@@ -8,6 +8,18 @@
         <EntityTypeShape EntityType="ModelGeneral.tb_empresa" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ModelGeneral.tb_sucursal" Width="1.5" PointX="3" PointY="9.125" />
         <AssociationConnector Association="ModelGeneral.FK_tb_sucursal_tb_empresa" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_persona" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_ciudad" Width="1.5" PointX="5.375" PointY="1" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_parroquia" Width="1.5" PointX="7.625" PointY="1" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_parroquia_tb_ciudad" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_Catalogo" Width="1.5" PointX="1.125" PointY="16" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo1" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo2" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo3" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo4" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo5" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo6" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

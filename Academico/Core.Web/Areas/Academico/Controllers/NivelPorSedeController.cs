@@ -111,6 +111,14 @@ namespace Core.Web.Areas.Academico.Controllers
             
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetListNivelPorSede(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, decimal IdTransaccionSession = 0)
+        {
+            List<aca_AnioLectivo_Sede_NivelAcademico_Info> lista = new List<aca_AnioLectivo_Sede_NivelAcademico_Info>();
+            lista = bus_SedePorNivel.GetListAsignacion(IdEmpresa, IdSede, IdAnio);
+            Lista_NivelPorSede.set_list(lista, IdTransaccionSession);
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 

@@ -8,26 +8,27 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Academico
 {
-    public class aca_AnioLectivo_Jornada_Curso_Data
+    public class aca_AnioLectivo_Curso_Materia_Data
     {
-        public List<aca_AnioLectivo_Jornada_Curso_Info> get_list_asignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada)
+        public List<aca_AnioLectivo_Curso_Materia_Info> get_list_asignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try
             {
-                List<aca_AnioLectivo_Jornada_Curso_Info> Lista;
+                List<aca_AnioLectivo_Curso_Materia_Info> Lista;
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = (from q in Context.aca_AnioLectivo_Jornada_Curso
-                             join c in Context.aca_Curso
-                             on new { q.IdEmpresa, q.IdCurso } equals new { c.IdEmpresa, c.IdCurso }
+                    Lista = (from q in Context.aca_AnioLectivo_Curso_Materia
+                             join c in Context.aca_Materia
+                             on new { q.IdEmpresa, q.IdMateria } equals new { c.IdEmpresa, c.IdMateria }
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSede == IdSede
                              && q.IdAnio == IdAnio
                              && q.IdNivel == IdNivel
                              && q.IdJornada == IdJornada
+                             && q.IdCurso == IdCurso
                              && c.Estado == true
-                             select new aca_AnioLectivo_Jornada_Curso_Info
+                             select new aca_AnioLectivo_Curso_Materia_Info
                              {
                                  seleccionado = true,
                                  IdEmpresa = q.IdEmpresa,
@@ -36,14 +37,16 @@ namespace Core.Data.Academico
                                  IdNivel = q.IdNivel,
                                  IdJornada = q.IdJornada,
                                  IdCurso = q.IdCurso,
-                                 NomCurso = q.NomCurso,
-                                 OrdenCurso = q.OrdenCurso
+                                 IdMateria = q.IdMateria,
+                                 NomMateria = q.NomMateria,
+                                 OrdenMateria = q.OrdenMateria,
+                                 EsObligatorio = q.EsObligatorio
                              }).ToList();
 
-                    Lista.AddRange((from j in Context.aca_Curso
-                                    where !Context.aca_AnioLectivo_Jornada_Curso.Any(n => n.IdCurso == j.IdCurso && n.IdEmpresa == IdEmpresa && n.IdSede == IdSede && n.IdAnio == IdAnio && n.IdNivel == IdNivel && n.IdJornada == IdJornada)
+                    Lista.AddRange((from j in Context.aca_Materia
+                                    where !Context.aca_AnioLectivo_Curso_Materia.Any(n => n.IdMateria == j.IdMateria && n.IdEmpresa == IdEmpresa && n.IdSede == IdSede && n.IdAnio == IdAnio && n.IdNivel == IdNivel && n.IdJornada == IdJornada && n.IdCurso == IdCurso)
                                     && j.Estado == true
-                                    select new aca_AnioLectivo_Jornada_Curso_Info
+                                    select new aca_AnioLectivo_Curso_Materia_Info
                                     {
                                         seleccionado = false,
                                         IdEmpresa = IdEmpresa,
@@ -51,9 +54,11 @@ namespace Core.Data.Academico
                                         IdAnio = IdAnio,
                                         IdNivel = IdNivel,
                                         IdJornada = IdJornada,
-                                        IdCurso = j.IdCurso,
-                                        NomCurso = j.NomCurso,
-                                        OrdenCurso = j.OrdenCurso
+                                        IdCurso = IdCurso,
+                                        IdMateria = j.IdMateria,
+                                        NomMateria = j.NomMateria,
+                                        OrdenMateria = j.OrdenMateria,
+                                        EsObligatorio = j.EsObligatorio
                                     }).ToList());
                 }
 
@@ -66,19 +71,19 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_AnioLectivo_Jornada_Curso_Info getInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada)
+        public aca_AnioLectivo_Curso_Materia_Info getInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try
             {
-                aca_AnioLectivo_Jornada_Curso_Info info;
+                aca_AnioLectivo_Curso_Materia_Info info;
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada).FirstOrDefault();
+                    var Entity = db.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
-                    info = new aca_AnioLectivo_Jornada_Curso_Info
+                    info = new aca_AnioLectivo_Curso_Materia_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdAnio = Entity.IdAnio,
@@ -86,8 +91,10 @@ namespace Core.Data.Academico
                         IdNivel = Entity.IdNivel,
                         IdJornada = Entity.IdJornada,
                         IdCurso = Entity.IdCurso,
-                        NomCurso = Entity.NomCurso,
-                        OrdenCurso = Entity.OrdenCurso
+                        IdMateria = Entity.IdMateria,
+                        NomMateria = Entity.NomMateria,
+                        OrdenMateria = Entity.OrdenMateria,
+                        EsObligatorio = Entity.EsObligatorio
                     };
                 }
 
@@ -100,20 +107,20 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, List<aca_AnioLectivo_Jornada_Curso_Info> lista)
+        public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, List<aca_AnioLectivo_Curso_Materia_Info> lista)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst_JornadaPorCurso = Context.aca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada).ToList();
-                    Context.aca_AnioLectivo_Jornada_Curso.RemoveRange(lst_JornadaPorCurso);
+                    var lst_MateriaPorCurso = Context.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();
+                    Context.aca_AnioLectivo_Curso_Materia.RemoveRange(lst_MateriaPorCurso);
 
                     if (lista.Count > 0)
                     {
                         foreach (var info in lista)
                         {
-                            aca_AnioLectivo_Jornada_Curso Entity = new aca_AnioLectivo_Jornada_Curso
+                            aca_AnioLectivo_Curso_Materia Entity = new aca_AnioLectivo_Curso_Materia
                             {
                                 IdEmpresa = info.IdEmpresa,
                                 IdAnio = info.IdAnio,
@@ -121,10 +128,12 @@ namespace Core.Data.Academico
                                 IdNivel = info.IdNivel,
                                 IdJornada = info.IdJornada,
                                 IdCurso = info.IdCurso,
-                                NomCurso = info.NomCurso,
-                                OrdenCurso = info.OrdenCurso
+                                IdMateria = info.IdMateria,
+                                NomMateria = info.NomMateria,
+                                OrdenMateria = info.OrdenMateria,
+                                EsObligatorio = info.EsObligatorio
                             };
-                            Context.aca_AnioLectivo_Jornada_Curso.Add(Entity);
+                            Context.aca_AnioLectivo_Curso_Materia.Add(Entity);
 
                             Context.SaveChanges();
                         }
