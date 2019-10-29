@@ -58,7 +58,7 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="IdEmpresa">Año Lectivo</label>
+                    <label for="IdAnio">Año Lectivo</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdAnio, settings =>
                    {
                        settings.Name = "IdAnio";
@@ -71,7 +71,6 @@
                        settings.Properties.ValueType = typeof(int);
                        settings.Properties.TextField = "Descripcion";
                        settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownButton.Enabled = false;
                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListNivelPorSede();}";
                    }).BindList(ViewBag.lst_anio).GetHtml()
@@ -93,7 +92,6 @@
                        settings.Properties.ValueType = typeof(int);
                        settings.Properties.TextField = "NomSede";
                        settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownButton.Enabled = false;
                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListNivelPorSede();}";
                    }).BindList(ViewBag.lst_sede).GetHtml()

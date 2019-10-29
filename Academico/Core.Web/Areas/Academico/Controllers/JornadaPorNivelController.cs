@@ -42,7 +42,6 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_AnioLectivo_NivelAcademico_Jornada_Info> lista = bus_NivelPorJornada.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel);
             Lista_JornadaPorNivel.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-            cargar_combos();
             return View(model);
         }
 
@@ -50,8 +49,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Index(aca_AnioLectivo_NivelAcademico_Jornada_Info model)
         {
             List<aca_AnioLectivo_NivelAcademico_Jornada_Info> lista = bus_NivelPorJornada.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel);
-            Lista_JornadaPorNivel.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-            cargar_combos();
+            Lista_JornadaPorNivel.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
             return View(model);
         }
 
@@ -64,22 +62,6 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_JornadaPorNivel", model);
         }
         #endregion
-
-        #region Metodos
-        private void cargar_combos()
-        {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var lst_sede = bus_sede.GetList(IdEmpresa, false);
-            ViewBag.lst_sede = lst_sede;
-
-            var lst_anio = bus_anio.GetList(IdEmpresa, false);
-            ViewBag.lst_anio = lst_anio;
-
-            var lst_nivel = bus_nivel.GetList(IdEmpresa, false);
-            ViewBag.lst_nivel = lst_nivel;
-        }
-        #endregion
-
         #region Json
         public JsonResult guardar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel=0, string Ids = "", decimal IdTransaccionSession = 0)
         {
@@ -120,6 +102,24 @@ namespace Core.Web.Areas.Academico.Controllers
             lista = bus_NivelPorJornada.GetListAsignacion(IdEmpresa, IdSede, IdAnio, IdNivel);
             Lista_JornadaPorNivel.set_list(lista, IdTransaccionSession);
             return Json(lista, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Combos
+        public ActionResult ComboBoxPartial_Anio()
+        {
+            return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
+        }
+        public ActionResult ComboBoxPartial_Sede()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            return PartialView("_ComboBoxPartial_Sede", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio });
+        }
+        public ActionResult ComboBoxPartial_Nivel()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
+            return PartialView("_ComboBoxPartial_Nivel", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio, IdSede = IdSede });
         }
         #endregion
     }

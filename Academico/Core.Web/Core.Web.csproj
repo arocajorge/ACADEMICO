@@ -7443,6 +7443,11 @@
     <Content Include="Areas\Academico\Views\Profesor\Nuevo.cshtml" />
     <Content Include="Areas\Academico\Views\Profesor\_GridViewPartial_profesor.cshtml" />
     <Content Include="Areas\Academico\Views\Profesor\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Academico\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Academico\Views\JornadaPorNivel\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\JornadaPorNivel\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\JornadaPorNivel\_ComboBoxPartial_Nivel.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -7479,7 +7484,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
-    <Folder Include="Areas\Academico\Views\Shared\" />
     <Folder Include="Areas\Reportes\Controllers\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\Reportes\Views\Shared\" />

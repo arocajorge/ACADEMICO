@@ -23,6 +23,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_NivelAcademico_Info> GetList(int IdEmpresa, int IdAnio, int IdSede)
+        {
+            try
+            {
+                return odata.getList(IdEmpresa, IdAnio, IdSede);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public aca_NivelAcademico_Info GetInfo(int IdEmpresa, int IdNivel)
         {
             try
