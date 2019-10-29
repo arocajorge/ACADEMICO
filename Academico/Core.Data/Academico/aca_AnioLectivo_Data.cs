@@ -27,7 +27,7 @@ namespace Core.Data.Academico
                             IdEmpresa = q.IdEmpresa,
                             IdAnio = q.IdAnio,
                             Descripcion = q.Descripcion,
-                            FechaDesde = q.FechaHasta,
+                            FechaDesde = q.FechaDesde,
                             FechaHasta = q.FechaHasta,
                             EnCurso = q.EnCurso,
                             Estado = q.Estado
@@ -118,12 +118,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_AnioLectivo
-                              where q.IdEmpresa == IdEmpresa
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.IdAnio) + 1;
+                    var cont = Context.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    if (cont > 0)
+                        ID = Context.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdAnio) + 1;
                 }
 
                 return ID;
@@ -208,6 +205,7 @@ namespace Core.Data.Academico
                     Entity.MotivoAnulacion = info.MotivoAnulacion;
                     Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                     Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;
+                    Entity.EnCurso = false;
                     Context.SaveChanges();
                 }
 

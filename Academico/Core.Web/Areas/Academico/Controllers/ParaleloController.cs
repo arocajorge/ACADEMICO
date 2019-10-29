@@ -54,7 +54,7 @@ namespace Core.Web.Areas.Academico.Controllers
         {
 
             var existe = bus_paralelo.ExisteCodigo(info.IdEmpresa, info.CodigoParalelo);
-            if (existe != null || existe.IdParalelo>0)
+            if (existe != null && existe.IdParalelo>0)
             {
                 msg = "El código del paralelo ya existe";
                 return false;
