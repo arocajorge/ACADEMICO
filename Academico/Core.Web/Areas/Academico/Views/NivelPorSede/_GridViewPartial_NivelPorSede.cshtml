@@ -54,12 +54,15 @@
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
-        settings.Init = (s, e) =>
+        settings.PreRender = (sender, e) =>
         {
-            MVCxGridView gridView = (MVCxGridView)s;
-            gridView.Selection.SelectRowByKey("1");
-
+            ASPxGridView gridView = (ASPxGridView)sender;
+            for (int i = 0; i < gridView.VisibleRowCount; i++)
+            {
+                gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
+            }
         };
+
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });

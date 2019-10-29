@@ -13,7 +13,7 @@ using Core.Info.SeguridadAcceso;
 using Core.Bus.SeguridadAcceso;
 using Core.Bus.Academico;
 using Core.Web.Helps;
-using Core.Erp.Bus.General;
+using Core.Bus.General;
 using Core.Web.Areas.SeguridadAcceso.Controllers;
 using Core.Web.Areas.Academico.Controllers;
 

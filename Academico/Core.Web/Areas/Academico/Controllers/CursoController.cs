@@ -1,5 +1,5 @@
 ﻿using Core.Bus.Academico;
-using Core.Erp.Bus.General;
+using Core.Bus.General;
 using Core.Info.Academico;
 using Core.Web.Helps;
 using System;

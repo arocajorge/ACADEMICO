@@ -1,6 +1,6 @@
 ﻿using Core.Bus.Academico;
 using Core.Bus.SeguridadAcceso;
-using Core.Erp.Bus.General;
+using Core.Bus.General;
 using Core.Info.Academico;
 using Core.Info.SeguridadAcceso;
 using Core.Web.Helps;

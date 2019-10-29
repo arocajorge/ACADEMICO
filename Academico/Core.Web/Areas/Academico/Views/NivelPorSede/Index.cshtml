@@ -56,28 +56,6 @@
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdEmpresa">Sede</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdSede, settings =>
-                   {
-                       settings.Name = "IdSede";
-                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                       settings.Properties.Columns.Add("IdSede", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                       settings.Properties.Columns.Add("NomSede", "Sede").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                       //Campo ID
-                       settings.Properties.ValueField = "IdSede";
-                       settings.Properties.ValueType = typeof(int);
-                       settings.Properties.TextField = "NomSede";
-                       settings.Properties.NullText = "== Seleccione ==";
-                       settings.Properties.DropDownButton.Enabled = false;
-                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListNivelPorSede();}";
-                   }).BindList(ViewBag.lst_sede).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
-                </div>
-            </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdEmpresa">Año Lectivo</label>
@@ -100,6 +78,29 @@
                     @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdEmpresa">Sede</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdSede, settings =>
+                   {
+                       settings.Name = "IdSede";
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                       settings.Properties.Columns.Add("IdSede", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                       settings.Properties.Columns.Add("NomSede", "Sede").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                       //Campo ID
+                       settings.Properties.ValueField = "IdSede";
+                       settings.Properties.ValueType = typeof(int);
+                       settings.Properties.TextField = "NomSede";
+                       settings.Properties.NullText = "== Seleccione ==";
+                       settings.Properties.DropDownButton.Enabled = false;
+                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListNivelPorSede();}";
+                   }).BindList(ViewBag.lst_sede).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            
         </div>
     </div>
 

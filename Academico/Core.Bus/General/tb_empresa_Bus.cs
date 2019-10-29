@@ -4,7 +4,7 @@ using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 
-namespace Core.Erp.Bus.General
+namespace Core.Bus.General
 {
     public class tb_empresa_Bus        
     {
