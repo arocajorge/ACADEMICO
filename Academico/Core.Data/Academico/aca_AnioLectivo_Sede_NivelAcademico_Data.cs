@@ -28,7 +28,6 @@ namespace Core.Data.Academico
                             IdAnio = q.IdAnio,
                             IdSede = q.IdSede,
                             IdNivel = q.IdNivel,
-                            Descripcion = "",
                             NomSede = q.NomSede,
                             NomNivel = q.NomNivel
                         });

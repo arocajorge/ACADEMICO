@@ -61,6 +61,7 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_Menu_x_seg_usuario_aca_Menu" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Menu_x_aca_Sede_aca_Sede" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Menu_x_seg_usuario_aca_Sede" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Profesor" Width="1.5" PointX="6.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

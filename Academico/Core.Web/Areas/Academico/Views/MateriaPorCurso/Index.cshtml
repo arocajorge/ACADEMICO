@@ -1,6 +1,6 @@
-﻿@model Core.Info.Academico.aca_AnioLectivo_NivelAcademico_Jornada_Info
+﻿@model Core.Info.Academico.aca_AnioLectivo_Curso_Materia_Info
 @{
-    ViewBag.Title = "Consulta de jornadas por nivel";
+    ViewBag.Title = "Consulta de materias por curso";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -16,7 +16,7 @@
         e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
     }
     function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdJornada", GetSelectedFieldValuesCallback);
+        s.GetSelectedFieldValues("IdMateria", GetSelectedFieldValuesCallback);
     }
     function GetSelectedFieldValuesCallback(values) {
         //Capture all selected keys
@@ -29,6 +29,8 @@
             IdSede: IdSede.GetValue(),
             IdAnio: IdAnio.GetValue(),
             IdNivel: IdNivel.GetValue(),
+            IdJornada: IdJornada.GetValue(),
+            IdCurso: IdCurso.GetValue(),
             IDs: selectedIDs,
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
@@ -36,7 +38,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "JornadaPorNivel", new { Area = "Academico" })',
+            url: '@Url.Action("guardar", "MateriaPorCurso", new { Area = "Academico" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -51,7 +53,7 @@
     }
 </script>
 
-@using (Html.BeginForm("Index", "JornadaPorNivel", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
+@using (Html.BeginForm("Index", "MateriaPorCurso", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
@@ -72,10 +74,9 @@
                        settings.Properties.ValueType = typeof(int);
                        settings.Properties.TextField = "NomSede";
                        settings.Properties.NullText = "== Seleccione ==";
-
                        settings.Properties.DropDownButton.Enabled = false;
                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListJornadaPorNivel();}";
+                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListMateriaPorCurso();}";
                    }).BindList(ViewBag.lst_sede).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
                 </div>
@@ -97,7 +98,7 @@
                        settings.Properties.NullText = "== Seleccione ==";
                        settings.Properties.DropDownButton.Enabled = false;
                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListJornadaPorNivel();}";
+                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListMateriaPorCurso();}";
                    }).BindList(ViewBag.lst_anio).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                 </div>
@@ -119,11 +120,57 @@
                     settings.Properties.NullText = "== Seleccione ==";
                     settings.Properties.DropDownButton.Enabled = false;
                     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListJornadaPorNivel();}";
+                    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListMateriaPorCurso();}";
                     }).BindList(ViewBag.lst_nivel).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdEmpresa">Jornada</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdJornada, settings =>
+                    {
+                    settings.Name = "IdJornada";
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                    settings.Properties.Columns.Add("IdJornada", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                    settings.Properties.Columns.Add("NomJornada", "Jornada").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                    //Campo ID
+                    settings.Properties.ValueField = "IdJornada";
+                    settings.Properties.ValueType = typeof(int);
+                    settings.Properties.TextField = "NomJornada";
+                    settings.Properties.NullText = "== Seleccione ==";
+                    settings.Properties.DropDownButton.Enabled = false;
+                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListMateriaPorCurso();}";
+                    }).BindList(ViewBag.lst_jornada).GetHtml()
+                    @*.Bind((Model.GetType() == typeof(Core.Info.Academico.aca_AnioLectivo_Jornada_Curso_Info) ) ? "" : Model.IdJornada);*@
+                    @Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdEmpresa">Curso</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCurso, settings =>
+                   {
+                       settings.Name = "IdCurso";
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                       settings.Properties.Columns.Add("IdCurso", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                       settings.Properties.Columns.Add("NomCurso", "Curso").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                       //Campo ID
+                       settings.Properties.ValueField = "IdCurso";
+                       settings.Properties.ValueType = typeof(int);
+                       settings.Properties.TextField = "NomCurso";
+                       settings.Properties.NullText = "== Seleccione ==";
+                       settings.Properties.DropDownButton.Enabled = false;
+                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListMateriaPorCurso();}";
+                   }).BindList(ViewBag.lst_curso).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -131,32 +178,34 @@
         <button type="submit" class="btn btn-default" id="btn_buscar">Buscar</button>
         <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
     </div>
-    @Html.Action("GridViewPartial_JornadaPorNivel")
+    @Html.Action("GridViewPartial_MateriaPorCurso")
 }
 
 <script type="text/javascript">
     $(function () {
     });
 
-    function GetListJornadaPorNivel() {
+    function GetListMateriaPorCurso() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSede: IdSede.GetValue(),
             IdAnio: IdAnio.GetValue(),
             IdNivel: IdNivel.GetValue(),
+            IdJornada: IdJornada.GetValue(),
+            IdCurso: IdCurso.GetValue(),
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("GetListJornadaPorNivel", "JornadaPorNivel", new { Area = "Academico"})',
+            url: '@Url.Action("GetListMateriaPorCurso", "MateriaPorCurso", new { Area = "Academico"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridViewPartial_JornadaPorNivel.PerformCallback();
+                GridViewPartial_MateriaPorCurso.PerformCallback();
             },
             error: function (error) {
             }

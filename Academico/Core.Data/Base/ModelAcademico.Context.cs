@@ -45,6 +45,7 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Menu> aca_Menu { get; set; }
         public virtual DbSet<aca_Menu_x_aca_Sede> aca_Menu_x_aca_Sede { get; set; }
         public virtual DbSet<aca_Menu_x_seg_usuario> aca_Menu_x_seg_usuario { get; set; }
+        public virtual DbSet<vwaca_Profesor> vwaca_Profesor { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

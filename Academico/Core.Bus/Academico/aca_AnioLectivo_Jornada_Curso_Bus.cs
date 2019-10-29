@@ -11,11 +11,11 @@ namespace Core.Bus.Academico
     public class aca_AnioLectivo_Jornada_Curso_Bus
     {
         aca_AnioLectivo_Jornada_Curso_Data odata = new aca_AnioLectivo_Jornada_Curso_Data();
-        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListAsignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdCurso)
+        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListAsignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada)
         {
             try
             {
-                return odata.get_list_asignacion(IdEmpresa, IdSede, IdAnio, IdNivel, IdCurso);
+                return odata.get_list_asignacion(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada);
             }
             catch (Exception)
             {
@@ -23,11 +23,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_AnioLectivo_Jornada_Curso_Info GetInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdCurso)
+        public aca_AnioLectivo_Jornada_Curso_Info GetInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada)
         {
             try
             {
-                return odata.getInfo(IdEmpresa, IdSede, IdAnio, IdNivel, IdCurso);
+                return odata.getInfo(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada);
             }
             catch (Exception)
             {
@@ -35,11 +35,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public bool GuardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdCurso, List<aca_AnioLectivo_Jornada_Curso_Info> lista)
+        public bool GuardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, List<aca_AnioLectivo_Jornada_Curso_Info> lista)
         {
             try
             {
-                return odata.guardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, IdCurso, lista);
+                return odata.guardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, lista);
             }
             catch (Exception)
             {
