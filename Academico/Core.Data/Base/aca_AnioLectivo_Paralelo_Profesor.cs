@@ -30,7 +30,7 @@ namespace Core.Data.Base
         public virtual aca_Materia aca_Materia { get; set; }
         public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
         public virtual aca_Paralelo aca_Paralelo { get; set; }
-        public virtual aca_Profesor aca_Profesor { get; set; }
         public virtual aca_Sede aca_Sede { get; set; }
+        public virtual aca_Profesor aca_Profesor { get; set; }
     }
 }

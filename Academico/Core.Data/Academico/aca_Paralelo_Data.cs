@@ -18,7 +18,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.aca_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
+                    var lst = odata.aca_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q => q.OrdenParalelo).ToList();
 
                     lst.ForEach(q =>
                     {
@@ -42,7 +42,34 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public List<aca_Paralelo_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                List<aca_Paralelo_Info> Lista = new List<aca_Paralelo_Info>();
 
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).OrderBy(q => q.OrdenParalelo).GroupBy(q => new { q.IdParalelo, q.NomParalelo }).Select(q => new { q.Key.IdParalelo, q.Key.NomParalelo }).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_Paralelo_Info
+                        {
+                            IdParalelo = q.IdParalelo,
+                            NomParalelo = q.NomParalelo,
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_Paralelo_Info getInfo(int IdEmpresa, int IdParalelo)
         {
             try
@@ -83,12 +110,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_Paralelo
-                              where q.IdEmpresa == IdEmpresa
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.IdParalelo) + 1;
+                    var cont = Context.aca_Paralelo.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    if (cont > 0)
+                        ID = Context.aca_Paralelo.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdParalelo) + 1;
                 }
 
                 return ID;
@@ -108,12 +132,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_Paralelo
-                              where q.IdEmpresa == IdEmpresa
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.OrdenParalelo) + 1;
+                    var cont = Context.aca_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Count();
+                    if (cont > 0)
+                        ID = Context.aca_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Max(q => q.OrdenParalelo) + 1;
                 }
 
                 return ID;
@@ -196,7 +217,7 @@ namespace Core.Data.Academico
                     aca_Paralelo Entity = Context.aca_Paralelo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdParalelo == info.IdParalelo);
                     if (Entity == null)
                         return false;
-                    Entity.IdEmpresa = info.IdEmpresa;
+                    Entity.CodigoParalelo = info.CodigoParalelo;
                     Entity.NomParalelo = info.NomParalelo;
                     Entity.OrdenParalelo = info.OrdenParalelo;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;

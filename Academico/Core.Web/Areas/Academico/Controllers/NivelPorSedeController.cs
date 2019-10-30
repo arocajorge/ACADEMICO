@@ -102,13 +102,11 @@ namespace Core.Web.Areas.Academico.Controllers
                     };
                     lista.Add(info);
                 }
-
-                if (!bus_SedePorNivel.GuardarDB(IdEmpresa, IdSede, IdAnio, lista))
-                {
-                    resultado = 0;
-                }
             }
-            
+            if (!bus_SedePorNivel.GuardarDB(IdEmpresa, IdSede, IdAnio, lista))
+            {
+                resultado = 0;
+            }
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 

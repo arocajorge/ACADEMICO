@@ -159,7 +159,7 @@ namespace Core.Data.General
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

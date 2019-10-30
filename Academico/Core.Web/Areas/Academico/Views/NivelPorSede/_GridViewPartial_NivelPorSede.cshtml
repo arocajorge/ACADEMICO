@@ -62,7 +62,7 @@
                 gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
             }
         };
-
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });

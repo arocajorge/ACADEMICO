@@ -12,8 +12,10 @@ namespace Core.Info.Academico
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdMateria { get; set; }
+        [Required(ErrorMessage = "El campo grupo de materia es obligatorio")]
         public Nullable<int> IdMateriaGrupo { get; set; }
-        [Required(ErrorMessage = "El campo nombre es obligatorio")]
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo materia debe tener mínimo 1 caracter y máximo 500")]
+        [Required(ErrorMessage = "El campo materia es obligatorio")]
         public string NomMateria { get; set; }
         public bool EsObligatorio { get; set; }
         [Required(ErrorMessage = "El campo orden es obligatorio")]

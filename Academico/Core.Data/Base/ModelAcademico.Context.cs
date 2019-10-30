@@ -40,12 +40,18 @@ namespace Core.Data.Base
         public virtual DbSet<aca_MateriaGrupo> aca_MateriaGrupo { get; set; }
         public virtual DbSet<aca_NivelAcademico> aca_NivelAcademico { get; set; }
         public virtual DbSet<aca_Paralelo> aca_Paralelo { get; set; }
-        public virtual DbSet<aca_Profesor> aca_Profesor { get; set; }
         public virtual DbSet<aca_Sede> aca_Sede { get; set; }
         public virtual DbSet<aca_Menu> aca_Menu { get; set; }
         public virtual DbSet<aca_Menu_x_aca_Sede> aca_Menu_x_aca_Sede { get; set; }
         public virtual DbSet<aca_Menu_x_seg_usuario> aca_Menu_x_seg_usuario { get; set; }
+        public virtual DbSet<aca_alumno> aca_alumno { get; set; }
+        public virtual DbSet<aca_Catalogo> aca_Catalogo { get; set; }
+        public virtual DbSet<aca_CatalogoTipo> aca_CatalogoTipo { get; set; }
+        public virtual DbSet<aca_familia> aca_familia { get; set; }
+        public virtual DbSet<aca_Profesor> aca_Profesor { get; set; }
+        public virtual DbSet<aca_rubro> aca_rubro { get; set; }
         public virtual DbSet<vwaca_Profesor> vwaca_Profesor { get; set; }
+        public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

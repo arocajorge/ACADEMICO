@@ -18,6 +18,8 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Variables
         aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
         aca_Profesor_List Lista_Profesor = new aca_Profesor_List();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
+        string mensaje = string.Empty;
         #endregion
 
         #region Index
@@ -96,9 +98,14 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc, ref return_naturaleza))
             {
+                model.info_persona.IdPersona = model.IdPersona;
                 model.info_persona.pe_Naturaleza = return_naturaleza;
+                model.info_persona.pe_telfono_Contacto = model.Telefonos;
+                model.info_persona.pe_correo = model.Correo;
+                model.info_persona.pe_direccion = model.Direccion;
                 if (!bus_profesor.GuardarDB(model))
                 {
+                    ViewBag.mensaje = "No se ha podido guardar el registro";
                     cargar_combos();
                     return View(model);
                 }
@@ -110,10 +117,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdProfesor = model.IdProfesor, Exito = true });
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdProfesor = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdProfesor = 0, bool Exito = false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -126,6 +133,9 @@ namespace Core.Web.Areas.Academico.Controllers
             if (model == null)
                 return RedirectToAction("Index");
 
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
             cargar_combos();
             return View(model);
         }
@@ -136,21 +146,26 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             if ((cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc, ref return_naturaleza)))
             {
+                model.info_persona.IdPersona = model.IdPersona;
                 model.info_persona.pe_Naturaleza = return_naturaleza;
+                model.info_persona.pe_telfono_Contacto = model.Telefonos;
+                model.info_persona.pe_correo = model.Correo;
+                model.info_persona.pe_direccion = model.Direccion;
                 if (!bus_profesor.ModificarDB(model))
                 {
+                    ViewBag.mensaje = "No se ha podido modificar el registro";
                     cargar_combos();
-                    return View(model);
+                    return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdProfesor = model.IdProfesor, Exito = true });
                 }
             }
             else
             {
                 ViewBag.mensaje = "Número de identificación inválida";
                 cargar_combos();
-                return View(model);
+                return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdProfesor = model.IdProfesor, Exito = true });
             }
 
-            return RedirectToAction("Index", "Persona");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdProfesor = model.IdProfesor, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdProfesor = 0)
@@ -176,6 +191,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!bus_profesor.AnularDB(model))
             {
+                ViewBag.mensaje = "No se ha podido anular el registro";
                 cargar_combos();
                 return View(model);
             }

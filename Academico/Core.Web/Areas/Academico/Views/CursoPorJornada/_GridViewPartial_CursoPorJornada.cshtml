@@ -53,7 +53,15 @@
             column.Width = Unit.Percentage(80);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-
+        settings.PreRender = (sender, e) =>
+        {
+            ASPxGridView gridView = (ASPxGridView)sender;
+            for (int i = 0; i < gridView.VisibleRowCount; i++)
+            {
+                gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
+            }
+        };
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });

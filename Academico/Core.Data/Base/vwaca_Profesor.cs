@@ -30,10 +30,13 @@ namespace Core.Data.Base
         public string pe_direccion { get; set; }
         public string pe_telfono_Contacto { get; set; }
         public string pe_celular { get; set; }
-        public string pe_correo { get; set; }
         public string pe_sexo { get; set; }
         public string IdEstadoCivil { get; set; }
         public Nullable<System.DateTime> pe_fechaNacimiento { get; set; }
         public string pe_estado { get; set; }
+        public string pe_correo { get; set; }
+        public string Correo { get; set; }
+        public string Direccion { get; set; }
+        public string Telefonos { get; set; }
     }
 }

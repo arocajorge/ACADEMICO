@@ -14,6 +14,7 @@ namespace Core.Info.Academico
         public int IdSede { get; set; }
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public int IdSucursal { get; set; }
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo nombre de sede debe tener mínimo 1 caracter y máximo 500")]
         [Required(ErrorMessage = "El campo nombre de sede es obligatorio")]
         public string NomSede { get; set; }
         public string Direccion { get; set; }

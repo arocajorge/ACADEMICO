@@ -69,6 +69,9 @@
     <Compile Include="Academico\aca_Paralelo_Data.cs" />
     <Compile Include="Academico\aca_Profesor_Data.cs" />
     <Compile Include="Academico\aca_Sede_Data.cs" />
+    <Compile Include="Base\aca_alumno.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_AnioLectivo.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -90,7 +93,16 @@
     <Compile Include="Base\aca_AnioLectivo_Sede_NivelAcademico.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\aca_Catalogo.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_CatalogoTipo.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_Curso.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_familia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Jornada.cs">
@@ -118,6 +130,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Profesor.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_rubro.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Sede.cs">
@@ -194,6 +209,9 @@
     </Compile>
     <Compile Include="Base\tb_sucursal.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_Materia.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Profesor.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>

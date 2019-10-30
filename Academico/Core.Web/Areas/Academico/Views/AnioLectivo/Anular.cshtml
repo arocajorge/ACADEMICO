@@ -14,6 +14,18 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdAnio)
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -85,8 +97,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
-                <div class="form-group">
-                    <label for="Rector">Motivo de anulación</label>
+                <div class="form-group has-error">
+                    <label for="Rector">Motivo de anulación*</label>
                     @Html.TextBoxFor(q => q.MotivoAnulacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.MotivoAnulacion, "", new { @class = "text-danger" })
                 </div>

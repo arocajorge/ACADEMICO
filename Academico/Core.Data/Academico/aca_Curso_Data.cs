@@ -18,7 +18,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
+                    var lst = odata.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q => q.OrdenCurso).ToList();
 
                     lst.ForEach(q =>
                     {
@@ -42,7 +42,34 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public List<aca_Curso_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada)
+        {
+            try
+            {
+                List<aca_Curso_Info> Lista = new List<aca_Curso_Info>();
 
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada).OrderBy(q => q.OrdenCurso).GroupBy(q => new { q.IdCurso, q.NomCurso }).Select(q => new { q.Key.IdCurso, q.Key.NomCurso }).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_Curso_Info
+                        {
+                            IdCurso = q.IdCurso,
+                            NomCurso = q.NomCurso,
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_Curso_Info getInfo(int IdEmpresa, int IdCurso)
         {
             try
@@ -83,12 +110,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_Curso
-                              where q.IdEmpresa == IdEmpresa
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.IdCurso) + 1;
+                    var cont = Context.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    if (cont > 0)
+                        ID = Context.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdCurso) + 1;
                 }
 
                 return ID;
@@ -108,12 +132,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_Curso
-                              where q.IdEmpresa == IdEmpresa
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.OrdenCurso) + 1;
+                    var cont = Context.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.Estado== true).Count();
+                    if (cont > 0)
+                        ID = Context.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Max(q => q.OrdenCurso) + 1;
                 }
 
                 return ID;

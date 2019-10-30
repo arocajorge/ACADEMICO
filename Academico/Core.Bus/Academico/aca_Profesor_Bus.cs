@@ -91,7 +91,19 @@ namespace Core.Bus.Academico
         {
             try
             {
-                return odata.modificarDB(info);
+                tb_persona_Bus bus_persona = new tb_persona_Bus();
+                var grabar = false;
+
+                if (odata_per.modificarDB(info.info_persona))
+                {
+                    grabar = true;
+                }
+
+                if (grabar == true)
+                {
+                    return odata.modificarDB(info);
+                }
+                return false;
             }
             catch (Exception)
             {

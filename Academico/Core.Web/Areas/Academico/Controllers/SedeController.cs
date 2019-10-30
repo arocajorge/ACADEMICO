@@ -20,6 +20,9 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Sede_Bus bus_sede = new aca_Sede_Bus();
         aca_Sede_List Lista_Sede = new aca_Sede_List();
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
+        string mensaje = string.Empty;
+
         public ActionResult Index()
         {
             #region Validar Session
@@ -104,13 +107,14 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             if (!bus_sede.guardarDB(model))
             {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
                 cargar_combos(model);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, Exito = true });
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdSede = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdSede = 0, bool Exito = false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -123,6 +127,9 @@ namespace Core.Web.Areas.Academico.Controllers
             if (model == null)
                 return RedirectToAction("Index");
 
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
             cargar_combos(model);
             return View(model);
         }
@@ -132,11 +139,12 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             if (!bus_sede.modificarDB(model))
             {
+                ViewBag.mensaje = "No se ha podido modificar el registro";
                 cargar_combos(model);
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdSede = 0)
@@ -162,6 +170,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!bus_sede.anularDB(model))
             {
+                ViewBag.mensaje = "No se ha podido anular el registro";
                 cargar_combos(model);
                 return View(model);
             }

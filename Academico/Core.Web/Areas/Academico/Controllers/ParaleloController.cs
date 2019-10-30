@@ -15,6 +15,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Paralelo_Bus bus_paralelo = new aca_Paralelo_Bus();
         aca_Paraleo_List Lista_Paralelo = new aca_Paraleo_List();
         string mensaje = string.Empty;
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Index
@@ -89,6 +90,7 @@ namespace Core.Web.Areas.Academico.Controllers
             
             if (!validar(model, ref mensaje))
             {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
@@ -98,10 +100,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdParalelo = model.IdParalelo, Exito = true });
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdParalelo = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdParalelo = 0, bool Exito = false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -114,6 +116,9 @@ namespace Core.Web.Areas.Academico.Controllers
             if (model == null)
                 return RedirectToAction("Index");
 
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
             return View(model);
         }
         [HttpPost]
@@ -122,10 +127,11 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             if (!bus_paralelo.ModificarDB(model))
             {
+                ViewBag.mensaje = "No se ha podido modificar el registro";
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdParalelo = model.IdParalelo, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdParalelo = 0)
@@ -150,6 +156,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!bus_paralelo.AnularDB(model))
             {
+                ViewBag.mensaje = "No se ha podido anular el registro";
                 return View(model);
             }
 

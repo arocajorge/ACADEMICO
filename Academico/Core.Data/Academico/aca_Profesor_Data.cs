@@ -67,20 +67,26 @@ namespace Core.Data.Academico
                         IdPersona = Entity.IdPersona,
                         Codigo = Entity.Codigo,
                         Estado = Entity.Estado,
+                        Correo = Entity.Correo,
+                        Direccion = Entity.Direccion,
+                        Telefonos = Entity.Telefonos,
                         info_persona = new tb_persona_Info
                         {
+                            IdPersona = Entity.IdPersona,
                             pe_Naturaleza = Entity.pe_Naturaleza,
                             pe_cedulaRuc = Entity.pe_cedulaRuc,
                             pe_nombre = Entity.pe_nombre,
                             pe_apellido = Entity.pe_apellido,
                             pe_nombreCompleto = Entity.pe_nombreCompleto,
+                            pe_razonSocial = Entity.pe_razonSocial,
                             pe_telfono_Contacto = Entity.pe_telfono_Contacto,
                             pe_correo = Entity.pe_correo,
                             pe_sexo = Entity.pe_sexo,
                             IdEstadoCivil = Entity.IdEstadoCivil,
                             pe_fechaNacimiento = Entity.pe_fechaNacimiento,
                             pe_celular = Entity.pe_celular,
-                            pe_direccion = Entity.pe_direccion
+                            pe_direccion = Entity.pe_direccion,
+                            IdTipoDocumento = Entity.IdTipoDocumento
                         }
                     };
                 }
@@ -102,12 +108,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_Profesor
-                              where q.IdEmpresa == IdEmpresa
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.IdProfesor) + 1;
+                    var cont = Context.aca_Profesor.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    if (cont > 0)
+                        ID = Context.aca_Profesor.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdProfesor) + 1;
                 }
 
                 return ID;
@@ -132,6 +135,9 @@ namespace Core.Data.Academico
                         IdPersona = info.IdPersona,
                         Codigo = info.Codigo,
                         Estado = true,
+                        Correo = info.info_persona.pe_correo,
+                        Direccion = info.info_persona.pe_direccion,
+                        Telefonos = info.info_persona.pe_telfono_Contacto,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
@@ -159,7 +165,10 @@ namespace Core.Data.Academico
                         return false;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
-
+                    Entity.Correo = info.info_persona.pe_correo;
+                    Entity.Direccion = info.info_persona.pe_direccion;
+                    Entity.Telefonos = info.info_persona.pe_telfono_Contacto;
+                    Entity.Codigo = info.Codigo;
                     Context.SaveChanges();
                 }
 
@@ -207,30 +216,30 @@ namespace Core.Data.Academico
                 };
 
                 EntitiesGeneral Context_general = new EntitiesGeneral();
-                tb_persona Entity_p = Context_general.tb_persona.Where(q => q.pe_cedulaRuc == pe_cedulaRuc).FirstOrDefault();
-                if (Entity_p == null)
+                tb_persona Entity_per = Context_general.tb_persona.Where(q => q.pe_cedulaRuc == pe_cedulaRuc).FirstOrDefault();
+                if (Entity_per == null)
                 {
                     Context_general.Dispose();
                     return info;
                 }
 
                 EntitiesAcademico Context_academico = new EntitiesAcademico();
-                aca_Profesor Entity_aca = Context_academico.aca_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdPersona == Entity_p.IdPersona).FirstOrDefault();
+                aca_Profesor Entity_aca = Context_academico.aca_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdPersona == Entity_per.IdPersona).FirstOrDefault();
                 if (Entity_aca == null)
                 {
-                    info.IdPersona = Entity_p.IdPersona;
+                    info.IdPersona = Entity_per.IdPersona;
                     info.info_persona = new Info.General.tb_persona_Info
                     {
-                        IdPersona = Entity_p.IdPersona,
-                        pe_apellido = Entity_p.pe_apellido,
-                        pe_nombre = Entity_p.pe_nombre,
-                        pe_cedulaRuc = Entity_p.pe_cedulaRuc,
-                        pe_nombreCompleto = Entity_p.pe_nombreCompleto,
-                        pe_razonSocial = Entity_p.pe_razonSocial,
-                        pe_celular = Entity_p.pe_celular,
-                        pe_telfono_Contacto = Entity_p.pe_telfono_Contacto,
-                        pe_correo = Entity_p.pe_correo,
-                        pe_direccion = Entity_p.pe_direccion
+                        IdPersona = Entity_per.IdPersona,
+                        pe_apellido = Entity_per.pe_apellido,
+                        pe_nombre = Entity_per.pe_nombre,
+                        pe_cedulaRuc = Entity_per.pe_cedulaRuc,
+                        pe_nombreCompleto = Entity_per.pe_nombreCompleto,
+                        pe_razonSocial = Entity_per.pe_razonSocial,
+                        pe_celular = Entity_per.pe_celular,
+                        pe_telfono_Contacto = Entity_per.pe_telfono_Contacto,
+                        pe_correo = Entity_per.pe_correo,
+                        pe_direccion = Entity_per.pe_direccion
                     };
                     Context_general.Dispose();
                     Context_academico.Dispose();
@@ -241,19 +250,19 @@ namespace Core.Data.Academico
                 {
                     IdEmpresa = Entity_aca.IdEmpresa,
                     IdProfesor = Entity_aca.IdProfesor,
-                    IdPersona = Entity_p.IdPersona,
+                    IdPersona = Entity_per.IdPersona,
                     info_persona = new Info.General.tb_persona_Info
                     {
-                        IdPersona = Entity_p.IdPersona,
-                        pe_apellido = Entity_p.pe_apellido,
-                        pe_nombre = Entity_p.pe_nombre,
-                        pe_cedulaRuc = Entity_p.pe_cedulaRuc,
-                        pe_nombreCompleto = Entity_p.pe_nombreCompleto,
-                        pe_razonSocial = Entity_p.pe_razonSocial,
-                        pe_celular = Entity_p.pe_celular,
-                        pe_telfono_Contacto = Entity_p.pe_telfono_Contacto,
-                        pe_correo = Entity_p.pe_correo,
-                        pe_direccion = Entity_p.pe_direccion
+                        IdPersona = Entity_per.IdPersona,
+                        pe_apellido = Entity_per.pe_apellido,
+                        pe_nombre = Entity_per.pe_nombre,
+                        pe_cedulaRuc = Entity_per.pe_cedulaRuc,
+                        pe_nombreCompleto = Entity_per.pe_nombreCompleto,
+                        pe_razonSocial = Entity_per.pe_razonSocial,
+                        pe_celular = Entity_per.pe_celular,
+                        pe_telfono_Contacto = Entity_per.pe_telfono_Contacto,
+                        pe_correo = Entity_per.pe_correo,
+                        pe_direccion = Entity_per.pe_direccion
                     }
                 };
 

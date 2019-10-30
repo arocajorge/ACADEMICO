@@ -13,7 +13,8 @@ namespace Core.Info.Academico
         public int IdEmpresa { get; set; }
         public int IdCurso { get; set; }
         public Nullable<int> IdCursoAPromover { get; set; }
-        [Required(ErrorMessage = "El campo nombre es obligatorio")]
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo curso debe tener mínimo 1 caracter y máximo 500")]
+        [Required(ErrorMessage = "El campo curso es obligatorio")]
         public string NomCurso { get; set; }
         [Required(ErrorMessage = "El campo orden es obligatorio")]
         public int OrdenCurso { get; set; }

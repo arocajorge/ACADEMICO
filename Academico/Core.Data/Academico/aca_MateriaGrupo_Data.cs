@@ -81,12 +81,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_MateriaGrupo
-                              where q.IdEmpresa == IdEmpresa
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.IdMateriaGrupo) + 1;
+                    var cont = Context.aca_MateriaGrupo.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    if (cont > 0)
+                        ID = Context.aca_MateriaGrupo.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdMateriaGrupo) + 1;
                 }
 
                 return ID;
@@ -106,12 +103,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_MateriaGrupo
-                              where q.IdEmpresa == IdEmpresa
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.OrdenMateriaGrupo) + 1;
+                    var cont = Context.aca_MateriaGrupo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Count();
+                    if (cont > 0)
+                        ID = Context.aca_MateriaGrupo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Max(q => q.OrdenMateriaGrupo) + 1;
                 }
 
                 return ID;

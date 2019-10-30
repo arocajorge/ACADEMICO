@@ -120,10 +120,9 @@ namespace Core.Data.Academico
                                 OrdenJornada = info.OrdenJornada
                             };
                             Context.aca_AnioLectivo_NivelAcademico_Jornada.Add(Entity);
-
-                            Context.SaveChanges();
                         }
                     }
+                    Context.SaveChanges();
                 }
                 return true;
             }

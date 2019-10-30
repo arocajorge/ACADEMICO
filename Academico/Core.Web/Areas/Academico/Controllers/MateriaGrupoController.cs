@@ -14,6 +14,8 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Variables
         aca_MateriaGrupo_Bus bus_materia_grupo = new aca_MateriaGrupo_Bus();
         aca_MateriaGrupo_List Lista_MateriaGrupo = new aca_MateriaGrupo_List();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
+        string mensaje = string.Empty;
         #endregion
 
         #region Index
@@ -72,12 +74,13 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             if (!bus_materia_grupo.GuardarDB(model))
             {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdMateriaGrupo = model.IdMateriaGrupo, Exito = true });
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdMateriaGrupo = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdMateriaGrupo = 0, bool Exito = false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -90,6 +93,9 @@ namespace Core.Web.Areas.Academico.Controllers
             if (model == null)
                 return RedirectToAction("Index");
 
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
             return View(model);
         }
         [HttpPost]
@@ -98,10 +104,11 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             if (!bus_materia_grupo.ModificarDB(model))
             {
+                ViewBag.mensaje = "No se ha podido modificar el registro";
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdMateriaGrupo = model.IdMateriaGrupo, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdMateriaGrupo = 0)
@@ -126,6 +133,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!bus_materia_grupo.AnularDB(model))
             {
+                ViewBag.mensaje = "No se ha podido anular el registro";
                 return View(model);
             }
 

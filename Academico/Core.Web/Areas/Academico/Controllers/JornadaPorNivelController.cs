@@ -62,6 +62,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_JornadaPorNivel", model);
         }
         #endregion
+
         #region Json
         public JsonResult guardar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel=0, string Ids = "", decimal IdTransaccionSession = 0)
         {
@@ -86,13 +87,14 @@ namespace Core.Web.Areas.Academico.Controllers
                         OrdenJornada = info_jornada.OrdenJornada
                     };
                     lista.Add(info);
-                }
-
-                if (!bus_NivelPorJornada.GuardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, lista))
-                {
-                    resultado = 0;
-                }
+                }       
             }
+
+            if (!bus_NivelPorJornada.GuardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, lista))
+            {
+                resultado = 0;
+            }
+
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 

@@ -138,11 +138,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_Menu
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.IdMenu) + 1;
+                    var cont = Context.aca_Menu.Count();
+                    if (cont > 0)
+                        ID = Context.aca_Menu.Max(q => q.IdMenu) + 1;
                 }
 
                 return ID;

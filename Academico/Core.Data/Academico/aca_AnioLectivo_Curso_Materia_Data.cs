@@ -134,10 +134,9 @@ namespace Core.Data.Academico
                                 EsObligatorio = info.EsObligatorio
                             };
                             Context.aca_AnioLectivo_Curso_Materia.Add(Entity);
-
-                            Context.SaveChanges();
                         }
                     }
+                    Context.SaveChanges();
                 }
                 return true;
             }

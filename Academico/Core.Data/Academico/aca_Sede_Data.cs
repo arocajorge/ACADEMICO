@@ -218,12 +218,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_Sede
-                              where q.IdEmpresa == IdEmpresa
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.IdSede) + 1;
+                    var cont = Context.aca_Sede.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    if (cont > 0)
+                        ID = Context.aca_Sede.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdSede) + 1;
                 }
 
                 return ID;

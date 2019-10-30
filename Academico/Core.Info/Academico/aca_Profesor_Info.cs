@@ -17,13 +17,15 @@ namespace Core.Info.Academico
         [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo código debe tener máximo 50")]
         public string Codigo { get; set; }
         public bool Estado { get; set; }
+        public string Correo { get; set; }
+        public string Direccion { get; set; }
+        public string Telefonos { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
-        [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
 
         #region Campos que no existen en la tablas

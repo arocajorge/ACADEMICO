@@ -145,11 +145,10 @@ namespace Core.Data.Academico
                                 NomSede = info.NomSede,
                                 NomNivel = info.NomNivel
                             };
-                            Context.aca_AnioLectivo_Sede_NivelAcademico.Add(Entity);
-
-                            Context.SaveChanges();
+                            Context.aca_AnioLectivo_Sede_NivelAcademico.Add(Entity);     
                         }
                     }
+                    Context.SaveChanges();
                 }
                 return true;
             }

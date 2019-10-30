@@ -13,13 +13,37 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.IdParalelo)
-    @Html.HiddenFor(q => q.CodigoParalelo)
+
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="Sede">Codigo*</label>
-                    @Html.TextBoxFor(q => q.CodigoParalelo, new { @class = "form-control", @disabled = "disabled" })
+                    @Html.TextBoxFor(q => q.CodigoParalelo, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.CodigoParalelo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -28,6 +52,14 @@
                     <label for="Sede">Orden*</label>
                     @Html.TextBoxFor(q => q.OrdenParalelo, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.OrdenParalelo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-3 col-md-1">
+                <div class="form-group">
+                    <label for="IdSucursal">&nbsp;</label>
+                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","Paralelo",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
+                        <i class="fa fa-plus"></i>
+                    </a>
                 </div>
             </div>
         </div>

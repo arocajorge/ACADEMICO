@@ -18,7 +18,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.aca_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
+                    var lst = odata.aca_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q => q.OrdenJornada).ToList();
 
                     lst.ForEach(q =>
                     {
@@ -29,6 +29,35 @@ namespace Core.Data.Academico
                             NomJornada = q.NomJornada,
                             OrdenJornada = q.OrdenJornada,
                             Estado = q.Estado
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_Jornada_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel)
+        {
+            try
+            {
+                List<aca_Jornada_Info> Lista = new List<aca_Jornada_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivo_NivelAcademico_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel).OrderBy(q => q.OrdenJornada).GroupBy(q => new { q.IdJornada, q.NomJornada }).Select(q => new { q.Key.IdJornada, q.Key.NomJornada }).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_Jornada_Info
+                        {
+                            IdJornada = q.IdJornada,
+                            NomJornada = q.NomJornada,
                         });
                     });
                 }
@@ -81,12 +110,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_Jornada
-                              where q.IdEmpresa == IdEmpresa
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.IdJornada) + 1;
+                    var cont = Context.aca_Jornada.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    if (cont > 0)
+                        ID = Context.aca_Jornada.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdJornada) + 1;
                 }
 
                 return ID;
@@ -106,12 +132,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = from q in Context.aca_Jornada
-                              where q.IdEmpresa == IdEmpresa
-                              select q;
-
-                    if (lst.Count() > 0)
-                        ID = lst.Max(q => q.OrdenJornada) + 1;
+                    var cont = Context.aca_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.Estado==true).Count();
+                    if (cont > 0)
+                        ID = Context.aca_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Max(q => q.OrdenJornada) + 1;
                 }
 
                 return ID;

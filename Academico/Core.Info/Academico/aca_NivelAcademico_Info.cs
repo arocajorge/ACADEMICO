@@ -12,7 +12,8 @@ namespace Core.Info.Academico
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdNivel { get; set; }
-        [Required(ErrorMessage = "El campo nombre es obligatorio")]
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo nivel debe tener mínimo 1 caracter y máximo 500")]
+        [Required(ErrorMessage = "El campo nivel es obligatorio")]
         public string NomNivel { get; set; }
         [Required(ErrorMessage = "El campo orden es obligatorio")]
         public int Orden { get; set; }

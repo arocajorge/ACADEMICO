@@ -15,6 +15,8 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Materia_Bus bus_materia = new aca_Materia_Bus();
         aca_MateriaGrupo_Bus bus_grupo = new aca_MateriaGrupo_Bus();
         aca_Materia_List Lista_Materia = new aca_Materia_List();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
+        string mensaje = string.Empty;
         #endregion
 
         #region Index
@@ -54,7 +56,6 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_grupos = bus_grupo.GetList(IdEmpresa, false);
-            lst_grupos.Add(new aca_MateriaGrupo_Info { IdMateriaGrupo=0, NomMateriaGrupo="" });
             ViewBag.lst_grupos = lst_grupos;
         }
         #endregion
@@ -84,13 +85,14 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             if (!bus_materia.GuardarDB(model))
             {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdMateria = model.IdMateria, Exito = true });
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdMateria = 0)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdMateria = 0, bool Exito = false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -103,6 +105,9 @@ namespace Core.Web.Areas.Academico.Controllers
             if (model == null)
                 return RedirectToAction("Index");
 
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
             cargar_combos();
             return View(model);
         }
@@ -112,11 +117,12 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             if (!bus_materia.ModificarDB(model))
             {
+                ViewBag.mensaje = "No se ha podido modificar el registro";
                 cargar_combos();
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdMateria = model.IdMateria, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdMateria = 0)
@@ -142,6 +148,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!bus_materia.AnularDB(model))
             {
+                ViewBag.mensaje = "No se ha podido anular el registro";
                 cargar_combos();
                 return View(model);
             }

@@ -12,6 +12,7 @@ namespace Core.Info.Academico
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdAnio { get; set; }
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 50")]
         [Required(ErrorMessage = "El campo descripción es obligatorio")]
         public string Descripcion { get; set; }
         [Required(ErrorMessage = "El campo fecha desde es obligatorio")]

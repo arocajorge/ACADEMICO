@@ -22,7 +22,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
-
+        public List<aca_Paralelo_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                return odata.getList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public aca_Paralelo_Info GetInfo(int IdEmpresa, int IdParalelo)
         {
             try

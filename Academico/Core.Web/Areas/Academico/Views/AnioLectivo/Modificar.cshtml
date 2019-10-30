@@ -26,14 +26,33 @@
             </div>
         </div>
     }
-
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <div class="form-group">
                     <label for="IdSucursal">Descripción*</label>
                     @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdSucursal">&nbsp;</label>
+                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","AnioLectivo",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
+                        <i class="fa fa-plus"></i>
+                    </a>
                 </div>
             </div>
         </div>

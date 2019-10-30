@@ -9,7 +9,7 @@ namespace Core.Info.Academico
         public int IdMenu { get; set; }
         public Nullable<int> IdMenuPadre { get; set; }
         [Required(ErrorMessage = "El campo descripción es obligatorio")]
-        [StringLength(255, MinimumLength = 1, ErrorMessage = "El campo descripción debe tener mínimo 1 caracter y máximo 255")]
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "El campo descripción debe tener mínimo 1 caracter y máximo 500")]
         public string DescripcionMenu { get; set; }
         [Required(ErrorMessage = "El campo posición es obligatorio")]
         public int PosicionMenu { get; set; }
