@@ -172,7 +172,7 @@ namespace Core.Data.Academico
                     aca_AnioLectivo Entity = Context.aca_AnioLectivo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio);
                     if (Entity == null)
                         return false;
-                    Entity.IdEmpresa = info.IdEmpresa;
+
                     Entity.Descripcion = info.Descripcion;
                     Entity.FechaDesde = info.FechaDesde;
                     Entity.FechaHasta = info.FechaHasta;

@@ -135,9 +135,9 @@ namespace Core.Data.Academico
                         IdPersona = info.IdPersona,
                         Codigo = info.Codigo,
                         Estado = true,
-                        Correo = info.info_persona.pe_correo,
-                        Direccion = info.info_persona.pe_direccion,
-                        Telefonos = info.info_persona.pe_telfono_Contacto,
+                        Correo = info.Correo,
+                        Direccion = info.Direccion,
+                        Telefonos = info.Telefonos,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
@@ -165,9 +165,9 @@ namespace Core.Data.Academico
                         return false;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
-                    Entity.Correo = info.info_persona.pe_correo;
-                    Entity.Direccion = info.info_persona.pe_direccion;
-                    Entity.Telefonos = info.info_persona.pe_telfono_Contacto;
+                    Entity.Correo = info.Correo;
+                    Entity.Direccion = info.Direccion;
+                    Entity.Telefonos = info.Telefonos;
                     Entity.Codigo = info.Codigo;
                     Context.SaveChanges();
                 }

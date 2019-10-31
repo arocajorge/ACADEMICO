@@ -40,6 +40,10 @@ namespace Core.Data.Base
         public string IdTipoCta_acreditacion_cat { get; set; }
         public string num_cta_acreditacion { get; set; }
         public Nullable<int> IdBanco_acreditacion { get; set; }
+        public string CodCatalogoSangre { get; set; }
+        public string CodCatalogoCONADIS { get; set; }
+        public Nullable<double> PorcentajeDiscapacidad { get; set; }
+        public string NumeroCarnetConadis { get; set; }
     
         public virtual tb_Catalogo tb_Catalogo { get; set; }
         public virtual tb_Catalogo tb_Catalogo1 { get; set; }
@@ -48,5 +52,7 @@ namespace Core.Data.Base
         public virtual tb_Catalogo tb_Catalogo4 { get; set; }
         public virtual tb_Catalogo tb_Catalogo5 { get; set; }
         public virtual tb_Catalogo tb_Catalogo6 { get; set; }
+        public virtual tb_Catalogo tb_Catalogo7 { get; set; }
+        public virtual tb_Catalogo tb_Catalogo8 { get; set; }
     }
 }

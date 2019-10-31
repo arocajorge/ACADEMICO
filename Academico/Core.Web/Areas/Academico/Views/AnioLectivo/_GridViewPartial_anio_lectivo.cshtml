@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_anio_lectivo";
-        settings.CallbackRouteValues = new { Controller = "Materia", Action = "GridViewPartial_anio_lectivo" };
+        settings.CallbackRouteValues = new { Controller = "AnioLectivo", Action = "GridViewPartial_anio_lectivo" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdAnio";
         //Configuración para que la grilla no muestre texto completo

@@ -1,5 +1,4 @@
-﻿using Core.Info.General;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,18 +7,17 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Academico
 {
-    public class aca_Profesor_Info
+    public class aca_Catalogo_Info
     {
-        public decimal IdTransaccionSession { get; set; }
-        public int IdEmpresa { get; set; }
-        public decimal IdProfesor { get; set; }
-        public decimal IdPersona { get; set; }
-        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo código debe tener máximo 50")]
+        public int IdCatalogo { get; set; }
+        public int IdCatalogoTipo { get; set; }
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo nombre debe tener máximo 50 caracteres")]
         public string Codigo { get; set; }
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo nombre debe tener mínimo 1 caracter y máximo 500")]
+        [Required(ErrorMessage = "El campo nombre es obligatorio")]
+        public string NomCatalogo { get; set; }
+        public int Orden { get; set; }
         public bool Estado { get; set; }
-        public string Correo { get; set; }
-        public string Direccion { get; set; }
-        public string Telefonos { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
@@ -28,9 +26,5 @@ namespace Core.Info.Academico
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
-
-        #region Campos que no existen en la tablas
-        public tb_persona_Info info_persona { get; set; }
-        #endregion
     }
 }

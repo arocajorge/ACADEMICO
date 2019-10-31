@@ -8,28 +8,25 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Academico
 {
-    public class aca_Materia_Data
+    public class aca_rubro_Data
     {
-        public List<aca_Materia_Info> getList(int IdEmpresa, bool MostrarAnulados)
+        public List<aca_rubro_Info> getList(int IdEmpresa, bool MostrarAnulados)
         {
             try
             {
-                List<aca_Materia_Info> Lista = new List<aca_Materia_Info>();
+                List<aca_rubro_Info> Lista = new List<aca_rubro_Info>();
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.vwaca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
+                    var lst = odata.aca_rubro.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
 
                     lst.ForEach(q =>
                     {
-                        Lista.Add(new aca_Materia_Info
+                        Lista.Add(new aca_rubro_Info
                         {
                             IdEmpresa = q.IdEmpresa,
-                            IdMateria = q.IdMateria,
-                            NomMateria = q.NomMateria,
-                            NomMateriaGrupo = q.NomMateriaGrupo,
-                            OrdenMateria = q.OrdenMateria,
-                            EsObligatorio = q.EsObligatorio,
+                            IdRubro = q.IdRubro,
+                            NomRubro = q.NomRubro,
                             Estado = q.Estado
                         });
                     });
@@ -44,26 +41,23 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_Materia_Info getInfo(int IdEmpresa, int IdMateria)
+        public aca_rubro_Info getInfo(int IdEmpresa, int IdRubro)
         {
             try
             {
-                aca_Materia_Info info;
+                aca_rubro_Info info;
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdMateria == IdMateria).FirstOrDefault();
+                    var Entity = db.aca_rubro.Where(q => q.IdEmpresa == IdEmpresa && q.IdRubro == IdRubro).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
-                    info = new aca_Materia_Info
+                    info = new aca_rubro_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
-                        IdMateria = Entity.IdMateria,
-                        IdMateriaGrupo = Entity.IdMateriaGrupo,
-                        NomMateria = Entity.NomMateria,
-                        OrdenMateria = Entity.OrdenMateria,
-                        EsObligatorio = Entity.EsObligatorio,
+                        IdRubro = Entity.IdRubro,
+                        NomRubro = Entity.NomRubro,
                         Estado = Entity.Estado
                     };
                 }
@@ -85,9 +79,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var cont = Context.aca_Materia.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    var cont = Context.aca_rubro.Where(q=> q.IdEmpresa == IdEmpresa).Count();
                     if (cont > 0)
-                        ID = Context.aca_Materia.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdMateria) + 1;
+                        ID = Context.aca_rubro.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdRubro) + 1;
                 }
 
                 return ID;
@@ -99,47 +93,22 @@ namespace Core.Data.Academico
             }
         }
 
-        public int getOrden(int IdEmpresa)
-        {
-            try
-            {
-                int ID = 1;
-
-                using (EntitiesAcademico Context = new EntitiesAcademico())
-                {
-                    var cont = Context.aca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Count();
-                    if (cont > 0)
-                        ID = Context.aca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Max(q => q.OrdenMateria) + 1;
-                }
-
-                return ID;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public bool guardarDB(aca_Materia_Info info)
+        public bool guardarDB(aca_rubro_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_Materia Entity = new aca_Materia
+                    aca_rubro Entity = new aca_rubro
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdMateria = info.IdMateria = getId(info.IdEmpresa),
-                        NomMateria = info.NomMateria,
-                        IdMateriaGrupo = (info.IdMateriaGrupo==0 ? null : info.IdMateriaGrupo),
-                        OrdenMateria = info.OrdenMateria,
-                        EsObligatorio = info.EsObligatorio,
+                        IdRubro = info.IdRubro = getId(info.IdEmpresa),
+                        NomRubro = info.NomRubro,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
-                    Context.aca_Materia.Add(Entity);
+                    Context.aca_rubro.Add(Entity);
 
                     Context.SaveChanges();
                 }
@@ -152,20 +121,16 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool modificarDB(aca_Materia_Info info)
+        public bool modificarDB(aca_rubro_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_Materia Entity = Context.aca_Materia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMateria == info.IdMateria);
+                    aca_rubro Entity = Context.aca_rubro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdRubro == info.IdRubro);
                     if (Entity == null)
                         return false;
-                    Entity.IdEmpresa = info.IdEmpresa;
-                    Entity.NomMateria = info.NomMateria;
-                    Entity.OrdenMateria = info.OrdenMateria;
-                    Entity.IdMateriaGrupo = (info.IdMateriaGrupo == 0 ? null : info.IdMateriaGrupo);
-                    Entity.EsObligatorio = info.EsObligatorio;
+                    Entity.NomRubro = info.NomRubro;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 
@@ -181,19 +146,21 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool anularDB(aca_Materia_Info info)
+        public bool anularDB(aca_rubro_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_Materia Entity = Context.aca_Materia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMateria == info.IdMateria);
+                    aca_rubro Entity = Context.aca_rubro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdRubro == info.IdRubro);
                     if (Entity == null)
                         return false;
+
                     Entity.Estado = info.Estado = false;
                     Entity.MotivoAnulacion = info.MotivoAnulacion;
                     Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                     Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;
+
                     Context.SaveChanges();
                 }
 

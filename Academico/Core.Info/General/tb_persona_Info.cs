@@ -34,5 +34,9 @@ namespace Core.Info.General
         public string IdTipoCta_acreditacion_cat { get; set; }
         public string num_cta_acreditacion { get; set; }
         public Nullable<int> IdBanco_acreditacion { get; set; }
+        public string CodCatalogoSangre { get; set; }
+        public string CodCatalogoCONADIS { get; set; }
+        public Nullable<double> PorcentajeDiscapacidad { get; set; }
+        public string NumeroCarnetConadis { get; set; }
     }
 }

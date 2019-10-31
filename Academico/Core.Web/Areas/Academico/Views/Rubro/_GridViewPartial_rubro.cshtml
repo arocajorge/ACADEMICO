@@ -1,10 +1,10 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_materia";
-        settings.CallbackRouteValues = new { Controller = "Materia", Action = "GridViewPartial_materia" };
+        settings.Name = "GridViewPartial_rubro";
+        settings.CallbackRouteValues = new { Controller = "Rubro", Action = "GridViewPartial_rubro" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdMateria";
+        settings.KeyFieldName = "IdRubro";
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -63,8 +63,8 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMateria = DataBinder.Eval(tc.DataItem, "IdMateria") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMateria = DataBinder.Eval(tc.DataItem, "IdMateria") },
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdRubro = DataBinder.Eval(tc.DataItem, "IdRubro") }) + "&nbsp;" +
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdRubro = DataBinder.Eval(tc.DataItem, "IdRubro") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -79,20 +79,8 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdMateria", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("NomMateria","Descripción").Width = Unit.Percentage(50);
-        settings.Columns.Add("NomMateriaGrupo", "Grupo").Width = Unit.Percentage(50);       
-        settings.Columns.Add("OrdenMateria","Orden").Width = Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EsObligatorio";
-            column.Caption = "Es Obligatoria";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
-            column.EditorProperties().CheckBox(sp =>
-            {
-
-            });
-        });
+        settings.Columns.Add("IdRubro", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomRubro", "Descripción").Width = Unit.Percentage(70);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";

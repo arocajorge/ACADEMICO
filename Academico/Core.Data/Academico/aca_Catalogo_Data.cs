@@ -8,28 +8,27 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Academico
 {
-    public class aca_Materia_Data
+    public class aca_Catalogo_Data
     {
-        public List<aca_Materia_Info> getList(int IdEmpresa, bool MostrarAnulados)
+        public List<aca_Catalogo_Info> getList(bool MostrarAnulados)
         {
             try
             {
-                List<aca_Materia_Info> Lista = new List<aca_Materia_Info>();
+                List<aca_Catalogo_Info> Lista = new List<aca_Catalogo_Info>();
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.vwaca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
+                    var lst = odata.aca_Catalogo.Where(q => q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
 
                     lst.ForEach(q =>
                     {
-                        Lista.Add(new aca_Materia_Info
+                        Lista.Add(new aca_Catalogo_Info
                         {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMateria = q.IdMateria,
-                            NomMateria = q.NomMateria,
-                            NomMateriaGrupo = q.NomMateriaGrupo,
-                            OrdenMateria = q.OrdenMateria,
-                            EsObligatorio = q.EsObligatorio,
+                            IdCatalogo = q.IdCatalogo,
+                            IdCatalogoTipo = q.IdCatalogoTipo,
+                            NomCatalogo = q.NomCatalogo,
+                            Codigo = q.Codigo,
+                            Orden = q.Orden,
                             Estado = q.Estado
                         });
                     });
@@ -44,26 +43,25 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_Materia_Info getInfo(int IdEmpresa, int IdMateria)
+        public aca_Catalogo_Info getInfo(int IdCatalogo)
         {
             try
             {
-                aca_Materia_Info info;
+                aca_Catalogo_Info info;
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdMateria == IdMateria).FirstOrDefault();
+                    var Entity = db.aca_Catalogo.Where(q => q.IdCatalogo == IdCatalogo).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
-                    info = new aca_Materia_Info
+                    info = new aca_Catalogo_Info
                     {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdMateria = Entity.IdMateria,
-                        IdMateriaGrupo = Entity.IdMateriaGrupo,
-                        NomMateria = Entity.NomMateria,
-                        OrdenMateria = Entity.OrdenMateria,
-                        EsObligatorio = Entity.EsObligatorio,
+                        IdCatalogo = Entity.IdCatalogo,
+                        IdCatalogoTipo = Entity.IdCatalogoTipo,
+                        NomCatalogo = Entity.NomCatalogo,
+                        Orden = Entity.Orden,
+                        Codigo = Entity.Codigo,
                         Estado = Entity.Estado
                     };
                 }
@@ -77,7 +75,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public int getId(int IdEmpresa)
+        public int getId()
         {
             try
             {
@@ -85,9 +83,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var cont = Context.aca_Materia.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    var cont = Context.aca_Catalogo.Count();
                     if (cont > 0)
-                        ID = Context.aca_Materia.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdMateria) + 1;
+                        ID = Context.aca_Catalogo.Max(q => q.IdCatalogo) + 1;
                 }
 
                 return ID;
@@ -99,7 +97,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public int getOrden(int IdEmpresa)
+        public int getOrden(int IdCatalogoTipo)
         {
             try
             {
@@ -107,9 +105,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var cont = Context.aca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Count();
+                    var cont = Context.aca_Catalogo.Where(q => q.Estado == true && q.IdCatalogoTipo == IdCatalogoTipo).Count();
                     if (cont > 0)
-                        ID = Context.aca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true).Max(q => q.OrdenMateria) + 1;
+                        ID = Context.aca_Catalogo.Where(q => q.Estado == true && q.IdCatalogoTipo == IdCatalogoTipo).Max(q => q.Orden) + 1;
                 }
 
                 return ID;
@@ -120,26 +118,24 @@ namespace Core.Data.Academico
                 throw;
             }
         }
-
-        public bool guardarDB(aca_Materia_Info info)
+        public bool guardarDB(aca_Catalogo_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_Materia Entity = new aca_Materia
+                    aca_Catalogo Entity = new aca_Catalogo
                     {
-                        IdEmpresa = info.IdEmpresa,
-                        IdMateria = info.IdMateria = getId(info.IdEmpresa),
-                        NomMateria = info.NomMateria,
-                        IdMateriaGrupo = (info.IdMateriaGrupo==0 ? null : info.IdMateriaGrupo),
-                        OrdenMateria = info.OrdenMateria,
-                        EsObligatorio = info.EsObligatorio,
+                        IdCatalogo = info.IdCatalogo=getId(),
+                        IdCatalogoTipo = info.IdCatalogoTipo,
+                        NomCatalogo = info.NomCatalogo,
+                        Orden = info.Orden,
+                        Codigo = info.Codigo,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
-                    Context.aca_Materia.Add(Entity);
+                    Context.aca_Catalogo.Add(Entity);
 
                     Context.SaveChanges();
                 }
@@ -152,20 +148,19 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool modificarDB(aca_Materia_Info info)
+        public bool modificarDB(aca_Catalogo_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_Materia Entity = Context.aca_Materia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMateria == info.IdMateria);
+                    aca_Catalogo Entity = Context.aca_Catalogo.FirstOrDefault(q => q.IdCatalogo == info.IdCatalogo);
                     if (Entity == null)
                         return false;
-                    Entity.IdEmpresa = info.IdEmpresa;
-                    Entity.NomMateria = info.NomMateria;
-                    Entity.OrdenMateria = info.OrdenMateria;
-                    Entity.IdMateriaGrupo = (info.IdMateriaGrupo == 0 ? null : info.IdMateriaGrupo);
-                    Entity.EsObligatorio = info.EsObligatorio;
+                    Entity.IdCatalogoTipo = info.IdCatalogoTipo;
+                    Entity.NomCatalogo = info.NomCatalogo;
+                    Entity.Orden = info.Orden;
+                    Entity.Codigo = info.Codigo;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 
@@ -181,19 +176,21 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool anularDB(aca_Materia_Info info)
+        public bool anularDB(aca_Catalogo_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_Materia Entity = Context.aca_Materia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMateria == info.IdMateria);
+                    aca_Catalogo Entity = Context.aca_Catalogo.FirstOrDefault(q => q.IdCatalogo == info.IdCatalogo);
                     if (Entity == null)
                         return false;
+
                     Entity.Estado = info.Estado = false;
                     Entity.MotivoAnulacion = info.MotivoAnulacion;
                     Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                     Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;
+
                     Context.SaveChanges();
                 }
 

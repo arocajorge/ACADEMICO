@@ -195,6 +195,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Academico\AcademicoAreaRegistration.cs" />
+    <Compile Include="Areas\Academico\Controllers\AlumnoController.cs" />
     <Compile Include="Areas\Academico\Controllers\AnioLectivoController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoPorJornadaController.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Areas\Academico\Controllers\ParaleloController.cs" />
     <Compile Include="Areas\Academico\Controllers\ParaleloPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\ProfesorController.cs" />
+    <Compile Include="Areas\Academico\Controllers\RubroController.cs" />
     <Compile Include="Areas\Academico\Controllers\SedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\NivelPorSedeController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
@@ -7463,6 +7465,14 @@
     <Content Include="Areas\Academico\Views\MateriaPorCurso\_ComboBoxPartial_Jornada.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaPorCurso\_ComboBoxPartial_Curso.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaPorCurso\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_GridViewPartial_alumno.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\Rubro\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\Rubro\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\Rubro\_GridViewPartial_rubro.cshtml" />
+    <Content Include="Areas\Academico\Views\Rubro\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\Rubro\Anular.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

@@ -114,6 +114,10 @@
           <Property Name="IdTipoCta_acreditacion_cat" Type="varchar" MaxLength="25" />
           <Property Name="num_cta_acreditacion" Type="varchar" MaxLength="50" />
           <Property Name="IdBanco_acreditacion" Type="int" />
+          <Property Name="CodCatalogoSangre" Type="varchar" MaxLength="25" />
+          <Property Name="CodCatalogoCONADIS" Type="varchar" MaxLength="25" />
+          <Property Name="PorcentajeDiscapacidad" Type="float" />
+          <Property Name="NumeroCarnetConadis" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="tb_sucursal">
           <Key>
@@ -238,6 +242,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo7">
+          <End Role="tb_Catalogo" Type="Self.tb_Catalogo" Multiplicity="0..1" />
+          <End Role="tb_persona" Type="Self.tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="CodCatalogoSangre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo8">
+          <End Role="tb_Catalogo" Type="Self.tb_Catalogo" Multiplicity="0..1" />
+          <End Role="tb_persona" Type="Self.tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="CodCatalogoCONADIS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_sucursal_tb_empresa">
           <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
           <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="*" />
@@ -289,6 +317,14 @@
             <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
             <End Role="tb_persona" EntitySet="tb_persona" />
           </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo7" Association="Self.FK_tb_persona_tb_Catalogo7">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo8" Association="Self.FK_tb_persona_tb_Catalogo8">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_sucursal_tb_empresa" Association="Self.FK_tb_sucursal_tb_empresa">
             <End Role="tb_empresa" EntitySet="tb_empresa" />
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
@@ -329,7 +365,6 @@
             <End Role="tb_empresa" EntitySet="tb_empresa" />
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
           </AssociationSet>
-          <EntitySet Name="tb_persona" EntityType="ModelGeneral.tb_persona" />
           <EntitySet Name="tb_ciudad" EntityType="ModelGeneral.tb_ciudad" />
           <EntitySet Name="tb_parroquia" EntityType="ModelGeneral.tb_parroquia" />
           <AssociationSet Name="FK_tb_parroquia_tb_ciudad" Association="ModelGeneral.FK_tb_parroquia_tb_ciudad">
@@ -337,6 +372,7 @@
             <End Role="tb_parroquia" EntitySet="tb_parroquia" />
           </AssociationSet>
           <EntitySet Name="tb_Catalogo" EntityType="ModelGeneral.tb_Catalogo" />
+          <EntitySet Name="tb_persona" EntityType="ModelGeneral.tb_persona" />
           <AssociationSet Name="FK_tb_persona_tb_Catalogo" Association="ModelGeneral.FK_tb_persona_tb_Catalogo">
             <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
             <End Role="tb_persona" EntitySet="tb_persona" />
@@ -365,7 +401,15 @@
             <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
             <End Role="tb_persona" EntitySet="tb_persona" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo7" Association="ModelGeneral.FK_tb_persona_tb_Catalogo7">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo8" Association="ModelGeneral.FK_tb_persona_tb_Catalogo8">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="tb_sucursal">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -406,44 +450,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tb_persona">
-          <Key>
-            <PropertyRef Name="IdPersona" />
-          </Key>
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="CodPersona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pe_Naturaleza" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_razonSocial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="pe_telfono_Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_sexo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdEstadoCivil" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_fechaNacimiento" Type="DateTime" Precision="3" />
-          <Property Name="pe_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="pe_fechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="pe_fechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="pe_UltUsuarioModi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoCta_acreditacion_cat" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="num_cta_acreditacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdBanco_acreditacion" Type="Int32" />
-          <NavigationProperty Name="tb_Catalogo" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo1" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo1" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo2" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo2" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo3" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo3" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo4" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo4" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo5" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo5" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo6" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo6" FromRole="tb_persona" ToRole="tb_Catalogo" />
-        </EntityType>
         <EntityType Name="tb_ciudad">
           <Key>
             <PropertyRef Name="IdCiudad" />
@@ -520,6 +526,52 @@
           <NavigationProperty Name="tb_persona4" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo4" FromRole="tb_Catalogo" ToRole="tb_persona" />
           <NavigationProperty Name="tb_persona5" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo5" FromRole="tb_Catalogo" ToRole="tb_persona" />
           <NavigationProperty Name="tb_persona6" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo6" FromRole="tb_Catalogo" ToRole="tb_persona" />
+          <NavigationProperty Name="tb_persona7" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo7" FromRole="tb_Catalogo" ToRole="tb_persona" />
+          <NavigationProperty Name="tb_persona8" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo8" FromRole="tb_Catalogo" ToRole="tb_persona" />
+          </EntityType>
+        <EntityType Name="tb_persona">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CodPersona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pe_Naturaleza" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_razonSocial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="pe_telfono_Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_sexo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstadoCivil" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_fechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="pe_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="pe_fechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="pe_fechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="pe_UltUsuarioModi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoCta_acreditacion_cat" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="num_cta_acreditacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco_acreditacion" Type="Int32" />
+          <Property Name="CodCatalogoSangre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CodCatalogoCONADIS" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeDiscapacidad" Type="Double" />
+          <Property Name="NumeroCarnetConadis" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_Catalogo" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo1" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo1" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo2" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo2" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo3" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo3" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo4" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo4" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo5" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo5" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo6" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo6" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo7" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo7" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo8" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo8" FromRole="tb_persona" ToRole="tb_Catalogo" />
         </EntityType>
         <Association Name="FK_tb_persona_tb_Catalogo">
           <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="1" />
@@ -605,7 +657,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK_tb_persona_tb_Catalogo7">
+          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="CodCatalogoSangre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo8">
+          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="CodCatalogoCONADIS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -659,38 +735,6 @@
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_persona">
-            <EntityTypeMapping TypeName="ModelGeneral.tb_persona">
-              <MappingFragment StoreEntitySet="tb_persona">
-                <ScalarProperty Name="IdBanco_acreditacion" ColumnName="IdBanco_acreditacion" />
-                <ScalarProperty Name="num_cta_acreditacion" ColumnName="num_cta_acreditacion" />
-                <ScalarProperty Name="IdTipoCta_acreditacion_cat" ColumnName="IdTipoCta_acreditacion_cat" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="pe_UltUsuarioModi" ColumnName="pe_UltUsuarioModi" />
-                <ScalarProperty Name="pe_fechaModificacion" ColumnName="pe_fechaModificacion" />
-                <ScalarProperty Name="pe_fechaCreacion" ColumnName="pe_fechaCreacion" />
-                <ScalarProperty Name="pe_estado" ColumnName="pe_estado" />
-                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
-                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
-                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
-                <ScalarProperty Name="pe_correo" ColumnName="pe_correo" />
-                <ScalarProperty Name="pe_celular" ColumnName="pe_celular" />
-                <ScalarProperty Name="pe_telfono_Contacto" ColumnName="pe_telfono_Contacto" />
-                <ScalarProperty Name="pe_direccion" ColumnName="pe_direccion" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="pe_razonSocial" ColumnName="pe_razonSocial" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="pe_Naturaleza" ColumnName="pe_Naturaleza" />
-                <ScalarProperty Name="CodPersona" ColumnName="CodPersona" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -750,6 +794,42 @@
                 <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
                 <ScalarProperty Name="IdTipoCatalogo" ColumnName="IdTipoCatalogo" />
                 <ScalarProperty Name="CodCatalogo" ColumnName="CodCatalogo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_persona">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_persona">
+              <MappingFragment StoreEntitySet="tb_persona">
+                <ScalarProperty Name="NumeroCarnetConadis" ColumnName="NumeroCarnetConadis" />
+                <ScalarProperty Name="PorcentajeDiscapacidad" ColumnName="PorcentajeDiscapacidad" />
+                <ScalarProperty Name="CodCatalogoCONADIS" ColumnName="CodCatalogoCONADIS" />
+                <ScalarProperty Name="CodCatalogoSangre" ColumnName="CodCatalogoSangre" />
+                <ScalarProperty Name="IdBanco_acreditacion" ColumnName="IdBanco_acreditacion" />
+                <ScalarProperty Name="num_cta_acreditacion" ColumnName="num_cta_acreditacion" />
+                <ScalarProperty Name="IdTipoCta_acreditacion_cat" ColumnName="IdTipoCta_acreditacion_cat" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="pe_UltUsuarioModi" ColumnName="pe_UltUsuarioModi" />
+                <ScalarProperty Name="pe_fechaModificacion" ColumnName="pe_fechaModificacion" />
+                <ScalarProperty Name="pe_fechaCreacion" ColumnName="pe_fechaCreacion" />
+                <ScalarProperty Name="pe_estado" ColumnName="pe_estado" />
+                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
+                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
+                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
+                <ScalarProperty Name="pe_correo" ColumnName="pe_correo" />
+                <ScalarProperty Name="pe_celular" ColumnName="pe_celular" />
+                <ScalarProperty Name="pe_telfono_Contacto" ColumnName="pe_telfono_Contacto" />
+                <ScalarProperty Name="pe_direccion" ColumnName="pe_direccion" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_razonSocial" ColumnName="pe_razonSocial" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_Naturaleza" ColumnName="pe_Naturaleza" />
+                <ScalarProperty Name="CodPersona" ColumnName="CodPersona" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

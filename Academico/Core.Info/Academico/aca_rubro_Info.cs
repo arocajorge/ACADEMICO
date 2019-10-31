@@ -7,19 +7,14 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Academico
 {
-    public class aca_Materia_Info
+    public class aca_rubro_Info
     {
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
-        public int IdMateria { get; set; }
-        [Required(ErrorMessage = "El campo grupo de materia es obligatorio")]
-        public Nullable<int> IdMateriaGrupo { get; set; }
-        [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo materia debe tener mínimo 1 caracter y máximo 500")]
-        [Required(ErrorMessage = "El campo materia es obligatorio")]
-        public string NomMateria { get; set; }
-        public bool EsObligatorio { get; set; }
-        [Required(ErrorMessage = "El campo orden es obligatorio")]
-        public int OrdenMateria { get; set; }
+        public int IdRubro { get; set; }
+        [StringLength(1000, MinimumLength = 1, ErrorMessage = "el campo rubro debe tener mínimo 1 caracter y máximo 1000")]
+        [Required(ErrorMessage = "El campo rubro es obligatorio")]
+        public string NomRubro { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -29,9 +24,5 @@ namespace Core.Info.Academico
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
-
-        #region Campos que no existen en la tabla
-        public string NomMateriaGrupo { get; set; }
-        #endregion
     }
 }

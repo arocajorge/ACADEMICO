@@ -41,13 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Academico\aca_alumno_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Jornada_Curso_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_NivelAcademico_Jornada_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Info.cs" />
+    <Compile Include="Academico\aca_CatalogoTipo_Info.cs" />
+    <Compile Include="Academico\aca_Catalogo_Info.cs" />
     <Compile Include="Academico\aca_Curso_Info.cs" />
+    <Compile Include="Academico\aca_familia_Info.cs" />
     <Compile Include="Academico\aca_Jornada_Info.cs" />
     <Compile Include="Academico\aca_MateriaGrupo_Info.cs" />
     <Compile Include="Academico\aca_Materia_Info.cs" />
@@ -57,6 +61,7 @@
     <Compile Include="Academico\aca_NivelAcademico_Info.cs" />
     <Compile Include="Academico\aca_Paralelo_Info.cs" />
     <Compile Include="Academico\aca_Profesor_Info.cs" />
+    <Compile Include="Academico\aca_rubro_Info.cs" />
     <Compile Include="Academico\aca_Sede_Info.cs" />
     <Compile Include="General\tb_Catalogo_Info.cs" />
     <Compile Include="General\tb_empresa_Info.cs" />

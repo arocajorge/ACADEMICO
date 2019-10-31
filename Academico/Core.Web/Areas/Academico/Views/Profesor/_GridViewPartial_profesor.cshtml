@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_profesor";
-        settings.CallbackRouteValues = new { Controller = "Cliente", Action = "GridViewPartial_profesor" };
+        settings.CallbackRouteValues = new { Controller = "Profesor", Action = "GridViewPartial_profesor" };
         settings.KeyFieldName = "IdProfesor";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo

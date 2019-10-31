@@ -24,6 +24,8 @@ namespace Core.Data.Base
             this.tb_persona4 = new HashSet<tb_persona>();
             this.tb_persona5 = new HashSet<tb_persona>();
             this.tb_persona6 = new HashSet<tb_persona>();
+            this.tb_persona7 = new HashSet<tb_persona>();
+            this.tb_persona8 = new HashSet<tb_persona>();
         }
     
         public string CodCatalogo { get; set; }
@@ -54,5 +56,9 @@ namespace Core.Data.Base
         public virtual ICollection<tb_persona> tb_persona5 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_persona> tb_persona6 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_persona> tb_persona7 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_persona> tb_persona8 { get; set; }
     }
 }
