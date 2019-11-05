@@ -96,13 +96,8 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             string return_naturaleza = "";
 
-            if (cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc, ref return_naturaleza))
+            if (cl_funciones.ValidaIdentificacion(model.IdTipoDocumento, model.pe_Naturaleza, model.pe_cedulaRuc, ref return_naturaleza))
             {
-                model.info_persona.IdPersona = model.IdPersona;
-                model.info_persona.pe_Naturaleza = return_naturaleza;
-                model.info_persona.pe_telfono_Contacto = model.Telefonos;
-                model.info_persona.pe_correo = model.Correo;
-                model.info_persona.pe_direccion = model.Direccion;
                 if (!bus_profesor.GuardarDB(model))
                 {
                     ViewBag.mensaje = "No se ha podido guardar el registro";
@@ -213,6 +208,12 @@ namespace Core.Web.Areas.Academico.Controllers
         public JsonResult get_info_x_num_cedula(int IdEmpresa = 0, string pe_cedulaRuc = "")
         {
             var resultado = bus_profesor.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
+            resultado.anio = Convert.ToDateTime(resultado.pe_fechaNacimiento).Year.ToString();
+            var mes = Convert.ToDateTime(resultado.pe_fechaNacimiento).Month;
+            mes = mes - 1;
+            resultado.mes = mes.ToString();
+            resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
+
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion

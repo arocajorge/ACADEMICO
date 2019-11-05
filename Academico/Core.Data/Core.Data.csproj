@@ -58,6 +58,7 @@
     <Compile Include="Academico\aca_AnioLectivo_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Jornada_Curso_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_NivelAcademico_Jornada_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Paralelo_Profesor_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Data.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Data.cs" />
     <Compile Include="Academico\aca_Catalogo_Data.cs" />

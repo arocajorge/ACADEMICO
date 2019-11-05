@@ -203,6 +203,7 @@
     <Compile Include="Areas\Academico\Controllers\MateriaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaGrupoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaPorCursoController.cs" />
+    <Compile Include="Areas\Academico\Controllers\MateriaPorProfesorController.cs" />
     <Compile Include="Areas\Academico\Controllers\MenuController.cs" />
     <Compile Include="Areas\Academico\Controllers\MenuPorSedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\MenuPorSedePorUsuarioController.cs" />
@@ -7450,7 +7451,6 @@
     <Content Include="Areas\Academico\Views\JornadaPorNivel\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Academico\Views\JornadaPorNivel\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Academico\Views\JornadaPorNivel\_ComboBoxPartial_Nivel.cshtml" />
-    <Content Include="Areas\Academico\Views\Profesor\Anular.cshtml" />
     <Content Include="Areas\Academico\Views\CursoPorJornada\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Academico\Views\CursoPorJornada\_ComboBoxPartial_Nivel.cshtml" />
     <Content Include="Areas\Academico\Views\CursoPorJornada\_ComboBoxPartial_Anio.cshtml" />
@@ -7473,6 +7473,18 @@
     <Content Include="Areas\Academico\Views\Rubro\_GridViewPartial_rubro.cshtml" />
     <Content Include="Areas\Academico\Views\Rubro\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\Rubro\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\Profesor\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_GridViewPartial_MateriaPorProfesor.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Materia.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Anio.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

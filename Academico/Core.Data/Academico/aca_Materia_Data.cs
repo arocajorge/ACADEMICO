@@ -44,6 +44,34 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_Materia_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                List<aca_Materia_Info> Lista = new List<aca_Materia_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).OrderBy(q => q.OrdenMateria).GroupBy(q => new { q.IdMateria, q.NomMateria }).Select(q => new { q.Key.IdMateria, q.Key.NomMateria }).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_Materia_Info
+                        {
+                            IdMateria = q.IdMateria,
+                            NomMateria = q.NomMateria,
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_Materia_Info getInfo(int IdEmpresa, int IdMateria)
         {
             try

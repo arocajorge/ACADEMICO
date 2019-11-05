@@ -25,6 +25,7 @@ namespace Core.Info.Academico
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
 
+
         #region Campos que no existen en la tabla
         public string IdTipoDocumento { get; set; }
         public string pe_Naturaleza { get; set; }
@@ -40,6 +41,9 @@ namespace Core.Info.Academico
         public string CodCatalogoCONADIS { get; set; }
         public Nullable<double> PorcentajeDiscapacidad { get; set; }
         public string NumeroCarnetConadis { get; set; }
+        public string anio { get; set; }
+        public string mes { get; set; }
+        public string dia { get; set; }
         #endregion
     }
 }

@@ -31,6 +31,20 @@ namespace Core.Info.Academico
 
         #region Campos que no existen en la tablas
         public tb_persona_Info info_persona { get; set; }
+        public string anio { get; set; }
+        public string mes { get; set; }
+        public string dia { get; set; }
+        public string IdTipoDocumento { get; set; }
+        public string pe_Naturaleza { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string pe_razonSocial { get; set; }
+        public string pe_apellido { get; set; }
+        public string pe_nombre { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string IdEstadoCivil { get; set; }
+        public string pe_sexo { get; set; }
+        public string pe_celular { get; set; }
+        public Nullable<System.DateTime> pe_fechaNacimiento { get; set; }
         #endregion
     }
 }

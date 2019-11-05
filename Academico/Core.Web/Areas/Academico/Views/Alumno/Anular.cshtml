@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Academico.aca_alumno_Info
 @{
-    ViewBag.Title = "Nuevo alumno";
+    ViewBag.Title = "Anular alumno";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -9,13 +9,17 @@
 }
 
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Nuevo", "Alumno", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "Alumno", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdAlumno, new { @id = "IdAlumno" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdPersona, new { @id = "IdPersona" })
     @Html.HiddenFor(q => q.IdPersona_padre, new { @id = "IdPersona_padre" })
     @Html.HiddenFor(q => q.IdPersona_madre, new { @id = "IdPersona_madre" })
+    @Html.HiddenFor(q => q.pe_Naturaleza, new { @id = "pe_Naturaleza" })
+    @Html.HiddenFor(q => q.IdTipoDocumento, new { @id = "IdTipoDocumento" })
+    @Html.HiddenFor(q => q.pe_cedulaRuc, new { @id = "pe_cedulaRuc" })
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -37,21 +41,21 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="info_persona.pe_Naturaleza">Naturaleza*</label>
-                    @Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza" })
+                    @Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza", @disabled="disabled" })
                     @Html.ValidationMessageFor(q => q.pe_Naturaleza, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="info_persona.IdTipoDocumento">Tipo documento*</label>
-                    @Html.DropDownListFor(q => q.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento" })
+                    @Html.DropDownListFor(q => q.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdTipoDocumento, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="info_persona.pe_cedulaRuc">Número documento*</label>
-                    @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc"})
+                    @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
                     <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                 </div>
@@ -224,7 +228,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="info_persona.pe_Naturaleza">Naturaleza*</label>
-                                @Html.DropDownListFor(q => q.pe_Naturaleza_padre, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza_padre"})
+                                @Html.DropDownListFor(q => q.pe_Naturaleza_padre, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza_padre" })
                                 @Html.ValidationMessageFor(q => q.pe_Naturaleza_padre, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -448,15 +452,15 @@
                                         <i class="fa fa-calendar"></i>
                                     </div>
                                     @Html.DevExpress().DateEditFor(q => q.pe_fechaNacimiento_madre, settings =>
-                            {
-                                settings.Name = "pe_fechaNacimiento_madre";
-                                settings.Properties.UseMaskBehavior = true;
-                                settings.Properties.EditFormat = EditFormat.Date;
-                                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                settings.Properties.AllowMouseWheel = false;
-                            }).GetHtml()
+                                    {
+                                        settings.Name = "pe_fechaNacimiento_madre";
+                                        settings.Properties.UseMaskBehavior = true;
+                                        settings.Properties.EditFormat = EditFormat.Date;
+                                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                        settings.Properties.AllowMouseWheel = false;
+                                    }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.pe_fechaNacimiento_madre, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -543,7 +547,7 @@
         </div>
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Alumno", new { Area = "Academico" }, null)">Cancelar</a>
     </div>
     @section Scripts {
@@ -556,475 +560,4 @@
         $("#error_documento_padre").hide();
         $("#error_documento_madre").hide();
     })
-    $("#pe_cedulaRuc").blur(function () {
-        Validar_cedula_ruc();
-    });
-
-    $("#pe_cedulaRuc_padre").blur(function () {
-        Validar_cedula_ruc_padre();
-    });
-
-    $("#pe_cedulaRuc_madre").blur(function () {
-        Validar_cedula_ruc_madre();
-    });
-
-    $("#pe_apellido").blur(function () {
-        actualizar_nombre_completo();
-    });
-    $("#pe_nombre").blur(function () {
-        actualizar_nombre_completo();
-    });
-
-    $("#pe_cedulaRuc").blur(function () {
-        get_info_x_num_cedula();
-    });
-
-    $("#pe_cedulaRuc_padre").blur(function () {
-        get_info_x_num_cedula_padre();
-    });
-
-    $("#pe_cedulaRuc_madre").blur(function () {
-        get_info_x_num_cedula_madre();
-    });
-
-    $("#pe_cedulaRuc").blur(function () {
-        var tipo_doc = $("#IdTipoDocumento").val();
-        var cedula = $("#pe_cedulaRuc").val();
-
-        if (tipo_doc == "RUC") {
-            if (cedula.length > 13) {
-                var len = $("#pe_cedulaRuc").val();
-                len = len.substring(0, 13);
-                $("#pe_cedulaRuc").val(len);
-            }
-        }
-        else
-            if (tipo_doc == "CED") {
-                if (cedula.length > 10) {
-                    var len = $("#pe_cedulaRuc").val();
-                    len = len.substring(0, 10);
-                    $("#pe_cedulaRuc").val(len);
-                }
-            }
-    });
-
-    $("#pe_cedulaRuc_padre").blur(function () {
-        var tipo_doc = $("#IdTipoDocumento_padre").val();
-        var cedula = $("#pe_cedulaRuc_padre").val();
-
-        if (tipo_doc == "RUC") {
-            if (cedula.length > 13) {
-                var len = $("#pe_cedulaRuc_padre").val();
-                len = len.substring(0, 13);
-                $("#pe_cedulaRuc_padre").val(len);
-            }
-
-        }
-        else
-            if (tipo_doc == "CED") {
-                if (cedula.length > 10) {
-                    var len = $("#pe_cedulaRuc_padre").val();
-                    len = len.substring(0, 10);
-                    $("#pe_cedulaRuc_padre").val(len);
-                }
-            }
-    });
-
-    $("#pe_cedulaRuc_madre").blur(function () {
-        var tipo_doc = $("#IdTipoDocumento_madre").val();
-        var cedula = $("#pe_cedulaRuc_madre").val();
-
-        if (tipo_doc == "RUC") {
-            if (cedula.length > 13) {
-                var len = $("#pe_cedulaRuc_madre").val();
-                len = len.substring(0, 13);
-                $("#pe_cedulaRuc_madre").val(len);
-            }
-
-        }
-        else
-            if (tipo_doc == "CED") {
-                if (cedula.length > 10) {
-                    var len = $("#pe_cedulaRuc_madre").val();
-                    len = len.substring(0, 10);
-                    $("#pe_cedulaRuc_madre").val(len);
-                }
-            }
-    });
-
-    function actualizar_nombre_completo() {
-        var apellido = $("#pe_apellido").val();
-        var nombre = $("#pe_nombre").val();
-
-        var nombre_completo = apellido + ' ' + nombre;
-        $("#pe_nombreCompleto").val(nombre_completo)
-    }
-
-    function get_info_x_num_cedula() {
-        var cedula = $("#pe_cedulaRuc").val();
-        var tipo_doc = $("#IdTipoDocumento").val();
-
-        if (cedula == null) {
-            vaciar_campos_persona();
-            return;
-        }
-
-        if (tipo_doc == "RUC") {
-            if (cedula.length != 13) {
-                alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
-                $("#pe_cedulaRuc").val("");
-                vaciar_campos_persona();
-                return;
-            }
-        } else
-            if (tipo_doc == "CED") {
-                if (cedula.length != 10) {
-                    alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
-                    $("#pe_cedulaRuc").val("");
-                    vaciar_campos_persona();
-                    return;
-                }
-            }
-
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            pe_cedulaRuc: cedula
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("get_info_x_num_cedula", "Alumno",new { Area = "Academico"})',
-            async: false,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data == "") {
-                    return;
-                }
-
-                if (data.IdAlumno != 0) {
-                    alert("El alumno ya existe con el ID: " + data.IdAlumno);
-                    window.location.href = '@Url.Action("Index", "Alumno", new { Area = "Academico" })'
-                }
-                else {
-                    console.log(data);
-                    if (data.IdPersona != 0 && data.IdAlumno == 0) {
-                        $("#IdPersona").val(data.IdPersona);
-                        $("#pe_Naturaleza").val(data.pe_Naturaleza);
-                        $("#IdTipoDocumento").val(data.IdTipoDocumento);
-                        $("#pe_nombre").val(data.pe_nombre);
-                        $("#pe_apellido").val(data.pe_apellido);
-                        $("#pe_nombreCompleto").val(data.pe_nombreCompleto);
-                        $("#pe_sexo").val(data.pe_sexo);
-                        pe_fechaNacimiento.SetDate(new Date(data.anio, data.mes, data.dia));
-                        $("#Correo").val(data.Correo);
-                        $("#Celular").val(data.Celular);
-                        $("#Direccion").val(data.Direccion);
-                        $("#pe_telfono_Contacto").val(data.pe_telfono_Contacto);
-                        $("#CodCatalogoSangre").val(data.CodCatalogoSangre);
-                        $("#CodCatalogoCONADIS").val(data.CodCatalogoCONADIS);
-                        $("#NumeroCarnetConadis").val(data.NumeroCarnetConadis);
-                        $("#PorcentajeDiscapacidad").val(data.PorcentajeDiscapacidad);
-
-                    }
-                    else {
-                        vaciar_campos_persona();
-                    }
-                }
-            },
-            error: function (error) {
-                alert(error);
-            }
-        });
-    }
-
-    function get_info_x_num_cedula_padre() {
-        var cedula = $("#pe_cedulaRuc_padre").val();
-        var tipo_doc = $("#IdTipoDocumento_padre").val();
-
-        if (cedula == null) {
-            vaciar_campos_padre();
-            return;
-        }
-
-        if (tipo_doc == "RUC") {
-            if (cedula.length != 13) {
-                alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
-                $("#pe_cedulaRuc_padre").val("");
-                vaciar_campos_padre();
-                return;
-            }
-        } else
-            if (tipo_doc == "CED") {
-                if (cedula.length != 10) {
-                    alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
-                    $("#pe_cedulaRuc_padre").val("");
-                    vaciar_campos_padre();
-                    return;
-                }
-            }
-
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            pe_cedulaRuc: cedula
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("get_info_x_num_cedula_familia", "Alumno",new { Area = "Academico"})',
-            async: false,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data == "") {
-                    return;
-                }
-                //console.log(data);
-                if (data.IdPersona != 0) {
-                    $("#IdPersona_padre").val(data.IdPersona);
-                    $("#pe_Naturaleza_padre").val(data.pe_Naturaleza);
-                    $("#IdTipoDocumento_padre").val(data.IdTipoDocumento);
-                    $("#pe_nombre_padre").val(data.pe_nombre);
-                    $("#pe_apellido_padre").val(data.pe_apellido);
-                    //var date = new Date(moment(data.pe_fechaNacimiento, "DD/MM/YYYY"));
-
-                    console.log(data.pe_fechaNacimiento);
-                    pe_fechaNacimiento_padre.SetDate(new Date(data.anio, data.mes, data.dia));
-                    //var date = new Date(moment(pe_fechaNacimiento, "DD/MM/YYYY"));
-                    //pe_fechaNacimiento_padre.SetValue(date);
-                    $("#Correo_padre").val(data.Correo);
-                    $("#Celular_padre").val(data.Celular);
-                    $("#Direccion_padre").val(data.Direccion);
-                    $("#pe_telfono_Contacto_padre").val(data.pe_telfono_Contacto);
-                    $("#CodCatalogoSangre_padre").val(data.CodCatalogoSangre);
-                    $("#CodCatalogoCONADIS_padre").val(data.CodCatalogoCONADIS);
-                    $("#NumeroCarnetConadis_padre").val(data.NumeroCarnetConadis);
-                    $("#PorcentajeDiscapacidad_padre").val(data.PorcentajeDiscapacidad);
-                    $("#IdEstadoCivil_padre").val(data.IdEstadoCivil);
-                    $("#pe_sexo_padre").val(data.pe_sexo);
-                }
-                else {
-                    vaciar_campos_padre();
-                }
-            },
-            error: function (error) {
-                alert(error);
-            }
-        });
-    }
-
-    function get_info_x_num_cedula_madre() {
-        var cedula = $("#pe_cedulaRuc_madre").val();
-        var tipo_doc = $("#IdTipoDocumento_madre").val();
-
-        if (cedula == null) {
-            vaciar_campos_madre();
-            return;
-        }
-
-        if (tipo_doc == "RUC") {
-            if (cedula.length != 13) {
-                alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
-                $("#pe_cedulaRuc_madre").val("");
-                vaciar_campos_padre();
-                return;
-            }
-        } else
-            if (tipo_doc == "CED") {
-                if (cedula.length != 10) {
-                    alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
-                    $("#pe_cedulaRuc_madre").val("");
-                    vaciar_campos_madre();
-                    return;
-                }
-            }
-
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            pe_cedulaRuc: cedula
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("get_info_x_num_cedula_familia", "Alumno",new { Area = "Academico"})',
-            async: false,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data == "") {
-                    return;
-                }
-
-                if (data.IdPersona != 0) {
-                    $("#IdPersona_madre").val(data.IdPersona);
-                    $("#pe_Naturaleza_madre").val(data.pe_Naturaleza);
-                    $("#IdTipoDocumento_madre").val(data.IdTipoDocumento);
-                    $("#pe_nombre_madre").val(data.pe_nombre);
-                    $("#pe_apellido_madre").val(data.pe_apellido);
-                    pe_fechaNacimiento_madre.SetDate(new Date(data.anio, data.mes, data.dia));
-                    $("#Correo_madre").val(data.Correo);
-                    $("#Celular_madre").val(data.Celular);
-                    $("#Direccion_madre").val(data.Direccion);
-                    $("#pe_telfono_Contacto_madre").val(data.pe_telfono_Contacto);
-                    $("#CodCatalogoSangre_madre").val(data.CodCatalogoSangre);
-                    $("#CodCatalogoCONADIS_madre").val(data.CodCatalogoCONADIS);
-                    $("#NumeroCarnetConadis_madre").val(data.NumeroCarnetConadis);
-                    $("#PorcentajeDiscapacidad_madre").val(data.PorcentajeDiscapacidad);
-                    $("#IdEstadoCivil_madre").val(data.IdEstadoCivil);
-                    $("#pe_sexo_madre").val(data.pe_sexo);
-                }
-                else {
-                    vaciar_campos_madre();
-                }
-            },
-            error: function (error) {
-                alert(error);
-            }
-        });
-    }
-
-    function vaciar_campos_persona() {
-        $("#IdPersona").val(0);
-        $("#pe_nombre").val("");
-        $("#pe_apellido").val("");
-        $("#pe_nombreCompleto").val("");
-        $("#pe_sexo").val("");
-        pe_fechaNacimiento.SetDate(null);
-        $("#Correo").val("");
-        $("#Celular").val("");
-        $("#Direccion").val("");
-        $("#pe_telfono_Contacto").val("");
-        $("#CodCatalogoSangre").val("");
-        $("#CodCatalogoCONADIS").val("");
-        $("#NumeroCarnetConadis").val("");
-        $("#PorcentajeDiscapacidad").val("");
-    }
-
-    function vaciar_campos_padre() {
-        $("#IdPersona_padre").val(0);
-        $("#pe_nombre_padre").val("");
-        $("#pe_apellido_padre").val("");
-        pe_fechaNacimiento_padre.SetDate(null);
-        $("#Correo_padre").val("");
-        $("#Celular_padre").val("");
-        $("#Direccion_padre").val("");
-        $("#pe_telfono_Contacto_padre").val("");
-        $("#CodCatalogoSangre_padre").val("");
-        $("#CodCatalogoCONADIS_padre").val("");
-        $("#NumeroCarnetConadis_padre").val("");
-        $("#PorcentajeDiscapacidad_padre").val("");
-        $("#IdEstadoCivil_padre").val("");
-        $("#pe_sexo_padre").val("");
-    }
-
-    function vaciar_campos_madre() {
-        $("#IdPersona_madre").val(0);
-        $("#pe_nombre_madre").val("");
-        $("#pe_apellido_madre").val("");
-        pe_fechaNacimiento_madre.SetDate(null);
-        $("#Correo_madre").val("");
-        $("#Celular_madre").val("");
-        $("#Direccion_madre").val("");
-        $("#pe_telfono_Contacto_madre").val("");
-        $("#CodCatalogoSangre_madre").val("");
-        $("#CodCatalogoCONADIS_madre").val("");
-        $("#NumeroCarnetConadis_madre").val("");
-        $("#PorcentajeDiscapacidad_madre").val("");
-        $("#IdEstadoCivil_madre").val("");
-        $("#pe_sexo_madre").val("");
-    }
-
-
-
-    function Validar_cedula_ruc() {
-        var datos = {
-            naturaleza: $("#pe_Naturaleza").val(),
-            tipo_documento: $("#IdTipoDocumento").val(),
-            cedula_ruc: $("#pe_cedulaRuc").val(),
-        }
-
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("Validar_cedula_ruc", "Alumno", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                console.log(data);
-                if (data.isValid == true) {
-                    $("#error_documento").hide();
-                    $("#pe_Naturaleza").val(data.return_naturaleza);
-                }
-                else {
-                    $("#error_documento").show();
-                }
-            },
-            error: function (error) {
-            }
-        });
-    };
-
-    function Validar_cedula_ruc_padre() {
-        var datos = {
-            naturaleza: $("#pe_Naturaleza_padre").val(),
-            tipo_documento: $("#IdTipoDocumento_padre").val(),
-            cedula_ruc: $("#pe_cedulaRuc_padre").val(),
-        }
-
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("Validar_cedula_ruc", "Alumno", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data.isValid == true) {
-                    $("#error_documento_padre").hide();
-                    $("#pe_Naturaleza_padre").val(data.return_naturaleza);
-                }
-                else {
-                    $("#error_documento_padre").show();
-                }
-            },
-            error: function (error) {
-            }
-        });
-    };
-
-    function Validar_cedula_ruc_madre() {
-        var datos = {
-            naturaleza: $("#pe_Naturaleza_madre").val(),
-            tipo_documento: $("#IdTipoDocumento_madre").val(),
-            cedula_ruc: $("#pe_cedulaRuc_madre").val(),
-        }
-
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("Validar_cedula_ruc", "Alumno", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data.isValid == true) {
-                    $("#error_documento_madre").hide();
-                    $("#pe_Naturaleza_madre").val(data.return_naturaleza);
-                }
-                else {
-                    $("#error_documento_madre").show();
-                }
-            },
-            error: function (error) {
-            }
-        });
-    };
-
 </script>

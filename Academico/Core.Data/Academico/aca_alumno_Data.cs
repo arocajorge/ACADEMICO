@@ -70,8 +70,12 @@ namespace Core.Data.Academico
                     info = new aca_alumno_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
+                        pe_nombre = Entity.pe_nombre,
+                        pe_apellido = Entity.pe_apellido,
+                        pe_nombreCompleto = Entity.pe_nombreCompleto,
                         IdAlumno = Entity.IdAlumno,
                         IdPersona = Entity.IdPersona,
+                        pe_telfono_Contacto = Entity.pe_telfono_Contacto,
                         IdTipoDocumento = Entity.IdTipoDocumento,
                         pe_Naturaleza = Entity.pe_Naturaleza,
                         pe_cedulaRuc = Entity.pe_cedulaRuc,
@@ -217,7 +221,7 @@ namespace Core.Data.Academico
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -244,7 +248,7 @@ namespace Core.Data.Academico
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

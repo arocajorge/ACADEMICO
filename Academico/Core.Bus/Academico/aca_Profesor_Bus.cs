@@ -2,6 +2,7 @@
 using Core.Data.Academico;
 using Core.Data.General;
 using Core.Info.Academico;
+using Core.Info.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace Core.Bus.Academico
             {
                 return odata.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -57,9 +58,28 @@ namespace Core.Bus.Academico
                 tb_persona_Bus bus_persona = new tb_persona_Bus();
                 var grabar = false;
 
-                if (bus_persona.validar_existe_cedula(info.info_persona.pe_cedulaRuc) == 0)
+                var persona = new tb_persona_Info
                 {
-                    info.info_persona = odata_per.armar_info(info.info_persona);
+                    IdPersona =info.IdPersona,
+                    pe_nombre = info.pe_nombre,
+                    pe_apellido = info.pe_apellido,
+                    pe_nombreCompleto = info.pe_nombreCompleto,
+                    pe_cedulaRuc = info.pe_cedulaRuc,
+                    pe_Naturaleza = info.pe_Naturaleza,
+                    IdTipoDocumento = info.IdTipoDocumento,
+                    pe_razonSocial = info.pe_nombreCompleto,
+                    pe_direccion = info.Direccion,
+                    pe_telfono_Contacto = info.Telefonos,
+                    pe_celular = info.pe_celular,
+                    pe_correo = info.Correo,
+                    pe_fechaNacimiento = info.pe_fechaNacimiento,
+                    IdEstadoCivil = info.IdEstadoCivil,
+                    pe_sexo = info.pe_sexo,
+                };
+
+                if (bus_persona.validar_existe_cedula(info.pe_cedulaRuc) == 0)
+                {
+                    info.info_persona = odata_per.armar_info(persona);
                     if (odata_per.guardarDB(info.info_persona))
                     {
                         info.IdPersona = info.info_persona.IdPersona;
@@ -68,8 +88,12 @@ namespace Core.Bus.Academico
                 }
                 else
                 {
-                    grabar = true;
-                    //grabar = odata_per.modificarDB(info.info_persona);
+                    info.info_persona = persona;
+                    info.info_persona.IdPersona = info.IdPersona;
+                    if (odata_per.modificarDB(info.info_persona))
+                    {
+                        grabar = true;
+                    }
                 }
 
 

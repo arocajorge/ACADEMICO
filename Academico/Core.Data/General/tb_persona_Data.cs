@@ -52,6 +52,7 @@ namespace Core.Data.General
                 pe_celular = info.pe_celular,
                 pe_correo = info.pe_correo,
                 pe_fechaNacimiento = info.pe_fechaNacimiento,
+                CodCatalogoSangre = (info.CodCatalogoSangre=="" ? null : info.CodCatalogoSangre),
 
                 //Si vienen null se pone un valor default
                 IdEstadoCivil = string.IsNullOrEmpty(info.IdEstadoCivil) ? "SOLTE" : info.IdEstadoCivil,
@@ -113,7 +114,11 @@ namespace Core.Data.General
                         IdTipoCta_acreditacion_cat = info.IdTipoCta_acreditacion_cat,
                         num_cta_acreditacion = info.num_cta_acreditacion,
                         IdBanco_acreditacion = info.IdBanco_acreditacion,
-                    };
+                        CodCatalogoSangre = info.CodCatalogoSangre,
+                        CodCatalogoCONADIS = info.CodCatalogoCONADIS,
+                        NumeroCarnetConadis = info.NumeroCarnetConadis,
+                        PorcentajeDiscapacidad = info.PorcentajeDiscapacidad
+                };
                     Context.tb_persona.Add(Entity);
                     Context.SaveChanges();
 
@@ -151,6 +156,10 @@ namespace Core.Data.General
                     Entity.IdTipoCta_acreditacion_cat = info.IdTipoCta_acreditacion_cat;
                     Entity.num_cta_acreditacion = info.num_cta_acreditacion;
                     Entity.IdBanco_acreditacion = info.IdBanco_acreditacion;
+                    Entity.CodCatalogoSangre = info.CodCatalogoSangre;
+                    Entity.CodCatalogoCONADIS = info.CodCatalogoCONADIS;
+                    Entity.NumeroCarnetConadis = info.NumeroCarnetConadis;
+                    Entity.PorcentajeDiscapacidad = info.PorcentajeDiscapacidad;
 
                     Entity.pe_fechaModificacion = DateTime.Now;
                     Entity.pe_UltUsuarioModi = info.pe_UltUsuarioModi;

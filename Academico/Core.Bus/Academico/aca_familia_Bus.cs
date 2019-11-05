@@ -23,6 +23,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_familia_Info GetListTipo(int IdEmpresa, int IdAlumno, int IdCatalogoPAREN)
+        {
+            try
+            {
+                return odata.getListTipo(IdEmpresa, IdAlumno, IdCatalogoPAREN);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public aca_familia_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
         {
             try

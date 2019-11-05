@@ -13,6 +13,7 @@ namespace Core.Bus.Academico
 {
     public class aca_alumno_Bus
     {
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
         aca_alumno_Data odata = new aca_alumno_Data();
         tb_persona_Data odata_per = new tb_persona_Data();
         aca_familia_Data odata_fam = new aca_familia_Data();
@@ -56,7 +57,6 @@ namespace Core.Bus.Academico
         {
             try
             {
-                tb_persona_Bus bus_persona = new tb_persona_Bus();
                 var grabar_alumno = false;
                 var grabar_padre = false;
                 var grabar_madre = false;
@@ -72,6 +72,7 @@ namespace Core.Bus.Academico
                 }
                 else
                 {
+                    odata_per.modificarDB(info.info_persona_alumno);
                     grabar_alumno = true;
                 }
 
@@ -80,72 +81,84 @@ namespace Core.Bus.Academico
                 {
                     if (odata.guardarDB(info))
                     {
-                        if (bus_persona.validar_existe_cedula(info.info_persona_padre.pe_cedulaRuc) == 0)
+                        grabar_padre = true;
+
+                    }
+                }
+
+                if (grabar_padre == true)
+                {
+                    if (bus_persona.validar_existe_cedula(info.info_persona_padre.pe_cedulaRuc) == 0)
+                    {
+                        info.info_persona_padre = odata_per.armar_info(info.info_persona_padre);
+                        if (odata_per.guardarDB(info.info_persona_padre))
                         {
-                            info.info_persona_padre = odata_per.armar_info(info.info_persona_padre);
-                            if (odata_per.guardarDB(info.info_persona_padre))
-                            {
-                                info.info_persona_padre.IdPersona = info.info_persona_padre.IdPersona;
-                                grabar_padre = true;
-                            }
+                            info.info_persona_padre.IdPersona = info.info_persona_padre.IdPersona;
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (odata_per.modificarDB(info.info_persona_padre))
                         {
-                            grabar_padre = true;
+                            info.info_persona_padre.IdPersona = info.info_persona_padre.IdPersona;
                         }
+                    }
 
-                        if (grabar_padre == true)
+                    var info_fam_padre = new aca_familia_Info
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdAlumno = info.IdAlumno,
+                        IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.Parentezco.PAPA),
+                        IdPersona = info.info_persona_padre.IdPersona,
+                        Direccion = info.Direccion_padre,
+                        Celular = info.Celular_padre,
+                        Correo = info.Correo_padre,
+                        SeFactura = info.SeFactura_padre,
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        FechaCreacion = info.FechaCreacion = DateTime.Now
+                    };
+
+                    if (odata_fam.guardarDB(info_fam_padre))
+                    {
+                        grabar_madre = true;
+                    }
+                }     
+
+                if (grabar_madre == true)
+                {
+                    if (bus_persona.validar_existe_cedula(info.info_persona_madre.pe_cedulaRuc) == 0)
+                    {
+                        info.info_persona_madre = odata_per.armar_info(info.info_persona_madre);
+                        if (odata_per.guardarDB(info.info_persona_madre))
                         {
-                            var info_fam_padre = new aca_familia_Info
-                            {
-                                IdEmpresa = info.IdEmpresa,
-                                IdAlumno = info.IdAlumno,
-                                IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.Parentezco.PAPA),
-                                IdPersona = info.info_persona_padre.IdPersona,
-                                Direccion = info.Direccion_padre,
-                                Celular = info.Celular_padre,
-                                Correo = info.Correo_padre,
-                                //SeFactura = info.SeFactura,
-                                IdUsuarioCreacion = info.IdUsuarioCreacion,
-                                FechaCreacion = info.FechaCreacion = DateTime.Now
-                            };
-
-                            if (odata_fam.guardarDB(info_fam_padre))
-                            {
-                                if (bus_persona.validar_existe_cedula(info.info_persona_madre.pe_cedulaRuc) == 0)
-                                {
-                                    info.info_persona_madre = odata_per.armar_info(info.info_persona_madre);
-                                    if (odata_per.guardarDB(info.info_persona_madre))
-                                    {
-                                        info.info_persona_madre.IdPersona = info.info_persona_madre.IdPersona;
-                                        grabar_madre = true;
-                                    }
-                                }
-                                else
-                                {
-                                    grabar_madre = true;
-                                }
-                            }
-
-                            if (grabar_madre == true)
-                            {
-                                var info_fam_madre = new aca_familia_Info
-                                {
-                                    IdEmpresa = info.IdEmpresa,
-                                    IdAlumno = info.IdAlumno,
-                                    IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.Parentezco.MAMA),
-                                    IdPersona = info.info_persona_padre.IdPersona,
-                                    Direccion = info.Direccion_madre,
-                                    Celular = info.Celular_madre,
-                                    Correo = info.Correo_madre,
-                                    //SeFactura = info.SeFactura,
-                                    IdUsuarioCreacion = info.IdUsuarioCreacion,
-                                    FechaCreacion = info.FechaCreacion = DateTime.Now
-                                };
-
-                                return odata_fam.guardarDB(info_fam_madre);
-                            }
+                            info.info_persona_madre.IdPersona = info.info_persona_madre.IdPersona;
                         }
+                    }
+                    else
+                    {
+                        if (odata_per.modificarDB(info.info_persona_padre))
+                        {
+                            info.info_persona_madre.IdPersona = info.info_persona_madre.IdPersona;
+                        }
+                    }
+
+                    var info_fam_madre = new aca_familia_Info
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdAlumno = info.IdAlumno,
+                            IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.Parentezco.MAMA),
+                            IdPersona = info.info_persona_madre.IdPersona,
+                            Direccion = info.Direccion_madre,
+                            Celular = info.Celular_madre,
+                            Correo = info.Correo_madre,
+                            SeFactura = info.SeFactura_madre,
+                            IdUsuarioCreacion = info.IdUsuarioCreacion,
+                            FechaCreacion = info.FechaCreacion = DateTime.Now
+                        };
+
+                    if (odata_fam.modificarDB(info_fam_madre))
+                    {
+                        return true;
                     }
                 }
 
@@ -162,21 +175,102 @@ namespace Core.Bus.Academico
         {
             try
             {
-                tb_persona_Bus bus_persona = new tb_persona_Bus();
-                var grabar = false;
+                var grabar_alumno = false;
+                var grabar_padre = false;
+                var grabar_madre = false;
+
 
                 if (odata_per.modificarDB(info.info_persona_alumno))
                 {
-                    grabar = true;
+                    grabar_alumno = true;
                 }
 
-                if (grabar == true)
+                if (grabar_alumno == true)
                 {
-                    return odata.modificarDB(info);
+                    if (odata.modificarDB(info))
+                    {
+                        grabar_padre = true;
+                    }
+                }
+
+                if (grabar_padre == true)
+                {
+                    if (bus_persona.validar_existe_cedula(info.info_persona_padre.pe_cedulaRuc) == 0)
+                    {
+                        info.info_persona_padre = odata_per.armar_info(info.info_persona_padre);
+                        if (odata_per.guardarDB(info.info_persona_padre))
+                        {
+                            info.info_persona_padre.IdPersona = info.info_persona_padre.IdPersona;
+                        }
+                    }
+                    else
+                    {
+                        if (odata_per.modificarDB(info.info_persona_padre))
+                        {
+                            info.info_persona_padre.IdPersona = info.info_persona_padre.IdPersona;
+                        }
+                    }
+
+                    var info_fam_padre = new aca_familia_Info
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdAlumno = info.IdAlumno,
+                        IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.Parentezco.PAPA),
+                        IdPersona = info.info_persona_padre.IdPersona,
+                        Direccion = info.Direccion_padre,
+                        Celular = info.Celular_padre,
+                        Correo = info.Correo_padre,
+                        SeFactura = info.SeFactura_padre,
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        FechaCreacion = info.FechaCreacion = DateTime.Now
+                    };
+
+                    if (odata_fam.modificarDB(info_fam_padre))
+                    {
+                        grabar_madre = true;
+                    }
+                }
+
+                if (grabar_madre == true)
+                {
+                    if (bus_persona.validar_existe_cedula(info.info_persona_madre.pe_cedulaRuc) == 0)
+                    {
+                        info.info_persona_madre = odata_per.armar_info(info.info_persona_madre);
+                        if (odata_per.guardarDB(info.info_persona_madre))
+                        {
+                            info.info_persona_madre.IdPersona = info.info_persona_madre.IdPersona;
+                        }
+                    }
+                    else
+                    {
+                        if (odata_per.modificarDB(info.info_persona_madre))
+                        {
+                            info.info_persona_madre.IdPersona = info.info_persona_madre.IdPersona;
+                        }
+                    }
+
+                    var info_fam_madre = new aca_familia_Info
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdAlumno = info.IdAlumno,
+                        IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.Parentezco.MAMA),
+                        IdPersona = info.info_persona_madre.IdPersona,
+                        Direccion = info.Direccion_madre,
+                        Celular = info.Celular_madre,
+                        Correo = info.Correo_madre,
+                        SeFactura = info.SeFactura_madre,
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        FechaCreacion = info.FechaCreacion = DateTime.Now
+                    };
+
+                    if (odata_fam.modificarDB(info_fam_madre))
+                    {
+                        return true;
+                    }
                 }
                 return false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

@@ -30,11 +30,8 @@ namespace Core.Data.Academico
                             IdPersona = q.IdPersona,
                             Codigo = q.Codigo,
                             Estado = q.Estado,
-                            info_persona = new tb_persona_Info
-                            {
-                                pe_nombreCompleto = q.pe_nombreCompleto,
-                                pe_cedulaRuc = q.pe_cedulaRuc
-                            }
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            pe_cedulaRuc = q.pe_cedulaRuc
                         });
                     });
                 }
@@ -70,24 +67,17 @@ namespace Core.Data.Academico
                         Correo = Entity.Correo,
                         Direccion = Entity.Direccion,
                         Telefonos = Entity.Telefonos,
-                        info_persona = new tb_persona_Info
-                        {
-                            IdPersona = Entity.IdPersona,
-                            pe_Naturaleza = Entity.pe_Naturaleza,
-                            pe_cedulaRuc = Entity.pe_cedulaRuc,
-                            pe_nombre = Entity.pe_nombre,
-                            pe_apellido = Entity.pe_apellido,
-                            pe_nombreCompleto = Entity.pe_nombreCompleto,
-                            pe_razonSocial = Entity.pe_razonSocial,
-                            pe_telfono_Contacto = Entity.pe_telfono_Contacto,
-                            pe_correo = Entity.pe_correo,
-                            pe_sexo = Entity.pe_sexo,
-                            IdEstadoCivil = Entity.IdEstadoCivil,
-                            pe_fechaNacimiento = Entity.pe_fechaNacimiento,
-                            pe_celular = Entity.pe_celular,
-                            pe_direccion = Entity.pe_direccion,
-                            IdTipoDocumento = Entity.IdTipoDocumento
-                        }
+                        pe_Naturaleza = Entity.pe_Naturaleza,
+                        pe_cedulaRuc = Entity.pe_cedulaRuc,
+                        pe_nombre = Entity.pe_nombre,
+                        pe_apellido = Entity.pe_apellido,
+                        pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        pe_razonSocial = Entity.pe_razonSocial,
+                        pe_sexo = Entity.pe_sexo,
+                        IdEstadoCivil = Entity.IdEstadoCivil,
+                        pe_fechaNacimiento = Entity.pe_fechaNacimiento,
+                        pe_celular = Entity.pe_celular,
+                        IdTipoDocumento = Entity.IdTipoDocumento
                     };
                 }
 
@@ -212,7 +202,7 @@ namespace Core.Data.Academico
             {
                 aca_Profesor_Info info = new aca_Profesor_Info
                 {
-                    info_persona = new tb_persona_Info()
+                    IdEmpresa = IdEmpresa
                 };
 
                 EntitiesGeneral Context_general = new EntitiesGeneral();
@@ -224,23 +214,23 @@ namespace Core.Data.Academico
                 }
 
                 EntitiesAcademico Context_academico = new EntitiesAcademico();
-                aca_Profesor Entity_aca = Context_academico.aca_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdPersona == Entity_per.IdPersona).FirstOrDefault();
+                var Entity_aca = Context_academico.vwaca_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdPersona == Entity_per.IdPersona).FirstOrDefault();
                 if (Entity_aca == null)
                 {
                     info.IdPersona = Entity_per.IdPersona;
-                    info.info_persona = new Info.General.tb_persona_Info
-                    {
-                        IdPersona = Entity_per.IdPersona,
-                        pe_apellido = Entity_per.pe_apellido,
-                        pe_nombre = Entity_per.pe_nombre,
-                        pe_cedulaRuc = Entity_per.pe_cedulaRuc,
-                        pe_nombreCompleto = Entity_per.pe_nombreCompleto,
-                        pe_razonSocial = Entity_per.pe_razonSocial,
-                        pe_celular = Entity_per.pe_celular,
-                        pe_telfono_Contacto = Entity_per.pe_telfono_Contacto,
-                        pe_correo = Entity_per.pe_correo,
-                        pe_direccion = Entity_per.pe_direccion
-                    };
+                    info.Correo = Entity_per.pe_correo;
+                    info.Direccion = Entity_per.pe_direccion;
+                    info.Telefonos = Entity_per.pe_telfono_Contacto;
+                    info.pe_apellido = Entity_per.pe_apellido;
+                    info.pe_nombre = Entity_per.pe_nombre;
+                    info.pe_cedulaRuc = Entity_per.pe_cedulaRuc;
+                    info.pe_nombreCompleto = Entity_per.pe_nombreCompleto;
+                    info.pe_razonSocial = Entity_per.pe_razonSocial;
+                    info.pe_celular = Entity_per.pe_celular;
+                    info.pe_sexo = Entity_per.pe_sexo;
+                    info.IdEstadoCivil = Entity_per.IdEstadoCivil;
+                    info.pe_fechaNacimiento = Entity_per.pe_fechaNacimiento;
+
                     Context_general.Dispose();
                     Context_academico.Dispose();
                     return info;
@@ -250,25 +240,24 @@ namespace Core.Data.Academico
                 {
                     IdEmpresa = Entity_aca.IdEmpresa,
                     IdProfesor = Entity_aca.IdProfesor,
-                    IdPersona = Entity_per.IdPersona,
-                    info_persona = new Info.General.tb_persona_Info
-                    {
-                        IdPersona = Entity_per.IdPersona,
-                        pe_apellido = Entity_per.pe_apellido,
-                        pe_nombre = Entity_per.pe_nombre,
-                        pe_cedulaRuc = Entity_per.pe_cedulaRuc,
-                        pe_nombreCompleto = Entity_per.pe_nombreCompleto,
-                        pe_razonSocial = Entity_per.pe_razonSocial,
-                        pe_celular = Entity_per.pe_celular,
-                        pe_telfono_Contacto = Entity_per.pe_telfono_Contacto,
-                        pe_correo = Entity_per.pe_correo,
-                        pe_direccion = Entity_per.pe_direccion
-                    }
-                };
+                    IdPersona = Entity_aca.IdPersona,
+                    Correo = Entity_aca.pe_correo,
+                    Direccion = Entity_aca.pe_direccion,
+                    Telefonos = Entity_aca.pe_telfono_Contacto,
+                    pe_apellido = Entity_aca.pe_apellido,
+                    pe_nombre = Entity_aca.pe_nombre,
+                    pe_cedulaRuc = Entity_aca.pe_cedulaRuc,
+                    pe_nombreCompleto = Entity_aca.pe_nombreCompleto,
+                    pe_razonSocial = Entity_aca.pe_razonSocial,
+                    pe_celular = Entity_aca.pe_celular,
+                    pe_sexo = Entity_aca.pe_sexo,
+                    IdEstadoCivil = Entity_aca.IdEstadoCivil,
+                    pe_fechaNacimiento = Entity_aca.pe_fechaNacimiento
+            };
 
                 return info;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

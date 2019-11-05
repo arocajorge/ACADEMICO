@@ -72,9 +72,10 @@ namespace Core.Info.Academico
         public string CodCatalogoCONADIS_padre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_padre { get; set; }
         public string NumeroCarnetConadis_padre { get; set; }
+        public bool SeFactura_padre { get; set; }
         #endregion
 
-        #region Datos padre
+        #region Datos madre
         public int IdCatalogo_madre { get; set; }
         public decimal IdPersona_madre { get; set; }
         public string IdTipoDocumento_madre { get; set; }
@@ -94,11 +95,15 @@ namespace Core.Info.Academico
         public string CodCatalogoCONADIS_madre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_madre { get; set; }
         public string NumeroCarnetConadis_madre { get; set; }
+        public bool SeFactura_madre { get; set; }
         #endregion
 
         public tb_persona_Info info_persona_alumno { get; set; }
         public tb_persona_Info info_persona_padre { get; set; }
         public tb_persona_Info info_persona_madre { get; set; }
+        public string anio { get; set; }
+        public string mes { get; set; }
+        public string dia { get; set; }
         #endregion
     }
 }

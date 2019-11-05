@@ -147,6 +147,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_nombre = model.pe_nombre,
                 pe_apellido = model.pe_apellido,
                 pe_nombreCompleto = model.pe_nombreCompleto,
+                pe_razonSocial = model.pe_nombreCompleto,
                 pe_sexo = model.pe_sexo,
                 CodCatalogoSangre = model.CodCatalogoSangre,
                 CodCatalogoCONADIS = model.CodCatalogoCONADIS,
@@ -168,6 +169,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_nombre = model.pe_nombre_padre,
                 pe_apellido = model.pe_apellido_padre,
                 pe_nombreCompleto = model.pe_apellido_padre + " " + model.pe_nombre_padre,
+                pe_razonSocial = model.pe_apellido_padre + " " + model.pe_nombre_padre,
                 pe_sexo = model.pe_sexo_padre,
                 CodCatalogoCONADIS = model.CodCatalogoCONADIS_padre,
                 NumeroCarnetConadis = model.NumeroCarnetConadis_padre,
@@ -189,6 +191,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_nombre = model.pe_nombre_madre,
                 pe_apellido = model.pe_apellido_madre,
                 pe_nombreCompleto = model.pe_apellido_madre + " " + model.pe_nombre_madre,
+                pe_razonSocial = model.pe_apellido_madre + " " + model.pe_nombre_madre,
                 pe_sexo = model.pe_sexo_madre,
                 CodCatalogoCONADIS = model.CodCatalogoCONADIS_madre,
                 NumeroCarnetConadis = model.NumeroCarnetConadis_madre,
@@ -232,9 +235,47 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_alumno_Info model = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
-            //model.info_persona_alumno.CodCatalogoCONADIS = (model.info_persona.CodCatalogoCONADIS == null ? "" : model.info_persona.CodCatalogoCONADIS);
-            //model.info_persona_padre.CodCatalogoCONADIS = (model.info_persona_padre.CodCatalogoCONADIS == null ? "" : model.info_persona_padre.CodCatalogoCONADIS);
-            //model.info_persona_madre.CodCatalogoCONADIS = (model.info_persona_madre.CodCatalogoCONADIS == null ? "" : model.info_persona_madre.CodCatalogoCONADIS);
+            aca_familia_Info info_fam_padre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.Parentezco.PAPA));
+            aca_familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.Parentezco.MAMA));
+
+            model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+
+            model.IdPersona_padre = info_fam_padre.IdPersona;
+            model.SeFactura_padre = info_fam_padre.SeFactura;
+            model.IdTipoDocumento_padre = info_fam_padre.IdTipoDocumento;
+            model.pe_Naturaleza_padre = info_fam_padre.pe_Naturaleza;
+            model.pe_cedulaRuc_padre = info_fam_padre.pe_cedulaRuc;
+            model.pe_nombre_padre = info_fam_padre.pe_nombre;
+            model.pe_apellido_padre = info_fam_padre.pe_apellido;
+            model.pe_fechaNacimiento_padre = info_fam_padre.pe_fechaNacimiento;
+            model.pe_sexo_padre = info_fam_padre.pe_sexo;
+            model.IdEstadoCivil_padre = info_fam_padre.IdEstadoCivil;
+            model.pe_telfono_Contacto_padre = info_fam_padre.pe_telfono_Contacto;
+            model.Celular_padre = info_fam_padre.Celular;
+            model.Correo_padre = info_fam_padre.Correo;
+            model.Direccion_padre = info_fam_padre.Direccion;
+            model.PorcentajeDiscapacidad_padre = info_fam_padre.PorcentajeDiscapacidad;
+            model.NumeroCarnetConadis_padre = info_fam_padre.NumeroCarnetConadis;
+            model.CodCatalogoCONADIS_padre = (info_fam_padre.CodCatalogoCONADIS == null ? "" : info_fam_padre.CodCatalogoCONADIS);
+
+            model.IdPersona_madre = info_fam_madre.IdPersona;
+            model.SeFactura_madre = info_fam_madre.SeFactura;
+            model.IdTipoDocumento_madre = info_fam_madre.IdTipoDocumento;
+            model.pe_Naturaleza_madre = info_fam_madre.pe_Naturaleza;
+            model.pe_cedulaRuc_madre = info_fam_madre.pe_cedulaRuc;
+            model.pe_nombre_madre = info_fam_madre.pe_nombre;
+            model.pe_apellido_madre = info_fam_madre.pe_apellido;
+            model.pe_fechaNacimiento_madre = info_fam_madre.pe_fechaNacimiento;
+            model.pe_sexo_madre = info_fam_madre.pe_sexo;
+            model.IdEstadoCivil_madre = info_fam_madre.IdEstadoCivil;
+            model.pe_telfono_Contacto_madre = info_fam_madre.pe_telfono_Contacto;
+            model.Celular_madre = info_fam_madre.Celular;
+            model.Correo_madre = info_fam_madre.Correo;
+            model.Direccion_madre = info_fam_madre.Direccion;
+            model.PorcentajeDiscapacidad_madre = info_fam_madre.PorcentajeDiscapacidad;
+            model.NumeroCarnetConadis_madre = info_fam_madre.NumeroCarnetConadis;
+            model.CodCatalogoCONADIS_madre = (info_fam_madre.CodCatalogoCONADIS == null ? "" : info_fam_madre.CodCatalogoCONADIS);
+
             if (model == null)
                 return RedirectToAction("Index");
 
@@ -244,10 +285,88 @@ namespace Core.Web.Areas.Academico.Controllers
             cargar_combos();
             return View(model);
         }
+
         [HttpPost]
         public ActionResult Modificar(aca_alumno_Info model)
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+
+            var info_persona_alumno = new tb_persona_Info
+            {
+                IdPersona = model.IdPersona,
+                pe_Naturaleza = model.pe_Naturaleza,
+                IdTipoDocumento = model.IdTipoDocumento,
+                pe_cedulaRuc = model.pe_cedulaRuc,
+                pe_nombre = model.pe_nombre,
+                pe_apellido = model.pe_apellido,
+                pe_nombreCompleto = model.pe_nombreCompleto,
+                pe_razonSocial = model.pe_nombreCompleto,
+                pe_sexo = model.pe_sexo,
+                CodCatalogoSangre = model.CodCatalogoSangre,
+                CodCatalogoCONADIS = model.CodCatalogoCONADIS,
+                NumeroCarnetConadis = model.NumeroCarnetConadis,
+                PorcentajeDiscapacidad = model.PorcentajeDiscapacidad,
+                pe_fechaNacimiento = model.pe_fechaNacimiento,
+                pe_telfono_Contacto = model.pe_telfono_Contacto,
+                pe_correo = model.Correo,
+                pe_celular = model.Celular,
+                pe_direccion = model.Direccion
+            };
+
+            var info_persona_padre = new tb_persona_Info
+            {
+                IdPersona = model.IdPersona_padre,
+                pe_Naturaleza = model.pe_Naturaleza_padre,
+                IdTipoDocumento = model.IdTipoDocumento_padre,
+                pe_cedulaRuc = model.pe_cedulaRuc_padre,
+                pe_nombre = model.pe_nombre_padre,
+                pe_apellido = model.pe_apellido_padre,
+                pe_nombreCompleto = model.pe_apellido_padre + " " + model.pe_nombre_padre,
+                pe_razonSocial = model.pe_apellido_padre + " " + model.pe_nombre_padre,
+                pe_sexo = model.pe_sexo_padre,
+                CodCatalogoCONADIS = model.CodCatalogoCONADIS_padre,
+                NumeroCarnetConadis = model.NumeroCarnetConadis_padre,
+                PorcentajeDiscapacidad = model.PorcentajeDiscapacidad_padre,
+                pe_fechaNacimiento = model.pe_fechaNacimiento_padre,
+                pe_telfono_Contacto = model.pe_telfono_Contacto_padre,
+                pe_correo = model.Correo_padre,
+                pe_celular = model.Celular_padre,
+                pe_direccion = model.Direccion_padre,
+                IdEstadoCivil = model.IdEstadoCivil_padre
+            };
+
+            var info_persona_madre = new tb_persona_Info
+            {
+                IdPersona = model.IdPersona_madre,
+                pe_Naturaleza = model.pe_Naturaleza_madre,
+                IdTipoDocumento = model.IdTipoDocumento_madre,
+                pe_cedulaRuc = model.pe_cedulaRuc_madre,
+                pe_nombre = model.pe_nombre_madre,
+                pe_apellido = model.pe_apellido_madre,
+                pe_nombreCompleto = model.pe_apellido_madre + " " + model.pe_nombre_madre,
+                pe_razonSocial = model.pe_apellido_madre + " " + model.pe_nombre_madre,
+                pe_sexo = model.pe_sexo_madre,
+                CodCatalogoCONADIS = model.CodCatalogoCONADIS_madre,
+                NumeroCarnetConadis = model.NumeroCarnetConadis_madre,
+                PorcentajeDiscapacidad = model.PorcentajeDiscapacidad_madre,
+                pe_fechaNacimiento = model.pe_fechaNacimiento_madre,
+                pe_telfono_Contacto = model.pe_telfono_Contacto_madre,
+                pe_correo = model.Correo_madre,
+                pe_celular = model.Celular_madre,
+                pe_direccion = model.Direccion_madre,
+                IdEstadoCivil = model.IdEstadoCivil_madre
+            };
+
+            model.info_persona_alumno = info_persona_alumno;
+            model.info_persona_padre = info_persona_padre;
+            model.info_persona_madre = info_persona_madre;
+
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
 
             if (!bus_alumno.ModificarDB(model))
             {
@@ -269,6 +388,46 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_alumno_Info model = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
+            aca_familia_Info info_fam_padre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.Parentezco.PAPA));
+            aca_familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.Parentezco.MAMA));
+
+            model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+
+            model.IdPersona_padre = info_fam_padre.IdPersona;
+            model.SeFactura_padre = info_fam_padre.SeFactura;
+            model.IdTipoDocumento_padre = info_fam_padre.IdTipoDocumento;
+            model.pe_Naturaleza_padre = info_fam_padre.pe_Naturaleza;
+            model.pe_cedulaRuc_padre = info_fam_padre.pe_cedulaRuc;
+            model.pe_nombre_padre = info_fam_padre.pe_nombre;
+            model.pe_apellido_padre = info_fam_padre.pe_apellido;
+            model.pe_fechaNacimiento_padre = info_fam_padre.pe_fechaNacimiento;
+            model.pe_sexo_padre = info_fam_padre.pe_sexo;
+            model.IdEstadoCivil_padre = info_fam_padre.IdEstadoCivil;
+            model.pe_telfono_Contacto_padre = info_fam_padre.pe_telfono_Contacto;
+            model.Celular_padre = info_fam_padre.Celular;
+            model.Correo_padre = info_fam_padre.Correo;
+            model.Direccion_padre = info_fam_padre.Direccion;
+            model.PorcentajeDiscapacidad_padre = info_fam_padre.PorcentajeDiscapacidad;
+            model.NumeroCarnetConadis_padre = info_fam_padre.NumeroCarnetConadis;
+            model.CodCatalogoCONADIS_padre = (info_fam_padre.CodCatalogoCONADIS == null ? "" : info_fam_padre.CodCatalogoCONADIS);
+
+            model.IdPersona_madre = info_fam_madre.IdPersona;
+            model.SeFactura_madre = info_fam_madre.SeFactura;
+            model.IdTipoDocumento_madre = info_fam_madre.IdTipoDocumento;
+            model.pe_Naturaleza_madre = info_fam_madre.pe_Naturaleza;
+            model.pe_cedulaRuc_madre = info_fam_madre.pe_cedulaRuc;
+            model.pe_nombre_madre = info_fam_madre.pe_nombre;
+            model.pe_apellido_madre = info_fam_madre.pe_apellido;
+            model.pe_fechaNacimiento_madre = info_fam_madre.pe_fechaNacimiento;
+            model.pe_sexo_madre = info_fam_madre.pe_sexo;
+            model.IdEstadoCivil_madre = info_fam_madre.IdEstadoCivil;
+            model.pe_telfono_Contacto_madre = info_fam_madre.pe_telfono_Contacto;
+            model.Celular_madre = info_fam_madre.Celular;
+            model.Correo_madre = info_fam_madre.Correo;
+            model.Direccion_madre = info_fam_madre.Direccion;
+            model.PorcentajeDiscapacidad_madre = info_fam_madre.PorcentajeDiscapacidad;
+            model.NumeroCarnetConadis_madre = info_fam_madre.NumeroCarnetConadis;
+            model.CodCatalogoCONADIS_madre = (info_fam_madre.CodCatalogoCONADIS == null ? "" : info_fam_madre.CodCatalogoCONADIS);
 
             if (model == null)
                 return RedirectToAction("Index");
@@ -304,12 +463,23 @@ namespace Core.Web.Areas.Academico.Controllers
         public JsonResult get_info_x_num_cedula(int IdEmpresa = 0, string pe_cedulaRuc = "")
         {
             var resultado = bus_alumno.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
+            resultado.anio = Convert.ToDateTime(resultado.pe_fechaNacimiento).Year.ToString();
+            var mes = Convert.ToDateTime(resultado.pe_fechaNacimiento).Month;
+            mes = mes - 1;
+            resultado.mes = mes.ToString();
+            resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult get_info_x_num_cedula_familia(int IdEmpresa = 0, string pe_cedulaRuc = "")
         {
             var resultado = bus_familia.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
+            resultado.anio = Convert.ToDateTime(resultado.pe_fechaNacimiento).Year.ToString();
+            var mes = Convert.ToDateTime(resultado.pe_fechaNacimiento).Month;
+            mes = mes - 1;
+            resultado.mes = mes.ToString();
+            resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
+
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion

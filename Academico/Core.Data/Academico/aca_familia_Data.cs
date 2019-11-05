@@ -55,6 +55,52 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_familia_Info getListTipo(int IdEmpresa, int IdAlumno, int IdCatalogoPAREN)
+        {
+            try
+            {
+                aca_familia_Info info_familia = new aca_familia_Info();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var Entity = odata.vwaca_familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdCatalogoPAREN == IdCatalogoPAREN).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info_familia = new aca_familia_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAlumno = Entity.IdAlumno,
+                        IdPersona = Entity.IdPersona,
+                        IdCatalogoPAREN = Entity.IdCatalogoPAREN,
+                        Direccion = Entity.Direccion,
+                        Celular = Entity.Celular,
+                        Correo = Entity.Correo,
+                        SeFactura = Entity.SeFactura,
+                        IdTipoDocumento = Entity.IdTipoDocumento,
+                        pe_Naturaleza = Entity.pe_Naturaleza,
+                        pe_cedulaRuc = Entity.pe_cedulaRuc,
+                        pe_nombre = Entity.pe_nombre,
+                        pe_apellido = Entity.pe_apellido,
+                        pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        pe_sexo = Entity.pe_sexo,
+                        IdEstadoCivil = Entity.IdEstadoCivil,
+                        pe_fechaNacimiento = Entity.pe_fechaNacimiento,
+                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
+                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
+                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
+                        pe_telfono_Contacto = Entity.pe_telfono_Contacto
+                    };
+                }
+
+                return info_familia;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_familia_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
         {
             try
@@ -123,7 +169,7 @@ namespace Core.Data.Academico
 
                 return info;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -155,7 +201,42 @@ namespace Core.Data.Academico
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(aca_familia_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var info_familia = Context.aca_familia.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.IdCatalogoPAREN == info.IdCatalogoPAREN);
+                    Context.aca_familia.RemoveRange(info_familia);
+
+                    aca_familia Entity = new aca_familia
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdAlumno = info.IdAlumno,
+                        IdCatalogoPAREN = info.IdCatalogoPAREN,
+                        IdPersona = info.IdPersona,
+                        Direccion = info.Direccion,
+                        Celular = info.Celular,
+                        Correo = info.Correo,
+                        SeFactura = info.SeFactura,
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        FechaCreacion = info.FechaCreacion = DateTime.Now
+                    };
+                    Context.aca_familia.Add(Entity);
+
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
             {
 
                 throw;

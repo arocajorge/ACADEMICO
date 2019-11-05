@@ -71,41 +71,41 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_AnioLectivo_Curso_Materia_Info getInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
-        {
-            try
-            {
-                aca_AnioLectivo_Curso_Materia_Info info;
+        //public aca_AnioLectivo_Curso_Materia_Info getInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
+        //{
+        //    try
+        //    {
+        //        aca_AnioLectivo_Curso_Materia_Info info;
 
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
+        //        using (EntitiesAcademico db = new EntitiesAcademico())
+        //        {
+        //            var Entity = db.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).FirstOrDefault();
+        //            if (Entity == null)
+        //                return null;
 
-                    info = new aca_AnioLectivo_Curso_Materia_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        IdSede = Entity.IdSede,
-                        IdNivel = Entity.IdNivel,
-                        IdJornada = Entity.IdJornada,
-                        IdCurso = Entity.IdCurso,
-                        IdMateria = Entity.IdMateria,
-                        NomMateria = Entity.NomMateria,
-                        OrdenMateria = Entity.OrdenMateria,
-                        EsObligatorio = Entity.EsObligatorio
-                    };
-                }
+        //            info = new aca_AnioLectivo_Curso_Materia_Info
+        //            {
+        //                IdEmpresa = Entity.IdEmpresa,
+        //                IdAnio = Entity.IdAnio,
+        //                IdSede = Entity.IdSede,
+        //                IdNivel = Entity.IdNivel,
+        //                IdJornada = Entity.IdJornada,
+        //                IdCurso = Entity.IdCurso,
+        //                IdMateria = Entity.IdMateria,
+        //                NomMateria = Entity.NomMateria,
+        //                OrdenMateria = Entity.OrdenMateria,
+        //                EsObligatorio = Entity.EsObligatorio
+        //            };
+        //        }
 
-                return info;
-            }
-            catch (Exception)
-            {
+        //        return info;
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
 
         public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, List<aca_AnioLectivo_Curso_Materia_Info> lista)
         {
