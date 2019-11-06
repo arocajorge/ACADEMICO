@@ -96,7 +96,7 @@ namespace Core.Data.Academico
                                 IdCurso = info.IdCurso,
                                 IdMateria = info.IdMateria,
                                 IdParalelo = info.IdParalelo,
-                                IdProfesor = info.IdProfesor
+                                IdProfesor = Convert.ToDecimal(info.IdProfesor)
                             };
                             Context.aca_AnioLectivo_Paralelo_Profesor.Add(Entity);
                         }

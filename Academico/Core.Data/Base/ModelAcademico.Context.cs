@@ -51,9 +51,9 @@ namespace Core.Data.Base
         public virtual DbSet<aca_rubro> aca_rubro { get; set; }
         public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
         public virtual DbSet<vwaca_familia> vwaca_familia { get; set; }
-        public virtual DbSet<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
         public virtual DbSet<vwaca_alumno> vwaca_alumno { get; set; }
         public virtual DbSet<vwaca_Profesor> vwaca_Profesor { get; set; }
+        public virtual DbSet<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor> vwaca_AnioLectivo_Paralelo_Profesor { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)

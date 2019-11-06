@@ -168,7 +168,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         IdCurso = IdCurso,
                         IdParalelo = IdParalelo,
                         IdMateria = IdMateria,
-                        IdProfesor = Convert.ToInt32(item),
+                        IdProfesor = Convert.ToDecimal(item),
                     };
                     lista.Add(info);
                 }

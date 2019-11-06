@@ -13,5 +13,5 @@
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
     settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue(); }";
-    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdNivel.PerformCallback(); IdJornada.PerformCallback();}";
+    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdNivel.PerformCallback();}";
 }).BindList(new Core.Bus.Academico.aca_Sede_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa),Model.IdAnio)).Bind(Model.IdSede).GetHtml()

@@ -22,7 +22,7 @@ namespace Core.Data.Base
         public int IdCurso { get; set; }
         public int IdMateria { get; set; }
         public int IdParalelo { get; set; }
-        public Nullable<decimal> IdProfesor { get; set; }
+        public decimal IdProfesor { get; set; }
         public decimal IdPersona { get; set; }
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }
