@@ -18,9 +18,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = (from q in Context.aca_AnioLectivo_Paralelo_Profesor
-                             join c in Context.aca_Materia
-                             on new { q.IdEmpresa, q.IdMateria } equals new { c.IdEmpresa, c.IdMateria }
+                    Lista = (from q in Context.vwaca_AnioLectivo_Paralelo_Profesor
                              where q.IdEmpresa == IdEmpresa
                              && q.IdSede == IdSede
                              && q.IdAnio == IdAnio
@@ -29,7 +27,7 @@ namespace Core.Data.Academico
                              && q.IdCurso == IdCurso
                              && q.IdParalelo == IdParalelo
                              && q.IdMateria == IdMateria
-                             && c.Estado == true
+                             && q.Estado == true
                              select new aca_AnioLectivo_Paralelo_Profesor_Info
                              {
                                  seleccionado = true,
@@ -41,10 +39,12 @@ namespace Core.Data.Academico
                                  IdCurso = q.IdCurso,
                                  IdParalelo = q.IdParalelo,
                                  IdMateria = q.IdMateria,
-                                 IdProfesor = q.IdProfesor   
+                                 IdProfesor = q.IdProfesor,
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 Codigo = q.Codigo
                              }).ToList();
 
-                    Lista.AddRange((from j in Context.aca_Profesor
+                    Lista.AddRange((from j in Context.vwaca_Profesor
                                     where !Context.aca_AnioLectivo_Paralelo_Profesor.Any(n => n.IdProfesor == j.IdProfesor && n.IdEmpresa == IdEmpresa && n.IdSede == IdSede && n.IdAnio == IdAnio && n.IdNivel == IdNivel && n.IdJornada == IdJornada && n.IdCurso == IdCurso && n.IdParalelo == IdParalelo && n.IdMateria == IdMateria)
                                     && j.Estado == true
                                     select new aca_AnioLectivo_Paralelo_Profesor_Info
@@ -58,7 +58,9 @@ namespace Core.Data.Academico
                                         IdCurso = IdCurso,
                                         IdParalelo = IdParalelo,
                                         IdMateria = IdMateria,
-                                        IdProfesor = j.IdProfesor
+                                        IdProfesor = j.IdProfesor,
+                                        pe_nombreCompleto = j.pe_nombreCompleto,
+                                        Codigo = j.Codigo
                                     }).ToList());
                 }
 

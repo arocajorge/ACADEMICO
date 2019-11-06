@@ -21,6 +21,8 @@ namespace Core.Info.Academico
 
         #region Campos que no existen en la tabla
         public bool seleccionado { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string Codigo { get; set; }
         #endregion
     }
 }

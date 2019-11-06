@@ -32,7 +32,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_AnioLectivo_Curso_Paralelo> aca_AnioLectivo_Curso_Paralelo { get; set; }
         public virtual DbSet<aca_AnioLectivo_Jornada_Curso> aca_AnioLectivo_Jornada_Curso { get; set; }
         public virtual DbSet<aca_AnioLectivo_NivelAcademico_Jornada> aca_AnioLectivo_NivelAcademico_Jornada { get; set; }
-        public virtual DbSet<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
         public virtual DbSet<aca_AnioLectivo_Sede_NivelAcademico> aca_AnioLectivo_Sede_NivelAcademico { get; set; }
         public virtual DbSet<aca_Curso> aca_Curso { get; set; }
         public virtual DbSet<aca_Jornada> aca_Jornada { get; set; }
@@ -50,10 +49,12 @@ namespace Core.Data.Base
         public virtual DbSet<aca_familia> aca_familia { get; set; }
         public virtual DbSet<aca_Profesor> aca_Profesor { get; set; }
         public virtual DbSet<aca_rubro> aca_rubro { get; set; }
-        public virtual DbSet<vwaca_Profesor> vwaca_Profesor { get; set; }
         public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
-        public virtual DbSet<vwaca_alumno> vwaca_alumno { get; set; }
         public virtual DbSet<vwaca_familia> vwaca_familia { get; set; }
+        public virtual DbSet<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
+        public virtual DbSet<vwaca_alumno> vwaca_alumno { get; set; }
+        public virtual DbSet<vwaca_Profesor> vwaca_Profesor { get; set; }
+        public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor> vwaca_AnioLectivo_Paralelo_Profesor { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

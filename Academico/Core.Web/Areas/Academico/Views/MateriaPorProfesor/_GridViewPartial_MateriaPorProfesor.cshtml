@@ -48,9 +48,16 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdProfesor";
+            column.FieldName = "Codigo";
+            column.Caption = "ID";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_nombreCompleto";
             column.Caption = "Profesor";
-            column.Width = Unit.Percentage(80);
+            column.Width = Unit.Percentage(70);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.PreRender = (sender, e) =>

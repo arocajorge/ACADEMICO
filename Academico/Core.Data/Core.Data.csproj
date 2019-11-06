@@ -219,6 +219,9 @@
     <Compile Include="Base\vwaca_alumno.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_AnioLectivo_Paralelo_Profesor.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_familia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
