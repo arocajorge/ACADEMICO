@@ -139,13 +139,8 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             var return_naturaleza = "";
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
-            if ((cl_funciones.ValidaIdentificacion(model.info_persona.IdTipoDocumento, model.info_persona.pe_Naturaleza, model.info_persona.pe_cedulaRuc, ref return_naturaleza)))
+            if ((cl_funciones.ValidaIdentificacion(model.IdTipoDocumento, model.pe_Naturaleza, model.pe_cedulaRuc, ref return_naturaleza)))
             {
-                model.info_persona.IdPersona = model.IdPersona;
-                model.info_persona.pe_Naturaleza = return_naturaleza;
-                model.info_persona.pe_telfono_Contacto = model.Telefonos;
-                model.info_persona.pe_correo = model.Correo;
-                model.info_persona.pe_direccion = model.Direccion;
                 if (!bus_profesor.ModificarDB(model))
                 {
                     ViewBag.mensaje = "No se ha podido modificar el registro";

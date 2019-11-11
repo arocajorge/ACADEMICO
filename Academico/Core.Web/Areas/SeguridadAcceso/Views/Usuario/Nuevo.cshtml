@@ -156,7 +156,7 @@
     });
 
     function OnSelectedEmpresaChanged() {
-        GridViewPartial_Usuario_x_Sede.GetEditor("IdString").PerformCallback();
+        GridViewPartial_Usuario_x_Sede.GetEditor("IdSede").PerformCallback();
     }
     function SedeComboBox_BeginCallback(s, e) {
         e.customArgs["var_IdEmpresa"] = IdEmpresa.GetValue();

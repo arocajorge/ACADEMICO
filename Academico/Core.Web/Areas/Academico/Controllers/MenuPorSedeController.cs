@@ -72,18 +72,22 @@ namespace Core.Web.Areas.Academico.Controllers
             string[] array = Ids.Split(',');
             List<aca_Menu_x_aca_Sede_Info> lista = new List<aca_Menu_x_aca_Sede_Info>();
             var output = array.GroupBy(q => q).ToList();
-            foreach (var item in output)
+            bool resultado = false;
+            if (Ids!= "")
             {
-                aca_Menu_x_aca_Sede_Info info = new aca_Menu_x_aca_Sede_Info
+                foreach (var item in output)
                 {
-                    IdEmpresa = IdEmpresa,
-                    IdSede = IdSede,
-                    IdMenu = Convert.ToInt32(item.Key),
-                };
-                lista.Add(info);
+                    aca_Menu_x_aca_Sede_Info info = new aca_Menu_x_aca_Sede_Info
+                    {
+                        IdEmpresa = IdEmpresa,
+                        IdSede = IdSede,
+                        IdMenu = Convert.ToInt32(item.Key),
+                    };
+                    lista.Add(info);
+                }
+                bus_menu_x_sede.eliminarDB(IdEmpresa, IdSede);
+                resultado = bus_menu_x_sede.guardarDB(lista);
             }
-            bus_menu_x_sede.eliminarDB(IdEmpresa, IdSede);
-            var resultado = bus_menu_x_sede.guardarDB(lista);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
