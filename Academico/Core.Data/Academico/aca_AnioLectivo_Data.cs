@@ -10,6 +10,7 @@ namespace Core.Data.Academico
 {
     public class aca_AnioLectivo_Data
     {
+        aca_AnioLectivo_Periodo_Data odata_periodo = new aca_AnioLectivo_Periodo_Data();
         public List<aca_AnioLectivo_Info> getList(int IdEmpresa, bool MostrarAnulados)
         {
             try
@@ -138,6 +139,7 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
+                    var IdPeriodo = 0;
                     aca_AnioLectivo Entity = new aca_AnioLectivo
                     {
                         IdEmpresa = info.IdEmpresa,
@@ -152,11 +154,33 @@ namespace Core.Data.Academico
                     };
                     Context.aca_AnioLectivo.Add(Entity);
 
+                    if (info.lst_periodos.Count >0)
+                    {
+                        IdPeriodo = odata_periodo.getId(info.IdEmpresa);
+                        foreach (var item in info.lst_periodos)
+                        {
+                            aca_AnioLectivo_Periodo Entity_Periodo = new aca_AnioLectivo_Periodo
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdPeriodo = IdPeriodo++,
+                                IdAnio = info.IdAnio,
+                                IdMes = item.IdMes,
+                                FechaDesde = item.FechaDesde,
+                                FechaHasta = item.FechaHasta,
+                                Estado = true,
+                                IdUsuarioCreacion = info.IdUsuarioCreacion,
+                                FechaCreacion = info.FechaCreacion = DateTime.Now
+
+                            };
+                                Context.aca_AnioLectivo_Periodo.Add(Entity_Periodo);
+                        }
+                    }
+
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

@@ -12,7 +12,7 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class vwaca_alumno
+    public partial class vwaca_Alumno
     {
         public int IdEmpresa { get; set; }
         public decimal IdAlumno { get; set; }

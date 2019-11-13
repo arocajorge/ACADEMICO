@@ -1,0 +1,23 @@
+﻿@model Core.Info.Academico.aca_Familia_Info
+@{
+    ViewBag.Title = "Consulta de familia por alumno";
+
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+@Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+
+@using (Html.BeginForm())
+{
+    @Html.Action("GridViewPartial_AlumnoFamilia")
+}
+
+
+<div class="box-footer">
+    <a class="btn btn-default" href="@Url.Action("Index","AlumnoFamilia",new { Area = "Academico" },null)">Volver</a>
+</div>

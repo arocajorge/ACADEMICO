@@ -27,34 +27,42 @@ namespace Core.Data.Base
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<aca_Alumno> aca_Alumno { get; set; }
         public virtual DbSet<aca_AnioLectivo> aca_AnioLectivo { get; set; }
         public virtual DbSet<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
         public virtual DbSet<aca_AnioLectivo_Curso_Paralelo> aca_AnioLectivo_Curso_Paralelo { get; set; }
+        public virtual DbSet<aca_AnioLectivo_Curso_Plantilla> aca_AnioLectivo_Curso_Plantilla { get; set; }
         public virtual DbSet<aca_AnioLectivo_Jornada_Curso> aca_AnioLectivo_Jornada_Curso { get; set; }
         public virtual DbSet<aca_AnioLectivo_NivelAcademico_Jornada> aca_AnioLectivo_NivelAcademico_Jornada { get; set; }
+        public virtual DbSet<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
+        public virtual DbSet<aca_AnioLectivo_Periodo> aca_AnioLectivo_Periodo { get; set; }
+        public virtual DbSet<aca_AnioLectivo_Rubro> aca_AnioLectivo_Rubro { get; set; }
+        public virtual DbSet<aca_AnioLectivo_Rubro_Periodo> aca_AnioLectivo_Rubro_Periodo { get; set; }
         public virtual DbSet<aca_AnioLectivo_Sede_NivelAcademico> aca_AnioLectivo_Sede_NivelAcademico { get; set; }
+        public virtual DbSet<aca_Catalogo> aca_Catalogo { get; set; }
+        public virtual DbSet<aca_CatalogoTipo> aca_CatalogoTipo { get; set; }
         public virtual DbSet<aca_Curso> aca_Curso { get; set; }
+        public virtual DbSet<aca_Familia> aca_Familia { get; set; }
         public virtual DbSet<aca_Jornada> aca_Jornada { get; set; }
         public virtual DbSet<aca_Materia> aca_Materia { get; set; }
         public virtual DbSet<aca_MateriaGrupo> aca_MateriaGrupo { get; set; }
-        public virtual DbSet<aca_NivelAcademico> aca_NivelAcademico { get; set; }
-        public virtual DbSet<aca_Paralelo> aca_Paralelo { get; set; }
-        public virtual DbSet<aca_Sede> aca_Sede { get; set; }
+        public virtual DbSet<aca_Matricula> aca_Matricula { get; set; }
         public virtual DbSet<aca_Menu> aca_Menu { get; set; }
         public virtual DbSet<aca_Menu_x_aca_Sede> aca_Menu_x_aca_Sede { get; set; }
         public virtual DbSet<aca_Menu_x_seg_usuario> aca_Menu_x_seg_usuario { get; set; }
-        public virtual DbSet<aca_alumno> aca_alumno { get; set; }
-        public virtual DbSet<aca_Catalogo> aca_Catalogo { get; set; }
-        public virtual DbSet<aca_CatalogoTipo> aca_CatalogoTipo { get; set; }
-        public virtual DbSet<aca_familia> aca_familia { get; set; }
+        public virtual DbSet<aca_NivelAcademico> aca_NivelAcademico { get; set; }
+        public virtual DbSet<aca_Paralelo> aca_Paralelo { get; set; }
+        public virtual DbSet<aca_Plantilla> aca_Plantilla { get; set; }
+        public virtual DbSet<aca_Plantilla_Rubro> aca_Plantilla_Rubro { get; set; }
         public virtual DbSet<aca_Profesor> aca_Profesor { get; set; }
-        public virtual DbSet<aca_rubro> aca_rubro { get; set; }
-        public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
-        public virtual DbSet<vwaca_familia> vwaca_familia { get; set; }
-        public virtual DbSet<vwaca_alumno> vwaca_alumno { get; set; }
-        public virtual DbSet<vwaca_Profesor> vwaca_Profesor { get; set; }
-        public virtual DbSet<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
+        public virtual DbSet<aca_Rubro> aca_Rubro { get; set; }
+        public virtual DbSet<aca_Sede> aca_Sede { get; set; }
+        public virtual DbSet<vwaca_Alumno> vwaca_Alumno { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor> vwaca_AnioLectivo_Paralelo_Profesor { get; set; }
+        public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
+        public virtual DbSet<vwaca_Profesor> vwaca_Profesor { get; set; }
+        public virtual DbSet<vwaca_AnioLectivo_Rubro> vwaca_AnioLectivo_Rubro { get; set; }
+        public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

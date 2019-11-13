@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Academico
 {
-    public class aca_rubro_Info
+    public class aca_Rubro_Info
     {
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }

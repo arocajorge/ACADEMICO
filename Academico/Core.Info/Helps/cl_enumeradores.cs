@@ -25,10 +25,44 @@ namespace Core.Info.Helps
             SEXO_MAS
         }
 
-        public enum Parentezco
+        public enum eTipoParentezco
         {
-            PAPA = 5,
-            MAMA = 6
+            PAPA = 10,
+            MAMA = 11
+        }
+
+        public enum eTipoBusquedaProducto
+        {
+            PORMODULO,
+            TODOS,
+            PORSUCURSAL,
+            SOLOSERVICIOS,
+            PORBODEGA
+        }
+
+        public enum eModulo
+        {
+            INV,
+            FAC,
+            COM,
+            ACF,
+            RRHH,
+            IMP,
+            CONTA,
+            CAJA,
+            BANCO,
+            CXC,
+            CXP,
+            ACA
+        }
+
+        public enum eTipoPersona
+        {
+            CLIENTE,
+            EMPLEA,
+            PERSONA,
+            PROVEE,
+            ALUMNO
         }
     }
 }

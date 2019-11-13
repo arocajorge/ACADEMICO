@@ -12,16 +12,18 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_familia
+    public partial class aca_Familia
     {
         public int IdEmpresa { get; set; }
         public decimal IdAlumno { get; set; }
+        public int Secuencia { get; set; }
         public int IdCatalogoPAREN { get; set; }
         public decimal IdPersona { get; set; }
         public string Direccion { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
         public bool SeFactura { get; set; }
+        public bool EsRepresentante { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
@@ -30,6 +32,6 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
-        public virtual aca_alumno aca_alumno { get; set; }
+        public virtual aca_Alumno aca_Alumno { get; set; }
     }
 }

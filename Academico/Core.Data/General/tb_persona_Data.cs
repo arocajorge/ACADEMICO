@@ -1,5 +1,6 @@
 ﻿using Core.Data.Base;
 using Core.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -196,5 +197,113 @@ namespace Core.Data.General
                 throw;
             }
         }
+
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, string IdTipoPersona)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<tb_persona_Info> Lista = new List<tb_persona_Info>();
+            Lista = get_list(IdEmpresa, IdTipoPersona, skip, take, args.Filter);
+            return Lista;
+        }
+
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, string IdTipoPersona)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info(IdEmpresa, IdTipoPersona, (decimal)args.Value);
+        }
+
+        public List<tb_persona_Info> get_list(int IdEmpresa, string IdTipo_persona, int skip, int take, string filter)
+        {
+            try
+            {
+                List<tb_persona_Info> Lista = new List<tb_persona_Info>();
+
+                EntitiesGeneral context_g = new EntitiesGeneral();
+                switch (IdTipo_persona)
+                {
+                    case "PERSONA":
+                        var lstg = context_g.tb_persona.Where(q => q.pe_estado == "A" && (q.IdPersona.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdPersona).Skip(skip).Take(take);
+                        foreach (var q in lstg)
+                        {
+                            Lista.Add(new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdPersona
+                            });
+                        }
+                        break;
+                    case "ALUMNO":
+                        EntitiesAcademico context_f = new EntitiesAcademico();
+                        var lstf = context_f.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true && (q.IdAlumno.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdAlumno).Skip(skip).Take(take);
+                        foreach (var q in lstf)
+                        {
+                            Lista.Add(new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdAlumno
+                            });
+                        }
+                        context_f.Dispose();
+                        break;
+                }
+
+                context_g.Dispose();
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public tb_persona_Info get_info(int IdEmpresa, string IdTipoPersona, decimal IdEntidad)
+        {
+            tb_persona_Info info = new tb_persona_Info();
+
+            EntitiesGeneral context_g = new EntitiesGeneral();
+            switch (IdTipoPersona)
+            {
+                case "PERSONA":
+                    info = (from q in context_g.tb_persona
+                            where q.pe_estado == "A"
+                            && q.IdPersona == IdEntidad
+                            select new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdPersona
+                            }).FirstOrDefault();
+                    break;
+                case "ALUMNO":
+                    EntitiesAcademico context_aca = new EntitiesAcademico();
+                    info = (from q in context_aca.vwaca_Alumno
+                            where q.Estado == true
+                            && q.IdEmpresa == IdEmpresa
+                            && q.IdAlumno == IdEntidad
+                            select new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdAlumno
+                            }).FirstOrDefault();
+                    context_aca.Dispose();
+                    break;
+            }
+
+            context_g.Dispose();
+
+            return info;
+        }
+
     }
 }

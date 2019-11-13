@@ -53,7 +53,7 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Metodos
         private bool validar(aca_AnioLectivo_Info info, ref string msg)
         {
-            if (info.EnCurso== true)
+            if (info.EnCurso == true)
             {
                 var AnioEnCurso = bus_anio.GetInfo_AnioEnCurso(info.IdEmpresa, info.IdAnio);
                 if (AnioEnCurso != null)
@@ -62,7 +62,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     return false;
                 }
             }
-            
+
             return true;
         }
         #endregion
@@ -76,10 +76,10 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            
+
             aca_AnioLectivo_Info model = new aca_AnioLectivo_Info
             {
-                IdEmpresa = IdEmpresa,
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 FechaDesde = DateTime.Now,
                 FechaHasta = DateTime.Now.AddYears(1)
             };
@@ -90,11 +90,38 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Nuevo(aca_AnioLectivo_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
-
+            model.lst_periodos = new List<aca_AnioLectivo_Periodo_Info>();
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
                 return View(model);
+            }
+
+            var mes_ini = model.FechaDesde.Month;
+            var mes_fin = model.FechaHasta.Month;
+            TimeSpan diferencia = model.FechaHasta - model.FechaDesde;
+            var dias_diferencia = diferencia.TotalDays;
+            var meses1 = dias_diferencia / 30;
+            var meses = Convert.ToInt32(dias_diferencia /30);
+            
+            var fecha_inicio = new DateTime(model.FechaDesde.Year, model.FechaDesde.Month, 1);
+
+            for (int i = 0; i < meses; i++)
+            {
+                var fecha_desde = fecha_inicio;
+                var fecha_hasta = fecha_inicio.AddMonths(1).AddDays(-1);
+
+                var info_periodo = new aca_AnioLectivo_Periodo_Info
+                {
+                    IdEmpresa = model.IdEmpresa,
+                    IdAnio = fecha_desde.Year,
+                    IdMes = fecha_desde.Month,
+                    FechaDesde = fecha_desde,
+                    FechaHasta = fecha_hasta
+                };
+                fecha_inicio = fecha_desde.AddMonths(1);
+
+                model.lst_periodos.Add(info_periodo);
             }
 
             if (!bus_anio.GuardarDB(model))

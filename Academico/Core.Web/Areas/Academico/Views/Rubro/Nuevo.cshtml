@@ -1,4 +1,4 @@
-﻿@model Core.Info.Academico.aca_rubro_Info
+﻿@model Core.Info.Academico.aca_Rubro_Info
 @{
     ViewBag.Title = "Nuevo rubro";
 
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label for="IdSucursal">Rubro*</label>
                     @Html.TextBoxFor(q => q.NomRubro, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.NomRubro, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(q => q.NomRubro, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

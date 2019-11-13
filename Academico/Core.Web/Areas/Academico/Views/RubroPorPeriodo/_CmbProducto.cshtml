@@ -1,0 +1,32 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdProducto";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "RubroPorPeriodo", Action = "CmbProducto", Area = "Academico" };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "pr_descripcion";
+        settings.Properties.TextFormatString = "[{0}] {1}";
+        settings.Properties.ValueField = "IdProducto";
+        settings.Properties.ValueType = typeof(decimal);
+        settings.Properties.AllowMouseWheel = false;
+
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+        settings.Properties.AllowNull = true;
+
+        settings.Properties.Columns.Add("IdProducto", "ID", 10);
+        settings.Properties.Columns.Add("pr_descripcion", "Producto", 50);
+        settings.Properties.Columns.Add("precio_1", "P.V.P", 10);
+        settings.Properties.Columns.Add("nom_categoria", "Categoria", 20);
+
+        settings.Properties.FilterMinLength = 3;
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){CalcularValoresProducto(s,e);}";
+    })
+    .BindList(new Core.Web.Areas.Academico.Controllers.RubroPorPeriodoController().get_list_bajo_demandaProducto,
+    new Core.Web.Areas.Academico.Controllers.RubroPorPeriodoController().get_info_bajo_demandaProducto).Bind((Model.GetType() == typeof(Core.Info.Academico.aca_AnioLectivo_Rubro_Info) || Model.GetType() == typeof(List<Core.Info.Academico.aca_AnioLectivo_Rubro_Info>)) ? "" : (Model == 0 ? "" : Model));
+}
+@comboBox.GetHtml()

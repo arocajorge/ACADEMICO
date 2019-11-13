@@ -119,6 +119,26 @@
           <Property Name="PorcentajeDiscapacidad" Type="float" />
           <Property Name="NumeroCarnetConadis" Type="varchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="tb_sis_Impuesto">
+          <Key>
+            <PropertyRef Name="IdCod_Impuesto" />
+          </Key>
+          <Property Name="IdCod_Impuesto" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="nom_impuesto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Usado_en_Ventas" Type="bit" Nullable="false" />
+          <Property Name="Usado_en_Compras" Type="bit" Nullable="false" />
+          <Property Name="porcentaje" Type="float" Nullable="false" />
+          <Property Name="IdCodigo_SRI" Type="int" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="IdTipoImpuesto" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_sis_Impuesto_Tipo">
+          <Key>
+            <PropertyRef Name="IdTipoImpuesto" />
+          </Key>
+          <Property Name="IdTipoImpuesto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nom_tipoImpuesto" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="tb_sucursal">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -266,6 +286,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
+          <End Role="tb_sis_Impuesto_Tipo" Type="Self.tb_sis_Impuesto_Tipo" Multiplicity="1" />
+          <End Role="tb_sis_Impuesto" Type="Self.tb_sis_Impuesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_Impuesto_Tipo">
+              <PropertyRef Name="IdTipoImpuesto" />
+            </Principal>
+            <Dependent Role="tb_sis_Impuesto">
+              <PropertyRef Name="IdTipoImpuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_sucursal_tb_empresa">
           <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
           <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="*" />
@@ -284,6 +316,8 @@
           <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_parroquia" EntityType="Self.tb_parroquia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_persona" EntityType="Self.tb_persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_sis_Impuesto" EntityType="Self.tb_sis_Impuesto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_sis_Impuesto_Tipo" EntityType="Self.tb_sis_Impuesto_Tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tb_parroquia_tb_ciudad" Association="Self.FK_tb_parroquia_tb_ciudad">
             <End Role="tb_ciudad" EntitySet="tb_ciudad" />
@@ -324,6 +358,10 @@
           <AssociationSet Name="FK_tb_persona_tb_Catalogo8" Association="Self.FK_tb_persona_tb_Catalogo8">
             <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
             <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" Association="Self.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
+            <End Role="tb_sis_Impuesto_Tipo" EntitySet="tb_sis_Impuesto_Tipo" />
+            <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
           </AssociationSet>
           <AssociationSet Name="FK_tb_sucursal_tb_empresa" Association="Self.FK_tb_sucursal_tb_empresa">
             <End Role="tb_empresa" EntitySet="tb_empresa" />
@@ -408,6 +446,12 @@
           <AssociationSet Name="FK_tb_persona_tb_Catalogo8" Association="ModelGeneral.FK_tb_persona_tb_Catalogo8">
             <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
             <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <EntitySet Name="tb_sis_Impuesto" EntityType="ModelGeneral.tb_sis_Impuesto" />
+          <EntitySet Name="tb_sis_Impuesto_Tipo" EntityType="ModelGeneral.tb_sis_Impuesto_Tipo" />
+          <AssociationSet Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" Association="ModelGeneral.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
+            <End Role="tb_sis_Impuesto_Tipo" EntitySet="tb_sis_Impuesto_Tipo" />
+            <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="tb_sucursal">
@@ -681,6 +725,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tb_sis_Impuesto">
+          <Key>
+            <PropertyRef Name="IdCod_Impuesto" />
+          </Key>
+          <Property Name="IdCod_Impuesto" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="nom_impuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Usado_en_Ventas" Type="Boolean" Nullable="false" />
+          <Property Name="Usado_en_Compras" Type="Boolean" Nullable="false" />
+          <Property Name="porcentaje" Type="Double" Nullable="false" />
+          <Property Name="IdCodigo_SRI" Type="Int32" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdTipoImpuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_sis_Impuesto_Tipo" Relationship="ModelGeneral.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" FromRole="tb_sis_Impuesto" ToRole="tb_sis_Impuesto_Tipo" />
+        </EntityType>
+        <EntityType Name="tb_sis_Impuesto_Tipo">
+          <Key>
+            <PropertyRef Name="IdTipoImpuesto" />
+          </Key>
+          <Property Name="IdTipoImpuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_tipoImpuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_sis_Impuesto" Relationship="ModelGeneral.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" FromRole="tb_sis_Impuesto_Tipo" ToRole="tb_sis_Impuesto" />
+        </EntityType>
+        <Association Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
+          <End Type="ModelGeneral.tb_sis_Impuesto_Tipo" Role="tb_sis_Impuesto_Tipo" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_sis_Impuesto" Role="tb_sis_Impuesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_Impuesto_Tipo">
+              <PropertyRef Name="IdTipoImpuesto" />
+            </Principal>
+            <Dependent Role="tb_sis_Impuesto">
+              <PropertyRef Name="IdTipoImpuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -830,6 +908,28 @@
                 <ScalarProperty Name="pe_Naturaleza" ColumnName="pe_Naturaleza" />
                 <ScalarProperty Name="CodPersona" ColumnName="CodPersona" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_Impuesto">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_sis_Impuesto">
+              <MappingFragment StoreEntitySet="tb_sis_Impuesto">
+                <ScalarProperty Name="IdTipoImpuesto" ColumnName="IdTipoImpuesto" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="IdCodigo_SRI" ColumnName="IdCodigo_SRI" />
+                <ScalarProperty Name="porcentaje" ColumnName="porcentaje" />
+                <ScalarProperty Name="Usado_en_Compras" ColumnName="Usado_en_Compras" />
+                <ScalarProperty Name="Usado_en_Ventas" ColumnName="Usado_en_Ventas" />
+                <ScalarProperty Name="nom_impuesto" ColumnName="nom_impuesto" />
+                <ScalarProperty Name="IdCod_Impuesto" ColumnName="IdCod_Impuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_Impuesto_Tipo">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_sis_Impuesto_Tipo">
+              <MappingFragment StoreEntitySet="tb_sis_Impuesto_Tipo">
+                <ScalarProperty Name="nom_tipoImpuesto" ColumnName="nom_tipoImpuesto" />
+                <ScalarProperty Name="IdTipoImpuesto" ColumnName="IdTipoImpuesto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,4 +1,6 @@
 ﻿using Core.Data.General;
+using Core.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,16 @@ namespace Core.Bus.General
 
                 throw;
             }
+        }
+
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, string IdTipoPersona)
+        {
+            return odata.get_list_bajo_demanda(args, IdEmpresa, IdTipoPersona);
+        }
+
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, string IdTipoPersona)
+        {
+            return odata.get_info_bajo_demanda(args, IdEmpresa, IdTipoPersona);
         }
     }
 }

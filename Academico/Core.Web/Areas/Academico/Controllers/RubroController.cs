@@ -1,6 +1,10 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.Inventario;
 using Core.Info.Academico;
+using Core.Info.Helps;
+using Core.Info.Inventario;
 using Core.Web.Helps;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +16,9 @@ namespace Core.Web.Areas.Academico.Controllers
     public class RubroController : Controller
     {
         #region Variables
-        aca_rubro_Bus bus_rubro = new aca_rubro_Bus();
+        aca_Rubro_Bus bus_rubro = new aca_Rubro_Bus();
         aca_rubro_List Lista_Rubro = new aca_rubro_List();
+        in_Producto_Bus bus_producto = new in_Producto_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -28,13 +33,13 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_rubro_Info model = new aca_rubro_Info
+            aca_Rubro_Info model = new aca_Rubro_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
 
-            List<aca_rubro_Info> lista = bus_rubro.GetList(model.IdEmpresa, true);
+            List<aca_Rubro_Info> lista = bus_rubro.GetList(model.IdEmpresa, true);
             Lista_Rubro.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             return View(model);
@@ -45,7 +50,7 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
-            List<aca_rubro_Info> model = Lista_Rubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            List<aca_Rubro_Info> model = Lista_Rubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_rubro", model);
         }
         #endregion
@@ -60,15 +65,15 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_rubro_Info model = new aca_rubro_Info
+            aca_Rubro_Info model = new aca_Rubro_Info
             {
-                IdEmpresa = IdEmpresa
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
             };
 
             return View(model);
         }
         [HttpPost]
-        public ActionResult Nuevo(aca_rubro_Info model)
+        public ActionResult Nuevo(aca_Rubro_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
 
@@ -90,7 +95,7 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_rubro_Info model = bus_rubro.GetInfo(IdEmpresa, IdRubro);
+            aca_Rubro_Info model = bus_rubro.GetInfo(IdEmpresa, IdRubro);
             if (model == null)
                 return RedirectToAction("Index");
 
@@ -100,7 +105,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Modificar(aca_rubro_Info model)
+        public ActionResult Modificar(aca_Rubro_Info model)
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
 
@@ -122,7 +127,7 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_rubro_Info model = bus_rubro.GetInfo(IdEmpresa, IdRubro);
+            aca_Rubro_Info model = bus_rubro.GetInfo(IdEmpresa, IdRubro);
 
             if (model == null)
                 return RedirectToAction("Index");
@@ -130,7 +135,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Anular(aca_rubro_Info model)
+        public ActionResult Anular(aca_Rubro_Info model)
         {
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!bus_rubro.AnularDB(model))
@@ -148,18 +153,18 @@ namespace Core.Web.Areas.Academico.Controllers
     public class aca_rubro_List
     {
         string Variable = "aca_rubro_Info";
-        public List<aca_rubro_Info> get_list(decimal IdTransaccionSession)
+        public List<aca_Rubro_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
-                List<aca_rubro_Info> list = new List<aca_rubro_Info>();
+                List<aca_Rubro_Info> list = new List<aca_Rubro_Info>();
 
                 HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<aca_rubro_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+            return (List<aca_Rubro_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<aca_rubro_Info> list, decimal IdTransaccionSession)
+        public void set_list(List<aca_Rubro_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }

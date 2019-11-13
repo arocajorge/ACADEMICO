@@ -52,18 +52,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Academico\aca_alumno_Data.cs" />
+    <Compile Include="Academico\aca_Alumno_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Jornada_Curso_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_NivelAcademico_Jornada_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Paralelo_Profesor_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Periodo_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Rubro_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Rubro_Periodo_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Data.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Data.cs" />
     <Compile Include="Academico\aca_Catalogo_Data.cs" />
     <Compile Include="Academico\aca_Curso_Data.cs" />
-    <Compile Include="Academico\aca_familia_Data.cs" />
+    <Compile Include="Academico\aca_Familia_Data.cs" />
     <Compile Include="Academico\aca_Jornada_Data.cs" />
     <Compile Include="Academico\aca_MateriaGrupo_Data.cs" />
     <Compile Include="Academico\aca_Materia_Data.cs" />
@@ -73,9 +76,9 @@
     <Compile Include="Academico\aca_NivelAcademico_Data.cs" />
     <Compile Include="Academico\aca_Paralelo_Data.cs" />
     <Compile Include="Academico\aca_Profesor_Data.cs" />
-    <Compile Include="Academico\aca_rubro_Data.cs" />
+    <Compile Include="Academico\aca_Rubro_Data.cs" />
     <Compile Include="Academico\aca_Sede_Data.cs" />
-    <Compile Include="Base\aca_alumno.cs">
+    <Compile Include="Base\aca_Alumno.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_AnioLectivo.cs">
@@ -87,6 +90,9 @@
     <Compile Include="Base\aca_AnioLectivo_Curso_Paralelo.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\aca_AnioLectivo_Curso_Plantilla.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_AnioLectivo_Jornada_Curso.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -94,6 +100,15 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_AnioLectivo_Paralelo_Profesor.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_AnioLectivo_Periodo.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_AnioLectivo_Rubro.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_AnioLectivo_Rubro_Periodo.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_AnioLectivo_Sede_NivelAcademico.cs">
@@ -108,7 +123,7 @@
     <Compile Include="Base\aca_Curso.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\aca_familia.cs">
+    <Compile Include="Base\aca_Familia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Jornada.cs">
@@ -118,6 +133,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MateriaGrupo.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_Matricula.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Menu.cs">
@@ -135,14 +153,32 @@
     <Compile Include="Base\aca_Paralelo.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\aca_Plantilla.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_Plantilla_Rubro.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_Profesor.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\aca_rubro.cs">
+    <Compile Include="Base\aca_Rubro.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Sede.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_categorias.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_presentacion.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_Producto.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_ProductoTipo.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\ModelAcademico.Context.cs">
       <AutoGen>True</AutoGen>
@@ -173,6 +209,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelGeneral.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelInventario.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelInventario.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelInventario.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelInventario.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelInventario.edmx</DependentUpon>
     </Compile>
     <Compile Include="Base\ModelSeguridadAcceso.Context.cs">
       <AutoGen>True</AutoGen>
@@ -213,16 +264,25 @@
     <Compile Include="Base\tb_persona.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\tb_sis_Impuesto.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\tb_sis_Impuesto_Tipo.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_sucursal.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\vwaca_alumno.cs">
+    <Compile Include="Base\vwaca_Alumno.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Paralelo_Profesor.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\vwaca_familia.cs">
+    <Compile Include="Base\vwaca_AnioLectivo_Rubro.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_Familia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Materia.cs">
@@ -238,7 +298,9 @@
     <Compile Include="General\tb_empresa_Data.cs" />
     <Compile Include="General\tb_parroquia_Data.cs" />
     <Compile Include="General\tb_persona_Data.cs" />
+    <Compile Include="General\tb_sis_Impuesto_Data.cs" />
     <Compile Include="General\tb_sucursal_Data.cs" />
+    <Compile Include="Inventario\in_Producto_Data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_Data.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_x_aca_Sede_Data.cs" />
@@ -274,6 +336,13 @@
     <None Include="Base\ModelGeneral.edmx.diagram">
       <DependentUpon>ModelGeneral.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="Base\ModelInventario.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelInventario.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Base\ModelInventario.edmx.diagram">
+      <DependentUpon>ModelInventario.edmx</DependentUpon>
+    </None>
     <None Include="Base\ModelSeguridadAcceso.edmx.diagram">
       <DependentUpon>ModelSeguridadAcceso.edmx</DependentUpon>
     </None>
@@ -299,6 +368,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelGeneral.edmx</DependentUpon>
       <LastGenOutput>ModelGeneral.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelInventario.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelInventario.edmx</DependentUpon>
+      <LastGenOutput>ModelInventario.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelInventario.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelInventario.edmx</DependentUpon>
+      <LastGenOutput>ModelInventario.cs</LastGenOutput>
     </Content>
     <Content Include="Base\ModelSeguridadAcceso.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -17,8 +17,8 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public aca_Catalogo()
         {
-            this.aca_alumno = new HashSet<aca_alumno>();
-            this.aca_alumno1 = new HashSet<aca_alumno>();
+            this.aca_Alumno = new HashSet<aca_Alumno>();
+            this.aca_Alumno1 = new HashSet<aca_Alumno>();
         }
     
         public int IdCatalogo { get; set; }
@@ -36,9 +36,9 @@ namespace Core.Data.Base
         public string MotivoAnulacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_alumno> aca_alumno { get; set; }
+        public virtual ICollection<aca_Alumno> aca_Alumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_alumno> aca_alumno1 { get; set; }
+        public virtual ICollection<aca_Alumno> aca_Alumno1 { get; set; }
         public virtual aca_CatalogoTipo aca_CatalogoTipo { get; set; }
     }
 }

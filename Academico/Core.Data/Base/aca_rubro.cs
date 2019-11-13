@@ -12,8 +12,14 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_rubro
+    public partial class aca_Rubro
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public aca_Rubro()
+        {
+            this.aca_AnioLectivo_Rubro = new HashSet<aca_AnioLectivo_Rubro>();
+        }
+    
         public int IdEmpresa { get; set; }
         public int IdRubro { get; set; }
         public string NomRubro { get; set; }
@@ -25,5 +31,8 @@ namespace Core.Data.Base
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_AnioLectivo_Rubro> aca_AnioLectivo_Rubro { get; set; }
     }
 }

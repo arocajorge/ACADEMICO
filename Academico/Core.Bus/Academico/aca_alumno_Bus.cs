@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Core.Bus.Academico
 {
-    public class aca_alumno_Bus
+    public class aca_Alumno_Bus
     {
         tb_persona_Bus bus_persona = new tb_persona_Bus();
-        aca_alumno_Data odata = new aca_alumno_Data();
+        aca_Alumno_Data odata = new aca_Alumno_Data();
         tb_persona_Data odata_per = new tb_persona_Data();
-        aca_familia_Data odata_fam = new aca_familia_Data();
-        public List<aca_alumno_Info> GetList(int IdEmpresa, bool MostrarAnulados)
+        aca_Familia_Data odata_fam = new aca_Familia_Data();
+        public List<aca_Alumno_Info> GetList(int IdEmpresa, bool MostrarAnulados)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_alumno_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
+        public aca_Alumno_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_alumno_Info GetInfo(int IdEmpresa, int IdProfesor)
+        public aca_Alumno_Info GetInfo(int IdEmpresa, int IdProfesor)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public bool GuardarDB(aca_alumno_Info info)
+        public bool GuardarDB(aca_Alumno_Info info)
         {
             try
             {
@@ -104,16 +104,17 @@ namespace Core.Bus.Academico
                         }
                     }
 
-                    var info_fam_padre = new aca_familia_Info
+                    var info_fam_padre = new aca_Familia_Info
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdAlumno = info.IdAlumno,
-                        IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.Parentezco.PAPA),
+                        IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA),
                         IdPersona = info.info_persona_padre.IdPersona,
                         Direccion = info.Direccion_padre,
                         Celular = info.Celular_padre,
                         Correo = info.Correo_padre,
                         SeFactura = info.SeFactura_padre,
+                        EsRepresentante = info.EsRepresentante_padre,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
@@ -142,16 +143,17 @@ namespace Core.Bus.Academico
                         }
                     }
 
-                    var info_fam_madre = new aca_familia_Info
+                    var info_fam_madre = new aca_Familia_Info
                         {
                             IdEmpresa = info.IdEmpresa,
                             IdAlumno = info.IdAlumno,
-                            IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.Parentezco.MAMA),
+                            IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA),
                             IdPersona = info.info_persona_madre.IdPersona,
                             Direccion = info.Direccion_madre,
                             Celular = info.Celular_madre,
                             Correo = info.Correo_madre,
                             SeFactura = info.SeFactura_madre,
+                            EsRepresentante = info.EsRepresentante_madre,
                             IdUsuarioCreacion = info.IdUsuarioCreacion,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
@@ -171,7 +173,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public bool ModificarDB(aca_alumno_Info info)
+        public bool ModificarDB(aca_Alumno_Info info)
         {
             try
             {
@@ -211,20 +213,22 @@ namespace Core.Bus.Academico
                         }
                     }
 
-                    var info_fam_padre = new aca_familia_Info
+                    var info_fam_padre = new aca_Familia_Info
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdAlumno = info.IdAlumno,
-                        IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.Parentezco.PAPA),
+                        IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA),
                         IdPersona = info.info_persona_padre.IdPersona,
                         Direccion = info.Direccion_padre,
                         Celular = info.Celular_padre,
                         Correo = info.Correo_padre,
                         SeFactura = info.SeFactura_padre,
+                        EsRepresentante = info.EsRepresentante_padre,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
 
+                    //var existe_padre = odata_fam.getInfo();
                     if (odata_fam.modificarDB(info_fam_padre))
                     {
                         grabar_madre = true;
@@ -249,16 +253,17 @@ namespace Core.Bus.Academico
                         }
                     }
 
-                    var info_fam_madre = new aca_familia_Info
+                    var info_fam_madre = new aca_Familia_Info
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdAlumno = info.IdAlumno,
-                        IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.Parentezco.MAMA),
+                        IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA),
                         IdPersona = info.info_persona_madre.IdPersona,
                         Direccion = info.Direccion_madre,
                         Celular = info.Celular_madre,
                         Correo = info.Correo_madre,
                         SeFactura = info.SeFactura_madre,
+                        EsRepresentante = info.EsRepresentante_madre,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
@@ -277,7 +282,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public bool AnularDB(aca_alumno_Info info)
+        public bool AnularDB(aca_Alumno_Info info)
         {
             try
             {

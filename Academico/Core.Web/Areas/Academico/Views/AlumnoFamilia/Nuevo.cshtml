@@ -1,0 +1,142 @@
+﻿@model Core.Info.Academico.aca_Familia_Info
+@{
+    ViewBag.Title = "Nuevo familiar de alumno";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
+@using (Html.BeginForm("Nuevo", "AlumnoFamilia", FormMethod.Post, new { @role = "form", @class = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdAlumno, new { @id = "IdAlumno" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCliente">Alumno*</label>
+                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4>Datos Generales</h4><hr />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Fecha de nacimiento</label>
+                                    <div class="input-group date">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        @Html.DevExpress().DateEditFor(q => q.pe_fechaNacimiento, settings =>
+                                   {
+                                       settings.Name = "pe_fechaNacimiento";
+                                       settings.Properties.UseMaskBehavior = true;
+                                       settings.Properties.EditFormat = EditFormat.Date;
+                                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       settings.Properties.AllowMouseWheel = false;
+                                   }).GetHtml()
+                                        @Html.ValidationMessageFor(q => q.pe_fechaNacimiento, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="pe_sexo">Sexo</label>
+                                    @Html.DropDownListFor(q => q.pe_sexo, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_sexo" })
+                                    @Html.ValidationMessageFor(q => q.pe_sexo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="pe_sexo">Tipo de sangre</label>
+                                    @Html.DropDownListFor(q => q.CodCatalogoSangre, new SelectList(ViewBag.lst_tipo_sangre, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_sexo" })
+                                    @Html.ValidationMessageFor(q => q.CodCatalogoSangre, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="Telefonos">Teléfono</label>
+                                    @Html.TextBoxFor(q => q.pe_telfono_Contacto, new { @class = "form-control", @id = "pe_telfono_Contacto" })
+                                    @Html.ValidationMessageFor(q => q.pe_telfono_Contacto, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="pe_celular">Celular</label>
+                                    @Html.TextBoxFor(q => q.Celular, new { @class = "form-control", @id = "Celular" })
+                                    @Html.ValidationMessageFor(q => q.Celular, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Correo">Correo</label>
+                                    @Html.TextBoxFor(q => q.Correo, new { @class = "form-control", @id = "Correo" })
+                                    @Html.ValidationMessageFor(q => q.Correo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="Direccion">Dirección</label>
+                                    @Html.TextAreaFor(q => q.Direccion, new { @class = "form-control", @rows = "2", @id = "Direccion" })
+                                    @Html.ValidationMessageFor(q => q.Direccion, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Datos Conadis</h4><hr />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="pe_sexo">Tipo de discapacidad</label>
+                                    @Html.DropDownListFor(q => q.CodCatalogoCONADIS, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogoCONADIS" })
+                                    @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="Telefonos">Porcentaje de discapacidad</label>
+                                    @Html.TextBoxFor(q => q.PorcentajeDiscapacidad, new { @class = "form-control", @id = "PorcentajeDiscapacidad" })
+                                    @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="Telefonos">Numero de carnet</label>
+                                    @Html.TextBoxFor(q => q.NumeroCarnetConadis, new { @class = "form-control", @id = "NumeroCarnetConadis" })
+                                    @Html.ValidationMessageFor(q => q.NumeroCarnetConadis, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","AlumnoFamilia", new { Area = "Academico" , IdEmpresa = ViewBag.IdEmpresa, IdAlumno = ViewBag.IdAlumno })">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    function OnBeginCallback(s, e) {
+        e.customArgs["IdCiudad"] = IdCiudad.GetValue();
+    }
+</script>

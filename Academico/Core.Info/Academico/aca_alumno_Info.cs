@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Academico
 {
-    public class aca_alumno_Info
+    public class aca_Alumno_Info
     {
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
@@ -73,6 +73,7 @@ namespace Core.Info.Academico
         public Nullable<double> PorcentajeDiscapacidad_padre { get; set; }
         public string NumeroCarnetConadis_padre { get; set; }
         public bool SeFactura_padre { get; set; }
+        public bool EsRepresentante_padre { get; set; }
         #endregion
 
         #region Datos madre
@@ -96,6 +97,7 @@ namespace Core.Info.Academico
         public Nullable<double> PorcentajeDiscapacidad_madre { get; set; }
         public string NumeroCarnetConadis_madre { get; set; }
         public bool SeFactura_madre { get; set; }
+        public bool EsRepresentante_madre { get; set; }
         #endregion
 
         public tb_persona_Info info_persona_alumno { get; set; }

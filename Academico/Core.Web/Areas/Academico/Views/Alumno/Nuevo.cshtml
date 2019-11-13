@@ -1,4 +1,4 @@
-﻿@model Core.Info.Academico.aca_alumno_Info
+﻿@model Core.Info.Academico.aca_Alumno_Info
 @{
     ViewBag.Title = "Nuevo alumno";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
@@ -235,7 +235,7 @@
                                 <label id="error_documento_padre" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                             </div>
                         </div>
-                        <div class="col-md-offset-3 col-md-2">
+                        <div class="col-md-offset-1 col-md-2">
                             <div class="form-group">
                                 <label for="bo_EsBodega"></label>
                                 @Html.DevExpress().CheckBoxFor(q => q.SeFactura_padre, settings =>
@@ -245,6 +245,18 @@
                                     settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){SeFactura_madre.SetChecked(false);}";
                                 }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.SeFactura_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.EsRepresentante_padre, settings =>
+                                {
+                                    settings.Name = "EsRepresentante_padre";
+                                    settings.Text = "Es Representante";
+                                    settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){EsRepresentante_madre.SetChecked(false);}";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.EsRepresentante_padre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -397,7 +409,7 @@
                                 <label id="error_documento_madre" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                             </div>
                         </div>
-                        <div class="col-md-offset-3 col-md-2">
+                        <div class="col-md-offset-1 col-md-2">
                             <div class="form-group">
                                 <label for="bo_EsBodega"></label>
                                 @Html.DevExpress().CheckBoxFor(q => q.SeFactura_madre, settings =>
@@ -407,6 +419,18 @@
                                     settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){SeFactura_padre.SetChecked(false);}";
                                 }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.SeFactura_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.EsRepresentante_madre, settings =>
+                                {
+                                    settings.Name = "EsRepresentante_madre";
+                                    settings.Text = "Es Representante";
+                                    settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){EsRepresentante_padre.SetChecked(false);}";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.EsRepresentante_madre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

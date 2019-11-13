@@ -81,7 +81,7 @@ namespace Core.Data.Academico
                 {
                     var lst_MateriaProfesor = Context.aca_AnioLectivo_Paralelo_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo && q.IdMateria == IdMateria).ToList();
                     Context.aca_AnioLectivo_Paralelo_Profesor.RemoveRange(lst_MateriaProfesor);
-
+                    
                     if (lista.Count > 0)
                     {
                         foreach (var info in lista)

@@ -7,16 +7,19 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Academico
 {
-    public class aca_familia_Info
+    public class aca_Familia_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdAlumno { get; set; }
+        public int Secuencia { get; set; }
         public int IdCatalogoPAREN { get; set; }
         public decimal IdPersona { get; set; }
         public string Direccion { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
         public bool SeFactura { get; set; }
+        public bool EsRepresentante { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
@@ -44,6 +47,7 @@ namespace Core.Info.Academico
         public string anio { get; set; }
         public string mes { get; set; }
         public string dia { get; set; }
+        public string NomCatalogo { get; set; }
         #endregion
     }
 }

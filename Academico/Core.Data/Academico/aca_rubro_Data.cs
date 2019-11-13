@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Academico
 {
-    public class aca_rubro_Data
+    public class aca_Rubro_Data
     {
-        public List<aca_rubro_Info> getList(int IdEmpresa, bool MostrarAnulados)
+        public List<aca_Rubro_Info> getList(int IdEmpresa, bool MostrarAnulados)
         {
             try
             {
-                List<aca_rubro_Info> Lista = new List<aca_rubro_Info>();
+                List<aca_Rubro_Info> Lista = new List<aca_Rubro_Info>();
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.aca_rubro.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
+                    var lst = odata.aca_Rubro.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
 
                     lst.ForEach(q =>
                     {
-                        Lista.Add(new aca_rubro_Info
+                        Lista.Add(new aca_Rubro_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdRubro = q.IdRubro,
@@ -41,19 +41,19 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_rubro_Info getInfo(int IdEmpresa, int IdRubro)
+        public aca_Rubro_Info getInfo(int IdEmpresa, int IdRubro)
         {
             try
             {
-                aca_rubro_Info info;
+                aca_Rubro_Info info;
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_rubro.Where(q => q.IdEmpresa == IdEmpresa && q.IdRubro == IdRubro).FirstOrDefault();
+                    var Entity = db.aca_Rubro.Where(q => q.IdEmpresa == IdEmpresa && q.IdRubro == IdRubro).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
-                    info = new aca_rubro_Info
+                    info = new aca_Rubro_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdRubro = Entity.IdRubro,
@@ -79,9 +79,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var cont = Context.aca_rubro.Where(q=> q.IdEmpresa == IdEmpresa).Count();
+                    var cont = Context.aca_Rubro.Where(q=> q.IdEmpresa == IdEmpresa).Count();
                     if (cont > 0)
-                        ID = Context.aca_rubro.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdRubro) + 1;
+                        ID = Context.aca_Rubro.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdRubro) + 1;
                 }
 
                 return ID;
@@ -93,13 +93,13 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool guardarDB(aca_rubro_Info info)
+        public bool guardarDB(aca_Rubro_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_rubro Entity = new aca_rubro
+                    aca_Rubro Entity = new aca_Rubro
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdRubro = info.IdRubro = getId(info.IdEmpresa),
@@ -108,7 +108,7 @@ namespace Core.Data.Academico
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
-                    Context.aca_rubro.Add(Entity);
+                    Context.aca_Rubro.Add(Entity);
 
                     Context.SaveChanges();
                 }
@@ -121,13 +121,13 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool modificarDB(aca_rubro_Info info)
+        public bool modificarDB(aca_Rubro_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_rubro Entity = Context.aca_rubro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdRubro == info.IdRubro);
+                    aca_Rubro Entity = Context.aca_Rubro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdRubro == info.IdRubro);
                     if (Entity == null)
                         return false;
                     Entity.NomRubro = info.NomRubro;
@@ -146,13 +146,13 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool anularDB(aca_rubro_Info info)
+        public bool anularDB(aca_Rubro_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_rubro Entity = Context.aca_rubro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdRubro == info.IdRubro);
+                    aca_Rubro Entity = Context.aca_Rubro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdRubro == info.IdRubro);
                     if (Entity == null)
                         return false;
 

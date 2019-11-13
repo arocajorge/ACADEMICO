@@ -15,8 +15,8 @@ namespace Core.Web.Areas.Academico.Controllers
     public class AlumnoController : Controller
     {
         #region Variables
-        aca_alumno_Bus bus_alumno = new aca_alumno_Bus();
-        aca_familia_Bus bus_familia = new aca_familia_Bus();
+        aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
+        aca_Familia_Bus bus_familia = new aca_Familia_Bus();
         tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
         aca_Catalogo_Bus bus_aca_catalogo = new aca_Catalogo_Bus();
         aca_alumno_List Lista_Alumno = new aca_alumno_List();
@@ -34,13 +34,13 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_alumno_Info model = new aca_alumno_Info
+            aca_Alumno_Info model = new aca_Alumno_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
 
-            List<aca_alumno_Info> lista = bus_alumno.GetList(model.IdEmpresa, true);
+            List<aca_Alumno_Info> lista = bus_alumno.GetList(model.IdEmpresa, true);
             Lista_Alumno.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             return View(model);
@@ -51,7 +51,7 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
-            List<aca_alumno_Info> model = Lista_Alumno.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            List<aca_Alumno_Info> model = Lista_Alumno.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_alumno", model);
         }
         #endregion
@@ -75,7 +75,7 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_tipo_discapacidad = lst_tipo_discapacidad;
         }
 
-        private bool validar(aca_alumno_Info info, ref string msg)
+        private bool validar(aca_Alumno_Info info, ref string msg)
         {
             string return_naturaleza = "";
             string return_naturaleza_padre = "";
@@ -124,7 +124,7 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            aca_alumno_Info model = new aca_alumno_Info
+            aca_Alumno_Info model = new aca_Alumno_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 pe_Naturaleza = "NATU",
@@ -134,7 +134,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Nuevo(aca_alumno_Info model)
+        public ActionResult Nuevo(aca_Alumno_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
 
@@ -234,14 +234,17 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_alumno_Info model = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
-            aca_familia_Info info_fam_padre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.Parentezco.PAPA));
-            aca_familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.Parentezco.MAMA));
+            aca_Alumno_Info model = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
+            aca_Familia_Info info_fam_padre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
+            aca_Familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
 
             model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+            info_fam_padre = (info_fam_padre == null ? new aca_Familia_Info() : info_fam_padre);
+            info_fam_madre = (info_fam_madre == null ? new aca_Familia_Info() : info_fam_madre);
 
             model.IdPersona_padre = info_fam_padre.IdPersona;
             model.SeFactura_padre = info_fam_padre.SeFactura;
+            model.EsRepresentante_padre = info_fam_padre.EsRepresentante;
             model.IdTipoDocumento_padre = info_fam_padre.IdTipoDocumento;
             model.pe_Naturaleza_padre = info_fam_padre.pe_Naturaleza;
             model.pe_cedulaRuc_padre = info_fam_padre.pe_cedulaRuc;
@@ -256,10 +259,11 @@ namespace Core.Web.Areas.Academico.Controllers
             model.Direccion_padre = info_fam_padre.Direccion;
             model.PorcentajeDiscapacidad_padre = info_fam_padre.PorcentajeDiscapacidad;
             model.NumeroCarnetConadis_padre = info_fam_padre.NumeroCarnetConadis;
-            model.CodCatalogoCONADIS_padre = (info_fam_padre.CodCatalogoCONADIS == null ? "" : info_fam_padre.CodCatalogoCONADIS);
+            model.CodCatalogoCONADIS_padre = (info_fam_padre == null || info_fam_padre.CodCatalogoCONADIS == null ? "" : info_fam_padre.CodCatalogoCONADIS);
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
             model.SeFactura_madre = info_fam_madre.SeFactura;
+            model.EsRepresentante_madre = info_fam_madre.EsRepresentante;
             model.IdTipoDocumento_madre = info_fam_madre.IdTipoDocumento;
             model.pe_Naturaleza_madre = info_fam_madre.pe_Naturaleza;
             model.pe_cedulaRuc_madre = info_fam_madre.pe_cedulaRuc;
@@ -274,7 +278,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.Direccion_madre = info_fam_madre.Direccion;
             model.PorcentajeDiscapacidad_madre = info_fam_madre.PorcentajeDiscapacidad;
             model.NumeroCarnetConadis_madre = info_fam_madre.NumeroCarnetConadis;
-            model.CodCatalogoCONADIS_madre = (info_fam_madre.CodCatalogoCONADIS == null ? "" : info_fam_madre.CodCatalogoCONADIS);
+            model.CodCatalogoCONADIS_madre = (info_fam_madre == null || info_fam_madre.CodCatalogoCONADIS == null ? "" : info_fam_madre.CodCatalogoCONADIS);
 
             if (model == null)
                 return RedirectToAction("Index");
@@ -287,7 +291,7 @@ namespace Core.Web.Areas.Academico.Controllers
         }
 
         [HttpPost]
-        public ActionResult Modificar(aca_alumno_Info model)
+        public ActionResult Modificar(aca_Alumno_Info model)
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
 
@@ -387,9 +391,9 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_alumno_Info model = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
-            aca_familia_Info info_fam_padre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.Parentezco.PAPA));
-            aca_familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.Parentezco.MAMA));
+            aca_Alumno_Info model = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
+            aca_Familia_Info info_fam_padre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
+            aca_Familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
 
             model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
 
@@ -436,7 +440,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Anular(aca_alumno_Info model)
+        public ActionResult Anular(aca_Alumno_Info model)
         {
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!bus_alumno.AnularDB(model))
@@ -487,19 +491,19 @@ namespace Core.Web.Areas.Academico.Controllers
 
     public class aca_alumno_List
     {
-        string Variable = "aca_alumno_Info";
-        public List<aca_alumno_Info> get_list(decimal IdTransaccionSession)
+        string Variable = "aca_Alumno_Info";
+        public List<aca_Alumno_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
-                List<aca_alumno_Info> list = new List<aca_alumno_Info>();
+                List<aca_Alumno_Info> list = new List<aca_Alumno_Info>();
 
                 HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<aca_alumno_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+            return (List<aca_Alumno_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<aca_alumno_Info> list, decimal IdTransaccionSession)
+        public void set_list(List<aca_Alumno_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }

@@ -12,7 +12,7 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class vwaca_familia
+    public partial class vwaca_Familia
     {
         public int IdEmpresa { get; set; }
         public decimal IdAlumno { get; set; }
@@ -37,5 +37,7 @@ namespace Core.Data.Base
         public Nullable<double> PorcentajeDiscapacidad { get; set; }
         public string NumeroCarnetConadis { get; set; }
         public string pe_telfono_Contacto { get; set; }
+        public int Secuencia { get; set; }
+        public bool EsRepresentante { get; set; }
     }
 }

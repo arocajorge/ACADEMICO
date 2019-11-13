@@ -31,5 +31,7 @@ namespace Core.Data.Base
         public virtual DbSet<tb_parroquia> tb_parroquia { get; set; }
         public virtual DbSet<tb_Catalogo> tb_Catalogo { get; set; }
         public virtual DbSet<tb_persona> tb_persona { get; set; }
+        public virtual DbSet<tb_sis_Impuesto> tb_sis_Impuesto { get; set; }
+        public virtual DbSet<tb_sis_Impuesto_Tipo> tb_sis_Impuesto_Tipo { get; set; }
     }
 }

@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Academico
 {
-    public class aca_alumno_Data
+    public class aca_Alumno_Data
     {
-        public List<aca_alumno_Info> getList(int IdEmpresa, bool MostrarAnulados)
+        public List<aca_Alumno_Info> getList(int IdEmpresa, bool MostrarAnulados)
         {
             try
             {
-                List<aca_alumno_Info> Lista = new List<aca_alumno_Info>();
+                List<aca_Alumno_Info> Lista = new List<aca_Alumno_Info>();
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.vwaca_alumno.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
+                    var lst = odata.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
 
                     lst.ForEach(q =>
                     {
-                        Lista.Add(new aca_alumno_Info
+                        Lista.Add(new aca_Alumno_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdAlumno = q.IdAlumno,
@@ -55,19 +55,19 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_alumno_Info getInfo(int IdEmpresa, int IdAlumno)
+        public aca_Alumno_Info getInfo(int IdEmpresa, int IdAlumno)
         {
             try
             {
-                aca_alumno_Info info;
+                aca_Alumno_Info info;
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.vwaca_alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).FirstOrDefault();
+                    var Entity = db.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
-                    info = new aca_alumno_Info
+                    info = new aca_Alumno_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         pe_nombre = Entity.pe_nombre,
@@ -102,11 +102,11 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_alumno_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
+        public aca_Alumno_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
         {
             try
             {
-                aca_alumno_Info info = new aca_alumno_Info();
+                aca_Alumno_Info info = new aca_Alumno_Info();
 
                 EntitiesGeneral Context_general = new EntitiesGeneral();
                 tb_persona Entity_per = Context_general.tb_persona.Where(q => q.pe_cedulaRuc == pe_cedulaRuc).FirstOrDefault();
@@ -117,7 +117,7 @@ namespace Core.Data.Academico
                 }
 
                 EntitiesAcademico Context_academico = new EntitiesAcademico();
-                var Entity_aca = Context_academico.vwaca_alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdPersona == Entity_per.IdPersona).FirstOrDefault();
+                var Entity_aca = Context_academico.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdPersona == Entity_per.IdPersona).FirstOrDefault();
                 if (Entity_aca == null)
                 {
                     info.IdPersona = Entity_per.IdPersona;
@@ -142,7 +142,7 @@ namespace Core.Data.Academico
                     return info;
                 }
 
-                info = new aca_alumno_Info
+                info = new aca_Alumno_Info
                 {
                     IdEmpresa = Entity_aca.IdEmpresa,
                     Codigo = Entity_aca.Codigo,
@@ -180,9 +180,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var cont = Context.aca_alumno.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    var cont = Context.aca_Alumno.Where(q => q.IdEmpresa == IdEmpresa).Count();
                     if (cont > 0)
-                        ID = Context.aca_alumno.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdAlumno) + 1;
+                        ID = Context.aca_Alumno.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdAlumno) + 1;
                 }
 
                 return ID;
@@ -194,13 +194,13 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool guardarDB(aca_alumno_Info info)
+        public bool guardarDB(aca_Alumno_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_alumno Entity = new aca_alumno
+                    aca_Alumno Entity = new aca_Alumno
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdAlumno = info.IdAlumno = getId(info.IdEmpresa),
@@ -215,7 +215,7 @@ namespace Core.Data.Academico
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
-                    Context.aca_alumno.Add(Entity);
+                    Context.aca_Alumno.Add(Entity);
 
                     Context.SaveChanges();
                 }
@@ -228,13 +228,13 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool modificarDB(aca_alumno_Info info)
+        public bool modificarDB(aca_Alumno_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_alumno Entity = Context.aca_alumno.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno);
+                    aca_Alumno Entity = Context.aca_Alumno.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno);
                     if (Entity == null)
                         return false;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
@@ -255,13 +255,13 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool anularDB(aca_alumno_Info info)
+        public bool anularDB(aca_Alumno_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_alumno Entity = Context.aca_alumno.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno);
+                    aca_Alumno Entity = Context.aca_Alumno.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno);
                     if (Entity == null)
                         return false;
                     Entity.Estado = info.Estado = false;

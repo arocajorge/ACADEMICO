@@ -196,6 +196,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Academico\AcademicoAreaRegistration.cs" />
     <Compile Include="Areas\Academico\Controllers\AlumnoController.cs" />
+    <Compile Include="Areas\Academico\Controllers\AlumnoFamiliaController.cs" />
     <Compile Include="Areas\Academico\Controllers\AnioLectivoController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoPorJornadaController.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Areas\Academico\Controllers\ParaleloPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\ProfesorController.cs" />
     <Compile Include="Areas\Academico\Controllers\RubroController.cs" />
+    <Compile Include="Areas\Academico\Controllers\RubroPorPeriodoController.cs" />
     <Compile Include="Areas\Academico\Controllers\SedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\NivelPorSedeController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
@@ -7485,6 +7487,18 @@
     <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Jornada.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Curso.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\RubroPorPeriodo\_CmbProducto.cshtml" />
+    <Content Include="Areas\Academico\Views\RubroPorPeriodo\_GridViewPartial_RubroPorPeriodo.cshtml" />
+    <Content Include="Areas\Academico\Views\RubroPorPeriodo\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\RubroPorPeriodo\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\RubroPorPeriodo\_GridViewPartial_RubroPorAnioPorPeriodo.cshtml" />
+    <Content Include="Areas\Academico\Views\RubroPorPeriodo\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\RubroPorPeriodo\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\RubroPorPeriodo\_ComboBoxPartial_Anio_Inactivo.cshtml" />
+    <Content Include="Areas\Academico\Views\AlumnoFamilia\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\AlumnoFamilia\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\AlumnoFamilia\_GridViewPartial_AlumnoFamilia.cshtml" />
+    <Content Include="Areas\Academico\Views\AlumnoFamilia\_CmbAlumno.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

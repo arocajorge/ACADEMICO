@@ -41,18 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Academico\aca_alumno_Bus.cs" />
+    <Compile Include="Academico\aca_Alumno_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Jornada_Curso_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_NivelAcademico_Jornada_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Paralelo_Profesor_Bus.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Rubro_Bus.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Rubro_Periodo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Bus.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Bus.cs" />
     <Compile Include="Academico\aca_Catalogo_Bus.cs" />
     <Compile Include="Academico\aca_Curso_Bus.cs" />
-    <Compile Include="Academico\aca_familia_Bus.cs" />
+    <Compile Include="Academico\aca_Familia_Bus.cs" />
     <Compile Include="Academico\aca_Jornada_Bus.cs" />
     <Compile Include="Academico\aca_MateriaGrupo_Bus.cs" />
     <Compile Include="Academico\aca_Materia_Bus.cs" />
@@ -62,13 +64,15 @@
     <Compile Include="Academico\aca_NivelAcademico_Bus.cs" />
     <Compile Include="Academico\aca_Paralelo_Bus.cs" />
     <Compile Include="Academico\aca_Profesor_Bus.cs" />
-    <Compile Include="Academico\aca_rubro_Bus.cs" />
+    <Compile Include="Academico\aca_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_Sede_Bus.cs" />
     <Compile Include="General\tb_Catalogo_Bus.cs" />
     <Compile Include="General\tb_empresa_Bus.cs" />
     <Compile Include="General\tb_parroquia_Bus.cs" />
     <Compile Include="General\tb_persona_Bus.cs" />
+    <Compile Include="General\tb_sis_Impuesto_Bus.cs" />
     <Compile Include="General\tb_sucursal_Bus.cs" />
+    <Compile Include="Inventario\in_Producto_Bus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_Bus.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_x_aca_Sede_Bus.cs" />
