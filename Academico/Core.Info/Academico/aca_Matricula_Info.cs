@@ -14,6 +14,7 @@ namespace Core.Info.Academico
         public string Codigo { get; set; }
         public decimal IdAlumno { get; set; }
         public int IdAnio { get; set; }
+        public DateTime Fecha { get; set; }
         public int IdSede { get; set; }
         public int IdNivel { get; set; }
         public int IdJornada { get; set; }
@@ -22,5 +23,9 @@ namespace Core.Info.Academico
         public decimal IdPersonaF { get; set; }
         public decimal IdPersonaR { get; set; }
         public int IdPlantilla { get; set; }
+
+        #region Campos que no existen en la tabla
+        public string IdComboCurso { get; set; }
+        #endregion
     }
 }

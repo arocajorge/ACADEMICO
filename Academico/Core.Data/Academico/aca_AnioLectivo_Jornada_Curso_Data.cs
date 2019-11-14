@@ -138,7 +138,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public List<aca_AnioLectivo_Jornada_Curso_Info> getList_ComboCurso(int IdEmpresa, int IdSede, int IdAnio)
+        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCursoPromoverAlumno(int IdEmpresa, decimal IdAlumno, int IdAnio)
         {
             try
             {
@@ -146,7 +146,14 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.vwaca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio==IdAnio).OrderBy(q => q.OrdenCurso).ToList();
+                    aca_Alumno alumno = odata.aca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).FirstOrDefault();
+                    if (alumno == null)
+                        return new List<aca_AnioLectivo_Jornada_Curso_Info>();
+
+                    aca_Curso curso = odata.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdCurso == alumno.IdCurso).FirstOrDefault();
+                    int IdCursoIni = curso == null ? 0 : (curso.IdCursoAPromover ?? 0);
+                    int IdCursoFin = curso == null ? 999999 : (curso.IdCursoAPromover ?? 999999);
+                    var lst = odata.vwaca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio==IdAnio && IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin).OrderBy(q => q.OrdenCurso).ToList();
 
                     lst.ForEach(q =>
                     {
@@ -154,7 +161,12 @@ namespace Core.Data.Academico
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdAnio = q.IdAnio,
-                            ComboCurso = q.ComboCurso
+                            IdSede = q.IdSede,
+                            IdNivel = q.IdNivel,
+                            IdJornada = q.IdJornada,
+                            IdCurso = q.IdCurso,
+                            NomCurso = q.ComboCurso,
+                            OrdenCurso = q.OrdenCurso
                         });
                     });
                 }

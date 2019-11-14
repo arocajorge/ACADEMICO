@@ -48,11 +48,11 @@ namespace Core.Bus.Academico
             }
         }
         
-        public List<aca_AnioLectivo_Jornada_Curso_Info> getList_ComboCurso(int IdEmpresa, int IdSede, int IdAnio)
+        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCursoPromoverAlumno(int IdEmpresa, decimal IdAlumno, int IdAnio)
         {
             try
             {
-                return odata.getList_ComboCurso(IdEmpresa, IdSede, IdAnio);
+                return odata.GetListCursoPromoverAlumno(IdEmpresa, IdAlumno, IdAnio);
             }
             catch (Exception)
             {
