@@ -33,6 +33,14 @@ namespace Core.Data.Base
         public decimal IdPersonaF { get; set; }
         public decimal IdPersonaR { get; set; }
         public int IdPlantilla { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public string IdUsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public string IdUsuarioModificacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public string IdUsuarioAnulacion { get; set; }
+        public Nullable<System.DateTime> FechaAnulacion { get; set; }
+        public string MotivoAnulacion { get; set; }
     
         public virtual aca_Alumno aca_Alumno { get; set; }
         public virtual aca_AnioLectivo_Curso_Paralelo aca_AnioLectivo_Curso_Paralelo { get; set; }

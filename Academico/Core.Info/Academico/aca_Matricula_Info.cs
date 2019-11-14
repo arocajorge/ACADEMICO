@@ -14,6 +14,7 @@ namespace Core.Info.Academico
         public string Codigo { get; set; }
         public decimal IdAlumno { get; set; }
         public int IdAnio { get; set; }
+        public DateTime Fecha { get; set; }
         public int IdSede { get; set; }
         public int IdNivel { get; set; }
         public int IdJornada { get; set; }
