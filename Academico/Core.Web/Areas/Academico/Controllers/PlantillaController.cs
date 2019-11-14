@@ -314,15 +314,6 @@ namespace Core.Web.Areas.Academico.Controllers
             return RedirectToAction("Index");
         }
         #endregion
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_PlantillaRubro()
-        {
-            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var model = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_egr_inv_det", model);
-        }
     }
 
     public class aca_Plantilla_List
