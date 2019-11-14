@@ -4,7 +4,7 @@
     {
         settings.Name = "IdAlumno";
         settings.Width = Unit.Percentage(100);
-        settings.Properties.DropDownWidth = Unit.Pixel(1200);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
         settings.CallbackRouteValues = new { Controller = "Matricula", Action = "Cmb_MatriculaAlumno", Area = "Academico" };
         settings.Properties.CallbackPageSize = 15;
@@ -16,10 +16,10 @@
 
         settings.Properties.DropDownButton.Enabled = false;
 
-        settings.Properties.Columns.Add("IdEntidad", "ID", 5);
-        settings.Properties.Columns.Add("pe_cedulaRuc", "Identificacion", 10);
-        settings.Properties.Columns.Add("pe_nombreCompleto", "Alumno", 55);
-        settings.Properties.FilterMinLength = 3;
+        settings.Properties.Columns.Add("IdEntidad", "ID", 10);
+        settings.Properties.Columns.Add("pe_cedulaRuc", "Identificacion", 20);
+        settings.Properties.Columns.Add("pe_nombreCompleto", "Alumno", 70);
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdComboCurso.PerformCallback(); }";
     })
     .BindList(new Core.Web.Areas.Academico.Controllers.AlumnoFamiliaController().get_list_bajo_demanda_alumno, new Core.Web.Areas.Academico.Controllers.AlumnoFamiliaController().get_info_bajo_demanda_alumno)
     .Bind(Model.GetType() == typeof(Core.Info.Academico.aca_Familia_Info) ? "" : (Model == 0 ? "" : Model));

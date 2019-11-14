@@ -8,6 +8,7 @@ using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -84,19 +85,34 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult ComboBoxPartial_Curso()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
-            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
-            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
-            int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
-            return PartialView("_ComboBoxPartial_Curso", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada });
+            decimal IdAlumno = (Request.Params["IdAlumno"] != null) ? decimal.Parse(Request.Params["IdAlumno"]) : -1;
+            return PartialView("_ComboBoxPartial_Curso", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdAlumno = IdAlumno });
         }
 
         public ActionResult ComboBoxPartial_Paralelo()
         {
-            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
-            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
-            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
-            int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
-            int IdCurso = (Request.Params["IdCurso"] != null) ? int.Parse(Request.Params["IdCurso"]) : -1;
+            string IdComboCurso = (Request.Params["IdCurso"] != null) ? (Request.Params["IdCurso"]).ToString() : null;
+            int IdAnio = -1;
+            int IdSede = -1;
+            int IdNivel = -1;
+            int IdJornada = -1;
+            int IdCurso = -1;
+
+            if (!string.IsNullOrEmpty(IdComboCurso))
+            {
+                var regex = new Regex(@".{4}");
+                string result = regex.Replace(IdComboCurso, "$&" + Environment.NewLine);
+                string[] array = result.Split('\n');
+                if (array.Count() >= 5)
+                {
+                    IdAnio = Convert.ToInt32(array[1]);
+                    IdSede = Convert.ToInt32(array[2]);
+                    IdNivel = Convert.ToInt32(array[3]);
+                    IdJornada = Convert.ToInt32(array[4]);
+                    IdCurso = Convert.ToInt32(array[5]);
+                }
+            }
+            
             return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
         }
         #endregion
@@ -116,7 +132,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSede = Convert.ToInt32(SessionFixed.IdSede),
                 IdAnio = (info == null ? 0 : info.IdAnio),
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
+                Fecha = DateTime.Now.Date
             };
 
             return View(model);

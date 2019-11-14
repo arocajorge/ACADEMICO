@@ -23,5 +23,9 @@ namespace Core.Info.Academico
         public decimal IdPersonaF { get; set; }
         public decimal IdPersonaR { get; set; }
         public int IdPlantilla { get; set; }
+
+        #region Campos que no existen en la tabla
+        public string IdComboCurso { get; set; }
+        #endregion
     }
 }

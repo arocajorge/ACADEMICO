@@ -28,6 +28,7 @@ namespace Core.Info.Academico
 
         #region Campos que no existen en la tabla
         public bool seleccionado { get; set; }
+        public decimal IdAlumno { get; set; }
         #endregion
     }
 }

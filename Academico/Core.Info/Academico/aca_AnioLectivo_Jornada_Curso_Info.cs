@@ -28,7 +28,6 @@ namespace Core.Info.Academico
         public string NomSede { get; set; }
         public string NomJornada { get; set; }
         public string NomNivel { get; set; }
-        public string ComboCurso { get; set; }
         public string IdComboCurso { get; set; }
         #endregion
     }
