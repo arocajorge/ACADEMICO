@@ -1,0 +1,20 @@
+﻿@model Core.Info.Academico.aca_Matricula_Info
+@{
+    ViewBag.Title = "Consulta de matricula";
+
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+
+    @Html.Action("GridViewPartial_Matricula")
+
+}
+

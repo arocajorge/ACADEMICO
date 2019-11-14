@@ -58,11 +58,18 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="Sede">Orden*</label>
                     @Html.TextBoxFor(q => q.OrdenCurso, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.OrdenCurso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="info_persona.pe_Naturaleza">Curso a promover*</label>
+                    @Html.DropDownListFor(q => q.IdCursoAPromover, new SelectList(ViewBag.lst_curso, "IdCurso", "NomCurso"), new { @class = "form-control", @id = "IdCursoAPromover" })
+                    @Html.ValidationMessageFor(q => q.IdCursoAPromover, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

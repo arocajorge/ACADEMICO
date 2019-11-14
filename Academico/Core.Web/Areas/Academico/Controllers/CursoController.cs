@@ -52,6 +52,17 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
+        #region Metodos
+        private void cargar_combos()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_curso = bus_curso.GetList(IdEmpresa, false);
+            lst_curso.Add(new aca_Curso_Info { IdCurso = 0, NomCurso = "" });
+
+            ViewBag.lst_curso = lst_curso;
+        }
+        #endregion
+
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
@@ -65,24 +76,27 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_Curso_Info model = new aca_Curso_Info
             {
                 IdEmpresa = IdEmpresa,
-                OrdenCurso = orden
+                OrdenCurso = orden,
+                IdCursoAPromover = 0
             };
-
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
         public ActionResult Nuevo(aca_Curso_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
+            model.IdCursoAPromover = (model.IdCursoAPromover ==0 ? null : model.IdCursoAPromover );
             if (!bus_curso.GuardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
+                cargar_combos();
                 return View(model);
             }
             return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdCurso = model.IdCurso, Exito = true });
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdCurso = 0, bool Exito=false)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdCurso = 0, bool Exito = false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -92,21 +106,26 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Curso_Info model = bus_curso.GetInfo(IdEmpresa, IdCurso);
+            model.IdCursoAPromover = (model.IdCursoAPromover == null ? 0 : model.IdCursoAPromover);
             if (model == null)
                 return RedirectToAction("Index");
 
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
         public ActionResult Modificar(aca_Curso_Info model)
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+            model.IdCursoAPromover = (model.IdCursoAPromover == 0 ? null : model.IdCursoAPromover);
+
             if (!bus_curso.ModificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";
+                cargar_combos();
                 return View(model);
             }
 
@@ -123,10 +142,12 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Curso_Info model = bus_curso.GetInfo(IdEmpresa, IdCurso);
+            model.IdCursoAPromover = (model.IdCursoAPromover == null ? 0 : model.IdCursoAPromover);
 
             if (model == null)
                 return RedirectToAction("Index");
 
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
@@ -136,6 +157,7 @@ namespace Core.Web.Areas.Academico.Controllers
             if (!bus_curso.AnularDB(model))
             {
                 ViewBag.mensaje = "No se ha podido anular el registro";
+                cargar_combos();
                 return View(model);
             }
 

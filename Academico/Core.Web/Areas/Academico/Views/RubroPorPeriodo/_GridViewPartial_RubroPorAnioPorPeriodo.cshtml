@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_RubroPorAnioPorPeriodo";
-        settings.CallbackRouteValues = new { Controller = "RubroPorPeriodo", Action = "_GridViewPartial_RubroPorAnioPorPeriodo" };
+        settings.CallbackRouteValues = new { Controller = "RubroPorPeriodo", Action = "GridViewPartial_RubroPorAnioPorPeriodo" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdString";
         //Configuración para que la grilla no muestre texto completo

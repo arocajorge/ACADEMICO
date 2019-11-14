@@ -1,7 +1,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_AlumnoFamilia";
-        settings.CallbackRouteValues = new { Controller = "AlumnoFamilia", Action = "GridViewPartial_AlumnoFamilia"};
+        settings.CallbackRouteValues = new { Controller = "AlumnoFamilia", Action = "GridViewPartial_AlumnoFamilia", IdEmpresa = ViewBag.IdEmpresa, IdAlumno = ViewBag.IdAlumno };
         settings.KeyFieldName = "Secuencia";
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
 
@@ -55,7 +55,7 @@
             {
                 ViewContext.Writer.Write(
                     Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") }) + "&nbsp;" +
-                    Html.ActionLink("Eliminar", "Eliminar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") },
+                    Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") },
                         new { onclick = "return confirm('¿Está seguro de que desea eliminar el registro?')" })
                 );
             });
@@ -71,9 +71,9 @@
         });
 
         settings.Columns.Add("Secuencia", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(5);
-        settings.Columns.Add("pe_nombreCompleto", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+        settings.Columns.Add("pe_nombreCompleto", "Nombres").Width = System.Web.UI.WebControls.Unit.Percentage(40);
         settings.Columns.Add("pe_cedulaRuc", "Cedula/Ruc").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("NomCatalogo", "Parentezco").Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        settings.Columns.Add("NomCatalogo", "Parentezco").Width = System.Web.UI.WebControls.Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "SeFactura";

@@ -1,0 +1,122 @@
+﻿@model Core.Info.Academico.aca_Plantilla_Info
+@{
+    ViewBag.Title = "Anular plantilla";
+
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script>
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdRubro", GetSelectedFieldValuesCallback);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+    function actualizar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdPlantilla: $("#IdPlantilla").val(),
+            NomPlantilla: $("#NomPlantilla").val(),
+            Valor: $("#Valor").val(),
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $("#btn_guardar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("actualizar", "Plantilla", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if(data.mensaje==""){
+                    $("#myform").submit();
+                }
+                else
+                {
+                    alert("Registro guardado exitosamente");
+                    var location = GetPathServer();
+                    window.open(location +"/Academico/Plantilla/Modificar?IdEmpresa="+@Model.IdEmpresa+"&IdAnio="+@Model.IdAnio+"&IdPlantilla="+@Model.IdPlantilla+"&Exito="+true);
+                }
+                $("#btn_guardar").attr("disabled", false);
+
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+@using (Html.BeginForm("Anular", "Plantilla", FormMethod.Post, new { @class = "form", @role = "form", @id = "myform" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdPlantilla, new { @id = "IdPlantilla" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdEmpresa">Descripción</label>
+                    @Html.TextBoxFor(q => q.NomPlantilla, new { @class = "form-control", @id = "NomPlantilla" })
+                    @Html.ValidationMessageFor(q => q.NomPlantilla, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Año Lectivo*</label>
+                    @Html.Partial("_ComboBoxPartial_Anio", Model)
+                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Valor</label>
+                    @Html.TextBoxFor(q => q.Valor, new { @class = "form-control", @id = "Valor" })
+                    @Html.ValidationMessageFor(q => q.Valor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Plantilla",new { Area = "Academico" },null)">Cancelar</a>
+    </div>
+    @Html.Action("GridViewPartial_PlantillaRubro")
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+

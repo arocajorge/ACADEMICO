@@ -204,7 +204,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(mensaje, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult modificar(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, int IdProducto = 0, decimal Subtotal = 0, string IdCod_Impuesto_Iva = "", decimal Porcentaje = 0, decimal ValorIVA = 0, decimal Total = 0, string Ids = "", decimal IdTransaccionSession = 0)
+        public JsonResult modificar_json(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, int IdProducto = 0, decimal Subtotal = 0, string IdCod_Impuesto_Iva = "", decimal Porcentaje = 0, decimal ValorIVA = 0, decimal Total = 0, string Ids = "", decimal IdTransaccionSession = 0)
         {
             var mensaje = ""; ;
             aca_AnioLectivo_Rubro_Info info_rubro_anio = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, IdRubro);

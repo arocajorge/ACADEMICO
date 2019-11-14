@@ -374,7 +374,7 @@ namespace Core.Info.Helps
                     return true;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

@@ -122,6 +122,7 @@ namespace Core.Data.Academico
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdAlumno = Entity.IdAlumno,
+                        Secuencia = Entity.Secuencia,
                         IdPersona = Entity.IdPersona,
                         IdCatalogoPAREN = Entity.IdCatalogoPAREN,
                         Direccion = Entity.Direccion,
@@ -153,52 +154,53 @@ namespace Core.Data.Academico
             }
         }
 
-        //public aca_Familia_Info getInfo_Persona(int IdEmpresa, int IdAlumno, int IdPersona, int IdCatalogoPAREN)
-        //{
-        //    try
-        //    {
-        //        aca_Familia_Info info_familia = new aca_Familia_Info();
+        public aca_Familia_Info getInfo_ExistePersonaParentezco(int IdEmpresa, decimal IdAlumno, decimal IdPersona, int IdCatalogoPAREN)
+        {
+            try
+            {
+                aca_Familia_Info info_familia = new aca_Familia_Info();
 
-        //        using (EntitiesAcademico odata = new EntitiesAcademico())
-        //        {
-        //            var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.Secuencia == Secuencia).FirstOrDefault();
-        //            if (Entity == null)
-        //                return null;
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdPersona == IdPersona && q.IdCatalogoPAREN == IdCatalogoPAREN).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
 
-        //            info_familia = new aca_Familia_Info
-        //            {
-        //                IdEmpresa = Entity.IdEmpresa,
-        //                IdAlumno = Entity.IdAlumno,
-        //                IdPersona = Entity.IdPersona,
-        //                IdCatalogoPAREN = Entity.IdCatalogoPAREN,
-        //                Direccion = Entity.Direccion,
-        //                Celular = Entity.Celular,
-        //                Correo = Entity.Correo,
-        //                SeFactura = Entity.SeFactura,
-        //                IdTipoDocumento = Entity.IdTipoDocumento,
-        //                pe_Naturaleza = Entity.pe_Naturaleza,
-        //                pe_cedulaRuc = Entity.pe_cedulaRuc,
-        //                pe_nombre = Entity.pe_nombre,
-        //                pe_apellido = Entity.pe_apellido,
-        //                pe_nombreCompleto = Entity.pe_nombreCompleto,
-        //                pe_sexo = Entity.pe_sexo,
-        //                IdEstadoCivil = Entity.IdEstadoCivil,
-        //                pe_fechaNacimiento = Entity.pe_fechaNacimiento,
-        //                CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
-        //                NumeroCarnetConadis = Entity.NumeroCarnetConadis,
-        //                PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
-        //                pe_telfono_Contacto = Entity.pe_telfono_Contacto
-        //            };
-        //        }
+                    info_familia = new aca_Familia_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAlumno = Entity.IdAlumno,
+                        Secuencia = Entity.Secuencia,
+                        IdPersona = Entity.IdPersona,
+                        IdCatalogoPAREN = Entity.IdCatalogoPAREN,
+                        Direccion = Entity.Direccion,
+                        Celular = Entity.Celular,
+                        Correo = Entity.Correo,
+                        SeFactura = Entity.SeFactura,
+                        IdTipoDocumento = Entity.IdTipoDocumento,
+                        pe_Naturaleza = Entity.pe_Naturaleza,
+                        pe_cedulaRuc = Entity.pe_cedulaRuc,
+                        pe_nombre = Entity.pe_nombre,
+                        pe_apellido = Entity.pe_apellido,
+                        pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        pe_sexo = Entity.pe_sexo,
+                        IdEstadoCivil = Entity.IdEstadoCivil,
+                        pe_fechaNacimiento = Entity.pe_fechaNacimiento,
+                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
+                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
+                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
+                        pe_telfono_Contacto = Entity.pe_telfono_Contacto
+                    };
+                }
 
-        //        return info_familia;
-        //    }
-        //    catch (Exception)
-        //    {
+                return info_familia;
+            }
+            catch (Exception)
+            {
 
-        //        throw;
-        //    }
-        //}
+                throw;
+            }
+        }
 
         public aca_Familia_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
         {
@@ -235,6 +237,7 @@ namespace Core.Data.Academico
                     info.PorcentajeDiscapacidad = Entity_per.PorcentajeDiscapacidad;
                     info.pe_fechaNacimiento = Entity_per.pe_fechaNacimiento;
                     info.IdEstadoCivil = Entity_per.IdEstadoCivil;
+                    info.Secuencia = 0;
                     Context_general.Dispose();
                     Context_academico.Dispose();
                     return info;
@@ -244,6 +247,7 @@ namespace Core.Data.Academico
                 {
                     IdEmpresa = Entity_fam.IdEmpresa,
                     IdAlumno = Entity_fam.IdAlumno,
+                    Secuencia = Entity_fam.Secuencia,
                     IdCatalogoPAREN = Entity_fam.IdCatalogoPAREN,
                     Direccion = Entity_fam.Direccion,
                     Correo = Entity_fam.Correo,
@@ -303,6 +307,37 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
+                    //var info_familia = Context.aca_Familia.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.IdCatalogoPAREN == info.IdCatalogoPAREN).FirstOrDefault();
+                    //if (info_familia != null)
+                    //{
+                    //    Context.aca_Familia.Remove(info_familia);
+                    //}
+
+                    var lst_familia = Context.aca_Familia.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).ToList();
+                    if (info.SeFactura == true)
+                    {                       
+                        if (lst_familia.Count>0)
+                        {
+                            foreach (var item in lst_familia)
+                            {
+                                item.SeFactura = false;
+                            }
+                            Context.SaveChanges();
+                        }      
+                    }
+
+                    if (info.EsRepresentante == true)
+                    {
+                        if (lst_familia.Count > 0)
+                        {
+                            foreach (var item in lst_familia)
+                            {
+                                item.EsRepresentante = false;
+                            }
+                            Context.SaveChanges();
+                        }
+                    }
+
                     aca_Familia Entity = new aca_Familia
                     {
                         IdEmpresa = info.IdEmpresa,
@@ -337,29 +372,46 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var info_familia = Context.aca_Familia.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.IdCatalogoPAREN == info.IdCatalogoPAREN).FirstOrDefault();
-                    if (info_familia!=null)
+                    var lst_familia = Context.aca_Familia.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).ToList();
+                    if (info.SeFactura == true)
                     {
-                        Context.aca_Familia.Remove(info_familia);
-                    }
-                    
+                        if (lst_familia.Count > 0)
+                        {
+                            foreach (var item in lst_familia)
+                            {
+                                aca_Familia Entity_Update = Context.aca_Familia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.Secuencia == item.Secuencia);
+                                Entity_Update.SeFactura = false;
+                            }
 
-                    aca_Familia Entity = new aca_Familia
+                        }
+                    }
+
+                    if (info.EsRepresentante == true)
                     {
-                        IdEmpresa = info.IdEmpresa,
-                        IdAlumno = info.IdAlumno,
-                        Secuencia = info.Secuencia = getSecuencia(info.IdEmpresa, info.IdAlumno),
-                        IdCatalogoPAREN = info.IdCatalogoPAREN,
-                        IdPersona = info.IdPersona,
-                        Direccion = info.Direccion,
-                        Celular = info.Celular,
-                        Correo = info.Correo,
-                        SeFactura = info.SeFactura,
-                        EsRepresentante = info.EsRepresentante,
-                        IdUsuarioCreacion = info.IdUsuarioCreacion,
-                        FechaCreacion = info.FechaCreacion = DateTime.Now
-                    };
-                    Context.aca_Familia.Add(Entity);
+                        if (lst_familia.Count > 0)
+                        {
+                            foreach (var item in lst_familia)
+                            {
+                                aca_Familia Entity_Update = Context.aca_Familia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.Secuencia == item.Secuencia);
+                                Entity_Update.EsRepresentante = false;
+                            }
+                        }
+                    }
+
+                    aca_Familia Entity = Context.aca_Familia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.Secuencia == info.Secuencia);
+
+                    if (Entity == null)
+                    return false;
+
+                    Entity.IdCatalogoPAREN = info.IdCatalogoPAREN;
+                    Entity.IdPersona = info.IdPersona;
+                    Entity.Direccion = info.Direccion;
+                    Entity.Celular = info.Celular;
+                    Entity.Correo = info.Correo;
+                    Entity.SeFactura = info.SeFactura;
+                    Entity.EsRepresentante = info.EsRepresentante;
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 
                     Context.SaveChanges();
                 }
@@ -370,14 +422,21 @@ namespace Core.Data.Academico
                 throw;
             }
         }
-        public bool eliminarDB(aca_Familia_Info info)
+        public bool anularDB(aca_Familia_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var info_familia = Context.aca_Familia.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.IdCatalogoPAREN == info.IdCatalogoPAREN).FirstOrDefault();
-                    Context.aca_Familia.Remove(info_familia);
+                    aca_Familia Entity = Context.aca_Familia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.Secuencia == info.Secuencia);
+
+                    if (Entity == null)
+                        return false;
+
+                    Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
+                    Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;
+                    //Entity.Estado = false;
+                    Entity.MotivoAnulacion = info.MotivoAnulacion;
 
                     Context.SaveChanges();
                 }

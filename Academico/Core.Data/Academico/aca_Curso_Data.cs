@@ -185,7 +185,7 @@ namespace Core.Data.Academico
                     aca_Curso Entity = Context.aca_Curso.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdCurso == info.IdCurso);
                     if (Entity == null)
                         return false;
-                    Entity.IdEmpresa = info.IdEmpresa;
+
                     Entity.IdCursoAPromover = info.IdCursoAPromover;
                     Entity.NomCurso = info.NomCurso;
                     Entity.OrdenCurso = info.OrdenCurso;

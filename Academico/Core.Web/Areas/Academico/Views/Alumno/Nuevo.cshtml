@@ -796,31 +796,32 @@
                     return;
                 }
                 //console.log(data);
-                if (data.IdPersona != 0) {
-                    $("#IdPersona_padre").val(data.IdPersona);
-                    $("#pe_Naturaleza_padre").val(data.pe_Naturaleza);
-                    $("#IdTipoDocumento_padre").val(data.IdTipoDocumento);
-                    $("#pe_nombre_padre").val(data.pe_nombre);
-                    $("#pe_apellido_padre").val(data.pe_apellido);
-                    //var date = new Date(moment(data.pe_fechaNacimiento, "DD/MM/YYYY"));
-
-                    console.log(data.pe_fechaNacimiento);
-                    pe_fechaNacimiento_padre.SetDate(new Date(data.anio, data.mes, data.dia));
-                    //var date = new Date(moment(pe_fechaNacimiento, "DD/MM/YYYY"));
-                    //pe_fechaNacimiento_padre.SetValue(date);
-                    $("#Correo_padre").val(data.Correo);
-                    $("#Celular_padre").val(data.Celular);
-                    $("#Direccion_padre").val(data.Direccion);
-                    $("#pe_telfono_Contacto_padre").val(data.pe_telfono_Contacto);
-                    $("#CodCatalogoSangre_padre").val(data.CodCatalogoSangre);
-                    $("#CodCatalogoCONADIS_padre").val(data.CodCatalogoCONADIS);
-                    $("#NumeroCarnetConadis_padre").val(data.NumeroCarnetConadis);
-                    $("#PorcentajeDiscapacidad_padre").val(data.PorcentajeDiscapacidad);
-                    $("#IdEstadoCivil_padre").val(data.IdEstadoCivil);
-                    $("#pe_sexo_padre").val(data.pe_sexo);
+                if (data.Secuencia != 0) {
+                    alert("El familiar ya existe con la secuencia: " + data.Secuencia);
+                    window.location.href = '@Url.Action("Index", "Alumno", new { Area = "Academico" })'
                 }
                 else {
-                    vaciar_campos_padre();
+                    if (data.IdPersona != 0) {
+                        $("#IdPersona_padre").val(data.IdPersona);
+                        $("#pe_Naturaleza_padre").val(data.pe_Naturaleza);
+                        $("#IdTipoDocumento_padre").val(data.IdTipoDocumento);
+                        $("#pe_nombre_padre").val(data.pe_nombre);
+                        $("#pe_apellido_padre").val(data.pe_apellido);
+                        pe_fechaNacimiento_padre.SetDate(new Date(data.anio, data.mes, data.dia));
+                        $("#Correo_padre").val(data.Correo);
+                        $("#Celular_padre").val(data.Celular);
+                        $("#Direccion_padre").val(data.Direccion);
+                        $("#pe_telfono_Contacto_padre").val(data.pe_telfono_Contacto);
+                        $("#CodCatalogoSangre_padre").val(data.CodCatalogoSangre);
+                        $("#CodCatalogoCONADIS_padre").val(data.CodCatalogoCONADIS);
+                        $("#NumeroCarnetConadis_padre").val(data.NumeroCarnetConadis);
+                        $("#PorcentajeDiscapacidad_padre").val(data.PorcentajeDiscapacidad);
+                        $("#IdEstadoCivil_padre").val(data.IdEstadoCivil);
+                        $("#pe_sexo_padre").val(data.pe_sexo);
+                    }
+                    else {
+                        vaciar_campos_padre();
+                    }
                 }
             },
             error: function (error) {
@@ -871,26 +872,32 @@
                     return;
                 }
 
-                if (data.IdPersona != 0) {
-                    $("#IdPersona_madre").val(data.IdPersona);
-                    $("#pe_Naturaleza_madre").val(data.pe_Naturaleza);
-                    $("#IdTipoDocumento_madre").val(data.IdTipoDocumento);
-                    $("#pe_nombre_madre").val(data.pe_nombre);
-                    $("#pe_apellido_madre").val(data.pe_apellido);
-                    pe_fechaNacimiento_madre.SetDate(new Date(data.anio, data.mes, data.dia));
-                    $("#Correo_madre").val(data.Correo);
-                    $("#Celular_madre").val(data.Celular);
-                    $("#Direccion_madre").val(data.Direccion);
-                    $("#pe_telfono_Contacto_madre").val(data.pe_telfono_Contacto);
-                    $("#CodCatalogoSangre_madre").val(data.CodCatalogoSangre);
-                    $("#CodCatalogoCONADIS_madre").val(data.CodCatalogoCONADIS);
-                    $("#NumeroCarnetConadis_madre").val(data.NumeroCarnetConadis);
-                    $("#PorcentajeDiscapacidad_madre").val(data.PorcentajeDiscapacidad);
-                    $("#IdEstadoCivil_madre").val(data.IdEstadoCivil);
-                    $("#pe_sexo_madre").val(data.pe_sexo);
+                if (data.Secuencia != 0) {
+                    alert("El familiar ya existe con la secuencia: " + data.Secuencia);
+                    window.location.href = '@Url.Action("Index", "Alumno", new { Area = "Academico" })'
                 }
                 else {
-                    vaciar_campos_madre();
+                    if (data.IdPersona != 0) {
+                        $("#IdPersona_madre").val(data.IdPersona);
+                        $("#pe_Naturaleza_madre").val(data.pe_Naturaleza);
+                        $("#IdTipoDocumento_madre").val(data.IdTipoDocumento);
+                        $("#pe_nombre_madre").val(data.pe_nombre);
+                        $("#pe_apellido_madre").val(data.pe_apellido);
+                        pe_fechaNacimiento_madre.SetDate(new Date(data.anio, data.mes, data.dia));
+                        $("#Correo_madre").val(data.Correo);
+                        $("#Celular_madre").val(data.Celular);
+                        $("#Direccion_madre").val(data.Direccion);
+                        $("#pe_telfono_Contacto_madre").val(data.pe_telfono_Contacto);
+                        $("#CodCatalogoSangre_madre").val(data.CodCatalogoSangre);
+                        $("#CodCatalogoCONADIS_madre").val(data.CodCatalogoCONADIS);
+                        $("#NumeroCarnetConadis_madre").val(data.NumeroCarnetConadis);
+                        $("#PorcentajeDiscapacidad_madre").val(data.PorcentajeDiscapacidad);
+                        $("#IdEstadoCivil_madre").val(data.IdEstadoCivil);
+                        $("#pe_sexo_madre").val(data.pe_sexo);
+                    }
+                    else {
+                        vaciar_campos_madre();
+                    }
                 }
             },
             error: function (error) {

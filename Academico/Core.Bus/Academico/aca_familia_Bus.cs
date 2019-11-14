@@ -1,4 +1,6 @@
-﻿using Core.Data.Academico;
+﻿using Core.Bus.General;
+using Core.Data.Academico;
+using Core.Data.General;
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,8 @@ namespace Core.Bus.Academico
     public class aca_Familia_Bus
     {
         aca_Familia_Data odata = new aca_Familia_Data();
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        tb_persona_Data odata_per = new tb_persona_Data();
         public List<aca_Familia_Info> GetList(int IdEmpresa, int IdAlumno)
         {
             try
@@ -63,7 +67,33 @@ namespace Core.Bus.Academico
         {
             try
             {
-                return odata.guardarDB(info);
+                var grabar = false;
+
+                if (bus_persona.validar_existe_cedula(info.pe_cedulaRuc) == 0)
+                {
+                    info.info_persona = odata_per.armar_info(info.info_persona);
+                    if (odata_per.guardarDB(info.info_persona))
+                    {
+                        info.IdPersona = info.info_persona.IdPersona;
+                        grabar = true;
+                    }
+                }
+                else
+                {
+                    odata_per.modificarDB(info.info_persona);
+                    grabar = true;
+                }
+
+                if (grabar == true)
+                {
+                    if (odata.guardarDB(info))
+                    {
+                        return true;
+
+                    }
+                }
+
+                return false;
             }
             catch (Exception)
             {
@@ -75,7 +105,33 @@ namespace Core.Bus.Academico
         {
             try
             {
-                return odata.modificarDB(info);
+                var grabar = false;
+
+                if (bus_persona.validar_existe_cedula(info.pe_cedulaRuc) == 0)
+                {
+                    info.info_persona = odata_per.armar_info(info.info_persona);
+                    if (odata_per.guardarDB(info.info_persona))
+                    {
+                        info.IdPersona = info.info_persona.IdPersona;
+                        grabar = true;
+                    }
+                }
+                else
+                {
+                    odata_per.modificarDB(info.info_persona);
+                    grabar = true;
+                }
+
+                if (grabar == true)
+                {
+                    if (odata.modificarDB(info))
+                    {
+                        return true;
+
+                    }
+                }
+
+                return false;
             }
             catch (Exception)
             {
@@ -83,11 +139,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public bool eliminarDB(aca_Familia_Info info)
+        public bool anularDB(aca_Familia_Info info)
         {
             try
             {
-                return odata.eliminarDB(info);
+                return odata.anularDB(info);
             }
             catch (Exception)
             {

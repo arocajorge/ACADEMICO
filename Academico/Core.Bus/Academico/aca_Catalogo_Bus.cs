@@ -23,6 +23,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_Catalogo_Info> GetList_x_Tipo(int IdCatalogoTipo, bool MostrarAnulados)
+        {
+            try
+            {
+                return odata.getList_x_Tipo(IdCatalogoTipo, MostrarAnulados);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public aca_Catalogo_Info GetInfo(int IdCatalogo)
         {
             try

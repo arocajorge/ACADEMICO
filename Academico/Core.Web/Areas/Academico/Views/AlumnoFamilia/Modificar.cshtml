@@ -1,0 +1,419 @@
+﻿@model Core.Info.Academico.aca_Familia_Info
+@{
+    ViewBag.Title = "Modificar familiar de alumno";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
+@using (Html.BeginForm("Modificar", "AlumnoFamilia", FormMethod.Post, new { @role = "form", @class = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdPersona, new { @id = "IdPersona" })
+    @Html.HiddenFor(q => q.Secuencia, new { @id = "Secuencia" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-11">
+                <div class="form-group">
+                    <label for="IdCliente">Alumno*</label>
+                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="Nuevo">&nbsp;</label>
+                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","AlumnoFamilia",new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAlumno = Model.IdAlumno },null)">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4>Datos Generales</h4><hr />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="info_persona.pe_Naturaleza">Naturaleza*</label>
+                    @Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza" })
+                    @Html.ValidationMessageFor(q => q.pe_Naturaleza, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="info_persona.IdTipoDocumento">Tipo documento*</label>
+                    @Html.DropDownListFor(q => q.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento" })
+                    @Html.ValidationMessageFor(q => q.IdTipoDocumento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="info_persona.pe_cedulaRuc">Número documento*</label>
+                    @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc" })
+                    @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
+                    <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Parent">Parentezco*</label>
+                    @Html.DropDownListFor(q => q.IdCatalogoPAREN, new SelectList(ViewBag.lst_parentezco, "IdCatalogo", "NomCatalogo"), new { @class = "form-control", @id = "IdCatalogoPAREN" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogoPAREN, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="bo_EsBodega"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.SeFactura, settings =>
+                                {
+                                    settings.Name = "SeFactura";
+                                    settings.Text = "Se factura";
+                                }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.SeFactura, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="bo_EsBodega"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.EsRepresentante, settings =>
+                                {
+                                    settings.Name = "EsRepresentante";
+                                    settings.Text = "Es Representante";
+                                }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.EsRepresentante, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="info_persona.pe_apellido">Apellidos</label>
+                    @Html.TextBoxFor(q => q.pe_apellido, new { @class = "form-control", @id = "pe_apellido" })
+                    @Html.ValidationMessageFor(q => q.pe_apellido, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="info_persona.pe_nombre">Nombres</label>
+                    @Html.TextBoxFor(q => q.pe_nombre, new { @class = "form-control", @id = "pe_nombre" })
+                    @Html.ValidationMessageFor(q => q.pe_nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha de nacimiento</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.pe_fechaNacimiento, settings =>
+                {
+                    settings.Name = "pe_fechaNacimiento";
+                    settings.Properties.UseMaskBehavior = true;
+                    settings.Properties.EditFormat = EditFormat.Date;
+                    settings.Properties.EditFormatString = "dd/MM/yyyy";
+                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                    settings.Properties.AllowMouseWheel = false;
+                }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.pe_fechaNacimiento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="pe_sexo">Sexo</label>
+                    @Html.DropDownListFor(q => q.pe_sexo, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_sexo" })
+                    @Html.ValidationMessageFor(q => q.pe_sexo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEstadoCivil">Estado civil</label>
+                    @Html.DropDownListFor(q => q.IdEstadoCivil, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdEstadoCivil" })
+                    @Html.ValidationMessageFor(q => q.IdEstadoCivil, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Telefonos">Teléfono</label>
+                    @Html.TextBoxFor(q => q.pe_telfono_Contacto, new { @class = "form-control", @id = "pe_telfono_Contacto" })
+                    @Html.ValidationMessageFor(q => q.pe_telfono_Contacto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="pe_celular">Celular</label>
+                    @Html.TextBoxFor(q => q.Celular, new { @class = "form-control", @id = "Celular" })
+                    @Html.ValidationMessageFor(q => q.Celular, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Correo">Correo</label>
+                    @Html.TextBoxFor(q => q.Correo, new { @class = "form-control", @id = "Correo" })
+                    @Html.ValidationMessageFor(q => q.Correo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Direccion">Dirección</label>
+                    @Html.TextAreaFor(q => q.Direccion, new { @class = "form-control", @rows = "2", @id = "Direccion" })
+                    @Html.ValidationMessageFor(q => q.Direccion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4>Datos Conadis</h4><hr />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="pe_sexo">Tipo de discapacidad</label>
+                    @Html.DropDownListFor(q => q.CodCatalogoCONADIS, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogoCONADIS" })
+                    @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Telefonos">Porcentaje de discapacidad</label>
+                    @Html.TextBoxFor(q => q.PorcentajeDiscapacidad, new { @class = "form-control", @id = "PorcentajeDiscapacidad" })
+                    @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Telefonos">Numero de carnet</label>
+                    @Html.TextBoxFor(q => q.NumeroCarnetConadis, new { @class = "form-control", @id = "NumeroCarnetConadis" })
+                    @Html.ValidationMessageFor(q => q.NumeroCarnetConadis, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","AlumnoFamilia", new { Area = "Academico" , IdEmpresa = ViewBag.IdEmpresa, IdAlumno = ViewBag.IdAlumno })">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script>
+    $(function () {
+        $("#error_documento").hide();
+    })
+
+    $("#pe_cedulaRuc").blur(function () {
+        Validar_cedula_ruc();
+    });
+
+    $("#pe_cedulaRuc").blur(function () {
+        get_info_x_num_cedula();
+    });
+
+    //$("#pe_apellido").blur(function () {
+    //    actualizar_nombre_completo();
+    //});
+    //$("#pe_nombre").blur(function () {
+    //    actualizar_nombre_completo();
+    //});
+
+    $("#pe_cedulaRuc").blur(function () {
+        var tipo_doc = $("#IdTipoDocumento").val();
+        var cedula = $("#pe_cedulaRuc").val();
+
+        if (tipo_doc == "RUC") {
+            if (cedula.length > 13) {
+                var len = $("#pe_cedulaRuc").val();
+                len = len.substring(0, 13);
+                $("#pe_cedulaRuc").val(len);
+            }
+
+        }
+        else
+            if (tipo_doc == "CED") {
+                if (cedula.length > 10) {
+                    var len = $("#pe_cedulaRuc").val();
+                    len = len.substring(0, 10);
+                    $("#pe_cedulaRuc").val(len);
+                }
+            }
+    });
+
+    //function actualizar_nombre_completo() {
+    //    var apellido = $("#pe_apellido").val();
+    //    var nombre = $("#pe_nombre").val();
+
+    //    var nombre_completo = apellido + ' ' + nombre;
+    //    $("#pe_nombreCompleto").val(nombre_completo)
+    //}
+
+    function get_info_x_num_cedula() {
+        var cedula = $("#pe_cedulaRuc").val();
+        var tipo_doc = $("#IdTipoDocumento").val();
+
+        if (cedula == null) {
+            vaciar_campos();
+            return;
+        }
+
+        if (tipo_doc == "RUC") {
+            if (cedula.length != 13) {
+                alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
+                $("#pe_cedulaRuc").val("");
+                vaciar_campos();
+                return;
+            }
+        } else
+            if (tipo_doc == "CED") {
+                if (cedula.length != 10) {
+                    alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
+                    $("#pe_cedulaRuc").val("");
+                    vaciar_campos();
+                    return;
+                }
+            }
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            pe_cedulaRuc: cedula
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("get_info_x_num_cedula", "AlumnoFamilia",new { Area = "Academico"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == "") {
+                    return;
+                }
+
+                if (data.Secuencia != 0) {
+                    alert("El familiar ya existe con la secuencia: " + data.Secuencia);
+                    window.open(location + "/Academico/AlumnoFamilia/Index?IdEmpresa=" +@Model.IdEmpresa +"&IdAlumno=" +@Model.IdAlumno +"&Exito=" + true, '_self');
+                    //window.location.href = '@Url.Action("Index", "Alumno", new { Area = "Academico" })'
+                }
+                else {
+                    if (data.IdPersona != 0) {
+                        $("#IdPersona").val(data.IdPersona);
+                        $("#pe_Naturaleza").val(data.pe_Naturaleza);
+                        $("#IdTipoDocumento").val(data.IdTipoDocumento);
+                        $("#pe_nombre").val(data.pe_nombre);
+                        $("#pe_apellido").val(data.pe_apellido);
+                        pe_fechaNacimiento.SetDate(new Date(data.anio, data.mes, data.dia));
+                        $("#Correo").val(data.Correo);
+                        $("#Celular").val(data.Celular);
+                        $("#Direccion").val(data.Direccion);
+                        $("#pe_telfono_Contacto").val(data.pe_telfono_Contacto);
+                        $("#CodCatalogoSangre").val(data.CodCatalogoSangre);
+                        $("#CodCatalogoCONADIS").val(data.CodCatalogoCONADIS);
+                        $("#NumeroCarnetConadis").val(data.NumeroCarnetConadis);
+                        $("#PorcentajeDiscapacidad").val(data.PorcentajeDiscapacidad);
+                        $("#IdEstadoCivil").val(data.IdEstadoCivil);
+                        $("#pe_sexo").val(data.pe_sexo);
+                    }
+                    else {
+                        vaciar_campos_madre();
+                    }
+                }
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    }
+
+    function vaciar_campos_madre() {
+        $("#IdPersona").val(0);
+        $("#pe_nombre").val("");
+        $("#pe_apellido").val("");
+        pe_fechaNacimiento.SetDate(null);
+        $("#Correo").val("");
+        $("#Celular").val("");
+        $("#Direccion").val("");
+        $("#pe_telfono_Contacto").val("");
+        $("#CodCatalogoSangre").val("");
+        $("#CodCatalogoCONADIS").val("");
+        $("#NumeroCarnetConadis").val("");
+        $("#PorcentajeDiscapacidad").val("");
+        $("#IdEstadoCivil").val("");
+        $("#pe_sexo").val("");
+    }
+
+    function Validar_cedula_ruc() {
+        var datos = {
+            naturaleza: $("#pe_Naturaleza").val(),
+            tipo_documento: $("#IdTipoDocumento").val(),
+            cedula_ruc: $("#pe_cedulaRuc").val(),
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Validar_cedula_ruc", "AlumnoFamilia", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.isValid == true) {
+                    $("#error_documento").hide();
+                    $("#pe_Naturaleza").val(data.return_naturaleza);
+                }
+                else {
+                    $("#error_documento").show();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+</script>

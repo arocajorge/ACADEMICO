@@ -37,11 +37,17 @@ namespace Core.Info.Academico
         #region Campos que no existen en la tabla
 
         #region Alumno
+        [Required(ErrorMessage = "El campo tipo de documento es obligatorio")]
         public string IdTipoDocumento { get; set; }
+        [Required(ErrorMessage = "El campo naturaleza es obligatorio")]
         public string pe_Naturaleza { get; set; }
+        [Required(ErrorMessage = "El campo nombre completo es obligatorio")]
         public string pe_nombreCompleto { get; set; }
+        [Required(ErrorMessage = "El campo apellido es obligatorio")]
         public string pe_apellido { get; set; }
+        [Required(ErrorMessage = "El campo nombre es obligatorio")]
         public string pe_nombre { get; set; }
+        [Required(ErrorMessage = "El campo numero de documento es obligatorio")]
         public string pe_cedulaRuc { get; set; }
         public string pe_telfono_Contacto { get; set; }
         public string pe_sexo { get; set; }
@@ -74,6 +80,7 @@ namespace Core.Info.Academico
         public string NumeroCarnetConadis_padre { get; set; }
         public bool SeFactura_padre { get; set; }
         public bool EsRepresentante_padre { get; set; }
+        public bool info_valido_padre { get; set; }
         #endregion
 
         #region Datos madre
@@ -98,6 +105,7 @@ namespace Core.Info.Academico
         public string NumeroCarnetConadis_madre { get; set; }
         public bool SeFactura_madre { get; set; }
         public bool EsRepresentante_madre { get; set; }
+        public bool info_valido_madre { get; set; }
         #endregion
 
         public tb_persona_Info info_persona_alumno { get; set; }

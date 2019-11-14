@@ -45,6 +45,7 @@
     <Compile Include="Academico\aca_AnioLectivo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Bus.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Jornada_Curso_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_NivelAcademico_Jornada_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Paralelo_Profesor_Bus.cs" />
@@ -58,11 +59,14 @@
     <Compile Include="Academico\aca_Jornada_Bus.cs" />
     <Compile Include="Academico\aca_MateriaGrupo_Bus.cs" />
     <Compile Include="Academico\aca_Materia_Bus.cs" />
+    <Compile Include="Academico\aca_Matricula_Bus.cs" />
     <Compile Include="Academico\aca_Menu_Bus.cs" />
     <Compile Include="Academico\aca_Menu_x_aca_Sede_Bus.cs" />
     <Compile Include="Academico\aca_Menu_x_seg_usuario_Bus.cs" />
     <Compile Include="Academico\aca_NivelAcademico_Bus.cs" />
     <Compile Include="Academico\aca_Paralelo_Bus.cs" />
+    <Compile Include="Academico\aca_Plantilla_Bus.cs" />
+    <Compile Include="Academico\aca_Plantilla_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_Profesor_Bus.cs" />
     <Compile Include="Academico\aca_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_Sede_Bus.cs" />

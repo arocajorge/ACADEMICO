@@ -44,6 +44,7 @@
     <Compile Include="Academico\aca_Alumno_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Info.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Jornada_Curso_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_NivelAcademico_Jornada_Info.cs" />
@@ -59,11 +60,14 @@
     <Compile Include="Academico\aca_Jornada_Info.cs" />
     <Compile Include="Academico\aca_MateriaGrupo_Info.cs" />
     <Compile Include="Academico\aca_Materia_Info.cs" />
+    <Compile Include="Academico\aca_Matricula_Info.cs" />
     <Compile Include="Academico\aca_Menu_Info.cs" />
     <Compile Include="Academico\aca_Menu_x_aca_Sede_Info.cs" />
     <Compile Include="Academico\aca_Menu_x_seg_usuario_Info.cs" />
     <Compile Include="Academico\aca_NivelAcademico_Info.cs" />
     <Compile Include="Academico\aca_Paralelo_Info.cs" />
+    <Compile Include="Academico\aca_Plantilla_Info.cs" />
+    <Compile Include="Academico\aca_Plantilla_Rubro_Info.cs" />
     <Compile Include="Academico\aca_Profesor_Info.cs" />
     <Compile Include="Academico\aca_Rubro_Info.cs" />
     <Compile Include="Academico\aca_Sede_Info.cs" />

@@ -64,5 +64,12 @@ namespace Core.Info.Helps
             PROVEE,
             ALUMNO
         }
+
+        public enum eTipoCatalogoAcademico
+        {
+            ESTMAT = 1,
+            ESTALU = 2,
+            PAREN = 3,
+        }
     }
 }
