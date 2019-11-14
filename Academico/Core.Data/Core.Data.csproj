@@ -142,6 +142,9 @@
     <Compile Include="Base\aca_Matricula.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\aca_Matricula_Rubro.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_Menu.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>

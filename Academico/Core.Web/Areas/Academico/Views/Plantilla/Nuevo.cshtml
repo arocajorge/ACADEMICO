@@ -115,7 +115,9 @@
         <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
     </div>
     @Html.Action("GridViewPartial_PlantillaRubro")
-
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index","Plantilla",new { Area = "Academico" },null)">Volver</a>
+    </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }

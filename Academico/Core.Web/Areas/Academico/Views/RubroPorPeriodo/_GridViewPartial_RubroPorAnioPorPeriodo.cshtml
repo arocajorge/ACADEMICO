@@ -63,9 +63,9 @@
                 //if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 //{
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdRubro = DataBinder.Eval(tc.DataItem, "IdRubro") }) + "&nbsp;"
-                        //Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdRubro = DataBinder.Eval(tc.DataItem, "IdRubro") },
-                        //new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                    Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdRubro = DataBinder.Eval(tc.DataItem, "IdRubro") }) + "&nbsp;"+
+                    Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdRubro = DataBinder.Eval(tc.DataItem, "IdRubro") },
+                    new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                 );
                 //}
             });

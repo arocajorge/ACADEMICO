@@ -12,11 +12,11 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_Plantilla_Rubro
+    public partial class aca_Matricula_Rubro
     {
         public int IdEmpresa { get; set; }
-        public int IdAnio { get; set; }
-        public int IdPlantilla { get; set; }
+        public decimal IdMatricula { get; set; }
+        public int IdPeriodo { get; set; }
         public int IdRubro { get; set; }
         public decimal IdProducto { get; set; }
         public decimal Subtotal { get; set; }
@@ -24,7 +24,12 @@ namespace Core.Data.Base
         public decimal Porcentaje { get; set; }
         public decimal ValorIVA { get; set; }
         public decimal Total { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
+        public Nullable<int> IdBodega { get; set; }
+        public Nullable<decimal> IdCbteVta { get; set; }
+        public Nullable<System.DateTime> FechaFacturacion { get; set; }
     
-        public virtual aca_Plantilla aca_Plantilla { get; set; }
+        public virtual aca_Matricula aca_Matricula { get; set; }
+        public virtual aca_Rubro aca_Rubro { get; set; }
     }
 }

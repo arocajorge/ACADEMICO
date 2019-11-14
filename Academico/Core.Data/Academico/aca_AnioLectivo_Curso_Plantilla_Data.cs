@@ -88,8 +88,7 @@ namespace Core.Data.Academico
                                 IdNivel = info.IdNivel,
                                 IdJornada = info.IdJornada,
                                 IdCurso = info.IdCurso,
-                                IdPlantilla = info.IdPlantilla,
-                                Observacion = info.Observacion
+                                IdPlantilla = info.IdPlantilla
                             };
                             Context.aca_AnioLectivo_Curso_Plantilla.Add(Entity);
                         }

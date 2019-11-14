@@ -49,15 +49,17 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if(data.mensaje==""){
-                    $("#myform").submit();
-                }
-                else
-                {
+                if (data.msg == "") {
+                    //$("#myform").submit();
                     alert("Registro guardado exitosamente");
+                    @*window.open(location + "/Academico/RubroPorPeriodo/Modificar?IdEmpresa=" +@Model.IdEmpresa +"&IdAnio=" +@Model.IdAnio +"&IdRubro=" +@Model.IdRubro +"&Exito=" + true, '_self');*@
+                    window.location.href = '@Url.Action("Modificar", "RubroPorPeriodo", new { IdEmpresa = @Model.IdEmpresa, IdAnio = @Model.IdAnio, IdRubro = @Model.IdRubro, Exito=true })';
+                }
+                else {
+                    alert(data.msg);
                 }
                 $("#btn_guardar").attr("disabled", false);
-                
+
             },
             error: function (error) {
             }
@@ -162,6 +164,10 @@
         <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
     </div>
     @Html.Action("GridViewPartial_RubroPorPeriodo")
+
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index","RubroPorPeriodo",new { Area = "Academico" },null)">Volver</a>
+    </div>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

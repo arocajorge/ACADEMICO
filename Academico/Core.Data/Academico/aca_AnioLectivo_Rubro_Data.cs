@@ -114,9 +114,7 @@ namespace Core.Data.Academico
                                 IdEmpresa = info.IdEmpresa,
                                 IdAnio = info.IdAnio,
                                 IdRubro = info.IdRubro,
-                                IdPeriodo = item.IdPeriodo,
-                                FechaFacturacion = null,
-                                FechaPago = null
+                                IdPeriodo = item.IdPeriodo
                             };
                             Context.aca_AnioLectivo_Rubro_Periodo.Add(Entity_Det);
                         }
@@ -162,9 +160,7 @@ namespace Core.Data.Academico
                                 IdEmpresa = info.IdEmpresa,
                                 IdAnio = info.IdAnio,
                                 IdRubro = info.IdRubro,
-                                IdPeriodo = item.IdPeriodo,
-                                FechaFacturacion = null,
-                                FechaPago = null
+                                IdPeriodo = item.IdPeriodo
                             };
                             Context.aca_AnioLectivo_Rubro_Periodo.Add(Entity_Det);
                         }

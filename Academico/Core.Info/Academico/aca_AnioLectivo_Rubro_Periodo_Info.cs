@@ -12,8 +12,7 @@ namespace Core.Info.Academico
         public int IdAnio { get; set; }
         public int IdRubro { get; set; }
         public int IdPeriodo { get; set; }
-        public Nullable<System.DateTime> FechaFacturacion { get; set; }
-        public Nullable<System.DateTime> FechaPago { get; set; }
+        public string Observacion { get; set; }
 
         #region Campos que no existen en la tabla
         public string IdString { get; set; }

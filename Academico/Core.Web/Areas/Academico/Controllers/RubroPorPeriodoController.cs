@@ -182,9 +182,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             IdEmpresa = IdEmpresa,
                             IdAnio = IdAnio,
                             IdRubro = IdRubro,
-                            IdPeriodo = Convert.ToInt32(item),
-                            FechaFacturacion = null,
-                            FechaPago = null
+                            IdPeriodo = Convert.ToInt32(item)
                         };
                         info_rubro_anio.lst_rubro_anio_periodo.Add(info_det);
                     }
@@ -201,10 +199,10 @@ namespace Core.Web.Areas.Academico.Controllers
             }
             
 
-            return Json(mensaje, JsonRequestBehavior.AllowGet);
+            return Json(new { msg = mensaje}, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult modificar_json(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, int IdProducto = 0, decimal Subtotal = 0, string IdCod_Impuesto_Iva = "", decimal Porcentaje = 0, decimal ValorIVA = 0, decimal Total = 0, string Ids = "", decimal IdTransaccionSession = 0)
+        public JsonResult actualizar(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, int IdProducto = 0, decimal Subtotal = 0, string IdCod_Impuesto_Iva = "", decimal Porcentaje = 0, decimal ValorIVA = 0, decimal Total = 0, string Ids = "", decimal IdTransaccionSession = 0)
         {
             var mensaje = ""; ;
             aca_AnioLectivo_Rubro_Info info_rubro_anio = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, IdRubro);
@@ -226,9 +224,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         IdEmpresa = IdEmpresa,
                         IdAnio = IdAnio,
                         IdRubro = IdRubro,
-                        IdPeriodo = Convert.ToInt32(item),
-                        FechaFacturacion = null,
-                        FechaPago = null
+                        IdPeriodo = Convert.ToInt32(item)
                     };
                     info_rubro_anio.lst_rubro_anio_periodo.Add(info_det);
                 }
@@ -289,7 +285,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return View(model);
         }
 
-        public ActionResult Modificar(int IdEmpresa=0, int IdAnio=0, int IdRubro=0)
+        public ActionResult Modificar(int IdEmpresa=0, int IdAnio=0, int IdRubro=0, bool Exito=false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -303,10 +299,23 @@ namespace Core.Web.Areas.Academico.Controllers
             model.lst_rubro_anio_periodo = bus_rubro_anio_periodo.GetListAsignacion(model.IdEmpresa, model.IdAnio, model.IdRubro);
             ListaRubroAnioPeriodo.set_list(model.lst_rubro_anio_periodo, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
             cargar_combos();
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Modificar(aca_AnioLectivo_Rubro_Info model)
+        {
+            model.lst_rubro_anio_periodo = new List<aca_AnioLectivo_Rubro_Periodo_Info>();
+            model.lst_rubro_anio_periodo = bus_rubro_anio_periodo.GetListAsignacion(model.IdEmpresa, model.IdAnio, model.IdRubro);
+            ListaRubroAnioPeriodo.set_list(model.lst_rubro_anio_periodo, Convert.ToDecimal(model.IdTransaccionSession));
+
+            cargar_combos();
+            return View(model);
+        }
         #endregion
     }
 

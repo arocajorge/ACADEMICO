@@ -16,6 +16,7 @@ namespace Core.Info.Academico
         public decimal Subtotal { get; set; }
         public string IdCod_Impuesto_Iva { get; set; }
         public decimal Porcentaje { get; set; }
+        public decimal ValorIVA { get; set; }
         public decimal Total { get; set; }
 
         #region Campos que no existen en la base

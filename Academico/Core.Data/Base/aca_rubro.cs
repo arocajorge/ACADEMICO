@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public aca_Rubro()
         {
             this.aca_AnioLectivo_Rubro = new HashSet<aca_AnioLectivo_Rubro>();
+            this.aca_Matricula_Rubro = new HashSet<aca_Matricula_Rubro>();
         }
     
         public int IdEmpresa { get; set; }
@@ -34,5 +35,7 @@ namespace Core.Data.Base
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivo_Rubro> aca_AnioLectivo_Rubro { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Matricula_Rubro> aca_Matricula_Rubro { get; set; }
     }
 }

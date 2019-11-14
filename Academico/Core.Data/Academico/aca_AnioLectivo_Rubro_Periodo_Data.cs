@@ -23,9 +23,7 @@ namespace Core.Data.Academico
                         IdEmpresa = q.IdEmpresa,
                         IdAnio = q.IdAnio,
                         IdRubro = q.IdRubro,
-                        IdPeriodo = q.IdPeriodo,
-                        FechaFacturacion = q.FechaFacturacion,
-                        FechaPago = q.FechaPago
+                        IdPeriodo = q.IdPeriodo
                     }).ToList();
                 }
                 Lista.ForEach(v => { v.IdString = v.IdEmpresa.ToString("000") + v.IdAnio.ToString("0000") + v.IdRubro.ToString("0000") + v.IdPeriodo.ToString("0000"); });
