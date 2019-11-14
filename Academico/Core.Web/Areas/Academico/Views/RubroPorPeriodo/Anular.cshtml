@@ -23,47 +23,8 @@
         //Capture all selected keys
         selectedIDs = values.join(',');
     }
-
-    function actualizar() {
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdAnio: IdAnio.GetValue(),
-            IdRubro: IdRubro.GetValue(),
-            IdProducto: IdProducto.GetValue(),
-            Subtotal: $("#Subtotal").val(),
-            IdCod_Impuesto_Iva: $("#IdCod_Impuesto_Iva").val(),
-            Porcentaje: $("#Porcentaje").val(),
-            ValorIVA: $("#ValorIVA").val(),
-            Total: $("#Total").val(),
-            IDs: selectedIDs,
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $("#btn_guardar").attr("disabled", true);
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("actualizar", "RubroPorPeriodo", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data.msg == "") {
-                    //$("#myform").submit();
-                    var url = '@Url.Action("Modificar", "RubroPorPeriodo")' + '?IdEmpresa=' + data.IdEmpresa + '&IdAnio=' + data.IdAnio + '&IdRubro=' + data.IdRubro + '&Exito=true';
-                    window.location.href = url;
-                }
-                else {
-                    alert(data.msg);
-                }
-            },
-            error: function (error) {
-            }
-        });
-    }
 </script>
-@using (Html.BeginForm("Modificar", "RubroPorPeriodo", FormMethod.Post, new { @class = "form", @role = "form", @id = "myform" }))
+@using (Html.BeginForm("Anular", "RubroPorPeriodo", FormMethod.Post, new { @class = "form", @role = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
@@ -178,7 +139,7 @@
         </div>
     </div>
     <div class="box-footer">
-        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="actualizar();">Guardar</button>
+        <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","RubroPorPeriodo",new { Area = "Academico" },null)">Cancelar</a>
     </div>
     @Html.Action("GridViewPartial_RubroPorPeriodo")

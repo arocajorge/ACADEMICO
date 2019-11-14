@@ -1,4 +1,5 @@
 ﻿using Core.Info.Academico;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,15 @@ namespace Core.Data.Academico
     {
         aca_AnioLectivo_Rubro_Data odata = new aca_AnioLectivo_Rubro_Data();
 
+        public List<aca_AnioLectivo_Rubro_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, int IdAnio)
+        {
+            return odata.get_list_bajo_demanda(args, IdEmpresa, IdAnio);
+        }
+
+        public aca_AnioLectivo_Rubro_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, int IdAnio)
+        {
+            return odata.get_info_bajo_demanda(args, IdEmpresa, IdAnio);
+        }
         public List<aca_AnioLectivo_Rubro_Info> GetList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
         {
             try
@@ -55,6 +65,19 @@ namespace Core.Data.Academico
             try
             {
                 return odata.modificarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool AnularDB(aca_AnioLectivo_Rubro_Info info)
+        {
+            try
+            {
+                return odata.anularDB(info);
             }
             catch (Exception)
             {

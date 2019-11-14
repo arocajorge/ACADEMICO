@@ -1,5 +1,6 @@
 ﻿using Core.Data.Base;
 using Core.Info.Academico;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,73 @@ namespace Core.Data.Academico
 {
     public class aca_AnioLectivo_Rubro_Data
     {
+        public List<aca_AnioLectivo_Rubro_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, int IdAnio)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<aca_AnioLectivo_Rubro_Info> Lista = new List<aca_AnioLectivo_Rubro_Info>();
+            Lista = get_list(IdEmpresa, IdAnio, skip, take, args.Filter);
+            return Lista;
+        }
+
+        public aca_AnioLectivo_Rubro_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa, int IdAnio)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info_demanda(IdEmpresa, IdAnio, Convert.ToDecimal(args.Value));
+        }
+
+        public aca_AnioLectivo_Rubro_Info get_info_demanda(int IdEmpresa, int IdAnio, decimal IdRubro)
+        {
+            aca_AnioLectivo_Rubro_Info info = new aca_AnioLectivo_Rubro_Info();
+
+            using (EntitiesAcademico Contex = new EntitiesAcademico())
+            {
+                info = (from q in Contex.aca_AnioLectivo_Rubro
+                        where q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdRubro == IdRubro
+                        select new aca_AnioLectivo_Rubro_Info
+                        {
+                            IdRubro = q.IdRubro,
+                            NomRubro = q.NomRubro,
+                        }).FirstOrDefault();
+
+            }
+
+            return info;
+        }
+
+        public List<aca_AnioLectivo_Rubro_Info> get_list(int IdEmpresa, int IdAnio, int skip, int take, string filter)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Rubro_Info> Lista = new List<aca_AnioLectivo_Rubro_Info>();
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var lst = (from a in Context.aca_AnioLectivo_Rubro where
+                                a.IdEmpresa == IdEmpresa
+                                && a.IdAnio == IdAnio
+                                && (a.IdRubro.ToString() + " " + a.NomRubro).Contains(filter)
+                               select new
+                               {
+                                   a.IdRubro,
+                                   a.NomRubro
+                               })
+                             .OrderBy(a => a.IdRubro)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<aca_AnioLectivo_Rubro_Info> getList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
         {
             try
@@ -165,6 +233,32 @@ namespace Core.Data.Academico
                             Context.aca_AnioLectivo_Rubro_Periodo.Add(Entity_Det);
                         }
                     }
+
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public bool anularDB(aca_AnioLectivo_Rubro_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var Entity = Context.aca_AnioLectivo_Rubro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdRubro == info.IdRubro).FirstOrDefault();
+                    if (Entity == null)
+                        return false;
+
+                    Context.aca_AnioLectivo_Rubro.Remove(Entity);
+
+                    var lst_RubroPeriodo = Context.aca_AnioLectivo_Rubro_Periodo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdRubro == info.IdRubro).ToList();
+                    Context.aca_AnioLectivo_Rubro_Periodo.RemoveRange(lst_RubroPeriodo);
 
                     Context.SaveChanges();
                 }

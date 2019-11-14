@@ -1,0 +1,27 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdRubro";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "Plantilla", Action = "CmbRubro_Plantilla", Area = "Academico" };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "NomRubro";
+        settings.Properties.TextFormatString = "[{0}] {1}";
+        settings.Properties.ValueField = "IdRubro";
+        settings.Properties.ValueType = typeof(decimal);
+        settings.Properties.AllowMouseWheel = false;
+
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+        settings.Properties.AllowNull = true;
+
+        settings.Properties.Columns.Add("IdRubro", "ID", 10);
+        settings.Properties.Columns.Add("NomRubro", "Rubro", 90);
+    })
+    .BindList(new Core.Web.Areas.Academico.Controllers.PlantillaController().get_list_bajo_demandaRubro,
+    new Core.Web.Areas.Academico.Controllers.PlantillaController().get_info_bajo_demandaRubro).Bind((Model.GetType() == typeof(Core.Info.Academico.aca_Plantilla_Rubro_Info) || Model.GetType() == typeof(List<Core.Info.Academico.aca_Plantilla_Rubro_Info>)) ? "" : (Model == 0 ? "" : Model));
+}
+@comboBox.GetHtml()

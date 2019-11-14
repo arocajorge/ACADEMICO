@@ -7527,6 +7527,9 @@
     <Content Include="Areas\Academico\Views\PlantillaPorCurso\_ComboBoxPartial_Materia.cshtml" />
     <Content Include="Areas\Academico\Views\PlantillaPorCurso\_ComboBoxPartial_Nivel.cshtml" />
     <Content Include="Areas\Academico\Views\PlantillaPorCurso\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\RubroPorPeriodo\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\Plantilla\_CmbProducto_Plantilla.cshtml" />
+    <Content Include="Areas\Academico\Views\Plantilla\_CmbRubro_Plantilla.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

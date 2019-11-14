@@ -12,6 +12,7 @@ namespace Core.Web.Helps
         string NomEmpresa { get; set; }
         string IdSucursal { get; set; }
         string IdSede { get; set; }
+        string IdAnio { get; set; }
         string IdNivel { get; set; }
         string IdTransaccionSession { get; set; }
         string IdTransaccionSessionActual { get; set; }
@@ -60,6 +61,12 @@ namespace Core.Web.Helps
             set { _sessionValueProvider.IdSede = value; }
         }
 
+        public static string IdAnio
+        {
+            get { return _sessionValueProvider.IdAnio; }
+            set { _sessionValueProvider.IdAnio = value; }
+        }
+
         public static string IdNivel
         {
             get { return _sessionValueProvider.IdNivel; }
@@ -74,6 +81,7 @@ namespace Core.Web.Helps
         private const string _IdSucursal = "FxAca_IdSucursal";
         private const string _IdNivel = "FxAca_IdNivel";
         private const string _IdSede = "FxAca_IdSede";
+        private const string _IdAnio = "FxAca_IdAnio";
         private const string _IdTransaccionSession = "FxAca_IdTransaccionSesssion";
         private const string _IdTransaccionSessionActual = "FxAca_IdTransaccionSessionActual";
         public string IdEmpresa
@@ -115,6 +123,12 @@ namespace Core.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdNivel]; }
             set { HttpContext.Current.Session[_IdNivel] = value; }
+        }
+
+        public string IdAnio
+        {
+            get { return (string)HttpContext.Current.Session[_IdAnio]; }
+            set { HttpContext.Current.Session[_IdAnio] = value; }
         }
     }
 }

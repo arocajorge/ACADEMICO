@@ -149,62 +149,88 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(new { ValorIva = IVA_Valor, Total = ValorTotal }, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult guardar(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, int IdProducto = 0, decimal Subtotal=0, string IdCod_Impuesto_Iva="", decimal Porcentaje=0, decimal ValorIVA=0, decimal Total =0, string Ids = "", decimal IdTransaccionSession = 0)
+        public JsonResult buscar_registros(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, decimal IdTransaccionSession = 0)
         {
-            var mensaje = ""; ;
-            var registro_existe = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, IdRubro);
+            var existe = 0;
+            var info_registro = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, IdRubro);
+            var Empresa = 0;
+            var Anio = 0;
+            var Rubro = 0;
 
-            if (registro_existe == null)
+            if (info_registro != null)
             {
-                var info_rubro = bus_rubro.GetInfo(IdEmpresa, IdRubro);
-                aca_AnioLectivo_Rubro_Info info_rubro_anio = new aca_AnioLectivo_Rubro_Info
-                {
-                    IdEmpresa = IdEmpresa,
-                    IdAnio = IdAnio,
-                    IdRubro = IdRubro,
-                    NomRubro = (info_rubro == null ? "" : info_rubro.NomRubro),
-                    IdProducto = IdProducto,
-                    Subtotal = Subtotal,
-                    IdCod_Impuesto_Iva = IdCod_Impuesto_Iva,
-                    Porcentaje = Porcentaje,
-                    ValorIVA = ValorIVA,
-                    Total = Total,
-                    lst_rubro_anio_periodo = new List<aca_AnioLectivo_Rubro_Periodo_Info>()
-                };
-
-                string[] array = Ids.Split(',');
-                if (Ids != "")
-                {
-                    foreach (var item in array)
-                    {
-                        aca_AnioLectivo_Rubro_Periodo_Info info_det = new aca_AnioLectivo_Rubro_Periodo_Info
-                        {
-                            IdEmpresa = IdEmpresa,
-                            IdAnio = IdAnio,
-                            IdRubro = IdRubro,
-                            IdPeriodo = Convert.ToInt32(item)
-                        };
-                        info_rubro_anio.lst_rubro_anio_periodo.Add(info_det);
-                    }
-                }
-
-                if (!bus_rubro_anio.GuardarDB(info_rubro_anio))
-                {
-                    mensaje = "No se ha podido guardar el registro";
-                }
+                existe = 1;
+                Empresa = info_registro.IdEmpresa;
+                Anio = info_registro.IdAnio;
+                Rubro = info_registro.IdRubro;
             }
             else
             {
-                mensaje = "Ya existe el rubro en el año lectivo seleccionado";
+                existe=0;
+                var lista_detalle = new List<aca_AnioLectivo_Rubro_Periodo_Info>();
+                lista_detalle = bus_rubro_anio_periodo.GetListAsignacion(IdEmpresa, IdAnio, IdRubro);
+                ListaRubroAnioPeriodo.set_list(lista_detalle, Convert.ToDecimal(IdTransaccionSession));
             }
             
+            return Json(new { existe_registro = existe, IdEmpresa=Empresa, IdAnio=Anio, IdRubro=Rubro}, JsonRequestBehavior.AllowGet);
+        }
 
-            return Json(new { msg = mensaje}, JsonRequestBehavior.AllowGet);
+        public JsonResult guardar(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, int IdProducto = 0, decimal Subtotal = 0, string IdCod_Impuesto_Iva = "", decimal Porcentaje = 0, decimal ValorIVA = 0, decimal Total = 0, string Ids = "", decimal IdTransaccionSession = 0)
+        {
+            var mensaje = "";
+            var Empresa = 0;
+            var Anio = 0;
+            var Rubro = 0;
+
+            var info_rubro = bus_rubro.GetInfo(IdEmpresa, IdRubro);
+            aca_AnioLectivo_Rubro_Info info_rubro_anio = new aca_AnioLectivo_Rubro_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdAnio = IdAnio,
+                IdRubro = IdRubro,
+                NomRubro = (info_rubro == null ? "" : info_rubro.NomRubro),
+                IdProducto = IdProducto,
+                Subtotal = Subtotal,
+                IdCod_Impuesto_Iva = IdCod_Impuesto_Iva,
+                Porcentaje = Porcentaje,
+                ValorIVA = ValorIVA,
+                Total = Total,
+                lst_rubro_anio_periodo = new List<aca_AnioLectivo_Rubro_Periodo_Info>()
+            };
+
+            string[] array = Ids.Split(',');
+            if (Ids != "")
+            {
+                foreach (var item in array)
+                {
+                    aca_AnioLectivo_Rubro_Periodo_Info info_det = new aca_AnioLectivo_Rubro_Periodo_Info
+                    {
+                        IdEmpresa = IdEmpresa,
+                        IdAnio = IdAnio,
+                        IdRubro = IdRubro,
+                        IdPeriodo = Convert.ToInt32(item)
+                    };
+                    info_rubro_anio.lst_rubro_anio_periodo.Add(info_det);
+                }
+            }
+
+            if (!bus_rubro_anio.GuardarDB(info_rubro_anio))
+            {
+                mensaje = "No se ha podido guardar el registro";
+            }
+            Empresa = info_rubro_anio.IdEmpresa;
+            Anio = info_rubro_anio.IdAnio;
+            Rubro = info_rubro_anio.IdRubro;
+
+            return Json(new { msg = mensaje, IdEmpresa = Empresa, IdAnio = Anio, IdRubro = Rubro }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult actualizar(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, int IdProducto = 0, decimal Subtotal = 0, string IdCod_Impuesto_Iva = "", decimal Porcentaje = 0, decimal ValorIVA = 0, decimal Total = 0, string Ids = "", decimal IdTransaccionSession = 0)
         {
-            var mensaje = ""; ;
+            var mensaje = "";
+            var Empresa = 0;
+            var Anio = 0;
+            var Rubro = 0;
             aca_AnioLectivo_Rubro_Info info_rubro_anio = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, IdRubro);
             info_rubro_anio.IdProducto = IdProducto;
             info_rubro_anio.Subtotal = Subtotal;
@@ -235,9 +261,12 @@ namespace Core.Web.Areas.Academico.Controllers
                 mensaje = "No se ha podido modificar el registro";
             }
 
-            return Json(mensaje, JsonRequestBehavior.AllowGet);
-        }
+            Empresa = info_rubro_anio.IdEmpresa;
+            Anio = info_rubro_anio.IdAnio;
+            Rubro = info_rubro_anio.IdRubro;
 
+            return Json(new { msg = mensaje, IdEmpresa = Empresa, IdAnio = Anio, IdRubro = Rubro }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Acciones
@@ -267,19 +296,7 @@ namespace Core.Web.Areas.Academico.Controllers
             };
 
             model.lst_rubro_anio_periodo = new List<aca_AnioLectivo_Rubro_Periodo_Info>();
-            model.lst_rubro_anio_periodo= bus_rubro_anio_periodo.GetListAsignacion(model.IdEmpresa, model.IdAnio, model.IdRubro);
-            ListaRubroAnioPeriodo.set_list(model.lst_rubro_anio_periodo, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-
-            cargar_combos();
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult Nuevo(aca_AnioLectivo_Rubro_Info model)
-        {
-            model.lst_rubro_anio_periodo = new List<aca_AnioLectivo_Rubro_Periodo_Info>();
-            model.lst_rubro_anio_periodo = bus_rubro_anio_periodo.GetListAsignacion(model.IdEmpresa, model.IdAnio, model.IdRubro);
-            ListaRubroAnioPeriodo.set_list(model.lst_rubro_anio_periodo, Convert.ToDecimal(model.IdTransaccionSession));
+            ListaRubroAnioPeriodo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             cargar_combos();
             return View(model);
@@ -306,15 +323,38 @@ namespace Core.Web.Areas.Academico.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult Modificar(aca_AnioLectivo_Rubro_Info model)
+        public ActionResult Anular(int IdEmpresa = 0, int IdAnio = 0, int IdRubro=0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_AnioLectivo_Rubro_Info model = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, IdRubro);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.lst_rubro_anio_periodo = new List<aca_AnioLectivo_Rubro_Periodo_Info>();
             model.lst_rubro_anio_periodo = bus_rubro_anio_periodo.GetListAsignacion(model.IdEmpresa, model.IdAnio, model.IdRubro);
-            ListaRubroAnioPeriodo.set_list(model.lst_rubro_anio_periodo, Convert.ToDecimal(model.IdTransaccionSession));
+            ListaRubroAnioPeriodo.set_list(model.lst_rubro_anio_periodo, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+
+            if (model == null)
+                return RedirectToAction("Index");
 
             cargar_combos();
             return View(model);
+        }
+        [HttpPost]
+        public ActionResult Anular(aca_AnioLectivo_Rubro_Info model)
+        {
+            if (!bus_rubro_anio.AnularDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido anular el registro";
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
         #endregion
     }

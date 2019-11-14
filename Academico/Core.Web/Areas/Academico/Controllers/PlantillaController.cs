@@ -1,7 +1,11 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.Inventario;
 using Core.Data.Academico;
 using Core.Info.Academico;
+using Core.Info.Helps;
+using Core.Info.Inventario;
 using Core.Web.Helps;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +25,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         aca_Plantilla_Bus bus_plantilla = new aca_Plantilla_Bus();
         aca_Plantilla_Rubro_Bus bus_plantilla_rubro = new aca_Plantilla_Rubro_Bus();
+        in_Producto_Bus bus_producto = new in_Producto_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -29,6 +34,37 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult ComboBoxPartial_Anio()
         {
             return PartialView("_ComboBoxPartial_Anio", new aca_Plantilla_Info());
+        }
+
+        public ActionResult CmbProducto_Plantilla()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbProducto_Plantilla", model);
+        }
+        public List<in_Producto_Info> get_list_bajo_demandaProducto(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORMODULO, cl_enumeradores.eModulo.ACA, Convert.ToInt32(SessionFixed.IdSucursal));
+        }
+        public in_Producto_Info get_info_bajo_demandaProducto(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+
+        public ActionResult CmbRubro_Plantilla()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbRubro_Plantilla", model);
+        }
+
+        public List<aca_AnioLectivo_Rubro_Info> get_list_bajo_demandaRubro(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            int IdAnio = Convert.ToInt32(SessionFixed.IdAnio);
+            return bus_rubro_anio.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), IdAnio);
+        }
+        public aca_AnioLectivo_Rubro_Info get_info_bajo_demandaRubro(ListEditItemRequestedByValueEventArgs args)
+        {
+            int IdAnio = Convert.ToInt32(SessionFixed.IdAnio);
+            return bus_rubro_anio.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), IdAnio);
         }
         #endregion
 
@@ -159,6 +195,12 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(mensaje, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult Set_Anio(int IdAnio = 0)
+        {
+            SessionFixed.IdAnio = IdAnio.ToString();
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Acciones
@@ -272,6 +314,15 @@ namespace Core.Web.Areas.Academico.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_PlantillaRubro()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = List_in_Ing_Egr_Inven_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_egr_inv_det", model);
+        }
     }
 
     public class aca_Plantilla_List
@@ -297,6 +348,7 @@ namespace Core.Web.Areas.Academico.Controllers
     public class aca_Plantilla_Rubro_List
     {
         string Variable = "aca_Plantilla_Rubro_Info";
+        aca_AnioLectivo_Rubro_Bus bus_rubro_anio = new aca_AnioLectivo_Rubro_Bus();
         public List<aca_Plantilla_Rubro_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
@@ -311,6 +363,32 @@ namespace Core.Web.Areas.Academico.Controllers
         public void set_list(List<aca_Plantilla_Rubro_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(aca_Plantilla_Rubro_Info info_det, decimal IdTransaccionSession)
+        {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            List<aca_Plantilla_Rubro_Info> list = get_list(IdTransaccionSession);
+            if ( list.Where(q=>q.IdRubro == info_det.IdRubro).ToList().Count == 0)
+            {
+                list.Add(info_det);
+            }   
+        }
+
+        public void UpdateRow(aca_Plantilla_Rubro_Info info_det, decimal IdTransaccionSession)
+        {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            aca_Plantilla_Rubro_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdRubro == info_det.IdRubro).FirstOrDefault();
+            edited_info.IdRubro = info_det.IdRubro;
+            var info_rubro_anio = bus_rubro_anio.GetInfo(info_det.IdEmpresa, info_det.IdAnio, info_det.IdRubro);
+        }
+
+        public void DeleteRow(int IdRubro, decimal IdTransaccionSession)
+        {
+            List<aca_Plantilla_Rubro_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(q => q.IdRubro == IdRubro).First());
         }
     }
 }
