@@ -1,7 +1,7 @@
 ﻿@Html.DevExpress().ComboBox(settings =>
 {
     settings.Name = "IdSede";
-    settings.CallbackRouteValues = new { Controller = "PlantillaPorCurso", Action = "ComboBoxPartial_Sede", Area = "Academico" };
+    settings.CallbackRouteValues = new { Controller = "Matricula", Action = "ComboBoxPartial_Sede", Area = "Academico" };
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.Properties.DisplayFormatString = "[{0}] - {1}";
     settings.Properties.Columns.Add("IdSede", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
@@ -13,5 +13,5 @@
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
     settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue(); }";
-    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdNivel.PerformCallback();}";
+    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdCurso.PerformCallback();}";
 }).BindList(new Core.Bus.Academico.aca_Sede_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa),Model.IdAnio)).Bind(Model.IdSede).GetHtml()

@@ -293,6 +293,7 @@
 
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
+            IdAlumno : IdAlumno.GetValue(),
             pe_cedulaRuc: cedula
         }
         $.ajax({
@@ -308,7 +309,8 @@
                 }
                 if (data.Secuencia != 0) {
                     alert("El familiar ya existe con la secuencia: " + data.Secuencia);
-                    window.open(location + "/Academico/AlumnoFamilia/Index?IdEmpresa=" +@Model.IdEmpresa +"&IdAlumno=" +@Model.IdAlumno +"&Exito=" + true, '_self');
+                    @*window.location.href = '@Url.Action("Index", "AlumnoFamilia", new { IdEmpresa = @Model.IdEmpresa,IdAlumno=@Model.IdAlumno }, Request.Url.Scheme)';*@
+                    window.open("/Academico/AlumnoFamilia/Index?IdEmpresa=" +@Model.IdEmpresa +"&IdAlumno=" +@Model.IdAlumno, 'self');
                 }
                 else {
                     if (data.IdPersona != 0) {

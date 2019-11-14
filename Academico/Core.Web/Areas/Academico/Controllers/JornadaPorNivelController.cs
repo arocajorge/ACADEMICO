@@ -36,7 +36,6 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSede = Convert.ToInt32(SessionFixed.IdSede),
                 IdAnio = (info == null ? 0 : info.IdAnio),
-                IdNivel = 0,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
 

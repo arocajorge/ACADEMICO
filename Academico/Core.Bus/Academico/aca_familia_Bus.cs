@@ -51,11 +51,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_Familia_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
+        public aca_Familia_Info get_info_x_num_cedula(int IdEmpresa, decimal IdAlumno, string pe_cedulaRuc)
         {
             try
             {
-                return odata.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
+                return odata.get_info_x_num_cedula(IdEmpresa, IdAlumno, pe_cedulaRuc);
             }
             catch (Exception)
             {

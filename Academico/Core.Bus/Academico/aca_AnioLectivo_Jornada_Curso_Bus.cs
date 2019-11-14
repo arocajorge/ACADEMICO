@@ -47,5 +47,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+        
+        public List<aca_AnioLectivo_Jornada_Curso_Info> getList_ComboCurso(int IdEmpresa, int IdSede, int IdAnio)
+        {
+            try
+            {
+                return odata.getList_ComboCurso(IdEmpresa, IdSede, IdAnio);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

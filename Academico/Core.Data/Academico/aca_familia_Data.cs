@@ -202,7 +202,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_Familia_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
+        public aca_Familia_Info get_info_x_num_cedula(int IdEmpresa, decimal IdAlumno, string pe_cedulaRuc)
         {
             try
             {
@@ -217,7 +217,7 @@ namespace Core.Data.Academico
                 }
 
                 EntitiesAcademico Context_academico = new EntitiesAcademico();
-                var Entity_fam = Context_academico.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdPersona == Entity_per.IdPersona).FirstOrDefault();
+                var Entity_fam = Context_academico.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno  && q.IdPersona == Entity_per.IdPersona).FirstOrDefault();
                 if (Entity_fam == null)
                 {
                     info.IdPersona = Entity_per.IdPersona;

@@ -137,5 +137,36 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public List<aca_AnioLectivo_Jornada_Curso_Info> getList_ComboCurso(int IdEmpresa, int IdSede, int IdAnio)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Jornada_Curso_Info> Lista = new List<aca_AnioLectivo_Jornada_Curso_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio==IdAnio).OrderBy(q => q.OrdenCurso).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AnioLectivo_Jornada_Curso_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            ComboCurso = q.ComboCurso
+                        });
+                    });
+                }
+
+                Lista.ForEach(v => { v.IdComboCurso = v.IdEmpresa.ToString("0000") + v.IdAnio.ToString("0000") + v.IdSede.ToString("0000") + v.IdNivel.ToString("0000")+ v.IdJornada.ToString("0000")+ v.IdCurso.ToString("0000"); });
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

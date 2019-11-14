@@ -124,36 +124,3 @@
     @Html.Action("GridViewPartial_MateriaPorProfesor")
     }
 
-<script type="text/javascript">
-    $(function () {
-    });
-
-    function GetListMateriaPorProfesor() {
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSede: IdSede.GetValue(),
-            IdAnio: IdAnio.GetValue(),
-            IdNivel: IdNivel.GetValue(),
-            IdJornada: IdJornada.GetValue(),
-            IdCurso: IdCurso.GetValue(),
-            IdParalelo: IdParalelo.GetValue(),
-            IdMateria: IdMateria.GetValue(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetListMateriaPorProfesor", "MateriaPorProfesor", new { Area = "Academico"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                GridViewPartial_MateriaPorProfesor.PerformCallback();
-            },
-            error: function (error) {
-            }
-        });
-    }
-</script>

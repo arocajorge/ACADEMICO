@@ -63,6 +63,7 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_Profesor> vwaca_Profesor { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Rubro> vwaca_AnioLectivo_Rubro { get; set; }
         public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
+        public virtual DbSet<vwaca_AnioLectivo_Jornada_Curso> vwaca_AnioLectivo_Jornada_Curso { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

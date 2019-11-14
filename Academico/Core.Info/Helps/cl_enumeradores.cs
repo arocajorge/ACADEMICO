@@ -71,5 +71,18 @@ namespace Core.Info.Helps
             ESTALU = 2,
             PAREN = 3,
         }
+
+        public enum eCatalogoAcademico
+        {
+            REGISTRADO = 1,
+            MATRICULADO = 2,
+            CURSANDO = 3,
+            REPROBADO_NOTAS = 4,
+            REPROBADO_DEUDA = 5,
+            REPROBADO_OTROS = 6,
+            SUPLENCIA = 7,
+            PROMOVIDO = 8,
+            NO_PROMOVIDO = 9
+        }
     }
 }

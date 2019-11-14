@@ -232,6 +232,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_direccion = model.Direccion
             };
 
+            model.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademico.CURSANDO);
+            model.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademico.REGISTRADO);
             model.info_persona_alumno = info_persona_alumno;
             model.info_persona_padre = armar_info_padre(model);
             model.info_persona_madre = armar_info_madre(model);
@@ -459,9 +461,9 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult get_info_x_num_cedula_familia(int IdEmpresa = 0, string pe_cedulaRuc = "")
+        public JsonResult get_info_x_num_cedula_familia(int IdEmpresa = 0, decimal IdAlumno = 0, string pe_cedulaRuc = "")
         {
-            var resultado = bus_familia.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
+            var resultado = bus_familia.get_info_x_num_cedula(IdEmpresa, IdAlumno, pe_cedulaRuc);
             resultado.anio = Convert.ToDateTime(resultado.pe_fechaNacimiento).Year.ToString();
             var mes = Convert.ToDateTime(resultado.pe_fechaNacimiento).Month;
             mes = mes - 1;

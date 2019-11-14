@@ -36,11 +36,7 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_AnioLectivo_Curso_Plantilla_Info model = new aca_AnioLectivo_Curso_Plantilla_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSede = Convert.ToInt32(SessionFixed.IdSede),
-                IdAnio = (info == null ? 0 : info.IdAnio),
-                IdNivel = 0,
-                IdJornada = 0,
-                IdCurso = 0,
+                IdAnio = (info==null ? 0 : info.IdAnio),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
 
@@ -70,12 +66,12 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Combos
         public ActionResult ComboBoxPartial_Anio()
         {
-            return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
+            return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_Info());
         }
         public ActionResult ComboBoxPartial_Sede()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
-            return PartialView("_ComboBoxPartial_Sede", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio });
+            return PartialView("_ComboBoxPartial_Sede", new aca_AnioLectivo_Sede_NivelAcademico_Info { IdAnio = IdAnio });
         }
         public ActionResult ComboBoxPartial_Nivel()
         {
@@ -97,7 +93,7 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
             int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
             int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
-            return PartialView("_ComboBoxPartial_Curso", new aca_AnioLectivo_Curso_Plantilla_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada });
+            return PartialView("_ComboBoxPartial_Curso", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada });
         }
         #endregion
 

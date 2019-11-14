@@ -98,7 +98,7 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
-        #region Metodos ComboBox bajo demanda cliente
+        #region Metodos ComboBox bajo demanda alumno
         public ActionResult Cmb_FamiliaAlumno()
         {
             decimal model = new decimal();
@@ -123,9 +123,9 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(new { isValid = isValid, return_naturaleza = return_naturaleza }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult get_info_x_num_cedula(int IdEmpresa = 0, string pe_cedulaRuc = "")
+        public JsonResult get_info_x_num_cedula(int IdEmpresa = 0, decimal IdAlumno=0, string pe_cedulaRuc = "")
         {
-            var resultado = bus_familia.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
+            var resultado = bus_familia.get_info_x_num_cedula(IdEmpresa, IdAlumno, pe_cedulaRuc);
             resultado.anio = Convert.ToDateTime(resultado.pe_fechaNacimiento).Year.ToString();
             var mes = Convert.ToDateTime(resultado.pe_fechaNacimiento).Month;
             mes = mes - 1;

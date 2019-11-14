@@ -210,8 +210,8 @@ namespace Core.Data.Academico
                         Correo = info.Correo,
                         Direccion = info.Direccion,
                         Celular = info.Celular,
-                        IdCatalogoESTALU = 4,
-                        IdCatalogoESTMAT = 3,
+                        IdCatalogoESTALU = info.IdCatalogoESTALU,
+                        IdCatalogoESTMAT = info.IdCatalogoESTMAT,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };

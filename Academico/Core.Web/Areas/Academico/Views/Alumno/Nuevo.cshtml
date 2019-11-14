@@ -12,6 +12,7 @@
 @using (Html.BeginForm("Nuevo", "Alumno", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdAlumno, new { @id = "IdAlumno" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdPersona, new { @id = "IdPersona" })
     @Html.HiddenFor(q => q.IdPersona_padre, new { @id = "IdPersona_padre" })
@@ -782,6 +783,7 @@
 
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
+            IdAlumno: $("#IdAlumno").val(),
             pe_cedulaRuc: cedula
         }
         $.ajax({
@@ -858,6 +860,7 @@
 
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
+            IdAlumno: $("#IdAlumno").val(),
             pe_cedulaRuc: cedula
         }
         $.ajax({
