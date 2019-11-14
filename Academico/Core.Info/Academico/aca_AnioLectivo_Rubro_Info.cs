@@ -17,6 +17,7 @@ namespace Core.Info.Academico
         public int IdRubro { get; set; }
         public string NomRubro { get; set; }
         public decimal IdProducto { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         public decimal Subtotal { get; set; }
         public string IdCod_Impuesto_Iva { get; set; }
         public decimal Porcentaje { get; set; }
