@@ -24,6 +24,36 @@
         selectedIDs = values.join(',');
     }
 
+    function buscar_registros() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdRubro: IdRubro.GetValue(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("buscar_registros", "RubroPorPeriodo", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.existe_registro == 1) {
+                    var url = '@Url.Action("Modificar", "RubroPorPeriodo")' + '?IdEmpresa=' + data.IdEmpresa + '&IdAnio=' + data.IdAnio + '&IdRubro=' + data.IdRubro + '&Exito=false';
+                    window.location.href = url;
+                }
+                else {
+                    GridViewPartial_RubroPorPeriodo.PerformCallback();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+
     function guardar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -51,9 +81,8 @@
             success: function (data) {
                 if (data.msg == "") {
                     //$("#myform").submit();
-                    alert("Registro guardado exitosamente");
-                    @*window.open(location + "/Academico/RubroPorPeriodo/Modificar?IdEmpresa=" +@Model.IdEmpresa +"&IdAnio=" +@Model.IdAnio +"&IdRubro=" +@Model.IdRubro +"&Exito=" + true, '_self');*@
-                    window.location.href = '@Url.Action("Modificar", "RubroPorPeriodo", new { IdEmpresa = @Model.IdEmpresa, IdAnio = @Model.IdAnio, IdRubro = @Model.IdRubro, Exito=true })';
+                    var url = '@Url.Action("Modificar", "RubroPorPeriodo")' + '?IdEmpresa=' + data.IdEmpresa + '&IdAnio=' + data.IdAnio + '&IdRubro=' + data.IdRubro + '&Exito=true';
+                    window.location.href = url;
                 }
                 else {
                     alert(data.msg);
@@ -107,6 +136,7 @@
                        settings.Properties.TextField = "NomRubro";
                        settings.Properties.NullText = "== Seleccione ==";
                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { buscar_registros(); }";
                    }).BindList(ViewBag.lst_rubro).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
                 </div>
@@ -160,14 +190,10 @@
         </div>
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-default" id="btn_buscar">Buscar</button>
         <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","RubroPorPeriodo",new { Area = "Academico" },null)">Cancelar</a>
     </div>
     @Html.Action("GridViewPartial_RubroPorPeriodo")
-
-    <div class="box-footer">
-        <a class="btn btn-default" href="@Url.Action("Index","RubroPorPeriodo",new { Area = "Academico" },null)">Volver</a>
-    </div>
 
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
