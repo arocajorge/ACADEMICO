@@ -143,6 +143,17 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
+        #region GridDetalle
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_AlumnosPorParalelo()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+
+            List<aca_Matricula_Info> model = Lista_Matricula.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_AlumnosPorParalelo", model);
+        }
+        #endregion
+
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
