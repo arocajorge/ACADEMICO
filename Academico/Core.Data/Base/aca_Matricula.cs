@@ -34,6 +34,7 @@ namespace Core.Data.Base
         public decimal IdPersonaR { get; set; }
         public int IdPlantilla { get; set; }
         public System.DateTime Fecha { get; set; }
+        public string Observacion { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }

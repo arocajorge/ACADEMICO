@@ -32,7 +32,8 @@ namespace Core.Data.Academico
                             IdNivel = q.IdNivel,
                             IdJornada = q.IdJornada,
                             IdCurso = q.IdCurso,
-                            IdParalelo = q.IdParalelo
+                            IdParalelo = q.IdParalelo,
+                            Observacion = q.Observacion
                         });
                     });
                 }
@@ -72,7 +73,8 @@ namespace Core.Data.Academico
                         IdParalelo = Entity.IdParalelo,
                         IdPersonaF = Entity.IdPersonaF,
                         IdPersonaR = Entity.IdPersonaR,
-                        IdPlantilla = Entity.IdPlantilla
+                        IdPlantilla = Entity.IdPlantilla,
+                        Observacion = Entity.Observacion
                     };
                 }
 
@@ -127,7 +129,8 @@ namespace Core.Data.Academico
                         IdParalelo = info.IdParalelo,
                         IdPersonaF = info.IdPersonaF,
                         IdPersonaR = info.IdPersonaR,
-                        IdPlantilla = info.IdPlantilla
+                        IdPlantilla = info.IdPlantilla,
+                        Observacion = info.Observacion
                     };
                     Context.aca_Matricula.Add(Entity);
 
@@ -153,7 +156,7 @@ namespace Core.Data.Academico
                         return false;
                     Entity.IdEmpresa = info.IdEmpresa;
                     Entity.Codigo = info.Codigo;
-
+                    Entity.Observacion = info.Observacion;
                     Context.SaveChanges();
                 }
 

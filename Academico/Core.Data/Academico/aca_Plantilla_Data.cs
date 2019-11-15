@@ -34,10 +34,10 @@ namespace Core.Data.Academico
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+        
 
         public aca_Plantilla_Info getInfo(int IdEmpresa, int IdAnio, int IdPlantilla)
         {
