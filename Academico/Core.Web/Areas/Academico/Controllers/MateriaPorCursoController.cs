@@ -47,7 +47,6 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_AnioLectivo_Curso_Materia_Info> lista = bus_MateriaPorCurso.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso);
             Lista_MateriaPorCurso.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-            cargar_combos();
             return View(model);
         }
 
@@ -56,7 +55,6 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             List<aca_AnioLectivo_Curso_Materia_Info> lista = bus_MateriaPorCurso.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso);
             Lista_MateriaPorCurso.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-            cargar_combos();
             return View(model);
         }
 

@@ -1,6 +1,7 @@
 ﻿using Core.Data.Base;
 using Core.Info.Academico;
 using Core.Info.General;
+using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,6 +82,56 @@ namespace Core.Data.Academico
                         Correo = Entity.Correo,
                         SeFactura = Entity.SeFactura,
                         EsRepresentante = Entity.EsRepresentante,
+                        IdTipoDocumento = Entity.IdTipoDocumento,
+                        pe_Naturaleza = Entity.pe_Naturaleza,
+                        pe_cedulaRuc = Entity.pe_cedulaRuc,
+                        pe_nombre = Entity.pe_nombre,
+                        pe_apellido = Entity.pe_apellido,
+                        pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        pe_sexo = Entity.pe_sexo,
+                        IdEstadoCivil = Entity.IdEstadoCivil,
+                        pe_fechaNacimiento = Entity.pe_fechaNacimiento,
+                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
+                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
+                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
+                        pe_telfono_Contacto = Entity.pe_telfono_Contacto
+                    };
+                }
+
+                return info_familia;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public aca_Familia_Info getInfo_Representante(int IdEmpresa, decimal IdAlumno, string Tipo)
+        {
+            try
+            {
+                aca_Familia_Info info_familia = new aca_Familia_Info();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno 
+                    && ((Tipo == cl_enumeradores.eTipoRepresentante.ECON.ToString() ? q.SeFactura == true : q.EsRepresentante==true))).FirstOrDefault();
+
+                    if (Entity == null)
+                        return null;
+
+                    info_familia = new aca_Familia_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAlumno = Entity.IdAlumno,
+                        Secuencia = Entity.Secuencia,
+                        IdPersona = Entity.IdPersona,
+                        IdCatalogoPAREN = Entity.IdCatalogoPAREN,
+                        Direccion = Entity.Direccion,
+                        Celular = Entity.Celular,
+                        Correo = Entity.Correo,
+                        SeFactura = Entity.SeFactura,
                         IdTipoDocumento = Entity.IdTipoDocumento,
                         pe_Naturaleza = Entity.pe_Naturaleza,
                         pe_cedulaRuc = Entity.pe_cedulaRuc,

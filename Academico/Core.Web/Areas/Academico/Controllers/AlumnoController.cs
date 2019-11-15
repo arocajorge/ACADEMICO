@@ -362,7 +362,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";
                 cargar_combos();
-                return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno, Exito = true });
+                return View(model);
             }
 
             return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno, Exito = true });
@@ -382,6 +382,8 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_Familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
 
             model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+            info_fam_padre = (info_fam_padre == null ? new aca_Familia_Info() : info_fam_padre);
+            info_fam_madre = (info_fam_madre == null ? new aca_Familia_Info() : info_fam_madre);
 
             model.IdPersona_padre = info_fam_padre.IdPersona;
             model.SeFactura_padre = info_fam_padre.SeFactura;

@@ -69,6 +69,10 @@ namespace Core.Bus.Academico
                         info.IdPersona = info.info_persona_alumno.IdPersona;
                         grabar_alumno = true;
                     }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
@@ -84,8 +88,12 @@ namespace Core.Bus.Academico
                         grabar_padre = true;
 
                     }
+                    else
+                    {
+                        return false;
+                    }
                 }
-
+                
                 if (grabar_padre == true)
                 {
                     if (info.info_valido_padre == true)
@@ -97,12 +105,20 @@ namespace Core.Bus.Academico
                             {
                                 info.info_persona_padre.IdPersona = info.info_persona_padre.IdPersona;
                             }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
                             if (odata_per.modificarDB(info.info_persona_padre))
                             {
                                 info.info_persona_padre.IdPersona = info.info_persona_padre.IdPersona;
+                            }
+                            else
+                            {
+                                return false;
                             }
                         }
 
@@ -125,6 +141,10 @@ namespace Core.Bus.Academico
                         {
                             grabar_madre = true;
                         }
+                        else
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
@@ -143,12 +163,20 @@ namespace Core.Bus.Academico
                             {
                                 info.info_persona_madre.IdPersona = info.info_persona_madre.IdPersona;
                             }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
                             if (odata_per.modificarDB(info.info_persona_padre))
                             {
                                 info.info_persona_madre.IdPersona = info.info_persona_madre.IdPersona;
+                            }
+                            else
+                            {
+                                return false;
                             }
                         }
 
@@ -167,10 +195,18 @@ namespace Core.Bus.Academico
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
 
-                        if (odata_fam.modificarDB(info_fam_madre))
+                        if (odata_fam.guardarDB(info_fam_madre))
                         {
                             return true;
                         }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return true;
                     }
                 }
 
@@ -196,6 +232,10 @@ namespace Core.Bus.Academico
                 {
                     grabar_alumno = true;
                 }
+                else
+                {
+                    return false;
+                }
 
                 if (grabar_alumno == true)
                 {
@@ -203,6 +243,14 @@ namespace Core.Bus.Academico
                     {
                         grabar_padre = true;
                     }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
                 }
 
                 if (grabar_padre == true)
@@ -216,12 +264,20 @@ namespace Core.Bus.Academico
                             {
                                 info.info_persona_padre.IdPersona = info.info_persona_padre.IdPersona;
                             }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
                             if (odata_per.modificarDB(info.info_persona_padre))
                             {
                                 info.info_persona_padre.IdPersona = info.info_persona_padre.IdPersona;
+                            }
+                            else
+                            {
+                                return false;
                             }
                         }
 
@@ -247,6 +303,10 @@ namespace Core.Bus.Academico
                             {
                                 grabar_madre = true;
                             }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
@@ -256,7 +316,15 @@ namespace Core.Bus.Academico
                             {
                                 grabar_madre = true;
                             }
+                            else
+                            {
+                                return false;
+                            }
                         }
+                    }
+                    else
+                    {
+                        grabar_madre = true;
                     }
                 }
 
@@ -271,12 +339,20 @@ namespace Core.Bus.Academico
                             {
                                 info.info_persona_madre.IdPersona = info.info_persona_madre.IdPersona;
                             }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
                             if (odata_per.modificarDB(info.info_persona_madre))
                             {
                                 info.info_persona_madre.IdPersona = info.info_persona_madre.IdPersona;
+                            }
+                            else
+                            {
+                                return false;
                             }
                         }
 
@@ -302,6 +378,10 @@ namespace Core.Bus.Academico
                             {
                                 return true;
                             }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
@@ -311,7 +391,15 @@ namespace Core.Bus.Academico
                             {
                                 return true;
                             }
+                            else
+                            {
+                                return false;
+                            }
                         }
+                    }
+                    else
+                    {
+                        return true;
                     }
                 }
                 return false;

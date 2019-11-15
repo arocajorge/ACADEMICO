@@ -41,7 +41,9 @@ namespace Core.Data.Academico
                             CodCatalogoCONADIS = q.CodCatalogoCONADIS,
                             NumeroCarnetConadis = q.NumeroCarnetConadis,
                             PorcentajeDiscapacidad =q.PorcentajeDiscapacidad,
-                            Estado = q.Estado,
+                            NomCatalogoESTALU = q.NomCatalogoESTALU,
+                            NomCatalogoESTMAT = q.NomCatalogoESTMAT,
+                            Estado = q.Estado
                         });
                     });
                 }

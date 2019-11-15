@@ -35,6 +35,8 @@ namespace Core.Info.Academico
         public string MotivoAnulacion { get; set; }
 
         #region Campos que no existen en la tabla
+        public string NomCatalogoESTALU { get; set; }
+        public string NomCatalogoESTMAT { get; set; }
 
         #region Alumno
         [Required(ErrorMessage = "El campo tipo de documento es obligatorio")]

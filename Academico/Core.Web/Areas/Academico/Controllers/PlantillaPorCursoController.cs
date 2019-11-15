@@ -141,6 +141,19 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(lista, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region Metodos
+        private bool validar(aca_Plantilla_Info info, ref string msg)
+        {
+            if(info.lst_Plantilla_Rubro.Count ==0)
+            {
+                msg = "Debe seleccionar al menos un registro en el detalle";
+                return false;
+            }
+
+            return true;
+        }
+        #endregion
     }
 
     public class aca_AnioLectivo_Curso_Plantilla_List

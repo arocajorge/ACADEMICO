@@ -84,5 +84,11 @@ namespace Core.Info.Helps
             PROMOVIDO = 8,
             NO_PROMOVIDO = 9
         }
+
+        public enum eTipoRepresentante
+        {
+            LEGAL,
+            ECON
+        }
     }
 }

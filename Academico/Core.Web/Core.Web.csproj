@@ -7533,6 +7533,7 @@
     <Content Include="Areas\Academico\Views\RubroPorPeriodo\_ComboBoxPartial_Anio_Consulta.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\_ComboBoxPartial_Plantilla.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\_GridViewPartial_AlumnosPorParalelo.cshtml" />
+    <Content Include="Areas\Academico\Views\Matricula\Modificar.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

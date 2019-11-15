@@ -171,7 +171,7 @@
                 $("#Subtotal").val(data.Subtotal);
                 $("#IdCod_Impuesto_Iva").val(data.IdCod_Impuesto_Iva);
                 $("#Porcentaje").val(data.Porcentaje);
-                $("#ValorIva").val(data.ValorIva);
+                $("#ValorIVA").val(data.ValorIva);
                 $("#Total").val(data.Total);
             },
             error: function (error) {
@@ -194,7 +194,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#ValorIva").val(data.ValorIva);
+                $("#ValorIVA").val(data.ValorIva);
                 $("#Total").val(data.Total);
             },
             error: function (error) {

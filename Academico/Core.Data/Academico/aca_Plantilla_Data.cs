@@ -204,6 +204,7 @@ namespace Core.Data.Academico
 
                     Entity.Estado = false;
                     Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
+                    Entity.MotivoAnulacion = info.MotivoAnulacion;
                     Entity.FechaAnulacion = DateTime.Now;
 
                     //var lst_PlantillaDet = Context.aca_Plantilla_Rubro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPlantilla == info.IdPlantilla).ToList();

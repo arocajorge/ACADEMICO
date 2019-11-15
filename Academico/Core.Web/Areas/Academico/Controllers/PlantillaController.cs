@@ -115,90 +115,6 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Json
-        //public JsonResult guardar(int IdEmpresa = 0, int IdAnio = 0, string NomPlantilla = "", decimal Valor = 0, string Ids = "", decimal IdTransaccionSession = 0)
-        //{
-        //    var mensaje = "";
-
-        //    aca_Plantilla_Info info_plantilla = new aca_Plantilla_Info
-        //    {
-        //        IdEmpresa = IdEmpresa,
-        //        IdAnio = IdAnio,
-        //        NomPlantilla = NomPlantilla,
-        //        Valor = Valor,
-        //        lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>()
-        //    };
-
-        //    string[] array = Ids.Split(',');
-        //    if (Ids != "")
-        //    {
-        //        var lista_det = Lista_PlantillaRubro.get_list(IdTransaccionSession);
-        //        foreach (var item in array)
-        //        {
-        //            var info = lista_det.Where(q=>q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdRubro == Convert.ToInt32(item) ).FirstOrDefault();
-        //            aca_Plantilla_Rubro_Info info_det = new aca_Plantilla_Rubro_Info
-        //            {
-        //                IdEmpresa = IdEmpresa,
-        //                IdAnio = IdAnio,
-        //                IdRubro = info.IdRubro,
-        //                IdProducto = info.IdProducto,
-        //                Subtotal = info.Subtotal,
-        //                IdCod_Impuesto_Iva = info.IdCod_Impuesto_Iva,
-        //                Porcentaje = info.Porcentaje,
-        //                Total = info.Total
-        //            };
-
-        //            info_plantilla.lst_Plantilla_Rubro.Add(info_det);
-        //        }
-        //    }
-
-        //    if (!bus_plantilla.GuardarDB(info_plantilla))
-        //    {
-        //        mensaje = "No se ha podido guardar el registro";
-        //    }
-
-        //    return Json(new { msg = mensaje, info = info_plantilla }, JsonRequestBehavior.AllowGet);
-        //}
-
-        //public JsonResult actualizar(int IdEmpresa = 0, int IdAnio = 0, int IdPlantilla = 0, string NomPlantilla = "", decimal Valor = 0, string Ids = "", decimal IdTransaccionSession = 0)
-        //{
-        //    var mensaje = "";
-        //    aca_Plantilla_Info info_plantilla = bus_plantilla.GetInfo(IdEmpresa, IdAnio, IdPlantilla);
-        //    info_plantilla.IdAnio = IdAnio;
-        //    info_plantilla.NomPlantilla = NomPlantilla;
-        //    info_plantilla.Valor = Valor;
-        //    info_plantilla.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
-
-        //    string[] array = Ids.Split(',');
-        //    if (Ids != "")
-        //    {
-        //        var lista_det = Lista_PlantillaRubro.get_list(IdTransaccionSession);
-        //        foreach (var item in array)
-        //        {
-        //            var info = lista_det.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdRubro == Convert.ToInt32(item)).FirstOrDefault();
-        //            aca_Plantilla_Rubro_Info info_det = new aca_Plantilla_Rubro_Info
-        //            {
-        //                IdEmpresa = IdEmpresa,
-        //                IdAnio = IdAnio,
-        //                IdRubro = info.IdRubro,
-        //                IdProducto = info.IdProducto,
-        //                Subtotal = info.Subtotal,
-        //                IdCod_Impuesto_Iva = info.IdCod_Impuesto_Iva,
-        //                Porcentaje = info.Porcentaje,
-        //                Total = info.Total
-        //            };
-
-        //            info_plantilla.lst_Plantilla_Rubro.Add(info_det);
-        //        }
-        //    }
-
-        //    if (!bus_plantilla.ModificarDB(info_plantilla))
-        //    {
-        //        mensaje = "No se ha podido modificar el registro";
-        //    }
-
-        //    return Json(mensaje, JsonRequestBehavior.AllowGet);
-        //}
-
         public JsonResult Set_Anio(int IdAnio = 0)
         {
             SessionFixed.IdAnio = IdAnio.ToString();
@@ -246,6 +162,31 @@ namespace Core.Web.Areas.Academico.Controllers
             TotalIProd = Math.Round((PrecioProd + iva), 2);
 
             return Json(new { Precio = PrecioProd, IdCodImpuesto = IdCod_Impuesto_Iva, Total = TotalIProd }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SetProductoPorRubro(int IdAnio=0, int IdRubro = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var rubro_periodo = bus_rubro_anio.GetInfo(IdEmpresa,IdAnio,IdRubro);
+            decimal data = 0;
+            if (rubro_periodo!= null)
+            {
+                data = rubro_periodo.IdProducto;
+            }
+            return Json( data, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Metodos
+        private bool validar(aca_Plantilla_Info info, ref string msg)
+        {
+            if (info.lst_Plantilla_Rubro.Count == 0)
+            {
+                msg = "Debe ingresar al menos un registro en el detalle";
+                return false;
+            }
+
+            return true;
         }
         #endregion
 
@@ -391,6 +332,13 @@ namespace Core.Web.Areas.Academico.Controllers
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
             model.lst_Plantilla_Rubro = Lista_PlantillaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
 
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+
             if (!bus_plantilla.GuardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
@@ -410,13 +358,14 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Plantilla_Info model = bus_plantilla.GetInfo(IdEmpresa, IdAnio, IdPlantilla);
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            
             if (model == null)
                 return RedirectToAction("Index");
 
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
             model.lst_Plantilla_Rubro = bus_plantilla_rubro.GetList(model.IdEmpresa, model.IdAnio, model.IdPlantilla);
             Lista_PlantillaRubro.set_list(model.lst_Plantilla_Rubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -431,13 +380,20 @@ namespace Core.Web.Areas.Academico.Controllers
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
             model.lst_Plantilla_Rubro = Lista_PlantillaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
 
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+
             if (!bus_plantilla.ModificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             }
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, IdPlantilla = model.IdPlantilla = 0, Exito = true });
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, IdPlantilla = model.IdPlantilla, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdAnio = 0, int IdPlantilla=0)

@@ -18,7 +18,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.aca_Matricula.Where(q => q.IdEmpresa == IdEmpresa).ToList();
+                    var lst = odata.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa).ToList();
 
                     lst.ForEach(q =>
                     {
@@ -33,7 +33,13 @@ namespace Core.Data.Academico
                             IdJornada = q.IdJornada,
                             IdCurso = q.IdCurso,
                             IdParalelo = q.IdParalelo,
-                            Observacion = q.Observacion
+                            Descripcion = q.Descripcion,
+                            NomSede = q.NomSede,
+                            NomNivel = q.NomNivel,
+                            NomJornada = q.NomJornada,
+                            NomCurso = q.NomCurso,
+                            NomParalelo = q.NomParalelo,
+                            pe_nombreCompleto =q.pe_nombreCompleto
                         });
                     });
                 }
@@ -47,6 +53,31 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_Matricula_Info> getList_PorCurso(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo)
+        {
+            try
+            {
+                List<aca_Matricula_Info> Lista = new List<aca_Matricula_Info>();
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.vwaca_Matricula_AlumnosPorParalelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede 
+                    && q.IdNivel== IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).Select(q => new aca_Matricula_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdMatricula = q.IdMatricula,
+                        Fecha = q.Fecha,
+                        pe_cedulaRuc = q.pe_cedulaRuc,
+                        pe_nombreCompleto = q.pe_nombreCompleto
+                    }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public aca_Matricula_Info getInfo(int IdEmpresa, int IdMatricula)
         {
             try
@@ -130,7 +161,9 @@ namespace Core.Data.Academico
                         IdPersonaF = info.IdPersonaF,
                         IdPersonaR = info.IdPersonaR,
                         IdPlantilla = info.IdPlantilla,
-                        Observacion = info.Observacion
+                        Observacion = info.Observacion,
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        FechaCreacion = DateTime.Now
                     };
                     Context.aca_Matricula.Add(Entity);
 
@@ -157,6 +190,8 @@ namespace Core.Data.Academico
                     Entity.IdEmpresa = info.IdEmpresa;
                     Entity.Codigo = info.Codigo;
                     Entity.Observacion = info.Observacion;
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = DateTime.Now;
                     Context.SaveChanges();
                 }
 
@@ -178,10 +213,10 @@ namespace Core.Data.Academico
                     aca_Matricula Entity = Context.aca_Matricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula);
                     if (Entity == null)
                         return false;
-                    //Entity.Estado = info.Estado = false;
-                    //Entity.MotivoAnulacion = info.MotivoAnulacion;
-                    //Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
-                    //Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;
+
+                    Entity.MotivoAnulacion = info.MotivoAnulacion;
+                    Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
+                    Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;
                     Context.SaveChanges();
                 }
 

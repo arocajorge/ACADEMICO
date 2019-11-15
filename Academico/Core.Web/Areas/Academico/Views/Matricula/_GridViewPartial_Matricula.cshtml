@@ -80,7 +80,11 @@
             c.Width = Unit.Pixel(150);
         });
         settings.Columns.Add("IdMatricula", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdAlumno", "Descripción").Width = Unit.Percentage(60);
+        settings.Columns.Add("NomSede", "Sede").Width = Unit.Percentage(10);
+        settings.Columns.Add("pe_nombreCompleto", "Alumno").Width = Unit.Percentage(40);
+        settings.Columns.Add("NomJornada", "Jornada").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomParalelo", "Paralelo").Width = Unit.Percentage(10);
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

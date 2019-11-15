@@ -86,7 +86,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         OrdenJornada = info_jornada.OrdenJornada
                     };
                     lista.Add(info);
-                }       
+                }
             }
 
             if (!bus_NivelPorJornada.GuardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, lista))

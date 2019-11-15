@@ -80,15 +80,16 @@
             c.Width = Unit.Pixel(150);
         });
 
-        settings.Columns.Add("IdAlumno", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdAlumno", "ID").Width = Unit.Percentage(7);
         settings.Columns.Add("pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Nombre completo").Width = Unit.Percentage(40);
-        settings.Columns.Add("IdCatalogoESTALU", "Estado Alumno").Width = Unit.Percentage(10);
+        settings.Columns.Add("pe_nombreCompleto", "Nombre completo").Width = Unit.Percentage(30);
+        settings.Columns.Add("NomCatalogoESTALU", "Estado Alumno").Width = Unit.Percentage(15);
+        settings.Columns.Add("NomCatalogoESTMAT", "Matriculación").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";
             column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(8);
             column.EditorProperties().CheckBox(sp =>
             {
 

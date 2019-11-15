@@ -57,12 +57,24 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group has-error">
+                    <label for="Rector">Motivo de anulación*</label>
+                    @Html.TextBoxFor(q => q.MotivoAnulacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.MotivoAnulacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.Action("GridViewPartial_PlantillaRubro")
+
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","Plantilla",new { Area = "Academico" },null)">Cancelar</a>
     </div>
-    @Html.Action("GridViewPartial_PlantillaRubro")
-
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }

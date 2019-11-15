@@ -112,6 +112,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     lista.Add(info);
                 }      
             }
+
             if (!bus_CursoPorJornada.GuardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, lista))
             {
                 resultado = 0;

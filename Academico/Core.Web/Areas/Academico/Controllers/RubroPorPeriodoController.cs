@@ -122,8 +122,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdCod_Impuesto_Iva = producto.IdCod_Impuesto_Iva;
                 precio = producto.precio_1;
                 PorcentajeIVA = info_impuesto.porcentaje;
-                IVA_Valor = precio * (PorcentajeIVA / 100);
-                ValorTotal = precio + IVA_Valor;
+                IVA_Valor = Math.Round((precio * (PorcentajeIVA / 100)),2);
+                ValorTotal = Math.Round((precio + IVA_Valor),2);
             }
             
 
@@ -142,8 +142,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 var producto = bus_producto.get_info(IdEmpresa, IdProducto);
                 var info_impuesto = bus_impuesto.get_info(producto.IdCod_Impuesto_Iva);
                 PorcentajeIVA = info_impuesto.porcentaje;
-                IVA_Valor = Subtotal * (PorcentajeIVA / 100);
-                ValorTotal = Subtotal + IVA_Valor;
+                IVA_Valor = Math.Round((Subtotal * (PorcentajeIVA / 100)),2);
+                ValorTotal = Math.Round((Subtotal + IVA_Valor),2);
             }
 
 
@@ -214,13 +214,20 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
             }
 
-            if (!bus_rubro_anio.GuardarDB(info_rubro_anio))
+            if (IdAnio!=0 && IdRubro!=0 && IdProducto!=0)
             {
-                mensaje = "No se ha podido guardar el registro";
+                if (!bus_rubro_anio.GuardarDB(info_rubro_anio))
+                {
+                    mensaje = "No se ha podido guardar el registro";
+                }
+                Empresa = info_rubro_anio.IdEmpresa;
+                Anio = info_rubro_anio.IdAnio;
+                Rubro = info_rubro_anio.IdRubro;
             }
-            Empresa = info_rubro_anio.IdEmpresa;
-            Anio = info_rubro_anio.IdAnio;
-            Rubro = info_rubro_anio.IdRubro;
+            else
+            {
+                mensaje = "Ingrese la información solicitada";
+            }
 
             return Json(new { msg = mensaje, IdEmpresa = Empresa, IdAnio = Anio, IdRubro = Rubro }, JsonRequestBehavior.AllowGet);
         }
@@ -254,16 +261,16 @@ namespace Core.Web.Areas.Academico.Controllers
                     };
                     info_rubro_anio.lst_rubro_anio_periodo.Add(info_det);
                 }
-            }
 
-            if (!bus_rubro_anio.ModificarDB(info_rubro_anio))
-            {
-                mensaje = "No se ha podido modificar el registro";
-            }
+                if (!bus_rubro_anio.ModificarDB(info_rubro_anio))
+                {
+                    mensaje = "No se ha podido modificar el registro";
+                }
 
-            Empresa = info_rubro_anio.IdEmpresa;
-            Anio = info_rubro_anio.IdAnio;
-            Rubro = info_rubro_anio.IdRubro;
+                Empresa = info_rubro_anio.IdEmpresa;
+                Anio = info_rubro_anio.IdAnio;
+                Rubro = info_rubro_anio.IdRubro;
+            }
 
             return Json(new { msg = mensaje, IdEmpresa = Empresa, IdAnio = Anio, IdRubro = Rubro }, JsonRequestBehavior.AllowGet);
         }

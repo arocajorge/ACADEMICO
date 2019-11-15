@@ -16,6 +16,7 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo rubro es obligatorio")]
         public int IdRubro { get; set; }
         public string NomRubro { get; set; }
+        [Required(ErrorMessage = "El campo producto es obligatorio")]
         public decimal IdProducto { get; set; }
         [DisplayFormat(DataFormatString = "{0:n2}", ApplyFormatInEditMode = true)]
         public decimal Subtotal { get; set; }

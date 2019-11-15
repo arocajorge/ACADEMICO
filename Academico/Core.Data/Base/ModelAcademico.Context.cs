@@ -67,6 +67,7 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Matricula> aca_Matricula { get; set; }
         public virtual DbSet<vwaca_Plantilla_Rubro> vwaca_Plantilla_Rubro { get; set; }
         public virtual DbSet<vwaca_Matricula_AlumnosPorParalelo> vwaca_Matricula_AlumnosPorParalelo { get; set; }
+        public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

@@ -75,14 +75,14 @@
                     @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="IdEmpresa">Nivel Académico</label>
                     @Html.Partial("_ComboBoxPartial_Nivel", Model)
                     @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdEmpresa">Jornada</label>
                     @Html.Partial("_ComboBoxPartial_Jornada", Model)
