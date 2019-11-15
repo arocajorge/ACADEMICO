@@ -785,32 +785,34 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Materia' no tiene defi
           <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Matricula_AlumnosPorParalelo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="vwaca_Matricula_AlumnosPorParalelo">
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Plantilla_Rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwaca_Plantilla_Rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="IdSede" />
-            <PropertyRef Name="IdNivel" />
-            <PropertyRef Name="IdJornada" />
-            <PropertyRef Name="IdCurso" />
-            <PropertyRef Name="IdParalelo" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="IdMatricula" />
-            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="IdPlantilla" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="NomRubro" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="Subtotal" />
+            <PropertyRef Name="IdCod_Impuesto_Iva" />
+            <PropertyRef Name="Porcentaje" />
+            <PropertyRef Name="ValorIVA" />
+            <PropertyRef Name="Total" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdAnio" Type="int" Nullable="false" />
-          <Property Name="IdSede" Type="int" Nullable="false" />
-          <Property Name="IdNivel" Type="int" Nullable="false" />
-          <Property Name="IdJornada" Type="int" Nullable="false" />
-          <Property Name="IdCurso" Type="int" Nullable="false" />
-          <Property Name="IdParalelo" Type="int" Nullable="false" />
-          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="IdPlantilla" Type="int" Nullable="false" />
+          <Property Name="IdRubro" Type="int" Nullable="false" />
+          <Property Name="NomRubro" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Subtotal" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IdCod_Impuesto_Iva" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Porcentaje" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ValorIVA" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="numeric" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1774,20 +1776,21 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
     [vwaca_Materia].[Estado] AS [Estado]
     FROM [dbo].[vwaca_Materia] AS [vwaca_Materia]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="vwaca_Matricula_AlumnosPorParalelo" EntityType="Self.vwaca_Matricula_AlumnosPorParalelo" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="vwaca_Plantilla_Rubro" EntityType="Self.vwaca_Plantilla_Rubro" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [vwaca_Matricula_AlumnosPorParalelo].[IdEmpresa] AS [IdEmpresa], 
-    [vwaca_Matricula_AlumnosPorParalelo].[IdAnio] AS [IdAnio], 
-    [vwaca_Matricula_AlumnosPorParalelo].[IdSede] AS [IdSede], 
-    [vwaca_Matricula_AlumnosPorParalelo].[IdNivel] AS [IdNivel], 
-    [vwaca_Matricula_AlumnosPorParalelo].[IdJornada] AS [IdJornada], 
-    [vwaca_Matricula_AlumnosPorParalelo].[IdCurso] AS [IdCurso], 
-    [vwaca_Matricula_AlumnosPorParalelo].[IdParalelo] AS [IdParalelo], 
-    [vwaca_Matricula_AlumnosPorParalelo].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-    [vwaca_Matricula_AlumnosPorParalelo].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-    [vwaca_Matricula_AlumnosPorParalelo].[IdMatricula] AS [IdMatricula], 
-    [vwaca_Matricula_AlumnosPorParalelo].[Fecha] AS [Fecha]
-    FROM [dbo].[vwaca_Matricula_AlumnosPorParalelo] AS [vwaca_Matricula_AlumnosPorParalelo]</DefiningQuery>
+    [vwaca_Plantilla_Rubro].[IdEmpresa] AS [IdEmpresa], 
+    [vwaca_Plantilla_Rubro].[IdAnio] AS [IdAnio], 
+    [vwaca_Plantilla_Rubro].[IdPlantilla] AS [IdPlantilla], 
+    [vwaca_Plantilla_Rubro].[IdRubro] AS [IdRubro], 
+    [vwaca_Plantilla_Rubro].[NomRubro] AS [NomRubro], 
+    [vwaca_Plantilla_Rubro].[IdProducto] AS [IdProducto], 
+    [vwaca_Plantilla_Rubro].[pr_descripcion] AS [pr_descripcion], 
+    [vwaca_Plantilla_Rubro].[Subtotal] AS [Subtotal], 
+    [vwaca_Plantilla_Rubro].[IdCod_Impuesto_Iva] AS [IdCod_Impuesto_Iva], 
+    [vwaca_Plantilla_Rubro].[Porcentaje] AS [Porcentaje], 
+    [vwaca_Plantilla_Rubro].[ValorIVA] AS [ValorIVA], 
+    [vwaca_Plantilla_Rubro].[Total] AS [Total]
+    FROM [dbo].[vwaca_Plantilla_Rubro] AS [vwaca_Plantilla_Rubro]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwaca_Profesor" EntityType="Self.vwaca_Profesor" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -2299,6 +2302,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
             <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
           </AssociationSet>
           <EntitySet Name="vwaca_Matricula_AlumnosPorParalelo" EntityType="ModelAcademico.vwaca_Matricula_AlumnosPorParalelo" />
+          <EntitySet Name="vwaca_Plantilla_Rubro" EntityType="ModelAcademico.vwaca_Plantilla_Rubro" />
           </EntityContainer>
         <EntityType Name="aca_Alumno">
           <Key>
@@ -4002,6 +4006,34 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
+        <EntityType Name="vwaca_Plantilla_Rubro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdPlantilla" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="NomRubro" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="Subtotal" />
+            <PropertyRef Name="IdCod_Impuesto_Iva" />
+            <PropertyRef Name="Porcentaje" />
+            <PropertyRef Name="ValorIVA" />
+            <PropertyRef Name="Total" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
+          <Property Name="IdRubro" Type="Int32" Nullable="false" />
+          <Property Name="NomRubro" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Porcentaje" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ValorIVA" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4715,18 +4747,19 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwaca_Matricula_AlumnosPorParalelo">
-            <EntityTypeMapping TypeName="ModelAcademico.vwaca_Matricula_AlumnosPorParalelo">
-              <MappingFragment StoreEntitySet="vwaca_Matricula_AlumnosPorParalelo">
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
-                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
-                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+          <EntitySetMapping Name="vwaca_Plantilla_Rubro">
+            <EntityTypeMapping TypeName="ModelAcademico.vwaca_Plantilla_Rubro">
+              <MappingFragment StoreEntitySet="vwaca_Plantilla_Rubro">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ValorIVA" ColumnName="ValorIVA" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="NomRubro" ColumnName="NomRubro" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>

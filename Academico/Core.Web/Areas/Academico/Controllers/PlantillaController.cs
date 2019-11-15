@@ -530,6 +530,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
             aca_Plantilla_Rubro_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdRubro == info_det.IdRubro).FirstOrDefault();
             edited_info.IdRubro = info_det.IdRubro;
+            edited_info.Porcentaje = info_det.Porcentaje;
+            edited_info.ValorIVA = info_det.ValorIVA;
+            edited_info.Total = info_det.Total;
+            edited_info.IdCod_Impuesto_Iva = info_det.IdCod_Impuesto_Iva;
+            edited_info.Subtotal = info_det.Subtotal;
             var info_rubro_anio = bus_rubro_anio.GetInfo(info_det.IdEmpresa, info_det.IdAnio, info_det.IdRubro);
         }
 
