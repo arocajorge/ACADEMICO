@@ -92,12 +92,13 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Rubro_Periodo_aca_AnioLectivo_Periodo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Rubro_Periodo_aca_AnioLectivo_Rubro" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Rubro" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_Matricula" Width="1.5" PointX="8.25" PointY="34.625" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_Matricula" Width="1.5" PointX="8.25" PointY="34.5" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_alumno" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_AnioLectivo_Curso_Paralelo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_Plantilla" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" />
-      </Diagram>
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula_AlumnosPorParalelo" Width="1.5" PointX="13.375" PointY="5.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

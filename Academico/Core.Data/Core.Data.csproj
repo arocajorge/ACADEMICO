@@ -298,11 +298,10 @@
     <Compile Include="Base\vwaca_Materia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Base\vwaca_Plantilla_Rubro.cs">
-=======
+		<DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_Matricula_AlumnosPorParalelo.cs">
->>>>>>> 4f9cf838a3484e81537b8ae38599394a3233ffe5
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Profesor.cs">
