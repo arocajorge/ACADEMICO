@@ -43,6 +43,7 @@
         {
             column.FieldName = "NomRubro";
             column.Caption = "Rubro";
+            column.VisibleIndex = 1;
             column.Width = Unit.Percentage(30);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
@@ -53,6 +54,7 @@
             column.Caption = "Rubro";
             column.Width = Unit.Percentage(30);
             column.Visible = false;
+            column.VisibleIndex = 1;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
@@ -65,6 +67,7 @@
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
             column.Width = Unit.Percentage(30);
+            column.VisibleIndex = 2;
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
@@ -74,15 +77,68 @@
             column.Caption = "Producto";
             column.Width = Unit.Percentage(30);
             column.Visible = false;
+            column.VisibleIndex = 2;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
                 Html.RenderPartial("_CmbProducto_Plantilla", DataBinder.Eval(c.DataItem, "IdProducto"));
             });
         });
-
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Subtotal";
+            column.Caption = "Valor";
+            column.VisibleIndex = 3;
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.Width = Unit.Percentage(5);
+            column.EditorProperties().SpinEdit(q =>
+            {
+                q.MinValue = 0;
+                q.Width = Unit.Percentage(100);
+                q.AllowMouseWheel = false;
+                q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularValores();}";
+            });
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCod_Impuesto_Iva";
+            column.Caption = "Impuesto";
+            column.Width = Unit.Percentage(8);
+            column.VisibleIndex = 4;
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("nom_impuesto", "Descripción").Width = Unit.Percentage(100);
+                p.TextField = "nom_impuesto";
+                p.ValueField = "IdCod_Impuesto";
+                p.ValueType = typeof(string);
+                p.DataSource = ViewBag.lst_impuesto;
+                p.ClientSideEvents.ValueChanged = "function(s, e){ CalcularValores();}";
+            });
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ValorIVA";
+            column.Caption = "I.V.A.";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.Width = Unit.Percentage(7);
+            column.VisibleIndex = 5;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.ReadOnly = true;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Total";
+            column.Caption = "Total";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.Width = Unit.Percentage(7);
+            column.VisibleIndex = 6;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.ReadOnly = true;
+        });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
-        settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {var editor = IdProducto;editor.Focus(); Set_Anio();}}";
+        settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {Set_Anio();}}";
     });
 }
 @grid.Bind(Model).GetHtml()
@@ -109,26 +165,47 @@
         });
     }
 
-    @*function SetPrecioProducto(s, e) {
+    function SetPrecioProducto(s, e) {
         var datos = {
-            IdSucursal: $("#IdSucursal").val(),
-            IdBodega: $("#IdBodega").val(),
             IdProducto: s.GetValue()
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("SetPrecioProductoEgreso", "EgresoInventario",new { Area = "Inventario" })',
+            url: '@Url.Action("SetPrecioProducto", "Plantilla",new { Area = "Academico" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridView_egr_inv_det.GetEditor('mv_costo_sinConversion').SetValue(data);
+                GridViewPartial_PlantillaRubro.GetEditor('Subtotal').SetValue(data.Precio);
+                GridViewPartial_PlantillaRubro.GetEditor('IdCod_Impuesto_Iva').SetValue(data.IdCodImpuesto);
+                GridViewPartial_PlantillaRubro.GetEditor('Total').SetValue(data.Total);
             },
             error: function (error) {
             }
         });
-    };*@
+    };
+    function CalcularValores(s, e) {
+        var datos = {
+            Valor: GridViewPartial_PlantillaRubro.GetEditor('Subtotal').GetValue(),
+            IdCodImpuesto: GridViewPartial_PlantillaRubro.GetEditor('IdCod_Impuesto_Iva').GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CalcularValores", "Plantilla", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_PlantillaRubro.GetEditor('Total').SetValue(data.total);
+            },
+            error: function (error) {
+            }
+        });
+    };
 </script>

@@ -9,59 +9,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-<script>
-    var selectedIDs;
-    function OnBeginCallback(s, e) {
-        //Pass all selected keys to GridView callback action
-        e.customArgs["selectedIDs"] = selectedIDs;
-        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
-    }
-    function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdRubro", GetSelectedFieldValuesCallback);
-    }
-    function GetSelectedFieldValuesCallback(values) {
-        //Capture all selected keys
-        selectedIDs = values.join(',');
-    }
 
-    function actualizar() {
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdAnio: IdAnio.GetValue(),
-            IdPlantilla: $("#IdPlantilla").val(),
-            NomPlantilla: $("#NomPlantilla").val(),
-            Valor: $("#Valor").val(),
-            IDs: selectedIDs,
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $("#btn_guardar").attr("disabled", true);
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("actualizar", "Plantilla", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if(data.mensaje==""){
-                    $("#myform").submit();
-                }
-                else
-                {
-                    alert("Registro guardado exitosamente");
-                    var location = GetPathServer();
-                    window.open(location +"/Academico/Plantilla/Modificar?IdEmpresa="+@Model.IdEmpresa+"&IdAnio="+@Model.IdAnio+"&IdPlantilla="+@Model.IdPlantilla+"&Exito="+true);
-                }
-                $("#btn_guardar").attr("disabled", false);
-
-            },
-            error: function (error) {
-            }
-        });
-    }
-</script>
 @using (Html.BeginForm("Anular", "Plantilla", FormMethod.Post, new { @class = "form", @role = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })

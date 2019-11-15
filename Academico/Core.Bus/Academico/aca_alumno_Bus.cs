@@ -126,6 +126,10 @@ namespace Core.Bus.Academico
                             grabar_madre = true;
                         }
                     }
+                    else
+                    {
+                        grabar_madre = true;
+                    }
                 }     
 
                 if (grabar_madre == true)

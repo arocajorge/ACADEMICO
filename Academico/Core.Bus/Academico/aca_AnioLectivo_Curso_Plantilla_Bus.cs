@@ -23,6 +23,19 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Curso_Plantilla_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                return odata.getList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool GuardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, List<aca_AnioLectivo_Curso_Plantilla_Info> lista)
         {
             try

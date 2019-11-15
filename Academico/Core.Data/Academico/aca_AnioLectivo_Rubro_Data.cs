@@ -67,6 +67,15 @@ namespace Core.Data.Academico
                              .Skip(skip)
                              .Take(take)
                              .ToList();
+
+                    foreach (var q in lst)
+                    {
+                        Lista.Add(new aca_AnioLectivo_Rubro_Info
+                        {
+                            IdRubro = q.IdRubro,
+                            NomRubro = q.NomRubro
+                        });
+                    }
                 }
 
                 return Lista;

@@ -34,10 +34,10 @@ namespace Core.Data.Academico
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
+        
 
         public aca_Plantilla_Info getInfo(int IdEmpresa, int IdAnio, int IdPlantilla)
         {
@@ -110,9 +110,6 @@ namespace Core.Data.Academico
                         FechaCreacion = DateTime.Now
                     };
                     Context.aca_Plantilla.Add(Entity);
-
-                    var lst_PlantillaDet = Context.aca_Plantilla_Rubro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPlantilla == info.IdPlantilla).ToList();
-                    Context.aca_Plantilla_Rubro.RemoveRange(lst_PlantillaDet);
 
                     if (info.lst_Plantilla_Rubro.Count > 0)
                     {
@@ -209,8 +206,8 @@ namespace Core.Data.Academico
                     Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                     Entity.FechaAnulacion = DateTime.Now;
 
-                    var lst_PlantillaDet = Context.aca_Plantilla_Rubro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPlantilla == info.IdPlantilla).ToList();
-                    Context.aca_Plantilla_Rubro.RemoveRange(lst_PlantillaDet);
+                    //var lst_PlantillaDet = Context.aca_Plantilla_Rubro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPlantilla == info.IdPlantilla).ToList();
+                    //Context.aca_Plantilla_Rubro.RemoveRange(lst_PlantillaDet);
 
                     Context.SaveChanges();
                 }

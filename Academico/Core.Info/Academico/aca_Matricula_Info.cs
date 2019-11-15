@@ -26,6 +26,7 @@ namespace Core.Info.Academico
 
         #region Campos que no existen en la tabla
         public string IdComboCurso { get; set; }
+        public string Observacion { get; set; }
         #endregion
     }
 }

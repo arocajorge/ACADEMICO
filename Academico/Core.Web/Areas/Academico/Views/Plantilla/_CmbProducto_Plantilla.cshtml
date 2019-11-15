@@ -22,7 +22,7 @@
         settings.Properties.Columns.Add("pr_descripcion", "Producto", 90);
 
         settings.Properties.FilterMinLength = 3;
-        //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){CalcularValoresProducto(s,e);}";
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){SetPrecioProducto(s,e);}";
     })
     .BindList(new Core.Web.Areas.Academico.Controllers.PlantillaController().get_list_bajo_demandaProducto,
     new Core.Web.Areas.Academico.Controllers.PlantillaController().get_info_bajo_demandaProducto).Bind((Model.GetType() == typeof(Core.Info.Academico.aca_Plantilla_Rubro_Info) || Model.GetType() == typeof(List<Core.Info.Academico.aca_Plantilla_Rubro_Info>)) ? "" : (Model == 0 ? "" : Model));

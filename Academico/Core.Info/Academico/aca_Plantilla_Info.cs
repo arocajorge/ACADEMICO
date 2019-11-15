@@ -29,7 +29,6 @@ namespace Core.Info.Academico
         public string MotivoAnulacion { get; set; }
 
         #region Campos que no existen
-        //public List<aca_AnioLectivo_Rubro_Info> lst_rubro_anio { get; set; }
         public List<aca_Plantilla_Rubro_Info> lst_Plantilla_Rubro { get; set; }
         
         #endregion

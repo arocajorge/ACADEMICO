@@ -11,11 +11,11 @@ namespace Core.Bus.Academico
     public class aca_Plantilla_Rubro_Bus
     {
         aca_Plantilla_Rubro_Data odata = new aca_Plantilla_Rubro_Data();
-        public List<aca_Plantilla_Rubro_Info> GetListAsignacion(int IdEmpresa, int IdAnio)
+        public List<aca_Plantilla_Rubro_Info> GetList(int IdEmpresa, int IdAnio, int IdPlantilla)
         {
             try
             {
-                return odata.get_list_asignacion(IdEmpresa, IdAnio);
+                return odata.getList(IdEmpresa, IdAnio, IdPlantilla);
             }
             catch (Exception)
             {
@@ -23,5 +23,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+        //public List<aca_Plantilla_Rubro_Info> GetListAsignacion(int IdEmpresa, int IdAnio)
+        //{
+        //    try
+        //    {
+        //        return odata.get_list_asignacion(IdEmpresa, IdAnio);
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //}
     }
 }

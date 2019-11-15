@@ -67,6 +67,32 @@ namespace Core.Data.Academico
             }
         }
 
+
+        public List<aca_AnioLectivo_Curso_Plantilla_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Plantilla_Info> Lista = new List<aca_AnioLectivo_Curso_Plantilla_Info>();
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.aca_AnioLectivo_Curso_Plantilla.Include("aca_Plantilla").Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.aca_Plantilla.Estado == true).Select(q => new aca_AnioLectivo_Curso_Plantilla_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdAnio = q.IdAnio,
+                        IdPlantilla = q.IdPlantilla,
+                        NomPlantilla = q.aca_Plantilla.NomPlantilla,
+                        Valor = q.aca_Plantilla.Valor
+                    }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, List<aca_AnioLectivo_Curso_Plantilla_Info> lista)
         {
             try

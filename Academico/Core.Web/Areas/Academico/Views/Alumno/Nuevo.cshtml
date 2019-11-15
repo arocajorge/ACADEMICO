@@ -28,7 +28,7 @@
     }
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="Codigo">Código</label>
                     @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control", @id = "Codigo" })
@@ -42,14 +42,14 @@
                     @Html.ValidationMessageFor(q => q.pe_Naturaleza, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="info_persona.IdTipoDocumento">Tipo documento*</label>
                     @Html.DropDownListFor(q => q.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento" })
                     @Html.ValidationMessageFor(q => q.IdTipoDocumento, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="info_persona.pe_cedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc"})

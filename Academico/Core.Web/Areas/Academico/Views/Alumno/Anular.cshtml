@@ -31,7 +31,7 @@
     }
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="Codigo">Código</label>
                     @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control", @id = "Codigo" })
@@ -45,27 +45,19 @@
                     @Html.ValidationMessageFor(q => q.pe_Naturaleza, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="info_persona.IdTipoDocumento">Tipo documento*</label>
                     @Html.DropDownListFor(q => q.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdTipoDocumento, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="info_persona.pe_cedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
                     <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label for="IdSucursal">&nbsp;</label>
-                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","Alumno",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
-                        <i class="fa fa-plus"></i>
-                    </a>
                 </div>
             </div>
         </div>

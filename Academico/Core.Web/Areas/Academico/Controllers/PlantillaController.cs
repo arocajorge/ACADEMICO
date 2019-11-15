@@ -1,4 +1,5 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.General;
 using Core.Bus.Inventario;
 using Core.Data.Academico;
 using Core.Info.Academico;
@@ -6,6 +7,7 @@ using Core.Info.Helps;
 using Core.Info.Inventario;
 using Core.Web.Helps;
 using DevExpress.Web;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Plantilla_Bus bus_plantilla = new aca_Plantilla_Bus();
         aca_Plantilla_Rubro_Bus bus_plantilla_rubro = new aca_Plantilla_Rubro_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
+        tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -112,107 +115,255 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Json
-        public JsonResult guardar(int IdEmpresa = 0, int IdAnio = 0, string NomPlantilla = "", decimal Valor = 0, string Ids = "", decimal IdTransaccionSession = 0)
-        {
-            var mensaje = "";
+        //public JsonResult guardar(int IdEmpresa = 0, int IdAnio = 0, string NomPlantilla = "", decimal Valor = 0, string Ids = "", decimal IdTransaccionSession = 0)
+        //{
+        //    var mensaje = "";
 
-            aca_Plantilla_Info info_plantilla = new aca_Plantilla_Info
-            {
-                IdEmpresa = IdEmpresa,
-                IdAnio = IdAnio,
-                NomPlantilla = NomPlantilla,
-                Valor = Valor,
-                lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>()
-            };
+        //    aca_Plantilla_Info info_plantilla = new aca_Plantilla_Info
+        //    {
+        //        IdEmpresa = IdEmpresa,
+        //        IdAnio = IdAnio,
+        //        NomPlantilla = NomPlantilla,
+        //        Valor = Valor,
+        //        lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>()
+        //    };
 
-            string[] array = Ids.Split(',');
-            if (Ids != "")
-            {
-                var lista_det = Lista_PlantillaRubro.get_list(IdTransaccionSession);
-                foreach (var item in array)
-                {
-                    var info = lista_det.Where(q=>q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdRubro == Convert.ToInt32(item) ).FirstOrDefault();
-                    aca_Plantilla_Rubro_Info info_det = new aca_Plantilla_Rubro_Info
-                    {
-                        IdEmpresa = IdEmpresa,
-                        IdAnio = IdAnio,
-                        IdRubro = info.IdRubro,
-                        IdProducto = info.IdProducto,
-                        Subtotal = info.Subtotal,
-                        IdCod_Impuesto_Iva = info.IdCod_Impuesto_Iva,
-                        Porcentaje = info.Porcentaje,
-                        Total = info.Total
-                    };
+        //    string[] array = Ids.Split(',');
+        //    if (Ids != "")
+        //    {
+        //        var lista_det = Lista_PlantillaRubro.get_list(IdTransaccionSession);
+        //        foreach (var item in array)
+        //        {
+        //            var info = lista_det.Where(q=>q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdRubro == Convert.ToInt32(item) ).FirstOrDefault();
+        //            aca_Plantilla_Rubro_Info info_det = new aca_Plantilla_Rubro_Info
+        //            {
+        //                IdEmpresa = IdEmpresa,
+        //                IdAnio = IdAnio,
+        //                IdRubro = info.IdRubro,
+        //                IdProducto = info.IdProducto,
+        //                Subtotal = info.Subtotal,
+        //                IdCod_Impuesto_Iva = info.IdCod_Impuesto_Iva,
+        //                Porcentaje = info.Porcentaje,
+        //                Total = info.Total
+        //            };
 
-                    info_plantilla.lst_Plantilla_Rubro.Add(info_det);
-                }
-            }
+        //            info_plantilla.lst_Plantilla_Rubro.Add(info_det);
+        //        }
+        //    }
 
-            if (!bus_plantilla.GuardarDB(info_plantilla))
-            {
-                mensaje = "No se ha podido guardar el registro";
-            }
+        //    if (!bus_plantilla.GuardarDB(info_plantilla))
+        //    {
+        //        mensaje = "No se ha podido guardar el registro";
+        //    }
 
-            return Json(new { msg = mensaje, info = info_plantilla }, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(new { msg = mensaje, info = info_plantilla }, JsonRequestBehavior.AllowGet);
+        //}
 
-        public JsonResult actualizar(int IdEmpresa = 0, int IdAnio = 0, int IdPlantilla = 0, string NomPlantilla = "", decimal Valor = 0, string Ids = "", decimal IdTransaccionSession = 0)
-        {
-            var mensaje = "";
-            aca_Plantilla_Info info_plantilla = bus_plantilla.GetInfo(IdEmpresa, IdAnio, IdPlantilla);
-            info_plantilla.IdAnio = IdAnio;
-            info_plantilla.NomPlantilla = NomPlantilla;
-            info_plantilla.Valor = Valor;
-            info_plantilla.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
+        //public JsonResult actualizar(int IdEmpresa = 0, int IdAnio = 0, int IdPlantilla = 0, string NomPlantilla = "", decimal Valor = 0, string Ids = "", decimal IdTransaccionSession = 0)
+        //{
+        //    var mensaje = "";
+        //    aca_Plantilla_Info info_plantilla = bus_plantilla.GetInfo(IdEmpresa, IdAnio, IdPlantilla);
+        //    info_plantilla.IdAnio = IdAnio;
+        //    info_plantilla.NomPlantilla = NomPlantilla;
+        //    info_plantilla.Valor = Valor;
+        //    info_plantilla.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
 
-            string[] array = Ids.Split(',');
-            if (Ids != "")
-            {
-                var lista_det = Lista_PlantillaRubro.get_list(IdTransaccionSession);
-                foreach (var item in array)
-                {
-                    var info = lista_det.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdRubro == Convert.ToInt32(item)).FirstOrDefault();
-                    aca_Plantilla_Rubro_Info info_det = new aca_Plantilla_Rubro_Info
-                    {
-                        IdEmpresa = IdEmpresa,
-                        IdAnio = IdAnio,
-                        IdRubro = info.IdRubro,
-                        IdProducto = info.IdProducto,
-                        Subtotal = info.Subtotal,
-                        IdCod_Impuesto_Iva = info.IdCod_Impuesto_Iva,
-                        Porcentaje = info.Porcentaje,
-                        Total = info.Total
-                    };
+        //    string[] array = Ids.Split(',');
+        //    if (Ids != "")
+        //    {
+        //        var lista_det = Lista_PlantillaRubro.get_list(IdTransaccionSession);
+        //        foreach (var item in array)
+        //        {
+        //            var info = lista_det.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdRubro == Convert.ToInt32(item)).FirstOrDefault();
+        //            aca_Plantilla_Rubro_Info info_det = new aca_Plantilla_Rubro_Info
+        //            {
+        //                IdEmpresa = IdEmpresa,
+        //                IdAnio = IdAnio,
+        //                IdRubro = info.IdRubro,
+        //                IdProducto = info.IdProducto,
+        //                Subtotal = info.Subtotal,
+        //                IdCod_Impuesto_Iva = info.IdCod_Impuesto_Iva,
+        //                Porcentaje = info.Porcentaje,
+        //                Total = info.Total
+        //            };
 
-                    info_plantilla.lst_Plantilla_Rubro.Add(info_det);
-                }
-            }
+        //            info_plantilla.lst_Plantilla_Rubro.Add(info_det);
+        //        }
+        //    }
 
-            if (!bus_plantilla.ModificarDB(info_plantilla))
-            {
-                mensaje = "No se ha podido modificar el registro";
-            }
+        //    if (!bus_plantilla.ModificarDB(info_plantilla))
+        //    {
+        //        mensaje = "No se ha podido modificar el registro";
+        //    }
 
-            return Json(mensaje, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(mensaje, JsonRequestBehavior.AllowGet);
+        //}
 
         public JsonResult Set_Anio(int IdAnio = 0)
         {
             SessionFixed.IdAnio = IdAnio.ToString();
             return Json("", JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult CalcularValores(double Valor = 0, string IdCodImpuesto = "")
+        {
+            double iva_porc = 0;
+            double iva = 0;
+            double total = 0;
+
+            var impuesto = bus_impuesto.get_info(IdCodImpuesto);
+            if (impuesto != null)
+                iva_porc = impuesto.porcentaje;
+
+            iva = Math.Round((Valor * (iva_porc / 100)), 2);
+            total = Math.Round((Valor + iva), 2);
+
+            return Json(new { iva = iva, total = total }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SetPrecioProducto(decimal IdProducto = 0)
+        {
+            in_Producto_Bus bus_producto = new in_Producto_Bus();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var producto = bus_producto.get_info(IdEmpresa, IdProducto);
+            string IdCod_Impuesto_Iva = "";
+            double iva_porc = 0;
+            double iva = 0;
+            double PrecioProd = 0;
+            double TotalIProd = 0;
+
+            if (producto == null)
+                producto = new in_Producto_Info();
+
+            IdCod_Impuesto_Iva = producto.IdCod_Impuesto_Iva;
+            PrecioProd = producto.precio_1;
+
+            var impuesto = bus_impuesto.get_info(producto.IdCod_Impuesto_Iva);
+            if (impuesto != null)
+                iva_porc = impuesto.porcentaje;
+
+            iva = Math.Round((PrecioProd * (iva_porc / 100)), 2);
+            TotalIProd = Math.Round((PrecioProd + iva), 2);
+
+            return Json(new { Precio = PrecioProd, IdCodImpuesto = IdCod_Impuesto_Iva, Total = TotalIProd }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
-        #region Acciones
+        #region funciones del detalle
         [ValidateInput(false)]
         public ActionResult GridViewPartial_PlantillaRubro()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             List<aca_Plantilla_Rubro_Info> model = Lista_PlantillaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
             return PartialView("_GridViewPartial_PlantillaRubro", model);
         }
 
+        private void cargar_combos_detalle()
+        {
+            var lst_impuesto = bus_impuesto.get_list("IVA", false);
+            ViewBag.lst_impuesto = lst_impuesto;
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] aca_Plantilla_Rubro_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdAnio = Convert.ToInt32(SessionFixed.IdAnio);
+            var Lista = Lista_PlantillaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            if (Lista.Where(q => q.IdRubro == info_det.IdRubro).ToList().Count == 0)
+            {
+                var info_impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto_Iva);
+                var info_rubro = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, info_det.IdRubro);
+                if (info_rubro != null)
+                {
+                    info_det.IdAnio = IdAnio;
+                    info_det.IdEmpresa = IdEmpresa;
+                    info_det.NomRubro = info_rubro.NomRubro;
+                    //info_det.IdProducto = info_rubro.IdProducto;
+                    //info_det.Subtotal = info_rubro.Subtotal;
+                    //info_det.IdCod_Impuesto_Iva = info_rubro.IdCod_Impuesto_Iva;
+                    //info_det.ValorIVA = info_rubro.ValorIVA;
+                    //info_det.Porcentaje = info_rubro.Porcentaje;
+                    //info_det.Total = info_rubro.Total;
+                }
+
+                if (info_det.IdProducto != 0)
+                {
+                    var info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                    if (info_producto != null)
+                    {
+                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                    }
+                }
+
+                if(info_impuesto!=null)
+                    info_det.Porcentaje = Convert.ToDecimal(info_impuesto.porcentaje);
+                info_det.ValorIVA = (info_det.Subtotal * (info_det.Porcentaje/100));
+                Lista_PlantillaRubro.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
+            
+            var model = Lista_PlantillaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_PlantillaRubro", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] aca_Plantilla_Rubro_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdAnio = Convert.ToInt32(SessionFixed.IdAnio);
+            if (info_det != null)
+            {
+                var info_impuesto = bus_impuesto.get_info(info_det.IdCod_Impuesto_Iva);
+
+                if (info_det.IdRubro != 0)
+                {
+                    var info_rubro = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, info_det.IdRubro);
+                    if (info_rubro != null)
+                    {
+                        info_det.IdAnio = IdAnio;
+                        info_det.IdEmpresa = IdEmpresa;
+                        info_det.NomRubro = info_rubro.NomRubro;
+                        //info_det.IdProducto = info_rubro.IdProducto;
+                        //info_det.Subtotal = info_rubro.Subtotal;
+                        //info_det.IdCod_Impuesto_Iva = info_rubro.IdCod_Impuesto_Iva;
+                        //info_det.ValorIVA = info_rubro.ValorIVA;
+                        //info_det.Porcentaje = info_rubro.Porcentaje;
+                        //info_det.Total = info_rubro.Total;
+                    }
+                }
+                if (info_det.IdProducto != 0)
+                {
+                    var info_producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                    if (info_producto!=null)
+                    {
+                        info_det.pr_descripcion = info_producto.pr_descripcion;
+                    }
+                }
+
+                if (info_impuesto != null)
+                    info_det.Porcentaje = Convert.ToDecimal(info_impuesto.porcentaje);
+                info_det.ValorIVA = (info_det.Subtotal * (info_det.Porcentaje / 100));
+            }
+
+            Lista_PlantillaRubro.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lista_PlantillaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_PlantillaRubro", model);
+        }
+
+        public ActionResult EditingDelete(int IdRubro)
+        {
+            Lista_PlantillaRubro.DeleteRow(IdRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lista_PlantillaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_PlantillaRubro", model);
+        }
+        #endregion
+
+        #region Acciones
         public ActionResult Nuevo()
         {
             #region Validar Session
@@ -230,20 +381,23 @@ namespace Core.Web.Areas.Academico.Controllers
             };
 
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
-            model.lst_Plantilla_Rubro = bus_plantilla_rubro.GetListAsignacion(model.IdEmpresa, model.IdAnio);
-            Lista_PlantillaRubro.set_list(model.lst_Plantilla_Rubro, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Nuevo(aca_Plantilla_Info model)
         {
+            model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
-            model.lst_Plantilla_Rubro = bus_plantilla_rubro.GetListAsignacion(model.IdEmpresa, model.IdAnio);
-            Lista_PlantillaRubro.set_list(model.lst_Plantilla_Rubro, Convert.ToDecimal(model.IdTransaccionSession));
+            model.lst_Plantilla_Rubro = Lista_PlantillaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
 
-            return View(model);
+            if (!bus_plantilla.GuardarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, IdPlantilla = model.IdPlantilla, Exito = true });
         }
 
         public ActionResult Modificar(int IdEmpresa = 0, int IdAnio=0, int IdPlantilla = 0, bool Exito = false)
@@ -264,7 +418,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
-            model.lst_Plantilla_Rubro = bus_plantilla_rubro.GetListAsignacion(model.IdEmpresa, model.IdAnio);
+            model.lst_Plantilla_Rubro = bus_plantilla_rubro.GetList(model.IdEmpresa, model.IdAnio, model.IdPlantilla);
             Lista_PlantillaRubro.set_list(model.lst_Plantilla_Rubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return View(model);
@@ -273,11 +427,17 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Modificar(aca_Plantilla_Info model)
         {
+            model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
-            model.lst_Plantilla_Rubro = bus_plantilla_rubro.GetListAsignacion(model.IdEmpresa, model.IdAnio);
-            Lista_PlantillaRubro.set_list(model.lst_Plantilla_Rubro, Convert.ToDecimal(model.IdTransaccionSession));
+            model.lst_Plantilla_Rubro = Lista_PlantillaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
 
-            return View(model);
+            if (!bus_plantilla.ModificarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, IdPlantilla = model.IdPlantilla = 0, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdAnio = 0, int IdPlantilla=0)
@@ -295,7 +455,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 return RedirectToAction("Index");
 
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
-            model.lst_Plantilla_Rubro = bus_plantilla_rubro.GetListAsignacion(model.IdEmpresa, model.IdAnio);
+            model.lst_Plantilla_Rubro = bus_plantilla_rubro.GetList(model.IdEmpresa, model.IdAnio, model.IdPlantilla);
             Lista_PlantillaRubro.set_list(model.lst_Plantilla_Rubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return View(model);
@@ -361,10 +521,7 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
 
             List<aca_Plantilla_Rubro_Info> list = get_list(IdTransaccionSession);
-            if ( list.Where(q=>q.IdRubro == info_det.IdRubro).ToList().Count == 0)
-            {
-                list.Add(info_det);
-            }   
+                list.Add(info_det); 
         }
 
         public void UpdateRow(aca_Plantilla_Rubro_Info info_det, decimal IdTransaccionSession)
