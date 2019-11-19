@@ -62,7 +62,9 @@ namespace Core.Info.Helps
             EMPLEA,
             PERSONA,
             PROVEE,
-            ALUMNO
+            ALUMNO,
+            TUTOR,
+            INSPECTOR
         }
 
         public enum eTipoCatalogoAcademico

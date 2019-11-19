@@ -188,6 +188,14 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return true;
         }
+
+        private void cargar_combos()
+        {
+            Dictionary<string, string> lst_tipo_desc = new Dictionary<string, string>();
+            lst_tipo_desc.Add("$", "$ Monto");
+            lst_tipo_desc.Add("%", "% Porcentaje");
+            ViewBag.lst_tipo_desc = lst_tipo_desc;
+        }
         #endregion
 
         #region funciones del detalle
@@ -322,6 +330,7 @@ namespace Core.Web.Areas.Academico.Controllers
             };
 
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
+            cargar_combos();
             return View(model);
         }
 
@@ -336,6 +345,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 ViewBag.mensaje = mensaje;
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
                 return View(model);
             }
 
@@ -343,6 +353,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
                 return View(model);
             }
             return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, IdPlantilla = model.IdPlantilla, Exito = true });
@@ -369,7 +380,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
             model.lst_Plantilla_Rubro = bus_plantilla_rubro.GetList(model.IdEmpresa, model.IdAnio, model.IdPlantilla);
             Lista_PlantillaRubro.set_list(model.lst_Plantilla_Rubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
+            cargar_combos();
             return View(model);
         }
 
@@ -384,6 +395,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 ViewBag.mensaje = mensaje;
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
                 return View(model);
             }
 
@@ -391,8 +403,10 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
                 return View(model);
             }
+
             return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, IdPlantilla = model.IdPlantilla, Exito = true });
         }
 
@@ -413,7 +427,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
             model.lst_Plantilla_Rubro = bus_plantilla_rubro.GetList(model.IdEmpresa, model.IdAnio, model.IdPlantilla);
             Lista_PlantillaRubro.set_list(model.lst_Plantilla_Rubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
@@ -423,7 +437,8 @@ namespace Core.Web.Areas.Academico.Controllers
             if (!bus_plantilla.AnularDB(model))
             {
                 ViewBag.mensaje = "No se ha podido anular el registro";
-
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
                 return View(model);
             }
 
@@ -497,7 +512,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public void DeleteRow(int IdRubro, decimal IdTransaccionSession)
         {
             List<aca_Plantilla_Rubro_Info> list = get_list(IdTransaccionSession);
-            list.Remove(list.Where(q => q.IdRubro == IdRubro).First());
+            list.Remove(list.Where(q => q.IdRubro == IdRubro).FirstOrDefault());
         }
     }
 }

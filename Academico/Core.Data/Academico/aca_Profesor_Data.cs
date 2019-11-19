@@ -31,7 +31,9 @@ namespace Core.Data.Academico
                             Codigo = q.Codigo,
                             Estado = q.Estado,
                             pe_nombreCompleto = q.pe_nombreCompleto,
-                            pe_cedulaRuc = q.pe_cedulaRuc
+                            pe_cedulaRuc = q.pe_cedulaRuc,
+                            EsInspector = q.EsInspector,
+                            EsProfesor = q.EsProfesor
                         });
                     });
                 }
@@ -77,7 +79,9 @@ namespace Core.Data.Academico
                         IdEstadoCivil = Entity.IdEstadoCivil,
                         pe_fechaNacimiento = Entity.pe_fechaNacimiento,
                         pe_celular = Entity.pe_celular,
-                        IdTipoDocumento = Entity.IdTipoDocumento
+                        IdTipoDocumento = Entity.IdTipoDocumento,
+                        EsInspector = Entity.EsInspector,
+                        EsProfesor = Entity.EsProfesor
                     };
                 }
 
@@ -128,6 +132,8 @@ namespace Core.Data.Academico
                         Correo = info.Correo,
                         Direccion = info.Direccion,
                         Telefonos = info.Telefonos,
+                        EsProfesor = info.EsProfesor,
+                        EsInspector = info.EsInspector,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
@@ -159,6 +165,8 @@ namespace Core.Data.Academico
                     Entity.Direccion = info.Direccion;
                     Entity.Telefonos = info.Telefonos;
                     Entity.Codigo = info.Codigo;
+                    Entity.EsInspector = info.EsInspector;
+                    Entity.EsProfesor= info.EsProfesor;
                     Context.SaveChanges();
                 }
 
@@ -251,6 +259,8 @@ namespace Core.Data.Academico
                     pe_razonSocial = Entity_aca.pe_razonSocial,
                     pe_celular = Entity_aca.pe_celular,
                     pe_sexo = Entity_aca.pe_sexo,
+                    EsInspector = Entity_aca.EsInspector,
+                    EsProfesor = Entity_aca.EsProfesor,
                     IdEstadoCivil = Entity_aca.IdEstadoCivil,
                     pe_fechaNacimiento = Entity_aca.pe_fechaNacimiento
             };

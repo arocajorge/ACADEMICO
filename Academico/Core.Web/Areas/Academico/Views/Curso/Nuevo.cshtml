@@ -54,6 +54,24 @@
             </div>
         </div>
     </div>
+    @*<div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Tutor*</label>
+                    @Html.Partial("_CmbProfesorTutor", Model.IdProfesorTutor)
+                    @Html.ValidationMessageFor(q => q.IdProfesorTutor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Inspector*</label>
+                    @Html.Partial("_CmbProfesorInspector", Model.IdProfesorInspector)
+                    @Html.ValidationMessageFor(q => q.IdProfesorInspector, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>*@
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Curso",new { Area = "Academico" },null)">Cancelar</a>

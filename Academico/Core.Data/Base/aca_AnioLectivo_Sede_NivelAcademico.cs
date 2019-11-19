@@ -21,8 +21,8 @@ namespace Core.Data.Base
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
     
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
         public virtual aca_Sede aca_Sede { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

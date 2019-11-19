@@ -19,6 +19,7 @@ namespace Core.Info.Academico
         public string NomPlantilla { get; set; }
         [Required(ErrorMessage = "El campo valor es obligatorio")]
         public decimal Valor { get; set; }
+        public string TipoDescuento { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

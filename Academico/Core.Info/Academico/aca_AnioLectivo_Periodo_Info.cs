@@ -8,12 +8,14 @@ namespace Core.Info.Academico
 {
     public class aca_AnioLectivo_Periodo_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdPeriodo { get; set; }
         public int IdAnio { get; set; }
         public int IdMes { get; set; }
         public System.DateTime FechaDesde { get; set; }
         public System.DateTime FechaHasta { get; set; }
+        public Nullable<System.DateTime> FechaProntoPago { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -22,5 +24,12 @@ namespace Core.Info.Academico
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+
+        #region Campos que no existen en la tabla
+        public List<aca_AnioLectivo_Periodo_Info> lst_detalle { get; set; }
+        public string Descripcion { get; set; }
+        public int NumPeriodos { get; set; }
+        public string NomPeriodo { get; set; }
+        #endregion
     }
 }

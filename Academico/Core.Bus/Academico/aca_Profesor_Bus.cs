@@ -15,6 +15,7 @@ namespace Core.Bus.Academico
     {
         aca_Profesor_Data odata = new aca_Profesor_Data();
         tb_persona_Data odata_per = new tb_persona_Data();
+
         public List<aca_Profesor_Info> GetList(int IdEmpresa, bool MostrarAnulados)
         {
             try

@@ -38,5 +38,7 @@ namespace Core.Data.Base
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string Telefonos { get; set; }
+        public bool EsProfesor { get; set; }
+        public bool EsInspector { get; set; }
     }
 }

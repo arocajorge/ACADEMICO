@@ -102,27 +102,6 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
-        #region Metodos
-        private void cargar_combos()
-        {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var lst_sede = bus_sede.GetList(IdEmpresa, false);
-            ViewBag.lst_sede = lst_sede;
-
-            var lst_anio = bus_anio.GetList(IdEmpresa, false);
-            ViewBag.lst_anio = lst_anio;
-
-            var lst_nivel = bus_nivel.GetList(IdEmpresa, false);
-            ViewBag.lst_nivel = lst_nivel;
-
-            var lst_jornada = bus_jornada.GetList(IdEmpresa, false);
-            ViewBag.lst_jornada = lst_jornada;
-
-            var lst_curso = bus_curso.GetList(IdEmpresa, false);
-            ViewBag.lst_curso = lst_curso;
-        }
-        #endregion
-
         #region Json
         public JsonResult guardar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, string Ids = "", decimal IdTransaccionSession = 0)
         {
@@ -147,6 +126,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         IdMateria = Convert.ToInt32(item),
                         EsObligatorio = info_materia.EsObligatorio,
                         NomMateria = info_materia.NomMateria,
+                        NomMateriaGrupo = info_materia.NomMateriaGrupo,
                         OrdenMateria = info_materia.OrdenMateria
                     };
                     lista.Add(info);

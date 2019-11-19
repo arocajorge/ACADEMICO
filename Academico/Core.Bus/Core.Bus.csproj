@@ -49,6 +49,7 @@
     <Compile Include="Academico\aca_AnioLectivo_Jornada_Curso_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_NivelAcademico_Jornada_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Paralelo_Profesor_Bus.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Periodo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Periodo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Bus.cs" />

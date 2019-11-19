@@ -45,8 +45,8 @@ namespace Core.Data.Base
     
         public virtual aca_Alumno aca_Alumno { get; set; }
         public virtual aca_AnioLectivo_Curso_Paralelo aca_AnioLectivo_Curso_Paralelo { get; set; }
-        public virtual aca_Plantilla aca_Plantilla { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Matricula_Rubro> aca_Matricula_Rubro { get; set; }
+        public virtual aca_Plantilla aca_Plantilla { get; set; }
     }
 }

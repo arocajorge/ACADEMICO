@@ -26,6 +26,7 @@ namespace Core.Data.Academico
                         IdAnio = q.IdAnio,
                         IdPlantilla = q.IdPlantilla,
                         NomPlantilla = q.NomPlantilla,
+                        TipoDescuento = q.TipoDescuento,
                         Valor = q.Valor,
                         Estado = q.Estado
                     }).ToList();
@@ -57,6 +58,7 @@ namespace Core.Data.Academico
                         IdPlantilla = Entity.IdPlantilla,
                         IdAnio = Entity.IdAnio,
                         NomPlantilla = Entity.NomPlantilla,
+                        TipoDescuento = Entity.TipoDescuento,
                         Valor = Entity.Valor
                     };
                 }
@@ -104,6 +106,7 @@ namespace Core.Data.Academico
                         IdAnio = info.IdAnio,
                         IdPlantilla = info.IdPlantilla = getId(info.IdEmpresa),
                         NomPlantilla = info.NomPlantilla,
+                        TipoDescuento = info.TipoDescuento,
                         Valor = info.Valor,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
@@ -154,6 +157,7 @@ namespace Core.Data.Academico
 
                     Entity.IdAnio = info.IdAnio;
                     Entity.NomPlantilla = info.NomPlantilla;
+                    Entity.TipoDescuento = info.TipoDescuento;
                     Entity.Valor = info.Valor;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;

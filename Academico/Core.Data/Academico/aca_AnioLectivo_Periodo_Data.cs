@@ -1,4 +1,5 @@
 ﻿using Core.Data.Base;
+using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,117 @@ namespace Core.Data.Academico
 {
     public class aca_AnioLectivo_Periodo_Data
     {
+        public List<aca_AnioLectivo_Periodo_Info> getList(int IdEmpresa)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Periodo_Info> Lista = new List<aca_AnioLectivo_Periodo_Info>();
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.vwaca_AnioLectivo_Periodo.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new aca_AnioLectivo_Periodo_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdAnio = q.IdAnio,
+                        Descripcion = q.Descripcion,
+                        NumPeriodos = q.NumPeriodos??0
+                    }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivo_Periodo_Info> getList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Periodo_Info> Lista = new List<aca_AnioLectivo_Periodo_Info>();
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.aca_AnioLectivo_Periodo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_AnioLectivo_Periodo_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdPeriodo = q.IdPeriodo,
+                        IdAnio = q.IdAnio,
+                        FechaDesde = q.FechaDesde,
+                        FechaHasta = q.FechaHasta,
+                        FechaProntoPago = q.FechaProntoPago,
+                        Estado = q.Estado
+                    }).ToList();
+                }
+                Lista.ForEach(v => { v.NomPeriodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(List<aca_AnioLectivo_Periodo_Info> info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    foreach (var item in info)
+                    {
+                        aca_AnioLectivo_Periodo Entity = Context.aca_AnioLectivo_Periodo.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa && q.IdAnio == item.IdAnio && q.IdPeriodo == item.IdPeriodo);
+                        if (Entity == null)
+                            return false;
+
+                        Entity.FechaProntoPago = item.FechaProntoPago;
+                        Entity.IdUsuarioModificacion = item.IdUsuarioModificacion;
+                        Entity.FechaModificacion = item.FechaModificacion = DateTime.Now;
+
+                        Context.SaveChanges();
+                    }
+                    
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool anularDB(aca_AnioLectivo_Periodo_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_AnioLectivo_Periodo Entity = Context.aca_AnioLectivo_Periodo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio);
+                    if (Entity == null)
+                        return false;
+
+                    Entity.Estado = false;
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public int getId(int IdEmpresa)
         {
             try

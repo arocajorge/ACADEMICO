@@ -20,6 +20,8 @@ namespace Core.Info.Academico
         public string Correo { get; set; }
         public string Direccion { get; set; }
         public string Telefonos { get; set; }
+        public bool EsProfesor { get; set; }
+        public bool EsInspector { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }

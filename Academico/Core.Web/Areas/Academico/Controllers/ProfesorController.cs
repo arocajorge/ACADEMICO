@@ -82,10 +82,8 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_Profesor_Info model = new aca_Profesor_Info
             {
                 IdEmpresa = IdEmpresa,
-                info_persona = new tb_persona_Info
-                {
-                    pe_Naturaleza = "NATU"
-                }
+                EsProfesor = true,
+                pe_Naturaleza = "NATU"
             };
             cargar_combos();
             return View(model);

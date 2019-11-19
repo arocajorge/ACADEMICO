@@ -213,6 +213,7 @@
     <Compile Include="Areas\Academico\Controllers\JornadaPorNivelController.cs" />
     <Compile Include="Areas\Academico\Controllers\ParaleloController.cs" />
     <Compile Include="Areas\Academico\Controllers\ParaleloPorCursoController.cs" />
+    <Compile Include="Areas\Academico\Controllers\PeriodoPorAnioLectivoController.cs" />
     <Compile Include="Areas\Academico\Controllers\PlantillaController.cs" />
     <Compile Include="Areas\Academico\Controllers\PlantillaPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\ProfesorController.cs" />
@@ -7534,6 +7535,14 @@
     <Content Include="Areas\Academico\Views\Matricula\_ComboBoxPartial_Plantilla.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\_GridViewPartial_AlumnosPorParalelo.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\Curso\_CmbProfesorTutor.cshtml" />
+    <Content Include="Areas\Academico\Views\Curso\_CmbProfesorInspector.cshtml" />
+    <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\_GridViewPartial_anio_lectivo_periodo.cshtml" />
+    <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\_GridViewPartial_periodos.cshtml" />
+    <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

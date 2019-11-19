@@ -88,6 +88,9 @@
     <Compile Include="Base\aca_AnioLectivo.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\aca_AnioLectivo_Curso_Documento.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_AnioLectivo_Curso_Materia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -125,6 +128,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Curso.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_Documento.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Familia.cs">
@@ -287,6 +293,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Paralelo_Profesor.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_AnioLectivo_Periodo.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Rubro.cs">

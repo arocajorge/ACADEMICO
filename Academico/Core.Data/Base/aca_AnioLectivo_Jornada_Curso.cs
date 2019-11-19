@@ -14,6 +14,12 @@ namespace Core.Data.Base
     
     public partial class aca_AnioLectivo_Jornada_Curso
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public aca_AnioLectivo_Jornada_Curso()
+        {
+            this.aca_AnioLectivo_Curso_Documento = new HashSet<aca_AnioLectivo_Curso_Documento>();
+        }
+    
         public int IdEmpresa { get; set; }
         public int IdAnio { get; set; }
         public int IdSede { get; set; }
@@ -23,10 +29,12 @@ namespace Core.Data.Base
         public string NomCurso { get; set; }
         public int OrdenCurso { get; set; }
     
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
-        public virtual aca_Curso aca_Curso { get; set; }
         public virtual aca_Jornada aca_Jornada { get; set; }
         public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
         public virtual aca_Sede aca_Sede { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_AnioLectivo_Curso_Documento> aca_AnioLectivo_Curso_Documento { get; set; }
+        public virtual aca_Curso aca_Curso { get; set; }
     }
 }

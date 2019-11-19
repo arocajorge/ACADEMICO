@@ -49,6 +49,13 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
+                    <label for="IdOrden_giro_Tipo">Tipo descuento*</label>
+                    @Html.DropDownListFor(q => q.TipoDescuento, new SelectList(ViewBag.lst_tipo_desc, "Key", "Value"), new { @class = "form-control", @id = "TipoDescuento" })
+                    @Html.ValidationMessageFor(q => q.TipoDescuento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
                     <label for="IdEmpresa">Valor</label>
                     @Html.TextBoxFor(q => q.Valor, new { @class = "form-control", @id = "Valor" })
                     @Html.ValidationMessageFor(q => q.Valor, "", new { @class = "text-danger" })

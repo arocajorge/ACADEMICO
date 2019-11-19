@@ -12,19 +12,19 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_AnioLectivo_NivelAcademico_Jornada
+    public partial class aca_AnioLectivo_Curso_Documento
     {
         public int IdEmpresa { get; set; }
         public int IdAnio { get; set; }
         public int IdSede { get; set; }
         public int IdNivel { get; set; }
         public int IdJornada { get; set; }
-        public string NomJornada { get; set; }
-        public int OrdenJornada { get; set; }
+        public int IdCurso { get; set; }
+        public int IdDocumento { get; set; }
+        public string NomDocumento { get; set; }
+        public Nullable<int> OrdenDocumento { get; set; }
     
-        public virtual aca_Jornada aca_Jornada { get; set; }
-        public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
-        public virtual aca_Sede aca_Sede { get; set; }
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
+        public virtual aca_AnioLectivo_Jornada_Curso aca_AnioLectivo_Jornada_Curso { get; set; }
+        public virtual aca_Documento aca_Documento { get; set; }
     }
 }

@@ -252,6 +252,36 @@ namespace Core.Data.General
                         }
                         context_f.Dispose();
                         break;
+                    case "TUTOR":
+                        EntitiesAcademico context_t = new EntitiesAcademico();
+                        var lst_tutor = context_t.vwaca_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.EsProfesor == true && q.Estado == true && (q.IdProfesor.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdProfesor).Skip(skip).Take(take);
+                        foreach (var q in lst_tutor)
+                        {
+                            Lista.Add(new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdProfesor
+                            });
+                        }
+                        context_t.Dispose();
+                        break;
+                    case "INSPECTOR":
+                        EntitiesAcademico context_i = new EntitiesAcademico();
+                        var lst_inspector = context_i.vwaca_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.EsInspector == true && q.Estado == true && (q.IdProfesor.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdProfesor).Skip(skip).Take(take);
+                        foreach (var q in lst_inspector)
+                        {
+                            Lista.Add(new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdProfesor
+                            });
+                        }
+                        context_i.Dispose();
+                        break;
                 }
 
                 context_g.Dispose();

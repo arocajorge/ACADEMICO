@@ -94,6 +94,32 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.EsProfesor, settings =>
+                        {
+                            settings.Name = "EsProfesor";
+                            settings.Text = "Es Profesor";
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.EsProfesor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.EsInspector, settings =>
+                        {
+                            settings.Name = "EsInspector";
+                            settings.Text = "Es Inspector";
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.EsInspector, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="Tabs" role="tabpanel">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">

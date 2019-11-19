@@ -26,6 +26,7 @@ namespace Core.Data.Base
         public int IdMes { get; set; }
         public System.DateTime FechaDesde { get; set; }
         public System.DateTime FechaHasta { get; set; }
+        public Nullable<System.DateTime> FechaProntoPago { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

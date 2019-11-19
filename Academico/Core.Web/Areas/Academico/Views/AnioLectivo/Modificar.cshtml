@@ -59,7 +59,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="Sede">Fecha desde*</label>
                     <div class="input-group date">
@@ -80,7 +80,7 @@
 
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="Sede">Fecha hasta*</label>
                     <div class="input-group date">
@@ -110,6 +110,17 @@
                                 settings.Text = "En Curso";
                             }).GetHtml()
                     @Html.ValidationMessageFor(q => q.EnCurso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.BloquearMatricula, settings =>
+                        {
+                            settings.Name = "BloquearMatricula";
+                            settings.Text = "Bloquear Matricula";
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.BloquearMatricula, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

@@ -31,6 +31,7 @@ namespace Core.Data.Academico
                             FechaDesde = q.FechaDesde,
                             FechaHasta = q.FechaHasta,
                             EnCurso = q.EnCurso,
+                            BloquearMatricula = q.BloquearMatricula,
                             Estado = q.Estado
                         });
                     });
@@ -65,6 +66,7 @@ namespace Core.Data.Academico
                         FechaDesde = Entity.FechaDesde,
                         FechaHasta = Entity.FechaHasta,
                         EnCurso = Entity.EnCurso,
+                        BloquearMatricula = Entity.BloquearMatricula,
                         Estado = Entity.Estado
                     };
                 }
@@ -148,6 +150,7 @@ namespace Core.Data.Academico
                         FechaDesde = info.FechaDesde,
                         FechaHasta = info.FechaHasta,
                         EnCurso = info.EnCurso,
+                        BloquearMatricula = info.BloquearMatricula,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -167,6 +170,7 @@ namespace Core.Data.Academico
                                 IdMes = item.IdMes,
                                 FechaDesde = item.FechaDesde,
                                 FechaHasta = item.FechaHasta,
+                                FechaProntoPago = null,
                                 Estado = true,
                                 IdUsuarioCreacion = info.IdUsuarioCreacion,
                                 FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -201,6 +205,7 @@ namespace Core.Data.Academico
                     Entity.FechaDesde = info.FechaDesde;
                     Entity.FechaHasta = info.FechaHasta;
                     Entity.EnCurso = info.EnCurso;
+                    Entity.BloquearMatricula = info.BloquearMatricula;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 

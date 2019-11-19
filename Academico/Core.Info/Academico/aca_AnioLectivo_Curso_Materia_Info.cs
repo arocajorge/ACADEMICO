@@ -23,6 +23,7 @@ namespace Core.Info.Academico
         public int IdCurso { get; set; }
         public int IdMateria { get; set; }
         public string NomMateria { get; set; }
+        public string NomMateriaGrupo { get; set; }
         public bool EsObligatorio { get; set; }
         public int OrdenMateria { get; set; }
 

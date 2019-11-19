@@ -80,7 +80,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdMateria == IdMateria).FirstOrDefault();
+                    var Entity = db.vwaca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdMateria == IdMateria).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
@@ -89,6 +89,7 @@ namespace Core.Data.Academico
                         IdEmpresa = Entity.IdEmpresa,
                         IdMateria = Entity.IdMateria,
                         IdMateriaGrupo = Entity.IdMateriaGrupo,
+                        NomMateriaGrupo = Entity.NomMateriaGrupo,
                         NomMateria = Entity.NomMateria,
                         OrdenMateria = Entity.OrdenMateria,
                         EsObligatorio = Entity.EsObligatorio,

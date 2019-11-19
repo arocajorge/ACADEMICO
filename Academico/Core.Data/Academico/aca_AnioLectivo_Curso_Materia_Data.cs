@@ -130,6 +130,7 @@ namespace Core.Data.Academico
                                 IdCurso = info.IdCurso,
                                 IdMateria = info.IdMateria,
                                 NomMateria = info.NomMateria,
+                                NomMateriaGrupo = info.NomMateriaGrupo,
                                 OrdenMateria = info.OrdenMateria,
                                 EsObligatorio = info.EsObligatorio
                             };

@@ -33,6 +33,7 @@ namespace Core.Data.Base
         public System.DateTime FechaHasta { get; set; }
         public bool Estado { get; set; }
         public bool EnCurso { get; set; }
+        public bool BloquearMatricula { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
