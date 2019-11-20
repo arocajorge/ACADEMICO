@@ -47,18 +47,6 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_AnioLectivo_Curso_Paralelo_Info GetInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
-        {
-            try
-            {
-                return odata.getInfo(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public bool GuardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, List<aca_AnioLectivo_Curso_Paralelo_Info> lista)
         {
             try

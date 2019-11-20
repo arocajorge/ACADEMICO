@@ -1,4 +1,4 @@
-﻿@model Core.Info.Academico.aca_AnioLectivo_Curso_Paralelo_Info
+﻿@model Core.Info.Academico.aca_AnioLectivo_Curso_Documento_Info
 @{
     ViewBag.Title = "Consulta de documentos por curso";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -16,7 +16,7 @@
         e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
     }
     function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("Documento", GetSelectedFieldValuesCallback);
+        s.GetSelectedFieldValues("IdDocumento", GetSelectedFieldValuesCallback);
     }
     function GetSelectedFieldValuesCallback(values) {
         //Capture all selected keys

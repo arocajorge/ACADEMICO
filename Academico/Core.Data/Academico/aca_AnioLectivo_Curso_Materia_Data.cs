@@ -71,42 +71,6 @@ namespace Core.Data.Academico
             }
         }
 
-        //public aca_AnioLectivo_Curso_Materia_Info getInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
-        //{
-        //    try
-        //    {
-        //        aca_AnioLectivo_Curso_Materia_Info info;
-
-        //        using (EntitiesAcademico db = new EntitiesAcademico())
-        //        {
-        //            var Entity = db.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).FirstOrDefault();
-        //            if (Entity == null)
-        //                return null;
-
-        //            info = new aca_AnioLectivo_Curso_Materia_Info
-        //            {
-        //                IdEmpresa = Entity.IdEmpresa,
-        //                IdAnio = Entity.IdAnio,
-        //                IdSede = Entity.IdSede,
-        //                IdNivel = Entity.IdNivel,
-        //                IdJornada = Entity.IdJornada,
-        //                IdCurso = Entity.IdCurso,
-        //                IdMateria = Entity.IdMateria,
-        //                NomMateria = Entity.NomMateria,
-        //                OrdenMateria = Entity.OrdenMateria,
-        //                EsObligatorio = Entity.EsObligatorio
-        //            };
-        //        }
-
-        //        return info;
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-
         public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, List<aca_AnioLectivo_Curso_Materia_Info> lista)
         {
             try
@@ -142,6 +106,70 @@ namespace Core.Data.Academico
                 return true;
             }
             catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivo_Curso_Materia_Info> getList_Update(int IdEmpresa, int IdAnio, int IdMateria)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Materia_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdMateria == IdMateria).Select(q => new aca_AnioLectivo_Curso_Materia_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdSede = q.IdSede,
+                        IdAnio = q.IdAnio,
+                        IdNivel = q.IdNivel,
+                        IdJornada = q.IdJornada,
+                        IdCurso = q.IdCurso,
+                        IdMateria = q.IdMateria,
+                        NomMateria = q.NomMateria,
+                        OrdenMateria = q.OrdenMateria,
+                        EsObligatorio = q.EsObligatorio
+                    }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool modificarDB(List<aca_AnioLectivo_Curso_Materia_Info> lista)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    if (lista.Count > 0)
+                    {
+                        foreach (var item in lista)
+                        {
+                            aca_AnioLectivo_Curso_Materia Entity = Context.aca_AnioLectivo_Curso_Materia.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa
+                            && q.IdSede == item.IdSede && q.IdAnio == item.IdAnio && q.IdNivel == item.IdNivel && q.IdJornada == item.IdJornada && q.IdCurso == item.IdCurso && q.IdMateria == item.IdMateria);
+                            if (Entity == null)
+                                return false;
+
+                            Entity.NomMateria = item.NomMateria;
+                            Entity.NomMateriaGrupo = item.NomMateriaGrupo;
+                            Entity.EsObligatorio = item.EsObligatorio;
+                            Entity.OrdenMateria = item.OrdenMateria;
+                        }
+                        Context.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
             {
 
                 throw;

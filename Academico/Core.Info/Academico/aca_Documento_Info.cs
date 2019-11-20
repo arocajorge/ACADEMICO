@@ -13,7 +13,7 @@ namespace Core.Info.Academico
         public int IdEmpresa { get; set; }
         public int IdDocumento { get; set; }
         [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo curso debe tener mínimo 1 caracter y máximo 500")]
-        [Required(ErrorMessage = "El campo curso es obligatorio")]
+        [Required(ErrorMessage = "El campo documento es obligatorio")]
         public string NomDocumento { get; set; }
         [Required(ErrorMessage = "El campo orden es obligatorio")]
         public Nullable<int> OrdenDocumento { get; set; }
@@ -24,6 +24,7 @@ namespace Core.Info.Academico
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
+        [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
     }
 }

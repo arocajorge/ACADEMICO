@@ -139,7 +139,7 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-
+            
             aca_Curso_Info model = bus_curso.GetInfo(IdEmpresa, IdCurso);
             model.IdCursoAPromover = (model.IdCursoAPromover == null ? 0 : model.IdCursoAPromover);
             if (model == null)
@@ -156,7 +156,6 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             model.IdCursoAPromover = (model.IdCursoAPromover == 0 ? null : model.IdCursoAPromover);
-
             if (!bus_curso.ModificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";

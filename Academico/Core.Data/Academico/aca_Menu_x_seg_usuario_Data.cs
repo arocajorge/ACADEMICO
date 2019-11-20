@@ -37,7 +37,9 @@ namespace Core.Data.Academico
                                  IdMenu = meu.IdMenu,
                                  IdMenuPadre = m.IdMenuPadre,
                                  DescripcionMenu = m.DescripcionMenu,
-                                 Perfil = meu.Perfil,
+                                 Nuevo = meu.Nuevo,
+                                 Modificar = meu.Modificar,
+                                 Anular = meu.Anular,
                                  info_menu = new aca_Menu_Info
                                  {
                                      IdMenu = m.IdMenu,
@@ -65,7 +67,9 @@ namespace Core.Data.Academico
                                             IdMenu = q.IdMenu,
                                             IdMenuPadre = q.IdMenuPadre,
                                             DescripcionMenu = q.DescripcionMenu,
-                                            Perfil = "",
+                                            Nuevo = true,
+                                            Modificar = true,
+                                            Anular = true,
                                             info_menu = new aca_Menu_Info
                                             {
                                                 IdMenu = q.IdMenu,
@@ -109,7 +113,9 @@ namespace Core.Data.Academico
                                  IdUsuario = meu.IdUsuario,
                                  IdMenu = meu.IdMenu,
                                  IdSede = meu.IdSede,
-                                 Perfil = meu.Perfil,
+                                 Nuevo = meu.Nuevo,
+                                 Modificar = meu.Modificar,
+                                 Anular = meu.Anular,
                                  info_menu = new aca_Menu_Info
                                  {
                                      IdMenu = m.IdMenu,
@@ -164,7 +170,9 @@ namespace Core.Data.Academico
                             IdSede = item.IdSede,
                             IdUsuario = item.IdUsuario,
                             IdMenu = item.IdMenu,
-                            Perfil = item.Perfil,
+                            Nuevo = item.Nuevo,
+                            Modificar = item.Modificar,
+                            Anular = item.Anular,
                         };
                         Context.aca_Menu_x_seg_usuario.Add(Entity);
                     }

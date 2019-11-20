@@ -23,18 +23,6 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_AnioLectivo_NivelAcademico_Jornada_Info GetInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel)
-        {
-            try
-            {
-                return odata.getInfo(IdEmpresa, IdSede, IdAnio, IdNivel);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public bool GuardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, List<aca_AnioLectivo_NivelAcademico_Jornada_Info> lista)
         {
             try

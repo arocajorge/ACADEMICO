@@ -107,5 +107,66 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public List<aca_AnioLectivo_Curso_Documento_Info> getList_Update(int IdEmpresa, int IdAnio, int IdDocumento)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Documento_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.aca_AnioLectivo_Curso_Documento.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdDocumento == IdDocumento).Select(q => new aca_AnioLectivo_Curso_Documento_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdSede = q.IdSede,
+                        IdAnio = q.IdAnio,
+                        IdNivel = q.IdNivel,
+                        IdJornada = q.IdJornada,
+                        IdCurso = q.IdCurso,
+                        IdDocumento = q.IdDocumento,
+                        NomDocumento = q.NomDocumento,
+                        OrdenDocumento = q.OrdenDocumento
+                    }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool modificarDB(List<aca_AnioLectivo_Curso_Documento_Info> lista)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    if (lista.Count > 0)
+                    {
+                        foreach (var item in lista)
+                        {
+                            aca_AnioLectivo_Curso_Documento Entity = Context.aca_AnioLectivo_Curso_Documento.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa
+                            && q.IdSede == item.IdSede && q.IdAnio == item.IdAnio && q.IdNivel == item.IdNivel && q.IdJornada == item.IdJornada && q.IdCurso == item.IdCurso && q.IdDocumento == item.IdDocumento);
+                            if (Entity == null)
+                                return false;
+
+                            Entity.NomDocumento = item.NomDocumento;
+                            Entity.OrdenDocumento = item.OrdenDocumento;
+                        }
+                        Context.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@Html.DevExpress().ComboBox(settings =>
 {
     settings.Name = "IdCurso";
-    settings.CallbackRouteValues = new { Controller = "ParaleloPorCurso", Action = "ComboBoxPartial_Curso", Area = "Academico" };
+    settings.CallbackRouteValues = new { Controller = "AsignacionTutorInspector", Action = "ComboBoxPartial_Curso", Area = "Academico" };
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.Properties.DisplayFormatString = "[{0}] - {1}";
     settings.Properties.Columns.Add("IdCurso", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);

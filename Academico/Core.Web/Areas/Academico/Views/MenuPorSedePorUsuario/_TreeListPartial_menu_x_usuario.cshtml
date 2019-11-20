@@ -6,18 +6,18 @@
         settings.KeyFieldName = "IdMenu";
         settings.ParentFieldName = "IdMenuPadre";
 
-        //settings.SettingsEditing.UpdateNodeRouteValues = new { Controller = "MenuPorEmpresaPorUsuario", Action = "EditingUpdate", Area = "SeguridadAcceso" };
+        settings.SettingsEditing.UpdateNodeRouteValues = new { Controller = "MenuPorSedePorUsuario", Action = "EditingUpdate", Area = "Academico" };
         settings.SettingsEditing.Mode = TreeListEditMode.EditFormAndDisplayNode;
         settings.SettingsEditing.ConfirmDelete = true;
         settings.Settings.GridLines = System.Web.UI.WebControls.GridLines.Both;
         settings.SettingsBehavior.ExpandCollapseAction = TreeListExpandCollapseAction.NodeDblClick;
 
-        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButtonInHeader = false;
         settings.CommandColumn.NewButton.Visible = false;
         settings.CommandColumn.DeleteButton.Visible = false;
-        settings.CommandColumn.EditButton.Visible = false;
-        
+        settings.CommandColumn.EditButton.Visible = true;
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdMenu";
@@ -38,7 +38,33 @@
             column.Caption = "Menú";
             column.FieldName = "DescripcionMenu";
             column.EditFormSettings.Visible = DefaultBoolean.False;
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(80);
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(50);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Nuevo";
+            column.FieldName = "Nuevo";
+            column.ColumnType = MVCxTreeListColumnType.CheckBox;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Modificar";
+            column.FieldName = "Modificar";
+            column.ColumnType = MVCxTreeListColumnType.CheckBox;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Anular";
+            column.FieldName = "Anular";
+            column.ColumnType = MVCxTreeListColumnType.CheckBox;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
         });
 
         settings.SettingsCookies.StoreSelection = true;

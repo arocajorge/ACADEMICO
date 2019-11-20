@@ -106,7 +106,7 @@
         });
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
-        settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {Set_Anio();}}";
+        settings.ClientSideEvents.EndCallback = "function(s,e){}";
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -31,5 +31,9 @@ namespace Core.Data.Base
         public int OrdenParalelo { get; set; }
         public Nullable<decimal> IdProfesorTutor { get; set; }
         public Nullable<decimal> IdProfesorInspector { get; set; }
+        public Nullable<decimal> IdPersonaTutor { get; set; }
+        public Nullable<decimal> IdPersonaInpector { get; set; }
+        public string NomTutor { get; set; }
+        public string NomInspector { get; set; }
     }
 }

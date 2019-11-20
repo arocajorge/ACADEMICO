@@ -12,7 +12,10 @@ namespace Core.Info.Academico
         public int IdSede { get; set; }
         public int IdMenu { get; set; }
         public string IdUsuario { get; set; }
-        public string Perfil { get; set; }
+        public bool Nuevo { get; set; }
+        public bool Modificar { get; set; }
+        public bool Anular { get; set; }
+
 
         //Campos que no existen en la tabla
         public string DescripcionMenu { get; set; }

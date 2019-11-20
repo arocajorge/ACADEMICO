@@ -11,17 +11,6 @@ namespace Core.Bus.Academico
     public class aca_AnioLectivo_Sede_NivelAcademico_Bus
     {
         aca_AnioLectivo_Sede_NivelAcademico_Data odata = new aca_AnioLectivo_Sede_NivelAcademico_Data();
-        public List<aca_AnioLectivo_Sede_NivelAcademico_Info> GetList(int IdEmpresa, int IdSede, int IdAnio)
-        {
-            try
-            {
-                return odata.getList(IdEmpresa, IdSede, IdAnio);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         public List<aca_AnioLectivo_Sede_NivelAcademico_Info> GetListAsignacion(int IdEmpresa, int IdSede, int IdAnio)
         {

@@ -11,6 +11,8 @@ namespace Core.Bus.Academico
     public class aca_Paralelo_Bus
     {
         aca_Paralelo_Data odata = new aca_Paralelo_Data();
+        aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
+        aca_AnioLectivo_Curso_Paralelo_Data odata_curso_paralelo = new aca_AnioLectivo_Curso_Paralelo_Data();
         public List<aca_Paralelo_Info> GetList(int IdEmpresa, bool MostrarAnulados)
         {
             try
@@ -86,7 +88,29 @@ namespace Core.Bus.Academico
         {
             try
             {
-                return odata.modificarDB(info);
+                var lst_anios = odata_anio.getList_update(info.IdEmpresa);
+                if (odata.modificarDB(info))
+                {
+                    if (lst_anios.Count > 0)
+                    {
+                        foreach (var item in lst_anios)
+                        {
+                            var lst_curso_paralelo = odata_curso_paralelo.getList_Update(info.IdEmpresa, item.IdAnio, info.IdParalelo);
+                            if (lst_curso_paralelo.Count > 0)
+                            {
+                                foreach (var info_curso_paralelo in lst_curso_paralelo)
+                                {
+                                    info_curso_paralelo.CodigoParalelo = info.CodigoParalelo;
+                                    info_curso_paralelo.NomParalelo = info.NomParalelo;
+                                    info_curso_paralelo.OrdenParalelo = info.OrdenParalelo;
+                                }
+
+                                return (odata_curso_paralelo.modificarDB(lst_curso_paralelo));
+                            }
+                        }
+                    }
+                }
+                return true;
             }
             catch (Exception)
             {

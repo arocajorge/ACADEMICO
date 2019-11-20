@@ -11,6 +11,8 @@ namespace Core.Bus.Academico
     public class aca_Curso_Bus
     {
         aca_Curso_Data odata = new aca_Curso_Data();
+        aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
+        aca_AnioLectivo_Jornada_Curso_Data odata_jornada_curso = new aca_AnioLectivo_Jornada_Curso_Data();
         public List<aca_Curso_Info> GetList(int IdEmpresa, bool MostrarAnulados)
         {
             try
@@ -75,7 +77,28 @@ namespace Core.Bus.Academico
         {
             try
             {
-                return odata.modificarDB(info);
+                var lst_anios = odata_anio.getList_update(info.IdEmpresa);
+                if (odata.modificarDB(info))
+                {
+                    if (lst_anios.Count > 0)
+                    {
+                        foreach (var item in lst_anios)
+                        {
+                            var lst_jornada_curso = odata_jornada_curso.getList_Update(info.IdEmpresa, item.IdAnio, info.IdCurso);
+                            if (lst_jornada_curso.Count > 0)
+                            {
+                                foreach (var info_jornada_curso in lst_jornada_curso)
+                                {
+                                    info_jornada_curso.NomCurso = info.NomCurso;
+                                    info_jornada_curso.OrdenCurso = info.OrdenCurso;
+                                }
+
+                                return (odata_jornada_curso.modificarDB(lst_jornada_curso));
+                            }
+                        }
+                    }
+                }
+                return true;
             }
             catch (Exception)
             {

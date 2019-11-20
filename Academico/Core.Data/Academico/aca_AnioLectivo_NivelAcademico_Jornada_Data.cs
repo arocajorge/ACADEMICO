@@ -63,31 +63,27 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_AnioLectivo_NivelAcademico_Jornada_Info getInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel)
+        public List<aca_AnioLectivo_NivelAcademico_Jornada_Info> GetList_Update(int IdEmpresa, int IdAnio, int IdJornada)
         {
             try
             {
-                aca_AnioLectivo_NivelAcademico_Jornada_Info info;
+                List<aca_AnioLectivo_NivelAcademico_Jornada_Info> Lista;
 
-                using (EntitiesAcademico db = new EntitiesAcademico())
+                using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_AnioLectivo_NivelAcademico_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
-
-                    info = new aca_AnioLectivo_NivelAcademico_Jornada_Info
+                    Lista = Context.aca_AnioLectivo_NivelAcademico_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdJornada == IdJornada).Select(q => new aca_AnioLectivo_NivelAcademico_Jornada_Info
                     {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        IdSede = Entity.IdSede,
-                        IdNivel = Entity.IdNivel,
-                        IdJornada = Entity.IdJornada,
-                        NomJornada = Entity.NomJornada,
-                        OrdenJornada = Entity.OrdenJornada
-                    };
+                        IdEmpresa = q.IdEmpresa,
+                        IdAnio = q.IdAnio,
+                        IdSede = q.IdSede,
+                        IdNivel = q.IdNivel,
+                        IdJornada = q.IdJornada,
+                        NomJornada = q.NomJornada,
+                        OrdenJornada = q.OrdenJornada
+                    }).ToList();
                 }
 
-                return info;
+                return Lista;
             }
             catch (Exception)
             {
@@ -124,6 +120,36 @@ namespace Core.Data.Academico
                     }
                     Context.SaveChanges();
                 }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(List<aca_AnioLectivo_NivelAcademico_Jornada_Info> lista)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    if (lista.Count > 0)
+                    {
+                        foreach (var item in lista)
+                        {
+                            aca_AnioLectivo_NivelAcademico_Jornada Entity = Context.aca_AnioLectivo_NivelAcademico_Jornada.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa
+                            && q.IdSede == item.IdSede && q.IdAnio == item.IdAnio && q.IdNivel == item.IdNivel && q.IdJornada == item.IdJornada);
+                            if (Entity == null)
+                                return false;
+
+                            Entity.NomJornada = item.NomJornada;
+                        }
+                        Context.SaveChanges();
+                    }
+                }
+
                 return true;
             }
             catch (Exception)

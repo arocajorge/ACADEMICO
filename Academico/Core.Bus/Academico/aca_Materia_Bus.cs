@@ -11,6 +11,8 @@ namespace Core.Bus.Academico
     public class aca_Materia_Bus
     {
         aca_Materia_Data odata = new aca_Materia_Data();
+        aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
+        aca_AnioLectivo_Curso_Materia_Data odata_curso_materia = new aca_AnioLectivo_Curso_Materia_Data();
         public List<aca_Materia_Info> GetList(int IdEmpresa, bool MostrarAnulados)
         {
             try
@@ -75,7 +77,30 @@ namespace Core.Bus.Academico
         {
             try
             {
-                return odata.modificarDB(info);
+                var lst_anios = odata_anio.getList_update(info.IdEmpresa);
+                if (odata.modificarDB(info))
+                {
+                    if (lst_anios.Count > 0)
+                    {
+                        foreach (var item in lst_anios)
+                        {
+                            var lst_curso_materia = odata_curso_materia.getList_Update(info.IdEmpresa, item.IdAnio, info.IdMateria);
+                            if (lst_curso_materia.Count > 0)
+                            {
+                                foreach (var info_curso_materia in lst_curso_materia)
+                                {
+                                    info_curso_materia.NomMateria = info.NomMateria;
+                                    info_curso_materia.NomMateriaGrupo = info.NomMateriaGrupo;
+                                    info_curso_materia.EsObligatorio = info.EsObligatorio;
+                                    info_curso_materia.OrdenMateria = info.OrdenMateria;
+                                }
+
+                                return (odata_curso_materia.modificarDB(lst_curso_materia));
+                            }
+                        }
+                    }
+                }
+                return true;
             }
             catch (Exception)
             {

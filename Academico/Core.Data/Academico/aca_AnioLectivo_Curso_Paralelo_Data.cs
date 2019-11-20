@@ -70,7 +70,9 @@ namespace Core.Data.Academico
                         NomParalelo = q.NomParalelo,
                         OrdenParalelo = q.OrdenParalelo,
                         IdProfesorInspector = q.IdProfesorInspector,
-                        IdProfesorTutor = q.IdProfesorTutor
+                        IdProfesorTutor = q.IdProfesorTutor,
+                        NomTutor = q.NomTutor,
+                        NomInspector = q.NomInspector
                     }).ToList();
                 }
 
@@ -143,41 +145,6 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_AnioLectivo_Curso_Paralelo_Info getInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
-        {
-            try
-            {
-                aca_AnioLectivo_Curso_Paralelo_Info info;
-
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
-
-                    info = new aca_AnioLectivo_Curso_Paralelo_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        IdSede = Entity.IdSede,
-                        IdNivel = Entity.IdNivel,
-                        IdJornada = Entity.IdJornada,
-                        IdCurso = Entity.IdCurso,
-                        IdParalelo = Entity.IdParalelo,
-                        NomParalelo = Entity.NomParalelo,
-                        OrdenParalelo = Entity.OrdenParalelo
-                    };
-                }
-
-                return info;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, List<aca_AnioLectivo_Curso_Paralelo_Info> lista)
         {
             try
@@ -212,6 +179,69 @@ namespace Core.Data.Academico
                 return true;
             }
             catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivo_Curso_Paralelo_Info> getList_Update(int IdEmpresa, int IdAnio, int IdParalelo)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Paralelo_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.aca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdParalelo == IdParalelo).Select(q => new aca_AnioLectivo_Curso_Paralelo_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdAnio = q.IdAnio,
+                        IdSede = q.IdSede,
+                        IdNivel = q.IdNivel,
+                        IdJornada = q.IdJornada,
+                        IdCurso = q.IdCurso,
+                        IdParalelo = q.IdParalelo,
+                        CodigoParalelo = q.CodigoParalelo,
+                        NomParalelo = q.NomParalelo,
+                        OrdenParalelo = q.OrdenParalelo
+                    }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool modificarDB(List<aca_AnioLectivo_Curso_Paralelo_Info> lista)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    if (lista.Count > 0)
+                    {
+                        foreach (var item in lista)
+                        {
+                            aca_AnioLectivo_Curso_Paralelo Entity = Context.aca_AnioLectivo_Curso_Paralelo.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa
+                            && q.IdSede == item.IdSede && q.IdAnio == item.IdAnio && q.IdNivel == item.IdNivel && q.IdJornada == item.IdJornada && q.IdCurso == item.IdCurso && q.IdParalelo == item.IdParalelo);
+                            if (Entity == null)
+                                return false;
+
+                            Entity.NomParalelo = item.NomParalelo;
+                            Entity.OrdenParalelo = item.OrdenParalelo;
+                            Entity.CodigoParalelo = item.CodigoParalelo;
+                        }
+                        Context.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
             {
 
                 throw;

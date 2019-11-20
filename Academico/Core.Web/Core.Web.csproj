@@ -7567,6 +7567,7 @@
     <Content Include="Areas\Academico\Views\DocumentoPorCurso\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Academico\Views\DocumentoPorCurso\_GridViewPartial_DocumentoPorCurso.cshtml" />
     <Content Include="Areas\Academico\Views\DocumentoPorCurso\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\_ComboBoxPartial_Anio_Consulta.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

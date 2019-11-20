@@ -132,17 +132,14 @@ namespace Core.Web.Areas.Academico.Controllers
             }
             return PartialView("_TreeListPartial_menu_x_usuario", model);
         }
-
         public JsonResult guardar(int IdEmpresa = 0, int IdSede = 0, string IdUsuario = "", int Modificado = 0, string Ids = "")
         {
             string[] array = Ids.Split(',');
-            bool resultado = false;
 
             List<aca_Menu_x_seg_usuario_Info> lista = new List<aca_Menu_x_seg_usuario_Info>();
-
             if (Modificado == 0)
             {
-                var lst_menu_usuario = ListaUsuario.get_list();
+                var lst_menu_usuario = Lista_menu_usuario.get_list();
                 foreach (var item in lst_menu_usuario)
                 {
 
@@ -152,25 +149,29 @@ namespace Core.Web.Areas.Academico.Controllers
             }
             else
             {
-                if (Ids != "")
+                var output = array.GroupBy(q => q).ToList();
+                foreach (var item in output)
                 {
-                    var output = array.GroupBy(q => q).ToList();
-                    foreach (var item in output)
+                    if (!string.IsNullOrEmpty(item.Key))
                     {
-                        if (!string.IsNullOrEmpty(item.Key))
-                        {
-                            var lst_menu = Lista_menu_usuario.get_list();
-                            var menu = lst_menu.Where(q => q.IdMenu == Convert.ToInt32(item.Key)).FirstOrDefault();
-
-                            if (menu != null)
-                                lista.Add(menu);
-                        }
+                        var lst_menu = Lista_menu_usuario.get_list();
+                        var menu = lst_menu.Where(q => q.IdMenu == Convert.ToInt32(item.Key)).FirstOrDefault();
+                        //seg_Menu_x_Empresa_x_Usuario_Info info = new seg_Menu_x_Empresa_x_Usuario_Info
+                        //{
+                        //    IdEmpresa = IdEmpresa,
+                        //    IdMenu = Convert.ToInt32(item.Key),
+                        //    IdUsuario = IdUsuario
+                        //};
+                        if (menu != null)
+                            lista.Add(menu);
                     }
                 }
             }
+
             bus_menu_sede_usuario.eliminarDB(IdEmpresa, IdSede, IdUsuario);
-            resultado = bus_menu_sede_usuario.guardarDB(lista, IdEmpresa, IdSede, IdUsuario);
-            
+            var resultado = bus_menu_sede_usuario.guardarDB(lista, IdEmpresa, IdSede, IdUsuario);
+
+
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
     }
@@ -217,9 +218,9 @@ namespace Core.Web.Areas.Academico.Controllers
         public void UpdateRow(aca_Menu_x_seg_usuario_Info info)
         {
             aca_Menu_x_seg_usuario_Info edited_info = get_list().Where(q => q.IdMenu == info.IdMenu).FirstOrDefault();
-            //edited_info.Lectura = info.Lectura;
-            //edited_info.Escritura = info.Escritura;
-            //edited_info.Eliminacion = info.Eliminacion;
+            edited_info.Nuevo = info.Nuevo;
+            edited_info.Modificar = info.Modificar;
+            edited_info.Anular = info.Anular;
         }
     }
 

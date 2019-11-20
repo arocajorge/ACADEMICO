@@ -22,6 +22,8 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         aca_AnioLectivo_Curso_Paralelo_Bus bus_ParaleloPorCurso = new aca_AnioLectivo_Curso_Paralelo_Bus();
         aca_AnioLectivo_Curso_Paralelo_List Lista_ParaleloPorCurso = new aca_AnioLectivo_Curso_Paralelo_List();
+        string mensaje = string.Empty;
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Combos bajo demanada
@@ -51,6 +53,38 @@ namespace Core.Web.Areas.Academico.Controllers
         public tb_persona_Info get_info_bajo_demanda_inspector(ListEditItemRequestedByValueEventArgs args)
         {
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.INSPECTOR.ToString());
+        }
+
+        public ActionResult ComboBoxPartial_Anio()
+        {
+            return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
+        }
+        public ActionResult ComboBoxPartial_Sede()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            return PartialView("_ComboBoxPartial_Sede", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio });
+        }
+        public ActionResult ComboBoxPartial_Nivel()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
+            return PartialView("_ComboBoxPartial_Nivel", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio, IdSede = IdSede });
+        }
+        public ActionResult ComboBoxPartial_Jornada()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            return PartialView("_ComboBoxPartial_Jornada", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel });
+        }
+
+        public ActionResult ComboBoxPartial_Curso()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            return PartialView("_ComboBoxPartial_Curso", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada });
         }
         #endregion
 
@@ -115,6 +149,40 @@ namespace Core.Web.Areas.Academico.Controllers
                     Lista_ParaleloPorCurso.UpdateRow(product, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
             return GridViewPartial_AsignacionTutorInspector();
+        }
+        #endregion
+
+        #region Acciones
+        public ActionResult Modificar(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            aca_AnioLectivo_Curso_Paralelo_Info model = new aca_AnioLectivo_Curso_Paralelo_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdAnio = IdAnio,
+                IdSede = IdSede,
+                IdNivel = IdNivel,
+                IdJornada = IdJornada,
+                IdCurso = IdCurso,
+            };
+            model.lst_detalle = new List<aca_AnioLectivo_Curso_Paralelo_Info>();
+            model.lst_detalle = bus_ParaleloPorCurso.GetListByCurso(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            Lista_ParaleloPorCurso.set_list(model.lst_detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return View(model);
         }
         #endregion
     }

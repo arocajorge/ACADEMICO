@@ -11,6 +11,9 @@ namespace Core.Bus.Academico
     public class aca_NivelAcademico_Bus
     {
         aca_NivelAcademico_Data odata = new aca_NivelAcademico_Data();
+        aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
+        aca_AnioLectivo_Sede_NivelAcademico_Data odata_sede_nivel = new aca_AnioLectivo_Sede_NivelAcademico_Data();
+
         public List<aca_NivelAcademico_Info> GetList(int IdEmpresa, bool MostrarAnulados)
         {
             try
@@ -76,7 +79,27 @@ namespace Core.Bus.Academico
         {
             try
             {
-                return odata.modificarDB(info);
+                var lst_anios = odata_anio.getList_update(info.IdEmpresa);
+                if (odata.modificarDB(info))
+                {
+                    if (lst_anios.Count > 0)
+                    {
+                        foreach (var item in lst_anios)
+                        {
+                            var lst_sede_nivel = odata_sede_nivel.GetList_Update_Nivel(info.IdEmpresa, item.IdAnio, info.IdNivel);
+                            if (lst_sede_nivel.Count > 0)
+                            {
+                                foreach (var info_sede_nivel in lst_sede_nivel)
+                                {
+                                    info_sede_nivel.NomNivel = info.NomNivel;
+                                }
+
+                                return (odata_sede_nivel.modificarDB(lst_sede_nivel));
+                            }
+                        }
+                    }
+                }
+                return true;
             }
             catch (Exception)
             {

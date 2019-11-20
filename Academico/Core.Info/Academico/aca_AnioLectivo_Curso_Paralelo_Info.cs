@@ -36,6 +36,9 @@ namespace Core.Info.Academico
         public string NomNivel { get; set; }
         public string NomJornada { get; set; }
         public string NomCurso { get; set; }
+        public string NomTutor { get; set; }
+        public string NomInspector { get; set; }
+        public List<aca_AnioLectivo_Curso_Paralelo_Info> lst_detalle { get; set; }
         #endregion
     }
 }

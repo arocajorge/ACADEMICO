@@ -18,7 +18,9 @@ namespace Core.Data.Base
         public int IdSede { get; set; }
         public int IdMenu { get; set; }
         public string IdUsuario { get; set; }
-        public string Perfil { get; set; }
+        public bool Nuevo { get; set; }
+        public bool Modificar { get; set; }
+        public bool Anular { get; set; }
     
         public virtual aca_Menu aca_Menu { get; set; }
         public virtual aca_Sede aca_Sede { get; set; }

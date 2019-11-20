@@ -42,35 +42,6 @@ namespace Core.Data.Academico
             }
         }
 
-        public List<aca_Jornada_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel)
-        {
-            try
-            {
-                List<aca_Jornada_Info> Lista = new List<aca_Jornada_Info>();
-
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_AnioLectivo_NivelAcademico_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel).OrderBy(q => q.OrdenJornada).GroupBy(q => new { q.IdJornada, q.NomJornada }).Select(q => new { q.Key.IdJornada, q.Key.NomJornada }).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Jornada_Info
-                        {
-                            IdJornada = q.IdJornada,
-                            NomJornada = q.NomJornada,
-                        });
-                    });
-                }
-
-                return Lista;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         public aca_Jornada_Info getInfo(int IdEmpresa, int IdJornada)
         {
             try

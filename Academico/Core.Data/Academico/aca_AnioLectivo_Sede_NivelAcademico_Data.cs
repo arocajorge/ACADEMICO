@@ -10,39 +10,6 @@ namespace Core.Data.Academico
 {
     public class aca_AnioLectivo_Sede_NivelAcademico_Data
     {
-        public List<aca_AnioLectivo_Sede_NivelAcademico_Info> getList(int IdEmpresa, int IdSede, int IdAnio)
-        {
-            try
-            {
-                List<aca_AnioLectivo_Sede_NivelAcademico_Info> Lista = new List<aca_AnioLectivo_Sede_NivelAcademico_Info>();
-
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_AnioLectivo_Sede_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio== IdAnio).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_AnioLectivo_Sede_NivelAcademico_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAnio = q.IdAnio,
-                            IdSede = q.IdSede,
-                            IdNivel = q.IdNivel,
-                            NomSede = q.NomSede,
-                            NomNivel = q.NomNivel
-                        });
-                    });
-                }
-
-                return Lista;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         public List<aca_AnioLectivo_Sede_NivelAcademico_Info> get_list_asignacion(int IdEmpresa, int IdSede, int IdAnio)
         {
             try
@@ -159,6 +126,71 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Sede_NivelAcademico_Info> GetList_Update(int IdEmpresa, int IdAnio, int IdSede)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Sede_NivelAcademico_Info> Lista = new List<aca_AnioLectivo_Sede_NivelAcademico_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivo_Sede_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AnioLectivo_Sede_NivelAcademico_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            IdSede = q.IdSede,
+                            IdNivel = q.IdNivel,
+                            NomSede = q.NomSede,
+                            NomNivel = q.NomNivel
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivo_Sede_NivelAcademico_Info> GetList_Update_Nivel(int IdEmpresa, int IdAnio, int IdNivel)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Sede_NivelAcademico_Info> Lista = new List<aca_AnioLectivo_Sede_NivelAcademico_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivo_Sede_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdNivel == IdNivel).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AnioLectivo_Sede_NivelAcademico_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            IdSede = q.IdSede,
+                            IdNivel = q.IdNivel,
+                            NomSede = q.NomSede,
+                            NomNivel = q.NomNivel
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool modificarDB(List<aca_AnioLectivo_Sede_NivelAcademico_Info> lista)
         {
             try
@@ -170,14 +202,13 @@ namespace Core.Data.Academico
                         foreach (var item in lista)
                         {
                             aca_AnioLectivo_Sede_NivelAcademico Entity = Context.aca_AnioLectivo_Sede_NivelAcademico.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa
-                            && q.IdSede == item.IdSede && q.IdAnio == item.IdAnio);
+                            && q.IdSede == item.IdSede && q.IdAnio == item.IdAnio && q.IdNivel == item.IdNivel);
                             if (Entity == null)
                                 return false;
 
                             Entity.NomSede = item.NomSede;
-                            Entity.NomNivel = item.NomNivel;
+                            Entity.NomNivel = item.NomNivel;  
                         }
-
                         Context.SaveChanges();
                     }
                 }

@@ -58,12 +58,12 @@ namespace Core.Web.Areas.Academico.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_ParaleloPorCurso()
+        public ActionResult GridViewPartial_DocumentoPorCurso()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             List<aca_AnioLectivo_Curso_Documento_Info> model = Lista_DocumentoPorCurso.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_ParaleloPorCurso", model);
+            return PartialView("_GridViewPartial_DocumentoPorCurso", model);
         }
         #endregion
 

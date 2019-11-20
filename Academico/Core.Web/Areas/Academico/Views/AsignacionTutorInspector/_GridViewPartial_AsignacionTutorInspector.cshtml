@@ -28,34 +28,35 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdParalelo";
-            column.Caption = "ID";
-            column.Width = Unit.Percentage(10);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
-        settings.Columns.Add(column =>
-        {
             column.FieldName = "NomParalelo";
             column.Caption = "Paralelo";
             column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 1;
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "NomTutor";
             column.Caption = "Tutor";
-            column.VisibleIndex = 1;
-            column.Width = Unit.Percentage(30);
+            column.VisibleIndex = 2;
+            column.Width = Unit.Percentage(40);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NomInspector";
+            column.Caption = "Inspector";
+            column.VisibleIndex = 3;
+            column.Width = Unit.Percentage(40);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdProfesorTutor";
             column.Caption = "Tutor";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(40);
             column.Visible = false;
-            column.VisibleIndex = 1;
+            column.VisibleIndex = 2;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
@@ -64,20 +65,11 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "NomInspector";
-            column.Caption = "Inspector";
-            column.VisibleIndex = 1;
-            column.Width = Unit.Percentage(30);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
-
-        settings.Columns.Add(column =>
-        {
             column.FieldName = "IdProfesorInspector";
             column.Caption = "Inspector";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(40);
             column.Visible = false;
-            column.VisibleIndex = 1;
+            column.VisibleIndex = 3;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {

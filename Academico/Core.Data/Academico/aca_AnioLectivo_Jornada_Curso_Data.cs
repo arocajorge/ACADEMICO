@@ -66,40 +66,6 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_AnioLectivo_Jornada_Curso_Info getInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada)
-        {
-            try
-            {
-                aca_AnioLectivo_Jornada_Curso_Info info;
-
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
-
-                    info = new aca_AnioLectivo_Jornada_Curso_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        IdSede = Entity.IdSede,
-                        IdNivel = Entity.IdNivel,
-                        IdJornada = Entity.IdJornada,
-                        IdCurso = Entity.IdCurso,
-                        NomCurso = Entity.NomCurso,
-                        OrdenCurso = Entity.OrdenCurso
-                    };
-                }
-
-                return info;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
         public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, List<aca_AnioLectivo_Jornada_Curso_Info> lista)
         {
             try
@@ -173,6 +139,66 @@ namespace Core.Data.Academico
 
                 Lista.ForEach(v => { v.IdComboCurso = v.IdEmpresa.ToString("0000") + v.IdAnio.ToString("0000") + v.IdSede.ToString("0000") + v.IdNivel.ToString("0000")+ v.IdJornada.ToString("0000")+ v.IdCurso.ToString("0000"); });
                 return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivo_Jornada_Curso_Info> getList_Update(int IdEmpresa, int IdAnio, int IdCurso)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Jornada_Curso_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.aca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdCurso == IdCurso).Select(q => new aca_AnioLectivo_Jornada_Curso_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdAnio = q.IdAnio,
+                        IdSede = q.IdSede,
+                        IdNivel = q.IdNivel,
+                        IdJornada = q.IdJornada,
+                        IdCurso = q.IdCurso,
+                        NomCurso = q.NomCurso,
+                        OrdenCurso = q.OrdenCurso
+                    }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool modificarDB(List<aca_AnioLectivo_Jornada_Curso_Info> lista)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    if (lista.Count > 0)
+                    {
+                        foreach (var item in lista)
+                        {
+                            aca_AnioLectivo_Jornada_Curso Entity = Context.aca_AnioLectivo_Jornada_Curso.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa
+                            && q.IdSede == item.IdSede && q.IdAnio == item.IdAnio && q.IdNivel == item.IdNivel && q.IdJornada == item.IdJornada && q.IdCurso == item.IdCurso);
+                            if (Entity == null)
+                                return false;
+
+                            Entity.NomCurso = item.NomCurso;
+                            Entity.OrdenCurso = item.OrdenCurso;
+                        }
+                        Context.SaveChanges();
+                    }
+                }
+
+                return true;
             }
             catch (Exception)
             {

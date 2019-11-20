@@ -102,6 +102,7 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Materia_Info model = bus_materia.GetInfo(IdEmpresa, IdMateria);
+
             if (model == null)
                 return RedirectToAction("Index");
 
@@ -115,6 +116,8 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Modificar(aca_Materia_Info model)
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+            var info_grupo = bus_grupo.GetInfo(model.IdEmpresa, Convert.ToInt32(model.IdMateriaGrupo));
+            model.NomMateriaGrupo = (info_grupo == null ? "" : info_grupo.NomMateriaGrupo);
             if (!bus_materia.ModificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";

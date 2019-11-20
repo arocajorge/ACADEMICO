@@ -97,7 +97,7 @@ namespace Core.Bus.Academico
                     {
                         foreach (var item in lst_anios)
                         {
-                            var lst_sede_nivel = odata_sede_nivel.getList(info.IdEmpresa, info.IdSede, item.IdAnio);
+                            var lst_sede_nivel = odata_sede_nivel.GetList_Update(info.IdEmpresa, item.IdAnio, info.IdSede);
                             if (lst_sede_nivel.Count > 0)
                             {
                                 foreach (var info_sede_nivel in lst_sede_nivel)
