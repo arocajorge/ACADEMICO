@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="baf8f787ff3d4a13b589caf343ea4b3c" Name="Diagram1">
         <EntityTypeShape EntityType="ModelAcademico.aca_Alumno" Width="1.5" PointX="6" PointY="48" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Paralelo" Width="1.5" PointX="6" PointY="21.25" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Plantilla" Width="1.5" PointX="8.25" PointY="30.125" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Jornada_Curso" Width="1.5" PointX="6" PointY="11.625" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_NivelAcademico_Jornada" Width="1.5" PointX="3" PointY="11.75" />
@@ -32,10 +31,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_alumno_aca_Catalogo1" />
         <AssociationConnector Association="ModelAcademico.FK_aca_alumno_aca_Catalogo2" />
         <AssociationConnector Association="ModelAcademico.FK_aca_familia_aca_alumno" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Jornada" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_NivelAcademico" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Paralelo" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Jornada" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_NivelAcademico" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Sede" />
@@ -66,7 +61,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Rubro" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Matricula" Width="1.5" PointX="8.25" PointY="34.5" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_alumno" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_AnioLectivo_Curso_Paralelo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Plantilla_Rubro" Width="1.5" PointX="13.375" PointY="9.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula_AlumnosPorParalelo" Width="1.5" PointX="13.375" PointY="5.75" />
@@ -78,7 +72,6 @@
         <EntityTypeShape EntityType="ModelAcademico.aca_Profesor" Width="1.5" PointX="0.75" PointY="10.125" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Profesor" Width="1.5" PointX="9.375" PointY="0.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_AnioLectivo" />
@@ -95,16 +88,24 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_Plantilla_Rubro_aca_Plantilla" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Documento" Width="1.5" PointX="16.25" PointY="11.875" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Curso" Width="1.5" PointX="15.375" PointY="1.125" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_Documento" Width="1.5" PointX="14" PointY="20.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_alumno_aca_Curso" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Documento_aca_AnioLectivo_Jornada_Curso" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Documento_aca_Documento" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Curso" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Curso" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Curso" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Curso" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Curso_aca_Curso" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_AnioLectivo_Periodo" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Paralelo" Width="1.5" PointX="17.625" PointY="15.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_AnioLectivo_Curso_Paralelo" Width="1.5" PointX="15.375" PointY="6.75" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_AnioLectivo" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Curso" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Jornada" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_NivelAcademico" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Paralelo" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_AnioLectivo_Curso_Paralelo" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_Documento" Width="1.5" PointX="5.375" PointY="17" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Documento_aca_Documento" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

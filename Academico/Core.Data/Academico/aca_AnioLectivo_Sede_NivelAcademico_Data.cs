@@ -158,5 +158,37 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public bool modificarDB(List<aca_AnioLectivo_Sede_NivelAcademico_Info> lista)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    if (lista.Count >0)
+                    {
+                        foreach (var item in lista)
+                        {
+                            aca_AnioLectivo_Sede_NivelAcademico Entity = Context.aca_AnioLectivo_Sede_NivelAcademico.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa
+                            && q.IdSede == item.IdSede && q.IdAnio == item.IdAnio);
+                            if (Entity == null)
+                                return false;
+
+                            Entity.NomSede = item.NomSede;
+                            Entity.NomNivel = item.NomNivel;
+                        }
+
+                        Context.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

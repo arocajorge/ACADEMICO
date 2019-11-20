@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Academico\aca_Alumno_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Bus.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Bus.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Academico\aca_CatalogoTipo_Bus.cs" />
     <Compile Include="Academico\aca_Catalogo_Bus.cs" />
     <Compile Include="Academico\aca_Curso_Bus.cs" />
+    <Compile Include="Academico\aca_Documento_Bus.cs" />
     <Compile Include="Academico\aca_Familia_Bus.cs" />
     <Compile Include="Academico\aca_Jornada_Bus.cs" />
     <Compile Include="Academico\aca_MateriaGrupo_Bus.cs" />

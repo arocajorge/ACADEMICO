@@ -46,6 +46,36 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Info> getList_update(int IdEmpresa)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Info> Lista = new List<aca_AnioLectivo_Info>();
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true && q.BloquearMatricula == false).Select(q => new aca_AnioLectivo_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdAnio = q.IdAnio,
+                        Descripcion = q.Descripcion,
+                        FechaDesde = q.FechaDesde,
+                        FechaHasta = q.FechaHasta,
+                        EnCurso = q.EnCurso,
+                        BloquearMatricula = q.BloquearMatricula,
+                        Estado = q.Estado
+                    }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public aca_AnioLectivo_Info getInfo(int IdEmpresa, int IdAnio)
         {
             try

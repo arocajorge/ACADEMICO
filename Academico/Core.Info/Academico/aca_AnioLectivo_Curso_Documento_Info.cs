@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Academico
 {
-    public class aca_AnioLectivo_Curso_Paralelo_Info
+    public class aca_AnioLectivo_Curso_Documento_Info
     {
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
@@ -21,21 +21,12 @@ namespace Core.Info.Academico
         public int IdJornada { get; set; }
         [Required(ErrorMessage = "El campo curso es obligatorio")]
         public int IdCurso { get; set; }
-        public int IdParalelo { get; set; }
-        public string CodigoParalelo { get; set; }
-        public string NomParalelo { get; set; }
-        public int OrdenParalelo { get; set; }
-        public Nullable<decimal> IdProfesorTutor { get; set; }
-        public Nullable<decimal> IdProfesorInspector { get; set; }
+        public int IdDocumento { get; set; }
+        public string NomDocumento { get; set; }
+        public Nullable<int> OrdenDocumento { get; set; }
 
-        #region Campos que no existen en la tabla
+        #region Campos que no existen en la base
         public bool seleccionado { get; set; }
-        public decimal IdAlumno { get; set; }
-        public string NomSede { get; set; }
-        public string Descripcion { get; set; }
-        public string NomNivel { get; set; }
-        public string NomJornada { get; set; }
-        public string NomCurso { get; set; }
         #endregion
     }
 }

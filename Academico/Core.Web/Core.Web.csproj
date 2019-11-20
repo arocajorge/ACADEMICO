@@ -198,8 +198,11 @@
     <Compile Include="Areas\Academico\Controllers\AlumnoController.cs" />
     <Compile Include="Areas\Academico\Controllers\AlumnoFamiliaController.cs" />
     <Compile Include="Areas\Academico\Controllers\AnioLectivoController.cs" />
+    <Compile Include="Areas\Academico\Controllers\AsignacionTutorInspectorController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoPorJornadaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\DocumentoController.cs" />
+    <Compile Include="Areas\Academico\Controllers\DocumentoPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\JornadaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaGrupoController.cs" />
@@ -7535,14 +7538,35 @@
     <Content Include="Areas\Academico\Views\Matricula\_ComboBoxPartial_Plantilla.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\_GridViewPartial_AlumnosPorParalelo.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\Modificar.cshtml" />
-    <Content Include="Areas\Academico\Views\Curso\_CmbProfesorTutor.cshtml" />
-    <Content Include="Areas\Academico\Views\Curso\_CmbProfesorInspector.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\_CmbProfesorTutor.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\_CmbProfesorInspector.cshtml" />
     <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\_GridViewPartial_anio_lectivo_periodo.cshtml" />
     <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\_GridViewPartial_periodos.cshtml" />
     <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\Anular.cshtml" />
     <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\_GridViewPartial_AnioLectivoCurso.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\_GridViewPartial_AsignacionTutorInspector.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\Documento\_GridViewPartial_documento.cshtml" />
+    <Content Include="Areas\Academico\Views\Documento\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\Documento\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\Documento\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\Documento\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\DocumentoPorCurso\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\DocumentoPorCurso\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\DocumentoPorCurso\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\DocumentoPorCurso\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\DocumentoPorCurso\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\DocumentoPorCurso\_GridViewPartial_DocumentoPorCurso.cshtml" />
+    <Content Include="Areas\Academico\Views\DocumentoPorCurso\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -7632,6 +7656,8 @@
           <DevelopmentServerPort>50058</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:50058/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:50058/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

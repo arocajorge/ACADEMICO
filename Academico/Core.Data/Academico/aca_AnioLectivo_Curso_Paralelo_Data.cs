@@ -10,6 +10,80 @@ namespace Core.Data.Academico
 {
     public class aca_AnioLectivo_Curso_Paralelo_Data
     {
+        public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list(int IdEmpresa, int IdSede, int IdAnio)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Paralelo_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = (from q in Context.vwaca_AnioLectivo_Curso_Paralelo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdSede == IdSede
+                             && q.IdAnio == IdAnio
+                             group q by new { q.IdEmpresa, q.IdAnio, q.IdSede, q.IdNivel, q.IdJornada, q.IdCurso,
+                                 q.NomSede, q.Descripcion,q.NomNivel, q.NomJornada, q.NomCurso } into g
+                             select new aca_AnioLectivo_Curso_Paralelo_Info
+                             {
+                                 IdEmpresa = g.Key.IdEmpresa,
+                                 IdSede = g.Key.IdSede,
+                                 IdAnio = g.Key.IdAnio,
+                                 IdNivel = g.Key.IdNivel,
+                                 IdJornada = g.Key.IdJornada,
+                                 IdCurso = g.Key.IdCurso,
+                                 NomSede = g.Key.NomSede,
+                                 Descripcion = g.Key.Descripcion,
+                                 NomNivel = g.Key.NomNivel,
+                                 NomJornada = g.Key.NomJornada,
+                                 NomCurso = g.Key.NomCurso
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Paralelo_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.vwaca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
+                    && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).Select(q => new aca_AnioLectivo_Curso_Paralelo_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdSede = q.IdSede,
+                        IdAnio = q.IdAnio,
+                        IdNivel = q.IdNivel,
+                        IdJornada = q.IdJornada,
+                        IdCurso = q.IdCurso,
+                        IdParalelo = q.IdParalelo,
+                        NomParalelo = q.NomParalelo,
+                        OrdenParalelo = q.OrdenParalelo,
+                        IdProfesorInspector = q.IdProfesorInspector,
+                        IdProfesorTutor = q.IdProfesorTutor
+                    }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list_asignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try

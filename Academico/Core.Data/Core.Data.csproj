@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Academico\aca_Alumno_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Data.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Academico\aca_CatalogoTipo_Data.cs" />
     <Compile Include="Academico\aca_Catalogo_Data.cs" />
     <Compile Include="Academico\aca_Curso_Data.cs" />
+    <Compile Include="Academico\aca_Documento_Data.cs" />
     <Compile Include="Academico\aca_Familia_Data.cs" />
     <Compile Include="Academico\aca_Jornada_Data.cs" />
     <Compile Include="Academico\aca_MateriaGrupo_Data.cs" />
@@ -287,6 +289,9 @@
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Alumno.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_AnioLectivo_Curso_Paralelo.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Jornada_Curso.cs">

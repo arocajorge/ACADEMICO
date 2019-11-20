@@ -23,7 +23,7 @@ namespace Core.Data.Base
         public int IdEmpresa { get; set; }
         public int IdDocumento { get; set; }
         public string NomDocumento { get; set; }
-        public Nullable<int> OrdenDocumento { get; set; }
+        public int OrdenDocumento { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
