@@ -53,6 +53,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public decimal GetId(int IdEmpresa)
+        {
+            try
+            {
+                return odata.getId(IdEmpresa);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool GuardarDB(aca_Alumno_Info info)
         {
             try

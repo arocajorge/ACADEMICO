@@ -20,7 +20,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.aca_Plantilla.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio >= IdAnio_ini && q.IdAnio <= IdAnio_fin).Select(q => new aca_Plantilla_Info
+                    Lista = Context.aca_Plantilla.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio >= IdAnio_ini && q.IdAnio <= IdAnio_fin && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_Plantilla_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdAnio = q.IdAnio,
@@ -39,7 +39,6 @@ namespace Core.Data.Academico
             }
         }
         
-
         public aca_Plantilla_Info getInfo(int IdEmpresa, int IdAnio, int IdPlantilla)
         {
             try

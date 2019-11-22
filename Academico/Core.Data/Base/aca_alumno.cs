@@ -19,6 +19,7 @@ namespace Core.Data.Base
         {
             this.aca_Familia = new HashSet<aca_Familia>();
             this.aca_Matricula = new HashSet<aca_Matricula>();
+            this.aca_PermisoMatricula = new HashSet<aca_PermisoMatricula>();
         }
     
         public int IdEmpresa { get; set; }
@@ -32,7 +33,6 @@ namespace Core.Data.Base
         public int IdCatalogoESTMAT { get; set; }
         public Nullable<int> IdCurso { get; set; }
         public int IdCatalogoESTALU { get; set; }
-        public string MotivoNoMatricula { get; set; }
         public System.DateTime FechaIngreso { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -44,10 +44,12 @@ namespace Core.Data.Base
     
         public virtual aca_Catalogo aca_Catalogo { get; set; }
         public virtual aca_Catalogo aca_Catalogo1 { get; set; }
+        public virtual aca_Curso aca_Curso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Familia> aca_Familia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
-        public virtual aca_Curso aca_Curso { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_PermisoMatricula> aca_PermisoMatricula { get; set; }
     }
 }

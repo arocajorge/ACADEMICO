@@ -39,6 +39,7 @@ namespace Core.Info.Academico
         public string NomTutor { get; set; }
         public string NomInspector { get; set; }
         public List<aca_AnioLectivo_Curso_Paralelo_Info> lst_detalle { get; set; }
+        public string Validar { get; set; }
         #endregion
     }
 }

@@ -16,6 +16,7 @@ namespace Core.Web.Helps
         string IdNivel { get; set; }
         string IdTransaccionSession { get; set; }
         string IdTransaccionSessionActual { get; set; }
+        string NombreImagenAlumno { get; set; }
     }
     public static class SessionFixed
     {
@@ -72,6 +73,12 @@ namespace Core.Web.Helps
             get { return _sessionValueProvider.IdNivel; }
             set { _sessionValueProvider.IdNivel = value; }
         }
+        
+        public static string NombreImagenAlumno
+        {
+            get { return _sessionValueProvider.IdNivel; }
+            set { _sessionValueProvider.IdNivel = value; }
+        }
     }
     public class WebSessionValueProvider : ISessionValueProvider
     {
@@ -84,6 +91,8 @@ namespace Core.Web.Helps
         private const string _IdAnio = "FxAca_IdAnio";
         private const string _IdTransaccionSession = "FxAca_IdTransaccionSesssion";
         private const string _IdTransaccionSessionActual = "FxAca_IdTransaccionSessionActual";
+        private const string _NombreImagenAlumno = "FxAca_NombreImagenAlumno";
+        
         public string IdEmpresa
         {
             get { return (string)HttpContext.Current.Session[_IdEmpresa]; }
@@ -130,5 +139,11 @@ namespace Core.Web.Helps
             get { return (string)HttpContext.Current.Session[_IdAnio]; }
             set { HttpContext.Current.Session[_IdAnio] = value; }
         }
+        public string NombreImagenAlumno
+        {
+            get { return (string)HttpContext.Current.Session[_NombreImagenAlumno]; }
+            set { HttpContext.Current.Session[_NombreImagenAlumno] = value; }
+        }
+        
     }
 }

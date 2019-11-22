@@ -35,6 +35,7 @@ namespace Core.Info.Academico
         public string MotivoAnulacion { get; set; }
 
         #region Campos que no existen en la tabla
+        public byte[] alu_foto { get; set; }
         public string NomCatalogoESTALU { get; set; }
         public string NomCatalogoESTMAT { get; set; }
 

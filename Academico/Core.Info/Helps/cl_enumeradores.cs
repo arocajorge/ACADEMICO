@@ -92,5 +92,11 @@ namespace Core.Info.Helps
             LEGAL,
             ECON
         }
+
+        public enum eCatalogoPermisoMatricula
+        {
+            PERMITIR = 19,
+            NEGAR = 20
+        }
     }
 }

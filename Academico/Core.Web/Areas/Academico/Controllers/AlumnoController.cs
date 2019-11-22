@@ -1,14 +1,16 @@
-﻿using Core.Bus.Academico;
-using Core.Bus.General;
-using Core.Info.Academico;
-using Core.Info.General;
-using Core.Info.Helps;
-using Core.Web.Helps;
+﻿using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DevExpress.Web;
+using Core.Info.Academico;
+using Core.Web.Helps;
+using Core.Bus.Academico;
+using Core.Bus.General;
+using Core.Info.Helps;
+using Core.Info.General;
 
 namespace Core.Web.Areas.Academico.Controllers
 {
@@ -22,6 +24,9 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_alumno_List Lista_Alumno = new aca_alumno_List();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
+        public static UploadedFile file { get; set; }
+        public int IdAlumno_ { get; set; }
+        public static byte[] imagen { get; set; }
         #endregion
 
         #region Index
@@ -200,7 +205,8 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 pe_Naturaleza = "NATU",
-                CodCatalogoCONADIS = ""
+                CodCatalogoCONADIS = "",
+                alu_foto = new byte[0]
             };
             cargar_combos();
             return View(model);
@@ -269,6 +275,21 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_Familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
 
             model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+
+            if (model.alu_foto == null)
+                model.alu_foto = new byte[0];
+
+            try
+            {
+
+                model.alu_foto = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + model.IdEmpresa.ToString("000") + model.IdAlumno.ToString("000000") + ".jpg");
+            }
+            catch (Exception)
+            {
+
+                model.alu_foto = new byte[0];
+            }
+
             info_fam_padre = (info_fam_padre == null ? new aca_Familia_Info() : info_fam_padre);
             info_fam_madre = (info_fam_madre == null ? new aca_Familia_Info() : info_fam_madre);
 
@@ -382,6 +403,24 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_Familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
 
             model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+
+            if (model.alu_foto == null)
+                model.alu_foto = new byte[0];
+
+            if (model.alu_foto == null)
+                model.alu_foto = new byte[0];
+
+            try
+            {
+
+                model.alu_foto = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + model.IdEmpresa.ToString("000") + model.IdAlumno.ToString("000000") + ".jpg");
+            }
+            catch (Exception)
+            {
+
+                model.alu_foto = new byte[0];
+            }
+
             info_fam_padre = (info_fam_padre == null ? new aca_Familia_Info() : info_fam_padre);
             info_fam_madre = (info_fam_madre == null ? new aca_Familia_Info() : info_fam_madre);
 
@@ -440,7 +479,6 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return RedirectToAction("Index");
         }
-
         #endregion
 
         #region Json
@@ -474,9 +512,114 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+
+        #endregion
+
+        #region Funciones imagen alumno
+        public JsonResult nombre_imagen(decimal IdAlumno = 0)
+        {
+            try
+            {
+                if (IdAlumno == 0)
+                    IdAlumno = bus_alumno.GetId(Convert.ToInt32(SessionFixed.IdEmpresa));
+                SessionFixed.NombreImagenAlumno = IdAlumno.ToString("000000");
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult get_imagen_general()
+        {
+
+            byte[] model = empresa_imagen.pr_imagen;
+            if (model == null)
+                model = new byte[0];
+            return PartialView("_Empresa_imagen", model);
+        }
+        public class empresa_imagen
+        {
+            public static byte[] pr_imagen { get; set; }
+            public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+            {
+                AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".png" },
+                MaxFileSize = 4000000
+            };
+            public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+            {
+
+                if (e.UploadedFile.IsValid)
+                {
+                    pr_imagen = e.UploadedFile.FileBytes;
+                }
+            }
+        }
+        public JsonResult actualizar_div()
+        {
+            return Json(SessionFixed.NombreImagenAlumno, JsonRequestBehavior.AllowGet);
+        }
+        public string UploadDirectory = "~/Content/imagenes/alumnos/";
+        public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
+        {
+
+            try
+            {
+                //Extract Image File Name.
+                string fileName = System.IO.Path.GetFileName(ucDragAndDrop.FirstOrDefault().FileName);
+                var IdEmpresa = Convert.ToString(SessionFixed.IdEmpresa).PadLeft(3,'0');
+                //Set the Image File Path.
+                UploadDirectory = UploadDirectory + IdEmpresa + SessionFixed.NombreImagenAlumno + ".jpg";
+                imagen = ucDragAndDrop.FirstOrDefault().FileBytes;
+                //Save the Image File in Folder.
+                ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
+                SessionFixed.NombreImagenAlumno = UploadDirectory;
+
+                file = ucDragAndDrop.FirstOrDefault();
+                return Json(ucDragAndDrop.FirstOrDefault().FileBytes, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+
+        }
+
         #endregion
     }
 
+    #region Clases para imagen alumno
+    public class DragAndDropSupportDemoBinder : DevExpressEditorsBinder
+    {
+        public DragAndDropSupportDemoBinder()
+        {
+            UploadControlBinderSettings.ValidationSettings.Assign(UploadControlDemosHelper.UploadValidationSettings);
+            UploadControlBinderSettings.FileUploadCompleteHandler = UploadControlDemosHelper.FileUploadComplete;
+        }
+    }
+    public class UploadControlDemosHelper
+    {
+        public static byte[] em_foto { get; set; }
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".png" },
+            MaxFileSize = 4000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+
+            if (e.UploadedFile.IsValid)
+            {
+                em_foto = e.UploadedFile.FileBytes;
+                //var filename = Path.GetFileName(e.UploadedFile.FileName);
+                //e.UploadedFile.SaveAs("~/Content/imagenes/"+e.UploadedFile.FileName, true);
+            }
+        }
+    }
+    #endregion
     public class aca_alumno_List
     {
         string Variable = "aca_Alumno_Info";

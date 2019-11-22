@@ -21,6 +21,8 @@ namespace Core.Data.Academico
                     Lista = Context.vwaca_Plantilla_Rubro.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPlantilla==IdPlantilla).Select(q => new aca_Plantilla_Rubro_Info
                     {
                         IdEmpresa = q.IdEmpresa,
+                        IdAnio = q.IdAnio,
+                        IdPlantilla= q.IdPlantilla,
                         IdRubro = q.IdRubro,
                         IdProducto = q.IdProducto,
                         Subtotal =q.Subtotal,
@@ -32,7 +34,7 @@ namespace Core.Data.Academico
                         NomRubro = q.NomRubro
                     }).ToList();
                 }
-
+                Lista.ForEach(q => q.IdString = q.IdPlantilla.ToString("000000") + q.IdRubro.ToString("000000"));
                 return Lista;
             }
             catch (Exception)

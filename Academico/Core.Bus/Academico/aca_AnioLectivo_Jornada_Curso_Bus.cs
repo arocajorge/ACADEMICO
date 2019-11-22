@@ -36,11 +36,11 @@ namespace Core.Bus.Academico
             }
         }
         
-        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCursoPromoverAlumno(int IdEmpresa, decimal IdAlumno, int IdAnio)
+        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCursoPromoverAlumno(int IdEmpresa, decimal IdAlumno, int IdAnio, string Validar)
         {
             try
             {
-                return odata.GetListCursoPromoverAlumno(IdEmpresa, IdAlumno, IdAnio);
+                return odata.GetListCursoPromoverAlumno(IdEmpresa, IdAlumno, IdAnio, Validar);
             }
             catch (Exception)
             {

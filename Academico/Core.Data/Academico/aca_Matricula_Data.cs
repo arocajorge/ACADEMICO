@@ -118,6 +118,46 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_Matricula_Info getInfo_ExisteMatricula(int IdEmpresa, int IdAnio, decimal IdAlumno)
+        {
+            try
+            {
+                aca_Matricula_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_Matricula_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdMatricula = Entity.IdMatricula,
+                        Codigo = Entity.Codigo,
+                        IdAlumno = Entity.IdAlumno,
+                        IdAnio = Entity.IdAnio,
+                        IdSede = Entity.IdSede,
+                        IdNivel = Entity.IdNivel,
+                        IdJornada = Entity.IdJornada,
+                        IdCurso = Entity.IdCurso,
+                        IdParalelo = Entity.IdParalelo,
+                        IdPersonaF = Entity.IdPersonaF,
+                        IdPersonaR = Entity.IdPersonaR,
+                        IdPlantilla = Entity.IdPlantilla,
+                        Observacion = Entity.Observacion
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public decimal getId(int IdEmpresa)
         {
             try
@@ -161,17 +201,39 @@ namespace Core.Data.Academico
                         IdPersonaF = info.IdPersonaF,
                         IdPersonaR = info.IdPersonaR,
                         IdPlantilla = info.IdPlantilla,
+                        IdMecanismo = info.IdMecanismo,
                         Observacion = info.Observacion,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now
                     };
                     Context.aca_Matricula.Add(Entity);
 
+                    if (info.lst_MatriculaRubro.Count > 0)
+                    {
+                        foreach (var item in info.lst_MatriculaRubro)
+                        {
+                            aca_Matricula_Rubro Entity_Det = new aca_Matricula_Rubro
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdMatricula = info.IdMatricula,
+                                IdPeriodo = item.IdPeriodo,
+                                IdRubro = item.IdRubro,
+                                IdProducto = item.IdProducto,
+                                Subtotal = item.IdProducto,
+                                IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
+                                Porcentaje = item.Porcentaje,
+                                ValorIVA = item.ValorIVA,
+                                Total = item.Total,
+                                FechaFacturacion = item.FechaFacturacion
+                            };
+                            Context.aca_Matricula_Rubro.Add(Entity_Det);
+                        }
+                    }
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

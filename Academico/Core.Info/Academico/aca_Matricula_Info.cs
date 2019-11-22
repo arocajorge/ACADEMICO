@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,17 +12,25 @@ namespace Core.Info.Academico
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
+        [Required(ErrorMessage = "El campo código es obligatorio")]
         public string Codigo { get; set; }
+        [Required(ErrorMessage = "El campo alumno es obligatorio")]
         public decimal IdAlumno { get; set; }
+        [Required(ErrorMessage = "El campo año lectivo es obligatorio")]
         public int IdAnio { get; set; }
         public int IdSede { get; set; }
         public int IdNivel { get; set; }
         public int IdJornada { get; set; }
         public int IdCurso { get; set; }
+        [Required(ErrorMessage = "El campo curso es obligatorio")]
         public int IdParalelo { get; set; }
         public decimal IdPersonaF { get; set; }
         public decimal IdPersonaR { get; set; }
+        [Required(ErrorMessage = "El campo plantilla es obligatorio")]
         public int IdPlantilla { get; set; }
+        [Required(ErrorMessage = "El campo mecanismo de pago es obligatorio")]
+        public decimal IdMecanismo { get; set; }
+        [Required(ErrorMessage = "El campo fecha es obligatorio")]
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
         public string IdUsuarioCreacion { get; set; }
@@ -43,6 +52,9 @@ namespace Core.Info.Academico
         public string NomParalelo { get; set; }
         public string Descripcion { get; set; }
         public string NomCurso { get; set; }
+        public string Validar { get; set; }
+        public double ValorPlantilla { get; set; }
+        public List<aca_Matricula_Rubro_Info> lst_MatriculaRubro { get; set; }
         #endregion
     }
 }

@@ -74,11 +74,14 @@
     <Compile Include="Academico\aca_MateriaGrupo_Data.cs" />
     <Compile Include="Academico\aca_Materia_Data.cs" />
     <Compile Include="Academico\aca_Matricula_Data.cs" />
+    <Compile Include="Academico\aca_Matricula_Rubro_Data.cs" />
+    <Compile Include="Academico\aca_MecanismoDePago_Data.cs" />
     <Compile Include="Academico\aca_Menu_Data.cs" />
     <Compile Include="Academico\aca_Menu_x_aca_Sede_Data.cs" />
     <Compile Include="Academico\aca_Menu_x_seg_usuario_Data.cs" />
     <Compile Include="Academico\aca_NivelAcademico_Data.cs" />
     <Compile Include="Academico\aca_Paralelo_Data.cs" />
+    <Compile Include="Academico\aca_PermisoMatricula_Data.cs" />
     <Compile Include="Academico\aca_Plantilla_Data.cs" />
     <Compile Include="Academico\aca_Plantilla_Rubro_Data.cs" />
     <Compile Include="Academico\aca_Profesor_Data.cs" />
@@ -153,6 +156,9 @@
     <Compile Include="Base\aca_Matricula_Rubro.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\aca_MecanismoDePago.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_Menu.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -166,6 +172,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Paralelo.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_PermisoMatricula.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Plantilla.cs">
@@ -182,6 +191,9 @@
     </Compile>
     <Compile Include="Base\aca_Sede.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\fa_TerminoPago.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\in_categorias.cs">
       <DependentUpon>ModelInventario.tt</DependentUpon>
@@ -209,6 +221,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelAcademico.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelFacturacion.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelFacturacion.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelFacturacion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelFacturacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelFacturacion.edmx</DependentUpon>
     </Compile>
     <Compile Include="Base\ModelGeneral.Context.cs">
       <AutoGen>True</AutoGen>
@@ -315,10 +342,19 @@
     <Compile Include="Base\vwaca_Matricula.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_Matricula_Rubro.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_PermisoMatricula.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_Plantilla_Rubro.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Matricula_AlumnosPorParalelo.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_Plantilla_Rubro_Matricula.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Profesor.cs">
@@ -327,6 +363,7 @@
     <Compile Include="Base\vwseg_usuario_x_aca_Sede.cs">
       <DependentUpon>ModelSeguridadAcceso.tt</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion\fa_TerminoPago_Data.cs" />
     <Compile Include="General\tb_Catalogo_Data.cs" />
     <Compile Include="General\tb_empresa_Data.cs" />
     <Compile Include="General\tb_parroquia_Data.cs" />
@@ -366,6 +403,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelGeneral.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Base\ModelFacturacion.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelFacturacion.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Base\ModelFacturacion.edmx.diagram">
+      <DependentUpon>ModelFacturacion.edmx</DependentUpon>
+    </None>
     <None Include="Base\ModelGeneral.edmx.diagram">
       <DependentUpon>ModelGeneral.edmx</DependentUpon>
     </None>
@@ -391,6 +435,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelAcademico.edmx</DependentUpon>
       <LastGenOutput>ModelAcademico.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelFacturacion.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelFacturacion.edmx</DependentUpon>
+      <LastGenOutput>ModelFacturacion.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelFacturacion.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelFacturacion.edmx</DependentUpon>
+      <LastGenOutput>ModelFacturacion.cs</LastGenOutput>
     </Content>
     <Content Include="Base\ModelGeneral.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

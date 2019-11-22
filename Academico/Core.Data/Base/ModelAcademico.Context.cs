@@ -27,7 +27,6 @@ namespace Core.Data.Base
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<aca_Alumno> aca_Alumno { get; set; }
         public virtual DbSet<aca_AnioLectivo_Curso_Plantilla> aca_AnioLectivo_Curso_Plantilla { get; set; }
         public virtual DbSet<aca_AnioLectivo_Jornada_Curso> aca_AnioLectivo_Jornada_Curso { get; set; }
         public virtual DbSet<aca_AnioLectivo_NivelAcademico_Jornada> aca_AnioLectivo_NivelAcademico_Jornada { get; set; }
@@ -46,7 +45,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Paralelo> aca_Paralelo { get; set; }
         public virtual DbSet<aca_Rubro> aca_Rubro { get; set; }
         public virtual DbSet<aca_Sede> aca_Sede { get; set; }
-        public virtual DbSet<vwaca_Alumno> vwaca_Alumno { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor> vwaca_AnioLectivo_Paralelo_Profesor { get; set; }
         public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Rubro> vwaca_AnioLectivo_Rubro { get; set; }
@@ -55,10 +53,8 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_AnioLectivo_Jornada_Curso> vwaca_AnioLectivo_Jornada_Curso { get; set; }
         public virtual DbSet<aca_AnioLectivo_Rubro_Periodo> aca_AnioLectivo_Rubro_Periodo { get; set; }
         public virtual DbSet<aca_Matricula_Rubro> aca_Matricula_Rubro { get; set; }
-        public virtual DbSet<aca_Matricula> aca_Matricula { get; set; }
         public virtual DbSet<vwaca_Plantilla_Rubro> vwaca_Plantilla_Rubro { get; set; }
         public virtual DbSet<vwaca_Matricula_AlumnosPorParalelo> vwaca_Matricula_AlumnosPorParalelo { get; set; }
-        public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
         public virtual DbSet<aca_AnioLectivo> aca_AnioLectivo { get; set; }
         public virtual DbSet<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
         public virtual DbSet<aca_AnioLectivo_Periodo> aca_AnioLectivo_Periodo { get; set; }
@@ -72,6 +68,15 @@ namespace Core.Data.Base
         public virtual DbSet<aca_AnioLectivo_Curso_Paralelo> aca_AnioLectivo_Curso_Paralelo { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Curso_Paralelo> vwaca_AnioLectivo_Curso_Paralelo { get; set; }
         public virtual DbSet<aca_Menu_x_seg_usuario> aca_Menu_x_seg_usuario { get; set; }
+        public virtual DbSet<aca_Alumno> aca_Alumno { get; set; }
+        public virtual DbSet<aca_Matricula> aca_Matricula { get; set; }
+        public virtual DbSet<aca_MecanismoDePago> aca_MecanismoDePago { get; set; }
+        public virtual DbSet<aca_PermisoMatricula> aca_PermisoMatricula { get; set; }
+        public virtual DbSet<vwaca_Alumno> vwaca_Alumno { get; set; }
+        public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
+        public virtual DbSet<vwaca_PermisoMatricula> vwaca_PermisoMatricula { get; set; }
+        public virtual DbSet<vwaca_Matricula_Rubro> vwaca_Matricula_Rubro { get; set; }
+        public virtual DbSet<vwaca_Plantilla_Rubro_Matricula> vwaca_Plantilla_Rubro_Matricula { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

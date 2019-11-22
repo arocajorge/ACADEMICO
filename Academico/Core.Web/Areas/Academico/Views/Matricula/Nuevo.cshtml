@@ -9,6 +9,258 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script>
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdString", GetSelectedFieldValuesCallback);
+        s.GetSelectedFieldValues("Total", GetSelectedFieldValuesCallback_Total);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+    function GetSelectedFieldValuesCallback_Total(values) {
+        TotalRows = values.join(',');
+
+        var datos = {
+            TotalRows: TotalRows
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SumarValores", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#ValorPlantilla").val(data);
+
+            },
+            error: function (error) {
+            }
+        });
+
+    }
+
+    function guardar() {
+        var datos = {
+            Fecha: Fecha.GetDate(),
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdAlumno: IdAlumno.GetValue(),
+            IdComboCurso: IdComboCurso.GetValue(),
+            IdParalelo: IdParalelo.GetValue(),
+            IdPlantilla: IdPlantilla.GetValue(),
+            IdMecanismo: $("#IdMecanismo").val(),
+            Observacion: $("#Observacion").val(),
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $("#btn_guardar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("guardar", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.msg == "") {
+                    //$("#myform").submit();
+                    var url = '@Url.Action("Modificar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
+                    window.location.href = url;
+                }
+                else {
+                    alert(data.msg);
+                }
+                $("#btn_guardar").attr("disabled", false);
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+@using (Html.BeginForm("Nuevo", "Matricula", FormMethod.Post, new { @role = "form", @class = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.Validar, new { @id = "Validar" })
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Año Lectivo*</label>
+                    @Html.Partial("_ComboBoxPartial_Anio", Model)
+                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="IdCliente">Alumno*</label>
+                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdCliente"></label>
+                    <button type="button" class="btn btn-primary form-control" title="Crear/Modificar alumno" onclick="CrearModificarAlumno();">
+                        <i class="fa fa-external-link-square"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="pf_fecha">Fecha*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
+                            {
+                                settings.Name = "Fecha";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Properties.AllowMouseWheel = false;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.AllowMouseWheel = false;
+                            }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="IdEmpresa">Curso*</label>
+                    @Html.Partial("_ComboBoxPartial_Curso", Model)
+                    @Html.ValidationMessageFor(q => q.IdComboCurso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="Validar"></label>
+                    <button type="button" class="btn btn-primary form-control" title="Mostrar todos los cursos" onclick="ValidarCurso();">
+                        <i class="fa fa-navicon"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Paralelo*</label>
+                    @Html.Partial("_ComboBoxPartial_Paralelo", Model)
+                    @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="IdEmpresa">Plantilla*</label>
+                    @Html.Partial("_ComboBoxPartial_Plantilla", Model)
+                    @Html.ValidationMessageFor(q => q.IdPlantilla, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label for="IdEmpresa">Valor</label>
+                @Html.TextBoxFor(q => q.ValorPlantilla, new { @class = "form-control", @id= "ValorPlantilla", @readonly = "readonly" })
+                @Html.ValidationMessageFor(q => q.ValorPlantilla, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Mecanismo de pago*</label>
+                    @Html.DropDownListFor(q => q.IdMecanismo, new SelectList(ViewBag.lst_mecanismo, "IdMecanismo", "NombreMecanismo"), new { @class = "form-control", @id = "IdMecanismo" })
+                    @Html.ValidationMessageFor(q => q.IdMecanismo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <label for="IdEmpresa">Observación</label>
+                @Html.TextBoxFor(q=> q.Observacion,new { @class = "form-control", id="Observacion"})
+                @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <br />
+    <div id="Tabs" role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tb_matricula_paralelo" aria-controls="general" role="tab" data-toggle="tab">Alumnos por paralelo</a>
+            </li>
+            <li>
+                <a href="#tb_plantilla_detalle" aria-controls="otros" role="tab" data-toggle="tab">Detalle de plantilla</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content" style="padding-top: 20px">
+
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_matricula_paralelo">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.Action("GridViewPartial_AlumnosPorParalelo")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_plantilla_detalle">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_DetallePlantilla")
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Matricula", new { Area = "Academico" })">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+<script>
     function CrearModificarAlumno() {
         var location = GetPathServer();
         if(IdAlumno.GetValue() > 0)
@@ -45,120 +297,72 @@
             }
         });
     }
+
+    function ValidarCurso() {
+        if(IdAlumno.GetValue() == 0){
+            alert("Debe seleccionar un alumno");
+        }
+        else{
+            $("#Validar").val("N");
+            IdComboCurso.PerformCallback();
+        }
+    }
+
+    function SetMatriculaRubro(){
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdPlantilla: IdPlantilla.GetValue(),
+            IdMatricula: $("#IdMatricula").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetMatriculaRubro", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#ValorPlantilla").val(data);
+                GridViewPartial_DetallePlantilla.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function ValidarMatricula(){
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdAlumno: IdAlumno.GetValue(),
+            Nuevo: "S"
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ValidarMatricula", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if(data!= ""){
+                    alert(data);
+                    $("#btn_guardar").hide();
+                }
+                else{
+                    $("#btn_guardar").show();
+                }
+                
+
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
-@using (Html.BeginForm("Nuevo", "Matricula", FormMethod.Post, new { @role = "form", @class = "form" }))
-{
-    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
-    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-
-    if (ViewBag.mensaje != null)
-    {
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-warning alert-dismissible">
-                    <h4>
-                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
-                    </h4>
-                </div>
-            </div>
-        </div>
-    }
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Año Lectivo*</label>
-                    @Html.Partial("_ComboBoxPartial_Anio", Model)
-                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-7">
-                <div class="form-group">
-                    <label for="IdCliente">Alumno*</label>
-                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
-                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label for="IdCliente"></label>
-                    <button type="button" class="btn btn-primary form-control " onclick="CrearModificarAlumno();">
-                        <i class="fa fa-external-link-square"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="pf_fecha">Fecha*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
-                            {
-                                settings.Name = "Fecha";
-                                settings.Properties.UseMaskBehavior = true;
-                                settings.Properties.EditFormat = EditFormat.Date;
-                                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Properties.AllowMouseWheel = false;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                settings.Properties.AllowMouseWheel = false;
-                            }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-9">
-                <div class="form-group">
-                    <label for="IdEmpresa">Curso*</label>
-                    @Html.Partial("_ComboBoxPartial_Curso", Model)
-                    @Html.ValidationMessageFor(q => q.IdComboCurso, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdEmpresa">Paralelo*</label>
-                    @Html.Partial("_ComboBoxPartial_Paralelo", Model)
-                    @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-9">
-                <div class="form-group">
-                    <label for="IdEmpresa">Plantilla*</label>
-                    @Html.Partial("_ComboBoxPartial_Plantilla", Model)
-                    @Html.ValidationMessageFor(q => q.IdPlantilla, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <label for="IdEmpresa">Observación</label>
-                @Html.TextBoxFor(q=> q.Observacion,new { @class = "form-control"})
-                @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    
-    <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","Matricula", new { Area = "Academico" })">Cancelar</a>
-    </div>
-
-    @Html.Action("GridViewPartial_AlumnosPorParalelo")
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-}
 

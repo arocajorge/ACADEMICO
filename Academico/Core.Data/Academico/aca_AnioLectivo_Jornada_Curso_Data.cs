@@ -104,7 +104,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCursoPromoverAlumno(int IdEmpresa, decimal IdAlumno, int IdAnio)
+        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCursoPromoverAlumno(int IdEmpresa, decimal IdAlumno, int IdAnio, string Validar)
         {
             try
             {
@@ -112,14 +112,26 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    aca_Alumno alumno = odata.aca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).FirstOrDefault();
-                    if (alumno == null)
-                        return new List<aca_AnioLectivo_Jornada_Curso_Info>();
+                    int IdCursoIni = 0;
+                    int IdCursoFin = 0;
 
-                    aca_Curso curso = odata.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdCurso == alumno.IdCurso).FirstOrDefault();
-                    int IdCursoIni = curso == null ? 0 : (curso.IdCursoAPromover ?? 0);
-                    int IdCursoFin = curso == null ? 999999 : (curso.IdCursoAPromover ?? 999999);
-                    var lst = odata.vwaca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio==IdAnio && IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin).OrderBy(q => q.OrdenCurso).ToList();
+                    if (Validar == "S")
+                    {
+                        aca_Alumno alumno = odata.aca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).FirstOrDefault();
+                        if (alumno == null)
+                            return new List<aca_AnioLectivo_Jornada_Curso_Info>();
+
+                        aca_Curso curso = odata.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdCurso == alumno.IdCurso).FirstOrDefault();
+                        IdCursoIni = curso == null ? 0 : (curso.IdCursoAPromover ?? 0);
+                        IdCursoFin = curso == null ? 999999 : (curso.IdCursoAPromover ?? 999999);
+                    }
+                    else
+                    {
+                        IdCursoIni = 0;
+                        IdCursoFin = 999999;
+                    }
+
+                    var lst = odata.vwaca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin).OrderBy(q => q.OrdenCurso).ToList();
 
                     lst.ForEach(q =>
                     {

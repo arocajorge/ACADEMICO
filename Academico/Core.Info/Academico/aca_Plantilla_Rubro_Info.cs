@@ -23,6 +23,10 @@ namespace Core.Info.Academico
         public bool seleccionado { get; set; }
         public string NomRubro { get; set; }
         public string pr_descripcion { get; set; }
+        public string IdString { get; set; }
+        public int IdPeriodo { get; set; }
+        public string Periodo { get; set; }
+        public DateTime FechaDesde { get; set; }
         #endregion
     }
 }

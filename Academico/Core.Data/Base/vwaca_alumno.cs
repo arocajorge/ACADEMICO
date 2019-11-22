@@ -37,7 +37,6 @@ namespace Core.Data.Base
         public int IdCatalogoESTMAT { get; set; }
         public Nullable<int> IdCurso { get; set; }
         public int IdCatalogoESTALU { get; set; }
-        public string MotivoNoMatricula { get; set; }
         public string pe_telfono_Contacto { get; set; }
         public string NomCatalogoESTMAT { get; set; }
         public string NomCatalogoESTALU { get; set; }

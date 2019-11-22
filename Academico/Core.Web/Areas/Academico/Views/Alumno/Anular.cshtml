@@ -1,4 +1,5 @@
-﻿@model Core.Info.Academico.aca_Alumno_Info
+﻿@using System.Web.UI.WebControls;
+@model Core.Info.Academico.aca_Alumno_Info
 @{
     ViewBag.Title = "Anular alumno";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
@@ -97,6 +98,9 @@
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
                 <a href="#tb_alumno" aria-controls="general" role="tab" data-toggle="tab">Datos del alumno</a>
+            </li>
+            <li>
+                <a href="#tb_foto" aria-controls="otros" role="tab" data-toggle="tab">Foto del alumno</a>
             </li>
             <li>
                 <a href="#tb_padre" aria-controls="otros" role="tab" data-toggle="tab">Datos del padre</a>
@@ -207,6 +211,23 @@
                                 <label for="Telefonos">Numero de carnet</label>
                                 @Html.TextBoxFor(q => q.NumeroCarnetConadis, new { @class = "form-control", @id = "NumeroCarnetConadis" })
                                 @Html.ValidationMessageFor(q => q.NumeroCarnetConadis, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_foto">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="uploadContainer">
+                                @Html.DevExpress().BinaryImage(
+                               settings =>
+                               {
+                                   settings.Name = "pr_imagen";
+                                   settings.CallbackRouteValues = new { Controller = "Alumno", Action = "get_imagen_general" };
+                               }).Bind((Model.alu_foto).ToArray()).GetHtml()
                             </div>
                         </div>
                     </div>

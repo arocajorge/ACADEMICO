@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="baf8f787ff3d4a13b589caf343ea4b3c" Name="Diagram1">
-        <EntityTypeShape EntityType="ModelAcademico.aca_Alumno" Width="1.5" PointX="6" PointY="48" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Plantilla" Width="1.5" PointX="8.25" PointY="30.125" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Jornada_Curso" Width="1.5" PointX="6" PointY="11.625" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_NivelAcademico_Jornada" Width="1.5" PointX="3" PointY="11.75" />
@@ -24,12 +23,8 @@
         <EntityTypeShape EntityType="ModelAcademico.aca_Paralelo" Width="1.5" PointX="0.75" PointY="21.875" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Rubro" Width="1.5" PointX="3.75" PointY="54.625" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Sede" Width="1.5" PointX="0.75" PointY="15.625" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Alumno" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_AnioLectivo_Paralelo_Profesor" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Materia" Width="1.5" PointX="8.75" PointY="7.75" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_alumno_aca_Catalogo1" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_alumno_aca_Catalogo2" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_familia_aca_alumno" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Jornada" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_NivelAcademico" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Sede" />
@@ -56,12 +51,8 @@
         <EntityTypeShape EntityType="ModelAcademico.aca_Matricula_Rubro" Width="1.5" PointX="10.5" PointY="37.625" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Rubro_Periodo_aca_AnioLectivo_Rubro" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Rubro" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_Matricula" Width="1.5" PointX="8.25" PointY="34.5" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_alumno" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Plantilla_Rubro" Width="1.5" PointX="13.375" PointY="9.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula_AlumnosPorParalelo" Width="1.5" PointX="13.375" PointY="5.75" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula" Width="1.5" PointX="13.375" PointY="14.75" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo" Width="1.5" PointX="0.75" PointY="26.75" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Materia" Width="1.5" PointX="17.625" PointY="21.625" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Periodo" Width="1.5" PointX="6" PointY="42.875" />
@@ -81,11 +72,9 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Profesor" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Rubro_Periodo_aca_AnioLectivo_Periodo" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_Plantilla" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Plantilla_Rubro_aca_Plantilla" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Documento" Width="1.5" PointX="16.25" PointY="11.875" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Curso" Width="1.5" PointX="15.375" PointY="1.125" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_alumno_aca_Curso" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Documento_aca_AnioLectivo_Jornada_Curso" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Curso" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Curso" />
@@ -104,10 +93,30 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Profesor" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Profesor1" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_AnioLectivo_Curso_Paralelo" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Menu_x_seg_usuario" Width="1.5" PointX="9" PointY="17.5" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Menu_x_seg_usuario_aca_Menu" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Menu_x_seg_usuario_aca_Sede" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_Alumno" Width="1.5" PointX="18" PointY="27.25" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_Matricula" Width="1.5" PointX="21.25" PointY="22.25" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_MecanismoDePago" Width="1.5" PointX="19" PointY="10.75" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_PermisoMatricula" Width="1.5" PointX="20.25" PointY="37.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Alumno" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula" Width="1.5" PointX="13.75" PointY="14.75" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_alumno_aca_Catalogo1" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_alumno_aca_Catalogo2" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_alumno_aca_Curso" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_familia_aca_alumno" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_alumno" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PermisoMatricula_aca_Alumno" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PermisoMatricula_aca_AnioLectivo" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_AnioLectivo_Curso_Paralelo" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PermisoMatricula_aca_Catalogo" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_MecanismoDePago" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_Plantilla" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_PermisoMatricula" Width="1.5" PointX="15.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula_Rubro" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Plantilla_Rubro_Matricula" Width="1.5" PointX="11.375" PointY="20.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

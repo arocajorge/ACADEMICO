@@ -19,6 +19,7 @@ namespace Core.Data.Base
         {
             this.aca_Alumno = new HashSet<aca_Alumno>();
             this.aca_Alumno1 = new HashSet<aca_Alumno>();
+            this.aca_PermisoMatricula = new HashSet<aca_PermisoMatricula>();
         }
     
         public int IdCatalogo { get; set; }
@@ -35,10 +36,12 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
+        public virtual aca_CatalogoTipo aca_CatalogoTipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Alumno> aca_Alumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Alumno> aca_Alumno1 { get; set; }
-        public virtual aca_CatalogoTipo aca_CatalogoTipo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_PermisoMatricula> aca_PermisoMatricula { get; set; }
     }
 }

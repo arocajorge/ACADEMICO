@@ -23,6 +23,7 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+        
         //public List<aca_Plantilla_Rubro_Info> GetListAsignacion(int IdEmpresa, int IdAnio)
         //{
         //    try
