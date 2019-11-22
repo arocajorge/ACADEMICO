@@ -145,6 +145,7 @@ namespace Core.Data.Academico
                         IdPersonaF = Entity.IdPersonaF,
                         IdPersonaR = Entity.IdPersonaR,
                         IdPlantilla = Entity.IdPlantilla,
+                        Fecha = Entity.Fecha,
                         Observacion = Entity.Observacion
                     };
                 }
@@ -249,17 +250,55 @@ namespace Core.Data.Academico
                     aca_Matricula Entity = Context.aca_Matricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula);
                     if (Entity == null)
                         return false;
+
                     Entity.IdEmpresa = info.IdEmpresa;
-                    Entity.Codigo = info.Codigo;
+                    Entity.IdAnio = info.IdAnio;
+                    Entity.IdSede = info.IdSede;
+                    Entity.IdNivel = info.IdNivel;
+                    Entity.IdJornada = info.IdJornada;
+                    Entity.IdCurso = info.IdCurso;
+                    Entity.IdParalelo = info.IdParalelo;
+                    Entity.IdPlantilla = info.IdPlantilla;
+                    Entity.IdPersonaF = info.IdPersonaF;
+                    Entity.IdPersonaR = info.IdPersonaR;
+                    Entity.IdMecanismo = info.IdMecanismo;
+                    Entity.Fecha = info.Fecha;
                     Entity.Observacion = info.Observacion;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
+
+                    var lst_MatriculaRubro = Context.aca_Matricula_Rubro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula && q.FechaFacturacion== null).ToList();
+                    Context.aca_Matricula_Rubro.RemoveRange(lst_MatriculaRubro);
+                    var nueva_lista_ingresar = info.lst_MatriculaRubro.Where(q=> q.FechaFacturacion == null).ToList();
+
+                    if (nueva_lista_ingresar.Count > 0)
+                    {
+                        foreach (var item in nueva_lista_ingresar)
+                        {
+                            aca_Matricula_Rubro Entity_Det = new aca_Matricula_Rubro
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdMatricula = info.IdMatricula,
+                                IdPeriodo = item.IdPeriodo,
+                                IdRubro = item.IdRubro,
+                                IdProducto = item.IdProducto,
+                                Subtotal = item.IdProducto,
+                                IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
+                                Porcentaje = item.Porcentaje,
+                                ValorIVA = item.ValorIVA,
+                                Total = item.Total,
+                                FechaFacturacion = item.FechaFacturacion
+                            };
+                            Context.aca_Matricula_Rubro.Add(Entity_Det);
+                        }
+                    }
+
                     Context.SaveChanges();
                 }
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

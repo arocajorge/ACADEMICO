@@ -346,8 +346,9 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdPersonaR = (info_rep_legal == null ? 0 : info_rep_legal.IdPersona),
                 IdPlantilla = IdPlantilla,
                 IdMecanismo = IdMecanismo,
-                Fecha = Fecha,
+                Fecha = Fecha.Date,
                 Observacion = Observacion,
+                IdUsuarioCreacion = SessionFixed.IdUsuario,
                 lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>()
             };
 
@@ -416,6 +417,93 @@ namespace Core.Web.Areas.Academico.Controllers
                     mensaje = "Ingrese la información solicitada";
                 }
                 
+            }
+
+            return Json(new { msg = mensaje, IdEmpresa = Empresa, IdMatricula = Matricula }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult actualizar(DateTime Fecha, int IdEmpresa = 0, int IdAnio = 0, decimal IdAlumno = 0, string IdComboCurso = "", int IdParalelo = 0, int IdPlantilla = 0,
+            int IdMecanismo = 0, string Observacion = "", decimal IdTransaccionSession = 0, int IdMatricula=0)
+        {
+            decimal Matricula = 0;
+            int Empresa = 0;
+
+            //IdEmpresa = Convert.ToInt32(model.IdComboCurso.Substring(0, 4));
+            //IdAnio = Convert.ToInt32(model.IdComboCurso.Substring(4, 4));
+            int IdSede = Convert.ToInt32(IdComboCurso.Substring(8, 4));
+            int IdNivel = Convert.ToInt32(IdComboCurso.Substring(12, 4));
+            int IdJornada = Convert.ToInt32(IdComboCurso.Substring(16, 4));
+            int IdCurso = Convert.ToInt32(IdComboCurso.Substring(20, 4));
+
+            var info_rep_eco = bus_familia.GetInfo_Representante(IdEmpresa, IdAlumno, cl_enumeradores.eTipoRepresentante.ECON.ToString());
+            var info_rep_legal = bus_familia.GetInfo_Representante(IdEmpresa, IdAlumno, cl_enumeradores.eTipoRepresentante.LEGAL.ToString());
+
+            aca_Matricula_Info info_matricula = new aca_Matricula_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdMatricula = IdMatricula,
+                IdAlumno = IdAlumno,
+                IdAnio = IdAnio,
+                IdSede = IdSede,
+                IdNivel = IdNivel,
+                IdJornada = IdJornada,
+                IdCurso = IdCurso,
+                IdParalelo = IdParalelo,
+                IdPersonaF = (info_rep_eco == null ? 0 : info_rep_eco.IdPersona),
+                IdPersonaR = (info_rep_legal == null ? 0 : info_rep_legal.IdPersona),
+                IdPlantilla = IdPlantilla,
+                IdMecanismo = IdMecanismo,
+                Fecha = Fecha.Date,
+                Observacion = Observacion,
+                IdUsuarioModificacion = SessionFixed.IdUsuario,
+                lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>()
+            };
+
+            var lst_DetallePlantilla = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            if (lst_DetallePlantilla.Count > 0)
+            {
+                foreach (var item_det in lst_DetallePlantilla)
+                {
+                    aca_Matricula_Rubro_Info info_mat_rubro = new aca_Matricula_Rubro_Info
+                    {
+                        IdEmpresa = IdEmpresa,
+                        IdMatricula = IdMatricula,
+                        IdPeriodo = item_det.IdPeriodo,
+                        IdRubro = item_det.IdRubro,
+                        IdProducto = item_det.IdProducto,
+                        Subtotal = item_det.IdProducto,
+                        IdCod_Impuesto_Iva = item_det.IdCod_Impuesto_Iva,
+                        Porcentaje = item_det.Porcentaje,
+                        ValorIVA = item_det.ValorIVA,
+                        FechaFacturacion = item_det.FechaFacturacion,
+                        Total = item_det.Total
+                    };
+
+                    info_matricula.lst_MatriculaRubro.Add(info_mat_rubro);
+                }
+            }
+
+            if (info_matricula.IdAnio != 0 && info_matricula.IdAlumno != 0 && info_matricula.IdPersonaR != 0 && info_matricula.IdPersonaF != 0)
+            {
+                if (!bus_matricula.ModificarDB(info_matricula))
+                {
+                    mensaje = "No se ha podido guardar el registro";
+                }
+                Empresa = info_matricula.IdEmpresa;
+                Matricula = info_matricula.IdMatricula;
+            }
+            else
+            {
+                if (info_matricula.IdPersonaR == 0 || info_matricula.IdPersonaF == 0)
+                {
+                    mensaje = "Verique que el alumno tenga asignados representantes";
+                }
+                else
+                {
+                    mensaje = "Ingrese la información solicitada";
+                }
+
             }
 
             return Json(new { msg = mensaje, IdEmpresa = Empresa, IdMatricula = Matricula }, JsonRequestBehavior.AllowGet);

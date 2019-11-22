@@ -181,7 +181,7 @@
     </div>
 
     <div class="box-footer">
-        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
+        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="actualizar();">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Matricula", new { Area = "Academico" })">Cancelar</a>
     </div>
     @section Scripts {
@@ -288,6 +288,46 @@
                 }
 
 
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function actualizar() {
+        var datos = {
+            Fecha: Fecha.GetDate(),
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdAlumno: IdAlumno.GetValue(),
+            IdComboCurso: IdComboCurso.GetValue(),
+            IdParalelo: IdParalelo.GetValue(),
+            IdPlantilla: IdPlantilla.GetValue(),
+            IdMecanismo: $("#IdMecanismo").val(),
+            Observacion: $("#Observacion").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            IdMatricula: $("#IdMatricula").val()
+        }
+        $("#btn_guardar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("actualizar", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.msg == "") {
+                    //$("#myform").submit();
+                    var url = '@Url.Action("Modificar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
+                    window.location.href = url;
+                }
+                else {
+                    alert(data.msg);
+                }
+                $("#btn_guardar").attr("disabled", false);
             },
             error: function (error) {
             }
