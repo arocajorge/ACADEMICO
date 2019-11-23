@@ -10,6 +10,7 @@ namespace Core.Data.Academico
 {
     public class aca_AnioLectivo_Jornada_Curso_Data
     {
+        aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
         public List<aca_AnioLectivo_Jornada_Curso_Info> get_list_asignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada)
         {
             try
@@ -151,6 +152,30 @@ namespace Core.Data.Academico
 
                 Lista.ForEach(v => { v.IdComboCurso = v.IdEmpresa.ToString("0000") + v.IdAnio.ToString("0000") + v.IdSede.ToString("0000") + v.IdNivel.ToString("0000")+ v.IdJornada.ToString("0000")+ v.IdCurso.ToString("0000"); });
                 return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public aca_AnioLectivo_Jornada_Curso_Info GetInfoCursoMatricula(int IdEmpresa, int IdAnio, decimal IdMatricula)
+        {
+            try
+            {
+                aca_AnioLectivo_Jornada_Curso_Info info_curso = new aca_AnioLectivo_Jornada_Curso_Info();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var matricula = odata_matricula.getInfo(IdEmpresa,IdMatricula);
+                    var IdCurso = (matricula == null ? 0 : matricula.IdCurso);
+                    var info = odata.vwaca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdCurso == IdCurso).OrderBy(q => q.OrdenCurso).FirstOrDefault();
+                    info_curso.NomCurso = info.NomCurso;
+                    info_curso.IdComboCurso = info.IdEmpresa.ToString("0000") + info.IdAnio.ToString("0000") + info.IdSede.ToString("0000") + info.IdNivel.ToString("0000") + info.IdJornada.ToString("0000") + info.IdCurso.ToString("0000");
+                }
+
+                return info_curso;
             }
             catch (Exception)
             {

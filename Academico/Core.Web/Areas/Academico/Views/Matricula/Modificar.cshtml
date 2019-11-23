@@ -39,7 +39,7 @@
             <div class="col-md-7">
                 <div class="form-group">
                     <label for="IdCliente">Alumno*</label>
-                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                    @Html.Partial("_CmbAlumno_ReadOnly", Model.IdAlumno)
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                 </div>
             </div>

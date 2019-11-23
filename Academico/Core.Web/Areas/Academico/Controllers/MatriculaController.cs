@@ -29,6 +29,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_PermisoMatricula_Bus bus_permiso = new aca_PermisoMatricula_Bus();
         aca_Matricula_Rubro_List ListaMatriculaRubro = new aca_Matricula_Rubro_List();
         aca_Matricula_Rubro_Bus bus_matricula_rubro = new aca_Matricula_Rubro_Bus();
+        aca_AnioLectivo_Jornada_Curso_Bus bus_jornada_curso = new aca_AnioLectivo_Jornada_Curso_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -602,6 +603,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
             aca_Matricula_Info model = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
             model.Validar = "S";
+
+            var info_curso = bus_jornada_curso.GetInfoCursoMatricula(model.IdEmpresa, model.IdAnio, model.IdMatricula);
+            model.IdComboCurso = (info_curso==null ? "" : info_curso.IdComboCurso);
+            model.NomCurso = (info_curso == null ? "" : info_curso.NomCurso);
+
             if (model == null)
                 return RedirectToAction("Index");
 

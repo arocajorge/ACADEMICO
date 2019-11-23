@@ -78,7 +78,7 @@ namespace Core.Data.Academico
                 throw;
             }
         }
-        public aca_Matricula_Info getInfo(int IdEmpresa, int IdMatricula)
+        public aca_Matricula_Info getInfo(int IdEmpresa, decimal IdMatricula)
         {
             try
             {
@@ -105,7 +105,8 @@ namespace Core.Data.Academico
                         IdPersonaF = Entity.IdPersonaF,
                         IdPersonaR = Entity.IdPersonaR,
                         IdPlantilla = Entity.IdPlantilla,
-                        Observacion = Entity.Observacion
+                        Observacion = Entity.Observacion,
+                        Fecha = Entity.Fecha
                     };
                 }
 
