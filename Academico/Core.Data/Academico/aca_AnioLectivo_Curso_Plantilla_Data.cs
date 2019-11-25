@@ -80,6 +80,10 @@ namespace Core.Data.Academico
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdAnio = q.IdAnio,
+                        IdSede = q.IdSede,
+                        IdJornada = q.IdJornada,
+                        IdCurso = q.IdCurso,
+                        IdNivel = q.IdNivel,
                         IdPlantilla = q.IdPlantilla,
                         NomPlantilla = q.aca_Plantilla.NomPlantilla,
                         Valor = q.aca_Plantilla.Valor

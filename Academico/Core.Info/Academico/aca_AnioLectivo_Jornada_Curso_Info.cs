@@ -29,6 +29,8 @@ namespace Core.Info.Academico
         public string NomJornada { get; set; }
         public string NomNivel { get; set; }
         public string IdComboCurso { get; set; }
+        public decimal IdAlumno { get; set; }
+        public string Validar { get; set; }
         #endregion
     }
 }

@@ -106,7 +106,8 @@ namespace Core.Data.Academico
                         IdPersonaR = Entity.IdPersonaR,
                         IdPlantilla = Entity.IdPlantilla,
                         Observacion = Entity.Observacion,
-                        Fecha = Entity.Fecha
+                        Fecha = Entity.Fecha,
+                        IdMecanismo = Entity.IdMecanismo
                     };
                 }
 
@@ -206,7 +207,8 @@ namespace Core.Data.Academico
                         IdMecanismo = info.IdMecanismo,
                         Observacion = info.Observacion,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
-                        FechaCreacion = DateTime.Now
+                        FechaCreacion = DateTime.Now,
+                        Fecha = info.Fecha
                     };
                     Context.aca_Matricula.Add(Entity);
 

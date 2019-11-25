@@ -96,7 +96,7 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             decimal IdAlumno = (Request.Params["IdAlumno"] != null) ? decimal.Parse(Request.Params["IdAlumno"]) : -1;
             string Validar = (Request.Params["Validar"] != null) ? Convert.ToString(Request.Params["Validar"]) : "N";
-            return PartialView("_ComboBoxPartial_Curso", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdAlumno = IdAlumno, Validar = Validar });
+            return PartialView("_ComboBoxPartial_Curso", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdAlumno = IdAlumno, Validar = Validar });
         }
 
         public ActionResult ComboBoxPartial_Plantilla()
@@ -178,6 +178,23 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             List<aca_Matricula_Rubro_Info> model = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            ViewData["selectedIDs"] = Request.Params["selectedIDs"];
+            if (ViewData["selectedIDs"] == null)
+            {
+                int x = 0;
+                string selectedIDs = "";
+                foreach (var item in model.Where(q => q.seleccionado == true).ToList())
+                {
+                    if (x == 0)
+                        selectedIDs = item.IdString;
+                    else
+                        selectedIDs += "," + item.IdString;
+                    x++;
+                }
+                ViewData["selectedIDs"] = selectedIDs;
+            }
+
             return PartialView("_GridViewPartial_DetallePlantilla", model);
         }
         
@@ -185,8 +202,9 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult GridViewPartial_MatriculaRubro()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-
             List<aca_Matricula_Rubro_Info> model = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            
+            
             return PartialView("_GridViewPartial_MatriculaRubro", model);
         }
         #endregion

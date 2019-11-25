@@ -73,7 +73,8 @@
             });
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
-
+       
+        
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

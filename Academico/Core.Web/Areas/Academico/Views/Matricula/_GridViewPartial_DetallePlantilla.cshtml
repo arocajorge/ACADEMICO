@@ -71,12 +71,14 @@
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
         });
-        settings.PreRender = (sender, e) =>
+        settings.AfterPerformCallback = (sender, e) =>
         {
-            ASPxGridView gridView = (ASPxGridView)sender;
+            string[] array = ViewData["selectedIDs"].ToString().Split(',');
+            var gridView = sender as MVCxGridView;
             for (int i = 0; i < gridView.VisibleRowCount; i++)
             {
-                gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
+                if (array.Where(q => q == (string)gridView.GetRowValues(i, "IdString")).Count() > 0)
+                    gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
             }
         };
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
