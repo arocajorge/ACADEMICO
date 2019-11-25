@@ -97,7 +97,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (lst_registros.Count() > 0)
             {
-                msg = "Ya existe una negación de matricula para este alumno en el año lectivo seleccionado";
+                msg = "Ya existe una aceptación de matricula para este alumno en el año lectivo seleccionado";
                 return false;
             }
 
