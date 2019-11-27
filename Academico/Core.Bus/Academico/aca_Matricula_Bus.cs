@@ -11,11 +11,11 @@ namespace Core.Bus.Academico
     public class aca_Matricula_Bus
     {
         aca_Matricula_Data odata = new aca_Matricula_Data();
-        public List<aca_Matricula_Info> GetList(int IdEmpresa, bool MostrarAnulados)
+        public List<aca_Matricula_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, bool MostrarAnulados)
         {
             try
             {
-                return odata.getList(IdEmpresa, MostrarAnulados);
+                return odata.getList(IdEmpresa, IdAnio, IdSede, MostrarAnulados);
             }
             catch (Exception)
             {

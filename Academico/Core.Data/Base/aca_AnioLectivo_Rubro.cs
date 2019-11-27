@@ -23,6 +23,7 @@ namespace Core.Data.Base
         public int IdEmpresa { get; set; }
         public int IdAnio { get; set; }
         public int IdRubro { get; set; }
+        public bool AplicaProntoPago { get; set; }
         public string NomRubro { get; set; }
         public decimal IdProducto { get; set; }
         public decimal Subtotal { get; set; }

@@ -10,7 +10,7 @@ namespace Core.Data.Academico
 {
     public class aca_Matricula_Data
     {
-        public List<aca_Matricula_Info> getList(int IdEmpresa, bool MostrarAnulados)
+        public List<aca_Matricula_Info> getList(int IdEmpresa, int IdAnio, int IdSede, bool MostrarAnulados)
         {
             try
             {
@@ -18,7 +18,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa).ToList();
+                    var lst = odata.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio==IdAnio && q.IdSede == IdSede).ToList();
 
                     lst.ForEach(q =>
                     {
@@ -39,7 +39,8 @@ namespace Core.Data.Academico
                             NomJornada = q.NomJornada,
                             NomCurso = q.NomCurso,
                             NomParalelo = q.NomParalelo,
-                            pe_nombreCompleto =q.pe_nombreCompleto
+                            pe_nombreCompleto =q.pe_nombreCompleto,
+                            BloquearMatricula = q.BloquearMatricula
                         });
                     });
                 }
@@ -193,7 +194,7 @@ namespace Core.Data.Academico
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdMatricula = info.IdMatricula = getId(info.IdEmpresa),
-                        Codigo = info.Codigo,
+                        Codigo = info.IdMatricula.ToString("00000"),
                         IdAlumno = info.IdAlumno,
                         IdAnio = info.IdAnio,
                         IdSede = info.IdSede,
@@ -222,17 +223,35 @@ namespace Core.Data.Academico
                                 IdMatricula = info.IdMatricula,
                                 IdPeriodo = item.IdPeriodo,
                                 IdRubro = item.IdRubro,
+                                IdMecanismo = item.IdMecanismo,
                                 IdProducto = item.IdProducto,
-                                Subtotal = item.IdProducto,
+                                Subtotal = item.Subtotal,
                                 IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
                                 Porcentaje = item.Porcentaje,
                                 ValorIVA = item.ValorIVA,
                                 Total = item.Total,
-                                FechaFacturacion = item.FechaFacturacion
+                                FechaFacturacion = null,
+                                EnMatricula = item.EnMatricula
                             };
                             Context.aca_Matricula_Rubro.Add(Entity_Det);
                         }
                     }
+
+                    if (info.lst_documentos.Count > 0)
+                    {
+                        foreach (var item in info.lst_documentos)
+                        {
+                            aca_AlumnoDocumento Entity_DetDoc = new aca_AlumnoDocumento
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdAlumno = item.IdAlumno,
+                                IdDocumento = item.IdDocumento,
+                                EnArchivo = true
+                            };
+                            Context.aca_AlumnoDocumento.Add(Entity_DetDoc);
+                        }
+                    }
+
                     Context.SaveChanges();
                 }
                 return true;
@@ -264,7 +283,6 @@ namespace Core.Data.Academico
                     Entity.IdPlantilla = info.IdPlantilla;
                     Entity.IdPersonaF = info.IdPersonaF;
                     Entity.IdPersonaR = info.IdPersonaR;
-                    Entity.IdMecanismo = info.IdMecanismo;
                     Entity.Fecha = info.Fecha;
                     Entity.Observacion = info.Observacion;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
@@ -282,6 +300,7 @@ namespace Core.Data.Academico
                             {
                                 IdEmpresa = info.IdEmpresa,
                                 IdMatricula = info.IdMatricula,
+                                IdMecanismo = item.IdMecanismo,
                                 IdPeriodo = item.IdPeriodo,
                                 IdRubro = item.IdRubro,
                                 IdProducto = item.IdProducto,
@@ -289,13 +308,26 @@ namespace Core.Data.Academico
                                 IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
                                 Porcentaje = item.Porcentaje,
                                 ValorIVA = item.ValorIVA,
-                                Total = item.Total,
-                                FechaFacturacion = item.FechaFacturacion
+                                Total = item.Total
                             };
                             Context.aca_Matricula_Rubro.Add(Entity_Det);
                         }
                     }
 
+                    if (info.lst_documentos.Count > 0)
+                    {
+                        foreach (var item in info.lst_documentos)
+                        {
+                            aca_AlumnoDocumento Entity_DetDoc = new aca_AlumnoDocumento
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdAlumno = item.IdAlumno,
+                                IdDocumento = item.IdDocumento,
+                                EnArchivo = true
+                            };
+                            Context.aca_AlumnoDocumento.Add(Entity_DetDoc);
+                        }
+                    }
                     Context.SaveChanges();
                 }
 

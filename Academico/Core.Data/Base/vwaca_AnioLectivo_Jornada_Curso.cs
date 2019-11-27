@@ -27,5 +27,6 @@ namespace Core.Data.Base
         public string NomCurso { get; set; }
         public int OrdenCurso { get; set; }
         public string ComboCurso { get; set; }
+        public bool BloquearMatricula { get; set; }
     }
 }

@@ -31,5 +31,7 @@ namespace Core.Data.Base
         public Nullable<int> IdBodega { get; set; }
         public Nullable<decimal> IdCbteVta { get; set; }
         public Nullable<System.DateTime> FechaFacturacion { get; set; }
+        public decimal IdMecanismo { get; set; }
+        public bool EnMatricula { get; set; }
     }
 }

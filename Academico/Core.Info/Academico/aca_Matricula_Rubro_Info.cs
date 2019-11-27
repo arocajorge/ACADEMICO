@@ -12,6 +12,8 @@ namespace Core.Info.Academico
         public decimal IdMatricula { get; set; }
         public int IdPeriodo { get; set; }
         public int IdRubro { get; set; }
+        public bool EnMatricula { get; set; }
+        public decimal IdMecanismo { get; set; }
         public decimal IdProducto { get; set; }
         public decimal Subtotal { get; set; }
         public string IdCod_Impuesto_Iva { get; set; }
@@ -32,6 +34,7 @@ namespace Core.Info.Academico
         public int IdAnio { get; set; }
         public int IdPlantilla { get; set; }
         public string pr_descripcion { get; set; }
+        public bool AplicaProntoPago { get; set; }
         #endregion
     }
 }

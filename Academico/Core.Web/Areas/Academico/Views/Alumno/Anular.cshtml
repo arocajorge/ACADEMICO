@@ -35,7 +35,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Codigo">Código</label>
-                    @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control", @id = "Codigo" })
+                    @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control", @id = "Codigo", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.Codigo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -59,6 +59,28 @@
                     @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
                     <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha de ingreso</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.FechaIngreso, settings =>
+                           {
+                               settings.Name = "FechaIngreso";
+                               settings.Properties.UseMaskBehavior = true;
+                               settings.Properties.EditFormat = EditFormat.Date;
+                               settings.Properties.EditFormatString = "dd/MM/yyyy";
+                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.AllowMouseWheel = false;
+                               settings.ReadOnly = true;
+                           }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.FechaIngreso, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
         </div>

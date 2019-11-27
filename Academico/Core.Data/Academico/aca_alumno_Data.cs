@@ -36,6 +36,7 @@ namespace Core.Data.Academico
                             pe_apellido = q.pe_apellido,
                             pe_nombreCompleto = q.pe_nombreCompleto,
                             pe_sexo = q.pe_sexo,
+                            FechaIngreso = q.FechaIngreso,
                             pe_fechaNacimiento = q.pe_fechaNacimiento,
                             CodCatalogoSangre = q.CodCatalogoSangre,
                             CodCatalogoCONADIS = q.CodCatalogoCONADIS,
@@ -87,6 +88,7 @@ namespace Core.Data.Academico
                         Direccion = Entity.Direccion,
                         Celular = Entity.Celular,
                         pe_sexo = Entity.pe_sexo,
+                        FechaIngreso = Entity.FechaIngreso,
                         pe_fechaNacimiento = Entity.pe_fechaNacimiento,
                         CodCatalogoSangre = Entity.CodCatalogoSangre,
                         CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
@@ -202,16 +204,33 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
+                    var anio = info.FechaIngreso.Year;
+                    var lista = getList(info.IdEmpresa, true);
+                    var ListaAnio = lista.Where(q => q.FechaIngreso.Year == anio).ToList();
+                    var NumEstudiante = 1;
+                    var Codigo = "";
+
+                    if (ListaAnio == null)
+                    {
+                        Codigo = anio + NumEstudiante.ToString("0000");
+                    }
+                    else
+                    {
+                        NumEstudiante = Convert.ToInt32(ListaAnio.Max(q=> q.Codigo))+1;
+                        Codigo = NumEstudiante.ToString();
+                    }
+
                     aca_Alumno Entity = new aca_Alumno
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdAlumno = info.IdAlumno = getId(info.IdEmpresa),
                         IdPersona = info.IdPersona,
-                        Codigo = info.Codigo,
+                        Codigo = Codigo,
                         Estado = true,
                         Correo = info.Correo,
                         Direccion = info.Direccion,
                         Celular = info.Celular,
+                        FechaIngreso = info.FechaIngreso,
                         IdCatalogoESTALU = info.IdCatalogoESTALU,
                         IdCatalogoESTMAT = info.IdCatalogoESTMAT,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,

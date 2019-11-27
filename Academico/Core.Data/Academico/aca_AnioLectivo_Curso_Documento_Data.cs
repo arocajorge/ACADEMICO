@@ -69,6 +69,49 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Curso_Documento_Info> get_list_matricula(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Documento_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = (from q in Context.aca_AnioLectivo_Curso_Documento
+                             join c in Context.aca_Documento
+                             on new { q.IdEmpresa, q.IdDocumento } equals new { c.IdEmpresa, c.IdDocumento }
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdSede == IdSede
+                             && q.IdAnio == IdAnio
+                             && q.IdNivel == IdNivel
+                             && q.IdJornada == IdJornada
+                             && q.IdCurso == IdCurso
+                             && c.Estado == true
+                             select new aca_AnioLectivo_Curso_Documento_Info
+                             {
+                                 seleccionado = true,
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSede = q.IdSede,
+                                 IdAnio = q.IdAnio,
+                                 IdNivel = q.IdNivel,
+                                 IdJornada = q.IdJornada,
+                                 IdCurso = q.IdCurso,
+                                 IdDocumento = q.IdDocumento,
+                                 NomDocumento = q.NomDocumento,
+                                 OrdenDocumento = q.OrdenDocumento
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, List<aca_AnioLectivo_Curso_Documento_Info> lista)
         {
             try

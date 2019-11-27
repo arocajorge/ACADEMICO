@@ -124,6 +124,8 @@ namespace Core.Data.Academico
                         IdAlumno = Entity.IdAlumno,
                         IdCatalogoPERNEG = Entity.IdCatalogoPERNEG,
                         Fecha = Entity.Fecha,
+                        IdUsuarioCreacion = Entity.IdUsuarioCreacion,
+                        IdUsuarioModificacion = Entity.IdUsuarioModificacion,
                         Observacion = Entity.Observacion
                     };
                 }

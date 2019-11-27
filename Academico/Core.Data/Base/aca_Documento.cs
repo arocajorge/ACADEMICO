@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public aca_Documento()
         {
             this.aca_AnioLectivo_Curso_Documento = new HashSet<aca_AnioLectivo_Curso_Documento>();
+            this.aca_AlumnoDocumento = new HashSet<aca_AlumnoDocumento>();
         }
     
         public int IdEmpresa { get; set; }
@@ -35,5 +36,7 @@ namespace Core.Data.Base
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivo_Curso_Documento> aca_AnioLectivo_Curso_Documento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_AlumnoDocumento> aca_AlumnoDocumento { get; set; }
     }
 }

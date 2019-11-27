@@ -9,6 +9,11 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script>
+    $(function () 
+    {
+        $("#MensajeError").hide();
+    });
+
     var selectedIDs;
     function OnBeginCallback(s, e) {
         //Pass all selected keys to GridView callback action
@@ -17,17 +22,35 @@
     }
     function OnSelectionChanged(s, e) {
         s.GetSelectedFieldValues("IdString", GetSelectedFieldValuesCallback);
-        s.GetSelectedFieldValues("Total", GetSelectedFieldValuesCallback_Total);
+        s.GetSelectedFieldValues("IdString", GetSelectedFieldValuesCallback_Total);
     }
     function GetSelectedFieldValuesCallback(values) {
         //Capture all selected keys
         selectedIDs = values.join(',');
     }
+
+    var documentoIDs;
+    function OnBeginCallback_Doc(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["documentoIDs"] = documentoIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChanged_Doc(s, e) {
+        s.GetSelectedFieldValues("IdStringDoc", GetSelectedFieldValuesCallback_Doc);
+    }
+    function GetSelectedFieldValuesCallback_Doc(values) {
+        //Capture all selected keys
+        documentoIDs = values.join(',');
+        console.log(documentoIDs);
+    }
+
     function GetSelectedFieldValuesCallback_Total(values) {
-        TotalRows = values.join(',');
+        ItemsSeleccionados = values.join(',');
 
         var datos = {
-            TotalRows: TotalRows
+            IdAnio: IdAnio.GetValue(),
+            IdPlantilla: IdPlantilla.GetValue(),
+            Seleccionados: ItemsSeleccionados
         }
         $.ajax({
             type: 'POST',
@@ -39,7 +62,8 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#ValorPlantilla").val(data);
+                $("#ValorPlantilla").val(data.ValorPlantilla);
+                $("#ValorPlantillaProntoPago").val(data.ValorPlantillaProntoPago);
 
             },
             error: function (error) {
@@ -58,8 +82,10 @@
             IdParalelo: IdParalelo.GetValue(),
             IdPlantilla: IdPlantilla.GetValue(),
             IdMecanismo: $("#IdMecanismo").val(),
+            IdMecanismoDet: $("#IdMecanismoDet").val(),
             Observacion: $("#Observacion").val(),
             IDs: selectedIDs,
+            IDs_Doc: documentoIDs,
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $("#btn_guardar").attr("disabled", true);
@@ -79,7 +105,8 @@
                     window.location.href = url;
                 }
                 else {
-                    alert(data.msg);
+                    $("#MensajeError").show();
+                    $("#Mensaje").html(data.msg);
                 }
                 $("#btn_guardar").attr("disabled", false);
             },
@@ -105,7 +132,15 @@
             </div>
         </div>
     }
-
+    <div class="row" id="MensajeError">
+        <div class="col-md-12">
+            <div class="alert alert-warning alert-dismissible">
+                <h4>
+                    <i class="icon fa fa-warning"></i> <label id="Mensaje"></label>
+                </h4>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -115,7 +150,7 @@
                     @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCliente">Alumno*</label>
                     @Html.Partial("_CmbAlumno", Model.IdAlumno)
@@ -130,26 +165,12 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-offset-2 col-md-1">
                 <div class="form-group">
-                    <label for="pf_fecha">Fecha*</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
-                            {
-                                settings.Name = "Fecha";
-                                settings.Properties.UseMaskBehavior = true;
-                                settings.Properties.EditFormat = EditFormat.Date;
-                                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Properties.AllowMouseWheel = false;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                settings.Properties.AllowMouseWheel = false;
-                            }).GetHtml()
-                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
-                    </div>
+                    <label for="IdCliente"></label>
+                    <button type="button" class="btn btn-primary form-control" title="Ver ultima matricula" onclick="VerMatriculaAnterior();">
+                        <i class="fa fa-search"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -182,7 +203,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdEmpresa">Plantilla*</label>
                     @Html.Partial("_ComboBoxPartial_Plantilla", Model)
@@ -190,15 +211,53 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <label for="IdEmpresa">Valor</label>
+                <div class="form-group">
+                    <label for="pf_fecha">Fecha*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
+                            {
+                                settings.Name = "Fecha";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Properties.AllowMouseWheel = false;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.AllowMouseWheel = false;
+                            }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label for="IdEmpresa">Valor total</label>
                 @Html.TextBoxFor(q => q.ValorPlantilla, new { @class = "form-control", @id= "ValorPlantilla", @readonly = "readonly" })
                 @Html.ValidationMessageFor(q => q.ValorPlantilla, "", new { @class = "text-danger" })
             </div>
             <div class="col-md-2">
+                <label for="IdEmpresa">Valor pronto pago</label>
+                @Html.TextBoxFor(q => q.ValorPlantillaProntoPago, new { @class = "form-control", @id = "ValorPlantillaProntoPago", @readonly = "readonly" })
+                @Html.ValidationMessageFor(q => q.ValorPlantillaProntoPago, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdEmpresa">Mecanismo de pago*</label>
                     @Html.DropDownListFor(q => q.IdMecanismo, new SelectList(ViewBag.lst_mecanismo, "IdMecanismo", "NombreMecanismo"), new { @class = "form-control", @id = "IdMecanismo" })
                     @Html.ValidationMessageFor(q => q.IdMecanismo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Mecanismo de pago otros rubros*</label>
+                    @Html.DropDownListFor(q => q.IdMecanismoDet, new SelectList(ViewBag.lst_mecanismo, "IdMecanismo", "NombreMecanismo"), new { @class = "form-control", @id = "IdMecanismoDet" })
+                    @Html.ValidationMessageFor(q => q.IdMecanismoDet, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -221,6 +280,9 @@
             </li>
             <li>
                 <a href="#tb_plantilla_detalle" aria-controls="otros" role="tab" data-toggle="tab">Detalle de plantilla</a>
+            </li>
+            <li>
+                <a href="#tb_documento" aria-controls="otros" role="tab" data-toggle="tab">Documentos por curso</a>
             </li>
         </ul>
         <!-- Tab panes -->
@@ -248,6 +310,15 @@
                 </div>
             </div>
 
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_documento">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_AlumnoDocumentos")
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -271,6 +342,44 @@
         {
             var win = window.open(location + "/Academico/Alumno/Nuevo?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa, '_blank');
             win.focus();
+        }
+    }
+
+    function VerMatriculaAnterior() {
+        var location = GetPathServer();
+        if(IdAlumno.GetValue() != 0 || IdAlumno.GetValue()!=""){
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                IdAnio: IdAnio.GetValue(),
+                IdAlumno: IdAlumno.GetValue()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("VerMatriculaAnterior", "Matricula", new { Area = "Academico" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    if(data.msg == ""){
+                        $("#MensajeError").hide();
+                        var win = window.open(location + "/Academico/Matricula/Modificar?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdMatricula=" + data.Matricula, '_blank');
+                        win.focus();
+                    }
+                    else{
+                        $("#MensajeError").show();
+                        $("#Mensaje").html(data.msg);
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        }
+        else{
+            alert("Debe seleccionar alumno");
         }
     }
 
@@ -325,7 +434,9 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#ValorPlantilla").val(data);
+                $("#ValorPlantilla").val(data.Valor);
+                $("#ValorPlantillaProntoPago").val(data.ProntoPago);
+
                 GridViewPartial_DetallePlantilla.PerformCallback();
             },
             error: function (error) {
@@ -351,14 +462,40 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if(data!= ""){
-                    alert(data);
+                    $("#MensajeError").show();
+                    $("#Mensaje").html(data);
+
                     $("#btn_guardar").hide();
                 }
                 else{
                     $("#btn_guardar").show();
                 }
-                
 
+
+            },
+            error: function (error) {
+            }
+        });
+    }
+    
+    function SetAlumnoDocumentos(){
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdCurso: IdComboCurso.GetValue(),
+            IdAlumno: IdAlumno.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetAlumnoDocumentos", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_AlumnoDocumentos.PerformCallback();
             },
             error: function (error) {
             }

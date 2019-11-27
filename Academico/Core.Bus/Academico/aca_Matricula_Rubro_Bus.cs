@@ -37,5 +37,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+        public aca_Matricula_Rubro_Info GetInfo(int IdEmpresa, decimal IdMatricula, int IdPeriodo, int IdRubro)
+        {
+            try
+            {
+                return odata.getInfo(IdEmpresa, IdMatricula, IdPeriodo, IdRubro);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -150,7 +150,7 @@ namespace Core.Data.Academico
 
                 return info_familia;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

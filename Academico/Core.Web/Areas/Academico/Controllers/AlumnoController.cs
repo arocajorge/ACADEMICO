@@ -18,10 +18,12 @@ namespace Core.Web.Areas.Academico.Controllers
     {
         #region Variables
         aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
+        aca_AlumnoDocumento_Bus bus_alumno_documento = new aca_AlumnoDocumento_Bus();
         aca_Familia_Bus bus_familia = new aca_Familia_Bus();
         tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
         aca_Catalogo_Bus bus_aca_catalogo = new aca_Catalogo_Bus();
         aca_alumno_List Lista_Alumno = new aca_alumno_List();
+        aca_AlumnoDocumento_List ListaAlumnoDocumento = new aca_AlumnoDocumento_List();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         public static UploadedFile file { get; set; }
@@ -192,6 +194,17 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
+        #region Documentos
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_AlumnoDocumento()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+
+            List<aca_AlumnoDocumento_Info> model = ListaAlumnoDocumento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_AlumnoDocumento", model);
+        }
+        #endregion
+
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
@@ -206,7 +219,9 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 pe_Naturaleza = "NATU",
                 CodCatalogoCONADIS = "",
-                alu_foto = new byte[0]
+                FechaIngreso = DateTime.Now,
+                alu_foto = new byte[0],
+                lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>()
             };
             cargar_combos();
             return View(model);
@@ -271,6 +286,10 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Alumno_Info model = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
+            model.IdTransaccionSession = Convert.ToInt32(SessionFixed.IdTransaccionSessionActual);
+            model.lst_alumno_documentos = bus_alumno_documento.GetList(IdEmpresa, IdAlumno, true);
+            ListaAlumnoDocumento.set_list(model.lst_alumno_documentos, model.IdTransaccionSession);
+
             aca_Familia_Info info_fam_padre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
             aca_Familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
 
@@ -399,6 +418,10 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Alumno_Info model = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
+            model.IdTransaccionSession = Convert.ToInt32(SessionFixed.IdTransaccionSessionActual);
+            model.lst_alumno_documentos = bus_alumno_documento.GetList(IdEmpresa, IdAlumno, true);
+            ListaAlumnoDocumento.set_list(model.lst_alumno_documentos, model.IdTransaccionSession);
+
             aca_Familia_Info info_fam_padre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
             aca_Familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
 
@@ -635,6 +658,26 @@ namespace Core.Web.Areas.Academico.Controllers
         }
 
         public void set_list(List<aca_Alumno_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
+    public class aca_AlumnoDocumento_List
+    {
+        string Variable = "aca_AlumnoDocumento_Info";
+        public List<aca_AlumnoDocumento_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<aca_AlumnoDocumento_Info> list = new List<aca_AlumnoDocumento_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<aca_AlumnoDocumento_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<aca_AlumnoDocumento_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }

@@ -12,9 +12,10 @@ namespace Core.Info.Academico
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         [Required(ErrorMessage = "El campo año lectivo es obligatorio")]
-        public int IdAnio { get; set; }
-        [Required(ErrorMessage = "El campo rubro es obligatorio")]
+        public int IdAnio { get; set; }  
         public int IdRubro { get; set; }
+        public bool AplicaProntoPago { get; set; }
+        [Required(ErrorMessage = "El campo rubro es obligatorio")]
         public string NomRubro { get; set; }
         [Required(ErrorMessage = "El campo producto es obligatorio")]
         public decimal IdProducto { get; set; }

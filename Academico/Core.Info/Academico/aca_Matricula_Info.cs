@@ -44,6 +44,8 @@ namespace Core.Info.Academico
         #region Campos que no existen en la tabla
         public string IdComboCurso { get; set; }
         public List<aca_Matricula_Info> lst_matricula_curso { get; set; }
+        public List<aca_AnioLectivo_Curso_Documento_Info> lst_alumno_documentos { get; set; }
+        public List<aca_AlumnoDocumento_Info> lst_documentos { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string NomSede { get; set; }
@@ -54,7 +56,11 @@ namespace Core.Info.Academico
         public string NomCurso { get; set; }
         public string Validar { get; set; }
         public double ValorPlantilla { get; set; }
+        public double ValorPlantillaProntoPago { get; set; }
         public List<aca_Matricula_Rubro_Info> lst_MatriculaRubro { get; set; }
+        public bool BloquearMatricula { get; set; }
+        [Required(ErrorMessage = "El campo mecanismo de pago del rubro es obligatorio")]
+        public decimal IdMecanismoDet { get; set; }
         #endregion
     }
 }

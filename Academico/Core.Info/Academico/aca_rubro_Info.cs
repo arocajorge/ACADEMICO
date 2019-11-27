@@ -15,6 +15,7 @@ namespace Core.Info.Academico
         [StringLength(1000, MinimumLength = 1, ErrorMessage = "el campo rubro debe tener mínimo 1 caracter y máximo 1000")]
         [Required(ErrorMessage = "El campo rubro es obligatorio")]
         public string NomRubro { get; set; }
+        public bool AplicaProntoPago { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

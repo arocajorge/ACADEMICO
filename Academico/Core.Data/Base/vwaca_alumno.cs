@@ -40,5 +40,6 @@ namespace Core.Data.Base
         public string pe_telfono_Contacto { get; set; }
         public string NomCatalogoESTMAT { get; set; }
         public string NomCatalogoESTALU { get; set; }
+        public System.DateTime FechaIngreso { get; set; }
     }
 }

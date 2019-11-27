@@ -27,6 +27,7 @@ namespace Core.Info.Academico
 
         #region Campos que no existen en la base
         public bool seleccionado { get; set; }
+        public string IdStringDoc { get; set; }
         #endregion
     }
 }

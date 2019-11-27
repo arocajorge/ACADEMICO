@@ -23,7 +23,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
-
+        public List<aca_AnioLectivo_Curso_Documento_Info> GetList_Matricula(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                return odata.get_list_matricula(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public bool GuardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, List<aca_AnioLectivo_Curso_Documento_Info> lista)
         {
             try

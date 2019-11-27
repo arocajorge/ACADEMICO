@@ -24,6 +24,7 @@ namespace Core.Data.Base
         public int IdEmpresa { get; set; }
         public int IdRubro { get; set; }
         public string NomRubro { get; set; }
+        public bool AplicaProntoPago { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

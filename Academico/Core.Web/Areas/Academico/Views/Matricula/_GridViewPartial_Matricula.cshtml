@@ -47,27 +47,18 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        //Evento para pintar de rojo las filas anuladas
-        //settings.HtmlRowPrepared = (s, e) =>
-        //{
-        //    if (Convert.ToBoolean(e.GetValue("Estado")) == false)
-        //    {
-        //        e.Row.ForeColor = System.Drawing.Color.Red;
-        //    }
-        //};
+
         settings.Columns.Add(c =>
         {
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                //if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
-                //{
-                ViewContext.Writer.Write(
-            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") }) + "&nbsp;" +
-                    Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") },
-                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                );
-                //}
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "BloquearMatricula")) == false)
+                {
+                    ViewContext.Writer.Write(
+                        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") })
+                    );
+                }
             });
             c.SetHeaderTemplateContent(tc =>
             {

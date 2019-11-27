@@ -29,5 +29,6 @@ namespace Core.Data.Base
         public decimal ValorIVA { get; set; }
         public decimal Total { get; set; }
         public string pr_descripcion { get; set; }
+        public bool AplicaProntoPago { get; set; }
     }
 }

@@ -7599,6 +7599,9 @@
     <Content Include="Areas\Academico\Views\Matricula\_GridViewPartial_DetallePlantilla.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\_GridViewPartial_MatriculaRubro.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\_CmbAlumno_ReadOnly.cshtml" />
+    <Content Include="Areas\Academico\Views\Matricula\_ComboBoxPartial_Anio_Consulta.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_GridViewPartial_AlumnoDocumento.cshtml" />
+    <Content Include="Areas\Academico\Views\Matricula\_GridViewPartial_AlumnoDocumentos.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

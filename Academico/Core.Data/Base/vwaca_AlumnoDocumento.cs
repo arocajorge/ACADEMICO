@@ -12,15 +12,13 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_AnioLectivo_Rubro_Periodo
+    public partial class vwaca_AlumnoDocumento
     {
         public int IdEmpresa { get; set; }
-        public int IdAnio { get; set; }
-        public int IdRubro { get; set; }
-        public int IdPeriodo { get; set; }
-        public string Observacion { get; set; }
-    
-        public virtual aca_AnioLectivo_Periodo aca_AnioLectivo_Periodo { get; set; }
-        public virtual aca_AnioLectivo_Rubro aca_AnioLectivo_Rubro { get; set; }
+        public decimal IdAlumno { get; set; }
+        public int IdDocumento { get; set; }
+        public string NomDocumento { get; set; }
+        public bool EnArchivo { get; set; }
+        public int OrdenDocumento { get; set; }
     }
 }

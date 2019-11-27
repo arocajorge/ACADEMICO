@@ -28,6 +28,7 @@ namespace Core.Info.Academico
         public bool seleccionado { get; set; }
         public string NomPlantilla { get; set; }
         public decimal Valor { get; set; }
+        public string TipoDescuento { get; set; }
         #endregion
     }
 }

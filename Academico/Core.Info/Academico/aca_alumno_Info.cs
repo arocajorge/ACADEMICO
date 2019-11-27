@@ -59,6 +59,7 @@ namespace Core.Info.Academico
         public string CodCatalogoCONADIS { get; set; }
         public Nullable<double> PorcentajeDiscapacidad { get; set; }
         public string NumeroCarnetConadis { get; set; }
+        public List<aca_AlumnoDocumento_Info> lst_alumno_documentos { get; set; }
         #endregion
 
         #region Datos padre

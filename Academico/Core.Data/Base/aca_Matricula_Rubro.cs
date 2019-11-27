@@ -18,7 +18,9 @@ namespace Core.Data.Base
         public decimal IdMatricula { get; set; }
         public int IdPeriodo { get; set; }
         public int IdRubro { get; set; }
+        public decimal IdMecanismo { get; set; }
         public decimal IdProducto { get; set; }
+        public bool EnMatricula { get; set; }
         public decimal Subtotal { get; set; }
         public string IdCod_Impuesto_Iva { get; set; }
         public decimal Porcentaje { get; set; }
@@ -29,7 +31,8 @@ namespace Core.Data.Base
         public Nullable<decimal> IdCbteVta { get; set; }
         public Nullable<System.DateTime> FechaFacturacion { get; set; }
     
-        public virtual aca_Rubro aca_Rubro { get; set; }
         public virtual aca_Matricula aca_Matricula { get; set; }
+        public virtual aca_MecanismoDePago aca_MecanismoDePago { get; set; }
+        public virtual aca_Rubro aca_Rubro { get; set; }
     }
 }
