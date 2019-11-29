@@ -317,6 +317,28 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.pe_apellido">Nombre completo</label>
+                                @Html.TextBoxFor(q => q.pe_nombreCompleto_padre, new { @class = "form-control", @id = "pe_nombreCompleto_padre" })
+                                @Html.ValidationMessageFor(q => q.pe_nombreCompleto_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.pe_apellido">Razón Social</label>
+                                @Html.TextBoxFor(q => q.pe_razonSocial_padre, new { @class = "form-control", @id = "pe_razonSocial_padre" })
+                                @Html.ValidationMessageFor(q => q.pe_razonSocial_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="">Fecha de nacimiento</label>
@@ -473,6 +495,28 @@
                                 <label for="info_persona.pe_nombre">Nombres</label>
                                 @Html.TextBoxFor(q => q.pe_nombre_madre, new { @class = "form-control", @id = "pe_nombre_madre" })
                                 @Html.ValidationMessageFor(q => q.pe_nombre_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.pe_apellido">Nombre completo</label>
+                                @Html.TextBoxFor(q => q.pe_nombreCompleto_madre, new { @class = "form-control", @id = "pe_nombreCompleto_madre" })
+                                @Html.ValidationMessageFor(q => q.pe_nombreCompleto_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.pe_apellido">Razón Social</label>
+                                @Html.TextBoxFor(q => q.pe_razonSocial_madre, new { @class = "form-control", @id = "pe_razonSocial_madre" })
+                                @Html.ValidationMessageFor(q => q.pe_razonSocial_madre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

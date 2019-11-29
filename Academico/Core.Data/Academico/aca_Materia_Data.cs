@@ -30,6 +30,7 @@ namespace Core.Data.Academico
                             NomMateriaGrupo = q.NomMateriaGrupo,
                             OrdenMateria = q.OrdenMateria,
                             EsObligatorio = q.EsObligatorio,
+                            EsCompartida = q.EsCompartida,
                             Estado = q.Estado
                         });
                     });
@@ -93,6 +94,7 @@ namespace Core.Data.Academico
                         NomMateria = Entity.NomMateria,
                         OrdenMateria = Entity.OrdenMateria,
                         EsObligatorio = Entity.EsObligatorio,
+                        EsCompartida = Entity.EsCompartida,
                         Estado = Entity.Estado
                     };
                 }
@@ -164,6 +166,7 @@ namespace Core.Data.Academico
                         IdMateriaGrupo = (info.IdMateriaGrupo==0 ? null : info.IdMateriaGrupo),
                         OrdenMateria = info.OrdenMateria,
                         EsObligatorio = info.EsObligatorio,
+                        EsCompartida = info.EsCompartida,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -195,6 +198,7 @@ namespace Core.Data.Academico
                     Entity.OrdenMateria = info.OrdenMateria;
                     Entity.IdMateriaGrupo = (info.IdMateriaGrupo == 0 ? null : info.IdMateriaGrupo);
                     Entity.EsObligatorio = info.EsObligatorio;
+                    Entity.EsCompartida = info.EsCompartida;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 

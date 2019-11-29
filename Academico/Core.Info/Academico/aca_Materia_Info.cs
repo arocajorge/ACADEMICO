@@ -18,6 +18,7 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo materia es obligatorio")]
         public string NomMateria { get; set; }
         public bool EsObligatorio { get; set; }
+        public bool EsCompartida { get; set; }
         [Required(ErrorMessage = "El campo orden es obligatorio")]
         public int OrdenMateria { get; set; }
         public bool Estado { get; set; }

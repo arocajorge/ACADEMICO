@@ -18,12 +18,13 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.aca_MecanismoDePago.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_MecanismoDePago_Info
+                    Lista = Context.vwaca_MecanismoDePago.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_MecanismoDePago_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdMecanismo = q.IdMecanismo,
                         NombreMecanismo = q.NombreMecanismo,
                         IdTerminoPago = q.IdTerminoPago,
+                        nom_TerminoPago = q.nom_TerminoPago,
                         Estado = q.Estado
                     }).ToList();
                 }

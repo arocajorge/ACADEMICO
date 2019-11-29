@@ -45,7 +45,7 @@ namespace Core.Data.General
                 pe_cedulaRuc = info.pe_cedulaRuc,
                 pe_Naturaleza = info.pe_Naturaleza,
                 IdTipoDocumento = info.IdTipoDocumento,
-                pe_razonSocial = info.pe_nombreCompleto,
+                pe_razonSocial = info.pe_razonSocial,
 
                 //Campos opcionales
                 pe_direccion = info.pe_direccion,
@@ -54,6 +54,10 @@ namespace Core.Data.General
                 pe_correo = info.pe_correo,
                 pe_fechaNacimiento = info.pe_fechaNacimiento,
                 CodCatalogoSangre = (info.CodCatalogoSangre=="" ? null : info.CodCatalogoSangre),
+
+                CodCatalogoCONADIS = (info.CodCatalogoCONADIS=="" ? null : info.CodCatalogoCONADIS),
+                NumeroCarnetConadis = info.NumeroCarnetConadis,
+                PorcentajeDiscapacidad = info.PorcentajeDiscapacidad,
 
                 //Si vienen null se pone un valor default
                 IdEstadoCivil = string.IsNullOrEmpty(info.IdEstadoCivil) ? "SOLTE" : info.IdEstadoCivil,

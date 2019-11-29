@@ -7537,7 +7537,6 @@
     <Content Include="Areas\Academico\Views\RubroPorPeriodo\Anular.cshtml" />
     <Content Include="Areas\Academico\Views\Plantilla\_CmbProducto_Plantilla.cshtml" />
     <Content Include="Areas\Academico\Views\Plantilla\_CmbRubro_Plantilla.cshtml" />
-    <Content Include="Areas\Academico\Views\RubroPorPeriodo\_ComboBoxPartial_Anio_Consulta.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\_ComboBoxPartial_Plantilla.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\_GridViewPartial_AlumnosPorParalelo.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\Modificar.cshtml" />

@@ -13,6 +13,7 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdPlantilla, new { @id = "IdPlantilla" })
+    @Html.HiddenFor(q => q.IdAnio, new { @id = "IdAnio" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {
@@ -53,8 +54,8 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="IdEmpresa">Año Lectivo*</label>
-                    @Html.Partial("_ComboBoxPartial_Anio", Model)
+                    <label for="IdEmpresa">Año Lectivo</label>
+                    @Html.DropDownListFor(q => q.IdAnio, new SelectList(ViewBag.lst_anio, "IdAnio", "Descripcion"), new { @class = "form-control", @id = "IdAnio", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                 </div>
             </div>

@@ -38,14 +38,17 @@ namespace Core.Info.Academico
         public string IdTipoDocumento { get; set; }
         [Required(ErrorMessage = "El campo naturaleza es obligatorio")]
         public string pe_Naturaleza { get; set; }
+        [StringLength(200, MinimumLength = 1, ErrorMessage = "el campo nombre completo debe tener mínimo 1 caracter y máximo 200 caracteres")]
         public string pe_nombreCompleto { get; set; }
-        [Required(ErrorMessage = "El campo apellido es obligatorio")]
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string pe_apellido { get; set; }
-        [Required(ErrorMessage = "El campo nombre es obligatorio")]
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string pe_nombre { get; set; }
         [Required(ErrorMessage = "El campo numero de documento es obligatorio")]
         public string pe_cedulaRuc { get; set; }
         public string pe_telfono_Contacto { get; set; }
+        [StringLength(150, MinimumLength = 0, ErrorMessage = "el campo razón social debe tener máximo 150 caracteres")]
+        public string pe_razonSocial { get; set; }
         public string pe_sexo { get; set; }
         public string IdEstadoCivil { get; set; }
         public Nullable<System.DateTime> pe_fechaNacimiento { get; set; }

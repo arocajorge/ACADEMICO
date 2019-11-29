@@ -81,12 +81,22 @@
         });
         settings.Columns.Add("IdMateria", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add("NomMateria","Descripción").Width = Unit.Percentage(50);
-        settings.Columns.Add("NomMateriaGrupo", "Grupo").Width = Unit.Percentage(50);       
+        settings.Columns.Add("NomMateriaGrupo", "Grupo").Width = Unit.Percentage(40);       
         settings.Columns.Add("OrdenMateria","Orden").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EsObligatorio";
             column.Caption = "Es Obligatoria";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EsCompartida";
+            column.Caption = "Es Compartida";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {

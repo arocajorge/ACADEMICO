@@ -27,6 +27,7 @@ namespace Core.Data.Academico
                             IdEmpresa = q.IdEmpresa,
                             IdRubro = q.IdRubro,
                             NomRubro = q.NomRubro,
+                            AplicaProntoPago = q.AplicaProntoPago,
                             Estado = q.Estado
                         });
                     });
@@ -58,6 +59,7 @@ namespace Core.Data.Academico
                         IdEmpresa = Entity.IdEmpresa,
                         IdRubro = Entity.IdRubro,
                         NomRubro = Entity.NomRubro,
+                        AplicaProntoPago = Entity.AplicaProntoPago,
                         Estado = Entity.Estado
                     };
                 }
@@ -104,6 +106,7 @@ namespace Core.Data.Academico
                         IdEmpresa = info.IdEmpresa,
                         IdRubro = info.IdRubro = getId(info.IdEmpresa),
                         NomRubro = info.NomRubro,
+                        AplicaProntoPago = info.AplicaProntoPago,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -131,6 +134,7 @@ namespace Core.Data.Academico
                     if (Entity == null)
                         return false;
                     Entity.NomRubro = info.NomRubro;
+                    Entity.AplicaProntoPago = info.AplicaProntoPago;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 

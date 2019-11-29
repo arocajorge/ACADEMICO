@@ -355,6 +355,9 @@
     <Compile Include="Base\vwaca_Matricula_Rubro.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_MecanismoDePago.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_PermisoMatricula.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>

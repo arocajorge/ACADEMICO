@@ -153,10 +153,10 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             var existe = 0;
             var info_registro = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, IdRubro);
+            var info_rubro = bus_rubro.GetInfo(IdEmpresa, IdRubro);
             var Empresa = 0;
             var Anio = 0;
             var Rubro = 0;
-
             if (info_registro != null)
             {
                 existe = 1;
@@ -175,7 +175,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(new { existe_registro = existe, IdEmpresa=Empresa, IdAnio=Anio, IdRubro=Rubro}, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult guardar(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, int IdProducto = 0, decimal Subtotal = 0, string IdCod_Impuesto_Iva = "", decimal Porcentaje = 0, decimal ValorIVA = 0, decimal Total = 0, string Ids = "", decimal IdTransaccionSession = 0)
+        public JsonResult guardar(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, int IdProducto = 0, decimal Subtotal = 0, string IdCod_Impuesto_Iva = "", decimal Porcentaje = 0, decimal ValorIVA = 0, decimal Total = 0, bool AplicaProntoPago = false, string Ids = "", decimal IdTransaccionSession = 0)
         {
             var mensaje = "";
             var Empresa = 0;
@@ -188,6 +188,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdEmpresa = IdEmpresa,
                 IdAnio = IdAnio,
                 IdRubro = IdRubro,
+                AplicaProntoPago = AplicaProntoPago,
                 NomRubro = (info_rubro == null ? "" : info_rubro.NomRubro),
                 IdProducto = IdProducto,
                 Subtotal = Subtotal,
@@ -232,13 +233,14 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(new { msg = mensaje, IdEmpresa = Empresa, IdAnio = Anio, IdRubro = Rubro }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult actualizar(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, int IdProducto = 0, decimal Subtotal = 0, string IdCod_Impuesto_Iva = "", decimal Porcentaje = 0, decimal ValorIVA = 0, decimal Total = 0, string Ids = "", decimal IdTransaccionSession = 0)
+        public JsonResult actualizar(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, int IdProducto = 0, decimal Subtotal = 0, string IdCod_Impuesto_Iva = "", decimal Porcentaje = 0, decimal ValorIVA = 0, decimal Total = 0, bool AplicaProntoPago = false, string Ids = "", decimal IdTransaccionSession = 0)
         {
             var mensaje = "";
             var Empresa = 0;
             var Anio = 0;
             var Rubro = 0;
             aca_AnioLectivo_Rubro_Info info_rubro_anio = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, IdRubro);
+            info_rubro_anio.AplicaProntoPago = AplicaProntoPago;
             info_rubro_anio.IdProducto = IdProducto;
             info_rubro_anio.Subtotal = Subtotal;
             info_rubro_anio.IdCod_Impuesto_Iva = IdCod_Impuesto_Iva;
@@ -274,6 +276,18 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(new { msg = mensaje, IdEmpresa = Empresa, IdAnio = Anio, IdRubro = Rubro }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult setProntoPago(int IdEmpresa = 0, int IdRubro = 0)
+        {
+            var AplicaProntoPago = 0;
+            var info_rubro = bus_rubro.GetInfo(IdEmpresa, IdRubro);
+            if (info_rubro != null)
+            {
+                AplicaProntoPago = (info_rubro.AplicaProntoPago== true ? 1 : 0);
+            }
+
+            return Json(AplicaProntoPago, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region Acciones

@@ -39,5 +39,6 @@ namespace Core.Data.Base
         public string pe_telfono_Contacto { get; set; }
         public int Secuencia { get; set; }
         public bool EsRepresentante { get; set; }
+        public string pe_razonSocial { get; set; }
     }
 }

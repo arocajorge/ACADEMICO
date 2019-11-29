@@ -40,6 +40,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public decimal GetId(int IdEmpresa)
+        {
+            try
+            {
+                return odata.getId(IdEmpresa);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public aca_Profesor_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
         {
             try
@@ -76,6 +88,9 @@ namespace Core.Bus.Academico
                     pe_fechaNacimiento = info.pe_fechaNacimiento,
                     IdEstadoCivil = info.IdEstadoCivil,
                     pe_sexo = info.pe_sexo,
+                    CodCatalogoCONADIS = info.CodCatalogoCONADIS,
+                    NumeroCarnetConadis = info.NumeroCarnetConadis,
+                    PorcentajeDiscapacidad = info.PorcentajeDiscapacidad
                 };
 
                 if (bus_persona.validar_existe_cedula(info.pe_cedulaRuc) == 0)
@@ -135,6 +150,9 @@ namespace Core.Bus.Academico
                     pe_correo = info.Correo,
                     pe_fechaNacimiento = info.pe_fechaNacimiento,
                     IdEstadoCivil = info.IdEstadoCivil,
+                    CodCatalogoCONADIS = (info.CodCatalogoCONADIS=="" ? null : info.CodCatalogoCONADIS),
+                    NumeroCarnetConadis = info.NumeroCarnetConadis,
+                    PorcentajeDiscapacidad = info.PorcentajeDiscapacidad,
                     pe_sexo = info.pe_sexo,
                 };
 

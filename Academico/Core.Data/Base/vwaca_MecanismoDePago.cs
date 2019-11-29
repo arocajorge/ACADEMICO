@@ -12,19 +12,13 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class vwaca_PermisoMatricula
+    public partial class vwaca_MecanismoDePago
     {
         public int IdEmpresa { get; set; }
-        public decimal IdPermiso { get; set; }
-        public decimal IdAlumno { get; set; }
-        public decimal IdPersona { get; set; }
-        public string pe_nombreCompleto { get; set; }
-        public int IdAnio { get; set; }
-        public string Descripcion { get; set; }
-        public int IdCatalogoPERNEG { get; set; }
-        public System.DateTime Fecha { get; set; }
-        public string Observacion { get; set; }
+        public decimal IdMecanismo { get; set; }
+        public string NombreMecanismo { get; set; }
+        public string IdTerminoPago { get; set; }
+        public string nom_TerminoPago { get; set; }
         public Nullable<bool> Estado { get; set; }
-        public string IdUsuarioCreacion { get; set; }
     }
 }

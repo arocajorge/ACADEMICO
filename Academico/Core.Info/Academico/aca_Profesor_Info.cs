@@ -32,6 +32,7 @@ namespace Core.Info.Academico
         public string MotivoAnulacion { get; set; }
 
         #region Campos que no existen en la tablas
+        public byte[] prof_foto { get; set; }
         public tb_persona_Info info_persona { get; set; }
         public string anio { get; set; }
         public string mes { get; set; }
@@ -47,6 +48,9 @@ namespace Core.Info.Academico
         public string pe_sexo { get; set; }
         public string pe_celular { get; set; }
         public Nullable<System.DateTime> pe_fechaNacimiento { get; set; }
+        public string CodCatalogoCONADIS { get; set; }
+        public Nullable<double> PorcentajeDiscapacidad { get; set; }
+        public string NumeroCarnetConadis { get; set; }
         #endregion
     }
 }

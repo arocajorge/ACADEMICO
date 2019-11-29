@@ -44,11 +44,11 @@ namespace Core.Info.Academico
         public string IdTipoDocumento { get; set; }
         [Required(ErrorMessage = "El campo naturaleza es obligatorio")]
         public string pe_Naturaleza { get; set; }
-        [Required(ErrorMessage = "El campo nombre completo es obligatorio")]
+        [StringLength(200, MinimumLength = 1, ErrorMessage = "el campo nombre completo debe tener mínimo 1 caracter y máximo 200 caracteres")]
         public string pe_nombreCompleto { get; set; }
-        [Required(ErrorMessage = "El campo apellido es obligatorio")]
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string pe_apellido { get; set; }
-        [Required(ErrorMessage = "El campo nombre es obligatorio")]
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string pe_nombre { get; set; }
         [Required(ErrorMessage = "El campo numero de documento es obligatorio")]
         public string pe_cedulaRuc { get; set; }
@@ -67,10 +67,15 @@ namespace Core.Info.Academico
         public decimal IdPersona_padre { get; set; }
         public string IdTipoDocumento_padre { get; set; }
         public string pe_Naturaleza_padre { get; set; }
+        [StringLength(200, MinimumLength = 1, ErrorMessage = "el campo nombre completo debe tener mínimo 1 caracter y máximo 200 caracteres")]
         public string pe_nombreCompleto_padre { get; set; }
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string pe_apellido_padre { get; set; }
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string pe_nombre_padre { get; set; }
         public string pe_cedulaRuc_padre { get; set; }
+        [StringLength(150, MinimumLength = 0, ErrorMessage = "el campo razón social debe tener máximo 150 caracteres")]
+        public string pe_razonSocial_padre { get; set; }
         public string Direccion_padre { get; set; }
         public string pe_telfono_Contacto_padre { get; set; }
         public string Celular_padre { get; set; }
@@ -92,8 +97,13 @@ namespace Core.Info.Academico
         public decimal IdPersona_madre { get; set; }
         public string IdTipoDocumento_madre { get; set; }
         public string pe_Naturaleza_madre { get; set; }
+        [StringLength(200, MinimumLength = 1, ErrorMessage = "el campo nombre completo debe tener mínimo 1 caracter y máximo 200 caracteres")]
         public string pe_nombreCompleto_madre { get; set; }
+        [StringLength(150, MinimumLength = 0, ErrorMessage = "el campo razón social debe tener máximo 150 caracteres")]
+        public string pe_razonSocial_madre { get; set; }
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string pe_apellido_madre { get; set; }
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string pe_nombre_madre { get; set; }
         public string pe_cedulaRuc_madre { get; set; }
         public string Direccion_madre { get; set; }

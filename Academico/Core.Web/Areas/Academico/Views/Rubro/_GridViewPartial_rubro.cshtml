@@ -81,6 +81,17 @@
         });
         settings.Columns.Add("IdRubro", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add("NomRubro", "Descripción").Width = Unit.Percentage(70);
+        
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "AplicaProntoPago";
+            column.Caption = "Pronto Pago";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";

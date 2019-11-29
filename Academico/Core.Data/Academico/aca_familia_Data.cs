@@ -88,6 +88,7 @@ namespace Core.Data.Academico
                         pe_nombre = Entity.pe_nombre,
                         pe_apellido = Entity.pe_apellido,
                         pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        pe_razonSocial = Entity.pe_razonSocial,
                         pe_sexo = Entity.pe_sexo,
                         IdEstadoCivil = Entity.IdEstadoCivil,
                         pe_fechaNacimiento = Entity.pe_fechaNacimiento,
@@ -138,6 +139,7 @@ namespace Core.Data.Academico
                         pe_nombre = Entity.pe_nombre,
                         pe_apellido = Entity.pe_apellido,
                         pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        pe_razonSocial = Entity.pe_razonSocial,
                         pe_sexo = Entity.pe_sexo,
                         IdEstadoCivil = Entity.IdEstadoCivil,
                         pe_fechaNacimiento = Entity.pe_fechaNacimiento,
@@ -186,6 +188,7 @@ namespace Core.Data.Academico
                         pe_nombre = Entity.pe_nombre,
                         pe_apellido = Entity.pe_apellido,
                         pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        pe_razonSocial = Entity.pe_razonSocial,
                         pe_sexo = Entity.pe_sexo,
                         IdEstadoCivil = Entity.IdEstadoCivil,
                         pe_fechaNacimiento = Entity.pe_fechaNacimiento,
@@ -234,6 +237,7 @@ namespace Core.Data.Academico
                         pe_nombre = Entity.pe_nombre,
                         pe_apellido = Entity.pe_apellido,
                         pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        pe_razonSocial =Entity.pe_razonSocial,
                         pe_sexo = Entity.pe_sexo,
                         IdEstadoCivil = Entity.IdEstadoCivil,
                         pe_fechaNacimiento = Entity.pe_fechaNacimiento,
@@ -281,6 +285,7 @@ namespace Core.Data.Academico
                     info.pe_apellido = Entity_per.pe_apellido;
                     info.pe_nombre = Entity_per.pe_nombre;
                     info.pe_nombreCompleto = Entity_per.pe_nombreCompleto;
+                    info.pe_razonSocial = Entity_per.pe_razonSocial;
                     info.pe_telfono_Contacto = Entity_per.pe_telfono_Contacto;
                     info.CodCatalogoSangre = Entity_per.CodCatalogoSangre;
                     info.CodCatalogoCONADIS = Entity_per.CodCatalogoCONADIS;
@@ -307,6 +312,7 @@ namespace Core.Data.Academico
                     IdPersona = Entity_fam.IdPersona,
                     pe_apellido = Entity_fam.pe_apellido,
                     pe_nombre = Entity_fam.pe_nombre,
+                    pe_razonSocial = Entity_fam.pe_razonSocial,
                     pe_Naturaleza = Entity_fam.pe_Naturaleza,
                     IdTipoDocumento = Entity_fam.IdTipoDocumento,
                     pe_cedulaRuc = Entity_fam.pe_cedulaRuc,

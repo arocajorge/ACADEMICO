@@ -138,6 +138,7 @@ namespace Core.Data.Academico
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdRubro = Entity.IdRubro,
+                        AplicaProntoPago = Entity.AplicaProntoPago,
                         IdAnio = Entity.IdAnio,
                         NomRubro = Entity.NomRubro,
                         Subtotal = Entity.Subtotal,
@@ -170,6 +171,7 @@ namespace Core.Data.Academico
                         IdAnio = info.IdAnio,
                         IdRubro = info.IdRubro,
                         NomRubro = info.NomRubro,
+                        AplicaProntoPago = info.AplicaProntoPago,
                         IdProducto = info.IdProducto,
                         Subtotal = info.Subtotal,
                         IdCod_Impuesto_Iva = info.IdCod_Impuesto_Iva,
@@ -218,6 +220,7 @@ namespace Core.Data.Academico
                     if (Entity == null)
                         return false;
 
+                    Entity.AplicaProntoPago = info.AplicaProntoPago;
                     Entity.IdProducto = info.IdProducto;
                     Entity.Subtotal = info.Subtotal;
                     Entity.IdCod_Impuesto_Iva = info.IdCod_Impuesto_Iva;

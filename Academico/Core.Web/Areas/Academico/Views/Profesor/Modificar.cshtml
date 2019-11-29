@@ -1,4 +1,5 @@
-﻿@model Core.Info.Academico.aca_Profesor_Info
+﻿@using System.Web.UI.WebControls;
+@model Core.Info.Academico.aca_Profesor_Info
 @{
     ViewBag.Title = "Modificar profesor";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
@@ -145,6 +146,9 @@
             <li>
                 <a href="#tb_otros" aria-controls="otros" role="tab" data-toggle="tab">Otros</a>
             </li>
+            <li>
+                <a href="#tb_foto" aria-controls="otros" role="tab" data-toggle="tab">Foto</a>
+            </li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content" style="padding-top: 20px">
@@ -188,6 +192,7 @@
             </div>
 
             <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_otros">
+                <h4>Datos adicionales</h4><hr />
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -224,8 +229,99 @@
                         </div>
                     </div>
                 </div>
+                <h4>Datos Conadis</h4><hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="pe_sexo">Tipo de discapacidad</label>
+                                @Html.DropDownListFor(q => q.CodCatalogoCONADIS, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogoCONADIS" })
+                                @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Telefonos">Porcentaje de discapacidad</label>
+                                @Html.TextBoxFor(q => q.PorcentajeDiscapacidad, new { @class = "form-control", @id = "PorcentajeDiscapacidad" })
+                                @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Telefonos">Numero de carnet</label>
+                                @Html.TextBoxFor(q => q.NumeroCarnetConadis, new { @class = "form-control", @id = "NumeroCarnetConadis" })
+                                @Html.ValidationMessageFor(q => q.NumeroCarnetConadis, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_foto">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <script type="text/javascript">
+                                function onUploadControlFileUploadComplete(s, e) {
+                                    if (e.isValid)
+                                        // $("#uploadedImage").attr("src", e.callbackData);
+                                       //actualizar_div();
+                                        setElementVisible("uploadedImage", e.isValid);
+                                }
+                                function onImageLoad() {
+                                    var externalDropZone = $("#externalDropZone");
+                                    var uploadedImage = $("#uploadedImage");
+                                    uploadedImage.css({
+                                        left: (externalDropZone.width() - uploadedImage.width()) / 4,
+                                        top: (externalDropZone.height() - uploadedImage.height()) / 4
+                                    });
+                                    setElementVisible("dragZone", false);
+                                }
+                                function setElementVisible(elementId, visible) {
+                                    var el = $("#" + elementId);
+                                    if (visible)
+                                        el.show();
+                                    else
+                                        el.hide();
+                                }
+                            </script>
+                            <div class="uploadContainer">
+                                @Html.DevExpress().BinaryImage(
+                               settings =>
+                               {
+                                   settings.Name = "pr_imagen";
+                                   settings.CallbackRouteValues = new { Controller = "Profesor", Action = "get_imagen_general" };
+                               }).Bind((Model.prof_foto).ToArray()).GetHtml()
+
+                                @Html.DevExpress().UploadControl(settings =>
+                               {
+                                   settings.ShowProgressPanel = true;
+                                   settings.CallbackRouteValues = new { Controller = "Profesor", Action = "DragAndDropImageUpload" };
+                                   settings.Name = "ucDragAndDrop";
+                                   settings.UploadMode = UploadControlUploadMode.Auto;
+                                   settings.AutoStartUpload = true;
+                                   settings.Width = Unit.Percentage(100);
+                                   settings.DialogTriggerID = "externalDropZone";
+                                   settings.AdvancedModeSettings.EnableDragAndDrop = true;
+                                   settings.AdvancedModeSettings.EnableFileList = false;
+                                   settings.AdvancedModeSettings.EnableMultiSelect = false;
+                                   settings.AdvancedModeSettings.ExternalDropZoneID = "externalDropZone";
+                                   settings.AdvancedModeSettings.DropZoneText = "";
+                                   settings.ValidationSettings.MaxFileSize = 4194304;
+                                   settings.ValidationSettings.AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".gif", ".png" };
+                                   settings.ValidationSettings.ErrorStyle.CssClass = "validationMessage";
+                                   settings.ClientSideEvents.FilesUploadStart = "function(s,e){nombre_imagen();}";
+
+                                   settings.Styles.DropZone.CssClass = "uploadControlDropZone";
+                                   settings.ClientSideEvents.DropZoneEnter = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', true); }";
+                                   settings.ClientSideEvents.DropZoneLeave = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', false); }";
+                                   settings.ClientSideEvents.FileUploadComplete = "onUploadControlFileUploadComplete";
+                               }).GetHtml()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="box-footer">

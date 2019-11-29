@@ -30,7 +30,8 @@ namespace Core.Data.Academico
                         Observacion = q.Observacion,
                         AnioLectivo = q.Descripcion,
                         Alumno = q.pe_nombreCompleto,
-                        Estado = q.Estado
+                        Estado = q.Estado,
+                        IdUsuarioCreacion = q.IdUsuarioCreacion
                     }).ToList();
                 }
                 return Lista;

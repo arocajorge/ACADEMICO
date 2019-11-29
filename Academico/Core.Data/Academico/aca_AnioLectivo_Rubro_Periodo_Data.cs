@@ -58,7 +58,7 @@ namespace Core.Data.Academico
                                  IdRubro = q.IdRubro,
                                  IdPeriodo = q.IdPeriodo,
                                  FechaDesde = j.FechaDesde,
-                                 FechaHasta = j.FechaHasta
+                                 FechaHasta = j.FechaHasta,
                              }).ToList();
 
                     Lista.AddRange((from j in Context.aca_AnioLectivo_Periodo

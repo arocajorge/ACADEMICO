@@ -91,7 +91,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_Plantilla_Info> lista = bus_plantilla.GetList(model.IdEmpresa, model.IdAnio, true);
             Lista_Plantilla.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-
+            cargar_combos();
             return View(model);
         }
 
@@ -100,7 +100,7 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             List<aca_Plantilla_Info> lista = bus_plantilla.GetList(model.IdEmpresa, model.IdAnio, true);
             Lista_Plantilla.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
-
+            cargar_combos();
             return View(model);
         }
 
@@ -191,6 +191,10 @@ namespace Core.Web.Areas.Academico.Controllers
 
         private void cargar_combos()
         {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_anio = bus_anio.GetList(IdEmpresa, false);
+            ViewBag.lst_anio = lst_anio;
+
             Dictionary<string, string> lst_tipo_desc = new Dictionary<string, string>();
             lst_tipo_desc.Add("$", "$ Monto");
             lst_tipo_desc.Add("%", "% Porcentaje");

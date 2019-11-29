@@ -408,6 +408,28 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.pe_apellido">Nombre completo</label>
+                                @Html.TextBoxFor(q => q.pe_nombreCompleto_padre, new { @class = "form-control", @id = "pe_nombreCompleto_padre" })
+                                @Html.ValidationMessageFor(q => q.pe_nombreCompleto_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.pe_apellido">Razón Social</label>
+                                @Html.TextBoxFor(q => q.pe_razonSocial_padre, new { @class = "form-control", @id = "pe_razonSocial_padre" })
+                                @Html.ValidationMessageFor(q => q.pe_razonSocial_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="">Fecha de nacimiento</label>
@@ -582,6 +604,28 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.pe_apellido">Nombre completo</label>
+                                @Html.TextBoxFor(q => q.pe_nombreCompleto_madre, new { @class = "form-control", @id = "pe_nombreCompleto_madre" })
+                                @Html.ValidationMessageFor(q => q.pe_nombreCompleto_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.pe_apellido">Razón Social</label>
+                                @Html.TextBoxFor(q => q.pe_razonSocial_madre, new { @class = "form-control", @id = "pe_razonSocial_madre" })
+                                @Html.ValidationMessageFor(q => q.pe_razonSocial_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="">Fecha de nacimiento</label>
@@ -723,6 +767,26 @@
         });
         $("#pe_nombre").blur(function () {
             actualizar_nombre_completo();
+        });
+
+        $("#pe_apellido_padre").blur(function () {
+            actualizar_nombre_completo_padre("N");
+        });
+        $("#pe_nombre_padre").blur(function () {
+            actualizar_nombre_completo_padre("N");
+        });
+        $("#pe_razonSocial_padre").blur(function () {
+            actualizar_nombre_completo_padre("R");
+        });
+
+        $("#pe_apellido_madre").blur(function () {
+            actualizar_nombre_completo_madre("N");
+        });
+        $("#pe_nombre_madre").blur(function () {
+            actualizar_nombre_completo_madre("N");
+        });
+        $("#pe_razonSocial_madre").blur(function () {
+            actualizar_nombre_completo_madre("R");
         });
 
         $("#pe_cedulaRuc").blur(function () {
@@ -1062,6 +1126,8 @@
             $("#IdPersona_padre").val(0);
             $("#pe_nombre_padre").val("");
             $("#pe_apellido_padre").val("");
+            $("#pe_nombreCompleto_padre").val("");
+            $("#pe_razonSocial_padre").val("");
             pe_fechaNacimiento_padre.SetDate(null);
             $("#Correo_padre").val("");
             $("#Celular_padre").val("");
@@ -1079,6 +1145,8 @@
             $("#IdPersona_madre").val(0);
             $("#pe_nombre_madre").val("");
             $("#pe_apellido_madre").val("");
+            $("#pe_nombreCompleto_madre").val("");
+            $("#pe_razonSocial_madre").val("");
             pe_fechaNacimiento_madre.SetDate(null);
             $("#Correo_madre").val("");
             $("#Celular_madre").val("");
@@ -1238,5 +1306,35 @@
                 error: function (error) {
                 }
             });
+        }
+
+        function actualizar_nombre_completo_padre(Tipo) {
+            console.log(Tipo);
+            if (Tipo == "N") {
+                var apellido = $("#pe_apellido_padre").val();
+                var nombre = $("#pe_nombre_padre").val();
+
+                var nombre_completo = apellido + ' ' + nombre;
+                $("#pe_nombreCompleto_padre").val(nombre_completo)
+            }
+            else {
+                var razon_social = $("#pe_razonSocial_padre").val();
+                $("#pe_nombreCompleto_padre").val(razon_social)
+            }
+        }
+
+        function actualizar_nombre_completo_madre(Tipo) {
+            console.log(Tipo);
+            if (Tipo == "N") {
+                var apellido = $("#pe_apellido_madre").val();
+                var nombre = $("#pe_nombre_madre").val();
+
+                var nombre_completo = apellido + ' ' + nombre;
+                $("#pe_nombreCompleto_madre").val(nombre_completo)
+            }
+            else {
+                var razon_social = $("#pe_razonSocial_madre").val();
+                $("#pe_nombreCompleto_madre").val(razon_social)
+            }
         }
     </script>

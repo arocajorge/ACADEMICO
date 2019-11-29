@@ -13,7 +13,6 @@
         <EntityTypeShape EntityType="ModelAcademico.aca_CatalogoTipo" Width="1.5" PointX="1.5" PointY="49.25" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Familia" Width="1.5" PointX="8.25" PointY="48.625" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Jornada" Width="1.5" PointX="3.75" PointY="30.75" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_Materia" Width="1.5" PointX="3.75" PointY="42.25" />
         <EntityTypeShape EntityType="ModelAcademico.aca_MateriaGrupo" Width="1.5" PointX="1.5" PointY="42.625" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Menu" Width="1.5" PointX="6.75" PointY="6.75" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Menu_x_aca_Sede" Width="1.5" PointX="9" PointY="14.25" />
@@ -21,7 +20,6 @@
         <EntityTypeShape EntityType="ModelAcademico.aca_Paralelo" Width="1.5" PointX="0.75" PointY="21.875" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Sede" Width="1.5" PointX="0.75" PointY="15.625" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_AnioLectivo_Paralelo_Profesor" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Materia" Width="1.5" PointX="8.75" PointY="7.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Jornada" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_NivelAcademico" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Sede" />
@@ -31,11 +29,9 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_NivelAcademico" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Catalogo_aca_CatalogoTipo" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_Materia_aca_MateriaGrupo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Menu_x_aca_Sede_aca_Menu" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Menu_x_aca_Sede_aca_Sede" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_AnioLectivo_Rubro" Width="1.5" PointX="11.375" PointY="7.75" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Familia" Width="1.5" PointX="11.375" PointY="11.75" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Plantilla_Rubro" Width="1.5" PointX="8.25" PointY="26.125" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Rubro_Periodo" Width="1.5" PointX="8.25" PointY="44.875" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Plantilla_Rubro" Width="1.5" PointX="13.375" PointY="9.75" />
@@ -88,7 +84,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_PermisoMatricula_aca_Catalogo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_MecanismoDePago" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_Plantilla" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_PermisoMatricula" Width="1.5" PointX="15.375" PointY="6.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Alumno" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AlumnoRetiro" Width="1.5" PointX="20.25" PointY="29.625" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Materia" Width="1.5" PointX="23.625" PointY="23.625" />
@@ -98,7 +93,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Curso" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Jornada" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Materia" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_NivelAcademico" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Sede" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Rubro_aca_rubro" />
@@ -119,11 +113,18 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Curso" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Jornada" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Materia" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_NivelAcademico" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Paralelo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Profesor" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Sede" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_PermisoMatricula" Width="1.5" PointX="11.375" PointY="20.75" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_Materia" Width="1.5" PointX="3.75" PointY="42.125" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Materia" Width="1.5" PointX="19.375" PointY="6.75" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Materia" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Materia" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_Materia_aca_MateriaGrupo" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_MecanismoDePago" Width="1.5" PointX="8.375" PointY="10.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Familia" Width="1.5" PointX="21.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -65,6 +65,7 @@
             Porcentaje: $("#Porcentaje").val(),
             ValorIVA: $("#ValorIVA").val(),
             Total: $("#Total").val(),
+            AplicaProntoPago: AplicaProntoPago.GetValue(),
             IDs: selectedIDs,
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
@@ -136,12 +137,23 @@
                        settings.Properties.TextField = "NomRubro";
                        settings.Properties.NullText = "== Seleccione ==";
                        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { buscar_registros(); }";
+                       settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { buscar_registros(); setProntoPago();}";
                    }).BindList(ViewBag.lst_rubro).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.AplicaProntoPago, settings =>
+                            {
+                                settings.Name = "AplicaProntoPago";
+                                settings.Text = "Aplica Pronto Pago";
+                            }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.AplicaProntoPago, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdSucursal">Producto*</label>
                     @Html.Partial("_CmbProducto", Model.IdProducto)
@@ -249,6 +261,34 @@
                 console.log(data);
                 $("#ValorIVA").val(data.ValorIva);
                 $("#Total").val(data.Total);
+            },
+            error: function (error) {
+            }
+        });
+    }
+    
+    function setProntoPago() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdRubro: IdRubro.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("setProntoPago", "RubroPorPeriodo",new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if(data == 1){
+                    AplicaProntoPago.SetChecked(true);
+                }
+                else {
+                    AplicaProntoPago.SetChecked(false);
+                }
+                
             },
             error: function (error) {
             }

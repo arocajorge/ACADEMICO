@@ -149,8 +149,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     pe_cedulaRuc = (model.pe_cedulaRuc_padre=="" ? null : model.pe_cedulaRuc_padre),
                     pe_nombre = model.pe_nombre_padre,
                     pe_apellido = model.pe_apellido_padre,
-                    pe_nombreCompleto = model.pe_apellido_padre + " " + model.pe_nombre_padre,
-                    pe_razonSocial = model.pe_apellido_padre + " " + model.pe_nombre_padre,
+                    pe_nombreCompleto = model.pe_nombreCompleto,
+                    pe_razonSocial = model.pe_razonSocial_padre,
                     pe_sexo = model.pe_sexo_padre,
                     CodCatalogoCONADIS = model.CodCatalogoCONADIS_padre,
                     NumeroCarnetConadis = model.NumeroCarnetConadis_padre,
@@ -176,8 +176,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     pe_cedulaRuc = (model.pe_cedulaRuc_madre== "" ? null : model.pe_cedulaRuc_madre),
                     pe_nombre = model.pe_nombre_madre,
                     pe_apellido = model.pe_apellido_madre,
-                    pe_nombreCompleto = model.pe_apellido_madre + " " + model.pe_nombre_madre,
-                    pe_razonSocial = model.pe_apellido_madre + " " + model.pe_nombre_madre,
+                    pe_nombreCompleto = model.pe_nombreCompleto,
+                    pe_razonSocial = model.pe_razonSocial_madre,
                     pe_sexo = model.pe_sexo_madre,
                     CodCatalogoCONADIS = model.CodCatalogoCONADIS_madre,
                     NumeroCarnetConadis = model.NumeroCarnetConadis_madre,
@@ -320,6 +320,8 @@ namespace Core.Web.Areas.Academico.Controllers
             model.pe_cedulaRuc_padre = info_fam_padre.pe_cedulaRuc;
             model.pe_nombre_padre = info_fam_padre.pe_nombre;
             model.pe_apellido_padre = info_fam_padre.pe_apellido;
+            model.pe_nombreCompleto_padre = info_fam_padre.pe_nombreCompleto;
+            model.pe_razonSocial_padre = info_fam_padre.pe_razonSocial;
             model.pe_fechaNacimiento_padre = info_fam_padre.pe_fechaNacimiento;
             model.pe_sexo_padre = info_fam_padre.pe_sexo;
             model.IdEstadoCivil_padre = info_fam_padre.IdEstadoCivil;
@@ -339,6 +341,8 @@ namespace Core.Web.Areas.Academico.Controllers
             model.pe_cedulaRuc_madre = info_fam_madre.pe_cedulaRuc;
             model.pe_nombre_madre = info_fam_madre.pe_nombre;
             model.pe_apellido_madre = info_fam_madre.pe_apellido;
+            model.pe_nombreCompleto_madre = info_fam_madre.pe_nombreCompleto;
+            model.pe_razonSocial_madre = info_fam_madre.pe_razonSocial;
             model.pe_fechaNacimiento_madre = info_fam_madre.pe_fechaNacimiento;
             model.pe_sexo_madre = info_fam_madre.pe_sexo;
             model.IdEstadoCivil_madre = info_fam_madre.IdEstadoCivil;

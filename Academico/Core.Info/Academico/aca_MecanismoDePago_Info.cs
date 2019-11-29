@@ -26,5 +26,9 @@ namespace Core.Info.Academico
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
+
+        #region Campos que no existen en la tabla
+        public string nom_TerminoPago { get; set; }
+        #endregion
     }
 }
