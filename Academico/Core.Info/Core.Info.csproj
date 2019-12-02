@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Academico\aca_AlumnoDocumento_Info.cs" />
+    <Compile Include="Academico\aca_AlumnoRetiro_Info.cs" />
     <Compile Include="Academico\aca_Alumno_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Info.cs" />

@@ -270,7 +270,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(SessionFixed.NombreImagenProfesor, JsonRequestBehavior.AllowGet);
         }
         public string UploadDirectory = "~/Content/imagenes/profesores/";
-        public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
+        public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder_Profesor))]IEnumerable<UploadedFile> ucDragAndDrop)
         {
 
             try
@@ -320,6 +320,36 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
     }
+
+    #region Clases para imagen
+    public class DragAndDropSupportDemoBinder_Profesor : DevExpressEditorsBinder
+    {
+        public DragAndDropSupportDemoBinder_Profesor()
+        {
+            UploadControlBinderSettings.ValidationSettings.Assign(UploadControlDemosHelper_Profesor.UploadValidationSettings);
+            UploadControlBinderSettings.FileUploadCompleteHandler = UploadControlDemosHelper_Profesor.FileUploadComplete;
+        }
+    }
+    public class UploadControlDemosHelper_Profesor
+    {
+        public static byte[] em_foto { get; set; }
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".png" },
+            MaxFileSize = 4000000
+        };
+        public static void FileUploadComplete(object sender, FileUploadCompleteEventArgs e)
+        {
+
+            if (e.UploadedFile.IsValid)
+            {
+                em_foto = e.UploadedFile.FileBytes;
+                //var filename = Path.GetFileName(e.UploadedFile.FileName);
+                //e.UploadedFile.SaveAs("~/Content/imagenes/"+e.UploadedFile.FileName, true);
+            }
+        }
+    }
+    #endregion
 
     public class aca_Profesor_List
     {

@@ -1,5 +1,6 @@
 ﻿using Core.Data.Base;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -251,6 +252,9 @@ namespace Core.Data.Academico
                             Context.aca_AlumnoDocumento.Add(Entity_DetDoc);
                         }
                     }
+
+                    aca_Alumno Entity_Alumno = Context.aca_Alumno.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno);
+                    Entity_Alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.MATRICULADO);
 
                     Context.SaveChanges();
                 }

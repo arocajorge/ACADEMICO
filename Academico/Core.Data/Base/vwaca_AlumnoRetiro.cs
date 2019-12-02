@@ -12,20 +12,17 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_AlumnoRetiro
+    public partial class vwaca_AlumnoRetiro
     {
         public int IdEmpresa { get; set; }
         public decimal IdRetiro { get; set; }
         public decimal IdAlumno { get; set; }
+        public decimal IdPersona { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string pe_nombreCompleto { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
         public int IdCatalogoESTALU { get; set; }
-        public string IdUsuarioCreacion { get; set; }
-        public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioAnulacion { get; set; }
-        public Nullable<System.DateTime> FechaAnulacion { get; set; }
-        public string MotivoAnulacion { get; set; }
-    
-        public virtual aca_Alumno aca_Alumno { get; set; }
     }
 }

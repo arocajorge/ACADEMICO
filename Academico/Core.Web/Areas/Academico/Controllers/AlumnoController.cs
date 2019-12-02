@@ -253,8 +253,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_direccion = model.Direccion
             };
 
-            model.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademico.CURSANDO);
-            model.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademico.REGISTRADO);
+            model.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.CURSANDO);
+            model.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REGISTRADO);
             model.info_persona_alumno = info_persona_alumno;
             model.info_persona_padre = armar_info_padre(model);
             model.info_persona_madre = armar_info_madre(model);

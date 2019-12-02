@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Academico\aca_AlumnoDocumento_Data.cs" />
+    <Compile Include="Academico\aca_AlumnoRetiro_Data.cs" />
     <Compile Include="Academico\aca_Alumno_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Data.cs" />
@@ -326,6 +327,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AlumnoDocumento.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_AlumnoRetiro.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Curso_Paralelo.cs">

@@ -113,6 +113,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="info_persona.pe_nombreCompleto">Razón social</label>
+                    @Html.TextBoxFor(q => q.pe_razonSocial, new { @class = "form-control", @id = "pe_razonSocial" })
+                    @Html.ValidationMessageFor(q => q.pe_razonSocial, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="obligatorio"></label>
@@ -288,167 +299,4 @@
     $(function () {
         $("#error_documento").hide();
     })
-    $("#pe_cedulaRuc").blur(function () {
-        Validar_cedula_ruc();
-    });
-
-    $("#pe_apellido").blur(function () {
-        actualizar_nombre_completo();
-    });
-    $("#pe_nombre").blur(function () {
-        actualizar_nombre_completo();
-    });
-
-    $("#pe_cedulaRuc").blur(function () {
-        get_info_x_num_cedula();
-    });
-
-    $("#pe_cedulaRuc").blur(function () {
-        var tipo_doc = $("#IdTipoDocumento").val();
-        var cedula = $("#pe_cedulaRuc").val();
-
-        if (tipo_doc == "RUC") {
-            if (cedula.length > 13) {
-                var len = $("#pe_cedulaRuc").val();
-                len = len.substring(0, 13);
-                $("#pe_cedulaRuc").val(len);
-            }
-
-        }
-        else
-            if (tipo_doc == "CED") {
-                if (cedula.length > 10) {
-                    var len = $("#pe_cedulaRuc").val();
-                    len = len.substring(0, 10);
-                    $("#pe_cedulaRuc").val(len);
-                }
-            }
-    });
-
-    function actualizar_nombre_completo() {
-        var apellido = $("#pe_apellido").val();
-        var nombre = $("#pe_nombre").val();
-
-        var nombre_completo = apellido + ' ' + nombre;
-        $("#pe_nombreCompleto").val(nombre_completo)
-    }
-
-    function get_info_x_num_cedula() {
-        var cedula = $("#pe_cedulaRuc").val();
-        var tipo_doc = $("#IdTipoDocumento").val();
-
-        if (cedula == null) {
-            vaciar_campos_persona();
-            return;
-        }
-
-        if (tipo_doc == "RUC") {
-            if (cedula.length != 13) {
-                alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
-                $("#pe_cedulaRuc").val("");
-                vaciar_campos_persona();
-                return;
-            }
-        } else
-            if (tipo_doc == "CED") {
-                if (cedula.length != 10) {
-                    alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
-                    $("#pe_cedulaRuc").val("");
-                    vaciar_campos_persona();
-                    return;
-                }
-            }
-
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            pe_cedulaRuc: cedula
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("get_info_x_num_cedula", "Profesor",new { Area = "Academico"})',
-            async: false,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data == "") {
-                    return;
-                }
-
-                if (data.IdProfesor != 0) {
-                    alert("El cliente ya existe con el ID: " + data.IdProfesor);
-                    window.location.href = '@Url.Action("Index", "Profesor", new { Area = "Academico" })'
-                }
-                else {
-                    if (data.IdPersona != 0 && data.IdProfesor == 0) {
-                        $("#pe_nombre").val(data.pe_nombre);
-                        $("#pe_apellido").val(data.pe_apellido);
-                        $("#pe_nombreCompleto").val(data.pe_nombreCompleto);
-                        $("#pe_sexo").val(data.pe_sexo);
-                        $("#IdEstadoCivil").val(data.IdEstadoCivil);
-                        pe_fechaNacimiento.SetDate(new Date(data.anio, data.mes, data.dia));
-                        $("#Correo").val(data.Correo);
-                        $("#pe_celular").val(data.pe_celular);
-                        $("#Telefonos").val(data.Telefonos);
-                        $("#Direccion").val(data.Direccion);
-
-                        $("#IdPersona").val(data.IdPersona);
-                    }
-                    else {
-                        vaciar_campos_persona();
-                    }
-                }
-            },
-            error: function (error) {
-                alert(error);
-            }
-        });
-    }
-
-    function vaciar_campos_persona() {
-        $("#pe_nombre").val("");
-        $("#pe_apellido").val("");
-        $("#pe_nombreCompleto").val("");
-        $("#IdPersona").val("0");
-        $("#Correo").val("");
-        $("#pe_sexo").val("");
-        $("#IdEstadoCivil").val("");
-        pe_fechaNacimiento.SetDate(null);
-        $("#pe_celular").val("");
-        $("#Telefonos").val("");
-        $("#Direccion").val("");
-    }
-
-
-
-    function Validar_cedula_ruc() {
-        var datos = {
-            naturaleza: $("#pe_Naturaleza").val(),
-            tipo_documento: $("#IdTipoDocumento").val(),
-            cedula_ruc: $("#pe_cedulaRuc").val(),
-        }
-
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("Validar_cedula_ruc", "Profesor", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data.isValid == true) {
-                    $("#error_documento").hide();
-                    $("#pe_Naturaleza").val(data.return_naturaleza);
-                }
-                else {
-                    $("#error_documento").show();
-                }
-            },
-            error: function (error) {
-            }
-        });
-    };
-
 </script>

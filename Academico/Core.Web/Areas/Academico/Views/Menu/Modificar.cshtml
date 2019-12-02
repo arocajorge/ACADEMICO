@@ -38,11 +38,19 @@
     }
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <div class="form-group">
                     <label for="IdMenuPadre">Menú padre</label>
                     @Html.DropDownListFor(q => q.IdMenuPadre, new SelectList(ViewBag.lst_menu, "IdMenu", "DescripcionMenu_combo", "0"), new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.IdMenuPadre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdSucursal">&nbsp;</label>
+                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","Menu",new { Area = "Academico" },null)">
+                        <i class="fa fa-plus"></i>
+                    </a>
                 </div>
             </div>
         </div>

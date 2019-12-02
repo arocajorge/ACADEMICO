@@ -97,6 +97,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="info_persona.pe_nombreCompleto">Razón social</label>
+                    @Html.TextBoxFor(q => q.pe_razonSocial, new { @class = "form-control", @id = "pe_razonSocial" })
+                    @Html.ValidationMessageFor(q => q.pe_razonSocial, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="obligatorio"></label>
@@ -327,10 +338,13 @@
     });
 
     $("#pe_apellido").blur(function () {
-        actualizar_nombre_completo();
+        actualizar_nombre_completo("N");
     });
     $("#pe_nombre").blur(function () {
-        actualizar_nombre_completo();
+        actualizar_nombre_completo("N");
+    });
+    $("#pe_razonSocial").blur(function () {
+        actualizar_nombre_completo("R");
     });
 
     $("#pe_cedulaRuc").blur(function () {
@@ -359,12 +373,18 @@
             }
     });
 
-    function actualizar_nombre_completo() {
-        var apellido = $("#pe_apellido").val();
-        var nombre = $("#pe_nombre").val();
+    function actualizar_nombre_completo(Tipo) {
+        if (Tipo == "N") {
+            var apellido = $("#pe_apellido").val();
+            var nombre = $("#pe_nombre").val();
 
-        var nombre_completo = apellido + ' ' + nombre;
-        $("#pe_nombreCompleto").val(nombre_completo)
+            var nombre_completo = apellido + ' ' + nombre;
+            $("#pe_nombreCompleto").val(nombre_completo)
+        }
+        else {
+            var razon_social = $("#pe_razonSocial").val();
+            $("#pe_nombreCompleto").val(razon_social)
+        }
     }
 
     function get_info_x_num_cedula() {
@@ -485,4 +505,46 @@
         });
     };
 
+    function nombre_imagen() {
+        var datos = {
+            IdProfesor: $("#IdProfesor").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("nombre_imagen", "Profesor", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+    }
+    function actualizar_div() {
+        var datos = {
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("actualizar_div", "Profesor", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+
+                //$("#uploadedImage").load();
+                //  $("#uploadedImage").attr("src",Url.Content(Core.Erp.Web.Helps.SessionFixed.NombreImagen));
+
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>

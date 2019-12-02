@@ -197,6 +197,8 @@
     <Compile Include="Areas\Academico\AcademicoAreaRegistration.cs" />
     <Compile Include="Areas\Academico\Controllers\AlumnoController.cs" />
     <Compile Include="Areas\Academico\Controllers\AlumnoFamiliaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\AlumnoRetiroController.cs" />
+    <Compile Include="Areas\Academico\Controllers\AnioLectivoAperturaController.cs" />
     <Compile Include="Areas\Academico\Controllers\AnioLectivoController.cs" />
     <Compile Include="Areas\Academico\Controllers\AsignacionTutorInspectorController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoController.cs" />
@@ -7601,6 +7603,14 @@
     <Content Include="Areas\Academico\Views\Matricula\_ComboBoxPartial_Anio_Consulta.cshtml" />
     <Content Include="Areas\Academico\Views\Alumno\_GridViewPartial_AlumnoDocumento.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\_GridViewPartial_AlumnoDocumentos.cshtml" />
+    <Content Include="Areas\Academico\Views\AlumnoRetiro\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\AlumnoRetiro\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\AlumnoRetiro\_GridViewPartial_alumno_retiro.cshtml" />
+    <Content Include="Areas\Academico\Views\AlumnoRetiro\_CmbAlumno.cshtml" />
+    <Content Include="Areas\Academico\Views\AlumnoRetiro\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\AnioLectivoApertura\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\AnioLectivoApertura\_ComboBoxPartial_AnioAperturar.cshtml" />
+    <Content Include="Areas\Academico\Views\AnioLectivoApertura\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

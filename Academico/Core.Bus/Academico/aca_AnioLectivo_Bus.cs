@@ -96,5 +96,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public bool GuardarAperturaDB(aca_AnioLectivo_Info info)
+        {
+            try
+            {
+                return odata.guardarAperturaDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

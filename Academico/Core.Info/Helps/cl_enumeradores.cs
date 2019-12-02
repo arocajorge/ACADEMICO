@@ -74,17 +74,22 @@ namespace Core.Info.Helps
             PAREN = 3,
         }
 
-        public enum eCatalogoAcademico
+        public enum eCatalogoAcademicoMatricula
         {
             REGISTRADO = 1,
-            MATRICULADO = 2,
+            MATRICULADO = 2
+        }
+
+        public enum eCatalogoAcademicoAlumno
+        {
             CURSANDO = 3,
             REPROBADO_NOTAS = 4,
             REPROBADO_DEUDA = 5,
             REPROBADO_OTROS = 6,
             SUPLENCIA = 7,
             PROMOVIDO = 8,
-            NO_PROMOVIDO = 9
+            NO_PROMOVIDO = 9,
+            RETIRADO = 21
         }
 
         public enum eTipoRepresentante

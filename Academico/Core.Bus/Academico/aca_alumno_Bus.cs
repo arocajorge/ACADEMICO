@@ -41,11 +41,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_Alumno_Info GetInfo(int IdEmpresa, int IdProfesor)
+        public aca_Alumno_Info GetInfo(int IdEmpresa, decimal IdAlumno)
         {
             try
             {
-                return odata.getInfo(IdEmpresa, IdProfesor);
+                return odata.getInfo(IdEmpresa, IdAlumno);
             }
             catch (Exception)
             {

@@ -58,7 +58,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_Alumno_Info getInfo(int IdEmpresa, int IdAlumno)
+        public aca_Alumno_Info getInfo(int IdEmpresa, decimal IdAlumno)
         {
             try
             {
@@ -78,6 +78,8 @@ namespace Core.Data.Academico
                         pe_nombreCompleto = Entity.pe_nombreCompleto,
                         IdAlumno = Entity.IdAlumno,
                         IdPersona = Entity.IdPersona,
+                        IdCatalogoESTALU = Entity.IdCatalogoESTALU,
+                        IdCatalogoESTMAT = Entity.IdCatalogoESTMAT,
                         pe_telfono_Contacto = Entity.pe_telfono_Contacto,
                         IdTipoDocumento = Entity.IdTipoDocumento,
                         pe_Naturaleza = Entity.pe_Naturaleza,

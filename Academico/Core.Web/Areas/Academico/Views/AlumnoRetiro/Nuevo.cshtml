@@ -1,0 +1,78 @@
+﻿@using System.Web.UI.WebControls;
+@model Core.Info.Academico.aca_AlumnoRetiro_Info
+@{
+    ViewBag.Title = "Nuevo retiro de alumno";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Nuevo", "AlumnoRetiro", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="info_persona.pe_Naturaleza">Alumno*</label>
+                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha de ingreso</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
+                                   {
+                                       settings.Name = "Fecha";
+                                       settings.Properties.UseMaskBehavior = true;
+                                       settings.Properties.EditFormat = EditFormat.Date;
+                                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                       settings.Properties.AllowMouseWheel = false;
+                                   }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="info_persona.pe_apellido">Observación</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", @id = "Observacion" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "AlumnoRetiro", new { Area = "Academico" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

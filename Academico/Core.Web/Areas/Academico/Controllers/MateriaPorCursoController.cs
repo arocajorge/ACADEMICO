@@ -125,6 +125,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         IdCurso = IdCurso,
                         IdMateria = Convert.ToInt32(item),
                         EsObligatorio = info_materia.EsObligatorio,
+                        EsCompartida = info_materia.EsCompartida,
                         NomMateria = info_materia.NomMateria,
                         NomMateriaGrupo = info_materia.NomMateriaGrupo,
                         OrdenMateria = info_materia.OrdenMateria

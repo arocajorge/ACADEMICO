@@ -96,7 +96,8 @@ namespace Core.Data.Academico
                                 NomMateria = info.NomMateria,
                                 NomMateriaGrupo = info.NomMateriaGrupo,
                                 OrdenMateria = info.OrdenMateria,
-                                EsObligatorio = info.EsObligatorio
+                                EsObligatorio = info.EsObligatorio,
+                                EsCompartida =info.EsCompartida
                             };
                             Context.aca_AnioLectivo_Curso_Materia.Add(Entity);
                         }
@@ -131,7 +132,8 @@ namespace Core.Data.Academico
                         IdMateria = q.IdMateria,
                         NomMateria = q.NomMateria,
                         OrdenMateria = q.OrdenMateria,
-                        EsObligatorio = q.EsObligatorio
+                        EsObligatorio = q.EsObligatorio,
+                        EsCompartida = q.EsCompartida
                     }).ToList();
                 }
 
@@ -161,6 +163,7 @@ namespace Core.Data.Academico
                             Entity.NomMateria = item.NomMateria;
                             Entity.NomMateriaGrupo = item.NomMateriaGrupo;
                             Entity.EsObligatorio = item.EsObligatorio;
+                            Entity.EsCompartida = item.EsCompartida;
                             Entity.OrdenMateria = item.OrdenMateria;
                         }
                         Context.SaveChanges();

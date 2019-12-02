@@ -32,6 +32,8 @@ namespace Core.Info.Academico
         public string MotivoAnulacion { get; set; }
 
         #region Campos que no existen en la tabla
+        public int IdAnioApertura { get; set; }
+        public int IdSede { get; set; }
         public List<aca_AnioLectivo_Periodo_Info> lst_periodos { get; set; }
         #endregion
     }
