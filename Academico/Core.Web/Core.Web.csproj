@@ -229,6 +229,8 @@
     <Compile Include="Areas\Academico\Controllers\RubroPorPeriodoController.cs" />
     <Compile Include="Areas\Academico\Controllers\SedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\NivelPorSedeController.cs" />
+    <Compile Include="Areas\Academico\Controllers\SocioEconomicoController.cs" />
+    <Compile Include="Areas\Reportes\Controllers\AcademicoController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
     <Compile Include="Areas\SeguridadAcceso\SeguridadAccesoAreaRegistration.cs" />
     <Compile Include="Areas\SeguridadAcceso\Controllers\UsuarioController.cs" />
@@ -242,6 +244,12 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\Academico\ACA_001_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_001_Rpt.Designer.cs">
+      <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -7611,6 +7619,11 @@
     <Content Include="Areas\Academico\Views\AnioLectivoApertura\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Academico\Views\AnioLectivoApertura\_ComboBoxPartial_AnioAperturar.cshtml" />
     <Content Include="Areas\Academico\Views\AnioLectivoApertura\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\SocioEconomico\_GridViewPartial_SocioEconomico.cshtml" />
+    <Content Include="Areas\Academico\Views\SocioEconomico\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\SocioEconomico\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\SocioEconomico\_CmbAlumno.cshtml" />
+    <Content Include="Areas\Academico\Views\SocioEconomico\Modificar.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -7649,8 +7662,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
-    <Folder Include="Areas\Reportes\Controllers\" />
     <Folder Include="Areas\Reportes\Models\" />
+    <Folder Include="Areas\Reportes\Views\Academico\" />
     <Folder Include="Areas\Reportes\Views\Shared\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Views\Shared\" />
@@ -7679,6 +7692,12 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="AdminLTE\bower_components\moment\moment.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reportes\Academico\ACA_001_Rpt.resx">
+      <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -56,6 +56,8 @@
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Periodo_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Info.cs" />
+    <Compile Include="Academico\aca_CatalogoFicha_Info.cs" />
+    <Compile Include="Academico\aca_CatalogoTipoFicha_Info.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Info.cs" />
     <Compile Include="Academico\aca_Catalogo_Info.cs" />
     <Compile Include="Academico\aca_Curso_Info.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Academico\aca_Profesor_Info.cs" />
     <Compile Include="Academico\aca_Rubro_Info.cs" />
     <Compile Include="Academico\aca_Sede_Info.cs" />
+    <Compile Include="Academico\aca_SocioEconomico_Info.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Info.cs" />
     <Compile Include="General\tb_Catalogo_Info.cs" />
     <Compile Include="General\tb_empresa_Info.cs" />

@@ -12,31 +12,26 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_Alumno
+    public partial class aca_CatalogoFicha
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public aca_Alumno()
+        public aca_CatalogoFicha()
         {
-            this.aca_Familia = new HashSet<aca_Familia>();
-            this.aca_Matricula = new HashSet<aca_Matricula>();
-            this.aca_PermisoMatricula = new HashSet<aca_PermisoMatricula>();
-            this.aca_AlumnoDocumento = new HashSet<aca_AlumnoDocumento>();
-            this.aca_AlumnoRetiro = new HashSet<aca_AlumnoRetiro>();
             this.aca_SocioEconomico = new HashSet<aca_SocioEconomico>();
+            this.aca_SocioEconomico1 = new HashSet<aca_SocioEconomico>();
+            this.aca_SocioEconomico2 = new HashSet<aca_SocioEconomico>();
+            this.aca_SocioEconomico3 = new HashSet<aca_SocioEconomico>();
+            this.aca_SocioEconomico4 = new HashSet<aca_SocioEconomico>();
+            this.aca_SocioEconomico5 = new HashSet<aca_SocioEconomico>();
+            this.aca_SocioEconomico6 = new HashSet<aca_SocioEconomico>();
         }
     
-        public int IdEmpresa { get; set; }
-        public decimal IdAlumno { get; set; }
+        public int IdCatalogoFicha { get; set; }
+        public int IdCatalogoTipoFicha { get; set; }
         public string Codigo { get; set; }
-        public decimal IdPersona { get; set; }
-        public string Direccion { get; set; }
-        public string Celular { get; set; }
-        public string Correo { get; set; }
-        public Nullable<bool> Estado { get; set; }
-        public int IdCatalogoESTMAT { get; set; }
-        public Nullable<int> IdCurso { get; set; }
-        public int IdCatalogoESTALU { get; set; }
-        public System.DateTime FechaIngreso { get; set; }
+        public string NomCatalogoFicha { get; set; }
+        public int Orden { get; set; }
+        public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
@@ -45,20 +40,20 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
-        public virtual aca_Catalogo aca_Catalogo { get; set; }
-        public virtual aca_Catalogo aca_Catalogo1 { get; set; }
-        public virtual aca_Curso aca_Curso { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_Familia> aca_Familia { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_PermisoMatricula> aca_PermisoMatricula { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_AlumnoDocumento> aca_AlumnoDocumento { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_AlumnoRetiro> aca_AlumnoRetiro { get; set; }
+        public virtual aca_CatalogoTipoFicha aca_CatalogoTipoFicha { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico4 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico5 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico6 { get; set; }
     }
 }

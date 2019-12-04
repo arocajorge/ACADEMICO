@@ -67,6 +67,7 @@
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Periodo_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Data.cs" />
+    <Compile Include="Academico\aca_CatalogoFicha_Data.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Data.cs" />
     <Compile Include="Academico\aca_Catalogo_Data.cs" />
     <Compile Include="Academico\aca_Curso_Data.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Academico\aca_Profesor_Data.cs" />
     <Compile Include="Academico\aca_Rubro_Data.cs" />
     <Compile Include="Academico\aca_Sede_Data.cs" />
+    <Compile Include="Academico\aca_SocioEconomico_Data.cs" />
     <Compile Include="Base\aca_Alumno.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -137,7 +139,13 @@
     <Compile Include="Base\aca_Catalogo.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\aca_CatalogoFicha.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_CatalogoTipo.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_CatalogoTipoFicha.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Curso.cs">
@@ -198,6 +206,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Sede.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_SocioEconomico.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\fa_TerminoPago.cs">
@@ -274,6 +285,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelInventario.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelReportes.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelReportes.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelReportes.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelReportes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelReportes.edmx</DependentUpon>
     </Compile>
     <Compile Include="Base\ModelSeguridadAcceso.Context.cs">
       <AutoGen>True</AutoGen>
@@ -437,6 +463,13 @@
     <None Include="Base\ModelInventario.edmx.diagram">
       <DependentUpon>ModelInventario.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="Base\ModelReportes.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelReportes.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Base\ModelReportes.edmx.diagram">
+      <DependentUpon>ModelReportes.edmx</DependentUpon>
+    </None>
     <None Include="Base\ModelSeguridadAcceso.edmx.diagram">
       <DependentUpon>ModelSeguridadAcceso.edmx</DependentUpon>
     </None>
@@ -482,6 +515,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelInventario.edmx</DependentUpon>
       <LastGenOutput>ModelInventario.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelReportes.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelReportes.edmx</DependentUpon>
+      <LastGenOutput>ModelReportes.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelReportes.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelReportes.edmx</DependentUpon>
+      <LastGenOutput>ModelReportes.cs</LastGenOutput>
     </Content>
     <Content Include="Base\ModelSeguridadAcceso.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

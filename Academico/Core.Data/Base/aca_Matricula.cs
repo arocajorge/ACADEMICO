@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public aca_Matricula()
         {
             this.aca_Matricula_Rubro = new HashSet<aca_Matricula_Rubro>();
+            this.aca_SocioEconomico = new HashSet<aca_SocioEconomico>();
         }
     
         public int IdEmpresa { get; set; }
@@ -50,5 +51,7 @@ namespace Core.Data.Base
         public virtual aca_Plantilla aca_Plantilla { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Matricula_Rubro> aca_Matricula_Rubro { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico { get; set; }
     }
 }

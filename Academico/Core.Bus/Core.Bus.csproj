@@ -56,6 +56,7 @@
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Periodo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Bus.cs" />
+    <Compile Include="Academico\aca_CatalogoFicha_Bus.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Bus.cs" />
     <Compile Include="Academico\aca_Catalogo_Bus.cs" />
     <Compile Include="Academico\aca_Curso_Bus.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Academico\aca_Profesor_Bus.cs" />
     <Compile Include="Academico\aca_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_Sede_Bus.cs" />
+    <Compile Include="Academico\aca_SocioEconomico_Bus.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Bus.cs" />
     <Compile Include="General\tb_Catalogo_Bus.cs" />
     <Compile Include="General\tb_empresa_Bus.cs" />

@@ -1,0 +1,405 @@
+﻿@model Core.Info.Academico.aca_SocioEconomico_Info
+@{
+    ViewBag.Title = "Modificar ficha socio economica";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
+@using (Html.BeginForm("Modificar", "SocioEconomico", FormMethod.Post, new { @class = "form", @role = "form" }))
+    {
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdSocioEconomico, new { @id = "IdSocioEconomico" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row" id="MensajeError">
+        <div class="col-md-12">
+            <div class="alert alert-warning alert-dismissible">
+                <h4>
+                    <i class="icon fa fa-warning"></i> <label id="Mensaje"></label>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Alumno*</label>
+                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Tenencia de vivienda*</label>
+                    @Html.DropDownListFor(q => q.IdCatalogoFichaTVi, new SelectList(ViewBag.lst_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaTVi" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaTVi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Tipo de vivienda*</label>
+                    @Html.DropDownListFor(q => q.IdCatalogoFichaVi, new SelectList(ViewBag.lst_tipo_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaVi" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaVi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Agua*</label>
+                    @Html.DropDownListFor(q => q.IdCatalogoFichaAg, new SelectList(ViewBag.lst_agua, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaAg" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaAg, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="descuento_mensual">Luz electrica</label>
+                        @Html.DevExpress().RadioButtonFor(q => q.SI_ENERG, settings =>
+                   {
+                       settings.Name = "SI_ENERG";
+                       settings.GroupName = "energia_electrica";
+                       settings.Text = "SI";
+
+                   }).GetHtml()
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="descuento_quincena">&nbsp;</label>
+                        @Html.DevExpress().RadioButtonFor(q => q.NO_ENERG, settings =>
+                   {
+                       settings.Name = "NO_ENERG";
+                       settings.GroupName = "energia_electrica";
+                       settings.Text = "NO";
+                   }).GetHtml()
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-1">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="tiene_hermanos">Hermanos</label>
+                        @Html.DevExpress().RadioButtonFor(q => q.SI_HERM, settings =>
+                   {
+                       settings.Name = "SI_HERM";
+                       settings.GroupName = "tiene_hermanos";
+                       settings.Text = "SI";
+
+                   }).GetHtml()
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="tiene_hermanos">&nbsp;</label>
+                        @Html.DevExpress().RadioButtonFor(q => q.NO_HERM, settings =>
+                   {
+                       settings.Name = "NO_HERM";
+                       settings.GroupName = "tiene_hermanos";
+                       settings.Text = "NO";
+                   }).GetHtml()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdEmpresa">Nombres y curso*</label>
+                    @Html.TextBoxFor(q => q.NombreHermanos, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.NombreHermanos, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Sueldo padre*</label>
+                    @Html.TextBoxFor(q => q.SueldoPadre, new { @class = "form-control", @id = "SueldoPadre" })
+                    @Html.ValidationMessageFor(m => m.SueldoPadre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Sueldo madre*</label>
+                    @Html.TextBoxFor(q => q.SueldoMadre, new { @class = "form-control", @id = "SueldoMadre" })
+                    @Html.ValidationMessageFor(m => m.SueldoMadre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Otros ingresos*</label>
+                    @Html.TextBoxFor(q => q.OtroIngreso, new { @class = "form-control", @id = "OtroIngreso" })
+                    @Html.ValidationMessageFor(m => m.OtroIngreso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Gastos alimentacion*</label>
+                    @Html.TextBoxFor(q => q.GastoAlimentacion, new { @class = "form-control", @id = "GastoAlimentacion" })
+                    @Html.ValidationMessageFor(m => m.GastoAlimentacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Gastos educación*</label>
+                    @Html.TextBoxFor(q => q.GastoEducacion, new { @class = "form-control", @id = "GastoEducacion" })
+                    @Html.ValidationMessageFor(m => m.GastoEducacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Gastos servicios basico*</label>
+                    @Html.TextBoxFor(q => q.GastoServicioBasico, new { @class = "form-control", @id = "GastoServicioBasico" })
+                    @Html.ValidationMessageFor(m => m.GastoServicioBasico, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Gastos arriendo*</label>
+                    @Html.TextBoxFor(q => q.GastoArriendo, new { @class = "form-control", @id = "GastoArriendo" })
+                    @Html.ValidationMessageFor(m => m.GastoArriendo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Gastos prestamo*</label>
+                    @Html.TextBoxFor(q => q.GastoPrestamo, new { @class = "form-control", @id = "GastoPrestamo" })
+                    @Html.ValidationMessageFor(m => m.GastoPrestamo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Otros gastos*</label>
+                    @Html.TextBoxFor(q => q.OtroGasto, new { @class = "form-control", @id = "OtroGasto" })
+                    @Html.ValidationMessageFor(m => m.OtroGasto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Total de ingresos*</label>
+                    @Html.TextBoxFor(q => q.TotalIngreso, new { @class = "form-control", @id = "TotalIngreso", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.TotalIngreso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Total de gastos*</label>
+                    @Html.TextBoxFor(q => q.TotalGasto, new { @class = "form-control", @id = "TotalGasto", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.TotalGasto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Saldo*</label>
+                    @Html.TextBoxFor(q => q.Saldo, new { @class = "form-control", @id = "Saldo", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.Saldo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">¿Que le impulsa a ingresar al Liceo Cristiano de Guayaquil?*</label>
+                    @Html.DropDownListFor(q => q.IdCatalogoFichaMot, new SelectList(ViewBag.lst_ing_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaMot" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaMot, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-8" id="otro_motivo_ingreso">
+                <div class="form-group">
+                    <label for="IdEmpresa">Otro motivo de Ingreso</label>
+                    @Html.TextBoxFor(q => q.OtroMotivoIngreso, new { @class = "form-control", @id = "OtroMotivoIngreso" })
+                    @Html.ValidationMessageFor(m => m.OtroMotivoIngreso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">¿Cómo se informó de nuestra institución?*</label>
+                    @Html.DropDownListFor(q => q.IdCatalogoFichaIns, new SelectList(ViewBag.lst_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaIns" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaIns, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-8" id="otro_informacion_inst">
+                <div class="form-group">
+                    <label for="IdEmpresa">Otra información</label>
+                    @Html.TextBoxFor(q => q.OtroInformacionInst, new { @class = "form-control", @id = "OtroInformacionInst" })
+                    @Html.ValidationMessageFor(m => m.OtroInformacionInst, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">¿Cómo financiara los estudios?*</label>
+                    @Html.DropDownListFor(q => q.IdCatalogoFichaFin, new SelectList(ViewBag.lst_financiamiento, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaFin" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaFin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-8" id="otro_forma_financ">
+                <div class="form-group">
+                    <label for="IdEmpresa">Otro forma de financiamiento</label>
+                    @Html.TextBoxFor(q => q.OtroFinanciamiento, new { @class = "form-control", @id = "OtroFinanciamiento" })
+                    @Html.ValidationMessageFor(m => m.OtroFinanciamiento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "Matricula", new { Area = "Academico" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+<script>
+    $(function () {
+        $("#MensajeError").hide();
+        $("#otro_motivo_ingreso").hide();
+        $("#otro_informacion_inst").hide();
+        $("#otro_forma_financ").hide();
+
+        mostrar_otro_motivo();
+        mostrar_otro_informacion_inst();
+        mostrar_otro_financiamiento();
+
+        $("#IdCatalogoFichaMot").change(function () {
+            mostrar_otro_motivo();
+        });
+
+        $("#IdCatalogoFichaIns").change(function () {
+            mostrar_otro_informacion_inst();
+        });
+
+        $("#IdCatalogoFichaFin").change(function () {
+            mostrar_otro_financiamiento;
+        });
+
+        $("#SueldoPadre").change(function () {
+            sumar_ingresos();
+        });
+        $("#SueldoMadre").change(function () {
+            sumar_ingresos();
+        });
+        $("#OtroIngreso").change(function () {
+            sumar_ingresos();
+        });
+
+        $("#GastoAlimentacion").change(function () {
+            sumar_egresos();
+        });
+        $("#GastoEducacion").change(function () {
+            sumar_egresos();
+        });
+        $("#GastoServicioBasico").change(function () {
+            sumar_egresos();
+        });
+        $("#GastoArriendo").change(function () {
+            sumar_egresos();
+        });
+        $("#GastoPrestamo").change(function () {
+            sumar_egresos();
+        });
+        $("#OtroGasto").change(function () {
+            sumar_egresos();
+        });
+    });
+
+    function mostrar_otro_motivo() {
+        var MotivoIngreso = $("#IdCatalogoFichaMot").val();
+        if (MotivoIngreso == 19) {
+            $("#otro_motivo_ingreso").show();
+        }
+        else {
+            $("#otro_motivo_ingreso").hide();
+        }
+    };
+
+    function mostrar_otro_informacion_inst() {
+        var MotivoIngreso = $("#IdCatalogoFichaIns").val();
+        if (MotivoIngreso == 23) {
+            $("#otro_informacion_inst").show();
+        }
+        else {
+            $("#otro_informacion_inst").hide();
+        }
+    };
+    function mostrar_otro_financiamiento() {
+        var Informacion = $("#IdCatalogoFichaFin").val();
+        if (Informacion == 26) {
+            $("#otro_forma_financ").show();
+        }
+        else {
+            $("#otro_forma_financ").hide();
+        }
+    };
+
+    function sumar_ingresos()
+    {
+        var TotalIng = parseFloat($("#SueldoPadre").val()) + parseFloat($("#SueldoMadre").val()) + parseFloat($("#OtroIngreso").val());
+        $("#TotalIngreso").val(TotalIng);
+        saldo();
+    };
+
+    function sumar_egresos() {
+        var TotalGasto = parseFloat($("#GastoAlimentacion").val()) + parseFloat($("#GastoEducacion").val()) + parseFloat($("#GastoServicioBasico").val()) + parseFloat($("#GastoArriendo").val()) + parseFloat($("#GastoPrestamo").val()) + parseFloat($("#OtroGasto").val());
+        $("#TotalGasto").val(TotalGasto);
+        saldo();
+    };
+
+    function saldo() {
+        var Total = parseFloat($("#TotalIngreso").val()) - parseFloat($("#TotalGasto").val());
+        $("#Saldo").val(Total);
+    };
+</script>
+

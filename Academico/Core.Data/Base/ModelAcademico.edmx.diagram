@@ -126,6 +126,19 @@
         <EntityTypeShape EntityType="ModelAcademico.aca_AlumnoRetiro" Width="1.5" PointX="20.25" PointY="29.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AlumnoRetiro_aca_Alumno" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_AlumnoRetiro" Width="1.5" PointX="5.375" PointY="21.75" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_CatalogoFicha" Width="1.5" PointX="23.625" PointY="8" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_CatalogoTipoFicha" Width="1.5" PointX="21.375" PointY="8.25" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_CatalogoFicha_aca_CatalogoTipoFicha" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_SocioEconomico" Width="1.5" PointX="25.875" PointY="16.625" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha1" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha2" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha3" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha4" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha5" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha6" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_Matricula" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

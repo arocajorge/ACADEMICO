@@ -304,6 +304,24 @@
           <Property Name="FechaAnulacion" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="aca_CatalogoFicha">
+          <Key>
+            <PropertyRef Name="IdCatalogoFicha" />
+          </Key>
+          <Property Name="IdCatalogoFicha" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoTipoFicha" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="NomCatalogoFicha" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="aca_CatalogoTipo">
           <Key>
             <PropertyRef Name="IdCatalogoTipo" />
@@ -311,6 +329,22 @@
           <Property Name="IdCatalogoTipo" Type="int" Nullable="false" />
           <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NomCatalogoTipo" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="aca_CatalogoTipoFicha">
+          <Key>
+            <PropertyRef Name="IdCatalogoTipoFicha" />
+          </Key>
+          <Property Name="IdCatalogoTipoFicha" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomCatalogoTipoFicha" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
           <Property Name="FechaCreacion" Type="datetime" />
@@ -707,6 +741,42 @@
           <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="200" />
           <Property Name="FechaAnulacion" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="aca_SocioEconomico">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSocioEconomico" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSocioEconomico" Type="int" Nullable="false" />
+          <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdCatalogoFichaVi" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaTVi" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaAg" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaEl" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaHe" Type="int" Nullable="false" />
+          <Property Name="NombreHermanos" Type="varchar(max)" />
+          <Property Name="SueldoPadre" Type="float" Nullable="false" />
+          <Property Name="SueldoMadre" Type="float" Nullable="false" />
+          <Property Name="OtroIngreso" Type="float" Nullable="false" />
+          <Property Name="GastoAlimentacion" Type="float" Nullable="false" />
+          <Property Name="GastoEducacion" Type="float" Nullable="false" />
+          <Property Name="GastoServicioBasico" Type="float" Nullable="false" />
+          <Property Name="GastoSalud" Type="float" Nullable="false" />
+          <Property Name="GastoArriendo" Type="float" Nullable="false" />
+          <Property Name="GastoPrestamo" Type="float" Nullable="false" />
+          <Property Name="OtroGasto" Type="float" Nullable="false" />
+          <Property Name="IdCatalogoFichaMot" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaIns" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaFin" Type="int" Nullable="false" />
+          <Property Name="OtroMotivoIngreso" Type="varchar(max)" />
+          <Property Name="OtroInformacionInst" Type="varchar(max)" />
+          <Property Name="OtroFinanciamiento" Type="varchar(max)" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaModificacion" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Alumno' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1953,6 +2023,18 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_aca_CatalogoFicha_aca_CatalogoTipoFicha">
+          <End Role="aca_CatalogoTipoFicha" Type="Self.aca_CatalogoTipoFicha" Multiplicity="1" />
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoTipoFicha">
+              <PropertyRef Name="IdCatalogoTipoFicha" />
+            </Principal>
+            <Dependent Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoTipoFicha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_aca_Curso_aca_Curso">
           <End Role="aca_Curso" Type="Self.aca_Curso" Multiplicity="0..1" />
           <End Role="aca_Curso1" Type="Self.aca_Curso" Multiplicity="*" />
@@ -2213,6 +2295,118 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_Alumno">
+          <End Role="aca_Alumno" Type="Self.aca_Alumno" Multiplicity="1" />
+          <End Role="aca_SocioEconomico" Type="Self.aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_SocioEconomico" Type="Self.aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaVi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha1">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_SocioEconomico" Type="Self.aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaTVi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha2">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_SocioEconomico" Type="Self.aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaAg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha3">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_SocioEconomico" Type="Self.aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaEl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha4">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_SocioEconomico" Type="Self.aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaMot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha5">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_SocioEconomico" Type="Self.aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaIns" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha6">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_SocioEconomico" Type="Self.aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaFin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_Matricula">
+          <End Role="aca_Matricula" Type="Self.aca_Matricula" Multiplicity="1" />
+          <End Role="aca_SocioEconomico" Type="Self.aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Matricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="spaca_corregir_menu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="IdSede" Type="int" Mode="In" />
@@ -2235,7 +2429,9 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <EntitySet Name="aca_AnioLectivo_Rubro_Periodo" EntityType="Self.aca_AnioLectivo_Rubro_Periodo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_AnioLectivo_Sede_NivelAcademico" EntityType="Self.aca_AnioLectivo_Sede_NivelAcademico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Catalogo" EntityType="Self.aca_Catalogo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aca_CatalogoFicha" EntityType="Self.aca_CatalogoFicha" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_CatalogoTipo" EntityType="Self.aca_CatalogoTipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aca_CatalogoTipoFicha" EntityType="Self.aca_CatalogoTipoFicha" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Curso" EntityType="Self.aca_Curso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Documento" EntityType="Self.aca_Documento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Familia" EntityType="Self.aca_Familia" Schema="dbo" store:Type="Tables" />
@@ -2256,6 +2452,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <EntitySet Name="aca_Profesor" EntityType="Self.aca_Profesor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Rubro" EntityType="Self.aca_Rubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Sede" EntityType="Self.aca_Sede" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aca_SocioEconomico" EntityType="Self.aca_SocioEconomico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwaca_Alumno" EntityType="Self.vwaca_Alumno" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwaca_Alumno].[IdEmpresa] AS [IdEmpresa], 
@@ -2783,6 +2980,10 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
             <End Role="aca_CatalogoTipo" EntitySet="aca_CatalogoTipo" />
             <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
           </AssociationSet>
+          <AssociationSet Name="FK_aca_CatalogoFicha_aca_CatalogoTipoFicha" Association="Self.FK_aca_CatalogoFicha_aca_CatalogoTipoFicha">
+            <End Role="aca_CatalogoTipoFicha" EntitySet="aca_CatalogoTipoFicha" />
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+          </AssociationSet>
           <AssociationSet Name="FK_aca_Curso_aca_Curso" Association="Self.FK_aca_Curso_aca_Curso">
             <End Role="aca_Curso" EntitySet="aca_Curso" />
             <End Role="aca_Curso1" EntitySet="aca_Curso" />
@@ -2854,6 +3055,42 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <AssociationSet Name="FK_aca_Plantilla_Rubro_aca_Plantilla" Association="Self.FK_aca_Plantilla_Rubro_aca_Plantilla">
             <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
             <End Role="aca_Plantilla_Rubro" EntitySet="aca_Plantilla_Rubro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_Alumno" Association="Self.FK_aca_SocioEconomico_aca_Alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha" Association="Self.FK_aca_SocioEconomico_aca_CatalogoFicha">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha1" Association="Self.FK_aca_SocioEconomico_aca_CatalogoFicha1">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha2" Association="Self.FK_aca_SocioEconomico_aca_CatalogoFicha2">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha3" Association="Self.FK_aca_SocioEconomico_aca_CatalogoFicha3">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha4" Association="Self.FK_aca_SocioEconomico_aca_CatalogoFicha4">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha5" Association="Self.FK_aca_SocioEconomico_aca_CatalogoFicha5">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha6" Association="Self.FK_aca_SocioEconomico_aca_CatalogoFicha6">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_Matricula" Association="Self.FK_aca_SocioEconomico_aca_Matricula">
+            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -3185,6 +3422,49 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
             <End Role="aca_AlumnoRetiro" EntitySet="aca_AlumnoRetiro" />
           </AssociationSet>
           <EntitySet Name="vwaca_AlumnoRetiro" EntityType="ModelAcademico.vwaca_AlumnoRetiro" />
+          <EntitySet Name="aca_CatalogoFicha" EntityType="ModelAcademico.aca_CatalogoFicha" />
+          <EntitySet Name="aca_CatalogoTipoFicha" EntityType="ModelAcademico.aca_CatalogoTipoFicha" />
+          <AssociationSet Name="FK_aca_CatalogoFicha_aca_CatalogoTipoFicha" Association="ModelAcademico.FK_aca_CatalogoFicha_aca_CatalogoTipoFicha">
+            <End Role="aca_CatalogoTipoFicha" EntitySet="aca_CatalogoTipoFicha" />
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+          </AssociationSet>
+          <EntitySet Name="aca_SocioEconomico" EntityType="ModelAcademico.aca_SocioEconomico" />
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_Alumno" Association="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha" Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha1" Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha1">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha2" Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha2">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha3" Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha3">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha4" Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha4">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha5" Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha5">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha6" Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha6">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_Matricula" Association="ModelAcademico.FK_aca_SocioEconomico_aca_Matricula">
+            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
           <Key>
@@ -4416,6 +4696,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <NavigationProperty Name="aca_PermisoMatricula" Relationship="ModelAcademico.FK_aca_PermisoMatricula_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_PermisoMatricula" />
           <NavigationProperty Name="aca_AlumnoDocumento" Relationship="ModelAcademico.FK_aca_AlumnoDocumento_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_AlumnoDocumento" />
           <NavigationProperty Name="aca_AlumnoRetiro" Relationship="ModelAcademico.FK_aca_AlumnoRetiro_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_AlumnoRetiro" />
+          <NavigationProperty Name="aca_SocioEconomico" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_SocioEconomico" />
         </EntityType>
         <EntityType Name="aca_Matricula">
           <Key>
@@ -4450,6 +4731,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <NavigationProperty Name="aca_MecanismoDePago" Relationship="ModelAcademico.FK_aca_Matricula_aca_MecanismoDePago" FromRole="aca_Matricula" ToRole="aca_MecanismoDePago" />
           <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_Matricula_aca_Plantilla" FromRole="aca_Matricula" ToRole="aca_Plantilla" />
           <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_Matricula_Rubro" />
+          <NavigationProperty Name="aca_SocioEconomico" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_SocioEconomico" />
         </EntityType>
         <EntityType Name="aca_MecanismoDePago">
           <Key>
@@ -5490,6 +5772,218 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <Property Name="IdCatalogoESTALU" Type="Int32" Nullable="false" />
           <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="aca_CatalogoFicha">
+          <Key>
+            <PropertyRef Name="IdCatalogoFicha" />
+          </Key>
+          <Property Name="IdCatalogoFicha" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoTipoFicha" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomCatalogoFicha" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aca_CatalogoTipoFicha" Relationship="ModelAcademico.FK_aca_CatalogoFicha_aca_CatalogoTipoFicha" FromRole="aca_CatalogoFicha" ToRole="aca_CatalogoTipoFicha" />
+          <NavigationProperty Name="aca_SocioEconomico" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha" FromRole="aca_CatalogoFicha" ToRole="aca_SocioEconomico" />
+          <NavigationProperty Name="aca_SocioEconomico1" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha1" FromRole="aca_CatalogoFicha" ToRole="aca_SocioEconomico" />
+          <NavigationProperty Name="aca_SocioEconomico2" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha2" FromRole="aca_CatalogoFicha" ToRole="aca_SocioEconomico" />
+          <NavigationProperty Name="aca_SocioEconomico3" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha3" FromRole="aca_CatalogoFicha" ToRole="aca_SocioEconomico" />
+          <NavigationProperty Name="aca_SocioEconomico4" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha4" FromRole="aca_CatalogoFicha" ToRole="aca_SocioEconomico" />
+          <NavigationProperty Name="aca_SocioEconomico5" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha5" FromRole="aca_CatalogoFicha" ToRole="aca_SocioEconomico" />
+          <NavigationProperty Name="aca_SocioEconomico6" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha6" FromRole="aca_CatalogoFicha" ToRole="aca_SocioEconomico" />
+          </EntityType>
+        <EntityType Name="aca_CatalogoTipoFicha">
+          <Key>
+            <PropertyRef Name="IdCatalogoTipoFicha" />
+          </Key>
+          <Property Name="IdCatalogoTipoFicha" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomCatalogoTipoFicha" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aca_CatalogoFicha" Relationship="ModelAcademico.FK_aca_CatalogoFicha_aca_CatalogoTipoFicha" FromRole="aca_CatalogoTipoFicha" ToRole="aca_CatalogoFicha" />
+        </EntityType>
+        <Association Name="FK_aca_CatalogoFicha_aca_CatalogoTipoFicha">
+          <End Type="ModelAcademico.aca_CatalogoTipoFicha" Role="aca_CatalogoTipoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoTipoFicha">
+              <PropertyRef Name="IdCatalogoTipoFicha" />
+            </Principal>
+            <Dependent Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoTipoFicha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="aca_SocioEconomico">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSocioEconomico" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSocioEconomico" Type="Int32" Nullable="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCatalogoFichaVi" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaTVi" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaAg" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaEl" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaHe" Type="Int32" Nullable="false" />
+          <Property Name="NombreHermanos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SueldoPadre" Type="Double" Nullable="false" />
+          <Property Name="SueldoMadre" Type="Double" Nullable="false" />
+          <Property Name="OtroIngreso" Type="Double" Nullable="false" />
+          <Property Name="GastoAlimentacion" Type="Double" Nullable="false" />
+          <Property Name="GastoEducacion" Type="Double" Nullable="false" />
+          <Property Name="GastoServicioBasico" Type="Double" Nullable="false" />
+          <Property Name="GastoSalud" Type="Double" Nullable="false" />
+          <Property Name="GastoArriendo" Type="Double" Nullable="false" />
+          <Property Name="GastoPrestamo" Type="Double" Nullable="false" />
+          <Property Name="OtroGasto" Type="Double" Nullable="false" />
+          <Property Name="IdCatalogoFichaMot" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaIns" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaFin" Type="Int32" Nullable="false" />
+          <Property Name="OtroMotivoIngreso" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OtroInformacionInst" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OtroFinanciamiento" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno" FromRole="aca_SocioEconomico" ToRole="aca_Alumno" />
+          <NavigationProperty Name="aca_CatalogoFicha" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha" FromRole="aca_SocioEconomico" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha1" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha1" FromRole="aca_SocioEconomico" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha2" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha2" FromRole="aca_SocioEconomico" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha3" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha3" FromRole="aca_SocioEconomico" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha4" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha4" FromRole="aca_SocioEconomico" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha5" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha5" FromRole="aca_SocioEconomico" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha6" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha6" FromRole="aca_SocioEconomico" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_Matricula" FromRole="aca_SocioEconomico" ToRole="aca_Matricula" />
+        </EntityType>
+        <Association Name="FK_aca_SocioEconomico_aca_Alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_SocioEconomico" Role="aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_SocioEconomico" Role="aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaVi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha1">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_SocioEconomico" Role="aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaTVi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha2">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_SocioEconomico" Role="aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaAg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha3">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_SocioEconomico" Role="aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaEl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha4">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_SocioEconomico" Role="aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaMot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha5">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_SocioEconomico" Role="aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaIns" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_CatalogoFicha6">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_SocioEconomico" Role="aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdCatalogoFichaFin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_Matricula">
+          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_SocioEconomico" Role="aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Matricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -6521,6 +7015,78 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="IdRetiro" ColumnName="IdRetiro" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_CatalogoFicha">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_CatalogoFicha">
+              <MappingFragment StoreEntitySet="aca_CatalogoFicha">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="NomCatalogoFicha" ColumnName="NomCatalogoFicha" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdCatalogoTipoFicha" ColumnName="IdCatalogoTipoFicha" />
+                <ScalarProperty Name="IdCatalogoFicha" ColumnName="IdCatalogoFicha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_CatalogoTipoFicha">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_CatalogoTipoFicha">
+              <MappingFragment StoreEntitySet="aca_CatalogoTipoFicha">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="NomCatalogoTipoFicha" ColumnName="NomCatalogoTipoFicha" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdCatalogoTipoFicha" ColumnName="IdCatalogoTipoFicha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_SocioEconomico">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_SocioEconomico">
+              <MappingFragment StoreEntitySet="aca_SocioEconomico">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="OtroFinanciamiento" ColumnName="OtroFinanciamiento" />
+                <ScalarProperty Name="OtroInformacionInst" ColumnName="OtroInformacionInst" />
+                <ScalarProperty Name="OtroMotivoIngreso" ColumnName="OtroMotivoIngreso" />
+                <ScalarProperty Name="IdCatalogoFichaFin" ColumnName="IdCatalogoFichaFin" />
+                <ScalarProperty Name="IdCatalogoFichaIns" ColumnName="IdCatalogoFichaIns" />
+                <ScalarProperty Name="IdCatalogoFichaMot" ColumnName="IdCatalogoFichaMot" />
+                <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />
+                <ScalarProperty Name="GastoPrestamo" ColumnName="GastoPrestamo" />
+                <ScalarProperty Name="GastoArriendo" ColumnName="GastoArriendo" />
+                <ScalarProperty Name="GastoSalud" ColumnName="GastoSalud" />
+                <ScalarProperty Name="GastoServicioBasico" ColumnName="GastoServicioBasico" />
+                <ScalarProperty Name="GastoEducacion" ColumnName="GastoEducacion" />
+                <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
+                <ScalarProperty Name="OtroIngreso" ColumnName="OtroIngreso" />
+                <ScalarProperty Name="SueldoMadre" ColumnName="SueldoMadre" />
+                <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
+                <ScalarProperty Name="NombreHermanos" ColumnName="NombreHermanos" />
+                <ScalarProperty Name="IdCatalogoFichaHe" ColumnName="IdCatalogoFichaHe" />
+                <ScalarProperty Name="IdCatalogoFichaEl" ColumnName="IdCatalogoFichaEl" />
+                <ScalarProperty Name="IdCatalogoFichaAg" ColumnName="IdCatalogoFichaAg" />
+                <ScalarProperty Name="IdCatalogoFichaTVi" ColumnName="IdCatalogoFichaTVi" />
+                <ScalarProperty Name="IdCatalogoFichaVi" ColumnName="IdCatalogoFichaVi" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdSocioEconomico" ColumnName="IdSocioEconomico" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

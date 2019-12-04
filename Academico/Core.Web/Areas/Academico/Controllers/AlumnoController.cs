@@ -24,6 +24,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Catalogo_Bus bus_aca_catalogo = new aca_Catalogo_Bus();
         aca_alumno_List Lista_Alumno = new aca_alumno_List();
         aca_AlumnoDocumento_List ListaAlumnoDocumento = new aca_AlumnoDocumento_List();
+        aca_SocioEconomico_Bus bus_socioeconomico = new aca_SocioEconomico_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         public static UploadedFile file { get; set; }
@@ -540,7 +541,15 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult VerFichaSocioEconomica(int IdEmpresa = 0, int IdAlumno = 0)
+        {
+            mensaje = "";
+            int IdSocioEconomico = 0;
+            var info_socioeconomico = bus_socioeconomico.GetInfo_by_Alumno(IdEmpresa, IdAlumno);
+            IdSocioEconomico = (info_socioeconomico == null ? 0 : info_socioeconomico.IdSocioEconomico);
 
+            return Json(new { SocioEconomico = IdSocioEconomico }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Funciones imagen alumno

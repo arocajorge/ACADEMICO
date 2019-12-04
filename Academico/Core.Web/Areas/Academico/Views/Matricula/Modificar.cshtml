@@ -102,11 +102,19 @@
                     <i class="fa fa-external-link-square"></i>
                 </button>
             </div>
-            <div class="col-md-offset-2 col-md-1">
+            <div class="col-md-offset-1 col-md-1">
                 <label for="IdCliente"></label>
                 <a type="button" class="btn btn-primary form-control" title="Nueva matricula" href="@Url.Action("Nuevo","Matricula",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
                     <i class="fa fa-plus"></i>
                 </a>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdCliente"></label>
+                    <button type="button" class="btn btn-primary form-control" title="Ver ficha socio economica" onclick="VerFichaSocioEconomica();">
+                        <i class="fa fa-money"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -240,7 +248,7 @@
 }
 
 <script>
-    $(function () 
+    $(function ()
     {
         $("#MensajeError").hide();
     });
@@ -379,6 +387,42 @@
             error: function (error) {
             }
         });
+    }
+
+    function VerFichaSocioEconomica() {
+        var location = GetPathServer();
+        if(IdAlumno.GetValue() != 0 || IdAlumno.GetValue()!=""){
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                IdAlumno: IdAlumno.GetValue()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("VerFichaSocioEconomica", "Alumno", new { Area = "Academico" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    if(data.SocioEconomico != 0){
+                        var win = window.open(location + "/Academico/SocioEconomico/Modificar?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdSocioEconomico=" + data.SocioEconomico+"&IdSocioEconomico=false", '_blank');
+                        win.focus();
+                    }
+                    else{
+                        var win = window.open(location + "/Academico/SocioEconomico/Nuevo?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdAlumno=" + IdAlumno.GetValue(), '_blank');
+                        win.focus();
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        }
+        else{
+            alert("Debe seleccionar alumno");
+        }
     }
 </script>
 
