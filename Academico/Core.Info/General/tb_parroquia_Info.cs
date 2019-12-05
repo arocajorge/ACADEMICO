@@ -33,5 +33,6 @@ namespace Core.Info.General
         //campos que no existen en la tabla
         public string IdPais { get; set; }
         public string IdProvincia { get; set; }
+
     }
 }

@@ -38,7 +38,7 @@ namespace Core.Info.General
         public string CodCatalogoCONADIS { get; set; }
         public Nullable<double> PorcentajeDiscapacidad { get; set; }
         public string NumeroCarnetConadis { get; set; }
-
+        public Nullable<int> IdProfesion { get; set; }
         #region Campos que no existen en la tabla
         public decimal IdEntidad { get; set; }
         #endregion

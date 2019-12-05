@@ -30,8 +30,17 @@ namespace Core.Data.Base
         public virtual DbSet<tb_ciudad> tb_ciudad { get; set; }
         public virtual DbSet<tb_parroquia> tb_parroquia { get; set; }
         public virtual DbSet<tb_Catalogo> tb_Catalogo { get; set; }
-        public virtual DbSet<tb_persona> tb_persona { get; set; }
         public virtual DbSet<tb_sis_Impuesto> tb_sis_Impuesto { get; set; }
         public virtual DbSet<tb_sis_Impuesto_Tipo> tb_sis_Impuesto_Tipo { get; set; }
+        public virtual DbSet<tb_persona> tb_persona { get; set; }
+        public virtual DbSet<tb_profesion> tb_profesion { get; set; }
+        public virtual DbSet<tb_pais> tb_pais { get; set; }
+        public virtual DbSet<tb_provincia> tb_provincia { get; set; }
+        public virtual DbSet<tb_region> tb_region { get; set; }
+        public virtual DbSet<vwtb_pais> vwtb_pais { get; set; }
+        public virtual DbSet<vwtb_parroquia> vwtb_parroquia { get; set; }
+        public virtual DbSet<vwtb_provincia> vwtb_provincia { get; set; }
+        public virtual DbSet<vwtb_Ciudad> vwtb_Ciudad { get; set; }
+        public virtual DbSet<vwtb_ciudad_id> vwtb_ciudad_id { get; set; }
     }
 }

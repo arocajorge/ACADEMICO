@@ -82,9 +82,14 @@
     <Compile Include="Academico\aca_SocioEconomico_Bus.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Bus.cs" />
     <Compile Include="General\tb_Catalogo_Bus.cs" />
+    <Compile Include="General\tb_ciudad_Bus.cs" />
     <Compile Include="General\tb_empresa_Bus.cs" />
+    <Compile Include="General\tb_pais_Bus.cs" />
     <Compile Include="General\tb_parroquia_Bus.cs" />
     <Compile Include="General\tb_persona_Bus.cs" />
+    <Compile Include="General\tb_profesion_Bus.cs" />
+    <Compile Include="General\tb_provincia_Bus.cs" />
+    <Compile Include="General\tb_region_Bus.cs" />
     <Compile Include="General\tb_sis_Impuesto_Bus.cs" />
     <Compile Include="General\tb_sucursal_Bus.cs" />
     <Compile Include="Inventario\in_Producto_Bus.cs" />

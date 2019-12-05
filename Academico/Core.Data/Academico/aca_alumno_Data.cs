@@ -51,7 +51,7 @@ namespace Core.Data.Academico
 
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -96,12 +96,19 @@ namespace Core.Data.Academico
                         CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
                         NumeroCarnetConadis = Entity.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
+                        IdPais = Entity.IdPais,
+                        Cod_Region = Entity.Cod_Region,
+                        IdProvincia = Entity.IdProvincia,
+                        IdCiudad = Entity.IdCiudad,
+                        IdParroquia = Entity.IdParroquia,
+                        Sector = Entity.Sector,
+                        LugarNacimiento = Entity.LugarNacimiento
                     };
                 }
 
                 return info;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -212,7 +219,7 @@ namespace Core.Data.Academico
                     var NumEstudiante = 1;
                     var Codigo = "";
 
-                    if (ListaAnio == null)
+                    if (ListaAnio.Count ==0)
                     {
                         Codigo = anio + NumEstudiante.ToString("0000");
                     }
@@ -235,6 +242,13 @@ namespace Core.Data.Academico
                         FechaIngreso = info.FechaIngreso,
                         IdCatalogoESTALU = info.IdCatalogoESTALU,
                         IdCatalogoESTMAT = info.IdCatalogoESTMAT,
+                        IdPais = info.IdPais,
+                        Cod_Region = info.Cod_Region,
+                        IdProvincia = info.IdProvincia,
+                        IdCiudad = info.IdCiudad,
+                        IdParroquia = info.IdParroquia,
+                        Sector = info.Sector,
+                        LugarNacimiento = info.LugarNacimiento,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
@@ -265,7 +279,14 @@ namespace Core.Data.Academico
                     Entity.Correo = info.Correo;
                     Entity.Direccion = info.Direccion;
                     Entity.Celular = info.Celular;
-                    Entity.Codigo = info.Codigo;
+                    Entity.IdPais = info.IdPais;
+                    Entity.Cod_Region = info.Cod_Region;
+                    Entity.IdProvincia = info.IdProvincia;
+                    Entity.IdCiudad = info.IdCiudad;
+                    Entity.IdParroquia = info.IdParroquia;
+                    Entity.Sector = info.Sector;
+                    Entity.LugarNacimiento = info.LugarNacimiento;
+
                     Context.SaveChanges();
                 }
 

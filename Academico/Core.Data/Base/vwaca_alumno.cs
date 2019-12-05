@@ -41,5 +41,12 @@ namespace Core.Data.Base
         public string NomCatalogoESTMAT { get; set; }
         public string NomCatalogoESTALU { get; set; }
         public System.DateTime FechaIngreso { get; set; }
+        public string LugarNacimiento { get; set; }
+        public string IdPais { get; set; }
+        public string Cod_Region { get; set; }
+        public string IdProvincia { get; set; }
+        public string IdCiudad { get; set; }
+        public string IdParroquia { get; set; }
+        public string Sector { get; set; }
     }
 }

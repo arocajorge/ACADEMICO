@@ -44,6 +44,7 @@ namespace Core.Data.Base
         public string CodCatalogoCONADIS { get; set; }
         public Nullable<double> PorcentajeDiscapacidad { get; set; }
         public string NumeroCarnetConadis { get; set; }
+        public Nullable<int> IdProfesion { get; set; }
     
         public virtual tb_Catalogo tb_Catalogo { get; set; }
         public virtual tb_Catalogo tb_Catalogo1 { get; set; }
@@ -54,5 +55,6 @@ namespace Core.Data.Base
         public virtual tb_Catalogo tb_Catalogo6 { get; set; }
         public virtual tb_Catalogo tb_Catalogo7 { get; set; }
         public virtual tb_Catalogo tb_Catalogo8 { get; set; }
+        public virtual tb_profesion tb_profesion { get; set; }
     }
 }

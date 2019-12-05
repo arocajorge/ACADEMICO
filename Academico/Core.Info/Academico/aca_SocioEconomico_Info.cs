@@ -21,9 +21,9 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo agua es obligatorio")]
         public int IdCatalogoFichaAg { get; set; }
         [Required(ErrorMessage = "El campo energia electrica es obligatorio")]
-        public int IdCatalogoFichaEl { get; set; }
+        public bool TieneElectricidad { get; set; }
         [Required(ErrorMessage = "El campo tiene hermanos es obligatorio")]
-        public int IdCatalogoFichaHe { get; set; }
+        public bool TieneHermanos { get; set; }
         public string NombreHermanos { get; set; }
         [Required(ErrorMessage = "El campo sueldo del padre es obligatorio")]
         public double SueldoPadre { get; set; }

@@ -65,6 +65,25 @@
           <Property Name="cod_entidad_dinardap" Type="varchar" MaxLength="50" />
           <Property Name="em_Email" Type="varchar" MaxLength="300" />
         </EntityType>
+        <EntityType Name="tb_pais">
+          <Key>
+            <PropertyRef Name="IdPais" />
+          </Key>
+          <Property Name="IdPais" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CodPais" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nacionalidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotivoAnula" Type="varchar" MaxLength="100" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+        </EntityType>
         <EntityType Name="tb_parroquia">
           <Key>
             <PropertyRef Name="IdParroquia" />
@@ -118,6 +137,52 @@
           <Property Name="CodCatalogoCONADIS" Type="varchar" MaxLength="25" />
           <Property Name="PorcentajeDiscapacidad" Type="float" />
           <Property Name="NumeroCarnetConadis" Type="varchar" MaxLength="200" />
+          <Property Name="IdProfesion" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_profesion">
+          <Key>
+            <PropertyRef Name="IdProfesion" />
+          </Key>
+          <Property Name="IdProfesion" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tb_provincia">
+          <Key>
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdProvincia" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Cod_Provincia" Type="varchar" MaxLength="25" />
+          <Property Name="Descripcion_Prov" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdPais" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotivoAnula" Type="varchar" MaxLength="100" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="Cod_Region" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tb_region">
+          <Key>
+            <PropertyRef Name="Cod_Region" />
+          </Key>
+          <Property Name="Cod_Region" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nom_region" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="codigo" Type="varchar" MaxLength="10" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="IdPais" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_sis_Impuesto">
           <Key>
@@ -166,6 +231,69 @@
           <Property Name="IdCtaCble_vtaIVA0" Type="varchar" MaxLength="20" />
           <Property Name="IdCtaCble_vtaIVA" Type="varchar" MaxLength="20" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_Ciudad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwtb_Ciudad">
+          <Key>
+            <PropertyRef Name="IdCiudad" />
+            <PropertyRef Name="Cod_Ciudad" />
+            <PropertyRef Name="Descripcion_Ciudad" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="IdPais" />
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdCiudad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Cod_Ciudad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Descripcion_Ciudad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdPais" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdProvincia" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_ciudad_id' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwtb_ciudad_id">
+          <Key>
+            <PropertyRef Name="IdCiudad" />
+          </Key>
+          <Property Name="IdCiudad" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_pais' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwtb_pais">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="IdPais" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_parroquia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwtb_parroquia">
+          <Key>
+            <PropertyRef Name="IdParroquia" />
+          </Key>
+          <Property Name="IdParroquia" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwtb_provincia">
+          <Key>
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdProvincia" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tb_ciudad_tb_provincia">
+          <End Role="tb_provincia" Type="Self.tb_provincia" Multiplicity="1" />
+          <End Role="tb_ciudad" Type="Self.tb_ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_provincia">
+              <PropertyRef Name="IdProvincia" />
+            </Principal>
+            <Dependent Role="tb_ciudad">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_parroquia_tb_ciudad">
           <End Role="tb_ciudad" Type="Self.tb_ciudad" Multiplicity="1" />
           <End Role="tb_parroquia" Type="Self.tb_parroquia" Multiplicity="*" />
@@ -286,6 +414,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_persona_tb_profesion">
+          <End Role="tb_profesion" Type="Self.tb_profesion" Multiplicity="0..1" />
+          <End Role="tb_persona" Type="Self.tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_profesion">
+              <PropertyRef Name="IdProfesion" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdProfesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_provincia_tb_pais">
+          <End Role="tb_pais" Type="Self.tb_pais" Multiplicity="1" />
+          <End Role="tb_provincia" Type="Self.tb_provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_pais">
+              <PropertyRef Name="IdPais" />
+            </Principal>
+            <Dependent Role="tb_provincia">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_provincia_tb_region">
+          <End Role="tb_region" Type="Self.tb_region" Multiplicity="0..1" />
+          <End Role="tb_provincia" Type="Self.tb_provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_region">
+              <PropertyRef Name="Cod_Region" />
+            </Principal>
+            <Dependent Role="tb_provincia">
+              <PropertyRef Name="Cod_Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_region_tb_pais">
+          <End Role="tb_pais" Type="Self.tb_pais" Multiplicity="1" />
+          <End Role="tb_region" Type="Self.tb_region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_pais">
+              <PropertyRef Name="IdPais" />
+            </Principal>
+            <Dependent Role="tb_region">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
           <End Role="tb_sis_Impuesto_Tipo" Type="Self.tb_sis_Impuesto_Tipo" Multiplicity="1" />
           <End Role="tb_sis_Impuesto" Type="Self.tb_sis_Impuesto" Multiplicity="*" />
@@ -314,11 +490,50 @@
           <EntitySet Name="tb_Catalogo" EntityType="Self.tb_Catalogo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ciudad" EntityType="Self.tb_ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_pais" EntityType="Self.tb_pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_parroquia" EntityType="Self.tb_parroquia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_persona" EntityType="Self.tb_persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_profesion" EntityType="Self.tb_profesion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_provincia" EntityType="Self.tb_provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_region" EntityType="Self.tb_region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_Impuesto" EntityType="Self.tb_sis_Impuesto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_Impuesto_Tipo" EntityType="Self.tb_sis_Impuesto_Tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwtb_Ciudad" EntityType="Self.vwtb_Ciudad" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwtb_Ciudad].[IdCiudad] AS [IdCiudad], 
+    [vwtb_Ciudad].[Cod_Ciudad] AS [Cod_Ciudad], 
+    [vwtb_Ciudad].[Descripcion_Ciudad] AS [Descripcion_Ciudad], 
+    [vwtb_Ciudad].[Estado] AS [Estado], 
+    [vwtb_Ciudad].[IdPais] AS [IdPais], 
+    [vwtb_Ciudad].[IdProvincia] AS [IdProvincia]
+    FROM [dbo].[vwtb_Ciudad] AS [vwtb_Ciudad]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwtb_ciudad_id" EntityType="Self.vwtb_ciudad_id" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwtb_ciudad_id].[IdCiudad] AS [IdCiudad]
+    FROM [dbo].[vwtb_ciudad_id] AS [vwtb_ciudad_id]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwtb_pais" EntityType="Self.vwtb_pais" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwtb_pais].[IdPais] AS [IdPais], 
+    [vwtb_pais].[Nombre] AS [Nombre]
+    FROM [dbo].[vwtb_pais] AS [vwtb_pais]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwtb_parroquia" EntityType="Self.vwtb_parroquia" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwtb_parroquia].[IdParroquia] AS [IdParroquia]
+    FROM [dbo].[vwtb_parroquia] AS [vwtb_parroquia]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwtb_provincia" EntityType="Self.vwtb_provincia" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwtb_provincia].[IdProvincia] AS [IdProvincia]
+    FROM [dbo].[vwtb_provincia] AS [vwtb_provincia]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_tb_ciudad_tb_provincia" Association="Self.FK_tb_ciudad_tb_provincia">
+            <End Role="tb_provincia" EntitySet="tb_provincia" />
+            <End Role="tb_ciudad" EntitySet="tb_ciudad" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_parroquia_tb_ciudad" Association="Self.FK_tb_parroquia_tb_ciudad">
             <End Role="tb_ciudad" EntitySet="tb_ciudad" />
             <End Role="tb_parroquia" EntitySet="tb_parroquia" />
@@ -358,6 +573,22 @@
           <AssociationSet Name="FK_tb_persona_tb_Catalogo8" Association="Self.FK_tb_persona_tb_Catalogo8">
             <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
             <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_profesion" Association="Self.FK_tb_persona_tb_profesion">
+            <End Role="tb_profesion" EntitySet="tb_profesion" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_provincia_tb_pais" Association="Self.FK_tb_provincia_tb_pais">
+            <End Role="tb_pais" EntitySet="tb_pais" />
+            <End Role="tb_provincia" EntitySet="tb_provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_provincia_tb_region" Association="Self.FK_tb_provincia_tb_region">
+            <End Role="tb_region" EntitySet="tb_region" />
+            <End Role="tb_provincia" EntitySet="tb_provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_region_tb_pais" Association="Self.FK_tb_region_tb_pais">
+            <End Role="tb_pais" EntitySet="tb_pais" />
+            <End Role="tb_region" EntitySet="tb_region" />
           </AssociationSet>
           <AssociationSet Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" Association="Self.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
             <End Role="tb_sis_Impuesto_Tipo" EntitySet="tb_sis_Impuesto_Tipo" />
@@ -410,7 +641,14 @@
             <End Role="tb_parroquia" EntitySet="tb_parroquia" />
           </AssociationSet>
           <EntitySet Name="tb_Catalogo" EntityType="ModelGeneral.tb_Catalogo" />
+          <EntitySet Name="tb_sis_Impuesto" EntityType="ModelGeneral.tb_sis_Impuesto" />
+          <EntitySet Name="tb_sis_Impuesto_Tipo" EntityType="ModelGeneral.tb_sis_Impuesto_Tipo" />
+          <AssociationSet Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" Association="ModelGeneral.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
+            <End Role="tb_sis_Impuesto_Tipo" EntitySet="tb_sis_Impuesto_Tipo" />
+            <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
+          </AssociationSet>
           <EntitySet Name="tb_persona" EntityType="ModelGeneral.tb_persona" />
+          <EntitySet Name="tb_profesion" EntityType="ModelGeneral.tb_profesion" />
           <AssociationSet Name="FK_tb_persona_tb_Catalogo" Association="ModelGeneral.FK_tb_persona_tb_Catalogo">
             <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
             <End Role="tb_persona" EntitySet="tb_persona" />
@@ -447,12 +685,34 @@
             <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
             <End Role="tb_persona" EntitySet="tb_persona" />
           </AssociationSet>
-          <EntitySet Name="tb_sis_Impuesto" EntityType="ModelGeneral.tb_sis_Impuesto" />
-          <EntitySet Name="tb_sis_Impuesto_Tipo" EntityType="ModelGeneral.tb_sis_Impuesto_Tipo" />
-          <AssociationSet Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" Association="ModelGeneral.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
-            <End Role="tb_sis_Impuesto_Tipo" EntitySet="tb_sis_Impuesto_Tipo" />
-            <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
+          <AssociationSet Name="FK_tb_persona_tb_profesion" Association="ModelGeneral.FK_tb_persona_tb_profesion">
+            <End Role="tb_profesion" EntitySet="tb_profesion" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
           </AssociationSet>
+          <EntitySet Name="tb_pais" EntityType="ModelGeneral.tb_pais" />
+          <EntitySet Name="tb_provincia" EntityType="ModelGeneral.tb_provincia" />
+          <EntitySet Name="tb_region" EntityType="ModelGeneral.tb_region" />
+          <AssociationSet Name="FK_tb_ciudad_tb_provincia" Association="ModelGeneral.FK_tb_ciudad_tb_provincia">
+            <End Role="tb_provincia" EntitySet="tb_provincia" />
+            <End Role="tb_ciudad" EntitySet="tb_ciudad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_provincia_tb_pais" Association="ModelGeneral.FK_tb_provincia_tb_pais">
+            <End Role="tb_pais" EntitySet="tb_pais" />
+            <End Role="tb_provincia" EntitySet="tb_provincia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_region_tb_pais" Association="ModelGeneral.FK_tb_region_tb_pais">
+            <End Role="tb_pais" EntitySet="tb_pais" />
+            <End Role="tb_region" EntitySet="tb_region" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_provincia_tb_region" Association="ModelGeneral.FK_tb_provincia_tb_region">
+            <End Role="tb_region" EntitySet="tb_region" />
+            <End Role="tb_provincia" EntitySet="tb_provincia" />
+          </AssociationSet>
+          <EntitySet Name="vwtb_pais" EntityType="ModelGeneral.vwtb_pais" />
+          <EntitySet Name="vwtb_parroquia" EntityType="ModelGeneral.vwtb_parroquia" />
+          <EntitySet Name="vwtb_provincia" EntityType="ModelGeneral.vwtb_provincia" />
+          <EntitySet Name="vwtb_Ciudad" EntityType="ModelGeneral.vwtb_Ciudad" />
+          <EntitySet Name="vwtb_ciudad_id" EntityType="ModelGeneral.vwtb_ciudad_id" />
           </EntityContainer>
         <EntityType Name="tb_sucursal">
           <Key>
@@ -513,6 +773,7 @@
           <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_parroquia" Relationship="ModelGeneral.FK_tb_parroquia_tb_ciudad" FromRole="tb_ciudad" ToRole="tb_parroquia" />
+          <NavigationProperty Name="tb_provincia" Relationship="ModelGeneral.FK_tb_ciudad_tb_provincia" FromRole="tb_ciudad" ToRole="tb_provincia" />
         </EntityType>
         <EntityType Name="tb_parroquia">
           <Key>
@@ -573,6 +834,40 @@
           <NavigationProperty Name="tb_persona7" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo7" FromRole="tb_Catalogo" ToRole="tb_persona" />
           <NavigationProperty Name="tb_persona8" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo8" FromRole="tb_Catalogo" ToRole="tb_persona" />
           </EntityType>
+        <EntityType Name="tb_sis_Impuesto">
+          <Key>
+            <PropertyRef Name="IdCod_Impuesto" />
+          </Key>
+          <Property Name="IdCod_Impuesto" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="nom_impuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Usado_en_Ventas" Type="Boolean" Nullable="false" />
+          <Property Name="Usado_en_Compras" Type="Boolean" Nullable="false" />
+          <Property Name="porcentaje" Type="Double" Nullable="false" />
+          <Property Name="IdCodigo_SRI" Type="Int32" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdTipoImpuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_sis_Impuesto_Tipo" Relationship="ModelGeneral.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" FromRole="tb_sis_Impuesto" ToRole="tb_sis_Impuesto_Tipo" />
+        </EntityType>
+        <EntityType Name="tb_sis_Impuesto_Tipo">
+          <Key>
+            <PropertyRef Name="IdTipoImpuesto" />
+          </Key>
+          <Property Name="IdTipoImpuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_tipoImpuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_sis_Impuesto" Relationship="ModelGeneral.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" FromRole="tb_sis_Impuesto_Tipo" ToRole="tb_sis_Impuesto" />
+        </EntityType>
+        <Association Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
+          <End Type="ModelGeneral.tb_sis_Impuesto_Tipo" Role="tb_sis_Impuesto_Tipo" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_sis_Impuesto" Role="tb_sis_Impuesto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_Impuesto_Tipo">
+              <PropertyRef Name="IdTipoImpuesto" />
+            </Principal>
+            <Dependent Role="tb_sis_Impuesto">
+              <PropertyRef Name="IdTipoImpuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="tb_persona">
           <Key>
             <PropertyRef Name="IdPersona" />
@@ -607,6 +902,7 @@
           <Property Name="CodCatalogoCONADIS" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="PorcentajeDiscapacidad" Type="Double" />
           <Property Name="NumeroCarnetConadis" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdProfesion" Type="Int32" />
           <NavigationProperty Name="tb_Catalogo" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo" FromRole="tb_persona" ToRole="tb_Catalogo" />
           <NavigationProperty Name="tb_Catalogo1" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo1" FromRole="tb_persona" ToRole="tb_Catalogo" />
           <NavigationProperty Name="tb_Catalogo2" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo2" FromRole="tb_persona" ToRole="tb_Catalogo" />
@@ -616,6 +912,23 @@
           <NavigationProperty Name="tb_Catalogo6" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo6" FromRole="tb_persona" ToRole="tb_Catalogo" />
           <NavigationProperty Name="tb_Catalogo7" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo7" FromRole="tb_persona" ToRole="tb_Catalogo" />
           <NavigationProperty Name="tb_Catalogo8" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo8" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_profesion" Relationship="ModelGeneral.FK_tb_persona_tb_profesion" FromRole="tb_persona" ToRole="tb_profesion" />
+        </EntityType>
+        <EntityType Name="tb_profesion">
+          <Key>
+            <PropertyRef Name="IdProfesion" />
+          </Key>
+          <Property Name="IdProfesion" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_persona" Relationship="ModelGeneral.FK_tb_persona_tb_profesion" FromRole="tb_profesion" ToRole="tb_persona" />
         </EntityType>
         <Association Name="FK_tb_persona_tb_Catalogo">
           <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="1" />
@@ -725,40 +1038,163 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tb_sis_Impuesto">
-          <Key>
-            <PropertyRef Name="IdCod_Impuesto" />
-          </Key>
-          <Property Name="IdCod_Impuesto" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="nom_impuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Usado_en_Ventas" Type="Boolean" Nullable="false" />
-          <Property Name="Usado_en_Compras" Type="Boolean" Nullable="false" />
-          <Property Name="porcentaje" Type="Double" Nullable="false" />
-          <Property Name="IdCodigo_SRI" Type="Int32" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdTipoImpuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tb_sis_Impuesto_Tipo" Relationship="ModelGeneral.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" FromRole="tb_sis_Impuesto" ToRole="tb_sis_Impuesto_Tipo" />
-        </EntityType>
-        <EntityType Name="tb_sis_Impuesto_Tipo">
-          <Key>
-            <PropertyRef Name="IdTipoImpuesto" />
-          </Key>
-          <Property Name="IdTipoImpuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="nom_tipoImpuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tb_sis_Impuesto" Relationship="ModelGeneral.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" FromRole="tb_sis_Impuesto_Tipo" ToRole="tb_sis_Impuesto" />
-        </EntityType>
-        <Association Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
-          <End Type="ModelGeneral.tb_sis_Impuesto_Tipo" Role="tb_sis_Impuesto_Tipo" Multiplicity="1" />
-          <End Type="ModelGeneral.tb_sis_Impuesto" Role="tb_sis_Impuesto" Multiplicity="*" />
+        <Association Name="FK_tb_persona_tb_profesion">
+          <End Type="ModelGeneral.tb_profesion" Role="tb_profesion" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tb_sis_Impuesto_Tipo">
-              <PropertyRef Name="IdTipoImpuesto" />
+            <Principal Role="tb_profesion">
+              <PropertyRef Name="IdProfesion" />
             </Principal>
-            <Dependent Role="tb_sis_Impuesto">
-              <PropertyRef Name="IdTipoImpuesto" />
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdProfesion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tb_pais">
+          <Key>
+            <PropertyRef Name="IdPais" />
+          </Key>
+          <Property Name="IdPais" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CodPais" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nacionalidad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_provincia" Relationship="ModelGeneral.FK_tb_provincia_tb_pais" FromRole="tb_pais" ToRole="tb_provincia" />
+          <NavigationProperty Name="tb_region" Relationship="ModelGeneral.FK_tb_region_tb_pais" FromRole="tb_pais" ToRole="tb_region" />
+        </EntityType>
+        <EntityType Name="tb_provincia">
+          <Key>
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdProvincia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Provincia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_Prov" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdPais" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Region" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_ciudad" Relationship="ModelGeneral.FK_tb_ciudad_tb_provincia" FromRole="tb_provincia" ToRole="tb_ciudad" />
+          <NavigationProperty Name="tb_pais" Relationship="ModelGeneral.FK_tb_provincia_tb_pais" FromRole="tb_provincia" ToRole="tb_pais" />
+          <NavigationProperty Name="tb_region" Relationship="ModelGeneral.FK_tb_provincia_tb_region" FromRole="tb_provincia" ToRole="tb_region" />
+        </EntityType>
+        <EntityType Name="tb_region">
+          <Key>
+            <PropertyRef Name="Cod_Region" />
+          </Key>
+          <Property Name="Cod_Region" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Nom_region" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdPais" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_pais" Relationship="ModelGeneral.FK_tb_region_tb_pais" FromRole="tb_region" ToRole="tb_pais" />
+          <NavigationProperty Name="tb_provincia" Relationship="ModelGeneral.FK_tb_provincia_tb_region" FromRole="tb_region" ToRole="tb_provincia" />
+        </EntityType>
+        <Association Name="FK_tb_ciudad_tb_provincia">
+          <End Type="ModelGeneral.tb_provincia" Role="tb_provincia" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_ciudad" Role="tb_ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_provincia">
+              <PropertyRef Name="IdProvincia" />
+            </Principal>
+            <Dependent Role="tb_ciudad">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_provincia_tb_pais">
+          <End Type="ModelGeneral.tb_pais" Role="tb_pais" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_provincia" Role="tb_provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_pais">
+              <PropertyRef Name="IdPais" />
+            </Principal>
+            <Dependent Role="tb_provincia">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_region_tb_pais">
+          <End Type="ModelGeneral.tb_pais" Role="tb_pais" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_region" Role="tb_region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_pais">
+              <PropertyRef Name="IdPais" />
+            </Principal>
+            <Dependent Role="tb_region">
+              <PropertyRef Name="IdPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_provincia_tb_region">
+          <End Type="ModelGeneral.tb_region" Role="tb_region" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_provincia" Role="tb_provincia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_region">
+              <PropertyRef Name="Cod_Region" />
+            </Principal>
+            <Dependent Role="tb_provincia">
+              <PropertyRef Name="Cod_Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwtb_pais">
+          <Key>
+            <PropertyRef Name="Nombre" />
+          </Key>
+          <Property Name="IdPais" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwtb_parroquia">
+          <Key>
+            <PropertyRef Name="IdParroquia" />
+          </Key>
+          <Property Name="IdParroquia" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwtb_provincia">
+          <Key>
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdProvincia" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwtb_Ciudad">
+          <Key>
+            <PropertyRef Name="IdCiudad" />
+            <PropertyRef Name="Cod_Ciudad" />
+            <PropertyRef Name="Descripcion_Ciudad" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="IdPais" />
+            <PropertyRef Name="IdProvincia" />
+          </Key>
+          <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Ciudad" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_Ciudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdPais" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdProvincia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwtb_ciudad_id">
+          <Key>
+            <PropertyRef Name="IdCiudad" />
+          </Key>
+          <Property Name="IdCiudad" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -875,9 +1311,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_Impuesto">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_sis_Impuesto">
+              <MappingFragment StoreEntitySet="tb_sis_Impuesto">
+                <ScalarProperty Name="IdTipoImpuesto" ColumnName="IdTipoImpuesto" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="IdCodigo_SRI" ColumnName="IdCodigo_SRI" />
+                <ScalarProperty Name="porcentaje" ColumnName="porcentaje" />
+                <ScalarProperty Name="Usado_en_Compras" ColumnName="Usado_en_Compras" />
+                <ScalarProperty Name="Usado_en_Ventas" ColumnName="Usado_en_Ventas" />
+                <ScalarProperty Name="nom_impuesto" ColumnName="nom_impuesto" />
+                <ScalarProperty Name="IdCod_Impuesto" ColumnName="IdCod_Impuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_Impuesto_Tipo">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_sis_Impuesto_Tipo">
+              <MappingFragment StoreEntitySet="tb_sis_Impuesto_Tipo">
+                <ScalarProperty Name="nom_tipoImpuesto" ColumnName="nom_tipoImpuesto" />
+                <ScalarProperty Name="IdTipoImpuesto" ColumnName="IdTipoImpuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tb_persona">
             <EntityTypeMapping TypeName="ModelGeneral.tb_persona">
               <MappingFragment StoreEntitySet="tb_persona">
+                <ScalarProperty Name="IdProfesion" ColumnName="IdProfesion" />
                 <ScalarProperty Name="NumeroCarnetConadis" ColumnName="NumeroCarnetConadis" />
                 <ScalarProperty Name="PorcentajeDiscapacidad" ColumnName="PorcentajeDiscapacidad" />
                 <ScalarProperty Name="CodCatalogoCONADIS" ColumnName="CodCatalogoCONADIS" />
@@ -911,25 +1370,112 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_sis_Impuesto">
-            <EntityTypeMapping TypeName="ModelGeneral.tb_sis_Impuesto">
-              <MappingFragment StoreEntitySet="tb_sis_Impuesto">
-                <ScalarProperty Name="IdTipoImpuesto" ColumnName="IdTipoImpuesto" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="IdCodigo_SRI" ColumnName="IdCodigo_SRI" />
-                <ScalarProperty Name="porcentaje" ColumnName="porcentaje" />
-                <ScalarProperty Name="Usado_en_Compras" ColumnName="Usado_en_Compras" />
-                <ScalarProperty Name="Usado_en_Ventas" ColumnName="Usado_en_Ventas" />
-                <ScalarProperty Name="nom_impuesto" ColumnName="nom_impuesto" />
-                <ScalarProperty Name="IdCod_Impuesto" ColumnName="IdCod_Impuesto" />
+          <EntitySetMapping Name="tb_profesion">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_profesion">
+              <MappingFragment StoreEntitySet="tb_profesion">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdProfesion" ColumnName="IdProfesion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_sis_Impuesto_Tipo">
-            <EntityTypeMapping TypeName="ModelGeneral.tb_sis_Impuesto_Tipo">
-              <MappingFragment StoreEntitySet="tb_sis_Impuesto_Tipo">
-                <ScalarProperty Name="nom_tipoImpuesto" ColumnName="nom_tipoImpuesto" />
-                <ScalarProperty Name="IdTipoImpuesto" ColumnName="IdTipoImpuesto" />
+          <EntitySetMapping Name="tb_pais">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_pais">
+              <MappingFragment StoreEntitySet="tb_pais">
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="MotivoAnula" ColumnName="MotivoAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CodPais" ColumnName="CodPais" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_provincia">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_provincia">
+              <MappingFragment StoreEntitySet="tb_provincia">
+                <ScalarProperty Name="Cod_Region" ColumnName="Cod_Region" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="MotivoAnula" ColumnName="MotivoAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion_Prov" ColumnName="Descripcion_Prov" />
+                <ScalarProperty Name="Cod_Provincia" ColumnName="Cod_Provincia" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_region">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_region">
+              <MappingFragment StoreEntitySet="tb_region">
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="Nom_region" ColumnName="Nom_region" />
+                <ScalarProperty Name="Cod_Region" ColumnName="Cod_Region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_pais">
+            <EntityTypeMapping TypeName="ModelGeneral.vwtb_pais">
+              <MappingFragment StoreEntitySet="vwtb_pais">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_parroquia">
+            <EntityTypeMapping TypeName="ModelGeneral.vwtb_parroquia">
+              <MappingFragment StoreEntitySet="vwtb_parroquia">
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_provincia">
+            <EntityTypeMapping TypeName="ModelGeneral.vwtb_provincia">
+              <MappingFragment StoreEntitySet="vwtb_provincia">
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_Ciudad">
+            <EntityTypeMapping TypeName="ModelGeneral.vwtb_Ciudad">
+              <MappingFragment StoreEntitySet="vwtb_Ciudad">
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion_Ciudad" ColumnName="Descripcion_Ciudad" />
+                <ScalarProperty Name="Cod_Ciudad" ColumnName="Cod_Ciudad" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwtb_ciudad_id">
+            <EntityTypeMapping TypeName="ModelGeneral.vwtb_ciudad_id">
+              <MappingFragment StoreEntitySet="vwtb_ciudad_id">
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

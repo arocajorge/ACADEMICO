@@ -21,6 +21,23 @@ namespace Core.Info.Academico
         public string Direccion { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
+        public int IdCatalogoFichaInst { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo empresa debe tener máximo 200")]
+        public string EmpresaTrabajo { get; set; }
+        [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo dirección debe tener máximo 500")]
+        public string DireccionTrabajo { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo telefono debe tener máximo 200")]
+        public string TelefonoTrabajo { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo cargo debe tener máximo 200")]
+        public string CargoTrabajo { get; set; }
+        public Nullable<int> AniosServicio { get; set; }
+        public Nullable<double> IngresoMensual { get; set; }
+        public bool VehiculoPropio { get; set; }
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo marca debe tener máximo 50")]
+        public string Marca { get; set; }
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo modelo debe tener máximo 50")]
+        public string Modelo { get; set; }
+        public bool CasaPropia { get; set; }
         public bool SeFactura { get; set; }
         public bool EsRepresentante { get; set; }
         public string IdUsuarioCreacion { get; set; }
@@ -61,7 +78,7 @@ namespace Core.Info.Academico
         public string mes { get; set; }
         public string dia { get; set; }
         public string NomCatalogo { get; set; }
-
+        public int IdProfesion { get; set; }
         public tb_persona_Info info_persona { get; set; }
         #endregion
     }

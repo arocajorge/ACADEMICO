@@ -20,8 +20,8 @@ namespace Core.Data.Base
         public int IdCatalogoFichaVi { get; set; }
         public int IdCatalogoFichaTVi { get; set; }
         public int IdCatalogoFichaAg { get; set; }
-        public int IdCatalogoFichaEl { get; set; }
-        public int IdCatalogoFichaHe { get; set; }
+        public bool TieneElectricidad { get; set; }
+        public bool TieneHermanos { get; set; }
         public string NombreHermanos { get; set; }
         public double SueldoPadre { get; set; }
         public double SueldoMadre { get; set; }
@@ -45,14 +45,12 @@ namespace Core.Data.Base
         public string IdUsuarioModificacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
     
-        public virtual aca_Alumno aca_Alumno { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha1 { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha2 { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha3 { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha4 { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha5 { get; set; }
-        public virtual aca_CatalogoFicha aca_CatalogoFicha6 { get; set; }
-        public virtual aca_Matricula aca_Matricula { get; set; }
+        public virtual aca_Alumno aca_Alumno { get; set; }
     }
 }

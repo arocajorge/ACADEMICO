@@ -7624,6 +7624,11 @@
     <Content Include="Areas\Academico\Views\SocioEconomico\Index.cshtml" />
     <Content Include="Areas\Academico\Views\SocioEconomico\_CmbAlumno.cshtml" />
     <Content Include="Areas\Academico\Views\SocioEconomico\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Pais.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Region.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Provincia.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Ciudad.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Parroquia.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

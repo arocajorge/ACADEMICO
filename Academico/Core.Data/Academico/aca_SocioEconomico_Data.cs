@@ -10,55 +10,6 @@ namespace Core.Data.Academico
 {
     public class aca_SocioEconomico_Data
     {
-        //public List<aca_SocioEconomico_Info> getList(int IdEmpresa, int IdAnio, decimal IdAlumno, bool MostrarAnulados)
-        //{
-        //    try
-        //    {
-        //        var IdAnio_Ini = IdAnio;
-        //        var IdAnio_Fin = (IdAnio==0 ? 999999 : IdAnio);
-        //        List<aca_SocioEconomico_Info> Lista = new List<aca_SocioEconomico_Info>();
-
-        //        using (EntitiesAcademico Context = new EntitiesAcademico())
-        //        {
-        //            Lista = Context.aca_SocioEconomico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno==IdAlumno && q.IdAnio>=IdAnio_Ini && q.IdAnio<=IdAnio_Fin).Select(q => new aca_SocioEconomico_Info
-        //            {
-        //                IdEmpresa = q.IdEmpresa,
-        //                IdSocioEconomico = q.IdSocioEconomico,
-        //                IdMatricula = q.IdMatricula,
-        //                IdAnio = q.IdAnio,
-        //                Descripcion = q.Descripcion,
-        //                IdAlumno = q.IdAlumno,
-        //                IdCatalogoFichaVi = q.IdCatalogoFichaVi,
-        //                IdCatalogoFichaTVi = q.IdCatalogoFichaTVi,
-        //                IdCatalogoFichaAg = q.IdCatalogoFichaAg,
-        //                IdCatalogoFichaEl = q.IdCatalogoFichaEl,
-        //                IdCatalogoFichaHe = q.IdCatalogoFichaHe,
-        //                NombreHermanos = q.NombreHermanos,
-        //                SueldoPadre = q.SueldoPadre,
-        //                SueldoMadre = q.SueldoMadre,
-        //                SueldoOtro = q.SueldoOtro,
-        //                GastoAlimentacion = q.GastoAlimentacion,
-        //                GastoEducacion = q.GastoEducacion,
-        //                GastoServicioBasico = q.GastoServicioBasico,
-        //                GastoSalud = q.GastoSalud,
-        //                GastoArriendo = q.GastoArriendo,
-        //                GastoPrestamo = q.GastoPrestamo,
-        //                GastoOtros = q.GastoOtros,
-        //                IdCatalogoFichaMot = q.IdCatalogoFichaMot,
-        //                IdCatalogoFichaIns = q.IdCatalogoFichaIns,
-        //                IdCatalogoFichaFin = q.IdCatalogoFichaFin
-        //            }).ToList();
-        //        }
-
-        //        return Lista;
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-
         public int getId(int IdEmpresa)
         {
             try
@@ -99,8 +50,8 @@ namespace Core.Data.Academico
                         IdCatalogoFichaVi = Entity.IdCatalogoFichaVi,
                         IdCatalogoFichaTVi = Entity.IdCatalogoFichaTVi,
                         IdCatalogoFichaAg = Entity.IdCatalogoFichaAg,
-                        IdCatalogoFichaEl = Entity.IdCatalogoFichaEl,
-                        IdCatalogoFichaHe = Entity.IdCatalogoFichaHe,
+                        TieneElectricidad = Entity.TieneElectricidad,
+                        TieneHermanos = Entity.TieneHermanos,
                         NombreHermanos = Entity.NombreHermanos,
                         SueldoPadre = Entity.SueldoPadre,
                         SueldoMadre = Entity.SueldoMadre,
@@ -149,8 +100,8 @@ namespace Core.Data.Academico
                         IdCatalogoFichaVi = Entity.IdCatalogoFichaVi,
                         IdCatalogoFichaTVi = Entity.IdCatalogoFichaTVi,
                         IdCatalogoFichaAg = Entity.IdCatalogoFichaAg,
-                        IdCatalogoFichaEl = Entity.IdCatalogoFichaEl,
-                        IdCatalogoFichaHe = Entity.IdCatalogoFichaHe,
+                        TieneElectricidad = Entity.TieneElectricidad,
+                        TieneHermanos = Entity.TieneHermanos,
                         NombreHermanos = Entity.NombreHermanos,
                         SueldoPadre = Entity.SueldoPadre,
                         SueldoMadre = Entity.SueldoMadre,
@@ -190,8 +141,8 @@ namespace Core.Data.Academico
                         IdCatalogoFichaVi = info.IdCatalogoFichaVi,
                         IdCatalogoFichaTVi = info.IdCatalogoFichaTVi,
                         IdCatalogoFichaAg = info.IdCatalogoFichaAg,
-                        IdCatalogoFichaEl = info.IdCatalogoFichaEl,
-                        IdCatalogoFichaHe = info.IdCatalogoFichaHe,
+                        TieneElectricidad = info.TieneElectricidad,
+                        TieneHermanos = info.TieneHermanos,
                         NombreHermanos = info.NombreHermanos,
                         SueldoPadre = info.SueldoPadre,
                         SueldoMadre = info.SueldoMadre,
@@ -208,7 +159,10 @@ namespace Core.Data.Academico
                         IdCatalogoFichaFin = info.IdCatalogoFichaFin,
                         OtroFinanciamiento = info.OtroFinanciamiento,
                         OtroInformacionInst = info.OtroInformacionInst,
-                        OtroMotivoIngreso = info.OtroMotivoIngreso
+                        OtroMotivoIngreso = info.OtroMotivoIngreso,
+                        Estado =true,
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        FechaCreacion = DateTime.Now
                     };
                     Context.aca_SocioEconomico.Add(Entity);
 
@@ -236,8 +190,8 @@ namespace Core.Data.Academico
                     Entity.IdCatalogoFichaVi = info.IdCatalogoFichaVi;
                     Entity.IdCatalogoFichaTVi = info.IdCatalogoFichaTVi;
                     Entity.IdCatalogoFichaAg = info.IdCatalogoFichaAg;
-                    Entity.IdCatalogoFichaEl = info.IdCatalogoFichaEl;
-                    Entity.IdCatalogoFichaHe = info.IdCatalogoFichaHe;
+                    Entity.TieneElectricidad = info.TieneElectricidad;
+                    Entity.TieneHermanos = info.TieneHermanos;
                     Entity.NombreHermanos = info.NombreHermanos;
                     Entity.SueldoPadre = info.SueldoPadre;
                     Entity.SueldoMadre = info.SueldoMadre;

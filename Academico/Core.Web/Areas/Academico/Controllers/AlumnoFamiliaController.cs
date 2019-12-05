@@ -21,6 +21,8 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
         aca_Catalogo_Bus bus_aca_catalogo = new aca_Catalogo_Bus();
+        tb_profesion_Bus bus_profesion = new tb_profesion_Bus();
+        aca_CatalogoFicha_Bus bus_catalogo_ficha = new aca_CatalogoFicha_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -36,6 +38,9 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_tipo_discapacidad = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODISCAP), false);
             var lst_parentezco = bus_aca_catalogo.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.PAREN),false);
             lst_tipo_discapacidad.Add(new tb_Catalogo_Info { CodCatalogo = "", ca_descripcion = "" });
+            var lst_instruccion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTRUCCION), false);
+            var lst_profesion = bus_profesion.GetList(false);
+            lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "" });
 
             ViewBag.lst_sexo = lst_sexo;
             ViewBag.lst_estado_civil = lst_estado_civil;
@@ -44,6 +49,8 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_tipo_sangre = lst_tipo_sangre;
             ViewBag.lst_tipo_discapacidad = lst_tipo_discapacidad;
             ViewBag.lst_parentezco = lst_parentezco;
+            ViewBag.lst_profesion = lst_profesion;
+            ViewBag.lst_instruccion = lst_instruccion;
         }
 
         private bool validar(aca_Familia_Info info, ref string msg)
@@ -176,7 +183,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_telfono_Contacto = model.pe_telfono_Contacto,
                 pe_correo = model.Correo,
                 pe_celular = model.Celular,
-                pe_direccion = model.Direccion
+                pe_direccion = model.Direccion,
+                IdProfesion = model.IdProfesion,
             };
 
             model.info_persona= info_persona_familia;
@@ -206,6 +214,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 return RedirectToAction("Index", new { IdEmpresa = IdEmpresa, IdAlumno = IdAlumno });
 
             model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
@@ -240,7 +249,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_telfono_Contacto = model.pe_telfono_Contacto,
                 pe_correo = model.Correo,
                 pe_celular = model.Celular,
-                pe_direccion = model.Direccion
+                pe_direccion = model.Direccion,
+                IdProfesion = model.IdProfesion
             };
 
             model.info_persona = info_persona_familia;

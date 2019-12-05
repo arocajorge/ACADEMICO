@@ -33,7 +33,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_AnioLectivo_Sede_NivelAcademico> aca_AnioLectivo_Sede_NivelAcademico { get; set; }
         public virtual DbSet<aca_Catalogo> aca_Catalogo { get; set; }
         public virtual DbSet<aca_CatalogoTipo> aca_CatalogoTipo { get; set; }
-        public virtual DbSet<aca_Familia> aca_Familia { get; set; }
         public virtual DbSet<aca_Jornada> aca_Jornada { get; set; }
         public virtual DbSet<aca_MateriaGrupo> aca_MateriaGrupo { get; set; }
         public virtual DbSet<aca_Menu> aca_Menu { get; set; }
@@ -59,11 +58,9 @@ namespace Core.Data.Base
         public virtual DbSet<aca_AnioLectivo_Curso_Paralelo> aca_AnioLectivo_Curso_Paralelo { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Curso_Paralelo> vwaca_AnioLectivo_Curso_Paralelo { get; set; }
         public virtual DbSet<aca_Menu_x_seg_usuario> aca_Menu_x_seg_usuario { get; set; }
-        public virtual DbSet<aca_Alumno> aca_Alumno { get; set; }
         public virtual DbSet<aca_Matricula> aca_Matricula { get; set; }
         public virtual DbSet<aca_MecanismoDePago> aca_MecanismoDePago { get; set; }
         public virtual DbSet<aca_PermisoMatricula> aca_PermisoMatricula { get; set; }
-        public virtual DbSet<vwaca_Alumno> vwaca_Alumno { get; set; }
         public virtual DbSet<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
         public virtual DbSet<aca_AnioLectivo_Rubro> aca_AnioLectivo_Rubro { get; set; }
         public virtual DbSet<aca_Rubro> aca_Rubro { get; set; }
@@ -79,12 +76,15 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Materia> aca_Materia { get; set; }
         public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
         public virtual DbSet<vwaca_MecanismoDePago> vwaca_MecanismoDePago { get; set; }
-        public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
         public virtual DbSet<aca_AlumnoRetiro> aca_AlumnoRetiro { get; set; }
         public virtual DbSet<vwaca_AlumnoRetiro> vwaca_AlumnoRetiro { get; set; }
         public virtual DbSet<aca_CatalogoFicha> aca_CatalogoFicha { get; set; }
         public virtual DbSet<aca_CatalogoTipoFicha> aca_CatalogoTipoFicha { get; set; }
+        public virtual DbSet<aca_Familia> aca_Familia { get; set; }
         public virtual DbSet<aca_SocioEconomico> aca_SocioEconomico { get; set; }
+        public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
+        public virtual DbSet<aca_Alumno> aca_Alumno { get; set; }
+        public virtual DbSet<vwaca_Alumno> vwaca_Alumno { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

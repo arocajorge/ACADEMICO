@@ -183,11 +183,51 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="Correo">Correo</label>
                     @Html.TextBoxFor(q => q.Correo, new { @class = "form-control", @id = "Correo" })
                     @Html.ValidationMessageFor(q => q.Correo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="bo_EsBodega"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.CasaPropia, settings =>
+                            {
+                                settings.Name = "CasaPropia";
+                                settings.Text = "Tiene casa propia";
+                            }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.CasaPropia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="bo_EsBodega"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.VehiculoPropio, settings =>
+                            {
+                                settings.Name = "VehiculoPropio";
+                                settings.Text = "Tiene vehiculo propio";
+                            }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.VehiculoPropio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Correo">Marca</label>
+                    @Html.TextBoxFor(q => q.Marca, new { @class = "form-control", @id = "Marca" })
+                    @Html.ValidationMessageFor(q => q.Marca, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Correo">Modelo</label>
+                    @Html.TextBoxFor(q => q.Modelo, new { @class = "form-control", @id = "Modelo" })
+                    @Html.ValidationMessageFor(q => q.Modelo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -199,6 +239,75 @@
                     <label for="Direccion">Dirección</label>
                     @Html.TextAreaFor(q => q.Direccion, new { @class = "form-control", @rows = "2", @id = "Direccion" })
                     @Html.ValidationMessageFor(q => q.Direccion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4>Datos de trabajo</h4><hr />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Correo">Empresa donde trabaja</label>
+                    @Html.TextBoxFor(q => q.EmpresaTrabajo, new { @class = "form-control", @id = "EmpresaTrabajo" })
+                    @Html.ValidationMessageFor(q => q.EmpresaTrabajo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEstadoCivil">Instrucción</label>
+                    @Html.DropDownListFor(q => q.IdCatalogoFichaInst, new SelectList(ViewBag.lst_instruccion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaInst" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEstadoCivil">Profesión</label>
+                    @Html.DropDownListFor(q => q.IdProfesion, new SelectList(ViewBag.lst_profesion, "IdProfesion", "Descripcion"), new { @class = "form-control", @id = "IdProfesion" })
+                    @Html.ValidationMessageFor(q => q.IdProfesion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Correo">Cargo</label>
+                    @Html.TextBoxFor(q => q.CargoTrabajo, new { @class = "form-control", @id = "CargoTrabajo" })
+                    @Html.ValidationMessageFor(q => q.CargoTrabajo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="Correo">Telefono</label>
+                    @Html.TextBoxFor(q => q.TelefonoTrabajo, new { @class = "form-control", @id = "TelefonoTrabajo" })
+                    @Html.ValidationMessageFor(q => q.TelefonoTrabajo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Correo">Años de servicio</label>
+                    @Html.TextBoxFor(q => q.AniosServicio, new { @class = "form-control", @id = "AniosServicio" })
+                    @Html.ValidationMessageFor(q => q.AniosServicio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Correo">Ingreso mensual</label>
+                    @Html.TextBoxFor(q => q.IngresoMensual, new { @class = "form-control", @id = "IngresoMensual" })
+                    @Html.ValidationMessageFor(q => q.IngresoMensual, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Correo">Dirección</label>
+                    @Html.TextBoxFor(q => q.DireccionTrabajo, new { @class = "form-control", @id = "DireccionTrabajo" })
+                    @Html.ValidationMessageFor(q => q.DireccionTrabajo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

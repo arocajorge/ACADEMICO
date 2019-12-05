@@ -25,6 +25,8 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_alumno_List Lista_Alumno = new aca_alumno_List();
         aca_AlumnoDocumento_List ListaAlumnoDocumento = new aca_AlumnoDocumento_List();
         aca_SocioEconomico_Bus bus_socioeconomico = new aca_SocioEconomico_Bus();
+        tb_profesion_Bus bus_profesion = new tb_profesion_Bus();
+        aca_CatalogoFicha_Bus bus_catalogo_ficha = new aca_CatalogoFicha_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         public static UploadedFile file { get; set; }
@@ -73,7 +75,10 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_tipo_naturaleza = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPONATPER), false);
             var lst_tipo_sangre = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPOSANGRE), false);
             var lst_tipo_discapacidad = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODISCAP), false);
+            var lst_instruccion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTRUCCION), false);
             lst_tipo_discapacidad.Add(new tb_Catalogo_Info { CodCatalogo = "", ca_descripcion = ""});
+            var lst_profesion = bus_profesion.GetList(false);
+            lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "" });
 
             ViewBag.lst_sexo = lst_sexo;
             ViewBag.lst_estado_civil = lst_estado_civil;
@@ -81,6 +86,8 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_tipo_naturaleza = lst_tipo_naturaleza;
             ViewBag.lst_tipo_sangre = lst_tipo_sangre;
             ViewBag.lst_tipo_discapacidad = lst_tipo_discapacidad;
+            ViewBag.lst_profesion = lst_profesion;
+            ViewBag.lst_instruccion = lst_instruccion;
         }
 
         private bool validar(aca_Alumno_Info info, ref string msg)
@@ -150,7 +157,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     pe_cedulaRuc = (model.pe_cedulaRuc_padre=="" ? null : model.pe_cedulaRuc_padre),
                     pe_nombre = model.pe_nombre_padre,
                     pe_apellido = model.pe_apellido_padre,
-                    pe_nombreCompleto = model.pe_nombreCompleto,
+                    pe_nombreCompleto = model.pe_nombreCompleto_padre,
                     pe_razonSocial = model.pe_razonSocial_padre,
                     pe_sexo = model.pe_sexo_padre,
                     CodCatalogoCONADIS = model.CodCatalogoCONADIS_padre,
@@ -161,7 +168,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     pe_correo = model.Correo_padre,
                     pe_celular = model.Celular_padre,
                     pe_direccion = model.Direccion_padre,
-                    IdEstadoCivil = model.IdEstadoCivil_padre
+                    IdEstadoCivil = model.IdEstadoCivil_padre,
+                    IdProfesion = model.IdProfesion_padre
                 };        
 
             return info_persona;
@@ -177,7 +185,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     pe_cedulaRuc = (model.pe_cedulaRuc_madre== "" ? null : model.pe_cedulaRuc_madre),
                     pe_nombre = model.pe_nombre_madre,
                     pe_apellido = model.pe_apellido_madre,
-                    pe_nombreCompleto = model.pe_nombreCompleto,
+                    pe_nombreCompleto = model.pe_nombreCompleto_madre,
                     pe_razonSocial = model.pe_razonSocial_madre,
                     pe_sexo = model.pe_sexo_madre,
                     CodCatalogoCONADIS = model.CodCatalogoCONADIS_madre,
@@ -188,10 +196,44 @@ namespace Core.Web.Areas.Academico.Controllers
                     pe_correo = model.Correo_madre,
                     pe_celular = model.Celular_madre,
                     pe_direccion = model.Direccion_madre,
-                    IdEstadoCivil = model.IdEstadoCivil_madre
-                };
+                    IdEstadoCivil = model.IdEstadoCivil_madre,
+                    IdProfesion = model.IdProfesion_padre
+            };
 
             return info_persona;
+        }
+        #endregion
+
+        #region Combos
+        public ActionResult ComboBoxPartial_Pais()
+        {
+            return PartialView("_ComboBoxPartial_Pais", new aca_Alumno_Info());
+        }
+        public ActionResult ComboBoxPartial_Region()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            return PartialView("_ComboBoxPartial_Region", new aca_Alumno_Info { IdPais = IdPais });
+        }
+        public ActionResult ComboBoxPartial_Provincia()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            string Cod_Region= (Request.Params["Cod_Region"] != null) ? Convert.ToString(Request.Params["Cod_Region"]) : "";
+            return PartialView("_ComboBoxPartial_Provincia", new aca_Alumno_Info { IdPais = IdPais, Cod_Region= Cod_Region });
+        }
+        public ActionResult ComboBoxPartial_Ciudad()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region"] != null) ? Convert.ToString(Request.Params["Cod_Region"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia"] != null) ? Convert.ToString(Request.Params["IdProvincia"]) : "";
+            return PartialView("_ComboBoxPartial_Ciudad", new aca_Alumno_Info { IdPais = IdPais, Cod_Region = Cod_Region, IdProvincia= IdProvincia });
+        }
+        public ActionResult ComboBoxPartial_Parroquia()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region"] != null) ? Convert.ToString(Request.Params["Cod_Region"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia"] != null) ? Convert.ToString(Request.Params["IdProvincia"]) : "";
+            string IdCiudad = (Request.Params["IdCiudad"] != null) ? Convert.ToString(Request.Params["IdCiudad"]) : "";
+            return PartialView("_ComboBoxPartial_Parroquia", new aca_Alumno_Info { IdPais = IdPais, Cod_Region = Cod_Region, IdProvincia = IdProvincia, IdCiudad = IdCiudad });
         }
         #endregion
 
@@ -220,6 +262,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 pe_Naturaleza = "NATU",
                 CodCatalogoCONADIS = "",
+                IdProfesion_madre=0,
+                IdPersona_padre=0,
                 FechaIngreso = DateTime.Now,
                 alu_foto = new byte[0],
                 lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>()
@@ -333,6 +377,18 @@ namespace Core.Web.Areas.Academico.Controllers
             model.PorcentajeDiscapacidad_padre = info_fam_padre.PorcentajeDiscapacidad;
             model.NumeroCarnetConadis_padre = info_fam_padre.NumeroCarnetConadis;
             model.CodCatalogoCONADIS_padre = (info_fam_padre == null || info_fam_padre.CodCatalogoCONADIS == null ? "" : info_fam_padre.CodCatalogoCONADIS);
+            model.IdProfesion_padre = (info_fam_padre == null || info_fam_padre.IdProfesion == 0 ? 0 : info_fam_padre.IdProfesion);
+            model.IdCatalogoFichaInst_padre = info_fam_padre.IdCatalogoFichaInst;
+            model.EmpresaTrabajo_padre = info_fam_padre.EmpresaTrabajo;
+            model.DireccionTrabajo_padre = info_fam_padre.DireccionTrabajo;
+            model.TelefonoTrabajo_padre = info_fam_padre.TelefonoTrabajo;
+            model.CargoTrabajo_padre = info_fam_padre.CargoTrabajo;
+            model.AniosServicio_padre = info_fam_padre.AniosServicio;
+            model.IngresoMensual_padre = info_fam_padre.IngresoMensual;
+            model.VehiculoPropio_padre = info_fam_padre.VehiculoPropio;
+            model.Marca_padre = info_fam_padre.Marca;
+            model.Modelo_padre = info_fam_padre.Modelo;
+            model.CasaPropia_padre = info_fam_padre.CasaPropia;
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
             model.SeFactura_madre = info_fam_madre.SeFactura;
@@ -354,6 +410,18 @@ namespace Core.Web.Areas.Academico.Controllers
             model.PorcentajeDiscapacidad_madre = info_fam_madre.PorcentajeDiscapacidad;
             model.NumeroCarnetConadis_madre = info_fam_madre.NumeroCarnetConadis;
             model.CodCatalogoCONADIS_madre = (info_fam_madre == null || info_fam_madre.CodCatalogoCONADIS == null ? "" : info_fam_madre.CodCatalogoCONADIS);
+            model.IdProfesion_madre = (info_fam_madre == null || info_fam_madre.IdProfesion == 0 ? 0 : info_fam_madre.IdProfesion);
+            model.IdCatalogoFichaInst_madre = info_fam_madre.IdCatalogoFichaInst;
+            model.EmpresaTrabajo_madre = info_fam_madre.EmpresaTrabajo;
+            model.DireccionTrabajo_madre = info_fam_madre.DireccionTrabajo;
+            model.TelefonoTrabajo_madre = info_fam_madre.TelefonoTrabajo;
+            model.CargoTrabajo_madre = info_fam_madre.CargoTrabajo;
+            model.AniosServicio_madre = info_fam_madre.AniosServicio;
+            model.IngresoMensual_madre = info_fam_madre.IngresoMensual;
+            model.VehiculoPropio_madre = info_fam_madre.VehiculoPropio;
+            model.Marca_madre = info_fam_madre.Marca;
+            model.Modelo_madre = info_fam_madre.Modelo;
+            model.CasaPropia_madre = info_fam_madre.CasaPropia;
 
             if (model == null)
                 return RedirectToAction("Index");
@@ -469,6 +537,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.PorcentajeDiscapacidad_padre = info_fam_padre.PorcentajeDiscapacidad;
             model.NumeroCarnetConadis_padre = info_fam_padre.NumeroCarnetConadis;
             model.CodCatalogoCONADIS_padre = (info_fam_padre.CodCatalogoCONADIS == null ? "" : info_fam_padre.CodCatalogoCONADIS);
+            model.IdProfesion_padre = (info_fam_padre == null || info_fam_padre.IdProfesion == 0 ? 0 : info_fam_padre.IdProfesion);
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
             model.SeFactura_madre = info_fam_madre.SeFactura;
@@ -487,6 +556,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.PorcentajeDiscapacidad_madre = info_fam_madre.PorcentajeDiscapacidad;
             model.NumeroCarnetConadis_madre = info_fam_madre.NumeroCarnetConadis;
             model.CodCatalogoCONADIS_madre = (info_fam_madre.CodCatalogoCONADIS == null ? "" : info_fam_madre.CodCatalogoCONADIS);
+            model.IdProfesion_madre = (info_fam_madre == null || info_fam_madre.IdProfesion == 0 ? 0 : info_fam_madre.IdProfesion);
 
             if (model == null)
                 return RedirectToAction("Index");

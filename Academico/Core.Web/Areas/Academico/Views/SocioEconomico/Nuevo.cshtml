@@ -74,58 +74,26 @@
                     @Html.ValidationMessageFor(q => q.IdCatalogoFichaAg, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <div class="form-group">
-                    <div class="form-group">
-                        <label for="descuento_mensual">Luz electrica</label>
-                        @Html.DevExpress().RadioButtonFor(q => q.SI_ENERG, settings =>
-                   {
-                       settings.Name = "SI_ENERG";
-                       settings.GroupName = "energia_electrica";
-                       settings.Text = "SI";
-
-                   }).GetHtml()
-                    </div>
+                    <label for="bo_EsBodega"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.TieneElectricidad, settings =>
+                            {
+                                settings.Name = "TieneElectricidad";
+                                settings.Text = "Luz electrica";
+                            }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.TieneElectricidad, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <div class="form-group">
-                        <label for="descuento_quincena">&nbsp;</label>
-                        @Html.DevExpress().RadioButtonFor(q => q.NO_ENERG, settings =>
-                   {
-                       settings.Name = "NO_ENERG";
-                       settings.GroupName = "energia_electrica";
-                       settings.Text = "NO";
-                   }).GetHtml()
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-offset-1 col-md-1">
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="tiene_hermanos">Hermanos</label>
-                        @Html.DevExpress().RadioButtonFor(q => q.SI_HERM, settings =>
-                   {
-                       settings.Name = "SI_HERM";
-                       settings.GroupName = "tiene_hermanos";
-                       settings.Text = "SI";
-
-                   }).GetHtml()
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <div class="form-group">
-                        <label for="tiene_hermanos">&nbsp;</label>
-                        @Html.DevExpress().RadioButtonFor(q => q.NO_HERM, settings =>
-                   {
-                       settings.Name = "NO_HERM";
-                       settings.GroupName = "tiene_hermanos";
-                       settings.Text = "NO";
-                   }).GetHtml()
-                    </div>
+                    <label for="bo_EsBodega"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.TieneHermanos, settings =>
+                            {
+                                settings.Name = "TieneHermanos";
+                                settings.Text = "Tiene hermanos en la institución";
+                            }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.TieneHermanos, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

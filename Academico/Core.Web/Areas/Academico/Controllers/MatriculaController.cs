@@ -466,8 +466,8 @@ namespace Core.Web.Areas.Academico.Controllers
             int Plantilla = 0;
             int Periodo = 0;
             int Rubro = 0;
-            var lst_DetallePlantilla = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var lst_DetalleDocumentos = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var lst_DetallePlantilla = ListaMatriculaRubro.get_list(Convert.ToDecimal(IdTransaccionSession));
+            var lst_DetalleDocumentos = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(IdTransaccionSession));
 
             if (IdAnio!=0 && IdAlumno != 0 && IdComboCurso!="" && IdParalelo!=0 && IdPlantilla!=0 && IdMecanismo!=0 && IdMecanismoDet!=0 && lst_DetallePlantilla.Count>0 && lst_DetalleDocumentos.Count >0)
             {

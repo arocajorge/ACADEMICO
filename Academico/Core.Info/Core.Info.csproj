@@ -83,9 +83,14 @@
     <Compile Include="Academico\aca_SocioEconomico_Info.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Info.cs" />
     <Compile Include="General\tb_Catalogo_Info.cs" />
+    <Compile Include="General\tb_ciudad_Info.cs" />
     <Compile Include="General\tb_empresa_Info.cs" />
+    <Compile Include="General\tb_pais_Info.cs" />
     <Compile Include="General\tb_parroquia_Info.cs" />
     <Compile Include="General\tb_persona_Info.cs" />
+    <Compile Include="General\tb_profesion_Info.cs" />
+    <Compile Include="General\tb_provincia_Info.cs" />
+    <Compile Include="General\tb_region_Info.cs" />
     <Compile Include="General\tb_sis_Impuesto_Info.cs" />
     <Compile Include="General\tb_sucursal_Info.cs" />
     <Compile Include="Helps\cl_enumeradores.cs" />

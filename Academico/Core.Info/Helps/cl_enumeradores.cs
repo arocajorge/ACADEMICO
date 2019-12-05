@@ -109,21 +109,10 @@ namespace Core.Info.Helps
             VIVIENDA = 1,
             TIPOVIVIENDA = 2,
             AGUA = 3,
-            ENERGIA = 4,
-            HERMANOS = 5,
-            MOTIVOING = 6,
-            INSTITUCION = 7,
-            ESTUDIOS = 8
-        }
-        public enum eCatalogoSocioEconomico_Hermanos
-        {
-            SI_HERM = 11,
-            NO_HERM = 12,
-        }
-        public enum eCatalogoSocioEconomico_Energia
-        {
-            SI_ENERG = 9,
-            NO_ENERG = 10,
+            MOTIVOING = 4,
+            INSTITUCION = 5,
+            ESTUDIOS = 6,
+            INSTRUCCION = 7
         }
     }
 }

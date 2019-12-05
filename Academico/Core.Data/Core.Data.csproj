@@ -334,10 +334,22 @@
     <Compile Include="Base\tb_empresa.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\tb_pais.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_parroquia.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\tb_persona.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\tb_profesion.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\tb_provincia.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\tb_region.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\tb_sis_Impuesto.cs">
@@ -406,11 +418,31 @@
     <Compile Include="Base\vwseg_usuario_x_aca_Sede.cs">
       <DependentUpon>ModelSeguridadAcceso.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwtb_Ciudad.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwtb_ciudad_id.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwtb_pais.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwtb_parroquia.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwtb_provincia.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\fa_TerminoPago_Data.cs" />
     <Compile Include="General\tb_Catalogo_Data.cs" />
+    <Compile Include="General\tb_ciudad_Data.cs" />
     <Compile Include="General\tb_empresa_Data.cs" />
+    <Compile Include="General\tb_pais_Data.cs" />
     <Compile Include="General\tb_parroquia_Data.cs" />
     <Compile Include="General\tb_persona_Data.cs" />
+    <Compile Include="General\tb_profesion_Data.cs" />
+    <Compile Include="General\tb_provincia_Data.cs" />
+    <Compile Include="General\tb_region_Data.cs" />
     <Compile Include="General\tb_sis_Impuesto_Data.cs" />
     <Compile Include="General\tb_sucursal_Data.cs" />
     <Compile Include="Inventario\in_Producto_Data.cs" />

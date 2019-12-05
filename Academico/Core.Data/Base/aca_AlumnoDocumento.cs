@@ -19,7 +19,7 @@ namespace Core.Data.Base
         public int IdDocumento { get; set; }
         public bool EnArchivo { get; set; }
     
-        public virtual aca_Alumno aca_Alumno { get; set; }
         public virtual aca_Documento aca_Documento { get; set; }
+        public virtual aca_Alumno aca_Alumno { get; set; }
     }
 }

@@ -40,5 +40,17 @@ namespace Core.Data.Base
         public int Secuencia { get; set; }
         public bool EsRepresentante { get; set; }
         public string pe_razonSocial { get; set; }
+        public Nullable<int> IdProfesion { get; set; }
+        public int IdCatalogoFichaInst { get; set; }
+        public string EmpresaTrabajo { get; set; }
+        public string DireccionTrabajo { get; set; }
+        public string TelefonoTrabajo { get; set; }
+        public string CargoTrabajo { get; set; }
+        public Nullable<int> AniosServicio { get; set; }
+        public Nullable<double> IngresoMensual { get; set; }
+        public bool VehiculoPropio { get; set; }
+        public string Marca { get; set; }
+        public string Modelo { get; set; }
+        public bool CasaPropia { get; set; }
     }
 }

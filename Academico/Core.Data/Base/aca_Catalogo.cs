@@ -17,9 +17,9 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public aca_Catalogo()
         {
+            this.aca_PermisoMatricula = new HashSet<aca_PermisoMatricula>();
             this.aca_Alumno = new HashSet<aca_Alumno>();
             this.aca_Alumno1 = new HashSet<aca_Alumno>();
-            this.aca_PermisoMatricula = new HashSet<aca_PermisoMatricula>();
         }
     
         public int IdCatalogo { get; set; }
@@ -38,10 +38,10 @@ namespace Core.Data.Base
     
         public virtual aca_CatalogoTipo aca_CatalogoTipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_PermisoMatricula> aca_PermisoMatricula { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Alumno> aca_Alumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Alumno> aca_Alumno1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_PermisoMatricula> aca_PermisoMatricula { get; set; }
     }
 }

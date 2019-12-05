@@ -25,6 +25,14 @@ namespace Core.Info.Academico
         public int IdCatalogoESTALU { get; set; }
         public string MotivoNoMatricula { get; set; }
         public System.DateTime FechaIngreso { get; set; }
+        [StringLength(300, MinimumLength = 1, ErrorMessage = "el campo descripción debe tener mínimo 1 caracter y máximo 300")]
+        public string LugarNacimiento { get; set; }
+        public string IdPais { get; set; }
+        public string Cod_Region { get; set; }
+        public string IdProvincia { get; set; }
+        public string IdCiudad { get; set; }
+        public string IdParroquia { get; set; }
+        public string Sector { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
@@ -91,6 +99,24 @@ namespace Core.Info.Academico
         public string NumeroCarnetConadis_padre { get; set; }
         public bool SeFactura_padre { get; set; }
         public bool EsRepresentante_padre { get; set; }
+        public int IdCatalogoFichaInst_padre { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo empresa debe tener máximo 200")]
+        public string EmpresaTrabajo_padre { get; set; }
+        [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo dirección debe tener máximo 500")]
+        public string DireccionTrabajo_padre { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo telefono debe tener máximo 200")]
+        public string TelefonoTrabajo_padre { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo cargo debe tener máximo 200")]
+        public string CargoTrabajo_padre { get; set; }
+        public Nullable<int> AniosServicio_padre { get; set; }
+        public Nullable<double> IngresoMensual_padre { get; set; }
+        public bool VehiculoPropio_padre { get; set; }
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo marca debe tener máximo 50")]
+        public string Marca_padre { get; set; }
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo modelo debe tener máximo 50")]
+        public string Modelo_padre { get; set; }
+        public bool CasaPropia_padre { get; set; }
+        public int IdProfesion_padre { get; set; }
         public bool info_valido_padre { get; set; }
         #endregion
 
@@ -122,6 +148,24 @@ namespace Core.Info.Academico
         public string NumeroCarnetConadis_madre { get; set; }
         public bool SeFactura_madre { get; set; }
         public bool EsRepresentante_madre { get; set; }
+        public int IdCatalogoFichaInst_madre { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo empresa debe tener máximo 200")]
+        public string EmpresaTrabajo_madre { get; set; }
+        [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo dirección debe tener máximo 500")]
+        public string DireccionTrabajo_madre { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo telefono debe tener máximo 200")]
+        public string TelefonoTrabajo_madre { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo cargo debe tener máximo 200")]
+        public string CargoTrabajo_madre { get; set; }
+        public Nullable<int> AniosServicio_madre { get; set; }
+        public Nullable<double> IngresoMensual_madre { get; set; }
+        public bool VehiculoPropio_madre { get; set; }
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo marca debe tener máximo 50")]
+        public string Marca_madre { get; set; }
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo modelo debe tener máximo 50")]
+        public string Modelo_madre { get; set; }
+        public bool CasaPropia_madre { get; set; }
+        public int IdProfesion_madre { get; set; }
         public bool info_valido_madre { get; set; }
         #endregion
 

@@ -22,6 +22,17 @@ namespace Core.Data.Base
         public string Direccion { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
+        public int IdCatalogoFichaInst { get; set; }
+        public string EmpresaTrabajo { get; set; }
+        public string DireccionTrabajo { get; set; }
+        public string TelefonoTrabajo { get; set; }
+        public string CargoTrabajo { get; set; }
+        public Nullable<int> AniosServicio { get; set; }
+        public Nullable<double> IngresoMensual { get; set; }
+        public bool VehiculoPropio { get; set; }
+        public string Marca { get; set; }
+        public string Modelo { get; set; }
+        public bool CasaPropia { get; set; }
         public bool SeFactura { get; set; }
         public bool EsRepresentante { get; set; }
         public string IdUsuarioCreacion { get; set; }
@@ -32,6 +43,7 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
+        public virtual aca_CatalogoFicha aca_CatalogoFicha { get; set; }
         public virtual aca_Alumno aca_Alumno { get; set; }
     }
 }

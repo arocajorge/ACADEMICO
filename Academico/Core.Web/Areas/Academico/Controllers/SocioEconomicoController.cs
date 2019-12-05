@@ -53,8 +53,6 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_tipo_vivienda = lst_tipo_vivienda;
             var lst_agua = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.AGUA), false);
             ViewBag.lst_agua = lst_agua;
-            var lst_energia = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.ENERGIA), false);
-            ViewBag.lst_energia = lst_energia;
             var lst_ing_institucion = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.MOTIVOING), false);
             ViewBag.lst_ing_institucion = lst_ing_institucion;
             var lst_institucion = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTITUCION), false);
@@ -90,8 +88,6 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Nuevo(aca_SocioEconomico_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
-            model.IdCatalogoFichaHe = (model.SI_HERM == true ? Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Hermanos.SI_HERM) : Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Hermanos.NO_HERM));
-            model.IdCatalogoFichaEl = (model.SI_ENERG == true ? Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Energia.SI_ENERG) : Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Energia.NO_ENERG));
 
             if (!bus_socio_economico.GuardarDB(model))
             {
@@ -113,10 +109,6 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_SocioEconomico_Info model = bus_socio_economico.GetInfo(IdEmpresa, IdSocioEconomico);
-            model.SI_HERM = (model.IdCatalogoFichaHe == Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Hermanos.SI_HERM) ? true: false);
-            model.NO_HERM = (model.IdCatalogoFichaHe == Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Hermanos.NO_HERM) ? true : false);
-            model.SI_ENERG = (model.IdCatalogoFichaEl == Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Energia.SI_ENERG) ? true : false);
-            model.NO_ENERG = (model.IdCatalogoFichaEl == Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Energia.NO_ENERG) ? true : false);
 
             if (model == null)
                 return RedirectToAction("Index", "Matricula");
@@ -131,8 +123,6 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Modificar(aca_SocioEconomico_Info model)
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
-            model.IdCatalogoFichaHe = (model.SI_HERM == true ? Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Hermanos.SI_HERM) : Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Hermanos.NO_HERM));
-            model.IdCatalogoFichaEl = (model.SI_ENERG == true ? Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Energia.SI_ENERG) : Convert.ToInt32(cl_enumeradores.eCatalogoSocioEconomico_Energia.NO_ENERG));
 
             if (!bus_socio_economico.ModificarDB(model))
             {
