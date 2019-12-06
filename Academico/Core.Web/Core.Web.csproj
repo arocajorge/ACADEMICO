@@ -230,6 +230,7 @@
     <Compile Include="Areas\Academico\Controllers\SedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\NivelPorSedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\SocioEconomicoController.cs" />
+    <Compile Include="Areas\Facturacion\FacturacionAreaRegistration.cs" />
     <Compile Include="Areas\Reportes\Controllers\AcademicoReportesController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
     <Compile Include="Areas\SeguridadAcceso\SeguridadAccesoAreaRegistration.cs" />
@@ -7631,6 +7632,7 @@
     <Content Include="Areas\Reportes\Views\web.config" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_001.cshtml" />
     <Content Include="Areas\Reportes\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Facturacion\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -7669,6 +7671,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
+    <Folder Include="Areas\Facturacion\Controllers\" />
+    <Folder Include="Areas\Facturacion\Models\" />
+    <Folder Include="Areas\Facturacion\Views\Shared\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Views\Shared\" />

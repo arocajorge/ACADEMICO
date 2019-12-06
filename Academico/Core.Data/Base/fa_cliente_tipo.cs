@@ -12,21 +12,27 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class fa_TerminoPago
+    public partial class fa_cliente_tipo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public fa_TerminoPago()
+        public fa_cliente_tipo()
         {
             this.fa_cliente = new HashSet<fa_cliente>();
         }
     
-        public string IdTerminoPago { get; set; }
-        public string nom_TerminoPago { get; set; }
-        public int Num_Coutas { get; set; }
-        public int Dias_Vct { get; set; }
-        public bool estado { get; set; }
-        public Nullable<bool> AplicaDescuentoNomina { get; set; }
-        public string CodigoRubroDescto { get; set; }
+        public int IdEmpresa { get; set; }
+        public int Idtipo_cliente { get; set; }
+        public string Cod_cliente_tipo { get; set; }
+        public string Descripcion_tip_cliente { get; set; }
+        public string IdCtaCble_CXC_Cred { get; set; }
+        public string IdUsuario { get; set; }
+        public Nullable<System.DateTime> Fecha_Transac { get; set; }
+        public string IdUsuarioUltMod { get; set; }
+        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
+        public string IdUsuarioUltAnu { get; set; }
+        public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        public string MotivoAnula { get; set; }
+        public string Estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_cliente> fa_cliente { get; set; }

@@ -444,6 +444,19 @@
                         </div>
                     </div>
                 </div>
+                <div id="DatosFacturacion">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="info_persona.pe_apellido">Razón Social</label>
+                                    @Html.TextBoxFor(q => q.pe_razonSocial_padre, new { @class = "form-control", @id = "pe_razonSocial_padre" })
+                                    @Html.ValidationMessageFor(q => q.pe_razonSocial_padre, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-2">

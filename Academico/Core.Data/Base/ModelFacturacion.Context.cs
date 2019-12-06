@@ -26,5 +26,15 @@ namespace Core.Data.Base
         }
     
         public virtual DbSet<fa_TerminoPago> fa_TerminoPago { get; set; }
+        public virtual DbSet<fa_cliente> fa_cliente { get; set; }
+        public virtual DbSet<fa_catalogo> fa_catalogo { get; set; }
+        public virtual DbSet<fa_catalogo_tipo> fa_catalogo_tipo { get; set; }
+        public virtual DbSet<fa_cliente_contactos> fa_cliente_contactos { get; set; }
+        public virtual DbSet<fa_cliente_tipo> fa_cliente_tipo { get; set; }
+        public virtual DbSet<fa_cliente_x_fa_Vendedor_x_sucursal> fa_cliente_x_fa_Vendedor_x_sucursal { get; set; }
+        public virtual DbSet<fa_formaPago> fa_formaPago { get; set; }
+        public virtual DbSet<fa_NivelDescuento> fa_NivelDescuento { get; set; }
+        public virtual DbSet<fa_parametro> fa_parametro { get; set; }
+        public virtual DbSet<fa_PuntoVta> fa_PuntoVta { get; set; }
     }
 }

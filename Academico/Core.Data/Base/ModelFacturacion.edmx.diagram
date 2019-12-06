@@ -6,6 +6,24 @@
     <edmx:Diagrams>
       <Diagram DiagramId="ef6d44e8c7cc425b9610c5a236e3cb4d" Name="Diagram1">
         <EntityTypeShape EntityType="ModelFacturacion.fa_TerminoPago" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_cliente" Width="1.5" PointX="3.125" PointY="4" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_cliente_fa_TerminoPago" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_catalogo" Width="1.5" PointX="9.625" PointY="1" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_catalogo_tipo" Width="1.5" PointX="7.375" PointY="2.125" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_cliente_contactos" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_cliente_tipo" Width="1.5" PointX="0.875" PointY="11.625" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_cliente_x_fa_Vendedor_x_sucursal" Width="1.5" PointX="5.375" PointY="10.625" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_formaPago" Width="1.5" PointX="0.875" PointY="4.875" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_NivelDescuento" Width="1.5" PointX="0.875" PointY="8.5" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_parametro" Width="1.5" PointX="5.375" PointY="1.5" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_PuntoVta" Width="1.5" PointX="7.375" PointY="6.75" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_catalogo_fa_catalogo_tipo" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_cliente_contactos_fa_cliente" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_cliente_fa_cliente_tipo" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_cliente_fa_forma_pago" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_cliente_fa_NivelDescuento" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_parametro_fa_cliente" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
