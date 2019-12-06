@@ -52,7 +52,7 @@ namespace Core.Info.Academico
         public string IdTipoDocumento { get; set; }
         [Required(ErrorMessage = "El campo naturaleza es obligatorio")]
         public string pe_Naturaleza { get; set; }
-        [Required(ErrorMessage = "El campo nombre completo es requerido")]
+        [Required(ErrorMessage = "El campo nombre completo es obligatorio")]
         [StringLength(200, MinimumLength = 2, ErrorMessage = "el campo nombre completo debe tener mínimo 2 caracter y máximo 200 caracteres")]
         public string pe_nombreCompleto { get; set; }
         [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
@@ -67,6 +67,7 @@ namespace Core.Info.Academico
         public string CodCatalogoSangre { get; set; }
         public string CodCatalogoCONADIS { get; set; }
         public Nullable<double> PorcentajeDiscapacidad { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 200 caracteres")]
         public string NumeroCarnetConadis { get; set; }
         public List<aca_AlumnoDocumento_Info> lst_alumno_documentos { get; set; }
         #endregion
@@ -76,7 +77,7 @@ namespace Core.Info.Academico
         public decimal IdPersona_padre { get; set; }
         public string IdTipoDocumento_padre { get; set; }
         public string pe_Naturaleza_padre { get; set; }
-        [Required(ErrorMessage = "El campo nombre completo es requerido")]
+        [Required(ErrorMessage = "El campo nombre completo es obligatorio")]
         [StringLength(200, MinimumLength = 2, ErrorMessage = "el campo nombre completo debe tener mínimo 2 caracter y máximo 200 caracteres")]
         public string pe_nombreCompleto_padre { get; set; }
         [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
@@ -96,6 +97,7 @@ namespace Core.Info.Academico
         public string CodCatalogoSangre_padre { get; set; }
         public string CodCatalogoCONADIS_padre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_padre { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 200 caracteres")]
         public string NumeroCarnetConadis_padre { get; set; }
         public bool SeFactura_padre { get; set; }
         public bool EsRepresentante_padre { get; set; }
@@ -125,7 +127,7 @@ namespace Core.Info.Academico
         public decimal IdPersona_madre { get; set; }
         public string IdTipoDocumento_madre { get; set; }
         public string pe_Naturaleza_madre { get; set; }
-        [Required(ErrorMessage = "El campo nombre completo es requerido")]
+        [Required(ErrorMessage = "El campo nombre completo es obligatorio")]
         [StringLength(200, MinimumLength = 2, ErrorMessage = "el campo nombre completo debe tener mínimo 2 caracter y máximo 200 caracteres")]
         public string pe_nombreCompleto_madre { get; set; }
         [StringLength(150, MinimumLength = 0, ErrorMessage = "el campo razón social debe tener máximo 150 caracteres")]
@@ -145,6 +147,7 @@ namespace Core.Info.Academico
         public string CodCatalogoSangre_madre { get; set; }
         public string CodCatalogoCONADIS_madre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_madre { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 200 caracteres")]
         public string NumeroCarnetConadis_madre { get; set; }
         public bool SeFactura_madre { get; set; }
         public bool EsRepresentante_madre { get; set; }

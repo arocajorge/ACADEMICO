@@ -56,7 +56,7 @@ namespace Core.Info.Academico
         public string IdTipoDocumento { get; set; }
         [Required(ErrorMessage = "El campo naturaleza es obligatorio")]
         public string pe_Naturaleza { get; set; }
-        [Required(ErrorMessage = "El campo nombre completo es requerido")]
+        [Required(ErrorMessage = "El campo nombre completo es obligatorio")]
         [StringLength(200, MinimumLength = 2, ErrorMessage = "el campo nombre completo debe tener mínimo 2 caracter y máximo 200 caracteres")]
         public string pe_nombreCompleto { get; set; }
         [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
@@ -74,6 +74,7 @@ namespace Core.Info.Academico
         public string CodCatalogoSangre { get; set; }
         public string CodCatalogoCONADIS { get; set; }
         public Nullable<double> PorcentajeDiscapacidad { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 200 caracteres")]
         public string NumeroCarnetConadis { get; set; }
         public string anio { get; set; }
         public string mes { get; set; }
