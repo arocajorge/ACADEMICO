@@ -29,6 +29,34 @@
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="50" />
           <Property Name="cod_categoria" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="in_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_egresoBodegaOrigen" Type="int" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_ingresoBodegaDestino" Type="int" Nullable="false" />
+          <Property Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" Type="int" Nullable="false" />
+          <Property Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" Type="int" Nullable="false" />
+          <Property Name="P_IdCtaCble_transitoria_transf_inven" Type="varchar" MaxLength="20" />
+          <Property Name="P_IdMovi_inven_tipo_default_ing" Type="int" Nullable="false" />
+          <Property Name="P_IdMovi_inven_tipo_default_egr" Type="int" Nullable="false" />
+          <Property Name="P_IdMovi_inven_tipo_ingreso_x_compra" Type="int" Nullable="false" />
+          <Property Name="P_Dias_menores_alerta_desde_fecha_actual_rojo" Type="int" Nullable="false" />
+          <Property Name="P_Dias_menores_alerta_desde_fecha_actual_amarillo" Type="int" Nullable="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="int" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_Cambio" Type="int" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_Consignacion" Type="int" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_elaboracion_egr" Type="int" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_elaboracion_ing" Type="int" Nullable="false" />
+          <Property Name="IdMotivo_Inv_elaboracion_ing" Type="int" />
+          <Property Name="IdMotivo_Inv_elaboracion_egr" Type="int" />
+          <Property Name="IdMovi_inven_tipo_ajuste_ing" Type="int" />
+          <Property Name="IdMovi_inven_tipo_ajuste_egr" Type="int" />
+          <Property Name="IdCatalogoEstadoAjuste" Type="varchar" MaxLength="15" />
+          <Property Name="IdMotivo_Inv_ajuste_ing" Type="int" />
+          <Property Name="IdMotivo_Inv_ajuste_egr" Type="int" />
+        </EntityType>
         <EntityType Name="in_presentacion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -83,6 +111,18 @@
           <Property Name="precio_1" Type="float" />
           <Property Name="se_distribuye" Type="bit" />
           <Property Name="pr_imagen" Type="image" />
+        </EntityType>
+        <EntityType Name="in_Producto_x_fa_NivelDescuento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdNivel" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdNivel" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="Porcentaje" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="in_ProductoTipo">
           <Key>
@@ -163,10 +203,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_in_Producto_x_fa_NivelDescuento_in_Producto">
+          <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="1" />
+          <End Role="in_Producto_x_fa_NivelDescuento" Type="Self.in_Producto_x_fa_NivelDescuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="in_Producto_x_fa_NivelDescuento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelInventarioStoreContainer">
           <EntitySet Name="in_categorias" EntityType="Self.in_categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="in_parametro" EntityType="Self.in_parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_presentacion" EntityType="Self.in_presentacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_Producto" EntityType="Self.in_Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="in_Producto_x_fa_NivelDescuento" EntityType="Self.in_Producto_x_fa_NivelDescuento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_ProductoTipo" EntityType="Self.in_ProductoTipo" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_in_Producto_in_categorias" Association="Self.FK_in_Producto_in_categorias">
             <End Role="in_categorias" EntitySet="in_categorias" />
@@ -183,6 +239,10 @@
           <AssociationSet Name="FK_in_Producto_in_ProductoTipo" Association="Self.FK_in_Producto_in_ProductoTipo">
             <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
             <End Role="in_Producto" EntitySet="in_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_Producto_x_fa_NivelDescuento_in_Producto" Association="Self.FK_in_Producto_x_fa_NivelDescuento_in_Producto">
+            <End Role="in_Producto" EntitySet="in_Producto" />
+            <End Role="in_Producto_x_fa_NivelDescuento" EntitySet="in_Producto_x_fa_NivelDescuento" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -238,6 +298,7 @@
           <NavigationProperty Name="in_categorias" Relationship="ModelInventario.FK_in_Producto_in_categorias" FromRole="in_Producto" ToRole="in_categorias" />
           <NavigationProperty Name="in_presentacion" Relationship="ModelInventario.FK_in_Producto_in_presentacion" FromRole="in_Producto" ToRole="in_presentacion" />
           <NavigationProperty Name="in_ProductoTipo" Relationship="ModelInventario.FK_in_Producto_in_ProductoTipo" FromRole="in_Producto" ToRole="in_ProductoTipo" />
+          <NavigationProperty Name="in_Producto_x_fa_NivelDescuento" Relationship="ModelInventario.FK_in_Producto_x_fa_NivelDescuento_in_Producto" FromRole="in_Producto" ToRole="in_Producto_x_fa_NivelDescuento" />
         </EntityType>
         <Association Name="FK_in_Producto_in_Producto1">
           <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="0..1" />
@@ -274,6 +335,12 @@
             <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
             <End Role="in_Producto" EntitySet="in_Producto" />
           </AssociationSet>
+          <EntitySet Name="in_Producto_x_fa_NivelDescuento" EntityType="ModelInventario.in_Producto_x_fa_NivelDescuento" />
+          <AssociationSet Name="FK_in_Producto_x_fa_NivelDescuento_in_Producto" Association="ModelInventario.FK_in_Producto_x_fa_NivelDescuento_in_Producto">
+            <End Role="in_Producto" EntitySet="in_Producto" />
+            <End Role="in_Producto_x_fa_NivelDescuento" EntitySet="in_Producto_x_fa_NivelDescuento" />
+          </AssociationSet>
+          <EntitySet Name="in_parametro" EntityType="ModelInventario.in_parametro" />
         </EntityContainer>
         <EntityType Name="in_categorias">
           <Key>
@@ -377,6 +444,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="in_Producto_x_fa_NivelDescuento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdNivel" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Porcentaje" Type="Double" Nullable="false" />
+          <NavigationProperty Name="in_Producto" Relationship="ModelInventario.FK_in_Producto_x_fa_NivelDescuento_in_Producto" FromRole="in_Producto_x_fa_NivelDescuento" ToRole="in_Producto" />
+        </EntityType>
+        <Association Name="FK_in_Producto_x_fa_NivelDescuento_in_Producto">
+          <End Type="ModelInventario.in_Producto" Role="in_Producto" Multiplicity="1" />
+          <End Type="ModelInventario.in_Producto_x_fa_NivelDescuento" Role="in_Producto_x_fa_NivelDescuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Principal>
+            <Dependent Role="in_Producto_x_fa_NivelDescuento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="in_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_egresoBodegaOrigen" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_ingresoBodegaDestino" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" Type="Int32" Nullable="false" />
+          <Property Name="P_IdCtaCble_transitoria_transf_inven" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="P_IdMovi_inven_tipo_default_ing" Type="Int32" Nullable="false" />
+          <Property Name="P_IdMovi_inven_tipo_default_egr" Type="Int32" Nullable="false" />
+          <Property Name="P_IdMovi_inven_tipo_ingreso_x_compra" Type="Int32" Nullable="false" />
+          <Property Name="P_Dias_menores_alerta_desde_fecha_actual_rojo" Type="Int32" Nullable="false" />
+          <Property Name="P_Dias_menores_alerta_desde_fecha_actual_amarillo" Type="Int32" Nullable="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_Cambio" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_Consignacion" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_elaboracion_egr" Type="Int32" Nullable="false" />
+          <Property Name="IdMovi_inven_tipo_elaboracion_ing" Type="Int32" Nullable="false" />
+          <Property Name="IdMotivo_Inv_elaboracion_ing" Type="Int32" />
+          <Property Name="IdMotivo_Inv_elaboracion_egr" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_ajuste_ing" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_ajuste_egr" Type="Int32" />
+          <Property Name="IdCatalogoEstadoAjuste" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IdMotivo_Inv_ajuste_ing" Type="Int32" />
+          <Property Name="IdMotivo_Inv_ajuste_egr" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -481,6 +603,46 @@
                 <ScalarProperty Name="tp_EsCombo" ColumnName="tp_EsCombo" />
                 <ScalarProperty Name="tp_descripcion" ColumnName="tp_descripcion" />
                 <ScalarProperty Name="IdProductoTipo" ColumnName="IdProductoTipo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_Producto_x_fa_NivelDescuento">
+            <EntityTypeMapping TypeName="ModelInventario.in_Producto_x_fa_NivelDescuento">
+              <MappingFragment StoreEntitySet="in_Producto_x_fa_NivelDescuento">
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_parametro">
+            <EntityTypeMapping TypeName="ModelInventario.in_parametro">
+              <MappingFragment StoreEntitySet="in_parametro">
+                <ScalarProperty Name="IdMotivo_Inv_ajuste_egr" ColumnName="IdMotivo_Inv_ajuste_egr" />
+                <ScalarProperty Name="IdMotivo_Inv_ajuste_ing" ColumnName="IdMotivo_Inv_ajuste_ing" />
+                <ScalarProperty Name="IdCatalogoEstadoAjuste" ColumnName="IdCatalogoEstadoAjuste" />
+                <ScalarProperty Name="IdMovi_inven_tipo_ajuste_egr" ColumnName="IdMovi_inven_tipo_ajuste_egr" />
+                <ScalarProperty Name="IdMovi_inven_tipo_ajuste_ing" ColumnName="IdMovi_inven_tipo_ajuste_ing" />
+                <ScalarProperty Name="IdMotivo_Inv_elaboracion_egr" ColumnName="IdMotivo_Inv_elaboracion_egr" />
+                <ScalarProperty Name="IdMotivo_Inv_elaboracion_ing" ColumnName="IdMotivo_Inv_elaboracion_ing" />
+                <ScalarProperty Name="IdMovi_inven_tipo_elaboracion_ing" ColumnName="IdMovi_inven_tipo_elaboracion_ing" />
+                <ScalarProperty Name="IdMovi_inven_tipo_elaboracion_egr" ColumnName="IdMovi_inven_tipo_elaboracion_egr" />
+                <ScalarProperty Name="IdMovi_inven_tipo_Consignacion" ColumnName="IdMovi_inven_tipo_Consignacion" />
+                <ScalarProperty Name="IdMovi_inven_tipo_Cambio" ColumnName="IdMovi_inven_tipo_Cambio" />
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="P_Dias_menores_alerta_desde_fecha_actual_amarillo" ColumnName="P_Dias_menores_alerta_desde_fecha_actual_amarillo" />
+                <ScalarProperty Name="P_Dias_menores_alerta_desde_fecha_actual_rojo" ColumnName="P_Dias_menores_alerta_desde_fecha_actual_rojo" />
+                <ScalarProperty Name="P_IdMovi_inven_tipo_ingreso_x_compra" ColumnName="P_IdMovi_inven_tipo_ingreso_x_compra" />
+                <ScalarProperty Name="P_IdMovi_inven_tipo_default_egr" ColumnName="P_IdMovi_inven_tipo_default_egr" />
+                <ScalarProperty Name="P_IdMovi_inven_tipo_default_ing" ColumnName="P_IdMovi_inven_tipo_default_ing" />
+                <ScalarProperty Name="P_IdCtaCble_transitoria_transf_inven" ColumnName="P_IdCtaCble_transitoria_transf_inven" />
+                <ScalarProperty Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" ColumnName="IdMovi_Inven_tipo_x_Dev_Inv_x_Erg" />
+                <ScalarProperty Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" ColumnName="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" />
+                <ScalarProperty Name="IdMovi_inven_tipo_ingresoBodegaDestino" ColumnName="IdMovi_inven_tipo_ingresoBodegaDestino" />
+                <ScalarProperty Name="IdMovi_inven_tipo_egresoBodegaOrigen" ColumnName="IdMovi_inven_tipo_egresoBodegaOrigen" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -47,5 +47,155 @@ namespace Core.Data.Facturacion
                 throw;
             }
         }
+
+        public fa_TerminoPago_Info get_info(string IdTerminoPago)
+        {
+            try
+            {
+                fa_TerminoPago_Info info = new fa_TerminoPago_Info();
+                using (EntitiesFacturacion Context = new EntitiesFacturacion())
+                {
+                    fa_TerminoPago Entity = Context.fa_TerminoPago.FirstOrDefault(q => q.IdTerminoPago == IdTerminoPago);
+                    if (Entity == null) return null;
+                    info = new fa_TerminoPago_Info
+                    {
+                        IdTerminoPago = Entity.IdTerminoPago,
+                        Dias_Vct = Entity.Dias_Vct,
+                        nom_TerminoPago = Entity.nom_TerminoPago,
+                        Num_Coutas = Entity.Num_Coutas,
+                        AplicaDescuentoNomina = Entity.AplicaDescuentoNomina,
+                        CodigoRubroDescto = Entity.CodigoRubroDescto,
+                        estado = Entity.estado
+                    };
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool validar_existe_IdTerminoPago(string IdTerminoPago)
+        {
+            try
+            {
+                using (EntitiesFacturacion Context = new EntitiesFacturacion())
+                {
+                    var lst = from q in Context.fa_TerminoPago
+                              where IdTerminoPago == q.IdTerminoPago
+                              select q;
+
+                    if (lst.Count() > 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool guardarDB(fa_TerminoPago_Info info)
+        {
+            try
+            {
+                using (EntitiesFacturacion Context = new EntitiesFacturacion())
+                {
+                    fa_TerminoPago Entity = new fa_TerminoPago
+                    {
+                        IdTerminoPago = info.IdTerminoPago,
+                        Dias_Vct = info.Dias_Vct,
+                        nom_TerminoPago = info.nom_TerminoPago,
+                        Num_Coutas = info.Num_Coutas,
+                        AplicaDescuentoNomina = info.AplicaDescuentoNomina,
+                        CodigoRubroDescto = info.CodigoRubroDescto,
+                        estado = info.estado = true
+
+                    };
+                    Context.fa_TerminoPago.Add(Entity);
+                    int secuencia = 1;
+                    foreach (var item in info.Lst_fa_TerminoPago_Distribucion)
+                    {
+                        fa_TerminoPago_Distribucion det = new fa_TerminoPago_Distribucion
+                        {
+                            IdTerminoPago = info.IdTerminoPago,
+                            Num_Dias_Vcto = item.Num_Dias_Vcto,
+                            Por_distribucion = item.Por_distribucion,
+                            Secuencia = item.Secuencia = secuencia++
+                        };
+                        Context.fa_TerminoPago_Distribucion.Add(det);
+                    }
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(fa_TerminoPago_Info info)
+        {
+            try
+            {
+                using (EntitiesFacturacion Context = new EntitiesFacturacion())
+                {
+                    fa_TerminoPago Entity = Context.fa_TerminoPago.FirstOrDefault(q => q.IdTerminoPago == info.IdTerminoPago);
+                    if (Entity == null) return false;
+
+                    Entity.Dias_Vct = info.Dias_Vct;
+                    Entity.nom_TerminoPago = info.nom_TerminoPago;
+                    Entity.Num_Coutas = info.Num_Coutas;
+                    Entity.AplicaDescuentoNomina = info.AplicaDescuentoNomina;
+                    Entity.CodigoRubroDescto = info.CodigoRubroDescto;
+
+                    foreach (var item in info.Lst_fa_TerminoPago_Distribucion)
+                    {
+                        fa_TerminoPago_Distribucion det = new fa_TerminoPago_Distribucion
+                        {
+                            IdTerminoPago = info.IdTerminoPago,
+                            Num_Dias_Vcto = item.Num_Dias_Vcto,
+                            Por_distribucion = item.Por_distribucion,
+                            Secuencia = item.Secuencia
+                        };
+                        Context.fa_TerminoPago_Distribucion.Add(det);
+                    }
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool anularDB(fa_TerminoPago_Info info)
+        {
+            try
+            {
+                using (EntitiesFacturacion Context = new EntitiesFacturacion())
+                {
+                    fa_TerminoPago Entity = Context.fa_TerminoPago.FirstOrDefault(q => q.IdTerminoPago == info.IdTerminoPago);
+                    if (Entity == null) return false;
+
+                    Entity.estado = info.estado = false;
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

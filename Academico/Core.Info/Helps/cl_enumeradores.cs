@@ -8,6 +8,19 @@ namespace Core.Info.Helps
 {
     public class cl_enumeradores
     {
+        public enum eTipoDocumento
+        {
+            COTIZ,
+            FACT,
+            GUIA,
+            NTCR,
+            NTDB,
+            NTPEDI,
+            NTVTA,
+            ORDESP,
+            PEDI,
+            RETEN
+        }
         public enum eTipoCatalogoGeneral
         {
             SEXO = 1,
@@ -25,6 +38,27 @@ namespace Core.Info.Helps
             SEXO_MAS
         }
 
+        public enum eTipoCatalogoBanco
+        {
+            CALTAMOR = 1,
+            EST_CB_BA = 2,
+            EST_CH = 3,
+            EST_CONCI = 4,
+            EST_PAG = 5
+        }
+
+        public enum eTipoCatalogoFact
+        {
+            FormaDePago = 15
+        }
+
+        public enum eCatalogoFact
+        {
+            EFEC,
+            TARCRE,
+            CRED,
+            TARDEB
+        }
         public enum eTipoParentezco
         {
             PAPA = 10,

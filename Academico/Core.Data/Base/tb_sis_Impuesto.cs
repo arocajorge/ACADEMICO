@@ -14,6 +14,12 @@ namespace Core.Data.Base
     
     public partial class tb_sis_Impuesto
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tb_sis_Impuesto()
+        {
+            this.tb_sis_Impuesto_x_ctacble = new HashSet<tb_sis_Impuesto_x_ctacble>();
+        }
+    
         public string IdCod_Impuesto { get; set; }
         public string nom_impuesto { get; set; }
         public bool Usado_en_Ventas { get; set; }
@@ -24,5 +30,7 @@ namespace Core.Data.Base
         public string IdTipoImpuesto { get; set; }
     
         public virtual tb_sis_Impuesto_Tipo tb_sis_Impuesto_Tipo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_sis_Impuesto_x_ctacble> tb_sis_Impuesto_x_ctacble { get; set; }
     }
 }

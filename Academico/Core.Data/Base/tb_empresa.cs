@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public tb_empresa()
         {
             this.tb_sucursal = new HashSet<tb_sucursal>();
+            this.tb_sis_Documento_Tipo_x_Empresa = new HashSet<tb_sis_Documento_Tipo_x_Empresa>();
         }
     
         public int IdEmpresa { get; set; }
@@ -41,5 +42,7 @@ namespace Core.Data.Base
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_sucursal> tb_sucursal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_sis_Documento_Tipo_x_Empresa> tb_sis_Documento_Tipo_x_Empresa { get; set; }
     }
 }

@@ -21,5 +21,6 @@ namespace Core.Data.Base
         public string observacion { get; set; }
     
         public virtual fa_cliente fa_cliente { get; set; }
+        public virtual fa_Vendedor fa_Vendedor { get; set; }
     }
 }

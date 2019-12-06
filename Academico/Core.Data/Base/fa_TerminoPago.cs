@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public fa_TerminoPago()
         {
             this.fa_cliente = new HashSet<fa_cliente>();
+            this.fa_TerminoPago_Distribucion = new HashSet<fa_TerminoPago_Distribucion>();
         }
     
         public string IdTerminoPago { get; set; }
@@ -30,5 +31,7 @@ namespace Core.Data.Base
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_cliente> fa_cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_TerminoPago_Distribucion> fa_TerminoPago_Distribucion { get; set; }
     }
 }

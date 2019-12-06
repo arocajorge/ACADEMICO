@@ -36,5 +36,23 @@ namespace Core.Data.Base
         public virtual DbSet<fa_NivelDescuento> fa_NivelDescuento { get; set; }
         public virtual DbSet<fa_parametro> fa_parametro { get; set; }
         public virtual DbSet<fa_PuntoVta> fa_PuntoVta { get; set; }
+        public virtual DbSet<fa_factura> fa_factura { get; set; }
+        public virtual DbSet<fa_factura_det> fa_factura_det { get; set; }
+        public virtual DbSet<fa_factura_resumen> fa_factura_resumen { get; set; }
+        public virtual DbSet<fa_factura_x_ct_cbtecble> fa_factura_x_ct_cbtecble { get; set; }
+        public virtual DbSet<fa_notaCreDeb> fa_notaCreDeb { get; set; }
+        public virtual DbSet<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
+        public virtual DbSet<fa_notaCreDeb_x_ct_cbtecble> fa_notaCreDeb_x_ct_cbtecble { get; set; }
+        public virtual DbSet<fa_notaCreDeb_x_cxc_cobro> fa_notaCreDeb_x_cxc_cobro { get; set; }
+        public virtual DbSet<fa_notaCreDeb_x_fa_factura_NotaDeb> fa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
+        public virtual DbSet<fa_TipoNota> fa_TipoNota { get; set; }
+        public virtual DbSet<vwfa_factura_det> vwfa_factura_det { get; set; }
+        public virtual DbSet<vwfa_PuntoVta> vwfa_PuntoVta { get; set; }
+        public virtual DbSet<fa_Vendedor> fa_Vendedor { get; set; }
+        public virtual DbSet<vwfa_cliente_consulta> vwfa_cliente_consulta { get; set; }
+        public virtual DbSet<vwfa_cliente_contactos> vwfa_cliente_contactos { get; set; }
+        public virtual DbSet<fa_TerminoPago_Distribucion> fa_TerminoPago_Distribucion { get; set; }
+        public virtual DbSet<vwfa_factura_sin_automatico> vwfa_factura_sin_automatico { get; set; }
+        public virtual DbSet<vwfa_factura> vwfa_factura { get; set; }
     }
 }

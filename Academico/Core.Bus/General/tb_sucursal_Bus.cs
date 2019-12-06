@@ -11,6 +11,19 @@ namespace Core.Bus.General
     public class tb_sucursal_Bus
     {
         tb_sucursal_Data odata = new tb_sucursal_Data();
+        public List<tb_sucursal_Info> GetList(int IdEmpresa, string IdUsuario, bool MostrarTodos)
+
+        {
+            try
+            {
+                return odata.GetList(IdEmpresa, IdUsuario, MostrarTodos);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<tb_sucursal_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try

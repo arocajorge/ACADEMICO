@@ -1,0 +1,950 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ModelContabilidad.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ct_cbtecble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="CodCbteCble" Type="varchar" MaxLength="20" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="cb_Fecha" Type="datetime" Nullable="false" />
+          <Property Name="cb_Valor" Type="float" Nullable="false" />
+          <Property Name="cb_Observacion" Type="varchar(max)" />
+          <Property Name="cb_Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="IdUsuarioAnu" Type="varchar" MaxLength="20" />
+          <Property Name="cb_MotivoAnu" Type="varchar" MaxLength="100" />
+          <Property Name="IdUsuarioUltModi" Type="varchar" MaxLength="20" />
+          <Property Name="cb_FechaAnu" Type="datetime" />
+          <Property Name="cb_FechaTransac" Type="datetime" />
+          <Property Name="cb_FechaUltModi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ct_cbtecble_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencia" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="dc_Valor" Type="float" Nullable="false" />
+          <Property Name="dc_Observacion" Type="varchar(max)" />
+          <Property Name="dc_para_conciliar" Type="bit" />
+          <Property Name="IdPunto_cargo_grupo" Type="int" />
+          <Property Name="IdPunto_cargo" Type="int" />
+          <Property Name="IdCentroCosto" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ct_cbtecble_Reversado">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="IdEmpresa_Anu" />
+            <PropertyRef Name="IdTipoCbte_Anu" />
+            <PropertyRef Name="IdCbteCble_Anu" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpresa_Anu" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte_Anu" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble_Anu" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ip" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="ct_cbtecble_tipo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="CodTipoCbte" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="tc_TipoCbte" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tc_Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="tc_Interno" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="tc_Nemonico" Type="nchar" MaxLength="10" />
+          <Property Name="IdTipoCbte_Anul" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ct_CierrePorModuloPorSucursal">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCierre" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCierre" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="CodModulo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaIni" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" Nullable="false" />
+          <Property Name="Cerrado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte_SaldoInicial" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte_AsientoCierre_Anual" Type="int" Nullable="false" />
+          <Property Name="P_Se_Muestra_Todas_las_ctas_en_combos" Type="bit" Nullable="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_periodo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="int" Nullable="false" />
+          <Property Name="pe_mes" Type="int" Nullable="false" />
+          <Property Name="pe_FechaIni" Type="smalldatetime" Nullable="false" />
+          <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
+          <Property Name="pe_cerrado" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="pe_estado" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwct_cbtecble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="tc_Interno" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="cb_Valor" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="cb_Estado" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="tc_TipoCbte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="tc_Interno" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="cb_Fecha" Type="datetime" Nullable="false" />
+          <Property Name="cb_Valor" Type="float" Nullable="false" />
+          <Property Name="CodCbteCble" Type="varchar" MaxLength="20" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="cb_Observacion" Type="varchar(max)" />
+          <Property Name="cb_Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tc_TipoCbte" Type="char" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwct_cbtecble_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="pc_Cuenta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencia" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="dc_Valor" Type="float" Nullable="false" />
+          <Property Name="dc_Observacion" Type="varchar(max)" />
+          <Property Name="dc_para_conciliar" Type="bit" />
+          <Property Name="pc_Cuenta" Type="varchar" MaxLength="523" Nullable="false" />
+          <Property Name="IdPunto_cargo_grupo" Type="int" />
+          <Property Name="IdPunto_cargo" Type="int" />
+          <Property Name="IdCentroCosto" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwct_periodo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdanioFiscal" />
+            <PropertyRef Name="pe_mes" />
+            <PropertyRef Name="pe_FechaIni" />
+            <PropertyRef Name="pe_FechaFin" />
+            <PropertyRef Name="pe_cerrado" />
+            <PropertyRef Name="idMes" />
+            <PropertyRef Name="smes" />
+            <PropertyRef Name="Nemonico" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdPeriodo" Type="int" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="int" Nullable="false" />
+          <Property Name="pe_mes" Type="int" Nullable="false" />
+          <Property Name="pe_FechaIni" Type="smalldatetime" Nullable="false" />
+          <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
+          <Property Name="pe_cerrado" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="pe_estado" Type="nvarchar" MaxLength="1" />
+          <Property Name="idMes" Type="int" Nullable="false" />
+          <Property Name="smes" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nemonico" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="smesIngles" Type="varchar" MaxLength="20" />
+          <Property Name="AnioMes" Type="varchar" MaxLength="51" />
+        </EntityType>
+        <Association Name="FK_ct_cbtecble_ct_cbtecble_tipo">
+          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="1" />
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_ct_periodo">
+          <End Role="ct_periodo" Type="Self.ct_periodo" Multiplicity="1" />
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_periodo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPeriodo" />
+            </Principal>
+            <Dependent Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_det_ct_cbtecble">
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
+          <End Role="ct_cbtecble_det" Type="Self.ct_cbtecble_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble">
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
+          <End Role="ct_cbtecble_Reversado" Type="Self.ct_cbtecble_Reversado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_Reversado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble1">
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
+          <End Role="ct_cbtecble_Reversado" Type="Self.ct_cbtecble_Reversado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_Reversado">
+              <PropertyRef Name="IdEmpresa_Anu" />
+              <PropertyRef Name="IdTipoCbte_Anu" />
+              <PropertyRef Name="IdCbteCble_Anu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_parametro_ct_cbtecble_tipo">
+          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="1" />
+          <End Role="ct_parametro" Type="Self.ct_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte_SaldoInicial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_parametro_ct_cbtecble_tipo1">
+          <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="1" />
+          <End Role="ct_parametro" Type="Self.ct_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte_AsientoCierre_Anual" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelContabilidadStoreContainer">
+          <EntitySet Name="ct_cbtecble" EntityType="Self.ct_cbtecble" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_cbtecble_det" EntityType="Self.ct_cbtecble_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_cbtecble_Reversado" EntityType="Self.ct_cbtecble_Reversado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_cbtecble_tipo" EntityType="Self.ct_cbtecble_tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_CierrePorModuloPorSucursal" EntityType="Self.ct_CierrePorModuloPorSucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_parametro" EntityType="Self.ct_parametro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_periodo" EntityType="Self.ct_periodo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwct_cbtecble" EntityType="Self.vwct_cbtecble" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwct_cbtecble].[IdEmpresa] AS [IdEmpresa], 
+    [vwct_cbtecble].[IdTipoCbte] AS [IdTipoCbte], 
+    [vwct_cbtecble].[IdCbteCble] AS [IdCbteCble], 
+    [vwct_cbtecble].[tc_Interno] AS [tc_Interno], 
+    [vwct_cbtecble].[cb_Fecha] AS [cb_Fecha], 
+    [vwct_cbtecble].[cb_Valor] AS [cb_Valor], 
+    [vwct_cbtecble].[CodCbteCble] AS [CodCbteCble], 
+    [vwct_cbtecble].[IdSucursal] AS [IdSucursal], 
+    [vwct_cbtecble].[cb_Observacion] AS [cb_Observacion], 
+    [vwct_cbtecble].[cb_Estado] AS [cb_Estado], 
+    [vwct_cbtecble].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwct_cbtecble].[tc_TipoCbte] AS [tc_TipoCbte]
+    FROM [dbo].[vwct_cbtecble] AS [vwct_cbtecble]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwct_cbtecble_det" EntityType="Self.vwct_cbtecble_det" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwct_cbtecble_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwct_cbtecble_det].[IdTipoCbte] AS [IdTipoCbte], 
+    [vwct_cbtecble_det].[IdCbteCble] AS [IdCbteCble], 
+    [vwct_cbtecble_det].[secuencia] AS [secuencia], 
+    [vwct_cbtecble_det].[IdCtaCble] AS [IdCtaCble], 
+    [vwct_cbtecble_det].[dc_Valor] AS [dc_Valor], 
+    [vwct_cbtecble_det].[dc_Observacion] AS [dc_Observacion], 
+    [vwct_cbtecble_det].[dc_para_conciliar] AS [dc_para_conciliar], 
+    [vwct_cbtecble_det].[pc_Cuenta] AS [pc_Cuenta], 
+    [vwct_cbtecble_det].[IdPunto_cargo_grupo] AS [IdPunto_cargo_grupo], 
+    [vwct_cbtecble_det].[IdPunto_cargo] AS [IdPunto_cargo], 
+    [vwct_cbtecble_det].[IdCentroCosto] AS [IdCentroCosto]
+    FROM [dbo].[vwct_cbtecble_det] AS [vwct_cbtecble_det]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwct_periodo" EntityType="Self.vwct_periodo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwct_periodo].[IdEmpresa] AS [IdEmpresa], 
+    [vwct_periodo].[IdPeriodo] AS [IdPeriodo], 
+    [vwct_periodo].[IdanioFiscal] AS [IdanioFiscal], 
+    [vwct_periodo].[pe_mes] AS [pe_mes], 
+    [vwct_periodo].[pe_FechaIni] AS [pe_FechaIni], 
+    [vwct_periodo].[pe_FechaFin] AS [pe_FechaFin], 
+    [vwct_periodo].[pe_cerrado] AS [pe_cerrado], 
+    [vwct_periodo].[pe_estado] AS [pe_estado], 
+    [vwct_periodo].[idMes] AS [idMes], 
+    [vwct_periodo].[smes] AS [smes], 
+    [vwct_periodo].[Nemonico] AS [Nemonico], 
+    [vwct_periodo].[smesIngles] AS [smesIngles], 
+    [vwct_periodo].[AnioMes] AS [AnioMes]
+    FROM [dbo].[vwct_periodo] AS [vwct_periodo]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ct_cbtecble_ct_cbtecble_tipo" Association="Self.FK_ct_cbtecble_ct_cbtecble_tipo">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_ct_periodo" Association="Self.FK_ct_cbtecble_ct_periodo">
+            <End Role="ct_periodo" EntitySet="ct_periodo" />
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_det_ct_cbtecble" Association="Self.FK_ct_cbtecble_det_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble" Association="Self.FK_ct_cbtecble_Reversado_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble1" Association="Self.FK_ct_cbtecble_Reversado_ct_cbtecble1">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo" Association="Self.FK_ct_parametro_ct_cbtecble_tipo">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_parametro" EntitySet="ct_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo1" Association="Self.FK_ct_parametro_ct_cbtecble_tipo1">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_parametro" EntitySet="ct_parametro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ModelContabilidad" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ct_cbtecble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="CodCbteCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cb_Valor" Type="Double" Nullable="false" />
+          <Property Name="cb_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cb_MotivoAnu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cb_FechaAnu" Type="DateTime" Precision="3" />
+          <Property Name="cb_FechaTransac" Type="DateTime" Precision="3" />
+          <Property Name="cb_FechaUltModi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ct_cbtecble_det" Relationship="Self.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_det" />
+          <NavigationProperty Name="ct_periodo" Relationship="ModelContabilidad.FK_ct_cbtecble_ct_periodo" FromRole="ct_cbtecble" ToRole="ct_periodo" />
+          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="ModelContabilidad.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble" ToRole="ct_cbtecble_tipo" />
+          <NavigationProperty Name="ct_cbtecble_Reversado" Relationship="ModelContabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
+          <NavigationProperty Name="ct_cbtecble_Reversado1" Relationship="ModelContabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
+        </EntityType>
+        <EntityType Name="ct_cbtecble_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dc_Valor" Type="Double" Nullable="false" />
+          <Property Name="dc_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="dc_para_conciliar" Type="Boolean" />
+          <Property Name="IdPunto_cargo_grupo" Type="Int32" />
+          <Property Name="IdPunto_cargo" Type="Int32" />
+          <Property Name="IdCentroCosto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble_det" ToRole="ct_cbtecble" />
+        </EntityType>
+        <Association Name="FK_ct_cbtecble_det_ct_cbtecble">
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
+          <End Role="ct_cbtecble_det" Type="Self.ct_cbtecble_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntitiesContabilidad" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ct_cbtecble" EntityType="Self.ct_cbtecble" />
+          <EntitySet Name="ct_cbtecble_det" EntityType="Self.ct_cbtecble_det" />
+          <AssociationSet Name="FK_ct_cbtecble_det_ct_cbtecble" Association="Self.FK_ct_cbtecble_det_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
+          </AssociationSet>
+          <EntitySet Name="ct_periodo" EntityType="ModelContabilidad.ct_periodo" />
+          <EntitySet Name="vwct_cbtecble_det" EntityType="ModelContabilidad.vwct_cbtecble_det" />
+          <AssociationSet Name="FK_ct_cbtecble_ct_periodo" Association="ModelContabilidad.FK_ct_cbtecble_ct_periodo">
+            <End Role="ct_periodo" EntitySet="ct_periodo" />
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+          </AssociationSet>
+          <EntitySet Name="vwct_cbtecble" EntityType="ModelContabilidad.vwct_cbtecble" />
+          <EntitySet Name="ct_cbtecble_Reversado" EntityType="ModelContabilidad.ct_cbtecble_Reversado" />
+          <EntitySet Name="ct_cbtecble_tipo" EntityType="ModelContabilidad.ct_cbtecble_tipo" />
+          <AssociationSet Name="FK_ct_cbtecble_ct_cbtecble_tipo" Association="ModelContabilidad.FK_ct_cbtecble_ct_cbtecble_tipo">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble" Association="ModelContabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble1" Association="ModelContabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_Reversado" EntitySet="ct_cbtecble_Reversado" />
+          </AssociationSet>
+          <EntitySet Name="vwct_periodo" EntityType="ModelContabilidad.vwct_periodo" />
+          <EntitySet Name="ct_CierrePorModuloPorSucursal" EntityType="ModelContabilidad.ct_CierrePorModuloPorSucursal" />
+          <EntitySet Name="ct_parametro" EntityType="ModelContabilidad.ct_parametro" />
+          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo" Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_parametro" EntitySet="ct_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo1" Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo1">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_parametro" EntitySet="ct_parametro" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ct_periodo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="Int32" Nullable="false" />
+          <Property Name="pe_mes" Type="Int32" Nullable="false" />
+          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_cerrado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="pe_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="ModelContabilidad.FK_ct_cbtecble_ct_periodo" FromRole="ct_periodo" ToRole="ct_cbtecble" />
+        </EntityType>
+        <EntityType Name="vwct_cbtecble_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="pc_Cuenta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dc_Valor" Type="Double" Nullable="false" />
+          <Property Name="dc_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="dc_para_conciliar" Type="Boolean" />
+          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="523" FixedLength="false" Unicode="false" />
+          <Property Name="IdPunto_cargo_grupo" Type="Int32" />
+          <Property Name="IdPunto_cargo" Type="Int32" />
+          <Property Name="IdCentroCosto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_ct_cbtecble_ct_periodo">
+          <End Type="ModelContabilidad.ct_periodo" Role="ct_periodo" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_periodo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPeriodo" />
+            </Principal>
+            <Dependent Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdPeriodo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwct_cbtecble">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="tc_Interno" />
+            <PropertyRef Name="cb_Fecha" />
+            <PropertyRef Name="cb_Valor" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="cb_Estado" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="tc_TipoCbte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="tc_Interno" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cb_Valor" Type="Double" Nullable="false" />
+          <Property Name="CodCbteCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="cb_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cb_Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tc_TipoCbte" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ct_cbtecble_Reversado">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="IdEmpresa_Anu" />
+            <PropertyRef Name="IdTipoCbte_Anu" />
+            <PropertyRef Name="IdCbteCble_Anu" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_Anu" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_Anu" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_Anu" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ip" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="ModelContabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble_Reversado" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_cbtecble1" Relationship="ModelContabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble_Reversado" ToRole="ct_cbtecble" />
+        </EntityType>
+        <EntityType Name="ct_cbtecble_tipo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="CodTipoCbte" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="tc_TipoCbte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tc_Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="tc_Interno" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="tc_Nemonico" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IdTipoCbte_Anul" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="ModelContabilidad.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_parametro" Relationship="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
+          <NavigationProperty Name="ct_parametro1" Relationship="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_cbtecble_tipo" ToRole="ct_parametro" />
+        </EntityType>
+        <Association Name="FK_ct_cbtecble_ct_cbtecble_tipo">
+          <End Type="ModelContabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble">
+          <End Type="ModelContabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_cbtecble_Reversado" Role="ct_cbtecble_Reversado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_Reversado">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_Reversado_ct_cbtecble1">
+          <End Type="ModelContabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_cbtecble_Reversado" Role="ct_cbtecble_Reversado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_Reversado">
+              <PropertyRef Name="IdEmpresa_Anu" />
+              <PropertyRef Name="IdTipoCbte_Anu" />
+              <PropertyRef Name="IdCbteCble_Anu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwct_periodo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdanioFiscal" />
+            <PropertyRef Name="pe_mes" />
+            <PropertyRef Name="pe_FechaIni" />
+            <PropertyRef Name="pe_FechaFin" />
+            <PropertyRef Name="pe_cerrado" />
+            <PropertyRef Name="idMes" />
+            <PropertyRef Name="smes" />
+            <PropertyRef Name="Nemonico" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="Int32" Nullable="false" />
+          <Property Name="pe_mes" Type="Int32" Nullable="false" />
+          <Property Name="pe_FechaIni" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="pe_cerrado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="pe_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="idMes" Type="Int32" Nullable="false" />
+          <Property Name="smes" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Nemonico" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="smesIngles" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AnioMes" Type="String" MaxLength="51" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ct_CierrePorModuloPorSucursal">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCierre" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCierre" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="CodModulo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIni" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Cerrado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_SaldoInicial" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_AsientoCierre_Anual" Type="Int32" Nullable="false" />
+          <Property Name="P_Se_Muestra_Todas_las_ctas_en_combos" Type="Boolean" Nullable="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
+          <NavigationProperty Name="ct_cbtecble_tipo1" Relationship="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
+        </EntityType>
+        <Association Name="FK_ct_parametro_ct_cbtecble_tipo">
+          <End Type="ModelContabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_parametro" Role="ct_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte_SaldoInicial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_parametro_ct_cbtecble_tipo1">
+          <End Type="ModelContabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_parametro" Role="ct_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte_AsientoCierre_Anual" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelContabilidadStoreContainer" CdmEntityContainer="EntitiesContabilidad">
+          <EntitySetMapping Name="ct_cbtecble">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_cbtecble">
+              <MappingFragment StoreEntitySet="ct_cbtecble">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="CodCbteCble" ColumnName="CodCbteCble" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="cb_Valor" ColumnName="cb_Valor" />
+                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
+                <ScalarProperty Name="cb_Estado" ColumnName="cb_Estado" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdUsuarioAnu" ColumnName="IdUsuarioAnu" />
+                <ScalarProperty Name="cb_MotivoAnu" ColumnName="cb_MotivoAnu" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="cb_FechaAnu" ColumnName="cb_FechaAnu" />
+                <ScalarProperty Name="cb_FechaTransac" ColumnName="cb_FechaTransac" />
+                <ScalarProperty Name="cb_FechaUltModi" ColumnName="cb_FechaUltModi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_cbtecble_det">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_cbtecble_det">
+              <MappingFragment StoreEntitySet="ct_cbtecble_det">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="dc_Observacion" ColumnName="dc_Observacion" />
+                <ScalarProperty Name="dc_para_conciliar" ColumnName="dc_para_conciliar" />
+                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
+                <ScalarProperty Name="IdPunto_cargo" ColumnName="IdPunto_cargo" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_periodo">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_periodo">
+              <MappingFragment StoreEntitySet="ct_periodo">
+                <ScalarProperty Name="pe_estado" ColumnName="pe_estado" />
+                <ScalarProperty Name="pe_cerrado" ColumnName="pe_cerrado" />
+                <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
+                <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />
+                <ScalarProperty Name="pe_mes" ColumnName="pe_mes" />
+                <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_cbtecble_det">
+            <EntityTypeMapping TypeName="ModelContabilidad.vwct_cbtecble_det">
+              <MappingFragment StoreEntitySet="vwct_cbtecble_det">
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="IdPunto_cargo" ColumnName="IdPunto_cargo" />
+                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="dc_para_conciliar" ColumnName="dc_para_conciliar" />
+                <ScalarProperty Name="dc_Observacion" ColumnName="dc_Observacion" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_cbtecble">
+            <EntityTypeMapping TypeName="ModelContabilidad.vwct_cbtecble">
+              <MappingFragment StoreEntitySet="vwct_cbtecble">
+                <ScalarProperty Name="tc_TipoCbte" ColumnName="tc_TipoCbte" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="cb_Estado" ColumnName="cb_Estado" />
+                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="CodCbteCble" ColumnName="CodCbteCble" />
+                <ScalarProperty Name="cb_Valor" ColumnName="cb_Valor" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="tc_Interno" ColumnName="tc_Interno" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_cbtecble_Reversado">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_cbtecble_Reversado">
+              <MappingFragment StoreEntitySet="ct_cbtecble_Reversado">
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="IdCbteCble_Anu" ColumnName="IdCbteCble_Anu" />
+                <ScalarProperty Name="IdTipoCbte_Anu" ColumnName="IdTipoCbte_Anu" />
+                <ScalarProperty Name="IdEmpresa_Anu" ColumnName="IdEmpresa_Anu" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_cbtecble_tipo">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_cbtecble_tipo">
+              <MappingFragment StoreEntitySet="ct_cbtecble_tipo">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdTipoCbte_Anul" ColumnName="IdTipoCbte_Anul" />
+                <ScalarProperty Name="tc_Nemonico" ColumnName="tc_Nemonico" />
+                <ScalarProperty Name="tc_Interno" ColumnName="tc_Interno" />
+                <ScalarProperty Name="tc_Estado" ColumnName="tc_Estado" />
+                <ScalarProperty Name="tc_TipoCbte" ColumnName="tc_TipoCbte" />
+                <ScalarProperty Name="CodTipoCbte" ColumnName="CodTipoCbte" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_periodo">
+            <EntityTypeMapping TypeName="ModelContabilidad.vwct_periodo">
+              <MappingFragment StoreEntitySet="vwct_periodo">
+                <ScalarProperty Name="AnioMes" ColumnName="AnioMes" />
+                <ScalarProperty Name="smesIngles" ColumnName="smesIngles" />
+                <ScalarProperty Name="Nemonico" ColumnName="Nemonico" />
+                <ScalarProperty Name="smes" ColumnName="smes" />
+                <ScalarProperty Name="idMes" ColumnName="idMes" />
+                <ScalarProperty Name="pe_estado" ColumnName="pe_estado" />
+                <ScalarProperty Name="pe_cerrado" ColumnName="pe_cerrado" />
+                <ScalarProperty Name="pe_FechaFin" ColumnName="pe_FechaFin" />
+                <ScalarProperty Name="pe_FechaIni" ColumnName="pe_FechaIni" />
+                <ScalarProperty Name="pe_mes" ColumnName="pe_mes" />
+                <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_CierrePorModuloPorSucursal">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_CierrePorModuloPorSucursal">
+              <MappingFragment StoreEntitySet="ct_CierrePorModuloPorSucursal">
+                <ScalarProperty Name="Cerrado" ColumnName="Cerrado" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="FechaIni" ColumnName="FechaIni" />
+                <ScalarProperty Name="CodModulo" ColumnName="CodModulo" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdCierre" ColumnName="IdCierre" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_parametro">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_parametro">
+              <MappingFragment StoreEntitySet="ct_parametro">
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="P_Se_Muestra_Todas_las_ctas_en_combos" ColumnName="P_Se_Muestra_Todas_las_ctas_en_combos" />
+                <ScalarProperty Name="IdTipoCbte_AsientoCierre_Anual" ColumnName="IdTipoCbte_AsientoCierre_Anual" />
+                <ScalarProperty Name="IdTipoCbte_SaldoInicial" ColumnName="IdTipoCbte_SaldoInicial" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

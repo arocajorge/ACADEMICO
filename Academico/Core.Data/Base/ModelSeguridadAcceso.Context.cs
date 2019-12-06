@@ -29,5 +29,6 @@ namespace Core.Data.Base
         public virtual DbSet<seg_usuario_x_aca_Sede> seg_usuario_x_aca_Sede { get; set; }
         public virtual DbSet<seg_Usuario_x_Empresa> seg_Usuario_x_Empresa { get; set; }
         public virtual DbSet<vwseg_usuario_x_aca_Sede> vwseg_usuario_x_aca_Sede { get; set; }
+        public virtual DbSet<vwseg_usuario_x_tb_sucursal> vwseg_usuario_x_tb_sucursal { get; set; }
     }
 }

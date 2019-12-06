@@ -248,5 +248,25 @@ namespace Core.Data.Inventario
                 throw;
             }
         }
+
+        public bool ValidarCodigoExists(int IdEmpresa, string Codigo)
+        {
+            try
+            {
+                Codigo = Codigo.Trim();
+                using (EntitiesInventario db = new EntitiesInventario())
+                {
+                    var pro = db.in_Producto.Where(q => q.IdEmpresa == IdEmpresa && q.pr_codigo == Codigo).FirstOrDefault();
+                    if (pro == null)
+                        return false;
+                    else
+                        return true;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

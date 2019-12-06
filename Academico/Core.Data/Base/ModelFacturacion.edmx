@@ -108,6 +108,127 @@
           <Property Name="IdVendedor" Type="int" Nullable="false" />
           <Property Name="observacion" Type="varchar" MaxLength="2" />
         </EntityType>
+        <EntityType Name="fa_factura">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CodCbteVta" Type="varchar" MaxLength="20" />
+          <Property Name="vt_tipoDoc" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="vt_serie1" Type="varchar" MaxLength="3" />
+          <Property Name="vt_serie2" Type="varchar" MaxLength="3" />
+          <Property Name="vt_NumFactura" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Autorizacion" Type="datetime" />
+          <Property Name="vt_autorizacion" Type="varchar" MaxLength="50" />
+          <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdVendedor" Type="int" Nullable="false" />
+          <Property Name="IdNivel" Type="int" Nullable="false" />
+          <Property Name="IdCatalogo_FormaPago" Type="varchar" MaxLength="15" />
+          <Property Name="vt_fecha" Type="datetime" Nullable="false" />
+          <Property Name="vt_plazo" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="vt_fech_venc" Type="datetime" Nullable="false" />
+          <Property Name="vt_tipo_venta" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="vt_Observacion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transaccion" Type="datetime" />
+          <Property Name="IdUsuarioUltModi" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
+          <Property Name="IdPuntoVta" Type="int" />
+          <Property Name="esta_impresa" Type="bit" />
+          <Property Name="fecha_primera_cuota" Type="datetime" />
+          <Property Name="valor_abono" Type="float" />
+          <Property Name="aprobada_enviar_sri" Type="bit" Nullable="false" />
+          <Property Name="Generado" Type="bit" />
+        </EntityType>
+        <EntityType Name="fa_factura_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="aca_IdPeriodo" Type="int" />
+          <Property Name="aca_IdRubro" Type="int" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="vt_cantidad" Type="float" Nullable="false" />
+          <Property Name="vt_Precio" Type="float" Nullable="false" />
+          <Property Name="vt_PorDescUnitario" Type="float" Nullable="false" />
+          <Property Name="vt_DescUnitario" Type="float" Nullable="false" />
+          <Property Name="vt_PrecioFinal" Type="float" Nullable="false" />
+          <Property Name="vt_Subtotal" Type="float" Nullable="false" />
+          <Property Name="vt_iva" Type="float" Nullable="false" />
+          <Property Name="vt_total" Type="float" Nullable="false" />
+          <Property Name="vt_detallexItems" Type="nvarchar(max)" />
+          <Property Name="vt_por_iva" Type="float" Nullable="false" />
+          <Property Name="IdCentroCosto" Type="varchar" MaxLength="200" />
+          <Property Name="IdPunto_Cargo" Type="int" />
+          <Property Name="IdPunto_cargo_grupo" Type="int" />
+          <Property Name="IdCod_Impuesto_Iva" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdEmpresa_pf" Type="int" />
+          <Property Name="IdSucursal_pf" Type="int" />
+          <Property Name="IdProforma" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Secuencia_pf" Type="int" />
+        </EntityType>
+        <EntityType Name="fa_factura_resumen">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SubtotalIVASinDscto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SubtotalSinIVASinDscto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SubtotalSinDscto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Descuento" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SubtotalIVAConDscto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SubtotalSinIVAConDscto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SubtotalConDscto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ValorIVA" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ValorEfectivo" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cambio" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fa_factura_x_ct_cbtecble">
+          <Key>
+            <PropertyRef Name="vt_IdEmpresa" />
+            <PropertyRef Name="vt_IdSucursal" />
+            <PropertyRef Name="vt_IdBodega" />
+            <PropertyRef Name="vt_IdCbteVta" />
+            <PropertyRef Name="ct_IdEmpresa" />
+            <PropertyRef Name="ct_IdTipoCbte" />
+            <PropertyRef Name="ct_IdCbteCble" />
+          </Key>
+          <Property Name="vt_IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="vt_IdSucursal" Type="int" Nullable="false" />
+          <Property Name="vt_IdBodega" Type="int" Nullable="false" />
+          <Property Name="vt_IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ct_IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="ct_IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="ct_IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Motivo" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="fa_formaPago">
           <Key>
             <PropertyRef Name="IdFormaPago" />
@@ -133,6 +254,137 @@
           <Property Name="Observacion" Type="varchar(max)" />
           <Property Name="Porcentaje" Type="float" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fa_notaCreDeb">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdNota" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdNota" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dev_IdEmpresa" Type="int" />
+          <Property Name="dev_IdDev_Inven" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CodNota" Type="varchar" MaxLength="50" />
+          <Property Name="CreDeb" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="CodDocumentoTipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Serie1" Type="varchar" MaxLength="3" />
+          <Property Name="Serie2" Type="varchar" MaxLength="3" />
+          <Property Name="NumNota_Impresa" Type="varchar" MaxLength="20" />
+          <Property Name="NumAutorizacion" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_Autorizacion" Type="datetime" />
+          <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="no_fecha" Type="datetime" Nullable="false" />
+          <Property Name="no_fecha_venc" Type="datetime" Nullable="false" />
+          <Property Name="IdTipoNota" Type="int" Nullable="false" />
+          <Property Name="sc_observacion" Type="varchar(max)" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="NaturalezaNota" Type="char" MaxLength="3" />
+          <Property Name="IdCtaCble_TipoNota" Type="varchar" MaxLength="20" />
+          <Property Name="IdPuntoVta" Type="int" Nullable="false" />
+          <Property Name="aprobada_enviar_sri" Type="bit" Nullable="false" />
+          <Property Name="Generado" Type="bit" />
+        </EntityType>
+        <EntityType Name="fa_notaCreDeb_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdNota" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdNota" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="sc_cantidad" Type="float" Nullable="false" />
+          <Property Name="sc_Precio" Type="float" Nullable="false" />
+          <Property Name="sc_descUni" Type="float" Nullable="false" />
+          <Property Name="sc_PordescUni" Type="float" Nullable="false" />
+          <Property Name="sc_precioFinal" Type="float" Nullable="false" />
+          <Property Name="sc_subtotal" Type="float" Nullable="false" />
+          <Property Name="sc_iva" Type="float" Nullable="false" />
+          <Property Name="sc_total" Type="float" Nullable="false" />
+          <Property Name="sc_costo" Type="float" Nullable="false" />
+          <Property Name="sc_observacion" Type="varchar" MaxLength="1000" />
+          <Property Name="vt_por_iva" Type="float" Nullable="false" />
+          <Property Name="IdCentroCosto" Type="varchar" MaxLength="200" />
+          <Property Name="IdPunto_Cargo" Type="int" />
+          <Property Name="IdPunto_cargo_grupo" Type="int" />
+          <Property Name="IdCod_Impuesto_Iva" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="sc_cantidad_factura" Type="float" />
+        </EntityType>
+        <EntityType Name="fa_notaCreDeb_x_ct_cbtecble">
+          <Key>
+            <PropertyRef Name="no_IdEmpresa" />
+            <PropertyRef Name="no_IdSucursal" />
+            <PropertyRef Name="no_IdBodega" />
+            <PropertyRef Name="no_IdNota" />
+            <PropertyRef Name="ct_IdEmpresa" />
+            <PropertyRef Name="ct_IdTipoCbte" />
+            <PropertyRef Name="ct_IdCbteCble" />
+          </Key>
+          <Property Name="no_IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="no_IdSucursal" Type="int" Nullable="false" />
+          <Property Name="no_IdBodega" Type="int" Nullable="false" />
+          <Property Name="no_IdNota" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ct_IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="ct_IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="ct_IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="observacion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="fa_notaCreDeb_x_cxc_cobro">
+          <Key>
+            <PropertyRef Name="IdEmpresa_cbr" />
+            <PropertyRef Name="IdSucursal_cbr" />
+            <PropertyRef Name="IdCobro_cbr" />
+            <PropertyRef Name="IdEmpresa_nt" />
+            <PropertyRef Name="IdSucursal_nt" />
+            <PropertyRef Name="IdBodega_nt" />
+            <PropertyRef Name="IdNota_nt" />
+          </Key>
+          <Property Name="IdEmpresa_cbr" Type="int" Nullable="false" />
+          <Property Name="IdSucursal_cbr" Type="int" Nullable="false" />
+          <Property Name="IdCobro_cbr" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEmpresa_nt" Type="int" Nullable="false" />
+          <Property Name="IdSucursal_nt" Type="int" Nullable="false" />
+          <Property Name="IdBodega_nt" Type="int" Nullable="false" />
+          <Property Name="IdNota_nt" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Valor_cobro" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fa_notaCreDeb_x_fa_factura_NotaDeb">
+          <Key>
+            <PropertyRef Name="IdEmpresa_nt" />
+            <PropertyRef Name="IdSucursal_nt" />
+            <PropertyRef Name="IdBodega_nt" />
+            <PropertyRef Name="IdNota_nt" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdEmpresa_nt" Type="int" Nullable="false" />
+          <Property Name="IdSucursal_nt" Type="int" Nullable="false" />
+          <Property Name="IdBodega_nt" Type="int" Nullable="false" />
+          <Property Name="IdNota_nt" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa_fac_nd_doc_mod" Type="int" Nullable="false" />
+          <Property Name="IdSucursal_fac_nd_doc_mod" Type="int" Nullable="false" />
+          <Property Name="IdBodega_fac_nd_doc_mod" Type="int" Nullable="false" />
+          <Property Name="IdCbteVta_fac_nd_doc_mod" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="vt_tipoDoc" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NumDocumento" Type="varchar" MaxLength="300" />
+          <Property Name="Valor_Aplicado" Type="float" Nullable="false" />
+          <Property Name="fecha_cruce" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="fa_parametro">
           <Key>
@@ -194,6 +446,240 @@
           <Property Name="estado" Type="bit" Nullable="false" />
           <Property Name="AplicaDescuentoNomina" Type="bit" />
           <Property Name="CodigoRubroDescto" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="fa_TerminoPago_Distribucion">
+          <Key>
+            <PropertyRef Name="IdTerminoPago" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdTerminoPago" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="Num_Dias_Vcto" Type="int" Nullable="false" />
+          <Property Name="Por_distribucion" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fa_TipoNota">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoNota" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoNota" Type="int" Nullable="false" />
+          <Property Name="CodTipoNota" Type="varchar" MaxLength="20" />
+          <Property Name="Tipo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="No_Descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="GeneraMoviInven" Type="bit" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCbleCXC" Type="varchar" MaxLength="20" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="fa_Vendedor">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdVendedor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdVendedor" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="Ve_Vendedor" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NomInterno" Type="varchar" MaxLength="500" />
+          <Property Name="ve_cedula" Type="varchar" MaxLength="20" />
+          <Property Name="PorComision" Type="float" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MotivoAnula" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwfa_cliente_contactos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwfa_cliente_contactos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdContacto" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="IdCiudad" />
+            <PropertyRef Name="IdParroquia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdContacto" Type="int" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="200" />
+          <Property Name="Celular" Type="varchar" MaxLength="200" />
+          <Property Name="Correo" Type="varchar" MaxLength="1000" />
+          <Property Name="Direccion" Type="varchar" MaxLength="1000" />
+          <Property Name="IdCiudad" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdParroquia" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="nom_parroquia" Type="varchar" MaxLength="150" />
+          <Property Name="Descripcion_Ciudad" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwfa_factura_sin_automatico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwfa_factura_sin_automatico">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdCbte_vta_nota" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega_Cbte" Type="int" />
+          <Property Name="IdCbte_vta_nota" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dc_TipoDocumento" Type="varchar" MaxLength="20" />
+          <Property Name="estado" Type="varchar" MaxLength="1" />
+          <Property Name="IdCobro" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwfa_PuntoVta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwfa_PuntoVta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdPuntoVta" />
+            <PropertyRef Name="cod_PuntoVta" />
+            <PropertyRef Name="nom_PuntoVta" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="CobroAutomatico" />
+            <PropertyRef Name="EsElectronico" />
+            <PropertyRef Name="codDocumentoTipo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdPuntoVta" Type="int" Nullable="false" />
+          <Property Name="cod_PuntoVta" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nom_PuntoVta" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="estado" Type="bit" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="Su_CodigoEstablecimiento" Type="varchar" MaxLength="30" />
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="IPImpresora" Type="varchar" MaxLength="500" />
+          <Property Name="NumCopias" Type="int" />
+          <Property Name="CobroAutomatico" Type="bit" Nullable="false" />
+          <Property Name="EsElectronico" Type="bit" Nullable="false" />
+          <Property Name="codDocumentoTipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwfa_cliente_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwfa_cliente_consulta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="Idtipo_cliente" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" />
+          <Property Name="Idtipo_cliente" Type="int" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descripcion_tip_cliente" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwfa_factura' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwfa_factura">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="Ve_Vendedor" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="vt_NumFactura" Type="varchar" MaxLength="20" />
+          <Property Name="vt_fecha" Type="datetime" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Ve_Vendedor" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="vt_Subtotal0" Type="float" />
+          <Property Name="vt_SubtotalIVA" Type="float" />
+          <Property Name="vt_iva" Type="float" />
+          <Property Name="vt_total" Type="float" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="esta_impresa" Type="bit" />
+          <Property Name="IdEmpresa_in_eg_x_inv" Type="int" />
+          <Property Name="IdSucursal_in_eg_x_inv" Type="int" />
+          <Property Name="IdMovi_inven_tipo_in_eg_x_inv" Type="int" />
+          <Property Name="IdNumMovi_in_eg_x_inv" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Fecha_Autorizacion" Type="datetime" />
+          <Property Name="vt_autorizacion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwfa_factura_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwfa_factura_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="vt_cantidad" />
+            <PropertyRef Name="vt_Precio" />
+            <PropertyRef Name="vt_PorDescUnitario" />
+            <PropertyRef Name="vt_DescUnitario" />
+            <PropertyRef Name="vt_PrecioFinal" />
+            <PropertyRef Name="vt_Subtotal" />
+            <PropertyRef Name="vt_iva" />
+            <PropertyRef Name="vt_total" />
+            <PropertyRef Name="vt_por_iva" />
+            <PropertyRef Name="IdCod_Impuesto_Iva" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="vt_cantidad" Type="float" Nullable="false" />
+          <Property Name="vt_Precio" Type="float" Nullable="false" />
+          <Property Name="vt_PorDescUnitario" Type="float" Nullable="false" />
+          <Property Name="vt_DescUnitario" Type="float" Nullable="false" />
+          <Property Name="vt_PrecioFinal" Type="float" Nullable="false" />
+          <Property Name="vt_Subtotal" Type="float" Nullable="false" />
+          <Property Name="vt_iva" Type="float" Nullable="false" />
+          <Property Name="vt_total" Type="float" Nullable="false" />
+          <Property Name="vt_detallexItems" Type="nvarchar(max)" />
+          <Property Name="vt_por_iva" Type="float" Nullable="false" />
+          <Property Name="IdPunto_Cargo" Type="int" />
+          <Property Name="IdPunto_cargo_grupo" Type="int" />
+          <Property Name="IdCod_Impuesto_Iva" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdCentroCosto" Type="varchar" MaxLength="200" />
+          <Property Name="IdEmpresa_pf" Type="int" />
+          <Property Name="IdSucursal_pf" Type="int" />
+          <Property Name="IdProforma" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Secuencia_pf" Type="int" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" />
+          <Property Name="nom_presentacion" Type="varchar" MaxLength="150" />
+          <Property Name="lote_num_lote" Type="varchar" MaxLength="50" />
+          <Property Name="lote_fecha_vcto" Type="datetime" />
+          <Property Name="se_distribuye" Type="bit" />
+          <Property Name="tp_ManejaInven" Type="char" MaxLength="1" />
         </EntityType>
         <Association Name="FK_fa_catalogo_fa_catalogo_tipo">
           <End Role="fa_catalogo_tipo" Type="Self.fa_catalogo_tipo" Multiplicity="1" />
@@ -287,6 +773,224 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor">
+          <End Role="fa_Vendedor" Type="Self.fa_Vendedor" Multiplicity="1" />
+          <End Role="fa_cliente_x_fa_Vendedor_x_sucursal" Type="Self.fa_cliente_x_fa_Vendedor_x_sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_Vendedor">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdVendedor" />
+            </Principal>
+            <Dependent Role="fa_cliente_x_fa_Vendedor_x_sucursal">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdVendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_det_fa_factura">
+          <End Role="fa_factura" Type="Self.fa_factura" Multiplicity="1" />
+          <End Role="fa_factura_det" Type="Self.fa_factura_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdCbteVta" />
+            </Principal>
+            <Dependent Role="fa_factura_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdCbteVta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_fa_catalogo">
+          <End Role="fa_catalogo" Type="Self.fa_catalogo" Multiplicity="0..1" />
+          <End Role="fa_factura" Type="Self.fa_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="fa_factura">
+              <PropertyRef Name="IdCatalogo_FormaPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_fa_cliente">
+          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="1" />
+          <End Role="fa_factura" Type="Self.fa_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_fa_NivelDescuento">
+          <End Role="fa_NivelDescuento" Type="Self.fa_NivelDescuento" Multiplicity="1" />
+          <End Role="fa_factura" Type="Self.fa_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_NivelDescuento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Principal>
+            <Dependent Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_fa_PuntoVta">
+          <End Role="fa_PuntoVta" Type="Self.fa_PuntoVta" Multiplicity="0..1" />
+          <End Role="fa_factura" Type="Self.fa_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_PuntoVta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdPuntoVta" />
+            </Principal>
+            <Dependent Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdPuntoVta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_fa_Vendedor">
+          <End Role="fa_Vendedor" Type="Self.fa_Vendedor" Multiplicity="1" />
+          <End Role="fa_factura" Type="Self.fa_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_Vendedor">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdVendedor" />
+            </Principal>
+            <Dependent Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdVendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_x_ct_cbtecble_fa_factura">
+          <End Role="fa_factura" Type="Self.fa_factura" Multiplicity="1" />
+          <End Role="fa_factura_x_ct_cbtecble" Type="Self.fa_factura_x_ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdCbteVta" />
+            </Principal>
+            <Dependent Role="fa_factura_x_ct_cbtecble">
+              <PropertyRef Name="vt_IdEmpresa" />
+              <PropertyRef Name="vt_IdSucursal" />
+              <PropertyRef Name="vt_IdBodega" />
+              <PropertyRef Name="vt_IdCbteVta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_det_fa_notaCreDeb">
+          <End Role="fa_notaCreDeb" Type="Self.fa_notaCreDeb" Multiplicity="1" />
+          <End Role="fa_notaCreDeb_det" Type="Self.fa_notaCreDeb_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdNota" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_fa_cliente">
+          <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="1" />
+          <End Role="fa_notaCreDeb" Type="Self.fa_notaCreDeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_fa_PuntoVta">
+          <End Role="fa_PuntoVta" Type="Self.fa_PuntoVta" Multiplicity="1" />
+          <End Role="fa_notaCreDeb" Type="Self.fa_notaCreDeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_PuntoVta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdPuntoVta" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdPuntoVta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_fa_TipoNota1">
+          <End Role="fa_TipoNota" Type="Self.fa_TipoNota" Multiplicity="1" />
+          <End Role="fa_notaCreDeb" Type="Self.fa_notaCreDeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TipoNota">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoNota" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb">
+          <End Role="fa_notaCreDeb" Type="Self.fa_notaCreDeb" Multiplicity="1" />
+          <End Role="fa_notaCreDeb_x_ct_cbtecble" Type="Self.fa_notaCreDeb_x_ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdNota" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb_x_ct_cbtecble">
+              <PropertyRef Name="no_IdEmpresa" />
+              <PropertyRef Name="no_IdSucursal" />
+              <PropertyRef Name="no_IdBodega" />
+              <PropertyRef Name="no_IdNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb">
+          <End Role="fa_notaCreDeb" Type="Self.fa_notaCreDeb" Multiplicity="1" />
+          <End Role="fa_notaCreDeb_x_cxc_cobro" Type="Self.fa_notaCreDeb_x_cxc_cobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdNota" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb_x_cxc_cobro">
+              <PropertyRef Name="IdEmpresa_nt" />
+              <PropertyRef Name="IdSucursal_nt" />
+              <PropertyRef Name="IdBodega_nt" />
+              <PropertyRef Name="IdNota_nt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_fa_parametro_fa_cliente">
           <End Role="fa_cliente" Type="Self.fa_cliente" Multiplicity="0..1" />
           <End Role="fa_parametro" Type="Self.fa_parametro" Multiplicity="*" />
@@ -301,6 +1005,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_fa_TerminoPago_Distribucion_fa_TerminoPago">
+          <End Role="fa_TerminoPago" Type="Self.fa_TerminoPago" Multiplicity="1" />
+          <End Role="fa_TerminoPago_Distribucion" Type="Self.fa_TerminoPago_Distribucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TerminoPago">
+              <PropertyRef Name="IdTerminoPago" />
+            </Principal>
+            <Dependent Role="fa_TerminoPago_Distribucion">
+              <PropertyRef Name="IdTerminoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelFacturacionStoreContainer">
           <EntitySet Name="fa_catalogo" EntityType="Self.fa_catalogo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_catalogo_tipo" EntityType="Self.fa_catalogo_tipo" Schema="dbo" store:Type="Tables" />
@@ -308,11 +1024,141 @@
           <EntitySet Name="fa_cliente_contactos" EntityType="Self.fa_cliente_contactos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_cliente_tipo" EntityType="Self.fa_cliente_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_cliente_x_fa_Vendedor_x_sucursal" EntityType="Self.fa_cliente_x_fa_Vendedor_x_sucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_factura" EntityType="Self.fa_factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_factura_det" EntityType="Self.fa_factura_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_factura_resumen" EntityType="Self.fa_factura_resumen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_factura_x_ct_cbtecble" EntityType="Self.fa_factura_x_ct_cbtecble" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_formaPago" EntityType="Self.fa_formaPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_NivelDescuento" EntityType="Self.fa_NivelDescuento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_notaCreDeb" EntityType="Self.fa_notaCreDeb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_notaCreDeb_det" EntityType="Self.fa_notaCreDeb_det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_notaCreDeb_x_ct_cbtecble" EntityType="Self.fa_notaCreDeb_x_ct_cbtecble" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_notaCreDeb_x_cxc_cobro" EntityType="Self.fa_notaCreDeb_x_cxc_cobro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_notaCreDeb_x_fa_factura_NotaDeb" EntityType="Self.fa_notaCreDeb_x_fa_factura_NotaDeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_parametro" EntityType="Self.fa_parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_PuntoVta" EntityType="Self.fa_PuntoVta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_TerminoPago" EntityType="Self.fa_TerminoPago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_TerminoPago_Distribucion" EntityType="Self.fa_TerminoPago_Distribucion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_TipoNota" EntityType="Self.fa_TipoNota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fa_Vendedor" EntityType="Self.fa_Vendedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwfa_cliente_contactos" EntityType="Self.vwfa_cliente_contactos" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwfa_cliente_contactos].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_cliente_contactos].[IdCliente] AS [IdCliente], 
+    [vwfa_cliente_contactos].[IdContacto] AS [IdContacto], 
+    [vwfa_cliente_contactos].[Nombres] AS [Nombres], 
+    [vwfa_cliente_contactos].[Telefono] AS [Telefono], 
+    [vwfa_cliente_contactos].[Celular] AS [Celular], 
+    [vwfa_cliente_contactos].[Correo] AS [Correo], 
+    [vwfa_cliente_contactos].[Direccion] AS [Direccion], 
+    [vwfa_cliente_contactos].[IdCiudad] AS [IdCiudad], 
+    [vwfa_cliente_contactos].[IdParroquia] AS [IdParroquia], 
+    [vwfa_cliente_contactos].[nom_parroquia] AS [nom_parroquia], 
+    [vwfa_cliente_contactos].[Descripcion_Ciudad] AS [Descripcion_Ciudad]
+    FROM [dbo].[vwfa_cliente_contactos] AS [vwfa_cliente_contactos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwfa_factura_sin_automatico" EntityType="Self.vwfa_factura_sin_automatico" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwfa_factura_sin_automatico].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_factura_sin_automatico].[IdSucursal] AS [IdSucursal], 
+    [vwfa_factura_sin_automatico].[IdBodega_Cbte] AS [IdBodega_Cbte], 
+    [vwfa_factura_sin_automatico].[IdCbte_vta_nota] AS [IdCbte_vta_nota], 
+    [vwfa_factura_sin_automatico].[dc_TipoDocumento] AS [dc_TipoDocumento], 
+    [vwfa_factura_sin_automatico].[estado] AS [estado], 
+    [vwfa_factura_sin_automatico].[IdCobro] AS [IdCobro]
+    FROM [dbo].[vwfa_factura_sin_automatico] AS [vwfa_factura_sin_automatico]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwfa_PuntoVta" EntityType="Self.vwfa_PuntoVta" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwfa_PuntoVta].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_PuntoVta].[IdSucursal] AS [IdSucursal], 
+    [vwfa_PuntoVta].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwfa_PuntoVta].[IdPuntoVta] AS [IdPuntoVta], 
+    [vwfa_PuntoVta].[cod_PuntoVta] AS [cod_PuntoVta], 
+    [vwfa_PuntoVta].[nom_PuntoVta] AS [nom_PuntoVta], 
+    [vwfa_PuntoVta].[estado] AS [estado], 
+    [vwfa_PuntoVta].[IdBodega] AS [IdBodega], 
+    [vwfa_PuntoVta].[Su_CodigoEstablecimiento] AS [Su_CodigoEstablecimiento], 
+    [vwfa_PuntoVta].[IdCaja] AS [IdCaja], 
+    [vwfa_PuntoVta].[IPImpresora] AS [IPImpresora], 
+    [vwfa_PuntoVta].[NumCopias] AS [NumCopias], 
+    [vwfa_PuntoVta].[CobroAutomatico] AS [CobroAutomatico], 
+    [vwfa_PuntoVta].[EsElectronico] AS [EsElectronico], 
+    [vwfa_PuntoVta].[codDocumentoTipo] AS [codDocumentoTipo], 
+    [vwfa_PuntoVta].[Descripcion] AS [Descripcion]
+    FROM [dbo].[vwfa_PuntoVta] AS [vwfa_PuntoVta]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwfa_cliente_consulta" EntityType="Self.vwfa_cliente_consulta" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [vwfa_cliente_consulta].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_cliente_consulta].[IdCliente] AS [IdCliente], 
+    [vwfa_cliente_consulta].[Codigo] AS [Codigo], 
+    [vwfa_cliente_consulta].[IdPersona] AS [IdPersona], 
+    [vwfa_cliente_consulta].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwfa_cliente_consulta].[Idtipo_cliente] AS [Idtipo_cliente], 
+    [vwfa_cliente_consulta].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwfa_cliente_consulta].[Estado] AS [Estado], 
+    [vwfa_cliente_consulta].[Descripcion_tip_cliente] AS [Descripcion_tip_cliente]
+    FROM [web].[vwfa_cliente_consulta] AS [vwfa_cliente_consulta]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwfa_factura" EntityType="Self.vwfa_factura" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [vwfa_factura].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_factura].[IdSucursal] AS [IdSucursal], 
+    [vwfa_factura].[IdBodega] AS [IdBodega], 
+    [vwfa_factura].[IdCbteVta] AS [IdCbteVta], 
+    [vwfa_factura].[vt_NumFactura] AS [vt_NumFactura], 
+    [vwfa_factura].[vt_fecha] AS [vt_fecha], 
+    [vwfa_factura].[Nombres] AS [Nombres], 
+    [vwfa_factura].[Ve_Vendedor] AS [Ve_Vendedor], 
+    [vwfa_factura].[vt_Subtotal0] AS [vt_Subtotal0], 
+    [vwfa_factura].[vt_SubtotalIVA] AS [vt_SubtotalIVA], 
+    [vwfa_factura].[vt_iva] AS [vt_iva], 
+    [vwfa_factura].[vt_total] AS [vt_total], 
+    [vwfa_factura].[Estado] AS [Estado], 
+    [vwfa_factura].[esta_impresa] AS [esta_impresa], 
+    [vwfa_factura].[IdEmpresa_in_eg_x_inv] AS [IdEmpresa_in_eg_x_inv], 
+    [vwfa_factura].[IdSucursal_in_eg_x_inv] AS [IdSucursal_in_eg_x_inv], 
+    [vwfa_factura].[IdMovi_inven_tipo_in_eg_x_inv] AS [IdMovi_inven_tipo_in_eg_x_inv], 
+    [vwfa_factura].[IdNumMovi_in_eg_x_inv] AS [IdNumMovi_in_eg_x_inv], 
+    [vwfa_factura].[Fecha_Autorizacion] AS [Fecha_Autorizacion], 
+    [vwfa_factura].[vt_autorizacion] AS [vt_autorizacion]
+    FROM [web].[vwfa_factura] AS [vwfa_factura]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwfa_factura_det" EntityType="Self.vwfa_factura_det" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [vwfa_factura_det].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_factura_det].[IdSucursal] AS [IdSucursal], 
+    [vwfa_factura_det].[IdBodega] AS [IdBodega], 
+    [vwfa_factura_det].[IdCbteVta] AS [IdCbteVta], 
+    [vwfa_factura_det].[Secuencia] AS [Secuencia], 
+    [vwfa_factura_det].[IdProducto] AS [IdProducto], 
+    [vwfa_factura_det].[vt_cantidad] AS [vt_cantidad], 
+    [vwfa_factura_det].[vt_Precio] AS [vt_Precio], 
+    [vwfa_factura_det].[vt_PorDescUnitario] AS [vt_PorDescUnitario], 
+    [vwfa_factura_det].[vt_DescUnitario] AS [vt_DescUnitario], 
+    [vwfa_factura_det].[vt_PrecioFinal] AS [vt_PrecioFinal], 
+    [vwfa_factura_det].[vt_Subtotal] AS [vt_Subtotal], 
+    [vwfa_factura_det].[vt_iva] AS [vt_iva], 
+    [vwfa_factura_det].[vt_total] AS [vt_total], 
+    [vwfa_factura_det].[vt_detallexItems] AS [vt_detallexItems], 
+    [vwfa_factura_det].[vt_por_iva] AS [vt_por_iva], 
+    [vwfa_factura_det].[IdPunto_Cargo] AS [IdPunto_Cargo], 
+    [vwfa_factura_det].[IdPunto_cargo_grupo] AS [IdPunto_cargo_grupo], 
+    [vwfa_factura_det].[IdCod_Impuesto_Iva] AS [IdCod_Impuesto_Iva], 
+    [vwfa_factura_det].[IdCentroCosto] AS [IdCentroCosto], 
+    [vwfa_factura_det].[IdEmpresa_pf] AS [IdEmpresa_pf], 
+    [vwfa_factura_det].[IdSucursal_pf] AS [IdSucursal_pf], 
+    [vwfa_factura_det].[IdProforma] AS [IdProforma], 
+    [vwfa_factura_det].[Secuencia_pf] AS [Secuencia_pf], 
+    [vwfa_factura_det].[pr_descripcion] AS [pr_descripcion], 
+    [vwfa_factura_det].[nom_presentacion] AS [nom_presentacion], 
+    [vwfa_factura_det].[lote_num_lote] AS [lote_num_lote], 
+    [vwfa_factura_det].[lote_fecha_vcto] AS [lote_fecha_vcto], 
+    [vwfa_factura_det].[se_distribuye] AS [se_distribuye], 
+    [vwfa_factura_det].[tp_ManejaInven] AS [tp_ManejaInven]
+    FROM [web].[vwfa_factura_det] AS [vwfa_factura_det]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_fa_catalogo_fa_catalogo_tipo" Association="Self.FK_fa_catalogo_fa_catalogo_tipo">
             <End Role="fa_catalogo_tipo" EntitySet="fa_catalogo_tipo" />
             <End Role="fa_catalogo" EntitySet="fa_catalogo" />
@@ -341,9 +1187,69 @@
             <End Role="fa_cliente" EntitySet="fa_cliente" />
             <End Role="fa_cliente_x_fa_Vendedor_x_sucursal" EntitySet="fa_cliente_x_fa_Vendedor_x_sucursal" />
           </AssociationSet>
+          <AssociationSet Name="FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor" Association="Self.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor">
+            <End Role="fa_Vendedor" EntitySet="fa_Vendedor" />
+            <End Role="fa_cliente_x_fa_Vendedor_x_sucursal" EntitySet="fa_cliente_x_fa_Vendedor_x_sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_det_fa_factura" Association="Self.FK_fa_factura_det_fa_factura">
+            <End Role="fa_factura" EntitySet="fa_factura" />
+            <End Role="fa_factura_det" EntitySet="fa_factura_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_fa_catalogo" Association="Self.FK_fa_factura_fa_catalogo">
+            <End Role="fa_catalogo" EntitySet="fa_catalogo" />
+            <End Role="fa_factura" EntitySet="fa_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_fa_cliente" Association="Self.FK_fa_factura_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_factura" EntitySet="fa_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_fa_NivelDescuento" Association="Self.FK_fa_factura_fa_NivelDescuento">
+            <End Role="fa_NivelDescuento" EntitySet="fa_NivelDescuento" />
+            <End Role="fa_factura" EntitySet="fa_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_fa_PuntoVta" Association="Self.FK_fa_factura_fa_PuntoVta">
+            <End Role="fa_PuntoVta" EntitySet="fa_PuntoVta" />
+            <End Role="fa_factura" EntitySet="fa_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_fa_Vendedor" Association="Self.FK_fa_factura_fa_Vendedor">
+            <End Role="fa_Vendedor" EntitySet="fa_Vendedor" />
+            <End Role="fa_factura" EntitySet="fa_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_x_ct_cbtecble_fa_factura" Association="Self.FK_fa_factura_x_ct_cbtecble_fa_factura">
+            <End Role="fa_factura" EntitySet="fa_factura" />
+            <End Role="fa_factura_x_ct_cbtecble" EntitySet="fa_factura_x_ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_det_fa_notaCreDeb" Association="Self.FK_fa_notaCreDeb_det_fa_notaCreDeb">
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+            <End Role="fa_notaCreDeb_det" EntitySet="fa_notaCreDeb_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_fa_cliente" Association="Self.FK_fa_notaCreDeb_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_fa_PuntoVta" Association="Self.FK_fa_notaCreDeb_fa_PuntoVta">
+            <End Role="fa_PuntoVta" EntitySet="fa_PuntoVta" />
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_fa_TipoNota1" Association="Self.FK_fa_notaCreDeb_fa_TipoNota1">
+            <End Role="fa_TipoNota" EntitySet="fa_TipoNota" />
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb" Association="Self.FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb">
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+            <End Role="fa_notaCreDeb_x_ct_cbtecble" EntitySet="fa_notaCreDeb_x_ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb" Association="Self.FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb">
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+            <End Role="fa_notaCreDeb_x_cxc_cobro" EntitySet="fa_notaCreDeb_x_cxc_cobro" />
+          </AssociationSet>
           <AssociationSet Name="FK_fa_parametro_fa_cliente" Association="Self.FK_fa_parametro_fa_cliente">
             <End Role="fa_cliente" EntitySet="fa_cliente" />
             <End Role="fa_parametro" EntitySet="fa_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_TerminoPago_Distribucion_fa_TerminoPago" Association="Self.FK_fa_TerminoPago_Distribucion_fa_TerminoPago">
+            <End Role="fa_TerminoPago" EntitySet="fa_TerminoPago" />
+            <End Role="fa_TerminoPago_Distribucion" EntitySet="fa_TerminoPago_Distribucion" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -362,6 +1268,7 @@
           <Property Name="AplicaDescuentoNomina" Type="Boolean" />
           <Property Name="CodigoRubroDescto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="fa_cliente" Relationship="ModelFacturacion.FK_fa_cliente_fa_TerminoPago" FromRole="fa_TerminoPago" ToRole="fa_cliente" />
+          <NavigationProperty Name="fa_TerminoPago_Distribucion" Relationship="ModelFacturacion.FK_fa_TerminoPago_Distribucion_fa_TerminoPago" FromRole="fa_TerminoPago" ToRole="fa_TerminoPago_Distribucion" />
         </EntityType>
         <EntityContainer Name="EntitiesFacturacion" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="fa_TerminoPago" EntityType="Self.fa_TerminoPago" />
@@ -407,6 +1314,84 @@
             <End Role="fa_cliente" EntitySet="fa_cliente" />
             <End Role="fa_parametro" EntitySet="fa_parametro" />
           </AssociationSet>
+          <EntitySet Name="fa_factura" EntityType="ModelFacturacion.fa_factura" />
+          <EntitySet Name="fa_factura_det" EntityType="ModelFacturacion.fa_factura_det" />
+          <EntitySet Name="fa_factura_resumen" EntityType="ModelFacturacion.fa_factura_resumen" />
+          <EntitySet Name="fa_factura_x_ct_cbtecble" EntityType="ModelFacturacion.fa_factura_x_ct_cbtecble" />
+          <EntitySet Name="fa_notaCreDeb" EntityType="ModelFacturacion.fa_notaCreDeb" />
+          <EntitySet Name="fa_notaCreDeb_det" EntityType="ModelFacturacion.fa_notaCreDeb_det" />
+          <EntitySet Name="fa_notaCreDeb_x_ct_cbtecble" EntityType="ModelFacturacion.fa_notaCreDeb_x_ct_cbtecble" />
+          <EntitySet Name="fa_notaCreDeb_x_cxc_cobro" EntityType="ModelFacturacion.fa_notaCreDeb_x_cxc_cobro" />
+          <EntitySet Name="fa_notaCreDeb_x_fa_factura_NotaDeb" EntityType="ModelFacturacion.fa_notaCreDeb_x_fa_factura_NotaDeb" />
+          <EntitySet Name="fa_TipoNota" EntityType="ModelFacturacion.fa_TipoNota" />
+          <AssociationSet Name="FK_fa_factura_fa_catalogo" Association="ModelFacturacion.FK_fa_factura_fa_catalogo">
+            <End Role="fa_catalogo" EntitySet="fa_catalogo" />
+            <End Role="fa_factura" EntitySet="fa_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_fa_cliente" Association="ModelFacturacion.FK_fa_factura_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_factura" EntitySet="fa_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_fa_cliente" Association="ModelFacturacion.FK_fa_notaCreDeb_fa_cliente">
+            <End Role="fa_cliente" EntitySet="fa_cliente" />
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_det_fa_factura" Association="ModelFacturacion.FK_fa_factura_det_fa_factura">
+            <End Role="fa_factura" EntitySet="fa_factura" />
+            <End Role="fa_factura_det" EntitySet="fa_factura_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_fa_NivelDescuento" Association="ModelFacturacion.FK_fa_factura_fa_NivelDescuento">
+            <End Role="fa_NivelDescuento" EntitySet="fa_NivelDescuento" />
+            <End Role="fa_factura" EntitySet="fa_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_fa_PuntoVta" Association="ModelFacturacion.FK_fa_factura_fa_PuntoVta">
+            <End Role="fa_PuntoVta" EntitySet="fa_PuntoVta" />
+            <End Role="fa_factura" EntitySet="fa_factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_x_ct_cbtecble_fa_factura" Association="ModelFacturacion.FK_fa_factura_x_ct_cbtecble_fa_factura">
+            <End Role="fa_factura" EntitySet="fa_factura" />
+            <End Role="fa_factura_x_ct_cbtecble" EntitySet="fa_factura_x_ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_det_fa_notaCreDeb" Association="ModelFacturacion.FK_fa_notaCreDeb_det_fa_notaCreDeb">
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+            <End Role="fa_notaCreDeb_det" EntitySet="fa_notaCreDeb_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_fa_PuntoVta" Association="ModelFacturacion.FK_fa_notaCreDeb_fa_PuntoVta">
+            <End Role="fa_PuntoVta" EntitySet="fa_PuntoVta" />
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_fa_TipoNota1" Association="ModelFacturacion.FK_fa_notaCreDeb_fa_TipoNota1">
+            <End Role="fa_TipoNota" EntitySet="fa_TipoNota" />
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb" Association="ModelFacturacion.FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb">
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+            <End Role="fa_notaCreDeb_x_ct_cbtecble" EntitySet="fa_notaCreDeb_x_ct_cbtecble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb" Association="ModelFacturacion.FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb">
+            <End Role="fa_notaCreDeb" EntitySet="fa_notaCreDeb" />
+            <End Role="fa_notaCreDeb_x_cxc_cobro" EntitySet="fa_notaCreDeb_x_cxc_cobro" />
+          </AssociationSet>
+          <EntitySet Name="vwfa_factura_det" EntityType="ModelFacturacion.vwfa_factura_det" />
+          <EntitySet Name="vwfa_PuntoVta" EntityType="ModelFacturacion.vwfa_PuntoVta" />
+          <EntitySet Name="fa_Vendedor" EntityType="ModelFacturacion.fa_Vendedor" />
+          <AssociationSet Name="FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor" Association="ModelFacturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor">
+            <End Role="fa_Vendedor" EntitySet="fa_Vendedor" />
+            <End Role="fa_cliente_x_fa_Vendedor_x_sucursal" EntitySet="fa_cliente_x_fa_Vendedor_x_sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fa_factura_fa_Vendedor" Association="ModelFacturacion.FK_fa_factura_fa_Vendedor">
+            <End Role="fa_Vendedor" EntitySet="fa_Vendedor" />
+            <End Role="fa_factura" EntitySet="fa_factura" />
+          </AssociationSet>
+          <EntitySet Name="vwfa_cliente_consulta" EntityType="ModelFacturacion.vwfa_cliente_consulta" />
+          <EntitySet Name="vwfa_cliente_contactos" EntityType="ModelFacturacion.vwfa_cliente_contactos" />
+          <EntitySet Name="fa_TerminoPago_Distribucion" EntityType="ModelFacturacion.fa_TerminoPago_Distribucion" />
+          <AssociationSet Name="FK_fa_TerminoPago_Distribucion_fa_TerminoPago" Association="ModelFacturacion.FK_fa_TerminoPago_Distribucion_fa_TerminoPago">
+            <End Role="fa_TerminoPago" EntitySet="fa_TerminoPago" />
+            <End Role="fa_TerminoPago_Distribucion" EntitySet="fa_TerminoPago_Distribucion" />
+          </AssociationSet>
+          <EntitySet Name="vwfa_factura_sin_automatico" EntityType="ModelFacturacion.vwfa_factura_sin_automatico" />
+          <EntitySet Name="vwfa_factura" EntityType="ModelFacturacion.vwfa_factura" />
         </EntityContainer>
         <EntityType Name="fa_cliente">
           <Key>
@@ -440,6 +1425,8 @@
           <NavigationProperty Name="fa_NivelDescuento" Relationship="ModelFacturacion.FK_fa_cliente_fa_NivelDescuento" FromRole="fa_cliente" ToRole="fa_NivelDescuento" />
           <NavigationProperty Name="fa_cliente_x_fa_Vendedor_x_sucursal" Relationship="ModelFacturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente" FromRole="fa_cliente" ToRole="fa_cliente_x_fa_Vendedor_x_sucursal" />
           <NavigationProperty Name="fa_parametro" Relationship="ModelFacturacion.FK_fa_parametro_fa_cliente" FromRole="fa_cliente" ToRole="fa_parametro" />
+          <NavigationProperty Name="fa_factura" Relationship="ModelFacturacion.FK_fa_factura_fa_cliente" FromRole="fa_cliente" ToRole="fa_factura" />
+          <NavigationProperty Name="fa_notaCreDeb" Relationship="ModelFacturacion.FK_fa_notaCreDeb_fa_cliente" FromRole="fa_cliente" ToRole="fa_notaCreDeb" />
         </EntityType>
         <Association Name="FK_fa_cliente_fa_TerminoPago">
           <End Type="ModelFacturacion.fa_TerminoPago" Role="fa_TerminoPago" Multiplicity="1" />
@@ -473,6 +1460,7 @@
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="fa_catalogo_tipo" Relationship="ModelFacturacion.FK_fa_catalogo_fa_catalogo_tipo" FromRole="fa_catalogo" ToRole="fa_catalogo_tipo" />
+          <NavigationProperty Name="fa_factura" Relationship="ModelFacturacion.FK_fa_factura_fa_catalogo" FromRole="fa_catalogo" ToRole="fa_factura" />
         </EntityType>
         <EntityType Name="fa_catalogo_tipo">
           <Key>
@@ -534,6 +1522,7 @@
           <Property Name="IdVendedor" Type="Int32" Nullable="false" />
           <Property Name="observacion" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="fa_cliente" Relationship="ModelFacturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente" FromRole="fa_cliente_x_fa_Vendedor_x_sucursal" ToRole="fa_cliente" />
+          <NavigationProperty Name="fa_Vendedor" Relationship="ModelFacturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor" FromRole="fa_cliente_x_fa_Vendedor_x_sucursal" ToRole="fa_Vendedor" />
         </EntityType>
         <EntityType Name="fa_formaPago">
           <Key>
@@ -562,6 +1551,7 @@
           <Property Name="Porcentaje" Type="Double" Nullable="false" />
           <Property Name="Estado" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="fa_cliente" Relationship="ModelFacturacion.FK_fa_cliente_fa_NivelDescuento" FromRole="fa_NivelDescuento" ToRole="fa_cliente" />
+          <NavigationProperty Name="fa_factura" Relationship="ModelFacturacion.FK_fa_factura_fa_NivelDescuento" FromRole="fa_NivelDescuento" ToRole="fa_factura" />
         </EntityType>
         <EntityType Name="fa_parametro">
           <Key>
@@ -612,6 +1602,8 @@
           <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fa_factura" Relationship="ModelFacturacion.FK_fa_factura_fa_PuntoVta" FromRole="fa_PuntoVta" ToRole="fa_factura" />
+          <NavigationProperty Name="fa_notaCreDeb" Relationship="ModelFacturacion.FK_fa_notaCreDeb_fa_PuntoVta" FromRole="fa_PuntoVta" ToRole="fa_notaCreDeb" />
         </EntityType>
         <Association Name="FK_fa_catalogo_fa_catalogo_tipo">
           <End Type="ModelFacturacion.fa_catalogo_tipo" Role="fa_catalogo_tipo" Multiplicity="1" />
@@ -707,6 +1699,732 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="fa_factura">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CodCbteVta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_tipoDoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="vt_serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
+          <Property Name="vt_autorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdAlumno" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdVendedor" Type="Int32" Nullable="false" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogo_FormaPago" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="vt_plazo" Type="Decimal" Nullable="false" Precision="10" Scale="0" />
+          <Property Name="vt_fech_venc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="vt_tipo_venta" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_Observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transaccion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdPuntoVta" Type="Int32" />
+          <Property Name="esta_impresa" Type="Boolean" />
+          <Property Name="fecha_primera_cuota" Type="DateTime" Precision="3" />
+          <Property Name="valor_abono" Type="Double" />
+          <Property Name="aprobada_enviar_sri" Type="Boolean" Nullable="false" />
+          <Property Name="Generado" Type="Boolean" />
+          <NavigationProperty Name="fa_catalogo" Relationship="ModelFacturacion.FK_fa_factura_fa_catalogo" FromRole="fa_factura" ToRole="fa_catalogo" />
+          <NavigationProperty Name="fa_cliente" Relationship="ModelFacturacion.FK_fa_factura_fa_cliente" FromRole="fa_factura" ToRole="fa_cliente" />
+          <NavigationProperty Name="fa_factura_det" Relationship="ModelFacturacion.FK_fa_factura_det_fa_factura" FromRole="fa_factura" ToRole="fa_factura_det" />
+          <NavigationProperty Name="fa_NivelDescuento" Relationship="ModelFacturacion.FK_fa_factura_fa_NivelDescuento" FromRole="fa_factura" ToRole="fa_NivelDescuento" />
+          <NavigationProperty Name="fa_PuntoVta" Relationship="ModelFacturacion.FK_fa_factura_fa_PuntoVta" FromRole="fa_factura" ToRole="fa_PuntoVta" />
+          <NavigationProperty Name="fa_factura_x_ct_cbtecble" Relationship="ModelFacturacion.FK_fa_factura_x_ct_cbtecble_fa_factura" FromRole="fa_factura" ToRole="fa_factura_x_ct_cbtecble" />
+          <NavigationProperty Name="fa_Vendedor" Relationship="ModelFacturacion.FK_fa_factura_fa_Vendedor" FromRole="fa_factura" ToRole="fa_Vendedor" />
+        </EntityType>
+        <EntityType Name="fa_factura_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="aca_IdPeriodo" Type="Int32" />
+          <Property Name="aca_IdRubro" Type="Int32" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_cantidad" Type="Double" Nullable="false" />
+          <Property Name="vt_Precio" Type="Double" Nullable="false" />
+          <Property Name="vt_PorDescUnitario" Type="Double" Nullable="false" />
+          <Property Name="vt_DescUnitario" Type="Double" Nullable="false" />
+          <Property Name="vt_PrecioFinal" Type="Double" Nullable="false" />
+          <Property Name="vt_Subtotal" Type="Double" Nullable="false" />
+          <Property Name="vt_iva" Type="Double" Nullable="false" />
+          <Property Name="vt_total" Type="Double" Nullable="false" />
+          <Property Name="vt_detallexItems" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vt_por_iva" Type="Double" Nullable="false" />
+          <Property Name="IdCentroCosto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdPunto_Cargo" Type="Int32" />
+          <Property Name="IdPunto_cargo_grupo" Type="Int32" />
+          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_pf" Type="Int32" />
+          <Property Name="IdSucursal_pf" Type="Int32" />
+          <Property Name="IdProforma" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Secuencia_pf" Type="Int32" />
+          <NavigationProperty Name="fa_factura" Relationship="ModelFacturacion.FK_fa_factura_det_fa_factura" FromRole="fa_factura_det" ToRole="fa_factura" />
+        </EntityType>
+        <EntityType Name="fa_factura_resumen">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SubtotalIVASinDscto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SubtotalSinIVASinDscto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SubtotalSinDscto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Descuento" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SubtotalIVAConDscto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SubtotalSinIVAConDscto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SubtotalConDscto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ValorIVA" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ValorEfectivo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Cambio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="fa_factura_x_ct_cbtecble">
+          <Key>
+            <PropertyRef Name="vt_IdEmpresa" />
+            <PropertyRef Name="vt_IdSucursal" />
+            <PropertyRef Name="vt_IdBodega" />
+            <PropertyRef Name="vt_IdCbteVta" />
+            <PropertyRef Name="ct_IdEmpresa" />
+            <PropertyRef Name="ct_IdTipoCbte" />
+            <PropertyRef Name="ct_IdCbteCble" />
+          </Key>
+          <Property Name="vt_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="vt_IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="vt_IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="vt_IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ct_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="ct_IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="ct_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Motivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fa_factura" Relationship="ModelFacturacion.FK_fa_factura_x_ct_cbtecble_fa_factura" FromRole="fa_factura_x_ct_cbtecble" ToRole="fa_factura" />
+        </EntityType>
+        <EntityType Name="fa_notaCreDeb">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdNota" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdNota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="dev_IdEmpresa" Type="Int32" />
+          <Property Name="dev_IdDev_Inven" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CodNota" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreDeb" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="CodDocumentoTipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="NumNota_Impresa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumAutorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
+          <Property Name="IdAlumno" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="no_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="no_fecha_venc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdTipoNota" Type="Int32" Nullable="false" />
+          <Property Name="sc_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="NaturalezaNota" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="IdCtaCble_TipoNota" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdPuntoVta" Type="Int32" Nullable="false" />
+          <Property Name="aprobada_enviar_sri" Type="Boolean" Nullable="false" />
+          <Property Name="Generado" Type="Boolean" />
+          <NavigationProperty Name="fa_cliente" Relationship="ModelFacturacion.FK_fa_notaCreDeb_fa_cliente" FromRole="fa_notaCreDeb" ToRole="fa_cliente" />
+          <NavigationProperty Name="fa_notaCreDeb_det" Relationship="ModelFacturacion.FK_fa_notaCreDeb_det_fa_notaCreDeb" FromRole="fa_notaCreDeb" ToRole="fa_notaCreDeb_det" />
+          <NavigationProperty Name="fa_PuntoVta" Relationship="ModelFacturacion.FK_fa_notaCreDeb_fa_PuntoVta" FromRole="fa_notaCreDeb" ToRole="fa_PuntoVta" />
+          <NavigationProperty Name="fa_TipoNota" Relationship="ModelFacturacion.FK_fa_notaCreDeb_fa_TipoNota1" FromRole="fa_notaCreDeb" ToRole="fa_TipoNota" />
+          <NavigationProperty Name="fa_notaCreDeb_x_ct_cbtecble" Relationship="ModelFacturacion.FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb" FromRole="fa_notaCreDeb" ToRole="fa_notaCreDeb_x_ct_cbtecble" />
+          <NavigationProperty Name="fa_notaCreDeb_x_cxc_cobro" Relationship="ModelFacturacion.FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb" FromRole="fa_notaCreDeb" ToRole="fa_notaCreDeb_x_cxc_cobro" />
+        </EntityType>
+        <EntityType Name="fa_notaCreDeb_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdNota" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdNota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="sc_cantidad" Type="Double" Nullable="false" />
+          <Property Name="sc_Precio" Type="Double" Nullable="false" />
+          <Property Name="sc_descUni" Type="Double" Nullable="false" />
+          <Property Name="sc_PordescUni" Type="Double" Nullable="false" />
+          <Property Name="sc_precioFinal" Type="Double" Nullable="false" />
+          <Property Name="sc_subtotal" Type="Double" Nullable="false" />
+          <Property Name="sc_iva" Type="Double" Nullable="false" />
+          <Property Name="sc_total" Type="Double" Nullable="false" />
+          <Property Name="sc_costo" Type="Double" Nullable="false" />
+          <Property Name="sc_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="vt_por_iva" Type="Double" Nullable="false" />
+          <Property Name="IdCentroCosto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdPunto_Cargo" Type="Int32" />
+          <Property Name="IdPunto_cargo_grupo" Type="Int32" />
+          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="sc_cantidad_factura" Type="Double" />
+          <NavigationProperty Name="fa_notaCreDeb" Relationship="ModelFacturacion.FK_fa_notaCreDeb_det_fa_notaCreDeb" FromRole="fa_notaCreDeb_det" ToRole="fa_notaCreDeb" />
+        </EntityType>
+        <EntityType Name="fa_notaCreDeb_x_ct_cbtecble">
+          <Key>
+            <PropertyRef Name="no_IdEmpresa" />
+            <PropertyRef Name="no_IdSucursal" />
+            <PropertyRef Name="no_IdBodega" />
+            <PropertyRef Name="no_IdNota" />
+            <PropertyRef Name="ct_IdEmpresa" />
+            <PropertyRef Name="ct_IdTipoCbte" />
+            <PropertyRef Name="ct_IdCbteCble" />
+          </Key>
+          <Property Name="no_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="no_IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="no_IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="no_IdNota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ct_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="ct_IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="ct_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fa_notaCreDeb" Relationship="ModelFacturacion.FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb" FromRole="fa_notaCreDeb_x_ct_cbtecble" ToRole="fa_notaCreDeb" />
+        </EntityType>
+        <EntityType Name="fa_notaCreDeb_x_cxc_cobro">
+          <Key>
+            <PropertyRef Name="IdEmpresa_cbr" />
+            <PropertyRef Name="IdSucursal_cbr" />
+            <PropertyRef Name="IdCobro_cbr" />
+            <PropertyRef Name="IdEmpresa_nt" />
+            <PropertyRef Name="IdSucursal_nt" />
+            <PropertyRef Name="IdBodega_nt" />
+            <PropertyRef Name="IdNota_nt" />
+          </Key>
+          <Property Name="IdEmpresa_cbr" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal_cbr" Type="Int32" Nullable="false" />
+          <Property Name="IdCobro_cbr" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEmpresa_nt" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal_nt" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega_nt" Type="Int32" Nullable="false" />
+          <Property Name="IdNota_nt" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Valor_cobro" Type="Double" Nullable="false" />
+          <NavigationProperty Name="fa_notaCreDeb" Relationship="ModelFacturacion.FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb" FromRole="fa_notaCreDeb_x_cxc_cobro" ToRole="fa_notaCreDeb" />
+        </EntityType>
+        <EntityType Name="fa_notaCreDeb_x_fa_factura_NotaDeb">
+          <Key>
+            <PropertyRef Name="IdEmpresa_nt" />
+            <PropertyRef Name="IdSucursal_nt" />
+            <PropertyRef Name="IdBodega_nt" />
+            <PropertyRef Name="IdNota_nt" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdEmpresa_nt" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal_nt" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega_nt" Type="Int32" Nullable="false" />
+          <Property Name="IdNota_nt" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_fac_nd_doc_mod" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal_fac_nd_doc_mod" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega_fac_nd_doc_mod" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta_fac_nd_doc_mod" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_tipoDoc" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumDocumento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Valor_Aplicado" Type="Double" Nullable="false" />
+          <Property Name="fecha_cruce" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="fa_TipoNota">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoNota" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoNota" Type="Int32" Nullable="false" />
+          <Property Name="CodTipoNota" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="No_Descripcion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="GeneraMoviInven" Type="Boolean" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCbleCXC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fa_notaCreDeb" Relationship="ModelFacturacion.FK_fa_notaCreDeb_fa_TipoNota1" FromRole="fa_TipoNota" ToRole="fa_notaCreDeb" />
+        </EntityType>
+        <Association Name="FK_fa_factura_fa_catalogo">
+          <End Type="ModelFacturacion.fa_catalogo" Role="fa_catalogo" Multiplicity="0..1" />
+          <End Type="ModelFacturacion.fa_factura" Role="fa_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="fa_factura">
+              <PropertyRef Name="IdCatalogo_FormaPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_fa_cliente">
+          <End Type="ModelFacturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_factura" Role="fa_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_fa_cliente">
+          <End Type="ModelFacturacion.fa_cliente" Role="fa_cliente" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_notaCreDeb" Role="fa_notaCreDeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_cliente">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_det_fa_factura">
+          <End Type="ModelFacturacion.fa_factura" Role="fa_factura" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_factura_det" Role="fa_factura_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdCbteVta" />
+            </Principal>
+            <Dependent Role="fa_factura_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdCbteVta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_fa_NivelDescuento">
+          <End Type="ModelFacturacion.fa_NivelDescuento" Role="fa_NivelDescuento" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_factura" Role="fa_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_NivelDescuento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Principal>
+            <Dependent Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_fa_PuntoVta">
+          <End Type="ModelFacturacion.fa_PuntoVta" Role="fa_PuntoVta" Multiplicity="0..1" />
+          <End Type="ModelFacturacion.fa_factura" Role="fa_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_PuntoVta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdPuntoVta" />
+            </Principal>
+            <Dependent Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdPuntoVta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_x_ct_cbtecble_fa_factura">
+          <End Type="ModelFacturacion.fa_factura" Role="fa_factura" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_factura_x_ct_cbtecble" Role="fa_factura_x_ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdCbteVta" />
+            </Principal>
+            <Dependent Role="fa_factura_x_ct_cbtecble">
+              <PropertyRef Name="vt_IdEmpresa" />
+              <PropertyRef Name="vt_IdSucursal" />
+              <PropertyRef Name="vt_IdBodega" />
+              <PropertyRef Name="vt_IdCbteVta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_det_fa_notaCreDeb">
+          <End Type="ModelFacturacion.fa_notaCreDeb" Role="fa_notaCreDeb" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_notaCreDeb_det" Role="fa_notaCreDeb_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdNota" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_fa_PuntoVta">
+          <End Type="ModelFacturacion.fa_PuntoVta" Role="fa_PuntoVta" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_notaCreDeb" Role="fa_notaCreDeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_PuntoVta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdPuntoVta" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdPuntoVta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_fa_TipoNota1">
+          <End Type="ModelFacturacion.fa_TipoNota" Role="fa_TipoNota" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_notaCreDeb" Role="fa_notaCreDeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TipoNota">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoNota" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb">
+          <End Type="ModelFacturacion.fa_notaCreDeb" Role="fa_notaCreDeb" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_notaCreDeb_x_ct_cbtecble" Role="fa_notaCreDeb_x_ct_cbtecble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdNota" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb_x_ct_cbtecble">
+              <PropertyRef Name="no_IdEmpresa" />
+              <PropertyRef Name="no_IdSucursal" />
+              <PropertyRef Name="no_IdBodega" />
+              <PropertyRef Name="no_IdNota" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb">
+          <End Type="ModelFacturacion.fa_notaCreDeb" Role="fa_notaCreDeb" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_notaCreDeb_x_cxc_cobro" Role="fa_notaCreDeb_x_cxc_cobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_notaCreDeb">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+              <PropertyRef Name="IdBodega" />
+              <PropertyRef Name="IdNota" />
+            </Principal>
+            <Dependent Role="fa_notaCreDeb_x_cxc_cobro">
+              <PropertyRef Name="IdEmpresa_nt" />
+              <PropertyRef Name="IdSucursal_nt" />
+              <PropertyRef Name="IdBodega_nt" />
+              <PropertyRef Name="IdNota_nt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwfa_factura_det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="vt_cantidad" />
+            <PropertyRef Name="vt_Precio" />
+            <PropertyRef Name="vt_PorDescUnitario" />
+            <PropertyRef Name="vt_DescUnitario" />
+            <PropertyRef Name="vt_PrecioFinal" />
+            <PropertyRef Name="vt_Subtotal" />
+            <PropertyRef Name="vt_iva" />
+            <PropertyRef Name="vt_total" />
+            <PropertyRef Name="vt_por_iva" />
+            <PropertyRef Name="IdCod_Impuesto_Iva" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_cantidad" Type="Double" Nullable="false" />
+          <Property Name="vt_Precio" Type="Double" Nullable="false" />
+          <Property Name="vt_PorDescUnitario" Type="Double" Nullable="false" />
+          <Property Name="vt_DescUnitario" Type="Double" Nullable="false" />
+          <Property Name="vt_PrecioFinal" Type="Double" Nullable="false" />
+          <Property Name="vt_Subtotal" Type="Double" Nullable="false" />
+          <Property Name="vt_iva" Type="Double" Nullable="false" />
+          <Property Name="vt_total" Type="Double" Nullable="false" />
+          <Property Name="vt_detallexItems" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="vt_por_iva" Type="Double" Nullable="false" />
+          <Property Name="IdPunto_Cargo" Type="Int32" />
+          <Property Name="IdPunto_cargo_grupo" Type="Int32" />
+          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdCentroCosto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_pf" Type="Int32" />
+          <Property Name="IdSucursal_pf" Type="Int32" />
+          <Property Name="IdProforma" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Secuencia_pf" Type="Int32" />
+          <Property Name="pr_descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="nom_presentacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="lote_num_lote" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lote_fecha_vcto" Type="DateTime" Precision="3" />
+          <Property Name="se_distribuye" Type="Boolean" />
+          <Property Name="tp_ManejaInven" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwfa_PuntoVta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdPuntoVta" />
+            <PropertyRef Name="cod_PuntoVta" />
+            <PropertyRef Name="nom_PuntoVta" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="CobroAutomatico" />
+            <PropertyRef Name="EsElectronico" />
+            <PropertyRef Name="codDocumentoTipo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdPuntoVta" Type="Int32" Nullable="false" />
+          <Property Name="cod_PuntoVta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_PuntoVta" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="Su_CodigoEstablecimiento" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="IPImpresora" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NumCopias" Type="Int32" />
+          <Property Name="CobroAutomatico" Type="Boolean" Nullable="false" />
+          <Property Name="EsElectronico" Type="Boolean" Nullable="false" />
+          <Property Name="codDocumentoTipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="fa_Vendedor">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdVendedor" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdVendedor" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomInterno" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ve_cedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PorComision" Type="Double" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fa_cliente_x_fa_Vendedor_x_sucursal" Relationship="ModelFacturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor" FromRole="fa_Vendedor" ToRole="fa_cliente_x_fa_Vendedor_x_sucursal" />
+          <NavigationProperty Name="fa_factura" Relationship="ModelFacturacion.FK_fa_factura_fa_Vendedor" FromRole="fa_Vendedor" ToRole="fa_factura" />
+        </EntityType>
+        <Association Name="FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor">
+          <End Type="ModelFacturacion.fa_Vendedor" Role="fa_Vendedor" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_cliente_x_fa_Vendedor_x_sucursal" Role="fa_cliente_x_fa_Vendedor_x_sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_Vendedor">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdVendedor" />
+            </Principal>
+            <Dependent Role="fa_cliente_x_fa_Vendedor_x_sucursal">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdVendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fa_factura_fa_Vendedor">
+          <End Type="ModelFacturacion.fa_Vendedor" Role="fa_Vendedor" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_factura" Role="fa_factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_Vendedor">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdVendedor" />
+            </Principal>
+            <Dependent Role="fa_factura">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdVendedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwfa_cliente_consulta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="Idtipo_cliente" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pe_nombreCompleto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Idtipo_cliente" Type="Int32" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_tip_cliente" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwfa_cliente_contactos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="IdContacto" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="IdCiudad" />
+            <PropertyRef Name="IdParroquia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdContacto" Type="Int32" Nullable="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="nom_parroquia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_Ciudad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="fa_TerminoPago_Distribucion">
+          <Key>
+            <PropertyRef Name="IdTerminoPago" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdTerminoPago" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Num_Dias_Vcto" Type="Int32" Nullable="false" />
+          <Property Name="Por_distribucion" Type="Double" Nullable="false" />
+          <NavigationProperty Name="fa_TerminoPago" Relationship="ModelFacturacion.FK_fa_TerminoPago_Distribucion_fa_TerminoPago" FromRole="fa_TerminoPago_Distribucion" ToRole="fa_TerminoPago" />
+        </EntityType>
+        <Association Name="FK_fa_TerminoPago_Distribucion_fa_TerminoPago">
+          <End Type="ModelFacturacion.fa_TerminoPago" Role="fa_TerminoPago" Multiplicity="1" />
+          <End Type="ModelFacturacion.fa_TerminoPago_Distribucion" Role="fa_TerminoPago_Distribucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fa_TerminoPago">
+              <PropertyRef Name="IdTerminoPago" />
+            </Principal>
+            <Dependent Role="fa_TerminoPago_Distribucion">
+              <PropertyRef Name="IdTerminoPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwfa_factura_sin_automatico">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdCbte_vta_nota" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega_Cbte" Type="Int32" />
+          <Property Name="IdCbte_vta_nota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="dc_TipoDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="IdCobro" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="vwfa_factura">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdCbteVta" />
+            <PropertyRef Name="vt_fecha" />
+            <PropertyRef Name="Nombres" />
+            <PropertyRef Name="Ve_Vendedor" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteVta" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Ve_Vendedor" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="vt_Subtotal0" Type="Double" />
+          <Property Name="vt_SubtotalIVA" Type="Double" />
+          <Property Name="vt_iva" Type="Double" />
+          <Property Name="vt_total" Type="Double" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="esta_impresa" Type="Boolean" />
+          <Property Name="IdEmpresa_in_eg_x_inv" Type="Int32" />
+          <Property Name="IdSucursal_in_eg_x_inv" Type="Int32" />
+          <Property Name="IdMovi_inven_tipo_in_eg_x_inv" Type="Int32" />
+          <Property Name="IdNumMovi_in_eg_x_inv" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
+          <Property Name="vt_autorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -899,6 +2617,412 @@
                 <ScalarProperty Name="nom_PuntoVta" ColumnName="nom_PuntoVta" />
                 <ScalarProperty Name="cod_PuntoVta" ColumnName="cod_PuntoVta" />
                 <ScalarProperty Name="IdPuntoVta" ColumnName="IdPuntoVta" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_factura">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_factura">
+              <MappingFragment StoreEntitySet="fa_factura">
+                <ScalarProperty Name="Generado" ColumnName="Generado" />
+                <ScalarProperty Name="aprobada_enviar_sri" ColumnName="aprobada_enviar_sri" />
+                <ScalarProperty Name="valor_abono" ColumnName="valor_abono" />
+                <ScalarProperty Name="fecha_primera_cuota" ColumnName="fecha_primera_cuota" />
+                <ScalarProperty Name="esta_impresa" ColumnName="esta_impresa" />
+                <ScalarProperty Name="IdPuntoVta" ColumnName="IdPuntoVta" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="Fecha_Transaccion" ColumnName="Fecha_Transaccion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="vt_Observacion" ColumnName="vt_Observacion" />
+                <ScalarProperty Name="vt_tipo_venta" ColumnName="vt_tipo_venta" />
+                <ScalarProperty Name="vt_fech_venc" ColumnName="vt_fech_venc" />
+                <ScalarProperty Name="vt_plazo" ColumnName="vt_plazo" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="IdCatalogo_FormaPago" ColumnName="IdCatalogo_FormaPago" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="vt_autorizacion" ColumnName="vt_autorizacion" />
+                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="vt_serie2" ColumnName="vt_serie2" />
+                <ScalarProperty Name="vt_serie1" ColumnName="vt_serie1" />
+                <ScalarProperty Name="vt_tipoDoc" ColumnName="vt_tipoDoc" />
+                <ScalarProperty Name="CodCbteVta" ColumnName="CodCbteVta" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_factura_det">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_factura_det">
+              <MappingFragment StoreEntitySet="fa_factura_det">
+                <ScalarProperty Name="Secuencia_pf" ColumnName="Secuencia_pf" />
+                <ScalarProperty Name="IdProforma" ColumnName="IdProforma" />
+                <ScalarProperty Name="IdSucursal_pf" ColumnName="IdSucursal_pf" />
+                <ScalarProperty Name="IdEmpresa_pf" ColumnName="IdEmpresa_pf" />
+                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
+                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
+                <ScalarProperty Name="IdPunto_Cargo" ColumnName="IdPunto_Cargo" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="vt_por_iva" ColumnName="vt_por_iva" />
+                <ScalarProperty Name="vt_detallexItems" ColumnName="vt_detallexItems" />
+                <ScalarProperty Name="vt_total" ColumnName="vt_total" />
+                <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
+                <ScalarProperty Name="vt_Subtotal" ColumnName="vt_Subtotal" />
+                <ScalarProperty Name="vt_PrecioFinal" ColumnName="vt_PrecioFinal" />
+                <ScalarProperty Name="vt_DescUnitario" ColumnName="vt_DescUnitario" />
+                <ScalarProperty Name="vt_PorDescUnitario" ColumnName="vt_PorDescUnitario" />
+                <ScalarProperty Name="vt_Precio" ColumnName="vt_Precio" />
+                <ScalarProperty Name="vt_cantidad" ColumnName="vt_cantidad" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="aca_IdRubro" ColumnName="aca_IdRubro" />
+                <ScalarProperty Name="aca_IdPeriodo" ColumnName="aca_IdPeriodo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_factura_resumen">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_factura_resumen">
+              <MappingFragment StoreEntitySet="fa_factura_resumen">
+                <ScalarProperty Name="Cambio" ColumnName="Cambio" />
+                <ScalarProperty Name="ValorEfectivo" ColumnName="ValorEfectivo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ValorIVA" ColumnName="ValorIVA" />
+                <ScalarProperty Name="SubtotalConDscto" ColumnName="SubtotalConDscto" />
+                <ScalarProperty Name="SubtotalSinIVAConDscto" ColumnName="SubtotalSinIVAConDscto" />
+                <ScalarProperty Name="SubtotalIVAConDscto" ColumnName="SubtotalIVAConDscto" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="SubtotalSinDscto" ColumnName="SubtotalSinDscto" />
+                <ScalarProperty Name="SubtotalSinIVASinDscto" ColumnName="SubtotalSinIVASinDscto" />
+                <ScalarProperty Name="SubtotalIVASinDscto" ColumnName="SubtotalIVASinDscto" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_factura_x_ct_cbtecble">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_factura_x_ct_cbtecble">
+              <MappingFragment StoreEntitySet="fa_factura_x_ct_cbtecble">
+                <ScalarProperty Name="Motivo" ColumnName="Motivo" />
+                <ScalarProperty Name="ct_IdCbteCble" ColumnName="ct_IdCbteCble" />
+                <ScalarProperty Name="ct_IdTipoCbte" ColumnName="ct_IdTipoCbte" />
+                <ScalarProperty Name="ct_IdEmpresa" ColumnName="ct_IdEmpresa" />
+                <ScalarProperty Name="vt_IdCbteVta" ColumnName="vt_IdCbteVta" />
+                <ScalarProperty Name="vt_IdBodega" ColumnName="vt_IdBodega" />
+                <ScalarProperty Name="vt_IdSucursal" ColumnName="vt_IdSucursal" />
+                <ScalarProperty Name="vt_IdEmpresa" ColumnName="vt_IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_notaCreDeb">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_notaCreDeb">
+              <MappingFragment StoreEntitySet="fa_notaCreDeb">
+                <ScalarProperty Name="Generado" ColumnName="Generado" />
+                <ScalarProperty Name="aprobada_enviar_sri" ColumnName="aprobada_enviar_sri" />
+                <ScalarProperty Name="IdPuntoVta" ColumnName="IdPuntoVta" />
+                <ScalarProperty Name="IdCtaCble_TipoNota" ColumnName="IdCtaCble_TipoNota" />
+                <ScalarProperty Name="NaturalezaNota" ColumnName="NaturalezaNota" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="sc_observacion" ColumnName="sc_observacion" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+                <ScalarProperty Name="no_fecha_venc" ColumnName="no_fecha_venc" />
+                <ScalarProperty Name="no_fecha" ColumnName="no_fecha" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
+                <ScalarProperty Name="NumAutorizacion" ColumnName="NumAutorizacion" />
+                <ScalarProperty Name="NumNota_Impresa" ColumnName="NumNota_Impresa" />
+                <ScalarProperty Name="Serie2" ColumnName="Serie2" />
+                <ScalarProperty Name="Serie1" ColumnName="Serie1" />
+                <ScalarProperty Name="CodDocumentoTipo" ColumnName="CodDocumentoTipo" />
+                <ScalarProperty Name="CreDeb" ColumnName="CreDeb" />
+                <ScalarProperty Name="CodNota" ColumnName="CodNota" />
+                <ScalarProperty Name="dev_IdDev_Inven" ColumnName="dev_IdDev_Inven" />
+                <ScalarProperty Name="dev_IdEmpresa" ColumnName="dev_IdEmpresa" />
+                <ScalarProperty Name="IdNota" ColumnName="IdNota" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_notaCreDeb_det">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_notaCreDeb_det">
+              <MappingFragment StoreEntitySet="fa_notaCreDeb_det">
+                <ScalarProperty Name="sc_cantidad_factura" ColumnName="sc_cantidad_factura" />
+                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
+                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
+                <ScalarProperty Name="IdPunto_Cargo" ColumnName="IdPunto_Cargo" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="vt_por_iva" ColumnName="vt_por_iva" />
+                <ScalarProperty Name="sc_observacion" ColumnName="sc_observacion" />
+                <ScalarProperty Name="sc_costo" ColumnName="sc_costo" />
+                <ScalarProperty Name="sc_total" ColumnName="sc_total" />
+                <ScalarProperty Name="sc_iva" ColumnName="sc_iva" />
+                <ScalarProperty Name="sc_subtotal" ColumnName="sc_subtotal" />
+                <ScalarProperty Name="sc_precioFinal" ColumnName="sc_precioFinal" />
+                <ScalarProperty Name="sc_PordescUni" ColumnName="sc_PordescUni" />
+                <ScalarProperty Name="sc_descUni" ColumnName="sc_descUni" />
+                <ScalarProperty Name="sc_Precio" ColumnName="sc_Precio" />
+                <ScalarProperty Name="sc_cantidad" ColumnName="sc_cantidad" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdNota" ColumnName="IdNota" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_notaCreDeb_x_ct_cbtecble">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_notaCreDeb_x_ct_cbtecble">
+              <MappingFragment StoreEntitySet="fa_notaCreDeb_x_ct_cbtecble">
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="ct_IdCbteCble" ColumnName="ct_IdCbteCble" />
+                <ScalarProperty Name="ct_IdTipoCbte" ColumnName="ct_IdTipoCbte" />
+                <ScalarProperty Name="ct_IdEmpresa" ColumnName="ct_IdEmpresa" />
+                <ScalarProperty Name="no_IdNota" ColumnName="no_IdNota" />
+                <ScalarProperty Name="no_IdBodega" ColumnName="no_IdBodega" />
+                <ScalarProperty Name="no_IdSucursal" ColumnName="no_IdSucursal" />
+                <ScalarProperty Name="no_IdEmpresa" ColumnName="no_IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_notaCreDeb_x_cxc_cobro">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_notaCreDeb_x_cxc_cobro">
+              <MappingFragment StoreEntitySet="fa_notaCreDeb_x_cxc_cobro">
+                <ScalarProperty Name="Valor_cobro" ColumnName="Valor_cobro" />
+                <ScalarProperty Name="IdNota_nt" ColumnName="IdNota_nt" />
+                <ScalarProperty Name="IdBodega_nt" ColumnName="IdBodega_nt" />
+                <ScalarProperty Name="IdSucursal_nt" ColumnName="IdSucursal_nt" />
+                <ScalarProperty Name="IdEmpresa_nt" ColumnName="IdEmpresa_nt" />
+                <ScalarProperty Name="IdCobro_cbr" ColumnName="IdCobro_cbr" />
+                <ScalarProperty Name="IdSucursal_cbr" ColumnName="IdSucursal_cbr" />
+                <ScalarProperty Name="IdEmpresa_cbr" ColumnName="IdEmpresa_cbr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_notaCreDeb_x_fa_factura_NotaDeb">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_notaCreDeb_x_fa_factura_NotaDeb">
+              <MappingFragment StoreEntitySet="fa_notaCreDeb_x_fa_factura_NotaDeb">
+                <ScalarProperty Name="fecha_cruce" ColumnName="fecha_cruce" />
+                <ScalarProperty Name="Valor_Aplicado" ColumnName="Valor_Aplicado" />
+                <ScalarProperty Name="NumDocumento" ColumnName="NumDocumento" />
+                <ScalarProperty Name="vt_tipoDoc" ColumnName="vt_tipoDoc" />
+                <ScalarProperty Name="IdCbteVta_fac_nd_doc_mod" ColumnName="IdCbteVta_fac_nd_doc_mod" />
+                <ScalarProperty Name="IdBodega_fac_nd_doc_mod" ColumnName="IdBodega_fac_nd_doc_mod" />
+                <ScalarProperty Name="IdSucursal_fac_nd_doc_mod" ColumnName="IdSucursal_fac_nd_doc_mod" />
+                <ScalarProperty Name="IdEmpresa_fac_nd_doc_mod" ColumnName="IdEmpresa_fac_nd_doc_mod" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdNota_nt" ColumnName="IdNota_nt" />
+                <ScalarProperty Name="IdBodega_nt" ColumnName="IdBodega_nt" />
+                <ScalarProperty Name="IdSucursal_nt" ColumnName="IdSucursal_nt" />
+                <ScalarProperty Name="IdEmpresa_nt" ColumnName="IdEmpresa_nt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_TipoNota">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_TipoNota">
+              <MappingFragment StoreEntitySet="fa_TipoNota">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdCtaCbleCXC" ColumnName="IdCtaCbleCXC" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="GeneraMoviInven" ColumnName="GeneraMoviInven" />
+                <ScalarProperty Name="No_Descripcion" ColumnName="No_Descripcion" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="CodTipoNota" ColumnName="CodTipoNota" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwfa_factura_det">
+            <EntityTypeMapping TypeName="ModelFacturacion.vwfa_factura_det">
+              <MappingFragment StoreEntitySet="vwfa_factura_det">
+                <ScalarProperty Name="tp_ManejaInven" ColumnName="tp_ManejaInven" />
+                <ScalarProperty Name="se_distribuye" ColumnName="se_distribuye" />
+                <ScalarProperty Name="lote_fecha_vcto" ColumnName="lote_fecha_vcto" />
+                <ScalarProperty Name="lote_num_lote" ColumnName="lote_num_lote" />
+                <ScalarProperty Name="nom_presentacion" ColumnName="nom_presentacion" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="Secuencia_pf" ColumnName="Secuencia_pf" />
+                <ScalarProperty Name="IdProforma" ColumnName="IdProforma" />
+                <ScalarProperty Name="IdSucursal_pf" ColumnName="IdSucursal_pf" />
+                <ScalarProperty Name="IdEmpresa_pf" ColumnName="IdEmpresa_pf" />
+                <ScalarProperty Name="IdCentroCosto" ColumnName="IdCentroCosto" />
+                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
+                <ScalarProperty Name="IdPunto_cargo_grupo" ColumnName="IdPunto_cargo_grupo" />
+                <ScalarProperty Name="IdPunto_Cargo" ColumnName="IdPunto_Cargo" />
+                <ScalarProperty Name="vt_por_iva" ColumnName="vt_por_iva" />
+                <ScalarProperty Name="vt_detallexItems" ColumnName="vt_detallexItems" />
+                <ScalarProperty Name="vt_total" ColumnName="vt_total" />
+                <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
+                <ScalarProperty Name="vt_Subtotal" ColumnName="vt_Subtotal" />
+                <ScalarProperty Name="vt_PrecioFinal" ColumnName="vt_PrecioFinal" />
+                <ScalarProperty Name="vt_DescUnitario" ColumnName="vt_DescUnitario" />
+                <ScalarProperty Name="vt_PorDescUnitario" ColumnName="vt_PorDescUnitario" />
+                <ScalarProperty Name="vt_Precio" ColumnName="vt_Precio" />
+                <ScalarProperty Name="vt_cantidad" ColumnName="vt_cantidad" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwfa_PuntoVta">
+            <EntityTypeMapping TypeName="ModelFacturacion.vwfa_PuntoVta">
+              <MappingFragment StoreEntitySet="vwfa_PuntoVta">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="codDocumentoTipo" ColumnName="codDocumentoTipo" />
+                <ScalarProperty Name="EsElectronico" ColumnName="EsElectronico" />
+                <ScalarProperty Name="CobroAutomatico" ColumnName="CobroAutomatico" />
+                <ScalarProperty Name="NumCopias" ColumnName="NumCopias" />
+                <ScalarProperty Name="IPImpresora" ColumnName="IPImpresora" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="Su_CodigoEstablecimiento" ColumnName="Su_CodigoEstablecimiento" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nom_PuntoVta" ColumnName="nom_PuntoVta" />
+                <ScalarProperty Name="cod_PuntoVta" ColumnName="cod_PuntoVta" />
+                <ScalarProperty Name="IdPuntoVta" ColumnName="IdPuntoVta" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_Vendedor">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_Vendedor">
+              <MappingFragment StoreEntitySet="fa_Vendedor">
+                <ScalarProperty Name="MotivoAnula" ColumnName="MotivoAnula" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="PorComision" ColumnName="PorComision" />
+                <ScalarProperty Name="ve_cedula" ColumnName="ve_cedula" />
+                <ScalarProperty Name="NomInterno" ColumnName="NomInterno" />
+                <ScalarProperty Name="Ve_Vendedor" ColumnName="Ve_Vendedor" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdVendedor" ColumnName="IdVendedor" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwfa_cliente_consulta">
+            <EntityTypeMapping TypeName="ModelFacturacion.vwfa_cliente_consulta">
+              <MappingFragment StoreEntitySet="vwfa_cliente_consulta">
+                <ScalarProperty Name="Descripcion_tip_cliente" ColumnName="Descripcion_tip_cliente" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="Idtipo_cliente" ColumnName="Idtipo_cliente" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwfa_cliente_contactos">
+            <EntityTypeMapping TypeName="ModelFacturacion.vwfa_cliente_contactos">
+              <MappingFragment StoreEntitySet="vwfa_cliente_contactos">
+                <ScalarProperty Name="Descripcion_Ciudad" ColumnName="Descripcion_Ciudad" />
+                <ScalarProperty Name="nom_parroquia" ColumnName="nom_parroquia" />
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="IdContacto" ColumnName="IdContacto" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fa_TerminoPago_Distribucion">
+            <EntityTypeMapping TypeName="ModelFacturacion.fa_TerminoPago_Distribucion">
+              <MappingFragment StoreEntitySet="fa_TerminoPago_Distribucion">
+                <ScalarProperty Name="Por_distribucion" ColumnName="Por_distribucion" />
+                <ScalarProperty Name="Num_Dias_Vcto" ColumnName="Num_Dias_Vcto" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwfa_factura_sin_automatico">
+            <EntityTypeMapping TypeName="ModelFacturacion.vwfa_factura_sin_automatico">
+              <MappingFragment StoreEntitySet="vwfa_factura_sin_automatico">
+                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="dc_TipoDocumento" ColumnName="dc_TipoDocumento" />
+                <ScalarProperty Name="IdCbte_vta_nota" ColumnName="IdCbte_vta_nota" />
+                <ScalarProperty Name="IdBodega_Cbte" ColumnName="IdBodega_Cbte" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwfa_factura">
+            <EntityTypeMapping TypeName="ModelFacturacion.vwfa_factura">
+              <MappingFragment StoreEntitySet="vwfa_factura">
+                <ScalarProperty Name="vt_autorizacion" ColumnName="vt_autorizacion" />
+                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
+                <ScalarProperty Name="IdNumMovi_in_eg_x_inv" ColumnName="IdNumMovi_in_eg_x_inv" />
+                <ScalarProperty Name="IdMovi_inven_tipo_in_eg_x_inv" ColumnName="IdMovi_inven_tipo_in_eg_x_inv" />
+                <ScalarProperty Name="IdSucursal_in_eg_x_inv" ColumnName="IdSucursal_in_eg_x_inv" />
+                <ScalarProperty Name="IdEmpresa_in_eg_x_inv" ColumnName="IdEmpresa_in_eg_x_inv" />
+                <ScalarProperty Name="esta_impresa" ColumnName="esta_impresa" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="vt_total" ColumnName="vt_total" />
+                <ScalarProperty Name="vt_iva" ColumnName="vt_iva" />
+                <ScalarProperty Name="vt_SubtotalIVA" ColumnName="vt_SubtotalIVA" />
+                <ScalarProperty Name="vt_Subtotal0" ColumnName="vt_Subtotal0" />
+                <ScalarProperty Name="Ve_Vendedor" ColumnName="Ve_Vendedor" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>

@@ -14,6 +14,12 @@ namespace Core.Data.Base
     
     public partial class fa_catalogo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public fa_catalogo()
+        {
+            this.fa_factura = new HashSet<fa_factura>();
+        }
+    
         public string IdCatalogo { get; set; }
         public int IdCatalogo_tipo { get; set; }
         public string Nombre { get; set; }
@@ -31,5 +37,7 @@ namespace Core.Data.Base
         public string MotiAnula { get; set; }
     
         public virtual fa_catalogo_tipo fa_catalogo_tipo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_factura> fa_factura { get; set; }
     }
 }

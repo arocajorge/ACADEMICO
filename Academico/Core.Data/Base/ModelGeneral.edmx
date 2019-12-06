@@ -42,6 +42,24 @@
           <Property Name="nom_pc" Type="varchar" MaxLength="50" />
           <Property Name="ip" Type="varchar" MaxLength="25" />
         </EntityType>
+        <EntityType Name="tb_ColaImpresionDirecta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdImpresion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdImpresion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CodReporte" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IPUsuario" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="IPImpresora" Type="varchar" MaxLength="1000" />
+          <Property Name="Parametros" Type="varchar" MaxLength="1000" />
+          <Property Name="Usuario" Type="varchar" MaxLength="1000" />
+          <Property Name="NombreEmpresa" Type="varchar" MaxLength="1000" />
+          <Property Name="FechaEnvio" Type="datetime" Nullable="false" />
+          <Property Name="FechaImpresion" Type="datetime" />
+          <Property Name="Comentario" Type="varchar(max)" />
+          <Property Name="NumCopias" Type="int" />
+        </EntityType>
         <EntityType Name="tb_empresa">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -64,6 +82,15 @@
           <Property Name="em_fechaInicioActividad" Type="date" Nullable="false" />
           <Property Name="cod_entidad_dinardap" Type="varchar" MaxLength="50" />
           <Property Name="em_Email" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="tb_mes">
+          <Key>
+            <PropertyRef Name="idMes" />
+          </Key>
+          <Property Name="idMes" Type="int" Nullable="false" />
+          <Property Name="smes" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nemonico" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="smesIngles" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="tb_pais">
           <Key>
@@ -184,6 +211,49 @@
           <Property Name="estado" Type="bit" Nullable="false" />
           <Property Name="IdPais" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="tb_sis_Documento_Tipo">
+          <Key>
+            <PropertyRef Name="codDocumentoTipo" />
+          </Key>
+          <Property Name="codDocumentoTipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="estado" Type="char" MaxLength="1" />
+          <Property Name="Posicion" Type="int" />
+        </EntityType>
+        <EntityType Name="tb_sis_Documento_Tipo_Talonario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="CodDocumentoTipo" />
+            <PropertyRef Name="Establecimiento" />
+            <PropertyRef Name="PuntoEmision" />
+            <PropertyRef Name="NumDocumento" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="CodDocumentoTipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Establecimiento" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="PuntoEmision" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="NumDocumento" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaCaducidad" Type="date" />
+          <Property Name="Usado" Type="bit" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="NumAutorizacion" Type="varchar" MaxLength="150" />
+          <Property Name="es_Documento_Electronico" Type="bit" />
+        </EntityType>
+        <EntityType Name="tb_sis_Documento_Tipo_x_Empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="codDocumentoTipo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="codDocumentoTipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ApareceComboFac_TipoFact" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ApareceComboFac_Import" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ApareceTalonario" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Posicion" Type="int" Nullable="false" />
+          <Property Name="ApareceCombo_FileReporte" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
         <EntityType Name="tb_sis_Impuesto">
           <Key>
             <PropertyRef Name="IdCod_Impuesto" />
@@ -203,6 +273,17 @@
           </Key>
           <Property Name="IdTipoImpuesto" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nom_tipoImpuesto" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_sis_Impuesto_x_ctacble">
+          <Key>
+            <PropertyRef Name="IdCod_Impuesto" />
+            <PropertyRef Name="IdEmpresa_cta" />
+          </Key>
+          <Property Name="IdCod_Impuesto" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdEmpresa_cta" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+          <Property Name="observacion" Type="varchar" MaxLength="50" />
+          <Property Name="IdCtaCble_vta" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="tb_sucursal">
           <Key>
@@ -230,6 +311,42 @@
           <Property Name="IdCtaCble_cxp" Type="varchar" MaxLength="20" />
           <Property Name="IdCtaCble_vtaIVA0" Type="varchar" MaxLength="20" />
           <Property Name="IdCtaCble_vtaIVA" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tb_sucursal_FormaPago_x_fa_NivelDescuento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdCatalogo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="IdNivel" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_LogError">
+          <Key>
+            <PropertyRef Name="IdError" />
+          </Key>
+          <Property Name="IdError" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="Clase" Type="varchar" MaxLength="1000" />
+          <Property Name="Metodo" Type="varchar" MaxLength="1000" />
+          <Property Name="InnerException" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tbl_TransaccionesAutorizadas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTransaccion" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdUsuarioLog" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdUsuarioAut" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="FechaTransaccion" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_Ciudad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -462,6 +579,44 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo">
+          <End Role="tb_sis_Documento_Tipo" Type="Self.tb_sis_Documento_Tipo" Multiplicity="1" />
+          <End Role="tb_sis_Documento_Tipo_Talonario" Type="Self.tb_sis_Documento_Tipo_Talonario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_Documento_Tipo">
+              <PropertyRef Name="codDocumentoTipo" />
+            </Principal>
+            <Dependent Role="tb_sis_Documento_Tipo_Talonario">
+              <PropertyRef Name="CodDocumentoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo_x_Empresa">
+          <End Role="tb_sis_Documento_Tipo_x_Empresa" Type="Self.tb_sis_Documento_Tipo_x_Empresa" Multiplicity="1" />
+          <End Role="tb_sis_Documento_Tipo_Talonario" Type="Self.tb_sis_Documento_Tipo_Talonario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_Documento_Tipo_x_Empresa">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="codDocumentoTipo" />
+            </Principal>
+            <Dependent Role="tb_sis_Documento_Tipo_Talonario">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="CodDocumentoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
+          <End Role="tb_sis_Documento_Tipo_x_Empresa" Type="Self.tb_sis_Documento_Tipo_x_Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="tb_sis_Documento_Tipo_x_Empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
           <End Role="tb_sis_Impuesto_Tipo" Type="Self.tb_sis_Impuesto_Tipo" Multiplicity="1" />
           <End Role="tb_sis_Impuesto" Type="Self.tb_sis_Impuesto" Multiplicity="*" />
@@ -471,6 +626,32 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene def
             </Principal>
             <Dependent Role="tb_sis_Impuesto">
               <PropertyRef Name="IdTipoImpuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sis_Impuesto_x_ctacble_tb_sis_Impuesto">
+          <End Role="tb_sis_Impuesto" Type="Self.tb_sis_Impuesto" Multiplicity="1" />
+          <End Role="tb_sis_Impuesto_x_ctacble" Type="Self.tb_sis_Impuesto_x_ctacble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_Impuesto">
+              <PropertyRef Name="IdCod_Impuesto" />
+            </Principal>
+            <Dependent Role="tb_sis_Impuesto_x_ctacble">
+              <PropertyRef Name="IdCod_Impuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal">
+          <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="1" />
+          <End Role="tb_sucursal_FormaPago_x_fa_NivelDescuento" Type="Self.tb_sucursal_FormaPago_x_fa_NivelDescuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sucursal">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="tb_sucursal_FormaPago_x_fa_NivelDescuento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -489,16 +670,25 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene def
         <EntityContainer Name="ModelGeneralStoreContainer">
           <EntitySet Name="tb_Catalogo" EntityType="Self.tb_Catalogo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ciudad" EntityType="Self.tb_ciudad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_ColaImpresionDirecta" EntityType="Self.tb_ColaImpresionDirecta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_mes" EntityType="Self.tb_mes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_pais" EntityType="Self.tb_pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_parroquia" EntityType="Self.tb_parroquia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_persona" EntityType="Self.tb_persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_profesion" EntityType="Self.tb_profesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_provincia" EntityType="Self.tb_provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_region" EntityType="Self.tb_region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_sis_Documento_Tipo" EntityType="Self.tb_sis_Documento_Tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_sis_Documento_Tipo_Talonario" EntityType="Self.tb_sis_Documento_Tipo_Talonario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_sis_Documento_Tipo_x_Empresa" EntityType="Self.tb_sis_Documento_Tipo_x_Empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_Impuesto" EntityType="Self.tb_sis_Impuesto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_Impuesto_Tipo" EntityType="Self.tb_sis_Impuesto_Tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_sis_Impuesto_x_ctacble" EntityType="Self.tb_sis_Impuesto_x_ctacble" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_sucursal_FormaPago_x_fa_NivelDescuento" EntityType="Self.tb_sucursal_FormaPago_x_fa_NivelDescuento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_LogError" EntityType="Self.tb_LogError" Schema="web" store:Type="Tables" />
+          <EntitySet Name="tbl_TransaccionesAutorizadas" EntityType="Self.tbl_TransaccionesAutorizadas" Schema="web" store:Type="Tables" />
           <EntitySet Name="vwtb_Ciudad" EntityType="Self.vwtb_Ciudad" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwtb_Ciudad].[IdCiudad] AS [IdCiudad], 
@@ -590,9 +780,29 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene def
             <End Role="tb_pais" EntitySet="tb_pais" />
             <End Role="tb_region" EntitySet="tb_region" />
           </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo" Association="Self.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo">
+            <End Role="tb_sis_Documento_Tipo" EntitySet="tb_sis_Documento_Tipo" />
+            <End Role="tb_sis_Documento_Tipo_Talonario" EntitySet="tb_sis_Documento_Tipo_Talonario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo_x_Empresa" Association="Self.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo_x_Empresa">
+            <End Role="tb_sis_Documento_Tipo_x_Empresa" EntitySet="tb_sis_Documento_Tipo_x_Empresa" />
+            <End Role="tb_sis_Documento_Tipo_Talonario" EntitySet="tb_sis_Documento_Tipo_Talonario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" Association="Self.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_sis_Documento_Tipo_x_Empresa" EntitySet="tb_sis_Documento_Tipo_x_Empresa" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" Association="Self.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo">
             <End Role="tb_sis_Impuesto_Tipo" EntitySet="tb_sis_Impuesto_Tipo" />
             <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_Impuesto_x_ctacble_tb_sis_Impuesto" Association="Self.FK_tb_sis_Impuesto_x_ctacble_tb_sis_Impuesto">
+            <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
+            <End Role="tb_sis_Impuesto_x_ctacble" EntitySet="tb_sis_Impuesto_x_ctacble" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal" Association="Self.FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal">
+            <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+            <End Role="tb_sucursal_FormaPago_x_fa_NivelDescuento" EntitySet="tb_sucursal_FormaPago_x_fa_NivelDescuento" />
           </AssociationSet>
           <AssociationSet Name="FK_tb_sucursal_tb_empresa" Association="Self.FK_tb_sucursal_tb_empresa">
             <End Role="tb_empresa" EntitySet="tb_empresa" />
@@ -626,6 +836,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene def
           <Property Name="cod_entidad_dinardap" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="em_Email" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_sucursal" Relationship="ModelGeneral.FK_tb_sucursal_tb_empresa" FromRole="tb_empresa" ToRole="tb_sucursal" />
+          <NavigationProperty Name="tb_sis_Documento_Tipo_x_Empresa" Relationship="ModelGeneral.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" FromRole="tb_empresa" ToRole="tb_sis_Documento_Tipo_x_Empresa" />
         </EntityType>
         <EntityContainer Name="EntitiesGeneral" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" />
@@ -713,6 +924,35 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene def
           <EntitySet Name="vwtb_provincia" EntityType="ModelGeneral.vwtb_provincia" />
           <EntitySet Name="vwtb_Ciudad" EntityType="ModelGeneral.vwtb_Ciudad" />
           <EntitySet Name="vwtb_ciudad_id" EntityType="ModelGeneral.vwtb_ciudad_id" />
+          <EntitySet Name="tb_LogError" EntityType="ModelGeneral.tb_LogError" />
+          <EntitySet Name="tb_sis_Documento_Tipo" EntityType="ModelGeneral.tb_sis_Documento_Tipo" />
+          <EntitySet Name="tb_sis_Documento_Tipo_Talonario" EntityType="ModelGeneral.tb_sis_Documento_Tipo_Talonario" />
+          <EntitySet Name="tb_sis_Documento_Tipo_x_Empresa" EntityType="ModelGeneral.tb_sis_Documento_Tipo_x_Empresa" />
+          <AssociationSet Name="FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" Association="ModelGeneral.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_sis_Documento_Tipo_x_Empresa" EntitySet="tb_sis_Documento_Tipo_x_Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo" Association="ModelGeneral.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo">
+            <End Role="tb_sis_Documento_Tipo" EntitySet="tb_sis_Documento_Tipo" />
+            <End Role="tb_sis_Documento_Tipo_Talonario" EntitySet="tb_sis_Documento_Tipo_Talonario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo_x_Empresa" Association="ModelGeneral.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo_x_Empresa">
+            <End Role="tb_sis_Documento_Tipo_x_Empresa" EntitySet="tb_sis_Documento_Tipo_x_Empresa" />
+            <End Role="tb_sis_Documento_Tipo_Talonario" EntitySet="tb_sis_Documento_Tipo_Talonario" />
+          </AssociationSet>
+          <EntitySet Name="tb_sis_Impuesto_x_ctacble" EntityType="ModelGeneral.tb_sis_Impuesto_x_ctacble" />
+          <AssociationSet Name="FK_tb_sis_Impuesto_x_ctacble_tb_sis_Impuesto" Association="ModelGeneral.FK_tb_sis_Impuesto_x_ctacble_tb_sis_Impuesto">
+            <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
+            <End Role="tb_sis_Impuesto_x_ctacble" EntitySet="tb_sis_Impuesto_x_ctacble" />
+          </AssociationSet>
+          <EntitySet Name="tb_sucursal_FormaPago_x_fa_NivelDescuento" EntityType="ModelGeneral.tb_sucursal_FormaPago_x_fa_NivelDescuento" />
+          <EntitySet Name="tbl_TransaccionesAutorizadas" EntityType="ModelGeneral.tbl_TransaccionesAutorizadas" />
+          <AssociationSet Name="FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal" Association="ModelGeneral.FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal">
+            <End Role="tb_sucursal" EntitySet="tb_sucursal" />
+            <End Role="tb_sucursal_FormaPago_x_fa_NivelDescuento" EntitySet="tb_sucursal_FormaPago_x_fa_NivelDescuento" />
+          </AssociationSet>
+          <EntitySet Name="tb_ColaImpresionDirecta" EntityType="ModelGeneral.tb_ColaImpresionDirecta" />
+          <EntitySet Name="tb_mes" EntityType="ModelGeneral.tb_mes" />
           </EntityContainer>
         <EntityType Name="tb_sucursal">
           <Key>
@@ -741,6 +981,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene def
           <Property Name="IdCtaCble_vtaIVA0" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IdCtaCble_vtaIVA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_empresa" Relationship="ModelGeneral.FK_tb_sucursal_tb_empresa" FromRole="tb_sucursal" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_sucursal_FormaPago_x_fa_NivelDescuento" Relationship="ModelGeneral.FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal" FromRole="tb_sucursal" ToRole="tb_sucursal_FormaPago_x_fa_NivelDescuento" />
         </EntityType>
         <Association Name="FK_tb_sucursal_tb_empresa">
           <End Type="ModelGeneral.tb_empresa" Role="tb_empresa" Multiplicity="1" />
@@ -847,6 +1088,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene def
           <Property Name="estado" Type="Boolean" Nullable="false" />
           <Property Name="IdTipoImpuesto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_sis_Impuesto_Tipo" Relationship="ModelGeneral.FK_tb_sis_Impuesto_tb_sis_Impuesto_Tipo" FromRole="tb_sis_Impuesto" ToRole="tb_sis_Impuesto_Tipo" />
+          <NavigationProperty Name="tb_sis_Impuesto_x_ctacble" Relationship="ModelGeneral.FK_tb_sis_Impuesto_x_ctacble_tb_sis_Impuesto" FromRole="tb_sis_Impuesto" ToRole="tb_sis_Impuesto_x_ctacble" />
         </EntityType>
         <EntityType Name="tb_sis_Impuesto_Tipo">
           <Key>
@@ -1195,6 +1437,194 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene def
           </Key>
           <Property Name="IdCiudad" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="tb_LogError">
+          <Key>
+            <PropertyRef Name="IdError" />
+          </Key>
+          <Property Name="IdError" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clase" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Metodo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="InnerException" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_sis_Documento_Tipo">
+          <Key>
+            <PropertyRef Name="codDocumentoTipo" />
+          </Key>
+          <Property Name="codDocumentoTipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Posicion" Type="Int32" />
+          <NavigationProperty Name="tb_sis_Documento_Tipo_Talonario" Relationship="ModelGeneral.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo" FromRole="tb_sis_Documento_Tipo" ToRole="tb_sis_Documento_Tipo_Talonario" />
+        </EntityType>
+        <EntityType Name="tb_sis_Documento_Tipo_Talonario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="CodDocumentoTipo" />
+            <PropertyRef Name="Establecimiento" />
+            <PropertyRef Name="PuntoEmision" />
+            <PropertyRef Name="NumDocumento" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="CodDocumentoTipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Establecimiento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="PuntoEmision" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="NumDocumento" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCaducidad" Type="DateTime" Precision="0" />
+          <Property Name="Usado" Type="Boolean" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="NumAutorizacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="es_Documento_Electronico" Type="Boolean" />
+          <NavigationProperty Name="tb_sis_Documento_Tipo" Relationship="ModelGeneral.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo" FromRole="tb_sis_Documento_Tipo_Talonario" ToRole="tb_sis_Documento_Tipo" />
+          <NavigationProperty Name="tb_sis_Documento_Tipo_x_Empresa" Relationship="ModelGeneral.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo_x_Empresa" FromRole="tb_sis_Documento_Tipo_Talonario" ToRole="tb_sis_Documento_Tipo_x_Empresa" />
+        </EntityType>
+        <EntityType Name="tb_sis_Documento_Tipo_x_Empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="codDocumentoTipo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="codDocumentoTipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ApareceComboFac_TipoFact" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ApareceComboFac_Import" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ApareceTalonario" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Posicion" Type="Int32" Nullable="false" />
+          <Property Name="ApareceCombo_FileReporte" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="tb_empresa" Relationship="ModelGeneral.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" FromRole="tb_sis_Documento_Tipo_x_Empresa" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_sis_Documento_Tipo_Talonario" Relationship="ModelGeneral.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo_x_Empresa" FromRole="tb_sis_Documento_Tipo_x_Empresa" ToRole="tb_sis_Documento_Tipo_Talonario" />
+        </EntityType>
+        <Association Name="FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa">
+          <End Type="ModelGeneral.tb_empresa" Role="tb_empresa" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_sis_Documento_Tipo_x_Empresa" Role="tb_sis_Documento_Tipo_x_Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="tb_sis_Documento_Tipo_x_Empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo">
+          <End Type="ModelGeneral.tb_sis_Documento_Tipo" Role="tb_sis_Documento_Tipo" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_sis_Documento_Tipo_Talonario" Role="tb_sis_Documento_Tipo_Talonario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_Documento_Tipo">
+              <PropertyRef Name="codDocumentoTipo" />
+            </Principal>
+            <Dependent Role="tb_sis_Documento_Tipo_Talonario">
+              <PropertyRef Name="CodDocumentoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo_x_Empresa">
+          <End Type="ModelGeneral.tb_sis_Documento_Tipo_x_Empresa" Role="tb_sis_Documento_Tipo_x_Empresa" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_sis_Documento_Tipo_Talonario" Role="tb_sis_Documento_Tipo_Talonario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_Documento_Tipo_x_Empresa">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="codDocumentoTipo" />
+            </Principal>
+            <Dependent Role="tb_sis_Documento_Tipo_Talonario">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="CodDocumentoTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tb_sis_Impuesto_x_ctacble">
+          <Key>
+            <PropertyRef Name="IdCod_Impuesto" />
+            <PropertyRef Name="IdEmpresa_cta" />
+          </Key>
+          <Property Name="IdCod_Impuesto" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_cta" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble_vta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_sis_Impuesto" Relationship="ModelGeneral.FK_tb_sis_Impuesto_x_ctacble_tb_sis_Impuesto" FromRole="tb_sis_Impuesto_x_ctacble" ToRole="tb_sis_Impuesto" />
+        </EntityType>
+        <Association Name="FK_tb_sis_Impuesto_x_ctacble_tb_sis_Impuesto">
+          <End Type="ModelGeneral.tb_sis_Impuesto" Role="tb_sis_Impuesto" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_sis_Impuesto_x_ctacble" Role="tb_sis_Impuesto_x_ctacble" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sis_Impuesto">
+              <PropertyRef Name="IdCod_Impuesto" />
+            </Principal>
+            <Dependent Role="tb_sis_Impuesto_x_ctacble">
+              <PropertyRef Name="IdCod_Impuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tb_sucursal_FormaPago_x_fa_NivelDescuento">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_sucursal" Relationship="ModelGeneral.FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal" FromRole="tb_sucursal_FormaPago_x_fa_NivelDescuento" ToRole="tb_sucursal" />
+        </EntityType>
+        <EntityType Name="tbl_TransaccionesAutorizadas">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTransaccion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTransaccion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdUsuarioLog" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioAut" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaTransaccion" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal">
+          <End Type="ModelGeneral.tb_sucursal" Role="tb_sucursal" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_sucursal_FormaPago_x_fa_NivelDescuento" Role="tb_sucursal_FormaPago_x_fa_NivelDescuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_sucursal">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+            </Principal>
+            <Dependent Role="tb_sucursal_FormaPago_x_fa_NivelDescuento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tb_ColaImpresionDirecta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdImpresion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdImpresion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IPUsuario" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IPImpresora" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Parametros" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="NombreEmpresa" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEnvio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaImpresion" Type="DateTime" Precision="3" />
+          <Property Name="Comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NumCopias" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tb_mes">
+          <Key>
+            <PropertyRef Name="idMes" />
+          </Key>
+          <Property Name="idMes" Type="Int32" Nullable="false" />
+          <Property Name="smes" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Nemonico" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="smesIngles" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1476,6 +1906,122 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene def
             <EntityTypeMapping TypeName="ModelGeneral.vwtb_ciudad_id">
               <MappingFragment StoreEntitySet="vwtb_ciudad_id">
                 <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_LogError">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_LogError">
+              <MappingFragment StoreEntitySet="tb_LogError">
+                <ScalarProperty Name="InnerException" ColumnName="InnerException" />
+                <ScalarProperty Name="Metodo" ColumnName="Metodo" />
+                <ScalarProperty Name="Clase" ColumnName="Clase" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdError" ColumnName="IdError" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_Documento_Tipo">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_sis_Documento_Tipo">
+              <MappingFragment StoreEntitySet="tb_sis_Documento_Tipo">
+                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codDocumentoTipo" ColumnName="codDocumentoTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_Documento_Tipo_Talonario">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_sis_Documento_Tipo_Talonario">
+              <MappingFragment StoreEntitySet="tb_sis_Documento_Tipo_Talonario">
+                <ScalarProperty Name="es_Documento_Electronico" ColumnName="es_Documento_Electronico" />
+                <ScalarProperty Name="NumAutorizacion" ColumnName="NumAutorizacion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Usado" ColumnName="Usado" />
+                <ScalarProperty Name="FechaCaducidad" ColumnName="FechaCaducidad" />
+                <ScalarProperty Name="NumDocumento" ColumnName="NumDocumento" />
+                <ScalarProperty Name="PuntoEmision" ColumnName="PuntoEmision" />
+                <ScalarProperty Name="Establecimiento" ColumnName="Establecimiento" />
+                <ScalarProperty Name="CodDocumentoTipo" ColumnName="CodDocumentoTipo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_Documento_Tipo_x_Empresa">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_sis_Documento_Tipo_x_Empresa">
+              <MappingFragment StoreEntitySet="tb_sis_Documento_Tipo_x_Empresa">
+                <ScalarProperty Name="ApareceCombo_FileReporte" ColumnName="ApareceCombo_FileReporte" />
+                <ScalarProperty Name="Posicion" ColumnName="Posicion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ApareceTalonario" ColumnName="ApareceTalonario" />
+                <ScalarProperty Name="ApareceComboFac_Import" ColumnName="ApareceComboFac_Import" />
+                <ScalarProperty Name="ApareceComboFac_TipoFact" ColumnName="ApareceComboFac_TipoFact" />
+                <ScalarProperty Name="codDocumentoTipo" ColumnName="codDocumentoTipo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_Impuesto_x_ctacble">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_sis_Impuesto_x_ctacble">
+              <MappingFragment StoreEntitySet="tb_sis_Impuesto_x_ctacble">
+                <ScalarProperty Name="IdCtaCble_vta" ColumnName="IdCtaCble_vta" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdEmpresa_cta" ColumnName="IdEmpresa_cta" />
+                <ScalarProperty Name="IdCod_Impuesto" ColumnName="IdCod_Impuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sucursal_FormaPago_x_fa_NivelDescuento">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_sucursal_FormaPago_x_fa_NivelDescuento">
+              <MappingFragment StoreEntitySet="tb_sucursal_FormaPago_x_fa_NivelDescuento">
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_TransaccionesAutorizadas">
+            <EntityTypeMapping TypeName="ModelGeneral.tbl_TransaccionesAutorizadas">
+              <MappingFragment StoreEntitySet="tbl_TransaccionesAutorizadas">
+                <ScalarProperty Name="FechaTransaccion" ColumnName="FechaTransaccion" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="IdUsuarioAut" ColumnName="IdUsuarioAut" />
+                <ScalarProperty Name="IdUsuarioLog" ColumnName="IdUsuarioLog" />
+                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ColaImpresionDirecta">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_ColaImpresionDirecta">
+              <MappingFragment StoreEntitySet="tb_ColaImpresionDirecta">
+                <ScalarProperty Name="NumCopias" ColumnName="NumCopias" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="FechaImpresion" ColumnName="FechaImpresion" />
+                <ScalarProperty Name="FechaEnvio" ColumnName="FechaEnvio" />
+                <ScalarProperty Name="NombreEmpresa" ColumnName="NombreEmpresa" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Parametros" ColumnName="Parametros" />
+                <ScalarProperty Name="IPImpresora" ColumnName="IPImpresora" />
+                <ScalarProperty Name="IPUsuario" ColumnName="IPUsuario" />
+                <ScalarProperty Name="CodReporte" ColumnName="CodReporte" />
+                <ScalarProperty Name="IdImpresion" ColumnName="IdImpresion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_mes">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_mes">
+              <MappingFragment StoreEntitySet="tb_mes">
+                <ScalarProperty Name="smesIngles" ColumnName="smesIngles" />
+                <ScalarProperty Name="Nemonico" ColumnName="Nemonico" />
+                <ScalarProperty Name="smes" ColumnName="smes" />
+                <ScalarProperty Name="idMes" ColumnName="idMes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

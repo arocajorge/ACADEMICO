@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public in_Producto()
         {
             this.in_Producto1 = new HashSet<in_Producto>();
+            this.in_Producto_x_fa_NivelDescuento = new HashSet<in_Producto_x_fa_NivelDescuento>();
         }
     
         public int IdEmpresa { get; set; }
@@ -66,5 +67,7 @@ namespace Core.Data.Base
         public virtual in_categorias in_categorias { get; set; }
         public virtual in_presentacion in_presentacion { get; set; }
         public virtual in_ProductoTipo in_ProductoTipo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_Producto_x_fa_NivelDescuento> in_Producto_x_fa_NivelDescuento { get; set; }
     }
 }

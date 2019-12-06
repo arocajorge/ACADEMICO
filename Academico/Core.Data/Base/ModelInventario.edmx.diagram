@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="28cf665e7dd14495a2322c0b9ce30693" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="28cf665e7dd14495a2322c0b9ce30693" Name="Diagram1" ZoomLevel="70">
         <EntityTypeShape EntityType="ModelInventario.in_Producto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="ModelInventario.FK_in_Producto_in_Producto1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ModelInventario.in_categorias" Width="1.5" PointX="0.75" PointY="14.375" />
@@ -13,6 +13,9 @@
         <AssociationConnector Association="ModelInventario.FK_in_Producto_in_presentacion" />
         <EntityTypeShape EntityType="ModelInventario.in_ProductoTipo" Width="1.5" PointX="0.75" PointY="20.25" />
         <AssociationConnector Association="ModelInventario.FK_in_Producto_in_ProductoTipo" />
+        <EntityTypeShape EntityType="ModelInventario.in_Producto_x_fa_NivelDescuento" Width="1.5" PointX="3" PointY="4.5" />
+        <AssociationConnector Association="ModelInventario.FK_in_Producto_x_fa_NivelDescuento_in_Producto" />
+        <EntityTypeShape EntityType="ModelInventario.in_parametro" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

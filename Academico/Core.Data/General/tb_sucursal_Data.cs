@@ -10,6 +10,39 @@ namespace Core.Data.General
 {
     public class tb_sucursal_Data
     {
+        public List<tb_sucursal_Info> GetList(int IdEmpresa, string IdUsuario, bool MostrarTodos)
+        {
+            try
+            {
+                List<tb_sucursal_Info> Lista;
+                using (EntitiesSeguridadAcceso Context = new EntitiesSeguridadAcceso())
+                {
+                    Lista = Context.vwseg_usuario_x_tb_sucursal.Where(q => q.IdEmpresa == IdEmpresa && q.IdUsuario == IdUsuario).Select(q => new tb_sucursal_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdUsuario = q.IdUsuario,
+                        IdSucursal = q.IdSucursal,
+                        Su_Descripcion = q.Su_Descripcion,
+                    }).ToList();
+                    if (MostrarTodos)
+                    {
+                        Lista.Add(new tb_sucursal_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdSucursal = 0,
+                            Su_Descripcion = "TODAS"
+                        });
+                    }
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<tb_sucursal_Info> get_list(int IdEmpresa, bool mostrar_anulados)
         {
             try

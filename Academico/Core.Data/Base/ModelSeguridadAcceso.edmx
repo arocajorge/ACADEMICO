@@ -65,6 +65,22 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwseg_usuario_x_aca_Sede' no
           <Property Name="NomSede" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Observacion" Type="varchar" MaxLength="1" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwseg_usuario_x_tb_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwseg_usuario_x_tb_sucursal">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="em_nombre" />
+          </Key>
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="em_nombre" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
         <Association Name="FK_seg_usuario_x_aca_Sede_seg_usuario">
           <End Role="seg_usuario" Type="Self.seg_usuario" Multiplicity="1" />
           <End Role="seg_usuario_x_aca_Sede" Type="Self.seg_usuario_x_aca_Sede" Multiplicity="*" />
@@ -103,6 +119,15 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwseg_usuario_x_aca_Sede' no
     [vwseg_usuario_x_aca_Sede].[Observacion] AS [Observacion]
     FROM [dbo].[vwseg_usuario_x_aca_Sede] AS [vwseg_usuario_x_aca_Sede]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwseg_usuario_x_tb_sucursal" EntityType="Self.vwseg_usuario_x_tb_sucursal" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwseg_usuario_x_tb_sucursal].[IdUsuario] AS [IdUsuario], 
+    [vwseg_usuario_x_tb_sucursal].[IdEmpresa] AS [IdEmpresa], 
+    [vwseg_usuario_x_tb_sucursal].[IdSucursal] AS [IdSucursal], 
+    [vwseg_usuario_x_tb_sucursal].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwseg_usuario_x_tb_sucursal].[em_nombre] AS [em_nombre]
+    FROM [dbo].[vwseg_usuario_x_tb_sucursal] AS [vwseg_usuario_x_tb_sucursal]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_seg_usuario_x_aca_Sede_seg_usuario" Association="Self.FK_seg_usuario_x_aca_Sede_seg_usuario">
             <End Role="seg_usuario" EntitySet="seg_usuario" />
             <End Role="seg_usuario_x_aca_Sede" EntitySet="seg_usuario_x_aca_Sede" />
@@ -129,6 +154,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwseg_usuario_x_aca_Sede' no
             <End Role="seg_Usuario_x_Empresa" EntitySet="seg_Usuario_x_Empresa" />
           </AssociationSet>
           <EntitySet Name="vwseg_usuario_x_aca_Sede" EntityType="ModelSeguridadAcceso.vwseg_usuario_x_aca_Sede" />
+          <EntitySet Name="vwseg_usuario_x_tb_sucursal" EntityType="ModelSeguridadAcceso.vwseg_usuario_x_tb_sucursal" />
         </EntityContainer>
         <EntityType Name="seg_usuario">
           <Key>
@@ -216,6 +242,20 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwseg_usuario_x_aca_Sede' no
           <Property Name="NomSede" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Observacion" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="vwseg_usuario_x_tb_sucursal">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="em_nombre" />
+          </Key>
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="em_nombre" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -272,6 +312,17 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwseg_usuario_x_aca_Sede' no
                 <ScalarProperty Name="NomSede" ColumnName="NomSede" />
                 <ScalarProperty Name="IdSede" ColumnName="IdSede" />
                 <ScalarProperty Name="em_nombre" ColumnName="em_nombre" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwseg_usuario_x_tb_sucursal">
+            <EntityTypeMapping TypeName="ModelSeguridadAcceso.vwseg_usuario_x_tb_sucursal">
+              <MappingFragment StoreEntitySet="vwseg_usuario_x_tb_sucursal">
+                <ScalarProperty Name="em_nombre" ColumnName="em_nombre" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
               </MappingFragment>

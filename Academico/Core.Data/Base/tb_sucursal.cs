@@ -14,6 +14,12 @@ namespace Core.Data.Base
     
     public partial class tb_sucursal
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tb_sucursal()
+        {
+            this.tb_sucursal_FormaPago_x_fa_NivelDescuento = new HashSet<tb_sucursal_FormaPago_x_fa_NivelDescuento>();
+        }
+    
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public string codigo { get; set; }
@@ -37,5 +43,7 @@ namespace Core.Data.Base
         public string IdCtaCble_vtaIVA { get; set; }
     
         public virtual tb_empresa tb_empresa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_sucursal_FormaPago_x_fa_NivelDescuento> tb_sucursal_FormaPago_x_fa_NivelDescuento { get; set; }
     }
 }

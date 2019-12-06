@@ -35,5 +35,18 @@ namespace Core.Bus.Inventario
                 throw;
             }
         }
+
+        public bool ValidarCodigoExists(int IdEmpresa, string Codigo)
+        {
+            try
+            {
+                return odata.ValidarCodigoExists(IdEmpresa, Codigo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

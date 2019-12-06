@@ -11,6 +11,7 @@ using Core.Bus.Academico;
 using Core.Bus.General;
 using Core.Info.Helps;
 using Core.Info.General;
+using Core.Bus.Facturacion;
 
 namespace Core.Web.Areas.Academico.Controllers
 {
@@ -27,6 +28,8 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_SocioEconomico_Bus bus_socioeconomico = new aca_SocioEconomico_Bus();
         tb_profesion_Bus bus_profesion = new tb_profesion_Bus();
         aca_CatalogoFicha_Bus bus_catalogo_ficha = new aca_CatalogoFicha_Bus();
+        fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();
+        fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         public static UploadedFile file { get; set; }
@@ -69,6 +72,7 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Metodos
         private void cargar_combos()
         {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sexo = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.SEXO), false);
             var lst_estado_civil = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.ESTCIVIL), false);
             var lst_tipo_doc = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODOC), false);
@@ -88,6 +92,12 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_tipo_discapacidad = lst_tipo_discapacidad;
             ViewBag.lst_profesion = lst_profesion;
             ViewBag.lst_instruccion = lst_instruccion;
+   
+            var lst_termino_pago = bus_termino_pago.get_list(false);
+            ViewBag.lst_termino_pago = lst_termino_pago;
+
+            var lst_clientetipo = bus_clientetipo.get_list(IdEmpresa, false);
+            ViewBag.lst_clientetipo = lst_clientetipo;
         }
 
         private bool validar(aca_Alumno_Info info, ref string msg)

@@ -24,6 +24,39 @@
         <AssociationConnector Association="ModelFacturacion.FK_fa_cliente_fa_NivelDescuento" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_cliente" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_parametro_fa_cliente" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_factura" Width="1.5" PointX="11.875" PointY="2" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_factura_det" Width="1.5" PointX="14.125" PointY="5.125" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_factura_resumen" Width="1.5" PointX="3.375" PointY="13.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_factura_x_ct_cbtecble" Width="1.5" PointX="14.125" PointY="1.625" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_notaCreDeb" Width="1.5" PointX="9.625" PointY="6.875" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_notaCreDeb_det" Width="1.5" PointX="11.875" PointY="19.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_notaCreDeb_x_ct_cbtecble" Width="1.5" PointX="11.875" PointY="12.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_notaCreDeb_x_cxc_cobro" Width="1.5" PointX="11.875" PointY="16.25" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_notaCreDeb_x_fa_factura_NotaDeb" Width="1.5" PointX="14.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_TipoNota" Width="1.5" PointX="7.375" PointY="13.75" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_factura_fa_catalogo" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_factura_fa_cliente" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_fa_cliente" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_factura_det_fa_factura" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_factura_fa_NivelDescuento" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_factura_fa_PuntoVta" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_factura_x_ct_cbtecble_fa_factura" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_det_fa_notaCreDeb" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_fa_PuntoVta" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_fa_TipoNota1" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_x_ct_cbtecble_fa_notaCreDeb" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_x_cxc_cobro_fa_notaCreDeb" />
+        <EntityTypeShape EntityType="ModelFacturacion.vwfa_factura_det" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.vwfa_PuntoVta" Width="1.5" PointX="0.75" PointY="16.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_Vendedor" Width="1.5" PointX="16.375" PointY="9" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_cliente_x_fa_Vendedor_x_sucursal_fa_Vendedor" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_factura_fa_Vendedor" />
+        <EntityTypeShape EntityType="ModelFacturacion.vwfa_cliente_consulta" Width="1.5" PointX="16.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.vwfa_cliente_contactos" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_TerminoPago_Distribucion" Width="1.5" PointX="3" PointY="1.125" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_TerminoPago_Distribucion_fa_TerminoPago" />
+        <EntityTypeShape EntityType="ModelFacturacion.vwfa_factura_sin_automatico" Width="1.5" PointX="3.375" PointY="18.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.vwfa_factura" Width="1.5" PointX="18.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

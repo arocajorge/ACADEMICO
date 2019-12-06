@@ -42,5 +42,14 @@ namespace Core.Data.Base
         public virtual DbSet<vwtb_provincia> vwtb_provincia { get; set; }
         public virtual DbSet<vwtb_Ciudad> vwtb_Ciudad { get; set; }
         public virtual DbSet<vwtb_ciudad_id> vwtb_ciudad_id { get; set; }
+        public virtual DbSet<tb_LogError> tb_LogError { get; set; }
+        public virtual DbSet<tb_sis_Documento_Tipo> tb_sis_Documento_Tipo { get; set; }
+        public virtual DbSet<tb_sis_Documento_Tipo_Talonario> tb_sis_Documento_Tipo_Talonario { get; set; }
+        public virtual DbSet<tb_sis_Documento_Tipo_x_Empresa> tb_sis_Documento_Tipo_x_Empresa { get; set; }
+        public virtual DbSet<tb_sis_Impuesto_x_ctacble> tb_sis_Impuesto_x_ctacble { get; set; }
+        public virtual DbSet<tb_sucursal_FormaPago_x_fa_NivelDescuento> tb_sucursal_FormaPago_x_fa_NivelDescuento { get; set; }
+        public virtual DbSet<tbl_TransaccionesAutorizadas> tbl_TransaccionesAutorizadas { get; set; }
+        public virtual DbSet<tb_ColaImpresionDirecta> tb_ColaImpresionDirecta { get; set; }
+        public virtual DbSet<tb_mes> tb_mes { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public fa_NivelDescuento()
         {
             this.fa_cliente = new HashSet<fa_cliente>();
+            this.fa_factura = new HashSet<fa_factura>();
         }
     
         public int IdEmpresa { get; set; }
@@ -29,5 +30,7 @@ namespace Core.Data.Base
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_cliente> fa_cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_factura> fa_factura { get; set; }
     }
 }

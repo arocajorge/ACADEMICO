@@ -11,6 +11,7 @@
         <EntityTypeShape EntityType="ModelSeguridadAcceso.seg_Usuario_x_Empresa" Width="1.5" PointX="3.375" PointY="0.5" />
         <AssociationConnector Association="ModelSeguridadAcceso.FK_seg_Usuario_x_Empresa_seg_usuario" />
         <EntityTypeShape EntityType="ModelSeguridadAcceso.vwseg_usuario_x_aca_Sede" Width="1.5" PointX="7.25" PointY="0.5" />
+        <EntityTypeShape EntityType="ModelSeguridadAcceso.vwseg_usuario_x_tb_sucursal" Width="1.5" PointX="5.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

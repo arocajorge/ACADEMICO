@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="36ae914528654b838f558eb872ba3c6b" Name="Diagram1">
+        <EntityTypeShape EntityType="ModelContabilidad.ct_cbtecble" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelContabilidad.ct_cbtecble_det" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <AssociationConnector Association="ModelContabilidad.FK_ct_cbtecble_det_ct_cbtecble" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ModelContabilidad.ct_periodo" Width="1.5" PointX="0.75" PointY="7" />
+        <EntityTypeShape EntityType="ModelContabilidad.vwct_cbtecble_det" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="ModelContabilidad.FK_ct_cbtecble_ct_periodo" />
+        <EntityTypeShape EntityType="ModelContabilidad.vwct_cbtecble" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="ModelContabilidad.ct_cbtecble_Reversado" Width="1.5" PointX="3" PointY="10.25" />
+        <EntityTypeShape EntityType="ModelContabilidad.ct_cbtecble_tipo" Width="1.5" PointX="0.75" PointY="10.625" />
+        <AssociationConnector Association="ModelContabilidad.FK_ct_cbtecble_ct_cbtecble_tipo" />
+        <AssociationConnector Association="ModelContabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" />
+        <AssociationConnector Association="ModelContabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" />
+        <EntityTypeShape EntityType="ModelContabilidad.vwct_periodo" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="ModelContabilidad.ct_CierrePorModuloPorSucursal" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelContabilidad.ct_parametro" Width="1.5" PointX="3" PointY="14.625" />
+        <AssociationConnector Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo" />
+        <AssociationConnector Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
