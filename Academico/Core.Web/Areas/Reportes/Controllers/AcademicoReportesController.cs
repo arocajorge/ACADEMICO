@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Core.Web.Areas.Reportes.Controllers
 {
-    public class AcademicoController : Controller
+    public class AcademicoReportesController : Controller
     {
         public ActionResult ACA_001(int IdEmpresa = 0, int IdMatricula = 0)
         {

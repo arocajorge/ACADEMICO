@@ -565,13 +565,14 @@
                             {
                                 settings.Name = "VehiculoPropio_padre";
                                 settings.Text = "Tiene vehiculo propio";
+                                settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_vehiculo_padre();}";
                             }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.VehiculoPropio_padre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="vehiculo_padre">
                     <div class="col-md-12">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -870,13 +871,14 @@
                             {
                                 settings.Name = "VehiculoPropio_madre";
                                 settings.Text = "Tiene vehiculo propio";
+                                settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_vehiculo_madre();}";
                             }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.VehiculoPropio_madre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="vehiculo_madre">
                     <div class="col-md-12">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -1024,6 +1026,8 @@
             $("#error_documento").hide();
             $("#error_documento_padre").hide();
             $("#error_documento_madre").hide();
+            mostrar_vehiculo_padre();
+            mostrar_vehiculo_madre();
         })
         //$("#pe_cedulaRuc").blur(function () {
         //    Validar_cedula_ruc();
@@ -1269,9 +1273,9 @@
                     if (data == "") {
                         return;
                     }
-                    console.log(data);
+                    //console.log(data);
                     if (data.Secuencia != 0) {
-                        alert("El familiar ya existe con la secuencia: " + data.Secuencia);
+                        alert("Ya existe un familiar relacionado con la identificación ingresada");
                         window.location.href = '@Url.Action("Index", "Alumno", new { Area = "Academico" })'
                     }
                     else {
@@ -1281,6 +1285,8 @@
                             $("#IdTipoDocumento_padre").val(data.IdTipoDocumento);
                             $("#pe_nombre_padre").val(data.pe_nombre);
                             $("#pe_apellido_padre").val(data.pe_apellido);
+                            $("#pe_nombreCompleto_padre").val(data.pe_nombreCompleto);
+                            $("#pe_razonSocial_padre").val(data.pe_razonSocial);
                             pe_fechaNacimiento_padre.SetDate(new Date(data.anio, data.mes, data.dia));
                             $("#Correo_padre").val(data.Correo);
                             $("#Celular_padre").val(data.Celular);
@@ -1292,6 +1298,18 @@
                             $("#PorcentajeDiscapacidad_padre").val(data.PorcentajeDiscapacidad);
                             $("#IdEstadoCivil_padre").val(data.IdEstadoCivil);
                             $("#pe_sexo_padre").val(data.pe_sexo);
+                            $("#IdProfesion_padre").val(data.IdProfesion);
+                            $("#IdCatalogoFichaInst_padre").val(data.IdCatalogoFichaInst);
+                            $("#EmpresaTrabajo_padre").val(data.EmpresaTrabajo);
+                            $("#DireccionTrabajo_padre").val(data.DireccionTrabajo);
+                            $("#TelefonoTrabajo_padre").val(data.TelefonoTrabajo);
+                            $("#CargoTrabajo_padre").val(data.CargoTrabajo);
+                            $("#AniosServicio_padre").val(data.AniosServicio);
+                            $("#IngresoMensual_padre").val(data.IngresoMensual);
+                            $("#VehiculoPropio_padre").val(data.VehiculoPropio);
+                            $("#Marca_padre").val(data.Marca);
+                            $("#Modelo_padre").val(data.Modelo);
+                            $("#CasaPropia_padre").val(data.CasaPropia);
                         }
                         else {
                             vaciar_campos_padre();
@@ -1357,6 +1375,8 @@
                             $("#IdTipoDocumento_madre").val(data.IdTipoDocumento);
                             $("#pe_nombre_madre").val(data.pe_nombre);
                             $("#pe_apellido_madre").val(data.pe_apellido);
+                            $("#pe_nombreCompleto_madre").val(data.pe_nombreCompleto);
+                            $("#pe_razonSocial_madre").val(data.pe_razonSocial);
                             pe_fechaNacimiento_madre.SetDate(new Date(data.anio, data.mes, data.dia));
                             $("#Correo_madre").val(data.Correo);
                             $("#Celular_madre").val(data.Celular);
@@ -1368,6 +1388,18 @@
                             $("#PorcentajeDiscapacidad_madre").val(data.PorcentajeDiscapacidad);
                             $("#IdEstadoCivil_madre").val(data.IdEstadoCivil);
                             $("#pe_sexo_madre").val(data.pe_sexo);
+                            $("#IdProfesion_madre").val(data.IdProfesion);
+                            $("#IdCatalogoFichaInst_madre").val(data.IdCatalogoFichaInst);
+                            $("#EmpresaTrabajo_madre").val(data.EmpresaTrabajo);
+                            $("#DireccionTrabajo_madre").val(data.DireccionTrabajo);
+                            $("#TelefonoTrabajo_madre").val(data.TelefonoTrabajo);
+                            $("#CargoTrabajo_madre").val(data.CargoTrabajo);
+                            $("#AniosServicio_madre").val(data.AniosServicio);
+                            $("#IngresoMensual_madre").val(data.IngresoMensual);
+                            $("#VehiculoPropio_madre").val(data.VehiculoPropio);
+                            $("#Marca_madre").val(data.Marca);
+                            $("#Modelo_madre").val(data.Modelo);
+                            $("#CasaPropia_madre").val(data.CasaPropia);
                         }
                         else {
                             vaciar_campos_madre();
@@ -1414,6 +1446,17 @@
             $("#PorcentajeDiscapacidad_padre").val("");
             $("#IdEstadoCivil_padre").val("");
             $("#pe_sexo_padre").val("");
+            $("#IdProfesion_padre").val("0");
+            $("#EmpresaTrabajo_padre").val("");
+            $("#DireccionTrabajo_padre").val("");
+            $("#TelefonoTrabajo_padre").val("");
+            $("#CargoTrabajo_padre").val("");
+            $("#AniosServicio_padre").val("");
+            $("#IngresoMensual_padre").val("0");
+            VehiculoPropio_padre.SetChecked(false);
+            CasaPropia_padre.SetChecked(false);
+            $("#Marca_padre").val("");
+            $("#Modelo_padre").val("");
         }
 
         function vaciar_campos_madre() {
@@ -1433,6 +1476,17 @@
             $("#PorcentajeDiscapacidad_madre").val("");
             $("#IdEstadoCivil_madre").val("");
             $("#pe_sexo_madre").val("");
+            $("#IdProfesion_madre").val("0");
+            $("#EmpresaTrabajo_madre").val("");
+            $("#DireccionTrabajo_madre").val("");
+            $("#TelefonoTrabajo_madre").val("");
+            $("#CargoTrabajo_madre").val("");
+            $("#AniosServicio_madre").val("");
+            $("#IngresoMensual_madre").val("0");
+            VehiculoPropio_madre.SetChecked(false);
+            CasaPropia_madre.SetChecked(false);
+            $("#Marca_madre").val("");
+            $("#Modelo_madre").val("");
         }
 
 
@@ -1610,6 +1664,24 @@
             else {
                 var razon_social = $("#pe_razonSocial_madre").val();
                 $("#pe_nombreCompleto_madre").val(razon_social)
+            }
+        }
+
+        function mostrar_vehiculo_padre() {
+            if (VehiculoPropio_padre.GetValue() == true) {
+                $("#vehiculo_padre").show();
+            }
+            else {
+                $("#vehiculo_padre").hide();
+            }
+        }
+
+        function mostrar_vehiculo_madre() {
+            if (VehiculoPropio_madre.GetValue() == true) {
+                $("#vehiculo_madre").show();
+            }
+            else {
+                $("#vehiculo_madre").hide();
             }
         }
     </script>

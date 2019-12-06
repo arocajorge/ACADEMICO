@@ -208,13 +208,14 @@
                             {
                                 settings.Name = "VehiculoPropio";
                                 settings.Text = "Tiene vehiculo propio";
+                                settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_vehiculo();}";
                             }).GetHtml()
                     @Html.ValidationMessageFor(q => q.VehiculoPropio, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="vehiculo">
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
@@ -349,6 +350,7 @@
 <script>
     $(function () {
         $("#error_documento").hide();
+        mostrar_vehiculo();
     })
 
     $("#pe_cedulaRuc").blur(function () {
@@ -531,4 +533,12 @@
         });
     };
 
+    function mostrar_vehiculo() {
+        if (VehiculoPropio.GetValue() == true) {
+            $("#vehiculo").show();
+        }
+        else {
+            $("#vehiculo").hide();
+        }
+    }
 </script>

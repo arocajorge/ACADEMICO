@@ -52,5 +52,6 @@ namespace Core.Data.Base
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public bool CasaPropia { get; set; }
+        public bool Estado { get; set; }
     }
 }

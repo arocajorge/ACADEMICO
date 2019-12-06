@@ -913,5 +913,25 @@
         $("#error_documento").hide();
         $("#error_documento_padre").hide();
         $("#error_documento_madre").hide();
+        mostrar_vehiculo_padre();
+        mostrar_vehiculo_madre();
     })
+
+    function mostrar_vehiculo_padre() {
+        if (VehiculoPropio_padre.GetValue() == true) {
+            $("#vehiculo_padre").show();
+        }
+        else {
+            $("#vehiculo_padre").hide();
+        }
+    }
+
+    function mostrar_vehiculo_madre() {
+        if (VehiculoPropio_madre.GetValue() == true) {
+            $("#vehiculo_madre").show();
+        }
+        else {
+            $("#vehiculo_madre").hide();
+        }
+    }
 </script>

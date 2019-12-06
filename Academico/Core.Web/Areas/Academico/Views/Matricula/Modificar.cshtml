@@ -102,11 +102,16 @@
                     <i class="fa fa-external-link-square"></i>
                 </button>
             </div>
-            <div class="col-md-offset-1 col-md-1">
+            <div class="col-md-1">
                 <label for="IdCliente"></label>
                 <a type="button" class="btn btn-primary form-control" title="Nueva matricula" href="@Url.Action("Nuevo","Matricula",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
                     <i class="fa fa-plus"></i>
                 </a>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-primary form-control" onclick="Imprimir();" title="Imprimir ficha de estudiante">
+                    <i class="fa fa-print"></i>
+                </button>
             </div>
             <div class="col-md-1">
                 <div class="form-group">
@@ -423,6 +428,12 @@
         else{
             alert("Debe seleccionar alumno");
         }
+    }
+
+    function Imprimir() {
+        var location = GetPathServer();
+        var win = window.open(location +"/Reportes/AcademicoReportes/ACA_001?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdMatricula="+@Model.IdMatricula, '_blank');
+        win.focus();
     }
 </script>
 

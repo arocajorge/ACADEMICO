@@ -40,6 +40,7 @@ namespace Core.Info.Academico
         public bool CasaPropia { get; set; }
         public bool SeFactura { get; set; }
         public bool EsRepresentante { get; set; }
+        public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }

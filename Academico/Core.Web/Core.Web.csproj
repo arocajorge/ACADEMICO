@@ -230,7 +230,7 @@
     <Compile Include="Areas\Academico\Controllers\SedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\NivelPorSedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\SocioEconomicoController.cs" />
-    <Compile Include="Areas\Reportes\Controllers\AcademicoController.cs" />
+    <Compile Include="Areas\Reportes\Controllers\AcademicoReportesController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
     <Compile Include="Areas\SeguridadAcceso\SeguridadAccesoAreaRegistration.cs" />
     <Compile Include="Areas\SeguridadAcceso\Controllers\UsuarioController.cs" />
@@ -6858,7 +6858,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Academico\Views\web.config" />
-    <Content Include="Areas\Reportes\Views\web.config" />
     <Content Include="bower_DevExpress\ace-builds\.bower.json" />
     <Content Include="bower_DevExpress\ace-builds\bower.json" />
     <Content Include="bower_DevExpress\ace-builds\LICENSE" />
@@ -7629,6 +7628,9 @@
     <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Provincia.cshtml" />
     <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Ciudad.cshtml" />
     <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Parroquia.cshtml" />
+    <Content Include="Areas\Reportes\Views\web.config" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_001.cshtml" />
+    <Content Include="Areas\Reportes\Views\Shared\_Layout.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -7668,8 +7670,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
     <Folder Include="Areas\Reportes\Models\" />
-    <Folder Include="Areas\Reportes\Views\Academico\" />
-    <Folder Include="Areas\Reportes\Views\Shared\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Views\Shared\" />
   </ItemGroup>

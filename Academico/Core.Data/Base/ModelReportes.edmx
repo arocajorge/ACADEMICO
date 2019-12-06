@@ -4,20 +4,187 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ModelReportes.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="ModelReportesStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="ModelReportes.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWACA_001">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="FechaMatricula" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="Anio" />
+            <PropertyRef Name="NomSede" />
+            <PropertyRef Name="NomNivel" />
+            <PropertyRef Name="NomJornada" />
+            <PropertyRef Name="NomCurso" />
+            <PropertyRef Name="NomParalelo" />
+            <PropertyRef Name="Sexo" />
+            <PropertyRef Name="TieneElectricidad" />
+            <PropertyRef Name="TieneHermanos" />
+            <PropertyRef Name="TipoVivienda" />
+            <PropertyRef Name="TenenciaVivienda" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaMatricula" Type="date" Nullable="false" />
+          <Property Name="CodMatricula" Type="varchar" MaxLength="200" />
+          <Property Name="CodAlumno" Type="varchar" MaxLength="200" />
+          <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
+          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Anio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomSede" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NomNivel" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NomJornada" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NomCurso" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NomParalelo" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Sexo" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="LugarNacimiento" Type="varchar" MaxLength="300" />
+          <Property Name="pe_fechaNacimiento" Type="datetime" />
+          <Property Name="Direccion" Type="varchar" MaxLength="1000" />
+          <Property Name="Celular" Type="varchar" MaxLength="500" />
+          <Property Name="TieneElectricidad" Type="bit" Nullable="false" />
+          <Property Name="TieneHermanos" Type="bit" Nullable="false" />
+          <Property Name="NombreHermanos" Type="varchar(max)" />
+          <Property Name="TipoVivienda" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="TenenciaVivienda" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="CodCatalogoCONADIS" Type="varchar" MaxLength="25" />
+          <Property Name="PorcentajeDiscapacidad" Type="float" />
+          <Property Name="NumeroCarnetConadis" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityContainer Name="ModelReportesStoreContainer">
+          <EntitySet Name="VWACA_001" EntityType="Self.VWACA_001" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWACA_001].[IdEmpresa] AS [IdEmpresa], 
+    [VWACA_001].[IdMatricula] AS [IdMatricula], 
+    [VWACA_001].[FechaMatricula] AS [FechaMatricula], 
+    [VWACA_001].[CodMatricula] AS [CodMatricula], 
+    [VWACA_001].[CodAlumno] AS [CodAlumno], 
+    [VWACA_001].[IdAlumno] AS [IdAlumno], 
+    [VWACA_001].[IdPersona] AS [IdPersona], 
+    [VWACA_001].[pe_apellido] AS [pe_apellido], 
+    [VWACA_001].[pe_nombre] AS [pe_nombre], 
+    [VWACA_001].[Anio] AS [Anio], 
+    [VWACA_001].[NomSede] AS [NomSede], 
+    [VWACA_001].[NomNivel] AS [NomNivel], 
+    [VWACA_001].[NomJornada] AS [NomJornada], 
+    [VWACA_001].[NomCurso] AS [NomCurso], 
+    [VWACA_001].[NomParalelo] AS [NomParalelo], 
+    [VWACA_001].[Sexo] AS [Sexo], 
+    [VWACA_001].[LugarNacimiento] AS [LugarNacimiento], 
+    [VWACA_001].[pe_fechaNacimiento] AS [pe_fechaNacimiento], 
+    [VWACA_001].[Direccion] AS [Direccion], 
+    [VWACA_001].[Celular] AS [Celular], 
+    [VWACA_001].[TieneElectricidad] AS [TieneElectricidad], 
+    [VWACA_001].[TieneHermanos] AS [TieneHermanos], 
+    [VWACA_001].[NombreHermanos] AS [NombreHermanos], 
+    [VWACA_001].[TipoVivienda] AS [TipoVivienda], 
+    [VWACA_001].[TenenciaVivienda] AS [TenenciaVivienda], 
+    [VWACA_001].[CodCatalogoCONADIS] AS [CodCatalogoCONADIS], 
+    [VWACA_001].[PorcentajeDiscapacidad] AS [PorcentajeDiscapacidad], 
+    [VWACA_001].[NumeroCarnetConadis] AS [NumeroCarnetConadis]
+    FROM [web].[VWACA_001] AS [VWACA_001]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ModelReportes" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="EntitiesReportes" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="EntitiesReportes" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="VWACA_001" EntityType="ModelReportes.VWACA_001" />
+        </EntityContainer>
+        <EntityType Name="VWACA_001">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="FechaMatricula" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="Anio" />
+            <PropertyRef Name="NomSede" />
+            <PropertyRef Name="NomNivel" />
+            <PropertyRef Name="NomJornada" />
+            <PropertyRef Name="NomCurso" />
+            <PropertyRef Name="NomParalelo" />
+            <PropertyRef Name="Sexo" />
+            <PropertyRef Name="TieneElectricidad" />
+            <PropertyRef Name="TieneHermanos" />
+            <PropertyRef Name="TipoVivienda" />
+            <PropertyRef Name="TenenciaVivienda" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="FechaMatricula" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CodMatricula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CodAlumno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Anio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomSede" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomNivel" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomJornada" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomParalelo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LugarNacimiento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="pe_fechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TieneElectricidad" Type="Boolean" Nullable="false" />
+          <Property Name="TieneHermanos" Type="Boolean" Nullable="false" />
+          <Property Name="NombreHermanos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TipoVivienda" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TenenciaVivienda" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CodCatalogoCONADIS" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeDiscapacidad" Type="Double" />
+          <Property Name="NumeroCarnetConadis" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelReportesStoreContainer" CdmEntityContainer="EntitiesReportes" />
+        <EntityContainerMapping StorageEntityContainer="ModelReportesStoreContainer" CdmEntityContainer="EntitiesReportes" >
+          <EntitySetMapping Name="VWACA_001">
+            <EntityTypeMapping TypeName="ModelReportes.VWACA_001">
+              <MappingFragment StoreEntitySet="VWACA_001">
+                <ScalarProperty Name="NumeroCarnetConadis" ColumnName="NumeroCarnetConadis" />
+                <ScalarProperty Name="PorcentajeDiscapacidad" ColumnName="PorcentajeDiscapacidad" />
+                <ScalarProperty Name="CodCatalogoCONADIS" ColumnName="CodCatalogoCONADIS" />
+                <ScalarProperty Name="TenenciaVivienda" ColumnName="TenenciaVivienda" />
+                <ScalarProperty Name="TipoVivienda" ColumnName="TipoVivienda" />
+                <ScalarProperty Name="NombreHermanos" ColumnName="NombreHermanos" />
+                <ScalarProperty Name="TieneHermanos" ColumnName="TieneHermanos" />
+                <ScalarProperty Name="TieneElectricidad" ColumnName="TieneElectricidad" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="CodAlumno" ColumnName="CodAlumno" />
+                <ScalarProperty Name="CodMatricula" ColumnName="CodMatricula" />
+                <ScalarProperty Name="FechaMatricula" ColumnName="FechaMatricula" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

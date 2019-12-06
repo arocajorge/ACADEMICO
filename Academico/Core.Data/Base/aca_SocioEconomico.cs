@@ -45,12 +45,12 @@ namespace Core.Data.Base
         public string IdUsuarioModificacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
     
+        public virtual aca_Alumno aca_Alumno { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha1 { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha2 { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha3 { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha4 { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha5 { get; set; }
-        public virtual aca_Alumno aca_Alumno { get; set; }
     }
 }

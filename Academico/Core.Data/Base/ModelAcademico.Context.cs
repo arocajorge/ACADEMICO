@@ -80,11 +80,11 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_AlumnoRetiro> vwaca_AlumnoRetiro { get; set; }
         public virtual DbSet<aca_CatalogoFicha> aca_CatalogoFicha { get; set; }
         public virtual DbSet<aca_CatalogoTipoFicha> aca_CatalogoTipoFicha { get; set; }
-        public virtual DbSet<aca_Familia> aca_Familia { get; set; }
-        public virtual DbSet<aca_SocioEconomico> aca_SocioEconomico { get; set; }
-        public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
         public virtual DbSet<aca_Alumno> aca_Alumno { get; set; }
         public virtual DbSet<vwaca_Alumno> vwaca_Alumno { get; set; }
+        public virtual DbSet<aca_SocioEconomico> aca_SocioEconomico { get; set; }
+        public virtual DbSet<aca_Familia> aca_Familia { get; set; }
+        public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

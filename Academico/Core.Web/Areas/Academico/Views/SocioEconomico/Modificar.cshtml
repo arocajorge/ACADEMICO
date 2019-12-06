@@ -38,12 +38,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="IdCliente">Alumno*</label>
                     @Html.Partial("_CmbAlumno", Model.IdAlumno)
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                 </div>
+            </div>
+            <div class="col-md-offset-3 col-md-1">
+                <button type="button" class="btn btn-primary form-control" id="ride" onclick="Imprimir();" title="Imprimir">
+                    <i class="fa fa-print"></i>  Imprimir
+                </button>
             </div>
         </div>
     </div>
@@ -93,13 +98,14 @@
                             {
                                 settings.Name = "TieneHermanos";
                                 settings.Text = "Tiene hermanos en la institución";
+                                settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_div();}";
                             }).GetHtml()
                     @Html.ValidationMessageFor(q => q.TieneHermanos, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="tiene_hermanos">
         <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
@@ -280,6 +286,7 @@
         mostrar_otro_motivo();
         mostrar_otro_informacion_inst();
         mostrar_otro_financiamiento();
+        mostrar_div();
 
         $("#IdCatalogoFichaMot").change(function () {
             mostrar_otro_motivo();
@@ -323,9 +330,18 @@
         });
     });
 
+    function mostrar_div() {
+        if (TieneHermanos.GetValue() == true) {
+            $("#tiene_hermanos").show();
+        }
+        else {
+            $("#tiene_hermanos").hide();
+        }
+    }
+
     function mostrar_otro_motivo() {
         var MotivoIngreso = $("#IdCatalogoFichaMot").val();
-        if (MotivoIngreso == 19) {
+        if (MotivoIngreso == 15) {
             $("#otro_motivo_ingreso").show();
         }
         else {
@@ -335,7 +351,7 @@
 
     function mostrar_otro_informacion_inst() {
         var MotivoIngreso = $("#IdCatalogoFichaIns").val();
-        if (MotivoIngreso == 23) {
+        if (MotivoIngreso == 19) {
             $("#otro_informacion_inst").show();
         }
         else {
@@ -344,7 +360,7 @@
     };
     function mostrar_otro_financiamiento() {
         var Informacion = $("#IdCatalogoFichaFin").val();
-        if (Informacion == 26) {
+        if (Informacion == 22) {
             $("#otro_forma_financ").show();
         }
         else {
@@ -369,5 +385,11 @@
         var Total = parseFloat($("#TotalIngreso").val()) - parseFloat($("#TotalGasto").val());
         $("#Saldo").val(Total);
     };
+
+    function Imprimir() {
+        @*var location = GetPathServer();
+        var win = window.open(location +"/Reportes/AcademicoReportes/ACA_001?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdSocioEconomico="+@Model.IdSocioEconomico, '_blank');
+        win.focus();*@
+    }
 </script>
 

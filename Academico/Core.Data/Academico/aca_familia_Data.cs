@@ -56,7 +56,8 @@ namespace Core.Data.Academico
                             pe_nombreCompleto = q.pe_nombreCompleto,
                             pe_sexo = q.pe_sexo,
                             IdEstadoCivil = q.IdEstadoCivil,
-                            pe_fechaNacimiento = q.pe_fechaNacimiento
+                            pe_fechaNacimiento = q.pe_fechaNacimiento,
+                            Estado = q.Estado
                         });
                     });
                 }
@@ -78,7 +79,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdCatalogoPAREN == IdCatalogoPAREN).FirstOrDefault();
+                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdCatalogoPAREN == IdCatalogoPAREN && q.Estado==true).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
@@ -118,7 +119,8 @@ namespace Core.Data.Academico
                         CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
                         NumeroCarnetConadis = Entity.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
-                        pe_telfono_Contacto = Entity.pe_telfono_Contacto
+                        pe_telfono_Contacto = Entity.pe_telfono_Contacto,
+                        Estado = Entity.Estado
                     };
                 }
 
@@ -139,7 +141,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno 
+                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.Estado==true 
                     && ((Tipo == cl_enumeradores.eTipoRepresentante.ECON.ToString() ? q.SeFactura == true : q.EsRepresentante==true))).FirstOrDefault();
 
                     if (Entity == null)
@@ -181,7 +183,8 @@ namespace Core.Data.Academico
                         CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
                         NumeroCarnetConadis = Entity.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
-                        pe_telfono_Contacto = Entity.pe_telfono_Contacto
+                        pe_telfono_Contacto = Entity.pe_telfono_Contacto,
+                        Estado = Entity.Estado
                     };
                 }
 
@@ -202,7 +205,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.Secuencia == Secuencia).FirstOrDefault();
+                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.Secuencia == Secuencia && q.Estado==true).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
@@ -242,7 +245,8 @@ namespace Core.Data.Academico
                         CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
                         NumeroCarnetConadis = Entity.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
-                        pe_telfono_Contacto = Entity.pe_telfono_Contacto
+                        pe_telfono_Contacto = Entity.pe_telfono_Contacto,
+                        Estado = Entity.Estado
                     };
                 }
 
@@ -263,7 +267,8 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdPersona == IdPersona && q.IdCatalogoPAREN == IdCatalogoPAREN).FirstOrDefault();
+                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdPersona == IdPersona 
+                    && q.IdCatalogoPAREN == IdCatalogoPAREN && q.Estado ==true).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
@@ -331,7 +336,8 @@ namespace Core.Data.Academico
                 }
 
                 EntitiesAcademico Context_academico = new EntitiesAcademico();
-                var Entity_fam = Context_academico.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno  && q.IdPersona == Entity_per.IdPersona).FirstOrDefault();
+                var Entity_fam = Context_academico.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdPersona == Entity_per.IdPersona && q.Estado == true).FirstOrDefault();
+
                 if (Entity_fam == null)
                 {
                     info.IdPersona = Entity_per.IdPersona;
@@ -391,7 +397,7 @@ namespace Core.Data.Academico
                     Marca = Entity_fam.Marca,
                     Modelo = Entity_fam.Modelo,
                     CasaPropia = Entity_fam.CasaPropia,
-                pe_nombreCompleto = Entity_fam.pe_nombreCompleto,
+                    pe_nombreCompleto = Entity_fam.pe_nombreCompleto,
                     pe_telfono_Contacto = Entity_fam.pe_telfono_Contacto,
                     CodCatalogoSangre = Entity_fam.CodCatalogoSangre,
                     CodCatalogoCONADIS = Entity_fam.CodCatalogoCONADIS,
@@ -490,6 +496,7 @@ namespace Core.Data.Academico
                         Modelo = info.Modelo,
                         CasaPropia = info.CasaPropia,
                         EsRepresentante = info.EsRepresentante,
+                        Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
@@ -586,7 +593,7 @@ namespace Core.Data.Academico
 
                     Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                     Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;
-                    //Entity.Estado = false;
+                    Entity.Estado = false;
                     Entity.MotivoAnulacion = info.MotivoAnulacion;
 
                     Context.SaveChanges();

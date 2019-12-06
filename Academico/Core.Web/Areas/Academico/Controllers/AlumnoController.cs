@@ -144,6 +144,12 @@ namespace Core.Web.Areas.Academico.Controllers
                 info.info_valido_madre = false;
             }
 
+            if (info.info_persona_padre.IdPersona == info.info_persona_madre.IdPersona)
+            {
+                msg = "No se puede registrar a la misma persona como padre y madre";
+                return false;
+            }
+
             return true;
         }
 
@@ -347,8 +353,10 @@ namespace Core.Web.Areas.Academico.Controllers
             {
 
                 model.alu_foto = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + model.IdEmpresa.ToString("000") + model.IdAlumno.ToString("000000") + ".jpg");
+                if (model.alu_foto == null)
+                    model.alu_foto = new byte[0];
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 model.alu_foto = new byte[0];
@@ -464,6 +472,9 @@ namespace Core.Web.Areas.Academico.Controllers
             model.info_persona_padre = armar_info_padre(model);
             model.info_persona_madre = armar_info_madre(model);
 
+            if (model.alu_foto == null)
+                model.alu_foto = new byte[0];
+
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -568,6 +579,9 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Anular(aca_Alumno_Info model)
         {
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
+            if (model.alu_foto == null)
+                model.alu_foto = new byte[0];
+
             if (!bus_alumno.AnularDB(model))
             {
                 ViewBag.mensaje = "No se ha podido anular el registro";
