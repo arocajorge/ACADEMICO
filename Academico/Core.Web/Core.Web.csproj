@@ -74,6 +74,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -230,8 +233,17 @@
     <Compile Include="Areas\Academico\Controllers\SedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\NivelPorSedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\SocioEconomicoController.cs" />
-    <Compile Include="Areas\Facturacion\Controllers\FacturacionController.cs" />
+    <Compile Include="Areas\Contabilidad\ContabilidadAreaRegistration.cs" />
+    <Compile Include="Areas\Contabilidad\Controllers\AnioFiscalController.cs" />
+    <Compile Include="Areas\Contabilidad\Controllers\PlanDeCuentasController.cs" />
+    <Compile Include="Areas\Facturacion\ClienteController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\ClienteController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\FacturaController.cs" />
     <Compile Include="Areas\Facturacion\FacturacionAreaRegistration.cs" />
+    <Compile Include="Areas\General\Controllers\ParroquiaController.cs" />
+    <Compile Include="Areas\General\Controllers\PersonaController.cs" />
+    <Compile Include="Areas\General\GeneralAreaRegistration.cs" />
     <Compile Include="Areas\Inventario\Controllers\ProductoController.cs" />
     <Compile Include="Areas\Inventario\InventarioAreaRegistration.cs" />
     <Compile Include="Areas\Reportes\Controllers\AcademicoReportesController.cs" />
@@ -7637,6 +7649,45 @@
     <Content Include="Areas\Reportes\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Facturacion\Views\web.config" />
     <Content Include="Areas\Inventario\Views\web.config" />
+    <Content Include="Areas\General\Views\web.config" />
+    <Content Include="Areas\Contabilidad\Views\web.config" />
+    <Content Include="Areas\Facturacion\Views\Factura\Anular.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\Modificar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\Nuevo.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_CmbCliente_Factura.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_CmbProducto_Factura.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_factura.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_factura_cuotas.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_factura_det.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_LoteFactura.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\_GridViewPartial_PFactura_det.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\Anular.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\Importar.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\Index.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\Modificar.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\Nuevo.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_CmbProducto_composicion.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_CmbSucursal_det.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_MarcaPro_importacion.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_PresentacionPro_importacion.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_producto.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_ProductoPro_importacion.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_producto_composicion.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_producto_por_bodega.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_producto_x_niveldescuento.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\_GridViewPartial_SubgrupoPro_importacion.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\Anular.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\Importar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\Modificar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\Nuevo.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\_cmb_parroquia.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente_contacto.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente_importacion.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_cliente_tipo_importacion.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\_GridViewPartial_fa_vendedor.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -7675,11 +7726,18 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
+    <Folder Include="Areas\Contabilidad\Models\" />
+    <Folder Include="Areas\Contabilidad\Views\AnioFiscal\" />
+    <Folder Include="Areas\Contabilidad\Views\PlanDeCuentas\" />
+    <Folder Include="Areas\Contabilidad\Views\Shared\" />
     <Folder Include="Areas\Facturacion\Models\" />
-    <Folder Include="Areas\Facturacion\Views\Facturacion\" />
+    <Folder Include="Areas\Facturacion\Views\ClienteTipo\" />
     <Folder Include="Areas\Facturacion\Views\Shared\" />
+    <Folder Include="Areas\General\Models\" />
+    <Folder Include="Areas\General\Views\Parroquia\" />
+    <Folder Include="Areas\General\Views\Persona\" />
+    <Folder Include="Areas\General\Views\Shared\" />
     <Folder Include="Areas\Inventario\Models\" />
-    <Folder Include="Areas\Inventario\Views\Producto\" />
     <Folder Include="Areas\Inventario\Views\Shared\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />

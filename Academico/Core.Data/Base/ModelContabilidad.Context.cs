@@ -35,5 +35,15 @@ namespace Core.Data.Base
         public virtual DbSet<vwct_periodo> vwct_periodo { get; set; }
         public virtual DbSet<ct_CierrePorModuloPorSucursal> ct_CierrePorModuloPorSucursal { get; set; }
         public virtual DbSet<ct_parametro> ct_parametro { get; set; }
+        public virtual DbSet<ct_anio_fiscal> ct_anio_fiscal { get; set; }
+        public virtual DbSet<ct_anio_fiscal_x_cuenta_utilidad> ct_anio_fiscal_x_cuenta_utilidad { get; set; }
+        public virtual DbSet<ct_anio_fiscal_x_tb_sucursal> ct_anio_fiscal_x_tb_sucursal { get; set; }
+        public virtual DbSet<vwct_anio_fiscal_x_cuenta_utilidad> vwct_anio_fiscal_x_cuenta_utilidad { get; set; }
+        public virtual DbSet<vwct_anio_fiscal_x_tb_sucursal> vwct_anio_fiscal_x_tb_sucursal { get; set; }
+        public virtual DbSet<vwct_anio_fiscal_x_tb_sucursal_SinCierre> vwct_anio_fiscal_x_tb_sucursal_SinCierre { get; set; }
+        public virtual DbSet<ct_plancta> ct_plancta { get; set; }
+        public virtual DbSet<ct_plancta_nivel> ct_plancta_nivel { get; set; }
+        public virtual DbSet<ct_grupocble> ct_grupocble { get; set; }
+        public virtual DbSet<vwct_cbtecble_con_ctacble_acreedora> vwct_cbtecble_con_ctacble_acreedora { get; set; }
     }
 }

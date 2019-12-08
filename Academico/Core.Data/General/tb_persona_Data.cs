@@ -34,6 +34,93 @@ namespace Core.Data.General
                 throw;
             }
         }
+        public tb_persona_Info get_info(decimal IdPersona)
+        {
+            try
+            {
+                tb_persona_Info info = new tb_persona_Info();
+
+                using (EntitiesGeneral Context = new EntitiesGeneral())
+                {
+                    tb_persona Entity = Context.tb_persona.FirstOrDefault(q => q.IdPersona == IdPersona);
+                    if (Entity == null) return null;
+                    info = new tb_persona_Info
+                    {
+                        IdPersona = Entity.IdPersona,
+                        CodPersona = Entity.CodPersona,
+                        pe_Naturaleza = Entity.pe_Naturaleza,
+                        pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        pe_razonSocial = Entity.pe_razonSocial,
+                        pe_apellido = Entity.pe_apellido,
+                        pe_nombre = Entity.pe_nombre,
+                        IdTipoDocumento = Entity.IdTipoDocumento,
+                        pe_cedulaRuc = Entity.pe_cedulaRuc,
+                        pe_direccion = Entity.pe_direccion,
+                        pe_telfono_Contacto = Entity.pe_telfono_Contacto,
+                        pe_celular = Entity.pe_celular,
+                        pe_correo = Entity.pe_correo,
+                        pe_sexo = Entity.pe_sexo,
+                        IdEstadoCivil = Entity.IdEstadoCivil,
+                        pe_fechaNacimiento = Entity.pe_fechaNacimiento,
+                        pe_estado = Entity.pe_estado,
+                        IdTipoCta_acreditacion_cat = Entity.IdTipoCta_acreditacion_cat,
+                        num_cta_acreditacion = Entity.num_cta_acreditacion,
+                        IdBanco_acreditacion = Entity.IdBanco_acreditacion
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<tb_persona_Info> get_list(bool mostrar_anulados)
+        {
+            try
+            {
+                List<tb_persona_Info> Lista;
+
+                using (EntitiesGeneral Context = new EntitiesGeneral())
+                {
+                    if (mostrar_anulados)
+                        Lista = (from q in Context.tb_persona
+                                 select new tb_persona_Info
+                                 {
+                                     IdPersona = q.IdPersona,
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     IdTipoDocumento = q.IdTipoDocumento,
+                                     pe_cedulaRuc = q.pe_cedulaRuc,
+                                     pe_estado = q.pe_estado,
+
+                                     EstadoBool = q.pe_estado == "A" ? true : false
+                                 }).ToList();
+                    else
+                        Lista = (from q in Context.tb_persona
+                                 where q.pe_estado == "A"
+                                 select new tb_persona_Info
+                                 {
+                                     IdPersona = q.IdPersona,
+                                     pe_nombreCompleto = q.pe_nombreCompleto,
+                                     IdTipoDocumento = q.IdTipoDocumento,
+                                     pe_cedulaRuc = q.pe_cedulaRuc,
+                                     pe_estado = q.pe_estado,
+
+                                     EstadoBool = q.pe_estado == "A" ? true : false
+                                 }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public tb_persona_Info armar_info(tb_persona_Info info)
         {
             tb_persona_Info info_retorno = new tb_persona_Info

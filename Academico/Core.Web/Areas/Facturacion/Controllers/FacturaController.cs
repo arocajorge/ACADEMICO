@@ -18,7 +18,7 @@ using System.Web.Mvc;
 
 namespace Core.Web.Areas.Facturacion.Controllers
 {
-    public class FacturacionController : Controller
+    public class FacturaController : Controller
     {
         #region Variables
         in_Producto_x_fa_NivelDescuento_Bus bus_nivelproducto = new in_Producto_x_fa_NivelDescuento_Bus();

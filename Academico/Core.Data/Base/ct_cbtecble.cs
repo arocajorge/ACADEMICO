@@ -20,6 +20,7 @@ namespace Core.Data.Base
             this.ct_cbtecble_det = new HashSet<ct_cbtecble_det>();
             this.ct_cbtecble_Reversado = new HashSet<ct_cbtecble_Reversado>();
             this.ct_cbtecble_Reversado1 = new HashSet<ct_cbtecble_Reversado>();
+            this.ct_anio_fiscal_x_tb_sucursal = new HashSet<ct_anio_fiscal_x_tb_sucursal>();
         }
     
         public int IdEmpresa { get; set; }
@@ -48,5 +49,7 @@ namespace Core.Data.Base
         public virtual ICollection<ct_cbtecble_Reversado> ct_cbtecble_Reversado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ct_cbtecble_Reversado> ct_cbtecble_Reversado1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ct_anio_fiscal_x_tb_sucursal> ct_anio_fiscal_x_tb_sucursal { get; set; }
     }
 }

@@ -29,6 +29,73 @@
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="50" />
           <Property Name="cod_categoria" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="in_grupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCategoria" />
+            <PropertyRef Name="IdLinea" />
+            <PropertyRef Name="IdGrupo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCategoria" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdLinea" Type="int" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="cod_grupo" Type="varchar" MaxLength="50" />
+          <Property Name="nom_grupo" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="observacion" Type="varchar" MaxLength="150" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+        </EntityType>
+        <EntityType Name="in_linea">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCategoria" />
+            <PropertyRef Name="IdLinea" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCategoria" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdLinea" Type="int" Nullable="false" />
+          <Property Name="cod_linea" Type="varchar" MaxLength="50" />
+          <Property Name="nom_linea" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="observacion" Type="varchar" MaxLength="150" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+        </EntityType>
+        <EntityType Name="in_Marca">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMarca" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="in_parametro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -147,6 +214,63 @@
           <Property Name="Aparece_modu_Inventario" Type="bit" Nullable="false" />
           <Property Name="Aparece_fabricacion" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="in_subgrupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCategoria" />
+            <PropertyRef Name="IdLinea" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="IdSubgrupo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCategoria" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdLinea" Type="int" Nullable="false" />
+          <Property Name="IdGrupo" Type="int" Nullable="false" />
+          <Property Name="IdSubgrupo" Type="int" Nullable="false" />
+          <Property Name="cod_subgrupo" Type="varchar" MaxLength="50" />
+          <Property Name="nom_subgrupo" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="observacion" Type="varchar" MaxLength="150" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="nom_pc" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="25" />
+          <Property Name="MotiAnula" Type="varchar" MaxLength="200" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_in_grupo_in_linea">
+          <End Role="in_linea" Type="Self.in_linea" Multiplicity="1" />
+          <End Role="in_grupo" Type="Self.in_grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_linea">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+            </Principal>
+            <Dependent Role="in_grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_linea_in_categorias">
+          <End Role="in_categorias" Type="Self.in_categorias" Multiplicity="1" />
+          <End Role="in_linea" Type="Self.in_linea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_categorias">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="in_linea">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_in_Producto_in_categorias">
           <End Role="in_categorias" Type="Self.in_categorias" Multiplicity="1" />
           <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="*" />
@@ -158,6 +282,20 @@
             <Dependent Role="in_Producto">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_Producto_in_Marca">
+          <End Role="in_Marca" Type="Self.in_Marca" Multiplicity="1" />
+          <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Marca">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMarca" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -203,6 +341,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_in_Producto_in_subgrupo">
+          <End Role="in_subgrupo" Type="Self.in_subgrupo" Multiplicity="1" />
+          <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_subgrupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdGrupo" />
+              <PropertyRef Name="IdSubgrupo" />
+            </Principal>
+            <Dependent Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdGrupo" />
+              <PropertyRef Name="IdSubGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_in_Producto_x_fa_NivelDescuento_in_Producto">
           <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="1" />
           <End Role="in_Producto_x_fa_NivelDescuento" Type="Self.in_Producto_x_fa_NivelDescuento" Multiplicity="*" />
@@ -217,15 +375,49 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_in_subgrupo_in_grupo">
+          <End Role="in_grupo" Type="Self.in_grupo" Multiplicity="1" />
+          <End Role="in_subgrupo" Type="Self.in_subgrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="in_subgrupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelInventarioStoreContainer">
           <EntitySet Name="in_categorias" EntityType="Self.in_categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="in_grupo" EntityType="Self.in_grupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="in_linea" EntityType="Self.in_linea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="in_Marca" EntityType="Self.in_Marca" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_parametro" EntityType="Self.in_parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_presentacion" EntityType="Self.in_presentacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_Producto" EntityType="Self.in_Producto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_Producto_x_fa_NivelDescuento" EntityType="Self.in_Producto_x_fa_NivelDescuento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="in_ProductoTipo" EntityType="Self.in_ProductoTipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="in_subgrupo" EntityType="Self.in_subgrupo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_in_grupo_in_linea" Association="Self.FK_in_grupo_in_linea">
+            <End Role="in_linea" EntitySet="in_linea" />
+            <End Role="in_grupo" EntitySet="in_grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_linea_in_categorias" Association="Self.FK_in_linea_in_categorias">
+            <End Role="in_categorias" EntitySet="in_categorias" />
+            <End Role="in_linea" EntitySet="in_linea" />
+          </AssociationSet>
           <AssociationSet Name="FK_in_Producto_in_categorias" Association="Self.FK_in_Producto_in_categorias">
             <End Role="in_categorias" EntitySet="in_categorias" />
+            <End Role="in_Producto" EntitySet="in_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_Producto_in_Marca" Association="Self.FK_in_Producto_in_Marca">
+            <End Role="in_Marca" EntitySet="in_Marca" />
             <End Role="in_Producto" EntitySet="in_Producto" />
           </AssociationSet>
           <AssociationSet Name="FK_in_Producto_in_presentacion" Association="Self.FK_in_Producto_in_presentacion">
@@ -240,9 +432,17 @@
             <End Role="in_ProductoTipo" EntitySet="in_ProductoTipo" />
             <End Role="in_Producto" EntitySet="in_Producto" />
           </AssociationSet>
+          <AssociationSet Name="FK_in_Producto_in_subgrupo" Association="Self.FK_in_Producto_in_subgrupo">
+            <End Role="in_subgrupo" EntitySet="in_subgrupo" />
+            <End Role="in_Producto" EntitySet="in_Producto" />
+          </AssociationSet>
           <AssociationSet Name="FK_in_Producto_x_fa_NivelDescuento_in_Producto" Association="Self.FK_in_Producto_x_fa_NivelDescuento_in_Producto">
             <End Role="in_Producto" EntitySet="in_Producto" />
             <End Role="in_Producto_x_fa_NivelDescuento" EntitySet="in_Producto_x_fa_NivelDescuento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_subgrupo_in_grupo" Association="Self.FK_in_subgrupo_in_grupo">
+            <End Role="in_grupo" EntitySet="in_grupo" />
+            <End Role="in_subgrupo" EntitySet="in_subgrupo" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -299,6 +499,8 @@
           <NavigationProperty Name="in_presentacion" Relationship="ModelInventario.FK_in_Producto_in_presentacion" FromRole="in_Producto" ToRole="in_presentacion" />
           <NavigationProperty Name="in_ProductoTipo" Relationship="ModelInventario.FK_in_Producto_in_ProductoTipo" FromRole="in_Producto" ToRole="in_ProductoTipo" />
           <NavigationProperty Name="in_Producto_x_fa_NivelDescuento" Relationship="ModelInventario.FK_in_Producto_x_fa_NivelDescuento_in_Producto" FromRole="in_Producto" ToRole="in_Producto_x_fa_NivelDescuento" />
+          <NavigationProperty Name="in_Marca" Relationship="ModelInventario.FK_in_Producto_in_Marca" FromRole="in_Producto" ToRole="in_Marca" />
+          <NavigationProperty Name="in_subgrupo" Relationship="ModelInventario.FK_in_Producto_in_subgrupo" FromRole="in_Producto" ToRole="in_subgrupo" />
         </EntityType>
         <Association Name="FK_in_Producto_in_Producto1">
           <End Role="in_Producto" Type="Self.in_Producto" Multiplicity="0..1" />
@@ -341,6 +543,30 @@
             <End Role="in_Producto_x_fa_NivelDescuento" EntitySet="in_Producto_x_fa_NivelDescuento" />
           </AssociationSet>
           <EntitySet Name="in_parametro" EntityType="ModelInventario.in_parametro" />
+          <EntitySet Name="in_grupo" EntityType="ModelInventario.in_grupo" />
+          <EntitySet Name="in_linea" EntityType="ModelInventario.in_linea" />
+          <EntitySet Name="in_Marca" EntityType="ModelInventario.in_Marca" />
+          <EntitySet Name="in_subgrupo" EntityType="ModelInventario.in_subgrupo" />
+          <AssociationSet Name="FK_in_linea_in_categorias" Association="ModelInventario.FK_in_linea_in_categorias">
+            <End Role="in_categorias" EntitySet="in_categorias" />
+            <End Role="in_linea" EntitySet="in_linea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_grupo_in_linea" Association="ModelInventario.FK_in_grupo_in_linea">
+            <End Role="in_linea" EntitySet="in_linea" />
+            <End Role="in_grupo" EntitySet="in_grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_subgrupo_in_grupo" Association="ModelInventario.FK_in_subgrupo_in_grupo">
+            <End Role="in_grupo" EntitySet="in_grupo" />
+            <End Role="in_subgrupo" EntitySet="in_subgrupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_Producto_in_Marca" Association="ModelInventario.FK_in_Producto_in_Marca">
+            <End Role="in_Marca" EntitySet="in_Marca" />
+            <End Role="in_Producto" EntitySet="in_Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_in_Producto_in_subgrupo" Association="ModelInventario.FK_in_Producto_in_subgrupo">
+            <End Role="in_subgrupo" EntitySet="in_subgrupo" />
+            <End Role="in_Producto" EntitySet="in_Producto" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="in_categorias">
           <Key>
@@ -366,6 +592,7 @@
           <Property Name="MotivoAnulacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cod_categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="in_Producto" Relationship="ModelInventario.FK_in_Producto_in_categorias" FromRole="in_categorias" ToRole="in_Producto" />
+          <NavigationProperty Name="in_linea" Relationship="ModelInventario.FK_in_linea_in_categorias" FromRole="in_categorias" ToRole="in_linea" />
         </EntityType>
         <EntityType Name="in_presentacion">
           <Key>
@@ -499,6 +726,189 @@
           <Property Name="IdMotivo_Inv_ajuste_ing" Type="Int32" />
           <Property Name="IdMotivo_Inv_ajuste_egr" Type="Int32" />
         </EntityType>
+        <EntityType Name="in_grupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCategoria" />
+            <PropertyRef Name="IdLinea" />
+            <PropertyRef Name="IdGrupo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCategoria" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdLinea" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="cod_grupo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_grupo" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="in_linea" Relationship="ModelInventario.FK_in_grupo_in_linea" FromRole="in_grupo" ToRole="in_linea" />
+          <NavigationProperty Name="in_subgrupo" Relationship="ModelInventario.FK_in_subgrupo_in_grupo" FromRole="in_grupo" ToRole="in_subgrupo" />
+        </EntityType>
+        <EntityType Name="in_linea">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCategoria" />
+            <PropertyRef Name="IdLinea" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCategoria" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdLinea" Type="Int32" Nullable="false" />
+          <Property Name="cod_linea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_linea" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="in_categorias" Relationship="ModelInventario.FK_in_linea_in_categorias" FromRole="in_linea" ToRole="in_categorias" />
+          <NavigationProperty Name="in_grupo" Relationship="ModelInventario.FK_in_grupo_in_linea" FromRole="in_linea" ToRole="in_grupo" />
+        </EntityType>
+        <EntityType Name="in_Marca">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMarca" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMarca" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="in_Producto" Relationship="ModelInventario.FK_in_Producto_in_Marca" FromRole="in_Marca" ToRole="in_Producto" />
+        </EntityType>
+        <EntityType Name="in_subgrupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCategoria" />
+            <PropertyRef Name="IdLinea" />
+            <PropertyRef Name="IdGrupo" />
+            <PropertyRef Name="IdSubgrupo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCategoria" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdLinea" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+          <Property Name="IdSubgrupo" Type="Int32" Nullable="false" />
+          <Property Name="cod_subgrupo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_subgrupo" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="nom_pc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MotiAnula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="in_grupo" Relationship="ModelInventario.FK_in_subgrupo_in_grupo" FromRole="in_subgrupo" ToRole="in_grupo" />
+          <NavigationProperty Name="in_Producto" Relationship="ModelInventario.FK_in_Producto_in_subgrupo" FromRole="in_subgrupo" ToRole="in_Producto" />
+        </EntityType>
+        <Association Name="FK_in_linea_in_categorias">
+          <End Type="ModelInventario.in_categorias" Role="in_categorias" Multiplicity="1" />
+          <End Type="ModelInventario.in_linea" Role="in_linea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_categorias">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="in_linea">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_grupo_in_linea">
+          <End Type="ModelInventario.in_linea" Role="in_linea" Multiplicity="1" />
+          <End Type="ModelInventario.in_grupo" Role="in_grupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_linea">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+            </Principal>
+            <Dependent Role="in_grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_subgrupo_in_grupo">
+          <End Type="ModelInventario.in_grupo" Role="in_grupo" Multiplicity="1" />
+          <End Type="ModelInventario.in_subgrupo" Role="in_subgrupo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_grupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdGrupo" />
+            </Principal>
+            <Dependent Role="in_subgrupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_Producto_in_Marca">
+          <End Type="ModelInventario.in_Marca" Role="in_Marca" Multiplicity="1" />
+          <End Type="ModelInventario.in_Producto" Role="in_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_Marca">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMarca" />
+            </Principal>
+            <Dependent Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_in_Producto_in_subgrupo">
+          <End Type="ModelInventario.in_subgrupo" Role="in_subgrupo" Multiplicity="1" />
+          <End Type="ModelInventario.in_Producto" Role="in_Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="in_subgrupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdGrupo" />
+              <PropertyRef Name="IdSubgrupo" />
+            </Principal>
+            <Dependent Role="in_Producto">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCategoria" />
+              <PropertyRef Name="IdLinea" />
+              <PropertyRef Name="IdGrupo" />
+              <PropertyRef Name="IdSubGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -643,6 +1053,94 @@
                 <ScalarProperty Name="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" ColumnName="IdMovi_Inven_tipo_x_Dev_Inv_x_Ing" />
                 <ScalarProperty Name="IdMovi_inven_tipo_ingresoBodegaDestino" ColumnName="IdMovi_inven_tipo_ingresoBodegaDestino" />
                 <ScalarProperty Name="IdMovi_inven_tipo_egresoBodegaOrigen" ColumnName="IdMovi_inven_tipo_egresoBodegaOrigen" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_grupo">
+            <EntityTypeMapping TypeName="ModelInventario.in_grupo">
+              <MappingFragment StoreEntitySet="in_grupo">
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="nom_grupo" ColumnName="nom_grupo" />
+                <ScalarProperty Name="cod_grupo" ColumnName="cod_grupo" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_linea">
+            <EntityTypeMapping TypeName="ModelInventario.in_linea">
+              <MappingFragment StoreEntitySet="in_linea">
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="nom_linea" ColumnName="nom_linea" />
+                <ScalarProperty Name="cod_linea" ColumnName="cod_linea" />
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_Marca">
+            <EntityTypeMapping TypeName="ModelInventario.in_Marca">
+              <MappingFragment StoreEntitySet="in_Marca">
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="in_subgrupo">
+            <EntityTypeMapping TypeName="ModelInventario.in_subgrupo">
+              <MappingFragment StoreEntitySet="in_subgrupo">
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="MotiAnula" ColumnName="MotiAnula" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="nom_pc" ColumnName="nom_pc" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="nom_subgrupo" ColumnName="nom_subgrupo" />
+                <ScalarProperty Name="cod_subgrupo" ColumnName="cod_subgrupo" />
+                <ScalarProperty Name="IdSubgrupo" ColumnName="IdSubgrupo" />
+                <ScalarProperty Name="IdGrupo" ColumnName="IdGrupo" />
+                <ScalarProperty Name="IdLinea" ColumnName="IdLinea" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

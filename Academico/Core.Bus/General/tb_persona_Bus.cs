@@ -34,5 +34,70 @@ namespace Core.Bus.General
         {
             return odata.get_info_bajo_demanda(args, IdEmpresa, IdTipoPersona);
         }
+
+        public tb_persona_Info get_info(int IdEmpresa, string IdTipoPersona, decimal IdEntidad)
+        {
+            return odata.get_info(IdEmpresa, IdTipoPersona, IdEntidad);
+        }
+
+        public List<tb_persona_Info> get_list(bool mostrar_anulados)
+        {
+            try
+            {
+                return odata.get_list(mostrar_anulados);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public tb_persona_Info get_info(decimal IdPersona)
+        {
+            try
+            {
+                return odata.get_info(IdPersona);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool guardarDB(tb_persona_Info info)
+        {
+            try
+            {
+                return odata.guardarDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool modificarDB(tb_persona_Info info)
+        {
+            try
+            {
+                return odata.modificarDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool anularDB(tb_persona_Info info)
+        {
+            try
+            {
+                return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

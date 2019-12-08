@@ -27,5 +27,6 @@ namespace Core.Data.Base
         public string IdCentroCosto { get; set; }
     
         public virtual ct_cbtecble ct_cbtecble { get; set; }
+        public virtual ct_plancta ct_plancta { get; set; }
     }
 }

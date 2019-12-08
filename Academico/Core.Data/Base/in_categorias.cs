@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public in_categorias()
         {
             this.in_Producto = new HashSet<in_Producto>();
+            this.in_linea = new HashSet<in_linea>();
         }
     
         public int IdEmpresa { get; set; }
@@ -41,5 +42,7 @@ namespace Core.Data.Base
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_Producto> in_Producto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_linea> in_linea { get; set; }
     }
 }

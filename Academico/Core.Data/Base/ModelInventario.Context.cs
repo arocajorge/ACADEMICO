@@ -31,5 +31,9 @@ namespace Core.Data.Base
         public virtual DbSet<in_ProductoTipo> in_ProductoTipo { get; set; }
         public virtual DbSet<in_Producto_x_fa_NivelDescuento> in_Producto_x_fa_NivelDescuento { get; set; }
         public virtual DbSet<in_parametro> in_parametro { get; set; }
+        public virtual DbSet<in_grupo> in_grupo { get; set; }
+        public virtual DbSet<in_linea> in_linea { get; set; }
+        public virtual DbSet<in_Marca> in_Marca { get; set; }
+        public virtual DbSet<in_subgrupo> in_subgrupo { get; set; }
     }
 }

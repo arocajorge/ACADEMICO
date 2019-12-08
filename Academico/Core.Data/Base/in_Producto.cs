@@ -69,5 +69,7 @@ namespace Core.Data.Base
         public virtual in_ProductoTipo in_ProductoTipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_Producto_x_fa_NivelDescuento> in_Producto_x_fa_NivelDescuento { get; set; }
+        public virtual in_Marca in_Marca { get; set; }
+        public virtual in_subgrupo in_subgrupo { get; set; }
     }
 }

@@ -211,6 +211,15 @@
     <Compile Include="Base\aca_SocioEconomico.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\ct_anio_fiscal.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ct_anio_fiscal_x_cuenta_utilidad.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ct_anio_fiscal_x_tb_sucursal.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\ct_cbtecble.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
@@ -226,10 +235,19 @@
     <Compile Include="Base\ct_CierrePorModuloPorSucursal.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\ct_grupocble.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\ct_parametro.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\ct_periodo.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ct_plancta.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ct_plancta_nivel.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\fa_catalogo.cs">
@@ -304,6 +322,15 @@
     <Compile Include="Base\in_categorias.cs">
       <DependentUpon>ModelInventario.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\in_grupo.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_linea.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_Marca.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\in_parametro.cs">
       <DependentUpon>ModelInventario.tt</DependentUpon>
     </Compile>
@@ -317,6 +344,9 @@
       <DependentUpon>ModelInventario.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\in_Producto_x_fa_NivelDescuento.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_subgrupo.cs">
       <DependentUpon>ModelInventario.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\ModelAcademico.Context.cs">
@@ -553,7 +583,19 @@
     <Compile Include="Base\vwaca_Profesor.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwct_anio_fiscal_x_cuenta_utilidad.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwct_anio_fiscal_x_tb_sucursal.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwct_anio_fiscal_x_tb_sucursal_SinCierre.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwct_cbtecble.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwct_cbtecble_con_ctacble_acreedora.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwct_cbtecble_det.cs">
@@ -601,9 +643,14 @@
     <Compile Include="Base\vwtb_provincia.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Contabilidad\ct_anio_fiscal_Data.cs" />
+    <Compile Include="Contabilidad\ct_anio_fiscal_x_cuenta_utilidad_Data.cs" />
+    <Compile Include="Contabilidad\ct_anio_fiscal_x_tb_sucursal_Data.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_Data.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_det_Data.cs" />
+    <Compile Include="Contabilidad\ct_grupocble_Data.cs" />
     <Compile Include="Contabilidad\ct_periodo_Data.cs" />
+    <Compile Include="Contabilidad\ct_plancta_Data.cs" />
     <Compile Include="Facturacion\fa_catalogo_Data.cs" />
     <Compile Include="Facturacion\fa_catalogo_tipo_Data.cs" />
     <Compile Include="Facturacion\fa_cliente_contactos_Data.cs" />
@@ -637,9 +684,15 @@
     <Compile Include="General\tb_sis_Impuesto_Data.cs" />
     <Compile Include="General\tb_sucursal_Data.cs" />
     <Compile Include="General\tb_sucursal_FormaPago_x_fa_NivelDescuento_Data.cs" />
+    <Compile Include="Inventario\in_categorias_Data.cs" />
+    <Compile Include="Inventario\in_grupo_Data.cs" />
+    <Compile Include="Inventario\in_linea_Data.cs" />
+    <Compile Include="Inventario\in_Marca_Data.cs" />
+    <Compile Include="Inventario\in_presentacion_Data.cs" />
     <Compile Include="Inventario\in_ProductoTipo_Data.cs" />
     <Compile Include="Inventario\in_Producto_Data.cs" />
     <Compile Include="Inventario\in_Producto_x_fa_NivelDescuento_Data.cs" />
+    <Compile Include="Inventario\in_subgrupo_Data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reportes\ACA_001_Data.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_Data.cs" />

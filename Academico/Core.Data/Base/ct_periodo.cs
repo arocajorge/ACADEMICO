@@ -31,5 +31,6 @@ namespace Core.Data.Base
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ct_cbtecble> ct_cbtecble { get; set; }
+        public virtual ct_anio_fiscal ct_anio_fiscal { get; set; }
     }
 }

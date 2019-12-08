@@ -5,6 +5,37 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ModelContabilidad.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ct_anio_fiscal">
+          <Key>
+            <PropertyRef Name="IdanioFiscal" />
+          </Key>
+          <Property Name="IdanioFiscal" Type="int" Nullable="false" />
+          <Property Name="af_fechaIni" Type="date" Nullable="false" />
+          <Property Name="af_fechaFin" Type="date" Nullable="false" />
+          <Property Name="af_estado" Type="nvarchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_anio_fiscal_x_cuenta_utilidad">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdanioFiscal" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCbleCierre" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="ct_anio_fiscal_x_tb_sucursal">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdanioFiscal" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
         <EntityType Name="ct_cbtecble">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -99,6 +130,18 @@
           <Property Name="FechaFin" Type="date" Nullable="false" />
           <Property Name="Cerrado" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ct_grupocble">
+          <Key>
+            <PropertyRef Name="IdGrupoCble" />
+          </Key>
+          <Property Name="IdGrupoCble" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="gc_GrupoCble" Type="char" MaxLength="50" Nullable="false" />
+          <Property Name="gc_Orden" Type="tinyint" Nullable="false" />
+          <Property Name="gc_estado_financiero" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="gc_signo_operacion" Type="int" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdGrupo_Mayor" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ct_parametro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -122,6 +165,98 @@
           <Property Name="pe_FechaFin" Type="smalldatetime" Nullable="false" />
           <Property Name="pe_cerrado" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="pe_estado" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="ct_plancta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCtaCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdCtaCblePadre" Type="varchar" MaxLength="20" />
+          <Property Name="pc_Naturaleza" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdNivelCta" Type="int" Nullable="false" />
+          <Property Name="IdGrupoCble" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="pc_Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="pc_EsMovimiento" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="pc_clave_corta" Type="varchar" MaxLength="15" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="ct_plancta_nivel">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNivelCta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdNivelCta" Type="int" Nullable="false" />
+          <Property Name="nv_NumDigitos" Type="int" Nullable="false" />
+          <Property Name="nv_Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="1" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Transaccion" Type="datetime" />
+          <Property Name="IdUsuarioUltModi" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_anio_fiscal_x_cuenta_utilidad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwct_anio_fiscal_x_cuenta_utilidad">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdanioFiscal" />
+            <PropertyRef Name="pc_Cuenta" />
+            <PropertyRef Name="IdNivelCta" />
+            <PropertyRef Name="IdGrupoCble" />
+            <PropertyRef Name="gc_GrupoCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="int" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+          <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdNivelCta" Type="int" Nullable="false" />
+          <Property Name="IdGrupoCble" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="IdTipoCtaCble" Type="int" />
+          <Property Name="gc_GrupoCble" Type="char" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_anio_fiscal_x_tb_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwct_anio_fiscal_x_tb_sucursal">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdanioFiscal" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cb_Observacion" Type="varchar(max)" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_anio_fiscal_x_tb_sucursal_SinCierre' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwct_anio_fiscal_x_tb_sucursal_SinCierre">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdanioFiscal" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -150,6 +285,19 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble' no tiene defi
           <Property Name="cb_Estado" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="tc_TipoCbte" Type="char" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble_con_ctacble_acreedora' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwct_cbtecble_con_ctacble_acreedora">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdCtaCble_Acreedora" Type="varchar" MaxLength="20" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -205,6 +353,76 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
           <Property Name="smesIngles" Type="varchar" MaxLength="20" />
           <Property Name="AnioMes" Type="varchar" MaxLength="51" />
         </EntityType>
+        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
+          <End Role="ct_anio_fiscal" Type="Self.ct_anio_fiscal" Multiplicity="1" />
+          <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_anio_fiscal">
+              <PropertyRef Name="IdanioFiscal" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdanioFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
+          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="0..1" />
+          <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta1">
+          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="0..1" />
+          <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdanioFiscal" />
+              <PropertyRef Name="IdCtaCbleCierre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_anio_fiscal_x_tb_sucursal_ct_anio_fiscal_x_cuenta_utilidad">
+          <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="1" />
+          <End Role="ct_anio_fiscal_x_tb_sucursal" Type="Self.ct_anio_fiscal_x_tb_sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdanioFiscal" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_tb_sucursal">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdanioFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_anio_fiscal_x_tb_sucursal_ct_cbtecble">
+          <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
+          <End Role="ct_anio_fiscal_x_tb_sucursal" Type="Self.ct_anio_fiscal_x_tb_sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_tb_sucursal">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ct_cbtecble_ct_cbtecble_tipo">
           <End Role="ct_cbtecble_tipo" Type="Self.ct_cbtecble_tipo" Multiplicity="1" />
           <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="*" />
@@ -246,6 +464,20 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdTipoCbte" />
               <PropertyRef Name="IdCbteCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_det_ct_plancta">
+          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="1" />
+          <End Role="ct_cbtecble_det" Type="Self.ct_cbtecble_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -309,14 +541,102 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ct_periodo_ct_anio_fiscal">
+          <End Role="ct_anio_fiscal" Type="Self.ct_anio_fiscal" Multiplicity="1" />
+          <End Role="ct_periodo" Type="Self.ct_periodo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_anio_fiscal">
+              <PropertyRef Name="IdanioFiscal" />
+            </Principal>
+            <Dependent Role="ct_periodo">
+              <PropertyRef Name="IdanioFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_plancta_ct_grupocble">
+          <End Role="ct_grupocble" Type="Self.ct_grupocble" Multiplicity="1" />
+          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_grupocble">
+              <PropertyRef Name="IdGrupoCble" />
+            </Principal>
+            <Dependent Role="ct_plancta">
+              <PropertyRef Name="IdGrupoCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_plancta_ct_plancta">
+          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="0..1" />
+          <End Role="ct_plancta1" Type="Self.ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_plancta1">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCblePadre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_plancta_ct_plancta_nivel">
+          <End Role="ct_plancta_nivel" Type="Self.ct_plancta_nivel" Multiplicity="1" />
+          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta_nivel">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivelCta" />
+            </Principal>
+            <Dependent Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivelCta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelContabilidadStoreContainer">
+          <EntitySet Name="ct_anio_fiscal" EntityType="Self.ct_anio_fiscal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_anio_fiscal_x_cuenta_utilidad" EntityType="Self.ct_anio_fiscal_x_cuenta_utilidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_anio_fiscal_x_tb_sucursal" EntityType="Self.ct_anio_fiscal_x_tb_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ct_cbtecble" EntityType="Self.ct_cbtecble" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ct_cbtecble_det" EntityType="Self.ct_cbtecble_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ct_cbtecble_Reversado" EntityType="Self.ct_cbtecble_Reversado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ct_cbtecble_tipo" EntityType="Self.ct_cbtecble_tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ct_CierrePorModuloPorSucursal" EntityType="Self.ct_CierrePorModuloPorSucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_grupocble" EntityType="Self.ct_grupocble" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ct_parametro" EntityType="Self.ct_parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ct_periodo" EntityType="Self.ct_periodo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_plancta" EntityType="Self.ct_plancta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_plancta_nivel" EntityType="Self.ct_plancta_nivel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwct_anio_fiscal_x_cuenta_utilidad" EntityType="Self.vwct_anio_fiscal_x_cuenta_utilidad" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwct_anio_fiscal_x_cuenta_utilidad].[IdEmpresa] AS [IdEmpresa], 
+    [vwct_anio_fiscal_x_cuenta_utilidad].[IdanioFiscal] AS [IdanioFiscal], 
+    [vwct_anio_fiscal_x_cuenta_utilidad].[IdCtaCble] AS [IdCtaCble], 
+    [vwct_anio_fiscal_x_cuenta_utilidad].[pc_Cuenta] AS [pc_Cuenta], 
+    [vwct_anio_fiscal_x_cuenta_utilidad].[IdNivelCta] AS [IdNivelCta], 
+    [vwct_anio_fiscal_x_cuenta_utilidad].[IdGrupoCble] AS [IdGrupoCble], 
+    [vwct_anio_fiscal_x_cuenta_utilidad].[IdTipoCtaCble] AS [IdTipoCtaCble], 
+    [vwct_anio_fiscal_x_cuenta_utilidad].[gc_GrupoCble] AS [gc_GrupoCble]
+    FROM [dbo].[vwct_anio_fiscal_x_cuenta_utilidad] AS [vwct_anio_fiscal_x_cuenta_utilidad]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwct_anio_fiscal_x_tb_sucursal" EntityType="Self.vwct_anio_fiscal_x_tb_sucursal" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwct_anio_fiscal_x_tb_sucursal].[IdEmpresa] AS [IdEmpresa], 
+    [vwct_anio_fiscal_x_tb_sucursal].[IdSucursal] AS [IdSucursal], 
+    [vwct_anio_fiscal_x_tb_sucursal].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwct_anio_fiscal_x_tb_sucursal].[IdanioFiscal] AS [IdanioFiscal], 
+    [vwct_anio_fiscal_x_tb_sucursal].[IdTipoCbte] AS [IdTipoCbte], 
+    [vwct_anio_fiscal_x_tb_sucursal].[IdCbteCble] AS [IdCbteCble], 
+    [vwct_anio_fiscal_x_tb_sucursal].[cb_Observacion] AS [cb_Observacion]
+    FROM [dbo].[vwct_anio_fiscal_x_tb_sucursal] AS [vwct_anio_fiscal_x_tb_sucursal]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwct_anio_fiscal_x_tb_sucursal_SinCierre" EntityType="Self.vwct_anio_fiscal_x_tb_sucursal_SinCierre" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwct_anio_fiscal_x_tb_sucursal_SinCierre].[IdEmpresa] AS [IdEmpresa], 
+    [vwct_anio_fiscal_x_tb_sucursal_SinCierre].[IdanioFiscal] AS [IdanioFiscal], 
+    [vwct_anio_fiscal_x_tb_sucursal_SinCierre].[IdSucursal] AS [IdSucursal]
+    FROM [dbo].[vwct_anio_fiscal_x_tb_sucursal_SinCierre] AS [vwct_anio_fiscal_x_tb_sucursal_SinCierre]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwct_cbtecble" EntityType="Self.vwct_cbtecble" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwct_cbtecble].[IdEmpresa] AS [IdEmpresa], 
@@ -332,6 +652,14 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
     [vwct_cbtecble].[Su_Descripcion] AS [Su_Descripcion], 
     [vwct_cbtecble].[tc_TipoCbte] AS [tc_TipoCbte]
     FROM [dbo].[vwct_cbtecble] AS [vwct_cbtecble]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwct_cbtecble_con_ctacble_acreedora" EntityType="Self.vwct_cbtecble_con_ctacble_acreedora" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwct_cbtecble_con_ctacble_acreedora].[IdEmpresa] AS [IdEmpresa], 
+    [vwct_cbtecble_con_ctacble_acreedora].[IdTipoCbte] AS [IdTipoCbte], 
+    [vwct_cbtecble_con_ctacble_acreedora].[IdCbteCble] AS [IdCbteCble], 
+    [vwct_cbtecble_con_ctacble_acreedora].[IdCtaCble_Acreedora] AS [IdCtaCble_Acreedora]
+    FROM [dbo].[vwct_cbtecble_con_ctacble_acreedora] AS [vwct_cbtecble_con_ctacble_acreedora]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwct_cbtecble_det" EntityType="Self.vwct_cbtecble_det" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -366,6 +694,26 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
     [vwct_periodo].[AnioMes] AS [AnioMes]
     FROM [dbo].[vwct_periodo] AS [vwct_periodo]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
+            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta1" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta1">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_anio_fiscal_x_tb_sucursal_ct_anio_fiscal_x_cuenta_utilidad" Association="Self.FK_ct_anio_fiscal_x_tb_sucursal_ct_anio_fiscal_x_cuenta_utilidad">
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+            <End Role="ct_anio_fiscal_x_tb_sucursal" EntitySet="ct_anio_fiscal_x_tb_sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_anio_fiscal_x_tb_sucursal_ct_cbtecble" Association="Self.FK_ct_anio_fiscal_x_tb_sucursal_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_anio_fiscal_x_tb_sucursal" EntitySet="ct_anio_fiscal_x_tb_sucursal" />
+          </AssociationSet>
           <AssociationSet Name="FK_ct_cbtecble_ct_cbtecble_tipo" Association="Self.FK_ct_cbtecble_ct_cbtecble_tipo">
             <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
             <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
@@ -376,6 +724,10 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
           </AssociationSet>
           <AssociationSet Name="FK_ct_cbtecble_det_ct_cbtecble" Association="Self.FK_ct_cbtecble_det_ct_cbtecble">
             <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_det_ct_plancta" Association="Self.FK_ct_cbtecble_det_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
             <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
           </AssociationSet>
           <AssociationSet Name="FK_ct_cbtecble_Reversado_ct_cbtecble" Association="Self.FK_ct_cbtecble_Reversado_ct_cbtecble">
@@ -393,6 +745,22 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
           <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo1" Association="Self.FK_ct_parametro_ct_cbtecble_tipo1">
             <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
             <End Role="ct_parametro" EntitySet="ct_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_periodo_ct_anio_fiscal" Association="Self.FK_ct_periodo_ct_anio_fiscal">
+            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
+            <End Role="ct_periodo" EntitySet="ct_periodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_plancta_ct_grupocble" Association="Self.FK_ct_plancta_ct_grupocble">
+            <End Role="ct_grupocble" EntitySet="ct_grupocble" />
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_plancta_ct_plancta" Association="Self.FK_ct_plancta_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_plancta1" EntitySet="ct_plancta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_plancta_ct_plancta_nivel" Association="Self.FK_ct_plancta_ct_plancta_nivel">
+            <End Role="ct_plancta_nivel" EntitySet="ct_plancta_nivel" />
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -427,6 +795,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
           <NavigationProperty Name="ct_cbtecble_tipo" Relationship="ModelContabilidad.FK_ct_cbtecble_ct_cbtecble_tipo" FromRole="ct_cbtecble" ToRole="ct_cbtecble_tipo" />
           <NavigationProperty Name="ct_cbtecble_Reversado" Relationship="ModelContabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
           <NavigationProperty Name="ct_cbtecble_Reversado1" Relationship="ModelContabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" FromRole="ct_cbtecble" ToRole="ct_cbtecble_Reversado" />
+          <NavigationProperty Name="ct_anio_fiscal_x_tb_sucursal" Relationship="ModelContabilidad.FK_ct_anio_fiscal_x_tb_sucursal_ct_cbtecble" FromRole="ct_cbtecble" ToRole="ct_anio_fiscal_x_tb_sucursal" />
         </EntityType>
         <EntityType Name="ct_cbtecble_det">
           <Key>
@@ -447,6 +816,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
           <Property Name="IdPunto_cargo" Type="Int32" />
           <Property Name="IdCentroCosto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ct_cbtecble" Relationship="Self.FK_ct_cbtecble_det_ct_cbtecble" FromRole="ct_cbtecble_det" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_plancta" Relationship="ModelContabilidad.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_cbtecble_det" ToRole="ct_plancta" />
         </EntityType>
         <Association Name="FK_ct_cbtecble_det_ct_cbtecble">
           <End Role="ct_cbtecble" Type="Self.ct_cbtecble" Multiplicity="1" />
@@ -503,6 +873,56 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
             <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
             <End Role="ct_parametro" EntitySet="ct_parametro" />
           </AssociationSet>
+          <EntitySet Name="ct_anio_fiscal" EntityType="ModelContabilidad.ct_anio_fiscal" />
+          <EntitySet Name="ct_anio_fiscal_x_cuenta_utilidad" EntityType="ModelContabilidad.ct_anio_fiscal_x_cuenta_utilidad" />
+          <EntitySet Name="ct_anio_fiscal_x_tb_sucursal" EntityType="ModelContabilidad.ct_anio_fiscal_x_tb_sucursal" />
+          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" Association="ModelContabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
+            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_periodo_ct_anio_fiscal" Association="ModelContabilidad.FK_ct_periodo_ct_anio_fiscal">
+            <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
+            <End Role="ct_periodo" EntitySet="ct_periodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_anio_fiscal_x_tb_sucursal_ct_anio_fiscal_x_cuenta_utilidad" Association="ModelContabilidad.FK_ct_anio_fiscal_x_tb_sucursal_ct_anio_fiscal_x_cuenta_utilidad">
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+            <End Role="ct_anio_fiscal_x_tb_sucursal" EntitySet="ct_anio_fiscal_x_tb_sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_anio_fiscal_x_tb_sucursal_ct_cbtecble" Association="ModelContabilidad.FK_ct_anio_fiscal_x_tb_sucursal_ct_cbtecble">
+            <End Role="ct_cbtecble" EntitySet="ct_cbtecble" />
+            <End Role="ct_anio_fiscal_x_tb_sucursal" EntitySet="ct_anio_fiscal_x_tb_sucursal" />
+          </AssociationSet>
+          <EntitySet Name="vwct_anio_fiscal_x_cuenta_utilidad" EntityType="ModelContabilidad.vwct_anio_fiscal_x_cuenta_utilidad" />
+          <EntitySet Name="vwct_anio_fiscal_x_tb_sucursal" EntityType="ModelContabilidad.vwct_anio_fiscal_x_tb_sucursal" />
+          <EntitySet Name="vwct_anio_fiscal_x_tb_sucursal_SinCierre" EntityType="ModelContabilidad.vwct_anio_fiscal_x_tb_sucursal_SinCierre" />
+          <EntitySet Name="ct_plancta" EntityType="ModelContabilidad.ct_plancta" />
+          <EntitySet Name="ct_plancta_nivel" EntityType="ModelContabilidad.ct_plancta_nivel" />
+          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" Association="ModelContabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta1" Association="ModelContabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta1">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_cbtecble_det_ct_plancta" Association="ModelContabilidad.FK_ct_cbtecble_det_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_cbtecble_det" EntitySet="ct_cbtecble_det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_plancta_ct_plancta" Association="ModelContabilidad.FK_ct_plancta_ct_plancta">
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+            <End Role="ct_plancta1" EntitySet="ct_plancta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_plancta_ct_plancta_nivel" Association="ModelContabilidad.FK_ct_plancta_ct_plancta_nivel">
+            <End Role="ct_plancta_nivel" EntitySet="ct_plancta_nivel" />
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+          </AssociationSet>
+          <EntitySet Name="ct_grupocble" EntityType="ModelContabilidad.ct_grupocble" />
+          <EntitySet Name="vwct_cbtecble_con_ctacble_acreedora" EntityType="ModelContabilidad.vwct_cbtecble_con_ctacble_acreedora" />
+          <AssociationSet Name="FK_ct_plancta_ct_grupocble" Association="ModelContabilidad.FK_ct_plancta_ct_grupocble">
+            <End Role="ct_grupocble" EntitySet="ct_grupocble" />
+            <End Role="ct_plancta" EntitySet="ct_plancta" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ct_periodo">
           <Key>
@@ -518,6 +938,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
           <Property Name="pe_cerrado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="pe_estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ct_cbtecble" Relationship="ModelContabilidad.FK_ct_cbtecble_ct_periodo" FromRole="ct_periodo" ToRole="ct_cbtecble" />
+          <NavigationProperty Name="ct_anio_fiscal" Relationship="ModelContabilidad.FK_ct_periodo_ct_anio_fiscal" FromRole="ct_periodo" ToRole="ct_anio_fiscal" />
         </EntityType>
         <EntityType Name="vwct_cbtecble_det">
           <Key>
@@ -751,6 +1172,299 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ct_anio_fiscal">
+          <Key>
+            <PropertyRef Name="IdanioFiscal" />
+          </Key>
+          <Property Name="IdanioFiscal" Type="Int32" Nullable="false" />
+          <Property Name="af_fechaIni" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="af_fechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="af_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="ModelContabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" FromRole="ct_anio_fiscal" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
+          <NavigationProperty Name="ct_periodo" Relationship="ModelContabilidad.FK_ct_periodo_ct_anio_fiscal" FromRole="ct_anio_fiscal" ToRole="ct_periodo" />
+        </EntityType>
+        <EntityType Name="ct_anio_fiscal_x_cuenta_utilidad">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdanioFiscal" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCbleCierre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ct_anio_fiscal" Relationship="ModelContabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_anio_fiscal" />
+          <NavigationProperty Name="ct_anio_fiscal_x_tb_sucursal" Relationship="ModelContabilidad.FK_ct_anio_fiscal_x_tb_sucursal_ct_anio_fiscal_x_cuenta_utilidad" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_anio_fiscal_x_tb_sucursal" />
+          <NavigationProperty Name="ct_plancta" Relationship="ModelContabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_plancta" />
+          <NavigationProperty Name="ct_plancta1" Relationship="ModelContabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta1" FromRole="ct_anio_fiscal_x_cuenta_utilidad" ToRole="ct_plancta" />
+        </EntityType>
+        <EntityType Name="ct_anio_fiscal_x_tb_sucursal">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdanioFiscal" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="ModelContabilidad.FK_ct_anio_fiscal_x_tb_sucursal_ct_anio_fiscal_x_cuenta_utilidad" FromRole="ct_anio_fiscal_x_tb_sucursal" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
+          <NavigationProperty Name="ct_cbtecble" Relationship="ModelContabilidad.FK_ct_anio_fiscal_x_tb_sucursal_ct_cbtecble" FromRole="ct_anio_fiscal_x_tb_sucursal" ToRole="ct_cbtecble" />
+        </EntityType>
+        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
+          <End Type="ModelContabilidad.ct_anio_fiscal" Role="ct_anio_fiscal" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_anio_fiscal_x_cuenta_utilidad" Role="ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_anio_fiscal">
+              <PropertyRef Name="IdanioFiscal" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdanioFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_periodo_ct_anio_fiscal">
+          <End Type="ModelContabilidad.ct_anio_fiscal" Role="ct_anio_fiscal" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_periodo" Role="ct_periodo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_anio_fiscal">
+              <PropertyRef Name="IdanioFiscal" />
+            </Principal>
+            <Dependent Role="ct_periodo">
+              <PropertyRef Name="IdanioFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_anio_fiscal_x_tb_sucursal_ct_anio_fiscal_x_cuenta_utilidad">
+          <End Type="ModelContabilidad.ct_anio_fiscal_x_cuenta_utilidad" Role="ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_anio_fiscal_x_tb_sucursal" Role="ct_anio_fiscal_x_tb_sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdanioFiscal" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_tb_sucursal">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdanioFiscal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_anio_fiscal_x_tb_sucursal_ct_cbtecble">
+          <End Type="ModelContabilidad.ct_cbtecble" Role="ct_cbtecble" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_anio_fiscal_x_tb_sucursal" Role="ct_anio_fiscal_x_tb_sucursal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_tb_sucursal">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+              <PropertyRef Name="IdCbteCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwct_anio_fiscal_x_cuenta_utilidad">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdanioFiscal" />
+            <PropertyRef Name="pc_Cuenta" />
+            <PropertyRef Name="IdNivelCta" />
+            <PropertyRef Name="IdGrupoCble" />
+            <PropertyRef Name="gc_GrupoCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdNivelCta" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupoCble" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoCtaCble" Type="Int32" />
+          <Property Name="gc_GrupoCble" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwct_anio_fiscal_x_tb_sucursal">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="IdanioFiscal" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdanioFiscal" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="cb_Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwct_anio_fiscal_x_tb_sucursal_SinCierre">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdanioFiscal" />
+            <PropertyRef Name="IdSucursal" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdanioFiscal" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_plancta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCtaCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCblePadre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Naturaleza" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdNivelCta" Type="Int32" Nullable="false" />
+          <Property Name="IdGrupoCble" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="pc_EsMovimiento" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="pc_clave_corta" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad" Relationship="ModelContabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" FromRole="ct_plancta" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
+          <NavigationProperty Name="ct_anio_fiscal_x_cuenta_utilidad1" Relationship="ModelContabilidad.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta1" FromRole="ct_plancta" ToRole="ct_anio_fiscal_x_cuenta_utilidad" />
+          <NavigationProperty Name="ct_cbtecble_det" Relationship="ModelContabilidad.FK_ct_cbtecble_det_ct_plancta" FromRole="ct_plancta" ToRole="ct_cbtecble_det" />
+          <NavigationProperty Name="ct_plancta1" Relationship="ModelContabilidad.FK_ct_plancta_ct_plancta" FromRole="ct_plancta" ToRole="ct_plancta1" />
+          <NavigationProperty Name="ct_plancta2" Relationship="ModelContabilidad.FK_ct_plancta_ct_plancta" FromRole="ct_plancta1" ToRole="ct_plancta" />
+          <NavigationProperty Name="ct_plancta_nivel" Relationship="ModelContabilidad.FK_ct_plancta_ct_plancta_nivel" FromRole="ct_plancta" ToRole="ct_plancta_nivel" />
+          <NavigationProperty Name="ct_grupocble" Relationship="ModelContabilidad.FK_ct_plancta_ct_grupocble" FromRole="ct_plancta" ToRole="ct_grupocble" />
+        </EntityType>
+        <EntityType Name="ct_plancta_nivel">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdNivelCta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdNivelCta" Type="Int32" Nullable="false" />
+          <Property Name="nv_NumDigitos" Type="Int32" Nullable="false" />
+          <Property Name="nv_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transaccion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltModi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ct_plancta" Relationship="ModelContabilidad.FK_ct_plancta_ct_plancta_nivel" FromRole="ct_plancta_nivel" ToRole="ct_plancta" />
+        </EntityType>
+        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
+          <End Type="ModelContabilidad.ct_plancta" Role="ct_plancta" Multiplicity="0..1" />
+          <End Type="ModelContabilidad.ct_anio_fiscal_x_cuenta_utilidad" Role="ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta1">
+          <End Type="ModelContabilidad.ct_plancta" Role="ct_plancta" Multiplicity="0..1" />
+          <End Type="ModelContabilidad.ct_anio_fiscal_x_cuenta_utilidad" Role="ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
+              <PropertyRef Name="IdanioFiscal" />
+              <PropertyRef Name="IdCtaCbleCierre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_cbtecble_det_ct_plancta">
+          <End Type="ModelContabilidad.ct_plancta" Role="ct_plancta" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_cbtecble_det" Role="ct_cbtecble_det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_cbtecble_det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_plancta_ct_plancta">
+          <End Type="ModelContabilidad.ct_plancta" Role="ct_plancta" Multiplicity="0..1" />
+          <End Type="ModelContabilidad.ct_plancta" Role="ct_plancta1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCble" />
+            </Principal>
+            <Dependent Role="ct_plancta1">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCtaCblePadre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_plancta_ct_plancta_nivel">
+          <End Type="ModelContabilidad.ct_plancta_nivel" Role="ct_plancta_nivel" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_plancta" Role="ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_plancta_nivel">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivelCta" />
+            </Principal>
+            <Dependent Role="ct_plancta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivelCta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ct_grupocble">
+          <Key>
+            <PropertyRef Name="IdGrupoCble" />
+          </Key>
+          <Property Name="IdGrupoCble" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="gc_GrupoCble" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="gc_Orden" Type="Byte" Nullable="false" />
+          <Property Name="gc_estado_financiero" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="gc_signo_operacion" Type="Int32" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdGrupo_Mayor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ct_plancta" Relationship="ModelContabilidad.FK_ct_plancta_ct_grupocble" FromRole="ct_grupocble" ToRole="ct_plancta" />
+        </EntityType>
+        <EntityType Name="vwct_cbtecble_con_ctacble_acreedora">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCtaCble_Acreedora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_ct_plancta_ct_grupocble">
+          <End Type="ModelContabilidad.ct_grupocble" Role="ct_grupocble" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_plancta" Role="ct_plancta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_grupocble">
+              <PropertyRef Name="IdGrupoCble" />
+            </Principal>
+            <Dependent Role="ct_plancta">
+              <PropertyRef Name="IdGrupoCble" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -920,6 +1634,137 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
                 <ScalarProperty Name="P_Se_Muestra_Todas_las_ctas_en_combos" ColumnName="P_Se_Muestra_Todas_las_ctas_en_combos" />
                 <ScalarProperty Name="IdTipoCbte_AsientoCierre_Anual" ColumnName="IdTipoCbte_AsientoCierre_Anual" />
                 <ScalarProperty Name="IdTipoCbte_SaldoInicial" ColumnName="IdTipoCbte_SaldoInicial" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_anio_fiscal">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_anio_fiscal">
+              <MappingFragment StoreEntitySet="ct_anio_fiscal">
+                <ScalarProperty Name="af_estado" ColumnName="af_estado" />
+                <ScalarProperty Name="af_fechaFin" ColumnName="af_fechaFin" />
+                <ScalarProperty Name="af_fechaIni" ColumnName="af_fechaIni" />
+                <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_anio_fiscal_x_cuenta_utilidad">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_anio_fiscal_x_cuenta_utilidad">
+              <MappingFragment StoreEntitySet="ct_anio_fiscal_x_cuenta_utilidad">
+                <ScalarProperty Name="IdCtaCbleCierre" ColumnName="IdCtaCbleCierre" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_anio_fiscal_x_tb_sucursal">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_anio_fiscal_x_tb_sucursal">
+              <MappingFragment StoreEntitySet="ct_anio_fiscal_x_tb_sucursal">
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_anio_fiscal_x_cuenta_utilidad">
+            <EntityTypeMapping TypeName="ModelContabilidad.vwct_anio_fiscal_x_cuenta_utilidad">
+              <MappingFragment StoreEntitySet="vwct_anio_fiscal_x_cuenta_utilidad">
+                <ScalarProperty Name="gc_GrupoCble" ColumnName="gc_GrupoCble" />
+                <ScalarProperty Name="IdTipoCtaCble" ColumnName="IdTipoCtaCble" />
+                <ScalarProperty Name="IdGrupoCble" ColumnName="IdGrupoCble" />
+                <ScalarProperty Name="IdNivelCta" ColumnName="IdNivelCta" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_anio_fiscal_x_tb_sucursal">
+            <EntityTypeMapping TypeName="ModelContabilidad.vwct_anio_fiscal_x_tb_sucursal">
+              <MappingFragment StoreEntitySet="vwct_anio_fiscal_x_tb_sucursal">
+                <ScalarProperty Name="cb_Observacion" ColumnName="cb_Observacion" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_anio_fiscal_x_tb_sucursal_SinCierre">
+            <EntityTypeMapping TypeName="ModelContabilidad.vwct_anio_fiscal_x_tb_sucursal_SinCierre">
+              <MappingFragment StoreEntitySet="vwct_anio_fiscal_x_tb_sucursal_SinCierre">
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdanioFiscal" ColumnName="IdanioFiscal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_plancta">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_plancta">
+              <MappingFragment StoreEntitySet="ct_plancta">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="pc_clave_corta" ColumnName="pc_clave_corta" />
+                <ScalarProperty Name="pc_EsMovimiento" ColumnName="pc_EsMovimiento" />
+                <ScalarProperty Name="pc_Estado" ColumnName="pc_Estado" />
+                <ScalarProperty Name="IdGrupoCble" ColumnName="IdGrupoCble" />
+                <ScalarProperty Name="IdNivelCta" ColumnName="IdNivelCta" />
+                <ScalarProperty Name="pc_Naturaleza" ColumnName="pc_Naturaleza" />
+                <ScalarProperty Name="IdCtaCblePadre" ColumnName="IdCtaCblePadre" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_plancta_nivel">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_plancta_nivel">
+              <MappingFragment StoreEntitySet="ct_plancta_nivel">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltModi" ColumnName="IdUsuarioUltModi" />
+                <ScalarProperty Name="Fecha_Transaccion" ColumnName="Fecha_Transaccion" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="nv_Descripcion" ColumnName="nv_Descripcion" />
+                <ScalarProperty Name="nv_NumDigitos" ColumnName="nv_NumDigitos" />
+                <ScalarProperty Name="IdNivelCta" ColumnName="IdNivelCta" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_grupocble">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_grupocble">
+              <MappingFragment StoreEntitySet="ct_grupocble">
+                <ScalarProperty Name="IdGrupo_Mayor" ColumnName="IdGrupo_Mayor" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="gc_signo_operacion" ColumnName="gc_signo_operacion" />
+                <ScalarProperty Name="gc_estado_financiero" ColumnName="gc_estado_financiero" />
+                <ScalarProperty Name="gc_Orden" ColumnName="gc_Orden" />
+                <ScalarProperty Name="gc_GrupoCble" ColumnName="gc_GrupoCble" />
+                <ScalarProperty Name="IdGrupoCble" ColumnName="IdGrupoCble" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwct_cbtecble_con_ctacble_acreedora">
+            <EntityTypeMapping TypeName="ModelContabilidad.vwct_cbtecble_con_ctacble_acreedora">
+              <MappingFragment StoreEntitySet="vwct_cbtecble_con_ctacble_acreedora">
+                <ScalarProperty Name="IdCtaCble_Acreedora" ColumnName="IdCtaCble_Acreedora" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
