@@ -43,6 +43,10 @@ namespace Core.Info.Facturacion
         public string tp_manejaInven { get; set; }
         public double CantidadAnterior { get; set; }
         public bool? se_distribuye { get; set; }
+        public string IdString { get; set; }
+        public decimal IdMatricula { get; set; }
+        public int IdPeriodo { get; set; }
+        public int IdRubro { get; set; }
         #endregion
 
     }

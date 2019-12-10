@@ -51,5 +51,10 @@ namespace Core.Data.Base
         public virtual DbSet<tbl_TransaccionesAutorizadas> tbl_TransaccionesAutorizadas { get; set; }
         public virtual DbSet<tb_ColaImpresionDirecta> tb_ColaImpresionDirecta { get; set; }
         public virtual DbSet<tb_mes> tb_mes { get; set; }
+        public virtual DbSet<tb_bodega> tb_bodega { get; set; }
+        public virtual DbSet<tb_CatalogoTipo> tb_CatalogoTipo { get; set; }
+        public virtual DbSet<tb_dia> tb_dia { get; set; }
+        public virtual DbSet<vwtb_bodega_x_tb_sucursal> vwtb_bodega_x_tb_sucursal { get; set; }
+        public virtual DbSet<vwtb_bodega_x_sucursal> vwtb_bodega_x_sucursal { get; set; }
     }
 }

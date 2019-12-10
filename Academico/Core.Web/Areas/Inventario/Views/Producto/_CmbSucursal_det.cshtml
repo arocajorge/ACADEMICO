@@ -17,7 +17,7 @@
         settings.Properties.Columns.Add("Su_Descripcion", "Descripción", 90);
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "OnSelectedSucursalChanged";
     })
-     .BindList(new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_list_bajo_demanda_sucursal, new Core.Erp.Web.Areas.Inventario.Controllers.ProductoController().get_info_bajo_demanda_sucursal)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.Inventario.in_Producto_Info) ? "" : (Model == 0 ? "" : Model));
+     .BindList(new Core.Web.Areas.Inventario.Controllers.ProductoController().get_list_bajo_demanda_sucursal, new Core.Web.Areas.Inventario.Controllers.ProductoController().get_info_bajo_demanda_sucursal)
+    .Bind(Model.GetType() == typeof(Core.Info.Inventario.in_Producto_Info) ? "" : (Model == 0 ? "" : Model));
     }
 @comboBox.GetHtml()

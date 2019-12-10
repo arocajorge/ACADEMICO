@@ -49,5 +49,6 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+        
     }
 }

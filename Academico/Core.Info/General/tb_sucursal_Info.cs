@@ -41,9 +41,10 @@ namespace Core.Info.General
         public string IdCtaCble_vtaIVA { get; set; }
 
         #region Campos que no existen en la tabla
-        //public List<tb_sucursal_FormaPago_x_fa_NivelDescuento_Info> ListaNivelDescuento { get; set; }
+        public List<tb_sucursal_FormaPago_x_fa_NivelDescuento_Info> ListaNivelDescuento { get; set; }
         public string IdString { get; set; }
         public bool Seleccionado { get; set; }
         #endregion
+
     }
 }

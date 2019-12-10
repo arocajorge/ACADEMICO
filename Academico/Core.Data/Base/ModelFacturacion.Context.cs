@@ -54,5 +54,6 @@ namespace Core.Data.Base
         public virtual DbSet<fa_TerminoPago_Distribucion> fa_TerminoPago_Distribucion { get; set; }
         public virtual DbSet<vwfa_factura_sin_automatico> vwfa_factura_sin_automatico { get; set; }
         public virtual DbSet<vwfa_factura> vwfa_factura { get; set; }
+        public virtual DbSet<vwaca_Matricula_Rubro_PorFacturar> vwaca_Matricula_Rubro_PorFacturar { get; set; }
     }
 }

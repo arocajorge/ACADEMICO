@@ -70,6 +70,7 @@ namespace Core.Info.Academico
         [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 200 caracteres")]
         public string NumeroCarnetConadis { get; set; }
         public List<aca_AlumnoDocumento_Info> lst_alumno_documentos { get; set; }
+        public string IdUsuario { get; set; }
         #endregion
 
         #region Datos padre
@@ -120,6 +121,14 @@ namespace Core.Info.Academico
         public bool CasaPropia_padre { get; set; }
         public int IdProfesion_padre { get; set; }
         public bool info_valido_padre { get; set; }
+        [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
+        public int Idtipo_cliente_padre { get; set; }
+        public string IdTipoCredito_padre { get; set; }
+        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        public string IdCiudad_padre { get; set; }
+        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        public string IdParroquia_padre { get; set; }
+        [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         #endregion
 
         #region Datos madre
@@ -170,6 +179,14 @@ namespace Core.Info.Academico
         public bool CasaPropia_madre { get; set; }
         public int IdProfesion_madre { get; set; }
         public bool info_valido_madre { get; set; }
+        [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
+        public int Idtipo_cliente_madre { get; set; }
+        public string IdTipoCredito_madre { get; set; }
+        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        public string IdCiudad_madre { get; set; }
+        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        public string IdParroquia_madre { get; set; }
+        [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         #endregion
 
         public tb_persona_Info info_persona_alumno { get; set; }
@@ -178,6 +195,8 @@ namespace Core.Info.Academico
         public string anio { get; set; }
         public string mes { get; set; }
         public string dia { get; set; }
+        public int IdSede { get; set; }
+        public int IdSucursal { get; set; }
         #endregion
     }
 }

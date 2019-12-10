@@ -20,5 +20,17 @@ namespace Core.Bus.Facturacion
                 throw;
             }
         }
+
+        public List<fa_factura_det_Info> get_list_rubros_x_facturar(int IdEmpresa, int IdSucursal, int IdAnio, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.get_list_rubros_x_facturar(IdEmpresa, IdSucursal, IdAnio, IdAlumno);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -12,6 +12,8 @@ namespace Core.Data.Base
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class EntitiesInventario : DbContext
     {
@@ -35,5 +37,44 @@ namespace Core.Data.Base
         public virtual DbSet<in_linea> in_linea { get; set; }
         public virtual DbSet<in_Marca> in_Marca { get; set; }
         public virtual DbSet<in_subgrupo> in_subgrupo { get; set; }
+        public virtual DbSet<in_Catalogo> in_Catalogo { get; set; }
+        public virtual DbSet<in_CatalogoTipo> in_CatalogoTipo { get; set; }
+        public virtual DbSet<in_Producto_Composicion> in_Producto_Composicion { get; set; }
+        public virtual DbSet<in_Producto_imagenes> in_Producto_imagenes { get; set; }
+        public virtual DbSet<in_producto_x_tb_bodega> in_producto_x_tb_bodega { get; set; }
+        public virtual DbSet<in_UnidadMedida> in_UnidadMedida { get; set; }
+        public virtual DbSet<in_UnidadMedida_Equiv_conversion> in_UnidadMedida_Equiv_conversion { get; set; }
+        public virtual DbSet<vwin_in_Producto_x_tb_bodega_x_UnidadMedida> vwin_in_Producto_x_tb_bodega_x_UnidadMedida { get; set; }
+        public virtual DbSet<vwin_Presentacion> vwin_Presentacion { get; set; }
+        public virtual DbSet<vwin_Producto_Marca_Tipo_Categoria> vwin_Producto_Marca_Tipo_Categoria { get; set; }
+        public virtual DbSet<vwin_Producto_para_composicion> vwin_Producto_para_composicion { get; set; }
+        public virtual DbSet<vwin_Producto_PorSucursal> vwin_Producto_PorSucursal { get; set; }
+        public virtual DbSet<vwin_Producto_Stock> vwin_Producto_Stock { get; set; }
+        public virtual DbSet<vwin_Producto_Stock_x_Bodega> vwin_Producto_Stock_x_Bodega { get; set; }
+        public virtual DbSet<vwin_Producto_Stock_x_producto> vwin_Producto_Stock_x_producto { get; set; }
+        public virtual DbSet<vwin_Producto_Stock_x_Sucursal> vwin_Producto_Stock_x_Sucursal { get; set; }
+        public virtual DbSet<vwin_producto_x_tb_bodega> vwin_producto_x_tb_bodega { get; set; }
+        public virtual DbSet<vwin_UnidadMedida> vwin_UnidadMedida { get; set; }
+        public virtual DbSet<vwin_UnidadMedida_Equiv_conversion> vwin_UnidadMedida_Equiv_conversion { get; set; }
+        public virtual DbSet<vwin_UnidadMedida_Equivalencia> vwin_UnidadMedida_Equivalencia { get; set; }
+        public virtual DbSet<vwin_Producto_Composicion> vwin_Producto_Composicion { get; set; }
+        public virtual DbSet<vwin_producto_hijo_combo> vwin_producto_hijo_combo { get; set; }
+        public virtual DbSet<vwin_producto_padre_combo> vwin_producto_padre_combo { get; set; }
+        public virtual DbSet<vwin_producto_x_tb_bodega_stock_x_lote> vwin_producto_x_tb_bodega_stock_x_lote { get; set; }
+        public virtual DbSet<vwin_producto_x_tb_bodega_Costo_Historico> vwin_producto_x_tb_bodega_Costo_Historico { get; set; }
+        public virtual DbSet<in_producto_x_tb_bodega_Costo_Historico> in_producto_x_tb_bodega_Costo_Historico { get; set; }
+    
+        public virtual ObjectResult<string> spin_Producto_validar_anulacion(Nullable<int> idEmpresa, Nullable<decimal> idProducto)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spin_Producto_validar_anulacion", idEmpresaParameter, idProductoParameter);
+        }
     }
 }

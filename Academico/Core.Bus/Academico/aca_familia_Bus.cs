@@ -1,7 +1,9 @@
 ﻿using Core.Bus.General;
 using Core.Data.Academico;
+using Core.Data.Facturacion;
 using Core.Data.General;
 using Core.Info.Academico;
+using Core.Info.Facturacion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,11 @@ namespace Core.Bus.Academico
         aca_Familia_Data odata = new aca_Familia_Data();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         tb_persona_Data odata_per = new tb_persona_Data();
+        fa_cliente_Data odata_cliente = new fa_cliente_Data();
+        fa_TerminoPago_Data odata_terminopago = new fa_TerminoPago_Data();
+        fa_formaPago_Data odata_formapago = new fa_formaPago_Data();
+        fa_Vendedor_Data odata_vendedor = new fa_Vendedor_Data();
+        fa_cliente_x_fa_Vendedor_x_sucursal_Data odata_vendedor_sucursal = new fa_cliente_x_fa_Vendedor_x_sucursal_Data();
         public List<aca_Familia_Info> GetList(int IdEmpresa, int IdAlumno)
         {
             try
@@ -100,14 +107,79 @@ namespace Core.Bus.Academico
                 {
                     if (odata.guardarDB(info))
                     {
-                        return true;
+                        /*CLIENTE*/
+                        if (info.SeFactura == true)
+                        {
+                            var info_credito = odata_terminopago.get_info(info.IdTipoCredito);
+                            var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc);
+                            var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
 
+                            if (cliente.IdCliente == 0)
+                            {
+                                fa_cliente_Info info_cliente = new fa_cliente_Info
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdPersona = info.IdPersona,
+                                    cl_Cupo = 0,
+                                    cl_plazo = info_credito.Dias_Vct,
+                                    Codigo = "",
+                                    Estado = "A",
+                                    es_empresa_relacionada = false,
+                                    FormaPago = "01",
+                                    IdCtaCble_cxc_Credito = null,
+                                    IdTipoCredito = info.IdTipoCredito,
+                                    Idtipo_cliente = info.Idtipo_cliente,
+                                    IdNivel = 1,
+                                    EsClienteExportador = false,
+                                    IdCiudad = info.IdCiudad,
+                                    IdParroquia = info.IdParroquia,
+                                    Celular = info.Celular,
+                                    Direccion = info.Direccion,
+                                    Correo = info.Correo,
+                                    Telefono = info.pe_telfono_Contacto,
+                                    info_persona = info.info_persona,
+                                    IdUsuario = info.IdUsuarioCreacion
+                                };
+
+                                var info_vendedor = odata_vendedor.get_list(info.IdEmpresa, false).FirstOrDefault();
+                                var IdVendedor = info_vendedor.IdVendedor;
+                                info_cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
+
+                                info_cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal.Add(new fa_cliente_x_fa_Vendedor_x_sucursal_Info
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdSucursal = info.IdSucursal,
+                                    IdVendedor = IdVendedor,
+                                    observacion = ""
+                                });
+
+                                return odata_cliente.guardarDB(info_cliente);
+                            }
+                            else
+                            {
+                                cliente.Idtipo_cliente = info.Idtipo_cliente;
+                                cliente.IdTipoCredito = info.IdTipoCredito;
+                                cliente.cl_plazo = info_credito.Dias_Vct;
+                                cliente.IdCiudad = info.IdCiudad;
+                                cliente.IdParroquia = info.IdParroquia;
+                                cliente.Celular = info.Celular;
+                                cliente.Direccion = info.Direccion;
+                                cliente.Correo = info.Correo;
+                                cliente.Telefono = info.pe_telfono_Contacto;
+                                cliente.info_persona = info.info_persona;
+                                cliente.IdUsuarioUltMod = info.IdUsuarioCreacion;
+
+                                cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
+                                cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = odata_vendedor_sucursal.get_list(cliente.IdEmpresa, cliente.IdCliente);
+                                return odata_cliente.modificarDB(cliente);
+                            }
+                        }
                     }
                 }
 
                 return false;
             }
-            catch (Exception)
+            catch (Exception EX)
             {
                 throw;
             }
@@ -138,14 +210,79 @@ namespace Core.Bus.Academico
                 {
                     if (odata.modificarDB(info))
                     {
-                        return true;
+                        /*CLIENTE*/
+                        if (info.SeFactura == true)
+                        {
+                            var info_credito = odata_terminopago.get_info(info.IdTipoCredito);
+                            var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc);
+                            var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
 
+                            if (cliente==null || cliente.IdCliente == 0)
+                            {
+                                fa_cliente_Info info_cliente = new fa_cliente_Info
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdPersona = info.IdPersona,
+                                    cl_Cupo = 0,
+                                    cl_plazo = info_credito.Dias_Vct,
+                                    Codigo = "",
+                                    Estado = "A",
+                                    es_empresa_relacionada = false,
+                                    FormaPago = "01",
+                                    IdCtaCble_cxc_Credito = null,
+                                    IdTipoCredito = info.IdTipoCredito,
+                                    Idtipo_cliente = info.Idtipo_cliente,
+                                    IdNivel = 1,
+                                    EsClienteExportador = false,
+                                    IdCiudad = info.IdCiudad,
+                                    IdParroquia = info.IdParroquia,
+                                    Celular = info.Celular,
+                                    Direccion = info.Direccion,
+                                    Correo = info.Correo,
+                                    Telefono = info.pe_telfono_Contacto,
+                                    info_persona = info.info_persona,
+                                    IdUsuario = info.IdUsuarioCreacion
+                                };
+
+                                var info_vendedor = odata_vendedor.get_list(info.IdEmpresa, false).FirstOrDefault();
+                                var IdVendedor = info_vendedor.IdVendedor;
+                                info_cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
+
+                                info_cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal.Add(new fa_cliente_x_fa_Vendedor_x_sucursal_Info
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdSucursal = info.IdSucursal,
+                                    IdVendedor = IdVendedor,
+                                    observacion = ""
+                                });
+
+                                return odata_cliente.guardarDB(info_cliente);
+                            }
+                            else
+                            {
+                                cliente.Idtipo_cliente = info.Idtipo_cliente;
+                                cliente.IdTipoCredito = info.IdTipoCredito;
+                                cliente.cl_plazo = info_credito.Dias_Vct;
+                                cliente.IdCiudad = info.IdCiudad;
+                                cliente.IdParroquia = info.IdParroquia;
+                                cliente.Celular = info.Celular;
+                                cliente.Direccion = info.Direccion;
+                                cliente.Correo = info.Correo;
+                                cliente.Telefono = info.pe_telfono_Contacto;
+                                cliente.info_persona = info.info_persona;
+                                cliente.IdUsuarioUltMod = info.IdUsuarioCreacion;
+
+                                cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
+                                cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = odata_vendedor_sucursal.get_list(cliente.IdEmpresa, cliente.IdCliente);
+                                return odata_cliente.modificarDB(cliente);
+                            }
+                        }
                     }
                 }
 
                 return false;
             }
-            catch (Exception)
+            catch (Exception EX)
             {
                 throw;
             }

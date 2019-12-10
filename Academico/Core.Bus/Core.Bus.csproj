@@ -104,6 +104,7 @@
     <Compile Include="Facturacion\fa_TerminoPago_Distribucion_Bus.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Bus.cs" />
     <Compile Include="General\tbl_TransaccionesAutorizadas_Bus.cs" />
+    <Compile Include="General\tb_bodega_Bus.cs" />
     <Compile Include="General\tb_Catalogo_Bus.cs" />
     <Compile Include="General\tb_ciudad_Bus.cs" />
     <Compile Include="General\tb_ColaImpresionDirecta_Bus.cs" />
@@ -125,11 +126,16 @@
     <Compile Include="Inventario\in_grupo_Bus.cs" />
     <Compile Include="Inventario\in_linea_Bus.cs" />
     <Compile Include="Inventario\in_Marca_Bus.cs" />
+    <Compile Include="Inventario\in_parametro_Bus.cs" />
     <Compile Include="Inventario\in_presentacion_Bus.cs" />
     <Compile Include="Inventario\in_ProductoTipo_Bus.cs" />
     <Compile Include="Inventario\in_Producto_Bus.cs" />
+    <Compile Include="Inventario\in_Producto_Composicion_Bus.cs" />
     <Compile Include="Inventario\in_Producto_x_fa_NivelDescuento_Bus.cs" />
+    <Compile Include="Inventario\in_producto_x_tb_bodega_Bus.cs" />
     <Compile Include="Inventario\in_subgrupo_Bus.cs" />
+    <Compile Include="Inventario\in_UnidadMedida_Bus.cs" />
+    <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Bus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reportes\ACA_001_Bus.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_Bus.cs" />

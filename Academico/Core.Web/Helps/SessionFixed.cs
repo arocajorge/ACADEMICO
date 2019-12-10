@@ -18,6 +18,10 @@ namespace Core.Web.Helps
         string IdTransaccionSessionActual { get; set; }
         string NombreImagenAlumno { get; set; }
         string NombreImagenProfesor { get; set; }
+        string IdNivelDescuento { get; set; }
+        string IdEntidad { get; set; }
+        string EsSuperAdmin { get; set; }
+        string IdProducto_padre_dist { get; set; }
     }
     public static class SessionFixed
     {
@@ -51,10 +55,21 @@ namespace Core.Web.Helps
             get { return _sessionValueProvider.IdTransaccionSessionActual; }
             set { _sessionValueProvider.IdTransaccionSessionActual = value; }
         }
+        public static string IdNivelDescuento
+        {
+            get { return _sessionValueProvider.IdNivelDescuento; }
+            set { _sessionValueProvider.IdNivelDescuento = value; }
+
+        }
         public static string IdSucursal
         {
             get { return _sessionValueProvider.IdSucursal; }
             set { _sessionValueProvider.IdSucursal = value; }
+        }
+        public static string IdEntidad
+        {
+            get { return _sessionValueProvider.IdEntidad; }
+            set { _sessionValueProvider.IdEntidad = value; }
         }
 
         public static string IdSede
@@ -86,6 +101,18 @@ namespace Core.Web.Helps
             get { return _sessionValueProvider.NombreImagenProfesor; }
             set { _sessionValueProvider.NombreImagenProfesor = value; }
         }
+        public static string EsSuperAdmin
+        {
+            get { return _sessionValueProvider.EsSuperAdmin; }
+            set { _sessionValueProvider.EsSuperAdmin = value; }
+        }
+
+        public static string IdProducto_padre_dist
+        {
+            get { return _sessionValueProvider.IdProducto_padre_dist; }
+            set { _sessionValueProvider.IdProducto_padre_dist = value; }
+
+        }
     }
     public class WebSessionValueProvider : ISessionValueProvider
     {
@@ -100,6 +127,10 @@ namespace Core.Web.Helps
         private const string _IdTransaccionSessionActual = "FxAca_IdTransaccionSessionActual";
         private const string _NombreImagenAlumno = "FxAca_NombreImagenAlumno";
         private const string _NombreImagenProfesor = "FxAca_NombreImagenProfesor";
+        private const string _IdEntidad = "Fx_IdEntidadParam";
+        private const string _IdNivelDescuento = "Fx_IdNivelDescuento";
+        private const string _EsSuperAdmin = "Fx_EsSuperAdmin";
+        private const string _IdProducto_padre_dist = "Fx_IdProducto_padre_dist";
 
         public string IdEmpresa
         {
@@ -156,6 +187,27 @@ namespace Core.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_NombreImagenProfesor]; }
             set { HttpContext.Current.Session[_NombreImagenProfesor] = value; }
+        }
+        public string IdEntidad
+        {
+            get { return (string)HttpContext.Current.Session[_IdEntidad]; }
+            set { HttpContext.Current.Session[_IdEntidad] = value; }
+        }
+        public string IdNivelDescuento
+        {
+            get { return (string)HttpContext.Current.Session[_IdNivelDescuento]; }
+            set { HttpContext.Current.Session[_IdNivelDescuento] = value; }
+        }
+        public string EsSuperAdmin
+        {
+            get { return (string)HttpContext.Current.Session[_EsSuperAdmin]; }
+            set { HttpContext.Current.Session[_EsSuperAdmin] = value; }
+        }
+
+        public string IdProducto_padre_dist
+        {
+            get { return (string)HttpContext.Current.Session[_IdProducto_padre_dist]; }
+            set { HttpContext.Current.Session[_IdProducto_padre_dist] = value; }
         }
     }
 }

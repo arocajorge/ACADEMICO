@@ -1,7 +1,7 @@
-﻿@model Core.Erp.Info.Inventario.in_Producto_Info
+﻿@model Core.Info.Inventario.in_Producto_Info
 @{
     ViewBag.Title = "Modificar producto";
-    if (string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdEmpresa))
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
     }
@@ -319,7 +319,7 @@
                settings.CallbackRouteValues = new { Controller = "Producto", Action = "UploadControlUpload" };
                settings.ShowUploadButton = true;
                settings.ShowProgressPanel = false;
-               settings.ValidationSettings.Assign(Core.Erp.Web.Areas.Inventario.Controllers.Producto_imagen.UploadValidationSettings);
+               settings.ValidationSettings.Assign(Core.Web.Areas.Inventario.Controllers.Producto_imagen.UploadValidationSettings);
            }).GetHtml()
 
 

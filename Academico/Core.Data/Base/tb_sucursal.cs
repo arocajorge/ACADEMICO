@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public tb_sucursal()
         {
             this.tb_sucursal_FormaPago_x_fa_NivelDescuento = new HashSet<tb_sucursal_FormaPago_x_fa_NivelDescuento>();
+            this.tb_bodega = new HashSet<tb_bodega>();
         }
     
         public int IdEmpresa { get; set; }
@@ -45,5 +46,7 @@ namespace Core.Data.Base
         public virtual tb_empresa tb_empresa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_sucursal_FormaPago_x_fa_NivelDescuento> tb_sucursal_FormaPago_x_fa_NivelDescuento { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_bodega> tb_bodega { get; set; }
     }
 }

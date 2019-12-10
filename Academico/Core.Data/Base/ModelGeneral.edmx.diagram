@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="437637ffb7a743c0b5adb84253bc059a" Name="Diagram1" ZoomLevel="99">
+      <Diagram DiagramId="437637ffb7a743c0b5adb84253bc059a" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="ModelGeneral.tb_empresa" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ModelGeneral.tb_sucursal" Width="1.5" PointX="3" PointY="9.125" />
         <AssociationConnector Association="ModelGeneral.FK_tb_sucursal_tb_empresa" />
@@ -53,6 +53,13 @@
         <AssociationConnector Association="ModelGeneral.FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal" />
         <EntityTypeShape EntityType="ModelGeneral.tb_ColaImpresionDirecta" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelGeneral.tb_mes" Width="1.5" PointX="11.375" PointY="5.75" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_bodega" Width="1.5" PointX="5.25" PointY="36.375" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_CatalogoTipo" Width="1.5" PointX="1.125" PointY="37.125" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_dia" Width="1.5" PointX="11.375" PointY="8.75" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_bodega_tb_sucursal" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_Catalogo_tb_CatalogoTipo" />
+        <EntityTypeShape EntityType="ModelGeneral.vwtb_bodega_x_tb_sucursal" Width="1.5" PointX="9.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ModelGeneral.vwtb_bodega_x_sucursal" Width="1.5" PointX="11.375" PointY="11.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

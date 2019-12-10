@@ -19,6 +19,10 @@ namespace Core.Data.Base
         {
             this.in_Producto1 = new HashSet<in_Producto>();
             this.in_Producto_x_fa_NivelDescuento = new HashSet<in_Producto_x_fa_NivelDescuento>();
+            this.in_Producto_Composicion = new HashSet<in_Producto_Composicion>();
+            this.in_Producto_Composicion1 = new HashSet<in_Producto_Composicion>();
+            this.in_Producto_imagenes = new HashSet<in_Producto_imagenes>();
+            this.in_producto_x_tb_bodega = new HashSet<in_producto_x_tb_bodega>();
         }
     
         public int IdEmpresa { get; set; }
@@ -71,5 +75,15 @@ namespace Core.Data.Base
         public virtual ICollection<in_Producto_x_fa_NivelDescuento> in_Producto_x_fa_NivelDescuento { get; set; }
         public virtual in_Marca in_Marca { get; set; }
         public virtual in_subgrupo in_subgrupo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_Producto_Composicion> in_Producto_Composicion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_Producto_Composicion> in_Producto_Composicion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_Producto_imagenes> in_Producto_imagenes { get; set; }
+        public virtual in_UnidadMedida in_UnidadMedida { get; set; }
+        public virtual in_UnidadMedida in_UnidadMedida1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_producto_x_tb_bodega> in_producto_x_tb_bodega { get; set; }
     }
 }

@@ -509,6 +509,80 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" id="DatosFacturacionPadre">
+                    <div class="col-md-12">
+                        <h4>Datos de Cliente</h4><hr />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Idtipo_cliente">Tipo cliente</label>
+                                        @Html.DevExpress().ComboBoxFor(q => q.Idtipo_cliente_padre, settings =>
+                                {
+                                    settings.Name = "Idtipo_cliente_padre";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                    settings.Properties.Columns.Add("Idtipo_cliente", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                    settings.Properties.Columns.Add("Descripcion_tip_cliente", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                                    //Campo ID
+                                    settings.Properties.ValueField = "Idtipo_cliente";
+                                    settings.Properties.ValueType = typeof(int);
+                                    settings.Properties.TextField = "Descripcion_tip_cliente";
+                                    //Boton para seleccionar ningun registro
+                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                                    settings.Properties.NullText = "== Seleccione ==";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                    //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){get_info_tipo_cliente()}";
+                                    settings.Properties.AllowNull = true;
+
+                                }).BindList(ViewBag.lst_clientetipo).GetHtml()
+                                        @Html.ValidationMessageFor(q => q.Idtipo_cliente_padre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="IdTipoCredito">Término de pago*</label>
+                                        @Html.DropDownListFor(q => q.IdTipoCredito_padre, new SelectList(ViewBag.lst_termino_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "IdTipoCredito_padre" })
+                                        @Html.ValidationMessageFor(q => q.IdTipoCredito_padre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="IdCiudad">Ciudad*</label>
+                                        @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_padre, settings =>
+                               {
+                                   settings.Name = "IdCiudad_padre";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("Descripcion_Ciudad", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdCiudad";
+                                   settings.Properties.ValueType = typeof(string);
+                                   settings.Properties.TextField = "Descripcion_Ciudad";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia_padre.PerformCallback(); }";
+                               }).BindList(ViewBag.lst_ciudad).GetHtml()
+                                        @Html.ValidationMessageFor(q => q.IdCiudad_padre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="parroquia">Parroquia*</label>
+                                        @Html.Partial("_cmb_parroquia_padre", Model)
+                                        @Html.ValidationMessageFor(q => q.IdParroquia_padre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <h4>Datos de trabajo</h4><hr />
                 <div class="row">
                     <div class="col-md-12">
@@ -802,6 +876,80 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" id="DatosFacturacionMadre">
+                    <div class="col-md-12">
+                        <h4>Datos de Cliente</h4><hr />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Idtipo_cliente">Tipo cliente</label>
+                                        @Html.DevExpress().ComboBoxFor(q => q.Idtipo_cliente_madre, settings =>
+                                {
+                                    settings.Name = "Idtipo_cliente_madre";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                    settings.Properties.Columns.Add("Idtipo_cliente", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                    settings.Properties.Columns.Add("Descripcion_tip_cliente", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                                    //Campo ID
+                                    settings.Properties.ValueField = "Idtipo_cliente";
+                                    settings.Properties.ValueType = typeof(int);
+                                    settings.Properties.TextField = "Descripcion_tip_cliente";
+                                    //Boton para seleccionar ningun registro
+                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                                    settings.Properties.NullText = "== Seleccione ==";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                    //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){get_info_tipo_cliente()}";
+                                    settings.Properties.AllowNull = true;
+
+                                }).BindList(ViewBag.lst_clientetipo).GetHtml()
+                                        @Html.ValidationMessageFor(q => q.Idtipo_cliente_padre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="IdTipoCredito">Término de pago*</label>
+                                        @Html.DropDownListFor(q => q.IdTipoCredito_madre, new SelectList(ViewBag.lst_termino_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "IdTipoCredito_madre" })
+                                        @Html.ValidationMessageFor(q => q.IdTipoCredito_madre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="IdCiudad">Ciudad*</label>
+                                        @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_madre, settings =>
+                               {
+                                   settings.Name = "IdCiudad_madre";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("Descripcion_Ciudad", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdCiudad";
+                                   settings.Properties.ValueType = typeof(string);
+                                   settings.Properties.TextField = "Descripcion_Ciudad";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia_madre.PerformCallback(); }";
+                               }).BindList(ViewBag.lst_ciudad).GetHtml()
+                                        @Html.ValidationMessageFor(q => q.IdCiudad_madre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="parroquia">Parroquia*</label>
+                                        @Html.Partial("_cmb_parroquia_madre", Model)
+                                        @Html.ValidationMessageFor(q => q.IdParroquia_madre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <h4>Datos de trabajo</h4><hr />
                 <div class="row">
                     <div class="col-md-12">
@@ -915,6 +1063,8 @@
         $("#error_documento_madre").hide();
         mostrar_vehiculo_padre();
         mostrar_vehiculo_madre();
+        mostrar_cliente_padre();
+        mostrar_cliente_madre();
     })
 
     function mostrar_vehiculo_padre() {
@@ -932,6 +1082,23 @@
         }
         else {
             $("#vehiculo_madre").hide();
+        }
+    }
+    function mostrar_cliente_padre() {
+        if (SeFactura_padre.GetValue() == true) {
+            $("#DatosFacturacionPadre").show()
+        }
+        else {
+            $("#DatosFacturacionPadre").hide()
+        }
+    }
+
+    function mostrar_cliente_madre() {
+        if (SeFactura_madre.GetValue() == true) {
+            $("#DatosFacturacionMadre").show()
+        }
+        else {
+            $("#DatosFacturacionMadre").hide()
         }
     }
 </script>

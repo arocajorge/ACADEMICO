@@ -68,5 +68,47 @@ namespace Core.Data.Facturacion
                 throw;
             }
         }
+
+        public List<fa_factura_det_Info> get_list_rubros_x_facturar(int IdEmpresa, int IdSucursal, int IdAnio, decimal IdAlumno)
+        {
+            try
+            {
+                List<fa_factura_det_Info> Lista;
+                using (EntitiesFacturacion Context = new EntitiesFacturacion())
+                {
+                    Lista = (from q in Context.vwaca_Matricula_Rubro_PorFacturar
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdAnio== IdAnio
+                             && q.IdAlumno == IdAlumno
+                             select new fa_factura_det_Info
+                             {
+                                 IdProducto = q.IdProducto,
+                                 vt_cantidad = 1,
+                                 pr_descripcion = q.pr_descripcion,
+                                 vt_DescUnitario = 0,
+                                 //vt_PrecioFinal = q.Subtotal,
+                                 //vt_por_iva = q.Porcentaje,
+                                 //vt_Precio = q.Subtotal,
+                                 //vt_Subtotal = q.Subtotal,
+                                 //vt_iva = q.ValorIVA,
+                                 //vt_total = q.Total,
+                                 IdCod_Impuesto_Iva = q.IdCod_Impuesto_Iva,
+                                 IdMatricula = q.IdMatricula,
+                                 IdPeriodo=q.IdPeriodo,
+                                 IdRubro = q.IdRubro
+                             }).ToList();
+                }
+                Lista.ForEach(V =>
+                {
+                    V.IdString = Convert.ToInt32(V.IdEmpresa).ToString("00") + Convert.ToInt32(V.IdMatricula).ToString("000000") + Convert.ToInt32(V.IdPeriodo).ToString("00") + Convert.ToInt32(V.IdRubro).ToString("00");
+                });
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

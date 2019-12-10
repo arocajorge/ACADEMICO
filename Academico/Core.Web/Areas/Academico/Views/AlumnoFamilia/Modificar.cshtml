@@ -97,6 +97,7 @@
                                 {
                                     settings.Name = "SeFactura";
                                     settings.Text = "Se factura";
+                                    settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_cliente(); }";
                                 }).GetHtml()
                     @Html.ValidationMessageFor(q => q.SeFactura, "", new { @class = "text-danger" })
                 </div>
@@ -271,6 +272,80 @@
             </div>
         </div>
     </div>
+    <div class="row" id="DatosFacturacion">
+        <div class="col-md-12">
+            <h4>Datos de Cliente</h4><hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Idtipo_cliente">Tipo cliente</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.Idtipo_cliente, settings =>
+                                {
+                                    settings.Name = "Idtipo_cliente";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                    settings.Properties.Columns.Add("Idtipo_cliente", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                    settings.Properties.Columns.Add("Descripcion_tip_cliente", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                                    //Campo ID
+                                    settings.Properties.ValueField = "Idtipo_cliente";
+                                    settings.Properties.ValueType = typeof(int);
+                                    settings.Properties.TextField = "Descripcion_tip_cliente";
+                                    //Boton para seleccionar ningun registro
+                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                                    settings.Properties.NullText = "== Seleccione ==";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                    //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){get_info_tipo_cliente()}";
+                                    settings.Properties.AllowNull = true;
+
+                                }).BindList(ViewBag.lst_clientetipo).GetHtml()
+                            @Html.ValidationMessageFor(q => q.Idtipo_cliente, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="IdTipoCredito">Término de pago*</label>
+                            @Html.DropDownListFor(q => q.IdTipoCredito, new SelectList(ViewBag.lst_termino_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "IdTipoCredito" })
+                            @Html.ValidationMessageFor(q => q.IdTipoCredito, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="IdCiudad">Ciudad*</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdCiudad, settings =>
+                               {
+                                   settings.Name = "IdCiudad";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("Descripcion_Ciudad", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdCiudad";
+                                   settings.Properties.ValueType = typeof(string);
+                                   settings.Properties.TextField = "Descripcion_Ciudad";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia.PerformCallback(); }";
+                               }).BindList(ViewBag.lst_ciudad).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdCiudad, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="parroquia">Parroquia*</label>
+                            @Html.Partial("_cmb_parroquia", Model)
+                            @Html.ValidationMessageFor(q => q.IdParroquia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <h4>Datos de trabajo</h4><hr />
     <div class="row">
         <div class="col-md-12">
@@ -378,6 +453,7 @@
     $(function () {
         $("#error_documento").hide();
         mostrar_vehiculo();
+        mostrar_cliente();
     })
 
     $("#pe_cedulaRuc").blur(function () {
@@ -569,4 +645,13 @@
         }
     }
 
+    function mostrar_cliente()
+    {
+        if (SeFactura.GetValue() == true) {
+            $("#DatosFacturacion").show()
+        }
+        else{
+            $("#DatosFacturacion").hide()
+        }
+    }
 </script>

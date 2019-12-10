@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="28cf665e7dd14495a2322c0b9ce30693" Name="Diagram1" ZoomLevel="69">
+      <Diagram DiagramId="28cf665e7dd14495a2322c0b9ce30693" Name="Diagram1" ZoomLevel="66">
         <EntityTypeShape EntityType="ModelInventario.in_Producto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="ModelInventario.FK_in_Producto_in_Producto1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ModelInventario.in_categorias" Width="1.5" PointX="0.75" PointY="14.375" />
@@ -25,6 +25,45 @@
         <AssociationConnector Association="ModelInventario.FK_in_subgrupo_in_grupo" />
         <AssociationConnector Association="ModelInventario.FK_in_Producto_in_Marca" />
         <AssociationConnector Association="ModelInventario.FK_in_Producto_in_subgrupo" />
+        <EntityTypeShape EntityType="ModelInventario.in_Catalogo" Width="1.5" PointX="5.375" PointY="31.125" />
+        <EntityTypeShape EntityType="ModelInventario.in_CatalogoTipo" Width="1.5" PointX="3.125" PointY="31.625" />
+        <EntityTypeShape EntityType="ModelInventario.in_Producto_Composicion" Width="1.5" PointX="8.25" PointY="8.125" />
+        <EntityTypeShape EntityType="ModelInventario.in_Producto_imagenes" Width="1.5" PointX="5.25" PointY="1.5" />
+        <EntityTypeShape EntityType="ModelInventario.in_producto_x_tb_bodega" Width="1.5" PointX="5.25" PointY="9.5" />
+        <EntityTypeShape EntityType="ModelInventario.in_UnidadMedida" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="ModelInventario.in_UnidadMedida_Equiv_conversion" Width="1.5" PointX="3" PointY="35.25" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_in_Producto_x_tb_bodega_x_UnidadMedida" Width="1.5" PointX="12.625" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Presentacion" Width="1.5" PointX="9.625" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Producto_Marca_Tipo_Categoria" Width="1.5" PointX="14.625" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Producto_para_composicion" Width="1.5" PointX="9.625" PointY="3.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Producto_PorSucursal" Width="1.5" PointX="14.625" PointY="9.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Producto_Stock" Width="1.5" PointX="14.625" PointY="13.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Producto_Stock_x_Bodega" Width="1.5" PointX="16.625" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Producto_Stock_x_producto" Width="1.5" PointX="7.625" PointY="11.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Producto_Stock_x_Sucursal" Width="1.5" PointX="9.625" PointY="11.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_producto_x_tb_bodega" Width="1.5" PointX="16.625" PointY="3.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_UnidadMedida" Width="1.5" PointX="16.625" PointY="7.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_UnidadMedida_Equiv_conversion" Width="1.5" PointX="16.625" PointY="10.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_UnidadMedida_Equivalencia" Width="1.5" PointX="16.625" PointY="13.75" />
+        <AssociationConnector Association="ModelInventario.FK_in_Catalogo_in_CatalogoTipo" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_Catalogo2" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_Catalogo3" />
+        <AssociationConnector Association="ModelInventario.FK_in_Producto_Composicion_in_Producto" />
+        <AssociationConnector Association="ModelInventario.FK_in_Producto_Composicion_in_Producto1" />
+        <AssociationConnector Association="ModelInventario.FK_in_Producto_imagenes_in_Producto" />
+        <AssociationConnector Association="ModelInventario.FK_in_Producto_in_UnidadMedida" />
+        <AssociationConnector Association="ModelInventario.FK_in_Producto_in_UnidadMedida1" />
+        <AssociationConnector Association="ModelInventario.FK_in_producto_x_tb_bodega_in_Producto" />
+        <AssociationConnector Association="ModelInventario.FK_in_Producto_Composicion_in_UnidadMedida" />
+        <AssociationConnector Association="ModelInventario.FK_in_UnidadMedida_Equiv_conversion_in_UnidadMedida" />
+        <AssociationConnector Association="ModelInventario.FK_in_UnidadMedida_Equiv_conversion_in_UnidadMedida1" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Producto_Composicion" Width="1.5" PointX="10.375" PointY="15.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_producto_hijo_combo" Width="1.5" PointX="12.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_producto_padre_combo" Width="1.5" PointX="14.375" PointY="17.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_producto_x_tb_bodega_stock_x_lote" Width="1.5" PointX="18.375" PointY="17.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_producto_x_tb_bodega_Costo_Historico" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelInventario.in_producto_x_tb_bodega_Costo_Historico" Width="1.5" PointX="7.5" PointY="20.375" />
+        <AssociationConnector Association="ModelInventario.FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

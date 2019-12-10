@@ -65,15 +65,6 @@ namespace Core.Info.Helps
             MAMA = 11
         }
 
-        public enum eTipoBusquedaProducto
-        {
-            PORMODULO,
-            TODOS,
-            PORSUCURSAL,
-            SOLOSERVICIOS,
-            PORBODEGA
-        }
-
         public enum eModulo
         {
             INV,
@@ -147,6 +138,25 @@ namespace Core.Info.Helps
             INSTITUCION = 5,
             ESTUDIOS = 6,
             INSTRUCCION = 7
+        }
+
+        public enum eTipoBusquedaProducto
+        {
+            SOLOPADRES,
+            SOLOHIJOS,
+            PORMODULO,
+            TODOS,
+            TODOS_MENOS_PADRES,
+            PORSUCURSAL,
+            SOLOSERVICIOS
+        }
+
+        public enum eTipoCatalogoInventario
+        {
+            EST_APROB = 1,
+            FECH_CONTA = 4,
+            TIPO_CONTA_CTA = 6,
+            ING_EGR = 8
         }
     }
 }

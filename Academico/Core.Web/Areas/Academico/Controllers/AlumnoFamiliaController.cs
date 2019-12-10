@@ -1,4 +1,5 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Info.Academico;
 using Core.Info.General;
@@ -23,6 +24,13 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Catalogo_Bus bus_aca_catalogo = new aca_Catalogo_Bus();
         tb_profesion_Bus bus_profesion = new tb_profesion_Bus();
         aca_CatalogoFicha_Bus bus_catalogo_ficha = new aca_CatalogoFicha_Bus();
+        aca_Sede_Bus bus_sede = new aca_Sede_Bus();
+        fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();
+        fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
+        fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+        fa_cliente_contactos_Bus bus_cliente_cont = new fa_cliente_contactos_Bus();
+        tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -30,6 +38,7 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Metodos
         private void cargar_combos()
         {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_sexo = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.SEXO), false);
             var lst_estado_civil = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.ESTCIVIL), false);
             var lst_tipo_doc = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODOC), false);
@@ -51,6 +60,15 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_parentezco = lst_parentezco;
             ViewBag.lst_profesion = lst_profesion;
             ViewBag.lst_instruccion = lst_instruccion;
+
+            var lst_termino_pago = bus_termino_pago.get_list(false);
+            ViewBag.lst_termino_pago = lst_termino_pago;
+
+            var lst_clientetipo = bus_clientetipo.get_list(IdEmpresa, false);
+            ViewBag.lst_clientetipo = lst_clientetipo;
+
+            var lst_ciudad = bus_ciudad.get_list("", false);
+            ViewBag.lst_ciudad = lst_ciudad;
         }
 
         private bool validar(aca_Familia_Info info, ref string msg)
@@ -68,6 +86,14 @@ namespace Core.Web.Areas.Academico.Controllers
             }
 
             return true;
+        }
+        #endregion
+
+        #region Combo Parroquia
+        public ActionResult cmb_parroquia()
+        {
+            string IdCiudad = (Request.Params["fx_IdCiudad"] != null) ? Request.Params["fx_IdCiudad"].ToString() : "";
+            return PartialView("_cmb_parroquia", new aca_Familia_Info { IdCiudad = IdCiudad });
         }
         #endregion
 
@@ -151,7 +177,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdEmpresa = IdEmpresa,
                 IdAlumno = IdAlumno,
                 pe_Naturaleza = "NATU",
-                CodCatalogoCONADIS = ""
+                CodCatalogoCONADIS = "",
+                IdTipoCredito ="CON",
+                Idtipo_cliente = 1,
+                IdCiudad = "09",
+                IdParroquia = "09",
             };
             ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdAlumno = IdAlumno;
@@ -162,6 +192,8 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Nuevo(aca_Familia_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.IdSucursal = bus_sede.GetInfo(model.IdEmpresa, model.IdSede).IdSucursal;
 
             var info_persona_familia = new tb_persona_Info
             {
@@ -214,6 +246,14 @@ namespace Core.Web.Areas.Academico.Controllers
                 return RedirectToAction("Index", new { IdEmpresa = IdEmpresa, IdAlumno = IdAlumno });
 
             model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+            var info_cliente = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, model.pe_cedulaRuc);
+            var cliente = bus_cliente.get_info(model.IdEmpresa, info_cliente.IdCliente);
+            model.IdTipoCredito = ((cliente == null || cliente.IdCliente==0) ? "" : cliente.IdTipoCredito);
+            model.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
+            var IdCliente = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
+            var info_contacto = bus_cliente_cont.get_info(model.IdEmpresa, IdCliente, 1);
+            model.IdCiudad = (info_contacto == null ? "09" : info_contacto.IdCiudad);
+            model.IdParroquia = (info_contacto == null ? "09" : info_contacto.IdParroquia);
 
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
@@ -228,6 +268,8 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Modificar(aca_Familia_Info model)
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.IdSucursal = bus_sede.GetInfo(model.IdEmpresa, model.IdSede).IdSucursal;
 
             var info_persona_familia = new tb_persona_Info
             {
@@ -270,6 +312,14 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             aca_Familia_Info model = bus_familia.GetInfo(IdEmpresa, IdAlumno, Secuencia);
             model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+            var info_cliente = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, model.pe_cedulaRuc);
+            var cliente = bus_cliente.get_info(model.IdEmpresa, info_cliente.IdCliente);
+            model.IdTipoCredito = ((cliente == null || cliente.IdCliente == 0) ? "" : cliente.IdTipoCredito);
+            model.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : info_cliente.Idtipo_cliente);
+            var IdCliente = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
+            var info_contacto = bus_cliente_cont.get_info(model.IdEmpresa, IdCliente, 1);
+            model.IdCiudad = (info_contacto == null ? "09" : info_contacto.IdCiudad);
+            model.IdParroquia = (info_contacto == null ? "09" : info_contacto.IdParroquia);
 
             if (model == null)
                 return RedirectToAction("Index", new { IdEmpresa = IdEmpresa, IdAlumno = IdAlumno });

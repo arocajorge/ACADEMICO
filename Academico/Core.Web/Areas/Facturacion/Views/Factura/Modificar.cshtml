@@ -1,9 +1,9 @@
-﻿@model Core.Erp.Info.Facturacion.fa_factura_Info
+﻿@model Core.Info.Facturacion.fa_factura_Info
 @{
     /**/
 
     ViewBag.Title = ("Modificar factura" + " con ID #" + @Model.IdCbteVta);
-    if (string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdEmpresa))
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
     }
@@ -15,7 +15,7 @@
 <script type="text/javascript">
     function ImprimirRIDE() {
         var location = GetPathServer();        
-        var win = window.open(location +"/Reportes/FacturacionReportes/FAC_007?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
+        var win = window.open(location +"/Reportes/FacturacionReportes/FAC_007?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
         win.focus();
     }
 
@@ -107,11 +107,11 @@
         var location = GetPathServer();
         if(IdCliente.GetValue() > 0)
         {
-            var win = window.open(location +"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+IdCliente.GetValue(), '_blank');
+            var win = window.open(location +"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+IdCliente.GetValue(), '_blank');
             win.focus();
         }else
         {
-            var win = window.open(location +"/Facturacion/Cliente/Nuevo?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+            var win = window.open(location +"/Facturacion/Cliente/Nuevo?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa, '_blank');
             win.focus();
         }
     }

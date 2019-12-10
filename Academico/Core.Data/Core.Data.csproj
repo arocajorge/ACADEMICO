@@ -319,6 +319,12 @@
     <Compile Include="Base\fa_Vendedor.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\in_Catalogo.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_CatalogoTipo.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\in_categorias.cs">
       <DependentUpon>ModelInventario.tt</DependentUpon>
     </Compile>
@@ -343,10 +349,28 @@
     <Compile Include="Base\in_ProductoTipo.cs">
       <DependentUpon>ModelInventario.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\in_Producto_Composicion.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_Producto_imagenes.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\in_Producto_x_fa_NivelDescuento.cs">
       <DependentUpon>ModelInventario.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\in_producto_x_tb_bodega.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_producto_x_tb_bodega_Costo_Historico.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\in_subgrupo.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_UnidadMedida.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\in_UnidadMedida_Equiv_conversion.cs">
       <DependentUpon>ModelInventario.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\ModelAcademico.Context.cs">
@@ -466,13 +490,22 @@
     <Compile Include="Base\tbl_TransaccionesAutorizadas.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\tb_bodega.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_Catalogo.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\tb_CatalogoTipo.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\tb_ciudad.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\tb_ColaImpresionDirecta.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\tb_dia.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\tb_empresa.cs">
@@ -565,6 +598,9 @@
     <Compile Include="Base\vwaca_Matricula_Rubro.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_Matricula_Rubro_PorFacturar.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_MecanismoDePago.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -622,11 +658,71 @@
     <Compile Include="Base\vwfa_PuntoVta.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwin_in_Producto_x_tb_bodega_x_UnidadMedida.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_Presentacion.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_Producto_Composicion.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_producto_hijo_combo.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_Producto_Marca_Tipo_Categoria.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_producto_padre_combo.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_Producto_para_composicion.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_Producto_PorSucursal.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_Producto_Stock.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_Producto_Stock_x_Bodega.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_Producto_Stock_x_producto.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_Producto_Stock_x_Sucursal.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_producto_x_tb_bodega.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_producto_x_tb_bodega_Costo_Historico.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_producto_x_tb_bodega_stock_x_lote.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_UnidadMedida.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_UnidadMedida_Equivalencia.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwin_UnidadMedida_Equiv_conversion.cs">
+      <DependentUpon>ModelInventario.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwseg_usuario_x_aca_Sede.cs">
       <DependentUpon>ModelSeguridadAcceso.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwseg_usuario_x_tb_sucursal.cs">
       <DependentUpon>ModelSeguridadAcceso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwtb_bodega_x_sucursal.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwtb_bodega_x_tb_sucursal.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwtb_Ciudad.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
@@ -667,6 +763,7 @@
     <Compile Include="Facturacion\fa_TerminoPago_Distribucion_Data.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Data.cs" />
     <Compile Include="General\tbl_TransaccionesAutorizadas_Data.cs" />
+    <Compile Include="General\tb_bodega_Data.cs" />
     <Compile Include="General\tb_Catalogo_Data.cs" />
     <Compile Include="General\tb_ciudad_Data.cs" />
     <Compile Include="General\tb_ColaImpresionDirecta_Data.cs" />
@@ -688,11 +785,16 @@
     <Compile Include="Inventario\in_grupo_Data.cs" />
     <Compile Include="Inventario\in_linea_Data.cs" />
     <Compile Include="Inventario\in_Marca_Data.cs" />
+    <Compile Include="Inventario\in_parametro_Data.cs" />
     <Compile Include="Inventario\in_presentacion_Data.cs" />
     <Compile Include="Inventario\in_ProductoTipo_Data.cs" />
+    <Compile Include="Inventario\in_Producto_Composicion_Data.cs" />
     <Compile Include="Inventario\in_Producto_Data.cs" />
     <Compile Include="Inventario\in_Producto_x_fa_NivelDescuento_Data.cs" />
+    <Compile Include="Inventario\in_producto_x_tb_bodega_Data.cs" />
     <Compile Include="Inventario\in_subgrupo_Data.cs" />
+    <Compile Include="Inventario\in_UnidadMedida_Data.cs" />
+    <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reportes\ACA_001_Data.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_Data.cs" />

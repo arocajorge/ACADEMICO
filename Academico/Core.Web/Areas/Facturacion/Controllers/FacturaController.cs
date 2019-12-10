@@ -1,4 +1,5 @@
-﻿using Core.Bus.Contabilidad;
+﻿using DevExpress.Web.Mvc;
+using Core.Bus.Contabilidad;
 using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Bus.Inventario;
@@ -15,6 +16,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Core.Web.Areas.Academico.Controllers;
+using Core.Bus.Academico;
 
 namespace Core.Web.Areas.Facturacion.Controllers
 {
@@ -48,6 +51,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
         fa_NivelDescuento_Bus bus_nivelDescuento = new fa_NivelDescuento_Bus();
         fa_catalogo_Bus bus_catalogo = new fa_catalogo_Bus();
         tb_sucursal_FormaPago_x_fa_NivelDescuento_Bus bus_formapago_x_niveldescuento = new tb_sucursal_FormaPago_x_fa_NivelDescuento_Bus();
+        fa_factura_det_x_facturar_List Lista_RubrosPorFacturar = new fa_factura_det_x_facturar_List();
+        aca_Matricula_Rubro_Bus bus_rubro_matricula = new aca_Matricula_Rubro_Bus();
+        aca_Familia_Bus bus_familia = new aca_Familia_Bus();
+        fa_factura_det_Bus bus_factura_det = new fa_factura_det_Bus();
+        aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
         #region Index
@@ -252,6 +260,21 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
 
             return true;
+        }
+        #endregion
+        #region Combo bajo demanda
+        public ActionResult Cmb_Alumno()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbAlumno", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda_alumno(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda_alumno(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
         }
         #endregion
         #region Json
@@ -510,6 +533,15 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 resultado = new tb_sis_Documento_Tipo_Talonario_Info();
             return Json(new { data_puntovta = punto_venta, data_talonario = resultado }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetRubrosPorFacturar(int IdSucursal = 0, decimal IdAlumno = 0, decimal IdTransaccionSession = 0)
+        {
+            bool resultado = true;
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa),0);
+            Lista_RubrosPorFacturar.set_list(bus_factura_det.get_list_rubros_x_facturar(Convert.ToInt32(SessionFixed.IdEmpresa), IdSucursal, info_anio.IdAnio, IdAlumno), IdTransaccionSession);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        
         public JsonResult enviar_fact_sri(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
         {
             var valor = bus_factura.modificarEstadoAutorizacion(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
@@ -526,7 +558,16 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             return Json(IdNivel, JsonRequestBehavior.AllowGet);
         }
+        
+        public JsonResult SetCliente(int IdEmpresa = 0, decimal IdAlumno = 0)
+        {
+            decimal IdCliente = 0;
+            var info_familia = bus_familia.GetInfo_Representante(IdEmpresa, IdAlumno, cl_enumeradores.eTipoRepresentante.ECON.ToString());
+            var info_cliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, info_familia.pe_cedulaRuc);
+            IdCliente = info_cliente.IdCliente;
 
+            return Json(IdCliente, JsonRequestBehavior.AllowGet);
+        }
         #endregion
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
@@ -686,6 +727,142 @@ namespace Core.Web.Areas.Facturacion.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+        #region funciones del detalle
+        private void cargar_combos_detalle()
+        {
+            var lst_impuesto = bus_impuesto.get_list("IVA", false);
+            ViewBag.lst_impuesto = lst_impuesto;
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_factura_det()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            SessionFixed.IdNivelDescuento = Request.Params["NivelDescuento"] != null ? Request.Params["NivelDescuento"].ToString() : SessionFixed.IdNivelDescuento;
+            SessionFixed.IdEntidad = !string.IsNullOrEmpty(Request.Params["IdCliente"]) ? Request.Params["IdCliente"].ToString() : "-1";
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_factura_det", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
+            int IdNivelDescuento = Convert.ToInt32(SessionFixed.IdNivelDescuento);
+            if (info_det != null && info_det.IdProducto != 0)
+            {
+                var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                if (producto != null)
+                {
+                    info_det.pr_descripcion = producto.pr_descripcion_combo;
+                    info_det.se_distribuye = producto.se_distribuye;
+                    info_det.tp_manejaInven = producto.tp_ManejaInven;
+                    info_det.IdCod_Impuesto_Iva = producto.IdCod_Impuesto_Iva;
+                    var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
+                    if (cliente != null)
+                    {
+                        info_det.vt_Precio = producto.precio_1;
+                        int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
+
+                        var nivelproducto = bus_nivelproducto.GetInfo(IdEmpresa, producto.IdProducto, nivel_precio);
+
+                        if (SessionFixed.EsSuperAdmin == "False")
+                        {
+                            info_det.vt_PorDescUnitario = nivelproducto == null ? 0 : nivelproducto.Porcentaje;
+                        }
+                        else
+                        {
+                            info_det.vt_PorDescUnitario = IdNivelDescuento > 1 ? (nivelproducto == null ? 0 : nivelproducto.Porcentaje) : info_det.vt_PorDescUnitario;
+                        }
+                    }
+                }
+            }
+            List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_factura_det", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_factura_det_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
+            int IdNivelDescuento = Convert.ToInt32(SessionFixed.IdNivelDescuento);
+            if (info_det != null && info_det.IdProducto != 0)
+            {
+                var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                if (producto != null)
+                {
+                    info_det.pr_descripcion = producto.pr_descripcion_combo;
+                    info_det.tp_manejaInven = producto.tp_ManejaInven;
+                    info_det.se_distribuye = producto.se_distribuye;
+                    info_det.IdCod_Impuesto_Iva = producto.IdCod_Impuesto_Iva;
+                    var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
+                    if (cliente != null)
+                    {
+                        info_det.vt_Precio = producto.precio_1;
+                        int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
+
+                        var nivelproducto = bus_nivelproducto.GetInfo(IdEmpresa, producto.IdProducto, nivel_precio);
+
+                        if (SessionFixed.EsSuperAdmin == "False")
+                        {
+                            info_det.vt_PorDescUnitario = nivelproducto == null ? 0 : nivelproducto.Porcentaje;
+                        }
+                        else
+                        {
+                            info_det.vt_PorDescUnitario = IdNivelDescuento > 1 ? (nivelproducto == null ? 0 : nivelproducto.Porcentaje) : info_det.vt_PorDescUnitario;
+                        }
+                    }
+                }
+            }
+            List_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_factura_det", model);
+        }
+
+        public ActionResult EditingDelete(int Secuencia)
+        {
+            List_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_factura_det", model);
+        }
+        #endregion
+        #region Detalle de rubros por facturar
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_RubrosXFacturar()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+
+            var model = Lista_RubrosPorFacturar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_RubrosXFacturar", model);
+        }
+        public void AddRubros(string IDs = "", decimal IdTransaccionSession = 0)
+        {
+            if (!string.IsNullOrEmpty(IDs))
+            {
+                string[] array = IDs.Split(',');
+                var lst = Lista_RubrosPorFacturar.get_list(IdTransaccionSession);
+                var lst_det_fact = List_det.get_list(IdTransaccionSession);
+                foreach (var item in array)
+                {
+                    var rubro_x_fact = lst.Where(q => q.IdString == item).FirstOrDefault();
+                    if (rubro_x_fact != null)
+                        if (lst_det_fact.Where(q => q.IdEmpresa == rubro_x_fact.IdEmpresa && q.IdMatricula == rubro_x_fact.IdMatricula && q.IdPeriodo == rubro_x_fact.IdPeriodo && q.IdRubro == rubro_x_fact.IdRubro).Count() == 0)
+                        {
+                            rubro_x_fact.Secuencia = lst_det_fact.Count == 0 ? 1 : lst_det_fact.Max(q => q.Secuencia) + 1;
+                            lst_det_fact.Add(rubro_x_fact);
+                        }
+                }
+                List_det.set_list(lst_det_fact, IdTransaccionSession);
+            }
+        }
+        #endregion
     }
 
     public class fa_factura_det_List
@@ -750,6 +927,25 @@ namespace Core.Web.Areas.Facturacion.Controllers
         {
             List<fa_factura_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+        }
+    }
+
+    public class fa_factura_det_x_facturar_List
+    {
+        string variable = "fa_factura_det_x_facturar_Info";
+        public List<fa_factura_det_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<fa_factura_det_Info> list = new List<fa_factura_det_Info>();
+
+                HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<fa_factura_det_Info>)HttpContext.Current.Session[variable + IdTransaccionSession.ToString()];
+        }
+        public void set_list(List<fa_factura_det_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
     }
 }

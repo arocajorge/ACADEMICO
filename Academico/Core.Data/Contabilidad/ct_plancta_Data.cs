@@ -203,7 +203,7 @@ namespace Core.Data.Contabilidad
 
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

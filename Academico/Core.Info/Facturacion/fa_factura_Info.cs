@@ -76,6 +76,7 @@ namespace Core.Info.Facturacion
         #endregion
 
         #region Campos que no existen en la tabla
+        public int IdSede { get; set; }
         public List<fa_factura_det_Info> lst_det { get; set; }
         
         public decimal? IdProforma { get; set; }

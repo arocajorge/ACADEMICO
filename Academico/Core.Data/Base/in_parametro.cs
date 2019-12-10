@@ -37,5 +37,8 @@ namespace Core.Data.Base
         public string IdCatalogoEstadoAjuste { get; set; }
         public Nullable<int> IdMotivo_Inv_ajuste_ing { get; set; }
         public Nullable<int> IdMotivo_Inv_ajuste_egr { get; set; }
+    
+        public virtual in_Catalogo in_Catalogo { get; set; }
+        public virtual in_Catalogo in_Catalogo1 { get; set; }
     }
 }

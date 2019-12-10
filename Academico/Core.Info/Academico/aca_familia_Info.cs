@@ -81,6 +81,16 @@ namespace Core.Info.Academico
         public string dia { get; set; }
         public string NomCatalogo { get; set; }
         public int IdProfesion { get; set; }
+        [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
+        public int Idtipo_cliente { get; set; }
+        public string IdTipoCredito { get; set; }
+        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        public string IdCiudad { get; set; }
+        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        public string IdParroquia { get; set; }
+        [Required(ErrorMessage = "El campo sucursal es obligatorio")]
+        public int IdSede { get; set; }
+        public int IdSucursal { get; set; }
         public tb_persona_Info info_persona { get; set; }
         #endregion
     }
