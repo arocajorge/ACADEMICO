@@ -31,5 +31,54 @@ namespace Core.Info.Helps
             fecha_fin = DateTime.Now.Date;
         }
 
+        public class cl_filtros_facturacion_Info
+        {
+            public int IdEmpresa { get; set; }
+            public DateTime fecha_fin { get; set; }
+            public decimal? IdProducto { get; set; }
+            public decimal? IdCliente { get; set; }
+            public int IdClienteContacto { get; set; }
+            public int IdVendedor { get; set; }
+            public decimal? IdProductoPadre { get; set; }
+            public decimal? IdEntidad { get; set; }
+            public DateTime fecha_ini { get; set; }
+            public int IdSucursal { get; set; }
+            public bool Check1 { get; set; }
+            public bool Check2 { get; set; }
+            public DateTime fecha_corte { get; set; }
+            public int IdContacto { get; set; }
+
+            public decimal IdProforma { get; set; }
+            public bool formato_hoja_membretada { get; set; }
+
+            public int IdMarca { get; set; }
+            public string IdCategoria { get; set; }
+            public int IdLinea { get; set; }
+            public int IdGrupo { get; set; }
+            public int IdSubGrupo { get; set; }
+            public bool mostrarSaldo0 { get; set; }
+            public bool mostrarSoloVencido { get; set; }
+
+            public decimal IdLiquidacion { get; set; }
+            public bool mostrarAnulados { get; set; }
+            public bool mostrar_observacion_completa { get; set; }
+            public int Idtipo_cliente { get; set; }
+            public string IdCatalogo_FormaPago { get; set; }
+
+            public int IdAnio { get; set; }
+            public string IdCobro_tipo { get; set; }
+            public int[] IntArray { get; set; }
+            public int IdTipoNota { get; set; }
+            public string CreDeb { get; set; }
+
+
+            public cl_filtros_facturacion_Info()
+            {
+                fecha_ini = DateTime.Now.Date.AddMonths(-1);
+                fecha_fin = DateTime.Now.Date;
+                fecha_corte = DateTime.Now.Date;
+                IdCatalogo_FormaPago = "";
+            }
+        }
     }
 }

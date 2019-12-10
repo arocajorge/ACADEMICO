@@ -102,7 +102,7 @@ namespace Core.Info.Academico
         public string NumeroCarnetConadis_padre { get; set; }
         public bool SeFactura_padre { get; set; }
         public bool EsRepresentante_padre { get; set; }
-        public int IdCatalogoFichaInst_padre { get; set; }
+        public Nullable<int> IdCatalogoFichaInst_padre { get; set; }
         [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo empresa debe tener máximo 200")]
         public string EmpresaTrabajo_padre { get; set; }
         [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo dirección debe tener máximo 500")]
@@ -160,7 +160,7 @@ namespace Core.Info.Academico
         public string NumeroCarnetConadis_madre { get; set; }
         public bool SeFactura_madre { get; set; }
         public bool EsRepresentante_madre { get; set; }
-        public int IdCatalogoFichaInst_madre { get; set; }
+        public Nullable<int> IdCatalogoFichaInst_madre { get; set; }
         [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo empresa debe tener máximo 200")]
         public string EmpresaTrabajo_madre { get; set; }
         [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo dirección debe tener máximo 500")]

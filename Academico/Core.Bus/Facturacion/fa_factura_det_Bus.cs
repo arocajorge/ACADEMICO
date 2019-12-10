@@ -21,11 +21,11 @@ namespace Core.Bus.Facturacion
             }
         }
 
-        public List<fa_factura_det_Info> get_list_rubros_x_facturar(int IdEmpresa, int IdSucursal, int IdAnio, decimal IdAlumno)
+        public List<fa_factura_det_Info> get_list_rubros_x_facturar(int IdEmpresa, decimal IdAlumno)
         {
             try
             {
-                return odata.get_list_rubros_x_facturar(IdEmpresa, IdSucursal, IdAnio, IdAlumno);
+                return odata.get_list_rubros_x_facturar(IdEmpresa, IdAlumno);
             }
             catch (Exception)
             {

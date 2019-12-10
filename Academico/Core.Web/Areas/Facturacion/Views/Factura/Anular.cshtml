@@ -26,25 +26,6 @@
         </div>
     }
 
-    <div class="modal fade" id="OpModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Lotes disponibles</h4>
-                </div>
-                <div class="modal-body">
-                    @Html.Action("GridViewPartial_LoteFactura")
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
     <div class="row">
         <div class="col-md-6">
 
@@ -60,6 +41,13 @@
                     <label for="IdPuntoVta">Punto de venta*</label>
                     @Html.DropDownListFor(q => q.IdPuntoVta, new SelectList(ViewBag.lst_punto_venta, "IdPuntoVta", "nom_PuntoVta"), new { @class = "form-control", @id = "IdPuntoVta", @disabled = "disabled" })
                     @Html.ValidationMessageFor(q => q.IdPuntoVta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label for="IdCliente">Alumno*</label>
+                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12">
@@ -110,9 +98,6 @@
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="active">
                         <a href="#tab_general" aria-controls="general" role="tab" data-toggle="tab" id="link_general">Datos generales</a>
-                    </li>
-                    <li>
-                        <a href="#tab_cuotas" aria-controls="lote" role="tab" data-toggle="tab" id="link_cuotas">Detalle de cuotas</a>
                     </li>
                 </ul>
                 <div class="tab-content" style="padding-top: 5px">
@@ -176,30 +161,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="fecha_primera_cuota">Fecha primer cuota</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        @Html.TextBoxFor(q => q.fecha_primera_cuota, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "fecha_primera_cuota" })
-                                        @Html.ValidationMessageFor(q => q.fecha_primera_cuota, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Valor abono</label>
-                                    @Html.TextBoxFor(q => q.valor_abono, new { @class = "form-control", @id = "valor_abono" })
-                                </div>
-                            </div>
-                        </div>
-                        @Html.Action("GridViewPartial_factura_cuotas")
-                        <br />
                     </div>
                 </div>
             </div>
@@ -622,5 +583,30 @@ function ValidarGrid() {
         var Total = Number($("#Total").val());
         var Efectivo = Number($("#ValorEfectivo").val());
         $("#Cambio").val((Efectivo - Total).toFixed(2));
+    }
+
+    function SetCliente() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAlumno: IdAlumno.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetCliente", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                IdCliente.SetValue(data);
+                get_info_cliente();
+                ValidarCliente();
+                cargar_contactos();
+            },
+            error: function (error) {
+            }
+        });
     }
 </script>

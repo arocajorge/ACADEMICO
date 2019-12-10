@@ -37,7 +37,7 @@ namespace Core.Data.Academico
                             Correo =q.Correo,
                             SeFactura = q.SeFactura,
                             EsRepresentante =q.EsRepresentante,
-                            IdCatalogoFichaInst = q.IdCatalogoFichaInst,
+                            IdCatalogoFichaInst = q.IdCatalogoFichaInst??0,
                             EmpresaTrabajo = q.EmpresaTrabajo,
                             DireccionTrabajo = q.DireccionTrabajo,
                             TelefonoTrabajo = q.TelefonoTrabajo,
@@ -103,7 +103,7 @@ namespace Core.Data.Academico
                         pe_razonSocial = Entity.pe_razonSocial,
                         pe_sexo = Entity.pe_sexo,
                         IdProfesion = Entity.IdProfesion ?? 0,
-                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst,
+                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst??0,
                         EmpresaTrabajo = Entity.EmpresaTrabajo,
                         DireccionTrabajo = Entity.DireccionTrabajo,
                         TelefonoTrabajo = Entity.TelefonoTrabajo,
@@ -168,7 +168,7 @@ namespace Core.Data.Academico
                         pe_sexo = Entity.pe_sexo,
                         IdEstadoCivil = Entity.IdEstadoCivil,
                         IdProfesion = Entity.IdProfesion ?? 0,
-                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst,
+                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst??0,
                         EmpresaTrabajo = Entity.EmpresaTrabajo,
                         DireccionTrabajo = Entity.DireccionTrabajo,
                         TelefonoTrabajo = Entity.TelefonoTrabajo,
@@ -220,6 +220,7 @@ namespace Core.Data.Academico
                         Celular = Entity.Celular,
                         Correo = Entity.Correo,
                         SeFactura = Entity.SeFactura,
+                        EsRepresentante = Entity.EsRepresentante,
                         IdTipoDocumento = Entity.IdTipoDocumento,
                         pe_Naturaleza = Entity.pe_Naturaleza,
                         pe_cedulaRuc = Entity.pe_cedulaRuc,
@@ -230,7 +231,7 @@ namespace Core.Data.Academico
                         pe_sexo = Entity.pe_sexo,
                         IdEstadoCivil = Entity.IdEstadoCivil,
                         IdProfesion = Entity.IdProfesion ?? 0,
-                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst,
+                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst??0,
                         EmpresaTrabajo = Entity.EmpresaTrabajo,
                         DireccionTrabajo = Entity.DireccionTrabajo,
                         TelefonoTrabajo = Entity.TelefonoTrabajo,
@@ -293,7 +294,7 @@ namespace Core.Data.Academico
                         pe_sexo = Entity.pe_sexo,
                         IdEstadoCivil = Entity.IdEstadoCivil,
                         IdProfesion = Entity.IdProfesion??0,
-                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst,
+                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst??0,
                         EmpresaTrabajo = Entity.EmpresaTrabajo,
                         DireccionTrabajo = Entity.DireccionTrabajo,
                         TelefonoTrabajo = Entity.TelefonoTrabajo,
@@ -386,7 +387,7 @@ namespace Core.Data.Academico
                     pe_fechaNacimiento = Entity_fam.pe_fechaNacimiento,
                     IdEstadoCivil = Entity_fam.IdEstadoCivil,
                     IdProfesion = Entity_fam.IdProfesion??0,
-                    IdCatalogoFichaInst = Entity_fam.IdCatalogoFichaInst,
+                    IdCatalogoFichaInst = Entity_fam.IdCatalogoFichaInst??0,
                     EmpresaTrabajo = Entity_fam.EmpresaTrabajo,
                     DireccionTrabajo = Entity_fam.DireccionTrabajo,
                     TelefonoTrabajo = Entity_fam.TelefonoTrabajo,
@@ -484,7 +485,7 @@ namespace Core.Data.Academico
                         Celular = info.Celular,
                         Correo = info.Correo,
                         SeFactura = info.SeFactura,
-                        IdCatalogoFichaInst = info.IdCatalogoFichaInst,
+                        IdCatalogoFichaInst = (info.IdCatalogoFichaInst == 0 ? null : info.IdCatalogoFichaInst),
                         EmpresaTrabajo = info.EmpresaTrabajo,
                         DireccionTrabajo = info.DireccionTrabajo,
                         TelefonoTrabajo = info.TelefonoTrabajo,
@@ -557,7 +558,7 @@ namespace Core.Data.Academico
                     Entity.Correo = info.Correo;
                     Entity.SeFactura = info.SeFactura;
                     Entity.EsRepresentante = info.EsRepresentante;
-                    Entity.IdCatalogoFichaInst = info.IdCatalogoFichaInst;
+                    Entity.IdCatalogoFichaInst = (info.IdCatalogoFichaInst==0 ? null : info.IdCatalogoFichaInst);
                     Entity.EmpresaTrabajo = info.EmpresaTrabajo;
                     Entity.DireccionTrabajo = info.DireccionTrabajo;
                     Entity.TelefonoTrabajo = info.TelefonoTrabajo;

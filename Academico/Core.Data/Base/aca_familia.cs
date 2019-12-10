@@ -22,7 +22,7 @@ namespace Core.Data.Base
         public string Direccion { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
-        public int IdCatalogoFichaInst { get; set; }
+        public Nullable<int> IdCatalogoFichaInst { get; set; }
         public string EmpresaTrabajo { get; set; }
         public string DireccionTrabajo { get; set; }
         public string TelefonoTrabajo { get; set; }

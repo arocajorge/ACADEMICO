@@ -152,7 +152,7 @@ namespace Core.Bus.Academico
                             Correo = info.Correo_padre,
                             SeFactura = info.SeFactura_padre,
                             EsRepresentante = info.EsRepresentante_padre,
-                            IdCatalogoFichaInst = info.IdCatalogoFichaInst_padre,
+                            IdCatalogoFichaInst = (info.IdCatalogoFichaInst_padre==0 ? null : info.IdCatalogoFichaInst_padre),
                             EmpresaTrabajo = info.EmpresaTrabajo_padre,
                             DireccionTrabajo = info.DireccionTrabajo_padre,
                             TelefonoTrabajo = info.TelefonoTrabajo_padre,
@@ -183,7 +183,7 @@ namespace Core.Bus.Academico
                             var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc_padre);
                             var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
 
-                            if (cliente.IdCliente== 0)
+                            if (cliente == null || cliente.IdCliente== 0)
                             {
                                 fa_cliente_Info info_cliente = new fa_cliente_Info
                                 {
@@ -288,7 +288,7 @@ namespace Core.Bus.Academico
                             Celular = info.Celular_madre,
                             Correo = info.Correo_madre,
                             SeFactura = info.SeFactura_madre,
-                            IdCatalogoFichaInst = info.IdCatalogoFichaInst_madre,
+                            IdCatalogoFichaInst = (info.IdCatalogoFichaInst_madre == 0 ? null : info.IdCatalogoFichaInst_madre),
                             EmpresaTrabajo = info.EmpresaTrabajo_madre,
                             DireccionTrabajo = info.DireccionTrabajo_madre,
                             TelefonoTrabajo = info.TelefonoTrabajo_madre,
@@ -313,7 +313,7 @@ namespace Core.Bus.Academico
                                 var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc_padre);
                                 var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
 
-                                if (cliente.IdCliente == 0)
+                                if (cliente == null || cliente.IdCliente == 0)
                                 {
                                     fa_cliente_Info info_cliente = new fa_cliente_Info
                                     {
@@ -466,7 +466,7 @@ namespace Core.Bus.Academico
                             Correo = info.Correo_padre,
                             SeFactura = info.SeFactura_padre,
                             EsRepresentante = info.EsRepresentante_padre,
-                            IdCatalogoFichaInst = info.IdCatalogoFichaInst_padre,
+                            IdCatalogoFichaInst = (info.IdCatalogoFichaInst_padre == 0 ? null : info.IdCatalogoFichaInst_padre),
                             EmpresaTrabajo = info.EmpresaTrabajo_padre,
                             DireccionTrabajo = info.DireccionTrabajo_padre,
                             TelefonoTrabajo = info.TelefonoTrabajo_padre,
@@ -512,7 +512,7 @@ namespace Core.Bus.Academico
                                 var info_credito = odata_terminopago.get_info(info.IdTipoCredito_padre);
                                 var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc_padre);
                                 var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
-                            if (cliente.IdCliente == 0)
+                            if (cliente == null || cliente.IdCliente == 0)
                                 {
                                     fa_cliente_Info info_cliente = new fa_cliente_Info
                                     {
@@ -615,7 +615,7 @@ namespace Core.Bus.Academico
                             Celular = info.Celular_madre,
                             Correo = info.Correo_madre,
                             SeFactura = info.SeFactura_madre,
-                            IdCatalogoFichaInst = info.IdCatalogoFichaInst_madre,
+                            IdCatalogoFichaInst = (info.IdCatalogoFichaInst_madre == 0 ? null : info.IdCatalogoFichaInst_madre),
                             EmpresaTrabajo = info.EmpresaTrabajo_madre,
                             DireccionTrabajo = info.DireccionTrabajo_madre,
                             TelefonoTrabajo = info.TelefonoTrabajo_madre,
@@ -656,7 +656,7 @@ namespace Core.Bus.Academico
                                     var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc_madre);
                                     var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
                                    
-                                    if (cliente.IdCliente == 0)
+                                    if (cliente == null || cliente.IdCliente == 0)
                                     {
                                         fa_cliente_Info info_cliente = new fa_cliente_Info
                                         {

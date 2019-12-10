@@ -21,11 +21,14 @@ namespace Core.Data.Facturacion
                 List<fa_factura_consulta_Info> Lista;
                 Fecha_ini = Fecha_ini.Date;
                 Fecha_fin = Fecha_fin.Date;
+                int IdSucursalIni = IdSucursal;
+                int IdSucursalFin = IdSucursal == 0 ? 999 : IdSucursal;
                 using (EntitiesFacturacion Context = new EntitiesFacturacion())
                 {
                     Lista = (from q in Context.vwfa_factura
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdSucursal == IdSucursal
+                             && q.IdSucursal >= IdSucursalIni
+                             && q.IdSucursal <= IdSucursalFin
                              && Fecha_ini <= q.vt_fecha && q.vt_fecha <= Fecha_fin
                              orderby q.IdCbteVta descending
                              select new fa_factura_consulta_Info
@@ -53,7 +56,7 @@ namespace Core.Data.Facturacion
 
                                  vt_autorizacion = q.vt_autorizacion,
                                  Fecha_Autorizacion = q.Fecha_Autorizacion,
-
+                                 NombresAlumno = q.NombresAlumno,
                                  EstadoBool = q.Estado == "A" ? true : false
 
                              }).ToList();
@@ -106,6 +109,7 @@ namespace Core.Data.Facturacion
                         valor_abono = Entity.valor_abono,
                         IdNivel = Entity.IdNivel,
                         IdCatalogo_FormaPago = Entity.IdCatalogo_FormaPago,
+                        IdAlumno = Entity.IdAlumno
                     };
 
                     info.info_resumen = Context.fa_factura_resumen.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCbteVta == IdCbteVta).Select(q => new fa_factura_resumen_Info
@@ -166,6 +170,7 @@ namespace Core.Data.Facturacion
         {
             EntitiesFacturacion db_f = new EntitiesFacturacion();
             EntitiesGeneral db_g = new EntitiesGeneral();
+            EntitiesAcademico db_a = new EntitiesAcademico();
             try
             {
                 #region Variables
@@ -206,6 +211,7 @@ namespace Core.Data.Facturacion
                     valor_abono = info.valor_abono,
                     IdUsuario = info.IdUsuario,
                     IdNivel = info.IdNivel,
+                    IdAlumno = info.IdAlumno
 
                 };
                 #endregion
@@ -263,8 +269,21 @@ namespace Core.Data.Facturacion
 
                         IdCentroCosto = item.IdCentroCosto,
                         IdPunto_Cargo = item.IdPunto_Cargo,
-                        IdPunto_cargo_grupo = item.IdPunto_cargo_grupo
+                        IdPunto_cargo_grupo = item.IdPunto_cargo_grupo,
+
+                        aca_IdPeriodo = item.aca_IdPeriodo,
+                        aca_IdRubro = item.aca_IdRubro
                     });
+
+                    #region MatriculaRubro
+                    aca_Matricula_Rubro Entity_MatricularRubro = db_a.aca_Matricula_Rubro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == item.IdMatricula 
+                    && q.IdPeriodo == item.aca_IdPeriodo && q.IdRubro == item.aca_IdRubro);
+                    if (Entity_MatricularRubro == null) return false;
+
+                    Entity_MatricularRubro.FechaFacturacion = info.vt_fecha.Date;
+
+                    db_a.SaveChanges();
+                    #endregion
                 }
                 #endregion
 
@@ -338,9 +357,11 @@ namespace Core.Data.Facturacion
                         }
                 }
                 #endregion
+
                 #endregion
 
                 db_f.Dispose();
+                db_a.Dispose();
                 return true;
             }
             catch (Exception ex)

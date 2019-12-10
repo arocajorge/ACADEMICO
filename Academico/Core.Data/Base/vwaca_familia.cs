@@ -41,7 +41,7 @@ namespace Core.Data.Base
         public bool EsRepresentante { get; set; }
         public string pe_razonSocial { get; set; }
         public Nullable<int> IdProfesion { get; set; }
-        public int IdCatalogoFichaInst { get; set; }
+        public Nullable<int> IdCatalogoFichaInst { get; set; }
         public string EmpresaTrabajo { get; set; }
         public string DireccionTrabajo { get; set; }
         public string TelefonoTrabajo { get; set; }

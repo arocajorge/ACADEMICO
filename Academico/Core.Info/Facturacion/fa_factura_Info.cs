@@ -92,6 +92,7 @@ namespace Core.Info.Facturacion
 
     public class fa_factura_consulta_Info
     {
+        public string NombresAlumno { get; set; }
         public string NomContacto { get; set; }
         public string Ve_Vendedor { get; set; }
         public Nullable<double> vt_Subtotal0 { get; set; }

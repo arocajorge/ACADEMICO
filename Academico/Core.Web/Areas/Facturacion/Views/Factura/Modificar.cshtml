@@ -14,7 +14,7 @@
 
 <script type="text/javascript">
     function ImprimirRIDE() {
-        var location = GetPathServer();        
+        var location = GetPathServer();
         var win = window.open(location +"/Reportes/FacturacionReportes/FAC_007?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
         win.focus();
     }
@@ -43,42 +43,7 @@
             }
         });
     }
-    @*
-        function Imprimir() {
 
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSucursal: $("#IdSucursal").val(),
-            IdBodega: $("#IdBodega").val(),
-            IdCbteVta: $("#IdCbteVta").val(),
-            IdPuntoVta: $("#IdPuntoVta").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("Imprimir", "Factura",new { Area = "Facturacion"})',
-            async: false,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data == "FAC_007") {
-                    var win = window.open(window.location.origin +"/FixedERP/Reportes/FacturacionReportes/FAC_007?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
-                    win.focus();
-                }
-                if (data == "FAC_003") {
-                    var win = window.open(window.location.origin +"/FixedERP/Reportes/FacturacionReportes/FAC_003?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
-                    win.focus();
-                }
-                if (data == "FAC_013") {
-                    var win = window.open(window.location.origin +"/FixedERP/Reportes/FacturacionReportes/FAC_013?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdBodega="+@Model.IdBodega+"&IdCbteVta="+@Model.IdCbteVta, '_blank');
-                    win.focus();
-                }
-            },
-            error: function (error) {
-            }
-        });
-    }
-    *@
     function Imprimir() {
 
         var datos = {
@@ -102,17 +67,17 @@
             }
         });
     }
-    
-    function CrearModificarCliente() {
+
+    function CrearModificarAlumno() {
         var location = GetPathServer();
-        if(IdCliente.GetValue() > 0)
+        if(IdAlumno.GetValue() > 0)
         {
-            var win = window.open(location +"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+IdCliente.GetValue(), '_blank');
-            win.focus();
+            var win = window.open(location + "/Academico/Alumno/Modificar?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdAlumno=" + IdAlumno.GetValue(), '_blank');
+             win.focus();
         }else
         {
-            var win = window.open(location +"/Facturacion/Cliente/Nuevo?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa, '_blank');
-            win.focus();
+            var win = window.open(location + "/Academico/Alumno/Nuevo?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+             win.focus();
         }
     }
 </script>
@@ -273,25 +238,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="OpModal" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Lotes disponibles</h4>
-                </div>
-                <div class="modal-body">
-                    @Html.Action("GridViewPartial_LoteFactura")
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
     <div class="row">
         <div class="col-md-6">
 
@@ -311,9 +257,9 @@
             </div>
             <div class="col-md-10">
                 <div class="form-group">
-                    <label for="IdCliente">Cliente*</label>
-                    @Html.Partial("_CmbCliente_Factura", Model.IdCliente)
-                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
+                    <label for="IdCliente">Alumno*</label>
+                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
@@ -322,6 +268,13 @@
                     <button type="button" class="btn btn-primary form-control " onclick="CrearModificarCliente();">
                         <i class="fa fa-external-link-square"></i>
                     </button>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCliente">Cliente*</label>
+                    @Html.Partial("_CmbCliente_Factura", Model.IdCliente)
+                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12">
@@ -374,9 +327,6 @@
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="active">
                         <a href="#tab_general" aria-controls="general" role="tab" data-toggle="tab" id="link_general">Datos generales</a>
-                    </li>
-                    <li>
-                        <a href="#tab_cuotas" aria-controls="lote" role="tab" data-toggle="tab" id="link_cuotas">Detalle de cuotas</a>
                     </li>
                 </ul>
                 <div class="tab-content" style="padding-top: 5px">
@@ -465,39 +415,6 @@
                             </div>
                         </div>
 
-                    </div>
-                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cuotas">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="fecha_primera_cuota">Fecha primer cuota</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        @Html.DevExpress().DateEditFor(q => q.fecha_primera_cuota, settings =>
-                                  {
-                                      settings.Name = "fecha_primera_cuota";
-                                      settings.Properties.UseMaskBehavior = true;
-                                      settings.Properties.EditFormat = EditFormat.Date;
-                                      settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                      settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                      settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                      settings.Properties.ClientSideEvents.DateChanged = "function(s,e){CargarCuotas();}";
-                                  }).GetHtml()
-                                        @Html.ValidationMessageFor(q => q.fecha_primera_cuota, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="">Valor abono</label>
-                                    @Html.TextBoxFor(q => q.valor_abono, new { @class = "form-control", @id = "valor_abono" })
-                                </div>
-                            </div>
-                        </div>
-                        @Html.Action("GridViewPartial_factura_cuotas")
-                        <br />
                     </div>
                 </div>
             </div>
@@ -604,7 +521,6 @@
 
         $("#vt_tipo_venta").change(function () {
             get_info_termino_pago();
-            CargarCuotas();
         });
         $("#vt_plazo").change(function () {
             cargar_fecha_vencimiento();
@@ -621,7 +537,7 @@
             GetUltimoDocumento();
         });
         $("#valor_abono").change(function () {
-            CargarCuotas();
+            //CargarCuotas();
         });
         $("#ValorEfectivo").keyup(function () {
             CalcularCambio();
@@ -802,34 +718,6 @@
         $("#OpModal").modal("hide");
     }
 
-    function SeleccionarLote(s, e) {
-        $("#Secuencia").text(0);
-        var datos = {
-            IdSucursal: $("#IdSucursal").val(),
-            IdPuntoVta: $("#IdPuntoVta").val(),
-            IdProducto: s.GetValue(),
-            IdCliente: IdCliente.GetValue()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetLotesPorProducto", "Factura",new { Area = "Facturacion"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                //GridView_factura_det.GetEditor('IdCod_Impuesto_Iva').SetValue(data.IdCod_Impuesto_Iva);
-                if (data.IdProducto_padre > 0) {
-                    MostrarModal();
-                }
-            },
-            error: function (error) {
-            }
-        });
-    }
-
     function cargar_fecha_vencimiento() {
         var vida = Number($("#vt_plazo").val());
         var date = new Date(moment(vt_fecha.GetValue(), "DD/MM/YYYY").add(vida, 'days'));
@@ -955,27 +843,7 @@
         });
         }
 
-    function CargarCuotas() {
-            var datos = {
-                FechaPrimerPago: fecha_primera_cuota.GetDate(),
-                    IdTerminoPago: $("#vt_tipo_venta").val(),
-                ValorPrimerPago: $("#valor_abono").val(),
-                IdTransaccionSession: $("#IdTransaccionSession").val()
-            }
-            $.ajax({
-                type: 'POST',
-                data: JSON.stringify(datos),
-                url: '@Url.Action("CargarCuotas", "Factura",new { Area = "Facturacion"})',
-                async: false,
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                },
-                error: function (error) {
-                }
-            });
-            GridView_factura_cuotas.PerformCallback();
-    }
+    
     function ValidarGrid() {
         var datos = {
             IdTransaccionSession: $("#IdTransaccionSession").val()
@@ -1070,6 +938,31 @@
                     $("#DivMensajeCliente").hide();
                     $("#DivSuperAdmin").hide();
                 }
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function SetCliente(){
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAlumno: IdAlumno.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetCliente", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                IdCliente.SetValue(data);
+                get_info_cliente();
+                ValidarCliente(); 
+                cargar_contactos();
             },
             error: function (error) {
             }

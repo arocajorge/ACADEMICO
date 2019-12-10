@@ -10,6 +10,8 @@ namespace Core.Info.Facturacion
         public int IdBodega { get; set; }
         public decimal IdCbteVta { get; set; }
         public int Secuencia { get; set; }
+        public Nullable<int> aca_IdPeriodo { get; set; }
+        public Nullable<int> aca_IdRubro { get; set; }
         [Required(ErrorMessage ="El campo producto es obligatorio")]
         [Range(1, int.MaxValue, ErrorMessage = "El campo cantidad es obligatorio")]
         public decimal IdProducto { get; set; }
@@ -45,8 +47,10 @@ namespace Core.Info.Facturacion
         public bool? se_distribuye { get; set; }
         public string IdString { get; set; }
         public decimal IdMatricula { get; set; }
-        public int IdPeriodo { get; set; }
-        public int IdRubro { get; set; }
+        public bool AplicaProntoPago { get; set; }
+        public int IdAnio { get; set; }
+        public decimal DescuentoProntoPago { get; set; }
+        public decimal TotalProntoPago { get; set; }
         #endregion
 
     }

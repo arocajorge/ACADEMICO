@@ -35,7 +35,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_Matricula_Info GetInfo(int IdEmpresa, int IdMatricula)
+        public aca_Matricula_Info GetInfo(int IdEmpresa, decimal IdMatricula)
         {
             try
             {

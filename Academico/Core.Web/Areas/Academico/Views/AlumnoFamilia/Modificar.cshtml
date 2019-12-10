@@ -63,21 +63,21 @@
         <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="info_persona.pe_Naturaleza">Naturaleza*</label>
+                    <label for="pe_Naturaleza">Naturaleza*</label>
                     @Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza" })
                     @Html.ValidationMessageFor(q => q.pe_Naturaleza, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="info_persona.IdTipoDocumento">Tipo documento*</label>
+                    <label for="IdTipoDocumento">Tipo documento*</label>
                     @Html.DropDownListFor(q => q.IdTipoDocumento, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento" })
                     @Html.ValidationMessageFor(q => q.IdTipoDocumento, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="info_persona.pe_cedulaRuc">Número documento*</label>
+                    <label for="pe_cedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc" })
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
                     <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>

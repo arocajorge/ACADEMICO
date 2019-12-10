@@ -262,6 +262,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helps\SessionFixed.cs" />
+    <Compile Include="Helps\SessionTimeoutAttribute.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -7655,9 +7656,7 @@
     <Content Include="Areas\Inventario\Views\web.config" />
     <Content Include="Areas\General\Views\web.config" />
     <Content Include="Areas\Contabilidad\Views\web.config" />
-    <Content Include="Areas\Facturacion\Views\Factura\Anular.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\Index.cshtml" />
-    <Content Include="Areas\Facturacion\Views\Factura\Modificar.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\_CmbCliente_Factura.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\_CmbProducto_Factura.cshtml" />
@@ -7718,6 +7717,8 @@
     <Content Include="Areas\General\Views\Persona\_GridViewPartial_persona.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\_CmbAlumno.cshtml" />
     <Content Include="Areas\Academico\Views\AlumnoFamilia\_cmb_parroquia.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\Modificar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\Anular.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

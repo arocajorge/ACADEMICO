@@ -103,6 +103,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(7);
         });
+        settings.Columns.Add("NombresAlumno", "Alumno").Width = Unit.Percentage(20);
         settings.Columns.Add("NomContacto", "Cliente").Width = Unit.Percentage(20);
         settings.Columns.Add("vt_NumFactura", "# Factura").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
@@ -144,36 +145,36 @@
             });
         });
 
-        //settings.Columns.Add(column =>
-        //{
-        //    column.Caption = "Módulo";
-        //    column.SetDataItemTemplateContent(c =>
-        //    {
-        //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_013", "FacturacionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(c.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(c.DataItem, "IdCbteVta") }, Request.Url.Scheme) + "');\"></span>");
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Módulo";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_013", "FacturacionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(c.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(c.DataItem, "IdCbteVta") }, Request.Url.Scheme) + "');\"></span>");
 
-        //    });
-        //    column.Width = Unit.Percentage(5);
-        //});
+            });
+            column.Width = Unit.Percentage(5);
+        });
 
-        //settings.Columns.Add(column =>
-        //{
-        //    column.Caption = "RIDE";
-        //    column.SetDataItemTemplateContent(c =>
-        //    {
-        //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_007", "FacturacionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(c.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(c.DataItem, "IdCbteVta") }, Request.Url.Scheme) + "');\"></span>");
-        //    });
-        //    column.Width = Unit.Percentage(5);
-        //});
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "RIDE";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_007", "FacturacionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(c.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(c.DataItem, "IdCbteVta") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
 
-        //settings.Columns.Add(column =>
-        //{
-        //    column.Caption = "PreImpreso";
-        //    column.SetDataItemTemplateContent(c =>
-        //    {
-        //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_003", "FacturacionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(c.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(c.DataItem, "IdCbteVta") }, Request.Url.Scheme) + "');\"></span>");
-        //    });
-        //    column.Width = Unit.Percentage(5);
-        //});
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "PreImpreso";
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("FAC_003", "FacturacionReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdSucursal = DataBinder.Eval(c.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(c.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(c.DataItem, "IdCbteVta") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(5);
+        });
 
 
     });

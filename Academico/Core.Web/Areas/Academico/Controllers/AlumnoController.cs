@@ -42,6 +42,8 @@ namespace Core.Web.Areas.Academico.Controllers
         public static UploadedFile file { get; set; }
         public int IdAlumno_ { get; set; }
         public static byte[] imagen { get; set; }
+        public static byte[] pr_imagen { get; set; }
+        
         #endregion
 
         #region Index
@@ -87,6 +89,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_tipo_sangre = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPOSANGRE), false);
             var lst_tipo_discapacidad = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODISCAP), false);
             var lst_instruccion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTRUCCION), false);
+            lst_instruccion.Add(new aca_CatalogoFicha_Info { IdCatalogoFicha = 0, NomCatalogoFicha = "" });
             lst_tipo_discapacidad.Add(new tb_Catalogo_Info { CodCatalogo = "", ca_descripcion = ""});
             var lst_profesion = bus_profesion.GetList(false);
             lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "" });
@@ -167,7 +170,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 info.info_valido_madre = false;
             }
 
-            if (info.info_persona_padre.IdPersona == info.info_persona_madre.IdPersona)
+            if (info.info_persona_padre.pe_cedulaRuc == info.info_persona_madre.pe_cedulaRuc)
             {
                 msg = "No se puede registrar a la misma persona como padre y madre";
                 return false;
@@ -320,6 +323,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 alu_foto = new byte[0],
                 lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>()
             };
+
             cargar_combos();
             return View(model);
         }
@@ -358,6 +362,9 @@ namespace Core.Web.Areas.Academico.Controllers
             model.info_persona_alumno = info_persona_alumno;
             model.info_persona_padre = armar_info_padre(model);
             model.info_persona_madre = armar_info_madre(model);
+
+            if (model.alu_foto == null)
+                model.alu_foto = new byte[0];
 
             if (!validar(model, ref mensaje))
             {
@@ -767,7 +774,6 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         public ActionResult get_imagen_general()
         {
-
             byte[] model = empresa_imagen.pr_imagen;
             if (model == null)
                 model = new byte[0];

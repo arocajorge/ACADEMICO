@@ -114,7 +114,7 @@ namespace Core.Bus.Academico
                             var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc);
                             var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
 
-                            if (cliente.IdCliente == 0)
+                            if (cliente == null || cliente.IdCliente == 0)
                             {
                                 fa_cliente_Info info_cliente = new fa_cliente_Info
                                 {
@@ -280,7 +280,7 @@ namespace Core.Bus.Academico
                     }
                 }
 
-                return false;
+                return true;
             }
             catch (Exception EX)
             {

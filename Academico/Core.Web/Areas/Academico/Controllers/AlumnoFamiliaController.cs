@@ -48,6 +48,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_parentezco = bus_aca_catalogo.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.PAREN),false);
             lst_tipo_discapacidad.Add(new tb_Catalogo_Info { CodCatalogo = "", ca_descripcion = "" });
             var lst_instruccion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTRUCCION), false);
+            lst_instruccion.Add(new aca_CatalogoFicha_Info { IdCatalogoFicha = 0, NomCatalogoFicha = "" });
             var lst_profesion = bus_profesion.GetList(false);
             lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "" });
 
@@ -232,6 +233,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 ViewBag.IdAlumno = model.IdAlumno;
                 ViewBag.IdEmpresa = model.IdEmpresa;
+                cargar_combos();
                 return View(model);
             }
 
@@ -301,6 +303,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 ViewBag.IdAlumno = model.IdAlumno;
                 ViewBag.IdEmpresa = model.IdEmpresa;
+                cargar_combos();
                 return View(model);
             }
 

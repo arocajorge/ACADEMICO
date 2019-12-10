@@ -21,7 +21,7 @@ namespace Core.Info.Academico
         public string Direccion { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
-        public int IdCatalogoFichaInst { get; set; }
+        public Nullable<int> IdCatalogoFichaInst { get; set; }
         [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo empresa debe tener máximo 200")]
         public string EmpresaTrabajo { get; set; }
         [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo dirección debe tener máximo 500")]

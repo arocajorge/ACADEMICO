@@ -40,14 +40,11 @@
         $("#ValorEfectivo").keyup(function () {
             CalcularCambio();
         });
-        $("#IdCliente").change(function () {
-                      
-        });
     });
     function ValidarCliente() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IdCliente: $("#IdCliente").val(),
+            IdCliente: IdCliente.GetValue(),
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
@@ -81,7 +78,7 @@
             IdPuntoVta: $("#IdPuntoVta").val(),
             Secuencia: Secuencia,
             IdTransaccionSession: $("#IdTransaccionSession").val(),
-            IdCliente: $("#IdCliente").val()
+            IdCliente: IdCliente.GetValue()
         }
         $.ajax({
             type: 'POST',
@@ -102,10 +99,6 @@
         });
     }
 
-    function MostrarModal() {
-        GridView_LoteFactura.PerformCallback();
-        $("#OpModal").modal("show");
-    }
     function MostrarModalDesbloqueo() {
         $("#ContraseniaAdministrador").val("");
         $("#ModalDesbloqueo").modal("show");
@@ -195,60 +188,7 @@
         });
         $("#ModalPrecios").modal("hide");
     }
-    function SetLoteDetalle(ID) {
-        if (Number($("#Secuencia").text()) > 0) {
-            var datos = {
-                Secuencia: $("#Secuencia").text(),
-                IdTransaccionSession: $("#IdTransaccionSession").val(),
-                IdProducto: ID
-            }
-            $.ajax({
-                type: 'POST',
-                data: JSON.stringify(datos),
-                url: '@Url.Action("ModificarLineaProducto", "Factura",new { Area = "Facturacion"})',
-                async: false,
-                bDeferRender: true,
-                bProcessing: true,
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                success: function (data) {
-                    GridView_factura_det.PerformCallback();
-                },
-                error: function (error) {
-                }
-            });
-        } else {
-            $.ajax({
-                url: '@Url.Action("ChangeValuePartial", "Factura",new { Area = "Facturacion"})',
-                type: "GET",
-                data: { value: ID },
-                success: function (data) {
-                    $('#ajaxDiv').html(data);
-                },
-                error: function (xhr, textStatus, errorThrown) {
-                    alert('Request Status: ' + xhr.status + '; Status Text: ' + textStatus + '; Error: ' + errorThrown);
-                }
-            });
-        }
-
-        $.ajax({
-                url: '@Url.Action("ValidarSeleccionLote", "Factura",new { Area = "Facturacion"})',
-                type: "GET",
-                data: { IdProducto: ID },
-                success: function (data) {
-                    if (data != "") {
-                        alert(data);
-                    }
-                },
-                error: function (xhr, textStatus, errorThrown) {
-
-                }
-            });
-
-        $("#Secuencia").text(0);
-        $("#OpModal").modal("hide");
-    }
-
+   
     function cargar_fecha_vencimiento() {
         var vida = Number($("#vt_plazo").val());
         var date = new Date(moment(vt_fecha.GetValue(), "DD/MM/YYYY").add(vida, 'days'));
@@ -278,7 +218,7 @@
 
 
     function get_info_cliente() {
-        var tipo = $("#IdCliente").val();
+        var tipo = IdCliente.GetValue();
 
         var datos = {
             IdCliente: tipo,
@@ -306,7 +246,7 @@
     }
 
     function cargar_contactos() {
-        var codigo = $("#IdCliente").val();
+        var codigo = IdCliente.GetValue();
 
         if (codigo > 0) 
         {
@@ -410,7 +350,7 @@
     }
 
     function MostrarModalRubrosPendientes() {
-        if ($("#IdCliente").val() > 0) {
+        if (IdCliente.GetValue() > 0) {
             var datos = {
                 IdSucursal: $("#IdSucursal").val(),
                 IdAlumno: IdAlumno.GetValue(),
@@ -547,6 +487,7 @@
              win.focus();
         }
     }
+
     function SetCliente(){
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -562,8 +503,8 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $('#IdCliente').val(data);
-                get_info_cliente();
+                IdCliente.SetValue(data);
+                get_info_cliente(); 
                 ValidarCliente(); 
                 cargar_contactos();
             },
@@ -576,7 +517,6 @@
 @using (Html.BeginForm("Nuevo", "Factura", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
-    @Html.HiddenFor(q => q.IdCliente, new { @id = "IdCliente" })
     @Html.HiddenFor(q => q.vt_tipoDoc)
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
@@ -690,7 +630,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Proformas pendientes</h4>
+                    <h4 class="modal-title">Rubros pendientes de facturar</h4>
                 </div>
                 <div class="modal-body">
                     @Html.Action("GridViewPartial_RubrosXFacturar")
@@ -721,7 +661,7 @@
             </div>           
             <div class="col-md-10">
                 <div class="form-group">
-                    <label for="IdCliente">Cliente*</label>
+                    <label for="IdCliente">Alumno*</label>
                     @Html.Partial("_CmbAlumno", Model.IdAlumno)
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                 </div>
@@ -732,6 +672,13 @@
                     <button type="button" class="btn btn-primary form-control " onclick="CrearModificarAlumno();">
                         <i class="fa fa-external-link-square"></i>
                     </button>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCliente">Cliente*</label>
+                    @Html.Partial("_CmbCliente_Factura", Model.IdCliente)
+                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12">

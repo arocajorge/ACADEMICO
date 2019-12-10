@@ -27,6 +27,6 @@
         //settings.Properties.ClientSideEvents.SelectedIndexChanged = "SeleccionarLote";
     })
     .BindList(new Core.Web.Areas.Facturacion.Controllers.FacturaController().get_list_bajo_demandaProducto,
-    new Core.Web.Areas.Facturacion.Controllers.FacturaController().get_info_bajo_demandaProducto).Bind((Model.GetType() == typeof(Core.Info.Facturacion.fa_factura_det_Info) || Model.GetType() == typeof(List<Core.Erp.Info.Facturacion.fa_factura_det_Info>)) ? "" : (Model == 0 ? "" : Model));
+    new Core.Web.Areas.Facturacion.Controllers.FacturaController().get_info_bajo_demandaProducto).Bind((Model.GetType() == typeof(Core.Info.Facturacion.fa_factura_det_Info) || Model.GetType() == typeof(List<Core.Info.Facturacion.fa_factura_det_Info>)) ? "" : (Model == 0 ? "" : Model));
 }
 @comboBox.GetHtml()

@@ -69,7 +69,7 @@ namespace Core.Data.Facturacion
             }
         }
 
-        public List<fa_factura_det_Info> get_list_rubros_x_facturar(int IdEmpresa, int IdSucursal, int IdAnio, decimal IdAlumno)
+        public List<fa_factura_det_Info> get_list_rubros_x_facturar(int IdEmpresa, decimal IdAlumno)
         {
             try
             {
@@ -78,29 +78,32 @@ namespace Core.Data.Facturacion
                 {
                     Lista = (from q in Context.vwaca_Matricula_Rubro_PorFacturar
                              where q.IdEmpresa == IdEmpresa
-                             && q.IdAnio== IdAnio
                              && q.IdAlumno == IdAlumno
                              select new fa_factura_det_Info
                              {
+                                 IdEmpresa = q.IdEmpresa,
                                  IdProducto = q.IdProducto,
                                  vt_cantidad = 1,
                                  pr_descripcion = q.pr_descripcion,
                                  vt_DescUnitario = 0,
-                                 //vt_PrecioFinal = q.Subtotal,
-                                 //vt_por_iva = q.Porcentaje,
-                                 //vt_Precio = q.Subtotal,
-                                 //vt_Subtotal = q.Subtotal,
-                                 //vt_iva = q.ValorIVA,
-                                 //vt_total = q.Total,
+                                 vt_PrecioFinal = q.Subtotal??0,
+                                 vt_por_iva = q.Porcentaje??0,
+                                 vt_Precio = q.Subtotal??0,
+                                 vt_Subtotal = q.Subtotal??0,
+                                 vt_iva = q.ValorIVA??0,
+                                 vt_total = q.Total??0,
                                  IdCod_Impuesto_Iva = q.IdCod_Impuesto_Iva,
                                  IdMatricula = q.IdMatricula,
-                                 IdPeriodo=q.IdPeriodo,
-                                 IdRubro = q.IdRubro
+                                 aca_IdPeriodo = q.IdPeriodo,
+                                 aca_IdRubro = q.IdRubro,
+                                 AplicaProntoPago = q.AplicaProntoPago,
+                                 IdAnio = q.IdAnio
+                                 
                              }).ToList();
                 }
                 Lista.ForEach(V =>
                 {
-                    V.IdString = Convert.ToInt32(V.IdEmpresa).ToString("00") + Convert.ToInt32(V.IdMatricula).ToString("000000") + Convert.ToInt32(V.IdPeriodo).ToString("00") + Convert.ToInt32(V.IdRubro).ToString("00");
+                    V.IdString = Convert.ToInt32(V.IdEmpresa).ToString("00") + Convert.ToInt32(V.IdMatricula).ToString("000000") + Convert.ToInt32(V.aca_IdPeriodo).ToString("00") + Convert.ToInt32(V.aca_IdRubro).ToString("00");
                 });
                 return Lista;
             }

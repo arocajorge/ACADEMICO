@@ -211,7 +211,7 @@ namespace Core.Data.General
                         CodCatalogoCONADIS = info.CodCatalogoCONADIS,
                         NumeroCarnetConadis = info.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = info.PorcentajeDiscapacidad,
-                        IdProfesion = (info.IdProfesion == 0 ? null : info.IdProfesion)
+                        IdProfesion = ((info.IdProfesion == 0 || info.IdProfesion== null) ? null : info.IdProfesion)
                     };
                     Context.tb_persona.Add(Entity);
                     Context.SaveChanges();
@@ -332,9 +332,9 @@ namespace Core.Data.General
                         }
                         break;
                     case "ALUMNO":
-                        EntitiesAcademico context_f = new EntitiesAcademico();
-                        var lstf = context_f.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true && (q.IdAlumno.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdAlumno).Skip(skip).Take(take);
-                        foreach (var q in lstf)
+                        EntitiesAcademico context_a = new EntitiesAcademico();
+                        var lst_al = context_a.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true && (q.IdAlumno.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdAlumno).Skip(skip).Take(take);
+                        foreach (var q in lst_al)
                         {
                             Lista.Add(new tb_persona_Info
                             {
@@ -344,7 +344,7 @@ namespace Core.Data.General
                                 IdEntidad = q.IdAlumno
                             });
                         }
-                        context_f.Dispose();
+                        context_a.Dispose();
                         break;
                     case "TUTOR":
                         EntitiesAcademico context_t = new EntitiesAcademico();
@@ -375,6 +375,22 @@ namespace Core.Data.General
                             });
                         }
                         context_i.Dispose();
+                        break;
+                    case "CLIENTE":
+                        EntitiesFacturacion context_f = new EntitiesFacturacion();
+                        var lstcli = context_f.vwfa_cliente_consulta.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == "A" && (q.IdCliente.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdCliente).Skip(skip).Take(take);
+                        foreach (var q in lstcli)
+                        {
+                            Lista.Add(new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdCliente,
+                                CodPersona = q.Descripcion_tip_cliente
+                            });
+                        }
+                        context_f.Dispose();
                         break;
                 }
 

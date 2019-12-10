@@ -18,6 +18,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Web.Areas.Academico.Controllers;
 using Core.Bus.Academico;
+using Core.Data.Academico;
 
 namespace Core.Web.Areas.Facturacion.Controllers
 {
@@ -56,6 +57,10 @@ namespace Core.Web.Areas.Facturacion.Controllers
         aca_Familia_Bus bus_familia = new aca_Familia_Bus();
         fa_factura_det_Bus bus_factura_det = new fa_factura_det_Bus();
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+        aca_AnioLectivo_Rubro_Bus bus_aca_anio_rubro = new aca_AnioLectivo_Rubro_Bus();
+        aca_Rubro_Bus bus_rubro = new aca_Rubro_Bus();
+        aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
+        aca_Plantilla_Bus bus_plantilla = new aca_Plantilla_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
         #region Index
@@ -100,6 +105,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
+            var lista = bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
             return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
         }
         public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
@@ -537,7 +543,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         {
             bool resultado = true;
             var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa),0);
-            Lista_RubrosPorFacturar.set_list(bus_factura_det.get_list_rubros_x_facturar(Convert.ToInt32(SessionFixed.IdEmpresa), IdSucursal, info_anio.IdAnio, IdAlumno), IdTransaccionSession);
+            Lista_RubrosPorFacturar.set_list(bus_factura_det.get_list_rubros_x_facturar(Convert.ToInt32(SessionFixed.IdEmpresa), IdAlumno), IdTransaccionSession);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
@@ -563,8 +569,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
         {
             decimal IdCliente = 0;
             var info_familia = bus_familia.GetInfo_Representante(IdEmpresa, IdAlumno, cl_enumeradores.eTipoRepresentante.ECON.ToString());
-            var info_cliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, info_familia.pe_cedulaRuc);
-            IdCliente = info_cliente.IdCliente;
+            var info_cliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, (info_familia==null ? "" : info_familia.pe_cedulaRuc));
+            IdCliente = (info_cliente==null ? 0 :info_cliente.IdCliente);
 
             return Json(IdCliente, JsonRequestBehavior.AllowGet);
         }
@@ -849,13 +855,46 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 string[] array = IDs.Split(',');
                 var lst = Lista_RubrosPorFacturar.get_list(IdTransaccionSession);
                 var lst_det_fact = List_det.get_list(IdTransaccionSession);
+                decimal Total = 0;
+                decimal TotalProntoPago = 0;
+                decimal ValorDescuento = 0;
+                decimal ValorRubro = 0;
                 foreach (var item in array)
                 {
                     var rubro_x_fact = lst.Where(q => q.IdString == item).FirstOrDefault();
                     if (rubro_x_fact != null)
-                        if (lst_det_fact.Where(q => q.IdEmpresa == rubro_x_fact.IdEmpresa && q.IdMatricula == rubro_x_fact.IdMatricula && q.IdPeriodo == rubro_x_fact.IdPeriodo && q.IdRubro == rubro_x_fact.IdRubro).Count() == 0)
+                        if (lst_det_fact.Where(q => q.IdEmpresa == rubro_x_fact.IdEmpresa && q.IdMatricula == rubro_x_fact.IdMatricula && q.aca_IdPeriodo == rubro_x_fact.aca_IdPeriodo && q.aca_IdRubro == rubro_x_fact.aca_IdRubro).Count() == 0)
                         {
                             rubro_x_fact.Secuencia = lst_det_fact.Count == 0 ? 1 : lst_det_fact.Max(q => q.Secuencia) + 1;
+
+                            if (rubro_x_fact.AplicaProntoPago ==true)
+                            {
+                                var info_matricula = bus_matricula.GetInfo(rubro_x_fact.IdEmpresa, rubro_x_fact.IdMatricula);
+                                var info_plantilla = bus_plantilla.GetInfo(rubro_x_fact.IdEmpresa, info_matricula.IdAnio, info_matricula.IdPlantilla);
+
+                                if (info_plantilla.TipoDescuento == "%")
+                                {
+                                    ValorDescuento = ( Convert.ToDecimal(rubro_x_fact.vt_total) * (info_plantilla.Valor / 100));
+                                    ValorRubro = Convert.ToDecimal(rubro_x_fact.vt_total) - ValorDescuento;
+                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                                }
+                                else
+                                {
+                                    ValorRubro = (Convert.ToDecimal(rubro_x_fact.vt_total) - info_plantilla.Valor);
+                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                                }
+
+                                Total = Total + Math.Round((Convert.ToDecimal(rubro_x_fact.vt_total)), 2, MidpointRounding.AwayFromZero);
+                            }
+                            else
+                            {
+                                Total = Total + Math.Round((Convert.ToDecimal(rubro_x_fact.vt_total)), 2, MidpointRounding.AwayFromZero);
+                                TotalProntoPago = TotalProntoPago + Math.Round((Convert.ToDecimal(rubro_x_fact.vt_total)), 2, MidpointRounding.AwayFromZero);
+                            }
+
+                            rubro_x_fact.DescuentoProntoPago = ValorDescuento;
+                            rubro_x_fact.TotalProntoPago = TotalProntoPago;
+
                             lst_det_fact.Add(rubro_x_fact);
                         }
                 }
