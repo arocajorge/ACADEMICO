@@ -97,7 +97,8 @@ namespace Core.Data.Facturacion
                                  aca_IdPeriodo = q.IdPeriodo,
                                  aca_IdRubro = q.IdRubro,
                                  AplicaProntoPago = q.AplicaProntoPago,
-                                 IdAnio = q.IdAnio
+                                 IdAnio = q.IdAnio,
+                                 EnMatricula = q.EnMatricula
                                  
                              }).ToList();
                 }

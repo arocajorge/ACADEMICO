@@ -312,7 +312,8 @@ namespace Core.Data.Academico
                                 IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
                                 Porcentaje = item.Porcentaje,
                                 ValorIVA = item.ValorIVA,
-                                Total = item.Total
+                                Total = item.Total,
+                                EnMatricula = item.EnMatricula
                             };
                             Context.aca_Matricula_Rubro.Add(Entity_Det);
                         }

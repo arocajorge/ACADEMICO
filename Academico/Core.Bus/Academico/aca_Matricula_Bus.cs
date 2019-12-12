@@ -63,7 +63,15 @@ namespace Core.Bus.Academico
         {
             try
             {
-                return odata.guardarDB(info);
+                //return odata.guardarDB(info);
+
+                if (odata.guardarDB(info))
+                {
+                    var lst_rubros_x_cobrar = info.lst_MatriculaRubro.Where(q=>q.seleccionado==true);
+  
+                }
+
+                return true;
             }
             catch (Exception)
             {

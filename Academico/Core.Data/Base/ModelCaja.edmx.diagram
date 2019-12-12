@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f69f78a13a5a43f0a1148c29982e846c" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="ModelCaja.caj_Caja_Movimiento" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelCaja.caj_Caja_Movimiento_det" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <AssociationConnector Association="ModelCaja.FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ModelCaja.caj_Caja" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="ModelCaja.caj_catalogo" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelCaja.caj_catalogo_tipo" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ModelCaja.caj_parametro" Width="1.5" PointX="3.375" PointY="6.75" />
+        <AssociationConnector Association="ModelCaja.FK_caj_Caja_Movimiento_caj_Caja" />
+        <EntityTypeShape EntityType="ModelCaja.caj_Caja_x_seg_usuario" Width="1.5" PointX="3" PointY="10.25" />
+        <AssociationConnector Association="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja" />
+        <EntityTypeShape EntityType="ModelCaja.caj_Caja_Movimiento_Tipo" Width="1.5" PointX="0.75" PointY="15.25" />
+        <EntityTypeShape EntityType="ModelCaja.cp_conciliacion_Caja_det_x_ValeCaja" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="ModelCaja.FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo" />
+        <AssociationConnector Association="ModelCaja.FK_cp_conciliacion_Caja_det_x_ValeCaja_caj_Caja_Movimiento" />
+        <EntityTypeShape EntityType="ModelCaja.cp_conciliacion_Caja_det_Ing_Caja" Width="1.5" PointX="3" PointY="13" />
+        <EntityTypeShape EntityType="ModelCaja.vwcaj_Caja_Movimiento" Width="1.5" PointX="5.375" PointY="6.75" />
+        <AssociationConnector Association="ModelCaja.FK_cp_conciliacion_Caja_det_Ing_Caja_caj_Caja_Movimiento" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

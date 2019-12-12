@@ -121,7 +121,8 @@ namespace Core.Data.SeguridadAcceso
                         CambiarContraseniaSgtSesion = Entity.CambiarContraseniaSgtSesion == null ? false : Convert.ToBoolean(Entity.CambiarContraseniaSgtSesion),
                         IdMenu = Entity.IdMenu,
                         IPImpresora = Entity.IPImpresora,
-                        IPMaquina = Entity.IPUsuario
+                        IPMaquina = Entity.IPUsuario,
+                        EsContador = Entity.EsContador
                     };
                 }
 

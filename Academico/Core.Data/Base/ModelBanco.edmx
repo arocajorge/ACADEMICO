@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBERP_LICEOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
+          <Key>
+            <PropertyRef Name="mcj_IdEmpresa" />
+            <PropertyRef Name="mcj_IdCbteCble" />
+            <PropertyRef Name="mcj_IdTipocbte" />
+            <PropertyRef Name="mba_IdEmpresa" />
+            <PropertyRef Name="mba_IdCbteCble" />
+            <PropertyRef Name="mba_IdTipocbte" />
+            <PropertyRef Name="mcj_Secuencia" />
+          </Key>
+          <Property Name="mcj_IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="mcj_IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="mcj_IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="mba_IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="mba_IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="mba_IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="mcj_Secuencia" Type="int" Nullable="false" />
+          <Property Name="Observacion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="cp_conciliacion_Caja_det_Ing_Caja">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa_movcaj" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble_movcaj" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipocbte_movcaj" Type="int" Nullable="false" />
+          <Property Name="valor_aplicado" Type="float" Nullable="false" />
+          <Property Name="valor_disponible" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DBERP_LICEOModelStoreContainer">
+          <EntitySet Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntityType="Self.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cp_conciliacion_Caja_det_Ing_Caja" EntityType="Self.cp_conciliacion_Caja_det_Ing_Caja" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBERP_LICEOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cp_conciliacion_Caja_det_Ing_Caja">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_movcaj" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_movcaj" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipocbte_movcaj" Type="Int32" Nullable="false" />
+          <Property Name="valor_aplicado" Type="Double" Nullable="false" />
+          <Property Name="valor_disponible" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EntitiesBanco" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cp_conciliacion_Caja_det_Ing_Caja" EntityType="Self.cp_conciliacion_Caja_det_Ing_Caja" />
+          <EntitySet Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntityType="DBERP_LICEOModel.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" />
+        </EntityContainer>
+        <EntityType Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
+          <Key>
+            <PropertyRef Name="mcj_IdEmpresa" />
+            <PropertyRef Name="mcj_IdCbteCble" />
+            <PropertyRef Name="mcj_IdTipocbte" />
+            <PropertyRef Name="mba_IdEmpresa" />
+            <PropertyRef Name="mba_IdCbteCble" />
+            <PropertyRef Name="mba_IdTipocbte" />
+            <PropertyRef Name="mcj_Secuencia" />
+          </Key>
+          <Property Name="mcj_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="mcj_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="mcj_IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="mba_IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="mba_IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="mba_IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="mcj_Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBERP_LICEOModelStoreContainer" CdmEntityContainer="EntitiesBanco">
+          <EntitySetMapping Name="cp_conciliacion_Caja_det_Ing_Caja">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.cp_conciliacion_Caja_det_Ing_Caja">
+              <MappingFragment StoreEntitySet="cp_conciliacion_Caja_det_Ing_Caja">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdEmpresa_movcaj" ColumnName="IdEmpresa_movcaj" />
+                <ScalarProperty Name="IdCbteCble_movcaj" ColumnName="IdCbteCble_movcaj" />
+                <ScalarProperty Name="IdTipocbte_movcaj" ColumnName="IdTipocbte_movcaj" />
+                <ScalarProperty Name="valor_aplicado" ColumnName="valor_aplicado" />
+                <ScalarProperty Name="valor_disponible" ColumnName="valor_disponible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
+              <MappingFragment StoreEntitySet="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="mcj_Secuencia" ColumnName="mcj_Secuencia" />
+                <ScalarProperty Name="mba_IdTipocbte" ColumnName="mba_IdTipocbte" />
+                <ScalarProperty Name="mba_IdCbteCble" ColumnName="mba_IdCbteCble" />
+                <ScalarProperty Name="mba_IdEmpresa" ColumnName="mba_IdEmpresa" />
+                <ScalarProperty Name="mcj_IdTipocbte" ColumnName="mcj_IdTipocbte" />
+                <ScalarProperty Name="mcj_IdCbteCble" ColumnName="mcj_IdCbteCble" />
+                <ScalarProperty Name="mcj_IdEmpresa" ColumnName="mcj_IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

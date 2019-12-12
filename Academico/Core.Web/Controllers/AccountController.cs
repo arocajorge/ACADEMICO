@@ -16,6 +16,7 @@ using Core.Web.Helps;
 using Core.Bus.General;
 using Core.Web.Areas.SeguridadAcceso.Controllers;
 using Core.Web.Areas.Academico.Controllers;
+using Core.Bus.Caja;
 
 namespace Core.Web.Controllers
 {
@@ -29,7 +30,7 @@ namespace Core.Web.Controllers
         aca_Menu_Bus bus_menu = new aca_Menu_Bus();
         aca_Menu_x_seg_usuario_Bus bus_usuario_x_sede = new aca_Menu_x_seg_usuario_Bus();
         seg_usuario_x_aca_Sede_Bus bus_MenuPorSede = new seg_usuario_x_aca_Sede_Bus();
-
+        caj_Caja_Bus bus_caja = new caj_Caja_Bus();
         #endregion
         [AllowAnonymous]
         public ActionResult Login()
@@ -80,12 +81,14 @@ namespace Core.Web.Controllers
             Session["IdEmpresa"] = model.IdEmpresa;
             Session["nom_empresa"] = info_empresa.em_nombre;
             Session["IdSede"] = model.IdSede;
+            Session["IdSucursal"] = model.IdSucursal= bus_sede.GetInfo(model.IdEmpresa, model.IdSede).IdSucursal;
             Session["IdNivel"] = model.IdNivel;
             Session["em_direccion"] = info_empresa.em_direccion;
             SessionFixed.NomEmpresa = info_empresa.em_nombre;
             //SessionFixed.Ruc = info_empresa.em_ruc;
             SessionFixed.IdEmpresa = model.IdEmpresa.ToString();
             SessionFixed.IdSede = model.IdSede.ToString();
+            SessionFixed.IdSucursal = model.IdSucursal.ToString();
             SessionFixed.IdNivel = model.IdNivel.ToString();
             //SessionFixed.em_direccion = info_empresa.em_direccion;
             SessionFixed.IdTransaccionSession = string.IsNullOrEmpty(SessionFixed.IdTransaccionSession) ? "1" : (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
@@ -95,8 +98,9 @@ namespace Core.Web.Controllers
             if (usuario != null)
             {
                 SessionFixed.IdUsuario = usuario.IdUsuario;
-                //SessionFixed.EsSuperAdmin = usuario.es_super_admin.ToString();
-                //SessionFixed.IdCaja = bus_caja.GetIdCajaPorUsuario(model.IdEmpresa, SessionFixed.IdUsuario).ToString();
+                SessionFixed.EsContador = Convert.ToString(usuario.EsContador);
+                SessionFixed.EsSuperAdmin = usuario.es_super_admin.ToString();
+                SessionFixed.IdCaja = bus_caja.GetIdCajaPorUsuario(model.IdEmpresa, SessionFixed.IdUsuario).ToString();
                 var lista = bus_usuario_x_sede.get_list(model.IdEmpresa, model.IdSede, usuario.IdUsuario, false);
                 seg_Menu_x_Sede_x_Usuario_Lista.set_list(bus_usuario_x_sede.get_list(model.IdEmpresa, model.IdSede, usuario.IdUsuario, false));
                 if (usuario.IdMenu != null)

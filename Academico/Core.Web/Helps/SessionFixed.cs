@@ -22,6 +22,9 @@ namespace Core.Web.Helps
         string IdEntidad { get; set; }
         string EsSuperAdmin { get; set; }
         string IdProducto_padre_dist { get; set; }
+        string Idtipo_cliente { get; set; }
+        string EsContador { get; set; }
+        string IdCaja { get; set; }
     }
     public static class SessionFixed
     {
@@ -113,6 +116,24 @@ namespace Core.Web.Helps
             set { _sessionValueProvider.IdProducto_padre_dist = value; }
 
         }
+
+        public static string Idtipo_cliente
+        {
+            get { return _sessionValueProvider.Idtipo_cliente; }
+            set { _sessionValueProvider.Idtipo_cliente = value; }
+        }
+
+        public static string EsContador
+        {
+            get { return _sessionValueProvider.EsContador; }
+            set { _sessionValueProvider.EsContador = value; }
+        }
+
+        public static string IdCaja
+        {
+            get { return _sessionValueProvider.IdCaja; }
+            set { _sessionValueProvider.IdCaja = value; }
+        }
     }
     public class WebSessionValueProvider : ISessionValueProvider
     {
@@ -131,6 +152,9 @@ namespace Core.Web.Helps
         private const string _IdNivelDescuento = "Fx_IdNivelDescuento";
         private const string _EsSuperAdmin = "Fx_EsSuperAdmin";
         private const string _IdProducto_padre_dist = "Fx_IdProducto_padre_dist";
+        private const string _Idtipo_cliente = "Fx_Idtipo_cliente";
+        private const string _EsContador = "Fx_EsContador";
+        private const string _IdCaja = "Fx_IdCaja";
 
         public string IdEmpresa
         {
@@ -208,6 +232,23 @@ namespace Core.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdProducto_padre_dist]; }
             set { HttpContext.Current.Session[_IdProducto_padre_dist] = value; }
+        }
+
+        public string Idtipo_cliente
+        {
+            get { return (string)HttpContext.Current.Session[_Idtipo_cliente]; }
+            set { HttpContext.Current.Session[_Idtipo_cliente] = value; }
+        }
+
+        public string EsContador
+        {
+            get { return (string)HttpContext.Current.Session[_EsContador]; }
+            set { HttpContext.Current.Session[_EsContador] = value; }
+        }
+        public string IdCaja
+        {
+            get { return (string)HttpContext.Current.Session[_IdCaja]; }
+            set { HttpContext.Current.Session[_IdCaja] = value; }
         }
     }
 }

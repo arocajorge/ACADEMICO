@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3207e5253d0d4f0cb47e36568b9c2534" Name="Diagram1" ZoomLevel="51" >
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_Catalogo" Width="1.5" PointX="12" PointY="11" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_CatalogoTipo" Width="1.5" PointX="9.75" PointY="11.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro" Width="1.5" PointX="5.25" PointY="3.25" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro_det" Width="1.5" PointX="10.5" PointY="4.875" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro_det_x_ct_cbtecble_det" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro_tipo" Width="1.5" PointX="3" PointY="6.125" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro_tipo_motivo" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro_tipo_Param_conta_x_sucursal" Width="1.5" PointX="5.25" PointY="12.125" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro_x_caj_Caja_Movimiento" Width="1.5" PointX="7.5" PointY="13.25" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro_x_ct_cbtecble" Width="1.5" PointX="7.5" PointY="4.375" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_Parametro" Width="1.5" PointX="7.75" PointY="0.75" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_Catalogo_cxc_CatalogoTipo" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_cxc_cobro_tipo" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_det_cxc_cobro" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_x_caj_Caja_Movimiento_cxc_cobro" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_x_ct_cbtecble_cxc_cobro" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_det_cxc_cobro_tipo" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_tipo_cxc_cobro_tipo_motivo" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_tipo_Param_conta_x_sucursal_cxc_cobro_tipo" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro_det" Width="1.5" PointX="2.75" PointY="12.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro_det_retencion" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro_det_valor_retenciones" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro_para_retencion" Width="1.5" PointX="13.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro1" Width="1.5" PointX="10.375" PointY="15.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro_det1" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cartera_x_cobrar" Width="1.5" PointX="14.375" PointY="10.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

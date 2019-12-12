@@ -1035,6 +1035,34 @@ namespace Core.Data.Inventario
                                     .Take(take)
                                     .ToList();
                             break;
+                        case cl_enumeradores.eModulo.ACA:
+                            Lista = (from p in Context.in_Producto
+                                     join c in Context.in_categorias
+                                     on new { p.IdEmpresa, p.IdCategoria } equals new { c.IdEmpresa, c.IdCategoria }
+                                     join pr in Context.in_presentacion
+                                     on new { p.IdEmpresa, p.IdPresentacion } equals new { pr.IdEmpresa, pr.IdPresentacion }
+                                     where
+                                      p.IdEmpresa == IdEmpresa
+                                      && c.IdEmpresa == IdEmpresa
+                                      && pr.IdEmpresa == IdEmpresa
+                                      && p.Estado == "A"
+                                      && (p.IdProducto.ToString() + " " + p.pr_descripcion + " " + p.lote_num_lote).Contains(filter)
+                                     select new in_Producto_Info
+                                     {
+                                         IdEmpresa = p.IdEmpresa,
+                                         IdProducto = p.IdProducto,
+                                         pr_descripcion = p.pr_descripcion,
+                                         lote_num_lote = p.lote_num_lote,
+                                         lote_fecha_vcto = p.lote_fecha_vcto,
+                                         nom_categoria = c.ca_Categoria,
+                                         nom_presentacion = pr.nom_presentacion,
+                                         precio_1 = p.precio_1 ?? 0
+                                     })
+                                    .OrderBy(p => p.IdProducto)
+                                    .Skip(skip)
+                                    .Take(take)
+                                    .ToList();
+                            break;
                     }
                 }
                 Lista = get_list_nombre_combo(Lista);

@@ -51,6 +51,7 @@ namespace Core.Info.Facturacion
         public int IdAnio { get; set; }
         public decimal DescuentoProntoPago { get; set; }
         public decimal TotalProntoPago { get; set; }
+        public bool EnMatricula { get; set; }
         #endregion
 
     }

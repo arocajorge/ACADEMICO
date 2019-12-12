@@ -268,7 +268,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
             return true;
         }
         #endregion
-        #region Combo bajo demanda
+        #region Combo bajo demanda Alumno
         public ActionResult Cmb_Alumno()
         {
             decimal model = new decimal();
@@ -542,7 +542,6 @@ namespace Core.Web.Areas.Facturacion.Controllers
         public JsonResult GetRubrosPorFacturar(int IdSucursal = 0, decimal IdAlumno = 0, decimal IdTransaccionSession = 0)
         {
             bool resultado = true;
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa),0);
             Lista_RubrosPorFacturar.set_list(bus_factura_det.get_list_rubros_x_facturar(Convert.ToInt32(SessionFixed.IdEmpresa), IdAlumno), IdTransaccionSession);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);

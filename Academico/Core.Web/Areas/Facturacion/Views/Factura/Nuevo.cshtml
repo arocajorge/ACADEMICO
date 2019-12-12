@@ -188,7 +188,7 @@
         });
         $("#ModalPrecios").modal("hide");
     }
-   
+
     function cargar_fecha_vencimiento() {
         var vida = Number($("#vt_plazo").val());
         var date = new Date(moment(vt_fecha.GetValue(), "DD/MM/YYYY").add(vida, 'days'));
@@ -235,20 +235,20 @@
                 $("#IdVendedor").val(data.IdVendedor);
                 $("#vt_tipo_venta").val(data.IdTipoCredito);
 
-                get_info_termino_pago();  
-                
+                get_info_termino_pago();
+
             },
             error: function (error) {
                 alert(error);
             }
 
-        });        
+        });
     }
 
     function cargar_contactos() {
         var codigo = IdCliente.GetValue();
 
-        if (codigo > 0) 
+        if (codigo > 0)
         {
             var datos = {
                 IdCliente: codigo
@@ -404,8 +404,6 @@
             $("#RubrosXFacturarModal").modal("hide");
     }
 
-
-
     function ValidarGrid() {
         var datos = {
             IdTransaccionSession: $("#IdTransaccionSession").val()
@@ -504,8 +502,9 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 IdCliente.SetValue(data);
-                get_info_cliente(); 
-                ValidarCliente(); 
+                
+                get_info_cliente();
+                ValidarCliente();
                 cargar_contactos();
             },
             error: function (error) {

@@ -8,6 +8,12 @@ namespace Core.Info.Helps
 {
     public class cl_enumeradores
     {
+        public enum eEstadoAprobacionOrdenPago
+        {
+            APRO,
+            PENDI,
+            REPRO
+        }
         public enum eTipoDocumento
         {
             COTIZ,
@@ -89,7 +95,8 @@ namespace Core.Info.Helps
             PROVEE,
             ALUMNO,
             TUTOR,
-            INSPECTOR
+            INSPECTOR,
+            ALUMNO_MATRICULA
         }
 
         public enum eTipoCatalogoAcademico
@@ -157,6 +164,12 @@ namespace Core.Info.Helps
             FECH_CONTA = 4,
             TIPO_CONTA_CTA = 6,
             ING_EGR = 8
+        }
+
+        public enum eTipoCobroTomaCuentaDe
+        {
+            TIP_COBRO,
+            CAJA
         }
     }
 }

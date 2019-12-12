@@ -211,6 +211,48 @@
     <Compile Include="Base\aca_SocioEconomico.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\caj_Caja.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\caj_Caja_Movimiento.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\caj_Caja_Movimiento_det.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\caj_Caja_Movimiento_Tipo.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\caj_Caja_x_seg_usuario.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\caj_catalogo.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\caj_catalogo_tipo.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\caj_parametro.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cp_conciliacion_Caja_det_Ing_Caja.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cp_conciliacion_Caja_det_x_ValeCaja.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cp_orden_pago.cs">
+      <DependentUpon>ModelCuentasPorPagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cp_orden_pago_cancelaciones.cs">
+      <DependentUpon>ModelCuentasPorPagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cp_orden_pago_det.cs">
+      <DependentUpon>ModelCuentasPorPagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\ct_anio_fiscal.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
@@ -249,6 +291,39 @@
     </Compile>
     <Compile Include="Base\ct_plancta_nivel.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_Catalogo.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_CatalogoTipo.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_cobro.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_cobro_det.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_cobro_det_x_ct_cbtecble_det.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_cobro_tipo.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_cobro_tipo_motivo.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_cobro_tipo_Param_conta_x_sucursal.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_cobro_x_caj_Caja_Movimiento.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_cobro_x_ct_cbtecble.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_Parametro.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\fa_catalogo.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
@@ -314,6 +389,9 @@
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\fa_TipoNota.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\fa_TipoNota_x_Empresa_x_Sucursal.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\fa_Vendedor.cs">
@@ -388,6 +466,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelAcademico.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Base\ModelBanco.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelBanco.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelBanco.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelBanco.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelBanco.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelCaja.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCaja.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelCaja.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelCaja.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCaja.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Base\ModelContabilidad.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -402,6 +510,36 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelContabilidad.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelCuentasPorCobrar.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCuentasPorCobrar.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelCuentasPorCobrar.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelCuentasPorCobrar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCuentasPorCobrar.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelCuentasPorPagar.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCuentasPorPagar.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelCuentasPorPagar.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCuentasPorPagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ModelCuentasPorPagar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelCuentasPorPagar.edmx</DependentUpon>
     </Compile>
     <Compile Include="Base\ModelFacturacion.Context.cs">
       <AutoGen>True</AutoGen>
@@ -486,6 +624,12 @@
     </Compile>
     <Compile Include="Base\seg_Usuario_x_Empresa.cs">
       <DependentUpon>ModelSeguridadAcceso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\spcp_Get_Data_orden_pago_con_cancelacion_data_Result.cs">
+      <DependentUpon>ModelCuentasPorPagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\spcp_Get_Data_orden_pago_con_cancelacion_x_pago_Result.cs">
+      <DependentUpon>ModelCuentasPorPagar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\tbl_TransaccionesAutorizadas.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
@@ -619,6 +763,15 @@
     <Compile Include="Base\vwaca_Profesor.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwcaj_Caja_Movimiento.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcp_orden_pago.cs">
+      <DependentUpon>ModelCuentasPorPagar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcp_orden_pago_det.cs">
+      <DependentUpon>ModelCuentasPorPagar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwct_anio_fiscal_x_cuenta_utilidad.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
@@ -640,6 +793,30 @@
     <Compile Include="Base\vwct_periodo.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwcxc_cartera_x_cobrar.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcxc_cobro.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcxc_cobro1.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcxc_cobro_det.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcxc_cobro_det1.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcxc_cobro_det_retencion.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcxc_cobro_det_valor_retenciones.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcxc_cobro_para_retencion.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwfa_cliente_consulta.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -653,6 +830,15 @@
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwfa_factura_sin_automatico.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwfa_notaCreDeb.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwfa_notaCreDeb_det.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwfa_notaCreDeb_x_fa_factura_NotaDeb.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwfa_PuntoVta.cs">
@@ -739,6 +925,12 @@
     <Compile Include="Base\vwtb_provincia.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Caja\caj_Caja_Data.cs" />
+    <Compile Include="Caja\caj_Caja_Movimiento_Data.cs" />
+    <Compile Include="Caja\caj_Caja_Movimiento_det_Data.cs" />
+    <Compile Include="Caja\caj_Caja_Movimiento_Tipo_Data.cs" />
+    <Compile Include="Caja\caj_Caja_x_seg_usuario_Data.cs" />
+    <Compile Include="Caja\caj_parametro_Data.cs" />
     <Compile Include="Contabilidad\ct_anio_fiscal_Data.cs" />
     <Compile Include="Contabilidad\ct_anio_fiscal_x_cuenta_utilidad_Data.cs" />
     <Compile Include="Contabilidad\ct_anio_fiscal_x_tb_sucursal_Data.cs" />
@@ -747,6 +939,17 @@
     <Compile Include="Contabilidad\ct_grupocble_Data.cs" />
     <Compile Include="Contabilidad\ct_periodo_Data.cs" />
     <Compile Include="Contabilidad\ct_plancta_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_CatalogoTipo_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Catalogo_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_det_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Parametro_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_cancelaciones_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_Data.cs" />
+    <Compile Include="CuentasPorPagar\cp_orden_pago_det_Data.cs" />
     <Compile Include="Facturacion\fa_catalogo_Data.cs" />
     <Compile Include="Facturacion\fa_catalogo_tipo_Data.cs" />
     <Compile Include="Facturacion\fa_cliente_contactos_Data.cs" />
@@ -757,10 +960,15 @@
     <Compile Include="Facturacion\fa_factura_det_Data.cs" />
     <Compile Include="Facturacion\fa_formaPago_Data.cs" />
     <Compile Include="Facturacion\fa_NivelDescuento_Data.cs" />
+    <Compile Include="Facturacion\fa_notaCreDeb_Data.cs" />
+    <Compile Include="Facturacion\fa_notaCreDeb_det_Data.cs" />
+    <Compile Include="Facturacion\fa_notaCreDeb_x_fa_factura_NotaDeb_Data.cs" />
     <Compile Include="Facturacion\fa_parametro_Data.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_Data.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Data.cs" />
     <Compile Include="Facturacion\fa_TerminoPago_Distribucion_Data.cs" />
+    <Compile Include="Facturacion\fa_TipoNota_Data.cs" />
+    <Compile Include="Facturacion\fa_TipoNota_x_Empresa_x_Sucursal_Data.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Data.cs" />
     <Compile Include="General\tbl_TransaccionesAutorizadas_Data.cs" />
     <Compile Include="General\tb_bodega_Data.cs" />
@@ -834,8 +1042,36 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelContabilidad.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Base\ModelCaja.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelCaja.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Base\ModelBanco.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelBanco.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Base\ModelBanco.edmx.diagram">
+      <DependentUpon>ModelBanco.edmx</DependentUpon>
+    </None>
+    <None Include="Base\ModelCaja.edmx.diagram">
+      <DependentUpon>ModelCaja.edmx</DependentUpon>
+    </None>
     <None Include="Base\ModelContabilidad.edmx.diagram">
       <DependentUpon>ModelContabilidad.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Base\ModelCuentasPorCobrar.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelCuentasPorCobrar.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Base\ModelCuentasPorCobrar.edmx.diagram">
+      <DependentUpon>ModelCuentasPorCobrar.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Base\ModelCuentasPorPagar.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelCuentasPorPagar.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Base\ModelCuentasPorPagar.edmx.diagram">
+      <DependentUpon>ModelCuentasPorPagar.edmx</DependentUpon>
     </None>
     <None Include="Base\ModelFacturacion.edmx.diagram">
       <DependentUpon>ModelFacturacion.edmx</DependentUpon>
@@ -873,6 +1109,26 @@
       <DependentUpon>ModelAcademico.edmx</DependentUpon>
       <LastGenOutput>ModelAcademico.cs</LastGenOutput>
     </Content>
+    <Content Include="Base\ModelBanco.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelBanco.edmx</DependentUpon>
+      <LastGenOutput>ModelBanco.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelBanco.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelBanco.edmx</DependentUpon>
+      <LastGenOutput>ModelBanco.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelCaja.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelCaja.edmx</DependentUpon>
+      <LastGenOutput>ModelCaja.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelCaja.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelCaja.edmx</DependentUpon>
+      <LastGenOutput>ModelCaja.cs</LastGenOutput>
+    </Content>
     <Content Include="Base\ModelContabilidad.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelContabilidad.edmx</DependentUpon>
@@ -882,6 +1138,26 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelContabilidad.edmx</DependentUpon>
       <LastGenOutput>ModelContabilidad.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelCuentasPorCobrar.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelCuentasPorCobrar.edmx</DependentUpon>
+      <LastGenOutput>ModelCuentasPorCobrar.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelCuentasPorCobrar.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelCuentasPorCobrar.edmx</DependentUpon>
+      <LastGenOutput>ModelCuentasPorCobrar.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelCuentasPorPagar.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelCuentasPorPagar.edmx</DependentUpon>
+      <LastGenOutput>ModelCuentasPorPagar.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Base\ModelCuentasPorPagar.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelCuentasPorPagar.edmx</DependentUpon>
+      <LastGenOutput>ModelCuentasPorPagar.cs</LastGenOutput>
     </Content>
     <Content Include="Base\ModelFacturacion.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

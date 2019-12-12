@@ -16,6 +16,7 @@ namespace Core.Info.Academico
         public decimal IdAlumno { get; set; }
         [Required(ErrorMessage = "El campo fecha es obligatorio")]
         public System.DateTime Fecha { get; set; }
+        [Required(ErrorMessage = "El campo observación es obligatorio")]
         public string Observacion { get; set; }
         public int IdCatalogoESTALU { get; set; }
         public string IdUsuarioCreacion { get; set; }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e61c4376d5dd442893feef00de2fd6a8" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_pago_cancelaciones" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_pago" Width="1.5" PointX="0.75" PointY="16.875" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_pago_det" Width="1.5" PointX="0.75" PointY="11.5" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_orden_pago" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_orden_pago_det" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_det_cp_orden_pago" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

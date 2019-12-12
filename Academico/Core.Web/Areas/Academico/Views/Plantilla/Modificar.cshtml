@@ -55,7 +55,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdEmpresa">Año Lectivo</label>
-                    @Html.DropDownListFor(q => q.IdAnio, new SelectList(ViewBag.lst_anio, "IdAnio", "Descripcion"), new { @class = "form-control", @id = "IdAnio", @disabled = "disabled" })
+                    @Html.Partial("_ComboBoxPartial_Anio", Model)
                     @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                 </div>
             </div>

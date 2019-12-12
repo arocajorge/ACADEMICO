@@ -25,9 +25,16 @@ namespace Core.Info.SeguridadAcceso
         public Nullable<int> IdMenu { get; set; }
         public string IPMaquina { get; set; }
         public string IPImpresora { get; set; }
+        public Nullable<bool> EsContador { get; set; }
 
         #region Campos que no existen en la tabla
         public List<seg_usuario_x_aca_Sede_Info> lst_usuario_sede { get; set; }
         #endregion
+
+        public Nullable<System.DateTime> Fecha_Transaccion { get; set; }
+        public string IdUsuarioUltModi { get; set; }
+        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
+        public string IdUsuarioUltAnu { get; set; }
+        public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
     }
 }
