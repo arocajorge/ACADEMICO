@@ -6,7 +6,6 @@ using Core.Info.General;
 using Core.Info.Helps;
 using Core.Web.Areas.General.Controllers;
 using Core.Web.Helps;
-using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ using System.Web.Mvc;
 
 namespace Core.Web.Areas.Facturacion.Controllers
 {
-    public class ClientesController : Controller
+    public class ClienteController : Controller
     {
         #region Variables
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();

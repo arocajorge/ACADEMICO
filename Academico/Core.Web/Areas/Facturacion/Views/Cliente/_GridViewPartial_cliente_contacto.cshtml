@@ -2,7 +2,7 @@
 @{
         var grid = Html.DevExpress().GridView(settings => {
             settings.Name = "GridView_cliente_contacto";
-            settings.CallbackRouteValues = new { Controller = "Clientes", Action = "GridViewPartial_cliente_contacto" };
+            settings.CallbackRouteValues = new { Controller = "Cliente", Action = "GridViewPartial_cliente_contacto" };
             settings.KeyFieldName = "IdContacto";
             settings.Width = Unit.Percentage(100);
 

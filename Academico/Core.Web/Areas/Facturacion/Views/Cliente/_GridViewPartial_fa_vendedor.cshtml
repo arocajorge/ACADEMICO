@@ -4,13 +4,13 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_fa_vendedor";
-        settings.CallbackRouteValues = new { Controller = "Clientes", Action = "GridViewPartial_fa_vendedor" };
+        settings.CallbackRouteValues = new { Controller = "Cliente", Action = "GridViewPartial_fa_vendedor" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCliente";
         settings.SettingsEditing.Mode = GridViewEditingMode.Inline;
-        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Clientes", Action = "Editing_AddNew", Area = "Facturacion" };
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Clientes", Action = "Editing_Update", Area = "Facturacion" };
-        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Clientes", Action = "Editing_Delete", Area = "Facturacion" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "Cliente", Action = "Editing_AddNew", Area = "Facturacion" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Cliente", Action = "Editing_Update", Area = "Facturacion" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "Cliente", Action = "Editing_Delete", Area = "Facturacion" };
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = true;

@@ -1,10 +1,11 @@
 @using System.Web.UI.WebControls;
 @{
-    var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_cliente";
-        settings.CallbackRouteValues = new { Controller = "Clientes", Action = "GridViewPartial_cliente" };
-        settings.KeyFieldName = "IdCliente";
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridViewPartial_cliente_tipo_importacion";
+        settings.CallbackRouteValues = new { Controller = "Cliente", Action = "GridViewPartial_cliente_tipo_importacion" };
         settings.Width = Unit.Percentage(100);
+        settings.KeyFieldName = "Idtipo_cliente";
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -47,54 +48,11 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        //Evento para pintar de rojo las filas anuladas
-        settings.HtmlRowPrepared = (s, e) =>
-        {
-            if (Convert.ToString(e.GetValue("Estado")) == "I")
-            {
-                e.Row.ForeColor = System.Drawing.Color.Red;
-            }
-        };
-        settings.Columns.Add(c =>
-        {
-            c.Caption = "#";
-            c.SetDataItemTemplateContent(tc =>
-            {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
-                {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdCliente = DataBinder.Eval(tc.DataItem, "IdCliente") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdCliente = DataBinder.Eval(tc.DataItem, "IdCliente") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-                }
-            });
-            c.SetHeaderTemplateContent(tc =>
-            {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
-                );
-            });
-            c.Settings.AllowDragDrop = DefaultBoolean.False;
-            c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(150);
-        });
+        settings.Columns.Add("Idtipo_cliente", "Código").Width = Unit.Percentage(10);
+        settings.Columns.Add("Descripcion_tip_cliente", "Descripción").Width = Unit.Percentage(40);
+        settings.Columns.Add("IdCtaCble_CXC_Cred", "Cuenta").Width = Unit.Percentage(30);
 
-        settings.Columns.Add("IdCliente", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("info_persona.pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(10);
-        settings.Columns.Add("Descripcion_tip_cliente", "Tipo").Width = Unit.Percentage(20);
-        settings.Columns.Add("info_persona.pe_nombreCompleto", "Nombre completo").Width = Unit.Percentage(50);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "EstadoBool";
-            column.Caption = "Estado";
-            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
-            column.EditorProperties().CheckBox(sp =>
-            {
-
-            });
-        });
-
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }
 @grid.Bind(Model).GetHtml()
