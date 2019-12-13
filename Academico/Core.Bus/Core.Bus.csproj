@@ -80,6 +80,11 @@
     <Compile Include="Academico\aca_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_Sede_Bus.cs" />
     <Compile Include="Academico\aca_SocioEconomico_Bus.cs" />
+    <Compile Include="Banco\ba_Banco_Cuenta_Bus.cs" />
+    <Compile Include="Banco\ba_Banco_Cuenta_x_tb_sucursal_Bus.cs" />
+    <Compile Include="Banco\ba_CatalogoTipo_Bus.cs" />
+    <Compile Include="Banco\ba_Catalogo_Bus.cs" />
+    <Compile Include="Banco\ba_parametros_Bus.cs" />
     <Compile Include="Caja\caj_Caja_Bus.cs" />
     <Compile Include="Caja\caj_Caja_Movimiento_Bus.cs" />
     <Compile Include="Caja\caj_Caja_Movimiento_det_Bus.cs" />
@@ -126,6 +131,7 @@
     <Compile Include="Facturacion\fa_TipoNota_x_Empresa_x_Sucursal_Bus.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Bus.cs" />
     <Compile Include="General\tbl_TransaccionesAutorizadas_Bus.cs" />
+    <Compile Include="General\tb_banco_Bus.cs" />
     <Compile Include="General\tb_bodega_Bus.cs" />
     <Compile Include="General\tb_Catalogo_Bus.cs" />
     <Compile Include="General\tb_ciudad_Bus.cs" />
@@ -134,6 +140,7 @@
     <Compile Include="General\tb_LogError_Bus.cs" />
     <Compile Include="General\tb_mes_Bus.cs" />
     <Compile Include="General\tb_pais_Bus.cs" />
+    <Compile Include="General\tb_parametro_Bus.cs" />
     <Compile Include="General\tb_parroquia_Bus.cs" />
     <Compile Include="General\tb_persona_Bus.cs" />
     <Compile Include="General\tb_profesion_Bus.cs" />

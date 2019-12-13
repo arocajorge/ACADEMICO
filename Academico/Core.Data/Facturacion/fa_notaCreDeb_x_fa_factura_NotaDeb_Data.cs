@@ -76,7 +76,7 @@ namespace Core.Data.Facturacion
             }
         }
 
-        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list_cartera_academico(int IdEmpresa, int IdSucursal, decimal IdCliente, bool mostrar_saldo0)
+        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list_cartera_academico(int IdEmpresa, int IdSucursal, decimal IdCliente, decimal IdAlumno, bool mostrar_saldo0)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace Core.Data.Facturacion
                                  && q.IdCliente == IdCliente
                                  && q.Saldo > 0
                                  && q.Estado == "A"
-                                 && q.IdAlumno!=null
+                                 && q.IdAlumno== IdAlumno
                                  select new fa_notaCreDeb_x_fa_factura_NotaDeb_Info
                                  {
                                      IdEmpresa_fac_nd_doc_mod = q.IdEmpresa,

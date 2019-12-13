@@ -24,5 +24,6 @@ namespace Core.Data.Base
         public double valor_disponible { get; set; }
     
         public virtual caj_Caja_Movimiento caj_Caja_Movimiento { get; set; }
+        public virtual cp_conciliacion_Caja cp_conciliacion_Caja { get; set; }
     }
 }

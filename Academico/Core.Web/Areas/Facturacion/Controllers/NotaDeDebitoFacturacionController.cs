@@ -204,12 +204,12 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 resultado = new tb_sis_Documento_Tipo_Talonario_Info();
             return Json(new { data_puntovta = punto_venta, data_talonario = resultado }, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult GetDocumentosPorCobrar(int IdSucursal = 0, decimal IdCliente = 0, decimal IdTransaccionSession = 0)
+        public JsonResult GetDocumentosPorCobrar(int IdSucursal = 0, decimal IdCliente = 0, decimal IdAlumno = 0, decimal IdTransaccionSession = 0)
         {
             bool resultado = true;
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var List = List_cruce.get_list(IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
-            var ListPorCruzar = bus_cruce.get_list_cartera_academico(IdEmpresa, IdSucursal, IdCliente, false);
+            var ListPorCruzar = bus_cruce.get_list_cartera_academico(IdEmpresa, IdSucursal, IdCliente, IdAlumno, false);
 
             foreach (var item in List)
             {

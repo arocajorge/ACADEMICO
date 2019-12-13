@@ -16,6 +16,7 @@ namespace Core.Info.CuentasPorCobrar
         [Range(1,999999,ErrorMessage ="El campo cliente es obligatorio")]
         [Required(ErrorMessage = "El campo cliente es obligatorio")]
         public decimal IdCliente { get; set; }
+        public Nullable<decimal> IdAlumno { get; set; }
         [Range(0.01,double.MaxValue, ErrorMessage ="El campo total cobro es obligatorio")]
         [Required(ErrorMessage ="El campo total cobro es obligatorio")]
         public double cr_TotalCobro { get; set; }

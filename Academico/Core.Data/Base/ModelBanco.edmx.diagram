@@ -7,6 +7,13 @@
       <Diagram DiagramId="a7a05271867746c69744c221c1e918f3" Name="Diagram1">
         <EntityTypeShape EntityType="DBERP_LICEOModel.cp_conciliacion_Caja_det_Ing_Caja" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Banco_Cuenta" Width="1.5" PointX="5.75" PointY="1.125" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Banco_Cuenta_x_tb_sucursal" Width="1.5" PointX="8" PointY="2.625" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Catalogo" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_CatalogoTipo" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_parametros" Width="1.5" PointX="7.75" PointY="5.75" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Banco_Cuenta_x_tb_sucursal_ba_Banco_Cuenta" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Catalogo_ba_CatalogoTipo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

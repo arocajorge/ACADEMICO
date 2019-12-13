@@ -236,6 +236,8 @@
     <Compile Include="Areas\Contabilidad\ContabilidadAreaRegistration.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\AnioFiscalController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\PlanDeCuentasController.cs" />
+    <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaController.cs" />
+    <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClientesController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\FacturaController.cs" />
@@ -7771,6 +7773,18 @@
     <Content Include="Areas\General\Views\TipoDocumentoTalonario\Nuevo.cshtml" />
     <Content Include="Areas\General\Views\TipoDocumentoTalonario\_GridViewPartial_tipodocumentotal.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\_CmbAlumnoND.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\web.config" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\Index.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_CmbCliente_Cobranza.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_det.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_facturas_x_cruzar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Shared\_LayoutConsulta.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_CmbAlumno_Cobranza.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -7816,6 +7830,7 @@
     <Folder Include="Areas\Contabilidad\Models\" />
     <Folder Include="Areas\Contabilidad\Views\AnioFiscal\" />
     <Folder Include="Areas\Contabilidad\Views\PlanDeCuentas\" />
+    <Folder Include="Areas\CuentasPorCobrar\Models\" />
     <Folder Include="Areas\Facturacion\Models\" />
     <Folder Include="Areas\General\Models\" />
     <Folder Include="Areas\General\Views\Parroquia\" />

@@ -21,7 +21,18 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
-
+        
+        public List<cxc_cobro_Info> get_list_matricula(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
+        {
+            try
+            {
+                return odata.get_list_matricula(IdEmpresa, IdSucursal, Fecha_ini, Fecha_fin);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public cxc_cobro_Info get_info(int IdEmpresa, int IdSucursal, decimal IdCobro)
         {
             try
@@ -73,7 +84,7 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
-        
+
         public List<cxc_cobro_Info> get_list_para_retencion(int IdEmpresa, int IdSucursal, DateTime fecha_ini, DateTime fecha_fin, bool TieneRetencion)
         {
             try
@@ -86,7 +97,7 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
-       
+
         public cxc_cobro_Info get_info_para_retencion(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string vt_tipoDoc)
         {
             try
@@ -96,6 +107,18 @@ namespace Core.Bus.CuentasPorCobrar
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public string ValidarSaldoDocumento(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string CodDocumentoTipo, double ValorCobrado, double ValorAnterior)
+        {
+            try
+            {
+                return odata.ValidarSaldoDocumento(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, CodDocumentoTipo, ValorCobrado, ValorAnterior);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

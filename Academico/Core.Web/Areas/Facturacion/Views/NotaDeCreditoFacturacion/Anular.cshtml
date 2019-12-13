@@ -350,7 +350,7 @@
                 IdCliente.SetValue(data);
 
                 get_info_cliente();
-                ValidarCliente();
+                //ValidarCliente();
                 cargar_contactos();
             },
             error: function (error) {
@@ -446,19 +446,11 @@
                     @Html.ValidationMessageFor(q => q.NaturalezaNota, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdCliente">Alumno*</label>
                     @Html.Partial("_CmbAlumnoNC", Model.IdAlumno)
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdCliente"></label>
-                    <button type="button" class="btn btn-primary form-control " onclick="CrearModificarAlumno();">
-                        <i class="fa fa-external-link-square"></i>
-                    </button>
                 </div>
             </div>
             <div class="col-md-12">
@@ -595,7 +587,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
-                <div class="form-group">
+                <div class="form-group has-error">
                     <label for="MotiAnula">Motivo anulación*</label>
                     @Html.TextAreaFor(q => q.MotiAnula, new { @class = "form-control", @rows = 3 })
                     @Html.ValidationMessageFor(q => q.MotiAnula, "", new { @class = "text-danger" })

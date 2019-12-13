@@ -30,7 +30,7 @@ namespace Core.Info.CuentasPorCobrar
         public string nom_pc { get; set; }
         public string ip { get; set; }
         #endregion
-                
+
         #region Campos que no existen en la tabla
         public string secuencia { get; set; }
         public DateTime? vt_fecha { get; set; }

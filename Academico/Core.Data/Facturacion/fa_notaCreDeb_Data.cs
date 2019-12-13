@@ -670,6 +670,7 @@ namespace Core.Data.Facturacion
                     cr_TotalCobro = Math.Round(info.lst_cruce.Sum(q=>q.Valor_Aplicado),2,MidpointRounding.AwayFromZero),
                     IdCaja = 1,
                     IdCliente = info.IdCliente,
+                    IdAlumno = info.IdAlumno,
                     IdUsuario = info.IdUsuario,
                     IdTipoNotaCredito = info.IdTipoNota,
                     lst_det = new List<cxc_cobro_det_Info>()

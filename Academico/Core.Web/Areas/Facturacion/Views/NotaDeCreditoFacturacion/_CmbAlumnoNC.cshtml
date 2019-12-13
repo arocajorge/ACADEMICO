@@ -16,7 +16,7 @@
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);
         settings.Properties.Columns.Add("pe_cedulaRuc", "Identificacion", 20);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Alumno", 70);
-        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdCliente.PerformCallback(s,e); SetCliente(s,e); }";
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { SetCliente(s,e); }";
     })
     .BindList(new Core.Web.Areas.Facturacion.Controllers.FacturaController().get_list_bajo_demanda_alumno, new Core.Web.Areas.Facturacion.Controllers.FacturaController().get_info_bajo_demanda_alumno)
     .Bind(Model.GetType() == typeof(Core.Info.Facturacion.fa_notaCreDeb_Info) ? "" : (Model == 0 ? "" : Model));

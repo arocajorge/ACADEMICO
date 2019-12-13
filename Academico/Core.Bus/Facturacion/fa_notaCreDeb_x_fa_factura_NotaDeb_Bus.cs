@@ -23,11 +23,11 @@ namespace Core.Bus.Facturacion
             }
         }
 
-        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list_cartera_academico(int IdEmpresa, int IdSucursal, decimal IdCliente, bool mostrar_saldo0)
+        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list_cartera_academico(int IdEmpresa, int IdSucursal, decimal IdCliente, decimal IdAlumno, bool mostrar_saldo0)
         {
             try
             {
-                return odata.get_list_cartera_academico(IdEmpresa, IdSucursal, IdCliente, mostrar_saldo0);
+                return odata.get_list_cartera_academico(IdEmpresa, IdSucursal, IdCliente, IdAlumno, mostrar_saldo0);
             }
             catch (Exception)
             {

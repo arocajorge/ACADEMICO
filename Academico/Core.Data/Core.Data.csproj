@@ -91,6 +91,11 @@
     <Compile Include="Academico\aca_Rubro_Data.cs" />
     <Compile Include="Academico\aca_Sede_Data.cs" />
     <Compile Include="Academico\aca_SocioEconomico_Data.cs" />
+    <Compile Include="Banco\ba_Banco_Cuenta_Data.cs" />
+    <Compile Include="Banco\ba_Banco_Cuenta_x_tb_sucursal_Data.cs" />
+    <Compile Include="Banco\ba_CatalogoTipo_Data.cs" />
+    <Compile Include="Banco\ba_Catalogo_Data.cs" />
+    <Compile Include="Banco\ba_parametros_Data.cs" />
     <Compile Include="Base\aca_Alumno.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -211,7 +216,22 @@
     <Compile Include="Base\aca_SocioEconomico.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\ba_Banco_Cuenta.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ba_Banco_Cuenta_x_tb_sucursal.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ba_Catalogo.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ba_CatalogoTipo.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ba_parametros.cs">
       <DependentUpon>ModelBanco.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\caj_Caja.cs">
@@ -238,10 +258,19 @@
     <Compile Include="Base\caj_parametro.cs">
       <DependentUpon>ModelCaja.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\cp_conciliacion_Caja.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cp_conciliacion_Caja_det.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\cp_conciliacion_Caja_det_Ing_Caja.cs">
       <DependentUpon>ModelCaja.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\cp_conciliacion_Caja_det_x_ValeCaja.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cp_conciliacion_Caja_ValesNoConciliados.cs">
       <DependentUpon>ModelCaja.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\cp_orden_pago.cs">
@@ -634,6 +663,12 @@
     <Compile Include="Base\tbl_TransaccionesAutorizadas.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\tb_banco.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\tb_banco_procesos_bancarios_x_empresa.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_bodega.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
@@ -662,6 +697,9 @@
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\tb_pais.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\tb_parametro.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\tb_parroquia.cs">
@@ -766,6 +804,12 @@
     <Compile Include="Base\vwcaj_Caja_Movimiento.cs">
       <DependentUpon>ModelCaja.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwcp_Conciliacion_Caja_det.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcp_conciliacion_Caja_det_x_ValeCaja.cs">
+      <DependentUpon>ModelCaja.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwcp_orden_pago.cs">
       <DependentUpon>ModelCuentasPorPagar.tt</DependentUpon>
     </Compile>
@@ -799,13 +843,7 @@
     <Compile Include="Base\vwcxc_cobro.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\vwcxc_cobro1.cs">
-      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
-    </Compile>
     <Compile Include="Base\vwcxc_cobro_det.cs">
-      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\vwcxc_cobro_det1.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwcxc_cobro_det_retencion.cs">
@@ -971,6 +1009,7 @@
     <Compile Include="Facturacion\fa_TipoNota_x_Empresa_x_Sucursal_Data.cs" />
     <Compile Include="Facturacion\fa_Vendedor_Data.cs" />
     <Compile Include="General\tbl_TransaccionesAutorizadas_Data.cs" />
+    <Compile Include="General\tb_banco_Data.cs" />
     <Compile Include="General\tb_bodega_Data.cs" />
     <Compile Include="General\tb_Catalogo_Data.cs" />
     <Compile Include="General\tb_ciudad_Data.cs" />
@@ -979,6 +1018,7 @@
     <Compile Include="General\tb_LogError_Data.cs" />
     <Compile Include="General\tb_mes_Data.cs" />
     <Compile Include="General\tb_pais_Data.cs" />
+    <Compile Include="General\tb_parametro_Data.cs" />
     <Compile Include="General\tb_parroquia_Data.cs" />
     <Compile Include="General\tb_persona_Data.cs" />
     <Compile Include="General\tb_profesion_Data.cs" />

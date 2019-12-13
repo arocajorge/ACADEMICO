@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public tb_sis_Impuesto()
         {
             this.tb_sis_Impuesto_x_ctacble = new HashSet<tb_sis_Impuesto_x_ctacble>();
+            this.tb_parametro = new HashSet<tb_parametro>();
         }
     
         public string IdCod_Impuesto { get; set; }
@@ -32,5 +33,7 @@ namespace Core.Data.Base
         public virtual tb_sis_Impuesto_Tipo tb_sis_Impuesto_Tipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_sis_Impuesto_x_ctacble> tb_sis_Impuesto_x_ctacble { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_parametro> tb_parametro { get; set; }
     }
 }

@@ -27,5 +27,10 @@ namespace Core.Data.Base
     
         public virtual DbSet<cp_conciliacion_Caja_det_Ing_Caja> cp_conciliacion_Caja_det_Ing_Caja { get; set; }
         public virtual DbSet<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito> ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito { get; set; }
+        public virtual DbSet<ba_Banco_Cuenta> ba_Banco_Cuenta { get; set; }
+        public virtual DbSet<ba_Banco_Cuenta_x_tb_sucursal> ba_Banco_Cuenta_x_tb_sucursal { get; set; }
+        public virtual DbSet<ba_Catalogo> ba_Catalogo { get; set; }
+        public virtual DbSet<ba_CatalogoTipo> ba_CatalogoTipo { get; set; }
+        public virtual DbSet<ba_parametros> ba_parametros { get; set; }
     }
 }

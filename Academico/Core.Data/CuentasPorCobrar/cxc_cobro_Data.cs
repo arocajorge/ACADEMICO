@@ -57,6 +57,50 @@ namespace Core.Data.CuentasPorCobrar
             }
         }
 
+        public List<cxc_cobro_Info> get_list_matricula(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
+        {
+            try
+            {
+                int IdSucursal_ini = IdSucursal;
+                int IdSucursal_fin = IdSucursal == 0 ? 9999 : IdSucursal;
+                List<cxc_cobro_Info> Lista;
+
+                using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
+                {
+                    Lista = (from q in Context.vwcxc_cobro
+                             where q.IdEmpresa == IdEmpresa
+                             && IdSucursal_ini <= q.IdSucursal && q.IdSucursal <= IdSucursal_fin
+                             && Fecha_ini <= q.cr_fecha && q.cr_fecha <= Fecha_fin
+                             && q.IdAlumno != null
+                             orderby q.IdCobro descending
+                             select new cxc_cobro_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 IdCobro = q.IdCobro,
+                                 IdCliente = q.IdCliente,
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 IdCobro_tipo = q.IdCobro_tipo,
+                                 cr_fecha = q.cr_fecha,
+                                 cr_TotalCobro = q.cr_TotalCobro,
+                                 cr_estado = q.cr_estado,
+                                 Su_Descripcion = q.Su_Descripcion,
+                                 cr_observacion = q.cr_observacion,
+                                 nom_Motivo_tipo_cobro = q.nom_Motivo_tipo_cobro,
+                                 cr_NumDocumento = q.cr_NumDocumento,
+
+                                 EstadoBool = q.cr_estado == "A" ? true : false
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         private decimal get_id(int IdEmpesa, int IdSucursal)
         {
             try
@@ -101,6 +145,7 @@ namespace Core.Data.CuentasPorCobrar
                         cr_Codigo = Entity.cr_Codigo,
                         IdCobro_tipo = Entity.IdCobro_tipo,
                         IdCliente = Entity.IdCliente,
+                        IdAlumno = Entity.IdAlumno,
                         cr_TotalCobro = Entity.cr_TotalCobro,
                         cr_fecha = Entity.cr_fecha,
                         cr_fechaDocu = Entity.cr_fechaDocu,
@@ -252,6 +297,7 @@ namespace Core.Data.CuentasPorCobrar
                     cr_Codigo = info.cr_Codigo,
                     IdCobro_tipo = info.IdCobro_tipo,
                     IdCliente = info.IdCliente,
+                    IdAlumno = info.IdAlumno,
                     cr_TotalCobro = info.cr_TotalCobro,
                     cr_fecha = info.cr_fecha.Date,
                     cr_fechaDocu = info.cr_fechaDocu,
@@ -459,6 +505,7 @@ namespace Core.Data.CuentasPorCobrar
                 Entity.cr_Codigo = info.cr_Codigo;
                 Entity.IdCobro_tipo = info.IdCobro_tipo;
                 Entity.IdCliente = info.IdCliente;
+                Entity.IdAlumno = info.IdAlumno;
                 Entity.cr_TotalCobro = info.cr_TotalCobro;
                 Entity.cr_fecha = info.cr_fecha.Date;
                 Entity.cr_fechaDocu = info.cr_fechaDocu;
@@ -1041,6 +1088,31 @@ namespace Core.Data.CuentasPorCobrar
             }
         }
 
-        
+        public string ValidarSaldoDocumento(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string CodDocumentoTipo, double ValorCobrado, double ValorAnterior)
+        {
+            try
+            {
+                string Retorno = string.Empty;
+
+                using (EntitiesCuentasPorCobrar db = new EntitiesCuentasPorCobrar())
+                {
+                    var Documento = db.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdComprobante == IdCbteVta && q.vt_tipoDoc == CodDocumentoTipo).FirstOrDefault();
+                    if (Documento != null)
+                    {
+                        if (Math.Round((Documento.Saldo ?? 0) + ValorAnterior - ValorCobrado, 2, MidpointRounding.AwayFromZero) < 0)
+                        {
+                            Retorno += ("Está intentando aplicar " + ValorCobrado.ToString("c2") + " al documento " + Documento.vt_NunDocumento + " cuyo saldo es de " + (Documento.Saldo ?? 0 + ValorAnterior).ToString("c2"));
+                        }
+                    }
+                }
+
+                return Retorno;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
