@@ -88,10 +88,9 @@ namespace Core.Data.Facturacion
                         Lista = (from q in Context.vwcxc_cartera_x_cobrar
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdSucursal == IdSucursal
-                                 && q.IdCliente == IdCliente
+                                 && q.IdAlumno == IdAlumno
                                  && q.Saldo > 0
                                  && q.Estado == "A"
-                                 && q.IdAlumno== IdAlumno
                                  select new fa_notaCreDeb_x_fa_factura_NotaDeb_Info
                                  {
                                      IdEmpresa_fac_nd_doc_mod = q.IdEmpresa,
@@ -112,7 +111,7 @@ namespace Core.Data.Facturacion
                         Lista = (from q in Context.vwcxc_cartera_x_cobrar
                                  where q.IdEmpresa == IdEmpresa
                                  && q.IdSucursal == IdSucursal
-                                 && q.IdCliente == IdCliente
+                                 && q.IdAlumno == IdAlumno
                                  && q.Estado == "A"
                                  select new fa_notaCreDeb_x_fa_factura_NotaDeb_Info
                                  {

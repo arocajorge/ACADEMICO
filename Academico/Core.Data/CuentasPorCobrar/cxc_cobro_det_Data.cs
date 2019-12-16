@@ -61,7 +61,6 @@ namespace Core.Data.CuentasPorCobrar
                 {
                     Lista = Context.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
-                             && q.IdCliente == IdCliente
                              && q.IdAlumno == IdAlumno
                              && q.Saldo > 0
                              ).Select(q => new cxc_cobro_det_Info
