@@ -17,6 +17,6 @@
 
         settings.Properties.ValueType = typeof(string);
     }).BindList(new Core.Bus.General.tb_parroquia_Bus().get_list(Model.IdCiudad_padre,false))
-    .Bind(Model.IdParroquia);
+    .Bind(Model.IdParroquia_padre);
 }
 @comboBox.GetHtml()
