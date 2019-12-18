@@ -8,11 +8,70 @@ namespace Core.Info.Helps
 {
     public class cl_enumeradores
     {
+        public enum eEstadoContratoRRHH
+        {
+            ECT_ACT,
+            ECT_LIQ,
+            ECT_PLQ
+        }
+        public enum eEstadoEmpleadoRRHH
+        {
+            EST_ACT = 1,
+            EST_DES = 2,
+            EST_INC = 3,
+            EST_LIQ = 4,
+            EST_PER = 5,
+            EST_PLQ = 6,
+            EST_SUB = 7,
+            EST_VAC = 8,
+            EST_VB = 9,
+
+        }
+        public enum eTipoServicioCXP
+        {
+            BIEN,
+            SERVI,
+            AMBAS
+        }
+        public enum eTipoCbteBancario
+        {
+            CHEQ,
+            DEPO,
+            NCBA,
+            NDBA
+        }
+        public enum eEstadoCierreCaja
+        {
+            EST_CIE_ABI,
+            EST_CIE_CER
+        }
         public enum eEstadoAprobacionOrdenPago
         {
             APRO,
             PENDI,
             REPRO
+        }
+        public enum eFormaPagoOrdenPago
+        {
+            CHEQUE,
+            EFEC,
+            NTDEB_BAN,
+            TARJE_CRE
+        }
+        public enum eTipoNotaCXP
+        {
+            T_TIP_NOTA_INT,
+            T_TIP_NOTA_SRI
+        }
+        public enum eTipoOrdenPago
+        {
+            ANTI_EMPLE,
+            ANTI_PROVEE,
+            FACT_PROVEE,
+            LIQ_HAB,
+            OTROS_CONC,
+            PRESTAMOS,
+            VACACIONES
         }
         public enum eTipoDocumento
         {
@@ -170,6 +229,12 @@ namespace Core.Info.Helps
         {
             TIP_COBRO,
             CAJA
+        }
+
+        public enum eTipoIngEgr
+        {
+            ING,
+            EGR
         }
     }
 }

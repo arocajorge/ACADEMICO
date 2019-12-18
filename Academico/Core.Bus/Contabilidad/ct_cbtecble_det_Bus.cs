@@ -3,7 +3,7 @@ using Core.Info.Contabilidad;
 using System;
 using System.Collections.Generic;
 
-namespace Core.Erp.Bus.Contabilidad
+namespace Core.Bus.Contabilidad
 {
     public class ct_cbtecble_det_Bus
     {

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e61c4376d5dd442893feef00de2fd6a8" Name="Diagram1" ZoomLevel="81">
+      <Diagram DiagramId="e61c4376d5dd442893feef00de2fd6a8" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_pago_cancelaciones" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_pago" Width="1.5" PointX="0.75" PointY="16.875" />
         <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_pago_det" Width="1.5" PointX="0.75" PointY="11.5" />
@@ -13,6 +13,82 @@
         <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_det_cp_orden_pago" />
         <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det" />
         <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_pago_tipo_x_empresa" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_parametros" Width="1.5" PointX="3.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_nota_DebCre" Width="1.5" PointX="6.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_orden_giro_x_pagar" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_SolicitudPago" Width="1.5" PointX="8.375" PointY="10" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_SolicitudPagoDet" Width="1.5" PointX="10.625" PointY="10.875" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_SolicitudPagoDet_cp_SolicitudPago" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_SolicitudPago" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_catalogo" Width="1.5" PointX="8.75" PointY="12.25" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_catalogo_tipo" Width="1.5" PointX="6.5" PointY="24.25" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_codigo_SRI" Width="1.5" PointX="2.75" PointY="6" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_codigo_SRI_tipo" Width="1.5" PointX="5.75" PointY="27.5" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_codigo_SRI_x_CtaCble" Width="1.5" PointX="5" PointY="39.875" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_giro" Width="1.5" PointX="9.25" PointY="20.375" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_giro_det" Width="1.5" PointX="11.5" PointY="22.5" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_giro_det_ing_x_oc" Width="1.5" PointX="11.5" PointY="41.375" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_giro_det_ing_x_os" Width="1.5" PointX="11.5" PointY="35.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_giro_pagos_sri" Width="1.5" PointX="14.5" PointY="26" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_giro_x_in_Ing_Egr_Inven" Width="1.5" PointX="11.5" PointY="19.25" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_pago_formapago" Width="1.5" PointX="3.125" PointY="17.125" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_pago_tipo" Width="1.5" PointX="3.125" PointY="13.875" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_pagos_sri" Width="1.5" PointX="12.25" PointY="48.375" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_pais_sri" Width="1.5" PointX="7" PointY="37.375" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_proveedor" Width="1.5" PointX="0.75" PointY="13.375" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_proveedor_clase" Width="1.5" PointX="6" PointY="31.875" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_proveedor_codigo_SRI" Width="1.5" PointX="8" PointY="17.375" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_proveedor_detalle" Width="1.5" PointX="6" PointY="47.125" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_retencion" Width="1.5" PointX="11.5" PointY="28.625" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_retencion_det" Width="1.5" PointX="13.75" PointY="18.125" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_retencion_x_ct_cbtecble" Width="1.5" PointX="13.75" PointY="36.25" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_TipoDocumento" Width="1.5" PointX="17" PointY="0.75" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_catalogo_cp_catalogo_tipo" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_nota_DebCre_cp_catalogo" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_proveedor_cp_catalogo2" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_codigo_SRI_cp_codigo_SRI_tipo" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_codigo_SRI_x_CtaCble_cp_codigo_SRI" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_nota_DebCre_cp_codigo_SRI" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_nota_DebCre_cp_codigo_SRI1" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_cp_codigo_SRI" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_cp_codigo_SRI1" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_cp_codigo_SRI2" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_proveedor_codigo_SRI_cp_codigo_SRI" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_retencion_det_cp_codigo_SRI" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_nota_DebCre_cp_proveedor" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_cp_pais_sri" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_cp_proveedor" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_cp_proveedor_detalle" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_det_cp_orden_giro" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_det_ing_x_oc_cp_orden_giro" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_det_ing_x_os_cp_orden_giro" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_pagos_sri_cp_orden_giro" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_x_in_Ing_Egr_Inven_cp_orden_giro" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_retencion_cp_orden_giro" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_giro_pagos_sri_cp_pagos_sri" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_cp_orden_pago_formapago" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_cp_orden_pago_tipo" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_det_cp_orden_pago_formapago" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_tipo_x_empresa_cp_orden_pago_tipo" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_proveedor_codigo_SRI_cp_proveedor" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_proveedor_cp_proveedor_clase" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_proveedor_detalle_cp_proveedor" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_SolicitudPago_cp_proveedor" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_retencion_det_cp_retencion" />
+        <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_retencion_x_ct_cbtecble_cp_retencion" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_pago_estado_aprob" Width="1.5" PointX="10.375" PointY="5.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_codigo_SRI" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_orden_giro_det_ing_x_oc" Width="1.5" PointX="13.375" PointY="4.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_orden_giro_det_ing_x_oc_x_cruzar" Width="1.5" PointX="15.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_orden_giro_det_ing_x_os" Width="1.5" PointX="16.375" PointY="13.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_orden_giro_det_ing_x_os_x_cruzar" Width="1.5" PointX="17.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_orden_giro" Width="1.5" PointX="18.375" PointY="13.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_orden_giro_det" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_orden_giro_SinRetencion" Width="1.5" PointX="19.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_proveedor_consulta" Width="1.5" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_retencion" Width="1.5" PointX="20.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_retencion_det" Width="1.5" PointX="3.375" PointY="20.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

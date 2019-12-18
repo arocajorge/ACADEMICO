@@ -47,5 +47,7 @@ namespace Core.Data.Base
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_orden_pago_det> cp_orden_pago_det { get; set; }
+        public virtual cp_orden_pago_formapago cp_orden_pago_formapago { get; set; }
+        public virtual cp_orden_pago_tipo cp_orden_pago_tipo { get; set; }
     }
 }

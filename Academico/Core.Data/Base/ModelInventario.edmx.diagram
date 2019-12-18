@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="28cf665e7dd14495a2322c0b9ce30693" Name="Diagram1" ZoomLevel="66">
+      <Diagram DiagramId="28cf665e7dd14495a2322c0b9ce30693" Name="Diagram1" ZoomLevel="11">
         <EntityTypeShape EntityType="ModelInventario.in_Producto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="ModelInventario.FK_in_Producto_in_Producto1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ModelInventario.in_categorias" Width="1.5" PointX="0.75" PointY="14.375" />
@@ -64,6 +64,52 @@
         <EntityTypeShape EntityType="ModelInventario.vwin_producto_x_tb_bodega_Costo_Historico" Width="1.5" PointX="19.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelInventario.in_producto_x_tb_bodega_Costo_Historico" Width="1.5" PointX="7.5" PointY="20.375" />
         <AssociationConnector Association="ModelInventario.FK_in_producto_x_tb_bodega_Costo_Historico_in_producto_x_tb_bodega" />
+        <EntityTypeShape EntityType="ModelInventario.in_Ing_Egr_Inven" Width="1.5" PointX="1.25" PointY="35.625" />
+        <EntityTypeShape EntityType="ModelInventario.in_Ing_Egr_Inven_det" Width="1.5" PointX="3.5" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelInventario.in_movi_inve" Width="1.5" PointX="19.875" PointY="11.625" />
+        <AssociationConnector Association="ModelInventario.FK_in_Ing_Egr_Inven_det_in_Ing_Egr_Inven" />
+        <AssociationConnector Association="ModelInventario.FK_in_Ing_Egr_Inven_det_in_Producto" />
+        <AssociationConnector Association="ModelInventario.FK_in_Ing_Egr_Inven_det_in_UnidadMedida2" />
+        <AssociationConnector Association="ModelInventario.FK_in_Ing_Egr_Inven_det_in_UnidadMedida3" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Ing_Egr_Inven_det_conversion" Width="1.5" PointX="19.75" PointY="6.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Ing_Egr_Inven_PorAprobar" Width="1.5" PointX="3.75" PointY="20.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Ing_Egr_InvenPorOrdenCompra" Width="1.5" PointX="10.75" PointY="20.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Ing_Egr_Inven_PorContabilizar" Width="1.5" PointX="13.375" PointY="20.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Ing_Egr_Inven_PorDespachar" Width="1.5" PointX="15.375" PointY="20.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Ing_Egr_Inven_PorReversar" Width="1.5" PointX="20.375" PointY="17.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Ing_Egr_Inven_por_devolver" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelInventario.in_movi_inve_detalle" Width="1.5" PointX="22.125" PointY="5.625" />
+        <EntityTypeShape EntityType="ModelInventario.in_movi_inve_detalle_x_ct_cbtecble_det" Width="1.5" PointX="17.375" PointY="21.75" />
+        <AssociationConnector Association="ModelInventario.FK_in_Ing_Egr_Inven_det_in_movi_inve_detalle" />
+        <AssociationConnector Association="ModelInventario.FK_in_movi_inve_detalle_in_movi_inve" />
+        <AssociationConnector Association="ModelInventario.FK_in_movi_inve_detalle_in_Producto" />
+        <AssociationConnector Association="ModelInventario.FK_in_movi_inve_detalle_in_UnidadMedida" />
+        <AssociationConnector Association="ModelInventario.FK_in_movi_inve_detalle_in_UnidadMedida1" />
+        <EntityTypeShape EntityType="ModelInventario.in_Motivo_Inven" Width="1.5" PointX="8" PointY="26.625" />
+        <EntityTypeShape EntityType="ModelInventario.in_movi_inve_x_ct_cbteCble" Width="1.5" PointX="22.5" PointY="12.75" />
+        <EntityTypeShape EntityType="ModelInventario.in_movi_inven_tipo" Width="1.5" PointX="8" PointY="32.125" />
+        <AssociationConnector Association="ModelInventario.FK_in_Motivo_Inven_in_Catalogo1" />
+        <AssociationConnector Association="ModelInventario.FK_in_movi_inven_tipo_in_Catalogo" />
+        <AssociationConnector Association="ModelInventario.FK_in_Ing_Egr_Inven_in_Motivo_Inven" />
+        <AssociationConnector Association="ModelInventario.FK_in_movi_inve_in_Motivo_Inven" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_Motivo_Inven" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_Motivo_Inven1" />
+        <AssociationConnector Association="ModelInventario.FK_in_movi_inve_in_movi_inven_tipo" />
+        <AssociationConnector Association="ModelInventario.FK_in_movi_inve_x_ct_cbteCble_in_movi_inve" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo1" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo10" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo11" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo12" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo13" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo2" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo3" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo4" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo5" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo6" />
+        <AssociationConnector Association="ModelInventario.FK_in_parametro_in_movi_inven_tipo7" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_Ing_Egr_Inven" Width="1.5" PointX="22.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ModelInventario.vwin_movi_inve_x_estado_contabilizacion" Width="1.5" PointX="22.375" PointY="22.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

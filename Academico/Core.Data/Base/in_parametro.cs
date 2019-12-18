@@ -40,5 +40,19 @@ namespace Core.Data.Base
     
         public virtual in_Catalogo in_Catalogo { get; set; }
         public virtual in_Catalogo in_Catalogo1 { get; set; }
+        public virtual in_Motivo_Inven in_Motivo_Inven { get; set; }
+        public virtual in_Motivo_Inven in_Motivo_Inven1 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo1 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo2 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo3 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo4 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo5 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo6 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo7 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo8 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo9 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo10 { get; set; }
+        public virtual in_movi_inven_tipo in_movi_inven_tipo11 { get; set; }
     }
 }

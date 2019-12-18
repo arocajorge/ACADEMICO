@@ -85,7 +85,7 @@ namespace Core.Data.Caja
 
                 return ID;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

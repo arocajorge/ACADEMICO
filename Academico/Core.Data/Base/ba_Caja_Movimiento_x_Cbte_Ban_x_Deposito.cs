@@ -22,5 +22,7 @@ namespace Core.Data.Base
         public int mba_IdTipocbte { get; set; }
         public int mcj_Secuencia { get; set; }
         public string Observacion { get; set; }
+    
+        public virtual ba_Cbte_Ban ba_Cbte_Ban { get; set; }
     }
 }

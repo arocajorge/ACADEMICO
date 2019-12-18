@@ -19,6 +19,8 @@ namespace Core.Data.Base
         {
             this.in_parametro = new HashSet<in_parametro>();
             this.in_parametro1 = new HashSet<in_parametro>();
+            this.in_Motivo_Inven = new HashSet<in_Motivo_Inven>();
+            this.in_movi_inven_tipo = new HashSet<in_movi_inven_tipo>();
         }
     
         public string IdCatalogo { get; set; }
@@ -35,5 +37,9 @@ namespace Core.Data.Base
         public virtual ICollection<in_parametro> in_parametro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_parametro> in_parametro1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_Motivo_Inven> in_Motivo_Inven { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_movi_inven_tipo> in_movi_inven_tipo { get; set; }
     }
 }

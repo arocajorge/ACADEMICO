@@ -25,6 +25,8 @@ namespace Core.Web.Helps
         string Idtipo_cliente { get; set; }
         string EsContador { get; set; }
         string IdCaja { get; set; }
+        string TipoPersona { get; set; }
+        string Ruc { get; set; }
     }
     public static class SessionFixed
     {
@@ -134,6 +136,18 @@ namespace Core.Web.Helps
             get { return _sessionValueProvider.IdCaja; }
             set { _sessionValueProvider.IdCaja = value; }
         }
+
+        public static string TipoPersona
+        {
+            get { return _sessionValueProvider.TipoPersona; }
+            set { _sessionValueProvider.TipoPersona = value; }
+        }
+
+        public static string Ruc
+        {
+            get { return _sessionValueProvider.Ruc; }
+            set { _sessionValueProvider.Ruc = value; }
+        }
     }
     public class WebSessionValueProvider : ISessionValueProvider
     {
@@ -155,6 +169,8 @@ namespace Core.Web.Helps
         private const string _Idtipo_cliente = "Fx_Idtipo_cliente";
         private const string _EsContador = "Fx_EsContador";
         private const string _IdCaja = "Fx_IdCaja";
+        private const string _IdTipoPersona = "Fx_PERSONA";
+        private const string _Ruc = "Fx_Ruc";
 
         public string IdEmpresa
         {
@@ -249,6 +265,18 @@ namespace Core.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdCaja]; }
             set { HttpContext.Current.Session[_IdCaja] = value; }
+        }
+
+        public string TipoPersona
+        {
+            get { return (string)HttpContext.Current.Session[_IdTipoPersona]; }
+            set { HttpContext.Current.Session[_IdTipoPersona] = value; }
+        }
+
+        public string Ruc
+        {
+            get { return (string)HttpContext.Current.Session[_Ruc]; }
+            set { HttpContext.Current.Session[_Ruc] = value; }
         }
     }
 }

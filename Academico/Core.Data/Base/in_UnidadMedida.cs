@@ -22,6 +22,10 @@ namespace Core.Data.Base
             this.in_Producto_Composicion = new HashSet<in_Producto_Composicion>();
             this.in_UnidadMedida_Equiv_conversion = new HashSet<in_UnidadMedida_Equiv_conversion>();
             this.in_UnidadMedida_Equiv_conversion1 = new HashSet<in_UnidadMedida_Equiv_conversion>();
+            this.in_Ing_Egr_Inven_det = new HashSet<in_Ing_Egr_Inven_det>();
+            this.in_Ing_Egr_Inven_det1 = new HashSet<in_Ing_Egr_Inven_det>();
+            this.in_movi_inve_detalle = new HashSet<in_movi_inve_detalle>();
+            this.in_movi_inve_detalle1 = new HashSet<in_movi_inve_detalle>();
         }
     
         public string IdUnidadMedida { get; set; }
@@ -43,5 +47,13 @@ namespace Core.Data.Base
         public virtual ICollection<in_UnidadMedida_Equiv_conversion> in_UnidadMedida_Equiv_conversion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<in_UnidadMedida_Equiv_conversion> in_UnidadMedida_Equiv_conversion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_Ing_Egr_Inven_det> in_Ing_Egr_Inven_det { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_Ing_Egr_Inven_det> in_Ing_Egr_Inven_det1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_movi_inve_detalle> in_movi_inve_detalle { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<in_movi_inve_detalle> in_movi_inve_detalle1 { get; set; }
     }
 }

@@ -21,7 +21,12 @@ namespace Core.Data.Base
             : base("name=EntitiesInventario")
         {
         }
-    
+
+        public void SetCommandTimeOut(int TimeOut)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = TimeOut;
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -63,6 +68,23 @@ namespace Core.Data.Base
         public virtual DbSet<vwin_producto_x_tb_bodega_stock_x_lote> vwin_producto_x_tb_bodega_stock_x_lote { get; set; }
         public virtual DbSet<vwin_producto_x_tb_bodega_Costo_Historico> vwin_producto_x_tb_bodega_Costo_Historico { get; set; }
         public virtual DbSet<in_producto_x_tb_bodega_Costo_Historico> in_producto_x_tb_bodega_Costo_Historico { get; set; }
+        public virtual DbSet<in_Ing_Egr_Inven> in_Ing_Egr_Inven { get; set; }
+        public virtual DbSet<in_Ing_Egr_Inven_det> in_Ing_Egr_Inven_det { get; set; }
+        public virtual DbSet<in_movi_inve> in_movi_inve { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_Inven_det_conversion> vwin_Ing_Egr_Inven_det_conversion { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_Inven_PorAprobar> vwin_Ing_Egr_Inven_PorAprobar { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_InvenPorOrdenCompra> vwin_Ing_Egr_InvenPorOrdenCompra { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_Inven_PorContabilizar> vwin_Ing_Egr_Inven_PorContabilizar { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_Inven_PorDespachar> vwin_Ing_Egr_Inven_PorDespachar { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_Inven_PorReversar> vwin_Ing_Egr_Inven_PorReversar { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_Inven_por_devolver> vwin_Ing_Egr_Inven_por_devolver { get; set; }
+        public virtual DbSet<in_movi_inve_detalle> in_movi_inve_detalle { get; set; }
+        public virtual DbSet<in_movi_inve_detalle_x_ct_cbtecble_det> in_movi_inve_detalle_x_ct_cbtecble_det { get; set; }
+        public virtual DbSet<in_Motivo_Inven> in_Motivo_Inven { get; set; }
+        public virtual DbSet<in_movi_inve_x_ct_cbteCble> in_movi_inve_x_ct_cbteCble { get; set; }
+        public virtual DbSet<in_movi_inven_tipo> in_movi_inven_tipo { get; set; }
+        public virtual DbSet<vwin_Ing_Egr_Inven> vwin_Ing_Egr_Inven { get; set; }
+        public virtual DbSet<vwin_movi_inve_x_estado_contabilizacion> vwin_movi_inve_x_estado_contabilizacion { get; set; }
     
         public virtual ObjectResult<string> spin_Producto_validar_anulacion(Nullable<int> idEmpresa, Nullable<decimal> idProducto)
         {
@@ -75,6 +97,56 @@ namespace Core.Data.Base
                 new ObjectParameter("IdProducto", typeof(decimal));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("spin_Producto_validar_anulacion", idEmpresaParameter, idProductoParameter);
+        }
+    
+        public virtual int spINV_aprobacion_ing_egr(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<int> idMovi_inven_tipo, Nullable<decimal> idNumMovi)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idSucursalParameter = idSucursal.HasValue ?
+                new ObjectParameter("IdSucursal", idSucursal) :
+                new ObjectParameter("IdSucursal", typeof(int));
+    
+            var idBodegaParameter = idBodega.HasValue ?
+                new ObjectParameter("IdBodega", idBodega) :
+                new ObjectParameter("IdBodega", typeof(int));
+    
+            var idMovi_inven_tipoParameter = idMovi_inven_tipo.HasValue ?
+                new ObjectParameter("IdMovi_inven_tipo", idMovi_inven_tipo) :
+                new ObjectParameter("IdMovi_inven_tipo", typeof(int));
+    
+            var idNumMoviParameter = idNumMovi.HasValue ?
+                new ObjectParameter("IdNumMovi", idNumMovi) :
+                new ObjectParameter("IdNumMovi", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spINV_aprobacion_ing_egr", idEmpresaParameter, idSucursalParameter, idBodegaParameter, idMovi_inven_tipoParameter, idNumMoviParameter);
+        }
+    
+        public virtual int spSys_Inv_Recosteo_Inventario(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<System.DateTime> fecha_ini, Nullable<int> cant_Decimales)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idSucursalParameter = idSucursal.HasValue ?
+                new ObjectParameter("IdSucursal", idSucursal) :
+                new ObjectParameter("IdSucursal", typeof(int));
+    
+            var idBodegaParameter = idBodega.HasValue ?
+                new ObjectParameter("IdBodega", idBodega) :
+                new ObjectParameter("IdBodega", typeof(int));
+    
+            var fecha_iniParameter = fecha_ini.HasValue ?
+                new ObjectParameter("Fecha_ini", fecha_ini) :
+                new ObjectParameter("Fecha_ini", typeof(System.DateTime));
+    
+            var cant_DecimalesParameter = cant_Decimales.HasValue ?
+                new ObjectParameter("cant_Decimales", cant_Decimales) :
+                new ObjectParameter("cant_Decimales", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spSys_Inv_Recosteo_Inventario", idEmpresaParameter, idSucursalParameter, idBodegaParameter, fecha_iniParameter, cant_DecimalesParameter);
         }
     }
 }

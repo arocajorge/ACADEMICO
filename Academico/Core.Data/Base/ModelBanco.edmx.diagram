@@ -14,6 +14,45 @@
         <EntityTypeShape EntityType="DBERP_LICEOModel.ba_parametros" Width="1.5" PointX="7.75" PointY="5.75" />
         <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Banco_Cuenta_x_tb_sucursal_ba_Banco_Cuenta" />
         <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Catalogo_ba_CatalogoTipo" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Cbte_Ban" Width="1.5" PointX="10.375" PointY="7" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Cbte_Ban_tipo" Width="1.5" PointX="13.75" PointY="1.125" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo" Width="1.5" PointX="16" PointY="1" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Cbte_Ban_x_ba_TipoFlujo" Width="1.5" PointX="12.625" PointY="14.875" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Conciliacion" Width="1.5" PointX="13.375" PointY="7.25" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Conciliacion_det" Width="1.5" PointX="15.625" PointY="5.875" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Conciliacion_det_IngEgr" Width="1.5" PointX="15.625" PointY="9.75" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_Talonario_cheques_x_banco" Width="1.5" PointX="8.375" PointY="25.75" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_tipo_nota" Width="1.5" PointX="8.125" PointY="10" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_TipoFlujo" Width="1.5" PointX="9.125" PointY="16.625" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_TipoFlujo_Movimiento" Width="1.5" PointX="11.375" PointY="1.875" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_TipoFlujo_Plantilla" Width="1.5" PointX="0.75" PointY="11" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.ba_TipoFlujo_PlantillaDet" Width="1.5" PointX="11.375" PointY="19" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Cbte_Ban_ba_Banco_Cuenta" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Conciliacion_ba_Banco_Cuenta" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_TipoFlujo_Movimiento_ba_Banco_Cuenta" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_ba_Cbte_Ban1" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Cbte_Ban_ba_Catalogo" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Cbte_Ban_ba_Catalogo1" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Conciliacion_ba_Catalogo" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Cbte_Ban_ba_tipo_nota" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Cbte_Ban_ba_TipoFlujo" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Cbte_Ban_x_ba_TipoFlujo_ba_Cbte_Ban" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo_ba_Cbte_Ban_tipo" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Cbte_Ban_x_ba_TipoFlujo_ba_TipoFlujo" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Conciliacion_det_ba_Conciliacion" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_Conciliacion_det_IngEgr_ba_Conciliacion" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_TipoFlujo_ba_TipoFlujo" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_TipoFlujo_Movimiento_ba_TipoFlujo" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo" />
+        <AssociationConnector Association="DBERP_LICEOModel.FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo_Plantilla" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.vwba_Cbte_Ban_x_ba_TipoFlujo" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.vwba_TipoFlujo_Movimiento" Width="1.5" PointX="2.75" PointY="15.75" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.vwba_TipoFlujoPlantillaDet" Width="1.5" PointX="15.75" PointY="15.75" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.vwba_Talonario_cheques_x_banco_ID" Width="1.5" PointX="7.75" PointY="13.75" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.vwba_Cbte_Ban" Width="1.5" PointX="5.375" PointY="16.75" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DBERP_LICEOModel.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar" Width="1.5" PointX="3.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
