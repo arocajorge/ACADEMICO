@@ -18,7 +18,7 @@
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){armar_diario();}";
     })
-      .BindList(new Core.Erp.Web.Areas.Banco.Controllers.NotaDeCreditoBancoController().get_list_bajo_TipoNota, new Core.Erp.Web.Areas.Banco.Controllers.NotaDeCreditoBancoController().get_info_bajo_demanda_TipoNota)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.Banco.ba_Cbte_Ban_Info) ? "" : (Model == 0 ? "" : Model));
+      .BindList(new Core.Web.Areas.Banco.Controllers.NotaDeCreditoBancoController().get_list_bajo_TipoNota, new Core.Web.Areas.Banco.Controllers.NotaDeCreditoBancoController().get_info_bajo_demanda_TipoNota)
+    .Bind(Model.GetType() == typeof(Core.Info.Banco.ba_Cbte_Ban_Info) ? "" : (Model == 0 ? "" : Model));
     }
 @comboBox.GetHtml()

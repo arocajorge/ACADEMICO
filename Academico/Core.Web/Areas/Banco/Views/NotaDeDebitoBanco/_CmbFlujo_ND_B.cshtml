@@ -20,8 +20,8 @@
         settings.Properties.Columns.Add("IdTipoFlujo", "ID", 10);
         settings.Properties.Columns.Add("Descricion", "Descripción", 20);
     })
-    .BindList(new Core.Erp.Web.Areas.Banco.Controllers.NotaDeDebitoBancoController().get_list_bajo_demandaFlujo, new Core.Erp.Web.Areas.Banco.Controllers.NotaDeDebitoBancoController().get_info_bajo_demandaFlujo)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.Banco.ba_Cbte_Ban_Info) ? "" : Model);
+    .BindList(new Core.Web.Areas.Banco.Controllers.NotaDeDebitoBancoController().get_list_bajo_demandaFlujo, new Core.Web.Areas.Banco.Controllers.NotaDeDebitoBancoController().get_info_bajo_demandaFlujo)
+    .Bind(Model.GetType() == typeof(Core.Info.Banco.ba_Cbte_Ban_Info) ? "" : Model);
 
 }
 @comboBox.GetHtml()

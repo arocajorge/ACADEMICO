@@ -543,7 +543,6 @@ namespace Core.Web.Areas.Banco.Controllers
         }
         #endregion
     }
-
     public class cp_orden_pago_cancelaciones_List
     {
         public List<cp_orden_pago_cancelaciones_Info> get_list(decimal IdTransaccionSession)

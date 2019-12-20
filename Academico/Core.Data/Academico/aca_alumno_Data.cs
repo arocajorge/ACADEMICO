@@ -51,7 +51,7 @@ namespace Core.Data.Academico
 
                 return Lista;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -108,7 +108,7 @@ namespace Core.Data.Academico
 
                 return info;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -258,7 +258,7 @@ namespace Core.Data.Academico
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -292,7 +292,7 @@ namespace Core.Data.Academico
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;

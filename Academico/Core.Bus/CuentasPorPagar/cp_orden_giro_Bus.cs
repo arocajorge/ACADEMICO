@@ -11,7 +11,6 @@ using Core.Data.General;
 using Core.Info.General;
 using Core.Data.Facturacion;
 using Core.Bus.General;
-using Core.Bus.Contabilidad;
 
 namespace Core.Bus.CuentasPorPagar
 {

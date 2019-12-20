@@ -328,7 +328,7 @@
       <DependentUpon>ModelCaja.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\cp_conciliacion_Caja_det_Ing_Caja.cs">
-      <DependentUpon>ModelBanco.tt</DependentUpon>
+      <DependentUpon>ModelCaja.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\cp_conciliacion_Caja_det_x_ValeCaja.cs">
       <DependentUpon>ModelCaja.tt</DependentUpon>

@@ -34,7 +34,7 @@
         <EntityTypeShape EntityType="ModelCaja.vwcaj_Caja_Movimiento_x_Conciliar" Width="1.5" PointX="5.375" PointY="11.75" />
         <EntityTypeShape EntityType="ModelCaja.vwcp_conciliacion_Caja_det" Width="1.5" PointX="11.375" PointY="11.75" />
         <EntityTypeShape EntityType="ModelCaja.vwcp_conciliacion_Caja_det_x_ValeCaja" Width="1.5" PointX="12.375" PointY="0.75" />
-        <EntityTypeShape EntityType="ModelCaja.caj_Caja_x_seg_usuario" Width="1.5" PointX="3" PointY="17.375" />
+        <EntityTypeShape EntityType="ModelCaja.caj_Caja_x_seg_usuario" Width="1.5" PointX="3.375" PointY="17.375" />
         <AssociationConnector Association="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja" />
       </Diagram>
     </edmx:Diagrams>

@@ -267,7 +267,7 @@ namespace Core.Data.Academico
 
                 return info;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;

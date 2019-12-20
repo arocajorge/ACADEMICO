@@ -371,7 +371,7 @@
 
     function Imprimir() {
         var location = GetPathServer();
-        var win = window.open(location +"/Reportes/CajaReportes/CAJ_001?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdTipocbte="+@Model.IdTipocbte+"&IdCbteCble="+@Model.IdCbteCble, '_blank');
+        var win = window.open(location +"/Reportes/CajaReportes/CAJ_001?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdTipocbte="+@Model.IdTipocbte+"&IdCbteCble="+@Model.IdCbteCble, '_blank');
         win.focus();
     }
 

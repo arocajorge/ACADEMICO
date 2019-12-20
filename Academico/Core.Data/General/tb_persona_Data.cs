@@ -220,7 +220,7 @@ namespace Core.Data.General
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -264,7 +264,7 @@ namespace Core.Data.General
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -409,12 +409,42 @@ namespace Core.Data.General
                         }
                         context_f.Dispose();
                         break;
+                    case "EMPLEA":
+                        EntitiesRRHH context_e = new EntitiesRRHH();
+                        var lstr = context_e.vwro_empleados_consulta.Where(q => q.IdEmpresa == IdEmpresa && q.em_estado == "A" && (q.IdEmpleado.ToString() + " " + q.pe_cedulaRuc + " " + q.Empleado).Contains(filter)).OrderBy(q => q.IdEmpleado).Skip(skip).Take(take);
+                        foreach (var q in lstr)
+                        {
+                            Lista.Add(new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.Empleado,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdEmpleado
+                            });
+                        }
+                        context_e.Dispose();
+                        break;
+                    case "PROVEE":
+                        EntitiesCuentasPorPagar context_p = new EntitiesCuentasPorPagar();
+                        var lstp = context_p.vwcp_proveedor_consulta.Where(q => q.IdEmpresa == IdEmpresa && q.pr_estado == "A" && (q.IdProveedor.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdProveedor).Skip(skip).Take(take);
+                        foreach (var q in lstp)
+                        {
+                            Lista.Add(new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdProveedor
+                            });
+                        }
+                        context_p.Dispose();
+                        break;
                 }
 
                 context_g.Dispose();
                 return Lista;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -471,6 +501,36 @@ namespace Core.Data.General
                                 IdEntidad = q.IdAlumno
                             }).FirstOrDefault();
                     context_mat.Dispose();
+                    break;
+                case "EMPLEA":
+                    EntitiesRRHH context_e = new EntitiesRRHH();
+                    info = (from q in context_e.vwro_empleados_consulta
+                            where q.em_estado == "A"
+                            && q.IdEmpresa == IdEmpresa
+                            && q.IdEmpleado == IdEntidad
+                            select new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.Empleado,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdEmpleado
+                            }).FirstOrDefault();
+                    context_e.Dispose();
+                    break;
+                case "PROVEE":
+                    EntitiesCuentasPorPagar context_p = new EntitiesCuentasPorPagar();
+                    info = (from q in context_p.vwcp_proveedor_consulta
+                            where q.pr_estado == "A"
+                            && q.IdEmpresa == IdEmpresa
+                            && q.IdProveedor == IdEntidad
+                            select new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdProveedor
+                            }).FirstOrDefault();
+                    context_p.Dispose();
                     break;
             }
 

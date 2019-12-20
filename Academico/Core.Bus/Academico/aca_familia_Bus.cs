@@ -179,7 +179,7 @@ namespace Core.Bus.Academico
 
                 return false;
             }
-            catch (Exception EX)
+            catch (Exception)
             {
                 throw;
             }
@@ -282,7 +282,7 @@ namespace Core.Bus.Academico
 
                 return true;
             }
-            catch (Exception EX)
+            catch (Exception)
             {
                 throw;
             }

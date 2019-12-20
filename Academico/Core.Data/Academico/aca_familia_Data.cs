@@ -190,7 +190,7 @@ namespace Core.Data.Academico
 
                 return info_familia;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -408,7 +408,7 @@ namespace Core.Data.Academico
 
                 return info;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -507,7 +507,7 @@ namespace Core.Data.Academico
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -576,7 +576,7 @@ namespace Core.Data.Academico
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -601,7 +601,7 @@ namespace Core.Data.Academico
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;

@@ -17,7 +17,7 @@
         settings.Properties.Columns.Add("Descricion", "Descripción", 90);
         settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
     })
-     .BindList(new Core.Erp.Web.Areas.Banco.Controllers.TipoFlujoPlantillaController().get_list_bajo_demanda_tipoflujo, new Core.Erp.Web.Areas.Banco.Controllers.TipoFlujoPlantillaController().get_info_bajo_demanda_tipoflujo)
-    .Bind((Model.GetType() == typeof(Core.Erp.Info.Banco.ba_TipoFlujo_Info) || Model.GetType() == typeof(Core.Erp.Info.Banco.ba_TipoFlujo_PlantillaDet_Info) || Model.GetType() == typeof(List<Core.Erp.Info.Banco.ba_TipoFlujo_PlantillaDet_Info>)) ? "" : Model);
+     .BindList(new Core.Web.Areas.Banco.Controllers.TipoFlujoPlantillaController().get_list_bajo_demanda_tipoflujo, new Core.Web.Areas.Banco.Controllers.TipoFlujoPlantillaController().get_info_bajo_demanda_tipoflujo)
+    .Bind((Model.GetType() == typeof(Core.Info.Banco.ba_TipoFlujo_Info) || Model.GetType() == typeof(Core.Info.Banco.ba_TipoFlujo_PlantillaDet_Info) || Model.GetType() == typeof(List<Core.Info.Banco.ba_TipoFlujo_PlantillaDet_Info>)) ? "" : Model);
     }
 @comboBox.GetHtml()

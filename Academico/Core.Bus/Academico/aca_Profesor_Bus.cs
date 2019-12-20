@@ -58,7 +58,7 @@ namespace Core.Bus.Academico
             {
                 return odata.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

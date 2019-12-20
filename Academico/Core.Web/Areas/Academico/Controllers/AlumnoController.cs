@@ -412,7 +412,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 if (model.alu_foto == null)
                     model.alu_foto = new byte[0];
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 model.alu_foto = new byte[0];

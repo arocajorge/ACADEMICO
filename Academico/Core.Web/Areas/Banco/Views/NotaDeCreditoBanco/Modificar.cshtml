@@ -1,8 +1,8 @@
-﻿@model Core.Erp.Info.Banco.ba_Cbte_Ban_Info
+﻿@model Core.Info.Banco.ba_Cbte_Ban_Info
 @{
     ViewBag.Title = ("Modificar crédito" + " con ID #" + @Model.IdCbteCble);
     Layout = "~/Views/Shared/_Layout.cshtml";
-    if (string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdEmpresa))
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
     }
@@ -325,7 +325,7 @@ function GetListBancoPorSucursal() {
 
     function Imprimir() {
         var location = GetPathServer();        
-        var win = window.open(location +"/Reportes/BancoReportes/BAN_002?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdTipocbte="+@Model.IdTipocbte+"&IdCbteCble="+@Model.IdCbteCble, '_blank');
+        var win = window.open(location +"/Reportes/BancoReportes/BAN_002?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdTipocbte="+@Model.IdTipocbte+"&IdCbteCble="+@Model.IdCbteCble, '_blank');
         win.focus();
     }
 </script>

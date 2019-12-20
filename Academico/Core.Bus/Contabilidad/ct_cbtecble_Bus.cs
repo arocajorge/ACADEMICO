@@ -1,5 +1,7 @@
-﻿using Core.Data.Contabilidad;
+﻿using Core.Bus.General;
+using Core.Data.Contabilidad;
 using Core.Info.Contabilidad;
+using Core.Info.General;
 using System;
 using System.Collections.Generic;
 
@@ -43,8 +45,8 @@ namespace Core.Bus.Contabilidad
             }
             catch (Exception ex)
             {
-                //tb_LogError_Bus LogData = new tb_LogError_Bus();
-                //LogData.GuardarDB(new tb_LogError_Info { Descripcion = ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.Message, Clase = "ct_cbtecble_Bus", Metodo = "guardarDB", IdUsuario = info.IdUsuario });
+                tb_LogError_Bus LogData = new tb_LogError_Bus();
+                LogData.GuardarDB(new tb_LogError_Info { Descripcion = ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.Message, Clase = "ct_cbtecble_Bus", Metodo = "guardarDB", IdUsuario = info.IdUsuario });
                 return false;
             }
         }
@@ -57,8 +59,8 @@ namespace Core.Bus.Contabilidad
             }
             catch (Exception ex)
             {
-                //tb_LogError_Bus LogData = new tb_LogError_Bus();
-                //LogData.GuardarDB(new tb_LogError_Info { Descripcion = ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.Message, Clase = "ct_cbtecble_Bus", Metodo = "modificarDB", IdUsuario = info.IdUsuario });
+                tb_LogError_Bus LogData = new tb_LogError_Bus();
+                LogData.GuardarDB(new tb_LogError_Info { Descripcion = ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.Message, Clase = "ct_cbtecble_Bus", Metodo = "modificarDB", IdUsuario = info.IdUsuario });
                 return false;
             }
         }

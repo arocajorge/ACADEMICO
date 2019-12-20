@@ -30,7 +30,7 @@ namespace Core.Bus.Caja
             {
                 return odata.GetIdCajaPorUsuario(IdEmpresa, IdUsuario);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }

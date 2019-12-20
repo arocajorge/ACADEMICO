@@ -20,7 +20,6 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
         aca_AlumnoRetiro_Bus bus_alumno_retiro = new aca_AlumnoRetiro_Bus();
         aca_AlumnoRetiro_List Lista_AlumnoRetiro = new aca_AlumnoRetiro_List();
-        string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
 
