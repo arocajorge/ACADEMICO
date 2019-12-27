@@ -42,6 +42,9 @@
         <EntityTypeShape EntityType="ModelContabilidad.ct_grupocble" Width="1.5" PointX="9.375" PointY="11" />
         <EntityTypeShape EntityType="ModelContabilidad.vwct_cbtecble_con_ctacble_acreedora" Width="1.5" PointX="11.375" PointY="0.75" />
         <AssociationConnector Association="ModelContabilidad.FK_ct_plancta_ct_grupocble" />
+        <EntityTypeShape EntityType="ModelContabilidad.ct_periodo_x_tb_modulo" Width="1.5" PointX="3" PointY="22.25" />
+        <EntityTypeShape EntityType="ModelContabilidad.vwct_CierrePorModuloPorSucursal" Width="1.5" PointX="11.375" PointY="10.75" />
+        <AssociationConnector Association="ModelContabilidad.FK_ct_periodo_x_tb_modulo_ct_periodo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

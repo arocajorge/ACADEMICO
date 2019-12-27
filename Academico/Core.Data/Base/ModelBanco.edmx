@@ -5,6 +5,67 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DBERP_LICEOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ba_Archivo_Transferencia">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdArchivo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cod_archivo" Type="varchar" MaxLength="50" />
+          <Property Name="IdBanco" Type="int" Nullable="false" />
+          <Property Name="IdProceso_bancario" Type="int" Nullable="false" />
+          <Property Name="Cod_Empresa" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Nom_Archivo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_Transac" Type="datetime" />
+          <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltMod" Type="datetime" />
+          <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_UltAnu" Type="datetime" />
+          <Property Name="Motivo_anulacion" Type="varchar(max)" />
+          <Property Name="IdUsuarioContabiliza" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_Proceso" Type="datetime" />
+          <Property Name="Contabilizado" Type="bit" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="SecuencialInicial" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="cb_Valor" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ba_Archivo_Transferencia_Det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdArchivo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa_OP" Type="int" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia_OP" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="Secuencial_reg_x_proceso" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Referencia" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ba_archivo_transferencia_x_ba_tipo_flujo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdArchivo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdTipoFlujo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Porcentaje" Type="float" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="ba_Banco_Cuenta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -363,6 +424,56 @@
           <Property Name="valor_disponible" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwba_Archivo_Transferencia_Det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwba_Archivo_Transferencia_Det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdEmpresa_OP" />
+            <PropertyRef Name="IdOrdenPago" />
+            <PropertyRef Name="Secuencia_OP" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Secuencial_reg_x_proceso" />
+            <PropertyRef Name="IdTipoDocumento" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="CodigoLegalBanco" />
+            <PropertyRef Name="IdTipo_Persona" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdEntidad" />
+            <PropertyRef Name="cb_Fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdArchivo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa_OP" Type="int" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia_OP" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="Secuencial_reg_x_proceso" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipoCta_acreditacion_cat" Type="varchar" MaxLength="25" />
+          <Property Name="num_cta_acreditacion" Type="varchar" MaxLength="50" />
+          <Property Name="IdBanco_acreditacion" Type="int" />
+          <Property Name="pr_direccion" Type="varchar" MaxLength="500" />
+          <Property Name="pr_correo" Type="varchar(max)" />
+          <Property Name="IdTipoDocumento" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar(max)" />
+          <Property Name="CodigoLegalBanco" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Referencia" Type="varchar(max)" />
+          <Property Name="IdTipo_Persona" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEntidad" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cb_Fecha" Type="datetime" Nullable="false" />
+          <Property Name="IdCtaCble_Acreedora" Type="varchar" MaxLength="20" />
+          <Property Name="pc_Cuenta" Type="varchar" MaxLength="523" />
+          <Property Name="IdEmpresa_cxp" Type="int" />
+          <Property Name="IdTipoCbte_cxp" Type="int" />
+          <Property Name="IdCbteCble_cxp" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
           <Key>
@@ -554,6 +665,62 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwba_Talonario_cheques_x_ban
           <Property Name="IdBanco" Type="int" Nullable="false" />
           <Property Name="Num_cheque" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
+        <Association Name="FK_ba_Archivo_Transferencia_ba_Banco_Cuenta">
+          <End Role="ba_Banco_Cuenta" Type="Self.ba_Banco_Cuenta" Multiplicity="1" />
+          <End Role="ba_Archivo_Transferencia" Type="Self.ba_Archivo_Transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_Banco_Cuenta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="ba_Archivo_Transferencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ba_Archivo_Transferencia_Det_ba_Archivo_Transferencia1">
+          <End Role="ba_Archivo_Transferencia" Type="Self.ba_Archivo_Transferencia" Multiplicity="1" />
+          <End Role="ba_Archivo_Transferencia_Det" Type="Self.ba_Archivo_Transferencia_Det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_Archivo_Transferencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdArchivo" />
+            </Principal>
+            <Dependent Role="ba_Archivo_Transferencia_Det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_Archivo_Transferencia">
+          <End Role="ba_Archivo_Transferencia" Type="Self.ba_Archivo_Transferencia" Multiplicity="1" />
+          <End Role="ba_archivo_transferencia_x_ba_tipo_flujo" Type="Self.ba_archivo_transferencia_x_ba_tipo_flujo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_Archivo_Transferencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdArchivo" />
+            </Principal>
+            <Dependent Role="ba_archivo_transferencia_x_ba_tipo_flujo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_TipoFlujo">
+          <End Role="ba_TipoFlujo" Type="Self.ba_TipoFlujo" Multiplicity="1" />
+          <End Role="ba_archivo_transferencia_x_ba_tipo_flujo" Type="Self.ba_archivo_transferencia_x_ba_tipo_flujo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_TipoFlujo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoFlujo" />
+            </Principal>
+            <Dependent Role="ba_archivo_transferencia_x_ba_tipo_flujo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoFlujo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ba_Banco_Cuenta_x_tb_sucursal_ba_Banco_Cuenta">
           <End Role="ba_Banco_Cuenta" Type="Self.ba_Banco_Cuenta" Multiplicity="1" />
           <End Role="ba_Banco_Cuenta_x_tb_sucursal" Type="Self.ba_Banco_Cuenta_x_tb_sucursal" Multiplicity="*" />
@@ -843,6 +1010,9 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwba_Talonario_cheques_x_ban
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DBERP_LICEOModelStoreContainer">
+          <EntitySet Name="ba_Archivo_Transferencia" EntityType="Self.ba_Archivo_Transferencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ba_Archivo_Transferencia_Det" EntityType="Self.ba_Archivo_Transferencia_Det" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ba_archivo_transferencia_x_ba_tipo_flujo" EntityType="Self.ba_archivo_transferencia_x_ba_tipo_flujo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_Banco_Cuenta" EntityType="Self.ba_Banco_Cuenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_Banco_Cuenta_x_tb_sucursal" EntityType="Self.ba_Banco_Cuenta_x_tb_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntityType="Self.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" Schema="dbo" store:Type="Tables" />
@@ -863,6 +1033,38 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwba_Talonario_cheques_x_ban
           <EntitySet Name="ba_TipoFlujo_Plantilla" EntityType="Self.ba_TipoFlujo_Plantilla" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ba_TipoFlujo_PlantillaDet" EntityType="Self.ba_TipoFlujo_PlantillaDet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cp_conciliacion_Caja_det_Ing_Caja" EntityType="Self.cp_conciliacion_Caja_det_Ing_Caja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwba_Archivo_Transferencia_Det" EntityType="Self.vwba_Archivo_Transferencia_Det" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwba_Archivo_Transferencia_Det].[IdEmpresa] AS [IdEmpresa], 
+    [vwba_Archivo_Transferencia_Det].[IdArchivo] AS [IdArchivo], 
+    [vwba_Archivo_Transferencia_Det].[Secuencia] AS [Secuencia], 
+    [vwba_Archivo_Transferencia_Det].[IdEmpresa_OP] AS [IdEmpresa_OP], 
+    [vwba_Archivo_Transferencia_Det].[IdOrdenPago] AS [IdOrdenPago], 
+    [vwba_Archivo_Transferencia_Det].[Secuencia_OP] AS [Secuencia_OP], 
+    [vwba_Archivo_Transferencia_Det].[Estado] AS [Estado], 
+    [vwba_Archivo_Transferencia_Det].[Valor] AS [Valor], 
+    [vwba_Archivo_Transferencia_Det].[Secuencial_reg_x_proceso] AS [Secuencial_reg_x_proceso], 
+    [vwba_Archivo_Transferencia_Det].[IdTipoCta_acreditacion_cat] AS [IdTipoCta_acreditacion_cat], 
+    [vwba_Archivo_Transferencia_Det].[num_cta_acreditacion] AS [num_cta_acreditacion], 
+    [vwba_Archivo_Transferencia_Det].[IdBanco_acreditacion] AS [IdBanco_acreditacion], 
+    [vwba_Archivo_Transferencia_Det].[pr_direccion] AS [pr_direccion], 
+    [vwba_Archivo_Transferencia_Det].[pr_correo] AS [pr_correo], 
+    [vwba_Archivo_Transferencia_Det].[IdTipoDocumento] AS [IdTipoDocumento], 
+    [vwba_Archivo_Transferencia_Det].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [vwba_Archivo_Transferencia_Det].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwba_Archivo_Transferencia_Det].[CodigoLegalBanco] AS [CodigoLegalBanco], 
+    [vwba_Archivo_Transferencia_Det].[Referencia] AS [Referencia], 
+    [vwba_Archivo_Transferencia_Det].[IdTipo_Persona] AS [IdTipo_Persona], 
+    [vwba_Archivo_Transferencia_Det].[IdPersona] AS [IdPersona], 
+    [vwba_Archivo_Transferencia_Det].[IdEntidad] AS [IdEntidad], 
+    [vwba_Archivo_Transferencia_Det].[cb_Fecha] AS [cb_Fecha], 
+    [vwba_Archivo_Transferencia_Det].[IdCtaCble_Acreedora] AS [IdCtaCble_Acreedora], 
+    [vwba_Archivo_Transferencia_Det].[pc_Cuenta] AS [pc_Cuenta], 
+    [vwba_Archivo_Transferencia_Det].[IdEmpresa_cxp] AS [IdEmpresa_cxp], 
+    [vwba_Archivo_Transferencia_Det].[IdTipoCbte_cxp] AS [IdTipoCbte_cxp], 
+    [vwba_Archivo_Transferencia_Det].[IdCbteCble_cxp] AS [IdCbteCble_cxp]
+    FROM [dbo].[vwba_Archivo_Transferencia_Det] AS [vwba_Archivo_Transferencia_Det]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntityType="Self.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito].[IdEmpresa] AS [IdEmpresa], 
@@ -972,6 +1174,22 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwba_Talonario_cheques_x_ban
     [vwba_Talonario_cheques_x_banco_ID].[Num_cheque] AS [Num_cheque]
     FROM [web].[vwba_Talonario_cheques_x_banco_ID] AS [vwba_Talonario_cheques_x_banco_ID]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_ba_Archivo_Transferencia_ba_Banco_Cuenta" Association="Self.FK_ba_Archivo_Transferencia_ba_Banco_Cuenta">
+            <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
+            <End Role="ba_Archivo_Transferencia" EntitySet="ba_Archivo_Transferencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ba_Archivo_Transferencia_Det_ba_Archivo_Transferencia1" Association="Self.FK_ba_Archivo_Transferencia_Det_ba_Archivo_Transferencia1">
+            <End Role="ba_Archivo_Transferencia" EntitySet="ba_Archivo_Transferencia" />
+            <End Role="ba_Archivo_Transferencia_Det" EntitySet="ba_Archivo_Transferencia_Det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_Archivo_Transferencia" Association="Self.FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_Archivo_Transferencia">
+            <End Role="ba_Archivo_Transferencia" EntitySet="ba_Archivo_Transferencia" />
+            <End Role="ba_archivo_transferencia_x_ba_tipo_flujo" EntitySet="ba_archivo_transferencia_x_ba_tipo_flujo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_TipoFlujo" Association="Self.FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_TipoFlujo">
+            <End Role="ba_TipoFlujo" EntitySet="ba_TipoFlujo" />
+            <End Role="ba_archivo_transferencia_x_ba_tipo_flujo" EntitySet="ba_archivo_transferencia_x_ba_tipo_flujo" />
+          </AssociationSet>
           <AssociationSet Name="FK_ba_Banco_Cuenta_x_tb_sucursal_ba_Banco_Cuenta" Association="Self.FK_ba_Banco_Cuenta_x_tb_sucursal_ba_Banco_Cuenta">
             <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
             <End Role="ba_Banco_Cuenta_x_tb_sucursal" EntitySet="ba_Banco_Cuenta_x_tb_sucursal" />
@@ -1188,6 +1406,26 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwba_Talonario_cheques_x_ban
           <EntitySet Name="vwba_Cbte_Ban" EntityType="DBERP_LICEOModel.vwba_Cbte_Ban" />
           <EntitySet Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntityType="DBERP_LICEOModel.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" />
           <EntitySet Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar" EntityType="DBERP_LICEOModel.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar" />
+          <EntitySet Name="ba_Archivo_Transferencia" EntityType="DBERP_LICEOModel.ba_Archivo_Transferencia" />
+          <EntitySet Name="ba_Archivo_Transferencia_Det" EntityType="DBERP_LICEOModel.ba_Archivo_Transferencia_Det" />
+          <EntitySet Name="ba_archivo_transferencia_x_ba_tipo_flujo" EntityType="DBERP_LICEOModel.ba_archivo_transferencia_x_ba_tipo_flujo" />
+          <EntitySet Name="vwba_Archivo_Transferencia_Det" EntityType="DBERP_LICEOModel.vwba_Archivo_Transferencia_Det" />
+          <AssociationSet Name="FK_ba_Archivo_Transferencia_ba_Banco_Cuenta" Association="DBERP_LICEOModel.FK_ba_Archivo_Transferencia_ba_Banco_Cuenta">
+            <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
+            <End Role="ba_Archivo_Transferencia" EntitySet="ba_Archivo_Transferencia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ba_Archivo_Transferencia_Det_ba_Archivo_Transferencia1" Association="DBERP_LICEOModel.FK_ba_Archivo_Transferencia_Det_ba_Archivo_Transferencia1">
+            <End Role="ba_Archivo_Transferencia" EntitySet="ba_Archivo_Transferencia" />
+            <End Role="ba_Archivo_Transferencia_Det" EntitySet="ba_Archivo_Transferencia_Det" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_Archivo_Transferencia" Association="DBERP_LICEOModel.FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_Archivo_Transferencia">
+            <End Role="ba_Archivo_Transferencia" EntitySet="ba_Archivo_Transferencia" />
+            <End Role="ba_archivo_transferencia_x_ba_tipo_flujo" EntitySet="ba_archivo_transferencia_x_ba_tipo_flujo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_TipoFlujo" Association="DBERP_LICEOModel.FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_TipoFlujo">
+            <End Role="ba_TipoFlujo" EntitySet="ba_TipoFlujo" />
+            <End Role="ba_archivo_transferencia_x_ba_tipo_flujo" EntitySet="ba_archivo_transferencia_x_ba_tipo_flujo" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
           <Key>
@@ -1239,6 +1477,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwba_Talonario_cheques_x_ban
           <NavigationProperty Name="ba_Conciliacion" Relationship="DBERP_LICEOModel.FK_ba_Conciliacion_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Conciliacion" />
           <NavigationProperty Name="ba_Talonario_cheques_x_banco" Relationship="DBERP_LICEOModel.FK_ba_Talonario_cheques_x_banco_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Talonario_cheques_x_banco" />
           <NavigationProperty Name="ba_TipoFlujo_Movimiento" Relationship="DBERP_LICEOModel.FK_ba_TipoFlujo_Movimiento_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_TipoFlujo_Movimiento" />
+          <NavigationProperty Name="ba_Archivo_Transferencia" Relationship="DBERP_LICEOModel.FK_ba_Archivo_Transferencia_ba_Banco_Cuenta" FromRole="ba_Banco_Cuenta" ToRole="ba_Archivo_Transferencia" />
         </EntityType>
         <EntityType Name="ba_Banco_Cuenta_x_tb_sucursal">
           <Key>
@@ -1543,6 +1782,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwba_Talonario_cheques_x_ban
           <NavigationProperty Name="ba_TipoFlujo2" Relationship="DBERP_LICEOModel.FK_ba_TipoFlujo_ba_TipoFlujo" FromRole="ba_TipoFlujo1" ToRole="ba_TipoFlujo" />
           <NavigationProperty Name="ba_TipoFlujo_Movimiento" Relationship="DBERP_LICEOModel.FK_ba_TipoFlujo_Movimiento_ba_TipoFlujo" FromRole="ba_TipoFlujo" ToRole="ba_TipoFlujo_Movimiento" />
           <NavigationProperty Name="ba_TipoFlujo_PlantillaDet" Relationship="DBERP_LICEOModel.FK_ba_TipoFlujo_PlantillaDet_ba_TipoFlujo" FromRole="ba_TipoFlujo" ToRole="ba_TipoFlujo_PlantillaDet" />
+          <NavigationProperty Name="ba_archivo_transferencia_x_ba_tipo_flujo" Relationship="DBERP_LICEOModel.FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_TipoFlujo" FromRole="ba_TipoFlujo" ToRole="ba_archivo_transferencia_x_ba_tipo_flujo" />
         </EntityType>
         <EntityType Name="ba_TipoFlujo_Movimiento">
           <Key>
@@ -2039,6 +2279,177 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwba_Talonario_cheques_x_ban
           <Property Name="ca_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cbr_IdSucursal" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="ba_Archivo_Transferencia">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="cod_archivo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco" Type="Int32" Nullable="false" />
+          <Property Name="IdProceso_bancario" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Empresa" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Nom_Archivo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Observacion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="Motivo_anulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioContabiliza" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Proceso" Type="DateTime" Precision="3" />
+          <Property Name="Contabilizado" Type="Boolean" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="SecuencialInicial" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipoCbte" Type="Int32" />
+          <Property Name="IdCbteCble" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="cb_Valor" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ba_Banco_Cuenta" Relationship="DBERP_LICEOModel.FK_ba_Archivo_Transferencia_ba_Banco_Cuenta" FromRole="ba_Archivo_Transferencia" ToRole="ba_Banco_Cuenta" />
+          <NavigationProperty Name="ba_Archivo_Transferencia_Det" Relationship="DBERP_LICEOModel.FK_ba_Archivo_Transferencia_Det_ba_Archivo_Transferencia1" FromRole="ba_Archivo_Transferencia" ToRole="ba_Archivo_Transferencia_Det" />
+          <NavigationProperty Name="ba_archivo_transferencia_x_ba_tipo_flujo" Relationship="DBERP_LICEOModel.FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_Archivo_Transferencia" FromRole="ba_Archivo_Transferencia" ToRole="ba_archivo_transferencia_x_ba_tipo_flujo" />
+        </EntityType>
+        <EntityType Name="ba_Archivo_Transferencia_Det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_OP" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia_OP" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Secuencial_reg_x_proceso" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Referencia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ba_Archivo_Transferencia" Relationship="DBERP_LICEOModel.FK_ba_Archivo_Transferencia_Det_ba_Archivo_Transferencia1" FromRole="ba_Archivo_Transferencia_Det" ToRole="ba_Archivo_Transferencia" />
+        </EntityType>
+        <EntityType Name="ba_archivo_transferencia_x_ba_tipo_flujo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoFlujo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Porcentaje" Type="Double" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ba_Archivo_Transferencia" Relationship="DBERP_LICEOModel.FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_Archivo_Transferencia" FromRole="ba_archivo_transferencia_x_ba_tipo_flujo" ToRole="ba_Archivo_Transferencia" />
+          <NavigationProperty Name="ba_TipoFlujo" Relationship="DBERP_LICEOModel.FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_TipoFlujo" FromRole="ba_archivo_transferencia_x_ba_tipo_flujo" ToRole="ba_TipoFlujo" />
+        </EntityType>
+        <EntityType Name="vwba_Archivo_Transferencia_Det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdEmpresa_OP" />
+            <PropertyRef Name="IdOrdenPago" />
+            <PropertyRef Name="Secuencia_OP" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Secuencial_reg_x_proceso" />
+            <PropertyRef Name="IdTipoDocumento" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="CodigoLegalBanco" />
+            <PropertyRef Name="IdTipo_Persona" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdEntidad" />
+            <PropertyRef Name="cb_Fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_OP" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia_OP" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Secuencial_reg_x_proceso" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipoCta_acreditacion_cat" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="num_cta_acreditacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco_acreditacion" Type="Int32" />
+          <Property Name="pr_direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pr_correo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoLegalBanco" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Referencia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_Persona" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEntidad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdCtaCble_Acreedora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Cuenta" Type="String" MaxLength="523" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_cxp" Type="Int32" />
+          <Property Name="IdTipoCbte_cxp" Type="Int32" />
+          <Property Name="IdCbteCble_cxp" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_ba_Archivo_Transferencia_ba_Banco_Cuenta">
+          <End Type="DBERP_LICEOModel.ba_Banco_Cuenta" Role="ba_Banco_Cuenta" Multiplicity="1" />
+          <End Type="DBERP_LICEOModel.ba_Archivo_Transferencia" Role="ba_Archivo_Transferencia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_Banco_Cuenta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="ba_Archivo_Transferencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ba_Archivo_Transferencia_Det_ba_Archivo_Transferencia1">
+          <End Type="DBERP_LICEOModel.ba_Archivo_Transferencia" Role="ba_Archivo_Transferencia" Multiplicity="1" />
+          <End Type="DBERP_LICEOModel.ba_Archivo_Transferencia_Det" Role="ba_Archivo_Transferencia_Det" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_Archivo_Transferencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdArchivo" />
+            </Principal>
+            <Dependent Role="ba_Archivo_Transferencia_Det">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_Archivo_Transferencia">
+          <End Type="DBERP_LICEOModel.ba_Archivo_Transferencia" Role="ba_Archivo_Transferencia" Multiplicity="1" />
+          <End Type="DBERP_LICEOModel.ba_archivo_transferencia_x_ba_tipo_flujo" Role="ba_archivo_transferencia_x_ba_tipo_flujo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_Archivo_Transferencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdArchivo" />
+            </Principal>
+            <Dependent Role="ba_archivo_transferencia_x_ba_tipo_flujo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_TipoFlujo">
+          <End Type="DBERP_LICEOModel.ba_TipoFlujo" Role="ba_TipoFlujo" Multiplicity="1" />
+          <End Type="DBERP_LICEOModel.ba_archivo_transferencia_x_ba_tipo_flujo" Role="ba_archivo_transferencia_x_ba_tipo_flujo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ba_TipoFlujo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoFlujo" />
+            </Principal>
+            <Dependent Role="ba_archivo_transferencia_x_ba_tipo_flujo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoFlujo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2511,6 +2922,99 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwba_Talonario_cheques_x_ban
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
                 <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_Archivo_Transferencia">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.ba_Archivo_Transferencia">
+              <MappingFragment StoreEntitySet="ba_Archivo_Transferencia">
+                <ScalarProperty Name="cb_Valor" ColumnName="cb_Valor" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="SecuencialInicial" ColumnName="SecuencialInicial" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Contabilizado" ColumnName="Contabilizado" />
+                <ScalarProperty Name="Fecha_Proceso" ColumnName="Fecha_Proceso" />
+                <ScalarProperty Name="IdUsuarioContabiliza" ColumnName="IdUsuarioContabiliza" />
+                <ScalarProperty Name="Motivo_anulacion" ColumnName="Motivo_anulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Nom_Archivo" ColumnName="Nom_Archivo" />
+                <ScalarProperty Name="Cod_Empresa" ColumnName="Cod_Empresa" />
+                <ScalarProperty Name="IdProceso_bancario" ColumnName="IdProceso_bancario" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="cod_archivo" ColumnName="cod_archivo" />
+                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_Archivo_Transferencia_Det">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.ba_Archivo_Transferencia_Det">
+              <MappingFragment StoreEntitySet="ba_Archivo_Transferencia_Det">
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="Secuencial_reg_x_proceso" ColumnName="Secuencial_reg_x_proceso" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Secuencia_OP" ColumnName="Secuencia_OP" />
+                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
+                <ScalarProperty Name="IdEmpresa_OP" ColumnName="IdEmpresa_OP" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_archivo_transferencia_x_ba_tipo_flujo">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.ba_archivo_transferencia_x_ba_tipo_flujo">
+              <MappingFragment StoreEntitySet="ba_archivo_transferencia_x_ba_tipo_flujo">
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwba_Archivo_Transferencia_Det">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.vwba_Archivo_Transferencia_Det">
+              <MappingFragment StoreEntitySet="vwba_Archivo_Transferencia_Det">
+                <ScalarProperty Name="IdCbteCble_cxp" ColumnName="IdCbteCble_cxp" />
+                <ScalarProperty Name="IdTipoCbte_cxp" ColumnName="IdTipoCbte_cxp" />
+                <ScalarProperty Name="IdEmpresa_cxp" ColumnName="IdEmpresa_cxp" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="IdCtaCble_Acreedora" ColumnName="IdCtaCble_Acreedora" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="IdEntidad" ColumnName="IdEntidad" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdTipo_Persona" ColumnName="IdTipo_Persona" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="CodigoLegalBanco" ColumnName="CodigoLegalBanco" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="pr_correo" ColumnName="pr_correo" />
+                <ScalarProperty Name="pr_direccion" ColumnName="pr_direccion" />
+                <ScalarProperty Name="IdBanco_acreditacion" ColumnName="IdBanco_acreditacion" />
+                <ScalarProperty Name="num_cta_acreditacion" ColumnName="num_cta_acreditacion" />
+                <ScalarProperty Name="IdTipoCta_acreditacion_cat" ColumnName="IdTipoCta_acreditacion_cat" />
+                <ScalarProperty Name="Secuencial_reg_x_proceso" ColumnName="Secuencial_reg_x_proceso" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Secuencia_OP" ColumnName="Secuencia_OP" />
+                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
+                <ScalarProperty Name="IdEmpresa_OP" ColumnName="IdEmpresa_OP" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

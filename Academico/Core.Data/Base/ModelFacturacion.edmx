@@ -530,6 +530,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Matricula_Rubro_PorFac
             <PropertyRef Name="AplicaProntoPago" />
             <PropertyRef Name="NomRubro" />
             <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="FechaDesde" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -553,6 +554,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Matricula_Rubro_PorFac
           <Property Name="AplicaProntoPago" Type="bit" Nullable="false" />
           <Property Name="NomRubro" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FechaDesde" Type="date" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwfa_cliente_contactos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1239,7 +1241,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwfa_notaCreDeb_x_fa_factura
     [vwaca_Matricula_Rubro_PorFacturar].[IdAlumno] AS [IdAlumno], 
     [vwaca_Matricula_Rubro_PorFacturar].[AplicaProntoPago] AS [AplicaProntoPago], 
     [vwaca_Matricula_Rubro_PorFacturar].[NomRubro] AS [NomRubro], 
-    [vwaca_Matricula_Rubro_PorFacturar].[pr_descripcion] AS [pr_descripcion]
+    [vwaca_Matricula_Rubro_PorFacturar].[pr_descripcion] AS [pr_descripcion], 
+    [vwaca_Matricula_Rubro_PorFacturar].[FechaDesde] AS [FechaDesde]
     FROM [dbo].[vwaca_Matricula_Rubro_PorFacturar] AS [vwaca_Matricula_Rubro_PorFacturar]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_cliente_contactos" EntityType="Self.vwfa_cliente_contactos" store:Type="Views" store:Schema="dbo">
@@ -1669,12 +1672,12 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwfa_notaCreDeb_x_fa_factura
             <End Role="fa_TerminoPago_Distribucion" EntitySet="fa_TerminoPago_Distribucion" />
           </AssociationSet>
           <EntitySet Name="vwfa_factura_sin_automatico" EntityType="ModelFacturacion.vwfa_factura_sin_automatico" />
-          <EntitySet Name="vwaca_Matricula_Rubro_PorFacturar" EntityType="ModelFacturacion.vwaca_Matricula_Rubro_PorFacturar" />
           <EntitySet Name="vwfa_factura" EntityType="ModelFacturacion.vwfa_factura" />
           <EntitySet Name="fa_TipoNota_x_Empresa_x_Sucursal" EntityType="ModelFacturacion.fa_TipoNota_x_Empresa_x_Sucursal" />
           <EntitySet Name="vwfa_notaCreDeb_x_fa_factura_NotaDeb" EntityType="ModelFacturacion.vwfa_notaCreDeb_x_fa_factura_NotaDeb" />
           <EntitySet Name="vwfa_notaCreDeb_det" EntityType="ModelFacturacion.vwfa_notaCreDeb_det" />
           <EntitySet Name="vwfa_notaCreDeb" EntityType="ModelFacturacion.vwfa_notaCreDeb" />
+          <EntitySet Name="vwaca_Matricula_Rubro_PorFacturar" EntityType="ModelFacturacion.vwaca_Matricula_Rubro_PorFacturar" />
         </EntityContainer>
         <EntityType Name="fa_cliente">
           <Key>
@@ -2676,46 +2679,6 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwfa_notaCreDeb_x_fa_factura
           <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="IdCobro" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
-        <EntityType Name="vwaca_Matricula_Rubro_PorFacturar">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMatricula" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="IdMecanismo" />
-            <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="EnMatricula" />
-            <PropertyRef Name="IdCod_Impuesto_Iva" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="IdSede" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="AplicaProntoPago" />
-            <PropertyRef Name="NomRubro" />
-            <PropertyRef Name="pr_descripcion" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="IdRubro" Type="Int32" Nullable="false" />
-          <Property Name="IdMecanismo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="EnMatricula" Type="Boolean" Nullable="false" />
-          <Property Name="Subtotal" Type="Double" />
-          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Porcentaje" Type="Double" />
-          <Property Name="ValorIVA" Type="Double" />
-          <Property Name="Total" Type="Double" />
-          <Property Name="IdSucursal" Type="Int32" />
-          <Property Name="IdBodega" Type="Int32" />
-          <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="FechaFacturacion" Type="DateTime" Precision="3" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="IdSede" Type="Int32" Nullable="false" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="AplicaProntoPago" Type="Boolean" Nullable="false" />
-          <Property Name="NomRubro" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="vwfa_factura">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2873,6 +2836,48 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwfa_notaCreDeb_x_fa_factura
           <Property Name="sc_total" Type="Double" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="IdAlumno" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="vwaca_Matricula_Rubro_PorFacturar">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="IdMecanismo" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="EnMatricula" />
+            <PropertyRef Name="IdCod_Impuesto_Iva" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdSede" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="AplicaProntoPago" />
+            <PropertyRef Name="NomRubro" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="FechaDesde" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdRubro" Type="Int32" Nullable="false" />
+          <Property Name="IdMecanismo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="EnMatricula" Type="Boolean" Nullable="false" />
+          <Property Name="Subtotal" Type="Double" />
+          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Porcentaje" Type="Double" />
+          <Property Name="ValorIVA" Type="Double" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <Property Name="IdBodega" Type="Int32" />
+          <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FechaFacturacion" Type="DateTime" Precision="3" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdSede" Type="Int32" Nullable="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="AplicaProntoPago" Type="Boolean" Nullable="false" />
+          <Property Name="NomRubro" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3451,34 +3456,6 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwfa_notaCreDeb_x_fa_factura
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwaca_Matricula_Rubro_PorFacturar">
-            <EntityTypeMapping TypeName="ModelFacturacion.vwaca_Matricula_Rubro_PorFacturar">
-              <MappingFragment StoreEntitySet="vwaca_Matricula_Rubro_PorFacturar">
-                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
-                <ScalarProperty Name="NomRubro" ColumnName="NomRubro" />
-                <ScalarProperty Name="AplicaProntoPago" ColumnName="AplicaProntoPago" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="FechaFacturacion" ColumnName="FechaFacturacion" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="ValorIVA" ColumnName="ValorIVA" />
-                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
-                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="EnMatricula" ColumnName="EnMatricula" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="IdMecanismo" ColumnName="IdMecanismo" />
-                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwfa_factura">
             <EntityTypeMapping TypeName="ModelFacturacion.vwfa_factura">
               <MappingFragment StoreEntitySet="vwfa_factura">
@@ -3594,6 +3571,35 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwfa_notaCreDeb_x_fa_factura
                 <ScalarProperty Name="IdNota" ColumnName="IdNota" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwaca_Matricula_Rubro_PorFacturar">
+            <EntityTypeMapping TypeName="ModelFacturacion.vwaca_Matricula_Rubro_PorFacturar">
+              <MappingFragment StoreEntitySet="vwaca_Matricula_Rubro_PorFacturar">
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="NomRubro" ColumnName="NomRubro" />
+                <ScalarProperty Name="AplicaProntoPago" ColumnName="AplicaProntoPago" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="FechaFacturacion" ColumnName="FechaFacturacion" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ValorIVA" ColumnName="ValorIVA" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="EnMatricula" ColumnName="EnMatricula" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdMecanismo" ColumnName="IdMecanismo" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

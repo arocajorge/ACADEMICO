@@ -45,5 +45,7 @@ namespace Core.Data.Base
         public virtual DbSet<ct_plancta_nivel> ct_plancta_nivel { get; set; }
         public virtual DbSet<ct_grupocble> ct_grupocble { get; set; }
         public virtual DbSet<vwct_cbtecble_con_ctacble_acreedora> vwct_cbtecble_con_ctacble_acreedora { get; set; }
+        public virtual DbSet<ct_periodo_x_tb_modulo> ct_periodo_x_tb_modulo { get; set; }
+        public virtual DbSet<vwct_CierrePorModuloPorSucursal> vwct_CierrePorModuloPorSucursal { get; set; }
     }
 }

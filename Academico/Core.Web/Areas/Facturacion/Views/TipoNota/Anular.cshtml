@@ -35,7 +35,15 @@
                 </div>
             </div>
         </div>
-
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCble">Cuenta contable CxC*</label>
+                    @Html.Partial("_CmbCuentaCxC_TipoNota", Model)
+                    @Html.ValidationMessageFor(q => q.IdCtaCbleCXC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
 
         <div class="col-md-3">
             <div class="col-md-12">
@@ -60,7 +68,15 @@
                 </div>
             </div>
         </div>
-
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdCtaCble">Producto*</label>
+                    @Html.Partial("_CmbProducto_TipoNota", Model.IdProducto)
+                    @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-12">

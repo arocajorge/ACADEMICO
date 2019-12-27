@@ -24,6 +24,8 @@ namespace Core.Info.Facturacion
         public bool GeneraMoviInven { get; set; }
         [Required(ErrorMessage = ("el campo cuenta contable es obligatorio"))]
         public string IdCtaCble { get; set; }
+        public string IdCtaCbleCXC { get; set; }
+        public Nullable<decimal> IdProducto { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }

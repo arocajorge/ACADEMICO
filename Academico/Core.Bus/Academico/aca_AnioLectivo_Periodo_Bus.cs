@@ -35,6 +35,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_AnioLectivo_Periodo_Info GetInfo(int IdEmpresa, int IdAnio, int Periodo)
+        {
+            try
+            {
+                return odata.getInfo(IdEmpresa, IdAnio, Periodo);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool ModificarDB(List<aca_AnioLectivo_Periodo_Info> info)
         {
             try

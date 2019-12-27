@@ -66,6 +66,8 @@
         <AssociationConnector Association="ModelGeneral.FK_tb_banco_procesos_bancarios_x_empresa_tb_banco" />
         <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_banco" />
         <AssociationConnector Association="ModelGeneral.FK_tb_parametro_tb_sis_Impuesto" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_modulo" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelGeneral.vwtb_banco_procesos_bancarios_x_empresa" Width="1.5" PointX="13.375" PointY="3.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -22,6 +22,7 @@ namespace Core.Data.Base
             this.ba_TipoFlujo1 = new HashSet<ba_TipoFlujo>();
             this.ba_TipoFlujo_Movimiento = new HashSet<ba_TipoFlujo_Movimiento>();
             this.ba_TipoFlujo_PlantillaDet = new HashSet<ba_TipoFlujo_PlantillaDet>();
+            this.ba_archivo_transferencia_x_ba_tipo_flujo = new HashSet<ba_archivo_transferencia_x_ba_tipo_flujo>();
         }
     
         public int IdEmpresa { get; set; }
@@ -50,5 +51,7 @@ namespace Core.Data.Base
         public virtual ICollection<ba_TipoFlujo_Movimiento> ba_TipoFlujo_Movimiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ba_TipoFlujo_PlantillaDet> ba_TipoFlujo_PlantillaDet { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ba_archivo_transferencia_x_ba_tipo_flujo> ba_archivo_transferencia_x_ba_tipo_flujo { get; set; }
     }
 }

@@ -1,0 +1,28 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdProducto";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "TipoNota", Action = "CmbProducto_TipoNota", Area = "Facturacion" };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "pr_descripcion";
+        settings.Properties.TextFormatString = "[{0}] {1}";
+        settings.Properties.ValueField = "IdProducto";
+        settings.Properties.ValueType = typeof(decimal);
+
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+        settings.Properties.AllowNull = true;
+
+        settings.Properties.Columns.Add("IdProducto", "ID", 10);
+        settings.Properties.Columns.Add("pr_descripcion", "Producto", 90);
+
+        settings.Properties.FilterMinLength = 3;
+    })
+    .BindList(new Core.Web.Areas.Facturacion.Controllers.TipoNotaController().get_list_bajo_demandaProducto,
+    new Core.Web.Areas.Facturacion.Controllers.TipoNotaController().get_info_bajo_demandaProducto).Bind((Model.GetType() == typeof(Core.Info.Facturacion.fa_TipoNota_Info) || Model.GetType() == typeof(List<Core.Info.Facturacion.fa_TipoNota_Info>)) ? "" : (Model == 0 ? "" : Model));
+}
+@comboBox.GetHtml()

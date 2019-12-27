@@ -80,6 +80,9 @@
     <Compile Include="Academico\aca_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_Sede_Bus.cs" />
     <Compile Include="Academico\aca_SocioEconomico_Bus.cs" />
+    <Compile Include="Banco\ba_Archivo_Transferencia_Bus.cs" />
+    <Compile Include="Banco\ba_Archivo_Transferencia_Det_Bus.cs" />
+    <Compile Include="Banco\ba_archivo_transferencia_x_ba_tipo_flujo_Bus.cs" />
     <Compile Include="Banco\ba_Banco_Cuenta_Bus.cs" />
     <Compile Include="Banco\ba_Banco_Cuenta_x_tb_sucursal_Bus.cs" />
     <Compile Include="Banco\ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Bus.cs" />
@@ -110,6 +113,7 @@
     <Compile Include="Contabilidad\ct_cbtecble_Bus.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_det_Bus.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_tipo_Bus.cs" />
+    <Compile Include="Contabilidad\ct_CierrePorModuloPorSucursal_Bus.cs" />
     <Compile Include="Contabilidad\ct_grupocble_Bus.cs" />
     <Compile Include="Contabilidad\ct_periodo_Bus.cs" />
     <Compile Include="Contabilidad\ct_plancta_Bus.cs" />
@@ -168,6 +172,7 @@
     <Compile Include="Facturacion\fa_Vendedor_Bus.cs" />
     <Compile Include="General\tbl_TransaccionesAutorizadas_Bus.cs" />
     <Compile Include="General\tb_banco_Bus.cs" />
+    <Compile Include="General\tb_banco_procesos_bancarios_x_empresa_Bus.cs" />
     <Compile Include="General\tb_bodega_Bus.cs" />
     <Compile Include="General\tb_Catalogo_Bus.cs" />
     <Compile Include="General\tb_ciudad_Bus.cs" />
@@ -175,6 +180,7 @@
     <Compile Include="General\tb_empresa_Bus.cs" />
     <Compile Include="General\tb_LogError_Bus.cs" />
     <Compile Include="General\tb_mes_Bus.cs" />
+    <Compile Include="General\tb_modulo_Bus.cs" />
     <Compile Include="General\tb_pais_Bus.cs" />
     <Compile Include="General\tb_parametro_Bus.cs" />
     <Compile Include="General\tb_parroquia_Bus.cs" />

@@ -6,6 +6,7 @@ using Core.Bus.CuentasPorCobrar;
 using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Bus.SeguridadAcceso;
+using Core.Data.Academico;
 using Core.Info.CuentasPorCobrar;
 using Core.Info.General;
 using Core.Info.Helps;
@@ -40,6 +41,8 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
         aca_Familia_Bus bus_familia = new aca_Familia_Bus();
+        aca_AnioLectivo_Rubro_Bus bus_aca_anio_rubro = new aca_AnioLectivo_Rubro_Bus();
+        aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -81,7 +84,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info
             {
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                fecha_ini= DateTime.Now.Date.AddMonths(-1),
+                fecha_fin=DateTime.Now
             };
             cargar_combos_consulta();
             return View(model);
@@ -431,6 +436,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         public JsonResult GetListFacturas_PorIngresar(decimal IdTransaccionSession = 0, int IdEmpresa = 0, int IdSucursal = 0, decimal IdCliente = 0, decimal IdAlumno = 0)
         {
             var lst = bus_det.get_list_cartera_academico(IdEmpresa, IdSucursal, IdCliente, IdAlumno);
+
             List_x_Cruzar.set_list(lst, IdTransaccionSession);
 
             return Json("", JsonRequestBehavior.AllowGet);

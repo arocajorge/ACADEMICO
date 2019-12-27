@@ -40,11 +40,17 @@
             column.Width = Unit.Percentage(30);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Periodo";
+            column.Caption = "Periodo";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "vt_cantidad";
-            column.Caption = "cantidad";
+            column.Caption = "Cantidad";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(8);
         });
@@ -76,7 +82,13 @@
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(8);
         });
-
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "TotalProntoPago";
+            column.Caption = "Pronto Pago";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.Width = Unit.Percentage(12);
+        });
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

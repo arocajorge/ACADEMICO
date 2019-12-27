@@ -98,8 +98,9 @@ namespace Core.Data.Facturacion
                                  aca_IdRubro = q.IdRubro,
                                  AplicaProntoPago = q.AplicaProntoPago,
                                  IdAnio = q.IdAnio,
-                                 EnMatricula = q.EnMatricula
-                                 
+                                 EnMatricula = q.EnMatricula,
+                                 FechaDesde = q.FechaDesde
+
                              }).ToList();
                 }
                 Lista.ForEach(V =>

@@ -64,7 +64,38 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public aca_AnioLectivo_Periodo_Info getInfo(int IdEmpresa, int IdAnio, int IdPeriodo)
+        {
+            try
+            {
+                aca_AnioLectivo_Periodo_Info info;
 
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_AnioLectivo_Periodo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPeriodo == IdPeriodo).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_AnioLectivo_Periodo_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdPeriodo = Entity.IdPeriodo,
+                        IdAnio = Entity.IdAnio,
+                        FechaDesde = Entity.FechaDesde,
+                        FechaHasta = Entity.FechaHasta,
+                        FechaProntoPago = Entity.FechaProntoPago,
+                        Estado = Entity.Estado
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool modificarDB(List<aca_AnioLectivo_Periodo_Info> info)
         {
             try

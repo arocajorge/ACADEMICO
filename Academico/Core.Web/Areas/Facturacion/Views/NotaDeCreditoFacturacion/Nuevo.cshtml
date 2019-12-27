@@ -27,10 +27,6 @@
         $("#NaturalezaNota").change(function () {
             SetNaturalezaNota();
         });
-        $("#IdTipoNota").change(function () {
-            SetNaturalezaNota();
-            GetUltimoDocumento();
-        });
     });
 
     function MostrarModal() {
@@ -197,7 +193,7 @@
     }
 
     function SetNaturalezaNota() {
-
+        console.log($("#NaturalezaNota").val());
         if ($("#NaturalezaNota").val() == "SRI") {
             $("#divNaturaleza").show();
         } else
@@ -253,7 +249,7 @@
         var datos = {
             IDs: selectedIDs,
             IdTransaccionSession: $("#IdTransaccionSession").val(),
-            IdTipoNota: $("#IdTipoNota").val(),
+            IdTipoNota: IdTipoNota.GetValue(),
             IdEmpresa: $("#IdEmpresa").val()
         }
         $.ajax({
@@ -411,15 +407,21 @@
 
     <div class="row">
         <div class="col-md-6">
-
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="IdSucursal">Sucursal*</label>
                     @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">Naturaleza</label>
+                    @Html.DropDownListFor(q => q.NaturalezaNota, new SelectList(ViewBag.lst_naturaleza, "Key", "Value"), new { @class = "form-control", @id = "NaturalezaNota" })
+                    @Html.ValidationMessageFor(q => q.NaturalezaNota, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdPuntoVta">Punto de venta*</label>
                     @Html.DropDownListFor(q => q.IdPuntoVta, new SelectList(ViewBag.lst_punto_venta, "IdPuntoVta", "nom_PuntoVta"), new { @class = "form-control", @id = "IdPuntoVta" })
@@ -460,14 +462,6 @@
                 <div class="form-group">
                     <label for="DatosCliente">Información adicional</label>
                     <input class="form-control" type="text" id="DatosCliente" value="" readonly="readonly" />
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="sc_observacion">Observación</label>
-                    @Html.TextBoxFor(q => q.sc_observacion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.sc_observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -524,21 +518,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="">Tipo nota</label>
-                                @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "IdTipoNota", "No_Descripcion"), new { @class = "form-control", @id = "IdTipoNota" })
+                                @Html.DevExpress().ComboBoxFor(q => q.IdTipoNota, settings =>
+                               {
+                                   settings.Name = "IdTipoNota";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("No_Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdTipoNota";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "No_Descripcion";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){SetNaturalezaNota(); GetUltimoDocumento(); }";
+                                }).BindList(ViewBag.lst_tipo_nota).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="">Naturaleza</label>
-                                @Html.DropDownListFor(q => q.NaturalezaNota, new SelectList(ViewBag.lst_naturaleza, "Key", "Value"), new { @class = "form-control", @id = "NaturalezaNota" })
-                                @Html.ValidationMessageFor(q => q.NaturalezaNota, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div id="divNaturaleza" hidden>
+                        <div id="divNaturaleza">
                             <div class="col-md-3"  id="datos_punto_venta1">
                                 <div class="form-group">
                                     <label for="Serie1">Establecimiento*</label>
@@ -579,6 +580,13 @@
             </div>
         </div>
     </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="sc_observacion">Observación</label>
+                @Html.TextBoxFor(q => q.sc_observacion, new { @class = "form-control" })
+                @Html.ValidationMessageFor(q => q.sc_observacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

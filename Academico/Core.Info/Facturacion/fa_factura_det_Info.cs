@@ -52,6 +52,9 @@ namespace Core.Info.Facturacion
         public decimal DescuentoProntoPago { get; set; }
         public decimal TotalProntoPago { get; set; }
         public bool EnMatricula { get; set; }
+        public System.DateTime FechaDesde { get; set; }
+        public string NumPeriodo { get; set; }
+        public string Periodo { get; set; }
         #endregion
 
     }

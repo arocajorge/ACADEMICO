@@ -118,7 +118,9 @@ namespace Core.Data.Facturacion
                         Tipo = Entity.Tipo,
                         Estado = Entity.Estado,
                         GeneraMoviInven = Entity.GeneraMoviInven ,
-                        IdCtaCble = Entity.IdCtaCble
+                        IdCtaCble = Entity.IdCtaCble,
+                        IdCtaCbleCXC = Entity.IdCtaCbleCXC,
+                        IdProducto = Entity.IdProducto
                     };
                 }
                 return info;
@@ -167,7 +169,8 @@ namespace Core.Data.Facturacion
                         Estado = info.Estado="A",
                         GeneraMoviInven = info.GeneraMoviInven,
                         IdCtaCble = info.IdCtaCble,
-
+                        IdCtaCbleCXC = info.IdCtaCbleCXC,
+                        IdProducto = info.IdProducto,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = DateTime.Now
                     };
@@ -196,7 +199,8 @@ namespace Core.Data.Facturacion
                     Entity.Tipo = info.Tipo;
                     Entity.GeneraMoviInven = info.GeneraMoviInven;
                     Entity.IdCtaCble = info.IdCtaCble;
-
+                    Entity.IdCtaCbleCXC = info.IdCtaCbleCXC;
+                    Entity.IdProducto = info.IdProducto;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = DateTime.Now;
                     

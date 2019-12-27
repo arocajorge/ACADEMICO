@@ -236,5 +236,11 @@ namespace Core.Info.Helps
             ING,
             EGR
         }
+        public enum eTipoProcesoBancario
+        {
+            NCR,
+            ROL_ELECTRONICO,
+            NCR_TRASN
+        }
     }
 }

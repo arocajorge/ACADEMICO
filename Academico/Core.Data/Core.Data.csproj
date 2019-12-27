@@ -91,6 +91,9 @@
     <Compile Include="Academico\aca_Rubro_Data.cs" />
     <Compile Include="Academico\aca_Sede_Data.cs" />
     <Compile Include="Academico\aca_SocioEconomico_Data.cs" />
+    <Compile Include="Banco\ba_Archivo_Transferencia_Data.cs" />
+    <Compile Include="Banco\ba_Archivo_Transferencia_Det_Data.cs" />
+    <Compile Include="Banco\ba_archivo_transferencia_x_ba_tipo_flujo_Data.cs" />
     <Compile Include="Banco\ba_Banco_Cuenta_Data.cs" />
     <Compile Include="Banco\ba_Banco_Cuenta_x_tb_sucursal_Data.cs" />
     <Compile Include="Banco\ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Data.cs" />
@@ -224,6 +227,15 @@
     </Compile>
     <Compile Include="Base\aca_SocioEconomico.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ba_Archivo_Transferencia.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ba_Archivo_Transferencia_Det.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ba_archivo_transferencia_x_ba_tipo_flujo.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\ba_Banco_Cuenta.cs">
       <DependentUpon>ModelBanco.tt</DependentUpon>
@@ -448,6 +460,9 @@
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\ct_periodo.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ct_periodo_x_tb_modulo.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\ct_plancta.cs">
@@ -1083,6 +1098,9 @@
     <Compile Include="Base\tb_mes.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\tb_modulo.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_pais.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
@@ -1188,6 +1206,9 @@
     <Compile Include="Base\vwaca_Profesor.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwba_Archivo_Transferencia_Det.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.cs">
       <DependentUpon>ModelBanco.tt</DependentUpon>
     </Compile>
@@ -1288,6 +1309,9 @@
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwct_cbtecble_det.cs">
+      <DependentUpon>ModelContabilidad.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwct_CierrePorModuloPorSucursal.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwct_periodo.cs">
@@ -1443,6 +1467,9 @@
     <Compile Include="Base\vwseg_usuario_x_tb_sucursal.cs">
       <DependentUpon>ModelSeguridadAcceso.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwtb_banco_procesos_bancarios_x_empresa.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwtb_bodega_x_sucursal.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
@@ -1483,6 +1510,7 @@
     <Compile Include="Contabilidad\ct_cbtecble_Data.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_det_Data.cs" />
     <Compile Include="Contabilidad\ct_cbtecble_tipo_Data.cs" />
+    <Compile Include="Contabilidad\ct_CierrePorModuloPorSucursal_Data.cs" />
     <Compile Include="Contabilidad\ct_grupocble_Data.cs" />
     <Compile Include="Contabilidad\ct_periodo_Data.cs" />
     <Compile Include="Contabilidad\ct_plancta_Data.cs" />
@@ -1541,6 +1569,7 @@
     <Compile Include="Facturacion\fa_Vendedor_Data.cs" />
     <Compile Include="General\tbl_TransaccionesAutorizadas_Data.cs" />
     <Compile Include="General\tb_banco_Data.cs" />
+    <Compile Include="General\tb_banco_procesos_bancarios_x_empresa_Data.cs" />
     <Compile Include="General\tb_bodega_Data.cs" />
     <Compile Include="General\tb_Catalogo_Data.cs" />
     <Compile Include="General\tb_ciudad_Data.cs" />
@@ -1548,6 +1577,7 @@
     <Compile Include="General\tb_empresa_Data.cs" />
     <Compile Include="General\tb_LogError_Data.cs" />
     <Compile Include="General\tb_mes_Data.cs" />
+    <Compile Include="General\tb_modulo_Data.cs" />
     <Compile Include="General\tb_pais_Data.cs" />
     <Compile Include="General\tb_parametro_Data.cs" />
     <Compile Include="General\tb_parroquia_Data.cs" />

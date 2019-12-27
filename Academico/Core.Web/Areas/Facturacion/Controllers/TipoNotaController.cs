@@ -1,7 +1,10 @@
 ﻿using Core.Bus.Contabilidad;
 using Core.Bus.Facturacion;
+using Core.Bus.Inventario;
 using Core.Info.Contabilidad;
 using Core.Info.Facturacion;
+using Core.Info.Helps;
+using Core.Info.Inventario;
 using Core.Web.Helps;
 using DevExpress.Web;
 using System;
@@ -16,6 +19,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
     {
         #region Variables
         fa_TipoNota_Bus bus_tiponota = new fa_TipoNota_Bus();
+        in_Producto_Bus bus_producto = new in_Producto_Bus();
         #endregion
 
         #region Index
@@ -48,6 +52,28 @@ namespace Core.Web.Areas.Facturacion.Controllers
             fa_TipoNota_Info model = new fa_TipoNota_Info();
             return PartialView("_CmbCuenta_TipoNota", model);
         }
+
+        public ActionResult CmbCuentaCxC_TipoNota()
+        {
+            fa_TipoNota_Info model = new fa_TipoNota_Info();
+            return PartialView("_CmbCuentaCxC_TipoNota", model);
+        }
+
+        #region Metodos ComboBox bajo demanda producto
+        public ActionResult CmbProducto_TipoNota()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbProducto_TipoNota", model);
+        }
+        public List<in_Producto_Info> get_list_bajo_demandaProducto(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_producto.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoBusquedaProducto.PORSUCURSAL, cl_enumeradores.eModulo.FAC, 0, Convert.ToInt32(SessionFixed.IdSucursal));
+        }
+        public in_Producto_Info get_info_bajo_demandaProducto(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        #endregion
 
         public List<ct_plancta_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {

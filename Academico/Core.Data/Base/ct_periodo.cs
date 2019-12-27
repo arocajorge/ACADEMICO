@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public ct_periodo()
         {
             this.ct_cbtecble = new HashSet<ct_cbtecble>();
+            this.ct_periodo_x_tb_modulo = new HashSet<ct_periodo_x_tb_modulo>();
         }
     
         public int IdEmpresa { get; set; }
@@ -32,5 +33,7 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ct_cbtecble> ct_cbtecble { get; set; }
         public virtual ct_anio_fiscal ct_anio_fiscal { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ct_periodo_x_tb_modulo> ct_periodo_x_tb_modulo { get; set; }
     }
 }

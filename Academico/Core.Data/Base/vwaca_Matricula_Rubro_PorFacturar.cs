@@ -36,5 +36,6 @@ namespace Core.Data.Base
         public bool AplicaProntoPago { get; set; }
         public string NomRubro { get; set; }
         public string pr_descripcion { get; set; }
+        public System.DateTime FechaDesde { get; set; }
     }
 }
