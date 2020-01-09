@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Bus.Contabilidad
+namespace Core.Bus.Contabilidad
 {
     public class ct_anio_fiscal_x_tb_sucursal_Bus
     {

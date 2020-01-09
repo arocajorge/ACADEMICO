@@ -2,7 +2,7 @@
 @{
     var comboBox = Html.DevExpress().ComboBox(settings =>
     {
-        settings.Name = "IdCtaCble";
+        settings.Name = "IdCtaCbleDebe";
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
@@ -25,7 +25,5 @@
     })
     .BindList(new Core.Web.Areas.Facturacion.Controllers.TipoNotaController().get_list_bajo_demanda, new Core.Web.Areas.Facturacion.Controllers.TipoNotaController().get_info_bajo_demanda)
     .Bind(Model.IdCtaCble);
-
-
 }
 @comboBox.GetHtml()
