@@ -223,6 +223,7 @@
     <Compile Include="Areas\Academico\Controllers\JornadaPorNivelController.cs" />
     <Compile Include="Areas\Academico\Controllers\ParaleloController.cs" />
     <Compile Include="Areas\Academico\Controllers\ParaleloPorCursoController.cs" />
+    <Compile Include="Areas\Academico\Controllers\ParametrizacionPlantillaController.cs" />
     <Compile Include="Areas\Academico\Controllers\PeriodoPorAnioLectivoController.cs" />
     <Compile Include="Areas\Academico\Controllers\PermitirMatriculaController.cs" />
     <Compile Include="Areas\Academico\Controllers\PlantillaController.cs" />
@@ -7998,6 +7999,8 @@
     <Content Include="Areas\Contabilidad\Views\AnioFiscal\_GridViewPartial_anio_fiscal.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaPorProfesor\_GridViewPartial_MateriaPorProfesor.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaPorProfesor\_CmbProfesor.cshtml" />
+    <Content Include="Areas\Academico\Views\ParametrizacionPlantilla\_GridViewPartial_ParametrizacionDet.cshtml" />
+    <Content Include="Areas\Academico\Views\ParametrizacionPlantilla\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
