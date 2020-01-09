@@ -110,7 +110,7 @@ namespace Core.Bus.Academico
                         }
                     }
                 }
-                return false;
+                return true;
             }
             catch (Exception)
             {
