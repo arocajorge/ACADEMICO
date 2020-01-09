@@ -27,6 +27,7 @@ namespace Core.Info.Academico
         public string NomRubro { get; set; }
         public string NomNivel { get; set; }
         public string NomSede { get; set; }
+        public string IdString { get; set; }
         #endregion
     }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Data.Inventario
+namespace Core.Data.Inventario
 {
     public class in_UnidadMedida_Data
     {
