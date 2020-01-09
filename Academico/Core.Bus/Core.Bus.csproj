@@ -49,6 +49,7 @@
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Bus.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Jornada_Curso_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_NivelAcademico_Jornada_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Paralelo_Profesor_Bus.cs" />

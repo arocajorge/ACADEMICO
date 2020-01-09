@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Core.Info.RRHH;
 using Core.Data.Base;
 
-namespace Core.Erp.Data.RRHH
+namespace Core.Data.RRHH
 {
    public class ro_Nomina_Tipoliqui_Data
     {

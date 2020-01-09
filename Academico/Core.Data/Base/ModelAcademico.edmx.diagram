@@ -147,6 +147,8 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Sede" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacion_aca_Matricula" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Plantilla_Parametrizacion" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion" Width="1.5" PointX="23.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
