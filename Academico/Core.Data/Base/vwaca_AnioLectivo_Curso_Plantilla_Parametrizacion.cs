@@ -22,7 +22,6 @@ namespace Core.Data.Base
         public int IdCurso { get; set; }
         public int IdPlantilla { get; set; }
         public int IdRubro { get; set; }
-        public string IdCtaCble { get; set; }
         public string NomJornada { get; set; }
         public Nullable<int> OrdenJornada { get; set; }
         public string NomCurso { get; set; }
@@ -31,5 +30,7 @@ namespace Core.Data.Base
         public string NomRubro { get; set; }
         public string NomNivel { get; set; }
         public string NomSede { get; set; }
+        public string IdCtaCbleDebe { get; set; }
+        public string IdCtaCbleHaber { get; set; }
     }
 }

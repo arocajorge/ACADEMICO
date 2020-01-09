@@ -190,7 +190,8 @@
           <Property Name="IdCurso" Type="int" Nullable="false" />
           <Property Name="IdPlantilla" Type="int" Nullable="false" />
           <Property Name="IdRubro" Type="int" Nullable="false" />
-          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCbleDebe" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCbleHaber" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="aca_AnioLectivo_Jornada_Curso">
           <Key>
@@ -1056,7 +1057,6 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_AnioLectivo_Curso_Plan
           <Property Name="IdCurso" Type="int" Nullable="false" />
           <Property Name="IdPlantilla" Type="int" Nullable="false" />
           <Property Name="IdRubro" Type="int" Nullable="false" />
-          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
           <Property Name="NomJornada" Type="varchar" MaxLength="500" />
           <Property Name="OrdenJornada" Type="int" />
           <Property Name="NomCurso" Type="varchar" MaxLength="500" />
@@ -1065,6 +1065,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_AnioLectivo_Curso_Plan
           <Property Name="NomRubro" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="NomNivel" Type="varchar" MaxLength="500" />
           <Property Name="NomSede" Type="varchar" MaxLength="500" />
+          <Property Name="IdCtaCbleDebe" Type="varchar" MaxLength="20" />
+          <Property Name="IdCtaCbleHaber" Type="varchar" MaxLength="20" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_AnioLectivo_Jornada_Curso' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -2775,7 +2777,6 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
     [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[IdCurso] AS [IdCurso], 
     [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[IdPlantilla] AS [IdPlantilla], 
     [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[IdRubro] AS [IdRubro], 
-    [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[IdCtaCble] AS [IdCtaCble], 
     [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[NomJornada] AS [NomJornada], 
     [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[OrdenJornada] AS [OrdenJornada], 
     [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[NomCurso] AS [NomCurso], 
@@ -2783,7 +2784,9 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
     [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[NomPlantilla] AS [NomPlantilla], 
     [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[NomRubro] AS [NomRubro], 
     [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[NomNivel] AS [NomNivel], 
-    [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[NomSede] AS [NomSede]
+    [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[NomSede] AS [NomSede], 
+    [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[IdCtaCbleDebe] AS [IdCtaCbleDebe], 
+    [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion].[IdCtaCbleHaber] AS [IdCtaCbleHaber]
     FROM [dbo].[vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion] AS [vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwaca_AnioLectivo_Jornada_Curso" EntityType="Self.vwaca_AnioLectivo_Jornada_Curso" store:Type="Views" store:Schema="dbo">
@@ -6489,7 +6492,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <Property Name="IdCurso" Type="Int32" Nullable="false" />
           <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
           <Property Name="IdRubro" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCbleDebe" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCbleHaber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion">
           <Key>
@@ -6512,7 +6516,6 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <Property Name="IdCurso" Type="Int32" Nullable="false" />
           <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
           <Property Name="IdRubro" Type="Int32" Nullable="false" />
-          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="NomJornada" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="OrdenJornada" Type="Int32" />
           <Property Name="NomCurso" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -6521,6 +6524,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <Property Name="NomRubro" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="NomNivel" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="NomSede" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCbleDebe" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCbleHaber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -7748,7 +7753,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <EntitySetMapping Name="aca_AnioLectivo_Curso_Plantilla_Parametrizacion">
             <EntityTypeMapping TypeName="ModelAcademico.aca_AnioLectivo_Curso_Plantilla_Parametrizacion">
               <MappingFragment StoreEntitySet="aca_AnioLectivo_Curso_Plantilla_Parametrizacion">
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="IdCtaCbleHaber" ColumnName="IdCtaCbleHaber" />
+                <ScalarProperty Name="IdCtaCbleDebe" ColumnName="IdCtaCbleDebe" />
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
                 <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
                 <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
@@ -7763,6 +7769,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
           <EntitySetMapping Name="vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion">
             <EntityTypeMapping TypeName="ModelAcademico.vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion">
               <MappingFragment StoreEntitySet="vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion">
+                <ScalarProperty Name="IdCtaCbleHaber" ColumnName="IdCtaCbleHaber" />
+                <ScalarProperty Name="IdCtaCbleDebe" ColumnName="IdCtaCbleDebe" />
                 <ScalarProperty Name="NomSede" ColumnName="NomSede" />
                 <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
                 <ScalarProperty Name="NomRubro" ColumnName="NomRubro" />
@@ -7771,7 +7779,6 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwaca_Profesor' no tiene def
                 <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
                 <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
                 <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
-                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
                 <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
                 <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />

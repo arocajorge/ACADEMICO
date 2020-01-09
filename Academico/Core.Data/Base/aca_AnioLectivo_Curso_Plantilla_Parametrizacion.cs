@@ -22,6 +22,7 @@ namespace Core.Data.Base
         public int IdCurso { get; set; }
         public int IdPlantilla { get; set; }
         public int IdRubro { get; set; }
-        public string IdCtaCble { get; set; }
+        public string IdCtaCbleDebe { get; set; }
+        public string IdCtaCbleHaber { get; set; }
     }
 }

@@ -16,7 +16,8 @@ namespace Core.Info.Academico
         public int IdCurso { get; set; }
         public int IdPlantilla { get; set; }
         public int IdRubro { get; set; }
-        public string IdCtaCble { get; set; }
+        public string IdCtaCbleHaber { get; set; }
+        public string IdCtaCbleDebe { get; set; }
 
         #region Campos que no existen en la tabla
         public string NomJornada { get; set; }
@@ -28,6 +29,7 @@ namespace Core.Info.Academico
         public string NomNivel { get; set; }
         public string NomSede { get; set; }
         public string IdString { get; set; }
+        
         #endregion
     }
 }

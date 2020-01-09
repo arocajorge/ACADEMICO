@@ -30,7 +30,7 @@ namespace Core.Data.Academico
                             IdCurso = item.IdCurso,
                             IdPlantilla = item.IdPlantilla,
                             IdRubro = item.IdRubro,
-                            IdCtaCble = item.IdCtaCble,
+                            IdCtaCbleDebe = item.IdCtaCbleDebe,
                             NomJornada = item.NomJornada,
                             OrdenJornada = item.OrdenJornada,
                             NomCurso = item.NomCurso,
@@ -86,10 +86,15 @@ namespace Core.Data.Academico
                                 IdCurso = info.IdCurso,
                                 IdPlantilla = info.IdPlantilla,
                                 IdRubro = info.IdRubro,
-                                IdCtaCble = info.IdCtaCble
+                                IdCtaCbleDebe = info.IdCtaCbleDebe,
+                                IdCtaCbleHaber = info.IdCtaCbleHaber
                             });
-                        }else
-                            Entity.IdCtaCble = info.IdCtaCble;
+                        }
+                        else
+                        {
+                            Entity.IdCtaCbleDebe = info.IdCtaCbleDebe;
+                            Entity.IdCtaCbleHaber = info.IdCtaCbleHaber;
+                        }
                         
                         db.SaveChanges();
                     }
