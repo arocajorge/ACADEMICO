@@ -1,5 +1,4 @@
 ﻿using Core.Data.Inventario;
-using Core.Erp.Data.Inventario;
 using Core.Info.Inventario;
 using System;
 using System.Collections.Generic;
