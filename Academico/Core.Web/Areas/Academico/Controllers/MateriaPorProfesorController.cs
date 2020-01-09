@@ -1,6 +1,11 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.General;
 using Core.Info.Academico;
+using Core.Info.General;
+using Core.Info.Helps;
 using Core.Web.Helps;
+using DevExpress.Web;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +26,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Materia_Bus bus_materia = new aca_Materia_Bus();
         aca_AnioLectivo_Paralelo_Profesor_Bus bus_MateriaPorProfesor = new aca_AnioLectivo_Paralelo_Profesor_Bus();
         aca_AnioLectivo_Paralelo_Profesor_List Lista_MateriaPorProfesor = new aca_AnioLectivo_Paralelo_Profesor_List();
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
         string mensaje = string.Empty;
         #endregion
 
@@ -126,6 +132,22 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
+        #region Combos bajo demanda
+        public ActionResult Cmb_Profesor()
+        {
+            aca_AnioLectivo_Paralelo_Profesor_Info model = new aca_AnioLectivo_Paralelo_Profesor_Info();
+            return PartialView("_Cmb_Profesor", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROFESOR.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.PROFESOR.ToString());
+        }
+        #endregion
+
         #region Metodos
         private void cargar_combos()
         {
@@ -147,53 +169,68 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
+        #region Funciones del Grid
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] aca_AnioLectivo_Paralelo_Profesor_Info info_det)
+        {
+
+            if (ModelState.IsValid)
+                Lista_MateriaPorProfesor.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            List<aca_AnioLectivo_Paralelo_Profesor_Info> model = new List<aca_AnioLectivo_Paralelo_Profesor_Info>();
+            model = Lista_MateriaPorProfesor.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_MateriaPorProfesor", model);
+        }
+        #endregion
         #region Json
-        public JsonResult guardar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo=0,  int IdMateria=0, string Ids = "", decimal IdTransaccionSession = 0)
-        {
-            var resultado = 1;
-            List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = new List<aca_AnioLectivo_Paralelo_Profesor_Info>();
-            string[] array = Ids.Split(',');
+        //public JsonResult guardar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo=0,  int IdMateria=0, string Ids = "", decimal IdTransaccionSession = 0)
+        //{
+        //    var resultado = 1;
+        //    List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = new List<aca_AnioLectivo_Paralelo_Profesor_Info>();
+        //    string[] array = Ids.Split(',');
 
-            if (Ids != "")
-            {
-                foreach (var item in array)
-                {
-                    aca_AnioLectivo_Paralelo_Profesor_Info info = new aca_AnioLectivo_Paralelo_Profesor_Info
-                    {
-                        IdEmpresa = IdEmpresa,
-                        IdSede = IdSede,
-                        IdAnio = IdAnio,
-                        IdNivel = IdNivel,
-                        IdJornada = IdJornada,
-                        IdCurso = IdCurso,
-                        IdParalelo = IdParalelo,
-                        IdMateria = IdMateria,
-                        IdProfesor = Convert.ToDecimal(item),
-                    };
-                    lista.Add(info);
-                }
-            }
+        //    if (Ids != "")
+        //    {
+        //        foreach (var item in array)
+        //        {
+        //            aca_AnioLectivo_Paralelo_Profesor_Info info = new aca_AnioLectivo_Paralelo_Profesor_Info
+        //            {
+        //                IdEmpresa = IdEmpresa,
+        //                IdSede = IdSede,
+        //                IdAnio = IdAnio,
+        //                IdNivel = IdNivel,
+        //                IdJornada = IdJornada,
+        //                IdCurso = IdCurso,
+        //                IdParalelo = IdParalelo,
+        //                IdMateria = IdMateria,
+        //                IdProfesor = Convert.ToDecimal(item),
+        //            };
+        //            lista.Add(info);
+        //        }
+        //    }
 
-            if (!bus_MateriaPorProfesor.GuardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, lista))
-            {
-                resultado = 0;
-            }
+        //    if (!bus_MateriaPorProfesor.GuardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, lista))
+        //    {
+        //        resultado = 0;
+        //    }
 
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(resultado, JsonRequestBehavior.AllowGet);
+        //}
 
-        public JsonResult GetListMateriaPorProfesor(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdMateria = 0, decimal IdTransaccionSession = 0)
-        {
-            List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = new List<aca_AnioLectivo_Paralelo_Profesor_Info>();
-            lista = bus_MateriaPorProfesor.GetListAsignacion(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria);
-            Lista_MateriaPorProfesor.set_list(lista, IdTransaccionSession);
-            return Json(lista, JsonRequestBehavior.AllowGet);
-        }
+        //public JsonResult GetListMateriaPorProfesor(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdMateria = 0, decimal IdTransaccionSession = 0)
+        //{
+        //    List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = new List<aca_AnioLectivo_Paralelo_Profesor_Info>();
+        //    lista = bus_MateriaPorProfesor.GetListAsignacion(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria);
+        //    Lista_MateriaPorProfesor.set_list(lista, IdTransaccionSession);
+        //    return Json(lista, JsonRequestBehavior.AllowGet);
+        //}
+
         #endregion
     }
 
     public class aca_AnioLectivo_Paralelo_Profesor_List
     {
+        aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
         string Variable = "aca_AnioLectivo_Paralelo_Profesor_Info";
         public List<aca_AnioLectivo_Paralelo_Profesor_Info> get_list(decimal IdTransaccionSession)
         {
@@ -209,6 +246,19 @@ namespace Core.Web.Areas.Academico.Controllers
         public void set_list(List<aca_AnioLectivo_Paralelo_Profesor_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void UpdateRow(aca_AnioLectivo_Paralelo_Profesor_Info info_det, decimal IdTransaccionSession)
+        {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            aca_AnioLectivo_Paralelo_Profesor_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdMateria == info_det.IdMateria).FirstOrDefault();
+            edited_info.IdProfesor = info_det.IdProfesor;
+
+            var profesor = bus_profesor.GetInfo(IdEmpresa, Convert.ToDecimal(info_det.IdProfesor));
+            if (profesor != null)
+                info_det.pe_nombreCompleto = profesor.pe_nombreCompleto;
+            edited_info.pe_nombreCompleto = info_det.pe_nombreCompleto;
         }
     }
 }

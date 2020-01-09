@@ -155,6 +155,7 @@ namespace Core.Info.Helps
             ALUMNO,
             TUTOR,
             INSPECTOR,
+            PROFESOR,
             ALUMNO_MATRICULA
         }
 

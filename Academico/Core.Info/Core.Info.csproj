@@ -44,6 +44,8 @@
     <Compile Include="Academico\aca_AlumnoDocumento_Info.cs" />
     <Compile Include="Academico\aca_AlumnoRetiro_Info.cs" />
     <Compile Include="Academico\aca_Alumno_Info.cs" />
+    <Compile Include="Academico\aca_AnioLectivoCalificacionHistorico_Info.cs" />
+    <Compile Include="Academico\aca_AnioLectivoConductaEquivalencia_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Info.cs" />
@@ -66,6 +68,8 @@
     <Compile Include="Academico\aca_Jornada_Info.cs" />
     <Compile Include="Academico\aca_MateriaGrupo_Info.cs" />
     <Compile Include="Academico\aca_Materia_Info.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacion_Info.cs" />
+    <Compile Include="Academico\aca_MatriculaConducta_Info.cs" />
     <Compile Include="Academico\aca_Matricula_Info.cs" />
     <Compile Include="Academico\aca_Matricula_Rubro_Info.cs" />
     <Compile Include="Academico\aca_MecanismoDePago_Info.cs" />

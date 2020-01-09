@@ -365,7 +365,7 @@ namespace Core.Data.General
                         break;
                     case "TUTOR":
                         EntitiesAcademico context_t = new EntitiesAcademico();
-                        var lst_tutor = context_t.vwaca_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.EsProfesor == true && q.Estado == true && (q.IdProfesor.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdProfesor).Skip(skip).Take(take);
+                        var lst_tutor = context_t.vwaca_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true && (q.IdProfesor.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdProfesor).Skip(skip).Take(take);
                         foreach (var q in lst_tutor)
                         {
                             Lista.Add(new tb_persona_Info
@@ -392,6 +392,21 @@ namespace Core.Data.General
                             });
                         }
                         context_i.Dispose();
+                        break;
+                    case "PROFESOR":
+                        EntitiesAcademico context_pro = new EntitiesAcademico();
+                        var lst_profesor= context_pro.vwaca_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.EsProfesor == true && q.Estado == true && (q.IdProfesor.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdProfesor).Skip(skip).Take(take);
+                        foreach (var q in lst_profesor)
+                        {
+                            Lista.Add(new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdProfesor
+                            });
+                        }
+                        context_pro.Dispose();
                         break;
                     case "CLIENTE":
                         EntitiesFacturacion context_f = new EntitiesFacturacion();
@@ -501,6 +516,53 @@ namespace Core.Data.General
                                 IdEntidad = q.IdAlumno
                             }).FirstOrDefault();
                     context_mat.Dispose();
+                    break;
+                case "TUTOR":
+                    EntitiesAcademico context_tutor = new EntitiesAcademico();
+                    info = (from q in context_tutor.vwaca_Profesor
+                            where q.Estado == true
+                            && q.IdEmpresa == IdEmpresa
+                            && q.IdProfesor == IdEntidad
+                            select new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdProfesor
+                            }).FirstOrDefault();
+                    context_tutor.Dispose();
+                    break;
+                case "INSPECTOR":
+                    EntitiesAcademico context_insp = new EntitiesAcademico();
+                    info = (from q in context_insp.vwaca_Profesor
+                            where q.Estado == true
+                            && q.IdEmpresa == IdEmpresa
+                            && q.IdProfesor == IdEntidad
+                            && q.EsInspector == true
+                            select new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdProfesor
+                            }).FirstOrDefault();
+                    context_insp.Dispose();
+                    break;
+                case "PROFESOR":
+                    EntitiesAcademico context_prof = new EntitiesAcademico();
+                    info = (from q in context_prof.vwaca_Profesor
+                            where q.Estado == true
+                            && q.IdEmpresa == IdEmpresa
+                            && q.IdProfesor == IdEntidad
+                            && q.EsProfesor == true
+                            select new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdProfesor
+                            }).FirstOrDefault();
+                    context_prof.Dispose();
                     break;
                 case "EMPLEA":
                     EntitiesRRHH context_e = new EntitiesRRHH();

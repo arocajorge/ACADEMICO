@@ -9,21 +9,21 @@
 }
 
 <script>
-    var selectedIDs;
-    function OnBeginCallback(s, e) {
-        //Pass all selected keys to GridView callback action
-        e.customArgs["selectedIDs"] = selectedIDs;
-        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
-    }
-    function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdProfesor", GetSelectedFieldValuesCallback);
-    }
-    function GetSelectedFieldValuesCallback(values) {
-        //Capture all selected keys
-        selectedIDs = values.join(',');
-    }
+    //var selectedIDs;
+    //function OnBeginCallback(s, e) {
+    //    //Pass all selected keys to GridView callback action
+    //    e.customArgs["selectedIDs"] = selectedIDs;
+    //    e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    //}
+    //function OnSelectionChanged(s, e) {
+    //    s.GetSelectedFieldValues("IdProfesor", GetSelectedFieldValuesCallback);
+    //}
+    //function GetSelectedFieldValuesCallback(values) {
+    //    //Capture all selected keys
+    //    selectedIDs = values.join(',');
+    //}
 
-    function guardar() {
+    @*function guardar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSede: IdSede.GetValue(),
@@ -52,7 +52,7 @@
             error: function (error) {
             }
         });
-    }
+    }*@
 </script>
 
 @using (Html.BeginForm("Index", "MateriaPorProfesor", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))

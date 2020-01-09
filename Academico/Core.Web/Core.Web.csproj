@@ -7557,7 +7557,7 @@
     <Content Include="Areas\Academico\Views\Profesor\Anular.cshtml" />
     <Content Include="Areas\Academico\Views\Alumno\Anular.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaPorProfesor\Index.cshtml" />
-    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_GridViewPartial_MateriaPorProfesor.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_GridViewPartial_MateriaPorProfesor1.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Paralelo.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaPorProfesor\_ComboBoxPartial_Nivel.cshtml" />
@@ -7996,6 +7996,8 @@
     <Content Include="Areas\Contabilidad\Views\AnioFiscal\Nuevo.cshtml" />
     <Content Include="Areas\Contabilidad\Views\AnioFiscal\_CmbCuenta_Anio.cshtml" />
     <Content Include="Areas\Contabilidad\Views\AnioFiscal\_GridViewPartial_anio_fiscal.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_GridViewPartial_MateriaPorProfesor.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaPorProfesor\_CmbProfesor.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
