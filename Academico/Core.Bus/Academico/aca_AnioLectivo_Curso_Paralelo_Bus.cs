@@ -35,6 +35,19 @@ namespace Core.Bus.Academico
             }
         }
 
+        public bool ModificarDB(aca_AnioLectivo_Curso_Paralelo_Info info)
+        {
+            try
+            {
+                return odata.ModificarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<aca_AnioLectivo_Curso_Paralelo_Info> GetListAsignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try

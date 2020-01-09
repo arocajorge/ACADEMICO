@@ -28,7 +28,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_Profesor_Info GetInfo(int IdEmpresa, int IdProfesor)
+        public aca_Profesor_Info GetInfo(int IdEmpresa, decimal IdProfesor)
         {
             try
             {

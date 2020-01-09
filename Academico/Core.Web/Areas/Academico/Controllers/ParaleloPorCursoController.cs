@@ -151,6 +151,8 @@ namespace Core.Web.Areas.Academico.Controllers
 
     public class aca_AnioLectivo_Curso_Paralelo_List
     {
+        aca_AnioLectivo_Curso_Paralelo_Bus bus_ParaleloPorCurso = new aca_AnioLectivo_Curso_Paralelo_Bus();
+        aca_Profesor_Bus busProfesor = new aca_Profesor_Bus();
         string Variable = "aca_AnioLectivo_Curso_Paralelo_Info";
         public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list(decimal IdTransaccionSession)
         {
@@ -170,8 +172,30 @@ namespace Core.Web.Areas.Academico.Controllers
         public void UpdateRow(aca_AnioLectivo_Curso_Paralelo_Info info_det, decimal IdTransaccionSession)
         {
             aca_AnioLectivo_Curso_Paralelo_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdParalelo == info_det.IdParalelo).FirstOrDefault();
-            edited_info.IdProfesorInspector = info_det.IdProfesorInspector;
+            info_det.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var profesor = busProfesor.GetInfo(info_det.IdEmpresa, info_det.IdProfesorInspector ?? 0);
+            if (profesor != null)
+                info_det.NomInspector = profesor.pe_nombreCompleto;
+            else
+                info_det.NomInspector = null;
+
+            profesor = busProfesor.GetInfo(info_det.IdEmpresa, info_det.IdProfesorTutor ?? 0);
+            if (profesor != null)
+                info_det.NomTutor = profesor.pe_nombreCompleto;
+            else
+                info_det.NomTutor = null;
+
             edited_info.IdProfesorTutor = info_det.IdProfesorTutor;
+            edited_info.IdProfesorInspector = info_det.IdProfesorInspector;
+            edited_info.NomTutor = info_det.NomTutor;
+            edited_info.NomInspector = info_det.NomInspector;
+
+            if (bus_ParaleloPorCurso.ModificarDB(edited_info))
+            {
+
+            }
+
+
         }
     }
 }

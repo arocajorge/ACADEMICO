@@ -85,7 +85,6 @@ namespace Core.Data.Academico
             }
         }
 
-
         public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list_asignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try
@@ -216,6 +215,7 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
         public bool modificarDB(List<aca_AnioLectivo_Curso_Paralelo_Info> lista)
         {
             try
@@ -237,6 +237,30 @@ namespace Core.Data.Academico
                         }
                         Context.SaveChanges();
                     }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool ModificarDB(aca_AnioLectivo_Curso_Paralelo_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdNivel == info.IdNivel && q.IdJornada == info.IdJornada && q.IdSede == info.IdSede && q.IdCurso == info.IdCurso && q.IdParalelo == info.IdParalelo).FirstOrDefault();
+                    if (Entity != null)
+                    {
+                        Entity.IdProfesorInspector = info.IdProfesorInspector;
+                        Entity.IdProfesorTutor = info.IdProfesorTutor;
+                    }
+                    db.SaveChanges();
                 }
 
                 return true;

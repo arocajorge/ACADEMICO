@@ -532,6 +532,21 @@ namespace Core.Data.General
                             }).FirstOrDefault();
                     context_p.Dispose();
                     break;
+                case "CLIENTE":
+                    EntitiesFacturacion context_f = new EntitiesFacturacion();
+                    info = (from q in context_f.vwfa_cliente_consulta
+                            where q.Estado == "A"
+                            && q.IdEmpresa == IdEmpresa
+                            && q.IdCliente == IdEntidad
+                            select new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdCliente
+                            }).FirstOrDefault();
+                    context_f.Dispose();
+                    break;
             }
 
             context_g.Dispose();

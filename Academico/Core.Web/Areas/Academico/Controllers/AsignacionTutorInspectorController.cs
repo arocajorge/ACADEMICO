@@ -135,20 +135,15 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = Lista_ParaleloPorCurso.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
-            //ViewBag.BatchEditingOptions = options;
             return PartialView("_GridViewPartial_AsignacionTutorInspector", model);
         }
 
-        [ValidateInput(false)]
-        public ActionResult BatchEditingUpdateModel(MVCxGridViewBatchUpdateValues<aca_AnioLectivo_Curso_Paralelo_Info, int> updateValues)
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] aca_AnioLectivo_Curso_Paralelo_Info info_det)
         {
-            foreach (var product in updateValues.Update)
-            {
-                if (updateValues.IsValid(product))
-                    Lista_ParaleloPorCurso.UpdateRow(product, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            }
-            return GridViewPartial_AsignacionTutorInspector();
+            Lista_ParaleloPorCurso.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lista_ParaleloPorCurso.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_AsignacionTutorInspector", model);
         }
         #endregion
 

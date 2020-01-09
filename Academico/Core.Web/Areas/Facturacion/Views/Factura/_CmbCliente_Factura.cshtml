@@ -12,9 +12,9 @@
         settings.Properties.TextField = "pe_nombreCompleto";
         settings.Properties.TextFormatString = "[{0}] {1} - {2}";
         settings.Properties.ValueField = "IdEntidad";
-        settings.Properties.ValueType = typeof(decimal);
+        settings.Properties.ValueType = Model.GetType();
 
-        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
         settings.Properties.AllowNull = true;
         settings.ReadOnly = true;
 
@@ -22,7 +22,7 @@
         settings.Properties.Columns.Add("pe_cedulaRuc", "RUC", 10);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Cliente", 55);
         settings.Properties.Columns.Add("CodPersona", "Clase", 30);
-        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_info_cliente(); ValidarCliente(); cargar_contactos();}";
+        //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){get_info_cliente(); ValidarCliente(); cargar_contactos();}";
     })
     .BindList(new Core.Web.Areas.Facturacion.Controllers.FacturaController().get_list_bajo_demanda, new Core.Web.Areas.Facturacion.Controllers.FacturaController().get_info_bajo_demanda)
     .Bind(Model.GetType() == typeof(Core.Info.Facturacion.fa_factura_Info) ? "" : (Model == 0 ? "" : Model));

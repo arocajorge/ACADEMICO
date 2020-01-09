@@ -47,7 +47,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_Profesor_Info getInfo(int IdEmpresa, int IdProfesor)
+        public aca_Profesor_Info getInfo(int IdEmpresa, decimal IdProfesor)
         {
             try
             {
