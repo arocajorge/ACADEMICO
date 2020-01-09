@@ -1,4 +1,6 @@
-﻿namespace Core.Info.Facturacion
+﻿using System;
+
+namespace Core.Info.Facturacion
 {
     public class fa_factura_resumen_Info
     {
@@ -18,5 +20,7 @@
         public decimal ValorEfectivo { get; set; }
         public decimal Cambio { get; set; }
         public string mensaje { get; set; }
+        public decimal ValorProntoPago { get; set; }
+        public Nullable<System.DateTime> FechaProntoPago { get; set; }
     }
 }

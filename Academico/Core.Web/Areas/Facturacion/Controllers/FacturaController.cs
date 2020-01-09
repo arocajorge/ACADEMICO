@@ -235,6 +235,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
             i_validar.info_resumen.SubtotalSinDscto = i_validar.info_resumen.SubtotalIVASinDscto + i_validar.info_resumen.SubtotalSinIVASinDscto;
             i_validar.info_resumen.SubtotalConDscto = i_validar.info_resumen.SubtotalIVAConDscto + i_validar.info_resumen.SubtotalSinIVAConDscto;
             i_validar.info_resumen.Total = i_validar.info_resumen.SubtotalConDscto + i_validar.info_resumen.ValorIVA;
+            i_validar.info_resumen.ValorProntoPago = (decimal)Math.Round(i_validar.lst_det.Sum(q => q.TotalProntoPago), 2, MidpointRounding.AwayFromZero);
+            i_validar.info_resumen.FechaProntoPago = ( (i_validar.lst_det.Where(q => q.FechaProntoPago !=null).ToList().Count >0) ? i_validar.lst_det.Min(q=> q.FechaProntoPago) : null);
             #endregion
 
 
@@ -559,6 +561,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
                 var info_rubro_anio = bus_aca_anio_rubro.GetInfo(item.IdEmpresa, item.IdAnio, Convert.ToInt32(item.aca_IdRubro));
                 var info_anio_periodo = bus_anio_periodo.GetInfo(item.IdEmpresa, item.IdAnio, Convert.ToInt32(item.aca_IdPeriodo));
+                item.FechaProntoPago = null;
 
                 if (info_rubro_anio.AplicaProntoPago == true)
                 {
@@ -570,6 +573,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
                     if (DateTime.Now <= info_anio_periodo.FechaProntoPago)
                     {
+                        item.FechaProntoPago = info_anio_periodo.FechaProntoPago;
+
                         if (info_plantilla.TipoDescuento == "%")
                         {
                             ValorDescuento = (Convert.ToDecimal(item.vt_total) * (info_plantilla.Valor / 100));
@@ -589,7 +594,6 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 }
                 else
                 {
-                    //Total = Total + Math.Round((Convert.ToDecimal(item.vt_total)), 2, MidpointRounding.AwayFromZero);
                     TotalProntoPago = TotalProntoPago + Math.Round((Convert.ToDecimal(item.vt_total)), 2, MidpointRounding.AwayFromZero);
                 }
 
