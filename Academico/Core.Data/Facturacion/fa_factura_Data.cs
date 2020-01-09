@@ -235,7 +235,10 @@ namespace Core.Data.Facturacion
                     Descuento = info.info_resumen.Descuento,
                     ValorEfectivo = info.info_resumen.ValorEfectivo,
                     ValorIVA = info.info_resumen.ValorIVA,
-                    Cambio = info.info_resumen.Cambio
+                    Cambio = info.info_resumen.Cambio,
+
+                    FechaProntoPago = info.info_resumen.FechaProntoPago,
+                    ValorProntoPago = info.info_resumen.ValorProntoPago
                 });
                 #endregion
 
@@ -584,7 +587,10 @@ namespace Core.Data.Facturacion
                     Descuento = info.info_resumen.Descuento,
                     ValorEfectivo = info.info_resumen.ValorEfectivo,
                     ValorIVA = info.info_resumen.ValorIVA,
-                    Cambio = info.info_resumen.Cambio
+                    Cambio = info.info_resumen.Cambio,
+
+                    FechaProntoPago = info.info_resumen.FechaProntoPago,
+                    ValorProntoPago = info.info_resumen.ValorProntoPago
                 });
                 #endregion
 

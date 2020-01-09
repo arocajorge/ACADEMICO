@@ -71,7 +71,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_Plantilla_Rubro_Matricula> vwaca_Plantilla_Rubro_Matricula { get; set; }
         public virtual DbSet<vwaca_AlumnoDocumento> vwaca_AlumnoDocumento { get; set; }
         public virtual DbSet<aca_AlumnoDocumento> aca_AlumnoDocumento { get; set; }
-        public virtual DbSet<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
         public virtual DbSet<vwaca_PermisoMatricula> vwaca_PermisoMatricula { get; set; }
         public virtual DbSet<aca_Materia> aca_Materia { get; set; }
         public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
@@ -85,6 +84,11 @@ namespace Core.Data.Base
         public virtual DbSet<aca_SocioEconomico> aca_SocioEconomico { get; set; }
         public virtual DbSet<aca_Familia> aca_Familia { get; set; }
         public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
+        public virtual DbSet<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
+        public virtual DbSet<aca_AnioLectivoCalificacionHistorico> aca_AnioLectivoCalificacionHistorico { get; set; }
+        public virtual DbSet<aca_AnioLectivoConductaEquivalencia> aca_AnioLectivoConductaEquivalencia { get; set; }
+        public virtual DbSet<aca_MatriculaCalificacion> aca_MatriculaCalificacion { get; set; }
+        public virtual DbSet<aca_MatriculaConducta> aca_MatriculaConducta { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

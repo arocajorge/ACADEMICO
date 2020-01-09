@@ -29,5 +29,7 @@ namespace Core.Data.Base
         public decimal Total { get; set; }
         public decimal ValorEfectivo { get; set; }
         public decimal Cambio { get; set; }
+        public decimal ValorProntoPago { get; set; }
+        public Nullable<System.DateTime> FechaProntoPago { get; set; }
     }
 }

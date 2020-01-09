@@ -23,8 +23,8 @@
         settings.Properties.FilterMinLength = 3;
 
     })
-    .BindList(new Core.Erp.Web.Areas.Contabilidad.Controllers.AnioFiscalController().get_list_bajo_demanda, new Core.Erp.Web.Areas.Contabilidad.Controllers.AnioFiscalController().get_info_bajo_demanda)
-    .Bind(Model.GetType() == typeof(Core.Erp.Info.Contabilidad.ct_anio_fiscal_Info) ? "" : (Model == null ? "" : Model));
+    .BindList(new Core.Web.Areas.Contabilidad.Controllers.AnioFiscalController().get_list_bajo_demanda, new Core.Web.Areas.Contabilidad.Controllers.AnioFiscalController().get_info_bajo_demanda)
+    .Bind(Model.GetType() == typeof(Core.Info.Contabilidad.ct_anio_fiscal_Info) ? "" : (Model == null ? "" : Model));
 
 
 }
