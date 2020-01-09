@@ -27,7 +27,7 @@
             </div>
         </div>
     }
-    <div class="row" id="MensajeError">
+    <div class="row" id="MensajeError" hidden>
         <div class="col-md-12">
             <div class="alert alert-warning alert-dismissible">
                 <h4>
@@ -222,7 +222,7 @@
                     @Html.ValidationMessageFor(q => q.IdCatalogoFichaMot, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-8" id="otro_motivo_ingreso">
+            <div class="col-md-8" id="otro_motivo_ingreso" hidden>
                 <div class="form-group">
                     <label for="IdEmpresa">Otro motivo de Ingreso</label>
                     @Html.TextBoxFor(q => q.OtroMotivoIngreso, new { @class = "form-control", @id = "OtroMotivoIngreso" })
@@ -240,7 +240,7 @@
                     @Html.ValidationMessageFor(q => q.IdCatalogoFichaIns, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-8" id="otro_informacion_inst">
+            <div class="col-md-8" id="otro_informacion_inst" hidden>
                 <div class="form-group">
                     <label for="IdEmpresa">Otra información</label>
                     @Html.TextBoxFor(q => q.OtroInformacionInst, new { @class = "form-control", @id = "OtroInformacionInst" })
@@ -258,7 +258,7 @@
                     @Html.ValidationMessageFor(q => q.IdCatalogoFichaFin, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-8" id="otro_forma_financ">
+            <div class="col-md-8" id="otro_forma_financ" hidden>
                 <div class="form-group">
                     <label for="IdEmpresa">Otro forma de financiamiento</label>
                     @Html.TextBoxFor(q => q.OtroFinanciamiento, new { @class = "form-control", @id = "OtroFinanciamiento" })
@@ -278,9 +278,6 @@
 
 <script>
     $(function () {
-        $("#MensajeError").hide();
-        $("#otro_motivo_ingreso").hide();
-        $("#otro_informacion_inst").hide();
         $("#otro_forma_financ").hide();
 
         mostrar_otro_motivo();
