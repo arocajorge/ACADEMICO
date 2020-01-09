@@ -59,6 +59,7 @@
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Jornada_Curso_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_NivelAcademico_Jornada_Data.cs" />
@@ -136,6 +137,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_AnioLectivo_Curso_Plantilla.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_AnioLectivo_Curso_Plantilla_Parametrizacion.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_AnioLectivo_Jornada_Curso.cs">
@@ -1171,6 +1175,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Curso_Paralelo.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Jornada_Curso.cs">

@@ -89,6 +89,8 @@ namespace Core.Data.Base
         public virtual DbSet<aca_AnioLectivoConductaEquivalencia> aca_AnioLectivoConductaEquivalencia { get; set; }
         public virtual DbSet<aca_MatriculaCalificacion> aca_MatriculaCalificacion { get; set; }
         public virtual DbSet<aca_MatriculaConducta> aca_MatriculaConducta { get; set; }
+        public virtual DbSet<aca_AnioLectivo_Curso_Plantilla_Parametrizacion> aca_AnioLectivo_Curso_Plantilla_Parametrizacion { get; set; }
+        public virtual DbSet<vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion> vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

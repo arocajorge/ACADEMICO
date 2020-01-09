@@ -48,6 +48,7 @@
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Info.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Jornada_Curso_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_NivelAcademico_Jornada_Info.cs" />
