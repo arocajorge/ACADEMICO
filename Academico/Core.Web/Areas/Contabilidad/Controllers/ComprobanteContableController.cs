@@ -1,6 +1,5 @@
 ﻿using Core.Bus.Contabilidad;
 using Core.Bus.General;
-using Core.Erp.Bus.Contabilidad;
 using Core.Info.Contabilidad;
 using Core.Info.Helps;
 using Core.Web.Helps;

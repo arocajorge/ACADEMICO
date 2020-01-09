@@ -6,7 +6,7 @@
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        settings.CallbackRouteValues = new { Controller = "TipoNota", Action = "CmbCuenta_TipoNota", Area = "Facturacion" };
+        settings.CallbackRouteValues = new { Controller = "ParametrizacionPlantilla", Action = "CmbCuentaDebe_Parametrizacion", Area = "Academico" };
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "pc_Cuenta";
@@ -23,7 +23,7 @@
         settings.Properties.FilterMinLength = 3;
 
     })
-    .BindList(new Core.Web.Areas.Facturacion.Controllers.TipoNotaController().get_list_bajo_demanda, new Core.Web.Areas.Facturacion.Controllers.TipoNotaController().get_info_bajo_demanda)
-    .Bind(Model.IdCtaCble);
+    .BindList(new Core.Web.Areas.Academico.Controllers.ParametrizacionPlantillaController().get_list_bajo_demanda, new Core.Web.Areas.Academico.Controllers.ParametrizacionPlantillaController().get_info_bajo_demanda)
+    .Bind(Model.IdCtaCbleHaber);
 }
 @comboBox.GetHtml()
