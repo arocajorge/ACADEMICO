@@ -8001,6 +8001,7 @@
     <Content Include="Areas\Academico\Views\MateriaPorProfesor\_CmbProfesor.cshtml" />
     <Content Include="Areas\Academico\Views\ParametrizacionPlantilla\_GridViewPartial_ParametrizacionDet.cshtml" />
     <Content Include="Areas\Academico\Views\ParametrizacionPlantilla\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\ParametrizacionPlantilla\_CmbCuenta_Parametrizacion.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
