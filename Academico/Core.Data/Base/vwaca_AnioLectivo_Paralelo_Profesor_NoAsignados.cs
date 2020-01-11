@@ -12,7 +12,7 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class vwaca_AnioLectivo_Paralelo_Profesor
+    public partial class vwaca_AnioLectivo_Paralelo_Profesor_NoAsignados
     {
         public int IdEmpresa { get; set; }
         public int IdAnio { get; set; }
@@ -20,11 +20,8 @@ namespace Core.Data.Base
         public int IdNivel { get; set; }
         public int IdJornada { get; set; }
         public int IdCurso { get; set; }
-        public int IdMateria { get; set; }
         public int IdParalelo { get; set; }
-        public Nullable<decimal> IdProfesor { get; set; }
-        public Nullable<decimal> IdPersona { get; set; }
-        public string pe_nombreCompleto { get; set; }
+        public int IdMateria { get; set; }
         public string NomMateria { get; set; }
     }
 }

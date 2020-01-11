@@ -39,11 +39,19 @@
     }
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <div class="form-group">
                     <label for="IdSucursal">Documento*</label>
                     @Html.TextBoxFor(q => q.NomDocumento, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.NomDocumento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdSucursal">&nbsp;</label>
+                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","Documento",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
+                        <i class="fa fa-plus"></i>
+                    </a>
                 </div>
             </div>
         </div>

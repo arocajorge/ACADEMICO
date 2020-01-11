@@ -60,6 +60,46 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_financiamiento = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.ESTUDIOS), false);
             ViewBag.lst_financiamiento = lst_financiamiento;
         }
+
+        private bool validar(aca_SocioEconomico_Info info, ref string msg)
+        {
+            if (info.TieneHermanos == true)
+            {
+                if (info.NombreHermanos == "" || info.NombreHermanos == null)
+                {
+                    msg = "Debe de ingresar la información de los hermanos";
+                    return false;
+                }
+            }
+
+            if (info.IdCatalogoFichaMot == Convert.ToDecimal(cl_enumeradores.eCatalogoSocioEconomico_OtrodMotivos.OTROS_MOTIVOING))
+            {
+                if (info.OtroMotivoIngreso == "" || info.OtroMotivoIngreso == null)
+                {
+                    msg = "Debe de ingresar el motivo de ingreso";
+                    return false;
+                }
+            }
+
+            if (info.IdCatalogoFichaIns == Convert.ToDecimal(cl_enumeradores.eCatalogoSocioEconomico_OtrodMotivos.OTROS_INSTITUCION))
+            {
+                if (info.OtroInformacionInst == "" || info.OtroInformacionInst==null)
+                {
+                    msg = "Debe de ingresar como conoció nuestra institución";
+                    return false;
+                }
+            }
+
+            if (info.IdCatalogoFichaFin == Convert.ToDecimal(cl_enumeradores.eCatalogoSocioEconomico_OtrodMotivos.OTROS_MEDIOS))
+            {
+                if (info.OtroFinanciamiento == "" || info.OtroFinanciamiento == null)
+                {
+                    msg = "Debe de ingresar el medio de financiamiento de los estudios";
+                    return false;
+                }
+            }
+            return true;
+        }
         #endregion
 
         #region Acciones
@@ -89,6 +129,13 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
 
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+
             if (!bus_socio_economico.GuardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
@@ -96,7 +143,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdSocioEconomico = model.IdSocioEconomico });
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdSocioEconomico = model.IdSocioEconomico, Exito=true });
         }
 
         public ActionResult Modificar(int IdEmpresa = 0, int IdSocioEconomico = 0, bool Exito=false)
@@ -124,6 +171,13 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
 
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                cargar_combos();
+                return View(model);
+            }
+
             if (!bus_socio_economico.ModificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";
@@ -131,7 +185,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdSocioEconomico = model.IdSocioEconomico });
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdSocioEconomico = model.IdSocioEconomico, Exito=true });
         }
         #endregion
     }

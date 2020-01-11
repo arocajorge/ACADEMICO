@@ -1186,6 +1186,9 @@
     <Compile Include="Base\vwaca_AnioLectivo_Paralelo_Profesor.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_AnioLectivo_Paralelo_Profesor_NoAsignados.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Periodo.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>

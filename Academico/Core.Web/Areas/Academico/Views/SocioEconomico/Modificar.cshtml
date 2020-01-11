@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Academico.aca_SocioEconomico_Info
 @{
-    ViewBag.Title = "Modificar ficha socio economica";
+    ViewBag.Title = "Modificar ficha socio económica";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -22,6 +22,18 @@
                 <div class="alert alert-warning alert-dismissible">
                     <h4>
                         <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
                     </h4>
                 </div>
             </div>
@@ -278,12 +290,13 @@
 
 <script>
     $(function () {
-        $("#otro_forma_financ").hide();
-
         mostrar_otro_motivo();
         mostrar_otro_informacion_inst();
         mostrar_otro_financiamiento();
         mostrar_div();
+
+        sumar_ingresos();
+        sumar_egresos();
 
         $("#IdCatalogoFichaMot").change(function () {
             mostrar_otro_motivo();

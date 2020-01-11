@@ -10,7 +10,7 @@ namespace Core.Data.Academico
 {
     public class aca_AnioLectivo_Paralelo_Profesor_Data
     {
-        public List<aca_AnioLectivo_Paralelo_Profesor_Info> get_list_asignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria)
+        public List<aca_AnioLectivo_Paralelo_Profesor_Info> get_list_asignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo)
         {
             try
             {
@@ -26,11 +26,8 @@ namespace Core.Data.Academico
                              && q.IdJornada == IdJornada
                              && q.IdCurso == IdCurso
                              && q.IdParalelo == IdParalelo
-                             && q.IdMateria == IdMateria
-                             && q.Estado == true
                              select new aca_AnioLectivo_Paralelo_Profesor_Info
                              {
-                                 seleccionado = true,
                                  IdEmpresa = q.IdEmpresa,
                                  IdSede = q.IdSede,
                                  IdAnio = q.IdAnio,
@@ -39,31 +36,35 @@ namespace Core.Data.Academico
                                  IdCurso = q.IdCurso,
                                  IdParalelo = q.IdParalelo,
                                  IdMateria = q.IdMateria,
+                                 NomMateria = q.NomMateria,
                                  IdProfesor = q.IdProfesor,
-                                 pe_nombreCompleto = q.pe_nombreCompleto,
-                                 Codigo = q.Codigo
+                                 pe_nombreCompleto = q.pe_nombreCompleto
                              }).ToList();
 
-                    Lista.AddRange((from j in Context.vwaca_Profesor
-                                    where !Context.aca_AnioLectivo_Paralelo_Profesor.Any(n => n.IdProfesor == j.IdProfesor && n.IdEmpresa == IdEmpresa && n.IdSede == IdSede && n.IdAnio == IdAnio && n.IdNivel == IdNivel && n.IdJornada == IdJornada && n.IdCurso == IdCurso && n.IdParalelo == IdParalelo && n.IdMateria == IdMateria)
-                                    && j.Estado == true
+                    Lista.AddRange((from q in Context.vwaca_AnioLectivo_Paralelo_Profesor_NoAsignados
+                                     where q.IdEmpresa == IdEmpresa
+                                     && q.IdAnio == IdAnio
+                                     && q.IdSede == IdSede
+                                     && q.IdJornada == IdJornada
+                                     && q.IdNivel == IdNivel
+                                     && q.IdCurso == IdCurso
+                                     && q.IdParalelo == IdParalelo
+                                     && !Context.aca_AnioLectivo_Paralelo_Profesor.Any(me =>
+                                     me.IdEmpresa == IdEmpresa
+                                     && me.IdParalelo == IdParalelo)
                                     select new aca_AnioLectivo_Paralelo_Profesor_Info
                                     {
-                                        seleccionado = false,
-                                        IdEmpresa = IdEmpresa,
-                                        IdSede = IdSede,
-                                        IdAnio = IdAnio,
-                                        IdNivel = IdNivel,
-                                        IdJornada = IdJornada,
-                                        IdCurso = IdCurso,
+                                        IdEmpresa = q.IdEmpresa,
+                                        IdSede = q.IdSede,
+                                        IdAnio = q.IdAnio,
+                                        IdNivel = q.IdNivel,
+                                        IdJornada = q.IdJornada,
+                                        IdCurso = q.IdCurso,
                                         IdParalelo = IdParalelo,
-                                        IdMateria = IdMateria,
-                                        IdProfesor = j.IdProfesor,
-                                        pe_nombreCompleto = j.pe_nombreCompleto,
-                                        Codigo = j.Codigo
+                                        IdMateria = q.IdMateria,
+                                        NomMateria = q.NomMateria
                                     }).ToList());
                 }
-
                 return Lista;
             }
             catch (Exception)
@@ -73,13 +74,13 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, List<aca_AnioLectivo_Paralelo_Profesor_Info> lista)
+        public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, List<aca_AnioLectivo_Paralelo_Profesor_Info> lista)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst_MateriaProfesor = Context.aca_AnioLectivo_Paralelo_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo && q.IdMateria == IdMateria).ToList();
+                    var lst_MateriaProfesor = Context.aca_AnioLectivo_Paralelo_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).ToList();
                     Context.aca_AnioLectivo_Paralelo_Profesor.RemoveRange(lst_MateriaProfesor);
                     
                     if (lista.Count > 0)
@@ -96,7 +97,7 @@ namespace Core.Data.Academico
                                 IdCurso = info.IdCurso,
                                 IdMateria = info.IdMateria,
                                 IdParalelo = info.IdParalelo,
-                                IdProfesor = Convert.ToDecimal(info.IdProfesor)
+                                IdProfesor = info.IdProfesor
                             };
                             Context.aca_AnioLectivo_Paralelo_Profesor.Add(Entity);
                         }
@@ -105,7 +106,7 @@ namespace Core.Data.Academico
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

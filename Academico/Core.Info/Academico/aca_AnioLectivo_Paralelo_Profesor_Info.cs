@@ -31,6 +31,7 @@ namespace Core.Info.Academico
         public bool seleccionado { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string Codigo { get; set; }
+        public string NomMateria { get; set; }
         #endregion
     }
 }

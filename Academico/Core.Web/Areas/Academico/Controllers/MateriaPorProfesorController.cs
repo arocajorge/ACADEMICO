@@ -53,7 +53,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
 
-            List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = bus_MateriaPorProfesor.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdMateria);
+            List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = bus_MateriaPorProfesor.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
             Lista_MateriaPorProfesor.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos();
             return View(model);
@@ -62,7 +62,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_AnioLectivo_Paralelo_Profesor_Info model)
         {
-            List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = bus_MateriaPorProfesor.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdMateria);
+            List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = bus_MateriaPorProfesor.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
             Lista_MateriaPorProfesor.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos();
             return View(model);
@@ -183,39 +183,19 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
         #region Json
-        //public JsonResult guardar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo=0,  int IdMateria=0, string Ids = "", decimal IdTransaccionSession = 0)
-        //{
-        //    var resultado = 1;
-        //    List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = new List<aca_AnioLectivo_Paralelo_Profesor_Info>();
-        //    string[] array = Ids.Split(',');
+        public JsonResult guardar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, decimal IdTransaccionSession = 0)
+        {
+            var resultado = 1;
+            List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = new List<aca_AnioLectivo_Paralelo_Profesor_Info>();
+            lista = Lista_MateriaPorProfesor.get_list(IdTransaccionSession);
 
-        //    if (Ids != "")
-        //    {
-        //        foreach (var item in array)
-        //        {
-        //            aca_AnioLectivo_Paralelo_Profesor_Info info = new aca_AnioLectivo_Paralelo_Profesor_Info
-        //            {
-        //                IdEmpresa = IdEmpresa,
-        //                IdSede = IdSede,
-        //                IdAnio = IdAnio,
-        //                IdNivel = IdNivel,
-        //                IdJornada = IdJornada,
-        //                IdCurso = IdCurso,
-        //                IdParalelo = IdParalelo,
-        //                IdMateria = IdMateria,
-        //                IdProfesor = Convert.ToDecimal(item),
-        //            };
-        //            lista.Add(info);
-        //        }
-        //    }
+            if (!bus_MateriaPorProfesor.GuardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, lista))
+            {
+                resultado = 0;
+            }
 
-        //    if (!bus_MateriaPorProfesor.GuardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, lista))
-        //    {
-        //        resultado = 0;
-        //    }
-
-        //    return Json(resultado, JsonRequestBehavior.AllowGet);
-        //}
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
 
         //public JsonResult GetListMateriaPorProfesor(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdMateria = 0, decimal IdTransaccionSession = 0)
         //{

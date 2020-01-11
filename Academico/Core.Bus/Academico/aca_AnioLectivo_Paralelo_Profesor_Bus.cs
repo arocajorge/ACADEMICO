@@ -12,11 +12,11 @@ namespace Core.Bus.Academico
     {
         aca_AnioLectivo_Paralelo_Profesor_Data odata = new aca_AnioLectivo_Paralelo_Profesor_Data();
 
-        public List<aca_AnioLectivo_Paralelo_Profesor_Info> GetListAsignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria)
+        public List<aca_AnioLectivo_Paralelo_Profesor_Info> GetListAsignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo)
         {
             try
             {
-                return odata.get_list_asignacion(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria);
+                return odata.get_list_asignacion(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
             }
             catch (Exception)
             {
@@ -24,11 +24,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public bool GuardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, List<aca_AnioLectivo_Paralelo_Profesor_Info> lista)
+        public bool GuardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, List<aca_AnioLectivo_Paralelo_Profesor_Info> lista)
         {
             try
             {
-                return odata.guardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, lista);
+                return odata.guardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, lista);
             }
             catch (Exception)
             {

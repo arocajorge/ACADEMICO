@@ -1,12 +1,11 @@
 @using System.Web.UI.WebControls;
-@model Core.Info.Academico.aca_AnioLectivo_Paralelo_Profesor_Info
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_MateriaPorProfesor";
         settings.CallbackRouteValues = new { Controller = "MateriaPorProfesor", Action = "GridViewPartial_MateriaPorProfesor" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdMateria";
-        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.CommandColumn.ShowNewButtonInHeader = false;
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -46,7 +45,7 @@
         };
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdMateria";
+            column.FieldName = "NomMateria";
             column.Caption = "Materia";
             column.Width = Unit.Percentage(40);
             column.EditFormSettings.Visible = DefaultBoolean.False;
@@ -78,4 +77,4 @@
     });
 
 }
-@grid.Bind(Model.lst_ct_cbtecble_det).GetHtml()
+@grid.Bind(Model).GetHtml()

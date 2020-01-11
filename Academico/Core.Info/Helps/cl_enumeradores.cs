@@ -207,6 +207,13 @@ namespace Core.Info.Helps
             INSTRUCCION = 7
         }
 
+        public enum eCatalogoSocioEconomico_OtrodMotivos
+        {
+            OTROS_MOTIVOING = 15,
+            OTROS_INSTITUCION = 19,
+            OTROS_MEDIOS = 22
+        }
+
         public enum eTipoBusquedaProducto
         {
             SOLOPADRES,
