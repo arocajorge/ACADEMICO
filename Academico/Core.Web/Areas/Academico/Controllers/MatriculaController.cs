@@ -37,6 +37,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Jornada_Curso_Bus bus_aniolectivo_jornada_curso = new aca_AnioLectivo_Jornada_Curso_Bus();
         aca_AnioLectivo_Curso_Documento_Bus bus_curso_documento = new aca_AnioLectivo_Curso_Documento_Bus();
         aca_SocioEconomico_Bus bus_socioeconomico = new aca_SocioEconomico_Bus();
+        aca_AnioLectivo_Paralelo_Profesor_Bus bus_materias_x_paralelo = new aca_AnioLectivo_Paralelo_Profesor_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -571,6 +572,33 @@ namespace Core.Web.Areas.Academico.Controllers
                 
                 info_matricula.lst_documentos = lst_alumno_documentos;
 
+                #region Calificacion y conducta
+                var lst_materias_x_curso = bus_materias_x_paralelo.GetList(IdEmpresa, IdSede,IdAnio,IdNivel,IdJornada,IdCurso,IdParalelo);
+                info_matricula.lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
+                info_matricula.lst_conducta = new List<aca_MatriculaConducta_Info>();
+                if (lst_materias_x_curso!= null && lst_materias_x_curso.Count >0)
+                {
+                    foreach (var item in lst_materias_x_curso)
+                    {
+                        var info_calificacion = new aca_MatriculaCalificacion_Info
+                        {
+                            IdProfesor= item.IdProfesor,
+                            IdMateria = item.IdMateria
+                        };
+
+                        info_matricula.lst_calificacion.Add(info_calificacion);
+
+                        var info_conducta = new aca_MatriculaConducta_Info
+                        {
+                            IdProfesor = item.IdProfesor,
+                            IdMateria = item.IdMateria
+                        };
+
+                        info_matricula.lst_conducta.Add(info_conducta);
+                    }
+                }
+                #endregion
+
                 if (info_matricula.IdPersonaR != 0 && info_matricula.IdPersonaF != 0)
                 {
                     if (!bus_matricula.GuardarDB(info_matricula))
@@ -661,20 +689,23 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 string[] array_doc = IDs_Doc.Split(',');
                 var lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>();
-                foreach (var item in lst_DetalleDocumentos)
+                if (IDs_Doc != "")
                 {
-                    var existe_documento = bus_alumno_documento.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAlumno, item.IdDocumento);
-                    if (existe_documento == null)
+                    foreach (var item in array_doc)
                     {
-                        var info_doc = new aca_AlumnoDocumento_Info
+                        var existe_documento = bus_alumno_documento.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAlumno, Convert.ToInt32(item));
+                        if (existe_documento == null)
                         {
-                            IdEmpresa = info_matricula.IdEmpresa,
-                            IdAlumno = info_matricula.IdAlumno,
-                            IdDocumento = item.IdDocumento,
-                            EnArchivo = true
-                        };
+                            var info_doc = new aca_AlumnoDocumento_Info
+                            {
+                                IdEmpresa = info_matricula.IdEmpresa,
+                                IdAlumno = info_matricula.IdAlumno,
+                                IdDocumento = Convert.ToInt32(item),
+                                EnArchivo = true
+                            };
 
-                        lst_alumno_documentos.Add(info_doc);
+                            lst_alumno_documentos.Add(info_doc);
+                        }
                     }
                 }
 

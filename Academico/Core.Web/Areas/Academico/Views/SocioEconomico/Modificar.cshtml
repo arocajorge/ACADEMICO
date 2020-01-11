@@ -186,7 +186,7 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="IdEmpresa">Gastos prestamo*</label>
+                    <label for="IdEmpresa">Gastos préstamo*</label>
                     @Html.TextBoxFor(q => q.GastoPrestamo, new { @class = "form-control", @id = "GastoPrestamo" })
                     @Html.ValidationMessageFor(m => m.GastoPrestamo, "", new { @class = "text-danger" })
                 </div>
@@ -229,7 +229,7 @@
         <div class="col-md-12">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="IdEmpresa">¿Que le impulsa a ingresar al Liceo Cristiano de Guayaquil?*</label>
+                    <label for="IdEmpresa">¿Qué le impulsa a ingresar al Liceo Cristiano de Guayaquil?*</label>
                     @Html.DropDownListFor(q => q.IdCatalogoFichaMot, new SelectList(ViewBag.lst_ing_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaMot" })
                     @Html.ValidationMessageFor(q => q.IdCatalogoFichaMot, "", new { @class = "text-danger" })
                 </div>
@@ -272,7 +272,7 @@
             </div>
             <div class="col-md-8" id="otro_forma_financ" hidden>
                 <div class="form-group">
-                    <label for="IdEmpresa">Otro forma de financiamiento</label>
+                    <label for="IdEmpresa">Otra forma de financiamiento</label>
                     @Html.TextBoxFor(q => q.OtroFinanciamiento, new { @class = "form-control", @id = "OtroFinanciamiento" })
                     @Html.ValidationMessageFor(m => m.OtroFinanciamiento, "", new { @class = "text-danger" })
                 </div>

@@ -214,6 +214,36 @@ namespace Core.Data.Academico
                     };
                     Context.aca_Matricula.Add(Entity);
 
+                    if (info.lst_calificacion.Count > 0)
+                    {
+                        foreach (var item in info.lst_calificacion)
+                        {
+                            aca_MatriculaCalificacion Entity_Calificacion = new aca_MatriculaCalificacion
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdMatricula = info.IdMatricula,
+                                IdMateria = item.IdMateria,
+                                IdProfesor = item.IdProfesor
+                            };
+                            Context.aca_MatriculaCalificacion.Add(Entity_Calificacion);
+                        }
+                    }
+
+                    if (info.lst_conducta.Count > 0)
+                    {
+                        foreach (var item in info.lst_conducta)
+                        {
+                            aca_MatriculaConducta Entity_Conducta = new aca_MatriculaConducta
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdMatricula = info.IdMatricula,
+                                IdMateria = item.IdMateria,
+                                IdProfesor = item.IdProfesor
+                            };
+                            Context.aca_MatriculaConducta.Add(Entity_Conducta);
+                        }
+                    }
+
                     if (info.lst_MatriculaRubro.Count > 0)
                     {
                         foreach (var item in info.lst_MatriculaRubro)

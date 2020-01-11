@@ -42,7 +42,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdNivel = 0,
                 IdJornada = 0,
                 IdCurso = 0,
-                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
             List<aca_AnioLectivo_Curso_Materia_Info> lista = bus_MateriaPorCurso.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso);
@@ -54,7 +54,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Index(aca_AnioLectivo_Curso_Materia_Info model)
         {
             List<aca_AnioLectivo_Curso_Materia_Info> lista = bus_MateriaPorCurso.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso);
-            Lista_MateriaPorCurso.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            Lista_MateriaPorCurso.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return View(model);
         }
 

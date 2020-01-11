@@ -44,6 +44,7 @@
     <Compile Include="Academico\aca_AlumnoDocumento_Bus.cs" />
     <Compile Include="Academico\aca_AlumnoRetiro_Bus.cs" />
     <Compile Include="Academico\aca_Alumno_Bus.cs" />
+    <Compile Include="Academico\aca_AnioLectivoConductaEquivalencia_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Bus.cs" />

@@ -1,6 +1,6 @@
-﻿@model Core.Info.Academico.aca_Matricula_Info
+﻿@model Core.Info.Academico.aca_AnioLectivoConductaEquivalencia_Info
 @{
-    ViewBag.Title = "Consulta de matrícula";
+    ViewBag.Title = "Consulta de equivalencias de conducta";
 
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
@@ -36,15 +36,8 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdEmpresa">Año Lectivo</label>
-                            @Html.Partial("_ComboBoxPartial_Anio_Consulta", Model)
+                            @Html.Partial("_ComboBoxPartial_Anio", Model)
                             @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="IdEmpresa">Sede</label>
-                            @Html.Partial("_ComboBoxPartial_Sede", Model)
-                            @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -66,7 +59,7 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_Matricula")
+            @Html.Action("GridViewPartial_ConductaEquivalencia")
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

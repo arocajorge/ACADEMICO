@@ -222,14 +222,14 @@
                     <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="Pais">Pais</label>
+                                <label for="Pais">País</label>
                                 @Html.Partial("_ComboBoxPartial_Pais", Model)
                                 @Html.ValidationMessageFor(q => q.IdPais, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="Pais">Region</label>
+                                <label for="Pais">Región</label>
                                 @Html.Partial("_ComboBoxPartial_Region", Model)
                                 @Html.ValidationMessageFor(q => q.Cod_Region, "", new { @class = "text-danger" })
                             </div>
@@ -620,7 +620,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="Correo">Telefono</label>
+                                <label for="Correo">Teléfono</label>
                                 @Html.TextBoxFor(q => q.TelefonoTrabajo_padre, new { @class = "form-control", @id = "TelefonoTrabajo_padre" })
                                 @Html.ValidationMessageFor(q => q.TelefonoTrabajo_padre, "", new { @class = "text-danger" })
                             </div>
@@ -671,7 +671,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="Telefonos">Numero de carnet</label>
+                                <label for="Telefonos">Número de carnet</label>
                                 @Html.TextBoxFor(q => q.NumeroCarnetConadis_padre, new { @class = "form-control", @id = "NumeroCarnetConadis_padre" })
                                 @Html.ValidationMessageFor(q => q.NumeroCarnetConadis_padre, "", new { @class = "text-danger" })
                             </div>
@@ -987,7 +987,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="Correo">Telefono</label>
+                                <label for="Correo">Teléfono</label>
                                 @Html.TextBoxFor(q => q.TelefonoTrabajo_madre, new { @class = "form-control", @id = "TelefonoTrabajo_madre" })
                                 @Html.ValidationMessageFor(q => q.TelefonoTrabajo_madre, "", new { @class = "text-danger" })
                             </div>
@@ -1038,7 +1038,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="Telefonos">Numero de carnet</label>
+                                <label for="Telefonos">Número de carnet</label>
                                 @Html.TextBoxFor(q => q.NumeroCarnetConadis_madre, new { @class = "form-control", @id = "NumeroCarnetConadis_madre" })
                                 @Html.ValidationMessageFor(q => q.NumeroCarnetConadis_madre, "", new { @class = "text-danger" })
                             </div>

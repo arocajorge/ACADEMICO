@@ -61,6 +61,9 @@ namespace Core.Info.Academico
         public bool BloquearMatricula { get; set; }
         [Required(ErrorMessage = "El campo mecanismo de pago del rubro es obligatorio")]
         public decimal IdMecanismoDet { get; set; }
+
+        public List<aca_MatriculaCalificacion_Info> lst_calificacion { get; set; }
+        public List<aca_MatriculaConducta_Info> lst_conducta { get; set; }
         #endregion
     }
 }

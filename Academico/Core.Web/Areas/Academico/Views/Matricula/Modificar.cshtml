@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Academico.aca_Matricula_Info
 @{
-    ViewBag.Title = "Modificar matricula";
+    ViewBag.Title = "Modificar matrícula";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -71,7 +71,7 @@
             </div>
         </div>
     }
-    <div class="row" id="MensajeError">
+    <div class="row" id="MensajeError" hidden>
         <div class="col-md-12">
             <div class="alert alert-warning alert-dismissible">
                 <h4>
