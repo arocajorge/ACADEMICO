@@ -102,12 +102,22 @@ namespace Core.Data.Academico
                             };
                             Context.aca_AnioLectivo_Paralelo_Profesor.Add(Entity);
 
-                            var lst_MatriculaCalificacion = Context.aca_MatriculaCalificacion.Where(q=> q.IdEmpresa== info.IdEmpresa && q.IdMateria == info.IdMateria).ToList();
-                            if (lst_MatriculaCalificacion.Count>0)
+                            var info_anio_curso = Context.aca_AnioLectivo.Where(q=> q.IdEmpresa==IdEmpresa && q.EnCurso==true).FirstOrDefault();
+                            if (info_anio_curso!=null)
                             {
-                                lst_MatriculaCalificacion.ForEach(q => q.IdProfesor = info.IdProfesor);
-                            }
-                            
+                                var lst_matricula = Context.aca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
+                                if (lst_matricula!=null && lst_matricula.Count>0)
+                                {
+                                    foreach (var item in lst_matricula)
+                                    {
+                                        var lst_MatriculaCalificacion = Context.aca_MatriculaCalificacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula== item.IdMatricula && q.IdMateria == info.IdMateria).ToList();
+                                        if (lst_MatriculaCalificacion.Count > 0)
+                                        {
+                                            lst_MatriculaCalificacion.ForEach(q => q.IdProfesor = info.IdProfesor);
+                                        }
+                                    }
+                                }
+                            }                           
                         }
                     }
                     Context.SaveChanges();

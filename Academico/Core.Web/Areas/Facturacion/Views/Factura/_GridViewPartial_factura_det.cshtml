@@ -102,11 +102,6 @@
             column.Caption = "Precio";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(7);
-            column.EditorProperties().SpinEdit(q =>
-            {
-                q.MinValue = 0;
-                q.Width = Unit.Percentage(100);
-            });
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>

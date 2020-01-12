@@ -204,6 +204,7 @@
     <Compile Include="Areas\Academico\Controllers\AnioLectivoAperturaController.cs" />
     <Compile Include="Areas\Academico\Controllers\AnioLectivoController.cs" />
     <Compile Include="Areas\Academico\Controllers\AsignacionTutorInspectorController.cs" />
+    <Compile Include="Areas\Academico\Controllers\CalificacionHistoricoController.cs" />
     <Compile Include="Areas\Academico\Controllers\ConductaEquivalenciaController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoPorJornadaController.cs" />
@@ -280,6 +281,7 @@
     <Compile Include="Areas\Facturacion\FacturacionAreaRegistration.cs" />
     <Compile Include="Areas\General\Controllers\ParroquiaController.cs" />
     <Compile Include="Areas\General\Controllers\PersonaController.cs" />
+    <Compile Include="Areas\General\Controllers\ProfesionController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoTalonarioController.cs" />
     <Compile Include="Areas\General\GeneralAreaRegistration.cs" />
@@ -8009,6 +8011,21 @@
     <Content Include="Areas\Academico\Views\ConductaEquivalencia\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\ConductaEquivalencia\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Academico\Views\ConductaEquivalencia\Nuevo.cshtml" />
+    <Content Include="Areas\General\Views\Profesion\Index.cshtml" />
+    <Content Include="Areas\General\Views\Profesion\_GridViewPartial_profesion.cshtml" />
+    <Content Include="Areas\General\Views\Profesion\Nuevo.cshtml" />
+    <Content Include="Areas\General\Views\Profesion\Modificar.cshtml" />
+    <Content Include="Areas\General\Views\Profesion\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\_GridViewPartial_CalificacionHistorico.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\_CmbAlumno.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\Modificar.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

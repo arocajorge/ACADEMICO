@@ -12,16 +12,16 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class vwaca_Materia
+    public partial class vwaca_AnioLectivoCalificacionHistorico
     {
         public int IdEmpresa { get; set; }
-        public int IdMateria { get; set; }
-        public Nullable<int> IdMateriaGrupo { get; set; }
-        public string NomMateriaGrupo { get; set; }
-        public int OrdenMateriaGrupo { get; set; }
-        public string NomMateria { get; set; }
-        public bool EsObligatorio { get; set; }
-        public int OrdenMateria { get; set; }
-        public bool Estado { get; set; }
+        public int IdAnio { get; set; }
+        public string Descripcion { get; set; }
+        public decimal IdAlumno { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public int IdCurso { get; set; }
+        public string NomCurso { get; set; }
+        public decimal Promedio { get; set; }
+        public decimal Conducta { get; set; }
     }
 }

@@ -1,21 +1,22 @@
-﻿using Core.Data.General;
-using Core.Info.General;
+﻿using Core.Data.Academico;
+using Core.Data.Base;
+using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Bus.General
+namespace Core.Bus.Academico
 {
-    public class tb_profesion_Bus
+    public class aca_AnioLectivoCalificacionHistorico_Bus
     {
-        tb_profesion_Data odata = new tb_profesion_Data();
-        public List<tb_profesion_Info> GetList(bool MostrarAnulados)
+        aca_AnioLectivoCalificacionHistorico_Data odata = new aca_AnioLectivoCalificacionHistorico_Data();
+        public List<aca_AnioLectivoCalificacionHistorico_Info> GetList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
         {
             try
             {
-                return odata.getList(MostrarAnulados);
+                return odata.getList(IdEmpresa, IdAnio, MostrarAnulados);
             }
             catch (Exception)
             {
@@ -23,11 +24,11 @@ namespace Core.Bus.General
             }
         }
 
-        public tb_profesion_Info GetInfo(int IdProfesion)
+        public aca_AnioLectivoCalificacionHistorico_Info GetInfo(int IdEmpresa, int IdAnio, int IdAlumno)
         {
             try
             {
-                return odata.getInfo(IdProfesion);
+                return odata.getInfo(IdEmpresa, IdAnio, IdAlumno);
             }
             catch (Exception)
             {
@@ -35,7 +36,7 @@ namespace Core.Bus.General
             }
         }
 
-        public bool GuardarDB(tb_profesion_Info info)
+        public bool GuardarDB(aca_AnioLectivoCalificacionHistorico_Info info)
         {
             try
             {
@@ -48,24 +49,11 @@ namespace Core.Bus.General
             }
         }
 
-        public bool ModificarDB(tb_profesion_Info info)
+        public bool ModificarDB(aca_AnioLectivoCalificacionHistorico_Info info)
         {
             try
             {
                 return odata.modificarDB(info);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public bool AnularDB(tb_profesion_Info info)
-        {
-            try
-            {
-                return odata.anularDB(info);
             }
             catch (Exception)
             {

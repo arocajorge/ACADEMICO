@@ -63,17 +63,6 @@
                     @Html.ValidationMessageFor(q => q.EsObligatorio, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="obligatorio"></label>
-                    @Html.DevExpress().CheckBoxFor(q => q.EsCompartida, settings =>
-                            {
-                                settings.Name = "EsCompartida";
-                                settings.Text = "EsCompartida";
-                            }).GetHtml()
-                    @Html.ValidationMessageFor(q => q.EsCompartida, "", new { @class = "text-danger" })
-                </div>
-            </div>
         </div>
     </div>
     <div class="box-footer">

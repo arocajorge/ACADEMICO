@@ -40,7 +40,7 @@ namespace Core.Data.General
             }
         }
 
-        public tb_profesion_Info getInfo(int IdEmpresa, int IdProfesion)
+        public tb_profesion_Info getInfo(int IdProfesion)
         {
             try
             {

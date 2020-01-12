@@ -66,6 +66,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_ConductaEquivalencia", model);
         }
         #endregion
+
         #region Acciones
         public ActionResult Nuevo()
         {

@@ -55,6 +55,7 @@
     <Compile Include="Academico\aca_AlumnoDocumento_Data.cs" />
     <Compile Include="Academico\aca_AlumnoRetiro_Data.cs" />
     <Compile Include="Academico\aca_Alumno_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivoCalificacionHistorico_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivoConductaEquivalencia_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Data.cs" />
@@ -1173,6 +1174,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AlumnoRetiro.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_AnioLectivoCalificacionHistorico.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivoConductaEquivalencia.cs">

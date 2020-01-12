@@ -1,0 +1,105 @@
+﻿@model Core.Info.Academico.aca_AnioLectivoCalificacionHistorico_Info
+@{
+    ViewBag.Title = "Nuevo promedio general";
+
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Nuevo", "CalificacionHistorico", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Año Lectivo</label>
+                    @Html.Partial("_ComboBoxPartial_Anio", Model)
+                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdEmpresa">Sede</label>
+                    @Html.Partial("_ComboBoxPartial_Sede", Model)
+                    @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdEmpresa">Nivel Académico</label>
+                    @Html.Partial("_ComboBoxPartial_Nivel", Model)
+                    @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Jornada</label>
+                    @Html.Partial("_ComboBoxPartial_Jornada", Model)
+                    @Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Curso</label>
+                    @Html.Partial("_ComboBoxPartial_Curso", Model)
+                    @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="IdEmpresa">Alumno</label>
+                        @Html.Partial("_CmbAlumno", Model)
+                        @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="Sede">Promedio</label>
+                        @Html.TextBoxFor(q => q.Promedio, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Promedio, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="Sede">Conducta</label>
+                        @Html.DropDownListFor(q => q.Conducta, new SelectList(ViewBag.lst_conducta, "Calificacion", "Letra"), new { @class = "form-control", @id = "Conducta" })
+                        @Html.ValidationMessageFor(m => m.Conducta, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a class="btn btn-default" href="@Url.Action("Index","CalificacionHistorico",new { Area = "Academico" },null)">Cancelar</a>
+        </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+    }
+

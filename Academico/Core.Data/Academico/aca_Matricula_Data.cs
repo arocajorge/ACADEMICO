@@ -338,7 +338,7 @@ namespace Core.Data.Academico
                                 IdPeriodo = item.IdPeriodo,
                                 IdRubro = item.IdRubro,
                                 IdProducto = item.IdProducto,
-                                Subtotal = item.IdProducto,
+                                Subtotal = item.Subtotal,
                                 IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
                                 Porcentaje = item.Porcentaje,
                                 ValorIVA = item.ValorIVA,

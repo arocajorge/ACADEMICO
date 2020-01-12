@@ -441,7 +441,6 @@ namespace Core.Data.Academico
                                                         IdMateria = item_cm.IdMateria,
                                                         NomMateria = info_materia.NomMateria,
                                                         NomMateriaGrupo = info_materia.NomMateriaGrupo,
-                                                        EsCompartida = info_materia.EsCompartida,
                                                         EsObligatorio = info_materia.EsObligatorio,
                                                         OrdenMateria = info_materia.OrdenMateria
                                                     };

@@ -25,7 +25,6 @@ namespace Core.Info.Academico
         public string NomMateria { get; set; }
         public string NomMateriaGrupo { get; set; }
         public bool EsObligatorio { get; set; }
-        public bool EsCompartida { get; set; }
         public int OrdenMateria { get; set; }
 
         #region Campos que no existen en la tabla
