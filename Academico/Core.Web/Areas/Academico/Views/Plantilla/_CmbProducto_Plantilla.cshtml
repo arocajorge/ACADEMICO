@@ -21,7 +21,7 @@
         settings.Properties.Columns.Add("IdProducto", "ID", 10);
         settings.Properties.Columns.Add("pr_descripcion", "Producto", 90);
 
-        settings.Properties.FilterMinLength = 3;
+        //settings.Properties.FilterMinLength = 3;
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){SetPrecioProducto(s,e);}";
     })
     .BindList(new Core.Web.Areas.Academico.Controllers.PlantillaController().get_list_bajo_demandaProducto,

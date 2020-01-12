@@ -34,6 +34,10 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Metodos ComboBox bajo demanda
+        public ActionResult ChangeValuePartial(decimal value = 0)
+        {
+            return PartialView("_CmbProducto_Plantilla", value);
+        }
         public ActionResult ComboBoxPartial_Anio()
         {
             return PartialView("_ComboBoxPartial_Anio", new aca_Plantilla_Info());

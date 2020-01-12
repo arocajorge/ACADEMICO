@@ -81,7 +81,9 @@
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
+                ViewContext.Writer.Write("<div id='ajaxDiv'>");
                 Html.RenderPartial("_CmbProducto_Plantilla", DataBinder.Eval(c.DataItem, "IdProducto"));
+                ViewContext.Writer.Write("</div>");
             });
         });
         settings.Columns.Add(column =>
@@ -225,8 +227,19 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 console.log(data);
-                if(data!=0){
-                    GridViewPartial_PlantillaRubro.GetEditor('IdProducto').SetValue(data.IdProducto);
+                if (data > 0) {
+                    $.ajax({
+                        url: '@Url.Action("ChangeValuePartial", "Plantilla", new { Area = "Academico" })',
+                        type: "GET",
+                        data: { value: data },
+                        success: function (res) {
+                            $('#ajaxDiv').html(res);
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert('Request Status: ' + xhr.status + '; Status Text: ' + textStatus + '; Error: ' + errorThrown);
+                        }
+                    });
+                    
                 }
             },
             error: function (error) {

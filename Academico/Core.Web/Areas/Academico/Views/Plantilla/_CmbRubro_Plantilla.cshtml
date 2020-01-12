@@ -20,7 +20,7 @@
 
         settings.Properties.Columns.Add("IdRubro", "ID", 10);
         settings.Properties.Columns.Add("NomRubro", "Rubro", 90);
-        //settings.Properties.ClientSideEvents.SelectedIndexChanged = "SetProducto";
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "SetProducto";
     })
     .BindList(new Core.Web.Areas.Academico.Controllers.PlantillaController().get_list_bajo_demandaRubro,
     new Core.Web.Areas.Academico.Controllers.PlantillaController().get_info_bajo_demandaRubro).Bind((Model.GetType() == typeof(Core.Info.Academico.aca_Plantilla_Rubro_Info) || Model.GetType() == typeof(List<Core.Info.Academico.aca_Plantilla_Rubro_Info>)) ? "" : (Model == 0 ? "" : Model));
