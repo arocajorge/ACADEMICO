@@ -37,5 +37,8 @@ namespace Core.Data.Base
         public string NomRubro { get; set; }
         public string pr_descripcion { get; set; }
         public System.DateTime FechaDesde { get; set; }
+        public string DescripcionCuotas { get; set; }
+        public Nullable<double> ValorProntoPago { get; set; }
+        public Nullable<System.DateTime> FechaProntoPago { get; set; }
     }
 }

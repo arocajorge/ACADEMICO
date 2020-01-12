@@ -60,7 +60,6 @@
         <EntityTypeShape EntityType="ModelFacturacion.vwfa_notaCreDeb_x_fa_factura_NotaDeb" Width="1.5" PointX="18.375" PointY="17.75" />
         <EntityTypeShape EntityType="ModelFacturacion.vwfa_notaCreDeb_det" Width="1.5" PointX="7.375" PointY="19.75" />
         <EntityTypeShape EntityType="ModelFacturacion.vwfa_notaCreDeb" Width="1.5" PointX="20.375" PointY="0.75" />
-        <EntityTypeShape EntityType="ModelFacturacion.vwaca_Matricula_Rubro_PorFacturar" Width="1.5" PointX="20.375" PointY="5.75" />
         <EntityTypeShape EntityType="ModelFacturacion.fa_factura_resumen" Width="1.5" PointX="20.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>

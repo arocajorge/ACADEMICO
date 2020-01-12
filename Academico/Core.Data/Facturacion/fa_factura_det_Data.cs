@@ -74,7 +74,7 @@ namespace Core.Data.Facturacion
             try
             {
                 List<fa_factura_det_Info> Lista;
-                using (EntitiesFacturacion Context = new EntitiesFacturacion())
+                using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     Lista = (from q in Context.vwaca_Matricula_Rubro_PorFacturar
                              where q.IdEmpresa == IdEmpresa

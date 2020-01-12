@@ -1216,7 +1216,7 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Matricula_Rubro_PorFacturar.cs">
-      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_MecanismoDePago.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>

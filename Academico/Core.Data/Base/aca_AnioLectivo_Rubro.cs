@@ -31,6 +31,7 @@ namespace Core.Data.Base
         public decimal Porcentaje { get; set; }
         public decimal ValorIVA { get; set; }
         public decimal Total { get; set; }
+        public int NumeroCuotas { get; set; }
     
         public virtual aca_Rubro aca_Rubro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

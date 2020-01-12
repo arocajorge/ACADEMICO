@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public int IdAnio { get; set; }
         public int IdRubro { get; set; }
         public int IdPeriodo { get; set; }
+        public int Secuencia { get; set; }
         public string Observacion { get; set; }
     
         public virtual aca_AnioLectivo_Periodo aca_AnioLectivo_Periodo { get; set; }

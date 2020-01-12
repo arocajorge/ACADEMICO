@@ -165,6 +165,9 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
+                    var lst_RubroPeriodo = Context.aca_AnioLectivo_Rubro_Periodo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdRubro == info.IdRubro).ToList();
+                    Context.aca_AnioLectivo_Rubro_Periodo.RemoveRange(lst_RubroPeriodo);
+
                     aca_AnioLectivo_Rubro Entity = new aca_AnioLectivo_Rubro
                     {
                         IdEmpresa = info.IdEmpresa,
@@ -177,13 +180,11 @@ namespace Core.Data.Academico
                         IdCod_Impuesto_Iva = info.IdCod_Impuesto_Iva,
                         Porcentaje = info.Porcentaje,
                         ValorIVA = info.ValorIVA,
-                        Total = info.Total
+                        Total = info.Total,
+                        NumeroCuotas = lst_RubroPeriodo.Count
                     };
                     Context.aca_AnioLectivo_Rubro.Add(Entity);
-
-                    var lst_RubroPeriodo = Context.aca_AnioLectivo_Rubro_Periodo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdRubro == info.IdRubro).ToList();
-                    Context.aca_AnioLectivo_Rubro_Periodo.RemoveRange(lst_RubroPeriodo);
-
+                    int Secuencia = 1;
                     if (info.lst_rubro_anio_periodo.Count > 0)
                     {
                         foreach(var item in info.lst_rubro_anio_periodo)
@@ -193,7 +194,8 @@ namespace Core.Data.Academico
                                 IdEmpresa = info.IdEmpresa,
                                 IdAnio = info.IdAnio,
                                 IdRubro = info.IdRubro,
-                                IdPeriodo = item.IdPeriodo
+                                IdPeriodo = item.IdPeriodo,
+                                Secuencia = Secuencia++
                             };
                             Context.aca_AnioLectivo_Rubro_Periodo.Add(Entity_Det);
                         }
@@ -227,10 +229,13 @@ namespace Core.Data.Academico
                     Entity.Porcentaje = info.Porcentaje;
                     Entity.ValorIVA = info.ValorIVA;
                     Entity.Total = info.Total;
+                    
 
                     var lst_RubroPeriodo = Context.aca_AnioLectivo_Rubro_Periodo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdRubro == info.IdRubro).ToList();
                     Context.aca_AnioLectivo_Rubro_Periodo.RemoveRange(lst_RubroPeriodo);
+                    Entity.NumeroCuotas = lst_RubroPeriodo.Count;
 
+                    int Secuencia = 1;
                     if (info.lst_rubro_anio_periodo.Count > 0)
                     {
                         foreach (var item in info.lst_rubro_anio_periodo)
@@ -240,7 +245,8 @@ namespace Core.Data.Academico
                                 IdEmpresa = info.IdEmpresa,
                                 IdAnio = info.IdAnio,
                                 IdRubro = info.IdRubro,
-                                IdPeriodo = item.IdPeriodo
+                                IdPeriodo = item.IdPeriodo,
+                                Secuencia = Secuencia++
                             };
                             Context.aca_AnioLectivo_Rubro_Periodo.Add(Entity_Det);
                         }
