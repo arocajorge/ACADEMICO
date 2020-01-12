@@ -38,9 +38,6 @@ namespace Core.Info.Facturacion
         
         #region Campos que no existen en la tabla
         public string pr_descripcion { get; set; }
-        public string nom_presentacion { get; set; }
-        public string lote_num_lote { get; set; }
-        public DateTime? lote_fecha_vcto { get; set; }
         public string secuencial { get; set; }
         public string tp_manejaInven { get; set; }
         public double CantidadAnterior { get; set; }
@@ -50,11 +47,9 @@ namespace Core.Info.Facturacion
         public bool AplicaProntoPago { get; set; }
         public int IdAnio { get; set; }
         public decimal DescuentoProntoPago { get; set; }
-        public decimal TotalProntoPago { get; set; }
+        public double? ValorProntoPago { get; set; }
         public bool EnMatricula { get; set; }
         public System.DateTime FechaDesde { get; set; }
-        public string NumPeriodo { get; set; }
-        public string Periodo { get; set; }
         public DateTime? FechaProntoPago { get; set; }
         #endregion
 

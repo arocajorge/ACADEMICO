@@ -42,7 +42,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "Periodo";
+            column.FieldName = "vt_detallexItems";
             column.Caption = "Periodo";
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
@@ -84,8 +84,8 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "TotalProntoPago";
-            column.Caption = "Pronto Pago";
+            column.FieldName = "ValorProntoPago";
+            column.Caption = "Valor pronto pago";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(12);
         });

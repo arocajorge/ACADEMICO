@@ -47,19 +47,12 @@ namespace Core.Data.Facturacion
                                  Secuencia = q.Secuencia,
                                  Secuencia_pf = q.Secuencia_pf,
                                  pr_descripcion = q.pr_descripcion,
-                                 nom_presentacion = q.nom_presentacion,
-                                 lote_num_lote = q.lote_num_lote,
-                                 lote_fecha_vcto = q.lote_fecha_vcto,
                                  CantidadAnterior = q.vt_cantidad,
                                  tp_manejaInven = q.tp_ManejaInven,
                                  se_distribuye = q.se_distribuye
                                 
                              }).ToList();
                 }
-                Lista.ForEach(V =>
-                {
-                    V.pr_descripcion = V.pr_descripcion + " " + V.nom_presentacion + " - " + V.lote_num_lote + " - " + (V.lote_fecha_vcto != null ? Convert.ToDateTime(V.lote_fecha_vcto).ToString("dd/MM/yyyy") : "");
-                });
                 return Lista;
             }
             catch (Exception)
@@ -99,13 +92,15 @@ namespace Core.Data.Facturacion
                                  AplicaProntoPago = q.AplicaProntoPago,
                                  IdAnio = q.IdAnio,
                                  EnMatricula = q.EnMatricula,
-                                 FechaDesde = q.FechaDesde
-
+                                 FechaDesde = q.FechaDesde,
+                                 FechaProntoPago = q.FechaProntoPago,
+                                 ValorProntoPago = q.ValorProntoPago,
+                                 vt_detallexItems = q.DescripcionCuotas
                              }).ToList();
                 }
                 Lista.ForEach(V =>
                 {
-                    V.IdString = Convert.ToInt32(V.IdEmpresa).ToString("00") + Convert.ToInt32(V.IdMatricula).ToString("000000") + Convert.ToInt32(V.aca_IdPeriodo).ToString("00") + Convert.ToInt32(V.aca_IdRubro).ToString("00");
+                    V.IdString = Convert.ToInt32(V.IdEmpresa).ToString("00") + Convert.ToInt32(V.IdMatricula).ToString("00000000") + Convert.ToInt32(V.aca_IdPeriodo).ToString("00000000") + Convert.ToInt32(V.aca_IdRubro).ToString("00000000");
                 });
                 return Lista;
             }

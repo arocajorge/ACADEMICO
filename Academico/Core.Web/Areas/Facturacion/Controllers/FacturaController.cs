@@ -235,7 +235,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
             i_validar.info_resumen.SubtotalSinDscto = i_validar.info_resumen.SubtotalIVASinDscto + i_validar.info_resumen.SubtotalSinIVASinDscto;
             i_validar.info_resumen.SubtotalConDscto = i_validar.info_resumen.SubtotalIVAConDscto + i_validar.info_resumen.SubtotalSinIVAConDscto;
             i_validar.info_resumen.Total = i_validar.info_resumen.SubtotalConDscto + i_validar.info_resumen.ValorIVA;
-            i_validar.info_resumen.ValorProntoPago = (decimal)Math.Round(i_validar.lst_det.Sum(q => q.TotalProntoPago), 2, MidpointRounding.AwayFromZero);
+            i_validar.info_resumen.ValorProntoPago = (decimal)Math.Round(i_validar.lst_det.Sum(q => q.ValorProntoPago ?? 0), 2, MidpointRounding.AwayFromZero);
             i_validar.info_resumen.FechaProntoPago = ( (i_validar.lst_det.Where(q => q.FechaProntoPago !=null).ToList().Count >0) ? i_validar.lst_det.Min(q=> q.FechaProntoPago) : null);
             #endregion
 
@@ -546,62 +546,6 @@ namespace Core.Web.Areas.Facturacion.Controllers
         {
             bool resultado = true;
             var lst_rubros_x_facturar = bus_factura_det.get_list_rubros_x_facturar(Convert.ToInt32(SessionFixed.IdEmpresa), IdAlumno);
-            var NumPeriodo = 1;
-            decimal Total = 0;
-            decimal TotalProntoPago = 0;
-            decimal ValorDescuento = 0;
-            decimal ValorRubro = 0;
-
-            foreach (var item in lst_rubros_x_facturar)
-            {
-                var total_periodo = lst_rubros_x_facturar.Count();                
-                string Periodo = NumPeriodo++.ToString("00") + "/"+ total_periodo.ToString();
-                item.pr_descripcion = item.pr_descripcion + " " + Periodo;
-                item.Periodo = item.FechaDesde.Month.ToString("00") +"/"+ item.FechaDesde.Year.ToString();
-
-                var info_rubro_anio = bus_aca_anio_rubro.GetInfo(item.IdEmpresa, item.IdAnio, Convert.ToInt32(item.aca_IdRubro));
-                var info_anio_periodo = bus_anio_periodo.GetInfo(item.IdEmpresa, item.IdAnio, Convert.ToInt32(item.aca_IdPeriodo));
-                item.FechaProntoPago = null;
-
-                if (info_rubro_anio.AplicaProntoPago == true)
-                {
-                    ValorDescuento = 0;
-                    TotalProntoPago = 0;
-
-                    var info_matricula = bus_matricula.GetInfo(item.IdEmpresa, item.IdMatricula);
-                    var info_plantilla = bus_plantilla.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, info_matricula.IdPlantilla);
-
-                    if (DateTime.Now <= info_anio_periodo.FechaProntoPago)
-                    {
-                        item.FechaProntoPago = info_anio_periodo.FechaProntoPago;
-
-                        if (info_plantilla.TipoDescuento == "%")
-                        {
-                            ValorDescuento = (Convert.ToDecimal(item.vt_total) * (info_plantilla.Valor / 100));
-                            ValorRubro = Convert.ToDecimal(item.vt_total) - ValorDescuento;
-                            TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
-                        }
-                        else
-                        {
-                            ValorRubro = (Convert.ToDecimal(item.vt_total) - info_plantilla.Valor);
-                            TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
-                        }
-                    }
-                    else
-                    {
-                        TotalProntoPago = TotalProntoPago + Math.Round((Convert.ToDecimal(item.vt_total)), 2, MidpointRounding.AwayFromZero);
-                    }
-                }
-                else
-                {
-                    TotalProntoPago = TotalProntoPago + Math.Round((Convert.ToDecimal(item.vt_total)), 2, MidpointRounding.AwayFromZero);
-                }
-
-                item.DescuentoProntoPago = ValorDescuento;
-                item.TotalProntoPago = TotalProntoPago;
-
-            }
-
             Lista_RubrosPorFacturar.set_list(lst_rubros_x_facturar, IdTransaccionSession);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
