@@ -33,7 +33,7 @@
                     @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
                 </div>
             </div>
-       </div>
+        </div>
         <div class="col-md-6">
             <div class="col-md-12">
                 <div class="form-group">
@@ -43,6 +43,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="col-md-3">
             <div class="col-md-12">
                 <div class="form-group">
@@ -58,10 +60,10 @@
                 <div class="form-group">
                     <label for=""></label>
                     @Html.DevExpress().CheckBoxFor(q => q.GeneraMoviInven, settings =>
-               {
-                   settings.Name = "GeneraMoviInven";
-                   settings.Text = "Genera movimiento inventario";
-               }).GetHtml()
+            {
+                settings.Name = "GeneraMoviInven";
+                settings.Text = "Genera movimiento inventario";
+            }).GetHtml()
                     @Html.ValidationMessageFor(q => q.GeneraMoviInven, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -76,7 +78,6 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

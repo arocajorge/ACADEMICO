@@ -8022,9 +8022,6 @@
     <Content Include="Areas\Academico\Views\CalificacionHistorico\Nuevo.cshtml" />
     <Content Include="Areas\Academico\Views\CalificacionHistorico\_CmbAlumno.cshtml" />
     <Content Include="Areas\Academico\Views\CalificacionHistorico\_ComboBoxPartial_Curso.cshtml" />
-    <Content Include="Areas\Academico\Views\CalificacionHistorico\_ComboBoxPartial_Jornada.cshtml" />
-    <Content Include="Areas\Academico\Views\CalificacionHistorico\_ComboBoxPartial_Nivel.cshtml" />
-    <Content Include="Areas\Academico\Views\CalificacionHistorico\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Academico\Views\CalificacionHistorico\Modificar.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
