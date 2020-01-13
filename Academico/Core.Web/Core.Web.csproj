@@ -308,6 +308,12 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\Academico\ACA_001_Madre_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_001_Madre_Rpt.Designer.cs">
+      <DependentUpon>ACA_001_Madre_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_001_Padre_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8121,6 +8127,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reportes\Academico\ACA_001_Madre_Rpt.resx">
+      <DependentUpon>ACA_001_Madre_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_001_Padre_Rpt.resx">
       <DependentUpon>ACA_001_Padre_Rpt.cs</DependentUpon>
     </EmbeddedResource>
