@@ -54,10 +54,7 @@
             c.SetDataItemTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") }) + "&nbsp;" +
-                    Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") },
-                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                );
+                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") }) );
             });
             c.SetHeaderTemplateContent(tc =>
             {
