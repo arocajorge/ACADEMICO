@@ -32,12 +32,14 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
+            
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdAnio = Convert.ToInt32(SessionFixed.IdAnio),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
+            var anio = busAnioLectivo.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = anio == null ? 0 : anio.IdAnio;
             CargarCombos(model);
             ListParametrizacion.set_list(busParametrizacion.GetList(model.IdEmpresa, model.IdAnio),model.IdTransaccionSession);
             return View(model);
@@ -46,6 +48,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Index(cl_filtros_Info model)
         {
             CargarCombos(model);
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             return View(model);
         }
         #endregion
@@ -103,6 +106,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
     public class aca_AnioLectivo_Curso_Plantilla_Parametrizacion_List
     {
+        ct_plancta_Bus busPlancta = new ct_plancta_Bus();
         aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Bus busParametrizacion = new aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Bus();
         string Variable = "aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Info";
         public List<aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Info> get_list(decimal IdTransaccionSession)
@@ -124,6 +128,26 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdString == info_det.IdString).FirstOrDefault();
             edited_info.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            edited_info.IdCtaCbleDebe = info_det.IdCtaCbleDebe;
+            edited_info.IdCtaCbleHaber = info_det.IdCtaCbleHaber;
+
+            if (!string.IsNullOrEmpty(info_det.IdCtaCbleDebe))
+            {
+                var cuentaDebe = busPlancta.get_info(edited_info.IdEmpresa, edited_info.IdCtaCbleDebe);
+                if (cuentaDebe != null)
+                    edited_info.pc_CuentaDebe = edited_info.IdCtaCbleDebe + " - "+ cuentaDebe.pc_Cuenta;
+            }else
+                edited_info.pc_CuentaDebe = null;
+
+            if (!string.IsNullOrEmpty(info_det.IdCtaCbleHaber))
+            {
+                var cuentaHaber = busPlancta.get_info(edited_info.IdEmpresa, edited_info.IdCtaCbleHaber);
+                if (cuentaHaber != null)
+                    edited_info.pc_CuentaHaber = edited_info.IdCtaCbleHaber + " - " + cuentaHaber.pc_Cuenta;
+            }
+            else
+                edited_info.pc_CuentaHaber = null;
+
             if (busParametrizacion.ModificarDB(edited_info))
             {
 

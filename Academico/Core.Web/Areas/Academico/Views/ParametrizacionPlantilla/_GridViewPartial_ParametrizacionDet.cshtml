@@ -4,25 +4,26 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_factura_det";
-        settings.CallbackRouteValues = new { Controller = "Factura", Action = "GridViewPartial_factura_det", Area = "Facturacion"};
-        settings.KeyFieldName = "Secuencia";
+        settings.CallbackRouteValues = new { Controller = "ParametrizacionPlantilla", Action = "GridViewPartial_ParametrizacionDet", Area = "Academico"};
+        settings.KeyFieldName = "IdString";
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Factura", Action = "EditingUpdate", Area = "Facturacion" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ParametrizacionPlantilla", Action = "EditingUpdate", Area = "Academico" };
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
-        settings.CommandColumn.ShowNewButtonInHeader = true;
+        settings.CommandColumn.ShowNewButtonInHeader = false;
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = true;
-        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowDeleteButton = false;
 
         settings.SettingsContextMenu.Enabled = true;
-        settings.CommandColumn.ShowNewButtonInHeader = true;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
+        settings.SettingsContextMenu.RowMenuItemVisibility.DeleteRow = false;
 
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
@@ -37,9 +38,48 @@
 
         settings.Columns.Add(column =>
         {
+            column.FieldName = "NomNivel";
+            column.Caption = "Nivel";
+            column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NomJornada";
+            column.Caption = "Jornada";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NomCurso";
+            column.Caption = "Curso";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NomPlantilla";
+            column.Caption = "Plantilla";
+            column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NomRubro";
+            column.Caption = "Rubro";
+            column.Width = Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });        
+
+        settings.Columns.Add(column =>
+        {
             column.FieldName = "pc_CuentaDebe";
             column.Caption = "Debe";
-            column.Width = Unit.Percentage(40);
+            column.Width = Unit.Percentage(15);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
@@ -47,14 +87,36 @@
         {
             column.FieldName = "IdCtaCbleDebe";
             column.Caption = "Debe";
-            column.Width = Unit.Percentage(40);
+            column.Width = Unit.Percentage(10);
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.SetEditItemTemplateContent(c =>
             {
-                Html.RenderPartial("_CmbCuentaDebe_Parametrizacion", DataBinder.Eval(c.DataItem, "IdProducto"));
+                Html.RenderPartial("_CmbCuentaDebe_Parametrizacion", DataBinder.Eval(c.DataItem, "IdCtaCbleDebe"));
             });
         });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pc_CuentaHaber";
+            column.Caption = "Haber";
+            column.Width = Unit.Percentage(15);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCtaCbleHaber";
+            column.Caption = "Haber";
+            column.Width = Unit.Percentage(15);
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
+            {
+                Html.RenderPartial("_CmbCuentaHaber_Parametrizacion", DataBinder.Eval(c.DataItem, "IdCtaCbleHaber"));
+            });
+        });
+
         settings.ClientSideEvents.BeginCallback = "function(s,e){ e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 

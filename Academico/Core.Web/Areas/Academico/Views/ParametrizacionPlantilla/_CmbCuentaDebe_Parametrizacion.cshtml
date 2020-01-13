@@ -24,6 +24,6 @@
 
     })
     .BindList(new Core.Web.Areas.Academico.Controllers.ParametrizacionPlantillaController().get_list_bajo_demanda, new Core.Web.Areas.Academico.Controllers.ParametrizacionPlantillaController().get_info_bajo_demanda)
-    .Bind(Model.IdCtaCbleHaber);
+    .Bind(Model.GetType() == typeof(Core.Info.Academico.aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Info) || Model.GetType() == typeof(List<Core.Info.Academico.aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Info>) || Model == null ? "" : (Model));
 }
 @comboBox.GetHtml()

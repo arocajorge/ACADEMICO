@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Facturas";
+    ViewBag.Title = "Parametrización contable de plantillas";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -9,7 +9,7 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Index", "Factura", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Index", "ParametrizacionPlantilla", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
@@ -61,11 +61,11 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_factura", new { fecha_ini = Model.fecha_ini, fecha_fin = Model.fecha_fin, IdSucursal = Model.IdSucursal })
+            @Html.Action("GridViewPartial_ParametrizacionDet")
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            [@Session["IdEmpresa"]] @Session["nom_empresa"]
+            [@Core.Web.Helps.SessionFixed.IdEmpresa] @Core.Web.Helps.SessionFixed.NomEmpresa
         </div>
         <!-- /.box-footer-->
     </div>

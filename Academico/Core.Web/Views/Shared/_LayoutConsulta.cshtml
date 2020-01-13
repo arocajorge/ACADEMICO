@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@ViewBag.Title - Fixed ERP</title>
+    <title>@ViewBag.Title - Fixed Académico</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -66,7 +66,7 @@
             <nav class="navbar navbar-inverse navbar-static-top" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; padding: 0 15px; height: 50px; font-size: 25px;line-height: 50px; font-weight: 300;">
                 <div class="container">
                     <a class="navbar-brand text-center center-block" href="#myModal" data-toggle="modal">
-                        <span class="logo-lg"><strong>Fixed</strong> ERP</span>
+                        <span class="logo-lg"><strong>Fixed</strong> Académico</span>
                     </a>
                 </div>
             </nav>
@@ -97,7 +97,7 @@
                                     ();
                                     Core.Web.Areas.Academico.Controllers.MenuPorSedePorUsuarioController.CreateTreeViewNodesRecursive(Nodes, settings.Nodes, 0, (Core.Web.Helps.SessionFixed.IdEmpresa == null ? 0 : Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa)), (Core.Web.Helps.SessionFixed.IdSede == null ? 0 : Convert.ToInt32(Core.Web.Helps.SessionFixed.IdSede)), string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) ? "" : Core.Web.Helps.SessionFixed.IdUsuario);
                                     }).GetHtml()
-</div>
+                            </div>
                             <div class="modal-footer">
                                 <a class="btn btn-danger" href="@Url.Action("Login","Account",new { Area = "" },null)">Cerrar sesión @Session["IdUsuario"]</a>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

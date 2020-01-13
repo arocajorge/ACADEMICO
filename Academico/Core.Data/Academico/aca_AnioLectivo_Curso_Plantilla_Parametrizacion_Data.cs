@@ -39,6 +39,9 @@ namespace Core.Data.Academico
                             NomRubro = item.NomRubro,
                             NomNivel = item.NomNivel,
                             NomSede = item.NomSede,
+                            IdCtaCbleHaber = item.IdCtaCbleHaber,
+                            pc_CuentaDebe = item.pc_CuentaDebe,
+                            pc_CuentaHaber = item.pc_CuentaHaber,
                             IdString = item.IdEmpresa.ToString("0000") + item.IdAnio.ToString("0000") + item.IdSede.ToString("0000") + item.IdNivel.ToString("0000") + item.IdJornada.ToString("0000") + item.IdCurso.ToString("0000") + item.IdPlantilla.ToString("0000") + item.IdRubro.ToString("0000")
                         });
                     }
@@ -60,10 +63,12 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    
+                    /*
                     var PK = Regex.Matches(info.IdString, ".{1," + 4 + "}").Cast<Match>().Select(m => m.Value).ToArray();
                     if (PK.Count() != 0)
                     {
+                    */
+                    /*
                         info.IdEmpresa = Convert.ToInt32(PK[0]);
                         info.IdAnio = Convert.ToInt32(PK[1]);
                         info.IdSede = Convert.ToInt32(PK[2]);
@@ -72,7 +77,7 @@ namespace Core.Data.Academico
                         info.IdCurso = Convert.ToInt32(PK[5]);
                         info.IdPlantilla = Convert.ToInt32(PK[6]);
                         info.IdRubro = Convert.ToInt32(PK[7]);
-
+                        */
                         var Entity = db.aca_AnioLectivo_Curso_Plantilla_Parametrizacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdSede == info.IdSede && q.IdNivel == info.IdNivel && q.IdJornada == info.IdJornada && q.IdCurso == info.IdCurso && q.IdPlantilla == info.IdPlantilla && q.IdRubro == info.IdRubro).FirstOrDefault();
                         if (Entity == null)
                         {
@@ -97,7 +102,7 @@ namespace Core.Data.Academico
                         }
                         
                         db.SaveChanges();
-                    }
+                    //}
 
                 }
 

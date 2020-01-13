@@ -29,7 +29,9 @@ namespace Core.Info.Academico
         public string NomNivel { get; set; }
         public string NomSede { get; set; }
         public string IdString { get; set; }
-        
+        public string pc_CuentaDebe { get; set; }
+        public string pc_CuentaHaber { get; set; }
+
         #endregion
     }
 }
