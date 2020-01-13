@@ -39,5 +39,7 @@ namespace Core.Data.Base
         public string NomCliente { get; set; }
         public string em_nombre { get; set; }
         public string Estado { get; set; }
+        public Nullable<double> ValorProntoPago { get; set; }
+        public Nullable<System.DateTime> FechaProntoPago { get; set; }
     }
 }
