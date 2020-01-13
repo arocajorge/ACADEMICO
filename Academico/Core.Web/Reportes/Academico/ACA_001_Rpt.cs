@@ -27,10 +27,11 @@ namespace Core.Web.Reportes.Academico
             lbl_usuario.Text = usuario;
 
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdMatricula = string.IsNullOrEmpty(p_IdMatricula.Value.ToString()) ? 0 : Convert.ToInt32(p_IdMatricula.Value);
+            int IdAnio = string.IsNullOrEmpty(p_IdAnio.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAnio.Value);
+            decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
 
             ACA_001_Bus bus_rpt = new ACA_001_Bus();
-            List<ACA_001_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdMatricula);
+            List<ACA_001_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdAlumno, IdAnio);
 
             this.DataSource = lst_rpt;
         }

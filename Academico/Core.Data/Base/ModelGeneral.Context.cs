@@ -61,5 +61,6 @@ namespace Core.Data.Base
         public virtual DbSet<tb_parametro> tb_parametro { get; set; }
         public virtual DbSet<tb_modulo> tb_modulo { get; set; }
         public virtual DbSet<vwtb_banco_procesos_bancarios_x_empresa> vwtb_banco_procesos_bancarios_x_empresa { get; set; }
+        public virtual DbSet<tb_sis_reporte_x_tb_empresa> tb_sis_reporte_x_tb_empresa { get; set; }
     }
 }

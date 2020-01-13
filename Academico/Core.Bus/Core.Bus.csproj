@@ -194,6 +194,7 @@
     <Compile Include="General\tb_sis_Documento_Tipo_Bus.cs" />
     <Compile Include="General\tb_sis_Documento_Tipo_Talonario_Bus.cs" />
     <Compile Include="General\tb_sis_Impuesto_Bus.cs" />
+    <Compile Include="General\tb_sis_reporte_x_tb_empresa_Bus.cs" />
     <Compile Include="General\tb_sucursal_Bus.cs" />
     <Compile Include="General\tb_sucursal_FormaPago_x_fa_NivelDescuento_Bus.cs" />
     <Compile Include="Inventario\in_categorias_Bus.cs" />

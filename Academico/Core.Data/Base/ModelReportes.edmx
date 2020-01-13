@@ -6,14 +6,14 @@
     <edmx:StorageModels>
     <Schema Namespace="ModelReportes.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdMatricula" />
             <PropertyRef Name="FechaMatricula" />
             <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdPersonaAlumno" />
             <PropertyRef Name="Anio" />
             <PropertyRef Name="NomSede" />
             <PropertyRef Name="NomNivel" />
@@ -21,10 +21,9 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
             <PropertyRef Name="NomCurso" />
             <PropertyRef Name="NomParalelo" />
             <PropertyRef Name="Sexo" />
-            <PropertyRef Name="TieneElectricidad" />
-            <PropertyRef Name="TieneHermanos" />
-            <PropertyRef Name="TipoVivienda" />
-            <PropertyRef Name="TenenciaVivienda" />
+            <PropertyRef Name="NacionalidadAlumno" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="IdAnio" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -32,9 +31,9 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
           <Property Name="CodMatricula" Type="varchar" MaxLength="200" />
           <Property Name="CodAlumno" Type="varchar" MaxLength="200" />
           <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
-          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
+          <Property Name="IdPersonaAlumno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ApellidoAlumno" Type="varchar" MaxLength="100" />
+          <Property Name="NombreAlumno" Type="varchar" MaxLength="100" />
           <Property Name="Anio" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NomSede" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="NomNivel" Type="varchar" MaxLength="500" Nullable="false" />
@@ -44,16 +43,32 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
           <Property Name="Sexo" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="LugarNacimiento" Type="varchar" MaxLength="300" />
           <Property Name="pe_fechaNacimiento" Type="datetime" />
-          <Property Name="Direccion" Type="varchar" MaxLength="1000" />
-          <Property Name="Celular" Type="varchar" MaxLength="500" />
-          <Property Name="TieneElectricidad" Type="bit" Nullable="false" />
-          <Property Name="TieneHermanos" Type="bit" Nullable="false" />
+          <Property Name="DireccionAlumno" Type="varchar" MaxLength="1000" />
+          <Property Name="CelularAlumno" Type="varchar" MaxLength="500" />
+          <Property Name="TieneElectricidad" Type="bit" />
+          <Property Name="TieneHermanos" Type="bit" />
           <Property Name="NombreHermanos" Type="varchar(max)" />
-          <Property Name="TipoVivienda" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="TenenciaVivienda" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="TipoVivienda" Type="varchar" MaxLength="500" />
+          <Property Name="TenenciaVivienda" Type="varchar" MaxLength="500" />
           <Property Name="CodCatalogoCONADIS" Type="varchar" MaxLength="25" />
           <Property Name="PorcentajeDiscapacidad" Type="float" />
           <Property Name="NumeroCarnetConadis" Type="varchar" MaxLength="200" />
+          <Property Name="NacionalidadAlumno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TelefonoAlumno" Type="varchar" MaxLength="50" />
+          <Property Name="Agua" Type="varchar" MaxLength="500" />
+          <Property Name="TipoDiscapacidadAlumno" Type="varchar" MaxLength="25" />
+          <Property Name="SueldoPadre" Type="float" />
+          <Property Name="SueldoMadre" Type="float" />
+          <Property Name="OtroIngreso" Type="float" />
+          <Property Name="GastoAlimentacion" Type="float" />
+          <Property Name="GastoEducacion" Type="float" />
+          <Property Name="GastoServicioBasico" Type="float" />
+          <Property Name="GastoSalud" Type="float" />
+          <Property Name="GastoArriendo" Type="float" />
+          <Property Name="GastoPrestamo" Type="float" />
+          <Property Name="OtroGasto" Type="float" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdAnio" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ModelReportesStoreContainer">
           <EntitySet Name="VWACA_001" EntityType="Self.VWACA_001" store:Type="Views" store:Schema="web">
@@ -64,9 +79,9 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
     [VWACA_001].[CodMatricula] AS [CodMatricula], 
     [VWACA_001].[CodAlumno] AS [CodAlumno], 
     [VWACA_001].[IdAlumno] AS [IdAlumno], 
-    [VWACA_001].[IdPersona] AS [IdPersona], 
-    [VWACA_001].[pe_apellido] AS [pe_apellido], 
-    [VWACA_001].[pe_nombre] AS [pe_nombre], 
+    [VWACA_001].[IdPersonaAlumno] AS [IdPersonaAlumno], 
+    [VWACA_001].[ApellidoAlumno] AS [ApellidoAlumno], 
+    [VWACA_001].[NombreAlumno] AS [NombreAlumno], 
     [VWACA_001].[Anio] AS [Anio], 
     [VWACA_001].[NomSede] AS [NomSede], 
     [VWACA_001].[NomNivel] AS [NomNivel], 
@@ -76,8 +91,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
     [VWACA_001].[Sexo] AS [Sexo], 
     [VWACA_001].[LugarNacimiento] AS [LugarNacimiento], 
     [VWACA_001].[pe_fechaNacimiento] AS [pe_fechaNacimiento], 
-    [VWACA_001].[Direccion] AS [Direccion], 
-    [VWACA_001].[Celular] AS [Celular], 
+    [VWACA_001].[DireccionAlumno] AS [DireccionAlumno], 
+    [VWACA_001].[CelularAlumno] AS [CelularAlumno], 
     [VWACA_001].[TieneElectricidad] AS [TieneElectricidad], 
     [VWACA_001].[TieneHermanos] AS [TieneHermanos], 
     [VWACA_001].[NombreHermanos] AS [NombreHermanos], 
@@ -85,7 +100,23 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
     [VWACA_001].[TenenciaVivienda] AS [TenenciaVivienda], 
     [VWACA_001].[CodCatalogoCONADIS] AS [CodCatalogoCONADIS], 
     [VWACA_001].[PorcentajeDiscapacidad] AS [PorcentajeDiscapacidad], 
-    [VWACA_001].[NumeroCarnetConadis] AS [NumeroCarnetConadis]
+    [VWACA_001].[NumeroCarnetConadis] AS [NumeroCarnetConadis], 
+    [VWACA_001].[NacionalidadAlumno] AS [NacionalidadAlumno], 
+    [VWACA_001].[TelefonoAlumno] AS [TelefonoAlumno], 
+    [VWACA_001].[Agua] AS [Agua], 
+    [VWACA_001].[TipoDiscapacidadAlumno] AS [TipoDiscapacidadAlumno], 
+    [VWACA_001].[SueldoPadre] AS [SueldoPadre], 
+    [VWACA_001].[SueldoMadre] AS [SueldoMadre], 
+    [VWACA_001].[OtroIngreso] AS [OtroIngreso], 
+    [VWACA_001].[GastoAlimentacion] AS [GastoAlimentacion], 
+    [VWACA_001].[GastoEducacion] AS [GastoEducacion], 
+    [VWACA_001].[GastoServicioBasico] AS [GastoServicioBasico], 
+    [VWACA_001].[GastoSalud] AS [GastoSalud], 
+    [VWACA_001].[GastoArriendo] AS [GastoArriendo], 
+    [VWACA_001].[GastoPrestamo] AS [GastoPrestamo], 
+    [VWACA_001].[OtroGasto] AS [OtroGasto], 
+    [VWACA_001].[Descripcion] AS [Descripcion], 
+    [VWACA_001].[IdAnio] AS [IdAnio]
     FROM [web].[VWACA_001] AS [VWACA_001]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -102,7 +133,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
             <PropertyRef Name="IdMatricula" />
             <PropertyRef Name="FechaMatricula" />
             <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdPersonaAlumno" />
             <PropertyRef Name="Anio" />
             <PropertyRef Name="NomSede" />
             <PropertyRef Name="NomNivel" />
@@ -110,10 +141,9 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
             <PropertyRef Name="NomCurso" />
             <PropertyRef Name="NomParalelo" />
             <PropertyRef Name="Sexo" />
-            <PropertyRef Name="TieneElectricidad" />
-            <PropertyRef Name="TieneHermanos" />
-            <PropertyRef Name="TipoVivienda" />
-            <PropertyRef Name="TenenciaVivienda" />
+            <PropertyRef Name="NacionalidadAlumno" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="IdAnio" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
@@ -121,9 +151,9 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
           <Property Name="CodMatricula" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CodAlumno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersonaAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ApellidoAlumno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NombreAlumno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Anio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NomSede" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="NomNivel" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
@@ -133,16 +163,32 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
           <Property Name="Sexo" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="LugarNacimiento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="pe_fechaNacimiento" Type="DateTime" Precision="3" />
-          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TieneElectricidad" Type="Boolean" Nullable="false" />
-          <Property Name="TieneHermanos" Type="Boolean" Nullable="false" />
+          <Property Name="DireccionAlumno" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="CelularAlumno" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TieneElectricidad" Type="Boolean" />
+          <Property Name="TieneHermanos" Type="Boolean" />
           <Property Name="NombreHermanos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="TipoVivienda" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TenenciaVivienda" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TipoVivienda" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TenenciaVivienda" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="CodCatalogoCONADIS" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="PorcentajeDiscapacidad" Type="Double" />
           <Property Name="NumeroCarnetConadis" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NacionalidadAlumno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoAlumno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Agua" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDiscapacidadAlumno" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="SueldoPadre" Type="Double" />
+          <Property Name="SueldoMadre" Type="Double" />
+          <Property Name="OtroIngreso" Type="Double" />
+          <Property Name="GastoAlimentacion" Type="Double" />
+          <Property Name="GastoEducacion" Type="Double" />
+          <Property Name="GastoServicioBasico" Type="Double" />
+          <Property Name="GastoSalud" Type="Double" />
+          <Property Name="GastoArriendo" Type="Double" />
+          <Property Name="GastoPrestamo" Type="Double" />
+          <Property Name="OtroGasto" Type="Double" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -153,6 +199,22 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
           <EntitySetMapping Name="VWACA_001">
             <EntityTypeMapping TypeName="ModelReportes.VWACA_001">
               <MappingFragment StoreEntitySet="VWACA_001">
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />
+                <ScalarProperty Name="GastoPrestamo" ColumnName="GastoPrestamo" />
+                <ScalarProperty Name="GastoArriendo" ColumnName="GastoArriendo" />
+                <ScalarProperty Name="GastoSalud" ColumnName="GastoSalud" />
+                <ScalarProperty Name="GastoServicioBasico" ColumnName="GastoServicioBasico" />
+                <ScalarProperty Name="GastoEducacion" ColumnName="GastoEducacion" />
+                <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
+                <ScalarProperty Name="OtroIngreso" ColumnName="OtroIngreso" />
+                <ScalarProperty Name="SueldoMadre" ColumnName="SueldoMadre" />
+                <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
+                <ScalarProperty Name="TipoDiscapacidadAlumno" ColumnName="TipoDiscapacidadAlumno" />
+                <ScalarProperty Name="Agua" ColumnName="Agua" />
+                <ScalarProperty Name="TelefonoAlumno" ColumnName="TelefonoAlumno" />
+                <ScalarProperty Name="NacionalidadAlumno" ColumnName="NacionalidadAlumno" />
                 <ScalarProperty Name="NumeroCarnetConadis" ColumnName="NumeroCarnetConadis" />
                 <ScalarProperty Name="PorcentajeDiscapacidad" ColumnName="PorcentajeDiscapacidad" />
                 <ScalarProperty Name="CodCatalogoCONADIS" ColumnName="CodCatalogoCONADIS" />
@@ -161,8 +223,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
                 <ScalarProperty Name="NombreHermanos" ColumnName="NombreHermanos" />
                 <ScalarProperty Name="TieneHermanos" ColumnName="TieneHermanos" />
                 <ScalarProperty Name="TieneElectricidad" ColumnName="TieneElectricidad" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="CelularAlumno" ColumnName="CelularAlumno" />
+                <ScalarProperty Name="DireccionAlumno" ColumnName="DireccionAlumno" />
                 <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
                 <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
                 <ScalarProperty Name="Sexo" ColumnName="Sexo" />
@@ -172,9 +234,9 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.VWACA_001' no tiene definida
                 <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
                 <ScalarProperty Name="NomSede" ColumnName="NomSede" />
                 <ScalarProperty Name="Anio" ColumnName="Anio" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
+                <ScalarProperty Name="ApellidoAlumno" ColumnName="ApellidoAlumno" />
+                <ScalarProperty Name="IdPersonaAlumno" ColumnName="IdPersonaAlumno" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="CodAlumno" ColumnName="CodAlumno" />
                 <ScalarProperty Name="CodMatricula" ColumnName="CodMatricula" />

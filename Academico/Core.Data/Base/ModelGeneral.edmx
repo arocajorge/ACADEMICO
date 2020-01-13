@@ -437,6 +437,15 @@
           <Property Name="Metodo" Type="varchar" MaxLength="1000" />
           <Property Name="InnerException" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="tb_sis_reporte_x_tb_empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="CodReporte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="CodReporte" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReporteDisenio" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="tbl_TransaccionesAutorizadas">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -450,7 +459,7 @@
           <Property Name="FechaTransaccion" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_banco_procesos_bancarios_x_empresa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_banco_procesos_bancarios_x_empresa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_banco_procesos_bancarios_x_empresa">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -476,7 +485,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_banco_procesos_bancario
           <Property Name="Expr1" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_bodega_x_tb_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_bodega_x_tb_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_bodega_x_tb_sucursal">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -494,7 +503,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_bodega_x_tb_sucursal' n
           <Property Name="bo_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_Ciudad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_Ciudad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_Ciudad">
           <Key>
             <PropertyRef Name="IdCiudad" />
@@ -512,7 +521,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_Ciudad' no tiene defini
           <Property Name="IdProvincia" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_ciudad_id' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_ciudad_id' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_ciudad_id">
           <Key>
             <PropertyRef Name="IdCiudad" />
@@ -520,7 +529,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_ciudad_id' no tiene def
           <Property Name="IdCiudad" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_pais' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_pais' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_pais">
           <Key>
             <PropertyRef Name="Nombre" />
@@ -529,7 +538,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_pais' no tiene definida
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_parroquia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_parroquia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_parroquia">
           <Key>
             <PropertyRef Name="IdParroquia" />
@@ -537,7 +546,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_parroquia' no tiene def
           <Property Name="IdParroquia" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_provincia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_provincia">
           <Key>
             <PropertyRef Name="IdProvincia" />
@@ -545,7 +554,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwtb_provincia' no tiene def
           <Property Name="IdProvincia" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwtb_bodega_x_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_bodega_x_sucursal">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -870,6 +879,18 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwtb_bodega_x_sucursal' no t
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_sis_reporte_x_tb_empresa_tb_empresa">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
+          <End Role="tb_sis_reporte_x_tb_empresa" Type="Self.tb_sis_reporte_x_tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="tb_sis_reporte_x_tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal">
           <End Role="tb_sucursal" Type="Self.tb_sucursal" Multiplicity="1" />
           <End Role="tb_sucursal_FormaPago_x_fa_NivelDescuento" Type="Self.tb_sucursal_FormaPago_x_fa_NivelDescuento" Multiplicity="*" />
@@ -924,6 +945,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwtb_bodega_x_sucursal' no t
           <EntitySet Name="tb_sucursal" EntityType="Self.tb_sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sucursal_FormaPago_x_fa_NivelDescuento" EntityType="Self.tb_sucursal_FormaPago_x_fa_NivelDescuento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_LogError" EntityType="Self.tb_LogError" Schema="web" store:Type="Tables" />
+          <EntitySet Name="tb_sis_reporte_x_tb_empresa" EntityType="Self.tb_sis_reporte_x_tb_empresa" Schema="web" store:Type="Tables" />
           <EntitySet Name="tbl_TransaccionesAutorizadas" EntityType="Self.tbl_TransaccionesAutorizadas" Schema="web" store:Type="Tables" />
           <EntitySet Name="vwtb_banco_procesos_bancarios_x_empresa" EntityType="Self.vwtb_banco_procesos_bancarios_x_empresa" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1097,6 +1119,10 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwtb_bodega_x_sucursal' no t
             <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
             <End Role="tb_sis_Impuesto_x_ctacble" EntitySet="tb_sis_Impuesto_x_ctacble" />
           </AssociationSet>
+          <AssociationSet Name="FK_tb_sis_reporte_x_tb_empresa_tb_empresa" Association="Self.FK_tb_sis_reporte_x_tb_empresa_tb_empresa">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_sis_reporte_x_tb_empresa" EntitySet="tb_sis_reporte_x_tb_empresa" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal" Association="Self.FK_tb_sucursal_FormaPago_x_fa_NivelDescuento_tb_sucursal">
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
             <End Role="tb_sucursal_FormaPago_x_fa_NivelDescuento" EntitySet="tb_sucursal_FormaPago_x_fa_NivelDescuento" />
@@ -1134,6 +1160,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwtb_bodega_x_sucursal' no t
           <Property Name="em_Email" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_sucursal" Relationship="ModelGeneral.FK_tb_sucursal_tb_empresa" FromRole="tb_empresa" ToRole="tb_sucursal" />
           <NavigationProperty Name="tb_sis_Documento_Tipo_x_Empresa" Relationship="ModelGeneral.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" FromRole="tb_empresa" ToRole="tb_sis_Documento_Tipo_x_Empresa" />
+          <NavigationProperty Name="tb_sis_reporte_x_tb_empresa" Relationship="ModelGeneral.FK_tb_sis_reporte_x_tb_empresa_tb_empresa" FromRole="tb_empresa" ToRole="tb_sis_reporte_x_tb_empresa" />
         </EntityType>
         <EntityContainer Name="EntitiesGeneral" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" />
@@ -1280,6 +1307,11 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwtb_bodega_x_sucursal' no t
           </AssociationSet>
           <EntitySet Name="tb_modulo" EntityType="ModelGeneral.tb_modulo" />
           <EntitySet Name="vwtb_banco_procesos_bancarios_x_empresa" EntityType="ModelGeneral.vwtb_banco_procesos_bancarios_x_empresa" />
+          <EntitySet Name="tb_sis_reporte_x_tb_empresa" EntityType="ModelGeneral.tb_sis_reporte_x_tb_empresa" />
+          <AssociationSet Name="FK_tb_sis_reporte_x_tb_empresa_tb_empresa" Association="ModelGeneral.FK_tb_sis_reporte_x_tb_empresa_tb_empresa">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_sis_reporte_x_tb_empresa" EntitySet="tb_sis_reporte_x_tb_empresa" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="tb_sucursal">
           <Key>
@@ -2185,6 +2217,28 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwtb_bodega_x_sucursal' no t
           <Property Name="IdBanco" Type="Int32" Nullable="false" />
           <Property Name="Expr1" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="tb_sis_reporte_x_tb_empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="CodReporte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReporteDisenio" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="tb_empresa" Relationship="ModelGeneral.FK_tb_sis_reporte_x_tb_empresa_tb_empresa" FromRole="tb_sis_reporte_x_tb_empresa" ToRole="tb_empresa" />
+        </EntityType>
+        <Association Name="FK_tb_sis_reporte_x_tb_empresa_tb_empresa">
+          <End Type="ModelGeneral.tb_empresa" Role="tb_empresa" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_sis_reporte_x_tb_empresa" Role="tb_sis_reporte_x_tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="tb_sis_reporte_x_tb_empresa">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2733,6 +2787,15 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwtb_bodega_x_sucursal' no t
                 <ScalarProperty Name="Codigo_Empresa" ColumnName="Codigo_Empresa" />
                 <ScalarProperty Name="IdProceso_bancario_tipo" ColumnName="IdProceso_bancario_tipo" />
                 <ScalarProperty Name="IdProceso" ColumnName="IdProceso" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_sis_reporte_x_tb_empresa">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_sis_reporte_x_tb_empresa">
+              <MappingFragment StoreEntitySet="tb_sis_reporte_x_tb_empresa">
+                <ScalarProperty Name="ReporteDisenio" ColumnName="ReporteDisenio" />
+                <ScalarProperty Name="CodReporte" ColumnName="CodReporte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

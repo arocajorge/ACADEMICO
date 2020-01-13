@@ -431,7 +431,7 @@
 
     function Imprimir() {
         var location = GetPathServer();
-        var win = window.open(location +"/Reportes/AcademicoReportes/ACA_001?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdMatricula="+@Model.IdMatricula, '_blank');
+        var win = window.open(location +"/Reportes/AcademicoReportes/ACA_001?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdAlumno="+@Model.IdAlumno+"&IdAnio="+@Model.IdAnio, '_blank');
         win.focus();
     }
 </script>

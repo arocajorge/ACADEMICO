@@ -10,14 +10,14 @@ namespace Core.Data.Reportes
 {
     public class ACA_001_Data
     {
-        public List<ACA_001_Info> get_list(int IdEmpresa, int IdMatricula)
+        public List<ACA_001_Info> get_list(int IdEmpresa, decimal IdAlumno, int IdAnio)
         {
             try
             {
                 List<ACA_001_Info> Lista;
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Lista = Context.VWACA_001.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).Select(q => new ACA_001_Info
+                    Lista = Context.VWACA_001.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdAnio == IdAnio).Select(q => new ACA_001_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdMatricula = q.IdMatricula,
@@ -25,9 +25,8 @@ namespace Core.Data.Reportes
                         CodMatricula = q.CodMatricula,
                         CodAlumno = q.CodAlumno,
                         IdAlumno = q.IdAlumno,
-                        IdPersona = q.IdPersona,
-                        pe_apellido = q.pe_apellido,
-                        pe_nombre = q.pe_nombre,
+                        ApellidoAlumno = q.ApellidoAlumno,
+                        NombreAlumno = q.NombreAlumno,
                         Anio = q.Anio,
                         NomSede = q.NomSede,
                         NomNivel = q.NomNivel,
@@ -37,9 +36,13 @@ namespace Core.Data.Reportes
                         Sexo = q.Sexo,
                         LugarNacimiento = q.LugarNacimiento,
                         pe_fechaNacimiento = q.pe_fechaNacimiento,
-                        Direccion = q.Direccion,
-                        Celular=q.Celular,
+                        DireccionAlumno = q.DireccionAlumno,
+                        TelefonoAlumno = q.TelefonoAlumno,
+                        NacionalidadAlumno = q.NacionalidadAlumno,
+                        TipoDiscapacidadAlumno = q.TipoDiscapacidadAlumno,
+                        CelularAlumno=q.CelularAlumno,
                         TieneElectricidad = q.TieneElectricidad,
+                        Agua = q.Agua,
                         TieneHermanos=q.TieneHermanos,
                         NombreHermanos=q.NombreHermanos,
                         TipoVivienda = q.TipoVivienda,

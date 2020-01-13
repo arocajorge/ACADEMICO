@@ -1158,6 +1158,9 @@
     <Compile Include="Base\tb_sis_Impuesto_x_ctacble.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\tb_sis_reporte_x_tb_empresa.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_sucursal.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
@@ -1618,6 +1621,7 @@
     <Compile Include="General\tb_sis_Documento_Tipo_Data.cs" />
     <Compile Include="General\tb_sis_Documento_Tipo_Talonario_Data.cs" />
     <Compile Include="General\tb_sis_Impuesto_Data.cs" />
+    <Compile Include="General\tb_sis_reporte_x_tb_empresa_Data.cs" />
     <Compile Include="General\tb_sucursal_Data.cs" />
     <Compile Include="General\tb_sucursal_FormaPago_x_fa_NivelDescuento_Data.cs" />
     <Compile Include="Inventario\in_categorias_Data.cs" />
