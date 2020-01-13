@@ -243,5 +243,31 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCurso_x_Anio(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Jornada_Curso_Info> Lista = new List<aca_AnioLectivo_Jornada_Curso_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    Lista = odata.vwaca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).OrderBy(q=> q.OrdenCurso).GroupBy(q => new { q.IdEmpresa, q.IdAnio, q.IdCurso, q.NomCurso, q.OrdenCurso }).Select(q => new aca_AnioLectivo_Jornada_Curso_Info
+                    {
+                        IdEmpresa = q.Key.IdEmpresa,
+                        IdAnio = q.Key.IdAnio,
+                        IdCurso = q.Key.IdCurso,
+                        NomCurso = q.Key.NomCurso,
+                        OrdenCurso = q.Key.OrdenCurso
+                    }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

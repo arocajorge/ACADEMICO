@@ -66,7 +66,7 @@
                     @Html.ValidationMessageFor(q => q.TipoDescuento, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="">Tipo nota</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipoNota, settings =>
@@ -93,7 +93,7 @@
                     @Html.ValidationMessageFor(q => q.Valor, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-5 col-md-1">
+            <div class="col-md-1">
                 <div class="form-group">
                     <label for="IdSucursal">&nbsp;</label>
                     <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","Plantilla",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
