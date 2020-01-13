@@ -206,7 +206,7 @@ namespace Core.Web.Areas.Academico.Controllers
             lst_tipo_desc.Add("%", "% Porcentaje");
             ViewBag.lst_tipo_desc = lst_tipo_desc;
 
-            var lst_tipo_nota = bus_tipo_nota.get_list(model.IdEmpresa, "C", false);
+            var lst_tipo_nota = bus_tipo_nota.get_list(IdEmpresa, "C", false);
             ViewBag.lst_tipo_nota = lst_tipo_nota;
         }
         #endregion
