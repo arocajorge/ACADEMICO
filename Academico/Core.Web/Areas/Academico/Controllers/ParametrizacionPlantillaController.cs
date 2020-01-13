@@ -19,22 +19,42 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Variables
         aca_AnioLectivo_Curso_Plantilla_Parametrizacion_List ListParametrizacion = new aca_AnioLectivo_Curso_Plantilla_Parametrizacion_List();
         aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Bus busParametrizacion = new aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Bus();
+        aca_AnioLectivo_Bus busAnioLectivo = new aca_AnioLectivo_Bus();
         #endregion
 
         #region Index
         public ActionResult Index()
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+                IdAnio = Convert.ToInt32(SessionFixed.IdAnio),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
+            CargarCombos(model);
+            ListParametrizacion.set_list(busParametrizacion.GetList(model.IdEmpresa, model.IdAnio),model.IdTransaccionSession);
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
+            CargarCombos(model);
             return View(model);
+        }
+        #endregion
+
+        #region Metodos
+        private void CargarCombos(cl_filtros_Info model)
+        {
+            var lstAnio = busAnioLectivo.GetList(model.IdEmpresa, false);
+            ViewBag.lstAnio = lstAnio;
         }
         #endregion
 

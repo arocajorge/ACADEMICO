@@ -11,7 +11,8 @@
 
 @using (Html.BeginForm("Index", "Factura", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     <div class="box ">
         <div class="box-header with-border">
@@ -35,51 +36,12 @@
                 <div class="col-md-12">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="IdSucursal">Sucursal*</label>
-                            @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
-                            @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                            <label for="IdSucursal">Año*</label>
+                            @Html.DropDownListFor(q => q.IdAnio, new SelectList(ViewBag.lstAnio, "IdAnio", "Descripcion"), new { @class = "form-control", @id = "IdAnio" })
+                            @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Fecha inicio*</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                @Html.DevExpress().DateEditFor(q=> q.fecha_ini, settings =>
-                            {
-                                settings.Name = "fecha_ini";
-                                settings.Properties.UseMaskBehavior = true;
-                                settings.Properties.EditFormat = EditFormat.Date;
-                                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                            }).GetHtml()
-                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="">Fecha fin*</label>
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                @Html.DevExpress().DateEditFor(q=> q.fecha_fin, settings =>
-                            {
-                                settings.Name = "fecha_fin";
-                                settings.Properties.UseMaskBehavior = true;
-                                settings.Properties.EditFormat = EditFormat.Date;
-                                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                            }).GetHtml()
-                                @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
+                
                 </div>
             </div>
         </div>
