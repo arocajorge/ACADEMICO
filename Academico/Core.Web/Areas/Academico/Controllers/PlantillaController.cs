@@ -1,4 +1,5 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Bus.Inventario;
 using Core.Data.Academico;
@@ -29,6 +30,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Plantilla_Rubro_Bus bus_plantilla_rubro = new aca_Plantilla_Rubro_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
+        fa_TipoNota_Bus bus_tipo_nota = new fa_TipoNota_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -203,6 +205,9 @@ namespace Core.Web.Areas.Academico.Controllers
             lst_tipo_desc.Add("$", "$ Monto");
             lst_tipo_desc.Add("%", "% Porcentaje");
             ViewBag.lst_tipo_desc = lst_tipo_desc;
+
+            var lst_tipo_nota = bus_tipo_nota.get_list(model.IdEmpresa, "C", false);
+            ViewBag.lst_tipo_nota = lst_tipo_nota;
         }
         #endregion
 

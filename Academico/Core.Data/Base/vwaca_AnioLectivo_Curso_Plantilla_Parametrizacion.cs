@@ -32,5 +32,7 @@ namespace Core.Data.Base
         public string NomSede { get; set; }
         public string IdCtaCbleDebe { get; set; }
         public string IdCtaCbleHaber { get; set; }
+        public string pc_CuentaDebe { get; set; }
+        public string pc_CuentaHaber { get; set; }
     }
 }
