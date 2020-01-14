@@ -203,8 +203,145 @@ namespace Core.Data.CuentasPorCobrar
                 #endregion
 
                 dbc.SaveChanges();
+                dbf.SaveChanges();
 
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
+        public bool ModificarDB(cxc_ConciliacionNotaCredito_Info info)
+        {
+            try
+            {
+                EntitiesFacturacion dbf = new EntitiesFacturacion();
+                EntitiesCuentasPorCobrar dbc = new EntitiesCuentasPorCobrar();
+
+                #region Cabecera conciliacion
+                var Entity = dbc.cxc_ConciliacionNotaCredito.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConciliacion == info.IdConciliacion).FirstOrDefault();
+                if (Entity == null)
+                    return false;
+
+                Entity.Fecha = info.Fecha;
+                Entity.Observacion = info.Observacion;
+                Entity.IdUsuarioModificacion = info.IdUsuarioCreacion;
+                Entity.FechaModificacion = DateTime.Now;
+
+                #endregion
+
+                #region Detalle conciliacion
+                var lst = dbc.cxc_ConciliacionNotaCreditoDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConciliacion == info.IdConciliacion).ToList();
+                dbc.cxc_ConciliacionNotaCreditoDet.RemoveRange(lst);
+
+                int Secuencia = 1;
+                foreach (var item in info.ListaDet)
+                {
+                    dbc.cxc_ConciliacionNotaCreditoDet.Add(new cxc_ConciliacionNotaCreditoDet
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdConciliacion = info.IdConciliacion,
+                        Secuencia = Secuencia++,
+                        IdSucursal = item.IdSucursal,
+                        IdBodega = item.IdBodega,
+                        IdCbteVtaNota = item.IdCbteVtaNota,
+                        vt_TipoDoc = item.vt_TipoDoc,
+                        Valor = item.Valor
+                    });
+                }
+                #endregion
+
+                #region Cobro
+                var Cobro = ArmarInfoCobro(info);
+                if (Cobro != null)
+                {
+                    Cobro.IdCobro = info.IdCobro;
+                    if (odataCobro.modificarDB(Cobro))
+                    {
+                        #region Cruce con nota de credito
+                        var lst1 = dbf.fa_notaCreDeb_x_fa_factura_NotaDeb.Where(q => q.IdEmpresa_nt == info.IdEmpresa && q.IdSucursal_nt == info.IdSucursal && q.IdBodega_nt == info.IdBodega && q.IdNota_nt == info.IdNota).ToList();
+                        dbf.fa_notaCreDeb_x_fa_factura_NotaDeb.RemoveRange(lst1);
+
+                        Secuencia = 1;
+                        foreach (var item in info.ListaDet)
+                        {
+                            dbf.fa_notaCreDeb_x_fa_factura_NotaDeb.Add(new fa_notaCreDeb_x_fa_factura_NotaDeb
+                            {
+                                IdEmpresa_nt = info.IdEmpresa,
+                                IdSucursal_nt = info.IdSucursal,
+                                IdBodega_nt = info.IdBodega,
+                                IdNota_nt = info.IdNota,
+
+                                IdEmpresa_fac_nd_doc_mod = info.IdEmpresa,
+                                IdSucursal_fac_nd_doc_mod = info.IdSucursal,
+                                IdBodega_fac_nd_doc_mod = info.IdBodega,
+                                IdCbteVta_fac_nd_doc_mod = item.IdCbteVtaNota,
+                                vt_tipoDoc = item.vt_TipoDoc,
+                                Valor_Aplicado = item.Valor,
+                                fecha_cruce = info.Fecha,
+                                NumDocumento = item.Referencia,
+                                secuencia = Secuencia++
+                            });
+                        }
+
+                        #endregion
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false;
+                #endregion
+
+                
+
+                dbc.SaveChanges();
+                dbf.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool AnularDB(cxc_ConciliacionNotaCredito_Info info)
+        {
+            try
+            {
+                EntitiesCuentasPorCobrar dbc = new EntitiesCuentasPorCobrar();
+                EntitiesFacturacion dbf = new EntitiesFacturacion();
+                var Entity = dbc.cxc_ConciliacionNotaCredito.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdConciliacion == info.IdConciliacion).FirstOrDefault();
+                if (Entity == null)
+                    return false;
+
+                Entity.Estado = false;
+                Entity.FechaAnulacion = DateTime.Now;
+                Entity.MotivoAnulacion = info.MotivoAnulacion;
+
+                if (odataCobro.anularDB(new cxc_cobro_Info
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdSucursal = info.IdSucursal,
+                    IdCobro = info.IdCobro,
+                    IdUsuarioUltAnu = info.IdUsuarioCreacion,
+                    IdUsuario = info.IdUsuarioCreacion,
+                    MotiAnula = info.MotivoAnulacion
+                }))
+                {
+                    var lst = dbf.fa_notaCreDeb_x_cxc_cobro.Where(q => q.IdEmpresa_cbr == info.IdEmpresa && q.IdSucursal_cbr == info.IdSucursal && q.IdCobro_cbr == info.IdCobro).ToList();
+                    dbf.fa_notaCreDeb_x_cxc_cobro.RemoveRange(lst);
+
+                    var lst1 = dbf.fa_notaCreDeb_x_fa_factura_NotaDeb.Where(q => q.IdEmpresa_nt == info.IdEmpresa && q.IdSucursal_nt == info.IdSucursal && q.IdBodega_nt == info.IdBodega && q.IdNota_nt == info.IdNota).ToList();
+                    dbf.fa_notaCreDeb_x_fa_factura_NotaDeb.RemoveRange(lst1);
+                }
+
+                dbc.SaveChanges();
+                dbf.SaveChanges();
                 return true;
             }
             catch (Exception)
