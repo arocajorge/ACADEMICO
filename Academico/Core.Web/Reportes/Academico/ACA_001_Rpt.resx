@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="xrTableCell135.Text" xml:space="preserve">
-    <value>En el presente proceso de admisión declaro que el Representante Legal será: _______________. El mismo que responderá las obligaciones civiles y administrativas en el proceso educativo con la suscripción de los contratos respectivos.</value>
+    <value>En el presente proceso de admisión declaro que el Representante Legal será: _. El mismo que responderá las obligaciones civiles y administrativas en el proceso educativo con la suscripción de los contratos respectivos.</value>
   </data>
   <data name="xrTableCell36.ExpressionBindings" xml:space="preserve">
     <value>Iif(IsNull([GastoAlimentacion]),0 ,[GastoAlimentacion]) + Iif(IsNull([GastoArriendo]),0 ,[GastoArriendo]) + Iif(IsNull([GastoEducacion]),0 ,[GastoEducacion]) +  Iif(IsNull([GastoPrestamo]),0 ,[GastoPrestamo]) + Iif(IsNull([GastoSalud]),0 ,[GastoSalud]) + Iif(IsNull([GastoServicioBasico]),0 ,[GastoServicioBasico]) + Iif(IsNull([OtroGasto]),0 ,[OtroGasto])</value>

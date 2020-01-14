@@ -362,7 +362,7 @@ namespace Core.Data.Academico
                     foreach (var item in lstDocPorCurso)
                     {
                         //Valido si en la lista de los seleccionados existe el documento
-                        var Documento = info.lst_alumno_documentos.Where(q => q.IdDocumento == item.IdDocumento).FirstOrDefault();
+                        var Documento = info.lst_documentos.Where(q => q.IdDocumento == item.IdDocumento).FirstOrDefault();
                         //Si no existe como seleccionado
                         if (Documento == null)
                         {
@@ -403,7 +403,7 @@ namespace Core.Data.Academico
                             else
                             {
                                 //Si existe lo modifico y le pongo estado true
-                                DocumentoAlumnoE.EnArchivo = false;
+                                DocumentoAlumnoE.EnArchivo = true;
                             }
                         }
                     }

@@ -37,57 +37,50 @@
         {
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(20);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "";
+            column.Caption = "Periodo";
+            column.Width = Unit.Percentage(15);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "vt_detallexItems";
-            column.Caption = "Periodo";
+            column.Caption = "# Cuotas";
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "vt_cantidad";
-            column.Caption = "Cantidad";
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(8);
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "vt_Precio";
-            column.Caption = "Precio";
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(8);
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "vt_Subtotal";
             column.Caption = "Subtotal";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(8);
+            column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "vt_iva";
             column.Caption = "I.V.A.";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(8);
+            column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "vt_total";
             column.Caption = "Total";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(8);
+            column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "ValorProntoPago";
             column.Caption = "Valor pronto pago";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(12);
+            column.Width = Unit.Percentage(15);
         });
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
