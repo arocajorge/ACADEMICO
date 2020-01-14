@@ -7,6 +7,8 @@ using Core.Bus.General;
 using System.Collections.Generic;
 using Core.Bus.Reportes.Academico;
 using Core.Info.Reportes.Academico;
+using Core.Bus.Academico;
+using Core.Info.Helps;
 
 namespace Core.Web.Reportes.Academico
 {
@@ -22,6 +24,7 @@ namespace Core.Web.Reportes.Academico
 
         private void ACA_001_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
+            aca_Familia_Bus bus_familia = new aca_Familia_Bus();
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
@@ -33,6 +36,14 @@ namespace Core.Web.Reportes.Academico
             ACA_001_Bus bus_rpt = new ACA_001_Bus();
             List<ACA_001_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdAlumno, IdAnio);
 
+            var info_rep = bus_familia.GetInfo_Representante(IdEmpresa,IdAlumno, cl_enumeradores.eTipoRepresentante.LEGAL.ToString());
+            var RepLegal = "";
+            if (info_rep!=null)
+            {
+                RepLegal = info_rep.pe_nombreCompleto;
+            }
+
+            lbl_compromiso.Text.Replace("_.", RepLegal);
             this.DataSource = lst_rpt;
         }
 

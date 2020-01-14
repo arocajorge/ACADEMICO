@@ -23,5 +23,17 @@ namespace Core.Bus.Reportes.Academico
                 throw;
             }
         }
+        public List<ACA_001_Info> GetListPadres(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.get_list_padres(IdEmpresa, IdAlumno);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

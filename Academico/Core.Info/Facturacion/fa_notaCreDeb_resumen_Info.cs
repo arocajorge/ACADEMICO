@@ -11,7 +11,7 @@ namespace Core.Info.Facturacion
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
-        public decimal IdCbteVta { get; set; }
+        public decimal IdNota { get; set; }
         public decimal SubtotalIVASinDscto { get; set; }
         public decimal SubtotalSinIVASinDscto { get; set; }
         public decimal SubtotalSinDscto { get; set; }
@@ -21,9 +21,6 @@ namespace Core.Info.Facturacion
         public decimal SubtotalConDscto { get; set; }
         public decimal ValorIVA { get; set; }
         public decimal Total { get; set; }
-        public decimal ValorEfectivo { get; set; }
-        public decimal Cambio { get; set; }
-
         public Nullable<decimal> PorIva { get; set; }
         public string IdCod_Impuesto_IVA { get; set; }
     }

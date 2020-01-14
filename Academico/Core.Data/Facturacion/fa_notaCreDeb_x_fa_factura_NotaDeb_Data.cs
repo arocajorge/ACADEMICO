@@ -163,6 +163,7 @@ namespace Core.Data.Facturacion
                                  vt_NumDocumento = q.vt_NumFactura,
                                  Observacion = q.vt_Observacion,
                                  vt_fecha = q.vt_fecha,
+                                 fecha_cruce = q.fecha_cruce,
                                  vt_total = q.vt_total,
                                  Saldo = q.saldo_sin_cobro,
                                  vt_Subtotal = q.vt_Subtotal,
