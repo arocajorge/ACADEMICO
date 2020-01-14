@@ -51,5 +51,7 @@ namespace Core.Info.Reportes
         public Nullable<double> GastoPrestamo { get; set; }
         public Nullable<double> OtroGasto { get; set; }
         public string Descripcion { get; set; }
+        public int IdAnio { get; set; }
+        public string Observacion { get; set; }
     }
 }

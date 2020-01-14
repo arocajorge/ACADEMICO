@@ -691,44 +691,16 @@ namespace Core.Web.Areas.Academico.Controllers
                 var lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>();
                 if (IDs_Doc != "")
                 {
-                        var lst_docs_curso = bus_curso_documento.GetList_Matricula(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, info_matricula.IdNivel, info_matricula.IdJornada, info_matricula.IdCurso);
-                        foreach (var item1 in lst_docs_curso)
+                    foreach (var item in array_doc)
+                    {
+                        var info_doc = new aca_AlumnoDocumento_Info
                         {
-                            foreach (var item in array_doc)
-                            {
-                                var info_doc = new aca_AlumnoDocumento_Info
-                                {
-                                    IdEmpresa = info_matricula.IdEmpresa,
-                                    IdAlumno = info_matricula.IdAlumno,
-                                    IdDocumento = Convert.ToInt32(item1.IdDocumento),
-                                    EnArchivo= false
-                                };
-
-                                if (item1.IdDocumento == Convert.ToInt32(item))
-                                {
-                                    info_doc.EnArchivo = true;
-                                }
-
-                                lst_alumno_documentos.Add(info_doc);
-                            }
-
-                        //var existe_documento = bus_alumno_documento.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAlumno, Convert.ToInt32(item));
-                        //if (existe_documento == null)
-                        //{
-                        //    var info_doc = new aca_AlumnoDocumento_Info
-                        //    {
-                        //        IdEmpresa = info_matricula.IdEmpresa,
-                        //        IdAlumno = info_matricula.IdAlumno,
-                        //        IdDocumento = Convert.ToInt32(item),
-                        //        EnArchivo = true
-                        //    };
-                        //    lst_alumno_documentos.Add(info_doc);
-                        //}
-                        //else
-                        //{
-                        //    existe_documento.EnArchivo = false;
-                        //    lst_alumno_documentos.Add(existe_documento);
-                        //}
+                            IdEmpresa = info_matricula.IdEmpresa,
+                            IdAlumno = info_matricula.IdAlumno,
+                            IdDocumento = Convert.ToInt32(item),
+                            EnArchivo = true
+                        };
+                        lst_alumno_documentos.Add(info_doc);
                     }
                 }
                 info_matricula.lst_documentos = lst_alumno_documentos;
