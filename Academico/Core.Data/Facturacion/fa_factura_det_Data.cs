@@ -100,8 +100,9 @@ namespace Core.Data.Facturacion
                             vt_detallexItems = q.DescripcionCuotas,
                             Periodo = q.Periodo,
                             IdString = q.IdEmpresa.ToString("0000") + q.IdMatricula.ToString("00000000") + q.IdPeriodo.ToString("00000000") + q.IdRubro.ToString("00000000")
-                    });
-                    
+                        });
+
+                    }
                 }
                 return Lista;
             }
