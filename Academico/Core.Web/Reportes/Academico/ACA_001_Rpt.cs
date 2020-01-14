@@ -35,5 +35,15 @@ namespace Core.Web.Reportes.Academico
 
             this.DataSource = lst_rpt;
         }
+
+        private void xrSubreportMadre_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
+
+        private void xrSubreportPadre_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
     }
 }
