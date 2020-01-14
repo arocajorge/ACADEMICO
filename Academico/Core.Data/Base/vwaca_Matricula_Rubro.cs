@@ -33,5 +33,7 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaFacturacion { get; set; }
         public decimal IdMecanismo { get; set; }
         public bool EnMatricula { get; set; }
+        public int IdAnio { get; set; }
+        public int IdPlantilla { get; set; }
     }
 }

@@ -238,7 +238,9 @@ namespace Core.Data.Facturacion
                     Cambio = info.info_resumen.Cambio,
 
                     FechaProntoPago = info.info_resumen.FechaProntoPago,
-                    ValorProntoPago = info.info_resumen.ValorProntoPago
+                    ValorProntoPago = info.info_resumen.ValorProntoPago,
+                    IdPlantilla = info.lst_det.Where(q=> q.aca_IdPlantilla != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdPlantilla),
+                    IdAnio = info.lst_det.Where(q => q.aca_IdPlantilla != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdAnio)
                 });
                 #endregion
 
@@ -274,6 +276,8 @@ namespace Core.Data.Facturacion
                         IdPunto_Cargo = item.IdPunto_Cargo,
                         IdPunto_cargo_grupo = item.IdPunto_cargo_grupo,
 
+                        aca_IdAnio = item.aca_IdAnio,
+                        aca_IdPlantilla = item.aca_IdPlantilla,
                         aca_IdPeriodo = item.aca_IdPeriodo,
                         aca_IdRubro = item.aca_IdRubro
                     });
@@ -590,7 +594,9 @@ namespace Core.Data.Facturacion
                     Cambio = info.info_resumen.Cambio,
 
                     FechaProntoPago = info.info_resumen.FechaProntoPago,
-                    ValorProntoPago = info.info_resumen.ValorProntoPago
+                    ValorProntoPago = info.info_resumen.ValorProntoPago,
+                    IdPlantilla = info.lst_det.Where(q => q.aca_IdPlantilla != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdPlantilla),
+                    IdAnio = info.lst_det.Where(q => q.aca_IdPlantilla != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdAnio)
                 });
                 #endregion
 
@@ -627,7 +633,12 @@ namespace Core.Data.Facturacion
 
                         IdCentroCosto = item.IdCentroCosto,
                         IdPunto_Cargo = item.IdPunto_Cargo,
-                        IdPunto_cargo_grupo = item.IdPunto_cargo_grupo
+                        IdPunto_cargo_grupo = item.IdPunto_cargo_grupo,
+
+                        aca_IdPlantilla = item.aca_IdPlantilla,
+                        aca_IdAnio = item.IdAnio,
+                        aca_IdPeriodo = item.aca_IdPeriodo,
+                        aca_IdRubro = item.aca_IdRubro
                     });
                 }
                 #endregion

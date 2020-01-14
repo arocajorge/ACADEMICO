@@ -34,11 +34,11 @@ namespace Core.Data.Academico
                         NomRubro = q.NomRubro,
                         FechaDesde = q.FechaDesde,
                         pr_descripcion = q.pr_descripcion,
-                        AplicaProntoPago = q.AplicaProntoPago
+                        AplicaProntoPago = q.AplicaProntoPago,
                     }).ToList();
                 }
                 Lista.ForEach(v => { v.Periodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });
-                Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000") + q.IdPlantilla.ToString("000000") + q.IdPeriodo.ToString("0000") + q.IdRubro.ToString("000000"));
+                Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000000") + q.IdPlantilla.ToString("0000000") + q.IdPeriodo.ToString("0000000") + q.IdRubro.ToString("0000000"));
                 return Lista;
             }
             catch (Exception)
@@ -73,7 +73,9 @@ namespace Core.Data.Academico
                         FechaFacturacion = q.FechaFacturacion,
                         pr_descripcion = q.pr_descripcion,
                         IdMecanismo = q.IdMecanismo,
-                        EnMatricula = q.EnMatricula
+                        EnMatricula = q.EnMatricula,
+                        IdAnio = q.IdAnio,
+                        IdPlantilla = q.IdPlantilla
                     }).ToList();
                 }
                 Lista.ForEach(v => { v.Periodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });
@@ -116,7 +118,9 @@ namespace Core.Data.Academico
                         FechaFacturacion = Entity.FechaFacturacion,
                         pr_descripcion = Entity.pr_descripcion,
                         IdMecanismo = Entity.IdMecanismo,
-                        EnMatricula = Entity.EnMatricula
+                        EnMatricula = Entity.EnMatricula,
+                        IdAnio = Entity.IdAnio,
+                        IdPlantilla = Entity.IdPlantilla
                     };
                 }
 

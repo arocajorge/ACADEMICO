@@ -52,6 +52,8 @@ namespace Core.Info.Facturacion
         public System.DateTime FechaDesde { get; set; }
         public DateTime? FechaProntoPago { get; set; }
         public string Periodo { get; set; }
+        public int? aca_IdPlantilla { get; set; }
+        public int? aca_IdAnio { get; set; }
         #endregion
 
     }

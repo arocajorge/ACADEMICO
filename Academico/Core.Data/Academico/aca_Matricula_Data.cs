@@ -262,7 +262,9 @@ namespace Core.Data.Academico
                                 ValorIVA = item.ValorIVA,
                                 Total = item.Total,
                                 FechaFacturacion = null,
-                                EnMatricula = item.EnMatricula
+                                EnMatricula = item.EnMatricula,
+                                IdPlantilla = item.IdPlantilla,
+                                IdAnio = item.IdAnio
                             };
                             Context.aca_Matricula_Rubro.Add(Entity_Det);
                         }
@@ -343,7 +345,9 @@ namespace Core.Data.Academico
                                 Porcentaje = item.Porcentaje,
                                 ValorIVA = item.ValorIVA,
                                 Total = item.Total,
-                                EnMatricula = item.EnMatricula
+                                EnMatricula = item.EnMatricula,
+                                IdPlantilla = item.IdPlantilla,
+                                IdAnio = item.IdAnio
                             };
                             Context.aca_Matricula_Rubro.Add(Entity_Det);
                         }

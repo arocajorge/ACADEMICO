@@ -49,7 +49,11 @@ namespace Core.Data.Facturacion
                                  pr_descripcion = q.pr_descripcion,
                                  CantidadAnterior = q.vt_cantidad,
                                  tp_manejaInven = q.tp_ManejaInven,
-                                 se_distribuye = q.se_distribuye
+                                 se_distribuye = q.se_distribuye,
+                                 aca_IdPeriodo = q.aca_IdPeriodo,
+                                 aca_IdRubro = q.aca_IdRubro,
+                                 aca_IdAnio = q.aca_IdAnio,
+                                 aca_IdPlantilla = q.aca_IdPlantilla
                                 
                              }).ToList();
                 }
@@ -89,6 +93,8 @@ namespace Core.Data.Facturacion
                             vt_total = q.Total ?? 0,
                             IdCod_Impuesto_Iva = q.IdCod_Impuesto_Iva,
                             IdMatricula = q.IdMatricula,
+                            aca_IdAnio = q.IdAnio,
+                            aca_IdPlantilla = q.IdPlantilla,
                             aca_IdPeriodo = q.IdPeriodo,
                             aca_IdRubro = q.IdRubro,
                             AplicaProntoPago = q.AplicaProntoPago,
