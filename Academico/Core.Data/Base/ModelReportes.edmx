@@ -71,6 +71,46 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
           <Property Name="OtroIngresoPadre" Type="float" />
           <Property Name="OtroIngresoMadre" Type="float" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001_Familiares' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWACA_001_Familiares">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdCatalogoPAREN" />
+            <PropertyRef Name="NomInstruccion" />
+            <PropertyRef Name="NomCatalogo" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="NomEstadoCivil" />
+            <PropertyRef Name="VehiculoPropio" />
+            <PropertyRef Name="Titulo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoPAREN" Type="int" Nullable="false" />
+          <Property Name="NomInstruccion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NomCatalogo" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomEstadoCivil" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="1000" />
+          <Property Name="EmpresaTrabajo" Type="varchar" MaxLength="200" />
+          <Property Name="NomProfesion" Type="varchar" MaxLength="500" />
+          <Property Name="Correo" Type="varchar" MaxLength="500" />
+          <Property Name="Celular" Type="varchar" MaxLength="500" />
+          <Property Name="SueldoPadre" Type="float" />
+          <Property Name="Sueldo" Type="float" />
+          <Property Name="OtrosIngresos" Type="float" />
+          <Property Name="VehiculoPropio" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Marca" Type="varchar" MaxLength="50" />
+          <Property Name="Modelo" Type="varchar" MaxLength="50" />
+          <Property Name="AniosServicio" Type="int" />
+          <Property Name="AnioVehiculo" Type="int" />
+          <Property Name="Titulo" Type="varchar" MaxLength="65" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="ModelReportesStoreContainer">
           <EntitySet Name="VWACA_001" EntityType="Self.VWACA_001" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -121,6 +161,33 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
     [VWACA_001].[OtroIngresoMadre] AS [OtroIngresoMadre]
     FROM [web].[VWACA_001] AS [VWACA_001]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWACA_001_Familiares" EntityType="Self.VWACA_001_Familiares" store:Type="Views" store:Schema="web">
+            <DefiningQuery>SELECT 
+    [VWACA_001_Familiares].[IdEmpresa] AS [IdEmpresa], 
+    [VWACA_001_Familiares].[IdAlumno] AS [IdAlumno], 
+    [VWACA_001_Familiares].[Secuencia] AS [Secuencia], 
+    [VWACA_001_Familiares].[IdCatalogoPAREN] AS [IdCatalogoPAREN], 
+    [VWACA_001_Familiares].[NomInstruccion] AS [NomInstruccion], 
+    [VWACA_001_Familiares].[NomCatalogo] AS [NomCatalogo], 
+    [VWACA_001_Familiares].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWACA_001_Familiares].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [VWACA_001_Familiares].[NomEstadoCivil] AS [NomEstadoCivil], 
+    [VWACA_001_Familiares].[Direccion] AS [Direccion], 
+    [VWACA_001_Familiares].[EmpresaTrabajo] AS [EmpresaTrabajo], 
+    [VWACA_001_Familiares].[NomProfesion] AS [NomProfesion], 
+    [VWACA_001_Familiares].[Correo] AS [Correo], 
+    [VWACA_001_Familiares].[Celular] AS [Celular], 
+    [VWACA_001_Familiares].[SueldoPadre] AS [SueldoPadre], 
+    [VWACA_001_Familiares].[Sueldo] AS [Sueldo], 
+    [VWACA_001_Familiares].[OtrosIngresos] AS [OtrosIngresos], 
+    [VWACA_001_Familiares].[VehiculoPropio] AS [VehiculoPropio], 
+    [VWACA_001_Familiares].[Marca] AS [Marca], 
+    [VWACA_001_Familiares].[Modelo] AS [Modelo], 
+    [VWACA_001_Familiares].[AniosServicio] AS [AniosServicio], 
+    [VWACA_001_Familiares].[AnioVehiculo] AS [AnioVehiculo], 
+    [VWACA_001_Familiares].[Titulo] AS [Titulo]
+    FROM [web].[VWACA_001_Familiares] AS [VWACA_001_Familiares]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -128,6 +195,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
       <Schema Namespace="ModelReportes" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="EntitiesReportes" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="VWACA_001" EntityType="ModelReportes.VWACA_001" />
+          <EntitySet Name="VWACA_001_Familiares" EntityType="ModelReportes.VWACA_001_Familiares" />
         </EntityContainer>
         <EntityType Name="VWACA_001">
           <Key>
@@ -193,6 +261,44 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
           <Property Name="OtroIngresoPadre" Type="Double" />
           <Property Name="OtroIngresoMadre" Type="Double" />
         </EntityType>
+        <EntityType Name="VWACA_001_Familiares">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdCatalogoPAREN" />
+            <PropertyRef Name="NomInstruccion" />
+            <PropertyRef Name="NomCatalogo" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="NomEstadoCivil" />
+            <PropertyRef Name="VehiculoPropio" />
+            <PropertyRef Name="Titulo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoPAREN" Type="Int32" Nullable="false" />
+          <Property Name="NomInstruccion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomCatalogo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomEstadoCivil" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="EmpresaTrabajo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NomProfesion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SueldoPadre" Type="Double" />
+          <Property Name="Sueldo" Type="Double" />
+          <Property Name="OtrosIngresos" Type="Double" />
+          <Property Name="VehiculoPropio" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Marca" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AniosServicio" Type="Int32" />
+          <Property Name="AnioVehiculo" Type="Int32" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="65" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -246,6 +352,35 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
                 <ScalarProperty Name="CodMatricula" ColumnName="CodMatricula" />
                 <ScalarProperty Name="FechaMatricula" ColumnName="FechaMatricula" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWACA_001_Familiares">
+            <EntityTypeMapping TypeName="ModelReportes.VWACA_001_Familiares">
+              <MappingFragment StoreEntitySet="VWACA_001_Familiares">
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="AnioVehiculo" ColumnName="AnioVehiculo" />
+                <ScalarProperty Name="AniosServicio" ColumnName="AniosServicio" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="VehiculoPropio" ColumnName="VehiculoPropio" />
+                <ScalarProperty Name="OtrosIngresos" ColumnName="OtrosIngresos" />
+                <ScalarProperty Name="Sueldo" ColumnName="Sueldo" />
+                <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="NomProfesion" ColumnName="NomProfesion" />
+                <ScalarProperty Name="EmpresaTrabajo" ColumnName="EmpresaTrabajo" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NomEstadoCivil" ColumnName="NomEstadoCivil" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="NomCatalogo" ColumnName="NomCatalogo" />
+                <ScalarProperty Name="NomInstruccion" ColumnName="NomInstruccion" />
+                <ScalarProperty Name="IdCatalogoPAREN" ColumnName="IdCatalogoPAREN" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

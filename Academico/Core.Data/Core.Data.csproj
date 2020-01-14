@@ -1170,6 +1170,9 @@
     <Compile Include="Base\VWACA_001.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWACA_001_Familiares.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_Alumno.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>

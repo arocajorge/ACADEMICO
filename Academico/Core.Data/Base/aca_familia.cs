@@ -32,6 +32,7 @@ namespace Core.Data.Base
         public bool VehiculoPropio { get; set; }
         public string Marca { get; set; }
         public string Modelo { get; set; }
+        public Nullable<int> AnioVehiculo { get; set; }
         public bool CasaPropia { get; set; }
         public bool SeFactura { get; set; }
         public bool EsRepresentante { get; set; }

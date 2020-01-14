@@ -26,5 +26,6 @@ namespace Core.Data.Base
         }
     
         public virtual DbSet<VWACA_001> VWACA_001 { get; set; }
+        public virtual DbSet<VWACA_001_Familiares> VWACA_001_Familiares { get; set; }
     }
 }
