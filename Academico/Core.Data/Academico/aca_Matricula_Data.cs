@@ -349,23 +349,65 @@ namespace Core.Data.Academico
                         }
                     }
 
-                    var lst_AlumnoDocumento = Context.aca_AlumnoDocumento.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).ToList();
-                    Context.aca_AlumnoDocumento.RemoveRange(lst_AlumnoDocumento);
-                    if (info.lst_documentos.Count > 0)
+                    #region Documentos por alumno
+                    //Obtengo lista de documentos por curso
+                    var lstDocPorCurso = Context.aca_AnioLectivo_Curso_Documento.Where(q => q.IdEmpresa == info.IdEmpresa
+                  && q.IdSede == info.IdSede
+                  && q.IdAnio == info.IdAnio
+                  && q.IdNivel == info.IdNivel
+                  && q.IdJornada == info.IdJornada
+                  && q.IdCurso == info.IdCurso).ToList();
+
+                    //Recorro lista de documentos por curso
+                    foreach (var item in lstDocPorCurso)
                     {
-                        foreach (var item in info.lst_documentos)
+                        //Valido si en la lista de los seleccionados existe el documento
+                        var Documento = info.lst_alumno_documentos.Where(q => q.IdDocumento == item.IdDocumento).FirstOrDefault();
+                        //Si no existe como seleccionado
+                        if (Documento == null)
                         {
-                            aca_AlumnoDocumento Entity_DetDoc = new aca_AlumnoDocumento
+                            //Valido si existe en la lista de documentos por alumno
+                            var DocumentoAlumno = Context.aca_AlumnoDocumento.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.IdDocumento == item.IdDocumento).FirstOrDefault();
+                            if (DocumentoAlumno == null)
                             {
-                                IdEmpresa = item.IdEmpresa,
-                                IdAlumno = item.IdAlumno,
-                                IdDocumento = item.IdDocumento,
-                                EnArchivo = item.EnArchivo
-                            };
-                            Context.aca_AlumnoDocumento.Add(Entity_DetDoc);
+                                //Si no existe lo agrego con estado false
+                                Context.aca_AlumnoDocumento.Add(new aca_AlumnoDocumento
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAlumno = info.IdAlumno,
+                                    IdDocumento = item.IdDocumento,
+                                    EnArchivo = false
+                                });
+                            }
+                            else
+                            {
+                                //Si existe lo modifico y le pongo estado false
+                                DocumentoAlumno.EnArchivo = false;
+                            }
+                        }
+                        else
+                        {
+                            //Si existe como seleccionado valido si existe en la tabla de documentos por alumno
+                            var DocumentoAlumnoE = Context.aca_AlumnoDocumento.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.IdDocumento == item.IdDocumento).FirstOrDefault();
+                            if (DocumentoAlumnoE == null)
+                            {
+                                //Si no existe lo agrego con estado true
+                                Context.aca_AlumnoDocumento.Add(new aca_AlumnoDocumento
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAlumno = info.IdAlumno,
+                                    IdDocumento = item.IdDocumento,
+                                    EnArchivo = true
+                                });
+                            }
+                            else
+                            {
+                                //Si existe lo modifico y le pongo estado true
+                                DocumentoAlumnoE.EnArchivo = false;
+                            }
                         }
                     }
-                    Context.SaveChanges();
+                    #endregion
                 }
 
                 return true;
