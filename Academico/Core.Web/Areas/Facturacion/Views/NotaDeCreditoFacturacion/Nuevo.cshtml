@@ -464,6 +464,27 @@
                     <input class="form-control" type="text" id="DatosCliente" value="" readonly="readonly" />
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdSucursal">Subtotal*</label>
+                    @Html.TextBoxFor(q => q.info_resumen.SubtotalConDscto, new { @class = "form-control", @id = "SubtotalConDscto" })
+                    @Html.ValidationMessageFor(q => q.info_resumen.SubtotalConDscto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">IVA</label>
+                    @Html.TextBoxFor(q => q.info_resumen.ValorIVA, new { @class = "form-control", @id = "ValorIVA" })
+                    @Html.ValidationMessageFor(q => q.info_resumen.ValorIVA, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdPuntoVta">Total*</label>
+                    @Html.TextBoxFor(q => q.info_resumen.Total, new { @class = "form-control", @id = "Total" })
+                    @Html.ValidationMessageFor(q => q.info_resumen.Total, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
 
         <div class="col-md-6">
@@ -587,13 +608,13 @@
                 @Html.ValidationMessageFor(q => q.sc_observacion, "", new { @class = "text-danger" })
             </div>
         </div>
-    <div class="row">
+    @*<div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
                 @Html.Action("GridViewPartial_notaCredito_det")
             </div>
         </div>
-    </div>
+    </div>*@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

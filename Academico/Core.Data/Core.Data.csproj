@@ -564,6 +564,9 @@
     <Compile Include="Base\fa_notaCreDeb_det.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\fa_notaCreDeb_resumen.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\fa_notaCreDeb_x_ct_cbtecble.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -1645,7 +1648,7 @@
     <Compile Include="Inventario\in_UnidadMedida_Data.cs" />
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reportes\ACA_001_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_001_Data.cs" />
     <Compile Include="RRHH\ro_area_Data.cs" />
     <Compile Include="RRHH\ro_area_x_departamento_Data.cs" />
     <Compile Include="RRHH\ro_cargo_Data.cs" />

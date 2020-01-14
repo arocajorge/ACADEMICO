@@ -58,5 +58,6 @@ namespace Core.Data.Base
         public virtual DbSet<fa_factura_resumen> fa_factura_resumen { get; set; }
         public virtual DbSet<vwfa_factura_det> vwfa_factura_det { get; set; }
         public virtual DbSet<fa_factura> fa_factura { get; set; }
+        public virtual DbSet<fa_notaCreDeb_resumen> fa_notaCreDeb_resumen { get; set; }
     }
 }
