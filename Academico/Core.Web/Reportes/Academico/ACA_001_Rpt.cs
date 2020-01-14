@@ -4,9 +4,9 @@ using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
 using Core.Bus.General;
-using Core.Info.Reportes;
 using System.Collections.Generic;
-using Core.Bus.Reportes;
+using Core.Bus.Reportes.Academico;
+using Core.Info.Reportes.Academico;
 
 namespace Core.Web.Reportes.Academico
 {
@@ -38,12 +38,18 @@ namespace Core.Web.Reportes.Academico
 
         private void xrSubreportMadre_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdAlumno"].Value = p_IdAlumno.Value == null ? 0 : Convert.ToDecimal(p_IdAlumno.Value);
 
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
 
         private void xrSubreportPadre_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdAlumno"].Value = p_IdAlumno.Value == null ? 0 : Convert.ToDecimal(p_IdAlumno.Value);
 
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using Core.Data.Base;
-using Core.Info.Reportes;
+using Core.Info.Reportes.Academico;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Data.Reportes
+namespace Core.Data.Reportes.Academico
 {
     public class ACA_001_Data
     {
@@ -50,6 +50,45 @@ namespace Core.Data.Reportes
                         CodCatalogoCONADIS = q.CodCatalogoCONADIS,
                         PorcentajeDiscapacidad=q.PorcentajeDiscapacidad,
                         NumeroCarnetConadis=q.NumeroCarnetConadis
+
+                    }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ACA_001_Info> get_info(int IdEmpresa, decimal IdAlumno, int IdCatalogoPAREN)
+        {
+            try
+            {
+                List<ACA_001_Info> Lista;
+                using (EntitiesReportes Context = new EntitiesReportes())
+                {
+                    Lista = Context.VWACA_001_Familiares.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdCatalogoPAREN == IdCatalogoPAREN).Select(q => new ACA_001_Info
+                    {
+                        NomInstruccion = q.NomInstruccion,
+                        NomCatalogo = q.NomCatalogo,
+                        pe_nombreCompleto = q.pe_nombreCompleto,
+                        pe_cedulaRuc = q.pe_cedulaRuc,
+                        NomEstadoCivil = q.NomEstadoCivil,
+                        Direccion = q.Direccion,
+                        EmpresaTrabajo = q.EmpresaTrabajo,
+                        NomProfesion = q.NomProfesion,
+                        Correo = q.Correo,
+                        Celular = q.Celular,
+                        Sueldo = q.Sueldo,
+                        OtrosIngresos = q.OtrosIngresos,
+                        VehiculoPropio = q.VehiculoPropio,
+                        Marca = q.Marca,
+                        Modelo = q.Modelo,
+                        AniosServicio = q.AniosServicio,
+                        AnioVehiculo = q.AnioVehiculo,
+                        Titulo = q.Titulo
 
                     }).ToList();
                 }

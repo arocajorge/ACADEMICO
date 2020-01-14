@@ -13,5 +13,9 @@ namespace Core.Web.Reportes.Academico
             InitializeComponent();
         }
 
+        private void ACA_001_Padre_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
     }
 }

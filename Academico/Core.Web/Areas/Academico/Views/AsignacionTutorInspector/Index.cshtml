@@ -11,7 +11,6 @@
 @using (Html.BeginForm("Index", "AsignacionTutorInspector", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
-    @Html.HiddenFor(q => q.IdSede, new { @id = "IdSede" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
     <div class="box ">
@@ -38,6 +37,13 @@
                             <label for="IdEmpresa">Año Lectivo*</label>
                             @Html.Partial("_ComboBoxPartial_Anio_Consulta", Model)
                             @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Sede*</label>
+                            @Html.DropDownListFor(q => q.IdSede, new SelectList(ViewBag.lst_sede, "IdSede", "NomSede"), new { @class = "form-control", @id = "IdSede" })
+                            @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

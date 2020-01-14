@@ -38,6 +38,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Curso_Documento_Bus bus_curso_documento = new aca_AnioLectivo_Curso_Documento_Bus();
         aca_SocioEconomico_Bus bus_socioeconomico = new aca_SocioEconomico_Bus();
         aca_AnioLectivo_Paralelo_Profesor_Bus bus_materias_x_paralelo = new aca_AnioLectivo_Paralelo_Profesor_Bus();
+        aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -393,22 +394,31 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 string[] array = Seleccionados.Split(',');
                 var info_plantilla = bus_plantilla.GetInfo(IdEmpresa, IdAnio, IdPlantilla);
+                
                 var lst_detalle = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 foreach (var item in array)
                 {
                     var info = lst_detalle.Where(q=>q.IdString== item).FirstOrDefault();
+                    var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, info.IdPeriodo);
                     if (info.AplicaProntoPago == true)
                     {
-                        if (info_plantilla.TipoDescuento == "%")
+                        if (DateTime.Now <= info_anio_periodo.FechaProntoPago)
                         {
-                            ValorDescuento = (info.Total * (info_plantilla.Valor / 100));
-                            ValorRubro = info.Total - ValorDescuento;
-                            TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                            if (info_plantilla.TipoDescuento == "%")
+                            {
+                                ValorDescuento = (info.Total * (info_plantilla.Valor / 100));
+                                ValorRubro = info.Total - ValorDescuento;
+                                TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                            }
+                            else
+                            {
+                                ValorRubro = (info.Total - info_plantilla.Valor);
+                                TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                            }
                         }
                         else
                         {
-                            ValorRubro = (info.Total - info_plantilla.Valor);
-                            TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                            TotalProntoPago = TotalProntoPago + Math.Round((info.Total), 2, MidpointRounding.AwayFromZero);
                         }
 
                         Total = Total + Math.Round((info.Total), 2, MidpointRounding.AwayFromZero);

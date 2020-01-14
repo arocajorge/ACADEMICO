@@ -22,6 +22,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         aca_AnioLectivo_Curso_Paralelo_Bus bus_ParaleloPorCurso = new aca_AnioLectivo_Curso_Paralelo_Bus();
         aca_AnioLectivo_Curso_Paralelo_List Lista_ParaleloPorCurso = new aca_AnioLectivo_Curso_Paralelo_List();
+        aca_Sede_Bus bus_sede = new aca_Sede_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -88,6 +89,15 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
+        #region Metodos
+        private void cargar_combos()
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_sede = bus_sede.GetList(IdEmpresa, false);
+            ViewBag.lst_sede = lst_sede;
+        }
+        #endregion
+
         #region Index
         public ActionResult Index()
         {
@@ -108,6 +118,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_AnioLectivo_Curso_Paralelo_Info> lista = bus_ParaleloPorCurso.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
             Lista_ParaleloPorCurso.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            cargar_combos();
             return View(model);
         }
 
@@ -116,6 +127,7 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             List<aca_AnioLectivo_Curso_Paralelo_Info> lista = bus_ParaleloPorCurso.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
             Lista_ParaleloPorCurso.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            cargar_combos();
             return View(model);
         }
 

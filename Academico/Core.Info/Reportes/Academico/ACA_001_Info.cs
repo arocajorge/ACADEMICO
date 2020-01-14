@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Info.Reportes
+namespace Core.Info.Reportes.Academico
 {
     public class ACA_001_Info
     {
@@ -53,5 +53,31 @@ namespace Core.Info.Reportes
         public string Descripcion { get; set; }
         public int IdAnio { get; set; }
         public string Observacion { get; set; }
+
+        #region Familiares
+        //public int IdEmpresa { get; set; }
+        //public decimal IdAlumno { get; set; }
+        public int Secuencia { get; set; }
+        public int IdCatalogoPAREN { get; set; }
+        public string NomInstruccion { get; set; }
+        public string NomCatalogo { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string NomEstadoCivil { get; set; }
+        public string Direccion { get; set; }
+        public string EmpresaTrabajo { get; set; }
+        public string NomProfesion { get; set; }
+        public string Correo { get; set; }
+        public string Celular { get; set; }
+        //public Nullable<double> SueldoPadre { get; set; }
+        public Nullable<double> Sueldo { get; set; }
+        public Nullable<double> OtrosIngresos { get; set; }
+        public string VehiculoPropio { get; set; }
+        public string Marca { get; set; }
+        public string Modelo { get; set; }
+        public Nullable<int> AniosServicio { get; set; }
+        public Nullable<int> AnioVehiculo { get; set; }
+        public string Titulo { get; set; }
+        #endregion
     }
 }
