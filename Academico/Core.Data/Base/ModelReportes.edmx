@@ -59,7 +59,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
           <Property Name="TipoDiscapacidadAlumno" Type="varchar" MaxLength="25" />
           <Property Name="SueldoPadre" Type="float" />
           <Property Name="SueldoMadre" Type="float" />
-          <Property Name="OtroIngreso" Type="float" />
           <Property Name="GastoAlimentacion" Type="float" />
           <Property Name="GastoEducacion" Type="float" />
           <Property Name="GastoServicioBasico" Type="float" />
@@ -69,7 +68,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
           <Property Name="OtroGasto" Type="float" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdAnio" Type="int" Nullable="false" />
-          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="OtroIngresoPadre" Type="float" />
+          <Property Name="OtroIngresoMadre" Type="float" />
         </EntityType>
         <EntityContainer Name="ModelReportesStoreContainer">
           <EntitySet Name="VWACA_001" EntityType="Self.VWACA_001" store:Type="Views" store:Schema="web">
@@ -108,7 +108,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
     [VWACA_001].[TipoDiscapacidadAlumno] AS [TipoDiscapacidadAlumno], 
     [VWACA_001].[SueldoPadre] AS [SueldoPadre], 
     [VWACA_001].[SueldoMadre] AS [SueldoMadre], 
-    [VWACA_001].[OtroIngreso] AS [OtroIngreso], 
     [VWACA_001].[GastoAlimentacion] AS [GastoAlimentacion], 
     [VWACA_001].[GastoEducacion] AS [GastoEducacion], 
     [VWACA_001].[GastoServicioBasico] AS [GastoServicioBasico], 
@@ -118,7 +117,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
     [VWACA_001].[OtroGasto] AS [OtroGasto], 
     [VWACA_001].[Descripcion] AS [Descripcion], 
     [VWACA_001].[IdAnio] AS [IdAnio], 
-    [VWACA_001].[Observacion] AS [Observacion]
+    [VWACA_001].[OtroIngresoPadre] AS [OtroIngresoPadre], 
+    [VWACA_001].[OtroIngresoMadre] AS [OtroIngresoMadre]
     FROM [web].[VWACA_001] AS [VWACA_001]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -181,7 +181,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
           <Property Name="TipoDiscapacidadAlumno" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="SueldoPadre" Type="Double" />
           <Property Name="SueldoMadre" Type="Double" />
-          <Property Name="OtroIngreso" Type="Double" />
           <Property Name="GastoAlimentacion" Type="Double" />
           <Property Name="GastoEducacion" Type="Double" />
           <Property Name="GastoServicioBasico" Type="Double" />
@@ -191,7 +190,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
           <Property Name="OtroGasto" Type="Double" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OtroIngresoPadre" Type="Double" />
+          <Property Name="OtroIngresoMadre" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -202,7 +202,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
           <EntitySetMapping Name="VWACA_001">
             <EntityTypeMapping TypeName="ModelReportes.VWACA_001">
               <MappingFragment StoreEntitySet="VWACA_001">
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="OtroIngresoMadre" ColumnName="OtroIngresoMadre" />
+                <ScalarProperty Name="OtroIngresoPadre" ColumnName="OtroIngresoPadre" />
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />
@@ -212,7 +213,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
                 <ScalarProperty Name="GastoServicioBasico" ColumnName="GastoServicioBasico" />
                 <ScalarProperty Name="GastoEducacion" ColumnName="GastoEducacion" />
                 <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
-                <ScalarProperty Name="OtroIngreso" ColumnName="OtroIngreso" />
                 <ScalarProperty Name="SueldoMadre" ColumnName="SueldoMadre" />
                 <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
                 <ScalarProperty Name="TipoDiscapacidadAlumno" ColumnName="TipoDiscapacidadAlumno" />

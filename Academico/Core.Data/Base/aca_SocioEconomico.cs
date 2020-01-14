@@ -25,7 +25,8 @@ namespace Core.Data.Base
         public string NombreHermanos { get; set; }
         public double SueldoPadre { get; set; }
         public double SueldoMadre { get; set; }
-        public double OtroIngreso { get; set; }
+        public double OtroIngresoPadre { get; set; }
+        public double OtroIngresoMadre { get; set; }
         public double GastoAlimentacion { get; set; }
         public double GastoEducacion { get; set; }
         public double GastoServicioBasico { get; set; }

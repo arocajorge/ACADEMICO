@@ -19,6 +19,8 @@ namespace Core.Data.Base
         public int IdBodega { get; set; }
         public decimal IdCbteVta { get; set; }
         public int Secuencia { get; set; }
+        public Nullable<int> aca_IdAnio { get; set; }
+        public Nullable<int> aca_IdPlantilla { get; set; }
         public Nullable<int> aca_IdPeriodo { get; set; }
         public Nullable<int> aca_IdRubro { get; set; }
         public decimal IdProducto { get; set; }

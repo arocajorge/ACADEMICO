@@ -55,7 +55,8 @@ namespace Core.Data.Academico
                         NombreHermanos = Entity.NombreHermanos,
                         SueldoPadre = Entity.SueldoPadre,
                         SueldoMadre = Entity.SueldoMadre,
-                        OtroIngreso = Entity.OtroIngreso,
+                        OtroIngresoMadre = Entity.OtroIngresoMadre,
+                        OtroIngresoPadre = Entity.OtroIngresoPadre,
                         GastoAlimentacion = Entity.GastoAlimentacion,
                         GastoEducacion = Entity.GastoEducacion,
                         GastoServicioBasico = Entity.GastoServicioBasico,
@@ -105,7 +106,8 @@ namespace Core.Data.Academico
                         NombreHermanos = Entity.NombreHermanos,
                         SueldoPadre = Entity.SueldoPadre,
                         SueldoMadre = Entity.SueldoMadre,
-                        OtroIngreso = Entity.OtroIngreso,
+                        OtroIngresoMadre = Entity.OtroIngresoMadre,
+                        OtroIngresoPadre = Entity.OtroIngresoPadre,
                         GastoAlimentacion = Entity.GastoAlimentacion,
                         GastoEducacion = Entity.GastoEducacion,
                         GastoServicioBasico = Entity.GastoServicioBasico,
@@ -146,7 +148,8 @@ namespace Core.Data.Academico
                         NombreHermanos = info.NombreHermanos,
                         SueldoPadre = info.SueldoPadre,
                         SueldoMadre = info.SueldoMadre,
-                        OtroIngreso = info.OtroIngreso,
+                        OtroIngresoMadre = info.OtroIngresoMadre,
+                        OtroIngresoPadre = info.OtroIngresoPadre,
                         GastoAlimentacion = info.GastoAlimentacion,
                         GastoEducacion = info.GastoEducacion,
                         GastoServicioBasico = info.GastoServicioBasico,
@@ -195,7 +198,8 @@ namespace Core.Data.Academico
                     Entity.NombreHermanos = info.NombreHermanos;
                     Entity.SueldoPadre = info.SueldoPadre;
                     Entity.SueldoMadre = info.SueldoMadre;
-                    Entity.OtroIngreso = info.OtroIngreso;
+                    Entity.OtroIngresoMadre = info.OtroIngresoMadre;
+                    Entity.OtroIngresoPadre = info.OtroIngresoPadre;
                     Entity.GastoAlimentacion = info.GastoAlimentacion;
                     Entity.GastoEducacion = info.GastoEducacion;
                     Entity.GastoServicioBasico = info.GastoServicioBasico;

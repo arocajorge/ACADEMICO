@@ -31,5 +31,7 @@ namespace Core.Data.Base
         public decimal Cambio { get; set; }
         public decimal ValorProntoPago { get; set; }
         public Nullable<System.DateTime> FechaProntoPago { get; set; }
+        public Nullable<int> IdAnio { get; set; }
+        public Nullable<int> IdPlantilla { get; set; }
     }
 }

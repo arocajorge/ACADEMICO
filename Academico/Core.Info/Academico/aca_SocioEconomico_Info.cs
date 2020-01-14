@@ -29,8 +29,12 @@ namespace Core.Info.Academico
         public double SueldoPadre { get; set; }
         [Required(ErrorMessage = "El campo sueldo de la madre es obligatorio")]
         public double SueldoMadre { get; set; }
-        [Required(ErrorMessage = "El campo otros ingresos es obligatorio")]
-        public double OtroIngreso { get; set; }
+
+        [Required(ErrorMessage = "El campo otros ingresos madre es obligatorio")]
+        public double OtroIngresoMadre { get; set; }
+        [Required(ErrorMessage = "El campo otros ingresos padre es obligatorio")]
+        public double OtroIngresoPadre { get; set; }
+
         [Required(ErrorMessage = "El campo gastos de alimentación es obligatorio")]
         public double GastoAlimentacion { get; set; }
         [Required(ErrorMessage = "El campo gastos de educación es obligatorio")]
@@ -69,6 +73,7 @@ namespace Core.Info.Academico
         public double TotalIngreso { get; set; }
         public double TotalGasto { get; set; }
         public double Saldo { get; set; }
+   
         #endregion
     }
 }

@@ -48,7 +48,6 @@ namespace Core.Data.Base
         public string TipoDiscapacidadAlumno { get; set; }
         public Nullable<double> SueldoPadre { get; set; }
         public Nullable<double> SueldoMadre { get; set; }
-        public Nullable<double> OtroIngreso { get; set; }
         public Nullable<double> GastoAlimentacion { get; set; }
         public Nullable<double> GastoEducacion { get; set; }
         public Nullable<double> GastoServicioBasico { get; set; }
@@ -58,6 +57,7 @@ namespace Core.Data.Base
         public Nullable<double> OtroGasto { get; set; }
         public string Descripcion { get; set; }
         public int IdAnio { get; set; }
-        public string Observacion { get; set; }
+        public Nullable<double> OtroIngresoPadre { get; set; }
+        public Nullable<double> OtroIngresoMadre { get; set; }
     }
 }

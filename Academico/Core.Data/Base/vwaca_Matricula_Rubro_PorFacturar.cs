@@ -41,5 +41,6 @@ namespace Core.Data.Base
         public Nullable<double> ValorProntoPago { get; set; }
         public Nullable<System.DateTime> FechaProntoPago { get; set; }
         public string Periodo { get; set; }
+        public int IdPlantilla { get; set; }
     }
 }
