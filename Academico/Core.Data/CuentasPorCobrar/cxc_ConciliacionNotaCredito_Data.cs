@@ -178,6 +178,27 @@ namespace Core.Data.CuentasPorCobrar
                     IdCobro_cbr = info.IdCobro
                 });
 
+                Secuencia = 1;
+                foreach (var item in info.ListaDet)
+                {
+                    dbf.fa_notaCreDeb_x_fa_factura_NotaDeb.Add(new fa_notaCreDeb_x_fa_factura_NotaDeb
+                    {
+                        IdEmpresa_nt = info.IdEmpresa,
+                        IdSucursal_nt = info.IdSucursal,
+                        IdBodega_nt = info.IdBodega,
+                        IdNota_nt = info.IdNota,
+
+                        IdEmpresa_fac_nd_doc_mod = info.IdEmpresa,
+                        IdSucursal_fac_nd_doc_mod = info.IdSucursal,
+                        IdBodega_fac_nd_doc_mod = info.IdBodega,
+                        IdCbteVta_fac_nd_doc_mod = item.IdCbteVtaNota,
+                        vt_tipoDoc = item.vt_TipoDoc,
+                        Valor_Aplicado = item.Valor,
+                        fecha_cruce = info.Fecha,
+                        NumDocumento = item.Referencia,
+                        secuencia = Secuencia++
+                    });
+                }
                 
                 #endregion
 
