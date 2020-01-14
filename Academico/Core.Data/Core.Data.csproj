@@ -519,6 +519,12 @@
     <Compile Include="Base\cxc_cobro_x_ct_cbtecble.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\cxc_ConciliacionNotaCredito.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_ConciliacionNotaCreditoDet.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\cxc_Parametro.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
@@ -1372,6 +1378,12 @@
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwcxc_cobro_para_retencion.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcxc_ConciliacionNotaCredito.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcxc_ConciliacionNotaCreditoDet.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwfa_cliente_consulta.cs">

@@ -42,5 +42,9 @@ namespace Core.Data.Base
         public virtual DbSet<vwcxc_cobro_det> vwcxc_cobro_det { get; set; }
         public virtual DbSet<vwcxc_cobro> vwcxc_cobro { get; set; }
         public virtual DbSet<vwcxc_cartera_x_cobrar> vwcxc_cartera_x_cobrar { get; set; }
+        public virtual DbSet<cxc_ConciliacionNotaCredito> cxc_ConciliacionNotaCredito { get; set; }
+        public virtual DbSet<cxc_ConciliacionNotaCreditoDet> cxc_ConciliacionNotaCreditoDet { get; set; }
+        public virtual DbSet<vwcxc_ConciliacionNotaCredito> vwcxc_ConciliacionNotaCredito { get; set; }
+        public virtual DbSet<vwcxc_ConciliacionNotaCreditoDet> vwcxc_ConciliacionNotaCreditoDet { get; set; }
     }
 }
