@@ -40,5 +40,6 @@ namespace Core.Data.Base
         public string DescripcionCuotas { get; set; }
         public Nullable<double> ValorProntoPago { get; set; }
         public Nullable<System.DateTime> FechaProntoPago { get; set; }
+        public string Periodo { get; set; }
     }
 }
