@@ -17,6 +17,7 @@ namespace Core.Data.Academico
         aca_AnioLectivo_Curso_Paralelo_Data odata_curso_paralelo = new aca_AnioLectivo_Curso_Paralelo_Data();
         aca_AnioLectivo_Curso_Documento_Data odata_curso_documento = new aca_AnioLectivo_Curso_Documento_Data();
         aca_AnioLectivo_Curso_Materia_Data odata_curso_materia = new aca_AnioLectivo_Curso_Materia_Data();
+        aca_AnioLectivo_Paralelo_Profesor_Data odata_paralelo_profesor = new aca_AnioLectivo_Paralelo_Profesor_Data();
         aca_Sede_Data odata_sede = new aca_Sede_Data();
         aca_NivelAcademico_Data odata_nivel = new aca_NivelAcademico_Data();
         aca_Jornada_Data odata_jornada = new aca_Jornada_Data();
@@ -446,6 +447,28 @@ namespace Core.Data.Academico
                                                     };
                                                     Context.aca_AnioLectivo_Curso_Materia.Add(Entity_CursoMateria);
                                                 }
+
+                                                //var lst_asignacion_paralelo_profesor = odata_paralelo_profesor.get_list_asignacion(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key)).Where(q => q.seleccionado == true).ToList();
+
+                                                //foreach (var item_cm in lst_asignacion_curso_materia)
+                                                //{
+                                                //    var info_materia = odata_materia.getInfo(info.IdEmpresa, item_cm.IdMateria);
+                                                //    aca_AnioLectivo_Curso_Materia Entity_CursoMateria = new aca_AnioLectivo_Curso_Materia
+                                                //    {
+                                                //        IdEmpresa = item_cm.IdEmpresa,
+                                                //        IdAnio = info.IdAnioApertura,
+                                                //        IdSede = item_cm.IdSede,
+                                                //        IdNivel = item_cm.IdNivel,
+                                                //        IdJornada = item_cm.IdJornada,
+                                                //        IdCurso = item_cm.IdCurso,
+                                                //        IdMateria = item_cm.IdMateria,
+                                                //        NomMateria = info_materia.NomMateria,
+                                                //        NomMateriaGrupo = info_materia.NomMateriaGrupo,
+                                                //        EsObligatorio = info_materia.EsObligatorio,
+                                                //        OrdenMateria = info_materia.OrdenMateria
+                                                //    };
+                                                //    Context.aca_AnioLectivo_Curso_Materia.Add(Entity_CursoMateria);
+                                                //}
 
                                                 var lst_asignacion_curso_documento = odata_curso_documento.get_list_asignacion(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key)).Where(q => q.seleccionado == true).ToList();
 

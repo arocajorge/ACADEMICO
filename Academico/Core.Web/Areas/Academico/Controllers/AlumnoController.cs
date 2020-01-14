@@ -170,7 +170,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 info.info_valido_madre = false;
             }
 
-            if (info.info_persona_padre.pe_cedulaRuc == info.info_persona_madre.pe_cedulaRuc)
+            if (info.info_persona_padre.pe_cedulaRuc!=null && info.info_persona_madre.pe_cedulaRuc!=null && (info.info_persona_padre.pe_cedulaRuc == info.info_persona_madre.pe_cedulaRuc))
             {
                 msg = "No se puede registrar a la misma persona como padre y madre";
                 return false;

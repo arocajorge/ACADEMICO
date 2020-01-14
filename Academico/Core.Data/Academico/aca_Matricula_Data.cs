@@ -349,6 +349,8 @@ namespace Core.Data.Academico
                         }
                     }
 
+                    var lst_AlumnoDocumento = Context.aca_AlumnoDocumento.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).ToList();
+                    Context.aca_AlumnoDocumento.RemoveRange(lst_AlumnoDocumento);
                     if (info.lst_documentos.Count > 0)
                     {
                         foreach (var item in info.lst_documentos)
@@ -358,7 +360,7 @@ namespace Core.Data.Academico
                                 IdEmpresa = item.IdEmpresa,
                                 IdAlumno = item.IdAlumno,
                                 IdDocumento = item.IdDocumento,
-                                EnArchivo = true
+                                EnArchivo = item.EnArchivo
                             };
                             Context.aca_AlumnoDocumento.Add(Entity_DetDoc);
                         }

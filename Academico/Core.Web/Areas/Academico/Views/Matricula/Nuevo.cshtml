@@ -9,11 +9,6 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script>
-    $(function () 
-    {
-        $("#MensajeError").hide();
-    });
-
     var selectedIDs;
     function OnBeginCallback(s, e) {
         //Pass all selected keys to GridView callback action
@@ -132,7 +127,7 @@
             </div>
         </div>
     }
-    <div class="row" id="MensajeError">
+    <div class="row" id="MensajeError" hidden>
         <div class="col-md-12">
             <div class="alert alert-warning alert-dismissible">
                 <h4>

@@ -69,6 +69,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
           <Property Name="OtroGasto" Type="float" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdAnio" Type="int" Nullable="false" />
+          <Property Name="Observacion" Type="varchar(max)" />
         </EntityType>
         <EntityContainer Name="ModelReportesStoreContainer">
           <EntitySet Name="VWACA_001" EntityType="Self.VWACA_001" store:Type="Views" store:Schema="web">
@@ -116,7 +117,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
     [VWACA_001].[GastoPrestamo] AS [GastoPrestamo], 
     [VWACA_001].[OtroGasto] AS [OtroGasto], 
     [VWACA_001].[Descripcion] AS [Descripcion], 
-    [VWACA_001].[IdAnio] AS [IdAnio]
+    [VWACA_001].[IdAnio] AS [IdAnio], 
+    [VWACA_001].[Observacion] AS [Observacion]
     FROM [web].[VWACA_001] AS [VWACA_001]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -189,6 +191,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
           <Property Name="OtroGasto" Type="Double" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -199,6 +202,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene defi
           <EntitySetMapping Name="VWACA_001">
             <EntityTypeMapping TypeName="ModelReportes.VWACA_001">
               <MappingFragment StoreEntitySet="VWACA_001">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />

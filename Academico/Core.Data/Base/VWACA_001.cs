@@ -58,5 +58,6 @@ namespace Core.Data.Base
         public Nullable<double> OtroGasto { get; set; }
         public string Descripcion { get; set; }
         public int IdAnio { get; set; }
+        public string Observacion { get; set; }
     }
 }
