@@ -38,7 +38,7 @@
         settings.SettingsBehavior.AllowSelectByRowClick = true;
         settings.Settings.ShowFooter = true;
 
-        settings.Columns.Add("IdCbte_vta_nota", "ID").Width = Unit.Percentage(10);
+        //settings.Columns.Add("IdCbte_vta_nota", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add("NomCliente", "Cliente").Width = Unit.Percentage(20);
         settings.Columns.Add("vt_NumDocumento", "# Documento").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
@@ -47,14 +47,7 @@
             column.FieldName = "vt_fecha";
             column.Caption = "Fecha";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-        });
-        settings.Columns.Add(column =>
-        {
-            column.Width = Unit.Percentage(10);
-            column.FieldName = "vt_fech_venc";
-            column.Caption = "Fecha vcto.";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-        });
+        });        
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
@@ -78,13 +71,6 @@
             column.Caption = "Total";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
-        //settings.Columns.Add(column =>
-        //{
-        //    column.Width = Unit.Percentage(10);
-        //    column.FieldName = "ProntoPago";
-        //    column.Caption = "Pronto Pago";
-        //    column.PropertiesEdit.DisplayFormatString = "{0:N2}";
-        //});
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
@@ -92,6 +78,21 @@
             column.Caption = "Saldo";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(10);
+            column.FieldName = "ValorProntoPago";
+            column.Caption = "Pronto Pago";
+            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(10);
+            column.FieldName = "FechaProntoPago";
+            column.Caption = "Fecha pronto pago";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+        });
+        
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "vt_total").DisplayFormat = "{0:c2}";
         //settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "ProntoPago").DisplayFormat = "{0:c2}";
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Saldo").DisplayFormat = "{0:c2}";

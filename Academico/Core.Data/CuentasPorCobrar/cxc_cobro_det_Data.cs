@@ -8,37 +8,46 @@ namespace Core.Data.CuentasPorCobrar
 {
     public class cxc_cobro_det_Data
     {
-        public List<cxc_cobro_det_Info> get_list_cartera(int IdEmpresa, int IdSucursal, decimal IdCliente)
+        public List<cxc_cobro_det_Info> get_list_cartera(int IdEmpresa, int IdSucursal, decimal IdCliente, bool FiltrarPorCliente)
         {
             try
             {
-                List<cxc_cobro_det_Info> Lista;
+                List<cxc_cobro_det_Info> Lista = new List<cxc_cobro_det_Info>();
 
                 using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
                 {
-                    Lista = Context.vwcxc_cartera_x_cobrar.Where(q=> q.IdEmpresa == IdEmpresa
+                    var lst = Context.vwcxc_cartera_x_cobrar.Where(q=> q.IdEmpresa == IdEmpresa
                              && q.IdSucursal == IdSucursal
-                             && q.IdCliente == IdCliente
-                             && q.Saldo > 0
-                             ).Select(q=> new cxc_cobro_det_Info
-                             {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdSucursal = q.IdSucursal,
-                                 IdBodega_Cbte = q.IdBodega,
-                                 dc_TipoDocumento = q.vt_tipoDoc,
-                                 vt_NumDocumento = q.vt_NunDocumento,
-                                 Observacion = q.Referencia,
-                                 IdCbte_vta_nota = q.IdComprobante,
-                                 vt_fecha = q.vt_fecha,
-                                 vt_total = q.vt_total,
-                                 Saldo = q.Saldo,                                 
-                                 vt_Subtotal = q.vt_Subtotal,
-                                 vt_iva = q.vt_iva,
-                                 vt_fech_venc = q.vt_fech_venc,
-                                 dc_ValorRetFu = q.dc_ValorRetFu,
-                                 dc_ValorRetIva = q.dc_ValorRetIva,
-                                 NomCliente = q.NomCliente
-                             }).ToList();
+                             
+                             && q.IdCliente == (FiltrarPorCliente == true ? IdCliente : q.IdCliente)
+                             && q.IdAlumno == (FiltrarPorCliente == false ? IdCliente : q.IdAlumno)
+
+                             && q.Saldo > 0).ToList();
+
+                    foreach (var q in lst)
+                    {
+                        Lista.Add(new cxc_cobro_det_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdSucursal = q.IdSucursal,
+                            IdBodega_Cbte = q.IdBodega,
+                            dc_TipoDocumento = q.vt_tipoDoc,
+                            vt_NumDocumento = q.vt_NunDocumento,
+                            Observacion = q.Referencia,
+                            IdCbte_vta_nota = q.IdComprobante,
+                            vt_fecha = q.vt_fecha,
+                            vt_total = q.vt_total,
+                            Saldo = q.Saldo,
+                            vt_Subtotal = q.vt_Subtotal,
+                            vt_iva = q.vt_iva,
+                            vt_fech_venc = q.vt_fech_venc,
+                            dc_ValorRetFu = q.dc_ValorRetFu,
+                            dc_ValorRetIva = q.dc_ValorRetIva,
+                            NomCliente = q.NomCliente,
+                            ValorProntoPago = q.ValorProntoPago,
+                            FechaProntoPago = q.FechaProntoPago
+                        });
+                    }
 
                     Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento + "-" + q.IdBodega_Cbte.ToString() + "-" + q.IdCbte_vta_nota.ToString(); q.dc_ValorPago = Convert.ToDouble(q.Saldo); });
                 }
@@ -50,49 +59,7 @@ namespace Core.Data.CuentasPorCobrar
                 throw;
             }
         }
-
-        public List<cxc_cobro_det_Info> get_list_cartera_academico(int IdEmpresa, int IdSucursal, decimal IdCliente, decimal IdAlumno)
-        {
-            try
-            {
-                List<cxc_cobro_det_Info> Lista;
-
-                using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
-                {
-                    Lista = Context.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa
-                             && q.IdSucursal == IdSucursal
-                             && q.IdAlumno == IdAlumno
-                             && q.Saldo > 0
-                             ).Select(q => new cxc_cobro_det_Info
-                             {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdSucursal = q.IdSucursal,
-                                 IdBodega_Cbte = q.IdBodega,
-                                 dc_TipoDocumento = q.vt_tipoDoc,
-                                 vt_NumDocumento = q.vt_NunDocumento,
-                                 Observacion = q.Referencia,
-                                 IdCbte_vta_nota = q.IdComprobante,
-                                 vt_fecha = q.vt_fecha,
-                                 vt_total = q.vt_total,
-                                 Saldo = q.Saldo,
-                                 vt_Subtotal = q.vt_Subtotal,
-                                 vt_iva = q.vt_iva,
-                                 vt_fech_venc = q.vt_fech_venc,
-                                 dc_ValorRetFu = q.dc_ValorRetFu,
-                                 dc_ValorRetIva = q.dc_ValorRetIva,
-                                 NomCliente = q.NomCliente
-                             }).ToList();
-
-                    Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento + "-" + q.IdBodega_Cbte.ToString() + "-" + q.IdCbte_vta_nota.ToString(); q.dc_ValorPago = Convert.ToDouble(q.Saldo); });
-                }
-
-                return Lista;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        
         public List<cxc_cobro_det_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCobro)
         {
             try

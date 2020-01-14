@@ -433,9 +433,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         #endregion
 
         #region Json
-        public JsonResult GetListFacturas_PorIngresar(decimal IdTransaccionSession = 0, int IdEmpresa = 0, int IdSucursal = 0, decimal IdCliente = 0, decimal IdAlumno = 0)
+        public JsonResult GetListFacturas_PorIngresar(decimal IdTransaccionSession = 0, int IdEmpresa = 0, int IdSucursal = 0, decimal IdAlumno = 0)
         {
-            var lst = bus_det.get_list_cartera_academico(IdEmpresa, IdSucursal, IdCliente, IdAlumno);
+            var lst = bus_det.get_list_cartera(IdEmpresa, IdSucursal, IdAlumno, false);
 
             List_x_Cruzar.set_list(lst, IdTransaccionSession);
 
