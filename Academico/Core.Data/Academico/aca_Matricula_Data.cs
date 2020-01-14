@@ -408,6 +408,8 @@ namespace Core.Data.Academico
                         }
                     }
                     #endregion
+
+                    Context.SaveChanges();
                 }
 
                 return true;
