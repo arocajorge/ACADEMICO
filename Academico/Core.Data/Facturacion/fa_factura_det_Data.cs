@@ -66,42 +66,43 @@ namespace Core.Data.Facturacion
         {
             try
             {
-                List<fa_factura_det_Info> Lista;
+                List<fa_factura_det_Info> Lista = new List<fa_factura_det_Info>();
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = (from q in Context.vwaca_Matricula_Rubro_PorFacturar
-                             where q.IdEmpresa == IdEmpresa
-                             && q.IdAlumno == IdAlumno
-                             select new fa_factura_det_Info
-                             {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdProducto = q.IdProducto,
-                                 vt_cantidad = 1,
-                                 pr_descripcion = q.pr_descripcion,
-                                 vt_DescUnitario = 0,
-                                 vt_PrecioFinal = q.Subtotal??0,
-                                 vt_por_iva = q.Porcentaje??0,
-                                 vt_Precio = q.Subtotal??0,
-                                 vt_Subtotal = q.Subtotal??0,
-                                 vt_iva = q.ValorIVA??0,
-                                 vt_total = q.Total??0,
-                                 IdCod_Impuesto_Iva = q.IdCod_Impuesto_Iva,
-                                 IdMatricula = q.IdMatricula,
-                                 aca_IdPeriodo = q.IdPeriodo,
-                                 aca_IdRubro = q.IdRubro,
-                                 AplicaProntoPago = q.AplicaProntoPago,
-                                 IdAnio = q.IdAnio,
-                                 EnMatricula = q.EnMatricula,
-                                 FechaDesde = q.FechaDesde,
-                                 FechaProntoPago = q.FechaProntoPago,
-                                 ValorProntoPago = q.ValorProntoPago,
-                                 vt_detallexItems = q.DescripcionCuotas
-                             }).ToList();
+                    var lst = Context.vwaca_Matricula_Rubro_PorFacturar.Where(q => q.IdEmpresa == IdEmpresa
+                             && q.IdAlumno == IdAlumno).ToList();
+
+                    foreach (var q in lst)
+                    {
+                        Lista.Add(new fa_factura_det_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdProducto = q.IdProducto,
+                            vt_cantidad = 1,
+                            pr_descripcion = q.pr_descripcion,
+                            vt_DescUnitario = 0,
+                            vt_PrecioFinal = q.Subtotal ?? 0,
+                            vt_por_iva = q.Porcentaje ?? 0,
+                            vt_Precio = q.Subtotal ?? 0,
+                            vt_Subtotal = q.Subtotal ?? 0,
+                            vt_iva = q.ValorIVA ?? 0,
+                            vt_total = q.Total ?? 0,
+                            IdCod_Impuesto_Iva = q.IdCod_Impuesto_Iva,
+                            IdMatricula = q.IdMatricula,
+                            aca_IdPeriodo = q.IdPeriodo,
+                            aca_IdRubro = q.IdRubro,
+                            AplicaProntoPago = q.AplicaProntoPago,
+                            IdAnio = q.IdAnio,
+                            EnMatricula = q.EnMatricula,
+                            FechaDesde = q.FechaDesde,
+                            FechaProntoPago = q.FechaProntoPago,
+                            ValorProntoPago = q.ValorProntoPago,
+                            vt_detallexItems = q.DescripcionCuotas,
+                            Periodo = q.Periodo,
+                            IdString = q.IdEmpresa.ToString("0000") + q.IdMatricula.ToString("00000000") + q.IdPeriodo.ToString("00000000") + q.IdRubro.ToString("00000000")
+                    });
+                    
                 }
-                Lista.ForEach(V =>
-                {
-                    V.IdString = Convert.ToInt32(V.IdEmpresa).ToString("00") + Convert.ToInt32(V.IdMatricula).ToString("00000000") + Convert.ToInt32(V.aca_IdPeriodo).ToString("00000000") + Convert.ToInt32(V.aca_IdRubro).ToString("00000000");
-                });
                 return Lista;
             }
             catch (Exception)

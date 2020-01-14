@@ -51,6 +51,7 @@ namespace Core.Info.Facturacion
         public bool EnMatricula { get; set; }
         public System.DateTime FechaDesde { get; set; }
         public DateTime? FechaProntoPago { get; set; }
+        public string Periodo { get; set; }
         #endregion
 
     }
