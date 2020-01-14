@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@ViewBag.Title - Fixed ERP</title>
+    <title>@ViewBag.Title - Fixed Académico</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -42,20 +42,43 @@
     <link rel="stylesheet" href="~/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Bootstrap DatePicker -->
     <script src="~/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="~/Scripts/moment.min.js"></script>
     <script src="~/Scripts/ScriptsGenerales.js"></script>
-    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/moment.min.js"></script>
+    @*<script src="~/bower_DevExpress/jquery/dist/jquery.min.js"></script>*@
+    <link href="~/bower_DevExpress/jqueryui/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script src="~/bower_DevExpress/jqueryui/jquery-ui.js"></script>
+    <script src="~/bower_DevExpress/cldrjs/dist/cldr.js"></script>
+    <script src="~/bower_DevExpress/cldrjs/dist/cldr/event.js"></script>
+    <script src="~/bower_DevExpress/cldrjs/dist/cldr/supplemental.js"></script>
+    <script src="~/bower_DevExpress/globalize-1.3.0/dist/globalize-runtime.js"></script>
+    <script src="~/bower_DevExpress/globalize-1.3.0/dist/globalize.js"></script>
+    <script src="~/bower_DevExpress/globalize-1.3.0/dist/globalize/currency.js"></script>
+    <script src="~/bower_DevExpress/globalize-1.3.0/dist/globalize/number.js"></script>
+    <script src="~/bower_DevExpress/globalize-1.3.0/dist/globalize/date.js"></script>
+    <script src="~/bower_DevExpress/globalize-1.3.0/dist/globalize/message.js"></script>
+    <script src="~/bower_DevExpress/globalize-1.3.0/dist/globalize/plural.js"></script>
+    <script src="~/bower_DevExpress/globalize-1.3.0/dist/globalize/relative-time.js"></script>
+    <script src="~/bower_DevExpress/globalize-1.3.0/dist/globalize/unit.js"></script>
+
+    <script src="~/bower_DevExpress/knockout/dist/knockout.js"></script>
+    <script src="~/bower_DevExpress/ace-builds/src/ace.js"></script>
+    <script src="~/bower_DevExpress/ace-builds/src/ext-language_tools.js"></script>
+    @*RenderSection("scripts", required: false)*@
     @Html.DevExpress().GetStyleSheets(
-           new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
-           new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
-           new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
-           new StyleSheet { ExtensionSuite = ExtensionSuite.TreeList }
-       )
+            new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+            new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+            new StyleSheet { ExtensionSuite = ExtensionSuite.GridView },
+            new StyleSheet { ExtensionSuite = ExtensionSuite.Report },
+            new StyleSheet { ExtensionSuite = ExtensionSuite.PivotGrid }
+
+        )
     @Html.DevExpress().GetScripts(
             new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
             new Script { ExtensionSuite = ExtensionSuite.Editors },
             new Script { ExtensionSuite = ExtensionSuite.GridView },
-            new Script { ExtensionSuite = ExtensionSuite.TreeList }
+            new Script { ExtensionSuite = ExtensionSuite.Report },
+            new Script { ExtensionSuite = ExtensionSuite.PivotGrid }
+
         )
 </head>
 <body class="fixed skin-blue layout-top-nav">
@@ -65,7 +88,7 @@
             <nav class="navbar navbar-inverse navbar-static-top" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; padding: 0 15px; height: 50px; font-size: 25px;line-height: 50px; font-weight: 300;">
                 <div class="container">
                     <a class="navbar-brand text-center center-block" href="#myModal" data-toggle="modal">
-                        <span class="logo-lg"><strong>Fixed</strong> ERP</span>
+                        <span class="logo-lg"><strong>Fixed</strong> Académico</span>
                     </a>
                 </div>
             </nav>
@@ -89,14 +112,14 @@
                             </div>
                             <div class="modal-body">
                                 @Html.DevExpress().TreeView(settings =>
-                                {
-                                settings.Name = "treeViewMenu";
-                                settings.EnableHotTrack = true;
-                                var Nodes = new List<Core.Info.Academico.aca_Menu_x_seg_usuario_Info>
-                                    ();
-                                    Core.Web.Areas.Academico.Controllers.MenuPorSedePorUsuarioController.CreateTreeViewNodesRecursive(Nodes, settings.Nodes, 0, (Core.Web.Helps.SessionFixed.IdEmpresa == null ? 0 : Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa)), (Core.Web.Helps.SessionFixed.IdSede == null ? 0 : Convert.ToInt32(Core.Web.Helps.SessionFixed.IdSede)), string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) ? "" : Core.Web.Helps.SessionFixed.IdUsuario);
-                                    }).GetHtml()
-</div>
+                           {
+                               settings.Name = "treeViewMenu";
+                               settings.EnableHotTrack = true;
+                               var Nodes = new List<Core.Info.Academico.aca_Menu_x_seg_usuario_Info>
+                                   ();
+                               Core.Web.Areas.Academico.Controllers.MenuPorSedePorUsuarioController.CreateTreeViewNodesRecursive(Nodes, settings.Nodes, 0, (Core.Web.Helps.SessionFixed.IdEmpresa == null ? 0 : Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa)), (Core.Web.Helps.SessionFixed.IdSede == null ? 0 : Convert.ToInt32(Core.Web.Helps.SessionFixed.IdSede)), string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) ? "" : Core.Web.Helps.SessionFixed.IdUsuario);
+                           }).GetHtml()
+                            </div>
                             <div class="modal-footer">
                                 <a class="btn btn-danger" href="@Url.Action("Login","Account",new { Area = "" },null)">Cerrar sesión @Session["IdUsuario"]</a>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
