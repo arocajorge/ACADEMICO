@@ -247,6 +247,17 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             return Json(IdCliente, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult SetValores(double SubtotalConDscto = 0, string IdCod_Impuesto_IVA = "")
+        {
+            double ValorIVA = 0;
+            double ValorTotal = 0;
+            var info_impuesto = bus_impuesto.get_info(IdCod_Impuesto_IVA);
+
+            ValorIVA = Math.Round((SubtotalConDscto * (info_impuesto.porcentaje / 100)), 2, MidpointRounding.AwayFromZero);
+            ValorTotal = Math.Round((SubtotalConDscto + ValorIVA), 2, MidpointRounding.AwayFromZero);
+
+            return Json(new { IVA = ValorIVA, Total = ValorTotal }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
         #region Grillas de cruce
         public ActionResult GridViewPartial_CruceND_x_cruzar()
@@ -372,6 +383,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             var lst_tipo_nota = bus_tipo_nota.get_list(model.IdEmpresa, "D", false);
             ViewBag.lst_tipo_nota = lst_tipo_nota;
+
+            var lst_impuesto = bus_impuesto.get_list("IVA", false);
+            ViewBag.lst_impuesto = lst_impuesto;
         }
         private bool validar(fa_notaCreDeb_Info i_validar, ref string msg)
         {
@@ -381,23 +395,6 @@ namespace Core.Web.Areas.Facturacion.Controllers
             {
                 return false;
             }
-            if (i_validar.lst_det.Count == 0)
-            {
-                msg = "No ha ingresado registros en el detalle";
-                return false;
-            }
-            if (i_validar.lst_det.Where(q => q.sc_cantidad == 0).Count() > 0)
-            {
-                msg = "Existen registros con cantidad 0 en el detalle";
-                return false;
-            }
-            if (i_validar.lst_det.Where(q => q.IdProducto == 0).Count() > 0)
-            {
-                msg = "Existen registros sin producto en el detalle";
-                return false;
-            }
-
-            i_validar.lst_cruce.ForEach(q => q.Valor_Aplicado = 0);
 
             i_validar.IdBodega = (int)bus_punto_venta.get_info(i_validar.IdEmpresa, i_validar.IdSucursal, Convert.ToInt32(i_validar.IdPuntoVta)).IdBodega;
             i_validar.IdUsuario = SessionFixed.IdUsuario;
@@ -441,6 +438,74 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 i_validar.NumNota_Impresa = null;
             }
 
+            #region Resumen
+            var info_ImpuestoIVA = bus_impuesto.get_info(i_validar.info_resumen.IdCod_Impuesto_IVA);
+            var Descuento = 0;
+            var ValorIVA = Math.Round(i_validar.info_resumen.ValorIVA, 2, MidpointRounding.AwayFromZero);
+            var SubtotalIVASinDscto = Math.Round(i_validar.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
+            var SubtotalSinIVASinDscto = Math.Round(i_validar.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
+            var SubtotalIVAConDscto = Math.Round((info_ImpuestoIVA.porcentaje > 0 ? i_validar.info_resumen.SubtotalConDscto : 0), 2, MidpointRounding.AwayFromZero);
+            var SubtotalSinIVAConDscto = Math.Round((info_ImpuestoIVA.porcentaje == 0 ? i_validar.info_resumen.SubtotalConDscto : 0), 2, MidpointRounding.AwayFromZero);
+            var SubtotalSinDscto = Math.Round(i_validar.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
+            var SubtotalConDscto = Math.Round(i_validar.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
+            var Total = Math.Round(i_validar.info_resumen.Total, 2, MidpointRounding.AwayFromZero);
+            decimal PorIVA = Convert.ToDecimal(info_ImpuestoIVA.porcentaje);
+
+            i_validar.info_resumen = new fa_notaCreDeb_resumen_Info
+            {
+                IdEmpresa = i_validar.IdEmpresa,
+                IdSucursal = i_validar.IdSucursal,
+                IdBodega = i_validar.IdBodega,
+                IdNota = i_validar.IdNota,
+                SubtotalIVASinDscto = SubtotalIVASinDscto,
+                SubtotalSinIVASinDscto = SubtotalSinIVASinDscto,
+                SubtotalSinDscto = SubtotalSinDscto,
+                Descuento = Descuento,
+                SubtotalIVAConDscto = SubtotalIVAConDscto,
+                SubtotalSinIVAConDscto = SubtotalSinIVAConDscto,
+                SubtotalConDscto = SubtotalConDscto,
+                PorIva = PorIVA,
+                ValorIVA = ValorIVA,
+                Total = Total,
+                IdCod_Impuesto_IVA = info_ImpuestoIVA.IdCod_Impuesto
+            };
+
+            #endregion
+
+            var info_tipo_nota = bus_tipo_nota.get_info(i_validar.IdEmpresa, i_validar.IdTipoNota);
+
+            if (info_tipo_nota != null && info_tipo_nota.IdCtaCble != null && info_tipo_nota.IdCtaCbleCXC != null && info_tipo_nota.IdProducto != null)
+            {
+                var info_detalle = new fa_notaCreDeb_det_Info
+                {
+                    IdEmpresa = i_validar.IdEmpresa,
+                    IdSucursal = i_validar.IdSucursal,
+                    IdBodega = i_validar.IdBodega,
+                    IdNota = i_validar.IdNota,
+                    Secuencia = 1,
+                    IdProducto = Convert.ToDecimal(info_tipo_nota.IdProducto),
+                    sc_cantidad = 1,
+                    sc_cantidad_factura = 1,
+                    sc_Precio = Convert.ToDouble(i_validar.info_resumen.SubtotalConDscto),
+                    sc_descUni = 0,
+                    sc_PordescUni = 0,
+                    sc_precioFinal = Convert.ToDouble(i_validar.info_resumen.SubtotalConDscto),
+                    vt_por_iva = Convert.ToDouble(i_validar.info_resumen.PorIva),
+                    sc_iva = Convert.ToDouble(i_validar.info_resumen.ValorIVA),
+                    IdCod_Impuesto_Iva = i_validar.info_resumen.IdCod_Impuesto_IVA,
+                    sc_subtotal = Convert.ToDouble(i_validar.info_resumen.SubtotalConDscto),
+                    sc_total = Convert.ToDouble(i_validar.info_resumen.Total),
+                    IdCentroCosto = null,
+                    IdPunto_Cargo = null,
+                    IdPunto_cargo_grupo = null
+                };
+            }
+            else
+            {
+                msg = "Faltan parámetros por configurar en el tipo de nota";
+                return false;
+            }
+
             return true;
         }
         #endregion
@@ -465,6 +530,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 CreDeb = "D",
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
+            model.info_resumen = new fa_notaCreDeb_resumen_Info();
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             List_cruce.set_list(model.lst_cruce, model.IdTransaccionSession);
             cargar_combos(model);

@@ -271,7 +271,7 @@
             GridView_CruceNC_x_cruzar.PerformCallback();
             GridView_CruceNC_x_cruzar.UnselectRows();
             GridView_CruceNC.PerformCallback();
-            GridView_notaCredito_det.PerformCallback();
+            //GridView_notaCredito_det.PerformCallback();
             $("#FacturasModal").modal("hide");
     }
 
@@ -473,15 +473,22 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="">IVA</label>
-                    @Html.TextBoxFor(q => q.info_resumen.ValorIVA, new { @class = "form-control", @id = "ValorIVA" })
+                    <label for="IdPuntoVta">Impuesto IVA*</label>
+                    @Html.DropDownListFor(q => q.info_resumen.IdCod_Impuesto_IVA, new SelectList(ViewBag.lst_impuesto, "IdCod_Impuesto", "nom_impuesto"), new { @class = "form-control", @id = "IdCod_Impuesto_IVA" })
+                    @Html.ValidationMessageFor(q => q.info_resumen.IdCod_Impuesto_IVA, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="">Valor IVA</label>
+                    @Html.TextBoxFor(q => q.info_resumen.ValorIVA, new { @class = "form-control", @id = "ValorIVA", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.info_resumen.ValorIVA, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdPuntoVta">Total*</label>
-                    @Html.TextBoxFor(q => q.info_resumen.Total, new { @class = "form-control", @id = "Total" })
+                    @Html.TextBoxFor(q => q.info_resumen.Total, new { @class = "form-control", @id = "Total", @readonly = "readonly" })
                     @Html.ValidationMessageFor(q => q.info_resumen.Total, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -625,3 +632,38 @@
     }
 }
 
+<script type="text/javascript">
+    $(function () {
+        SetValores();
+    });
+
+    $("#SubtotalConDscto").change(function () {
+        SetValores();
+    });
+
+    $("#IdCod_Impuesto_IVA").change(function () {
+        SetValores();
+    });
+
+    function SetValores() {
+        var datos = {
+            SubtotalConDscto: $("#SubtotalConDscto").val(),
+            IdCod_Impuesto_IVA: $("#IdCod_Impuesto_IVA").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetValores", "NotaDeCreditoFacturacion",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#ValorIVA").val(data.IVA);
+                $("#Total").val(data.Total);
+            },
+            error: function (error) {
+
+            }
+        });
+    }
+</script>

@@ -49,10 +49,22 @@
 
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(15);
             column.FieldName = "NumDocumento";
             column.Caption = "# Doc reemplazo";
             column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(15);
+            column.FieldName = "fecha_cruce";
+            column.Caption = "Fecha";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.EditorProperties().DateEdit(p =>
+            {
+                p.DisplayFormatString = "{0:dd/MM/yyyy}";
+            });
         });
         settings.Columns.Add(column =>
         {

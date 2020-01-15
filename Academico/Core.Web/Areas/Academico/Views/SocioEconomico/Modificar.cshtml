@@ -147,9 +147,16 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="IdEmpresa">Otros ingresos*</label>
-                    @Html.TextBoxFor(q => q.OtroIngreso, new { @class = "form-control", @id = "OtroIngreso" })
-                    @Html.ValidationMessageFor(m => m.OtroIngreso, "", new { @class = "text-danger" })
+                    <label for="IdEmpresa">Otros ingresos Padre*</label>
+                    @Html.TextBoxFor(q => q.OtroIngresoPadre, new { @class = "form-control", @id = "OtroIngresoPadre" })
+                    @Html.ValidationMessageFor(m => m.OtroIngresoPadre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Otros ingresos Madre*</label>
+                    @Html.TextBoxFor(q => q.OtroIngresoMadre, new { @class = "form-control", @id = "OtroIngresoMadre" })
+                    @Html.ValidationMessageFor(m => m.OtroIngresoMadre, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -316,7 +323,11 @@
         $("#SueldoMadre").change(function () {
             sumar_ingresos();
         });
-        $("#OtroIngreso").change(function () {
+        $("#OtroIngresoPadre").change(function () {
+            sumar_ingresos();
+        });
+
+        $("#OtroIngresoMadre").change(function () {
             sumar_ingresos();
         });
 
@@ -381,7 +392,7 @@
 
     function sumar_ingresos()
     {
-        var TotalIng = parseFloat($("#SueldoPadre").val()) + parseFloat($("#SueldoMadre").val()) + parseFloat($("#OtroIngreso").val());
+        var TotalIng = parseFloat($("#SueldoPadre").val()) + parseFloat($("#SueldoMadre").val()) + parseFloat($("#OtroIngresoPadre").val()) + parseFloat($("#OtroIngresoMadre").val());
         $("#TotalIngreso").val(TotalIng);
         saldo();
     };

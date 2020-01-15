@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="xrTableCell135.Text" xml:space="preserve">
+  <data name="lbl_compromiso.Text" xml:space="preserve">
     <value>En el presente proceso de admisión declaro que el Representante Legal será: _. El mismo que responderá las obligaciones civiles y administrativas en el proceso educativo con la suscripción de los contratos respectivos.</value>
   </data>
   <data name="xrTableCell36.ExpressionBindings" xml:space="preserve">

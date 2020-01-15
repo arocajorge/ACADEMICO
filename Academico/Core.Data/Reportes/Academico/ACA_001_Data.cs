@@ -62,14 +62,14 @@ namespace Core.Data.Reportes.Academico
             }
         }
 
-        public List<ACA_001_Info> get_info(int IdEmpresa, decimal IdAlumno, int IdCatalogoPAREN)
+        public List<ACA_001_Info> get_list_padres(int IdEmpresa, decimal IdAlumno)
         {
             try
             {
                 List<ACA_001_Info> Lista;
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Lista = Context.VWACA_001_Familiares.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdCatalogoPAREN == IdCatalogoPAREN).Select(q => new ACA_001_Info
+                    Lista = Context.VWACA_001_Familiares.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).Select(q => new ACA_001_Info
                     {
                         NomInstruccion = q.NomInstruccion,
                         NomCatalogo = q.NomCatalogo,

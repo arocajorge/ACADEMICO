@@ -134,6 +134,34 @@ namespace Core.Data.Facturacion
                         NaturalezaNota = Entity.NaturalezaNota,
                         IdCtaCble_TipoNota = Entity.IdCtaCble_TipoNota
                     };
+
+                    info.info_resumen = new fa_notaCreDeb_resumen_Info();
+                    var EntityResumen = Context.fa_notaCreDeb_resumen.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdNota == IdNota).FirstOrDefault();
+                    if (EntityResumen==null)
+                    {
+                        info.info_resumen = new fa_notaCreDeb_resumen_Info();
+                    }
+                    else
+                    {
+                        info.info_resumen = new fa_notaCreDeb_resumen_Info
+                        {
+                            IdEmpresa = EntityResumen.IdEmpresa,
+                            IdSucursal = EntityResumen.IdSucursal,
+                            IdBodega = EntityResumen.IdBodega,
+                            IdNota = EntityResumen.IdNota,
+                            SubtotalIVASinDscto = EntityResumen.SubtotalIVASinDscto,
+                            SubtotalSinIVASinDscto = EntityResumen.SubtotalSinIVASinDscto,
+                            SubtotalSinDscto = EntityResumen.SubtotalSinDscto,
+                            Descuento = EntityResumen.Descuento,
+                            SubtotalIVAConDscto = EntityResumen.SubtotalIVAConDscto,
+                            SubtotalSinIVAConDscto = EntityResumen.SubtotalSinIVAConDscto,
+                            SubtotalConDscto = EntityResumen.SubtotalConDscto,
+                            IdCod_Impuesto_IVA = EntityResumen.IdCod_Impuesto_IVA,
+                            ValorIVA = EntityResumen.ValorIVA,
+                            Total = EntityResumen.Total,
+                            PorIva = EntityResumen.PorIva
+                        };
+                    }
                 }
 
                 return info;
@@ -266,6 +294,29 @@ namespace Core.Data.Facturacion
                         });
                     }
                     #endregion
+
+                    #region Resumen
+                    fa_notaCreDeb_resumen Entity_Resumen = new fa_notaCreDeb_resumen
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdSucursal = info.IdSucursal,
+                        IdBodega = info.IdBodega,
+                        IdNota = info.IdNota,
+                        SubtotalIVASinDscto = info.info_resumen.SubtotalIVASinDscto,
+                        SubtotalSinIVASinDscto = info.info_resumen.SubtotalSinIVASinDscto,
+                        SubtotalSinDscto = info.info_resumen.SubtotalSinDscto,
+                        Descuento = info.info_resumen.Descuento,
+                        SubtotalIVAConDscto = info.info_resumen.SubtotalIVAConDscto,
+                        SubtotalSinIVAConDscto = info.info_resumen.SubtotalSinIVAConDscto,
+                        SubtotalConDscto = info.info_resumen.SubtotalConDscto,
+                        IdCod_Impuesto_IVA = info.info_resumen.IdCod_Impuesto_IVA,
+                        ValorIVA = info.info_resumen.ValorIVA,
+                        Total = info.info_resumen.Total,
+                        PorIva = info.info_resumen.PorIva
+                    };
+                    db_f.fa_notaCreDeb_resumen.Add(Entity_Resumen);
+                    #endregion
+
 
                     #region Cruce
                     Secuencia = 1;
@@ -473,6 +524,33 @@ namespace Core.Data.Facturacion
                             IdPunto_cargo_grupo = item.IdPunto_cargo_grupo
                         });
                     }
+                    #endregion
+
+                    #region Resumen
+                    fa_notaCreDeb_resumen Entity_Resumen = new fa_notaCreDeb_resumen
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdSucursal = info.IdSucursal,
+                        IdBodega = info.IdBodega,
+                        IdNota = info.IdNota,
+                        SubtotalIVASinDscto = info.info_resumen.SubtotalIVASinDscto,
+                        SubtotalSinIVASinDscto = info.info_resumen.SubtotalSinIVASinDscto,
+                        SubtotalSinDscto = info.info_resumen.SubtotalSinDscto,
+                        Descuento = info.info_resumen.Descuento,
+                        SubtotalIVAConDscto = info.info_resumen.SubtotalIVAConDscto,
+                        SubtotalSinIVAConDscto = info.info_resumen.SubtotalSinIVAConDscto,
+                        SubtotalConDscto = info.info_resumen.SubtotalConDscto,
+                        IdCod_Impuesto_IVA = info.info_resumen.IdCod_Impuesto_IVA,
+                        ValorIVA = info.info_resumen.ValorIVA,
+                        Total = info.info_resumen.Total,
+                        PorIva = info.info_resumen.PorIva
+                    };
+
+                    var notaDebCred = db_f.fa_notaCreDeb_resumen.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdNota == info.IdNota).FirstOrDefault();
+                    if (notaDebCred != null)
+                        db_f.fa_notaCreDeb_resumen.Remove(notaDebCred);
+
+                    db_f.fa_notaCreDeb_resumen.Add(Entity_Resumen);
                     #endregion
 
                     #region Cruce
