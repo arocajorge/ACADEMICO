@@ -16,6 +16,6 @@ namespace Core.Info.CuentasPorCobrar
         public decimal IdCbteVtaNota { get; set; }
         public string vt_TipoDoc { get; set; }
         public double Valor { get; set; }
-        public string Referencia { get; set; }
+        public string ReferenciaDet { get; set; }
     }
 }

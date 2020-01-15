@@ -195,7 +195,7 @@ namespace Core.Data.CuentasPorCobrar
                         vt_tipoDoc = item.vt_TipoDoc,
                         Valor_Aplicado = item.Valor,
                         fecha_cruce = info.Fecha,
-                        NumDocumento = item.Referencia,
+                        NumDocumento = item.ReferenciaDet,
                         secuencia = Secuencia++
                     });
                 }
@@ -281,7 +281,7 @@ namespace Core.Data.CuentasPorCobrar
                                 vt_tipoDoc = item.vt_TipoDoc,
                                 Valor_Aplicado = item.Valor,
                                 fecha_cruce = info.Fecha,
-                                NumDocumento = item.Referencia,
+                                NumDocumento = item.ReferenciaDet,
                                 secuencia = Secuencia++
                             });
                         }
@@ -351,7 +351,7 @@ namespace Core.Data.CuentasPorCobrar
             }
         }
 
-        public cxc_cobro_Info ArmarInfoCobro(cxc_ConciliacionNotaCredito_Info info)
+        private cxc_cobro_Info ArmarInfoCobro(cxc_ConciliacionNotaCredito_Info info)
         {
             try
             {
