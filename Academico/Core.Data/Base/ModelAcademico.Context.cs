@@ -72,7 +72,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_CatalogoTipoFicha> aca_CatalogoTipoFicha { get; set; }
         public virtual DbSet<aca_Alumno> aca_Alumno { get; set; }
         public virtual DbSet<vwaca_Alumno> vwaca_Alumno { get; set; }
-        public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
         public virtual DbSet<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
         public virtual DbSet<aca_AnioLectivoCalificacionHistorico> aca_AnioLectivoCalificacionHistorico { get; set; }
         public virtual DbSet<aca_AnioLectivoConductaEquivalencia> aca_AnioLectivoConductaEquivalencia { get; set; }
@@ -95,6 +94,7 @@ namespace Core.Data.Base
         public virtual DbSet<aca_SocioEconomico> aca_SocioEconomico { get; set; }
         public virtual DbSet<aca_Familia> aca_Familia { get; set; }
         public virtual DbSet<vwaca_Matricula_Rubro> vwaca_Matricula_Rubro { get; set; }
+        public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

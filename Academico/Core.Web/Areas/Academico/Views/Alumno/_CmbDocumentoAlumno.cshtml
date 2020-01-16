@@ -1,0 +1,27 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdDocumento";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "Alumno", Action = "CmbDocumentoAlumno", Area = "Academico" };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "NomDocumento";
+        settings.Properties.TextFormatString = "[{0}] {1}";
+        settings.Properties.ValueField = "IdDocumento";
+        settings.Properties.ValueType = typeof(int);
+        settings.Properties.AllowMouseWheel = false;
+
+        settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+        settings.Properties.AllowNull = true;
+
+        settings.Properties.Columns.Add("IdDocumento", "ID", 10);
+        settings.Properties.Columns.Add("NomDocumento", "Documento", 90);
+    })
+    .BindList(new Core.Web.Areas.Academico.Controllers.AlumnoController().get_list_bajo_demandaDocumento,
+    new Core.Web.Areas.Academico.Controllers.AlumnoController().get_info_bajo_demandaDocumento).Bind((Model.GetType() == typeof(Core.Info.Academico.aca_Documento_Info) || Model.GetType() == typeof(List<Core.Info.Academico.aca_Documento_Info>)) ? "" : (Model == 0 ? "" : Model));
+}
+@comboBox.GetHtml()

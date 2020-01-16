@@ -1,5 +1,6 @@
 ﻿using Core.Data.Base;
 using Core.Info.Academico;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,83 @@ namespace Core.Data.Academico
 {
     public class aca_Documento_Data
     {
+        public List<aca_Documento_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<aca_Documento_Info> Lista = new List<aca_Documento_Info>();
+            Lista = get_list(IdEmpresa, skip, take, args.Filter);
+            return Lista;
+        }
+
+        public aca_Documento_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            decimal id;
+            if (args.Value == null || !decimal.TryParse(args.Value.ToString(), out id))
+                return null;
+            return get_info_demanda(IdEmpresa, Convert.ToInt32(args.Value));
+        }
+
+        public aca_Documento_Info get_info_demanda(int IdEmpresa,int IdDocumento)
+        {
+            aca_Documento_Info info = new aca_Documento_Info();
+
+            using (EntitiesAcademico Contex = new EntitiesAcademico())
+            {
+                info = (from q in Contex.aca_Documento
+                        where q.IdEmpresa == IdEmpresa 
+                        && q.IdDocumento==IdDocumento
+                        select new aca_Documento_Info
+                        {
+                            IdDocumento = q.IdDocumento,
+                            NomDocumento = q.NomDocumento,
+                        }).FirstOrDefault();
+
+            }
+
+            return info;
+        }
+
+        public List<aca_Documento_Info> get_list(int IdEmpresa, int skip, int take, string filter)
+        {
+            try
+            {
+                List<aca_Documento_Info> Lista = new List<aca_Documento_Info>();
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var lst = (from a in Context.aca_Documento
+                               where
+                            a.IdEmpresa == IdEmpresa
+                            && (a.IdDocumento.ToString() + " " + a.NomDocumento).Contains(filter)
+                               select new
+                               {
+                                   a.IdDocumento,
+                                   a.NomDocumento
+                               })
+                             .OrderBy(a => a.IdDocumento)
+                             .Skip(skip)
+                             .Take(take)
+                             .ToList();
+
+                    foreach (var q in lst)
+                    {
+                        Lista.Add(new aca_Documento_Info
+                        {
+                            IdDocumento = q.IdDocumento,
+                            NomDocumento = q.NomDocumento
+                        });
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<aca_Documento_Info> getList(int IdEmpresa, bool MostrarAnulados)
         {
             try

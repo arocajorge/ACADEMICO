@@ -37,6 +37,9 @@ namespace Core.Info.Academico
         public string Marca { get; set; }
         [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo modelo debe tener máximo 50")]
         public string Modelo { get; set; }
+
+        public Nullable<int> AnioVehiculo { get; set; }
+
         public bool CasaPropia { get; set; }
         public bool SeFactura { get; set; }
         public bool EsRepresentante { get; set; }

@@ -36,7 +36,7 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         aca_Sede_Bus bus_sede = new aca_Sede_Bus();
-
+        aca_Documento_Bus bus_documento = new aca_Documento_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         public static UploadedFile file { get; set; }
@@ -75,6 +75,26 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_Alumno_Info> model = Lista_Alumno.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_alumno", model);
+        }
+        #endregion
+
+        #region Combos bajo demanda
+
+        public ActionResult CmbDocumentoAlumno()
+        {
+            aca_Documento_Info model = new aca_Documento_Info();
+            return PartialView("_CmbDocumentoAlumno", model);
+        }
+
+        public List<aca_Documento_Info> get_list_bajo_demandaDocumento(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            int IdAnio = Convert.ToInt32(SessionFixed.IdAnio);
+            return bus_documento.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
+        public aca_Documento_Info get_info_bajo_demandaDocumento(ListEditItemRequestedByValueEventArgs args)
+        {
+            int IdAnio = Convert.ToInt32(SessionFixed.IdAnio);
+            return bus_documento.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
 
@@ -289,6 +309,61 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_AlumnoDocumento_Info> model = ListaAlumnoDocumento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_AlumnoDocumento", model);
         }
+
+        #region funciones del detalle
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] aca_AlumnoDocumento_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var Lista = ListaAlumnoDocumento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            if (Lista.Where(q => q.IdDocumento == info_det.IdDocumento).ToList().Count == 0)
+            {
+                if (info_det.IdDocumento != 0)
+                {
+                    var info_documento = bus_documento.GetInfo(IdEmpresa, info_det.IdDocumento);
+                    if (info_documento != null)
+                    {
+                        info_det.NomDocumento = info_documento.NomDocumento;
+                    }
+                }
+
+                ListaAlumnoDocumento.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
+
+            var model = ListaAlumnoDocumento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_AlumnoDocumento", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] aca_AlumnoDocumento_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            if (info_det != null)
+            {
+                if (info_det.IdDocumento != 0)
+                {
+                    var info_documento = bus_documento.GetInfo(IdEmpresa, info_det.IdDocumento);
+                    if (info_documento != null)
+                    {
+                        info_det.NomDocumento = info_documento.NomDocumento;
+                    }
+                }
+            }
+
+            ListaAlumnoDocumento.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = ListaAlumnoDocumento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_AlumnoDocumento", model);
+        }
+
+        public ActionResult EditingDelete(int IdDocumento)
+        {
+            ListaAlumnoDocumento.DeleteRow(IdDocumento, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = ListaAlumnoDocumento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_AlumnoDocumento", model);
+        }
+        #endregion
         #endregion
 
         #region Acciones
@@ -312,6 +387,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 Idtipo_cliente_madre=1,
                 IdTipoCredito_padre = "CON",
                 IdTipoCredito_madre = "CON",
+                IdPais="1",
+                Cod_Region="00001",
+                IdProvincia ="09",
+                IdCiudad = "09",
+                IdParroquia = "09",
                 IdCiudad_padre = "09",
                 IdParroquia_padre = "09",
                 IdCiudad_madre = "09",
@@ -482,6 +562,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.VehiculoPropio_padre = info_fam_padre.VehiculoPropio;
             model.Marca_padre = info_fam_padre.Marca;
             model.Modelo_padre = info_fam_padre.Modelo;
+            model.AnioVehiculo_padre = info_fam_padre.AnioVehiculo;
             model.CasaPropia_padre = info_fam_padre.CasaPropia;
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
@@ -515,6 +596,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.VehiculoPropio_madre = info_fam_madre.VehiculoPropio;
             model.Marca_madre = info_fam_madre.Marca;
             model.Modelo_madre = info_fam_madre.Modelo;
+            model.AnioVehiculo_madre = info_fam_madre.AnioVehiculo;
             model.CasaPropia_madre = info_fam_madre.CasaPropia;
 
             if (model == null)
@@ -896,6 +978,29 @@ namespace Core.Web.Areas.Academico.Controllers
         public void set_list(List<aca_AlumnoDocumento_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(aca_AlumnoDocumento_Info info_det, decimal IdTransaccionSession)
+        {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            List<aca_AlumnoDocumento_Info> list = get_list(IdTransaccionSession);
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(aca_AlumnoDocumento_Info info_det, decimal IdTransaccionSession)
+        {
+            int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            aca_AlumnoDocumento_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdDocumento == info_det.IdDocumento).FirstOrDefault();
+            edited_info.IdDocumento = info_det.IdDocumento;
+            edited_info.NomDocumento = info_det.NomDocumento;
+        }
+
+        public void DeleteRow(int IdDocumento, decimal IdTransaccionSession)
+        {
+            List<aca_AlumnoDocumento_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(q => q.IdDocumento == IdDocumento).FirstOrDefault());
         }
     }
 }

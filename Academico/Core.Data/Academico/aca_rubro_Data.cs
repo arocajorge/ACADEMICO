@@ -138,7 +138,14 @@ namespace Core.Data.Academico
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 
+                    aca_AnioLectivo_Rubro EntityAsignacion = Context.aca_AnioLectivo_Rubro.FirstOrDefault(q => q.IdAnio == info.IdAnio && q.IdRubro == info.IdRubro);
+                    if (EntityAsignacion!=null)
+                    {
+                        EntityAsignacion.AplicaProntoPago = info.AplicaProntoPago;
+                    }
+
                     Context.SaveChanges();
+
                 }
 
                 return true;

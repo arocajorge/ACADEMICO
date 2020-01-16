@@ -19,6 +19,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Rubro_Bus bus_rubro = new aca_Rubro_Bus();
         aca_rubro_List Lista_Rubro = new aca_rubro_List();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
+        aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -64,10 +65,11 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa,0);
             aca_Rubro_Info model = new aca_Rubro_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdAnio = (info_anio!=null ? info_anio.IdAnio : 0)
             };
 
             return View(model);
@@ -94,11 +96,12 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
             aca_Rubro_Info model = bus_rubro.GetInfo(IdEmpresa, IdRubro);
             if (model == null)
                 return RedirectToAction("Index");
 
+            model.IdAnio = (info_anio != null ? info_anio.IdAnio : 0);
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 

@@ -113,6 +113,7 @@ namespace Core.Data.Academico
                         VehiculoPropio = Entity.VehiculoPropio,
                         Marca = Entity.Marca,
                         Modelo = Entity.Modelo,
+                        AnioVehiculo = Entity.AnioVehiculo,
                         CasaPropia = Entity.CasaPropia,
                         IdEstadoCivil = Entity.IdEstadoCivil,
                         pe_fechaNacimiento = Entity.pe_fechaNacimiento,
@@ -241,6 +242,7 @@ namespace Core.Data.Academico
                         VehiculoPropio = Entity.VehiculoPropio,
                         Marca = Entity.Marca,
                         Modelo = Entity.Modelo,
+                        AnioVehiculo = Entity.AnioVehiculo,
                         CasaPropia = Entity.CasaPropia,
                         pe_fechaNacimiento = Entity.pe_fechaNacimiento,
                         CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
@@ -304,6 +306,7 @@ namespace Core.Data.Academico
                         VehiculoPropio = Entity.VehiculoPropio,
                         Marca = Entity.Marca,
                         Modelo = Entity.Modelo,
+                        AnioVehiculo = Entity.AnioVehiculo,
                         CasaPropia = Entity.CasaPropia,
                         pe_fechaNacimiento = Entity.pe_fechaNacimiento,
                         CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
@@ -397,6 +400,7 @@ namespace Core.Data.Academico
                     VehiculoPropio = Entity_fam.VehiculoPropio,
                     Marca = Entity_fam.Marca,
                     Modelo = Entity_fam.Modelo,
+                    AnioVehiculo = Entity_fam.AnioVehiculo,
                     CasaPropia = Entity_fam.CasaPropia,
                     pe_nombreCompleto = Entity_fam.pe_nombreCompleto,
                     pe_telfono_Contacto = Entity_fam.pe_telfono_Contacto,
@@ -495,6 +499,7 @@ namespace Core.Data.Academico
                         VehiculoPropio = info.VehiculoPropio,
                         Marca = info.Marca,
                         Modelo = info.Modelo,
+                        AnioVehiculo = info.AnioVehiculo,
                         CasaPropia = info.CasaPropia,
                         EsRepresentante = info.EsRepresentante,
                         Estado = true,
@@ -568,6 +573,7 @@ namespace Core.Data.Academico
                     Entity.VehiculoPropio = info.VehiculoPropio;
                     Entity.Marca = info.Marca;
                     Entity.Modelo = info.Modelo;
+                    Entity.AnioVehiculo = info.AnioVehiculo;
                     Entity.CasaPropia = info.CasaPropia;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;

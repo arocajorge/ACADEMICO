@@ -1,7 +1,7 @@
 ﻿@using Core.Web.Helps
 @model Core.Info.Academico.aca_Alumno_Info
 @{
-    ViewBag.Title = "Consulta de alumnos";
+    ViewBag.Title = "Consulta de estudiantes";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");

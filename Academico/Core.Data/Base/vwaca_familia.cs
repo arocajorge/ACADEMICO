@@ -53,5 +53,6 @@ namespace Core.Data.Base
         public string Modelo { get; set; }
         public bool CasaPropia { get; set; }
         public bool Estado { get; set; }
+        public Nullable<int> AnioVehiculo { get; set; }
     }
 }

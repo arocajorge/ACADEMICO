@@ -34,6 +34,7 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
+            this.xrSubreportPadre = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow21 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell58 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -150,7 +151,6 @@
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAnio = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
-            this.xrSubreportPadre = new DevExpress.XtraReports.UI.XRSubreport();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -186,6 +186,14 @@
             this.xrTable1});
             this.PageHeader.HeightF = 650.1666F;
             this.PageHeader.Name = "PageHeader";
+            // 
+            // xrSubreportPadre
+            // 
+            this.xrSubreportPadre.LocationFloat = new DevExpress.Utils.PointFloat(0F, 454.1666F);
+            this.xrSubreportPadre.Name = "xrSubreportPadre";
+            this.xrSubreportPadre.ReportSource = new Core.Web.Reportes.Academico.ACA_001_Padre_Rpt();
+            this.xrSubreportPadre.SizeF = new System.Drawing.SizeF(751.9999F, 23F);
+            this.xrSubreportPadre.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreportPadre_BeforePrint);
             // 
             // xrTable5
             // 
@@ -646,7 +654,7 @@
             // xrTableCell61
             // 
             this.xrTableCell61.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNull([TipoDiscapacidadAlumno]),\'SI\' ,\'NO\' )")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNull([TipoDiscapacidadAlumno]),\'NO\' ,\'SI\' )")});
             this.xrTableCell61.Font = new System.Drawing.Font("Verdana", 9F);
             this.xrTableCell61.Multiline = true;
             this.xrTableCell61.Name = "xrTableCell61";
@@ -1660,14 +1668,6 @@
             // 
             this.p_IdAlumno.Name = "p_IdAlumno";
             this.p_IdAlumno.Visible = false;
-            // 
-            // xrSubreportPadre
-            // 
-            this.xrSubreportPadre.LocationFloat = new DevExpress.Utils.PointFloat(0F, 454.1666F);
-            this.xrSubreportPadre.Name = "xrSubreportPadre";
-            this.xrSubreportPadre.ReportSource = new Core.Web.Reportes.Academico.ACA_001_Padre_Rpt();
-            this.xrSubreportPadre.SizeF = new System.Drawing.SizeF(751.9999F, 23F);
-            this.xrSubreportPadre.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreportPadre_BeforePrint);
             // 
             // objectDataSource1
             // 

@@ -53,7 +53,7 @@
                     <label for="info_persona.pe_cedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc" })
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
-                    <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                    <label id="error_documento" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                 </div>
             </div>
             <div class="col-md-2">
@@ -218,18 +218,25 @@
     </div>
     <div class="row" id="vehiculo">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="Correo">Marca</label>
                     @Html.TextBoxFor(q => q.Marca, new { @class = "form-control", @id = "Marca" })
                     @Html.ValidationMessageFor(q => q.Marca, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="Correo">Modelo</label>
                     @Html.TextBoxFor(q => q.Modelo, new { @class = "form-control", @id = "Modelo" })
                     @Html.ValidationMessageFor(q => q.Modelo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Correo">Año</label>
+                    @Html.TextBoxFor(q => q.AnioVehiculo, new { @class = "form-control", @id = "AnioVehiculo" })
+                    @Html.ValidationMessageFor(q => q.AnioVehiculo, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -424,7 +431,6 @@
 }
 <script>
     $(function () {
-        $("#error_documento").hide();
         mostrar_vehiculo();
         mostrar_cliente();
     })

@@ -26,7 +26,6 @@ namespace Core.Web.Reportes.Academico
         {
             aca_Familia_Bus bus_familia = new aca_Familia_Bus();
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-            lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
 
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);

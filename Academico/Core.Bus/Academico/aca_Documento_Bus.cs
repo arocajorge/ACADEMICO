@@ -1,5 +1,6 @@
 ﻿using Core.Data.Academico;
 using Core.Info.Academico;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,16 @@ namespace Core.Bus.Academico
         aca_Documento_Data odata = new aca_Documento_Data();
         aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
         aca_AnioLectivo_Curso_Documento_Data odata_curso_documento = new aca_AnioLectivo_Curso_Documento_Data();
+        public List<aca_Documento_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa)
+        {
+            return odata.get_list_bajo_demanda(args, IdEmpresa);
+        }
+
+        public aca_Documento_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            return odata.get_info_bajo_demanda(args, IdEmpresa);
+        }
+
         public List<aca_Documento_Info> GetList(int IdEmpresa, bool MostrarAnulados)
         {
             try

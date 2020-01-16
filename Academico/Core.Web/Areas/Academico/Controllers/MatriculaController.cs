@@ -528,7 +528,9 @@ namespace Core.Web.Areas.Academico.Controllers
                             IdCod_Impuesto_Iva = item_det.IdCod_Impuesto_Iva,
                             Porcentaje = item_det.Porcentaje,
                             ValorIVA = item_det.ValorIVA,
-                            Total = item_det.Total
+                            Total = item_det.Total,
+                            IdAnio = item_det.IdAnio,
+                            IdPlantilla = item_det.IdPlantilla
                         };
 
                         info_matricula.lst_MatriculaRubro.Add(info_mat_rubro);

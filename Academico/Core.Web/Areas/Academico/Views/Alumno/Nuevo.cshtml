@@ -1,7 +1,7 @@
 ﻿@using System.Web.UI.WebControls;
 @model Core.Info.Academico.aca_Alumno_Info
 @{
-    ViewBag.Title = "Nuevo alumno";
+    ViewBag.Title = "Nuevo estudiante";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -48,7 +48,7 @@
                     <label for="info_persona.pe_cedulaRuc">Número documento*</label>
                     @Html.TextBoxFor(q => q.pe_cedulaRuc, new { @class = "form-control", @id = "pe_cedulaRuc"})
                     @Html.ValidationMessageFor(q => q.pe_cedulaRuc, "", new { @class = "text-danger" })
-                    <label id="error_documento" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                    <label id="error_documento" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                 </div>
             </div>
             <div class="col-md-2">
@@ -374,7 +374,7 @@
                                 <label for="info_persona.pe_cedulaRuc">Número documento*</label>
                                 @Html.TextBoxFor(q => q.pe_cedulaRuc_padre, new { @class = "form-control", @id = "pe_cedulaRuc_padre" })
                                 @Html.ValidationMessageFor(q => q.pe_cedulaRuc_padre, "", new { @class = "text-danger" })
-                                <label id="error_documento_padre" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                                <label id="error_documento_padre" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                             </div>
                         </div>
                         <div class="col-md-offset-1 col-md-2">
@@ -533,18 +533,25 @@
                 </div>
                 <div class="row" id="vehiculo_padre">
                     <div class="col-md-12">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="Correo">Marca</label>
                                 @Html.TextBoxFor(q => q.Marca_padre, new { @class = "form-control", @id = "Marca_padre" })
                                 @Html.ValidationMessageFor(q => q.Marca_padre, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="Correo">Modelo</label>
                                 @Html.TextBoxFor(q => q.Modelo_padre, new { @class = "form-control", @id = "Modelo_padre" })
                                 @Html.ValidationMessageFor(q => q.Modelo_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Correo">Año</label>
+                                @Html.TextBoxFor(q => q.AnioVehiculo_padre, new { @class = "form-control", @id = "AnioVehiculo_padre" })
+                                @Html.ValidationMessageFor(q => q.AnioVehiculo_padre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -754,7 +761,7 @@
                                 <label for="info_persona.pe_cedulaRuc">Número documento*</label>
                                 @Html.TextBoxFor(q => q.pe_cedulaRuc_madre, new { @class = "form-control", @id = "pe_cedulaRuc_madre" })
                                 @Html.ValidationMessageFor(q => q.pe_cedulaRuc_madre, "", new { @class = "text-danger" })
-                                <label id="error_documento_madre" style="color:red"> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                                <label id="error_documento_madre" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                             </div>
                         </div>
                         <div class="col-md-offset-1 col-md-2">
@@ -913,18 +920,25 @@
                 </div>
                 <div class="row" id="vehiculo_madre">
                     <div class="col-md-12">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="Correo">Marca</label>
                                 @Html.TextBoxFor(q => q.Marca_madre, new { @class = "form-control", @id = "Marca_madre" })
                                 @Html.ValidationMessageFor(q => q.Marca_madre, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="Correo">Modelo</label>
                                 @Html.TextBoxFor(q => q.Modelo_madre, new { @class = "form-control", @id = "Modelo_madre" })
                                 @Html.ValidationMessageFor(q => q.Modelo_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Correo">Año</label>
+                                @Html.TextBoxFor(q => q.AnioVehiculo_madre, new { @class = "form-control", @id = "AnioVehiculo_madre" })
+                                @Html.ValidationMessageFor(q => q.AnioVehiculo_madre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -1122,9 +1136,6 @@
 }
 <script>
     $(function () {
-        $("#error_documento").hide();
-        $("#error_documento_padre").hide();
-        $("#error_documento_madre").hide();
         mostrar_vehiculo_padre();
         mostrar_vehiculo_madre();
         mostrar_cliente_padre();
@@ -1430,6 +1441,7 @@
                         $("#VehiculoPropio_padre").val(data.VehiculoPropio);
                         $("#Marca_padre").val(data.Marca);
                         $("#Modelo_padre").val(data.Modelo);
+                        $("#AnioVehiculo_padre").val(data.AnioVehiculo);
                         $("#CasaPropia_padre").val(data.CasaPropia);
                     }
                     else {
@@ -1521,6 +1533,8 @@
                         $("#VehiculoPropio_madre").val(data.VehiculoPropio);
                         $("#Marca_madre").val(data.Marca);
                         $("#Modelo_madre").val(data.Modelo);
+                        $("#AnioVehiculo_madre").val(data.AnioVehiculo);
+                        
                         $("#CasaPropia_madre").val(data.CasaPropia);
                     }
                     else {
@@ -1608,6 +1622,7 @@
         VehiculoPropio_madre.SetChecked(false);
         CasaPropia_madre.SetChecked(false);
         $("#Marca_madre").val("");
+        $("#AnioVehiculo_madre").val("");
         $("#Modelo_madre").val("");
     }
 

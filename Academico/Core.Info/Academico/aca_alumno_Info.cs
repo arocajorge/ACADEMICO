@@ -129,6 +129,9 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo parroquia es obligatorio")]
         public string IdParroquia_padre { get; set; }
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
+
+
+        public Nullable<int> AnioVehiculo_padre { get; set; }
         #endregion
 
         #region Datos madre
@@ -187,6 +190,7 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo parroquia es obligatorio")]
         public string IdParroquia_madre { get; set; }
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
+        public Nullable<int> AnioVehiculo_madre { get; set; }
         #endregion
 
         public tb_persona_Info info_persona_alumno { get; set; }
