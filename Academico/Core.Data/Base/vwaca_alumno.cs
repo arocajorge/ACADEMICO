@@ -48,5 +48,7 @@ namespace Core.Data.Base
         public string IdCiudad { get; set; }
         public string IdParroquia { get; set; }
         public string Sector { get; set; }
+        public Nullable<int> IdReligion { get; set; }
+        public Nullable<bool> AsisteCentroCristiano { get; set; }
     }
 }

@@ -30,6 +30,7 @@ namespace Core.Web.Areas.Academico.Controllers
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
         fa_cliente_contactos_Bus bus_cliente_cont = new fa_cliente_contactos_Bus();
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
+        tb_Religion_Bus bus_religion = new tb_Religion_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
@@ -51,6 +52,7 @@ namespace Core.Web.Areas.Academico.Controllers
             lst_instruccion.Add(new aca_CatalogoFicha_Info { IdCatalogoFicha = 0, NomCatalogoFicha = "" });
             var lst_profesion = bus_profesion.GetList(false);
             lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "" });
+            var lst_religion = bus_religion.GetList(false);
 
             ViewBag.lst_sexo = lst_sexo;
             ViewBag.lst_estado_civil = lst_estado_civil;
@@ -61,6 +63,7 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_parentezco = lst_parentezco;
             ViewBag.lst_profesion = lst_profesion;
             ViewBag.lst_instruccion = lst_instruccion;
+            ViewBag.lst_religion = lst_religion;
 
             var lst_termino_pago = bus_termino_pago.get_list(false);
             ViewBag.lst_termino_pago = lst_termino_pago;
@@ -218,6 +221,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_celular = model.Celular,
                 pe_direccion = model.Direccion,
                 IdProfesion = model.IdProfesion,
+                IdReligion = model.IdReligion,
+                AsisteCentroCristiano = model.AsisteCentroCristiano
             };
 
             model.info_persona= info_persona_familia;
@@ -294,6 +299,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_correo = model.Correo,
                 pe_celular = model.Celular,
                 pe_direccion = model.Direccion,
+                IdReligion=model.IdReligion,
+                AsisteCentroCristiano = model.AsisteCentroCristiano,
                 IdProfesion = model.IdProfesion
             };
 

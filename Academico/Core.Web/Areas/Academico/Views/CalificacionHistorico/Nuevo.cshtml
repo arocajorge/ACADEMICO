@@ -33,8 +33,41 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group">
+                    <label for="IdEmpresa">Nivel</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdNivel, settings =>
+                   {
+                       settings.Name = "IdNivel";
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                       settings.Properties.Columns.Add("IdNivel", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                       settings.Properties.Columns.Add("NomNivel", "Nivel").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                       //Campo ID
+                       settings.Properties.ValueField = "IdNivel";
+                       settings.Properties.ValueType = typeof(int);
+                       settings.Properties.TextField = "NomNivel";
+                       settings.Properties.NullText = "== Seleccione ==";
+                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   }).BindList(ViewBag.lst_nivel).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
                     <label for="IdEmpresa">Curso</label>
-                    @Html.Partial("_ComboBoxPartial_Curso", Model)
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCurso, settings =>
+                   {
+                       settings.Name = "IdCurso";
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                       settings.Properties.Columns.Add("IdCurso", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                       settings.Properties.Columns.Add("NomCurso", "Curso").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                       //Campo ID
+                       settings.Properties.ValueField = "IdCurso";
+                       settings.Properties.ValueType = typeof(int);
+                       settings.Properties.TextField = "NomCurso";
+                       settings.Properties.NullText = "== Seleccione ==";
+                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   }).BindList(ViewBag.lst_curso).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -47,6 +80,17 @@
                         <label for="IdEmpresa">Alumno</label>
                         @Html.Partial("_CmbAlumno", Model)
                         @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="IdEmpresa">Antigua institución</label>
+                        @Html.TextBoxFor(q => q.AntiguaInstitucion, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.AntiguaInstitucion, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>

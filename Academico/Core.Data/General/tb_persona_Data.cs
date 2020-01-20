@@ -66,8 +66,11 @@ namespace Core.Data.General
                         pe_estado = Entity.pe_estado,
                         IdTipoCta_acreditacion_cat = Entity.IdTipoCta_acreditacion_cat,
                         num_cta_acreditacion = Entity.num_cta_acreditacion,
-                        IdBanco_acreditacion = Entity.IdBanco_acreditacion
-                    };
+                        IdBanco_acreditacion = Entity.IdBanco_acreditacion,
+                        IdProfesion = Entity.IdProfesion,
+                        IdReligion = Entity.IdReligion,
+                        AsisteCentroCristiano = Entity.AsisteCentroCristiano
+                };
                 }
 
                 return info;
@@ -150,6 +153,8 @@ namespace Core.Data.General
                 //Si vienen null se pone un valor default
                 IdEstadoCivil = string.IsNullOrEmpty(info.IdEstadoCivil) ? "SOLTE" : info.IdEstadoCivil,
                 IdProfesion = (info.IdProfesion== 0 || info.IdProfesion==null) ? null : info.IdProfesion,
+                IdReligion = (info.IdReligion == 0 || info.IdReligion == null) ? null : info.IdReligion,
+                AsisteCentroCristiano = info.AsisteCentroCristiano,
                 pe_sexo = string.IsNullOrEmpty(info.pe_sexo) ? "SEXO_MAS" : info.pe_sexo,
             };
             return info_retorno;
@@ -212,7 +217,9 @@ namespace Core.Data.General
                         CodCatalogoCONADIS = info.CodCatalogoCONADIS,
                         NumeroCarnetConadis = info.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = info.PorcentajeDiscapacidad,
-                        IdProfesion = ((info.IdProfesion == 0 || info.IdProfesion== null) ? null : info.IdProfesion)
+                        IdProfesion = ((info.IdProfesion == 0 || info.IdProfesion== null) ? null : info.IdProfesion),
+                        IdReligion = ((info.IdReligion == 0 || info.IdReligion == null) ? null : info.IdReligion),
+                        AsisteCentroCristiano = info.AsisteCentroCristiano
                     };
                     Context.tb_persona.Add(Entity);
                     Context.SaveChanges();
@@ -256,7 +263,8 @@ namespace Core.Data.General
                     Entity.NumeroCarnetConadis = info.NumeroCarnetConadis;
                     Entity.PorcentajeDiscapacidad = info.PorcentajeDiscapacidad;
                     Entity.IdProfesion = (info.IdProfesion==0 ? null : info.IdProfesion);
-
+                    Entity.IdReligion = (info.IdReligion == 0 ? null : info.IdReligion);
+                    Entity.AsisteCentroCristiano = info.AsisteCentroCristiano;
                     Entity.pe_fechaModificacion = DateTime.Now;
                     Entity.pe_UltUsuarioModi = info.pe_UltUsuarioModi;
                     Context.SaveChanges();

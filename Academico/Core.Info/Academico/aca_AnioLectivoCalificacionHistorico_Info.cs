@@ -17,17 +17,20 @@ namespace Core.Info.Academico
         public decimal IdAlumno { get; set; }
         [Required(ErrorMessage = "El campo curso es obligatorio")]
         public int IdCurso { get; set; }
+        [Required(ErrorMessage = "El campo nivel es obligatorio")]
+        public int IdNivel { get; set; }
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo antigua institución debe tener mínimo 1 caracter y máximo 500")]
+        [Required(ErrorMessage = "El campo antigua institución es obligatorio")]
+        public string AntiguaInstitucion { get; set; }
         [Required(ErrorMessage = "El campo promedio es obligatorio")]
         public decimal Promedio { get; set; }
         [Required(ErrorMessage = "El campo conducta es obligatorio")]
         public decimal Conducta { get; set; }
 
         #region Campos que no existen en la tabla
-        public int IdSede { get; set; }
-        public int IdNivel { get; set; }
-        public int IdJornada { get; set; }
         public string Descripcion { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public string NomNivel { get; set; }
         public string NomCurso { get; set; }
         #endregion
     }

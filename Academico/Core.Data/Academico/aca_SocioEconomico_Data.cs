@@ -1,5 +1,6 @@
 ﻿using Core.Data.Base;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Core.Data.Academico
 {
     public class aca_SocioEconomico_Data
     {
+        aca_Familia_Data odata_fam = new aca_Familia_Data();
         public int getId(int IdEmpresa)
         {
             try
@@ -129,6 +131,7 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
         public bool guardarDB(aca_SocioEconomico_Info info)
         {
             try
@@ -227,5 +230,40 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public List<aca_Matricula_Info> GetListHermanos(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                List<aca_Matricula_Info> Lista = new List<aca_Matricula_Info>();
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var info_padre = odata_fam.getListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
+                    var info_madre = odata_fam.getListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
+
+                    var IdPersonaPadre = (info_padre == null ? 0 : info_padre.IdPersona);
+                    var IdPersonaMadre = (info_madre == null ? 0 : info_madre.IdPersona);
+
+                    Lista = Context.vwaca_Hermanos.Where(q => q.IdEmpresa == IdEmpresa && (q.IdPersona == IdPersonaPadre || q.IdPersona==IdPersonaMadre) && q.IdAlumno!=IdAlumno).OrderByDescending(q=>q.IdCurso).GroupBy(q => new { q.IdEmpresa, q.IdAlumno,q.pe_nombreCompleto, q.IdCurso, q.NomCurso, q.NomParalelo }).Select(q => new aca_Matricula_Info
+                    {
+                        IdEmpresa = q.Key.IdEmpresa,
+                        IdAlumno = q.Key.IdAlumno,
+                        pe_nombreCompleto = q.Key.pe_nombreCompleto,
+                        IdCurso = q.Key.IdCurso??0,
+                        NomCurso = q.Key.NomCurso,
+                        NomParalelo = q.Key.NomParalelo
+                    }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

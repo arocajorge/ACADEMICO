@@ -21,6 +21,8 @@
     @Html.HiddenFor(q => q.pe_Naturaleza, new { @id = "pe_Naturaleza" })
     @Html.HiddenFor(q => q.IdTipoDocumento, new { @id = "IdTipoDocumento" })
     @Html.HiddenFor(q => q.pe_cedulaRuc, new { @id = "pe_cedulaRuc" })
+    @Html.HiddenFor(q => q.IdTipoCredito_padre, new { @id = "IdTipoCredito_padre" })
+    @Html.HiddenFor(q => q.IdTipoCredito_madre, new { @id = "IdTipoCredito_madre" })
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -107,7 +109,9 @@
             <div class="col-md-1">
                 <div class="form-group">
                     <label for="IdSucursal">&nbsp;</label>
-                    <a class="btn btn-primary form-control" href="@Url.Action("Index","AlumnoFamilia",new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAlumno=Model.IdAlumno },null)">Familiares</a>
+                    <a class="btn btn-primary form-control" title="Familiares" href="@Url.Action("Index","AlumnoFamilia",new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAlumno=Model.IdAlumno },null)">
+                        <i class="fa fa-users"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -214,8 +218,43 @@
                             <div class="form-group">
                                 <label for="IdCliente"></label>
                                 <button type="button" class="btn btn-primary form-control" title="Ver ficha socio economica" onclick="VerFichaSocioEconomica();">
-                                    <i class="fa fa-usd"></i>
+                                    <i class="fa fa-dollar"></i>
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Religión</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdReligion, settings =>
+                               {
+                                   settings.Name = "IdReligion";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdReligion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("NomReligion", "Religion").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdReligion";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "NomReligion";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_religion).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdReligion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.AsisteCentroCristiano, settings =>
+                                {
+                                    settings.Name = "AsisteCentroCristiano";
+                                    settings.Text = "Asiste a Centro Cristiano";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.AsisteCentroCristiano, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -454,7 +493,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="info_persona.pe_apellido">Apellidos</label>
                                 @Html.TextBoxFor(q => q.pe_apellido_padre, new { @class = "form-control", @id = "pe_apellido_padre" })
@@ -462,11 +501,22 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="info_persona.pe_nombre">Nombres</label>
                                 @Html.TextBoxFor(q => q.pe_nombre_padre, new { @class = "form-control", @id = "pe_nombre_padre" })
                                 @Html.ValidationMessageFor(q => q.pe_nombre_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.EstaFallecido_padre, settings =>
+                                {
+                                    settings.Name = "EstaFallecido_padre";
+                                    settings.Text = "Está fallecido";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.EstaFallecido_padre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -542,6 +592,41 @@
                                 <label for="pe_celular">Celular</label>
                                 @Html.TextBoxFor(q => q.Celular_padre, new { @class = "form-control", @id = "Celular_padre" })
                                 @Html.ValidationMessageFor(q => q.Celular_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Religión</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdReligion_padre, settings =>
+                               {
+                                   settings.Name = "IdReligion_padre";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdReligion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("NomReligion", "Religion").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdReligion";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "NomReligion";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_religion).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdReligion_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.AsisteCentroCristiano_padre, settings =>
+                                {
+                                    settings.Name = "AsisteCentroCristiano_padre";
+                                    settings.Text = "Asiste a Centro Cristiano";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.AsisteCentroCristiano_padre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -648,13 +733,6 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="IdTipoCredito">Término de pago*</label>
-                                        @Html.DropDownListFor(q => q.IdTipoCredito_padre, new SelectList(ViewBag.lst_termino_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "IdTipoCredito_padre" })
-                                        @Html.ValidationMessageFor(q => q.IdTipoCredito_padre, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
                                         <label for="IdCiudad">Ciudad*</label>
                                         @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_padre, settings =>
                                {
@@ -675,10 +753,6 @@
                                         @Html.ValidationMessageFor(q => q.IdCiudad_padre, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="parroquia">Parroquia*</label>
@@ -841,7 +915,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="info_persona.pe_apellido">Apellidos</label>
                                 @Html.TextBoxFor(q => q.pe_apellido_madre, new { @class = "form-control", @id = "pe_apellido_madre" })
@@ -849,11 +923,22 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label for="info_persona.pe_nombre">Nombres</label>
                                 @Html.TextBoxFor(q => q.pe_nombre_madre, new { @class = "form-control", @id = "pe_nombre_madre" })
                                 @Html.ValidationMessageFor(q => q.pe_nombre_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.EstaFallecido_madre, settings =>
+                                {
+                                    settings.Name = "EstaFallecido_madre";
+                                    settings.Text = "Está fallecida";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.EstaFallecido_madre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -929,6 +1014,41 @@
                                 <label for="pe_celular">Celular</label>
                                 @Html.TextBoxFor(q => q.Celular_madre, new { @class = "form-control", @id = "Celular_madre" })
                                 @Html.ValidationMessageFor(q => q.Celular_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Religión</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdReligion_madre, settings =>
+                               {
+                                   settings.Name = "IdReligion_madre";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdReligion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("NomReligion", "Religion").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdReligion";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "NomReligion";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_religion).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdReligion_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.AsisteCentroCristiano_madre, settings =>
+                                {
+                                    settings.Name = "AsisteCentroCristiano_madre";
+                                    settings.Text = "Asiste a Centro Cristiano";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.AsisteCentroCristiano_madre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -1035,13 +1155,6 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="IdTipoCredito">Término de pago*</label>
-                                        @Html.DropDownListFor(q => q.IdTipoCredito_madre, new SelectList(ViewBag.lst_termino_pago, "IdTerminoPago", "nom_TerminoPago"), new { @class = "form-control", @id = "IdTipoCredito_madre" })
-                                        @Html.ValidationMessageFor(q => q.IdTipoCredito_madre, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
                                         <label for="IdCiudad">Ciudad*</label>
                                         @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_madre, settings =>
                                {
@@ -1062,10 +1175,6 @@
                                         @Html.ValidationMessageFor(q => q.IdCiudad_madre, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="parroquia">Parroquia*</label>
@@ -1369,7 +1478,6 @@
                         window.location.href = '@Url.Action("Index", "Alumno", new { Area = "Academico" })'
                     }
                     else {
-                        console.log(data);
                         if (data.IdPersona != 0 && data.IdAlumno == 0) {
                             $("#IdPersona").val(data.IdPersona);
                             $("#pe_Naturaleza").val(data.pe_Naturaleza);
@@ -1387,7 +1495,8 @@
                             $("#CodCatalogoCONADIS").val(data.CodCatalogoCONADIS);
                             $("#NumeroCarnetConadis").val(data.NumeroCarnetConadis);
                             $("#PorcentajeDiscapacidad").val(data.PorcentajeDiscapacidad);
-
+                            IdReligion.SetValue(data.IdReligion);
+                            AsisteCentroCristiano.SetChecked(data.AsisteCentroCristiano);
                         }
                         else {
                             vaciar_campos_persona();
@@ -1448,6 +1557,7 @@
                         window.location.href = '@Url.Action("Index", "Alumno", new { Area = "Academico" })'
                     }
                     else {
+
                         if (data.IdPersona != 0) {
                             $("#IdPersona_padre").val(data.IdPersona);
                             $("#pe_Naturaleza_padre").val(data.pe_Naturaleza);
@@ -1475,11 +1585,15 @@
                             $("#CargoTrabajo_padre").val(data.CargoTrabajo);
                             $("#AniosServicio_padre").val(data.AniosServicio);
                             $("#IngresoMensual_padre").val(data.IngresoMensual);
-                            $("#VehiculoPropio_padre").val(data.VehiculoPropio);
+                            VehiculoPropio_padre.SetChecked(data.VehiculoPropio);
                             $("#Marca_padre").val(data.Marca);
                             $("#Modelo_padre").val(data.Modelo);
                             $("#CasaPropia_padre").val(data.CasaPropia);
                             $("#AnioVehiculo_padre").val(data.AnioVehiculo);
+                            IdReligion_padre.SetValue(data.IdReligion);
+                            AsisteCentroCristiano_padre.SetChecked(data.AsisteCentroCristiano);
+
+                            mostrar_vehiculo_padre();
                         }
                         else {
                             vaciar_campos_padre();
@@ -1539,6 +1653,7 @@
                         window.location.href = '@Url.Action("Index", "Alumno", new { Area = "Academico" })'
                     }
                     else {
+                        console.log(data);
                         if (data.IdPersona != 0) {
                             $("#IdPersona_madre").val(data.IdPersona);
                             $("#pe_Naturaleza_madre").val(data.pe_Naturaleza);
@@ -1566,11 +1681,15 @@
                             $("#CargoTrabajo_madre").val(data.CargoTrabajo);
                             $("#AniosServicio_madre").val(data.AniosServicio);
                             $("#IngresoMensual_madre").val(data.IngresoMensual);
-                            $("#VehiculoPropio_madre").val(data.VehiculoPropio);
+                            VehiculoPropio_madre.SetChecked(data.VehiculoPropio);
                             $("#Marca_madre").val(data.Marca);
                             $("#Modelo_madre").val(data.Modelo);
                             $("#CasaPropia_madre").val(data.CasaPropia);
                             $("#AnioVehiculo_madre").val(data.AnioVehiculo);
+                            IdReligion_madre.SetValue(data.IdReligion);
+                            AsisteCentroCristiano_padre.SetChecked(data.AsisteCentroCristiano);
+
+                            mostrar_vehiculo_madre();
                         }
                         else {
                             vaciar_campos_madre();
@@ -1598,6 +1717,8 @@
             $("#CodCatalogoCONADIS").val("");
             $("#NumeroCarnetConadis").val("");
             $("#PorcentajeDiscapacidad").val("");
+            IdReligion.SetValue(null);
+            AsisteCentroCristiano.SetChecked(false);
         }
 
         function vaciar_campos_padre() {
@@ -1629,6 +1750,10 @@
             $("#Marca_padre").val("");
             $("#Modelo_padre").val("");
             $("#AnioVehiculo_padre").val("");
+            IdReligion_padre.SetValue(null);
+            AsisteCentroCristiano_padre.SetChecked(false);
+
+            mostrar_vehiculo_padre();
         }
 
         function vaciar_campos_madre() {
@@ -1660,6 +1785,10 @@
             $("#Marca_madre").val("");
             $("#Modelo_madre").val("");
             $("#AnioVehiculo_madre").val("");
+            IdReligion_madre.SetValue(null);
+            AsisteCentroCristiano_madre.SetChecked(false);
+
+            mostrar_vehiculo_madre();
         }
 
 

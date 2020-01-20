@@ -34,7 +34,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_Familia_Info GetListTipo(int IdEmpresa, int IdAlumno, int IdCatalogoPAREN)
+        public aca_Familia_Info GetListTipo(int IdEmpresa, decimal IdAlumno, int IdCatalogoPAREN)
         {
             try
             {

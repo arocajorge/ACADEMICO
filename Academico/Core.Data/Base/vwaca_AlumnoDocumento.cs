@@ -20,5 +20,6 @@ namespace Core.Data.Base
         public string NomDocumento { get; set; }
         public bool EnArchivo { get; set; }
         public int OrdenDocumento { get; set; }
+        public int Secuencia { get; set; }
     }
 }

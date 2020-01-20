@@ -23,6 +23,7 @@ namespace Core.Data.Academico
                         IdEmpresa = q.IdEmpresa,
                         IdAlumno = q.IdAlumno,
                         IdDocumento = q.IdDocumento,
+                        Secuencia = q.Secuencia,
                         EnArchivo = q.EnArchivo,
                         NomDocumento = q.NomDocumento
                     }).ToList();
@@ -54,6 +55,7 @@ namespace Core.Data.Academico
                         IdEmpresa = Entity.IdEmpresa,
                         IdAlumno = Entity.IdAlumno,
                         IdDocumento = Entity.IdDocumento,
+                        Secuencia = Entity.Secuencia,
                         EnArchivo = Entity.EnArchivo,
                         NomDocumento = Entity.NomDocumento
                     };
@@ -93,6 +95,7 @@ namespace Core.Data.Academico
                                  IdEmpresa = q.IdEmpresa,
                                  IdAlumno = q.IdAlumno,
                                  IdDocumento = q.IdDocumento,
+                                 Secuencia = q.Secuencia,
                                  NomDocumento = q.NomDocumento
                              }).ToList();
 
@@ -121,6 +124,97 @@ namespace Core.Data.Academico
 
                 Lista.ForEach(q=> q.IdStringDoc = Convert.ToString(q.IdDocumento));
                 return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int getSecuencia(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                int ID = 1;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var cont = Context.aca_AlumnoDocumento.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).Count();
+                    if (cont > 0)
+                        ID = Context.aca_AlumnoDocumento.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).Max(q => q.Secuencia) + 1;
+                }
+
+                return ID;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool guardarDB(aca_AlumnoDocumento_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_AlumnoDocumento Entity = new aca_AlumnoDocumento
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdAlumno = info.IdAlumno,
+                        IdDocumento = info.IdDocumento,
+                        Secuencia = info.Secuencia = getSecuencia(info.IdEmpresa, info.IdAlumno),
+                        EnArchivo = true
+                    };
+                    Context.aca_AlumnoDocumento.Add(Entity);
+
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(aca_AlumnoDocumento_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_AlumnoDocumento Entity = Context.aca_AlumnoDocumento.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.Secuencia == info.Secuencia && q.IdAlumno==info.IdAlumno);
+                    if (Entity == null)
+                        return false;
+
+                    Entity.IdDocumento = info.IdDocumento;
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool eliminarDB(aca_AlumnoDocumento_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var sql = "delete from aca_AlumnoDocumento where IdEmpresa =" + info.IdEmpresa + " and IdAlumno = " + info.IdAlumno + " and Secuencia = " + info.Secuencia;
+                    Context.Database.ExecuteSqlCommand(sql);
+                }
+
+                return true;
             }
             catch (Exception)
             {

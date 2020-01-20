@@ -57,6 +57,7 @@ namespace Core.Data.Academico
                             pe_sexo = q.pe_sexo,
                             IdEstadoCivil = q.IdEstadoCivil,
                             pe_fechaNacimiento = q.pe_fechaNacimiento,
+                            EstaFallecido = q.EstaFallecido,
                             Estado = q.Estado
                         });
                     });
@@ -71,7 +72,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_Familia_Info getListTipo(int IdEmpresa, int IdAlumno, int IdCatalogoPAREN)
+        public aca_Familia_Info getListTipo(int IdEmpresa, decimal IdAlumno, int IdCatalogoPAREN)
         {
             try
             {
@@ -121,6 +122,9 @@ namespace Core.Data.Academico
                         NumeroCarnetConadis = Entity.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
                         pe_telfono_Contacto = Entity.pe_telfono_Contacto,
+                        IdReligion = Entity.IdReligion,
+                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
+                        EstaFallecido = Entity.EstaFallecido,
                         Estado = Entity.Estado
                     };
                 }
@@ -185,6 +189,9 @@ namespace Core.Data.Academico
                         NumeroCarnetConadis = Entity.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
                         pe_telfono_Contacto = Entity.pe_telfono_Contacto,
+                        IdReligion = Entity.IdReligion,
+                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
+                        EstaFallecido = Entity.EstaFallecido,
                         Estado = Entity.Estado
                     };
                 }
@@ -249,6 +256,9 @@ namespace Core.Data.Academico
                         NumeroCarnetConadis = Entity.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
                         pe_telfono_Contacto = Entity.pe_telfono_Contacto,
+                        IdReligion = Entity.IdReligion,
+                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
+                        EstaFallecido = Entity.EstaFallecido,
                         Estado = Entity.Estado
                     };
                 }
@@ -312,7 +322,10 @@ namespace Core.Data.Academico
                         CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
                         NumeroCarnetConadis = Entity.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
-                        pe_telfono_Contacto = Entity.pe_telfono_Contacto
+                        pe_telfono_Contacto = Entity.pe_telfono_Contacto,
+                        IdReligion = Entity.IdReligion,
+                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
+                        EstaFallecido = Entity.EstaFallecido,
                     };
                 }
 
@@ -363,6 +376,8 @@ namespace Core.Data.Academico
                     info.pe_fechaNacimiento = Entity_per.pe_fechaNacimiento;
                     info.IdEstadoCivil = Entity_per.IdEstadoCivil;
                     info.IdProfesion = Entity_per.IdProfesion ?? 0;
+                    info.IdReligion = Entity_per.IdReligion;
+                    info.AsisteCentroCristiano = Entity_per.AsisteCentroCristiano;
                     info.Secuencia = 0;
                     Context_general.Dispose();
                     Context_academico.Dispose();
@@ -407,7 +422,10 @@ namespace Core.Data.Academico
                     CodCatalogoSangre = Entity_fam.CodCatalogoSangre,
                     CodCatalogoCONADIS = Entity_fam.CodCatalogoCONADIS,
                     NumeroCarnetConadis = Entity_fam.NumeroCarnetConadis,
-                    PorcentajeDiscapacidad = Entity_fam.PorcentajeDiscapacidad
+                    IdReligion = Entity_fam.IdReligion,
+                    AsisteCentroCristiano = Entity_fam.AsisteCentroCristiano,
+                    PorcentajeDiscapacidad = Entity_fam.PorcentajeDiscapacidad,
+                    EstaFallecido = Entity_fam.EstaFallecido
                 };
 
                 return info;
@@ -502,6 +520,7 @@ namespace Core.Data.Academico
                         AnioVehiculo = info.AnioVehiculo,
                         CasaPropia = info.CasaPropia,
                         EsRepresentante = info.EsRepresentante,
+                        EstaFallecido = info.EstaFallecido,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -575,6 +594,7 @@ namespace Core.Data.Academico
                     Entity.Modelo = info.Modelo;
                     Entity.AnioVehiculo = info.AnioVehiculo;
                     Entity.CasaPropia = info.CasaPropia;
+                    Entity.EstaFallecido = info.EstaFallecido;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 

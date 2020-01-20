@@ -5,7 +5,7 @@
         settings.Name = "GridViewPartial_AlumnoDocumento";
         settings.CallbackRouteValues = new { Controller = "Alumno", Action = "GridViewPartial_AlumnoDocumento" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdDocumento";
+        settings.KeyFieldName = "Secuencia";
 
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
@@ -59,7 +59,31 @@
             });
         });
 
-        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); SetAlumnoDocumento();}";
+        settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {var editor = IdDocumento;editor.Focus(); }}";
     });
 }
 @grid.Bind(Model).GetHtml()
+
+<script>
+    function SetAlumnoDocumento() {
+        var datos = {
+            IdAlumno: $("#IdAlumno").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetAlumnoDocumento", "Alumno", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>

@@ -102,7 +102,9 @@ namespace Core.Data.Academico
                         IdCiudad = Entity.IdCiudad,
                         IdParroquia = Entity.IdParroquia,
                         Sector = Entity.Sector,
-                        LugarNacimiento = Entity.LugarNacimiento
+                        LugarNacimiento = Entity.LugarNacimiento,
+                        IdReligion = Entity.IdReligion,
+                        AsisteCentroCristiano = Entity.AsisteCentroCristiano
                     };
                 }
 

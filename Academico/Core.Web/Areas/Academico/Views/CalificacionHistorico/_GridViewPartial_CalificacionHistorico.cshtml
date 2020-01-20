@@ -66,20 +66,14 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("Descripcion", "Año").Width = Unit.Percentage(15);
-        settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(25);
+        settings.Columns.Add("Descripcion", "Año").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomNivel", "Nivel").Width = Unit.Percentage(20);
+        settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(20);
         settings.Columns.Add("pe_nombreCompleto", "Alumno").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Promedio";
             column.Caption = "Promedio";
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(10);
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Conducta";
-            column.Caption = "Conducta";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
         });

@@ -43,6 +43,7 @@ namespace Core.Info.Academico
         public bool CasaPropia { get; set; }
         public bool SeFactura { get; set; }
         public bool EsRepresentante { get; set; }
+        public bool EstaFallecido { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -86,6 +87,9 @@ namespace Core.Info.Academico
         public int IdProfesion { get; set; }
         [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
         public int Idtipo_cliente { get; set; }
+        [Required(ErrorMessage = "El campo religión es obligatorio")]
+        public Nullable<int> IdReligion { get; set; }
+        public Nullable<bool> AsisteCentroCristiano { get; set; }
         public string IdTipoCredito { get; set; }
         [Required(ErrorMessage = "El campo ciudad es obligatorio")]
         public string IdCiudad { get; set; }

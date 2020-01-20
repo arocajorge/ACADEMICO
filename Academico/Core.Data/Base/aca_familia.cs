@@ -36,6 +36,7 @@ namespace Core.Data.Base
         public bool CasaPropia { get; set; }
         public bool SeFactura { get; set; }
         public bool EsRepresentante { get; set; }
+        public bool EstaFallecido { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

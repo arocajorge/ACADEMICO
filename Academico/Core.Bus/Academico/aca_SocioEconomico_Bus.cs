@@ -72,5 +72,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_Matricula_Info> GetListHermanos(int IdEmpresa=0, decimal IdAlumno=0)
+        {
+            try
+            {
+                return odata.GetListHermanos(IdEmpresa, IdAlumno);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

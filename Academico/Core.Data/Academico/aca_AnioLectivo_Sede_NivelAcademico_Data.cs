@@ -58,6 +58,30 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Sede_NivelAcademico_Info> GetListNivel_x_Anio(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Sede_NivelAcademico_Info> Lista = new List<aca_AnioLectivo_Sede_NivelAcademico_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    Lista = odata.aca_AnioLectivo_Sede_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).GroupBy(q => new { q.IdEmpresa, q.IdAnio, q.IdNivel, q.NomNivel }).Select(q => new aca_AnioLectivo_Sede_NivelAcademico_Info
+                    {
+                        IdEmpresa = q.Key.IdEmpresa,
+                        IdAnio = q.Key.IdAnio,
+                        IdNivel = q.Key.IdNivel,
+                        NomNivel = q.Key.NomNivel,
+                    }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_AnioLectivo_Sede_NivelAcademico_Info getInfo(int IdEmpresa, int IdSede, int IdAnio)
         {
             try

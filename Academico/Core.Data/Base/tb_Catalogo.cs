@@ -42,6 +42,7 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
     
+        public virtual tb_CatalogoTipo tb_CatalogoTipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_persona> tb_persona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -60,6 +61,5 @@ namespace Core.Data.Base
         public virtual ICollection<tb_persona> tb_persona7 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_persona> tb_persona8 { get; set; }
-        public virtual tb_CatalogoTipo tb_CatalogoTipo { get; set; }
     }
 }

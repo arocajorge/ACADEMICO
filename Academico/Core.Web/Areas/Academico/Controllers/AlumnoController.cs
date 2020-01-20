@@ -37,6 +37,7 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         aca_Sede_Bus bus_sede = new aca_Sede_Bus();
         aca_Documento_Bus bus_documento = new aca_Documento_Bus();
+        tb_Religion_Bus bus_religion = new tb_Religion_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         public static UploadedFile file { get; set; }
@@ -113,6 +114,7 @@ namespace Core.Web.Areas.Academico.Controllers
             lst_tipo_discapacidad.Add(new tb_Catalogo_Info { CodCatalogo = "", ca_descripcion = ""});
             var lst_profesion = bus_profesion.GetList(false);
             lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "" });
+            var lst_religion = bus_religion.GetList(false);
 
             ViewBag.lst_sexo = lst_sexo;
             ViewBag.lst_estado_civil = lst_estado_civil;
@@ -122,7 +124,8 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_tipo_discapacidad = lst_tipo_discapacidad;
             ViewBag.lst_profesion = lst_profesion;
             ViewBag.lst_instruccion = lst_instruccion;
-   
+            ViewBag.lst_religion = lst_religion;
+
             var lst_termino_pago = bus_termino_pago.get_list(false);
             ViewBag.lst_termino_pago = lst_termino_pago;
 
@@ -221,8 +224,10 @@ namespace Core.Web.Areas.Academico.Controllers
                     pe_celular = model.Celular_padre,
                     pe_direccion = model.Direccion_padre,
                     IdEstadoCivil = model.IdEstadoCivil_padre,
-                    IdProfesion = model.IdProfesion_padre
-                };        
+                    IdProfesion = model.IdProfesion_padre,
+                    IdReligion = model.IdReligion_padre,
+                    AsisteCentroCristiano = model.AsisteCentroCristiano_padre
+            };        
 
             return info_persona;
         }
@@ -249,7 +254,9 @@ namespace Core.Web.Areas.Academico.Controllers
                     pe_celular = model.Celular_madre,
                     pe_direccion = model.Direccion_madre,
                     IdEstadoCivil = model.IdEstadoCivil_madre,
-                    IdProfesion = model.IdProfesion_padre
+                    IdProfesion = model.IdProfesion_padre,
+                    IdReligion = model.IdReligion_madre,
+                    AsisteCentroCristiano = model.AsisteCentroCristiano_madre
             };
 
             return info_persona;
@@ -326,7 +333,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         info_det.NomDocumento = info_documento.NomDocumento;
                     }
                 }
-
+                
                 ListaAlumnoDocumento.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
 
@@ -356,9 +363,9 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_AlumnoDocumento", model);
         }
 
-        public ActionResult EditingDelete(int IdDocumento)
+        public ActionResult EditingDelete(int Secuencia)
         {
-            ListaAlumnoDocumento.DeleteRow(IdDocumento, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ListaAlumnoDocumento.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = ListaAlumnoDocumento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return PartialView("_GridViewPartial_AlumnoDocumento", model);
@@ -434,9 +441,12 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_telfono_Contacto = model.pe_telfono_Contacto,
                 pe_correo = model.Correo,
                 pe_celular = model.Celular,
-                pe_direccion = model.Direccion
+                pe_direccion = model.Direccion,
+                IdReligion = model.IdReligion,
+                AsisteCentroCristiano = model.AsisteCentroCristiano
             };
 
+            model.lst_alumno_documentos = ListaAlumnoDocumento.get_list(model.IdTransaccionSession);
             model.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.CURSANDO);
             model.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REGISTRADO);
             model.info_persona_alumno = info_persona_alumno;
@@ -564,6 +574,9 @@ namespace Core.Web.Areas.Academico.Controllers
             model.Modelo_padre = info_fam_padre.Modelo;
             model.AnioVehiculo_padre = info_fam_padre.AnioVehiculo;
             model.CasaPropia_padre = info_fam_padre.CasaPropia;
+            model.IdReligion_padre = info_fam_padre.IdReligion;
+            model.AsisteCentroCristiano_padre = info_fam_padre.AsisteCentroCristiano;
+            model.EstaFallecido_padre = info_fam_padre.EstaFallecido;
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
             model.SeFactura_madre = info_fam_madre.SeFactura;
@@ -598,6 +611,9 @@ namespace Core.Web.Areas.Academico.Controllers
             model.Modelo_madre = info_fam_madre.Modelo;
             model.AnioVehiculo_madre = info_fam_madre.AnioVehiculo;
             model.CasaPropia_madre = info_fam_madre.CasaPropia;
+            model.IdReligion_madre = info_fam_madre.IdReligion;
+            model.AsisteCentroCristiano_madre = info_fam_madre.AsisteCentroCristiano;
+            model.EstaFallecido_madre = info_fam_madre.EstaFallecido;
 
             if (model == null)
                 return RedirectToAction("Index");
@@ -636,12 +652,15 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_telfono_Contacto = model.pe_telfono_Contacto,
                 pe_correo = model.Correo,
                 pe_celular = model.Celular,
-                pe_direccion = model.Direccion
+                pe_direccion = model.Direccion,
+                IdReligion = model.IdReligion,
+                AsisteCentroCristiano = model.AsisteCentroCristiano
             };
 
             model.info_persona_alumno = info_persona_alumno;
             model.info_persona_padre = armar_info_padre(model);
             model.info_persona_madre = armar_info_madre(model);
+            model.lst_alumno_documentos = ListaAlumnoDocumento.get_list(model.IdTransaccionSession);
 
             if (model.alu_foto == null)
                 model.alu_foto = new byte[0];
@@ -749,6 +768,9 @@ namespace Core.Web.Areas.Academico.Controllers
             model.NumeroCarnetConadis_padre = info_fam_padre.NumeroCarnetConadis;
             model.CodCatalogoCONADIS_padre = (info_fam_padre.CodCatalogoCONADIS == null ? "" : info_fam_padre.CodCatalogoCONADIS);
             model.IdProfesion_padre = (info_fam_padre == null || info_fam_padre.IdProfesion == 0 ? 0 : info_fam_padre.IdProfesion);
+            model.IdReligion_padre = info_fam_padre.IdReligion;
+            model.AsisteCentroCristiano_padre = info_fam_padre.AsisteCentroCristiano;
+            model.EstaFallecido_padre = info_fam_padre.EstaFallecido;
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
             model.SeFactura_madre = info_fam_madre.SeFactura;
@@ -768,6 +790,9 @@ namespace Core.Web.Areas.Academico.Controllers
             model.NumeroCarnetConadis_madre = info_fam_madre.NumeroCarnetConadis;
             model.CodCatalogoCONADIS_madre = (info_fam_madre.CodCatalogoCONADIS == null ? "" : info_fam_madre.CodCatalogoCONADIS);
             model.IdProfesion_madre = (info_fam_madre == null || info_fam_madre.IdProfesion == 0 ? 0 : info_fam_madre.IdProfesion);
+            model.IdReligion_madre = info_fam_madre.IdReligion;
+            model.AsisteCentroCristiano_madre = info_fam_madre.AsisteCentroCristiano;
+            model.EstaFallecido_madre = info_fam_madre.EstaFallecido;
 
             if (model == null)
                 return RedirectToAction("Index");
@@ -835,6 +860,13 @@ namespace Core.Web.Areas.Academico.Controllers
             IdSocioEconomico = (info_socioeconomico == null ? 0 : info_socioeconomico.IdSocioEconomico);
 
             return Json(new { SocioEconomico = IdSocioEconomico }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SetAlumnoDocumento(decimal IdAlumno = 0)
+        {
+            SessionFixed.IdAlumno = IdAlumno.ToString();
+
+            return Json("", JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -963,6 +995,8 @@ namespace Core.Web.Areas.Academico.Controllers
 
     public class aca_AlumnoDocumento_List
     {
+        aca_AlumnoDocumento_Bus bus_alumno_doc = new aca_AlumnoDocumento_Bus();
+
         string Variable = "aca_AlumnoDocumento_Info";
         public List<aca_AlumnoDocumento_Info> get_list(decimal IdTransaccionSession)
         {
@@ -983,8 +1017,12 @@ namespace Core.Web.Areas.Academico.Controllers
         public void AddRow(aca_AlumnoDocumento_Info info_det, decimal IdTransaccionSession)
         {
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
-
             List<aca_AlumnoDocumento_Info> list = get_list(IdTransaccionSession);
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            info_det.IdAlumno = Convert.ToInt32(SessionFixed.IdAlumno);
+            info_det.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            bus_alumno_doc.GuardarDB(info_det);
             list.Add(info_det);
         }
 
@@ -992,15 +1030,23 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            aca_AlumnoDocumento_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdDocumento == info_det.IdDocumento).FirstOrDefault();
+            aca_AlumnoDocumento_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).FirstOrDefault();
             edited_info.IdDocumento = info_det.IdDocumento;
             edited_info.NomDocumento = info_det.NomDocumento;
+            edited_info.IdAlumno = Convert.ToInt32(SessionFixed.IdAlumno);
+            edited_info.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            bus_alumno_doc.ModificarDB(edited_info);
         }
 
-        public void DeleteRow(int IdDocumento, decimal IdTransaccionSession)
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {
             List<aca_AlumnoDocumento_Info> list = get_list(IdTransaccionSession);
-            list.Remove(list.Where(q => q.IdDocumento == IdDocumento).FirstOrDefault());
+            var info_det = list.Where(q=>q.Secuencia == Secuencia).FirstOrDefault();
+            info_det.IdAlumno = Convert.ToInt32(SessionFixed.IdAlumno);
+            info_det.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            list.Remove(list.Where(q => q.Secuencia == Secuencia).FirstOrDefault());
+            bus_alumno_doc.EliminarDB(info_det);
         }
     }
 }

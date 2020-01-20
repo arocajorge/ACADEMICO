@@ -31,6 +31,7 @@ namespace Core.Data.Academico
                             Promedio = q.Promedio,
                             Conducta = q.Conducta,
                             Descripcion = q.Descripcion,
+                            NomNivel=q.NomNivel,
                             NomCurso= q.NomCurso,
                             pe_nombreCompleto = q.pe_nombreCompleto
                         });
@@ -63,7 +64,9 @@ namespace Core.Data.Academico
                         IdEmpresa = Entity.IdEmpresa,
                         IdAnio = Entity.IdAnio,
                         IdAlumno = Entity.IdAlumno,
+                        IdNivel = Entity.IdNivel,
                         IdCurso = Entity.IdCurso,
+                        AntiguaInstitucion = Entity.AntiguaInstitucion,
                         Promedio = Entity.Promedio,
                         Conducta = Entity.Conducta
                     };
@@ -89,7 +92,9 @@ namespace Core.Data.Academico
                         IdEmpresa = info.IdEmpresa,
                         IdAnio = info.IdAnio,
                         IdAlumno = info.IdAlumno,
+                        IdNivel=info.IdNivel,
                         IdCurso = info.IdCurso,
+                        AntiguaInstitucion= info.AntiguaInstitucion,
                         Promedio = info.Promedio,
                         Conducta = info.Conducta
                     };
@@ -115,7 +120,10 @@ namespace Core.Data.Academico
                     aca_AnioLectivoCalificacionHistorico Entity = Context.aca_AnioLectivoCalificacionHistorico.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdAlumno == info.IdAlumno);
                     if (Entity == null)
                         return false;
+
+                    Entity.IdNivel = info.IdNivel;
                     Entity.IdCurso = info.IdCurso;
+                    Entity.AntiguaInstitucion = info.AntiguaInstitucion;
                     Entity.Promedio = info.Promedio;
                     Entity.Conducta = info.Conducta;
 

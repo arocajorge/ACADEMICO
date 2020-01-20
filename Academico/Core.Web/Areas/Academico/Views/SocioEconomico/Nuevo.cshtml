@@ -47,222 +47,248 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdEmpresa">Tenencia de vivienda*</label>
-                    @Html.DropDownListFor(q => q.IdCatalogoFichaTVi, new SelectList(ViewBag.lst_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaTVi" })
-                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaTVi, "", new { @class = "text-danger" })
+    <div id="Tabs" role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tb_socioeconomico" aria-controls="general" role="tab" data-toggle="tab">Datos SocioEconómicos</a>
+            </li>
+            <li>
+                <a href="#tb_alumno_hermanos" aria-controls="hermanos" role="tab" data-toggle="tab">Hermanos</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_socioeconomico">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Tenencia de vivienda*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaTVi, new SelectList(ViewBag.lst_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaTVi" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaTVi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Tipo de vivienda*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaVi, new SelectList(ViewBag.lst_tipo_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaVi" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaVi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdEmpresa">Tipo de vivienda*</label>
-                    @Html.DropDownListFor(q => q.IdCatalogoFichaVi, new SelectList(ViewBag.lst_tipo_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaVi" })
-                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaVi, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdEmpresa">Agua*</label>
-                    @Html.DropDownListFor(q => q.IdCatalogoFichaAg, new SelectList(ViewBag.lst_agua, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaAg" })
-                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaAg, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="bo_EsBodega"></label>
-                    @Html.DevExpress().CheckBoxFor(q => q.TieneElectricidad, settings =>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Agua*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaAg, new SelectList(ViewBag.lst_agua, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaAg" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaAg, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.TieneElectricidad, settings =>
                             {
                                 settings.Name = "TieneElectricidad";
                                 settings.Text = "Luz electrica";
                             }).GetHtml()
-                    @Html.ValidationMessageFor(q => q.TieneElectricidad, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="bo_EsBodega"></label>
-                    @Html.DevExpress().CheckBoxFor(q => q.TieneHermanos, settings =>
+                                @Html.ValidationMessageFor(q => q.TieneElectricidad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.TieneHermanos, settings =>
                             {
                                 settings.Name = "TieneHermanos";
                                 settings.Text = "Tiene hermanos en la institución";
                                 settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_div();}";
                             }).GetHtml()
-                    @Html.ValidationMessageFor(q => q.TieneHermanos, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.TieneHermanos, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="tiene_hermanos">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Nombres y curso*</label>
+                                @Html.TextBoxFor(q => q.NombreHermanos, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.NombreHermanos, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Sueldo padre*</label>
+                                @Html.TextBoxFor(q => q.SueldoPadre, new { @class = "form-control", @id = "SueldoPadre" })
+                                @Html.ValidationMessageFor(m => m.SueldoPadre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Sueldo madre*</label>
+                                @Html.TextBoxFor(q => q.SueldoMadre, new { @class = "form-control", @id = "SueldoMadre" })
+                                @Html.ValidationMessageFor(m => m.SueldoMadre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otros ingresos Padre*</label>
+                                @Html.TextBoxFor(q => q.OtroIngresoPadre, new { @class = "form-control", @id = "OtroIngresoPadre" })
+                                @Html.ValidationMessageFor(m => m.OtroIngresoPadre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otros ingresos Madre*</label>
+                                @Html.TextBoxFor(q => q.OtroIngresoMadre, new { @class = "form-control", @id = "OtroIngresoMadre" })
+                                @Html.ValidationMessageFor(m => m.OtroIngresoMadre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Gastos alimentación*</label>
+                                @Html.TextBoxFor(q => q.GastoAlimentacion, new { @class = "form-control", @id = "GastoAlimentacion" })
+                                @Html.ValidationMessageFor(m => m.GastoAlimentacion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Gastos educación*</label>
+                                @Html.TextBoxFor(q => q.GastoEducacion, new { @class = "form-control", @id = "GastoEducacion" })
+                                @Html.ValidationMessageFor(m => m.GastoEducacion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Gastos servicios básico*</label>
+                                @Html.TextBoxFor(q => q.GastoServicioBasico, new { @class = "form-control", @id = "GastoServicioBasico" })
+                                @Html.ValidationMessageFor(m => m.GastoServicioBasico, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Gastos arriendo*</label>
+                                @Html.TextBoxFor(q => q.GastoArriendo, new { @class = "form-control", @id = "GastoArriendo" })
+                                @Html.ValidationMessageFor(m => m.GastoArriendo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Gastos préstamo*</label>
+                                @Html.TextBoxFor(q => q.GastoPrestamo, new { @class = "form-control", @id = "GastoPrestamo" })
+                                @Html.ValidationMessageFor(m => m.GastoPrestamo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otros gastos*</label>
+                                @Html.TextBoxFor(q => q.OtroGasto, new { @class = "form-control", @id = "OtroGasto" })
+                                @Html.ValidationMessageFor(m => m.OtroGasto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Total de ingresos*</label>
+                                @Html.TextBoxFor(q => q.TotalIngreso, new { @class = "form-control", @id = "TotalIngreso", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(m => m.TotalIngreso, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Total de gastos*</label>
+                                @Html.TextBoxFor(q => q.TotalGasto, new { @class = "form-control", @id = "TotalGasto", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(m => m.TotalGasto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Saldo*</label>
+                                @Html.TextBoxFor(q => q.Saldo, new { @class = "form-control", @id = "Saldo", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(m => m.Saldo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">¿Qué le impulsa a ingresar al Liceo Cristiano de Guayaquil?*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaMot, new SelectList(ViewBag.lst_ing_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaMot" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaMot, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-8" id="otro_motivo_ingreso" hidden>
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otro motivo de Ingreso</label>
+                                @Html.TextBoxFor(q => q.OtroMotivoIngreso, new { @class = "form-control", @id = "OtroMotivoIngreso" })
+                                @Html.ValidationMessageFor(m => m.OtroMotivoIngreso, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">¿Cómo se informó de nuestra institución?*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaIns, new SelectList(ViewBag.lst_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaIns" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaIns, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-8" id="otro_informacion_inst" hidden>
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otra información</label>
+                                @Html.TextBoxFor(q => q.OtroInformacionInst, new { @class = "form-control", @id = "OtroInformacionInst" })
+                                @Html.ValidationMessageFor(m => m.OtroInformacionInst, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">¿Cómo financiara los estudios?*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaFin, new SelectList(ViewBag.lst_financiamiento, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaFin" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaFin, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-8" id="otro_forma_financ" hidden>
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otra forma de financiamiento</label>
+                                @Html.TextBoxFor(q => q.OtroFinanciamiento, new { @class = "form-control", @id = "OtroFinanciamiento" })
+                                @Html.ValidationMessageFor(m => m.OtroFinanciamiento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row" id="tiene_hermanos">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdEmpresa">Nombres y curso*</label>
-                    @Html.TextBoxFor(q => q.NombreHermanos, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.NombreHermanos, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Sueldo padre*</label>
-                    @Html.TextBoxFor(q => q.SueldoPadre, new { @class = "form-control", @id= "SueldoPadre" })
-                    @Html.ValidationMessageFor(m => m.SueldoPadre, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Sueldo madre*</label>
-                    @Html.TextBoxFor(q => q.SueldoMadre, new { @class = "form-control", @id = "SueldoMadre" })
-                    @Html.ValidationMessageFor(m => m.SueldoMadre, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Otros ingresos Padre*</label>
-                    @Html.TextBoxFor(q => q.OtroIngresoPadre, new { @class = "form-control", @id = "OtroIngresoPadre" })
-                    @Html.ValidationMessageFor(m => m.OtroIngresoPadre, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Otros ingresos Madre*</label>
-                    @Html.TextBoxFor(q => q.OtroIngresoMadre, new { @class = "form-control", @id = "OtroIngresoMadre" })
-                    @Html.ValidationMessageFor(m => m.OtroIngresoMadre, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Gastos alimentación*</label>
-                    @Html.TextBoxFor(q => q.GastoAlimentacion, new { @class = "form-control", @id = "GastoAlimentacion" })
-                    @Html.ValidationMessageFor(m => m.GastoAlimentacion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Gastos educación*</label>
-                    @Html.TextBoxFor(q => q.GastoEducacion, new { @class = "form-control", @id = "GastoEducacion" })
-                    @Html.ValidationMessageFor(m => m.GastoEducacion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Gastos servicios básico*</label>
-                    @Html.TextBoxFor(q => q.GastoServicioBasico, new { @class = "form-control", @id = "GastoServicioBasico" })
-                    @Html.ValidationMessageFor(m => m.GastoServicioBasico, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Gastos arriendo*</label>
-                    @Html.TextBoxFor(q => q.GastoArriendo, new { @class = "form-control", @id = "GastoArriendo" })
-                    @Html.ValidationMessageFor(m => m.GastoArriendo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Gastos préstamo*</label>
-                    @Html.TextBoxFor(q => q.GastoPrestamo, new { @class = "form-control", @id = "GastoPrestamo" })
-                    @Html.ValidationMessageFor(m => m.GastoPrestamo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Otros gastos*</label>
-                    @Html.TextBoxFor(q => q.OtroGasto, new { @class = "form-control", @id = "OtroGasto" })
-                    @Html.ValidationMessageFor(m => m.OtroGasto, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Total de ingresos*</label>
-                    @Html.TextBoxFor(q => q.TotalIngreso, new { @class = "form-control", @id = "TotalIngreso", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(m => m.TotalIngreso, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Total de gastos*</label>
-                    @Html.TextBoxFor(q => q.TotalGasto, new { @class = "form-control", @id = "TotalGasto", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(m => m.TotalGasto, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Saldo*</label>
-                    @Html.TextBoxFor(q => q.Saldo, new { @class = "form-control", @id = "Saldo", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(m => m.Saldo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdEmpresa">¿Qué le impulsa a ingresar al Liceo Cristiano de Guayaquil?*</label>
-                    @Html.DropDownListFor(q => q.IdCatalogoFichaMot, new SelectList(ViewBag.lst_ing_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaMot" })
-                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaMot, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-8" id="otro_motivo_ingreso" hidden>
-                <div class="form-group">
-                    <label for="IdEmpresa">Otro motivo de Ingreso</label>
-                    @Html.TextBoxFor(q => q.OtroMotivoIngreso, new { @class = "form-control", @id = "OtroMotivoIngreso" })
-                    @Html.ValidationMessageFor(m => m.OtroMotivoIngreso, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdEmpresa">¿Cómo se informó de nuestra institución?*</label>
-                    @Html.DropDownListFor(q => q.IdCatalogoFichaIns, new SelectList(ViewBag.lst_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaIns" })
-                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaIns, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-8" id="otro_informacion_inst" hidden>
-                <div class="form-group">
-                    <label for="IdEmpresa">Otra información</label>
-                    @Html.TextBoxFor(q => q.OtroInformacionInst, new { @class = "form-control", @id = "OtroInformacionInst" })
-                    @Html.ValidationMessageFor(m => m.OtroInformacionInst, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdEmpresa">¿Cómo financiara los estudios?*</label>
-                    @Html.DropDownListFor(q => q.IdCatalogoFichaFin, new SelectList(ViewBag.lst_financiamiento, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaFin" })
-                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaFin, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-8" id="otro_forma_financ" hidden>
-                <div class="form-group">
-                    <label for="IdEmpresa">Otra forma de financiamiento</label>
-                    @Html.TextBoxFor(q => q.OtroFinanciamiento, new { @class = "form-control", @id = "OtroFinanciamiento" })
-                    @Html.ValidationMessageFor(m => m.OtroFinanciamiento, "", new { @class = "text-danger" })
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_alumno_hermanos">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_AlumnoHermanos")
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

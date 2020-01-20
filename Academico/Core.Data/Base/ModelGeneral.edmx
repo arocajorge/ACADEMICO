@@ -266,6 +266,8 @@
           <Property Name="PorcentajeDiscapacidad" Type="float" />
           <Property Name="NumeroCarnetConadis" Type="varchar" MaxLength="200" />
           <Property Name="IdProfesion" Type="int" />
+          <Property Name="IdReligion" Type="int" />
+          <Property Name="AsisteCentroCristiano" Type="bit" />
         </EntityType>
         <EntityType Name="tb_profesion">
           <Key>
@@ -311,6 +313,21 @@
           <Property Name="codigo" Type="varchar" MaxLength="10" />
           <Property Name="estado" Type="bit" Nullable="false" />
           <Property Name="IdPais" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_Religion">
+          <Key>
+            <PropertyRef Name="IdReligion" />
+          </Key>
+          <Property Name="IdReligion" Type="int" Nullable="false" />
+          <Property Name="NomReligion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="tb_sis_Documento_Tipo">
           <Key>
@@ -936,6 +953,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <EntitySet Name="tb_profesion" EntityType="Self.tb_profesion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_provincia" EntityType="Self.tb_provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_region" EntityType="Self.tb_region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_Religion" EntityType="Self.tb_Religion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_Documento_Tipo" EntityType="Self.tb_sis_Documento_Tipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_Documento_Tipo_Talonario" EntityType="Self.tb_sis_Documento_Tipo_Talonario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_sis_Documento_Tipo_x_Empresa" EntityType="Self.tb_sis_Documento_Tipo_x_Empresa" Schema="dbo" store:Type="Tables" />
@@ -1182,48 +1200,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             <End Role="tb_sis_Impuesto_Tipo" EntitySet="tb_sis_Impuesto_Tipo" />
             <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
           </AssociationSet>
-          <EntitySet Name="tb_persona" EntityType="ModelGeneral.tb_persona" />
           <EntitySet Name="tb_profesion" EntityType="ModelGeneral.tb_profesion" />
-          <AssociationSet Name="FK_tb_persona_tb_Catalogo" Association="ModelGeneral.FK_tb_persona_tb_Catalogo">
-            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
-            <End Role="tb_persona" EntitySet="tb_persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_persona_tb_Catalogo1" Association="ModelGeneral.FK_tb_persona_tb_Catalogo1">
-            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
-            <End Role="tb_persona" EntitySet="tb_persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_persona_tb_Catalogo2" Association="ModelGeneral.FK_tb_persona_tb_Catalogo2">
-            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
-            <End Role="tb_persona" EntitySet="tb_persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_persona_tb_Catalogo3" Association="ModelGeneral.FK_tb_persona_tb_Catalogo3">
-            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
-            <End Role="tb_persona" EntitySet="tb_persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_persona_tb_Catalogo4" Association="ModelGeneral.FK_tb_persona_tb_Catalogo4">
-            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
-            <End Role="tb_persona" EntitySet="tb_persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_persona_tb_Catalogo5" Association="ModelGeneral.FK_tb_persona_tb_Catalogo5">
-            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
-            <End Role="tb_persona" EntitySet="tb_persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_persona_tb_Catalogo6" Association="ModelGeneral.FK_tb_persona_tb_Catalogo6">
-            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
-            <End Role="tb_persona" EntitySet="tb_persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_persona_tb_Catalogo7" Association="ModelGeneral.FK_tb_persona_tb_Catalogo7">
-            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
-            <End Role="tb_persona" EntitySet="tb_persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_persona_tb_Catalogo8" Association="ModelGeneral.FK_tb_persona_tb_Catalogo8">
-            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
-            <End Role="tb_persona" EntitySet="tb_persona" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tb_persona_tb_profesion" Association="ModelGeneral.FK_tb_persona_tb_profesion">
-            <End Role="tb_profesion" EntitySet="tb_profesion" />
-            <End Role="tb_persona" EntitySet="tb_persona" />
-          </AssociationSet>
           <EntitySet Name="tb_pais" EntityType="ModelGeneral.tb_pais" />
           <EntitySet Name="tb_provincia" EntityType="ModelGeneral.tb_provincia" />
           <EntitySet Name="tb_region" EntityType="ModelGeneral.tb_region" />
@@ -1297,10 +1274,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             <End Role="tb_banco" EntitySet="tb_banco" />
             <End Role="tb_banco_procesos_bancarios_x_empresa" EntitySet="tb_banco_procesos_bancarios_x_empresa" />
           </AssociationSet>
-          <AssociationSet Name="FK_tb_persona_tb_banco" Association="ModelGeneral.FK_tb_persona_tb_banco">
-            <End Role="tb_banco" EntitySet="tb_banco" />
-            <End Role="tb_persona" EntitySet="tb_persona" />
-          </AssociationSet>
           <AssociationSet Name="FK_tb_parametro_tb_sis_Impuesto" Association="ModelGeneral.FK_tb_parametro_tb_sis_Impuesto">
             <End Role="tb_sis_Impuesto" EntitySet="tb_sis_Impuesto" />
             <End Role="tb_parametro" EntitySet="tb_parametro" />
@@ -1312,6 +1285,52 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             <End Role="tb_empresa" EntitySet="tb_empresa" />
             <End Role="tb_sis_reporte_x_tb_empresa" EntitySet="tb_sis_reporte_x_tb_empresa" />
           </AssociationSet>
+          <EntitySet Name="tb_persona" EntityType="ModelGeneral.tb_persona" />
+          <AssociationSet Name="FK_tb_persona_tb_banco" Association="ModelGeneral.FK_tb_persona_tb_banco">
+            <End Role="tb_banco" EntitySet="tb_banco" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo" Association="ModelGeneral.FK_tb_persona_tb_Catalogo">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo1" Association="ModelGeneral.FK_tb_persona_tb_Catalogo1">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo2" Association="ModelGeneral.FK_tb_persona_tb_Catalogo2">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo3" Association="ModelGeneral.FK_tb_persona_tb_Catalogo3">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo4" Association="ModelGeneral.FK_tb_persona_tb_Catalogo4">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo5" Association="ModelGeneral.FK_tb_persona_tb_Catalogo5">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo6" Association="ModelGeneral.FK_tb_persona_tb_Catalogo6">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo7" Association="ModelGeneral.FK_tb_persona_tb_Catalogo7">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Catalogo8" Association="ModelGeneral.FK_tb_persona_tb_Catalogo8">
+            <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_profesion" Association="ModelGeneral.FK_tb_persona_tb_profesion">
+            <End Role="tb_profesion" EntitySet="tb_profesion" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <EntitySet Name="tb_Religion" EntityType="ModelGeneral.tb_Religion" />
           </EntityContainer>
         <EntityType Name="tb_sucursal">
           <Key>
@@ -1425,6 +1444,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_CatalogoTipo" Relationship="ModelGeneral.FK_tb_Catalogo_tb_CatalogoTipo" FromRole="tb_Catalogo" ToRole="tb_CatalogoTipo" />
           <NavigationProperty Name="tb_persona" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo" FromRole="tb_Catalogo" ToRole="tb_persona" />
           <NavigationProperty Name="tb_persona1" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo1" FromRole="tb_Catalogo" ToRole="tb_persona" />
           <NavigationProperty Name="tb_persona2" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo2" FromRole="tb_Catalogo" ToRole="tb_persona" />
@@ -1434,7 +1454,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <NavigationProperty Name="tb_persona6" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo6" FromRole="tb_Catalogo" ToRole="tb_persona" />
           <NavigationProperty Name="tb_persona7" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo7" FromRole="tb_Catalogo" ToRole="tb_persona" />
           <NavigationProperty Name="tb_persona8" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo8" FromRole="tb_Catalogo" ToRole="tb_persona" />
-          <NavigationProperty Name="tb_CatalogoTipo" Relationship="ModelGeneral.FK_tb_Catalogo_tb_CatalogoTipo" FromRole="tb_Catalogo" ToRole="tb_CatalogoTipo" />
           </EntityType>
         <EntityType Name="tb_sis_Impuesto">
           <Key>
@@ -1472,53 +1491,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tb_persona">
-          <Key>
-            <PropertyRef Name="IdPersona" />
-          </Key>
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="CodPersona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pe_Naturaleza" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_razonSocial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="pe_telfono_Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_sexo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdEstadoCivil" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_fechaNacimiento" Type="DateTime" Precision="3" />
-          <Property Name="pe_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="pe_fechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="pe_fechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="pe_UltUsuarioModi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoCta_acreditacion_cat" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="num_cta_acreditacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdBanco_acreditacion" Type="Int32" />
-          <Property Name="CodCatalogoSangre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="CodCatalogoCONADIS" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="PorcentajeDiscapacidad" Type="Double" />
-          <Property Name="NumeroCarnetConadis" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdProfesion" Type="Int32" />
-          <NavigationProperty Name="tb_Catalogo" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo1" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo1" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo2" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo2" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo3" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo3" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo4" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo4" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo5" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo5" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo6" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo6" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo7" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo7" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_Catalogo8" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo8" FromRole="tb_persona" ToRole="tb_Catalogo" />
-          <NavigationProperty Name="tb_profesion" Relationship="ModelGeneral.FK_tb_persona_tb_profesion" FromRole="tb_persona" ToRole="tb_profesion" />
-          <NavigationProperty Name="tb_banco" Relationship="ModelGeneral.FK_tb_persona_tb_banco" FromRole="tb_persona" ToRole="tb_banco" />
-        </EntityType>
         <EntityType Name="tb_profesion">
           <Key>
             <PropertyRef Name="IdProfesion" />
@@ -1535,126 +1507,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_persona" Relationship="ModelGeneral.FK_tb_persona_tb_profesion" FromRole="tb_profesion" ToRole="tb_persona" />
         </EntityType>
-        <Association Name="FK_tb_persona_tb_Catalogo">
-          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="1" />
-          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Catalogo">
-              <PropertyRef Name="CodCatalogo" />
-            </Principal>
-            <Dependent Role="tb_persona">
-              <PropertyRef Name="pe_Naturaleza" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_persona_tb_Catalogo1">
-          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="1" />
-          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Catalogo">
-              <PropertyRef Name="CodCatalogo" />
-            </Principal>
-            <Dependent Role="tb_persona">
-              <PropertyRef Name="IdTipoDocumento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_persona_tb_Catalogo2">
-          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="1" />
-          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Catalogo">
-              <PropertyRef Name="CodCatalogo" />
-            </Principal>
-            <Dependent Role="tb_persona">
-              <PropertyRef Name="IdTipoDocumento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_persona_tb_Catalogo3">
-          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
-          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Catalogo">
-              <PropertyRef Name="CodCatalogo" />
-            </Principal>
-            <Dependent Role="tb_persona">
-              <PropertyRef Name="IdEstadoCivil" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_persona_tb_Catalogo4">
-          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
-          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Catalogo">
-              <PropertyRef Name="CodCatalogo" />
-            </Principal>
-            <Dependent Role="tb_persona">
-              <PropertyRef Name="pe_sexo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_persona_tb_Catalogo5">
-          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="1" />
-          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Catalogo">
-              <PropertyRef Name="CodCatalogo" />
-            </Principal>
-            <Dependent Role="tb_persona">
-              <PropertyRef Name="pe_Naturaleza" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_persona_tb_Catalogo6">
-          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
-          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Catalogo">
-              <PropertyRef Name="CodCatalogo" />
-            </Principal>
-            <Dependent Role="tb_persona">
-              <PropertyRef Name="IdTipoCta_acreditacion_cat" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_persona_tb_Catalogo7">
-          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
-          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Catalogo">
-              <PropertyRef Name="CodCatalogo" />
-            </Principal>
-            <Dependent Role="tb_persona">
-              <PropertyRef Name="CodCatalogoSangre" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_persona_tb_Catalogo8">
-          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
-          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_Catalogo">
-              <PropertyRef Name="CodCatalogo" />
-            </Principal>
-            <Dependent Role="tb_persona">
-              <PropertyRef Name="CodCatalogoCONADIS" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tb_persona_tb_profesion">
-          <End Type="ModelGeneral.tb_profesion" Role="tb_profesion" Multiplicity="0..1" />
-          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_profesion">
-              <PropertyRef Name="IdProfesion" />
-            </Principal>
-            <Dependent Role="tb_persona">
-              <PropertyRef Name="IdProfesion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="tb_pais">
           <Key>
             <PropertyRef Name="IdPais" />
@@ -2160,18 +2012,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tb_persona_tb_banco">
-          <End Type="ModelGeneral.tb_banco" Role="tb_banco" Multiplicity="0..1" />
-          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_banco">
-              <PropertyRef Name="IdBanco" />
-            </Principal>
-            <Dependent Role="tb_persona">
-              <PropertyRef Name="IdBanco_acreditacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tb_parametro_tb_sis_Impuesto">
           <End Type="ModelGeneral.tb_sis_Impuesto" Role="tb_sis_Impuesto" Multiplicity="1" />
           <End Type="ModelGeneral.tb_parametro" Role="tb_parametro" Multiplicity="*" />
@@ -2239,6 +2079,202 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tb_persona">
+          <Key>
+            <PropertyRef Name="IdPersona" />
+          </Key>
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CodPersona" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pe_Naturaleza" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_razonSocial" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_direccion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="pe_telfono_Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_sexo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdEstadoCivil" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_fechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="pe_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="pe_fechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="pe_fechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="pe_UltUsuarioModi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoCta_acreditacion_cat" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="num_cta_acreditacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco_acreditacion" Type="Int32" />
+          <Property Name="CodCatalogoSangre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CodCatalogoCONADIS" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeDiscapacidad" Type="Double" />
+          <Property Name="NumeroCarnetConadis" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdProfesion" Type="Int32" />
+          <Property Name="IdReligion" Type="Int32" />
+          <Property Name="AsisteCentroCristiano" Type="Boolean" />
+          <NavigationProperty Name="tb_banco" Relationship="ModelGeneral.FK_tb_persona_tb_banco" FromRole="tb_persona" ToRole="tb_banco" />
+          <NavigationProperty Name="tb_Catalogo" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo1" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo1" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo2" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo2" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo3" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo3" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo4" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo4" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo5" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo5" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo6" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo6" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo7" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo7" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_Catalogo8" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo8" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_profesion" Relationship="ModelGeneral.FK_tb_persona_tb_profesion" FromRole="tb_persona" ToRole="tb_profesion" />
+        </EntityType>
+        <Association Name="FK_tb_persona_tb_banco">
+          <End Type="ModelGeneral.tb_banco" Role="tb_banco" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_banco">
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdBanco_acreditacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo">
+          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="pe_Naturaleza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo1">
+          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo2">
+          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdTipoDocumento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo3">
+          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdEstadoCivil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo4">
+          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="pe_sexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo5">
+          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="pe_Naturaleza" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo6">
+          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdTipoCta_acreditacion_cat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo7">
+          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="CodCatalogoSangre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Catalogo8">
+          <End Type="ModelGeneral.tb_Catalogo" Role="tb_Catalogo" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Catalogo">
+              <PropertyRef Name="CodCatalogo" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="CodCatalogoCONADIS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_profesion">
+          <End Type="ModelGeneral.tb_profesion" Role="tb_profesion" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_profesion">
+              <PropertyRef Name="IdProfesion" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdProfesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tb_Religion">
+          <Key>
+            <PropertyRef Name="IdReligion" />
+          </Key>
+          <Property Name="IdReligion" Type="Int32" Nullable="false" />
+          <Property Name="NomReligion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2374,43 +2410,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
               <MappingFragment StoreEntitySet="tb_sis_Impuesto_Tipo">
                 <ScalarProperty Name="nom_tipoImpuesto" ColumnName="nom_tipoImpuesto" />
                 <ScalarProperty Name="IdTipoImpuesto" ColumnName="IdTipoImpuesto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_persona">
-            <EntityTypeMapping TypeName="ModelGeneral.tb_persona">
-              <MappingFragment StoreEntitySet="tb_persona">
-                <ScalarProperty Name="IdProfesion" ColumnName="IdProfesion" />
-                <ScalarProperty Name="NumeroCarnetConadis" ColumnName="NumeroCarnetConadis" />
-                <ScalarProperty Name="PorcentajeDiscapacidad" ColumnName="PorcentajeDiscapacidad" />
-                <ScalarProperty Name="CodCatalogoCONADIS" ColumnName="CodCatalogoCONADIS" />
-                <ScalarProperty Name="CodCatalogoSangre" ColumnName="CodCatalogoSangre" />
-                <ScalarProperty Name="IdBanco_acreditacion" ColumnName="IdBanco_acreditacion" />
-                <ScalarProperty Name="num_cta_acreditacion" ColumnName="num_cta_acreditacion" />
-                <ScalarProperty Name="IdTipoCta_acreditacion_cat" ColumnName="IdTipoCta_acreditacion_cat" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="pe_UltUsuarioModi" ColumnName="pe_UltUsuarioModi" />
-                <ScalarProperty Name="pe_fechaModificacion" ColumnName="pe_fechaModificacion" />
-                <ScalarProperty Name="pe_fechaCreacion" ColumnName="pe_fechaCreacion" />
-                <ScalarProperty Name="pe_estado" ColumnName="pe_estado" />
-                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
-                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
-                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
-                <ScalarProperty Name="pe_correo" ColumnName="pe_correo" />
-                <ScalarProperty Name="pe_celular" ColumnName="pe_celular" />
-                <ScalarProperty Name="pe_telfono_Contacto" ColumnName="pe_telfono_Contacto" />
-                <ScalarProperty Name="pe_direccion" ColumnName="pe_direccion" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="pe_razonSocial" ColumnName="pe_razonSocial" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="pe_Naturaleza" ColumnName="pe_Naturaleza" />
-                <ScalarProperty Name="CodPersona" ColumnName="CodPersona" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2797,6 +2796,61 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
                 <ScalarProperty Name="ReporteDisenio" ColumnName="ReporteDisenio" />
                 <ScalarProperty Name="CodReporte" ColumnName="CodReporte" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_persona">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_persona">
+              <MappingFragment StoreEntitySet="tb_persona">
+                <ScalarProperty Name="AsisteCentroCristiano" ColumnName="AsisteCentroCristiano" />
+                <ScalarProperty Name="IdReligion" ColumnName="IdReligion" />
+                <ScalarProperty Name="IdProfesion" ColumnName="IdProfesion" />
+                <ScalarProperty Name="NumeroCarnetConadis" ColumnName="NumeroCarnetConadis" />
+                <ScalarProperty Name="PorcentajeDiscapacidad" ColumnName="PorcentajeDiscapacidad" />
+                <ScalarProperty Name="CodCatalogoCONADIS" ColumnName="CodCatalogoCONADIS" />
+                <ScalarProperty Name="CodCatalogoSangre" ColumnName="CodCatalogoSangre" />
+                <ScalarProperty Name="IdBanco_acreditacion" ColumnName="IdBanco_acreditacion" />
+                <ScalarProperty Name="num_cta_acreditacion" ColumnName="num_cta_acreditacion" />
+                <ScalarProperty Name="IdTipoCta_acreditacion_cat" ColumnName="IdTipoCta_acreditacion_cat" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="pe_UltUsuarioModi" ColumnName="pe_UltUsuarioModi" />
+                <ScalarProperty Name="pe_fechaModificacion" ColumnName="pe_fechaModificacion" />
+                <ScalarProperty Name="pe_fechaCreacion" ColumnName="pe_fechaCreacion" />
+                <ScalarProperty Name="pe_estado" ColumnName="pe_estado" />
+                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
+                <ScalarProperty Name="IdEstadoCivil" ColumnName="IdEstadoCivil" />
+                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
+                <ScalarProperty Name="pe_correo" ColumnName="pe_correo" />
+                <ScalarProperty Name="pe_celular" ColumnName="pe_celular" />
+                <ScalarProperty Name="pe_telfono_Contacto" ColumnName="pe_telfono_Contacto" />
+                <ScalarProperty Name="pe_direccion" ColumnName="pe_direccion" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_razonSocial" ColumnName="pe_razonSocial" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_Naturaleza" ColumnName="pe_Naturaleza" />
+                <ScalarProperty Name="CodPersona" ColumnName="CodPersona" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_Religion">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_Religion">
+              <MappingFragment StoreEntitySet="tb_Religion">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="NomReligion" ColumnName="NomReligion" />
+                <ScalarProperty Name="IdReligion" ColumnName="IdReligion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

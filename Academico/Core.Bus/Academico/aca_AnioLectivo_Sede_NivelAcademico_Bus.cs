@@ -23,7 +23,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
-
+        public List<aca_AnioLectivo_Sede_NivelAcademico_Info> GetListNivel_x_Anio(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                return odata.GetListNivel_x_Anio(IdEmpresa, IdAnio);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public aca_AnioLectivo_Sede_NivelAcademico_Info GetInfo(int IdEmpresa, int IdSede, int IdAnio)
         {
             try

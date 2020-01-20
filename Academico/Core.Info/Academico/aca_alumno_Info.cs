@@ -71,6 +71,9 @@ namespace Core.Info.Academico
         public string NumeroCarnetConadis { get; set; }
         public List<aca_AlumnoDocumento_Info> lst_alumno_documentos { get; set; }
         public string IdUsuario { get; set; }
+        [Required(ErrorMessage = "El campo religión es obligatorio")]
+        public Nullable<int> IdReligion { get; set; }
+        public Nullable<bool> AsisteCentroCristiano { get; set; }
         #endregion
 
         #region Datos padre
@@ -129,9 +132,11 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo parroquia es obligatorio")]
         public string IdParroquia_padre { get; set; }
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
-
-
         public Nullable<int> AnioVehiculo_padre { get; set; }
+        [Required(ErrorMessage = "El campo religión es obligatorio")]
+        public Nullable<int> IdReligion_padre { get; set; }
+        public Nullable<bool> AsisteCentroCristiano_padre { get; set; }
+        public bool EstaFallecido_padre { get; set; }
         #endregion
 
         #region Datos madre
@@ -191,6 +196,10 @@ namespace Core.Info.Academico
         public string IdParroquia_madre { get; set; }
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public Nullable<int> AnioVehiculo_madre { get; set; }
+        [Required(ErrorMessage = "El campo religión es obligatorio")]
+        public Nullable<int> IdReligion_madre { get; set; }
+        public Nullable<bool> AsisteCentroCristiano_madre { get; set; }
+        public bool EstaFallecido_madre { get; set; }
         #endregion
 
         public tb_persona_Info info_persona_alumno { get; set; }

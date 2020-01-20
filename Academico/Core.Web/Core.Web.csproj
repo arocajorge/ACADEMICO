@@ -8039,6 +8039,7 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Academico\Views\RubroPorPeriodo\_ComboBoxPartial_Anio_Consulta.cshtml" />
     <Content Include="Areas\Academico\Views\Alumno\_CmbDocumentoAlumno.cshtml" />
+    <Content Include="Areas\Academico\Views\SocioEconomico\_GridViewPartial_AlumnoHermanos.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

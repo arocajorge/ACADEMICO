@@ -73,7 +73,8 @@ namespace Core.Info.Academico
         public double TotalIngreso { get; set; }
         public double TotalGasto { get; set; }
         public double Saldo { get; set; }
-   
+        public List<aca_Matricula_Info> lst_hermanos { get; set; }
+
         #endregion
     }
 }

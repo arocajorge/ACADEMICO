@@ -170,13 +170,73 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.TextBoxFor(q => q.pe_fechaNacimiento, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "pe_fechaNacimiento" })
+                                @Html.DevExpress().DateEditFor(q => q.pe_fechaNacimiento, settings =>
+                               {
+                                   settings.Name = "pe_fechaNacimiento";
+                                   settings.Properties.UseMaskBehavior = true;
+                                   settings.Properties.EditFormat = EditFormat.Date;
+                                   settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.pe_fechaNacimiento, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Profesión</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdProfesion, settings =>
+                               {
+                                   settings.Name = "IdProfesion";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdProfesion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("Descripcion", "Profesion").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdProfesion";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "Descripcion";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_profesion).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdProfesion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Religión</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdReligion, settings =>
+                               {
+                                   settings.Name = "IdReligion";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdReligion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("NomReligion", "Religion").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdReligion";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "NomReligion";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_religion).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdReligion, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="bo_EsBodega"></label>
+                            @Html.DevExpress().CheckBoxFor(q => q.AsisteCentroCristiano, settings =>
+                                {
+                                    settings.Name = "AsisteCentroCristiano";
+                                    settings.Text = "Asiste a Centro Cristiano";
+                                }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.AsisteCentroCristiano, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">

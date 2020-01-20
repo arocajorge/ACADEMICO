@@ -47,5 +47,44 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public bool GuardarDB(aca_AlumnoDocumento_Info info)
+        {
+            try
+            {
+                return odata.guardarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool ModificarDB(aca_AlumnoDocumento_Info info)
+        {
+            try
+            {
+                return odata.modificarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool EliminarDB(aca_AlumnoDocumento_Info info)
+        {
+            try
+            {
+                return odata.eliminarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

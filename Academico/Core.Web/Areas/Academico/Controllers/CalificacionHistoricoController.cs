@@ -19,6 +19,8 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivoCalificacionHistorico_List Lista_CalificacionHistorico = new aca_AnioLectivoCalificacionHistorico_List();
         aca_AnioLectivoCalificacionHistorico_Bus bus_CalificacionHistorico = new aca_AnioLectivoCalificacionHistorico_Bus();
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+        aca_AnioLectivo_Sede_NivelAcademico_Bus bus_anio_nivel = new aca_AnioLectivo_Sede_NivelAcademico_Bus();
+        aca_AnioLectivo_Jornada_Curso_Bus bus_anio_curso = new aca_AnioLectivo_Jornada_Curso_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
@@ -80,6 +82,10 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_conducta = bus_conducta.GetList(info.IdEmpresa, info.IdAnio, false);
             ViewBag.lst_conducta = lst_conducta;
+            var lst_nivel = bus_anio_nivel.GetListNivel_x_Anio(info.IdEmpresa, info.IdAnio);
+            ViewBag.lst_nivel = lst_nivel;
+            var lst_curso = bus_anio_curso.GetListCurso_x_Anio(info.IdEmpresa, info.IdAnio);
+            ViewBag.lst_curso = lst_curso;
         }
         #endregion
 

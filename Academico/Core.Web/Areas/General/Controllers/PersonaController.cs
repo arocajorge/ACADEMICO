@@ -22,17 +22,23 @@ namespace Core.Web.Areas.General.Controllers
         private void cargar_combos()
         {
             tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
+            tb_Religion_Bus bus_religion = new tb_Religion_Bus();
+            tb_profesion_Bus bus_profesion = new tb_profesion_Bus();
             var lst_sexo = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.SEXO), false);
             var lst_estado_civil = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.ESTCIVIL), false);
             var lst_tipo_doc = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODOC), false);
             var lst_tipo_cta = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIP_CTA_AC), false);
             var lst_tipo_naturaleza = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPONATPER), false);
+            var lst_profesion = bus_profesion.GetList(false);
+            var lst_religion = bus_religion.GetList(false);
 
             ViewBag.lst_sexo = lst_sexo;
             ViewBag.lst_estado_civil = lst_estado_civil;
             ViewBag.lst_tipo_doc = lst_tipo_doc;
             ViewBag.lst_tipo_cta = lst_tipo_cta;
             ViewBag.lst_tipo_naturaleza = lst_tipo_naturaleza;
+            ViewBag.lst_profesion = lst_profesion;
+            ViewBag.lst_religion = lst_religion;
         }
         #endregion
         #region Acciones

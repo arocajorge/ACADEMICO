@@ -20,8 +20,9 @@ namespace Core.Data.Base
         public decimal IdAlumno { get; set; }
         public string pe_nombreCompleto { get; set; }
         public int IdCurso { get; set; }
-        public string NomCurso { get; set; }
         public decimal Promedio { get; set; }
         public decimal Conducta { get; set; }
+        public string NomNivel { get; set; }
+        public string NomCurso { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace Core.Info.Academico
     public class aca_AlumnoDocumento_Info
     {
         public int IdEmpresa { get; set; }
+        public int Secuencia { get; set; }
         public decimal IdAlumno { get; set; }
         public int IdDocumento { get; set; }
         public bool EnArchivo { get; set; }

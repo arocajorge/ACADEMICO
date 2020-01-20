@@ -148,6 +148,7 @@ namespace Core.Bus.Academico
                             Modelo = info.Modelo_padre,
                             AnioVehiculo = info.AnioVehiculo_padre,
                             CasaPropia = info.CasaPropia_padre,
+                            EstaFallecido = info.EstaFallecido_padre,
                             IdUsuarioCreacion = info.IdUsuario,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
@@ -298,6 +299,7 @@ namespace Core.Bus.Academico
                             AnioVehiculo = info.AnioVehiculo_madre,
                             CasaPropia = info.CasaPropia_madre,
                             EsRepresentante = info.EsRepresentante_madre,
+                            EstaFallecido = info.EstaFallecido_madre,
                             IdUsuarioCreacion = info.IdUsuario,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
@@ -458,6 +460,7 @@ namespace Core.Bus.Academico
                             Modelo = info.Modelo_padre,
                             AnioVehiculo = info.AnioVehiculo_padre,
                             CasaPropia = info.CasaPropia_padre,
+                            EstaFallecido = info.EstaFallecido_padre,
                             IdUsuarioCreacion = info.IdUsuario,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
@@ -602,6 +605,7 @@ namespace Core.Bus.Academico
                             AnioVehiculo = info.AnioVehiculo_madre,
                             CasaPropia = info.CasaPropia_madre,
                             EsRepresentante = info.EsRepresentante_madre,
+                            EstaFallecido = info.EstaFallecido_madre,
                             IdUsuarioCreacion = info.IdUsuario,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };

@@ -26,6 +26,7 @@ namespace Core.Web.Helps
         string EsContador { get; set; }
         string IdCaja { get; set; }
         string TipoPersona { get; set; }
+        string IdAlumno { get; set; }
         string Ruc { get; set; }
     }
     public static class SessionFixed
@@ -148,6 +149,12 @@ namespace Core.Web.Helps
             get { return _sessionValueProvider.Ruc; }
             set { _sessionValueProvider.Ruc = value; }
         }
+
+        public static string IdAlumno
+        {
+            get { return _sessionValueProvider.IdAlumno; }
+            set { _sessionValueProvider.IdAlumno = value; }
+        }
     }
     public class WebSessionValueProvider : ISessionValueProvider
     {
@@ -171,6 +178,7 @@ namespace Core.Web.Helps
         private const string _IdCaja = "Fx_IdCaja";
         private const string _IdTipoPersona = "Fx_PERSONA";
         private const string _Ruc = "Fx_Ruc";
+        private const string _IdAlumno = "Fx_IdAlumno";
 
         public string IdEmpresa
         {
@@ -277,6 +285,12 @@ namespace Core.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_Ruc]; }
             set { HttpContext.Current.Session[_Ruc] = value; }
+        }
+
+        public string IdAlumno
+        {
+            get { return (string)HttpContext.Current.Session[_IdAlumno]; }
+            set { HttpContext.Current.Session[_IdAlumno] = value; }
         }
     }
 }

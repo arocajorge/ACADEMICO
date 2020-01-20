@@ -54,5 +54,8 @@ namespace Core.Data.Base
         public bool CasaPropia { get; set; }
         public bool Estado { get; set; }
         public Nullable<int> AnioVehiculo { get; set; }
+        public Nullable<int> IdReligion { get; set; }
+        public Nullable<bool> AsisteCentroCristiano { get; set; }
+        public bool EstaFallecido { get; set; }
     }
 }
