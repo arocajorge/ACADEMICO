@@ -77,8 +77,8 @@
             <div class="col-md-12">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="IdEmpresa">Alumno</label>
-                        @Html.Partial("_CmbAlumno", Model)
+                        <label for="IdEmpresa">Estudiante</label>
+                        @Html.Partial("_CmbAlumno", Model.IdAlumno)
                         @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -115,7 +115,7 @@
         </div>
         <div class="box-footer">
             <button type="submit" class="btn btn-primary">Guardar</button>
-            <a class="btn btn-default" href="@Url.Action("Index","CalificacionHistorico",new { Area = "Academico" },null)">Cancelar</a>
+            <a class="btn btn-default" href="@Url.Action("Index","CalificacionHistorico",new { Area = "Academico", IdAlumno = Model.IdAlumno },null)">Cancelar</a>
         </div>
         @section Scripts {
             @Scripts.Render("~/bundles/jqueryval")

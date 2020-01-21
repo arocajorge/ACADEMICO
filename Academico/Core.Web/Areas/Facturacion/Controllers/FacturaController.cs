@@ -760,35 +760,40 @@ namespace Core.Web.Areas.Facturacion.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             decimal IdCliente = Convert.ToDecimal(SessionFixed.IdEntidad);
             int IdNivelDescuento = Convert.ToInt32(SessionFixed.IdNivelDescuento);
-            if (info_det != null && info_det.IdProducto != 0)
+            var lst_detalle = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            if (lst_detalle.Count==0)
             {
-                var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
-                if (producto != null)
+                if (info_det != null && info_det.IdProducto != 0)
                 {
-                    info_det.pr_descripcion = producto.pr_descripcion_combo;
-                    info_det.se_distribuye = producto.se_distribuye;
-                    info_det.tp_manejaInven = producto.tp_ManejaInven;
-                    info_det.IdCod_Impuesto_Iva = producto.IdCod_Impuesto_Iva;
-                    var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
-                    if (cliente != null)
+                    var producto = bus_producto.get_info(IdEmpresa, info_det.IdProducto);
+                    if (producto != null)
                     {
-                        info_det.vt_Precio = producto.precio_1;
-                        int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
-
-                        var nivelproducto = bus_nivelproducto.GetInfo(IdEmpresa, producto.IdProducto, nivel_precio);
-
-                        if (SessionFixed.EsSuperAdmin == "False")
+                        info_det.pr_descripcion = producto.pr_descripcion_combo;
+                        info_det.se_distribuye = producto.se_distribuye;
+                        info_det.tp_manejaInven = producto.tp_ManejaInven;
+                        info_det.IdCod_Impuesto_Iva = producto.IdCod_Impuesto_Iva;
+                        var cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
+                        if (cliente != null)
                         {
-                            info_det.vt_PorDescUnitario = nivelproducto == null ? 0 : nivelproducto.Porcentaje;
-                        }
-                        else
-                        {
-                            info_det.vt_PorDescUnitario = IdNivelDescuento > 1 ? (nivelproducto == null ? 0 : nivelproducto.Porcentaje) : info_det.vt_PorDescUnitario;
+                            info_det.vt_Precio = producto.precio_1;
+                            int nivel_precio = IdNivelDescuento > 1 ? IdNivelDescuento : (cliente.IdNivel == 0 ? 1 : cliente.IdNivel);
+
+                            var nivelproducto = bus_nivelproducto.GetInfo(IdEmpresa, producto.IdProducto, nivel_precio);
+
+                            if (SessionFixed.EsSuperAdmin == "False")
+                            {
+                                info_det.vt_PorDescUnitario = nivelproducto == null ? 0 : nivelproducto.Porcentaje;
+                            }
+                            else
+                            {
+                                info_det.vt_PorDescUnitario = IdNivelDescuento > 1 ? (nivelproducto == null ? 0 : nivelproducto.Porcentaje) : info_det.vt_PorDescUnitario;
+                            }
                         }
                     }
                 }
+                List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
-            List_det.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            
             var model = List_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_factura_det", model);
@@ -855,20 +860,33 @@ namespace Core.Web.Areas.Facturacion.Controllers
         {
             if (!string.IsNullOrEmpty(IDs))
             {
-                string[] array = IDs.Split(',');
+                //string[] array = IDs.Split(',');
                 var lst = Lista_RubrosPorFacturar.get_list(IdTransaccionSession);
                 var lst_det_fact = List_det.get_list(IdTransaccionSession);
 
-                foreach (var item in array)
+                if (lst_det_fact.Count == 0)
                 {
-                    var rubro_x_fact = lst.Where(q => q.IdString == item).FirstOrDefault();
-                    if (rubro_x_fact != null)
-                        if (lst_det_fact.Where(q => q.IdEmpresa == rubro_x_fact.IdEmpresa && q.IdMatricula == rubro_x_fact.IdMatricula && q.aca_IdPeriodo == rubro_x_fact.aca_IdPeriodo && q.aca_IdRubro == rubro_x_fact.aca_IdRubro).Count() == 0)
-                        {
-                            rubro_x_fact.Secuencia = lst_det_fact.Count == 0 ? 1 : lst_det_fact.Max(q => q.Secuencia) + 1;
-                            lst_det_fact.Add(rubro_x_fact);
-                        }
+                    var rubro_x_fact = lst.Where(q => q.IdString == IDs).FirstOrDefault();
+                    var ite_mas_antiguo = lst.Min(q => q.FechaDesde);
+
+                    var item_seleccionado = lst.Where(q => q.IdEmpresa == rubro_x_fact.IdEmpresa && q.IdMatricula == rubro_x_fact.IdMatricula && q.aca_IdPeriodo == rubro_x_fact.aca_IdPeriodo && q.aca_IdRubro == rubro_x_fact.aca_IdRubro).FirstOrDefault();
+                    if (rubro_x_fact.FechaDesde == ite_mas_antiguo)
+                    {
+                        rubro_x_fact.Secuencia = lst_det_fact.Count == 0 ? 1 : lst_det_fact.Max(q => q.Secuencia) + 1;
+                        lst_det_fact.Add(rubro_x_fact);
+                    }
                 }
+
+                //foreach (var item in array)
+                //{
+                //    var rubro_x_fact = lst.Where(q => q.IdString == item).FirstOrDefault();
+                //    if (rubro_x_fact != null)
+                //        if (lst_det_fact.Where(q => q.IdEmpresa == rubro_x_fact.IdEmpresa && q.IdMatricula == rubro_x_fact.IdMatricula && q.aca_IdPeriodo == rubro_x_fact.aca_IdPeriodo && q.aca_IdRubro == rubro_x_fact.aca_IdRubro).Count() == 0)
+                //        {
+                //            rubro_x_fact.Secuencia = lst_det_fact.Count == 0 ? 1 : lst_det_fact.Max(q => q.Secuencia) + 1;
+                //            lst_det_fact.Add(rubro_x_fact);
+                //        }
+                //}
                 List_det.set_list(lst_det_fact, IdTransaccionSession);
             }
         }

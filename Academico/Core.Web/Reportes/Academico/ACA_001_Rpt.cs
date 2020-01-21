@@ -42,7 +42,7 @@ namespace Core.Web.Reportes.Academico
                 RepLegal = info_rep.pe_nombreCompleto;
             }
 
-            lbl_compromiso.Text.Replace("_.", RepLegal);
+            lbl_compromiso.Text.Replace("_", RepLegal);
             this.DataSource = lst_rpt;
         }
 

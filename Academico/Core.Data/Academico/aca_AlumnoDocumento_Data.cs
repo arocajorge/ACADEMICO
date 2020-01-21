@@ -165,7 +165,7 @@ namespace Core.Data.Academico
                         IdAlumno = info.IdAlumno,
                         IdDocumento = info.IdDocumento,
                         Secuencia = info.Secuencia = getSecuencia(info.IdEmpresa, info.IdAlumno),
-                        EnArchivo = true
+                        EnArchivo = info.EnArchivo
                     };
                     Context.aca_AlumnoDocumento.Add(Entity);
 
@@ -191,6 +191,7 @@ namespace Core.Data.Academico
                         return false;
 
                     Entity.IdDocumento = info.IdDocumento;
+                    Entity.EnArchivo = info.EnArchivo;
 
                     Context.SaveChanges();
                 }

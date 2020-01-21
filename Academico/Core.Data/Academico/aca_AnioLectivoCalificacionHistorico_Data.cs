@@ -10,7 +10,7 @@ namespace Core.Data.Academico
 {
     public class aca_AnioLectivoCalificacionHistorico_Data
     {
-        public List<aca_AnioLectivoCalificacionHistorico_Info> getList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
+        public List<aca_AnioLectivoCalificacionHistorico_Info> getList(int IdEmpresa, decimal IdAlumno, bool MostrarAnulados)
         {
             try
             {
@@ -18,7 +18,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.vwaca_AnioLectivoCalificacionHistorico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
+                    var lst = odata.vwaca_AnioLectivoCalificacionHistorico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).ToList();
 
                     lst.ForEach(q =>
                     {

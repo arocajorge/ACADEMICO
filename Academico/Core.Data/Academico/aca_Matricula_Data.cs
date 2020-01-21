@@ -425,6 +425,87 @@ namespace Core.Data.Academico
             }
         }
 
+        public bool modificarPlantillaDB(aca_Matricula_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_Matricula Entity = Context.aca_Matricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula);
+                    if (Entity == null)
+                        return false;
+                    Entity.IdPlantilla = info.IdPlantilla;
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = DateTime.Now;
+
+                    var lst_MatriculaRubro = Context.aca_Matricula_Rubro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula && q.FechaFacturacion == null).ToList();
+                    Context.aca_Matricula_Rubro.RemoveRange(lst_MatriculaRubro);
+                    var nueva_lista_ingresar = info.lst_MatriculaRubro.Where(q => q.FechaFacturacion == null).ToList();
+
+                    if (nueva_lista_ingresar.Count > 0)
+                    {
+                        foreach (var item in nueva_lista_ingresar)
+                        {
+                            aca_Matricula_Rubro Entity_Det = new aca_Matricula_Rubro
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdMatricula = info.IdMatricula,
+                                IdMecanismo = item.IdMecanismo,
+                                IdPeriodo = item.IdPeriodo,
+                                IdRubro = item.IdRubro,
+                                IdProducto = item.IdProducto,
+                                Subtotal = item.Subtotal,
+                                IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
+                                Porcentaje = item.Porcentaje,
+                                ValorIVA = item.ValorIVA,
+                                Total = item.Total,
+                                EnMatricula = item.EnMatricula,
+                                IdPlantilla = item.IdPlantilla,
+                                IdAnio = item.IdAnio
+                            };
+                            Context.aca_Matricula_Rubro.Add(Entity_Det);
+                        }
+                    }
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool modificarCursoParaleloDB(aca_Matricula_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_Matricula Entity = Context.aca_Matricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula);
+                    if (Entity == null)
+                        return false;
+
+                    Entity.IdSede = info.IdSede;
+                    Entity.IdNivel = info.IdNivel;
+                    Entity.IdJornada = info.IdJornada;
+                    Entity.IdCurso = info.IdCurso;
+                    Entity.IdParalelo = info.IdParalelo;
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = DateTime.Now;
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool anularDB(aca_Matricula_Info info)
         {
             try

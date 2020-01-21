@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_CalificacionHistorico";
-        settings.CallbackRouteValues = new { Controller = "CalificacionHistorico", Action = "GridViewPartial_CalificacionHistorico" };
+        settings.CallbackRouteValues = new { Controller = "CalificacionHistorico", Action = "GridViewPartial_CalificacionHistorico", IdAlumno = ViewBag.IdAlumno };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdString";
         //Configuración para que la grilla no muestre texto completo
@@ -59,7 +59,7 @@
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Web.Helps.SessionFixed.IdEmpresa, IdAlumno = ViewBag.IdAlumno}).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

@@ -3,12 +3,12 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_MatriculaRubro";
-        settings.CallbackRouteValues = new { Controller = "Matricula", Action = "GridViewPartial_MatriculaRubro" };
+        settings.CallbackRouteValues = new { Controller = "CambioPlantillaMatricula", Action = "GridViewPartial_MatriculaRubro" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdString";
 
-        //settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        //settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Matricula", Action = "EditingUpdate", Area = "Academico" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Matricula", Action = "EditingUpdate", Area = "Academico" };
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -16,7 +16,7 @@
 
         settings.CommandColumn.Visible = false;
         settings.CommandColumn.ShowNewButtonInHeader = false;
-        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = false;
 
         settings.SettingsContextMenu.Enabled = false;
@@ -70,7 +70,7 @@
                 p.ValueType = typeof(decimal);
                 p.DataSource = ViewBag.lst_mecanismo;
             });
-            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {

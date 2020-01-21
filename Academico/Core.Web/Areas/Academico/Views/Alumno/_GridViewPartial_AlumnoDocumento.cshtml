@@ -49,7 +49,7 @@
         {
             column.FieldName = "IdDocumento";
             column.Caption = "Documentos";
-            column.Width = Unit.Percentage(90);
+            column.Width = Unit.Percentage(80);
             column.Visible = false;
             column.VisibleIndex = 1;
             column.EditFormSettings.Visible = DefaultBoolean.True;
@@ -58,7 +58,17 @@
                 Html.RenderPartial("_CmbDocumentoAlumno", DataBinder.Eval(c.DataItem, "IdDocumento"));
             });
         });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EnArchivo";
+            column.Caption = "En Archivo";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.EditorProperties().CheckBox(sp =>
+            {
 
+            });
+        });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); SetAlumnoDocumento();}";
         settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {var editor = IdDocumento;editor.Focus(); }}";
     });

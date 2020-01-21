@@ -1,4 +1,5 @@
-﻿using Core.Data.Base;
+﻿using Core.Data.Academico;
+using Core.Data.Base;
 using Core.Info.General;
 using Core.Info.Helps;
 using DevExpress.Web;
@@ -12,6 +13,7 @@ namespace Core.Data.General
 {
     public class tb_persona_Data
     {
+        aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
         public decimal validar_existe_cedula(string pe_CedulaRuc)
         {
             try
@@ -371,6 +373,24 @@ namespace Core.Data.General
                         }
                         context_mat.Dispose();
                         break;
+                    case "ALUMNO_MATRICULADOS":
+                        EntitiesAcademico context_matriculados = new EntitiesAcademico();
+                        var info_anio = odata_anio.getInfo_AnioEnCurso(IdEmpresa, 0);
+                        var IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+                        var IdCatRetirado = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.RETIRADO);
+                        var lst_matriculados = context_matriculados.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio ==IdAnio && (q.IdAlumno.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdAlumno).Skip(skip).Take(take);
+                        foreach (var q in lst_matriculados)
+                        {
+                            Lista.Add(new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdAlumno
+                            });
+                        }
+                        context_matriculados.Dispose();
+                        break;
                     case "TUTOR":
                         EntitiesAcademico context_t = new EntitiesAcademico();
                         var lst_tutor = context_t.vwaca_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true && (q.IdProfesor.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdProfesor).Skip(skip).Take(take);
@@ -524,6 +544,24 @@ namespace Core.Data.General
                                 IdEntidad = q.IdAlumno
                             }).FirstOrDefault();
                     context_mat.Dispose();
+                    break;
+                case "ALUMNO_MATRICULADOS":
+                    EntitiesAcademico context_matriculados = new EntitiesAcademico();
+                    var info_anio = odata_anio.getInfo_AnioEnCurso(IdEmpresa, 0);
+                    var IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+                    var IdCatRetirado = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.RETIRADO);
+                    info = (from q in context_matriculados.vwaca_Matricula
+                            where q.IdEmpresa == IdEmpresa
+                            && q.IdAlumno == IdEntidad
+                            && q.IdAnio != IdAnio
+                            select new tb_persona_Info
+                            {
+                                IdPersona = q.IdPersona,
+                                pe_nombreCompleto = q.pe_nombreCompleto,
+                                pe_cedulaRuc = q.pe_cedulaRuc,
+                                IdEntidad = q.IdAlumno
+                            }).FirstOrDefault();
+                    context_matriculados.Dispose();
                     break;
                 case "TUTOR":
                     EntitiesAcademico context_tutor = new EntitiesAcademico();

@@ -118,7 +118,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="info_persona.pe_apellido">Apellidos</label>
                     @Html.TextBoxFor(q => q.pe_apellido, new { @class = "form-control", @id = "pe_apellido" })
@@ -126,11 +126,27 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="info_persona.pe_nombre">Nombres</label>
                     @Html.TextBoxFor(q => q.pe_nombre, new { @class = "form-control", @id = "pe_nombre" })
                     @Html.ValidationMessageFor(q => q.pe_nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdCliente"></label>
+                    <button type="button" class="btn btn-primary form-control" title="Ver ficha socio economica" onclick="VerFichaSocioEconomica();">
+                        <i class="fa fa-dollar"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdSucursal"></label>
+                    <a type="button" class="btn btn-primary form-control" title="Histórico de calificaciones" href="@Url.Action("Index","CalificacionHistorico",new { Area = "Academico", IdAlumno = Model.IdAlumno },null)">
+                        <i class="fa fa-list-alt"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -212,14 +228,6 @@
                                 <label for="pe_sexo">Tipo de sangre</label>
                                 @Html.DropDownListFor(q => q.CodCatalogoSangre, new SelectList(ViewBag.lst_tipo_sangre, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_sexo" })
                                 @Html.ValidationMessageFor(q => q.CodCatalogoSangre, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-offset-1 col-md-1">
-                            <div class="form-group">
-                                <label for="IdCliente"></label>
-                                <button type="button" class="btn btn-primary form-control" title="Ver ficha socio economica" onclick="VerFichaSocioEconomica();">
-                                    <i class="fa fa-dollar"></i>
-                                </button>
                             </div>
                         </div>
                     </div>

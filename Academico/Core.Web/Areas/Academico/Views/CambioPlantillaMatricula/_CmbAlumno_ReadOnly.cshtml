@@ -16,10 +16,10 @@
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);
         settings.Properties.Columns.Add("pe_cedulaRuc", "Identificacion", 20);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Alumno", 70);
-        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdComboCurso.PerformCallback();}";
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdComboCurso.PerformCallback(); setTimeout(SetDatosMatricula(), 3000)}";
     })
-    .BindList(new Core.Web.Areas.Academico.Controllers.MatriculaController().get_list_bajo_demanda_alumno, new Core.Web.Areas.Academico.Controllers.MatriculaController().get_info_bajo_demanda_alumno)
-    .Bind(Model.GetType() == typeof(Core.Info.Academico.aca_Familia_Info) ? "" : (Model == 0 ? "" : Model));
+    .BindList(new Core.Web.Areas.Academico.Controllers.CambioPlantillaMatriculaController().get_list_bajo_demanda_alumno, new Core.Web.Areas.Academico.Controllers.CambioPlantillaMatriculaController().get_info_bajo_demanda_alumno)
+    .Bind(Model.GetType() == typeof(Core.Info.Academico.aca_Matricula_Info) ? "" : (Model == 0 ? "" : Model));
 
 }
 @comboBox.GetHtml()

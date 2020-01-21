@@ -12,11 +12,11 @@ namespace Core.Bus.Academico
     public class aca_AnioLectivoCalificacionHistorico_Bus
     {
         aca_AnioLectivoCalificacionHistorico_Data odata = new aca_AnioLectivoCalificacionHistorico_Data();
-        public List<aca_AnioLectivoCalificacionHistorico_Info> GetList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
+        public List<aca_AnioLectivoCalificacionHistorico_Info> GetList(int IdEmpresa, decimal IdAlumno, bool MostrarAnulados)
         {
             try
             {
-                return odata.getList(IdEmpresa, IdAnio, MostrarAnulados);
+                return odata.getList(IdEmpresa, IdAlumno, MostrarAnulados);
             }
             catch (Exception)
             {

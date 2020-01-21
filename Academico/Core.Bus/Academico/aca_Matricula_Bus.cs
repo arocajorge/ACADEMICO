@@ -93,6 +93,30 @@ namespace Core.Bus.Academico
             }
         }
 
+        public bool ModificarPlantillaDB(aca_Matricula_Info info)
+        {
+            try
+            {
+                return odata.modificarPlantillaDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool ModificarCursoParaleloDB(aca_Matricula_Info info)
+        {
+            try
+            {
+                return odata.modificarCursoParaleloDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool AnularDB(aca_Matricula_Info info)
         {
             try

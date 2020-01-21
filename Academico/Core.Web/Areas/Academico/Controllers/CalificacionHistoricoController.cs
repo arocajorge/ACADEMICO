@@ -90,7 +90,7 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Index
-        public ActionResult Index()
+        public ActionResult Index(decimal IdAlumno=0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -102,37 +102,37 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_AnioLectivoCalificacionHistorico_Info model = new aca_AnioLectivoCalificacionHistorico_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdAnio = (info_anio == null ? 0 : info_anio.IdAnio),
+                IdAlumno = IdAlumno,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
-
-            List<aca_AnioLectivoCalificacionHistorico_Info> lista = bus_CalificacionHistorico.GetList(model.IdEmpresa, model.IdAnio, true);
+            ViewBag.IdAlumno = model.IdAlumno;
+            List<aca_AnioLectivoCalificacionHistorico_Info> lista = bus_CalificacionHistorico.GetList(model.IdEmpresa, model.IdAlumno, true);
             Lista_CalificacionHistorico.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult Index(aca_AnioLectivoCalificacionHistorico_Info model)
-        {
-            List<aca_AnioLectivoCalificacionHistorico_Info> lista = bus_CalificacionHistorico.GetList(model.IdEmpresa, model.IdAnio, true);
-            Lista_CalificacionHistorico.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
+        //[HttpPost]
+        //public ActionResult Index(aca_AnioLectivoCalificacionHistorico_Info model)
+        //{
+        //    List<aca_AnioLectivoCalificacionHistorico_Info> lista = bus_CalificacionHistorico.GetList(model.IdEmpresa, model.IdAlumno, true);
+        //    Lista_CalificacionHistorico.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_CalificacionHistorico()
+        public ActionResult GridViewPartial_CalificacionHistorico(decimal IdAlumno=0)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-
+            ViewBag.IdAlumno = IdAlumno;
             List<aca_AnioLectivoCalificacionHistorico_Info> model = Lista_CalificacionHistorico.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_CalificacionHistorico", model);
         }
         #endregion
 
         #region Acciones
-        public ActionResult Nuevo()
+        public ActionResult Nuevo(int IdEmpresa=0, decimal IdAlumno=0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -145,8 +145,10 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdAnio = (info == null ? 0 : info.IdAnio),
+                IdAlumno = IdAlumno,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
+            ViewBag.IdAlumno = model.IdAlumno;
             cargar_combos(model);
             return View(model);
         }

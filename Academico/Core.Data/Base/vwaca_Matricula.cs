@@ -33,5 +33,6 @@ namespace Core.Data.Base
         public string NomCurso { get; set; }
         public string NomParalelo { get; set; }
         public bool BloquearMatricula { get; set; }
+        public string pe_cedulaRuc { get; set; }
     }
 }
