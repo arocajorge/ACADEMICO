@@ -71,6 +71,8 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_institucion = lst_institucion;
             var lst_financiamiento = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.ESTUDIOS), false);
             ViewBag.lst_financiamiento = lst_financiamiento;
+            var lst_vivecon = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.VIVECON), false);
+            ViewBag.lst_vivecon = lst_vivecon;
         }
 
         private bool validar(aca_SocioEconomico_Info info, ref string msg)

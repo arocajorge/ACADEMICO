@@ -58,7 +58,9 @@
         <EntityTypeShape EntityType="ModelGeneral.vwtb_banco_procesos_bancarios_x_empresa" Width="1.5" PointX="13.375" PointY="3.75" />
         <EntityTypeShape EntityType="ModelGeneral.tb_sis_reporte_x_tb_empresa" Width="1.5" PointX="3" PointY="2.375" />
         <AssociationConnector Association="ModelGeneral.FK_tb_sis_reporte_x_tb_empresa_tb_empresa" />
-        <EntityTypeShape EntityType="ModelGeneral.tb_persona" Width="1.5" PointX="3.375" PointY="15.875" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_Religion" Width="1.5" PointX="13.375" PointY="8.75" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_GrupoEtnico" Width="1.5" PointX="13.375" PointY="16.375" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_persona" Width="1.5" PointX="15.625" PointY="11.875" />
         <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_banco" />
         <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo" />
         <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo1" />
@@ -69,8 +71,9 @@
         <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo6" />
         <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo7" />
         <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Catalogo8" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_GrupoEtnico" />
         <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_profesion" />
-        <EntityTypeShape EntityType="ModelGeneral.tb_Religion" Width="1.5" PointX="13.375" PointY="8.75" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Religion" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

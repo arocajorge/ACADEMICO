@@ -12,16 +12,16 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_Religion
+    public partial class tb_GrupoEtnico
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_Religion()
+        public tb_GrupoEtnico()
         {
             this.tb_persona = new HashSet<tb_persona>();
         }
     
-        public int IdReligion { get; set; }
-        public string NomReligion { get; set; }
+        public int IdGrupoEtnico { get; set; }
+        public string NomGrupoEtnico { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

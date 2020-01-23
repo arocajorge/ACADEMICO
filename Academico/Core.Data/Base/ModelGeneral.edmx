@@ -166,6 +166,21 @@
           <Property Name="cod_entidad_dinardap" Type="varchar" MaxLength="50" />
           <Property Name="em_Email" Type="varchar" MaxLength="300" />
         </EntityType>
+        <EntityType Name="tb_GrupoEtnico">
+          <Key>
+            <PropertyRef Name="IdGrupoEtnico" />
+          </Key>
+          <Property Name="IdGrupoEtnico" Type="int" Nullable="false" />
+          <Property Name="NomGrupoEtnico" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="tb_mes">
           <Key>
             <PropertyRef Name="idMes" />
@@ -268,6 +283,7 @@
           <Property Name="IdProfesion" Type="int" />
           <Property Name="IdReligion" Type="int" />
           <Property Name="AsisteCentroCristiano" Type="bit" />
+          <Property Name="IdGrupoEtnico" Type="int" />
         </EntityType>
         <EntityType Name="tb_profesion">
           <Key>
@@ -786,6 +802,18 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_persona_tb_GrupoEtnico">
+          <End Role="tb_GrupoEtnico" Type="Self.tb_GrupoEtnico" Multiplicity="0..1" />
+          <End Role="tb_persona" Type="Self.tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_GrupoEtnico">
+              <PropertyRef Name="IdGrupoEtnico" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdGrupoEtnico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_persona_tb_profesion">
           <End Role="tb_profesion" Type="Self.tb_profesion" Multiplicity="0..1" />
           <End Role="tb_persona" Type="Self.tb_persona" Multiplicity="*" />
@@ -795,6 +823,18 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             </Principal>
             <Dependent Role="tb_persona">
               <PropertyRef Name="IdProfesion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tb_persona_tb_Religion">
+          <End Role="tb_Religion" Type="Self.tb_Religion" Multiplicity="0..1" />
+          <End Role="tb_persona" Type="Self.tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Religion">
+              <PropertyRef Name="IdReligion" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdReligion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -944,6 +984,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <EntitySet Name="tb_ColaImpresionDirecta" EntityType="Self.tb_ColaImpresionDirecta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_dia" EntityType="Self.tb_dia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_GrupoEtnico" EntityType="Self.tb_GrupoEtnico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_mes" EntityType="Self.tb_mes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_modulo" EntityType="Self.tb_modulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_pais" EntityType="Self.tb_pais" Schema="dbo" store:Type="Tables" />
@@ -1101,8 +1142,16 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
             <End Role="tb_persona" EntitySet="tb_persona" />
           </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_GrupoEtnico" Association="Self.FK_tb_persona_tb_GrupoEtnico">
+            <End Role="tb_GrupoEtnico" EntitySet="tb_GrupoEtnico" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_persona_tb_profesion" Association="Self.FK_tb_persona_tb_profesion">
             <End Role="tb_profesion" EntitySet="tb_profesion" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_Religion" Association="Self.FK_tb_persona_tb_Religion">
+            <End Role="tb_Religion" EntitySet="tb_Religion" />
             <End Role="tb_persona" EntitySet="tb_persona" />
           </AssociationSet>
           <AssociationSet Name="FK_tb_provincia_tb_pais" Association="Self.FK_tb_provincia_tb_pais">
@@ -1285,6 +1334,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             <End Role="tb_empresa" EntitySet="tb_empresa" />
             <End Role="tb_sis_reporte_x_tb_empresa" EntitySet="tb_sis_reporte_x_tb_empresa" />
           </AssociationSet>
+          <EntitySet Name="tb_Religion" EntityType="ModelGeneral.tb_Religion" />
+          <EntitySet Name="tb_GrupoEtnico" EntityType="ModelGeneral.tb_GrupoEtnico" />
           <EntitySet Name="tb_persona" EntityType="ModelGeneral.tb_persona" />
           <AssociationSet Name="FK_tb_persona_tb_banco" Association="ModelGeneral.FK_tb_persona_tb_banco">
             <End Role="tb_banco" EntitySet="tb_banco" />
@@ -1326,11 +1377,18 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             <End Role="tb_Catalogo" EntitySet="tb_Catalogo" />
             <End Role="tb_persona" EntitySet="tb_persona" />
           </AssociationSet>
+          <AssociationSet Name="FK_tb_persona_tb_GrupoEtnico" Association="ModelGeneral.FK_tb_persona_tb_GrupoEtnico">
+            <End Role="tb_GrupoEtnico" EntitySet="tb_GrupoEtnico" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
           <AssociationSet Name="FK_tb_persona_tb_profesion" Association="ModelGeneral.FK_tb_persona_tb_profesion">
             <End Role="tb_profesion" EntitySet="tb_profesion" />
             <End Role="tb_persona" EntitySet="tb_persona" />
           </AssociationSet>
-          <EntitySet Name="tb_Religion" EntityType="ModelGeneral.tb_Religion" />
+          <AssociationSet Name="FK_tb_persona_tb_Religion" Association="ModelGeneral.FK_tb_persona_tb_Religion">
+            <End Role="tb_Religion" EntitySet="tb_Religion" />
+            <End Role="tb_persona" EntitySet="tb_persona" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="tb_sucursal">
           <Key>
@@ -2079,6 +2137,38 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tb_Religion">
+          <Key>
+            <PropertyRef Name="IdReligion" />
+          </Key>
+          <Property Name="IdReligion" Type="Int32" Nullable="false" />
+          <Property Name="NomReligion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_persona" Relationship="ModelGeneral.FK_tb_persona_tb_Religion" FromRole="tb_Religion" ToRole="tb_persona" />
+        </EntityType>
+        <EntityType Name="tb_GrupoEtnico">
+          <Key>
+            <PropertyRef Name="IdGrupoEtnico" />
+          </Key>
+          <Property Name="IdGrupoEtnico" Type="Int32" Nullable="false" />
+          <Property Name="NomGrupoEtnico" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_persona" Relationship="ModelGeneral.FK_tb_persona_tb_GrupoEtnico" FromRole="tb_GrupoEtnico" ToRole="tb_persona" />
+        </EntityType>
         <EntityType Name="tb_persona">
           <Key>
             <PropertyRef Name="IdPersona" />
@@ -2116,6 +2206,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <Property Name="IdProfesion" Type="Int32" />
           <Property Name="IdReligion" Type="Int32" />
           <Property Name="AsisteCentroCristiano" Type="Boolean" />
+          <Property Name="IdGrupoEtnico" Type="Int32" />
           <NavigationProperty Name="tb_banco" Relationship="ModelGeneral.FK_tb_persona_tb_banco" FromRole="tb_persona" ToRole="tb_banco" />
           <NavigationProperty Name="tb_Catalogo" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo" FromRole="tb_persona" ToRole="tb_Catalogo" />
           <NavigationProperty Name="tb_Catalogo1" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo1" FromRole="tb_persona" ToRole="tb_Catalogo" />
@@ -2126,7 +2217,9 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <NavigationProperty Name="tb_Catalogo6" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo6" FromRole="tb_persona" ToRole="tb_Catalogo" />
           <NavigationProperty Name="tb_Catalogo7" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo7" FromRole="tb_persona" ToRole="tb_Catalogo" />
           <NavigationProperty Name="tb_Catalogo8" Relationship="ModelGeneral.FK_tb_persona_tb_Catalogo8" FromRole="tb_persona" ToRole="tb_Catalogo" />
+          <NavigationProperty Name="tb_GrupoEtnico" Relationship="ModelGeneral.FK_tb_persona_tb_GrupoEtnico" FromRole="tb_persona" ToRole="tb_GrupoEtnico" />
           <NavigationProperty Name="tb_profesion" Relationship="ModelGeneral.FK_tb_persona_tb_profesion" FromRole="tb_persona" ToRole="tb_profesion" />
+          <NavigationProperty Name="tb_Religion" Relationship="ModelGeneral.FK_tb_persona_tb_Religion" FromRole="tb_persona" ToRole="tb_Religion" />
         </EntityType>
         <Association Name="FK_tb_persona_tb_banco">
           <End Type="ModelGeneral.tb_banco" Role="tb_banco" Multiplicity="0..1" />
@@ -2248,6 +2341,18 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_persona_tb_GrupoEtnico">
+          <End Type="ModelGeneral.tb_GrupoEtnico" Role="tb_GrupoEtnico" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_GrupoEtnico">
+              <PropertyRef Name="IdGrupoEtnico" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdGrupoEtnico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tb_persona_tb_profesion">
           <End Type="ModelGeneral.tb_profesion" Role="tb_profesion" Multiplicity="0..1" />
           <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
@@ -2260,21 +2365,18 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tb_Religion">
-          <Key>
-            <PropertyRef Name="IdReligion" />
-          </Key>
-          <Property Name="IdReligion" Type="Int32" Nullable="false" />
-          <Property Name="NomReligion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
+        <Association Name="FK_tb_persona_tb_Religion">
+          <End Type="ModelGeneral.tb_Religion" Role="tb_Religion" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_persona" Role="tb_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_Religion">
+              <PropertyRef Name="IdReligion" />
+            </Principal>
+            <Dependent Role="tb_persona">
+              <PropertyRef Name="IdReligion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2799,9 +2901,42 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="tb_Religion">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_Religion">
+              <MappingFragment StoreEntitySet="tb_Religion">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="NomReligion" ColumnName="NomReligion" />
+                <ScalarProperty Name="IdReligion" ColumnName="IdReligion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_GrupoEtnico">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_GrupoEtnico">
+              <MappingFragment StoreEntitySet="tb_GrupoEtnico">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="NomGrupoEtnico" ColumnName="NomGrupoEtnico" />
+                <ScalarProperty Name="IdGrupoEtnico" ColumnName="IdGrupoEtnico" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="tb_persona">
             <EntityTypeMapping TypeName="ModelGeneral.tb_persona">
               <MappingFragment StoreEntitySet="tb_persona">
+                <ScalarProperty Name="IdGrupoEtnico" ColumnName="IdGrupoEtnico" />
                 <ScalarProperty Name="AsisteCentroCristiano" ColumnName="AsisteCentroCristiano" />
                 <ScalarProperty Name="IdReligion" ColumnName="IdReligion" />
                 <ScalarProperty Name="IdProfesion" ColumnName="IdProfesion" />
@@ -2835,22 +2970,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
                 <ScalarProperty Name="pe_Naturaleza" ColumnName="pe_Naturaleza" />
                 <ScalarProperty Name="CodPersona" ColumnName="CodPersona" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_Religion">
-            <EntityTypeMapping TypeName="ModelGeneral.tb_Religion">
-              <MappingFragment StoreEntitySet="tb_Religion">
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="NomReligion" ColumnName="NomReligion" />
-                <ScalarProperty Name="IdReligion" ColumnName="IdReligion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

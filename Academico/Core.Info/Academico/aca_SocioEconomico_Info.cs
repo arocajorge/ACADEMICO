@@ -55,6 +55,8 @@ namespace Core.Info.Academico
         public int IdCatalogoFichaIns { get; set; }
         [Required(ErrorMessage = "El campo como financiara los estudios es obligatorio")]
         public int IdCatalogoFichaFin { get; set; }
+        [Required(ErrorMessage = "El campo vive con es obligatorio")]
+        public int IdCatalogoFichaVive { get; set; }
         public string OtroMotivoIngreso { get; set; }
         public string OtroInformacionInst { get; set; }
         public string OtroFinanciamiento { get; set; }

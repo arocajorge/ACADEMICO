@@ -91,9 +91,13 @@
     <Compile Include="Academico\aca_Plantilla_Data.cs" />
     <Compile Include="Academico\aca_Plantilla_Rubro_Data.cs" />
     <Compile Include="Academico\aca_Profesor_Data.cs" />
+    <Compile Include="Base\tb_GrupoEtnico.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_Hermanos.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="General\tb_GrupoEtnico_Data.cs" />
     <Compile Include="General\tb_Religion_Data.cs" />
     <Compile Include="Academico\aca_Rubro_Data.cs" />
     <Compile Include="Academico\aca_Sede_Data.cs" />

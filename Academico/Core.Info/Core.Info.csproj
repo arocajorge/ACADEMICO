@@ -83,6 +83,7 @@
     <Compile Include="Academico\aca_Plantilla_Info.cs" />
     <Compile Include="Academico\aca_Plantilla_Rubro_Info.cs" />
     <Compile Include="Academico\aca_Profesor_Info.cs" />
+    <Compile Include="General\tb_GrupoEtnico_Info.cs" />
     <Compile Include="General\tb_Religion_Info.cs" />
     <Compile Include="Academico\aca_Rubro_Info.cs" />
     <Compile Include="Academico\aca_Sede_Info.cs" />

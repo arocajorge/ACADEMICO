@@ -38,6 +38,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Sede_Bus bus_sede = new aca_Sede_Bus();
         aca_Documento_Bus bus_documento = new aca_Documento_Bus();
         tb_Religion_Bus bus_religion = new tb_Religion_Bus();
+        tb_GrupoEtnico_Bus bus_grupoetnico = new tb_GrupoEtnico_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         public static UploadedFile file { get; set; }
@@ -115,6 +116,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_profesion = bus_profesion.GetList(false);
             lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "" });
             var lst_religion = bus_religion.GetList(false);
+            var lst_grupoetnico = bus_grupoetnico.GetList(false);
 
             ViewBag.lst_sexo = lst_sexo;
             ViewBag.lst_estado_civil = lst_estado_civil;
@@ -125,6 +127,7 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_profesion = lst_profesion;
             ViewBag.lst_instruccion = lst_instruccion;
             ViewBag.lst_religion = lst_religion;
+            ViewBag.lst_grupoetnico = lst_grupoetnico;
 
             var lst_termino_pago = bus_termino_pago.get_list(false);
             ViewBag.lst_termino_pago = lst_termino_pago;
@@ -448,7 +451,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_celular = model.Celular,
                 pe_direccion = model.Direccion,
                 IdReligion = model.IdReligion,
-                AsisteCentroCristiano = model.AsisteCentroCristiano
+                AsisteCentroCristiano = model.AsisteCentroCristiano,
+                IdGrupoEtnico = model.IdGrupoEtnico
             };
 
             model.lst_alumno_documentos = ListaAlumnoDocumento.get_list(model.IdTransaccionSession);
@@ -659,7 +663,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_celular = model.Celular,
                 pe_direccion = model.Direccion,
                 IdReligion = model.IdReligion,
-                AsisteCentroCristiano = model.AsisteCentroCristiano
+                AsisteCentroCristiano = model.AsisteCentroCristiano,
+                IdGrupoEtnico = model.IdGrupoEtnico
             };
 
             model.info_persona_alumno = info_persona_alumno;

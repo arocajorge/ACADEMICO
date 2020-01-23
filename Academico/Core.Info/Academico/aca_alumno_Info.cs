@@ -74,6 +74,7 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo religión es obligatorio")]
         public Nullable<int> IdReligion { get; set; }
         public Nullable<bool> AsisteCentroCristiano { get; set; }
+        public Nullable<int> IdGrupoEtnico { get; set; }
         #endregion
 
         #region Datos padre

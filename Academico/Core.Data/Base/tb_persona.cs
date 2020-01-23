@@ -47,6 +47,7 @@ namespace Core.Data.Base
         public Nullable<int> IdProfesion { get; set; }
         public Nullable<int> IdReligion { get; set; }
         public Nullable<bool> AsisteCentroCristiano { get; set; }
+        public Nullable<int> IdGrupoEtnico { get; set; }
     
         public virtual tb_banco tb_banco { get; set; }
         public virtual tb_Catalogo tb_Catalogo { get; set; }
@@ -58,6 +59,8 @@ namespace Core.Data.Base
         public virtual tb_Catalogo tb_Catalogo6 { get; set; }
         public virtual tb_Catalogo tb_Catalogo7 { get; set; }
         public virtual tb_Catalogo tb_Catalogo8 { get; set; }
+        public virtual tb_GrupoEtnico tb_GrupoEtnico { get; set; }
         public virtual tb_profesion tb_profesion { get; set; }
+        public virtual tb_Religion tb_Religion { get; set; }
     }
 }

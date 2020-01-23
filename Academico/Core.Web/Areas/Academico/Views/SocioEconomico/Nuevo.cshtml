@@ -64,6 +64,13 @@
                     <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
+                                <label for="IdEmpresa">El alumno vive con</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaVive, new SelectList(ViewBag.lst_vivecon, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaVive" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaVive, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
                                 <label for="IdEmpresa">Tenencia de vivienda*</label>
                                 @Html.DropDownListFor(q => q.IdCatalogoFichaTVi, new SelectList(ViewBag.lst_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaTVi" })
                                 @Html.ValidationMessageFor(q => q.IdCatalogoFichaTVi, "", new { @class = "text-danger" })

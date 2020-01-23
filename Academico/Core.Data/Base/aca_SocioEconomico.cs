@@ -37,6 +37,7 @@ namespace Core.Data.Base
         public int IdCatalogoFichaMot { get; set; }
         public int IdCatalogoFichaIns { get; set; }
         public int IdCatalogoFichaFin { get; set; }
+        public int IdCatalogoFichaVive { get; set; }
         public string OtroMotivoIngreso { get; set; }
         public string OtroInformacionInst { get; set; }
         public string OtroFinanciamiento { get; set; }
@@ -53,5 +54,6 @@ namespace Core.Data.Base
         public virtual aca_CatalogoFicha aca_CatalogoFicha3 { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha4 { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha5 { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha6 { get; set; }
     }
 }

@@ -204,7 +204,8 @@ namespace Core.Info.Helps
             MOTIVOING = 4,
             INSTITUCION = 5,
             ESTUDIOS = 6,
-            INSTRUCCION = 7
+            INSTRUCCION = 7,
+            VIVECON = 8
         }
 
         public enum eCatalogoSocioEconomico_OtrodMotivos

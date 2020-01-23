@@ -50,5 +50,6 @@ namespace Core.Data.Base
         public string Sector { get; set; }
         public Nullable<int> IdReligion { get; set; }
         public Nullable<bool> AsisteCentroCristiano { get; set; }
+        public Nullable<int> IdGrupoEtnico { get; set; }
     }
 }

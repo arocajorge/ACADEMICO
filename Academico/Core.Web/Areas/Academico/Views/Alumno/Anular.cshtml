@@ -188,6 +188,26 @@
                     <div class="col-md-12">
                         <div class="col-md-3">
                             <div class="form-group">
+                                <label for="IdEmpresa">Grupo Etnico</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdGrupoEtnico, settings =>
+                               {
+                                   settings.Name = "IdGrupoEtnico";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdGrupoEtnico", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("NomGrupoEtnico", "Grupo Etnico").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdGrupoEtnico";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "NomGrupoEtnico";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_grupoetnico).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdGrupoEtnico, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
                                 <label for="IdEmpresa">Religión</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdReligion, settings =>
                                {

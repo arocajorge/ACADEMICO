@@ -69,6 +69,7 @@ namespace Core.Data.Academico
                         IdCatalogoFichaMot = Entity.IdCatalogoFichaMot,
                         IdCatalogoFichaIns = Entity.IdCatalogoFichaIns,
                         IdCatalogoFichaFin = Entity.IdCatalogoFichaFin,
+                        IdCatalogoFichaVive = Entity.IdCatalogoFichaVive,
                         OtroFinanciamiento = Entity.OtroFinanciamiento,
                         OtroInformacionInst = Entity.OtroInformacionInst,
                         OtroMotivoIngreso = Entity.OtroMotivoIngreso
@@ -103,6 +104,7 @@ namespace Core.Data.Academico
                         IdCatalogoFichaVi = Entity.IdCatalogoFichaVi,
                         IdCatalogoFichaTVi = Entity.IdCatalogoFichaTVi,
                         IdCatalogoFichaAg = Entity.IdCatalogoFichaAg,
+                        IdCatalogoFichaVive = Entity.IdCatalogoFichaVive,
                         TieneElectricidad = Entity.TieneElectricidad,
                         TieneHermanos = Entity.TieneHermanos,
                         NombreHermanos = Entity.NombreHermanos,
@@ -163,6 +165,7 @@ namespace Core.Data.Academico
                         IdCatalogoFichaMot = info.IdCatalogoFichaMot,
                         IdCatalogoFichaIns = info.IdCatalogoFichaIns,
                         IdCatalogoFichaFin = info.IdCatalogoFichaFin,
+                        IdCatalogoFichaVive = info.IdCatalogoFichaVive,
                         OtroFinanciamiento = info.OtroFinanciamiento,
                         OtroInformacionInst = info.OtroInformacionInst,
                         OtroMotivoIngreso = info.OtroMotivoIngreso,
@@ -213,6 +216,7 @@ namespace Core.Data.Academico
                     Entity.IdCatalogoFichaMot = info.IdCatalogoFichaMot;
                     Entity.IdCatalogoFichaIns = info.IdCatalogoFichaIns;
                     Entity.IdCatalogoFichaFin = info.IdCatalogoFichaFin;
+                    Entity.IdCatalogoFichaVive = info.IdCatalogoFichaVive;
                     Entity.OtroFinanciamiento = info.OtroFinanciamiento;
                     Entity.OtroInformacionInst = info.OtroInformacionInst;
                     Entity.OtroMotivoIngreso = info.OtroMotivoIngreso;

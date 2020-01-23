@@ -156,6 +156,7 @@ namespace Core.Data.General
                 IdEstadoCivil = string.IsNullOrEmpty(info.IdEstadoCivil) ? "SOLTE" : info.IdEstadoCivil,
                 IdProfesion = (info.IdProfesion== 0 || info.IdProfesion==null) ? null : info.IdProfesion,
                 IdReligion = (info.IdReligion == 0 || info.IdReligion == null) ? null : info.IdReligion,
+                IdGrupoEtnico = (info.IdGrupoEtnico == 0 || info.IdGrupoEtnico == null) ? null : info.IdGrupoEtnico,
                 AsisteCentroCristiano = info.AsisteCentroCristiano,
                 pe_sexo = string.IsNullOrEmpty(info.pe_sexo) ? "SEXO_MAS" : info.pe_sexo,
             };
@@ -221,6 +222,7 @@ namespace Core.Data.General
                         PorcentajeDiscapacidad = info.PorcentajeDiscapacidad,
                         IdProfesion = ((info.IdProfesion == 0 || info.IdProfesion== null) ? null : info.IdProfesion),
                         IdReligion = ((info.IdReligion == 0 || info.IdReligion == null) ? null : info.IdReligion),
+                        IdGrupoEtnico = ((info.IdGrupoEtnico == 0 || info.IdGrupoEtnico == null) ? null : info.IdGrupoEtnico),
                         AsisteCentroCristiano = info.AsisteCentroCristiano
                     };
                     Context.tb_persona.Add(Entity);
@@ -266,6 +268,7 @@ namespace Core.Data.General
                     Entity.PorcentajeDiscapacidad = info.PorcentajeDiscapacidad;
                     Entity.IdProfesion = (info.IdProfesion==0 ? null : info.IdProfesion);
                     Entity.IdReligion = (info.IdReligion == 0 ? null : info.IdReligion);
+                    Entity.IdGrupoEtnico = (info.IdGrupoEtnico == 0 ? null : info.IdGrupoEtnico);
                     Entity.AsisteCentroCristiano = info.AsisteCentroCristiano;
                     Entity.pe_fechaModificacion = DateTime.Now;
                     Entity.pe_UltUsuarioModi = info.pe_UltUsuarioModi;

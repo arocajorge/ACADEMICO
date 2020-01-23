@@ -41,6 +41,8 @@ namespace Core.Info.General
         public Nullable<int> IdProfesion { get; set; }
         public Nullable<int> IdReligion { get; set; }
         public Nullable<bool> AsisteCentroCristiano { get; set; }
+        public Nullable<int> IdGrupoEtnico { get; set; }
+
         #region Campos que no existen en la tabla
         public decimal IdEntidad { get; set; }
         public bool EstadoBool { get; set; }

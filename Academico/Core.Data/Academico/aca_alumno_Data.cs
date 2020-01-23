@@ -104,7 +104,8 @@ namespace Core.Data.Academico
                         Sector = Entity.Sector,
                         LugarNacimiento = Entity.LugarNacimiento,
                         IdReligion = Entity.IdReligion,
-                        AsisteCentroCristiano = Entity.AsisteCentroCristiano
+                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
+                        IdGrupoEtnico = Entity.IdGrupoEtnico
                     };
                 }
 
@@ -151,6 +152,9 @@ namespace Core.Data.Academico
                     info.NumeroCarnetConadis = Entity_per.NumeroCarnetConadis;
                     info.PorcentajeDiscapacidad = Entity_per.PorcentajeDiscapacidad;
                     info.pe_fechaNacimiento = Entity_per.pe_fechaNacimiento;
+                    info.IdReligion = Entity_per.IdReligion;
+                    info.AsisteCentroCristiano = Entity_per.AsisteCentroCristiano;
+                    info.IdGrupoEtnico = Entity_per.IdGrupoEtnico;
 
                     Context_general.Dispose();
                     Context_academico.Dispose();

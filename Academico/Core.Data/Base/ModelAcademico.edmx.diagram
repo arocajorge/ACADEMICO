@@ -127,14 +127,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_Plantilla_Rubro_aca_Plantilla" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula_Rubro_PorFacturar" Width="1.5" PointX="26.375" PointY="7.75" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Matricula_Rubro" Width="1.5" PointX="23.5" PointY="16.25" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_SocioEconomico" Width="1.5" PointX="28.875" PointY="17.375" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha1" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha2" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha3" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha4" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha5" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_MecanismoDePago" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla" />
@@ -146,9 +138,7 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Curso" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Alumno" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Familia" Width="1.5" PointX="25.875" PointY="17.875" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Familia" Width="1.5" PointX="12.375" PointY="25.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_familia_aca_alumno" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Familia_aca_CatalogoFicha" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AlumnoDocumento" Width="1.5" PointX="23.875" PointY="28.875" />
@@ -157,6 +147,17 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AlumnoDocumento_aca_Documento" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Hermanos" Width="1.5" PointX="17.375" PointY="6.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula" Width="1.5" PointX="11.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Alumno" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Familia" Width="1.5" PointX="12.75" PointY="25.75" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_SocioEconomico" Width="1.5" PointX="28.875" PointY="17.25" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha1" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha2" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha3" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha4" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha5" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha6" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
