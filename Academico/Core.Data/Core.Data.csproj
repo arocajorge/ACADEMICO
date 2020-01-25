@@ -71,6 +71,7 @@
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Periodo_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Data.cs" />
     <Compile Include="Academico\aca_CatalogoFicha_Data.cs" />
+    <Compile Include="Academico\aca_CatalogoTipoFicha_Data.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Data.cs" />
     <Compile Include="Academico\aca_Catalogo_Data.cs" />
     <Compile Include="Academico\aca_Curso_Data.cs" />

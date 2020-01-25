@@ -9,6 +9,7 @@ namespace Core.Info.General
 {
     public class tb_Religion_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdReligion { get; set; }
         [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo religión debe tener mínimo 1 caracter y máximo 500")]

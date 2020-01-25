@@ -52,7 +52,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Index(aca_AnioLectivo_Jornada_Curso_Info model)
         {
             List<aca_AnioLectivo_Jornada_Curso_Info> lista = bus_CursoPorJornada.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada);
-            Lista_CursoPorJornada.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            Lista_CursoPorJornada.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
             cargar_combos();
             return View(model);
         }

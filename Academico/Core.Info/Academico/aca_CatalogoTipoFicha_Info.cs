@@ -8,6 +8,7 @@ namespace Core.Info.Academico
 {
     public class aca_CatalogoTipoFicha_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdCatalogoTipoFicha { get; set; }
         public string Codigo { get; set; }
         public string NomCatalogoTipoFicha { get; set; }
