@@ -12,6 +12,7 @@ using Core.Web.Areas.Inventario.Controllers;
 using Core.Web.Helps;
 using DevExpress.Web;
 using DevExpress.Web.Mvc;
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -676,7 +677,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         #region Importacion
         public ActionResult UploadControlUploadImp()
         {
-            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettingsND.UploadValidationSettings, UploadControlSettingsND.FileUploadComplete);
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", Core.Web.Areas.Facturacion.Controllers.UploadControlSettingsND.UploadValidationSettings, Core.Web.Areas.Facturacion.Controllers.UploadControlSettingsND.FileUploadComplete);
             return null;
         }
         public ActionResult Importar(int IdEmpresa = 0)
