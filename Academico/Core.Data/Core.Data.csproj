@@ -92,6 +92,18 @@
     <Compile Include="Academico\aca_Plantilla_Data.cs" />
     <Compile Include="Academico\aca_Plantilla_Rubro_Data.cs" />
     <Compile Include="Academico\aca_Profesor_Data.cs" />
+    <Compile Include="Academico\aca_Reporte_Data.cs" />
+    <Compile Include="Academico\aca_Reporte_x_seg_usuario_Data.cs" />
+    <Compile Include="Academico\aca_Reporte_x_tb_empresa_Data.cs" />
+    <Compile Include="Base\aca_Reporte.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_Reporte_x_seg_usuario.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_Reporte_x_tb_empresa.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_GrupoEtnico.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>

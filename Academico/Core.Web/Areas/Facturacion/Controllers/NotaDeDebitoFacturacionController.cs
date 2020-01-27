@@ -7,12 +7,14 @@ using Core.Info.Facturacion;
 using Core.Info.General;
 using Core.Info.Helps;
 using Core.Info.Inventario;
+using Core.Web.Areas.Facturacion.Controllers;
 using Core.Web.Areas.Inventario.Controllers;
 using Core.Web.Helps;
 using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -48,6 +50,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
         fa_notaCreDeb_List Lista_Factura = new fa_notaCreDeb_List();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+
+        public object UploadControlSettingsND { get; private set; }
         #endregion
         #region Index
         public ActionResult Index()
@@ -668,12 +672,13 @@ namespace Core.Web.Areas.Facturacion.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
         #region Importacion
-        //public ActionResult UploadControlUploadImp()
-        //{
-        //    UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettingsND.UploadValidationSettings, UploadControlSettingsND.FileUploadComplete);
-        //    return null;
-        //}
+        public ActionResult UploadControlUploadImp()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettingsND.UploadValidationSettings, UploadControlSettingsND.FileUploadComplete);
+            return null;
+        }
         public ActionResult Importar(int IdEmpresa = 0)
         {
             #region Validar Session
@@ -734,125 +739,129 @@ namespace Core.Web.Areas.Facturacion.Controllers
         #endregion
     }
 
-    //public class UploadControlSettingsND
-    //{
-    //    public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
-    //    {
-    //        AllowedFileExtensions = new string[] { ".xlsx" },
-    //        MaxFileSize = 40000000
-    //    };
-    //    public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
-    //    {
-    //        #region Variables
-    //        fa_notaCreDeb_List ListaFactura = new fa_notaCreDeb_List();
-    //        List<fa_notaCreDeb_Info> Lista_Factura = new List<fa_notaCreDeb_Info>();
-    //        fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
-    //        fa_cliente_contactos_Bus bus_cliente_contatos = new fa_cliente_contactos_Bus();
-    //        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
-    //        fa_parametro_Bus bus_fa_parametro = new fa_parametro_Bus();
-    //        fa_TipoNota_Bus bus_tipo_nota = new fa_TipoNota_Bus();
-    //        tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+    public class UploadControlSettingsND
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            fa_notaCreDeb_List ListaFactura = new fa_notaCreDeb_List();
+            List<fa_notaCreDeb_Info> Lista_Factura = new List<fa_notaCreDeb_Info>();
+            fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+            fa_cliente_contactos_Bus bus_cliente_contatos = new fa_cliente_contactos_Bus();
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            fa_parametro_Bus bus_fa_parametro = new fa_parametro_Bus();
+            fa_TipoNota_Bus bus_tipo_nota = new fa_TipoNota_Bus();
+            tb_bodega_Bus bus_bodega = new tb_bodega_Bus();
+            aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
+            aca_Familia_Bus bus_familia = new aca_Familia_Bus();
+            int cont = 0;
+            int IdNota = 1;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #endregion
 
-    //        int cont = 0;
-    //        int IdNota = 1;
-    //        decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-    //        int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-    //        #endregion
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
 
-    //        Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
-    //        if (stream.Length > 0)
-    //        {
-    //            IExcelDataReader reader = null;
-    //            reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+                #region Saldo Fact      
+                var info_fa_parametro = bus_fa_parametro.get_info(IdEmpresa);
+                var IdTipoNota = 1; //default
+                var infoTipoNota = bus_tipo_nota.get_info(IdEmpresa, IdTipoNota);
 
-    //            #region Saldo Fact      
-    //            var info_fa_parametro = bus_fa_parametro.get_info(IdEmpresa);
-    //            var IdTipoNota = 1; //default
-    //            var infoTipoNota = bus_tipo_nota.get_info(IdEmpresa, IdTipoNota);
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        var Su_CodigoEstablecimiento = Convert.ToString(reader.GetValue(0)).Trim();
+                        var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+                        var IdSucursal = lst_sucursal.Where(q => q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal;
+                        var info_estudiante = bus_alumno.get_info_x_num_cedula(IdEmpresa, Convert.ToString(reader.GetValue(1)));
+                        var InfoRepEconomico = bus_familia.GetInfo_Representante(IdEmpresa, info_estudiante.IdAlumno, cl_enumeradores.eTipoRepresentante.ECON.ToString());
+                        var InfoCliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, InfoRepEconomico.pe_cedulaRuc);
+                        //var InfoCliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, Convert.ToString(reader.GetValue(1)));
+                        var infoBodega = bus_bodega.get_info(IdEmpresa, IdSucursal, 1);
 
-    //            while (reader.Read())
-    //            {
-    //                if (!reader.IsDBNull(0) && cont > 0)
-    //                {
-    //                    var Su_CodigoEstablecimiento = Convert.ToString(reader.GetValue(0)).Trim();
-    //                    var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
-    //                    var IdSucursal = lst_sucursal.Where(q => q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal;
-    //                    var InfoCliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, Convert.ToString(reader.GetValue(1)));
-    //                    var infoBodega = bus_bodega.get_info(IdEmpresa, IdSucursal, 1);
+                        if (InfoCliente != null && InfoCliente.IdCliente != 0)
+                        {
+                            //var InfoContactosCliente = bus_cliente_contatos.get_list(IdEmpresa, InfoCliente.IdCliente);
+                            var InfoContactosCliente = bus_cliente_contatos.get_info(IdEmpresa, InfoCliente.IdCliente, 1);
+                            fa_notaCreDeb_Info info = new fa_notaCreDeb_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdSucursal = IdSucursal,
+                                IdBodega = infoBodega.IdBodega,
+                                IdNota = IdNota++,
+                                dev_IdEmpresa = null,
+                                dev_IdDev_Inven = null,
+                                CodNota = Convert.ToString(reader.GetValue(2)),
+                                CreDeb = "D",
+                                CodDocumentoTipo = null,
+                                Serie1 = null,
+                                Serie2 = null,
+                                NumNota_Impresa = null,
+                                NumAutorizacion = null,
+                                Fecha_Autorizacion = null,
+                                IdCliente = InfoCliente.IdCliente,
+                                no_fecha = Convert.ToDateTime(reader.GetValue(5)),
+                                no_fecha_venc = Convert.ToDateTime(reader.GetValue(6)),
+                                IdTipoNota = infoTipoNota.IdTipoNota,
+                                sc_observacion = Convert.ToString(reader.GetValue(7)) == "" ? ("DOCUMENTO #" + Convert.ToString(reader.GetValue(2)) + " CLIENTE: " + InfoCliente.info_persona.pe_nombreCompleto) : Convert.ToString(reader.GetValue(7)),
+                                IdUsuario = SessionFixed.IdUsuario,
+                                NaturalezaNota = null,
+                                IdCtaCble_TipoNota = infoTipoNota.IdCtaCble,
+                                //IdPuntoVta = null,
+                                aprobada_enviar_sri = false
+                            };
 
-    //                    if (InfoCliente != null && InfoCliente.IdCliente != 0)
-    //                    {
-    //                        //var InfoContactosCliente = bus_cliente_contatos.get_list(IdEmpresa, InfoCliente.IdCliente);
-    //                        var InfoContactosCliente = bus_cliente_contatos.get_info(IdEmpresa, InfoCliente.IdCliente, 1);
-    //                        fa_notaCreDeb_Info info = new fa_notaCreDeb_Info
-    //                        {
-    //                            IdEmpresa = IdEmpresa,
-    //                            IdSucursal = IdSucursal,
-    //                            IdBodega = infoBodega.IdBodega,
-    //                            IdNota = IdNota++,
-    //                            dev_IdEmpresa = null,
-    //                            dev_IdDev_Inven = null,
-    //                            CodNota = Convert.ToString(reader.GetValue(2)),
-    //                            CreDeb = "D",
-    //                            CodDocumentoTipo = null,
-    //                            Serie1 = null,
-    //                            Serie2 = null,
-    //                            NumNota_Impresa = null,
-    //                            NumAutorizacion = null,
-    //                            Fecha_Autorizacion = null,
-    //                            IdCliente = InfoCliente.IdCliente,
-    //                            no_fecha = Convert.ToDateTime(reader.GetValue(5)),
-    //                            no_fecha_venc = Convert.ToDateTime(reader.GetValue(6)),
-    //                            IdTipoNota = infoTipoNota.IdTipoNota,
-    //                            sc_observacion = Convert.ToString(reader.GetValue(7)) == "" ? ("DOCUMENTO #" + Convert.ToString(reader.GetValue(2)) + " CLIENTE: " + InfoCliente.info_persona.pe_nombreCompleto) : Convert.ToString(reader.GetValue(7)),
-    //                            IdUsuario = SessionFixed.IdUsuario,
-    //                            NaturalezaNota = null,
-    //                            IdCtaCble_TipoNota = infoTipoNota.IdCtaCble,
-    //                            //IdPuntoVta = null,
-    //                            aprobada_enviar_sri = false
-    //                        };
+                            info.lst_det = new List<fa_notaCreDeb_det_Info>();
+                            info.lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>();
 
-    //                        info.lst_det = new List<fa_notaCreDeb_det_Info>();
-    //                        info.lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>();
+                            fa_notaCreDeb_det_Info info_detalle = new fa_notaCreDeb_det_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdSucursal = IdSucursal,
+                                IdBodega = info.IdBodega,
+                                IdNota = info.IdNota,
+                                IdProducto = 1,
+                                sc_cantidad = 1,
+                                sc_Precio = Convert.ToDouble(reader.GetValue(4)),
+                                sc_descUni = 0,
+                                sc_PordescUni = 0,
+                                sc_precioFinal = Convert.ToDouble(reader.GetValue(4)),
+                                sc_subtotal = Convert.ToDouble(reader.GetValue(4)),
+                                sc_iva = 0,
+                                sc_total = Convert.ToDouble(reader.GetValue(4)),
+                                sc_costo = 0,
+                                sc_observacion = Convert.ToString(reader.GetValue(7)),
+                                vt_por_iva = 0,
+                                IdPunto_Cargo = null,
+                                IdPunto_cargo_grupo = null,
+                                IdCod_Impuesto_Iva = "IVA0",
+                                IdCentroCosto = null,
+                                sc_cantidad_factura = null
+                            };
 
-    //                        fa_notaCreDeb_det_Info info_detalle = new fa_notaCreDeb_det_Info
-    //                        {
-    //                            IdEmpresa = IdEmpresa,
-    //                            IdSucursal = IdSucursal,
-    //                            IdBodega = info.IdBodega,
-    //                            IdNota = info.IdNota,
-    //                            IdProducto = 1,
-    //                            sc_cantidad = 1,
-    //                            sc_Precio = Convert.ToDouble(reader.GetValue(4)),
-    //                            sc_descUni = 0,
-    //                            sc_PordescUni = 0,
-    //                            sc_precioFinal = Convert.ToDouble(reader.GetValue(4)),
-    //                            sc_subtotal = Convert.ToDouble(reader.GetValue(4)),
-    //                            sc_iva = 0,
-    //                            sc_total = Convert.ToDouble(reader.GetValue(4)),
-    //                            sc_costo = 0,
-    //                            sc_observacion = Convert.ToString(reader.GetValue(7)),
-    //                            vt_por_iva = 0,
-    //                            IdPunto_Cargo = null,
-    //                            IdPunto_cargo_grupo = null,
-    //                            IdCod_Impuesto_Iva = "IVA0",
-    //                            IdCentroCosto = null,
-    //                            sc_cantidad_factura = null
-    //                        };
+                            info.lst_det.Add(info_detalle);
 
-    //                        info.lst_det.Add(info_detalle);
-
-    //                        Lista_Factura.Add(info);
-    //                    }
-    //                }
-    //                else
-    //                    cont++;
-    //            }
-    //            ListaFactura.set_list(Lista_Factura, IdTransaccionSession);
-    //            #endregion
-    //        }
-    //    }
-    //}
+                            Lista_Factura.Add(info);
+                        }
+                    }
+                    else
+                        cont++;
+                }
+                ListaFactura.set_list(Lista_Factura, IdTransaccionSession);
+                #endregion
+            }
+        }
+    }
     public class fa_notaCreDeb_List
     {
         string Variable = "fa_notaCreDeb_Info";

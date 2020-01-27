@@ -46,17 +46,17 @@ namespace Core.Web.Areas.Reportes.Controllers
 
         public ActionResult ACA_001(int IdEmpresa = 0, decimal IdAlumno = 0, int IdAnio=0)
         {
-            cl_filtros_Info model = new cl_filtros_Info
-            {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdAnio = (IdAnio==0 ? bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0).IdAnio : IdAnio),
-                IdAlumno = IdAlumno,
-            };
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model. IdAlumno = IdAlumno;
 
             ACA_001_Rpt report = new ACA_001_Rpt();
 
             #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_001");
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_001");
             if (reporte != null)
             {
                 System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
@@ -64,7 +64,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             }
             #endregion
 
-            report.p_IdEmpresa.Value = IdEmpresa;
+            report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = IdAnio;
             report.p_IdAlumno.Value = IdAlumno;
             report.usuario = SessionFixed.IdUsuario;

@@ -81,6 +81,9 @@
     <Compile Include="Academico\aca_Plantilla_Bus.cs" />
     <Compile Include="Academico\aca_Plantilla_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_Profesor_Bus.cs" />
+    <Compile Include="Academico\aca_Reporte_Bus.cs" />
+    <Compile Include="Academico\aca_Reporte_x_seg_usuario_Bus.cs" />
+    <Compile Include="Academico\aca_Reporte_x_tb_empresa_Bus.cs" />
     <Compile Include="General\tb_GrupoEtnico_Bus.cs" />
     <Compile Include="General\tb_Religion_Bus.cs" />
     <Compile Include="Academico\aca_Rubro_Bus.cs" />

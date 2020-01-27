@@ -60,6 +60,19 @@ namespace Core.Bus.Academico
             }
         }
 
+        public bool validar_existe_CodCatalogo(string Codigo)
+        {
+            try
+            {
+                return odata.validar_existe_CodCatalogo(Codigo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool GuardarDB(aca_CatalogoFicha_Info info)
         {
             try

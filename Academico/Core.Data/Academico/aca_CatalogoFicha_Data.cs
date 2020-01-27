@@ -151,6 +151,29 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public bool validar_existe_CodCatalogo(string Codigo)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var lst = from q in Context.aca_CatalogoFicha
+                              where Codigo == q.Codigo
+                              select q;
+
+                    if (lst.Count() > 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool guardarDB(aca_CatalogoFicha_Info info)
         {
             try

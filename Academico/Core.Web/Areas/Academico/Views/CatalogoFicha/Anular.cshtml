@@ -1,0 +1,82 @@
+﻿@model Core.Info.Academico.aca_CatalogoFicha_Info
+@{
+    ViewBag.Title = "Anular catálogo";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
+@using (Html.BeginForm("Anular", "CatalogoFicha", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdTipoCatalogo">Tipo catálogo*</label>
+                    @Html.HiddenFor(q => q.IdCatalogoTipoFicha)
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCatalogoTipoFicha, settings =>
+               {
+                   settings.Name = "IdCatalogoTipoFicha";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("IdCatalogoTipoFicha", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                   settings.Properties.Columns.Add("NomCatalogoTipoFicha", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                   //Campo ID
+                   settings.Properties.ValueField = "IdCatalogoTipoFicha";
+                   settings.Properties.ValueType = typeof(int);
+                   settings.Properties.TextField = "NomCatalogoTipoFicha";
+                   settings.Properties.NullText = "== Seleccione ==";
+
+                   settings.Properties.DropDownButton.Enabled = false;
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.ReadOnly = true;
+               }).BindList(ViewBag.lst_tipos).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdCatalogoTipoFicha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="CodCatalogo">Código*</label>
+                    @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.Codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="ca_orden">Orden*</label>
+                    @Html.TextBoxFor(q => q.Orden, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Orden, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ca_descripcion">Descripción*</label>
+                    @Html.TextBoxFor(q => q.NomCatalogoFicha, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.NomCatalogoFicha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-danger">Anular</button>
+        <a class="btn btn-default" href="@Url.Action("Index","CatalogoFicha", new { IdCatalogoTipoFicha = ViewBag.IdCatalogoTipoFicha, Area = "Academico"  },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
