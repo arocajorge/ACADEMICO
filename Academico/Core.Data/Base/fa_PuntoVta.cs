@@ -17,8 +17,8 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public fa_PuntoVta()
         {
-            this.fa_notaCreDeb = new HashSet<fa_notaCreDeb>();
             this.fa_factura = new HashSet<fa_factura>();
+            this.fa_notaCreDeb = new HashSet<fa_notaCreDeb>();
         }
     
         public int IdEmpresa { get; set; }
@@ -43,8 +43,8 @@ namespace Core.Data.Base
         public string MotivoAnulacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<fa_notaCreDeb> fa_notaCreDeb { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_factura> fa_factura { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_notaCreDeb> fa_notaCreDeb { get; set; }
     }
 }

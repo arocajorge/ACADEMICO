@@ -104,6 +104,9 @@
     <Compile Include="Base\aca_Reporte_x_tb_empresa.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\fa_notaCreDeb_resumen.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_GrupoEtnico.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
@@ -589,9 +592,6 @@
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\fa_notaCreDeb_det.cs">
-      <DependentUpon>ModelFacturacion.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\fa_notaCreDeb_resumen.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\fa_notaCreDeb_x_ct_cbtecble.cs">

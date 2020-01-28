@@ -50,10 +50,10 @@ namespace Core.Data.Facturacion
                                  CantidadAnterior = q.vt_cantidad,
                                  tp_manejaInven = q.tp_ManejaInven,
                                  se_distribuye = q.se_distribuye,
-                                 aca_IdPeriodo = q.aca_IdPeriodo,
-                                 aca_IdRubro = q.aca_IdRubro,
-                                 aca_IdAnio = q.aca_IdAnio,
-                                 aca_IdPlantilla = q.aca_IdPlantilla
+                                 aca_IdPeriodo = q.IdPeriodo,
+                                 aca_IdRubro = q.IdRubro,
+                                 aca_IdAnio = q.IdAnio,
+                                 aca_IdPlantilla = q.IdPlantilla
                                 
                              }).ToList();
                 }
