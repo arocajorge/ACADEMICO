@@ -88,7 +88,7 @@ namespace Core.Bus.Academico
             {
                 var grabar = false;
 
-                if (bus_persona.validar_existe_cedula(info.pe_cedulaRuc) == 0)
+                if (bus_persona.validar_existe_cedula(info.info_persona.pe_cedulaRuc) == 0)
                 {
                     info.info_persona = odata_per.armar_info(info.info_persona);
                     if (odata_per.guardarDB(info.info_persona))
@@ -110,8 +110,8 @@ namespace Core.Bus.Academico
                         /*CLIENTE*/
                         if (info.SeFactura == true)
                         {
-                            var info_credito = odata_terminopago.get_info(info.IdTipoCredito);
-                            var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc);
+                            var info_credito = odata_terminopago.get_info("CON");
+                            var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.info_persona.pe_cedulaRuc);
                             var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
 
                             if (cliente == null || cliente.IdCliente == 0)
@@ -127,18 +127,19 @@ namespace Core.Bus.Academico
                                     es_empresa_relacionada = false,
                                     FormaPago = "01",
                                     IdCtaCble_cxc_Credito = null,
-                                    IdTipoCredito = info.IdTipoCredito,
-                                    Idtipo_cliente = info.Idtipo_cliente,
+                                    IdTipoCredito = "CON",
+                                    Idtipo_cliente = 1,
                                     IdNivel = 1,
                                     EsClienteExportador = false,
-                                    IdCiudad = info.IdCiudad,
-                                    IdParroquia = info.IdParroquia,
+                                    IdCiudad = "09",
+                                    IdParroquia = "09",
                                     Celular = info.Celular,
                                     Direccion = info.Direccion,
                                     Correo = info.Correo,
                                     Telefono = info.pe_telfono_Contacto,
                                     info_persona = info.info_persona,
-                                    IdUsuario = info.IdUsuarioCreacion
+                                    IdUsuario = info.IdUsuarioCreacion,
+                                    Fecha_Transac = DateTime.Now
                                 };
 
                                 var info_vendedor = odata_vendedor.get_list(info.IdEmpresa, false).FirstOrDefault();
@@ -148,7 +149,7 @@ namespace Core.Bus.Academico
                                 info_cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal.Add(new fa_cliente_x_fa_Vendedor_x_sucursal_Info
                                 {
                                     IdEmpresa = info.IdEmpresa,
-                                    IdSucursal = info.IdSucursal,
+                                    IdSucursal = 1,
                                     IdVendedor = IdVendedor,
                                     observacion = ""
                                 });
