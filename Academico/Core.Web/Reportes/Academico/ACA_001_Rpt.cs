@@ -45,16 +45,8 @@ namespace Core.Web.Reportes.Academico
             lbl_compromiso.Text.Replace("_", RepLegal);
             this.DataSource = lst_rpt;
         }
-
-        private void xrSubreportMadre_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdAlumno"].Value = p_IdAlumno.Value == null ? 0 : Convert.ToDecimal(p_IdAlumno.Value);
-
-            ((XRSubreport)sender).ReportSource.RequestParameters = false;
-        }
-
-        private void xrSubreportPadre_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        
+        private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdAlumno"].Value = p_IdAlumno.Value == null ? 0 : Convert.ToDecimal(p_IdAlumno.Value);
