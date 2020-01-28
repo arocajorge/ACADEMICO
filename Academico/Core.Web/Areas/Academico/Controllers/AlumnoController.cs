@@ -1272,18 +1272,19 @@ namespace Core.Web.Areas.Academico.Controllers
                 //Para avanzar a la siguiente hoja de excel
                 cont = 0;
                 reader.NextResult();
+                var x = reader.ResultsCount;
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
                         var return_naturaleza_familia = "";
-                        var cedula_ruc_familia = Convert.ToString(reader.GetValue(2));
-
+                        var cedula_ruc_familia = Convert.ToString(reader.GetValue(2)).Trim();
+                        var cedula_alumno = Convert.ToString(reader.GetValue(0)).Trim();
                         tb_persona_Info info_persona_familia = new tb_persona_Info();
                         tb_persona_Info info_persona_fam = new tb_persona_Info();
                         info_persona_fam = lst_persona.Where(q => q.pe_cedulaRuc == cedula_ruc_familia).FirstOrDefault();
                         info_persona_familia = info_persona_fam;
-                        var IdAlumnoFamilia = Lista_Estudiantes.Where(q => q.info_persona_alumno.pe_cedulaRuc == Convert.ToString(reader.GetValue(0))).FirstOrDefault().IdAlumno;
+                        var IdAlumnoFamilia = Lista_Estudiantes.Where(q => q.info_persona_alumno.pe_cedulaRuc == cedula_alumno).FirstOrDefault().IdAlumno;
 
                         if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3)), cedula_ruc_familia, ref return_naturaleza_familia))
                         {
@@ -1345,7 +1346,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                 FechaCreacion = DateTime.Now
                             };
 
-                            info_fam.info_persona = info_persona_fam;
+                            info_fam.info_persona = info_persona_familia;
 
                             Secuencia++;
                             Lista_FamiliaEstudiantes.Add(info_fam);
