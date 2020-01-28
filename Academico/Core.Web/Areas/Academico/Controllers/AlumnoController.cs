@@ -13,6 +13,8 @@ using Core.Info.Helps;
 using Core.Info.General;
 using Core.Bus.Facturacion;
 using Core.Info.Facturacion;
+using System.IO;
+using ExcelDataReader;
 
 namespace Core.Web.Areas.Academico.Controllers
 {
@@ -25,6 +27,7 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
         aca_Catalogo_Bus bus_aca_catalogo = new aca_Catalogo_Bus();
         aca_alumno_List Lista_Alumno = new aca_alumno_List();
+        aca_Familia_List Lista_Familia = new aca_Familia_List();
         aca_AlumnoDocumento_List ListaAlumnoDocumento = new aca_AlumnoDocumento_List();
         aca_SocioEconomico_Bus bus_socioeconomico = new aca_SocioEconomico_Bus();
         tb_profesion_Bus bus_profesion = new tb_profesion_Bus();
@@ -878,6 +881,15 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json("", JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Funciones imagen alumno
@@ -952,6 +964,78 @@ namespace Core.Web.Areas.Academico.Controllers
         }
 
         #endregion
+
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_Alumno_Info model = new aca_Alumno_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(aca_Alumno_Info model)
+        {
+            try
+            {
+                var Lista_Estudiantes = Lista_Alumno.get_list(model.IdTransaccionSession);
+                var Lista_Familia_Estudiantes= Lista_Familia.get_list(model.IdTransaccionSession);
+                foreach (var item in Lista_Estudiantes)
+                {
+                    if (!bus_alumno.GuardarDB(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
+                }
+
+                foreach (var item in Lista_Familia_Estudiantes)
+                {
+                    if (!bus_familia.guardarDB(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.error = ex.Message.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult GridViewPartial_AlumnoImportacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_Alumno.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_AlumnoImportacion", model);
+        }
+        public ActionResult GridViewPartial_AlumnoFamiliaImportacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_Familia.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_AlumnoFamiliaImportacion", model);
+        }
+        #endregion
     }
 
     #region Clases para imagen alumno
@@ -983,6 +1067,7 @@ namespace Core.Web.Areas.Academico.Controllers
         }
     }
     #endregion
+
     public class aca_alumno_List
     {
         string Variable = "aca_Alumno_Info";
@@ -1058,6 +1143,218 @@ namespace Core.Web.Areas.Academico.Controllers
 
             list.Remove(list.Where(q => q.Secuencia == Secuencia).FirstOrDefault());
             bus_alumno_doc.EliminarDB(info_det);
+        }
+    }
+
+    public class UploadControlSettings
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            aca_alumno_List ListaEstudiantes = new aca_alumno_List();
+            aca_Familia_List ListaFamilia = new aca_Familia_List();
+            List<aca_Alumno_Info> Lista_Estudiantes = new List<aca_Alumno_Info>();
+            List<aca_Familia_Info> Lista_FamiliaEstudiantes = new List<aca_Familia_Info>();
+            tb_persona_Bus bus_persona = new tb_persona_Bus();
+            aca_Catalogo_Bus bus_aca_catalogo = new aca_Catalogo_Bus();
+            
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #endregion
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                #region Alumno   
+                var lst_persona = bus_persona.get_list(false);
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        var return_naturaleza = "";
+                        var cedula_ruc_alumno = (Convert.ToString(reader.GetValue(3))).Trim();
+
+                        tb_persona_Info info_persona_alumno = new tb_persona_Info();
+                        tb_persona_Info info_persona_alu = new tb_persona_Info();
+                        info_persona_alu = lst_persona.Where(q => q.pe_cedulaRuc == cedula_ruc_alumno).FirstOrDefault();
+                        info_persona_alumno = info_persona_alu;
+
+                        if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(1)), cedula_ruc_alumno, ref return_naturaleza))
+                        {
+                            if (info_persona_alumno == null)
+                            {
+                                tb_persona_Info info_alumno = new tb_persona_Info
+                                {
+                                    pe_Naturaleza = Convert.ToString(reader.GetValue(1)),
+                                    pe_nombreCompleto = Convert.ToString(reader.GetValue(4)) + ' ' + Convert.ToString(reader.GetValue(5)),
+                                    pe_razonSocial = (Convert.ToString(reader.GetValue(1)) == "NATU" ? "" : Convert.ToString(reader.GetValue(4)) + ' ' + Convert.ToString(reader.GetValue(5))),
+                                    pe_apellido = Convert.ToString(reader.GetValue(4)),
+                                    pe_nombre = Convert.ToString(reader.GetValue(5)),
+                                    pe_fechaNacimiento = Convert.ToDateTime(reader.GetValue(6)),
+                                    pe_sexo = Convert.ToString(reader.GetValue(7)),
+                                    IdTipoDocumento = Convert.ToString(reader.GetValue(2)),
+                                    pe_cedulaRuc = cedula_ruc_alumno,
+                                    pe_direccion = Convert.ToString(reader.GetValue(8)),
+                                    pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)),
+                                    pe_correo = Convert.ToString(reader.GetValue(9)),
+                                };
+                                info_persona_alumno = info_alumno;
+                            }
+                            else
+                            {
+                                info_persona_alumno = bus_persona.get_info(info_persona_alu.IdPersona);
+                                var Naturaleza = Convert.ToString(reader.GetValue(1));
+                                info_persona_alumno.pe_Naturaleza = Naturaleza;
+                                info_persona_alumno.pe_nombreCompleto = Convert.ToString(reader.GetValue(4)) + ' ' + Convert.ToString(reader.GetValue(5));
+                                info_persona_alumno.pe_razonSocial = (Convert.ToString(reader.GetValue(1)) == "NATU" ? "" : Convert.ToString(reader.GetValue(4)) + ' ' + Convert.ToString(reader.GetValue(5)));
+                                info_persona_alumno.pe_apellido = Convert.ToString(reader.GetValue(4));
+                                info_persona_alumno.pe_nombre = Convert.ToString(reader.GetValue(5));
+                                info_persona_alumno.IdTipoDocumento = Convert.ToString(reader.GetValue(2));
+                                info_persona_alumno.pe_cedulaRuc = cedula_ruc_alumno;
+                                info_persona_alumno.pe_direccion = Convert.ToString(reader.GetValue(8));
+                                info_persona_alumno.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
+                                info_persona_alumno.pe_correo = Convert.ToString(reader.GetValue(9));
+                                info_persona_alumno.pe_sexo = Convert.ToString(reader.GetValue(7));
+                            }
+
+                            info_persona_alumno.pe_Naturaleza = return_naturaleza;
+                            info_persona_alumno.pe_nombreCompleto = (info_persona_alumno.pe_razonSocial != "" ? info_persona_alumno.pe_razonSocial : (info_persona_alumno.pe_apellido + ' ' + info_persona_alumno.pe_nombre));
+                            var IdAlumno = 1;
+                            aca_Alumno_Info info = new aca_Alumno_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdAlumno = IdAlumno,
+                                Codigo = Convert.ToString(reader.GetValue(0)),
+                                IdPersona = info_persona_alumno.IdPersona,
+                                Direccion = info_persona_alumno.pe_direccion,
+                                Celular = info_persona_alumno.pe_telfono_Contacto,
+                                Correo = info_persona_alumno.pe_correo,
+                                Estado = true,
+                                IdCatalogoESTMAT = 1,
+                                IdCurso = null,
+                                IdCatalogoESTALU = 8,
+                                FechaIngreso = Convert.ToDateTime(reader.GetValue(11)),
+                                LugarNacimiento = "",
+                                IdPais = null,
+                                Cod_Region = null,
+                                IdProvincia = null,
+                                IdCiudad = null,
+                                IdParroquia = null,
+                                Sector = "",
+
+                                IdUsuarioCreacion = SessionFixed.IdUsuario,
+                                FechaCreacion = DateTime.Now
+                            };
+
+                            info.info_persona_alumno = info_persona_alumno;
+                            IdAlumno++;
+
+                            if (Lista_Estudiantes.Where(q => q.info_persona_alumno.pe_cedulaRuc == info_persona_alumno.pe_cedulaRuc).Count() == 0)
+                                Lista_Estudiantes.Add(info);
+                        }
+                    }
+                    else
+                        cont++;
+                }
+                ListaEstudiantes.set_list(Lista_Estudiantes, IdTransaccionSession);
+                #endregion
+
+                //Para avanzar a la siguiente hoja de excel
+                cont = 0;
+                reader.NextResult();
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        var return_naturaleza_familia = "";
+                        var cedula_ruc_familia = Convert.ToString(reader.GetValue(2));
+
+                        tb_persona_Info info_persona_familia = new tb_persona_Info();
+                        tb_persona_Info info_persona_fam = new tb_persona_Info();
+                        info_persona_fam = lst_persona.Where(q => q.pe_cedulaRuc == cedula_ruc_familia).FirstOrDefault();
+                        info_persona_familia = info_persona_fam;
+                        var IdAlumnoFamilia = Lista_Estudiantes.Where(q => q.info_persona_alumno.pe_cedulaRuc == Convert.ToString(reader.GetValue(0))).FirstOrDefault().IdAlumno;
+
+                        if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3)), cedula_ruc_familia, ref return_naturaleza_familia))
+                        {
+                            if (info_persona_familia == null)
+                            {
+                                tb_persona_Info persona_fam = new tb_persona_Info
+                                {
+                                    pe_Naturaleza = Convert.ToString(reader.GetValue(3)),
+                                    pe_nombreCompleto = Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(6)),
+                                    pe_razonSocial = (Convert.ToString(reader.GetValue(3)) == "NATU" ? "" : Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(6))),
+                                    pe_apellido = Convert.ToString(reader.GetValue(5)),
+                                    pe_nombre = Convert.ToString(reader.GetValue(6)),
+                                    pe_sexo = Convert.ToString(reader.GetValue(7)),
+                                    IdTipoDocumento = Convert.ToString(reader.GetValue(4)),
+                                    pe_cedulaRuc = cedula_ruc_familia,
+                                    pe_direccion = Convert.ToString(reader.GetValue(8)),
+                                    pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)),
+                                    pe_correo = Convert.ToString(reader.GetValue(9))
+                                };
+                                info_persona_familia = persona_fam;
+                            }
+                            else
+                            {
+                                info_persona_familia = bus_persona.get_info(info_persona_fam.IdPersona);
+                                var Naturaleza = Convert.ToString(reader.GetValue(1));
+                                info_persona_familia.pe_Naturaleza = Naturaleza;
+                                info_persona_familia.pe_nombreCompleto = Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(6));
+                                info_persona_familia.pe_razonSocial = (Convert.ToString(reader.GetValue(3)) == "NATU" ? "" : Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(6)));
+                                info_persona_familia.pe_apellido = Convert.ToString(reader.GetValue(5));
+                                info_persona_familia.pe_nombre = Convert.ToString(reader.GetValue(6));
+                                info_persona_familia.IdTipoDocumento = Convert.ToString(reader.GetValue(4));
+                                info_persona_familia.pe_cedulaRuc = cedula_ruc_familia;
+                                info_persona_familia.pe_direccion = Convert.ToString(reader.GetValue(8));
+                                info_persona_familia.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
+                                info_persona_familia.pe_correo = Convert.ToString(reader.GetValue(9));
+                            }
+
+                            info_persona_familia.pe_Naturaleza = return_naturaleza_familia;
+                            info_persona_familia.pe_nombreCompleto = (info_persona_familia.pe_razonSocial != "" ? info_persona_familia.pe_razonSocial : (info_persona_familia.pe_apellido + ' ' + info_persona_familia.pe_nombre));
+                            var lst_parentezco = bus_aca_catalogo.GetList_x_Tipo(3, true);
+                            aca_Catalogo_Info info_parentezco = lst_parentezco.Where(q => q.NomCatalogo == Convert.ToString(reader.GetValue(1))).FirstOrDefault();
+
+                            var Secuencia = 1;
+                            aca_Familia_Info info_fam = new aca_Familia_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdAlumno = IdAlumnoFamilia,
+                                Secuencia = Secuencia,
+                                IdCatalogoPAREN = info_parentezco.IdCatalogo,
+                                IdPersona = info_persona_familia.IdPersona,
+                                Direccion = Convert.ToString(reader.GetValue(8)),
+                                Celular = Convert.ToString(reader.GetValue(10)),
+                                Correo = Convert.ToString(reader.GetValue(9)),
+                                SeFactura = (Convert.ToString(reader.GetValue(12)) == "SI" ? true : false),
+                                EsRepresentante = (Convert.ToString(reader.GetValue(11)) == "SI" ? true : false),
+                                Estado = true,
+                                AsisteCentroCristiano = false,
+                                IdUsuarioCreacion = SessionFixed.IdUsuario,
+                                FechaCreacion = DateTime.Now
+                            };
+
+                            info_fam.info_persona = info_persona_fam;
+
+                            Secuencia++;
+                            Lista_FamiliaEstudiantes.Add(info_fam);
+                        }
+                    }
+                    cont++;
+                }
+                ListaFamilia.set_list(Lista_FamiliaEstudiantes, IdTransaccionSession);
+            }
         }
     }
 }

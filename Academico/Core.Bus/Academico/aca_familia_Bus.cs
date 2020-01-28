@@ -179,7 +179,7 @@ namespace Core.Bus.Academico
 
                 return false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

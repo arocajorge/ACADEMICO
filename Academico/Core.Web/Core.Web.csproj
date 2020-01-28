@@ -8089,6 +8089,9 @@
     <Content Include="Areas\Academico\Views\ReportePorUsuario\_GridViewPartial_ReportesPorAsignar.cshtml" />
     <Content Include="Areas\Academico\Views\ReportePorUsuario\_GridViewPartial_ReportesPorUsuario.cshtml" />
     <Content Include="Areas\Academico\Views\ReportePorUsuario\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\Importar.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_GridViewPartial_AlumnoImportacion.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_GridViewPartial_AlumnoFamiliaImportacion.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

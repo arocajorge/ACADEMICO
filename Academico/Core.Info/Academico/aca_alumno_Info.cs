@@ -75,6 +75,7 @@ namespace Core.Info.Academico
         public Nullable<int> IdReligion { get; set; }
         public Nullable<bool> AsisteCentroCristiano { get; set; }
         public Nullable<int> IdGrupoEtnico { get; set; }
+        public List<aca_Familia_Info> lst_familia { get; set; }
         #endregion
 
         #region Datos padre
