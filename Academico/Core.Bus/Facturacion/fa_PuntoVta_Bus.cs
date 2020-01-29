@@ -32,7 +32,21 @@ namespace Core.Bus.Facturacion
                 throw;
             }
         }
-            public fa_PuntoVta_Info get_info(int IdEmpresa, int IdSucursal, int IdPuntoVta)
+
+        public List<fa_PuntoVta_Info> GetListUsuario(int IdEmpresa, int IdSucursal, bool mostrar_anulados, string IdUsuario, bool EsContador, string codDocumentoTipo)
+        {
+            try
+            {
+                return odata.GetListUsuario(IdEmpresa, IdSucursal, mostrar_anulados, IdUsuario, EsContador, codDocumentoTipo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public fa_PuntoVta_Info get_info(int IdEmpresa, int IdSucursal, int IdPuntoVta)
         {
             try
             {

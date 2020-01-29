@@ -176,6 +176,7 @@ namespace Core.Bus.Academico
                             }
                         }
                     }
+                    return true;
                 }
 
                 return false;

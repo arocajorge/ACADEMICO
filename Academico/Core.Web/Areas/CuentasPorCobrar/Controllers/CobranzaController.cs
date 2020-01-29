@@ -43,6 +43,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         aca_Familia_Bus bus_familia = new aca_Familia_Bus();
         aca_AnioLectivo_Rubro_Bus bus_aca_anio_rubro = new aca_AnioLectivo_Rubro_Bus();
         aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
+        tb_TarjetaCredito_Bus bus_tarjeta = new tb_TarjetaCredito_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -130,6 +131,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, IdSucursal, false);
             ViewBag.lst_banco_cuenta = lst_banco_cuenta;
+
+            var lst_tarjeta = bus_tarjeta.GetList(IdEmpresa,false);
+            ViewBag.lst_tarjeta = lst_tarjeta;
         }
 
         private bool validar(cxc_cobro_Info i_validar, ref string msg)

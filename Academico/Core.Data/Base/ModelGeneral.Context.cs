@@ -64,5 +64,7 @@ namespace Core.Data.Base
         public virtual DbSet<tb_Religion> tb_Religion { get; set; }
         public virtual DbSet<tb_GrupoEtnico> tb_GrupoEtnico { get; set; }
         public virtual DbSet<tb_persona> tb_persona { get; set; }
+        public virtual DbSet<tb_TarjetaCredito> tb_TarjetaCredito { get; set; }
+        public virtual DbSet<tb_TarjetaCredito_x_cp_proveedor> tb_TarjetaCredito_x_cp_proveedor { get; set; }
     }
 }

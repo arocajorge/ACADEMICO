@@ -27,8 +27,6 @@ namespace Core.Data.Base
     
         public virtual DbSet<cxc_Catalogo> cxc_Catalogo { get; set; }
         public virtual DbSet<cxc_CatalogoTipo> cxc_CatalogoTipo { get; set; }
-        public virtual DbSet<cxc_cobro> cxc_cobro { get; set; }
-        public virtual DbSet<cxc_cobro_det> cxc_cobro_det { get; set; }
         public virtual DbSet<cxc_cobro_det_x_ct_cbtecble_det> cxc_cobro_det_x_ct_cbtecble_det { get; set; }
         public virtual DbSet<cxc_cobro_tipo> cxc_cobro_tipo { get; set; }
         public virtual DbSet<cxc_cobro_tipo_motivo> cxc_cobro_tipo_motivo { get; set; }
@@ -46,5 +44,7 @@ namespace Core.Data.Base
         public virtual DbSet<cxc_ConciliacionNotaCreditoDet> cxc_ConciliacionNotaCreditoDet { get; set; }
         public virtual DbSet<vwcxc_ConciliacionNotaCredito> vwcxc_ConciliacionNotaCredito { get; set; }
         public virtual DbSet<vwcxc_ConciliacionNotaCreditoDet> vwcxc_ConciliacionNotaCreditoDet { get; set; }
+        public virtual DbSet<cxc_cobro> cxc_cobro { get; set; }
+        public virtual DbSet<cxc_cobro_det> cxc_cobro_det { get; set; }
     }
 }

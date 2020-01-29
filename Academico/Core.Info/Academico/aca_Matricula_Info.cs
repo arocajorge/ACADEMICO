@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Info.Facturacion;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -61,6 +62,13 @@ namespace Core.Info.Academico
         public bool BloquearMatricula { get; set; }
         [Required(ErrorMessage = "El campo mecanismo de pago del rubro es obligatorio")]
         public decimal IdMecanismoDet { get; set; }
+        [Required(ErrorMessage = "El campo forma de pago del rubro es obligatorio")]
+        public int IdPuntoVta { get; set; }
+        public string IdCatalogo_FormaPago { get; set; }
+        public int IdSucursal { get; set; }
+        public string vt_serie1 { get; set; }
+        public string vt_serie2 { get; set; }
+        public string vt_NumFactura { get; set; }
 
         public List<aca_MatriculaCalificacion_Info> lst_calificacion { get; set; }
         public List<aca_MatriculaConducta_Info> lst_conducta { get; set; }

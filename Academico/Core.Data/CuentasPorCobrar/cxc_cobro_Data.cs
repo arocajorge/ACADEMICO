@@ -307,13 +307,14 @@ namespace Core.Data.CuentasPorCobrar
                     cr_Banco = info.cr_Banco,
                     cr_cuenta = info.cr_cuenta,
                     cr_NumDocumento = info.cr_NumDocumento,
-                    cr_Tarjeta = info.cr_Tarjeta,
                     cr_propietarioCta = info.cr_propietarioCta,
                     cr_estado = "A",
                     cr_es_anticipo = "N",
 
                     IdBanco = info.IdBanco,
                     IdCaja = info.IdCaja,
+                    IdTarjeta = info.IdTarjeta,
+                    cr_Tarjeta = info.cr_Tarjeta,
 
                     Fecha_Transac = DateTime.Now,
                     IdUsuario = info.IdUsuario

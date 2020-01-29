@@ -295,6 +295,7 @@
     <Compile Include="Areas\General\Controllers\PersonaController.cs" />
     <Compile Include="Areas\General\Controllers\ProfesionController.cs" />
     <Compile Include="Areas\General\Controllers\ReligionController.cs" />
+    <Compile Include="Areas\General\Controllers\TarjetaCreditoController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoController.cs" />
     <Compile Include="Areas\General\Controllers\TipoDocumentoTalonarioController.cs" />
     <Compile Include="Areas\General\GeneralAreaRegistration.cs" />
@@ -8092,6 +8093,12 @@
     <Content Include="Areas\Academico\Views\Alumno\Importar.cshtml" />
     <Content Include="Areas\Academico\Views\Alumno\_GridViewPartial_AlumnoImportacion.cshtml" />
     <Content Include="Areas\Academico\Views\Alumno\_GridViewPartial_AlumnoFamiliaImportacion.cshtml" />
+    <Content Include="Areas\Facturacion\Views\PuntoVenta\_GridViewPartial_puntoventa_usuario.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCredito\_GridViewPartial_TarjetaCredito.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCredito\Anular.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCredito\Index.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCredito\Modificar.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCredito\Nuevo.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

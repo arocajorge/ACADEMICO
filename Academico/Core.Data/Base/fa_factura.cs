@@ -17,8 +17,8 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public fa_factura()
         {
-            this.fa_factura_x_ct_cbtecble = new HashSet<fa_factura_x_ct_cbtecble>();
             this.fa_factura_det = new HashSet<fa_factura_det>();
+            this.fa_factura_x_ct_cbtecble = new HashSet<fa_factura_x_ct_cbtecble>();
         }
     
         public int IdEmpresa { get; set; }
@@ -60,12 +60,12 @@ namespace Core.Data.Base
     
         public virtual fa_catalogo fa_catalogo { get; set; }
         public virtual fa_cliente fa_cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_factura_det> fa_factura_det { get; set; }
         public virtual fa_NivelDescuento fa_NivelDescuento { get; set; }
         public virtual fa_PuntoVta fa_PuntoVta { get; set; }
         public virtual fa_Vendedor fa_Vendedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_factura_x_ct_cbtecble> fa_factura_x_ct_cbtecble { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<fa_factura_det> fa_factura_det { get; set; }
     }
 }

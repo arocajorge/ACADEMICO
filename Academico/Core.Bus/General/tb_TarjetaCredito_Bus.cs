@@ -1,17 +1,17 @@
-﻿using Core.Data.Academico;
-using Core.Info.Academico;
+﻿using Core.Data.General;
+using Core.Info.General;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Bus.Academico
+namespace Core.Bus.General
 {
-    public class aca_MecanismoDePago_Bus
+    public class tb_TarjetaCredito_Bus
     {
-        aca_MecanismoDePago_Data odata = new aca_MecanismoDePago_Data();
-        public List<aca_MecanismoDePago_Info> GetList(int IdEmpresa, bool MostrarAnulados)
+        tb_TarjetaCredito_Data odata = new tb_TarjetaCredito_Data();
+        public List<tb_TarjetaCredito_Info> GetList(int IdEmpresa, bool MostrarAnulados)
         {
             try
             {
@@ -19,25 +19,23 @@ namespace Core.Bus.Academico
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
-        public aca_MecanismoDePago_Info GetInfo(int IdEmpresa, decimal IdMecanismo)
+        public tb_TarjetaCredito_Info GetInfo(int IdEmpresa, int IdTarjeta)
         {
             try
             {
-                return odata.getInfo(IdEmpresa, IdMecanismo);
+                return odata.getInfo(IdEmpresa, IdTarjeta);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
-        public bool GuardarDB(aca_MecanismoDePago_Info info)
+        public bool GuardarDB(tb_TarjetaCredito_Info info)
         {
             try
             {
@@ -50,7 +48,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public bool ModificarDB(aca_MecanismoDePago_Info info)
+        public bool ModificarDB(tb_TarjetaCredito_Info info)
         {
             try
             {
@@ -63,7 +61,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public bool AnularDB(aca_MecanismoDePago_Info info)
+        public bool AnularDB(tb_TarjetaCredito_Info info)
         {
             try
             {

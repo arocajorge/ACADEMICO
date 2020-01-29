@@ -39,8 +39,6 @@ namespace Core.Info.CuentasPorCobrar
         public int IdCaja { get; set; }
         public string MotiAnula { get; set; }
         public Nullable<int> IdTipoNotaCredito { get; set; }
-
-        #region Campos de auditoria
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuario { get; set; }
         public string IdUsuarioUltMod { get; set; }
@@ -49,8 +47,10 @@ namespace Core.Info.CuentasPorCobrar
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string nom_pc { get; set; }
         public string ip { get; set; }
-        #endregion
-        
+        public Nullable<int> IdTarjeta { get; set; }
+
+
+
         #region Campos que no existen en la tabla
         public string pe_nombreCompleto { get; set; }
         public string tc_descripcion { get; set; }

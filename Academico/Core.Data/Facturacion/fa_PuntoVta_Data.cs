@@ -95,6 +95,56 @@ namespace Core.Data.Facturacion
             }
         }
 
+        public List<fa_PuntoVta_Info> GetListUsuario(int IdEmpresa, int IdSucursal, bool mostrar_anulados, string IdUsuario, bool EsContador, string codDocumentoTipo)
+        {
+            try
+            {
+                List<fa_PuntoVta_Info> Lista;
+                using (EntitiesFacturacion Context = new EntitiesFacturacion())
+                {
+                    if (EsContador)
+                    {
+                        var lst = Context.fa_PuntoVta.Where(q => q.IdEmpresa == IdEmpresa && q.estado == (mostrar_anulados ? q.estado : true)
+                        && q.IdSucursal == (IdSucursal == 0 ? q.IdSucursal : IdSucursal) && q.codDocumentoTipo == codDocumentoTipo
+                        ).ToList();
+                        Lista = lst.Select(q => new fa_PuntoVta_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            estado = q.estado,
+                            IdCaja = q.IdCaja,
+                            nom_PuntoVta = q.nom_PuntoVta,
+                            IdSucursal = q.IdSucursal,
+                            cod_PuntoVta = q.cod_PuntoVta,
+                            IdBodega = q.IdBodega,
+                            IdPuntoVta = q.IdPuntoVta
+                        }).ToList();
+                    }
+                    else
+                    {
+                        var lst = Context.fa_PuntoVta_x_seg_usuario.Include("fa_PuntoVta").Where(q => q.IdEmpresa == IdEmpresa && q.IdUsuario.ToLower() == IdUsuario.ToLower() && q.fa_PuntoVta.estado == (mostrar_anulados ? q.fa_PuntoVta.estado : true) 
+                        && q.fa_PuntoVta.IdSucursal == IdSucursal && q.fa_PuntoVta.codDocumentoTipo == codDocumentoTipo).ToList();
+                        Lista = lst.Select(q => new fa_PuntoVta_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdPuntoVta =q.IdPuntoVta,
+                            estado = q.fa_PuntoVta.estado,
+                            IdCaja = q.fa_PuntoVta.IdCaja,
+                            nom_PuntoVta = q.fa_PuntoVta.nom_PuntoVta,
+                            IdSucursal = q.fa_PuntoVta.IdSucursal,
+                            cod_PuntoVta = q.fa_PuntoVta.cod_PuntoVta,
+                            IdBodega = q.fa_PuntoVta.IdBodega
+                        }).ToList();
+                    }
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public fa_PuntoVta_Info get_info(int IdEmpresa, int IdSucursal, int IdPuntoVta)
         {
             try
@@ -183,6 +233,25 @@ namespace Core.Data.Facturacion
                         FechaCreacion = DateTime.Now
                     };
                     Context.fa_PuntoVta.Add(Entity);
+
+                    if (info.lst_usuarios!= null || info.lst_usuarios.Count>0)
+                    {
+                        int Secuencia = 1;
+
+                        foreach (var item in info.lst_usuarios)
+                        {
+                            Context.fa_PuntoVta_x_seg_usuario.Add(new fa_PuntoVta_x_seg_usuario
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdPuntoVta = info.IdPuntoVta,
+                                IdSucursal = info.IdSucursal,
+                                Secuencia = Secuencia++,
+                                IdUsuario = item.IdUsuario
+                            });
+
+                        }
+                    }
+                    
                     Context.SaveChanges();
                 }
                 return true;
@@ -214,6 +283,27 @@ namespace Core.Data.Facturacion
 
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
+
+                    var lst_Usuarios = Context.fa_PuntoVta_x_seg_usuario.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdPuntoVta == info.IdPuntoVta).ToList();
+                    Context.fa_PuntoVta_x_seg_usuario.RemoveRange(lst_Usuarios);
+                    if (info.lst_usuarios != null || info.lst_usuarios.Count > 0)
+                    {
+                        int Secuencia = 1;
+
+                        foreach (var item in info.lst_usuarios)
+                        {
+                            Context.fa_PuntoVta_x_seg_usuario.Add(new fa_PuntoVta_x_seg_usuario
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdPuntoVta = info.IdPuntoVta,
+                                IdSucursal = info.IdSucursal,
+                                Secuencia = Secuencia++,
+                                IdUsuario = item.IdUsuario
+                            });
+
+                        }
+                    }
+
                     Context.SaveChanges();
                 
                 }

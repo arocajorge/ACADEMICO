@@ -84,6 +84,7 @@
     <Compile Include="Academico\aca_Reporte_Bus.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Bus.cs" />
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Bus.cs" />
+    <Compile Include="Facturacion\fa_PuntoVta_x_seg_usuario_Bus.cs" />
     <Compile Include="General\tb_GrupoEtnico_Bus.cs" />
     <Compile Include="General\tb_Religion_Bus.cs" />
     <Compile Include="Academico\aca_Rubro_Bus.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="General\tb_sis_reporte_x_tb_empresa_Bus.cs" />
     <Compile Include="General\tb_sucursal_Bus.cs" />
     <Compile Include="General\tb_sucursal_FormaPago_x_fa_NivelDescuento_Bus.cs" />
+    <Compile Include="General\tb_TarjetaCredito_Bus.cs" />
     <Compile Include="Inventario\in_categorias_Bus.cs" />
     <Compile Include="Inventario\in_grupo_Bus.cs" />
     <Compile Include="Inventario\in_Ing_Egr_Inven_Bus.cs" />

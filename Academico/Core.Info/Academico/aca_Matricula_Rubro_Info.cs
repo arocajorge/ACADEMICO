@@ -35,6 +35,8 @@ namespace Core.Info.Academico
         public int IdPlantilla { get; set; }
         public string pr_descripcion { get; set; }
         public bool AplicaProntoPago { get; set; }
+        public DateTime FechaProntoPago { get; set; }
+        public decimal ValorProntoPago { get; set; }
         #endregion
     }
 }

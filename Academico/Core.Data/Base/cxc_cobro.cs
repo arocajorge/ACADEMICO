@@ -17,10 +17,10 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public cxc_cobro()
         {
-            this.cxc_cobro_det = new HashSet<cxc_cobro_det>();
             this.cxc_cobro_x_caj_Caja_Movimiento = new HashSet<cxc_cobro_x_caj_Caja_Movimiento>();
             this.cxc_cobro_x_ct_cbtecble = new HashSet<cxc_cobro_x_ct_cbtecble>();
             this.cxc_ConciliacionNotaCredito = new HashSet<cxc_ConciliacionNotaCredito>();
+            this.cxc_cobro_det = new HashSet<cxc_cobro_det>();
         }
     
         public int IdEmpresa { get; set; }
@@ -39,6 +39,7 @@ namespace Core.Data.Base
         public string cr_Banco { get; set; }
         public string cr_cuenta { get; set; }
         public string cr_NumDocumento { get; set; }
+        public Nullable<int> IdTarjeta { get; set; }
         public string cr_Tarjeta { get; set; }
         public string cr_propietarioCta { get; set; }
         public string cr_estado { get; set; }
@@ -59,12 +60,12 @@ namespace Core.Data.Base
     
         public virtual cxc_cobro_tipo cxc_cobro_tipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cxc_cobro_det> cxc_cobro_det { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cxc_cobro_x_caj_Caja_Movimiento> cxc_cobro_x_caj_Caja_Movimiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cxc_cobro_x_ct_cbtecble> cxc_cobro_x_ct_cbtecble { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cxc_ConciliacionNotaCredito> cxc_ConciliacionNotaCredito { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cxc_cobro_det> cxc_cobro_det { get; set; }
     }
 }

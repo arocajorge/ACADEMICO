@@ -14,9 +14,10 @@
     var selectedIDs;
 
     $(function () {
-
+        MostrarDatosTarjeta();
         $("#IdCobro_tipo").change(function () {
             SetCobroTipo();
+            MostrarDatosTarjeta();
         });
 
         $("#cr_TotalCobro").change(function () {
@@ -25,6 +26,20 @@
         SetCobroTipo();
     })
 
+    function MostrarDatosTarjeta() {
+
+        var TipoCobro = $("#IdCobro_tipo").val();
+        if (TipoCobro == "TARJ") 
+        {
+            $("#DatoIdTarjeta").show();
+            $("#DatoTarjeta").show();
+        }
+        else
+        {
+            $("#DatoIdTarjeta").hide();
+            $("#DatoTarjeta").hide();
+        }
+    }
     function SetCobroTipo() {
 
         var tipo_cobro = $("#IdCobro_tipo").val();
@@ -347,6 +362,20 @@
                         @Html.ValidationMessageFor(q => q.cr_saldo, "", new { @class = "text-danger" })
                     </div>
                 </div>
+            <div class="col-md-6" id="DatoIdTarjeta" hidden>
+                <div class="form-group">
+                    <label for="cr_TotalCobro">Tarjeta de Crédito</label>
+                    @Html.DropDownListFor(q => q.IdTarjeta, new SelectList(ViewBag.lst_tarjeta, "IdTarjeta", "NombreTarjeta"), new { @class = "form-control", @id = "IdTarjeta" })
+                    @Html.ValidationMessageFor(q => q.IdTarjeta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6" id="DatoTarjeta" hidden>
+                <div class="form-group">
+                    <label for="cr_saldo">Numero</label>
+                    @Html.TextBoxFor(q => q.cr_Tarjeta, new { @id = "cr_Tarjeta", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cr_Tarjeta, "", new { @class = "text-danger" })
+                </div>
+            </div>
             </div>
     </div>
     <div class="row" id="div_cheque" hidden>

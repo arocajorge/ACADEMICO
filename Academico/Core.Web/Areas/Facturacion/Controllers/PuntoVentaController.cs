@@ -2,10 +2,12 @@
 using Core.Bus.Caja;
 using Core.Bus.Facturacion;
 using Core.Bus.General;
+using Core.Bus.SeguridadAcceso;
 using Core.Info.Facturacion;
 using Core.Info.General;
 using Core.Info.Helps;
 using Core.Web.Helps;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,12 @@ namespace Core.Web.Areas.Facturacion.Controllers
         #region Index
 
         fa_PuntoVta_Bus bus_punto = new fa_PuntoVta_Bus();
+        fa_PuntoVta_x_seg_usuario_Bus bus_punto_usuario = new fa_PuntoVta_x_seg_usuario_Bus();
         aca_Sede_Bus bus_sede = new aca_Sede_Bus();
+        fa_PuntoVta_x_seg_usuario_List Lista_PtoVta_Usuario = new fa_PuntoVta_x_seg_usuario_List();
+        string mensaje = string.Empty;
+        seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
+
         public ActionResult Index()
         {
             cl_filtros_Info model = new cl_filtros_Info
@@ -101,9 +108,17 @@ namespace Core.Web.Areas.Facturacion.Controllers
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             fa_PuntoVta_Info model = new fa_PuntoVta_Info
             {
                 IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                 IdSucursal = bus_sede.GetInfo(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede)).IdSucursal,
             };
             cargar_combos(model);
@@ -114,6 +129,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         public ActionResult Nuevo(fa_PuntoVta_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
+            model.lst_usuarios = Lista_PtoVta_Usuario.get_list(model.IdTransaccionSession);
             if (!bus_punto.guardarDB(model))
             {
                 cargar_combos(model);
@@ -123,7 +139,16 @@ namespace Core.Web.Areas.Facturacion.Controllers
         }
         public ActionResult Modificar(int IdEmpresa = 0, int IdSucursal = 0, int IdPuntoVta = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             fa_PuntoVta_Info model = bus_punto.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
+            model.lst_usuarios = bus_punto_usuario.get_list(IdEmpresa,IdPuntoVta);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos(model);
@@ -134,6 +159,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         public ActionResult Modificar(fa_PuntoVta_Info model)
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+            model.lst_usuarios = Lista_PtoVta_Usuario.get_list(model.IdTransaccionSession);
             if (!bus_punto.modificarDB(model))
             {
                 cargar_combos(model);
@@ -143,7 +169,17 @@ namespace Core.Web.Areas.Facturacion.Controllers
         }
         public ActionResult Anular(int IdEmpresa = 0, int IdSucursal = 0, int IdPuntoVta = 0)
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             fa_PuntoVta_Info model = bus_punto.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
+            model.lst_usuarios = bus_punto_usuario.get_list(IdEmpresa, IdPuntoVta);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            
             if (model == null)
             {
                 return RedirectToAction("Index");
@@ -156,6 +192,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         public ActionResult Anular(fa_PuntoVta_Info model)
         {
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
+            model.lst_usuarios = Lista_PtoVta_Usuario.get_list(model.IdTransaccionSession);
             if (!bus_punto.anularDB(model))
             {
                 cargar_combos(model);
@@ -173,5 +210,125 @@ namespace Core.Web.Areas.Facturacion.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
+        #region Metodos del detalle
+        public ActionResult GridViewPartial_puntoventa_usuario()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            cargar_combos_detalle();
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_PtoVta_Usuario.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_puntoventa_usuario", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_PuntoVta_x_seg_usuario_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            if (info_det != null)
+                Lista_PtoVta_Usuario.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lista_PtoVta_Usuario.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_puntoventa_usuario", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_PuntoVta_x_seg_usuario_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            if (info_det != null)
+                Lista_PtoVta_Usuario.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            var model = Lista_PtoVta_Usuario.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_puntoventa_usuario", model);
+        }
+
+        public ActionResult EditingDelete(int Secuencia)
+        {
+            Lista_PtoVta_Usuario.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lista_PtoVta_Usuario.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+
+            return PartialView("_GridViewPartial_puntoventa_usuario", model);
+        }
+
+        private void cargar_combos_detalle()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            var lst_responsable = bus_usuario.get_list(false);
+            ViewBag.lst_responsable = lst_responsable;
+        }
+
+        private bool Validar(fa_PuntoVta_Info i_validar, ref string msg)
+        {
+            i_validar.lst_usuarios = Lista_PtoVta_Usuario.get_list(i_validar.IdTransaccionSession);
+
+            foreach (var item1 in i_validar.lst_usuarios)
+            {
+                var contador = 0;
+                foreach (var item2 in i_validar.lst_usuarios)
+                {
+                    if (item1.IdUsuario == item2.IdUsuario)
+                    {
+                        contador++;
+                    }
+
+                    if (contador > 1)
+                    {
+                        mensaje = "Existen usuarios repetidos en el detalle";
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        #endregion        
+    }
+
+    public class fa_PuntoVta_x_seg_usuario_List
+    {
+        string Variable = "fa_PuntoVta_x_seg_usuario_Info";
+        public List<fa_PuntoVta_x_seg_usuario_Info> get_list(decimal IdTransaccionSession)
+        {
+
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<fa_PuntoVta_x_seg_usuario_Info> list = new List<fa_PuntoVta_x_seg_usuario_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<fa_PuntoVta_x_seg_usuario_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<fa_PuntoVta_x_seg_usuario_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(fa_PuntoVta_x_seg_usuario_Info info_det, decimal IdTransaccionSession)
+        {
+            List<fa_PuntoVta_x_seg_usuario_Info> list = get_list(IdTransaccionSession);
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            info_det.IdUsuario = info_det.IdUsuario;
+
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(fa_PuntoVta_x_seg_usuario_Info info_det, decimal IdTransaccionSession)
+        {
+            fa_PuntoVta_x_seg_usuario_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            edited_info.IdUsuario = info_det.IdUsuario;
+        }
+
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
+        {
+            List<fa_PuntoVta_x_seg_usuario_Info> list = get_list(IdTransaccionSession);
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).FirstOrDefault());
+        }
     }
 }

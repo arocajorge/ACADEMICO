@@ -127,7 +127,18 @@ namespace Core.Info.Helps
         public enum eTipoParentezco
         {
             PAPA = 10,
-            MAMA = 11
+            MAMA = 11,
+            REPRESENTANTE_ECONOMICO=12,
+            HERMANO_A = 13,
+            ABUELO_A = 14,
+            TIO_TIA = 15,
+            PADRINO_MADRINA = 16,
+            PADRASTRO = 17,
+            MADRASTRA = 18,
+            OTROS = 22,
+            PRIMO_A = 23,
+            HERMANASTRO_A = 24,
+            CUÑADO_A = 25
         }
 
         public enum eModulo

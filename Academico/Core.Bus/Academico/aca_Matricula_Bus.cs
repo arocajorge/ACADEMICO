@@ -1,5 +1,6 @@
 ﻿using Core.Data.Academico;
 using Core.Info.Academico;
+using Core.Info.Facturacion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,12 +64,9 @@ namespace Core.Bus.Academico
         {
             try
             {
-                //return odata.guardarDB(info);
-
                 if (odata.guardarDB(info))
                 {
-                    var lst_rubros_x_cobrar = info.lst_MatriculaRubro.Where(q=>q.seleccionado==true);
-  
+                    var lst_rubros_x_cobrar = info.lst_MatriculaRubro.Where(q => q.seleccionado == true);
                 }
 
                 return true;

@@ -19,8 +19,15 @@ namespace Core.Info.Facturacion
         public decimal Total { get; set; }
         public decimal ValorEfectivo { get; set; }
         public decimal Cambio { get; set; }
+        public Nullable<int> IdAnio { get; set; }
+        public Nullable<int> IdPlantilla { get; set; }
+        public Nullable<int> IdRubro { get; set; }
+        public Nullable<int> IdPeriodo { get; set; }
+        public Nullable<decimal> ValorProntoPago { get; set; }
+
+
+
+        public Nullable<DateTime> FechaProntoPago { get; set; }
         public string mensaje { get; set; }
-        public decimal ValorProntoPago { get; set; }
-        public Nullable<System.DateTime> FechaProntoPago { get; set; }
     }
 }

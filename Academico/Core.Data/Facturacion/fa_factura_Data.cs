@@ -216,35 +216,6 @@ namespace Core.Data.Facturacion
                 };
                 #endregion
 
-                #region Resumen
-                db_f.fa_factura_resumen.Add(new fa_factura_resumen
-                {
-                    IdEmpresa = info.IdEmpresa,
-                    IdSucursal = info.IdSucursal,
-                    IdBodega = info.IdBodega,
-                    IdCbteVta = info.IdCbteVta,
-
-                    SubtotalConDscto = info.info_resumen.SubtotalConDscto,
-                    SubtotalIVAConDscto = info.info_resumen.SubtotalIVAConDscto,
-                    SubtotalIVASinDscto = info.info_resumen.SubtotalIVASinDscto,
-                    SubtotalSinDscto = info.info_resumen.SubtotalSinDscto,
-                    SubtotalSinIVAConDscto = info.info_resumen.SubtotalSinIVAConDscto,
-                    SubtotalSinIVASinDscto = info.info_resumen.SubtotalSinIVASinDscto,
-
-                    Total = info.info_resumen.Total,
-                    Descuento = info.info_resumen.Descuento,
-                    ValorEfectivo = info.info_resumen.ValorEfectivo,
-                    ValorIVA = info.info_resumen.ValorIVA,
-                    Cambio = info.info_resumen.Cambio,
-                    
-                    ValorProntoPago = info.info_resumen.ValorProntoPago,
-                    IdRubro = info.lst_det.Where(q => q.aca_IdRubro != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdRubro),
-                    IdPeriodo = info.lst_det.Where(q => q.aca_IdPeriodo != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdPeriodo),
-                    IdPlantilla = info.lst_det.Where(q=> q.aca_IdPlantilla != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdPlantilla),
-                    IdAnio = info.lst_det.Where(q => q.aca_IdPlantilla != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdAnio)
-                });
-                #endregion
-
                 #region Detalle
                 foreach (var item in info.lst_det)
                 {
@@ -267,7 +238,7 @@ namespace Core.Data.Facturacion
                         IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
                         vt_iva = item.vt_iva,
                         vt_total = item.vt_total,
-
+                        
                         IdEmpresa_pf = item.IdEmpresa_pf,
                         IdSucursal_pf = item.IdSucursal_pf,
                         IdProforma = item.IdProforma,
@@ -279,7 +250,7 @@ namespace Core.Data.Facturacion
                     });
 
                     #region MatriculaRubro
-                    aca_Matricula_Rubro Entity_MatricularRubro = db_a.aca_Matricula_Rubro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == item.IdMatricula 
+                    aca_Matricula_Rubro Entity_MatricularRubro = db_a.aca_Matricula_Rubro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == item.IdMatricula
                     && q.IdPeriodo == item.aca_IdPeriodo && q.IdRubro == item.aca_IdRubro);
                     if (Entity_MatricularRubro == null) return false;
 
@@ -288,6 +259,35 @@ namespace Core.Data.Facturacion
                     db_a.SaveChanges();
                     #endregion
                 }
+                #endregion
+
+                #region Resumen
+                db_f.fa_factura_resumen.Add(new fa_factura_resumen
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdSucursal = info.IdSucursal,
+                    IdBodega = info.IdBodega,
+                    IdCbteVta = info.IdCbteVta,
+
+                    SubtotalConDscto = info.info_resumen.SubtotalConDscto,
+                    SubtotalIVAConDscto = info.info_resumen.SubtotalIVAConDscto,
+                    SubtotalIVASinDscto = info.info_resumen.SubtotalIVASinDscto,
+                    SubtotalSinDscto = info.info_resumen.SubtotalSinDscto,
+                    SubtotalSinIVAConDscto = info.info_resumen.SubtotalSinIVAConDscto,
+                    SubtotalSinIVASinDscto = info.info_resumen.SubtotalSinIVASinDscto,
+
+                    Total = info.info_resumen.Total,
+                    Descuento = info.info_resumen.Descuento,
+                    ValorEfectivo = info.info_resumen.ValorEfectivo,
+                    ValorIVA = info.info_resumen.ValorIVA,
+                    Cambio = info.info_resumen.Cambio,
+
+                    ValorProntoPago = info.info_resumen.ValorProntoPago,
+                    IdRubro = info.lst_det.Where(q => q.aca_IdRubro != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdRubro),
+                    IdPeriodo = info.lst_det.Where(q => q.aca_IdPeriodo != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdPeriodo),
+                    IdPlantilla = info.lst_det.Where(q => q.aca_IdPlantilla != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdPlantilla),
+                    IdAnio = info.lst_det.Where(q => q.aca_IdPlantilla != null).ToList().Count == 0 ? null : info.lst_det.Max(q => q.aca_IdAnio)
+                });
                 #endregion
 
                 var cliente = db_f.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();

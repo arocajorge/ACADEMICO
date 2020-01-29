@@ -255,7 +255,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
             var info_cliente = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, model.pe_cedulaRuc);
             var cliente = bus_cliente.get_info(model.IdEmpresa, info_cliente.IdCliente);
-            model.IdTipoCredito = ((cliente == null || cliente.IdCliente==0) ? "" : cliente.IdTipoCredito);
+            model.IdTipoCredito = ((cliente == null || cliente.IdCliente==0) ? "CON" : cliente.IdTipoCredito);
             model.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
             var IdCliente = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
             var info_contacto = bus_cliente_cont.get_info(model.IdEmpresa, IdCliente, 1);

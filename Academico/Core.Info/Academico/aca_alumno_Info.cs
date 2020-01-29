@@ -71,7 +71,6 @@ namespace Core.Info.Academico
         public string NumeroCarnetConadis { get; set; }
         public List<aca_AlumnoDocumento_Info> lst_alumno_documentos { get; set; }
         public string IdUsuario { get; set; }
-        [Required(ErrorMessage = "El campo religión es obligatorio")]
         public Nullable<int> IdReligion { get; set; }
         public Nullable<bool> AsisteCentroCristiano { get; set; }
         public Nullable<int> IdGrupoEtnico { get; set; }

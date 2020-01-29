@@ -36,7 +36,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_MecanismoDePago_Info getInfo(int IdEmpresa, int IdMecanismo)
+        public aca_MecanismoDePago_Info getInfo(int IdEmpresa, decimal IdMecanismo)
         {
             try
             {

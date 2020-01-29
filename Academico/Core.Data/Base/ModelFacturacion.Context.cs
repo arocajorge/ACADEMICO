@@ -51,13 +51,14 @@ namespace Core.Data.Base
         public virtual DbSet<vwfa_notaCreDeb_det> vwfa_notaCreDeb_det { get; set; }
         public virtual DbSet<vwfa_notaCreDeb> vwfa_notaCreDeb { get; set; }
         public virtual DbSet<vwfa_notaCreDeb_x_fa_factura_NotaDeb> vwfa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
-        public virtual DbSet<fa_factura> fa_factura { get; set; }
         public virtual DbSet<fa_notaCreDeb> fa_notaCreDeb { get; set; }
         public virtual DbSet<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
         public virtual DbSet<vwfa_factura> vwfa_factura { get; set; }
         public virtual DbSet<fa_notaCreDeb_resumen> fa_notaCreDeb_resumen { get; set; }
+        public virtual DbSet<vwfa_factura_det> vwfa_factura_det { get; set; }
+        public virtual DbSet<fa_factura> fa_factura { get; set; }
         public virtual DbSet<fa_factura_det> fa_factura_det { get; set; }
         public virtual DbSet<fa_factura_resumen> fa_factura_resumen { get; set; }
-        public virtual DbSet<vwfa_factura_det> vwfa_factura_det { get; set; }
+        public virtual DbSet<fa_PuntoVta_x_seg_usuario> fa_PuntoVta_x_seg_usuario { get; set; }
     }
 }
