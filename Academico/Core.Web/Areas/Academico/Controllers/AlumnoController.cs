@@ -1302,6 +1302,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                     pe_cedulaRuc = cedula_ruc_familia,
                                     pe_direccion = Convert.ToString(reader.GetValue(8)),
                                     pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)),
+                                    pe_celular = Convert.ToString(reader.GetValue(11)),
                                     pe_correo = Convert.ToString(reader.GetValue(9))
                                 };
                                 info_persona_familia = persona_fam;
@@ -1320,12 +1321,11 @@ namespace Core.Web.Areas.Academico.Controllers
                                 info_persona_familia.pe_direccion = Convert.ToString(reader.GetValue(8));
                                 info_persona_familia.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
                                 info_persona_familia.pe_correo = Convert.ToString(reader.GetValue(9));
+                                info_persona_familia.pe_celular = Convert.ToString(reader.GetValue(11));
                             }
 
                             info_persona_familia.pe_Naturaleza = return_naturaleza_familia;
                             info_persona_familia.pe_nombreCompleto = (info_persona_familia.pe_razonSocial != "" ? info_persona_familia.pe_razonSocial : (info_persona_familia.pe_apellido + ' ' + info_persona_familia.pe_nombre));
-                            var lst_parentezco = bus_aca_catalogo.GetList_x_Tipo(3, true);
-                            aca_Catalogo_Info info_parentezco = lst_parentezco.Where(q => q.NomCatalogo == Convert.ToString(reader.GetValue(1))).FirstOrDefault();
 
                             var Secuencia = 1;
                             aca_Familia_Info info_fam = new aca_Familia_Info
@@ -1333,13 +1333,24 @@ namespace Core.Web.Areas.Academico.Controllers
                                 IdEmpresa = IdEmpresa,
                                 IdAlumno = IdAlumnoFamilia,
                                 Secuencia = Secuencia,
-                                IdCatalogoPAREN = info_parentezco.IdCatalogo,
+                                IdCatalogoPAREN = Convert.ToInt32(reader.GetValue(1)),
                                 IdPersona = info_persona_familia.IdPersona,
                                 Direccion = Convert.ToString(reader.GetValue(8)),
-                                Celular = Convert.ToString(reader.GetValue(10)),
+                                Celular = Convert.ToString(reader.GetValue(11)),
                                 Correo = Convert.ToString(reader.GetValue(9)),
-                                SeFactura = (Convert.ToString(reader.GetValue(12)) == "SI" ? true : false),
-                                EsRepresentante = (Convert.ToString(reader.GetValue(11)) == "SI" ? true : false),
+                                SeFactura = (Convert.ToString(reader.GetValue(13)) == "SI" ? true : false),
+                                EsRepresentante = (Convert.ToString(reader.GetValue(12)) == "SI" ? true : false),
+                                EmpresaTrabajo = Convert.ToString(reader.GetValue(14)),
+                                DireccionTrabajo = Convert.ToString(reader.GetValue(15)),
+                                TelefonoTrabajo = Convert.ToString(reader.GetValue(16)),
+                                CargoTrabajo = Convert.ToString(reader.GetValue(17)),
+                                AniosServicio = Convert.ToInt32(reader.GetValue(18)),
+                                IngresoMensual = Convert.ToDouble(reader.GetValue(19)),
+                                VehiculoPropio = (Convert.ToString(reader.GetValue(20)) == "SI" ? true : false),
+                                AnioVehiculo = Convert.ToInt32(reader.GetValue(23)),
+                                Marca = Convert.ToString(reader.GetValue(21)),
+                                Modelo = Convert.ToString(reader.GetValue(22)),
+                                CasaPropia = (Convert.ToString(reader.GetValue(24)) == "SI" ? true : false),
                                 Estado = true,
                                 AsisteCentroCristiano = false,
                                 IdUsuarioCreacion = SessionFixed.IdUsuario,
