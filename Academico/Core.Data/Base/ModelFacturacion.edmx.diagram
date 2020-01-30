@@ -65,6 +65,7 @@
         <AssociationConnector Association="ModelFacturacion.FK_fa_factura_fa_Vendedor" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_factura_x_ct_cbtecble_fa_factura" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_PuntoVta_x_seg_usuario_fa_PuntoVta" />
+        <EntityTypeShape EntityType="ModelFacturacion.vwfa_factura_ParaContabilizarAcademico" Width="1.5" PointX="3.375" PointY="13.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
