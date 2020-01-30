@@ -25,6 +25,7 @@ namespace Core.Info.Academico
         public decimal Porcentaje { get; set; }
         public decimal ValorIVA { get; set; }
         public decimal Total { get; set; }
+        public int NumeroCuotas { get; set; }
 
         #region Campos que no existen en la tabla
         public string IdString { get; set; }

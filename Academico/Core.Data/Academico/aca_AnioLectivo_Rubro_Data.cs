@@ -146,7 +146,8 @@ namespace Core.Data.Academico
                         IdProducto = Entity.IdProducto,
                         Porcentaje = Entity.Porcentaje,
                         Total = Entity.Total,
-                        ValorIVA = Entity.ValorIVA
+                        ValorIVA = Entity.ValorIVA,
+                        NumeroCuotas = Entity.NumeroCuotas
                     };
                 }
 

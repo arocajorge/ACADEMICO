@@ -35,5 +35,18 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public aca_AnioLectivo_Rubro_Periodo_Info GetInfo(int IdEmpresa, int IdAnio, int IdRubro, int IdPeriodo)
+        {
+            try
+            {
+                return odata.getInfo(IdEmpresa, IdAnio, IdRubro, IdPeriodo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

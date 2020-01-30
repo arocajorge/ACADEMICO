@@ -87,5 +87,37 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public aca_AnioLectivo_Rubro_Periodo_Info getInfo(int IdEmpresa, int IdAnio, int IdRubro, int IdPeriodo)
+        {
+            try
+            {
+                aca_AnioLectivo_Rubro_Periodo_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_AnioLectivo_Rubro_Periodo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdRubro == IdRubro && q.IdPeriodo == IdPeriodo).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_AnioLectivo_Rubro_Periodo_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdRubro = Entity.IdRubro,
+                        IdAnio = Entity.IdAnio,
+                        IdPeriodo = Entity.IdPeriodo,
+                        Secuencia = Entity.Secuencia
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
