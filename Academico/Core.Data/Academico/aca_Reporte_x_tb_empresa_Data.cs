@@ -15,25 +15,28 @@ namespace Core.Data.Academico
             try
             {
                 aca_Reporte_x_tb_empresa_Info info;
+                EntitiesGeneral dbg = new EntitiesGeneral();
+                EntitiesAcademico dba = new EntitiesAcademico();
 
-                using (EntitiesAcademico db = new EntitiesAcademico())
+                var Entity = dba.aca_Reporte_x_tb_empresa.Where(q => q.IdEmpresa == IdEmpresa && q.CodReporte == CodReporte).FirstOrDefault();
+                if (Entity == null) return null;
+                else
                 {
-                    var Entity = db.aca_Reporte_x_tb_empresa.Where(q => q.IdEmpresa == IdEmpresa && q.CodReporte == CodReporte).FirstOrDefault();
-                    if (Entity == null) return null;
-                    else
-                        info = new aca_Reporte_x_tb_empresa_Info
-                        {
-                            IdEmpresa = Entity.IdEmpresa,
-                            CodReporte = Entity.CodReporte,
-                            ReporteDisenio = Entity.ReporteDisenio,
-                            Nom_Carpeta = Entity.aca_Reporte.tb_modulo.Nom_Carpeta,
-                            Reporte = Entity.aca_Reporte.nom_reporte
-                        };
+                    info = new aca_Reporte_x_tb_empresa_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        CodReporte = Entity.CodReporte,
+                        ReporteDisenio = Entity.ReporteDisenio,
+                        Reporte = Entity.aca_Reporte.nom_reporte
+                    };
+                    var Modulo = dbg.tb_modulo.Where(q => q.CodModulo == Entity.aca_Reporte.CodModulo).FirstOrDefault();
+                    if (Modulo != null)
+                    {
+                        info.Nom_Carpeta = Modulo.Nom_Carpeta;
+                    }
                 }
 
                 return info;
-
-
             }
             catch (Exception)
             {
