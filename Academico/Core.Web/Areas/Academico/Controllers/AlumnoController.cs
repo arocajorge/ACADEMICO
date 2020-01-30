@@ -1176,7 +1176,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 #region Alumno   
                 var lst_persona = bus_persona.get_list(false);
-
+                var IdAlumno = 1;
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
@@ -1196,17 +1196,18 @@ namespace Core.Web.Areas.Academico.Controllers
                                 tb_persona_Info info_alumno = new tb_persona_Info
                                 {
                                     pe_Naturaleza = Convert.ToString(reader.GetValue(1)),
-                                    pe_nombreCompleto = Convert.ToString(reader.GetValue(4)) + ' ' + Convert.ToString(reader.GetValue(5)),
-                                    pe_razonSocial = (Convert.ToString(reader.GetValue(1)) == "NATU" ? "" : Convert.ToString(reader.GetValue(4)) + ' ' + Convert.ToString(reader.GetValue(5))),
-                                    pe_apellido = Convert.ToString(reader.GetValue(4)),
-                                    pe_nombre = Convert.ToString(reader.GetValue(5)),
+                                    pe_nombreCompleto = Convert.ToString(reader.GetValue(4)).Trim() + ' ' + Convert.ToString(reader.GetValue(5)).Trim(),
+                                    pe_razonSocial = (Convert.ToString(reader.GetValue(1)) == "NATU" ? "" : Convert.ToString(reader.GetValue(4)).Trim() + ' ' + Convert.ToString(reader.GetValue(5)).Trim()),
+                                    pe_apellido = Convert.ToString(reader.GetValue(4)).Trim(),
+                                    pe_nombre = Convert.ToString(reader.GetValue(5)).Trim(),
                                     pe_fechaNacimiento = Convert.ToDateTime(reader.GetValue(6)),
                                     pe_sexo = Convert.ToString(reader.GetValue(7)),
                                     IdTipoDocumento = Convert.ToString(reader.GetValue(2)),
                                     pe_cedulaRuc = cedula_ruc_alumno,
-                                    pe_direccion = Convert.ToString(reader.GetValue(8)),
-                                    pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)),
-                                    pe_correo = Convert.ToString(reader.GetValue(9)),
+                                    pe_direccion = Convert.ToString(reader.GetValue(8)).Trim(),
+                                    pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim(),
+                                    pe_correo = Convert.ToString(reader.GetValue(9)).Trim(),
+                                    pe_celular= Convert.ToString(reader.GetValue(11)).Trim()
                                 };
                                 info_persona_alumno = info_alumno;
                             }
@@ -1215,26 +1216,27 @@ namespace Core.Web.Areas.Academico.Controllers
                                 info_persona_alumno = bus_persona.get_info(info_persona_alu.IdPersona);
                                 var Naturaleza = Convert.ToString(reader.GetValue(1));
                                 info_persona_alumno.pe_Naturaleza = Naturaleza;
-                                info_persona_alumno.pe_nombreCompleto = Convert.ToString(reader.GetValue(4)) + ' ' + Convert.ToString(reader.GetValue(5));
+                                info_persona_alumno.pe_nombreCompleto = Convert.ToString(reader.GetValue(4)).Trim() + ' ' + Convert.ToString(reader.GetValue(5)).Trim();
                                 info_persona_alumno.pe_razonSocial = (Convert.ToString(reader.GetValue(1)) == "NATU" ? "" : Convert.ToString(reader.GetValue(4)) + ' ' + Convert.ToString(reader.GetValue(5)));
-                                info_persona_alumno.pe_apellido = Convert.ToString(reader.GetValue(4));
-                                info_persona_alumno.pe_nombre = Convert.ToString(reader.GetValue(5));
-                                info_persona_alumno.IdTipoDocumento = Convert.ToString(reader.GetValue(2));
+                                info_persona_alumno.pe_apellido = Convert.ToString(reader.GetValue(4)).Trim();
+                                info_persona_alumno.pe_nombre = Convert.ToString(reader.GetValue(5)).Trim();
+                                info_persona_alumno.IdTipoDocumento = Convert.ToString(reader.GetValue(2)).Trim();
                                 info_persona_alumno.pe_cedulaRuc = cedula_ruc_alumno;
-                                info_persona_alumno.pe_direccion = Convert.ToString(reader.GetValue(8));
-                                info_persona_alumno.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
-                                info_persona_alumno.pe_correo = Convert.ToString(reader.GetValue(9));
-                                info_persona_alumno.pe_sexo = Convert.ToString(reader.GetValue(7));
+                                info_persona_alumno.pe_direccion = Convert.ToString(reader.GetValue(8)).Trim();
+                                info_persona_alumno.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim();
+                                info_persona_alumno.pe_correo = Convert.ToString(reader.GetValue(9)).Trim();
+                                info_persona_alumno.pe_sexo = Convert.ToString(reader.GetValue(7)).Trim();
+                                info_persona_alumno.pe_celular = Convert.ToString(reader.GetValue(11)).Trim();
                             }
 
                             info_persona_alumno.pe_Naturaleza = return_naturaleza;
                             info_persona_alumno.pe_nombreCompleto = (info_persona_alumno.pe_razonSocial != "" ? info_persona_alumno.pe_razonSocial : (info_persona_alumno.pe_apellido + ' ' + info_persona_alumno.pe_nombre));
-                            var IdAlumno = 1;
+                            
                             aca_Alumno_Info info = new aca_Alumno_Info
                             {
                                 IdEmpresa = IdEmpresa,
                                 IdAlumno = IdAlumno,
-                                Codigo = Convert.ToString(reader.GetValue(0)),
+                                Codigo = Convert.ToString(reader.GetValue(0)).Trim(),
                                 IdPersona = info_persona_alumno.IdPersona,
                                 Direccion = info_persona_alumno.pe_direccion,
                                 Celular = info_persona_alumno.pe_telfono_Contacto,
@@ -1243,7 +1245,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                 IdCatalogoESTMAT = 1,
                                 IdCurso = null,
                                 IdCatalogoESTALU = 8,
-                                FechaIngreso = Convert.ToDateTime(reader.GetValue(11)),
+                                FechaIngreso = Convert.ToDateTime(reader.GetValue(12)),
                                 LugarNacimiento = "",
                                 IdPais = null,
                                 Cod_Region = null,
@@ -1293,17 +1295,19 @@ namespace Core.Web.Areas.Academico.Controllers
                                 tb_persona_Info persona_fam = new tb_persona_Info
                                 {
                                     pe_Naturaleza = Convert.ToString(reader.GetValue(3)),
-                                    pe_nombreCompleto = Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(6)),
+                                    pe_nombreCompleto = Convert.ToString(reader.GetValue(5)).Trim() + ' ' + Convert.ToString(reader.GetValue(6)).Trim(),
                                     pe_razonSocial = (Convert.ToString(reader.GetValue(3)) == "NATU" ? "" : Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(6))),
-                                    pe_apellido = Convert.ToString(reader.GetValue(5)),
-                                    pe_nombre = Convert.ToString(reader.GetValue(6)),
-                                    pe_sexo = Convert.ToString(reader.GetValue(7)),
+                                    pe_apellido = Convert.ToString(reader.GetValue(5)).Trim(),
+                                    pe_nombre = Convert.ToString(reader.GetValue(6)).Trim(),
+                                    pe_sexo = Convert.ToString(reader.GetValue(7)).Trim(),
                                     IdTipoDocumento = Convert.ToString(reader.GetValue(4)),
                                     pe_cedulaRuc = cedula_ruc_familia,
-                                    pe_direccion = Convert.ToString(reader.GetValue(8)),
-                                    pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)),
-                                    pe_celular = Convert.ToString(reader.GetValue(11)),
-                                    pe_correo = Convert.ToString(reader.GetValue(9))
+                                    pe_direccion = Convert.ToString(reader.GetValue(8)).Trim(),
+                                    pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim(),
+                                    pe_celular = Convert.ToString(reader.GetValue(11)).Trim(),
+                                    pe_correo = Convert.ToString(reader.GetValue(9)).Trim(),
+                                    IdReligion = Convert.ToInt32(reader.GetValue(26)),
+                                    IdProfesion = Convert.ToInt32(reader.GetValue(18))
                                 };
                                 info_persona_familia = persona_fam;
                             }
@@ -1312,16 +1316,18 @@ namespace Core.Web.Areas.Academico.Controllers
                                 info_persona_familia = bus_persona.get_info(info_persona_fam.IdPersona);
                                 var Naturaleza = Convert.ToString(reader.GetValue(3));
                                 info_persona_familia.pe_Naturaleza = Naturaleza;
-                                info_persona_familia.pe_nombreCompleto = Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(6));
-                                info_persona_familia.pe_razonSocial = (Convert.ToString(reader.GetValue(3)) == "NATU" ? "" : Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(6)));
-                                info_persona_familia.pe_apellido = Convert.ToString(reader.GetValue(5));
-                                info_persona_familia.pe_nombre = Convert.ToString(reader.GetValue(6));
+                                info_persona_familia.pe_nombreCompleto = Convert.ToString(reader.GetValue(5)).Trim() + ' ' + Convert.ToString(reader.GetValue(6)).Trim();
+                                info_persona_familia.pe_razonSocial = (Convert.ToString(reader.GetValue(3)) == "NATU" ? "" : Convert.ToString(reader.GetValue(5)).Trim() + ' ' + Convert.ToString(reader.GetValue(6)).Trim());
+                                info_persona_familia.pe_apellido = Convert.ToString(reader.GetValue(5)).Trim();
+                                info_persona_familia.pe_nombre = Convert.ToString(reader.GetValue(6)).Trim();
                                 info_persona_familia.IdTipoDocumento = Convert.ToString(reader.GetValue(4));
                                 info_persona_familia.pe_cedulaRuc = cedula_ruc_familia;
-                                info_persona_familia.pe_direccion = Convert.ToString(reader.GetValue(8));
-                                info_persona_familia.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10));
-                                info_persona_familia.pe_correo = Convert.ToString(reader.GetValue(9));
-                                info_persona_familia.pe_celular = Convert.ToString(reader.GetValue(11));
+                                info_persona_familia.pe_direccion = Convert.ToString(reader.GetValue(8)).Trim();
+                                info_persona_familia.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim();
+                                info_persona_familia.pe_correo = Convert.ToString(reader.GetValue(9)).Trim();
+                                info_persona_familia.pe_celular = Convert.ToString(reader.GetValue(11)).Trim();
+                                info_persona_familia.IdReligion = Convert.ToInt32(reader.GetValue(26));
+                                info_persona_familia.IdProfesion = Convert.ToInt32(reader.GetValue(18));
                             }
 
                             info_persona_familia.pe_Naturaleza = return_naturaleza_familia;
@@ -1335,22 +1341,22 @@ namespace Core.Web.Areas.Academico.Controllers
                                 Secuencia = Secuencia,
                                 IdCatalogoPAREN = Convert.ToInt32(reader.GetValue(1)),
                                 IdPersona = info_persona_familia.IdPersona,
-                                Direccion = Convert.ToString(reader.GetValue(8)),
+                                Direccion = Convert.ToString(reader.GetValue(8)).Trim(),
                                 Celular = Convert.ToString(reader.GetValue(11)),
-                                Correo = Convert.ToString(reader.GetValue(9)),
+                                Correo = Convert.ToString(reader.GetValue(9)).Trim(),
                                 SeFactura = (Convert.ToString(reader.GetValue(13)) == "SI" ? true : false),
                                 EsRepresentante = (Convert.ToString(reader.GetValue(12)) == "SI" ? true : false),
-                                EmpresaTrabajo = Convert.ToString(reader.GetValue(14)),
-                                DireccionTrabajo = Convert.ToString(reader.GetValue(15)),
-                                TelefonoTrabajo = Convert.ToString(reader.GetValue(16)),
-                                CargoTrabajo = Convert.ToString(reader.GetValue(17)),
-                                AniosServicio = Convert.ToInt32(reader.GetValue(18)),
-                                IngresoMensual = Convert.ToDouble(reader.GetValue(19)),
-                                VehiculoPropio = (Convert.ToString(reader.GetValue(20)) == "SI" ? true : false),
-                                AnioVehiculo = Convert.ToInt32(reader.GetValue(23)),
-                                Marca = Convert.ToString(reader.GetValue(21)),
-                                Modelo = Convert.ToString(reader.GetValue(22)),
-                                CasaPropia = (Convert.ToString(reader.GetValue(24)) == "SI" ? true : false),
+                                EmpresaTrabajo = Convert.ToString(reader.GetValue(14)).Trim(),
+                                DireccionTrabajo = Convert.ToString(reader.GetValue(15)).Trim(),
+                                TelefonoTrabajo = Convert.ToString(reader.GetValue(16)).Trim(),
+                                CargoTrabajo = Convert.ToString(reader.GetValue(17)).Trim(),
+                                AniosServicio = Convert.ToInt32(reader.GetValue(19)),
+                                IngresoMensual = Convert.ToDouble(reader.GetValue(20)),
+                                VehiculoPropio = (Convert.ToString(reader.GetValue(21)) == "SI" ? true : false),
+                                AnioVehiculo = Convert.ToInt32(reader.GetValue(24)),
+                                Marca = Convert.ToString(reader.GetValue(22)).Trim(),
+                                Modelo = Convert.ToString(reader.GetValue(23)).Trim(),
+                                CasaPropia = (Convert.ToString(reader.GetValue(25)) == "SI" ? true : false),
                                 Estado = true,
                                 AsisteCentroCristiano = false,
                                 IdUsuarioCreacion = SessionFixed.IdUsuario,
