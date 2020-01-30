@@ -352,66 +352,87 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCobro_tipo">Tipo cobro*</label>
                     @Html.DropDownListFor(q => q.IdCobro_tipo, new SelectList(ViewBag.lst_cobro_tipo, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo" })
                     @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Tipo nota</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoNotaCredito, settings =>
+                           {
+                               settings.Name = "IdTipoNotaCredito";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                               settings.Properties.Columns.Add("No_Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdTipoNota";
+                               settings.Properties.ValueType = typeof(int);
+                               settings.Properties.TextField = "No_Descripcion";
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_tipo_nota).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoNotaCredito, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
+
         <div class="col-md-4">
-            <div class="col-md-offset-6 col-md-6">
-                <div class="form-group">
-                    <label for="cr_fecha">Fecha*</label>
-                    @Html.DevExpress().DateEditFor(q=> q.cr_fecha, settings =>
-                {
-                    settings.Name = "cr_fecha";
-                    settings.Properties.UseMaskBehavior = true;
-                    settings.Properties.EditFormat = EditFormat.Date;
-                    settings.Properties.EditFormatString = "dd/MM/yyyy";
-                    settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                }).GetHtml()
-                    @Html.ValidationMessageFor(q => q.cr_fecha, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdCaja">Caja*</label>
-                    @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @class = "form-control", @id = "IdCaja" })
-                    @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="cr_TotalCobro">Total*</label>
-                    @Html.TextBoxFor(q => q.cr_TotalCobro, new { @id = "cr_TotalCobro", @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.cr_TotalCobro, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="cr_saldo">Excedente</label>
-                    @Html.TextBoxFor(q => q.cr_saldo, new { @id = "cr_saldo", @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(q => q.cr_saldo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6" id="DatoIdTarjeta" hidden>
-                <div class="form-group">
-                    <label for="cr_TotalCobro">Tarjeta de Crédito</label>
-                    @Html.DropDownListFor(q => q.IdTarjeta, new SelectList(ViewBag.lst_tarjeta, "IdTarjeta", "NombreTarjeta"), new { @class = "form-control", @id = "IdTarjeta" })
-                    @Html.ValidationMessageFor(q => q.IdTarjeta, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6" id="DatoTarjeta" hidden>
-                <div class="form-group">
-                    <label for="cr_saldo">Numero</label>
-                    @Html.TextBoxFor(q => q.cr_Tarjeta, new { @id = "cr_Tarjeta", @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.cr_Tarjeta, "", new { @class = "text-danger" })
-                </div>
+        <div class="col-md-offset-6 col-md-6">
+            <div class="form-group">
+                <label for="cr_fecha">Fecha*</label>
+                @Html.DevExpress().DateEditFor(q=> q.cr_fecha, settings =>
+            {
+                settings.Name = "cr_fecha";
+                settings.Properties.UseMaskBehavior = true;
+                settings.Properties.EditFormat = EditFormat.Date;
+                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+            }).GetHtml()
+                @Html.ValidationMessageFor(q => q.cr_fecha, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="IdCaja">Caja*</label>
+                @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @class = "form-control", @id = "IdCaja" })
+                @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="cr_TotalCobro">Total*</label>
+                @Html.TextBoxFor(q => q.cr_TotalCobro, new { @id = "cr_TotalCobro", @class = "form-control" })
+                @Html.ValidationMessageFor(q => q.cr_TotalCobro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="cr_saldo">Excedente</label>
+                @Html.TextBoxFor(q => q.cr_saldo, new { @id = "cr_saldo", @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(q => q.cr_saldo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6" id="DatoIdTarjeta" hidden>
+            <div class="form-group">
+                <label for="cr_TotalCobro">Tarjeta de Crédito</label>
+                @Html.DropDownListFor(q => q.IdTarjeta, new SelectList(ViewBag.lst_tarjeta, "IdTarjeta", "NombreTarjeta"), new { @class = "form-control", @id = "IdTarjeta" })
+                @Html.ValidationMessageFor(q => q.IdTarjeta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-6" id="DatoTarjeta" hidden>
+            <div class="form-group">
+                <label for="cr_saldo">Numero</label>
+                @Html.TextBoxFor(q => q.cr_Tarjeta, new { @id = "cr_Tarjeta", @class = "form-control" })
+                @Html.ValidationMessageFor(q => q.cr_Tarjeta, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
     </div>
     <div class="row" id="div_cheque" hidden>
         <div class="col-md-12">

@@ -1310,7 +1310,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             else
                             {
                                 info_persona_familia = bus_persona.get_info(info_persona_fam.IdPersona);
-                                var Naturaleza = Convert.ToString(reader.GetValue(1));
+                                var Naturaleza = Convert.ToString(reader.GetValue(3));
                                 info_persona_familia.pe_Naturaleza = Naturaleza;
                                 info_persona_familia.pe_nombreCompleto = Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(6));
                                 info_persona_familia.pe_razonSocial = (Convert.ToString(reader.GetValue(3)) == "NATU" ? "" : Convert.ToString(reader.GetValue(5)) + ' ' + Convert.ToString(reader.GetValue(6)));

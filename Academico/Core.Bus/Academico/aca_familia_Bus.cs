@@ -158,11 +158,11 @@ namespace Core.Bus.Academico
                             }
                             else
                             {
-                                cliente.Idtipo_cliente = info.Idtipo_cliente;
-                                cliente.IdTipoCredito = info.IdTipoCredito;
-                                cliente.cl_plazo = info_credito.Dias_Vct;
-                                cliente.IdCiudad = info.IdCiudad;
-                                cliente.IdParroquia = info.IdParroquia;
+                                //cliente.Idtipo_cliente = info.Idtipo_cliente;
+                                //cliente.IdTipoCredito = info.IdTipoCredito;
+                                //cliente.cl_plazo = info_credito.Dias_Vct;
+                                //cliente.IdCiudad = info.IdCiudad;
+                                //cliente.IdParroquia = info.IdParroquia;
                                 cliente.Celular = info.Celular;
                                 cliente.Direccion = info.Direccion;
                                 cliente.Correo = info.Correo;

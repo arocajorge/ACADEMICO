@@ -344,25 +344,34 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 foreach (var item in lst_MatriculaRubro)
                 {
+                    var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, IdPrimerPeriodo);
+
                     if (item.IdPeriodo == IdPrimerPeriodo)
-                    {
-                        var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, IdPrimerPeriodo);
+                    {                     
                         item.seleccionado = true;
 
                         if (item.AplicaProntoPago == true)
                         {
-                            if (info_plantilla.TipoDescuento == "%")
+                            if (DateTime.Now <= info_anio_periodo.FechaProntoPago)
                             {
-                                ValorDescuento = (item.Total * (info_plantilla.Valor / 100));
-                                ValorRubro = item.Total - ValorDescuento;
-                                TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                                if (info_plantilla.TipoDescuento == "%")
+                                {
+                                    ValorDescuento = (item.Total * (info_plantilla.Valor / 100));
+                                    ValorRubro = item.Total - ValorDescuento;
+                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                                }
+                                else
+                                {
+                                    ValorRubro = (item.Total - info_plantilla.Valor);
+                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                                }
                             }
                             else
                             {
-                                ValorRubro = (item.Total - info_plantilla.Valor);
+                                ValorRubro = (item.Total);
                                 TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
                             }
-                            
+                               
                             Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
                         }
                         else
@@ -373,6 +382,15 @@ namespace Core.Web.Areas.Academico.Controllers
                         }
                         item.ValorProntoPago = ValorRubro;
                         item.FechaProntoPago =Convert.ToDateTime(info_anio_periodo.FechaProntoPago);
+                    }
+                    else
+                    {
+                        ValorRubro = (item.Total);
+                        Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                        TotalProntoPago = TotalProntoPago + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+
+                        item.ValorProntoPago = ValorRubro;
+                        item.FechaProntoPago = Convert.ToDateTime(info_anio_periodo.FechaProntoPago);
                     }
                 }
 
