@@ -1,6 +1,7 @@
 ﻿using Core.Bus.Academico;
 using Core.Bus.Facturacion;
 using Core.Bus.General;
+using Core.Data.Academico;
 using Core.Info.Academico;
 using Core.Info.Facturacion;
 using Core.Info.General;
@@ -50,6 +51,9 @@ namespace Core.Web.Areas.Academico.Controllers
         fa_factura_Bus bus_factura = new fa_factura_Bus();
         tb_sis_Documento_Tipo_Talonario_Bus bus_talonario = new tb_sis_Documento_Tipo_Talonario_Bus();
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
+        aca_AnioLectivo_Rubro_Bus bus_anio_rubro = new aca_AnioLectivo_Rubro_Bus();
+        aca_AnioLectivo_Rubro_Periodo_Bus bus_anio_rubro_periodo = new aca_AnioLectivo_Rubro_Periodo_Bus();
+        tb_mes_Bus bus_mes = new tb_mes_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -344,56 +348,47 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 foreach (var item in lst_MatriculaRubro)
                 {
-                    var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, IdPrimerPeriodo);
+                    var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, item.IdPeriodo);
 
                     if (item.IdPeriodo == IdPrimerPeriodo)
-                    {                     
+                    {
                         item.seleccionado = true;
+                    }
 
-                        if (item.AplicaProntoPago == true)
+                    if (item.AplicaProntoPago == true)
+                    {
+                        if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
                         {
-                            if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
+                            if (info_plantilla.TipoDescuento == "%")
                             {
-                                if (info_plantilla.TipoDescuento == "%")
-                                {
-                                    ValorDescuento = (item.Total * (info_plantilla.Valor / 100));
-                                    ValorRubro = item.Total - ValorDescuento;
-                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
-                                }
-                                else
-                                {
-                                    ValorRubro = (item.Total - info_plantilla.Valor);
-                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
-                                }
+                                ValorDescuento = (item.Total * (info_plantilla.Valor / 100));
+                                ValorRubro = item.Total - ValorDescuento;
+                                TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
                             }
                             else
                             {
-                                ValorRubro = (item.Total);
+                                ValorRubro = (item.Total - info_plantilla.Valor);
                                 TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
                             }
-                               
-                            Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
                         }
                         else
                         {
                             ValorRubro = (item.Total);
-                            Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
-                            TotalProntoPago = TotalProntoPago + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                            TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
                         }
-                        item.ValorProntoPago = ValorRubro;
-                        item.FechaProntoPago =Convert.ToDateTime(info_anio_periodo.FechaProntoPago);
+
+                        Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
                     }
                     else
                     {
                         ValorRubro = (item.Total);
                         Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
                         TotalProntoPago = TotalProntoPago + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
-
-                        item.ValorProntoPago = ValorRubro;
-                        item.FechaProntoPago = Convert.ToDateTime(info_anio_periodo.FechaProntoPago);
                     }
-                }
 
+                    item.ValorProntoPago = ValorRubro;
+                    item.FechaProntoPago = Convert.ToDateTime(info_anio_periodo.FechaProntoPago);
+                }
                 ListaMatriculaRubro.set_list(lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
             else
@@ -450,7 +445,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, info.IdPeriodo);
                     if (info.AplicaProntoPago == true)
                     {
-                        if (DateTime.Now <= info_anio_periodo.FechaProntoPago)
+                        if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
                         {
                             if (info_plantilla.TipoDescuento == "%")
                             {
@@ -466,15 +461,17 @@ namespace Core.Web.Areas.Academico.Controllers
                         }
                         else
                         {
-                            TotalProntoPago = TotalProntoPago + Math.Round((info.Total), 2, MidpointRounding.AwayFromZero);
+                            ValorRubro = info.Total;
+                            TotalProntoPago = TotalProntoPago + Math.Round((ValorRubro), 2, MidpointRounding.AwayFromZero);
                         }
 
                         Total = Total + Math.Round((info.Total), 2, MidpointRounding.AwayFromZero);
                     }
                     else
                     {
+                        ValorRubro = info.Total;
                         Total = Total + Math.Round((info.Total), 2, MidpointRounding.AwayFromZero);
-                        TotalProntoPago = TotalProntoPago + Math.Round((info.Total), 2, MidpointRounding.AwayFromZero);
+                        TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
                     }
                     
                 }
@@ -677,6 +674,12 @@ namespace Core.Web.Areas.Academico.Controllers
                         #region Factura
                         foreach (var item in lst_rubros_x_cobrar)
                         {
+                            var AnioLectivo_Periodo = bus_anio_periodo.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, item.IdPeriodo);
+                            var AnioLectivo_Rubro = bus_anio_rubro.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, item.IdRubro);
+                            var AnioLectivo_Rubro_Periodo = bus_anio_rubro_periodo.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, item.IdRubro, item.IdPeriodo);
+                            var mes = bus_mes.get_list().Where(q=>q.idMes == AnioLectivo_Periodo.IdMes).FirstOrDefault();
+                            var ObsFactura = AnioLectivo_Rubro.NomRubro + " "+(AnioLectivo_Rubro.NumeroCuotas>1 ? (AnioLectivo_Rubro_Periodo.Secuencia + "/"+AnioLectivo_Rubro.NumeroCuotas) : "")+" "+ mes.smes+" "+ AnioLectivo_Periodo.FechaHasta.Year;
+
                             var info_factura = new fa_factura_Info {
                                 IdEmpresa = info_matricula.IdEmpresa,
                                 IdSucursal = IdSucursal,
@@ -694,7 +697,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                 vt_plazo=termino_pago.Dias_Vct,
                                 vt_fech_venc = DateTime.Now.AddDays(termino_pago.Dias_Vct),
                                 vt_tipo_venta = mecanismo.IdTerminoPago,
-                                vt_Observacion = info_matricula.Observacion,
+                                vt_Observacion = ObsFactura,
                                 Estado="A",
                                 IdCaja = punto_venta.IdCaja,
                                 IdUsuario = SessionFixed.IdUsuario,

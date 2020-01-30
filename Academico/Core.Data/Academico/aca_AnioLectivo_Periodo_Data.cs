@@ -81,6 +81,7 @@ namespace Core.Data.Academico
                         IdEmpresa = Entity.IdEmpresa,
                         IdPeriodo = Entity.IdPeriodo,
                         IdAnio = Entity.IdAnio,
+                        IdMes = Entity.IdMes,
                         FechaDesde = Entity.FechaDesde,
                         FechaHasta = Entity.FechaHasta,
                         FechaProntoPago = Entity.FechaProntoPago,
