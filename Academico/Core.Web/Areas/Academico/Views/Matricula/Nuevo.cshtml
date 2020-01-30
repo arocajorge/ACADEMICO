@@ -121,6 +121,7 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdSucursal, new { @id = "IdSucursal" })
+    @Html.HiddenFor(q => q.IdCatalogo_FormaPago, new { @id = "IdCatalogo_FormaPago" })
     @Html.HiddenFor(q => q.Validar, new { @id = "Validar" })
     if (ViewBag.mensaje != null)
     {
@@ -263,13 +264,6 @@
                     <label for="IdPuntoVta">Punto de venta*</label>
                     @Html.DropDownListFor(q => q.IdPuntoVta, new SelectList(ViewBag.lst_ptoventa, "IdPuntoVta", "nom_PuntoVta"), new { @class = "form-control", @id = "IdPuntoVta" })
                     @Html.ValidationMessageFor(q => q.IdPuntoVta, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdCatalogo_FormaPago">Forma de pago*</label>
-                    @Html.DropDownListFor(q => q.IdCatalogo_FormaPago, new SelectList(ViewBag.lst_formapago, "IdCatalogo", "Nombre"), new { @class = "form-control", @id = "IdCatalogo_FormaPago" })
-                    @Html.ValidationMessageFor(q => q.IdCatalogo_FormaPago, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">

@@ -22,7 +22,6 @@ namespace Core.Data.Base
         public int IdCatalogoFichaAg { get; set; }
         public bool TieneElectricidad { get; set; }
         public bool TieneHermanos { get; set; }
-        public string NombreHermanos { get; set; }
         public double SueldoPadre { get; set; }
         public double SueldoMadre { get; set; }
         public double OtroIngresoPadre { get; set; }

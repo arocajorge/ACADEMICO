@@ -24,7 +24,6 @@ namespace Core.Info.Academico
         public bool TieneElectricidad { get; set; }
         [Required(ErrorMessage = "El campo tiene hermanos es obligatorio")]
         public bool TieneHermanos { get; set; }
-        public string NombreHermanos { get; set; }
         [Required(ErrorMessage = "El campo sueldo del padre es obligatorio")]
         public double SueldoPadre { get; set; }
         [Required(ErrorMessage = "El campo sueldo de la madre es obligatorio")]

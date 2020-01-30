@@ -39,8 +39,7 @@ namespace Core.Data.Base
         public int orden { get; set; }
         public string observacion { get; set; }
         public bool Se_Mustra_Disenador_rpt { get; set; }
-        public virtual tb_modulo tb_modulo { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Reporte_x_seg_usuario> aca_Reporte_x_seg_usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

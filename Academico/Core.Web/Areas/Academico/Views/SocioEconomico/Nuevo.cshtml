@@ -112,20 +112,9 @@
                             {
                                 settings.Name = "TieneHermanos";
                                 settings.Text = "Tiene hermanos en la institución";
-                                settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_div();}";
+                                //settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_div();}";
                             }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.TieneHermanos, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" id="tiene_hermanos">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="IdEmpresa">Nombres y curso*</label>
-                                @Html.TextBoxFor(q => q.NombreHermanos, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(m => m.NombreHermanos, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -363,15 +352,6 @@
             sumar_egresos();
         });
     });
-
-    function mostrar_div() {
-        if (TieneHermanos.GetValue() == true) {
-            $("#tiene_hermanos").show();
-        }
-        else {
-            $("#tiene_hermanos").hide();
-        }
-    }
 
     function mostrar_otro_motivo() {
         var MotivoIngreso = $("#IdCatalogoFichaMot").val();

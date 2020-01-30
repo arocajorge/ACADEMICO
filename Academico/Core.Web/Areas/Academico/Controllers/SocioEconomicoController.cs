@@ -77,15 +77,6 @@ namespace Core.Web.Areas.Academico.Controllers
 
         private bool validar(aca_SocioEconomico_Info info, ref string msg)
         {
-            if (info.TieneHermanos == true)
-            {
-                if (info.NombreHermanos == "" || info.NombreHermanos == null)
-                {
-                    msg = "Debe de ingresar la información de los hermanos";
-                    return false;
-                }
-            }
-
             if (info.IdCatalogoFichaMot == Convert.ToDecimal(cl_enumeradores.eCatalogoSocioEconomico_OtrodMotivos.OTROS_MOTIVOING))
             {
                 if (info.OtroMotivoIngreso == "" || info.OtroMotivoIngreso == null)

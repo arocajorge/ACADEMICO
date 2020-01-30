@@ -54,7 +54,6 @@ namespace Core.Data.Academico
                         IdCatalogoFichaAg = Entity.IdCatalogoFichaAg,
                         TieneElectricidad = Entity.TieneElectricidad,
                         TieneHermanos = Entity.TieneHermanos,
-                        NombreHermanos = Entity.NombreHermanos,
                         SueldoPadre = Entity.SueldoPadre,
                         SueldoMadre = Entity.SueldoMadre,
                         OtroIngresoMadre = Entity.OtroIngresoMadre,
@@ -107,7 +106,6 @@ namespace Core.Data.Academico
                         IdCatalogoFichaVive = Entity.IdCatalogoFichaVive,
                         TieneElectricidad = Entity.TieneElectricidad,
                         TieneHermanos = Entity.TieneHermanos,
-                        NombreHermanos = Entity.NombreHermanos,
                         SueldoPadre = Entity.SueldoPadre,
                         SueldoMadre = Entity.SueldoMadre,
                         OtroIngresoMadre = Entity.OtroIngresoMadre,
@@ -150,7 +148,6 @@ namespace Core.Data.Academico
                         IdCatalogoFichaAg = info.IdCatalogoFichaAg,
                         TieneElectricidad = info.TieneElectricidad,
                         TieneHermanos = info.TieneHermanos,
-                        NombreHermanos = info.NombreHermanos,
                         SueldoPadre = info.SueldoPadre,
                         SueldoMadre = info.SueldoMadre,
                         OtroIngresoMadre = info.OtroIngresoMadre,
@@ -201,7 +198,6 @@ namespace Core.Data.Academico
                     Entity.IdCatalogoFichaAg = info.IdCatalogoFichaAg;
                     Entity.TieneElectricidad = info.TieneElectricidad;
                     Entity.TieneHermanos = info.TieneHermanos;
-                    Entity.NombreHermanos = info.NombreHermanos;
                     Entity.SueldoPadre = info.SueldoPadre;
                     Entity.SueldoMadre = info.SueldoMadre;
                     Entity.OtroIngresoMadre = info.OtroIngresoMadre;

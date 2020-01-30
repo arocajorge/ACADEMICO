@@ -926,7 +926,6 @@
           <Property Name="IdCatalogoFichaAg" Type="int" Nullable="false" />
           <Property Name="TieneElectricidad" Type="bit" Nullable="false" />
           <Property Name="TieneHermanos" Type="bit" Nullable="false" />
-          <Property Name="NombreHermanos" Type="varchar(max)" />
           <Property Name="SueldoPadre" Type="float" Nullable="false" />
           <Property Name="SueldoMadre" Type="float" Nullable="false" />
           <Property Name="OtroIngresoPadre" Type="float" Nullable="false" />
@@ -4160,6 +4159,17 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <EntitySet Name="vwaca_Matricula" EntityType="ModelAcademico.vwaca_Matricula" />
           <EntitySet Name="vwaca_Alumno" EntityType="ModelAcademico.vwaca_Alumno" />
           <EntitySet Name="vwaca_Familia" EntityType="ModelAcademico.vwaca_Familia" />
+          <EntitySet Name="aca_Reporte_x_seg_usuario" EntityType="ModelAcademico.aca_Reporte_x_seg_usuario" />
+          <EntitySet Name="aca_Reporte_x_tb_empresa" EntityType="ModelAcademico.aca_Reporte_x_tb_empresa" />
+          <EntitySet Name="aca_Reporte" EntityType="ModelAcademico.aca_Reporte" />
+          <AssociationSet Name="FK_aca_Reporte_x_seg_usuario_aca_Reporte" Association="ModelAcademico.FK_aca_Reporte_x_seg_usuario_aca_Reporte">
+            <End Role="aca_Reporte" EntitySet="aca_Reporte" />
+            <End Role="aca_Reporte_x_seg_usuario" EntitySet="aca_Reporte_x_seg_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Reporte_x_tb_empresa_aca_Reporte" Association="ModelAcademico.FK_aca_Reporte_x_tb_empresa_aca_Reporte">
+            <End Role="aca_Reporte" EntitySet="aca_Reporte" />
+            <End Role="aca_Reporte_x_tb_empresa" EntitySet="aca_Reporte_x_tb_empresa" />
+          </AssociationSet>
           <EntitySet Name="aca_SocioEconomico" EntityType="ModelAcademico.aca_SocioEconomico" />
           <AssociationSet Name="FK_aca_SocioEconomico_aca_Alumno" Association="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno">
             <End Role="aca_Alumno" EntitySet="aca_Alumno" />
@@ -4192,17 +4202,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <AssociationSet Name="FK_aca_SocioEconomico_aca_CatalogoFicha6" Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha6">
             <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
             <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
-          </AssociationSet>
-          <EntitySet Name="aca_Reporte_x_seg_usuario" EntityType="ModelAcademico.aca_Reporte_x_seg_usuario" />
-          <EntitySet Name="aca_Reporte_x_tb_empresa" EntityType="ModelAcademico.aca_Reporte_x_tb_empresa" />
-          <EntitySet Name="aca_Reporte" EntityType="ModelAcademico.aca_Reporte" />
-          <AssociationSet Name="FK_aca_Reporte_x_seg_usuario_aca_Reporte" Association="ModelAcademico.FK_aca_Reporte_x_seg_usuario_aca_Reporte">
-            <End Role="aca_Reporte" EntitySet="aca_Reporte" />
-            <End Role="aca_Reporte_x_seg_usuario" EntitySet="aca_Reporte_x_seg_usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_Reporte_x_tb_empresa_aca_Reporte" Association="ModelAcademico.FK_aca_Reporte_x_tb_empresa_aca_Reporte">
-            <End Role="aca_Reporte" EntitySet="aca_Reporte" />
-            <End Role="aca_Reporte_x_tb_empresa" EntitySet="aca_Reporte_x_tb_empresa" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
@@ -7033,6 +7032,76 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <Property Name="EstaFallecido" Type="Boolean" Nullable="false" />
           <Property Name="IdGrupoEtnico" Type="Int32" />
         </EntityType>
+        <EntityType Name="aca_Reporte_x_seg_usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="CodReporte" />
+          </Key>
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aca_Reporte" Relationship="ModelAcademico.FK_aca_Reporte_x_seg_usuario_aca_Reporte" FromRole="aca_Reporte_x_seg_usuario" ToRole="aca_Reporte" />
+        </EntityType>
+        <EntityType Name="aca_Reporte_x_tb_empresa">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="CodReporte" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReporteDisenio" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="aca_Reporte" Relationship="ModelAcademico.FK_aca_Reporte_x_tb_empresa_aca_Reporte" FromRole="aca_Reporte_x_tb_empresa" ToRole="aca_Reporte" />
+        </EntityType>
+        <EntityType Name="aca_Reporte">
+          <Key>
+            <PropertyRef Name="CodReporte" />
+          </Key>
+          <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nom_reporte" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="CodModulo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="rpt_vista" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rpt_usa_store_procedure" Type="Boolean" Nullable="false" />
+          <Property Name="rpt_store_procedure" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="rpt_clase_info" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="rpt_clase_data" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rpt_clase_bus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rpt_clase_rpt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mvc_area" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="mvc_controlador" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="mvc_accion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Boolean" Nullable="false" />
+          <Property Name="se_muestra_administrador_reportes" Type="Boolean" Nullable="false" />
+          <Property Name="orden" Type="Int32" Nullable="false" />
+          <Property Name="observacion" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Se_Mustra_Disenador_rpt" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="aca_Reporte_x_seg_usuario" Relationship="ModelAcademico.FK_aca_Reporte_x_seg_usuario_aca_Reporte" FromRole="aca_Reporte" ToRole="aca_Reporte_x_seg_usuario" />
+          <NavigationProperty Name="aca_Reporte_x_tb_empresa" Relationship="ModelAcademico.FK_aca_Reporte_x_tb_empresa_aca_Reporte" FromRole="aca_Reporte" ToRole="aca_Reporte_x_tb_empresa" />
+        </EntityType>
+        <Association Name="FK_aca_Reporte_x_seg_usuario_aca_Reporte">
+          <End Type="ModelAcademico.aca_Reporte" Role="aca_Reporte" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Reporte_x_seg_usuario" Role="aca_Reporte_x_seg_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Reporte">
+              <PropertyRef Name="CodReporte" />
+            </Principal>
+            <Dependent Role="aca_Reporte_x_seg_usuario">
+              <PropertyRef Name="CodReporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Reporte_x_tb_empresa_aca_Reporte">
+          <End Type="ModelAcademico.aca_Reporte" Role="aca_Reporte" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Reporte_x_tb_empresa" Role="aca_Reporte_x_tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Reporte">
+              <PropertyRef Name="CodReporte" />
+            </Principal>
+            <Dependent Role="aca_Reporte_x_tb_empresa">
+              <PropertyRef Name="CodReporte" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="aca_SocioEconomico">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7046,7 +7115,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <Property Name="IdCatalogoFichaAg" Type="Int32" Nullable="false" />
           <Property Name="TieneElectricidad" Type="Boolean" Nullable="false" />
           <Property Name="TieneHermanos" Type="Boolean" Nullable="false" />
-          <Property Name="NombreHermanos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="SueldoPadre" Type="Double" Nullable="false" />
           <Property Name="SueldoMadre" Type="Double" Nullable="false" />
           <Property Name="OtroIngresoPadre" Type="Double" Nullable="false" />
@@ -7174,76 +7242,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             </Principal>
             <Dependent Role="aca_SocioEconomico">
               <PropertyRef Name="IdCatalogoFichaVive" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="aca_Reporte_x_seg_usuario">
-          <Key>
-            <PropertyRef Name="IdUsuario" />
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="CodReporte" />
-          </Key>
-          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aca_Reporte" Relationship="ModelAcademico.FK_aca_Reporte_x_seg_usuario_aca_Reporte" FromRole="aca_Reporte_x_seg_usuario" ToRole="aca_Reporte" />
-        </EntityType>
-        <EntityType Name="aca_Reporte_x_tb_empresa">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="CodReporte" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ReporteDisenio" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="aca_Reporte" Relationship="ModelAcademico.FK_aca_Reporte_x_tb_empresa_aca_Reporte" FromRole="aca_Reporte_x_tb_empresa" ToRole="aca_Reporte" />
-        </EntityType>
-        <EntityType Name="aca_Reporte">
-          <Key>
-            <PropertyRef Name="CodReporte" />
-          </Key>
-          <Property Name="CodReporte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="nom_reporte" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="CodModulo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="rpt_vista" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="rpt_usa_store_procedure" Type="Boolean" Nullable="false" />
-          <Property Name="rpt_store_procedure" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="rpt_clase_info" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="rpt_clase_data" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="rpt_clase_bus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="rpt_clase_rpt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="mvc_area" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="mvc_controlador" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="mvc_accion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="estado" Type="Boolean" Nullable="false" />
-          <Property Name="se_muestra_administrador_reportes" Type="Boolean" Nullable="false" />
-          <Property Name="orden" Type="Int32" Nullable="false" />
-          <Property Name="observacion" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <Property Name="Se_Mustra_Disenador_rpt" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="aca_Reporte_x_seg_usuario" Relationship="ModelAcademico.FK_aca_Reporte_x_seg_usuario_aca_Reporte" FromRole="aca_Reporte" ToRole="aca_Reporte_x_seg_usuario" />
-          <NavigationProperty Name="aca_Reporte_x_tb_empresa" Relationship="ModelAcademico.FK_aca_Reporte_x_tb_empresa_aca_Reporte" FromRole="aca_Reporte" ToRole="aca_Reporte_x_tb_empresa" />
-        </EntityType>
-        <Association Name="FK_aca_Reporte_x_seg_usuario_aca_Reporte">
-          <End Type="ModelAcademico.aca_Reporte" Role="aca_Reporte" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Reporte_x_seg_usuario" Role="aca_Reporte_x_seg_usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Reporte">
-              <PropertyRef Name="CodReporte" />
-            </Principal>
-            <Dependent Role="aca_Reporte_x_seg_usuario">
-              <PropertyRef Name="CodReporte" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_Reporte_x_tb_empresa_aca_Reporte">
-          <End Type="ModelAcademico.aca_Reporte" Role="aca_Reporte" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Reporte_x_tb_empresa" Role="aca_Reporte_x_tb_empresa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Reporte">
-              <PropertyRef Name="CodReporte" />
-            </Principal>
-            <Dependent Role="aca_Reporte_x_tb_empresa">
-              <PropertyRef Name="CodReporte" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8587,44 +8585,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="aca_SocioEconomico">
-            <EntityTypeMapping TypeName="ModelAcademico.aca_SocioEconomico">
-              <MappingFragment StoreEntitySet="aca_SocioEconomico">
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="OtroFinanciamiento" ColumnName="OtroFinanciamiento" />
-                <ScalarProperty Name="OtroInformacionInst" ColumnName="OtroInformacionInst" />
-                <ScalarProperty Name="OtroMotivoIngreso" ColumnName="OtroMotivoIngreso" />
-                <ScalarProperty Name="IdCatalogoFichaVive" ColumnName="IdCatalogoFichaVive" />
-                <ScalarProperty Name="IdCatalogoFichaFin" ColumnName="IdCatalogoFichaFin" />
-                <ScalarProperty Name="IdCatalogoFichaIns" ColumnName="IdCatalogoFichaIns" />
-                <ScalarProperty Name="IdCatalogoFichaMot" ColumnName="IdCatalogoFichaMot" />
-                <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />
-                <ScalarProperty Name="GastoPrestamo" ColumnName="GastoPrestamo" />
-                <ScalarProperty Name="GastoArriendo" ColumnName="GastoArriendo" />
-                <ScalarProperty Name="GastoSalud" ColumnName="GastoSalud" />
-                <ScalarProperty Name="GastoServicioBasico" ColumnName="GastoServicioBasico" />
-                <ScalarProperty Name="GastoEducacion" ColumnName="GastoEducacion" />
-                <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
-                <ScalarProperty Name="OtroIngresoMadre" ColumnName="OtroIngresoMadre" />
-                <ScalarProperty Name="OtroIngresoPadre" ColumnName="OtroIngresoPadre" />
-                <ScalarProperty Name="SueldoMadre" ColumnName="SueldoMadre" />
-                <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
-                <ScalarProperty Name="NombreHermanos" ColumnName="NombreHermanos" />
-                <ScalarProperty Name="TieneHermanos" ColumnName="TieneHermanos" />
-                <ScalarProperty Name="TieneElectricidad" ColumnName="TieneElectricidad" />
-                <ScalarProperty Name="IdCatalogoFichaAg" ColumnName="IdCatalogoFichaAg" />
-                <ScalarProperty Name="IdCatalogoFichaTVi" ColumnName="IdCatalogoFichaTVi" />
-                <ScalarProperty Name="IdCatalogoFichaVi" ColumnName="IdCatalogoFichaVi" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="IdSocioEconomico" ColumnName="IdSocioEconomico" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="aca_Reporte_x_seg_usuario">
             <EntityTypeMapping TypeName="ModelAcademico.aca_Reporte_x_seg_usuario">
               <MappingFragment StoreEntitySet="aca_Reporte_x_seg_usuario">
@@ -8664,6 +8624,43 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
                 <ScalarProperty Name="CodModulo" ColumnName="CodModulo" />
                 <ScalarProperty Name="nom_reporte" ColumnName="nom_reporte" />
                 <ScalarProperty Name="CodReporte" ColumnName="CodReporte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_SocioEconomico">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_SocioEconomico">
+              <MappingFragment StoreEntitySet="aca_SocioEconomico">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="OtroFinanciamiento" ColumnName="OtroFinanciamiento" />
+                <ScalarProperty Name="OtroInformacionInst" ColumnName="OtroInformacionInst" />
+                <ScalarProperty Name="OtroMotivoIngreso" ColumnName="OtroMotivoIngreso" />
+                <ScalarProperty Name="IdCatalogoFichaVive" ColumnName="IdCatalogoFichaVive" />
+                <ScalarProperty Name="IdCatalogoFichaFin" ColumnName="IdCatalogoFichaFin" />
+                <ScalarProperty Name="IdCatalogoFichaIns" ColumnName="IdCatalogoFichaIns" />
+                <ScalarProperty Name="IdCatalogoFichaMot" ColumnName="IdCatalogoFichaMot" />
+                <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />
+                <ScalarProperty Name="GastoPrestamo" ColumnName="GastoPrestamo" />
+                <ScalarProperty Name="GastoArriendo" ColumnName="GastoArriendo" />
+                <ScalarProperty Name="GastoSalud" ColumnName="GastoSalud" />
+                <ScalarProperty Name="GastoServicioBasico" ColumnName="GastoServicioBasico" />
+                <ScalarProperty Name="GastoEducacion" ColumnName="GastoEducacion" />
+                <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
+                <ScalarProperty Name="OtroIngresoMadre" ColumnName="OtroIngresoMadre" />
+                <ScalarProperty Name="OtroIngresoPadre" ColumnName="OtroIngresoPadre" />
+                <ScalarProperty Name="SueldoMadre" ColumnName="SueldoMadre" />
+                <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
+                <ScalarProperty Name="TieneHermanos" ColumnName="TieneHermanos" />
+                <ScalarProperty Name="TieneElectricidad" ColumnName="TieneElectricidad" />
+                <ScalarProperty Name="IdCatalogoFichaAg" ColumnName="IdCatalogoFichaAg" />
+                <ScalarProperty Name="IdCatalogoFichaTVi" ColumnName="IdCatalogoFichaTVi" />
+                <ScalarProperty Name="IdCatalogoFichaVi" ColumnName="IdCatalogoFichaVi" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdSocioEconomico" ColumnName="IdSocioEconomico" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

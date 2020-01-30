@@ -352,7 +352,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                         if (item.AplicaProntoPago == true)
                         {
-                            if (DateTime.Now <= info_anio_periodo.FechaProntoPago)
+                            if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
                             {
                                 if (info_plantilla.TipoDescuento == "%")
                                 {
@@ -1016,7 +1016,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                 Fecha = DateTime.Now.Date,
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
-                IdCatalogo_FormaPago = "EFEC",
+                IdCatalogo_FormaPago = "CRE",
                 Validar = "S"
             };
             model.lst_matricula_curso = new List<aca_Matricula_Info>();

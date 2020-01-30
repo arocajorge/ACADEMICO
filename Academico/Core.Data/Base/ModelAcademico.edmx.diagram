@@ -149,7 +149,12 @@
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula" Width="1.5" PointX="11.375" PointY="14.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Alumno" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Familia" Width="1.5" PointX="12.75" PointY="25.75" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_SocioEconomico" Width="1.5" PointX="28.875" PointY="17.25" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_Reporte_x_seg_usuario" Width="1.5" PointX="29.625" PointY="1.375" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_Reporte_x_tb_empresa" Width="1.5" PointX="29.625" PointY="3.875" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_Reporte" Width="1.5" PointX="27.375" PointY="0.75" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_Reporte_x_seg_usuario_aca_Reporte" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_Reporte_x_tb_empresa_aca_Reporte" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_SocioEconomico" Width="1.5" PointX="28.875" PointY="17.375" />
         <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno" />
         <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha" />
         <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha1" />
@@ -158,11 +163,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha4" />
         <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha5" />
         <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha6" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_Reporte_x_seg_usuario" Width="1.5" PointX="29.625" PointY="1.375" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_Reporte_x_tb_empresa" Width="1.5" PointX="29.625" PointY="3.875" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_Reporte" Width="1.5" PointX="27.375" PointY="0.75" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_Reporte_x_seg_usuario_aca_Reporte" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_Reporte_x_tb_empresa_aca_Reporte" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
