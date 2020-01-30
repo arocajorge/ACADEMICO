@@ -151,7 +151,6 @@
             this.p_IdAnio = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -178,7 +177,6 @@
             // PageHeader
             // 
             this.PageHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrSubreport1,
             this.xrTable5,
             this.xrTable3,
             this.xrTable2,
@@ -1666,14 +1664,6 @@
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_001_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
-            // xrSubreport1
-            // 
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 454.1666F);
-            this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.ReportSource = new Core.Web.Reportes.Academico.ACA_001_Padre_Rpt();
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(100F, 23F);
-            this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
-            // 
             // ACA_001_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1829,6 +1819,5 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdAlumno;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow21;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell58;
-        private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
     }
 }

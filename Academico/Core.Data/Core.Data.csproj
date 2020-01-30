@@ -122,6 +122,9 @@
     <Compile Include="Base\tb_TarjetaCredito_x_cp_proveedor.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWACA_002.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_Hermanos.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -1210,12 +1213,6 @@
     <Compile Include="Base\tb_sucursal_FormaPago_x_fa_NivelDescuento.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\VWACA_001.cs">
-      <DependentUpon>ModelReportes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\VWACA_001_Familiares.cs">
-      <DependentUpon>ModelReportes.tt</DependentUpon>
-    </Compile>
     <Compile Include="Base\vwaca_Alumno.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -1698,6 +1695,7 @@
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Data.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reportes\Academico\ACA_001_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_002_Data.cs" />
     <Compile Include="RRHH\ro_area_Data.cs" />
     <Compile Include="RRHH\ro_area_x_departamento_Data.cs" />
     <Compile Include="RRHH\ro_cargo_Data.cs" />

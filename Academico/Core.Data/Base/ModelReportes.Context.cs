@@ -25,7 +25,6 @@ namespace Core.Data.Base
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<VWACA_001> VWACA_001 { get; set; }
-        public virtual DbSet<VWACA_001_Familiares> VWACA_001_Familiares { get; set; }
+        public virtual DbSet<VWACA_002> VWACA_002 { get; set; }
     }
 }

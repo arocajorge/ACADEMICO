@@ -340,6 +340,12 @@
     <Compile Include="Reportes\Academico\ACA_001_Rpt.Designer.cs">
       <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_002_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_002_Rpt.Designer.cs">
+      <DependentUpon>ACA_002_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -8198,6 +8204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_001_Rpt.resx">
       <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_002_Rpt.resx">
+      <DependentUpon>ACA_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

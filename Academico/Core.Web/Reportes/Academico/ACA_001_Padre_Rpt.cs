@@ -22,7 +22,8 @@ namespace Core.Web.Reportes.Academico
             decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
 
             ACA_001_Bus bus_rpt = new ACA_001_Bus();
-            List<ACA_001_Info> lst_rpt = bus_rpt.GetListPadres(IdEmpresa, IdAlumno);
+            List<ACA_001_Info> lst_rpt = new List<ACA_001_Info>();
+            //List<ACA_001_Info> lst_rpt = bus_rpt.GetListPadres(IdEmpresa, IdAlumno);
 
             this.DataSource = lst_rpt;
         }

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Core.Bus.Reportes.Academico
 {
-    public class ACA_001_Bus
+    public class ACA_002_Bus
     {
-        ACA_001_Data odata = new ACA_001_Data();
-        public List<ACA_001_Info> GetList(int IdEmpresa, decimal IdAlumno, int IdAnio)
+        ACA_002_Data odata = new ACA_002_Data();
+        public List<ACA_002_Info> GetList(int IdEmpresa, decimal IdAlumno, int IdAnio)
         {
             try
             {
