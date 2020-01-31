@@ -48,6 +48,7 @@ namespace Core.Data.Academico
                             FechaHasta = q.FechaHasta,
                             EnCurso = q.EnCurso,
                             BloquearMatricula = q.BloquearMatricula,
+                            IdAnioLectivoAnterior = q.IdAnioLectivoAnterior,
                             Estado = q.Estado
                         });
                     });
@@ -113,6 +114,7 @@ namespace Core.Data.Academico
                         FechaHasta = Entity.FechaHasta,
                         EnCurso = Entity.EnCurso,
                         BloquearMatricula = Entity.BloquearMatricula,
+                        IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
                         Estado = Entity.Estado
                     };
                 }
@@ -147,6 +149,7 @@ namespace Core.Data.Academico
                         FechaHasta = Entity.FechaHasta,
                         EnCurso = Entity.EnCurso,
                         BloquearMatricula = Entity.BloquearMatricula,
+                        IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
                         Estado = Entity.Estado
                     };
                 }
@@ -180,6 +183,7 @@ namespace Core.Data.Academico
                         FechaDesde = Entity.FechaDesde,
                         FechaHasta = Entity.FechaHasta,
                         EnCurso = Entity.EnCurso,
+                        IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
                         Estado = Entity.Estado
                     };
                 }
@@ -231,6 +235,7 @@ namespace Core.Data.Academico
                         FechaHasta = info.FechaHasta,
                         EnCurso = info.EnCurso,
                         BloquearMatricula = info.BloquearMatricula,
+                        IdAnioLectivoAnterior = info.IdAnioLectivoAnterior,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -286,6 +291,7 @@ namespace Core.Data.Academico
                     Entity.FechaHasta = info.FechaHasta;
                     Entity.EnCurso = info.EnCurso;
                     Entity.BloquearMatricula = info.BloquearMatricula;
+                    Entity.IdAnioLectivoAnterior = info.IdAnioLectivoAnterior;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 

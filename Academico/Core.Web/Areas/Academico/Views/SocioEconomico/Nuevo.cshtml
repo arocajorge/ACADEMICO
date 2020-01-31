@@ -112,9 +112,16 @@
                             {
                                 settings.Name = "TieneHermanos";
                                 settings.Text = "Tiene hermanos en la institución";
-                                //settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_div();}";
+                                settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_div();}";
                             }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.TieneHermanos, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2" id="cant_hermanos" hidden>
+                            <div class="form-group">
+                                <label for="IdEmpresa">Cantidad de hermanos</label>
+                                @Html.TextBoxFor(q => q.CantidadHermanos, new { @class = "form-control", @id = "CantidadHermanos" })
+                                @Html.ValidationMessageFor(m => m.CantidadHermanos, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -382,6 +389,15 @@
             $("#otro_forma_financ").hide();
         }
     };
+
+    function mostrar_div() {
+        if (TieneHermanos.GetValue() == true) {
+            $("#cant_hermanos").show();
+        }
+        else {
+            $("#cant_hermanos").hide();
+        }
+    }
 
     function sumar_ingresos()
     {

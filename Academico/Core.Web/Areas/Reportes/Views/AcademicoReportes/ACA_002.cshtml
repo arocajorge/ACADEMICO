@@ -1,16 +1,15 @@
 ﻿@model Core.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Ficha del estudiante";
+    ViewBag.Title = "Solicitud de matrícula";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
 }
-@using (Html.BeginForm("ACA_001", "AcademicoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("ACA_002", "AcademicoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdSucursal)
     <div class="box">
         <div class="box-header with-border">
             <div class="row">

@@ -24,7 +24,6 @@ namespace Core.Data.Base
         public int IdParalelo { get; set; }
         public Nullable<decimal> IdProfesor { get; set; }
     
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_Curso aca_Curso { get; set; }
         public virtual aca_Jornada aca_Jornada { get; set; }
         public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
@@ -32,5 +31,6 @@ namespace Core.Data.Base
         public virtual aca_Profesor aca_Profesor { get; set; }
         public virtual aca_Sede aca_Sede { get; set; }
         public virtual aca_Materia aca_Materia { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

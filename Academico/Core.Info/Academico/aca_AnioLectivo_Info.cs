@@ -20,6 +20,7 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo fecha desde es obligatorio")]
         public System.DateTime FechaHasta { get; set; }
         public bool BloquearMatricula { get; set; }
+        public Nullable<int> IdAnioLectivoAnterior { get; set; }
         public bool Estado { get; set; }
         public bool EnCurso { get; set; }
         public string IdUsuarioCreacion { get; set; }

@@ -40,6 +40,7 @@ namespace Core.Data.Base
         public string OtroMotivoIngreso { get; set; }
         public string OtroInformacionInst { get; set; }
         public string OtroFinanciamiento { get; set; }
+        public Nullable<int> CantidadHermanos { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

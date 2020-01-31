@@ -12,20 +12,21 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_AnioLectivoCalificacionHistorico
+    public partial class VWACA_003
     {
         public int IdEmpresa { get; set; }
-        public int IdAnio { get; set; }
+        public decimal IdMatricula { get; set; }
         public decimal IdAlumno { get; set; }
-        public int IdNivel { get; set; }
-        public int IdCurso { get; set; }
-        public string AntiguaInstitucion { get; set; }
-        public decimal Promedio { get; set; }
-        public decimal Conducta { get; set; }
-    
-        public virtual aca_Alumno aca_Alumno { get; set; }
-        public virtual aca_Curso aca_Curso { get; set; }
-        public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
+        public string NomRepresentante { get; set; }
+        public string CedulaRepresentante { get; set; }
+        public string NomSeFactura { get; set; }
+        public string CedulaSeFactura { get; set; }
+        public string NomAlumno { get; set; }
+        public string CedulaAlumno { get; set; }
+        public string NomCurso { get; set; }
+        public string DescripcionActual { get; set; }
+        public string DescripcionAnterior { get; set; }
+        public string Direccion { get; set; }
+        public string DescripcionPensiones { get; set; }
     }
 }

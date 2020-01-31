@@ -107,6 +107,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Año Lectivo Anterior</label>
+                    @Html.Partial("_ComboBoxPartial_Anio", Model)
+                    @Html.ValidationMessageFor(q => q.IdAnioLectivoAnterior, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group has-error">
                     <label for="Rector">Motivo de anulación*</label>

@@ -113,6 +113,9 @@
     <Compile Include="Base\fa_PuntoVta_x_seg_usuario.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPACA_001_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_GrupoEtnico.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
@@ -123,6 +126,9 @@
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\VWACA_002.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWACA_003.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Hermanos.cs">

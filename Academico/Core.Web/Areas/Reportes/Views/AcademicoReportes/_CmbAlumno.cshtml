@@ -16,7 +16,6 @@
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);
         settings.Properties.Columns.Add("pe_cedulaRuc", "Identificacion", 20);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Alumno", 70);
-        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdComboCurso.PerformCallback(); ValidarMatricula(s,e); }";
     })
     .BindList(new Core.Web.Areas.Reportes.Controllers.AcademicoReportesController().get_list_bajo_demanda_alumno, new Core.Web.Areas.Reportes.Controllers.AcademicoReportesController().get_info_bajo_demanda_alumno)
     .Bind(Model.GetType() == typeof(Core.Info.Helps.cl_filtros_Info) ? "" : (Model == 0 ? "" : Model));

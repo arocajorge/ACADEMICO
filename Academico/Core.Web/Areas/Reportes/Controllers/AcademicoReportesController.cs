@@ -48,6 +48,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
@@ -57,6 +58,60 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             #region Cargo diseño desde base
             var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_001");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = IdAnio;
+            report.p_IdAlumno.Value = IdAlumno;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ACA_001(cl_filtros_Info model)
+        {
+            ACA_001_Rpt report = new ACA_001_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_001");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+
+        public ActionResult ACA_002(int IdEmpresa = 0, decimal IdAlumno = 0, int IdAnio = 0)
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdAlumno = IdAlumno;
+            ACA_002_Rpt report = new ACA_002_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_002");
             if (reporte != null)
             {
                 System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
@@ -75,12 +130,12 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
 
         [HttpPost]
-        public ActionResult ACA_001(cl_filtros_Info model)
+        public ActionResult ACA_002(cl_filtros_Info model)
         {
-            ACA_001_Rpt report = new ACA_001_Rpt();
+            ACA_002_Rpt report = new ACA_002_Rpt();
             #region Cargo diseño desde base
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_001");
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_002");
             if (reporte != null)
             {
                 System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);

@@ -20,6 +20,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_002' no tien
             <PropertyRef Name="NomJornada" />
             <PropertyRef Name="NomCurso" />
             <PropertyRef Name="NomParalelo" />
+            <PropertyRef Name="CodigoAlumno" />
             <PropertyRef Name="NombreAlumno" />
             <PropertyRef Name="CedulaRep" />
             <PropertyRef Name="NombreRep" />
@@ -36,16 +37,46 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_002' no tien
           <Property Name="NomJornada" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="NomCurso" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="NomParalelo" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="CodigoAlumno" Type="varchar" MaxLength="200" />
+          <Property Name="CodigoAlumno" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="NombreAlumno" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="CedulaRep" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NombreRep" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="NomPlantilla" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001_Familiares' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWACA_003">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="NomRepresentante" />
+            <PropertyRef Name="CedulaRepresentante" />
+            <PropertyRef Name="NomSeFactura" />
+            <PropertyRef Name="CedulaSeFactura" />
+            <PropertyRef Name="NomAlumno" />
+            <PropertyRef Name="NomCurso" />
+            <PropertyRef Name="DescripcionActual" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NomRepresentante" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CedulaRepresentante" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomSeFactura" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CedulaSeFactura" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NomAlumno" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CedulaAlumno" Type="varchar" MaxLength="100" />
+          <Property Name="NomCurso" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="DescripcionActual" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescripcionAnterior" Type="varchar" MaxLength="50" />
+          <Property Name="Direccion" Type="varchar" MaxLength="1000" />
+          <Property Name="DescripcionPensiones" Type="varchar" MaxLength="91" />
+        </EntityType>
+        <Function Name="SPACA_001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdAlumno" Type="numeric" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelReportesStoreContainer">
           <EntitySet Name="VWACA_002" EntityType="Self.VWACA_002" store:Type="Views" store:Schema="Academico">
             <DefiningQuery>SELECT 
@@ -67,6 +98,24 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001_Familiares' no
     [VWACA_002].[NomPlantilla] AS [NomPlantilla]
     FROM [Academico].[VWACA_002] AS [VWACA_002]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWACA_003" EntityType="Self.VWACA_003" store:Type="Views" store:Schema="Academico">
+            <DefiningQuery>SELECT 
+    [VWACA_003].[IdEmpresa] AS [IdEmpresa], 
+    [VWACA_003].[IdMatricula] AS [IdMatricula], 
+    [VWACA_003].[IdAlumno] AS [IdAlumno], 
+    [VWACA_003].[NomRepresentante] AS [NomRepresentante], 
+    [VWACA_003].[CedulaRepresentante] AS [CedulaRepresentante], 
+    [VWACA_003].[NomSeFactura] AS [NomSeFactura], 
+    [VWACA_003].[CedulaSeFactura] AS [CedulaSeFactura], 
+    [VWACA_003].[NomAlumno] AS [NomAlumno], 
+    [VWACA_003].[CedulaAlumno] AS [CedulaAlumno], 
+    [VWACA_003].[NomCurso] AS [NomCurso], 
+    [VWACA_003].[DescripcionActual] AS [DescripcionActual], 
+    [VWACA_003].[DescripcionAnterior] AS [DescripcionAnterior], 
+    [VWACA_003].[Direccion] AS [Direccion], 
+    [VWACA_003].[DescripcionPensiones] AS [DescripcionPensiones]
+    FROM [Academico].[VWACA_003] AS [VWACA_003]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -74,6 +123,11 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001_Familiares' no
       <Schema Namespace="ModelReportes" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="EntitiesReportes" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="VWACA_002" EntityType="ModelReportes.VWACA_002" />
+          <EntitySet Name="VWACA_003" EntityType="ModelReportes.VWACA_003" />
+          <FunctionImport Name="SPACA_001" ReturnType="Collection(ModelReportes.SPACA_001_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="VWACA_002">
           <Key>
@@ -88,6 +142,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001_Familiares' no
             <PropertyRef Name="NomJornada" />
             <PropertyRef Name="NomCurso" />
             <PropertyRef Name="NomParalelo" />
+            <PropertyRef Name="CodigoAlumno" />
             <PropertyRef Name="NombreAlumno" />
             <PropertyRef Name="CedulaRep" />
             <PropertyRef Name="NombreRep" />
@@ -104,12 +159,99 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001_Familiares' no
           <Property Name="NomJornada" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="NomParalelo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="CodigoAlumno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NombreAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CedulaRep" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NombreRep" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="NomPlantilla" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="VWACA_003">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="NomRepresentante" />
+            <PropertyRef Name="CedulaRepresentante" />
+            <PropertyRef Name="NomSeFactura" />
+            <PropertyRef Name="CedulaSeFactura" />
+            <PropertyRef Name="NomAlumno" />
+            <PropertyRef Name="NomCurso" />
+            <PropertyRef Name="DescripcionActual" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NomRepresentante" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CedulaRepresentante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomSeFactura" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CedulaSeFactura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CedulaAlumno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionActual" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionAnterior" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionPensiones" Type="String" MaxLength="91" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="SPACA_001_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="CodigoMatricula" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomAnio" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CodigoAlumno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="pe_nombre" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="pe_apellido" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="pe_sexo" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Nacionalidad" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CodigoParalelo" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="pe_fechaNacimiento" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LugarNacimiento" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Celular" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Correo" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="String" Name="NomPlantilla" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="AntiguaInstitucion" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="Conducta" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Promedio" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="DocumentosCompletos" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="NomVivienda" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomTipoVivienda" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomAgua" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TieneElectricidad" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="NomGrupoEtnico" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TieneHermanos" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="TieneConadis" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="NomConadis" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="NomViveCon" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="CantidadHermanos" Nullable="true" />
+          <Property Type="Double" Name="TotalGastos" Nullable="true" />
+          <Property Type="String" Name="Observacion" Nullable="true" />
+          <Property Type="String" Name="Titulo" Nullable="true" MaxLength="546" />
+          <Property Type="String" Name="NomFamiliar" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NomEstadoCivil" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="DireccionFamiliar" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="NomInstruccion" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="EmpresaTrabajo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CorreoFamiliar" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="VehiculoPropio" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Marca" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Modelo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AnioVehiculo" Nullable="true" />
+          <Property Type="String" Name="CedulaRucFamiliar" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomProfesion" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CelularFamiliar" Nullable="true" MaxLength="500" />
+          <Property Type="Double" Name="IngresoMensual" Nullable="true" />
+          <Property Type="Double" Name="OtrosIngresos" Nullable="true" />
+          <Property Type="String" Name="IdUsuarioCreacion" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NivelProcedencia" Nullable="true" MaxLength="500" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -138,6 +280,89 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWACA_001_Familiares' no
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VWACA_003">
+            <EntityTypeMapping TypeName="ModelReportes.VWACA_003">
+              <MappingFragment StoreEntitySet="VWACA_003">
+                <ScalarProperty Name="DescripcionPensiones" ColumnName="DescripcionPensiones" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="DescripcionAnterior" ColumnName="DescripcionAnterior" />
+                <ScalarProperty Name="DescripcionActual" ColumnName="DescripcionActual" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="CedulaAlumno" ColumnName="CedulaAlumno" />
+                <ScalarProperty Name="NomAlumno" ColumnName="NomAlumno" />
+                <ScalarProperty Name="CedulaSeFactura" ColumnName="CedulaSeFactura" />
+                <ScalarProperty Name="NomSeFactura" ColumnName="NomSeFactura" />
+                <ScalarProperty Name="CedulaRepresentante" ColumnName="CedulaRepresentante" />
+                <ScalarProperty Name="NomRepresentante" ColumnName="NomRepresentante" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_001" FunctionName="ModelReportes.Store.SPACA_001">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPACA_001_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="CodigoMatricula" ColumnName="CodigoMatricula" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="NomAnio" ColumnName="NomAnio" />
+                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="CodigoParalelo" ColumnName="CodigoParalelo" />
+                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="NomPlantilla" ColumnName="NomPlantilla" />
+                <ScalarProperty Name="AntiguaInstitucion" ColumnName="AntiguaInstitucion" />
+                <ScalarProperty Name="Conducta" ColumnName="Conducta" />
+                <ScalarProperty Name="Promedio" ColumnName="Promedio" />
+                <ScalarProperty Name="DocumentosCompletos" ColumnName="DocumentosCompletos" />
+                <ScalarProperty Name="NomVivienda" ColumnName="NomVivienda" />
+                <ScalarProperty Name="NomTipoVivienda" ColumnName="NomTipoVivienda" />
+                <ScalarProperty Name="NomAgua" ColumnName="NomAgua" />
+                <ScalarProperty Name="TieneElectricidad" ColumnName="TieneElectricidad" />
+                <ScalarProperty Name="NomGrupoEtnico" ColumnName="NomGrupoEtnico" />
+                <ScalarProperty Name="TieneHermanos" ColumnName="TieneHermanos" />
+                <ScalarProperty Name="TieneConadis" ColumnName="TieneConadis" />
+                <ScalarProperty Name="NomConadis" ColumnName="NomConadis" />
+                <ScalarProperty Name="NomViveCon" ColumnName="NomViveCon" />
+                <ScalarProperty Name="CantidadHermanos" ColumnName="CantidadHermanos" />
+                <ScalarProperty Name="TotalGastos" ColumnName="TotalGastos" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="NomFamiliar" ColumnName="NomFamiliar" />
+                <ScalarProperty Name="NomEstadoCivil" ColumnName="NomEstadoCivil" />
+                <ScalarProperty Name="DireccionFamiliar" ColumnName="DireccionFamiliar" />
+                <ScalarProperty Name="NomInstruccion" ColumnName="NomInstruccion" />
+                <ScalarProperty Name="EmpresaTrabajo" ColumnName="EmpresaTrabajo" />
+                <ScalarProperty Name="CorreoFamiliar" ColumnName="CorreoFamiliar" />
+                <ScalarProperty Name="VehiculoPropio" ColumnName="VehiculoPropio" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="AnioVehiculo" ColumnName="AnioVehiculo" />
+                <ScalarProperty Name="CedulaRucFamiliar" ColumnName="CedulaRucFamiliar" />
+                <ScalarProperty Name="NomProfesion" ColumnName="NomProfesion" />
+                <ScalarProperty Name="CelularFamiliar" ColumnName="CelularFamiliar" />
+                <ScalarProperty Name="IngresoMensual" ColumnName="IngresoMensual" />
+                <ScalarProperty Name="OtrosIngresos" ColumnName="OtrosIngresos" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="NivelProcedencia" ColumnName="NivelProcedencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
