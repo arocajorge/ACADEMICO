@@ -334,6 +334,12 @@
     <Compile Include="Reportes\Academico\ACA_002_Rpt.Designer.cs">
       <DependentUpon>ACA_002_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_003_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_003_Rpt.Designer.cs">
+      <DependentUpon>ACA_003_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -8095,6 +8101,8 @@
     <Content Include="Areas\General\Views\TarjetaCredito\Nuevo.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_002.cshtml" />
     <Content Include="Areas\Academico\Views\AnioLectivo\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_003.cshtml" />
+    <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -8191,6 +8199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_002_Rpt.resx">
       <DependentUpon>ACA_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_003_Rpt.resx">
+      <DependentUpon>ACA_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

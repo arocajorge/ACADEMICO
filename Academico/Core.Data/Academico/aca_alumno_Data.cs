@@ -240,7 +240,7 @@ namespace Core.Data.Academico
                         IdEmpresa = info.IdEmpresa,
                         IdAlumno = info.IdAlumno = getId(info.IdEmpresa),
                         IdPersona = info.IdPersona,
-                        Codigo = Codigo,
+                        Codigo = info.Codigo,
                         Estado = true,
                         Correo = info.Correo,
                         Direccion = info.Direccion,

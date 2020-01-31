@@ -1207,7 +1207,6 @@ namespace Core.Web.Areas.Academico.Controllers
                                     pe_direccion = Convert.ToString(reader.GetValue(8)).Trim(),
                                     pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim(),
                                     pe_correo = Convert.ToString(reader.GetValue(9)).Trim(),
-                                    pe_celular= Convert.ToString(reader.GetValue(11)).Trim()
                                 };
                                 info_persona_alumno = info_alumno;
                             }
@@ -1226,7 +1225,6 @@ namespace Core.Web.Areas.Academico.Controllers
                                 info_persona_alumno.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim();
                                 info_persona_alumno.pe_correo = Convert.ToString(reader.GetValue(9)).Trim();
                                 info_persona_alumno.pe_sexo = Convert.ToString(reader.GetValue(7)).Trim();
-                                info_persona_alumno.pe_celular = Convert.ToString(reader.GetValue(11)).Trim();
                             }
 
                             info_persona_alumno.pe_Naturaleza = return_naturaleza;
@@ -1245,7 +1243,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                 IdCatalogoESTMAT = 1,
                                 IdCurso = null,
                                 IdCatalogoESTALU = 8,
-                                FechaIngreso = Convert.ToDateTime(reader.GetValue(12)),
+                                FechaIngreso = Convert.ToDateTime(reader.GetValue(11)),
                                 LugarNacimiento = "",
                                 IdPais = null,
                                 Cod_Region = null,
@@ -1277,6 +1275,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 var x = reader.ResultsCount;
                 while (reader.Read())
                 {
+                    var Secuencia = 1;
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
                         var return_naturaleza_familia = "";
@@ -1286,7 +1285,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         tb_persona_Info info_persona_fam = new tb_persona_Info();
                         info_persona_fam = lst_persona.Where(q => q.pe_cedulaRuc == cedula_ruc_familia).FirstOrDefault();
                         info_persona_familia = info_persona_fam;
-                        var IdAlumnoFamilia = Lista_Estudiantes.Where(q => q.info_persona_alumno.pe_cedulaRuc == cedula_alumno).FirstOrDefault().IdAlumno;
+                        aca_Alumno_Info InfoAlumno = Lista_Estudiantes.Where(q => q.info_persona_alumno.pe_cedulaRuc == cedula_alumno).FirstOrDefault();
 
                         if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(4)), Convert.ToString(reader.GetValue(3)), cedula_ruc_familia, ref return_naturaleza_familia))
                         {
@@ -1333,40 +1332,43 @@ namespace Core.Web.Areas.Academico.Controllers
                             info_persona_familia.pe_Naturaleza = return_naturaleza_familia;
                             info_persona_familia.pe_nombreCompleto = (info_persona_familia.pe_razonSocial != "" ? info_persona_familia.pe_razonSocial : (info_persona_familia.pe_apellido + ' ' + info_persona_familia.pe_nombre));
 
-                            var Secuencia = 1;
-                            aca_Familia_Info info_fam = new aca_Familia_Info
+                            if (InfoAlumno != null && InfoAlumno.IdAlumno> 0)
                             {
-                                IdEmpresa = IdEmpresa,
-                                IdAlumno = IdAlumnoFamilia,
-                                Secuencia = Secuencia,
-                                IdCatalogoPAREN = Convert.ToInt32(reader.GetValue(1)),
-                                IdPersona = info_persona_familia.IdPersona,
-                                Direccion = Convert.ToString(reader.GetValue(8)).Trim(),
-                                Celular = Convert.ToString(reader.GetValue(11)),
-                                Correo = Convert.ToString(reader.GetValue(9)).Trim(),
-                                SeFactura = (Convert.ToString(reader.GetValue(13)) == "SI" ? true : false),
-                                EsRepresentante = (Convert.ToString(reader.GetValue(12)) == "SI" ? true : false),
-                                EmpresaTrabajo = Convert.ToString(reader.GetValue(14)).Trim(),
-                                DireccionTrabajo = Convert.ToString(reader.GetValue(15)).Trim(),
-                                TelefonoTrabajo = Convert.ToString(reader.GetValue(16)).Trim(),
-                                CargoTrabajo = Convert.ToString(reader.GetValue(17)).Trim(),
-                                AniosServicio = Convert.ToInt32(reader.GetValue(19)),
-                                IngresoMensual = Convert.ToDouble(reader.GetValue(20)),
-                                VehiculoPropio = (Convert.ToString(reader.GetValue(21)) == "SI" ? true : false),
-                                AnioVehiculo = Convert.ToInt32(reader.GetValue(24)),
-                                Marca = Convert.ToString(reader.GetValue(22)).Trim(),
-                                Modelo = Convert.ToString(reader.GetValue(23)).Trim(),
-                                CasaPropia = (Convert.ToString(reader.GetValue(25)) == "SI" ? true : false),
-                                Estado = true,
-                                AsisteCentroCristiano = false,
-                                IdUsuarioCreacion = SessionFixed.IdUsuario,
-                                FechaCreacion = DateTime.Now
-                            };
 
-                            info_fam.info_persona = info_persona_familia;
+                                aca_Familia_Info info_fam = new aca_Familia_Info
+                                {
+                                    IdEmpresa = IdEmpresa,
+                                    IdAlumno = InfoAlumno.IdAlumno,
+                                    Secuencia = Secuencia,
+                                    IdCatalogoPAREN = Convert.ToInt32(reader.GetValue(1)),
+                                    IdPersona = info_persona_familia.IdPersona,
+                                    Direccion = Convert.ToString(reader.GetValue(8)).Trim(),
+                                    Celular = Convert.ToString(reader.GetValue(11)),
+                                    Correo = Convert.ToString(reader.GetValue(9)).Trim(),
+                                    SeFactura = (Convert.ToString(reader.GetValue(13)) == "SI" ? true : false),
+                                    EsRepresentante = (Convert.ToString(reader.GetValue(12)) == "SI" ? true : false),
+                                    EmpresaTrabajo = Convert.ToString(reader.GetValue(14)).Trim(),
+                                    DireccionTrabajo = Convert.ToString(reader.GetValue(15)).Trim(),
+                                    TelefonoTrabajo = Convert.ToString(reader.GetValue(16)).Trim(),
+                                    CargoTrabajo = Convert.ToString(reader.GetValue(17)).Trim(),
+                                    AniosServicio = Convert.ToInt32(reader.GetValue(19)),
+                                    IngresoMensual = Convert.ToDouble(reader.GetValue(20)),
+                                    VehiculoPropio = (Convert.ToString(reader.GetValue(21)) == "SI" ? true : false),
+                                    AnioVehiculo = Convert.ToInt32(reader.GetValue(24)),
+                                    Marca = Convert.ToString(reader.GetValue(22)).Trim(),
+                                    Modelo = Convert.ToString(reader.GetValue(23)).Trim(),
+                                    CasaPropia = (Convert.ToString(reader.GetValue(25)) == "SI" ? true : false),
+                                    Estado = true,
+                                    AsisteCentroCristiano = false,
+                                    IdUsuarioCreacion = SessionFixed.IdUsuario,
+                                    FechaCreacion = DateTime.Now
+                                };
 
-                            Secuencia++;
-                            Lista_FamiliaEstudiantes.Add(info_fam);
+                                info_fam.info_persona = info_persona_familia;
+                                Lista_FamiliaEstudiantes.Add(info_fam);
+                                Secuencia++;
+                            }
+                            
                         }
                     }
                     cont++;

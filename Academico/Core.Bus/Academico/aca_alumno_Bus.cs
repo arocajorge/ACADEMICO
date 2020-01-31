@@ -4,6 +4,7 @@ using Core.Data.Facturacion;
 using Core.Data.General;
 using Core.Info.Academico;
 using Core.Info.Facturacion;
+using Core.Info.General;
 using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
@@ -91,6 +92,13 @@ namespace Core.Bus.Academico
                 }
                 else
                 {
+                    var data_persona = new tb_persona_Info();
+                    if (info.IdPersona == 0)
+                    {
+                        data_persona = odata_per.get_info_x_num_cedula(info.info_persona_alumno.pe_cedulaRuc);
+                        info.IdPersona = data_persona.IdPersona;
+                    }
+
                     odata_per.modificarDB(info.info_persona_alumno);
                     grabar_alumno = true;
                 }
