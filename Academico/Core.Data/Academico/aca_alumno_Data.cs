@@ -225,14 +225,19 @@ namespace Core.Data.Academico
                     var NumEstudiante = 1;
                     var Codigo = "";
 
-                    if (ListaAnio.Count ==0)
+                    if (ListaAnio.Count == 0)
                     {
                         Codigo = anio + NumEstudiante.ToString("0000");
                     }
                     else
                     {
-                        NumEstudiante = Convert.ToInt32(ListaAnio.Max(q=> q.Codigo))+1;
-                        Codigo = NumEstudiante.ToString();
+                        NumEstudiante = Convert.ToInt32(ListaAnio.Max(q => q.Codigo)) + 1;
+                        Codigo = anio + NumEstudiante.ToString("0000");
+                    }
+
+                    if (info.Codigo=="" || info.Codigo==null)
+                    {
+                        info.Codigo = Codigo;
                     }
 
                     aca_Alumno Entity = new aca_Alumno

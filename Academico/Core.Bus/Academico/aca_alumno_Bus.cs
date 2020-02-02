@@ -81,7 +81,13 @@ namespace Core.Bus.Academico
                 var grabar_padre = false;
                 var grabar_madre = false;
 
-                if (bus_persona.validar_existe_cedula(info.pe_cedulaRuc) == 0)
+                if (info.info_persona_alumno.pe_cedulaRuc == "0943334409" || info.info_persona_alumno.pe_cedulaRuc == "0929694446" || 
+                    info.info_persona_alumno.pe_cedulaRuc == "0911583078" || info.info_persona_alumno.pe_cedulaRuc == "0931748693" || info.info_persona_alumno.pe_cedulaRuc == "0923513766")
+                {
+                    var a = bus_persona.get_info_x_num_cedula(info.info_persona_alumno.pe_cedulaRuc);
+                }
+
+                if (bus_persona.validar_existe_cedula(info.info_persona_alumno.pe_cedulaRuc) == 0)
                 {
                     info.info_persona_alumno = odata_per.armar_info(info.info_persona_alumno);
                     if (odata_per.guardarDB(info.info_persona_alumno))
@@ -126,10 +132,14 @@ namespace Core.Bus.Academico
                         }
                         else
                         {
-                            if (odata_per.modificarDB(info.info_persona_padre))
+                            var data_persona = new tb_persona_Info();
+                            if (info.info_persona_padre.IdPersona == 0)
                             {
-                                info.info_persona_padre.IdPersona = info.info_persona_padre.IdPersona;
+                                data_persona = odata_per.get_info_x_num_cedula(info.info_persona_padre.pe_cedulaRuc);
+                                info.info_persona_padre.IdPersona = data_persona.IdPersona;
                             }
+
+                            odata_per.modificarDB(info.info_persona_padre);
                         }
 
 
@@ -278,10 +288,14 @@ namespace Core.Bus.Academico
                         }
                         else
                         {
-                            if (odata_per.modificarDB(info.info_persona_padre))
+                            var data_persona = new tb_persona_Info();
+                            if (info.info_persona_madre.IdPersona == 0)
                             {
-                                info.info_persona_madre.IdPersona = info.info_persona_madre.IdPersona;
+                                data_persona = odata_per.get_info_x_num_cedula(info.info_persona_madre.pe_cedulaRuc);
+                                info.info_persona_madre.IdPersona = data_persona.IdPersona;
                             }
+
+                            odata_per.modificarDB(info.info_persona_madre);
                         }
 
                         var info_fam_madre = new aca_Familia_Info

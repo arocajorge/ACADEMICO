@@ -1186,12 +1186,18 @@ namespace Core.Web.Areas.Academico.Controllers
 
                         tb_persona_Info info_persona_alumno = new tb_persona_Info();
                         tb_persona_Info info_persona_alu = new tb_persona_Info();
-                        info_persona_alu = lst_persona.Where(q => q.pe_cedulaRuc == cedula_ruc_alumno).FirstOrDefault();
+
+                        if (cedula_ruc_alumno== "0943334409" || cedula_ruc_alumno == "0929694446" || cedula_ruc_alumno == "0911583078" || cedula_ruc_alumno == "0931748693" || cedula_ruc_alumno == "0923513766")
+                        {
+                            var a = bus_persona.get_info_x_num_cedula(cedula_ruc_alumno);
+                        }
+
+                        info_persona_alu = lst_persona.Where(q=>q.pe_cedulaRuc == cedula_ruc_alumno).FirstOrDefault();
                         info_persona_alumno = info_persona_alu;
 
                         if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(1)), cedula_ruc_alumno, ref return_naturaleza))
                         {
-                            if (info_persona_alumno == null)
+                            if (info_persona_alumno == null || info_persona_alu.IdPersona==0)
                             {
                                 tb_persona_Info info_alumno = new tb_persona_Info
                                 {

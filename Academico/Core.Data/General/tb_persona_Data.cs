@@ -148,7 +148,24 @@ namespace Core.Data.General
                                      IdTipoDocumento = q.IdTipoDocumento,
                                      pe_cedulaRuc = q.pe_cedulaRuc,
                                      pe_estado = q.pe_estado,
-
+                                     CodPersona = q.CodPersona,
+                                     pe_Naturaleza = q.pe_Naturaleza,
+                                     pe_razonSocial = q.pe_razonSocial,
+                                     pe_apellido = q.pe_apellido,
+                                     pe_nombre = q.pe_nombre,
+                                     pe_direccion = q.pe_direccion,
+                                     pe_telfono_Contacto = q.pe_telfono_Contacto,
+                                     pe_celular = q.pe_celular,
+                                     pe_correo = q.pe_correo,
+                                     pe_sexo = q.pe_sexo,
+                                     IdEstadoCivil = q.IdEstadoCivil,
+                                     pe_fechaNacimiento = q.pe_fechaNacimiento,
+                                     IdTipoCta_acreditacion_cat = q.IdTipoCta_acreditacion_cat,
+                                     num_cta_acreditacion = q.num_cta_acreditacion,
+                                     IdBanco_acreditacion = q.IdBanco_acreditacion,
+                                     IdProfesion = q.IdProfesion,
+                                     IdReligion = q.IdReligion,
+                                     AsisteCentroCristiano = q.AsisteCentroCristiano,
                                      EstadoBool = q.pe_estado == "A" ? true : false
                                  }).ToList();
                     else
@@ -161,7 +178,24 @@ namespace Core.Data.General
                                      IdTipoDocumento = q.IdTipoDocumento,
                                      pe_cedulaRuc = q.pe_cedulaRuc,
                                      pe_estado = q.pe_estado,
-
+                                     CodPersona = q.CodPersona,
+                                     pe_Naturaleza = q.pe_Naturaleza,
+                                     pe_razonSocial = q.pe_razonSocial,
+                                     pe_apellido = q.pe_apellido,
+                                     pe_nombre = q.pe_nombre,
+                                     pe_direccion = q.pe_direccion,
+                                     pe_telfono_Contacto = q.pe_telfono_Contacto,
+                                     pe_celular = q.pe_celular,
+                                     pe_correo = q.pe_correo,
+                                     pe_sexo = q.pe_sexo,
+                                     IdEstadoCivil = q.IdEstadoCivil,
+                                     pe_fechaNacimiento = q.pe_fechaNacimiento,
+                                     IdTipoCta_acreditacion_cat = q.IdTipoCta_acreditacion_cat,
+                                     num_cta_acreditacion = q.num_cta_acreditacion,
+                                     IdBanco_acreditacion = q.IdBanco_acreditacion,
+                                     IdProfesion = q.IdProfesion,
+                                     IdReligion = q.IdReligion,
+                                     AsisteCentroCristiano = q.AsisteCentroCristiano,
                                      EstadoBool = q.pe_estado == "A" ? true : false
                                  }).ToList();
                 }

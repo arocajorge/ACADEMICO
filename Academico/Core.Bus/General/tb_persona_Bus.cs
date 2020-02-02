@@ -63,6 +63,17 @@ namespace Core.Bus.General
                 throw;
             }
         }
+        public tb_persona_Info get_info_x_num_cedula(string pe_cedulaRuc)
+        {
+            try
+            {
+                return odata.get_info_x_num_cedula(pe_cedulaRuc);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public bool guardarDB(tb_persona_Info info)
         {
