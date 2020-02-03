@@ -61,8 +61,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             return PartialView("_GridViewPartial_ConciliacionNC", model);
         }
         #endregion
-
-        #region Alumno bajo demanda
+        
         #region Combo bajo demanda Alumno
         public ActionResult Cmb_Alumno_ConciliacionNC()
         {
@@ -78,7 +77,6 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             return busPersona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
         }
         #endregion
-        #endregion
 
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
@@ -93,6 +91,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             cxc_ConciliacionNotaCredito_Info model = new cxc_ConciliacionNotaCredito_Info
             {
                 IdEmpresa = IdEmpresa,
+                Fecha = DateTime.Now.Date,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             return View(model);
@@ -184,11 +183,43 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = ListaDetPorCruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
             return PartialView("_GridViewPartial_ConciliacionNC_PorCruzar", model);
+        }
+        public ActionResult GridViewPartial_ConciliacionNCDet()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ConciliacionNCDet", model);
         }
         #endregion
 
+        #region Json
+        public JsonResult GetDocumentosPorCobrar(int IdEmpresa = 0, decimal IdAlumno = 0, decimal IdTransaccionSession = 0)
+        {
+            ListaDetPorCruzar.set_list(busConciliacionDet.GetListPorCruzar(IdEmpresa, IdAlumno), IdTransaccionSession);
+            return Json("",JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult EditingAddNew(int IdEmpresa = 0, string IDs = "", decimal IdTransaccionSession = 0)
+        {
+            if (IDs != "")
+            {
+                int IdEmpresaSesion = Convert.ToInt32(SessionFixed.IdEmpresa);
+                var lst_x_ingresar = ListaDetPorCruzar.get_list(IdTransaccionSession);
+                string[] array = IDs.Split(',');
+
+                foreach (var item in array)
+                {
+                    var info_det = lst_x_ingresar.Where(q => q.IdString == item).FirstOrDefault();
+                    if (info_det != null)
+                        ListaDet.AddRow(info_det, IdTransaccionSession);
+                }
+            }
+            var lst = ListaDet.get_list(IdTransaccionSession);
+            ListaDet.set_list(lst, IdTransaccionSession);
+            
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 
     public class cxc_ConciliacionNotaCredito_List
@@ -234,21 +265,21 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         public void AddRow(cxc_ConciliacionNotaCreditoDet_Info info_det, decimal IdTransaccionSession)
         {
             List<cxc_ConciliacionNotaCreditoDet_Info> list = get_list(IdTransaccionSession);
-            if (list.Where(q => q.Secuencia == info_det.Secuencia).FirstOrDefault() == null)
+            if (list.Where(q => q.IdString == info_det.IdString).FirstOrDefault() == null)
                 list.Add(info_det);
             
         }
 
         public void UpdateRow(cxc_ConciliacionNotaCreditoDet_Info info_det, decimal IdTransaccionSession)
         {
-            cxc_ConciliacionNotaCreditoDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            cxc_ConciliacionNotaCreditoDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdString == info_det.IdString).First();
             edited_info.Valor = info_det.Valor;
         }
 
-        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
+        public void DeleteRow(string Secuencia, decimal IdTransaccionSession)
         {
             List<cxc_ConciliacionNotaCreditoDet_Info> list = get_list(IdTransaccionSession);
-            list.Remove(list.Where(m => m.Secuencia == Secuencia).FirstOrDefault());
+            list.Remove(list.Where(m => m.IdString == Secuencia).FirstOrDefault());
         }
     }
 

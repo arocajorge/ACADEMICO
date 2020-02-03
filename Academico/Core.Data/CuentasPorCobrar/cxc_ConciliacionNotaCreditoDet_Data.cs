@@ -31,7 +31,8 @@ namespace Core.Data.CuentasPorCobrar
                             IdCbteVtaNota = item.IdCbteVtaNota,
                             vt_TipoDoc = item.vt_TipoDoc,
                             Valor = item.Valor,
-                            ReferenciaDet = item.ReferenciaDet
+                            ReferenciaDet = item.ReferenciaDet,
+                            IdString = item.vt_TipoDoc + item.IdSucursal.ToString("0000") + item.IdBodega.ToString("0000") + item.IdCbteVtaNota.ToString("0000000000")
                         });
                     }
                 }
@@ -66,7 +67,15 @@ namespace Core.Data.CuentasPorCobrar
                             IdCbteVtaNota = item.IdComprobante,
                             vt_TipoDoc = item.vt_tipoDoc,
                             Valor = item.Saldo ?? 0,
-                            ReferenciaDet = item.vt_NunDocumento
+                            Saldo = item.Saldo ?? 0,
+                            vt_total = item.vt_total,
+                            NomCliente = item.NomCliente,
+                            vt_fecha = item.vt_fecha,
+                            ReferenciaDet = item.Referencia,
+                            ValorProntoPago = item.ValorProntoPago,
+                            FechaProntoPago = item.FechaProntoPago,
+                            vt_NumDocumento = item.vt_NunDocumento,
+                            IdString = item.vt_tipoDoc+item.IdSucursal.ToString("0000")+item.IdBodega.ToString("0000")+item.IdComprobante.ToString("0000000000")
                         });
                     }
                 }

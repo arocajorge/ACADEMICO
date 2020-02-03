@@ -785,7 +785,7 @@ namespace Core.Data.Facturacion
                 using (EntitiesFacturacion db = new EntitiesFacturacion())
                 {
                     var lst = db.vwfa_notaCreDeb_ParaContabilizarAcademico.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdNota == info.IdNota).ToList();
-                    var NCND = lst.Count == 0 ? lst[0] : null;
+                    var NCND = lst.Count > 0 ? lst[0] : null;
                     if (NCND == null)
                         return null;
                     
@@ -855,7 +855,7 @@ namespace Core.Data.Facturacion
                         }
                     }
 
-                    if (info.lst_det.Count == 0)
+                    if (diario.lst_ct_cbtecble_det.Count == 0)
                         return null;
 
                     if (Math.Round(diario.lst_ct_cbtecble_det.Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero) != 0)

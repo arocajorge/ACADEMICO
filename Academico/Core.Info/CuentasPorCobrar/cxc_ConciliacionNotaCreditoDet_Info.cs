@@ -17,5 +17,16 @@ namespace Core.Info.CuentasPorCobrar
         public string vt_TipoDoc { get; set; }
         public double Valor { get; set; }
         public string ReferenciaDet { get; set; }
+        #region Campos que no existen en la tabla
+        public string IdString { get; set; }
+        public double Saldo { get; set; }
+        public DateTime vt_fecha { get; set; }
+        public double? vt_total { get; set; }
+        public string NomCliente { get; set; }
+        public DateTime? FechaProntoPago { get; set; }
+        public double? ValorProntoPago { get; set; }
+        public string vt_NumDocumento { get; set; }
+        #endregion
+
     }
 }

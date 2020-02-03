@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_ConciliacionNC_PorCruzar";
         settings.CallbackRouteValues = new { Controller = "ConciliacionNotaCredito", Action = "GridViewPartial_ConciliacionNC_PorCruzar" };
-        settings.KeyFieldName = "Secuencia";
+        settings.KeyFieldName = "IdString";
         settings.Width = Unit.Percentage(100);
 
         settings.SettingsPager.Visible = true;
@@ -39,7 +39,6 @@
         settings.Settings.ShowFooter = true;
 
         //settings.Columns.Add("IdCbte_vta_nota", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("NomCliente", "Cliente").Width = Unit.Percentage(20);
         settings.Columns.Add("vt_NumDocumento", "# Documento").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
@@ -48,7 +47,7 @@
             column.Caption = "Fecha";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
         });
-        settings.Columns.Add("Referencia", "Referencia").Width = Unit.Percentage(20);
+        settings.Columns.Add("ReferenciaDet", "Referencia").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);

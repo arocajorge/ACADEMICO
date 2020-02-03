@@ -101,7 +101,7 @@
                     @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="IdCliente">Estudiante*</label>
                     @Html.Partial("_CmbAlumno_ReadOnly", Model.IdAlumno)
@@ -126,49 +126,8 @@
                     <i class="fa fa-plus"></i>
                 </a>
             </div>
-            <div class="col-md-1">
-                <label for="IdCliente"></label>
-                <button type="button" class="btn btn-primary form-control" onclick="Imprimir();" title="Imprimir hoja de matrícula">
-                    <i class="fa fa-print"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-8">
-                <div class="form-group">
-                    <label for="IdEmpresa">Curso*</label>
-                    @Html.Partial("_ComboBoxPartial_Curso", Model)
-                    @Html.ValidationMessageFor(q => q.IdComboCurso, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label for="Validar"></label>
-                    <button type="button" class="btn btn-primary form-control" title="Mostrar todos los cursos" onclick="ValidarCurso();">
-                        <i class="fa fa-navicon"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Paralelo*</label>
-                    @Html.Partial("_ComboBoxPartial_Paralelo", Model)
-                    @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdEmpresa">Plantilla*</label>
-                    @Html.Partial("_ComboBoxPartial_Plantilla", Model)
-                    @Html.ValidationMessageFor(q => q.IdPlantilla, "", new { @class = "text-danger" })
-                </div>
-            </div>
+           
+            
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="pf_fecha">Fecha*</label>
@@ -191,6 +150,50 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="IdEmpresa">Curso*</label>
+                    @Html.Partial("_ComboBoxPartial_Curso", Model)
+                    @Html.ValidationMessageFor(q => q.IdComboCurso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="Validar"></label>
+                    <button type="button" class="btn btn-primary form-control" title="Mostrar todos los cursos" onclick="ValidarCurso();">
+                        <i class="fa fa-navicon"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <label for="IdCliente"></label>
+                <button type="button" class="btn btn-primary form-control" onclick="Imprimir();" title="Imprimir hoja de matrícula">
+                    <i class="fa fa-print"></i>
+                </button>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Paralelo*</label>
+                    @Html.Partial("_ComboBoxPartial_Paralelo", Model)
+                    @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="IdEmpresa">Plantilla*</label>
+                    @Html.Partial("_ComboBoxPartial_Plantilla", Model)
+                    @Html.ValidationMessageFor(q => q.IdPlantilla, "", new { @class = "text-danger" })
+                </div>
+            </div>
+           
             
         </div>
     </div>
