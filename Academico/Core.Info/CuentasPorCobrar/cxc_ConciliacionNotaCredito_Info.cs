@@ -26,6 +26,7 @@ namespace Core.Info.CuentasPorCobrar
         public string pe_nombreCompleto { get; set; }
         public string Referencia { get; set; }
         public List<cxc_ConciliacionNotaCreditoDet_Info> ListaDet { get; set; }
+        public decimal IdTransaccionSession { get; set; }
         #endregion
 
     }
