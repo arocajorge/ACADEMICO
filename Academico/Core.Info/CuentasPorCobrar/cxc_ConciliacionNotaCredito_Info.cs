@@ -25,6 +25,7 @@ namespace Core.Info.CuentasPorCobrar
         #region Campos que no existen en la tabla
         public string pe_nombreCompleto { get; set; }
         public string Referencia { get; set; }
+        public decimal IdAlumno { get; set; }
         public List<cxc_ConciliacionNotaCreditoDet_Info> ListaDet { get; set; }
         public decimal IdTransaccionSession { get; set; }
         #endregion
