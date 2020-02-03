@@ -8107,6 +8107,8 @@
     <Content Include="Areas\Academico\Views\Profesor\_GridViewPartial_ProfesorImportacion.cshtml" />
     <Content Include="Areas\Academico\Views\CalificacionHistorico\Importar.cshtml" />
     <Content Include="Areas\Academico\Views\CalificacionHistorico\_GridViewPartial_CalificacionHistoricoImportacion.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\_GridViewPartial_ConciliacionNC.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -8157,7 +8159,6 @@
     <Folder Include="Areas\Contabilidad\Models\" />
     <Folder Include="Areas\Contabilidad\Views\PlanDeCuentas\" />
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
-    <Folder Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />
     <Folder Include="Areas\CuentasPorPagar\Views\Deudas\" />
     <Folder Include="Areas\CuentasPorPagar\Views\Retencion\" />
