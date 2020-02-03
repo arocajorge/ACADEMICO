@@ -23,5 +23,6 @@ namespace Core.Data.Base
         public bool EsObligatorio { get; set; }
         public int OrdenMateria { get; set; }
         public bool Estado { get; set; }
+        public Nullable<int> IdMateriaArea { get; set; }
     }
 }

@@ -22,10 +22,19 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo curso es obligatorio")]
         public int IdCurso { get; set; }
         public int IdMateria { get; set; }
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo materia debe tener mínimo 1 caracter y máximo 500")]
+        [Required(ErrorMessage = "El campo materia es obligatorio")]
         public string NomMateria { get; set; }
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo área de materia debe tener mínimo 1 caracter y máximo 500")]
+        [Required(ErrorMessage = "El campo área de materia es obligatorio")]
+        public string NomMateriaArea { get; set; }
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo grupo de materia debe tener mínimo 1 caracter y máximo 500")]
+        [Required(ErrorMessage = "El campo grupo de materia es obligatorio")]
         public string NomMateriaGrupo { get; set; }
         public bool EsObligatorio { get; set; }
         public int OrdenMateria { get; set; }
+        public Nullable<int> OrdenMateriaGrupo { get; set; }
+        public Nullable<int> OrdenMateriaArea { get; set; }
 
         #region Campos que no existen en la tabla
         public bool seleccionado { get; set; }

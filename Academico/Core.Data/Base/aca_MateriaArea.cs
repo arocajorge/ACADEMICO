@@ -12,22 +12,18 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_Materia
+    public partial class aca_MateriaArea
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public aca_Materia()
+        public aca_MateriaArea()
         {
-            this.aca_AnioLectivo_Curso_Materia = new HashSet<aca_AnioLectivo_Curso_Materia>();
-            this.aca_AnioLectivo_Paralelo_Profesor = new HashSet<aca_AnioLectivo_Paralelo_Profesor>();
+            this.aca_Materia = new HashSet<aca_Materia>();
         }
     
         public int IdEmpresa { get; set; }
-        public int IdMateria { get; set; }
-        public Nullable<int> IdMateriaGrupo { get; set; }
-        public Nullable<int> IdMateriaArea { get; set; }
-        public string NomMateria { get; set; }
-        public bool EsObligatorio { get; set; }
-        public int OrdenMateria { get; set; }
+        public int IdMateriaArea { get; set; }
+        public string NomMateriaArea { get; set; }
+        public int OrdenMateriaArea { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -38,10 +34,6 @@ namespace Core.Data.Base
         public string MotivoAnulacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
-        public virtual aca_MateriaArea aca_MateriaArea { get; set; }
-        public virtual aca_MateriaGrupo aca_MateriaGrupo { get; set; }
+        public virtual ICollection<aca_Materia> aca_Materia { get; set; }
     }
 }

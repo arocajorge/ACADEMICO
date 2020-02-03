@@ -78,6 +78,7 @@
     <Compile Include="Academico\aca_Documento_Data.cs" />
     <Compile Include="Academico\aca_Familia_Data.cs" />
     <Compile Include="Academico\aca_Jornada_Data.cs" />
+    <Compile Include="Academico\aca_MateriaArea_Data.cs" />
     <Compile Include="Academico\aca_MateriaGrupo_Data.cs" />
     <Compile Include="Academico\aca_Materia_Data.cs" />
     <Compile Include="Academico\aca_Matricula_Data.cs" />
@@ -95,6 +96,9 @@
     <Compile Include="Academico\aca_Reporte_Data.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Data.cs" />
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Data.cs" />
+    <Compile Include="Base\aca_MateriaArea.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_Reporte.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>

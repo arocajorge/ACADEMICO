@@ -30,6 +30,7 @@ namespace Core.Data.Academico
                             NomMateriaGrupo = q.NomMateriaGrupo,
                             OrdenMateria = q.OrdenMateria,
                             EsObligatorio = q.EsObligatorio,
+                            IdMateriaGrupo = q.IdMateriaGrupo,
                             Estado = q.Estado
                         });
                     });
@@ -89,6 +90,7 @@ namespace Core.Data.Academico
                         IdEmpresa = Entity.IdEmpresa,
                         IdMateria = Entity.IdMateria,
                         IdMateriaGrupo = Entity.IdMateriaGrupo,
+                        IdMateriaArea = Entity.IdMateriaArea,
                         NomMateriaGrupo = Entity.NomMateriaGrupo,
                         NomMateria = Entity.NomMateria,
                         OrdenMateria = Entity.OrdenMateria,
@@ -162,6 +164,7 @@ namespace Core.Data.Academico
                         IdMateria = info.IdMateria = getId(info.IdEmpresa),
                         NomMateria = info.NomMateria,
                         IdMateriaGrupo = (info.IdMateriaGrupo==0 ? null : info.IdMateriaGrupo),
+                        IdMateriaArea = (info.IdMateriaArea == 0 ? null : info.IdMateriaArea),
                         OrdenMateria = info.OrdenMateria,
                         EsObligatorio = info.EsObligatorio,
                         Estado = true,
@@ -194,6 +197,7 @@ namespace Core.Data.Academico
                     Entity.NomMateria = info.NomMateria;
                     Entity.OrdenMateria = info.OrdenMateria;
                     Entity.IdMateriaGrupo = (info.IdMateriaGrupo == 0 ? null : info.IdMateriaGrupo);
+                    Entity.IdMateriaArea = (info.IdMateriaArea == 0 ? null : info.IdMateriaArea);
                     Entity.EsObligatorio = info.EsObligatorio;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
