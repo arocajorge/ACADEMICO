@@ -35,7 +35,6 @@
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula_AlumnosPorParalelo" Width="1.5" PointX="13.375" PointY="5.75" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Periodo" Width="1.5" PointX="6" PointY="42.875" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Profesor" Width="1.5" PointX="0.75" PointY="10.125" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Profesor" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Documento" Width="1.5" PointX="16.25" PointY="11.875" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Curso" Width="1.5" PointX="15.375" PointY="1.125" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Documento_aca_AnioLectivo_Jornada_Curso" />
@@ -165,6 +164,7 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_Materia_aca_MateriaArea" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Materia_aca_MateriaGrupo" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Materia" Width="1.5" PointX="28.375" PointY="26.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Profesor" Width="1.5" PointX="30.375" PointY="26.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

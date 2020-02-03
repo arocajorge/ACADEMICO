@@ -71,31 +71,31 @@ namespace Core.Bus.Academico
                 tb_persona_Bus bus_persona = new tb_persona_Bus();
                 var grabar = false;
 
-                var persona = new tb_persona_Info
-                {
-                    IdPersona =info.IdPersona,
-                    pe_nombre = info.pe_nombre,
-                    pe_apellido = info.pe_apellido,
-                    pe_nombreCompleto = info.pe_nombreCompleto,
-                    pe_cedulaRuc = info.pe_cedulaRuc,
-                    pe_Naturaleza = info.pe_Naturaleza,
-                    IdTipoDocumento = info.IdTipoDocumento,
-                    pe_razonSocial = info.pe_razonSocial,
-                    pe_direccion = info.Direccion,
-                    pe_telfono_Contacto = info.Telefonos,
-                    pe_celular = info.pe_celular,
-                    pe_correo = info.Correo,
-                    pe_fechaNacimiento = info.pe_fechaNacimiento,
-                    IdEstadoCivil = info.IdEstadoCivil,
-                    pe_sexo = info.pe_sexo,
-                    CodCatalogoCONADIS = info.CodCatalogoCONADIS,
-                    NumeroCarnetConadis = info.NumeroCarnetConadis,
-                    PorcentajeDiscapacidad = info.PorcentajeDiscapacidad
-                };
+                //var persona = new tb_persona_Info
+                //{
+                //    IdPersona =info.IdPersona,
+                //    pe_nombre = info.pe_nombre,
+                //    pe_apellido = info.pe_apellido,
+                //    pe_nombreCompleto = info.pe_nombreCompleto,
+                //    pe_cedulaRuc = info.pe_cedulaRuc,
+                //    pe_Naturaleza = info.pe_Naturaleza,
+                //    IdTipoDocumento = info.IdTipoDocumento,
+                //    pe_razonSocial = info.pe_razonSocial,
+                //    pe_direccion = info.Direccion,
+                //    pe_telfono_Contacto = info.Telefonos,
+                //    pe_celular = info.pe_celular,
+                //    pe_correo = info.Correo,
+                //    pe_fechaNacimiento = info.pe_fechaNacimiento,
+                //    IdEstadoCivil = info.IdEstadoCivil,
+                //    pe_sexo = info.pe_sexo,
+                //    CodCatalogoCONADIS = info.CodCatalogoCONADIS,
+                //    NumeroCarnetConadis = info.NumeroCarnetConadis,
+                //    PorcentajeDiscapacidad = info.PorcentajeDiscapacidad
+                //};
 
-                if (bus_persona.validar_existe_cedula(info.pe_cedulaRuc) == 0)
+                if (bus_persona.validar_existe_cedula(info.info_persona.pe_cedulaRuc) == 0)
                 {
-                    info.info_persona = odata_per.armar_info(persona);
+                    info.info_persona = odata_per.armar_info(info.info_persona);
                     if (odata_per.guardarDB(info.info_persona))
                     {
                         info.IdPersona = info.info_persona.IdPersona;
@@ -104,8 +104,13 @@ namespace Core.Bus.Academico
                 }
                 else
                 {
-                    info.info_persona = persona;
-                    info.info_persona.IdPersona = info.IdPersona;
+                    var data_persona = new tb_persona_Info();
+                    if (info.IdPersona == 0)
+                    {
+                        data_persona = odata_per.get_info_x_num_cedula(info.info_persona.pe_cedulaRuc);
+                        info.IdPersona = data_persona.IdPersona;
+                    }
+
                     if (odata_per.modificarDB(info.info_persona))
                     {
                         grabar = true;
@@ -120,7 +125,7 @@ namespace Core.Bus.Academico
 
                 return false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -134,29 +139,30 @@ namespace Core.Bus.Academico
                 tb_persona_Bus bus_persona = new tb_persona_Bus();
                 var grabar = false;
 
-                var persona = new tb_persona_Info
-                {
-                    IdPersona = info.IdPersona,
-                    pe_nombre = info.pe_nombre,
-                    pe_apellido = info.pe_apellido,
-                    pe_nombreCompleto = info.pe_nombreCompleto,
-                    pe_cedulaRuc = info.pe_cedulaRuc,
-                    pe_Naturaleza = info.pe_Naturaleza,
-                    IdTipoDocumento = info.IdTipoDocumento,
-                    pe_razonSocial = info.pe_razonSocial,
-                    pe_direccion = info.Direccion,
-                    pe_telfono_Contacto = info.Telefonos,
-                    pe_celular = info.pe_celular,
-                    pe_correo = info.Correo,
-                    pe_fechaNacimiento = info.pe_fechaNacimiento,
-                    IdEstadoCivil = info.IdEstadoCivil,
-                    CodCatalogoCONADIS = (info.CodCatalogoCONADIS=="" ? null : info.CodCatalogoCONADIS),
-                    NumeroCarnetConadis = info.NumeroCarnetConadis,
-                    PorcentajeDiscapacidad = info.PorcentajeDiscapacidad,
-                    pe_sexo = info.pe_sexo,
-                };
+                //var persona = new tb_persona_Info
+                //{
+                //    IdPersona = info.IdPersona,
+                //    pe_nombre = info.pe_nombre,
+                //    pe_apellido = info.pe_apellido,
+                //    pe_nombreCompleto = info.pe_nombreCompleto,
+                //    pe_cedulaRuc = info.pe_cedulaRuc,
+                //    pe_Naturaleza = info.pe_Naturaleza,
+                //    IdTipoDocumento = info.IdTipoDocumento,
+                //    pe_razonSocial = info.pe_razonSocial,
+                //    pe_direccion = info.Direccion,
+                //    pe_telfono_Contacto = info.Telefonos,
+                //    pe_celular = info.pe_celular,
+                //    pe_correo = info.Correo,
+                //    pe_fechaNacimiento = info.pe_fechaNacimiento,
+                //    IdEstadoCivil = info.IdEstadoCivil,
+                //    CodCatalogoCONADIS = (info.CodCatalogoCONADIS=="" ? null : info.CodCatalogoCONADIS),
+                //    NumeroCarnetConadis = info.NumeroCarnetConadis,
+                //    PorcentajeDiscapacidad = info.PorcentajeDiscapacidad,
+                //    pe_sexo = info.pe_sexo,
+                //    IdProfesion = info.IdProfesion
+                //};
 
-                if (odata_per.modificarDB(persona))
+                if (odata_per.modificarDB(info.info_persona))
                 {
                     grabar = true;
                 }

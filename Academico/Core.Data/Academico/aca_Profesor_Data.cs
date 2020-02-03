@@ -81,7 +81,11 @@ namespace Core.Data.Academico
                         pe_celular = Entity.pe_celular,
                         IdTipoDocumento = Entity.IdTipoDocumento,
                         EsInspector = Entity.EsInspector,
-                        EsProfesor = Entity.EsProfesor
+                        EsProfesor = Entity.EsProfesor,
+                        IdProfesion = Entity.IdProfesion??0,
+                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
+                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
+                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
                     };
                 }
 
@@ -238,7 +242,10 @@ namespace Core.Data.Academico
                     info.pe_sexo = Entity_per.pe_sexo;
                     info.IdEstadoCivil = Entity_per.IdEstadoCivil;
                     info.pe_fechaNacimiento = Entity_per.pe_fechaNacimiento;
-
+                    info.IdProfesion = Entity_per.IdProfesion??0;
+                    info.CodCatalogoCONADIS = Entity_per.CodCatalogoCONADIS;
+                    info.NumeroCarnetConadis = Entity_per.NumeroCarnetConadis;
+                    info.PorcentajeDiscapacidad = Entity_per.PorcentajeDiscapacidad;
                     Context_general.Dispose();
                     Context_academico.Dispose();
                     return info;
@@ -262,7 +269,11 @@ namespace Core.Data.Academico
                     EsInspector = Entity_aca.EsInspector,
                     EsProfesor = Entity_aca.EsProfesor,
                     IdEstadoCivil = Entity_aca.IdEstadoCivil,
-                    pe_fechaNacimiento = Entity_aca.pe_fechaNacimiento
+                    pe_fechaNacimiento = Entity_aca.pe_fechaNacimiento,
+                    IdProfesion = Entity_per.IdProfesion??0,
+                    CodCatalogoCONADIS = Entity_per.CodCatalogoCONADIS,
+                    NumeroCarnetConadis = Entity_per.NumeroCarnetConadis,
+                    PorcentajeDiscapacidad = Entity_per.PorcentajeDiscapacidad
             };
 
                 return info;

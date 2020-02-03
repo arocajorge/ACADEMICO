@@ -49,9 +49,8 @@
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
         settings.Columns.Add("IdProfesor", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("Codigo", "Código").Width = Unit.Percentage(20);
-        settings.Columns.Add("info_persona_alumno.pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(20);
-        settings.Columns.Add("info_persona_alumno.pe_nombreCompleto", "Nombres").Width = Unit.Percentage(20);
+        settings.Columns.Add("info_persona.pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(20);
+        settings.Columns.Add("info_persona.pe_nombreCompleto", "Nombres").Width = Unit.Percentage(60);
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
