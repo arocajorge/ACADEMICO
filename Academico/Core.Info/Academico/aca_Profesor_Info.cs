@@ -60,6 +60,7 @@ namespace Core.Info.Academico
         public Nullable<double> PorcentajeDiscapacidad { get; set; }
         [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 200 caracteres")]
         public string NumeroCarnetConadis { get; set; }
+        public int IdProfesion { get; set; }
         #endregion
     }
 }

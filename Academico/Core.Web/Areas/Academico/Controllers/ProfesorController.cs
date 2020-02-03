@@ -106,6 +106,28 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (cl_funciones.ValidaIdentificacion(model.IdTipoDocumento, model.pe_Naturaleza, model.pe_cedulaRuc, ref return_naturaleza))
             {
+                model.info_persona = new tb_persona_Info
+                {
+                    IdPersona = model.IdPersona,
+                    pe_Naturaleza = model.pe_Naturaleza,
+                    pe_nombreCompleto = model.pe_nombreCompleto,
+                    pe_razonSocial = model.pe_razonSocial,
+                    pe_apellido = model.pe_apellido,
+                    pe_nombre = model.pe_nombre,
+                    pe_fechaNacimiento = model.pe_fechaNacimiento,
+                    pe_sexo = model.pe_sexo,
+                    IdTipoDocumento = model.IdTipoDocumento,
+                    pe_cedulaRuc = model.pe_cedulaRuc,
+                    pe_direccion = model.Direccion,
+                    pe_telfono_Contacto = model.Telefonos,
+                    pe_correo = model.Correo,
+                    IdEstadoCivil = model.IdEstadoCivil,
+                    CodCatalogoCONADIS = model.CodCatalogoCONADIS,
+                    NumeroCarnetConadis = model.NumeroCarnetConadis,
+                    PorcentajeDiscapacidad = model.PorcentajeDiscapacidad,
+                    IdProfesion = model.IdProfesion
+                };
+
                 if (!bus_profesor.GuardarDB(model))
                 {
                     ViewBag.mensaje = "No se ha podido guardar el registro";
@@ -162,6 +184,28 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             var return_naturaleza = "";
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+            model.info_persona = new tb_persona_Info
+            {
+                IdPersona = model.IdPersona,
+                pe_Naturaleza = model.pe_Naturaleza,
+                pe_nombreCompleto = model.pe_nombreCompleto,
+                pe_razonSocial = model.pe_razonSocial,
+                pe_apellido = model.pe_apellido,
+                pe_nombre = model.pe_nombre,
+                pe_fechaNacimiento = model.pe_fechaNacimiento,
+                pe_sexo = model.pe_sexo,
+                IdTipoDocumento = model.IdTipoDocumento,
+                pe_cedulaRuc = model.pe_cedulaRuc,
+                pe_direccion = model.Direccion,
+                pe_telfono_Contacto = model.Telefonos,
+                pe_correo = model.Correo,
+                IdEstadoCivil = model.IdEstadoCivil,
+                CodCatalogoCONADIS = model.CodCatalogoCONADIS,
+                NumeroCarnetConadis = model.NumeroCarnetConadis,
+                PorcentajeDiscapacidad = model.PorcentajeDiscapacidad,
+                IdProfesion = model.IdProfesion
+            };
+
             if ((cl_funciones.ValidaIdentificacion(model.IdTipoDocumento, model.pe_Naturaleza, model.pe_cedulaRuc, ref return_naturaleza)))
             {
                 if (!bus_profesor.ModificarDB(model))
@@ -472,7 +516,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
                         var return_naturaleza = "";
-                        var cedula_ruc_profesor = (Convert.ToString(reader.GetValue(3))).Trim();
+                        var cedula_ruc_profesor = (Convert.ToString(reader.GetValue(0))).Trim();
 
                         tb_persona_Info info_persona_profesor = new tb_persona_Info();
                         tb_persona_Info info_persona_profe = new tb_persona_Info();

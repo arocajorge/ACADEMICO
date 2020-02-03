@@ -40,5 +40,10 @@ namespace Core.Data.Base
         public string Telefonos { get; set; }
         public bool EsProfesor { get; set; }
         public bool EsInspector { get; set; }
+        public string CodCatalogoSangre { get; set; }
+        public string CodCatalogoCONADIS { get; set; }
+        public Nullable<double> PorcentajeDiscapacidad { get; set; }
+        public string NumeroCarnetConadis { get; set; }
+        public Nullable<int> IdProfesion { get; set; }
     }
 }
