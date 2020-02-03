@@ -8104,6 +8104,8 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_003.cshtml" />
     <Content Include="Areas\Academico\Views\Profesor\Importar.cshtml" />
     <Content Include="Areas\Academico\Views\Profesor\_GridViewPartial_ProfesorImportacion.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\Importar.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\_GridViewPartial_CalificacionHistoricoImportacion.cshtml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

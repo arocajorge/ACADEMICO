@@ -27,6 +27,12 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <a class="btn btn-primary" href="@Url.Action("Importar","CalificacionHistorico",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">Importar desde excel</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-12">
                 @Html.Action("GridViewPartial_CalificacionHistorico")
             </div>

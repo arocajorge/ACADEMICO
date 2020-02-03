@@ -32,6 +32,8 @@ namespace Core.Info.Academico
         public string pe_nombreCompleto { get; set; }
         public string NomNivel { get; set; }
         public string NomCurso { get; set; }
+        public string IdString { get; set; }
+        public string Letra { get; set; }
         #endregion
     }
 }

@@ -337,7 +337,7 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_Alumno_Info model = new aca_Alumno_Info
+            aca_Profesor_Info model = new aca_Profesor_Info
             {
                 IdEmpresa = IdEmpresa,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
@@ -345,7 +345,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Importar(aca_Alumno_Info model)
+        public ActionResult Importar(aca_Profesor_Info model)
         {
             try
             {

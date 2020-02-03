@@ -28,6 +28,7 @@ namespace Core.Data.Academico
                             IdAnio = q.IdAnio,
                             IdAlumno = q.IdAlumno,
                             IdCurso = q.IdCurso,
+                            IdNivel = q.IdNivel,
                             Promedio = q.Promedio,
                             Conducta = q.Conducta,
                             Descripcion = q.Descripcion,
@@ -37,7 +38,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                Lista.ForEach(q=>q.IdString = IdEmpresa.ToString("000")+ q.IdAnio.ToString("0000") + q.IdAlumno.ToString("000000") + q.IdNivel.ToString("000") + q.IdCurso.ToString("000") );
                 return Lista;
             }
             catch (Exception)
