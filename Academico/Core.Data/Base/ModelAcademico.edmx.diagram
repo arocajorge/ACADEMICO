@@ -164,7 +164,7 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Materia" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Materia_aca_MateriaArea" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Materia_aca_MateriaGrupo" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Materia" Width="1.5" PointX="13.375" PointY="21.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Materia" Width="1.5" PointX="28.375" PointY="26.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

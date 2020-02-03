@@ -16,13 +16,15 @@ namespace Core.Data.Base
     {
         public int IdEmpresa { get; set; }
         public int IdMateria { get; set; }
-        public Nullable<int> IdMateriaGrupo { get; set; }
-        public string NomMateriaGrupo { get; set; }
-        public int OrdenMateriaGrupo { get; set; }
-        public string NomMateria { get; set; }
-        public bool EsObligatorio { get; set; }
-        public int OrdenMateria { get; set; }
-        public bool Estado { get; set; }
         public Nullable<int> IdMateriaArea { get; set; }
+        public Nullable<int> IdMateriaGrupo { get; set; }
+        public int OrdenMateria { get; set; }
+        public Nullable<int> OrdenMateriaArea { get; set; }
+        public Nullable<int> OrdenMateriaGrupo { get; set; }
+        public string NomMateria { get; set; }
+        public string NomMateriaArea { get; set; }
+        public string NomMateriaGrupo { get; set; }
+        public bool EsObligatorio { get; set; }
+        public bool Estado { get; set; }
     }
 }

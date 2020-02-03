@@ -91,9 +91,12 @@ namespace Core.Data.Academico
                         IdMateria = Entity.IdMateria,
                         IdMateriaGrupo = Entity.IdMateriaGrupo,
                         IdMateriaArea = Entity.IdMateriaArea,
+                        NomMateriaArea = Entity.NomMateriaArea,
                         NomMateriaGrupo = Entity.NomMateriaGrupo,
                         NomMateria = Entity.NomMateria,
                         OrdenMateria = Entity.OrdenMateria,
+                        OrdenMateriaGrupo = Entity.OrdenMateriaGrupo??0,
+                        OrdenMateriaArea = Entity.OrdenMateriaArea??0,
                         EsObligatorio = Entity.EsObligatorio,
                         Estado = Entity.Estado
                     };

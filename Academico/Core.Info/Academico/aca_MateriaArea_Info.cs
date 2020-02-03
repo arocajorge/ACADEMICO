@@ -9,6 +9,7 @@ namespace Core.Info.Academico
 {
     public class aca_MateriaArea_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdMateriaArea { get; set; }
         [StringLength(500, MinimumLength = 1, ErrorMessage = "el campo área de materia debe tener mínimo 1 caracter y máximo 500")]

@@ -482,9 +482,12 @@ namespace Core.Data.Academico
                                                         IdCurso = item_cm.IdCurso,
                                                         IdMateria = item_cm.IdMateria,
                                                         NomMateria = info_materia.NomMateria,
+                                                        NomMateriaArea = info_materia.NomMateriaArea,
                                                         NomMateriaGrupo = info_materia.NomMateriaGrupo,
                                                         EsObligatorio = info_materia.EsObligatorio,
-                                                        OrdenMateria = info_materia.OrdenMateria
+                                                        OrdenMateria = info_materia.OrdenMateria,
+                                                        OrdenMateriaArea = info_materia.OrdenMateriaArea,
+                                                        OrdenMateriaGrupo = info_materia.OrdenMateriaGrupo
                                                     };
                                                     Context.aca_AnioLectivo_Curso_Materia.Add(Entity_CursoMateria);
                                                 }

@@ -247,6 +247,7 @@
     <Compile Include="Areas\Academico\Controllers\SedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\NivelPorSedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\SocioEconomicoController.cs" />
+    <Compile Include="Areas\Academico\Controllers\MateriaAreaController.cs" />
     <Compile Include="Areas\Banco\BancoAreaRegistration.cs" />
     <Compile Include="Areas\Banco\Controllers\ArchivoBancarioController.cs" />
     <Compile Include="Areas\Banco\Controllers\BancoCuentaController.cs" />
@@ -8113,6 +8114,11 @@
     <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\_CmbAlumno_ConciliacionNC.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\_GridViewPartial_ConciliacionNC_PorCruzar.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\_GridViewPartial_ConciliacionNCDet.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaArea\_GridViewPartial_materia_area.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaArea\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaArea\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaArea\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaArea\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

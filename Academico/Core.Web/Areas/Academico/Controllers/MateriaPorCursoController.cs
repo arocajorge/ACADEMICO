@@ -126,8 +126,11 @@ namespace Core.Web.Areas.Academico.Controllers
                         IdMateria = Convert.ToInt32(item),
                         EsObligatorio = info_materia.EsObligatorio,
                         NomMateria = info_materia.NomMateria,
+                        NomMateriaArea = info_materia.NomMateriaArea,
                         NomMateriaGrupo = info_materia.NomMateriaGrupo,
-                        OrdenMateria = info_materia.OrdenMateria
+                        OrdenMateria = info_materia.OrdenMateria,
+                        OrdenMateriaArea = info_materia.OrdenMateriaArea,
+                        OrdenMateriaGrupo = info_materia.OrdenMateriaGrupo
                     };
                     lista.Add(info);
                 }

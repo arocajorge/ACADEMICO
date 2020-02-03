@@ -32,6 +32,9 @@ namespace Core.Info.Academico
 
         #region Campos que no existen en la tabla
         public string NomMateriaGrupo { get; set; }
+        public string NomMateriaArea { get; set; }
+        public int OrdenMateriaGrupo { get; set; }
+        public int OrdenMateriaArea { get; set; }
         #endregion
     }
 }
