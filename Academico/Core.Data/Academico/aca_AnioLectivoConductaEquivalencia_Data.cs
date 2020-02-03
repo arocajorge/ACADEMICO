@@ -51,7 +51,38 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.Secuencia == Secuencia).FirstOrDefault();
+                    var Entity = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Secuencia == Secuencia).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_AnioLectivoConductaEquivalencia_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAnio = Entity.IdAnio,
+                        Secuencia = Entity.Secuencia,
+                        Letra = Entity.Letra,
+                        Calificacion = Entity.Calificacion
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public aca_AnioLectivoConductaEquivalencia_Info getInfo_X_PromConducta(int IdEmpresa, int IdAnio, decimal PromedioConducta)
+        {
+            try
+            {
+                aca_AnioLectivoConductaEquivalencia_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio ==IdAnio && q.Calificacion == PromedioConducta).FirstOrDefault();
                     if (Entity == null)
                         return null;
 

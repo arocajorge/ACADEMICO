@@ -320,12 +320,21 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Importacion
         public ActionResult UploadControlUpload()
         {
-            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings_Profesor.UploadValidationSettings, UploadControlSettings_Profesor.FileUploadComplete);
             return null;
         }
         public ActionResult Importar(int IdEmpresa = 0)
@@ -429,7 +438,7 @@ namespace Core.Web.Areas.Academico.Controllers
         }
     }
 
-    public class UploadControlSettingsProfesor
+    public class UploadControlSettings_Profesor
     {
         public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
         {
@@ -455,7 +464,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IExcelDataReader reader = null;
                 reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
 
-                #region Alumno   
+                #region Profesor   
                 var lst_persona = bus_persona.get_list(false);
                 var IdProfesor = 1;
                 while (reader.Read())

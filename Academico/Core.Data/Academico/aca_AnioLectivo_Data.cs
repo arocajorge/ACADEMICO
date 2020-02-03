@@ -128,6 +128,41 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_AnioLectivo_Info getInfo_x_Anio(int IdEmpresa, int AnioIni, int AnioFin)
+        {
+            try
+            {
+                aca_AnioLectivo_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.FechaDesde.Year == AnioFin && q.FechaHasta.Year == AnioFin).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_AnioLectivo_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAnio = Entity.IdAnio,
+                        Descripcion = Entity.Descripcion,
+                        FechaDesde = Entity.FechaDesde,
+                        FechaHasta = Entity.FechaHasta,
+                        EnCurso = Entity.EnCurso,
+                        BloquearMatricula = Entity.BloquearMatricula,
+                        IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
+                        Estado = Entity.Estado
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public aca_AnioLectivo_Info getInfo_AnioAnterior(int IdEmpresa, int Anio)
         {
             try

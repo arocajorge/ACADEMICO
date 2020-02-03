@@ -35,6 +35,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_AnioLectivoConductaEquivalencia_Info GetInfo_x_PromConducta(int IdEmpresa, int IdAnio, decimal PromedioConducta)
+        {
+            try
+            {
+                return odata.getInfo_X_PromConducta(IdEmpresa, IdAnio, PromedioConducta);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool GuardarDB(aca_AnioLectivoConductaEquivalencia_Info info)
         {
             try

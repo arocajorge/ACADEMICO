@@ -5,8 +5,11 @@ using Core.Info.General;
 using Core.Info.Helps;
 using Core.Web.Helps;
 using DevExpress.Web;
+using DevExpress.Web.Mvc;
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -203,60 +206,71 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
+        #region Json
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #region Importacion
-        //public ActionResult UploadControlUpload()
-        //{
-        //    UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
-        //    return null;
-        //}
-        //public ActionResult Importar(int IdEmpresa = 0)
-        //{
-        //    #region Validar Session
-        //    if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
-        //        return RedirectToAction("Login", new { Area = "", Controller = "Account" });
-        //    SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
-        //    SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
-        //    #endregion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings_Calificacion.UploadValidationSettings, UploadControlSettings_Calificacion.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
 
-        //    aca_AnioLectivoCalificacionHistorico_Info model = new aca_AnioLectivoCalificacionHistorico_Info
-        //    {
-        //        IdEmpresa = IdEmpresa,
-        //        IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
-        //    };
-        //    return View(model);
-        //}
-        //[HttpPost]
-        //public ActionResult Importar(aca_AnioLectivoCalificacionHistorico_Info model)
-        //{
-        //    try
-        //    {
-        //        var Lista_Calificacion_Historico = Lista_CalificacionHistorico.get_list(model.IdTransaccionSession);
-        //        foreach (var item in Lista_Calificacion_Historico)
-        //        {
-        //            if (!bus_CalificacionHistorico.GuardarDB(item))
-        //            {
-        //                ViewBag.mensaje = "Error al importar el archivo";
-        //                return View(model);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+            aca_AnioLectivoCalificacionHistorico_Info model = new aca_AnioLectivoCalificacionHistorico_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(aca_AnioLectivoCalificacionHistorico_Info model)
+        {
+            try
+            {
+                var Lista_Calificacion_Historico = Lista_CalificacionHistorico.get_list(model.IdTransaccionSession);
+                foreach (var item in Lista_Calificacion_Historico)
+                {
+                    if (!bus_CalificacionHistorico.GuardarDB(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
 
-        //        ViewBag.error = ex.Message.ToString();
-        //        return View(model);
-        //    }
+                ViewBag.error = ex.Message.ToString();
+                return View(model);
+            }
 
-        //    return RedirectToAction("Index");
-        //}
+            return RedirectToAction("Index");
+        }
 
-        //public ActionResult GridViewPartial_CalificacionHistoricoImportacion()
-        //{
-        //    SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-        //    var model = Lista_CalificacionHistorico.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-        //    return PartialView("_GridViewPartial_CalificacionHistoricoImportacion", model);
-        //}
+        public ActionResult GridViewPartial_CalificacionHistoricoImportacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_CalificacionHistorico.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_CalificacionHistoricoImportacion", model);
+        }
         #endregion
     }
     public class aca_AnioLectivoCalificacionHistorico_List
@@ -276,6 +290,77 @@ namespace Core.Web.Areas.Academico.Controllers
         public void set_list(List<aca_AnioLectivoCalificacionHistorico_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
+    public class UploadControlSettings_Calificacion
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            aca_AnioLectivoCalificacionHistorico_List ListaCalificaciones = new aca_AnioLectivoCalificacionHistorico_List();
+            List<aca_AnioLectivoCalificacionHistorico_Info> Lista_Calificaciones = new List<aca_AnioLectivoCalificacionHistorico_Info>();
+            tb_persona_Bus bus_persona = new tb_persona_Bus();
+            aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
+            aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+            aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
+            aca_AnioLectivo_Jornada_Curso_Bus bus_jornada_curso = new aca_AnioLectivo_Jornada_Curso_Bus();
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #endregion
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                #region Calificacion   
+                var lst_persona = bus_persona.get_list(false);
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        int anio_inicio = (Convert.ToInt32(reader.GetValue(0)));
+                        int anio_fin = (Convert.ToInt32(reader.GetValue(1)));
+                        string cedula_ruc_alumno = (Convert.ToString(reader.GetValue(2)));
+                        aca_Alumno_Info info_alumno = bus_alumno.get_info_x_num_cedula(IdEmpresa, cedula_ruc_alumno);
+                        aca_AnioLectivo_Info info_anio = bus_anio.GetInfo_x_Anio(IdEmpresa, anio_inicio, anio_fin);
+                        aca_AnioLectivoConductaEquivalencia_Info info_conducta = bus_conducta.GetInfo_x_PromConducta(IdEmpresa, info_anio.IdAnio, (Convert.ToDecimal(reader.GetValue(7))));
+
+                        //tb_persona_Info info_persona_alumno = new tb_persona_Info();
+                        //info_persona_alumno = lst_persona.Where(q => q.pe_cedulaRuc==cedula_ruc_alumno).FirstOrDefault();
+
+                        aca_AnioLectivoCalificacionHistorico_Info info = new aca_AnioLectivoCalificacionHistorico_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdAnio = info_anio.IdAnio,
+                            pe_nombreCompleto = info_alumno.pe_nombreCompleto,
+                            IdAlumno = info_alumno.IdAlumno,
+                            IdNivel = (Convert.ToInt32(reader.GetValue(3))),
+                            IdCurso = (Convert.ToInt32(reader.GetValue(4))),
+                            AntiguaInstitucion = (Convert.ToString(reader.GetValue(5))),
+                            Promedio = (Convert.ToDecimal(reader.GetValue(6))),
+                            Conducta = (Convert.ToDecimal(reader.GetValue(7))),
+                            Letra = info_conducta.Letra
+                        };
+                            
+                        if (Lista_Calificaciones.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio==q.IdAnio && q.IdAlumno==info.IdAlumno && q.IdNivel==info.IdNivel && q.IdCurso==info.IdCurso).Count() == 0)
+                            Lista_Calificaciones.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+                ListaCalificaciones.set_list(Lista_Calificaciones, IdTransaccionSession);
+                #endregion
+            }
         }
     }
 }
