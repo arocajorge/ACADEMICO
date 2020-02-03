@@ -1,6 +1,6 @@
-﻿@model Core.Info.Academico.aca_Alumno_Info
+﻿@model Core.Info.Academico.aca_Profesor_Info
 @{
-    ViewBag.Title = "Importar estudiantes";
+    ViewBag.Title = "Importar profesores";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("ActualizarVariablesSession", "Alumno", new { Area = "Academico"})',
+            url: '@Url.Action("ActualizarVariablesSession", "Profesor", new { Area = "Academico"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -29,13 +29,12 @@
 
     function OnFileUploadComplete(s, e)
     {
-        GridViewPartial_AlumnoImportacion.PerformCallback();
-        GridViewPartial_AlumnoFamiliaImportacion.PerformCallback();
+        GridViewPartial_ProfesorImportacion.PerformCallback();
     }
 
 </script>
 
-@using (Html.BeginForm("Importar", "Alumno", FormMethod.Post, new { @role = "form", @id = "form" }))
+@using (Html.BeginForm("Importar", "Profesor", FormMethod.Post, new { @role = "form", @id = "form" }))
 {
     if (ViewBag.mensaje != null)
     {
@@ -64,7 +63,7 @@
                 @Html.DevExpress().UploadControl(settings =>
            {
                settings.Name = "UploadControlFile";
-               settings.CallbackRouteValues = new { Controller = "Alumno", Action = "UploadControlUpload" };
+               settings.CallbackRouteValues = new { Controller = "Profesor", Action = "UploadControlUpload" };
                settings.ShowUploadButton = true;
                settings.ShowProgressPanel = true;
                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -83,27 +82,15 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_estudiantes" aria-controls="vales" role="tab" data-toggle="tab">Datos de estudiantes</a>
-            </li>     
-            <li>
-                <a href="#tab_familiares" aria-controls="vales" role="tab" data-toggle="tab">Datos de familiares</a>
-            </li>        
+                <a href="#tab_profesores" aria-controls="vales" role="tab" data-toggle="tab">Datos de profesores</a>
+            </li>            
         </ul>
         <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_estudiantes">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_profesores">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_AlumnoImportacion")
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_familiares">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            @Html.Action("GridViewPartial_AlumnoFamiliaImportacion")
+                            @Html.Action("GridViewPartial_ProfesorImportacion")
                         </div>
                     </div>
                 </div>

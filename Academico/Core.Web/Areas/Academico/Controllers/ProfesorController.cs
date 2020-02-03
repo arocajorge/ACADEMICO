@@ -11,6 +11,8 @@ using Core.Bus.General;
 using Core.Info.Helps;
 using Core.Info.General;
 using DevExpress.Web;
+using System.IO;
+using ExcelDataReader;
 
 namespace Core.Web.Areas.Academico.Controllers
 {
@@ -319,6 +321,62 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_Alumno_Info model = new aca_Alumno_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(aca_Alumno_Info model)
+        {
+            try
+            {
+                var Lista_Profesores = Lista_Profesor.get_list(model.IdTransaccionSession);
+                foreach (var item in Lista_Profesores)
+                {
+                    if (!bus_profesor.GuardarDB(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.error = ex.Message.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult GridViewPartial_ProfesorImportacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_Profesor.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ProfesorImportacion", model);
+        }
+        #endregion
     }
 
     #region Clases para imagen
@@ -368,6 +426,122 @@ namespace Core.Web.Areas.Academico.Controllers
         public void set_list(List<aca_Profesor_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
+    public class UploadControlSettingsProfesor
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            aca_Profesor_List ListaProfesores = new aca_Profesor_List();
+            List<aca_Profesor_Info> Lista_Profesores = new List<aca_Profesor_Info>();
+            tb_persona_Bus bus_persona = new tb_persona_Bus();
+            aca_Catalogo_Bus bus_aca_catalogo = new aca_Catalogo_Bus();
+
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            #endregion
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                #region Alumno   
+                var lst_persona = bus_persona.get_list(false);
+                var IdProfesor = 1;
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        var return_naturaleza = "";
+                        var cedula_ruc_profesor = (Convert.ToString(reader.GetValue(3))).Trim();
+
+                        tb_persona_Info info_persona_profesor = new tb_persona_Info();
+                        tb_persona_Info info_persona_profe = new tb_persona_Info();
+
+                        info_persona_profe = lst_persona.Where(q => q.pe_cedulaRuc == cedula_ruc_profesor).FirstOrDefault();
+                        info_persona_profesor = info_persona_profe;
+
+                        if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(1)), cedula_ruc_profesor, ref return_naturaleza))
+                        {
+                            if (info_persona_profesor == null || info_persona_profe.IdPersona == 0)
+                            {
+                                tb_persona_Info info_profesor = new tb_persona_Info
+                                {
+                                    pe_Naturaleza = Convert.ToString(reader.GetValue(1)),
+                                    pe_nombreCompleto = Convert.ToString(reader.GetValue(3)).Trim() + ' ' + Convert.ToString(reader.GetValue(4)).Trim(),
+                                    pe_razonSocial = (Convert.ToString(reader.GetValue(1)) == "NATU" ? "" : Convert.ToString(reader.GetValue(3)).Trim() + ' ' + Convert.ToString(reader.GetValue(4)).Trim()),
+                                    pe_apellido = Convert.ToString(reader.GetValue(3)).Trim(),
+                                    pe_nombre = Convert.ToString(reader.GetValue(4)).Trim(),
+                                    pe_fechaNacimiento = Convert.ToDateTime(reader.GetValue(5)),
+                                    pe_sexo = Convert.ToString(reader.GetValue(6)),
+                                    IdTipoDocumento = Convert.ToString(reader.GetValue(2)),
+                                    pe_cedulaRuc = cedula_ruc_profesor,
+                                    pe_direccion = Convert.ToString(reader.GetValue(8)).Trim(),
+                                    pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim(),
+                                    pe_correo = Convert.ToString(reader.GetValue(9)).Trim(),
+                                    IdProfesion= Convert.ToInt32(reader.GetValue(11))
+                                };
+                                info_persona_profesor = info_profesor;
+                            }
+                            else
+                            {
+                                info_persona_profesor = bus_persona.get_info(info_persona_profe.IdPersona);
+                                var Naturaleza = Convert.ToString(reader.GetValue(1));
+                                info_persona_profesor.pe_Naturaleza = Naturaleza;
+                                info_persona_profesor.pe_nombreCompleto = Convert.ToString(reader.GetValue(3)).Trim() + ' ' + Convert.ToString(reader.GetValue(4)).Trim();
+                                info_persona_profesor.pe_razonSocial = (Convert.ToString(reader.GetValue(1)) == "NATU" ? "" : Convert.ToString(reader.GetValue(3)) + ' ' + Convert.ToString(reader.GetValue(4)));
+                                info_persona_profesor.pe_apellido = Convert.ToString(reader.GetValue(3)).Trim();
+                                info_persona_profesor.pe_nombre = Convert.ToString(reader.GetValue(4)).Trim();
+                                info_persona_profesor.IdTipoDocumento = Convert.ToString(reader.GetValue(2)).Trim();
+                                info_persona_profesor.pe_cedulaRuc = cedula_ruc_profesor;
+                                info_persona_profesor.pe_direccion = Convert.ToString(reader.GetValue(8)).Trim();
+                                info_persona_profesor.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim();
+                                info_persona_profesor.pe_correo = Convert.ToString(reader.GetValue(9)).Trim();
+                                info_persona_profesor.pe_sexo = Convert.ToString(reader.GetValue(6)).Trim();
+                                info_persona_profesor.IdProfesion = Convert.ToInt32(reader.GetValue(11));
+                            }
+
+                            info_persona_profesor.pe_Naturaleza = return_naturaleza;
+                            info_persona_profesor.pe_nombreCompleto = (info_persona_profesor.pe_razonSocial != "" ? info_persona_profesor.pe_razonSocial : (info_persona_profesor.pe_apellido + ' ' + info_persona_profesor.pe_nombre));
+
+                            aca_Profesor_Info info = new aca_Profesor_Info
+                            {
+                                IdEmpresa = IdEmpresa,
+                                IdProfesor = IdProfesor,
+                                IdPersona = info_persona_profesor.IdPersona,
+                                Direccion = info_persona_profesor.pe_direccion,
+                                Telefonos = info_persona_profesor.pe_telfono_Contacto,
+                                Correo = info_persona_profesor.pe_correo,
+                                Estado = true,
+                                EsProfesor = true,
+                                EsInspector = (Convert.ToString(reader.GetValue(12)).Trim()=="SI" ? true : false),
+                                IdUsuarioCreacion = SessionFixed.IdUsuario,
+                                FechaCreacion = DateTime.Now
+                            };
+
+                            info.info_persona = info_persona_profesor;
+                            IdProfesor++;
+
+                            if (Lista_Profesores.Where(q =>q.info_persona.pe_cedulaRuc == info_persona_profesor.pe_cedulaRuc).Count() == 0)
+                                Lista_Profesores.Add(info);
+                        }
+                    }
+                    else
+                        cont++;
+                }
+                ListaProfesores.set_list(Lista_Profesores, IdTransaccionSession);
+                #endregion
+            }
         }
     }
 }
