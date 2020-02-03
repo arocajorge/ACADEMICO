@@ -782,101 +782,92 @@ namespace Core.Data.Facturacion
         {
             try
             {
-
-                string IdCtaCble_IVA = string.Empty;
-                using (EntitiesGeneral Context = new EntitiesGeneral())
+                using (EntitiesFacturacion db = new EntitiesFacturacion())
                 {
-                    var porcentajes = (from q in info.lst_det
-                                       group q by new { q.IdCod_Impuesto_Iva } into g
-                                       select g.Key).ToList();
-
-                    foreach (var item in porcentajes)
+                    var lst = db.vwfa_notaCreDeb_ParaContabilizarAcademico.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdNota == info.IdNota).ToList();
+                    var NCND = lst.Count == 0 ? lst[0] : null;
+                    if (NCND == null)
+                        return null;
+                    
+                    #region Cabecera
+                    ct_cbtecble_Info diario = new ct_cbtecble_Info
                     {
-                        var impuesto = Context.tb_sis_Impuesto_x_ctacble.Include("tb_sis_Impuesto").Where(q => q.IdEmpresa_cta == info.IdEmpresa && q.IdCod_Impuesto == item.IdCod_Impuesto_Iva).FirstOrDefault();
-                        if (impuesto != null)
+                        IdEmpresa = info.IdEmpresa,
+                        IdTipoCbte = IdTipoCbte,
+                        IdCbteCble = 0,
+                        cb_Fecha = info.no_fecha.Date,
+                        IdSucursal = info.IdSucursal,
+                        IdPeriodo = Convert.ToInt32(info.no_fecha.ToString("yyyyMM")),
+                        IdUsuario = info.IdUsuario,
+                        IdUsuarioUltModi = info.IdUsuarioUltMod,
+                        cb_Observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString()) +" CLIENTE: "+NCND.NomCliente+" ALUMNO: "+NCND.NomAlumno + " " + info.sc_observacion,
+                        CodCbteCble = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? info.NumNota_Impresa : info.IdNota.ToString()),
+                        cb_Valor = 0,
+                        lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>()
+                    };
+                    #endregion
+                    int secuencia = 1;
+
+                    if (NCND.CreDeb.Trim() == "C")
+                    {
+                        #region Debe
+                        diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
                         {
-                            if (impuesto.tb_sis_Impuesto.porcentaje > 0)
-                            {                                
-                                IdCtaCble_IVA = impuesto.IdCtaCble;
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = secuencia++,
+                            IdCtaCble = NCND.IdCtaCbleDebe,
+                            dc_Observacion = NCND.vt_NumFactura,
+                            dc_Valor = Math.Round(Convert.ToDouble(NCND.Total), 2, MidpointRounding.AwayFromZero)
+                        });
+                        #endregion
+
+                        if (lst.Where(q => q.Valor_Aplicado != null).Count() > 0)
+                        {
+                            foreach (var item in lst)
+                            {
+                                #region Haber
+                                diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
+                                {
+                                    IdEmpresa = diario.IdEmpresa,
+                                    IdTipoCbte = diario.IdTipoCbte,
+                                    IdCbteCble = diario.IdCbteCble,
+                                    secuencia = secuencia++,
+                                    IdCtaCble = NCND.IdCtaCbleHaber,
+                                    dc_Observacion = NCND.vt_NumFactura,
+                                    dc_Valor = Math.Round(item.Valor_Aplicado ?? 0, 2, MidpointRounding.AwayFromZero) * -1
+                                });
+                                #endregion
                             }
+                        }else
+                        {
+                            diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
+                            {
+                                IdEmpresa = diario.IdEmpresa,
+                                IdTipoCbte = diario.IdTipoCbte,
+                                IdCbteCble = diario.IdCbteCble,
+                                secuencia = secuencia++,
+                                IdCtaCble = NCND.IdCtaCbleHaber,
+                                dc_Observacion = NCND.vt_NumFactura,
+                                dc_Valor = Math.Round(Convert.ToDouble(NCND.Total), 2, MidpointRounding.AwayFromZero) * -1
+                            });
                         }
                     }
+
+                    if (info.lst_det.Count == 0)
+                        return null;
+
+                    if (Math.Round(diario.lst_ct_cbtecble_det.Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero) != 0)
+                        return null;
+
+                    if (diario.lst_ct_cbtecble_det.Where(q => q.dc_Valor == 0).Count() > 0)
+                        return null;
+
+                    return diario;
                 }
 
-                #region Cabecera
-                ct_cbtecble_Info diario = new ct_cbtecble_Info
-                {
-                    IdEmpresa = info.IdEmpresa,
-                    IdTipoCbte = IdTipoCbte,
-                    IdCbteCble = 0,
-                    cb_Fecha = info.no_fecha.Date,
-                    IdSucursal = info.IdSucursal,
-                    IdPeriodo = Convert.ToInt32(info.no_fecha.ToString("yyyyMM")),
-                    IdUsuario = info.IdUsuario,
-                    IdUsuarioUltModi = info.IdUsuarioUltMod,
-                    cb_Observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000")) + info.sc_observacion,
-                    CodCbteCble = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? info.NumNota_Impresa : info.IdNota.ToString("000000000")),
-                    cb_Valor = 0,
-                    lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>()
-                };
-                #endregion
-                int secuencia = 1;
-
-                #region Cuenta cliente
-                if (!string.IsNullOrEmpty(IdCtaCble_cliente))
-                {
-                    diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
-                    {
-                        IdEmpresa = diario.IdEmpresa,
-                        IdTipoCbte = diario.IdTipoCbte,
-                        IdCbteCble = diario.IdCbteCble,
-                        secuencia = secuencia++,
-                        IdCtaCble = IdCtaCble_cliente,
-                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.sc_total), 2, MidpointRounding.AwayFromZero) * (info.CreDeb.Trim() == "C" ? -1 : 1),
-                        dc_para_conciliar = false
-                    });
-                }
-                #endregion
-
-                #region IVA
-                if (!string.IsNullOrEmpty(IdCtaCble_IVA))
-                    diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
-                    {
-                        IdEmpresa = diario.IdEmpresa,
-                        IdTipoCbte = diario.IdTipoCbte,
-                        IdCbteCble = diario.IdCbteCble,
-                        secuencia = secuencia++,
-                        IdCtaCble = IdCtaCble_IVA,
-                        dc_Valor = Math.Round(info.lst_det.Where(q => q.vt_por_iva > 0).Sum(q => q.sc_iva), 2, MidpointRounding.AwayFromZero) * (info.CreDeb.Trim() == "C" ? 1 : -1)
-                    });
-                #endregion
-
-                #region Cuenta tipo nota
-                if (!string.IsNullOrEmpty(IdCtaCble_tipoNota))
-                {
-                    diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
-                    {
-                        IdEmpresa = diario.IdEmpresa,
-                        IdTipoCbte = diario.IdTipoCbte,
-                        IdCbteCble = diario.IdCbteCble,
-                        secuencia = secuencia++,
-                        IdCtaCble = IdCtaCble_tipoNota,
-                        dc_Valor = Math.Round(info.lst_det.Sum(q => q.sc_subtotal), 2, MidpointRounding.AwayFromZero) * (info.CreDeb.Trim() == "C" ? 1 : -1),
-                        dc_para_conciliar = false,
-                    });
-                }
-                #endregion
-
-                if (info.lst_det.Count == 0)
-                    return null;
-
-                if (Math.Round(diario.lst_ct_cbtecble_det.Sum(q => q.dc_Valor),2,MidpointRounding.AwayFromZero) != 0)
-                    return null;
-
-                if (diario.lst_ct_cbtecble_det.Where(q=>q.dc_Valor == 0).Count() > 0)
-                    return null;
-
-                return diario;
+                
             }
             catch (Exception)
             {
