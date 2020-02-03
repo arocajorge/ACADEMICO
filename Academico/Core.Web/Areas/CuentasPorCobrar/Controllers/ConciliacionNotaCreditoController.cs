@@ -7,6 +7,9 @@ using Core.Bus.CuentasPorCobrar;
 using Core.Info.CuentasPorCobrar;
 using Core.Info.Helps;
 using Core.Web.Helps;
+using DevExpress.Web;
+using Core.Info.General;
+using Core.Bus.General;
 
 namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 {
@@ -17,7 +20,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         cxc_ConciliacionNotaCredito_Bus busConciliacion = new cxc_ConciliacionNotaCredito_Bus();
         cxc_ConciliacionNotaCreditoDet_Bus busConciliacionDet = new cxc_ConciliacionNotaCreditoDet_Bus();
         cxc_ConciliacionNotaCreditoDet_List ListaDet = new cxc_ConciliacionNotaCreditoDet_List();
+        cxc_ConciliacionNotaCreditoDetPorCruzar_List ListaDetPorCruzar = new cxc_ConciliacionNotaCreditoDetPorCruzar_List();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+        tb_persona_Bus busPersona = new tb_persona_Bus();
         #endregion
 
         #region Index
@@ -55,6 +60,24 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             List<cxc_ConciliacionNotaCredito_Info> model = Lista.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_ConciliacionNC", model);
         }
+        #endregion
+
+        #region Alumno bajo demanda
+        #region Combo bajo demanda Alumno
+        public ActionResult Cmb_Alumno_ConciliacionNC()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbAlumno_ConciliacionNC", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda_alumno(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return busPersona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda_alumno(ListEditItemRequestedByValueEventArgs args)
+        {
+            return busPersona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
+        }
+        #endregion
         #endregion
 
         #region Acciones
@@ -155,6 +178,17 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         }
         #endregion
 
+        #region Grid
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_ConciliacionNC_PorCruzar()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaDetPorCruzar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_ConciliacionNC_PorCruzar", model);
+        }
+        #endregion
+
     }
 
     public class cxc_ConciliacionNotaCredito_List
@@ -215,6 +249,27 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         {
             List<cxc_ConciliacionNotaCreditoDet_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.Secuencia == Secuencia).FirstOrDefault());
+        }
+    }
+
+    public class cxc_ConciliacionNotaCreditoDetPorCruzar_List
+    {
+        string Variable = "cxc_ConciliacionNotaCreditoDetPorCruzar_Info";
+        public List<cxc_ConciliacionNotaCreditoDet_Info> get_list(decimal IdTransaccionSession)
+        {
+
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<cxc_ConciliacionNotaCreditoDet_Info> list = new List<cxc_ConciliacionNotaCreditoDet_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<cxc_ConciliacionNotaCreditoDet_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<cxc_ConciliacionNotaCreditoDet_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
     }
 }

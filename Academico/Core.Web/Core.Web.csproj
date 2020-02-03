@@ -8110,6 +8110,9 @@
     <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\_GridViewPartial_ConciliacionNC.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\Index.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\_CmbAlumno_ConciliacionNC.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\_GridViewPartial_ConciliacionNC_PorCruzar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNotaCredito\_GridViewPartial_ConciliacionNCDet.cshtml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
