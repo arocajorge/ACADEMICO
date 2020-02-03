@@ -44,5 +44,40 @@ namespace Core.Data.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<cxc_ConciliacionNotaCreditoDet_Info> GetListPorCruzar(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                List<cxc_ConciliacionNotaCreditoDet_Info> Lista = new List<cxc_ConciliacionNotaCreditoDet_Info>();
+
+                using (EntitiesCuentasPorCobrar db = new EntitiesCuentasPorCobrar())
+                {
+                    var lst = db.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).ToList();
+                    int Secuencia = 1;
+                    foreach (var item in lst)
+                    {
+                        Lista.Add(new cxc_ConciliacionNotaCreditoDet_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            Secuencia = Secuencia++,
+                            IdSucursal = item.IdSucursal,
+                            IdBodega = item.IdBodega,
+                            IdCbteVtaNota = item.IdComprobante,
+                            vt_TipoDoc = item.vt_tipoDoc,
+                            Valor = item.Saldo ?? 0,
+                            ReferenciaDet = item.vt_NunDocumento
+                        });
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
