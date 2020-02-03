@@ -40,8 +40,41 @@
         <div class="col-md-12">
             <div class="col-md-4">
                 <div class="form-group">
+                    <label for="">Area</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdMateriaArea, settings =>
+                           {
+                               settings.Name = "IdMateriaArea";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdMateriaArea", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                               settings.Properties.Columns.Add("NomMateriaArea", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdMateriaArea";
+                               settings.Properties.ValueType = typeof(int);
+                               settings.Properties.TextField = "NomMateriaArea";
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_areas).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdMateriaArea, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
                     <label for="Sede">Grupo</label>
-                    @Html.DropDownListFor(q => q.IdMateriaGrupo, new SelectList(ViewBag.lst_grupos, "IdMateriaGrupo", "NomMateriaGrupo"), new { @class = "form-control" })
+                    @Html.DevExpress().ComboBoxFor(q => q.IdMateriaGrupo, settings =>
+                           {
+                               settings.Name = "IdMateriaGrupo";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdMateriaGrupo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                               settings.Properties.Columns.Add("NomMateriaGrupo", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdMateriaGrupo";
+                               settings.Properties.ValueType = typeof(int);
+                               settings.Properties.TextField = "NomMateriaGrupo";
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_grupos).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdMateriaGrupo, "", new { @class = "text-danger" })
                 </div>
             </div>

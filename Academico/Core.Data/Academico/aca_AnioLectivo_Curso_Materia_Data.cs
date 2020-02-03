@@ -94,8 +94,11 @@ namespace Core.Data.Academico
                                 IdCurso = info.IdCurso,
                                 IdMateria = info.IdMateria,
                                 NomMateria = info.NomMateria,
+                                NomMateriaArea = info.NomMateriaArea,
                                 NomMateriaGrupo = info.NomMateriaGrupo,
                                 OrdenMateria = info.OrdenMateria,
+                                OrdenMateriaArea = (info.NomMateriaArea==null ? null : info.OrdenMateriaArea),
+                                OrdenMateriaGrupo = (info.NomMateriaGrupo==null ? null : info.OrdenMateriaGrupo),
                                 EsObligatorio = info.EsObligatorio
                             };
                             Context.aca_AnioLectivo_Curso_Materia.Add(Entity);
@@ -130,7 +133,11 @@ namespace Core.Data.Academico
                         IdCurso = q.IdCurso,
                         IdMateria = q.IdMateria,
                         NomMateria = q.NomMateria,
+                        NomMateriaArea = q.NomMateriaArea,
+                        NomMateriaGrupo = q.NomMateriaGrupo,
                         OrdenMateria = q.OrdenMateria,
+                        OrdenMateriaArea = q.OrdenMateriaArea,
+                        OrdenMateriaGrupo = q.OrdenMateriaGrupo,
                         EsObligatorio = q.EsObligatorio
                     }).ToList();
                 }
@@ -159,9 +166,13 @@ namespace Core.Data.Academico
                                 return false;
 
                             Entity.NomMateria = item.NomMateria;
+                            Entity.NomMateriaArea = item.NomMateriaArea;
                             Entity.NomMateriaGrupo = item.NomMateriaGrupo;
                             Entity.EsObligatorio = item.EsObligatorio;
                             Entity.OrdenMateria = item.OrdenMateria;
+                            Entity.OrdenMateriaArea = item.OrdenMateriaArea;
+                            Entity.OrdenMateriaGrupo = item.OrdenMateriaGrupo;
+
                         }
                         Context.SaveChanges();
                     }

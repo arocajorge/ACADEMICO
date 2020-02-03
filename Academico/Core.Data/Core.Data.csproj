@@ -138,6 +138,9 @@
     <Compile Include="Base\vwaca_Hermanos.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_Materia.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwfa_factura_ParaContabilizarAcademico.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -1266,9 +1269,6 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Familia.cs">
-      <DependentUpon>ModelAcademico.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\vwaca_Materia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Matricula.cs">

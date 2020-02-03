@@ -1416,23 +1416,23 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Materia' no tiene definida n
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdMateria" />
-            <PropertyRef Name="NomMateriaGrupo" />
-            <PropertyRef Name="OrdenMateriaGrupo" />
+            <PropertyRef Name="OrdenMateria" />
             <PropertyRef Name="NomMateria" />
             <PropertyRef Name="EsObligatorio" />
-            <PropertyRef Name="OrdenMateria" />
             <PropertyRef Name="Estado" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdMateria" Type="int" Nullable="false" />
-          <Property Name="IdMateriaGrupo" Type="int" />
-          <Property Name="NomMateriaGrupo" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="OrdenMateriaGrupo" Type="int" Nullable="false" />
-          <Property Name="NomMateria" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="EsObligatorio" Type="bit" Nullable="false" />
-          <Property Name="OrdenMateria" Type="int" Nullable="false" />
-          <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="IdMateriaArea" Type="int" />
+          <Property Name="IdMateriaGrupo" Type="int" />
+          <Property Name="OrdenMateria" Type="int" Nullable="false" />
+          <Property Name="OrdenMateriaArea" Type="int" />
+          <Property Name="OrdenMateriaGrupo" Type="int" />
+          <Property Name="NomMateria" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NomMateriaArea" Type="varchar" MaxLength="500" />
+          <Property Name="NomMateriaGrupo" Type="varchar" MaxLength="500" />
+          <Property Name="EsObligatorio" Type="bit" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Matricula' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3288,14 +3288,16 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <DefiningQuery>SELECT 
     [vwaca_Materia].[IdEmpresa] AS [IdEmpresa], 
     [vwaca_Materia].[IdMateria] AS [IdMateria], 
+    [vwaca_Materia].[IdMateriaArea] AS [IdMateriaArea], 
     [vwaca_Materia].[IdMateriaGrupo] AS [IdMateriaGrupo], 
-    [vwaca_Materia].[NomMateriaGrupo] AS [NomMateriaGrupo], 
+    [vwaca_Materia].[OrdenMateria] AS [OrdenMateria], 
+    [vwaca_Materia].[OrdenMateriaArea] AS [OrdenMateriaArea], 
     [vwaca_Materia].[OrdenMateriaGrupo] AS [OrdenMateriaGrupo], 
     [vwaca_Materia].[NomMateria] AS [NomMateria], 
+    [vwaca_Materia].[NomMateriaArea] AS [NomMateriaArea], 
+    [vwaca_Materia].[NomMateriaGrupo] AS [NomMateriaGrupo], 
     [vwaca_Materia].[EsObligatorio] AS [EsObligatorio], 
-    [vwaca_Materia].[OrdenMateria] AS [OrdenMateria], 
-    [vwaca_Materia].[Estado] AS [Estado], 
-    [vwaca_Materia].[IdMateriaArea] AS [IdMateriaArea]
+    [vwaca_Materia].[Estado] AS [Estado]
     FROM [dbo].[vwaca_Materia] AS [vwaca_Materia]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwaca_Matricula" EntityType="Self.vwaca_Matricula" store:Type="Views" store:Schema="dbo">
@@ -7333,23 +7335,23 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdMateria" />
-            <PropertyRef Name="NomMateriaGrupo" />
-            <PropertyRef Name="OrdenMateriaGrupo" />
+            <PropertyRef Name="OrdenMateria" />
             <PropertyRef Name="NomMateria" />
             <PropertyRef Name="EsObligatorio" />
-            <PropertyRef Name="OrdenMateria" />
             <PropertyRef Name="Estado" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdMateria" Type="Int32" Nullable="false" />
-          <Property Name="IdMateriaGrupo" Type="Int32" />
-          <Property Name="NomMateriaGrupo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenMateriaGrupo" Type="Int32" Nullable="false" />
-          <Property Name="NomMateria" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="EsObligatorio" Type="Boolean" Nullable="false" />
-          <Property Name="OrdenMateria" Type="Int32" Nullable="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
           <Property Name="IdMateriaArea" Type="Int32" />
+          <Property Name="IdMateriaGrupo" Type="Int32" />
+          <Property Name="OrdenMateria" Type="Int32" Nullable="false" />
+          <Property Name="OrdenMateriaArea" Type="Int32" />
+          <Property Name="OrdenMateriaGrupo" Type="Int32" />
+          <Property Name="NomMateria" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomMateriaArea" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomMateriaGrupo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EsObligatorio" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -8785,14 +8787,16 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <EntitySetMapping Name="vwaca_Materia">
             <EntityTypeMapping TypeName="ModelAcademico.vwaca_Materia">
               <MappingFragment StoreEntitySet="vwaca_Materia">
-                <ScalarProperty Name="IdMateriaArea" ColumnName="IdMateriaArea" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="OrdenMateria" ColumnName="OrdenMateria" />
                 <ScalarProperty Name="EsObligatorio" ColumnName="EsObligatorio" />
+                <ScalarProperty Name="NomMateriaGrupo" ColumnName="NomMateriaGrupo" />
+                <ScalarProperty Name="NomMateriaArea" ColumnName="NomMateriaArea" />
                 <ScalarProperty Name="NomMateria" ColumnName="NomMateria" />
                 <ScalarProperty Name="OrdenMateriaGrupo" ColumnName="OrdenMateriaGrupo" />
-                <ScalarProperty Name="NomMateriaGrupo" ColumnName="NomMateriaGrupo" />
+                <ScalarProperty Name="OrdenMateriaArea" ColumnName="OrdenMateriaArea" />
+                <ScalarProperty Name="OrdenMateria" ColumnName="OrdenMateria" />
                 <ScalarProperty Name="IdMateriaGrupo" ColumnName="IdMateriaGrupo" />
+                <ScalarProperty Name="IdMateriaArea" ColumnName="IdMateriaArea" />
                 <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
