@@ -12,15 +12,15 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
     public class ConciliacionNotaCreditoController : Controller
     {
         // GET: CuentasPorCobrar/ConciliacionNotaCredito
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //[HttpPost]
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
     }
 }

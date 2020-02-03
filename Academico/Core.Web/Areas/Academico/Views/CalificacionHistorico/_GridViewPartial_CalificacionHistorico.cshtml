@@ -67,9 +67,9 @@
             c.Width = Unit.Pixel(150);
         });
         settings.Columns.Add("Descripcion", "Año").Width = Unit.Percentage(10);
-        settings.Columns.Add("NomNivel", "Nivel").Width = Unit.Percentage(20);
-        settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(20);
-        settings.Columns.Add("pe_nombreCompleto", "Alumno").Width = Unit.Percentage(30);
+        settings.Columns.Add("NomNivel", "Nivel").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(10);
+        settings.Columns.Add("pe_nombreCompleto", "Alumno").Width = Unit.Percentage(40);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Promedio";
@@ -77,6 +77,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.Width = Unit.Percentage(10);
         });
+        settings.Columns.Add("Letra", "Conducta").Width = Unit.Percentage(10);
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

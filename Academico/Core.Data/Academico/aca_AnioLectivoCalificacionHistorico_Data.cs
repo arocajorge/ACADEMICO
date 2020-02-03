@@ -34,6 +34,8 @@ namespace Core.Data.Academico
                             Descripcion = q.Descripcion,
                             NomNivel=q.NomNivel,
                             NomCurso= q.NomCurso,
+                            Letra = q.Letra,
+                            AntiguaInstitucion = q.AntiguaInstitucion,
                             pe_nombreCompleto = q.pe_nombreCompleto
                         });
                     });
