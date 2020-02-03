@@ -61,5 +61,6 @@ namespace Core.Data.Base
         public virtual DbSet<fa_factura_resumen> fa_factura_resumen { get; set; }
         public virtual DbSet<fa_PuntoVta_x_seg_usuario> fa_PuntoVta_x_seg_usuario { get; set; }
         public virtual DbSet<vwfa_factura_ParaContabilizarAcademico> vwfa_factura_ParaContabilizarAcademico { get; set; }
+        public virtual DbSet<vwfa_notaCreDeb_ParaContabilizarAcademico> vwfa_notaCreDeb_ParaContabilizarAcademico { get; set; }
     }
 }

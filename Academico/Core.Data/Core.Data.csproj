@@ -137,6 +137,9 @@
     <Compile Include="Base\vwfa_factura_ParaContabilizarAcademico.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwfa_notaCreDeb_ParaContabilizarAcademico.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\fa_PuntoVta_x_seg_usuario_Data.cs" />
     <Compile Include="General\tb_GrupoEtnico_Data.cs" />
     <Compile Include="General\tb_Religion_Data.cs" />
