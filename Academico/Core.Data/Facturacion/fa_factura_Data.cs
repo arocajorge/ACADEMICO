@@ -254,6 +254,9 @@ namespace Core.Data.Facturacion
                     && q.IdPeriodo == item.aca_IdPeriodo && q.IdRubro == item.aca_IdRubro);
                     if (Entity_MatricularRubro == null) return false;
 
+                    Entity_MatricularRubro.IdSucursal = info.IdSucursal;
+                    Entity_MatricularRubro.IdBodega = info.IdBodega;
+                    Entity_MatricularRubro.IdCbteVta = info.IdCbteVta;
                     Entity_MatricularRubro.FechaFacturacion = info.vt_fecha.Date;
 
                     db_a.SaveChanges();

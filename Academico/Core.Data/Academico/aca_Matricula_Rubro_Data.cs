@@ -132,5 +132,32 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public bool modificarDB(aca_Matricula_Rubro_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_Matricula_Rubro Entity = Context.aca_Matricula_Rubro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula && q.IdPeriodo==info.IdPeriodo && q.IdRubro==info.IdRubro);
+                    if (Entity == null)
+                        return false;
+
+                    Entity.IdSucursal = info.IdSucursal;
+                    Entity.IdBodega = info.IdBodega;
+                    Entity.IdCbteVta = info.IdCbteVta;
+                    Entity.FechaFacturacion = info.FechaFacturacion;
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

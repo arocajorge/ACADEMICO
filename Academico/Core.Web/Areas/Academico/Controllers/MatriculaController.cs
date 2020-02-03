@@ -761,10 +761,23 @@ namespace Core.Web.Areas.Academico.Controllers
                             {
                                 mensaje = "No se ha podido guardar la factura";
                             }
+                            else
+                            {
+                                #region Actualiza MatriculaRubro
+                                //var info_matricula_rubro = bus_matricula_rubro.GetInfo(info_matricula.IdEmpresa, info_matricula.IdMatricula, Convert.ToInt32(info_factura.info_resumen.IdPeriodo), Convert.ToInt32(info_factura.info_resumen.IdRubro));
+                                //info_matricula_rubro.IdSucursal = info_factura.IdSucursal;
+                                //info_matricula_rubro.IdBodega = info_factura.IdBodega;
+                                //info_matricula_rubro.IdCbteVta = info_factura.IdCbteVta;
+                                //info_matricula_rubro.FechaFacturacion = info_factura.vt_fecha;
+
+                                //if (!bus_matricula_rubro.ModificarDB(info_matricula_rubro))
+                                //{
+                                //    mensaje = "No se ha podido modificar el rubro por matricula";
+                                //}
+                                #endregion
+                            }
                         }
                         #endregion
-
-                            
                     }
                     else
                     {

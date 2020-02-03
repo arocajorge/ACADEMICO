@@ -81,12 +81,6 @@ namespace Core.Bus.Academico
                 var grabar_padre = false;
                 var grabar_madre = false;
 
-                if (info.info_persona_alumno.pe_cedulaRuc == "0943334409" || info.info_persona_alumno.pe_cedulaRuc == "0929694446" || 
-                    info.info_persona_alumno.pe_cedulaRuc == "0911583078" || info.info_persona_alumno.pe_cedulaRuc == "0931748693" || info.info_persona_alumno.pe_cedulaRuc == "0923513766")
-                {
-                    var a = bus_persona.get_info_x_num_cedula(info.info_persona_alumno.pe_cedulaRuc);
-                }
-
                 if (bus_persona.validar_existe_cedula(info.info_persona_alumno.pe_cedulaRuc) == 0)
                 {
                     info.info_persona_alumno = odata_per.armar_info(info.info_persona_alumno);
