@@ -66,8 +66,37 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("Descripcion", "Año").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdConciliacion", "# Conciliación").Width = Unit.Percentage(10);
+        //settings.Columns.Add("IdCobro", "# Cobro").Width = Unit.Percentage(10);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha";
+            column.Caption = "Fecha";
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.Width = Unit.Percentage(10);
+        });
+        settings.Columns.Add("pe_nombreCompleto", "Alumno").Width = Unit.Percentage(15);
+        settings.Columns.Add("Referencia", "Referencia").Width = Unit.Percentage(15);
+        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(20);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Valor";
+            column.Caption = "Valor";
+            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.Width = Unit.Percentage(10);
+        });
         
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }
