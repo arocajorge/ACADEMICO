@@ -511,6 +511,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 #region Profesor   
                 var lst_persona = bus_persona.get_list(false);
                 var IdProfesor = 1;
+                var no_validas = "";
+                var repetidos = "";
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
@@ -523,7 +525,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                         info_persona_profe = lst_persona.Where(q => q.pe_cedulaRuc == cedula_ruc_profesor).FirstOrDefault();
                         info_persona_profesor = info_persona_profe;
-
+                        
                         if (cl_funciones.ValidaIdentificacion(Convert.ToString(reader.GetValue(2)), Convert.ToString(reader.GetValue(1)), cedula_ruc_profesor, ref return_naturaleza))
                         {
                             if (info_persona_profesor == null || info_persona_profe.IdPersona == 0)
@@ -586,12 +588,24 @@ namespace Core.Web.Areas.Academico.Controllers
                             IdProfesor++;
 
                             if (Lista_Profesores.Where(q =>q.info_persona.pe_cedulaRuc == info_persona_profesor.pe_cedulaRuc).Count() == 0)
+                            {
                                 Lista_Profesores.Add(info);
+                            }
+                            else
+                            {
+                                repetidos = repetidos + cedula_ruc_profesor + " ";
+                            }
+                                
+                        }
+                        else
+                        {
+                             no_validas = no_validas + cedula_ruc_profesor+" ";
                         }
                     }
-                    else
-                        cont++;
+                    cont++;
                 }
+                no_validas = " " + no_validas;
+                repetidos = " " + repetidos;
                 ListaProfesores.set_list(Lista_Profesores, IdTransaccionSession);
                 #endregion
             }
