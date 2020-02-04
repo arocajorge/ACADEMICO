@@ -1177,6 +1177,9 @@ namespace Core.Web.Areas.Academico.Controllers
                 #region Alumno   
                 var lst_persona = bus_persona.get_list(false);
                 var IdAlumno = 1;
+                var no_validas = "";
+                var repetidos = "";
+
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
@@ -1266,12 +1269,25 @@ namespace Core.Web.Areas.Academico.Controllers
                             IdAlumno++;
 
                             if (Lista_Estudiantes.Where(q => q.info_persona_alumno.pe_cedulaRuc == info_persona_alumno.pe_cedulaRuc).Count() == 0)
+                            {
                                 Lista_Estudiantes.Add(info);
+                            }
+                            else
+                            {
+                                repetidos = repetidos + cedula_ruc_alumno + " ";
+                            }
+                            
+                        }
+                        else
+                        {
+                            no_validas = no_validas + cedula_ruc_alumno + " ";
                         }
                     }
                     else
                         cont++;
                 }
+                no_validas = " " + no_validas;
+                repetidos = " " + repetidos;
                 ListaEstudiantes.set_list(Lista_Estudiantes, IdTransaccionSession);
                 #endregion
 
@@ -1282,6 +1298,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 while (reader.Read())
                 {
                     var Secuencia = 1;
+                    no_validas = "";
+                    repetidos = "";
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
                         var return_naturaleza_familia = "";
@@ -1319,26 +1337,26 @@ namespace Core.Web.Areas.Academico.Controllers
                             else
                             {
                                 info_persona_familia = bus_persona.get_info(info_persona_fam.IdPersona);
-                                var Naturaleza = Convert.ToString(reader.GetValue(3));
-                                info_persona_familia.pe_Naturaleza = Naturaleza;
-                                info_persona_familia.pe_nombreCompleto = Convert.ToString(reader.GetValue(5)).Trim() + ' ' + Convert.ToString(reader.GetValue(6)).Trim();
-                                info_persona_familia.pe_razonSocial = (Convert.ToString(reader.GetValue(3)) == "NATU" ? "" : Convert.ToString(reader.GetValue(5)).Trim() + ' ' + Convert.ToString(reader.GetValue(6)).Trim());
-                                info_persona_familia.pe_apellido = Convert.ToString(reader.GetValue(5)).Trim();
-                                info_persona_familia.pe_nombre = Convert.ToString(reader.GetValue(6)).Trim();
-                                info_persona_familia.IdTipoDocumento = Convert.ToString(reader.GetValue(4));
-                                info_persona_familia.pe_cedulaRuc = cedula_ruc_familia;
-                                info_persona_familia.pe_direccion = Convert.ToString(reader.GetValue(8)).Trim();
-                                info_persona_familia.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim();
-                                info_persona_familia.pe_correo = Convert.ToString(reader.GetValue(9)).Trim();
-                                info_persona_familia.pe_celular = Convert.ToString(reader.GetValue(11)).Trim();
-                                info_persona_familia.IdReligion = Convert.ToInt32(reader.GetValue(26));
-                                info_persona_familia.IdProfesion = Convert.ToInt32(reader.GetValue(18));
+                                //var Naturaleza = Convert.ToString(reader.GetValue(3));
+                                //info_persona_familia.pe_Naturaleza = Naturaleza;
+                                //info_persona_familia.pe_nombreCompleto = Convert.ToString(reader.GetValue(5)).Trim() + ' ' + Convert.ToString(reader.GetValue(6)).Trim();
+                                //info_persona_familia.pe_razonSocial = (Convert.ToString(reader.GetValue(3)) == "NATU" ? "" : Convert.ToString(reader.GetValue(5)).Trim() + ' ' + Convert.ToString(reader.GetValue(6)).Trim());
+                                //info_persona_familia.pe_apellido = Convert.ToString(reader.GetValue(5)).Trim();
+                                //info_persona_familia.pe_nombre = Convert.ToString(reader.GetValue(6)).Trim();
+                                //info_persona_familia.IdTipoDocumento = Convert.ToString(reader.GetValue(4));
+                                //info_persona_familia.pe_cedulaRuc = cedula_ruc_familia;
+                                //info_persona_familia.pe_direccion = Convert.ToString(reader.GetValue(8)).Trim();
+                                //info_persona_familia.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim();
+                                //info_persona_familia.pe_correo = Convert.ToString(reader.GetValue(9)).Trim();
+                                //info_persona_familia.pe_celular = Convert.ToString(reader.GetValue(11)).Trim();
+                                //info_persona_familia.IdReligion = Convert.ToInt32(reader.GetValue(26));
+                                //info_persona_familia.IdProfesion = Convert.ToInt32(reader.GetValue(18));
                             }
 
-                            info_persona_familia.pe_Naturaleza = return_naturaleza_familia;
-                            info_persona_familia.pe_nombreCompleto = (info_persona_familia.pe_razonSocial != "" ? info_persona_familia.pe_razonSocial : (info_persona_familia.pe_apellido + ' ' + info_persona_familia.pe_nombre));
+                            //info_persona_familia.pe_Naturaleza = return_naturaleza_familia;
+                            //info_persona_familia.pe_nombreCompleto = (info_persona_familia.pe_razonSocial != "" ? info_persona_familia.pe_razonSocial : (info_persona_familia.pe_apellido + ' ' + info_persona_familia.pe_nombre));
 
-                            if (InfoAlumno != null && InfoAlumno.IdAlumno> 0)
+                            if (InfoAlumno != null && InfoAlumno.IdAlumno > 0)
                             {
 
                                 aca_Familia_Info info_fam = new aca_Familia_Info
@@ -1374,11 +1392,16 @@ namespace Core.Web.Areas.Academico.Controllers
                                 Lista_FamiliaEstudiantes.Add(info_fam);
                                 Secuencia++;
                             }
-                            
+
+                        }
+                        else
+                        {
+                            no_validas = no_validas + cedula_ruc_familia + " ";
                         }
                     }
                     cont++;
                 }
+                no_validas = " " + no_validas;
                 ListaFamilia.set_list(Lista_FamiliaEstudiantes, IdTransaccionSession);
             }
         }

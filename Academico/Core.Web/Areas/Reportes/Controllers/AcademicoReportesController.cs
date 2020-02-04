@@ -54,49 +54,119 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             model. IdAlumno = IdAlumno;
 
-            ACA_001_Rpt report = new ACA_001_Rpt();
+            ACA_001_Rpt Report = new ACA_001_Rpt();
 
             #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_001");
-            if (reporte != null)
+            var report = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_001");
+            if (report != null)
             {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
+                System.IO.File.WriteAllBytes(RootReporte, report.ReporteDisenio);
+                Report.LoadLayout(RootReporte);
             }
             #endregion
 
-            report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdSede.Value = model.IdSede;
-            report.p_IdAnio.Value = IdAnio;
-            report.p_IdAlumno.Value = IdAlumno;
-            report.usuario = SessionFixed.IdUsuario;
-            report.empresa = SessionFixed.NomEmpresa;
+            Report.p_IdEmpresa.Value = model.IdEmpresa;
+            Report.p_IdSede.Value = model.IdSede;
+            Report.p_IdAnio.Value = IdAnio;
+            Report.p_IdAlumno.Value = IdAlumno;
+            Report.usuario = SessionFixed.IdUsuario;
+            Report.empresa = SessionFixed.NomEmpresa;
 
-            ViewBag.Report = report;
+            ViewBag.Report = Report;
+
+            ACA_002_Rpt ReportSolicitud = new ACA_002_Rpt();
+            #region Cargo diseño desde base
+            var reportSol = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_002");
+            if (reportSol != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportSol.ReporteDisenio);
+                ReportSolicitud.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportSolicitud.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportSolicitud.p_IdAlumno.Value = model.IdAlumno;
+            ReportSolicitud.p_IdAnio.Value = model.IdAnio;
+            ReportSolicitud.usuario = SessionFixed.IdUsuario;
+            ReportSolicitud.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportSolicitud = ReportSolicitud;
+
+            ACA_003_Rpt ReportContrato = new ACA_003_Rpt();
+            #region Cargo diseño desde base
+            var reportCont = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_003");
+            if (reportCont != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportCont.ReporteDisenio);
+                ReportContrato.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportContrato.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportContrato.p_IdAlumno.Value = model.IdAlumno;
+            ReportContrato.p_IdSede.Value = model.IdSede;
+            ReportContrato.usuario = SessionFixed.IdUsuario;
+            ReportContrato.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportContrato = ReportContrato;
+
             return View(model);
         }
 
         [HttpPost]
         public ActionResult ACA_001(cl_filtros_Info model)
         {
-            ACA_001_Rpt report = new ACA_001_Rpt();
+            ACA_001_Rpt Report = new ACA_001_Rpt();
             #region Cargo diseño desde base
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_001");
-            if (reporte != null)
+            var report = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_001");
+            if (report != null)
             {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
+                System.IO.File.WriteAllBytes(RootReporte, report.ReporteDisenio);
+                Report.LoadLayout(RootReporte);
             }
             #endregion
-            report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdAlumno.Value = model.IdAlumno;
-            report.p_IdAnio.Value = model.IdAnio;
-            report.p_IdSede.Value = model.IdSede;
-            report.usuario = SessionFixed.IdUsuario;
-            report.empresa = SessionFixed.NomEmpresa;
+            Report.p_IdEmpresa.Value = model.IdEmpresa;
+            Report.p_IdAlumno.Value = model.IdAlumno;
+            Report.p_IdAnio.Value = model.IdAnio;
+            Report.p_IdSede.Value = model.IdSede;
+            Report.usuario = SessionFixed.IdUsuario;
+            Report.empresa = SessionFixed.NomEmpresa;
 
-            ViewBag.Report = report;
+            ViewBag.Report = Report;
+
+            ACA_002_Rpt ReportSolicitud = new ACA_002_Rpt();
+            #region Cargo diseño desde base
+            var reportSol = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_002");
+            if (reportSol != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportSol.ReporteDisenio);
+                ReportSolicitud.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportSolicitud.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportSolicitud.p_IdAlumno.Value = model.IdAlumno;
+            ReportSolicitud.p_IdAnio.Value = model.IdAnio;
+            ReportSolicitud.usuario = SessionFixed.IdUsuario;
+            ReportSolicitud.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportSolicitud = ReportSolicitud;
+
+            ACA_003_Rpt ReportContrato = new ACA_003_Rpt();
+            #region Cargo diseño desde base
+            var reportCont = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_003");
+            if (reportCont != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportCont.ReporteDisenio);
+                ReportContrato.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportContrato.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportContrato.p_IdAlumno.Value = model.IdAlumno;
+            ReportContrato.p_IdSede.Value = model.IdSede;
+            ReportContrato.usuario = SessionFixed.IdUsuario;
+            ReportContrato.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportContrato = ReportContrato;
+
             return View(model);
         }
 

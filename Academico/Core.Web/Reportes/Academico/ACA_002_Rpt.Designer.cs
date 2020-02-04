@@ -37,7 +37,7 @@
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.lbl_empresa = new DevExpress.XtraReports.UI.XRTableCell();
+            this.titulo = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow22 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl_sede = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -157,21 +157,21 @@
             // xrTableRow1
             // 
             this.xrTableRow1.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.lbl_empresa});
+            this.titulo});
             this.xrTableRow1.Name = "xrTableRow1";
             this.xrTableRow1.Weight = 1D;
             // 
-            // lbl_empresa
+            // titulo
             // 
-            this.lbl_empresa.Font = new System.Drawing.Font("Verdana", 11F);
-            this.lbl_empresa.Name = "lbl_empresa";
-            this.lbl_empresa.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.lbl_empresa.StylePriority.UseFont = false;
-            this.lbl_empresa.StylePriority.UsePadding = false;
-            this.lbl_empresa.StylePriority.UseTextAlignment = false;
-            this.lbl_empresa.Text = "REPUBLICA DEL ECUADOR";
-            this.lbl_empresa.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.lbl_empresa.Weight = 1.9987184195334D;
+            this.titulo.Font = new System.Drawing.Font("Verdana", 11F);
+            this.titulo.Name = "titulo";
+            this.titulo.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.titulo.StylePriority.UseFont = false;
+            this.titulo.StylePriority.UsePadding = false;
+            this.titulo.StylePriority.UseTextAlignment = false;
+            this.titulo.Text = "REPUBLICA DEL ECUADOR";
+            this.titulo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.titulo.Weight = 1.9987184195334D;
             // 
             // xrTableRow22
             // 
@@ -862,7 +862,7 @@
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo2;
         private DevExpress.XtraReports.UI.XRTable xrTable1;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow1;
-        private DevExpress.XtraReports.UI.XRTableCell lbl_empresa;
+        private DevExpress.XtraReports.UI.XRTableCell titulo;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow22;
         private DevExpress.XtraReports.UI.XRTableCell lbl_sede;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow3;

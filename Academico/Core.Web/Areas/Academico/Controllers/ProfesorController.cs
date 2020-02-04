@@ -551,23 +551,23 @@ namespace Core.Web.Areas.Academico.Controllers
                             else
                             {
                                 info_persona_profesor = bus_persona.get_info(info_persona_profe.IdPersona);
-                                var Naturaleza = Convert.ToString(reader.GetValue(1));
-                                info_persona_profesor.pe_Naturaleza = Naturaleza;
-                                info_persona_profesor.pe_nombreCompleto = Convert.ToString(reader.GetValue(3)).Trim() + ' ' + Convert.ToString(reader.GetValue(4)).Trim();
-                                info_persona_profesor.pe_razonSocial = (Convert.ToString(reader.GetValue(1)) == "NATU" ? "" : Convert.ToString(reader.GetValue(3)) + ' ' + Convert.ToString(reader.GetValue(4)));
-                                info_persona_profesor.pe_apellido = Convert.ToString(reader.GetValue(3)).Trim();
-                                info_persona_profesor.pe_nombre = Convert.ToString(reader.GetValue(4)).Trim();
-                                info_persona_profesor.IdTipoDocumento = Convert.ToString(reader.GetValue(2)).Trim();
-                                info_persona_profesor.pe_cedulaRuc = cedula_ruc_profesor;
-                                info_persona_profesor.pe_direccion = Convert.ToString(reader.GetValue(8)).Trim();
-                                info_persona_profesor.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim();
-                                info_persona_profesor.pe_correo = Convert.ToString(reader.GetValue(9)).Trim();
-                                info_persona_profesor.pe_sexo = Convert.ToString(reader.GetValue(6)).Trim();
-                                info_persona_profesor.IdProfesion = Convert.ToInt32(reader.GetValue(11));
+                                //var Naturaleza = Convert.ToString(reader.GetValue(1));
+                                //info_persona_profesor.pe_Naturaleza = Naturaleza;
+                                //info_persona_profesor.pe_nombreCompleto = Convert.ToString(reader.GetValue(3)).Trim() + ' ' + Convert.ToString(reader.GetValue(4)).Trim();
+                                //info_persona_profesor.pe_razonSocial = (Convert.ToString(reader.GetValue(1)) == "NATU" ? "" : Convert.ToString(reader.GetValue(3)) + ' ' + Convert.ToString(reader.GetValue(4)));
+                                //info_persona_profesor.pe_apellido = Convert.ToString(reader.GetValue(3)).Trim();
+                                //info_persona_profesor.pe_nombre = Convert.ToString(reader.GetValue(4)).Trim();
+                                //info_persona_profesor.IdTipoDocumento = Convert.ToString(reader.GetValue(2)).Trim();
+                                //info_persona_profesor.pe_cedulaRuc = cedula_ruc_profesor;
+                                //info_persona_profesor.pe_direccion = Convert.ToString(reader.GetValue(8)).Trim();
+                                //info_persona_profesor.pe_telfono_Contacto = Convert.ToString(reader.GetValue(10)).Trim();
+                                //info_persona_profesor.pe_correo = Convert.ToString(reader.GetValue(9)).Trim();
+                                //info_persona_profesor.pe_sexo = Convert.ToString(reader.GetValue(6)).Trim();
+                                //info_persona_profesor.IdProfesion = Convert.ToInt32(reader.GetValue(11));
                             }
 
-                            info_persona_profesor.pe_Naturaleza = return_naturaleza;
-                            info_persona_profesor.pe_nombreCompleto = (info_persona_profesor.pe_razonSocial != "" ? info_persona_profesor.pe_razonSocial : (info_persona_profesor.pe_apellido + ' ' + info_persona_profesor.pe_nombre));
+                            //info_persona_profesor.pe_Naturaleza = return_naturaleza;
+                            //info_persona_profesor.pe_nombreCompleto = (info_persona_profesor.pe_razonSocial != "" ? info_persona_profesor.pe_razonSocial : (info_persona_profesor.pe_apellido + ' ' + info_persona_profesor.pe_nombre));
 
                             aca_Profesor_Info info = new aca_Profesor_Info
                             {

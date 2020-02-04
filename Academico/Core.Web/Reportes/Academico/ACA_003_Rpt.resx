@@ -117,6 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="xrTableCell3.ExpressionBindings" xml:space="preserve">
+    <value>Concat([NomRepresentante],'de nacionalidad ', '________________', 'titular de cédula de ciudadania No. ', [CedulaRepresentante] , ' con domicilio en la calle: ', [Direccion],' sector: ', '________', ' barrio: ', '________', ' del Cantón Guayaquil, número de telefono: ', '_______', ' correo electrónico: ', '_______',' en calidad de representante legal del estudiante ', [NomAlumno],' de ', [NomCurso], 'a quien en adelante se le denominará EL REPRESENTANTE; y, por otra parte la U.E. LICEO CRISTIANO DE GUAYAQUIL, ubicada en el cantón Guayaquil, legalmente representada por el señor  DR. EDUARDO ARAUZ VERGARA  a quien en adelante se le denominará la INSTITUCIÓN EDUCATIVA.')</value>
+  </data>
+  <data name="xrTableCell4.Text" xml:space="preserve">
+    <value>CLÁUSULA SEGUNDA.- ANTECEDENTES:
+La U.E. LICEO CRISTIANO DE GUAYAQUIL, es una institución de derecho privado, sin fines de lucro y servicio público que cuenta con las autorizaciones de funcionamiento de acuerdo a lo dispuesto en la Ley Orgánica de la Educación Intercultural.
+
+La U.E. LICEO CRISTIANO DE GUAYAQUIL, brinda educación integral de excelencia a niños, niñas y adolescentes, en los niveles (inicial, básico y bachillerato). Su actividad y los servicios educativos que presta, se enmarcan en las normas de la Constitución, la Ley Orgánica de Educación Intercultural y su reglamento de aplicación, el Código de Niñez y Adolescencia y demás leyes de la República del Ecuador. Está sujeta al control de regulación del Ministerio de Educación, quien ha autorizado sus actividades.
+ 
+La institución Educativa ha realizado el proceso en el Acuerdo Ministerial No MINEDUCME-2017-00006-A resuelto por la Junta Distrital Reguladora de Pensiones y Matrículas en el cual emite la correspondiente resolución de costos de matrícula y pensiones para el año lectivo 2019-2020 a través del sistema informático del Ministerio de Educación, misma que podrá ser revisada en la página web institucional www.liceocristiano.edu.ec y públicada en la cartilla institucional.
+
+EL REPRESENTANTE LEGAL, consciente de su responsabilidad de participar en el proceso educativo de su representado/a, ha escogido libremente el modelo educativo que ofrece la INSTITUCIÓN EDUCATIVA por considerarlo adecuado para el desarrollo integral de su representado y con el objeto de asegurar para él (ella), el pleno ejercicio de sus derechos y una educación acorde con sus principios, creencias y módelo pedagógico. EL REPRESENTANTE se ha informado adecuada y ampliamente de este modelo educativo que consta en el Proyecto Educativo Institucional, Código de Convivencia y en las políticas internas vigentes, documentos que se encuentran públicados en la página web del plantel. EL REPRESENTANTE, ha leído y comprendido el alcance de las disposiciones que constan en los documentos mencionados y, de manera libre, voluntaria y responsable se compromete a respetarlos y a hacerlos cumplir pues sus contenidos están conformes con sus creencias, principios y cultura, así mismo comprende las consecuencias de su inobservancia y acepta su obligación  de ser corresponsable en el proceso educativo de su representado
+</value>
+  </data>
   <metadata name="objectDataSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
