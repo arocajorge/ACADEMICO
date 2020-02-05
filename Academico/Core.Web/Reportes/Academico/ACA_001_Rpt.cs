@@ -37,16 +37,14 @@ namespace Core.Web.Reportes.Academico
 
             ACA_001_Bus bus_rpt = new ACA_001_Bus();
             List<ACA_001_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, IdAlumno, IdAnio);
-
-            var info_rep = bus_familia.GetInfo_Representante(IdEmpresa,IdAlumno, cl_enumeradores.eTipoRepresentante.LEGAL.ToString());
+            var info_rep = bus_familia.GetInfo_Representante(IdEmpresa, IdAlumno, cl_enumeradores.eTipoRepresentante.LEGAL.ToString());
             string RepLegal = "";
-            if (info_rep!=null)
+            if (info_rep != null)
             {
                 RepLegal = info_rep.pe_nombreCompleto;
             }
-
-            lbl_compromiso.Text.Replace("_.", RepLegal);
-
+            txtCompromiso.Rtf = txtCompromiso.Rtf.Replace("[RepLegal]", RepLegal);
+            
             var info_sede = bus_sede.GetInfo(IdEmpresa,IdSede);
             lbl_sede.Text = info_sede.NomSede;
             lbl_rector.Text = info_sede.NombreRector;
@@ -54,14 +52,6 @@ namespace Core.Web.Reportes.Academico
             lbl_representante.Text = info_rep.pe_cedulaRuc;
 
             this.DataSource = lst_rpt;
-        }
-        
-        private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdAlumno"].Value = p_IdAlumno.Value == null ? 0 : Convert.ToDecimal(p_IdAlumno.Value);
-
-            ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
     }
 }
