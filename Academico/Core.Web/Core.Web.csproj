@@ -8119,6 +8119,7 @@
     <Content Include="Areas\Academico\Views\MateriaArea\Index.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaArea\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaArea\Nuevo.cshtml" />
+    <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

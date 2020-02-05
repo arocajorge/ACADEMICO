@@ -111,8 +111,8 @@ namespace Core.Data.Academico
                     }
                     Context.SaveChanges();
 
-                    //string sql = "exec spaca_corregir_menu '" + IdEmpresa + "','" + IdSede.ToString() + "','" + "" + "'";
-                    //Context.Database.ExecuteSqlCommand(sql);
+                    string sql = "exec spaca_corregir_menu '" + IdEmpresa + "','" + IdSede.ToString() + "','" + "" + "'";
+                    Context.Database.ExecuteSqlCommand(sql);
                 }
 
                 return true;
