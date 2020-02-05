@@ -33,7 +33,6 @@ namespace Core.Data.Base
         public virtual DbSet<cxc_cobro_tipo_Param_conta_x_sucursal> cxc_cobro_tipo_Param_conta_x_sucursal { get; set; }
         public virtual DbSet<cxc_cobro_x_caj_Caja_Movimiento> cxc_cobro_x_caj_Caja_Movimiento { get; set; }
         public virtual DbSet<cxc_cobro_x_ct_cbtecble> cxc_cobro_x_ct_cbtecble { get; set; }
-        public virtual DbSet<cxc_Parametro> cxc_Parametro { get; set; }
         public virtual DbSet<vwcxc_cobro_det_retencion> vwcxc_cobro_det_retencion { get; set; }
         public virtual DbSet<vwcxc_cobro_det_valor_retenciones> vwcxc_cobro_det_valor_retenciones { get; set; }
         public virtual DbSet<vwcxc_cobro_para_retencion> vwcxc_cobro_para_retencion { get; set; }
@@ -46,5 +45,6 @@ namespace Core.Data.Base
         public virtual DbSet<cxc_cobro> cxc_cobro { get; set; }
         public virtual DbSet<cxc_cobro_det> cxc_cobro_det { get; set; }
         public virtual DbSet<vwcxc_cobro_det> vwcxc_cobro_det { get; set; }
+        public virtual DbSet<cxc_Parametro> cxc_Parametro { get; set; }
     }
 }
