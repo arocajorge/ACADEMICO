@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro_det_retencion" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro_det_valor_retenciones" Width="1.5" PointX="7.75" PointY="7.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro_para_retencion" Width="1.5" PointX="13.75" PointY="5.75" />
-        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro_det" Width="1.5" PointX="2.75" PointY="12.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro" Width="1.5" PointX="10.375" PointY="15.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cartera_x_cobrar" Width="1.5" PointX="14.375" PointY="10.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_ConciliacionNotaCredito" Width="1.5" PointX="7.5" PointY="21.125" />
@@ -33,10 +32,11 @@
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_x_caj_Caja_Movimiento_cxc_cobro" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_x_ct_cbtecble_cxc_cobro" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_ConciliacionNotaCredito_cxc_cobro" />
-        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro_det" Width="1.5" PointX="16.5" PointY="4.5" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro_det" Width="1.5" PointX="16.875" PointY="4.375" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro_det" Width="1.5" PointX="0.75" PointY="12.75" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_det_cxc_cobro" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_det_cxc_cobro_tipo" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

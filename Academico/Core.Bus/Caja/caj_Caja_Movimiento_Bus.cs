@@ -44,21 +44,12 @@ namespace Core.Bus.Caja
         {
             try
             {
-                var caja = odata_caja.get_info(info.IdEmpresa, info.IdCaja);
-                //Como necesito que exista un diario para que el movimiento herede sus PK, armo un diario en base a lo que ingresen en la pantalla
-                info.info_ct_cbtecble = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, caja.IdSucursal, info.IdTipocbte, info.IdCbteCble, info.cm_observacion, info.cm_fecha);
-                info.info_ct_cbtecble.IdUsuario = info.IdUsuario;
-
-                //Guardo el diario
-                if (odata_ct.guardarDB(info.info_ct_cbtecble))
-                {//Si el diario se guarda exitosamente entonces paso los PK al movimiento de caja
-                    info.IdCbteCble = info.info_ct_cbtecble.IdCbteCble;
                     //Guardo el movimiento de caja                    
                     if (odata.guardarDB(info))
                     {
                         return true;
                     }                    
-                }
+                
                 return false;
             }
             catch (Exception ex)
@@ -73,17 +64,12 @@ namespace Core.Bus.Caja
         {
             try
             {
-                var caja = odata_caja.get_info(info.IdEmpresa, info.IdCaja);
-                var info_ct_cbtecble = odata_ct.armar_info(info.lst_ct_cbtecble_det, info.IdEmpresa, caja.IdSucursal, info.IdTipocbte, info.IdCbteCble, info.cm_observacion, info.cm_fecha);
-                info_ct_cbtecble.IdUsuarioUltModi = info.IdUsuarioUltMod;
-
-                if (odata_ct.modificarDB(info_ct_cbtecble))
-                {
+                
                     if (odata.modificarDB(info))
                     {
                         return true;
                     }
-                }
+              
                 return false;
             }
             catch (Exception ex)
