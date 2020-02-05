@@ -22,6 +22,7 @@ namespace Core.Data.Base
         public Nullable<int> IdBodega_Cbte { get; set; }
         public decimal IdCbte_vta_nota { get; set; }
         public double dc_ValorPago { get; set; }
+        public Nullable<double> dc_ValorProntoPago { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
@@ -32,6 +33,7 @@ namespace Core.Data.Base
         public string ip { get; set; }
         public string estado { get; set; }
         public string IdCobro_tipo { get; set; }
+        public Nullable<decimal> IdNotaCredito { get; set; }
     
         public virtual cxc_cobro cxc_cobro { get; set; }
         public virtual cxc_cobro_tipo cxc_cobro_tipo { get; set; }

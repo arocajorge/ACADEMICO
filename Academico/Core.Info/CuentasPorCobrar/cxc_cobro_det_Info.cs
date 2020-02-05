@@ -54,6 +54,8 @@ namespace Core.Info.CuentasPorCobrar
         public decimal ProntoPago { get; set; }
         public double? ValorProntoPago { get; set; }
         public DateTime? FechaProntoPago { get; set; }
+        public double? dc_ValorProntoPago { get; set; }
+        public decimal? IdNotaCredito { get; set; }
         #endregion
 
     }

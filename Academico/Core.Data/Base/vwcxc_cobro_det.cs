@@ -36,5 +36,7 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> vt_fech_venc { get; set; }
         public Nullable<decimal> IdCliente { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public Nullable<decimal> IdNotaCredito { get; set; }
+        public Nullable<double> dc_ValorProntoPago { get; set; }
     }
 }

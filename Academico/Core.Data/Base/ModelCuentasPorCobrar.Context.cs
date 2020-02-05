@@ -37,7 +37,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwcxc_cobro_det_retencion> vwcxc_cobro_det_retencion { get; set; }
         public virtual DbSet<vwcxc_cobro_det_valor_retenciones> vwcxc_cobro_det_valor_retenciones { get; set; }
         public virtual DbSet<vwcxc_cobro_para_retencion> vwcxc_cobro_para_retencion { get; set; }
-        public virtual DbSet<vwcxc_cobro_det> vwcxc_cobro_det { get; set; }
         public virtual DbSet<vwcxc_cobro> vwcxc_cobro { get; set; }
         public virtual DbSet<vwcxc_cartera_x_cobrar> vwcxc_cartera_x_cobrar { get; set; }
         public virtual DbSet<cxc_ConciliacionNotaCredito> cxc_ConciliacionNotaCredito { get; set; }
@@ -46,5 +45,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwcxc_ConciliacionNotaCreditoDet> vwcxc_ConciliacionNotaCreditoDet { get; set; }
         public virtual DbSet<cxc_cobro> cxc_cobro { get; set; }
         public virtual DbSet<cxc_cobro_det> cxc_cobro_det { get; set; }
+        public virtual DbSet<vwcxc_cobro_det> vwcxc_cobro_det { get; set; }
     }
 }

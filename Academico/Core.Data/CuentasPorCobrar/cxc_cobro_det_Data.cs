@@ -89,7 +89,9 @@ namespace Core.Data.CuentasPorCobrar
                                  vt_fech_venc = q.vt_fech_venc,
                                  IdCobro_tipo_det = q.IdCobro_tipo,
                                  IdCobro = q.IdCobro,
-                                 dc_ValorPago = q.dc_ValorPago
+                                 dc_ValorPago = q.dc_ValorPago,
+                                 IdNotaCredito = q.IdNotaCredito,
+                                 dc_ValorProntoPago = q.dc_ValorProntoPago
                              }).ToList();
 
                     Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento +"-"+ q.IdBodega_Cbte.ToString() +"-"+ q.IdCbte_vta_nota.ToString(); q.Saldo_final = Convert.ToDouble(q.Saldo - q.dc_ValorPago); });
