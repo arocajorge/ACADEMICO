@@ -45,5 +45,41 @@ namespace Core.Data.Reportes.Academico
                 throw;
             }
         }
+
+        public ACA_002_Info get_info(int IdEmpresa, decimal IdAlumno, int IdAnio)
+        {
+            try
+            {
+                ACA_002_Info Info;
+                using (EntitiesReportes Context = new EntitiesReportes())
+                {
+                    Info = Context.VWACA_002.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdAnio == IdAnio).Select(q => new ACA_002_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdMatricula = q.IdMatricula,
+                        IdAnio = q.IdAnio,
+                        IdAlumno = q.IdAlumno,
+                        CodigoAlumno = q.CodigoAlumno,
+                        NombreAlumno = q.NombreAlumno,
+                        Descripcion = q.Descripcion,
+                        NomSede = q.NomSede,
+                        NomNivel = q.NomNivel,
+                        NomJornada = q.NomJornada,
+                        NomCurso = q.NomCurso,
+                        NomParalelo = q.NomParalelo,
+                        NombreRep = q.NombreRep,
+                        CedulaRep = q.CedulaRep,
+                        NomPlantilla = q.NomPlantilla
+
+                    }).FirstOrDefault();
+                }
+                return Info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -23,5 +23,18 @@ namespace Core.Bus.Reportes.Academico
                 throw;
             }
         }
+
+        public ACA_003_Info GetInfo(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.get_info(IdEmpresa, IdAlumno);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
