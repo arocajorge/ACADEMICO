@@ -19,6 +19,9 @@
         settings.Properties.Columns.Add("pe_nombreCompleto", "Cliente", 70);
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "VaciarLista";
         settings.Properties.FilterMinLength = 3;
+        settings.Properties.AllowMouseWheel = false;
+        settings.Properties.DropDownButton.Visible = false;
+        
     })
     .BindList(new Core.Web.Areas.CuentasPorCobrar.Controllers.CobranzaController().get_list_bajo_demanda, new Core.Web.Areas.CuentasPorCobrar.Controllers.CobranzaController().get_info_bajo_demanda)
     .Bind(Model.GetType() == typeof(Core.Info.CuentasPorCobrar.cxc_cobro_Info) ? "" : (Model == 0 ? "" : Model));

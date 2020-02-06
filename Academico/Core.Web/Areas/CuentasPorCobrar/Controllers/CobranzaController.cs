@@ -453,6 +453,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         public JsonResult EditingAddNewFactura(string IDs = "", double TotalACobrar = 0, decimal IdTransaccionSession = 0)
         {
             double saldo = TotalACobrar;
+            double ValorProntoPago = 0;
             if (IDs != "")
             {
                 int IdEmpresaSesion = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -469,11 +470,13 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             var lst = list_det.get_list(IdTransaccionSession);
             foreach (var item in lst)
             {
+                ValorProntoPago = (item.vt_total - item.ValorProntoPago ?? 0);
                 if (saldo > 0)
                 {
-                    item.dc_ValorPago = saldo >= Convert.ToDouble(item.Saldo) ? Convert.ToDouble(item.Saldo) : saldo;
-                    item.Saldo_final = Convert.ToDouble(item.Saldo) - item.dc_ValorPago;
-                    saldo = saldo - item.dc_ValorPago;
+                    item.dc_ValorProntoPago = saldo >= ValorProntoPago ? ValorProntoPago : 0;
+                    item.dc_ValorPago = saldo >= Convert.ToDouble(item.Saldo) ? Convert.ToDouble(item.Saldo) - ValorProntoPago : saldo;
+                    item.Saldo_final = Convert.ToDouble(item.Saldo - ValorProntoPago) - item.dc_ValorPago;
+                    saldo = saldo - item.dc_ValorPago - item.dc_ValorProntoPago ?? 0;
                 }
                 else
                     item.dc_ValorPago = 0;
