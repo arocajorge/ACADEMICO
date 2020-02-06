@@ -41,11 +41,15 @@ namespace Core.Data.CuentasPorCobrar
                             vt_Subtotal = q.vt_Subtotal,
                             vt_iva = q.vt_iva,
                             vt_fech_venc = q.vt_fech_venc,
-                            dc_ValorRetFu = q.dc_ValorRetFu,
-                            dc_ValorRetIva = q.dc_ValorRetIva,
                             NomCliente = q.NomCliente,
                             ValorProntoPago = q.ValorProntoPago,
-                            FechaProntoPago = q.FechaProntoPago
+                            FechaProntoPago = q.FechaProntoPago,
+
+                            IdAnio = q.IdAnio,
+                            IdPlantilla = q.IdPlantilla,
+                            IdPuntoVta = q.IdPuntoVta,
+                            IdCliente = q.IdCliente,
+                            IdAlumno = q.IdAlumno
                         });
                     }
 
@@ -91,7 +95,11 @@ namespace Core.Data.CuentasPorCobrar
                                  IdCobro = q.IdCobro,
                                  dc_ValorPago = q.dc_ValorPago,
                                  IdNotaCredito = q.IdNotaCredito,
-                                 dc_ValorProntoPago = q.dc_ValorProntoPago
+                                 dc_ValorProntoPago = q.dc_ValorProntoPago,
+                                 IdAnio = q.IdAnio,
+                                 IdPlantilla = q.IdPlantilla,
+                                 IdPuntoVta = q.IdPuntoVta,
+                                 IdAlumno = q.IdAlumno
                              }).ToList();
 
                     Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento +"-"+ q.IdBodega_Cbte.ToString() +"-"+ q.IdCbte_vta_nota.ToString(); q.Saldo_final = Convert.ToDouble(q.Saldo - q.dc_ValorPago); });

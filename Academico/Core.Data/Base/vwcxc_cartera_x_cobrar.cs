@@ -33,13 +33,16 @@ namespace Core.Data.Base
         public Nullable<double> vt_Subtotal { get; set; }
         public Nullable<double> vt_iva { get; set; }
         public System.DateTime vt_fech_venc { get; set; }
-        public double dc_ValorRetFu { get; set; }
-        public double dc_ValorRetIva { get; set; }
+        public Nullable<double> dc_ValorRetFu { get; set; }
+        public Nullable<double> dc_ValorRetIva { get; set; }
         public string CodCliente { get; set; }
         public string NomCliente { get; set; }
         public string em_nombre { get; set; }
         public string Estado { get; set; }
         public Nullable<double> ValorProntoPago { get; set; }
         public Nullable<System.DateTime> FechaProntoPago { get; set; }
+        public Nullable<int> IdAnio { get; set; }
+        public Nullable<int> IdPlantilla { get; set; }
+        public Nullable<int> IdPuntoVta { get; set; }
     }
 }

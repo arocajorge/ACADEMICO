@@ -317,7 +317,6 @@ namespace Core.Data.Facturacion
                     db_f.fa_notaCreDeb_resumen.Add(Entity_Resumen);
                     #endregion
 
-
                     #region Cruce
                     Secuencia = 1;
                     foreach (var item in info.lst_cruce)

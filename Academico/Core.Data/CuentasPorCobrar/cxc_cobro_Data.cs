@@ -1,10 +1,12 @@
 ﻿using Core.Data.Base;
 using Core.Data.Caja;
 using Core.Data.Contabilidad;
+using Core.Data.Facturacion;
 using Core.Data.General;
 using Core.Info.Caja;
 using Core.Info.Contabilidad;
 using Core.Info.CuentasPorCobrar;
+using Core.Info.Facturacion;
 using Core.Info.General;
 using Core.Info.Helps;
 using System;
@@ -17,6 +19,7 @@ namespace Core.Data.CuentasPorCobrar
     {
         caj_Caja_Movimiento_Data DataCajaMovimiento = new caj_Caja_Movimiento_Data();
         ct_cbtecble_Data DataContable = new ct_cbtecble_Data();
+        fa_notaCreDeb_Data DataNotaCredito = new fa_notaCreDeb_Data();
 
         public List<cxc_cobro_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
@@ -217,16 +220,33 @@ namespace Core.Data.CuentasPorCobrar
                     IdUsuario = info.IdUsuario
                 };
                 Context_cxc.cxc_cobro.Add(cab);
+                Context_cxc.SaveChanges();
                 #endregion
 
                 #region Detalle cobro
                 foreach (var item in info.lst_det)
                 {
+                    item.IdEmpresa = cab.IdEmpresa;
+                    item.IdSucursal = cab.IdSucursal;
+                    item.IdCobro = cab.IdCobro;
+                    
+                    if (item.ValorProntoPago > 0)
+                    {
+                        var NotaCredito = ArmarNotaCredito(item);
+                        if(NotaCredito != null)
+                        {
+                            if (DataNotaCredito.guardarDB(NotaCredito))
+                            {
+                                item.IdNotaCredito = NotaCredito.IdNota;
+                            }
+                        }
+                    }
+
                     cxc_cobro_det det = new cxc_cobro_det
                     {
-                        IdEmpresa = item.IdEmpresa = cab.IdEmpresa,
-                        IdSucursal = item.IdSucursal = cab.IdSucursal,
-                        IdCobro = item.IdCobro = cab.IdCobro,
+                        IdEmpresa = item.IdEmpresa,
+                        IdSucursal = item.IdSucursal,
+                        IdCobro = item.IdCobro,
                         secuencial = item.secuencial = Secuencia++,
                         dc_TipoDocumento = item.dc_TipoDocumento,
                         IdBodega_Cbte = item.IdBodega_Cbte,
@@ -323,7 +343,7 @@ namespace Core.Data.CuentasPorCobrar
                 }
 
                 #endregion
-
+                Context_cxc.SaveChanges();
                 Context_cxc.Dispose();
                 return true;
             }
@@ -377,6 +397,32 @@ namespace Core.Data.CuentasPorCobrar
                 }
                 foreach (var item in info.lst_det)
                 {
+                    item.IdEmpresa = info.IdEmpresa;
+                    item.IdSucursal = info.IdSucursal;
+                    item.IdCobro = info.IdCobro;
+
+                    if (item.ValorProntoPago > 0)
+                    {
+                        var NotaCredito = ArmarNotaCredito(item);
+                        if (NotaCredito != null)
+                        {
+                            if (item.IdNotaCredito == null)
+                            {
+                                if (DataNotaCredito.guardarDB(NotaCredito))
+                                {
+                                    item.IdNotaCredito = NotaCredito.IdNota;
+                                }
+                            }else
+                            {
+                                NotaCredito.IdNota = item.IdNotaCredito ?? 0;
+                                if (DataNotaCredito.modificarDB(NotaCredito))
+                                {
+                                    
+                                }
+                            }
+                            
+                        }
+                    }
                     cxc_cobro_det det = new cxc_cobro_det
                     {
                         IdEmpresa = item.IdEmpresa = info.IdEmpresa,
@@ -535,6 +581,15 @@ namespace Core.Data.CuentasPorCobrar
                     var cobros_det = Context.cxc_cobro_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro == info.IdCobro).ToList();
                     foreach (var item in cobros_det)
                     {
+                        DataNotaCredito.anularDB(new fa_notaCreDeb_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdSucursal = item.IdSucursal,
+                            IdBodega = item.IdBodega_Cbte ?? 0,
+                            IdNota = item.IdNotaCredito ?? 0,
+                            IdUsuarioUltAnu = info.IdUsuarioUltAnu,
+                            MotiAnula = info.MotiAnula
+                        });
                         item.estado = "I";
                     }
 
@@ -795,6 +850,118 @@ namespace Core.Data.CuentasPorCobrar
                     return null;
 
                 return retorno;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public fa_notaCreDeb_Info ArmarNotaCredito(cxc_cobro_det_Info info)
+        {
+            try
+            {
+                EntitiesCuentasPorCobrar dbCxc = new EntitiesCuentasPorCobrar();
+                EntitiesFacturacion dbFac = new EntitiesFacturacion();
+                EntitiesAcademico dbACA = new EntitiesAcademico();
+
+                var paramCxc = dbCxc.cxc_Parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                if (paramCxc == null)
+                    return null;
+
+                if (info.dc_TipoDocumento == "NTDB" && paramCxc.IdTipoNotaProntoPago == null)
+                    return null;
+                
+                if(info.dc_TipoDocumento == "FACT")
+                {
+                    var Plantilla = dbACA.aca_Plantilla.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPlantilla == info.IdPlantilla).FirstOrDefault();
+                    if (Plantilla == null)
+                        return null;
+
+                    paramCxc.IdTipoNotaProntoPago = Plantilla.IdTipoNota;
+                }
+
+                var TipoNota = dbFac.fa_TipoNota.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoNota == paramCxc.IdTipoNotaProntoPago).FirstOrDefault();
+                if (TipoNota == null)
+                    return null;
+
+                var PuntoVta = dbFac.vwfa_PuntoVta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdPuntoVta == info.IdPuntoVta).FirstOrDefault();
+                if (PuntoVta == null)
+                    return null;
+
+                if (TipoNota.IdProducto == null)
+                    return null;
+
+                fa_notaCreDeb_Info Retorno = new fa_notaCreDeb_Info
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdSucursal = info.IdSucursal,
+                    IdBodega = info.IdBodega_Cbte ?? 0,
+                    IdPuntoVta = info.IdPuntoVta ?? 0,
+                    CodNota = "ProntoPago",
+                    CreDeb = "C",
+                    CodDocumentoTipo = "NTDC",
+                    Serie1 = PuntoVta.Su_CodigoEstablecimiento,
+                    Serie2 = PuntoVta.cod_PuntoVta,
+                    NumAutorizacion = null,
+                    NumNota_Impresa = null,
+                    Fecha_Autorizacion = null,
+                    IdCliente = info.IdCliente,
+                    IdAlumno = info.IdAlumno,
+                    no_fecha = DateTime.Now.Date,
+                    no_fecha_venc = DateTime.Now.Date,
+                    IdTipoNota = paramCxc.IdTipoNotaProntoPago ?? 0,
+                    sc_observacion = "NC Por pronto pago de "+info.dc_TipoDocumento+" "+info.Observacion,
+                    NaturalezaNota = "SRI",
+                    IdCtaCble_TipoNota = TipoNota.IdCtaCble,
+                    info_resumen = new fa_notaCreDeb_resumen_Info(),
+                    lst_det = new List<fa_notaCreDeb_det_Info>(),
+                    lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>()
+                };
+                Retorno.lst_det.Add(new fa_notaCreDeb_det_Info
+                {
+                    IdProducto = TipoNota.IdProducto ?? 0,
+                    sc_cantidad = 1,
+                    sc_cantidad_factura = null,
+                    sc_Precio = info.ValorProntoPago ?? 0,
+                    sc_precioFinal = info.ValorProntoPago ?? 0,
+                    sc_descUni = 0,
+                    sc_PordescUni = 0,
+                    vt_por_iva = 0,
+                    IdCod_Impuesto_Iva = "IVA0",
+                    sc_iva = 0,
+                    sc_subtotal = info.ValorProntoPago ?? 0,
+                    sc_total = info.ValorProntoPago ?? 0
+                });
+
+                Retorno.lst_cruce.Add(new fa_notaCreDeb_x_fa_factura_NotaDeb_Info
+                {
+                    IdEmpresa_fac_nd_doc_mod = info.IdEmpresa,
+                    IdSucursal_fac_nd_doc_mod = info.IdSucursal,
+                    IdBodega_fac_nd_doc_mod = info.IdBodega_Cbte ?? 0,
+                    IdCbteVta_fac_nd_doc_mod = info.IdCbte_vta_nota,
+                    vt_tipoDoc = info.dc_TipoDocumento,
+                    Valor_Aplicado = info.ValorProntoPago ?? 0,
+                    fecha_cruce = DateTime.Now.Date
+                });
+
+                Retorno.info_resumen = new fa_notaCreDeb_resumen_Info
+                {
+                    SubtotalIVASinDscto = 0,
+                    SubtotalSinIVASinDscto = Convert.ToDecimal(info.ValorProntoPago ?? 0),
+                    SubtotalSinDscto = Convert.ToDecimal(info.ValorProntoPago ?? 0),
+                    Descuento = 0,
+                    SubtotalIVAConDscto = 0,
+                    SubtotalSinIVAConDscto = Convert.ToDecimal(info.ValorProntoPago ?? 0),
+                    SubtotalConDscto = Convert.ToDecimal(info.ValorProntoPago ?? 0),
+                    IdCod_Impuesto_IVA = "IVA0",
+                    ValorIVA = 0,
+                    Total = Convert.ToDecimal(info.ValorProntoPago ?? 0),
+                    PorIva = 0
+                };
+
+                return Retorno;
             }
             catch (Exception)
             {
