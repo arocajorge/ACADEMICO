@@ -48,15 +48,18 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        settings.Columns.Add("IdSucursal", "Establecimiento").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdBodega", "IdBodega").Width = Unit.Percentage(10);
-        settings.Columns.Add("IdCliente", "IdCliente").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdSucursal", "Establecimiento").Width = Unit.Percentage(8);
+        settings.Columns.Add("IdBodega", "IdBodega").Width = Unit.Percentage(8);
+        settings.Columns.Add("CedulaCliente", "Cedula Cliente").Width = Unit.Percentage(8);
+        settings.Columns.Add("NomCliente", "Cliente").Width = Unit.Percentage(10);
+        settings.Columns.Add("CedulaAlumno", "Cedula Alumno").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomAlumno", "Alumno").Width = Unit.Percentage(10);
         settings.Columns.Add("CodNota", "Documento").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "no_fecha";
             column.Caption = "Fecha";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "d";
             column.EditorProperties().DateEdit(sp =>
             {
@@ -68,7 +71,7 @@
         {
             column.FieldName = "no_fecha_venc";
             column.Caption = "Fecha vencimiento";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "d";
             column.EditorProperties().DateEdit(sp =>
             {
@@ -76,7 +79,7 @@
                 sp.Width = Unit.Percentage(100);
             });
         });
-        settings.Columns.Add("sc_observacion", "Observación").Width = Unit.Percentage(30);
+        settings.Columns.Add("sc_observacion", "Observación").Width = Unit.Percentage(10);
 
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
