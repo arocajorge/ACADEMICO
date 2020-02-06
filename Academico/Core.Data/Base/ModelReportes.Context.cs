@@ -42,5 +42,38 @@ namespace Core.Data.Base
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_001_Result>("SPACA_001", idEmpresaParameter, idAlumnoParameter);
         }
+    
+        public virtual ObjectResult<SPCXC_001_Result> SPCXC_001(Nullable<int> idEmpresa, Nullable<int> idSucursalIni, Nullable<int> idSucursalFin, Nullable<decimal> idAlumnoIni, Nullable<decimal> idAlumnoFin, Nullable<System.DateTime> fechaCorte, Nullable<bool> mostrarSaldo0)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idSucursalIniParameter = idSucursalIni.HasValue ?
+                new ObjectParameter("IdSucursalIni", idSucursalIni) :
+                new ObjectParameter("IdSucursalIni", typeof(int));
+    
+            var idSucursalFinParameter = idSucursalFin.HasValue ?
+                new ObjectParameter("IdSucursalFin", idSucursalFin) :
+                new ObjectParameter("IdSucursalFin", typeof(int));
+    
+            var idAlumnoIniParameter = idAlumnoIni.HasValue ?
+                new ObjectParameter("IdAlumnoIni", idAlumnoIni) :
+                new ObjectParameter("IdAlumnoIni", typeof(decimal));
+    
+            var idAlumnoFinParameter = idAlumnoFin.HasValue ?
+                new ObjectParameter("IdAlumnoFin", idAlumnoFin) :
+                new ObjectParameter("IdAlumnoFin", typeof(decimal));
+    
+            var fechaCorteParameter = fechaCorte.HasValue ?
+                new ObjectParameter("FechaCorte", fechaCorte) :
+                new ObjectParameter("FechaCorte", typeof(System.DateTime));
+    
+            var mostrarSaldo0Parameter = mostrarSaldo0.HasValue ?
+                new ObjectParameter("MostrarSaldo0", mostrarSaldo0) :
+                new ObjectParameter("MostrarSaldo0", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXC_001_Result>("SPCXC_001", idEmpresaParameter, idSucursalIniParameter, idSucursalFinParameter, idAlumnoIniParameter, idAlumnoFinParameter, fechaCorteParameter, mostrarSaldo0Parameter);
+        }
     }
 }

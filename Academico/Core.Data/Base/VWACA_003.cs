@@ -28,5 +28,7 @@ namespace Core.Data.Base
         public string DescripcionAnterior { get; set; }
         public string Direccion { get; set; }
         public string DescripcionPensiones { get; set; }
+        public string CorreoSeFactura { get; set; }
+        public string CorreoRepresentante { get; set; }
     }
 }
