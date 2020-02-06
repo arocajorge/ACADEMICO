@@ -263,6 +263,7 @@ namespace Core.Info.Helps
         public int[] IntArray { get; set; }
         public int IdTipoNota { get; set; }
         public string CreDeb { get; set; }
+        public decimal IdAlumno { get; set; }
 
 
         public cl_filtros_facturacion_Info()

@@ -1,9 +1,9 @@
 ﻿@using System.Web.UI.WebControls
-@model Core.Erp.Info.Helps.cl_filtros_facturacion_Info
+@model Core.Info.Helps.cl_filtros_facturacion_Info
 @{
-    Layout = "~/Areas/Reportes/Views/Layout/_Layout_filtros.cshtml";
-    ViewBag.Title = "Estado de cuenta de clientes";
-    if (string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Erp.Web.Helps.SessionFixed.IdEmpresa))
+    Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
+    ViewBag.Title = "Estado de cuenta por alumno";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
     }
@@ -115,9 +115,9 @@
                 
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="IdCliente">Cliente</label>
-                        @Html.Partial("_CmbCliente_CXC", Model.IdCliente)
-                        @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
+                        <label for="IdCliente">Alumno</label>
+                        @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                        @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
 
                     </div>
                 </div>              

@@ -8127,6 +8127,7 @@
     <Content Include="Areas\Academico\Views\MateriaArea\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\MateriaArea\Nuevo.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_001.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_CmbAlumno.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
