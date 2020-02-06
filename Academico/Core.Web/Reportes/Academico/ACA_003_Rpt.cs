@@ -133,7 +133,6 @@ namespace Core.Web.Reportes.Academico
             txtContrato.Rtf = txtContrato.Rtf.Replace("[NombreRepLegal]", NombreRepLegal);
             txtContrato.Rtf = txtContrato.Rtf.Replace("[NombreRepEconomico]", NombreRepEconomico);
             txtContrato.Rtf = txtContrato.Rtf.Replace("[NombrePersonaFactura]", NombrePersonaFactura);
-            txtContrato.Rtf = txtContrato.Rtf.Replace("[DireccionRepLegal]", DireccionRepLegal);
             txtContrato.Rtf = txtContrato.Rtf.Replace("[DireccionSede]", DireccionSede);
 
 
