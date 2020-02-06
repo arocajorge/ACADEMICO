@@ -40,6 +40,13 @@ namespace Core.Info.Facturacion
         public Nullable<double> sc_saldo { get; set; }
         public fa_notaCreDeb_resumen_Info info_resumen { get; set; }
 
+
+        public string NomAlumno { get; set; }
+        public string NomCliente { get; set; }
+        public string CedulaAlumno { get; set; }
+        public string CedulaCliente { get; set; }
+        public string NomCuenta { get; set; }
+
         #region Campos de auditoria
         public string IdUsuario { get; set; }
         public string IdUsuarioUltMod { get; set; }

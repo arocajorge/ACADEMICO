@@ -762,6 +762,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
             aca_Familia_Bus bus_familia = new aca_Familia_Bus();
             tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
             fa_PuntoVta_Bus bus_ptoventa = new fa_PuntoVta_Bus();
+            ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
             int cont = 0;
             int IdNota = 1;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
@@ -776,123 +777,127 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
                 #region Saldo Fact      
                 var info_fa_parametro = bus_fa_parametro.get_info(IdEmpresa);
-                var IdTipoNota = 1; //default
+                var IdTipoNota = 1; //2 Saldo inicial NTDB -3 Saldo inicial NTCR
                 var infoTipoNota = bus_tipo_nota.get_info(IdEmpresa, IdTipoNota);
 
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
+                        var CreDeb = Convert.ToString(reader.GetValue(10)).Trim();
+                        var CedAlu = Convert.ToString(reader.GetValue(2)).Trim();
+                        var CedCli = Convert.ToString(reader.GetValue(1)).Trim();
                         var Su_CodigoEstablecimiento = Convert.ToString(reader.GetValue(0)).Trim();
                         var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
                         var IdSucursal = lst_sucursal.Where(q => q.Su_CodigoEstablecimiento == Su_CodigoEstablecimiento).FirstOrDefault().IdSucursal;
-                        var info_ptoventa = bus_ptoventa.get_list_x_tipo_doc(IdEmpresa, IdSucursal, "NTDB").FirstOrDefault();
-                        var InfoCliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, Convert.ToString(reader.GetValue(1)));
-                        var info_estudiante = bus_alumno.get_info_x_num_cedula(IdEmpresa, Convert.ToString(reader.GetValue(2)));
+                        var info_ptoventa = bus_ptoventa.get_list_x_tipo_doc(IdEmpresa, IdSucursal, (CreDeb=="D" ? "NTDB": "NTCR") ).FirstOrDefault();
+                        var InfoCliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, CedCli);
+                        var info_Alumno = bus_alumno.get_info_x_num_cedula(IdEmpresa, CedAlu);
                         var infoBodega = bus_bodega.get_info(IdEmpresa, IdSucursal, 1);
+                        var infoCtaCble = bus_cuenta.get_info(IdEmpresa, Convert.ToString(reader.GetValue(9)).Trim());                      
+                        var InfoContactosCliente = bus_cliente_contatos.get_info(IdEmpresa, InfoCliente.IdCliente, 1);
 
-                        if (InfoCliente != null && InfoCliente.IdCliente != 0)
+                        fa_notaCreDeb_Info info = new fa_notaCreDeb_Info
                         {
-                            var InfoContactosCliente = bus_cliente_contatos.get_info(IdEmpresa, InfoCliente.IdCliente, 1);
-                            fa_notaCreDeb_Info info = new fa_notaCreDeb_Info
-                            {
-                                IdEmpresa = IdEmpresa,
-                                IdSucursal = IdSucursal,
-                                IdBodega = infoBodega.IdBodega,
-                                IdNota = IdNota++,
-                                dev_IdEmpresa = null,
-                                dev_IdDev_Inven = null,
-                                CodNota = Convert.ToString(reader.GetValue(3)),
-                                CreDeb = "D",
-                                CodDocumentoTipo = "NTDB",
-                                Serie1 = null,
-                                Serie2 = null,
-                                NumNota_Impresa = null,
-                                NumAutorizacion = null,
-                                Fecha_Autorizacion = null,
-                                IdCliente = InfoCliente.IdCliente,
-                                no_fecha = Convert.ToDateTime(reader.GetValue(6)),
-                                no_fecha_venc = Convert.ToDateTime(reader.GetValue(7)),
-                                IdTipoNota = infoTipoNota.IdTipoNota,
-                                sc_observacion = Convert.ToString(reader.GetValue(8)) == "" ? ("DOCUMENTO #" + Convert.ToString(reader.GetValue(3)) + " CLIENTE: " + InfoCliente.info_persona.pe_nombreCompleto) : Convert.ToString(reader.GetValue(8)),
-                                IdUsuario = SessionFixed.IdUsuario,
-                                NaturalezaNota = null,
-                                IdCtaCble_TipoNota = infoTipoNota.IdCtaCble,
-                                IdPuntoVta = info_ptoventa.IdPuntoVta,
-                                aprobada_enviar_sri = false,
-                                IdAlumno =info_estudiante.IdAlumno
-                            };
+                            IdEmpresa = IdEmpresa,
+                            IdSucursal = IdSucursal,
+                            IdBodega = infoBodega.IdBodega,
+                            IdNota = IdNota++,
+                            dev_IdEmpresa = null,
+                            dev_IdDev_Inven = null,
+                            CodNota = Convert.ToString(reader.GetValue(3)).Trim(),
+                            CreDeb = CreDeb,
+                            CodDocumentoTipo = (CreDeb == "D" ? "NTDB" : "NTCR"),
+                            Serie1 = null,
+                            Serie2 = null,
+                            NumNota_Impresa = null,
+                            NumAutorizacion = null,
+                            Fecha_Autorizacion = null,
+                            IdCliente = (InfoCliente.IdCliente == 0 ? 0 : InfoCliente.IdCliente),
+                            no_fecha = Convert.ToDateTime(reader.GetValue(6)),
+                            no_fecha_venc = Convert.ToDateTime(reader.GetValue(7)),
+                            IdTipoNota = infoTipoNota.IdTipoNota,
+                            sc_observacion = Convert.ToString(reader.GetValue(8)).Trim() == "" ? ("DOCUMENTO #" + Convert.ToString(reader.GetValue(3)) + " CLIENTE: " + InfoCliente.info_persona.pe_nombreCompleto) : Convert.ToString(reader.GetValue(8)),
+                            IdUsuario = SessionFixed.IdUsuario,
+                            NaturalezaNota = null,
+                            //IdCtaCble_TipoNota = infoTipoNota.IdCtaCble,
+                            IdCtaCble_TipoNota = (infoCtaCble == null ? null : infoCtaCble.IdCtaCble),
+                            IdPuntoVta = info_ptoventa.IdPuntoVta,
+                            aprobada_enviar_sri = false,
+                            IdAlumno = (info_Alumno.IdAlumno == 0 ? 0 : info_Alumno.IdAlumno),
+                            NomAlumno = (info_Alumno.IdAlumno==0 ? "" : info_Alumno.pe_nombreCompleto),
+                            NomCliente = (InfoCliente.IdCliente == 0 ? "" : InfoCliente.info_persona.pe_nombreCompleto),
+                            CedulaAlumno = (info_Alumno.IdAlumno == 0 ? CedAlu : info_Alumno.pe_cedulaRuc),
+                            CedulaCliente = (InfoCliente.IdCliente == 0 ? CedCli : InfoCliente.info_persona.pe_cedulaRuc),
+                            NomCuenta = (infoCtaCble == null ? "" : infoCtaCble.pc_Cuenta)
+                        };
 
-                            info.lst_det = new List<fa_notaCreDeb_det_Info>();
-                            info.lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>();
+                        info.lst_det = new List<fa_notaCreDeb_det_Info>();
+                        info.lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>();
 
-                            fa_notaCreDeb_det_Info info_detalle = new fa_notaCreDeb_det_Info
-                            {
-                                IdEmpresa = IdEmpresa,
-                                IdSucursal = IdSucursal,
-                                IdBodega = info.IdBodega,
-                                IdNota = info.IdNota,
-                                IdProducto = 1,
-                                sc_cantidad = 1,
-                                sc_Precio = Convert.ToDouble(reader.GetValue(5)),
-                                sc_descUni = 0,
-                                sc_PordescUni = 0,
-                                sc_precioFinal = Convert.ToDouble(reader.GetValue(5)),
-                                sc_subtotal = Convert.ToDouble(reader.GetValue(5)),
-                                sc_iva = 0,
-                                sc_total = Convert.ToDouble(reader.GetValue(5)),
-                                sc_costo = 0,
-                                sc_observacion = Convert.ToString(reader.GetValue(8)),
-                                vt_por_iva = 0,
-                                IdPunto_Cargo = null,
-                                IdPunto_cargo_grupo = null,
-                                IdCod_Impuesto_Iva = "IVA0",
-                                IdCentroCosto = null,
-                                sc_cantidad_factura = null
-                            };
+                        fa_notaCreDeb_det_Info info_detalle = new fa_notaCreDeb_det_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdSucursal = IdSucursal,
+                            IdBodega = info.IdBodega,
+                            IdNota = info.IdNota,
+                            IdProducto = 1,
+                            sc_cantidad = 1,
+                            sc_Precio = Convert.ToDouble(reader.GetValue(5)),
+                            sc_descUni = 0,
+                            sc_PordescUni = 0,
+                            sc_precioFinal = Convert.ToDouble(reader.GetValue(5)),
+                            sc_subtotal = Convert.ToDouble(reader.GetValue(5)),
+                            sc_iva = 0,
+                            sc_total = Convert.ToDouble(reader.GetValue(5)),
+                            sc_costo = 0,
+                            sc_observacion = Convert.ToString(reader.GetValue(8)).Trim(),
+                            vt_por_iva = 0,
+                            IdPunto_Cargo = null,
+                            IdPunto_cargo_grupo = null,
+                            IdCod_Impuesto_Iva = "IVA0",
+                            IdCentroCosto = null,
+                            sc_cantidad_factura = null
+                        };
 
-                            info.lst_det.Add(info_detalle);
+                        info.lst_det.Add(info_detalle);
 
-                            Lista_Factura.Add(info);
+                        #region Resumen
+                        info.info_resumen = new fa_notaCreDeb_resumen_Info();
+                        info.info_resumen.SubtotalConDscto = Convert.ToDecimal(info_detalle.sc_total);
+                        var info_ImpuestoIVA = bus_impuesto.get_info("IVA0");
+                        var Descuento = 0;
+                        var ValorIVA = Math.Round(info.info_resumen.ValorIVA, 2, MidpointRounding.AwayFromZero);
+                        var SubtotalIVASinDscto = Math.Round(info.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
+                        var SubtotalSinIVASinDscto = Math.Round(info.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
+                        var SubtotalIVAConDscto = Math.Round((info_ImpuestoIVA.porcentaje > 0 ? info.info_resumen.SubtotalConDscto : 0), 2, MidpointRounding.AwayFromZero);
+                        var SubtotalSinIVAConDscto = Math.Round((info_ImpuestoIVA.porcentaje == 0 ? info.info_resumen.SubtotalConDscto : 0), 2, MidpointRounding.AwayFromZero);
+                        var SubtotalSinDscto = Math.Round(info.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
+                        var SubtotalConDscto = Math.Round(info.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
+                        var Total = Math.Round(info.info_resumen.Total, 2, MidpointRounding.AwayFromZero);
+                        decimal PorIVA = Convert.ToDecimal(info_ImpuestoIVA.porcentaje);
 
-                            #region Resumen
-                            info.info_resumen = new fa_notaCreDeb_resumen_Info();
-                            info.info_resumen.SubtotalConDscto = Convert.ToDecimal(info_detalle.sc_total);
-                            var info_ImpuestoIVA = bus_impuesto.get_info("IVA0");
-                            var Descuento = 0;
-                            var ValorIVA = Math.Round(info.info_resumen.ValorIVA, 2, MidpointRounding.AwayFromZero);
-                            var SubtotalIVASinDscto = Math.Round(info.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
-                            var SubtotalSinIVASinDscto = Math.Round(info.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
-                            var SubtotalIVAConDscto = Math.Round((info_ImpuestoIVA.porcentaje > 0 ? info.info_resumen.SubtotalConDscto : 0), 2, MidpointRounding.AwayFromZero);
-                            var SubtotalSinIVAConDscto = Math.Round((info_ImpuestoIVA.porcentaje == 0 ? info.info_resumen.SubtotalConDscto : 0), 2, MidpointRounding.AwayFromZero);
-                            var SubtotalSinDscto = Math.Round(info.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
-                            var SubtotalConDscto = Math.Round(info.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
-                            var Total = Math.Round(info.info_resumen.Total, 2, MidpointRounding.AwayFromZero);
-                            decimal PorIVA = Convert.ToDecimal(info_ImpuestoIVA.porcentaje);
+                        info.info_resumen = new fa_notaCreDeb_resumen_Info
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdBodega = info.IdBodega,
+                            IdNota = info.IdNota,
+                            SubtotalIVASinDscto = SubtotalIVASinDscto,
+                            SubtotalSinIVASinDscto = SubtotalSinIVASinDscto,
+                            SubtotalSinDscto = SubtotalSinDscto,
+                            Descuento = Descuento,
+                            SubtotalIVAConDscto = SubtotalIVAConDscto,
+                            SubtotalSinIVAConDscto = SubtotalSinIVAConDscto,
+                            SubtotalConDscto = SubtotalConDscto,
+                            PorIva = PorIVA,
+                            ValorIVA = ValorIVA,
+                            Total = Total,
+                            IdCod_Impuesto_IVA = info_ImpuestoIVA.IdCod_Impuesto
+                        };
+                        #endregion
 
-                            info.info_resumen = new fa_notaCreDeb_resumen_Info
-                            {
-                                IdEmpresa = info.IdEmpresa,
-                                IdSucursal = info.IdSucursal,
-                                IdBodega = info.IdBodega,
-                                IdNota = info.IdNota,
-                                SubtotalIVASinDscto = SubtotalIVASinDscto,
-                                SubtotalSinIVASinDscto = SubtotalSinIVASinDscto,
-                                SubtotalSinDscto = SubtotalSinDscto,
-                                Descuento = Descuento,
-                                SubtotalIVAConDscto = SubtotalIVAConDscto,
-                                SubtotalSinIVAConDscto = SubtotalSinIVAConDscto,
-                                SubtotalConDscto = SubtotalConDscto,
-                                PorIva = PorIVA,
-                                ValorIVA = ValorIVA,
-                                Total = Total,
-                                IdCod_Impuesto_IVA = info_ImpuestoIVA.IdCod_Impuesto
-                            };
-
-                            #endregion
-
-                            
-                        }
+                        Lista_Factura.Add(info);
                     }
                     else
                         cont++;
