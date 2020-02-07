@@ -237,7 +237,10 @@
     <Compile Include="Reportes\Academico\ACA_001_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_002_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_003_Info.cs" />
+    <Compile Include="Reportes\Contabilidad\CONTA_001_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Info.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Info.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Info.cs" />
     <Compile Include="RRHH\ro_area_Info.cs" />
     <Compile Include="RRHH\ro_area_x_departamento_Info.cs" />
     <Compile Include="RRHH\ro_cargaFamiliar_Info.cs" />

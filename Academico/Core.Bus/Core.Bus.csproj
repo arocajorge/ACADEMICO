@@ -229,7 +229,10 @@
     <Compile Include="Reportes\Academico\ACA_001_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_002_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_003_Bus.cs" />
+    <Compile Include="Reportes\Contabilidad\CONTA_001_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Bus.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Bus.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_Bus.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_Bus.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_x_aca_Sede_Bus.cs" />

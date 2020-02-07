@@ -43,13 +43,16 @@ namespace Core.Web.Reportes.Academico
             {
                 RepLegal = info_rep.pe_nombreCompleto;
             }
+
             txtCompromiso.Rtf = txtCompromiso.Rtf.Replace("[RepLegal]", RepLegal);
             
             var info_sede = bus_sede.GetInfo(IdEmpresa,IdSede);
-            lbl_sede.Text = info_sede.NomSede;
-            lbl_rector.Text = info_sede.NombreRector;
-            lbl_secretaria.Text = info_sede.NombreSecretaria;
-            lbl_representante.Text = info_rep.pe_cedulaRuc;
+            if (info_sede!=null)
+            {
+                lbl_sede.Text = info_sede.NomSede;
+                lbl_rector.Text = info_sede.NombreRector;
+                lbl_secretaria.Text = info_sede.NombreSecretaria;
+            }
 
             this.DataSource = lst_rpt;
         }

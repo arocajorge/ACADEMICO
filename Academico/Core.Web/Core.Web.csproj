@@ -310,6 +310,7 @@
     <Compile Include="Areas\Inventario\Controllers\SubgrupoController.cs" />
     <Compile Include="Areas\Inventario\InventarioAreaRegistration.cs" />
     <Compile Include="Areas\Reportes\Controllers\AcademicoReportesController.cs" />
+    <Compile Include="Areas\Reportes\Controllers\ContabilidadReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\CuentasPorCobrarReportesController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
     <Compile Include="Areas\SeguridadAcceso\SeguridadAccesoAreaRegistration.cs" />
@@ -343,11 +344,29 @@
     <Compile Include="Reportes\Academico\ACA_003_Rpt.Designer.cs">
       <DependentUpon>ACA_003_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.Designer.cs">
+      <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Rpt.Designer.cs">
       <DependentUpon>CXC_001_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Rpt.Designer.cs">
+      <DependentUpon>CXC_002_diario_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Rpt.Designer.cs">
+      <DependentUpon>CXC_002_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -8128,6 +8147,10 @@
     <Content Include="Areas\Academico\Views\MateriaArea\Nuevo.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_001.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_CmbAlumno.cshtml" />
+    <Content Include="Areas\Reportes\Views\ContabilidadReportes\CONTA_001.cshtml" />
+    <Content Include="Areas\Reportes\Views\ContabilidadReportes\_CmbCuenta_contable_Conta.cshtml" />
+    <Content Include="Areas\Reportes\Views\ContabilidadReportes\_CmbCuenta_contable_ContaFin.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_002.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8230,8 +8253,17 @@
     <EmbeddedResource Include="Reportes\Academico\ACA_003_Rpt.resx">
       <DependentUpon>ACA_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contabilidad\CONTA_001_Rpt.resx">
+      <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_001_Rpt.resx">
       <DependentUpon>CXC_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_002_diario_Rpt.resx">
+      <DependentUpon>CXC_002_diario_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_002_Rpt.resx">
+      <DependentUpon>CXC_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -144,6 +144,15 @@
     <Compile Include="Base\vwaca_Materia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWCONTA_001.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWCXC_002.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWCXC_002_diario.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwfa_factura_ParaContabilizarAcademico.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -1719,7 +1728,10 @@
     <Compile Include="Reportes\Academico\ACA_001_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_002_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_003_Data.cs" />
+    <Compile Include="Reportes\Contabilidad\CONTA_001_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Data.cs" />
     <Compile Include="RRHH\ro_area_Data.cs" />
     <Compile Include="RRHH\ro_area_x_departamento_Data.cs" />
     <Compile Include="RRHH\ro_cargo_Data.cs" />
