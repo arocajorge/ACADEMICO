@@ -192,6 +192,13 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         return false;
                     }
                     break;
+                case "TARJ":
+                    if (i_validar.IdTarjeta == null || string.IsNullOrEmpty(i_validar.cr_Tarjeta))
+                    {
+                        msg = "El campo tarjeta de crédito es obligatorio";
+                        return false;
+                    }
+                    break;
                 case "CHQF":
                     if (string.IsNullOrEmpty(i_validar.cr_Banco))
                     {

@@ -524,7 +524,7 @@
             this.xrTableCell2.Font = new System.Drawing.Font("Verdana", 6F);
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.StylePriority.UseFont = false;
-            this.xrTableCell2.Text = "CXC_001";
+            this.xrTableCell2.Text = "CXC_002";
             this.xrTableCell2.Weight = 0.267022772985508D;
             // 
             // xrTableRow2

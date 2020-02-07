@@ -312,6 +312,7 @@
     <Compile Include="Areas\Reportes\Controllers\AcademicoReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\ContabilidadReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\CuentasPorCobrarReportesController.cs" />
+    <Compile Include="Areas\Reportes\Controllers\FacturacionReportesController.cs" />
     <Compile Include="Areas\Reportes\ReportesAreaRegistration.cs" />
     <Compile Include="Areas\SeguridadAcceso\SeguridadAccesoAreaRegistration.cs" />
     <Compile Include="Areas\SeguridadAcceso\Controllers\UsuarioController.cs" />
@@ -367,6 +368,12 @@
     </Compile>
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Rpt.Designer.cs">
       <DependentUpon>CXC_002_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_003_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_003_Rpt.Designer.cs">
+      <DependentUpon>CXC_003_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -8151,6 +8158,12 @@
     <Content Include="Areas\Reportes\Views\ContabilidadReportes\_CmbCuenta_contable_Conta.cshtml" />
     <Content Include="Areas\Reportes\Views\ContabilidadReportes\_CmbCuenta_contable_ContaFin.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_002.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_001.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_002.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_003.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_004.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbCliente_Facturacion.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_003.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8216,6 +8229,7 @@
     <Folder Include="Areas\Inventario\Views\Subgrupo\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
+    <Folder Include="Reportes\Facturacion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -8264,6 +8278,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_002_Rpt.resx">
       <DependentUpon>CXC_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_003_Rpt.resx">
+      <DependentUpon>CXC_003_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

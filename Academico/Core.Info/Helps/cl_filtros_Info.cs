@@ -43,6 +43,7 @@ namespace Core.Info.Helps
         public string IdTipoServicio { get; set; }
 
         public int[] IntArray { get; set; }
+        public string[] StringArray { get; set; }
         public bool mostrarSaldo0 { get; set; }
         #endregion
 

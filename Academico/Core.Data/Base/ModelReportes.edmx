@@ -121,13 +121,13 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002' no tiene definida
             <PropertyRef Name="IdPersona" />
             <PropertyRef Name="pe_nombreCompleto" />
             <PropertyRef Name="vt_fecha" />
-            <PropertyRef Name="ObservacionFact" />
             <PropertyRef Name="ObservacionCobro" />
             <PropertyRef Name="cr_fecha" />
             <PropertyRef Name="NombreContacto" />
             <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="Su_Descripcion" />
             <PropertyRef Name="cr_TotalCobro" />
+            <PropertyRef Name="ObservacionFact" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdSucursal" Type="int" Nullable="false" />
@@ -140,9 +140,9 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002' no tiene definida
           <Property Name="tc_descripcion" Type="varchar" MaxLength="50" />
           <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="vt_NumFactura" Type="varchar" MaxLength="28" />
+          <Property Name="vt_NumFactura" Type="varchar" MaxLength="50" />
           <Property Name="vt_fecha" Type="datetime" Nullable="false" />
-          <Property Name="ObservacionFact" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ObservacionFact" Type="varchar(max)" Nullable="false" />
           <Property Name="ObservacionCobro" Type="varchar" MaxLength="700" Nullable="false" />
           <Property Name="cr_fecha" Type="datetime" Nullable="false" />
           <Property Name="NombreContacto" Type="varchar" MaxLength="1000" Nullable="false" />
@@ -183,6 +183,46 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002_diario' no tiene d
           <Property Name="dc_Valor" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="float" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWCXC_003">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdCobro" />
+            <PropertyRef Name="secuencial" />
+            <PropertyRef Name="IdCbte_vta_nota" />
+            <PropertyRef Name="dc_ValorPago" />
+            <PropertyRef Name="dc_ValorPagoNC" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cr_fecha" />
+            <PropertyRef Name="TotalPago" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdCobro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencial" Type="int" Nullable="false" />
+          <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="NombreUsuario" Type="varchar(max)" />
+          <Property Name="IdBodega_Cbte" Type="int" />
+          <Property Name="IdCbte_vta_nota" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="dc_TipoDocumento" Type="varchar" MaxLength="20" />
+          <Property Name="dc_ValorPago" Type="float" Nullable="false" />
+          <Property Name="dc_ValorPagoNC" Type="float" Nullable="false" />
+          <Property Name="CodigAlumno" Type="varchar" MaxLength="200" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="NumFactura" Type="varchar" MaxLength="50" />
+          <Property Name="IdCobro_tipo" Type="varchar" MaxLength="2" />
+          <Property Name="cr_fecha" Type="datetime" Nullable="false" />
+          <Property Name="IdTarjeta" Type="int" />
+          <Property Name="NombreTarjeta" Type="varchar" MaxLength="500" />
+          <Property Name="cr_Banco" Type="varchar" MaxLength="50" />
+          <Property Name="AnioFactura" Type="int" />
+          <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="GrupoTipoCobro" Type="varchar" MaxLength="18" />
+          <Property Name="NombreTipoCobro" Type="varchar" MaxLength="50" />
+          <Property Name="TotalPago" Type="float" Nullable="false" />
         </EntityType>
         <Function Name="SPACA_001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -303,6 +343,34 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002_diario' no tiene d
     [VWCXC_002_diario].[dc_Valor_Haber] AS [dc_Valor_Haber]
     FROM [Academico].[VWCXC_002_diario] AS [VWCXC_002_diario]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWCXC_003" EntityType="Self.VWCXC_003" store:Type="Views" store:Schema="Academico">
+            <DefiningQuery>SELECT 
+    [VWCXC_003].[IdEmpresa] AS [IdEmpresa], 
+    [VWCXC_003].[IdSucursal] AS [IdSucursal], 
+    [VWCXC_003].[IdCobro] AS [IdCobro], 
+    [VWCXC_003].[secuencial] AS [secuencial], 
+    [VWCXC_003].[IdUsuario] AS [IdUsuario], 
+    [VWCXC_003].[NombreUsuario] AS [NombreUsuario], 
+    [VWCXC_003].[IdBodega_Cbte] AS [IdBodega_Cbte], 
+    [VWCXC_003].[IdCbte_vta_nota] AS [IdCbte_vta_nota], 
+    [VWCXC_003].[dc_TipoDocumento] AS [dc_TipoDocumento], 
+    [VWCXC_003].[dc_ValorPago] AS [dc_ValorPago], 
+    [VWCXC_003].[dc_ValorPagoNC] AS [dc_ValorPagoNC], 
+    [VWCXC_003].[CodigAlumno] AS [CodigAlumno], 
+    [VWCXC_003].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWCXC_003].[NumFactura] AS [NumFactura], 
+    [VWCXC_003].[IdCobro_tipo] AS [IdCobro_tipo], 
+    [VWCXC_003].[cr_fecha] AS [cr_fecha], 
+    [VWCXC_003].[IdTarjeta] AS [IdTarjeta], 
+    [VWCXC_003].[NombreTarjeta] AS [NombreTarjeta], 
+    [VWCXC_003].[cr_Banco] AS [cr_Banco], 
+    [VWCXC_003].[AnioFactura] AS [AnioFactura], 
+    [VWCXC_003].[IdAlumno] AS [IdAlumno], 
+    [VWCXC_003].[GrupoTipoCobro] AS [GrupoTipoCobro], 
+    [VWCXC_003].[NombreTipoCobro] AS [NombreTipoCobro], 
+    [VWCXC_003].[TotalPago] AS [TotalPago]
+    FROM [Academico].[VWCXC_003] AS [VWCXC_003]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -327,6 +395,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002_diario' no tiene d
           <EntitySet Name="VWCONTA_001" EntityType="ModelReportes.VWCONTA_001" />
           <EntitySet Name="VWCXC_002" EntityType="ModelReportes.VWCXC_002" />
           <EntitySet Name="VWCXC_002_diario" EntityType="ModelReportes.VWCXC_002_diario" />
+          <EntitySet Name="VWCXC_003" EntityType="ModelReportes.VWCXC_003" />
         </EntityContainer>
         <EntityType Name="VWACA_002">
           <Key>
@@ -533,9 +602,9 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002_diario' no tiene d
           <Property Name="tc_descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="vt_NumFactura" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
+          <Property Name="vt_NumFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ObservacionFact" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ObservacionFact" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ObservacionCobro" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
           <Property Name="cr_fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NombreContacto" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
@@ -574,6 +643,44 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002_diario' no tiene d
           <Property Name="dc_Valor" Type="Double" Nullable="false" />
           <Property Name="dc_Valor_Debe" Type="Double" Nullable="false" />
           <Property Name="dc_Valor_Haber" Type="Double" />
+        </EntityType>
+        <EntityType Name="VWCXC_003">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdCobro" />
+            <PropertyRef Name="secuencial" />
+            <PropertyRef Name="IdCbte_vta_nota" />
+            <PropertyRef Name="dc_ValorPago" />
+            <PropertyRef Name="dc_ValorPagoNC" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cr_fecha" />
+            <PropertyRef Name="TotalPago" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdCobro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencial" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdBodega_Cbte" Type="Int32" />
+          <Property Name="IdCbte_vta_nota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="dc_TipoDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dc_ValorPago" Type="Double" Nullable="false" />
+          <Property Name="dc_ValorPagoNC" Type="Double" Nullable="false" />
+          <Property Name="CodigAlumno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NumFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCobro_tipo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="cr_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdTarjeta" Type="Int32" />
+          <Property Name="NombreTarjeta" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cr_Banco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AnioFactura" Type="Int32" />
+          <Property Name="IdAlumno" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="GrupoTipoCobro" Type="String" MaxLength="18" FixedLength="false" Unicode="false" />
+          <Property Name="NombreTipoCobro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotalPago" Type="Double" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -779,6 +886,36 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002_diario' no tiene d
                 <ScalarProperty Name="cbr_IdCobro" ColumnName="cbr_IdCobro" />
                 <ScalarProperty Name="cbr_IdSucursal" ColumnName="cbr_IdSucursal" />
                 <ScalarProperty Name="cbr_IdEmpresa" ColumnName="cbr_IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCXC_003">
+            <EntityTypeMapping TypeName="ModelReportes.VWCXC_003">
+              <MappingFragment StoreEntitySet="VWCXC_003">
+                <ScalarProperty Name="TotalPago" ColumnName="TotalPago" />
+                <ScalarProperty Name="NombreTipoCobro" ColumnName="NombreTipoCobro" />
+                <ScalarProperty Name="GrupoTipoCobro" ColumnName="GrupoTipoCobro" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="AnioFactura" ColumnName="AnioFactura" />
+                <ScalarProperty Name="cr_Banco" ColumnName="cr_Banco" />
+                <ScalarProperty Name="NombreTarjeta" ColumnName="NombreTarjeta" />
+                <ScalarProperty Name="IdTarjeta" ColumnName="IdTarjeta" />
+                <ScalarProperty Name="cr_fecha" ColumnName="cr_fecha" />
+                <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
+                <ScalarProperty Name="NumFactura" ColumnName="NumFactura" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="CodigAlumno" ColumnName="CodigAlumno" />
+                <ScalarProperty Name="dc_ValorPagoNC" ColumnName="dc_ValorPagoNC" />
+                <ScalarProperty Name="dc_ValorPago" ColumnName="dc_ValorPago" />
+                <ScalarProperty Name="dc_TipoDocumento" ColumnName="dc_TipoDocumento" />
+                <ScalarProperty Name="IdCbte_vta_nota" ColumnName="IdCbte_vta_nota" />
+                <ScalarProperty Name="IdBodega_Cbte" ColumnName="IdBodega_Cbte" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

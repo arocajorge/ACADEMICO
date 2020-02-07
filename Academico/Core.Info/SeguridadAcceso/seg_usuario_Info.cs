@@ -36,5 +36,6 @@ namespace Core.Info.SeguridadAcceso
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        public bool Seleccionado { get; set; }
     }
 }

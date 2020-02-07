@@ -1,6 +1,8 @@
 ﻿using Core.Bus.General;
+using Core.Bus.SeguridadAcceso;
 using Core.Info.General;
 using Core.Info.Helps;
+using Core.Info.SeguridadAcceso;
 using Core.Web.Helps;
 using Core.Web.Reportes.CuentasPorCobrar;
 using DevExpress.Web;
@@ -60,6 +62,33 @@ namespace Core.Web.Areas.Reportes.Controllers
                     item.Seleccionado = (intArray.Where(q => q == item.IdSucursal).Count() > 0 ? true : false);
                 }
             ViewBag.lst_sucursal = lst_sucursal;
+        }
+
+        private void cargar_usuario_check(int IdEmpresa, string[] StringArray)
+        {
+            seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
+            List<seg_usuario_Info> lst_usuario = new List<seg_usuario_Info>();
+           var infoUsuario = bus_usuario.get_info(SessionFixed.IdUsuario);
+
+            if (infoUsuario !=null && infoUsuario.es_super_admin==true)
+            {
+                lst_usuario = bus_usuario.get_list(false);
+            }
+            else
+            {
+                lst_usuario.Add(infoUsuario);
+            }
+            
+            if (StringArray == null || StringArray.Count() == 0)
+            {
+                lst_usuario.Where(q => q.IdUsuario == SessionFixed.IdUsuario).FirstOrDefault().Seleccionado = true;
+            }
+            else
+                foreach (var item in lst_usuario)
+                {
+                    item.Seleccionado = (StringArray.Where(q => q == item.IdUsuario).Count() > 0 ? true : false);
+                }
+            ViewBag.lst_usuario = lst_usuario;
         }
         #endregion
 
@@ -139,6 +168,66 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.p_IdCobro.Value = IdCobro;
             model.usuario = SessionFixed.IdUsuario.ToString();
             model.empresa = SessionFixed.NomEmpresa.ToString();
+            return View(model);
+        }
+
+        public ActionResult CXC_003()
+        {
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                fecha_ini = DateTime.Now.AddMonths(-1),
+                fecha_fin = DateTime.Now,
+                StringArray = new string[] { SessionFixed.IdUsuario }
+            };
+
+            cargar_usuario_check(model.IdEmpresa, model.StringArray);
+            CXC_003_Rpt report = new CXC_003_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_003");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.StringArray = model.StringArray;
+            report.p_FechaIni.Value = model.fecha_ini;
+            report.p_FechaFin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CXC_003(cl_filtros_Info model)
+        {
+            CXC_003_Rpt report = new CXC_003_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_003");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            //CargarSucursal(model);
+            
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.StringArray = model.StringArray;
+            report.p_FechaIni.Value = model.fecha_ini;
+            report.p_FechaFin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            cargar_usuario_check(model.IdEmpresa, model.StringArray);
+            ViewBag.Report = report;
+
             return View(model);
         }
 
