@@ -567,7 +567,7 @@ namespace Core.Data.Facturacion
 
                 #region Contabilidad
                 var parametro = db_f.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito))
+                //if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito))
                 {
                     var conta = db_f.fa_factura_x_ct_cbtecble.Where(q => q.vt_IdEmpresa == info.IdEmpresa && q.vt_IdSucursal == info.IdSucursal && q.vt_IdBodega == info.IdBodega && q.vt_IdCbteVta == info.IdCbteVta).FirstOrDefault();
                     if (conta == null)

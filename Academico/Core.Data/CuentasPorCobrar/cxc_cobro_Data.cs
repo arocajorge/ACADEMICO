@@ -230,7 +230,7 @@ namespace Core.Data.CuentasPorCobrar
                     item.IdSucursal = cab.IdSucursal;
                     item.IdCobro = cab.IdCobro;
                     
-                    if (item.ValorProntoPago > 0)
+                    if (item.dc_ValorProntoPago > 0)
                     {
                         var NotaCredito = ArmarNotaCredito(item);
                         if(NotaCredito != null)
@@ -401,8 +401,9 @@ namespace Core.Data.CuentasPorCobrar
                     item.IdSucursal = info.IdSucursal;
                     item.IdCobro = info.IdCobro;
 
-                    if (item.ValorProntoPago > 0)
+                    if (item.dc_ValorProntoPago > 0)
                     {
+                        item.IdCliente = info.IdCliente;
                         var NotaCredito = ArmarNotaCredito(item);
                         if (NotaCredito != null)
                         {
@@ -653,7 +654,7 @@ namespace Core.Data.CuentasPorCobrar
                     return null;
 
                 var paramCxc = dbCxc.cxc_Parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                if (paramCaja == null)
+                if (paramCxc == null)
                     return null;
 
                 var cliente = dbFac.vwfa_cliente_consulta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
@@ -890,6 +891,10 @@ namespace Core.Data.CuentasPorCobrar
                 if (PuntoVta == null)
                     return null;
 
+                PuntoVta = dbFac.vwfa_PuntoVta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.cod_PuntoVta == PuntoVta.cod_PuntoVta && q.codDocumentoTipo == "NTCR").FirstOrDefault();
+                if (PuntoVta == null)
+                    return null;
+
                 if (TipoNota.IdProducto == null)
                     return null;
 
@@ -901,7 +906,7 @@ namespace Core.Data.CuentasPorCobrar
                     IdPuntoVta = info.IdPuntoVta ?? 0,
                     CodNota = "ProntoPago",
                     CreDeb = "C",
-                    CodDocumentoTipo = "NTDC",
+                    CodDocumentoTipo = "NTCR",
                     Serie1 = PuntoVta.Su_CodigoEstablecimiento,
                     Serie2 = PuntoVta.cod_PuntoVta,
                     NumAutorizacion = null,

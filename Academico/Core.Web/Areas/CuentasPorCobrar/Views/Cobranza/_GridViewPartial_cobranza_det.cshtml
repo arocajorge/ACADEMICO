@@ -59,14 +59,6 @@
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
-            column.FieldName = "vt_fech_venc";
-            column.Caption = "Fecha";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.Width = Unit.Percentage(10);
             column.FieldName = "vt_Subtotal";
             column.Caption = "SubTotal";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
@@ -109,6 +101,21 @@
                 p.MinValue = 0;
                 p.DisplayFormatInEditMode = true;
                 p.DisplayFormatString = "N2";
+                p.AllowMouseWheel = false;
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(10);
+            column.FieldName = "dc_ValorProntoPago";
+            column.Caption = "Pronto Pago";
+            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.EditorProperties().SpinEdit(p =>
+            {
+                p.MinValue = 0;
+                p.DisplayFormatInEditMode = true;
+                p.DisplayFormatString = "N2";
+                p.AllowMouseWheel = false;
             });
         });
         settings.Columns.Add(column =>

@@ -154,7 +154,7 @@
 <script>
     function Imprimir() {
         var location = GetPathServer();
-        var win = window.open(location +"/Reportes/ContabilidadReportes/CONTA_001?IdEmpresa="+@Core.Erp.Web.Helps.SessionFixed.IdEmpresa+"&IdTipoCbte="+@Model.IdTipoCbte+"&IdCbteCble="+@Model.IdCbteCble, '_blank');
+        var win = window.open(location +"/Reportes/ContabilidadReportes/CONTA_001?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdTipoCbte="+@Model.IdTipoCbte+"&IdCbteCble="+@Model.IdCbteCble, '_blank');
         win.focus();
     }
 </script>
