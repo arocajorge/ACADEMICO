@@ -476,7 +476,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                     item.dc_ValorProntoPago = saldo >= ValorProntoPago ? ValorProntoPago : 0;
                     item.dc_ValorPago = saldo >= Convert.ToDouble(item.Saldo) ? Convert.ToDouble(item.Saldo) - ValorProntoPago : saldo;
                     item.Saldo_final = Convert.ToDouble(item.Saldo - ValorProntoPago) - item.dc_ValorPago;
-                    saldo = saldo - item.dc_ValorPago - item.dc_ValorProntoPago ?? 0;
+                    saldo = saldo - item.dc_ValorPago;
                 }
                 else
                     item.dc_ValorPago = 0;
