@@ -26,7 +26,7 @@ namespace Core.Web.Reportes.CuentasPorCobrar
 
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdSucursal = string.IsNullOrEmpty(p_IdSucursal.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSucursal.Value);
-            decimal IdCobro = string.IsNullOrEmpty(p_IdCobro.ToString()) ? 0 : Convert.ToDecimal(p_IdCobro.Value);
+            decimal IdCobro = string.IsNullOrEmpty(p_IdCobro.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdCobro.Value);
 
             CXC_002_Bus bus_rpt = new CXC_002_Bus();
             List<CXC_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdCobro);
