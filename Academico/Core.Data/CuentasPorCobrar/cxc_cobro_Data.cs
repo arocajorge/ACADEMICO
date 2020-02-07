@@ -256,93 +256,99 @@ namespace Core.Data.CuentasPorCobrar
                         Fecha_Transac = DateTime.Now,
                         estado = "A",
                         IdCobro_tipo = item.IdCobro_tipo_det,
-                        dc_ValorProntoPago = item.ValorProntoPago ?? 0,
+                        dc_ValorProntoPago = item.dc_ValorProntoPago ?? 0,
                         IdNotaCredito = item.IdNotaCredito
                     };
                     Context_cxc.cxc_cobro_det.Add(det);
                 }
-                
+
                 #endregion
 
                 #region Contabilización
-                if (info.IdCobro_tipo != null)
+                if (info.IdCobro_tipo != "NTCR" && info.IdCobro_tipo != "NTDB")
                 {
-                    var TipoCobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == info.IdCobro_tipo).FirstOrDefault();
-                    if (TipoCobro != null)
+                    if (info.IdCobro_tipo != null)
                     {
-                        switch (TipoCobro.tc_Tomar_Cta_Cble_De)
+                        var TipoCobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == info.IdCobro_tipo).FirstOrDefault();
+                        if (TipoCobro != null)
                         {
-                            case "CAJA":
-                                #region Movimiento de caja
-                                var MovimientoCaja = ArmarMovimientoDeCaja(info);
-                                if (MovimientoCaja != null)
-                                {
-                                    if (DataCajaMovimiento.guardarDB(MovimientoCaja))
-                                    {
-                                        Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
-                                        {
-                                            cbr_IdEmpresa = info.IdEmpresa,
-                                            cbr_IdSucursal = info.IdSucursal,
-                                            cbr_IdCobro = info.IdCobro,
-                                            ct_IdEmpresa = MovimientoCaja.IdEmpresa,
-                                            ct_IdTipoCbte = MovimientoCaja.IdTipocbte,
-                                            ct_IdCbteCble = MovimientoCaja.IdCbteCble,
-                                            observacion = ""
-                                        });
-                                        Context_cxc.SaveChanges();
-                                    }
-                                }
-                                #endregion
-                                break;
-                            default:
-                                #region Movimiento contable
-                                var MovimientoContable = ArmarMovimientoContable(info);
-                                if (MovimientoContable != null)
-                                {
-                                    if (DataContable.guardarDB(MovimientoContable))
-                                    {
-                                        Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
-                                        {
-                                            cbr_IdEmpresa = info.IdEmpresa,
-                                            cbr_IdSucursal = info.IdSucursal,
-                                            cbr_IdCobro = info.IdCobro,
-                                            ct_IdEmpresa = MovimientoContable.IdEmpresa,
-                                            ct_IdTipoCbte = MovimientoContable.IdTipoCbte,
-                                            ct_IdCbteCble = MovimientoContable.IdCbteCble,
-                                            observacion = ""
-                                        });
-                                        Context_cxc.SaveChanges();
-                                    }
-                                }
-                                #endregion
-                                break;
-                        }
-                    }
-                }else
-                {
-                    #region Movimiento contable
-                    var MovimientoContable = ArmarMovimientoContable(info);
-                    if (MovimientoContable != null)
-                    {
-                        if (DataContable.guardarDB(MovimientoContable))
-                        {
-                            Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
+                            switch (TipoCobro.tc_Tomar_Cta_Cble_De)
                             {
-                                cbr_IdEmpresa = info.IdEmpresa,
-                                cbr_IdSucursal = info.IdSucursal,
-                                cbr_IdCobro = info.IdCobro,
-                                ct_IdEmpresa = MovimientoContable.IdEmpresa,
-                                ct_IdTipoCbte = MovimientoContable.IdTipoCbte,
-                                ct_IdCbteCble = MovimientoContable.IdCbteCble,
-                                observacion = ""
-                            });
-                            Context_cxc.SaveChanges();
+                                case "CAJA":
+                                    #region Movimiento de caja
+                                    var MovimientoCaja = ArmarMovimientoDeCaja(info);
+                                    if (MovimientoCaja != null)
+                                    {
+                                        if (DataCajaMovimiento.guardarDB(MovimientoCaja))
+                                        {
+                                            Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
+                                            {
+                                                cbr_IdEmpresa = info.IdEmpresa,
+                                                cbr_IdSucursal = info.IdSucursal,
+                                                cbr_IdCobro = info.IdCobro,
+                                                ct_IdEmpresa = MovimientoCaja.IdEmpresa,
+                                                ct_IdTipoCbte = MovimientoCaja.IdTipocbte,
+                                                ct_IdCbteCble = MovimientoCaja.IdCbteCble,
+                                                observacion = ""
+                                            });
+                                            Context_cxc.SaveChanges();
+                                        }
+                                    }
+                                    #endregion
+                                    break;
+                                default:
+                                    #region Movimiento contable
+                                    var MovimientoContable = ArmarMovimientoContable(info);
+                                    if (MovimientoContable != null)
+                                    {
+                                        if (DataContable.guardarDB(MovimientoContable))
+                                        {
+                                            Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
+                                            {
+                                                cbr_IdEmpresa = info.IdEmpresa,
+                                                cbr_IdSucursal = info.IdSucursal,
+                                                cbr_IdCobro = info.IdCobro,
+                                                ct_IdEmpresa = MovimientoContable.IdEmpresa,
+                                                ct_IdTipoCbte = MovimientoContable.IdTipoCbte,
+                                                ct_IdCbteCble = MovimientoContable.IdCbteCble,
+                                                observacion = ""
+                                            });
+                                            Context_cxc.SaveChanges();
+                                        }
+                                    }
+                                    #endregion
+                                    break;
+                            }
                         }
                     }
-                    #endregion
+                    else
+                    {
+                        #region Movimiento contable
+                        var MovimientoContable = ArmarMovimientoContable(info);
+                        if (MovimientoContable != null)
+                        {
+                            if (DataContable.guardarDB(MovimientoContable))
+                            {
+                                Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
+                                {
+                                    cbr_IdEmpresa = info.IdEmpresa,
+                                    cbr_IdSucursal = info.IdSucursal,
+                                    cbr_IdCobro = info.IdCobro,
+                                    ct_IdEmpresa = MovimientoContable.IdEmpresa,
+                                    ct_IdTipoCbte = MovimientoContable.IdTipoCbte,
+                                    ct_IdCbteCble = MovimientoContable.IdCbteCble,
+                                    observacion = ""
+                                });
+                                Context_cxc.SaveChanges();
+                            }
+                        }
+                        #endregion
+                    }
+
                 }
 
                 #endregion
+
                 Context_cxc.SaveChanges();
                 Context_cxc.Dispose();
                 return true;
@@ -444,114 +450,116 @@ namespace Core.Data.CuentasPorCobrar
                     Context_cxc.cxc_cobro_det.Add(det);
                 }
                 #endregion
-                
-                #region Contabilización
-                if (info.IdCobro_tipo != null)
+                if (info.IdCobro_tipo != "NTCR" && info.IdCobro_tipo != "NTDB")
                 {
-                    var TipoCobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == info.IdCobro_tipo).FirstOrDefault();
-                    if (TipoCobro != null)
+                    #region Contabilización
+                    if (info.IdCobro_tipo != null)
                     {
-                        switch (TipoCobro.tc_Tomar_Cta_Cble_De)
+                        var TipoCobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == info.IdCobro_tipo).FirstOrDefault();
+                        if (TipoCobro != null)
                         {
-                            case "CAJA":
-                                #region Movimiento de caja
-                                var MovimientoCaja = ArmarMovimientoDeCaja(info);
-                                if (MovimientoCaja != null)
-                                {
-                                    var rel = Context_cxc.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
-                                    if (rel == null)
+                            switch (TipoCobro.tc_Tomar_Cta_Cble_De)
+                            {
+                                case "CAJA":
+                                    #region Movimiento de caja
+                                    var MovimientoCaja = ArmarMovimientoDeCaja(info);
+                                    if (MovimientoCaja != null)
                                     {
-                                        if (DataCajaMovimiento.guardarDB(MovimientoCaja))
+                                        var rel = Context_cxc.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
+                                        if (rel == null)
                                         {
-                                            Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
+                                            if (DataCajaMovimiento.guardarDB(MovimientoCaja))
                                             {
-                                                cbr_IdEmpresa = info.IdEmpresa,
-                                                cbr_IdSucursal = info.IdSucursal,
-                                                cbr_IdCobro = info.IdCobro,
-                                                ct_IdEmpresa = MovimientoCaja.IdEmpresa,
-                                                ct_IdTipoCbte = MovimientoCaja.IdTipocbte,
-                                                ct_IdCbteCble = MovimientoCaja.IdCbteCble,
-                                                observacion = ""
-                                            });
-                                            Context_cxc.SaveChanges();
+                                                Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
+                                                {
+                                                    cbr_IdEmpresa = info.IdEmpresa,
+                                                    cbr_IdSucursal = info.IdSucursal,
+                                                    cbr_IdCobro = info.IdCobro,
+                                                    ct_IdEmpresa = MovimientoCaja.IdEmpresa,
+                                                    ct_IdTipoCbte = MovimientoCaja.IdTipocbte,
+                                                    ct_IdCbteCble = MovimientoCaja.IdCbteCble,
+                                                    observacion = ""
+                                                });
+                                                Context_cxc.SaveChanges();
+                                            }
+                                            else
+                                            {
+                                                MovimientoCaja.IdCbteCble = rel.ct_IdCbteCble;
+                                                DataCajaMovimiento.modificarDB(MovimientoCaja);
+                                            }
+                                        }
+                                    }
+                                    #endregion
+                                    break;
+                                default:
+                                    #region Movimiento contable
+                                    var MovimientoContable = ArmarMovimientoContable(info);
+                                    if (MovimientoContable != null)
+                                    {
+                                        var rel = Context_cxc.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
+                                        if (rel == null)
+                                        {
+                                            if (DataContable.guardarDB(MovimientoContable))
+                                            {
+                                                Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
+                                                {
+                                                    cbr_IdEmpresa = info.IdEmpresa,
+                                                    cbr_IdSucursal = info.IdSucursal,
+                                                    cbr_IdCobro = info.IdCobro,
+                                                    ct_IdEmpresa = MovimientoContable.IdEmpresa,
+                                                    ct_IdTipoCbte = MovimientoContable.IdTipoCbte,
+                                                    ct_IdCbteCble = MovimientoContable.IdCbteCble,
+                                                    observacion = ""
+                                                });
+                                                Context_cxc.SaveChanges();
+                                            }
                                         }
                                         else
                                         {
-                                            MovimientoCaja.IdCbteCble = rel.ct_IdCbteCble;
-                                            DataCajaMovimiento.modificarDB(MovimientoCaja);
+                                            MovimientoContable.IdCbteCble = rel.ct_IdCbteCble;
+                                            DataContable.modificarDB(MovimientoContable);
                                         }
                                     }
-                                }
-                                #endregion
-                                break;
-                            default:
-                                #region Movimiento contable
-                                var MovimientoContable = ArmarMovimientoContable(info);
-                                if (MovimientoContable != null)
-                                {
-                                    var rel = Context_cxc.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
-                                    if (rel == null)
-                                    {
-                                        if (DataContable.guardarDB(MovimientoContable))
-                                        {
-                                            Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
-                                            {
-                                                cbr_IdEmpresa = info.IdEmpresa,
-                                                cbr_IdSucursal = info.IdSucursal,
-                                                cbr_IdCobro = info.IdCobro,
-                                                ct_IdEmpresa = MovimientoContable.IdEmpresa,
-                                                ct_IdTipoCbte = MovimientoContable.IdTipoCbte,
-                                                ct_IdCbteCble = MovimientoContable.IdCbteCble,
-                                                observacion = ""
-                                            });
-                                            Context_cxc.SaveChanges();
-                                        }
-                                    }
-                                    else
-                                    {
-                                        MovimientoContable.IdCbteCble = rel.ct_IdCbteCble;
-                                        DataContable.modificarDB(MovimientoContable);
-                                    }
-                                }
-                                #endregion
-                                break;
-                        }
-                    }
-                }
-                else
-                {
-                    #region Movimiento contable
-                    var MovimientoContable = ArmarMovimientoContable(info);
-                    if (MovimientoContable != null)
-                    {
-                        var rel = Context_cxc.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
-                        if (rel == null)
-                        {
-                            if (DataContable.guardarDB(MovimientoContable))
-                            {
-                                Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
-                                {
-                                    cbr_IdEmpresa = info.IdEmpresa,
-                                    cbr_IdSucursal = info.IdSucursal,
-                                    cbr_IdCobro = info.IdCobro,
-                                    ct_IdEmpresa = MovimientoContable.IdEmpresa,
-                                    ct_IdTipoCbte = MovimientoContable.IdTipoCbte,
-                                    ct_IdCbteCble = MovimientoContable.IdCbteCble,
-                                    observacion = ""
-                                });
-                                Context_cxc.SaveChanges();
+                                    #endregion
+                                    break;
                             }
-                        }else
-                        {
-                            MovimientoContable.IdCbteCble = rel.ct_IdCbteCble;
-                            DataContable.modificarDB(MovimientoContable);
                         }
                     }
+                    else
+                    {
+                        #region Movimiento contable
+                        var MovimientoContable = ArmarMovimientoContable(info);
+                        if (MovimientoContable != null)
+                        {
+                            var rel = Context_cxc.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
+                            if (rel == null)
+                            {
+                                if (DataContable.guardarDB(MovimientoContable))
+                                {
+                                    Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
+                                    {
+                                        cbr_IdEmpresa = info.IdEmpresa,
+                                        cbr_IdSucursal = info.IdSucursal,
+                                        cbr_IdCobro = info.IdCobro,
+                                        ct_IdEmpresa = MovimientoContable.IdEmpresa,
+                                        ct_IdTipoCbte = MovimientoContable.IdTipoCbte,
+                                        ct_IdCbteCble = MovimientoContable.IdCbteCble,
+                                        observacion = ""
+                                    });
+                                    Context_cxc.SaveChanges();
+                                }
+                            }
+                            else
+                            {
+                                MovimientoContable.IdCbteCble = rel.ct_IdCbteCble;
+                                DataContable.modificarDB(MovimientoContable);
+                            }
+                        }
+                        #endregion
+                    }
+
                     #endregion
                 }
-
-                #endregion
-
                 Context_cxc.SaveChanges();
 
                 Context_cxc.Dispose();
@@ -903,7 +911,7 @@ namespace Core.Data.CuentasPorCobrar
                     IdEmpresa = info.IdEmpresa,
                     IdSucursal = info.IdSucursal,
                     IdBodega = info.IdBodega_Cbte ?? 0,
-                    IdPuntoVta = info.IdPuntoVta ?? 0,
+                    IdPuntoVta = PuntoVta.IdPuntoVta,
                     CodNota = "ProntoPago",
                     CreDeb = "C",
                     CodDocumentoTipo = "NTCR",
@@ -929,15 +937,15 @@ namespace Core.Data.CuentasPorCobrar
                     IdProducto = TipoNota.IdProducto ?? 0,
                     sc_cantidad = 1,
                     sc_cantidad_factura = null,
-                    sc_Precio = info.ValorProntoPago ?? 0,
-                    sc_precioFinal = info.ValorProntoPago ?? 0,
+                    sc_Precio = info.dc_ValorProntoPago ?? 0,
+                    sc_precioFinal = info.dc_ValorProntoPago ?? 0,
                     sc_descUni = 0,
                     sc_PordescUni = 0,
                     vt_por_iva = 0,
                     IdCod_Impuesto_Iva = "IVA0",
                     sc_iva = 0,
-                    sc_subtotal = info.ValorProntoPago ?? 0,
-                    sc_total = info.ValorProntoPago ?? 0
+                    sc_subtotal = info.dc_ValorProntoPago ?? 0,
+                    sc_total = info.dc_ValorProntoPago ?? 0
                 });
 
                 Retorno.lst_cruce.Add(new fa_notaCreDeb_x_fa_factura_NotaDeb_Info
@@ -947,22 +955,22 @@ namespace Core.Data.CuentasPorCobrar
                     IdBodega_fac_nd_doc_mod = info.IdBodega_Cbte ?? 0,
                     IdCbteVta_fac_nd_doc_mod = info.IdCbte_vta_nota,
                     vt_tipoDoc = info.dc_TipoDocumento,
-                    Valor_Aplicado = info.ValorProntoPago ?? 0,
+                    Valor_Aplicado = info.dc_ValorProntoPago ?? 0,
                     fecha_cruce = DateTime.Now.Date
                 });
 
                 Retorno.info_resumen = new fa_notaCreDeb_resumen_Info
                 {
                     SubtotalIVASinDscto = 0,
-                    SubtotalSinIVASinDscto = Convert.ToDecimal(info.ValorProntoPago ?? 0),
-                    SubtotalSinDscto = Convert.ToDecimal(info.ValorProntoPago ?? 0),
+                    SubtotalSinIVASinDscto = Convert.ToDecimal(info.dc_ValorProntoPago ?? 0),
+                    SubtotalSinDscto = Convert.ToDecimal(info.dc_ValorProntoPago ?? 0),
                     Descuento = 0,
                     SubtotalIVAConDscto = 0,
-                    SubtotalSinIVAConDscto = Convert.ToDecimal(info.ValorProntoPago ?? 0),
-                    SubtotalConDscto = Convert.ToDecimal(info.ValorProntoPago ?? 0),
+                    SubtotalSinIVAConDscto = Convert.ToDecimal(info.dc_ValorProntoPago ?? 0),
+                    SubtotalConDscto = Convert.ToDecimal(info.dc_ValorProntoPago ?? 0),
                     IdCod_Impuesto_IVA = "IVA0",
                     ValorIVA = 0,
-                    Total = Convert.ToDecimal(info.ValorProntoPago ?? 0),
+                    Total = Convert.ToDecimal(info.dc_ValorProntoPago ?? 0),
                     PorIva = 0
                 };
 
