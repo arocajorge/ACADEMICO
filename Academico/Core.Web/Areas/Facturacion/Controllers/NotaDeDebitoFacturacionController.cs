@@ -777,7 +777,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
                 #region Saldo Fact      
                 var info_fa_parametro = bus_fa_parametro.get_info(IdEmpresa);
-                var IdTipoNota = 1; //2 Saldo inicial NTDB -3 Saldo inicial NTCR
+                var IdTipoNota = 2; //2 Saldo inicial NTDB -3 Saldo inicial NTCR
                 var infoTipoNota = bus_tipo_nota.get_info(IdEmpresa, IdTipoNota);
 
                 while (reader.Read())
@@ -874,7 +874,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
                         var SubtotalSinIVAConDscto = Math.Round((info_ImpuestoIVA.porcentaje == 0 ? info.info_resumen.SubtotalConDscto : 0), 2, MidpointRounding.AwayFromZero);
                         var SubtotalSinDscto = Math.Round(info.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
                         var SubtotalConDscto = Math.Round(info.info_resumen.SubtotalConDscto, 2, MidpointRounding.AwayFromZero);
-                        var Total = Math.Round(info.info_resumen.Total, 2, MidpointRounding.AwayFromZero);
+                        var Total = Math.Round(Convert.ToDecimal(info_detalle.sc_total), 2, MidpointRounding.AwayFromZero);
                         decimal PorIVA = Convert.ToDecimal(info_ImpuestoIVA.porcentaje);
 
                         info.info_resumen = new fa_notaCreDeb_resumen_Info
