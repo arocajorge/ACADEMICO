@@ -26,5 +26,7 @@ namespace Core.Data.Base
         public bool Estado { get; set; }
         public string Referencia { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public Nullable<int> IdTipoCbte { get; set; }
+        public Nullable<decimal> IdCbteCble { get; set; }
     }
 }

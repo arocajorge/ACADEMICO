@@ -19,8 +19,8 @@ namespace Core.Data.Base
         {
             this.cxc_cobro_x_caj_Caja_Movimiento = new HashSet<cxc_cobro_x_caj_Caja_Movimiento>();
             this.cxc_cobro_x_ct_cbtecble = new HashSet<cxc_cobro_x_ct_cbtecble>();
-            this.cxc_ConciliacionNotaCredito = new HashSet<cxc_ConciliacionNotaCredito>();
             this.cxc_cobro_det = new HashSet<cxc_cobro_det>();
+            this.cxc_ConciliacionNotaCredito = new HashSet<cxc_ConciliacionNotaCredito>();
         }
     
         public int IdEmpresa { get; set; }
@@ -64,8 +64,8 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cxc_cobro_x_ct_cbtecble> cxc_cobro_x_ct_cbtecble { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cxc_ConciliacionNotaCredito> cxc_ConciliacionNotaCredito { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cxc_cobro_det> cxc_cobro_det { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cxc_ConciliacionNotaCredito> cxc_ConciliacionNotaCredito { get; set; }
     }
 }

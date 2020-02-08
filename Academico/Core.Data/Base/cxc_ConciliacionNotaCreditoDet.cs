@@ -22,6 +22,7 @@ namespace Core.Data.Base
         public decimal IdCbteVtaNota { get; set; }
         public string vt_TipoDoc { get; set; }
         public double Valor { get; set; }
+        public Nullable<int> secuencia_nt { get; set; }
     
         public virtual cxc_ConciliacionNotaCredito cxc_ConciliacionNotaCredito { get; set; }
     }

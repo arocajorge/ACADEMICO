@@ -23,5 +23,6 @@ namespace Core.Data.Base
         public string vt_TipoDoc { get; set; }
         public double Valor { get; set; }
         public string ReferenciaDet { get; set; }
+        public Nullable<int> secuencia_nt { get; set; }
     }
 }
