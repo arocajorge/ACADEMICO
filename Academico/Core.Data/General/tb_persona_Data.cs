@@ -428,7 +428,7 @@ namespace Core.Data.General
                         break;
                     case "ALUMNO":
                         EntitiesAcademico context_a = new EntitiesAcademico();
-                        var lst_al = context_a.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true && (q.IdAlumno.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdAlumno).Skip(skip).Take(take);
+                        var lst_al = context_a.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true && (q.IdAlumno.ToString() + " " + q.Codigo + " " + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdAlumno).Skip(skip).Take(take);
                         foreach (var q in lst_al)
                         {
                             Lista.Add(new tb_persona_Info
@@ -436,7 +436,8 @@ namespace Core.Data.General
                                 IdPersona = q.IdPersona,
                                 pe_nombreCompleto = q.pe_nombreCompleto,
                                 pe_cedulaRuc = q.pe_cedulaRuc,
-                                IdEntidad = q.IdAlumno
+                                IdEntidad = q.IdAlumno,
+                                CodAlumno = q.Codigo
                             });
                         }
                         context_a.Dispose();
@@ -444,7 +445,8 @@ namespace Core.Data.General
                     case "ALUMNO_MATRICULA":
                         EntitiesAcademico context_mat = new EntitiesAcademico();
                         var IdCatalogoRetirado = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.RETIRADO);
-                        var lst_mat = context_mat.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdCatalogoESTALU != IdCatalogoRetirado && q.Estado == true && (q.IdAlumno.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdAlumno).Skip(skip).Take(take);
+                        var lst_mat = context_mat.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdCatalogoESTALU != IdCatalogoRetirado && q.Estado == true 
+                        && (q.IdAlumno.ToString() + " " + q.Codigo + " " + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdAlumno).Skip(skip).Take(take);
                         foreach (var q in lst_mat)
                         {
                             Lista.Add(new tb_persona_Info
@@ -452,7 +454,8 @@ namespace Core.Data.General
                                 IdPersona = q.IdPersona,
                                 pe_nombreCompleto = q.pe_nombreCompleto,
                                 pe_cedulaRuc = q.pe_cedulaRuc,
-                                IdEntidad = q.IdAlumno
+                                IdEntidad = q.IdAlumno,
+                                CodAlumno = q.Codigo
                             });
                         }
                         context_mat.Dispose();
@@ -462,7 +465,8 @@ namespace Core.Data.General
                         var info_anio = odata_anio.getInfo_AnioEnCurso(IdEmpresa, 0);
                         var IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
                         var IdCatRetirado = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.RETIRADO);
-                        var lst_matriculados = context_matriculados.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio ==IdAnio && (q.IdAlumno.ToString() + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdAlumno).Skip(skip).Take(take);
+                        var lst_matriculados = context_matriculados.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio ==IdAnio 
+                        && (q.IdAlumno.ToString() + " " + q.Codigo + " " + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdAlumno).Skip(skip).Take(take);
                         foreach (var q in lst_matriculados)
                         {
                             Lista.Add(new tb_persona_Info
@@ -470,7 +474,8 @@ namespace Core.Data.General
                                 IdPersona = q.IdPersona,
                                 pe_nombreCompleto = q.pe_nombreCompleto,
                                 pe_cedulaRuc = q.pe_cedulaRuc,
-                                IdEntidad = q.IdAlumno
+                                IdEntidad = q.IdAlumno,
+                                CodAlumno = q.Codigo
                             });
                         }
                         context_matriculados.Dispose();
@@ -608,7 +613,8 @@ namespace Core.Data.General
                                 IdPersona = q.IdPersona,
                                 pe_nombreCompleto = q.pe_nombreCompleto,
                                 pe_cedulaRuc = q.pe_cedulaRuc,
-                                IdEntidad = q.IdAlumno
+                                IdEntidad = q.IdAlumno,
+                                CodAlumno = q.Codigo
                             }).FirstOrDefault();
                     context_aca.Dispose();
                     break;
@@ -625,7 +631,8 @@ namespace Core.Data.General
                                 IdPersona = q.IdPersona,
                                 pe_nombreCompleto = q.pe_nombreCompleto,
                                 pe_cedulaRuc = q.pe_cedulaRuc,
-                                IdEntidad = q.IdAlumno
+                                IdEntidad = q.IdAlumno,
+                                CodAlumno = q.Codigo
                             }).FirstOrDefault();
                     context_mat.Dispose();
                     break;
@@ -643,7 +650,8 @@ namespace Core.Data.General
                                 IdPersona = q.IdPersona,
                                 pe_nombreCompleto = q.pe_nombreCompleto,
                                 pe_cedulaRuc = q.pe_cedulaRuc,
-                                IdEntidad = q.IdAlumno
+                                IdEntidad = q.IdAlumno,
+                                CodAlumno = q.Codigo
                             }).FirstOrDefault();
                     context_matriculados.Dispose();
                     break;

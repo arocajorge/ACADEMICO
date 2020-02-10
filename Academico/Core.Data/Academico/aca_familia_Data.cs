@@ -369,7 +369,7 @@ namespace Core.Data.Academico
                 aca_Familia_Info info = new aca_Familia_Info();
 
                 EntitiesGeneral Context_general = new EntitiesGeneral();
-                tb_persona Entity_per = Context_general.tb_persona.Where(q => q.pe_cedulaRuc == pe_cedulaRuc).FirstOrDefault();
+                var Entity_per = Context_general.tb_persona.Where(q => q.pe_cedulaRuc == pe_cedulaRuc).FirstOrDefault();
                 if (Entity_per == null)
                 {
                     Context_general.Dispose();

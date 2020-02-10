@@ -53,6 +53,7 @@ namespace Core.Info.CuentasPorCobrar
 
         #region Campos que no existen en la tabla
         public string pe_nombreCompleto { get; set; }
+        public string NomAlumno { get; set; }
         public string tc_descripcion { get; set; }
         public string Su_Descripcion { get; set; }
         public double cr_saldo { get; set; }

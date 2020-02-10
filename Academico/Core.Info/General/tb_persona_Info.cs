@@ -46,6 +46,7 @@ namespace Core.Info.General
         #region Campos que no existen en la tabla
         public decimal IdEntidad { get; set; }
         public bool EstadoBool { get; set; }
+        public string CodAlumno { get; set; }
         #endregion
     }
 }

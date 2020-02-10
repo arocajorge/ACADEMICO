@@ -652,6 +652,7 @@
                     window.open("/Academico/AlumnoFamilia/Index?IdEmpresa=" +@Model.IdEmpresa +"&IdAlumno=" +@Model.IdAlumno, 'self');
                 }
                 else {
+                    console.log(data);
                     if (data.IdPersona != 0) {
                         $("#IdPersona").val(data.IdPersona);
                         $("#pe_Naturaleza").val(data.pe_Naturaleza);

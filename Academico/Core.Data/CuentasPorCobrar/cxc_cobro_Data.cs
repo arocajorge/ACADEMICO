@@ -95,14 +95,14 @@ namespace Core.Data.CuentasPorCobrar
                                  cr_observacion = q.cr_observacion,
                                  nom_Motivo_tipo_cobro = q.nom_Motivo_tipo_cobro,
                                  cr_NumDocumento = q.cr_NumDocumento,
-
+                                 NomAlumno = q.NomAlumno,
                                  EstadoBool = q.cr_estado == "A" ? true : false
                              }).ToList();
                 }
 
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
