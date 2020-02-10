@@ -93,11 +93,42 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
-        #region Combo Parroquia
+        #region Combos
         public ActionResult cmb_parroquia()
         {
             string IdCiudad_fact = (Request.Params["fx_IdCiudad_fact"] != null) ? Request.Params["fx_IdCiudad_fact"].ToString() : "";
             return PartialView("_cmb_parroquia", new aca_Familia_Info { IdCiudad_fact = IdCiudad_fact });
+        }
+
+        public ActionResult ComboBoxPartial_Pais()
+        {
+            return PartialView("_ComboBoxPartial_Pais", new aca_Alumno_Info());
+        }
+        public ActionResult ComboBoxPartial_Region()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            return PartialView("_ComboBoxPartial_Region", new aca_Alumno_Info { IdPais = IdPais });
+        }
+        public ActionResult ComboBoxPartial_Provincia()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region"] != null) ? Convert.ToString(Request.Params["Cod_Region"]) : "";
+            return PartialView("_ComboBoxPartial_Provincia", new aca_Alumno_Info { IdPais = IdPais, Cod_Region = Cod_Region });
+        }
+        public ActionResult ComboBoxPartial_Ciudad()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region"] != null) ? Convert.ToString(Request.Params["Cod_Region"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia"] != null) ? Convert.ToString(Request.Params["IdProvincia"]) : "";
+            return PartialView("_ComboBoxPartial_Ciudad", new aca_Alumno_Info { IdPais = IdPais, Cod_Region = Cod_Region, IdProvincia = IdProvincia });
+        }
+        public ActionResult ComboBoxPartial_Parroquia()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region"] != null) ? Convert.ToString(Request.Params["Cod_Region"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia"] != null) ? Convert.ToString(Request.Params["IdProvincia"]) : "";
+            string IdCiudad = (Request.Params["IdCiudad"] != null) ? Convert.ToString(Request.Params["IdCiudad"]) : "";
+            return PartialView("_ComboBoxPartial_Parroquia", new aca_Alumno_Info { IdPais = IdPais, Cod_Region = Cod_Region, IdProvincia = IdProvincia, IdCiudad = IdCiudad });
         }
         #endregion
 

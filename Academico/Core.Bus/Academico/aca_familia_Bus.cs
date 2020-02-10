@@ -19,6 +19,7 @@ namespace Core.Bus.Academico
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         tb_persona_Data odata_per = new tb_persona_Data();
         fa_cliente_Data odata_cliente = new fa_cliente_Data();
+        fa_cliente_contactos_Data odata_cliente_contactos = new fa_cliente_contactos_Data();
         fa_TerminoPago_Data odata_terminopago = new fa_TerminoPago_Data();
         fa_formaPago_Data odata_formapago = new fa_formaPago_Data();
         fa_Vendedor_Data odata_vendedor = new fa_Vendedor_Data();
@@ -284,6 +285,7 @@ namespace Core.Bus.Academico
 
                                 cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
                                 cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = odata_vendedor_sucursal.get_list(cliente.IdEmpresa, cliente.IdCliente);
+
                                 return odata_cliente.modificarDB(cliente);
                             }
                         }
