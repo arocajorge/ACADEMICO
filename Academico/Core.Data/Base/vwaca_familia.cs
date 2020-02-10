@@ -52,11 +52,17 @@ namespace Core.Data.Base
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public bool CasaPropia { get; set; }
-        public bool Estado { get; set; }
         public Nullable<int> AnioVehiculo { get; set; }
         public Nullable<int> IdReligion { get; set; }
         public Nullable<bool> AsisteCentroCristiano { get; set; }
         public bool EstaFallecido { get; set; }
         public Nullable<int> IdGrupoEtnico { get; set; }
+        public string IdPais { get; set; }
+        public string Cod_Region { get; set; }
+        public string IdProvincia { get; set; }
+        public string IdCiudad { get; set; }
+        public string IdParroquia { get; set; }
+        public string Sector { get; set; }
+        public bool Estado { get; set; }
     }
 }

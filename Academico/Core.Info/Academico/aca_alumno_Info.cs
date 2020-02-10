@@ -32,6 +32,7 @@ namespace Core.Info.Academico
         public string IdProvincia { get; set; }
         public string IdCiudad { get; set; }
         public string IdParroquia { get; set; }
+        [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 500 caracteres")]
         public string Sector { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

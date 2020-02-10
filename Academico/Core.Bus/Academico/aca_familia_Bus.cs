@@ -244,8 +244,8 @@ namespace Core.Bus.Academico
                                     Idtipo_cliente = info.Idtipo_cliente,
                                     IdNivel = 1,
                                     EsClienteExportador = false,
-                                    IdCiudad = info.IdCiudad,
-                                    IdParroquia = info.IdParroquia,
+                                    IdCiudad = info.IdCiudad_fact,
+                                    IdParroquia = info.IdParroquia_fact,
                                     Celular = info.Celular,
                                     Direccion = info.Direccion,
                                     Correo = info.Correo,
@@ -273,8 +273,8 @@ namespace Core.Bus.Academico
                                 cliente.Idtipo_cliente = info.Idtipo_cliente;
                                 cliente.IdTipoCredito = info.IdTipoCredito;
                                 cliente.cl_plazo = info_credito.Dias_Vct;
-                                cliente.IdCiudad = info.IdCiudad;
-                                cliente.IdParroquia = info.IdParroquia;
+                                cliente.IdCiudad = info.IdCiudad_fact;
+                                cliente.IdParroquia = info.IdParroquia_fact;
                                 cliente.Celular = info.Celular;
                                 cliente.Direccion = info.Direccion;
                                 cliente.Correo = info.Correo;
