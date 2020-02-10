@@ -37,6 +37,12 @@ namespace Core.Data.Base
         public bool SeFactura { get; set; }
         public bool EsRepresentante { get; set; }
         public bool EstaFallecido { get; set; }
+        public string IdPais { get; set; }
+        public string Cod_Region { get; set; }
+        public string IdProvincia { get; set; }
+        public string IdCiudad { get; set; }
+        public string IdParroquia { get; set; }
+        public string Sector { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

@@ -96,8 +96,8 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Combo Parroquia
         public ActionResult cmb_parroquia()
         {
-            string IdCiudad = (Request.Params["fx_IdCiudad"] != null) ? Request.Params["fx_IdCiudad"].ToString() : "";
-            return PartialView("_cmb_parroquia", new aca_Familia_Info { IdCiudad = IdCiudad });
+            string IdCiudad_fact = (Request.Params["fx_IdCiudad_fact"] != null) ? Request.Params["fx_IdCiudad_fact"].ToString() : "";
+            return PartialView("_cmb_parroquia", new aca_Familia_Info { IdCiudad_fact = IdCiudad_fact });
         }
         #endregion
 
@@ -184,6 +184,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 CodCatalogoCONADIS = "",
                 IdTipoCredito ="CON",
                 Idtipo_cliente = 1,
+                IdCiudad_fact = "09",
+                IdParroquia_fact = "09",
+                IdPais = "1",
+                Cod_Region = "00001",
+                IdProvincia = "09",
                 IdCiudad = "09",
                 IdParroquia = "09",
             };
@@ -259,8 +264,8 @@ namespace Core.Web.Areas.Academico.Controllers
             model.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
             var IdCliente = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
             var info_contacto = bus_cliente_cont.get_info(model.IdEmpresa, IdCliente, 1);
-            model.IdCiudad = (info_contacto == null ? "09" : info_contacto.IdCiudad);
-            model.IdParroquia = (info_contacto == null ? "09" : info_contacto.IdParroquia);
+            model.IdCiudad_fact = (info_contacto == null ? "09" : info_contacto.IdCiudad);
+            model.IdParroquia_fact = (info_contacto == null ? "09" : info_contacto.IdParroquia);
 
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
@@ -328,8 +333,8 @@ namespace Core.Web.Areas.Academico.Controllers
             model.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : info_cliente.Idtipo_cliente);
             var IdCliente = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
             var info_contacto = bus_cliente_cont.get_info(model.IdEmpresa, IdCliente, 1);
-            model.IdCiudad = (info_contacto == null ? "09" : info_contacto.IdCiudad);
-            model.IdParroquia = (info_contacto == null ? "09" : info_contacto.IdParroquia);
+            model.IdCiudad_fact = (info_contacto == null ? "09" : info_contacto.IdCiudad);
+            model.IdParroquia_fact = (info_contacto == null ? "09" : info_contacto.IdParroquia);
 
             if (model == null)
                 return RedirectToAction("Index", new { IdEmpresa = IdEmpresa, IdAlumno = IdAlumno });

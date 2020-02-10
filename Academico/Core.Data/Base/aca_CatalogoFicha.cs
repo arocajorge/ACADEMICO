@@ -17,7 +17,6 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public aca_CatalogoFicha()
         {
-            this.aca_Familia = new HashSet<aca_Familia>();
             this.aca_SocioEconomico = new HashSet<aca_SocioEconomico>();
             this.aca_SocioEconomico1 = new HashSet<aca_SocioEconomico>();
             this.aca_SocioEconomico2 = new HashSet<aca_SocioEconomico>();
@@ -25,6 +24,7 @@ namespace Core.Data.Base
             this.aca_SocioEconomico4 = new HashSet<aca_SocioEconomico>();
             this.aca_SocioEconomico5 = new HashSet<aca_SocioEconomico>();
             this.aca_SocioEconomico6 = new HashSet<aca_SocioEconomico>();
+            this.aca_Familia = new HashSet<aca_Familia>();
         }
     
         public int IdCatalogoFicha { get; set; }
@@ -43,8 +43,6 @@ namespace Core.Data.Base
     
         public virtual aca_CatalogoTipoFicha aca_CatalogoTipoFicha { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_Familia> aca_Familia { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico1 { get; set; }
@@ -58,5 +56,7 @@ namespace Core.Data.Base
         public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico5 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico6 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Familia> aca_Familia { get; set; }
     }
 }

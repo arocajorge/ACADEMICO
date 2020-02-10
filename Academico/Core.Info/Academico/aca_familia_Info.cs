@@ -87,15 +87,24 @@ namespace Core.Info.Academico
         public int IdProfesion { get; set; }
         [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
         public int Idtipo_cliente { get; set; }
-        [Required(ErrorMessage = "El campo religión es obligatorio")]
         public Nullable<int> IdReligion { get; set; }
         public Nullable<bool> AsisteCentroCristiano { get; set; }
         public string IdTipoCredito { get; set; }
         [Required(ErrorMessage = "El campo ciudad es obligatorio")]
-        public string IdCiudad { get; set; }
+        public string IdCiudad_fact { get; set; }
         [Required(ErrorMessage = "El campo parroquia es obligatorio")]
-        public string IdParroquia { get; set; }
+        public string IdParroquia_fact { get; set; }
         [Required(ErrorMessage = "El campo sucursal es obligatorio")]
+        public string IdPais { get; set; }
+        public string Cod_Region { get; set; }
+        public string IdProvincia { get; set; }
+        public string IdCiudad { get; set; }
+        public string IdParroquia { get; set; }
+        [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 500 caracteres")]
+        public string Sector { get; set; }
+
+
+
         public int IdSede { get; set; }
         public int IdSucursal { get; set; }
         public tb_persona_Info info_persona { get; set; }

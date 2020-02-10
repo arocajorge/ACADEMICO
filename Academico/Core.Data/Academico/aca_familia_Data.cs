@@ -259,6 +259,12 @@ namespace Core.Data.Academico
                         IdReligion = Entity.IdReligion,
                         AsisteCentroCristiano = Entity.AsisteCentroCristiano,
                         EstaFallecido = Entity.EstaFallecido,
+                        IdPais = Entity.IdPais,
+                        IdProvincia = Entity.IdProvincia,
+                        IdCiudad = Entity.IdCiudad,
+                        IdParroquia = Entity.IdParroquia,
+                        Cod_Region = Entity.Cod_Region,
+                        Sector = Entity.Sector,
                         Estado = Entity.Estado
                     };
                 }
@@ -325,6 +331,12 @@ namespace Core.Data.Academico
                         pe_telfono_Contacto = Entity.pe_telfono_Contacto,
                         IdReligion = Entity.IdReligion,
                         AsisteCentroCristiano = Entity.AsisteCentroCristiano,
+                        IdPais = Entity.IdPais,
+                        IdProvincia = Entity.IdProvincia,
+                        IdCiudad = Entity.IdCiudad,
+                        IdParroquia = Entity.IdParroquia,
+                        Cod_Region = Entity.Cod_Region,
+                        Sector = Entity.Sector,
                         EstaFallecido = Entity.EstaFallecido,
                     };
                 }
@@ -425,6 +437,12 @@ namespace Core.Data.Academico
                     IdReligion = Entity_fam.IdReligion,
                     AsisteCentroCristiano = Entity_fam.AsisteCentroCristiano,
                     PorcentajeDiscapacidad = Entity_fam.PorcentajeDiscapacidad,
+                    IdPais = Entity_fam.IdPais,
+                    IdProvincia = Entity_fam.IdProvincia,
+                    IdCiudad = Entity_fam.IdCiudad,
+                    IdParroquia = Entity_fam.IdParroquia,
+                    Cod_Region = Entity_fam.Cod_Region,
+                    Sector = Entity_fam.Sector,
                     EstaFallecido = Entity_fam.EstaFallecido
                 };
 
@@ -521,6 +539,12 @@ namespace Core.Data.Academico
                         CasaPropia = info.CasaPropia,
                         EsRepresentante = info.EsRepresentante,
                         EstaFallecido = info.EstaFallecido,
+                        IdPais = info.IdPais,
+                        IdProvincia = info.IdProvincia,
+                        IdCiudad = info.IdCiudad,
+                        IdParroquia = info.IdParroquia,
+                        Cod_Region = info.Cod_Region,
+                        Sector = info.Sector,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -595,6 +619,12 @@ namespace Core.Data.Academico
                     Entity.AnioVehiculo = info.AnioVehiculo;
                     Entity.CasaPropia = info.CasaPropia;
                     Entity.EstaFallecido = info.EstaFallecido;
+                    Entity.IdPais = info.IdPais;
+                    Entity.IdProvincia = info.IdProvincia;
+                    Entity.IdCiudad = info.IdCiudad;
+                    Entity.IdParroquia = info.IdParroquia;
+                    Entity.Cod_Region = info.Cod_Region;
+                    Entity.Sector = info.Sector;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 
