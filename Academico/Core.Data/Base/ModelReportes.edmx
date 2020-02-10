@@ -237,6 +237,11 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_003' no tiene definida
           <Parameter Name="FechaCorte" Type="datetime" Mode="In" />
           <Parameter Name="MostrarSaldo0" Type="bit" Mode="In" />
         </Function>
+        <Function Name="SPCXC_004" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="FechaCorte" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelReportesStoreContainer">
           <EntitySet Name="VWACA_002" EntityType="Self.VWACA_002" store:Type="Views" store:Schema="Academico">
             <DefiningQuery>SELECT 
@@ -396,6 +401,11 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_003' no tiene definida
           <EntitySet Name="VWCXC_002" EntityType="ModelReportes.VWCXC_002" />
           <EntitySet Name="VWCXC_002_diario" EntityType="ModelReportes.VWCXC_002_diario" />
           <EntitySet Name="VWCXC_003" EntityType="ModelReportes.VWCXC_003" />
+          <FunctionImport Name="SPCXC_004" ReturnType="Collection(ModelReportes.SPCXC_004_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdUsuario" Mode="In" Type="String" />
+            <Parameter Name="FechaCorte" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="VWACA_002">
           <Key>
@@ -682,6 +692,20 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_003' no tiene definida
           <Property Name="NombreTipoCobro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TotalPago" Type="Double" Nullable="false" />
         </EntityType>
+        <ComplexType Name="SPCXC_004_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdAnio" Nullable="false" />
+          <Property Type="String" Name="IdUsuario" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="NomAnio" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="CodigoAlumno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreAlumno" Nullable="false" MaxLength="1000" />
+          <Property Type="Int32" Name="IdJornada" Nullable="true" />
+          <Property Type="String" Name="NombreJornada" Nullable="true" MaxLength="500" />
+          <Property Type="Decimal" Name="SaldoDeudor" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="SaldoAcreedor" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="SaldoFinal" Nullable="false" Precision="18" Scale="2" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -919,6 +943,24 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_003' no tiene definida
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPCXC_004" FunctionName="ModelReportes.Store.SPCXC_004">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPCXC_004_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NomAnio" ColumnName="NomAnio" />
+                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
+                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="NombreJornada" ColumnName="NombreJornada" />
+                <ScalarProperty Name="SaldoDeudor" ColumnName="SaldoDeudor" />
+                <ScalarProperty Name="SaldoAcreedor" ColumnName="SaldoAcreedor" />
+                <ScalarProperty Name="SaldoFinal" ColumnName="SaldoFinal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

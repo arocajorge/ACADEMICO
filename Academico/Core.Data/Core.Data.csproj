@@ -123,6 +123,9 @@
     <Compile Include="Base\SPCXC_001_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPCXC_004_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_GrupoEtnico.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
@@ -1736,6 +1739,7 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_003_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_004_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_001_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_002_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_003_aplicaciones_Data.cs" />
