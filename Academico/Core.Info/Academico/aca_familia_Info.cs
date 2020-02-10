@@ -94,7 +94,6 @@ namespace Core.Info.Academico
         public string IdCiudad_fact { get; set; }
         [Required(ErrorMessage = "El campo parroquia es obligatorio")]
         public string IdParroquia_fact { get; set; }
-        [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public string IdPais { get; set; }
         public string Cod_Region { get; set; }
         public string IdProvincia { get; set; }
@@ -106,6 +105,7 @@ namespace Core.Info.Academico
 
 
         public int IdSede { get; set; }
+        [Required(ErrorMessage = "El campo sucursal es obligatorio")]
         public int IdSucursal { get; set; }
         public tb_persona_Info info_persona { get; set; }
         #endregion

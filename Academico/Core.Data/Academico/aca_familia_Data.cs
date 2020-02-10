@@ -124,6 +124,12 @@ namespace Core.Data.Academico
                         pe_telfono_Contacto = Entity.pe_telfono_Contacto,
                         IdReligion = Entity.IdReligion,
                         AsisteCentroCristiano = Entity.AsisteCentroCristiano,
+                        IdPais = Entity.IdPais,
+                        IdProvincia = Entity.IdProvincia,
+                        IdCiudad = Entity.IdCiudad,
+                        IdParroquia = Entity.IdParroquia,
+                        Cod_Region = Entity.Cod_Region,
+                        Sector = Entity.Sector,
                         EstaFallecido = Entity.EstaFallecido,
                         Estado = Entity.Estado
                     };
@@ -191,6 +197,12 @@ namespace Core.Data.Academico
                         pe_telfono_Contacto = Entity.pe_telfono_Contacto,
                         IdReligion = Entity.IdReligion,
                         AsisteCentroCristiano = Entity.AsisteCentroCristiano,
+                        IdPais = Entity.IdPais,
+                        IdProvincia = Entity.IdProvincia,
+                        IdCiudad = Entity.IdCiudad,
+                        IdParroquia = Entity.IdParroquia,
+                        Cod_Region = Entity.Cod_Region,
+                        Sector = Entity.Sector,
                         EstaFallecido = Entity.EstaFallecido,
                         Estado = Entity.Estado
                     };
@@ -632,7 +644,7 @@ namespace Core.Data.Academico
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

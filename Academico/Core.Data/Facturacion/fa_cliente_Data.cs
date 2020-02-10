@@ -334,7 +334,12 @@ namespace Core.Data.Facturacion
                         Context.fa_cliente_x_fa_Vendedor_x_sucursal.Add(det);
                     }
 
-
+                    fa_cliente_contactos Entity_Contacto = Context.fa_cliente_contactos.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente && q.IdContacto==1);
+                    if (Entity_Contacto != null)
+                    {
+                        Entity_Contacto.IdParroquia = info.IdParroquia;
+                        Entity_Contacto.IdCiudad = info.IdCiudad;
+                    }
 
                     Context.SaveChanges();
                 }
