@@ -89,7 +89,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         }
         #endregion
         #region Combo bajo demanda Alumno
-        public ActionResult Cmb_AlumnoNC()
+        public ActionResult Cmb_AlumnoND()
         {
             decimal model = new decimal();
             return PartialView("_CmbAlumnoND", model);
