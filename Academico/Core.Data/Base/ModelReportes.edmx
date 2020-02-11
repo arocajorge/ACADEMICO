@@ -76,6 +76,54 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_003' no tiene definida
           <Property Name="CorreoRepresentante" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWACA_004">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdSede" />
+            <PropertyRef Name="IdNivel" />
+            <PropertyRef Name="IdJornada" />
+            <PropertyRef Name="IdCurso" />
+            <PropertyRef Name="IdMateria" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="FechaDesde" />
+            <PropertyRef Name="FechaHasta" />
+            <PropertyRef Name="NomSede" />
+            <PropertyRef Name="NomNivel" />
+            <PropertyRef Name="NomJornada" />
+            <PropertyRef Name="OrdenJornada" />
+            <PropertyRef Name="NomCurso" />
+            <PropertyRef Name="OrdenCurso" />
+            <PropertyRef Name="NomMateria" />
+            <PropertyRef Name="OrdenMateria" />
+            <PropertyRef Name="EsObligatorio" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdAnio" Type="int" Nullable="false" />
+          <Property Name="IdSede" Type="int" Nullable="false" />
+          <Property Name="IdNivel" Type="int" Nullable="false" />
+          <Property Name="IdJornada" Type="int" Nullable="false" />
+          <Property Name="IdCurso" Type="int" Nullable="false" />
+          <Property Name="IdMateria" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaDesde" Type="date" Nullable="false" />
+          <Property Name="FechaHasta" Type="date" Nullable="false" />
+          <Property Name="NomSede" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NomNivel" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NomJornada" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="OrdenJornada" Type="int" Nullable="false" />
+          <Property Name="NomCurso" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="OrdenCurso" Type="int" Nullable="false" />
+          <Property Name="NomMateria" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="NomMateriaArea" Type="varchar" MaxLength="500" />
+          <Property Name="NomMateriaGrupo" Type="varchar" MaxLength="500" />
+          <Property Name="OrdenMateria" Type="int" Nullable="false" />
+          <Property Name="OrdenMateriaGrupo" Type="int" />
+          <Property Name="OrdenMateriaArea" Type="int" />
+          <Property Name="EsObligatorio" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.Academico.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCONTA_001">
           <Key>
@@ -580,6 +628,33 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
     [VWACA_003].[CorreoRepresentante] AS [CorreoRepresentante]
     FROM [Academico].[VWACA_003] AS [VWACA_003]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWACA_004" EntityType="Self.VWACA_004" store:Type="Views" store:Schema="Academico">
+            <DefiningQuery>SELECT 
+    [VWACA_004].[IdEmpresa] AS [IdEmpresa], 
+    [VWACA_004].[IdAnio] AS [IdAnio], 
+    [VWACA_004].[IdSede] AS [IdSede], 
+    [VWACA_004].[IdNivel] AS [IdNivel], 
+    [VWACA_004].[IdJornada] AS [IdJornada], 
+    [VWACA_004].[IdCurso] AS [IdCurso], 
+    [VWACA_004].[IdMateria] AS [IdMateria], 
+    [VWACA_004].[Descripcion] AS [Descripcion], 
+    [VWACA_004].[FechaDesde] AS [FechaDesde], 
+    [VWACA_004].[FechaHasta] AS [FechaHasta], 
+    [VWACA_004].[NomSede] AS [NomSede], 
+    [VWACA_004].[NomNivel] AS [NomNivel], 
+    [VWACA_004].[NomJornada] AS [NomJornada], 
+    [VWACA_004].[OrdenJornada] AS [OrdenJornada], 
+    [VWACA_004].[NomCurso] AS [NomCurso], 
+    [VWACA_004].[OrdenCurso] AS [OrdenCurso], 
+    [VWACA_004].[NomMateria] AS [NomMateria], 
+    [VWACA_004].[NomMateriaArea] AS [NomMateriaArea], 
+    [VWACA_004].[NomMateriaGrupo] AS [NomMateriaGrupo], 
+    [VWACA_004].[OrdenMateria] AS [OrdenMateria], 
+    [VWACA_004].[OrdenMateriaGrupo] AS [OrdenMateriaGrupo], 
+    [VWACA_004].[OrdenMateriaArea] AS [OrdenMateriaArea], 
+    [VWACA_004].[EsObligatorio] AS [EsObligatorio]
+    FROM [Academico].[VWACA_004] AS [VWACA_004]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWCONTA_001" EntityType="Self.VWCONTA_001" store:Type="Views" store:Schema="Academico">
             <DefiningQuery>SELECT 
     [VWCONTA_001].[IdEmpresa] AS [IdEmpresa], 
@@ -898,6 +973,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <EntitySet Name="VWFAC_003" EntityType="ModelReportes.VWFAC_003" />
           <EntitySet Name="VWFAC_003_aplicaciones" EntityType="ModelReportes.VWFAC_003_aplicaciones" />
           <EntitySet Name="VWFAC_004" EntityType="ModelReportes.VWFAC_004" />
+          <EntitySet Name="VWACA_004" EntityType="ModelReportes.VWACA_004" />
         </EntityContainer>
         <EntityType Name="VWACA_002">
           <Key>
@@ -1485,6 +1561,52 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <Property Name="ValorEfectivo" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Cambio" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
+        <EntityType Name="VWACA_004">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdSede" />
+            <PropertyRef Name="IdNivel" />
+            <PropertyRef Name="IdJornada" />
+            <PropertyRef Name="IdCurso" />
+            <PropertyRef Name="IdMateria" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="FechaDesde" />
+            <PropertyRef Name="FechaHasta" />
+            <PropertyRef Name="NomSede" />
+            <PropertyRef Name="NomNivel" />
+            <PropertyRef Name="NomJornada" />
+            <PropertyRef Name="OrdenJornada" />
+            <PropertyRef Name="NomCurso" />
+            <PropertyRef Name="OrdenCurso" />
+            <PropertyRef Name="NomMateria" />
+            <PropertyRef Name="OrdenMateria" />
+            <PropertyRef Name="EsObligatorio" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdSede" Type="Int32" Nullable="false" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="IdJornada" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="IdMateria" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaHasta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NomSede" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomNivel" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomJornada" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenJornada" Type="Int32" Nullable="false" />
+          <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenCurso" Type="Int32" Nullable="false" />
+          <Property Name="NomMateria" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomMateriaArea" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomMateriaGrupo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenMateria" Type="Int32" Nullable="false" />
+          <Property Name="OrdenMateriaGrupo" Type="Int32" />
+          <Property Name="OrdenMateriaArea" Type="Int32" />
+          <Property Name="EsObligatorio" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1936,6 +2058,35 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
                 <ScalarProperty Name="Su_Direccion" ColumnName="Su_Direccion" />
                 <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
                 <ScalarProperty Name="Su_CodigoEstablecimiento" ColumnName="Su_CodigoEstablecimiento" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWACA_004">
+            <EntityTypeMapping TypeName="ModelReportes.VWACA_004">
+              <MappingFragment StoreEntitySet="VWACA_004">
+                <ScalarProperty Name="EsObligatorio" ColumnName="EsObligatorio" />
+                <ScalarProperty Name="OrdenMateriaArea" ColumnName="OrdenMateriaArea" />
+                <ScalarProperty Name="OrdenMateriaGrupo" ColumnName="OrdenMateriaGrupo" />
+                <ScalarProperty Name="OrdenMateria" ColumnName="OrdenMateria" />
+                <ScalarProperty Name="NomMateriaGrupo" ColumnName="NomMateriaGrupo" />
+                <ScalarProperty Name="NomMateriaArea" ColumnName="NomMateriaArea" />
+                <ScalarProperty Name="NomMateria" ColumnName="NomMateria" />
+                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
