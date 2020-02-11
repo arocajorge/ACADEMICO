@@ -11,6 +11,11 @@
         <EntityTypeShape EntityType="ModelReportes.VWCXC_002" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="ModelReportes.VWCXC_002_diario" Width="1.5" PointX="2.75" PointY="5.75" />
         <EntityTypeShape EntityType="ModelReportes.VWCXC_003" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWFAC_001" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWFAC_002" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWFAC_003" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWFAC_003_aplicaciones" Width="1.5" PointX="7.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWFAC_004" Width="1.5" PointX="11.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

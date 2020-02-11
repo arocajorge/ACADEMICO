@@ -15,7 +15,6 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdPersona, new { @id = "IdPersona" })
-    @Html.HiddenFor(q => q.IdProfesion, new { @id = "IdProfesion" })
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -223,6 +222,27 @@
                            }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.pe_fechaNacimiento, "", new { @class = "text-danger" })
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdProfesion">Profesion*</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdProfesion, settings =>
+                               {
+                                   settings.Name = "IdProfesion";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdProfesion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdProfesion";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "Descripcion";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_profesion).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdProfesion, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
@@ -446,7 +466,7 @@
                         $("#pe_celular").val(data.pe_celular);
                         $("#Telefonos").val(data.Telefonos);
                         $("#Direccion").val(data.Direccion);
-
+                        IdProfesion.SetValue(data.IdProfesion);
                         $("#IdPersona").val(data.IdPersona);
                     }
                     else {
@@ -472,6 +492,7 @@
         $("#pe_celular").val("");
         $("#Telefonos").val("");
         $("#Direccion").val("");
+        IdProfesion.SetValue(null);
     }
 
 

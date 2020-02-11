@@ -21,6 +21,7 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Variables
         aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
         aca_Profesor_List Lista_Profesor = new aca_Profesor_List();
+        tb_profesion_Bus bus_profesion = new tb_profesion_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         public static UploadedFile file { get; set; }
@@ -69,12 +70,15 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_tipo_naturaleza = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPONATPER), false);
             var lst_tipo_discapacidad = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODISCAP), false);
             lst_tipo_discapacidad.Add(new tb_Catalogo_Info { CodCatalogo = "", ca_descripcion = "" });
+            var lst_profesion = bus_profesion.GetList(false);
+            //lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "" });
 
             ViewBag.lst_sexo = lst_sexo;
             ViewBag.lst_estado_civil = lst_estado_civil;
             ViewBag.lst_tipo_doc = lst_tipo_doc;
             ViewBag.lst_tipo_naturaleza = lst_tipo_naturaleza;
             ViewBag.lst_tipo_discapacidad = lst_tipo_discapacidad;
+            ViewBag.lst_profesion = lst_profesion;
         }
         #endregion
 

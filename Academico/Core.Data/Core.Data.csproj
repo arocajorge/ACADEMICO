@@ -159,6 +159,21 @@
     <Compile Include="Base\VWCXC_003.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWFAC_001.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWFAC_002.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWFAC_003.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWFAC_003_aplicaciones.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWFAC_004.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwfa_factura_ParaContabilizarAcademico.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>

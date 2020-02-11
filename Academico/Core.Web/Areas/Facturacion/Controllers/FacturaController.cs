@@ -324,32 +324,32 @@ namespace Core.Web.Areas.Facturacion.Controllers
             return Json(mensaje, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult ImpresionRapida(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, int IdPuntoVta = 0)
-        //{
-        //    string reporte = string.Empty;
-        //    tb_ColaImpresionDirecta_Bus bus_ColaImpresion = new tb_ColaImpresionDirecta_Bus();
-        //    seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
-        //    var usuario = bus_usuario.get_info(SessionFixed.IdUsuario);
+        public JsonResult ImpresionRapida(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, int IdPuntoVta = 0)
+        {
+            string reporte = string.Empty;
+            tb_ColaImpresionDirecta_Bus bus_ColaImpresion = new tb_ColaImpresionDirecta_Bus();
+            seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
+            var usuario = bus_usuario.get_info(SessionFixed.IdUsuario);
 
-        //    var pto_vta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
-        //    if (pto_vta != null)
-        //    {
-        //        bus_ColaImpresion.GuardarDB(new tb_ColaImpresionDirecta_Info
-        //        {
-        //            IdEmpresa = IdEmpresa,
-        //            CodReporte = pto_vta.IPImpresora,
-        //            IPImpresora = usuario.IPImpresora,
-        //            IPUsuario = usuario.IPMaquina,
-        //            NombreEmpresa = SessionFixed.NomEmpresa,
-        //            Usuario = SessionFixed.IdUsuario,
-        //            //Nunca enviar IdEmpresa en Parametros
-        //            Parametros = IdSucursal + "," + IdBodega + "," + IdCbteVta,
-        //            NumCopias = pto_vta.NumCopias
-        //        });
-        //    }
+            var pto_vta = bus_punto_venta.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
+            if (pto_vta != null)
+            {
+                bus_ColaImpresion.GuardarDB(new tb_ColaImpresionDirecta_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    CodReporte = pto_vta.IPImpresora,
+                    IPImpresora = usuario.IPImpresora,
+                    IPUsuario = usuario.IPMaquina,
+                    NombreEmpresa = SessionFixed.NomEmpresa,
+                    Usuario = SessionFixed.IdUsuario,
+                    //Nunca enviar IdEmpresa en Parametros
+                    Parametros = IdSucursal + "," + IdBodega + "," + IdCbteVta,
+                    NumCopias = pto_vta.NumCopias
+                });
+            }
 
-        //    return Json(reporte, JsonRequestBehavior.AllowGet);
-        //}
+            return Json(reporte, JsonRequestBehavior.AllowGet);
+        }
 
         public JsonResult Imprimir(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, int IdPuntoVta = 0)
         {
@@ -360,9 +360,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 #region 
                 /*
                 tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
-                FAC_003_Rpt model = new FAC_003_Rpt();
+                FAC_001_Rpt model = new FAC_001_Rpt();
                 #region Cargo diseño desde base
-                var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_003");
+                var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_001");
                 if (reporte != null)
                 {
                     System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);

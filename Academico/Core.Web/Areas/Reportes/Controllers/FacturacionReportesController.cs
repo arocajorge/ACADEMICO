@@ -5,6 +5,7 @@ using Core.Info.General;
 using Core.Info.Helps;
 using Core.Info.Inventario;
 using Core.Web.Helps;
+using Core.Web.Reportes.Facturacion;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
@@ -55,5 +56,95 @@ namespace Core.Web.Areas.Reportes.Controllers
             return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
+
+        public ActionResult FAC_001(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
+        {
+            FAC_001_Rpt model = new FAC_001_Rpt();
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_001");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            model.p_IdEmpresa.Value = IdEmpresa;
+            model.p_IdBodega.Value = IdBodega;
+            model.p_IdSucursal.Value = IdSucursal;
+            model.p_IdCbteVta.Value = IdCbteVta;
+            model.p_mostrar_cuotas.Value = bus_factura.MostrarCuotasRpt(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+            model.RequestParameters = false;
+            model.DefaultPrinterSettingsUsing.UsePaperKind = false;
+            //bus_factura.modificarEstadoImpresion(Convert.ToInt32(SessionFixed.IdEmpresa), IdSucursal, IdBodega, IdCbteVta, true);
+
+
+            return View(model);
+        }
+
+        public ActionResult FAC_002(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            FAC_002_Rpt model = new FAC_002_Rpt();
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_002");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+            model.p_IdEmpresa.Value = IdEmpresa;
+            model.p_IdBodega.Value = IdBodega;
+            model.p_IdSucursal.Value = IdSucursal;
+            model.p_IdCbteVta.Value = IdCbteVta;
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            model.RequestParameters = false;
+            return View(model);
+        }
+        public ActionResult FAC_003(int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
+        {
+            FAC_003_Rpt model = new FAC_003_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_003");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdBodega.Value = IdBodega;
+            model.p_IdSucursal.Value = IdSucursal;
+            model.p_IdNota.Value = IdNota;
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            model.RequestParameters = false;
+            return View(model);
+        }
+
+        public ActionResult FAC_004(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            FAC_004_Rpt model = new FAC_004_Rpt();
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_004");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+            model.p_IdEmpresa.Value = IdEmpresa;
+            model.p_IdBodega.Value = IdBodega;
+            model.p_IdSucursal.Value = IdSucursal;
+            model.p_IdCbteVta.Value = IdCbteVta;
+            model.RequestParameters = false;
+            return View(model);
+        }
     }
 }

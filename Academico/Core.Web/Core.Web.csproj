@@ -381,6 +381,36 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_004_Rpt.Designer.cs">
       <DependentUpon>CXC_004_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_001_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_001_Rpt.Designer.cs">
+      <DependentUpon>FAC_001_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_002_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_002_Rpt.Designer.cs">
+      <DependentUpon>FAC_002_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_003_aplicaciones_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_003_aplicaciones_Rpt.Designer.cs">
+      <DependentUpon>FAC_003_aplicaciones_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_003_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_003_Rpt.Designer.cs">
+      <DependentUpon>FAC_003_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_004_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_004_Rpt.Designer.cs">
+      <DependentUpon>FAC_004_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -8240,7 +8270,6 @@
     <Folder Include="Areas\Inventario\Views\Subgrupo\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
-    <Folder Include="Reportes\Facturacion\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -8295,6 +8324,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_004_Rpt.resx">
       <DependentUpon>CXC_004_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_001_Rpt.resx">
+      <DependentUpon>FAC_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_002_Rpt.resx">
+      <DependentUpon>FAC_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_003_aplicaciones_Rpt.resx">
+      <DependentUpon>FAC_003_aplicaciones_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_003_Rpt.resx">
+      <DependentUpon>FAC_003_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_004_Rpt.resx">
+      <DependentUpon>FAC_004_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

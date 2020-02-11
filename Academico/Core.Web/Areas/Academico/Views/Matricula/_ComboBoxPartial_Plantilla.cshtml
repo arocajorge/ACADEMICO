@@ -3,11 +3,11 @@
     settings.Name = "IdPlantilla";
     settings.CallbackRouteValues = new { Controller = "Matricula", Action = "ComboBoxPartial_Plantilla", Area = "Academico" };
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-    settings.Properties.DisplayFormatString = "[{0}] - {1} ${2:n2}";
+    settings.Properties.DisplayFormatString = "[{0}] - {1}";
     settings.Properties.Columns.Add("IdPlantilla", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
     settings.Properties.Columns.Add("NomPlantilla", "Plantilla").Width = System.Web.UI.WebControls.Unit.Percentage(60);
-    settings.Properties.Columns.Add("TipoDescuento", "Descuento").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-    settings.Properties.Columns.Add("Valor", "Valor").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+    //settings.Properties.Columns.Add("TipoDescuento", "Descuento").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+    //settings.Properties.Columns.Add("Valor", "Valor").Width = System.Web.UI.WebControls.Unit.Percentage(20);
     //Campo ID
     settings.Properties.ValueField = "IdPlantilla";
     settings.Properties.ValueType = typeof(int);
