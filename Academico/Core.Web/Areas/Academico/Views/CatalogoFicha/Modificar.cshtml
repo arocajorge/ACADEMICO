@@ -13,7 +13,7 @@
 {
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
+            <div class="col-md-11">
                 <div class="form-group">
                     <label for="IdTipoCatalogo">Tipo catálogo*</label>
                     @Html.HiddenFor(q => q.IdCatalogoTipoFicha)
@@ -35,6 +35,14 @@
                    settings.ReadOnly = true;
                }).BindList(ViewBag.lst_tipos).GetHtml()
                     @Html.ValidationMessageFor(q => q.IdCatalogoTipoFicha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdSucursal">&nbsp;</label>
+                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","CatalogoFicha",new { Area = "Academico", IdCatalogoTipoFicha=Model.IdCatalogoTipoFicha },null)">
+                        <i class="fa fa-plus"></i>
+                    </a>
                 </div>
             </div>
         </div>
