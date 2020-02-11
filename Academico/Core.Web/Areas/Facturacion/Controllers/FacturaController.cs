@@ -267,6 +267,16 @@ namespace Core.Web.Areas.Facturacion.Controllers
              */
             #endregion
 
+            #region Cliente
+            var infoRepEconomico = bus_familia.GetInfo_Representante(i_validar.IdEmpresa, Convert.ToDecimal(i_validar.IdAlumno), cl_enumeradores.eTipoRepresentante.ECON.ToString() );
+            var info_cliente = bus_cliente.get_info_x_num_cedula(i_validar.IdEmpresa, (infoRepEconomico==null ? "" :infoRepEconomico.pe_cedulaRuc));         
+            if (info_cliente== null || info_cliente.IdCliente==0)
+            {
+                msg = "El alumno no tiene asigando un cliente (persona a la que se factura).";
+                return false;
+            }
+            i_validar.IdCliente = info_cliente.IdCliente;
+            #endregion
 
             return true;
         }
@@ -488,7 +498,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             fa_cliente_Info info_cliente = bus_cliente.get_info(IdEmpresa, IdCliente);
             fa_cliente_contactos_Info info_contacto = bus_contacto.get_info(IdEmpresa, IdCliente, info_cliente.IdContacto);
-            var resultado = info_contacto.Direccion + " " + info_contacto.Correo + " " + info_contacto.Telefono + " " + info_contacto.Celular;
+            var resultado = info_cliente.info_persona.pe_nombreCompleto+ " "+ info_contacto.Direccion + " " + info_contacto.Correo + " " + info_contacto.Telefono + " " + info_contacto.Celular;
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }

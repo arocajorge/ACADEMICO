@@ -500,7 +500,11 @@ namespace Core.Web.Areas.Academico.Controllers
             ListaAlumnoDocumento.set_list(model.lst_alumno_documentos, model.IdTransaccionSession);
 
             aca_Familia_Info info_fam_padre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
+            //info_fam_padre.IdTipoCredito = (info_fam_padre.IdTipoCredito==null ? "CON" : info_fam_padre.IdTipoCredito);
+            //info_fam_padre.Idtipo_cliente = (info_fam_padre.Idtipo_cliente == 0 ? 1 : info_fam_padre.Idtipo_cliente);
             aca_Familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
+            //info_fam_madre.IdTipoCredito = (info_fam_madre.IdTipoCredito == null ? "CON" : info_fam_madre.IdTipoCredito);
+            //info_fam_madre.Idtipo_cliente = (info_fam_madre.Idtipo_cliente == 0 ? 1 : info_fam_madre.Idtipo_cliente);
 
             model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
 
@@ -589,6 +593,8 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdReligion_padre = info_fam_padre.IdReligion;
             model.AsisteCentroCristiano_padre = info_fam_padre.AsisteCentroCristiano;
             model.EstaFallecido_padre = info_fam_padre.EstaFallecido;
+            model.IdTipoCredito_padre = (info_fam_padre.IdTipoCredito == null ? "CON" : info_fam_padre.IdTipoCredito);
+            model.Idtipo_cliente_padre = (info_fam_padre.Idtipo_cliente == 0 ? 1 : info_fam_padre.Idtipo_cliente);
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
             model.SeFactura_madre = info_fam_madre.SeFactura;
@@ -626,6 +632,8 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdReligion_madre = info_fam_madre.IdReligion;
             model.AsisteCentroCristiano_madre = info_fam_madre.AsisteCentroCristiano;
             model.EstaFallecido_madre = info_fam_madre.EstaFallecido;
+            model.IdTipoCredito_madre = (info_fam_madre.IdTipoCredito == null ? "CON" : info_fam_madre.IdTipoCredito);
+            model.Idtipo_cliente_madre = (info_fam_madre.Idtipo_cliente == 0 ? 1 : info_fam_madre.Idtipo_cliente);
 
             if (model == null)
                 return RedirectToAction("Index");

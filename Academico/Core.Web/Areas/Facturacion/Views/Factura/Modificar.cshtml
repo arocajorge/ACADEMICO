@@ -83,9 +83,9 @@
 
     function CrearModificarCliente() {
         var location = GetPathServer();
-        if(IdCliente.GetValue() > 0)
+        if($("#IdCliente").val() > 0)
         {
-            var win = window.open(location +"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+IdCliente.GetValue(), '_blank');
+            var win = window.open(location +"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+$("#IdCliente").val(), '_blank');
             win.focus();
         }else
         {
@@ -103,6 +103,7 @@
     @Html.HiddenFor(q => q.IdCbteVta, new { @id = "IdCbteVta" })
     @Html.HiddenFor(q => q.IdPuntoVta, new { @id = "IdPuntoVta" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdCliente, new { @id = "IdCliente" })
     if (ViewBag.mensaje != null)
     {
         <div class="row">
@@ -279,21 +280,6 @@
                 <div class="form-group">
                     <label for="IdCliente"></label>
                     <button type="button" class="btn btn-primary form-control " onclick="CrearModificarAlumno();">
-                        <i class="fa fa-external-link-square"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-10">
-                <div class="form-group">
-                    <label for="IdCliente">Cliente*</label>
-                    @Html.Partial("_CmbCliente_Factura", Model.IdCliente)
-                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdCliente"></label>
-                    <button type="button" class="btn btn-primary form-control " onclick="CrearModificarCliente();">
                         <i class="fa fa-external-link-square"></i>
                     </button>
                 </div>
@@ -571,7 +557,7 @@
             IdPuntoVta: $("#IdPuntoVta").val(),
             Secuencia: Secuencia,
             IdTransaccionSession: $("#IdTransaccionSession").val(),
-            IdCliente: IdCliente.GetValue()
+            IdCliente: $("#IdCliente").val()
         }
         $.ajax({
             type: 'POST',
@@ -768,7 +754,7 @@
 
 
     function get_info_cliente() {
-        var tipo = IdCliente.GetValue();
+        var tipo = $("#IdCliente").val();
 
         var datos = {
             IdCliente: tipo,
@@ -793,7 +779,7 @@
     }
 
     function cargar_contactos() {
-        var codigo = IdCliente.GetValue();
+        var codigo = $("#IdCliente").val();
 
         if (codigo > 0)
         {
@@ -938,7 +924,7 @@
     function ValidarCliente() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IdCliente: IdCliente.GetValue(),
+            IdCliente: $("#IdCliente").val(),
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
@@ -980,7 +966,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                IdCliente.SetValue(data);
+                $("#IdCliente").val(data);
                 get_info_cliente();
                 ValidarCliente(); 
                 cargar_contactos();
