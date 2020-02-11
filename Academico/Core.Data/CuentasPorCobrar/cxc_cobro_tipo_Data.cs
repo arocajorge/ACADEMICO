@@ -23,6 +23,7 @@ namespace Core.Data.CuentasPorCobrar
                                      tc_abreviatura = q.tc_abreviatura,
                                      tc_descripcion = q.tc_descripcion,
                                      Estado = q.Estado,
+                                     IdMotivo_tipo_cobro = q.IdMotivo_tipo_cobro,
 
                                      EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
@@ -35,6 +36,7 @@ namespace Core.Data.CuentasPorCobrar
                                      tc_abreviatura = q.tc_abreviatura,
                                      tc_descripcion = q.tc_descripcion,
                                      Estado = q.Estado,
+                                     IdMotivo_tipo_cobro = q.IdMotivo_tipo_cobro,
 
                                      EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();

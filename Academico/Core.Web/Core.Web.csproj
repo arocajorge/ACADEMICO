@@ -7909,7 +7909,6 @@
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\Index.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\Modificar.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\Nuevo.cshtml" />
-    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_CmbCliente_Cobranza.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_det.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_facturas_x_cruzar.cshtml" />

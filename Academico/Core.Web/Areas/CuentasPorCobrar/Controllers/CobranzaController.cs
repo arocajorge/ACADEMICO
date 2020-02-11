@@ -125,6 +125,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.lst_caja = lst_caja;
 
             var lst_cobro_tipo = bus_cobro_tipo.get_list(false);
+            lst_cobro_tipo = lst_cobro_tipo.Where(q => q.IdMotivo_tipo_cobro != "RET").ToList();
             ViewBag.lst_cobro_tipo = lst_cobro_tipo;
 
             var lst_banco = bus_banco.get_list(false);
@@ -454,7 +455,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             List_x_Cruzar.set_list(lst, IdTransaccionSession);
 
-            return Json("", JsonRequestBehavior.AllowGet);
+            return Json(lst.Count, JsonRequestBehavior.AllowGet);
         }
         [HttpPost, ValidateInput(false)]
         public JsonResult EditingAddNewFactura(string IDs = "", double TotalACobrar = 0, decimal IdTransaccionSession = 0)

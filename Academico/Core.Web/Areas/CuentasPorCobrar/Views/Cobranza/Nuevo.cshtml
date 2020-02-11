@@ -88,19 +88,12 @@
     //}
 
     function MostrarModal() {
-        if (Number($("#cr_TotalCobro").val()) == 0)
-        {
-            alert("Debe ingresar el total a cobrar");
-            return;
-        }
-        else
-        {
             selectedIDs = "";
             var datos = {
                 IdTransaccionSession: $("#IdTransaccionSession").val(),
                 IdEmpresa: $("#IdEmpresa").val(),
                 IdSucursal: $("#IdSucursal").val(),
-                IdCliente: IdCliente.GetValue(),
+                IdCliente: 0,
                 IdAlumno: IdAlumno.GetValue()
             }
             $.ajax({
@@ -113,16 +106,19 @@
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    console.log(data);
-                    GridView_cobranza_facturas_x_cruzar.PerformCallback();
-                    GridView_cobranza_facturas_x_cruzar.UnselectRows();
-                    $("#FacturasModal").modal("show");
-
+                    if(data > 0)
+                    {
+                        GridView_cobranza_facturas_x_cruzar.PerformCallback();
+                        GridView_cobranza_facturas_x_cruzar.UnselectRows();
+                        $("#FacturasModal").modal("show");
+                    }else
+                    {
+                        alert("El alumno no tiene documentos pendientes de cobrar");
+                    }
                 },
                 error: function (error) {
                 }
             });
-        }       
     }
 
     function GetIdCajaPorSucursal() {
@@ -167,6 +163,10 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $("#cr_saldo").val(data);
+                if (data > 0) {
+                    $("#DivTipoNota").show();
+                }else
+                    $("#DivTipoNota").hide();
             },
             error: function (error) {
             }
@@ -195,6 +195,10 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $("#cr_saldo").val(data);
+                if (data > 0) {
+                    $("#DivTipoNota").show();
+                }else
+                    $("#DivTipoNota").hide();
             },
             error: function (error) {
             }
@@ -235,42 +239,6 @@
             var win = window.open(location + "/Academico/Alumno/Nuevo?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa, '_blank');
             win.focus();
         }
-    }
-
-    function CrearModificarCliente() {
-        var location = GetPathServer();
-        if(IdCliente.GetValue() > 0)
-        {
-            var win = window.open(location +"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+IdCliente.GetValue(), '_blank');
-            win.focus();
-        }else
-        {
-            var win = window.open(location +"/Facturacion/Cliente/Nuevo?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa, '_blank');
-            win.focus();
-        }
-    }
-
-    function SetCliente(){
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdAlumno: IdAlumno.GetValue()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("SetCliente", "Cobranza",new { Area = "CuentasPorCobrar"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                IdCliente.SetValue(data);
-
-            },
-            error: function (error) {
-            }
-        });
     }
 
 </script>
@@ -334,21 +302,6 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-10">
-                <div class="form-group">
-                    <label for="IdCliente">Cliente*</label>
-                    @Html.Partial("_CmbCliente_Cobranza", Model.IdEntidad)
-                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdCliente"></label>
-                    <button type="button" class="btn btn-primary form-control " onclick="CrearModificarCliente();">
-                        <i class="fa fa-external-link-square"></i>
-                    </button>
-                </div>
-            </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCobro_tipo">Tipo cobro*</label>
@@ -356,7 +309,7 @@
                     @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" id="DivTipoNota" hidden>
                 <div class="form-group">
                     <label for="">Tipo nota</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipoNotaCredito, settings =>
