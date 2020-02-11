@@ -103,7 +103,7 @@
     }
 
     function get_info_cliente() {
-        var tipo = IdCliente.GetValue();
+        var tipo = $("#IdCliente").val();
 
         var datos = {
             IdCliente: tipo,
@@ -126,7 +126,7 @@
     }
 
     function cargar_contactos() {
-        var codigo = IdCliente.GetValue();
+        var codigo = $("#IdCliente").val();
 
         if (codigo > 0)
         {
@@ -136,7 +136,7 @@
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
-                url: '@Url.Action("cargar_contactos", "Factura",new { Area = "Facturacion"})',
+                url: '@Url.Action("cargar_contactos", "NotaDeCreditoFacturacion",new { Area = "Facturacion"})',
                 async: false,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
@@ -238,11 +238,11 @@
     }
 
     function MostrarModalDocumentos() {
-        if (IdCliente.GetValue() > 0) {
+        if ($("#IdCliente").val() > 0) {
 
             var datos = {
                 IdSucursal: $("#IdSucursal").val(),
-                IdCliente: IdCliente.GetValue(),
+                IdCliente: $("#IdCliente").val(),
                 IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
@@ -347,7 +347,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                IdCliente.SetValue(data);
+                $("#IdCliente").val(data)
 
                 get_info_cliente();
                 //ValidarCliente();
@@ -374,6 +374,7 @@
     @Html.HiddenFor(q => q.IdNota)
     @Html.HiddenFor(q => q.CodDocumentoTipo)
     @Html.HiddenFor(q => q.CreDeb)
+    @Html.HiddenFor(q => q.IdCliente, new { @id = "IdCliente" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {
@@ -450,13 +451,6 @@
                     <label for="IdCliente">Estudiante*</label>
                     @Html.Partial("_CmbAlumnoNC", Model.IdAlumno)
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdCliente">Cliente*</label>
-                    @Html.Partial("_CmbCliente_NotaCrebitoFacturacion", Model.IdCliente)
-                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-12">

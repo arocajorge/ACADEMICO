@@ -59,12 +59,12 @@
             Html.ActionLink("Modificar", "Modificar", new { IdCatalogoTipoFicha = DataBinder.Eval(tc.DataItem, "IdCatalogoTipoFicha") })
                 );
             });
-            c.SetHeaderTemplateContent(tc =>
-            {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
-                );
-            });
+            //c.SetHeaderTemplateContent(tc =>
+            //{
+            //    ViewContext.Writer.Write(
+            //        Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+            //    );
+            //});
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(100);

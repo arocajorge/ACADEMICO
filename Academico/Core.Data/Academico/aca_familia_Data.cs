@@ -12,6 +12,8 @@ namespace Core.Data.Academico
 {
     public class aca_Familia_Data
     {
+        aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
+        aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
         public List<aca_Familia_Info> getList(int IdEmpresa, int IdAlumno)
         {
             try
@@ -495,15 +497,19 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    //var info_familia = Context.aca_Familia.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.IdCatalogoPAREN == info.IdCatalogoPAREN).FirstOrDefault();
-                    //if (info_familia != null)
-                    //{
-                    //    Context.aca_Familia.Remove(info_familia);
-                    //}
+                    var info_anio = odata_anio.getInfo_AnioEnCurso(info.IdEmpresa, 0);
+                    var infoMatricula = odata_matricula.getInfo_ExisteMatricula(info.IdEmpresa, info_anio.IdAnio, info.IdAlumno);
+                    var IdMatricula = (infoMatricula == null ? 0 : infoMatricula.IdMatricula);
 
                     var lst_familia = Context.aca_Familia.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).ToList();
                     if (info.SeFactura == true)
-                    {                       
+                    {
+                        aca_Matricula EntityMatricula = Context.aca_Matricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == IdMatricula && q.IdAlumno == info.IdAlumno);
+                        if (EntityMatricula!=null)
+                        {
+                            EntityMatricula.IdPersonaF = info.IdPersona;
+                        }
+
                         if (lst_familia.Count>0)
                         {
                             foreach (var item in lst_familia)
@@ -516,6 +522,12 @@ namespace Core.Data.Academico
 
                     if (info.EsRepresentante == true)
                     {
+                        aca_Matricula EntityMatricula = Context.aca_Matricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == IdMatricula && q.IdAlumno == info.IdAlumno);
+                        if (EntityMatricula != null)
+                        {
+                            EntityMatricula.IdPersonaR = info.IdPersona;
+                        }
+
                         if (lst_familia.Count > 0)
                         {
                             foreach (var item in lst_familia)
@@ -580,9 +592,19 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
+                    var info_anio = odata_anio.getInfo_AnioEnCurso(info.IdEmpresa, 0);
+                    var infoMatricula = odata_matricula.getInfo_ExisteMatricula(info.IdEmpresa, info_anio.IdAnio, info.IdAlumno);
+                    var IdMatricula = (infoMatricula==null ? 0 : infoMatricula.IdMatricula);
+
                     var lst_familia = Context.aca_Familia.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).ToList();
                     if (info.SeFactura == true)
                     {
+                        aca_Matricula EntityMatricula = Context.aca_Matricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == IdMatricula && q.IdAlumno == info.IdAlumno);
+                        if (EntityMatricula != null)
+                        {
+                            EntityMatricula.IdPersonaF = info.IdPersona;
+                        }
+
                         if (lst_familia.Count > 0)
                         {
                             foreach (var item in lst_familia)
@@ -596,6 +618,12 @@ namespace Core.Data.Academico
 
                     if (info.EsRepresentante == true)
                     {
+                        aca_Matricula EntityMatricula = Context.aca_Matricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == IdMatricula && q.IdAlumno == info.IdAlumno);
+                        if (EntityMatricula != null)
+                        {
+                            EntityMatricula.IdPersonaR = info.IdPersona;
+                        }
+
                         if (lst_familia.Count > 0)
                         {
                             foreach (var item in lst_familia)

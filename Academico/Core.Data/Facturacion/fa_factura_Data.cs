@@ -252,12 +252,13 @@ namespace Core.Data.Facturacion
                     #region MatriculaRubro
                     aca_Matricula_Rubro Entity_MatricularRubro = db_a.aca_Matricula_Rubro.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == item.IdMatricula
                     && q.IdPeriodo == item.aca_IdPeriodo && q.IdRubro == item.aca_IdRubro);
-                    if (Entity_MatricularRubro == null) return false;
-
-                    Entity_MatricularRubro.IdSucursal = info.IdSucursal;
-                    Entity_MatricularRubro.IdBodega = info.IdBodega;
-                    Entity_MatricularRubro.IdCbteVta = info.IdCbteVta;
-                    Entity_MatricularRubro.FechaFacturacion = info.vt_fecha.Date;
+                    if (Entity_MatricularRubro != null)
+                    {
+                        Entity_MatricularRubro.IdSucursal = info.IdSucursal;
+                        Entity_MatricularRubro.IdBodega = info.IdBodega;
+                        Entity_MatricularRubro.IdCbteVta = info.IdCbteVta;
+                        Entity_MatricularRubro.FechaFacturacion = info.vt_fecha.Date;
+                    }
 
                     db_a.SaveChanges();
                     #endregion

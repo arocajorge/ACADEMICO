@@ -83,7 +83,7 @@
     }
 
     function get_info_cliente() {
-        var tipo = IdCliente.GetValue();
+        var tipo = $("#IdCliente").val();
 
         var datos = {
             IdCliente: tipo,
@@ -106,7 +106,7 @@
     }
 
     function cargar_contactos() {
-        var codigo = IdCliente.GetValue();
+        var codigo = $("#IdCliente").val();
 
         if (codigo > 0)
         {
@@ -116,7 +116,7 @@
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
-                url: '@Url.Action("cargar_contactos", "Factura",new { Area = "Facturacion"})',
+                url: '@Url.Action("cargar_contactos", "NotaDeDebitoFacturacion", new { Area = "Facturacion"})',
                 async: false,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
@@ -219,11 +219,11 @@
     }
 
     function MostrarModalDocumentos() {
-        if (IdCliente.GetValue() > 0 && IdAlumno.GetValue() > 0) {
+        if ($("#IdCliente").val() > 0 && IdAlumno.GetValue() > 0) {
 
             var datos = {
                 IdSucursal: $("#IdSucursal").val(),
-                IdCliente: IdCliente.GetValue(),
+                IdCliente: $("#IdCliente").val(),
                 IdAlumno: IdAlumno.GetValue(),
                 IdTransaccionSession: $("#IdTransaccionSession").val()
         }
@@ -315,9 +315,9 @@
 
     function CrearModificarCliente() {
         var location = GetPathServer();
-        if(IdCliente.GetValue() > 0)
+        if($("#IdCliente").val() > 0)
         {
-            var win = window.open(location +"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+IdCliente.GetValue(), '_blank');
+            var win = window.open(location +"/Facturacion/Cliente/Modificar?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdCliente="+$("#IdCliente").val(), '_blank');
             win.focus();
         }else
         {
@@ -341,7 +341,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                IdCliente.SetValue(data);
+                $("#IdCliente").val(data);
 
                 get_info_cliente();
                 //ValidarCliente();
@@ -358,6 +358,7 @@
     @Html.HiddenFor(q => q.IdEmpresa)
     @Html.HiddenFor(q => q.CodDocumentoTipo)
     @Html.HiddenFor(q => q.CreDeb)
+    @Html.HiddenFor(q => q.IdCliente, new { @id = "IdCliente" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {
@@ -441,21 +442,6 @@
                 <div class="form-group">
                     <label for="IdCliente"></label>
                     <button type="button" class="btn btn-primary form-control " onclick="CrearModificarAlumno();">
-                        <i class="fa fa-external-link-square"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-10">
-                <div class="form-group">
-                    <label for="IdCliente">Cliente*</label>
-                    @Html.Partial("_CmbCliente_NotaDebitoFacturacion", Model.IdCliente)
-                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdCliente"></label>
-                    <button type="button" class="btn btn-primary form-control " onclick="CrearModificarCliente();">
                         <i class="fa fa-external-link-square"></i>
                     </button>
                 </div>
