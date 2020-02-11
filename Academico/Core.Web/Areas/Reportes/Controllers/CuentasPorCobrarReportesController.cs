@@ -231,5 +231,57 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult CXC_004()
+        {
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdCliente = 0,
+                
+            };
+           
+            CXC_004_Rpt report = new CXC_004_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_004");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdUsuario.Value = model.IdAlumno == null ? 0 : Convert.ToDecimal(model.IdAlumno);
+            report.p_FechaCorte.Value = model.fecha_corte;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CXC_004(cl_filtros_facturacion_Info model)
+        {
+            CXC_004_Rpt report = new CXC_004_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_004");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdUsuario.Value = model.IdAlumno == null ? 0 : Convert.ToDecimal(model.IdAlumno);
+            report.p_FechaCorte.Value = model.fecha_corte;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+
     }
 }
