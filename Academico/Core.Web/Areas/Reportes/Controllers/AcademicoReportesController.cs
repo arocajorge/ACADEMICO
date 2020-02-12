@@ -294,7 +294,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             #region Cargo diseño desde base
             var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_004");
-            if (report != null)
+            if (reporte != null)
             {
                 System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
                 report.LoadLayout(RootReporte);
@@ -321,7 +321,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             #region Cargo diseño desde base
             var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_004");
-            if (report != null)
+            if (reporte != null)
             {
                 System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
                 report.LoadLayout(RootReporte);
