@@ -231,7 +231,8 @@ namespace Core.Data.Academico
                                 return false;
 
                             Entity.NomSede = item.NomSede;
-                            Entity.NomNivel = item.NomNivel;  
+                            Entity.NomNivel = item.NomNivel;
+                            Entity.OrdenNivel = item.OrdenNivel;
                         }
                         Context.SaveChanges();
                     }

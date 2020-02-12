@@ -19,6 +19,7 @@ namespace Core.Info.Academico
         public int IdNivel { get; set; }
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
+        public int OrdenNivel { get; set; }
 
         #region Campos que no existen en la base de datos
         public string Descripcion { get; set; }

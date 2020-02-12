@@ -37,6 +37,30 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">Banco</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdBanco, settings =>
+                        {
+                            settings.Name = "IdBanco";
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                            settings.Properties.Columns.Add("IdBanco", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                            settings.Properties.Columns.Add("ba_descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                            //Campo ID
+                            settings.Properties.ValueField = "IdBanco";
+                            settings.Properties.ValueType = typeof(int);
+                            settings.Properties.TextField = "ba_descripcion";
+                            settings.Properties.NullText = "== Seleccione ==";
+                            settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                        }).BindList(ViewBag.lst_banco).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","TarjetaCredito",new { Area = "General" },null)">Cancelar</a>

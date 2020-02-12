@@ -16,6 +16,7 @@ namespace Core.Info.General
         [Required(ErrorMessage = "El campo religión es obligatorio")]
         public string NombreTarjeta { get; set; }
         public bool Estado { get; set; }
+        public Nullable<int> IdBanco { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }

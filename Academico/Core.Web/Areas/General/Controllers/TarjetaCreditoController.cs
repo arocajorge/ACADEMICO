@@ -15,6 +15,7 @@ namespace Core.Web.Areas.General.Controllers
         tb_TarjetaCredito_List Lista_Religion = new tb_TarjetaCredito_List();
         tb_TarjetaCredito_Bus bus_tarjeta= new tb_TarjetaCredito_Bus();
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+        tb_banco_Bus bus_banco = new tb_banco_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -51,6 +52,15 @@ namespace Core.Web.Areas.General.Controllers
         }
         #endregion
 
+        #region Metodos
+        private void cargar_combos()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_banco = bus_banco.get_list(false);
+            ViewBag.lst_banco = lst_banco;
+        }
+        #endregion
+
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
@@ -63,7 +73,7 @@ namespace Core.Web.Areas.General.Controllers
 
             tb_TarjetaCredito_Info model = new tb_TarjetaCredito_Info();
             model.IdEmpresa = IdEmpresa;
-
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
@@ -74,8 +84,10 @@ namespace Core.Web.Areas.General.Controllers
             if (!bus_tarjeta.GuardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
+                cargar_combos();
                 return View(model);
             }
+            cargar_combos();
             return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdTarjeta = model.IdTarjeta, Exito = true });
         }
 
@@ -95,6 +107,7 @@ namespace Core.Web.Areas.General.Controllers
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
@@ -105,9 +118,10 @@ namespace Core.Web.Areas.General.Controllers
             if (!bus_tarjeta.ModificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";
+                cargar_combos();
                 return View(model);
             }
-
+            cargar_combos();
             return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdTarjeta = model.IdTarjeta, Exito = true });
         }
 
@@ -125,6 +139,7 @@ namespace Core.Web.Areas.General.Controllers
             if (model == null)
                 return RedirectToAction("Index");
 
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
@@ -134,6 +149,7 @@ namespace Core.Web.Areas.General.Controllers
             if (!bus_tarjeta.AnularDB(model))
             {
                 ViewBag.mensaje = "No se ha podido anular el registro";
+                cargar_combos();
                 return View(model);
             }
 

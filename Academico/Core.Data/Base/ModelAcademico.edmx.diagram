@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Plantilla" Width="1.5" PointX="8.25" PointY="30.125" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Jornada_Curso" Width="1.5" PointX="6" PointY="11.625" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_NivelAcademico_Jornada" Width="1.5" PointX="3" PointY="11.75" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Sede_NivelAcademico" Width="1.5" PointX="3" PointY="22" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Catalogo" Width="1.5" PointX="3.75" PointY="48.875" />
         <EntityTypeShape EntityType="ModelAcademico.aca_CatalogoTipo" Width="1.5" PointX="1.5" PointY="49.25" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Jornada" Width="1.5" PointX="3.75" PointY="30.75" />
@@ -24,8 +23,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Jornada" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_NivelAcademico" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Sede" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_NivelAcademico" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Catalogo_aca_CatalogoTipo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Menu_x_aca_Sede_aca_Menu" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Menu_x_aca_Sede_aca_Sede" />
@@ -135,7 +132,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Periodo_aca_AnioLectivo" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoConductaEquivalencia_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_PermisoMatricula_aca_AnioLectivo" />
@@ -165,6 +161,10 @@
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Familia" Width="1.5" PointX="13.375" PointY="21.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_familia_aca_alumno" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Familia_aca_CatalogoFicha" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Sede_NivelAcademico" Width="1.5" PointX="11" PointY="25" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_AnioLectivo" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_NivelAcademico" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

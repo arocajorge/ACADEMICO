@@ -154,7 +154,8 @@ namespace Core.Data.SeguridadAcceso
                         IdMenu = info.IdMenu == 0 ? null : info.IdMenu,
                         IPImpresora = info.IPImpresora,
                         IPUsuario = info.IPMaquina,
-                        Fecha_Transaccion = DateTime.Now
+                        Fecha_Transaccion = DateTime.Now,
+                        EsContador = info.EsContador
                     };
                     Context.seg_usuario.Add(Entity);
                     
@@ -217,7 +218,7 @@ namespace Core.Data.SeguridadAcceso
                     Entity.IdMenu = info.IdMenu == 0 ? null : info.IdMenu;
                     Entity.IPImpresora = info.IPImpresora;
                     Entity.IPUsuario = info.IPMaquina;
-                    
+                    Entity.EsContador = info.EsContador;
                     var lst = Context.seg_usuario_x_aca_Sede.Where(q => q.IdUsuario == info.IdUsuario).ToList();
                     Context.seg_usuario_x_aca_Sede.RemoveRange(lst);
 

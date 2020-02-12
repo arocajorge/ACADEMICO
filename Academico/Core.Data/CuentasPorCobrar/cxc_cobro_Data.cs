@@ -1209,5 +1209,42 @@ namespace Core.Data.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<cxc_cobro_Info> get_list_deuda(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                List<cxc_cobro_Info> Lista;
+                using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
+                {
+                    Lista = (from q in Context.vwcxc_cartera_x_cobrar
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdAlumno == IdAlumno
+                             select new cxc_cobro_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 IdBodega = q.IdBodega,
+                                 vt_tipoDoc = q.vt_tipoDoc,
+                                 vt_NumFactura = q.vt_NunDocumento,
+                                 pe_nombreCompleto = q.NomCliente,
+                                 cr_fecha = q.vt_fecha,
+                                 vt_fecha = q.vt_fecha,
+                                 vt_fech_venc = q.vt_fech_venc,
+                                 Su_Descripcion = q.Su_Descripcion,
+                                 IdAlumno = q.IdAlumno,
+                                 cr_saldo = q.Saldo??0,  
+
+                             }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

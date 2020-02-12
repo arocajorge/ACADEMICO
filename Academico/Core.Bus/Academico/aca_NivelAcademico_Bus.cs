@@ -92,6 +92,7 @@ namespace Core.Bus.Academico
                                 foreach (var info_sede_nivel in lst_sede_nivel)
                                 {
                                     info_sede_nivel.NomNivel = info.NomNivel;
+                                    info_sede_nivel.OrdenNivel = info.Orden;
                                 }
 
                                 return (odata_sede_nivel.modificarDB(lst_sede_nivel));
