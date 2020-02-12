@@ -175,6 +175,8 @@ namespace Core.Info.Helps
             ESTMAT = 1,
             ESTALU = 2,
             PAREN = 3,
+            PERNEG = 4,
+            CONDIC = 5
         }
 
         public enum eCatalogoAcademicoMatricula

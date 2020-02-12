@@ -224,6 +224,7 @@
     <Compile Include="Areas\Academico\Controllers\MateriaGrupoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaPorProfesorController.cs" />
+    <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MecanismoDePagoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MenuController.cs" />
@@ -8216,6 +8217,16 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbNivel.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbJornada.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbCurso.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\_CmbAlumno.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\_CmbAlumno_Readonly.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\_ComboBoxPartial_Anio_Consulta.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\_ComboBoxPartial_Anio_Readonly.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\_GridViewPartial_MatriculaCondicional.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

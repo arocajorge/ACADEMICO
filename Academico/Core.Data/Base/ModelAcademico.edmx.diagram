@@ -165,6 +165,10 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_NivelAcademico" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_CondicionalMatricula" Width="1.5" PointX="19.875" PointY="43.125" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_CondicionalMatricula_aca_Alumno" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_CondicionalMatricula_aca_AnioLectivo" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_CondicionalMatricula_aca_Catalogo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -27,6 +27,7 @@ namespace Core.Data.Base
             this.aca_PermisoMatricula = new HashSet<aca_PermisoMatricula>();
             this.aca_AnioLectivo_Curso_Materia = new HashSet<aca_AnioLectivo_Curso_Materia>();
             this.aca_AnioLectivo_Sede_NivelAcademico = new HashSet<aca_AnioLectivo_Sede_NivelAcademico>();
+            this.aca_CondicionalMatricula = new HashSet<aca_CondicionalMatricula>();
         }
     
         public int IdEmpresa { get; set; }
@@ -66,5 +67,7 @@ namespace Core.Data.Base
         public virtual ICollection<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivo_Sede_NivelAcademico> aca_AnioLectivo_Sede_NivelAcademico { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_CondicionalMatricula> aca_CondicionalMatricula { get; set; }
     }
 }

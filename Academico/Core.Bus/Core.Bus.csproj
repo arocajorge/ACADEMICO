@@ -63,6 +63,7 @@
     <Compile Include="Academico\aca_CatalogoTipoFicha_Bus.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Bus.cs" />
     <Compile Include="Academico\aca_Catalogo_Bus.cs" />
+    <Compile Include="Academico\aca_CondicionalMatricula_Bus.cs" />
     <Compile Include="Academico\aca_Curso_Bus.cs" />
     <Compile Include="Academico\aca_Documento_Bus.cs" />
     <Compile Include="Academico\aca_Familia_Bus.cs" />
