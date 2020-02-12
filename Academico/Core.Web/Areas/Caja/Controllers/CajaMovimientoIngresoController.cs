@@ -137,6 +137,7 @@ namespace Core.Web.Areas.Caja.Controllers
             lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.PROVEE.ToString(), "Proveedor");
             lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.EMPLEA.ToString(), "Empleado");
             lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.CLIENTE.ToString(), "Cliente");
+            lst_tipo_personas.Add(cl_enumeradores.eTipoPersona.ALUMNO.ToString(), "Alumno");
             ViewBag.lst_tipo_personas = lst_tipo_personas;
         }
         private void cargar_combos_detalle()

@@ -390,6 +390,7 @@ namespace Core.Data.CuentasPorCobrar
         public bool modificarDB(cxc_cobro_Info info)
         {
             EntitiesCuentasPorCobrar Context_cxc = new EntitiesCuentasPorCobrar();
+            EntitiesFacturacion dbFac = new EntitiesFacturacion();
             try
             {
                 #region Variables
@@ -475,7 +476,8 @@ namespace Core.Data.CuentasPorCobrar
                     Context_cxc.cxc_cobro_det.Add(det);
                 }
                 #endregion
-                if (info.IdCobro_tipo != "NTCR" && info.IdCobro_tipo != "NTDB")
+
+                if (info.IdCobro_tipo != "NTCR" && info.IdCobro_tipo != "NTDB" && info.lst_det.Count > 0)
                 {
                     #region Contabilización
                     if (info.IdCobro_tipo != null)
@@ -585,8 +587,41 @@ namespace Core.Data.CuentasPorCobrar
 
                     #endregion
                 }
-                Context_cxc.SaveChanges();
 
+                #region Nota de credito por excedente
+                if (info.cr_saldo > 0)
+                {
+                    var NotaCredito = ArmarNotaCreditoExcedente(info);
+                    if (NotaCredito != null)
+                    {
+                        var relNCCobro = dbFac.fa_notaCreDeb_x_cxc_cobro.Where(q => q.IdEmpresa_cbr == info.IdEmpresa && q.IdSucursal_cbr == info.IdSucursal && q.IdCobro_cbr == info.IdCobro).FirstOrDefault();
+                        if (relNCCobro == null)
+                        {
+                            if (DataNotaCredito.guardarDB(NotaCredito))
+                            {
+                                dbFac.fa_notaCreDeb_x_cxc_cobro.Add(new fa_notaCreDeb_x_cxc_cobro
+                                {
+                                    IdEmpresa_cbr = info.IdEmpresa,
+                                    IdSucursal_cbr = info.IdSucursal,
+                                    IdCobro_cbr = info.IdCobro,
+                                    IdEmpresa_nt = info.IdEmpresa,
+                                    IdSucursal_nt = NotaCredito.IdSucursal,
+                                    IdBodega_nt = NotaCredito.IdBodega,
+                                    IdNota_nt = NotaCredito.IdNota
+                                });
+                                dbFac.SaveChanges();
+                            }
+                        }else
+                        {
+                            NotaCredito.IdNota = relNCCobro.IdNota_nt;
+                            DataNotaCredito.modificarDB(NotaCredito);
+                        }
+                        
+                    }
+                }
+                #endregion
+
+                Context_cxc.SaveChanges();
                 Context_cxc.Dispose();
 
                 return true;
@@ -1036,6 +1071,10 @@ namespace Core.Data.CuentasPorCobrar
                 if (TipoNota.IdProducto == null)
                     return null;
 
+                var Alumno = dbACA.vwaca_Alumno.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).FirstOrDefault();
+                if (Alumno == null)
+                    return null;
+
                 fa_notaCreDeb_Info Retorno = new fa_notaCreDeb_Info
                 {
                     IdEmpresa = info.IdEmpresa,
@@ -1055,7 +1094,7 @@ namespace Core.Data.CuentasPorCobrar
                     no_fecha = DateTime.Now.Date,
                     no_fecha_venc = DateTime.Now.Date,
                     IdTipoNota = info.IdTipoNotaCredito ?? 0,
-                    sc_observacion = "NC Por excedente COBRO: " + info.IdCobro.ToString() + " "+info.cr_observacion,
+                    sc_observacion = "NC Por excedente COBRO # " + info.IdCobro.ToString() + " ALUMNO: "+Alumno.pe_nombreCompleto + " "+info.cr_observacion,
                     NaturalezaNota = "SRI",
                     IdCtaCble_TipoNota = TipoNota.IdCtaCble,
                     IdCobro_tipo = info.IdCobro_tipo,
