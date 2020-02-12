@@ -1,7 +1,9 @@
 ﻿using Core.Data.Base;
+using Core.Data.Caja;
 using Core.Data.Contabilidad;
 using Core.Data.CuentasPorCobrar;
 using Core.Data.General;
+using Core.Info.Caja;
 using Core.Info.Contabilidad;
 using Core.Info.CuentasPorCobrar;
 using Core.Info.Facturacion;
@@ -132,7 +134,8 @@ namespace Core.Data.Facturacion
                         sc_observacion = Entity.sc_observacion,
                         Estado = Entity.Estado,
                         NaturalezaNota = Entity.NaturalezaNota,
-                        IdCtaCble_TipoNota = Entity.IdCtaCble_TipoNota
+                        IdCtaCble_TipoNota = Entity.IdCtaCble_TipoNota,
+                        IdCobro_tipo = Entity.IdCobro_tipo
                     };
 
                     info.info_resumen = new fa_notaCreDeb_resumen_Info();
@@ -171,7 +174,6 @@ namespace Core.Data.Facturacion
                 throw;
             }
         }
-
         public bool DocumentoExiste(int IdEmpresa, string CodDocumentoTipo, string Serie1, string Serie2, string NumNota_Impresa)
         {
             try
@@ -229,6 +231,8 @@ namespace Core.Data.Facturacion
                 int Secuencia = 1;
                 ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
                 cxc_cobro_Data odata_cobr = new cxc_cobro_Data();
+                cxc_cobro_tipo_Data odat_TipoCobro = new cxc_cobro_tipo_Data();
+                caj_Caja_Movimiento_Data odata_MovimientoCaja = new caj_Caja_Movimiento_Data();
                 #endregion
 
                 using (EntitiesFacturacion db_f = new EntitiesFacturacion())
@@ -261,8 +265,8 @@ namespace Core.Data.Facturacion
                         Estado = info.Estado = "A",
                         NaturalezaNota = info.NaturalezaNota,
                         IdCtaCble_TipoNota = info.IdCtaCble_TipoNota,
-
-                        IdUsuario = info.IdUsuario
+                        IdCobro_tipo = string.IsNullOrEmpty(info.IdCobro_tipo) ? "" : info.IdCobro_tipo,
+                        IdUsuario = info.IdUsuario,
                     };
                     #endregion
 
@@ -384,36 +388,61 @@ namespace Core.Data.Facturacion
                     db_f.SaveChanges();
 
                     #endregion
-
-                    #region Parametros
-                    var parametros = db_f.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                    var cliente = db_f.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
-                    #endregion
-
+                    
                     #region Contabilidad
-                    if (parametros != null)
+
+                    var TipoCobro = odat_TipoCobro.get_info(info.IdCobro_tipo);
+                    if (TipoCobro != null)
                     {
-                        ct_cbtecble_Info diario = armar_diario(info, info.CreDeb.Trim() == "C" ? (int)parametros.IdTipoCbteCble_NC : (int)parametros.IdTipoCbteCble_ND, cliente.IdCtaCble_cxc_Credito, info.IdCtaCble_TipoNota);
+                        ct_cbtecble_Info diario = armar_diario(info);
+
                         if (diario != null)
                         {
-                            if (odata_ct.guardarDB(diario))
+                            if (TipoCobro.tc_Tomar_Cta_Cble_De == "CAJA")
                             {
-                                db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                caj_Caja_Movimiento_Info MovimientoCaja = armar_movimiendoCaja(info, diario);
+                                if (MovimientoCaja != null)
                                 {
-                                    no_IdEmpresa = info.IdEmpresa,
-                                    no_IdSucursal = info.IdSucursal,
-                                    no_IdBodega = info.IdBodega,
-                                    no_IdNota = info.IdNota,
+                                    if(odata_MovimientoCaja.guardarDB(MovimientoCaja))
+                                    {
+                                        db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                        {
+                                            no_IdEmpresa = info.IdEmpresa,
+                                            no_IdSucursal = info.IdSucursal,
+                                            no_IdBodega = info.IdBodega,
+                                            no_IdNota = info.IdNota,
 
-                                    ct_IdEmpresa = diario.IdEmpresa,
-                                    ct_IdTipoCbte = diario.IdTipoCbte,
-                                    ct_IdCbteCble = diario.IdCbteCble,
+                                            ct_IdEmpresa = diario.IdEmpresa,
+                                            ct_IdTipoCbte = diario.IdTipoCbte,
+                                            ct_IdCbteCble = diario.IdCbteCble,
 
-                                    observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
-                                });
-                                db_f.SaveChanges();
+                                            observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
+                                        });
+                                        db_f.SaveChanges();
+                                    }
+                                }
                             }
-                        }                        
+                            else
+                            {
+                                if (odata_ct.guardarDB(diario))
+                                {
+                                    db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                    {
+                                        no_IdEmpresa = info.IdEmpresa,
+                                        no_IdSucursal = info.IdSucursal,
+                                        no_IdBodega = info.IdBodega,
+                                        no_IdNota = info.IdNota,
+
+                                        ct_IdEmpresa = diario.IdEmpresa,
+                                        ct_IdTipoCbte = diario.IdTipoCbte,
+                                        ct_IdCbteCble = diario.IdCbteCble,
+
+                                        observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
+                                    });
+                                    db_f.SaveChanges();
+                                }
+                            }
+                        }
                     }
                     #endregion
 
@@ -461,6 +490,8 @@ namespace Core.Data.Facturacion
                 int Secuencia = 1;
                 ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
                 cxc_cobro_Data odata_cobr = new cxc_cobro_Data();
+                cxc_cobro_tipo_Data odat_TipoCobro = new cxc_cobro_tipo_Data();
+                caj_Caja_Movimiento_Data odata_MovimientoCaja = new caj_Caja_Movimiento_Data();
                 #endregion
 
                 using (EntitiesFacturacion db_f = new EntitiesFacturacion())
@@ -580,45 +611,81 @@ namespace Core.Data.Facturacion
 
                     #endregion
 
-                    #region Parametros
-                    var parametros = db_f.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-                    var cliente = db_f.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
-                    #endregion
-
                     #region Contabilidad
-                    if (parametros != null)
+                    var TipoCobro = odat_TipoCobro.get_info(info.IdCobro_tipo);
+                    if (TipoCobro != null)
                     {
                         var rel_conta = db_f.fa_notaCreDeb_x_ct_cbtecble.Where(q => q.no_IdEmpresa == info.IdEmpresa && q.no_IdSucursal == info.IdSucursal && q.no_IdBodega == info.IdBodega && q.no_IdNota == info.IdNota).FirstOrDefault();
-                        ct_cbtecble_Info diario = armar_diario(info, info.CreDeb.Trim() == "C" ? (int)parametros.IdTipoCbteCble_NC : (int)parametros.IdTipoCbteCble_ND, cliente.IdCtaCble_cxc_Credito, info.IdCtaCble_TipoNota);
+                        ct_cbtecble_Info diario = armar_diario(info);
                         if (diario != null)
                         {
                             if (rel_conta == null)
                             {
-                                if (odata_ct.guardarDB(diario))
+                                if (TipoCobro.tc_Tomar_Cta_Cble_De == "CAJA")
                                 {
-                                    db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                    caj_Caja_Movimiento_Info MovimientoCaja = armar_movimiendoCaja(info, diario);
+                                    if (MovimientoCaja != null)
                                     {
-                                        no_IdEmpresa = info.IdEmpresa,
-                                        no_IdSucursal = info.IdSucursal,
-                                        no_IdBodega = info.IdBodega,
-                                        no_IdNota = info.IdNota,
+                                        if (odata_MovimientoCaja.guardarDB(MovimientoCaja))
+                                        {
+                                            db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                            {
+                                                no_IdEmpresa = info.IdEmpresa,
+                                                no_IdSucursal = info.IdSucursal,
+                                                no_IdBodega = info.IdBodega,
+                                                no_IdNota = info.IdNota,
 
-                                        ct_IdEmpresa = diario.IdEmpresa,
-                                        ct_IdTipoCbte = diario.IdTipoCbte,
-                                        ct_IdCbteCble = diario.IdCbteCble,
+                                                ct_IdEmpresa = diario.IdEmpresa,
+                                                ct_IdTipoCbte = diario.IdTipoCbte,
+                                                ct_IdCbteCble = diario.IdCbteCble,
 
-                                        observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
-                                    });
-                                    db_f.SaveChanges();
+                                                observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
+                                            });
+                                            db_f.SaveChanges();
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (odata_ct.guardarDB(diario))
+                                    {
+                                        db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                        {
+                                            no_IdEmpresa = info.IdEmpresa,
+                                            no_IdSucursal = info.IdSucursal,
+                                            no_IdBodega = info.IdBodega,
+                                            no_IdNota = info.IdNota,
+
+                                            ct_IdEmpresa = diario.IdEmpresa,
+                                            ct_IdTipoCbte = diario.IdTipoCbte,
+                                            ct_IdCbteCble = diario.IdCbteCble,
+
+                                            observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
+                                        });
+                                        db_f.SaveChanges();
+                                    }
                                 }
                             }
                             else
                             {
                                 diario.IdCbteCble = rel_conta.ct_IdCbteCble;
-                                odata_ct.modificarDB(diario);
+                                if (TipoCobro.tc_Tomar_Cta_Cble_De == "CAJA")
+                                {
+                                    caj_Caja_Movimiento_Info MovimientoCaja = armar_movimiendoCaja(info, diario);
+                                    if (MovimientoCaja != null)
+                                    {
+                                        MovimientoCaja.IdCbteCble = rel_conta.ct_IdCbteCble;
+                                        odata_MovimientoCaja.modificarDB(MovimientoCaja);
+                                    }
+                                }
+                                else
+                                {   
+                                    odata_ct.modificarDB(diario);
+                                }
                             }
                         }
                     }
+                        
                     #endregion
 
                     #region Cobranza
@@ -750,6 +817,7 @@ namespace Core.Data.Facturacion
                     IdAlumno = info.IdAlumno,
                     IdUsuario = info.IdUsuario,
                     IdTipoNotaCredito = info.IdTipoNota,
+                    IdUsuarioUltMod = info.IdUsuarioUltMod,
                     lst_det = new List<cxc_cobro_det_Info>()
                 };
 
@@ -777,22 +845,44 @@ namespace Core.Data.Facturacion
                 throw;
             }
         }
-        private ct_cbtecble_Info armar_diario(fa_notaCreDeb_Info info, int IdTipoCbte, string IdCtaCble_cliente, string IdCtaCble_tipoNota)
+        private ct_cbtecble_Info armar_diario(fa_notaCreDeb_Info info)
         {
             try
             {
+                EntitiesCaja dbCaj = new EntitiesCaja();
+                EntitiesCuentasPorCobrar dbCxc = new EntitiesCuentasPorCobrar();
                 using (EntitiesFacturacion db = new EntitiesFacturacion())
                 {
                     var lst = db.vwfa_notaCreDeb_ParaContabilizarAcademico.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdNota == info.IdNota).ToList();
                     var NCND = lst.Count > 0 ? lst[0] : null;
                     if (NCND == null)
                         return null;
+
+                    var paramFac = db.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    if (paramFac == null)
+                        return null;
+
+                    var paramCaj = dbCaj.caj_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
+                    if (paramCaj == null)
+                        return null;
+
+                    var TipoCobro = dbCxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == info.IdCobro_tipo).FirstOrDefault();
+                    if (TipoCobro == null)
+                        return null;
+
+                    var ptoVta = db.vwfa_PuntoVta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdPuntoVta == info.IdPuntoVta).FirstOrDefault();
+                    if (ptoVta == null)
+                        return null;
+
+                    var Caja = dbCaj.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == ptoVta.IdCaja).FirstOrDefault();
+                    if (Caja == null)
+                        return null;
                     
                     #region Cabecera
                     ct_cbtecble_Info diario = new ct_cbtecble_Info
                     {
                         IdEmpresa = info.IdEmpresa,
-                        IdTipoCbte = IdTipoCbte,
+                        IdTipoCbte = TipoCobro.tc_Tomar_Cta_Cble_De == "CAJA" ? paramCaj.IdTipoCbteCble_MoviCaja_Ing : (info.CreDeb == "C" ? paramFac.IdTipoCbteCble_NC : paramFac.IdTipoCbteCble_ND),
                         IdCbteCble = 0,
                         cb_Fecha = info.no_fecha.Date,
                         IdSucursal = info.IdSucursal,
@@ -816,7 +906,7 @@ namespace Core.Data.Facturacion
                             IdTipoCbte = diario.IdTipoCbte,
                             IdCbteCble = diario.IdCbteCble,
                             secuencia = secuencia++,
-                            IdCtaCble = NCND.IdCtaCbleDebe,
+                            IdCtaCble = TipoCobro.tc_Tomar_Cta_Cble_De == "CAJA" ? Caja.IdCtaCble : NCND.IdCtaCbleDebe,
                             dc_Observacion = NCND.vt_NumFactura,
                             dc_Valor = Math.Round(Convert.ToDouble(NCND.Total), 2, MidpointRounding.AwayFromZero)
                         });
@@ -867,6 +957,60 @@ namespace Core.Data.Facturacion
                 }
 
                 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        private caj_Caja_Movimiento_Info armar_movimiendoCaja(fa_notaCreDeb_Info infoNC, ct_cbtecble_Info infoCT)
+        {
+            try
+            {
+                EntitiesCaja dbCaj = new EntitiesCaja();
+                EntitiesCuentasPorCobrar dbCxc = new EntitiesCuentasPorCobrar();
+                EntitiesFacturacion dbFac = new EntitiesFacturacion();
+                EntitiesAcademico dbAca = new EntitiesAcademico();
+
+                var paramCaj = dbCaj.caj_parametro.Where(q => q.IdEmpresa == infoNC.IdEmpresa).FirstOrDefault();
+                if (paramCaj == null)
+                    return null;
+
+                var paramCxc = dbCxc.cxc_Parametro.Where(q => q.IdEmpresa == infoNC.IdEmpresa).FirstOrDefault();
+                if (paramCxc == null)
+                    return null;
+
+                var ptoVta = dbFac.vwfa_PuntoVta.Where(q => q.IdEmpresa == infoNC.IdEmpresa && q.IdPuntoVta == infoNC.IdPuntoVta).FirstOrDefault();
+                if (ptoVta == null)
+                    return null;
+
+                var Alumno = dbAca.vwaca_Alumno.Where(q => q.IdEmpresa == infoNC.IdEmpresa && q.IdAlumno == infoNC.IdAlumno).FirstOrDefault();
+                if (Alumno == null)
+                    return null;
+
+                caj_Caja_Movimiento_Info Movimiento = new caj_Caja_Movimiento_Info
+                {
+                    IdEmpresa = infoNC.IdEmpresa,
+                    IdTipocbte = paramCaj.IdTipoCbteCble_MoviCaja_Ing,
+                    IdTipoMovi = paramCxc.pa_IdTipoMoviCaja_x_Cobros_x_cliente,
+                    IdCaja = ptoVta.IdCaja,
+                    IdTipo_Persona = "ALUMNO",
+                    IdPersona = Alumno.IdPersona,
+                    IdEntidad  = Alumno.IdAlumno,
+                    cm_fecha = infoNC.no_fecha,
+                    cm_observacion = infoNC.sc_observacion,
+                    cm_Signo = "+",
+                    cm_valor = Convert.ToDouble(infoNC.info_resumen.Total),
+                    info_caj_Caja_Movimiento_det = new caj_Caja_Movimiento_det_Info
+                    {
+                        cr_Valor = Convert.ToDouble(infoNC.info_resumen.Total),
+                        IdCobro_tipo = infoNC.IdCobro_tipo
+                    },
+                    lst_ct_cbtecble_det = infoCT.lst_ct_cbtecble_det
+                };
+
+                return Movimiento;
             }
             catch (Exception)
             {
