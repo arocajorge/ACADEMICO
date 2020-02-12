@@ -126,7 +126,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.lst_caja = lst_caja;
 
             var lst_cobro_tipo = bus_cobro_tipo.get_list(false);
-            lst_cobro_tipo = lst_cobro_tipo.Where(q => q.IdMotivo_tipo_cobro != "RET").ToList();
+            lst_cobro_tipo = lst_cobro_tipo.Where(q => q.IdMotivo_tipo_cobro != "RET" && !q.IdCobro_tipo.StartsWith("CRU") && !q.IdCobro_tipo.StartsWith("NT") && !q.IdCobro_tipo.StartsWith("NC") && !q.IdCobro_tipo.StartsWith("TRAN_CLI") && !q.IdCobro_tipo.StartsWith("CHQF")).ToList();
             ViewBag.lst_cobro_tipo = lst_cobro_tipo;
 
             var lst_banco = bus_banco.get_list(false);
