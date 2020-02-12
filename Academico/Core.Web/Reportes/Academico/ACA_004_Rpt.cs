@@ -6,6 +6,9 @@ using DevExpress.XtraReports.UI;
 using Core.Info.Reportes.Academico;
 using System.Collections.Generic;
 using Core.Bus.Reportes.Academico;
+using Core.Bus.General;
+using Core.Bus.Academico;
+using Core.Info.Helps;
 
 namespace Core.Web.Reportes.Academico
 {
@@ -37,7 +40,7 @@ namespace Core.Web.Reportes.Academico
                 List<ACA_004_Info> Lista = bus_rpt.Getlist(IdEmpresa,IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
                 this.DataSource = Lista;
             }
-            catch (Exception)
+            catch (Exception EX)
             {
                 throw;
             }
