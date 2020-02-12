@@ -68,7 +68,7 @@
     }
 
     function guardar() {
-        
+        $("#btn_guardar").attr("disabled", true);
         var datos = {
             Fecha: Fecha.GetDate(),
             IdEmpresa: $("#IdEmpresa").val(),
@@ -90,7 +90,7 @@
             vt_NumFactura:$("#vt_NumFactura").val(),
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
-        $("#btn_guardar").attr("disabled", true);
+        
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),

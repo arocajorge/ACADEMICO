@@ -122,5 +122,17 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<cxc_cobro_Info> get_list_deuda(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.get_list_deuda(IdEmpresa, IdAlumno);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

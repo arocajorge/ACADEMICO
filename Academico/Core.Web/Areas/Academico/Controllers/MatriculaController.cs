@@ -1,8 +1,10 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.CuentasPorCobrar;
 using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Data.Academico;
 using Core.Info.Academico;
+using Core.Info.CuentasPorCobrar;
 using Core.Info.Facturacion;
 using Core.Info.General;
 using Core.Info.Helps;
@@ -53,6 +55,7 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         aca_AnioLectivo_Rubro_Bus bus_anio_rubro = new aca_AnioLectivo_Rubro_Bus();
         aca_AnioLectivo_Rubro_Periodo_Bus bus_anio_rubro_periodo = new aca_AnioLectivo_Rubro_Periodo_Bus();
+        cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
         tb_mes_Bus bus_mes = new tb_mes_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
@@ -491,7 +494,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 var existe_matricula = bus_matricula.GetInfo_ExisteMatricula(IdEmpresa, IdAnio, IdAlumno);
                 if (existe_matricula != null)
                 {
-                    mensaje = "El alumno ya se encuentra matriculado en el año lectivo seleccionado";
+                    mensaje += "El alumno ya se encuentra matriculado en el año lectivo seleccionado.</ br > ";
                     Validacion = 1;
                 }
             }
@@ -506,8 +509,16 @@ namespace Core.Web.Areas.Academico.Controllers
 
                     if (PermitirMatricula == null)
                     {
-                        mensaje = "No se puede matricular al alumno, Usuario: "+ NegarMatricula.IdUsuarioCreacion + " , detalle de negacion: " + NegarMatricula.Observacion;
+                        mensaje += "No se puede matricular al alumno, Usuario: "+ NegarMatricula.IdUsuarioCreacion + " , detalle de negacion: " + NegarMatricula.Observacion+".</br>";
                     }
+                }
+
+                List<cxc_cobro_Info> lst_DeudaAlumno = bus_cobro.get_list_deuda(IdEmpresa,IdAlumno);
+
+                if (lst_DeudaAlumno.Count()>0)
+                {
+                    var Saldo = Math.Round(lst_DeudaAlumno.Sum(q => q.cr_saldo), 2, MidpointRounding.AwayFromZero).ToString("C2");
+                    mensaje += "El alumno tiene saldo pendiente: "+Saldo + ".</br>"; 
                 }
             }            
 
