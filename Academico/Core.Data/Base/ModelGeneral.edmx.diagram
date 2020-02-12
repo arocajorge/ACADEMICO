@@ -75,7 +75,7 @@
         <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_profesion" />
         <AssociationConnector Association="ModelGeneral.FK_tb_persona_tb_Religion" />
         <EntityTypeShape EntityType="ModelGeneral.tb_TarjetaCredito_x_cp_proveedor" Width="1.5" PointX="15.375" PointY="4.75" />
-        <EntityTypeShape EntityType="ModelGeneral.tb_TarjetaCredito" Width="1.5" PointX="3.125" PointY="26.125" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_TarjetaCredito" Width="1.5" PointX="3" PointY="26.125" />
         <AssociationConnector Association="ModelGeneral.FK_tb_TarjetaCredito_tb_banco" />
         </Diagram>
     </edmx:Diagrams>

@@ -57,6 +57,7 @@ namespace Core.Data.General
                         IdEmpresa = Entity.IdEmpresa,
                         IdTarjeta = Entity.IdTarjeta,
                         NombreTarjeta = Entity.NombreTarjeta,
+                        IdBanco = Entity.IdBanco,
                         Estado = Entity.Estado
                     };
                 }
@@ -103,6 +104,7 @@ namespace Core.Data.General
                         IdEmpresa = info.IdEmpresa,
                         IdTarjeta = info.IdTarjeta = getId(info.IdEmpresa),
                         NombreTarjeta = info.NombreTarjeta,
+                        IdBanco = info.IdBanco,
                         Estado = true,
                         IdUsuario = info.IdUsuario,
                         Fecha_Transac = info.Fecha_Transac = DateTime.Now
@@ -131,6 +133,7 @@ namespace Core.Data.General
                         return false;
 
                     Entity.NombreTarjeta = info.NombreTarjeta;
+                    Entity.IdBanco = info.IdBanco;
                     Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     Entity.Fecha_UltMod = info.Fecha_UltMod = DateTime.Now;
 
