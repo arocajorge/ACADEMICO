@@ -754,7 +754,20 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="IdEstadoCivil">Profesión</label>
-                                @Html.DropDownListFor(q => q.IdProfesion_padre, new SelectList(ViewBag.lst_profesion, "IdProfesion", "Descripcion"), new { @class = "form-control", @id = "IdProfesion_padre" })
+                                @Html.DevExpress().ComboBoxFor(q => q.IdProfesion_padre, settings =>
+                                {
+                                    settings.Name = "IdProfesion_padre";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                    settings.Properties.Columns.Add("IdProfesion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                    settings.Properties.Columns.Add("Descripcion", "Profesión").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                    //Campo ID
+                                    settings.Properties.ValueField = "IdProfesion";
+                                    settings.Properties.ValueType = typeof(int);
+                                    settings.Properties.TextField = "Descripcion";
+                                    settings.Properties.NullText = "== Seleccione ==";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                }).BindList(ViewBag.lst_profesion).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdProfesion_padre, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -1176,8 +1189,21 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="IdEstadoCivil">Profesión</label>
-                                @Html.DropDownListFor(q => q.IdProfesion_padre, new SelectList(ViewBag.lst_profesion, "IdProfesion", "Descripcion"), new { @class = "form-control", @id = "IdProfesion_padre" })
-                                @Html.ValidationMessageFor(q => q.IdProfesion_padre, "", new { @class = "text-danger" })
+                                @Html.DevExpress().ComboBoxFor(q => q.IdProfesion_madre, settings =>
+                                {
+                                    settings.Name = "IdProfesion_madre";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                    settings.Properties.Columns.Add("IdProfesion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                    settings.Properties.Columns.Add("Descripcion", "Profesión").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                    //Campo ID
+                                    settings.Properties.ValueField = "IdProfesion";
+                                    settings.Properties.ValueType = typeof(int);
+                                    settings.Properties.TextField = "Descripcion";
+                                    settings.Properties.NullText = "== Seleccione ==";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                }).BindList(ViewBag.lst_profesion).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdProfesion_madre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
@@ -1561,7 +1587,8 @@
                         $("#PorcentajeDiscapacidad_padre").val(data.PorcentajeDiscapacidad);
                         $("#IdEstadoCivil_padre").val(data.IdEstadoCivil);
                         $("#pe_sexo_padre").val(data.pe_sexo);
-                        $("#IdProfesion_padre").val(data.IdProfesion);
+                        //$("#IdProfesion_padre").val(data.IdProfesion);
+                        IdProfesion_padre.SetValue(data.IdProfesion);
                         $("#IdCatalogoFichaInst_padre").val(data.IdCatalogoFichaInst);
                         $("#EmpresaTrabajo_padre").val(data.EmpresaTrabajo);
                         $("#DireccionTrabajo_padre").val(data.DireccionTrabajo);
@@ -1657,7 +1684,8 @@
                         $("#PorcentajeDiscapacidad_madre").val(data.PorcentajeDiscapacidad);
                         $("#IdEstadoCivil_madre").val(data.IdEstadoCivil);
                         $("#pe_sexo_madre").val(data.pe_sexo);
-                        $("#IdProfesion_madre").val(data.IdProfesion);
+                        //$("#IdProfesion_madre").val(data.IdProfesion);
+                        IdProfesion_madre.SetValue(data.IdProfesion);
                         $("#IdCatalogoFichaInst_madre").val(data.IdCatalogoFichaInst);
                         $("#EmpresaTrabajo_madre").val(data.EmpresaTrabajo);
                         $("#DireccionTrabajo_madre").val(data.DireccionTrabajo);
@@ -1723,7 +1751,8 @@
         $("#PorcentajeDiscapacidad_padre").val("");
         $("#IdEstadoCivil_padre").val("");
         $("#pe_sexo_padre").val("");
-        $("#IdProfesion_padre").val("0");
+        //$("#IdProfesion_padre").val("0");
+        IdProfesion_madre.SetValue(null);
         $("#EmpresaTrabajo_padre").val("");
         $("#DireccionTrabajo_padre").val("");
         $("#TelefonoTrabajo_padre").val("");
@@ -1756,7 +1785,8 @@
         $("#PorcentajeDiscapacidad_madre").val("");
         $("#IdEstadoCivil_madre").val("");
         $("#pe_sexo_madre").val("");
-        $("#IdProfesion_madre").val("0");
+        //$("#IdProfesion_madre").val("0");
+        IdProfesion_madre.SetValue(null);
         $("#EmpresaTrabajo_madre").val("");
         $("#DireccionTrabajo_madre").val("");
         $("#TelefonoTrabajo_madre").val("");

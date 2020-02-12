@@ -84,7 +84,7 @@ namespace Core.Info.Academico
         public string mes { get; set; }
         public string dia { get; set; }
         public string NomCatalogo { get; set; }
-        public int IdProfesion { get; set; }
+        public Nullable<int> IdProfesion { get; set; }
         [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
         public int Idtipo_cliente { get; set; }
         public Nullable<int> IdReligion { get; set; }
