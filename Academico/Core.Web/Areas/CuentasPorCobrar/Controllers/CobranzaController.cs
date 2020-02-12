@@ -143,10 +143,24 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
         private bool validar(cxc_cobro_Info i_validar, ref string msg)
         {
+            var familia = bus_familia.GetInfo_Representante(i_validar.IdEmpresa, i_validar.IdAlumno ?? 0, "ECON");
+            if (familia == null)
+            {
+                msg = "El alumno no tiene familiar destinado ser un cliente";
+                return false;
+            }
+
+            var Cliente = bus_cliente.get_info_x_num_cedula(i_validar.IdEmpresa, familia.pe_cedulaRuc);
+            if (Cliente == null)
+            {
+                msg = "El familiar destinado a ser un cliente no existe en el módulo de clientes";
+                return false;
+            }
+            i_validar.IdCliente = Cliente.IdCliente;
             i_validar.IdEntidad = i_validar.IdCliente;
             if (i_validar.cr_TotalCobro == 0)
             {
-                msg = "No ha seleccionado documentos para realizar la cobranza";
+                msg = "No ha ingresado el total a cobrar";
                 return false;
             }
             if (Math.Round(i_validar.cr_saldo, 2, MidpointRounding.AwayFromZero) < 0)
@@ -155,7 +169,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 return false;
             }
             i_validar.lst_det = list_det.get_list(i_validar.IdTransaccionSession);
-            if (i_validar.lst_det.Count == 0)
+            if (i_validar.lst_det.Count == 0 && i_validar.cr_saldo == 0)
             {
                 msg = "No ha seleccionado documentos para realizar la cobranza";
                 return false;
@@ -175,6 +189,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             {
                 observacion += item.vt_NumDocumento + "/";
             }
+            if (i_validar.lst_det.Count == 0)
+            {
+                observacion = "Cobro sin documentos";
+            }
             i_validar.cr_observacion = observacion;
             i_validar.cr_fechaCobro = i_validar.cr_fecha;
             i_validar.cr_fechaDocu = i_validar.cr_fecha;
@@ -183,6 +201,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 i_validar.lst_det.ForEach(q => q.IdCobro_tipo_det = i_validar.IdCobro_tipo);
 
 
+            if (i_validar.lst_det.Count == 0 && i_validar.cr_saldo > 0 && i_validar.IdTipoNotaCredito == null)
+            {
+                msg = "Debe ingresar el tipo de nota de crédito a aplicar para el saldo";
+                return false;
+            }
 
             switch (i_validar.IdCobro_tipo)
             {

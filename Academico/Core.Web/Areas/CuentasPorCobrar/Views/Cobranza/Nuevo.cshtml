@@ -15,6 +15,12 @@
         GetIdCajaPorSucursal();
         MostrarDatosTarjeta();
 
+        var num = Number($("#cr_saldo").val());
+        if (num > 0) {
+            $("#DivTipoNota").show();
+        }else
+            $("#DivTipoNota").hide();
+
         $("#IdCobro_tipo").change(function () {
             SetCobroTipo();
             MostrarDatosTarjeta();
