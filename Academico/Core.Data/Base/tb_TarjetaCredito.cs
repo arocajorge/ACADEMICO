@@ -18,11 +18,14 @@ namespace Core.Data.Base
         public int IdTarjeta { get; set; }
         public string NombreTarjeta { get; set; }
         public bool Estado { get; set; }
+        public Nullable<int> IdBanco { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+    
+        public virtual tb_banco tb_banco { get; set; }
     }
 }

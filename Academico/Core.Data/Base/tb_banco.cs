@@ -19,6 +19,7 @@ namespace Core.Data.Base
         {
             this.tb_banco_procesos_bancarios_x_empresa = new HashSet<tb_banco_procesos_bancarios_x_empresa>();
             this.tb_persona = new HashSet<tb_persona>();
+            this.tb_TarjetaCredito = new HashSet<tb_TarjetaCredito>();
         }
     
         public int IdBanco { get; set; }
@@ -31,5 +32,7 @@ namespace Core.Data.Base
         public virtual ICollection<tb_banco_procesos_bancarios_x_empresa> tb_banco_procesos_bancarios_x_empresa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_persona> tb_persona { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_TarjetaCredito> tb_TarjetaCredito { get; set; }
     }
 }

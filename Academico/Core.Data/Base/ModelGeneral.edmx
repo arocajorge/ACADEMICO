@@ -467,6 +467,7 @@
           <Property Name="IdTarjeta" Type="int" Nullable="false" />
           <Property Name="NombreTarjeta" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdBanco" Type="int" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_Transac" Type="datetime" />
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
@@ -1007,6 +1008,18 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tb_TarjetaCredito_tb_banco">
+          <End Role="tb_banco" Type="Self.tb_banco" Multiplicity="0..1" />
+          <End Role="tb_TarjetaCredito" Type="Self.tb_TarjetaCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_banco">
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="tb_TarjetaCredito">
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelGeneralStoreContainer">
           <EntitySet Name="tb_banco" EntityType="Self.tb_banco" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_banco_procesos_bancarios_x_empresa" EntityType="Self.tb_banco_procesos_bancarios_x_empresa" Schema="dbo" store:Type="Tables" />
@@ -1233,6 +1246,10 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             <End Role="tb_empresa" EntitySet="tb_empresa" />
             <End Role="tb_sucursal" EntitySet="tb_sucursal" />
           </AssociationSet>
+          <AssociationSet Name="FK_tb_TarjetaCredito_tb_banco" Association="Self.FK_tb_TarjetaCredito_tb_banco">
+            <End Role="tb_banco" EntitySet="tb_banco" />
+            <End Role="tb_TarjetaCredito" EntitySet="tb_TarjetaCredito" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1424,8 +1441,12 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             <End Role="tb_Religion" EntitySet="tb_Religion" />
             <End Role="tb_persona" EntitySet="tb_persona" />
           </AssociationSet>
-          <EntitySet Name="tb_TarjetaCredito" EntityType="ModelGeneral.tb_TarjetaCredito" />
           <EntitySet Name="tb_TarjetaCredito_x_cp_proveedor" EntityType="ModelGeneral.tb_TarjetaCredito_x_cp_proveedor" />
+          <EntitySet Name="tb_TarjetaCredito" EntityType="ModelGeneral.tb_TarjetaCredito" />
+          <AssociationSet Name="FK_tb_TarjetaCredito_tb_banco" Association="ModelGeneral.FK_tb_TarjetaCredito_tb_banco">
+            <End Role="tb_banco" EntitySet="tb_banco" />
+            <End Role="tb_TarjetaCredito" EntitySet="tb_TarjetaCredito" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="tb_sucursal">
           <Key>
@@ -2062,6 +2083,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <Property Name="TieneFormatoTransferencia" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="tb_banco_procesos_bancarios_x_empresa" Relationship="ModelGeneral.FK_tb_banco_procesos_bancarios_x_empresa_tb_banco" FromRole="tb_banco" ToRole="tb_banco_procesos_bancarios_x_empresa" />
           <NavigationProperty Name="tb_persona" Relationship="ModelGeneral.FK_tb_persona_tb_banco" FromRole="tb_banco" ToRole="tb_persona" />
+          <NavigationProperty Name="tb_TarjetaCredito" Relationship="ModelGeneral.FK_tb_TarjetaCredito_tb_banco" FromRole="tb_banco" ToRole="tb_TarjetaCredito" />
         </EntityType>
         <EntityType Name="tb_banco_procesos_bancarios_x_empresa">
           <Key>
@@ -2414,22 +2436,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tb_TarjetaCredito">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdTarjeta" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTarjeta" Type="Int32" Nullable="false" />
-          <Property Name="NombreTarjeta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="tb_TarjetaCredito_x_cp_proveedor">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2447,6 +2453,36 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="tb_TarjetaCredito">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTarjeta" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTarjeta" Type="Int32" Nullable="false" />
+          <Property Name="NombreTarjeta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdBanco" Type="Int32" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltAnu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tb_banco" Relationship="ModelGeneral.FK_tb_TarjetaCredito_tb_banco" FromRole="tb_TarjetaCredito" ToRole="tb_banco" />
+        </EntityType>
+        <Association Name="FK_tb_TarjetaCredito_tb_banco">
+          <End Type="ModelGeneral.tb_banco" Role="tb_banco" Multiplicity="0..1" />
+          <End Type="ModelGeneral.tb_TarjetaCredito" Role="tb_TarjetaCredito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_banco">
+              <PropertyRef Name="IdBanco" />
+            </Principal>
+            <Dependent Role="tb_TarjetaCredito">
+              <PropertyRef Name="IdBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3043,22 +3079,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_TarjetaCredito">
-            <EntityTypeMapping TypeName="ModelGeneral.tb_TarjetaCredito">
-              <MappingFragment StoreEntitySet="tb_TarjetaCredito">
-                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
-                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
-                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="NombreTarjeta" ColumnName="NombreTarjeta" />
-                <ScalarProperty Name="IdTarjeta" ColumnName="IdTarjeta" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tb_TarjetaCredito_x_cp_proveedor">
             <EntityTypeMapping TypeName="ModelGeneral.tb_TarjetaCredito_x_cp_proveedor">
               <MappingFragment StoreEntitySet="tb_TarjetaCredito_x_cp_proveedor">
@@ -3072,6 +3092,23 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
                 <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
                 <ScalarProperty Name="IdTarjeta" ColumnName="IdTarjeta" />
                 <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_TarjetaCredito">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_TarjetaCredito">
+              <MappingFragment StoreEntitySet="tb_TarjetaCredito">
+                <ScalarProperty Name="Fecha_UltAnu" ColumnName="Fecha_UltAnu" />
+                <ScalarProperty Name="IdUsuarioUltAnu" ColumnName="IdUsuarioUltAnu" />
+                <ScalarProperty Name="Fecha_UltMod" ColumnName="Fecha_UltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="NombreTarjeta" ColumnName="NombreTarjeta" />
+                <ScalarProperty Name="IdTarjeta" ColumnName="IdTarjeta" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

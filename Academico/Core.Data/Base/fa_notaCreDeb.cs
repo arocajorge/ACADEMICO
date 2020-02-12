@@ -20,6 +20,7 @@ namespace Core.Data.Base
             this.fa_notaCreDeb_det = new HashSet<fa_notaCreDeb_det>();
             this.fa_notaCreDeb_x_ct_cbtecble = new HashSet<fa_notaCreDeb_x_ct_cbtecble>();
             this.fa_notaCreDeb_x_cxc_cobro = new HashSet<fa_notaCreDeb_x_cxc_cobro>();
+            this.fa_notaCreDeb_x_fa_factura_NotaDeb = new HashSet<fa_notaCreDeb_x_fa_factura_NotaDeb>();
         }
     
         public int IdEmpresa { get; set; }
@@ -54,16 +55,19 @@ namespace Core.Data.Base
         public int IdPuntoVta { get; set; }
         public bool aprobada_enviar_sri { get; set; }
         public Nullable<bool> Generado { get; set; }
+        public string IdCobro_tipo { get; set; }
     
         public virtual fa_cliente fa_cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
         public virtual fa_PuntoVta fa_PuntoVta { get; set; }
         public virtual fa_TipoNota fa_TipoNota { get; set; }
+        public virtual fa_notaCreDeb_resumen fa_notaCreDeb_resumen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_notaCreDeb_x_ct_cbtecble> fa_notaCreDeb_x_ct_cbtecble { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_notaCreDeb_x_cxc_cobro> fa_notaCreDeb_x_cxc_cobro { get; set; }
-        public virtual fa_notaCreDeb_resumen fa_notaCreDeb_resumen { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_notaCreDeb_x_fa_factura_NotaDeb> fa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
     }
 }
