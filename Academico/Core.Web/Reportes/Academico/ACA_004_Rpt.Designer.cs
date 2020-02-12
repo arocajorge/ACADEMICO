@@ -676,18 +676,22 @@
             // p_IdSede
             // 
             this.p_IdSede.Name = "p_IdSede";
+            this.p_IdSede.Visible = false;
             // 
             // p_IdNivel
             // 
             this.p_IdNivel.Name = "p_IdNivel";
+            this.p_IdNivel.Visible = false;
             // 
             // p_IdJornada
             // 
             this.p_IdJornada.Name = "p_IdJornada";
+            this.p_IdJornada.Visible = false;
             // 
             // p_IdCurso
             // 
             this.p_IdCurso.Name = "p_IdCurso";
+            this.p_IdCurso.Visible = false;
             // 
             // xrTableRow5
             // 
@@ -832,10 +836,12 @@
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
             // 
             // p_IdAnio
             // 
             this.p_IdAnio.Name = "p_IdAnio";
+            this.p_IdAnio.Visible = false;
             // 
             // ACA_004_Rpt
             // 
@@ -932,10 +938,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell20;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell21;
         private DevExpress.XtraReports.UI.GroupHeaderBand groupHeaderBand5;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdSede;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdNivel;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdJornada;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdCurso;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell14;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell15;
@@ -946,7 +948,11 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell12;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell13;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdAnio;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdAnio;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdSede;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdNivel;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdJornada;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdCurso;
     }
 }
