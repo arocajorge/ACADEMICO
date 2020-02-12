@@ -18,8 +18,8 @@ namespace Core.Data.Base
         public cxc_cobro_tipo()
         {
             this.cxc_cobro_tipo_Param_conta_x_sucursal = new HashSet<cxc_cobro_tipo_Param_conta_x_sucursal>();
-            this.cxc_cobro = new HashSet<cxc_cobro>();
             this.cxc_cobro_det = new HashSet<cxc_cobro_det>();
+            this.cxc_cobro = new HashSet<cxc_cobro>();
         }
     
         public string IdCobro_tipo { get; set; }
@@ -45,8 +45,8 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cxc_cobro_tipo_Param_conta_x_sucursal> cxc_cobro_tipo_Param_conta_x_sucursal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cxc_cobro> cxc_cobro { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cxc_cobro_det> cxc_cobro_det { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cxc_cobro> cxc_cobro { get; set; }
     }
 }

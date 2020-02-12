@@ -167,7 +167,8 @@ namespace Core.Data.CuentasPorCobrar
                         cr_recibo = Entity.cr_recibo,
                         cr_es_anticipo = Entity.cr_es_anticipo,
                         IdBanco = Entity.IdBanco,
-                        IdCaja = Entity.IdCaja
+                        IdCaja = Entity.IdCaja,
+                        cr_saldo = Entity.cr_Saldo ?? 0
                     };
                 }
 
@@ -216,7 +217,7 @@ namespace Core.Data.CuentasPorCobrar
                     IdCaja = info.IdCaja,
                     IdTarjeta = info.IdTarjeta,
                     cr_Tarjeta = info.cr_Tarjeta,
-
+                    cr_Saldo = info.cr_saldo,
                     Fecha_Transac = DateTime.Now,
                     IdUsuario = info.IdUsuario
                 };
@@ -416,7 +417,7 @@ namespace Core.Data.CuentasPorCobrar
                 Entity.cr_propietarioCta = info.cr_propietarioCta;
                 Entity.IdBanco = info.IdBanco;
                 Entity.IdCaja = info.IdCaja;
-
+                Entity.cr_Saldo = info.cr_saldo;
                 Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                 Entity.Fecha_UltMod = DateTime.Now;
                 #endregion

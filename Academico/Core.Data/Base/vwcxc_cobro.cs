@@ -29,5 +29,6 @@ namespace Core.Data.Base
         public string nom_Motivo_tipo_cobro { get; set; }
         public Nullable<decimal> IdAlumno { get; set; }
         public string NomAlumno { get; set; }
+        public Nullable<double> cr_Saldo { get; set; }
     }
 }
