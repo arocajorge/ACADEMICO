@@ -36,6 +36,7 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_AnioLectivo_Curso_Plantilla_Info model = new aca_AnioLectivo_Curso_Plantilla_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSede = Convert.ToInt32(SessionFixed.IdSede),
                 IdAnio = (info==null ? 0 : info.IdAnio),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
