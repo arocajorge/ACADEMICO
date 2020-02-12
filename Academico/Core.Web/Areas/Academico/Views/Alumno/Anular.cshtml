@@ -702,7 +702,20 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="IdEstadoCivil">Profesión</label>
-                                @Html.DropDownListFor(q => q.IdProfesion_padre, new SelectList(ViewBag.lst_profesion, "IdProfesion", "Descripcion"), new { @class = "form-control", @id = "IdProfesion_padre" })
+                                @Html.DevExpress().ComboBoxFor(q => q.IdProfesion_padre, settings =>
+                                {
+                                    settings.Name = "IdProfesion_padre";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                    settings.Properties.Columns.Add("IdProfesion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                    settings.Properties.Columns.Add("Descripcion", "Profesión").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                    //Campo ID
+                                    settings.Properties.ValueField = "IdProfesion";
+                                    settings.Properties.ValueType = typeof(int);
+                                    settings.Properties.TextField = "Descripcion";
+                                    settings.Properties.NullText = "== Seleccione ==";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                }).BindList(ViewBag.lst_profesion).GetHtml()
                                 @Html.ValidationMessageFor(q => q.IdProfesion_padre, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -1111,8 +1124,21 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="IdEstadoCivil">Profesión</label>
-                                @Html.DropDownListFor(q => q.IdProfesion_padre, new SelectList(ViewBag.lst_profesion, "IdProfesion", "Descripcion"), new { @class = "form-control", @id = "IdProfesion_padre" })
-                                @Html.ValidationMessageFor(q => q.IdProfesion_padre, "", new { @class = "text-danger" })
+                                @Html.DevExpress().ComboBoxFor(q => q.IdProfesion_madre, settings =>
+                                {
+                                    settings.Name = "IdProfesion_madre";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                    settings.Properties.Columns.Add("IdProfesion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                    settings.Properties.Columns.Add("Descripcion", "Profesión").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                    //Campo ID
+                                    settings.Properties.ValueField = "IdProfesion";
+                                    settings.Properties.ValueType = typeof(int);
+                                    settings.Properties.TextField = "Descripcion";
+                                    settings.Properties.NullText = "== Seleccione ==";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                }).BindList(ViewBag.lst_profesion).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdProfesion_madre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

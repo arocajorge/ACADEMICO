@@ -506,10 +506,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 if (NegarMatricula != null)
                 {
                     var PermitirMatricula = bus_permiso.GetInfo_ByMatricula(IdEmpresa, IdAnio, IdAlumno, IdCatalogoPERNEG_Permitir);
-
+                    var IdUsuario = (string.IsNullOrEmpty(NegarMatricula.IdUsuarioModificacion) ? NegarMatricula.IdUsuarioCreacion: NegarMatricula.IdUsuarioCreacion);
                     if (PermitirMatricula == null)
                     {
-                        mensaje += "No se puede matricular al alumno, Usuario: "+ NegarMatricula.IdUsuarioCreacion + " , detalle de negacion: " + NegarMatricula.Observacion+".</br>";
+                        mensaje += "No se puede matricular al alumno, Usuario: "+ IdUsuario + " , detalle de negacion: " + NegarMatricula.Observacion+".</br>";
                     }
                 }
 

@@ -51,7 +51,6 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_instruccion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTRUCCION), false);
             lst_instruccion.Add(new aca_CatalogoFicha_Info { IdCatalogoFicha = 0, NomCatalogoFicha = "" });
             var lst_profesion = bus_profesion.GetList(false);
-            lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "" });
             var lst_religion = bus_religion.GetList(false);
 
             ViewBag.lst_sexo = lst_sexo;

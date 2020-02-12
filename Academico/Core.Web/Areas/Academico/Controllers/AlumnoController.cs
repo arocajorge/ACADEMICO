@@ -117,7 +117,6 @@ namespace Core.Web.Areas.Academico.Controllers
             lst_instruccion.Add(new aca_CatalogoFicha_Info { IdCatalogoFicha = 0, NomCatalogoFicha = "" });
             lst_tipo_discapacidad.Add(new tb_Catalogo_Info { CodCatalogo = "", ca_descripcion = ""});
             var lst_profesion = bus_profesion.GetList(false);
-            lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "" });
             var lst_religion = bus_religion.GetList(false);
             var lst_grupoetnico = bus_grupoetnico.GetList(false);
 
@@ -260,7 +259,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     pe_celular = model.Celular_madre,
                     pe_direccion = model.Direccion_madre,
                     IdEstadoCivil = model.IdEstadoCivil_madre,
-                    IdProfesion = model.IdProfesion_padre,
+                    IdProfesion = model.IdProfesion_madre,
                     IdReligion = model.IdReligion_madre,
                     AsisteCentroCristiano = model.AsisteCentroCristiano_madre
             };
@@ -415,7 +414,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdCiudad_madre = "09",
                 IdParroquia_madre = "09",
                 CodCatalogoCONADIS = "",
-                IdProfesion_madre=0,
+                //IdProfesion_madre=0,
                 IdPersona_padre=0,
                 FechaIngreso = DateTime.Now,
                 alu_foto = new byte[0],
@@ -577,7 +576,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.PorcentajeDiscapacidad_padre = info_fam_padre.PorcentajeDiscapacidad;
             model.NumeroCarnetConadis_padre = info_fam_padre.NumeroCarnetConadis;
             model.CodCatalogoCONADIS_padre = (info_fam_padre == null || info_fam_padre.CodCatalogoCONADIS == null ? "" : info_fam_padre.CodCatalogoCONADIS);
-            model.IdProfesion_padre = (info_fam_padre == null || info_fam_padre.IdProfesion == 0 ? 0 : info_fam_padre.IdProfesion);
+            model.IdProfesion_padre = info_fam_padre.IdProfesion;
             model.IdCatalogoFichaInst_padre = info_fam_padre.IdCatalogoFichaInst;
             model.EmpresaTrabajo_padre = info_fam_padre.EmpresaTrabajo;
             model.DireccionTrabajo_padre = info_fam_padre.DireccionTrabajo;
@@ -616,7 +615,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.PorcentajeDiscapacidad_madre = info_fam_madre.PorcentajeDiscapacidad;
             model.NumeroCarnetConadis_madre = info_fam_madre.NumeroCarnetConadis;
             model.CodCatalogoCONADIS_madre = (info_fam_madre == null || info_fam_madre.CodCatalogoCONADIS == null ? "" : info_fam_madre.CodCatalogoCONADIS);
-            model.IdProfesion_madre = (info_fam_madre == null || info_fam_madre.IdProfesion == 0 ? 0 : info_fam_madre.IdProfesion);
+            model.IdProfesion_madre = info_fam_madre.IdProfesion;
             model.IdCatalogoFichaInst_madre = info_fam_madre.IdCatalogoFichaInst;
             model.EmpresaTrabajo_madre = info_fam_madre.EmpresaTrabajo;
             model.DireccionTrabajo_madre = info_fam_madre.DireccionTrabajo;
@@ -788,7 +787,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.PorcentajeDiscapacidad_padre = info_fam_padre.PorcentajeDiscapacidad;
             model.NumeroCarnetConadis_padre = info_fam_padre.NumeroCarnetConadis;
             model.CodCatalogoCONADIS_padre = (info_fam_padre.CodCatalogoCONADIS == null ? "" : info_fam_padre.CodCatalogoCONADIS);
-            model.IdProfesion_padre = (info_fam_padre == null || info_fam_padre.IdProfesion == 0 ? 0 : info_fam_padre.IdProfesion);
+            model.IdProfesion_padre = info_fam_padre.IdProfesion;
             model.IdReligion_padre = info_fam_padre.IdReligion;
             model.AsisteCentroCristiano_padre = info_fam_padre.AsisteCentroCristiano;
             model.EstaFallecido_padre = info_fam_padre.EstaFallecido;
@@ -810,7 +809,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.PorcentajeDiscapacidad_madre = info_fam_madre.PorcentajeDiscapacidad;
             model.NumeroCarnetConadis_madre = info_fam_madre.NumeroCarnetConadis;
             model.CodCatalogoCONADIS_madre = (info_fam_madre.CodCatalogoCONADIS == null ? "" : info_fam_madre.CodCatalogoCONADIS);
-            model.IdProfesion_madre = (info_fam_madre == null || info_fam_madre.IdProfesion == 0 ? 0 : info_fam_madre.IdProfesion);
+            model.IdProfesion_madre = info_fam_madre.IdProfesion;
             model.IdReligion_madre = info_fam_madre.IdReligion;
             model.AsisteCentroCristiano_madre = info_fam_madre.AsisteCentroCristiano;
             model.EstaFallecido_madre = info_fam_madre.EstaFallecido;

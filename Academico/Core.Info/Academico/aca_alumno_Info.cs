@@ -124,7 +124,7 @@ namespace Core.Info.Academico
         [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo modelo debe tener máximo 50")]
         public string Modelo_padre { get; set; }
         public bool CasaPropia_padre { get; set; }
-        public int IdProfesion_padre { get; set; }
+        public Nullable<int> IdProfesion_padre { get; set; }
         public bool info_valido_padre { get; set; }
         [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
         public int Idtipo_cliente_padre { get; set; }
@@ -186,7 +186,7 @@ namespace Core.Info.Academico
         [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo modelo debe tener máximo 50")]
         public string Modelo_madre { get; set; }
         public bool CasaPropia_madre { get; set; }
-        public int IdProfesion_madre { get; set; }
+        public Nullable<int> IdProfesion_madre { get; set; }
         public bool info_valido_madre { get; set; }
         [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
         public int Idtipo_cliente_madre { get; set; }
