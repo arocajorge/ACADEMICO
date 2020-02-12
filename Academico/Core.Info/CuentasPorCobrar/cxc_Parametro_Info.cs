@@ -13,6 +13,7 @@ namespace Core.Info.CuentasPorCobrar
         public int pa_IdTipoMoviCaja_x_Cobros_x_cliente { get; set; }
         public int pa_IdTipoCbteCble_CxC { get; set; }
         public int DiasTransaccionesAFuturo { get; set; }
+        public Nullable<int> IdTipoNotaProntoPago { get; set; }
         public string IdUsuario { get; set; }
         public Nullable<System.DateTime> FechaTransac { get; set; }
         public string IdUsuarioUltMod { get; set; }
