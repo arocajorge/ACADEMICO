@@ -63,9 +63,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             var lst_caja = bus_caja.GetList(IdEmpresa, 0, false, SessionFixed.IdUsuario, EsContador);
             ViewBag.lst_caja = lst_caja;
 
-
             var lst_tiponota = bus_tiponota.get_list(IdEmpresa, "D", false);
             ViewBag.lst_tiponota = lst_tiponota;
+            
+            var lst_tipo_nota_credito = bus_tiponota.get_list(IdEmpresa, "C", false);
+            ViewBag.lst_tipo_nota_credito = lst_tipo_nota_credito;
         }
 
         #endregion
