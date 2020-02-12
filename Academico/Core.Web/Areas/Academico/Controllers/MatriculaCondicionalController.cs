@@ -79,12 +79,12 @@ namespace Core.Web.Areas.Academico.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_NegarMatricula()
+        public ActionResult GridViewPartial_MatriculaCondicional()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             List<aca_CondicionalMatricula_Info> model = Lista_MatriculaCondicional.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_NegarMatricula", model);
+            return PartialView("_GridViewPartial_MatriculaCondicional", model);
         }
         #endregion
 
