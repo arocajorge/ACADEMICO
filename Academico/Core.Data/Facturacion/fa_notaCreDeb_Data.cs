@@ -92,7 +92,7 @@ namespace Core.Data.Facturacion
                              }).ToList();
                 }
 
-                return Lista;
+                return Lista.OrderByDescending(q=> q.IdNota).ToList();
             }
             catch (Exception)
             {
@@ -414,7 +414,7 @@ namespace Core.Data.Facturacion
 
                                             ct_IdEmpresa = diario.IdEmpresa,
                                             ct_IdTipoCbte = diario.IdTipoCbte,
-                                            ct_IdCbteCble = diario.IdCbteCble,
+                                            ct_IdCbteCble = MovimientoCaja.IdCbteCble,
 
                                             observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
                                         });
@@ -637,7 +637,7 @@ namespace Core.Data.Facturacion
 
                                                 ct_IdEmpresa = diario.IdEmpresa,
                                                 ct_IdTipoCbte = diario.IdTipoCbte,
-                                                ct_IdCbteCble = diario.IdCbteCble,
+                                                ct_IdCbteCble = MovimientoCaja.IdCbteCble,
 
                                                 observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
                                             });

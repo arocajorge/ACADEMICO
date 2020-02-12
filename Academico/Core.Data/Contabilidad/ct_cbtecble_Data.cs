@@ -26,7 +26,7 @@ namespace Core.Data.Contabilidad
                              where q.IdEmpresa == IdEmpresa
                              && fecha_ini <= q.cb_Fecha && q.cb_Fecha <= fecha_fin
                              && IdSucursal_ini <= q.IdSucursal && q.IdSucursal <= IdSucursal_fin
-                             orderby q.cb_Fecha descending
+                             orderby new { q.cb_Fecha, q.IdCbteCble} descending 
                              select new ct_cbtecble_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
@@ -48,7 +48,7 @@ namespace Core.Data.Contabilidad
                                  && fecha_ini <= q.cb_Fecha && q.cb_Fecha <= fecha_fin
                                  && IdSucursal_ini <= q.IdSucursal && q.IdSucursal <= IdSucursal_fin
                                  && q.cb_Estado == "A"
-                                 orderby q.cb_Fecha descending
+                                 orderby new { q.cb_Fecha, q.IdCbteCble } descending
                                  select new ct_cbtecble_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

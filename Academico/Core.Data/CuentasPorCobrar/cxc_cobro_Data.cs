@@ -168,7 +168,8 @@ namespace Core.Data.CuentasPorCobrar
                         cr_es_anticipo = Entity.cr_es_anticipo,
                         IdBanco = Entity.IdBanco,
                         IdCaja = Entity.IdCaja,
-                        cr_saldo = Entity.cr_Saldo ?? 0
+                        cr_saldo = Entity.cr_Saldo ?? 0,
+                        IdTipoNotaCredito = Entity.IdTipoNotaCredito
                     };
                 }
 
@@ -219,7 +220,8 @@ namespace Core.Data.CuentasPorCobrar
                     cr_Tarjeta = info.cr_Tarjeta,
                     cr_Saldo = info.cr_saldo,
                     Fecha_Transac = DateTime.Now,
-                    IdUsuario = info.IdUsuario
+                    IdUsuario = info.IdUsuario,
+                    IdTipoNotaCredito = info.IdTipoNotaCredito
                 };
                 Context_cxc.cxc_cobro.Add(cab);
                 Context_cxc.SaveChanges();
@@ -1085,18 +1087,18 @@ namespace Core.Data.CuentasPorCobrar
                     CodNota = "ProntoPago",
                     CreDeb = "C",
                     CodDocumentoTipo = "NTCR",
-                    Serie1 = PuntoVta.Su_CodigoEstablecimiento,
-                    Serie2 = PuntoVta.cod_PuntoVta,
+                    Serie1 = null,
+                    Serie2 = null,
                     NumAutorizacion = null,
                     NumNota_Impresa = null,
                     Fecha_Autorizacion = null,
                     IdCliente = info.IdCliente,
                     IdAlumno = info.IdAlumno,
-                    no_fecha = DateTime.Now.Date,
-                    no_fecha_venc = DateTime.Now.Date,
+                    no_fecha = info.cr_fecha,
+                    no_fecha_venc = info.cr_fecha,
                     IdTipoNota = info.IdTipoNotaCredito ?? 0,
                     sc_observacion = "NC Por excedente COBRO # " + info.IdCobro.ToString() + " ALUMNO: "+Alumno.pe_nombreCompleto + " "+info.cr_observacion,
-                    NaturalezaNota = "SRI",
+                    NaturalezaNota = "INT",
                     IdCtaCble_TipoNota = TipoNota.IdCtaCble,
                     IdCobro_tipo = info.IdCobro_tipo,
                     info_resumen = new fa_notaCreDeb_resumen_Info(),

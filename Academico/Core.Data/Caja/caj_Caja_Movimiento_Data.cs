@@ -34,7 +34,7 @@ namespace Core.Data.Caja
                                  && q.cm_Signo == cm_signo
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
                                  && IdCaja_ini <= q.IdCaja && q.IdCaja <= IdCaja_fin
-                                 orderby q.IdCbteCble descending
+                                 orderby new { q.cm_fecha, q.IdCbteCble } descending
                                  select new caj_Caja_Movimiento_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,
@@ -59,7 +59,7 @@ namespace Core.Data.Caja
                                  && fecha_ini <= q.cm_fecha && q.cm_fecha <= fecha_fin
                                  && IdCaja_ini <= q.IdCaja && q.IdCaja <= IdCaja_fin
                                  && q.Estado =="A"
-                                 orderby q.IdCbteCble descending
+                                 orderby new { q.cm_fecha, q.IdCbteCble } descending
                                  select new caj_Caja_Movimiento_Info
                                  {
                                      IdEmpresa = q.IdEmpresa,

@@ -30,6 +30,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
         caj_parametro_Bus bus_param_caja = new caj_parametro_Bus();
         cxc_cobro_tipo_Bus bus_cobro_tipo = new cxc_cobro_tipo_Bus();
+        cxc_Parametro_Bus bus_param_cxc = new cxc_Parametro_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         tb_banco_Bus bus_banco = new tb_banco_Bus();
         ba_Banco_Cuenta_Bus bus_banco_cuenta = new ba_Banco_Cuenta_Bus();
@@ -296,6 +297,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+
+            var paramCxc = bus_param_cxc.get_info(IdEmpresa);
+            if (paramCxc == null)
+                return RedirectToAction("Index");
+
             cxc_cobro_Info model = new cxc_cobro_Info
             {
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
@@ -304,6 +310,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 cr_fecha = DateTime.Now.Date,
                 IdCobro_tipo = "EFEC",
                 lst_det = new List<cxc_cobro_det_Info>(),
+                IdTipoNotaCredito = paramCxc.IdTipoNotaProntoPago
             };
             list_det.set_list(new List<cxc_cobro_det_Info>(), model.IdTransaccionSession);
             List_x_Cruzar.set_list(new List<cxc_cobro_det_Info>(), model.IdTransaccionSession);
