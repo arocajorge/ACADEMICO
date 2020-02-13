@@ -1288,5 +1288,23 @@ namespace Core.Data.CuentasPorCobrar
             }
         }
 
+
+        public double GetSaldoAlumno(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                EntitiesCuentasPorCobrar dbCxc = new EntitiesCuentasPorCobrar();
+                EntitiesFacturacion dbFac = new EntitiesFacturacion();
+
+                var SaldoCxc = dbCxc.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).Sum(q => q.Saldo) ?? 0;
+                
+                return SaldoCxc;                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

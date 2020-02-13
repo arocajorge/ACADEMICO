@@ -166,8 +166,8 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdSucursal.Value = IdSucursal;
             model.p_IdCobro.Value = IdCobro;
-            model.usuario = SessionFixed.IdUsuario.ToString();
-            model.empresa = SessionFixed.NomEmpresa.ToString();
+            model.usuario = SessionFixed.IdUsuario;
+            
             return View(model);
         }
 

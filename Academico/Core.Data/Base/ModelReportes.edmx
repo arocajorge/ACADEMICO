@@ -214,7 +214,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_002_Aplicaci
           <Property Name="secuencial" Type="int" Nullable="false" />
           <Property Name="dc_TipoDocumento" Type="varchar" MaxLength="20" />
           <Property Name="vt_NumFactura" Type="varchar(max)" />
-          <Property Name="Total" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Total" Type="float" />
           <Property Name="dc_ValorProntoPago" Type="float" />
           <Property Name="dc_ValorPago" Type="float" Nullable="false" />
         </EntityType>
@@ -1571,7 +1571,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_004' no tien
           <Property Name="secuencial" Type="Int32" Nullable="false" />
           <Property Name="dc_TipoDocumento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="vt_NumFactura" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Double" />
           <Property Name="dc_ValorProntoPago" Type="Double" />
           <Property Name="dc_ValorPago" Type="Double" Nullable="false" />
         </EntityType>

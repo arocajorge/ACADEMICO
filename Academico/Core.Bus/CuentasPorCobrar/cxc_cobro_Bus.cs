@@ -134,5 +134,18 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
+
+        public double GetSaldoAlumno(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.GetSaldoAlumno(IdEmpresa, IdAlumno);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
