@@ -231,6 +231,8 @@
     <Compile Include="Reportes\Academico\ACA_002_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_003_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_004_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_007_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_006_ Bus.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_001_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Bus.cs" />

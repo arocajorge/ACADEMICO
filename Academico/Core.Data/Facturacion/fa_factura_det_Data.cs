@@ -53,8 +53,9 @@ namespace Core.Data.Facturacion
                                  aca_IdPeriodo = q.IdPeriodo,
                                  aca_IdRubro = q.IdRubro,
                                  aca_IdAnio = q.IdAnio,
-                                 aca_IdPlantilla = q.IdPlantilla
-                                
+                                 aca_IdPlantilla = q.IdPlantilla,
+                                 ValorProntoPago = q.ValorProntoPago
+
                              }).ToList();
                 }
                 return Lista;
