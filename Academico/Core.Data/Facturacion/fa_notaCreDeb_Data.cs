@@ -265,7 +265,7 @@ namespace Core.Data.Facturacion
                         Estado = info.Estado = "A",
                         NaturalezaNota = info.NaturalezaNota,
                         IdCtaCble_TipoNota = info.IdCtaCble_TipoNota,
-                        IdCobro_tipo = string.IsNullOrEmpty(info.IdCobro_tipo) ? "" : info.IdCobro_tipo,
+                        IdCobro_tipo = string.IsNullOrEmpty(info.IdCobro_tipo) ? (info.CreDeb == "C" ? "NTCR" : "NTDB"): info.IdCobro_tipo,
                         IdUsuario = info.IdUsuario,
                     };
                     #endregion
@@ -740,7 +740,7 @@ namespace Core.Data.Facturacion
                 ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
                 cxc_cobro_Data odata_cobr = new cxc_cobro_Data();
                 #endregion
-
+                
                 using (EntitiesFacturacion db_f = new EntitiesFacturacion())
                 {
                     #region Nota de debito credito
@@ -777,13 +777,18 @@ namespace Core.Data.Facturacion
 
                     var rel_cobr = db_f.fa_notaCreDeb_x_cxc_cobro.Where(q => q.IdEmpresa_nt == info.IdEmpresa && q.IdSucursal_nt == info.IdSucursal && q.IdBodega_nt == info.IdBodega && q.IdNota_nt == info.IdNota).FirstOrDefault();
                     if (rel_cobr != null)
-                        if (!odata_cobr.anularDB(new cxc_cobro_Info { IdEmpresa = rel_cobr.IdEmpresa_cbr, IdSucursal = rel_cobr.IdSucursal_cbr, IdCobro = rel_cobr.IdCobro_cbr, IdUsuarioUltAnu = info.IdUsuarioUltAnu }))
+                    {
+                        if (lst_cruce.Count > 0)
                         {
-                            entity.Estado = "A";
-                            entity.IdUsuarioUltAnu = null;
-                            entity.Fecha_UltAnu = null;
-                            entity.MotiAnula = null;
+                            if (!odata_cobr.anularDB(new cxc_cobro_Info { IdEmpresa = rel_cobr.IdEmpresa_cbr, IdSucursal = rel_cobr.IdSucursal_cbr, IdCobro = rel_cobr.IdCobro_cbr, IdUsuarioUltAnu = info.IdUsuarioUltAnu }))
+                            {
+                                entity.Estado = "A";
+                                entity.IdUsuarioUltAnu = null;
+                                entity.Fecha_UltAnu = null;
+                                entity.MotiAnula = null;
+                            }
                         }
+                    }   
                     #endregion
 
                     db_f.SaveChanges();

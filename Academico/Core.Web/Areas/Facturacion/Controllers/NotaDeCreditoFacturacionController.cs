@@ -475,31 +475,35 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             var info_tipo_nota = bus_tipo_nota.get_info(i_validar.IdEmpresa, i_validar.IdTipoNota);
 
-            if (info_tipo_nota!=null && info_tipo_nota.IdCtaCble!=null && info_tipo_nota.IdCtaCbleCXC!=null && info_tipo_nota.IdProducto!=null)
+            if (info_tipo_nota != null && info_tipo_nota.IdCtaCble != null && info_tipo_nota.IdCtaCbleCXC != null && info_tipo_nota.IdProducto != null)
             {
-                var info_detalle = new fa_notaCreDeb_det_Info
+                i_validar.lst_det = new List<fa_notaCreDeb_det_Info>
                 {
-                    IdEmpresa = i_validar.IdEmpresa,
-                    IdSucursal = i_validar.IdSucursal,
-                    IdBodega = i_validar.IdBodega,
-                    IdNota = i_validar.IdNota,
-                    Secuencia = 1,
-                    IdProducto = Convert.ToDecimal(info_tipo_nota.IdProducto),
-                    sc_cantidad = 1,
-                    sc_cantidad_factura = 1,
-                    sc_Precio = Convert.ToDouble(i_validar.info_resumen.SubtotalConDscto),
-                    sc_descUni = 0,
-                    sc_PordescUni = 0,
-                    sc_precioFinal = Convert.ToDouble(i_validar.info_resumen.SubtotalConDscto),
-                    vt_por_iva = Convert.ToDouble(i_validar.info_resumen.PorIva),
-                    sc_iva = Convert.ToDouble(i_validar.info_resumen.ValorIVA),
-                    IdCod_Impuesto_Iva = i_validar.info_resumen.IdCod_Impuesto_IVA,
-                    sc_subtotal = Convert.ToDouble(i_validar.info_resumen.SubtotalConDscto),
-                    sc_total = Convert.ToDouble(i_validar.info_resumen.Total),
-                    IdCentroCosto = null,
-                    IdPunto_Cargo = null,
-                    IdPunto_cargo_grupo = null
+                    new fa_notaCreDeb_det_Info
+                    {
+                        IdEmpresa = i_validar.IdEmpresa,
+                        IdSucursal = i_validar.IdSucursal,
+                        IdBodega = i_validar.IdBodega,
+                        IdNota = i_validar.IdNota,
+                        Secuencia = 1,
+                        IdProducto = Convert.ToDecimal(info_tipo_nota.IdProducto),
+                        sc_cantidad = 1,
+                        sc_cantidad_factura = 1,
+                        sc_Precio = Convert.ToDouble(i_validar.info_resumen.SubtotalConDscto),
+                        sc_descUni = 0,
+                        sc_PordescUni = 0,
+                        sc_precioFinal = Convert.ToDouble(i_validar.info_resumen.SubtotalConDscto),
+                        vt_por_iva = Convert.ToDouble(i_validar.info_resumen.PorIva),
+                        sc_iva = Convert.ToDouble(i_validar.info_resumen.ValorIVA),
+                        IdCod_Impuesto_Iva = i_validar.info_resumen.IdCod_Impuesto_IVA,
+                        sc_subtotal = Convert.ToDouble(i_validar.info_resumen.SubtotalConDscto),
+                        sc_total = Convert.ToDouble(i_validar.info_resumen.Total),
+                        IdCentroCosto = null,
+                        IdPunto_Cargo = null,
+                        IdPunto_cargo_grupo = null
+                    }
                 };
+
             }
             else
             {

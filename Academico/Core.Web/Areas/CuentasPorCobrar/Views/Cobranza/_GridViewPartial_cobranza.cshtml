@@ -69,7 +69,7 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "cr_estado")) == "A")
+                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "cr_estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "IdCobro_tipo")) != "NTCR")
                 {
                     ViewContext.Writer.Write(
                 Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdCobro = DataBinder.Eval(tc.DataItem, "IdCobro") }) + "&nbsp;" +

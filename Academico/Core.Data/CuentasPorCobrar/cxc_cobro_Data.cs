@@ -642,66 +642,86 @@ namespace Core.Data.CuentasPorCobrar
         {
             try
             {
-                using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
+                EntitiesFacturacion dbFac = new EntitiesFacturacion();
+                EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar();
+
+
+                var Entity = Context.cxc_cobro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro == info.IdCobro).FirstOrDefault();
+                if (Entity == null) return false;
+
+                if (Entity.cr_estado == "I") return true;
+
+                Entity.cr_estado = "I";
+                var cobros_det = Context.cxc_cobro_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro == info.IdCobro).ToList();
+                foreach (var item in cobros_det)
                 {
-                    var Entity = Context.cxc_cobro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro == info.IdCobro).FirstOrDefault();
-                    if (Entity == null) return false;
+                    DataNotaCredito.anularDB(new fa_notaCreDeb_Info
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdSucursal = item.IdSucursal,
+                        IdBodega = item.IdBodega_Cbte ?? 0,
+                        IdNota = item.IdNotaCredito ?? 0,
+                        IdUsuarioUltAnu = info.IdUsuarioUltAnu,
+                        MotiAnula = info.MotiAnula
+                    });
+                    item.estado = "I";
+                }
 
-                    if (Entity.cr_estado == "I") return true;
+                var relacion = Context.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
+                if (relacion != null)
+                {
+                    ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
+                    if (odata_ct.anularDB(new ct_cbtecble_Info
+                    {
+                        IdEmpresa = relacion.ct_IdEmpresa,
+                        IdTipoCbte = relacion.ct_IdTipoCbte,
+                        IdCbteCble = relacion.ct_IdCbteCble,
+                        IdUsuario = info.IdUsuarioUltAnu,
+                        IdUsuarioAnu = info.IdUsuarioUltAnu
+                    }))
+                    {
+                        if (Entity.IdCobro_tipo != null)
+                        {
+                            var cobro_tipo = Context.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == Entity.IdCobro_tipo).FirstOrDefault();
 
-                    Entity.cr_estado = "I";
-                    var cobros_det = Context.cxc_cobro_det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro == info.IdCobro).ToList();
-                    foreach (var item in cobros_det)
+                            if (cobro_tipo.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
+                            {
+                                caj_Caja_Movimiento_Data odata_caj = new caj_Caja_Movimiento_Data();
+                                odata_caj.anularDB(new Info.Caja.caj_Caja_Movimiento_Info
+                                {
+                                    IdEmpresa = relacion.ct_IdEmpresa,
+                                    IdTipocbte = relacion.ct_IdTipoCbte,
+                                    IdCbteCble = relacion.ct_IdCbteCble,
+                                    IdUsuario = info.IdUsuarioUltAnu,
+                                    IdUsuario_Anu = info.IdUsuarioUltAnu
+                                });
+                            }
+                        }
+                    }
+                }
+
+
+                var NCPorCobro = dbFac.fa_notaCreDeb_x_cxc_cobro.Where(q => q.IdEmpresa_cbr == info.IdEmpresa && q.IdSucursal_cbr == info.IdSucursal && q.IdCobro_cbr == info.IdCobro).FirstOrDefault();
+                if (NCPorCobro != null)
+                {
+                    if (Entity.cr_Saldo > 0)
                     {
                         DataNotaCredito.anularDB(new fa_notaCreDeb_Info
                         {
-                            IdEmpresa = item.IdEmpresa,
-                            IdSucursal = item.IdSucursal,
-                            IdBodega = item.IdBodega_Cbte ?? 0,
-                            IdNota = item.IdNotaCredito ?? 0,
+                            IdEmpresa = NCPorCobro.IdEmpresa_nt,
+                            IdSucursal = NCPorCobro.IdSucursal_nt,
+                            IdBodega = NCPorCobro.IdBodega_nt,
+                            IdNota = NCPorCobro.IdNota_nt,
                             IdUsuarioUltAnu = info.IdUsuarioUltAnu,
                             MotiAnula = info.MotiAnula
                         });
-                        item.estado = "I";
                     }
-
-                    var relacion = Context.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
-                    if (relacion != null)
-                    {
-                        ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
-                        if (odata_ct.anularDB(new ct_cbtecble_Info
-                        {
-                            IdEmpresa = relacion.ct_IdEmpresa,
-                            IdTipoCbte = relacion.ct_IdTipoCbte,
-                            IdCbteCble = relacion.ct_IdCbteCble,
-                            IdUsuario = info.IdUsuarioUltAnu,
-                            IdUsuarioAnu = info.IdUsuarioUltAnu
-                        }))
-                        {
-                            if (Entity.IdCobro_tipo != null)
-                            {
-                                var cobro_tipo = Context.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == Entity.IdCobro_tipo).FirstOrDefault();
-
-                                if (cobro_tipo.tc_Tomar_Cta_Cble_De == cl_enumeradores.eTipoCobroTomaCuentaDe.CAJA.ToString())
-                                {
-                                    caj_Caja_Movimiento_Data odata_caj = new caj_Caja_Movimiento_Data();
-                                    odata_caj.anularDB(new Info.Caja.caj_Caja_Movimiento_Info
-                                    {
-                                        IdEmpresa = relacion.ct_IdEmpresa,
-                                        IdTipocbte = relacion.ct_IdTipoCbte,
-                                        IdCbteCble = relacion.ct_IdCbteCble,
-                                        IdUsuario = info.IdUsuarioUltAnu,
-                                        IdUsuario_Anu = info.IdUsuarioUltAnu
-                                    });
-                                }
-                            }
-                        }
-                    }             
-
-                    Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
-                    Entity.Fecha_UltAnu = DateTime.Now;
-                    Context.SaveChanges();
                 }
+
+                Entity.IdUsuarioUltAnu = info.IdUsuarioUltAnu;
+                Entity.Fecha_UltAnu = DateTime.Now;
+                Context.SaveChanges();
+
 
                 return true;
             }
@@ -1287,8 +1307,7 @@ namespace Core.Data.CuentasPorCobrar
                 throw;
             }
         }
-
-
+        
         public double GetSaldoAlumno(int IdEmpresa, decimal IdAlumno)
         {
             try
