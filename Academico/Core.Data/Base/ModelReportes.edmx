@@ -76,7 +76,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_003' no tien
           <Property Name="CorreoRepresentante" Type="varchar" MaxLength="500" />
           <Property Name="DireccionRepresentante" Type="varchar" MaxLength="150" />
           <Property Name="NacionalidadRepresentante" Type="varchar" MaxLength="50" />
-          <Property Name="Sector" Type="varchar" MaxLength="500" />
+          <Property Name="SectorRepresentante" Type="varchar" MaxLength="500" />
+          <Property Name="CelularRepresentante" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -719,7 +720,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_004' no tien
     [VWACA_003].[CorreoRepresentante] AS [CorreoRepresentante], 
     [VWACA_003].[DireccionRepresentante] AS [DireccionRepresentante], 
     [VWACA_003].[NacionalidadRepresentante] AS [NacionalidadRepresentante], 
-    [VWACA_003].[Sector] AS [Sector]
+    [VWACA_003].[SectorRepresentante] AS [SectorRepresentante], 
+    [VWACA_003].[CelularRepresentante] AS [CelularRepresentante]
     FROM [Academico].[VWACA_003] AS [VWACA_003]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWACA_004" EntityType="Self.VWACA_004" store:Type="Views" store:Schema="Academico">
@@ -1118,9 +1120,9 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_004' no tien
           <EntitySet Name="VWACA_004" EntityType="ModelReportes.VWACA_004" />
           <EntitySet Name="VWCXC_002" EntityType="ModelReportes.VWCXC_002" />
           <EntitySet Name="VWCXC_002_Aplicaciones" EntityType="ModelReportes.VWCXC_002_Aplicaciones" />
-          <EntitySet Name="VWACA_003" EntityType="ModelReportes.VWACA_003" />
           <EntitySet Name="VWACA_006" EntityType="ModelReportes.VWACA_006" />
           <EntitySet Name="VWACA_007" EntityType="ModelReportes.VWACA_007" />
+          <EntitySet Name="VWACA_003" EntityType="ModelReportes.VWACA_003" />
         </EntityContainer>
         <EntityType Name="VWACA_002">
           <Key>
@@ -1712,39 +1714,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_004' no tien
           <Property Name="dc_ValorProntoPago" Type="Double" />
           <Property Name="dc_ValorPago" Type="Double" Nullable="false" />
         </EntityType>
-        <EntityType Name="VWACA_003">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMatricula" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="NomRepresentante" />
-            <PropertyRef Name="CedulaRepresentante" />
-            <PropertyRef Name="NomSeFactura" />
-            <PropertyRef Name="CedulaSeFactura" />
-            <PropertyRef Name="NomAlumno" />
-            <PropertyRef Name="NomCurso" />
-            <PropertyRef Name="DescripcionActual" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="NomRepresentante" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CedulaRepresentante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NomSeFactura" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CedulaSeFactura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NomAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CedulaAlumno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="DescripcionActual" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DescripcionAnterior" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="DescripcionPensiones" Type="String" MaxLength="91" FixedLength="false" Unicode="false" />
-          <Property Name="CorreoSeFactura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="CorreoRepresentante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="DireccionRepresentante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="NacionalidadRepresentante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Sector" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="VWACA_006">
           <Key>
             <PropertyRef Name="NomSede" />
@@ -1840,6 +1809,40 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_004' no tien
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="NomPlantilla" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VWACA_003">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="NomRepresentante" />
+            <PropertyRef Name="CedulaRepresentante" />
+            <PropertyRef Name="NomSeFactura" />
+            <PropertyRef Name="CedulaSeFactura" />
+            <PropertyRef Name="NomAlumno" />
+            <PropertyRef Name="NomCurso" />
+            <PropertyRef Name="DescripcionActual" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NomRepresentante" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CedulaRepresentante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomSeFactura" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CedulaSeFactura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CedulaAlumno" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionActual" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionAnterior" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionPensiones" Type="String" MaxLength="91" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoSeFactura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoRepresentante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionRepresentante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NacionalidadRepresentante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SectorRepresentante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CelularRepresentante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2301,31 +2304,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_004' no tien
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VWACA_003">
-            <EntityTypeMapping TypeName="ModelReportes.VWACA_003">
-              <MappingFragment StoreEntitySet="VWACA_003">
-                <ScalarProperty Name="Sector" ColumnName="Sector" />
-                <ScalarProperty Name="NacionalidadRepresentante" ColumnName="NacionalidadRepresentante" />
-                <ScalarProperty Name="DireccionRepresentante" ColumnName="DireccionRepresentante" />
-                <ScalarProperty Name="CorreoRepresentante" ColumnName="CorreoRepresentante" />
-                <ScalarProperty Name="CorreoSeFactura" ColumnName="CorreoSeFactura" />
-                <ScalarProperty Name="DescripcionPensiones" ColumnName="DescripcionPensiones" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="DescripcionAnterior" ColumnName="DescripcionAnterior" />
-                <ScalarProperty Name="DescripcionActual" ColumnName="DescripcionActual" />
-                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
-                <ScalarProperty Name="CedulaAlumno" ColumnName="CedulaAlumno" />
-                <ScalarProperty Name="NomAlumno" ColumnName="NomAlumno" />
-                <ScalarProperty Name="CedulaSeFactura" ColumnName="CedulaSeFactura" />
-                <ScalarProperty Name="NomSeFactura" ColumnName="NomSeFactura" />
-                <ScalarProperty Name="CedulaRepresentante" ColumnName="CedulaRepresentante" />
-                <ScalarProperty Name="NomRepresentante" ColumnName="NomRepresentante" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VWACA_006">
             <EntityTypeMapping TypeName="ModelReportes.VWACA_006">
               <MappingFragment StoreEntitySet="VWACA_006">
@@ -2380,6 +2358,32 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_004' no tien
                 <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
                 <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
                 <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWACA_003">
+            <EntityTypeMapping TypeName="ModelReportes.VWACA_003">
+              <MappingFragment StoreEntitySet="VWACA_003">
+                <ScalarProperty Name="CelularRepresentante" ColumnName="CelularRepresentante" />
+                <ScalarProperty Name="SectorRepresentante" ColumnName="SectorRepresentante" />
+                <ScalarProperty Name="NacionalidadRepresentante" ColumnName="NacionalidadRepresentante" />
+                <ScalarProperty Name="DireccionRepresentante" ColumnName="DireccionRepresentante" />
+                <ScalarProperty Name="CorreoRepresentante" ColumnName="CorreoRepresentante" />
+                <ScalarProperty Name="CorreoSeFactura" ColumnName="CorreoSeFactura" />
+                <ScalarProperty Name="DescripcionPensiones" ColumnName="DescripcionPensiones" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="DescripcionAnterior" ColumnName="DescripcionAnterior" />
+                <ScalarProperty Name="DescripcionActual" ColumnName="DescripcionActual" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="CedulaAlumno" ColumnName="CedulaAlumno" />
+                <ScalarProperty Name="NomAlumno" ColumnName="NomAlumno" />
+                <ScalarProperty Name="CedulaSeFactura" ColumnName="CedulaSeFactura" />
+                <ScalarProperty Name="NomSeFactura" ColumnName="NomSeFactura" />
+                <ScalarProperty Name="CedulaRepresentante" ColumnName="CedulaRepresentante" />
+                <ScalarProperty Name="NomRepresentante" ColumnName="NomRepresentante" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

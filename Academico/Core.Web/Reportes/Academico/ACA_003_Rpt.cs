@@ -56,6 +56,7 @@ namespace Core.Web.Reportes.Academico
             var PeriodoFin = "";
             var NomAnioLectivoAnterior = "";
             var CorreoRepLegal = "";
+            var CorreoSeFactura = "";
 
             if (info != null)
             {
@@ -71,7 +72,10 @@ namespace Core.Web.Reportes.Academico
                 DescripcionPensiones = info.DescripcionPensiones;
                 DireccionRepLegal = info.Direccion;
                 NacionalidadRepLegal = info.NacionalidadRepresentante;
-                SectorRepLegal = info.Sector;
+                SectorRepLegal = info.SectorRepresentante;
+                CorreoRepLegal = info.CorreoRepresentante;
+                CorreoSeFactura = info.CorreoSeFactura;
+                TelefonoRepLegal = info.CelularRepresentante;
                 lst_rpt.Add(info);
             }
 
