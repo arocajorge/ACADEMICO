@@ -33,6 +33,7 @@ namespace Core.Info.Academico
         #region Campos que no existen en la tabla
         public string AnioLectivo { get; set; }
         public string Alumno { get; set; }
+        public string NomCatalogo { get; set; }
         #endregion
     }
 }

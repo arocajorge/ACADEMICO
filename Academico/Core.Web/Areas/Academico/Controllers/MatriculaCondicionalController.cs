@@ -91,11 +91,11 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Metodos
         private bool validar(aca_CondicionalMatricula_Info info, ref string msg)
         {
-            var lst_registros = bus_condicional.GetList_Validacion(info.IdEmpresa, info.IdAnio, info.IdAlumno);
+            var lst_registros = bus_condicional.GetList_ExisteCondicional(info.IdEmpresa, info.IdAnio, info.IdAlumno, info.IdCatalogoCONDIC);
 
             if (lst_registros.Count() > 0)
             {
-                msg = "Ya existe una matrícula condicional para este alumno en el año lectivo seleccionado";
+                msg = "Ya existe una matrícula condicional de ese tipo para el alumno en el año lectivo seleccionado";
                 return false;
             }
 

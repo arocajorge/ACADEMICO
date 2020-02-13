@@ -57,8 +57,10 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Rubro_Periodo_Bus bus_anio_rubro_periodo = new aca_AnioLectivo_Rubro_Periodo_Bus();
         cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
         tb_mes_Bus bus_mes = new tb_mes_Bus();
+        aca_CondicionalMatricula_Bus bus_matricula_condicional = new aca_CondicionalMatricula_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
+        string mensajeInfo = string.Empty;
         #endregion
 
         #region Index
@@ -494,7 +496,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 var existe_matricula = bus_matricula.GetInfo_ExisteMatricula(IdEmpresa, IdAnio, IdAlumno);
                 if (existe_matricula != null)
                 {
-                    mensaje += "El alumno ya se encuentra matriculado en el año lectivo seleccionado.</ br > ";
+                    mensaje += "El estudiante ya se encuentra matriculado en el año lectivo seleccionado.</ br > ";
                     Validacion = 1;
                 }
             }
@@ -509,7 +511,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     var IdUsuario = (string.IsNullOrEmpty(NegarMatricula.IdUsuarioModificacion) ? NegarMatricula.IdUsuarioCreacion: NegarMatricula.IdUsuarioCreacion);
                     if (PermitirMatricula == null)
                     {
-                        mensaje += "No se puede matricular al alumno, Usuario: "+ IdUsuario + " , detalle de negacion: " + NegarMatricula.Observacion+".</br>";
+                        mensaje += "El estudiante tiene negación de matrícula. Observación: " + NegarMatricula.Observacion+ " , usuario: " + IdUsuario + " </br>";
                     }
                 }
 
@@ -518,11 +520,31 @@ namespace Core.Web.Areas.Academico.Controllers
                 if (lst_DeudaAlumno.Count()>0)
                 {
                     var Saldo = Math.Round(lst_DeudaAlumno.Sum(q => q.cr_saldo), 2, MidpointRounding.AwayFromZero).ToString("C2");
-                    mensaje += "El alumno tiene saldo pendiente: "+Saldo + ".</br>"; 
+                    mensaje += "El estudiante tiene saldo pendiente: "+Saldo + ".</br>"; 
                 }
-            }            
 
-            return Json(mensaje, JsonRequestBehavior.AllowGet);
+                var ObsMatriculaCondicional = "";
+                List<aca_CondicionalMatricula_Info> lst_MatriculaCondicional = bus_matricula_condicional.GetList_Matricula(IdEmpresa, IdAnio, IdAlumno);
+
+                if (lst_MatriculaCondicional.Count()>0)
+                {
+                    var cant = lst_MatriculaCondicional.Count();
+                    var cont = 0; 
+                    foreach (var item in lst_MatriculaCondicional)
+                    {
+                        ObsMatriculaCondicional += item.Observacion;
+                        if (cont < (cant-1))
+                        {
+                            ObsMatriculaCondicional = ObsMatriculaCondicional + " - ";
+                        }
+                        cont++;
+                    }
+                    mensajeInfo = "El estudiante tiene matrícula condicional. Observación: "+ObsMatriculaCondicional;
+                }
+
+            }
+
+            return Json(new { msg = mensaje , msgInf = mensajeInfo }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult guardar(DateTime Fecha, int IdEmpresa = 0, int IdAnio = 0, decimal IdAlumno = 0, string IdComboCurso = "", int IdParalelo = 0, int IdPlantilla = 0,

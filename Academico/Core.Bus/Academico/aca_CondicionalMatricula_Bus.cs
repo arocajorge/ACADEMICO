@@ -25,11 +25,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public List<aca_CondicionalMatricula_Info> GetList_Validacion(int IdEmpresa, int IdAnio, decimal IdAlumno)
+        public List<aca_CondicionalMatricula_Info> GetList_Matricula(int IdEmpresa, int IdAnio, decimal IdAlumno)
         {
             try
             {
-                return odata.getList_Validacion(IdEmpresa, IdAnio, IdAlumno);
+                return odata.getList_Matricula(IdEmpresa, IdAnio, IdAlumno);
             }
             catch (Exception)
             {
@@ -37,6 +37,20 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public List<aca_CondicionalMatricula_Info> GetList_ExisteCondicional(int IdEmpresa, int IdAnio, decimal IdAlumno, int IdCatalogoCONDIC)
+        {
+            try
+            {
+                return odata.getList_ExisteCondicional(IdEmpresa, IdAnio, IdAlumno, IdCatalogoCONDIC);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public aca_CondicionalMatricula_Info GetInfo(int IdEmpresa, int IdCondicional)
         {
             try
@@ -50,18 +64,6 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_CondicionalMatricula_Info GetInfo_ByMatricula(int IdEmpresa, int IdAnio, decimal IdAlumno, int IdCondicional)
-        {
-            try
-            {
-                return odata.getInfo(IdEmpresa, IdAnio, IdAlumno, IdCondicional);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
         public bool GuardarDB(aca_CondicionalMatricula_Info info)
         {
             try

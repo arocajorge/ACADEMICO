@@ -169,6 +169,7 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_CondicionalMatricula_aca_Alumno" />
         <AssociationConnector Association="ModelAcademico.FK_aca_CondicionalMatricula_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_CondicionalMatricula_aca_Catalogo" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_CondicionalMatricula" Width="1.5" PointX="7.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

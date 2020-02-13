@@ -18,7 +18,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.aca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio
+                    Lista = Context.vwaca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio
                     && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_CondicionalMatricula_Info
                     {
                         IdEmpresa = q.IdEmpresa,
@@ -28,10 +28,10 @@ namespace Core.Data.Academico
                         IdCatalogoCONDIC = q.IdCatalogoCONDIC,
                         Fecha = q.Fecha,
                         Observacion = q.Observacion,
-                        //AnioLectivo = q.Descripcion,
-                        //Alumno = q.pe_nombreCompleto,
+                        AnioLectivo = q.Descripcion,
+                        Alumno = q.pe_nombreCompleto,
                         Estado = q.Estado,
-                        IdUsuarioCreacion = q.IdUsuarioCreacion
+                        NomCatalogo = q.NomCatalogo
                     }).ToList();
                 }
                 return Lista;
@@ -42,7 +42,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public List<aca_CondicionalMatricula_Info> getList_Validacion(int IdEmpresa, int IdAnio, decimal IdAlumno)
+        public List<aca_CondicionalMatricula_Info> getList_ExisteCondicional(int IdEmpresa, int IdAnio, decimal IdAlumno, int IdCatalogoCONDIC)
         {
             try
             {
@@ -50,7 +50,8 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.aca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno && q.Estado == true).Select(q => new aca_CondicionalMatricula_Info
+                    Lista = Context.aca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno 
+                    && q.IdCatalogoCONDIC == IdCatalogoCONDIC  && q.Estado == true).Select(q => new aca_CondicionalMatricula_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdAnio = q.IdAnio,
@@ -70,6 +71,34 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_CondicionalMatricula_Info> getList_Matricula(int IdEmpresa, int IdAnio, decimal IdAlumno)
+        {
+            try
+            {
+                List<aca_CondicionalMatricula_Info> Lista = new List<aca_CondicionalMatricula_Info>();
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.aca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno
+                    && q.Estado == true).Select(q => new aca_CondicionalMatricula_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdAnio = q.IdAnio,
+                        IdCondicional = q.IdCondicional,
+                        IdAlumno = q.IdAlumno,
+                        IdCatalogoCONDIC = q.IdCatalogoCONDIC,
+                        Fecha = q.Fecha,
+                        Observacion = q.Observacion,
+                        Estado = q.Estado
+                    }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public aca_CondicionalMatricula_Info getInfo(int IdEmpresa, int IdCondicional)
         {
             try
@@ -103,41 +132,6 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_CondicionalMatricula_Info getInfo(int IdEmpresa, int IdAnio, decimal IdAlumno, int IdCondicional)
-        {
-            try
-            {
-                aca_CondicionalMatricula_Info info;
-
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno
-                    && q.IdCondicional == IdCondicional && q.Estado == true).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
-
-                    info = new aca_CondicionalMatricula_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdCondicional = Entity.IdCondicional,
-                        IdAnio = Entity.IdAnio,
-                        IdAlumno = Entity.IdAlumno,
-                        IdCatalogoCONDIC = Entity.IdCatalogoCONDIC,
-                        Fecha = Entity.Fecha,
-                        IdUsuarioCreacion = Entity.IdUsuarioCreacion,
-                        IdUsuarioModificacion = Entity.IdUsuarioModificacion,
-                        Observacion = Entity.Observacion
-                    };
-                }
-
-                return info;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
         public decimal getId(int IdEmpresa)
         {
             try

@@ -136,6 +136,15 @@
             </div>
         </div>
     }
+    <div class="row" id="MensajeInformativo" hidden>
+        <div class="col-md-12">
+            <div class="callout callout-info">
+                <h4>
+                    <i class="icon fa fa-exclamation"></i> <label id="MensajeInfo"></label>
+                </h4>
+            </div>
+        </div>
+    </div>
     <div class="row" id="MensajeError" hidden>
         <div class="col-md-12">
             <div class="alert alert-warning alert-dismissible">
@@ -458,7 +467,6 @@
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
-                    console.log(data);
                     if(data.msg == ""){
                         $("#MensajeError").hide();
                         var win = window.open(location + "/Academico/Matricula/Modificar?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdMatricula=" + data.Matricula, '_blank');
@@ -593,9 +601,17 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if(data!= ""){
+                if(data.msgInf!=""){
+                    $("#MensajeInformativo").show();
+                    $("#MensajeInfo").html(data.msgInf);
+                }
+                else{
+                    $("#MensajeInformativo").hide();
+                }
+
+                if(data.msg!= ""){
                     $("#MensajeError").show();
-                    $("#Mensaje").html(data);
+                    $("#Mensaje").html(data.msg);
 
                     $("#btn_guardar").hide();
                 }
