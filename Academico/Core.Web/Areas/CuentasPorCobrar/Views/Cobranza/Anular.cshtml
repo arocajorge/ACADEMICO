@@ -150,57 +150,9 @@
         GridView_cobranza_det.PerformCallback();
     }
 
-    function SetCliente(){
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdAlumno: IdAlumno.GetValue()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("SetCliente", "Cobranza",new { Area = "CuentasPorCobrar"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                IdCliente.SetValue(data);
+  
 
-                get_info_cliente();
-                ValidarCliente();
-                cargar_contactos();
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-    function SetCliente(){
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdAlumno: IdAlumno.GetValue()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("SetCliente", "Cobranza",new { Area = "CuentasPorCobrar"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                IdCliente.SetValue(data);
-
-                get_info_cliente();
-                ValidarCliente();
-                cargar_contactos();
-            },
-            error: function (error) {
-            }
-        });
-    }
+  
 </script>
 
 
@@ -256,13 +208,6 @@
                     <label for="IdCliente">Alumno*</label>
                     @Html.Partial("_CmbAlumno_Cobranza", Model.IdAlumno)
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdCliente">Cliente*</label>
-                    @Html.Partial("_CmbCliente_Cobranza", Model.IdEntidad)
-                    @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-6">
