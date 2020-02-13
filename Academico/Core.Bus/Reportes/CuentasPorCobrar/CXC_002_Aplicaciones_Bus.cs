@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace Core.Bus.Reportes.CuentasPorCobrar
 {
-    public class CXC_002_diario_Bus
+    public class CXC_002_Aplicaciones_Bus
     {
-        CXC_002_diario_Data odata = new CXC_002_diario_Data();
+        CXC_002_Aplicaciones_Data odata = new CXC_002_Aplicaciones_Data();
     
-        public List<CXC_002_diario_Info> get_list(int cbr_IdEmpresa, int cbr_IdSucursal, decimal cbr_IdCobro)
+        public List<CXC_002_Aplicaciones_Info> get_list(int cbr_IdEmpresa, int cbr_IdSucursal, decimal cbr_IdCobro)
         {
             try
             {

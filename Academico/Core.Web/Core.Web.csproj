@@ -364,11 +364,11 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Rpt.Designer.cs">
       <DependentUpon>CXC_001_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Rpt.cs">
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Aplicaciones_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_diario_Rpt.Designer.cs">
-      <DependentUpon>CXC_002_diario_Rpt.cs</DependentUpon>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Aplicaciones_Rpt.Designer.cs">
+      <DependentUpon>CXC_002_Aplicaciones_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Rpt.cs">
       <SubType>Component</SubType>
@@ -8338,8 +8338,8 @@
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_001_Rpt.resx">
       <DependentUpon>CXC_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_002_diario_Rpt.resx">
-      <DependentUpon>CXC_002_diario_Rpt.cs</DependentUpon>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_002_Aplicaciones_Rpt.resx">
+      <DependentUpon>CXC_002_Aplicaciones_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_002_Rpt.resx">
       <DependentUpon>CXC_002_Rpt.cs</DependentUpon>

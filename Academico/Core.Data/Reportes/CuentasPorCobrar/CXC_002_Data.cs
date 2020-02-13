@@ -14,41 +14,39 @@ namespace Core.Data.Reportes.CuentasPorCobrar
         {
             try
             {
-                List<CXC_002_Info> Lista;
+                List<CXC_002_Info> Lista = new List<CXC_002_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Lista = (from q in Context.VWCXC_002
-                             where q.IdEmpresa == IdEmpresa
-                             && q.IdSucursal == IdSucursal
-                             && q.IdCobro == IdCobro
-                             select new CXC_002_Info
-                             {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdSucursal = q.IdSucursal,
-                                 IdCobro = q.IdCobro,
-                                 secuencial = q.secuencial,
-                                 IdBodega_Cbte = q.IdBodega_Cbte,
-                                 IdCbte_vta_nota = q.IdCbte_vta_nota,
-                                 dc_TipoDocumento = q.dc_TipoDocumento,
-                                 dc_ValorPago = q.dc_ValorPago,
-                                 tc_descripcion = q.tc_descripcion,
-                                 IdPersona = q.IdPersona,
-                                 pe_cedulaRuc = q.pe_cedulaRuc,
-                                 pe_nombreCompleto = q.pe_nombreCompleto,
-                                 vt_fecha = q.vt_fecha,
-                                 vt_NumFactura = q.vt_NumFactura,
-                                 ObservacionCobro = q.ObservacionCobro,
-                                 ObservacionFact = q.ObservacionFact,
-                                 cr_estado = q.cr_estado,
-                                 cr_fecha = q.cr_fecha,
-                                 cr_NumDocumento = q.cr_NumDocumento,
-                                 cr_TotalCobro = q.cr_TotalCobro,
-                                 Su_Descripcion = q.Su_Descripcion,
-                                 ba_descripcion = q.ba_descripcion,
-                                 Correo = q.Correo,
-                                 Direccion = q.Direccion,
-                                 NombreContacto = q.NombreContacto
-                             }).ToList();
+                    var lst = Context.VWCXC_002.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdCobro == IdCobro).ToList();
+                    foreach (var item in lst)
+                    {
+                        Lista.Add(new CXC_002_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdSucursal = item.IdSucursal,
+                            IdCobro = item.IdCobro,
+                            IdAlumno = item.IdAlumno,
+                            pe_nombreCompleto = item.pe_nombreCompleto,
+                            cr_estado = item.cr_estado,
+                            cr_fecha = item.cr_fecha,
+                            tc_descripcion = item.tc_descripcion,
+                            CodigoAlumno = item.CodigoAlumno,
+                            cr_observacion = item.cr_observacion,
+                            NomSede = item.NomSede,
+                            NomNivel = item.NomNivel,
+                            NomJornada = item.NomJornada,
+                            NomCurso = item.NomCurso,
+                            NomParalelo = item.NomParalelo,
+                            CodigoParalelo = item.CodigoParalelo,
+                            NomPlantilla = item.NomPlantilla,
+                            cr_TotalCobro = item.cr_TotalCobro,
+                            cr_Saldo = item.cr_Saldo,
+                            NomCliente = item.NomCliente,
+                            CedulaCliente = item.CedulaCliente,
+                            cr_Banco = item.cr_Banco,
+                            cr_NumDocumento = item.cr_NumDocumento
+                        });
+                    }   
                 }
                 return Lista;
             }

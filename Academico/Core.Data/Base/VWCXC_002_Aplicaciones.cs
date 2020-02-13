@@ -12,19 +12,16 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class VWCXC_002_diario
+    public partial class VWCXC_002_Aplicaciones
     {
-        public int cbr_IdEmpresa { get; set; }
-        public int cbr_IdSucursal { get; set; }
-        public decimal cbr_IdCobro { get; set; }
         public int IdEmpresa { get; set; }
-        public int IdTipoCbte { get; set; }
-        public decimal IdCbteCble { get; set; }
-        public int secuencia { get; set; }
-        public string IdCtaCble { get; set; }
-        public string pc_Cuenta { get; set; }
-        public double dc_Valor { get; set; }
-        public double dc_Valor_Debe { get; set; }
-        public Nullable<double> dc_Valor_Haber { get; set; }
+        public int IdSucursal { get; set; }
+        public decimal IdCobro { get; set; }
+        public int secuencial { get; set; }
+        public string dc_TipoDocumento { get; set; }
+        public string vt_NumFactura { get; set; }
+        public Nullable<decimal> Total { get; set; }
+        public Nullable<double> dc_ValorProntoPago { get; set; }
+        public double dc_ValorPago { get; set; }
     }
 }

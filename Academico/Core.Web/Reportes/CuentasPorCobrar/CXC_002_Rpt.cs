@@ -32,5 +32,13 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             List<CXC_002_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdCobro);
             this.DataSource = lst_rpt;
         }
+
+        private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdSucursal"].Value = p_IdSucursal.Value == null ? 0 : Convert.ToInt32(p_IdSucursal.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdCobro"].Value = p_IdCobro.Value == null ? 0 : Convert.ToDecimal(p_IdCobro.Value);
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
+        }
     }
 }
