@@ -431,6 +431,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
+                <div class="form-group">
+                    <label for="pf_observacion">Observación</label>
+                    @Html.TextBoxFor(q => q.cr_ObservacionPantalla, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cr_ObservacionPantalla, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
                 <button type="button" class="btn btn-primary" title="Buscar facturas" id="btn_buscar" onclick="MostrarModal();">
                     <i class="fa fa-search"></i>
                 </button>

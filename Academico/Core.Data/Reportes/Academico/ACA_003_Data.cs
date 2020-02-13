@@ -67,7 +67,13 @@ namespace Core.Data.Reportes.Academico
                         NomAlumno = q.NomAlumno,
                         NomCurso = q.NomCurso,
                         NomRepresentante = q.NomRepresentante,
-                        NomSeFactura = q.NomSeFactura
+                        NomSeFactura = q.NomSeFactura,
+                        DireccionRepresentante = q.DireccionRepresentante,
+                        NacionalidadRepresentante = q.NacionalidadRepresentante,
+                        SectorRepresentante = q.SectorRepresentante,
+                        CorreoRepresentante = q.CorreoRepresentante,
+                        CelularRepresentante= q.CelularRepresentante,
+                        CorreoSeFactura = q.CorreoSeFactura
 
                     }).FirstOrDefault();
                 }

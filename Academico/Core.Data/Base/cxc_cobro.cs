@@ -37,6 +37,7 @@ namespace Core.Data.Base
         public System.DateTime cr_fechaDocu { get; set; }
         public System.DateTime cr_fechaCobro { get; set; }
         public string cr_observacion { get; set; }
+        public string cr_ObservacionPantalla { get; set; }
         public string cr_Banco { get; set; }
         public string cr_cuenta { get; set; }
         public string cr_NumDocumento { get; set; }

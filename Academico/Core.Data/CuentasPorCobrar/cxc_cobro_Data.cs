@@ -50,8 +50,8 @@ namespace Core.Data.CuentasPorCobrar
                                  Su_Descripcion = q.Su_Descripcion,
                                  cr_observacion = q.cr_observacion,
                                  nom_Motivo_tipo_cobro = q.nom_Motivo_tipo_cobro,
-                                cr_NumDocumento = q.cr_NumDocumento,
-
+                                 cr_NumDocumento = q.cr_NumDocumento,
+                                 //cr_ObservacionPantalla = q.cr_ObservacionPantalla,
                                  EstadoBool = q.cr_estado == "A" ? true : false
                              }).ToList();
                 }
@@ -169,7 +169,8 @@ namespace Core.Data.CuentasPorCobrar
                         IdBanco = Entity.IdBanco,
                         IdCaja = Entity.IdCaja,
                         cr_saldo = Entity.cr_Saldo ?? 0,
-                        IdTipoNotaCredito = Entity.IdTipoNotaCredito
+                        IdTipoNotaCredito = Entity.IdTipoNotaCredito,
+                        cr_ObservacionPantalla = Entity.cr_ObservacionPantalla
                     };
                 }
 
@@ -219,6 +220,7 @@ namespace Core.Data.CuentasPorCobrar
                     IdTarjeta = info.IdTarjeta,
                     cr_Tarjeta = info.cr_Tarjeta,
                     cr_Saldo = info.cr_saldo,
+                    cr_ObservacionPantalla = info.cr_ObservacionPantalla,
                     Fecha_Transac = DateTime.Now,
                     IdUsuario = info.IdUsuario,
                     IdTipoNotaCredito = info.IdTipoNotaCredito
@@ -420,6 +422,7 @@ namespace Core.Data.CuentasPorCobrar
                 Entity.IdBanco = info.IdBanco;
                 Entity.IdCaja = info.IdCaja;
                 Entity.cr_Saldo = info.cr_saldo;
+                Entity.cr_ObservacionPantalla = info.cr_ObservacionPantalla;
                 Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                 Entity.Fecha_UltMod = DateTime.Now;
                 #endregion
