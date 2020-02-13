@@ -33,8 +33,6 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
-            this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
-            this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
             this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
@@ -42,6 +40,8 @@
             this.pivotGridField4 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdSede = new DevExpress.XtraReports.Parameters.Parameter();
@@ -70,14 +70,6 @@
             this.xrPivotGrid1});
             this.ReportHeader.HeightF = 151.4584F;
             this.ReportHeader.Name = "ReportHeader";
-            // 
-            // ReportFooter
-            // 
-            this.ReportFooter.Name = "ReportFooter";
-            // 
-            // PageFooter
-            // 
-            this.PageFooter.Name = "PageFooter";
             // 
             // xrPivotGrid1
             // 
@@ -134,7 +126,7 @@
             // 
             this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField5.AreaIndex = 0;
-            this.pivotGridField5.FieldName = "pe_sexo";
+            this.pivotGridField5.FieldName = "NomSexo";
             this.pivotGridField5.Name = "pivotGridField5";
             // 
             // pivotGridField6
@@ -143,6 +135,14 @@
             this.pivotGridField6.AreaIndex = 0;
             this.pivotGridField6.FieldName = "Cantidad";
             this.pivotGridField6.Name = "pivotGridField6";
+            // 
+            // ReportFooter
+            // 
+            this.ReportFooter.Name = "ReportFooter";
+            // 
+            // PageFooter
+            // 
+            this.PageFooter.Name = "PageFooter";
             // 
             // objectDataSource1
             // 

@@ -42,7 +42,9 @@ namespace Core.Data.Reportes.Academico
                         OrdenJornada = q.OrdenJornada,
                         OrdenCurso = q.OrdenCurso,
                         NomParalelo = q.NomParalelo,
-                        pe_sexo = q.pe_sexo
+                        pe_sexo = q.pe_sexo,
+                        NomSexo=q.NomSexo,
+                        Cantidad = q.Cantidad
 
                     }).ToList();
                 }
