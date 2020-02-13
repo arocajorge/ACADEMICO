@@ -29,8 +29,8 @@
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_ConciliacionNotaCredito" Width="1.5" PointX="14.375" PointY="13.25" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_ConciliacionNotaCreditoDet" Width="1.5" PointX="12.375" PointY="18.25" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_ConciliacionNotaCreditoDet_cxc_ConciliacionNotaCredito" />
-        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro" Width="1.5" PointX="5.25" PointY="2.375" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro" Width="1.5" PointX="5.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_cobro" Width="1.5" PointX="5.25" PointY="2.25" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_cxc_cobro_tipo" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_det_cxc_cobro" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_x_caj_Caja_Movimiento_cxc_cobro" />
