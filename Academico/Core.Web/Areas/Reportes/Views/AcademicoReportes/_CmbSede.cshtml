@@ -12,13 +12,12 @@
         settings.Properties.TextField = "NomSede";
         settings.Properties.TextFormatString = "[{0}] - {1}";
         settings.Properties.ValueField = "IdSede";
-        settings.Properties.ValueType = typeof(decimal);
-        settings.Properties.Columns.Add("p_IdSede", "ID", 10);
+        settings.Properties.ValueType = typeof(int);
+        settings.Properties.Columns.Add("IdSede", "ID", 10);
         settings.Properties.Columns.Add("NomSede", "Sede", 70);
         settings.Properties.NullText = "== Seleccione ==";
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
         settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue(); e.customArgs['IdSede'] = IdSede.GetValue(); }";
-    })//.BindList(new Core.Web.Areas.Reportes.Controllers.AcademicoReportesController().get_list_bajo_demanda_alumno, new Core.Web.Areas.Reportes.Controllers.AcademicoReportesController().get_info_bajo_demanda_alumno)
-    .Bind(Model.GetType() == typeof(Core.Info.Helps.cl_filtros_Info) ? "" : (Model == 0 ? "" : Model));
-}
-@comboBox.GetHtml()
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdNivel.PerformCallback();}";
+    }).BindList(new Core.Bus.Academico.aca_Sede_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAnio)).Bind(Model.IdSede).GetHtml();
+ }
