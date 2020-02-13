@@ -12,13 +12,12 @@
         settings.Properties.TextField = "NomNivel";
         settings.Properties.TextFormatString = "[{0}] - {1}";
         settings.Properties.ValueField = "IdNivel";
-        settings.Properties.ValueType = typeof(decimal);
-        settings.Properties.Columns.Add("p_IdNivel", "ID", 10);
+        settings.Properties.ValueType = typeof(int);
+        settings.Properties.Columns.Add("IdNivel", "ID", 10);
         settings.Properties.Columns.Add("NomNivel", "Nivel", 70);
         settings.Properties.NullText = "== Seleccione ==";
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
         settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue(); e.customArgs['IdNivel'] = IdNivel.GetValue(); }";
-    })//.BindList(new Core.Web.Areas.Reportes.Controllers.AcademicoReportesController().get_list_bajo_demanda_alumno, new Core.Web.Areas.Reportes.Controllers.AcademicoReportesController().get_info_bajo_demanda_alumno)
-    .Bind(Model.GetType() == typeof(Core.Info.Helps.cl_filtros_Info) ? "" : (Model == 0 ? "" : Model));
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdJornada.PerformCallback();}";
+    }).BindList(new Core.Bus.Academico.aca_NivelAcademico_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAnio, Model.IdSede)).Bind(Model.IdNivel).GetHtml();
 }
-@comboBox.GetHtml()
