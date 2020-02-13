@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Core.Bus.Reportes.Academico
 {
-    public class ACA_006__Bus
+    public class ACA_006_Bus
     {
         ACA_006_Data odata = new ACA_006_Data();
         public List<ACA_006_Info> Getlist(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
