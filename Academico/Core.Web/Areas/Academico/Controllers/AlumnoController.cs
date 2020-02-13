@@ -999,24 +999,31 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             try
             {
+                var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 var Lista_Estudiantes = Lista_Alumno.get_list(model.IdTransaccionSession);
                 var Lista_Familia_Estudiantes= Lista_Familia.get_list(model.IdTransaccionSession);
-                foreach (var item in Lista_Estudiantes)
-                {
-                    if (!bus_alumno.GuardarDB(item))
-                    {
-                        ViewBag.mensaje = "Error al importar el archivo";
-                        return View(model);
-                    }
-                }
+                //foreach (var item in Lista_Estudiantes)
+                //{
+                //    if (!bus_alumno.GuardarDB(item))
+                //    {
+                //        ViewBag.mensaje = "Error al importar el archivo";
+                //        return View(model);
+                //    }
+                //}
 
                 foreach (var item in Lista_Familia_Estudiantes)
                 {
-                    if (!bus_familia.guardarDB(item))
+                    var info_alumno = bus_alumno.get_info_x_num_cedula(IdEmpresa, item.pe_cedulaRuc_Alumno);
+                    if (info_alumno != null)
                     {
-                        ViewBag.mensaje = "Error al importar el archivo";
-                        return View(model);
+                        item.IdAlumno = info_alumno.IdAlumno;
+                        if (!bus_familia.guardarDB(item))
+                        {
+                            ViewBag.mensaje = "Error al importar el archivo";
+                            return View(model);
+                        }
                     }
+
                 }
             }
             catch (Exception ex)
@@ -1370,6 +1377,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                 {
                                     IdEmpresa = IdEmpresa,
                                     IdAlumno = InfoAlumno.IdAlumno,
+                                    pe_cedulaRuc_Alumno = cedula_alumno,
                                     Secuencia = Secuencia,
                                     IdCatalogoPAREN = Convert.ToInt32(reader.GetValue(1)),
                                     IdPersona = info_persona_familia.IdPersona,
