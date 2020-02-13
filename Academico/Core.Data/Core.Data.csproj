@@ -1766,6 +1766,7 @@
     <Compile Include="Reportes\Academico\ACA_002_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_003_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_004_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_007_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_001_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Data.cs" />

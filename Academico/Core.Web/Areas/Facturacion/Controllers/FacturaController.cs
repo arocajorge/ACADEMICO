@@ -51,6 +51,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         fa_NivelDescuento_Bus bus_nivelDescuento = new fa_NivelDescuento_Bus();
         fa_catalogo_Bus bus_catalogo = new fa_catalogo_Bus();
+        aca_Sede_Bus bus_sede = new aca_Sede_Bus();
         tb_sucursal_FormaPago_x_fa_NivelDescuento_Bus bus_formapago_x_niveldescuento = new tb_sucursal_FormaPago_x_fa_NivelDescuento_Bus();
         fa_factura_det_x_facturar_List Lista_RubrosPorFacturar = new fa_factura_det_x_facturar_List();
         aca_Matricula_Rubro_Bus bus_rubro_matricula = new aca_Matricula_Rubro_Bus();
@@ -67,10 +68,12 @@ namespace Core.Web.Areas.Facturacion.Controllers
         #region Index
         public ActionResult Index()
         {
+            var IdSucursal = bus_sede.GetInfo(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede)).IdSucursal;
             cl_filtros_Info model = new cl_filtros_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
+                IdSede = Convert.ToInt32(SessionFixed.IdSede),
+                IdSucursal = IdSucursal
             };
             cargar_combos(model.IdEmpresa);
             return View(model);

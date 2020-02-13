@@ -48,5 +48,6 @@ namespace Core.Data.Base
         public Nullable<int> IdPlantilla { get; set; }
         public Nullable<int> IdRubro { get; set; }
         public Nullable<int> IdPeriodo { get; set; }
+        public Nullable<double> ValorProntoPago { get; set; }
     }
 }

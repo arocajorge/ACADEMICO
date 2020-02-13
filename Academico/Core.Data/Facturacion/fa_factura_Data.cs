@@ -30,6 +30,7 @@ namespace Core.Data.Facturacion
                              && q.IdSucursal >= IdSucursalIni
                              && q.IdSucursal <= IdSucursalFin
                              && Fecha_ini <= q.vt_fecha && q.vt_fecha <= Fecha_fin
+                             && q.IdAlumno >0
                              orderby q.IdCbteVta descending
                              select new fa_factura_consulta_Info
                              {
