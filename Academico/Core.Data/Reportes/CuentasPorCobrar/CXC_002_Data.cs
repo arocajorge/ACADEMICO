@@ -44,7 +44,9 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                             NomCliente = item.NomCliente,
                             CedulaCliente = item.CedulaCliente,
                             cr_Banco = item.cr_Banco,
-                            cr_NumDocumento = item.cr_NumDocumento
+                            cr_NumDocumento = item.cr_NumDocumento,
+                            IdCliente = item.IdCliente,
+                            cr_ObservacionPantalla = item.cr_ObservacionPantalla
                         });
                     }   
                 }

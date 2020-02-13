@@ -48,6 +48,8 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             }
             var Primero = lst_rpt.FirstOrDefault();
             lblSaldo.Text = busCobro.GetSaldoAlumno(IdEmpresa,(Primero == null ? 0 : Primero.IdAlumno ?? 0)).ToString("c2");
+            if (Primero != null)
+                lblReemplaza.Text.Replace("{0}", Primero.CedulaCliente).Replace("{1}", Primero.NomCliente);
         }
 
         private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
