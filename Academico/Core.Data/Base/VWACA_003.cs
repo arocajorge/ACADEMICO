@@ -30,5 +30,8 @@ namespace Core.Data.Base
         public string DescripcionPensiones { get; set; }
         public string CorreoSeFactura { get; set; }
         public string CorreoRepresentante { get; set; }
+        public string DireccionRepresentante { get; set; }
+        public string NacionalidadRepresentante { get; set; }
+        public string Sector { get; set; }
     }
 }

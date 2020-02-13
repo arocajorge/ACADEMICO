@@ -69,7 +69,9 @@ namespace Core.Web.Reportes.Academico
                 NomAnioLectivoAnterior = info.DescripcionAnterior;
                 NomAnioLectivo = info.DescripcionActual;
                 DescripcionPensiones = info.DescripcionPensiones;
-
+                DireccionRepLegal = info.Direccion;
+                NacionalidadRepLegal = info.NacionalidadRepresentante;
+                SectorRepLegal = info.Sector;
                 lst_rpt.Add(info);
             }
 

@@ -38,5 +38,7 @@ namespace Core.Data.Base
         public decimal IdCliente { get; set; }
         public string cr_Banco { get; set; }
         public string cr_NumDocumento { get; set; }
+        public Nullable<System.DateTime> Fecha_Transac { get; set; }
+        public string cr_ObservacionPantalla { get; set; }
     }
 }

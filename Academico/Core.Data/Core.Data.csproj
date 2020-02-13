@@ -148,6 +148,12 @@
     <Compile Include="Base\VWACA_004.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWACA_006.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWACA_007.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_CondicionalMatricula.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
