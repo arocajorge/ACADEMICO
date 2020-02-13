@@ -352,6 +352,12 @@
     <Compile Include="Reportes\Academico\ACA_004_Rpt.Designer.cs">
       <DependentUpon>ACA_004_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_006_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_006_Rpt.Designer.cs">
+      <DependentUpon>ACA_006_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8227,6 +8233,7 @@
     <Content Include="Areas\Academico\Views\MatriculaCondicional\Index.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCondicional\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCondicional\Nuevo.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_006.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8331,6 +8338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_004_Rpt.resx">
       <DependentUpon>ACA_004_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_006_Rpt.resx">
+      <DependentUpon>ACA_006_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_001_Rpt.resx">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
