@@ -27,30 +27,41 @@ namespace Core.Data.Reportes.Academico
                 List<ACA_004_Info> Lista = new List<ACA_004_Info>();
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
-                    Lista = db.VWACA_004.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin && IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin && IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin && IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin).Select(q => new ACA_004_Info
+                    var lst = db.VWACA_004.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && 
+                    IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin && 
+                    IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin && 
+                    IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin && 
+                    IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin).ToList();
+
+                    foreach (var item in lst)
                     {
-                        IdEmpresa = q.IdEmpresa,
-                        IdAnio = q.IdAnio,
-                        IdSede = q.IdSede,
-                        IdNivel = q.IdNivel,
-                        IdJornada = q.IdJornada,
-                        IdCurso = q.IdCurso,
-                        IdMateria = q.IdMateria,
-                        Descripcion = q.Descripcion,
-                        NomSede = q.NomSede,
-                        NomJornada = q.NomJornada,
-                        NomCurso = q.NomCurso,
-                        NomNivel = q.NomNivel,
-                        OrdenJornada = q.OrdenJornada,
-                        OrdenCurso = q.OrdenCurso,
-                        NomMateria = q.NomMateria,
-                        NomMateriaArea = q.NomMateriaArea,
-                        NomMateriaGrupo = q.NomMateriaGrupo,
-                        OrdenMateria = q.OrdenMateria,
-                        OrdenMateriaGrupo = q.OrdenMateriaGrupo,
-                        OrdenMateriaArea = q.OrdenMateriaArea,
-                        EsObligatorio = q.EsObligatorio
-                    }).ToList();
+                        Lista.Add(new ACA_004_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdAnio = item.IdAnio,
+                            IdSede = item.IdSede,
+                            IdNivel = item.IdNivel,
+                            IdJornada = item.IdJornada,
+                            IdCurso = item.IdCurso,
+                            IdMateria = item.IdMateria,
+                            Descripcion = item.Descripcion,
+                            FechaDesde = item.FechaDesde,
+                            FechaHasta = item.FechaHasta,
+                            NomSede = item.NomSede,
+                            NomNivel = item.NomNivel,
+                            NomJornada = item.NomJornada,
+                            OrdenJornada = item.OrdenJornada,
+                            NomCurso = item.NomCurso,
+                            OrdenCurso = item.OrdenCurso,
+                            NomMateria = item.NomMateria,
+                            NomMateriaArea = item.NomMateriaArea,
+                            NomMateriaGrupo = item.NomMateriaGrupo,
+                            OrdenMateria = item.OrdenMateria,
+                            OrdenMateriaGrupo = item.OrdenMateriaGrupo,
+                            OrdenMateriaArea = item.OrdenMateriaArea,
+                            EsObligatorio = item.EsObligatorio,
+                        });
+                    }
                 }
 
                     return Lista;
