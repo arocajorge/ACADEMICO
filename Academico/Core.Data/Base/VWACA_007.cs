@@ -37,5 +37,6 @@ namespace Core.Data.Base
         public System.DateTime Fecha { get; set; }
         public string NomPlantilla { get; set; }
         public int IdPlantilla { get; set; }
+        public string Descripcion { get; set; }
     }
 }
