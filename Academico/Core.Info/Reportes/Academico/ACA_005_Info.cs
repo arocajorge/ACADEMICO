@@ -99,5 +99,6 @@ namespace Core.Info.Reportes.Academico
         public string MarcaRepresentante { get; set; }
         public string ModeloRepresentante { get; set; }
         public Nullable<int> AnioVehiculoRepresentante { get; set; }
+        public string TelefonoAlumno { get; set; }
     }
 }

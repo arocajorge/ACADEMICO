@@ -571,8 +571,8 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 console.log(data);
-                //$("#ValorPlantilla").val(data.Valor);
-                //$("#ValorPlantillaProntoPago").val(data.ProntoPago);
+                $("#ValorPlantilla").val(data.Valor);
+                $("#ValorPlantillaProntoPago").val(data.ProntoPago);
 
                 GridViewPartial_DetallePlantilla.PerformCallback();
             },

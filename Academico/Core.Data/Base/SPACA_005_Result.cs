@@ -24,6 +24,7 @@ namespace Core.Data.Base
         public string SexoAlumno { get; set; }
         public string CedulaAlumno { get; set; }
         public string DireccionAlumno { get; set; }
+        public string TelefonoAlumno { get; set; }
         public string SectorAlumno { get; set; }
         public string TieneDiscapacidadAlumno { get; set; }
         public string DiscapacidadAlumno { get; set; }

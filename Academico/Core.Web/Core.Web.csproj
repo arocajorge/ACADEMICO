@@ -8246,6 +8246,7 @@
     <Content Include="Areas\Academico\Views\MatriculaCondicional\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCondicional\Nuevo.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_006.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_005.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

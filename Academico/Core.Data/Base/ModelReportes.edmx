@@ -6,7 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="ModelReportes.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -44,7 +44,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_002' no tiene definida
           <Property Name="NomPlantilla" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -80,7 +80,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_003' no tiene definida
           <Property Name="CelularRepresentante" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -130,7 +130,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_004' no tiene definida
           <Property Name="OrdenNivel" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_006">
           <Key>
             <PropertyRef Name="NomSede" />
@@ -181,7 +181,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_006' no tiene definida
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_007">
           <Key>
             <PropertyRef Name="NomSede" />
@@ -234,7 +234,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_007' no tiene definida
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCONTA_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -267,7 +267,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCONTA_001' no tiene defini
           <Property Name="NombreUsuario" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -311,7 +311,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002' no tiene definida
           <Property Name="cr_ObservacionPantalla" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002_Aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_002_Aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_002_Aplicaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -331,7 +331,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002_Aplicaciones' no t
           <Property Name="dc_ValorPago" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -371,7 +371,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_003' no tiene definida
           <Property Name="TotalPago" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -435,7 +435,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_001' no tiene definida
           <Property Name="vt_detallexItems" Type="nvarchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -506,7 +506,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_002' no tiene definida
           <Property Name="Cambio" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -568,7 +568,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_003' no tiene definida
           <Property Name="No_Descripcion" Type="varchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_003_aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_003_aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_003_aplicaciones">
           <Key>
             <PropertyRef Name="IdEmpresa_nt" />
@@ -590,7 +590,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_003_aplicaciones' no t
           <Property Name="vt_fecha" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1133,13 +1133,13 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <EntitySet Name="VWCXC_002_Aplicaciones" EntityType="ModelReportes.VWCXC_002_Aplicaciones" />
           <EntitySet Name="VWACA_003" EntityType="ModelReportes.VWACA_003" />
           <EntitySet Name="VWCXC_002" EntityType="ModelReportes.VWCXC_002" />
+          <EntitySet Name="VWACA_004" EntityType="ModelReportes.VWACA_004" />
+          <EntitySet Name="VWACA_006" EntityType="ModelReportes.VWACA_006" />
+          <EntitySet Name="VWACA_007" EntityType="ModelReportes.VWACA_007" />
           <FunctionImport Name="SPACA_005" ReturnType="Collection(ModelReportes.SPACA_005_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <EntitySet Name="VWACA_004" EntityType="ModelReportes.VWACA_004" />
-          <EntitySet Name="VWACA_006" EntityType="ModelReportes.VWACA_006" />
-          <EntitySet Name="VWACA_007" EntityType="ModelReportes.VWACA_007" />
         </EntityContainer>
         <EntityType Name="VWACA_002">
           <Key>
@@ -1719,99 +1719,6 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
           <Property Name="cr_ObservacionPantalla" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
-        <ComplexType Name="SPACA_005_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Int32" Name="IdSocioEconomico" Nullable="false" />
-          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="CodigoAlumno" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="NombreAlumno" Nullable="false" MaxLength="200" />
-          <Property Type="DateTime" Name="FechaNacAlumno" Nullable="true" Precision="23" />
-          <Property Type="String" Name="ProvinciaAlumno" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="CiudadAlumno" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="SexoAlumno" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="CedulaAlumno" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="DireccionAlumno" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="SectorAlumno" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="TieneDiscapacidadAlumno" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="DiscapacidadAlumno" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="LugarNacimiento" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="ParroquiaAlumno" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="TieneElectricidad" Nullable="false" MaxLength="2" />
-          <Property Type="String" Name="TieneHermanos" Nullable="false" MaxLength="2" />
-          <Property Type="Int32" Name="CantidadHermanos" Nullable="true" />
-          <Property Type="String" Name="TipoVivienda" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="TenenciaVivienda" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Agua" Nullable="true" MaxLength="500" />
-          <Property Type="Double" Name="SueldoPadre" Nullable="false" />
-          <Property Type="Double" Name="SueldoMadre" Nullable="false" />
-          <Property Type="Double" Name="OtroIngresoPadre" Nullable="false" />
-          <Property Type="Double" Name="OtroIngresoMadre" Nullable="false" />
-          <Property Type="Double" Name="GastoAlimentacion" Nullable="false" />
-          <Property Type="Double" Name="GastoEducacion" Nullable="false" />
-          <Property Type="Double" Name="GastoServicioBasico" Nullable="false" />
-          <Property Type="Double" Name="GastoSalud" Nullable="false" />
-          <Property Type="Double" Name="GastoArriendo" Nullable="false" />
-          <Property Type="Double" Name="GastoPrestamo" Nullable="false" />
-          <Property Type="Double" Name="OtroGasto" Nullable="false" />
-          <Property Type="String" Name="MotivoIngreso" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="OtroMotivoIngreso" Nullable="true" />
-          <Property Type="String" Name="InformacionInstitucion" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="OtroInformacionInst" Nullable="true" />
-          <Property Type="String" Name="FinanciaEstudios" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="OtroFinanciamiento" Nullable="true" />
-          <Property Type="String" Name="AlumnoViveCon" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomPadre" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="DireccionPadre" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="NomEstadoCivilPadre" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="CelularPadre" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="ProfesionPadre" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomInstruccionPadre" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="CorreoPadre" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="EmpresaTrabajoPadre" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="DireccionTrabajoPadre" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="TelefonoTrabajoPadre" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="CargoTrabajoPadre" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="AniosServicioPadre" Nullable="true" />
-          <Property Type="Double" Name="IngresoMensualPadre" Nullable="true" />
-          <Property Type="String" Name="VehiculoPropioPadre" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="MarcaPadre" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ModeloPadre" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="AnioVehiculoPadre" Nullable="true" />
-          <Property Type="String" Name="NomMadre" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="DireccionMadre" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="NomEstadoCivilMadre" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="CelularMadre" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="ProfesionMadre" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomInstruccionMadre" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="CorreoMadre" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="EmpresaTrabajoMadre" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="DireccionTrabajoMadre" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="TelefonoTrabajoMadre" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="CargoTrabajoMadre" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="AniosServicioMadre" Nullable="true" />
-          <Property Type="Double" Name="IngresoMensualMadre" Nullable="true" />
-          <Property Type="String" Name="VehiculoPropioMadre" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="MarcaMadre" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ModeloMadre" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="AnioVehiculoMadre" Nullable="true" />
-          <Property Type="String" Name="NomRepresentante" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="DireccionRepresentante" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="NomEstadoCivilRepresentante" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="CelularRepresentante" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="ProfesionRepresentante" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomInstruccionRepresentante" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="CorreoRepresentante" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="EmpresaTrabajoRepresentante" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="DireccionTrabajoRepresentante" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="TelefonoTrabajoRepresentante" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="CargoTrabajoRepresentante" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="AniosServicioRepresentante" Nullable="true" />
-          <Property Type="Double" Name="IngresoMensualRepresentante" Nullable="true" />
-          <Property Type="String" Name="VehiculoPropioRepresentante" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="MarcaRepresentante" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ModeloRepresentante" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="AnioVehiculoRepresentante" Nullable="true" />
-        </ComplexType>
         <EntityType Name="VWACA_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1960,6 +1867,100 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="SPACA_005_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSocioEconomico" Nullable="false" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="CodigoAlumno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NombreAlumno" Nullable="false" MaxLength="200" />
+          <Property Type="DateTime" Name="FechaNacAlumno" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ProvinciaAlumno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CiudadAlumno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SexoAlumno" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="CedulaAlumno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DireccionAlumno" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="TelefonoAlumno" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="SectorAlumno" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TieneDiscapacidadAlumno" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="DiscapacidadAlumno" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="LugarNacimiento" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="ParroquiaAlumno" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="TieneElectricidad" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="TieneHermanos" Nullable="false" MaxLength="2" />
+          <Property Type="Int32" Name="CantidadHermanos" Nullable="true" />
+          <Property Type="String" Name="TipoVivienda" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TenenciaVivienda" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Agua" Nullable="true" MaxLength="500" />
+          <Property Type="Double" Name="SueldoPadre" Nullable="false" />
+          <Property Type="Double" Name="SueldoMadre" Nullable="false" />
+          <Property Type="Double" Name="OtroIngresoPadre" Nullable="false" />
+          <Property Type="Double" Name="OtroIngresoMadre" Nullable="false" />
+          <Property Type="Double" Name="GastoAlimentacion" Nullable="false" />
+          <Property Type="Double" Name="GastoEducacion" Nullable="false" />
+          <Property Type="Double" Name="GastoServicioBasico" Nullable="false" />
+          <Property Type="Double" Name="GastoSalud" Nullable="false" />
+          <Property Type="Double" Name="GastoArriendo" Nullable="false" />
+          <Property Type="Double" Name="GastoPrestamo" Nullable="false" />
+          <Property Type="Double" Name="OtroGasto" Nullable="false" />
+          <Property Type="String" Name="MotivoIngreso" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="OtroMotivoIngreso" Nullable="true" />
+          <Property Type="String" Name="InformacionInstitucion" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="OtroInformacionInst" Nullable="true" />
+          <Property Type="String" Name="FinanciaEstudios" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="OtroFinanciamiento" Nullable="true" />
+          <Property Type="String" Name="AlumnoViveCon" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomPadre" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DireccionPadre" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="NomEstadoCivilPadre" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="CelularPadre" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ProfesionPadre" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomInstruccionPadre" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CorreoPadre" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="EmpresaTrabajoPadre" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DireccionTrabajoPadre" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TelefonoTrabajoPadre" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CargoTrabajoPadre" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="AniosServicioPadre" Nullable="true" />
+          <Property Type="Double" Name="IngresoMensualPadre" Nullable="true" />
+          <Property Type="String" Name="VehiculoPropioPadre" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="MarcaPadre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ModeloPadre" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AnioVehiculoPadre" Nullable="true" />
+          <Property Type="String" Name="NomMadre" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DireccionMadre" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="NomEstadoCivilMadre" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="CelularMadre" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ProfesionMadre" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomInstruccionMadre" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CorreoMadre" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="EmpresaTrabajoMadre" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DireccionTrabajoMadre" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TelefonoTrabajoMadre" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CargoTrabajoMadre" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="AniosServicioMadre" Nullable="true" />
+          <Property Type="Double" Name="IngresoMensualMadre" Nullable="true" />
+          <Property Type="String" Name="VehiculoPropioMadre" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="MarcaMadre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ModeloMadre" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AnioVehiculoMadre" Nullable="true" />
+          <Property Type="String" Name="NomRepresentante" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DireccionRepresentante" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="NomEstadoCivilRepresentante" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="CelularRepresentante" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="ProfesionRepresentante" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomInstruccionRepresentante" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CorreoRepresentante" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="EmpresaTrabajoRepresentante" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DireccionTrabajoRepresentante" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TelefonoTrabajoRepresentante" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CargoTrabajoRepresentante" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="AniosServicioRepresentante" Nullable="true" />
+          <Property Type="Double" Name="IngresoMensualRepresentante" Nullable="true" />
+          <Property Type="String" Name="VehiculoPropioRepresentante" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="MarcaRepresentante" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ModeloRepresentante" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AnioVehiculoRepresentante" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2417,103 +2418,6 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SPACA_005" FunctionName="ModelReportes.Store.SPACA_005">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ModelReportes.SPACA_005_Result">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdSocioEconomico" ColumnName="IdSocioEconomico" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
-                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
-                <ScalarProperty Name="FechaNacAlumno" ColumnName="FechaNacAlumno" />
-                <ScalarProperty Name="ProvinciaAlumno" ColumnName="ProvinciaAlumno" />
-                <ScalarProperty Name="CiudadAlumno" ColumnName="CiudadAlumno" />
-                <ScalarProperty Name="SexoAlumno" ColumnName="SexoAlumno" />
-                <ScalarProperty Name="CedulaAlumno" ColumnName="CedulaAlumno" />
-                <ScalarProperty Name="DireccionAlumno" ColumnName="DireccionAlumno" />
-                <ScalarProperty Name="SectorAlumno" ColumnName="SectorAlumno" />
-                <ScalarProperty Name="TieneDiscapacidadAlumno" ColumnName="TieneDiscapacidadAlumno" />
-                <ScalarProperty Name="DiscapacidadAlumno" ColumnName="DiscapacidadAlumno" />
-                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
-                <ScalarProperty Name="ParroquiaAlumno" ColumnName="ParroquiaAlumno" />
-                <ScalarProperty Name="TieneElectricidad" ColumnName="TieneElectricidad" />
-                <ScalarProperty Name="TieneHermanos" ColumnName="TieneHermanos" />
-                <ScalarProperty Name="CantidadHermanos" ColumnName="CantidadHermanos" />
-                <ScalarProperty Name="TipoVivienda" ColumnName="TipoVivienda" />
-                <ScalarProperty Name="TenenciaVivienda" ColumnName="TenenciaVivienda" />
-                <ScalarProperty Name="Agua" ColumnName="Agua" />
-                <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
-                <ScalarProperty Name="SueldoMadre" ColumnName="SueldoMadre" />
-                <ScalarProperty Name="OtroIngresoPadre" ColumnName="OtroIngresoPadre" />
-                <ScalarProperty Name="OtroIngresoMadre" ColumnName="OtroIngresoMadre" />
-                <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
-                <ScalarProperty Name="GastoEducacion" ColumnName="GastoEducacion" />
-                <ScalarProperty Name="GastoServicioBasico" ColumnName="GastoServicioBasico" />
-                <ScalarProperty Name="GastoSalud" ColumnName="GastoSalud" />
-                <ScalarProperty Name="GastoArriendo" ColumnName="GastoArriendo" />
-                <ScalarProperty Name="GastoPrestamo" ColumnName="GastoPrestamo" />
-                <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />
-                <ScalarProperty Name="MotivoIngreso" ColumnName="MotivoIngreso" />
-                <ScalarProperty Name="OtroMotivoIngreso" ColumnName="OtroMotivoIngreso" />
-                <ScalarProperty Name="InformacionInstitucion" ColumnName="InformacionInstitucion" />
-                <ScalarProperty Name="OtroInformacionInst" ColumnName="OtroInformacionInst" />
-                <ScalarProperty Name="FinanciaEstudios" ColumnName="FinanciaEstudios" />
-                <ScalarProperty Name="OtroFinanciamiento" ColumnName="OtroFinanciamiento" />
-                <ScalarProperty Name="AlumnoViveCon" ColumnName="AlumnoViveCon" />
-                <ScalarProperty Name="NomPadre" ColumnName="NomPadre" />
-                <ScalarProperty Name="DireccionPadre" ColumnName="DireccionPadre" />
-                <ScalarProperty Name="NomEstadoCivilPadre" ColumnName="NomEstadoCivilPadre" />
-                <ScalarProperty Name="CelularPadre" ColumnName="CelularPadre" />
-                <ScalarProperty Name="ProfesionPadre" ColumnName="ProfesionPadre" />
-                <ScalarProperty Name="NomInstruccionPadre" ColumnName="NomInstruccionPadre" />
-                <ScalarProperty Name="CorreoPadre" ColumnName="CorreoPadre" />
-                <ScalarProperty Name="EmpresaTrabajoPadre" ColumnName="EmpresaTrabajoPadre" />
-                <ScalarProperty Name="DireccionTrabajoPadre" ColumnName="DireccionTrabajoPadre" />
-                <ScalarProperty Name="TelefonoTrabajoPadre" ColumnName="TelefonoTrabajoPadre" />
-                <ScalarProperty Name="CargoTrabajoPadre" ColumnName="CargoTrabajoPadre" />
-                <ScalarProperty Name="AniosServicioPadre" ColumnName="AniosServicioPadre" />
-                <ScalarProperty Name="IngresoMensualPadre" ColumnName="IngresoMensualPadre" />
-                <ScalarProperty Name="VehiculoPropioPadre" ColumnName="VehiculoPropioPadre" />
-                <ScalarProperty Name="MarcaPadre" ColumnName="MarcaPadre" />
-                <ScalarProperty Name="ModeloPadre" ColumnName="ModeloPadre" />
-                <ScalarProperty Name="AnioVehiculoPadre" ColumnName="AnioVehiculoPadre" />
-                <ScalarProperty Name="NomMadre" ColumnName="NomMadre" />
-                <ScalarProperty Name="DireccionMadre" ColumnName="DireccionMadre" />
-                <ScalarProperty Name="NomEstadoCivilMadre" ColumnName="NomEstadoCivilMadre" />
-                <ScalarProperty Name="CelularMadre" ColumnName="CelularMadre" />
-                <ScalarProperty Name="ProfesionMadre" ColumnName="ProfesionMadre" />
-                <ScalarProperty Name="NomInstruccionMadre" ColumnName="NomInstruccionMadre" />
-                <ScalarProperty Name="CorreoMadre" ColumnName="CorreoMadre" />
-                <ScalarProperty Name="EmpresaTrabajoMadre" ColumnName="EmpresaTrabajoMadre" />
-                <ScalarProperty Name="DireccionTrabajoMadre" ColumnName="DireccionTrabajoMadre" />
-                <ScalarProperty Name="TelefonoTrabajoMadre" ColumnName="TelefonoTrabajoMadre" />
-                <ScalarProperty Name="CargoTrabajoMadre" ColumnName="CargoTrabajoMadre" />
-                <ScalarProperty Name="AniosServicioMadre" ColumnName="AniosServicioMadre" />
-                <ScalarProperty Name="IngresoMensualMadre" ColumnName="IngresoMensualMadre" />
-                <ScalarProperty Name="VehiculoPropioMadre" ColumnName="VehiculoPropioMadre" />
-                <ScalarProperty Name="MarcaMadre" ColumnName="MarcaMadre" />
-                <ScalarProperty Name="ModeloMadre" ColumnName="ModeloMadre" />
-                <ScalarProperty Name="AnioVehiculoMadre" ColumnName="AnioVehiculoMadre" />
-                <ScalarProperty Name="NomRepresentante" ColumnName="NomRepresentante" />
-                <ScalarProperty Name="DireccionRepresentante" ColumnName="DireccionRepresentante" />
-                <ScalarProperty Name="NomEstadoCivilRepresentante" ColumnName="NomEstadoCivilRepresentante" />
-                <ScalarProperty Name="CelularRepresentante" ColumnName="CelularRepresentante" />
-                <ScalarProperty Name="ProfesionRepresentante" ColumnName="ProfesionRepresentante" />
-                <ScalarProperty Name="NomInstruccionRepresentante" ColumnName="NomInstruccionRepresentante" />
-                <ScalarProperty Name="CorreoRepresentante" ColumnName="CorreoRepresentante" />
-                <ScalarProperty Name="EmpresaTrabajoRepresentante" ColumnName="EmpresaTrabajoRepresentante" />
-                <ScalarProperty Name="DireccionTrabajoRepresentante" ColumnName="DireccionTrabajoRepresentante" />
-                <ScalarProperty Name="TelefonoTrabajoRepresentante" ColumnName="TelefonoTrabajoRepresentante" />
-                <ScalarProperty Name="CargoTrabajoRepresentante" ColumnName="CargoTrabajoRepresentante" />
-                <ScalarProperty Name="AniosServicioRepresentante" ColumnName="AniosServicioRepresentante" />
-                <ScalarProperty Name="IngresoMensualRepresentante" ColumnName="IngresoMensualRepresentante" />
-                <ScalarProperty Name="VehiculoPropioRepresentante" ColumnName="VehiculoPropioRepresentante" />
-                <ScalarProperty Name="MarcaRepresentante" ColumnName="MarcaRepresentante" />
-                <ScalarProperty Name="ModeloRepresentante" ColumnName="ModeloRepresentante" />
-                <ScalarProperty Name="AnioVehiculoRepresentante" ColumnName="AnioVehiculoRepresentante" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="VWACA_004">
             <EntityTypeMapping TypeName="ModelReportes.VWACA_004">
               <MappingFragment StoreEntitySet="VWACA_004">
@@ -2603,6 +2507,104 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_005" FunctionName="ModelReportes.Store.SPACA_005">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPACA_005_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSocioEconomico" ColumnName="IdSocioEconomico" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
+                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
+                <ScalarProperty Name="FechaNacAlumno" ColumnName="FechaNacAlumno" />
+                <ScalarProperty Name="ProvinciaAlumno" ColumnName="ProvinciaAlumno" />
+                <ScalarProperty Name="CiudadAlumno" ColumnName="CiudadAlumno" />
+                <ScalarProperty Name="SexoAlumno" ColumnName="SexoAlumno" />
+                <ScalarProperty Name="CedulaAlumno" ColumnName="CedulaAlumno" />
+                <ScalarProperty Name="DireccionAlumno" ColumnName="DireccionAlumno" />
+                <ScalarProperty Name="TelefonoAlumno" ColumnName="TelefonoAlumno" />
+                <ScalarProperty Name="SectorAlumno" ColumnName="SectorAlumno" />
+                <ScalarProperty Name="TieneDiscapacidadAlumno" ColumnName="TieneDiscapacidadAlumno" />
+                <ScalarProperty Name="DiscapacidadAlumno" ColumnName="DiscapacidadAlumno" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="ParroquiaAlumno" ColumnName="ParroquiaAlumno" />
+                <ScalarProperty Name="TieneElectricidad" ColumnName="TieneElectricidad" />
+                <ScalarProperty Name="TieneHermanos" ColumnName="TieneHermanos" />
+                <ScalarProperty Name="CantidadHermanos" ColumnName="CantidadHermanos" />
+                <ScalarProperty Name="TipoVivienda" ColumnName="TipoVivienda" />
+                <ScalarProperty Name="TenenciaVivienda" ColumnName="TenenciaVivienda" />
+                <ScalarProperty Name="Agua" ColumnName="Agua" />
+                <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
+                <ScalarProperty Name="SueldoMadre" ColumnName="SueldoMadre" />
+                <ScalarProperty Name="OtroIngresoPadre" ColumnName="OtroIngresoPadre" />
+                <ScalarProperty Name="OtroIngresoMadre" ColumnName="OtroIngresoMadre" />
+                <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
+                <ScalarProperty Name="GastoEducacion" ColumnName="GastoEducacion" />
+                <ScalarProperty Name="GastoServicioBasico" ColumnName="GastoServicioBasico" />
+                <ScalarProperty Name="GastoSalud" ColumnName="GastoSalud" />
+                <ScalarProperty Name="GastoArriendo" ColumnName="GastoArriendo" />
+                <ScalarProperty Name="GastoPrestamo" ColumnName="GastoPrestamo" />
+                <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />
+                <ScalarProperty Name="MotivoIngreso" ColumnName="MotivoIngreso" />
+                <ScalarProperty Name="OtroMotivoIngreso" ColumnName="OtroMotivoIngreso" />
+                <ScalarProperty Name="InformacionInstitucion" ColumnName="InformacionInstitucion" />
+                <ScalarProperty Name="OtroInformacionInst" ColumnName="OtroInformacionInst" />
+                <ScalarProperty Name="FinanciaEstudios" ColumnName="FinanciaEstudios" />
+                <ScalarProperty Name="OtroFinanciamiento" ColumnName="OtroFinanciamiento" />
+                <ScalarProperty Name="AlumnoViveCon" ColumnName="AlumnoViveCon" />
+                <ScalarProperty Name="NomPadre" ColumnName="NomPadre" />
+                <ScalarProperty Name="DireccionPadre" ColumnName="DireccionPadre" />
+                <ScalarProperty Name="NomEstadoCivilPadre" ColumnName="NomEstadoCivilPadre" />
+                <ScalarProperty Name="CelularPadre" ColumnName="CelularPadre" />
+                <ScalarProperty Name="ProfesionPadre" ColumnName="ProfesionPadre" />
+                <ScalarProperty Name="NomInstruccionPadre" ColumnName="NomInstruccionPadre" />
+                <ScalarProperty Name="CorreoPadre" ColumnName="CorreoPadre" />
+                <ScalarProperty Name="EmpresaTrabajoPadre" ColumnName="EmpresaTrabajoPadre" />
+                <ScalarProperty Name="DireccionTrabajoPadre" ColumnName="DireccionTrabajoPadre" />
+                <ScalarProperty Name="TelefonoTrabajoPadre" ColumnName="TelefonoTrabajoPadre" />
+                <ScalarProperty Name="CargoTrabajoPadre" ColumnName="CargoTrabajoPadre" />
+                <ScalarProperty Name="AniosServicioPadre" ColumnName="AniosServicioPadre" />
+                <ScalarProperty Name="IngresoMensualPadre" ColumnName="IngresoMensualPadre" />
+                <ScalarProperty Name="VehiculoPropioPadre" ColumnName="VehiculoPropioPadre" />
+                <ScalarProperty Name="MarcaPadre" ColumnName="MarcaPadre" />
+                <ScalarProperty Name="ModeloPadre" ColumnName="ModeloPadre" />
+                <ScalarProperty Name="AnioVehiculoPadre" ColumnName="AnioVehiculoPadre" />
+                <ScalarProperty Name="NomMadre" ColumnName="NomMadre" />
+                <ScalarProperty Name="DireccionMadre" ColumnName="DireccionMadre" />
+                <ScalarProperty Name="NomEstadoCivilMadre" ColumnName="NomEstadoCivilMadre" />
+                <ScalarProperty Name="CelularMadre" ColumnName="CelularMadre" />
+                <ScalarProperty Name="ProfesionMadre" ColumnName="ProfesionMadre" />
+                <ScalarProperty Name="NomInstruccionMadre" ColumnName="NomInstruccionMadre" />
+                <ScalarProperty Name="CorreoMadre" ColumnName="CorreoMadre" />
+                <ScalarProperty Name="EmpresaTrabajoMadre" ColumnName="EmpresaTrabajoMadre" />
+                <ScalarProperty Name="DireccionTrabajoMadre" ColumnName="DireccionTrabajoMadre" />
+                <ScalarProperty Name="TelefonoTrabajoMadre" ColumnName="TelefonoTrabajoMadre" />
+                <ScalarProperty Name="CargoTrabajoMadre" ColumnName="CargoTrabajoMadre" />
+                <ScalarProperty Name="AniosServicioMadre" ColumnName="AniosServicioMadre" />
+                <ScalarProperty Name="IngresoMensualMadre" ColumnName="IngresoMensualMadre" />
+                <ScalarProperty Name="VehiculoPropioMadre" ColumnName="VehiculoPropioMadre" />
+                <ScalarProperty Name="MarcaMadre" ColumnName="MarcaMadre" />
+                <ScalarProperty Name="ModeloMadre" ColumnName="ModeloMadre" />
+                <ScalarProperty Name="AnioVehiculoMadre" ColumnName="AnioVehiculoMadre" />
+                <ScalarProperty Name="NomRepresentante" ColumnName="NomRepresentante" />
+                <ScalarProperty Name="DireccionRepresentante" ColumnName="DireccionRepresentante" />
+                <ScalarProperty Name="NomEstadoCivilRepresentante" ColumnName="NomEstadoCivilRepresentante" />
+                <ScalarProperty Name="CelularRepresentante" ColumnName="CelularRepresentante" />
+                <ScalarProperty Name="ProfesionRepresentante" ColumnName="ProfesionRepresentante" />
+                <ScalarProperty Name="NomInstruccionRepresentante" ColumnName="NomInstruccionRepresentante" />
+                <ScalarProperty Name="CorreoRepresentante" ColumnName="CorreoRepresentante" />
+                <ScalarProperty Name="EmpresaTrabajoRepresentante" ColumnName="EmpresaTrabajoRepresentante" />
+                <ScalarProperty Name="DireccionTrabajoRepresentante" ColumnName="DireccionTrabajoRepresentante" />
+                <ScalarProperty Name="TelefonoTrabajoRepresentante" ColumnName="TelefonoTrabajoRepresentante" />
+                <ScalarProperty Name="CargoTrabajoRepresentante" ColumnName="CargoTrabajoRepresentante" />
+                <ScalarProperty Name="AniosServicioRepresentante" ColumnName="AniosServicioRepresentante" />
+                <ScalarProperty Name="IngresoMensualRepresentante" ColumnName="IngresoMensualRepresentante" />
+                <ScalarProperty Name="VehiculoPropioRepresentante" ColumnName="VehiculoPropioRepresentante" />
+                <ScalarProperty Name="MarcaRepresentante" ColumnName="MarcaRepresentante" />
+                <ScalarProperty Name="ModeloRepresentante" ColumnName="ModeloRepresentante" />
+                <ScalarProperty Name="AnioVehiculoRepresentante" ColumnName="AnioVehiculoRepresentante" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
