@@ -11,8 +11,11 @@ namespace Core.Web.Reportes.Academico
 {
     public partial class ACA_006_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
-      
+        public string usuario { get; set; }
+        public string empresa { get; set; }
+
         ACA_006_Bus bus_rpt = new ACA_006_Bus();
+        
         public ACA_006_Rpt()
         {
             InitializeComponent();
@@ -22,6 +25,10 @@ namespace Core.Web.Reportes.Academico
         {
             try
             {
+                
+                lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+                lbl_sede.Text = empresa;
+                lbl_usuario.Text = usuario;
                 int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
                 int IdAnio = string.IsNullOrEmpty(p_IdAnio.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAnio.Value);
                 int IdSede = string.IsNullOrEmpty(p_IdSede.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSede.Value);
