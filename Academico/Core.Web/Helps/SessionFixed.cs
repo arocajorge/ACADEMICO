@@ -28,6 +28,14 @@ namespace Core.Web.Helps
         string TipoPersona { get; set; }
         string IdAlumno { get; set; }
         string Ruc { get; set; }
+
+        #region Combos bajo demanda de curso - paralelo - plantilla
+        string IdAnioDemanda { get; set; }
+        string IdSedeBajoDemanda { get; set; }
+        string IdNivelBajoDemanda { get; set; }
+        string IdJornadaBajoDemanda { get; set; }
+        string IdCursoBajoDemanda { get; set; }
+        #endregion
     }
     public static class SessionFixed
     {
@@ -155,6 +163,33 @@ namespace Core.Web.Helps
             get { return _sessionValueProvider.IdAlumno; }
             set { _sessionValueProvider.IdAlumno = value; }
         }
+
+        public static string IdAnioDemanda
+        {
+            get { return _sessionValueProvider.IdAnioDemanda; }
+            set { _sessionValueProvider.IdAnioDemanda = value; }
+        }
+        public static string IdSedeBajoDemanda
+        {
+            get { return _sessionValueProvider.IdSedeBajoDemanda; }
+            set { _sessionValueProvider.IdSedeBajoDemanda = value; }
+        }
+        public static string IdNivelBajoDemanda
+        {
+            get { return _sessionValueProvider.IdNivelBajoDemanda; }
+            set { _sessionValueProvider.IdNivelBajoDemanda = value; }
+        }
+        public static string IdJornadaBajoDemanda
+        {
+            get { return _sessionValueProvider.IdJornadaBajoDemanda; }
+            set { _sessionValueProvider.IdJornadaBajoDemanda = value; }
+        }
+
+        public static string IdCursoBajoDemanda
+        {
+            get { return _sessionValueProvider.IdCursoBajoDemanda; }
+            set { _sessionValueProvider.IdCursoBajoDemanda = value; }
+        }
     }
     public class WebSessionValueProvider : ISessionValueProvider
     {
@@ -179,6 +214,12 @@ namespace Core.Web.Helps
         private const string _IdTipoPersona = "Fx_PERSONA";
         private const string _Ruc = "Fx_Ruc";
         private const string _IdAlumno = "Fx_IdAlumno";
+
+        private const string _IdAnioBajoDemanda = "Fx_IdAnioBajoDemanda";
+        private const string _IdSedeBajoDemanda = "Fx_IdSedeBajoDemanda";
+        private const string _IdNivelBajoDemanda = "Fx_IdNivelBajoDemanda";
+        private const string _IdJornadaBajoDemanda = "Fx_IdJornadaBajoDemanda";
+        private const string _IdCursoBajoDemanda = "Fx_IdCursoBajoDemanda";
 
         public string IdEmpresa
         {
@@ -291,6 +332,28 @@ namespace Core.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdAlumno]; }
             set { HttpContext.Current.Session[_IdAlumno] = value; }
+        }
+
+        public string IdSedeBajoDemanda
+        {
+            get { return (string)HttpContext.Current.Session[_IdSedeBajoDemanda]; }
+            set { HttpContext.Current.Session[_IdSedeBajoDemanda] = value; }
+        }
+        public string IdNivelBajoDemanda
+        {
+            get { return (string)HttpContext.Current.Session[_IdNivelBajoDemanda]; }
+            set { HttpContext.Current.Session[_IdNivelBajoDemanda] = value; }
+        }
+
+        public string IdJornadaBajoDemanda
+        {
+            get { return (string)HttpContext.Current.Session[_IdJornadaBajoDemanda]; }
+            set { HttpContext.Current.Session[_IdJornadaBajoDemanda] = value; }
+        }
+        public string IdCursoBajoDemanda
+        {
+            get { return (string)HttpContext.Current.Session[_IdCursoBajoDemanda]; }
+            set { HttpContext.Current.Session[_IdCursoBajoDemanda] = value; }
         }
     }
 }

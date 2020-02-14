@@ -3,6 +3,7 @@
     settings.Name = "IdComboCurso";
     settings.CallbackRouteValues = new { Controller = "CambioPlantillaMatricula", Action = "ComboBoxPartial_Curso", Area = "Academico" };
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Properties.DropDownWidth = System.Web.UI.WebControls.Unit.Pixel(1000);
     settings.Properties.DisplayFormatString = "{0}";
     settings.Properties.Columns.Add("NomCurso", "Curso").Width = System.Web.UI.WebControls.Unit.Percentage(100);
     //Campo ID
@@ -13,4 +14,4 @@
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
     settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = $('#IdAnio').val(); e.customArgs['IdAlumno'] = IdAlumno.GetValue(); e.customArgs['Validar'] = $('#Validar').val(); }";
     settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParalelo.PerformCallback(); IdPlantilla.PerformCallback(); }";
-}).BindList(new Core.Bus.Academico.aca_AnioLectivo_Jornada_Curso_Bus().GetListCursoPromoverAlumno(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAlumno, Model.IdAnio, Model.Validar)).Bind(Model.IdComboCurso).GetHtml()
+}).BindList(new Core.Bus.Academico.aca_AnioLectivo_Jornada_Curso_Bus().GetListCursoCambioMatricula(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAlumno, Model.IdAnio, Model.Validar)).Bind(Model.IdComboCurso).GetHtml()

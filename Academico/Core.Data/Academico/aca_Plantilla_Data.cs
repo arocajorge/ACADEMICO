@@ -1,5 +1,6 @@
 ﻿using Core.Data.Base;
 using Core.Info.Academico;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;

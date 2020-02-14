@@ -1,5 +1,6 @@
 ﻿using Core.Data.Base;
 using Core.Info.Academico;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,58 @@ namespace Core.Data.Academico
 {
     public class aca_Paralelo_Data
     {
+        public List<aca_Paralelo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                var skip = args.BeginIndex;
+                var take = args.EndIndex - args.BeginIndex + 1;
+                List<aca_Paralelo_Info> Lista = new List<aca_Paralelo_Info>();
+                Lista = getList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, skip, take, args.Filter);
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public aca_Paralelo_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            int id;
+            if (args.Value == null || !int.TryParse(args.Value.ToString(), out id))
+                return null;
+            return getInfo(IdEmpresa, (int)args.Value);
+        }
+        public List<aca_Paralelo_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int skip, int take, string filter)
+        {
+            try
+            {
+                List<aca_Paralelo_Info> Lista = new List<aca_Paralelo_Info>();
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var lst = db.vwaca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && (q.CodigoParalelo + " " + q.NomParalelo).Contains(filter)).OrderBy(q => q.OrdenParalelo).Skip(skip).Take(take);
+                    foreach (var item in lst)
+                    {
+                        Lista.Add(new aca_Paralelo_Info
+                        {
+                            IdParalelo = item.IdParalelo,
+                            NomParalelo = item.NomParalelo,
+                            OrdenParalelo = item.OrdenParalelo,
+                            CodigoParalelo = item.CodigoParalelo
+                        });
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_Paralelo_Info> getList(int IdEmpresa, bool MostrarAnulados)
         {
             try

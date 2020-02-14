@@ -60,6 +60,17 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCursoCambioMatricula(int IdEmpresa, decimal IdAlumno, int IdAnio, string Validar)
+        {
+            try
+            {
+                return odata.GetListCursoCambioMatricula(IdEmpresa, IdAlumno, IdAnio, Validar);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCurso_x_Anio(int IdEmpresa, int IdAnio)
         {
             try

@@ -165,7 +165,7 @@
                 IdComboCurso.SetValue(data.IdComboCurso);
                 IdParalelo.SetValue(data.IdParalelo);
                 IdPlantilla.SetValue(data.IdPlantilla);
-
+                IdPlantilla.DataBind();
                 GridViewPartial_MatriculaRubro.PerformCallback();
             },
             error: function (error) {

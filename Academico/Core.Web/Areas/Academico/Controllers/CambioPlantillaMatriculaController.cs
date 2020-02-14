@@ -39,8 +39,20 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_SocioEconomico_Bus bus_socioeconomico = new aca_SocioEconomico_Bus();
         aca_AnioLectivo_Paralelo_Profesor_Bus bus_materias_x_paralelo = new aca_AnioLectivo_Paralelo_Profesor_Bus();
         aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
+        aca_Paralelo_Bus bus_paralelo = new aca_Paralelo_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
+        #endregion
+
+        #region Combobox bajo demanda de paralelo
+        public List<aca_Paralelo_Info> get_list_bajo_demanda_paralelo(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            //return bus_paralelo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),);
+        }
+        public aca_Paralelo_Info get_info_bajo_demanda_paralelo(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_paralelo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
+        }
         #endregion
 
         #region Combos bajo demanada
@@ -57,7 +69,6 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO_MATRICULA.ToString());
         }
-
         public ActionResult ComboBoxPartial_Anio()
         {
             return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
@@ -105,11 +116,6 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult ComboBoxPartial_Paralelo()
         {
             string IdComboCurso = (Request.Params["IdCurso"] != null) ? (Request.Params["IdCurso"]).ToString() : null;
-            int IdAnio = -1;
-            int IdSede = -1;
-            int IdNivel = -1;
-            int IdJornada = -1;
-            int IdCurso = -1;
 
             if (!string.IsNullOrEmpty(IdComboCurso))
             {
@@ -118,15 +124,15 @@ namespace Core.Web.Areas.Academico.Controllers
                 string[] array = result.Split('\n');
                 if (array.Count() >= 5)
                 {
-                    IdAnio = Convert.ToInt32(array[1]);
-                    IdSede = Convert.ToInt32(array[2]);
-                    IdNivel = Convert.ToInt32(array[3]);
-                    IdJornada = Convert.ToInt32(array[4]);
-                    IdCurso = Convert.ToInt32(array[5]);
+                    SessionFixed.IdAnioDemanda = Convert.ToInt32(array[1]).ToString();
+                    SessionFixed.IdSedeBajoDemanda = Convert.ToInt32(array[2]).ToString();
+                    SessionFixed.IdNivelBajoDemanda = Convert.ToInt32(array[3]).ToString();
+                    SessionFixed.IdJornadaBajoDemanda = Convert.ToInt32(array[4]).ToString();
+                    SessionFixed.IdCursoBajoDemanda = Convert.ToInt32(array[5]).ToString();
                 }
             }
 
-            return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
+            return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { });
         }
         #endregion
 

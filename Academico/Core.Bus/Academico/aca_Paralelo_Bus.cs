@@ -1,5 +1,6 @@
 ﻿using Core.Data.Academico;
 using Core.Info.Academico;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,30 @@ namespace Core.Bus.Academico
         aca_Paralelo_Data odata = new aca_Paralelo_Data();
         aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
         aca_AnioLectivo_Curso_Paralelo_Data odata_curso_paralelo = new aca_AnioLectivo_Curso_Paralelo_Data();
+
+        public List<aca_Paralelo_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                return odata.get_list_bajo_demanda(args, IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public aca_Paralelo_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_info_bajo_demanda(args, IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_Paralelo_Info> GetList(int IdEmpresa, bool MostrarAnulados)
         {
             try

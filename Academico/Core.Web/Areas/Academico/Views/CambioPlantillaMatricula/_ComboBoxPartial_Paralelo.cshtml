@@ -1,16 +1,19 @@
-﻿@Html.DevExpress().ComboBox(settings =>
+﻿@using System.Web.UI.WebControls;
+@Html.DevExpress().ComboBox(settings =>
 {
     settings.Name = "IdParalelo";
+    settings.Width = Unit.Percentage(100);
+    settings.Properties.DropDownWidth = Unit.Pixel(1000);
+    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
     settings.CallbackRouteValues = new { Controller = "CambioPlantillaMatricula", Action = "ComboBoxPartial_Paralelo", Area = "Academico" };
-    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-    settings.Properties.DisplayFormatString = "[{0}] - {1}";
-    settings.Properties.Columns.Add("IdParalelo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-    settings.Properties.Columns.Add("NomParalelo", "Paralelo").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-    //Campo ID
+    settings.Properties.CallbackPageSize = 15;
+    settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+    settings.Properties.TextField = "NomParalelo";
+    settings.Properties.TextFormatString = "[{0}] - {1}";
     settings.Properties.ValueField = "IdParalelo";
     settings.Properties.ValueType = typeof(int);
-    settings.Properties.TextField = "NomParalelo";
-    settings.Properties.NullText = "== Seleccione ==";
-    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+    settings.Properties.Columns.Add("IdParalelo", "ID", 10);
+    settings.Properties.Columns.Add("NomParalelo", "Paralelo", 90);
     settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = $('#IdAnio').val(); e.customArgs['IdCurso'] = IdComboCurso.GetValue();}";
-}).BindList(new Core.Bus.Academico.aca_Paralelo_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAnio, Model.IdSede, Model.IdNivel, Model.IdJornada, Model.IdCurso)).Bind(Model.IdParalelo).GetHtml()
+}).BindList(new Core.Web.Areas.Academico.Controllers.CambioPlantillaMatriculaController().get_list_bajo_demanda_paralelo, new Core.Web.Areas.Academico.Controllers.CambioPlantillaMatriculaController().get_info_bajo_demanda_paralelo)
+.Bind(Model.IdParalelo).GetHtml()
