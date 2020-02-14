@@ -232,7 +232,7 @@ namespace Core.Data.Academico
                     else
                     {
                         NumEstudiante = Convert.ToInt32(ListaAnio.Max(q => q.Codigo)) + 1;
-                        Codigo = anio + NumEstudiante.ToString("0000");
+                        Codigo = NumEstudiante.ToString("0000");
                     }
 
                     if (info.Codigo=="" || info.Codigo==null)
