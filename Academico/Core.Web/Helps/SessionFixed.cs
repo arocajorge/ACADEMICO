@@ -30,7 +30,7 @@ namespace Core.Web.Helps
         string Ruc { get; set; }
 
         #region Combos bajo demanda de curso - paralelo - plantilla
-        string IdAnioDemanda { get; set; }
+        string IdAnioBajoDemanda { get; set; }
         string IdSedeBajoDemanda { get; set; }
         string IdNivelBajoDemanda { get; set; }
         string IdJornadaBajoDemanda { get; set; }
@@ -164,10 +164,10 @@ namespace Core.Web.Helps
             set { _sessionValueProvider.IdAlumno = value; }
         }
 
-        public static string IdAnioDemanda
+        public static string IdAnioBajoDemanda
         {
-            get { return _sessionValueProvider.IdAnioDemanda; }
-            set { _sessionValueProvider.IdAnioDemanda = value; }
+            get { return _sessionValueProvider.IdAnioBajoDemanda; }
+            set { _sessionValueProvider.IdAnioBajoDemanda = value; }
         }
         public static string IdSedeBajoDemanda
         {
@@ -333,7 +333,11 @@ namespace Core.Web.Helps
             get { return (string)HttpContext.Current.Session[_IdAlumno]; }
             set { HttpContext.Current.Session[_IdAlumno] = value; }
         }
-
+        public string IdAnioBajoDemanda
+        {
+            get { return (string)HttpContext.Current.Session[_IdAnioBajoDemanda]; }
+            set { HttpContext.Current.Session[_IdAnioBajoDemanda] = value; }
+        }
         public string IdSedeBajoDemanda
         {
             get { return (string)HttpContext.Current.Session[_IdSedeBajoDemanda]; }

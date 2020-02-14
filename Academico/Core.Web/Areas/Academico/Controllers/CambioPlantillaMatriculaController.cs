@@ -47,6 +47,7 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Combobox bajo demanda de paralelo
         public List<aca_Paralelo_Info> get_list_bajo_demanda_paralelo(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
+            return new List<aca_Paralelo_Info>();
             //return bus_paralelo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),);
         }
         public aca_Paralelo_Info get_info_bajo_demanda_paralelo(ListEditItemRequestedByValueEventArgs args)
@@ -124,7 +125,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 string[] array = result.Split('\n');
                 if (array.Count() >= 5)
                 {
-                    SessionFixed.IdAnioDemanda = Convert.ToInt32(array[1]).ToString();
+                    SessionFixed.IdAnioBajoDemanda = Convert.ToInt32(array[1]).ToString();
                     SessionFixed.IdSedeBajoDemanda = Convert.ToInt32(array[2]).ToString();
                     SessionFixed.IdNivelBajoDemanda = Convert.ToInt32(array[3]).ToString();
                     SessionFixed.IdJornadaBajoDemanda = Convert.ToInt32(array[4]).ToString();
