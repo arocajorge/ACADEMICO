@@ -337,64 +337,91 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(lista_PorCurso, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult LimpiarListaDetalle(int IdEmpresa = 0)
+        {
+            decimal Total = 0;
+            decimal TotalProntoPago = 0;
+            decimal ValorTotal = 0;
+            decimal ValorTotalPP = 0;
+
+            ValorTotal = Total;
+            ValorTotalPP = TotalProntoPago;
+            ListaMatriculaRubro.set_list(new List<aca_Matricula_Rubro_Info>(), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return Json(new { Valor = ValorTotal, ProntoPago = ValorTotalPP }, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult SetMatriculaRubro(int IdEmpresa = 0, int IdAnio = 0, int IdPlantilla = 0, int IdMatricula=0)
         {
             decimal Total = 0;
             decimal TotalProntoPago = 0;
             decimal ValorDescuento = 0;
             decimal ValorRubro = 0;
-
+            decimal ValorTotal = 0;
+            decimal ValorTotalPP = 0;
             List<aca_Matricula_Rubro_Info> lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
             if (IdMatricula == 0)
             {
                 var info_plantilla = bus_plantilla.GetInfo(IdEmpresa, IdAnio, IdPlantilla);
                 lst_MatriculaRubro = bus_matricula_rubro.GetList_Matricula(IdEmpresa, IdAnio, IdPlantilla);
-                var IdPrimerPeriodo = lst_MatriculaRubro.Min(q => q.IdPeriodo);
-
-                foreach (var item in lst_MatriculaRubro)
+                if (lst_MatriculaRubro.Count()>0)
                 {
-                    var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, item.IdPeriodo);
+                    var IdPrimerPeriodo = lst_MatriculaRubro.Min(q => q.IdPeriodo);
 
-                    if (item.IdPeriodo == IdPrimerPeriodo)
+                    foreach (var item in lst_MatriculaRubro)
                     {
-                        item.seleccionado = true;
-                    }
+                        var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, item.IdPeriodo);
 
-                    if (item.AplicaProntoPago == true)
-                    {
-                        if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
+                        if (item.IdPeriodo == IdPrimerPeriodo)
                         {
-                            if (info_plantilla.TipoDescuento == "%")
+                            item.seleccionado = true;
+                        }
+
+                        if (item.AplicaProntoPago == true)
+                        {
+                            if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
                             {
-                                ValorDescuento = (item.Total * (info_plantilla.Valor / 100));
-                                ValorRubro = item.Total - ValorDescuento;
-                                TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                                if (info_plantilla.TipoDescuento == "%")
+                                {
+                                    ValorDescuento = (item.Total * (info_plantilla.Valor / 100));
+                                    ValorRubro = item.Total - ValorDescuento;
+                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                                }
+                                else
+                                {
+                                    ValorRubro = (item.Total - info_plantilla.Valor);
+                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                                }
                             }
                             else
                             {
-                                ValorRubro = (item.Total - info_plantilla.Valor);
+                                ValorRubro = (item.Total);
                                 TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
                             }
+
+                            Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
                         }
                         else
                         {
                             ValorRubro = (item.Total);
-                            TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                            Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                            TotalProntoPago = TotalProntoPago + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
                         }
 
-                        Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                        item.ValorProntoPago = ValorRubro;
+                        item.FechaProntoPago = Convert.ToDateTime(info_anio_periodo.FechaProntoPago);
                     }
-                    else
-                    {
-                        ValorRubro = (item.Total);
-                        Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
-                        TotalProntoPago = TotalProntoPago + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
-                    }
-
-                    item.ValorProntoPago = ValorRubro;
-                    item.FechaProntoPago = Convert.ToDateTime(info_anio_periodo.FechaProntoPago);
+                    ValorTotal = lst_MatriculaRubro.Where(q => q.seleccionado == true).Sum(q => q.Total);
+                    ValorTotalPP = lst_MatriculaRubro.Where(q => q.seleccionado == true).Sum(q => q.ValorProntoPago);
+                    ListaMatriculaRubro.set_list(lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 }
-                ListaMatriculaRubro.set_list(lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                else
+                {
+                    ValorTotal = Total;
+                    ValorTotalPP = TotalProntoPago;
+                    ListaMatriculaRubro.set_list(new List<aca_Matricula_Rubro_Info>(), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                }
+                
             }
             else
             {
@@ -428,7 +455,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 ListaMatriculaRubro.set_list(lista_nueva, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
             
-            return Json(new { Valor =Total, ProntoPago =TotalProntoPago}, JsonRequestBehavior.AllowGet);
+            
+            return Json(new { Valor = ValorTotal, ProntoPago = ValorTotalPP }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult SumarValores(int IdAnio = 0, int IdPlantilla = 0, string Seleccionados = "")
         {
