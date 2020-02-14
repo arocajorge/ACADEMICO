@@ -276,6 +276,41 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 }
             }
 
+            if (i_validar.lst_det.Count > 0)
+            {
+                if (i_validar.cr_saldo != 0)
+                {
+                    msg = "No puede existir un excedente cuando hay documentos aplicados, debe realizar un cobro sin documentos para el pago anticipado";
+                    return false;
+                }
+            }
+            if (i_validar.lst_det.Count > 0)
+            {
+                //Obtener la mayor fecha de los documentos seleccionados
+                DateTime FechaMayor = i_validar.lst_det.Max(q => q.FechaProntoPago ?? DateTime.Now.Date.AddYears(-10));
+                //De la lista de TODO lo pendiente de pagar obtengo la menor fecha
+                var lst = List_x_Cruzar.get_list(i_validar.IdTransaccionSession);
+
+                foreach (var item in i_validar.lst_det)
+                {
+                    var obj = lst.Where(q => q.secuencia == item.secuencia).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        lst.Remove(obj);
+                    }
+                }
+                if (lst.Count > 0)
+                {
+                    DateTime FechaMenor = lst.Min(q => q.FechaProntoPago ?? DateTime.Now.Date.AddYears(-10));
+                    if (FechaMayor > FechaMenor)
+                    {
+                        msg = "No puede realizar el cobro ya que existen facturas no seleccionadas con fecha menor";
+                        return false;
+                    }
+                }
+            }
+            
+
             if (i_validar.IdCobro>0)
             {
                 var LstDet = bus_det.get_list(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdCobro);

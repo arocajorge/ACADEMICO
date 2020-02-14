@@ -37,6 +37,5 @@ namespace Core.Data.Base
         public int IdParalelo { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Descripcion { get; set; }
-        public string Descripcion1 { get; set; }
     }
 }
