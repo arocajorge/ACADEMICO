@@ -406,7 +406,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         [HttpPost]
         public ActionResult ACA_006(cl_filtros_Info model)
         {
-            ACA_004_Rpt report = new ACA_004_Rpt();
+            ACA_006_Rpt report = new ACA_006_Rpt();
 
             #region Cargo diseño desde base
             var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_006");
