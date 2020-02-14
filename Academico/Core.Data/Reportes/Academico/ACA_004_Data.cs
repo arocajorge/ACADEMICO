@@ -60,6 +60,8 @@ namespace Core.Data.Reportes.Academico
                             OrdenMateriaGrupo = item.OrdenMateriaGrupo,
                             OrdenMateriaArea = item.OrdenMateriaArea,
                             EsObligatorio = item.EsObligatorio,
+
+                            OrdenNivel = item.OrdenNivel
                         });
                     }
                 }

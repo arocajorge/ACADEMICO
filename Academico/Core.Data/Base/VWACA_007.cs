@@ -38,5 +38,6 @@ namespace Core.Data.Base
         public string NomPlantilla { get; set; }
         public int IdPlantilla { get; set; }
         public string Descripcion { get; set; }
+        public string Descripcion1 { get; set; }
     }
 }

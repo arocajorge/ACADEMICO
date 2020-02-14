@@ -27,5 +27,6 @@ namespace Core.Info.Reportes.Academico
         public Nullable<int> OrdenMateriaGrupo { get; set; }
         public Nullable<int> OrdenMateriaArea { get; set; }
         public bool EsObligatorio { get; set; }
+        public int OrdenNivel { get; set; }
     }
 }
