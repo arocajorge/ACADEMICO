@@ -45,6 +45,7 @@ namespace Core.Data.Reportes.Academico
                         pe_sexo = q.pe_sexo,
                         NomSexo=q.NomSexo,
                         Cantidad = q.Cantidad,
+                        Descripcion = q.Descripcion,
                         Fecha = q.Fecha
 
                     }).ToList();

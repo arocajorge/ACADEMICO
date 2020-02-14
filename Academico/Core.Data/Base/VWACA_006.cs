@@ -36,5 +36,6 @@ namespace Core.Data.Base
         public int IdCurso { get; set; }
         public int IdParalelo { get; set; }
         public System.DateTime Fecha { get; set; }
+        public string Descripcion { get; set; }
     }
 }
