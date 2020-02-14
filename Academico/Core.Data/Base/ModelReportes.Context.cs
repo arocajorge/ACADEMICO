@@ -104,5 +104,18 @@ namespace Core.Data.Base
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXC_004_Result>("SPCXC_004", idEmpresaParameter, idUsuarioParameter, fechaCorteParameter);
         }
+    
+        public virtual ObjectResult<SPACA_005_Result> SPACA_005(Nullable<int> idEmpresa, Nullable<decimal> idAlumno)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idAlumnoParameter = idAlumno.HasValue ?
+                new ObjectParameter("IdAlumno", idAlumno) :
+                new ObjectParameter("IdAlumno", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_005_Result>("SPACA_005", idEmpresaParameter, idAlumnoParameter);
+        }
     }
 }
