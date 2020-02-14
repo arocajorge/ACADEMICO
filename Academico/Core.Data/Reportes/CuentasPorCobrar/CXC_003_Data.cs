@@ -19,9 +19,9 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                 {
                     Lista = (from q in Context.VWCXC_003
                              where q.IdEmpresa == IdEmpresa
-                             && q.cr_fecha >= fecha_ini
-                             && q.cr_fecha <= fecha_fin
-                             && q.IdUsuario == IdUsuario
+                             && q.cr_fecha >= fecha_ini.Date
+                             && q.cr_fecha <= fecha_fin.Date
+                             && q.IdUsuario == (IdUsuario=="" ? q.IdUsuario : IdUsuario)
                              select new CXC_003_Info
                              {
                                 IdEmpresa = q.IdEmpresa,
