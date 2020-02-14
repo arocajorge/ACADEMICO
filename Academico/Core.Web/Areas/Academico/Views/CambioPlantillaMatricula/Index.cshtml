@@ -101,7 +101,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdEmpresa">Paralelo*</label>
-                    @Html.Partial("_ComboBoxPartial_Paralelo", Model)
+                    @Html.Partial("_ComboBoxPartial_Paralelo", new { id = Model.IdParalelo })
                     @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -161,11 +161,9 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                console.log(data);
                 IdComboCurso.SetValue(data.IdComboCurso);
                 IdParalelo.SetValue(data.IdParalelo);
                 IdPlantilla.SetValue(data.IdPlantilla);
-                IdPlantilla.DataBind();
                 GridViewPartial_MatriculaRubro.PerformCallback();
             },
             error: function (error) {
