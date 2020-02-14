@@ -50,7 +50,6 @@ namespace Core.Data.Reportes.Academico
                         OrdenMateriaGrupo = q.OrdenMateriaGrupo,
                         OrdenMateriaArea = q.OrdenMateriaArea,
                         EsObligatorio = q.EsObligatorio
-
                     }).ToList();
                 }
 
