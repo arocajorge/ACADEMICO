@@ -1,19 +1,22 @@
 ﻿@using System.Web.UI.WebControls;
-@Html.DevExpress().ComboBox(settings =>
-{
-    settings.Name = "IdParalelo";
-    settings.Width = Unit.Percentage(100);
-    settings.Properties.DropDownWidth = Unit.Pixel(1000);
-    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-    settings.CallbackRouteValues = new { Controller = "CambioPlantillaMatricula", Action = "ComboBoxPartial_Paralelo", Area = "Academico" };
-    settings.Properties.CallbackPageSize = 15;
-    settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
-    settings.Properties.TextField = "NomParalelo";
-    settings.Properties.TextFormatString = "[{0}] - {1}";
-    settings.Properties.ValueField = "IdParalelo";
-    settings.Properties.ValueType = typeof(int);
-    settings.Properties.Columns.Add("IdParalelo", "ID", 10);
-    settings.Properties.Columns.Add("NomParalelo", "Paralelo", 90);
-    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = $('#IdAnio').val(); e.customArgs['IdCurso'] = IdComboCurso.GetValue();}";
-}).BindList(new Core.Web.Areas.Academico.Controllers.CambioPlantillaMatriculaController().get_list_bajo_demanda_paralelo, new Core.Web.Areas.Academico.Controllers.CambioPlantillaMatriculaController().get_info_bajo_demanda_paralelo)
-.Bind(Model.IdParalelo).GetHtml()
+
+@{ 
+    var combobox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdParalelo";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Pixel(1000);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "CambioPlantillaMatricula", Action = "ComboBoxPartial_Paralelo", Area = "Academico", id = Model };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "NomParalelo";
+        settings.Properties.TextFormatString = "[{0}] - {1}";
+        settings.Properties.ValueField = "IdParalelo";
+        settings.Properties.ValueType = typeof(int);
+        settings.Properties.Columns.Add("IdParalelo", "ID", 10);
+        settings.Properties.Columns.Add("NomParalelo", "Paralelo", 90);
+    }).BindList(new Core.Web.Areas.Academico.Controllers.CambioPlantillaMatriculaController().get_list_bajo_demanda_paralelo, new Core.Web.Areas.Academico.Controllers.CambioPlantillaMatriculaController().get_info_bajo_demanda_paralelo)
+    .Bind(Model);
+}
+@combobox.GetHtml()

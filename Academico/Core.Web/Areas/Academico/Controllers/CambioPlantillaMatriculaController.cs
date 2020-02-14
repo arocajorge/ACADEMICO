@@ -47,8 +47,12 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Combobox bajo demanda de paralelo
         public List<aca_Paralelo_Info> get_list_bajo_demanda_paralelo(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return new List<aca_Paralelo_Info>();
-            //return bus_paralelo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),);
+            int IdAnio = Convert.ToInt32(SessionFixed.IdAnioBajoDemanda ?? "-1");
+            int IdSede = Convert.ToInt32(SessionFixed.IdSedeBajoDemanda ?? "-1");
+            int IdJornada = Convert.ToInt32(SessionFixed.IdJornadaBajoDemanda ?? "-1");
+            int IdNivel = Convert.ToInt32(SessionFixed.IdNivelBajoDemanda ?? "-1");
+            int IdCurso = Convert.ToInt32(SessionFixed.IdCursoBajoDemanda ?? "-1");
+            return bus_paralelo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
         }
         public aca_Paralelo_Info get_info_bajo_demanda_paralelo(ListEditItemRequestedByValueEventArgs args)
         {
@@ -114,26 +118,9 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_ComboBoxPartial_Plantilla", new aca_AnioLectivo_Curso_Plantilla_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
         }
 
-        public ActionResult ComboBoxPartial_Paralelo()
+        public ActionResult ComboBoxPartial_Paralelo(int? id)
         {
-            string IdComboCurso = (Request.Params["IdCurso"] != null) ? (Request.Params["IdCurso"]).ToString() : null;
-
-            if (!string.IsNullOrEmpty(IdComboCurso))
-            {
-                var regex = new Regex(@".{4}");
-                string result = regex.Replace(IdComboCurso, "$&" + Environment.NewLine);
-                string[] array = result.Split('\n');
-                if (array.Count() >= 5)
-                {
-                    SessionFixed.IdAnioBajoDemanda = Convert.ToInt32(array[1]).ToString();
-                    SessionFixed.IdSedeBajoDemanda = Convert.ToInt32(array[2]).ToString();
-                    SessionFixed.IdNivelBajoDemanda = Convert.ToInt32(array[3]).ToString();
-                    SessionFixed.IdJornadaBajoDemanda = Convert.ToInt32(array[4]).ToString();
-                    SessionFixed.IdCursoBajoDemanda = Convert.ToInt32(array[5]).ToString();
-                }
-            }
-
-            return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { });
+            return PartialView("_ComboBoxPartial_Paralelo", id);
         }
         #endregion
 
@@ -190,6 +177,22 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdComboCurso = (info_curso == null ? "" : info_curso.IdComboCurso);
             model.NomCurso = (info_curso == null ? "" : info_curso.NomCurso);
 
+
+            if (!string.IsNullOrEmpty(model.IdComboCurso))
+            {
+                var regex = new Regex(@".{4}");
+                string result = regex.Replace(model.IdComboCurso, "$&" + Environment.NewLine);
+                string[] array = result.Split('\n');
+                if (array.Count() >= 5)
+                {
+                    SessionFixed.IdAnioBajoDemanda = Convert.ToInt32(array[1]).ToString();
+                    SessionFixed.IdSedeBajoDemanda = Convert.ToInt32(array[2]).ToString();
+                    SessionFixed.IdNivelBajoDemanda = Convert.ToInt32(array[3]).ToString();
+                    SessionFixed.IdJornadaBajoDemanda = Convert.ToInt32(array[4]).ToString();
+                    SessionFixed.IdCursoBajoDemanda = Convert.ToInt32(array[5]).ToString();
+                }
+            }
+
             model.lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
             model.lst_MatriculaRubro = bus_matricula_rubro.GetList(model.IdEmpresa, model.IdMatricula);
             ListaMatriculaRubro.set_list(model.lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -216,7 +219,11 @@ namespace Core.Web.Areas.Academico.Controllers
             model.lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
             model.lst_MatriculaRubro = bus_matricula_rubro.GetList(model.IdEmpresa, model.IdMatricula);
             ListaMatriculaRubro.set_list(model.lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
+            SessionFixed.IdAnioBajoDemanda = "-1";
+            SessionFixed.IdSedeBajoDemanda = "-1";
+            SessionFixed.IdNivelBajoDemanda = "-1";
+            SessionFixed.IdJornadaBajoDemanda = "-1";
+            SessionFixed.IdCursoBajoDemanda = "-1";
             cargar_combos();
             return View(model);
         }
