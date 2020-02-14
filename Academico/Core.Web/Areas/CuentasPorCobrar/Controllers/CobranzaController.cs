@@ -276,12 +276,16 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 }
             }
 
-            var LstDet = bus_det.get_list(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdCobro);
-            if ((LstDet.Count == 0 && i_validar.lst_det.Count != 0) || (LstDet.Count != 0 && i_validar.lst_det.Count == 0))
+            if (i_validar.IdCobro>0)
             {
-                msg = "Si el cobro tenia relacionados documentos, no se puede modificar para convertirlo en un cobro anticipado, debe anularlo";
-                return false;
+                var LstDet = bus_det.get_list(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdCobro);
+                if ((LstDet.Count == 0 && i_validar.lst_det.Count != 0) || (LstDet.Count != 0 && i_validar.lst_det.Count == 0))
+                {
+                    msg = "Si el cobro tenia relacionados documentos, no se puede modificar para convertirlo en un cobro anticipado, debe anularlo";
+                    return false;
+                }
             }
+            
             return true;
         }
         #endregion
