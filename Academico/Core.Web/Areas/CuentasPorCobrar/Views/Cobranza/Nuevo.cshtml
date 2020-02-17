@@ -252,6 +252,7 @@
             success: function (data) {
                 $("#DatosAlumno").val(data.DatosAlumno);
                 $("#cr_TotalCobro").val(data.Saldo);
+                CalcularSaldo();
             },
             error: function (error) {
             }
