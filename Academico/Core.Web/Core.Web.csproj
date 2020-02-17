@@ -8258,6 +8258,7 @@
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_ComboBoxPartial_Curso.cshtml" />
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_ComboBoxPartial_Paralelo.cshtml" />
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_ComboBoxPartial_Plantilla.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_007.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
