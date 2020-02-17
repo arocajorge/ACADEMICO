@@ -231,8 +231,6 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_aniolectivo_jornada
-
         public List<aca_AnioLectivo_Jornada_Curso_Info> getList_Update(int IdEmpresa, int IdAnio, int IdCurso)
         {
             try
