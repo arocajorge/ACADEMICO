@@ -44,22 +44,6 @@ namespace Core.Web.Areas.Academico.Controllers
         string mensaje = string.Empty;
         #endregion
 
-        #region Combobox bajo demanda de paralelo
-        public List<aca_Paralelo_Info> get_list_bajo_demanda_paralelo(ListEditItemsRequestedByFilterConditionEventArgs args)
-        {
-            int IdAnio = Convert.ToInt32(SessionFixed.IdAnioBajoDemanda ?? "-1");
-            int IdSede = Convert.ToInt32(SessionFixed.IdSedeBajoDemanda ?? "-1");
-            int IdJornada = Convert.ToInt32(SessionFixed.IdJornadaBajoDemanda ?? "-1");
-            int IdNivel = Convert.ToInt32(SessionFixed.IdNivelBajoDemanda ?? "-1");
-            int IdCurso = Convert.ToInt32(SessionFixed.IdCursoBajoDemanda ?? "-1");
-            return bus_paralelo.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa),IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
-        }
-        public aca_Paralelo_Info get_info_bajo_demanda_paralelo(ListEditItemRequestedByValueEventArgs args)
-        {
-            return bus_paralelo.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
-        }
-        #endregion
-
         #region Combos bajo demanada
         public ActionResult Cmb_MatriculaAlumno()
         {
@@ -74,53 +58,37 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO_MATRICULA.ToString());
         }
-        public ActionResult ComboBoxPartial_Anio()
-        {
-            return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
-        }
+
+        //public ActionResult ComboBoxPartial_Anio()
+        //{
+        //    return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
+        //}
         public ActionResult ComboBoxPartial_Sede()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             return PartialView("_ComboBoxPartial_Sede", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio });
         }
+        public ActionResult ComboBoxPartial_Nivel()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
+            return PartialView("_ComboBoxPartial_Nivel", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio, IdSede = IdSede });
+        }
+        public ActionResult ComboBoxPartial_Jornada()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            return PartialView("_ComboBoxPartial_Jornada", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel });
+        }
 
         public ActionResult ComboBoxPartial_Curso()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
-            decimal IdAlumno = (Request.Params["IdAlumno"] != null) ? decimal.Parse(Request.Params["IdAlumno"]) : -1;
-            string Validar = (Request.Params["Validar"] != null) ? Convert.ToString(Request.Params["Validar"]) : "N";
-            return PartialView("_ComboBoxPartial_Curso", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdAlumno = IdAlumno, Validar = Validar });
-        }
-
-        public ActionResult ComboBoxPartial_Plantilla()
-        {
-            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
-            string IdComboCurso = (Request.Params["IdCurso"] != null) ? (Request.Params["IdCurso"]).ToString() : null;
-            int IdSede = -1;
-            int IdNivel = -1;
-            int IdJornada = -1;
-            int IdCurso = -1;
-
-            if (!string.IsNullOrEmpty(IdComboCurso))
-            {
-                var regex = new Regex(@".{4}");
-                string result = regex.Replace(IdComboCurso, "$&" + Environment.NewLine);
-                string[] array = result.Split('\n');
-                if (array.Count() >= 5)
-                {
-                    IdAnio = Convert.ToInt32(array[1]);
-                    IdSede = Convert.ToInt32(array[2]);
-                    IdNivel = Convert.ToInt32(array[3]);
-                    IdJornada = Convert.ToInt32(array[4]);
-                    IdCurso = Convert.ToInt32(array[5]);
-                }
-            }
-            return PartialView("_ComboBoxPartial_Plantilla", new aca_AnioLectivo_Curso_Plantilla_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
-        }
-
-        public ActionResult ComboBoxPartial_Paralelo(int? id)
-        {
-            return PartialView("_ComboBoxPartial_Paralelo", id);
+            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            return PartialView("_ComboBoxPartial_Curso", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada });
         }
         #endregion
 
@@ -163,43 +131,7 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
-        #region Json
-
-        #endregion
-        public JsonResult SetDatosMatricula(int IdEmpresa = 0, decimal IdAlumno = 0, int IdAnio=0)
-        {
-            var model = bus_matricula.GetInfo_ExisteMatricula(IdEmpresa,IdAnio,IdAlumno);
-            if (model == null) model = new aca_Matricula_Info();
-            model.Validar = "S";
-            //model.IdComboCurso = model.IdEmpresa.ToString("0000") + model.IdAnio.ToString("0000")+ model.IdSede.ToString("0000")+ model.IdNivel.ToString("0000")+ model.IdJornada.ToString("0000") + model.IdCurso.ToString("0000");
-            var info_curso = bus_jornada_curso.GetInfoCursoMatricula(model.IdEmpresa, model.IdAnio, model.IdMatricula);
-            if (info_curso == null) info_curso = new aca_AnioLectivo_Jornada_Curso_Info();
-            model.IdComboCurso = (info_curso == null ? "" : info_curso.IdComboCurso);
-            model.NomCurso = (info_curso == null ? "" : info_curso.NomCurso);
-
-
-            if (!string.IsNullOrEmpty(model.IdComboCurso))
-            {
-                var regex = new Regex(@".{4}");
-                string result = regex.Replace(model.IdComboCurso, "$&" + Environment.NewLine);
-                string[] array = result.Split('\n');
-                if (array.Count() >= 5)
-                {
-                    SessionFixed.IdAnioBajoDemanda = Convert.ToInt32(array[1]).ToString();
-                    SessionFixed.IdSedeBajoDemanda = Convert.ToInt32(array[2]).ToString();
-                    SessionFixed.IdNivelBajoDemanda = Convert.ToInt32(array[3]).ToString();
-                    SessionFixed.IdJornadaBajoDemanda = Convert.ToInt32(array[4]).ToString();
-                    SessionFixed.IdCursoBajoDemanda = Convert.ToInt32(array[5]).ToString();
-                }
-            }
-
-            model.lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
-            model.lst_MatriculaRubro = bus_matricula_rubro.GetList(model.IdEmpresa, model.IdMatricula);
-            ListaMatriculaRubro.set_list(model.lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
-            return Json(model, JsonRequestBehavior.AllowGet);
-        }
-        #region Acciones
+        #region Index
         public ActionResult Index()
         {
             #region Validar Session
@@ -208,41 +140,191 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            aca_Matricula_Info model = new aca_Matricula_Info();
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
-            var IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
-            model.IdEmpresa = IdEmpresa;
-            model.IdAnio = IdAnio;
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-            model.Validar = "S";
-            model.lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
-            model.lst_MatriculaRubro = bus_matricula_rubro.GetList(model.IdEmpresa, model.IdMatricula);
-            ListaMatriculaRubro.set_list(model.lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            SessionFixed.IdAnioBajoDemanda = "-1";
-            SessionFixed.IdSedeBajoDemanda = "-1";
-            SessionFixed.IdNivelBajoDemanda = "-1";
-            SessionFixed.IdJornadaBajoDemanda = "-1";
-            SessionFixed.IdCursoBajoDemanda = "-1";
-            cargar_combos();
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
+
+            aca_Matricula_Info model = new aca_Matricula_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdAnio = info_anio.IdAnio,
+                IdSede = Convert.ToInt32(SessionFixed.IdSede),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+            };
+
+            List<aca_Matricula_Info> lista = bus_matricula.GetList(model.IdEmpresa, model.IdAnio, model.IdSede, true);
+            Lista_Matricula.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Index(aca_Matricula_Info model)
         {
-            model.IdUsuarioModificacion = SessionFixed.IdUsuario;
-            model.lst_MatriculaRubro = ListaMatriculaRubro.get_list(model.IdTransaccionSession);
+            List<aca_Matricula_Info> lista = bus_matricula.GetList(model.IdEmpresa, model.IdAnio, model.IdSede, true);
+            Lista_Matricula.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
 
-            if (!bus_matricula.ModificarPlantillaDB(model))
+            return View(model);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_CambioPlantillaMatricula()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+
+            List<aca_Matricula_Info> model = Lista_Matricula.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_CambioPlantillaMatricula", model);
+        }
+        #endregion
+
+        #region Json
+        public JsonResult SetMatriculaRubro(int IdEmpresa = 0, int IdAnio = 0, int IdPlantilla = 0, int IdMatricula = 0)
+        {
+            decimal Total = 0;
+            decimal TotalProntoPago = 0;
+            decimal ValorDescuento = 0;
+            decimal ValorRubro = 0;
+            decimal ValorTotal = 0;
+            decimal ValorTotalPP = 0;
+            List<aca_Matricula_Rubro_Info> lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
+            if (IdMatricula == 0)
             {
-                ViewBag.mensaje = "No se ha podido modificar el registro";
-                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
-                cargar_combos();
-                return View(model);
+                var info_plantilla = bus_plantilla.GetInfo(IdEmpresa, IdAnio, IdPlantilla);
+                lst_MatriculaRubro = bus_matricula_rubro.GetList_Matricula(IdEmpresa, IdAnio, IdPlantilla);
+                if (lst_MatriculaRubro.Count() > 0)
+                {
+                    var IdPrimerPeriodo = lst_MatriculaRubro.Min(q => q.IdPeriodo);
+
+                    foreach (var item in lst_MatriculaRubro)
+                    {
+                        var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, item.IdPeriodo);
+
+                        if (item.IdPeriodo == IdPrimerPeriodo)
+                        {
+                            item.seleccionado = true;
+                        }
+
+                        if (item.AplicaProntoPago == true)
+                        {
+                            if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
+                            {
+                                if (info_plantilla.TipoDescuento == "%")
+                                {
+                                    ValorDescuento = (item.Total * (info_plantilla.Valor / 100));
+                                    ValorRubro = item.Total - ValorDescuento;
+                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                                }
+                                else
+                                {
+                                    ValorRubro = (item.Total - info_plantilla.Valor);
+                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                                }
+                            }
+                            else
+                            {
+                                ValorRubro = (item.Total);
+                                TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                            }
+
+                            Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                        }
+                        else
+                        {
+                            ValorRubro = (item.Total);
+                            Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                            TotalProntoPago = TotalProntoPago + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                        }
+
+                        item.ValorProntoPago = ValorRubro;
+                        item.FechaProntoPago = Convert.ToDateTime(info_anio_periodo.FechaProntoPago);
+                    }
+                    ValorTotal = lst_MatriculaRubro.Where(q => q.seleccionado == true).Sum(q => q.Total);
+                    ValorTotalPP = lst_MatriculaRubro.Where(q => q.seleccionado == true).Sum(q => q.ValorProntoPago);
+                    ListaMatriculaRubro.set_list(lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                }
+                else
+                {
+                    ValorTotal = Total;
+                    ValorTotalPP = TotalProntoPago;
+                    ListaMatriculaRubro.set_list(new List<aca_Matricula_Rubro_Info>(), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                }
+
+            }
+            else
+            {
+                lst_MatriculaRubro = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                var lst_nueva_plantilla = bus_matricula_rubro.GetList_Matricula(IdEmpresa, IdAnio, IdPlantilla);
+                var lista_no_cobrado = lst_MatriculaRubro.Where(q => q.EnMatricula == false).ToList();
+
+                List<aca_Matricula_Rubro_Info> lista_nueva = new List<aca_Matricula_Rubro_Info>();
+
+                foreach (var item in lst_MatriculaRubro)
+                {
+                    if (item.EnMatricula == true)
+                    {
+                        lista_nueva.Add(item);
+                    }
+                }
+
+
+                foreach (var item1 in lista_no_cobrado)
+                {
+                    foreach (var item2 in lst_nueva_plantilla)
+                    {
+                        if (item1.IdPeriodo == item2.IdPeriodo)
+                        {
+                            item2.IdMecanismo = item1.IdMecanismo;
+                            lista_nueva.Add(item2);
+                        }
+                    }
+                }
+
+                ListaMatriculaRubro.set_list(lista_nueva, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdMatricula = model.IdMatricula, Exito = true });
+
+            return Json(new { Valor = ValorTotal, ProntoPago = ValorTotalPP }, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Acciones
+        public ActionResult Modificar(int IdEmpresa = 0, int IdMatricula = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_Matricula_Info model = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
+            model.Validar = "N";
+
+            var info_curso = bus_jornada_curso.GetInfoCursoMatricula(model.IdEmpresa, model.IdAnio, model.IdMatricula);
+            model.IdComboCurso = (info_curso == null ? "" : info_curso.IdComboCurso);
+            model.NomCurso = (info_curso == null ? "" : info_curso.NomCurso);
+
+            var IdAnio = Convert.ToInt32(model.IdComboCurso.Substring(4, 4));
+            var IdSede = Convert.ToInt32(model.IdComboCurso.Substring(8, 4));
+            var IdNivel = Convert.ToInt32(model.IdComboCurso.Substring(12, 4));
+            var IdJornada = Convert.ToInt32(model.IdComboCurso.Substring(16, 4));
+            var IdCursoMat = Convert.ToInt32(model.IdComboCurso.Substring(20, 4));
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.lst_matricula_curso = new List<aca_Matricula_Info>();
+            model.lst_matricula_curso = bus_matricula.GetList_PorCurso(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
+            Lista_Matricula_PorCurso.set_list(model.lst_matricula_curso, model.IdTransaccionSession);
+
+            model.lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
+            model.lst_MatriculaRubro = bus_matricula_rubro.GetList(model.IdEmpresa, model.IdMatricula);
+            ListaMatriculaRubro.set_list(model.lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            cargar_combos();
+            return View(model);
         }
         #endregion
     }

@@ -34,6 +34,36 @@ namespace Core.Data.Academico
                 return null;
             return getInfo(IdEmpresa, (int)args.Value);
         }
+
+        public List<aca_Paralelo_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                List<aca_Paralelo_Info> Lista = new List<aca_Paralelo_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso==IdCurso).OrderBy(q => q.OrdenParalelo).GroupBy(q => new { q.IdParalelo, q.NomParalelo }).Select(q => new { q.Key.IdParalelo, q.Key.NomParalelo }).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_Paralelo_Info
+                        {
+                            IdParalelo = q.IdParalelo,
+                            NomParalelo = q.NomParalelo,
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<aca_Paralelo_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int skip, int take, string filter)
         {
             try
@@ -95,34 +125,34 @@ namespace Core.Data.Academico
                 throw;
             }
         }
-        public List<aca_Paralelo_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
-        {
-            try
-            {
-                List<aca_Paralelo_Info> Lista = new List<aca_Paralelo_Info>();
+        //public List<aca_Paralelo_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        //{
+        //    try
+        //    {
+        //        List<aca_Paralelo_Info> Lista = new List<aca_Paralelo_Info>();
 
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).OrderBy(q => q.OrdenParalelo).GroupBy(q => new { q.IdParalelo, q.NomParalelo }).Select(q => new { q.Key.IdParalelo, q.Key.NomParalelo }).ToList();
+        //        using (EntitiesAcademico odata = new EntitiesAcademico())
+        //        {
+        //            var lst = odata.aca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).OrderBy(q => q.OrdenParalelo).GroupBy(q => new { q.IdParalelo, q.NomParalelo }).Select(q => new { q.Key.IdParalelo, q.Key.NomParalelo }).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Paralelo_Info
-                        {
-                            IdParalelo = q.IdParalelo,
-                            NomParalelo = q.NomParalelo,
-                        });
-                    });
-                }
+        //            lst.ForEach(q =>
+        //            {
+        //                Lista.Add(new aca_Paralelo_Info
+        //                {
+        //                    IdParalelo = q.IdParalelo,
+        //                    NomParalelo = q.NomParalelo,
+        //                });
+        //            });
+        //        }
 
-                return Lista;
-            }
-            catch (Exception)
-            {
+        //        return Lista;
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-        }
+        //        throw;
+        //    }
+        //}
         public aca_Paralelo_Info getInfo(int IdEmpresa, int IdParalelo)
         {
             try
