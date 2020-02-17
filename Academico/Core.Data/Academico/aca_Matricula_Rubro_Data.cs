@@ -56,7 +56,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.vwaca_Matricula_Rubro.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).Select(q => new aca_Matricula_Rubro_Info
+                    Lista = Context.vwaca_Matricula_Rubro.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).OrderBy(q=>q.IdPeriodo).Select(q => new aca_Matricula_Rubro_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdMatricula = q.IdMatricula,

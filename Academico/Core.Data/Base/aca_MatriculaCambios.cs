@@ -27,8 +27,6 @@ namespace Core.Data.Base
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
     
-        public virtual aca_AnioLectivo_Curso_Paralelo aca_AnioLectivo_Curso_Paralelo { get; set; }
         public virtual aca_Matricula aca_Matricula { get; set; }
-        public virtual aca_Plantilla aca_Plantilla { get; set; }
     }
 }

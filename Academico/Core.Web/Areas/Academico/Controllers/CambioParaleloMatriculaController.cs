@@ -5,17 +5,15 @@ using Core.Info.General;
 using Core.Info.Helps;
 using Core.Web.Helps;
 using DevExpress.Web;
-using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Core.Web.Areas.Academico.Controllers
 {
-    public class CambioPlantillaMatriculaController : Controller
+    public class CambioParaleloMatriculaController : Controller
     {
         #region Variables
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
@@ -98,7 +96,7 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
             int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
             int IdCurso = (Request.Params["IdCurso"] != null) ? int.Parse(Request.Params["IdCurso"]) : -1;
-            return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso=IdCurso});
+            return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
         }
 
         #endregion
@@ -147,12 +145,12 @@ namespace Core.Web.Areas.Academico.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_CambioPlantillaMatricula()
+        public ActionResult GridViewPartial_CambioParaleloMatricula()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             List<aca_Matricula_Info> model = Lista_Matricula.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_CambioPlantillaMatricula", model);
+            return PartialView("_GridViewPartial_CambioParaleloMatricula", model);
         }
         #endregion
 
@@ -266,33 +264,14 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
-        #region Funciones del detalle (modificar)
-        private void cargar_combos_detalle()
-        {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var lst_mecanismo = bus_mecanismo.GetList(IdEmpresa, false);
-            ViewBag.lst_mecanismo = lst_mecanismo;
-        }
-
+        #region GridDetalle alumnos paralelo
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_MatriculaRubro()
+        public ActionResult GridViewPartial_AlumnosPorParalelo()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            List<aca_Matricula_Rubro_Info> model = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_MatriculaRubro", model);
-        }
-
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] aca_Matricula_Rubro_Info info_det)
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            if (ModelState.IsValid)
-                ListaMatriculaRubro.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_MatriculaRubro", model);
+            List<aca_Matricula_Info> model = Lista_Matricula_PorCurso.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_AlumnosPorParalelo", model);
         }
         #endregion
 
@@ -316,9 +295,9 @@ namespace Core.Web.Areas.Academico.Controllers
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
-            model.lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
-            model.lst_MatriculaRubro = bus_matricula_rubro.GetList(model.IdEmpresa, model.IdMatricula);
-            ListaMatriculaRubro.set_list(model.lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            model.lst_matricula_curso = new List<aca_Matricula_Info>();
+            model.lst_matricula_curso = bus_matricula.GetList_PorCurso(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
+            Lista_Matricula_PorCurso.set_list(model.lst_matricula_curso, model.IdTransaccionSession);
 
             cargar_combos();
             return View(model);
@@ -330,7 +309,8 @@ namespace Core.Web.Areas.Academico.Controllers
             model.info_MatriculaCambios = new aca_MatriculaCambios_Info();
             aca_Matricula_Info info_matricula = bus_matricula.GetInfo(model.IdEmpresa, model.IdMatricula);
 
-            model.info_MatriculaCambios = new aca_MatriculaCambios_Info {
+            model.info_MatriculaCambios = new aca_MatriculaCambios_Info
+            {
                 IdEmpresa = info_matricula.IdEmpresa,
                 IdMatricula = info_matricula.IdMatricula,
                 IdAnio = info_matricula.IdAnio,

@@ -2864,46 +2864,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_aca_MatriculaHistoricoPlantilla_aca_AnioLectivo_Curso_Paralelo">
-          <End Role="aca_AnioLectivo_Curso_Paralelo" Type="Self.aca_AnioLectivo_Curso_Paralelo" Multiplicity="1" />
-          <End Role="aca_MatriculaCambios" Type="Self.aca_MatriculaCambios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_AnioLectivo_Curso_Paralelo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdSede" />
-              <PropertyRef Name="IdNivel" />
-              <PropertyRef Name="IdJornada" />
-              <PropertyRef Name="IdCurso" />
-              <PropertyRef Name="IdParalelo" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCambios">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdSede" />
-              <PropertyRef Name="IdNivel" />
-              <PropertyRef Name="IdJornada" />
-              <PropertyRef Name="IdCurso" />
-              <PropertyRef Name="IdParalelo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_MatriculaHistoricoPlantilla_aca_Plantilla">
-          <End Role="aca_Plantilla" Type="Self.aca_Plantilla" Multiplicity="1" />
-          <End Role="aca_MatriculaCambios" Type="Self.aca_MatriculaCambios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Plantilla">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCambios">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_aca_Menu_x_aca_Sede_aca_Menu">
           <End Role="aca_Menu" Type="Self.aca_Menu" Multiplicity="1" />
           <End Role="aca_Menu_x_aca_Sede" Type="Self.aca_Menu_x_aca_Sede" Multiplicity="*" />
@@ -3984,14 +3944,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_MatriculaConducta" EntitySet="aca_MatriculaConducta" />
           </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaHistoricoPlantilla_aca_AnioLectivo_Curso_Paralelo" Association="Self.FK_aca_MatriculaHistoricoPlantilla_aca_AnioLectivo_Curso_Paralelo">
-            <End Role="aca_AnioLectivo_Curso_Paralelo" EntitySet="aca_AnioLectivo_Curso_Paralelo" />
-            <End Role="aca_MatriculaCambios" EntitySet="aca_MatriculaCambios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaHistoricoPlantilla_aca_Plantilla" Association="Self.FK_aca_MatriculaHistoricoPlantilla_aca_Plantilla">
-            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
-            <End Role="aca_MatriculaCambios" EntitySet="aca_MatriculaCambios" />
-          </AssociationSet>
           <AssociationSet Name="FK_aca_Menu_x_aca_Sede_aca_Menu" Association="Self.FK_aca_Menu_x_aca_Sede_aca_Menu">
             <End Role="aca_Menu" EntitySet="aca_Menu" />
             <End Role="aca_Menu_x_aca_Sede" EntitySet="aca_Menu_x_aca_Sede" />
@@ -4511,16 +4463,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           </AssociationSet>
           <EntitySet Name="vwaca_CondicionalMatricula" EntityType="ModelAcademico.vwaca_CondicionalMatricula" />
           <EntitySet Name="aca_MatriculaCambios" EntityType="ModelAcademico.aca_MatriculaCambios" />
-          <AssociationSet Name="FK_aca_MatriculaHistoricoPlantilla_aca_AnioLectivo_Curso_Paralelo" Association="ModelAcademico.FK_aca_MatriculaHistoricoPlantilla_aca_AnioLectivo_Curso_Paralelo">
-            <End Role="aca_AnioLectivo_Curso_Paralelo" EntitySet="aca_AnioLectivo_Curso_Paralelo" />
-            <End Role="aca_MatriculaCambios" EntitySet="aca_MatriculaCambios" />
-          </AssociationSet>
           <AssociationSet Name="FK_aca_MatriculaCambios_aca_Matricula" Association="ModelAcademico.FK_aca_MatriculaCambios_aca_Matricula">
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
-            <End Role="aca_MatriculaCambios" EntitySet="aca_MatriculaCambios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaHistoricoPlantilla_aca_Plantilla" Association="ModelAcademico.FK_aca_MatriculaHistoricoPlantilla_aca_Plantilla">
-            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
             <End Role="aca_MatriculaCambios" EntitySet="aca_MatriculaCambios" />
           </AssociationSet>
           </EntityContainer>
@@ -5219,7 +5163,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <NavigationProperty Name="aca_Sede" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_Sede" />
           <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_AnioLectivo_Curso_Paralelo" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_Matricula" />
           <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_AnioLectivo" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_AnioLectivo" />
-          <NavigationProperty Name="aca_MatriculaCambios" Relationship="ModelAcademico.FK_aca_MatriculaHistoricoPlantilla_aca_AnioLectivo_Curso_Paralelo" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_MatriculaCambios" />
         </EntityType>
         <EntityType Name="vwaca_AnioLectivo_Curso_Paralelo">
           <Key>
@@ -6316,7 +6259,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Matricula" />
           <NavigationProperty Name="aca_Plantilla_Rubro" Relationship="ModelAcademico.FK_aca_Plantilla_Rubro_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Plantilla_Rubro" />
           <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Matricula_Rubro" />
-          <NavigationProperty Name="aca_MatriculaCambios" Relationship="ModelAcademico.FK_aca_MatriculaHistoricoPlantilla_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_MatriculaCambios" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla">
           <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
@@ -7743,34 +7685,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_MatriculaHistoricoPlantilla_aca_AnioLectivo_Curso_Paralelo" FromRole="aca_MatriculaCambios" ToRole="aca_AnioLectivo_Curso_Paralelo" />
           <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_MatriculaCambios_aca_Matricula" FromRole="aca_MatriculaCambios" ToRole="aca_Matricula" />
-          <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_MatriculaHistoricoPlantilla_aca_Plantilla" FromRole="aca_MatriculaCambios" ToRole="aca_Plantilla" />
         </EntityType>
-        <Association Name="FK_aca_MatriculaHistoricoPlantilla_aca_AnioLectivo_Curso_Paralelo">
-          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Paralelo" Role="aca_AnioLectivo_Curso_Paralelo" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_MatriculaCambios" Role="aca_MatriculaCambios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_AnioLectivo_Curso_Paralelo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdSede" />
-              <PropertyRef Name="IdNivel" />
-              <PropertyRef Name="IdJornada" />
-              <PropertyRef Name="IdCurso" />
-              <PropertyRef Name="IdParalelo" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCambios">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdSede" />
-              <PropertyRef Name="IdNivel" />
-              <PropertyRef Name="IdJornada" />
-              <PropertyRef Name="IdCurso" />
-              <PropertyRef Name="IdParalelo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_aca_MatriculaCambios_aca_Matricula">
           <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
           <End Type="ModelAcademico.aca_MatriculaCambios" Role="aca_MatriculaCambios" Multiplicity="*" />
@@ -7782,22 +7698,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             <Dependent Role="aca_MatriculaCambios">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdMatricula" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_MatriculaHistoricoPlantilla_aca_Plantilla">
-          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_MatriculaCambios" Role="aca_MatriculaCambios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Plantilla">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCambios">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

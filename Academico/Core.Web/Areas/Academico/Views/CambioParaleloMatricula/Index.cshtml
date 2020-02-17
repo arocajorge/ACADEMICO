@@ -1,0 +1,23 @@
+﻿@model Core.Info.Academico.aca_Matricula_Info
+@{
+    ViewBag.Title = "Modificar plantilla de matrícula";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
+@using (Html.BeginForm("Index", "CambioParaleloMatricula", FormMethod.Post, new { @role = "form", @class = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdAnio, new { @id = "IdAnio" })
+    @Html.HiddenFor(q => q.IdMatricula, new { @id = "IdMatricula" })
+    @Html.HiddenFor(q => q.IdMecanismo, new { @id = "IdMecanismo" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.Validar, new { @id = "Validar" })
+
+    @Html.Action("GridViewPartial_CambioParaleloMatricula")
+}
+

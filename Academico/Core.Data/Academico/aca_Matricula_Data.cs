@@ -471,17 +471,17 @@ namespace Core.Data.Academico
                     #region HistoricoPlantilla
                     aca_MatriculaCambios Entity_Historico = new aca_MatriculaCambios
                     {
-                        IdEmpresa = info.IdEmpresa,
-                        IdMatricula = info.IdMatricula,
-                        Secuencia = odata_HistoricoPlantilla.getSecuenciaByMatricula(info.IdEmpresa, info.IdMatricula),
-                        IdAnio = info.IdAnio,
-                        IdSede = info.IdSede,
-                        IdNivel = info.IdNivel,
-                        IdJornada = info.IdJornada,
-                        IdCurso = info.IdCurso,
-                        IdParalelo = info.IdParalelo,
-                        IdPlantilla = info.IdPlantilla,
-                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        IdEmpresa = info.info_MatriculaCambios.IdEmpresa,
+                        IdMatricula = info.info_MatriculaCambios.IdMatricula,
+                        Secuencia = odata_HistoricoPlantilla.getSecuenciaByMatricula(info.info_MatriculaCambios.IdEmpresa, info.info_MatriculaCambios.IdMatricula),
+                        IdAnio = info.info_MatriculaCambios.IdAnio,
+                        IdSede = info.info_MatriculaCambios.IdSede,
+                        IdNivel = info.info_MatriculaCambios.IdNivel,
+                        IdJornada = info.info_MatriculaCambios.IdJornada,
+                        IdCurso = info.info_MatriculaCambios.IdCurso,
+                        IdParalelo = info.info_MatriculaCambios.IdParalelo,
+                        IdPlantilla = info.info_MatriculaCambios.IdPlantilla,
+                        IdUsuarioCreacion = info.info_MatriculaCambios.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now
                     };
                     Context.aca_MatriculaCambios.Add(Entity_Historico);
