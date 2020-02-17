@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Academico
 {
-    public class aca_MatriculaHistoricoPlantilla_Data
+    public class aca_MatriculaCambios_Data
     {
         public int getSecuenciaByMatricula(int IdEmpresa, decimal IdMatricula)
         {
@@ -17,9 +17,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var cont = Context.aca_MatriculaHistoricoPlantilla.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula==IdMatricula).Count();
+                    var cont = Context.aca_MatriculaCambios.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula==IdMatricula).Count();
                     if (cont > 0)
-                        Secuencia = Context.aca_MatriculaHistoricoPlantilla.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.Secuencia) + 1;
+                        Secuencia = Context.aca_MatriculaCambios.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.Secuencia) + 1;
                 }
 
                 return Secuencia;

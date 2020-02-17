@@ -216,7 +216,7 @@
     <Compile Include="Areas\Academico\Controllers\AnioLectivoController.cs" />
     <Compile Include="Areas\Academico\Controllers\AsignacionTutorInspectorController.cs" />
     <Compile Include="Areas\Academico\Controllers\CalificacionHistoricoController.cs" />
-    <Compile Include="Areas\Academico\Controllers\CambioCursoMatriculaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\CambioParaleloMatriculaController.cs" />
     <Compile Include="Areas\Academico\Controllers\CambioPlantillaMatriculaController.cs" />
     <Compile Include="Areas\Academico\Controllers\CatalogoFichaController.cs" />
     <Compile Include="Areas\Academico\Controllers\CatalogoTipoFichaController.cs" />
@@ -8259,6 +8259,17 @@
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_ComboBoxPartial_Paralelo.cshtml" />
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_ComboBoxPartial_Plantilla.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_007.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_CmbAlumno.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_GridViewPartial_CambioParaleloMatricula.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioParaleloMatricula\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioParaleloMatricula\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_GridViewPartial_AlumnosPorParalelo.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8303,7 +8314,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
-    <Folder Include="Areas\Academico\Views\CambioCursoMatricula\" />
     <Folder Include="Areas\Banco\Models\" />
     <Folder Include="Areas\Banco\Views\ArchivoBancario\" />
     <Folder Include="Areas\Caja\Models\" />

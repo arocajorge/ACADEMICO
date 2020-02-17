@@ -170,9 +170,8 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_CondicionalMatricula_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_CondicionalMatricula_aca_Catalogo" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_CondicionalMatricula" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaHistoricoPlantilla" Width="1.5" PointX="31.875" PointY="21.5" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaHistoricoPlantilla_aca_AnioLectivo_Curso_Paralelo" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaHistoricoPlantilla_aca_Plantilla" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaCambios" Width="1.5" PointX="23.5" PointY="46" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCambios_aca_Matricula" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -40,5 +40,6 @@ namespace Core.Data.Base
         public string cr_NumDocumento { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }
         public string cr_ObservacionPantalla { get; set; }
+        public string IdUsuario { get; set; }
     }
 }

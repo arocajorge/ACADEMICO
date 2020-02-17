@@ -64,10 +64,10 @@
             this.xrTableCell52 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_fecha_ini = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_fecha_fin = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdSede = new DevExpress.XtraReports.Parameters.Parameter();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
@@ -95,7 +95,7 @@
             this.xrPivotGrid1,
             this.xrTable2,
             this.xrTable1});
-            this.ReportHeader.HeightF = 171.25F;
+            this.ReportHeader.HeightF = 152.9167F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // xrPivotGrid1
@@ -413,11 +413,6 @@
             this.p_IdEmpresa.Name = "p_IdEmpresa";
             this.p_IdEmpresa.Visible = false;
             // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_007_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
-            // 
             // p_fecha_ini
             // 
             this.p_fecha_ini.Name = "p_fecha_ini";
@@ -432,6 +427,11 @@
             // 
             this.p_IdSede.Name = "p_IdSede";
             this.p_IdSede.Visible = false;
+            // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_007_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // ACA_007_Rpt
             // 
