@@ -34,10 +34,10 @@
 
 
         //Configuración checkbox
-        settings.CommandColumn.Visible = false;
-        settings.CommandColumn.ShowSelectCheckbox = false;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowSelectCheckbox = true;
         settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
-
+        /*
         settings.Columns.Add(column =>
         {
             column.Caption = "Selección anterior";
@@ -45,7 +45,7 @@
             column.ColumnType = MVCxGridViewColumnType.CheckBox;
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
         });
-
+*/
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdDocumento";

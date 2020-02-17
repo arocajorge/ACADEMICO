@@ -116,6 +116,36 @@
             }
         });
     }
+    function SetMatriculaRubro(){
+        $("#ValorPlantilla").val("");
+        $("#ValorPlantillaProntoPago").val("");
+        LimpiarListaDetalle();
+        selectedIDs = "";
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdPlantilla: IdPlantilla.GetValue(),
+            IdMatricula: $("#IdMatricula").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetMatriculaRubro", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                $("#ValorPlantilla").val(data.Valor);
+                $("#ValorPlantillaProntoPago").val(data.ProntoPago);
+                GridViewPartial_DetallePlantilla.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
 @using (Html.BeginForm("Nuevo", "Matricula", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
@@ -581,36 +611,7 @@
         });
     }
 
-    function SetMatriculaRubro(){
-        $("#ValorPlantilla").val("");
-        $("#ValorPlantillaProntoPago").val("");
-        LimpiarListaDetalle();
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdAnio: IdAnio.GetValue(),
-            IdPlantilla: IdPlantilla.GetValue(),
-            IdMatricula: $("#IdMatricula").val(),
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("SetMatriculaRubro", "Matricula", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            console.log(data);
-                $("#ValorPlantilla").val(data.Valor);
-                $("#ValorPlantillaProntoPago").val(data.ProntoPago);
 
-                GridViewPartial_DetallePlantilla.PerformCallback();
-            },
-            error: function (error) {
-            }
-        });
-    }
 
     function ValidarMatricula(){
         var datos = {
