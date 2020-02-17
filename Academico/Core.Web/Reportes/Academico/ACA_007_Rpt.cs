@@ -65,6 +65,7 @@ namespace Core.Web.Reportes.Academico
 
                 List<ACA_007_Info> Lista = bus_rpt.Getlist(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
                 this.DataSource = Lista;
+
                 var info_sede = bus_sede.GetInfo(IdEmpresa, IdSede);
                 var NomSede = "";
                 if (info_sede != null)

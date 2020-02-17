@@ -63,13 +63,13 @@
             this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell52 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAnio = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdSede = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCurso = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdJornada = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdNivel = new DevExpress.XtraReports.Parameters.Parameter();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
@@ -97,7 +97,7 @@
             this.xrPivotGrid1,
             this.xrTable2,
             this.xrTable1});
-            this.ReportHeader.HeightF = 162.9167F;
+            this.ReportHeader.HeightF = 171.25F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // xrPivotGrid1
@@ -121,8 +121,9 @@
             this.pivotGridField1});
             this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 85.00001F);
             this.xrPivotGrid1.Name = "xrPivotGrid1";
+            this.xrPivotGrid1.OLAPConnectionString = "";
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(751.0001F, 77.91665F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(751.0001F, 67.91671F);
             this.xrPivotGrid1.PrintHeader += new System.EventHandler<DevExpress.XtraReports.UI.PivotGrid.CustomExportHeaderEventArgs>(this.xrPivotGrid1_PrintHeader);
             this.xrPivotGrid1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrPivotGrid1_BeforePrint);
             // 
@@ -405,11 +406,6 @@
             this.xrPageInfo2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrPageInfo2.TextFormatString = "Página {0} de {1}";
             // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_007_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
-            // 
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
@@ -433,6 +429,11 @@
             // p_IdNivel
             // 
             this.p_IdNivel.Name = "p_IdNivel";
+            // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_007_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // ACA_007_Rpt
             // 

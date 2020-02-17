@@ -482,5 +482,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
+
+        
     }
 }
