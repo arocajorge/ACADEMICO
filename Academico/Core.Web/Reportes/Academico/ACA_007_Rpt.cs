@@ -61,23 +61,24 @@ namespace Core.Web.Reportes.Academico
 
         }
 
-        private void xrPivotGrid1_PrintHeader(object sender, DevExpress.XtraReports.UI.PivotGrid.CustomExportHeaderEventArgs e)
+        private void xrPivotGrid1_PrintFieldValue(object sender, DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs e)
         {
             try
             {
-                if (e.Field != null && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
+                if (e.Field != null && (e.Field.FieldName == "NomPlantilla") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
                 {
                     LabelBrick lb = new LabelBrick();
-                    lb.BackColor = Color.Beige;
                     lb.Padding = new PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
                     lb.Angle = 90;
+                    lb.Text = e.Text;
                     lb.Rect = GraphicsUnitConverter.DocToPixel(e.Brick.Rect);
                     e.Brick = lb;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                
+
+                throw;
             }
         }
     }
