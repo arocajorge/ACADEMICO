@@ -93,11 +93,20 @@
             });
 
         });
-        //settings.row
-        settings.ClientSideEvents.RowClick = "OnRowClick";
-        settings.ClientSideEvents.EndCallback = "OnEndCallback";
-
-        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        settings.AfterPerformCallback = (sender, e) =>
+        {
+            string[] array = ViewData["selectedIDs"].ToString().Split(',');
+            var gridView = sender as MVCxGridView;
+            for (int i = 0; i < gridView.VisibleRowCount; i++)
+            {
+                if (array.Where(q => q == (string)gridView.GetRowValues(i, "IdString")).Count() > 0)
+                    gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
+            }
+        };
+        //settings.ClientSideEvents.RowClick = "OnRowClick";
+        //settings.ClientSideEvents.EndCallback = "OnEndCallback";
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });
 }
 @grid.Bind(Model).GetHtml()

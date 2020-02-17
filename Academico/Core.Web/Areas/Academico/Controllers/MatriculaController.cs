@@ -236,12 +236,22 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             List<aca_Matricula_Rubro_Info> model = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
+            int x = 0;
+            string selectedIDs = "";
             ViewData["selectedIDs"] = Request.Params["selectedIDs"];
             if (ViewData["selectedIDs"] == null)
+            {   
+                foreach (var item in model.Where(q => q.seleccionado == true).ToList())
+                {
+                    if (x == 0)
+                        selectedIDs = item.IdString;
+                    else
+                        selectedIDs += "," + item.IdString;
+                    x++;
+                }
+                ViewData["selectedIDs"] = selectedIDs;
+            }else
             {
-                int x = 0;
-                string selectedIDs = "";
                 foreach (var item in model.Where(q => q.seleccionado == true).ToList())
                 {
                     if (x == 0)
@@ -398,8 +408,11 @@ namespace Core.Web.Areas.Academico.Controllers
                                 ValorRubro = (item.Total);
                                 TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
                             }
-
-                            Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                            if (item.seleccionado)
+                            {
+                                Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                            }
+                            
                         }
                         else
                         {

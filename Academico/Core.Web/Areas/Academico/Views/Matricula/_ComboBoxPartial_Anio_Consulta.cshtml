@@ -11,6 +11,7 @@
     settings.Properties.ValueType = typeof(int);
     settings.Properties.TextField = "Descripcion";
     settings.Properties.NullText = "== Seleccione ==";
+    settings.Properties.AllowMouseWheel = false;
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
     settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdSede.PerformCallback(); }";
 }).BindList(new Core.Bus.Academico.aca_AnioLectivo_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa),false)).Bind(Model.IdAnio).GetHtml()

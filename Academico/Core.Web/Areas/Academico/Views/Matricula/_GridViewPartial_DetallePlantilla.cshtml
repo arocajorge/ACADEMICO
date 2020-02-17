@@ -37,7 +37,7 @@
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowSelectCheckbox = true;
         settings.CommandColumn.SelectAllCheckboxMode = GridViewSelectAllCheckBoxMode.AllPages;
-
+        /*
         settings.Columns.Add(column =>
         {
             column.Caption = "Selección anterior";
@@ -45,10 +45,10 @@
             column.ColumnType = MVCxGridViewColumnType.CheckBox;
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
         });
-
+*/
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdString";
+            column.FieldName = "Periodo";
             column.Caption = "Periodo";
             column.Width = Unit.Percentage(10);
         });
@@ -81,7 +81,7 @@
                     gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
             }
         };
-        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        //settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });
