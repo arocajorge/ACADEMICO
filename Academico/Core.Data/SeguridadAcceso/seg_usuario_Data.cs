@@ -50,6 +50,33 @@ namespace Core.Data.SeguridadAcceso
             }
         }
 
+        public List<seg_usuario_Info> GetListCobradores(int IdEmpresa)
+        {
+            try
+            {
+                List<seg_usuario_Info> Lista = new List<seg_usuario_Info>();
+
+                using (EntitiesCuentasPorCobrar db = new Base.EntitiesCuentasPorCobrar())
+                {
+                    var lst = db.cxc_cobro.Where(q => q.IdEmpresa == IdEmpresa).GroupBy(q=> q.IdUsuario).ToList();
+                    foreach (var item in lst)
+                    {
+                        Lista.Add(new seg_usuario_Info
+                        {
+                            IdUsuario =item.Key,
+                            Nombre = item.Key
+                        });
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public seg_usuario_Info validar_login(string IdUsuario, string contrasena)
         {
             try

@@ -36,6 +36,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public List<aca_Curso_Info> GetList_CambioCurso(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, decimal IdMatricula)
+        {
+            try
+            {
+                return odata.getList_CambioCurso(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdMatricula);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public aca_Curso_Info GetInfo(int IdEmpresa, int IdCurso)
         {
             try

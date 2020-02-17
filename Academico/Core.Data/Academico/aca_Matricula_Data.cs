@@ -516,6 +516,25 @@ namespace Core.Data.Academico
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
 
+                    #region HistoricoPlantilla
+                    aca_MatriculaCambios Entity_Cambios = new aca_MatriculaCambios
+                    {
+                        IdEmpresa = info.info_MatriculaCambios.IdEmpresa,
+                        IdMatricula = info.info_MatriculaCambios.IdMatricula,
+                        Secuencia = odata_HistoricoPlantilla.getSecuenciaByMatricula(info.info_MatriculaCambios.IdEmpresa, info.info_MatriculaCambios.IdMatricula),
+                        IdAnio = info.info_MatriculaCambios.IdAnio,
+                        IdSede = info.info_MatriculaCambios.IdSede,
+                        IdNivel = info.info_MatriculaCambios.IdNivel,
+                        IdJornada = info.info_MatriculaCambios.IdJornada,
+                        IdCurso = info.info_MatriculaCambios.IdCurso,
+                        IdParalelo = info.info_MatriculaCambios.IdParalelo,
+                        IdPlantilla = info.info_MatriculaCambios.IdPlantilla,
+                        IdUsuarioCreacion = info.info_MatriculaCambios.IdUsuarioCreacion,
+                        FechaCreacion = DateTime.Now
+                    };
+                    Context.aca_MatriculaCambios.Add(Entity_Cambios);
+                    #endregion
+
                     Context.SaveChanges();
                 }
 

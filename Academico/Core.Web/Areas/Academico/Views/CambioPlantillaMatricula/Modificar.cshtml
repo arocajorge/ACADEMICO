@@ -195,46 +195,5 @@
             }
         });
     }
-
-    function actualizar() {
-        var datos = {
-            Fecha: Fecha.GetDate(),
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdAnio: IdAnio.GetValue(),
-            IdAlumno: IdAlumno.GetValue(),
-            IdComboCurso: IdComboCurso.GetValue(),
-            IdParalelo: IdParalelo.GetValue(),
-            IdPlantilla: IdPlantilla.GetValue(),
-            Observacion: $("#Observacion").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val(),
-            IdMatricula: $("#IdMatricula").val(),
-            IDs_Doc: documentoIDs
-        }
-        $("#btn_guardar").attr("disabled", true);
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("actualizar", "Matricula", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data.msg == "") {
-                    //$("#myform").submit();
-                    var url = '@Url.Action("Modificar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
-                    window.location.href = url;
-                }
-                else {
-                    $("#MensajeError").show();
-                    $("#Mensaje").html(data.msg);
-                }
-                $("#btn_guardar").attr("disabled", false);
-            },
-            error: function (error) {
-            }
-        });
-    }
 </script>
 

@@ -25,6 +25,18 @@ namespace Core.Bus.SeguridadAcceso
                 throw;
             }
         }
+        public List<seg_usuario_Info> GetListCobradores(int IdEmpresa)
+        {
+            try
+            {
+                return odata.GetListCobradores(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public bool modificarDB(string IdUsuario, string old_Contrasena, string new_Contrasena)
         {

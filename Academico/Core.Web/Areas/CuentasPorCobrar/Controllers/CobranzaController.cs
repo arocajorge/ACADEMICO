@@ -216,6 +216,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         msg = "El campo cuenta bancaria es obligatorio para depositos";
                         return false;
                     }
+                    i_validar.cr_Banco = null;
+                    i_validar.IdTarjeta = null;
+                    i_validar.cr_Tarjeta = null;                    
                     break;
                 case "TARJ":
                     if (i_validar.IdTarjeta == null || string.IsNullOrEmpty(i_validar.cr_Tarjeta))
@@ -223,6 +226,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         msg = "El campo tarjeta de crédito es obligatorio";
                         return false;
                     }
+                    i_validar.cr_Banco = null;
                     break;
                 case "CHQF":
                     if (string.IsNullOrEmpty(i_validar.cr_Banco))
@@ -241,6 +245,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         return false;
                     }
                     i_validar.IdBanco = null;
+                    i_validar.cr_Banco = null;
+                    i_validar.IdTarjeta = null;
+                    i_validar.cr_Tarjeta = null;
                     break;
 
                 case "CHQV":
@@ -260,10 +267,15 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         return false;
                     }
                     i_validar.IdBanco = null;
+                    i_validar.cr_Banco = null;
+                    i_validar.IdTarjeta = null;
+                    i_validar.cr_Tarjeta = null;
                     break;
                 default:
                     i_validar.IdBanco = null;
                     i_validar.cr_Banco = null;
+                    i_validar.IdTarjeta = null;
+                    i_validar.cr_Tarjeta = null;
                     break;
             }
 

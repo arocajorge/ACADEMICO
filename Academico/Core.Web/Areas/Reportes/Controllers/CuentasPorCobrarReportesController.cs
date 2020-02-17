@@ -72,7 +72,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             if (infoUsuario !=null && infoUsuario.es_super_admin==true)
             {
-                lst_usuario = bus_usuario.get_list(false);
+                lst_usuario = bus_usuario.GetListCobradores(IdEmpresa);
             }
             else
             {

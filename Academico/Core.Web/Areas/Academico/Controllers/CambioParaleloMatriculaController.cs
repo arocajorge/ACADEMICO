@@ -155,112 +155,12 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Json
-        public JsonResult SetMatriculaRubro(int IdEmpresa = 0, int IdAnio = 0, int IdPlantilla = 0, int IdMatricula = 0)
+        public JsonResult SetMatricula_PorCurso(int IdEmpresa = 0, int IdAnio = 0, int IdSede=0, int IdNivel=0, int IdJornada=0, int IdCurso=0, int IdParalelo = 0)
         {
-            decimal Total = 0;
-            decimal TotalProntoPago = 0;
-            decimal ValorDescuento = 0;
-            decimal ValorRubro = 0;
-            decimal ValorTotal = 0;
-            decimal ValorTotalPP = 0;
-            List<aca_Matricula_Rubro_Info> lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
-            if (IdMatricula == 0)
-            {
-                var info_plantilla = bus_plantilla.GetInfo(IdEmpresa, IdAnio, IdPlantilla);
-                lst_MatriculaRubro = bus_matricula_rubro.GetList_Matricula(IdEmpresa, IdAnio, IdPlantilla);
-                if (lst_MatriculaRubro.Count() > 0)
-                {
-                    var IdPrimerPeriodo = lst_MatriculaRubro.Min(q => q.IdPeriodo);
+            var lista_PorCurso = bus_matricula.GetList_PorCurso(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo);
+            Lista_Matricula_PorCurso.set_list(lista_PorCurso, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-                    foreach (var item in lst_MatriculaRubro)
-                    {
-                        var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, item.IdPeriodo);
-
-                        if (item.IdPeriodo == IdPrimerPeriodo)
-                        {
-                            item.seleccionado = true;
-                        }
-
-                        if (item.AplicaProntoPago == true)
-                        {
-                            if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
-                            {
-                                if (info_plantilla.TipoDescuento == "%")
-                                {
-                                    ValorDescuento = (item.Total * (info_plantilla.Valor / 100));
-                                    ValorRubro = item.Total - ValorDescuento;
-                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
-                                }
-                                else
-                                {
-                                    ValorRubro = (item.Total - info_plantilla.Valor);
-                                    TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
-                                }
-                            }
-                            else
-                            {
-                                ValorRubro = (item.Total);
-                                TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
-                            }
-
-                            Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
-                        }
-                        else
-                        {
-                            ValorRubro = (item.Total);
-                            Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
-                            TotalProntoPago = TotalProntoPago + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
-                        }
-
-                        item.ValorProntoPago = ValorRubro;
-                        item.FechaProntoPago = Convert.ToDateTime(info_anio_periodo.FechaProntoPago);
-                    }
-                    ValorTotal = lst_MatriculaRubro.Where(q => q.seleccionado == true).Sum(q => q.Total);
-                    ValorTotalPP = lst_MatriculaRubro.Where(q => q.seleccionado == true).Sum(q => q.ValorProntoPago);
-                    ListaMatriculaRubro.set_list(lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                }
-                else
-                {
-                    ValorTotal = Total;
-                    ValorTotalPP = TotalProntoPago;
-                    ListaMatriculaRubro.set_list(new List<aca_Matricula_Rubro_Info>(), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                }
-
-            }
-            else
-            {
-                lst_MatriculaRubro = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                var lst_nueva_plantilla = bus_matricula_rubro.GetList_Matricula(IdEmpresa, IdAnio, IdPlantilla);
-                var lista_no_cobrado = lst_MatriculaRubro.Where(q => q.EnMatricula == false).ToList();
-
-                List<aca_Matricula_Rubro_Info> lista_nueva = new List<aca_Matricula_Rubro_Info>();
-
-                foreach (var item in lst_MatriculaRubro)
-                {
-                    if (item.EnMatricula == true)
-                    {
-                        lista_nueva.Add(item);
-                    }
-                }
-
-
-                foreach (var item1 in lista_no_cobrado)
-                {
-                    foreach (var item2 in lst_nueva_plantilla)
-                    {
-                        if (item1.IdPeriodo == item2.IdPeriodo)
-                        {
-                            item2.IdMecanismo = item1.IdMecanismo;
-                            lista_nueva.Add(item2);
-                        }
-                    }
-                }
-
-                ListaMatriculaRubro.set_list(lista_nueva, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            }
-
-
-            return Json(new { Valor = ValorTotal, ProntoPago = ValorTotalPP }, JsonRequestBehavior.AllowGet);
+            return Json(lista_PorCurso, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -318,13 +218,13 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdNivel = info_matricula.IdNivel,
                 IdJornada = info_matricula.IdJornada,
                 IdCurso = info_matricula.IdCurso,
-                IdParalelo = info_matricula.IdPlantilla,
+                IdParalelo = info_matricula.IdParalelo,
                 IdPlantilla = info_matricula.IdPlantilla,
                 IdUsuarioCreacion = SessionFixed.IdUsuario
             };
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
-            model.lst_MatriculaRubro = ListaMatriculaRubro.get_list(model.IdTransaccionSession);
-            if (!bus_matricula.ModificarPlantillaDB(model))
+            
+            if (!bus_matricula.ModificarCursoParaleloDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
