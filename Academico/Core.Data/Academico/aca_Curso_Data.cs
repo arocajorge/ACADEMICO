@@ -10,6 +10,7 @@ namespace Core.Data.Academico
 {
     public class aca_Curso_Data
     {
+        aca_Matricula_Data odataMatricula = new aca_Matricula_Data();
         public List<aca_Curso_Info> getList(int IdEmpresa, bool MostrarAnulados)
         {
             try
@@ -51,6 +52,37 @@ namespace Core.Data.Academico
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada).OrderBy(q => q.OrdenCurso).GroupBy(q => new { q.IdCurso, q.NomCurso }).Select(q => new { q.Key.IdCurso, q.Key.NomCurso }).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_Curso_Info
+                        {
+                            IdCurso = q.IdCurso,
+                            NomCurso = q.NomCurso,
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_Curso_Info> getList_CambioCurso(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, decimal IdMatricula)
+        {
+            try
+            {
+                List<aca_Curso_Info> Lista = new List<aca_Curso_Info>();
+                var info_matricula = odataMatricula.getInfo(IdEmpresa, IdMatricula);
+                var IdCursoActualMatricula = (info_matricula == null ? 0 : info_matricula.IdCurso);
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel 
+                    && q.IdJornada == IdJornada && q.IdCurso == IdCursoActualMatricula).OrderBy(q => q.OrdenCurso).GroupBy(q => new { q.IdCurso, q.NomCurso }).Select(q => new { q.Key.IdCurso, q.Key.NomCurso }).ToList();
 
                     lst.ForEach(q =>
                     {
