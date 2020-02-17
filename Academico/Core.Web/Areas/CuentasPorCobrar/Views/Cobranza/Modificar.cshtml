@@ -35,7 +35,7 @@
     function MostrarDatosTarjeta() {
 
         var TipoCobro = $("#IdCobro_tipo").val();
-        if (TipoCobro == "TARJ") 
+        if (TipoCobro == "TARJ")
         {
             $("#DatoIdTarjeta").show();
             $("#DatoTarjeta").show();
@@ -182,8 +182,28 @@
             win.focus();
         }
     }
-
-
+    function SetDatosAlumno() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAlumno: IdAlumno.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetAlumno", "Cobranza",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#DatosAlumno").val(data.DatosAlumno);
+                $("#cr_TotalCobro").val(data.Saldo);
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
 
 
@@ -249,12 +269,18 @@
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdCliente"></label>
                     <button type="button" class="btn btn-primary form-control " onclick="CrearModificarAlumno();">
                         <i class="fa fa-external-link-square"></i>
                     </button>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    @Html.TextBoxFor(q => q.DatosAlumno, new { @id = "DatosAlumno", @readonly = "readonly", @class = "form-control" })
                 </div>
             </div>
             @if (!String.IsNullOrEmpty(Model.IdCobro_tipo))

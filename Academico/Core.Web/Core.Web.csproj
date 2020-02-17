@@ -8258,7 +8258,6 @@
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_ComboBoxPartial_Curso.cshtml" />
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_ComboBoxPartial_Paralelo.cshtml" />
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_ComboBoxPartial_Plantilla.cshtml" />
-    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_007.cshtml" />
     <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_CmbAlumno.cshtml" />
     <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_ComboBoxPartial_Curso.cshtml" />
@@ -8270,6 +8269,7 @@
     <Content Include="Areas\Academico\Views\CambioParaleloMatricula\Index.cshtml" />
     <Content Include="Areas\Academico\Views\CambioParaleloMatricula\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_GridViewPartial_AlumnosPorParalelo.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_007.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

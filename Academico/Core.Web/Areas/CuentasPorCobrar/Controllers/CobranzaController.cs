@@ -46,6 +46,8 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
         tb_TarjetaCredito_Bus bus_tarjeta = new tb_TarjetaCredito_Bus();
         fa_TipoNota_Bus bus_tipo_nota = new fa_TipoNota_Bus();
+        aca_AnioLectivo_Bus bus_anioLectivo = new aca_AnioLectivo_Bus();
+        aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -216,6 +218,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         msg = "El campo cuenta bancaria es obligatorio para depositos";
                         return false;
                     }
+                    i_validar.cr_Banco = null;
+                    i_validar.IdTarjeta = null;
+                    i_validar.cr_Tarjeta = null;                    
                     break;
                 case "TARJ":
                     if (i_validar.IdTarjeta == null || string.IsNullOrEmpty(i_validar.cr_Tarjeta))
@@ -223,6 +228,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         msg = "El campo tarjeta de crédito es obligatorio";
                         return false;
                     }
+                    i_validar.cr_Banco = null;
                     break;
                 case "CHQF":
                     if (string.IsNullOrEmpty(i_validar.cr_Banco))
@@ -241,6 +247,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         return false;
                     }
                     i_validar.IdBanco = null;
+                    i_validar.cr_Banco = null;
+                    i_validar.IdTarjeta = null;
+                    i_validar.cr_Tarjeta = null;
                     break;
 
                 case "CHQV":
@@ -260,10 +269,15 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         return false;
                     }
                     i_validar.IdBanco = null;
+                    i_validar.cr_Banco = null;
+                    i_validar.IdTarjeta = null;
+                    i_validar.cr_Tarjeta = null;
                     break;
                 default:
                     i_validar.IdBanco = null;
                     i_validar.cr_Banco = null;
+                    i_validar.IdTarjeta = null;
+                    i_validar.cr_Tarjeta = null;
                     break;
             }
 
@@ -396,6 +410,19 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             model.IdEntidad = model.IdCliente;
             cargar_combos(IdEmpresa, model.IdSucursal);
 
+            var Anio = bus_anioLectivo.GetInfo_AnioEnCurso(IdEmpresa, 0);
+            if (Anio != null)
+            {
+                var Matricula = bus_matricula.GetInfo_ExisteMatricula(model.IdEmpresa, Anio.IdAnio, model.IdAlumno ?? 0);
+                if (Matricula != null)
+                {
+                    model.DatosAlumno = Matricula.NomNivel + " " + Matricula.NomJornada + " " + Matricula.NomCurso + " " + Matricula.NomParalelo;
+                }
+                else
+                    model.DatosAlumno = "NO MATRICULADO";
+            }
+            
+
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
@@ -448,6 +475,18 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             list_det.set_list(model.lst_det, model.IdTransaccionSession);
             model.IdEntidad = model.IdCliente;
             cargar_combos(IdEmpresa, model.IdSucursal);
+
+            var Anio = bus_anioLectivo.GetInfo_AnioEnCurso(IdEmpresa, 0);
+            if (Anio != null)
+            {
+                var Matricula = bus_matricula.GetInfo_ExisteMatricula(model.IdEmpresa, Anio.IdAnio, model.IdAlumno ?? 0);
+                if (Matricula != null)
+                {
+                    model.DatosAlumno = Matricula.NomNivel + " " + Matricula.NomJornada + " " + Matricula.NomCurso + " " + Matricula.NomParalelo;
+                }
+                else
+                    model.DatosAlumno = "NO MATRICULADO";
+            }
 
             #region Validacion Periodo
             ViewBag.MostrarBoton = true;
@@ -606,6 +645,24 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             IdCliente = (info_cliente == null ? 0 : info_cliente.IdCliente);
 
             return Json(IdCliente, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SetAlumno(int IdEmpresa = 0, decimal IdAlumno = 0)
+        {
+            string DatosAlumno = string.Empty;
+            double Saldo = Math.Round(bus_cobro.GetSaldoAlumno(IdEmpresa, IdAlumno),2,MidpointRounding.AwayFromZero);
+            var AnioLectivo = bus_anioLectivo.GetInfo_AnioEnCurso(IdEmpresa, 0);
+            if (AnioLectivo != null)
+            {
+                var Matricula = bus_matricula.GetInfo_ExisteMatricula(IdEmpresa, AnioLectivo.IdAnio, IdAlumno);
+                if (Matricula != null)
+                {
+                    DatosAlumno = Matricula.NomNivel + " " + Matricula.NomJornada + " " + Matricula.NomCurso + " " + Matricula.NomParalelo;
+                }
+                else
+                    DatosAlumno = "NO MATRICULADO";
+            }
+            return Json(new { Saldo = Saldo, DatosAlumno = DatosAlumno },JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

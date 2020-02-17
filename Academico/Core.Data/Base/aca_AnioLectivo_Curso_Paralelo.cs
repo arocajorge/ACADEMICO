@@ -40,8 +40,8 @@ namespace Core.Data.Base
         public virtual aca_Profesor aca_Profesor { get; set; }
         public virtual aca_Profesor aca_Profesor1 { get; set; }
         public virtual aca_Sede aca_Sede { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

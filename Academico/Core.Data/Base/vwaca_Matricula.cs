@@ -34,5 +34,11 @@ namespace Core.Data.Base
         public string NomParalelo { get; set; }
         public bool BloquearMatricula { get; set; }
         public string pe_cedulaRuc { get; set; }
+        public decimal IdPersonaF { get; set; }
+        public decimal IdPersonaR { get; set; }
+        public int IdPlantilla { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public string Observacion { get; set; }
+        public decimal IdMecanismo { get; set; }
     }
 }

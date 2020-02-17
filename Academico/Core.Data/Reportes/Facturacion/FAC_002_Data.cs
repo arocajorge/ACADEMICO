@@ -68,6 +68,7 @@ namespace Core.Data.Reportes.Facturacion
                                  T_SubtotalSinDscto = q.T_SubtotalSinDscto,
                                  ValorIVA = q.ValorIVA,
                                  vt_total = q.vt_total
+                                 
                              }).ToList();
                 }
                 return Lista;

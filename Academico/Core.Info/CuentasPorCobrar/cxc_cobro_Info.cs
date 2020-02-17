@@ -46,8 +46,6 @@ namespace Core.Info.CuentasPorCobrar
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
-        public string nom_pc { get; set; }
-        public string ip { get; set; }
         public Nullable<int> IdTarjeta { get; set; }
 
 
@@ -70,6 +68,7 @@ namespace Core.Info.CuentasPorCobrar
         public DateTime vt_fecha { get; set; }
         public string vt_tipoDoc { get; set; }
         public string nom_Motivo_tipo_cobro { get; set; }
+        public string DatosAlumno { get; set; }
         #endregion
     }
 }
