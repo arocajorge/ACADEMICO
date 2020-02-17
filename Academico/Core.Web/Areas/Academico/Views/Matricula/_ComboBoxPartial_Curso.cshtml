@@ -11,6 +11,7 @@
     settings.Properties.TextField = "NomCurso";
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+    settings.Properties.AllowMouseWheel = false;
     settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue(); e.customArgs['IdAlumno'] = IdAlumno.GetValue(); e.customArgs['Validar'] = $('#Validar').val(); }";
     settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParalelo.PerformCallback(); IdPlantilla.PerformCallback();LimpiarListaDetalle();}";
 }).BindList(new Core.Bus.Academico.aca_AnioLectivo_Jornada_Curso_Bus().GetListCursoPromoverAlumno(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAlumno, Model.IdAnio, Model.Validar)).Bind(Model.IdComboCurso).GetHtml()

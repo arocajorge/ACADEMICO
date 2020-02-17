@@ -48,6 +48,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
         fa_TipoNota_x_Empresa_x_Sucursal_Bus bus_nota_x_empresa_sucursal = new fa_TipoNota_x_Empresa_x_Sucursal_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         aca_Familia_Bus bus_familia = new aca_Familia_Bus();
+        aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+        aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
 
         fa_notaCreDeb_List Lista_Factura = new fa_notaCreDeb_List();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
@@ -444,6 +446,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
             }
 
             #region Resumen
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(info.IdEmpresa,0);
+            var info_matricula = bus_matricula.GetInfo_ExisteMatricula(info.IdEmpresa,(info_anio==null ? 0 : info_anio.IdAnio),Convert.ToDecimal(info.IdAlumno));
             var info_ImpuestoIVA = bus_impuesto.get_info(info.info_resumen.IdCod_Impuesto_IVA);
             var Descuento = 0;
             var ValorIVA = Math.Round(info.info_resumen.ValorIVA, 2, MidpointRounding.AwayFromZero);
@@ -472,7 +476,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 PorIva = PorIVA,
                 ValorIVA = ValorIVA,
                 Total = Total,
-                IdCod_Impuesto_IVA = info_ImpuestoIVA.IdCod_Impuesto
+                IdCod_Impuesto_IVA = info_ImpuestoIVA.IdCod_Impuesto,
+                IdAnio=(info_anio==null ? (int?)null : info_anio.IdAnio),
+                IdMatricula = (info_matricula==null ? (decimal?)null : info_matricula.IdMatricula)
             };
 
             #endregion
@@ -525,6 +531,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
             return true;
         }
         #endregion
+
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
