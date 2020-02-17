@@ -42,18 +42,27 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             }
 
             this.DataSource = lst_rpt;
+            xrPivotGrid1.DataSource = lst_rpt.Where(q=> q.IdCobro_tipo != "NT").ToList();
         }
 
         private void xrPivotGrid1_PrintFieldValue(object sender, DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs e)
         {
             try
             {
-                if (e.Field != null && (e.Field.FieldName == "cr_fecha" || e.Field.FieldName == "GrupoTipoCobro") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.RowArea)
+                if (e.Field != null && (e.Field.FieldName == "cr_fecha" || e.Field.FieldName == "GrupoTipoCobro") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.RowArea && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.GrandTotal && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.Total)
                 {
                     LabelBrick lb = new LabelBrick();
                     lb.Padding = new PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
                     lb.Angle = 90;
                     lb.Text = e.Field.FieldName == "cr_fecha" ? Convert.ToDateTime(e.Text.Replace("Total","")).Date.ToString("dd/MM/yyyy") : e.Text;
+                    lb.Rect = GraphicsUnitConverter.DocToPixel(e.Brick.Rect);
+                    e.Brick = lb;
+                }else
+                    if (e.Field != null && e.Field.FieldName == "cr_fecha" && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.RowArea && (e.ValueType == DevExpress.XtraPivotGrid.PivotGridValueType.GrandTotal || e.ValueType == DevExpress.XtraPivotGrid.PivotGridValueType.Total))
+                {
+                    LabelBrick lb = new LabelBrick();
+                    lb.Padding = new PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
+                    lb.Text = e.Field.FieldName == "cr_fecha" ? Convert.ToDateTime(e.Text.Replace("Total", "")).Date.ToString("'Total 'dd/MM/yyyy") : e.Text;
                     lb.Rect = GraphicsUnitConverter.DocToPixel(e.Brick.Rect);
                     e.Brick = lb;
                 }
