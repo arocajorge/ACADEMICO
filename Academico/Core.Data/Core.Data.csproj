@@ -104,6 +104,9 @@
     <Compile Include="Base\aca_MateriaArea.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\aca_Matricula.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_MatriculaCambios.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -311,9 +314,6 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MateriaGrupo.cs">
-      <DependentUpon>ModelAcademico.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\aca_Matricula.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MatriculaCalificacion.cs">

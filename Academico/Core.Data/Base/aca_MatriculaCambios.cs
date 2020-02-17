@@ -26,7 +26,5 @@ namespace Core.Data.Base
         public int IdPlantilla { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
-    
-        public virtual aca_Matricula aca_Matricula { get; set; }
     }
 }

@@ -89,7 +89,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).FirstOrDefault();
+                    var Entity = db.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
