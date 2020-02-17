@@ -82,6 +82,7 @@
     <Compile Include="Academico\aca_MateriaArea_Data.cs" />
     <Compile Include="Academico\aca_MateriaGrupo_Data.cs" />
     <Compile Include="Academico\aca_Materia_Data.cs" />
+    <Compile Include="Academico\aca_MatriculaCambios_Data.cs" />
     <Compile Include="Academico\aca_Matricula_Data.cs" />
     <Compile Include="Academico\aca_Matricula_Rubro_Data.cs" />
     <Compile Include="Academico\aca_MecanismoDePago_Data.cs" />
@@ -101,6 +102,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MateriaArea.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_MatriculaCambios.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Reporte.cs">

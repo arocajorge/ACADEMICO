@@ -73,6 +73,7 @@
     <Compile Include="Academico\aca_Materia_Info.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacion_Info.cs" />
     <Compile Include="Academico\aca_MatriculaConducta_Info.cs" />
+    <Compile Include="Academico\aca_MatriculaCambios_Info.cs" />
     <Compile Include="Academico\aca_Matricula_Info.cs" />
     <Compile Include="Academico\aca_Matricula_Rubro_Info.cs" />
     <Compile Include="Academico\aca_MecanismoDePago_Info.cs" />
