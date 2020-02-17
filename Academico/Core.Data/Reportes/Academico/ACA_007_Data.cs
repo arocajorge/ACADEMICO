@@ -41,7 +41,8 @@ namespace Core.Data.Reportes.Academico
                         NomSede=q.NomSede,
                         OrdenParalelo = q.OrdenParalelo,
                         pe_sexo =q.pe_sexo,
-                        NomCurso = q.NomCurso
+                        NomCurso = q.NomCurso,
+                        Descripcion=q.Descripcion
 
                     }).ToList();
                 }

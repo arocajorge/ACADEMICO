@@ -31,5 +31,6 @@ namespace Core.Info.Reportes.Academico
         public System.DateTime Fecha { get; set; }
         public string NomPlantilla { get; set; }
         public int IdPlantilla { get; set; }
+        public string Descripcion { get; set; }
     }
 }
