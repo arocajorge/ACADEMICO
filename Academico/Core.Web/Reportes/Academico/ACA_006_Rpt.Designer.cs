@@ -48,7 +48,6 @@
             this.p_IdCurso = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdJornada = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAnio = new DevExpress.XtraReports.Parameters.Parameter();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -66,9 +65,10 @@
             this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -237,11 +237,6 @@
             this.p_IdAnio.Name = "p_IdAnio";
             this.p_IdAnio.Visible = false;
             // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_006_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
-            // 
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
@@ -396,6 +391,11 @@
             this.lbl_imagen.SizeF = new System.Drawing.SizeF(135.3146F, 76.91665F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_006_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
+            // 
             // ACA_006_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -420,8 +420,8 @@
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_006_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
