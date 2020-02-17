@@ -8156,7 +8156,7 @@
     <Content Include="Areas\Academico\Views\Alumno\_CmbDocumentoAlumno.cshtml" />
     <Content Include="Areas\Academico\Views\SocioEconomico\_GridViewPartial_AlumnoHermanos.cshtml" />
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_GridViewPartial_MatriculaRubro.cshtml" />
-    <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_CmbAlumno_ReadOnly.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_CmbAlumno.cshtml" />
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\Index.cshtml" />
     <Content Include="Areas\General\Views\GrupoEtnico\Nuevo.cshtml" />
     <Content Include="Areas\General\Views\GrupoEtnico\Modificar.cshtml" />

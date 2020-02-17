@@ -8,14 +8,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
+    var exp = false;
+    var ind;
+    var visibleIndex = -1;
+    function OnGetRowValues(Value){
+        console.log(Value);
+        if(Value == null){
 
+            exp = true;
+            ind = visibleIndex;
+        }
+    }
+
+    function OnRowClick (s, e) {
+        visibleIndex = e.visibleIndex;
+        s.GetRowValues(e.visibleIndex, 'FechaFacturacion', OnGetRowValues);
+        if(exp == true){
+            s.StartEditRow(visibleIndex);
+        }
+
+    }
+
+    function OnEndCallback(s, e) {
+        if (exp == true) {
+            exp = false;
+            s.ExpandDetailRow(ind);
+        }
+    }
+</script>
 @using (Html.BeginForm("Modificar", "CambioPlantillaMatricula", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdMatricula, new { @id = "IdMatricula" })
     @Html.HiddenFor(q => q.IdMecanismo, new { @id = "IdMecanismo" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-    @Html.HiddenFor(q => q.IdAnio, new { @id = "IdAnio" })
     @Html.HiddenFor(q => q.Validar, new { @id = "Validar" })
 
     if (ViewBag.mensaje != null)
@@ -56,28 +83,29 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCliente">Estudiante*</label>
-                    @Html.Partial("_CmbAlumno_ReadOnly", Model.IdAlumno)
+                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="IdEmpresa">Año Lectivo</label>
-                    @Html.TextBoxFor(q => q.Descripcion, new { @class = "form-control" })
+                    <label for="IdEmpresa">Año lectivo</label>
+                    @Html.Partial("_ComboBoxPartial_Anio", Model)
+                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdEmpresa">Sede</label>
                     @Html.Partial("_ComboBoxPartial_Sede", Model)
                     @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-5">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdEmpresa">Nivel Académico</label>
                     @Html.Partial("_ComboBoxPartial_Nivel", Model)
@@ -91,11 +119,7 @@
                     @Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdEmpresa">Curso</label>
                     @Html.Partial("_ComboBoxPartial_Curso", Model)
@@ -125,26 +149,11 @@
         </div>
     </div>
     <br />
-    <div id="Tabs" role="tabpanel">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="active">
-                <a href="#tb_plantilla_detalle" aria-controls="otros" role="tab" data-toggle="tab">Detalle de plantilla</a>
-            </li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content" style="padding-top: 20px">
-
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_matricula_paralelo">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            @Html.Action("GridViewPartial_MatriculaRubro")
-                        </div>
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_MatriculaRubro")
             </div>
-
         </div>
     </div>
 
