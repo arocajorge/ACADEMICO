@@ -1,6 +1,6 @@
 ﻿@Html.DevExpress().ComboBox(settings =>
 {
-    settings.Name = "IdCurso";
+    settings.Name = "IdParalelo";
     settings.CallbackRouteValues = new { Controller = "CambioPlantillaMatricula", Action = "ComboBoxPartial_Paralelo", Area = "Academico" };
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.Properties.DisplayFormatString = "[{0}] - {1}";
@@ -12,5 +12,6 @@
     settings.Properties.TextField = "NomParalelo";
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = $('#IdAnio').val(); e.customArgs['IdSede'] = IdSede.GetValue(); e.customArgs['IdNivel'] = IdNivel.GetValue(); e.customArgs['IdJornada'] = IdJornada.GetValue(); e.customArgs['IdCurso'] = IdCurso.GetValue();}";
+    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue(); e.customArgs['IdSede'] = IdSede.GetValue(); e.customArgs['IdNivel'] = IdNivel.GetValue(); e.customArgs['IdJornada'] = IdJornada.GetValue(); e.customArgs['IdCurso'] = IdCurso.GetValue();}";
+    settings.ReadOnly = true;
 }).BindList(new Core.Bus.Academico.aca_Paralelo_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAnio, Model.IdSede, Model.IdNivel, Model.IdJornada, Model.IdCurso)).Bind(Model.IdParalelo).GetHtml()

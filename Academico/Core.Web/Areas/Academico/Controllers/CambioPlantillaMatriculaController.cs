@@ -101,36 +101,6 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
-        #region Funciones del detalle (modificar)
-        private void cargar_combos_detalle()
-        {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var lst_mecanismo = bus_mecanismo.GetList(IdEmpresa, false);
-            ViewBag.lst_mecanismo = lst_mecanismo;
-        }
-
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_MatriculaRubro()
-        {
-            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            List<aca_Matricula_Rubro_Info> model = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_MatriculaRubro", model);
-        }
-
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] aca_Matricula_Rubro_Info info_det)
-        {
-            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
-            if (ModelState.IsValid)
-                ListaMatriculaRubro.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_MatriculaRubro", model);
-        }
-        #endregion
-
         #region Index
         public ActionResult Index()
         {
@@ -285,6 +255,36 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
+        #region Funciones del detalle (modificar)
+        private void cargar_combos_detalle()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_mecanismo = bus_mecanismo.GetList(IdEmpresa, false);
+            ViewBag.lst_mecanismo = lst_mecanismo;
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_MatriculaRubro()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            List<aca_Matricula_Rubro_Info> model = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_MatriculaRubro", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] aca_Matricula_Rubro_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            if (ModelState.IsValid)
+                ListaMatriculaRubro.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_MatriculaRubro", model);
+        }
+        #endregion
+
         #region Acciones
         public ActionResult Modificar(int IdEmpresa = 0, int IdMatricula = 0, bool Exito = false)
         {
@@ -325,6 +325,35 @@ namespace Core.Web.Areas.Academico.Controllers
 
             cargar_combos();
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(aca_Matricula_Info model)
+        {
+            aca_Matricula_Info info_matricula = bus_matricula.GetInfo(model.IdEmpresa, model.IdMatricula);
+            model.info_HistoricoPlantilla = new aca_MatriculaHistoricoPlantilla_Info {
+                IdEmpresa = info_matricula.IdEmpresa,
+                IdMatricula = info_matricula.IdMatricula,
+                IdAnio = info_matricula.IdAnio,
+                IdSede = info_matricula.IdSede,
+                IdNivel = info_matricula.IdNivel,
+                IdJornada = info_matricula.IdJornada,
+                IdCurso = info_matricula.IdCurso,
+                IdParalelo = info_matricula.IdPlantilla,
+                IdPlantilla = info_matricula.IdPlantilla,
+                IdUsuarioCreacion = SessionFixed.IdUsuario
+            };
+            model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+
+            if (!bus_matricula.ModificarPlantillaDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido modificar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdMatricula = model.IdMatricula, Exito = true });
         }
         #endregion
     }

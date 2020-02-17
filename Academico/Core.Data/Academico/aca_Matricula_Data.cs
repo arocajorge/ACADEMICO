@@ -11,6 +11,7 @@ namespace Core.Data.Academico
 {
     public class aca_Matricula_Data
     {
+        aca_MatriculaHistoricoPlantilla_Data odata_HistoricoPlantilla = new aca_MatriculaHistoricoPlantilla_Data();
         public List<aca_Matricula_Info> getList(int IdEmpresa, int IdAnio, int IdSede, bool MostrarAnulados)
         {
             try
@@ -466,12 +467,32 @@ namespace Core.Data.Academico
                             Context.aca_Matricula_Rubro.Add(Entity_Det);
                         }
                     }
+
+                    #region HistoricoPlantilla
+                    aca_MatriculaHistoricoPlantilla Entity_Historico = new aca_MatriculaHistoricoPlantilla
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdMatricula = info.IdMatricula,
+                        Secuencia = odata_HistoricoPlantilla.getSecuenciaByMatricula(info.IdEmpresa, info.IdMatricula),
+                        IdAnio = info.IdAnio,
+                        IdSede = info.IdSede,
+                        IdNivel = info.IdNivel,
+                        IdJornada = info.IdJornada,
+                        IdCurso = info.IdCurso,
+                        IdParalelo = info.IdParalelo,
+                        IdPlantilla = info.IdPlantilla,
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        FechaCreacion = DateTime.Now
+                    };
+                    Context.aca_MatriculaHistoricoPlantilla.Add(Entity_Historico);
+                    #endregion
+
                     Context.SaveChanges();
                 }
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

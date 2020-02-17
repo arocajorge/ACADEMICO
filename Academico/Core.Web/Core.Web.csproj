@@ -8156,7 +8156,7 @@
     <Content Include="Areas\Academico\Views\Alumno\_CmbDocumentoAlumno.cshtml" />
     <Content Include="Areas\Academico\Views\SocioEconomico\_GridViewPartial_AlumnoHermanos.cshtml" />
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_GridViewPartial_MatriculaRubro.cshtml" />
-    <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_CmbAlumno_ReadOnly.cshtml" />
+    <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_CmbAlumno.cshtml" />
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\Index.cshtml" />
     <Content Include="Areas\General\Views\GrupoEtnico\Nuevo.cshtml" />
     <Content Include="Areas\General\Views\GrupoEtnico\Modificar.cshtml" />
@@ -8258,6 +8258,7 @@
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_ComboBoxPartial_Curso.cshtml" />
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_ComboBoxPartial_Paralelo.cshtml" />
     <Content Include="Areas\Academico\Views\CambioPlantillaMatricula\_ComboBoxPartial_Plantilla.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_007.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

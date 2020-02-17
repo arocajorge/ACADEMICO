@@ -3,11 +3,12 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
-using DevExpress.XtraPrinting;
-using Core.Bus.Reportes.Academico;
 using Core.Info.Reportes.Academico;
 using System.Collections.Generic;
+using Core.Bus.Reportes.Academico;
 using Core.Bus.Academico;
+using Core.Bus.General;
+using DevExpress.XtraPrinting;
 
 namespace Core.Web.Reportes.Academico
 {
@@ -20,6 +21,39 @@ namespace Core.Web.Reportes.Academico
         public ACA_007_Rpt()
         {
             InitializeComponent();
+        }
+        private void ACA_007_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            try
+            {
+
+                lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+                lbl_usuario.Text = usuario;
+
+                int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+                int IdSede = string.IsNullOrEmpty(p_IdSede.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSede.Value);
+                DateTime fecha_ini = string.IsNullOrEmpty(p_fecha_ini.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_fecha_ini.Value);
+                DateTime fecha_fin = string.IsNullOrEmpty(p_fecha_fin.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_fecha_fin.Value);
+                aca_Sede_Bus bus_sede = new aca_Sede_Bus();
+
+                List<ACA_007_Info> Lista = bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin);
+                this.DataSource = Lista;
+
+                var info_sede = bus_sede.GetInfo(IdEmpresa, IdSede);
+                var NomSede = "";
+                if (info_sede != null)
+                {
+                    NomSede = info_sede.NomSede;
+
+                }
+
+                lbl_sede.Text = NomSede;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void xrPivotGrid1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
@@ -46,42 +80,5 @@ namespace Core.Web.Reportes.Academico
                 
             }
         }
-
-        private void ACA_007_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-            try
-            {
-
-                lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-                lbl_usuario.Text = usuario;
-
-                int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-                int IdAnio = string.IsNullOrEmpty(p_IdAnio.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAnio.Value);
-                int IdSede = string.IsNullOrEmpty(p_IdSede.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSede.Value);
-                int IdNivel = string.IsNullOrEmpty(p_IdNivel.Value.ToString()) ? 0 : Convert.ToInt32(p_IdNivel.Value);
-                int IdJornada = string.IsNullOrEmpty(p_IdJornada.Value.ToString()) ? 0 : Convert.ToInt32(p_IdJornada.Value);
-                int IdCurso = string.IsNullOrEmpty(p_IdCurso.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCurso.Value);
-                aca_Sede_Bus bus_sede = new aca_Sede_Bus();
-
-                List<ACA_007_Info> Lista = bus_rpt.Getlist(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
-                this.DataSource = Lista;
-                var info_sede = bus_sede.GetInfo(IdEmpresa, IdSede);
-                var NomSede = "";
-                if (info_sede != null)
-                {
-                    NomSede = info_sede.NomSede;
-
-                }
-
-                lbl_sede.Text = NomSede;
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-    
     }
 }

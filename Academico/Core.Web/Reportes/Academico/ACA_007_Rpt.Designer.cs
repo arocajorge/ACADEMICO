@@ -63,13 +63,11 @@
             this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell52 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_IdAnio = new DevExpress.XtraReports.Parameters.Parameter();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.p_fecha_ini = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_fecha_fin = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdSede = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_IdCurso = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_IdJornada = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_IdNivel = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
@@ -97,7 +95,7 @@
             this.xrPivotGrid1,
             this.xrTable2,
             this.xrTable1});
-            this.ReportHeader.HeightF = 162.9167F;
+            this.ReportHeader.HeightF = 171.25F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // xrPivotGrid1
@@ -121,8 +119,9 @@
             this.pivotGridField1});
             this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 85.00001F);
             this.xrPivotGrid1.Name = "xrPivotGrid1";
+            this.xrPivotGrid1.OLAPConnectionString = "";
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(751.0001F, 77.91665F);
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(751.0001F, 67.91671F);
             this.xrPivotGrid1.PrintHeader += new System.EventHandler<DevExpress.XtraReports.UI.PivotGrid.CustomExportHeaderEventArgs>(this.xrPivotGrid1_PrintHeader);
             this.xrPivotGrid1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrPivotGrid1_BeforePrint);
             // 
@@ -208,6 +207,8 @@
             // 
             // xrTableCell3
             // 
+            this.xrTableCell3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?p_fecha_ini")});
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.Text = "xrTableCell3";
@@ -224,6 +225,8 @@
             // 
             // xrTableCell5
             // 
+            this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?p_fecha_fin")});
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.Text = "xrTableCell5";
@@ -405,34 +408,30 @@
             this.xrPageInfo2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrPageInfo2.TextFormatString = "Página {0} de {1}";
             // 
+            // p_IdEmpresa
+            // 
+            this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
+            // 
             // objectDataSource1
             // 
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_007_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
-            // p_IdEmpresa
+            // p_fecha_ini
             // 
-            this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_fecha_ini.Name = "p_fecha_ini";
+            this.p_fecha_ini.Visible = false;
             // 
-            // p_IdAnio
+            // p_fecha_fin
             // 
-            this.p_IdAnio.Name = "p_IdAnio";
+            this.p_fecha_fin.Name = "p_fecha_fin";
+            this.p_fecha_fin.Visible = false;
             // 
             // p_IdSede
             // 
             this.p_IdSede.Name = "p_IdSede";
-            // 
-            // p_IdCurso
-            // 
-            this.p_IdCurso.Name = "p_IdCurso";
-            // 
-            // p_IdJornada
-            // 
-            this.p_IdJornada.Name = "p_IdJornada";
-            // 
-            // p_IdNivel
-            // 
-            this.p_IdNivel.Name = "p_IdNivel";
+            this.p_IdSede.Visible = false;
             // 
             // ACA_007_Rpt
             // 
@@ -450,11 +449,9 @@
             this.Margins = new System.Drawing.Printing.Margins(43, 56, 40, 35);
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
-            this.p_IdAnio,
-            this.p_IdSede,
-            this.p_IdCurso,
-            this.p_IdJornada,
-            this.p_IdNivel});
+            this.p_fecha_ini,
+            this.p_fecha_fin,
+            this.p_IdSede});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_007_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
@@ -502,11 +499,9 @@
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField2;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField1;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField7;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdAnio;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdSede;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdCurso;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdJornada;
-        private DevExpress.XtraReports.Parameters.Parameter p_IdNivel;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
+        public DevExpress.XtraReports.Parameters.Parameter p_fecha_ini;
+        public DevExpress.XtraReports.Parameters.Parameter p_fecha_fin;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdSede;
     }
 }
