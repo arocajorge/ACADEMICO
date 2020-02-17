@@ -46,6 +46,8 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                             cr_Banco = item.cr_Banco,
                             cr_NumDocumento = item.cr_NumDocumento,
                             IdCliente = item.IdCliente,
+                            IdUsuario=item.IdUsuario,
+                            Fecha_Transac=item.Fecha_Transac,
                             cr_ObservacionPantalla = item.cr_ObservacionPantalla
                         });
                     }   
