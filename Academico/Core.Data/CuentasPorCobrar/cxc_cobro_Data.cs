@@ -1015,6 +1015,8 @@ namespace Core.Data.CuentasPorCobrar
                     NaturalezaNota = "SRI",
                     IdCtaCble_TipoNota = TipoNota.IdCtaCble,
                     IdCobro_tipo = "NTCR",
+                    IdUsuario = info.IdUsuario,
+                    IdUsuarioUltMod = info.IdUsuarioUltMod,
                     info_resumen = new fa_notaCreDeb_resumen_Info(),
                     lst_det = new List<fa_notaCreDeb_det_Info>(),
                     lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>()
@@ -1124,6 +1126,8 @@ namespace Core.Data.CuentasPorCobrar
                     NaturalezaNota = "INT",
                     IdCtaCble_TipoNota = TipoNota.IdCtaCble,
                     IdCobro_tipo = info.IdCobro_tipo,
+                    IdUsuario = info.IdUsuario,
+                    IdUsuarioUltMod = info.IdUsuarioUltMod,
                     info_resumen = new fa_notaCreDeb_resumen_Info(),
                     lst_det = new List<fa_notaCreDeb_det_Info>(),
                     lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>()

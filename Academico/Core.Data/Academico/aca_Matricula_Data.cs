@@ -131,7 +131,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno).FirstOrDefault();
+                    var Entity = db.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
@@ -151,7 +151,13 @@ namespace Core.Data.Academico
                         IdPersonaR = Entity.IdPersonaR,
                         IdPlantilla = Entity.IdPlantilla,
                         Fecha = Entity.Fecha,
-                        Observacion = Entity.Observacion
+                        Observacion = Entity.Observacion,
+                        NomSede = Entity.NomSede,
+                        NomJornada = Entity.NomJornada,
+                        NomCurso = Entity.NomCurso,
+                        NomNivel = Entity.NomNivel,
+                        NomParalelo = Entity.NomParalelo,
+                        pe_nombreCompleto = Entity.pe_nombreCompleto
                     };
                 }
 

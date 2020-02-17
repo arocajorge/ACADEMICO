@@ -17,6 +17,7 @@
         settings.Properties.Columns.Add("CodAlumno", "Codigo", 10);
         settings.Properties.Columns.Add("pe_cedulaRuc", "Identificacion", 15);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Alumno", 65);
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function (){ SetDatosAlumno(); }";
     })
     .BindList(new Core.Web.Areas.CuentasPorCobrar.Controllers.CobranzaController().get_list_bajo_demanda_alumno, new Core.Web.Areas.CuentasPorCobrar.Controllers.CobranzaController().get_info_bajo_demanda_alumno)
     .Bind(Model.GetType() == typeof(Core.Info.CuentasPorCobrar.cxc_cobro_Info) ? "" : (Model == 0 ? "" : Model));
