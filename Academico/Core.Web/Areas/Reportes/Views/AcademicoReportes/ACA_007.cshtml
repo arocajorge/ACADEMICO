@@ -1,15 +1,47 @@
-﻿@model Core.Info.Helps.cl_filtros_Info
+﻿@using System.Web.UI.WebControls
+@model Core.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Resumen de alumnos matriculados";
+    Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
+    ViewBag.Title = "Estadistica de alumnos matriculados";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
     }
-    Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
 }
-@using (Html.BeginForm("ACA_007", "AcademicoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+<script type="text/javascript">
+    var textSeparator = ";";
+    function updateText() {
+        var selectedItems = StringArray.GetSelectedItems();
+        checkComboBox.SetText(getSelectedItemsText(selectedItems));
+    }
+    function synchronizeListBoxValues(dropDown, args) {
+        StringArray.UnselectAll();
+        var texts = dropDown.GetText().split(textSeparator);
+        var values = getValuesByTexts(texts);
+        StringArray.SelectValues(values);
+        updateText(); // for remove non-existing texts
+    }
+    function getSelectedItemsText(items) {
+        var texts = [];
+        for (var i = 0; i < items.length; i++)
+            texts.push(items[i].text);
+        return texts.join(textSeparator);
+    }
+    function getValuesByTexts(texts) {
+        var actualValues = [];
+        var item;
+        for (var i = 0; i < texts.length; i++) {
+            item = StringArray.FindItemByText(texts[i]);
+            if (item != null)
+                actualValues.push(item.value);
+        }
+        return actualValues;
+    }
+</script>
+
+@using (Html.BeginForm("CXC_007", "AcademicoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     <div class="box">
         <div class="box-header with-border">
             <div class="row">
@@ -29,11 +61,44 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-6">
+                    <div class="col-md-2">
                         <div class="form-group">
-                            <label for="IdProducto">Año lectivo</label>
-                            @Html.Partial("_ComboBoxPartial_Anio", Model)
-                            @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                            <label for="">Fecha inicio*</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.DevExpress().DateEditFor(q => q.fecha_ini, settings =>
+                           {
+                               settings.Name = "fecha_ini";
+                               settings.Properties.UseMaskBehavior = true;
+                               settings.Properties.EditFormat = EditFormat.Date;
+                               settings.Properties.EditFormatString = "dd/MM/yyyy";
+                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Fecha fin*</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.DevExpress().DateEditFor(q => q.fecha_fin, settings =>
+                           {
+                               settings.Name = "fecha_fin";
+                               settings.Properties.UseMaskBehavior = true;
+                               settings.Properties.EditFormat = EditFormat.Date;
+                               settings.Properties.EditFormatString = "dd/MM/yyyy";
+                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -41,6 +106,7 @@
             <!-- /.box-body -->
         </div>
     </div>
+
 
     <div class="box">
         <div class="box-header with-border">
@@ -56,11 +122,11 @@
         </div>
         <div class="box-body">
             @Html.DevExpress().WebDocumentViewer(settings =>
-                    {
-                        settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
-                        settings.MobileMode = false;
-                        settings.Name = "webDocumentViewer";
-                    }).Bind(ViewBag.Report).GetHtml()
+       {
+           settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+           settings.MobileMode = false;
+           settings.Name = "webDocumentViewer";
+       }).Bind(ViewBag.Report).GetHtml()
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
