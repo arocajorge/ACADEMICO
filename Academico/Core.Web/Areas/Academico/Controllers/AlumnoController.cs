@@ -1002,14 +1002,14 @@ namespace Core.Web.Areas.Academico.Controllers
                 var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 var Lista_Estudiantes = Lista_Alumno.get_list(model.IdTransaccionSession);
                 var Lista_Familia_Estudiantes= Lista_Familia.get_list(model.IdTransaccionSession);
-                //foreach (var item in Lista_Estudiantes)
-                //{
-                //    if (!bus_alumno.GuardarDB(item))
-                //    {
-                //        ViewBag.mensaje = "Error al importar el archivo";
-                //        return View(model);
-                //    }
-                //}
+                foreach (var item in Lista_Estudiantes)
+                {
+                    if (!bus_alumno.GuardarDB(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        return View(model);
+                    }
+                }
 
                 foreach (var item in Lista_Familia_Estudiantes)
                 {

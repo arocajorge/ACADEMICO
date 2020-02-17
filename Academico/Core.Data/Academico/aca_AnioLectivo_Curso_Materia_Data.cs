@@ -80,6 +80,8 @@ namespace Core.Data.Academico
                     var lst_MateriaPorCurso = Context.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();
                     Context.aca_AnioLectivo_Curso_Materia.RemoveRange(lst_MateriaPorCurso);
 
+                    var lst_antigua_materia_profesor = Context.aca_AnioLectivo_Paralelo_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();
+
                     if (lista.Count > 0)
                     {
                         foreach (var info in lista)
@@ -101,9 +103,14 @@ namespace Core.Data.Academico
                                 OrdenMateriaGrupo = (info.NomMateriaGrupo==null ? null : info.OrdenMateriaGrupo),
                                 EsObligatorio = info.EsObligatorio
                             };
+
                             Context.aca_AnioLectivo_Curso_Materia.Add(Entity);
                         }
+
+
                     }
+
+                    
                     Context.SaveChanges();
                 }
                 return true;
