@@ -8,35 +8,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-<script type="text/javascript">
-    var exp = false;
-    var ind;
-    var visibleIndex = -1;
-    function OnGetRowValues(Value){
-        console.log(Value);
-        if(Value == null){
-
-            exp = true;
-            ind = visibleIndex;
-        }
-    }
-
-    function OnRowClick (s, e) {
-        visibleIndex = e.visibleIndex;
-        s.GetRowValues(e.visibleIndex, 'FechaFacturacion', OnGetRowValues);
-        if(exp == true){
-            s.StartEditRow(visibleIndex);
-        }
-
-    }
-
-    function OnEndCallback(s, e) {
-        if (exp == true) {
-            exp = false;
-            s.ExpandDetailRow(ind);
-        }
-    }
-</script>
 @using (Html.BeginForm("Modificar", "CambioParaleloMatricula", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
@@ -44,6 +15,7 @@
     @Html.HiddenFor(q => q.IdMecanismo, new { @id = "IdMecanismo" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.Validar, new { @id = "Validar" })
+    @Html.HiddenFor(q => q.IdPlantilla, new { @id = "IdPlantilla" })
 
     if (ViewBag.mensaje != null)
     {
@@ -159,65 +131,27 @@
         $("#MensajeError").hide();
     });
 
-    function SetMatriculaRubro(){
+    function SetMatricula_PorCurso() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdAnio: IdAnio.GetValue(),
-            IdPlantilla: IdPlantilla.GetValue(),
-            IdMatricula: $("#IdMatricula").val(),
+            IdSede: IdSede.GetValue(),
+            IdNivel: IdNivel.GetValue(),
+            IdJornada: IdJornada.GetValue(),
+            IdCurso: IdCurso.GetValue(),
+            IdParalelo: IdParalelo.GetValue()
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("SetMatriculaRubro", "Matricula", new { Area = "Academico" })',
+            url: '@Url.Action("SetMatricula_PorCurso", "CambioParaleloMatricula", new { Area = "Academico" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridViewPartial_MatriculaRubro.PerformCallback();
-            },
-            error: function (error) {
-            }
-        });
-    }
-
-    function actualizar() {
-        var datos = {
-            Fecha: Fecha.GetDate(),
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdAnio: IdAnio.GetValue(),
-            IdAlumno: IdAlumno.GetValue(),
-            IdComboCurso: IdComboCurso.GetValue(),
-            IdParalelo: IdParalelo.GetValue(),
-            IdPlantilla: IdPlantilla.GetValue(),
-            Observacion: $("#Observacion").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val(),
-            IdMatricula: $("#IdMatricula").val(),
-            IDs_Doc: documentoIDs
-        }
-        $("#btn_guardar").attr("disabled", true);
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("actualizar", "Matricula", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data.msg == "") {
-                    //$("#myform").submit();
-                    var url = '@Url.Action("Modificar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
-                    window.location.href = url;
-                }
-                else {
-                    $("#MensajeError").show();
-                    $("#Mensaje").html(data.msg);
-                }
-                $("#btn_guardar").attr("disabled", false);
+                GridViewPartial_AlumnosPorParalelo.PerformCallback();
             },
             error: function (error) {
             }
