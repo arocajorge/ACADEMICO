@@ -17,7 +17,6 @@ namespace Core.Data.Base
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
         public int Secuencia { get; set; }
-        public decimal IdAlumno { get; set; }
         public int IdAnio { get; set; }
         public int IdSede { get; set; }
         public int IdNivel { get; set; }

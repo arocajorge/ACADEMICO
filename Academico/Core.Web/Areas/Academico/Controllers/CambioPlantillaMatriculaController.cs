@@ -330,6 +330,19 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Modificar(aca_Matricula_Info model)
         {
+            aca_Matricula_Info info_matricula = bus_matricula.GetInfo(model.IdEmpresa, model.IdMatricula);
+            model.info_HistoricoPlantilla = new aca_MatriculaHistoricoPlantilla_Info {
+                IdEmpresa = info_matricula.IdEmpresa,
+                IdMatricula = info_matricula.IdMatricula,
+                IdAnio = info_matricula.IdAnio,
+                IdSede = info_matricula.IdSede,
+                IdNivel = info_matricula.IdNivel,
+                IdJornada = info_matricula.IdJornada,
+                IdCurso = info_matricula.IdCurso,
+                IdParalelo = info_matricula.IdPlantilla,
+                IdPlantilla = info_matricula.IdPlantilla,
+                IdUsuarioCreacion = SessionFixed.IdUsuario
+            };
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
 
             if (!bus_matricula.ModificarPlantillaDB(model))
