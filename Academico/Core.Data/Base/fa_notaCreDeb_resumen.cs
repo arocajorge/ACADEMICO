@@ -29,6 +29,8 @@ namespace Core.Data.Base
         public decimal Total { get; set; }
         public Nullable<decimal> PorIva { get; set; }
         public string IdCod_Impuesto_IVA { get; set; }
+        public Nullable<int> IdAnio { get; set; }
+        public Nullable<decimal> IdMatricula { get; set; }
     
         public virtual fa_notaCreDeb fa_notaCreDeb { get; set; }
     }

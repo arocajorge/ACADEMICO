@@ -23,5 +23,7 @@ namespace Core.Info.Facturacion
         public decimal Total { get; set; }
         public Nullable<decimal> PorIva { get; set; }
         public string IdCod_Impuesto_IVA { get; set; }
+        public Nullable<int> IdAnio { get; set; }
+        public Nullable<decimal> IdMatricula { get; set; }
     }
 }
