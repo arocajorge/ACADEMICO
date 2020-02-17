@@ -11,7 +11,7 @@ namespace Core.Data.Academico
 {
     public class aca_Matricula_Data
     {
-        aca_MatriculaHistoricoPlantilla_Data odata_HistoricoPlantilla = new aca_MatriculaHistoricoPlantilla_Data();
+        aca_MatriculaCambios_Data odata_HistoricoPlantilla = new aca_MatriculaCambios_Data();
         public List<aca_Matricula_Info> getList(int IdEmpresa, int IdAnio, int IdSede, bool MostrarAnulados)
         {
             try
@@ -469,7 +469,7 @@ namespace Core.Data.Academico
                     }
 
                     #region HistoricoPlantilla
-                    aca_MatriculaHistoricoPlantilla Entity_Historico = new aca_MatriculaHistoricoPlantilla
+                    aca_MatriculaCambios Entity_Historico = new aca_MatriculaCambios
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdMatricula = info.IdMatricula,
@@ -484,7 +484,7 @@ namespace Core.Data.Academico
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now
                     };
-                    Context.aca_MatriculaHistoricoPlantilla.Add(Entity_Historico);
+                    Context.aca_MatriculaCambios.Add(Entity_Historico);
                     #endregion
 
                     Context.SaveChanges();

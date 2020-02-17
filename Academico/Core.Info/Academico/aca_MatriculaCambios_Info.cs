@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Academico
 {
-    public class aca_MatriculaHistoricoPlantilla_Info
+    public class aca_MatriculaCambios_Info
     {
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }

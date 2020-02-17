@@ -12,7 +12,7 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_MatriculaHistoricoPlantilla
+    public partial class aca_MatriculaCambios
     {
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
@@ -28,6 +28,7 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaCreacion { get; set; }
     
         public virtual aca_AnioLectivo_Curso_Paralelo aca_AnioLectivo_Curso_Paralelo { get; set; }
+        public virtual aca_Matricula aca_Matricula { get; set; }
         public virtual aca_Plantilla aca_Plantilla { get; set; }
     }
 }
