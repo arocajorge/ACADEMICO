@@ -23,5 +23,10 @@ namespace Core.Bus.Reportes.Academico
                 throw;
             }
         }
+
+        public List<ACA_007_Info> Getlist(int idEmpresa, int idAnio, int idSede, int idNivel, int idJornada, int idCurso)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
