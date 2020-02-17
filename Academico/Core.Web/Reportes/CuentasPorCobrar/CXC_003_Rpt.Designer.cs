@@ -95,11 +95,11 @@
             this.xrTableCell30 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField4 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField3 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
@@ -733,15 +733,32 @@
             this.pivotGridField6});
             this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0.0002034505F, 30F);
             this.xrPivotGrid1.Name = "xrPivotGrid1";
+            this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
+            this.xrPivotGrid1.OptionsPrint.PrintHorzLines = DevExpress.Utils.DefaultBoolean.True;
+            this.xrPivotGrid1.OptionsPrint.PrintVertLines = DevExpress.Utils.DefaultBoolean.True;
+            this.xrPivotGrid1.OptionsView.ShowColumnHeaders = false;
+            this.xrPivotGrid1.OptionsView.ShowDataHeaders = false;
+            this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
+            this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(549.9998F, 60F);
+            this.xrPivotGrid1.PrintFieldValue += new System.EventHandler<DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs>(this.xrPivotGrid1_PrintFieldValue);
+            // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.CuentasPorCobrar.CXC_003_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // pivotGridField1
             // 
             this.pivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.pivotGridField1.AreaIndex = 0;
+            this.pivotGridField1.Caption = "Fecha";
+            this.pivotGridField1.CellFormat.FormatString = "d";
+            this.pivotGridField1.CellFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.pivotGridField1.FieldName = "cr_fecha";
             this.pivotGridField1.Name = "pivotGridField1";
+            this.pivotGridField1.Width = 25;
             // 
             // pivotGridField2
             // 
@@ -749,6 +766,7 @@
             this.pivotGridField2.AreaIndex = 1;
             this.pivotGridField2.FieldName = "GrupoTipoCobro";
             this.pivotGridField2.Name = "pivotGridField2";
+            this.pivotGridField2.Width = 25;
             // 
             // pivotGridField4
             // 
@@ -764,17 +782,16 @@
             this.pivotGridField3.FieldName = "NombreTarjeta";
             this.pivotGridField3.Name = "pivotGridField3";
             // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.CuentasPorCobrar.CXC_003_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
-            // 
             // pivotGridField5
             // 
             this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField5.AreaIndex = 0;
+            this.pivotGridField5.CellFormat.FormatString = "n2";
+            this.pivotGridField5.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.pivotGridField5.FieldName = "TotalPago";
             this.pivotGridField5.Name = "pivotGridField5";
+            this.pivotGridField5.TotalCellFormat.FormatString = "n2";
+            this.pivotGridField5.TotalCellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             // 
             // pivotGridField6
             // 

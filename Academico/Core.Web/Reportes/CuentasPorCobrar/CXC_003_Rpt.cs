@@ -7,6 +7,7 @@ using Core.Bus.Reportes.CuentasPorCobrar;
 using Core.Info.Reportes.CuentasPorCobrar;
 using System.Collections.Generic;
 using System.Linq;
+using DevExpress.XtraPrinting;
 
 namespace Core.Web.Reportes.CuentasPorCobrar
 {
@@ -41,6 +42,27 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             }
 
             this.DataSource = lst_rpt;
+        }
+
+        private void xrPivotGrid1_PrintFieldValue(object sender, DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs e)
+        {
+            try
+            {
+                if (e.Field != null && (e.Field.FieldName == "cr_fecha" || e.Field.FieldName == "GrupoTipoCobro") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.RowArea)
+                {
+                    LabelBrick lb = new LabelBrick();
+                    lb.Padding = new PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
+                    lb.Angle = 90;
+                    lb.Text = e.Field.FieldName == "cr_fecha" ? Convert.ToDateTime(e.Text.Replace("Total","")).Date.ToString("dd/MM/yyyy") : e.Text;
+                    lb.Rect = GraphicsUnitConverter.DocToPixel(e.Brick.Rect);
+                    e.Brick = lb;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
