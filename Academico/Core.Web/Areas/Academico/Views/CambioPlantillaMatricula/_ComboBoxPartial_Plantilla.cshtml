@@ -14,6 +14,6 @@
     settings.Properties.TextField = "NomPlantilla";
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = $('#IdAnio').val(); e.customArgs['IdSede'] = IdSede.GetValue(); e.customArgs['IdNivel'] = IdNivel.GetValue(); e.customArgs['IdJornada'] = IdJornada.GetValue(); e.customArgs['IdCurso'] = IdCurso.GetValue(); }";
+    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue();; e.customArgs['IdSede'] = IdSede.GetValue(); e.customArgs['IdNivel'] = IdNivel.GetValue(); e.customArgs['IdJornada'] = IdJornada.GetValue(); e.customArgs['IdCurso'] = IdCurso.GetValue(); }";
     settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { SetMatriculaRubro(s,e); }";
 }).BindList(new Core.Bus.Academico.aca_AnioLectivo_Curso_Plantilla_Bus().getList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdSede, Model.IdAnio, Model.IdNivel, Model.IdJornada, Model.IdCurso)).Bind(Model.IdPlantilla).GetHtml()
