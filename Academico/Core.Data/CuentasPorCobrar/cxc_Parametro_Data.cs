@@ -26,7 +26,8 @@ namespace Core.Data.CuentasPorCobrar
                         pa_IdTipoCbteCble_CxC = Entity.pa_IdTipoCbteCble_CxC,
                         pa_IdTipoMoviCaja_x_Cobros_x_cliente = Entity.pa_IdTipoMoviCaja_x_Cobros_x_cliente,
                         IdTipoNotaProntoPago = Entity.IdTipoNotaProntoPago,
-                        DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo
+                        DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo,
+                        IdTipoCbte_ConciliacionNC = Entity.IdTipoCbte_ConciliacionNC
                     };
                 }
                 return info;
@@ -55,6 +56,7 @@ namespace Core.Data.CuentasPorCobrar
                             pa_IdTipoMoviCaja_x_Cobros_x_cliente = info.pa_IdTipoMoviCaja_x_Cobros_x_cliente,
                             IdTipoNotaProntoPago = info.IdTipoNotaProntoPago,
                             DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo,
+                            IdTipoCbte_ConciliacionNC = info.IdTipoCbte_ConciliacionNC,
                             IdUsuario = info.IdUsuario,
                             FechaTransac = DateTime.Now
                         };
@@ -67,6 +69,7 @@ namespace Core.Data.CuentasPorCobrar
                         Entity.pa_IdTipoMoviCaja_x_Cobros_x_cliente = info.pa_IdTipoMoviCaja_x_Cobros_x_cliente;
                         Entity.IdTipoNotaProntoPago = info.IdTipoNotaProntoPago;
                         Entity.DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo;
+                        Entity.IdTipoCbte_ConciliacionNC = info.IdTipoCbte_ConciliacionNC;
                         Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                         Entity.FechaUltMod = DateTime.Now;
                     }

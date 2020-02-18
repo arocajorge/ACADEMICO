@@ -8,7 +8,6 @@ namespace Core.Info.CuentasPorCobrar
 {
     public class cxc_cobro_det_Info
     {
-        public string Observacion { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public decimal IdCobro { get; set; }
@@ -32,6 +31,7 @@ namespace Core.Info.CuentasPorCobrar
         #endregion
 
         #region Campos que no existen en la tabla
+        public string Observacion { get; set; }
         public string secuencia { get; set; }
         public DateTime? vt_fecha { get; set; }
         public double? vt_total { get; set; }
