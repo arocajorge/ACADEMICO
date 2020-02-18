@@ -236,12 +236,19 @@
             this.pivotGridField10,
             this.pivotGridField9,
             this.pivotGridField8});
-            this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 22.08328F);
+            this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPivotGrid1.Name = "xrPivotGrid1";
             this.xrPivotGrid1.OLAPConnectionString = "";
-            this.xrPivotGrid1.OptionsPrint.PrintColumnHeaders = DevExpress.Utils.DefaultBoolean.True;
+            this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
+            this.xrPivotGrid1.OptionsPrint.PrintColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
+            this.xrPivotGrid1.OptionsPrint.PrintDataHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(751.0001F, 67.91671F);
+            this.xrPivotGrid1.OptionsPrint.PrintUnusedFilterFields = false;
+            this.xrPivotGrid1.OptionsView.ShowColumnHeaders = false;
+            this.xrPivotGrid1.OptionsView.ShowDataHeaders = false;
+            this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(751.0001F, 100F);
+            this.xrPivotGrid1.PrintFieldValue += new System.EventHandler<DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs>(this.xrPivotGrid1_PrintFieldValue);
             this.xrPivotGrid1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrPivotGrid1_BeforePrint_1);
             // 
             // pivotGridField14
@@ -253,10 +260,13 @@
             // 
             // pivotGridField13
             // 
+            this.pivotGridField13.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.pivotGridField13.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField13.AreaIndex = 0;
+            this.pivotGridField13.ColumnValueLineCount = 6;
             this.pivotGridField13.FieldName = "NomPlantilla";
             this.pivotGridField13.Name = "pivotGridField13";
+            this.pivotGridField13.Width = 25;
             // 
             // pivotGridField12
             // 

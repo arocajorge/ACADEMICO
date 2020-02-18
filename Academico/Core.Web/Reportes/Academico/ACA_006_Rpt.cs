@@ -94,13 +94,13 @@ namespace Core.Web.Reportes.Academico
         {
             try
             {
-                if (e.Field != null && (e.Field.FieldName == "NomSexo") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
+                if (e.Field != null && (e.Field.FieldName == "NomJornada") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.RowArea)
                 {
-                    LabelBrick lb = new LabelBrick();
-                    lb.Padding = new PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
+                    LabelBrick lb = new DevExpress.XtraPrinting.LabelBrick();
+                    lb.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
                     lb.Angle = 90;
                     lb.Text = e.Text;
-                    lb.Rect = GraphicsUnitConverter.DocToPixel(e.Brick.Rect);
+                    lb.Rect = DevExpress.XtraPrinting.GraphicsUnitConverter.DocToPixel(e.Brick.Rect);
                     e.Brick = lb;
                 }
             }
