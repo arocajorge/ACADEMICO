@@ -86,7 +86,6 @@
     <Compile Include="Academico\aca_Reporte_Bus.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Bus.cs" />
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Bus.cs" />
-    <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Bus.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_x_seg_usuario_Bus.cs" />
     <Compile Include="General\tb_GrupoEtnico_Bus.cs" />
     <Compile Include="General\tb_Religion_Bus.cs" />
@@ -137,7 +136,6 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Bus.cs" />
-    <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCredito_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Parametro_Bus.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_Bus.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_tipo_Bus.cs" />
