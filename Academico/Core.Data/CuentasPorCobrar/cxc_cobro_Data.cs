@@ -51,6 +51,7 @@ namespace Core.Data.CuentasPorCobrar
                                  cr_observacion = q.cr_observacion,
                                  nom_Motivo_tipo_cobro = q.nom_Motivo_tipo_cobro,
                                  cr_NumDocumento = q.cr_NumDocumento,
+                                 Usuario=q.IdUsuario,
                                  //cr_ObservacionPantalla = q.cr_ObservacionPantalla,
                                  EstadoBool = q.cr_estado == "A" ? true : false
                              }).ToList();

@@ -29,5 +29,6 @@ namespace Core.Data.Base
         public Nullable<decimal> IdAlumno { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string sc_observacion { get; set; }
+        public string IdUsuario { get; set; }
     }
 }

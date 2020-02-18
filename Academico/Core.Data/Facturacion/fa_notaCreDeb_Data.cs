@@ -84,10 +84,13 @@ namespace Core.Data.Facturacion
                                  NumNota_Impresa = q.NumNota_Impresa,
                                  no_fecha = q.no_fecha,
                                  Nombres = q.Nombres,
+                                 NombresAlumno=q.pe_nombreCompleto,
+                                 Usuario=q.IdUsuario,
                                  sc_subtotal = q.sc_subtotal,
                                  sc_iva = q.sc_iva,
                                  sc_total = q.sc_total,
                                  Estado = q.Estado,
+                                 
                                  EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                 }

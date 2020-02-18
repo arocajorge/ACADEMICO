@@ -30,5 +30,6 @@ namespace Core.Data.Base
         public Nullable<decimal> IdAlumno { get; set; }
         public string NomAlumno { get; set; }
         public Nullable<double> cr_Saldo { get; set; }
+        public string IdUsuario { get; set; }
     }
 }

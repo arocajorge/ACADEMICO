@@ -43,6 +43,7 @@ namespace Core.Info.Facturacion
 
         public string NomAlumno { get; set; }
         public string NomCliente { get; set; }
+        public string Usuario { get; set; }
         public string CedulaAlumno { get; set; }
         public string CedulaCliente { get; set; }
         public string NomCuenta { get; set; }
@@ -77,6 +78,8 @@ namespace Core.Info.Facturacion
         public string NumNota_Impresa { get; set; }
         public System.DateTime no_fecha { get; set; }
         public string Nombres { get; set; }
+        public string NombresAlumno { get; set; }
+        public string Usuario { get; set; }
         public Nullable<double> sc_subtotal { get; set; }
         public Nullable<double> sc_iva { get; set; }
         public Nullable<double> sc_total { get; set; }

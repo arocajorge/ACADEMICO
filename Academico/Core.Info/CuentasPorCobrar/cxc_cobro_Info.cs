@@ -69,6 +69,7 @@ namespace Core.Info.CuentasPorCobrar
         public string vt_tipoDoc { get; set; }
         public string nom_Motivo_tipo_cobro { get; set; }
         public string DatosAlumno { get; set; }
+        public string Usuario { get; set; }
         #endregion
     }
 }

@@ -98,7 +98,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(10);
         });
-        settings.Columns.Add("NomAlumno", "Alumno").Width = Unit.Percentage(20);
+        settings.Columns.Add("NomAlumno", "Alumno").Width = Unit.Percentage(15);
         settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(15);
 
         settings.Columns.Add(column =>
@@ -109,6 +109,7 @@
             column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add("cr_observacion", "Observación").Width = Unit.Percentage(10);
+        settings.Columns.Add("Usuario", "Usuario").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";
