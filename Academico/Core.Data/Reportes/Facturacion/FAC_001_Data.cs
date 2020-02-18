@@ -63,7 +63,15 @@ namespace Core.Data.Reportes.Facturacion
                                  T_SubtotalConDscto = q.T_SubtotalConDscto,
                                  T_SubtotalSinDscto = q.T_SubtotalSinDscto,
                                  ValorIVA = q.ValorIVA,
-                                 vt_detallexItems = q.vt_detallexItems
+                                 vt_detallexItems = q.vt_detallexItems,
+
+                                 NomSede = q.NomSede ,
+                                 NomJornada = q.NomJornada,
+                                 NomNivel = q.NomNivel,
+                                 NomCurso = q.NomCurso,
+                                 NomPlantilla = q.NomPlantilla,
+                                 NomParalelo = q.NomParalelo,
+                                 NomAlumno = q.NomAlumno
                              }).ToList();
 
 

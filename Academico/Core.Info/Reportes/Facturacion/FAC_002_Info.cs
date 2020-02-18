@@ -51,5 +51,12 @@ namespace Core.Info.Reportes.Facturacion
         public Nullable<decimal> Total { get; set; }
         public Nullable<decimal> ValorEfectivo { get; set; }
         public Nullable<decimal> Cambio { get; set; }
+        public string NomSede { get; set; }
+        public string NomJornada { get; set; }
+        public string NomNivel { get; set; }
+        public string NomCurso { get; set; }
+        public string NomPlantilla { get; set; }
+        public string NomParalelo { get; set; }
+        public string NomAlumno { get; set; }
     }
 }
