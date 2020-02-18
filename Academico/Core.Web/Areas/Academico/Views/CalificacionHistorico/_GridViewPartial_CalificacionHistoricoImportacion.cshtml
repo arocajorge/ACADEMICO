@@ -3,9 +3,9 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_CalificacionHistoricoImportacion";
-        settings.CallbackRouteValues = new { Controller = "Profesor", Action = "GridViewPartial_CalificacionHistoricoImportacion" };
+        settings.CallbackRouteValues = new { Controller = "CalificacionHistorico", Action = "GridViewPartial_CalificacionHistoricoImportacion" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdString";
+        settings.KeyFieldName = "IdAlumno";
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -49,7 +49,8 @@
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
         settings.Columns.Add("IdAnio", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Alumno").Width = Unit.Percentage(40);
+        settings.Columns.Add("IdAlumno", "ID alumno").Width = Unit.Percentage(10);
+        settings.Columns.Add("pe_nombreCompleto", "Alumno").Width = Unit.Percentage(0);
         settings.Columns.Add("IdNivel", "Nivel").Width = Unit.Percentage(10);
         settings.Columns.Add("IdCurso", "Curso").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>

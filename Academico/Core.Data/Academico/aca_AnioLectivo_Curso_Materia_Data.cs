@@ -10,6 +10,7 @@ namespace Core.Data.Academico
 {
     public class aca_AnioLectivo_Curso_Materia_Data
     {
+        aca_AnioLectivo_Paralelo_Profesor_Data odata_MateriaProfesor = new aca_AnioLectivo_Paralelo_Profesor_Data();
         public List<aca_AnioLectivo_Curso_Materia_Info> get_list_asignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try
@@ -80,8 +81,6 @@ namespace Core.Data.Academico
                     var lst_MateriaPorCurso = Context.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();
                     Context.aca_AnioLectivo_Curso_Materia.RemoveRange(lst_MateriaPorCurso);
 
-                    var lst_antigua_materia_profesor = Context.aca_AnioLectivo_Paralelo_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();
-
                     if (lista.Count > 0)
                     {
                         foreach (var info in lista)
@@ -103,15 +102,14 @@ namespace Core.Data.Academico
                                 OrdenMateriaGrupo = (info.NomMateriaGrupo==null ? null : info.OrdenMateriaGrupo),
                                 EsObligatorio = info.EsObligatorio
                             };
-
-                            Context.aca_AnioLectivo_Curso_Materia.Add(Entity);
+                            Context.aca_AnioLectivo_Curso_Materia.Add(Entity);    
                         }
-
-
                     }
-
-                    
                     Context.SaveChanges();
+
+                    //var lst_GuardadaMateriaPorCurso = Context.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();
+                    //var lst_ParaleloProfesor = Context.aca_AnioLectivo_Paralelo_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();
+                    //var noExisten = lst_ParaleloProfesor.Except(lst_GuardadaMateriaPorCurso);
                 }
                 return true;
             }

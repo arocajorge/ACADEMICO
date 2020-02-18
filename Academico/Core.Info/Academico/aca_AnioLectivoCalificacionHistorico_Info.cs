@@ -34,6 +34,7 @@ namespace Core.Info.Academico
         public string NomCurso { get; set; }
         public string IdString { get; set; }
         public string Letra { get; set; }
+        public string pe_cedulaRuc { get; set; }
         #endregion
     }
 }

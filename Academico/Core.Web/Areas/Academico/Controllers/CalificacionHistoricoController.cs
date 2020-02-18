@@ -234,7 +234,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
             aca_AnioLectivoCalificacionHistorico_Info model = new aca_AnioLectivoCalificacionHistorico_Info
             {
-                IdEmpresa = IdEmpresa,
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
             return View(model);
@@ -305,6 +305,7 @@ namespace Core.Web.Areas.Academico.Controllers
             #region Variables
             aca_AnioLectivoCalificacionHistorico_List ListaCalificaciones = new aca_AnioLectivoCalificacionHistorico_List();
             List<aca_AnioLectivoCalificacionHistorico_Info> Lista_Calificaciones = new List<aca_AnioLectivoCalificacionHistorico_Info>();
+            List<aca_AnioLectivoCalificacionHistorico_Info> Lista_Calificaciones_NoValidos = new List<aca_AnioLectivoCalificacionHistorico_Info>();
             tb_persona_Bus bus_persona = new tb_persona_Bus();
             aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
             aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
@@ -330,10 +331,11 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         int anio_inicio = (Convert.ToInt32(reader.GetValue(0)));
                         int anio_fin = (Convert.ToInt32(reader.GetValue(1)));
-                        string cedula_ruc_alumno = (Convert.ToString(reader.GetValue(2)));
+                        decimal conducta = Convert.ToInt32(reader.GetValue(8));
+                        string cedula_ruc_alumno = (Convert.ToString(reader.GetValue(2)).Trim());
                         aca_Alumno_Info info_alumno = bus_alumno.get_info_x_num_cedula(IdEmpresa, cedula_ruc_alumno);
                         aca_AnioLectivo_Info info_anio = bus_anio.GetInfo_x_Anio(IdEmpresa, anio_inicio, anio_fin);
-                        aca_AnioLectivoConductaEquivalencia_Info info_conducta = bus_conducta.GetInfo_x_PromConducta(IdEmpresa, info_anio.IdAnio, (Convert.ToDecimal(reader.GetValue(7))));
+                        aca_AnioLectivoConductaEquivalencia_Info info_conducta = bus_conducta.GetInfo_x_PromConducta(IdEmpresa, info_anio.IdAnio, conducta);
 
                         //tb_persona_Info info_persona_alumno = new tb_persona_Info();
                         //info_persona_alumno = lst_persona.Where(q => q.pe_cedulaRuc==cedula_ruc_alumno).FirstOrDefault();
@@ -343,21 +345,31 @@ namespace Core.Web.Areas.Academico.Controllers
                             IdEmpresa = IdEmpresa,
                             IdAnio = info_anio.IdAnio,
                             pe_nombreCompleto = info_alumno.pe_nombreCompleto,
+                            pe_cedulaRuc = cedula_ruc_alumno,
                             IdAlumno = info_alumno.IdAlumno,
                             IdNivel = (Convert.ToInt32(reader.GetValue(3))),
                             IdCurso = (Convert.ToInt32(reader.GetValue(4))),
-                            AntiguaInstitucion = (Convert.ToString(reader.GetValue(5))),
+                            AntiguaInstitucion = (Convert.ToString(reader.GetValue(5)).Trim()),
                             Promedio = (Convert.ToDecimal(reader.GetValue(6))),
-                            Conducta = (Convert.ToDecimal(reader.GetValue(7))),
-                            Letra = info_conducta.Letra
+                            Conducta = conducta,
+                            Letra = (info_conducta== null ? "" :info_conducta.Letra)
                         };
-                            
-                        if (Lista_Calificaciones.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio==q.IdAnio && q.IdAlumno==info.IdAlumno && q.IdNivel==info.IdNivel && q.IdCurso==info.IdCurso).Count() == 0)
-                            Lista_Calificaciones.Add(info);
+
+                        if (info.IdAlumno==0 || info.Promedio==0)
+                        {
+                            Lista_Calificaciones_NoValidos.Add(info);
+                        }
+                        else
+                        {
+                            if (Lista_Calificaciones.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == q.IdAnio && q.IdAlumno == info.IdAlumno && q.IdNivel == info.IdNivel && q.IdCurso == info.IdCurso).Count() == 0)
+                                Lista_Calificaciones.Add(info);
+                        }
+                        
                     }
                     else
                         cont++;
                 }
+                var ListaNoValida = Lista_Calificaciones_NoValidos;
                 ListaCalificaciones.set_list(Lista_Calificaciones, IdTransaccionSession);
                 #endregion
             }

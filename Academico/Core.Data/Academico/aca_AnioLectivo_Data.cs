@@ -62,7 +62,41 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public List<aca_AnioLectivo_Info> getList_Matricula(int IdEmpresa, bool MostrarAnulados)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Info> Lista = new List<aca_AnioLectivo_Info>();
 
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.BloquearMatricula==false && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q => q.Descripcion).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AnioLectivo_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            Descripcion = q.Descripcion,
+                            FechaDesde = q.FechaDesde,
+                            FechaHasta = q.FechaHasta,
+                            EnCurso = q.EnCurso,
+                            BloquearMatricula = q.BloquearMatricula,
+                            IdAnioLectivoAnterior = q.IdAnioLectivoAnterior,
+                            Estado = q.Estado
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_AnioLectivo_Info> getList_update(int IdEmpresa)
         {
             try
@@ -136,7 +170,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.FechaDesde.Year == AnioFin && q.FechaHasta.Year == AnioFin).FirstOrDefault();
+                    var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.FechaDesde.Year == AnioIni && q.FechaHasta.Year == AnioFin).FirstOrDefault();
                     if (Entity == null)
                         return null;
 

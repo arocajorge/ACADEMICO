@@ -105,7 +105,7 @@
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 0, 100F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(541.0417F, 25F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(751.0001F, 25F);
             this.xrTable2.StylePriority.UseFont = false;
             this.xrTable2.StylePriority.UsePadding = false;
             // 
@@ -135,7 +135,7 @@
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.Text = "xrTableCell3";
-            this.xrTableCell3.Weight = 1D;
+            this.xrTableCell3.Weight = 1.4800010198064693D;
             // 
             // xrTableCell4
             // 
@@ -144,7 +144,7 @@
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.StylePriority.UseFont = false;
             this.xrTableCell4.Text = "Hasta: ";
-            this.xrTableCell4.Weight = 1D;
+            this.xrTableCell4.Weight = 1.0364184848044888D;
             // 
             // xrTableCell5
             // 
@@ -153,7 +153,7 @@
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.Text = "xrTableCell5";
-            this.xrTableCell5.Weight = 1D;
+            this.xrTableCell5.Weight = 2.0358333369996728D;
             // 
             // xrTable1
             // 
@@ -236,11 +236,19 @@
             this.pivotGridField10,
             this.pivotGridField9,
             this.pivotGridField8});
-            this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 10.00001F);
+            this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPivotGrid1.Name = "xrPivotGrid1";
             this.xrPivotGrid1.OLAPConnectionString = "";
+            this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
+            this.xrPivotGrid1.OptionsPrint.PrintColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
+            this.xrPivotGrid1.OptionsPrint.PrintDataHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(751.0001F, 67.91671F);
+            this.xrPivotGrid1.OptionsPrint.PrintUnusedFilterFields = false;
+            this.xrPivotGrid1.OptionsView.ShowColumnHeaders = false;
+            this.xrPivotGrid1.OptionsView.ShowDataHeaders = false;
+            this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(751.0001F, 100F);
+            this.xrPivotGrid1.PrintFieldValue += new System.EventHandler<DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs>(this.xrPivotGrid1_PrintFieldValue);
             this.xrPivotGrid1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrPivotGrid1_BeforePrint_1);
             // 
             // pivotGridField14
@@ -252,10 +260,13 @@
             // 
             // pivotGridField13
             // 
+            this.pivotGridField13.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.pivotGridField13.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField13.AreaIndex = 0;
+            this.pivotGridField13.ColumnValueLineCount = 6;
             this.pivotGridField13.FieldName = "NomPlantilla";
             this.pivotGridField13.Name = "pivotGridField13";
+            this.pivotGridField13.Width = 25;
             // 
             // pivotGridField12
             // 
