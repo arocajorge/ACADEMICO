@@ -21,7 +21,7 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Combos
         public ActionResult ComboBoxPartial_Anio()
         {
-            return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
+            return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_Info());
         }
         #endregion
         #region Index

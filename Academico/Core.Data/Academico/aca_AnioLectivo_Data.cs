@@ -136,7 +136,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.FechaDesde.Year == AnioFin && q.FechaHasta.Year == AnioFin).FirstOrDefault();
+                    var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.FechaDesde.Year == AnioIni && q.FechaHasta.Year == AnioFin).FirstOrDefault();
                     if (Entity == null)
                         return null;
 

@@ -171,5 +171,43 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Paralelo_Profesor_Info> get_list_x_curso(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Paralelo_Profesor_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = (from q in Context.vwaca_AnioLectivo_Paralelo_Profesor
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdSede == IdSede
+                             && q.IdAnio == IdAnio
+                             && q.IdNivel == IdNivel
+                             && q.IdJornada == IdJornada
+                             && q.IdCurso == IdCurso
+                             select new aca_AnioLectivo_Paralelo_Profesor_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSede = q.IdSede,
+                                 IdAnio = q.IdAnio,
+                                 IdNivel = q.IdNivel,
+                                 IdJornada = q.IdJornada,
+                                 IdCurso = q.IdCurso,
+                                 IdParalelo = q.IdParalelo,
+                                 IdMateria = q.IdMateria,
+                                 NomMateria = q.NomMateria,
+                                 IdProfesor = q.IdProfesor,
+                                 pe_nombreCompleto = q.pe_nombreCompleto
+                             }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

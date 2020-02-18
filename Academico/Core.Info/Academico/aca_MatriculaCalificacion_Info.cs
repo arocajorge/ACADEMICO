@@ -8,6 +8,7 @@ namespace Core.Info.Academico
 {
     public class aca_MatriculaCalificacion_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
         public int IdMateria { get; set; }
