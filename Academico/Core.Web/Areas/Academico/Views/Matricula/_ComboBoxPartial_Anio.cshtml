@@ -13,4 +13,4 @@
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.AllowMouseWheel = false;
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-}).BindList(new Core.Bus.Academico.aca_AnioLectivo_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa),false)).Bind(Model.IdAnio).GetHtml()
+}).BindList(new Core.Bus.Academico.aca_AnioLectivo_Bus().GetList_Matricula(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa),false)).Bind(Model.IdAnio).GetHtml()

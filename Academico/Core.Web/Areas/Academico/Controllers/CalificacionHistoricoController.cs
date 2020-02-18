@@ -345,6 +345,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             IdEmpresa = IdEmpresa,
                             IdAnio = info_anio.IdAnio,
                             pe_nombreCompleto = info_alumno.pe_nombreCompleto,
+                            pe_cedulaRuc = cedula_ruc_alumno,
                             IdAlumno = info_alumno.IdAlumno,
                             IdNivel = (Convert.ToInt32(reader.GetValue(3))),
                             IdCurso = (Convert.ToInt32(reader.GetValue(4))),

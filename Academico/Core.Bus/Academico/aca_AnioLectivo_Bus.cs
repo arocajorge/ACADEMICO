@@ -23,6 +23,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Info> GetList_Matricula(int IdEmpresa, bool MostrarAnulados)
+        {
+            try
+            {
+                return odata.getList_Matricula(IdEmpresa, MostrarAnulados);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public aca_AnioLectivo_Info GetInfo(int IdEmpresa, int IdAnio)
         {
             try
