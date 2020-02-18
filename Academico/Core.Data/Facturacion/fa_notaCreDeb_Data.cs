@@ -8,6 +8,7 @@ using Core.Info.Contabilidad;
 using Core.Info.CuentasPorCobrar;
 using Core.Info.Facturacion;
 using Core.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,6 @@ namespace Core.Data.Facturacion
                 throw;
             }
         }
-
         public List<fa_notaCreDeb_consulta_Info> get_list_academico(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin, string CreDeb)
         {
             try
@@ -1047,6 +1047,89 @@ namespace Core.Data.Facturacion
             }
         }
 
+        public List<fa_notaCreDeb_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, decimal IdAlumno)
+        {
+            var skip = args.BeginIndex;
+            var take = args.EndIndex - args.BeginIndex + 1;
+            List<fa_notaCreDeb_Info> Lista = new List<fa_notaCreDeb_Info>();
+            Lista = GetListNCConSaldo(IdEmpresa,IdAlumno, skip, take, args.Filter);
+            return Lista;
+        }
+
+        public List<fa_notaCreDeb_Info> GetListNCConSaldo(int IdEmpresa, decimal IdAlumno,int Skip, int take, string Filter)
+        {
+            try
+            {
+                List<fa_notaCreDeb_Info> Lista = new List<fa_notaCreDeb_Info>();
+
+                using (EntitiesFacturacion db = new EntitiesFacturacion())
+                {
+                    var lst = db.vwfa_notaCreDeb_ParaConciliarNC.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).ToList().Skip(Skip).Take(take).OrderBy(q => q.IdNota);
+
+                    foreach (var item in lst)
+                    {
+                        Lista.Add(new fa_notaCreDeb_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdSucursal = item.IdSucursal,
+                            IdBodega = item.IdBodega,
+                            IdNota = item.IdNota,
+                            no_fecha = item.no_fecha,
+                            sc_observacion = item.sc_observacion,
+                            sc_total = Convert.ToDouble(item.Total),
+                            sc_saldo = Math.Round(Convert.ToDouble(item.Total - item.Valor_Aplicado),2,MidpointRounding.AwayFromZero),
+                            IdString = item.IdSucursal.ToString("0000") + item.IdBodega.ToString("0000") + item.IdNota.ToString("0000000000"),
+                            NumNota_Impresa = item.NumNota
+                        });
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public fa_notaCreDeb_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            if (args.Value == null)
+                return null;
+            return get_info(IdEmpresa, args.Value.ToString());
+        }
+        public fa_notaCreDeb_Info get_info(int IdEmpresa,string IdString)
+        {
+            try
+            {
+                fa_notaCreDeb_Info info;
+
+                using (EntitiesFacturacion Context = new EntitiesFacturacion())
+                {
+                    var Entity = Context.vwfa_notaCreDeb.Where(q => q.IdEmpresa == IdEmpresa && (q.IdSucursal.ToString("0000")+q.IdBodega.ToString("0000")+q.IdNota.ToString("0000000000")) == IdString).FirstOrDefault();
+                    if (Entity == null) return null;
+                    info = new fa_notaCreDeb_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdSucursal = Entity.IdSucursal,
+                        IdBodega = Entity.IdBodega,
+                        IdNota = Entity.IdNota,
+                        no_fecha = Entity.no_fecha,
+                        sc_observacion = Entity.sc_observacion,
+                        sc_total = Convert.ToDouble(Entity.sc_total),
+                        NumNota_Impresa = Entity.NumNota_Impresa,
+                        IdString = Entity.IdSucursal.ToString("0000") + Entity.IdBodega.ToString("0000") + Entity.IdNota.ToString("0000000000")
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
 

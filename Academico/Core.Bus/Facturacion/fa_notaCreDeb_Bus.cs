@@ -2,6 +2,7 @@
 using Core.Data.Facturacion;
 using Core.Info.Facturacion;
 using Core.Info.General;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -113,5 +114,33 @@ namespace Core.Bus.Facturacion
                 throw;
             }
         }
+
+        public List<fa_notaCreDeb_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.get_list_bajo_demanda(args, IdEmpresa, IdAlumno);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public fa_notaCreDeb_Info get_info_bajo_demanda(ListEditItemRequestedByValueEventArgs args, int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_info_bajo_demanda(args, IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }

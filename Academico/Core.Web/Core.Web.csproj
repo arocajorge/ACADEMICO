@@ -284,6 +284,7 @@
     <Compile Include="Areas\Contabilidad\Controllers\PeriodoContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\PlanDeCuentasController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaController.cs" />
+    <Compile Include="Areas\CuentasPorCobrar\Controllers\ConciliacionNCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\DeudasController.cs" />
@@ -8263,6 +8264,12 @@
     <Content Include="Areas\Academico\Views\CambioParaleloMatricula\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\CambioParaleloMatricula\_GridViewPartial_AlumnosPorParalelo.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_007.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\Index.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\_GridViewPartial_ConciliacionNC.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\_CmbNotaCreditoPorConciliar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\_CmbAlumno_ConciliacionNC.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\_GridViewPartial_ConciliacionNCPorConciliar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

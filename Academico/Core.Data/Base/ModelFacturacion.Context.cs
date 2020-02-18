@@ -49,7 +49,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwfa_factura_sin_automatico> vwfa_factura_sin_automatico { get; set; }
         public virtual DbSet<fa_TipoNota_x_Empresa_x_Sucursal> fa_TipoNota_x_Empresa_x_Sucursal { get; set; }
         public virtual DbSet<vwfa_notaCreDeb_det> vwfa_notaCreDeb_det { get; set; }
-        public virtual DbSet<vwfa_notaCreDeb> vwfa_notaCreDeb { get; set; }
         public virtual DbSet<vwfa_notaCreDeb_x_fa_factura_NotaDeb> vwfa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
         public virtual DbSet<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
         public virtual DbSet<vwfa_factura> vwfa_factura { get; set; }
@@ -62,5 +61,7 @@ namespace Core.Data.Base
         public virtual DbSet<fa_notaCreDeb> fa_notaCreDeb { get; set; }
         public virtual DbSet<vwfa_factura_det> vwfa_factura_det { get; set; }
         public virtual DbSet<fa_notaCreDeb_resumen> fa_notaCreDeb_resumen { get; set; }
+        public virtual DbSet<vwfa_notaCreDeb_ParaConciliarNC> vwfa_notaCreDeb_ParaConciliarNC { get; set; }
+        public virtual DbSet<vwfa_notaCreDeb> vwfa_notaCreDeb { get; set; }
     }
 }

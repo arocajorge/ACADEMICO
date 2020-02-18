@@ -12,22 +12,20 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class vwfa_notaCreDeb
+    public partial class vwfa_notaCreDeb_ParaConciliarNC
     {
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
         public decimal IdNota { get; set; }
-        public string CreDeb { get; set; }
-        public string NumNota_Impresa { get; set; }
+        public decimal Total { get; set; }
+        public Nullable<decimal> Valor_Aplicado { get; set; }
+        public string NumNota { get; set; }
         public System.DateTime no_fecha { get; set; }
-        public string Nombres { get; set; }
-        public Nullable<double> sc_subtotal { get; set; }
-        public Nullable<double> sc_iva { get; set; }
-        public Nullable<double> sc_total { get; set; }
-        public string Estado { get; set; }
-        public Nullable<decimal> IdAlumno { get; set; }
-        public string pe_nombreCompleto { get; set; }
         public string sc_observacion { get; set; }
+        public string No_Descripcion { get; set; }
+        public Nullable<decimal> IdAlumno { get; set; }
+        public decimal IdCliente { get; set; }
+        public string pe_nombreCompleto { get; set; }
     }
 }

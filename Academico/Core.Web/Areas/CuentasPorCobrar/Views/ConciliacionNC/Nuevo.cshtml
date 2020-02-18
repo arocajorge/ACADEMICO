@@ -1,0 +1,170 @@
+﻿@model Core.Info.CuentasPorCobrar.cxc_ConciliacionNotaCredito_Info
+@{
+    ViewBag.Title = "Nuevo conciliación de nota de crédito";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
+<script type="text/javascript">
+    function SetDatosAlumno() {
+        var datos = {
+            IdAlumno: IdAlumno.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetDatosAlumno", "ConciliacionNC", new { Area = "CuentasPorCobrar" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                IdString.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("secuencia", GetSelectedFieldValuesCallback);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+    function MostrarModal() {
+        selectedIDs = "";
+        var datos = {
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAlumno: IdAlumno.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetListFacturas_PorIngresar", "Cobranza", new { Area = "CuentasPorCobrar" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data > 0) {
+                    GridView_cobranza_facturas_x_cruzar.PerformCallback();
+                    GridView_cobranza_facturas_x_cruzar.UnselectRows();
+                    $("#FacturasModal").modal("show");
+                } else {
+                    alert("El alumno no tiene documentos pendientes de cobrar");
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+@using (Html.BeginForm("Nuevo", "ConciliacionNC", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    <div class="modal fade" id="FacturasModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Facturas</h4>
+                </div>
+                <div class="modal-body">
+
+                    @Html.Action("GridViewPartial_ConciliacionNCPorConciliar")
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="AddFacturas();">Aceptar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdAlumno">Alumno*</label>
+                    @Html.Partial("_CmbAlumno_ConciliacionNC", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-4 col-md-2">
+                <div class="form-group">
+                    <label for="cr_fecha">Fecha*</label>
+                    @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
+                    {
+                        settings.Name = "Fecha";
+                        settings.Properties.UseMaskBehavior = true;
+                        settings.Properties.EditFormat = EditFormat.Date;
+                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        settings.Properties.AllowMouseWheel = false;
+                    }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label for="IdString">Nota de crédito*</label>
+                    @Html.Partial("_CmbNotaCreditoPorConciliar", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdString, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary form-control" title="Buscar facturas" id="btn_buscar" onclick="MostrarModal();">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+                
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <label for="cr_fecha">Observación</label>
+                @Html.TextBoxFor(q=> q.Observacion, new { @class = "form-control", @id="Observacion" })
+                @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "ConciliacionNC", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+

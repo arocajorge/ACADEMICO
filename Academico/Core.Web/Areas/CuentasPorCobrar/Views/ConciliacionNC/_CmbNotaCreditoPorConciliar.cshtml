@@ -1,0 +1,35 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdString";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "ConciliacionNC", Action = "CmbNotaCreditoPorConciliar", Area = "CuentasPorCobrar" };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "NumNota_Impresa";
+        settings.Properties.TextFormatString = "[{0}] {1} - {2} - {3}";
+        settings.Properties.ValueField = "IdString";
+        settings.Properties.ValueType = typeof(decimal);
+        settings.Properties.Columns.Add("IdNota", "ID", 10);
+
+        settings.Properties.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(10);
+            column.FieldName = "no_fecha";
+            column.Caption = "Fecha";
+        });
+
+        settings.Properties.Columns.Add("NumNota_Impresa", "Referencia", 10);
+        settings.Properties.Columns.Add("sc_observacion", "Observación", 60);
+        settings.Properties.Columns.Add("sc_total", "Total", 10);
+        settings.Properties.AllowMouseWheel = false;
+        settings.Properties.ClientSideEvents.BeginCallback = "function(s,e){ SetDatosAlumno();}";
+    })
+    .BindList(new Core.Web.Areas.CuentasPorCobrar.Controllers.ConciliacionNCController().get_list_bajo_demanda_NC, new Core.Web.Areas.CuentasPorCobrar.Controllers.ConciliacionNCController().get_info_bajo_demanda_NC)
+    .Bind(Model.GetType() == typeof(Core.Info.CuentasPorCobrar.cxc_ConciliacionNotaCredito_Info) ? "" : (Model == 0 ? "" : Model));
+
+}
+@comboBox.GetHtml()
