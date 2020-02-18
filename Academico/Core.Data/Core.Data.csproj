@@ -203,9 +203,6 @@
     <Compile Include="Base\vwfa_factura_ParaContabilizarAcademico.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\vwfa_notaCreDeb_ParaConciliarNC.cs">
-      <DependentUpon>ModelFacturacion.tt</DependentUpon>
-    </Compile>
     <Compile Include="Base\vwfa_notaCreDeb_ParaContabilizarAcademico.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -632,12 +629,6 @@
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\cxc_cobro_x_ct_cbtecble.cs">
-      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\cxc_ConciliacionNotaCredito.cs">
-      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\cxc_ConciliacionNotaCreditoDet.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\cxc_Parametro.cs">
@@ -1486,12 +1477,6 @@
     <Compile Include="Base\vwcxc_cobro_para_retencion.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\vwcxc_ConciliacionNotaCredito.cs">
-      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\vwcxc_ConciliacionNotaCreditoDet.cs">
-      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
-    </Compile>
     <Compile Include="Base\vwfa_cliente_consulta.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -1678,8 +1663,6 @@
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_motivo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_cobro_tipo_Param_conta_x_sucursal_Data.cs" />
-    <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Data.cs" />
-    <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCredito_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_Parametro_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_Data.cs" />
     <Compile Include="CuentasPorPagar\cp_codigo_SRI_tipo_Data.cs" />

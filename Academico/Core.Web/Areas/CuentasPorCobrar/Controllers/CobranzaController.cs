@@ -209,6 +209,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 msg = "Debe ingresar el tipo de nota de crédito a aplicar para el saldo";
                 return false;
             }
+            if (i_validar.lst_det.Count > 0 && i_validar.cr_saldo > 0)
+            {
+                msg = "Tiene un excedente de "+ i_validar.cr_saldo.ToString("c2")+", por favor cree un nuevo cobro para el excedente";
+                return false;
+            }
 
             switch (i_validar.IdCobro_tipo)
             {

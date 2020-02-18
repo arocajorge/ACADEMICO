@@ -81,5 +81,10 @@ namespace Core.Web.Reportes.Academico
                 throw;
             }
         }
+
+        private void xrPivotGrid1_BeforePrint_1(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
     }
 }

@@ -7,6 +7,7 @@ using Core.Bus.Reportes.Facturacion;
 using Core.Info.Reportes.Facturacion;
 using System.Collections.Generic;
 using Core.Bus.General;
+using System.Linq;
 
 namespace Core.Web.Reportes.Facturacion
 {
@@ -47,6 +48,14 @@ namespace Core.Web.Reportes.Facturacion
             {
                 ImageConverter obj = new ImageConverter();
                 lbl_imagen.Image = (Image)obj.ConvertFrom(empresa.em_logo);
+            }
+
+            var Primero = lst_rpt.FirstOrDefault();
+            if (Primero != null)
+            {
+                string Cadena = lblReemplaza.Text;
+                Cadena = Cadena.Replace("{0}", Primero.cli_cedulaRuc).Replace("{1}", Primero.cli_Nombre);
+                lblReemplaza.Text = Cadena;
             }
         }
     }

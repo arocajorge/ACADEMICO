@@ -50,5 +50,12 @@ namespace Core.Info.Reportes.Facturacion
         public string vt_detallexItems { get; set; }
 
         public string ValorEnLetras { get; set; }
+        public string NomParalelo { get; set; }
+        public string NomPlantilla { get; set; }
+        public string NomCurso { get; set; }
+        public string NomNivel { get; set; }
+        public string NomJornada { get; set; }
+        public string NomSede { get; set; }
+        public string NomAlumno { get; set; }
     }
 }
