@@ -1,6 +1,6 @@
-﻿@model Core.Info.Academico.aca_Profesor_Info
+﻿@model Core.Info.Academico.aca_AnioLectivoCalificacionHistorico_Info
 @{
-    ViewBag.Title = "Importar profesores";
+    ViewBag.Title = "Importar calificaciones finales";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("ActualizarVariablesSession", "Profesor", new { Area = "Academico"})',
+            url: '@Url.Action("ActualizarVariablesSession", "CalificacionHistorico", new { Area = "Academico"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -29,12 +29,12 @@
 
     function OnFileUploadComplete(s, e)
     {
-        GridViewPartial_ProfesorImportacion.PerformCallback();
+        GridViewPartial_CalificacionHistoricoImportacion.PerformCallback();
     }
 
 </script>
 
-@using (Html.BeginForm("Importar", "Profesor", FormMethod.Post, new { @role = "form", @id = "form" }))
+@using (Html.BeginForm("Importar", "CalificacionHistorico", FormMethod.Post, new { @role = "form", @id = "form" }))
 {
     if (ViewBag.mensaje != null)
     {
@@ -63,7 +63,7 @@
                 @Html.DevExpress().UploadControl(settings =>
            {
                settings.Name = "UploadControlFile";
-               settings.CallbackRouteValues = new { Controller = "Profesor", Action = "UploadControlUpload" };
+               settings.CallbackRouteValues = new { Controller = "CalificacionHistorico", Action = "UploadControlUpload" };
                settings.ShowUploadButton = true;
                settings.ShowProgressPanel = true;
                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -82,7 +82,7 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_profesores" aria-controls="vales" role="tab" data-toggle="tab">Datos de profesores</a>
+                <a href="#tab_profesores" aria-controls="vales" role="tab" data-toggle="tab">Datos de Calificaciones</a>
             </li>            
         </ul>
         <div class="tab-content" style="padding-top: 20px">
@@ -90,7 +90,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("GridViewPartial_ProfesorImportacion")
+                            @Html.Action("GridViewPartial_CalificacionHistoricoImportacion")
                         </div>
                     </div>
                 </div>
