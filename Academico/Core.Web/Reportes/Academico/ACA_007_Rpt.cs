@@ -65,7 +65,7 @@ namespace Core.Web.Reportes.Academico
         {
             try
             {
-                if (e.Field != null && (e.Field.FieldName == "NomPlantilla") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
+                if (e.Field != null && (e.Field.FieldName == "Nom Plantilla") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
                 {
                     LabelBrick lb = new LabelBrick();
                     lb.Padding = new PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
@@ -80,6 +80,11 @@ namespace Core.Web.Reportes.Academico
 
                 throw;
             }
+        }
+
+        private void xrPivotGrid1_BeforePrint_1(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
         }
     }
 }
