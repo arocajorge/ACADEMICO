@@ -243,7 +243,7 @@
             this.xrTable1,
             this.xrPivotGrid1,
             this.lbl_imagen});
-            this.ReportHeader.HeightF = 163.7917F;
+            this.ReportHeader.HeightF = 171.6251F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // xrTable1
@@ -330,6 +330,7 @@
             this.xrPivotGrid1.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.xrPivotGrid1.Appearance.Lines.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.xrPivotGrid1.Appearance.TotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.xrPivotGrid1.DataSource = this.objectDataSource1;
             this.xrPivotGrid1.Fields.AddRange(new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField[] {
             this.pivotGridField1,
             this.pivotGridField2,
@@ -337,7 +338,7 @@
             this.pivotGridField4,
             this.pivotGridField5,
             this.pivotGridField6});
-            this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 76.91665F);
+            this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 84.75F);
             this.xrPivotGrid1.Name = "xrPivotGrid1";
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(753F, 86.87505F);
