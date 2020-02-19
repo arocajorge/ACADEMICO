@@ -155,6 +155,9 @@
     <Compile Include="Base\tb_TarjetaCredito_x_cp_proveedor.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\tb_visor_video.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\VWACA_002.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
@@ -1751,6 +1754,7 @@
     <Compile Include="General\tb_sucursal_Data.cs" />
     <Compile Include="General\tb_sucursal_FormaPago_x_fa_NivelDescuento_Data.cs" />
     <Compile Include="General\tb_TarjetaCredito_Data.cs" />
+    <Compile Include="General\tb_visor_video_Data.cs" />
     <Compile Include="Inventario\in_categorias_Data.cs" />
     <Compile Include="Inventario\in_grupo_Data.cs" />
     <Compile Include="Inventario\in_Ing_Egr_Inven_Data.cs" />

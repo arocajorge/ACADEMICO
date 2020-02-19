@@ -215,6 +215,7 @@
     <Compile Include="General\tb_sucursal_FormaPago_x_fa_NivelDescuento_Info.cs" />
     <Compile Include="General\tb_sucursal_Info.cs" />
     <Compile Include="General\tb_TarjetaCredito_Info.cs" />
+    <Compile Include="General\tb_visor_video_Info.cs" />
     <Compile Include="Helps\cl_enumeradores.cs" />
     <Compile Include="Helps\cl_filtros_Info.cs" />
     <Compile Include="Helps\cl_funciones.cs" />
