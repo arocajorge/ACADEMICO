@@ -10,14 +10,14 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_005_Data
     {
-        public List<ACA_005_Info> get_list(int IdEmpresa, decimal IdAlumno)
+        public ACA_005_Info get_info(int IdEmpresa, decimal IdAlumno)
         {
             try
             {
-                List<ACA_005_Info> Lista = new List<ACA_005_Info>(); ;
+                ACA_005_Info info = new ACA_005_Info(); ;
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Lista = (from q in Context.SPACA_005(IdEmpresa, IdAlumno)
+                    info = (from q in Context.SPACA_005(IdEmpresa, IdAlumno)
                              select new ACA_005_Info
                              {
                                 Agua=q.Agua,
@@ -111,10 +111,17 @@ namespace Core.Data.Reportes.Academico
                                 VehiculoPropioRepresentante=q.VehiculoPropioRepresentante,
                                 MarcaRepresentante=q.MarcaRepresentante,
                                 ModeloRepresentante=q.ModeloRepresentante,
-                                AnioVehiculoRepresentante=q.AnioVehiculoRepresentante
-                             }).ToList();
+                                AnioVehiculoRepresentante=q.AnioVehiculoRepresentante,
+                                Descripcion = q.Descripcion,
+                                NomJornada=q.NomJornada,
+                                NomCurso=q.NomCurso,
+                                NomNivel=q.NomNivel,
+                                Conducta=q.Conducta,
+                                Promedio=q.Promedio,
+                                IdAnio = q.IdAnio
+                             }).FirstOrDefault();
                 }
-                return Lista;
+                return info;
             }
             catch (Exception)
             {

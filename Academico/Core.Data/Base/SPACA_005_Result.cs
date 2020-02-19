@@ -15,6 +15,11 @@ namespace Core.Data.Base
     {
         public int IdEmpresa { get; set; }
         public int IdSocioEconomico { get; set; }
+        public int IdAnio { get; set; }
+        public string Descripcion { get; set; }
+        public string NomNivel { get; set; }
+        public string NomJornada { get; set; }
+        public string NomCurso { get; set; }
         public decimal IdAlumno { get; set; }
         public string CodigoAlumno { get; set; }
         public string NombreAlumno { get; set; }
@@ -105,5 +110,7 @@ namespace Core.Data.Base
         public string MarcaRepresentante { get; set; }
         public string ModeloRepresentante { get; set; }
         public Nullable<int> AnioVehiculoRepresentante { get; set; }
+        public Nullable<decimal> Conducta { get; set; }
+        public Nullable<decimal> Promedio { get; set; }
     }
 }

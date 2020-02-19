@@ -100,5 +100,12 @@ namespace Core.Info.Reportes.Academico
         public string ModeloRepresentante { get; set; }
         public Nullable<int> AnioVehiculoRepresentante { get; set; }
         public string TelefonoAlumno { get; set; }
+        public Nullable<decimal> Conducta { get; set; }
+        public Nullable<decimal> Promedio { get; set; }
+        public string Descripcion { get; set; }
+        public string NomNivel { get; set; }
+        public string NomJornada { get; set; }
+        public string NomCurso { get; set; }
+        public int IdAnio { get; set; }
     }
 }
