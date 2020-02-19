@@ -126,7 +126,7 @@
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.Text = "Matriculados desde: ";
-            this.xrTableCell1.Weight = 1D;
+            this.xrTableCell1.Weight = 0.84836155898679322D;
             // 
             // xrTableCell3
             // 
@@ -135,7 +135,7 @@
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.Text = "xrTableCell3";
-            this.xrTableCell3.Weight = 1.4800010198064693D;
+            this.xrTableCell3.Weight = 1.6316394608196763D;
             // 
             // xrTableCell4
             // 
@@ -144,7 +144,7 @@
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.StylePriority.UseFont = false;
             this.xrTableCell4.Text = "Hasta: ";
-            this.xrTableCell4.Weight = 1.0364184848044888D;
+            this.xrTableCell4.Weight = 0.31250689091651263D;
             // 
             // xrTableCell5
             // 
@@ -153,7 +153,7 @@
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.Text = "xrTableCell5";
-            this.xrTableCell5.Weight = 2.0358333369996728D;
+            this.xrTableCell5.Weight = 2.7597449308876492D;
             // 
             // xrTable1
             // 
@@ -182,7 +182,7 @@
             this.lbl_sede.StylePriority.UseFont = false;
             this.lbl_sede.StylePriority.UsePadding = false;
             this.lbl_sede.Text = "lbl_sede";
-            this.lbl_sede.Weight = 1.6350966055588803D;
+            this.lbl_sede.Weight = 1.7283628906920954D;
             // 
             // CXC_001
             // 
@@ -190,7 +190,7 @@
             this.CXC_001.Name = "CXC_001";
             this.CXC_001.StylePriority.UseFont = false;
             this.CXC_001.Text = "ACA_007";
-            this.CXC_001.Weight = 0.36490339444112019D;
+            this.CXC_001.Weight = 0.271637109307905D;
             // 
             // xrTableRow3
             // 
@@ -364,7 +364,7 @@
             this.xrTableCell50.StylePriority.UseTextAlignment = false;
             this.xrTableCell50.Text = "Usuario:";
             this.xrTableCell50.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell50.Weight = 1.3333334347064D;
+            this.xrTableCell50.Weight = 1.222369996496476D;
             // 
             // lbl_usuario
             // 
@@ -377,7 +377,7 @@
             this.lbl_usuario.StylePriority.UsePadding = false;
             this.lbl_usuario.StylePriority.UseTextAlignment = false;
             this.lbl_usuario.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbl_usuario.Weight = 2.2399996626659D;
+            this.lbl_usuario.Weight = 2.3509631008758243D;
             // 
             // xrTableCell51
             // 
