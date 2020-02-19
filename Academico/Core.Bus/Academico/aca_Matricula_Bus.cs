@@ -18,7 +18,7 @@ namespace Core.Bus.Academico
             {
                 return odata.getList(IdEmpresa, IdAnio, IdSede, MostrarAnulados);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

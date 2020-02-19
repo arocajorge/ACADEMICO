@@ -59,30 +59,30 @@
             column.Width = Unit.Percentage(70);
         });
 
-        //settings.PreRender = (sender, e) =>
-        //{
-        //    string[] array = ViewData["documentoIDs"].ToString().Split(',');
-        //    var gridView = sender as MVCxGridView;
-        //    for (int i = 0; i < gridView.VisibleRowCount; i++)
-        //    {
-        //        if (array.Where(q => q == (string)gridView.GetRowValues(i, "IdStringDoc")).Count() > 0)
-        //            gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
-        //    }
-        //};
+        settings.PreRender = (sender, e) =>
+        {
+            string[] array = ViewData["documentoIDs"].ToString().Split(',');
+            var gridView = sender as MVCxGridView;
+            for (int i = 0; i < gridView.VisibleRowCount; i++)
+            {
+                if (array.Where(q => q == (string)gridView.GetRowValues(i, "IdStringDoc")).Count() > 0)
+                    gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
+            }
+        };
 
-        //settings.AfterPerformCallback = (sender, e) =>
-        //{
-        //    string[] array = ViewData["documentoIDs"].ToString().Split(',');
-        //    var gridView = sender as MVCxGridView;
-        //    for (int i = 0; i < gridView.VisibleRowCount; i++)
-        //    {
-        //        if (array.Where(q => q == (string)gridView.GetRowValues(i, "IdStringDoc")).Count() > 0)
-        //            gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
-        //    }
-        //};
+        settings.AfterPerformCallback = (sender, e) =>
+        {
+            string[] array = ViewData["documentoIDs"].ToString().Split(',');
+            var gridView = sender as MVCxGridView;
+            for (int i = 0; i < gridView.VisibleRowCount; i++)
+            {
+                if (array.Where(q => q == (string)gridView.GetRowValues(i, "IdStringDoc")).Count() > 0)
+                    gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
+            }
+        };
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
-        //settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged_Doc";
-        //settings.ClientSideEvents.BeginCallback = "OnBeginCallback_Doc";
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged_Doc";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback_Doc";
     });
 }
 @grid.Bind(Model).GetHtml()

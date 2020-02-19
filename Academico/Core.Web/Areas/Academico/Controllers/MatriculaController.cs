@@ -558,7 +558,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 List<cxc_cobro_Info> lst_DeudaAlumno = bus_cobro.get_list_deuda(IdEmpresa,IdAlumno);
 
-                if (lst_DeudaAlumno.Count()>0)
+                if (lst_DeudaAlumno.Sum(q=>q.cr_saldo)>0)
                 {
                     var Saldo = Math.Round(lst_DeudaAlumno.Sum(q => q.cr_saldo), 2, MidpointRounding.AwayFromZero).ToString("C2");
                     mensaje += "El estudiante tiene saldo pendiente: "+Saldo + ".</br>"; 

@@ -12,6 +12,7 @@ namespace Core.Data.Academico
     public class aca_Matricula_Data
     {
         aca_MatriculaCambios_Data odata_HistoricoPlantilla = new aca_MatriculaCambios_Data();
+        aca_AlumnoDocumento_Data odata_AlumnoDocumento = new aca_AlumnoDocumento_Data();
         public List<aca_Matricula_Info> getList(int IdEmpresa, int IdAnio, int IdSede, bool MostrarAnulados)
         {
             try
@@ -277,20 +278,83 @@ namespace Core.Data.Academico
                         }
                     }
 
-                    if (info.lst_documentos.Count > 0)
+                    //if (info.lst_documentos.Count > 0)
+                    //{
+                    //    foreach (var item in info.lst_documentos)
+                    //    {
+                    //        aca_AlumnoDocumento Entity_DetDoc = new aca_AlumnoDocumento
+                    //        {
+                    //            IdEmpresa = item.IdEmpresa,
+                    //            IdAlumno = item.IdAlumno,
+                    //            Secuencia = item.Secuencia,
+                    //            IdDocumento = item.IdDocumento,
+                    //            EnArchivo = true
+                    //        };
+                    //        Context.aca_AlumnoDocumento.Add(Entity_DetDoc);
+                    //    }
+                    //}
+                    #region Documentos por alumno
+                    //Obtengo lista de documentos por curso
+                    var Secuencia = odata_AlumnoDocumento.getSecuencia(info.IdEmpresa, info.IdAlumno);
+                    var lstDocPorCurso = Context.aca_AnioLectivo_Curso_Documento.Where(q => q.IdEmpresa == info.IdEmpresa
+                  && q.IdSede == info.IdSede
+                  && q.IdAnio == info.IdAnio
+                  && q.IdNivel == info.IdNivel
+                  && q.IdJornada == info.IdJornada
+                  && q.IdCurso == info.IdCurso).ToList();
+
+                    //Recorro lista de documentos por curso
+                    foreach (var item in lstDocPorCurso)
                     {
-                        foreach (var item in info.lst_documentos)
+                        //Valido si en la lista de los seleccionados existe el documento
+                        var Documento = info.lst_documentos.Where(q => q.IdDocumento == item.IdDocumento).FirstOrDefault();
+                        //Si no existe como seleccionado
+                        if (Documento == null)
                         {
-                            aca_AlumnoDocumento Entity_DetDoc = new aca_AlumnoDocumento
+                            //Valido si existe en la lista de documentos por alumno
+                            var DocumentoAlumno = Context.aca_AlumnoDocumento.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.IdDocumento == item.IdDocumento).FirstOrDefault();
+                            if (DocumentoAlumno == null)
                             {
-                                IdEmpresa = item.IdEmpresa,
-                                IdAlumno = item.IdAlumno,
-                                IdDocumento = item.IdDocumento,
-                                EnArchivo = true
-                            };
-                            Context.aca_AlumnoDocumento.Add(Entity_DetDoc);
+                                //Si no existe lo agrego con estado false
+                                Context.aca_AlumnoDocumento.Add(new aca_AlumnoDocumento
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAlumno = info.IdAlumno,
+                                    IdDocumento = item.IdDocumento,
+                                    Secuencia = Secuencia++,
+                                    EnArchivo = false
+                                });
+                            }
+                            else
+                            {
+                                //Si existe lo modifico y le pongo estado false
+                                DocumentoAlumno.EnArchivo = false;
+                            }
+                        }
+                        else
+                        {
+                            //Si existe como seleccionado valido si existe en la tabla de documentos por alumno
+                            var DocumentoAlumnoE = Context.aca_AlumnoDocumento.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.IdDocumento == item.IdDocumento).FirstOrDefault();
+                            if (DocumentoAlumnoE == null)
+                            {
+                                //Si no existe lo agrego con estado true
+                                Context.aca_AlumnoDocumento.Add(new aca_AlumnoDocumento
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAlumno = info.IdAlumno,
+                                    IdDocumento = item.IdDocumento,
+                                    Secuencia = Secuencia++,
+                                    EnArchivo = true
+                                });
+                            }
+                            else
+                            {
+                                //Si existe lo modifico y le pongo estado true
+                                DocumentoAlumnoE.EnArchivo = true;
+                            }
                         }
                     }
+                    #endregion
 
                     aca_Alumno Entity_Alumno = Context.aca_Alumno.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno);
                     Entity_Alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.MATRICULADO);
