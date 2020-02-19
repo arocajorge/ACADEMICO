@@ -66,5 +66,6 @@ namespace Core.Data.Base
         public virtual DbSet<tb_persona> tb_persona { get; set; }
         public virtual DbSet<tb_TarjetaCredito_x_cp_proveedor> tb_TarjetaCredito_x_cp_proveedor { get; set; }
         public virtual DbSet<tb_TarjetaCredito> tb_TarjetaCredito { get; set; }
+        public virtual DbSet<tb_visor_video> tb_visor_video { get; set; }
     }
 }
