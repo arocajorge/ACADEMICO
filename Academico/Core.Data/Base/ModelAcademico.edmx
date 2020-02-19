@@ -695,6 +695,16 @@
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
           <Property Name="FechaCreacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="aca_MatriculaCondicionalParrafo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Parrafo" Type="varchar(max)" Nullable="false" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+          <Property Name="IdCatalogo" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="aca_MatriculaConducta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2861,6 +2871,18 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_aca_MatriculaCondicionalParrafo_aca_Catalogo">
+          <End Role="aca_Catalogo" Type="Self.aca_Catalogo" Multiplicity="1" />
+          <End Role="aca_MatriculaCondicionalParrafo" Type="Self.aca_MatriculaCondicionalParrafo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCondicionalParrafo">
+              <PropertyRef Name="IdCatalogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_aca_MatriculaConducta_aca_Matricula">
           <End Role="aca_Matricula" Type="Self.aca_Matricula" Multiplicity="1" />
           <End Role="aca_MatriculaConducta" Type="Self.aca_MatriculaConducta" Multiplicity="*" />
@@ -3145,6 +3167,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <EntitySet Name="aca_Matricula_Rubro" EntityType="Self.aca_Matricula_Rubro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_MatriculaCalificacion" EntityType="Self.aca_MatriculaCalificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_MatriculaCambios" EntityType="Self.aca_MatriculaCambios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aca_MatriculaCondicionalParrafo" EntityType="Self.aca_MatriculaCondicionalParrafo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_MatriculaConducta" EntityType="Self.aca_MatriculaConducta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_MecanismoDePago" EntityType="Self.aca_MecanismoDePago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Menu" EntityType="Self.aca_Menu" Schema="dbo" store:Type="Tables" />
@@ -3957,6 +3980,10 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_MatriculaCambios" EntitySet="aca_MatriculaCambios" />
           </AssociationSet>
+          <AssociationSet Name="FK_aca_MatriculaCondicionalParrafo_aca_Catalogo" Association="Self.FK_aca_MatriculaCondicionalParrafo_aca_Catalogo">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_MatriculaCondicionalParrafo" EntitySet="aca_MatriculaCondicionalParrafo" />
+          </AssociationSet>
           <AssociationSet Name="FK_aca_MatriculaConducta_aca_Matricula" Association="Self.FK_aca_MatriculaConducta_aca_Matricula">
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_MatriculaConducta" EntitySet="aca_MatriculaConducta" />
@@ -4484,6 +4511,11 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_MatriculaCambios" EntitySet="aca_MatriculaCambios" />
           </AssociationSet>
+          <EntitySet Name="aca_MatriculaCondicionalParrafo" EntityType="ModelAcademico.aca_MatriculaCondicionalParrafo" />
+          <AssociationSet Name="FK_aca_MatriculaCondicionalParrafo_aca_Catalogo" Association="ModelAcademico.FK_aca_MatriculaCondicionalParrafo_aca_Catalogo">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_MatriculaCondicionalParrafo" EntitySet="aca_MatriculaCondicionalParrafo" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
           <Key>
@@ -4571,6 +4603,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_alumno_aca_Catalogo1" FromRole="aca_Catalogo" ToRole="aca_Alumno" />
           <NavigationProperty Name="aca_Alumno1" Relationship="ModelAcademico.FK_aca_alumno_aca_Catalogo2" FromRole="aca_Catalogo" ToRole="aca_Alumno" />
           <NavigationProperty Name="aca_CondicionalMatricula" Relationship="ModelAcademico.FK_aca_CondicionalMatricula_aca_Catalogo" FromRole="aca_Catalogo" ToRole="aca_CondicionalMatricula" />
+          <NavigationProperty Name="aca_MatriculaCondicionalParrafo" Relationship="ModelAcademico.FK_aca_MatriculaCondicionalParrafo_aca_Catalogo" FromRole="aca_Catalogo" ToRole="aca_MatriculaCondicionalParrafo" />
           </EntityType>
         <EntityType Name="aca_CatalogoTipo">
           <Key>
@@ -7729,6 +7762,29 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="aca_MatriculaCondicionalParrafo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Parrafo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="aca_Catalogo" Relationship="ModelAcademico.FK_aca_MatriculaCondicionalParrafo_aca_Catalogo" FromRole="aca_MatriculaCondicionalParrafo" ToRole="aca_Catalogo" />
+        </EntityType>
+        <Association Name="FK_aca_MatriculaCondicionalParrafo_aca_Catalogo">
+          <End Type="ModelAcademico.aca_Catalogo" Role="aca_Catalogo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaCondicionalParrafo" Role="aca_MatriculaCondicionalParrafo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCondicionalParrafo">
+              <PropertyRef Name="IdCatalogo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9256,6 +9312,17 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_MatriculaCondicionalParrafo">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_MatriculaCondicionalParrafo">
+              <MappingFragment StoreEntitySet="aca_MatriculaCondicionalParrafo">
+                <ScalarProperty Name="IdCatalogo" ColumnName="IdCatalogo" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="Parrafo" ColumnName="Parrafo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

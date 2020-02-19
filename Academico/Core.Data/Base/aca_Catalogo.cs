@@ -21,6 +21,7 @@ namespace Core.Data.Base
             this.aca_Alumno = new HashSet<aca_Alumno>();
             this.aca_Alumno1 = new HashSet<aca_Alumno>();
             this.aca_CondicionalMatricula = new HashSet<aca_CondicionalMatricula>();
+            this.aca_MatriculaCondicionalParrafo = new HashSet<aca_MatriculaCondicionalParrafo>();
         }
     
         public int IdCatalogo { get; set; }
@@ -46,5 +47,7 @@ namespace Core.Data.Base
         public virtual ICollection<aca_Alumno> aca_Alumno1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_CondicionalMatricula> aca_CondicionalMatricula { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_MatriculaCondicionalParrafo> aca_MatriculaCondicionalParrafo { get; set; }
     }
 }
