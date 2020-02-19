@@ -65,7 +65,16 @@ namespace Core.Web.Reportes.Academico
         {
             try
             {
-                if (e.Field != null  && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea)
+                if (e.Field != null  && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea )
+                {
+                    LabelBrick lb = new DevExpress.XtraPrinting.LabelBrick();
+                    lb.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
+                    lb.Angle = 90;
+                    lb.Text = e.Text;
+                    lb.Rect = DevExpress.XtraPrinting.GraphicsUnitConverter.DocToPixel(e.Brick.Rect);
+                    e.Brick = lb;
+                }else
+                    if (e.Field != null && (e.Field.FieldName == "Descripcion" || e.Field.FieldName == "NomJornada" || e.Field.FieldName == "NomNivel") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.RowArea )
                 {
                     LabelBrick lb = new DevExpress.XtraPrinting.LabelBrick();
                     lb.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);

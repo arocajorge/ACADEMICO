@@ -73,33 +73,27 @@ namespace Core.Web.Reportes.Academico
         }
         private void xrPivotGrid1_PrintHeader(object sender, DevExpress.XtraReports.UI.PivotGrid.CustomExportHeaderEventArgs e)
         {
-            try
-            {
-                if (e.Field != null && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.RowArea)
-                {
-                    LabelBrick lb = new LabelBrick();
-                    lb.BackColor = Color.Beige;
-                    lb.Padding = new PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
-                    lb.Angle = 90;
-                    lb.Rect = GraphicsUnitConverter.DocToPixel(e.Brick.Rect);
-                    e.Brick = lb;
-                }
-            }
-            catch (Exception ex)
-            {
 
-            }
         }
         private void xrPivotGrid1_PrintFieldValue(object sender, DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs e)
         {
             try
             {
-                if (e.Field != null && (e.Field.FieldName == "NomJornada") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.RowArea)
+                if (e.Field != null && (e.Field.FieldName == "NomJornada") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.RowArea && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.GrandTotal && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.Total)
                 {
                     LabelBrick lb = new DevExpress.XtraPrinting.LabelBrick();
                     lb.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
                     lb.Angle = 90;
-                    lb.Text = e.Text;
+                    lb.Text = e.Field.FieldName == "Cantidad" ? Convert.ToString(e.Text.Replace("Total", "")) : e.Text;
+                    lb.Rect = DevExpress.XtraPrinting.GraphicsUnitConverter.DocToPixel(e.Brick.Rect);
+                    e.Brick = lb;
+                }
+                else
+                    if (e.Field != null && e.Field.FieldName == "NomJornada" && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.RowArea && (e.ValueType == DevExpress.XtraPivotGrid.PivotGridValueType.GrandTotal || e.ValueType == DevExpress.XtraPivotGrid.PivotGridValueType.Total))
+                {
+                    LabelBrick lb = new DevExpress.XtraPrinting.LabelBrick();
+                    lb.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
+                    lb.Text = e.Field.FieldName == "Cantidad" ? Convert.ToString(e.Text.Replace("Total", "")) : e.Text;
                     lb.Rect = DevExpress.XtraPrinting.GraphicsUnitConverter.DocToPixel(e.Brick.Rect);
                     e.Brick = lb;
                 }
