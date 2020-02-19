@@ -1081,7 +1081,7 @@ namespace Core.Data.Facturacion
                             sc_observacion = item.sc_observacion,
                             sc_total = Convert.ToDouble(item.Total),
                             sc_saldo = Math.Round(Convert.ToDouble(item.Total - item.Valor_Aplicado),2,MidpointRounding.AwayFromZero),
-                            IdString = item.IdSucursal.ToString("0000") + item.IdBodega.ToString("0000") + item.IdNota.ToString("0000000000"),
+                            IdString = item.IdSucursal.ToString().PadLeft(4,'0') + item.IdBodega.ToString().PadLeft(4, '0') + item.IdNota.ToString().PadLeft(10, '0'),
                             NumNota_Impresa = item.NumNota
                         });
                     }
@@ -1110,7 +1110,11 @@ namespace Core.Data.Facturacion
 
                 using (EntitiesFacturacion Context = new EntitiesFacturacion())
                 {
-                    var Entity = Context.vwfa_notaCreDeb.Where(q => q.IdEmpresa == IdEmpresa && (q.IdSucursal.ToString("0000")+q.IdBodega.ToString("0000")+q.IdNota.ToString("0000000000")) == IdString).FirstOrDefault();
+                    int IdSucursal = string.IsNullOrEmpty(IdString) ? 0 : Convert.ToInt32(IdString.Substring(0, 4));
+                    int IdBodega = string.IsNullOrEmpty(IdString) ? 0 : Convert.ToInt32(IdString.Substring(4, 4));
+                    int IdNota = string.IsNullOrEmpty(IdString) ? 0 : Convert.ToInt32(IdString.Substring(8, 10));
+
+                    var Entity = Context.vwfa_notaCreDeb.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdNota == IdNota).FirstOrDefault();
                     if (Entity == null) return null;
                     info = new fa_notaCreDeb_Info
                     {
@@ -1124,8 +1128,13 @@ namespace Core.Data.Facturacion
                         NumNota_Impresa = Entity.NumNota_Impresa,
                         IdString = Entity.IdSucursal.ToString("0000") + Entity.IdBodega.ToString("0000") + Entity.IdNota.ToString("0000000000")
                     };
-                }
 
+                    var NCSaldo = Context.vwfa_notaCreDeb_ParaConciliarNC.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdNota == IdNota).FirstOrDefault();
+                    if (NCSaldo != null)
+                    {
+                        info.sc_saldo = Math.Round(Convert.ToDouble(NCSaldo.Total - NCSaldo.Valor_Aplicado ?? 0), 2, MidpointRounding.AwayFromZero);
+                    }
+                }
                 return info;
             }
             catch (Exception)

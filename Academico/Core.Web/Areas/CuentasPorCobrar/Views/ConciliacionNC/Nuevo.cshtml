@@ -54,7 +54,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("GetListFacturas_PorIngresar", "Cobranza", new { Area = "CuentasPorCobrar" })',
+            url: '@Url.Action("GetListFacturas_PorIngresar", "ConciliacionNC", new { Area = "CuentasPorCobrar" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -62,8 +62,8 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data > 0) {
-                    GridView_cobranza_facturas_x_cruzar.PerformCallback();
-                    GridView_cobranza_facturas_x_cruzar.UnselectRows();
+                    GridView_ConciliacionNCPorConciliar.PerformCallback();
+                    GridView_ConciliacionNCPorConciliar.UnselectRows();
                     $("#FacturasModal").modal("show");
                 } else {
                     alert("El alumno no tiene documentos pendientes de cobrar");
@@ -73,9 +73,33 @@
             }
         });
     }
+
+    function SetValorNC() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdString: IdString.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetSaldoNC", "ConciliacionNC", new { Area = "CuentasPorCobrar" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#Valor").val(data);
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
 @using (Html.BeginForm("Nuevo", "ConciliacionNC", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
+    @Html.HiddenFor(q=> q.IdEmpresa, new { @id = "IdEmpresa"})
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="modal fade" id="FacturasModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
@@ -128,18 +152,26 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <div class="form-group">
                     <label for="IdString">Nota de crédito*</label>
                     @Html.Partial("_CmbNotaCreditoPorConciliar", Model.IdAlumno)
                     @Html.ValidationMessageFor(q => q.IdString, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="form-group">
+                    <label>     </label>
                     <button type="button" class="btn btn-primary form-control" title="Buscar facturas" id="btn_buscar" onclick="MostrarModal();">
                         <i class="fa fa-search"></i>
                     </button>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="cr_fecha">Valor NC</label>
+                    @Html.TextBoxFor(q => q.Valor, new { @class = "form-control", @id = "Valor", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.Valor, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -150,13 +182,16 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
-                <label for="cr_fecha">Observación</label>
-                @Html.TextBoxFor(q=> q.Observacion, new { @class = "form-control", @id="Observacion" })
-                @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label for="cr_fecha">Observación</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", @id = "Observacion" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
     </div>
 
+    @Html.Action("GridViewPartial_ConciliacionNCDet")
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>

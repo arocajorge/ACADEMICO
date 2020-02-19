@@ -18,5 +18,25 @@ namespace Core.Info.CuentasPorCobrar
         public double Valor { get; set; }
         public double ValorProntoPago { get; set; }
         public Nullable<int> secuencia_nt { get; set; }
+        #region Campos que no existen en la tabla
+        public string ReferenciaDet { get; set; }
+        public double? Saldo { get; set; }
+        public string secuencia { get; set; }
+        public DateTime vt_fecha { get; set; }
+        public double? vt_total { get; set; }
+        public double? vt_Subtotal { get; set; }
+        public double? vt_iva { get; set; }
+        public DateTime vt_fech_venc { get; set; }
+        public string NomCliente { get; set; }
+        public DateTime? FechaProntoPago { get; set; }
+        public int? IdAnio { get; set; }
+        public int? IdPlantilla { get; set; }
+        public int? IdPuntoVta { get; set; }
+        public decimal IdCliente { get; set; }
+        public decimal? IdAlumno { get; set; }
+        public double Saldo_final { get; set; }
+        public string Observacion { get; set; }
+        #endregion
+
     }
 }

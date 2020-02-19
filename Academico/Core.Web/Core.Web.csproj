@@ -8270,6 +8270,7 @@
     <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\_CmbNotaCreditoPorConciliar.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\_CmbAlumno_ConciliacionNC.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\_GridViewPartial_ConciliacionNCPorConciliar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\_GridViewPartial_ConciliacionNCDet.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

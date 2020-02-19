@@ -61,6 +61,17 @@ namespace Core.Bus.Facturacion
                 throw;
             }
         }
+        public fa_notaCreDeb_Info get_info(int IdEmpresa, string IdString)
+        {
+            try
+            {
+                return odata.get_info(IdEmpresa,IdString);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public bool guardarDB(fa_notaCreDeb_Info info)
         {

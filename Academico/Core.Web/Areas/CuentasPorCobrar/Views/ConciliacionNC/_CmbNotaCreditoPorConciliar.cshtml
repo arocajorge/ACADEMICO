@@ -10,9 +10,9 @@
         settings.Properties.CallbackPageSize = 15;
         settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
         settings.Properties.TextField = "NumNota_Impresa";
-        settings.Properties.TextFormatString = "[{0}] {1} - {2} - {3}";
+        settings.Properties.TextFormatString = "[{0}] {1} - {2} - {3} - {4}";
         settings.Properties.ValueField = "IdString";
-        settings.Properties.ValueType = typeof(decimal);
+        settings.Properties.ValueType = typeof(String);
         settings.Properties.Columns.Add("IdNota", "ID", 10);
 
         settings.Properties.Columns.Add(column =>
@@ -23,10 +23,11 @@
         });
 
         settings.Properties.Columns.Add("NumNota_Impresa", "Referencia", 10);
-        settings.Properties.Columns.Add("sc_observacion", "Observación", 60);
+        settings.Properties.Columns.Add("sc_observacion", "Observación", 50);
         settings.Properties.Columns.Add("sc_total", "Total", 10);
         settings.Properties.AllowMouseWheel = false;
         settings.Properties.ClientSideEvents.BeginCallback = "function(s,e){ SetDatosAlumno();}";
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){ SetValorNC();}";
     })
     .BindList(new Core.Web.Areas.CuentasPorCobrar.Controllers.ConciliacionNCController().get_list_bajo_demanda_NC, new Core.Web.Areas.CuentasPorCobrar.Controllers.ConciliacionNCController().get_info_bajo_demanda_NC)
     .Bind(Model.GetType() == typeof(Core.Info.CuentasPorCobrar.cxc_ConciliacionNotaCredito_Info) ? "" : (Model == 0 ? "" : Model));
