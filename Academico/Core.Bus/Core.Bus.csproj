@@ -71,6 +71,7 @@
     <Compile Include="Academico\aca_MateriaArea_Bus.cs" />
     <Compile Include="Academico\aca_MateriaGrupo_Bus.cs" />
     <Compile Include="Academico\aca_Materia_Bus.cs" />
+    <Compile Include="Academico\aca_MatriculaCondicionalParrafo_Bus.cs" />
     <Compile Include="Academico\aca_Matricula_Bus.cs" />
     <Compile Include="Academico\aca_Matricula_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_MecanismoDePago_Bus.cs" />

@@ -231,6 +231,7 @@
     <Compile Include="Areas\Academico\Controllers\MateriaPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaPorProfesorController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalController.cs" />
+    <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalParrafoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MecanismoDePagoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MenuController.cs" />
@@ -8278,6 +8279,8 @@
     <Content Include="Areas\General\Views\VisorDeVideo\Nuevo.cshtml" />
     <Content Include="Areas\General\Views\VisorDeVideo\ReproducirVideo.cshtml" />
     <Content Include="Areas\General\Views\VisorDeVideo\_GridViewPartial_visor_video.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicionalParrafo\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicionalParrafo\_GridViewPartial_MatriculaCondicionalParrafo.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
