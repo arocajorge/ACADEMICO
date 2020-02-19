@@ -27,7 +27,6 @@ namespace Core.Data.Base
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<VWACA_002> VWACA_002 { get; set; }
         public virtual DbSet<VWCONTA_001> VWCONTA_001 { get; set; }
         public virtual DbSet<VWCXC_003> VWCXC_003 { get; set; }
         public virtual DbSet<VWFAC_003> VWFAC_003 { get; set; }
@@ -41,6 +40,7 @@ namespace Core.Data.Base
         public virtual DbSet<VWCXC_002_Aplicaciones> VWCXC_002_Aplicaciones { get; set; }
         public virtual DbSet<VWFAC_001> VWFAC_001 { get; set; }
         public virtual DbSet<VWFAC_002> VWFAC_002 { get; set; }
+        public virtual DbSet<VWACA_002> VWACA_002 { get; set; }
     
         public virtual ObjectResult<SPACA_001_Result> SPACA_001(Nullable<int> idEmpresa, Nullable<decimal> idAlumno)
         {

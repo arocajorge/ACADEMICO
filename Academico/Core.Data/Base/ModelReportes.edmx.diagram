@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d9eff5eb2a43466aaf4523466d3e7617" Name="Diagram1" ZoomLevel="69" >
-        <EntityTypeShape EntityType="ModelReportes.VWACA_002" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ModelReportes.VWCONTA_001" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelReportes.VWCXC_003" Width="1.5" PointX="5.375" PointY="5.75" />
         <EntityTypeShape EntityType="ModelReportes.VWFAC_003" Width="1.5" PointX="11.375" PointY="0.75" />
@@ -19,6 +18,7 @@
         <EntityTypeShape EntityType="ModelReportes.VWCXC_002_Aplicaciones" Width="1.5" PointX="3.375" PointY="12.75" />
         <EntityTypeShape EntityType="ModelReportes.VWFAC_001" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelReportes.VWFAC_002" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWACA_002" Width="1.5" PointX="5.375" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

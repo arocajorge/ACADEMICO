@@ -42,6 +42,8 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_002' no tiene definida
           <Property Name="CedulaRep" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NombreRep" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="NomPlantilla" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -724,7 +726,9 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
     [VWACA_002].[NombreAlumno] AS [NombreAlumno], 
     [VWACA_002].[CedulaRep] AS [CedulaRep], 
     [VWACA_002].[NombreRep] AS [NombreRep], 
-    [VWACA_002].[NomPlantilla] AS [NomPlantilla]
+    [VWACA_002].[NomPlantilla] AS [NomPlantilla], 
+    [VWACA_002].[IdUsuarioCreacion] AS [IdUsuarioCreacion], 
+    [VWACA_002].[FechaCreacion] AS [FechaCreacion]
     FROM [Academico].[VWACA_002] AS [VWACA_002]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWACA_003" EntityType="Self.VWACA_003" store:Type="Views" store:Schema="Academico">
@@ -1136,7 +1140,6 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
     <edmx:ConceptualModels>
       <Schema Namespace="ModelReportes" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="EntitiesReportes" annotation:LazyLoadingEnabled="true" >
-          <EntitySet Name="VWACA_002" EntityType="ModelReportes.VWACA_002" />
           <FunctionImport Name="SPACA_001" ReturnType="Collection(ModelReportes.SPACA_001_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
@@ -1172,43 +1175,8 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
           </FunctionImport>
+          <EntitySet Name="VWACA_002" EntityType="ModelReportes.VWACA_002" />
         </EntityContainer>
-        <EntityType Name="VWACA_002">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMatricula" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="EnCurso" />
-            <PropertyRef Name="NomSede" />
-            <PropertyRef Name="NomNivel" />
-            <PropertyRef Name="NomJornada" />
-            <PropertyRef Name="NomCurso" />
-            <PropertyRef Name="NomParalelo" />
-            <PropertyRef Name="CodigoAlumno" />
-            <PropertyRef Name="NombreAlumno" />
-            <PropertyRef Name="CedulaRep" />
-            <PropertyRef Name="NombreRep" />
-            <PropertyRef Name="NomPlantilla" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EnCurso" Type="Boolean" Nullable="false" />
-          <Property Name="NomSede" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomNivel" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomJornada" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomParalelo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="CodigoAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="NombreAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CedulaRep" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NombreRep" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="NomPlantilla" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
         <ComplexType Name="SPACA_001_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
@@ -2017,34 +1985,50 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <Property Type="Decimal" Name="Conducta" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="Promedio" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
+        <EntityType Name="VWACA_002">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="EnCurso" />
+            <PropertyRef Name="NomSede" />
+            <PropertyRef Name="NomNivel" />
+            <PropertyRef Name="NomJornada" />
+            <PropertyRef Name="NomCurso" />
+            <PropertyRef Name="NomParalelo" />
+            <PropertyRef Name="CodigoAlumno" />
+            <PropertyRef Name="NombreAlumno" />
+            <PropertyRef Name="CedulaRep" />
+            <PropertyRef Name="NombreRep" />
+            <PropertyRef Name="NomPlantilla" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EnCurso" Type="Boolean" Nullable="false" />
+          <Property Name="NomSede" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomNivel" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomJornada" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomParalelo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NombreAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CedulaRep" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreRep" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NomPlantilla" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelReportesStoreContainer" CdmEntityContainer="EntitiesReportes" >
-          <EntitySetMapping Name="VWACA_002">
-            <EntityTypeMapping TypeName="ModelReportes.VWACA_002">
-              <MappingFragment StoreEntitySet="VWACA_002">
-                <ScalarProperty Name="NomPlantilla" ColumnName="NomPlantilla" />
-                <ScalarProperty Name="NombreRep" ColumnName="NombreRep" />
-                <ScalarProperty Name="CedulaRep" ColumnName="CedulaRep" />
-                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
-                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
-                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
-                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
-                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
-                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
-                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
-                <ScalarProperty Name="EnCurso" ColumnName="EnCurso" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SPACA_001" FunctionName="ModelReportes.Store.SPACA_001">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ModelReportes.SPACA_001_Result">
@@ -2683,6 +2667,30 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWACA_002">
+            <EntityTypeMapping TypeName="ModelReportes.VWACA_002">
+              <MappingFragment StoreEntitySet="VWACA_002">
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="NomPlantilla" ColumnName="NomPlantilla" />
+                <ScalarProperty Name="NombreRep" ColumnName="NombreRep" />
+                <ScalarProperty Name="CedulaRep" ColumnName="CedulaRep" />
+                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
+                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="EnCurso" ColumnName="EnCurso" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

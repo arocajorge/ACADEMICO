@@ -704,7 +704,7 @@
             // 
             this.xrTableCell27.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell27.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([dc_ValorPagoNC]+[dc_ValorPagoNC])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([dc_ValorPago]+[dc_ValorPagoNC])")});
             this.xrTableCell27.Multiline = true;
             this.xrTableCell27.Name = "xrTableCell27";
             this.xrTableCell27.StylePriority.UseBorders = false;

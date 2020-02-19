@@ -24,5 +24,7 @@ namespace Core.Info.Reportes.Academico
         public string CedulaRep { get; set; }
         public string NombreRep { get; set; }
         public string NomPlantilla { get; set; }
+        public string IdUsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
     }
 }
