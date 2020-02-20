@@ -1,6 +1,6 @@
 ﻿@model Core.Info.CuentasPorCobrar.cxc_ConciliacionNotaCredito_Info
 @{
-    ViewBag.Title = "Nueva conciliación de nota de crédito";
+    ViewBag.Title = "Anular conciliación de nota de crédito";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -123,10 +123,11 @@
         $("#FacturasModal").modal("hide");
     }
 </script>
-@using (Html.BeginForm("Nuevo", "ConciliacionNC", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "ConciliacionNC", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q=> q.IdEmpresa, new { @id = "IdEmpresa"})
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdConciliacion, new { @id = "IdConciliacion" })
 
     if (!string.IsNullOrEmpty(@ViewBag.mensaje))
     {
@@ -136,6 +137,23 @@
                     <div class="alert alert-warning alert-dismissible">
                         <h4>
                             <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    if (!string.IsNullOrEmpty(@ViewBag.MensajeSuccess))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4>
+                            <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
                         </h4>
                     </div>
                 </div>
@@ -245,7 +263,7 @@
     
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index", "ConciliacionNC", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
     </div>
 

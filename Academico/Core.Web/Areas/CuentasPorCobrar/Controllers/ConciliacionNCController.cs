@@ -30,6 +30,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         cxc_ConciliacionNotaCreditoDet_List lstDet = new cxc_ConciliacionNotaCreditoDet_List();
         cxc_ConciliacionNotaCreditoDet_Bus busDet = new cxc_ConciliacionNotaCreditoDet_Bus();
         string Mensaje = string.Empty;
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Combo bajo demanda Alumno
@@ -197,6 +198,87 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             if (!busConciliacion.GuardarDB(model))
             {
                 ViewBag.mensaje = "Ha ocurrido un error al guardar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Modificar",new { IdEmpresa = model.IdEmpresa, IdConciliacion = model.IdConciliacion, Exito = true});
+        }
+
+        public ActionResult Modificar(int IdEmpresa = 0, decimal IdConciliacion = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            var model = busConciliacion.GetInfo(IdEmpresa, IdConciliacion);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            SessionFixed.IdAlumno = model.IdAlumno.ToString();
+            lstDet.set_list(busDet.GetList(model.IdEmpresa, model.IdConciliacion), model.IdTransaccionSession);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(cxc_ConciliacionNotaCredito_Info model)
+        {
+            if (!Validar(model, ref Mensaje))
+            {
+                ViewBag.mensaje = Mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+
+            if (!busConciliacion.ModificarDB(model))
+            {
+                ViewBag.mensaje = "Ha ocurrido un error al modificar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdConciliacion = model.IdConciliacion, Exito = true });
+        }
+
+        public ActionResult Anular(int IdEmpresa = 0, decimal IdConciliacion = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            var model = busConciliacion.GetInfo(IdEmpresa, IdConciliacion);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            SessionFixed.IdAlumno = model.IdAlumno.ToString();
+            lstDet.set_list(busDet.GetList(model.IdEmpresa, model.IdConciliacion), model.IdTransaccionSession);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Anular(cxc_ConciliacionNotaCredito_Info model)
+        {
+            if (!Validar(model, ref Mensaje))
+            {
+                ViewBag.mensaje = Mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+
+            if (!busConciliacion.AnularDB(model))
+            {
+                ViewBag.mensaje = "Ha ocurrido un error al modificar el registro";
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             }
