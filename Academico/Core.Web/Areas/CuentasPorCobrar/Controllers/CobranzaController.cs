@@ -8,6 +8,7 @@ using Core.Bus.General;
 using Core.Bus.SeguridadAcceso;
 using Core.Data.Academico;
 using Core.Info.CuentasPorCobrar;
+using Core.Info.Facturacion;
 using Core.Info.General;
 using Core.Info.Helps;
 using Core.Web.Helps;
@@ -48,7 +49,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         fa_TipoNota_Bus bus_tipo_nota = new fa_TipoNota_Bus();
         aca_AnioLectivo_Bus bus_anioLectivo = new aca_AnioLectivo_Bus();
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
+        fa_notaCreDeb_Bus bus_notaDebCre = new fa_notaCreDeb_Bus();
         string mensaje = string.Empty;
+        string mensajeInfo = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
@@ -685,7 +688,16 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 else
                     DatosAlumno = "NO MATRICULADO";
             }
-            return Json(new { Saldo = Saldo, DatosAlumno = DatosAlumno },JsonRequestBehavior.AllowGet);
+
+            List<fa_notaCreDeb_Info> lst_CreditoAlumno = bus_notaDebCre.get_list_credito_favor(IdEmpresa, IdAlumno);
+
+            if (lst_CreditoAlumno.Sum(q => q.sc_saldo) > 0)
+            {
+                var SaldoCredito = Math.Round(lst_CreditoAlumno.Sum(q => Convert.ToDouble(q.sc_saldo)), 2, MidpointRounding.AwayFromZero).ToString("C2");
+                mensajeInfo += "El estudiante tiene un saldo a favor: " + SaldoCredito + ".</br>";
+            }
+
+            return Json(new { Saldo = Saldo, DatosAlumno = DatosAlumno, mensajeInfo = mensajeInfo },JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

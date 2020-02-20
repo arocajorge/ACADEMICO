@@ -58,6 +58,7 @@ namespace Core.Web.Areas.Academico.Controllers
         cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
         tb_mes_Bus bus_mes = new tb_mes_Bus();
         aca_CondicionalMatricula_Bus bus_matricula_condicional = new aca_CondicionalMatricula_Bus();
+        fa_notaCreDeb_Bus bus_notaDebCre = new fa_notaCreDeb_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         string mensajeInfo = string.Empty;
@@ -562,6 +563,14 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     var Saldo = Math.Round(lst_DeudaAlumno.Sum(q => q.cr_saldo), 2, MidpointRounding.AwayFromZero).ToString("C2");
                     mensaje += "El estudiante tiene saldo pendiente: "+Saldo + ".</br>"; 
+                }
+
+                List<fa_notaCreDeb_Info> lst_CreditoAlumno = bus_notaDebCre.get_list_credito_favor(IdEmpresa, IdAlumno);
+
+                if (lst_CreditoAlumno.Sum(q => q.sc_saldo) > 0)
+                {
+                    var Saldo = Math.Round(lst_CreditoAlumno.Sum(q => Convert.ToDouble(q.sc_saldo)), 2, MidpointRounding.AwayFromZero).ToString("C2");
+                    mensajeInfo += "El estudiante tiene un saldo a favor: " + Saldo + ".</br>";
                 }
 
                 var ObsMatriculaCondicional = "";

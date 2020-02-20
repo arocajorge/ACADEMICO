@@ -44,7 +44,7 @@
     function MostrarDatosTarjeta() {
 
         var TipoCobro = $("#IdCobro_tipo").val();
-        if (TipoCobro == "TARJ") 
+        if (TipoCobro == "TARJ")
         {
             $("#DatoIdTarjeta").show();
             $("#DatoTarjeta").show();
@@ -254,9 +254,19 @@
                 $("#cr_TotalCobro").val(data.Saldo);
                 CalcularSaldo();
 
-                if (data.Saldo == 0) {
+                if (data.Saldo == 0 && data.mensajeInfo=="") {
                     alert("El estudiante no tiene documentos pendientes de cobrar");
                 }
+                else{
+                    $("#MensajeInformativo").show();
+                    $("#MensajeInfo").html(data.mensajeInfo);
+
+                    var location = GetPathServer();
+                    var win = window.open(location + "/CuentasPorCobrar/ConciliacionNC/Nuevo?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdAlumno=" + IdAlumno.GetValue(), '_self');
+
+                    win.focus();
+                }
+
             },
             error: function (error) {
             }
@@ -278,6 +288,15 @@
             </h4>
         </div>
     }
+    <div class="row" id="MensajeInformativo" hidden>
+        <div class="col-md-12">
+            <div class="callout callout-info">
+                <h4>
+                    <i class="icon fa fa-exclamation"></i> <label id="MensajeInfo"></label>
+                </h4>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="FacturasModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->

@@ -331,7 +331,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         int anio_inicio = (Convert.ToInt32(reader.GetValue(0)));
                         int anio_fin = (Convert.ToInt32(reader.GetValue(1)));
-                        decimal conducta = Convert.ToInt32(reader.GetValue(8));
+                        decimal conducta = Convert.ToInt32(reader.GetValue(7));
                         string cedula_ruc_alumno = (Convert.ToString(reader.GetValue(2)).Trim());
                         aca_Alumno_Info info_alumno = bus_alumno.get_info_x_num_cedula(IdEmpresa, cedula_ruc_alumno);
                         aca_AnioLectivo_Info info_anio = bus_anio.GetInfo_x_Anio(IdEmpresa, anio_inicio, anio_fin);

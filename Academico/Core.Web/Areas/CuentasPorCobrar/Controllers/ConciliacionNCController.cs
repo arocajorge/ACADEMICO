@@ -166,7 +166,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         #endregion
 
         #region Acciones
-        public ActionResult Nuevo(int IdEmpresa = 0)
+        public ActionResult Nuevo(int IdEmpresa = 0, int IdAlumno=0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -179,7 +179,8 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
-                Fecha = DateTime.Now.Date
+                Fecha = DateTime.Now.Date,
+                IdAlumno=IdAlumno
             };
             SessionFixed.IdAlumno = "0";
             return View(model);

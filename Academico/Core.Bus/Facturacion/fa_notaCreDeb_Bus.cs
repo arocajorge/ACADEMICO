@@ -152,6 +152,16 @@ namespace Core.Bus.Facturacion
             }
         }
 
-
+        public List<fa_notaCreDeb_Info> get_list_credito_favor(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.get_list_credito_favor(IdEmpresa, IdAlumno);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
