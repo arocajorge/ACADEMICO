@@ -51,6 +51,26 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_MatriculaCondicionalParrafo", model);
         }
         #endregion
+
+        #region Acciones
+        public ActionResult Nuevo(int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            aca_MatriculaCondicionalParrafo_Info model = new aca_MatriculaCondicionalParrafo_Info()
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual))
+
+            };
+
+            return View(model);
+        }
+        #endregion
     }
 
     public class aca_CondicionalMatriculaParrafo_List
