@@ -204,10 +204,18 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 i_validar.lst_det.ForEach(q => q.IdCobro_tipo_det = i_validar.IdCobro_tipo);
 
 
-            if (i_validar.lst_det.Count == 0 && i_validar.cr_saldo > 0 && i_validar.IdTipoNotaCredito == null)
+            if (i_validar.lst_det.Count == 0 && i_validar.cr_saldo > 0)
             {
-                msg = "Debe ingresar el tipo de nota de crédito a aplicar para el saldo";
-                return false;
+                if (i_validar.IdTipoNotaCredito == null)
+                {
+                    msg = "Debe ingresar el tipo de nota de crédito a aplicar para el saldo";
+                    return false;
+                }
+                if (List_x_Cruzar.get_list(i_validar.IdTransaccionSession).Count > 0)
+                {
+                    msg = "No puede realizar un cobro sin documentos cuando el estudiante tiene documentos por cobrar";
+                    return false;
+                }
             }
             if (i_validar.lst_det.Count > 0 && i_validar.cr_saldo > 0)
             {
