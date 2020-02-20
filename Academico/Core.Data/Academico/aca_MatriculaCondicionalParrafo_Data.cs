@@ -26,7 +26,7 @@ namespace Core.Data.Academico
                             IdCatalogo = item.IdCatalogo,
                             Nombre = item.Nombre,
                             Parrafo = item.Parrafo,
-                            Orden = item.IdCatalogo
+                            Orden = item.Orden
                         });
                     }
                 }
@@ -59,7 +59,9 @@ namespace Core.Data.Academico
                         IdCatalogo = Entity.IdCatalogo,
                         Nombre = Entity.Nombre,
                         Parrafo = Entity.Parrafo,
-                        Orden = Entity.IdCatalogo
+                        Orden = Entity.Orden,
+                        Estado = Entity.Estado
+                        
                     };
                 }
 
@@ -85,7 +87,10 @@ namespace Core.Data.Academico
                     IdCatalogo = info.IdCatalogo,
                     Nombre = info.Nombre,
                     Parrafo = info.Parrafo,
-                    Orden = info.IdCatalogo
+                    Orden = info.Orden,
+                    Estado = true,
+                    IdUsuarioCreacion = info.IdUsuarioCreacion,
+                    FechaCreacion = DateTime.Now
                 };
                 #endregion
                 #region MyRegion
@@ -117,6 +122,8 @@ namespace Core.Data.Academico
 
                 Entity.Parrafo = info.Parrafo;
                 Entity.Nombre = info.Nombre;
+                Entity.FechaModificacion = DateTime.Now;
+                Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                 #endregion
 
 
@@ -142,8 +149,10 @@ namespace Core.Data.Academico
                 if (Entity == null)
                     return false;
 
-                Entity.Parrafo = info.Parrafo;
-                Entity.Nombre = info.Nombre;
+                Entity.Estado = false;
+                Entity.FechaAnulacion = DateTime.Now;
+                Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
+                Entity.MotivoAnulacion = info.MotivoAnulacion;
                 #endregion
 
                 return true;

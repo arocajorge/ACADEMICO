@@ -19,6 +19,15 @@ namespace Core.Data.Base
         public string Parrafo { get; set; }
         public int Orden { get; set; }
         public int IdCatalogo { get; set; }
+        public bool Estado { get; set; }
+        public string IdUsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public string IdUsuarioModificacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public string IdUsuarioAnulacion { get; set; }
+        public Nullable<System.DateTime> FechaAnulacion { get; set; }
+        public string MotivoAnulacion { get; set; }
+    
         public virtual aca_Catalogo aca_Catalogo { get; set; }
     }
 }
