@@ -214,7 +214,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                     msg = "Debe ingresar el tipo de nota de crédito a aplicar para el saldo";
                     return false;
                 }
-                if (List_x_Cruzar.get_list(i_validar.IdTransaccionSession).Count > 0)
+                if (bus_det.get_list_cartera(i_validar.IdEmpresa,i_validar.IdSucursal,i_validar.IdAlumno ?? 0,false).Count > 0)
                 {
                     msg = "No puede realizar un cobro sin documentos cuando el estudiante tiene documentos por cobrar";
                     return false;
@@ -622,9 +622,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 ValorProntoPago = (item.vt_total - item.ValorProntoPago ?? 0);
                 if (saldo > 0)
                 {
-                    item.dc_ValorProntoPago = saldo >= ValorProntoPago ? ValorProntoPago : 0;
+                    item.dc_ValorProntoPago = saldo >= item.ValorProntoPago ? ValorProntoPago : 0;
                     item.dc_ValorPago = saldo >= Convert.ToDouble(item.Saldo) ? Convert.ToDouble(item.Saldo) - ValorProntoPago : saldo;
                     item.Saldo_final = Convert.ToDouble(item.Saldo - ValorProntoPago) - item.dc_ValorPago;
+                    item.ValorProntoPago = ValorProntoPago;
                     saldo = saldo - item.dc_ValorPago;
                 }
                 else

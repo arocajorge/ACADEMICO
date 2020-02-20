@@ -9,7 +9,7 @@ function OpenInBrowser(url) {
 }
 
 function GetPathServer() {
-    //var location = window.location.origin + "/FixedERP"; /*produccion*/
+    var location = window.location.origin + "/lcg"; /*produccion*/
     var location = window.location.origin; /*local*/
 
     return location;
