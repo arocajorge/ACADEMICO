@@ -71,8 +71,9 @@ namespace Core.Data.Reportes.Academico
                         NomParalelo = q.NomParalelo,
                         NombreRep = q.NombreRep,
                         CedulaRep = q.CedulaRep,
-                        NomPlantilla = q.NomPlantilla
-
+                        NomPlantilla = q.NomPlantilla,
+                        IdUsuarioCreacion = q.IdUsuarioCreacion,
+                        FechaCreacion = q.FechaCreacion
                     }).FirstOrDefault();
                 }
                 return Info;
