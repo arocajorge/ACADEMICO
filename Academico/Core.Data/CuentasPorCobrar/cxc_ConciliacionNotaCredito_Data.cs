@@ -107,7 +107,9 @@ namespace Core.Data.CuentasPorCobrar
                         Observacion = Entity.Observacion,
                         Estado = Entity.Estado,
                         IdTipoCbte = Entity.IdTipoCbte,
-                        IdCbteCble = Entity.IdCbteCble
+                        IdCbteCble = Entity.IdCbteCble,
+
+                        IdString = Entity.IdSucursal.ToString("0000")+Entity.IdBodega.ToString("0000")+Entity.IdNota.ToString("0000000000")
                     };
                 }
 
