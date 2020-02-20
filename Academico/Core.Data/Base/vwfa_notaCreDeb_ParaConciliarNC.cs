@@ -20,6 +20,7 @@ namespace Core.Data.Base
         public decimal IdNota { get; set; }
         public decimal Total { get; set; }
         public Nullable<decimal> Valor_Aplicado { get; set; }
+        public Nullable<decimal> Saldo { get; set; }
         public string NumNota { get; set; }
         public System.DateTime no_fecha { get; set; }
         public string sc_observacion { get; set; }

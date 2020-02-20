@@ -24,5 +24,13 @@ namespace Core.Data.Base
         public double Valor { get; set; }
         public string ReferenciaDet { get; set; }
         public Nullable<int> secuencia_nt { get; set; }
+        public Nullable<System.DateTime> vt_fecha { get; set; }
+        public Nullable<int> IdAnio { get; set; }
+        public Nullable<int> IdPlantilla { get; set; }
+        public Nullable<int> IdPuntoVta { get; set; }
+        public Nullable<decimal> IdAlumno { get; set; }
+        public Nullable<decimal> IdCliente { get; set; }
+        public double ValorProntoPago { get; set; }
+        public string vt_Observacion { get; set; }
     }
 }
