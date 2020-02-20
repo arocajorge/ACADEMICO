@@ -207,6 +207,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdConciliacion = 0, bool Exito = false)
         {
+            ViewBag.OcultarBoton = false;
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
@@ -223,7 +224,16 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             SessionFixed.IdAlumno = model.IdAlumno.ToString();
-            lstDet.set_list(busDet.GetList(model.IdEmpresa, model.IdConciliacion), model.IdTransaccionSession);
+
+            var lst = busDet.GetList(model.IdEmpresa, model.IdConciliacion);
+            if (lst.Where(q => q.ValorProntoPago > 0).Count() > 0)
+            {
+                ViewBag.mensaje = "La conciliación no se puede modificar ya que aplica pronto pago, debe anular y realizar una nueva";
+                ViewBag.OcultarBoton = true;
+            }
+
+            lstDet.set_list(lst, model.IdTransaccionSession);
+
             return View(model);
         }
 
@@ -233,12 +243,14 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             if (!Validar(model, ref Mensaje))
             {
                 ViewBag.mensaje = Mensaje;
+                ViewBag.OcultarBoton = false;
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             }
 
             if (!busConciliacion.ModificarDB(model))
             {
+                ViewBag.OcultarBoton = false;
                 ViewBag.mensaje = "Ha ocurrido un error al modificar el registro";
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);

@@ -406,11 +406,20 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+            ViewBag.MostrarBoton = true;
             cxc_cobro_Info model = bus_cobro.get_info(IdEmpresa, IdSucursal, IdCobro);
             if (model == null)
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
+
+            if (model.lst_det.Where(q => q.dc_ValorProntoPago > 0).Count() > 0)
+            {
+                ViewBag.mensaje = "El cobro no se puede modificar ya que aplica pronto pago, debe anular y realizar uno nuevo";
+                ViewBag.MostrarBoton = false;
+            }
+
+
             list_det.set_list(model.lst_det, model.IdTransaccionSession);
             model.IdEntidad = model.IdCliente;
             cargar_combos(IdEmpresa, model.IdSucursal);
@@ -432,7 +441,6 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
             #region Validacion Periodo
-            ViewBag.MostrarBoton = true;
             if (!bus_periodo.ValidarFechaTransaccion(IdEmpresa, model.cr_fecha, cl_enumeradores.eModulo.CXC, model.IdSucursal, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -451,12 +459,14 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             {
                 ViewBag.mensaje = mensaje;
                 cargar_combos(model.IdEmpresa, model.IdSucursal);
+                ViewBag.MostrarBoton = true;
                 return View(model);
             }
             model.IdUsuarioUltMod = SessionFixed.IdUsuario;
             if (!bus_cobro.modificarDB(model))
             {
                 ViewBag.mensaje = mensaje;
+                ViewBag.MostrarBoton = true;
                 cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
