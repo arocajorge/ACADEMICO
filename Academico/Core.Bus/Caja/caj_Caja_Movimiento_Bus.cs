@@ -98,19 +98,7 @@ namespace Core.Bus.Caja
         {
             try
             {
-                var info_ct_cbtecble = odata_ct.get_info(info.IdEmpresa, info.IdTipocbte, info.IdCbteCble);
-                if(info_ct_cbtecble != null)
-                {
-                    if(odata_ct.anularDB(info_ct_cbtecble))
-                    {
-                        return odata.anularDB(info);
-                    }
-                }
-                else
-                {
-                    return odata.anularDB(info);
-                }
-                return false;
+                return odata.anularDB(info);
             }
             catch (Exception)
             {

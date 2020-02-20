@@ -342,31 +342,34 @@ namespace Core.Data.Caja
         {
             try
             {
-                using (EntitiesContabilidad db = new EntitiesContabilidad())
+                if(odata_ct.anularDB(new Info.Contabilidad.ct_cbtecble_Info
                 {
-                    ct_cbtecble ct = new ct_cbtecble();
-
-                    db.SaveChanges();
-                }
-                using (EntitiesCaja Context = new EntitiesCaja())
+                    IdEmpresa = info.IdEmpresa,
+                    IdTipoCbte = info.IdTipocbte,
+                    IdCbteCble = info.IdCbteCble,
+                    IdUsuarioAnu = info.IdUsuario ?? info.IdUsuario_Anu,
+                    cb_MotivoAnu = info.MotivoAnulacion
+                }))
                 {
-                    caj_Caja_Movimiento Entity = Context.caj_Caja_Movimiento.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTipocbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble);
-                    if (Entity == null) return false;
+                    using (EntitiesCaja Context = new EntitiesCaja())
+                    {
+                        caj_Caja_Movimiento Entity = Context.caj_Caja_Movimiento.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdTipocbte == info.IdTipocbte && q.IdCbteCble == info.IdCbteCble);
+                        if (Entity == null) return false;
 
-                    Entity.Estado = info.Estado="I";
+                        Entity.Estado = info.Estado = "I";
 
-                    Entity.IdUsuario_Anu = info.IdUsuario_Anu;
-                    Entity.FechaAnulacion = DateTime.Now;
-                    Context.SaveChanges();
-                    Context.Database.ExecuteSqlCommand("DELETE cp_conciliacion_Caja_det_x_ValeCaja WHERE IdEmpresa_movcaja = " + info.IdEmpresa+ " AND IdTipocbte_movcaja = " + info.IdTipocbte+ " AND IdCbteCble_movcaja = " + info.IdCbteCble);
+                        Entity.IdUsuario_Anu = info.IdUsuario_Anu;
+                        Entity.FechaAnulacion = DateTime.Now;
+                        Context.SaveChanges();
+                        Context.Database.ExecuteSqlCommand("DELETE cp_conciliacion_Caja_det_x_ValeCaja WHERE IdEmpresa_movcaja = " + info.IdEmpresa + " AND IdTipocbte_movcaja = " + info.IdTipocbte + " AND IdCbteCble_movcaja = " + info.IdCbteCble);
+                    }
+                    using (EntitiesCuentasPorPagar db = new EntitiesCuentasPorPagar())
+                    {
+                        var lst = db.cp_orden_pago_cancelaciones.Where(q => q.IdEmpresa_pago == info.IdEmpresa && q.IdTipoCbte_pago == info.IdTipocbte && q.IdCbteCble_pago == info.IdCbteCble).ToList();
+                        db.cp_orden_pago_cancelaciones.RemoveRange(lst);
+                        db.SaveChanges();
+                    }
                 }
-                using (EntitiesCuentasPorPagar db = new EntitiesCuentasPorPagar())
-                {
-                    var lst = db.cp_orden_pago_cancelaciones.Where(q => q.IdEmpresa_pago == info.IdEmpresa && q.IdTipoCbte_pago == info.IdTipocbte && q.IdCbteCble_pago == info.IdCbteCble).ToList();
-                    db.cp_orden_pago_cancelaciones.RemoveRange(lst);
-                    db.SaveChanges();
-                }
-
                 return true;
             }
             catch (Exception)

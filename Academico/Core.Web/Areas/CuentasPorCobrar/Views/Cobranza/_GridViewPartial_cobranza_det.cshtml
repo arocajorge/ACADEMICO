@@ -110,6 +110,7 @@
             column.FieldName = "dc_ValorProntoPago";
             column.Caption = "Pronto Pago";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.EditFormSettings.Visible = DefaultBoolean.False;
             column.EditorProperties().SpinEdit(p =>
             {
                 p.MinValue = 0;

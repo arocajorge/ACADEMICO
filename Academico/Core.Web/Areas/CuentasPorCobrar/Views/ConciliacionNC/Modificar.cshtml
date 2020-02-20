@@ -122,12 +122,22 @@
         GridView_ConciliacionNCDet.PerformCallback();
         $("#FacturasModal").modal("hide");
     }
+
+    function Imprimir() {
+        var location = GetPathServer();
+        var win = window.open(location +"/Reportes/CuentasPorCobrarReportes/CXC_002?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdCobro="+@Model.IdCobro, '_blank');
+        win.focus();
+    }
 </script>
 @using (Html.BeginForm("Modificar", "ConciliacionNC", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q=> q.IdEmpresa, new { @id = "IdEmpresa"})
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdConciliacion, new { @id = "IdConciliacion" })
+    @Html.HiddenFor(q => q.IdSucursal, new { @id = "IdSucursal" })
+    @Html.HiddenFor(q => q.IdCobro, new { @id = "IdCobro" })
+    @Html.HiddenFor(q => q.IdTipoCbte, new { @id = "IdTipoCbte" })
+    @Html.HiddenFor(q => q.IdCbteCble, new { @id = "IdCbteCble" })
 
     if (!string.IsNullOrEmpty(@ViewBag.mensaje))
     {
@@ -192,7 +202,23 @@
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-4 col-md-2">
+            <div class="col-md-offset-2 col-md-1">
+                <label for="IdNuevo">  </label>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary form-control" id="btn_imprimir" onclick="Imprimir();" title="Imprimir">
+                        <i class="fa fa-print"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <label for="IdNuevo">  </label>
+                <div class="form-group">
+                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","ConciliacionNC",new { Area = "CuentasPorCobrar", IdEmpresa = Model.IdEmpresa },null)">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="cr_fecha">Fecha*</label>
                     @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>

@@ -33,7 +33,22 @@ namespace Core.Data.CuentasPorCobrar
                             vt_TipoDoc = item.vt_TipoDoc,
                             Valor = item.Valor,
                             ReferenciaDet = item.ReferenciaDet,
-                            secuencia_nt = item.secuencia_nt
+                            secuencia_nt = item.secuencia_nt,
+                            Observacion = item.vt_Observacion,
+                            
+                            vt_fecha = item.vt_fecha ?? DateTime.Now.Date,
+                            vt_total = item.Valor,
+                            Saldo = 0,
+                            vt_Subtotal = 0,
+                            vt_iva = 0,
+                            ValorProntoPago = item.ValorProntoPago,
+                            //FechaProntoPago = item.FechaProntoPago,
+
+                            IdAnio = item.IdAnio,
+                            IdPlantilla = item.IdPlantilla,
+                            IdPuntoVta = item.IdPuntoVta,
+                            IdCliente = item.IdCliente ?? 0,
+                            IdAlumno = item.IdAlumno,
                         });
                     }
                 }

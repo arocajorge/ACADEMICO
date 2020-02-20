@@ -125,9 +125,13 @@
 </script>
 @using (Html.BeginForm("Anular", "ConciliacionNC", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    @Html.HiddenFor(q=> q.IdEmpresa, new { @id = "IdEmpresa"})
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdConciliacion, new { @id = "IdConciliacion" })
+    @Html.HiddenFor(q => q.IdSucursal, new { @id = "IdSucursal" })
+    @Html.HiddenFor(q => q.IdCobro, new { @id = "IdCobro" })
+    @Html.HiddenFor(q => q.IdTipoCbte, new { @id = "IdTipoCbte" })
+    @Html.HiddenFor(q => q.IdCbteCble, new { @id = "IdCbteCble" })
 
     if (!string.IsNullOrEmpty(@ViewBag.mensaje))
     {

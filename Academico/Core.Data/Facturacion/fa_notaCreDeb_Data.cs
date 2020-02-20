@@ -17,6 +17,7 @@ namespace Core.Data.Facturacion
 {
     public class fa_notaCreDeb_Data
     {
+        caj_Caja_Movimiento_Data odataMovCaja = new caj_Caja_Movimiento_Data();
         public List<fa_notaCreDeb_consulta_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin, string CreDeb)
         {
             try
@@ -767,6 +768,23 @@ namespace Core.Data.Facturacion
                     #region Contabilidad
                     var rel_conta = db_f.fa_notaCreDeb_x_ct_cbtecble.Where(q => q.no_IdEmpresa == info.IdEmpresa && q.no_IdSucursal == info.IdSucursal && q.no_IdBodega == info.IdBodega && q.no_IdNota == info.IdNota).FirstOrDefault();
                     if (rel_conta != null)
+                    {
+                        var MovCaj = odataMovCaja.get_info(rel_conta.ct_IdEmpresa, rel_conta.ct_IdTipoCbte, rel_conta.ct_IdCbteCble);
+                        if (MovCaj != null)
+                        {
+                            if(!odataMovCaja.anularDB(new caj_Caja_Movimiento_Info
+                            {
+                                IdEmpresa = rel_conta.ct_IdEmpresa,
+                                IdTipocbte = rel_conta.ct_IdTipoCbte,
+                                IdCbteCble = rel_conta.ct_IdCbteCble
+                            }))
+                            {
+                                entity.Estado = "A";
+                                entity.IdUsuarioUltAnu = null;
+                                entity.Fecha_UltAnu = null;
+                                entity.MotiAnula = null;
+                            }
+                        }else
                         if (!odata_ct.anularDB(new ct_cbtecble_Info { IdEmpresa = rel_conta.ct_IdEmpresa, IdTipoCbte = rel_conta.ct_IdTipoCbte, IdCbteCble = rel_conta.ct_IdCbteCble, IdUsuarioAnu = info.IdUsuarioUltAnu }))
                         {
                             entity.Estado = "A";
@@ -774,7 +792,7 @@ namespace Core.Data.Facturacion
                             entity.Fecha_UltAnu = null;
                             entity.MotiAnula = null;
                         }
-
+                    }
 
                     #endregion
 
@@ -793,7 +811,7 @@ namespace Core.Data.Facturacion
                                 entity.MotiAnula = null;
                             }
                         }
-                    }   
+                    }
                     #endregion
 
                     db_f.SaveChanges();
