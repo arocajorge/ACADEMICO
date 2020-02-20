@@ -16,8 +16,10 @@ namespace Core.Web.Areas.Academico.Controllers
     {
         #region Variables
         aca_MatriculaCondicionalParrafo_Bus busMatriculaParrafo = new aca_MatriculaCondicionalParrafo_Bus();
-        aca_CondicionalMatriculaParrafo_List lstMatriculaCondicionalParrafo = new aca_CondicionalMatriculaParrafo_List();
+        aca_MatriculaCondicionalParrafo_List lstMatriculaCondicionalParrafo = new aca_MatriculaCondicionalParrafo_List();
         aca_Catalogo_Bus bus_catalogo = new aca_Catalogo_Bus();
+        string mensaje = string.Empty;
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Index
@@ -72,7 +74,57 @@ namespace Core.Web.Areas.Academico.Controllers
             cargar_combos();
             return View(model);
         }
+        [HttpPost]
+        public ActionResult Nuevo(aca_MatriculaCondicionalParrafo_Info model)
+        {
+            model.IdUsuarioCreacion = SessionFixed.IdUsuario;
+            if (!busMatriculaParrafo.GuardarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
+                return View(model);
+            }
+            return RedirectToAction("Index");
+        }
 
+        public ActionResult Modificar(int IdEmpresa = 0, int IdCondicional = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_MatriculaCondicionalParrafo_Info model = busMatriculaParrafo.GetInfo(IdEmpresa);
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            cargar_combos();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Modificar(aca_MatriculaCondicionalParrafo_Info model)
+        {
+            model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+            
+            if (!busMatriculaParrafo.ModificarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
+                return View(model);
+            }
+
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdCondicional = model.IdCondicional, Exito = true });
+        }
+        
         #endregion
 
         #region Metodos
@@ -85,9 +137,9 @@ namespace Core.Web.Areas.Academico.Controllers
 
     }
 
-    public class aca_CondicionalMatriculaParrafo_List
+    public class aca_MatriculaCondicionalParrafo_List
     {
-        string Variable = "aca_CondicionalMatriculaParrafo_Info";
+        string Variable = "aca_MatriculaCondicionalParrafo_Info";
         public List<aca_MatriculaCondicionalParrafo_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)

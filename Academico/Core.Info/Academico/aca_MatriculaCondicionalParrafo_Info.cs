@@ -23,5 +23,6 @@ namespace Core.Info.Academico
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
         public int IdEmpresa { get; set; }
+        public object IdCondicional { get; set; }
     }
 }
