@@ -29,6 +29,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         cxc_ConciliacionNotaCreditoDetPorCruzar_List lstDetPorCruzar = new cxc_ConciliacionNotaCreditoDetPorCruzar_List();
         cxc_ConciliacionNotaCreditoDet_List lstDet = new cxc_ConciliacionNotaCreditoDet_List();
         cxc_ConciliacionNotaCreditoDet_Bus busDet = new cxc_ConciliacionNotaCreditoDet_Bus();
+        string Mensaje = string.Empty;
         #endregion
 
         #region Combo bajo demanda Alumno
@@ -181,6 +182,83 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             };
             SessionFixed.IdAlumno = "0";
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Nuevo(cxc_ConciliacionNotaCredito_Info model)
+        {
+            if (!Validar(model,ref Mensaje))
+            {
+                ViewBag.mensaje = Mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+
+            if (!busConciliacion.GuardarDB(model))
+            {
+                ViewBag.mensaje = "Ha ocurrido un error al guardar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region Metodos
+        public bool Validar(cxc_ConciliacionNotaCredito_Info i_validar, ref string msg)
+        {
+            i_validar.ListaDet = lstDet.get_list(i_validar.IdTransaccionSession);
+            if (i_validar.ListaDet.Count == 0)
+            {
+                msg = "Debe seleccionar documentos a cruzar";
+                return false;
+            }
+            if (i_validar.ListaDet.Where(q=> q.Valor == 0).ToList().Count > 0)
+            {
+                msg = "Existen registros con valor aplicado 0";
+                return false;
+            }
+            if (string.IsNullOrEmpty(i_validar.IdString))
+            {
+                msg = "Debe seleccionar la nota de crédito a cruzar";
+                return false;
+            }
+
+            i_validar.IdSucursal = Convert.ToInt32(i_validar.IdString.Substring(0, 4));
+            i_validar.IdBodega = Convert.ToInt32(i_validar.IdString.Substring(4, 4));
+            i_validar.IdNota = Convert.ToInt32(i_validar.IdString.Substring(8, 10));
+
+            if (i_validar.ListaDet.Count > 0)
+            {
+                //Obtener la mayor fecha de los documentos seleccionados
+                DateTime FechaMayor = i_validar.ListaDet.Max(q => q.FechaProntoPago ?? DateTime.Now.Date.AddYears(-10));
+                //De la lista de TODO lo pendiente de pagar obtengo la menor fecha
+                var lst = lstDetPorCruzar.get_list(i_validar.IdTransaccionSession);
+
+                foreach (var item in i_validar.ListaDet)
+                {
+                    var obj = lst.Where(q => q.secuencia == item.secuencia).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        lst.Remove(obj);
+                    }
+                }
+                if (lst.Count > 0)
+                {
+                    DateTime FechaMenor = lst.Min(q => q.FechaProntoPago ?? DateTime.Now.Date.AddYears(-10));
+                    if (FechaMayor > FechaMenor)
+                    {
+                        msg = "No puede realizar la conciliación ya que existen facturas no seleccionadas con fecha menor";
+                        return false;
+                    }
+                }
+            }
+
+            i_validar.IdUsuarioCreacion = SessionFixed.IdUsuario;
+
+
+            return true;
         }
         #endregion
 

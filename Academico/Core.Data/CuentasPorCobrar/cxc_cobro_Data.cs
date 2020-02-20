@@ -208,7 +208,7 @@ namespace Core.Data.CuentasPorCobrar
                     cr_fecha = info.cr_fecha.Date,
                     cr_fechaDocu = info.cr_fechaDocu,
                     cr_fechaCobro = info.cr_fechaCobro,
-                    cr_observacion = info.cr_observacion,
+                    cr_observacion = info.cr_observacion ?? "",
 
                     cr_Banco = info.cr_Banco,
                     cr_cuenta = info.cr_cuenta,
@@ -358,7 +358,7 @@ namespace Core.Data.CuentasPorCobrar
                 #endregion
 
                 #region Nota de credito por excedente
-                if (info.cr_saldo > 0)
+                if (info.cr_saldo > 0 && info.lst_det.Count == 0)
                 {
                     var NotaCredito = ArmarNotaCreditoExcedente(info);
                     if (NotaCredito != null)
@@ -972,7 +972,17 @@ namespace Core.Data.CuentasPorCobrar
                 
                 if(info.dc_TipoDocumento == "FACT")
                 {
-                    var Plantilla = dbACA.aca_Plantilla.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPlantilla == info.IdPlantilla).FirstOrDefault();
+                    var Fac = dbFac.fa_factura_resumen.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega_Cbte && q.IdCbteVta == info.IdCbte_vta_nota).FirstOrDefault();
+                    if (Fac == null)
+                        return null;
+
+                    var Fact = dbFac.fa_factura.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega_Cbte && q.IdCbteVta == info.IdCbte_vta_nota).FirstOrDefault();
+                    if (Fact == null)
+                        return null;
+
+                    info.IdPuntoVta = Fact.IdPuntoVta;
+
+                    var Plantilla = dbACA.aca_Plantilla.Where(q => q.IdEmpresa == Fac.IdEmpresa && q.IdAnio == Fac.IdAnio && q.IdPlantilla == Fac.IdPlantilla).FirstOrDefault();
                     if (Plantilla == null)
                         return null;
 

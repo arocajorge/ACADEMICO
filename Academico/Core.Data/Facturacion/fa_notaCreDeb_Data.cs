@@ -1113,6 +1113,8 @@ namespace Core.Data.Facturacion
                     int IdSucursal = string.IsNullOrEmpty(IdString) ? 0 : Convert.ToInt32(IdString.Substring(0, 4));
                     int IdBodega = string.IsNullOrEmpty(IdString) ? 0 : Convert.ToInt32(IdString.Substring(4, 4));
                     int IdNota = string.IsNullOrEmpty(IdString) ? 0 : Convert.ToInt32(IdString.Substring(8, 10));
+                    if (IdNota == 0)
+                        return null;
 
                     var Entity = Context.vwfa_notaCreDeb.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdNota == IdNota).FirstOrDefault();
                     if (Entity == null) return null;

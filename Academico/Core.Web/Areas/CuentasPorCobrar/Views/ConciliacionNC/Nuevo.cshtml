@@ -95,11 +95,54 @@
             }
         });
     }
+
+    function AddFacturas() {
+        var datos = {
+            IDs: selectedIDs,
+            TotalACobrar: $("#Valor").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EditingAddNewFactura", "ConciliacionNC",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+        selectedIDs = "";
+        GridView_ConciliacionNCPorConciliar.PerformCallback();
+        GridView_ConciliacionNCPorConciliar.UnselectRows();
+        GridView_ConciliacionNCDet.PerformCallback();
+        $("#FacturasModal").modal("hide");
+    }
 </script>
 @using (Html.BeginForm("Nuevo", "ConciliacionNC", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q=> q.IdEmpresa, new { @id = "IdEmpresa"})
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+
+    if (!string.IsNullOrEmpty(@ViewBag.mensaje))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="alert alert-warning alert-dismissible">
+                        <h4>
+                            <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
     <div class="modal fade" id="FacturasModal" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
@@ -155,7 +198,7 @@
             <div class="col-md-9">
                 <div class="form-group">
                     <label for="IdString">Nota de crédito*</label>
-                    @Html.Partial("_CmbNotaCreditoPorConciliar", Model.IdAlumno)
+                    @Html.Partial("_CmbNotaCreditoPorConciliar", Model.IdString)
                     @Html.ValidationMessageFor(q => q.IdString, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -191,7 +234,15 @@
         </div>
     </div>
 
-    @Html.Action("GridViewPartial_ConciliacionNCDet")
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_ConciliacionNCDet")
+            </div>
+        </div>
+    </div>
+    
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
