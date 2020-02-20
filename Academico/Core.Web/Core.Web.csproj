@@ -8283,6 +8283,7 @@
     <Content Include="Areas\Academico\Views\MatriculaCondicionalParrafo\_GridViewPartial_MatriculaCondicionalParrafo.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\Modificar.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicionalParrafo\Nuevo.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

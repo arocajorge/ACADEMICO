@@ -8,6 +8,7 @@ namespace Core.Info.Academico
 {
     public class aca_MatriculaCondicionalParrafo_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Parrafo { get; set; }
@@ -21,5 +22,6 @@ namespace Core.Info.Academico
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+        public int IdEmpresa { get; set; }
     }
 }
