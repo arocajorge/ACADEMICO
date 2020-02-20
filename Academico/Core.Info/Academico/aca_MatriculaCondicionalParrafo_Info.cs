@@ -13,7 +13,5 @@ namespace Core.Info.Academico
         public string Parrafo { get; set; }
         public int Orden { get; set; }
         public int IdCatalogo { get; set; }
-
-        public virtual aca_Catalogo aca_Catalogo { get; set; }
     }
 }

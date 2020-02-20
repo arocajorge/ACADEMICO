@@ -187,7 +187,7 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_Catalogo Entity = Context.aca_Catalogo.FirstOrDefault(q => q.IdCatalogo == info.IdCatalogo);
+                    Base.aca_Catalogo Entity = Context.aca_Catalogo.FirstOrDefault(q => q.IdCatalogo == info.IdCatalogo);
                     if (Entity == null)
                         return false;
                     Entity.IdCatalogoTipo = info.IdCatalogoTipo;

@@ -59,7 +59,6 @@
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Periodo_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Info.cs" />
-    <Compile Include="Academico\aca_Catalogo.cs" />
     <Compile Include="Academico\aca_CatalogoFicha_Info.cs" />
     <Compile Include="Academico\aca_CatalogoTipoFicha_Info.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Info.cs" />
