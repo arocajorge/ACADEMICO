@@ -479,7 +479,13 @@ namespace Core.Data.CuentasPorCobrar
                         dc_ValorPago = item.Valor,
                         dc_ValorProntoPago = item.ValorProntoPago,
                         estado = "A",
-                        IdCobro_tipo_det = "NTCR"
+                        IdCobro_tipo_det = "NTCR",
+
+                        IdAnio = item.IdAnio,
+                        IdPlantilla = item.IdPlantilla,
+                        IdPuntoVta = item.IdPuntoVta,
+                        IdCliente = item.IdCliente,
+                        IdAlumno = item.IdAlumno,
                     });
                 }
 

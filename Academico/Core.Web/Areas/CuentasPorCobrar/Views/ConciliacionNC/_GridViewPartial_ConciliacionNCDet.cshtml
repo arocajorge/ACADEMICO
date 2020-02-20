@@ -1,7 +1,7 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_ConciliacionNC";
+        settings.Name = "GridView_ConciliacionNCDet";
         settings.CallbackRouteValues = new { Controller = "ConciliacionNC", Action = "GridViewPartial_ConciliacionNCDet" };
         settings.KeyFieldName = "secuencia";
         settings.Width = Unit.Percentage(100);

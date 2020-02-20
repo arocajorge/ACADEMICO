@@ -30,7 +30,7 @@
         settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e){ SetValorNC();}";
     })
     .BindList(new Core.Web.Areas.CuentasPorCobrar.Controllers.ConciliacionNCController().get_list_bajo_demanda_NC, new Core.Web.Areas.CuentasPorCobrar.Controllers.ConciliacionNCController().get_info_bajo_demanda_NC)
-    .Bind(Model.GetType() == typeof(Core.Info.CuentasPorCobrar.cxc_ConciliacionNotaCredito_Info) ? "" : (Model == 0 ? "" : Model));
+    .Bind(Model == null || Model.GetType() == typeof(Core.Info.CuentasPorCobrar.cxc_ConciliacionNotaCredito_Info) ? "" : (Model));
 
 }
 @comboBox.GetHtml()
