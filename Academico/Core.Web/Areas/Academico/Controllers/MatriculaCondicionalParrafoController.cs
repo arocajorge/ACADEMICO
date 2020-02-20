@@ -52,6 +52,7 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
     }
+
     public class aca_CondicionalMatriculaParrafo_List
     {
         string Variable = "aca_CondicionalMatriculaParrafo_Info";

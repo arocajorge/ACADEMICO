@@ -1,4 +1,4 @@
-﻿@model Core.Info.Academico.aca_CondicionalMatricula_Info
+﻿@model Core.Info.Helps.cl_filtros_Info
 @{
     ViewBag.Title = "Consulta de matrícula condicional";
 
@@ -9,43 +9,12 @@
     Layout = "~/Views/Shared/_LayoutConsulta.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "MatriculaCondicionalParrafo", FormMethod.Post, new {@role= "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     
-    <div class="box ">
-        <div class="box-header with-border">
-            <div class="row">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
-                </div>
-            </div>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fa fa-times"></i>
-                </button>
-            </div>
-        </div>
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="IdEmpresa">Año Lectivo*</label>
-                            @Html.Partial("_ComboBoxPartial_Anio_Consulta", Model)
-                            @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
-
+    
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">@ViewBag.Title</h3>
@@ -59,11 +28,11 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_MatriculaCondicional")
+            @Html.Action("GridViewPartial_MatriculaCondicionalParrafo")
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            [@Session["IdEmpresa"]] @Session["nom_empresa"]
+            [@Core.Web.Helps.SessionFixed.IdEmpresa] @Core.Web.Helps.SessionFixed.NomEmpresa
         </div>
         <!-- /.box-footer-->
     </div>
