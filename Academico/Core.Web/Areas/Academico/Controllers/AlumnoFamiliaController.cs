@@ -221,6 +221,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdProvincia = "09",
                 IdCiudad = "09",
                 IdParroquia = "09",
+                CodCatalogoSangre = "O+",
             };
             ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdAlumno = IdAlumno;

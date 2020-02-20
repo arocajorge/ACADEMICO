@@ -252,7 +252,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         return false;
                     }
                     i_validar.IdBanco = null;
-                    i_validar.cr_Banco = null;
+                    //i_validar.cr_Banco = null;
                     i_validar.IdTarjeta = null;
                     i_validar.cr_Tarjeta = null;
                     break;
@@ -274,7 +274,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         return false;
                     }
                     i_validar.IdBanco = null;
-                    i_validar.cr_Banco = null;
+                    //i_validar.cr_Banco = null;
                     i_validar.IdTarjeta = null;
                     i_validar.cr_Tarjeta = null;
                     break;

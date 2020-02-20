@@ -136,7 +136,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Cmb_Profesor()
         {
             aca_AnioLectivo_Paralelo_Profesor_Info model = new aca_AnioLectivo_Paralelo_Profesor_Info();
-            return PartialView("_Cmb_Profesor", model);
+            return PartialView("_CmbProfesor", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {

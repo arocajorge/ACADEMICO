@@ -401,12 +401,12 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdCatalogoFichaInst_madre = 25,
                 IdCatalogoFichaInst_padre = 25,
                 Idtipo_cliente_padre = 1,
-                Idtipo_cliente_madre=1,
+                Idtipo_cliente_madre = 1,
                 IdTipoCredito_padre = "CON",
                 IdTipoCredito_madre = "CON",
-                IdPais="1",
-                Cod_Region="00001",
-                IdProvincia ="09",
+                IdPais = "1",
+                Cod_Region = "00001",
+                IdProvincia = "09",
                 IdCiudad = "09",
                 IdParroquia = "09",
                 IdCiudad_padre = "09",
@@ -415,7 +415,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdParroquia_madre = "09",
                 CodCatalogoCONADIS = "",
                 //IdProfesion_madre=0,
-                IdPersona_padre=0,
+                CodCatalogoSangre = "O+",
+                CodCatalogoSangre_padre = "O+",
+                CodCatalogoSangre_madre = "O+",
+                IdPersona_padre =0,
                 FechaIngreso = DateTime.Now,
                 alu_foto = new byte[0],
                 lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>()
@@ -458,7 +461,7 @@ namespace Core.Web.Areas.Academico.Controllers
             };
 
             model.lst_alumno_documentos = ListaAlumnoDocumento.get_list(model.IdTransaccionSession);
-            model.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.CURSANDO);
+            model.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO);
             model.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REGISTRADO);
             model.info_persona_alumno = info_persona_alumno;
             model.info_persona_padre = armar_info_padre(model);
