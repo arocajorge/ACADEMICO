@@ -17,6 +17,7 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Variables
         aca_MatriculaCondicionalParrafo_Bus busMatriculaParrafo = new aca_MatriculaCondicionalParrafo_Bus();
         aca_CondicionalMatriculaParrafo_List lstMatriculaCondicionalParrafo = new aca_CondicionalMatriculaParrafo_List();
+        aca_Catalogo_Bus bus_catalogo = new aca_Catalogo_Bus();
         #endregion
 
         #region Index
@@ -36,6 +37,7 @@ namespace Core.Web.Areas.Academico.Controllers
             lstMatriculaCondicionalParrafo.set_list(busMatriculaParrafo.GetList(), model.IdTransaccionSession);
             return View(model);
         }
+
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
@@ -67,10 +69,20 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual))
 
             };
-
+            cargar_combos();
             return View(model);
         }
+
         #endregion
+
+        #region Metodos
+        private void cargar_combos()
+        {
+            var lst_tipo_condicional = bus_catalogo.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.CONDIC), false);
+            ViewBag.lst_tipo_condicional = lst_tipo_condicional;
+        }
+        #endregion
+
     }
 
     public class aca_CondicionalMatriculaParrafo_List
