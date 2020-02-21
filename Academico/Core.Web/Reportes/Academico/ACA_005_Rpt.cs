@@ -50,7 +50,7 @@ namespace Core.Web.Reportes.Academico
                 Estudiante = info.NombreAlumno;
                 Jornada = info.NomJornada;
                 Curso = info.NomCurso;
-                Aprovechamiento =  Convert.ToDecimal(info.Promedio).ToString("N2");
+                Aprovechamiento =  ((info.Promedio==0 || info.Promedio == null) ? "" : Convert.ToDecimal(info.Promedio).ToString("N2"));
                 var info_conducta = bus_conducta.GetInfo_x_PromConducta(IdEmpresa, IdAnio, Convert.ToDecimal(info.Conducta));
                 Comportamiento = (info_conducta==null ? "": info_conducta.Letra);
 

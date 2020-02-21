@@ -229,7 +229,7 @@ namespace Core.Data.CuentasPorCobrar
                 dbFac.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -496,7 +496,7 @@ namespace Core.Data.CuentasPorCobrar
 
                 return retorno;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -589,7 +589,7 @@ namespace Core.Data.CuentasPorCobrar
 
                 return retorno;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

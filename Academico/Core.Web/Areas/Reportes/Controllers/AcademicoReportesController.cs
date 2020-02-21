@@ -134,7 +134,23 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ViewBag.ReportContrato = ReportContrato;
 
-            
+            ACA_005_Rpt ReportSocioEconomica = new ACA_005_Rpt();
+            #region Cargo diseño desde base
+            var reportSocioEco = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_005");
+            if (reportSocioEco != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportSocioEco.ReporteDisenio);
+                ReportSocioEconomica.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportSocioEconomica.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportSocioEconomica.p_IdAlumno.Value = model.IdAlumno;
+            ReportSocioEconomica.p_IdSede.Value = model.IdSede;
+            ReportSocioEconomica.usuario = SessionFixed.IdUsuario;
+            ReportSocioEconomica.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportSocioEconomica = ReportSocioEconomica;
+
             return View(model);
         }
 
@@ -193,6 +209,24 @@ namespace Core.Web.Areas.Reportes.Controllers
             ReportContrato.empresa = SessionFixed.NomEmpresa;
 
             ViewBag.ReportContrato = ReportContrato;
+
+
+            ACA_005_Rpt ReportSocioEconomica = new ACA_005_Rpt();
+            #region Cargo diseño desde base
+            var reportSocioEco = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_005");
+            if (reportSocioEco != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportSocioEco.ReporteDisenio);
+                ReportSocioEconomica.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportSocioEconomica.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportSocioEconomica.p_IdAlumno.Value = model.IdAlumno;
+            ReportSocioEconomica.p_IdSede.Value = model.IdSede;
+            ReportSocioEconomica.usuario = SessionFixed.IdUsuario;
+            ReportSocioEconomica.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportSocioEconomica = ReportSocioEconomica;
 
             return View(model);
         }

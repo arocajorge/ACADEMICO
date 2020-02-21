@@ -63,6 +63,9 @@
             <li>
                 <a href="#tab_contrato_matricula" aria-controls="listado" role="tab" data-toggle="tab">Contrato</a>
             </li>
+            <li>
+                <a href="#tab_socioeconomica" aria-controls="listado" role="tab" data-toggle="tab">Ficha SocioEconómica</a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_hoja_matricula">
@@ -92,6 +95,16 @@
                    settings.Name = "webDocumentViewer3";
                }).Bind(ViewBag.ReportContrato).GetHtml()
             </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_socioeconomica">
+
+                @Html.DevExpress().WebDocumentViewer(settings =>
+               {
+                   settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                   settings.MobileMode = false;
+                   settings.Name = "webDocumentViewer4";
+               }).Bind(ViewBag.ReportSocioEconomica).GetHtml()
+            </div>
+            
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

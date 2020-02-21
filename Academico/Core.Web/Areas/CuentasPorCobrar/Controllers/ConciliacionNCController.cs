@@ -182,7 +182,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 Fecha = DateTime.Now.Date,
                 IdAlumno=IdAlumno
             };
-            SessionFixed.IdAlumno = "0";
+            SessionFixed.IdAlumno = model.IdAlumno.ToString();
             return View(model);
         }
 

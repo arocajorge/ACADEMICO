@@ -148,7 +148,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             fa_PuntoVta_Info model = bus_punto.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
             model.lst_usuarios = bus_punto_usuario.get_list(IdEmpresa,IdPuntoVta);
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            Lista_PtoVta_Usuario.set_list(model.lst_usuarios, model.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");
             cargar_combos(model);
