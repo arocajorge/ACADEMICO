@@ -26,7 +26,8 @@ namespace Core.Data.Academico
                             IdCatalogo = item.IdCatalogo,
                             Nombre = item.Nombre,
                             Parrafo = item.Parrafo,
-                            Orden = item.Orden
+                            Orden = item.Orden,
+                            Estado = item.Estado
                         });
                     }
                 }
@@ -35,6 +36,28 @@ namespace Core.Data.Academico
                     return Lista;
             }
             
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private int getId()
+        {
+            try
+            {
+                int ID = 1;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    int count = Context.aca_MatriculaCondicionalParrafo.Count();
+                    if (count > 0)
+                    ID = Context.aca_MatriculaCondicionalParrafo.Max(q => q.Id) + 1;
+                }
+
+                return ID;
+            }
             catch (Exception)
             {
 
@@ -83,7 +106,7 @@ namespace Core.Data.Academico
                 #region Cabecera
                 aca_MatriculaCondicionalParrafo Entity = new aca_MatriculaCondicionalParrafo
                 {
-                    Id = info.Id,
+                    Id = getId(),
                     IdCatalogo = info.IdCatalogo,
                     Nombre = info.Nombre,
                     Parrafo = info.Parrafo,
@@ -93,15 +116,13 @@ namespace Core.Data.Academico
                     FechaCreacion = DateTime.Now
                 };
                 #endregion
-                #region MyRegion
-
-                #endregion
+              
                 dbACA.aca_MatriculaCondicionalParrafo.Add(Entity);
                 dbACA.SaveChanges();
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
@@ -114,9 +135,8 @@ namespace Core.Data.Academico
             {
                 EntitiesAcademico dbACA = new EntitiesAcademico();
                 #region Cabecera
-
-                int Id = 0;
-                var Entity = dbACA.aca_MatriculaCondicionalParrafo.Where(q => q.Id == Id).FirstOrDefault();
+                
+                var Entity = dbACA.aca_MatriculaCondicionalParrafo.Where(q => q.Id == info.Id).FirstOrDefault();
                 if (Entity == null)
                     return false;
 
@@ -125,7 +145,7 @@ namespace Core.Data.Academico
                 Entity.FechaModificacion = DateTime.Now;
                 Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                 #endregion
-
+                dbACA.SaveChanges();
 
                 return true;
             }
@@ -143,9 +163,7 @@ namespace Core.Data.Academico
                 EntitiesAcademico dbACA = new EntitiesAcademico();
 
                 #region Cabecera
-
-                int Id = 0;
-                var Entity = dbACA.aca_MatriculaCondicionalParrafo.Where(q => q.Id == Id).FirstOrDefault();
+                var Entity = dbACA.aca_MatriculaCondicionalParrafo.Where(q => q.Id == info.Id).FirstOrDefault();
                 if (Entity == null)
                     return false;
 
@@ -153,6 +171,8 @@ namespace Core.Data.Academico
                 Entity.FechaAnulacion = DateTime.Now;
                 Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                 Entity.MotivoAnulacion = info.MotivoAnulacion;
+
+                dbACA.SaveChanges();
                 #endregion
 
                 return true;

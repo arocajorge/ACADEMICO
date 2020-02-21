@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,12 @@ namespace Core.Info.Academico
     {
         public decimal IdTransaccionSession { get; set; }
         public int Id { get; set; }
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo Nombre debe tener mínimo 1 caracter y máximo 50")]
+        [Required(ErrorMessage = "El campo Nombre es obligatorio")]
         public string Nombre { get; set; }
+        [Required(ErrorMessage = "El campo Parrafo es obligatorio")]
         public string Parrafo { get; set; }
+        [Required(ErrorMessage = "El campo Orden es obligatorio")]
         public int Orden { get; set; }
         public int IdCatalogo { get; set; }
         public bool Estado { get; set; }
@@ -22,7 +27,6 @@ namespace Core.Info.Academico
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
-        public int IdEmpresa { get; set; }
-        public object IdCondicional { get; set; }
+        
     }
 }
