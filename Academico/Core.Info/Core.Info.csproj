@@ -63,7 +63,8 @@
     <Compile Include="Academico\aca_CatalogoTipoFicha_Info.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Info.cs" />
     <Compile Include="Academico\aca_Catalogo_Info.cs" />
-    <Compile Include="Academico\aca_CondicionalMatricula_Info.cs" />
+    <Compile Include="Academico\aca_MatriculaCondicional_Det_Info.cs" />
+    <Compile Include="Academico\aca_MatriculaCondicional_Info.cs" />
     <Compile Include="Academico\aca_Curso_Info.cs" />
     <Compile Include="Academico\aca_Documento_Info.cs" />
     <Compile Include="Academico\aca_Familia_Info.cs" />

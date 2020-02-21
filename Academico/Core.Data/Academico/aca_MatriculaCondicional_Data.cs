@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Academico
 {
-    public class aca_CondicionalMatricula_Data
+    public class aca_MatriculaCondicional_Data
     {
-        public List<aca_CondicionalMatricula_Info> getList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
+        public List<aca_MatriculaCondicional_Info> getList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
         {
             try
             {
-                List<aca_CondicionalMatricula_Info> Lista = new List<aca_CondicionalMatricula_Info>();
+                List<aca_MatriculaCondicional_Info> Lista = new List<aca_MatriculaCondicional_Info>();
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.vwaca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio
-                    && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_CondicionalMatricula_Info
+                    Lista = Context.vwaca_MatriculaCondicional.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio
+                    && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_MatriculaCondicional_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdAnio = q.IdAnio,
@@ -42,16 +42,16 @@ namespace Core.Data.Academico
             }
         }
 
-        public List<aca_CondicionalMatricula_Info> getList_ExisteCondicional(int IdEmpresa, int IdAnio, decimal IdAlumno, int IdCatalogoCONDIC)
+        public List<aca_MatriculaCondicional_Info> getList_ExisteCondicional(int IdEmpresa, int IdAnio, decimal IdAlumno, int IdCatalogoCONDIC)
         {
             try
             {
-                List<aca_CondicionalMatricula_Info> Lista = new List<aca_CondicionalMatricula_Info>();
+                List<aca_MatriculaCondicional_Info> Lista = new List<aca_MatriculaCondicional_Info>();
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.aca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno 
-                    && q.IdCatalogoCONDIC == IdCatalogoCONDIC  && q.Estado == true).Select(q => new aca_CondicionalMatricula_Info
+                    Lista = Context.aca_MatriculaCondicional.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno 
+                    && q.IdCatalogoCONDIC == IdCatalogoCONDIC  && q.Estado == true).Select(q => new aca_MatriculaCondicional_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdAnio = q.IdAnio,
@@ -71,16 +71,16 @@ namespace Core.Data.Academico
             }
         }
 
-        public List<aca_CondicionalMatricula_Info> getList_Matricula(int IdEmpresa, int IdAnio, decimal IdAlumno)
+        public List<aca_MatriculaCondicional_Info> getList_Matricula(int IdEmpresa, int IdAnio, decimal IdAlumno)
         {
             try
             {
-                List<aca_CondicionalMatricula_Info> Lista = new List<aca_CondicionalMatricula_Info>();
+                List<aca_MatriculaCondicional_Info> Lista = new List<aca_MatriculaCondicional_Info>();
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.aca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno
-                    && q.Estado == true).Select(q => new aca_CondicionalMatricula_Info
+                    Lista = Context.aca_MatriculaCondicional.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno
+                    && q.Estado == true).Select(q => new aca_MatriculaCondicional_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdAnio = q.IdAnio,
@@ -99,19 +99,19 @@ namespace Core.Data.Academico
                 throw;
             }
         }
-        public aca_CondicionalMatricula_Info getInfo(int IdEmpresa, int IdCondicional)
+        public aca_MatriculaCondicional_Info getInfo(int IdEmpresa, int IdCondicional)
         {
             try
             {
-                aca_CondicionalMatricula_Info info;
+                aca_MatriculaCondicional_Info info;
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdCondicional == IdCondicional).FirstOrDefault();
+                    var Entity = db.aca_MatriculaCondicional.Where(q => q.IdEmpresa == IdEmpresa && q.IdCondicional == IdCondicional).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
-                    info = new aca_CondicionalMatricula_Info
+                    info = new aca_MatriculaCondicional_Info
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdCondicional = Entity.IdCondicional,
@@ -140,9 +140,9 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var cont = Context.aca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    var cont = Context.aca_MatriculaCondicional.Where(q => q.IdEmpresa == IdEmpresa).Count();
                     if (cont > 0)
-                        ID = Context.aca_CondicionalMatricula.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdCondicional) + 1;
+                        ID = Context.aca_MatriculaCondicional.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdCondicional) + 1;
                 }
 
                 return ID;
@@ -154,13 +154,13 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool guardarDB(aca_CondicionalMatricula_Info info)
+        public bool guardarDB(aca_MatriculaCondicional_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_CondicionalMatricula Entity = new aca_CondicionalMatricula
+                    aca_MatriculaCondicional Entity = new aca_MatriculaCondicional
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdAnio = info.IdAnio,
@@ -173,7 +173,23 @@ namespace Core.Data.Academico
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now
                     };
-                    Context.aca_CondicionalMatricula.Add(Entity);
+                    Context.aca_MatriculaCondicional.Add(Entity);
+
+                    if (info.lst_detalle != null || info.lst_detalle.Count > 0)
+                    {
+                        int Secuencia = 1;
+
+                        foreach (var item in info.lst_detalle)
+                        {
+                            Context.aca_MatriculaCondicional_Det.Add(new aca_MatriculaCondicional_Det
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdCondicional = info.IdCondicional,
+                                Secuencia = Secuencia++,
+                                IdParrafo = item.IdParrafo
+                            });
+                        }
+                    }
 
                     Context.SaveChanges();
                 }
@@ -186,13 +202,13 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool modificarDB(aca_CondicionalMatricula_Info info)
+        public bool modificarDB(aca_MatriculaCondicional_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_CondicionalMatricula Entity = Context.aca_CondicionalMatricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdCondicional == info.IdCondicional);
+                    aca_MatriculaCondicional Entity = Context.aca_MatriculaCondicional.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdCondicional == info.IdCondicional);
                     if (Entity == null)
                         return false;
 
@@ -201,6 +217,25 @@ namespace Core.Data.Academico
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
 
+                    var lst_Detalle = Context.aca_MatriculaCondicional_Det.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCondicional == info.IdCondicional).ToList();
+                    Context.aca_MatriculaCondicional_Det.RemoveRange(lst_Detalle);
+
+                    if (info.lst_detalle != null || info.lst_detalle.Count > 0)
+                    {
+                        int Secuencia = 1;
+
+                        foreach (var item in info.lst_detalle)
+                        {
+                            Context.aca_MatriculaCondicional_Det.Add(new aca_MatriculaCondicional_Det
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdCondicional = info.IdCondicional,
+                                Secuencia = Secuencia++,
+                                IdParrafo = item.IdParrafo
+                            });
+                        }
+                    }
+
                     Context.SaveChanges();
                 }
                 return true;
@@ -212,13 +247,13 @@ namespace Core.Data.Academico
             }
         }
 
-        public bool anularDB(aca_CondicionalMatricula_Info info)
+        public bool anularDB(aca_MatriculaCondicional_Info info)
         {
             try
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_CondicionalMatricula Entity = Context.aca_CondicionalMatricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdCondicional == info.IdCondicional);
+                    aca_MatriculaCondicional Entity = Context.aca_MatriculaCondicional.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdCondicional == info.IdCondicional);
                     if (Entity == null)
                         return false;
 

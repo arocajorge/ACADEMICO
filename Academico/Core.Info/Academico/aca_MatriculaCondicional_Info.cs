@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Academico
 {
-    public class aca_CondicionalMatricula_Info
+    public class aca_MatriculaCondicional_Info
     {
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
@@ -34,6 +34,7 @@ namespace Core.Info.Academico
         public string AnioLectivo { get; set; }
         public string Alumno { get; set; }
         public string NomCatalogo { get; set; }
+        public List<aca_MatriculaCondicional_Det_Info> lst_detalle { get; set; }
         #endregion
     }
 }

@@ -397,84 +397,84 @@ namespace Core.Data.Facturacion
 
                     #region Contabilidad
 
-                    //var TipoCobro = odat_TipoCobro.get_info(info.IdCobro_tipo);
-                    //if (TipoCobro != null)
-                    //{
-                    //    ct_cbtecble_Info diario = armar_diario(info);
+                    var TipoCobro = odat_TipoCobro.get_info(info.IdCobro_tipo);
+                    if (TipoCobro != null)
+                    {
+                        ct_cbtecble_Info diario = armar_diario(info);
 
-                    //    if (diario != null)
-                    //    {
-                    //        if (TipoCobro.tc_Tomar_Cta_Cble_De == "CAJA")
-                    //        {
-                    //            caj_Caja_Movimiento_Info MovimientoCaja = armar_movimiendoCaja(info, diario);
-                    //            if (MovimientoCaja != null)
-                    //            {
-                    //                if (odata_MovimientoCaja.guardarDB(MovimientoCaja))
-                    //                {
-                    //                    db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
-                    //                    {
-                    //                        no_IdEmpresa = info.IdEmpresa,
-                    //                        no_IdSucursal = info.IdSucursal,
-                    //                        no_IdBodega = info.IdBodega,
-                    //                        no_IdNota = info.IdNota,
+                        if (diario != null)
+                        {
+                            if (TipoCobro.tc_Tomar_Cta_Cble_De == "CAJA")
+                            {
+                                caj_Caja_Movimiento_Info MovimientoCaja = armar_movimiendoCaja(info, diario);
+                                if (MovimientoCaja != null)
+                                {
+                                    if (odata_MovimientoCaja.guardarDB(MovimientoCaja))
+                                    {
+                                        db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                        {
+                                            no_IdEmpresa = info.IdEmpresa,
+                                            no_IdSucursal = info.IdSucursal,
+                                            no_IdBodega = info.IdBodega,
+                                            no_IdNota = info.IdNota,
 
-                    //                        ct_IdEmpresa = diario.IdEmpresa,
-                    //                        ct_IdTipoCbte = diario.IdTipoCbte,
-                    //                        ct_IdCbteCble = MovimientoCaja.IdCbteCble,
+                                            ct_IdEmpresa = diario.IdEmpresa,
+                                            ct_IdTipoCbte = diario.IdTipoCbte,
+                                            ct_IdCbteCble = MovimientoCaja.IdCbteCble,
 
-                    //                        observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
-                    //                    });
-                    //                    db_f.SaveChanges();
-                    //                }
-                    //            }
-                    //        }
-                    //        else
-                    //        {
-                    //            if (odata_ct.guardarDB(diario))
-                    //            {
-                    //                db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
-                    //                {
-                    //                    no_IdEmpresa = info.IdEmpresa,
-                    //                    no_IdSucursal = info.IdSucursal,
-                    //                    no_IdBodega = info.IdBodega,
-                    //                    no_IdNota = info.IdNota,
+                                            observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
+                                        });
+                                        db_f.SaveChanges();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (odata_ct.guardarDB(diario))
+                                {
+                                    db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                    {
+                                        no_IdEmpresa = info.IdEmpresa,
+                                        no_IdSucursal = info.IdSucursal,
+                                        no_IdBodega = info.IdBodega,
+                                        no_IdNota = info.IdNota,
 
-                    //                    ct_IdEmpresa = diario.IdEmpresa,
-                    //                    ct_IdTipoCbte = diario.IdTipoCbte,
-                    //                    ct_IdCbteCble = diario.IdCbteCble,
+                                        ct_IdEmpresa = diario.IdEmpresa,
+                                        ct_IdTipoCbte = diario.IdTipoCbte,
+                                        ct_IdCbteCble = diario.IdCbteCble,
 
-                    //                    observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
-                    //                });
-                    //                db_f.SaveChanges();
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                                        observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
+                                    });
+                                    db_f.SaveChanges();
+                                }
+                            }
+                        }
+                    }
                     #endregion
 
                     #region Cobranza
-                    //if (info.CreDeb.Trim() == "C" && info.lst_cruce.Count != 0)
-                    //{
-                    //    cxc_cobro_Info cobro = armar_cobro(info);
-                    //    if (cobro != null)
-                    //    {
-                    //        if (odata_cobr.guardarDB(cobro))
-                    //        {
-                    //            db_f.fa_notaCreDeb_x_cxc_cobro.Add(new fa_notaCreDeb_x_cxc_cobro
-                    //            {
-                    //                IdEmpresa_nt = info.IdEmpresa,
-                    //                IdSucursal_nt = info.IdSucursal,
-                    //                IdBodega_nt = info.IdBodega,
-                    //                IdNota_nt = info.IdNota,
-                    //                IdEmpresa_cbr = cobro.IdEmpresa,
-                    //                IdSucursal_cbr = cobro.IdSucursal,
-                    //                IdCobro_cbr = cobro.IdCobro,
-                    //                Valor_cobro = Math.Round(info.lst_cruce.Sum(q => q.Valor_Aplicado), 2, MidpointRounding.AwayFromZero)
-                    //            });
-                    //            db_f.SaveChanges();
-                    //        }
-                    //    }
-                    //}
+                    if (info.CreDeb.Trim() == "C" && info.lst_cruce.Count != 0)
+                    {
+                        cxc_cobro_Info cobro = armar_cobro(info);
+                        if (cobro != null)
+                        {
+                            if (odata_cobr.guardarDB(cobro))
+                            {
+                                db_f.fa_notaCreDeb_x_cxc_cobro.Add(new fa_notaCreDeb_x_cxc_cobro
+                                {
+                                    IdEmpresa_nt = info.IdEmpresa,
+                                    IdSucursal_nt = info.IdSucursal,
+                                    IdBodega_nt = info.IdBodega,
+                                    IdNota_nt = info.IdNota,
+                                    IdEmpresa_cbr = cobro.IdEmpresa,
+                                    IdSucursal_cbr = cobro.IdSucursal,
+                                    IdCobro_cbr = cobro.IdCobro,
+                                    Valor_cobro = Math.Round(info.lst_cruce.Sum(q => q.Valor_Aplicado), 2, MidpointRounding.AwayFromZero)
+                                });
+                                db_f.SaveChanges();
+                            }
+                        }
+                    }
 
                     #endregion
                 }

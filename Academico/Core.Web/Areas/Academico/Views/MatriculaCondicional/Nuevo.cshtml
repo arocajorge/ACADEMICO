@@ -1,4 +1,4 @@
-﻿@model Core.Info.Academico.aca_CondicionalMatricula_Info
+﻿@model Core.Info.Academico.aca_MatriculaCondicional_Info
 @{
     ViewBag.Title = "Nueva matrícula condicional";
 
@@ -84,6 +84,14 @@
                 <label for="IdEmpresa">Observación</label>
                 @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
                 @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_MatriculaCondicionalParrafo")
             </div>
         </div>
     </div>

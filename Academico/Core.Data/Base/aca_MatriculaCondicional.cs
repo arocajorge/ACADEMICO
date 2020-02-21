@@ -12,7 +12,7 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_CondicionalMatricula
+    public partial class aca_MatriculaCondicional
     {
         public int IdEmpresa { get; set; }
         public decimal IdCondicional { get; set; }
@@ -33,5 +33,6 @@ namespace Core.Data.Base
         public virtual aca_Alumno aca_Alumno { get; set; }
         public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_Catalogo aca_Catalogo { get; set; }
+        public virtual aca_MatriculaCondicional_Det aca_MatriculaCondicional_Det { get; set; }
     }
 }

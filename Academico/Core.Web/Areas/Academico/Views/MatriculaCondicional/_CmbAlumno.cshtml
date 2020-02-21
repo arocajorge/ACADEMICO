@@ -19,7 +19,7 @@
         settings.Properties.Columns.Add("pe_nombreCompleto", "Alumno", 65);
     })
     .BindList(new Core.Web.Areas.Academico.Controllers.MatriculaCondicionalController().get_list_bajo_demanda_alumno, new Core.Web.Areas.Academico.Controllers.MatriculaCondicionalController().get_info_bajo_demanda_alumno)
-    .Bind(Model.GetType() == typeof(Core.Info.Academico.aca_CondicionalMatricula_Info) ? "" : (Model == 0 ? "" : Model));
+    .Bind(Model.GetType() == typeof(Core.Info.Academico.aca_MatriculaCondicional_Info) ? "" : (Model == 0 ? "" : Model));
 
 }
 @comboBox.GetHtml()

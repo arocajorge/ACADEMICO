@@ -12,19 +12,14 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class vwaca_CondicionalMatricula
+    public partial class vwaca_MatriculaCondicional_Det
     {
         public int IdEmpresa { get; set; }
         public decimal IdCondicional { get; set; }
-        public decimal IdAlumno { get; set; }
-        public string Codigo { get; set; }
-        public string pe_nombreCompleto { get; set; }
-        public int IdAnio { get; set; }
-        public string Descripcion { get; set; }
-        public System.DateTime Fecha { get; set; }
+        public int Secuencia { get; set; }
         public int IdCatalogoCONDIC { get; set; }
         public string NomCatalogo { get; set; }
-        public string Observacion { get; set; }
-        public Nullable<bool> Estado { get; set; }
+        public int IdParrafo { get; set; }
+        public string Nombre { get; set; }
     }
 }
