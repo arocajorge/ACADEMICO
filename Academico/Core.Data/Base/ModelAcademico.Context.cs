@@ -98,12 +98,14 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Familia> aca_Familia { get; set; }
         public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
         public virtual DbSet<aca_AnioLectivo_Sede_NivelAcademico> aca_AnioLectivo_Sede_NivelAcademico { get; set; }
-        public virtual DbSet<aca_CondicionalMatricula> aca_CondicionalMatricula { get; set; }
-        public virtual DbSet<vwaca_CondicionalMatricula> vwaca_CondicionalMatricula { get; set; }
         public virtual DbSet<aca_Matricula> aca_Matricula { get; set; }
         public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
         public virtual DbSet<aca_MatriculaCambios> aca_MatriculaCambios { get; set; }
+        public virtual DbSet<vwaca_MatriculaCondicional> vwaca_MatriculaCondicional { get; set; }
+        public virtual DbSet<aca_MatriculaCondicional> aca_MatriculaCondicional { get; set; }
+        public virtual DbSet<aca_MatriculaCondicional_Det> aca_MatriculaCondicional_Det { get; set; }
         public virtual DbSet<aca_MatriculaCondicionalParrafo> aca_MatriculaCondicionalParrafo { get; set; }
+        public virtual DbSet<vwaca_MatriculaCondicional_Det> vwaca_MatriculaCondicional_Det { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

@@ -36,7 +36,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
-            lstMatriculaCondicionalParrafo.set_list(busMatriculaParrafo.GetList(), model.IdTransaccionSession);
+            lstMatriculaCondicionalParrafo.set_list(busMatriculaParrafo.GetList(false), model.IdTransaccionSession);
             return View(model);
         }
 
@@ -67,7 +67,7 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
             aca_MatriculaCondicionalParrafo_Info model = new aca_MatriculaCondicionalParrafo_Info()
             {
-                Id = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual))
 
             };
@@ -88,7 +88,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Modificar(int Id = 0, bool Exito = false)
+        public ActionResult Modificar(int IdEmpresa=0, int IdParrafo = 0, bool Exito = false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -97,7 +97,7 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_MatriculaCondicionalParrafo_Info model = busMatriculaParrafo.GetInfo(Id);
+            aca_MatriculaCondicionalParrafo_Info model = busMatriculaParrafo.GetInfo(IdEmpresa, IdParrafo);
 
             if (model == null)
                 return RedirectToAction("Index");
@@ -122,10 +122,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { Id = model.Id, Exito = true });
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdParrafo = model.IdParrafo, Exito = true });
         }
 
-        public ActionResult Anular(int Id = 0)
+        public ActionResult Anular(int IdEmpresa=0, int IdParrafo = 0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -134,7 +134,7 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_MatriculaCondicionalParrafo_Info model = busMatriculaParrafo.GetInfo(Id);
+            aca_MatriculaCondicionalParrafo_Info model = busMatriculaParrafo.GetInfo(IdEmpresa, IdParrafo);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");

@@ -14,11 +14,18 @@ namespace Core.Data.Base
     
     public partial class aca_MatriculaCondicionalParrafo
     {
-        public int Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public aca_MatriculaCondicionalParrafo()
+        {
+            this.aca_MatriculaCondicional_Det = new HashSet<aca_MatriculaCondicional_Det>();
+        }
+    
+        public int IdEmpresa { get; set; }
+        public int IdParrafo { get; set; }
         public string Nombre { get; set; }
         public string Parrafo { get; set; }
         public int Orden { get; set; }
-        public int IdCatalogo { get; set; }
+        public int IdCatalogoCONDIC { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -29,5 +36,7 @@ namespace Core.Data.Base
         public string MotivoAnulacion { get; set; }
     
         public virtual aca_Catalogo aca_Catalogo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_MatriculaCondicional_Det> aca_MatriculaCondicional_Det { get; set; }
     }
 }

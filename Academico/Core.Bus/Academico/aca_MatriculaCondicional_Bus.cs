@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Core.Bus.Academico
 {
-    public class aca_CondicionalMatricula_Bus
+    public class aca_MatriculaCondicional_Bus
     {
-        aca_CondicionalMatricula_Data odata = new aca_CondicionalMatricula_Data();
+        aca_MatriculaCondicional_Data odata = new aca_MatriculaCondicional_Data();
 
-        public List<aca_CondicionalMatricula_Info> GetList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
+        public List<aca_MatriculaCondicional_Info> GetList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public List<aca_CondicionalMatricula_Info> GetList_Matricula(int IdEmpresa, int IdAnio, decimal IdAlumno)
+        public List<aca_MatriculaCondicional_Info> GetList_Matricula(int IdEmpresa, int IdAnio, decimal IdAlumno)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public List<aca_CondicionalMatricula_Info> GetList_ExisteCondicional(int IdEmpresa, int IdAnio, decimal IdAlumno, int IdCatalogoCONDIC)
+        public List<aca_MatriculaCondicional_Info> GetList_ExisteCondicional(int IdEmpresa, int IdAnio, decimal IdAlumno, int IdCatalogoCONDIC)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_CondicionalMatricula_Info GetInfo(int IdEmpresa, int IdCondicional)
+        public aca_MatriculaCondicional_Info GetInfo(int IdEmpresa, int IdCondicional)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public bool GuardarDB(aca_CondicionalMatricula_Info info)
+        public bool GuardarDB(aca_MatriculaCondicional_Info info)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public bool ModificarDB(aca_CondicionalMatricula_Info info)
+        public bool ModificarDB(aca_MatriculaCondicional_Info info)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public bool AnularDB(aca_CondicionalMatricula_Info info)
+        public bool AnularDB(aca_MatriculaCondicional_Info info)
         {
             try
             {

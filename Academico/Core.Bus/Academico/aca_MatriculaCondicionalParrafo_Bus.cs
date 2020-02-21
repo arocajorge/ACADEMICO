@@ -12,11 +12,11 @@ namespace Core.Bus.Academico
     {
         aca_MatriculaCondicionalParrafo_Data odata = new aca_MatriculaCondicionalParrafo_Data();
 
-        public List<aca_MatriculaCondicionalParrafo_Info> GetList()
+        public List<aca_MatriculaCondicionalParrafo_Info> GetList(bool MostrarAnulados)
         {
             try
             {
-                return odata.GetList();
+                return odata.GetList(MostrarAnulados);
             }
             catch (Exception)
             {
@@ -25,11 +25,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_MatriculaCondicionalParrafo_Info GetInfo(int Id)
+        public aca_MatriculaCondicionalParrafo_Info GetInfo(int IdEmpresa, int Id)
         {
             try
             {
-                return odata.GetInfo(Id); 
+                return odata.GetInfo(IdEmpresa, Id); 
             }
             catch (Exception)
             {

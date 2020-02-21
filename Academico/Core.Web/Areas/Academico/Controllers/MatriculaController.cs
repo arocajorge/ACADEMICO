@@ -57,7 +57,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Rubro_Periodo_Bus bus_anio_rubro_periodo = new aca_AnioLectivo_Rubro_Periodo_Bus();
         cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
         tb_mes_Bus bus_mes = new tb_mes_Bus();
-        aca_CondicionalMatricula_Bus bus_matricula_condicional = new aca_CondicionalMatricula_Bus();
+        aca_MatriculaCondicional_Bus bus_matricula_condicional = new aca_MatriculaCondicional_Bus();
         fa_notaCreDeb_Bus bus_notaDebCre = new fa_notaCreDeb_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
@@ -574,7 +574,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
 
                 var ObsMatriculaCondicional = "";
-                List<aca_CondicionalMatricula_Info> lst_MatriculaCondicional = bus_matricula_condicional.GetList_Matricula(IdEmpresa, IdAnio, IdAlumno);
+                List<aca_MatriculaCondicional_Info> lst_MatriculaCondicional = bus_matricula_condicional.GetList_Matricula(IdEmpresa, IdAnio, IdAlumno);
 
                 if (lst_MatriculaCondicional.Count()>0)
                 {
@@ -609,7 +609,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_DetallePlantilla = ListaMatriculaRubro.get_list(Convert.ToDecimal(IdTransaccionSession));
             var lst_DetalleDocumentos = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(IdTransaccionSession));
 
-            if (IdAnio != 0 && IdAlumno != 0 && IdComboCurso != "" && IdParalelo != 0 && IdPlantilla != 0 && IdMecanismo != 0 && IdMecanismoDet != 0 && lst_DetallePlantilla.Count > 0)
+            if (IdAnio != 0 && IdAlumno != 0 && IdComboCurso != "" && IdParalelo != 0 && IdPlantilla != 0 && IdPuntoVta!=0 && IdMecanismo != 0 && IdMecanismoDet != 0 && lst_DetallePlantilla.Count > 0)
             {
                 //IdEmpresa = Convert.ToInt32(model.IdComboCurso.Substring(0, 4));
                 //IdAnio = Convert.ToInt32(model.IdComboCurso.Substring(4, 4));

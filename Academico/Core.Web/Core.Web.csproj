@@ -8286,6 +8286,7 @@
     <Content Include="Areas\Academico\Views\MatriculaCondicionalParrafo\Nuevo.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCondicionalParrafo\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCondicionalParrafo\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\_GridViewPartial_MatriculaCondicionalParrafo.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

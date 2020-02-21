@@ -12,7 +12,7 @@
 
 @using (Html.BeginForm("Nuevo", "MatriculaCondicionalParrafo", FormMethod.Post, new { @class = "form", @role = "form", @id = "myform" }))
 {
-    @Html.HiddenFor(q => q.Id, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {
@@ -54,8 +54,8 @@
             <div class="col-md-offset-1 col-md-2">
                 <div class="form-group">
                     <label for="Id">Tipo*</label>
-                    @Html.DropDownListFor(q => q.IdCatalogo, new SelectList(ViewBag.lst_tipo_condicional, "IdCatalogo", "NomCatalogo"), new { @class = "form-control", @id = "IdCatalogoCONDIC" })
-                    @Html.ValidationMessageFor(q => q.IdCatalogo, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(q => q.IdCatalogoCONDIC, new SelectList(ViewBag.lst_tipo_condicional, "IdCatalogo", "NomCatalogo"), new { @class = "form-control", @id = "IdCatalogoCONDIC" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogoCONDIC, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
