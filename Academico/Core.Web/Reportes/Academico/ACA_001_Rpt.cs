@@ -54,6 +54,17 @@ namespace Core.Web.Reportes.Academico
                 lbl_secretaria.Text = info_sede.NombreSecretaria;
             }
 
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+            var emp = bus_empresa.get_info(IdEmpresa);
+            if (emp != null)
+            {
+                if (emp.em_logo != null)
+                {
+                    ImageConverter obj = new ImageConverter();
+                    lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
+                }
+            }
+
             this.DataSource = lst_rpt;
         }
     }
