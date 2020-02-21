@@ -74,7 +74,7 @@
                         Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(tc.DataItem, "IdCbteVta") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
-                }
+                }/*
                 else
                              if (!string.IsNullOrEmpty(Convert.ToString(DataBinder.Eval(tc.DataItem, "vt_autorizacion"))) && Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
@@ -82,7 +82,7 @@
                         Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdCbteVta = DataBinder.Eval(tc.DataItem, "IdCbteVta") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
-                }
+                }*/
             });
             c.SetHeaderTemplateContent(tc =>
             {

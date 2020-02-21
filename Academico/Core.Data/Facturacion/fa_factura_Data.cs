@@ -669,6 +669,19 @@ namespace Core.Data.Facturacion
 
                     Context.SaveChanges();
                 }
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var RubroFacturado = db.aca_Matricula_Rubro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCbteVta == info.IdCbteVta).FirstOrDefault();
+                    if (RubroFacturado != null)
+                    {
+                        RubroFacturado.IdSucursal = null;
+                        RubroFacturado.IdBodega = null;
+                        RubroFacturado.IdCbteVta = null;
+                        RubroFacturado.FechaFacturacion = null;
+                        db.SaveChanges();
+                    }
+                }
                 return true;
             }
             catch (Exception)
