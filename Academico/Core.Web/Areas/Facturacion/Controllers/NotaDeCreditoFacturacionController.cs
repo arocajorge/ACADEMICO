@@ -393,6 +393,17 @@ namespace Core.Web.Areas.Facturacion.Controllers
             i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
             i_validar.lst_cruce = List_cruce.get_list(i_validar.IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
 
+            if (i_validar.lst_cruce.Count()>0)
+            {
+                var TotalCruce = i_validar.lst_cruce.Sum(q=>q.Valor_Aplicado);
+
+                if (Convert.ToDouble(i_validar.info_resumen.Total) != TotalCruce)
+                {
+                    msg = "El valor total de los documentos relacionados no es igual al valor de la nota de crédito";
+                    return false;
+                }
+            }
+
             if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.no_fecha, cl_enumeradores.eModulo.FAC, i_validar.IdSucursal, ref msg))
             {
                 return false;
