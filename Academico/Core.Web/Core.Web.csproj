@@ -8294,6 +8294,7 @@
     <Content Include="Areas\Academico\Views\MatriculaCondicionalParrafo\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCondicionalParrafo\Anular.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCondicional\_GridViewPartial_MatriculaCondicionalParrafo.cshtml" />
+    <Content Include="Areas\Reportes\Views\CajaReportes\CAJ_001.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8357,7 +8358,6 @@
     <Folder Include="Areas\Inventario\Views\Presentacion\" />
     <Folder Include="Areas\Inventario\Views\Subgrupo\" />
     <Folder Include="Areas\Reportes\Models\" />
-    <Folder Include="Areas\Reportes\Views\CajaReportes\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
   </ItemGroup>
   <ItemGroup>
