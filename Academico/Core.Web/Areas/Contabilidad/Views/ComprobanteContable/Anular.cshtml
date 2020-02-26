@@ -109,7 +109,17 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group has-error">
+                    <label for="Rector">Motivo de anulación*</label>
+                    @Html.TextBoxFor(q => q.cb_MotivoAnu, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.cb_MotivoAnu, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="box-footer">
     @if (ViewBag.MostrarBoton ?? false)
     {
