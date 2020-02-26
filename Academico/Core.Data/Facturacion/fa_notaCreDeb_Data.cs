@@ -328,25 +328,25 @@ namespace Core.Data.Facturacion
                     #endregion
 
                     #region Cruce
-                    //Secuencia = 1;
-                    //foreach (var item in info.lst_cruce)
-                    //{
-                    //    db_f.fa_notaCreDeb_x_fa_factura_NotaDeb.Add(new fa_notaCreDeb_x_fa_factura_NotaDeb
-                    //    {
-                    //        IdEmpresa_nt = info.IdEmpresa,
-                    //        IdSucursal_nt = info.IdSucursal,
-                    //        IdBodega_nt = info.IdBodega,
-                    //        IdNota_nt = info.IdNota,
-                    //        secuencia = Secuencia++,
-                    //        IdEmpresa_fac_nd_doc_mod = item.IdEmpresa_fac_nd_doc_mod,
-                    //        IdSucursal_fac_nd_doc_mod = item.IdSucursal_fac_nd_doc_mod,
-                    //        IdBodega_fac_nd_doc_mod = item.IdBodega_fac_nd_doc_mod,
-                    //        IdCbteVta_fac_nd_doc_mod = item.IdCbteVta_fac_nd_doc_mod,
-                    //        vt_tipoDoc = item.vt_tipoDoc,
-                    //        Valor_Aplicado = item.Valor_Aplicado,
-                    //        fecha_cruce = DateTime.Now,
-                    //    });
-                    //}
+                    Secuencia = 1;
+                    foreach (var item in info.lst_cruce)
+                    {
+                        db_f.fa_notaCreDeb_x_fa_factura_NotaDeb.Add(new fa_notaCreDeb_x_fa_factura_NotaDeb
+                        {
+                            IdEmpresa_nt = info.IdEmpresa,
+                            IdSucursal_nt = info.IdSucursal,
+                            IdBodega_nt = info.IdBodega,
+                            IdNota_nt = info.IdNota,
+                            secuencia = Secuencia++,
+                            IdEmpresa_fac_nd_doc_mod = item.IdEmpresa_fac_nd_doc_mod,
+                            IdSucursal_fac_nd_doc_mod = item.IdSucursal_fac_nd_doc_mod,
+                            IdBodega_fac_nd_doc_mod = item.IdBodega_fac_nd_doc_mod,
+                            IdCbteVta_fac_nd_doc_mod = item.IdCbteVta_fac_nd_doc_mod,
+                            vt_tipoDoc = item.vt_tipoDoc,
+                            Valor_Aplicado = item.Valor_Aplicado,
+                            fecha_cruce = DateTime.Now,
+                        });
+                    }
                     #endregion
 
                     #region Talonario
