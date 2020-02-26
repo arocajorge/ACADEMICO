@@ -358,6 +358,7 @@ namespace Core.Data.Academico
 
                     aca_Alumno Entity_Alumno = Context.aca_Alumno.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno);
                     Entity_Alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.MATRICULADO);
+                    Entity_Alumno.IdCurso = info.IdCurso;
 
                     Context.SaveChanges();
                 }

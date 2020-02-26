@@ -193,6 +193,18 @@
     <Compile Include="Base\vwaca_MatriculaCondicional_Det.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWCAJ_001.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWCAJ_002.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWCAJ_002_ingresos.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWCAJ_002_ValesNoConciliados.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\VWCONTA_001.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>

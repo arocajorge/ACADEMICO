@@ -63,6 +63,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         aca_Plantilla_Bus bus_plantilla = new aca_Plantilla_Bus();
         aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
+        aca_AnioLectivo_Rubro_Bus bus_anio_rubro = new aca_AnioLectivo_Rubro_Bus();
+        aca_AnioLectivo_Rubro_Periodo_Bus bus_anio_rubro_periodo = new aca_AnioLectivo_Rubro_Periodo_Bus();
+        tb_mes_Bus bus_mes = new tb_mes_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
         #region Index
@@ -632,6 +635,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return View(model);
             }
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
+
             if (!bus_factura.guardarDB(model))
             {
                 List_det.set_list(List_det.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
@@ -869,8 +873,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
             var model = Lista_RubrosPorFacturar.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_RubrosXFacturar", model);
         }
-        public void AddRubros(string IDs = "", decimal IdTransaccionSession = 0)
+        public JsonResult AddRubros(string IDs = "", decimal IdTransaccionSession = 0)
         {
+            var ObsFactura = "";
             if (!string.IsNullOrEmpty(IDs))
             {
                 //string[] array = IDs.Split(',');
@@ -886,22 +891,21 @@ namespace Core.Web.Areas.Facturacion.Controllers
                     if (rubro_x_fact.FechaDesde == ite_mas_antiguo)
                     {
                         rubro_x_fact.Secuencia = lst_det_fact.Count == 0 ? 1 : lst_det_fact.Max(q => q.Secuencia) + 1;
+                        var AnioLectivo_Periodo = bus_anio_periodo.GetInfo(rubro_x_fact.IdEmpresa, Convert.ToInt32(rubro_x_fact.aca_IdAnio), Convert.ToInt32(rubro_x_fact.aca_IdPeriodo) );
+                        var AnioLectivo_Rubro = bus_anio_rubro.GetInfo(rubro_x_fact.IdEmpresa, Convert.ToInt32(rubro_x_fact.aca_IdAnio), Convert.ToInt32(rubro_x_fact.aca_IdRubro));
+                        var AnioLectivo_Rubro_Periodo = bus_anio_rubro_periodo.GetInfo(rubro_x_fact.IdEmpresa, Convert.ToInt32(rubro_x_fact.aca_IdAnio), Convert.ToInt32(rubro_x_fact.aca_IdRubro), Convert.ToInt32(rubro_x_fact.aca_IdPeriodo) );
+                        var mes = bus_mes.get_list().Where(q => q.idMes == AnioLectivo_Periodo.IdMes).FirstOrDefault();
+                        ObsFactura = AnioLectivo_Rubro.NomRubro + " " + (AnioLectivo_Rubro.NumeroCuotas > 1 ? (AnioLectivo_Rubro_Periodo.Secuencia + "/" + AnioLectivo_Rubro.NumeroCuotas) : "") + " " + mes.smes + " " + AnioLectivo_Periodo.FechaHasta.Year;
+
+
                         lst_det_fact.Add(rubro_x_fact);
                     }
                 }
 
-                //foreach (var item in array)
-                //{
-                //    var rubro_x_fact = lst.Where(q => q.IdString == item).FirstOrDefault();
-                //    if (rubro_x_fact != null)
-                //        if (lst_det_fact.Where(q => q.IdEmpresa == rubro_x_fact.IdEmpresa && q.IdMatricula == rubro_x_fact.IdMatricula && q.aca_IdPeriodo == rubro_x_fact.aca_IdPeriodo && q.aca_IdRubro == rubro_x_fact.aca_IdRubro).Count() == 0)
-                //        {
-                //            rubro_x_fact.Secuencia = lst_det_fact.Count == 0 ? 1 : lst_det_fact.Max(q => q.Secuencia) + 1;
-                //            lst_det_fact.Add(rubro_x_fact);
-                //        }
-                //}
                 List_det.set_list(lst_det_fact, IdTransaccionSession);
             }
+
+            return Json(ObsFactura, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }
