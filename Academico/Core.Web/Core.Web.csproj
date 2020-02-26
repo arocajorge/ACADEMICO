@@ -8351,6 +8351,7 @@
     <Folder Include="Areas\Inventario\Views\Subgrupo\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
+    <Folder Include="Reportes\Caja\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
