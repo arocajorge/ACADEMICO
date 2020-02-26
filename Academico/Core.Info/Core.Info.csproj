@@ -246,6 +246,7 @@
     <Compile Include="Reportes\Academico\ACA_005_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_007_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_006_Info.cs" />
+    <Compile Include="Reportes\Caja\CAJ_001_Info.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_001_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Aplicaciones_Info.cs" />
