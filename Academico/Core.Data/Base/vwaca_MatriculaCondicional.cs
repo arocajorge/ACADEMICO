@@ -15,7 +15,7 @@ namespace Core.Data.Base
     public partial class vwaca_MatriculaCondicional
     {
         public int IdEmpresa { get; set; }
-        public decimal IdCondicional { get; set; }
+        public decimal IdMatriculaCondicional { get; set; }
         public decimal IdAlumno { get; set; }
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }

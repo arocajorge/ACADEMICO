@@ -4,7 +4,7 @@
         settings.Name = "GridViewPartial_MatriculaCondicional";
         settings.CallbackRouteValues = new { Controller = "MatriculaCondicional", Action = "GridViewPartial_MatriculaCondicional" };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdCondicional";
+        settings.KeyFieldName = "IdMatriculaCondicional";
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -63,8 +63,8 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
                     ViewContext.Writer.Write(
-                        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdCondicional = DataBinder.Eval(tc.DataItem, "IdCondicional") }) + "&nbsp;"+
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdCondicional = DataBinder.Eval(tc.DataItem, "IdCondicional") },
+                        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatriculaCondicional = DataBinder.Eval(tc.DataItem, "IdMatriculaCondicional") }) + "&nbsp;"+
+                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatriculaCondicional = DataBinder.Eval(tc.DataItem, "IdMatriculaCondicional") },
                         new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
                 }
@@ -79,7 +79,7 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdCondicional", "ID").Width = Unit.Percentage(8);
+        settings.Columns.Add("IdMatriculaCondicional", "ID").Width = Unit.Percentage(8);
         settings.Columns.Add("AnioLectivo", "Año Lectivo").Width = Unit.Percentage(10);
         settings.Columns.Add("Alumno", "Alumno").Width = Unit.Percentage(25);
         settings.Columns.Add("NomCatalogo", "Tipo de Condicional").Width = Unit.Percentage(12);

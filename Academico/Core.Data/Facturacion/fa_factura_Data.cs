@@ -239,7 +239,8 @@ namespace Core.Data.Facturacion
                         IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
                         vt_iva = item.vt_iva,
                         vt_total = item.vt_total,
-                        
+                        vt_detallexItems = item.vt_detallexItems,
+
                         IdEmpresa_pf = item.IdEmpresa_pf,
                         IdSucursal_pf = item.IdSucursal_pf,
                         IdProforma = item.IdProforma,

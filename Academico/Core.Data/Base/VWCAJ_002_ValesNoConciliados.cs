@@ -12,14 +12,16 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_MatriculaCondicional_Det
+    public partial class VWCAJ_002_ValesNoConciliados
     {
         public int IdEmpresa { get; set; }
-        public decimal IdMatriculaCondicional { get; set; }
-        public int IdParrafo { get; set; }
-        public int Secuencia { get; set; }
-    
-        public virtual aca_MatriculaCondicional aca_MatriculaCondicional { get; set; }
-        public virtual aca_MatriculaCondicionalParrafo aca_MatriculaCondicionalParrafo { get; set; }
+        public decimal IdConciliacion_Caja { get; set; }
+        public int IdTipocbte { get; set; }
+        public decimal IdCbteCble { get; set; }
+        public double Valor { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string cm_observacion { get; set; }
+        public System.DateTime cm_fecha { get; set; }
+        public Nullable<decimal> SecuenciaCaja { get; set; }
     }
 }
