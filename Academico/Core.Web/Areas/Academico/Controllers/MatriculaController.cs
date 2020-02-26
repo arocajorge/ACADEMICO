@@ -762,6 +762,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             var AnioLectivo_Rubro_Periodo = bus_anio_rubro_periodo.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, item.IdRubro, item.IdPeriodo);
                             var mes = bus_mes.get_list().Where(q=>q.idMes == AnioLectivo_Periodo.IdMes).FirstOrDefault();
                             var ObsFactura = AnioLectivo_Rubro.NomRubro + " "+(AnioLectivo_Rubro.NumeroCuotas>1 ? (AnioLectivo_Rubro_Periodo.Secuencia + "/"+AnioLectivo_Rubro.NumeroCuotas) : "")+" "+ mes.smes+" "+ AnioLectivo_Periodo.FechaHasta.Year;
+                            var NumPension = (AnioLectivo_Rubro.NumeroCuotas > 1 ? (AnioLectivo_Rubro_Periodo.Secuencia + "/" + AnioLectivo_Rubro.NumeroCuotas) : "");
 
                             var info_factura = new fa_factura_Info {
                                 IdEmpresa = info_matricula.IdEmpresa,
@@ -803,7 +804,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                 IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
                                 vt_iva = Convert.ToDouble(item.ValorIVA),
                                 vt_total = Convert.ToDouble(item.Total),
-
+                                vt_detallexItems = NumPension,
                                 IdMatricula = info_matricula.IdMatricula,
                                 aca_IdPeriodo = item.IdPeriodo,
                                 aca_IdAnio = item.IdAnio,

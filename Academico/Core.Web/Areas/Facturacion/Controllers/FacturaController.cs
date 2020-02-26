@@ -876,6 +876,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         public JsonResult AddRubros(string IDs = "", decimal IdTransaccionSession = 0)
         {
             var ObsFactura = "";
+            var NumPension = "";
             if (!string.IsNullOrEmpty(IDs))
             {
                 //string[] array = IDs.Split(',');
@@ -896,7 +897,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
                         var AnioLectivo_Rubro_Periodo = bus_anio_rubro_periodo.GetInfo(rubro_x_fact.IdEmpresa, Convert.ToInt32(rubro_x_fact.aca_IdAnio), Convert.ToInt32(rubro_x_fact.aca_IdRubro), Convert.ToInt32(rubro_x_fact.aca_IdPeriodo) );
                         var mes = bus_mes.get_list().Where(q => q.idMes == AnioLectivo_Periodo.IdMes).FirstOrDefault();
                         ObsFactura = AnioLectivo_Rubro.NomRubro + " " + (AnioLectivo_Rubro.NumeroCuotas > 1 ? (AnioLectivo_Rubro_Periodo.Secuencia + "/" + AnioLectivo_Rubro.NumeroCuotas) : "") + " " + mes.smes + " " + AnioLectivo_Periodo.FechaHasta.Year;
+                        NumPension = (AnioLectivo_Rubro.NumeroCuotas > 1 ? (AnioLectivo_Rubro_Periodo.Secuencia + "/" + AnioLectivo_Rubro.NumeroCuotas) : "");
 
+                        rubro_x_fact.vt_detallexItems = NumPension;
 
                         lst_det_fact.Add(rubro_x_fact);
                     }
