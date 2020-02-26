@@ -13,7 +13,7 @@
 @using (Html.BeginForm("Modificar", "MatriculaCondicional", FormMethod.Post, new { @class = "form", @role = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
-    @Html.HiddenFor(q => q.IdCondicional, new { @id = "IdCondicional" })
+    @Html.HiddenFor(q => q.IdMatriculaCondicional, new { @id = "IdMatriculaCondicional" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {

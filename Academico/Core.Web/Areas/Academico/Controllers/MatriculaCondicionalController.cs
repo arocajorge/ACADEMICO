@@ -185,10 +185,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdCondicional = model.IdCondicional, Exito = true });
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdMatriculaCondicional = model.IdMatriculaCondicional, Exito = true });
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdCondicional = 0, bool Exito = false)
+        public ActionResult Modificar(int IdEmpresa = 0, int IdMatriculaCondicional = 0, bool Exito = false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -197,7 +197,7 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_MatriculaCondicional_Info model = bus_condicional.GetInfo(IdEmpresa, IdCondicional);
+            aca_MatriculaCondicional_Info model = bus_condicional.GetInfo(IdEmpresa, IdMatriculaCondicional);
 
             if (model == null)
                 return RedirectToAction("Index");
@@ -206,7 +206,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-            model.lst_detalle = bus_condicional_det.getList(model.IdEmpresa, model.IdCondicional);
+            model.lst_detalle = bus_condicional_det.getList(model.IdEmpresa, model.IdMatriculaCondicional);
             Lista_CondicionalDet.set_list(model.lst_detalle, model.IdTransaccionSession);
             cargar_combos();
             return View(model);
@@ -234,10 +234,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdCondicional = model.IdCondicional, Exito = true });
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdMatriculaCondicional = model.IdMatriculaCondicional, Exito = true });
         }
 
-        public ActionResult Anular(int IdEmpresa = 0, int IdCondicional = 0)
+        public ActionResult Anular(int IdEmpresa = 0, int IdMatriculaCondicional = 0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -246,12 +246,12 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
-            aca_MatriculaCondicional_Info model = bus_condicional.GetInfo(IdEmpresa, IdCondicional);
+            aca_MatriculaCondicional_Info model = bus_condicional.GetInfo(IdEmpresa, IdMatriculaCondicional);
             if (model == null)
                 return RedirectToAction("Index");
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-            model.lst_detalle = bus_condicional_det.getList(model.IdEmpresa, model.IdCondicional);
+            model.lst_detalle = bus_condicional_det.getList(model.IdEmpresa, model.IdMatriculaCondicional);
             Lista_CondicionalDet.set_list(model.lst_detalle, model.IdTransaccionSession);
             cargar_combos();
             return View(model);

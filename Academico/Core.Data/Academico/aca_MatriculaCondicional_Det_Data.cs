@@ -10,7 +10,7 @@ namespace Core.Data.Academico
 {
     public class aca_MatriculaCondicional_Det_Data
     {
-        public List<aca_MatriculaCondicional_Det_Info> getList(int IdEmpresa, decimal IdCondicional)
+        public List<aca_MatriculaCondicional_Det_Info> getList(int IdEmpresa, decimal IdMatriculaCondicional)
         {
             try
             {
@@ -18,14 +18,14 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.vwaca_MatriculaCondicional_Det.Where(q => q.IdEmpresa == IdEmpresa && q.IdCondicional == IdCondicional).ToList();
+                    var lst = odata.vwaca_MatriculaCondicional_Det.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatriculaCondicional == IdMatriculaCondicional).ToList();
 
                     lst.ForEach(q =>
                     {
                         Lista.Add(new aca_MatriculaCondicional_Det_Info
                         {
                             IdEmpresa = q.IdEmpresa,
-                            IdCondicional = q.IdCondicional,
+                            IdMatriculaCondicional = q.IdMatriculaCondicional,
                             Secuencia=q.Secuencia,
                             IdParrafo = q.IdParrafo,
                             Nombre = q.Nombre,

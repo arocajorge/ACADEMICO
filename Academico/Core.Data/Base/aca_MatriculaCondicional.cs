@@ -14,8 +14,14 @@ namespace Core.Data.Base
     
     public partial class aca_MatriculaCondicional
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public aca_MatriculaCondicional()
+        {
+            this.aca_MatriculaCondicional_Det = new HashSet<aca_MatriculaCondicional_Det>();
+        }
+    
         public int IdEmpresa { get; set; }
-        public decimal IdCondicional { get; set; }
+        public decimal IdMatriculaCondicional { get; set; }
         public decimal IdAlumno { get; set; }
         public int IdAnio { get; set; }
         public int IdCatalogoCONDIC { get; set; }
@@ -33,6 +39,7 @@ namespace Core.Data.Base
         public virtual aca_Alumno aca_Alumno { get; set; }
         public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_Catalogo aca_Catalogo { get; set; }
-        public virtual aca_MatriculaCondicional_Det aca_MatriculaCondicional_Det { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_MatriculaCondicional_Det> aca_MatriculaCondicional_Det { get; set; }
     }
 }

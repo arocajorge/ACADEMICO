@@ -11,7 +11,7 @@ namespace Core.Info.Academico
     {
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
-        public decimal IdCondicional { get; set; }
+        public decimal IdMatriculaCondicional { get; set; }
         [Required(ErrorMessage = "El campo alumno es obligatorio")]
         public decimal IdAlumno { get; set; }
         [Required(ErrorMessage = "El campo año lectivo es obligatorio")]

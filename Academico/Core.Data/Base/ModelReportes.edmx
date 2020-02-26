@@ -236,6 +236,161 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_007' no tiene definida
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCAJ_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWCAJ_001">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia" />
+            <PropertyRef Name="pc_Cuenta" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="dc_Valor_Debe" />
+            <PropertyRef Name="tc_descripcion" />
+            <PropertyRef Name="cr_Valor" />
+            <PropertyRef Name="cm_Signo" />
+            <PropertyRef Name="IdTipoMovi" />
+            <PropertyRef Name="tm_descripcion" />
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="ca_Descripcion" />
+            <PropertyRef Name="cm_fecha" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="tc_TipoCbte" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="SecuenciaCaja" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="secuencia" Type="int" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="dc_Valor" Type="float" Nullable="false" />
+          <Property Name="dc_Valor_Debe" Type="float" Nullable="false" />
+          <Property Name="dc_Valor_Haber" Type="float" />
+          <Property Name="tc_descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cr_Valor" Type="float" Nullable="false" />
+          <Property Name="cm_Signo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdTipoMovi" Type="int" Nullable="false" />
+          <Property Name="tm_descripcion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="cm_observacion" Type="varchar(max)" />
+          <Property Name="IdCaja" Type="int" Nullable="false" />
+          <Property Name="ca_Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cm_fecha" Type="date" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="tc_TipoCbte" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre" Type="varchar(max)" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCAJ_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWCAJ_002">
+          <Key>
+            <PropertyRef Name="IdRow" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdEmpresa_OGiro" />
+            <PropertyRef Name="IdTipoCbte_Ogiro" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="co_FechaFactura" />
+            <PropertyRef Name="co_total" />
+            <PropertyRef Name="valor_retencion" />
+            <PropertyRef Name="valor_a_pagar" />
+            <PropertyRef Name="Valor_a_aplicar" />
+            <PropertyRef Name="Saldo_cont_al_periodo" />
+            <PropertyRef Name="Ingresos" />
+            <PropertyRef Name="Dif_x_pagar_o_cobrar" />
+            <PropertyRef Name="TIPO" />
+            <PropertyRef Name="Fecha_ini" />
+            <PropertyRef Name="Fecha_fin" />
+            <PropertyRef Name="NombreCaja" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="SecuenciaCaja" />
+          </Key>
+          <Property Name="IdRow" Type="bigint" Nullable="false" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdEmpresa_OGiro" Type="int" Nullable="false" />
+          <Property Name="IdTipoCbte_Ogiro" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble_Ogiro" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="co_factura" Type="varchar" MaxLength="50" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="co_FechaFactura" Type="datetime" Nullable="false" />
+          <Property Name="co_total" Type="float" Nullable="false" />
+          <Property Name="valor_retencion" Type="float" Nullable="false" />
+          <Property Name="valor_a_pagar" Type="float" Nullable="false" />
+          <Property Name="Valor_a_aplicar" Type="float" Nullable="false" />
+          <Property Name="co_observacion" Type="varchar" MaxLength="1000" />
+          <Property Name="Saldo_cont_al_periodo" Type="float" Nullable="false" />
+          <Property Name="Ingresos" Type="float" Nullable="false" />
+          <Property Name="Total_fact_vale" Type="float" />
+          <Property Name="Dif_x_pagar_o_cobrar" Type="float" Nullable="false" />
+          <Property Name="TIPO" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Fecha_ini" Type="date" Nullable="false" />
+          <Property Name="Fecha_fin" Type="date" Nullable="false" />
+          <Property Name="valor_a_reponer" Type="float" />
+          <Property Name="NombreCaja" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tm_descripcion" Type="varchar" MaxLength="200" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="NombreUsuario" Type="varchar(max)" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SecuenciaVale" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCAJ_002_ingresos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWCAJ_002_ingresos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="valor_disponible" />
+            <PropertyRef Name="valor_aplicado" />
+            <PropertyRef Name="cr_Valor" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cm_fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="valor_disponible" Type="float" Nullable="false" />
+          <Property Name="valor_aplicado" Type="float" Nullable="false" />
+          <Property Name="cr_Valor" Type="float" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="cm_observacion" Type="varchar(max)" />
+          <Property Name="cm_fecha" Type="date" Nullable="false" />
+          <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCAJ_002_ValesNoConciliados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWCAJ_002_ValesNoConciliados">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cm_fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdTipocbte" Type="int" Nullable="false" />
+          <Property Name="IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="cm_observacion" Type="varchar(max)" />
+          <Property Name="cm_fecha" Type="date" Nullable="false" />
+          <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.Academico.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCONTA_001">
           <Key>
@@ -838,6 +993,96 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
     [VWACA_007].[Descripcion] AS [Descripcion]
     FROM [Academico].[VWACA_007] AS [VWACA_007]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWCAJ_001" EntityType="Self.VWCAJ_001" store:Type="Views" store:Schema="Academico">
+            <DefiningQuery>SELECT 
+    [VWCAJ_001].[IdEmpresa] AS [IdEmpresa], 
+    [VWCAJ_001].[IdTipoCbte] AS [IdTipoCbte], 
+    [VWCAJ_001].[IdCbteCble] AS [IdCbteCble], 
+    [VWCAJ_001].[secuencia] AS [secuencia], 
+    [VWCAJ_001].[pc_Cuenta] AS [pc_Cuenta], 
+    [VWCAJ_001].[dc_Valor] AS [dc_Valor], 
+    [VWCAJ_001].[dc_Valor_Debe] AS [dc_Valor_Debe], 
+    [VWCAJ_001].[dc_Valor_Haber] AS [dc_Valor_Haber], 
+    [VWCAJ_001].[tc_descripcion] AS [tc_descripcion], 
+    [VWCAJ_001].[cr_Valor] AS [cr_Valor], 
+    [VWCAJ_001].[cm_Signo] AS [cm_Signo], 
+    [VWCAJ_001].[IdTipoMovi] AS [IdTipoMovi], 
+    [VWCAJ_001].[tm_descripcion] AS [tm_descripcion], 
+    [VWCAJ_001].[cm_observacion] AS [cm_observacion], 
+    [VWCAJ_001].[IdCaja] AS [IdCaja], 
+    [VWCAJ_001].[ca_Descripcion] AS [ca_Descripcion], 
+    [VWCAJ_001].[cm_fecha] AS [cm_fecha], 
+    [VWCAJ_001].[Estado] AS [Estado], 
+    [VWCAJ_001].[tc_TipoCbte] AS [tc_TipoCbte], 
+    [VWCAJ_001].[IdCtaCble] AS [IdCtaCble], 
+    [VWCAJ_001].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWCAJ_001].[Nombre] AS [Nombre], 
+    [VWCAJ_001].[Su_Descripcion] AS [Su_Descripcion], 
+    [VWCAJ_001].[SecuenciaCaja] AS [SecuenciaCaja]
+    FROM [Academico].[VWCAJ_001] AS [VWCAJ_001]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWCAJ_002" EntityType="Self.VWCAJ_002" store:Type="Views" store:Schema="Academico">
+            <DefiningQuery>SELECT 
+    [VWCAJ_002].[IdRow] AS [IdRow], 
+    [VWCAJ_002].[IdEmpresa] AS [IdEmpresa], 
+    [VWCAJ_002].[IdConciliacion_Caja] AS [IdConciliacion_Caja], 
+    [VWCAJ_002].[Secuencia] AS [Secuencia], 
+    [VWCAJ_002].[IdEmpresa_OGiro] AS [IdEmpresa_OGiro], 
+    [VWCAJ_002].[IdTipoCbte_Ogiro] AS [IdTipoCbte_Ogiro], 
+    [VWCAJ_002].[IdCbteCble_Ogiro] AS [IdCbteCble_Ogiro], 
+    [VWCAJ_002].[co_factura] AS [co_factura], 
+    [VWCAJ_002].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWCAJ_002].[co_FechaFactura] AS [co_FechaFactura], 
+    [VWCAJ_002].[co_total] AS [co_total], 
+    [VWCAJ_002].[valor_retencion] AS [valor_retencion], 
+    [VWCAJ_002].[valor_a_pagar] AS [valor_a_pagar], 
+    [VWCAJ_002].[Valor_a_aplicar] AS [Valor_a_aplicar], 
+    [VWCAJ_002].[co_observacion] AS [co_observacion], 
+    [VWCAJ_002].[Saldo_cont_al_periodo] AS [Saldo_cont_al_periodo], 
+    [VWCAJ_002].[Ingresos] AS [Ingresos], 
+    [VWCAJ_002].[Total_fact_vale] AS [Total_fact_vale], 
+    [VWCAJ_002].[Dif_x_pagar_o_cobrar] AS [Dif_x_pagar_o_cobrar], 
+    [VWCAJ_002].[TIPO] AS [TIPO], 
+    [VWCAJ_002].[Fecha_ini] AS [Fecha_ini], 
+    [VWCAJ_002].[Fecha_fin] AS [Fecha_fin], 
+    [VWCAJ_002].[valor_a_reponer] AS [valor_a_reponer], 
+    [VWCAJ_002].[NombreCaja] AS [NombreCaja], 
+    [VWCAJ_002].[tm_descripcion] AS [tm_descripcion], 
+    [VWCAJ_002].[IdUsuarioCreacion] AS [IdUsuarioCreacion], 
+    [VWCAJ_002].[NombreUsuario] AS [NombreUsuario], 
+    [VWCAJ_002].[Su_Descripcion] AS [Su_Descripcion], 
+    [VWCAJ_002].[SecuenciaCaja] AS [SecuenciaCaja], 
+    [VWCAJ_002].[SecuenciaVale] AS [SecuenciaVale]
+    FROM [Academico].[VWCAJ_002] AS [VWCAJ_002]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWCAJ_002_ingresos" EntityType="Self.VWCAJ_002_ingresos" store:Type="Views" store:Schema="Academico">
+            <DefiningQuery>SELECT 
+    [VWCAJ_002_ingresos].[IdEmpresa] AS [IdEmpresa], 
+    [VWCAJ_002_ingresos].[IdConciliacion_Caja] AS [IdConciliacion_Caja], 
+    [VWCAJ_002_ingresos].[IdTipocbte] AS [IdTipocbte], 
+    [VWCAJ_002_ingresos].[IdCbteCble] AS [IdCbteCble], 
+    [VWCAJ_002_ingresos].[valor_disponible] AS [valor_disponible], 
+    [VWCAJ_002_ingresos].[valor_aplicado] AS [valor_aplicado], 
+    [VWCAJ_002_ingresos].[cr_Valor] AS [cr_Valor], 
+    [VWCAJ_002_ingresos].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWCAJ_002_ingresos].[cm_observacion] AS [cm_observacion], 
+    [VWCAJ_002_ingresos].[cm_fecha] AS [cm_fecha], 
+    [VWCAJ_002_ingresos].[SecuenciaCaja] AS [SecuenciaCaja]
+    FROM [Academico].[VWCAJ_002_ingresos] AS [VWCAJ_002_ingresos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VWCAJ_002_ValesNoConciliados" EntityType="Self.VWCAJ_002_ValesNoConciliados" store:Type="Views" store:Schema="Academico">
+            <DefiningQuery>SELECT 
+    [VWCAJ_002_ValesNoConciliados].[IdEmpresa] AS [IdEmpresa], 
+    [VWCAJ_002_ValesNoConciliados].[IdConciliacion_Caja] AS [IdConciliacion_Caja], 
+    [VWCAJ_002_ValesNoConciliados].[IdTipocbte] AS [IdTipocbte], 
+    [VWCAJ_002_ValesNoConciliados].[IdCbteCble] AS [IdCbteCble], 
+    [VWCAJ_002_ValesNoConciliados].[Valor] AS [Valor], 
+    [VWCAJ_002_ValesNoConciliados].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWCAJ_002_ValesNoConciliados].[cm_observacion] AS [cm_observacion], 
+    [VWCAJ_002_ValesNoConciliados].[cm_fecha] AS [cm_fecha], 
+    [VWCAJ_002_ValesNoConciliados].[SecuenciaCaja] AS [SecuenciaCaja]
+    FROM [Academico].[VWCAJ_002_ValesNoConciliados] AS [VWCAJ_002_ValesNoConciliados]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWCONTA_001" EntityType="Self.VWCONTA_001" store:Type="Views" store:Schema="Academico">
             <DefiningQuery>SELECT 
     [VWCONTA_001].[IdEmpresa] AS [IdEmpresa], 
@@ -1176,6 +1421,10 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
             <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
           </FunctionImport>
           <EntitySet Name="VWACA_002" EntityType="ModelReportes.VWACA_002" />
+          <EntitySet Name="VWCAJ_001" EntityType="ModelReportes.VWCAJ_001" />
+          <EntitySet Name="VWCAJ_002" EntityType="ModelReportes.VWCAJ_002" />
+          <EntitySet Name="VWCAJ_002_ingresos" EntityType="ModelReportes.VWCAJ_002_ingresos" />
+          <EntitySet Name="VWCAJ_002_ValesNoConciliados" EntityType="ModelReportes.VWCAJ_002_ValesNoConciliados" />
         </EntityContainer>
         <ComplexType Name="SPACA_001_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -2023,6 +2272,153 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="VWCAJ_001">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoCbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="secuencia" />
+            <PropertyRef Name="pc_Cuenta" />
+            <PropertyRef Name="dc_Valor" />
+            <PropertyRef Name="dc_Valor_Debe" />
+            <PropertyRef Name="tc_descripcion" />
+            <PropertyRef Name="cr_Valor" />
+            <PropertyRef Name="cm_Signo" />
+            <PropertyRef Name="IdTipoMovi" />
+            <PropertyRef Name="tm_descripcion" />
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="ca_Descripcion" />
+            <PropertyRef Name="cm_fecha" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="tc_TipoCbte" />
+            <PropertyRef Name="IdCtaCble" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="SecuenciaCaja" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="pc_Cuenta" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="dc_Valor" Type="Double" Nullable="false" />
+          <Property Name="dc_Valor_Debe" Type="Double" Nullable="false" />
+          <Property Name="dc_Valor_Haber" Type="Double" />
+          <Property Name="tc_descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cr_Valor" Type="Double" Nullable="false" />
+          <Property Name="cm_Signo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdTipoMovi" Type="Int32" Nullable="false" />
+          <Property Name="tm_descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cm_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="ca_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cm_fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="tc_TipoCbte" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCtaCble" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaCaja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="VWCAJ_002">
+          <Key>
+            <PropertyRef Name="IdRow" />
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdEmpresa_OGiro" />
+            <PropertyRef Name="IdTipoCbte_Ogiro" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="co_FechaFactura" />
+            <PropertyRef Name="co_total" />
+            <PropertyRef Name="valor_retencion" />
+            <PropertyRef Name="valor_a_pagar" />
+            <PropertyRef Name="Valor_a_aplicar" />
+            <PropertyRef Name="Saldo_cont_al_periodo" />
+            <PropertyRef Name="Ingresos" />
+            <PropertyRef Name="Dif_x_pagar_o_cobrar" />
+            <PropertyRef Name="TIPO" />
+            <PropertyRef Name="Fecha_ini" />
+            <PropertyRef Name="Fecha_fin" />
+            <PropertyRef Name="NombreCaja" />
+            <PropertyRef Name="Su_Descripcion" />
+            <PropertyRef Name="SecuenciaCaja" />
+          </Key>
+          <Property Name="IdRow" Type="Int64" Nullable="false" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_OGiro" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_Ogiro" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_Ogiro" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="co_factura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="co_FechaFactura" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="co_total" Type="Double" Nullable="false" />
+          <Property Name="valor_retencion" Type="Double" Nullable="false" />
+          <Property Name="valor_a_pagar" Type="Double" Nullable="false" />
+          <Property Name="Valor_a_aplicar" Type="Double" Nullable="false" />
+          <Property Name="co_observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Saldo_cont_al_periodo" Type="Double" Nullable="false" />
+          <Property Name="Ingresos" Type="Double" Nullable="false" />
+          <Property Name="Total_fact_vale" Type="Double" />
+          <Property Name="Dif_x_pagar_o_cobrar" Type="Double" Nullable="false" />
+          <Property Name="TIPO" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_ini" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_fin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="valor_a_reponer" Type="Double" />
+          <Property Name="NombreCaja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tm_descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaCaja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SecuenciaVale" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="VWCAJ_002_ingresos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="valor_disponible" />
+            <PropertyRef Name="valor_aplicado" />
+            <PropertyRef Name="cr_Valor" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cm_fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="valor_disponible" Type="Double" Nullable="false" />
+          <Property Name="valor_aplicado" Type="Double" Nullable="false" />
+          <Property Name="cr_Valor" Type="Double" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cm_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cm_fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SecuenciaCaja" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="VWCAJ_002_ValesNoConciliados">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="IdTipocbte" />
+            <PropertyRef Name="IdCbteCble" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="cm_fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipocbte" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cm_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cm_fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SecuenciaCaja" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2687,6 +3083,104 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCAJ_001">
+            <EntityTypeMapping TypeName="ModelReportes.VWCAJ_001">
+              <MappingFragment StoreEntitySet="VWCAJ_001">
+                <ScalarProperty Name="SecuenciaCaja" ColumnName="SecuenciaCaja" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="tc_TipoCbte" ColumnName="tc_TipoCbte" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="cm_fecha" ColumnName="cm_fecha" />
+                <ScalarProperty Name="ca_Descripcion" ColumnName="ca_Descripcion" />
+                <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="cm_observacion" ColumnName="cm_observacion" />
+                <ScalarProperty Name="tm_descripcion" ColumnName="tm_descripcion" />
+                <ScalarProperty Name="IdTipoMovi" ColumnName="IdTipoMovi" />
+                <ScalarProperty Name="cm_Signo" ColumnName="cm_Signo" />
+                <ScalarProperty Name="cr_Valor" ColumnName="cr_Valor" />
+                <ScalarProperty Name="tc_descripcion" ColumnName="tc_descripcion" />
+                <ScalarProperty Name="dc_Valor_Haber" ColumnName="dc_Valor_Haber" />
+                <ScalarProperty Name="dc_Valor_Debe" ColumnName="dc_Valor_Debe" />
+                <ScalarProperty Name="dc_Valor" ColumnName="dc_Valor" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipoCbte" ColumnName="IdTipoCbte" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCAJ_002">
+            <EntityTypeMapping TypeName="ModelReportes.VWCAJ_002">
+              <MappingFragment StoreEntitySet="VWCAJ_002">
+                <ScalarProperty Name="SecuenciaVale" ColumnName="SecuenciaVale" />
+                <ScalarProperty Name="SecuenciaCaja" ColumnName="SecuenciaCaja" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="tm_descripcion" ColumnName="tm_descripcion" />
+                <ScalarProperty Name="NombreCaja" ColumnName="NombreCaja" />
+                <ScalarProperty Name="valor_a_reponer" ColumnName="valor_a_reponer" />
+                <ScalarProperty Name="Fecha_fin" ColumnName="Fecha_fin" />
+                <ScalarProperty Name="Fecha_ini" ColumnName="Fecha_ini" />
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="Dif_x_pagar_o_cobrar" ColumnName="Dif_x_pagar_o_cobrar" />
+                <ScalarProperty Name="Total_fact_vale" ColumnName="Total_fact_vale" />
+                <ScalarProperty Name="Ingresos" ColumnName="Ingresos" />
+                <ScalarProperty Name="Saldo_cont_al_periodo" ColumnName="Saldo_cont_al_periodo" />
+                <ScalarProperty Name="co_observacion" ColumnName="co_observacion" />
+                <ScalarProperty Name="Valor_a_aplicar" ColumnName="Valor_a_aplicar" />
+                <ScalarProperty Name="valor_a_pagar" ColumnName="valor_a_pagar" />
+                <ScalarProperty Name="valor_retencion" ColumnName="valor_retencion" />
+                <ScalarProperty Name="co_total" ColumnName="co_total" />
+                <ScalarProperty Name="co_FechaFactura" ColumnName="co_FechaFactura" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="co_factura" ColumnName="co_factura" />
+                <ScalarProperty Name="IdCbteCble_Ogiro" ColumnName="IdCbteCble_Ogiro" />
+                <ScalarProperty Name="IdTipoCbte_Ogiro" ColumnName="IdTipoCbte_Ogiro" />
+                <ScalarProperty Name="IdEmpresa_OGiro" ColumnName="IdEmpresa_OGiro" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCAJ_002_ingresos">
+            <EntityTypeMapping TypeName="ModelReportes.VWCAJ_002_ingresos">
+              <MappingFragment StoreEntitySet="VWCAJ_002_ingresos">
+                <ScalarProperty Name="SecuenciaCaja" ColumnName="SecuenciaCaja" />
+                <ScalarProperty Name="cm_fecha" ColumnName="cm_fecha" />
+                <ScalarProperty Name="cm_observacion" ColumnName="cm_observacion" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="cr_Valor" ColumnName="cr_Valor" />
+                <ScalarProperty Name="valor_aplicado" ColumnName="valor_aplicado" />
+                <ScalarProperty Name="valor_disponible" ColumnName="valor_disponible" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
+                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWCAJ_002_ValesNoConciliados">
+            <EntityTypeMapping TypeName="ModelReportes.VWCAJ_002_ValesNoConciliados">
+              <MappingFragment StoreEntitySet="VWCAJ_002_ValesNoConciliados">
+                <ScalarProperty Name="SecuenciaCaja" ColumnName="SecuenciaCaja" />
+                <ScalarProperty Name="cm_fecha" ColumnName="cm_fecha" />
+                <ScalarProperty Name="cm_observacion" ColumnName="cm_observacion" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IdCbteCble" ColumnName="IdCbteCble" />
+                <ScalarProperty Name="IdTipocbte" ColumnName="IdTipocbte" />
+                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

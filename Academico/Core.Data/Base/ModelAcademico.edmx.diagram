@@ -167,17 +167,17 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" />
         <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaCambios" Width="1.5" PointX="23.5" PointY="45.375" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCambios_aca_Matricula" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_MatriculaCondicional" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaCondicional" Width="1.5" PointX="19.875" PointY="43.125" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaCondicional_Det" Width="1.5" PointX="26.125" PointY="44.25" />
         <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaCondicionalParrafo" Width="1.5" PointX="23.875" PointY="50.375" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicionalParrafo_aca_Catalogo" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaCondicional" Width="1.5" PointX="19.875" PointY="43.125" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_MatriculaCondicional" Width="1.5" PointX="7.375" PointY="0.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicional_aca_Alumno" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicional_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicional_aca_Catalogo" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicionalParrafo_aca_Catalogo" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaCondicional_Det" Width="1.5" PointX="26.125" PointY="47.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_MatriculaCondicional_Det" Width="1.5" PointX="11.375" PointY="14.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicional_Det_aca_MatriculaCondicional" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicional_Det_aca_MatriculaCondicionalParrafo" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_MatriculaCondicional_Det" Width="1.5" PointX="11.375" PointY="14.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
