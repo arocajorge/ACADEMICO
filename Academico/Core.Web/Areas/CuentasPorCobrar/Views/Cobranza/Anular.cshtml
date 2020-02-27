@@ -354,7 +354,6 @@
         </div>
     </div>
     <br />
-    @Html.Action("GridViewPartial_cobranza_det")
 
     <div class="row">
         <div class="col-md-12">
@@ -367,6 +366,17 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_cobranza_det")
+            </div>
+        </div>
+    </div>
+    
+
+    
     <div class="box-footer">
     @if (ViewBag.MostrarBoton ?? false)
     {
