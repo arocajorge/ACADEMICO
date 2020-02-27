@@ -36,6 +36,21 @@
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_Parametro" Width="1.5" PointX="12.375" PointY="15.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro" Width="1.5" PointX="14.375" PointY="15.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_ConciliacionNotaCreditoDet" Width="1.5" PointX="5.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_LiquidacionTarjeta" Width="1.5" PointX="16.375" PointY="13.375" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_LiquidacionTarjeta_x_ba_TipoFlujo" Width="1.5" PointX="18.625" PointY="21.5" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_LiquidacionTarjeta_x_cxc_cobro" Width="1.5" PointX="19.625" PointY="9.125" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_LiquidacionTarjetaDet" Width="1.5" PointX="18.625" PointY="14.625" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_MotivoLiquidacionTarjeta" Width="1.5" PointX="16.375" PointY="20.875" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_MotivoLiquidacionTarjeta_x_tb_sucursal" Width="1.5" PointX="18.625" PointY="24.875" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_LiquidacionTarjeta_x_cxc_cobro_cxc_cobro" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_LiquidacionTarjeta_x_ba_TipoFlujo_cxc_LiquidacionTarjeta" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_LiquidacionTarjeta_x_cxc_cobro_cxc_LiquidacionTarjeta" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_LiquidacionTarjetaDet_cxc_LiquidacionTarjeta" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_LiquidacionTarjetaDet_cxc_MotivoLiquidacionTarjeta" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_cxc_MotivoLiquidacionTarjeta" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_LiquidacionTarjeta" Width="1.5" PointX="7.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_LiquidacionTarjeta_x_cxc_cobro" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal" Width="1.5" PointX="16.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

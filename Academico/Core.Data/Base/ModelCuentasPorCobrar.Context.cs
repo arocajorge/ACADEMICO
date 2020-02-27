@@ -46,5 +46,14 @@ namespace Core.Data.Base
         public virtual DbSet<cxc_Parametro> cxc_Parametro { get; set; }
         public virtual DbSet<vwcxc_cobro> vwcxc_cobro { get; set; }
         public virtual DbSet<vwcxc_ConciliacionNotaCreditoDet> vwcxc_ConciliacionNotaCreditoDet { get; set; }
+        public virtual DbSet<cxc_LiquidacionTarjeta> cxc_LiquidacionTarjeta { get; set; }
+        public virtual DbSet<cxc_LiquidacionTarjeta_x_ba_TipoFlujo> cxc_LiquidacionTarjeta_x_ba_TipoFlujo { get; set; }
+        public virtual DbSet<cxc_LiquidacionTarjeta_x_cxc_cobro> cxc_LiquidacionTarjeta_x_cxc_cobro { get; set; }
+        public virtual DbSet<cxc_LiquidacionTarjetaDet> cxc_LiquidacionTarjetaDet { get; set; }
+        public virtual DbSet<cxc_MotivoLiquidacionTarjeta> cxc_MotivoLiquidacionTarjeta { get; set; }
+        public virtual DbSet<cxc_MotivoLiquidacionTarjeta_x_tb_sucursal> cxc_MotivoLiquidacionTarjeta_x_tb_sucursal { get; set; }
+        public virtual DbSet<vwcxc_LiquidacionTarjeta> vwcxc_LiquidacionTarjeta { get; set; }
+        public virtual DbSet<vwcxc_LiquidacionTarjeta_x_cxc_cobro> vwcxc_LiquidacionTarjeta_x_cxc_cobro { get; set; }
+        public virtual DbSet<vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal> vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal { get; set; }
     }
 }
