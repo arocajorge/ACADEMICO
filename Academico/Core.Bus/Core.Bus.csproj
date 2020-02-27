@@ -92,6 +92,7 @@
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCredito_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_Bus.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Bus.cs" />

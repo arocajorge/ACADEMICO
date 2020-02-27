@@ -15,5 +15,9 @@ namespace Core.Info.CuentasPorCobrar
         public decimal IdTipoFlujo { get; set; }
         public double Porcentaje { get; set; }
         public double Valor { get; set; }
+
+        #region Campos que no existen en la tabla
+        public string Descripcion { get; set; }
+        #endregion
     }
 }

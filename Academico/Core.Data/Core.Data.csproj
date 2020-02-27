@@ -259,6 +259,9 @@
     <Compile Include="Base\vwcxc_LiquidacionTarjeta.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwcxc_LiquidacionTarjeta_x_cxc_cobro.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
@@ -293,6 +296,7 @@
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCredito_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Data.cs" />

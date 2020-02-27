@@ -42,6 +42,7 @@ namespace Core.Info.CuentasPorCobrar
         #region Campos que no existen en la tabla
         public List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> ListaCobros { get; set; }
         public List<cxc_LiquidacionTarjetaDet_Info> ListaDet { get; set; }
+        public List<cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info> ListaFlujo { get; set; }
         public string Su_Descripcion { get; set; }
         public string ba_descripcion { get; set; }
         public double Total { get; set; }

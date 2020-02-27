@@ -516,12 +516,12 @@ namespace Core.Data.CuentasPorCobrar
                                                     observacion = ""
                                                 });
                                                 Context_cxc.SaveChanges();
-                                            }
-                                            else
-                                            {
-                                                MovimientoCaja.IdCbteCble = rel.ct_IdCbteCble;
-                                                DataCajaMovimiento.modificarDB(MovimientoCaja);
-                                            }
+                                            }                                            
+                                        }
+                                        else
+                                        {
+                                            MovimientoCaja.IdCbteCble = rel.ct_IdCbteCble;
+                                            DataCajaMovimiento.modificarDB(MovimientoCaja);
                                         }
                                     }
                                     #endregion

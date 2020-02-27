@@ -189,8 +189,24 @@ namespace Core.Data.CuentasPorCobrar
                             Valor = item.Valor
                         });
                     }
+
+                    Secuencia = 1;
+                    foreach (var item in info.ListaFlujo)
+                    {
+                        db.cxc_LiquidacionTarjeta_x_ba_TipoFlujo.Add(new cxc_LiquidacionTarjeta_x_ba_TipoFlujo
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdLiquidacion = info.IdLiquidacion,
+                            IdTipoFlujo= item.IdTipoFlujo,
+                            Secuencia = Secuencia++,
+                            Valor = item.Valor,
+                            Porcentaje = item.Porcentaje
+                        });
+                    }
                     db.cxc_LiquidacionTarjeta.Add(Entity);
                     db.SaveChanges();
+
                     var cobro_tipo = db.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro_tipo == "TARJ").FirstOrDefault();
                     if (cobro_tipo != null)
                     {
@@ -339,7 +355,25 @@ namespace Core.Data.CuentasPorCobrar
                             Valor = item.Valor
                         });
                     }
+
+                    Secuencia = 1;
+                    var lst_flujo = db.cxc_LiquidacionTarjeta_x_ba_TipoFlujo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdLiquidacion == info.IdLiquidacion).ToList();
+                    db.cxc_LiquidacionTarjeta_x_ba_TipoFlujo.RemoveRange(lst_flujo);
+                    foreach (var item in info.ListaFlujo)
+                    {
+                        db.cxc_LiquidacionTarjeta_x_ba_TipoFlujo.Add(new cxc_LiquidacionTarjeta_x_ba_TipoFlujo
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSucursal = info.IdSucursal,
+                            IdLiquidacion = info.IdLiquidacion,
+                            IdTipoFlujo = item.IdTipoFlujo,
+                            Secuencia = Secuencia++,
+                            Valor = item.Valor,
+                            Porcentaje = item.Porcentaje
+                        });
+                    }
                     db.SaveChanges();
+
                     var cobro_tipo = db.cxc_cobro_tipo_Param_conta_x_sucursal.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro_tipo == "TARJ").FirstOrDefault();
                     if (cobro_tipo != null)
                     {

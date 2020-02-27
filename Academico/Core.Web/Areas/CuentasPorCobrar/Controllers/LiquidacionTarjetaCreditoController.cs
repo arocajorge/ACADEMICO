@@ -29,6 +29,8 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         cxc_LiquidacionTarjeta_x_cxc_cobro_List Lista_LiquidacionTarjeta_x_cxc_cobro = new cxc_LiquidacionTarjeta_x_cxc_cobro_List();
         cxc_LiquidacionTarjeta_x_cxc_cobro_pendientes_List Lista_Liquidacion_x_cobro_pendiente = new cxc_LiquidacionTarjeta_x_cxc_cobro_pendientes_List();
         cxc_LiquidacionTarjeta_x_ba_TipoFlujo_List List_LiquidacionTarjeta_Flujo = new cxc_LiquidacionTarjeta_x_ba_TipoFlujo_List();
+        ba_TipoFlujo_PlantillaDet_Bus bus_TipoFlujo_PlantillaDet = new ba_TipoFlujo_PlantillaDet_Bus();
+        cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Bus bus_LiquidacionTarjeta_flujo = new cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Bus();
         ba_TipoFlujo_Bus bus_tipo = new ba_TipoFlujo_Bus();
         string mensaje = string.Empty;
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
@@ -190,6 +192,14 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             return PartialView("_GridViewPartial_CobrosLiquidacion", model);
         }
 
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingDeleteCobros(int secuencia)
+        {
+            Lista_LiquidacionTarjeta_x_cxc_cobro.DeleteRow(secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_CobrosLiquidacion", model);
+        }
+
         public ActionResult GridViewPartial_MotivosLiquidacion()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
@@ -248,6 +258,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Nuevo(cxc_LiquidacionTarjeta_Info model)
         {
+            model.ListaCobros = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(model.IdTransaccionSession);
+            model.ListaDet = Lista_LiquidacionTarjetaDet.get_list(model.IdTransaccionSession);
+            model.ListaFlujo = List_LiquidacionTarjeta_Flujo.get_list(model.IdTransaccionSession);
+
             if (!Validar(model, ref mensaje))
             {
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
@@ -279,7 +293,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             Lista_LiquidacionTarjetaDet.set_list(bus_LiquidacionTarjetaDet.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
             Lista_LiquidacionTarjeta_x_cxc_cobro.set_list(bus_LiquidacionTarjeta_cxc_cobro.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
-
+            List_LiquidacionTarjeta_Flujo.set_list(bus_LiquidacionTarjeta_flujo.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
+            var ListaCobro = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(model.IdTransaccionSession);
+            var ListaMotivo = Lista_LiquidacionTarjetaDet.get_list(model.IdTransaccionSession);
+            double Total = Convert.ToDouble(ListaCobro.Sum(q => q.Valor)) - Convert.ToDouble(ListaMotivo.Sum(q => q.Valor));
+            model.Total = Total;
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
@@ -307,6 +325,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Modificar(cxc_LiquidacionTarjeta_Info model)
         {
+            model.ListaCobros = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(model.IdTransaccionSession);
+            model.ListaDet = Lista_LiquidacionTarjetaDet.get_list(model.IdTransaccionSession);
+            model.ListaFlujo = List_LiquidacionTarjeta_Flujo.get_list(model.IdTransaccionSession);
+
             if (!Validar(model, ref mensaje))
             {
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
@@ -339,6 +361,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             Lista_LiquidacionTarjetaDet.set_list(bus_LiquidacionTarjetaDet.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
             Lista_LiquidacionTarjeta_x_cxc_cobro.set_list(bus_LiquidacionTarjeta_cxc_cobro.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
+            List_LiquidacionTarjeta_Flujo.set_list(bus_LiquidacionTarjeta_flujo.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
+            var ListaCobro = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(model.IdTransaccionSession);
+            var ListaMotivo = Lista_LiquidacionTarjetaDet.get_list(model.IdTransaccionSession);
+            double Total = Convert.ToDouble(ListaCobro.Sum(q => q.Valor)) - Convert.ToDouble(ListaMotivo.Sum(q => q.Valor));
+            model.Total = Total;
 
             #region Validacion Periodo BAN
             ViewBag.MostrarBoton = true;
@@ -382,6 +409,43 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult cargar_PlantillaTipoFlujo(float Valor = 0, decimal IdPlantillaTipoFlujo = 0)
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+
+            var ListaPlantillaTipoFlujo = bus_TipoFlujo_PlantillaDet.GetList(IdEmpresa, IdPlantillaTipoFlujo);
+            var ListaDetFlujo = new List<cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info>();
+            var secuencia = 1;
+
+            foreach (var item in ListaPlantillaTipoFlujo)
+            {
+                ListaDetFlujo.Add(new cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info
+                {
+                    Secuencia = secuencia++,
+                    IdTipoFlujo = item.IdTipoFlujo,
+                    Descripcion = item.Descricion,
+                    Porcentaje = item.Porcentaje,
+                    Valor = (item.Porcentaje * Valor) / 100
+                });
+            }
+
+            List_LiquidacionTarjeta_Flujo.set_list(ListaDetFlujo, IdTransaccionSession);
+            return Json(ListaDetFlujo, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CalcularTotal()
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+
+            var ListaCobros = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var ListaMotivos = Lista_LiquidacionTarjetaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            double Total = Convert.ToDouble(ListaCobros.Sum(q=>q.Valor)) - Convert.ToDouble(ListaMotivos.Sum(q=>q.Valor));
+
+            return Json(Total, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult actualizarGridDetFlujo(float Valor = 0)
         {
             var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -396,7 +460,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 {
                     Secuencia = item.Secuencia,
                     IdTipoFlujo = item.IdTipoFlujo,
-                    //Descricion = item.Descricion,
+                    Descripcion = item.Descripcion,
                     Porcentaje = item.Porcentaje,
                     Valor = (item.Porcentaje * Valor) / 100
                 });
@@ -488,6 +552,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
     public class cxc_LiquidacionTarjeta_x_cxc_cobro_pendientes_List
     {
         string Variable = "cxc_LiquidacionTarjeta_x_cxc_cobro_pendientes_Info";
+
         public List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> get_list(decimal IdTransaccionSession)
         {
 
@@ -509,7 +574,6 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         {
             List<cxc_LiquidacionTarjeta_x_cxc_cobro_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-
 
             list.Add(info_det);
         }
@@ -554,8 +618,6 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         {
             List<cxc_LiquidacionTarjetaDet_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-
-
             list.Add(info_det);
         }
 
@@ -576,6 +638,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
     public class cxc_LiquidacionTarjeta_x_ba_TipoFlujo_List
     {
+        ba_TipoFlujo_Plantilla_Bus bus_tipoflujo = new ba_TipoFlujo_Plantilla_Bus();
         string Variable = "cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info";
         public List<cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info> get_list(decimal IdTransaccionSession)
         {
@@ -593,22 +656,45 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         }
         public void AddRow(cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info info_det, decimal IdTransaccionSession)
         {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-            list.Add(info_det);
+            
+            #region TipoFlujo
+            var info_tipo_flujo = bus_tipoflujo.GetInfo(IdEmpresa, info_det.IdTipoFlujo);
+            info_det.Descripcion = (info_det == null ? "" : info_tipo_flujo.Descripcion);
+            #endregion
+
+            var existe = list.Where(q => q.IdEmpresa == IdEmpresa && q.IdTipoFlujo == info_det.IdTipoFlujo);
+            if (existe == null)
+            {
+                list.Add(info_det);
+            }
         }
         public void UpdateRow(cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info info_det, decimal IdTransaccionSession)
         {
-            cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
-            edited_info.IdTipoFlujo = info_det.IdTipoFlujo;
-            edited_info.Porcentaje = info_det.Porcentaje;
-            edited_info.Valor = info_det.Valor;
-            edited_info.Secuencia = info_det.Secuencia;
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).FirstOrDefault();
+            List<cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info> list = get_list(IdTransaccionSession);
+
+            var existe = list.Where(q => q.IdEmpresa==IdEmpresa && q.IdTipoFlujo == info_det.IdTipoFlujo);
+            if (existe == null)
+            {
+                edited_info.IdTipoFlujo = info_det.IdTipoFlujo;
+                edited_info.Porcentaje = info_det.Porcentaje;
+                edited_info.Valor = info_det.Valor;
+                edited_info.Secuencia = info_det.Secuencia;
+
+                #region TipoFlujo
+                var info_tipo_flujo = bus_tipoflujo.GetInfo(IdEmpresa, info_det.IdTipoFlujo);
+                edited_info.Descripcion = (info_det == null ? "" : info_tipo_flujo.Descripcion);
+                #endregion
+            }
         }
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {
             List<cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info> list = get_list(IdTransaccionSession);
-            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).FirstOrDefault());
         }
     }
 }
