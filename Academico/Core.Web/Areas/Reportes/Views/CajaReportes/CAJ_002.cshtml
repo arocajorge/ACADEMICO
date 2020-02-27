@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Movimiento de caja";
+    ViewBag.Title = "Conciliación de caja";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -9,7 +9,7 @@
 }
 @using (Html.BeginForm())
 {
-    @Html.DevExpress().WebDocumentViewer(settings =>
+   @Html.DevExpress().WebDocumentViewer(settings =>
     {
         settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
         settings.MobileMode = false;
