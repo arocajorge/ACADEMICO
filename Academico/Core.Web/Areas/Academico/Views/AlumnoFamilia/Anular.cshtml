@@ -402,7 +402,7 @@
                             <label for="IdCiudad">Ciudad*</label>
                             @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_fact, settings =>
                                {
-                                   settings.Name = "IdCiudad";
+                                   settings.Name = "IdCiudad_fact";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                    settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
