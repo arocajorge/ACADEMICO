@@ -8296,8 +8296,16 @@
     <Content Include="Areas\Academico\Views\MatriculaCondicionalParrafo\Anular.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCondicional\_GridViewPartial_MatriculaCondicionalParrafo.cshtml" />
     <Content Include="Areas\Reportes\Views\CajaReportes\CAJ_001.cshtml" />
-    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_flujo_det.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_CmbFlujo_Liquidacion.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Anular.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Index.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_CobrosLiquidacion.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_CobrosPendientesLiquidacion.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_LiquidacionTarjetaCredito.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_MotivosLiquidacion.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_flujo_det.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

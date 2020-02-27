@@ -54,7 +54,7 @@
                 p.TextField = "Descripcion";
                 p.DropDownStyle = DropDownStyle.DropDownList;
                 p.ValueType = typeof(decimal);
-                p.BindList(new Core.Erp.Bus.CuentasPorCobrar.cxc_MotivoLiquidacionTarjeta_Bus().GetList(Convert.ToInt32(Core.Erp.Web.Helps.SessionFixed.IdEmpresa),false));
+                p.BindList(new Core.Bus.CuentasPorCobrar.cxc_MotivoLiquidacionTarjeta_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa),false));
                 p.Columns.Add("Descripcion", "Motivo").Width = Unit.Percentage(100);
             });
         });
@@ -84,6 +84,7 @@
         settings.Settings.ShowFooter = true;
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor").DisplayFormat = "{0:c2}";
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        settings.ClientSideEvents.EndCallback = "function(s, e) { CalcularTotal(s,e);}";
     });
 }
 @grid.Bind(Model).GetHtml()

@@ -56,6 +56,8 @@
         settings.Settings.ShowFooter = true;
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor").DisplayFormat = "{0:c2}";
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        settings.ClientSideEvents.EndCallback = "function(s, e) { CalcularTotal(s,e);}";
+
     });
 }
 @grid.Bind(Model).GetHtml()

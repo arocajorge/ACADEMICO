@@ -44,6 +44,7 @@ namespace Core.Info.CuentasPorCobrar
         public List<cxc_LiquidacionTarjetaDet_Info> ListaDet { get; set; }
         public string Su_Descripcion { get; set; }
         public string ba_descripcion { get; set; }
+        public double Total { get; set; }
         #endregion
     }
 }

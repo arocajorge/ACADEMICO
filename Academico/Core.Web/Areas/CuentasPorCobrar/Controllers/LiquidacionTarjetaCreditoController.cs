@@ -93,7 +93,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         #region Metodos ComboBox bajo demanda flujo
         public ActionResult CmbFlujo_Liquidacion()
         {
-            ba_TipoFlujo_Info model = new ba_TipoFlujo_Info();
+            cxc_LiquidacionTarjeta_Info model = new cxc_LiquidacionTarjeta_Info();
             return PartialView("_CmbFlujo_Liquidacion", model);
         }
         public List<ba_TipoFlujo_Info> get_list_bajo_demandaFlujo_NC(ListEditItemsRequestedByFilterConditionEventArgs args)
@@ -381,6 +381,31 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             Lista_Liquidacion_x_cobro_pendiente.set_list(bus_LiquidacionTarjeta_cxc_cobro.GetList(IdEmpresa, IdSucursal, null), IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult actualizarGridDetFlujo(float Valor = 0)
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+
+            var ListaPlantillaTipoFlujo = List_LiquidacionTarjeta_Flujo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            var ListaDetFlujo = new List<cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info>();
+            foreach (var item in ListaPlantillaTipoFlujo)
+            {
+                ListaDetFlujo.Add(new cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info
+                {
+                    Secuencia = item.Secuencia,
+                    IdTipoFlujo = item.IdTipoFlujo,
+                    //Descricion = item.Descricion,
+                    Porcentaje = item.Porcentaje,
+                    Valor = (item.Porcentaje * Valor) / 100
+                });
+            }
+
+            List_LiquidacionTarjeta_Flujo.set_list(ListaDetFlujo, IdTransaccionSession);
+            return Json(ListaDetFlujo, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region Detalle Flujo

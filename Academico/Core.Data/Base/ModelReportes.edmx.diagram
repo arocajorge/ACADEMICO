@@ -23,6 +23,11 @@
         <EntityTypeShape EntityType="ModelReportes.VWCAJ_002" Width="1.5" PointX="15.75" PointY="12.75" />
         <EntityTypeShape EntityType="ModelReportes.VWCAJ_002_ingresos" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="ModelReportes.VWCAJ_002_ValesNoConciliados" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWBAN_001" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWBAN_001_cancelaciones" Width="1.5" PointX="17.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWBAN_002" Width="1.5" PointX="18.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWBAN_002_cancelaciones" Width="1.5" PointX="18.375" PointY="17.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWBAN_003" Width="1.5" PointX="19.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
