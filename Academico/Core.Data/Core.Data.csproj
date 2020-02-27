@@ -1850,6 +1850,11 @@
     <Compile Include="Reportes\Academico\ACA_005_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_007_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_006_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_001_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_002_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_003_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_001_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Data.cs" />

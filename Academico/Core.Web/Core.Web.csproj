@@ -320,6 +320,7 @@
     <Compile Include="Areas\Inventario\Controllers\SubgrupoController.cs" />
     <Compile Include="Areas\Inventario\InventarioAreaRegistration.cs" />
     <Compile Include="Areas\Reportes\Controllers\AcademicoReportesController.cs" />
+    <Compile Include="Areas\Reportes\Controllers\BancoReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\CajaReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\ContabilidadReportesController.cs" />
     <Compile Include="Areas\Reportes\Controllers\CuentasPorCobrarReportesController.cs" />
@@ -379,6 +380,36 @@
     </Compile>
     <Compile Include="Reportes\Academico\ACA_007_Rpt.Designer.cs">
       <DependentUpon>ACA_007_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.Designer.cs">
+      <DependentUpon>BAN_001_cancelaciones_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_001_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_001_Rpt.Designer.cs">
+      <DependentUpon>BAN_001_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Rpt.Designer.cs">
+      <DependentUpon>BAN_002_cancelaciones_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_002_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_002_Rpt.Designer.cs">
+      <DependentUpon>BAN_002_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_003_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_003_Rpt.Designer.cs">
+      <DependentUpon>BAN_003_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Caja\CAJ_001_Rpt.cs">
       <SubType>Component</SubType>
@@ -8325,6 +8356,9 @@
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_MotivosLiquidacion.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_flujo_det.cshtml" />
     <Content Include="Areas\Reportes\Views\CajaReportes\CAJ_002.cshtml" />
+    <Content Include="Areas\Reportes\Views\BancoReportes\BAN_001.cshtml" />
+    <Content Include="Areas\Reportes\Views\BancoReportes\BAN_002.cshtml" />
+    <Content Include="Areas\Reportes\Views\BancoReportes\BAN_003.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8438,6 +8472,21 @@
     <EmbeddedResource Include="Reportes\Academico\ACA_007_Rpt.resx">
       <DependentUpon>ACA_007_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.resx">
+      <DependentUpon>BAN_001_cancelaciones_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_001_Rpt.resx">
+      <DependentUpon>BAN_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_002_cancelaciones_Rpt.resx">
+      <DependentUpon>BAN_002_cancelaciones_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_002_Rpt.resx">
+      <DependentUpon>BAN_002_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_003_Rpt.resx">
+      <DependentUpon>BAN_003_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
       <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -8499,7 +8548,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50058</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
