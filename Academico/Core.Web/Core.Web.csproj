@@ -286,6 +286,7 @@
     <Compile Include="Areas\Contabilidad\Controllers\PlanDeCuentasController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ConciliacionNCController.cs" />
+    <Compile Include="Areas\CuentasPorCobrar\Controllers\LiquidacionTarjetaCreditoController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\DeudasController.cs" />
@@ -8295,6 +8296,8 @@
     <Content Include="Areas\Academico\Views\MatriculaCondicionalParrafo\Anular.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCondicional\_GridViewPartial_MatriculaCondicionalParrafo.cshtml" />
     <Content Include="Areas\Reportes\Views\CajaReportes\CAJ_001.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_GridViewPartial_flujo_det.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\_CmbFlujo_Liquidacion.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

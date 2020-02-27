@@ -136,6 +136,24 @@
     <Compile Include="Base\cxc_ConciliacionNotaCreditoDet.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\cxc_LiquidacionTarjeta.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_LiquidacionTarjetaDet.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_LiquidacionTarjeta_x_ba_TipoFlujo.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_LiquidacionTarjeta_x_cxc_cobro.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_MotivoLiquidacionTarjeta.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\fa_notaCreDeb_resumen.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -223,6 +241,15 @@
     <Compile Include="Base\vwcxc_ConciliacionNotaCreditoDet.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwcxc_LiquidacionTarjeta.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcxc_LiquidacionTarjeta_x_cxc_cobro.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\VWFAC_001.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
@@ -249,6 +276,11 @@
     </Compile>
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCredito_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Data.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_x_seg_usuario_Data.cs" />
     <Compile Include="General\tb_GrupoEtnico_Data.cs" />
     <Compile Include="General\tb_Religion_Data.cs" />
