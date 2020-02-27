@@ -135,6 +135,7 @@
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.Text = "xrTableCell3";
+            this.xrTableCell3.TextFormatString = "{0:dd/MM/yyyy}";
             this.xrTableCell3.Weight = 1.6316394608196763D;
             // 
             // xrTableCell4
@@ -153,6 +154,7 @@
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.Text = "xrTableCell5";
+            this.xrTableCell5.TextFormatString = "{0:dd/MM/yyyy}";
             this.xrTableCell5.Weight = 2.7597449308876492D;
             // 
             // xrTable1
@@ -201,7 +203,7 @@
             // 
             // xrTableCell2
             // 
-            this.xrTableCell2.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(65, 0, 0, 0, 100F);
@@ -221,7 +223,7 @@
             // 
             this.xrPivotGrid1.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.xrPivotGrid1.Appearance.CustomTotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid1.Appearance.FieldHeader.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.xrPivotGrid1.Appearance.FieldHeader.Font = new System.Drawing.Font("Tahoma", 3.75F);
             this.xrPivotGrid1.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.xrPivotGrid1.Appearance.FieldValueGrandTotal.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.xrPivotGrid1.Appearance.FieldValueTotal.Font = new System.Drawing.Font("Tahoma", 8.25F);
@@ -268,14 +270,15 @@
             // 
             // pivotGridField13
             // 
-            this.pivotGridField13.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.pivotGridField13.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.pivotGridField13.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 3.75F, System.Drawing.FontStyle.Bold);
+            this.pivotGridField13.Appearance.FieldHeader.Font = new System.Drawing.Font("Tahoma", 3.75F);
+            this.pivotGridField13.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 6F);
             this.pivotGridField13.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField13.AreaIndex = 0;
             this.pivotGridField13.ColumnValueLineCount = 6;
             this.pivotGridField13.FieldName = "NomPlantilla";
             this.pivotGridField13.Name = "pivotGridField13";
-            this.pivotGridField13.Width = 74;
+            this.pivotGridField13.Width = 45;
             // 
             // pivotGridField12
             // 
@@ -283,6 +286,7 @@
             this.pivotGridField12.AreaIndex = 4;
             this.pivotGridField12.FieldName = "NomParalelo";
             this.pivotGridField12.Name = "pivotGridField12";
+            this.pivotGridField12.Width = 30;
             // 
             // pivotGridField11
             // 
@@ -290,6 +294,7 @@
             this.pivotGridField11.AreaIndex = 3;
             this.pivotGridField11.FieldName = "NomCurso";
             this.pivotGridField11.Name = "pivotGridField11";
+            this.pivotGridField11.Width = 90;
             // 
             // pivotGridField10
             // 
@@ -465,6 +470,7 @@
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
             this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.HorizontalContentSplitting = DevExpress.XtraPrinting.HorizontalContentSplitting.Smart;
             this.Margins = new System.Drawing.Printing.Margins(43, 56, 40, 35);
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
