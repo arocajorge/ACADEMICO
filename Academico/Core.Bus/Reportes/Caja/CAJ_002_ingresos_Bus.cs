@@ -5,15 +5,15 @@ using System.Collections.Generic;
 
 namespace Core.Bus.Reportes.Caja
 {
-    public class CAJ_001_Bus
+    public class CAJ_002_ingresos_Bus
     {
-        CAJ_001_Data odata = new CAJ_001_Data();
+        CAJ_002_ingresos_Data odata = new CAJ_002_ingresos_Data();
 
-        public List<CAJ_001_Info> GetList(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
+        public List<CAJ_002_ingresos_Info> get_list(int IdEmpresa, decimal IdConciliacionCaja)
         {
             try
             {
-                return odata.GetList(IdEmpresa, IdTipoCbte, IdCbteCble);
+                return odata.get_list(IdEmpresa, IdConciliacionCaja);
             }
             catch (Exception)
             {

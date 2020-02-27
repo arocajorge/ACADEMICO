@@ -10,21 +10,15 @@ namespace Core.Data.Reportes.Caja
 {
    public class CAJ_001_Data
     {
-        public List<CAJ_001_Info> GetList(int IdEmpresa, int IdCaja, DateTime cm_fecha )
+        public List<CAJ_001_Info> GetList(int IdEmpresa, int IdTipoCbte, decimal IdCbteCble)
         {
             try
             {
-                int IdCajaIni = IdCaja;
-                int IdCajaFin = IdCaja == 0 ? 99999999 : IdCaja;
-
-                cm_fecha = cm_fecha.Date;
-
-
                 List<CAJ_001_Info> Lista = new List<CAJ_001_Info>();
 
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
-                    Lista = db.VWCAJ_001.Where(q => q.IdEmpresa == IdEmpresa && IdCajaIni <= q.IdCaja && q.IdCaja <= IdCajaFin).Select(q => new CAJ_001_Info
+                    Lista = db.VWCAJ_001.Where(q => q.IdEmpresa == IdEmpresa && q.IdTipoCbte == IdTipoCbte && q.IdCbteCble == IdCbteCble).Select(q => new CAJ_001_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdTipoCbte = q.IdTipoCbte,

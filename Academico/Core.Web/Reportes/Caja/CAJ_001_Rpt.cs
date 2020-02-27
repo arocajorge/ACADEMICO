@@ -24,12 +24,13 @@ namespace Core.Web.Reportes.Caja
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
+            int IdTipoCbte = string.IsNullOrEmpty(p_IdTipoCbte.Value.ToString()) ? 0 : Convert.ToInt32(p_IdTipoCbte.Value);
+            decimal IdCbteCble = string.IsNullOrEmpty(p_IdCbteCble.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdCbteCble.Value);
+
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdCaja = string.IsNullOrEmpty(p_IdCaja.Value.ToString()) ? 0:  Convert.ToInt32(p_IdCaja.Value);
-            DateTime cm_fecha = string.IsNullOrEmpty(p_Fecha.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_Fecha.Value);
-            List<CAJ_001_Info> Lista = bus_rpt.GetList(IdEmpresa, IdCaja, cm_fecha);
+            List<CAJ_001_Info> Lista = bus_rpt.GetList(IdEmpresa, IdTipoCbte, IdCbteCble);
 
-
+            this.DataSource = Lista;
         }
     }
 }

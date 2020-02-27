@@ -2,20 +2,18 @@
 using Core.Info.Reportes.Caja;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Bus.Reportes.Caja
 {
-   public class CAJ_002_Bus
+    public class CAJ_002_Bus
     {
         CAJ_002_Data odata = new CAJ_002_Data();
-        public List<CAJ_002_Info> GetList(int IdEmpresa, DateTime FechaIni, DateTime FechaFin)
+    
+        public List<CAJ_002_Info> get_list(int IdEmpresa, decimal IdConciliacionCaja)
         {
             try
             {
-                return odata.GetList(IdEmpresa, FechaFin, FechaIni);
+                return odata.get_list(IdEmpresa, IdConciliacionCaja);
             }
             catch (Exception)
             {
