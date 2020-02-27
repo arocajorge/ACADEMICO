@@ -20,8 +20,8 @@
         settings.Properties.Columns.Add("IdTipoFlujo", "ID", 10);
         settings.Properties.Columns.Add("Descricion", "Descripción", 20);
     })
-    .BindList(new Core.Web.Areas.Banco.Controllers.NotaDeCreditoBancoController().get_list_bajo_demandaFlujo_NC, new Core.Web.Areas.Banco.Controllers.NotaDeCreditoBancoController().get_info_bajo_demandaFlujo_NC)
-    .Bind((Model.GetType() == typeof(Core.Info.Banco.ba_Cbte_Ban_Info) || Model.GetType() == typeof(Core.Info.Banco.ba_Cbte_Ban_x_ba_TipoFlujo_Info) || Model.GetType() == typeof(List<Core.Info.Banco.ba_Cbte_Ban_x_ba_TipoFlujo_Info>)) ? "" : Model);
+    .BindList(new Core.Web.Areas.CuentasPorCobrar.Controllers.LiquidacionTarjetaCreditoController().get_list_bajo_demandaFlujo_NC, new Core.Web.Areas.CuentasPorCobrar.Controllers.LiquidacionTarjetaCreditoController().get_info_bajo_demandaFlujo_NC)
+    .Bind((Model.GetType() == typeof(Core.Info.CuentasPorCobrar.cxc_LiquidacionTarjeta_Info) || Model.GetType() == typeof(Core.Info.CuentasPorCobrar.cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info) || Model.GetType() == typeof(List<Core.Info.CuentasPorCobrar.cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info>)) ? "" : Model);
 
 }
 @comboBox.GetHtml()

@@ -211,6 +211,21 @@
     <Compile Include="Base\vwaca_MatriculaCondicional_Det.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWBAN_001.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWBAN_001_cancelaciones.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWBAN_002.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWBAN_002_cancelaciones.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWBAN_003.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\VWCAJ_001.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
@@ -1835,6 +1850,11 @@
     <Compile Include="Reportes\Academico\ACA_005_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_007_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_006_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_001_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_002_Data.cs" />
+    <Compile Include="Reportes\Banco\BAN_003_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_001_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Data.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Data.cs" />
