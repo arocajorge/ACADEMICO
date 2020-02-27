@@ -18,7 +18,7 @@ namespace Core.Data.CuentasPorCobrar
 
                 using (EntitiesCuentasPorCobrar db = new EntitiesCuentasPorCobrar())
                 {
-                    Lista = db.cxc_LiquidacionTarjeta_x_ba_TipoFlujo.Where(q => q.IdEmpresa == IdEmpresa
+                    Lista = db.vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo.Where(q => q.IdEmpresa == IdEmpresa
                     && q.IdSucursal == IdSucursal && q.IdLiquidacion == IdLiquidacion).Select(q => new cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info
                     {
                         IdEmpresa = q.IdEmpresa,
@@ -26,6 +26,7 @@ namespace Core.Data.CuentasPorCobrar
                         IdLiquidacion = q.IdLiquidacion,
                         Secuencia = q.Secuencia,
                         IdTipoFlujo = q.IdTipoFlujo,
+                        Descripcion = q.Descricion,
                         Porcentaje = q.Porcentaje,
                         Valor = q.Valor
                     }).ToList();

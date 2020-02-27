@@ -325,6 +325,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Modificar(cxc_LiquidacionTarjeta_Info model)
         {
+            model.ListaCobros = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(model.IdTransaccionSession);
+            model.ListaDet = Lista_LiquidacionTarjetaDet.get_list(model.IdTransaccionSession);
+            model.ListaFlujo = List_LiquidacionTarjeta_Flujo.get_list(model.IdTransaccionSession);
+
             if (!Validar(model, ref mensaje))
             {
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
@@ -358,6 +362,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             Lista_LiquidacionTarjetaDet.set_list(bus_LiquidacionTarjetaDet.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
             Lista_LiquidacionTarjeta_x_cxc_cobro.set_list(bus_LiquidacionTarjeta_cxc_cobro.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
             List_LiquidacionTarjeta_Flujo.set_list(bus_LiquidacionTarjeta_flujo.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
+            var ListaCobro = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(model.IdTransaccionSession);
+            var ListaMotivo = Lista_LiquidacionTarjetaDet.get_list(model.IdTransaccionSession);
+            double Total = Convert.ToDouble(ListaCobro.Sum(q => q.Valor)) - Convert.ToDouble(ListaMotivo.Sum(q => q.Valor));
+            model.Total = Total;
 
             #region Validacion Periodo BAN
             ViewBag.MostrarBoton = true;
@@ -452,7 +460,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 {
                     Secuencia = item.Secuencia,
                     IdTipoFlujo = item.IdTipoFlujo,
-                    //Descripcion = item.Descricion,
+                    Descripcion = item.Descripcion,
                     Porcentaje = item.Porcentaje,
                     Valor = (item.Porcentaje * Valor) / 100
                 });

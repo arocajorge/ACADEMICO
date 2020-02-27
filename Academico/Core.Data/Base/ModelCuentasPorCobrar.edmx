@@ -504,6 +504,28 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcxc_LiquidacionTarjeta
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdTipoFlujo" />
+            <PropertyRef Name="Porcentaje" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Descricion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdTipoFlujo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Porcentaje" Type="float" Nullable="false" />
+          <Property Name="Valor" Type="float" Nullable="false" />
+          <Property Name="Descricion" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcxc_LiquidacionTarjeta_x_cxc_cobro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcxc_LiquidacionTarjeta_x_cxc_cobro">
           <Key>
@@ -1053,6 +1075,18 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcxc_cobro_para_retenci
     [vwcxc_LiquidacionTarjeta].[Su_Descripcion] AS [Su_Descripcion]
     FROM [dbo].[vwcxc_LiquidacionTarjeta] AS [vwcxc_LiquidacionTarjeta]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo" EntityType="Self.vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo].[IdEmpresa] AS [IdEmpresa], 
+    [vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo].[IdSucursal] AS [IdSucursal], 
+    [vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo].[IdLiquidacion] AS [IdLiquidacion], 
+    [vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo].[Secuencia] AS [Secuencia], 
+    [vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo].[IdTipoFlujo] AS [IdTipoFlujo], 
+    [vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo].[Porcentaje] AS [Porcentaje], 
+    [vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo].[Valor] AS [Valor], 
+    [vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo].[Descricion] AS [Descricion]
+    FROM [dbo].[vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo] AS [vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwcxc_LiquidacionTarjeta_x_cxc_cobro" EntityType="Self.vwcxc_LiquidacionTarjeta_x_cxc_cobro" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwcxc_LiquidacionTarjeta_x_cxc_cobro].[IdEmpresa] AS [IdEmpresa], 
@@ -1347,6 +1381,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcxc_cobro_para_retenci
           <EntitySet Name="vwcxc_LiquidacionTarjeta" EntityType="ModelCuentasPorCobrar.vwcxc_LiquidacionTarjeta" />
           <EntitySet Name="vwcxc_LiquidacionTarjeta_x_cxc_cobro" EntityType="ModelCuentasPorCobrar.vwcxc_LiquidacionTarjeta_x_cxc_cobro" />
           <EntitySet Name="vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal" EntityType="ModelCuentasPorCobrar.vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal" />
+          <EntitySet Name="vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo" EntityType="ModelCuentasPorCobrar.vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo" />
           </EntityContainer>
         <EntityType Name="cxc_Catalogo">
           <Key>
@@ -2292,6 +2327,26 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcxc_cobro_para_retenci
           <Property Name="pc_Cuenta" Type="String" MaxLength="523" FixedLength="false" Unicode="false" />
           <Property Name="Su_Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdLiquidacion" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdTipoFlujo" />
+            <PropertyRef Name="Porcentaje" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Descricion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdLiquidacion" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoFlujo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Porcentaje" Type="Double" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Descricion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2870,6 +2925,20 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcxc_cobro_para_retenci
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdMotivo" ColumnName="IdMotivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo">
+            <EntityTypeMapping TypeName="ModelCuentasPorCobrar.vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo">
+              <MappingFragment StoreEntitySet="vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo">
+                <ScalarProperty Name="Descricion" ColumnName="Descricion" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IdTipoFlujo" ColumnName="IdTipoFlujo" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

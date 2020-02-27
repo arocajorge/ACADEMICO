@@ -170,7 +170,14 @@
                     @Html.ValidationMessageFor(q => q.Lote, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-1 col-md-2">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="Lote">Total:</label>
+                    @Html.TextBoxFor(q => q.Total, new { @id = "Total", @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.Total, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="cb_Fecha">Fecha:*</label>
                     <div class="input-group date">
@@ -224,6 +231,9 @@
             <li>
                 <a href="#tab_motivos_liquidacion" aria-controls="vales" role="tab" data-toggle="tab">Motivos</a>
             </li>
+            <li>
+                <a href="#tab_flujo" aria-controls="vales" role="tab" data-toggle="tab">Flujo</a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_cobros_pendientes">
@@ -239,6 +249,17 @@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_motivos_liquidacion">
                 @Html.Action("GridViewPartial_MotivosLiquidacion")
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_flujo">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" id="btn_buscar_plantilla" onclick="MostrarModalPlantilla();">
+                            <i class="fa fa-search" title="Plantilla Tipo de Flujo"></i>
+                        </button>
+                    </div>
+                </div>
+                <br />
+                @Html.Action("GridViewPartial_flujo_det")
             </div>
         </div>
     </div>

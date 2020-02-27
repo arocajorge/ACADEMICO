@@ -259,6 +259,9 @@
     <Compile Include="Base\vwcxc_LiquidacionTarjeta.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwcxc_LiquidacionTarjeta_x_cxc_cobro.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
