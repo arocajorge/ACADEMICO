@@ -183,14 +183,14 @@
                     @Html.ValidationMessageFor(q => q.Lote, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="form-group">
                     <label for="Lote">Total:</label>
                     @Html.TextBoxFor(q => q.Total, new { @id = "Total", @class = "form-control", @readonly="readonly" })
                     @Html.ValidationMessageFor(q => q.Total, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-1">
+            <div class="col-md-offset-2">
                 <div class="form-group">
                     <label for="cb_Fecha">Fecha:*</label>
                     <div class="input-group date">
@@ -276,10 +276,9 @@
 }
 <script>
     $(function () {
-        //$("#cb_Valor").change(function () {
-        //    armar_diario();
-        //    actualizarGridDetFlujo();
-        //});
+        $("#Total").change(function () {
+            actualizarGridDetFlujo();
+        });
 
         actualizarGridDetFlujo();
     })
@@ -288,15 +287,36 @@
         $("#PlantillaModal").modal("show");
     }
 
+    function CalcularTotal() {
+        var datos = {
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CalcularTotal", "LiquidacionTarjetaCredito",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $('#Total').val(data)
+            },
+            error: function (error) {
+            }
+        });
+
+    }
+
     function AgregarPlantilla(IdPlantilla) {
         var datos = {
-            Valor : $("#cb_Valor").val(),
+            Valor : $("#Total").val(),
             IdPlantillaTipoFlujo: IdPlantilla,
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("cargar_PlantillaTipoFlujo", "TipoFlujoPlantilla",new { Area = "Banco"})',
+            url: '@Url.Action("cargar_PlantillaTipoFlujo", "LiquidacionTarjetaCredito", new { Area = "CuentasPorCobrar" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -315,7 +335,7 @@
 
     function actualizarGridDetFlujo() {
         var datos = {
-            Valor: $("#cb_Valor").val()
+            Valor: $("#Total").val()
         }
         $.ajax({
             type: 'POST',
@@ -337,7 +357,7 @@
     function CalcularPorcentaje()
     {
         var valor = GridView_flujo_det.GetEditor('Valor').GetValue();
-        var ValorTotal = $("#cb_Valor").val();
+        var ValorTotal = $("#Total").val();
         var PorcentajeSet = (valor * 100) / ValorTotal
 
         GridView_flujo_det.GetEditor('Porcentaje').SetValue(PorcentajeSet);
@@ -345,7 +365,7 @@
 
     function CalcularValor() {
         var porcentaje = GridView_flujo_det.GetEditor('Porcentaje').GetValue();
-        var ValorTotal = $("#cb_Valor").val();
+        var ValorTotal = $("#Total").val();
         var ValorSet = (ValorTotal * porcentaje) / 100
 
         GridView_flujo_det.GetEditor('Valor').SetValue(ValorSet);
