@@ -228,6 +228,12 @@ namespace Core.Info.Helps
             OTROS_MEDIOS = 22
         }
 
+        public enum eCatalogoMatriculaCondicional
+        {
+            APROVECHAMIENTO = 26,
+            CONDUCTA = 27
+        }
+
         public enum eTipoBusquedaProducto
         {
             SOLOPADRES,

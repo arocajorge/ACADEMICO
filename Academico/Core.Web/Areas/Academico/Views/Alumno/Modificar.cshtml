@@ -1431,54 +1431,54 @@
         //    Validar_cedula_ruc();
         //});
 
-        $("#pe_cedulaRuc_padre").blur(function () {
+        $("#pe_cedulaRuc_padre").change(function () {
             Validar_cedula_ruc_padre();
         });
 
-        $("#pe_cedulaRuc_madre").blur(function () {
+        $("#pe_cedulaRuc_madre").change(function () {
             Validar_cedula_ruc_madre();
         });
 
-        $("#pe_apellido").blur(function () {
+        $("#pe_apellido").change(function () {
             actualizar_nombre_completo();
         });
-        $("#pe_nombre").blur(function () {
+        $("#pe_nombre").change(function () {
             actualizar_nombre_completo();
         });
 
-        $("#pe_apellido_padre").blur(function () {
+        $("#pe_apellido_padre").change(function () {
             actualizar_nombre_completo_padre("N");
         });
-        $("#pe_nombre_padre").blur(function () {
+        $("#pe_nombre_padre").change(function () {
             actualizar_nombre_completo_padre("N");
         });
-        $("#pe_razonSocial_padre").blur(function () {
+        $("#pe_razonSocial_padre").change(function () {
             actualizar_nombre_completo_padre("R");
         });
 
-        $("#pe_apellido_madre").blur(function () {
+        $("#pe_apellido_madre").change(function () {
             actualizar_nombre_completo_madre("N");
         });
-        $("#pe_nombre_madre").blur(function () {
+        $("#pe_nombre_madre").change(function () {
             actualizar_nombre_completo_madre("N");
         });
-        $("#pe_razonSocial_madre").blur(function () {
+        $("#pe_razonSocial_madre").change(function () {
             actualizar_nombre_completo_madre("R");
         });
 
-        $("#pe_cedulaRuc").blur(function () {
+        $("#pe_cedulaRuc").change(function () {
             get_info_x_num_cedula();
         });
 
-        $("#pe_cedulaRuc_padre").blur(function () {
+        $("#pe_cedulaRuc_padre").change(function () {
             get_info_x_num_cedula_padre();
         });
 
-        $("#pe_cedulaRuc_madre").blur(function () {
+        $("#pe_cedulaRuc_madre").change(function () {
             get_info_x_num_cedula_madre();
         });
 
-        $("#pe_cedulaRuc").blur(function () {
+        $("#pe_cedulaRuc").change(function () {
             var tipo_doc = $("#IdTipoDocumento").val();
             var cedula = $("#pe_cedulaRuc").val();
 
@@ -1499,7 +1499,7 @@
                 }
         });
 
-        $("#pe_cedulaRuc_padre").blur(function () {
+        $("#pe_cedulaRuc_padre").change(function () {
             var tipo_doc = $("#IdTipoDocumento_padre").val();
             var cedula = $("#pe_cedulaRuc_padre").val();
 
@@ -1521,7 +1521,7 @@
                 }
         });
 
-        $("#pe_cedulaRuc_madre").blur(function () {
+        $("#pe_cedulaRuc_madre").change(function () {
             var tipo_doc = $("#IdTipoDocumento_madre").val();
             var cedula = $("#pe_cedulaRuc_madre").val();
 
