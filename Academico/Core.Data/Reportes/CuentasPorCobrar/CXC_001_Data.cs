@@ -37,7 +37,8 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                             Total = item.Total,
                             Cobrado = item.Cobrado,
                             NotaCredito = item.NotaCredito,
-                            Saldo = item.Saldo
+                            Saldo = item.Saldo,
+                            Su_Descripcion=item.Su_Descripcion
                         });
                     }
                 }
