@@ -1334,9 +1334,7 @@ namespace Core.Data.CuentasPorCobrar
                 EntitiesCuentasPorCobrar dbCxc = new EntitiesCuentasPorCobrar();
                 EntitiesFacturacion dbFac = new EntitiesFacturacion();
 
-                var SaldoCxc = dbCxc.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).Sum(q => q.Saldo) ?? 0;
-                var Total = dbCxc.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).Sum(q => q.vt_total)??0;
-                var ProntoPago = dbCxc.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).Sum(q => q.ValorProntoPago);
+                var SaldoCxc = dbCxc.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).Sum(q => q.Saldo - (q.vt_total - q.ValorProntoPago )) ?? 0;
 
                 //double Saldo = Convert.ToDouble(SaldoCxc - (Total - ProntoPago));
                 double Saldo = Convert.ToDouble(SaldoCxc);
