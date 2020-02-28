@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Info.Academico;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

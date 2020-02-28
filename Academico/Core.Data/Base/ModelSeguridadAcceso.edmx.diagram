@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9998931b6fe3449684425cfad95f8b1e" Name="Diagram1">
+      <Diagram DiagramId="9998931b6fe3449684425cfad95f8b1e" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="ModelSeguridadAcceso.seg_usuario" Width="1.5" PointX="0.75" PointY="1.25" />
         <EntityTypeShape EntityType="ModelSeguridadAcceso.seg_usuario_x_aca_Sede" Width="1.5" PointX="3.125" PointY="4.625" />
         <AssociationConnector Association="ModelSeguridadAcceso.FK_seg_usuario_x_aca_Sede_seg_usuario" />

@@ -48,7 +48,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public int IdAlumno_ { get; set; }
         public static byte[] imagen { get; set; }
         public static byte[] pr_imagen { get; set; }
-        
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Index
@@ -77,8 +77,14 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult GridViewPartial_alumno()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-
             List<aca_Alumno_Info> model = Lista_Alumno.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Alumno");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return PartialView("_GridViewPartial_alumno", model);
         }
         #endregion

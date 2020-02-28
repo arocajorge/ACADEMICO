@@ -211,6 +211,9 @@
     <Compile Include="Base\vwaca_MatriculaCondicional_Det.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_Menu_x_seg_usuario.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\VWBAN_001.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>

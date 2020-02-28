@@ -191,5 +191,37 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public aca_Menu_x_seg_usuario_Info get_list_menu_accion(int IdEmpresa, int IdSede, string IdUsuario, string NomControlador)
+        {
+            try
+            {
+                aca_Menu_x_seg_usuario_Info info = new aca_Menu_x_seg_usuario_Info();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var Entity = odata.vwaca_Menu_x_seg_usuario.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede==IdSede && q.IdUsuario==IdUsuario && q.web_nom_Controller==NomControlador).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_Menu_x_seg_usuario_Info {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdSede = Entity.IdSede,
+                        IdUsuario = Entity.IdUsuario,
+                        IdMenu = Entity.IdMenu,
+                        Nuevo = Entity.Nuevo,
+                        Modificar = Entity.Modificar,
+                        Anular = Entity.Anular,
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

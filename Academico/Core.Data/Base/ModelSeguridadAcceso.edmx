@@ -49,7 +49,9 @@
           <Property Name="Observacion" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwseg_usuario_x_aca_Sede' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Menu_x_seg_usuario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwseg_usuario_x_aca_Sede' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwseg_usuario_x_aca_Sede">
           <Key>
             <PropertyRef Name="IdUsuario" />
@@ -66,7 +68,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwseg_usuario_x_aca_Sede' no
           <Property Name="Observacion" Type="varchar" MaxLength="1" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwseg_usuario_x_tb_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwseg_usuario_x_tb_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwseg_usuario_x_tb_sucursal">
           <Key>
             <PropertyRef Name="IdUsuario" />

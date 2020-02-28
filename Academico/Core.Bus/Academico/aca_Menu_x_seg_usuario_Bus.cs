@@ -63,5 +63,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public aca_Menu_x_seg_usuario_Info get_list_menu_accion(int IdEmpresa, int IdSede, string IdUsuario, string NomControlador)
+        {
+            try
+            {
+                return odata.get_list_menu_accion(IdEmpresa, IdSede, IdUsuario, NomControlador);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
