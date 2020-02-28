@@ -353,14 +353,13 @@
             // 
             // lbl_titulo
             // 
-            this.lbl_titulo.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "SOLICITUD DE MATRICULA")});
             this.lbl_titulo.Font = new System.Drawing.Font("Verdana", 11F, System.Drawing.FontStyle.Bold);
             this.lbl_titulo.Name = "lbl_titulo";
             this.lbl_titulo.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.lbl_titulo.StylePriority.UseFont = false;
             this.lbl_titulo.StylePriority.UsePadding = false;
             this.lbl_titulo.StylePriority.UseTextAlignment = false;
+            this.lbl_titulo.Text = "SOLICITUD DE MATRICULA";
             this.lbl_titulo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.lbl_titulo.Weight = 1.99871841953339D;
             // 
@@ -374,7 +373,7 @@
             // lbl_periodo
             // 
             this.lbl_periodo.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'PERIODO LECTIVO \', [Anio])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'PERIODO LECTIVO \', [Descripcion])")});
             this.lbl_periodo.Font = new System.Drawing.Font("Verdana", 11F, System.Drawing.FontStyle.Italic);
             this.lbl_periodo.Name = "lbl_periodo";
             this.lbl_periodo.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);

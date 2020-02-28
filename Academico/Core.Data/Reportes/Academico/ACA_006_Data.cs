@@ -8,26 +8,27 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_006_Data
     {
-        public List<ACA_006_Info> Getlist(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        public List<ACA_006_Info> Getlist(int IdEmpresa, int IdSede, int IdAnio, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
                 int IdSedeIni = IdSede;
                 int IdSedeFin = IdSede == 0 ? 9999999 : IdSede;
 
-                int IdNivelIni = IdNivel;
-                int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
+                //int IdNivelIni = IdNivel;
+                //int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
 
-                int IdJornadaIni = IdJornada;
-                int IdJornadaFin = IdJornada == 0 ? 9999999 : IdJornada;
+                //int IdJornadaIni = IdJornada;
+                //int IdJornadaFin = IdJornada == 0 ? 9999999 : IdJornada;
 
-                int IdCursoIni = IdCurso;
-                int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
+                //int IdCursoIni = IdCurso;
+                //int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
 
                 List<ACA_006_Info> Lista = new List<ACA_006_Info>();
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
-                    Lista = db.VWACA_006.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin && IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin && IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin && IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin).Select(q => new ACA_006_Info
+                    Lista = db.VWACA_006.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin 
+                    && q.Fecha>= fecha_ini && q.Fecha <= fecha_fin).Select(q => new ACA_006_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdAnio = q.IdAnio,

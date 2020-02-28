@@ -52,8 +52,6 @@ namespace Core.Web.Reportes.Academico
             var SectorRepLegal = "";
             var BarrioRepLegal = "";
             var NomAnioLectivo = "";
-            var PeriodoInicio = "";
-            var PeriodoFin = "";
             var NomAnioLectivoAnterior = "";
             var CorreoRepLegal = "";
             var CorreoSeFactura = "";
@@ -133,8 +131,7 @@ namespace Core.Web.Reportes.Academico
             txtContrato.Rtf = txtContrato.Rtf.Replace("[NombreEstudiante]", NombreEstudiante);
             txtContrato.Rtf = txtContrato.Rtf.Replace("[CursoEstudiante]", CursoEstudiante);
             txtContrato.Rtf = txtContrato.Rtf.Replace("[NomAnioLectivo]", NomAnioLectivo);
-            txtContrato.Rtf = txtContrato.Rtf.Replace("[PeriodoInicio]", PeriodoInicio);
-            txtContrato.Rtf = txtContrato.Rtf.Replace("[PeriodoFin]", PeriodoFin);
+            txtContrato.Rtf = txtContrato.Rtf.Replace("[DescripcionPensiones]", DescripcionPensiones);
             txtContrato.Rtf = txtContrato.Rtf.Replace("[NomAnioLectivoAnterior]", NomAnioLectivoAnterior);
             txtContrato.Rtf = txtContrato.Rtf.Replace("[NombreRepLegal]", NombreRepLegal);
             txtContrato.Rtf = txtContrato.Rtf.Replace("[NombreRepEconomico]", NombreRepEconomico);

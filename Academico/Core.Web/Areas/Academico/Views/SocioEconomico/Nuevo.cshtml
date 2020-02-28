@@ -183,6 +183,13 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
+                                <label for="IdEmpresa">Gastos salud*</label>
+                                @Html.TextBoxFor(q => q.GastoSalud, new { @class = "form-control", @id = "GastoSalud" })
+                                @Html.ValidationMessageFor(m => m.GastoSalud, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
                                 <label for="IdEmpresa">Gastos arriendo*</label>
                                 @Html.TextBoxFor(q => q.GastoArriendo, new { @class = "form-control", @id = "GastoArriendo" })
                                 @Html.ValidationMessageFor(m => m.GastoArriendo, "", new { @class = "text-danger" })
@@ -195,6 +202,10 @@
                                 @Html.ValidationMessageFor(m => m.GastoPrestamo, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="IdEmpresa">Otros gastos*</label>
@@ -202,10 +213,6 @@
                                 @Html.ValidationMessageFor(m => m.OtroGasto, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label for="IdEmpresa">Total de ingresos*</label>
@@ -349,6 +356,9 @@
         $("#GastoServicioBasico").change(function () {
             sumar_egresos();
         });
+        $("#GastoSalud").change(function () {
+            sumar_egresos();
+        });
         $("#GastoArriendo").change(function () {
             sumar_egresos();
         });
@@ -407,7 +417,7 @@
     };
 
     function sumar_egresos() {
-        var TotalGasto = parseFloat($("#GastoAlimentacion").val()) + parseFloat($("#GastoEducacion").val()) + parseFloat($("#GastoServicioBasico").val()) + parseFloat($("#GastoArriendo").val()) + parseFloat($("#GastoPrestamo").val()) + parseFloat($("#OtroGasto").val());
+        var TotalGasto = parseFloat($("#GastoAlimentacion").val()) + parseFloat($("#GastoEducacion").val()) + parseFloat($("#GastoServicioBasico").val()) + parseFloat($("#GastoSalud").val()) + parseFloat($("#GastoArriendo").val()) + parseFloat($("#GastoPrestamo").val()) + parseFloat($("#OtroGasto").val());
         $("#TotalGasto").val(TotalGasto);
         saldo();
     };

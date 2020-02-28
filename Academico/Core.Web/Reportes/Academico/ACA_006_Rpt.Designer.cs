@@ -66,6 +66,8 @@
             this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
+            this.p_fecha_fin = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_fecha_ini = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
@@ -274,7 +276,7 @@
             this.lbl_sede.StylePriority.UseFont = false;
             this.lbl_sede.StylePriority.UsePadding = false;
             this.lbl_sede.Text = "lbl_sede";
-            this.lbl_sede.Weight = 1.6835749378598959D;
+            this.lbl_sede.Weight = 1.6835749378599D;
             // 
             // CXC_001
             // 
@@ -282,7 +284,7 @@
             this.CXC_001.Name = "CXC_001";
             this.CXC_001.StylePriority.UseFont = false;
             this.CXC_001.Text = "ACA_006";
-            this.CXC_001.Weight = 0.31642506214010013D;
+            this.CXC_001.Weight = 0.3164250621401D;
             // 
             // xrTableRow3
             // 
@@ -409,6 +411,16 @@
             this.lbl_imagen.SizeF = new System.Drawing.SizeF(135.3146F, 76.91665F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
+            // p_fecha_fin
+            // 
+            this.p_fecha_fin.Name = "p_fecha_fin";
+            this.p_fecha_fin.Visible = false;
+            // 
+            // p_fecha_ini
+            // 
+            this.p_fecha_ini.Name = "p_fecha_ini";
+            this.p_fecha_ini.Visible = false;
+            // 
             // ACA_006_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -432,7 +444,9 @@
             this.p_IdNivel,
             this.p_IdCurso,
             this.p_IdJornada,
-            this.p_IdAnio});
+            this.p_IdAnio,
+            this.p_fecha_fin,
+            this.p_fecha_ini});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_006_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).EndInit();
@@ -481,5 +495,7 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell2;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow2;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell1;
+        public DevExpress.XtraReports.Parameters.Parameter p_fecha_fin;
+        public DevExpress.XtraReports.Parameters.Parameter p_fecha_ini;
     }
 }

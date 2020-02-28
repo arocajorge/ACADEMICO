@@ -456,7 +456,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult ACA_006(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0)
+        public ActionResult ACA_006()
         {
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -464,10 +464,8 @@ namespace Core.Web.Areas.Reportes.Controllers
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
 
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
-            model.IdNivel = IdNivel;
-            model.IdJornada = IdJornada;
-            model.IdCurso = IdCurso;
-
+            model.fecha_ini = DateTime.Now.AddMonths(-1);
+            model.fecha_fin = DateTime.Now;
 
             ACA_006_Rpt report = new ACA_006_Rpt();
 
@@ -483,9 +481,8 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
             report.p_IdSede.Value = model.IdSede;
-            report.p_IdNivel.Value = model.IdNivel;
-            report.p_IdJornada.Value = model.IdJornada;
-            report.p_IdCurso.Value = model.IdCurso;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_fecha_ini.Value = model.fecha_ini;
 
             ViewBag.Report = report;
 
@@ -508,26 +505,20 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
             report.p_IdSede.Value = model.IdSede;
-            report.p_IdNivel.Value = model.IdNivel;
-            report.p_IdJornada.Value = model.IdJornada;
-            report.p_IdCurso.Value = model.IdCurso;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_fecha_ini.Value = model.fecha_ini;
 
             ViewBag.Report = report;
 
             return View(model);
         }
-        public ActionResult ACA_007(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0)
+        public ActionResult ACA_007()
         {
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
-
-            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
-            model.IdNivel = IdNivel;
-            model.IdJornada = IdJornada;
-            model.IdCurso = IdCurso;
-
+            model.fecha_ini = DateTime.Now.AddMonths(-1);
+            model.fecha_fin = DateTime.Now;
 
             ACA_007_Rpt report = new ACA_007_Rpt();
 
