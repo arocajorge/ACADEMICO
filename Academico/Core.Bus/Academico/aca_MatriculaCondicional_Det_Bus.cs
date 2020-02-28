@@ -23,5 +23,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+        public List<aca_MatriculaCondicional_Det_Info> getList(int IdEmpresa, int IdCatalogoCONDIC)
+        {
+            try
+            {
+                return odata.getList_x_Tipo(IdEmpresa, IdCatalogoCONDIC);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

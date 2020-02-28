@@ -103,4 +103,35 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+<script type="text/javascript">
+    $(function () {
+        $("#IdCatalogoCONDIC").change(function () {
+            SetListaDetalle();
+        });
+    })
+
+    function SetListaDetalle() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdCatalogoCONDIC: $("#IdCatalogoCONDIC").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetListaDetalle", "MatriculaCondicional", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_MatriculaCondicionalParrafo.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    };
+</script>
+    
 

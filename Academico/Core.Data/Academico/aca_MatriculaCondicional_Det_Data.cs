@@ -42,5 +42,36 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public List<aca_MatriculaCondicional_Det_Info> getList_x_Tipo(int IdEmpresa, int IdCatalogoCONDIC)
+        {
+            try
+            {
+                List<aca_MatriculaCondicional_Det_Info> Lista = new List<aca_MatriculaCondicional_Det_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_MatriculaCondicionalParrafo.Where(q => q.IdEmpresa == IdEmpresa && q.IdCatalogoCONDIC == IdCatalogoCONDIC).ToList();
+                    var Secuencia = 1;
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_MatriculaCondicional_Det_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            Secuencia = Secuencia++,
+                            IdParrafo = q.IdParrafo,
+                            Nombre = q.Nombre
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

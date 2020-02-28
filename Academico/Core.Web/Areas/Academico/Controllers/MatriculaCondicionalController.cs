@@ -159,8 +159,13 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdAnio = (info == null ? 0 : info.IdAnio),
                 Fecha = DateTime.Now.Date,
+                IdCatalogoCONDIC = Convert.ToInt32(cl_enumeradores.eCatalogoMatriculaCondicional.APROVECHAMIENTO),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
+
+            model.lst_detalle = new List<aca_MatriculaCondicional_Det_Info>();
+            var lst_pararafo = bus_condicional_det.getList(model.IdEmpresa,model.IdCatalogoCONDIC);
+            Lista_CondicionalDet.set_list(lst_pararafo, model.IdTransaccionSession);
             cargar_combos();
             return View(model);
         }
@@ -269,6 +274,16 @@ namespace Core.Web.Areas.Academico.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region Json
+        public JsonResult SetListaDetalle(int IdEmpresa = 0, int IdCatalogoCONDIC=0)
+        {
+            var lst_pararafo = bus_condicional_det.getList(IdEmpresa, IdCatalogoCONDIC);
+            Lista_CondicionalDet.set_list(lst_pararafo, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return Json(lst_pararafo, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
