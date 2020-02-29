@@ -64,11 +64,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_Menu_x_seg_usuario_Info get_list_menu_accion(int IdEmpresa, int IdSede, string IdUsuario, string NomControlador)
+        public aca_Menu_x_seg_usuario_Info get_list_menu_accion(int IdEmpresa, int IdSede, string IdUsuario, string Area, string NomControlador, string Accion)
         {
             try
             {
-                return odata.get_list_menu_accion(IdEmpresa, IdSede, IdUsuario, NomControlador);
+                return odata.get_list_menu_accion(IdEmpresa, IdSede, IdUsuario, Area, NomControlador, Accion);
             }
             catch (Exception)
             {

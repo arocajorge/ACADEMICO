@@ -106,7 +106,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_MatriculaCondicional> vwaca_MatriculaCondicional { get; set; }
         public virtual DbSet<aca_MatriculaCondicional_Det> aca_MatriculaCondicional_Det { get; set; }
         public virtual DbSet<vwaca_MatriculaCondicional_Det> vwaca_MatriculaCondicional_Det { get; set; }
-        public virtual DbSet<vwaca_Menu_x_seg_usuario> vwaca_Menu_x_seg_usuario { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

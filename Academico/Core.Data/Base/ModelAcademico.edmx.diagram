@@ -178,7 +178,6 @@
         <EntityTypeShape EntityType="ModelAcademico.vwaca_MatriculaCondicional_Det" Width="1.5" PointX="11.375" PointY="14.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicional_Det_aca_MatriculaCondicional" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicional_Det_aca_MatriculaCondicionalParrafo" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Menu_x_seg_usuario" Width="1.5" PointX="30.375" PointY="6.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

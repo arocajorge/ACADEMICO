@@ -192,7 +192,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_Menu_x_seg_usuario_Info get_list_menu_accion(int IdEmpresa, int IdSede, string IdUsuario, string NomControlador)
+        public aca_Menu_x_seg_usuario_Info get_list_menu_accion(int IdEmpresa, int IdSede, string IdUsuario, string Area, string NomControlador, string Accion)
         {
             try
             {
@@ -200,11 +200,12 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var Entity = odata.vwaca_Menu_x_seg_usuario.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede==IdSede && q.IdUsuario==IdUsuario && q.web_nom_Controller==NomControlador).FirstOrDefault();
+                    var Entity = odata.aca_Menu_x_seg_usuario.Include("aca_Menu").Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdUsuario == IdUsuario && (q.aca_Menu == null ? "" : q.aca_Menu.web_nom_Controller) == NomControlador &&(q.aca_Menu == null ? "" : q.aca_Menu.web_nom_Area) == Area && (q.aca_Menu == null ? "" : q.aca_Menu.web_nom_Action) == Accion).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
-                    info = new aca_Menu_x_seg_usuario_Info {
+                    info = new aca_Menu_x_seg_usuario_Info
+                    {
                         IdEmpresa = Entity.IdEmpresa,
                         IdSede = Entity.IdSede,
                         IdUsuario = Entity.IdUsuario,
