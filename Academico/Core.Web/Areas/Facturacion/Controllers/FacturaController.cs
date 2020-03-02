@@ -19,6 +19,7 @@ using System.Web.Mvc;
 using Core.Web.Areas.Academico.Controllers;
 using Core.Bus.Academico;
 using Core.Data.Academico;
+using Core.Info.Academico;
 
 namespace Core.Web.Areas.Facturacion.Controllers
 {
@@ -67,6 +68,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         aca_AnioLectivo_Rubro_Periodo_Bus bus_anio_rubro_periodo = new aca_AnioLectivo_Rubro_Periodo_Bus();
         tb_mes_Bus bus_mes = new tb_mes_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
         #region Index
         public ActionResult Index()
@@ -79,12 +81,26 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 IdSucursal = IdSucursal
             };
             cargar_combos(model.IdEmpresa);
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "Factura", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
             cargar_combos(model.IdEmpresa);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "Factura", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View(model);
         }
         private void cargar_combos(int IdEmpresa)
@@ -94,13 +110,18 @@ namespace Core.Web.Areas.Facturacion.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_factura(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0)
+        public ActionResult GridViewPartial_factura(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0, bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
             ViewBag.IdSucursal = IdSucursal;
             var model = bus_factura.get_list(IdEmpresa, IdSucursal, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
+
             return PartialView("_GridViewPartial_factura", model);
         }
         #endregion
@@ -604,6 +625,12 @@ namespace Core.Web.Areas.Facturacion.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "Factura", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
+
             fa_factura_Info model = new fa_factura_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -617,6 +644,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 IdCatalogo_FormaPago = "EFEC",
                 info_resumen = new fa_factura_resumen_Info()
             };
+
 
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
             cargar_combos(model);
@@ -660,6 +688,12 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return RedirectToAction("Index");
             if (model.esta_impresa == null ? false : Convert.ToBoolean(model.esta_impresa))
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "Factura", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
@@ -722,6 +756,13 @@ namespace Core.Web.Areas.Facturacion.Controllers
             fa_factura_Info model = bus_factura.get_info(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "Factura", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
+
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);
