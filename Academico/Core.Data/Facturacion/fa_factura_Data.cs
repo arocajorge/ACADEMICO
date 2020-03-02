@@ -688,6 +688,7 @@ namespace Core.Data.Facturacion
                         RubroFacturado.IdBodega = null;
                         RubroFacturado.IdCbteVta = null;
                         RubroFacturado.FechaFacturacion = null;
+                        RubroFacturado.EnMatricula = false;
                         db.SaveChanges();
                     }
                 }
