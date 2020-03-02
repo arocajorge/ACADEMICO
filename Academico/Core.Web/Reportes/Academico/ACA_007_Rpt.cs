@@ -65,7 +65,7 @@ namespace Core.Web.Reportes.Academico
         {
             try
             {
-                if (e.Field != null  && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.GrandTotal && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.Total)
+                if (e.Field != null && (e.Field.FieldName == "NomPlantilla" )&& e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.GrandTotal && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.Total)
                 {
                     LabelBrick lb = new DevExpress.XtraPrinting.LabelBrick();
                     lb.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
