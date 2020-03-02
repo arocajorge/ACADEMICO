@@ -12,7 +12,7 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_visor_video
+    public partial class tb_visor_video_aca
     {
         public string Cod_video { get; set; }
         public string Nombre_video { get; set; }

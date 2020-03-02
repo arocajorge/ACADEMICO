@@ -1,4 +1,4 @@
-﻿@model Core.Info.General.tb_visor_video_Info
+﻿@model Core.Info.General.tb_visor_video_aca_Info
 @{
     ViewBag.Title = "Anular video";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Anular", "VisorDeVideo", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "VisorDeVideoAcademico", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.Cod_video)
 
@@ -42,7 +42,7 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-danger">Anular</button>
-        <a class="btn btn-default" href="@Url.Action("Index","VisorDeVideo",new { Area = "General" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","VisorDeVideoAcademico",new { Area = "General" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

@@ -492,7 +492,7 @@
           <Property Name="IdUsuarioUltAnu" Type="varchar" MaxLength="20" />
           <Property Name="Fecha_UltAnu" Type="datetime" />
         </EntityType>
-        <EntityType Name="tb_visor_video">
+        <EntityType Name="tb_visor_video_aca">
           <Key>
             <PropertyRef Name="Cod_video" />
           </Key>
@@ -1065,7 +1065,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_bodega_x_sucursal' no tiene d
           <EntitySet Name="tb_sucursal_FormaPago_x_fa_NivelDescuento" EntityType="Self.tb_sucursal_FormaPago_x_fa_NivelDescuento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_TarjetaCredito" EntityType="Self.tb_TarjetaCredito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_TarjetaCredito_x_cp_proveedor" EntityType="Self.tb_TarjetaCredito_x_cp_proveedor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tb_visor_video" EntityType="Self.tb_visor_video" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_visor_video_aca" EntityType="Self.tb_visor_video_aca" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_LogError" EntityType="Self.tb_LogError" Schema="web" store:Type="Tables" />
           <EntitySet Name="tb_sis_reporte_x_tb_empresa" EntityType="Self.tb_sis_reporte_x_tb_empresa" Schema="web" store:Type="Tables" />
           <EntitySet Name="tbl_TransaccionesAutorizadas" EntityType="Self.tbl_TransaccionesAutorizadas" Schema="web" store:Type="Tables" />
@@ -1462,7 +1462,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_bodega_x_sucursal' no tiene d
             <End Role="tb_banco" EntitySet="tb_banco" />
             <End Role="tb_TarjetaCredito" EntitySet="tb_TarjetaCredito" />
           </AssociationSet>
-          <EntitySet Name="tb_visor_video" EntityType="ModelGeneral.tb_visor_video" />
+          <EntitySet Name="tb_visor_video_aca" EntityType="ModelGeneral.tb_visor_video_aca" />
           </EntityContainer>
         <EntityType Name="tb_sucursal">
           <Key>
@@ -2499,7 +2499,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_bodega_x_sucursal' no tiene d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tb_visor_video">
+        <EntityType Name="tb_visor_video_aca">
           <Key>
             <PropertyRef Name="Cod_video" />
           </Key>
@@ -3143,9 +3143,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_bodega_x_sucursal' no tiene d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tb_visor_video">
-            <EntityTypeMapping TypeName="ModelGeneral.tb_visor_video">
-              <MappingFragment StoreEntitySet="tb_visor_video">
+          <EntitySetMapping Name="tb_visor_video_aca">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_visor_video_aca">
+              <MappingFragment StoreEntitySet="tb_visor_video_aca">
                 <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
                 <ScalarProperty Name="IdUsuarioModifica" ColumnName="IdUsuarioModifica" />
                 <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />

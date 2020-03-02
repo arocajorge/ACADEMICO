@@ -13,9 +13,9 @@ using System.Web.Mvc;
 namespace Core.Web.Areas.General.Controllers
 {
     [SessionTimeout]
-    public class VisorDeVideoController : Controller
+    public class VisorDeVideoAcademicoController : Controller
     {
-        tb_visor_video_Bus bus_pais = new tb_visor_video_Bus();
+        tb_visor_video_aca_Bus bus_pais = new tb_visor_video_aca_Bus();
         #region vistas
         public ActionResult Index()
         {
@@ -23,15 +23,15 @@ namespace Core.Web.Areas.General.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_visor_video()
+        public ActionResult GridViewPartial_visor_video_aca()
         {
-            List<tb_visor_video_Info> model = new List<tb_visor_video_Info>();
+            List<tb_visor_video_aca_Info> model = new List<tb_visor_video_aca_Info>();
             model = bus_pais.get_list(true);
-            return PartialView("_GridViewPartial_visor_video", model);
+            return PartialView("_GridViewPartial_visor_video_aca", model);
         }
         public ActionResult ReproducirVideo(string Cod_video)
         {
-            tb_visor_video_Info model = new tb_visor_video_Info();
+            tb_visor_video_aca_Info model = new tb_visor_video_aca_Info();
             model = bus_pais.get_info(Cod_video);
             if (model == null)
                 return RedirectToAction("Index");
@@ -43,11 +43,11 @@ namespace Core.Web.Areas.General.Controllers
         #region acciones
         public ActionResult Nuevo()
         {
-            tb_visor_video_Info model = new tb_visor_video_Info();
+            tb_visor_video_aca_Info model = new tb_visor_video_aca_Info();
             return View(model);
         }
         [HttpPost]
-        public ActionResult Nuevo(tb_visor_video_Info model)
+        public ActionResult Nuevo(tb_visor_video_aca_Info model)
         {
             if (bus_pais.si_existe(model.Cod_video))
             {
@@ -58,7 +58,7 @@ namespace Core.Web.Areas.General.Controllers
             {
                 return View(model);
             }
-            model.video = tb_visor_video_video.video;
+            model.video = tb_visor_video_video_aca.video;
             string patch = Path.Combine(Server.MapPath("~/Content"), model.Cod_video);
             if (System.IO.File.Exists(patch + ".mp4"))
                 System.IO.File.Delete(patch + ".mp4");
@@ -71,13 +71,13 @@ namespace Core.Web.Areas.General.Controllers
         }
         public ActionResult Modificar(string Cod_video)
         {
-            tb_visor_video_Info model = bus_pais.get_info(Cod_video);
+            tb_visor_video_aca_Info model = bus_pais.get_info(Cod_video);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
         }
         [HttpPost]
-        public ActionResult Modificar(tb_visor_video_Info model)
+        public ActionResult Modificar(tb_visor_video_aca_Info model)
         {
             if (!bus_pais.modificarDB(model))
             {
@@ -87,13 +87,13 @@ namespace Core.Web.Areas.General.Controllers
         }
         public ActionResult Anular(string Cod_video)
         {
-            tb_visor_video_Info model = bus_pais.get_info(Cod_video);
+            tb_visor_video_aca_Info model = bus_pais.get_info(Cod_video);
             if (model == null)
                 return RedirectToAction("Index");
             return View(model);
         }
         [HttpPost]
-        public ActionResult Anular(tb_visor_video_Info model)
+        public ActionResult Anular(tb_visor_video_aca_Info model)
         {
             if (!bus_pais.anularDB(model))
             {
@@ -107,15 +107,15 @@ namespace Core.Web.Areas.General.Controllers
 
         public UploadedFile UploadControlUpload()
         {
-            UploadControlExtension.GetUploadedFiles("UploadControl", tb_visor_video_video.UploadValidationSettings, tb_visor_video_video.FileUploadComplete);
+            UploadControlExtension.GetUploadedFiles("UploadControl", tb_visor_video_video_aca.UploadValidationSettings, tb_visor_video_video_aca.FileUploadComplete);
 
-            byte[] model = tb_visor_video_video.video;
+            byte[] model = tb_visor_video_video_aca.video;
             UploadedFile file = new UploadedFile();
             return file;
         }
     }
 
-    public class tb_visor_video_video
+    public class tb_visor_video_video_aca
     {
         public static byte[] video { get; set; }
         public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
