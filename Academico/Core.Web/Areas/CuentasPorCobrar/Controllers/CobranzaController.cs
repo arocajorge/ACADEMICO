@@ -409,6 +409,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             List_x_Cruzar.set_list(new List<cxc_cobro_det_Info>(), model.IdTransaccionSession);
 
             cargar_combos(IdEmpresa, model.IdSucursal);
+            
             return View(model);
         }
         [HttpPost]
