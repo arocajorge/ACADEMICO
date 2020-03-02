@@ -16,6 +16,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_MateriaGrupo_List Lista_MateriaGrupo = new aca_MateriaGrupo_List();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Index
@@ -36,16 +37,24 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_MateriaGrupo_Info> lista = bus_materia_grupo.GetList(model.IdEmpresa, true);
             Lista_MateriaGrupo.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MateriaGrupo", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_materia_grupo()
+        public ActionResult GridViewPartial_materia_grupo(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             List<aca_MateriaGrupo_Info> model = Lista_MateriaGrupo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_materia_grupo", model);
         }
         #endregion
@@ -65,7 +74,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdEmpresa = IdEmpresa,
                 OrdenMateriaGrupo = orden
             };
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MateriaGrupo", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
         [HttpPost]
@@ -92,7 +105,11 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_MateriaGrupo_Info model = bus_materia_grupo.GetInfo(IdEmpresa, IdMateriaGrupo);
             if (model == null)
                 return RedirectToAction("Index");
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MateriaGrupo", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
@@ -124,7 +141,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MateriaGrupo", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
         [HttpPost]
