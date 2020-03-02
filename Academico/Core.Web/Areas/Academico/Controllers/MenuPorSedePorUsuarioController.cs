@@ -149,6 +149,8 @@ namespace Core.Web.Areas.Academico.Controllers
             }
             else
             {
+                //var lst_menu = Lista_menu_usuario.get_list();
+
                 var output = array.GroupBy(q => q).ToList();
                 foreach (var item in output)
                 {
@@ -156,12 +158,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         var lst_menu = Lista_menu_usuario.get_list();
                         var menu = lst_menu.Where(q => q.IdMenu == Convert.ToInt32(item.Key)).FirstOrDefault();
-                        //aca_Menu_x_seg_usuario_Info info = new aca_Menu_x_seg_usuario_Info
-                        //{
-                        //    IdEmpresa = IdEmpresa,
-                        //    IdMenu = Convert.ToInt32(item.Key),
-                        //    IdUsuario = IdUsuario
-                        //};
+
                         if (menu != null)
                             lista.Add(menu);
                     }
