@@ -149,20 +149,30 @@ namespace Core.Web.Areas.Academico.Controllers
             }
             else
             {
-                //var lst_menu = Lista_menu_usuario.get_list();
-
+                var lst_menu = Lista_menu_usuario.get_list();
                 var output = array.GroupBy(q => q).ToList();
-                foreach (var item in output)
+                foreach (var item in lst_menu)
                 {
-                    if (!string.IsNullOrEmpty(item.Key))
+                    foreach (var item2 in output)
                     {
-                        var lst_menu = Lista_menu_usuario.get_list();
-                        var menu = lst_menu.Where(q => q.IdMenu == Convert.ToInt32(item.Key)).FirstOrDefault();
-
-                        if (menu != null)
-                            lista.Add(menu);
+                        if (item.IdMenu == Convert.ToInt32(item2.Key))
+                        {
+                            lista.Add(item);
+                        }
                     }
                 }
+                //var output = array.GroupBy(q => q).ToList();
+                //foreach (var item in output)
+                //{
+                //    if (!string.IsNullOrEmpty(item.Key))
+                //    {
+                //        var lst_menu = Lista_menu_usuario.get_list();
+                //        var menu = lst_menu.Where(q => q.IdMenu == Convert.ToInt32(item.Key)).FirstOrDefault();
+
+                //        if (menu != null)
+                //            lista.Add(menu);
+                //    }
+                //}
             }
 
             bus_menu_sede_usuario.eliminarDB(IdEmpresa, IdSede, IdUsuario);

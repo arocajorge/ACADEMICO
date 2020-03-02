@@ -14,7 +14,7 @@
         e.customArgs["selectedIDs"] = selectedIDs;
     }
     function OnSelectionChanged(s, e) {
-        //$("#modificado").val("1");
+        $("#modificado").val("1");
         s.GetSelectedNodeValues("IdMenu", GetSelectedNodeValuesCallback);
     }
     function GetSelectedNodeValuesCallback(values) {
