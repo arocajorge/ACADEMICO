@@ -156,7 +156,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         var lst_menu = Lista_menu_usuario.get_list();
                         var menu = lst_menu.Where(q => q.IdMenu == Convert.ToInt32(item.Key)).FirstOrDefault();
-                        //seg_Menu_x_Empresa_x_Usuario_Info info = new seg_Menu_x_Empresa_x_Usuario_Info
+                        //aca_Menu_x_seg_usuario_Info info = new aca_Menu_x_seg_usuario_Info
                         //{
                         //    IdEmpresa = IdEmpresa,
                         //    IdMenu = Convert.ToInt32(item.Key),

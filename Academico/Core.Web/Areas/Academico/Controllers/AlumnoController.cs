@@ -515,6 +515,12 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Alumno_Info model = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
+
+            model.IdPais = (model.IdPais == "" || model.IdPais == null ? "1" : model.IdPais);
+            model.Cod_Region = (model.IdPais == "" || model.Cod_Region == null ? "00001" : model.Cod_Region); 
+            model.IdProvincia = (model.IdProvincia == "" || model.IdProvincia == null ? "09" : model.IdProvincia);
+            model.IdCiudad = (model.IdCiudad == "" || model.IdCiudad == null ? "09" : model.IdCiudad);
+            model.IdParroquia = (model.IdParroquia == "" || model.IdParroquia == null ? "09" : model.IdParroquia);
             if (model == null)
                 return RedirectToAction("Index");
 
@@ -529,12 +535,7 @@ namespace Core.Web.Areas.Academico.Controllers
             ListaAlumnoDocumento.set_list(model.lst_alumno_documentos, model.IdTransaccionSession);
 
             aca_Familia_Info info_fam_padre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
-            //info_fam_padre.IdTipoCredito = (info_fam_padre.IdTipoCredito==null ? "CON" : info_fam_padre.IdTipoCredito);
-            //info_fam_padre.Idtipo_cliente = (info_fam_padre.Idtipo_cliente == 0 ? 1 : info_fam_padre.Idtipo_cliente);
             aca_Familia_Info info_fam_madre = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
-            //info_fam_madre.IdTipoCredito = (info_fam_madre.IdTipoCredito == null ? "CON" : info_fam_madre.IdTipoCredito);
-            //info_fam_madre.Idtipo_cliente = (info_fam_madre.Idtipo_cliente == 0 ? 1 : info_fam_madre.Idtipo_cliente);
-
             model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
 
             if (model.alu_foto == null)
@@ -556,7 +557,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (info_fam_padre == null)
             {
-                info_fam_padre = new aca_Familia_Info();
+                info_fam_padre = new aca_Familia_Info
+                {
+                    IdCiudad_fact = "09",
+                    IdParroquia_fact = "09",
+                };
             }
             else
             {
@@ -572,7 +577,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (info_fam_madre == null)
             {
-                info_fam_madre = new aca_Familia_Info();
+                info_fam_madre = new aca_Familia_Info
+                {
+                    IdCiudad_fact = "09",
+                    IdParroquia_fact = "09",
+                };
             }
             else
             {
@@ -624,6 +633,8 @@ namespace Core.Web.Areas.Academico.Controllers
             model.EstaFallecido_padre = info_fam_padre.EstaFallecido;
             model.IdTipoCredito_padre = (info_fam_padre.IdTipoCredito == null ? "CON" : info_fam_padre.IdTipoCredito);
             model.Idtipo_cliente_padre = (info_fam_padre.Idtipo_cliente == 0 ? 1 : info_fam_padre.Idtipo_cliente);
+            model.IdCiudad_padre = info_fam_padre.IdCiudad_fact;
+            model.IdParroquia_padre = info_fam_padre.IdParroquia_fact;
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
             model.SeFactura_madre = info_fam_madre.SeFactura;
@@ -663,6 +674,8 @@ namespace Core.Web.Areas.Academico.Controllers
             model.EstaFallecido_madre = info_fam_madre.EstaFallecido;
             model.IdTipoCredito_madre = (info_fam_madre.IdTipoCredito == null ? "CON" : info_fam_madre.IdTipoCredito);
             model.Idtipo_cliente_madre = (info_fam_madre.Idtipo_cliente == 0 ? 1 : info_fam_madre.Idtipo_cliente);
+            model.IdCiudad_madre = info_fam_madre.IdCiudad_fact;
+            model.IdParroquia_madre = info_fam_madre.IdParroquia_fact;
 
             if (model == null)
                 return RedirectToAction("Index");
