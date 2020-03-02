@@ -510,6 +510,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
                     IdPunto_Cargo = null,
                     IdPunto_cargo_grupo = null
                 };
+                info.lst_det = new List<fa_notaCreDeb_det_Info>();
+                info.lst_det.Add(info_detalle);
             }
             else
             {
