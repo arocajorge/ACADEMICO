@@ -39,6 +39,17 @@ namespace Core.Web.Reportes.Academico
                 List<ACA_007_Info> Lista = bus_rpt.GetList(IdEmpresa, fecha_ini, fecha_fin);
                 this.DataSource = Lista;
 
+                tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+                var emp = bus_empresa.get_info(IdEmpresa);
+                if (emp != null)
+                {
+                    if (emp.em_logo != null)
+                    {
+                        ImageConverter obj = new ImageConverter();
+                        lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
+                    }
+                }
+
                 var info_sede = bus_sede.GetInfo(IdEmpresa, IdSede);
                 var NomSede = "";
                 if (info_sede != null)
