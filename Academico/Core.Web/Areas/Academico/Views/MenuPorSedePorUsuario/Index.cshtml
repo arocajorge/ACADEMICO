@@ -13,17 +13,13 @@
         //Pass all selected keys to GridView callback action
         e.customArgs["selectedIDs"] = selectedIDs;
     }
-    function OnSelectionChanged(s, e) {      
+    function OnSelectionChanged(s, e) {
+        //$("#modificado").val("1");
         s.GetSelectedNodeValues("IdMenu", GetSelectedNodeValuesCallback);
     }
     function GetSelectedNodeValuesCallback(values) {
         selectedIDs = values.join(',');
     }
-
-    function MoficarPermisos()
-    {
-        //$("#modificado").val("1");
-    };
 
     function guardar() {
         var datos = {
@@ -54,8 +50,7 @@
 </script>
 @using (Html.BeginForm("Index", "MenuPorSedePorUsuario", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
-    @*@Html.HiddenFor(q => q.modificado, new { @id= "modificado" })*@
-    @Html.TextBoxFor(q => q.modificado, new { @class = "form-control", @id = "modificado" })
+    @Html.HiddenFor(q => q.modificado, new { @id= "modificado" })
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-4">

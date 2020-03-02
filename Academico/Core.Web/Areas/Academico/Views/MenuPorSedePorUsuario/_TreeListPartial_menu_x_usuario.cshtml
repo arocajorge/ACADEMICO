@@ -47,10 +47,6 @@
             column.ColumnType = MVCxTreeListColumnType.CheckBox;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
-            column.EditorProperties().CheckBox (q =>
-            {
-                q.ClientSideEvents.ValueChanged = "function(s,e,){MoficarPermisos()}";
-            });
         });
 
         settings.Columns.Add(column =>
@@ -60,10 +56,6 @@
             column.ColumnType = MVCxTreeListColumnType.CheckBox;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
-            column.EditorProperties().CheckBox(q =>
-            {
-                q.ClientSideEvents.ValueChanged = "function(s,e,){MoficarPermisos()}";
-            });
         });
 
         settings.Columns.Add(column =>
@@ -73,10 +65,6 @@
             column.ColumnType = MVCxTreeListColumnType.CheckBox;
             column.EditFormSettings.Visible = DefaultBoolean.True;
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
-            column.EditorProperties().CheckBox(q =>
-            {
-                q.ClientSideEvents.ValueChanged = "function(s,e,){MoficarPermisos()}";
-            });
         });
 
         settings.SettingsCookies.StoreSelection = true;
