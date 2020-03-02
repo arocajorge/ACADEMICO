@@ -216,7 +216,11 @@ namespace Core.Data.Academico
                 {
                     var matricula = odata_matricula.getInfo(IdEmpresa,IdMatricula);
                     var IdCurso = (matricula == null ? 0 : matricula.IdCurso);
-                    var info = odata.vwaca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdCurso == IdCurso).OrderBy(q => q.OrdenCurso).FirstOrDefault();
+                    var IdJornada = (matricula == null ? 0 : matricula.IdJornada);
+                    var IdNivel = (matricula == null ? 0 : matricula.IdNivel);
+                    var IdSede = (matricula == null ? 0 : matricula.IdSede);
+
+                    var info = odata.vwaca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede==IdSede && q.IdNivel==IdNivel && q.IdJornada== IdJornada && q.IdCurso == IdCurso).OrderBy(q => q.OrdenCurso).FirstOrDefault();
                     if (info == null) info = new vwaca_AnioLectivo_Jornada_Curso();
                     info_curso.NomCurso = info.NomCurso;
                     info_curso.IdComboCurso = info.IdEmpresa.ToString("0000") + info.IdAnio.ToString("0000") + info.IdSede.ToString("0000") + info.IdNivel.ToString("0000") + info.IdJornada.ToString("0000") + info.IdCurso.ToString("0000");
