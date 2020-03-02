@@ -11,6 +11,7 @@ namespace Core.Web.Areas.Academico.Controllers
 {
     public class CatalogoTipoFichaController : Controller
     {
+        
         #region Index
         aca_CatalogoTipoFicha_List Lista_CatalogoTipoFicha = new aca_CatalogoTipoFicha_List();
         aca_CatalogoTipoFicha_Bus bus_catalogo_tipo_ficha = new aca_CatalogoTipoFicha_Bus();
@@ -30,7 +31,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_CatalogoTipoFicha_Info> lista = bus_catalogo_tipo_ficha.get_list();
             Lista_CatalogoTipoFicha.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-
+            
             return View(model);
         }
 
