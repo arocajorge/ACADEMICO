@@ -620,7 +620,8 @@ namespace Core.Data.Facturacion
                     #endregion
 
                     #region Contabilidad
-                    var TipoCobro = odat_TipoCobro.get_info(info.IdCobro_tipo);
+                    info.IdCobro_tipo = entity.IdCobro_tipo;
+                    var TipoCobro = odat_TipoCobro.get_info(entity.IdCobro_tipo);
                     if (TipoCobro != null)
                     {
                         var rel_conta = db_f.fa_notaCreDeb_x_ct_cbtecble.Where(q => q.no_IdEmpresa == info.IdEmpresa && q.no_IdSucursal == info.IdSucursal && q.no_IdBodega == info.IdBodega && q.no_IdNota == info.IdNota).FirstOrDefault();
@@ -926,6 +927,7 @@ namespace Core.Data.Facturacion
                         lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>()
                     };
                     #endregion
+
                     int secuencia = 1;
 
                     if (NCND.CreDeb.Trim() == "C")
@@ -973,6 +975,33 @@ namespace Core.Data.Facturacion
                                 dc_Valor = Math.Round(Convert.ToDouble(NCND.Total), 2, MidpointRounding.AwayFromZero) * -1
                             });
                         }
+                    }else
+                    {
+                        #region Debe
+                        diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = secuencia++,
+                            IdCtaCble = NCND.IdCtaCbleDebe,
+                            dc_Observacion = NCND.vt_NumFactura,
+                            dc_Valor = Math.Round(Convert.ToDouble(NCND.Total), 2, MidpointRounding.AwayFromZero)
+                        });
+                        #endregion
+
+                        #region Debe
+                        diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
+                        {
+                            IdEmpresa = diario.IdEmpresa,
+                            IdTipoCbte = diario.IdTipoCbte,
+                            IdCbteCble = diario.IdCbteCble,
+                            secuencia = secuencia++,
+                            IdCtaCble = NCND.IdCtaCbleHaber,
+                            dc_Observacion = NCND.vt_NumFactura,
+                            dc_Valor = Math.Round(Convert.ToDouble(NCND.Total), 2, MidpointRounding.AwayFromZero)*-1
+                        });
+                        #endregion
                     }
 
                     if (diario.lst_ct_cbtecble_det.Count == 0)
