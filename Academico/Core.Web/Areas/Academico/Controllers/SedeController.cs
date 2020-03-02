@@ -14,6 +14,8 @@ namespace Core.Web.Areas.Academico.Controllers
 {
     public class SedeController : Controller
     {
+        
+
         #region Index / Metodo
 
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
@@ -22,7 +24,7 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
-
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         public ActionResult Index()
         {
             #region Validar Session
@@ -40,8 +42,13 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_Sede_Info> lista = bus_sede.GetList(model.IdEmpresa, true);
             Lista_Sede.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-
             cargar_filtros(model);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Sede", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View(model);
         }
 
@@ -53,15 +60,24 @@ namespace Core.Web.Areas.Academico.Controllers
             Lista_Sede.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
 
             cargar_filtros(model);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Sede", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_sede()
+        public ActionResult GridViewPartial_sede(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             List<aca_Sede_Info> model = Lista_Sede.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_sede", model);
         }
         #endregion
@@ -99,6 +115,12 @@ namespace Core.Web.Areas.Academico.Controllers
             };
 
             cargar_combos(model);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Sede", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
+            
             return View(model);
         }
         [HttpPost]
@@ -126,7 +148,11 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_Sede_Info model = bus_sede.GetInfo(IdEmpresa, IdSede);
             if (model == null)
                 return RedirectToAction("Index");
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Sede", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
@@ -160,7 +186,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Sede", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(model);
             return View(model);
         }
