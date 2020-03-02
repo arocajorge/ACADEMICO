@@ -101,6 +101,17 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso=IdCurso});
         }
 
+        public ActionResult ComboBoxPartial_Plantilla()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            int IdJornada = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            int IdCurso = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdCurso"]) : -1;
+
+            return PartialView("_ComboBoxPartial_Plantilla", new aca_AnioLectivo_Curso_Plantilla_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
+        }
+
         #endregion
 
         #region Metodos
@@ -250,7 +261,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     foreach (var item2 in lst_nueva_plantilla)
                     {
-                        if (item1.IdPeriodo == item2.IdPeriodo)
+                        if (item1.IdPeriodo == item2.IdPeriodo && item1.IdRubro== item2.IdRubro)
                         {
                             item2.IdMecanismo = item1.IdMecanismo;
                             lista_nueva.Add(item2);
