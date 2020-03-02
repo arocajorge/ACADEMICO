@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridViewPartial_CalificacionHistoricoImportacion";
-        settings.CallbackRouteValues = new { Controller = "CalificacionHistorico", Action = "GridViewPartial_CalificacionHistoricoImportacion" };
+        settings.CallbackRouteValues = new { Controller = "CalificacionHistorico", Action = "GridViewPartial_CalificacionHistoricoImportacion", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdAlumno";
         //Configuración para que la grilla no muestre texto completo

@@ -14,7 +14,7 @@
 
 @using (Html.BeginForm())
 {
-    @Html.Action("GridViewPartial_AlumnoFamilia")
+    @Html.Action("GridViewPartial_AlumnoFamilia", new {Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular })
 }
 
 

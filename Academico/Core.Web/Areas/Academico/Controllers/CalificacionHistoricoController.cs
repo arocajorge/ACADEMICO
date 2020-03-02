@@ -27,6 +27,7 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -111,7 +112,12 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.IdAlumno = model.IdAlumno;
             List<aca_AnioLectivoCalificacionHistorico_Info> lista = bus_CalificacionHistorico.GetList(model.IdEmpresa, model.IdAlumno, true);
             Lista_CalificacionHistorico.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "CalificacionHistorico", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View(model);
         }
 
@@ -125,11 +131,14 @@ namespace Core.Web.Areas.Academico.Controllers
         //}
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_CalificacionHistorico(decimal IdAlumno=0)
+        public ActionResult GridViewPartial_CalificacionHistorico(decimal IdAlumno=0, bool Nuevo = false, bool Modificar = false)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             ViewBag.IdAlumno = IdAlumno;
             List<aca_AnioLectivoCalificacionHistorico_Info> model = Lista_CalificacionHistorico.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            
             return PartialView("_GridViewPartial_CalificacionHistorico", model);
         }
         #endregion
@@ -153,6 +162,11 @@ namespace Core.Web.Areas.Academico.Controllers
             };
             ViewBag.IdAlumno = model.IdAlumno;
             cargar_combos(model);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info inf = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "CalificacionHistorico", "Index");
+            if (!inf.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
 
@@ -182,7 +196,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "CalificacionHistorico", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 

@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_anio_lectivo";
-        settings.CallbackRouteValues = new { Controller = "AnioLectivo", Action = "GridViewPartial_anio_lectivo" };
+        settings.CallbackRouteValues = new { Controller = "AnioLectivo", Action = "GridViewPartial_anio_lectivo", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdAnio";
         //Configuración para que la grilla no muestre texto completo
@@ -62,18 +62,27 @@
             {
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
+                    if (ViewBag.Modificar == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio") }));
+                        ViewContext.Writer.Write("&nbsp;");
+                    }
+                    if (ViewBag.Anular == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio") },
+                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                    }
                 }
             });
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
+                if (ViewBag.Nuevo == true)
+                {
+                    ViewContext.Writer.Write(
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
+                }
+
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
