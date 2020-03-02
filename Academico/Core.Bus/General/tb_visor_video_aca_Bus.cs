@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Core.Bus.General
 {
-   public class tb_visor_video_Bus
+   public class tb_visor_video_aca_Bus
     {
-        tb_visor_video_Data odata = new tb_visor_video_Data();
-        public List<tb_visor_video_Info> get_list(bool mostrar_anulados)
+        tb_visor_video_aca_Data odata = new tb_visor_video_aca_Data();
+        public List<tb_visor_video_aca_Info> get_list(bool mostrar_anulados)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace Core.Bus.General
             }
         }
 
-        public tb_visor_video_Info get_info(string Cod_video)
+        public tb_visor_video_aca_Info get_info(string Cod_video)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Core.Bus.General
             }
         }
 
-        public bool guardarDB(tb_visor_video_Info info)
+        public bool guardarDB(tb_visor_video_aca_Info info)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace Core.Bus.General
             }
         }
 
-        public bool modificarDB(tb_visor_video_Info info)
+        public bool modificarDB(tb_visor_video_aca_Info info)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace Core.Bus.General
             }
         }
 
-        public bool anularDB(tb_visor_video_Info info)
+        public bool anularDB(tb_visor_video_aca_Info info)
         {
             try
             {

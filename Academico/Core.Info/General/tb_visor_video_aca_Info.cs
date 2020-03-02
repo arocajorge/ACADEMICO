@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Info.General
 {
-   public class tb_visor_video_Info
+   public class tb_visor_video_aca_Info
     {
         [Required(ErrorMessage = "El campo código es obligatorio")]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo código debe tener mínimo 1 caracter y máximo 50")]
