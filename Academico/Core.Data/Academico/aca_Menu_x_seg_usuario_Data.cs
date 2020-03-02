@@ -202,7 +202,7 @@ namespace Core.Data.Academico
                 {
                     var Entity = odata.aca_Menu_x_seg_usuario.Include("aca_Menu").Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdUsuario == IdUsuario && (q.aca_Menu == null ? "" : q.aca_Menu.web_nom_Controller) == NomControlador &&(q.aca_Menu == null ? "" : q.aca_Menu.web_nom_Area) == Area && (q.aca_Menu == null ? "" : q.aca_Menu.web_nom_Action) == Accion).FirstOrDefault();
                     if (Entity == null)
-                        new aca_Menu_x_seg_usuario_Info();
+                        return new aca_Menu_x_seg_usuario_Info();
 
                     info = new aca_Menu_x_seg_usuario_Info
                     {
