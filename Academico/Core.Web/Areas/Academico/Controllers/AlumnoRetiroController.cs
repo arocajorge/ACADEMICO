@@ -21,6 +21,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AlumnoRetiro_Bus bus_alumno_retiro = new aca_AlumnoRetiro_Bus();
         aca_AlumnoRetiro_List Lista_AlumnoRetiro = new aca_AlumnoRetiro_List();
         string mensaje = string.Empty;
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Combos bajo demanada
@@ -58,16 +59,23 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_AlumnoRetiro_Info> lista = bus_alumno_retiro.GetList(model.IdEmpresa);
             Lista_AlumnoRetiro.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoRetiro", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_alumno_retiro()
+        public ActionResult GridViewPartial_alumno_retiro(bool Nuevo = false, bool Anular = false)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             List<aca_AlumnoRetiro_Info> model = Lista_AlumnoRetiro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_alumno_retiro", model);
         }
         #endregion
@@ -101,7 +109,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 Fecha = DateTime.Now
             };
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoRetiro", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
         [HttpPost]
@@ -140,7 +152,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoRetiro", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
         [HttpPost]

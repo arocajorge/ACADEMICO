@@ -14,7 +14,7 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
-    @Html.Action("GridViewPartial_anio_lectivo")
+    @Html.Action("GridViewPartial_anio_lectivo", new {Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular})
 
 }
 

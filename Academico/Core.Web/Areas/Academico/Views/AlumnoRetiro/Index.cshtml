@@ -13,6 +13,6 @@
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
-    @Html.Action("GridViewPartial_alumno_retiro")
+    @Html.Action("GridViewPartial_alumno_retiro", new {Nuevo = ViewBag.Nuevo, Anular = ViewBag.Anular })
 
 }

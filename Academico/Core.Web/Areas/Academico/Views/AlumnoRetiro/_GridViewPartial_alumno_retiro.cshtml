@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_alumno_retiro";
-        settings.CallbackRouteValues = new { Controller = "Alumno", Action = "GridViewPartial_alumno_retiro" };
+        settings.CallbackRouteValues = new { Controller = "Alumno", Action = "GridViewPartial_alumno_retiro", Nuevo = ViewBag.Nuevo,  Anular = ViewBag.Anular };
         settings.KeyFieldName = "IdRetiro";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
@@ -62,17 +62,25 @@
             {
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "IdUsuarioAnulacion")) == "")
                 {
-                    ViewContext.Writer.Write(
+                    if (ViewBag.Anular == true)
+                    {
+                        ViewContext.Writer.Write(
                         Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdRetiro = DataBinder.Eval(tc.DataItem, "IdRetiro") },
                             new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                     );
+                    }
+
                 }
             });
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
+                if (ViewBag.Nuevo)
+                {
+                    ViewContext.Writer.Write(
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
+                }
+
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;

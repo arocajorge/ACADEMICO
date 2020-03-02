@@ -72,7 +72,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdAnioApertura = ultimo_anio,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
-
+            
             return View(model);
         }
 

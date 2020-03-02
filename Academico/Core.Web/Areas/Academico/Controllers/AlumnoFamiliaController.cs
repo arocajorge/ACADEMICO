@@ -34,6 +34,7 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Metodos
@@ -151,15 +152,26 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_Familia_Info> lista = bus_familia.GetList(IdEmpresa, IdAlumno);
             Lista_Familia.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoFamilia", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_AlumnoFamilia(int IdEmpresa=0, decimal IdAlumno=0)
+        public ActionResult GridViewPartial_AlumnoFamilia(int IdEmpresa=0, decimal IdAlumno=0, bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdAlumno = IdAlumno;
+
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             List<aca_Familia_Info> model = Lista_Familia.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_AlumnoFamilia", model);
         }
@@ -223,6 +235,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdParroquia = "09",
                 CodCatalogoSangre = "O+",
             };
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoFamilia", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdAlumno = IdAlumno;
             cargar_combos();
@@ -298,6 +315,12 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdCiudad_fact = (info_contacto == null ? "09" : info_contacto.IdCiudad);
             model.IdParroquia_fact = (info_contacto == null ? "09" : info_contacto.IdParroquia);
 
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoFamilia", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
+
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
@@ -371,6 +394,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 return RedirectToAction("Index", new { IdEmpresa = IdEmpresa, IdAlumno = IdAlumno });
             ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdAlumno = IdAlumno;
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoFamilia", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos();
             return View(model);
         }
