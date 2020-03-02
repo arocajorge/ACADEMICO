@@ -31,6 +31,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         cxc_ConciliacionNotaCreditoDet_Bus busDet = new cxc_ConciliacionNotaCreditoDet_Bus();
         string Mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Combo bajo demanda Alumno
@@ -82,6 +83,13 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "CuentasPorCobrar", "ConciliacionNC", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
             lstConciliacion.set_list(busConciliacion.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             return View(model);
         }
@@ -90,14 +98,27 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         {
             lstConciliacion.set_list(busConciliacion.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "CuentasPorCobrar", "ConciliacionNC", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_ConciliacionNC()
+        public ActionResult GridViewPartial_ConciliacionNC(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = lstConciliacion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
+
             return PartialView("_GridViewPartial_ConciliacionNC", model);
         }
         #endregion
@@ -175,6 +196,12 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "CuentasPorCobrar", "ConciliacionNC", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
+
             cxc_ConciliacionNotaCredito_Info model = new cxc_ConciliacionNotaCredito_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
@@ -222,6 +249,12 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             var model = busConciliacion.GetInfo(IdEmpresa, IdConciliacion);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "CuentasPorCobrar", "ConciliacionNC", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             SessionFixed.IdAlumno = model.IdAlumno.ToString();
@@ -272,6 +305,12 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             var model = busConciliacion.GetInfo(IdEmpresa, IdConciliacion);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "CuentasPorCobrar", "ConciliacionNC", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             SessionFixed.IdAlumno = model.IdAlumno.ToString();

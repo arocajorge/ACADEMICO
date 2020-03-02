@@ -436,6 +436,13 @@ namespace Core.Web.Areas.Academico.Controllers
             };
 
             cargar_combos();
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Alumno", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
+
             return View(model);
         }
         [HttpPost]
@@ -508,6 +515,15 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Alumno_Info model = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Alumno", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
+
             model.IdTransaccionSession = Convert.ToInt32(SessionFixed.IdTransaccionSessionActual);
             model.lst_alumno_documentos = bus_alumno_documento.GetList(IdEmpresa, IdAlumno, false);
             ListaAlumnoDocumento.set_list(model.lst_alumno_documentos, model.IdTransaccionSession);
@@ -726,6 +742,14 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Alumno_Info model = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
+            if(model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Alumno", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             model.IdTransaccionSession = Convert.ToInt32(SessionFixed.IdTransaccionSessionActual);
             model.lst_alumno_documentos = bus_alumno_documento.GetList(IdEmpresa, IdAlumno, false);
             ListaAlumnoDocumento.set_list(model.lst_alumno_documentos, model.IdTransaccionSession);
