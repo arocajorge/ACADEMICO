@@ -424,7 +424,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
 
-            if (model.lst_det.Where(q => q.dc_ValorProntoPago > 0).Count() > 0)
+            if (ViewBag.MostrarBoton == true && model.lst_det.Where(q => q.dc_ValorProntoPago > 0).Count() > 0)
             {
                 ViewBag.mensaje = "El cobro no se puede modificar ya que aplica pronto pago, debe anular y realizar uno nuevo";
                 ViewBag.MostrarBoton = false;
@@ -452,9 +452,17 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
             #region Validacion Periodo
-            if (!bus_periodo.ValidarFechaTransaccion(IdEmpresa, model.cr_fecha, cl_enumeradores.eModulo.CXC, model.IdSucursal, ref mensaje))
+            if (ViewBag.MostrarBoton == true && !bus_periodo.ValidarFechaTransaccion(IdEmpresa, model.cr_fecha, cl_enumeradores.eModulo.CXC, model.IdSucursal, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
+                ViewBag.MostrarBoton = false;
+            }
+            #endregion
+
+            #region Validacion Movimiento de caja
+            if (ViewBag.MostrarBoton == true && !bus_cobro.ValidarMostrarBotonModificar(IdEmpresa, model.IdSucursal,model.IdCobro))
+            {
+                ViewBag.mensaje = "El cobro no se puede modificar porque el movimiento de caja asociado ya fue depositado o fue registrado al cerrar una caja chica";
                 ViewBag.MostrarBoton = false;
             }
             #endregion
@@ -487,12 +495,15 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
         public ActionResult Anular(int IdEmpresa = 0, int IdSucursal = 0, decimal IdCobro = 0)
         {
+            ViewBag.MostrarBoton = true;
+
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+
             cxc_cobro_Info model = bus_cobro.get_info(IdEmpresa, IdSucursal, IdCobro);
             if (model == null)
                 return RedirectToAction("Index");
@@ -516,12 +527,21 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             #region Validacion Periodo
             ViewBag.MostrarBoton = true;
-            if (!bus_periodo.ValidarFechaTransaccion(IdEmpresa, model.cr_fecha, cl_enumeradores.eModulo.CXC, model.IdSucursal, ref mensaje))
+            if (ViewBag.MostrarBoton == true && !bus_periodo.ValidarFechaTransaccion(IdEmpresa, model.cr_fecha, cl_enumeradores.eModulo.CXC, model.IdSucursal, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
                 ViewBag.MostrarBoton = false;
             }
             #endregion
+
+            #region Validacion Movimiento de caja
+            if (ViewBag.MostrarBoton == true && !bus_cobro.ValidarMostrarBotonModificar(IdEmpresa, model.IdSucursal, model.IdCobro))
+            {
+                ViewBag.mensaje = "El cobro no se puede modificar porque el movimiento de caja asociado ya fue depositado o fue registrado al cerrar una caja chica";
+                ViewBag.MostrarBoton = false;
+            }
+            #endregion
+
 
             return View(model);
         }

@@ -52,13 +52,11 @@ namespace Core.Data.Base
         public virtual DbSet<aca_AnioLectivo_Curso_Paralelo> aca_AnioLectivo_Curso_Paralelo { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Curso_Paralelo> vwaca_AnioLectivo_Curso_Paralelo { get; set; }
         public virtual DbSet<aca_Menu_x_seg_usuario> aca_Menu_x_seg_usuario { get; set; }
-        public virtual DbSet<aca_MecanismoDePago> aca_MecanismoDePago { get; set; }
         public virtual DbSet<aca_PermisoMatricula> aca_PermisoMatricula { get; set; }
         public virtual DbSet<aca_Rubro> aca_Rubro { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Jornada_Curso> vwaca_AnioLectivo_Jornada_Curso { get; set; }
         public virtual DbSet<vwaca_Plantilla_Rubro_Matricula> vwaca_Plantilla_Rubro_Matricula { get; set; }
         public virtual DbSet<vwaca_PermisoMatricula> vwaca_PermisoMatricula { get; set; }
-        public virtual DbSet<vwaca_MecanismoDePago> vwaca_MecanismoDePago { get; set; }
         public virtual DbSet<aca_AlumnoRetiro> aca_AlumnoRetiro { get; set; }
         public virtual DbSet<vwaca_AlumnoRetiro> vwaca_AlumnoRetiro { get; set; }
         public virtual DbSet<aca_CatalogoFicha> aca_CatalogoFicha { get; set; }
@@ -106,6 +104,8 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_MatriculaCondicional> vwaca_MatriculaCondicional { get; set; }
         public virtual DbSet<aca_MatriculaCondicional_Det> aca_MatriculaCondicional_Det { get; set; }
         public virtual DbSet<vwaca_MatriculaCondicional_Det> vwaca_MatriculaCondicional_Det { get; set; }
+        public virtual DbSet<aca_MecanismoDePago> aca_MecanismoDePago { get; set; }
+        public virtual DbSet<vwaca_MecanismoDePago> vwaca_MecanismoDePago { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

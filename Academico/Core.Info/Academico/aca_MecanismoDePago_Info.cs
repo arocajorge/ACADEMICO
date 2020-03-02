@@ -29,6 +29,8 @@ namespace Core.Info.Academico
 
         #region Campos que no existen en la tabla
         public string nom_TerminoPago { get; set; }
+        public string No_Descripcion { get; set; }
+        public int? IdTipoNotaDescuentoPorRol { get; set; }
         #endregion
     }
 }

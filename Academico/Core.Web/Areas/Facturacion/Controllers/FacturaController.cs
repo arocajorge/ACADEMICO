@@ -677,6 +677,14 @@ namespace Core.Web.Areas.Facturacion.Controllers
             }
             #endregion
 
+            #region Validacion si tiene cobros
+            if (ViewBag.MostrarBoton == true && !bus_factura.ValidarDocumentoAnulacion(model.IdEmpresa, model.IdSucursal, model.IdBodega, model.IdCbteVta, model.vt_tipoDoc, ref mensaje))
+            {
+                ViewBag.mensaje = "El documento tiene cobros realizados, por favor anule los cobros primero";
+                ViewBag.MostrarBoton = false;
+            }
+            #endregion
+
             return View(model);
         }
 

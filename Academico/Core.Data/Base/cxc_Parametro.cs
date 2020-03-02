@@ -25,5 +25,7 @@ namespace Core.Data.Base
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> FechaUltMod { get; set; }
         public Nullable<int> IdTipoNotaProntoPago { get; set; }
+    
+        public virtual fa_TipoNota fa_TipoNota { get; set; }
     }
 }

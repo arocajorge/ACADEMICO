@@ -20,5 +20,6 @@ namespace Core.Data.Base
         public string IdTerminoPago { get; set; }
         public string nom_TerminoPago { get; set; }
         public Nullable<bool> Estado { get; set; }
+        public string No_Descripcion { get; set; }
     }
 }

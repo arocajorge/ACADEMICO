@@ -39,5 +39,6 @@ namespace Core.Data.Base
         public Nullable<decimal> IdCliente { get; set; }
         public string pe_nombreCompleto { get; set; }
         public System.DateTime fecha_cruce { get; set; }
+        public Nullable<double> ValorProntoPago { get; set; }
     }
 }

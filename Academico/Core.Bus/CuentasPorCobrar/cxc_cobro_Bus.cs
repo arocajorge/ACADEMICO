@@ -147,5 +147,18 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
+
+        public bool ValidarMostrarBotonModificar(int IdEmpresa, int IdSucursal, decimal IdCobro)
+        {
+            try
+            {
+                return odata.ValidarMostrarBotonModificar(IdEmpresa, IdSucursal, IdCobro);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

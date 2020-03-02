@@ -21,6 +21,8 @@ namespace Core.Info.Facturacion
         public string NumDocumento { get; set; }
         public double Valor_Aplicado { get; set; }
         public System.DateTime fecha_cruce { get; set; }
+        public double ValorProntoPago { get; set; }
+
         #region Campos que no existen en la tabla
         public string secuencial { get; set; }
         public string vt_NumDocumento { get; set; }
@@ -32,6 +34,7 @@ namespace Core.Info.Facturacion
         public string Observacion { get; set; }
         public bool seleccionado { get; set; }
         public double Saldo_final { get; set; }
+        public int? IdPuntoVta { get; set; }
         #endregion
 
     }

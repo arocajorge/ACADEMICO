@@ -25,7 +25,8 @@ namespace Core.Data.Academico
                         NombreMecanismo = q.NombreMecanismo,
                         IdTerminoPago = q.IdTerminoPago,
                         nom_TerminoPago = q.nom_TerminoPago,
-                        Estado = q.Estado
+                        Estado = q.Estado,
+                        No_Descripcion = q.No_Descripcion
                     }).ToList();
                 }
                 return Lista;
@@ -54,6 +55,7 @@ namespace Core.Data.Academico
                         IdMecanismo = Entity.IdMecanismo,
                         NombreMecanismo = Entity.NombreMecanismo,
                         IdTerminoPago = Entity.IdTerminoPago,
+                        IdTipoNotaDescuentoPorRol = Entity.IdTipoNotaDescuentoPorRol
                     };
                 }
 
@@ -100,6 +102,7 @@ namespace Core.Data.Academico
                         IdMecanismo = info.IdMecanismo = getId(info.IdEmpresa),
                         NombreMecanismo = info.NombreMecanismo,
                         IdTerminoPago = info.IdTerminoPago,
+                        IdTipoNotaDescuentoPorRol = info.IdTipoNotaDescuentoPorRol,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now
@@ -129,6 +132,7 @@ namespace Core.Data.Academico
 
                     Entity.NombreMecanismo = info.NombreMecanismo;
                     Entity.IdTerminoPago = info.IdTerminoPago;
+                    Entity.IdTipoNotaDescuentoPorRol = info.IdTipoNotaDescuentoPorRol;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
 

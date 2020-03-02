@@ -345,6 +345,7 @@ namespace Core.Data.Facturacion
                             vt_tipoDoc = item.vt_tipoDoc,
                             Valor_Aplicado = item.Valor_Aplicado,
                             fecha_cruce = DateTime.Now,
+                            ValorProntoPago = item.ValorProntoPago
                         });
                     }
                     #endregion
@@ -609,6 +610,7 @@ namespace Core.Data.Facturacion
                             vt_tipoDoc = item.vt_tipoDoc,
                             Valor_Aplicado = item.Valor_Aplicado,
                             fecha_cruce = DateTime.Now,
+                            ValorProntoPago = item.ValorProntoPago
                         });
                     }
                     #endregion
@@ -862,7 +864,8 @@ namespace Core.Data.Facturacion
                         IdBodega_Cbte = item.IdBodega_fac_nd_doc_mod,
                         IdCbte_vta_nota = item.IdCbteVta_fac_nd_doc_mod,
                         dc_TipoDocumento = item.vt_tipoDoc,
-                        dc_ValorPago = item.Valor_Aplicado,                        
+                        dc_ValorPago = item.Valor_Aplicado,  
+                        dc_ValorProntoPago = item.ValorProntoPago                      
                     });
                 }
 

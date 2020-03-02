@@ -726,7 +726,7 @@
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\cxc_Parametro.cs">
-      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\fa_catalogo.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>

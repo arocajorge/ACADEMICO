@@ -14,6 +14,7 @@ namespace Core.Data.Facturacion
 {
    public class fa_factura_Data
     {
+        fa_notaCreDeb_Data odatNc = new fa_notaCreDeb_Data();
         public List<fa_factura_consulta_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
@@ -178,8 +179,6 @@ namespace Core.Data.Facturacion
                 int secuencia = 1;
                 ct_cbtecble_Data data_ct = new ct_cbtecble_Data();
                 #endregion
-
-                #region Factura
 
                 #region Cabecera
                 var factura = new fa_factura
@@ -367,8 +366,17 @@ namespace Core.Data.Facturacion
                 }
                 #endregion
 
-                #endregion
+                #region Descuento por rol
+                var Nc = ArmarNotaCreditoDescuentoPorRol(info);
+                if (Nc != null)
+                {
+                    if(odatNc.guardarDB(Nc))
+                    {
 
+                    }
+                }
+                #endregion
+                
                 db_f.Dispose();
                 db_a.Dispose();
                 return true;
@@ -821,6 +829,122 @@ namespace Core.Data.Facturacion
                 }
 
                 return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public fa_notaCreDeb_Info ArmarNotaCreditoDescuentoPorRol(fa_factura_Info info)
+        {
+            try
+            {
+                EntitiesCuentasPorCobrar dbCxc = new EntitiesCuentasPorCobrar();
+                EntitiesFacturacion dbFac = new EntitiesFacturacion();
+                EntitiesAcademico dbACA = new EntitiesAcademico();
+
+                var TerminoPago = dbFac.fa_TerminoPago.Where(q => q.IdTerminoPago == info.vt_tipo_venta).FirstOrDefault();
+                if (TerminoPago == null)
+                    return null;
+
+                if (!(TerminoPago.AplicaDescuentoNomina ?? false))
+                    return null;
+
+                var MecanismoPago = dbACA.aca_MecanismoDePago.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTerminoPago == info.vt_tipo_venta).FirstOrDefault();
+                if (MecanismoPago == null || MecanismoPago.IdTerminoPago == null)
+                    return null;
+
+                var TipoNota = dbFac.fa_TipoNota.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoNota == MecanismoPago.IdTipoNotaDescuentoPorRol).FirstOrDefault();
+                if (TipoNota == null)
+                    return null;
+
+                if (TipoNota.IdProducto == null)
+                    return null;
+                
+                var PuntoVta = dbFac.vwfa_PuntoVta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdPuntoVta == info.IdPuntoVta).FirstOrDefault();
+                if (PuntoVta == null)
+                    return null;
+
+                PuntoVta = dbFac.vwfa_PuntoVta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.cod_PuntoVta == PuntoVta.cod_PuntoVta && q.codDocumentoTipo == "NTCR").FirstOrDefault();
+                if (PuntoVta == null)
+                    return null;
+                
+                fa_notaCreDeb_Info Retorno = new fa_notaCreDeb_Info
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdSucursal = info.IdSucursal,
+                    IdBodega = info.IdBodega,
+                    IdPuntoVta = PuntoVta.IdPuntoVta,
+                    CodNota = "DsctoPorRol",
+                    CreDeb = "C",
+                    CodDocumentoTipo = "NTCR",
+                    Serie1 = null,
+                    Serie2 = null,
+                    NumAutorizacion = null,
+                    NumNota_Impresa = null,
+                    Fecha_Autorizacion = null,
+                    IdCliente = info.IdCliente,
+                    IdAlumno = info.IdAlumno,
+                    no_fecha = DateTime.Now.Date,
+                    no_fecha_venc = DateTime.Now.Date,
+                    IdTipoNota = TipoNota.IdTipoNota,
+                    sc_observacion = "NC por dscto. por rol " + info.vt_tipo_venta + " "+ info.vt_NumFactura + " " + info.vt_Observacion,
+                    NaturalezaNota = "INT",
+                    IdCtaCble_TipoNota = TipoNota.IdCtaCble,
+                    IdCobro_tipo = "NTCR",
+                    IdUsuario = info.IdUsuario,
+                    IdUsuarioUltMod = info.IdUsuarioUltModi,
+                    info_resumen = new fa_notaCreDeb_resumen_Info(),
+                    lst_det = new List<fa_notaCreDeb_det_Info>(),
+                    lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>()
+                };
+
+                Retorno.lst_det.Add(new fa_notaCreDeb_det_Info
+                {
+                    IdProducto = TipoNota.IdProducto ?? 0,
+                    sc_cantidad = 1,
+                    sc_cantidad_factura = null,
+                    sc_Precio = Convert.ToDouble(info.info_resumen.ValorProntoPago),
+                    sc_precioFinal = Convert.ToDouble(info.info_resumen.ValorProntoPago),
+                    sc_descUni = 0,
+                    sc_PordescUni = 0,
+                    vt_por_iva = 0,
+                    IdCod_Impuesto_Iva = "IVA0",
+                    sc_iva = 0,
+                    sc_subtotal = Convert.ToDouble(info.info_resumen.ValorProntoPago),
+                    sc_total = Convert.ToDouble(info.info_resumen.ValorProntoPago)
+                });
+
+                Retorno.lst_cruce.Add(new fa_notaCreDeb_x_fa_factura_NotaDeb_Info
+                {
+                    IdEmpresa_fac_nd_doc_mod = info.IdEmpresa,
+                    IdSucursal_fac_nd_doc_mod = info.IdSucursal,
+                    IdBodega_fac_nd_doc_mod = info.IdBodega,
+                    IdCbteVta_fac_nd_doc_mod = info.IdCbteVta,
+                    vt_tipoDoc = info.vt_tipoDoc,
+                    Valor_Aplicado = Convert.ToDouble(info.info_resumen.ValorProntoPago),
+                    ValorProntoPago = Convert.ToDouble(info.info_resumen.Total - info.info_resumen.ValorProntoPago),
+                    fecha_cruce = DateTime.Now.Date
+                });
+
+                Retorno.info_resumen = new fa_notaCreDeb_resumen_Info
+                {
+                    SubtotalIVASinDscto = 0,
+                    SubtotalSinIVASinDscto = Convert.ToDecimal(info.info_resumen.ValorProntoPago),
+                    SubtotalSinDscto = Convert.ToDecimal(info.info_resumen.ValorProntoPago),
+                    Descuento = 0,
+                    SubtotalIVAConDscto = 0,
+                    SubtotalSinIVAConDscto = Convert.ToDecimal(info.info_resumen.ValorProntoPago),
+                    SubtotalConDscto = Convert.ToDecimal(info.info_resumen.ValorProntoPago),
+                    IdCod_Impuesto_IVA = "IVA0",
+                    ValorIVA = 0,
+                    Total = Convert.ToDecimal(info.info_resumen.ValorProntoPago),
+                    PorIva = 0
+                };
+
+                return Retorno;
             }
             catch (Exception)
             {

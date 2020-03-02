@@ -19,6 +19,7 @@ namespace Core.Web.Areas.Academico.Controllers
         fa_TerminoPago_Bus bus_termino = new fa_TerminoPago_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+        fa_TipoNota_Bus bus_tiponota = new fa_TipoNota_Bus();
         #endregion
 
         #region Index
@@ -68,6 +69,9 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_termino = bus_termino.get_list(false);
             ViewBag.lst_termino = lst_termino;
+
+            var lst_tipo_nota_credito = bus_tiponota.get_list(IdEmpresa, "C", false);
+            ViewBag.lst_tipo_nota_credito = lst_tipo_nota_credito;
         }
         #endregion
 

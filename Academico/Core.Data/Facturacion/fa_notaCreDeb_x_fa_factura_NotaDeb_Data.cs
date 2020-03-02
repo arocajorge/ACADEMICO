@@ -171,7 +171,8 @@ namespace Core.Data.Facturacion
                                  Saldo_final = q.saldo,
                                  seleccionado = true,
                                  Valor_Aplicado = q.Valor_Aplicado,
-                                 NumDocumento = null
+                                 NumDocumento = null,
+                                 ValorProntoPago = q.ValorProntoPago ?? 0
                              }).ToList();
                 }
                 Lista.ForEach(q => { q.secuencial = q.vt_tipoDoc + "-" + q.IdBodega_fac_nd_doc_mod.ToString() + "-" + q.IdCbteVta_fac_nd_doc_mod.ToString(); });

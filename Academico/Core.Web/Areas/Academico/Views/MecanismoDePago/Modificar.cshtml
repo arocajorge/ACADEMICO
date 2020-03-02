@@ -59,7 +59,27 @@
                     @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-7 col-md-1">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pa_IdTipoCbteCble_CxC">Tipo de nota de credito para descuento por rol</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoNotaDescuentoPorRol, settings =>
+                            {
+                                settings.Name = "IdTipoNotaDescuentoPorRol";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                settings.Properties.Columns.Add("No_Descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdTipoNota";
+                                settings.Properties.ValueType = typeof(int);
+                                settings.Properties.TextField = "No_Descripcion";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            }).BindList(ViewBag.lst_tipo_nota_credito).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoNotaDescuentoPorRol, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-1">
                 <div class="form-group">
                     <label for="IdSucursal">&nbsp;</label>
                     <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","MecanismoDePago",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">

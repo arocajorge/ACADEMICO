@@ -1346,5 +1346,37 @@ namespace Core.Data.CuentasPorCobrar
                 throw;
             }
         }
+
+        public bool ValidarMostrarBotonModificar(int IdEmpresa, int IdSucursal, decimal IdCobro)
+        {
+            try
+            {
+                int cont = 0;
+                EntitiesCaja db = new EntitiesCaja();
+                EntitiesBanco dbb = new EntitiesBanco();
+                EntitiesCuentasPorCobrar dbcxc = new EntitiesCuentasPorCobrar();
+
+                var Rel = dbcxc.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == IdEmpresa && q.cbr_IdSucursal == IdSucursal && q.cbr_IdCobro == IdCobro).FirstOrDefault();
+                if (Rel != null)
+                {
+                    cont = db.cp_conciliacion_Caja_det_Ing_Caja.Where(q => q.IdEmpresa_movcaj == IdEmpresa
+                    && q.IdTipocbte_movcaj == Rel.ct_IdTipoCbte && q.IdCbteCble_movcaj == Rel.ct_IdCbteCble).Count();
+
+                    if (cont != 0)
+                        return false;
+
+                    cont = dbb.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.Where(q => q.mcj_IdEmpresa == IdEmpresa
+                    && q.mcj_IdTipocbte == Rel.ct_IdTipoCbte && q.mcj_IdCbteCble == Rel.ct_IdCbteCble).Count();
+
+                    if (cont != 0)
+                        return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
