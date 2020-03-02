@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_alumno";
-        settings.CallbackRouteValues = new { Controller = "Alumno", Action = "GridViewPartial_alumno" };
+        settings.CallbackRouteValues = new { Controller = "Alumno", Action = "GridViewPartial_alumno",  Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.KeyFieldName = "IdAlumno";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
@@ -65,14 +65,14 @@
                     if (ViewBag.Modificar == true)
                     {
                         ViewContext.Writer.Write(
-                            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") }) + "&nbsp;" 
+                            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") }) + "&nbsp;"
                         );
                     }
                     if (ViewBag.Anular == true)
                     {
                         ViewContext.Writer.Write(
                             Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }) 
+                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
                         );
                     }
                 }
