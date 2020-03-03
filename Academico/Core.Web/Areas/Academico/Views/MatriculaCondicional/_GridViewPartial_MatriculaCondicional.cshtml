@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_MatriculaCondicional";
-        settings.CallbackRouteValues = new { Controller = "MatriculaCondicional", Action = "GridViewPartial_MatriculaCondicional" };
+        settings.CallbackRouteValues = new { Controller = "MatriculaCondicional", Action = "GridViewPartial_MatriculaCondicional", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdMatriculaCondicional";
         //Configuración para que la grilla no muestre texto completo
@@ -62,18 +62,28 @@
             {
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
-                    ViewContext.Writer.Write(
-                        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatriculaCondicional = DataBinder.Eval(tc.DataItem, "IdMatriculaCondicional") }) + "&nbsp;"+
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatriculaCondicional = DataBinder.Eval(tc.DataItem, "IdMatriculaCondicional") },
-                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
+                    if (ViewBag.Modificar == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatriculaCondicional = DataBinder.Eval(tc.DataItem, "IdMatriculaCondicional") }));
+                        ViewContext.Writer.Write("&nbsp;");
+                    }
+                    if (ViewBag.Anular == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatriculaCondicional = DataBinder.Eval(tc.DataItem, "IdMatriculaCondicional") },
+                    new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                    }
                 }
             });
+
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
+                if (ViewBag.Nuevo == true)
+                {
+                    ViewContext.Writer.Write(
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
+                }
+
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
@@ -84,7 +94,7 @@
         settings.Columns.Add("Alumno", "Alumno").Width = Unit.Percentage(25);
         settings.Columns.Add("NomCatalogo", "Tipo de Condicional").Width = Unit.Percentage(12);
         settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(25);
-        
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";

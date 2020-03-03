@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_NegarMatricula";
-        settings.CallbackRouteValues = new { Controller = "NegarMatricula", Action = "GridViewPartial_NegarMatricula" };
+        settings.CallbackRouteValues = new { Controller = "NegarMatricula", Action = "GridViewPartial_NegarMatricula", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdPermiso";
         //Configuración para que la grilla no muestre texto completo
@@ -62,18 +62,28 @@
             {
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
-                    ViewContext.Writer.Write(
-                        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPermiso = DataBinder.Eval(tc.DataItem, "IdPermiso") }) + "&nbsp;"+
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPermiso = DataBinder.Eval(tc.DataItem, "IdPermiso") },
-                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
+                    if (ViewBag.Modificar == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPermiso = DataBinder.Eval(tc.DataItem, "IdPermiso") }));
+                        ViewContext.Writer.Write("&nbsp;");
+                    }
+                    if (ViewBag.Anular == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPermiso = DataBinder.Eval(tc.DataItem, "IdPermiso") },
+                    new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                    }
                 }
             });
+
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
+                if (ViewBag.Nuevo == true)
+                {
+                    ViewContext.Writer.Write(
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
+                }
+
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
@@ -84,7 +94,7 @@
         settings.Columns.Add("Alumno", "Alumno").Width = Unit.Percentage(30);
         settings.Columns.Add("IdUsuarioCreacion", "Usuario").Width = Unit.Percentage(10);
         settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(20);
-        
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";

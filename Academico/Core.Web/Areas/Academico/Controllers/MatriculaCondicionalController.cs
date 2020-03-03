@@ -27,6 +27,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_MatriculaCondicional_Det_List Lista_CondicionalDet = new aca_MatriculaCondicional_Det_List();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -69,7 +70,12 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_MatriculaCondicional_Info> lista = bus_condicional.GetList(model.IdEmpresa, model.IdAnio, true);
             Lista_MatriculaCondicional.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MatriculaCondicional", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View(model);
         }
 
@@ -78,16 +84,24 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             List<aca_MatriculaCondicional_Info> lista = bus_condicional.GetList(model.IdEmpresa, model.IdAnio, true);
             Lista_MatriculaCondicional.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MatriculaCondicional", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_MatriculaCondicional()
+        public ActionResult GridViewPartial_MatriculaCondicional(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             List<aca_MatriculaCondicional_Info> model = Lista_MatriculaCondicional.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_MatriculaCondicional", model);
         }
         #endregion
@@ -167,6 +181,11 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_pararafo = bus_condicional_det.getList(model.IdEmpresa,model.IdCatalogoCONDIC);
             Lista_CondicionalDet.set_list(lst_pararafo, model.IdTransaccionSession);
             cargar_combos();
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info inf = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MatriculaCondicional", "Index");
+            if (!inf.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
 
@@ -206,7 +225,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MatriculaCondicional", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
@@ -254,7 +277,11 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_MatriculaCondicional_Info model = bus_condicional.GetInfo(IdEmpresa, IdMatriculaCondicional);
             if (model == null)
                 return RedirectToAction("Index");
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MatriculaCondicional", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_detalle = bus_condicional_det.getList(model.IdEmpresa, model.IdMatriculaCondicional);
             Lista_CondicionalDet.set_list(model.lst_detalle, model.IdTransaccionSession);

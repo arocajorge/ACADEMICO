@@ -60,11 +60,11 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_PermitirMatricula")
+            @Html.Action("GridViewPartial_PermitirMatricula", new {Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular})
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            [@Session["IdEmpresa"]] @Session["nom_empresa"]
+            [@Core.Web.Helps.SessionFixed.IdEmpresa] @Core.Web.Helps.SessionFixed.NomEmpresa
         </div>
         <!-- /.box-footer-->
     </div>
