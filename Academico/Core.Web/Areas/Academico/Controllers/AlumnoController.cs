@@ -567,7 +567,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 var existe_cliente_padre = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, info_fam_padre.pe_cedulaRuc);
                 var cliente = bus_cliente.get_info(model.IdEmpresa, existe_cliente_padre.IdCliente);
-                info_fam_padre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "" : cliente.IdTipoCredito);
+                info_fam_padre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "CON" : cliente.IdTipoCredito);
                 info_fam_padre.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0 )? 1 : cliente.Idtipo_cliente);
                 var IdClientePadre = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
                 var info_contacto_padre = bus_cliente_cont.get_info(model.IdEmpresa, IdClientePadre, 1);
@@ -587,7 +587,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 var existe_cliente_madre = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, info_fam_madre.pe_cedulaRuc);
                 var cliente = bus_cliente.get_info(model.IdEmpresa, existe_cliente_madre.IdCliente);
-                info_fam_madre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "" : cliente.IdTipoCredito);
+                info_fam_madre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "CON" : cliente.IdTipoCredito);
                 info_fam_madre.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
                 var IdClienteMadre = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
                 var info_contacto_madre = bus_cliente_cont.get_info(model.IdEmpresa, IdClienteMadre, 1);
@@ -797,7 +797,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 var existe_cliente_padre = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, info_fam_padre.pe_cedulaRuc);
                 var cliente = bus_cliente.get_info(model.IdEmpresa, existe_cliente_padre.IdCliente);
-                info_fam_padre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "" : cliente.IdTipoCredito);
+                info_fam_padre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "CON" : cliente.IdTipoCredito);
                 info_fam_padre.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
                 var IdClientePadre = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
                 var info_contacto_padre = bus_cliente_cont.get_info(model.IdEmpresa, IdClientePadre, 1);
@@ -813,7 +813,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 var existe_cliente_madre = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, info_fam_madre.pe_cedulaRuc);
                 var cliente = bus_cliente.get_info(model.IdEmpresa, existe_cliente_madre.IdCliente);
-                info_fam_madre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "" : cliente.IdTipoCredito);
+                info_fam_madre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "CON" : cliente.IdTipoCredito);
                 info_fam_madre.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
                 var IdClienteMadre = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
                 var info_contacto_madre = bus_cliente_cont.get_info(model.IdEmpresa, IdClienteMadre, 1);

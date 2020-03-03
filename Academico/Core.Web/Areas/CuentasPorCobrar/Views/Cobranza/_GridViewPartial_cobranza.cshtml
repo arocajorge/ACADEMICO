@@ -73,7 +73,6 @@
                 {
                     if (ViewBag.Modificar == true)
                     {
-
                         ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdCobro = DataBinder.Eval(tc.DataItem, "IdCobro") }));
                         ViewContext.Writer.Write("&nbsp;");
                     }

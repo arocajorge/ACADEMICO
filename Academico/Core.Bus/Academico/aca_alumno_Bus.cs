@@ -190,7 +190,7 @@ namespace Core.Bus.Academico
                             var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc_padre);
                             var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
 
-                            if (cliente == null || cliente.IdCliente== 0)
+                            if (cliente == null)
                             {
                                 fa_cliente_Info info_cliente = new fa_cliente_Info
                                 {
@@ -340,7 +340,7 @@ namespace Core.Bus.Academico
                             var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc_padre);
                             var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
 
-                            if (cliente == null || cliente.IdCliente == 0)
+                            if (cliente == null)
                             {
                                 fa_cliente_Info info_cliente = new fa_cliente_Info
                                 {
@@ -505,7 +505,7 @@ namespace Core.Bus.Academico
                             var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc_padre);
                             var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
 
-                            if (cliente == null || cliente.IdCliente == 0)
+                            if (cliente == null)
                             {
                                 fa_cliente_Info info_cliente = new fa_cliente_Info
                                 {
@@ -646,7 +646,7 @@ namespace Core.Bus.Academico
                             var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.pe_cedulaRuc_madre);
                             var cliente = odata_cliente.get_info(info.IdEmpresa, existe_cliente.IdCliente);
 
-                            if (cliente == null || cliente.IdCliente == 0)
+                            if (cliente == null)
                             {
                                 fa_cliente_Info info_cliente = new fa_cliente_Info
                                 {
