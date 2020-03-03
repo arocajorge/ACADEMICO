@@ -27,7 +27,6 @@ namespace Core.Data.Base
     
         public virtual DbSet<caj_Caja_Movimiento> caj_Caja_Movimiento { get; set; }
         public virtual DbSet<caj_Caja_Movimiento_det> caj_Caja_Movimiento_det { get; set; }
-        public virtual DbSet<caj_Caja> caj_Caja { get; set; }
         public virtual DbSet<caj_catalogo> caj_catalogo { get; set; }
         public virtual DbSet<caj_catalogo_tipo> caj_catalogo_tipo { get; set; }
         public virtual DbSet<caj_parametro> caj_parametro { get; set; }
@@ -43,6 +42,7 @@ namespace Core.Data.Base
         public virtual DbSet<vwcaj_Caja_Movimiento_x_Conciliar> vwcaj_Caja_Movimiento_x_Conciliar { get; set; }
         public virtual DbSet<vwcp_conciliacion_Caja_det> vwcp_conciliacion_Caja_det { get; set; }
         public virtual DbSet<vwcp_conciliacion_Caja_det_x_ValeCaja> vwcp_conciliacion_Caja_det_x_ValeCaja { get; set; }
+        public virtual DbSet<caj_Caja> caj_Caja { get; set; }
         public virtual DbSet<caj_Caja_x_seg_usuario> caj_Caja_x_seg_usuario { get; set; }
     }
 }

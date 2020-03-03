@@ -30,5 +30,6 @@ namespace Core.Data.Base
         public int IdCaja { get; set; }
         public string ca_Descripcion { get; set; }
         public int cbr_IdSucursal { get; set; }
+        public string IdUsuario { get; set; }
     }
 }

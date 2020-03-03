@@ -74,7 +74,8 @@ namespace Core.Data.Banco
                                  pe_nombreCompleto = q.pe_nombreCompleto,
                                  cr_NumDocumento = q.cr_NumDocumento,
                                  IdCtaCble = q.IdCtaCble,
-                                 ca_Descripcion = q.ca_Descripcion
+                                 ca_Descripcion = q.ca_Descripcion,
+                                 IdUsuario = q.IdUsuario
                              }).ToList();
                 }
 

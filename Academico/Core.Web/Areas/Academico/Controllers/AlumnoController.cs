@@ -567,12 +567,12 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 var existe_cliente_padre = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, info_fam_padre.pe_cedulaRuc);
                 var cliente = bus_cliente.get_info(model.IdEmpresa, existe_cliente_padre.IdCliente);
-                model.IdTipoCredito_padre = ((cliente == null || cliente.Idtipo_cliente == 0) ? "" : cliente.IdTipoCredito);
-                model.Idtipo_cliente_padre = ((cliente == null || cliente.Idtipo_cliente == 0 )? 1 : cliente.Idtipo_cliente);
+                info_fam_padre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "" : cliente.IdTipoCredito);
+                info_fam_padre.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0 )? 1 : cliente.Idtipo_cliente);
                 var IdClientePadre = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
                 var info_contacto_padre = bus_cliente_cont.get_info(model.IdEmpresa, IdClientePadre, 1);
-                model.IdCiudad_padre = (info_contacto_padre == null ? "09" : info_contacto_padre.IdCiudad);
-                model.IdParroquia_padre = (info_contacto_padre == null ? "09" : info_contacto_padre.IdParroquia);
+                info_fam_padre.IdCiudad_fact = (info_contacto_padre == null ? "09" : info_contacto_padre.IdCiudad);
+                info_fam_padre.IdParroquia_fact = (info_contacto_padre == null ? "09" : info_contacto_padre.IdParroquia);
             }
 
             if (info_fam_madre == null)
@@ -587,12 +587,12 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 var existe_cliente_madre = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, info_fam_madre.pe_cedulaRuc);
                 var cliente = bus_cliente.get_info(model.IdEmpresa, existe_cliente_madre.IdCliente);
-                model.IdTipoCredito_madre = ((cliente == null || cliente.Idtipo_cliente == 0) ? "" : cliente.IdTipoCredito);
-                model.Idtipo_cliente_madre = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
+                info_fam_madre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "" : cliente.IdTipoCredito);
+                info_fam_madre.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
                 var IdClienteMadre = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
                 var info_contacto_madre = bus_cliente_cont.get_info(model.IdEmpresa, IdClienteMadre, 1);
-                model.IdCiudad_madre = (info_contacto_madre == null ? "09" : info_contacto_madre.IdCiudad);
-                model.IdParroquia_madre = (info_contacto_madre == null ? "09" : info_contacto_madre.IdParroquia);
+                info_fam_madre.IdCiudad_fact = (info_contacto_madre == null ? "09" : info_contacto_madre.IdCiudad);
+                info_fam_madre.IdParroquia_fact = (info_contacto_madre == null ? "09" : info_contacto_madre.IdParroquia);
             }
 
             model.IdPersona_padre = info_fam_padre.IdPersona;
@@ -797,12 +797,12 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 var existe_cliente_padre = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, info_fam_padre.pe_cedulaRuc);
                 var cliente = bus_cliente.get_info(model.IdEmpresa, existe_cliente_padre.IdCliente);
-                model.IdTipoCredito_padre = ((cliente == null || cliente.Idtipo_cliente == 0) ? "" : cliente.IdTipoCredito);
-                model.Idtipo_cliente_padre = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
+                info_fam_padre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "" : cliente.IdTipoCredito);
+                info_fam_padre.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
                 var IdClientePadre = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
                 var info_contacto_padre = bus_cliente_cont.get_info(model.IdEmpresa, IdClientePadre, 1);
-                model.IdCiudad_padre = (info_contacto_padre == null ? "09" : info_contacto_padre.IdCiudad);
-                model.IdParroquia_padre = (info_contacto_padre == null ? "09" : info_contacto_padre.IdParroquia);
+                info_fam_padre.IdCiudad_fact = (info_contacto_padre == null ? "09" : info_contacto_padre.IdCiudad);
+                info_fam_padre.IdParroquia_fact = (info_contacto_padre == null ? "09" : info_contacto_padre.IdParroquia);
             }
 
             if (info_fam_madre == null)
@@ -813,12 +813,12 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 var existe_cliente_madre = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, info_fam_madre.pe_cedulaRuc);
                 var cliente = bus_cliente.get_info(model.IdEmpresa, existe_cliente_madre.IdCliente);
-                model.IdTipoCredito_madre = ((cliente == null || cliente.Idtipo_cliente == 0) ? "" : cliente.IdTipoCredito);
-                model.Idtipo_cliente_madre = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
+                info_fam_madre.IdTipoCredito = ((cliente == null || cliente.IdTipoCredito == "") ? "" : cliente.IdTipoCredito);
+                info_fam_madre.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
                 var IdClienteMadre = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
                 var info_contacto_madre = bus_cliente_cont.get_info(model.IdEmpresa, IdClienteMadre, 1);
-                model.IdCiudad_madre = (info_contacto_madre == null ? "09" : info_contacto_madre.IdCiudad);
-                model.IdParroquia_madre = (info_contacto_madre == null ? "09" : info_contacto_madre.IdParroquia);
+                info_fam_madre.IdCiudad_fact = (info_contacto_madre == null ? "09" : info_contacto_madre.IdCiudad);
+                info_fam_madre.IdParroquia_fact = (info_contacto_madre == null ? "09" : info_contacto_madre.IdParroquia);
             }
 
             model.IdPersona_padre = info_fam_padre.IdPersona;
@@ -842,6 +842,10 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdReligion_padre = info_fam_padre.IdReligion;
             model.AsisteCentroCristiano_padre = info_fam_padre.AsisteCentroCristiano;
             model.EstaFallecido_padre = info_fam_padre.EstaFallecido;
+            model.IdTipoCredito_padre = (info_fam_padre.IdTipoCredito == null ? "CON" : info_fam_padre.IdTipoCredito);
+            model.Idtipo_cliente_padre = (info_fam_padre.Idtipo_cliente == 0 ? 1 : info_fam_padre.Idtipo_cliente);
+            model.IdCiudad_padre = info_fam_padre.IdCiudad_fact;
+            model.IdParroquia_padre = info_fam_padre.IdParroquia_fact;
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
             model.SeFactura_madre = info_fam_madre.SeFactura;
@@ -864,6 +868,10 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdReligion_madre = info_fam_madre.IdReligion;
             model.AsisteCentroCristiano_madre = info_fam_madre.AsisteCentroCristiano;
             model.EstaFallecido_madre = info_fam_madre.EstaFallecido;
+            model.IdTipoCredito_madre = (info_fam_madre.IdTipoCredito == null ? "CON" : info_fam_madre.IdTipoCredito);
+            model.Idtipo_cliente_madre = (info_fam_madre.Idtipo_cliente == 0 ? 1 : info_fam_madre.Idtipo_cliente);
+            model.IdCiudad_madre = info_fam_madre.IdCiudad_fact;
+            model.IdParroquia_madre = info_fam_madre.IdParroquia_fact;
 
             if (model == null)
                 return RedirectToAction("Index");

@@ -153,7 +153,7 @@ namespace Core.Web.Areas.Academico.Controllers
             Lista_Familia.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoFamilia", "Index");
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Alumno", "Index");
             ViewBag.Nuevo = info.Nuevo;
             ViewBag.Modificar = info.Modificar;
             ViewBag.Anular = info.Anular;
@@ -236,9 +236,9 @@ namespace Core.Web.Areas.Academico.Controllers
                 CodCatalogoSangre = "O+",
             };
             #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoFamilia", "Index");
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Alumno", "Index");
             if (!info.Nuevo)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno });
             #endregion
             ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdAlumno = IdAlumno;
@@ -316,9 +316,9 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdParroquia_fact = (info_contacto == null ? "09" : info_contacto.IdParroquia);
 
             #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoFamilia", "Index");
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Alumno", "Index");
             if (!info.Modificar)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno });
             #endregion
 
             if (Exito)
@@ -397,7 +397,7 @@ namespace Core.Web.Areas.Academico.Controllers
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoFamilia", "Index");
             if (!info.Anular)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno });
             #endregion
             cargar_combos();
             return View(model);

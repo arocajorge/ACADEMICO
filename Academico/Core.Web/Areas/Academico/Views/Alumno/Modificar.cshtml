@@ -10,7 +10,7 @@
 }
 
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Modificar", "Alumno", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Modificar", "Alumno", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdAlumno, new { @id = "IdAlumno" })
@@ -1416,11 +1416,11 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Alumno", new { Area = "Academico" }, null)">Cancelar</a>
     </div>
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
     }
-    <script>
+}
+<script type="text/javascript">
         $(function () {
             mostrar_vehiculo_padre();
             mostrar_vehiculo_madre();

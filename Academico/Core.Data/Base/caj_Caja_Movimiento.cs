@@ -50,7 +50,6 @@ namespace Core.Data.Base
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<caj_Caja_Movimiento_det> caj_Caja_Movimiento_det { get; set; }
-        public virtual caj_Caja caj_Caja { get; set; }
         public virtual caj_Caja_Movimiento_Tipo caj_Caja_Movimiento_Tipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_conciliacion_Caja_det_x_ValeCaja> cp_conciliacion_Caja_det_x_ValeCaja { get; set; }
@@ -58,5 +57,6 @@ namespace Core.Data.Base
         public virtual ICollection<cp_conciliacion_Caja_det_Ing_Caja> cp_conciliacion_Caja_det_Ing_Caja { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cp_conciliacion_Caja> cp_conciliacion_Caja { get; set; }
+        public virtual caj_Caja caj_Caja { get; set; }
     }
 }

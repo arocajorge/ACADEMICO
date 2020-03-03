@@ -51,10 +51,10 @@ namespace Core.Data.Base
         public virtual DbSet<vwba_Talonario_cheques_x_banco_ID> vwba_Talonario_cheques_x_banco_ID { get; set; }
         public virtual DbSet<vwba_Cbte_Ban> vwba_Cbte_Ban { get; set; }
         public virtual DbSet<vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito> vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito { get; set; }
-        public virtual DbSet<vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar> vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar { get; set; }
         public virtual DbSet<ba_Archivo_Transferencia> ba_Archivo_Transferencia { get; set; }
         public virtual DbSet<ba_Archivo_Transferencia_Det> ba_Archivo_Transferencia_Det { get; set; }
         public virtual DbSet<ba_archivo_transferencia_x_ba_tipo_flujo> ba_archivo_transferencia_x_ba_tipo_flujo { get; set; }
         public virtual DbSet<vwba_Archivo_Transferencia_Det> vwba_Archivo_Transferencia_Det { get; set; }
+        public virtual DbSet<vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar> vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar { get; set; }
     }
 }

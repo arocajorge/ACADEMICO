@@ -742,8 +742,10 @@ namespace Core.Web.Areas.Academico.Controllers
                     }
                 }
                 #endregion
+                var personaRep = bus_persona.get_info(info_matricula.IdPersonaF);
+                var ExisteCliente = bus_cliente.get_info_x_num_cedula(info_matricula.IdEmpresa, personaRep.pe_cedulaRuc);
 
-                if (info_matricula.IdPersonaR != 0 && info_matricula.IdPersonaF != 0)
+                if (info_matricula.IdPersonaR != 0 && info_matricula.IdPersonaF != 0 && ExisteCliente.IdCliente!=0)
                 {
                     if (bus_matricula.GuardarDB(info_matricula))
                     {
@@ -873,7 +875,14 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
                 else
                 {
-                    mensaje = "Verique que el alumno tenga asignados representantes";
+                    if (ExisteCliente.IdCliente==0 || ExisteCliente==null)
+                    {
+                        mensaje = "Verique que exista el cliente";
+                    }
+                    else
+                    {
+                        mensaje = "Verique que el alumno tenga asignados representantes";
+                    }
                 }
             }
             else

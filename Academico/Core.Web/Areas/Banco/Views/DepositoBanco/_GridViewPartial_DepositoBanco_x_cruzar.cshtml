@@ -60,6 +60,12 @@
             column.Caption = "Valor aprobado";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
+        settings.Columns.Add(column =>
+        {
+            column.Width = Unit.Percentage(10);
+            column.FieldName = "IdUsuario";
+            column.Caption = "Usuario";
+        });
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });

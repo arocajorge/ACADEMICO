@@ -18,8 +18,8 @@ namespace Core.Data.Base
         public caj_Caja()
         {
             this.caj_Caja_Movimiento = new HashSet<caj_Caja_Movimiento>();
-            this.cp_conciliacion_Caja = new HashSet<cp_conciliacion_Caja>();
             this.caj_Caja_x_seg_usuario = new HashSet<caj_Caja_x_seg_usuario>();
+            this.cp_conciliacion_Caja = new HashSet<cp_conciliacion_Caja>();
         }
     
         public int IdEmpresa { get; set; }
@@ -41,8 +41,8 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<caj_Caja_Movimiento> caj_Caja_Movimiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cp_conciliacion_Caja> cp_conciliacion_Caja { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<caj_Caja_x_seg_usuario> caj_Caja_x_seg_usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<cp_conciliacion_Caja> cp_conciliacion_Caja { get; set; }
     }
 }

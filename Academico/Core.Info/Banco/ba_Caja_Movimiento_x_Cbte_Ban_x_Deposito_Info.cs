@@ -16,6 +16,7 @@ namespace Core.Info.Banco
         public int mba_IdTipocbte { get; set; }
         public int mcj_Secuencia { get; set; }
         public string Observacion { get; set; }
+        public string IdUsuario { get; set; }
         #region Campos que no existen en la tabla
         public string tc_descripcion { get; set; }
         public double cr_Valor { get; set; }
