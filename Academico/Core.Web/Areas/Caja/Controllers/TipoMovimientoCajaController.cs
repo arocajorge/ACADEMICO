@@ -1,5 +1,7 @@
-﻿using Core.Bus.Caja;
+﻿using Core.Bus.Academico;
+using Core.Bus.Caja;
 using Core.Bus.Contabilidad;
+using Core.Info.Academico;
 using Core.Info.Caja;
 using Core.Info.Contabilidad;
 using Core.Web.Helps;
@@ -18,6 +20,7 @@ namespace Core.Web.Areas.Caja.Controllers
         #region variables
         caj_Caja_Movimiento_Tipo_Bus bus_tipomovimiento = new caj_Caja_Movimiento_Tipo_Bus();
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -40,14 +43,23 @@ namespace Core.Web.Areas.Caja.Controllers
         #region Index
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Caja", "TipoMovimientoCaja", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_tipomovimientocaja()
+        public ActionResult GridViewPartial_tipomovimientocaja(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<caj_Caja_Movimiento_Tipo_Info> model = bus_tipomovimiento.get_list(IdEmpresa, true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_tipomovimientocaja", model);
         }
 
@@ -77,6 +89,11 @@ namespace Core.Web.Areas.Caja.Controllers
                 IdEmpresa = IdEmpresa
             };
             cargar_combos(IdEmpresa);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Caja", "TipoMovimientoCaja", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
 
@@ -97,6 +114,11 @@ namespace Core.Web.Areas.Caja.Controllers
             caj_Caja_Movimiento_Tipo_Info model = bus_tipomovimiento.get_info(IdEmpresa, IdTipoMovi);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Caja", "TipoMovimientoCaja", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -117,6 +139,11 @@ namespace Core.Web.Areas.Caja.Controllers
             caj_Caja_Movimiento_Tipo_Info model = bus_tipomovimiento.get_info(IdEmpresa, IdTipoMovi);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Caja", "TipoMovimientoCaja", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(IdEmpresa);
             return View(model);
         }

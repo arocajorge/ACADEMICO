@@ -12,7 +12,7 @@
 @using (Html.BeginForm())
 {
 
-    @Html.Action("GridViewPartial_tipomovimientocaja")
+    @Html.Action("GridViewPartial_tipomovimientocaja", new {Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular })
 
 
 }

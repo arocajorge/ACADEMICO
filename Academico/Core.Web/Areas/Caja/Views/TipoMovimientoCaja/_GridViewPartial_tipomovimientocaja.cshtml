@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_tipomovimientocaja";
-        settings.CallbackRouteValues = new { Controller = "TipoMovimientoCaja", Action = "GridViewPartial_tipomovimientocaja" };
+        settings.CallbackRouteValues = new { Controller = "TipoMovimientoCaja", Action = "GridViewPartial_tipomovimientocaja", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.KeyFieldName = "IdTipoMovi";
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
@@ -63,18 +63,29 @@
             {
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipoMovi = DataBinder.Eval(tc.DataItem, "IdTipoMovi") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipoMovi = DataBinder.Eval(tc.DataItem, "IdTipoMovi") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
+                    if (ViewBag.Modificar == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipoMovi = DataBinder.Eval(tc.DataItem, "IdTipoMovi") }));
+                        ViewContext.Writer.Write("&nbsp;");
+                    }
+
+                    if (ViewBag.Anular == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipoMovi = DataBinder.Eval(tc.DataItem, "IdTipoMovi") },
+                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                    }
                 }
             });
+
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
-                );
+                if (ViewBag.Nuevo == true)
+                {
+                    ViewContext.Writer.Write(
+                   Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
+               );
+                }
+
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;

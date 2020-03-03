@@ -1,7 +1,9 @@
-﻿using Core.Bus.Caja;
+﻿using Core.Bus.Academico;
+using Core.Bus.Caja;
 using Core.Bus.Contabilidad;
 using Core.Bus.General;
 using Core.Bus.SeguridadAcceso;
+using Core.Info.Academico;
 using Core.Info.Caja;
 using Core.Info.Contabilidad;
 using Core.Info.Helps;
@@ -27,6 +29,7 @@ namespace Core.Web.Areas.Caja.Controllers
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         caj_Caja_x_seg_usuario_List Lista_caj_Caja_x_seg_usuario = new caj_Caja_x_seg_usuario_List();
         string mensaje = string.Empty;
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -54,24 +57,39 @@ namespace Core.Web.Areas.Caja.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal)
             };
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Caja", "Caja", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             cargar_combos(model.IdEmpresa);
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Caja", "Caja", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             cargar_combos(model.IdEmpresa);
             return View(model);
         }
 
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_caja(int IdSucursal = 0)
+        public ActionResult GridViewPartial_caja(int IdSucursal = 0, bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             bool EsContador = Convert.ToBoolean(SessionFixed.EsContador);
             ViewBag.IdSucursal = IdSucursal;
             var model = bus_caja.GetList(IdEmpresa, IdSucursal, true, SessionFixed.IdUsuario, EsContador);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_caja", model);
         }
 
@@ -179,6 +197,11 @@ namespace Core.Web.Areas.Caja.Controllers
             model.ListaResponsables = new List<caj_Caja_x_seg_usuario_Info>();
             Lista_caj_Caja_x_seg_usuario.set_list(model.ListaResponsables, model.IdTransaccionSession);
             cargar_combos(IdEmpresa);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Caja", "Caja", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
         [HttpPost]
@@ -210,6 +233,11 @@ namespace Core.Web.Areas.Caja.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Caja", "Caja", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -242,6 +270,11 @@ namespace Core.Web.Areas.Caja.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Caja", "Caja", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(IdEmpresa);
             return View(model);
         }
