@@ -1,6 +1,9 @@
-﻿using Core.Bus.General;
+﻿using Core.Bus.Academico;
+using Core.Bus.General;
+using Core.Info.Academico;
 using Core.Info.General;
 using Core.Info.Helps;
+using Core.Web.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +14,21 @@ namespace Core.Web.Areas.General.Controllers
 {
     public class PersonaController : Controller
     {
+        #region Variables
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        #endregion
+
         #region Index
 
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Persona", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
@@ -46,6 +59,11 @@ namespace Core.Web.Areas.General.Controllers
         {
             tb_persona_Info model = new tb_persona_Info();
             cargar_combos();
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Persona", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
 
@@ -80,9 +98,12 @@ namespace Core.Web.Areas.General.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_persona()
+        public ActionResult GridViewPartial_persona(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             List<tb_persona_Info> model = bus_persona.get_list(true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_persona", model);
         }
 
@@ -91,6 +112,11 @@ namespace Core.Web.Areas.General.Controllers
             tb_persona_Info model = bus_persona.get_info(IdPersona);
             if (model == null)
                 return RedirectToAction("Index", "Persona");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Persona", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos();
             return View(model);
         }
@@ -122,6 +148,12 @@ namespace Core.Web.Areas.General.Controllers
             tb_persona_Info model = bus_persona.get_info(IdPersona);
             if (model == null)
                 return RedirectToAction("Index", "Persona");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Persona", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
+
             cargar_combos();
             return View(model);
         }

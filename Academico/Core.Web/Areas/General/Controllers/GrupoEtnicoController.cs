@@ -1,4 +1,6 @@
-﻿using Core.Bus.General;
+﻿using Core.Bus.Academico;
+using Core.Bus.General;
+using Core.Info.Academico;
 using Core.Info.General;
 using Core.Web.Helps;
 using System;
@@ -17,6 +19,7 @@ namespace Core.Web.Areas.General.Controllers
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Index
@@ -36,16 +39,24 @@ namespace Core.Web.Areas.General.Controllers
 
             List<tb_GrupoEtnico_Info> lista = bus_GrupoEtnico.GetList(true);
             Lista_GrupoEtnico.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "GrupoEtnico", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_GrupoEtnico()
+        public ActionResult GridViewPartial_GrupoEtnico(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
             List<tb_GrupoEtnico_Info> model = Lista_GrupoEtnico.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_GrupoEtnico", model);
         }
         #endregion
@@ -61,7 +72,11 @@ namespace Core.Web.Areas.General.Controllers
             #endregion
 
             tb_GrupoEtnico_Info model = new tb_GrupoEtnico_Info();
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "GrupoEtnico", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
         [HttpPost]
@@ -89,7 +104,11 @@ namespace Core.Web.Areas.General.Controllers
             tb_GrupoEtnico_Info model = bus_GrupoEtnico.GetInfo(IdGrupoEtnico);
             if (model == null)
                 return RedirectToAction("Index");
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "GrupoEtnico", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
@@ -122,7 +141,11 @@ namespace Core.Web.Areas.General.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "GrupoEtnico", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
         [HttpPost]
