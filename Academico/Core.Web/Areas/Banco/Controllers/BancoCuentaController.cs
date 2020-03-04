@@ -1,6 +1,8 @@
-﻿using Core.Bus.Banco;
+﻿using Core.Bus.Academico;
+using Core.Bus.Banco;
 using Core.Bus.Contabilidad;
 using Core.Bus.General;
+using Core.Info.Academico;
 using Core.Info.Banco;
 using Core.Info.General;
 using Core.Web.Helps;
@@ -26,21 +28,30 @@ namespace Core.Web.Areas.Banco.Controllers
 
         ba_Banco_Cuenta_x_tb_sucursal_Bus bus_cta_det = new ba_Banco_Cuenta_x_tb_sucursal_Bus();
         ba_Banco_Det_List List_Det = new ba_Banco_Det_List();
-
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
 
         #endregion
 
         #region Index
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "BancoCuenta", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_cuentas()
+        public ActionResult GridViewPartial_cuentas(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_cuenta.get_list(IdEmpresa, 0, true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_cuentas", model);
         }
         #endregion
@@ -78,6 +89,11 @@ namespace Core.Web.Areas.Banco.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "BancoCuenta", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             ba_Banco_Cuenta_Info model = new ba_Banco_Cuenta_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -111,6 +127,11 @@ namespace Core.Web.Areas.Banco.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "BancoCuenta", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             ba_Banco_Cuenta_Info model = bus_cuenta.get_info(IdEmpresa, IdBanco);
             if (model == null)
                 return RedirectToAction("Index");
@@ -137,6 +158,11 @@ namespace Core.Web.Areas.Banco.Controllers
             ba_Banco_Cuenta_Info model = bus_cuenta.get_info(IdEmpresa, IdBanco);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "BancoCuenta", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.lstDet = bus_cta_det.GetList(IdEmpresa, IdBanco);
             List_Det.set_list(model.lstDet, model.IdTransaccionSession);

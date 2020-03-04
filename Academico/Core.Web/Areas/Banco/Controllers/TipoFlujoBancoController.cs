@@ -1,4 +1,6 @@
-﻿using Core.Bus.Banco;
+﻿using Core.Bus.Academico;
+using Core.Bus.Banco;
+using Core.Info.Academico;
 using Core.Info.Banco;
 using Core.Info.Helps;
 using Core.Web.Helps;
@@ -20,6 +22,7 @@ namespace Core.Web.Areas.Banco.Controllers
         ba_TipoFlujo_Bus bus_flujo = new ba_TipoFlujo_Bus();
         ba_Banco_Flujo_Det_List List_Det = new ba_Banco_Flujo_Det_List();
         ba_Cbte_Ban_x_ba_TipoFlujo_Bus bus_flujo_det = new ba_Cbte_Ban_x_ba_TipoFlujo_Bus();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         //ba_Archivo_Flujo_List List_flujo = new ba_Archivo_Flujo_List();
         #endregion
 
@@ -44,14 +47,23 @@ namespace Core.Web.Areas.Banco.Controllers
 
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoBanco", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_tipo_flujo()
+        public ActionResult GridViewPartial_tipo_flujo(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_flujo.get_list(IdEmpresa, true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_tipo_flujo", model);
         }
 
@@ -71,6 +83,11 @@ namespace Core.Web.Areas.Banco.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
             };
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoBanco", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combo(IdEmpresa);
             return View(model);
         }
@@ -91,6 +108,11 @@ namespace Core.Web.Areas.Banco.Controllers
             ba_TipoFlujo_Info model = bus_flujo.get_info(IdEmpresa, IdTipoFlujo);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoBanco", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combo(IdEmpresa);
             return View(model);
         }
@@ -110,6 +132,11 @@ namespace Core.Web.Areas.Banco.Controllers
             ba_TipoFlujo_Info model = bus_flujo.get_info(IdEmpresa, IdTipoFlujo);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoBanco", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combo(IdEmpresa);
             return View(model);
         }
