@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_cuentas";
-        settings.CallbackRouteValues = new { Controller = "BancoCuenta", Action = "GridViewPartial_cuentas" };
+        settings.CallbackRouteValues = new { Controller = "BancoCuenta", Action = "GridViewPartial_cuentas", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.KeyFieldName = "IdBanco";
         settings.Width = Unit.Percentage(100);
 
@@ -64,18 +64,28 @@
             {
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
                 {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdBanco = DataBinder.Eval(tc.DataItem, "IdBanco") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdBanco = DataBinder.Eval(tc.DataItem, "IdBanco") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
+                    if (ViewBag.Modificar == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdBanco = DataBinder.Eval(tc.DataItem, "IdBanco") }));
+                        ViewContext.Writer.Write("&nbsp;");
+                    }
+                    if (ViewBag.Anular == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdBanco = DataBinder.Eval(tc.DataItem, "IdBanco") },
+                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                    }
                 }
             });
+
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
+                if (ViewBag.Nuevo == true)
+                {
+                    ViewContext.Writer.Write(
                     Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
+                }
+                
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;

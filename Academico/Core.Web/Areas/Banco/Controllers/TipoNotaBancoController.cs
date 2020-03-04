@@ -1,5 +1,7 @@
-﻿using Core.Bus.Banco;
+﻿using Core.Bus.Academico;
+using Core.Bus.Banco;
 using Core.Bus.Contabilidad;
+using Core.Info.Academico;
 using Core.Info.Banco;
 using Core.Web.Helps;
 using System;
@@ -17,20 +19,30 @@ namespace Core.Web.Areas.Banco.Controllers
 
         ba_tipo_nota_Bus bus_tipo = new ba_tipo_nota_Bus();
         ct_plancta_Bus bus_cuenta = new ct_plancta_Bus();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Index
 
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoNotaBanco", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_tipo_nota()
+        public ActionResult GridViewPartial_tipo_nota(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_tipo.get_list(IdEmpresa, "", true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_tipo_nota", model);
         }
         #endregion
@@ -60,6 +72,11 @@ namespace Core.Web.Areas.Banco.Controllers
             {
                 IdEmpresa = IdEmpresa
             };
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoNotaBanco", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -80,6 +97,11 @@ namespace Core.Web.Areas.Banco.Controllers
             ba_tipo_nota_Info model = bus_tipo.get_info(IdEmpresa, IdTipoNota);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoNotaBanco", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -100,6 +122,11 @@ namespace Core.Web.Areas.Banco.Controllers
             ba_tipo_nota_Info model = bus_tipo.get_info(IdEmpresa, IdTipoNota);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoNotaBanco", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(IdEmpresa);
             return View(model);
         }

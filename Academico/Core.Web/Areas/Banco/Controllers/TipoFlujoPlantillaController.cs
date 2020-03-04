@@ -1,4 +1,6 @@
-﻿using Core.Bus.Banco;
+﻿using Core.Bus.Academico;
+using Core.Bus.Banco;
+using Core.Info.Academico;
 using Core.Info.Banco;
 using Core.Web.Helps;
 using DevExpress.Web;
@@ -20,6 +22,7 @@ namespace Core.Web.Areas.Banco.Controllers
         ba_TipoFlujo_PlantillaDet_Bus bus_TipoFlujo_PlantillaDet = new ba_TipoFlujo_PlantillaDet_Bus();
         ba_TipoFlujo_PlantillaDet_List TipoFlujo_PlantillaDet_Lista = new ba_TipoFlujo_PlantillaDet_List();
         ba_Banco_Flujo_Det_List List_Det = new ba_Banco_Flujo_Det_List();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         //ba_Archivo_Flujo_List List_flujo = new ba_Archivo_Flujo_List();
         string mensaje = string.Empty;
         #endregion
@@ -48,15 +51,23 @@ namespace Core.Web.Areas.Banco.Controllers
         #region Index
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoPlantilla", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_TipoFlujoPlantilla()
+        public ActionResult GridViewPartial_TipoFlujoPlantilla(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<ba_TipoFlujo_Plantilla_Info> model = bus_TipoFlujo_Plantilla.GetList(IdEmpresa, true);
-
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_TipoFlujoPlantilla", model);
         }
         #endregion
@@ -79,6 +90,11 @@ namespace Core.Web.Areas.Banco.Controllers
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoPlantilla", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
             #endregion
 
             ba_TipoFlujo_Plantilla_Info model = new ba_TipoFlujo_Plantilla_Info
@@ -122,6 +138,11 @@ namespace Core.Web.Areas.Banco.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoPlantilla", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
 
             ba_TipoFlujo_Plantilla_Info model = bus_TipoFlujo_Plantilla.GetInfo(IdEmpresa, IdPlantilla);
 
@@ -161,6 +182,11 @@ namespace Core.Web.Areas.Banco.Controllers
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoPlantilla", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
             #endregion
 
             ba_TipoFlujo_Plantilla_Info model = bus_TipoFlujo_Plantilla.GetInfo(IdEmpresa, IdPlantilla);

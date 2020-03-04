@@ -1,5 +1,7 @@
-﻿using Core.Bus.Banco;
+﻿using Core.Bus.Academico;
+using Core.Bus.Banco;
 using Core.Bus.General;
+using Core.Info.Academico;
 using Core.Info.Banco;
 using Core.Web.Helps;
 using DevExpress.Web;
@@ -20,6 +22,7 @@ namespace Core.Web.Areas.Banco.Controllers
         ba_Banco_Cuenta_Bus bus_banco_cuenta = new ba_Banco_Cuenta_Bus();
         ba_TipoFlujo_Movimiento_Bus bus_TipoFlujo_Movimiento = new ba_TipoFlujo_Movimiento_Bus();
         string mensaje = string.Empty;
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Combo bajo demanda CmbTipoFlujo
@@ -44,15 +47,23 @@ namespace Core.Web.Areas.Banco.Controllers
         #region Index
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoMovimiento", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_TipoFlujoMovimiento()
+        public ActionResult GridViewPartial_TipoFlujoMovimiento(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<ba_TipoFlujo_Movimiento_Info> model = bus_TipoFlujo_Movimiento.GetList(IdEmpresa, true);
-
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_TipoFlujoMovimiento", model);
         }
         #endregion
@@ -77,7 +88,11 @@ namespace Core.Web.Areas.Banco.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoMovimiento", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             ba_TipoFlujo_Movimiento_Info model = new ba_TipoFlujo_Movimiento_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -111,7 +126,11 @@ namespace Core.Web.Areas.Banco.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoMovimiento", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             ba_TipoFlujo_Movimiento_Info model = bus_TipoFlujo_Movimiento.GetInfo(IdEmpresa, IdMovimiento);
 
             if (model == null)
@@ -140,7 +159,11 @@ namespace Core.Web.Areas.Banco.Controllers
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
             #endregion
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoMovimiento", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             ba_TipoFlujo_Movimiento_Info model = bus_TipoFlujo_Movimiento.GetInfo(IdEmpresa, IdMovimiento);
             if (model == null)
                 return RedirectToAction("Index");

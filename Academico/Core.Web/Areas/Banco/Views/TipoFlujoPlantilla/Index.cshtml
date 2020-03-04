@@ -9,6 +9,6 @@
 
 @using (Html.BeginForm())
 {
-    @Html.Action("GridViewPartial_TipoFlujoPlantilla");
+    @Html.Action("GridViewPartial_TipoFlujoPlantilla", new { Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular });
 
 }

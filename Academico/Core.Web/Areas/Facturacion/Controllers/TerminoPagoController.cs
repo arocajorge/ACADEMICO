@@ -1,4 +1,6 @@
-﻿using Core.Bus.Facturacion;
+﻿using Core.Bus.Academico;
+using Core.Bus.Facturacion;
+using Core.Info.Academico;
 using Core.Info.Facturacion;
 using Core.Web.Helps;
 using DevExpress.Web.Mvc;
@@ -16,18 +18,28 @@ namespace Core.Web.Areas.Facturacion.Controllers
         fa_TerminoPago_Bus bus_terminopago = new fa_TerminoPago_Bus();
         fa_TerminoPago_Distribucion_Bus bus_termino_dist = new fa_TerminoPago_Distribucion_Bus();
         fa_TerminoPago_Distribucion_list List_fa_TerminoPago_Distribucion = new fa_TerminoPago_Distribucion_list();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Index
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "TerminoPago", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_terminopago()
+        public ActionResult GridViewPartial_terminopago(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             List<fa_TerminoPago_Info> model = bus_terminopago.get_list(true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_terminopago", model);
         }
 
@@ -49,6 +61,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
             List_fa_TerminoPago_Distribucion.set_list(model.Lst_fa_TerminoPago_Distribucion, model.IdTransaccionSession);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "TerminoPago", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
 
@@ -83,6 +100,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
             model.Lst_fa_TerminoPago_Distribucion = bus_termino_dist.get_list(IdTerminoPago);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             List_fa_TerminoPago_Distribucion.set_list(model.Lst_fa_TerminoPago_Distribucion, model.IdTransaccionSession);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "TerminoPago", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
 
@@ -115,6 +137,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.Lst_fa_TerminoPago_Distribucion = bus_termino_dist.get_list(IdTerminoPago);
             List_fa_TerminoPago_Distribucion.set_list(model.Lst_fa_TerminoPago_Distribucion, model.IdTransaccionSession);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "TerminoPago", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
 

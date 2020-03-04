@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_TipoFlujoMovimiento";
-        settings.CallbackRouteValues = new { Controller = "TipoFlujoMovimiento", Action = "GridViewPartial_TipoFlujoMovimiento" };
+        settings.CallbackRouteValues = new { Controller = "TipoFlujoMovimiento", Action = "GridViewPartial_TipoFlujoMovimiento", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.KeyFieldName = "IdMovimiento";
         settings.Width = Unit.Percentage(100);
 
@@ -65,18 +65,28 @@
             {
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMovimiento = DataBinder.Eval(tc.DataItem, "IdMovimiento") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMovimiento = DataBinder.Eval(tc.DataItem, "IdMovimiento") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
+                    if (ViewBag.Modificar == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMovimiento = DataBinder.Eval(tc.DataItem, "IdMovimiento") }));
+                        ViewContext.Writer.Write("&nbsp;");
+                    }
+                    if (ViewBag.Anular == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMovimiento = DataBinder.Eval(tc.DataItem, "IdMovimiento") },
+                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                    }
                 }
             });
+
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
+                if (ViewBag.Nuevo == true)
+                {
+                    ViewContext.Writer.Write(
                     Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
                 );
+                }
+                
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;

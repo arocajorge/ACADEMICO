@@ -1,6 +1,8 @@
-﻿using Core.Bus.Contabilidad;
+﻿using Core.Bus.Academico;
+using Core.Bus.Contabilidad;
 using Core.Bus.Facturacion;
 using Core.Bus.General;
+using Core.Info.Academico;
 using Core.Info.Facturacion;
 using Core.Info.General;
 using Core.Info.Helps;
@@ -31,11 +33,18 @@ namespace Core.Web.Areas.Facturacion.Controllers
         fa_cliente_tipo_List ListaTipoCliente = new fa_cliente_tipo_List();
         fa_cliente_List ListaCliente = new fa_cliente_List();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         string mensaje = string.Empty;
         #endregion
         #region Index
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "Cliente", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
         private bool validar(fa_cliente_Info i_validar, ref string msg)
@@ -43,10 +52,13 @@ namespace Core.Web.Areas.Facturacion.Controllers
             return true;
         }
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_cliente()
+        public ActionResult GridViewPartial_cliente(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_cliente.get_list(IdEmpresa, true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_cliente", model);
         }
         #endregion
@@ -113,6 +125,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
             };
 
             List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "Cliente", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(model);
             cargar_combos_det();
             return View(model);
@@ -166,7 +183,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
             List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
 
             //List_fa_cliente_contactos.set_list(model.lst_fa_cliente_contactos, model.IdTransaccionSession);
-
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "Cliente", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(model);
             return View(model);
         }
@@ -229,6 +250,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = bus_fa_vendedor.get_list(IdEmpresa, IdCliente);
             List_fa_cliente_x_fa_Vendedor_x_sucursal.set_list(model.Lst_fa_cliente_x_fa_Vendedor_x_sucursal, model.IdTransaccionSession);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "Cliente", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(model);
             return View(model);
         }
