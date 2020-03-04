@@ -1,5 +1,7 @@
-﻿using Core.Bus.Contabilidad;
+﻿using Core.Bus.Academico;
+using Core.Bus.Contabilidad;
 using Core.Bus.Facturacion;
+using Core.Info.Academico;
 using Core.Info.Contabilidad;
 using Core.Info.Facturacion;
 using Core.Web.Helps;
@@ -14,19 +16,31 @@ namespace Core.Web.Areas.Facturacion.Controllers
 {
     public class ClienteTipoController : Controller
     {
+        #region Variables
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        #endregion
         #region Index
         fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "ClienteTipo", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_clientetipo()
+        public ActionResult GridViewPartial_clientetipo(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             List<fa_cliente_tipo_Info> model = bus_clientetipo.get_list(IdEmpresa, true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_clientetipo", model);
         }
 
@@ -63,6 +77,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
             {
                 IdEmpresa = IdEmpresa
             };
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "ClienteTipo", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -85,6 +104,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
             {
                 return RedirectToAction("Index");
             }
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "ClienteTipo", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -107,6 +131,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
             {
                 return RedirectToAction("Index");
             }
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "ClienteTipo", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(IdEmpresa);
             return View(model);
         }

@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
 
-    @Html.Action("GridViewPartial_clientetipo")
+    @Html.Action("GridViewPartial_clientetipo", new { Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular})
 
 
 }

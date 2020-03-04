@@ -15,6 +15,6 @@
         </div>
     </div>
 
-    @Html.Action("GridViewPartial_cliente")
+    @Html.Action("GridViewPartial_cliente", new { Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular})
 
 }
