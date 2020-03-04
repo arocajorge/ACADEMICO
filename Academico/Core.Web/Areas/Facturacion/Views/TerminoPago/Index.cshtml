@@ -11,7 +11,7 @@
 @using (Html.BeginForm())
 {
 
-    @Html.Action("GridViewPartial_terminopago")
+    @Html.Action("GridViewPartial_terminopago", new { Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular })
 
 
 }
