@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_anio_fiscal";
-        settings.CallbackRouteValues = new { Controller = "AnioFiscal", Action = "GridViewPartial_anio_fiscal" };
+        settings.CallbackRouteValues = new { Controller = "AnioFiscal", Action = "GridViewPartial_anio_fiscal", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdanioFiscal";
 
@@ -63,18 +63,28 @@
             {
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "af_estado")) == "A")
                 {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
+                    if (ViewBag.Modificar == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") }));
+                        ViewContext.Writer.Write("&nbsp;");
+                    }
+                    if (ViewBag.Anular == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") },
+                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                    }
                 }
             });
+
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
+                if (ViewBag.Nuevo == true)
+                {
+                    ViewContext.Writer.Write(
                     Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
                 );
+                }
+                
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
@@ -94,7 +104,7 @@
             column.Caption = "Fecha fin";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(40);
-        }); 
+        });
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";

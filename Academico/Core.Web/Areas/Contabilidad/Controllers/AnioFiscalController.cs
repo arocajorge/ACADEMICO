@@ -1,4 +1,6 @@
-﻿using Core.Bus.Contabilidad;
+﻿using Core.Bus.Academico;
+using Core.Bus.Contabilidad;
+using Core.Info.Academico;
 using Core.Info.Contabilidad;
 using Core.Web.Helps;
 using DevExpress.Web;
@@ -17,16 +19,26 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         ct_anio_fiscal_Bus bus_anio_fiscal = new ct_anio_fiscal_Bus();
         ct_anio_fiscal_x_cuenta_utilidad_Bus bus_aniocta = new ct_anio_fiscal_x_cuenta_utilidad_Bus();
         string mensaje = string.Empty;
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
 
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Contabilidad", "AnioFiscal", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_anio_fiscal()
+        public ActionResult GridViewPartial_anio_fiscal(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             var model = bus_anio_fiscal.get_list(true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_anio_fiscal", model);
         }
         private void cargar_combos(int IdEmpresa)
@@ -89,6 +101,11 @@ namespace Core.Web.Areas.Contabilidad.Controllers
                 af_fechaFin = DateTime.Now,
                 info_anio_ctautil = new ct_anio_fiscal_x_cuenta_utilidad_Info()
             };
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Contabilidad", "AnioFiscal", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -160,6 +177,11 @@ namespace Core.Web.Areas.Contabilidad.Controllers
                     IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                     IdanioFiscal = model.IdanioFiscal
                 };
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Contabilidad", "AnioFiscal", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
             return View(model);
         }
@@ -188,6 +210,11 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             ct_anio_fiscal_Info model = bus_anio_fiscal.get_info(IdanioFiscal);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Contabilidad", "AnioFiscal", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             model.info_anio_ctautil = bus_aniocta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), IdanioFiscal);
             if (model.info_anio_ctautil == null)
                 model.info_anio_ctautil = new ct_anio_fiscal_x_cuenta_utilidad_Info();

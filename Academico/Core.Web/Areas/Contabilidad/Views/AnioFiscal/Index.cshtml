@@ -11,7 +11,7 @@
 @using (Html.BeginForm())
 {
 
-    @Html.Action("GridViewPartial_anio_fiscal")
+    @Html.Action("GridViewPartial_anio_fiscal", new { Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular })
 
 }
 

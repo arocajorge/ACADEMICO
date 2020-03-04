@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridView_comprobante_contable";
-        settings.CallbackRouteValues = new { Controller = "ComprobanteContable", Action = "GridViewPartial_comprobante_contable", fecha_ini = ViewBag.fecha_ini, fecha_fin = ViewBag.fecha_fin, IdEmpresa = ViewBag.IdEmpresa, IdSucursal = ViewBag.IdSucursal };
+        settings.CallbackRouteValues = new { Controller = "ComprobanteContable", Action = "GridViewPartial_comprobante_contable", fecha_ini = ViewBag.fecha_ini, fecha_fin = ViewBag.fecha_fin, IdEmpresa = ViewBag.IdEmpresa, IdSucursal = ViewBag.IdSucursal, Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.KeyFieldName = "IdCbteCble";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
@@ -62,28 +62,38 @@
             {
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "cb_Estado")) == "A")
                 {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipoCbte = DataBinder.Eval(tc.DataItem, "IdTipoCbte"), IdCbteCble = DataBinder.Eval(tc.DataItem, "IdCbteCble") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa") , IdTipoCbte = DataBinder.Eval(tc.DataItem, "IdTipoCbte"), IdCbteCble = DataBinder.Eval(tc.DataItem, "IdCbteCble")},
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
+                    if (ViewBag.Modificar == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipoCbte = DataBinder.Eval(tc.DataItem, "IdTipoCbte"), IdCbteCble = DataBinder.Eval(tc.DataItem, "IdCbteCble") }));
+                        ViewContext.Writer.Write("&nbsp;");
+                    }
+                    if (ViewBag.Anular == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipoCbte = DataBinder.Eval(tc.DataItem, "IdTipoCbte"), IdCbteCble = DataBinder.Eval(tc.DataItem, "IdCbteCble") },
+                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                    }
                 }
             });
+
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo",new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
-                );
+                if (ViewBag.Nuevo == true)
+                {
+                    ViewContext.Writer.Write(
+                   Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
+               );
+                }
+
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(10); 
+        settings.Columns.Add("Su_Descripcion", "Sucursal").Width = Unit.Percentage(10);
         settings.Columns.Add("tc_TipoCbte", "Tipo").Width = Unit.Percentage(20);
         settings.Columns.Add("IdCbteCble", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add("cb_Valor", "Valor").Width = Unit.Percentage(10);
-        
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "cb_Fecha";

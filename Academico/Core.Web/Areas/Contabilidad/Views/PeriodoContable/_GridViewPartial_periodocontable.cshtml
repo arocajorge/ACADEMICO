@@ -4,7 +4,7 @@
     var grid = Html.DevExpress().GridView(settings =>
     {
         settings.Name = "GridView_periodo_contable";
-        settings.CallbackRouteValues = new { Controller = "PeriodoContable", Action = "GridViewPartial_periodocontable" };
+        settings.CallbackRouteValues = new { Controller = "PeriodoContable", Action = "GridViewPartial_periodocontable", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdPeriodo";
 
@@ -65,18 +65,28 @@
             {
                 if (Convert.ToString(DataBinder.Eval(tc.DataItem, "pe_estado")) == "A")
                 {
-                    ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") }) + "&nbsp;" +
-                        Html.ActionLink("Anular", "Anular", new { IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
+                    if (ViewBag.Modificar == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") }));
+                        ViewContext.Writer.Write("&nbsp;");
+                    }
+                    if (ViewBag.Anular == true)
+                    {
+                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") },
+                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                    }
                 }
             });
+
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
-                );
+                if (ViewBag.Nuevo == true)
+                {
+                    ViewContext.Writer.Write(
+                   Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
+               );
+                }
+
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;

@@ -1,5 +1,7 @@
-﻿using Core.Bus.Contabilidad;
+﻿using Core.Bus.Academico;
+using Core.Bus.Contabilidad;
 using Core.Bus.General;
+using Core.Info.Academico;
 using Core.Info.Contabilidad;
 using Core.Web.Helps;
 using System;
@@ -16,21 +18,30 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         ct_anio_fiscal_Bus bus_anio = new ct_anio_fiscal_Bus();
         tb_mes_Bus bus_mes = new tb_mes_Bus();
-
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
         #region Index
         public ActionResult Index(int IdanioFiscal = 0)
         {
             ViewBag.IdanioFiscal = IdanioFiscal;
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Contabilidad", "PeriodoContable", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_periodocontable()
+        public ActionResult GridViewPartial_periodocontable(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             List<ct_periodo_Info> model = new List<ct_periodo_Info>();
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model = bus_periodo.get_list(IdEmpresa, true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_periodocontable", model);
         }
 
@@ -50,6 +61,11 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         {
             cargar_combos();
             ct_periodo_Info model = new ct_periodo_Info();
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Contabilidad", "PeriodoContable", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             return View(model);
         }
 
@@ -69,6 +85,11 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             ct_periodo_Info model = bus_periodo.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), IdPeriodo);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Contabilidad", "PeriodoContable", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos();
             return View(model);
         }
@@ -89,6 +110,11 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             ct_periodo_Info model = bus_periodo.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), IdPeriodo);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Contabilidad", "PeriodoContable", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos();
             return View(model);
         }

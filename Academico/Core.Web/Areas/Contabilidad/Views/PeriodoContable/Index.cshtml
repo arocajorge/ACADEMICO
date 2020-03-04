@@ -11,6 +11,6 @@
 @using (Html.BeginForm())
 {
 
-@Html.Action("GridViewPartial_periodocontable")
+@Html.Action("GridViewPartial_periodocontable", new { Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular })
 
 }
