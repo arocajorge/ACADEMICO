@@ -10,6 +10,6 @@
 }
 @using (Html.BeginForm())
 {
-   @Html.Action("GridViewPartial_tiponota")
+   @Html.Action("GridViewPartial_tiponota", new {Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular })
 
 }

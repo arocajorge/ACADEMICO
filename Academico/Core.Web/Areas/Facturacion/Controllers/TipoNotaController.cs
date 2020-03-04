@@ -1,6 +1,8 @@
-﻿using Core.Bus.Contabilidad;
+﻿using Core.Bus.Academico;
+using Core.Bus.Contabilidad;
 using Core.Bus.Facturacion;
 using Core.Bus.Inventario;
+using Core.Info.Academico;
 using Core.Info.Contabilidad;
 using Core.Info.Facturacion;
 using Core.Info.Helps;
@@ -20,19 +22,29 @@ namespace Core.Web.Areas.Facturacion.Controllers
         #region Variables
         fa_TipoNota_Bus bus_tiponota = new fa_TipoNota_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Index
         public ActionResult Index()
         {
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "TipoNota", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_tiponota()
+        public ActionResult GridViewPartial_tiponota(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var model = bus_tiponota.get_list(IdEmpresa, true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
             return PartialView("_GridViewPartial_tiponota", model);
         }
         private void cargar_combos()
@@ -92,6 +104,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
             };
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "TipoNota", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos();
             return View(model);
         }
@@ -112,6 +129,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
             fa_TipoNota_Info model = bus_tiponota.get_info(IdEmpresa, IdTipoNota);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "TipoNota", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos();
             return View(model);
         }
@@ -126,12 +148,18 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return View(model);
             }
             return RedirectToAction("Index");
+
         }
         public ActionResult Anular(int IdEmpresa = 0, int IdTipoNota = 0)
         {
             fa_TipoNota_Info model = bus_tiponota.get_info(IdEmpresa, IdTipoNota);
             if (model == null)
                 return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "TipoNota", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
             cargar_combos();
             return View(model);
         }
