@@ -68,7 +68,7 @@
     }
 
     function guardar() {
-        $("#btn_guardar").attr("disabled", true);
+        $("#btn_guardar").prop("disabled", true);
         var datos = {
             Fecha: Fecha.GetDate(),
             IdEmpresa: $("#IdEmpresa").val(),
@@ -109,8 +109,9 @@
                 else {
                     $("#MensajeError").show();
                     $("#Mensaje").html(data.msg);
+
+                    $("#btn_guardar").prop("disabled", false);
                 }
-                $("#btn_guardar").attr("disabled", false);
             },
             error: function (error) {
             }
