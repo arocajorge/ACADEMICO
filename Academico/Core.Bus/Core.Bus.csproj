@@ -243,6 +243,7 @@
     <Compile Include="Reportes\Academico\ACA_005_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_007_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_006_ Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_008_Bus.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Bus.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Bus.cs" />
     <Compile Include="Reportes\Banco\BAN_002_Bus.cs" />

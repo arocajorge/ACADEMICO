@@ -9,6 +9,7 @@ using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -67,6 +68,16 @@ namespace Core.Web.Areas.Reportes.Controllers
             int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
             int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
             return PartialView("_CmbJornada", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel });
+        }
+        public ActionResult ComboBoxPartial_Paralelo()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            int IdCurso = (Request.Params["IdCurso"] != null) ? int.Parse(Request.Params["IdCurso"]) : -1;
+
+            return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
         }
         #endregion
 
@@ -558,6 +569,72 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_fecha_ini.Value = model.fecha_ini;
 
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+
+        public ActionResult ACA_008(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0)
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdNivel = IdNivel;
+            model.IdJornada = IdJornada;
+            model.IdCurso = IdCurso;
+            model.IdParalelo = IdParalelo;
+
+            ACA_008_Rpt report = new ACA_008_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_008");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_008(cl_filtros_Info model)
+        {
+            ACA_008_Rpt report = new ACA_008_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_008");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
 
             ViewBag.Report = report;
 
