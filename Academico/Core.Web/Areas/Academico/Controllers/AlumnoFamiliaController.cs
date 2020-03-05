@@ -395,7 +395,7 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdAlumno = IdAlumno;
             #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoFamilia", "Index");
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Alumno", "Index");
             if (!info.Anular)
                 return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno });
             #endregion
