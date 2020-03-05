@@ -8,7 +8,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_008_Data
     {
-        public List<ACA_008_Info> GetList(int IdEmpresa, int IdSede, int IdNivel, int IdJornada, int IdCurso,int IdParalelo)
+        public List<ACA_008_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso,int IdParalelo)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace Core.Data.Reportes.Academico
                 List<ACA_008_Info> Lista = new List<ACA_008_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Lista = Context.VWACA_008.Where(q => q.IdEmpresa == IdEmpresa &&
+                    Lista = Context.VWACA_008.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio &&
                     IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin &&
                     IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
                     IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin &&

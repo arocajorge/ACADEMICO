@@ -29,13 +29,15 @@ namespace Core.Web.Reportes.Academico
                 lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
                 lbl_usuario.Text = usuario;
                 int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+                int IdAnio = string.IsNullOrEmpty(p_IdAnio.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAnio.Value);
                 int IdNivel = string.IsNullOrEmpty(p_IdNivel.Value.ToString()) ? 0 : Convert.ToInt32(p_IdNivel.Value);
                 int IdJornada = string.IsNullOrEmpty(p_IdJornada.Value.ToString()) ? 0 : Convert.ToInt32(p_IdJornada.Value);
                 int IdCurso = string.IsNullOrEmpty(p_IdCurso.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCurso.Value);
                 int IdParalelo = string.IsNullOrEmpty(p_IdParalelo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdParalelo.Value);
                 int IdSede = string.IsNullOrEmpty(p_IdSede.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSede.Value);
-                List<ACA_008_Info> Lista = bus_rpt.GetList(IdEmpresa, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo);
+                List<ACA_008_Info> Lista = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo);
                 this.DataSource = Lista;
+
                 aca_Sede_Bus bus_sede = new aca_Sede_Bus();
                 var info_sede = bus_sede.GetInfo(IdEmpresa, IdSede);
                 var NomSede = "";
