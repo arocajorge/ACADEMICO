@@ -1267,7 +1267,10 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             aca_Matricula_Rubro_Info edited_info = get_list(IdTransaccion).Where(q => q.IdString == info_det.IdString).FirstOrDefault();
-            edited_info.IdMecanismo = info_det.IdMecanismo;
+            if (edited_info.FechaFacturacion==null)
+            {
+                edited_info.IdMecanismo = info_det.IdMecanismo;
+            }
         }
     }
 }

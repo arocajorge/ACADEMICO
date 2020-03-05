@@ -12,15 +12,15 @@
 
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
-        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
-        settings.CommandColumn.Visible = false;
+        settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButtonInHeader = false;
         settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = false;
 
         settings.SettingsContextMenu.Enabled = false;
-        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = false;
+        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
         settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
         settings.SettingsContextMenu.RowMenuItemVisibility.DeleteRow = false;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
@@ -54,14 +54,14 @@
         {
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(25);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdMecanismo";
             column.Caption = "Mecanismo de pago";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(15);
             column.EditorProperties().ComboBox(p =>
             {
                 p.Columns.Add("NombreMecanismo", "Descripción").Width = Unit.Percentage(100);
@@ -94,8 +94,8 @@
 
         });
         //settings.row
-        settings.ClientSideEvents.RowClick = "OnRowClick";
-        settings.ClientSideEvents.EndCallback = "OnEndCallback";
+        //settings.ClientSideEvents.RowClick = "OnRowClick";
+        //settings.ClientSideEvents.EndCallback = "OnEndCallback";
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
