@@ -7,6 +7,7 @@ using Core.Bus.Reportes.Academico;
 using Core.Info.Reportes.Academico;
 using System.Collections.Generic;
 using Core.Bus.Academico;
+using Core.Bus.General;
 
 namespace Core.Web.Reportes.Academico
 {
@@ -37,6 +38,17 @@ namespace Core.Web.Reportes.Academico
                 int IdSede = string.IsNullOrEmpty(p_IdSede.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSede.Value);
                 List<ACA_008_Info> Lista = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo);
                 this.DataSource = Lista;
+
+                tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+                var emp = bus_empresa.get_info(IdEmpresa);
+                if (emp != null)
+                {
+                    if (emp.em_logo != null)
+                    {
+                        ImageConverter obj = new ImageConverter();
+                        lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
+                    }
+                }
 
                 aca_Sede_Bus bus_sede = new aca_Sede_Bus();
                 var info_sede = bus_sede.GetInfo(IdEmpresa, IdSede);
