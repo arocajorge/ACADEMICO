@@ -82,17 +82,11 @@
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-                <a href="#tab_Asignacion" aria-controls="stock" role="tab" data-toggle="tab">Asignacion</a>
+                <a href="#tab_Detalle" aria-controls="stock" role="tab" data-toggle="tab">Detalle</a>
             </li>
-           <!-- <li>
-                <a href="#tab_solicitud_matricula" aria-controls="listado" role="tab" data-toggle="tab">Solicitud</a>
-            </li>
-            <li>
-                <a href="#tab_contrato_matricula" aria-controls="listado" role="tab" data-toggle="tab">Contrato</a>
-            </li>-->
         </ul>
         <div class="tab-content" style="padding-top: 20px">
-            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_Asignacion">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_Detalle">
                 @Html.DevExpress().WebDocumentViewer(settings =>
                     {
                         settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
