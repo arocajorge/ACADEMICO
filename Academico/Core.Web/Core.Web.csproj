@@ -8385,6 +8385,7 @@
     <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Ciudad_madre.cshtml" />
     <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Parroquia_madre.cshtml" />
     <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Region_madre.cshtml" />
+    <Content Include="Areas\Academico\Views\Matricula\Eliminar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

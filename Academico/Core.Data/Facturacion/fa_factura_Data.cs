@@ -59,8 +59,9 @@ namespace Core.Data.Facturacion
                                  vt_autorizacion = q.vt_autorizacion,
                                  Fecha_Autorizacion = q.Fecha_Autorizacion,
                                  NombresAlumno = q.NombresAlumno,
-                                 EstadoBool = q.Estado == "A" ? true : false
+                                 EstadoBool = q.Estado == "A" ? true : false,
 
+                                 IdUsuario=q.IdUsuario
                              }).ToList();
                 }
 

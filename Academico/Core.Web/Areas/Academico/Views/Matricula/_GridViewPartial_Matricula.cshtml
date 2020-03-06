@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_Matricula";
-        settings.CallbackRouteValues = new { Controller = "Matricula", Action = "GridViewPartial_Matricula" };
+        settings.CallbackRouteValues = new { Controller = "Matricula", Action = "GridViewPartial_Matricula", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdMatricula";
         //Configuración para que la grilla no muestre texto completo
@@ -56,15 +56,26 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "BloquearMatricula")) == false)
                 {
                     ViewContext.Writer.Write(
-                        Html.ActionLink("Consultar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") })
-                    );
+                            Html.ActionLink("Consultar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") }) + "&nbsp;"
+                        );
+
+                    if (ViewBag.Anular == true)
+                    {
+                        ViewContext.Writer.Write(
+                            Html.ActionLink("Eliminar", "Eliminar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") },
+                            new { onclick = "return confirm('¿Está seguro de que desea eliminar el registro?')" })
+                        );
+                    }
                 }
             });
             c.SetHeaderTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Web.Helps.SessionFixed.IdEmpresa}).ToHtmlString()
-                );
+                if (ViewBag.Nuevo == true)
+                {
+                    ViewContext.Writer.Write(
+                        Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
+                    );
+                }
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
@@ -76,7 +87,15 @@
         settings.Columns.Add("NomJornada", "Jornada").Width = Unit.Percentage(10);
         settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(10);
         settings.Columns.Add("NomParalelo", "Paralelo").Width = Unit.Percentage(10);
-
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = "Reporte";
+        //    column.SetDataItemTemplateContent(c =>
+        //    {
+        //        ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-print\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("ACA_001", "AcademicoReportes", new { Area = "Reportes", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa").ToString(), IdAlumno = DataBinder.Eval(c.DataItem, "IdAlumno"), IdAnio = DataBinder.Eval(c.DataItem, "IdAnio") }, Request.Url.Scheme) + "');\"></span>");
+        //    });
+        //    column.Width = Unit.Percentage(5);
+        //});
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

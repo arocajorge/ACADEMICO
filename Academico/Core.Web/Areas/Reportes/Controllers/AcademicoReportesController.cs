@@ -84,11 +84,15 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_001(int IdEmpresa = 0, decimal IdAlumno = 0, int IdAnio=0)
         {
             cl_filtros_Info model = new cl_filtros_Info();
+            var info_anio = new aca_AnioLectivo_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
-            
-            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            if (IdAnio == 0)
+            {
+                info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            }
+
+            model.IdAnio = (IdAnio == 0 ? info_anio.IdAnio : IdAnio);
             model. IdAlumno = IdAlumno;
 
             ACA_001_Rpt Report = new ACA_001_Rpt();
@@ -104,7 +108,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             Report.p_IdEmpresa.Value = model.IdEmpresa;
             Report.p_IdSede.Value = model.IdSede;
-            Report.p_IdAnio.Value = IdAnio;
+            Report.p_IdAnio.Value = model.IdAnio;
             Report.p_IdAlumno.Value = IdAlumno;
             Report.usuario = SessionFixed.IdUsuario;
             Report.empresa = SessionFixed.NomEmpresa;
@@ -246,9 +250,14 @@ namespace Core.Web.Areas.Reportes.Controllers
         {
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            var info_anio = new aca_AnioLectivo_Info();
 
-            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            if (IdAnio == 0)
+            {
+                info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            }
+
+            model.IdAnio = (IdAnio == 0 ? info_anio.IdAnio : IdAnio);
             model.IdAlumno = IdAlumno;
             ACA_002_Rpt report = new ACA_002_Rpt();
 
@@ -262,7 +271,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdAnio.Value = IdAnio;
+            report.p_IdAnio.Value = model.IdAnio;
             report.p_IdAlumno.Value = IdAlumno;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -353,9 +362,13 @@ namespace Core.Web.Areas.Reportes.Controllers
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            var info_anio = new aca_AnioLectivo_Info();
+            if (IdAnio == 0)
+            {
+                info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            }
 
-            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdAnio = (IdAnio == 0 ? info_anio.IdAnio : IdAnio);
             model.IdNivel = IdNivel;
             model.IdJornada = IdJornada;
             model.IdCurso = IdCurso;
