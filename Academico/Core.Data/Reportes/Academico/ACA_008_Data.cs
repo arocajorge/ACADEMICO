@@ -30,43 +30,45 @@ namespace Core.Data.Reportes.Academico
                 List<ACA_008_Info> Lista = new List<ACA_008_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Lista = Context.VWACA_008.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio &&
+                   var lst = Context.VWACA_008.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio &&
                     IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin &&
                     IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
                     IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin &&
                     IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin &&
-                    IdParaleloIni <= q.IdCurso && q.IdCurso <= IdParaleloFin
-                 ).Select(q => new ACA_008_Info
+                    IdParaleloIni <= q.IdParalelo && q.IdParalelo <= IdParaleloFin).ToList();
+                    foreach (var item in lst)
                     {
-                        IdEmpresa = q.IdEmpresa,
-                        NomSede = q.NomSede,
-                        NomNivel = q.NomNivel,
-                        OrdenNivel = q.OrdenNivel,
-                        NomJornada = q.NomJornada,
-                        OrdenJornada = q.OrdenJornada,
-                        OrdenCurso = q.OrdenCurso,
-                        NomCurso = q.NomCurso,
-                        CodigoParalelo = q.CodigoParalelo,
-                        NomParalelo = q.NomParalelo,
-                        OrdenParalelo = q.OrdenParalelo,
-                        pe_sexo = q.pe_sexo,
-                        Cantidad = q.Cantidad,
-                        IdMatricula = q.IdMatricula,
-                        IdAnio = q.IdAnio,
-                        IdSede = q.IdSede,
-                        IdNivel = q.IdNivel,
-                        IdJornada = q.IdJornada,
-                        IdCurso = q.IdCurso,
-                        IdParalelo = q.IdParalelo,
-                        Fecha = q.Fecha,
-                        NomPlantilla =(MostarPlantilla==true ? q.NomPlantilla: ""),
-                        IdPlantilla = q.IdPlantilla,
-                        Descripcion = q.Descripcion,
-                        pe_nombreCompleto = q.pe_nombreCompleto,
-                        CodigoAlumno = q.CodigoAlumno
-
-
-                    }).ToList();
+                        Lista.Add(new ACA_008_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            NomSede = item.NomSede,
+                            NomNivel = item.NomNivel,
+                            OrdenNivel = item.OrdenNivel,
+                            NomJornada = item.NomJornada,
+                            OrdenJornada = item.OrdenJornada,
+                            OrdenCurso = item.OrdenCurso,
+                            NomCurso = item.NomCurso,
+                            CodigoParalelo = item.CodigoParalelo,
+                            NomParalelo = item.NomParalelo,
+                            OrdenParalelo = item.OrdenParalelo,
+                            pe_sexo = item.pe_sexo,
+                            Cantidad = item.Cantidad,
+                            IdMatricula = item.IdMatricula,
+                            IdAnio = item.IdAnio,
+                            IdSede = item.IdSede,
+                            IdNivel = item.IdNivel,
+                            IdJornada = item.IdJornada,
+                            IdCurso = item.IdCurso,
+                            IdParalelo = item.IdParalelo,
+                            Fecha = item.Fecha,
+                            NomPlantilla = (MostarPlantilla == true ? item.NomPlantilla : ""),
+                            IdPlantilla = item.IdPlantilla,
+                            Descripcion = item.Descripcion,
+                            pe_nombreCompleto = item.pe_nombreCompleto,
+                            CodigoAlumno = item.CodigoAlumno
+                            
+                        });
+                    }
                 }
 
                 return Lista;
