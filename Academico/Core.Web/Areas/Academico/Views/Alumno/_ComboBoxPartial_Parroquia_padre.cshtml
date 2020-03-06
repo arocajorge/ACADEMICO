@@ -1,0 +1,16 @@
+﻿@Html.DevExpress().ComboBox(settings =>
+{
+    settings.Name = "IdParroquia_padre";
+    settings.CallbackRouteValues = new { Controller = "Alumno", Action = "ComboBoxPartial_Parroquia_padre", Area = "Academico" };
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+    settings.Properties.Columns.Add("IdParroquia", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+    settings.Properties.Columns.Add("nom_parroquia", "Ciudad").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+    //Campo ID
+    settings.Properties.ValueField = "IdParroquia";
+    settings.Properties.ValueType = typeof(string);
+    settings.Properties.TextField = "nom_parroquia";
+    settings.Properties.NullText = "== Seleccione ==";
+    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdPais_padre'] = IdPais_padre.GetValue(); e.customArgs['Cod_Region_padre'] = Cod_Region.GetValue();e.customArgs['IdProvincia_padre'] = IdProvincia_padre.GetValue(); e.customArgs['IdCiudad_padre'] = IdCiudad_padre.GetValue(); }";
+}).BindList(new Core.Bus.General.tb_parroquia_Bus().get_list(Model.IdCiudad_padre, false)).Bind(Model.IdParroquia_padre).GetHtml()

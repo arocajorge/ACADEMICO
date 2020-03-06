@@ -692,6 +692,56 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">País</label>
+                                @Html.Partial("_ComboBoxPartial_Pais_padre", Model)
+                                @Html.ValidationMessageFor(q => q.IdPais_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Región</label>
+                                @Html.Partial("_ComboBoxPartial_Region_padre", Model)
+                                @Html.ValidationMessageFor(q => q.Cod_Region_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Provincia</label>
+                                @Html.Partial("_ComboBoxPartial_Provincia_padre", Model)
+                                @Html.ValidationMessageFor(q => q.IdProvincia_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Ciudad</label>
+                                @Html.Partial("_ComboBoxPartial_Ciudad_padre", Model)
+                                @Html.ValidationMessageFor(q => q.IdCiudad_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Parroquia</label>
+                                @Html.Partial("_ComboBoxPartial_Parroquia_padre", Model)
+                                @Html.ValidationMessageFor(q => q.IdParroquia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Direccion">Sector</label>
+                                @Html.TextBoxFor(q => q.Sector_padre, new { @class = "form-control", @rows = "2", @id = "Sector_padre" })
+                                @Html.ValidationMessageFor(q => q.Sector_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="IdEmpresa">Religión</label>
@@ -828,9 +878,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="IdCiudad">Ciudad*</label>
-                                        @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_padre, settings =>
+                                        @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_padre_fact, settings =>
                                {
-                                   settings.Name = "IdCiudad_padre";
+                                   settings.Name = "IdCiudad_padre_fact";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                    settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
@@ -842,16 +892,16 @@
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia_padre.PerformCallback(); }";
+                                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia_padre_fact.PerformCallback(); }";
                                }).BindList(ViewBag.lst_ciudad).GetHtml()
-                                        @Html.ValidationMessageFor(q => q.IdCiudad_padre, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(q => q.IdCiudad_padre_fact, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="parroquia">Parroquia*</label>
                                         @Html.Partial("_cmb_parroquia_padre", Model)
-                                        @Html.ValidationMessageFor(q => q.IdParroquia_padre, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(q => q.IdParroquia_padre_fact, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -1127,6 +1177,56 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">País</label>
+                                @Html.Partial("_ComboBoxPartial_Pais_madre", Model)
+                                @Html.ValidationMessageFor(q => q.IdPais_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Región</label>
+                                @Html.Partial("_ComboBoxPartial_Region_madre", Model)
+                                @Html.ValidationMessageFor(q => q.Cod_Region_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Provincia</label>
+                                @Html.Partial("_ComboBoxPartial_Provincia_madre", Model)
+                                @Html.ValidationMessageFor(q => q.IdProvincia_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Ciudad</label>
+                                @Html.Partial("_ComboBoxPartial_Ciudad_madre", Model)
+                                @Html.ValidationMessageFor(q => q.IdCiudad_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Parroquia</label>
+                                @Html.Partial("_ComboBoxPartial_Parroquia_madre", Model)
+                                @Html.ValidationMessageFor(q => q.IdParroquia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Direccion">Sector</label>
+                                @Html.TextBoxFor(q => q.Sector_madre, new { @class = "form-control", @rows = "2", @id = "Sector_madre" })
+                                @Html.ValidationMessageFor(q => q.Sector_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="IdEmpresa">Religión</label>
@@ -1263,9 +1363,9 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="IdCiudad">Ciudad*</label>
-                                        @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_madre, settings =>
+                                        @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_madre_fact, settings =>
                                {
-                                   settings.Name = "IdCiudad_madre";
+                                   settings.Name = "IdCiudad_madre_fact";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                    settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
@@ -1277,16 +1377,16 @@
                                    //Boton para seleccionar ningun registro
                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia_madre.PerformCallback(); }";
+                                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia_madre_fact.PerformCallback(); }";
                                }).BindList(ViewBag.lst_ciudad).GetHtml()
-                                        @Html.ValidationMessageFor(q => q.IdCiudad_madre, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(q => q.IdCiudad_madre_fact, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="parroquia">Parroquia*</label>
                                         @Html.Partial("_cmb_parroquia_madre", Model)
-                                        @Html.ValidationMessageFor(q => q.IdParroquia_madre, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(q => q.IdParroquia_madre_fact, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -1713,12 +1813,23 @@
                             $("#CasaPropia_padre").val(data.CasaPropia);
                             $("#AnioVehiculo_padre").val(data.AnioVehiculo);
                             IdReligion_padre.SetValue(data.IdReligion);
+                            IdPais_padre.SetValue(data.IdPais);
+                            Cod_Region_padre.SetValue(data.Cod_Region);
+                            IdProvincia_padre.SetValue(data.IdProvincia);
+                            IdCiudad_padre.SetValue(data.IdCiudad);
+                            IdParroquia_padre.SetValue(data.IdParroquia);
+                            $("#Sector_padre").val(data.Sector);
                             AsisteCentroCristiano_padre.SetChecked(data.AsisteCentroCristiano);
 
                             mostrar_vehiculo_padre();
                         }
                         else {
                             vaciar_campos_padre();
+                            IdPais_padre.SetValue(data.IdPais);
+                            Cod_Region_padre.SetValue(data.Cod_Region);
+                            IdProvincia_padre.SetValue(data.IdProvincia);
+                            IdCiudad_padre.SetValue(data.IdCiudad);
+                            IdParroquia_padre.SetValue(data.IdParroquia);
                         }
                     }
                 },
@@ -1811,11 +1922,22 @@
                             $("#AnioVehiculo_madre").val(data.AnioVehiculo);
                             IdReligion_madre.SetValue(data.IdReligion);
                             AsisteCentroCristiano_padre.SetChecked(data.AsisteCentroCristiano);
+                            IdPais_madre.SetValue(data.IdPais);
+                            Cod_Region_madre.SetValue(data.Cod_Region);
+                            IdProvincia_madre.SetValue(data.IdProvincia);
+                            IdCiudad_madre.SetValue(data.IdCiudad);
+                            IdParroquia_madre.SetValue(data.IdParroquia);
+                            $("#Sector_madre").val(data.Sector);
 
                             mostrar_vehiculo_madre();
                         }
                         else {
                             vaciar_campos_madre();
+                            IdPais_madre.SetValue(data.IdPais);
+                            Cod_Region_madre.SetValue(data.Cod_Region);
+                            IdProvincia_madre.SetValue(data.IdProvincia);
+                            IdCiudad_madre.SetValue(data.IdCiudad);
+                            IdParroquia_madre.SetValue(data.IdParroquia);
                         }
                     }
                 },
@@ -1877,6 +1999,12 @@
             $("#AnioVehiculo_padre").val("");
             IdReligion_padre.SetValue(null);
             AsisteCentroCristiano_padre.SetChecked(false);
+            IdPais_padre.SetValue(null);
+            Cod_Region_padre.SetValue(null);
+            IdProvincia_padre.SetValue(null);
+            IdCiudad_padre.SetValue(null);
+            IdParroquia_padre.SetValue(null);
+            $("#Sector_padre").val("");
 
             mostrar_vehiculo_padre();
         }
@@ -1913,6 +2041,12 @@
             $("#AnioVehiculo_madre").val("");
             IdReligion_madre.SetValue(null);
             AsisteCentroCristiano_madre.SetChecked(false);
+            IdPais_madre.SetValue(null);
+            Cod_Region_madre.SetValue(null);
+            IdProvincia_madre.SetValue(null);
+            IdCiudad_madre.SetValue(null);
+            IdParroquia_madre.SetValue(null);
+            $("#Sector_madre").val("");
 
             mostrar_vehiculo_madre();
         }
