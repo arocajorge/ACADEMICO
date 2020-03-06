@@ -612,6 +612,23 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ViewBag.Report = report;
 
+            ACA_008_Resumen_Rpt ReportResumen = new ACA_008_Resumen_Rpt();
+            #region Cargo diseño desde base
+            var reportCont = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_008");
+            if (reportCont != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportCont.ReporteDisenio);
+                ReportResumen.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_IdAnio.Value = model.IdAnio;
+            ReportResumen.p_IdSede.Value = model.IdSede;
+            ReportResumen.usuario = SessionFixed.IdUsuario;
+            ReportResumen.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportResumen = ReportResumen;
+
             return View(model);
         }
         [HttpPost]
@@ -640,6 +657,23 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
 
             ViewBag.Report = report;
+
+            ACA_008_Resumen_Rpt ReportResumen = new ACA_008_Resumen_Rpt();
+            #region Cargo diseño desde base
+            var reportCont = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_008");
+            if (reportCont != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportCont.ReporteDisenio);
+                ReportResumen.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_IdAnio.Value = model.IdAnio;
+            ReportResumen.p_IdSede.Value = model.IdSede;
+            ReportResumen.usuario = SessionFixed.IdUsuario;
+            ReportResumen.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportResumen = ReportResumen;
 
             return View(model);
         }

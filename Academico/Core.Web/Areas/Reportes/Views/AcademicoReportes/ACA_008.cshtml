@@ -95,6 +95,9 @@
             <li class="active">
                 <a href="#tab_Detalle" aria-controls="stock" role="tab" data-toggle="tab">Detalle</a>
             </li>
+            <li>
+                <a href="#tab_Resumen" aria-controls="listado" role="tab" data-toggle="tab">Resumen</a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_Detalle">
@@ -104,6 +107,15 @@
                         settings.MobileMode = false;
                         settings.Name = "webDocumentViewer";
                     }).Bind(ViewBag.Report).GetHtml()
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_Resumen">
+
+                @Html.DevExpress().WebDocumentViewer(settings =>
+               {
+                   settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                   settings.MobileMode = false;
+                   settings.Name = "webDocumentViewer2";
+               }).Bind(ViewBag.ReportResumen).GetHtml()
             </div>
         </div>
         <!-- /.box-body -->
