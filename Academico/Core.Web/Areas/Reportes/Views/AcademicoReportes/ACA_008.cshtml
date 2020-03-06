@@ -73,6 +73,17 @@
                             @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdCliente"></label>
+                            @Html.DevExpress().CheckBoxFor(q => q.mostrar_observacion_completa, settings =>
+                            {
+                                settings.Name = "mostrar_observacion_completa";
+                                settings.Text = "Mostrar nombre de Plantilla";
+                            }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.mostrar_observacion_completa, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.box-body -->
@@ -84,6 +95,9 @@
             <li class="active">
                 <a href="#tab_Detalle" aria-controls="stock" role="tab" data-toggle="tab">Detalle</a>
             </li>
+            <li>
+                <a href="#tab_Resumen" aria-controls="listado" role="tab" data-toggle="tab">Resumen</a>
+            </li>
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_Detalle">
@@ -93,6 +107,15 @@
                         settings.MobileMode = false;
                         settings.Name = "webDocumentViewer";
                     }).Bind(ViewBag.Report).GetHtml()
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_Resumen">
+
+                @Html.DevExpress().WebDocumentViewer(settings =>
+               {
+                   settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                   settings.MobileMode = false;
+                   settings.Name = "webDocumentViewer2";
+               }).Bind(ViewBag.ReportResumen).GetHtml()
             </div>
         </div>
         <!-- /.box-body -->

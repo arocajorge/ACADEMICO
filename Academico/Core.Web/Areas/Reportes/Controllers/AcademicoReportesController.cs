@@ -599,6 +599,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdJornada = IdJornada;
             model.IdCurso = IdCurso;
             model.IdParalelo = IdParalelo;
+            model.mostrar_observacion_completa = true;
 
             ACA_008_Rpt report = new ACA_008_Rpt();
 
@@ -618,10 +619,28 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_MostrarPlantilla.Value = model.mostrar_observacion_completa;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
             ViewBag.Report = report;
+
+            ACA_008_Resumen_Rpt ReportResumen = new ACA_008_Resumen_Rpt();
+            #region Cargo diseño desde base
+            var reportCont = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_008");
+            if (reportCont != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportCont.ReporteDisenio);
+                ReportResumen.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_IdAnio.Value = model.IdAnio;
+            ReportResumen.p_IdSede.Value = model.IdSede;
+            ReportResumen.usuario = SessionFixed.IdUsuario;
+            ReportResumen.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportResumen = ReportResumen;
 
             return View(model);
         }
@@ -646,10 +665,28 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_MostrarPlantilla.Value = model.mostrar_observacion_completa;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
             ViewBag.Report = report;
+
+            ACA_008_Resumen_Rpt ReportResumen = new ACA_008_Resumen_Rpt();
+            #region Cargo diseño desde base
+            var reportCont = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_008");
+            if (reportCont != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportCont.ReporteDisenio);
+                ReportResumen.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_IdAnio.Value = model.IdAnio;
+            ReportResumen.p_IdSede.Value = model.IdSede;
+            ReportResumen.usuario = SessionFixed.IdUsuario;
+            ReportResumen.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportResumen = ReportResumen;
 
             return View(model);
         }
