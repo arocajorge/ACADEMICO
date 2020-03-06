@@ -2,7 +2,7 @@
 @{
     var comboBox = Html.DevExpress().ComboBox(settings =>
     {
-        settings.Name = "IdParroquia_padre";
+        settings.Name = "IdParroquia_padre_fact";
         settings.Width = Unit.Percentage(100);
         settings.Properties.DropDownWidth = Unit.Percentage(100);
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
@@ -13,10 +13,10 @@
         settings.Properties.Columns.Add("nom_parroquia", "Parroquia").Width = System.Web.UI.WebControls.Unit.Percentage(80);
         settings.Properties.ValueField = "IdParroquia";
         settings.Properties.TextFormatString = "[{0}] [{1}]]";
-        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['fx_IdCiudad_padre'] = IdCiudad_padre.GetValue(); }";
+        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['fx_IdCiudad_padre_fact'] = IdCiudad_padre_fact.GetValue(); }";
 
         settings.Properties.ValueType = typeof(string);
-    }).BindList(new Core.Bus.General.tb_parroquia_Bus().get_list(Model.IdCiudad_padre,false))
-    .Bind(Model.IdParroquia_padre);
+    }).BindList(new Core.Bus.General.tb_parroquia_Bus().get_list(Model.IdCiudad_padre_fact,false))
+    .Bind(Model.IdParroquia_padre_fact);
 }
 @comboBox.GetHtml()

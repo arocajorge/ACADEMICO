@@ -279,6 +279,70 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
+        #region CombosPadre
+        public ActionResult ComboBoxPartial_Pais_padre()
+        {
+            return PartialView("_ComboBoxPartial_Pais_padre", new aca_Alumno_Info());
+        }
+        public ActionResult ComboBoxPartial_Region_padre()
+        {
+            string IdPais = (Request.Params["IdPais_padre"] != null) ? Convert.ToString(Request.Params["IdPais_padre"]) : "";
+            return PartialView("_ComboBoxPartial_Region_padre", new aca_Alumno_Info { IdPais_padre = IdPais });
+        }
+        public ActionResult ComboBoxPartial_Provincia_padre()
+        {
+            string IdPais = (Request.Params["IdPais_padre"] != null) ? Convert.ToString(Request.Params["IdPais_padre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_padre"] != null) ? Convert.ToString(Request.Params["Cod_Region_padre"]) : "";
+            return PartialView("_ComboBoxPartial_Provincia_padre", new aca_Alumno_Info { IdPais_padre = IdPais, Cod_Region_padre = Cod_Region });
+        }
+        public ActionResult ComboBoxPartial_Ciudad_padre()
+        {
+            string IdPais = (Request.Params["IdPais_padre"] != null) ? Convert.ToString(Request.Params["IdPais_padre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_padre"] != null) ? Convert.ToString(Request.Params["Cod_Region_padre"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia_padre"] != null) ? Convert.ToString(Request.Params["IdProvincia_padre"]) : "";
+            return PartialView("_ComboBoxPartial_Ciudad_padre", new aca_Alumno_Info { IdPais_padre = IdPais, Cod_Region_padre = Cod_Region, IdProvincia_padre = IdProvincia });
+        }
+        public ActionResult ComboBoxPartial_Parroquia_padre()
+        {
+            string IdPais = (Request.Params["IdPais_padre"] != null) ? Convert.ToString(Request.Params["IdPais_padre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_padre"] != null) ? Convert.ToString(Request.Params["Cod_Region_padre"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia_padre"] != null) ? Convert.ToString(Request.Params["IdProvincia_padre"]) : "";
+            string IdCiudad = (Request.Params["IdCiudad_padre"] != null) ? Convert.ToString(Request.Params["IdCiudad_padre"]) : "";
+            return PartialView("_ComboBoxPartial_Parroquia_padre", new aca_Alumno_Info { IdPais_padre = IdPais, Cod_Region_padre = Cod_Region, IdProvincia_padre = IdProvincia, IdCiudad_padre = IdCiudad });
+        }
+        #endregion
+        #region CombosMadre
+        public ActionResult ComboBoxPartial_Pais_madre()
+        {
+            return PartialView("_ComboBoxPartial_Pais_madre", new aca_Alumno_Info());
+        }
+        public ActionResult ComboBoxPartial_Region_madre()
+        {
+            string IdPais = (Request.Params["IdPais_madre"] != null) ? Convert.ToString(Request.Params["IdPais_madre"]) : "";
+            return PartialView("_ComboBoxPartial_Region_madre", new aca_Alumno_Info { IdPais_madre = IdPais });
+        }
+        public ActionResult ComboBoxPartial_Provincia_madre()
+        {
+            string IdPais = (Request.Params["IdPais_madre"] != null) ? Convert.ToString(Request.Params["IdPais_madre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_madre"] != null) ? Convert.ToString(Request.Params["Cod_Region_madre"]) : "";
+            return PartialView("_ComboBoxPartial_Provincia_madre", new aca_Alumno_Info { IdPais_madre = IdPais, Cod_Region_madre = Cod_Region });
+        }
+        public ActionResult ComboBoxPartial_Ciudad_madre()
+        {
+            string IdPais = (Request.Params["IdPais_madre"] != null) ? Convert.ToString(Request.Params["IdPais_madre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_madre"] != null) ? Convert.ToString(Request.Params["Cod_Region_madre"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia_madre"] != null) ? Convert.ToString(Request.Params["IdProvincia_madre"]) : "";
+            return PartialView("_ComboBoxPartial_Ciudad_madre", new aca_Alumno_Info { IdPais_madre = IdPais, Cod_Region_madre = Cod_Region, IdProvincia_madre = IdProvincia });
+        }
+        public ActionResult ComboBoxPartial_Parroquia_madre()
+        {
+            string IdPais = (Request.Params["IdPais_madre"] != null) ? Convert.ToString(Request.Params["IdPais_madre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_madre"] != null) ? Convert.ToString(Request.Params["Cod_Region_madre"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia_madre"] != null) ? Convert.ToString(Request.Params["IdProvincia_madre"]) : "";
+            string IdCiudad = (Request.Params["IdCiudad_madre"] != null) ? Convert.ToString(Request.Params["IdCiudad_madre"]) : "";
+            return PartialView("_ComboBoxPartial_Parroquia_madre", new aca_Alumno_Info { IdPais_madre = IdPais, Cod_Region_madre = Cod_Region, IdProvincia_madre = IdProvincia, IdCiudad_madre = IdCiudad });
+        }
+        #endregion
         #region Combos
         public ActionResult ComboBoxPartial_Pais()
         {
@@ -313,12 +377,12 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public ActionResult cmb_parroquia_padre()
         {
-            string IdCiudadPadre = (Request.Params["fx_IdCiudad_padre"] != null) ? Request.Params["fx_IdCiudad_padre"].ToString() : "";
+            string IdCiudadPadre = (Request.Params["fx_IdCiudad_padre_fact"] != null) ? Request.Params["fx_IdCiudad_padre_fact"].ToString() : "";
             return PartialView("_cmb_parroquia_padre", new aca_Alumno_Info { IdCiudad = IdCiudadPadre });
         }
         public ActionResult cmb_parroquia_madre()
         {
-            string IdCiudadMadre = (Request.Params["fx_IdCiudad_madre"] != null) ? Request.Params["fx_IdCiudad_madre"].ToString() : "";
+            string IdCiudadMadre = (Request.Params["fx_IdCiudad_madre_fact"] != null) ? Request.Params["fx_IdCiudad_madre_fact"].ToString() : "";
             return PartialView("_cmb_parroquia_madre", new aca_Alumno_Info { IdCiudad = IdCiudadMadre });
         }
         #endregion
@@ -420,18 +484,27 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdProvincia = "09",
                 IdCiudad = "09",
                 IdParroquia = "09",
-                IdCiudad_padre = "09",
-                IdParroquia_padre = "09",
-                IdCiudad_madre = "09",
-                IdParroquia_madre = "09",
+                IdCiudad_padre_fact = "09",
+                IdParroquia_padre_fact = "09",
+                IdCiudad_madre_fact = "09",
+                IdParroquia_madre_fact = "09",
                 CodCatalogoCONADIS = "",
-                //IdProfesion_madre=0,
                 CodCatalogoSangre = "O+",
                 CodCatalogoSangre_padre = "O+",
                 CodCatalogoSangre_madre = "O+",
                 IdPersona_padre =0,
                 FechaIngreso = DateTime.Now,
                 alu_foto = new byte[0],
+                IdPais_padre = "1",
+                Cod_Region_padre = "00001",
+                IdProvincia_padre = "09",
+                IdCiudad_padre = "09",
+                IdParroquia_padre = "09",
+                IdPais_madre = "1",
+                Cod_Region_madre = "00001",
+                IdProvincia_madre = "09",
+                IdCiudad_madre = "09",
+                IdParroquia_madre = "09",
                 lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>()
             };
 
@@ -561,6 +634,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     IdCiudad_fact = "09",
                     IdParroquia_fact = "09",
+                    IdPais = "1",
+                    Cod_Region = "00001",
+                    IdProvincia = "09",
+                    IdCiudad = "09",
+                    IdParroquia = "09"
                 };
             }
             else
@@ -581,6 +659,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     IdCiudad_fact = "09",
                     IdParroquia_fact = "09",
+                    IdPais = "1",
+                    Cod_Region = "00001",
+                    IdProvincia = "09",
+                    IdCiudad = "09",
+                    IdParroquia = "09"
                 };
             }
             else
@@ -633,8 +716,14 @@ namespace Core.Web.Areas.Academico.Controllers
             model.EstaFallecido_padre = info_fam_padre.EstaFallecido;
             model.IdTipoCredito_padre = (info_fam_padre.IdTipoCredito == null ? "CON" : info_fam_padre.IdTipoCredito);
             model.Idtipo_cliente_padre = (info_fam_padre.Idtipo_cliente == 0 ? 1 : info_fam_padre.Idtipo_cliente);
-            model.IdCiudad_padre = info_fam_padre.IdCiudad_fact;
-            model.IdParroquia_padre = info_fam_padre.IdParroquia_fact;
+            model.IdCiudad_padre_fact = info_fam_padre.IdCiudad_fact;
+            model.IdParroquia_padre_fact = info_fam_padre.IdParroquia_fact;
+            model.IdPais_padre = info_fam_padre.IdPais;
+            model.Cod_Region_padre = info_fam_padre.Cod_Region;
+            model.IdProvincia_padre = info_fam_padre.IdProvincia;
+            model.IdCiudad_padre = info_fam_padre.IdCiudad;
+            model.IdParroquia_padre = info_fam_padre.IdParroquia;
+            model.Sector_padre = info_fam_padre.Sector;
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
             model.SeFactura_madre = info_fam_madre.SeFactura;
@@ -674,8 +763,14 @@ namespace Core.Web.Areas.Academico.Controllers
             model.EstaFallecido_madre = info_fam_madre.EstaFallecido;
             model.IdTipoCredito_madre = (info_fam_madre.IdTipoCredito == null ? "CON" : info_fam_madre.IdTipoCredito);
             model.Idtipo_cliente_madre = (info_fam_madre.Idtipo_cliente == 0 ? 1 : info_fam_madre.Idtipo_cliente);
-            model.IdCiudad_madre = info_fam_madre.IdCiudad_fact;
-            model.IdParroquia_madre = info_fam_madre.IdParroquia_fact;
+            model.IdCiudad_madre_fact = info_fam_madre.IdCiudad_fact;
+            model.IdParroquia_madre_fact = info_fam_madre.IdParroquia_fact;
+            model.IdPais_madre = info_fam_madre.IdPais;
+            model.Cod_Region_madre = info_fam_madre.Cod_Region;
+            model.IdProvincia_madre = info_fam_madre.IdProvincia;
+            model.IdCiudad_madre = info_fam_madre.IdCiudad;
+            model.IdParroquia_madre = info_fam_madre.IdParroquia;
+            model.Sector_madre = info_fam_madre.Sector;
 
             if (model == null)
                 return RedirectToAction("Index");
@@ -844,8 +939,14 @@ namespace Core.Web.Areas.Academico.Controllers
             model.EstaFallecido_padre = info_fam_padre.EstaFallecido;
             model.IdTipoCredito_padre = (info_fam_padre.IdTipoCredito == null ? "CON" : info_fam_padre.IdTipoCredito);
             model.Idtipo_cliente_padre = (info_fam_padre.Idtipo_cliente == 0 ? 1 : info_fam_padre.Idtipo_cliente);
-            model.IdCiudad_padre = info_fam_padre.IdCiudad_fact;
-            model.IdParroquia_padre = info_fam_padre.IdParroquia_fact;
+            model.IdCiudad_padre_fact = info_fam_padre.IdCiudad_fact;
+            model.IdParroquia_padre_fact = info_fam_padre.IdParroquia_fact;
+            model.IdPais_padre = info_fam_padre.IdPais;
+            model.Cod_Region_padre = info_fam_padre.Cod_Region;
+            model.IdProvincia_padre = info_fam_padre.IdProvincia;
+            model.IdCiudad_padre = info_fam_padre.IdCiudad;
+            model.IdParroquia_padre = info_fam_padre.IdParroquia;
+            model.Sector_padre = info_fam_padre.Sector;
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
             model.SeFactura_madre = info_fam_madre.SeFactura;
@@ -870,8 +971,14 @@ namespace Core.Web.Areas.Academico.Controllers
             model.EstaFallecido_madre = info_fam_madre.EstaFallecido;
             model.IdTipoCredito_madre = (info_fam_madre.IdTipoCredito == null ? "CON" : info_fam_madre.IdTipoCredito);
             model.Idtipo_cliente_madre = (info_fam_madre.Idtipo_cliente == 0 ? 1 : info_fam_madre.Idtipo_cliente);
-            model.IdCiudad_madre = info_fam_madre.IdCiudad_fact;
-            model.IdParroquia_madre = info_fam_madre.IdParroquia_fact;
+            model.IdCiudad_madre_fact = info_fam_madre.IdCiudad_fact;
+            model.IdParroquia_madre_fact = info_fam_madre.IdParroquia_fact;
+            model.IdPais_madre = info_fam_madre.IdPais;
+            model.Cod_Region_madre = info_fam_madre.Cod_Region;
+            model.IdProvincia_madre = info_fam_madre.IdProvincia;
+            model.IdCiudad_madre = info_fam_madre.IdCiudad;
+            model.IdParroquia_madre = info_fam_madre.IdParroquia;
+            model.Sector_madre = info_fam_madre.Sector;
 
             if (model == null)
                 return RedirectToAction("Index");
@@ -927,6 +1034,12 @@ namespace Core.Web.Areas.Academico.Controllers
             mes = mes - 1;
             resultado.mes = mes.ToString();
             resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
+
+            resultado.IdPais = ((resultado.IdPais == null || resultado.IdPais=="") ? "1" : resultado.IdPais);
+            resultado.Cod_Region = ((resultado.Cod_Region == null || resultado.Cod_Region == "") ? "00001" : resultado.Cod_Region);
+            resultado.IdProvincia = ((resultado.IdProvincia == null || resultado.IdProvincia == "") ? "09" : resultado.IdProvincia);
+            resultado.IdCiudad = ((resultado.IdCiudad == null || resultado.IdCiudad == "") ? "09" : resultado.IdCiudad);
+            resultado.IdParroquia = ((resultado.IdParroquia == null || resultado.IdParroquia == "") ? "09" : resultado.IdParroquia);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }

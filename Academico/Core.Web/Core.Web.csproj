@@ -8375,6 +8375,16 @@
     <Content Include="Areas\CuentasPorCobrar\Views\MotivoLiquidacion\_GridViewPartial_motivo_x_sucursal.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_008.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Pais_padre.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Region_padre.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Provincia_padre.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Ciudad_padre.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Parroquia_padre.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Pais_madre.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Provincia_madre.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Ciudad_madre.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Parroquia_madre.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\_ComboBoxPartial_Region_madre.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

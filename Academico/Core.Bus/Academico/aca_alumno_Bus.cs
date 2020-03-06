@@ -161,6 +161,11 @@ namespace Core.Bus.Academico
                             AnioVehiculo = info.AnioVehiculo_padre,
                             CasaPropia = info.CasaPropia_padre,
                             EstaFallecido = info.EstaFallecido_padre,
+                            IdPais = info.IdPais_padre,
+                            Cod_Region = info.Cod_Region_padre,
+                            IdProvincia = info.IdProvincia_padre,
+                            IdCiudad = info.IdCiudad_padre,
+                            IdParroquia = info.IdParroquia_padre,
                             IdUsuarioCreacion = info.IdUsuario,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
@@ -207,8 +212,8 @@ namespace Core.Bus.Academico
                                     Idtipo_cliente = info.Idtipo_cliente_padre,
                                     IdNivel = 1,
                                     EsClienteExportador = false,
-                                    IdCiudad = info.IdCiudad_padre,
-                                    IdParroquia = info.IdParroquia_padre,
+                                    IdCiudad = info.IdCiudad_padre_fact,
+                                    IdParroquia = info.IdParroquia_padre_fact,
                                     Celular = info.Celular_padre,
                                     Direccion = info.Direccion_padre,
                                     Correo = info.Correo_padre,
@@ -239,8 +244,8 @@ namespace Core.Bus.Academico
                                 cliente.Idtipo_cliente = info.Idtipo_cliente_padre;
                                 cliente.IdTipoCredito = info.IdTipoCredito_padre;
                                 cliente.cl_plazo = info_credito.Dias_Vct;
-                                cliente.IdCiudad = info.IdCiudad_padre;
-                                cliente.IdParroquia = info.IdParroquia_padre;
+                                cliente.IdCiudad = info.IdCiudad_padre_fact;
+                                cliente.IdParroquia = info.IdParroquia_padre_fact;
                                 cliente.Celular = info.Celular_padre;
                                 cliente.Direccion = info.Direccion_padre;
                                 cliente.Correo = info.Correo_padre;
@@ -316,6 +321,11 @@ namespace Core.Bus.Academico
                             CasaPropia = info.CasaPropia_madre,
                             EsRepresentante = info.EsRepresentante_madre,
                             EstaFallecido = info.EstaFallecido_madre,
+                            IdPais = info.IdPais_madre,
+                            Cod_Region = info.Cod_Region_madre,
+                            IdProvincia = info.IdProvincia_madre,
+                            IdCiudad = info.IdCiudad_madre,
+                            IdParroquia = info.IdParroquia_madre,
                             IdUsuarioCreacion = info.IdUsuario,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
@@ -357,8 +367,8 @@ namespace Core.Bus.Academico
                                     Idtipo_cliente = info.Idtipo_cliente_madre,
                                     IdNivel = 1,
                                     EsClienteExportador = false,
-                                    IdCiudad = info.IdCiudad_madre,
-                                    IdParroquia = info.IdParroquia_madre,
+                                    IdCiudad = info.IdCiudad_madre_fact,
+                                    IdParroquia = info.IdParroquia_madre_fact,
                                     Celular = info.Celular_madre,
                                     Direccion = info.Direccion_madre,
                                     Correo = info.Correo_madre,
@@ -386,8 +396,8 @@ namespace Core.Bus.Academico
                                 cliente.Idtipo_cliente = info.Idtipo_cliente_madre;
                                 cliente.IdTipoCredito = info.IdTipoCredito_madre;
                                 cliente.cl_plazo = info_credito.Dias_Vct;
-                                cliente.IdCiudad = info.IdCiudad_madre;
-                                cliente.IdParroquia = info.IdParroquia_madre;
+                                cliente.IdCiudad = info.IdCiudad_madre_fact;
+                                cliente.IdParroquia = info.IdParroquia_madre_fact;
                                 cliente.Celular = info.Celular_madre;
                                 cliente.Direccion = info.Direccion_madre;
                                 cliente.Correo = info.Correo_madre;
@@ -477,6 +487,12 @@ namespace Core.Bus.Academico
                             AnioVehiculo = info.AnioVehiculo_padre,
                             CasaPropia = info.CasaPropia_padre,
                             EstaFallecido = info.EstaFallecido_padre,
+                            IdPais = info.IdPais_padre,
+                            Cod_Region = info.Cod_Region_padre,
+                            IdProvincia = info.IdProvincia_padre,
+                            IdCiudad = info.IdCiudad_padre,
+                            IdParroquia = info.IdParroquia_padre,
+                            Sector = info.Sector_padre,
                             IdUsuarioCreacion = info.IdUsuario,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
@@ -522,8 +538,8 @@ namespace Core.Bus.Academico
                                     Idtipo_cliente = info.Idtipo_cliente_padre,
                                     IdNivel = 1,
                                     EsClienteExportador = false,
-                                    IdCiudad = info.IdCiudad_padre,
-                                    IdParroquia = info.IdParroquia_padre,
+                                    IdCiudad = info.IdCiudad_padre_fact,
+                                    IdParroquia = info.IdParroquia_padre_fact,
                                     Celular = info.Celular_padre,
                                     Direccion = info.Direccion_padre,
                                     Correo = info.Correo_padre,
@@ -553,8 +569,8 @@ namespace Core.Bus.Academico
                                 cliente.Idtipo_cliente = info.Idtipo_cliente_padre;
                                 cliente.IdTipoCredito = info.IdTipoCredito_padre;
                                 cliente.cl_plazo = info_credito.Dias_Vct;
-                                cliente.IdCiudad = info.IdCiudad_padre;
-                                cliente.IdParroquia = info.IdParroquia_padre;
+                                cliente.IdCiudad = info.IdCiudad_padre_fact;
+                                cliente.IdParroquia = info.IdParroquia_padre_fact;
                                 cliente.Celular = info.Celular_padre;
                                 cliente.Direccion = info.Direccion_padre;
                                 cliente.Correo = info.Correo_padre;
@@ -622,6 +638,12 @@ namespace Core.Bus.Academico
                             CasaPropia = info.CasaPropia_madre,
                             EsRepresentante = info.EsRepresentante_madre,
                             EstaFallecido = info.EstaFallecido_madre,
+                            IdPais = info.IdPais_madre,
+                            Cod_Region = info.Cod_Region_madre,
+                            IdProvincia = info.IdProvincia_madre,
+                            IdCiudad = info.IdCiudad_madre,
+                            IdParroquia = info.IdParroquia_madre,
+                            Sector = info.Sector_madre,
                             IdUsuarioCreacion = info.IdUsuario,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
@@ -663,8 +685,8 @@ namespace Core.Bus.Academico
                                     Idtipo_cliente = info.Idtipo_cliente_madre,
                                     IdNivel = 1,
                                     EsClienteExportador = false,
-                                    IdCiudad = info.IdCiudad_madre,
-                                    IdParroquia = info.IdParroquia_madre,
+                                    IdCiudad = info.IdCiudad_madre_fact,
+                                    IdParroquia = info.IdParroquia_madre_fact,
                                     Celular = info.Celular_madre,
                                     Direccion = info.Direccion_madre,
                                     Correo = info.Correo_madre,
@@ -692,8 +714,8 @@ namespace Core.Bus.Academico
                                 cliente.Idtipo_cliente = info.Idtipo_cliente_madre;
                                 cliente.IdTipoCredito = info.IdTipoCredito_madre;
                                 cliente.cl_plazo = info_credito.Dias_Vct;
-                                cliente.IdCiudad = info.IdCiudad_madre;
-                                cliente.IdParroquia = info.IdParroquia_madre;
+                                cliente.IdCiudad = info.IdCiudad_madre_fact;
+                                cliente.IdParroquia = info.IdParroquia_madre_fact;
                                 cliente.Celular = info.Celular_madre;
                                 cliente.Direccion = info.Direccion_madre;
                                 cliente.Correo = info.Correo_madre;
