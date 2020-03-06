@@ -586,6 +586,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdJornada = IdJornada;
             model.IdCurso = IdCurso;
             model.IdParalelo = IdParalelo;
+            model.mostrar_observacion_completa = true;
 
             ACA_008_Rpt report = new ACA_008_Rpt();
 
@@ -605,6 +606,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_MostrarPlantilla.Value = model.mostrar_observacion_completa;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -633,6 +635,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_MostrarPlantilla.Value = model.mostrar_observacion_completa;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 

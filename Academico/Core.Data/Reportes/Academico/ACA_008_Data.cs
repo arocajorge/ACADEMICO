@@ -8,7 +8,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_008_Data
     {
-        public List<ACA_008_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso,int IdParalelo)
+        public List<ACA_008_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso,int IdParalelo, bool MostarPlantilla)
         {
             try
             {
@@ -35,7 +35,8 @@ namespace Core.Data.Reportes.Academico
                     IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
                     IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin &&
                     IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin &&
-                    IdParaleloIni <= q.IdCurso && q.IdCurso <= IdParaleloFin).Select(q => new ACA_008_Info
+                    IdParaleloIni <= q.IdCurso && q.IdCurso <= IdParaleloFin
+                 ).Select(q => new ACA_008_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         NomSede = q.NomSede,
@@ -58,7 +59,7 @@ namespace Core.Data.Reportes.Academico
                         IdCurso = q.IdCurso,
                         IdParalelo = q.IdParalelo,
                         Fecha = q.Fecha,
-                        NomPlantilla = q.NomPlantilla,
+                        NomPlantilla =(MostarPlantilla==true ? q.NomPlantilla: ""),
                         IdPlantilla = q.IdPlantilla,
                         Descripcion = q.Descripcion,
                         pe_nombreCompleto = q.pe_nombreCompleto,

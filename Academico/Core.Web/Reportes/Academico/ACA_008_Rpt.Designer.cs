@@ -85,6 +85,7 @@
             this.groupHeaderBand3 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.groupHeaderBand4 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.p_MostrarPlantilla = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -464,11 +465,10 @@
             // 
             // xrTableCell34
             // 
-            this.xrTableCell34.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomPlantilla]")});
             this.xrTableCell34.Multiline = true;
             this.xrTableCell34.Name = "xrTableCell34";
             this.xrTableCell34.StylePriority.UseTextAlignment = false;
+            this.xrTableCell34.Text = "Nombre de Plantilla";
             this.xrTableCell34.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrTableCell34.Weight = 2.2343617518627861D;
             // 
@@ -625,6 +625,11 @@
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_008_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
+            // p_MostrarPlantilla
+            // 
+            this.p_MostrarPlantilla.Name = "p_MostrarPlantilla";
+            this.p_MostrarPlantilla.Visible = false;
+            // 
             // ACA_008_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -653,7 +658,8 @@
             this.p_IdParalelo,
             this.p_IdJornada,
             this.p_IdSede,
-            this.p_IdAnio});
+            this.p_IdAnio,
+            this.p_MostrarPlantilla});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_008_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -724,5 +730,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell8;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell9;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell10;
+        public DevExpress.XtraReports.Parameters.Parameter p_MostrarPlantilla;
     }
 }
