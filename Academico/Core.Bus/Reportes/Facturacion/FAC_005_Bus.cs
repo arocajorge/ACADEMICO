@@ -11,11 +11,11 @@ namespace Core.Bus.Reportes.Facturacion
    public class FAC_005_Bus
     {
         FAC_005_Data odata = new FAC_005_Data();
-        public List<FAC_005_Info> GetList(int IdEmpresa, DateTime FechaDesde, DateTime FechaHasta, int IdTipoNota, string CreDeb, string NaturalezaNota)
+        public List<FAC_005_Info> GetList(int IdEmpresa, DateTime FechaDesde, DateTime FechaHasta, string CreDeb, string NaturalezaNota)
         {
             try
             {
-                return odata.GetList(IdEmpresa, FechaDesde, FechaHasta, IdTipoNota, CreDeb, NaturalezaNota);
+                return odata.GetList(IdEmpresa, FechaDesde, FechaHasta, CreDeb, NaturalezaNota);
             }
             catch (Exception)
             {
