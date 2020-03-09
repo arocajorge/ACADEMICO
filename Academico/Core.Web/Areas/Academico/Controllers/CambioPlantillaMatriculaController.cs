@@ -121,6 +121,17 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_mecanismo = bus_mecanismo.GetList(IdEmpresa, false);
             ViewBag.lst_mecanismo = lst_mecanismo;
         }
+
+        private bool validar(aca_Matricula_Info info, ref string msg)
+        {
+            if (string.IsNullOrEmpty(info.ObservacionCambio))
+            {
+                msg = "Debe de ingresar observación";
+                return false;
+            }
+
+            return true;
+        }
         #endregion
 
         #region Index
@@ -355,6 +366,15 @@ namespace Core.Web.Areas.Academico.Controllers
             };
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             model.lst_MatriculaRubro = ListaMatriculaRubro.get_list(model.IdTransaccionSession);
+
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
+                return View(model);
+            }
+
             if (!bus_matricula.ModificarPlantillaDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";

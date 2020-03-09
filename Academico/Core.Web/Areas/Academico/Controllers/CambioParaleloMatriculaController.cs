@@ -108,6 +108,17 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_mecanismo = bus_mecanismo.GetList(IdEmpresa, false);
             ViewBag.lst_mecanismo = lst_mecanismo;
         }
+
+        private bool validar(aca_Matricula_Info info, ref string msg)
+        {
+            if (string.IsNullOrEmpty(info.ObservacionCambio))
+            {
+                msg = "Debe de ingresar observación";
+                return false;
+            }
+
+            return true;
+        }
         #endregion
 
         #region Index
@@ -223,7 +234,15 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdUsuarioCreacion = SessionFixed.IdUsuario
             };
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
-            
+
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
+                return View(model);
+            }
+
             if (!bus_matricula.ModificarCursoParaleloDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";

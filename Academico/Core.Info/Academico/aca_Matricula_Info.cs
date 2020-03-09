@@ -42,6 +42,7 @@ namespace Core.Info.Academico
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
 
+        public string ObservacionCambio { get; set; }
         #region Campos que no existen en la tabla
         public string IdComboCurso { get; set; }
         public List<aca_Matricula_Info> lst_matricula_curso { get; set; }
