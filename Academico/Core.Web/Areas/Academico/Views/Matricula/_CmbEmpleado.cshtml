@@ -1,0 +1,18 @@
+﻿
+@Html.DevExpress().ComboBox(settings =>
+{
+    settings.Name = "IdEmpleado";
+    settings.CallbackRouteValues = new { Controller = "Matricula", Action = "Cmb_MatriculaEmpleado", Area = "Academico" };
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+    settings.Properties.Columns.Add("IdEmpleado", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+    settings.Properties.Columns.Add("Empleado", "Empleado").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+    //Campo ID
+    settings.Properties.ValueField = "IdEmpleado";
+    settings.Properties.ValueType = typeof(decimal);
+    settings.Properties.TextField = "Empleado";
+    settings.Properties.NullText = "== Seleccione ==";
+    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+    settings.Properties.AllowMouseWheel = false;
+    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdEmpresa_rol'] = $('#IdEmpresa_rol').val(); }";
+}).BindList(new Core.Bus.RRHH.ro_empleado_Bus().get_list_combo(Model.IdEmpresa_rol)).Bind(Model.IdEmpleado).GetHtml()

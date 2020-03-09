@@ -21,6 +21,7 @@
 
         $("#vt_tipo_venta").change(function () {
             get_info_termino_pago();
+
         });
         $("#vt_plazo").change(function () {
             cargar_fecha_vencimiento();
@@ -39,6 +40,10 @@
 
         $("#ValorEfectivo").keyup(function () {
             CalcularCambio();
+        });
+
+        $("#IdEmpresa_rol").change(function () {
+            IdEmpleado.PerformCallback();
         });
     });
     function ValidarCliente() {
@@ -209,6 +214,13 @@
             success: function (data) {
                 $("#vt_plazo").val(data.Dias_Vct);
                 cargar_fecha_vencimiento();
+
+                if(data.CodigoRubroDescto== "DACA"){
+                    $("#Empleado").show();
+                }
+                else{
+                    $("#Empleado").hide();
+                }
             },
             error: function (error) {
 
@@ -738,7 +750,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-6">
             <div id="Tabs" role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
@@ -826,6 +837,22 @@
                             </div>
                         </div>
                         
+                        <div class="row" id="Empleado" hidden>
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="IdEmpresa">Empresa</label>
+                                        @Html.DropDownListFor(q => q.IdEmpresa_rol, new SelectList(ViewBag.lst_empresa, "IdEmpresa", "em_nombre"), new { @class = "form-control", @id = "IdEmpresa_rol" })
+                                        @Html.ValidationMessageFor(q => q.IdEmpresa_rol, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="IdEmpresa">Empleado</label>
+                                    @Html.Partial("_CmbEmpleado", Model)
+                                    @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

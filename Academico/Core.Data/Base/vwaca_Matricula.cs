@@ -40,5 +40,7 @@ namespace Core.Data.Base
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
         public decimal IdMecanismo { get; set; }
+        public Nullable<int> IdEmpresa_rol { get; set; }
+        public Nullable<decimal> IdEmpleado { get; set; }
     }
 }

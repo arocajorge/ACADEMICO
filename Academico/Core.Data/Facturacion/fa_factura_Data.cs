@@ -112,7 +112,9 @@ namespace Core.Data.Facturacion
                         valor_abono = Entity.valor_abono,
                         IdNivel = Entity.IdNivel,
                         IdCatalogo_FormaPago = Entity.IdCatalogo_FormaPago,
-                        IdAlumno = Entity.IdAlumno
+                        IdAlumno = Entity.IdAlumno,
+                        IdEmpresa_rol=Entity.IdEmpresa_rol,
+                        IdEmpleado = Entity.IdEmpleado
                     };
 
                     info.info_resumen = Context.fa_factura_resumen.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCbteVta == IdCbteVta).Select(q => new fa_factura_resumen_Info
@@ -212,8 +214,9 @@ namespace Core.Data.Facturacion
                     valor_abono = info.valor_abono,
                     IdUsuario = info.IdUsuario,
                     IdNivel = info.IdNivel,
-                    IdAlumno = info.IdAlumno
-
+                    IdAlumno = info.IdAlumno,
+                    IdEmpresa_rol= info.IdEmpresa_rol,
+                    IdEmpleado=info.IdEmpleado
                 };
                 #endregion
 
@@ -499,7 +502,8 @@ namespace Core.Data.Facturacion
                 Entity.IdNivel = info.IdNivel;
                 Entity.IdUsuarioUltModi = info.IdUsuarioUltModi;
                 Entity.Fecha_UltMod = DateTime.Now;
-
+                Entity.IdEmpresa_rol = info.IdEmpresa_rol;
+                Entity.IdEmpleado = info.IdEmpleado;
                 #endregion
                 var cliente = db_f.fa_cliente.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCliente == info.IdCliente).FirstOrDefault();
                 var persona = db_g.tb_persona.Where(q => q.IdPersona == cliente.IdPersona).FirstOrDefault();

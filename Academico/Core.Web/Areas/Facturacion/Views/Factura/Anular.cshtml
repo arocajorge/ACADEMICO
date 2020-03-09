@@ -380,6 +380,13 @@
             success: function (data) {
                 $("#vt_plazo").val(data.Dias_Vct);
                 cargar_fecha_vencimiento();
+
+                if (data.CodigoRubroDescto == "DACA") {
+                    $("#Empleado").show();
+                }
+                else {
+                    $("#Empleado").hide();
+                }
             },
             error: function (error) {
 

@@ -57,6 +57,9 @@ namespace Core.Info.Facturacion
 
         public int IdNivel { get; set; }
 
+        public Nullable<int> IdEmpresa_rol { get; set; }
+        public Nullable<decimal> IdEmpleado { get; set; }
+
         public fa_factura_resumen_Info info_resumen { get; set; }
 
         #region Campos de auditoria

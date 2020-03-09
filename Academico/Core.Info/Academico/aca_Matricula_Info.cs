@@ -41,8 +41,11 @@ namespace Core.Info.Academico
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+        public Nullable<int> IdEmpresa_rol { get; set; }
+        public Nullable<decimal> IdEmpleado { get; set; }
 
-        public string ObservacionCambio { get; set; }
+        
+
         #region Campos que no existen en la tabla
         public string IdComboCurso { get; set; }
         public List<aca_Matricula_Info> lst_matricula_curso { get; set; }
@@ -70,6 +73,8 @@ namespace Core.Info.Academico
         public string vt_serie1 { get; set; }
         public string vt_serie2 { get; set; }
         public string vt_NumFactura { get; set; }
+
+        public string ObservacionCambio { get; set; }
 
         public List<aca_MatriculaCalificacion_Info> lst_calificacion { get; set; }
         public List<aca_MatriculaConducta_Info> lst_conducta { get; set; }

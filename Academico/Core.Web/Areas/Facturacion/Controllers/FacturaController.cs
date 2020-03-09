@@ -67,6 +67,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
         aca_AnioLectivo_Rubro_Bus bus_anio_rubro = new aca_AnioLectivo_Rubro_Bus();
         aca_AnioLectivo_Rubro_Periodo_Bus bus_anio_rubro_periodo = new aca_AnioLectivo_Rubro_Periodo_Bus();
         tb_mes_Bus bus_mes = new tb_mes_Bus();
+        aca_MecanismoDePago_Bus bus_mecanismo = new aca_MecanismoDePago_Bus();
+        tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
@@ -160,6 +162,13 @@ namespace Core.Web.Areas.Facturacion.Controllers
             return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
+        #region Combos bajo demanada Empleado
+        public ActionResult Cmb_FacturaEmpleado()
+        {
+            int IdEmpresa_rol = (Request.Params["IdEmpresa_rol"] != null) ? int.Parse(Request.Params["IdEmpresa_rol"]) : -1;
+            return PartialView("_CmbEmpleado", new aca_Matricula_Info { IdEmpresa_rol = IdEmpresa_rol });
+        }
+        #endregion
         #region Metodos
         private void cargar_combos(fa_factura_Info model)
         {
@@ -183,6 +192,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             var lst_formapago = bus_catalogo.get_list((int)cl_enumeradores.eTipoCatalogoFact.FormaDePago, false);
             ViewBag.lst_formapago = lst_formapago;
+
+            var lst_empresa = bus_empresa.get_list(false);
+            ViewBag.lst_empresa = lst_empresa;
         }
         private bool validar(fa_factura_Info i_validar, ref string msg)
         {
@@ -614,6 +626,20 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             return Json(IdCliente, JsonRequestBehavior.AllowGet);
         }
+
+        //public JsonResult GetDatosMecanismo(int IdEmpresa = 0, int IdMecanismo = 0)
+        //{
+        //    var resultado = "";
+        //    var info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismo);
+        //    var info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
+
+        //    if (info_termino_pago != null && info_termino_pago.CodigoRubroDescto == "DACA")
+        //    {
+        //        resultado = info_termino_pago.CodigoRubroDescto;
+        //    }
+
+        //    return Json(resultado, JsonRequestBehavior.AllowGet);
+        //}
         #endregion
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
@@ -642,6 +668,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual),
                 DescuentoReadOnly = false,
                 IdCatalogo_FormaPago = "EFEC",
+                IdEmpresa_rol = IdEmpresa,
                 info_resumen = new fa_factura_resumen_Info()
             };
 
@@ -663,6 +690,10 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return View(model);
             }
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
+
+            var info_termino_pago = bus_termino_pago.get_info(model.vt_tipo_venta);
+            model.IdEmpresa_rol = ((info_termino_pago != null && info_termino_pago.CodigoRubroDescto == "DACA") ? model.IdEmpresa_rol : (int?)null);
+            model.IdEmpleado = ((info_termino_pago != null && info_termino_pago.CodigoRubroDescto == "DACA") ? model.IdEmpleado : (decimal?)null);
 
             if (!bus_factura.guardarDB(model))
             {
@@ -688,7 +719,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return RedirectToAction("Index");
             if (model.esta_impresa == null ? false : Convert.ToBoolean(model.esta_impresa))
                 return RedirectToAction("Index");
-
+            model.IdEmpresa_rol = (model.IdEmpresa_rol==null ? IdEmpresa : model.IdEmpresa_rol);
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "Factura", "Index");
             if (!info.Modificar)
@@ -734,6 +765,11 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return View(model);
             }
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
+
+            var info_termino_pago = bus_termino_pago.get_info(model.vt_tipo_venta);
+            model.IdEmpresa_rol = ((info_termino_pago != null && info_termino_pago.CodigoRubroDescto == "DACA") ? model.IdEmpresa_rol : (int?)null);
+            model.IdEmpleado = ((info_termino_pago != null && info_termino_pago.CodigoRubroDescto == "DACA") ? model.IdEmpleado : (decimal?)null);
+
             if (!bus_factura.modificarDB(model))
             {
                 List_det.set_list(List_det.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
@@ -763,6 +799,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return RedirectToAction("Index");
             #endregion
 
+            model.IdEmpresa_rol = (model.IdEmpresa_rol == null ? IdEmpresa : model.IdEmpresa_rol);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
             List_det.set_list(model.lst_det, model.IdTransaccionSession);

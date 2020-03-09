@@ -23,8 +23,8 @@ namespace Core.Data.Base
             this.aca_AlumnoDocumento = new HashSet<aca_AlumnoDocumento>();
             this.aca_SocioEconomico = new HashSet<aca_SocioEconomico>();
             this.aca_Familia = new HashSet<aca_Familia>();
-            this.aca_Matricula = new HashSet<aca_Matricula>();
             this.aca_MatriculaCondicional = new HashSet<aca_MatriculaCondicional>();
+            this.aca_Matricula = new HashSet<aca_Matricula>();
         }
     
         public int IdEmpresa { get; set; }
@@ -70,8 +70,8 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Familia> aca_Familia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_MatriculaCondicional> aca_MatriculaCondicional { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
     }
 }

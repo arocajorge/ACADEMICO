@@ -187,9 +187,23 @@
                     @Html.Partial("_ComboBoxPartial_Plantilla", Model)
                     @Html.ValidationMessageFor(q => q.IdPlantilla, "", new { @class = "text-danger" })
                 </div>
+            </div>  
+        </div>
+    </div>
+    <div class="row" id="Empleado" hidden>
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Empresa</label>
+                    @Html.DropDownListFor(q => q.IdEmpresa_rol, new SelectList(ViewBag.lst_empresa, "IdEmpresa", "em_nombre"), new { @class = "form-control", @id = "IdEmpresa_rol" })
+                    @Html.ValidationMessageFor(q => q.IdEmpresa_rol, "", new { @class = "text-danger" })
+                </div>
             </div>
-           
-            
+            <div class="col-md-6">
+                <label for="IdEmpresa">Empleado</label>
+                @Html.Partial("_CmbEmpleado", Model)
+                @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+            </div>
         </div>
     </div>
     <div class="row">
@@ -264,8 +278,36 @@
 <script>
     $(function ()
     {
+        VerDatosEmpleado();
         $("#MensajeError").hide();
     });
+
+    function VerDatosEmpleado() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdMecanismo: $("#IdMecanismo").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetDatosMecanismo", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if(data == "DACA"){
+                    $("#Empleado").show();
+                }
+                else{
+                    $("#Empleado").hide();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
 
     function CrearModificarAlumno() {
         var location = GetPathServer();
