@@ -93,7 +93,6 @@
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_FechaDesde = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_FechaHasta = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_IdTipoNota = new DevExpress.XtraReports.Parameters.Parameter();
             this.groupHeaderBand1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
@@ -746,11 +745,6 @@
             this.p_FechaHasta.Name = "p_FechaHasta";
             this.p_FechaHasta.Visible = false;
             // 
-            // p_IdTipoNota
-            // 
-            this.p_IdTipoNota.Name = "p_IdTipoNota";
-            this.p_IdTipoNota.Visible = false;
-            // 
             // groupHeaderBand1
             // 
             this.groupHeaderBand1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
@@ -897,7 +891,6 @@
             this.p_IdEmpresa,
             this.p_FechaDesde,
             this.p_FechaHasta,
-            this.p_IdTipoNota,
             this.p_CreDeb,
             this.p_Naturaleza});
             this.Version = "19.1";
@@ -963,7 +956,6 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
         public DevExpress.XtraReports.Parameters.Parameter p_FechaDesde;
         public DevExpress.XtraReports.Parameters.Parameter p_FechaHasta;
-        public DevExpress.XtraReports.Parameters.Parameter p_IdTipoNota;
         private DevExpress.XtraReports.UI.XRTable xrTable8;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow16;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell50;

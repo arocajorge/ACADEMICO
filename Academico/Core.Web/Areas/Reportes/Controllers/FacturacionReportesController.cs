@@ -32,6 +32,16 @@ namespace Core.Web.Areas.Reportes.Controllers
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
             return PartialView("_CmbCliente_Facturacion", model);
         }
+        public ActionResult CmbTipoNota()
+        {
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
+            return PartialView("_CmbTipoNota", model);
+        }
+        public ActionResult CmbCreDeb()
+        {
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
+            return PartialView("_CmbCreDeb", model);
+        }
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
             return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());
@@ -164,7 +174,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             }
             #endregion
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdTipoNota.Value = model.IdTipoNota;
+            
             report.p_FechaDesde.Value = model.fecha_ini;
             report.p_FechaHasta.Value = model.fecha_fin;
             report.p_Naturaleza.Value = model.NaturalezaNota;
@@ -187,7 +197,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             }
             #endregion
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdTipoNota.Value = model.IdTipoNota;
+           
             report.p_FechaDesde.Value = model.fecha_ini;
             report.p_FechaHasta.Value = model.fecha_fin;
             report.p_Naturaleza.Value = model.NaturalezaNota;

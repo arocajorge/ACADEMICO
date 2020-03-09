@@ -69,6 +69,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdNivel">Tipo nota</label>
+                            @Html.Partial("_CmbTipoNota", Model)
+                            @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "form", @role = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdNivel">Crédito/Débito</label>
+                            @Html.Partial("_CmbCreDeb", Model)
+                            @Html.ValidationMessageFor(q => q.CreDeb, "", new { @class = "form", @role = "text-danger" })
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.box-body -->

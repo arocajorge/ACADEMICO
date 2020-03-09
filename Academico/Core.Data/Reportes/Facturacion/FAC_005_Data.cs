@@ -10,12 +10,10 @@ namespace Core.Data.Reportes.Facturacion
 {
    public class FAC_005_Data
     {
-      public List< FAC_005_Info> GetList(int IdEmpresa, DateTime FechaDesde, DateTime FechaHasta, int IdTipoNota, string CreDeb, string NaturalezaNota)
+      public List< FAC_005_Info> GetList(int IdEmpresa, DateTime FechaDesde, DateTime FechaHasta, string CreDeb, string NaturalezaNota)
         {
             try
             {
-                int IdTipoNotaini = IdTipoNota;
-                int IdTipoNotafin = IdTipoNota == 0 ? 99999999 : IdTipoNota;
                 
                 FechaDesde = FechaDesde.Date;
                 FechaHasta = FechaHasta.Date;
