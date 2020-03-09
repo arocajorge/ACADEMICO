@@ -425,106 +425,106 @@ namespace Core.Data.Contabilidad
                             }
                         }
                         break;
-                    //case cl_enumeradores.eModulo.CAJA:
-                    //    using (Entities_caja db = new Entities_caja())
-                    //    {
-                    //        var param = db.caj_parametro.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
-                    //        if (param == null)
-                    //        {
-                    //            mensaje = "No existen parámetros para el módulo de caja";
-                    //            return false;
-                    //        }
-                    //        if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
-                    //        {
-                    //            mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de caja";
-                    //            return false;
-                    //        }
-                    //    }
-                    //    CierreModulo = db_conta.ct_CierrePorModuloPorSucursal.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.CodModulo == "CAJ" && q.Cerrado).OrderByDescending(q => q.FechaFin).FirstOrDefault();
-                    //    if (CierreModulo != null)
-                    //    {
-                    //        if (Fecha.Date <= CierreModulo.FechaFin)
-                    //        {
-                    //            mensaje = "El periodo de la transacción se encuentra cerrado para el módulo de caja";
-                    //            return false;
-                    //        }
-                    //    }
-                    //    break;
-                    //case cl_enumeradores.eModulo.BANCO:
-                    //    using (Entities_banco db = new Entities_banco())
-                    //    {
-                    //        var param = db.ba_parametros.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
-                    //        if (param == null)
-                    //        {
-                    //            mensaje = "No existen parámetros para el módulo de bancos";
-                    //            return false;
-                    //        }
-                    //        if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
-                    //        {
-                    //            mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de bancos";
-                    //            return false;
-                    //        }
-                    //    }
-                    //    CierreModulo = db_conta.ct_CierrePorModuloPorSucursal.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.CodModulo == "BAN" && q.Cerrado).OrderByDescending(q => q.FechaFin).FirstOrDefault();
-                    //    if (CierreModulo != null)
-                    //    {
-                    //        if (Fecha.Date <= CierreModulo.FechaFin)
-                    //        {
-                    //            mensaje = "El periodo de la transacción se encuentra cerrado para el módulo de bancos";
-                    //            return false;
-                    //        }
-                    //    }
-                    //    break;
-                    //case cl_enumeradores.eModulo.CXC:
-                    //    using (Entities_cuentas_por_cobrar db = new Entities_cuentas_por_cobrar())
-                    //    {
-                    //        var param = db.cxc_Parametro.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
-                    //        if (param == null)
-                    //        {
-                    //            mensaje = "No existen parámetros para el módulo de cuentas por cobrar";
-                    //            return false;
-                    //        }
-                    //        if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
-                    //        {
-                    //            mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de cuentas por cobrar";
-                    //            return false;
-                    //        }
-                    //    }
-                    //    CierreModulo = db_conta.ct_CierrePorModuloPorSucursal.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.CodModulo == "CXC" && q.Cerrado).OrderByDescending(q => q.FechaFin).FirstOrDefault();
-                    //    if (CierreModulo != null)
-                    //    {
-                    //        if (Fecha.Date <= CierreModulo.FechaFin)
-                    //        {
-                    //            mensaje = "El periodo de la transacción se encuentra cerrado para el módulo de cuentas por cobrar";
-                    //            return false;
-                    //        }
-                    //    }
-                    //    break;
-                    //case cl_enumeradores.eModulo.CXP:
-                    //    using (Entities_cuentas_por_pagar db = new Entities_cuentas_por_pagar())
-                    //    {
-                    //        var param = db.cp_parametros.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
-                    //        if (param == null)
-                    //        {
-                    //            mensaje = "No existen parámetros para el módulo de cuentas por pagar";
-                    //            return false;
-                    //        }
-                    //        if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
-                    //        {
-                    //            mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de cuentas por pagar";
-                    //            return false;
-                    //        }
-                    //    }
-                    //    CierreModulo = db_conta.ct_CierrePorModuloPorSucursal.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.CodModulo == "CXP" && q.Cerrado).OrderByDescending(q => q.FechaFin).FirstOrDefault();
-                    //    if (CierreModulo != null)
-                    //    {
-                    //        if (Fecha.Date <= CierreModulo.FechaFin)
-                    //        {
-                    //            mensaje = "El periodo de la transacción se encuentra cerrado para el módulo de cuentas por pagar";
-                    //            return false;
-                    //        }
-                    //    }
-                    //    break;
+                    case cl_enumeradores.eModulo.CAJA:
+                        using (EntitiesCaja db = new EntitiesCaja())
+                        {
+                            var param = db.caj_parametro.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de caja";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de caja";
+                                return false;
+                            }
+                        }
+                        CierreModulo = db_conta.ct_CierrePorModuloPorSucursal.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.CodModulo == "CAJ" && q.Cerrado).OrderByDescending(q => q.FechaFin).FirstOrDefault();
+                        if (CierreModulo != null)
+                        {
+                            if (Fecha.Date <= CierreModulo.FechaFin)
+                            {
+                                mensaje = "El periodo de la transacción se encuentra cerrado para el módulo de caja";
+                                return false;
+                            }
+                        }
+                        break;
+                    case cl_enumeradores.eModulo.BANCO:
+                        using (EntitiesBanco db = new EntitiesBanco())
+                        {
+                            var param = db.ba_parametros.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de bancos";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de bancos";
+                                return false;
+                            }
+                        }
+                        CierreModulo = db_conta.ct_CierrePorModuloPorSucursal.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.CodModulo == "BAN" && q.Cerrado).OrderByDescending(q => q.FechaFin).FirstOrDefault();
+                        if (CierreModulo != null)
+                        {
+                            if (Fecha.Date <= CierreModulo.FechaFin)
+                            {
+                                mensaje = "El periodo de la transacción se encuentra cerrado para el módulo de bancos";
+                                return false;
+                            }
+                        }
+                        break;
+                    case cl_enumeradores.eModulo.CXC:
+                        using (EntitiesCuentasPorCobrar db = new EntitiesCuentasPorCobrar())
+                        {
+                            var param = db.cxc_Parametro.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de cuentas por cobrar";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de cuentas por cobrar";
+                                return false;
+                            }
+                        }
+                        CierreModulo = db_conta.ct_CierrePorModuloPorSucursal.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.CodModulo == "CXC" && q.Cerrado).OrderByDescending(q => q.FechaFin).FirstOrDefault();
+                        if (CierreModulo != null)
+                        {
+                            if (Fecha.Date <= CierreModulo.FechaFin)
+                            {
+                                mensaje = "El periodo de la transacción se encuentra cerrado para el módulo de cuentas por cobrar";
+                                return false;
+                            }
+                        }
+                        break;
+                    case cl_enumeradores.eModulo.CXP:
+                        using (EntitiesCuentasPorPagar db = new EntitiesCuentasPorPagar())
+                        {
+                            var param = db.cp_parametros.Where(q => q.IdEmpresa == IdEmpresa).FirstOrDefault();
+                            if (param == null)
+                            {
+                                mensaje = "No existen parámetros para el módulo de cuentas por pagar";
+                                return false;
+                            }
+                            if (param.DiasTransaccionesAFuturo > 0 && DateTime.Now.Date.AddDays(param.DiasTransaccionesAFuturo) < Fecha)
+                            {
+                                mensaje = "La fecha de la transacción es superior a la fecha permitida por los parámetros del módulo de cuentas por pagar";
+                                return false;
+                            }
+                        }
+                        CierreModulo = db_conta.ct_CierrePorModuloPorSucursal.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.CodModulo == "CXP" && q.Cerrado).OrderByDescending(q => q.FechaFin).FirstOrDefault();
+                        if (CierreModulo != null)
+                        {
+                            if (Fecha.Date <= CierreModulo.FechaFin)
+                            {
+                                mensaje = "El periodo de la transacción se encuentra cerrado para el módulo de cuentas por pagar";
+                                return false;
+                            }
+                        }
+                        break;
                 }
 
                 db_general.Dispose();
