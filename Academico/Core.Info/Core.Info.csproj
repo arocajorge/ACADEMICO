@@ -274,6 +274,7 @@
     <Compile Include="Reportes\Facturacion\FAC_003_aplicaciones_Info.cs" />
     <Compile Include="Reportes\Facturacion\FAC_003_Info.cs" />
     <Compile Include="Reportes\Facturacion\FAC_004_Info.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_005_Info.cs" />
     <Compile Include="RRHH\ro_area_Info.cs" />
     <Compile Include="RRHH\ro_area_x_departamento_Info.cs" />
     <Compile Include="RRHH\ro_cargaFamiliar_Info.cs" />

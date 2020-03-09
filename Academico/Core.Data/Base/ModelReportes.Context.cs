@@ -127,5 +127,30 @@ namespace Core.Data.Base
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_005_Result>("SPACA_005", idEmpresaParameter, idAlumnoParameter);
         }
+    
+        public virtual ObjectResult<SPFAC_005_Result> SPFAC_005(Nullable<int> idEmpresa, Nullable<System.DateTime> fechaDesde, Nullable<System.DateTime> fechaHasta, string creDeb, string naturaleza)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var fechaDesdeParameter = fechaDesde.HasValue ?
+                new ObjectParameter("FechaDesde", fechaDesde) :
+                new ObjectParameter("FechaDesde", typeof(System.DateTime));
+    
+            var fechaHastaParameter = fechaHasta.HasValue ?
+                new ObjectParameter("FechaHasta", fechaHasta) :
+                new ObjectParameter("FechaHasta", typeof(System.DateTime));
+    
+            var creDebParameter = creDeb != null ?
+                new ObjectParameter("CreDeb", creDeb) :
+                new ObjectParameter("CreDeb", typeof(string));
+    
+            var naturalezaParameter = naturaleza != null ?
+                new ObjectParameter("Naturaleza", naturaleza) :
+                new ObjectParameter("Naturaleza", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPFAC_005_Result>("SPFAC_005", idEmpresaParameter, fechaDesdeParameter, fechaHastaParameter, creDebParameter, naturalezaParameter);
+        }
     }
 }

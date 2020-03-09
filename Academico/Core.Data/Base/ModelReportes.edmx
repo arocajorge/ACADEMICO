@@ -1069,6 +1069,13 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
           <Parameter Name="FechaCorte" Type="date" Mode="In" />
         </Function>
+        <Function Name="SPFAC_005" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="FechaDesde" Type="date" Mode="In" />
+          <Parameter Name="FechaHasta" Type="date" Mode="In" />
+          <Parameter Name="CreDeb" Type="varchar" Mode="In" />
+          <Parameter Name="Naturaleza" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelReportesStoreContainer">
           <EntitySet Name="VWACA_002" EntityType="Self.VWACA_002" store:Type="Views" store:Schema="Academico">
             <DefiningQuery>SELECT 
@@ -1769,6 +1776,13 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <EntitySet Name="VWBAN_002_cancelaciones" EntityType="ModelReportes.VWBAN_002_cancelaciones" />
           <EntitySet Name="VWBAN_003" EntityType="ModelReportes.VWBAN_003" />
           <EntitySet Name="VWACA_008" EntityType="ModelReportes.VWACA_008" />
+          <FunctionImport Name="SPFAC_005" ReturnType="Collection(ModelReportes.SPFAC_005_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
+            <Parameter Name="CreDeb" Mode="In" Type="String" />
+            <Parameter Name="Naturaleza" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACA_001_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -2957,6 +2971,27 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CodigoAlumno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="SPFAC_005_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="Int32" Name="IdBodega" Nullable="false" />
+          <Property Type="Decimal" Name="IdNota" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="no_fecha" Nullable="false" Precision="23" />
+          <Property Type="String" Name="CreDeb" Nullable="false" MaxLength="3" />
+          <Property Type="Int32" Name="IdTipoNota" Nullable="false" />
+          <Property Type="String" Name="NaturalezaNota" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="NumeroNota" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="SubtotalConDscto" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ValorIVA" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Double" Name="Valor_Aplicado" Nullable="false" />
+          <Property Type="Double" Name="Saldo" Nullable="true" />
+          <Property Type="String" Name="NombreCliente" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="NombreAlumno" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="IdTipoNota1" Nullable="false" />
+          <Property Type="String" Name="No_Descripcion" Nullable="true" MaxLength="150" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3867,6 +3902,31 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPFAC_005" FunctionName="ModelReportes.Store.SPFAC_005">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPFAC_005_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdNota" ColumnName="IdNota" />
+                <ScalarProperty Name="no_fecha" ColumnName="no_fecha" />
+                <ScalarProperty Name="CreDeb" ColumnName="CreDeb" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+                <ScalarProperty Name="NaturalezaNota" ColumnName="NaturalezaNota" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="NumeroNota" ColumnName="NumeroNota" />
+                <ScalarProperty Name="SubtotalConDscto" ColumnName="SubtotalConDscto" />
+                <ScalarProperty Name="ValorIVA" ColumnName="ValorIVA" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Valor_Aplicado" ColumnName="Valor_Aplicado" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
+                <ScalarProperty Name="IdTipoNota1" ColumnName="IdTipoNota1" />
+                <ScalarProperty Name="No_Descripcion" ColumnName="No_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
