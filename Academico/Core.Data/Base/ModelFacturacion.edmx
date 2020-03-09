@@ -643,6 +643,57 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwfa_factura_sin_automatico' no ti
           <Property Name="IdCobro" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwfa_notaCreDeb' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwfa_notaCreDeb">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdNota" />
+            <PropertyRef Name="CreDeb" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="no_fecha" />
+            <PropertyRef Name="no_fecha_venc" />
+            <PropertyRef Name="IdTipoNota" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="IdPuntoVta" />
+            <PropertyRef Name="sc_subtotal" />
+            <PropertyRef Name="sc_iva" />
+            <PropertyRef Name="sc_total" />
+            <PropertyRef Name="valor_aplicado" />
+            <PropertyRef Name="saldo" />
+            <PropertyRef Name="Su_Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="4" />
+          <Property Name="IdNota" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CodNota" Type="varchar" MaxLength="50" />
+          <Property Name="CreDeb" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="Serie1" Type="varchar" MaxLength="3" />
+          <Property Name="Serie2" Type="varchar" MaxLength="3" />
+          <Property Name="NumNota_Impresa" Type="varchar" MaxLength="20" />
+          <Property Name="NumAutorizacion" Type="varchar" MaxLength="50" />
+          <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="no_fecha" Type="datetime" Nullable="false" />
+          <Property Name="no_fecha_venc" Type="datetime" Nullable="false" />
+          <Property Name="IdTipoNota" Type="int" Nullable="false" />
+          <Property Name="sc_observacion" Type="varchar(max)" />
+          <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdPuntoVta" Type="int" Nullable="false" />
+          <Property Name="sc_subtotal" Type="float" Nullable="false" />
+          <Property Name="sc_iva" Type="float" Nullable="false" />
+          <Property Name="sc_total" Type="float" Nullable="false" />
+          <Property Name="valor_aplicado" Type="float" Nullable="false" />
+          <Property Name="saldo" Type="float" Nullable="false" />
+          <Property Name="nom_cliente" Type="varchar" MaxLength="200" />
+          <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="bo_descripcion" Type="varchar" MaxLength="100" />
+          <Property Name="NaturalezaNota" Type="char" MaxLength="3" />
+          <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwfa_notaCreDeb_ParaConciliarNC' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwfa_notaCreDeb_ParaConciliarNC">
           <Key>
@@ -861,7 +912,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_factura_det' no tiene definid
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="vwfa_notaCreDeb">
+        <EntityType Name="vwfa_notaCreDeb1">
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdSucursal" />
@@ -888,6 +939,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb' no tiene definida
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" />
           <Property Name="sc_observacion" Type="varchar(max)" />
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="No_Descripcion" Type="varchar" MaxLength="150" />
+          <Property Name="NumAutorizacion" Type="varchar" MaxLength="50" />
+          <Property Name="NaturalezaNota" Type="char" MaxLength="3" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1459,6 +1513,38 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
     [vwfa_factura_sin_automatico].[IdCobro] AS [IdCobro]
     FROM [dbo].[vwfa_factura_sin_automatico] AS [vwfa_factura_sin_automatico]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwfa_notaCreDeb" EntityType="Self.vwfa_notaCreDeb" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwfa_notaCreDeb].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_notaCreDeb].[IdSucursal] AS [IdSucursal], 
+    [vwfa_notaCreDeb].[IdBodega] AS [IdBodega], 
+    [vwfa_notaCreDeb].[Tipo] AS [Tipo], 
+    [vwfa_notaCreDeb].[IdNota] AS [IdNota], 
+    [vwfa_notaCreDeb].[CodNota] AS [CodNota], 
+    [vwfa_notaCreDeb].[CreDeb] AS [CreDeb], 
+    [vwfa_notaCreDeb].[Serie1] AS [Serie1], 
+    [vwfa_notaCreDeb].[Serie2] AS [Serie2], 
+    [vwfa_notaCreDeb].[NumNota_Impresa] AS [NumNota_Impresa], 
+    [vwfa_notaCreDeb].[NumAutorizacion] AS [NumAutorizacion], 
+    [vwfa_notaCreDeb].[IdCliente] AS [IdCliente], 
+    [vwfa_notaCreDeb].[no_fecha] AS [no_fecha], 
+    [vwfa_notaCreDeb].[no_fecha_venc] AS [no_fecha_venc], 
+    [vwfa_notaCreDeb].[IdTipoNota] AS [IdTipoNota], 
+    [vwfa_notaCreDeb].[sc_observacion] AS [sc_observacion], 
+    [vwfa_notaCreDeb].[Estado] AS [Estado], 
+    [vwfa_notaCreDeb].[IdPuntoVta] AS [IdPuntoVta], 
+    [vwfa_notaCreDeb].[sc_subtotal] AS [sc_subtotal], 
+    [vwfa_notaCreDeb].[sc_iva] AS [sc_iva], 
+    [vwfa_notaCreDeb].[sc_total] AS [sc_total], 
+    [vwfa_notaCreDeb].[valor_aplicado] AS [valor_aplicado], 
+    [vwfa_notaCreDeb].[saldo] AS [saldo], 
+    [vwfa_notaCreDeb].[nom_cliente] AS [nom_cliente], 
+    [vwfa_notaCreDeb].[Su_Descripcion] AS [Su_Descripcion], 
+    [vwfa_notaCreDeb].[bo_descripcion] AS [bo_descripcion], 
+    [vwfa_notaCreDeb].[NaturalezaNota] AS [NaturalezaNota], 
+    [vwfa_notaCreDeb].[IdCtaCble] AS [IdCtaCble]
+    FROM [dbo].[vwfa_notaCreDeb] AS [vwfa_notaCreDeb]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwfa_notaCreDeb_ParaConciliarNC" EntityType="Self.vwfa_notaCreDeb_ParaConciliarNC" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwfa_notaCreDeb_ParaConciliarNC].[IdEmpresa] AS [IdEmpresa], 
@@ -1603,25 +1689,28 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
     [vwfa_factura_det].[ValorProntoPago] AS [ValorProntoPago]
     FROM [web].[vwfa_factura_det] AS [vwfa_factura_det]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="vwfa_notaCreDeb" EntityType="Self.vwfa_notaCreDeb" store:Type="Views" store:Schema="web">
+          <EntitySet Name="vwfa_notaCreDeb1" EntityType="Self.vwfa_notaCreDeb1" store:Type="Views" store:Schema="web" store:Name="vwfa_notaCreDeb">
             <DefiningQuery>SELECT 
-    [vwfa_notaCreDeb].[IdEmpresa] AS [IdEmpresa], 
-    [vwfa_notaCreDeb].[IdSucursal] AS [IdSucursal], 
-    [vwfa_notaCreDeb].[IdBodega] AS [IdBodega], 
-    [vwfa_notaCreDeb].[IdNota] AS [IdNota], 
-    [vwfa_notaCreDeb].[CreDeb] AS [CreDeb], 
-    [vwfa_notaCreDeb].[NumNota_Impresa] AS [NumNota_Impresa], 
-    [vwfa_notaCreDeb].[no_fecha] AS [no_fecha], 
-    [vwfa_notaCreDeb].[Nombres] AS [Nombres], 
-    [vwfa_notaCreDeb].[sc_subtotal] AS [sc_subtotal], 
-    [vwfa_notaCreDeb].[sc_iva] AS [sc_iva], 
-    [vwfa_notaCreDeb].[sc_total] AS [sc_total], 
-    [vwfa_notaCreDeb].[Estado] AS [Estado], 
-    [vwfa_notaCreDeb].[IdAlumno] AS [IdAlumno], 
-    [vwfa_notaCreDeb].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-    [vwfa_notaCreDeb].[sc_observacion] AS [sc_observacion], 
-    [vwfa_notaCreDeb].[IdUsuario] AS [IdUsuario]
-    FROM [web].[vwfa_notaCreDeb] AS [vwfa_notaCreDeb]</DefiningQuery>
+    [vwfa_notaCreDeb1].[IdEmpresa] AS [IdEmpresa], 
+    [vwfa_notaCreDeb1].[IdSucursal] AS [IdSucursal], 
+    [vwfa_notaCreDeb1].[IdBodega] AS [IdBodega], 
+    [vwfa_notaCreDeb1].[IdNota] AS [IdNota], 
+    [vwfa_notaCreDeb1].[CreDeb] AS [CreDeb], 
+    [vwfa_notaCreDeb1].[NumNota_Impresa] AS [NumNota_Impresa], 
+    [vwfa_notaCreDeb1].[no_fecha] AS [no_fecha], 
+    [vwfa_notaCreDeb1].[Nombres] AS [Nombres], 
+    [vwfa_notaCreDeb1].[sc_subtotal] AS [sc_subtotal], 
+    [vwfa_notaCreDeb1].[sc_iva] AS [sc_iva], 
+    [vwfa_notaCreDeb1].[sc_total] AS [sc_total], 
+    [vwfa_notaCreDeb1].[Estado] AS [Estado], 
+    [vwfa_notaCreDeb1].[IdAlumno] AS [IdAlumno], 
+    [vwfa_notaCreDeb1].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwfa_notaCreDeb1].[sc_observacion] AS [sc_observacion], 
+    [vwfa_notaCreDeb1].[IdUsuario] AS [IdUsuario], 
+    [vwfa_notaCreDeb1].[No_Descripcion] AS [No_Descripcion], 
+    [vwfa_notaCreDeb1].[NumAutorizacion] AS [NumAutorizacion], 
+    [vwfa_notaCreDeb1].[NaturalezaNota] AS [NaturalezaNota]
+    FROM [web].[vwfa_notaCreDeb] AS [vwfa_notaCreDeb1]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_notaCreDeb_det" EntityType="Self.vwfa_notaCreDeb_det" store:Type="Views" store:Schema="web">
             <DefiningQuery>SELECT 
@@ -1958,6 +2047,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
             <End Role="fa_parametro" EntitySet="fa_parametro" />
           </AssociationSet>
           <EntitySet Name="vwfa_factura" EntityType="ModelFacturacion.vwfa_factura" />
+          <EntitySet Name="vwfa_notaCreDeb1Set" EntityType="ModelFacturacion.vwfa_notaCreDeb1" />
           </EntityContainer>
         <EntityType Name="fa_cliente">
           <Key>
@@ -3139,6 +3229,9 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
           <Property Name="pe_nombreCompleto" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="sc_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="No_Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NumAutorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NaturalezaNota" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="vwfa_notaCreDeb_ParaConciliarNC">
           <Key>
@@ -3355,6 +3448,55 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
           <Property Name="IdAlumno" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="NombresAlumno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwfa_notaCreDeb1">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdNota" />
+            <PropertyRef Name="CreDeb" />
+            <PropertyRef Name="IdCliente" />
+            <PropertyRef Name="no_fecha" />
+            <PropertyRef Name="no_fecha_venc" />
+            <PropertyRef Name="IdTipoNota" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="IdPuntoVta" />
+            <PropertyRef Name="sc_subtotal" />
+            <PropertyRef Name="sc_iva" />
+            <PropertyRef Name="sc_total" />
+            <PropertyRef Name="valor_aplicado" />
+            <PropertyRef Name="saldo" />
+            <PropertyRef Name="Su_Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="IdNota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CodNota" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreDeb" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="NumNota_Impresa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumAutorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="no_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="no_fecha_venc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdTipoNota" Type="Int32" Nullable="false" />
+          <Property Name="sc_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdPuntoVta" Type="Int32" Nullable="false" />
+          <Property Name="sc_subtotal" Type="Double" Nullable="false" />
+          <Property Name="sc_iva" Type="Double" Nullable="false" />
+          <Property Name="sc_total" Type="Double" Nullable="false" />
+          <Property Name="valor_aplicado" Type="Double" Nullable="false" />
+          <Property Name="saldo" Type="Double" Nullable="false" />
+          <Property Name="nom_cliente" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Su_Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="bo_descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NaturalezaNota" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -4027,7 +4169,10 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
           </EntitySetMapping>
           <EntitySetMapping Name="vwfa_notaCreDeb">
             <EntityTypeMapping TypeName="ModelFacturacion.vwfa_notaCreDeb">
-              <MappingFragment StoreEntitySet="vwfa_notaCreDeb">
+              <MappingFragment StoreEntitySet="vwfa_notaCreDeb1">
+                <ScalarProperty Name="NaturalezaNota" ColumnName="NaturalezaNota" />
+                <ScalarProperty Name="NumAutorizacion" ColumnName="NumAutorizacion" />
+                <ScalarProperty Name="No_Descripcion" ColumnName="No_Descripcion" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="sc_observacion" ColumnName="sc_observacion" />
                 <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
@@ -4182,6 +4327,40 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwfa_notaCreDeb_x_fa_factura_NotaD
                 <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
                 <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
                 <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwfa_notaCreDeb1Set">
+            <EntityTypeMapping TypeName="ModelFacturacion.vwfa_notaCreDeb1">
+              <MappingFragment StoreEntitySet="vwfa_notaCreDeb">
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="NaturalezaNota" ColumnName="NaturalezaNota" />
+                <ScalarProperty Name="bo_descripcion" ColumnName="bo_descripcion" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
+                <ScalarProperty Name="nom_cliente" ColumnName="nom_cliente" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+                <ScalarProperty Name="valor_aplicado" ColumnName="valor_aplicado" />
+                <ScalarProperty Name="sc_total" ColumnName="sc_total" />
+                <ScalarProperty Name="sc_iva" ColumnName="sc_iva" />
+                <ScalarProperty Name="sc_subtotal" ColumnName="sc_subtotal" />
+                <ScalarProperty Name="IdPuntoVta" ColumnName="IdPuntoVta" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="sc_observacion" ColumnName="sc_observacion" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+                <ScalarProperty Name="no_fecha_venc" ColumnName="no_fecha_venc" />
+                <ScalarProperty Name="no_fecha" ColumnName="no_fecha" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NumAutorizacion" ColumnName="NumAutorizacion" />
+                <ScalarProperty Name="NumNota_Impresa" ColumnName="NumNota_Impresa" />
+                <ScalarProperty Name="Serie2" ColumnName="Serie2" />
+                <ScalarProperty Name="Serie1" ColumnName="Serie1" />
+                <ScalarProperty Name="CreDeb" ColumnName="CreDeb" />
+                <ScalarProperty Name="CodNota" ColumnName="CodNota" />
+                <ScalarProperty Name="IdNota" ColumnName="IdNota" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
                 <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />

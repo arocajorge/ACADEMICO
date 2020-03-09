@@ -71,6 +71,7 @@
         <EntityTypeShape EntityType="ModelFacturacion.fa_parametro" Width="1.5" PointX="5.375" PointY="27" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_parametro_fa_cliente" />
         <EntityTypeShape EntityType="ModelFacturacion.vwfa_factura" Width="1.5" PointX="9.375" PointY="19.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.vwfa_notaCreDeb1" Width="1.5" PointX="21.375" PointY="19.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

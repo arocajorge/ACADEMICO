@@ -91,6 +91,9 @@ namespace Core.Data.Facturacion
                                  sc_iva = q.sc_iva,
                                  sc_total = q.sc_total,
                                  Estado = q.Estado,
+                                 NaturalezaNota =q.NaturalezaNota,
+                                 No_Descripcion = q.No_Descripcion,
+                                 NumAutorizacion = q.NumAutorizacion,
                                  
                                  EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();

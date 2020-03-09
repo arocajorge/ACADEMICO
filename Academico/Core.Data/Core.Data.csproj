@@ -289,6 +289,12 @@
     <Compile Include="Base\vwfa_factura_ParaContabilizarAcademico.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwfa_notaCreDeb.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwfa_notaCreDeb1.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwfa_notaCreDeb_ParaConciliarNC.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -1587,9 +1593,6 @@
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwfa_factura_sin_automatico.cs">
-      <DependentUpon>ModelFacturacion.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\vwfa_notaCreDeb.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwfa_notaCreDeb_det.cs">

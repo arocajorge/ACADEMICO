@@ -64,5 +64,6 @@ namespace Core.Data.Base
         public virtual DbSet<cxc_Parametro> cxc_Parametro { get; set; }
         public virtual DbSet<fa_parametro> fa_parametro { get; set; }
         public virtual DbSet<vwfa_factura> vwfa_factura { get; set; }
+        public virtual DbSet<vwfa_notaCreDeb1> vwfa_notaCreDeb1Set { get; set; }
     }
 }

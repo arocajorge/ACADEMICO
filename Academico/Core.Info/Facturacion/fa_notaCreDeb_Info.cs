@@ -31,6 +31,8 @@ namespace Core.Info.Facturacion
         public string Estado { get; set; }
         public string NaturalezaNota { get; set; }
         public string IdCtaCble_TipoNota { get; set; }
+        public string No_Descripcion { get; set; }
+        
 
         // campos que no existen en la tabla
 
@@ -85,6 +87,9 @@ namespace Core.Info.Facturacion
         public Nullable<double> sc_total { get; set; }
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }
+        public string No_Descripcion { get; set; }
+        public string NumAutorizacion { get; set; }
+        public string NaturalezaNota { get; set; }
 
     }
 }
