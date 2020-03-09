@@ -48,7 +48,6 @@ namespace Core.Data.Base
         public virtual DbSet<fa_TipoNota_x_Empresa_x_Sucursal> fa_TipoNota_x_Empresa_x_Sucursal { get; set; }
         public virtual DbSet<vwfa_notaCreDeb_det> vwfa_notaCreDeb_det { get; set; }
         public virtual DbSet<fa_notaCreDeb_det> fa_notaCreDeb_det { get; set; }
-        public virtual DbSet<vwfa_factura> vwfa_factura { get; set; }
         public virtual DbSet<fa_factura> fa_factura { get; set; }
         public virtual DbSet<fa_factura_det> fa_factura_det { get; set; }
         public virtual DbSet<fa_factura_resumen> fa_factura_resumen { get; set; }
@@ -64,5 +63,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwfa_notaCreDeb_x_fa_factura_NotaDeb> vwfa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
         public virtual DbSet<cxc_Parametro> cxc_Parametro { get; set; }
         public virtual DbSet<fa_parametro> fa_parametro { get; set; }
+        public virtual DbSet<vwfa_factura> vwfa_factura { get; set; }
     }
 }

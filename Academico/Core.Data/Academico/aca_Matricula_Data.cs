@@ -617,7 +617,7 @@ namespace Core.Data.Academico
                 throw;
             }
         }
-        public bool anularDB(aca_Matricula_Info info)
+        public bool eliminarDB(aca_Matricula_Info info)
         {
             try
             {
@@ -627,9 +627,11 @@ namespace Core.Data.Academico
                     if (Entity == null)
                         return false;
 
-                    Entity.MotivoAnulacion = info.MotivoAnulacion;
-                    Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
-                    Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;
+                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacion WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCambios WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+                    Context.Database.ExecuteSqlCommand("DELETE aca_Matricula_Rubro WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+                    Context.Database.ExecuteSqlCommand("DELETE aca_Matricula WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+
                     Context.SaveChanges();
                 }
 

@@ -115,11 +115,11 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
-        public bool AnularDB(aca_Matricula_Info info)
+        public bool EliminarDB(aca_Matricula_Info info)
         {
             try
             {
-                return odata.anularDB(info);
+                return odata.eliminarDB(info);
             }
             catch (Exception)
             {

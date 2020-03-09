@@ -36,5 +36,6 @@ namespace Core.Data.Base
         public string vt_autorizacion { get; set; }
         public Nullable<decimal> IdAlumno { get; set; }
         public string NombresAlumno { get; set; }
+        public string IdUsuario { get; set; }
     }
 }
