@@ -146,25 +146,34 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult FAC_005(int IdSucursal = 0, int IdTipoNota = 0, string CreDeb = null, string NaturalezaNota = null)
+        public ActionResult FAC_005(DateTime FechaDesde, DateTime FechaHasta, int IdEmpresa =0, int IdTipoNota = 0, string CreDeb = null, string NaturalezaNota =null)
         {
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            FAC_005_Rpt model = new FAC_005_Rpt();
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.fecha_ini = DateTime.Now.AddMonths(-1);
+            model.fecha_fin = DateTime.Now;
+
+            FAC_005_Rpt report = new FAC_005_Rpt();
+
             #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_005");
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "FAC_005");
             if (reporte != null)
             {
                 System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                model.LoadLayout(RootReporte);
+                report.LoadLayout(RootReporte);
             }
             #endregion
-            model.p_IdEmpresa.Value = IdEmpresa;
-            model.p_IdTipoNota.Value = IdTipoNota;
-            
-            model.p_CreDeb.Value = CreDeb;
-            model.p_Naturaleza.Value = NaturalezaNota;
-            model.RequestParameters = false;
+            report.p_IdEmpresa.Value = IdEmpresa;
+            report.p_IdTipoNota.Value = IdTipoNota;
+            report.p_FechaDesde.Value = FechaDesde;
+            report.p_FechaHasta.Value = FechaHasta;
+            report.p_Naturaleza.Value = NaturalezaNota;
+            report.p_CreDeb.Value = CreDeb;
+            ViewBag.Report = report;
+
             return View(model);
         }
+       
     }
 }
