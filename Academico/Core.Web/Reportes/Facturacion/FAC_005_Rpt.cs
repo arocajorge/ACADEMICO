@@ -32,8 +32,9 @@ namespace Core.Web.Reportes.Facturacion
                 DateTime FechaHasta = string.IsNullOrEmpty(p_FechaHasta.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_FechaHasta.Value);
                 int IdTipoNota = string.IsNullOrEmpty(p_IdTipoNota.Value.ToString()) ? 0 : Convert.ToInt32(p_IdTipoNota.Value);
                 string CreDeb = string.IsNullOrEmpty(p_CreDeb.Value.ToString()) ? null : Convert.ToString(p_CreDeb.Value);
-                string NaturalezaNOta = string.IsNullOrEmpty(p_Naturaleza.Value.ToString()) ? null : Convert.ToString(p_Naturaleza.Value);
-                List<FAC_005_Info> Lista = bus_rpt.GetList(IdEmpresa, FechaDesde, FechaHasta, IdTipoNota, CreDeb, NaturalezaNOta);
+                string NaturalezaNota = string.IsNullOrEmpty(p_Naturaleza.Value.ToString()) ? null : Convert.ToString(p_Naturaleza.Value);
+                
+                List<FAC_005_Info> Lista = bus_rpt.GetList(IdEmpresa, FechaDesde, FechaHasta, IdTipoNota, CreDeb, NaturalezaNota);
 
                 tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
                 var emp = bus_empresa.get_info(IdEmpresa);

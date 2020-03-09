@@ -264,6 +264,7 @@ namespace Core.Info.Helps
         public int[] IntArray { get; set; }
         public int IdTipoNota { get; set; }
         public string CreDeb { get; set; }
+        public string NaturalezaNota { get; set; }
         public decimal IdAlumno { get; set; }
 
 

@@ -146,11 +146,10 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult FAC_005(DateTime FechaDesde, DateTime FechaHasta, int IdEmpresa =0, int IdTipoNota = 0, string CreDeb = null, string NaturalezaNota =null)
+        public ActionResult FAC_005()
         {
-            cl_filtros_Info model = new cl_filtros_Info();
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             model.fecha_ini = DateTime.Now.AddMonths(-1);
             model.fecha_fin = DateTime.Now;
 
@@ -164,16 +163,38 @@ namespace Core.Web.Areas.Reportes.Controllers
                 report.LoadLayout(RootReporte);
             }
             #endregion
-            report.p_IdEmpresa.Value = IdEmpresa;
-            report.p_IdTipoNota.Value = IdTipoNota;
-            report.p_FechaDesde.Value = FechaDesde;
-            report.p_FechaHasta.Value = FechaHasta;
-            report.p_Naturaleza.Value = NaturalezaNota;
-            report.p_CreDeb.Value = CreDeb;
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdTipoNota.Value = model.IdTipoNota;
+            report.p_FechaDesde.Value = model.fecha_ini;
+            report.p_FechaHasta.Value = model.fecha_fin;
+            report.p_Naturaleza.Value = model.NaturalezaNota;
+            report.p_CreDeb.Value = model.CreDeb;
             ViewBag.Report = report;
 
             return View(model);
         }
-       
+       [HttpPost]
+        public ActionResult FAC_005(cl_filtros_facturacion_Info model)
+        {
+            FAC_005_Rpt report = new FAC_005_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "FAC_005");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdTipoNota.Value = model.IdTipoNota;
+            report.p_FechaDesde.Value = model.fecha_ini;
+            report.p_FechaHasta.Value = model.fecha_fin;
+            report.p_Naturaleza.Value = model.NaturalezaNota;
+            report.p_CreDeb.Value = model.CreDeb;
+            ViewBag.Report = report;
+
+            return View(model);
+        }
     }
 }
