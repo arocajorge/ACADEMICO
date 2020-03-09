@@ -553,7 +553,8 @@ namespace Core.Data.Academico
                         IdParalelo = info.info_MatriculaCambios.IdParalelo,
                         IdPlantilla = info.info_MatriculaCambios.IdPlantilla,
                         IdUsuarioCreacion = info.info_MatriculaCambios.IdUsuarioCreacion,
-                        FechaCreacion = DateTime.Now
+                        FechaCreacion = DateTime.Now,
+                        Observacion = info.ObservacionCambio
                     };
                     Context.aca_MatriculaCambios.Add(Entity_Historico);
                     #endregion
@@ -586,6 +587,7 @@ namespace Core.Data.Academico
                     Entity.IdParalelo = info.IdParalelo;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
+                    
 
                     #region HistoricoPlantilla
                     aca_MatriculaCambios Entity_Cambios = new aca_MatriculaCambios
@@ -601,7 +603,8 @@ namespace Core.Data.Academico
                         IdParalelo = info.info_MatriculaCambios.IdParalelo,
                         IdPlantilla = info.info_MatriculaCambios.IdPlantilla,
                         IdUsuarioCreacion = info.info_MatriculaCambios.IdUsuarioCreacion,
-                        FechaCreacion = DateTime.Now
+                        FechaCreacion = DateTime.Now,
+                        Observacion = info.ObservacionCambio
                     };
                     Context.aca_MatriculaCambios.Add(Entity_Cambios);
                     #endregion

@@ -143,9 +143,16 @@
                     @Html.Partial("_ComboBoxPartial_Plantilla", Model)
                     @Html.ValidationMessageFor(q => q.IdPlantilla, "", new { @class = "text-danger" })
                 </div>
+            </div>     
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <label for="IdEmpresa">Observación</label>
+                @Html.TextBoxFor(q => q.ObservacionCambio, new { @class = "form-control", id = "ObservacionCambio" })
+                @Html.ValidationMessageFor(q => q.ObservacionCambio, "", new { @class = "text-danger" })
             </div>
-           
-            
         </div>
     </div>
     <br />
