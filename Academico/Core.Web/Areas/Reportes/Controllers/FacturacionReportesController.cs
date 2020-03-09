@@ -146,5 +146,25 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.RequestParameters = false;
             return View(model);
         }
+        public ActionResult FAC_005(int IdSucursal = 0, int IdTipoNota = 0, string CreDeb = null, string NaturalezaNota = null)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            FAC_005_Rpt model = new FAC_005_Rpt();
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_005");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                model.LoadLayout(RootReporte);
+            }
+            #endregion
+            model.p_IdEmpresa.Value = IdEmpresa;
+            model.p_IdTipoNota.Value = IdTipoNota;
+            
+            model.p_CreDeb.Value = CreDeb;
+            model.p_Naturaleza.Value = NaturalezaNota;
+            model.RequestParameters = false;
+            return View(model);
+        }
     }
 }
