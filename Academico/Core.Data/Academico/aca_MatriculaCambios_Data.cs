@@ -19,7 +19,7 @@ namespace Core.Data.Academico
                 {
                     var cont = Context.aca_MatriculaCambios.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula==IdMatricula).Count();
                     if (cont > 0)
-                        Secuencia = Context.aca_MatriculaCambios.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.Secuencia) + 1;
+                        Secuencia = Context.aca_MatriculaCambios.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).Max(q => q.Secuencia) + 1;
                 }
 
                 return Secuencia;
