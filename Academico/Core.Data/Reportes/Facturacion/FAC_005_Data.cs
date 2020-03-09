@@ -10,21 +10,20 @@ namespace Core.Data.Reportes.Facturacion
 {
    public class FAC_005_Data
     {
-      public List< FAC_005_Info> GetList(int IdEmpresa, DateTime FechaDesde, DateTime FechaHasta, int IdTipoNota, decimal IdNota, string creDeb, string NaturalezaNota)
+      public List< FAC_005_Info> GetList(int IdEmpresa, DateTime FechaDesde, DateTime FechaHasta, int IdTipoNota, string CreDeb, string NaturalezaNota)
         {
             try
             {
                 int IdTipoNotaini = IdTipoNota;
                 int IdTipoNotafin = IdTipoNota == 0 ? 99999999 : IdTipoNota;
-                decimal IdNotaini = IdNota;
-                decimal IdNotafin = IdNota == 0 ? 99999999 : IdNota;
+                
                 FechaDesde = FechaDesde.Date;
                 FechaHasta = FechaHasta.Date;
 
                 List<FAC_005_Info> Lista = new List<FAC_005_Info>();
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
-                    Lista = (from q in db.SPFAC_005(IdEmpresa, FechaDesde, FechaHasta, creDeb, NaturalezaNota)
+                    Lista = (from q in db.SPFAC_005(IdEmpresa, FechaDesde, FechaHasta, CreDeb, NaturalezaNota)
                              select new FAC_005_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
