@@ -691,5 +691,66 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        public ActionResult ACA_009(int IdEmpresa = 0, int IdAnio = 0, decimal IdAlumno = 0)
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.fecha_ini = DateTime.Now.AddMonths(-1);
+            model.fecha_fin = DateTime.Now;
+            var info_anio = new aca_AnioLectivo_Info();
+            if (IdAnio == 0)
+            {
+                info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            }
+
+            model.IdAnio = (IdAnio == 0 ? info_anio.IdAnio : IdAnio);
+            model.IdAlumno = IdAlumno;
+
+            ACA_009_Rpt report = new ACA_009_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_009");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAlumno.Value = model.IdSede;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_IdAnio.Value = model.IdAnio;
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_009(cl_filtros_Info model)
+        {
+
+            ACA_009_Rpt report = new ACA_009_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_009");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAlumno.Value = model.IdSede;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_IdAnio.Value = model.IdAnio;
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+
     }
 }
