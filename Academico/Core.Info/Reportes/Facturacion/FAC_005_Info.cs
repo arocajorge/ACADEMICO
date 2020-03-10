@@ -21,7 +21,7 @@ namespace Core.Info.Reportes.Facturacion
         public Nullable<double> Saldo { get; set; }
         public string NombreCliente { get; set; }
         public string NombreAlumno { get; set; }
-        public int IdTipoNota1 { get; set; }
+        //public int IdTipoNota1 { get; set; }
         public string No_Descripcion { get; set; }
     }
 }

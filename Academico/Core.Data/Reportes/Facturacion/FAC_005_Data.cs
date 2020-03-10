@@ -41,7 +41,6 @@ namespace Core.Data.Reportes.Facturacion
                                  Saldo = q.Saldo,
                                  NombreCliente = q.NombreCliente,
                                  NombreAlumno = q.NombreAlumno,
-                                 IdTipoNota1 = q.IdTipoNota1, 
                                  No_Descripcion = q.No_Descripcion
                              }).ToList();
                 }

@@ -4,14 +4,14 @@
     settings.CallbackRouteValues = new { Controller = "FacturacionReportes", Action = "CmbTipoNota", Area = "Reportes" };
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.Properties.DisplayFormatString = "[{0}] - {1}";
-    settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-    settings.Properties.Columns.Add("NaturalezaNota", "Tipo Nota").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+    settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+    settings.Properties.Columns.Add("No_Descripcion", "Tipo Nota").Width = System.Web.UI.WebControls.Unit.Percentage(90);
     //Campo ID
     settings.Properties.ValueField = "IdTipoNota";
     settings.Properties.ValueType = typeof(string);
-    settings.Properties.TextField = "NaturalezaNota";
+    settings.Properties.TextField = "No_Descripcion";
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
 
-}).BindList(new Core.Bus.Reportes.Facturacion.FAC_005_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.fecha_ini, Model.fecha_fin, Model.CreDeb, Model.NaturalezaNota)).GetHtml()
+}).BindList(new Core.Bus.Facturacion.fa_TipoNota_Bus().get_list(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), false)).GetHtml()
 

@@ -158,6 +158,8 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.fecha_ini = DateTime.Now.AddMonths(-1);
             model.fecha_fin = DateTime.Now;
+            model.CreDeb = "C";
+            model.NaturalezaNota = "SRI";
 
             FAC_005_Rpt report = new FAC_005_Rpt();
 

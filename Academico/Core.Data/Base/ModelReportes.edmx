@@ -281,6 +281,32 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_008' no tiene definida
           <Property Name="CodigoAlumno" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWACA_009">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="200" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="date" />
+          <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="IdAnio" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.Academico.VWBAN_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_001">
           <Key>
@@ -1236,6 +1262,22 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
     [VWACA_008].[CodigoAlumno] AS [CodigoAlumno]
     FROM [Academico].[VWACA_008] AS [VWACA_008]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWACA_009" EntityType="Self.VWACA_009" store:Type="Views" store:Schema="Academico">
+            <DefiningQuery>SELECT 
+    [VWACA_009].[IdEmpresa] AS [IdEmpresa], 
+    [VWACA_009].[IdMatricula] AS [IdMatricula], 
+    [VWACA_009].[Secuencia] AS [Secuencia], 
+    [VWACA_009].[IdAlumno] AS [IdAlumno], 
+    [VWACA_009].[Codigo] AS [Codigo], 
+    [VWACA_009].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWACA_009].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [VWACA_009].[FechaCreacion] AS [FechaCreacion], 
+    [VWACA_009].[Observacion] AS [Observacion], 
+    [VWACA_009].[IdAnio] AS [IdAnio], 
+    [VWACA_009].[Descripcion] AS [Descripcion], 
+    [VWACA_009].[IdUsuarioCreacion] AS [IdUsuarioCreacion]
+    FROM [Academico].[VWACA_009] AS [VWACA_009]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWBAN_001" EntityType="Self.VWBAN_001" store:Type="Views" store:Schema="Academico">
             <DefiningQuery>SELECT 
     [VWBAN_001].[CodTipoCbteBan] AS [CodTipoCbteBan], 
@@ -1776,6 +1818,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <EntitySet Name="VWBAN_002_cancelaciones" EntityType="ModelReportes.VWBAN_002_cancelaciones" />
           <EntitySet Name="VWBAN_003" EntityType="ModelReportes.VWBAN_003" />
           <EntitySet Name="VWACA_008" EntityType="ModelReportes.VWACA_008" />
+          <EntitySet Name="VWACA_009" EntityType="ModelReportes.VWACA_009" />
           <FunctionImport Name="SPFAC_005" ReturnType="Collection(ModelReportes.SPFAC_005_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
@@ -2971,6 +3014,30 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="CodigoAlumno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="VWACA_009">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
         <ComplexType Name="SPFAC_005_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Int32" Name="IdSucursal" Nullable="false" />
@@ -3899,6 +3966,24 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida
                 <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
                 <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
                 <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VWACA_009">
+            <EntityTypeMapping TypeName="ModelReportes.VWACA_009">
+              <MappingFragment StoreEntitySet="VWACA_009">
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
