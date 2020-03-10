@@ -443,6 +443,10 @@
             GetUltimoDocumento();
         });
         
+        $("#IdMecanismoDet").change(function () {
+            VerDatosEmpleado();
+        });
+
         $("#IdMecanismo").change(function () {
             VerDatosEmpleado();
         });
@@ -455,7 +459,8 @@
     function VerDatosEmpleado() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
-            IdMecanismo: $("#IdMecanismo").val()
+            IdMecanismo: $("#IdMecanismo").val(),
+            IdMecanismoOtros: $("#IdMecanismoDet").val()
         }
         $.ajax({
             type: 'POST',
@@ -467,7 +472,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if(data == "DACA"){
+                if(data == true){
                     $("#Empleado").show();
                 }
                 else{

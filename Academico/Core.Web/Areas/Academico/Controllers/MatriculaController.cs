@@ -654,6 +654,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 var info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismo);
                 var info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
+                if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == false)
+                {
+                    info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismoDet);
+                    info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
+                }
 
                 aca_Matricula_Info info_matricula = new aca_Matricula_Info
                 {
@@ -671,8 +676,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     IdMecanismo = IdMecanismo,
                     Fecha = Fecha.Date,
                     Observacion = Observacion,
-                    IdEmpresa_rol = ((info_termino_pago!=null && info_termino_pago.CodigoRubroDescto == "DACA")? IdEmpresa_rol :(int?)null ),
-                    IdEmpleado = ((info_termino_pago != null && info_termino_pago.CodigoRubroDescto == "DACA") ? IdEmpleado : (decimal?)null ),
+                    IdEmpresa_rol = ((info_termino_pago!=null && info_termino_pago.AplicaDescuentoNomina == true)? IdEmpresa_rol :(int?)null ),
+                    IdEmpleado = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? IdEmpleado : (decimal?)null ),
                     IdUsuarioCreacion = SessionFixed.IdUsuario,
                     lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>()
                 };
@@ -1144,15 +1149,23 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(new { data_puntovta = punto_venta, data_talonario = resultado }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetDatosMecanismo(int IdEmpresa = 0, int IdMecanismo = 0)
+        public JsonResult GetDatosMecanismo(int IdEmpresa = 0, int IdMecanismo = 0, int IdMecanismoOtros = 0)
         {
-            var resultado = "";
+            bool resultado = false;
             var info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismo);
             var info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
 
-            if (info_termino_pago!= null && info_termino_pago.CodigoRubroDescto== "DACA")
+            if (info_termino_pago!= null && info_termino_pago.AplicaDescuentoNomina == true)
             {
-                resultado = info_termino_pago.CodigoRubroDescto;
+                resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
+            }else
+            {
+                info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismoOtros);
+                info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
+                if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
+                {
+                    resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
+                }
             }
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
