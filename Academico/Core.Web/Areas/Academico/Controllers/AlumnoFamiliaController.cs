@@ -32,6 +32,7 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_ciudad_Bus bus_ciudad = new tb_ciudad_Bus();
         tb_Religion_Bus bus_religion = new tb_Religion_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
@@ -86,6 +87,14 @@ namespace Core.Web.Areas.Academico.Controllers
             else
             {
                 msg = "Número de identificación del alumno inválida";
+                return false;
+            }
+
+            var existe_alumno = bus_alumno.GetInfo(info.IdEmpresa, info.IdAlumno, info.pe_cedulaRuc);
+
+            if (existe_alumno != null)
+            {
+                msg = "El número de identificacion del familiar se encuentra registrado como alumno";
                 return false;
             }
 
@@ -364,6 +373,15 @@ namespace Core.Web.Areas.Academico.Controllers
             };
 
             model.info_persona = info_persona_familia;
+
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                ViewBag.IdAlumno = model.IdAlumno;
+                ViewBag.IdEmpresa = model.IdEmpresa;
+                cargar_combos();
+                return View(model);
+            }
 
             if (!bus_familia.modificarDB(model))
             {

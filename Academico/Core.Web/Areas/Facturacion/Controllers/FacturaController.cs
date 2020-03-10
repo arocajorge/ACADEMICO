@@ -627,19 +627,18 @@ namespace Core.Web.Areas.Facturacion.Controllers
             return Json(IdCliente, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult GetDatosMecanismo(int IdEmpresa = 0, int IdMecanismo = 0)
-        //{
-        //    var resultado = "";
-        //    var info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismo);
-        //    var info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
+        public JsonResult GetDatosMecanismo(int IdEmpresa = 0, string IdTerminoPago = "")
+        {
+            bool resultado = false;
+            var info_termino_pago = bus_termino_pago.get_info(IdTerminoPago);
 
-        //    if (info_termino_pago != null && info_termino_pago.CodigoRubroDescto == "DACA")
-        //    {
-        //        resultado = info_termino_pago.CodigoRubroDescto;
-        //    }
+            if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
+            {
+                resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
+            }
 
-        //    return Json(resultado, JsonRequestBehavior.AllowGet);
-        //}
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         #endregion
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
@@ -692,8 +691,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
 
             var info_termino_pago = bus_termino_pago.get_info(model.vt_tipo_venta);
-            model.IdEmpresa_rol = ((info_termino_pago != null && info_termino_pago.CodigoRubroDescto == "DACA") ? model.IdEmpresa_rol : (int?)null);
-            model.IdEmpleado = ((info_termino_pago != null && info_termino_pago.CodigoRubroDescto == "DACA") ? model.IdEmpleado : (decimal?)null);
+            model.IdEmpresa_rol = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpresa_rol : (int?)null);
+            model.IdEmpleado = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpleado : (decimal?)null);
 
             if (!bus_factura.guardarDB(model))
             {
@@ -767,8 +766,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
             model.IdUsuario = SessionFixed.IdUsuario.ToString();
 
             var info_termino_pago = bus_termino_pago.get_info(model.vt_tipo_venta);
-            model.IdEmpresa_rol = ((info_termino_pago != null && info_termino_pago.CodigoRubroDescto == "DACA") ? model.IdEmpresa_rol : (int?)null);
-            model.IdEmpleado = ((info_termino_pago != null && info_termino_pago.CodigoRubroDescto == "DACA") ? model.IdEmpleado : (decimal?)null);
+            model.IdEmpresa_rol = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpresa_rol : (int?)null);
+            model.IdEmpleado = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpleado : (decimal?)null);
 
             if (!bus_factura.modificarDB(model))
             {

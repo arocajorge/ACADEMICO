@@ -146,6 +146,22 @@
             </div>     
         </div>
     </div>
+    <div class="row" id="Empleado" hidden>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdEmpresa">Empresa</label>
+                    @Html.DropDownListFor(q => q.IdEmpresa_rol, new SelectList(ViewBag.lst_empresa, "IdEmpresa", "em_nombre"), new { @class = "form-control", @id = "IdEmpresa_rol" })
+                    @Html.ValidationMessageFor(q => q.IdEmpresa_rol, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="IdEmpresa">Empleado</label>
+                @Html.Partial("_CmbEmpleado", Model)
+                @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -178,6 +194,32 @@
     {
         $("#MensajeError").hide();
     });
+
+    function ValidarEmpleado() {
+        var datos = {
+            IdEmpresa: $('#IdEmpresa').val(),
+            IdTransaccionSession : $('#IdTransaccionSession').val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetDatosMecanismo", "CambioPlantillaMatricula",new { Area = "Academico"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == true) {
+                    $("#Empleado").show();
+                }
+                else {
+                    $("#Empleado").hide();
+                }
+            },
+            error: function (error) {
+
+            }
+        });
+    }
 
     function SetMatriculaRubro(){
         var datos = {

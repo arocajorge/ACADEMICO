@@ -215,6 +215,31 @@ namespace Core.Web.Areas.Academico.Controllers
                 return false;
             }
 
+            if (info.IdAlumno==0)
+            {
+                if (!string.IsNullOrEmpty(info.info_persona_padre.pe_cedulaRuc) && (info.info_persona_padre.pe_cedulaRuc == info.info_persona_alumno.pe_cedulaRuc))
+                {
+                    msg = "El número de identificacion del alumno no puede ser igual al número de identificacion del padre";
+                    return false;
+                }
+
+                if (!string.IsNullOrEmpty(info.info_persona_madre.pe_cedulaRuc) && (info.info_persona_madre.pe_cedulaRuc == info.info_persona_alumno.pe_cedulaRuc))
+                {
+                    msg = "El número de identificacion del alumno no puede ser igual al número de identificacion de la madre";
+                    return false;
+                }
+            }
+            else
+            {
+                var existe_fam_alumno = bus_familia.existe_familia(info.IdEmpresa, info.IdAlumno, info.info_persona_alumno.pe_cedulaRuc);
+
+                if (existe_fam_alumno != null)
+                {
+                    msg = "El número de identificacion del alumno ya existe como familiar - " + existe_fam_alumno.NomCatalogo;
+                    return false;
+                }
+            }
+
             return true;
         }
 

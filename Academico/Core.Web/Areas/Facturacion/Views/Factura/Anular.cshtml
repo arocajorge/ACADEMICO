@@ -131,7 +131,16 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(q => q.vt_fecha, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "vt_fecha" })
+                                    @Html.DevExpress().DateEditFor(q => q.vt_fecha, settings =>
+                                  {
+                                      settings.Name = "vt_fecha";
+                                      settings.Properties.UseMaskBehavior = true;
+                                      settings.Properties.EditFormat = EditFormat.Date;
+                                      settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                      settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                      settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                      //settings.Properties.ClientSideEvents.DateChanged = "function(s,e){cargar_fecha_vencimiento();}";
+                                  }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.vt_fecha, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -150,7 +159,15 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    @Html.TextBoxFor(q => q.vt_fech_venc, "{0:dd/MM/yyyy}", new { @class = "form-control", @id = "vt_fech_venc" })
+                                    @Html.DevExpress().DateEditFor(q => q.vt_fech_venc, settings =>
+                                  {
+                                      settings.Name = "vt_fech_venc";
+                                      settings.Properties.UseMaskBehavior = true;
+                                      settings.Properties.EditFormat = EditFormat.Date;
+                                      settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                      settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                      settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                  }).GetHtml()
                                     @Html.ValidationMessageFor(q => q.vt_fech_venc, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -268,6 +285,7 @@
         ValidarGrid();
         Set_NivelDescuento_x_FormaPago();
         cargar_contactos();
+        get_datos_mecanismo();
 
         //Date picker
         $('#vt_fecha').datepicker({
@@ -281,6 +299,7 @@
         })
         $("#vt_tipo_venta").change(function () {
             get_info_termino_pago();
+            get_datos_mecanismo();
         });
         $("#vt_plazo").change(function () {
             cargar_fecha_vencimiento();
@@ -380,8 +399,27 @@
             success: function (data) {
                 $("#vt_plazo").val(data.Dias_Vct);
                 cargar_fecha_vencimiento();
+            },
+            error: function (error) {
 
-                if (data.CodigoRubroDescto == "DACA") {
+            }
+        });
+    }
+
+    function get_datos_mecanismo() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTerminoPago: $("#vt_tipo_venta").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetDatosMecanismo", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == true) {
                     $("#Empleado").show();
                 }
                 else {
@@ -393,7 +431,6 @@
             }
         });
     }
-
 
     function get_info_cliente() {
         var tipo = $("#IdCliente").val();

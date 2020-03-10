@@ -114,7 +114,8 @@
             new DevExpress.XtraReports.UI.GroupField("OrdenNivel", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("OrdenJornada", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("OrdenCurso", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
-            new DevExpress.XtraReports.UI.GroupField("OrdenParalelo", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            new DevExpress.XtraReports.UI.GroupField("OrdenParalelo", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
+            new DevExpress.XtraReports.UI.GroupField("pe_nombreCompleto", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             // 
             // xrTable4
             // 

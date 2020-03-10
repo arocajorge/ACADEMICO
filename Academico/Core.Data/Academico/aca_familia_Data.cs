@@ -703,5 +703,49 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public aca_Familia_Info existe_familia(int IdEmpresa, decimal IdAlumno, string pe_cedulaRuc)
+        {
+            try
+            {
+                aca_Familia_Info info = new aca_Familia_Info();
+
+                EntitiesAcademico Context_academico = new EntitiesAcademico();
+                var Entity_fam = Context_academico.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.pe_cedulaRuc==pe_cedulaRuc && q.Estado == true).FirstOrDefault();
+
+                if (Entity_fam == null)
+                {
+                    return null;
+                }
+
+                info = new aca_Familia_Info
+                {
+                    IdEmpresa = Entity_fam.IdEmpresa,
+                    IdAlumno = Entity_fam.IdAlumno,
+                    Secuencia = Entity_fam.Secuencia,
+                    IdCatalogoPAREN = Entity_fam.IdCatalogoPAREN,
+                    NomCatalogo = Entity_fam.NomCatalogo,
+                    Direccion = Entity_fam.Direccion,
+                    Correo = Entity_fam.Correo,
+                    Celular = Entity_fam.Celular,
+                    SeFactura = Entity_fam.SeFactura,
+                    IdPersona = Entity_fam.IdPersona,
+                    pe_apellido = Entity_fam.pe_apellido,
+                    pe_nombre = Entity_fam.pe_nombre,
+                    pe_razonSocial = Entity_fam.pe_razonSocial,
+                    pe_Naturaleza = Entity_fam.pe_Naturaleza,
+                    IdTipoDocumento = Entity_fam.IdTipoDocumento,
+                    pe_cedulaRuc = Entity_fam.pe_cedulaRuc,
+                    pe_nombreCompleto = Entity_fam.pe_nombreCompleto
+                };
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

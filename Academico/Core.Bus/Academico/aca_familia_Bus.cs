@@ -83,7 +83,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
-
+        
+        public aca_Familia_Info existe_familia(int IdEmpresa, decimal IdAlumno, string pe_cedulaRuc)
+        {
+            try
+            {
+                return odata.existe_familia(IdEmpresa, IdAlumno, pe_cedulaRuc);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public bool guardarDB(aca_Familia_Info info)
         {
             try

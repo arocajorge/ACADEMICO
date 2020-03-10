@@ -784,7 +784,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
                 #endregion
                 var personaRep = bus_persona.get_info(info_matricula.IdPersonaF);
-                var ExisteCliente = bus_cliente.get_info_x_num_cedula(info_matricula.IdEmpresa, personaRep.pe_cedulaRuc);
+                var ExisteCliente = bus_cliente.get_info_x_num_cedula(info_matricula.IdEmpresa, (personaRep==null ? "": personaRep.pe_cedulaRuc));
 
                 if (info_matricula.IdPersonaR != 0 && info_matricula.IdPersonaF != 0 && ExisteCliente.IdCliente!=0)
                 {

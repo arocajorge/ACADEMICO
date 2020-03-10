@@ -96,7 +96,7 @@
         //settings.row
         //settings.ClientSideEvents.RowClick = "OnRowClick";
         //settings.ClientSideEvents.EndCallback = "OnEndCallback";
-
+        settings.ClientSideEvents.EndCallback = "function(s, e) { ValidarEmpleado();}";
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

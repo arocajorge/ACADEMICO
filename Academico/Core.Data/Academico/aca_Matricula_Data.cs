@@ -511,6 +511,8 @@ namespace Core.Data.Academico
                     if (Entity == null)
                         return false;
                     Entity.IdPlantilla = info.IdPlantilla;
+                    Entity.IdEmpresa_rol = info.IdEmpresa_rol;
+                    Entity.IdEmpleado = info.IdEmpleado;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
 
@@ -537,7 +539,7 @@ namespace Core.Data.Academico
                                 Total = item.Total,
                                 EnMatricula = item.EnMatricula,
                                 IdPlantilla = item.IdPlantilla,
-                                IdAnio = item.IdAnio
+                                IdAnio = item.IdAnio,
                             };
                             Context.aca_Matricula_Rubro.Add(Entity_Det);
                         }

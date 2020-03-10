@@ -1,4 +1,5 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Info.Academico;
 using Core.Info.General;
@@ -40,6 +41,8 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Paralelo_Profesor_Bus bus_materias_x_paralelo = new aca_AnioLectivo_Paralelo_Profesor_Bus();
         aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
         aca_Paralelo_Bus bus_paralelo = new aca_Paralelo_Bus();
+        tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+        fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -113,6 +116,13 @@ namespace Core.Web.Areas.Academico.Controllers
         }
 
         #endregion
+        #region Combos bajo demanada Empleado
+        public ActionResult Cmb_CambioPlantillaEmpleado()
+        {
+            int IdEmpresa_rol = (Request.Params["IdEmpresa_rol"] != null) ? int.Parse(Request.Params["IdEmpresa_rol"]) : -1;
+            return PartialView("_CmbEmpleado", new aca_Matricula_Info { IdEmpresa_rol = IdEmpresa_rol });
+        }
+        #endregion
 
         #region Metodos
         private void cargar_combos()
@@ -120,6 +130,9 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var lst_mecanismo = bus_mecanismo.GetList(IdEmpresa, false);
             ViewBag.lst_mecanismo = lst_mecanismo;
+
+            var lst_empresa = bus_empresa.get_list(false);
+            ViewBag.lst_empresa = lst_empresa;
         }
 
         private bool validar(aca_Matricula_Info info, ref string msg)
@@ -129,6 +142,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 msg = "Debe de ingresar observación";
                 return false;
             }
+
 
             return true;
         }
@@ -286,6 +300,29 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(new { Valor = ValorTotal, ProntoPago = ValorTotalPP }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetDatosMecanismo(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            bool resultado = false;
+            var lst_detalle = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var lst_modificar = lst_detalle.Where(q => q.FechaFacturacion == null).ToList();
+
+            if (lst_modificar!=null)
+            {
+                foreach (var item in lst_modificar)
+                {
+                    var info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, item.IdMecanismo);
+                    var info_termino_pago = bus_termino_pago.get_info((info_mecanismo == null ? "" : info_mecanismo.IdTerminoPago));
+
+                    if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
+                    {
+                        resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
+                        break;
+                    }
+                }
+            }
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Funciones del detalle (modificar)
@@ -329,6 +366,7 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Matricula_Info model = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
+            model.IdEmpresa_rol = IdEmpresa;
             model.Validar = "N";
 
             if (model == null)
@@ -364,13 +402,37 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdPlantilla = info_matricula.IdPlantilla,
                 IdUsuarioCreacion = SessionFixed.IdUsuario
             };
+
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             model.lst_MatriculaRubro = ListaMatriculaRubro.get_list(model.IdTransaccionSession);
+
+            var descuento_rol = model.lst_MatriculaRubro.Where(q => q.FechaFacturacion == null).ToList();
+
+            if (descuento_rol != null)
+            {
+                foreach (var item in descuento_rol)
+                {
+                    var info_mecanismo = bus_mecanismo.GetInfo(model.IdEmpresa, item.IdMecanismo);
+                    var info_termino_pago = bus_termino_pago.get_info((info_mecanismo == null ? "" : info_mecanismo.IdTerminoPago));
+
+                    if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
+                    {
+                        model.IdEmpresa_rol = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpresa_rol : (int?)null);
+                        model.IdEmpleado = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpleado : (decimal?)null);
+                        break;
+                    }
+                    else
+                    {
+                        model.IdEmpleado = null;
+                    }
+                }
+            }
 
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                model.lst_MatriculaRubro = ListaMatriculaRubro.get_list(model.IdTransaccionSession);
                 cargar_combos();
                 return View(model);
             }

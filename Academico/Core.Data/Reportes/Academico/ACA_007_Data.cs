@@ -17,7 +17,7 @@ namespace Core.Data.Reportes.Academico
                 List<ACA_007_Info> Lista;
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Lista = Context.VWACA_007.Where(q => q.IdEmpresa == IdEmpresa && q.Fecha >= fecha_ini && q.Fecha<=fecha_fin).Select(q => new ACA_007_Info
+                    Lista = Context.VWACA_007.Where(q => q.IdEmpresa == IdEmpresa && q.Fecha >= fecha_ini && q.Fecha<=fecha_fin).OrderBy(q=> new {q.OrdenNivel, q.OrdenJornada, q.OrdenCurso, q.OrdenParalelo }).Select(q => new ACA_007_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdMatricula = q.IdMatricula,

@@ -61,6 +61,17 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_Alumno_Info GetInfo(int IdEmpresa, decimal IdAlumno, string pe_cedulaRuc)
+        {
+            try
+            {
+                return odata.getInfo(IdEmpresa, IdAlumno, pe_cedulaRuc);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public decimal GetId(int IdEmpresa)
         {
             try

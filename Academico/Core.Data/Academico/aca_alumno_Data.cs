@@ -118,6 +118,39 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_Alumno_Info getInfo(int IdEmpresa, decimal IdAlumno, string pe_cedulaRucFamiliar)
+        {
+            try
+            {
+                aca_Alumno_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.pe_cedulaRuc== pe_cedulaRucFamiliar).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_Alumno_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        pe_nombre = Entity.pe_nombre,
+                        pe_apellido = Entity.pe_apellido,
+                        pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        IdAlumno = Entity.IdAlumno,
+                        IdPersona = Entity.IdPersona,
+                        pe_cedulaRuc = Entity.pe_cedulaRuc,
+                        Codigo = Entity.Codigo
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_Alumno_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
         {
             try

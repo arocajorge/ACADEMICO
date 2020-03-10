@@ -533,10 +533,11 @@
         ValidarCliente();
         Set_NivelDescuento_x_FormaPago();
         cargar_contactos();
-        get_info_termino_pago();
+        get_datos_mecanismo();
 
         $("#vt_tipo_venta").change(function () {
             get_info_termino_pago();
+            get_datos_mecanismo();
         });
         $("#vt_plazo").change(function () {
             cargar_fecha_vencimiento();
@@ -757,8 +758,27 @@
             success: function (data) {
                 $("#vt_plazo").val(data.Dias_Vct);
                 cargar_fecha_vencimiento();
+            },
+            error: function (error) {
 
-                if(data.CodigoRubroDescto== "DACA"){
+            }
+        });
+    }
+
+    function get_datos_mecanismo() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTerminoPago: $("#vt_tipo_venta").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetDatosMecanismo", "Factura",new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if(data == true){
                     $("#Empleado").show();
                 }
                 else{
@@ -770,7 +790,6 @@
             }
         });
     }
-
 
     function get_info_cliente() {
         var tipo = $("#IdCliente").val();
