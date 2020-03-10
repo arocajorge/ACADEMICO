@@ -1,20 +1,17 @@
-﻿@using System.Web.UI.WebControls;
-@{
-    var comboBox = Html.DevExpress().ComboBox(settings =>
-    {
-        settings.Name = "IdTipoNota";
-        settings.CallbackRouteValues = new { Controller = "FacturacionReportes", Action = "CmbtipoNota", Area = "Reportes" };
-        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-        settings.Properties.DisplayFormatString = "[{0}] - {1}";
-        settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-        settings.Properties.Columns.Add("NaturalezaNota", "Tipo Nota").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-        //Campo ID
-        settings.Properties.ValueField = "IdTipoNota";
-        settings.Properties.ValueType = typeof(int);
-        settings.Properties.TextField = "NaturalezaNota";
-        settings.Properties.NullText = "== Seleccione ==";
-        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        
-    }).BindList(new Core.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_list_bajo_demanda, new Core.Web.Areas.Reportes.Controllers.FacturacionReportesController().get_info_bajo_demanda)
-    .Bind(Model.GetType() == typeof(Core.Info.Helps.cl_filtros_facturacion_Info) ? "" : (Model == 0 ? "" : Model));
-}
+﻿@Html.DevExpress().ComboBox(settings =>
+{
+    settings.Name = "IdTipoNota";
+    settings.CallbackRouteValues = new { Controller = "FacturacionReportes", Action = "CmbTipoNota", Area = "Reportes" };
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+    settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+    settings.Properties.Columns.Add("NaturalezaNota", "Tipo Nota").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+    //Campo ID
+    settings.Properties.ValueField = "IdTipoNota";
+    settings.Properties.ValueType = typeof(string);
+    settings.Properties.TextField = "NaturalezaNota";
+    settings.Properties.NullText = "== Seleccione ==";
+    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+
+}).BindList(new Core.Bus.Reportes.Facturacion.FAC_005_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.fecha_ini, Model.fecha_fin, Model.CreDeb, Model.NaturalezaNota)).GetHtml()
+

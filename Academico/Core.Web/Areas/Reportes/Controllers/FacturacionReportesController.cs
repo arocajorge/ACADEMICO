@@ -37,11 +37,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
             return PartialView("_CmbTipoNota", model);
         }
-        public ActionResult CmbCreDeb()
-        {
-            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
-            return PartialView("_CmbCreDeb", model);
-        }
+        
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
             return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.CLIENTE.ToString());

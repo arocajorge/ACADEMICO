@@ -8402,7 +8402,6 @@
     <Content Include="Areas\Academico\Views\Matricula\_CmbEmpleado.cshtml" />
     <Content Include="Areas\Facturacion\Views\Factura\_CmbEmpleado.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbTipoNota.cshtml" />
-    <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbCreDeb.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8494,6 +8493,7 @@
     <TypeScriptCompile Include="AdminLTE\bower_components\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\Academico\ACA_001_Rpt.resx">
       <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>

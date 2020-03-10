@@ -71,17 +71,9 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="IdNivel">Tipo nota</label>
+                            <label for="IdCliente">Naturaleza</label>
                             @Html.Partial("_CmbTipoNota", Model)
-                            @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "form", @role = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="IdNivel">Crédito/Débito</label>
-                            @Html.Partial("_CmbCreDeb", Model)
-                            @Html.ValidationMessageFor(q => q.CreDeb, "", new { @class = "form", @role = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger", @id = "IdTipoNota" })
                         </div>
                     </div>
                 </div>
