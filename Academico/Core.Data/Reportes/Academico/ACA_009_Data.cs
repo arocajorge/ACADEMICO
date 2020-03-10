@@ -10,12 +10,12 @@ namespace Core.Data.Reportes.Academico
 {
   public class ACA_009_Data
     {
-        public List< ACA_009_Info> GetList(int IdEmpresa, int IdAnio, int IdAlumno, DateTime fecha_ini, DateTime fecha_fin)
+        public List< ACA_009_Info> GetList(int IdEmpresa, int IdAnio, decimal IdAlumno, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
-                int IdAlumnoini = IdAlumno;
-                int IdALumnofin = IdAlumno == 0 ? 99999999 : IdAlumno;
+                decimal IdAlumnoini = IdAlumno;
+                decimal IdALumnofin = IdAlumno == 0 ? 99999999 : IdAlumno;
                 fecha_ini = fecha_ini.Date;
                 fecha_fin = fecha_fin.Date;
 

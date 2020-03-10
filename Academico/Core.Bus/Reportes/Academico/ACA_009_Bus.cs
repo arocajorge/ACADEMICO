@@ -11,7 +11,7 @@ namespace Core.Bus.Reportes.Academico
    public class ACA_009_Bus
     {
         ACA_009_Data odata = new ACA_009_Data();
-        public List<ACA_009_Info> GetList(int IdEmpresa, int IdAnio, int IdAlumno, DateTime fecha_ini, DateTime fecha_fin)
+        public List<ACA_009_Info> GetList(int IdEmpresa, int IdAnio, Decimal IdAlumno, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
