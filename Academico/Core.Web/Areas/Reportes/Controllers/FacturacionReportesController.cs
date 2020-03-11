@@ -177,6 +177,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_FechaHasta.Value = model.fecha_fin;
             report.p_Naturaleza.Value = model.NaturalezaNota;
             report.p_CreDeb.Value = model.CreDeb;
+            report.p_IdTipoNota.Value = model.IdTipoNota;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
@@ -197,10 +198,10 @@ namespace Core.Web.Areas.Reportes.Controllers
             }
             #endregion
             report.p_IdEmpresa.Value = model.IdEmpresa;
-           
             report.p_FechaDesde.Value = model.fecha_ini;
             report.p_FechaHasta.Value = model.fecha_fin;
             report.p_Naturaleza.Value = model.NaturalezaNota;
+            report.p_IdTipoNota.Value = model.IdTipoNota;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             report.p_CreDeb.Value = model.CreDeb;

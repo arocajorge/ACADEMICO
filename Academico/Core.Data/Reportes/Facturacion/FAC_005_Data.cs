@@ -23,6 +23,7 @@ namespace Core.Data.Reportes.Facturacion
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
                     Lista = (from q in db.SPFAC_005(IdEmpresa, FechaDesde, FechaHasta, CreDeb, NaturalezaNota)
+                             where (IdTipoNotaIni <= q.IdTipoNota && q.IdTipoNota <= IdTipoNotaFin)
                              select new FAC_005_Info
                              {
                                  IdEmpresa = q.IdEmpresa,
