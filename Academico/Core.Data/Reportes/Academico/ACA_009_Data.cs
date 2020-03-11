@@ -23,7 +23,7 @@ namespace Core.Data.Reportes.Academico
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
                     Lista = db.VWACA_009.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio &&
-                    q.IdAlumno == IdAlumno && fecha_ini <= q.FechaCreacion && q.FechaCreacion <= fecha_fin).Select(q => new ACA_009_Info
+                    IdAlumnoini <= q.IdAlumno && q.IdAlumno <= IdALumnofin && fecha_ini <= q.FechaCreacion && q.FechaCreacion <= fecha_fin).Select(q => new ACA_009_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdMatricula = q.IdMatricula,

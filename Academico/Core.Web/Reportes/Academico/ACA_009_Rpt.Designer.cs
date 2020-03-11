@@ -107,7 +107,7 @@
             this.Detail.HeightF = 25F;
             this.Detail.Name = "Detail";
             this.Detail.SortFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
-            new DevExpress.XtraReports.UI.GroupField("IdAlumno", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
+            new DevExpress.XtraReports.UI.GroupField("pe_nombreCompleto", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("FechaCreacion", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             // 
             // xrTable2
@@ -154,6 +154,7 @@
             this.xrTableCell14.Multiline = true;
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.Text = "Fecha";
+            this.xrTableCell14.TextFormatString = "{0:dd/MM/yyyy}";
             this.xrTableCell14.Weight = 0.72536606252712943D;
             // 
             // xrTableCell15
