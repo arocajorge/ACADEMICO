@@ -106,6 +106,7 @@
             this.p_CreDeb = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_Naturaleza = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.p_IdTipoNota = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -884,6 +885,11 @@
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Facturacion.FAC_005_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
+            // p_IdTipoNota
+            // 
+            this.p_IdTipoNota.Name = "p_IdTipoNota";
+            this.p_IdTipoNota.Visible = false;
+            // 
             // FAC_005_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -907,7 +913,8 @@
             this.p_FechaDesde,
             this.p_FechaHasta,
             this.p_CreDeb,
-            this.p_Naturaleza});
+            this.p_Naturaleza,
+            this.p_IdTipoNota});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.FAC_005_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -995,5 +1002,6 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow7;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell37;
         public DevExpress.XtraReports.Parameters.Parameter p_Naturaleza;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdTipoNota;
     }
 }

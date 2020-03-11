@@ -175,6 +175,9 @@
     <Compile Include="Base\SPFAC_005_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPFAC_015_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_GrupoEtnico.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>

@@ -10,7 +10,6 @@ namespace Core.Info.Reportes.Facturacion
         public decimal IdNota { get; set; }
         public System.DateTime no_fecha { get; set; }
         public string CreDeb { get; set; }
-        public int IdTipoNota { get; set; }
         public string NaturalezaNota { get; set; }
         public string Estado { get; set; }
         public string NumeroNota { get; set; }
@@ -21,7 +20,7 @@ namespace Core.Info.Reportes.Facturacion
         public Nullable<double> Saldo { get; set; }
         public string NombreCliente { get; set; }
         public string NombreAlumno { get; set; }
-        //public int IdTipoNota1 { get; set; }
+        public int IdTipoNota { get; set; }
         public string No_Descripcion { get; set; }
     }
 }

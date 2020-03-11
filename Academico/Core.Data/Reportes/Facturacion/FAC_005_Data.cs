@@ -10,11 +10,12 @@ namespace Core.Data.Reportes.Facturacion
 {
    public class FAC_005_Data
     {
-      public List< FAC_005_Info> GetList(int IdEmpresa, DateTime FechaDesde, DateTime FechaHasta, string CreDeb, string NaturalezaNota)
+      public List< FAC_005_Info> GetList(int IdEmpresa, int IdTipoNota, DateTime FechaDesde, DateTime FechaHasta, string CreDeb, string NaturalezaNota)
         {
             try
             {
-                
+                int IdTipoNotaIni = IdTipoNota;
+                int IdTipoNotaFin = IdTipoNota == 0 ? 999999999 : IdTipoNota;
                 FechaDesde = FechaDesde.Date;
                 FechaHasta = FechaHasta.Date;
 
@@ -30,7 +31,6 @@ namespace Core.Data.Reportes.Facturacion
                                  IdNota = q.IdNota,
                                  no_fecha = q.no_fecha,
                                  CreDeb = q.CreDeb,
-                                 IdTipoNota = q.IdTipoNota,
                                  NaturalezaNota = q.NaturalezaNota,
                                  Estado = q.Estado,
                                  NumeroNota = q.NumeroNota,
@@ -41,6 +41,7 @@ namespace Core.Data.Reportes.Facturacion
                                  Saldo = q.Saldo,
                                  NombreCliente = q.NombreCliente,
                                  NombreAlumno = q.NombreAlumno,
+                                 IdTipoNota = q.IdTipoNota,
                                  No_Descripcion = q.No_Descripcion
                              }).ToList();
                 }
