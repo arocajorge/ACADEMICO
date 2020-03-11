@@ -14,6 +14,7 @@ namespace Core.Data.Base
     
     public partial class VWACA_008
     {
+        public Nullable<long> Num { get; set; }
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
         public Nullable<int> OrdenNivel { get; set; }

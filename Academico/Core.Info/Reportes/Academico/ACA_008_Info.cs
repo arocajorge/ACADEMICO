@@ -4,6 +4,7 @@ namespace Core.Info.Reportes.Academico
 {
     public class ACA_008_Info
     {
+        public Nullable<long> Num { get; set; }
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
         public Nullable<int> OrdenNivel { get; set; }

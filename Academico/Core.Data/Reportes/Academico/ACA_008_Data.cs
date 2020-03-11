@@ -40,6 +40,7 @@ namespace Core.Data.Reportes.Academico
                     {
                         Lista.Add(new ACA_008_Info
                         {
+                            Num=item.Num,
                             IdEmpresa = item.IdEmpresa,
                             NomSede = item.NomSede,
                             NomNivel = item.NomNivel,
