@@ -22,26 +22,22 @@ namespace Core.Data.Reportes.Academico
                 List<ACA_009_Info> Lista = new List<ACA_009_Info>();
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
-                    var lst = db.VWACA_009.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio &&
-                    q.IdAlumno == IdAlumno && fecha_ini <= q.FechaCreacion && q.FechaCreacion <= fecha_fin).ToList();
-                    foreach (var item in lst)
+                    Lista = db.VWACA_009.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio &&
+                    IdAlumnoini <= q.IdAlumno && q.IdAlumno <= IdALumnofin && fecha_ini <= q.FechaCreacion && q.FechaCreacion <= fecha_fin).Select(q => new ACA_009_Info
                     {
-                        Lista.Add(new ACA_009_Info
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdMatricula = item.IdMatricula,
-                            Secuencia = item.Secuencia,
-                            IdAlumno = item.IdAlumno,
-                            Codigo = item.Codigo,
-                            pe_nombreCompleto = item.pe_nombreCompleto,
-                            pe_cedulaRuc = item.pe_cedulaRuc,
-                            FechaCreacion = item.FechaCreacion,
-                            Observacion = item.Observacion,
-                            IdAnio = item.IdAnio,
-                            Descripcion = item.Descripcion,
-                            IdUsuarioCreacion = item.IdUsuarioCreacion
-                        });
-                    }
+                        IdEmpresa = q.IdEmpresa,
+                        IdMatricula = q.IdMatricula,
+                        Secuencia = q.Secuencia,
+                        IdAlumno = q.IdAlumno,
+                        Codigo = q.Codigo,
+                        pe_nombreCompleto = q.pe_nombreCompleto,
+                        pe_cedulaRuc = q.pe_cedulaRuc,
+                        FechaCreacion = q.FechaCreacion,
+                        Observacion = q.Observacion,
+                        IdAnio = q.IdAnio,
+                        Descripcion = q.Descripcion,
+                        IdUsuarioCreacion = q.IdUsuarioCreacion
+                    }).ToList();
                 }
 
                     return Lista;
