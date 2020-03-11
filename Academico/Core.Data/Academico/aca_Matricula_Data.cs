@@ -511,7 +511,7 @@ namespace Core.Data.Academico
                     if (Entity == null)
                         return false;
                     Entity.IdPlantilla = info.IdPlantilla;
-                    Entity.IdEmpresa_rol = info.IdEmpresa_rol;
+                    Entity.IdEmpresa_rol = (info.IdEmpleado==null ? null : info.IdEmpresa_rol);
                     Entity.IdEmpleado = info.IdEmpleado;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;

@@ -830,7 +830,8 @@ namespace Core.Web.Areas.Academico.Controllers
                                 IdEmpresa_rol = info_matricula.IdEmpresa_rol,
                                 IdEmpleado = info_matricula.IdEmpleado,
                                 IdUsuario = SessionFixed.IdUsuario,
-                                IdPuntoVta = IdPuntoVta
+                                IdPuntoVta = IdPuntoVta,
+                                aprobada_enviar_sri=false
                             };
 
                             info_factura.lst_det = new List<fa_factura_det_Info>();

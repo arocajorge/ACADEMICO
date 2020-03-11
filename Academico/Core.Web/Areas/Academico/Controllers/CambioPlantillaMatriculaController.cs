@@ -143,6 +143,33 @@ namespace Core.Web.Areas.Academico.Controllers
                 return false;
             }
 
+            var IdEmpresa_rol = info.IdEmpresa_rol;
+            var IdEmpleado = info.IdEmpleado;
+
+            info.IdEmpleado = null;
+            if (info.lst_MatriculaRubro.Count()>0)
+            {
+                foreach (var item in info.lst_MatriculaRubro)
+                {
+                    var info_mecanismo = bus_mecanismo.GetInfo(info.IdEmpresa, item.IdMecanismo);
+                    var info_termino_pago = bus_termino_pago.get_info((info_mecanismo == null ? "" : info_mecanismo.IdTerminoPago));
+
+                    if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
+                    {
+                        info.IdEmpresa_rol = IdEmpresa_rol;
+                        info.IdEmpleado = IdEmpleado;
+
+                        if (info.IdEmpresa_rol== null || info.IdEmpleado==null)
+                        {
+                            msg = "Debe de ingresar empresa y empleado para descuento en rol";
+                            return false;
+                        }
+
+                        break;
+                    }
+                }
+            }
+
 
             return true;
         }
@@ -375,7 +402,7 @@ namespace Core.Web.Areas.Academico.Controllers
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
-            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
             model.lst_MatriculaRubro = bus_matricula_rubro.GetList(model.IdEmpresa, model.IdMatricula);
             ListaMatriculaRubro.set_list(model.lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -405,28 +432,6 @@ namespace Core.Web.Areas.Academico.Controllers
 
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             model.lst_MatriculaRubro = ListaMatriculaRubro.get_list(model.IdTransaccionSession);
-
-            var descuento_rol = model.lst_MatriculaRubro.Where(q => q.FechaFacturacion == null).ToList();
-
-            if (descuento_rol != null)
-            {
-                foreach (var item in descuento_rol)
-                {
-                    var info_mecanismo = bus_mecanismo.GetInfo(model.IdEmpresa, item.IdMecanismo);
-                    var info_termino_pago = bus_termino_pago.get_info((info_mecanismo == null ? "" : info_mecanismo.IdTerminoPago));
-
-                    if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
-                    {
-                        model.IdEmpresa_rol = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpresa_rol : (int?)null);
-                        model.IdEmpleado = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpleado : (decimal?)null);
-                        break;
-                    }
-                    else
-                    {
-                        model.IdEmpleado = null;
-                    }
-                }
-            }
 
             if (!validar(model, ref mensaje))
             {
