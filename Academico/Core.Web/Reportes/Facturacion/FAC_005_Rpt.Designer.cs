@@ -209,6 +209,7 @@
             this.xrTableCell23.StylePriority.UseTextAlignment = false;
             this.xrTableCell23.Text = "Fecha";
             this.xrTableCell23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.xrTableCell23.TextFormatString = "{0:dd/MM/yyyy}";
             this.xrTableCell23.Weight = 1.508217067900385D;
             // 
             // xrTableCell24
