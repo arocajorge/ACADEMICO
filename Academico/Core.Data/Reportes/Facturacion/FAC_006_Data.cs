@@ -10,20 +10,20 @@ namespace Core.Data.Reportes.Facturacion
 {
     public class FAC_006_Data
     {
-        public List<FAC_006_Info> get_list(int IdEmpresa, int IdSucursal, int IdCliente, DateTime fecha_ini, DateTime fecha_fin, bool MostrarAnulados)
+        public List<FAC_006_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdAlumno, DateTime fecha_ini, DateTime fecha_fin, bool MostrarAnulados)
         {
             try
             {
                 int IdSucursalIni = IdSucursal;
                 int IdSucursalFin = IdSucursal == 0 ? 999999 : IdSucursal;
-                int IdClienteIni = IdCliente;
-                int IdClienteFin = IdCliente == 0 ? 999999999 : IdCliente;
+                decimal IdAlumnoIni = IdAlumno;
+                decimal IdAlumnoFin = IdAlumno == 0 ? 999999999 : IdAlumno;
                 fecha_ini = fecha_ini.Date;
                 fecha_fin = fecha_fin.Date;
                 List<FAC_006_Info> Lista;
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Lista = (from q in Context.SPFAC_006(IdEmpresa, IdSucursalIni, IdSucursalFin, IdClienteIni, IdClienteFin, fecha_ini, fecha_fin, MostrarAnulados)
+                    Lista = (from q in Context.SPFAC_006(IdEmpresa, IdSucursalIni, IdSucursalFin, IdAlumnoIni, IdAlumnoFin, fecha_ini, fecha_fin, MostrarAnulados)
                              select new FAC_006_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

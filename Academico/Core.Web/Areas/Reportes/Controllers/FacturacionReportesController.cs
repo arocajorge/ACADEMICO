@@ -64,6 +64,21 @@ namespace Core.Web.Areas.Reportes.Controllers
             return bus_producto.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa));
         }
         #endregion
+        #region Combo Alumno
+        public ActionResult CmbAlumno_Facturacion()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbAlumno_Facturacion", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda_alumno(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda_alumno(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
+        }
+        #endregion
 
         public ActionResult FAC_001(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
         {
@@ -261,7 +276,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
-                IdCliente = 0,
+                IdAlumno = 0,
                 IdCatalogo_FormaPago = ""
             };
 
@@ -280,7 +295,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSucursal.Value = model.IdSucursal;
-            report.p_IdCliente.Value = model.IdCliente;
+            report.p_IdAlumno.Value = model.IdAlumno;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_MostrarAnulados.Value = model.mostrarAnulados;
@@ -305,7 +320,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             #endregion
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSucursal.Value = model.IdSucursal;
-            report.p_IdCliente.Value = model.IdCliente;
+            report.p_IdAlumno.Value = model.IdAlumno;
             report.p_fecha_ini.Value = model.fecha_ini;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_MostrarAnulados.Value = model.mostrarAnulados;

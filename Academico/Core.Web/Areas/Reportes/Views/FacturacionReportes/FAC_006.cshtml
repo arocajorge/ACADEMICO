@@ -39,9 +39,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="IdCliente">Cliente</label>
-                            @Html.Partial("_CmbCliente_Facturacion", Model.IdCliente)
-                            @Html.ValidationMessageFor(q => q.IdCliente, "", new { @class = "text-danger", @id = "IdCliente" })
+                            <label for="IdCliente">Alumno</label>
+                            @Html.Partial("_CmbAlumno_Facturacion", Model.IdAlumno)
+                            @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger", @id = "IdCliente" })
                         </div>
                     </div>
                 </div>
