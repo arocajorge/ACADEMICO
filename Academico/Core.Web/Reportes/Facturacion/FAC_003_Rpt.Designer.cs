@@ -109,7 +109,6 @@
             this.xrTableCell34 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell20 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
-            this.Subreporte_apliaciones = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow7 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell19 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -136,6 +135,7 @@
             this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell50 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
+            this.Subreporte_apliaciones = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
@@ -489,7 +489,7 @@
             this.xrTableCell58.StylePriority.UseFont = false;
             this.xrTableCell58.StylePriority.UsePadding = false;
             this.xrTableCell58.Text = "ALUMNO";
-            this.xrTableCell58.Weight = 0.35952066836671126D;
+            this.xrTableCell58.Weight = 0.35952072932060558D;
             // 
             // xrTableCell59
             // 
@@ -499,7 +499,7 @@
             this.xrTableCell59.Name = "xrTableCell59";
             this.xrTableCell59.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 2, 0, 100F);
             this.xrTableCell59.StylePriority.UsePadding = false;
-            this.xrTableCell59.Weight = 0.64247654677199184D;
+            this.xrTableCell59.Weight = 1.0404795102690616D;
             // 
             // xrTableCell60
             // 
@@ -509,7 +509,7 @@
             this.xrTableCell60.Name = "xrTableCell60";
             this.xrTableCell60.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 2, 0, 100F);
             this.xrTableCell60.StylePriority.UsePadding = false;
-            this.xrTableCell60.Weight = 1.9980027848612969D;
+            this.xrTableCell60.Weight = 1.5999997604103329D;
             // 
             // logo
             // 
@@ -847,14 +847,6 @@
             this.ReportFooter.HeightF = 139.0833F;
             this.ReportFooter.Name = "ReportFooter";
             // 
-            // Subreporte_apliaciones
-            // 
-            this.Subreporte_apliaciones.LocationFloat = new DevExpress.Utils.PointFloat(0F, 119.0833F);
-            this.Subreporte_apliaciones.Name = "Subreporte_apliaciones";
-            this.Subreporte_apliaciones.ReportSource = new Core.Web.Reportes.Facturacion.FAC_003_aplicaciones_Rpt();
-            this.Subreporte_apliaciones.SizeF = new System.Drawing.SizeF(750.9999F, 19.99998F);
-            this.Subreporte_apliaciones.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Subreporte_apliaciones_BeforePrint);
-            // 
             // xrTable5
             // 
             this.xrTable5.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
@@ -1128,6 +1120,14 @@
             this.xrPageInfo2.StylePriority.UseTextAlignment = false;
             this.xrPageInfo2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrPageInfo2.TextFormatString = "Página {0} de {1}";
+            // 
+            // Subreporte_apliaciones
+            // 
+            this.Subreporte_apliaciones.LocationFloat = new DevExpress.Utils.PointFloat(0F, 119.0833F);
+            this.Subreporte_apliaciones.Name = "Subreporte_apliaciones";
+            this.Subreporte_apliaciones.ReportSource = new Core.Web.Reportes.Facturacion.FAC_003_aplicaciones_Rpt();
+            this.Subreporte_apliaciones.SizeF = new System.Drawing.SizeF(750.9999F, 19.99998F);
+            this.Subreporte_apliaciones.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Subreporte_apliaciones_BeforePrint);
             // 
             // FAC_003_Rpt
             // 
