@@ -448,7 +448,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 return RedirectToAction("Index");
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
-
+            
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "CuentasPorCobrar", "Cobranza", "Index");
             if (!info.Modificar)
@@ -460,8 +460,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 ViewBag.mensaje = "El cobro no se puede modificar ya que aplica pronto pago, debe anular y realizar uno nuevo";
                 ViewBag.MostrarBoton = false;
             }
-
-
+            
             list_det.set_list(model.lst_det, model.IdTransaccionSession);
             model.IdEntidad = model.IdCliente;
             cargar_combos(IdEmpresa, model.IdSucursal);
@@ -481,7 +480,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
-
+            
             #region Validacion Periodo
             if (ViewBag.MostrarBoton == true && !bus_periodo.ValidarFechaTransaccion(IdEmpresa, model.cr_fecha, cl_enumeradores.eModulo.CXC, model.IdSucursal, ref mensaje))
             {
@@ -497,7 +496,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 ViewBag.MostrarBoton = false;
             }
             #endregion
-
+            
             return View(model);
         }
 

@@ -97,7 +97,8 @@ namespace Core.Data.CuentasPorCobrar
                                  nom_Motivo_tipo_cobro = q.nom_Motivo_tipo_cobro,
                                  cr_NumDocumento = q.cr_NumDocumento,
                                  NomAlumno = q.NomAlumno,
-                                 EstadoBool = q.cr_estado == "A" ? true : false
+                                 EstadoBool = q.cr_estado == "A" ? true : false,
+                                 IdUsuario = q.IdUsuario
                              }).ToList();
                 }
 
@@ -407,6 +408,7 @@ namespace Core.Data.CuentasPorCobrar
                 #region Cabecera cobro
                 var Entity = Context_cxc.cxc_cobro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdCobro == info.IdCobro).FirstOrDefault();
                 if (Entity == null) return false;
+                
                 Entity.cr_Codigo = info.cr_Codigo;
                 Entity.IdCobro_tipo = info.IdCobro_tipo;
                 Entity.IdCliente = info.IdCliente;
@@ -427,6 +429,7 @@ namespace Core.Data.CuentasPorCobrar
                 Entity.cr_ObservacionPantalla = info.cr_ObservacionPantalla;
                 Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                 Entity.Fecha_UltMod = DateTime.Now;
+                
                 #endregion
 
                 #region Detalle cobro
@@ -484,7 +487,7 @@ namespace Core.Data.CuentasPorCobrar
                     Context_cxc.cxc_cobro_det.Add(det);
                 }
                 #endregion
-
+                
                 if (info.IdCobro_tipo != "NTCR" && info.IdCobro_tipo != "NTDB" && info.lst_det.Count > 0)
                 {
                     #region Contabilización
@@ -591,9 +594,11 @@ namespace Core.Data.CuentasPorCobrar
                             }
                         }
                         #endregion
+    
                     }
 
                     #endregion
+    
                 }
 
                 #region Nota de credito por excedente
@@ -628,7 +633,7 @@ namespace Core.Data.CuentasPorCobrar
                     }
                 }
                 #endregion
-
+                
                 Context_cxc.SaveChanges();
                 Context_cxc.Dispose();
 
