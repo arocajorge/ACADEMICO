@@ -393,7 +393,7 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Matricula_Info model = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
-            model.IdEmpresa_rol = (model.IdEmpresa_rol==null ? IdEmpresa: model.IdEmpresa_rol);
+            model.IdEmpresa_rol = (model.IdEmpresa_rol==null ? Convert.ToInt32(SessionFixed.IdEmpresa): model.IdEmpresa_rol);
             model.Validar = "N";
 
             if (model == null)
