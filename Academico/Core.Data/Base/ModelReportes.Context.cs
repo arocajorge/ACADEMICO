@@ -55,6 +55,7 @@ namespace Core.Data.Base
         public virtual DbSet<VWCXC_005> VWCXC_005 { get; set; }
         public virtual DbSet<VWCXC_005_Cobros> VWCXC_005_Cobros { get; set; }
         public virtual DbSet<VWCXC_005_Diario> VWCXC_005_Diario { get; set; }
+        public virtual DbSet<VWFAC_0031> VWFAC_0031 { get; set; }
     
         public virtual ObjectResult<SPACA_001_Result> SPACA_001(Nullable<int> idEmpresa, Nullable<decimal> idAlumno)
         {

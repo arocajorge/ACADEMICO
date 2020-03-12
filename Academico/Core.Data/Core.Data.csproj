@@ -301,6 +301,9 @@
     <Compile Include="Base\VWFAC_003.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWFAC_0031.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\VWFAC_003_aplicaciones.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>

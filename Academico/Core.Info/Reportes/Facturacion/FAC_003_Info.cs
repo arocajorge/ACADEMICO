@@ -38,6 +38,17 @@ namespace Core.Info.Reportes.Facturacion
         public string sc_observacion { get; set; }
         public double sc_total { get; set; }
         public string No_Descripcion { get; set; }
+        public string CodigoAlumno { get; set; }
+        public string NomSede { get; set; }
+        public string NomNivel { get; set; }
+        public string NomJornada { get; set; }
+        public string NomCurso { get; set; }
+        public string NomParalelo { get; set; }
+        public string CodigoParalelo { get; set; }
+        public string NomPlantilla { get; set; }
+        public string IdUsuario { get; set; }
+        public Nullable<System.DateTime> Fecha_UltMod { get; set; }
+        public Nullable<System.DateTime> FechaTransaccion { get; set; }
         public string nomReporte { get; set; }
     }
 }
