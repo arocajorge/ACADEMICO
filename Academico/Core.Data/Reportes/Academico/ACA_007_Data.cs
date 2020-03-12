@@ -55,6 +55,8 @@ namespace Core.Data.Reportes.Academico
                         IdNivel=q.IdNivel,
                         IdParalelo=q.IdParalelo,
                         IdPlantilla=q.IdPlantilla,
+                        IdTipoPlantilla = q.IdTipoPlantilla,
+                        NomPlantillaTipo = q.NomPlantillaTipo,
                         OrdenCurso=q.OrdenCurso,
                         OrdenJornada=q.OrdenJornada,
                         OrdenNivel=q.OrdenNivel,
@@ -73,7 +75,7 @@ namespace Core.Data.Reportes.Academico
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
