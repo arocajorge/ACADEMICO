@@ -175,6 +175,9 @@
     <Compile Include="Base\SPFAC_005_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPFAC_006_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\SPFAC_015_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
@@ -1893,6 +1896,7 @@
     <Compile Include="Reportes\Facturacion\FAC_003_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_004_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_005_Data.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_006_Data.cs" />
     <Compile Include="RRHH\ro_area_Data.cs" />
     <Compile Include="RRHH\ro_area_x_departamento_Data.cs" />
     <Compile Include="RRHH\ro_cargo_Data.cs" />

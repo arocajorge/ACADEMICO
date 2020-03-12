@@ -1,6 +1,8 @@
 ﻿using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Bus.Inventario;
+using Core.Erp.Web.Reportes.Facturacion;
+using Core.Info.Facturacion;
 using Core.Info.General;
 using Core.Info.Helps;
 using Core.Info.Inventario;
@@ -228,5 +230,91 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
         #endregion
 
+        #region FAC_006
+        private void cargar_FAC_006(cl_filtros_facturacion_Info model)
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            lst_sucursal.Add(new tb_sucursal_Info
+            {
+                IdSucursal = 0,
+                Su_Descripcion = "Todas"
+            });
+            ViewBag.lst_sucursal = lst_sucursal;
+
+            var lst_formapago = bus_catalogo.get_list((int)cl_enumeradores.eTipoCatalogoFact.FormaDePago, false);
+            lst_formapago.Add(new fa_catalogo_Info
+            {
+                IdCatalogo = "",
+                Nombre = "TODAS"
+            });
+
+            ViewBag.lst_formapago = lst_formapago;
+
+        }
+
+        public ActionResult FAC_006()
+        {
+
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdCliente = 0,
+                IdCatalogo_FormaPago = ""
+            };
+
+
+            cargar_FAC_006(model);
+            FAC_006_Rpt report = new FAC_006_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_006");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdCliente.Value = model.IdCliente;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_MostrarAnulados.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult FAC_006(cl_filtros_facturacion_Info model)
+        {
+            FAC_006_Rpt report = new FAC_006_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_006");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdCliente.Value = model.IdCliente;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_MostrarAnulados.Value = model.mostrarAnulados;
+            cargar_FAC_006(model);
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            return View(model);
+        }
+        #endregion
     }
 }
