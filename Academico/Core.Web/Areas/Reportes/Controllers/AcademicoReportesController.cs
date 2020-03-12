@@ -536,13 +536,21 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
+
+        #region ACA_007
         public ActionResult ACA_007()
         {
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa),0);
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             model.fecha_ini = DateTime.Now.AddMonths(-1);
             model.fecha_fin = DateTime.Now;
+            model.IdAnio = info_anio.IdAnio;
+            model.IdJornada = 0;
+            model.IdNivel = 0;
+            model.IdCurso = 0;
+            model.IdParalelo = 0;
 
             ACA_007_Rpt report = new ACA_007_Rpt();
 
@@ -559,6 +567,12 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdSede.Value = model.IdSede;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+
             ViewBag.Report = report;
 
             return View(model);
@@ -581,12 +595,17 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdSede.Value = model.IdSede;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_fecha_ini.Value = model.fecha_ini;
-
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
 
             ViewBag.Report = report;
 
             return View(model);
         }
+        #endregion
 
         public ActionResult ACA_008(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0)
         {

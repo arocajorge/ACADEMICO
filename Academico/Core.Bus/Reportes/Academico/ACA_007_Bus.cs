@@ -11,11 +11,11 @@ namespace Core.Bus.Reportes.Academico
     public class ACA_007_Bus
     {
         ACA_007_Data odata = new ACA_007_Data();
-        public List<ACA_007_Info> GetList(int IdEmpresa, DateTime fecha_ini, DateTime fecha_fin)
+        public List<ACA_007_Info> GetList(int IdEmpresa, int IdSede, int IdAnio, int IdJornada, int IdNivel, int IdCurso, int IdParalelo, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
-                return odata.get_list(IdEmpresa, fecha_ini, fecha_fin);
+                return odata.get_list(IdEmpresa, IdSede, IdAnio, IdJornada, IdNivel, IdCurso, IdParalelo, fecha_ini, fecha_fin);
             }
             catch (Exception)
             {

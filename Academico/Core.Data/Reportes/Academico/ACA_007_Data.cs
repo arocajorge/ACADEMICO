@@ -10,14 +10,39 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_007_Data
     {
-        public List<ACA_007_Info> get_list(int IdEmpresa, DateTime fecha_ini, DateTime fecha_fin)
+        public List<ACA_007_Info> get_list(int IdEmpresa, int IdSede, int IdAnio, int IdJornada, int IdNivel, int IdCurso, int IdParalelo, DateTime fecha_ini, DateTime fecha_fin)
         {
             try
             {
+                int IdSedeIni = IdSede;
+                int IdSedeFin = IdSede == 0 ? 9999999 : IdSede;
+
+                int IdAnioIni = IdAnio;
+                int IdAnioFin = IdAnio == 0 ? 9999999 : IdAnio;
+
+                int IdNivelIni = IdNivel;
+                int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
+
+                int IdJornadaIni = IdJornada;
+                int IdJornadaFin = IdJornada == 0 ? 9999999 : IdJornada;
+
+                int IdCursoIni = IdCurso;
+                int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
+
+                int IdParaleloIni = IdParalelo;
+                int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
+
                 List<ACA_007_Info> Lista;
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Lista = Context.VWACA_007.Where(q => q.IdEmpresa == IdEmpresa && q.Fecha >= fecha_ini && q.Fecha<=fecha_fin).OrderBy(q=> new {q.OrdenNivel, q.OrdenJornada, q.OrdenCurso, q.OrdenParalelo }).Select(q => new ACA_007_Info
+                    Lista = Context.VWACA_007.Where(q => q.IdEmpresa == IdEmpresa && 
+                    q.IdSede >= IdSedeIni && q.IdSede<=IdSedeFin &&
+                    q.IdAnio >= IdAnioIni && q.IdAnio <= IdAnioFin &&
+                    q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin &&
+                    q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin &&
+                    q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin &&
+                    q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin &&
+                    q.Fecha >= fecha_ini.Date && q.Fecha<=fecha_fin.Date).OrderBy(q=> new {q.OrdenNivel, q.OrdenJornada, q.OrdenCurso, q.OrdenParalelo }).Select(q => new ACA_007_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdMatricula = q.IdMatricula,
