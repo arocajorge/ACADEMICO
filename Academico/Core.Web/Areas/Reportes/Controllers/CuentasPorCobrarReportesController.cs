@@ -282,6 +282,26 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
+        public ActionResult CXC_005(int IdSucursal = 0, decimal IdLiquidacion = 0)
+        {
+            CXC_005_Rpt report = new CXC_005_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_005");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_IdSucursal.Value = IdSucursal;
+            report.p_IdLiquidacion.Value = IdLiquidacion;
+            report.usuario = SessionFixed.IdUsuario.ToString();
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            return View(report);
+        }
 
     }
 }

@@ -490,6 +490,24 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_004_Rpt.Designer.cs">
       <DependentUpon>CXC_004_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Cobros_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Cobros_Rpt.Designer.cs">
+      <DependentUpon>CXC_005_Cobros_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Diario_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Diario_Rpt.Designer.cs">
+      <DependentUpon>CXC_005_Diario_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Rpt.Designer.cs">
+      <DependentUpon>CXC_005_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Facturacion\FAC_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8418,6 +8436,7 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_009.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_006.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbAlumno_Facturacion.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_005.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8584,6 +8603,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_004_Rpt.resx">
       <DependentUpon>CXC_004_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_005_Cobros_Rpt.resx">
+      <DependentUpon>CXC_005_Cobros_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_005_Diario_Rpt.resx">
+      <DependentUpon>CXC_005_Diario_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_005_Rpt.resx">
+      <DependentUpon>CXC_005_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_001_Rpt.resx">
       <DependentUpon>FAC_001_Rpt.cs</DependentUpon>

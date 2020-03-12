@@ -265,6 +265,15 @@
     <Compile Include="Base\VWCXC_003.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWCXC_005.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWCXC_005_Cobros.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWCXC_005_Diario.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwcxc_ConciliacionNotaCredito.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
@@ -1890,6 +1899,9 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Aplicaciones_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_003_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_004_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Cobros_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Diario_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_001_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_002_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_003_aplicaciones_Data.cs" />
