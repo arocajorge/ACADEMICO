@@ -94,6 +94,7 @@
     <Compile Include="Academico\aca_NivelAcademico_Data.cs" />
     <Compile Include="Academico\aca_Paralelo_Data.cs" />
     <Compile Include="Academico\aca_PermisoMatricula_Data.cs" />
+    <Compile Include="Academico\aca_PlantillaTipo_Data.cs" />
     <Compile Include="Academico\aca_Plantilla_Data.cs" />
     <Compile Include="Academico\aca_Plantilla_Rubro_Data.cs" />
     <Compile Include="Academico\aca_Profesor_Data.cs" />
@@ -116,6 +117,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MatriculaCondicional_Det.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_PlantillaTipo.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Reporte.cs">

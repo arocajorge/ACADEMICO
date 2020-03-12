@@ -895,6 +895,7 @@
           <Property Name="FechaAnulacion" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar(max)" />
           <Property Name="IdTipoNota" Type="int" Nullable="false" />
+          <Property Name="IdTipoPlantilla" Type="int" />
         </EntityType>
         <EntityType Name="aca_Plantilla_Rubro">
           <Key>
@@ -913,6 +914,23 @@
           <Property Name="Porcentaje" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ValorIVA" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Total" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aca_PlantillaTipo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoPlantilla" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdTipoPlantilla" Type="int" Nullable="false" />
+          <Property Name="NomPlantillaTipo" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="aca_Profesor">
           <Key>
@@ -1057,7 +1075,7 @@
           <Property Name="FechaModificacion" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Alumno' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Alumno' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Alumno">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1110,7 +1128,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Alumno' no tiene d
           <Property Name="IdGrupoEtnico" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AlumnoDocumento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AlumnoDocumento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_AlumnoDocumento">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1130,7 +1148,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AlumnoDocumento' n
           <Property Name="Secuencia" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AlumnoRetiro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AlumnoRetiro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_AlumnoRetiro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1155,7 +1173,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AlumnoRetiro' no t
           <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Curso_Paralelo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivo_Curso_Paralelo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_AnioLectivo_Curso_Paralelo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1197,7 +1215,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Curso_
           <Property Name="NomInspector" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1233,7 +1251,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Curso_
           <Property Name="pc_CuentaHaber" Type="varchar" MaxLength="523" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Jornada_Curso' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivo_Jornada_Curso' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_AnioLectivo_Jornada_Curso">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1267,7 +1285,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Jornad
           <Property Name="BloquearMatricula" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Paralelo_Profesor' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivo_Paralelo_Profesor' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_AnioLectivo_Paralelo_Profesor">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1293,7 +1311,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Parale
           <Property Name="NomMateria" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Paralelo_Profesor_NoAsignados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivo_Paralelo_Profesor_NoAsignados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_AnioLectivo_Paralelo_Profesor_NoAsignados">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1317,7 +1335,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Parale
           <Property Name="NomMateria" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Periodo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivo_Periodo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_AnioLectivo_Periodo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1330,7 +1348,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Period
           <Property Name="NumPeriodos" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivo_Rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_AnioLectivo_Rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1358,7 +1376,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivo_Rubro'
           <Property Name="Total" Type="numeric" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivoCalificacionHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivoCalificacionHistorico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_AnioLectivoCalificacionHistorico">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1390,7 +1408,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivoCalific
           <Property Name="Letra" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivoConductaEquivalencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivoConductaEquivalencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_AnioLectivoConductaEquivalencia">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1408,7 +1426,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_AnioLectivoConduct
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Familia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Familia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Familia">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1479,7 +1497,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Familia' no tiene 
           <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Hermanos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Hermanos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Hermanos">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1499,7 +1517,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Hermanos' no tiene
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Materia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Materia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Materia">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1523,7 +1541,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Materia' no tiene 
           <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Matricula' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Matricula' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Matricula">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1581,7 +1599,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Matricula' no tien
           <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Matricula_AlumnosPorParalelo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Matricula_AlumnosPorParalelo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Matricula_AlumnosPorParalelo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1609,7 +1627,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Matricula_AlumnosP
           <Property Name="Fecha" Type="date" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Matricula_Rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Matricula_Rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Matricula_Rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1653,7 +1671,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Matricula_Rubro' n
           <Property Name="IdPlantilla" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Matricula_Rubro_PorFacturar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Matricula_Rubro_PorFacturar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Matricula_Rubro_PorFacturar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1703,7 +1721,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Matricula_Rubro_Po
           <Property Name="IdPlantilla" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_MatriculaCondicional' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_MatriculaCondicional' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_MatriculaCondicional">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1730,7 +1748,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_MatriculaCondicion
           <Property Name="Estado" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_MatriculaCondicional_Det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_MatriculaCondicional_Det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_MatriculaCondicional_Det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1750,7 +1768,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_MatriculaCondicion
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_MecanismoDePago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_MecanismoDePago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_MecanismoDePago">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1767,7 +1785,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_MecanismoDePago' n
           <Property Name="No_Descripcion" Type="varchar" MaxLength="150" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_PermisoMatricula' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_PermisoMatricula' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_PermisoMatricula">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1794,7 +1812,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_PermisoMatricula' 
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Plantilla_Rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Plantilla_Rubro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Plantilla_Rubro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1824,7 +1842,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Plantilla_Rubro' n
           <Property Name="Total" Type="numeric" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Plantilla_Rubro_Matricula' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Plantilla_Rubro_Matricula' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Plantilla_Rubro_Matricula">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1862,7 +1880,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Plantilla_Rubro_Ma
           <Property Name="AplicaProntoPago" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Profesor">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3065,6 +3083,20 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_aca_Plantilla_aca_PlantillaTipo">
+          <End Role="aca_PlantillaTipo" Type="Self.aca_PlantillaTipo" Multiplicity="0..1" />
+          <End Role="aca_Plantilla" Type="Self.aca_Plantilla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_PlantillaTipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoPlantilla" />
+            </Principal>
+            <Dependent Role="aca_Plantilla">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoPlantilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_aca_Plantilla_Rubro_aca_Plantilla">
           <End Role="aca_Plantilla" Type="Self.aca_Plantilla" Multiplicity="1" />
           <End Role="aca_Plantilla_Rubro" Type="Self.aca_Plantilla_Rubro" Multiplicity="*" />
@@ -3255,6 +3287,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <EntitySet Name="aca_PermisoMatricula" EntityType="Self.aca_PermisoMatricula" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Plantilla" EntityType="Self.aca_Plantilla" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Plantilla_Rubro" EntityType="Self.aca_Plantilla_Rubro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aca_PlantillaTipo" EntityType="Self.aca_PlantillaTipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Profesor" EntityType="Self.aca_Profesor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Reporte" EntityType="Self.aca_Reporte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Reporte_x_seg_usuario" EntityType="Self.aca_Reporte_x_seg_usuario" Schema="dbo" store:Type="Tables" />
@@ -4115,6 +4148,10 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
             <End Role="aca_PermisoMatricula" EntitySet="aca_PermisoMatricula" />
           </AssociationSet>
+          <AssociationSet Name="FK_aca_Plantilla_aca_PlantillaTipo" Association="Self.FK_aca_Plantilla_aca_PlantillaTipo">
+            <End Role="aca_PlantillaTipo" EntitySet="aca_PlantillaTipo" />
+            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
+          </AssociationSet>
           <AssociationSet Name="FK_aca_Plantilla_Rubro_aca_Plantilla" Association="Self.FK_aca_Plantilla_Rubro_aca_Plantilla">
             <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
             <End Role="aca_Plantilla_Rubro" EntitySet="aca_Plantilla_Rubro" />
@@ -4368,21 +4405,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             <End Role="aca_AnioLectivo_Rubro" EntitySet="aca_AnioLectivo_Rubro" />
             <End Role="aca_AnioLectivo_Rubro_Periodo" EntitySet="aca_AnioLectivo_Rubro_Periodo" />
           </AssociationSet>
-          <EntitySet Name="aca_Plantilla" EntityType="ModelAcademico.aca_Plantilla" />
-          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla">
-            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
-            <End Role="aca_AnioLectivo_Curso_Plantilla" EntitySet="aca_AnioLectivo_Curso_Plantilla" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_Plantilla_Rubro_aca_Plantilla" Association="ModelAcademico.FK_aca_Plantilla_Rubro_aca_Plantilla">
-            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
-            <End Role="aca_Plantilla_Rubro" EntitySet="aca_Plantilla_Rubro" />
-          </AssociationSet>
           <EntitySet Name="vwaca_Matricula_Rubro_PorFacturar" EntityType="ModelAcademico.vwaca_Matricula_Rubro_PorFacturar" />
           <EntitySet Name="aca_Matricula_Rubro" EntityType="ModelAcademico.aca_Matricula_Rubro" />
-          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Plantilla" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla">
-            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
-            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
-          </AssociationSet>
           <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Rubro" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Rubro">
             <End Role="aca_Rubro" EntitySet="aca_Rubro" />
             <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
@@ -4605,10 +4629,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             <End Role="aca_MecanismoDePago" EntitySet="aca_MecanismoDePago" />
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
           </AssociationSet>
-          <AssociationSet Name="FK_aca_Matricula_aca_Plantilla" Association="ModelAcademico.FK_aca_Matricula_aca_Plantilla">
-            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
-            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
-          </AssociationSet>
           <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Matricula" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula">
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
@@ -4624,6 +4644,28 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <AssociationSet Name="FK_aca_MatriculaConducta_aca_Matricula" Association="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula">
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_MatriculaConducta" EntitySet="aca_MatriculaConducta" />
+          </AssociationSet>
+          <EntitySet Name="aca_Plantilla" EntityType="ModelAcademico.aca_Plantilla" />
+          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla">
+            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
+            <End Role="aca_AnioLectivo_Curso_Plantilla" EntitySet="aca_AnioLectivo_Curso_Plantilla" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Matricula_aca_Plantilla" Association="ModelAcademico.FK_aca_Matricula_aca_Plantilla">
+            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
+            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Plantilla" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla">
+            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
+            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Plantilla_Rubro_aca_Plantilla" Association="ModelAcademico.FK_aca_Plantilla_Rubro_aca_Plantilla">
+            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
+            <End Role="aca_Plantilla_Rubro" EntitySet="aca_Plantilla_Rubro" />
+          </AssociationSet>
+          <EntitySet Name="aca_PlantillaTipo" EntityType="ModelAcademico.aca_PlantillaTipo" />
+          <AssociationSet Name="FK_aca_Plantilla_aca_PlantillaTipo" Association="ModelAcademico.FK_aca_Plantilla_aca_PlantillaTipo">
+            <End Role="aca_PlantillaTipo" EntitySet="aca_PlantillaTipo" />
+            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
@@ -6242,64 +6284,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="aca_Plantilla">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="IdPlantilla" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
-          <Property Name="NomPlantilla" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="TipoDescuento" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoNota" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="aca_AnioLectivo_Curso_Plantilla" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_AnioLectivo_Curso_Plantilla" />
-          <NavigationProperty Name="aca_Plantilla_Rubro" Relationship="ModelAcademico.FK_aca_Plantilla_Rubro_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Plantilla_Rubro" />
-          <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Matricula_Rubro" />
-          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Matricula" />
-        </EntityType>
-        <Association Name="FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla">
-          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Plantilla" Role="aca_AnioLectivo_Curso_Plantilla" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Plantilla">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_Curso_Plantilla">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_Plantilla_Rubro_aca_Plantilla">
-          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Plantilla_Rubro" Role="aca_Plantilla_Rubro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Plantilla">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Principal>
-            <Dependent Role="aca_Plantilla_Rubro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="vwaca_Matricula_Rubro_PorFacturar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -6373,27 +6357,11 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <Property Name="IdBodega" Type="Int32" />
           <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="FechaFacturacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla" FromRole="aca_Matricula_Rubro" ToRole="aca_Plantilla" />
           <NavigationProperty Name="aca_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Rubro" FromRole="aca_Matricula_Rubro" ToRole="aca_Rubro" />
           <NavigationProperty Name="aca_MecanismoDePago" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_MecanismoDePago" FromRole="aca_Matricula_Rubro" ToRole="aca_MecanismoDePago" />
           <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" FromRole="aca_Matricula_Rubro" ToRole="aca_Matricula" />
+          <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla" FromRole="aca_Matricula_Rubro" ToRole="aca_Plantilla" />
         </EntityType>
-        <Association Name="FK_aca_Matricula_Rubro_aca_Plantilla">
-          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Plantilla">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Principal>
-            <Dependent Role="aca_Matricula_Rubro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_aca_Matricula_Rubro_aca_Rubro">
           <End Type="ModelAcademico.aca_Rubro" Role="aca_Rubro" Multiplicity="1" />
           <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
@@ -7786,11 +7754,11 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_Matricula_aca_alumno" FromRole="aca_Matricula" ToRole="aca_Alumno" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_Matricula_aca_AnioLectivo_Curso_Paralelo" FromRole="aca_Matricula" ToRole="aca_AnioLectivo_Curso_Paralelo" />
           <NavigationProperty Name="aca_MecanismoDePago" Relationship="ModelAcademico.FK_aca_Matricula_aca_MecanismoDePago" FromRole="aca_Matricula" ToRole="aca_MecanismoDePago" />
-          <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_Matricula_aca_Plantilla" FromRole="aca_Matricula" ToRole="aca_Plantilla" />
           <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_Matricula_Rubro" />
           <NavigationProperty Name="aca_MatriculaCalificacion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacion_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacion" />
           <NavigationProperty Name="aca_MatriculaCambios" Relationship="ModelAcademico.FK_aca_MatriculaCambios_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCambios" />
           <NavigationProperty Name="aca_MatriculaConducta" Relationship="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaConducta" />
+          <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_Matricula_aca_Plantilla" FromRole="aca_Matricula" ToRole="aca_Plantilla" />
         </EntityType>
         <EntityType Name="vwaca_Matricula">
           <Key>
@@ -7900,22 +7868,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_aca_Matricula_aca_Plantilla">
-          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Plantilla">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Principal>
-            <Dependent Role="aca_Matricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_aca_Matricula_Rubro_aca_Matricula">
           <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
           <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
@@ -7969,6 +7921,130 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             <Dependent Role="aca_MatriculaConducta">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdMatricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="aca_Plantilla">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdPlantilla" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
+          <Property Name="NomPlantilla" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TipoDescuento" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoNota" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoPlantilla" Type="Int32" />
+          <NavigationProperty Name="aca_AnioLectivo_Curso_Plantilla" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_AnioLectivo_Curso_Plantilla" />
+          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Matricula" />
+          <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Matricula_Rubro" />
+          <NavigationProperty Name="aca_Plantilla_Rubro" Relationship="ModelAcademico.FK_aca_Plantilla_Rubro_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Plantilla_Rubro" />
+          <NavigationProperty Name="aca_PlantillaTipo" Relationship="ModelAcademico.FK_aca_Plantilla_aca_PlantillaTipo" FromRole="aca_Plantilla" ToRole="aca_PlantillaTipo" />
+        </EntityType>
+        <Association Name="FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla">
+          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Plantilla" Role="aca_AnioLectivo_Curso_Plantilla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Plantilla">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_Curso_Plantilla">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Matricula_aca_Plantilla">
+          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Plantilla">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Principal>
+            <Dependent Role="aca_Matricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Matricula_Rubro_aca_Plantilla">
+          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Plantilla">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Principal>
+            <Dependent Role="aca_Matricula_Rubro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Plantilla_Rubro_aca_Plantilla">
+          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Plantilla_Rubro" Role="aca_Plantilla_Rubro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Plantilla">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Principal>
+            <Dependent Role="aca_Plantilla_Rubro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="aca_PlantillaTipo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdTipoPlantilla" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoPlantilla" Type="Int32" Nullable="false" />
+          <Property Name="NomPlantillaTipo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_Plantilla_aca_PlantillaTipo" FromRole="aca_PlantillaTipo" ToRole="aca_Plantilla" />
+        </EntityType>
+        <Association Name="FK_aca_Plantilla_aca_PlantillaTipo">
+          <End Type="ModelAcademico.aca_PlantillaTipo" Role="aca_PlantillaTipo" Multiplicity="0..1" />
+          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_PlantillaTipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoPlantilla" />
+            </Principal>
+            <Dependent Role="aca_Plantilla">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoPlantilla" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8804,27 +8880,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="aca_Plantilla">
-            <EntityTypeMapping TypeName="ModelAcademico.aca_Plantilla">
-              <MappingFragment StoreEntitySet="aca_Plantilla">
-                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="TipoDescuento" ColumnName="TipoDescuento" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="NomPlantilla" ColumnName="NomPlantilla" />
-                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwaca_Matricula_Rubro_PorFacturar">
             <EntityTypeMapping TypeName="ModelAcademico.vwaca_Matricula_Rubro_PorFacturar">
               <MappingFragment StoreEntitySet="vwaca_Matricula_Rubro_PorFacturar">
@@ -9548,6 +9603,45 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_Plantilla">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_Plantilla">
+              <MappingFragment StoreEntitySet="aca_Plantilla">
+                <ScalarProperty Name="IdTipoPlantilla" ColumnName="IdTipoPlantilla" />
+                <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="TipoDescuento" ColumnName="TipoDescuento" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="NomPlantilla" ColumnName="NomPlantilla" />
+                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_PlantillaTipo">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_PlantillaTipo">
+              <MappingFragment StoreEntitySet="aca_PlantillaTipo">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="NomPlantillaTipo" ColumnName="NomPlantillaTipo" />
+                <ScalarProperty Name="IdTipoPlantilla" ColumnName="IdTipoPlantilla" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

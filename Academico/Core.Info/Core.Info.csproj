@@ -85,6 +85,7 @@
     <Compile Include="Academico\aca_NivelAcademico_Info.cs" />
     <Compile Include="Academico\aca_Paralelo_Info.cs" />
     <Compile Include="Academico\aca_PermisoMatricula_Info.cs" />
+    <Compile Include="Academico\aca_PlantillaTipo_Info.cs" />
     <Compile Include="Academico\aca_Plantilla_Info.cs" />
     <Compile Include="Academico\aca_Plantilla_Rubro_Info.cs" />
     <Compile Include="Academico\aca_Profesor_Info.cs" />

@@ -31,6 +31,8 @@ namespace Core.Info.Academico
         public string MotivoAnulacion { get; set; }
         [Required(ErrorMessage = "El campo tipo de nota es obligatorio")]
         public int IdTipoNota { get; set; }
+        [Required(ErrorMessage = "El campo tipo de plantilla es obligatorio")]
+        public Nullable<int> IdTipoPlantilla { get; set; }
 
         #region Campos que no existen
         public List<aca_Plantilla_Rubro_Info> lst_Plantilla_Rubro { get; set; }

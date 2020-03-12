@@ -31,6 +31,7 @@ namespace Core.Web.Areas.Academico.Controllers
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         fa_TipoNota_Bus bus_tipo_nota = new fa_TipoNota_Bus();
+        aca_PlantillaTipo_Bus bus_tipo_plantilla = new aca_PlantillaTipo_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
@@ -224,6 +225,9 @@ namespace Core.Web.Areas.Academico.Controllers
 
             var lst_tipo_nota = bus_tipo_nota.get_list(IdEmpresa, "C", false);
             ViewBag.lst_tipo_nota = lst_tipo_nota;
+
+            var lst_tipo_plantilla = bus_tipo_plantilla.GetList(IdEmpresa, false);
+            ViewBag.lst_tipo_plantilla = lst_tipo_plantilla;
         }
         #endregion
 

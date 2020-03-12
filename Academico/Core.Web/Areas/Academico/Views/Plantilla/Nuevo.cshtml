@@ -49,12 +49,19 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
+                    <label for="info_persona.IdTipoDocumento">Tipo de plantilla*</label>
+                    @Html.DropDownListFor(q => q.IdTipoPlantilla, new SelectList(ViewBag.lst_tipo_plantilla, "IdTipoPlantilla", "NomPlantillaTipo"), new { @class = "form-control", @id = "IdTipoPlantilla" })
+                    @Html.ValidationMessageFor(q => q.IdTipoPlantilla, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
                     <label for="IdOrden_giro_Tipo">Tipo descuento*</label>
                     @Html.DropDownListFor(q => q.TipoDescuento, new SelectList(ViewBag.lst_tipo_desc, "Key", "Value"), new { @class = "form-control", @id = "TipoDescuento" })
                     @Html.ValidationMessageFor(q => q.TipoDescuento, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="">Tipo nota</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipoNota, settings =>
