@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Helps.cl_filtros_facturacion_Info
 @{
-    ViewBag.Title = "Listado de notas";
+    ViewBag.Title = "Listado de notas de crédito o débito";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -69,43 +69,62 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <div class="form-group">
-                            <label for="IdCliente">Naturaleza Nota</label>
+                            <label for="IdCliente">Tipo Nota*</label>
                             @Html.Partial("_CmbTipoNota", Model)
-                            @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger", @id = "IdTipoNota" })
+                            @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Naturaleza</label>
+                                    @Html.DropDownListFor(q => q.NaturalezaNota, new SelectList(ViewBag.lstNaturaleza, "key", "value"), new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.NaturalezaNota, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Crédito/Débito</label>
+                                    @Html.DropDownListFor(q => q.CreDeb, new SelectList(ViewBag.lstCreDeb, "key", "value"), new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(q => q.CreDeb, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
-            <!-- /.box-body -->
         </div>
+        <!-- /.box-body -->
     </div>
 
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">@ViewBag.Title</h3>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fa fa-times"></i>
-                </button>
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">@ViewBag.Title</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="box-body">
-            @Html.DevExpress().WebDocumentViewer(settings =>
+            <div class="box-body">
+                @Html.DevExpress().WebDocumentViewer(settings =>
                     {
                         settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
                         settings.MobileMode = false;
                         settings.Name = "webDocumentViewer";
                     }).Bind(ViewBag.Report).GetHtml()
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                [@Core.Web.Helps.SessionFixed.IdEmpresa] @Core.Web.Helps.SessionFixed.NomEmpresa
+            </div>
+            <!-- /.box-footer-->
         </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-            [@Core.Web.Helps.SessionFixed.IdEmpresa] @Core.Web.Helps.SessionFixed.NomEmpresa
-        </div>
-        <!-- /.box-footer-->
-    </div>
 }

@@ -152,14 +152,30 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.RequestParameters = false;
             return View(model);
         }
-        public ActionResult FAC_005()
+
+        #region FAC_005
+        private void CargarCombosFAC_005()
+        {
+            var lstNaturaleza = new Dictionary<string, string>();
+            lstNaturaleza.Add("", "TODAS");
+            lstNaturaleza.Add("INT", "INTERNAS");
+            lstNaturaleza.Add("SRI", "SRI");
+            ViewBag.lstNaturaleza = lstNaturaleza;
+
+            var lstCreDeb = new Dictionary<string, string>();
+            lstCreDeb.Add("C","CREDITO");
+            lstCreDeb.Add("D", "DEBITO");
+            ViewBag.lstCreDeb = lstCreDeb;
+        }
+        public ActionResult FAC_005(int IdEmpresa = 0, int IdTipoNota = 0, string NaturalezaNota = null)
         {
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.fecha_ini = DateTime.Now.AddMonths(-1);
             model.fecha_fin = DateTime.Now;
             model.CreDeb = "C";
-            model.NaturalezaNota = "SRI";
+            model.NaturalezaNota = null;
+            model.IdTipoNota = IdTipoNota;
 
             FAC_005_Rpt report = new FAC_005_Rpt();
 
@@ -171,8 +187,8 @@ namespace Core.Web.Areas.Reportes.Controllers
                 report.LoadLayout(RootReporte);
             }
             #endregion
+
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            
             report.p_FechaDesde.Value = model.fecha_ini;
             report.p_FechaHasta.Value = model.fecha_fin;
             report.p_Naturaleza.Value = model.NaturalezaNota;
@@ -181,10 +197,11 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
+            CargarCombosFAC_005();
 
             return View(model);
         }
-       [HttpPost]
+        [HttpPost]
         public ActionResult FAC_005(cl_filtros_facturacion_Info model)
         {
             FAC_005_Rpt report = new FAC_005_Rpt();
@@ -206,8 +223,10 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
             report.p_CreDeb.Value = model.CreDeb;
             ViewBag.Report = report;
-
+            CargarCombosFAC_005();
             return View(model);
         }
+        #endregion
+
     }
 }
