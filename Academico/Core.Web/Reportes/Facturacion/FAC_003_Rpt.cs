@@ -6,6 +6,7 @@ using DevExpress.XtraReports.UI;
 using Core.Bus.Reportes.Facturacion;
 using Core.Info.Reportes.Facturacion;
 using System.Collections.Generic;
+using Core.Bus.General;
 
 namespace Core.Web.Reportes.Facturacion
 {
@@ -13,6 +14,7 @@ namespace Core.Web.Reportes.Facturacion
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
+        tb_empresa_Bus busEmpresa = new tb_empresa_Bus();
         public FAC_003_Rpt()
         {
             InitializeComponent();
@@ -33,6 +35,18 @@ namespace Core.Web.Reportes.Facturacion
             List<FAC_003_Info> lst_rpt = bus_rpt.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
             lst_rpt.ForEach(q => q.nomReporte = q.CreDeb.Trim() == "C" ? "NOTA DE CRÉDITO" : "NOTA DE DÉBITO");
             this.DataSource = lst_rpt;
+
+            var empres = busEmpresa.get_info(IdEmpresa);
+            if (empres != null)
+            {
+                lbl_empresa.Text = empres.em_nombre;
+                lblDireccion.Text = empres.em_direccion;
+                if (empres.em_logo != null)
+                {
+                    ImageConverter obj = new ImageConverter();
+                    logo.Image = (Image)obj.ConvertFrom(empres.em_logo);
+                }
+            }
         }
 
         private void Subreporte_apliaciones_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)

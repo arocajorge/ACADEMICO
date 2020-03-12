@@ -53,7 +53,17 @@ namespace Core.Data.Reportes.Facturacion
                                  vt_por_iva = q.vt_por_iva,
                                  No_Descripcion = q.No_Descripcion,
                                  sc_observacion = q.sc_observacion,
-                                 sc_total = q.sc_total
+                                 CodigoAlumno = q.CodigoAlumno,
+                                 NomSede = q.NomSede,
+                                 NomNivel = q.NomNivel,
+                                 NomJornada = q.NomJornada,
+                                 NomCurso = q.NomCurso,
+                                 NomParalelo = q.NomParalelo,
+                                 CodigoParalelo = q.CodigoParalelo,
+                                 NomPlantilla = q.NomPlantilla,
+                                 IdUsuario = q.IdUsuario,
+                                 Fecha_UltMod = q.Fecha_UltMod,
+                                 FechaTransaccion = q.FechaTransaccion,
 
                              }).ToList();
                 }
