@@ -11,22 +11,120 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
     var selectedIDsFactura;
+    var selectedIDsNota;
+    var selectedIDsCobro;
 
-    function OnBeginCallback(s, e) {
+    function OnBeginCallbackFactura(s, e) {
         //Pass all selected keys to GridView callback action
         e.customArgs["selectedIDsFactura"] = selectedIDsFactura;
         e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
     }
-    function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdString", GetSelectedFieldValuesCallback);
+    function OnSelectionChangedFactura(s, e) {
+        s.GetSelectedFieldValues("IdString", GetSelectedFieldValuesCallbackFactura);
     }
-    function GetSelectedFieldValuesCallback(values) {
+    function GetSelectedFieldValuesCallbackFactura(values) {
         //Capture all selected keys
         selectedIDsFactura = values.join(',');
     }
 
-    function ContabilizarFactura() {
 
+    function OnBeginCallbackNota(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDsNota"] = selectedIDsNota;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChangedNota(s, e) {
+        s.GetSelectedFieldValues("IdString", GetSelectedFieldValuesCallbackNota);
+    }
+    function GetSelectedFieldValuesCallbackNota(values) {
+        //Capture all selected keys
+        selectedIDsNota = values.join(',');
+    }
+
+
+    function OnBeginCallbackCobro(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDsCobro"] = selectedIDsCobro;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChangedCobro(s, e) {
+        s.GetSelectedFieldValues("IdString", GetSelectedFieldValuesCallbackCobro);
+    }
+    function GetSelectedFieldValuesCallbackCobro(values) {
+        //Capture all selected keys
+        selectedIDsCobro = values.join(',');
+    }
+
+    function ContabilizarFactura() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            Ids: selectedIDsFactura
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ContabilizarFactura", "AuditoriaContable", new { Area = "Contabilidad" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var url = '@Url.Action("Index", "AuditoriaContable")';
+                window.location.href = url;
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+    function ContabilizarNota() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            Ids: selectedIDsNota
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ContabilizarNota", "AuditoriaContable", new { Area = "Contabilidad" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var url = '@Url.Action("Index", "AuditoriaContable")';
+                window.location.href = url;
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function ContabilizarCobro() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            Ids: selectedIDsCobro
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ContabilizarCobro", "AuditoriaContable", new { Area = "Contabilidad" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                var url = '@Url.Action("Index", "AuditoriaContable")';
+                window.location.href = url;
+            },
+            error: function (error) {
+            }
+        });
     }
 </script>
 
@@ -106,6 +204,12 @@
                     <li class="active">
                         <a href="#tabContaFactura" aria-controls="Movimientos" role="tab" data-toggle="tab">Facturas</a>
                     </li>
+                    <li>
+                        <a href="#tabContaNota" aria-controls="Movimientos" role="tab" data-toggle="tab">Notas Crédito/Débito</a>
+                    </li>
+                    <li>
+                        <a href="#tabContaCobro" aria-controls="Movimientos" role="tab" data-toggle="tab">Cobros</a>
+                    </li>
                 </ul>
                 <div class="tab-content" style="padding-top: 20px">
                     <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tabContaFactura">
@@ -115,7 +219,7 @@
                                     <div class="form-group">
                                         <label for=""></label>
                                         <div class="input-group">
-                                            <button type="button" title="Contabilizar" class="btn btn-primary" id="btn_contabilizar" onclick="ContabilizarMovimientos();">
+                                            <button type="button" title="Contabilizar Facturas" class="btn btn-primary" id="btn_contabilizar" onclick="ContabilizarFactura();">
                                                 <i class="fa fa-refresh"></i>
                                             </button>
                                         </div>
@@ -133,7 +237,56 @@
                             </div>
                         </div>
                     </div>
-
+                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tabContaNota">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for=""></label>
+                                        <div class="input-group">
+                                            <button type="button" title="Contabilizar Notas" class="btn btn-primary" id="btn_contabilizar" onclick="ContabilizarNota();">
+                                                <i class="fa fa-refresh"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @Html.Action("GridViewPartial_ContaNota")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tabContaCobro">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for=""></label>
+                                        <div class="input-group">
+                                            <button type="button" title="Contabilizar Cobros" class="btn btn-primary" id="btn_contabilizar" onclick="ContabilizarCobro();">
+                                                <i class="fa fa-refresh"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @Html.Action("GridViewPartial_ContaCobro")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

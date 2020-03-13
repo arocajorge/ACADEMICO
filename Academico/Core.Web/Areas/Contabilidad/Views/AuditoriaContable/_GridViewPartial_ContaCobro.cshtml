@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_ContaFactura";
-        settings.CallbackRouteValues = new { Controller = "AuditoriaContable", Action = "GridViewPartial_ContaFactura"};
+        settings.Name = "GridViewPartial_ContaCobro";
+        settings.CallbackRouteValues = new { Controller = "AuditoriaContable", Action = "GridViewPartial_ContaCobro"};
         settings.KeyFieldName = "IdString";
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
 
@@ -55,13 +55,13 @@
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
         
-        settings.Columns.Add("IdCbteVta", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(8);
-        settings.Columns.Add("vt_NumFactura", "# Factura").Width = System.Web.UI.WebControls.Unit.Percentage(15);
-        settings.Columns.Add("Alumno", "Alumno").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-        settings.Columns.Add("vt_Observacion", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Columns.Add("IdCobro", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(8);
+        settings.Columns.Add("ct_IdCbteCble", "# Comprobante").Width = System.Web.UI.WebControls.Unit.Percentage(15);
+        settings.Columns.Add("pe_nombreCompleto", "Alumno").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        settings.Columns.Add("cr_ObservacionPantalla", "Observación").Width = System.Web.UI.WebControls.Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
-            column.FieldName = "vt_fecha";
+            column.FieldName = "cr_fecha";
             column.Caption = "Fecha";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(8);
@@ -82,7 +82,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "TotalContable";
+            column.FieldName = "TotalContabilidad";
             column.Caption = "Total Contabilidad";
             column.Width = Unit.Percentage(8);
             column.EditorProperties().SpinEdit(sp =>
@@ -96,7 +96,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "Diferencia";
+            column.FieldName = "Saldo";
             column.Caption = "Diferencia";
             column.Width = Unit.Percentage(8);
             column.EditorProperties().SpinEdit(sp =>
@@ -109,8 +109,8 @@
             });
         });
 
-        settings.ClientSideEvents.SelectionChanged = "OnSelectionChangedFactura";
-        settings.ClientSideEvents.BeginCallback = "OnBeginCallbackFactura";
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChangedCobro";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallbackCobro";
     });
 }
 @grid.Bind(Model).GetHtml()
