@@ -33,6 +33,27 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        private int GetId(int IdEmpresa)
+        {
+            try
+            {
+                int ID = 1;
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    int Cont = db.aca_PlantillaTipo.Where(q => q.IdEmpresa == IdEmpresa).Count();
+                    if (Cont > 0)
+                        ID = db.aca_PlantillaTipo.Where(q => q.IdEmpresa == IdEmpresa).Max(q => q.IdTipoPlantilla) + 1;
+                    
+                }
+                return ID;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_PlantillaTipo_Info getInfo(int IdEmpresa, int IdTipoPlantilla)
         {
             try
@@ -73,7 +94,7 @@ namespace Core.Data.Academico
                 aca_PlantillaTipo Entity = new aca_PlantillaTipo
                 {
                     IdEmpresa = info.IdEmpresa,
-                    IdTipoPlantilla = info.IdTipoPlantilla,
+                    IdTipoPlantilla = info.IdTipoPlantilla = GetId(info.IdEmpresa),
                     NomPlantillaTipo = info.NomPlantillaTipo,
                     Estado = true,
                     IdUsuarioCreacion = info.IdUsuarioCreacion,
@@ -104,10 +125,11 @@ namespace Core.Data.Academico
                 var Entity = dbAca.aca_PlantillaTipo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoPlantilla == info.IdTipoPlantilla).FirstOrDefault();
                 if (Entity == null)
                     return false;
-
+                Entity.NomPlantillaTipo = info.NomPlantillaTipo;
                 Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                 Entity.FechaModificacion = DateTime.Now;
                 #endregion
+
                 dbAca.SaveChanges();
 
                 return true;

@@ -44,7 +44,7 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.Modificar = info.Modificar;
             ViewBag.Anular = info.Anular;
             #endregion
-            cargar_combos();
+            
             return View();
         }
 
@@ -79,7 +79,7 @@ namespace Core.Web.Areas.Academico.Controllers
             if (!inf.Nuevo)
                 return RedirectToAction("Index");
             #endregion
-            cargar_combos();
+            
             return View(model);
         }
 
@@ -117,7 +117,7 @@ namespace Core.Web.Areas.Academico.Controllers
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
-            cargar_combos();
+            
             return View(model);
         }
 
@@ -130,7 +130,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
-                cargar_combos();
+                
                 return View(model);
             }
             
@@ -155,7 +155,7 @@ namespace Core.Web.Areas.Academico.Controllers
             if (!info.Anular)
                 return RedirectToAction("Index");
             #endregion
-            cargar_combos();
+            
             return View(model);
         }
         [HttpPost]
@@ -166,7 +166,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 ViewBag.mensaje = "No se ha podido anular el registro";
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
-                cargar_combos();
+                
                 return View(model);
             }
             
