@@ -92,6 +92,9 @@
     <Compile Include="Academico\aca_Reporte_Info.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Info.cs" />
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Info.cs" />
+    <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionCobros_Info.cs" />
+    <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionFacturas_Info.cs" />
+    <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionNotas_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCredito_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Info.cs" />
