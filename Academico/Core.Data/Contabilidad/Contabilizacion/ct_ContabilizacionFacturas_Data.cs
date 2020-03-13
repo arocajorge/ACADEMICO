@@ -39,7 +39,8 @@ namespace Core.Data.Contabilidad.Contabilizacion
                             IdCtaCble = item.IdCtaCble,
                             TotalModulo = item.TotalModulo,
                             TotalContable = item.TotalContable,
-                            Diferencia = item.Diferencia
+                            Diferencia = item.Diferencia,
+                            IdString = item.IdSucursal.ToString("0000")+item.IdBodega.ToString("0000")+item.IdCbteVta.ToString("0000000000")
                         });
                     }
                 }

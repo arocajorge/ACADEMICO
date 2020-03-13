@@ -60,6 +60,16 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             return View(model);
         }
         #endregion
+
+        #region Factura
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_ContaFactura()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaContaFactura.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ContaFactura", model);
+        }
+        #endregion
     }
 
     public class ct_ContabilizacionFacturas_List

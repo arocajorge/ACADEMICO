@@ -25,5 +25,6 @@ namespace Core.Info.Contabilidad.Contabilizacion
         public decimal TotalModulo { get; set; }
         public double TotalContable { get; set; }
         public Nullable<decimal> Diferencia { get; set; }
+        public string IdString { get; set; }
     }
 }
