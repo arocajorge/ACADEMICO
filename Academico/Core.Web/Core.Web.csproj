@@ -8441,6 +8441,8 @@
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_005.cshtml" />
     <Content Include="Areas\Contabilidad\Views\AuditoriaContable\Index.cshtml" />
     <Content Include="Areas\Contabilidad\Views\AuditoriaContable\_GridViewPartial_ContaFactura.cshtml" />
+    <Content Include="Areas\Academico\Views\PlantillaTipo\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\PlantillaTipo\_GridViewPartial_PlantillaTipo.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8485,7 +8487,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
-    <Folder Include="Areas\Academico\Views\PlantillaTipo\" />
     <Folder Include="Areas\Banco\Models\" />
     <Folder Include="Areas\Banco\Views\ArchivoBancario\" />
     <Folder Include="Areas\Caja\Models\" />

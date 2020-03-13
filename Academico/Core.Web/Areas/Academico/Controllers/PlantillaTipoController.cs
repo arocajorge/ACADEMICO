@@ -16,12 +16,66 @@ namespace Core.Web.Areas.Academico.Controllers
     {
         #region Variables
         aca_PlantillaTipo_Bus busPlantillaTipo = new aca_PlantillaTipo_Bus();
+        aca_PlantillaTipo_List Lista_Plantilla = new aca_PlantillaTipo_List();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
-        // GET: Academico/PlantillaTipo
+        #region Index
         public ActionResult Index()
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+            List<aca_PlantillaTipo_Info> lista = busPlantillaTipo.GetList(model.IdEmpresa, true);
+            Lista_Plantilla.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Plantilla", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
             return View();
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_PlantillaTipo(bool Nuevo = false, bool Modificar = false, bool Anular = false)
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+
+            List<aca_PlantillaTipo_Info> model = Lista_Plantilla.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
+            return PartialView("_GridViewPartial_PlantillaTipo", model);
+        }
+        #endregion
+
+    }
+    public class aca_PlantillaTipo_List
+    {
+        string Variable = "aca_PlantillaTipo_Info";
+        public List<aca_PlantillaTipo_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<aca_PlantillaTipo_Info> list = new List<aca_PlantillaTipo_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<aca_PlantillaTipo_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<aca_PlantillaTipo_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
     }
 }
