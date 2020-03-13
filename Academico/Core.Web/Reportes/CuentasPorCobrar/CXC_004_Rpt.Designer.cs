@@ -709,7 +709,7 @@
             this.xrTable10.Name = "xrTable10";
             this.xrTable10.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow13});
-            this.xrTable10.SizeF = new System.Drawing.SizeF(750F, 20F);
+            this.xrTable10.SizeF = new System.Drawing.SizeF(754.0001F, 20F);
             this.xrTable10.StylePriority.UseBorders = false;
             this.xrTable10.StylePriority.UseFont = false;
             this.xrTable10.StylePriority.UseTextAlignment = false;
@@ -753,7 +753,7 @@
             this.lbl_usuario.StylePriority.UsePadding = false;
             this.lbl_usuario.StylePriority.UseTextAlignment = false;
             this.lbl_usuario.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbl_usuario.Weight = 1.8581543760987871D;
+            this.lbl_usuario.Weight = 1.8666667458932063D;
             // 
             // xrTableCell55
             // 
@@ -767,7 +767,7 @@
             this.xrTableCell55.StylePriority.UseTextAlignment = false;
             this.xrTableCell55.Text = "Fecha de impresión:";
             this.xrTableCell55.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell55.Weight = 1.8751796340484357D;
+            this.xrTableCell55.Weight = 1.8666672642540165D;
             // 
             // lbl_fecha
             // 
@@ -791,7 +791,7 @@
             this.xrTableCell56.Name = "xrTableCell56";
             this.xrTableCell56.StylePriority.UseBorders = false;
             this.xrTableCell56.StylePriority.UseFont = false;
-            this.xrTableCell56.Weight = 1.2314875564801837D;
+            this.xrTableCell56.Weight = 1.274154877656168D;
             // 
             // xrPageInfo2
             // 
@@ -800,7 +800,7 @@
             this.xrPageInfo2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPageInfo2.Name = "xrPageInfo2";
             this.xrPageInfo2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
-            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(115.4519F, 20.00001F);
+            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(119.452F, 20.00001F);
             this.xrPageInfo2.StylePriority.UseBorders = false;
             this.xrPageInfo2.StylePriority.UseFont = false;
             this.xrPageInfo2.StylePriority.UsePadding = false;
