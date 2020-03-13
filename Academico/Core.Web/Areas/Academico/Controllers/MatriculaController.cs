@@ -788,130 +788,138 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 if (info_matricula.IdPersonaR != 0 && info_matricula.IdPersonaF != 0 && ExisteCliente.IdCliente!=0)
                 {
-                    if (bus_matricula.GuardarDB(info_matricula))
+                    if (info_termino_pago!=null && info_termino_pago.AplicaDescuentoNomina==true && (info_matricula.IdEmpresa_rol==null || info_matricula.IdEmpleado==0))
                     {
-                        var lst_rubros_x_cobrar = info_matricula.lst_MatriculaRubro.Where(q => q.EnMatricula == true).ToList();
-                        var mecanismo = bus_mecanismo.GetInfo(info_matricula.IdEmpresa, info_matricula.IdMecanismo);
-                        var termino_pago = bus_termino_pago.get_info(mecanismo.IdTerminoPago);
-                        var punto_venta = bus_punto_venta.get_info(info_matricula.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal), Convert.ToInt32(IdPuntoVta));
-                        var RepEconomico = bus_familia.GetInfo_Representante(info_matricula.IdEmpresa, info_matricula.IdAlumno, cl_enumeradores.eTipoRepresentante.ECON.ToString());
-                        var Cliente = bus_cliente.get_info_x_num_cedula(info_matricula.IdEmpresa, RepEconomico.pe_cedulaRuc);
-
-                        #region Factura
-                        foreach (var item in lst_rubros_x_cobrar)
-                        {
-                            var AnioLectivo_Periodo = bus_anio_periodo.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, item.IdPeriodo);
-                            var AnioLectivo_Rubro = bus_anio_rubro.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, item.IdRubro);
-                            var AnioLectivo_Rubro_Periodo = bus_anio_rubro_periodo.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, item.IdRubro, item.IdPeriodo);
-                            var mes = bus_mes.get_list().Where(q=>q.idMes == AnioLectivo_Periodo.IdMes).FirstOrDefault();
-                            var ObsFactura = AnioLectivo_Rubro.NomRubro + " "+(AnioLectivo_Rubro.NumeroCuotas>1 ? (AnioLectivo_Rubro_Periodo.Secuencia + "/"+AnioLectivo_Rubro.NumeroCuotas) : "")+" "+ mes.smes+" "+ AnioLectivo_Periodo.FechaHasta.Year;
-                            var NumPension = (AnioLectivo_Rubro.NumeroCuotas > 1 ? (AnioLectivo_Rubro_Periodo.Secuencia + "/" + AnioLectivo_Rubro.NumeroCuotas) : "");
-
-                            var info_factura = new fa_factura_Info {
-                                IdEmpresa = info_matricula.IdEmpresa,
-                                IdSucursal = IdSucursal,
-                                IdBodega = punto_venta.IdBodega,
-                                vt_tipoDoc= "FACT",
-                                vt_serie1 = vt_serie1,
-                                vt_serie2 = vt_serie2,
-                                vt_NumFactura = vt_NumFactura,
-                                IdAlumno = info_matricula.IdAlumno,
-                                IdCliente=Cliente.IdCliente,
-                                IdVendedor = 1,
-                                IdNivel = 1,
-                                IdCatalogo_FormaPago = IdCatalogo_FormaPago,
-                                vt_fecha = DateTime.Now,
-                                vt_plazo=termino_pago.Dias_Vct,
-                                vt_fech_venc = DateTime.Now.AddDays(termino_pago.Dias_Vct),
-                                vt_tipo_venta = mecanismo.IdTerminoPago,
-                                vt_Observacion = ObsFactura,
-                                Estado="A",
-                                IdCaja = punto_venta.IdCaja,
-                                IdEmpresa_rol = info_matricula.IdEmpresa_rol,
-                                IdEmpleado = info_matricula.IdEmpleado,
-                                IdUsuario = SessionFixed.IdUsuario,
-                                IdPuntoVta = IdPuntoVta,
-                                aprobada_enviar_sri=false
-                            };
-
-                            info_factura.lst_det = new List<fa_factura_det_Info>();
-                            var info_impuesto = bus_impuesto.get_info(item.IdCod_Impuesto_Iva);
-                            var fact_det = new fa_factura_det_Info
-                            {
-                                Secuencia = 1,
-                                IdProducto = item.IdProducto,
-                                vt_cantidad = 1,
-                                vt_Precio = Convert.ToDouble(item.Total),
-                                vt_PorDescUnitario = 0,
-                                vt_DescUnitario = 0,
-                                vt_PrecioFinal = Convert.ToDouble(item.Total),
-                                vt_Subtotal = Convert.ToDouble(item.Total),
-                                vt_por_iva = info_impuesto.porcentaje,
-                                IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
-                                vt_iva = Convert.ToDouble(item.ValorIVA),
-                                vt_total = Convert.ToDouble(item.Total),
-                                vt_detallexItems = NumPension,
-                                IdMatricula = info_matricula.IdMatricula,
-                                aca_IdPeriodo = item.IdPeriodo,
-                                aca_IdAnio = item.IdAnio,
-                                aca_IdPlantilla = item.IdPlantilla,
-                                aca_IdRubro = item.IdRubro,
-                                AplicaProntoPago = item.AplicaProntoPago,
-                                FechaProntoPago = item.FechaProntoPago,
-                                ValorProntoPago = Convert.ToDouble(item.ValorProntoPago)
-                            };
-
-                            info_factura.lst_det.Add(fact_det);
-
-                            #region Resumen
-                            info_factura.info_resumen = new fa_factura_resumen_Info
-                            {
-                                SubtotalIVASinDscto = (decimal)Math.Round(info_factura.lst_det.Where(q => q.vt_por_iva != 0).Sum(q => q.vt_cantidad * q.vt_Precio), 2, MidpointRounding.AwayFromZero),
-                                SubtotalSinIVASinDscto = (decimal)Math.Round( info_factura.lst_det.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_cantidad * q.vt_Precio), 2, MidpointRounding.AwayFromZero),
-
-                                Descuento = (decimal)Math.Round( info_factura.lst_det.Sum(q => q.vt_DescUnitario * q.vt_cantidad), 2, MidpointRounding.AwayFromZero),
-
-                                SubtotalIVAConDscto = (decimal)Math.Round(info_factura.lst_det.Where(q => q.vt_por_iva != 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero),
-                                SubtotalSinIVAConDscto = (decimal)Math.Round( info_factura.lst_det.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero),
-
-                                ValorIVA = (decimal)Math.Round( info_factura.lst_det.Sum(q => q.vt_iva), 2, MidpointRounding.AwayFromZero)
-                            };
-                            info_factura.info_resumen.SubtotalSinDscto = info_factura.info_resumen.SubtotalIVASinDscto +  info_factura.info_resumen.SubtotalSinIVASinDscto;
-                            info_factura.info_resumen.SubtotalConDscto = info_factura.info_resumen.SubtotalIVAConDscto +  info_factura.info_resumen.SubtotalSinIVAConDscto;
-                            info_factura.info_resumen.Total = info_factura.info_resumen.SubtotalConDscto +  info_factura.info_resumen.ValorIVA;
-                            info_factura.info_resumen.ValorProntoPago = (decimal)Math.Round( info_factura.lst_det.Sum(q => q.ValorProntoPago ?? 0), 2, MidpointRounding.AwayFromZero);
-                            info_factura.info_resumen.FechaProntoPago = (( info_factura.lst_det.Where(q => q.FechaProntoPago != null).ToList().Count > 0) ?  info_factura.lst_det.Min(q => q.FechaProntoPago) : null);
-                            info_factura.info_resumen.IdPeriodo = item.IdPeriodo;
-                            info_factura.info_resumen.IdAnio = info_matricula.IdAnio;
-                            info_factura.info_resumen.IdPlantilla = info_matricula.IdPlantilla;
-                            info_factura.info_resumen.IdRubro = item.IdRubro;
-                            #endregion
-
-                            if (!bus_factura.guardarDB(info_factura))
-                            {
-                                mensaje = "No se ha podido guardar la factura";
-                            }
-                            else
-                            {
-                                #region Actualiza MatriculaRubro
-                                //var info_matricula_rubro = bus_matricula_rubro.GetInfo(info_matricula.IdEmpresa, info_matricula.IdMatricula, Convert.ToInt32(info_factura.info_resumen.IdPeriodo), Convert.ToInt32(info_factura.info_resumen.IdRubro));
-                                //info_matricula_rubro.IdSucursal = info_factura.IdSucursal;
-                                //info_matricula_rubro.IdBodega = info_factura.IdBodega;
-                                //info_matricula_rubro.IdCbteVta = info_factura.IdCbteVta;
-                                //info_matricula_rubro.FechaFacturacion = info_factura.vt_fecha;
-
-                                //if (!bus_matricula_rubro.ModificarDB(info_matricula_rubro))
-                                //{
-                                //    mensaje = "No se ha podido modificar el rubro por matricula";
-                                //}
-                                #endregion
-                            }
-                        }
-                        #endregion
+                        mensaje = "Ingrese el empleado para descuento en rol";
                     }
                     else
                     {
-                        mensaje = "No se ha podido guardar el registro";
+                        if (bus_matricula.GuardarDB(info_matricula))
+                        {
+                            var lst_rubros_x_cobrar = info_matricula.lst_MatriculaRubro.Where(q => q.EnMatricula == true).ToList();
+                            var mecanismo = bus_mecanismo.GetInfo(info_matricula.IdEmpresa, info_matricula.IdMecanismo);
+                            var termino_pago = bus_termino_pago.get_info(mecanismo.IdTerminoPago);
+                            var punto_venta = bus_punto_venta.get_info(info_matricula.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal), Convert.ToInt32(IdPuntoVta));
+                            var RepEconomico = bus_familia.GetInfo_Representante(info_matricula.IdEmpresa, info_matricula.IdAlumno, cl_enumeradores.eTipoRepresentante.ECON.ToString());
+                            var Cliente = bus_cliente.get_info_x_num_cedula(info_matricula.IdEmpresa, RepEconomico.pe_cedulaRuc);
+
+                            #region Factura
+                            foreach (var item in lst_rubros_x_cobrar)
+                            {
+                                var AnioLectivo_Periodo = bus_anio_periodo.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, item.IdPeriodo);
+                                var AnioLectivo_Rubro = bus_anio_rubro.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, item.IdRubro);
+                                var AnioLectivo_Rubro_Periodo = bus_anio_rubro_periodo.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, item.IdRubro, item.IdPeriodo);
+                                var mes = bus_mes.get_list().Where(q => q.idMes == AnioLectivo_Periodo.IdMes).FirstOrDefault();
+                                var ObsFactura = AnioLectivo_Rubro.NomRubro + " " + (AnioLectivo_Rubro.NumeroCuotas > 1 ? (AnioLectivo_Rubro_Periodo.Secuencia + "/" + AnioLectivo_Rubro.NumeroCuotas) : "") + " " + mes.smes + " " + AnioLectivo_Periodo.FechaHasta.Year;
+                                var NumPension = (AnioLectivo_Rubro.NumeroCuotas > 1 ? (AnioLectivo_Rubro_Periodo.Secuencia + "/" + AnioLectivo_Rubro.NumeroCuotas) : "");
+
+                                var info_factura = new fa_factura_Info
+                                {
+                                    IdEmpresa = info_matricula.IdEmpresa,
+                                    IdSucursal = IdSucursal,
+                                    IdBodega = punto_venta.IdBodega,
+                                    vt_tipoDoc = "FACT",
+                                    vt_serie1 = vt_serie1,
+                                    vt_serie2 = vt_serie2,
+                                    vt_NumFactura = vt_NumFactura,
+                                    IdAlumno = info_matricula.IdAlumno,
+                                    IdCliente = Cliente.IdCliente,
+                                    IdVendedor = 1,
+                                    IdNivel = 1,
+                                    IdCatalogo_FormaPago = IdCatalogo_FormaPago,
+                                    vt_fecha = DateTime.Now,
+                                    vt_plazo = termino_pago.Dias_Vct,
+                                    vt_fech_venc = DateTime.Now.AddDays(termino_pago.Dias_Vct),
+                                    vt_tipo_venta = mecanismo.IdTerminoPago,
+                                    vt_Observacion = ObsFactura,
+                                    Estado = "A",
+                                    IdCaja = punto_venta.IdCaja,
+                                    IdEmpresa_rol = info_matricula.IdEmpresa_rol,
+                                    IdEmpleado = info_matricula.IdEmpleado,
+                                    IdUsuario = SessionFixed.IdUsuario,
+                                    IdPuntoVta = IdPuntoVta,
+                                    aprobada_enviar_sri = false
+                                };
+
+                                info_factura.lst_det = new List<fa_factura_det_Info>();
+                                var info_impuesto = bus_impuesto.get_info(item.IdCod_Impuesto_Iva);
+                                var fact_det = new fa_factura_det_Info
+                                {
+                                    Secuencia = 1,
+                                    IdProducto = item.IdProducto,
+                                    vt_cantidad = 1,
+                                    vt_Precio = Convert.ToDouble(item.Total),
+                                    vt_PorDescUnitario = 0,
+                                    vt_DescUnitario = 0,
+                                    vt_PrecioFinal = Convert.ToDouble(item.Total),
+                                    vt_Subtotal = Convert.ToDouble(item.Total),
+                                    vt_por_iva = info_impuesto.porcentaje,
+                                    IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
+                                    vt_iva = Convert.ToDouble(item.ValorIVA),
+                                    vt_total = Convert.ToDouble(item.Total),
+                                    vt_detallexItems = NumPension,
+                                    IdMatricula = info_matricula.IdMatricula,
+                                    aca_IdPeriodo = item.IdPeriodo,
+                                    aca_IdAnio = item.IdAnio,
+                                    aca_IdPlantilla = item.IdPlantilla,
+                                    aca_IdRubro = item.IdRubro,
+                                    AplicaProntoPago = item.AplicaProntoPago,
+                                    FechaProntoPago = item.FechaProntoPago,
+                                    ValorProntoPago = Convert.ToDouble(item.ValorProntoPago)
+                                };
+
+                                info_factura.lst_det.Add(fact_det);
+
+                                #region Resumen
+                                info_factura.info_resumen = new fa_factura_resumen_Info
+                                {
+                                    SubtotalIVASinDscto = (decimal)Math.Round(info_factura.lst_det.Where(q => q.vt_por_iva != 0).Sum(q => q.vt_cantidad * q.vt_Precio), 2, MidpointRounding.AwayFromZero),
+                                    SubtotalSinIVASinDscto = (decimal)Math.Round(info_factura.lst_det.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_cantidad * q.vt_Precio), 2, MidpointRounding.AwayFromZero),
+
+                                    Descuento = (decimal)Math.Round(info_factura.lst_det.Sum(q => q.vt_DescUnitario * q.vt_cantidad), 2, MidpointRounding.AwayFromZero),
+
+                                    SubtotalIVAConDscto = (decimal)Math.Round(info_factura.lst_det.Where(q => q.vt_por_iva != 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero),
+                                    SubtotalSinIVAConDscto = (decimal)Math.Round(info_factura.lst_det.Where(q => q.vt_por_iva == 0).Sum(q => q.vt_Subtotal), 2, MidpointRounding.AwayFromZero),
+
+                                    ValorIVA = (decimal)Math.Round(info_factura.lst_det.Sum(q => q.vt_iva), 2, MidpointRounding.AwayFromZero)
+                                };
+                                info_factura.info_resumen.SubtotalSinDscto = info_factura.info_resumen.SubtotalIVASinDscto + info_factura.info_resumen.SubtotalSinIVASinDscto;
+                                info_factura.info_resumen.SubtotalConDscto = info_factura.info_resumen.SubtotalIVAConDscto + info_factura.info_resumen.SubtotalSinIVAConDscto;
+                                info_factura.info_resumen.Total = info_factura.info_resumen.SubtotalConDscto + info_factura.info_resumen.ValorIVA;
+                                info_factura.info_resumen.ValorProntoPago = (decimal)Math.Round(info_factura.lst_det.Sum(q => q.ValorProntoPago ?? 0), 2, MidpointRounding.AwayFromZero);
+                                info_factura.info_resumen.FechaProntoPago = ((info_factura.lst_det.Where(q => q.FechaProntoPago != null).ToList().Count > 0) ? info_factura.lst_det.Min(q => q.FechaProntoPago) : null);
+                                info_factura.info_resumen.IdPeriodo = item.IdPeriodo;
+                                info_factura.info_resumen.IdAnio = info_matricula.IdAnio;
+                                info_factura.info_resumen.IdPlantilla = info_matricula.IdPlantilla;
+                                info_factura.info_resumen.IdRubro = item.IdRubro;
+                                #endregion
+
+                                if (!bus_factura.guardarDB(info_factura))
+                                {
+                                    mensaje = "No se ha podido guardar la factura";
+                                }
+                                else
+                                {
+                                    #region Actualiza MatriculaRubro
+                                    //var info_matricula_rubro = bus_matricula_rubro.GetInfo(info_matricula.IdEmpresa, info_matricula.IdMatricula, Convert.ToInt32(info_factura.info_resumen.IdPeriodo), Convert.ToInt32(info_factura.info_resumen.IdRubro));
+                                    //info_matricula_rubro.IdSucursal = info_factura.IdSucursal;
+                                    //info_matricula_rubro.IdBodega = info_factura.IdBodega;
+                                    //info_matricula_rubro.IdCbteVta = info_factura.IdCbteVta;
+                                    //info_matricula_rubro.FechaFacturacion = info_factura.vt_fecha;
+
+                                    //if (!bus_matricula_rubro.ModificarDB(info_matricula_rubro))
+                                    //{
+                                    //    mensaje = "No se ha podido modificar el rubro por matricula";
+                                    //}
+                                    #endregion
+                                }
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+                            mensaje = "No se ha podido guardar el registro";
+                        }
                     }
 
                 Empresa = info_matricula.IdEmpresa;
