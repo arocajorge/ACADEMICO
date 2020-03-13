@@ -69,6 +69,31 @@
 
             });
         });
+        settings.CellEditorInitialize = (sender, e) =>
+        {
+            MVCxGridView g = (MVCxGridView)sender;
+
+            if (e.Column.FieldName == "IdDocumento")
+            {
+                if (e.KeyValue != null)
+                {
+                    e.Editor.ReadOnly = true;
+                }
+                else
+                {
+                    e.Editor.ReadOnly = false;
+                }
+            }
+
+        };
+        //settings.CellEditorInitialize = (sender, e) =>
+        //{
+        //    if (e.Column.FieldName == "IdDocumento")
+        //    {
+        //        MVCxGridView g = sender as MVCxGridView;
+        //        e.Editor.ReadOnly = true;
+        //    }
+        //};
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); SetAlumnoDocumento();}";
         settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {var editor = IdDocumento;editor.Focus(); }}";
     });
