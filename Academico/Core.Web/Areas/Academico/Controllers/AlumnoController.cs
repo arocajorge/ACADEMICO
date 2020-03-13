@@ -452,21 +452,22 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var Lista = ListaAlumnoDocumento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            if (info_det != null)
+            if (info_det != null && info_det.IdDocumento!=0)
             {
-                if (Lista.Where(q => q.IdDocumento == info_det.IdDocumento).ToList().Count == 0)
-                {
-                    if (info_det.IdDocumento != 0)
-                    {
-                        var info_documento = bus_documento.GetInfo(IdEmpresa, info_det.IdDocumento);
-                        if (info_documento != null)
-                        {
-                            info_det.NomDocumento = info_documento.NomDocumento;
-                        }
-                    }
+                ListaAlumnoDocumento.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                //if (Lista.Where(q => q.IdDocumento == info_det.IdDocumento).ToList().Count == 0)
+                //{
+                //    if (info_det.IdDocumento != 0)
+                //    {
+                //        var info_documento = bus_documento.GetInfo(IdEmpresa, info_det.IdDocumento);
+                //        if (info_documento != null)
+                //        {
+                //            info_det.NomDocumento = info_documento.NomDocumento;
+                //        }
+                //    }
 
-                    ListaAlumnoDocumento.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                }
+                //    ListaAlumnoDocumento.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                //}
             }
        
             var model = ListaAlumnoDocumento.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -1337,8 +1338,8 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
 
             aca_AlumnoDocumento_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).FirstOrDefault();
-            edited_info.IdDocumento = info_det.IdDocumento;
-            edited_info.NomDocumento = info_det.NomDocumento;
+            //edited_info.IdDocumento = info_det.IdDocumento;
+            //edited_info.NomDocumento = info_det.NomDocumento;
             edited_info.EnArchivo = info_det.EnArchivo;
             edited_info.IdAlumno = Convert.ToInt32(SessionFixed.IdAlumno);
             edited_info.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);

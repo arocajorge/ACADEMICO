@@ -24,5 +24,41 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+        public bool GuardarDB(aca_PlantillaTipo_Info info)
+        {
+            try
+            {
+                return odata.GuardarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool ModificarDB(aca_PlantillaTipo_Info info)
+        {
+            try
+            {
+                return odata.ModificarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool AnularDB(aca_PlantillaTipo_Info info)
+        {
+            try
+            {
+                return odata.AnularDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

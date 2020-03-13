@@ -247,6 +247,7 @@
     <Compile Include="Areas\Academico\Controllers\PermitirMatriculaController.cs" />
     <Compile Include="Areas\Academico\Controllers\PlantillaController.cs" />
     <Compile Include="Areas\Academico\Controllers\PlantillaPorCursoController.cs" />
+    <Compile Include="Areas\Academico\Controllers\PlantillaTipoController.cs" />
     <Compile Include="Areas\Academico\Controllers\ProfesorController.cs" />
     <Compile Include="Areas\Academico\Controllers\ReporteController.cs" />
     <Compile Include="Areas\Academico\Controllers\ReportePorUsuarioController.cs" />
@@ -8482,6 +8483,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
+    <Folder Include="Areas\Academico\Views\PlantillaTipo\" />
     <Folder Include="Areas\Banco\Models\" />
     <Folder Include="Areas\Banco\Views\ArchivoBancario\" />
     <Folder Include="Areas\Caja\Models\" />
