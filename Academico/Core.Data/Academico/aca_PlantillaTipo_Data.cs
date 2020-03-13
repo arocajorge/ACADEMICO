@@ -33,6 +33,35 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public aca_PlantillaTipo_Info getInfo(int IdEmpresa, int IdTipoPlantilla)
+        {
+            try
+            {
+                aca_PlantillaTipo_Info info = new aca_PlantillaTipo_Info();
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_PlantillaTipo.Where(q => q.IdEmpresa == IdEmpresa  && q.IdTipoPlantilla == IdTipoPlantilla).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_PlantillaTipo_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdTipoPlantilla = Entity.IdTipoPlantilla,
+                        NomPlantillaTipo = Entity.NomPlantillaTipo,
+                        Estado = Entity.Estado
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public  bool GuardarDB(aca_PlantillaTipo_Info info)
         {

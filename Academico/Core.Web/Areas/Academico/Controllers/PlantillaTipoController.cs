@@ -18,6 +18,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_PlantillaTipo_Bus busPlantillaTipo = new aca_PlantillaTipo_Bus();
         aca_PlantillaTipo_List Lista_Plantilla = new aca_PlantillaTipo_List();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Index
@@ -37,7 +38,7 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_PlantillaTipo_Info> lista = busPlantillaTipo.GetList(model.IdEmpresa, true);
             Lista_Plantilla.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Plantilla", "Index");
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "PlantillaTipo", "Index");
             ViewBag.Nuevo = info.Nuevo;
             ViewBag.Modificar = info.Modificar;
             ViewBag.Anular = info.Anular;
@@ -57,7 +58,116 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_PlantillaTipo", model);
         }
         #endregion
+        #region Acciones
+        public ActionResult Nuevo()
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            aca_PlantillaTipo_Info model = new aca_PlantillaTipo_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                
+            };
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info inf = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "PlantillaTipo", "Index");
+            if (!inf.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
+            return View(model);
+        }
 
+        [HttpPost]
+        public ActionResult Nuevo(aca_PlantillaTipo_Info model)
+        {
+            model.IdUsuarioCreacion = SessionFixed.IdUsuario;
+
+            
+            if (!busPlantillaTipo.GuardarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                return View(model);
+            }
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdTipoPlantilla = model.IdTipoPlantilla, Exito = true });
+        }
+
+        public ActionResult Modificar(int IdEmpresa = 0, int IdTipoPlantilla = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_PlantillaTipo_Info model = busPlantillaTipo.getInfo(IdEmpresa, IdTipoPlantilla);
+
+            if (model == null)
+                return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "PlantillaTipo", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(aca_PlantillaTipo_Info model)
+        {
+            model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+
+            if (!busPlantillaTipo.ModificarDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+               
+                return View(model);
+            }
+
+            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdTipoPlantilla = model.IdTipoPlantilla, Exito = true });
+        }
+
+        public ActionResult Anular(int IdEmpresa = 0, int IdTipoPlantilla = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_PlantillaTipo_Info model = busPlantillaTipo.getInfo(IdEmpresa, IdTipoPlantilla);
+            if (model == null)
+                return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "PlantillaTipo", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
+            
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Anular(aca_PlantillaTipo_Info model)
+        {
+            model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
+            if (!busPlantillaTipo.AnularDB(model))
+            {
+                ViewBag.mensaje = "No se ha podido anular el registro";
+                
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+        #endregion
     }
     public class aca_PlantillaTipo_List
     {

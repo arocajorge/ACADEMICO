@@ -8443,6 +8443,9 @@
     <Content Include="Areas\Contabilidad\Views\AuditoriaContable\_GridViewPartial_ContaFactura.cshtml" />
     <Content Include="Areas\Academico\Views\PlantillaTipo\Index.cshtml" />
     <Content Include="Areas\Academico\Views\PlantillaTipo\_GridViewPartial_PlantillaTipo.cshtml" />
+    <Content Include="Areas\Academico\Views\PlantillaTipo\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\PlantillaTipo\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\PlantillaTipo\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

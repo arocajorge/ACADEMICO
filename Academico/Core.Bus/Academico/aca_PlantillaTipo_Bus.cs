@@ -24,6 +24,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+        public aca_PlantillaTipo_Info getInfo(int IdEmpresa, int IdTipoPlantilla)
+        {
+            try
+            {
+                return odata.getInfo(IdEmpresa, IdTipoPlantilla);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool GuardarDB(aca_PlantillaTipo_Info info)
         {
             try
