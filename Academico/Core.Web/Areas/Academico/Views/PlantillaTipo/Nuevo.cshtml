@@ -13,7 +13,7 @@
 @using (Html.BeginForm("Nuevo", "PlantillaTipo", FormMethod.Post, new { @class = "form", @role = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
-    //@Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {
         <div class="row">
@@ -38,7 +38,7 @@
             </div>
             </div>
         </div>
-            @Html.Action("GridViewPartial_PlantillaTipo")
+            //@Html.Action("GridViewPartial_PlantillaTipo")
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","PlantillaTipo",new { Area = "Academico" },null)">Cancelar</a>

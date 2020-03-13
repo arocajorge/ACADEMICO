@@ -18,6 +18,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_PlantillaTipo_Bus busPlantillaTipo = new aca_PlantillaTipo_Bus();
         aca_PlantillaTipo_List Lista_Plantilla = new aca_PlantillaTipo_List();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        aca_PlantillaTipo_Bus bus_tipo_plantilla = new aca_PlantillaTipo_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
@@ -43,6 +44,7 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.Modificar = info.Modificar;
             ViewBag.Anular = info.Anular;
             #endregion
+            cargar_combos();
             return View();
         }
 
@@ -69,14 +71,15 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
             aca_PlantillaTipo_Info model = new aca_PlantillaTipo_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
-                
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
             #region Permisos
             aca_Menu_x_seg_usuario_Info inf = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "PlantillaTipo", "Index");
             if (!inf.Nuevo)
                 return RedirectToAction("Index");
             #endregion
+            cargar_combos();
             return View(model);
         }
 
@@ -84,11 +87,10 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Nuevo(aca_PlantillaTipo_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
-
-            
             if (!busPlantillaTipo.GuardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
+                cargar_combos();
                 return View(model);
             }
             return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdTipoPlantilla = model.IdTipoPlantilla, Exito = true });
@@ -114,8 +116,8 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
-
-            
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            cargar_combos();
             return View(model);
         }
 
@@ -127,10 +129,11 @@ namespace Core.Web.Areas.Academico.Controllers
             if (!busPlantillaTipo.ModificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
-               
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
                 return View(model);
             }
-
+            
             return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdTipoPlantilla = model.IdTipoPlantilla, Exito = true });
         }
 
@@ -144,6 +147,7 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_PlantillaTipo_Info model = busPlantillaTipo.getInfo(IdEmpresa, IdTipoPlantilla);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");
             #region Permisos
@@ -151,7 +155,7 @@ namespace Core.Web.Areas.Academico.Controllers
             if (!info.Anular)
                 return RedirectToAction("Index");
             #endregion
-            
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
@@ -161,11 +165,22 @@ namespace Core.Web.Areas.Academico.Controllers
             if (!busPlantillaTipo.AnularDB(model))
             {
                 ViewBag.mensaje = "No se ha podido anular el registro";
-                
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos();
                 return View(model);
             }
-
+            
             return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region Metodos
+        private void cargar_combos()
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+           
+            var lst_tipo_plantilla = bus_tipo_plantilla.GetList(IdEmpresa, false);
+            ViewBag.lst_tipo_plantilla = lst_tipo_plantilla;
         }
         #endregion
     }
