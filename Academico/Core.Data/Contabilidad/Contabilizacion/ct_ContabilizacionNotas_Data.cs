@@ -36,7 +36,8 @@ namespace Core.Data.Contabilidad.Contabilizacion
                             ct_IdCbteCble = item.ct_IdCbteCble,
                             TotalModulo = item.TotalModulo,
                             TotalContabilidad = item.TotalContabilidad,
-                            Saldo = item.Saldo
+                            Saldo = item.Saldo,
+                            IdString = item.IdSucursal.ToString("0000") + item.IdBodega.ToString("0000") + item.IdNota.ToString("0000000000")
                         });
                     }
                 }

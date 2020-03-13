@@ -35,7 +35,8 @@ namespace Core.Data.Contabilidad.Contabilizacion
                             TotalContabilidad = item.TotalContabilidad,
                             Saldo = item.Saldo,
                             cr_fecha = item.cr_fecha,
-                            cr_ObservacionPantalla = item.cr_ObservacionPantalla
+                            cr_ObservacionPantalla = item.cr_ObservacionPantalla,
+                            IdString = item.IdSucursal.ToString("0000") + item.IdCobro.ToString("0000000000")
                         });
                     }
                 }

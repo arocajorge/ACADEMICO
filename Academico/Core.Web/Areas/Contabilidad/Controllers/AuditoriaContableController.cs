@@ -70,6 +70,89 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             return PartialView("_GridViewPartial_ContaFactura", model);
         }
         #endregion
+
+        #region Nota
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_ContaNota()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaContaNota.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ContaNota", model);
+        }
+        #endregion
+
+        #region Cobro
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_ContaCobro()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaContaCobro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ContaCobro", model);
+        }
+        #endregion
+
+        #region Json
+        public JsonResult ContabilizarFactura(int IdEmpresa=0, string Ids="")
+        {
+            var resultado = "";
+            string[] array = Ids.Split(',');
+            int IdSucursal = 0;
+            int IdBodega = 0;
+            decimal IdCbteVta = 0;
+
+            if (Ids != "")
+            {
+                foreach (var item in array)
+                {
+                    IdSucursal = Convert.ToInt32(item.Substring(0, 4));
+                    IdBodega = Convert.ToInt32(item.Substring(4, 4));
+                    IdCbteVta = Convert.ToDecimal(item.Substring(8, 10));
+                }
+            }
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ContabilizarNota(int IdEmpresa = 0, string Ids = "")
+        {
+            var resultado = "";
+            string[] array = Ids.Split(',');
+            int IdSucursal = 0;
+            int IdBodega = 0;
+            decimal IdNota = 0;
+
+            if (Ids != "")
+            {
+                foreach (var item in array)
+                {
+                    IdSucursal = Convert.ToInt32(item.Substring(0, 4));
+                    IdBodega = Convert.ToInt32(item.Substring(4, 4));
+                    IdNota = Convert.ToDecimal(item.Substring(8, 10));
+                }
+            }
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ContabilizarCobro(int IdEmpresa = 0, string Ids = "")
+        {
+            var resultado = "";
+            string[] array = Ids.Split(',');
+            int IdSucursal = 0;
+            decimal IdCobro = 0;
+
+            if (Ids != "")
+            {
+                foreach (var item in array)
+                {
+                    IdSucursal = Convert.ToInt32(item.Substring(0, 4));
+                    IdCobro = Convert.ToDecimal(item.Substring(4, 10));
+                }
+            }
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 
     public class ct_ContabilizacionFacturas_List

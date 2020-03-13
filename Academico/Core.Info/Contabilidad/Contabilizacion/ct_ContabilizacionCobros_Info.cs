@@ -21,5 +21,7 @@ namespace Core.Info.Contabilidad.Contabilizacion
         public Nullable<decimal> Saldo { get; set; }
         public System.DateTime cr_fecha { get; set; }
         public string cr_ObservacionPantalla { get; set; }
+
+        public string IdString { get; set; }
     }
 }

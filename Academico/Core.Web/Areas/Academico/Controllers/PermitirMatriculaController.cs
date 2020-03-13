@@ -169,7 +169,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 return View(model);
             }
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdPermiso = model.IdPermiso, Exito = true });
+            return RedirectToAction("Modificar","PermitirMatricula", new { IdEmpresa = model.IdEmpresa, IdPermiso = model.IdPermiso, Exito = true });
         }
 
         public ActionResult Modificar(int IdEmpresa = 0, int IdPermiso = 0, bool Exito = false)
@@ -216,7 +216,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdPermiso = model.IdPermiso, Exito = true });
+            return RedirectToAction("Modificar", "PermitirMatricula", new { IdEmpresa = model.IdEmpresa, IdPermiso = model.IdPermiso, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdPermiso = 0)

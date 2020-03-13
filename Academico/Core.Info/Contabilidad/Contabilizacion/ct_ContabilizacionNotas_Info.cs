@@ -22,5 +22,7 @@ namespace Core.Info.Contabilidad.Contabilizacion
         public decimal TotalModulo { get; set; }
         public Nullable<double> TotalContabilidad { get; set; }
         public Nullable<double> Saldo { get; set; }
+
+        public string IdString { get; set; }
     }
 }
