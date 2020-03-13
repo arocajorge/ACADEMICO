@@ -4,7 +4,7 @@
         settings.Name = "GridViewPartial_PlantillaTipo";
         settings.CallbackRouteValues = new { Controller = "PlantillaTipo", Action = "GridViewPartial_PlantillaTipo", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "IdPTipolantilla";
+        settings.KeyFieldName = "IdTipoPlantilla";
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
@@ -64,12 +64,12 @@
                 {
                     if (ViewBag.Modificar == true)
                     {
-                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipolantilla = DataBinder.Eval(tc.DataItem, "IdTipoPlantilla") }));
+                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipoPlantilla = DataBinder.Eval(tc.DataItem, "IdTipoPlantilla") }));
                         ViewContext.Writer.Write("&nbsp;");
                     }
                     if (ViewBag.Anular == true)
                     {
-                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipolantilla = DataBinder.Eval(tc.DataItem, "IdTipoPlantilla") },
+                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdTipoPlantilla = DataBinder.Eval(tc.DataItem, "IdTipoPlantilla") },
                     new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
                     }
                 }
@@ -89,8 +89,8 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdTipolantilla", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("NomPlantilla", "Nombre").Width = Unit.Percentage(80);
+        settings.Columns.Add("IdTipoPlantilla", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomPlantillaTipo", "Nombre Plantilla").Width = Unit.Percentage(80);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";

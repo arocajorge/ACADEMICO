@@ -1,4 +1,4 @@
-﻿@model Core.Info.Academico.aca_PlantillaTipo_Info
+﻿@model Core.Info.Helps.cl_filtros_Info
 @{
     ViewBag.Title = "Tipos de Plantillas";
 
@@ -12,26 +12,8 @@
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
-    //@Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
 
-    <div class="box ">
-        <div class="box-header with-border">
-            <div class="row">
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
-                </div>
-            </div>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fa fa-times"></i>
-                </button>
-            </div>
-        </div>
-        <!-- /.box-body -->
-    </div>
 
     <div class="box">
         <div class="box-header with-border">

@@ -8,6 +8,8 @@ namespace Core.Info.Academico
 {
     public class aca_PlantillaTipo_Info
     {
+        public decimal IdTransaccionSession;
+
         public int IdEmpresa { get; set; }
         public int IdTipoPlantilla { get; set; }
         public string NomPlantillaTipo { get; set; }
