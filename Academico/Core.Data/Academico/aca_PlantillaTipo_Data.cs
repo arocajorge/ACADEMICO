@@ -33,5 +33,88 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public  bool GuardarDB(aca_PlantillaTipo_Info info)
+        {
+            try
+            {
+                EntitiesAcademico dbAca = new EntitiesAcademico();
+                
+                #region Cabecera
+                aca_PlantillaTipo Entity = new aca_PlantillaTipo
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdTipoPlantilla = info.IdTipoPlantilla,
+                    NomPlantillaTipo = info.NomPlantillaTipo,
+                    Estado = true,
+                    IdUsuarioCreacion = info.IdUsuarioCreacion,
+                    FechaCreacion =DateTime.Now,
+
+                };
+
+                #endregion
+                dbAca.aca_PlantillaTipo.Add(Entity);
+                dbAca.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool ModificarDB(aca_PlantillaTipo_Info info)
+        {
+            try
+            {
+                EntitiesAcademico dbAca = new EntitiesAcademico();
+
+                #region Cabecera
+                var Entity = dbAca.aca_PlantillaTipo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoPlantilla == info.IdTipoPlantilla).FirstOrDefault();
+                if (Entity == null)
+                    return false;
+
+                Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                Entity.FechaModificacion = DateTime.Now;
+                #endregion
+                dbAca.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool AnularDB(aca_PlantillaTipo_Info info)
+        {
+            try
+            {
+                EntitiesAcademico dbAca = new EntitiesAcademico();
+
+                #region Cabecera
+                var Entity = dbAca.aca_PlantillaTipo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoPlantilla == info.IdTipoPlantilla).FirstOrDefault();
+                if (Entity == null)
+                    return false;
+
+                Entity.Estado = false;
+                Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
+                Entity.FechaAnulacion = DateTime.Now;
+                Entity.MotivoAnulacion = info.MotivoAnulacion;
+                #endregion
+                dbAca.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
     }
 }
