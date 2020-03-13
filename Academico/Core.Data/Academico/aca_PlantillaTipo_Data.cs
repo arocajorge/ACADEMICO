@@ -33,5 +33,40 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public  bool GuardarDB(aca_PlantillaTipo_Info info)
+        {
+            try
+            {
+                EntitiesAcademico dbAca = new EntitiesAcademico();
+                
+                #region Cabecera
+                aca_PlantillaTipo Entity = new aca_PlantillaTipo
+                {
+                    IdEmpresa = info.IdEmpresa,
+                    IdTipoPlantilla = info.IdTipoPlantilla,
+                    NomPlantillaTipo = info.NomPlantillaTipo,
+                    Estado = true,
+                    IdUsuarioCreacion = info.IdUsuarioCreacion,
+                    FechaCreacion =DateTime.Now,
+
+                };
+
+                #endregion
+                dbAca.aca_PlantillaTipo.Add(Entity);
+                dbAca.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        //public bool
+
+
     }
 }
