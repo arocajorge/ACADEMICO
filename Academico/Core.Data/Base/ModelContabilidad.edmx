@@ -223,7 +223,7 @@
           <Property Name="MotivoAnulacion" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_anio_fiscal_x_cuenta_utilidad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_anio_fiscal_x_cuenta_utilidad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwct_anio_fiscal_x_cuenta_utilidad">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -243,7 +243,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_anio_fiscal_x_cuenta_ut
           <Property Name="gc_GrupoCble" Type="char" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_anio_fiscal_x_tb_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_anio_fiscal_x_tb_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwct_anio_fiscal_x_tb_sucursal">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -262,7 +262,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_anio_fiscal_x_tb_sucurs
           <Property Name="cb_Observacion" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_anio_fiscal_x_tb_sucursal_SinCierre' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_anio_fiscal_x_tb_sucursal_SinCierre' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwct_anio_fiscal_x_tb_sucursal_SinCierre">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -274,7 +274,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_anio_fiscal_x_tb_sucurs
           <Property Name="IdSucursal" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_cbtecble' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwct_cbtecble">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -302,7 +302,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble' no tiene defi
           <Property Name="tc_TipoCbte" Type="char" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble_con_ctacble_acreedora' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_cbtecble_con_ctacble_acreedora' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwct_cbtecble_con_ctacble_acreedora">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -315,7 +315,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble_con_ctacble_ac
           <Property Name="IdCtaCble_Acreedora" Type="varchar" MaxLength="20" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_cbtecble_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwct_cbtecble_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -340,7 +340,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_cbtecble_det' no tiene 
           <Property Name="IdCentroCosto" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_CierrePorModuloPorSucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_CierrePorModuloPorSucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwct_CierrePorModuloPorSucursal">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -364,7 +364,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_CierrePorModuloPorSucur
           <Property Name="Cerrado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_periodo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwct_periodo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -401,34 +401,6 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
             </Principal>
             <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
               <PropertyRef Name="IdanioFiscal" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
-          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="0..1" />
-          <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_plancta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Principal>
-            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta1">
-          <End Role="ct_plancta" Type="Self.ct_plancta" Multiplicity="0..1" />
-          <End Role="ct_anio_fiscal_x_cuenta_utilidad" Type="Self.ct_anio_fiscal_x_cuenta_utilidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_plancta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCtaCble" />
-            </Principal>
-            <Dependent Role="ct_anio_fiscal_x_cuenta_utilidad">
-              <PropertyRef Name="IdanioFiscal" />
-              <PropertyRef Name="IdCtaCbleCierre" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -646,6 +618,21 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SPACA_ContabilizacionCobros" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="FechaIni" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SPACA_ContabilizacionFacturas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="FechaIni" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SPACA_ContabilizacionNotas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="FechaIni" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelContabilidadStoreContainer">
           <EntitySet Name="ct_anio_fiscal" EntityType="Self.ct_anio_fiscal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ct_anio_fiscal_x_cuenta_utilidad" EntityType="Self.ct_anio_fiscal_x_cuenta_utilidad" Schema="dbo" store:Type="Tables" />
@@ -763,14 +750,6 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
           </EntitySet>
           <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_anio_fiscal">
             <End Role="ct_anio_fiscal" EntitySet="ct_anio_fiscal" />
-            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta">
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
-            <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta1" Association="Self.FK_ct_anio_fiscal_x_cuenta_utilidad_ct_plancta1">
-            <End Role="ct_plancta" EntitySet="ct_plancta" />
             <End Role="ct_anio_fiscal_x_cuenta_utilidad" EntitySet="ct_anio_fiscal_x_cuenta_utilidad" />
           </AssociationSet>
           <AssociationSet Name="FK_ct_anio_fiscal_x_tb_sucursal_ct_anio_fiscal_x_cuenta_utilidad" Association="Self.FK_ct_anio_fiscal_x_tb_sucursal_ct_anio_fiscal_x_cuenta_utilidad">
@@ -1000,6 +979,21 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
             <End Role="ct_periodo" EntitySet="ct_periodo" />
             <End Role="ct_periodo_x_tb_modulo" EntitySet="ct_periodo_x_tb_modulo" />
           </AssociationSet>
+          <FunctionImport Name="SPACA_ContabilizacionCobros" ReturnType="Collection(ModelContabilidad.SPACA_ContabilizacionCobros_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SPACA_ContabilizacionFacturas" ReturnType="Collection(ModelContabilidad.SPACA_ContabilizacionFacturas_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SPACA_ContabilizacionNotas" ReturnType="Collection(ModelContabilidad.SPACA_ContabilizacionNotas_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="ct_periodo">
           <Key>
@@ -1595,6 +1589,56 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SPACA_ContabilizacionCobros_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="Decimal" Name="IdCobro" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="IdCobro_tipo" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="ct_IdEmpresa" Nullable="true" />
+          <Property Type="Int32" Name="ct_IdTipoCbte" Nullable="true" />
+          <Property Type="Decimal" Name="ct_IdCbteCble" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Double" Name="TotalModulo" Nullable="false" />
+          <Property Type="Double" Name="TotalContabilidad" Nullable="true" />
+          <Property Type="Decimal" Name="Saldo" Nullable="true" Precision="19" />
+          <Property Type="DateTime" Name="cr_fecha" Nullable="false" Precision="23" />
+          <Property Type="String" Name="cr_ObservacionPantalla" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SPACA_ContabilizacionFacturas_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="Int32" Name="IdBodega" Nullable="false" />
+          <Property Type="Decimal" Name="IdCbteVta" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="vt_NumFactura" Nullable="true" MaxLength="28" />
+          <Property Type="String" Name="Alumno" Nullable="false" MaxLength="200" />
+          <Property Type="DateTime" Name="vt_fecha" Nullable="false" Precision="23" />
+          <Property Type="String" Name="vt_Observacion" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="IdCtaCbleDebe" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IdCtaCbleHaber" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="ct_IdEmpresa" Nullable="true" />
+          <Property Type="Int32" Name="ct_IdTipoCbte" Nullable="true" />
+          <Property Type="Decimal" Name="ct_IdCbteCble" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="IdCtaCble" Nullable="true" MaxLength="20" />
+          <Property Type="Decimal" Name="TotalModulo" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Double" Name="TotalContable" Nullable="false" />
+          <Property Type="Decimal" Name="Diferencia" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="SPACA_ContabilizacionNotas_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="Int32" Name="IdBodega" Nullable="false" />
+          <Property Type="Decimal" Name="IdNota" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="no_fecha" Nullable="false" Precision="23" />
+          <Property Type="String" Name="sc_observacion" Nullable="true" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="No_Descripcion" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="ct_IdEmpresa" Nullable="true" />
+          <Property Type="Int32" Name="ct_IdTipoCbte" Nullable="true" />
+          <Property Type="Decimal" Name="ct_IdCbteCble" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="TotalModulo" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Double" Name="TotalContabilidad" Nullable="true" />
+          <Property Type="Double" Name="Saldo" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1928,6 +1972,68 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwct_periodo' no tiene defin
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_ContabilizacionCobros" FunctionName="ModelContabilidad.Store.SPACA_ContabilizacionCobros">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelContabilidad.SPACA_ContabilizacionCobros_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
+                <ScalarProperty Name="ct_IdEmpresa" ColumnName="ct_IdEmpresa" />
+                <ScalarProperty Name="ct_IdTipoCbte" ColumnName="ct_IdTipoCbte" />
+                <ScalarProperty Name="ct_IdCbteCble" ColumnName="ct_IdCbteCble" />
+                <ScalarProperty Name="TotalModulo" ColumnName="TotalModulo" />
+                <ScalarProperty Name="TotalContabilidad" ColumnName="TotalContabilidad" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="cr_fecha" ColumnName="cr_fecha" />
+                <ScalarProperty Name="cr_ObservacionPantalla" ColumnName="cr_ObservacionPantalla" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_ContabilizacionFacturas" FunctionName="ModelContabilidad.Store.SPACA_ContabilizacionFacturas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelContabilidad.SPACA_ContabilizacionFacturas_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="Alumno" ColumnName="Alumno" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="vt_Observacion" ColumnName="vt_Observacion" />
+                <ScalarProperty Name="IdCtaCbleDebe" ColumnName="IdCtaCbleDebe" />
+                <ScalarProperty Name="IdCtaCbleHaber" ColumnName="IdCtaCbleHaber" />
+                <ScalarProperty Name="ct_IdEmpresa" ColumnName="ct_IdEmpresa" />
+                <ScalarProperty Name="ct_IdTipoCbte" ColumnName="ct_IdTipoCbte" />
+                <ScalarProperty Name="ct_IdCbteCble" ColumnName="ct_IdCbteCble" />
+                <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
+                <ScalarProperty Name="TotalModulo" ColumnName="TotalModulo" />
+                <ScalarProperty Name="TotalContable" ColumnName="TotalContable" />
+                <ScalarProperty Name="Diferencia" ColumnName="Diferencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_ContabilizacionNotas" FunctionName="ModelContabilidad.Store.SPACA_ContabilizacionNotas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelContabilidad.SPACA_ContabilizacionNotas_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdNota" ColumnName="IdNota" />
+                <ScalarProperty Name="no_fecha" ColumnName="no_fecha" />
+                <ScalarProperty Name="sc_observacion" ColumnName="sc_observacion" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="No_Descripcion" ColumnName="No_Descripcion" />
+                <ScalarProperty Name="ct_IdEmpresa" ColumnName="ct_IdEmpresa" />
+                <ScalarProperty Name="ct_IdTipoCbte" ColumnName="ct_IdTipoCbte" />
+                <ScalarProperty Name="ct_IdCbteCble" ColumnName="ct_IdCbteCble" />
+                <ScalarProperty Name="TotalModulo" ColumnName="TotalModulo" />
+                <ScalarProperty Name="TotalContabilidad" ColumnName="TotalContabilidad" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
