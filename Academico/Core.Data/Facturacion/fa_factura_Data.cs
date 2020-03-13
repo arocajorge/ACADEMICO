@@ -749,9 +749,7 @@ namespace Core.Data.Facturacion
                     factura.lst_det = odata_det.get_list(factura.IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
                 }
                 var parametro = db.fa_parametro.Where(q => q.IdEmpresa == factura.IdEmpresa).FirstOrDefault();
-                var cliente = db.fa_cliente.Where(q => q.IdEmpresa == factura.IdEmpresa && q.IdCliente == factura.IdCliente).FirstOrDefault();
-                if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito))
-                {
+                
                     var conta = db.fa_factura_x_ct_cbtecble.Where(q => q.vt_IdEmpresa == factura.IdEmpresa && q.vt_IdSucursal == factura.IdSucursal && q.vt_IdBodega == factura.IdBodega && q.vt_IdCbteVta == factura.IdCbteVta).FirstOrDefault();
                     if (conta == null)
                     {
@@ -786,7 +784,7 @@ namespace Core.Data.Facturacion
                             return true;
                         }
                     }
-                }
+                
 
                 db.Dispose();
                 return false;

@@ -280,6 +280,7 @@
     <Compile Include="Areas\Caja\Controllers\TipoMovimientoCajaController.cs" />
     <Compile Include="Areas\Contabilidad\ContabilidadAreaRegistration.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\AnioFiscalController.cs" />
+    <Compile Include="Areas\Contabilidad\Controllers\AuditoriaContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\CierrePorModuloPorSucursalController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ComprobanteContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\PeriodoContableController.cs" />
@@ -8485,6 +8486,7 @@
     <Folder Include="Areas\Banco\Views\ArchivoBancario\" />
     <Folder Include="Areas\Caja\Models\" />
     <Folder Include="Areas\Contabilidad\Models\" />
+    <Folder Include="Areas\Contabilidad\Views\AuditoriaContable\" />
     <Folder Include="Areas\Contabilidad\Views\PlanDeCuentas\" />
     <Folder Include="Areas\CuentasPorCobrar\Models\" />
     <Folder Include="Areas\CuentasPorPagar\Models\" />

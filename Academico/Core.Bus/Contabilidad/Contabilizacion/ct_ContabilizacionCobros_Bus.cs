@@ -12,7 +12,7 @@ namespace Core.Bus.Contabilidad.Contabilizacion
     {
         ct_ContabilizacionCobros_Data odata = new ct_ContabilizacionCobros_Data();
 
-        List<ct_ContabilizacionCobros_Info> GetList(int IdEmpresa, DateTime FechaIni, DateTime FechaFin)
+        public List<ct_ContabilizacionCobros_Info> GetList(int IdEmpresa, DateTime FechaIni, DateTime FechaFin)
         {
             try
             {
