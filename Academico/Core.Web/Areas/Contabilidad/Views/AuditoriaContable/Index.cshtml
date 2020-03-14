@@ -95,8 +95,11 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                var url = '@Url.Action("Index", "AuditoriaContable")';
-                window.location.href = url;
+                if (data=="")
+                {
+                    var url = '@Url.Action("Index", "AuditoriaContable")';
+                    window.location.href = url;
+                }
             },
             error: function (error) {
             }
@@ -132,6 +135,14 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
 
     <div class="box">
         <div class="box-header with-border">

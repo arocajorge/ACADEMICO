@@ -26,6 +26,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         ct_ContabilizacionFacturas_List ListaContaFactura = new ct_ContabilizacionFacturas_List();
         ct_ContabilizacionCobros_List ListaContaCobro = new ct_ContabilizacionCobros_List();
         ct_ContabilizacionNotas_List ListaContaNota = new ct_ContabilizacionNotas_List();
+        string mensaje = string.Empty;
         #endregion
 
         #region Index
@@ -107,6 +108,13 @@ namespace Core.Web.Areas.Contabilidad.Controllers
                     IdSucursal = Convert.ToInt32(item.Substring(0, 4));
                     IdBodega = Convert.ToInt32(item.Substring(4, 4));
                     IdCbteVta = Convert.ToDecimal(item.Substring(8, 10));
+
+                    if (!busFactura.Contabilizar(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, ""))
+                    {
+                        mensaje = "No se ha contabilizado las facturas";
+                        ViewBag.mensaje = mensaje;
+                        resultado = mensaje;
+                    }
                 }
             }
 
