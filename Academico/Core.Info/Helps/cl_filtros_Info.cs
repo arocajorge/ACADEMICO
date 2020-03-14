@@ -262,7 +262,7 @@ namespace Core.Info.Helps
         public int IdAnio { get; set; }
         public string IdCobro_tipo { get; set; }
         public int[] IntArray { get; set; }
-        public int IdTipoNota { get; set; }
+        public int? IdTipoNota { get; set; }
         public string CreDeb { get; set; }
         public string NaturalezaNota { get; set; }
         public decimal IdAlumno { get; set; }
