@@ -16,18 +16,13 @@ namespace Core.Info.Academico
         public Nullable<decimal> CalificacionP2 { get; set; }
         public Nullable<decimal> CalificacionP3 { get; set; }
         public Nullable<decimal> PromedioQ1 { get; set; }
-        public Nullable<decimal> ExamenQ1 { get; set; }
         public Nullable<decimal> PromedioFinalQ1 { get; set; }
         public Nullable<decimal> CalificacionP4 { get; set; }
         public Nullable<decimal> CalificacionP5 { get; set; }
         public Nullable<decimal> CalificacionP6 { get; set; }
         public Nullable<decimal> PromedioQ2 { get; set; }
-        public Nullable<decimal> ExamenQ2 { get; set; }
         public Nullable<decimal> PromedioFinalQ2 { get; set; }
-        public Nullable<decimal> ExamenMejoramiento { get; set; }
-        public Nullable<decimal> ExamenSupletorio { get; set; }
-        public Nullable<decimal> ExamenRemedial { get; set; }
-        public Nullable<decimal> ExamenGracia { get; set; }
+        public Nullable<decimal> PromedioGeneral { get; set; }
         public Nullable<decimal> PromedioFinal { get; set; }
     }
 }

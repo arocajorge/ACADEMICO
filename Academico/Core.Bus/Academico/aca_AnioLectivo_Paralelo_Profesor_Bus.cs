@@ -48,5 +48,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public List<aca_AnioLectivo_Paralelo_Profesor_Info> GetList_Compartidas(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo)
+        {
+            try
+            {
+                return odata.get_list_compartidas(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

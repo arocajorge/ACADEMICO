@@ -225,6 +225,22 @@ namespace Core.Data.Academico
                         IdEmpleado = info.IdEmpleado
                     };
                     Context.aca_Matricula.Add(Entity);
+                    /*
+                    if (info.lst_calificacion_parcial.Count > 0)
+                    {
+                        foreach (var item in info.lst_calificacion_parcial)
+                        {
+                            aca_MatriculaCalificacionParcial Entity_CalificacionParcial = new aca_MatriculaCalificacionParcial
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdMatricula = info.IdMatricula,
+                                IdMateria = item.IdMateria,
+                                IdProfesor = item.IdProfesor,
+                                Parcial = item.Parcial
+                            };
+                            Context.aca_MatriculaCalificacionParcial.Add(Entity_CalificacionParcial);
+                        }
+                    }
 
                     if (info.lst_calificacion.Count > 0)
                     {
@@ -255,7 +271,7 @@ namespace Core.Data.Academico
                             Context.aca_MatriculaConducta.Add(Entity_Conducta);
                         }
                     }
-
+                    */
                     if (info.lst_MatriculaRubro.Count > 0)
                     {
                         foreach (var item in info.lst_MatriculaRubro)
@@ -282,21 +298,6 @@ namespace Core.Data.Academico
                         }
                     }
 
-                    //if (info.lst_documentos.Count > 0)
-                    //{
-                    //    foreach (var item in info.lst_documentos)
-                    //    {
-                    //        aca_AlumnoDocumento Entity_DetDoc = new aca_AlumnoDocumento
-                    //        {
-                    //            IdEmpresa = item.IdEmpresa,
-                    //            IdAlumno = item.IdAlumno,
-                    //            Secuencia = item.Secuencia,
-                    //            IdDocumento = item.IdDocumento,
-                    //            EnArchivo = true
-                    //        };
-                    //        Context.aca_AlumnoDocumento.Add(Entity_DetDoc);
-                    //    }
-                    //}
                     #region Documentos por alumno
                     //Obtengo lista de documentos por curso
                     var Secuencia = odata_AlumnoDocumento.getSecuencia(info.IdEmpresa, info.IdAlumno);
@@ -649,6 +650,39 @@ namespace Core.Data.Academico
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public List<aca_Matricula_Info> getList_Calificaciones(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno)
+        {
+            try
+            {
+                List<aca_Matricula_Info> Lista = new List<aca_Matricula_Info>();
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
+                    && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo && q.IdAlumno== IdAlumno).Select(q => new aca_Matricula_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdAnio=q.IdAnio,
+                        IdSede=q.IdSede,
+                        IdNivel=q.IdNivel,
+                        IdJornada=q.IdJornada,
+                        IdCurso = q.IdCurso,
+                        IdParalelo = q.IdParalelo,
+                        IdMatricula = q.IdMatricula,
+                        IdAlumno=q.IdAlumno,
+                        Fecha = q.Fecha,
+                        pe_cedulaRuc = q.pe_cedulaRuc,
+                        pe_nombreCompleto = q.pe_nombreCompleto|
+                    }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

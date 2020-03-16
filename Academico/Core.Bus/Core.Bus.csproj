@@ -46,6 +46,7 @@
     <Compile Include="Academico\aca_Alumno_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivoCalificacionHistorico_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivoConductaEquivalencia_Bus.cs" />
+    <Compile Include="Academico\aca_AnioLectivoParcial_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Bus.cs" />
@@ -63,6 +64,8 @@
     <Compile Include="Academico\aca_CatalogoTipoFicha_Bus.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Bus.cs" />
     <Compile Include="Academico\aca_Catalogo_Bus.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacionParcial_Bus.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacion_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Bus.cs" />
     <Compile Include="Academico\aca_Curso_Bus.cs" />
     <Compile Include="Academico\aca_Documento_Bus.cs" />
@@ -73,6 +76,7 @@
     <Compile Include="Academico\aca_Materia_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaCondicionalParrafo_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Det_Bus.cs" />
+    <Compile Include="Academico\aca_MatriculaConducta_Bus.cs" />
     <Compile Include="Academico\aca_Matricula_Bus.cs" />
     <Compile Include="Academico\aca_Matricula_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_MecanismoDePago_Bus.cs" />

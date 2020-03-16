@@ -30,5 +30,17 @@ namespace Core.Info.Academico
         public Nullable<decimal> ExamenRemedial { get; set; }
         public Nullable<decimal> ExamenGracia { get; set; }
         public Nullable<decimal> PromedioFinal { get; set; }
+
+        #region Campos que no existen en la tabla
+        public int IdAnio { get; set; }
+        public int IdSede { get; set; }
+        public int IdNivel { get; set; }
+        public int IdJornada { get; set; }
+        public int IdCurso { get; set; }
+        public int IdParalelo { get; set; }
+        public decimal IdAlumno { get; set; }
+        public string pe_nombreCompletoAlumno { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        #endregion
     }
 }

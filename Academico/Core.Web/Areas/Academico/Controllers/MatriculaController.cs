@@ -61,6 +61,7 @@ namespace Core.Web.Areas.Academico.Controllers
         fa_notaCreDeb_Bus bus_notaDebCre = new fa_notaCreDeb_Bus();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+        aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         string mensajeInfo = string.Empty;
@@ -759,12 +760,30 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 #region Calificacion y conducta
                 var lst_materias_x_curso = bus_materias_x_paralelo.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
+                var lst_parcial = bus_parcial.GetList(IdEmpresa, IdSede, IdAnio);
+                info_matricula.lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
                 info_matricula.lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
                 info_matricula.lst_conducta = new List<aca_MatriculaConducta_Info>();
                 if (lst_materias_x_curso != null && lst_materias_x_curso.Count > 0)
                 {
                     foreach (var item in lst_materias_x_curso)
                     {
+                        if (lst_parcial!=null)
+                        {
+                            foreach (var item_p in lst_parcial)
+                            {
+                                var info_calificacion_parcial = new aca_MatriculaCalificacionParcial_Info
+                                {
+                                    IdProfesor = item.IdProfesor,
+                                    IdMateria = item.IdMateria,
+                                    Parcial = item_p.Parcial
+                                };
+
+                                info_matricula.lst_calificacion_parcial.Add(info_calificacion_parcial);
+
+                            }
+                        }
+                        
                         var info_calificacion = new aca_MatriculaCalificacion_Info
                         {
                             IdProfesor = item.IdProfesor,
@@ -783,6 +802,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     }
                 }
                 #endregion
+
                 var personaRep = bus_persona.get_info(info_matricula.IdPersonaF);
                 var ExisteCliente = bus_cliente.get_info_x_num_cedula(info_matricula.IdEmpresa, (personaRep==null ? "": personaRep.pe_cedulaRuc));
 

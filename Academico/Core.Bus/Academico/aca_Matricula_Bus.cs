@@ -127,5 +127,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public List<aca_Matricula_Info> GetList_Calificaciones(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.getList_Calificaciones(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

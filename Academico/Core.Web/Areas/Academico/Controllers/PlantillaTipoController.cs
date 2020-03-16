@@ -45,7 +45,7 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.Anular = info.Anular;
             #endregion
             
-            return View();
+            return View(model);
         }
 
         [ValidateInput(false)]

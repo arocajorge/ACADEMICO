@@ -226,10 +226,12 @@
     <Compile Include="Areas\Academico\Controllers\DocumentoController.cs" />
     <Compile Include="Areas\Academico\Controllers\DocumentoPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\JornadaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\MateriaCompartidaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaGrupoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaPorProfesorController.cs" />
+    <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalParrafoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaController.cs" />
@@ -8448,6 +8450,16 @@
     <Content Include="Areas\Academico\Views\PlantillaTipo\Nuevo.cshtml" />
     <Content Include="Areas\Academico\Views\PlantillaTipo\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\PlantillaTipo\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaCompartida\_CmbProfesor.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaCompartida\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaCompartida\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaCompartida\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaCompartida\_ComboBoxPartial_Materia.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaCompartida\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaCompartida\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaCompartida\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaCompartida\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\MateriaCompartida\_GridViewPartial_MateriaCompartida.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8492,6 +8504,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
+    <Folder Include="Areas\Academico\Views\MatriculaCalificacion\" />
     <Folder Include="Areas\Banco\Models\" />
     <Folder Include="Areas\Banco\Views\ArchivoBancario\" />
     <Folder Include="Areas\Caja\Models\" />

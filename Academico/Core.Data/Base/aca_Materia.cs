@@ -19,6 +19,7 @@ namespace Core.Data.Base
         {
             this.aca_AnioLectivo_Curso_Materia = new HashSet<aca_AnioLectivo_Curso_Materia>();
             this.aca_AnioLectivo_Paralelo_Profesor = new HashSet<aca_AnioLectivo_Paralelo_Profesor>();
+            this.aca_MatriculaCalificacionParcial = new HashSet<aca_MatriculaCalificacionParcial>();
         }
     
         public int IdEmpresa { get; set; }
@@ -43,5 +44,7 @@ namespace Core.Data.Base
         public virtual ICollection<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
         public virtual aca_MateriaArea aca_MateriaArea { get; set; }
         public virtual aca_MateriaGrupo aca_MateriaGrupo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_MatriculaCalificacionParcial> aca_MatriculaCalificacionParcial { get; set; }
     }
 }

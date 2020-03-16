@@ -57,6 +57,7 @@
     <Compile Include="Academico\aca_Alumno_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivoCalificacionHistorico_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivoConductaEquivalencia_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivoParcial_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Data.cs" />
@@ -74,6 +75,8 @@
     <Compile Include="Academico\aca_CatalogoTipoFicha_Data.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Data.cs" />
     <Compile Include="Academico\aca_Catalogo_Data.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacionParcial_Data.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacion_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Data.cs" />
     <Compile Include="Academico\aca_Curso_Data.cs" />
     <Compile Include="Academico\aca_Documento_Data.cs" />
@@ -85,6 +88,7 @@
     <Compile Include="Academico\aca_MatriculaCambios_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCondicionalParrafo_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Det_Data.cs" />
+    <Compile Include="Academico\aca_MatriculaConducta_Data.cs" />
     <Compile Include="Academico\aca_Matricula_Data.cs" />
     <Compile Include="Academico\aca_Matricula_Rubro_Data.cs" />
     <Compile Include="Academico\aca_MecanismoDePago_Data.cs" />
@@ -101,10 +105,16 @@
     <Compile Include="Academico\aca_Reporte_Data.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Data.cs" />
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Data.cs" />
+    <Compile Include="Base\aca_AnioLectivoParcial.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_MateriaArea.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Matricula.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_MatriculaCalificacionParcial.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MatriculaCambios.cs">
@@ -231,6 +241,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Materia.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_MatriculaCalificacion.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_MatriculaCondicional.cs">
