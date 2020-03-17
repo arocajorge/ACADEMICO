@@ -21,9 +21,11 @@ namespace Core.Data.Base
         public int IdJornada { get; set; }
         public int IdCurso { get; set; }
         public int IdParalelo { get; set; }
-        public string pe_nombreCompleto { get; set; }
-        public string pe_cedulaRuc { get; set; }
         public decimal IdMatricula { get; set; }
+        public decimal IdAlumno { get; set; }
+        public string Codigo { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string pe_nombreCompleto { get; set; }
         public System.DateTime Fecha { get; set; }
     }
 }

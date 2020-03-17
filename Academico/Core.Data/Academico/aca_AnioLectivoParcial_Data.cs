@@ -27,7 +27,7 @@ namespace Core.Data.Academico
                             IdEmpresa = q.IdEmpresa,
                             IdSede = q.IdSede,
                             IdAnio = q.IdAnio,
-                            Parcial = q.Parcial,
+                            IdCatalogoParcial = q.IdCatalogoParcial,
                             FechaInicio = q.FechaInicio,
                             FechaFin = q.FechaFin
                         });

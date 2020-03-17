@@ -761,6 +761,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 #region Calificacion y conducta
                 var lst_materias_x_curso = bus_materias_x_paralelo.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
                 var lst_parcial = bus_parcial.GetList(IdEmpresa, IdSede, IdAnio);
+                /*
                 info_matricula.lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
                 info_matricula.lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
                 info_matricula.lst_conducta = new List<aca_MatriculaConducta_Info>();
@@ -801,6 +802,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         info_matricula.lst_conducta.Add(info_conducta);
                     }
                 }
+                */
                 #endregion
 
                 var personaRep = bus_persona.get_info(info_matricula.IdPersonaF);

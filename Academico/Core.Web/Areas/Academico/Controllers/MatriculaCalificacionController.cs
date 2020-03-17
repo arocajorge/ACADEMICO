@@ -103,7 +103,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                         IdEmpresa = item.IdEmpresa,
                                         IdMatricula=item.IdMatricula,
                                         IdMateria = item_materias.IdMateria,
-                                        Parcial = item_p.Parcial,
+                                        IdCatalogoParcial = item_p.IdCatalogoParcial,
                                         IdProfesor = item_materias.IdProfesor
                                     };
 
@@ -200,7 +200,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
         }
 
-        public ActionResult ComboBoxPartial_Materia()
+        public ActionResult ComboBoxPartial_Alumno()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
@@ -208,7 +208,7 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
             int IdCurso = (Request.Params["IdCurso"] != null) ? int.Parse(Request.Params["IdCurso"]) : -1;
             var IdParalelo = (Request.Params["IdParalelo"] != null) ? int.Parse(Request.Params["IdParalelo"]) : -1;
-            return PartialView("_ComboBoxPartial_Materia", new aca_AnioLectivo_Paralelo_Profesor_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso, IdParalelo = IdParalelo });
+            return PartialView("_ComboBoxPartial_Alumno", new aca_Matricula_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso, IdParalelo = IdParalelo });
         }
         #endregion
     }

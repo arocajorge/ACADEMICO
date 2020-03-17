@@ -75,10 +75,11 @@ namespace Core.Info.Academico
         public string vt_NumFactura { get; set; }
 
         public string ObservacionCambio { get; set; }
-
+        /*
         public List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial { get; set; }
         public List<aca_MatriculaCalificacion_Info> lst_calificacion { get; set; }
         public List<aca_MatriculaConducta_Info> lst_conducta { get; set; }
+        */
         public aca_MatriculaCambios_Info info_MatriculaCambios { get; set; }
         #endregion
     }

@@ -27,7 +27,7 @@ namespace Core.Data.Academico
                             IdEmpresa = q.IdEmpresa,
                             IdMatricula = q.IdMatricula,
                             IdMateria = q.IdMateria,
-                            Parcial = q.Parcial,
+                            IdCatalogoParcial = q.IdCatalogoParcial,
                             IdProfesor = q.IdProfesor,
                             Calificacion1 = q.Calificacion1,
                             Calificacion2 = q.Calificacion2,

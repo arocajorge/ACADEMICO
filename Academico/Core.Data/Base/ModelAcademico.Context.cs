@@ -42,7 +42,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_AnioLectivo_Rubro> vwaca_AnioLectivo_Rubro { get; set; }
         public virtual DbSet<aca_Plantilla_Rubro> aca_Plantilla_Rubro { get; set; }
         public virtual DbSet<vwaca_Plantilla_Rubro> vwaca_Plantilla_Rubro { get; set; }
-        public virtual DbSet<vwaca_Matricula_AlumnosPorParalelo> vwaca_Matricula_AlumnosPorParalelo { get; set; }
         public virtual DbSet<aca_AnioLectivo_Periodo> aca_AnioLectivo_Periodo { get; set; }
         public virtual DbSet<aca_Profesor> aca_Profesor { get; set; }
         public virtual DbSet<aca_AnioLectivo_Curso_Documento> aca_AnioLectivo_Curso_Documento { get; set; }
@@ -107,9 +106,10 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Plantilla> aca_Plantilla { get; set; }
         public virtual DbSet<aca_PlantillaTipo> aca_PlantillaTipo { get; set; }
         public virtual DbSet<aca_MatriculaConducta> aca_MatriculaConducta { get; set; }
-        public virtual DbSet<aca_MatriculaCalificacionParcial> aca_MatriculaCalificacionParcial { get; set; }
-        public virtual DbSet<aca_AnioLectivoParcial> aca_AnioLectivoParcial { get; set; }
         public virtual DbSet<vwaca_MatriculaCalificacion> vwaca_MatriculaCalificacion { get; set; }
+        public virtual DbSet<aca_AnioLectivoParcial> aca_AnioLectivoParcial { get; set; }
+        public virtual DbSet<aca_MatriculaCalificacionParcial> aca_MatriculaCalificacionParcial { get; set; }
+        public virtual DbSet<vwaca_Matricula_AlumnosPorParalelo> vwaca_Matricula_AlumnosPorParalelo { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

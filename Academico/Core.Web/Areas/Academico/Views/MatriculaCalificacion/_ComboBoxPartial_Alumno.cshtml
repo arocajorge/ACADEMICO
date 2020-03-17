@@ -1,0 +1,20 @@
+﻿@Html.DevExpress().ComboBox(settings =>
+{
+    settings.Name = "IdAlumno";
+    settings.CallbackRouteValues = new { Controller = "MatriculaCalificacion", Action = "ComboBoxPartial_Alumno", Area = "Academico" };
+    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+    settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+    settings.Properties.TextField = "pe_nombreCompleto";
+    settings.Properties.TextFormatString = "[{0}] {1} - {2}";
+    settings.Properties.Columns.Add("IdAlumno", "ID", 10);
+    settings.Properties.Columns.Add("Codigo", "Codigo", 20);
+    settings.Properties.Columns.Add("pe_nombreCompleto", "Alumno", 70);
+    //Campo ID
+    settings.Properties.ValueField = "IdAlumno";
+    settings.Properties.ValueType = typeof(decimal);
+    settings.Properties.TextField = "pe_nombreCompleto";
+    settings.Properties.NullText = "== Seleccione ==";
+    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+    settings.Properties.AllowMouseWheel = false;
+    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue(); e.customArgs['IdSede'] = IdSede.GetValue(); e.customArgs['IdNivel'] = IdNivel.GetValue(); e.customArgs['IdJornada'] = IdJornada.GetValue(); e.customArgs['IdCurso'] = IdCurso.GetValue(); e.customArgs['IdParalelo'] = IdParalelo.GetValue();}";
+}).BindList(new Core.Bus.Academico.aca_Matricula_Bus().GetList_PorCurso(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAnio, Model.IdSede, Model.IdNivel, Model.IdJornada, Model.IdCurso, Model.IdParalelo)).Bind(Model.IdAlumno).GetHtml()

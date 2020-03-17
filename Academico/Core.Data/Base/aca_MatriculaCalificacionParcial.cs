@@ -17,7 +17,7 @@ namespace Core.Data.Base
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
         public int IdMateria { get; set; }
-        public string Parcial { get; set; }
+        public int IdCatalogoParcial { get; set; }
         public Nullable<decimal> IdProfesor { get; set; }
         public Nullable<decimal> Calificacion1 { get; set; }
         public Nullable<decimal> Calificacion2 { get; set; }
@@ -31,6 +31,7 @@ namespace Core.Data.Base
         public string MotivoConducta { get; set; }
         public string AccionRemedial { get; set; }
     
+        public virtual aca_Catalogo aca_Catalogo { get; set; }
         public virtual aca_Materia aca_Materia { get; set; }
         public virtual aca_Matricula aca_Matricula { get; set; }
         public virtual aca_Profesor aca_Profesor { get; set; }

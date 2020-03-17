@@ -65,15 +65,23 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.vwaca_Matricula_AlumnosPorParalelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede 
-                    && q.IdNivel== IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).Select(q => new aca_Matricula_Info
+                    var lst = Context.vwaca_Matricula_AlumnosPorParalelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
+                    && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).OrderBy(q => q.pe_nombreCompleto).ToList();
+
+                    foreach (var item in lst)
                     {
-                        IdEmpresa = q.IdEmpresa,
-                        IdMatricula = q.IdMatricula,
-                        Fecha = q.Fecha,
-                        pe_cedulaRuc = q.pe_cedulaRuc,
-                        pe_nombreCompleto = q.pe_nombreCompleto
-                    }).ToList();
+                        var info = new aca_Matricula_Info
+                         {
+                             IdEmpresa = item.IdEmpresa,
+                             IdMatricula = item.IdMatricula,
+                             Fecha = item.Fecha,
+                             pe_cedulaRuc = item.pe_cedulaRuc,
+                             IdAlumno = item.IdAlumno,
+                             Codigo = item.Codigo,
+                             pe_nombreCompleto = item.pe_nombreCompleto
+                         };
+                        Lista.Add(info);
+                    }
                 }
                 return Lista;
             }
@@ -676,7 +684,7 @@ namespace Core.Data.Academico
                         IdAlumno=q.IdAlumno,
                         Fecha = q.Fecha,
                         pe_cedulaRuc = q.pe_cedulaRuc,
-                        pe_nombreCompleto = q.pe_nombreCompleto|
+                        pe_nombreCompleto = q.pe_nombreCompleto
                     }).ToList();
                 }
                 return Lista;

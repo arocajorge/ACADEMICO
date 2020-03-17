@@ -23,7 +23,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public List<aca_MatriculaCalificacion_Info> GetList(int IdEmpresa, decimal IdMaricula)
+        public List<aca_MatriculaCalificacion_Info> GetList(int IdEmpresa, decimal IdMatricula)
         {
             try
             {
