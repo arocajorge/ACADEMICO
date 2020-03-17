@@ -36,7 +36,7 @@ namespace Core.Web.Reportes.Facturacion
                 string NaturalezaNota = string.IsNullOrEmpty(p_Naturaleza.Value.ToString()) ? null : Convert.ToString(p_Naturaleza.Value);
 
                 List<FAC_005_Info> Lista = bus_rpt.GetList(IdEmpresa, IdTipoNota, FechaDesde, FechaHasta, CreDeb, NaturalezaNota);
-
+                xrPivotGrid1.DataSource = Lista;
                 tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
                 var emp = bus_empresa.get_info(IdEmpresa);
                 if (emp != null)
