@@ -210,11 +210,22 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_FechaHasta.Value = model.fecha_fin;
             report.p_Naturaleza.Value = model.NaturalezaNota;
             report.p_CreDeb.Value = model.CreDeb;
-            report.p_IdTipoNota.Value = model.IdTipoNota;
+            report.p_IdTipoNota.Value = model.IdTipoNota ?? 0;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
             CargarCombosFAC_005();
+
+            FAC_005_Resumen_Rpt reportResumen = new FAC_005_Resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_FechaDesde.Value = model.fecha_ini;
+            reportResumen.p_FechaHasta.Value = model.fecha_fin;
+            reportResumen.p_Naturaleza.Value = model.NaturalezaNota;
+            reportResumen.p_CreDeb.Value = model.CreDeb;
+            reportResumen.p_IdTipoNota.Value = model.IdTipoNota ?? 0;
+            reportResumen.usuario = SessionFixed.IdUsuario;
+            reportResumen.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = reportResumen;
 
             return View(model);
         }
@@ -241,6 +252,18 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_CreDeb.Value = model.CreDeb;
             ViewBag.Report = report;
             CargarCombosFAC_005();
+
+            FAC_005_Resumen_Rpt reportResumen = new FAC_005_Resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_FechaDesde.Value = model.fecha_ini;
+            reportResumen.p_FechaHasta.Value = model.fecha_fin;
+            reportResumen.p_Naturaleza.Value = model.NaturalezaNota;
+            reportResumen.p_CreDeb.Value = model.CreDeb;
+            reportResumen.p_IdTipoNota.Value = model.IdTipoNota ?? 0;
+            reportResumen.usuario = SessionFixed.IdUsuario;
+            reportResumen.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = reportResumen;
+
             return View(model);
         }
         #endregion

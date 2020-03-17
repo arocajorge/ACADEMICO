@@ -26,6 +26,7 @@ namespace Core.Data.Base
         public decimal ValorIVA { get; set; }
         public decimal Total { get; set; }
         public double Valor_Aplicado { get; set; }
+        public double Cruce { get; set; }
         public Nullable<double> Saldo { get; set; }
         public string NombreCliente { get; set; }
         public string NombreAlumno { get; set; }

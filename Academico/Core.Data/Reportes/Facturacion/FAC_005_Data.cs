@@ -22,29 +22,36 @@ namespace Core.Data.Reportes.Facturacion
                 List<FAC_005_Info> Lista = new List<FAC_005_Info>();
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
-                    Lista = (from q in db.SPFAC_005(IdEmpresa, FechaDesde, FechaHasta, CreDeb, NaturalezaNota)
-                             where (IdTipoNotaIni <= q.IdTipoNota && q.IdTipoNota <= IdTipoNotaFin)
-                             select new FAC_005_Info
-                             {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdSucursal = q.IdSucursal,
-                                 IdBodega = q.IdBodega,
-                                 IdNota = q.IdNota,
-                                 no_fecha = q.no_fecha,
-                                 CreDeb = q.CreDeb,
-                                 NaturalezaNota = q.NaturalezaNota,
-                                 Estado = q.Estado,
-                                 NumeroNota = q.NumeroNota,
-                                 SubtotalConDscto = q.SubtotalConDscto,
-                                 ValorIVA = q.ValorIVA,
-                                 Total = q.Total,
-                                 Valor_Aplicado = q.Valor_Aplicado,
-                                 Saldo = q.Saldo,
-                                 NombreCliente = q.NombreCliente,
-                                 NombreAlumno = q.NombreAlumno,
-                                 IdTipoNota = q.IdTipoNota,
-                                 No_Descripcion = q.No_Descripcion
-                             }).ToList();
+                    var lst = db.SPFAC_005(IdEmpresa, FechaDesde, FechaHasta, CreDeb, NaturalezaNota).ToList();
+                    lst = lst.Where(q => IdTipoNotaIni <= q.IdTipoNota && q.IdTipoNota <= IdTipoNotaFin).ToList();
+                    foreach (var q in lst)
+                    {
+                        Lista.Add(new FAC_005_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdSucursal = q.IdSucursal,
+                            IdBodega = q.IdBodega,
+                            IdNota = q.IdNota,
+                            no_fecha = q.no_fecha,
+                            CreDeb = q.CreDeb,
+                            NaturalezaNota = q.NaturalezaNota,
+                            Estado = q.Estado,
+                            NumeroNota = q.NumeroNota,
+                            SubtotalConDscto = q.SubtotalConDscto,
+                            ValorIVA = q.ValorIVA,
+                            Total = q.Total,
+                            Valor_Aplicado = q.Valor_Aplicado + q.Cruce,
+                            Saldo = q.Saldo,
+                            NombreCliente = q.NombreCliente,
+                            NombreAlumno = q.NombreAlumno,
+                            IdTipoNota = q.IdTipoNota,
+                            No_Descripcion = q.No_Descripcion,
+                            Cruce = q.Cruce,
+                            Aplicacion = q.Valor_Aplicado,
+                            Tipo = q.Valor_Aplicado > 0 ? "Aplicado" : "Conciliado"
+                        });
+                    }
+                             
                 }
                 return Lista;
             }

@@ -22,5 +22,8 @@ namespace Core.Info.Reportes.Facturacion
         public string NombreAlumno { get; set; }
         public int IdTipoNota { get; set; }
         public string No_Descripcion { get; set; }
+        public double Cruce { get; set; }
+        public double Aplicacion { get; set; }
+        public string Tipo { get; set; }
     }
 }

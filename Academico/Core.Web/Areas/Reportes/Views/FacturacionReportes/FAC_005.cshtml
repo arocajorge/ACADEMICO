@@ -114,12 +114,40 @@
                 </div>
             </div>
             <div class="box-body">
-                @Html.DevExpress().WebDocumentViewer(settings =>
+
+
+                <div id="Tabs" role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="active">
+                            <a href="#tab_hoja_matricula" aria-controls="stock" role="tab" data-toggle="tab">Detalle</a>
+                        </li>
+                        <li>
+                            <a href="#tab_solicitud_matricula" aria-controls="listado" role="tab" data-toggle="tab">Resumen</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" style="padding-top: 20px">
+                        <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_hoja_matricula">
+                            @Html.DevExpress().WebDocumentViewer(settings =>
                     {
                         settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
                         settings.MobileMode = false;
                         settings.Name = "webDocumentViewer";
                     }).Bind(ViewBag.Report).GetHtml()
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_solicitud_matricula">
+
+                            @Html.DevExpress().WebDocumentViewer(settings =>
+               {
+                   settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                   settings.MobileMode = false;
+                   settings.Name = "webDocumentViewer2";
+               }).Bind(ViewBag.ReportResumen).GetHtml()
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
