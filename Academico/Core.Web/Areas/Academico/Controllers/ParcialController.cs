@@ -1,5 +1,6 @@
 ﻿using Core.Bus.Academico;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using Core.Web.Helps;
 using DevExpress.Web.Mvc;
 using System;
@@ -90,25 +91,44 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Json
-        //public JsonResult guardar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdMateria = 0, decimal IdTransaccionSession = 0)
-        //{
-        //    var resultado = 1;
-        //    List<aca_AnioLectivoParcial_Info> lista = new List<aca_AnioLectivoParcial_Info>();
-        //    lista = ListaParcial.get_list(IdTransaccionSession);
+        public JsonResult generar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, decimal IdTransaccionSession = 0)
+        {
+            var resultado = "";
+            var lista = bus_parcial.GetList(IdEmpresa, IdSede, IdAnio);
+            var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
+            if (lista.Count()==0)
+            {
+                var lst_catalogo = bus_catalogo.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.PARCIAL), false);
 
-        //    if (!bus_calificacion.GuardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, lista))
-        //    {
-        //        resultado = 0;
-        //    }
+                foreach (var item in lst_catalogo)
+                {
+                    lst_parcial.Add(new aca_AnioLectivoParcial_Info {
+                        IdEmpresa = IdEmpresa,
+                        IdSede = IdSede,
+                        IdAnio = IdAnio,
+                        IdCatalogoParcial = item.IdCatalogo,
+                        IdUsuarioCreacion = SessionFixed.IdUsuario
+                    });
+                }
 
-        //    return Json(resultado, JsonRequestBehavior.AllowGet);
-        //}
+                if (!bus_parcial.GuardarDB(lst_parcial))
+                {
+                    resultado = "No se ha podido guardar los registros";
+                }
+            }
+            else
+            {
+                resultado = "Ya existen parciales para el año lectivo seleccionado";
+            }
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 
     public class aca_AnioLectivoParcial_List
     {
-        aca_AlumnoDocumento_Bus bus_alumno_doc = new aca_AlumnoDocumento_Bus();
+        aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
 
         string Variable = "aca_AnioLectivoParcial_Info";
         public List<aca_AnioLectivoParcial_Info> get_list(decimal IdTransaccionSession)
@@ -134,7 +154,7 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_AnioLectivoParcial_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdCatalogoParcial == info_det.IdCatalogoParcial).FirstOrDefault();
             edited_info.FechaInicio = info_det.FechaInicio;
             edited_info.FechaFin = info_det.FechaFin;
-            //bus_parcial.ModificarDB(edited_info);
+            bus_parcial.ModificarDB(edited_info);
         }
     }
 }

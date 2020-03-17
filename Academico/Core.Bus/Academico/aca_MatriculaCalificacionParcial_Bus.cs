@@ -23,11 +23,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public List<aca_MatriculaCalificacionParcial_Info> GenerarCalificacion(int IdEmpresa, decimal IdMatricula)
+        public bool GenerarCalificacion(List<aca_MatriculaCalificacionParcial_Info> lst_parcial)
         {
             try
             {
-                return odata.generarCalificacion(IdEmpresa, IdMatricula);
+                return odata.generarCalificacion(lst_parcial);
             }
             catch (Exception)
             {

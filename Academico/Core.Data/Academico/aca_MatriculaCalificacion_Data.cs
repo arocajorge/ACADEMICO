@@ -136,5 +136,75 @@ namespace Core.Data.Academico
             }
         }
 
+        public bool generarCalificacion(List<aca_MatriculaCalificacion_Info> lst_calificacion)
+        {
+            try
+            {
+                List<aca_MatriculaCalificacion_Info> Lista = new List<aca_MatriculaCalificacion_Info>();
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var lst_matricula = (from q in lst_calificacion
+                                         group q by new
+                                         {
+                                             q.IdEmpresa,
+                                             q.IdMatricula
+                                         } into mat
+                                         select new aca_Matricula_Info
+                                         {
+                                             IdEmpresa = mat.Key.IdEmpresa,
+                                             IdMatricula = mat.Key.IdMatricula
+                                         }).ToList();
+
+                    foreach (var item in lst_matricula)
+                    {
+                        var lst_calificacion_parcial = Context.aca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).ToList();
+                        Context.aca_MatriculaCalificacionParcial.RemoveRange(lst_calificacion_parcial);
+
+                        var lst_x_matricula = lst_calificacion.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).ToList();
+
+                        if (lst_x_matricula != null)
+                        {
+                            foreach (var info in lst_x_matricula)
+                            {
+                                aca_MatriculaCalificacion Entity = new aca_MatriculaCalificacion
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdMatricula = info.IdMatricula,
+                                    IdMateria = info.IdMateria,
+                                    IdProfesor = info.IdProfesor,
+                                    CalificacionP1 = info.CalificacionP1,
+                                    CalificacionP2= info.CalificacionP2,
+                                    CalificacionP3 = info.CalificacionP3,
+                                    CalificacionP4 = info.CalificacionP4,
+                                    CalificacionP5 = info.CalificacionP5,
+                                    CalificacionP6 = info.CalificacionP6,
+                                    PromedioQ1 = info.PromedioQ1,
+                                    ExamenQ1 = info.ExamenQ1,
+                                    PromedioFinalQ1 = info.PromedioFinalQ1,
+                                    PromedioQ2 = info.PromedioQ2,
+                                    ExamenQ2 = info.ExamenQ2,
+                                    PromedioFinalQ2 = info.PromedioFinalQ2,
+                                    ExamenMejoramiento = info.ExamenMejoramiento,
+                                    ExamenSupletorio = info.ExamenSupletorio,
+                                    ExamenRemedial = info.ExamenRemedial,
+                                    ExamenGracia = info.ExamenGracia,
+                                    PromedioFinal = info.PromedioFinal
+                                };
+
+                                Context.aca_MatriculaCalificacion.Add(Entity);
+                            }
+                        }
+                        Context.SaveChanges();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

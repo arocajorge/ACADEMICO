@@ -69,19 +69,19 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_materias_x_curso = bus_materias_x_paralelo.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
             var lst_parcial = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
 
+            List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial_existente = new List<aca_MatriculaCalificacionParcial_Info>();
+            List<aca_MatriculaCalificacion_Info> lst_calificacion_existente = new List<aca_MatriculaCalificacion_Info>();
+            List<aca_MatriculaConducta_Info> lst_conducta_existente = new List<aca_MatriculaConducta_Info>();
+
+            List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
+            List<aca_MatriculaCalificacion_Info> lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
+            List<aca_MatriculaConducta_Info> lst_conducta = new List<aca_MatriculaConducta_Info>();
+
             if (lista.Count()>0)
             {
                 foreach (var item in lista)
                 {
                     #region Calificacion y conducta
-                    List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial_existente = new List<aca_MatriculaCalificacionParcial_Info>();
-                    List<aca_MatriculaCalificacion_Info> lst_calificacion_existente = new List<aca_MatriculaCalificacion_Info>();
-                    List<aca_MatriculaConducta_Info> lst_conducta_existente = new List<aca_MatriculaConducta_Info>();
-
-                    List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
-                    List<aca_MatriculaCalificacion_Info> lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
-                    List<aca_MatriculaConducta_Info> lst_conducta = new List<aca_MatriculaConducta_Info>();
-
                     lst_calificacion_parcial_existente = bus_calificacion_parcial.GetList(model.IdEmpresa, item.IdMatricula);
                     lst_calificacion_existente = bus_calificacion.GetList(model.IdEmpresa, item.IdMatricula);
                     lst_conducta_existente = bus_conducta.GetList(model.IdEmpresa, item.IdMatricula);
@@ -90,11 +90,11 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         foreach (var item_materias in lst_materias_x_curso)
                         {
-                            var calificacion_parcial = lst_calificacion_parcial_existente.Where(q=>q.IdMateria==item_materias.IdMateria).FirstOrDefault();
+                            var calificacion_parcial = lst_calificacion_parcial_existente.Where(q => q.IdMateria == item_materias.IdMateria).FirstOrDefault();
                             var calificacion = lst_calificacion_existente.Where(q => q.IdMateria == item_materias.IdMateria).FirstOrDefault();
                             var conducta = lst_conducta_existente.Where(q => q.IdMateria == item_materias.IdMateria).FirstOrDefault();
 
-                            if (lst_parcial != null)
+                            if (lst_parcial.Count()>0)
                             {
                                 foreach (var item_p in lst_parcial)
                                 {
@@ -104,7 +104,18 @@ namespace Core.Web.Areas.Academico.Controllers
                                         IdMatricula=item.IdMatricula,
                                         IdMateria = item_materias.IdMateria,
                                         IdCatalogoParcial = item_p.IdCatalogoParcial,
-                                        IdProfesor = item_materias.IdProfesor
+                                        IdProfesor = item_materias.IdProfesor,
+                                        Calificacion1 = (calificacion_parcial==null ? null : calificacion_parcial.Calificacion1),
+                                        Calificacion2 = (calificacion_parcial == null ? null : calificacion_parcial.Calificacion2),
+                                        Calificacion3 = (calificacion_parcial == null ? null : calificacion_parcial.Calificacion3),
+                                        Calificacion4 = (calificacion_parcial == null ? null : calificacion_parcial.Calificacion4),
+                                        Evaluacion = (calificacion_parcial == null ? null : calificacion_parcial.Evaluacion),
+                                        Remedial1 = (calificacion_parcial == null ? null : calificacion_parcial.Remedial1),
+                                        Remedial2 = (calificacion_parcial == null ? null : calificacion_parcial.Remedial2),
+                                        Conducta = (calificacion_parcial == null ? null : calificacion_parcial.Conducta),
+                                        MotivoCalificacion = (calificacion_parcial == null ? null : calificacion_parcial.MotivoCalificacion),
+                                        MotivoConducta = (calificacion_parcial == null ? null : calificacion_parcial.MotivoConducta),
+                                        AccionRemedial = (calificacion_parcial == null ? null : calificacion_parcial.AccionRemedial)
                                     };
 
                                     lst_calificacion_parcial.Add(info_calificacion_parcial);
@@ -133,12 +144,29 @@ namespace Core.Web.Areas.Academico.Controllers
                         }
                     }
                     #endregion
+                }
 
-                    //if (bus_calificacion_parcial.GenerarCalificacion(item.IdEmpresa, item.IdMatricula))
-                    //{
-
-                    //}
-                    
+                if (bus_calificacion_parcial.GenerarCalificacion(lst_calificacion_parcial))
+                {
+                    if (bus_calificacion.GenerarCalificacion(lst_calificacion))
+                    {
+                        if (bus_conducta.GenerarCalificacion(lst_conducta))
+                        {
+                            mensaje = "Registros generados exitosamente";
+                        }
+                        else
+                        {
+                            mensaje = "Ha ocurrido un error al generar las calificaciones de conducta";
+                        }
+                    }
+                    else
+                    {
+                        mensaje = "Ha ocurrido un error al generar las calificaciones";
+                    }
+                }
+                else
+                {
+                    mensaje = "Ha ocurrido un error al generar las calificaciones parciales";
                 }
             }
 

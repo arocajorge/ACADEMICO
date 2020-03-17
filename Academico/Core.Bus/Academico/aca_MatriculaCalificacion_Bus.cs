@@ -47,5 +47,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public bool GenerarCalificacion(List<aca_MatriculaCalificacion_Info> lst_calificacion)
+        {
+            try
+            {
+                return odata.generarCalificacion(lst_calificacion);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

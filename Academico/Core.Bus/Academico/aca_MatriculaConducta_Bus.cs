@@ -23,5 +23,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public bool GenerarCalificacion(List<aca_MatriculaConducta_Info> lst_conducta)
+        {
+            try
+            {
+                return odata.generarCalificacion(lst_conducta);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

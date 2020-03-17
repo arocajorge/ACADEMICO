@@ -8,30 +8,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
-    function guardar() {
+    function generar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSede: IdSede.GetValue(),
             IdAnio: IdAnio.GetValue(),
-            IdNivel: IdNivel.GetValue(),
-            IdJornada: IdJornada.GetValue(),
-            IdCurso: IdCurso.GetValue(),
-            IdParalelo: IdParalelo.GetValue(),
-            IdMateria: IdMateria.GetValue(),
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $("#btn_guardar").attr("disabled", true);
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "MateriaCompartida", new { Area = "Academico" })',
+            url: '@Url.Action("generar", "Parcial", new { Area = "Academico" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#myform").submit();
+                if (data=="") {
+                    $("#myform").submit();
+                }
+                else {
+                    alert(data);
+                    $("#btn_guardar").attr("disabled", false);
+                }
+                
             },
             error: function (error) {
             }
@@ -58,51 +60,12 @@
                     @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label for="IdEmpresa">Nivel Académico</label>
-                    @Html.Partial("_ComboBoxPartial_Nivel", Model)
-                    @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Jornada</label>
-                    @Html.Partial("_ComboBoxPartial_Jornada", Model)
-                    @Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="IdEmpresa">Curso</label>
-                    @Html.Partial("_ComboBoxPartial_Curso", Model)
-                    @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdEmpresa">Paralelo</label>
-                    @Html.Partial("_ComboBoxPartial_Paralelo", Model)
-                    @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="IdEmpresa">Materia</label>
-                    @Html.Partial("_ComboBoxPartial_Materia", Model)
-                    @Html.ValidationMessageFor(q => q.IdMateria, "", new { @class = "text-danger" })
-                </div>
-            </div>
         </div>
     </div>
 
     <div class="box-footer">
         <button type="submit" class="btn btn-default" id="btn_buscar">Buscar</button>
-        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
+        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="generar();">Generar</button>
     </div>
     @Html.Action("GridViewPartial_Parcial")
     }

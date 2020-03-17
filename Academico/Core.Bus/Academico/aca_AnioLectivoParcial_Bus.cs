@@ -22,5 +22,31 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public bool GuardarDB(List<aca_AnioLectivoParcial_Info> lista)
+        {
+            try
+            {
+                return odata.guardarDB(lista);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool ModificarDB(aca_AnioLectivoParcial_Info info)
+        {
+            try
+            {
+                return odata.modificarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
