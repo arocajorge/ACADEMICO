@@ -666,26 +666,52 @@ namespace Core.Data.Academico
         {
             try
             {
+                int IdNivelIni = IdNivel;
+                int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
+
+                int IdJornadaIni = IdJornada;
+                int IdJornadaFin = IdJornada == 0 ? 9999999 : IdJornada;
+
+                int IdCursoIni = IdCurso;
+                int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
+
+                int IdParaleloIni = IdParalelo;
+                int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
+
+                decimal IdAlumnoIni = IdAlumno;
+                decimal IdAlumnoFin = IdAlumno == 0 ? 9999999 : IdAlumno;
+
                 List<aca_Matricula_Info> Lista = new List<aca_Matricula_Info>();
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
-                    && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo && q.IdAlumno== IdAlumno).Select(q => new aca_Matricula_Info
+                    var lst = Context.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
+                    && q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin && q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin
+                    && q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin && q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin
+                    && q.IdAlumno >= IdAlumnoIni && q.IdAlumno <= IdAlumnoFin).OrderBy(q=>q.OrdenCurso).ThenBy(q=>q.OrdenParalelo).ThenBy(q=>q.pe_nombreCompleto).ToList();
+
+                    foreach (var q in lst)
                     {
-                        IdEmpresa = q.IdEmpresa,
-                        IdAnio=q.IdAnio,
-                        IdSede=q.IdSede,
-                        IdNivel=q.IdNivel,
-                        IdJornada=q.IdJornada,
-                        IdCurso = q.IdCurso,
-                        IdParalelo = q.IdParalelo,
-                        IdMatricula = q.IdMatricula,
-                        IdAlumno=q.IdAlumno,
-                        Fecha = q.Fecha,
-                        pe_cedulaRuc = q.pe_cedulaRuc,
-                        pe_nombreCompleto = q.pe_nombreCompleto
-                    }).ToList();
+                        Lista.Add(new aca_Matricula_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            IdSede = q.IdSede,
+                            IdNivel = q.IdNivel,
+                            IdJornada = q.IdJornada,
+                            IdCurso = q.IdCurso,
+                            IdParalelo = q.IdParalelo,
+                            IdMatricula = q.IdMatricula,
+                            IdAlumno = q.IdAlumno,
+                            Fecha = q.Fecha,
+                            pe_cedulaRuc = q.pe_cedulaRuc,
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            NomJornada = q.NomJornada,
+                            NomNivel = q.NomNivel,
+                            NomCurso = q.NomCurso,
+                            NomParalelo = q.NomParalelo
+                        });
+                    }
                 }
                 return Lista;
             }

@@ -1,6 +1,6 @@
-﻿@model Core.Info.Academico.aca_MatriculaCalificacion_Info
+﻿@model Core.Info.Academico.aca_MatriculaCalificacionParcial_Info
 @{
-    ViewBag.Title = "Asignación de profesor por alumno";
+    ViewBag.Title = "Ingreso de calificaciones";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -9,7 +9,8 @@
 }
 <script>
     function guardar() {
-        var datos = {
+        alert("Guardar");
+        @*var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSede: IdSede.GetValue(),
             IdAnio: IdAnio.GetValue(),
@@ -35,10 +36,10 @@
             },
             error: function (error) {
             }
-        });
+        });*@
     }
 </script>
-@using (Html.BeginForm("Index", "MateriaCompartida", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
+@using (Html.BeginForm("Index", "MatriculaCalificacionParcial", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
@@ -90,11 +91,18 @@
                     @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label for="IdEmpresa">Materia</label>
                     @Html.Partial("_ComboBoxPartial_Materia", Model)
                     @Html.ValidationMessageFor(q => q.IdMateria, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Parcial</label>
+                    @Html.DropDownListFor(q => q.IdCatalogoParcial, new SelectList(ViewBag.lst_parcial, "IdCatalogoParcial", "NomCatalogo"), new { @class = "form-control", @id = "IdCatalogoParcial" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogoParcial, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -102,8 +110,11 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-default" id="btn_buscar">Buscar</button>
-        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
+        @if (ViewBag.Modificar)
+        {
+            <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
+        }      
     </div>
-    @Html.Action("GridViewPartial_MateriaCompartida", new { Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular })
+    @Html.Action("GridViewPartial_MatriculaCalificacionParcial", new { Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular })
     }
 

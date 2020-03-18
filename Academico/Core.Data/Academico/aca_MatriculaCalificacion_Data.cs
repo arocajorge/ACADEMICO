@@ -20,7 +20,7 @@ namespace Core.Data.Academico
                 {
                     var lst = odata.vwaca_MatriculaCalificacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede
                     && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo
-                    && q.IdMateria == IdMateria).ToList();
+                    && q.IdMateria == IdMateria).OrderBy(q=>q.pe_nombreCompletoAlumno).ToList();
 
                     lst.ForEach(q =>
                     {
@@ -31,6 +31,7 @@ namespace Core.Data.Academico
                             IdMateria = q.IdMateria,
                             IdProfesor = q.IdProfesor,
                             IdAlumno = q.IdAlumno,
+                            Codigo = q.Codigo,
                             pe_nombreCompletoAlumno = q.pe_nombreCompletoAlumno,
                             pe_nombreCompleto = q.pe_nombreCompleto
                         });
@@ -158,8 +159,8 @@ namespace Core.Data.Academico
 
                     foreach (var item in lst_matricula)
                     {
-                        var lst_calificacion_parcial = Context.aca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).ToList();
-                        Context.aca_MatriculaCalificacionParcial.RemoveRange(lst_calificacion_parcial);
+                        var lista_calificacion = Context.aca_MatriculaCalificacion.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).ToList();
+                        Context.aca_MatriculaCalificacion.RemoveRange(lista_calificacion);
 
                         var lst_x_matricula = lst_calificacion.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).ToList();
 
@@ -201,7 +202,7 @@ namespace Core.Data.Academico
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

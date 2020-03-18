@@ -8,6 +8,7 @@ namespace Core.Info.Academico
 {
     public class aca_MatriculaCalificacionParcial_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
         public int IdMateria { get; set; }
@@ -24,6 +25,22 @@ namespace Core.Info.Academico
         public string MotivoCalificacion { get; set; }
         public string MotivoConducta { get; set; }
         public string AccionRemedial { get; set; }
+        public string IdUsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public string IdUsuarioModificacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
 
+
+        #region Campos que no existen en la tabla
+        public int IdAnio { get; set; }
+        public int IdSede { get; set; }
+        public int IdNivel { get; set; }
+        public int IdJornada { get; set; }
+        public int IdCurso { get; set; }
+        public int IdParalelo { get; set; }
+        public decimal IdAlumno { get; set; }
+        public string Codigo { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        #endregion
     }
 }

@@ -42,5 +42,7 @@ namespace Core.Data.Base
         public decimal IdMecanismo { get; set; }
         public Nullable<int> IdEmpresa_rol { get; set; }
         public Nullable<decimal> IdEmpleado { get; set; }
+        public int OrdenCurso { get; set; }
+        public int OrdenParalelo { get; set; }
     }
 }

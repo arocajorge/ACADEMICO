@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_Parcial";
-        settings.CallbackRouteValues = new { Controller = "Parcial", Action = "GridViewPartial_Parcial" };
+        settings.CallbackRouteValues = new { Controller = "Parcial", Action = "GridViewPartial_Parcial", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCatalogoParcial";
         settings.CommandColumn.ShowNewButtonInHeader = false;
@@ -12,15 +12,22 @@
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Parcial", Action = "EditingUpdate", Area = "Academico" };
+        if (ViewBag.Modificar==true)
+        {
+            settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Parcial", Action = "EditingUpdate", Area = "Academico" };
+            settings.CommandColumn.ShowEditButton = true;
+            settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
+        }
+        else
+        {
+            settings.CommandColumn.ShowEditButton = false;
+            settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = false;
+        }
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
-        settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = false;
-
         settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
-        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
         settings.SettingsContextMenu.RowMenuItemVisibility.DeleteRow = false;
 
         settings.SettingsContextMenu.Enabled = true;

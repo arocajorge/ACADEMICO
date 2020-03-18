@@ -21,7 +21,6 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Paralelo_Bus bus_paralelo = new aca_Paralelo_Bus();
         aca_Materia_Bus bus_materia = new aca_Materia_Bus();
         aca_AnioLectivo_Paralelo_Profesor_Bus bus_MateriaPorProfesor = new aca_AnioLectivo_Paralelo_Profesor_Bus();
-        aca_MatriculaCalificacion_List Lista_MateriaCompartida = new aca_MatriculaCalificacion_List();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         aca_MatriculaCalificacionParcial_Bus bus_calificacion_parcial = new aca_MatriculaCalificacionParcial_Bus();
@@ -29,7 +28,9 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Paralelo_Profesor_Bus bus_materias_x_paralelo = new aca_AnioLectivo_Paralelo_Profesor_Bus();
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
         aca_MatriculaConducta_Bus bus_conducta = new aca_MatriculaConducta_Bus();
+        aca_MatriculaGeneracionCalificaciones_List Lista_MatriculaCalificaciones = new aca_MatriculaGeneracionCalificaciones_List();
         string mensaje = string.Empty;
+        string MensajeSuccess = string.Empty;
         #endregion
 
         #region Index
@@ -55,8 +56,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
-            List<aca_MatriculaCalificacion_Info> lista = bus_calificacion.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdMateria);
-            Lista_MateriaCompartida.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            List<aca_Matricula_Info> lista = new List<aca_Matricula_Info>();
+            Lista_MatriculaCalificaciones.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return View(model);
         }
@@ -65,10 +66,6 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Index(aca_MatriculaCalificacion_Info model)
         {
             List<aca_Matricula_Info> lista = bus_matricula.GetList_Calificaciones(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdAlumno);
-            List<aca_MatriculaCalificacion_Info> lst_calificaciones = new List<aca_MatriculaCalificacion_Info>();
-            var lst_materias_x_curso = bus_materias_x_paralelo.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
-            var lst_parcial = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
-
             List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial_existente = new List<aca_MatriculaCalificacionParcial_Info>();
             List<aca_MatriculaCalificacion_Info> lst_calificacion_existente = new List<aca_MatriculaCalificacion_Info>();
             List<aca_MatriculaConducta_Info> lst_conducta_existente = new List<aca_MatriculaConducta_Info>();
@@ -86,11 +83,13 @@ namespace Core.Web.Areas.Academico.Controllers
                     lst_calificacion_existente = bus_calificacion.GetList(model.IdEmpresa, item.IdMatricula);
                     lst_conducta_existente = bus_conducta.GetList(model.IdEmpresa, item.IdMatricula);
 
+                    var lst_materias_x_curso = bus_materias_x_paralelo.GetList(item.IdEmpresa, item.IdSede, item.IdAnio, item.IdNivel, item.IdJornada, item.IdCurso, item.IdParalelo);
+                    var lst_parcial = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
+
                     if (lst_materias_x_curso != null && lst_materias_x_curso.Count > 0)
                     {
                         foreach (var item_materias in lst_materias_x_curso)
                         {
-                            var calificacion_parcial = lst_calificacion_parcial_existente.Where(q => q.IdMateria == item_materias.IdMateria).FirstOrDefault();
                             var calificacion = lst_calificacion_existente.Where(q => q.IdMateria == item_materias.IdMateria).FirstOrDefault();
                             var conducta = lst_conducta_existente.Where(q => q.IdMateria == item_materias.IdMateria).FirstOrDefault();
 
@@ -98,6 +97,8 @@ namespace Core.Web.Areas.Academico.Controllers
                             {
                                 foreach (var item_p in lst_parcial)
                                 {
+                                    var calificacion_parcial = lst_calificacion_parcial_existente.Where(q => q.IdCatalogoParcial== item_p.IdCatalogoParcial && q.IdMateria == item_materias.IdMateria).FirstOrDefault();
+
                                     var info_calificacion_parcial = new aca_MatriculaCalificacionParcial_Info
                                     {
                                         IdEmpresa = item.IdEmpresa,
@@ -115,7 +116,8 @@ namespace Core.Web.Areas.Academico.Controllers
                                         Conducta = (calificacion_parcial == null ? null : calificacion_parcial.Conducta),
                                         MotivoCalificacion = (calificacion_parcial == null ? null : calificacion_parcial.MotivoCalificacion),
                                         MotivoConducta = (calificacion_parcial == null ? null : calificacion_parcial.MotivoConducta),
-                                        AccionRemedial = (calificacion_parcial == null ? null : calificacion_parcial.AccionRemedial)
+                                        AccionRemedial = (calificacion_parcial == null ? null : calificacion_parcial.AccionRemedial),
+                                        IdUsuarioCreacion = SessionFixed.IdUsuario
                                     };
 
                                     lst_calificacion_parcial.Add(info_calificacion_parcial);
@@ -127,7 +129,24 @@ namespace Core.Web.Areas.Academico.Controllers
                                 IdEmpresa = item.IdEmpresa,
                                 IdMatricula = item.IdMatricula,
                                 IdMateria = item_materias.IdMateria,
-                                IdProfesor = item_materias.IdProfesor
+                                IdProfesor = item_materias.IdProfesor,
+                                CalificacionP1 = (calificacion == null ? null : calificacion.CalificacionP1),
+                                CalificacionP2 = (calificacion == null ? null : calificacion.CalificacionP2),
+                                CalificacionP3 = (calificacion == null ? null : calificacion.CalificacionP3),
+                                CalificacionP4 = (calificacion == null ? null : calificacion.CalificacionP4),
+                                CalificacionP5 = (calificacion == null ? null : calificacion.CalificacionP5),
+                                CalificacionP6 = (calificacion == null ? null : calificacion.CalificacionP6),
+                                PromedioQ1 = (calificacion == null ? null : calificacion.PromedioQ1),
+                                PromedioQ2 = (calificacion == null ? null : calificacion.PromedioQ2),
+                                ExamenQ1 = (calificacion == null ? null : calificacion.ExamenQ1),
+                                ExamenQ2 = (calificacion == null ? null : calificacion.ExamenQ2),
+                                PromedioFinalQ1 = (calificacion == null ? null : calificacion.PromedioFinalQ1),
+                                PromedioFinalQ2 = (calificacion == null ? null : calificacion.PromedioFinalQ2),
+                                ExamenMejoramiento = (calificacion == null ? null : calificacion.ExamenMejoramiento),
+                                ExamenSupletorio = (calificacion == null ? null : calificacion.ExamenSupletorio),
+                                ExamenRemedial = (calificacion == null ? null : calificacion.ExamenRemedial),
+                                ExamenGracia = (calificacion == null ? null : calificacion.ExamenGracia),
+                                PromedioFinal = (calificacion == null ? null : calificacion.PromedioFinal)
                             };
 
                             lst_calificacion.Add(info_calificacion);
@@ -137,7 +156,19 @@ namespace Core.Web.Areas.Academico.Controllers
                                 IdEmpresa = item.IdEmpresa,
                                 IdMatricula = item.IdMatricula,
                                 IdMateria = item_materias.IdMateria,
-                                IdProfesor = item_materias.IdProfesor
+                                IdProfesor = item_materias.IdProfesor,
+                                CalificacionP1 = (conducta == null ? null : conducta.CalificacionP1),
+                                CalificacionP2 = (conducta == null ? null : conducta.CalificacionP2),
+                                CalificacionP3 = (conducta == null ? null : conducta.CalificacionP3),
+                                CalificacionP4 = (conducta == null ? null : conducta.CalificacionP4),
+                                CalificacionP5 = (conducta == null ? null : conducta.CalificacionP5),
+                                CalificacionP6 = (conducta == null ? null : conducta.CalificacionP6),
+                                PromedioFinalQ1 = (conducta == null ? null : conducta.PromedioFinalQ1),
+                                PromedioFinalQ2 = (conducta == null ? null : conducta.PromedioFinalQ2),
+                                PromedioQ1 = (conducta == null ? null : conducta.PromedioQ1),
+                                PromedioQ2 = (conducta == null ? null : conducta.PromedioQ2),
+                                PromedioGeneral = (conducta == null ? null : conducta.PromedioGeneral),
+                                PromedioFinal = (conducta == null ? null : conducta.PromedioFinal)
                             };
 
                             lst_conducta.Add(info_conducta);
@@ -152,25 +183,51 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         if (bus_conducta.GenerarCalificacion(lst_conducta))
                         {
-                            mensaje = "Registros generados exitosamente";
+                            MensajeSuccess = "Registros generados exitosamente";
+                            ViewBag.MensajeSuccess = MensajeSuccess;
+                            var ListaGenerada = new List<aca_Matricula_Info>();
+                            //var ListaGenerada = bus_calificacion.GetList(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdAlumno);
+
+                            var lst_matricula = (from q in lst_conducta
+                                                 group q by new
+                                                 {
+                                                     q.IdEmpresa,
+                                                     q.IdMatricula
+                                                 } into mat
+                                                 select new aca_Matricula_Info
+                                                 {
+                                                     IdEmpresa = mat.Key.IdEmpresa,
+                                                     IdMatricula = mat.Key.IdMatricula
+                                                 }).ToList();
+
+                            foreach (var item in lst_matricula)
+                            {
+                                var matricula = lista.Where(q=>q.IdEmpresa==item.IdEmpresa && q.IdMatricula==item.IdMatricula).FirstOrDefault();
+                                if (matricula!=null)
+                                {
+                                    ListaGenerada.Add(matricula);
+                                }                             
+                            }
+                            Lista_MatriculaCalificaciones.set_list(ListaGenerada, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                         }
                         else
                         {
                             mensaje = "Ha ocurrido un error al generar las calificaciones de conducta";
+                            ViewBag.mensaje = mensaje;
                         }
                     }
                     else
                     {
                         mensaje = "Ha ocurrido un error al generar las calificaciones";
+                        ViewBag.mensaje = mensaje;
                     }
                 }
                 else
                 {
                     mensaje = "Ha ocurrido un error al generar las calificaciones parciales";
+                    ViewBag.mensaje = mensaje;
                 }
             }
-
-            Lista_MateriaCompartida.set_list(lst_calificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return View(model);
         }
@@ -180,7 +237,7 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
-            List<aca_MatriculaCalificacion_Info> model = Lista_MateriaCompartida.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            List<aca_Matricula_Info> model = Lista_MatriculaCalificaciones.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_MatriculaCalificacion", model);
         }
         #endregion
@@ -272,6 +329,26 @@ namespace Core.Web.Areas.Academico.Controllers
             if (profesor != null)
                 info_det.pe_nombreCompleto = profesor.pe_nombreCompleto;
             edited_info.pe_nombreCompleto = info_det.pe_nombreCompleto;
+        }
+    }
+
+    public class aca_MatriculaGeneracionCalificaciones_List
+    {
+        string Variable = "aca_MatriculaGeneracionCalificaciones";
+        public List<aca_Matricula_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<aca_Matricula_Info> list = new List<aca_Matricula_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<aca_Matricula_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<aca_Matricula_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
     }
 }
