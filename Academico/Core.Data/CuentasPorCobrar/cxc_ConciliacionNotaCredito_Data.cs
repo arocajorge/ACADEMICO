@@ -595,5 +595,34 @@ namespace Core.Data.CuentasPorCobrar
                 throw;
             }
         }
+
+        public bool ValidarEnConciliacionNC(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota, string Tipo)
+        {
+            try
+            {
+                using (EntitiesCuentasPorCobrar db = new EntitiesCuentasPorCobrar())
+                {
+                    int Cont = 0;
+                    if (Tipo == "NC")
+                    {
+                        Cont = db.cxc_ConciliacionNotaCredito.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdNota == IdNota && q.Estado == true).Count();
+                        if (Cont > 0)
+                            return false;
+                    }else
+                    {
+                        Cont = db.cxc_ConciliacionNotaCredito.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdCobro == IdNota && q.Estado == true).Count();
+                        if (Cont > 0)
+                            return false;
+                    }
+                    
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

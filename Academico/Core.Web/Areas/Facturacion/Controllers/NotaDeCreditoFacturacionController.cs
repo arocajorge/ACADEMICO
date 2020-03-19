@@ -1,5 +1,6 @@
 ﻿using Core.Bus.Academico;
 using Core.Bus.Contabilidad;
+using Core.Bus.CuentasPorCobrar;
 using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Bus.Inventario;
@@ -50,6 +51,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        cxc_ConciliacionNotaCredito_Bus bus_conciliacion = new cxc_ConciliacionNotaCredito_Bus();
         #endregion
 
         #region Index
@@ -561,6 +563,15 @@ namespace Core.Web.Areas.Facturacion.Controllers
             i_validar.IdCliente = info_cliente.IdCliente;
             #endregion
 
+            if (i_validar.IdNota != 0)
+            {
+                if(!bus_conciliacion.ValidarEnConciliacionNC(i_validar.IdEmpresa,i_validar.IdSucursal,i_validar.IdBodega,i_validar.IdNota,"NC"))
+                {
+                    msg = "La nota de crédito ha sido conciliada y no puede ser modificada";
+                    return false;
+                }
+            }
+
             return true;
         }
         #endregion
@@ -733,6 +744,12 @@ namespace Core.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Anular(fa_notaCreDeb_Info model)
         {
+            if (!bus_conciliacion.ValidarEnConciliacionNC(model.IdEmpresa, model.IdSucursal, model.IdBodega, model.IdNota, "NC"))
+            {
+                ViewBag.mensaje = "La nota de crédito ha sido conciliada y no puede ser anulada";
+                cargar_combos(model);
+                return View(model);
+            }
             model.IdUsuarioUltAnu = SessionFixed.IdUsuario.ToString();
             if (!bus_nota.anularDB(model))
             {

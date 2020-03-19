@@ -81,5 +81,18 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
+
+        public bool ValidarExisteLiquidacionPorTarjeta(int IdEmpresa, int IdSucursal, decimal IdCobro)
+        {
+            try
+            {
+                return odata.ValidarExisteLiquidacionPorTarjeta(IdEmpresa, IdSucursal, IdCobro);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

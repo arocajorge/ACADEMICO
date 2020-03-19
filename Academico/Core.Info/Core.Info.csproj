@@ -279,6 +279,7 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Cobros_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Diario_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Info.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_006_Info.cs" />
     <Compile Include="Reportes\Facturacion\FAC_001_Info.cs" />
     <Compile Include="Reportes\Facturacion\FAC_002_Info.cs" />
     <Compile Include="Reportes\Facturacion\FAC_003_aplicaciones_Info.cs" />
