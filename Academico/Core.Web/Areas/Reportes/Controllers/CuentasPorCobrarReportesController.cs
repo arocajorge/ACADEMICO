@@ -252,7 +252,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             }
             #endregion
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdUsuario.Value = model.IdAlumno == null ? 0 : Convert.ToDecimal(model.IdAlumno);
+            report.p_IdUsuario.Value = SessionFixed.IdUsuario;
             report.p_FechaCorte.Value = model.fecha_corte;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -274,7 +274,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             }
             #endregion
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdUsuario.Value = model.IdAlumno == null ? 0 : Convert.ToDecimal(model.IdAlumno);
+            report.p_IdUsuario.Value = SessionFixed.IdUsuario;
             report.p_FechaCorte.Value = model.fecha_corte;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -303,5 +303,74 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(report);
         }
 
+        #region CXC_006
+        private void CargarCombos_CXC_006(int IdEmpresa, int[] intArray)
+        {
+            tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+            var lst_sucursal = bus_sucursal.get_list(IdEmpresa, false);
+            if (intArray == null || intArray.Count() == 0)
+            {
+                lst_sucursal.Where(q => q.IdSucursal == Convert.ToInt32(SessionFixed.IdSucursal)).FirstOrDefault().Seleccionado = true;
+            }
+            else
+                foreach (var item in lst_sucursal)
+                {
+                    item.Seleccionado = (intArray.Where(q => q == item.IdSucursal).Count() > 0 ? true : false);
+                }
+            ViewBag.lst_sucursal = lst_sucursal;
+        }
+        
+        public ActionResult CXC_006()
+        {
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
+                IdCliente = 0,
+
+            };
+
+            CXC_006_Rpt report = new CXC_006_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_006");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            report.p_FechaIni.Value = model.fecha_ini;
+            report.p_FechaFin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.IntArray = model.IntArray;
+            report.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa ?? "0");
+            ViewBag.Report = report;
+            CargarCombos_CXC_006(model.IdEmpresa,model.IntArray);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CXC_006(cl_filtros_facturacion_Info model)
+        {
+            CXC_006_Rpt report = new CXC_006_Rpt();
+            #region Cargo diseño desde base
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_006");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            report.p_FechaIni.Value = model.fecha_ini;
+            report.p_FechaFin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.IntArray = model.IntArray;
+            report.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa ?? "0");
+            ViewBag.Report = report;
+            CargarCombos_CXC_006(model.IdEmpresa, model.IntArray);
+            return View(model);
+        }
+        #endregion
     }
 }

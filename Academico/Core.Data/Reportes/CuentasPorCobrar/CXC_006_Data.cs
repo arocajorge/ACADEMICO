@@ -52,6 +52,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                     {
                         SucursalFiltro += item.Key + " ";
                     }
+                    Lista.ForEach(q => q.Su_DescripcionFiltros = SucursalFiltro);
                 }
 
                 return Lista;
