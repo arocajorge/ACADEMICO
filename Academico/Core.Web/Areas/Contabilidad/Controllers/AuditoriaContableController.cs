@@ -136,6 +136,13 @@ namespace Core.Web.Areas.Contabilidad.Controllers
                     IdSucursal = Convert.ToInt32(item.Substring(0, 4));
                     IdBodega = Convert.ToInt32(item.Substring(4, 4));
                     IdNota = Convert.ToDecimal(item.Substring(8, 10));
+
+                    if (!busNota.Contabilizar(IdEmpresa, IdSucursal, IdBodega, IdNota))
+                    {
+                        mensaje = "No se ha contabilizado las facturas";
+                        ViewBag.mensaje = mensaje;
+                        resultado = mensaje;
+                    }
                 }
             }
 
@@ -155,6 +162,12 @@ namespace Core.Web.Areas.Contabilidad.Controllers
                 {
                     IdSucursal = Convert.ToInt32(item.Substring(0, 4));
                     IdCobro = Convert.ToDecimal(item.Substring(4, 10));
+                    if (!busCobro.Contabilizar(IdEmpresa, IdSucursal, IdCobro))
+                    {
+                        mensaje = "No se ha contabilizado el cobro # "+IdCobro.ToString();
+                        ViewBag.mensaje = mensaje;
+                        resultado = mensaje;
+                    }
                 }
             }
 

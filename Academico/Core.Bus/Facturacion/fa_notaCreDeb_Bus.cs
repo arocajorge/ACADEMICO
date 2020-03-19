@@ -163,5 +163,18 @@ namespace Core.Bus.Facturacion
                 throw;
             }
         }
+
+        public bool Contabilizar(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota)
+        {
+            try
+            {
+                return odata.Contabilizar(IdEmpresa, IdSucursal, IdBodega, IdNota);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

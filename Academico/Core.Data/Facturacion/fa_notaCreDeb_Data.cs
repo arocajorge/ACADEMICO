@@ -17,6 +17,14 @@ namespace Core.Data.Facturacion
 {
     public class fa_notaCreDeb_Data
     {
+        #region Variables
+        cxc_cobro_tipo_Data odat_TipoCobro = new cxc_cobro_tipo_Data();
+        caj_Caja_Movimiento_Data odata_MovimientoCaja = new caj_Caja_Movimiento_Data();
+        ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
+        fa_notaCreDeb_det_Data odata_Det = new fa_notaCreDeb_det_Data();
+        fa_notaCreDeb_x_fa_factura_NotaDeb_Data odata_DetNDFac = new fa_notaCreDeb_x_fa_factura_NotaDeb_Data();
+        #endregion
+
         caj_Caja_Movimiento_Data odataMovCaja = new caj_Caja_Movimiento_Data();
         public List<fa_notaCreDeb_consulta_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin, string CreDeb)
         {
@@ -236,10 +244,9 @@ namespace Core.Data.Facturacion
             {
                 #region Variables
                 int Secuencia = 1;
-                ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
+                
                 cxc_cobro_Data odata_cobr = new cxc_cobro_Data();
-                cxc_cobro_tipo_Data odat_TipoCobro = new cxc_cobro_tipo_Data();
-                caj_Caja_Movimiento_Data odata_MovimientoCaja = new caj_Caja_Movimiento_Data();
+                
                 #endregion
 
                 using (EntitiesFacturacion db_f = new EntitiesFacturacion())
@@ -1220,6 +1227,100 @@ namespace Core.Data.Facturacion
                     }
                 }
                 return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool Contabilizar(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota)
+        {
+            try
+            {
+                EntitiesFacturacion db_f = new EntitiesFacturacion();
+                var info = get_info(IdEmpresa, IdSucursal, IdBodega, IdNota);
+                if (info == null || info.Estado == "I")
+                    return false;
+
+                info.lst_det = odata_Det.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
+                info.lst_cruce = odata_DetNDFac.get_list(IdEmpresa, IdSucursal, IdBodega, IdNota);
+
+                var TipoCobro = odat_TipoCobro.get_info(info.IdCobro_tipo);
+                if (TipoCobro != null)
+                {
+                    var rel_conta = db_f.fa_notaCreDeb_x_ct_cbtecble.Where(q => q.no_IdEmpresa == info.IdEmpresa && q.no_IdSucursal == info.IdSucursal && q.no_IdBodega == info.IdBodega && q.no_IdNota == info.IdNota).FirstOrDefault();
+                    ct_cbtecble_Info diario = armar_diario(info);
+                    if (diario != null)
+                    {
+                        if (rel_conta == null)
+                        {
+                            if (TipoCobro.tc_Tomar_Cta_Cble_De == "CAJA")
+                            {
+                                caj_Caja_Movimiento_Info MovimientoCaja = armar_movimiendoCaja(info, diario);
+                                if (MovimientoCaja != null)
+                                {
+                                    if (odata_MovimientoCaja.guardarDB(MovimientoCaja))
+                                    {
+                                        db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                        {
+                                            no_IdEmpresa = info.IdEmpresa,
+                                            no_IdSucursal = info.IdSucursal,
+                                            no_IdBodega = info.IdBodega,
+                                            no_IdNota = info.IdNota,
+
+                                            ct_IdEmpresa = diario.IdEmpresa,
+                                            ct_IdTipoCbte = diario.IdTipoCbte,
+                                            ct_IdCbteCble = MovimientoCaja.IdCbteCble,
+
+                                            observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
+                                        });
+                                        db_f.SaveChanges();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (odata_ct.guardarDB(diario))
+                                {
+                                    db_f.fa_notaCreDeb_x_ct_cbtecble.Add(new fa_notaCreDeb_x_ct_cbtecble
+                                    {
+                                        no_IdEmpresa = info.IdEmpresa,
+                                        no_IdSucursal = info.IdSucursal,
+                                        no_IdBodega = info.IdBodega,
+                                        no_IdNota = info.IdNota,
+
+                                        ct_IdEmpresa = diario.IdEmpresa,
+                                        ct_IdTipoCbte = diario.IdTipoCbte,
+                                        ct_IdCbteCble = diario.IdCbteCble,
+
+                                        observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString("000000000"))
+                                    });
+                                    db_f.SaveChanges();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            diario.IdCbteCble = rel_conta.ct_IdCbteCble;
+                            if (TipoCobro.tc_Tomar_Cta_Cble_De == "CAJA")
+                            {
+                                caj_Caja_Movimiento_Info MovimientoCaja = armar_movimiendoCaja(info, diario);
+                                if (MovimientoCaja != null)
+                                {
+                                    MovimientoCaja.IdCbteCble = rel_conta.ct_IdCbteCble;
+                                    odata_MovimientoCaja.modificarDB(MovimientoCaja);
+                                }
+                            }
+                            else
+                            {
+                                odata_ct.modificarDB(diario);
+                            }
+                        }
+                    }
+                }
+                return true;
             }
             catch (Exception)
             {

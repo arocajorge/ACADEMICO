@@ -20,6 +20,7 @@ namespace Core.Data.CuentasPorCobrar
         caj_Caja_Movimiento_Data DataCajaMovimiento = new caj_Caja_Movimiento_Data();
         ct_cbtecble_Data DataContable = new ct_cbtecble_Data();
         fa_notaCreDeb_Data DataNotaCredito = new fa_notaCreDeb_Data();
+        cxc_cobro_det_Data DataDet = new cxc_cobro_det_Data();
 
         public List<cxc_cobro_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
@@ -1380,6 +1381,139 @@ namespace Core.Data.CuentasPorCobrar
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public bool Contabilizar(int IdEmpresa, int IdSucursal, decimal IdCobro)
+        {
+            try
+            {
+                EntitiesCuentasPorCobrar Context_cxc = new EntitiesCuentasPorCobrar();
+
+                var info = get_info(IdEmpresa, IdSucursal, IdCobro);
+                if (info == null && info.cr_estado == "I")
+                    return false;
+
+                info.lst_det = DataDet.get_list(IdEmpresa, IdSucursal, IdCobro);
+
+                if (info.IdCobro_tipo != "NTCR" && info.IdCobro_tipo != "NTDB" && info.lst_det.Count > 0)
+                {
+                    #region Contabilización
+                    if (info.IdCobro_tipo != null)
+                    {
+                        var TipoCobro = Context_cxc.cxc_cobro_tipo.Where(q => q.IdCobro_tipo == info.IdCobro_tipo).FirstOrDefault();
+                        if (TipoCobro != null)
+                        {
+                            switch (TipoCobro.tc_Tomar_Cta_Cble_De)
+                            {
+                                case "CAJA":
+                                    #region Movimiento de caja
+                                    var MovimientoCaja = ArmarMovimientoDeCaja(info);
+                                    if (MovimientoCaja != null)
+                                    {
+                                        var rel = Context_cxc.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
+                                        if (rel == null)
+                                        {
+                                            if (DataCajaMovimiento.guardarDB(MovimientoCaja))
+                                            {
+                                                Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
+                                                {
+                                                    cbr_IdEmpresa = info.IdEmpresa,
+                                                    cbr_IdSucursal = info.IdSucursal,
+                                                    cbr_IdCobro = info.IdCobro,
+                                                    ct_IdEmpresa = MovimientoCaja.IdEmpresa,
+                                                    ct_IdTipoCbte = MovimientoCaja.IdTipocbte,
+                                                    ct_IdCbteCble = MovimientoCaja.IdCbteCble,
+                                                    observacion = ""
+                                                });
+                                                Context_cxc.SaveChanges();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            MovimientoCaja.IdCbteCble = rel.ct_IdCbteCble;
+                                            DataCajaMovimiento.modificarDB(MovimientoCaja);
+                                        }
+                                    }
+                                    #endregion
+                                    break;
+                                default:
+                                    #region Movimiento contable
+                                    var MovimientoContable = ArmarMovimientoContable(info);
+                                    if (MovimientoContable != null)
+                                    {
+                                        var rel = Context_cxc.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
+                                        if (rel == null)
+                                        {
+                                            if (DataContable.guardarDB(MovimientoContable))
+                                            {
+                                                Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
+                                                {
+                                                    cbr_IdEmpresa = info.IdEmpresa,
+                                                    cbr_IdSucursal = info.IdSucursal,
+                                                    cbr_IdCobro = info.IdCobro,
+                                                    ct_IdEmpresa = MovimientoContable.IdEmpresa,
+                                                    ct_IdTipoCbte = MovimientoContable.IdTipoCbte,
+                                                    ct_IdCbteCble = MovimientoContable.IdCbteCble,
+                                                    observacion = ""
+                                                });
+                                                Context_cxc.SaveChanges();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            MovimientoContable.IdCbteCble = rel.ct_IdCbteCble;
+                                            DataContable.modificarDB(MovimientoContable);
+                                        }
+                                    }
+                                    #endregion
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        #region Movimiento contable
+                        var MovimientoContable = ArmarMovimientoContable(info);
+                        if (MovimientoContable != null)
+                        {
+                            var rel = Context_cxc.cxc_cobro_x_ct_cbtecble.Where(q => q.cbr_IdEmpresa == info.IdEmpresa && q.cbr_IdSucursal == info.IdSucursal && q.cbr_IdCobro == info.IdCobro).FirstOrDefault();
+                            if (rel == null)
+                            {
+                                if (DataContable.guardarDB(MovimientoContable))
+                                {
+                                    Context_cxc.cxc_cobro_x_ct_cbtecble.Add(new cxc_cobro_x_ct_cbtecble
+                                    {
+                                        cbr_IdEmpresa = info.IdEmpresa,
+                                        cbr_IdSucursal = info.IdSucursal,
+                                        cbr_IdCobro = info.IdCobro,
+                                        ct_IdEmpresa = MovimientoContable.IdEmpresa,
+                                        ct_IdTipoCbte = MovimientoContable.IdTipoCbte,
+                                        ct_IdCbteCble = MovimientoContable.IdCbteCble,
+                                        observacion = ""
+                                    });
+                                    Context_cxc.SaveChanges();
+                                }
+                            }
+                            else
+                            {
+                                MovimientoContable.IdCbteCble = rel.ct_IdCbteCble;
+                                DataContable.modificarDB(MovimientoContable);
+                            }
+                        }
+                        #endregion
+
+                    }
+
+                    #endregion
+
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
