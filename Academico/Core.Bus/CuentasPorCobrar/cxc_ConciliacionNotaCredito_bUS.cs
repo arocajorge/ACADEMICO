@@ -77,5 +77,18 @@ namespace Core.Bus.CuentasPorCobrar
             }
         }
 
+        public bool ValidarEnConciliacionNC(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota, string Tipo)
+        {
+            try
+            {
+                return odata.ValidarEnConciliacionNC(IdEmpresa, IdSucursal, IdBodega, IdNota, Tipo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

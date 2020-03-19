@@ -155,20 +155,25 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 }
             }
             var lst = lstDet.get_list(IdTransaccionSession);
+            var lstFinal = new List<cxc_ConciliacionNotaCreditoDet_Info>();
             foreach (var item in lst)
             {
                 ValorProntoPago = (item.vt_total - item.ValorProntoPago ?? 0);
                 if (saldo > 0)
                 {
-                    item.ValorProntoPago = saldo >= ValorProntoPago ? ValorProntoPago : 0;
-                    item.Valor = saldo >= Convert.ToDouble(item.Saldo) ? Convert.ToDouble(item.Saldo) - ValorProntoPago : saldo;
-                    item.Saldo_final = Convert.ToDouble(item.Saldo - ValorProntoPago) - item.Valor;
+                    item.ValorProntoPago = saldo >= (item.Saldo - ValorProntoPago) ? ValorProntoPago : 0;
+                    item.Valor = saldo >= Convert.ToDouble(item.Saldo - ValorProntoPago) ? Convert.ToDouble(item.Saldo) - ValorProntoPago : saldo;
+                    item.Saldo_final = Convert.ToDouble(item.Saldo - item.ValorProntoPago) - item.Valor;
                     saldo = saldo - item.Valor;
+                    lstFinal.Add(item);
                 }
                 else
-                    item.Valor = 0;
+                {
+                    break;
+                }
+                    
             }
-            lstDet.set_list(lst, IdTransaccionSession);
+            lstDet.set_list(lstFinal, IdTransaccionSession);
 
             var resultado = saldo;
             return Json(Math.Round(resultado, 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);

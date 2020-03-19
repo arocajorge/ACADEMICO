@@ -26,7 +26,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
     public class CobranzaController : Controller
     {
         #region Variables
-
+        cxc_ConciliacionNotaCredito_Bus bus_conciliacion = new cxc_ConciliacionNotaCredito_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
         caj_Caja_Bus bus_caja = new caj_Caja_Bus();
@@ -51,6 +51,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         aca_AnioLectivo_Bus bus_anioLectivo = new aca_AnioLectivo_Bus();
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         fa_notaCreDeb_Bus bus_notaDebCre = new fa_notaCreDeb_Bus();
+        cxc_LiquidacionTarjeta_Bus busLiquidacionTarjeta = new cxc_LiquidacionTarjeta_Bus();
         string mensaje = string.Empty;
         string mensajeInfo = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
@@ -367,6 +368,19 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                     msg = "Si el cobro tenia relacionados documentos, no se puede modificar para convertirlo en un cobro anticipado, debe anularlo";
                     return false;
                 }
+
+                if (!bus_conciliacion.ValidarEnConciliacionNC(i_validar.IdEmpresa, i_validar.IdSucursal, 0, i_validar.IdCobro, "COBRO"))
+                {
+                    ViewBag.mensaje = "El cobro se ha creado a partir de una conciliación de NC y no puede ser modificado";
+                    return false;
+                }
+
+                if (!busLiquidacionTarjeta.ValidarExisteLiquidacionPorTarjeta(i_validar.IdEmpresa, i_validar.IdSucursal, i_validar.IdCobro))
+                {
+                    ViewBag.mensaje = "El cobro se encuentra en una liquidación de tarjeta de crédito y no puede ser modificado";
+                    return false;
+                }
+                
             }
             
             return true;
@@ -586,6 +600,19 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Anular(cxc_cobro_Info model)
         {
+            if (!bus_conciliacion.ValidarEnConciliacionNC(model.IdEmpresa, model.IdSucursal, 0, model.IdCobro, "COBRO"))
+            {
+                ViewBag.mensaje = "El cobro se ha creado a partir de una conciliación de NC y no puede ser anulado";
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                return View(model);
+            }
+
+            if (!busLiquidacionTarjeta.ValidarExisteLiquidacionPorTarjeta(model.IdEmpresa, model.IdSucursal, model.IdCobro))
+            {
+                ViewBag.mensaje = "El cobro se encuentra en una liquidación de tarjeta de crédito y no puede ser anulado";
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
+                return View(model);
+            }
             model.IdUsuarioUltAnu = SessionFixed.IdUsuario;
             if (!bus_cobro.anularDB(model))
             {
@@ -679,6 +706,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 }
             }
             var lst = list_det.get_list(IdTransaccionSession);
+            var lstFinal = new List<cxc_cobro_det_Info>();
             foreach (var item in lst)
             {
                 ValorProntoPago = (item.vt_total - item.ValorProntoPago ?? 0);
@@ -689,11 +717,12 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                     item.Saldo_final = Convert.ToDouble(item.Saldo - ValorProntoPago) - item.dc_ValorPago;
                     item.ValorProntoPago = ValorProntoPago;
                     saldo = saldo - item.dc_ValorPago;
+                    lstFinal.Add(item);
                 }
                 else
-                    item.dc_ValorPago = 0;
+                    break;
             }
-            list_det.set_list(lst, IdTransaccionSession);
+            list_det.set_list(lstFinal, IdTransaccionSession);
 
             var resultado = saldo;
             return Json(Math.Round(resultado, 2, MidpointRounding.AwayFromZero), JsonRequestBehavior.AllowGet);

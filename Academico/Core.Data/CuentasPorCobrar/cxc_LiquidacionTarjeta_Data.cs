@@ -447,5 +447,27 @@ namespace Core.Data.CuentasPorCobrar
             }
         }
 
+        public bool ValidarExisteLiquidacionPorTarjeta(int IdEmpresa, int IdSucursal, decimal IdCobro)
+        {
+            try
+            {
+                using (EntitiesCuentasPorCobrar db = new EntitiesCuentasPorCobrar())
+                {
+                    int Cont = 0;
+                    Cont = db.cxc_LiquidacionTarjeta_x_cxc_cobro.Include("cxc_LiquidacionTarjeta").Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdCobro == IdCobro && q.cxc_LiquidacionTarjeta.Estado == true).Count();
+
+                    if (Cont > 0)
+                        return false;
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
