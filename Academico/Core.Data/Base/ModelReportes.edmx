@@ -1252,6 +1252,12 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
           <Parameter Name="FechaCorte" Type="date" Mode="In" />
         </Function>
+        <Function Name="SPCXC_006" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+          <Parameter Name="FechaIni" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+        </Function>
         <Function Name="SPFAC_005" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="FechaDesde" Type="date" Mode="In" />
@@ -2122,6 +2128,12 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
             <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
             <Parameter Name="CreDeb" Mode="In" Type="String" />
             <Parameter Name="Naturaleza" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SPCXC_006" ReturnType="Collection(ModelReportes.SPCXC_006_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACA_001_Result">
@@ -3542,6 +3554,21 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Type="Int32" Name="IdTipoNota" Nullable="false" />
           <Property Type="String" Name="No_Descripcion" Nullable="true" MaxLength="150" />
         </ComplexType>
+        <ComplexType Name="SPCXC_006_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="Decimal" Name="IdLiquidacion" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Lote" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Int32" Name="IdBanco" Nullable="false" />
+          <Property Type="String" Name="ba_descripcion" Nullable="false" MaxLength="150" />
+          <Property Type="Double" Name="ValorCobro" Nullable="false" />
+          <Property Type="Double" Name="ValorComision" Nullable="false" />
+          <Property Type="Double" Name="ValorImpuesto" Nullable="false" />
+          <Property Type="Double" Name="DepositoNeto" Nullable="false" />
+          <Property Type="String" Name="Observacion" Nullable="true" />
+          <Property Type="String" Name="Su_Descripcion" Nullable="false" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4649,6 +4676,25 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
                 <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
                 <ScalarProperty Name="IdTipoNota" ColumnName="IdTipoNota" />
                 <ScalarProperty Name="No_Descripcion" ColumnName="No_Descripcion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPCXC_006" FunctionName="ModelReportes.Store.SPCXC_006">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPCXC_006_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
+                <ScalarProperty Name="Lote" ColumnName="Lote" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
+                <ScalarProperty Name="ba_descripcion" ColumnName="ba_descripcion" />
+                <ScalarProperty Name="ValorCobro" ColumnName="ValorCobro" />
+                <ScalarProperty Name="ValorComision" ColumnName="ValorComision" />
+                <ScalarProperty Name="ValorImpuesto" ColumnName="ValorImpuesto" />
+                <ScalarProperty Name="DepositoNeto" ColumnName="DepositoNeto" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Su_Descripcion" ColumnName="Su_Descripcion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -514,6 +514,12 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Rpt.Designer.cs">
       <DependentUpon>CXC_005_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_006_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_006_Rpt.Designer.cs">
+      <DependentUpon>CXC_006_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Facturacion\FAC_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8490,6 +8496,7 @@
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_GridViewPartial_MatriculaCalificacionParcial.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\Index.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_006.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8581,6 +8588,7 @@
     <TypeScriptCompile Include="AdminLTE\bower_components\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\Academico\ACA_001_Rpt.resx">
       <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -8664,6 +8672,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_005_Rpt.resx">
       <DependentUpon>CXC_005_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_006_Rpt.resx">
+      <DependentUpon>CXC_006_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_001_Rpt.resx">
       <DependentUpon>FAC_001_Rpt.cs</DependentUpon>
