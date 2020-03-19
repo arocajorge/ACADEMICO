@@ -19,6 +19,7 @@ namespace Core.Data.Base
         public int Secuencia { get; set; }
         public string Letra { get; set; }
         public decimal Calificacion { get; set; }
+        public Nullable<bool> IngresaMotivo { get; set; }
     
         public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }

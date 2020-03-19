@@ -66,7 +66,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AlumnoRetiro_aca_Alumno" />
         <AssociationConnector Association="ModelAcademico.FK_aca_PermisoMatricula_aca_Alumno" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Paralelo_Profesor" Width="1.5" PointX="17.625" PointY="21.75" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivoConductaEquivalencia" Width="1.5" PointX="3" PointY="36.875" />
         <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaCalificacion" Width="1.5" PointX="23.5" PointY="39" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Curso" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Jornada" />
@@ -110,7 +109,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Periodo_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoConductaEquivalencia_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_PermisoMatricula_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha" />
         <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha1" />
@@ -193,6 +191,8 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParcial_aca_Profesor" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Profesor" Width="1.5" PointX="30.375" PointY="26.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_AnioLectivo_Paralelo_Profesor_Calificaciones" Width="1.5" PointX="26.375" PointY="32.75" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivoConductaEquivalencia" Width="1.5" PointX="3" PointY="36.375" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoConductaEquivalencia_aca_AnioLectivo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
