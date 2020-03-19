@@ -30,6 +30,10 @@ namespace Core.Data.Base
         public string MotivoCalificacion { get; set; }
         public string MotivoConducta { get; set; }
         public string AccionRemedial { get; set; }
+        public string IdUsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public string IdUsuarioModificacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
     
         public virtual aca_Catalogo aca_Catalogo { get; set; }
         public virtual aca_Materia aca_Materia { get; set; }

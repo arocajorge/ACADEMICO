@@ -249,6 +249,9 @@
     <Compile Include="Base\vwaca_MatriculaCalificacion.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_MatriculaCalificacionParcial.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_MatriculaCondicional.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>

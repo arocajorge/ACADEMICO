@@ -180,6 +180,15 @@ namespace Core.Info.Helps
             PARCIAL = 6
         }
 
+        public enum eTipoCatalogoAcademicoParcial
+        {
+            P1 = 28,
+            P2 = 29,
+            P3 = 30,
+            P4 = 31,
+            P5 = 32,
+            P6 = 33
+        }
         public enum eCatalogoAcademicoMatricula
         {
             REGISTRADO = 1,

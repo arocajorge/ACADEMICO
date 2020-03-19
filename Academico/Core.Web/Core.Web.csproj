@@ -232,6 +232,7 @@
     <Compile Include="Areas\Academico\Controllers\MateriaPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaPorProfesorController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionController.cs" />
+    <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionParcialController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalParrafoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaController.cs" />
@@ -8480,6 +8481,15 @@
     <Content Include="Areas\Academico\Views\Parcial\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Academico\Views\Parcial\_GridViewPartial_Parcial.cshtml" />
     <Content Include="Areas\Academico\Views\Parcial\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_ComboBoxPartial_Materia.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_GridViewPartial_MatriculaCalificacionParcial.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\Index.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

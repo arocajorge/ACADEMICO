@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_MateriaCompartida";
-        settings.CallbackRouteValues = new { Controller = "MateriaCompartida", Action = "GridViewPartial_MateriaCompartida" };
+        settings.CallbackRouteValues = new { Controller = "MateriaCompartida", Action = "GridViewPartial_MateriaCompartida", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdAlumno";
         settings.CommandColumn.ShowNewButtonInHeader = false;
@@ -12,15 +12,22 @@
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "MateriaCompartida", Action = "EditingUpdate", Area = "Academico" };
+        if (ViewBag.Modificar == true)
+        {
+            settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "MateriaCompartida", Action = "EditingUpdate", Area = "Academico" };
+            settings.CommandColumn.ShowEditButton = true;
+            settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
+        }
+        else
+        {
+            settings.CommandColumn.ShowEditButton = false;
+            settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = false;
+        }
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
-        settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = false;
-
         settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
-        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
         settings.SettingsContextMenu.RowMenuItemVisibility.DeleteRow = false;
 
         settings.SettingsContextMenu.Enabled = true;
@@ -46,8 +53,8 @@
 
         settings.Columns.Add(column =>
         {
-            column.FieldName = "IdAlumno";
-            column.Caption = "Id";
+            column.FieldName = "Codigo";
+            column.Caption = "Código";
             column.Width = Unit.Percentage(10);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });

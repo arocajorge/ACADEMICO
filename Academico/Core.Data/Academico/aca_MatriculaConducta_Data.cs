@@ -74,8 +74,8 @@ namespace Core.Data.Academico
 
                     foreach (var item in lst_matricula)
                     {
-                        var lst_calificacion_parcial = Context.aca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).ToList();
-                        Context.aca_MatriculaCalificacionParcial.RemoveRange(lst_calificacion_parcial);
+                        var lista_calificacion_conducta = Context.aca_MatriculaConducta.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).ToList();
+                        Context.aca_MatriculaConducta.RemoveRange(lista_calificacion_conducta);
 
                         var lst_x_matricula = lst_conducta.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).ToList();
 
@@ -112,7 +112,7 @@ namespace Core.Data.Academico
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

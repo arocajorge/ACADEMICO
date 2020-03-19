@@ -18,6 +18,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Catalogo_Bus bus_catalogo = new aca_Catalogo_Bus();
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
         aca_AnioLectivoParcial_List ListaParcial = new aca_AnioLectivoParcial_List();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Index
@@ -29,17 +30,23 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
-            var info = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
             aca_AnioLectivoParcial_Info model = new aca_AnioLectivoParcial_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSede = Convert.ToInt32(SessionFixed.IdSede),
-                IdAnio = (info == null ? 0 : info.IdAnio),
+                IdAnio = (info_anio == null ? 0 : info_anio.IdAnio),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
             List<aca_AnioLectivoParcial_Info> lista = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
             ListaParcial.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Parcial", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
 
             return View(model);
         }
@@ -49,14 +56,23 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             List<aca_AnioLectivoParcial_Info> lista = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
             ListaParcial.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Parcial", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
 
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_Parcial()
+        public ActionResult GridViewPartial_Parcial(bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
 
             List<aca_AnioLectivoParcial_Info> model = ListaParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_Parcial", model);
