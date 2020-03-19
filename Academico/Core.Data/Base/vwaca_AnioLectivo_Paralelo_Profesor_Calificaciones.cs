@@ -12,36 +12,33 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_AnioLectivo_Curso_Paralelo
+    public partial class vwaca_AnioLectivo_Paralelo_Profesor_Calificaciones
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public aca_AnioLectivo_Curso_Paralelo()
-        {
-            this.aca_Matricula = new HashSet<aca_Matricula>();
-        }
-    
         public int IdEmpresa { get; set; }
+        public decimal IdMatricula { get; set; }
+        public int IdMateria { get; set; }
+        public Nullable<decimal> IdProfesor { get; set; }
         public int IdAnio { get; set; }
         public int IdSede { get; set; }
         public int IdNivel { get; set; }
         public int IdJornada { get; set; }
         public int IdCurso { get; set; }
         public int IdParalelo { get; set; }
+        public string Descripcion { get; set; }
+        public string NomSede { get; set; }
+        public string NomNivel { get; set; }
+        public Nullable<int> OrdenNivel { get; set; }
+        public string NomJornada { get; set; }
+        public Nullable<int> OrdenJornada { get; set; }
+        public string NomCurso { get; set; }
+        public Nullable<int> OrdenCurso { get; set; }
         public string CodigoParalelo { get; set; }
         public string NomParalelo { get; set; }
-        public int OrdenParalelo { get; set; }
+        public Nullable<int> OrdenParalelo { get; set; }
         public Nullable<decimal> IdProfesorTutor { get; set; }
         public Nullable<decimal> IdProfesorInspector { get; set; }
-    
-        public virtual aca_Curso aca_Curso { get; set; }
-        public virtual aca_Jornada aca_Jornada { get; set; }
-        public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
-        public virtual aca_Paralelo aca_Paralelo { get; set; }
-        public virtual aca_Sede aca_Sede { get; set; }
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
-        public virtual aca_Profesor aca_Profesor { get; set; }
-        public virtual aca_Profesor aca_Profesor1 { get; set; }
+        public string NomMateria { get; set; }
+        public bool EsObligatorio { get; set; }
+        public int OrdenMateria { get; set; }
     }
 }

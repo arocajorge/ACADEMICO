@@ -86,6 +86,7 @@ namespace Core.Data.Academico
                         CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
                         NumeroCarnetConadis = Entity.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
+                        IdUsuarioAnulacion = Entity.IdUsuario,
                     };
                 }
 
@@ -98,6 +99,57 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_Profesor_Info getInfo_x_Usuario(int IdEmpresa, string IdUsuario)
+        {
+            try
+            {
+                aca_Profesor_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.vwaca_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdUsuario == IdUsuario).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_Profesor_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdProfesor = Entity.IdProfesor,
+                        IdPersona = Entity.IdPersona,
+                        Codigo = Entity.Codigo,
+                        Estado = Entity.Estado,
+                        Correo = Entity.Correo,
+                        Direccion = Entity.Direccion,
+                        Telefonos = Entity.Telefonos,
+                        pe_Naturaleza = Entity.pe_Naturaleza,
+                        pe_cedulaRuc = Entity.pe_cedulaRuc,
+                        pe_nombre = Entity.pe_nombre,
+                        pe_apellido = Entity.pe_apellido,
+                        pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        pe_razonSocial = Entity.pe_razonSocial,
+                        pe_sexo = Entity.pe_sexo,
+                        IdEstadoCivil = Entity.IdEstadoCivil,
+                        pe_fechaNacimiento = Entity.pe_fechaNacimiento,
+                        pe_celular = Entity.pe_celular,
+                        IdTipoDocumento = Entity.IdTipoDocumento,
+                        EsInspector = Entity.EsInspector,
+                        EsProfesor = Entity.EsProfesor,
+                        IdProfesion = Entity.IdProfesion ?? 0,
+                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
+                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
+                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
+                        IdUsuarioAnulacion = Entity.IdUsuario,
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public decimal getId(int IdEmpresa)
         {
             try
@@ -138,6 +190,7 @@ namespace Core.Data.Academico
                         Telefonos = info.Telefonos,
                         EsProfesor = info.EsProfesor,
                         EsInspector = info.EsInspector,
+                        IdUsuario = info.IdUsuario,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
@@ -171,6 +224,7 @@ namespace Core.Data.Academico
                     Entity.Codigo = info.Codigo;
                     Entity.EsInspector = info.EsInspector;
                     Entity.EsProfesor= info.EsProfesor;
+                    Entity.IdUsuario = info.IdUsuario;
                     Context.SaveChanges();
                 }
 
@@ -268,6 +322,7 @@ namespace Core.Data.Academico
                     pe_sexo = Entity_aca.pe_sexo,
                     EsInspector = Entity_aca.EsInspector,
                     EsProfesor = Entity_aca.EsProfesor,
+                    IdUsuario = Entity_aca.IdUsuario,
                     IdEstadoCivil = Entity_aca.IdEstadoCivil,
                     pe_fechaNacimiento = Entity_aca.pe_fechaNacimiento,
                     IdProfesion = Entity_per.IdProfesion??0,

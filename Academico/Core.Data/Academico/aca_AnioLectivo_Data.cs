@@ -1,4 +1,5 @@
 ﻿using Core.Data.Base;
+using Core.Data.SeguridadAcceso;
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace Core.Data.Academico
         aca_Paralelo_Data odata_paralelo = new aca_Paralelo_Data();
         aca_Materia_Data odata_materia = new aca_Materia_Data();
         aca_Documento_Data odata_documento = new aca_Documento_Data();
-        
+        seg_usuario_Data odata_usuario = new seg_usuario_Data();
 
         public List<aca_AnioLectivo_Info> getList(int IdEmpresa, bool MostrarAnulados)
         {
@@ -62,6 +63,7 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
         public List<aca_AnioLectivo_Info> getList_Matricula(int IdEmpresa, bool MostrarAnulados)
         {
             try

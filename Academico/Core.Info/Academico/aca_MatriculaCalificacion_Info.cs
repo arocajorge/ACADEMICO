@@ -40,6 +40,22 @@ namespace Core.Info.Academico
         public int IdParalelo { get; set; }
         public decimal IdAlumno { get; set; }
         public string Codigo { get; set; }
+        public string Descripcion { get; set; }
+        public string NomSede { get; set; }
+        public string NomNivel { get; set; }
+        public string NomJornada { get; set; }
+        public string NomCurso { get; set; }
+        public string NomParalelo { get; set; }
+        public string CodigoParalelo { get; set; }
+        public string NomMateria { get; set; }
+        public int OrdenNivel { get; set; }
+        public int OrdenJornada { get; set; }
+        public int OrdenCurso { get; set; }
+        public int OrdenParalelo { get; set; }
+        public int OrdenMateria { get; set; }
+        public decimal IdProfesorTutor { get; set; }
+        public decimal IdProfesorInspector { get; set; }
+        public bool EsObligatorio { get; set; }
         public string pe_nombreCompletoAlumno { get; set; }
         public string pe_nombreCompleto { get; set; }
         #endregion

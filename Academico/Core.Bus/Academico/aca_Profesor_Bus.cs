@@ -40,6 +40,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_Profesor_Info GetInfo_x_Usuario(int IdEmpresa, string IdUsuario)
+        {
+            try
+            {
+                return odata.getInfo_x_Usuario(IdEmpresa, IdUsuario);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public decimal GetId(int IdEmpresa)
         {
             try

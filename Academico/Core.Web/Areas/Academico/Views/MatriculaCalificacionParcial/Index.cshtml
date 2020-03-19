@@ -8,9 +8,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
-    function guardar() {
-        alert("Guardar");
-        @*var datos = {
+    function buscar() {
+        var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSede: IdSede.GetValue(),
             IdAnio: IdAnio.GetValue(),
@@ -19,24 +18,54 @@
             IdCurso: IdCurso.GetValue(),
             IdParalelo: IdParalelo.GetValue(),
             IdMateria: IdMateria.GetValue(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
+            IdCatalogoParcial: $("#IdCatalogoParcial").val()
         }
-        $("#btn_guardar").attr("disabled", true);
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "MateriaCompartida", new { Area = "Academico" })',
+            url: '@Url.Action("cargar_calificaciones", "MatriculaCalificacionParcial", new { Area = "Academico" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#myform").submit();
+                GridViewPartial_MatriculaCalificacionParcial.PerformCallback();
             },
             error: function (error) {
             }
-        });*@
+        });
+    }
+
+    function guardar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSede: IdSede.GetValue(),
+            IdAnio: IdAnio.GetValue(),
+            IdNivel: IdNivel.GetValue(),
+            IdJornada: IdJornada.GetValue(),
+            IdCurso: IdCurso.GetValue(),
+            IdParalelo: IdParalelo.GetValue(),
+            IdMateria: IdMateria.GetValue(),
+            IdCatalogoParcial: $("#IdCatalogoParcial").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $("#btn_guardar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("guardar", "MatriculaCalificacionParcial", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_MatriculaCalificacionParcial.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
     }
 </script>
 @using (Html.BeginForm("Index", "MatriculaCalificacionParcial", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
@@ -109,11 +138,7 @@
     </div>
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-default" id="btn_buscar">Buscar</button>
-        @if (ViewBag.Modificar)
-        {
-            <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
-        }      
+        <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button>     
     </div>
     @Html.Action("GridViewPartial_MatriculaCalificacionParcial", new { Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular })
     }

@@ -166,5 +166,40 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public bool modificarDB(aca_MatriculaCalificacionParcial_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_MatriculaCalificacionParcial Entity = Context.aca_MatriculaCalificacionParcial.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula);
+                    if (Entity == null)
+                        return false;
+
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = DateTime.Now;
+                    Entity.Calificacion1 = info.Calificacion1;
+                    Entity.Calificacion2 = info.Calificacion2;
+                    Entity.Calificacion3 = info.Calificacion3;
+                    Entity.Calificacion4 = info.Calificacion4;
+                    Entity.Remedial1 = info.Remedial1;
+                    Entity.Remedial2 = info.Remedial2;
+                    Entity.Evaluacion = info.Evaluacion;
+                    Entity.Conducta = info.Conducta;
+                    Entity.MotivoCalificacion = info.MotivoCalificacion;
+                    Entity.MotivoConducta = info.MotivoConducta;
+                    Entity.AccionRemedial = info.AccionRemedial;
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

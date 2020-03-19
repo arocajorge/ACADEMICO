@@ -26,5 +26,6 @@ namespace Core.Data.Base
         public Nullable<decimal> IdPersona { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string NomMateria { get; set; }
+        public string IdUsuario { get; set; }
     }
 }

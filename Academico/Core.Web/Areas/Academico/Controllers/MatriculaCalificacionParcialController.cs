@@ -31,6 +31,8 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
         aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        aca_MatriculaCalificacion_Combos_List ListaCombos = new aca_MatriculaCalificacion_Combos_List();
+        aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
         string mensaje = string.Empty;
         #endregion
 
@@ -58,8 +60,15 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
-            List<aca_MatriculaCalificacionParcial_Info> lista = bus_calificacion_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdMateria, model.IdCatalogoParcial);
-            Lista_CalificacionParcial.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, IdProfesor, EsSuperAdmin);
+            ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            //List<aca_MatriculaCalificacionParcial_Info> lista = bus_calificacion_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdMateria, model.IdCatalogoParcial);
+            //Lista_CalificacionParcial.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MatriculaCalificacionParcial", "Index");
             ViewBag.Nuevo = info.Nuevo;
@@ -71,20 +80,20 @@ namespace Core.Web.Areas.Academico.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult Index(aca_MatriculaCalificacionParcial_Info model)
-        {
-            List<aca_MatriculaCalificacionParcial_Info> lista = bus_calificacion_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdMateria, model.IdCatalogoParcial);
-            Lista_CalificacionParcial.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MatriculaCalificacionParcial", "Index");
-            ViewBag.Nuevo = info.Nuevo;
-            ViewBag.Modificar = info.Modificar;
-            ViewBag.Anular = info.Anular;
-            #endregion
-            cargar_combos(model);
-            return View(model);
-        }
+        //[HttpPost]
+        //public ActionResult Index(aca_MatriculaCalificacionParcial_Info model)
+        //{
+        //    List<aca_MatriculaCalificacionParcial_Info> lista = bus_calificacion_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdMateria, model.IdCatalogoParcial);
+        //    Lista_CalificacionParcial.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+        //    #region Permisos
+        //    aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MatriculaCalificacionParcial", "Index");
+        //    ViewBag.Nuevo = info.Nuevo;
+        //    ViewBag.Modificar = info.Modificar;
+        //    ViewBag.Anular = info.Anular;
+        //    #endregion
+        //    cargar_combos(model);
+        //    return View(model);
+        //}
 
         [ValidateInput(false)]
         public ActionResult GridViewPartial_MatriculaCalificacionParcial(bool Nuevo = false, bool Modificar = false, bool Anular = false)
@@ -173,6 +182,267 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
+        #region FuncionesCombos
+        public List<aca_AnioLectivo_Info> CargarAnio(int IdEmpresa=0)
+        {
+            List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q=>q.IdEmpresa == IdEmpresa).ToList();
+            var lst_anio = (from q in lst_combos
+                            group q by new
+                                 {
+                                     q.IdEmpresa,
+                                     q.IdAnio,
+                                     q.Descripcion
+                                 } into a
+                                 select new aca_AnioLectivo_Info
+                                 {
+                                     IdEmpresa = a.Key.IdEmpresa,
+                                     IdAnio = a.Key.IdAnio,
+                                     Descripcion = a.Key.Descripcion
+                                 }).OrderBy(q=>q.Descripcion).ToList();
+
+            var ListaAnio = new List<aca_AnioLectivo_Info>();
+
+            foreach (var item in lst_anio)
+            {
+                ListaAnio.Add(new aca_AnioLectivo_Info {
+                    IdAnio = item.IdAnio,
+                    Descripcion = item.Descripcion
+                });
+            }
+
+            return ListaAnio;
+        }
+
+        public List<aca_Sede_Info> CargarSede(int IdEmpresa = 0, int IdAnio = 0)
+        {
+            List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => 
+            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
+
+            var lst_sede = (from q in lst_combos
+                            group q by new
+                            {
+                                q.IdEmpresa,
+                                q.IdAnio,
+                                q.IdSede,
+                                q.NomSede
+                            } into a
+                            select new aca_Sede_Info
+                            {
+                                IdEmpresa = a.Key.IdEmpresa,
+                                IdSede = a.Key.IdSede,
+                                NomSede = a.Key.NomSede
+                            }).OrderBy(q => q.NomSede).ToList();
+
+            var ListaSede = new List<aca_Sede_Info>();
+
+            foreach (var item in lst_sede)
+            {
+                ListaSede.Add(new aca_Sede_Info
+                {
+                    IdSede = item.IdSede,
+                    NomSede = item.NomSede
+                });
+            }
+
+            return ListaSede;
+        }
+
+        public List<aca_NivelAcademico_Info> CargarNivel(int IdEmpresa = 0, int IdAnio = 0, int IdSede=0)
+        {
+            List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => 
+            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede).ToList();
+
+            var lst_nivel = (from q in lst_combos
+                            group q by new
+                            {
+                                q.IdEmpresa,
+                                q.IdAnio,
+                                q.IdSede,
+                                q.IdNivel,
+                                q.NomNivel,
+                                q.OrdenNivel
+                            } into a
+                            select new aca_NivelAcademico_Info
+                            {
+                                IdEmpresa = a.Key.IdEmpresa,
+                                IdNivel = a.Key.IdNivel,
+                                NomNivel = a.Key.NomNivel,
+                                Orden = a.Key.OrdenNivel
+                            }).OrderBy(q => q.Orden).ToList();
+
+            var ListaNivel = new List<aca_NivelAcademico_Info>();
+
+            foreach (var item in lst_nivel)
+            {
+                ListaNivel.Add(new aca_NivelAcademico_Info
+                {
+                    IdNivel = item.IdNivel,
+                    NomNivel = item.NomNivel
+                });
+            }
+
+            return ListaNivel;
+        }
+
+        public List<aca_Jornada_Info> CargarJornada(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel=0)
+        {
+            List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => 
+            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel).ToList();
+
+            var lst_jornada = (from q in lst_combos
+                            group q by new
+                            {
+                                q.IdEmpresa,
+                                q.IdAnio,
+                                q.IdSede,
+                                q.IdNivel,
+                                q.IdJornada,
+                                q.NomJornada,
+                                q.OrdenJornada
+                            } into a
+                            select new aca_Jornada_Info
+                            {
+                                IdEmpresa = a.Key.IdEmpresa,
+                                IdJornada = a.Key.IdJornada,
+                                NomJornada = a.Key.NomJornada,
+                                OrdenJornada = a.Key.OrdenJornada
+                            }).OrderBy(q=>q.OrdenJornada).ToList();
+
+            var ListaJornada = new List<aca_Jornada_Info>();
+
+            foreach (var item in lst_jornada)
+            {
+                ListaJornada.Add(new aca_Jornada_Info
+                {
+                    IdJornada = item.IdJornada,
+                    NomJornada = item.NomJornada
+                });
+            }
+
+            return ListaJornada;
+        }
+
+        public List<aca_Curso_Info> CargarCurso(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada=0)
+        {
+            List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
+            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada).ToList();
+
+            var lst_curso = (from q in lst_combos
+                               group q by new
+                               {
+                                   q.IdEmpresa,
+                                   q.IdAnio,
+                                   q.IdSede,
+                                   q.IdNivel,
+                                   q.IdJornada,
+                                   q.IdCurso,
+                                   q.NomCurso,
+                                   q.OrdenCurso
+                               } into a
+                               select new aca_Curso_Info
+                               {
+                                   IdEmpresa = a.Key.IdEmpresa,
+                                   IdCurso = a.Key.IdCurso,
+                                   NomCurso = a.Key.NomCurso,
+                                   OrdenCurso = a.Key.OrdenCurso
+                               }).OrderBy(q=> q.OrdenCurso).ToList();
+
+            var ListaCurso = new List<aca_Curso_Info>();
+
+            foreach (var item in lst_curso)
+            {
+                ListaCurso.Add(new aca_Curso_Info
+                {
+                    IdCurso = item.IdCurso,
+                    NomCurso = item.NomCurso
+                });
+            }
+
+            return ListaCurso;
+        }
+
+        public List<aca_Paralelo_Info> CargarParalelo(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso=0)
+        {
+            List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
+            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso==IdCurso).ToList();
+
+            var lst_paralelo = (from q in lst_combos
+                             group q by new
+                             {
+                                 q.IdEmpresa,
+                                 q.IdAnio,
+                                 q.IdSede,
+                                 q.IdNivel,
+                                 q.IdJornada,
+                                 q.IdCurso,
+                                 q.IdParalelo,
+                                 q.NomParalelo,
+                                 q.OrdenParalelo
+                             } into a
+                             select new aca_Paralelo_Info
+                             {
+                                 IdEmpresa = a.Key.IdEmpresa,
+                                 IdParalelo = a.Key.IdParalelo,
+                                 NomParalelo = a.Key.NomParalelo,
+                                 OrdenParalelo = a.Key.OrdenParalelo,
+                             }).OrderBy(q=> q.OrdenParalelo).ToList();
+
+            var ListaParalelo = new List<aca_Paralelo_Info>();
+
+            foreach (var item in lst_paralelo)
+            {
+                ListaParalelo.Add(new aca_Paralelo_Info
+                {
+                    IdParalelo = item.IdParalelo,
+                    NomParalelo = item.NomParalelo
+                });
+            }
+
+            return ListaParalelo;
+        }
+
+        public List<aca_Materia_Info> CargarMateria(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo=0)
+        {
+            List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
+            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo==IdParalelo).ToList();
+
+            var lst_materia = (from q in lst_combos
+                                group q by new
+                                {
+                                    q.IdEmpresa,
+                                    q.IdAnio,
+                                    q.IdSede,
+                                    q.IdNivel,
+                                    q.IdJornada,
+                                    q.IdCurso,
+                                    q.IdParalelo,
+                                    q.IdMateria,
+                                    q.NomMateria,
+                                    q.OrdenMateria
+                                } into a
+                                select new aca_Materia_Info
+                                {
+                                    IdEmpresa = a.Key.IdEmpresa,
+                                    IdMateria = a.Key.IdMateria,
+                                    NomMateria = a.Key.NomMateria,
+                                    OrdenMateria = a.Key.OrdenMateria
+                                }).OrderBy(q=>q.OrdenMateria).ToList();
+
+            var ListaMateria = new List<aca_Materia_Info>();
+
+            foreach (var item in lst_materia)
+            {
+                ListaMateria.Add(new aca_Materia_Info
+                {
+                    IdMateria = item.IdMateria,
+                    NomMateria = item.NomMateria
+                });
+            }
+
+            return ListaMateria;
+        }
+        #endregion
+
         #region Funciones del Grid
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] aca_MatriculaCalificacionParcial_Info info_det)
         {
@@ -187,10 +457,34 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_MatriculaCalificacionParcial", model);
         }
         #endregion
+
+        #region Json
+        public JsonResult cargar_calificaciones(int IdEmpresa=0, int IdSede = 0, int IdAnio=0, int IdNivel=0, int IdJornada=0, int IdCurso=0, int IdParalelo = 0, int IdMateria=0, int IdCatalogoParcial = 0)
+        {
+            List<aca_MatriculaCalificacionParcial_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionParcial_Info>();
+
+            ListaCalificaciones = bus_calificacion_parcial.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial);
+            Lista_CalificacionParcial.set_list(ListaCalificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return Json(ListaCalificaciones, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult guardar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdMateria = 0, int IdCatalogoParcial = 0, decimal IdTransaccionSession=0)
+        {
+            List<aca_MatriculaCalificacionParcial_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionParcial_Info>();
+
+            ListaCalificaciones = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            //Lista_CalificacionParcial.set_list(ListaCalificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return Json(ListaCalificaciones, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 
     public class aca_MatriculaCalificacionParcial_List
     {
+        aca_MatriculaCalificacionParcial_Bus bus_parcial = new aca_MatriculaCalificacionParcial_Bus();
         string Variable = "aca_MatriculaCalificacionParcial_Info";
         public List<aca_MatriculaCalificacionParcial_Info> get_list(decimal IdTransaccionSession)
         {
@@ -224,6 +518,29 @@ namespace Core.Web.Areas.Academico.Controllers
             edited_info.MotivoCalificacion = info_det.MotivoCalificacion;
             edited_info.MotivoConducta = info_det.MotivoConducta;
             edited_info.AccionRemedial = info_det.AccionRemedial;
+            edited_info.IdUsuarioModificacion = SessionFixed.IdUsuario;
+
+            bus_parcial.ModicarDB(edited_info);
+        }
+    }
+
+    public class aca_MatriculaCalificacion_Combos_List
+    {
+        string Variable = "aca_MatriculaCalificacion_Combos_Info";
+        public List<aca_MatriculaCalificacion_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<aca_MatriculaCalificacion_Info> list = new List<aca_MatriculaCalificacion_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<aca_MatriculaCalificacion_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<aca_MatriculaCalificacion_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
     }
 }

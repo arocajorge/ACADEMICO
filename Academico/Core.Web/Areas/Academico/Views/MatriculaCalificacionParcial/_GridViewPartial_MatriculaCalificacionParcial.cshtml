@@ -63,6 +63,7 @@
             column.Caption = "Código";
             column.Width = Unit.Percentage(10);
             column.Index = 1;
+            column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
@@ -163,19 +164,10 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "MotivoConducta";
-            column.Caption = "Motivo Conducta";
-            column.Width = Unit.Percentage(10);
-            column.Index = 11;
-            column.Visible = false;
-            column.EditFormSettings.Visible = DefaultBoolean.True;
-        });
-        settings.Columns.Add(column =>
-        {
             column.FieldName = "MotivoCalificacion";
             column.Caption = "Motivo Calificacion";
             column.Width = Unit.Percentage(10);
-            column.Index = 12;
+            column.Index = 99;
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
@@ -184,7 +176,16 @@
             column.FieldName = "AccionRemedial";
             column.Caption = "Acción Remedial";
             column.Width = Unit.Percentage(10);
-            column.Index = 13;
+            column.Index = 99;
+            column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "MotivoConducta";
+            column.Caption = "Motivo Conducta";
+            column.Width = Unit.Percentage(10);
+            column.Index = 99;
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });

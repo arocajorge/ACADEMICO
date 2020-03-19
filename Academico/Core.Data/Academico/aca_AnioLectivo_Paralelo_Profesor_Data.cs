@@ -1,4 +1,5 @@
 ﻿using Core.Data.Base;
+using Core.Data.SeguridadAcceso;
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
@@ -121,6 +122,12 @@ namespace Core.Data.Academico
                                         if (lst_MatriculaCalificacion.Count > 0)
                                         {
                                             lst_MatriculaCalificacion.ForEach(q => q.IdProfesor = info.IdProfesor);
+                                        }
+
+                                        var lst_MatriculaConducta = Context.aca_MatriculaConducta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == item.IdMatricula && q.IdMateria == info.IdMateria).ToList();
+                                        if (lst_MatriculaConducta.Count > 0)
+                                        {
+                                            lst_MatriculaConducta.ForEach(q => q.IdProfesor = info.IdProfesor);
                                         }
                                     }
                                 }
@@ -257,6 +264,5 @@ namespace Core.Data.Academico
                 throw;
             }
         }
-
     }
 }

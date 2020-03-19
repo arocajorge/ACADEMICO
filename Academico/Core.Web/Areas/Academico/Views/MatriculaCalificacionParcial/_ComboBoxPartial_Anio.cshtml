@@ -13,4 +13,4 @@
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
     settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdSede.PerformCallback(); }";
-}).BindList(new Core.Bus.Academico.aca_AnioLectivo_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa),false)).Bind(Model.IdAnio).GetHtml()
+}).BindList(new Core.Web.Areas.Academico.Controllers.MatriculaCalificacionParcialController().CargarAnio(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa))).Bind(Model.IdAnio).GetHtml()

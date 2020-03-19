@@ -45,5 +45,6 @@ namespace Core.Data.Base
         public Nullable<double> PorcentajeDiscapacidad { get; set; }
         public string NumeroCarnetConadis { get; set; }
         public Nullable<int> IdProfesion { get; set; }
+        public string IdUsuario { get; set; }
     }
 }
