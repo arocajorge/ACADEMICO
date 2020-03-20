@@ -1,5 +1,6 @@
 ﻿using Core.Data.Base;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +77,53 @@ namespace Core.Data.Academico
                             IdAlumno = q.IdAlumno,
                             Codigo = q.Codigo,
                             pe_nombreCompleto = q.pe_nombreCompleto,
+                            IdCatalogoParcial = q.IdCatalogoParcial,
+                            Calificacion1 = q.Calificacion1,
+                            Calificacion2 = q.Calificacion2,
+                            Calificacion3 = q.Calificacion3,
+                            Calificacion4 = q.Calificacion4,
+                            Evaluacion = q.Evaluacion,
+                            Remedial1 = q.Remedial1,
+                            Remedial2 = q.Remedial2,
+                            Conducta = q.Conducta,
+                            MotivoCalificacion = q.MotivoCalificacion,
+                            MotivoConducta = q.MotivoConducta,
+                            AccionRemedial = q.AccionRemedial
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<aca_MatriculaCalificacionParcial_Info> getList_x_Parcial(int IdEmpresa, decimal IdMatricula, int IdCatalogoParcial)
+        {
+            try
+            {
+                List<aca_MatriculaCalificacionParcial_Info> Lista = new List<aca_MatriculaCalificacionParcial_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula
+                    && q.IdCatalogoParcial == IdCatalogoParcial).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_MatriculaCalificacionParcial_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdMatricula = q.IdMatricula,
+                            IdMateria = q.IdMateria,
+                            IdProfesor = q.IdProfesor,
+                            IdAlumno = q.IdAlumno,
+                            Codigo = q.Codigo,
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            IdCatalogoParcial = q.IdCatalogoParcial,
                             Calificacion1 = q.Calificacion1,
                             Calificacion2 = q.Calificacion2,
                             Calificacion3 = q.Calificacion3,
@@ -173,7 +221,8 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_MatriculaCalificacionParcial Entity = Context.aca_MatriculaCalificacionParcial.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula);
+                    aca_MatriculaCalificacionParcial Entity = Context.aca_MatriculaCalificacionParcial.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa 
+                    && q.IdMatricula == info.IdMatricula && q.IdMateria== info.IdMateria && q.IdProfesor== info.IdProfesor && q.IdCatalogoParcial == info.IdCatalogoParcial);
                     if (Entity == null)
                         return false;
 
@@ -190,6 +239,58 @@ namespace Core.Data.Academico
                     Entity.MotivoCalificacion = info.MotivoCalificacion;
                     Entity.MotivoConducta = info.MotivoConducta;
                     Entity.AccionRemedial = info.AccionRemedial;
+
+                    aca_MatriculaCalificacion EntityCalificacion = Context.aca_MatriculaCalificacion.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa 
+                    && q.IdMatricula == info.IdMatricula && q.IdProfesor == info.IdProfesor && q.IdMateria == info.IdMateria);
+                    if (EntityCalificacion == null)
+                        return false;
+                    
+                    if(info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
+                        EntityCalificacion.CalificacionP1 = info.PromedioParcial;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
+                        EntityCalificacion.CalificacionP2 = info.PromedioParcial;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
+                        EntityCalificacion.CalificacionP3 = info.PromedioParcial;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
+                        EntityCalificacion.CalificacionP4 = info.PromedioParcial;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
+                        EntityCalificacion.CalificacionP5 = info.PromedioParcial;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
+                        EntityCalificacion.CalificacionP6 = info.PromedioParcial;
+
+                    Context.SaveChanges();
+
+                    aca_MatriculaConducta EntityConducta = Context.aca_MatriculaConducta.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
+                    && q.IdMatricula == info.IdMatricula);
+                    if (EntityConducta == null)
+                        return false;
+
+                    var lst_calificaciones_parciales = getList_x_Parcial(info.IdEmpresa, info.IdMatricula, info.IdCatalogoParcial);
+                    decimal PromedioParcialConducta = Convert.ToDecimal(lst_calificaciones_parciales.Average(q=>q.Conducta));
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
+                        EntityConducta.PromedioP1 = PromedioParcialConducta;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
+                        EntityConducta.PromedioP2 = PromedioParcialConducta;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
+                        EntityConducta.PromedioP3 = PromedioParcialConducta;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
+                        EntityConducta.PromedioP4 = PromedioParcialConducta;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
+                        EntityConducta.PromedioP5 = PromedioParcialConducta;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
+                        EntityConducta.PromedioP6 = PromedioParcialConducta;
+                    
 
                     Context.SaveChanges();
                 }

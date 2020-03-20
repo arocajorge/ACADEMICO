@@ -61,7 +61,8 @@ namespace Core.Data.Academico
                         IdAnio = Entity.IdAnio,
                         Secuencia = Entity.Secuencia,
                         Letra = Entity.Letra,
-                        Calificacion = Entity.Calificacion
+                        Calificacion = Entity.Calificacion,
+                        IngresaMotivo = Entity.IngresaMotivo
                     };
                 }
 
@@ -92,7 +93,8 @@ namespace Core.Data.Academico
                         IdAnio = Entity.IdAnio,
                         Secuencia = Entity.Secuencia,
                         Letra = Entity.Letra,
-                        Calificacion = Entity.Calificacion
+                        Calificacion = Entity.Calificacion,
+                        IngresaMotivo = Entity.IngresaMotivo
                     };
                 }
 
@@ -139,7 +141,8 @@ namespace Core.Data.Academico
                         IdAnio = info.IdAnio,
                         Secuencia = info.Secuencia=getId(info.IdEmpresa),
                         Letra = info.Letra,
-                        Calificacion = info.Calificacion
+                        Calificacion = info.Calificacion,
+                        IngresaMotivo = (info.IngresaMotivo==null ? false : info.IngresaMotivo)
                     };
                     Context.aca_AnioLectivoConductaEquivalencia.Add(Entity);
 
@@ -166,7 +169,7 @@ namespace Core.Data.Academico
                     Entity.IdAnio = info.IdAnio;
                     Entity.Letra = info.Letra;
                     Entity.Calificacion = info.Calificacion;
-
+                    Entity.IngresaMotivo = (info.IngresaMotivo == null ? false : info.IngresaMotivo);
                     Context.SaveChanges();
                 }
 

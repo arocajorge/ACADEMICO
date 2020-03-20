@@ -41,6 +41,17 @@
                     @Html.ValidationMessageFor(m => m.Calificacion, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.IngresaMotivo, settings =>
+                        {
+                            settings.Name = "IngresaMotivo";
+                            settings.Text = "Ingresa motivo por baja conducta";
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IngresaMotivo, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="box-footer">

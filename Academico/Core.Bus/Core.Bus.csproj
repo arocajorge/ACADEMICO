@@ -85,6 +85,7 @@
     <Compile Include="Academico\aca_Menu_x_seg_usuario_Bus.cs" />
     <Compile Include="Academico\aca_NivelAcademico_Bus.cs" />
     <Compile Include="Academico\aca_Paralelo_Bus.cs" />
+    <Compile Include="Academico\aca_Parametro_Bus.cs" />
     <Compile Include="Academico\aca_PermisoMatricula_Bus.cs" />
     <Compile Include="Academico\aca_PlantillaTipo_Bus.cs" />
     <Compile Include="Academico\aca_Plantilla_Bus.cs" />
