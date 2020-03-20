@@ -536,7 +536,6 @@ namespace Core.Web.Areas.Academico.Controllers
         public JsonResult CalcularPromedio(int IdEmpresa = 0, decimal IdMatricula = 0, decimal Calificacion1 = 0, decimal Calificacion2 = 0, decimal Calificacion3 = 0, decimal Calificacion4 = 0, decimal Evaluacion = 0, decimal Remedial1 = 0, decimal Remedial2 = 0)
         {
             decimal resultado = 0;
-            var mensaje = "";
             var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
             var info_parametro = bus_parametro.getInfo(IdEmpresa);
 
@@ -562,14 +561,48 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
 
                 resultado= (decimal)Math.Round(resultado, 2, MidpointRounding.AwayFromZero);
+            }
+  
+            return Json(new { promedio= resultado}, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ValidarPromedio(int IdEmpresa = 0, decimal IdMatricula = 0, decimal Calificacion1 = 0, decimal Calificacion2 = 0, decimal Calificacion3 = 0, decimal Calificacion4 = 0, decimal Evaluacion = 0, decimal Remedial1 = 0, decimal Remedial2 = 0)
+        {
+            decimal resultado = 0;
+            var mensaje = "";
+            var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
+            var info_parametro = bus_parametro.getInfo(IdEmpresa);
+
+            if (info_parametro != null)
+            {
+                decimal suma_calificaciones = (Calificacion1 + Calificacion2 + Calificacion3 + Calificacion4 + Evaluacion);
+                decimal promedio = (Calificacion1 + Calificacion2 + Calificacion3 + Calificacion4 + Evaluacion) / 5;
+                resultado = promedio;
+
+                if (Remedial1 != 0)
+                {
+                    suma_calificaciones = suma_calificaciones + Remedial1;
+                    resultado = (decimal)Math.Round((suma_calificaciones / 6), 2, MidpointRounding.AwayFromZero);
+                }
+                else if (Remedial2 != 0)
+                {
+                    suma_calificaciones = suma_calificaciones + Remedial1 + Remedial2;
+                    resultado = (decimal)Math.Round((suma_calificaciones / 7), 2, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    resultado = promedio;
+                }
+
+                resultado = (decimal)Math.Round(resultado, 2, MidpointRounding.AwayFromZero);
 
                 if (resultado < Convert.ToDecimal(info_parametro.PromedioMinimoParcial))
                 {
-                    mensaje = "Promedio por debajo del mínimo aceptado";
+                    mensaje = "Promedio por debajo del mínimo aceptado, debe ingresar motivo y accion remedial de la calificacion";
                 }
             }
-  
-            return Json(new { promedio= resultado , mensaje=mensaje}, JsonRequestBehavior.AllowGet);
+
+            return Json(new { promedio = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult ValidarConducta(int IdEmpresa = 0, decimal IdMatricula = 0, int Conducta = 0)

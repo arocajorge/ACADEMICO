@@ -221,7 +221,8 @@
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.VisibleIndex = 11;
             column.Visible = true;
-            column.ReadOnly = true;
+            column.ReadOnly = false;
+            //q.ClientSideEvents.ValueChanged = "function(s, e){ ValidarPromedio();}";
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
@@ -281,9 +282,6 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if(data.mensaje!=""){
-                    alert(data.mensaje);
-                }
                 GridViewPartial_MatriculaCalificacionParcial.GetEditor('PromedioParcial').SetValue(data.promedio);
             },
             error: function (error) {
@@ -311,6 +309,38 @@
                     alert("Ingresa motivo de conducta");
                 }
                 //GridViewPartial_MatriculaCalificacionParcial.GetEditor('PromedioParcial').SetValue(data);
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+    
+    function ValidarPromedio(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdMatricula: GridViewPartial_MatriculaCalificacionParcial.GetEditor('IdMatricula').GetValue(),
+            Calificacion1: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion1').GetValue(),
+            Calificacion2: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion2').GetValue(),
+            Calificacion3: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion3').GetValue(),
+            Calificacion4: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion3').GetValue(),
+            Evaluacion: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Evaluacion').GetValue(),
+            Remedial1: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Remedial1').GetValue(),
+            Remedial2: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Remedial2').GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ValidarPromedio", "MatriculaCalificacionParcial",new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.mensaje != "") {
+                    alert(data.mensaje);
+                }
             },
             error: function (error) {
             }
