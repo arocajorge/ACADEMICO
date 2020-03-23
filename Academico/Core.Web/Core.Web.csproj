@@ -8588,7 +8588,6 @@
     <TypeScriptCompile Include="AdminLTE\bower_components\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\Academico\ACA_001_Rpt.resx">
       <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
