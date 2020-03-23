@@ -1191,11 +1191,14 @@ namespace Core.Web.Areas.Academico.Controllers
                 resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
             }else
             {
-                info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismoOtros);
-                info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
-                if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
+                if (IdMecanismoOtros!=0)
                 {
-                    resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
+                    info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismoOtros);
+                    info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
+                    if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
+                    {
+                        resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
+                    }
                 }
             }
 
