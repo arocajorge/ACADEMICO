@@ -452,13 +452,11 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 var info_matricula = bus_matricula.GetInfo(IdEmpresa, info_det.IdMatricula);
-                var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info_det.Conducta));
+                var info_conducta = bus_conducta.GetInfo(IdEmpresa,info_matricula.IdAnio, Convert.ToInt32(info_det.Conducta));
 
                 if (info_conducta!=null)
                 {
-                    info_det.Conducta = Convert.ToInt32(info_conducta.Calificacion);
-
-                    if (info_det.PromedioParcial >= 7 || (string.IsNullOrEmpty(info_det.MotivoCalificacion) && string.IsNullOrEmpty(info_det.AccionRemedial)))
+                    if (info_det.PromedioParcial >= 7 && (info_conducta.IngresaMotivo == false || (info_conducta.IngresaMotivo == true && !string.IsNullOrEmpty(info_det.MotivoConducta)) ) )
                     {
                         Lista_CalificacionParcial.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                     }
@@ -522,17 +520,6 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(ListaCalificaciones, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult guardar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdMateria = 0, int IdCatalogoParcial = 0, decimal IdTransaccionSession=0)
-        //{
-        //    List<aca_MatriculaCalificacionParcial_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionParcial_Info>();
-
-        //    ListaCalificaciones = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
-        //    //Lista_CalificacionParcial.set_list(ListaCalificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
-        //    return Json(ListaCalificaciones, JsonRequestBehavior.AllowGet);
-        //}
-
         public JsonResult CalcularPromedio(int IdEmpresa = 0, decimal IdMatricula = 0, decimal Calificacion1 = 0, decimal Calificacion2 = 0, decimal Calificacion3 = 0, decimal Calificacion4 = 0, decimal Evaluacion = 0, decimal Remedial1 = 0, decimal Remedial2 = 0)
         {
             decimal resultado = 0;
@@ -566,54 +553,69 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(new { promedio= resultado}, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ValidarPromedio(int IdEmpresa = 0, decimal IdMatricula = 0, decimal Calificacion1 = 0, decimal Calificacion2 = 0, decimal Calificacion3 = 0, decimal Calificacion4 = 0, decimal Evaluacion = 0, decimal Remedial1 = 0, decimal Remedial2 = 0)
+        public JsonResult ValidarPromedio(int IdEmpresa = 0, decimal IdMatricula = 0, decimal Calificacion1 = 0, decimal Calificacion2 = 0, decimal Calificacion3 = 0, decimal Calificacion4 = 0, decimal Evaluacion = 0, decimal Remedial1 = 0, decimal Remedial2 = 0, int Conducta=0, string MotivoCalificacion="", string AccionRemedial = "", string MotivoConducta = "" )
         {
             decimal resultado = 0;
             var mensaje = "";
             var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
             var info_parametro = bus_parametro.getInfo(IdEmpresa);
+            var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Conducta);
 
-            if (info_parametro != null)
+            if (Calificacion1>0 && Calificacion2>0 && Calificacion3>0 && Calificacion4>0 && Evaluacion>0)
             {
-                decimal suma_calificaciones = (Calificacion1 + Calificacion2 + Calificacion3 + Calificacion4 + Evaluacion);
-                decimal promedio = (Calificacion1 + Calificacion2 + Calificacion3 + Calificacion4 + Evaluacion) / 5;
-                resultado = promedio;
-
-                if (Remedial1 != 0)
+                if (info_parametro != null)
                 {
-                    suma_calificaciones = suma_calificaciones + Remedial1;
-                    resultado = (decimal)Math.Round((suma_calificaciones / 6), 2, MidpointRounding.AwayFromZero);
-                }
-                else if (Remedial2 != 0)
-                {
-                    suma_calificaciones = suma_calificaciones + Remedial1 + Remedial2;
-                    resultado = (decimal)Math.Round((suma_calificaciones / 7), 2, MidpointRounding.AwayFromZero);
-                }
-                else
-                {
+                    decimal suma_calificaciones = (Calificacion1 + Calificacion2 + Calificacion3 + Calificacion4 + Evaluacion);
+                    decimal promedio = (Calificacion1 + Calificacion2 + Calificacion3 + Calificacion4 + Evaluacion) / 5;
                     resultado = promedio;
-                }
 
-                resultado = (decimal)Math.Round(resultado, 2, MidpointRounding.AwayFromZero);
+                    if (Remedial1 != 0)
+                    {
+                        suma_calificaciones = suma_calificaciones + Remedial1;
+                        resultado = (decimal)Math.Round((suma_calificaciones / 6), 2, MidpointRounding.AwayFromZero);
+                    }
+                    else if (Remedial2 != 0)
+                    {
+                        suma_calificaciones = suma_calificaciones + Remedial1 + Remedial2;
+                        resultado = (decimal)Math.Round((suma_calificaciones / 7), 2, MidpointRounding.AwayFromZero);
+                    }
+                    else
+                    {
+                        resultado = promedio;
+                    }
 
-                if (resultado < Convert.ToDecimal(info_parametro.PromedioMinimoParcial))
-                {
-                    mensaje = "Promedio por debajo del mínimo aceptado, debe ingresar motivo y accion remedial de la calificacion";
+                    resultado = (decimal)Math.Round(resultado, 2, MidpointRounding.AwayFromZero);
+
+                    if (resultado < Convert.ToDecimal(info_parametro.PromedioMinimoParcial))
+                    {
+                        if (string.IsNullOrEmpty(MotivoCalificacion) || string.IsNullOrEmpty(AccionRemedial))
+                        {
+                            mensaje = "Promedio por debajo del mínimo aceptado, debe ingresar motivo y accion remedial de la calificación.";
+                        }
+                    }
+
+                    if (info_conducta != null)
+                    {
+                        if (info_conducta.IngresaMotivo == true && string.IsNullOrEmpty(MotivoConducta))
+                        {
+                            mensaje += " Debe de ingresar el motivo por el cual el estudiante tiene esa conducta.";
+                        }
+                    }
                 }
             }
 
             return Json(new { promedio = resultado, mensaje = mensaje }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult ValidarConducta(int IdEmpresa = 0, decimal IdMatricula = 0, int Conducta = 0)
+        public JsonResult ValidarConducta(int IdEmpresa = 0, decimal IdMatricula = 0, int Conducta = 0, string MotivoConducta = "")
         {
             var resultado = "";
             var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
             var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Conducta);
 
-            if (info_conducta!=null)
+            if (info_conducta.IngresaMotivo == true && string.IsNullOrEmpty(MotivoConducta))
             {
-                resultado = (info_conducta.IngresaMotivo == true ? "SI" : "NO") ;
+                resultado = "Debe de ingresar el motivo por el cual el estudiante tiene esa conducta";
             }
 
             return Json(resultado, JsonRequestBehavior.AllowGet);

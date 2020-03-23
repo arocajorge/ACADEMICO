@@ -36,37 +36,6 @@
             }
         });
     }
-
-    @*function guardar() {
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdSede: IdSede.GetValue(),
-            IdAnio: IdAnio.GetValue(),
-            IdNivel: IdNivel.GetValue(),
-            IdJornada: IdJornada.GetValue(),
-            IdCurso: IdCurso.GetValue(),
-            IdParalelo: IdParalelo.GetValue(),
-            IdMateria: IdMateria.GetValue(),
-            IdCatalogoParcial: $("#IdCatalogoParcial").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        $("#btn_guardar").attr("disabled", true);
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "MatriculaCalificacionParcial", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                GridViewPartial_MatriculaCalificacionParcial.PerformCallback();
-            },
-            error: function (error) {
-            }
-        });
-    }*@
 </script>
 @using (Html.BeginForm("Index", "MatriculaCalificacionParcial", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {

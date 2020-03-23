@@ -650,6 +650,10 @@ namespace Core.Data.Academico
                     Context.Database.ExecuteSqlCommand("DELETE aca_Matricula_Rubro WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
                     Context.Database.ExecuteSqlCommand("DELETE aca_Matricula WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
 
+                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacionParcial WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacion WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaConducta WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+
                     Context.SaveChanges();
                 }
 

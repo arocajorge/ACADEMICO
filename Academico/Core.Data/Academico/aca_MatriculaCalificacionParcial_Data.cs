@@ -11,6 +11,8 @@ namespace Core.Data.Academico
 {
     public class aca_MatriculaCalificacionParcial_Data
     {
+        aca_AnioLectivoConductaEquivalencia_Data odata_conducta = new aca_AnioLectivoConductaEquivalencia_Data();
+        aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
         public List<aca_MatriculaCalificacionParcial_Info> getList(int IdEmpresa, decimal IdMatricula)
         {
             try
@@ -270,8 +272,19 @@ namespace Core.Data.Academico
                     if (EntityConducta == null)
                         return false;
 
+                    decimal SumaConducta = 0;
                     var lst_calificaciones_parciales = getList_x_Parcial(info.IdEmpresa, info.IdMatricula, info.IdCatalogoParcial);
-                    decimal PromedioParcialConducta = Convert.ToDecimal(lst_calificaciones_parciales.Average(q=>q.Conducta));
+                    var info_matricula = odata_matricula.getInfo(info.IdEmpresa, info.IdMatricula);
+                    foreach (var item in lst_calificaciones_parciales)
+                    {
+                        if (item.Conducta!=null)
+                        {
+                            var info_equivalencia = odata_conducta.getInfo(info.IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(item.Conducta));
+                            SumaConducta = SumaConducta + info_equivalencia.Calificacion;
+                        }
+                    }
+
+                    Int32 PromedioParcialConducta = Convert.ToInt32(SumaConducta/ lst_calificaciones_parciales.Count());
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
                         EntityConducta.PromedioP1 = PromedioParcialConducta;

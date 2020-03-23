@@ -222,7 +222,6 @@
             column.VisibleIndex = 11;
             column.Visible = true;
             column.ReadOnly = false;
-            //q.ClientSideEvents.ValueChanged = "function(s, e){ ValidarPromedio();}";
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
@@ -283,6 +282,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 GridViewPartial_MatriculaCalificacionParcial.GetEditor('PromedioParcial').SetValue(data.promedio);
+                ValidarPromedio();
             },
             error: function (error) {
             }
@@ -305,10 +305,9 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if (data=="SI") {
-                    alert("Ingresa motivo de conducta");
+                if (data!="") {
+                    alert(data);
                 }
-                //GridViewPartial_MatriculaCalificacionParcial.GetEditor('PromedioParcial').SetValue(data);
             },
             error: function (error) {
             }
@@ -326,7 +325,11 @@
             Calificacion4: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion3').GetValue(),
             Evaluacion: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Evaluacion').GetValue(),
             Remedial1: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Remedial1').GetValue(),
-            Remedial2: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Remedial2').GetValue()
+            Remedial2: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Remedial2').GetValue(),
+            Conducta: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Conducta').GetValue(),
+            MotivoCalificacion: GridViewPartial_MatriculaCalificacionParcial.GetEditor('MotivoCalificacion').GetValue(),
+            AccionRemedial: GridViewPartial_MatriculaCalificacionParcial.GetEditor('AccionRemedial').GetValue(),
+            MotivoConducta: GridViewPartial_MatriculaCalificacionParcial.GetEditor('MotivoConducta').GetValue()
         }
         $.ajax({
             type: 'POST',

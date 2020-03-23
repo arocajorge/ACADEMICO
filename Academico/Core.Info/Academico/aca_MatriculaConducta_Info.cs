@@ -10,23 +10,23 @@ namespace Core.Info.Academico
     {
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
-        public Nullable<decimal> PromedioP1 { get; set; }
-        public Nullable<decimal> PromedioFinalP1 { get; set; }
-        public Nullable<decimal> PromedioP2 { get; set; }
-        public Nullable<decimal> PromedioFinalP2 { get; set; }
-        public Nullable<decimal> PromedioP3 { get; set; }
-        public Nullable<decimal> PromedioFinalP3 { get; set; }
-        public Nullable<decimal> PromedioQ1 { get; set; }
-        public Nullable<decimal> PromedioFinalQ1 { get; set; }
-        public Nullable<decimal> PromedioP4 { get; set; }
-        public Nullable<decimal> PromedioFinalP4 { get; set; }
-        public Nullable<decimal> PromedioP5 { get; set; }
-        public Nullable<decimal> PromedioFinalP5 { get; set; }
-        public Nullable<decimal> PromedioP6 { get; set; }
-        public Nullable<decimal> PromedioFinalP6 { get; set; }
-        public Nullable<decimal> PromedioQ2 { get; set; }
-        public Nullable<decimal> PromedioFinalQ2 { get; set; }
-        public Nullable<decimal> PromedioGeneral { get; set; }
-        public Nullable<decimal> PromedioFinal { get; set; }
+        public Nullable<int> PromedioP1 { get; set; }
+        public Nullable<int> PromedioFinalP1 { get; set; }
+        public Nullable<int> PromedioP2 { get; set; }
+        public Nullable<int> PromedioFinalP2 { get; set; }
+        public Nullable<int> PromedioP3 { get; set; }
+        public Nullable<int> PromedioFinalP3 { get; set; }
+        public Nullable<int> PromedioQ1 { get; set; }
+        public Nullable<int> PromedioFinalQ1 { get; set; }
+        public Nullable<int> PromedioP4 { get; set; }
+        public Nullable<int> PromedioFinalP4 { get; set; }
+        public Nullable<int> PromedioP5 { get; set; }
+        public Nullable<int> PromedioFinalP5 { get; set; }
+        public Nullable<int> PromedioP6 { get; set; }
+        public Nullable<int> PromedioFinalP6 { get; set; }
+        public Nullable<int> PromedioQ2 { get; set; }
+        public Nullable<int> PromedioFinalQ2 { get; set; }
+        public Nullable<int> PromedioGeneral { get; set; }
+        public Nullable<int> PromedioFinal { get; set; }
     }
 }
