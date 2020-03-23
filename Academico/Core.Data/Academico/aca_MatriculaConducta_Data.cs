@@ -26,14 +26,18 @@ namespace Core.Data.Academico
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdMatricula = q.IdMatricula,
-                            IdMateria = q.IdMateria,
-                            IdProfesor = q.IdProfesor,
-                            CalificacionP1 = q.CalificacionP1,
-                            CalificacionP2 = q.CalificacionP2,
-                            CalificacionP3 = q.CalificacionP3,
-                            CalificacionP4 = q.CalificacionP4,
-                            CalificacionP5 = q.CalificacionP5,
-                            CalificacionP6 = q.CalificacionP6,
+                            PromedioP1 = q.PromedioP1,
+                            PromedioP2 = q.PromedioP2,
+                            PromedioP3 = q.PromedioP3,
+                            PromedioP4 = q.PromedioP4,
+                            PromedioP5 = q.PromedioP5,
+                            PromedioP6 = q.PromedioP6,
+                            PromedioFinalP1 = q.PromedioFinalP1,
+                            PromedioFinalP2 = q.PromedioFinalP2,
+                            PromedioFinalP3 = q.PromedioFinalP3,
+                            PromedioFinalP4 = q.PromedioFinalP4,
+                            PromedioFinalP5 = q.PromedioFinalP5,
+                            PromedioFinalP6 = q.PromedioFinalP6,
                             PromedioQ1 = q.PromedioQ1,
                             PromedioQ2 = q.PromedioQ2,
                             PromedioFinalQ1 = q.PromedioFinalQ1,
@@ -60,52 +64,36 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst_matricula = (from q in lst_conducta
-                                         group q by new
-                                         {
-                                             q.IdEmpresa,
-                                             q.IdMatricula
-                                         } into mat
-                                         select new aca_Matricula_Info
-                                         {
-                                             IdEmpresa = mat.Key.IdEmpresa,
-                                             IdMatricula = mat.Key.IdMatricula
-                                         }).ToList();
-
-                    foreach (var item in lst_matricula)
+                    foreach (var info in lst_conducta)
                     {
-                        var lista_calificacion_conducta = Context.aca_MatriculaConducta.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).ToList();
+                        var lista_calificacion_conducta = Context.aca_MatriculaConducta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula).ToList();
                         Context.aca_MatriculaConducta.RemoveRange(lista_calificacion_conducta);
 
-                        var lst_x_matricula = lst_conducta.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).ToList();
-
-                        if (lst_x_matricula != null)
+                        aca_MatriculaConducta Entity = new aca_MatriculaConducta
                         {
-                            foreach (var info in lst_x_matricula)
-                            {
-                                aca_MatriculaConducta Entity = new aca_MatriculaConducta
-                                {
-                                    IdEmpresa = info.IdEmpresa,
-                                    IdMatricula = info.IdMatricula,
-                                    IdMateria = info.IdMateria,
-                                    IdProfesor = info.IdProfesor,
-                                    CalificacionP1 = info.CalificacionP1,
-                                    CalificacionP2 = info.CalificacionP2,
-                                    CalificacionP3 = info.CalificacionP3,
-                                    CalificacionP4 = info.CalificacionP4,
-                                    CalificacionP5 = info.CalificacionP5,
-                                    CalificacionP6 = info.CalificacionP6,
-                                    PromedioQ1 = info.PromedioQ1,
-                                    PromedioFinalQ1 = info.PromedioFinalQ1,
-                                    PromedioQ2 = info.PromedioQ2,
-                                    PromedioFinalQ2 = info.PromedioFinalQ2,
-                                    PromedioGeneral = info.PromedioGeneral,
-                                    PromedioFinal = info.PromedioFinal
-                                };
+                            IdEmpresa = info.IdEmpresa,
+                            IdMatricula = info.IdMatricula,
+                            PromedioP1 = info.PromedioP1,
+                            PromedioP2 = info.PromedioP2,
+                            PromedioP3 = info.PromedioP3,
+                            PromedioP4 = info.PromedioP4,
+                            PromedioP5 = info.PromedioP5,
+                            PromedioP6 = info.PromedioP6,
+                            PromedioFinalP1 = info.PromedioFinalP1,
+                            PromedioFinalP2 = info.PromedioFinalP2,
+                            PromedioFinalP3 = info.PromedioFinalP3,
+                            PromedioFinalP4 = info.PromedioFinalP4,
+                            PromedioFinalP5 = info.PromedioFinalP5,
+                            PromedioFinalP6 = info.PromedioFinalP6,
+                            PromedioQ1 = info.PromedioQ1,
+                            PromedioFinalQ1 = info.PromedioFinalQ1,
+                            PromedioQ2 = info.PromedioQ2,
+                            PromedioFinalQ2 = info.PromedioFinalQ2,
+                            PromedioGeneral = info.PromedioGeneral,
+                            PromedioFinal = info.PromedioFinal
+                        };
 
-                                Context.aca_MatriculaConducta.Add(Entity);
-                            }
-                        }
+                        Context.aca_MatriculaConducta.Add(Entity);
                         Context.SaveChanges();
                     }
                 }

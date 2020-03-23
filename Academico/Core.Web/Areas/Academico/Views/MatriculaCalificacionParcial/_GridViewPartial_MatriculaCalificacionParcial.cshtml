@@ -56,33 +56,41 @@
         {
             e.NewValues["Calificacion1"] = null;
         };
-
         settings.Columns.Add(column =>
         {
-            column.FieldName = "Codigo";
-            column.Caption = "Código";
-            column.Width = Unit.Percentage(10);
-            column.Index = 1;
+            column.FieldName = "IdMatricula";
+            column.Caption = "IdMatricula";
+            column.Width = Unit.Percentage(5);
+            column.VisibleIndex = 1;
             column.Visible = true;
-            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Alumno";
-            column.Width = Unit.Percentage(20);
-            column.Index = 2;
+            column.Width = Unit.Percentage(18);
+            column.VisibleIndex = 2;
             column.Visible = true;
-            column.EditFormSettings.Visible = DefaultBoolean.False;
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Calificacion1";
             column.Caption = "Calificacion 1";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Index = 3;
+            column.VisibleIndex = 3;
             column.Visible = true;
+            column.EditorProperties().SpinEdit(q =>
+            {
+                q.MinValue = 0;
+                q.Width = Unit.Percentage(100);
+                q.AllowMouseWheel = false;
+                q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
+            });
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
@@ -91,8 +99,15 @@
             column.Caption = "Calificacion 2";
             column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Index = 4;
+            column.VisibleIndex = 4;
             column.Visible = true;
+            column.EditorProperties().SpinEdit(q =>
+            {
+                q.MinValue = 0;
+                q.Width = Unit.Percentage(100);
+                q.AllowMouseWheel = false;
+                q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
+            });
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
@@ -101,8 +116,15 @@
             column.Caption = "Calificacion 3";
             column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Index = 5;
+            column.VisibleIndex = 5;
             column.Visible = true;
+            column.EditorProperties().SpinEdit(q =>
+            {
+                q.MinValue = 0;
+                q.Width = Unit.Percentage(100);
+                q.AllowMouseWheel = false;
+                q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
+            });
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
@@ -111,8 +133,15 @@
             column.Caption = "Calificacion 4";
             column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Index = 6;
+            column.VisibleIndex = 6;
             column.Visible = true;
+            column.EditorProperties().SpinEdit(q =>
+            {
+                q.MinValue = 0;
+                q.Width = Unit.Percentage(100);
+                q.AllowMouseWheel = false;
+                q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
+            });
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
@@ -121,8 +150,15 @@
             column.Caption = "Evaluación";
             column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Index = 7;
+            column.VisibleIndex = 7;
             column.Visible = true;
+            column.EditorProperties().SpinEdit(q =>
+            {
+                q.MinValue = 0;
+                q.Width = Unit.Percentage(100);
+                q.AllowMouseWheel = false;
+                q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
+            });
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
@@ -131,8 +167,15 @@
             column.Caption = "Remedial 1";
             column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Index = 8;
+            column.VisibleIndex = 8;
             column.Visible = true;
+            column.EditorProperties().SpinEdit(q =>
+            {
+                q.MinValue = 0;
+                q.Width = Unit.Percentage(100);
+                q.AllowMouseWheel = false;
+                q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
+            });
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
@@ -141,8 +184,15 @@
             column.Caption = "Remedial 2";
             column.Width = Unit.Percentage(8);
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Index = 9;
+            column.VisibleIndex = 9;
             column.Visible = true;
+            column.EditorProperties().SpinEdit(q =>
+            {
+                q.MinValue = 0;
+                q.Width = Unit.Percentage(100);
+                q.AllowMouseWheel = false;
+                q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
+            });
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
@@ -154,12 +204,25 @@
             {
                 p.Columns.Add("Letra", "Conducta").Width = Unit.Percentage(100);
                 p.TextField = "Letra";
-                p.ValueField = "Calificacion";
-                p.ValueType = typeof(decimal);
+                p.ValueField = "Secuencia";
+                p.ValueType = typeof(int);
                 p.DataSource = ViewBag.lst_conducta;
+                p.ClientSideEvents.ValueChanged = "function(s, e){ ValidarConducta();}";
             });
-            column.Index = 10;
+            column.VisibleIndex = 10;
             column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "PromedioParcial";
+            column.Caption = "Promedio Parcial";
+            column.Width = Unit.Percentage(8);
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.VisibleIndex = 11;
+            column.Visible = true;
+            column.ReadOnly = false;
+            //q.ClientSideEvents.ValueChanged = "function(s, e){ ValidarPromedio();}";
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add(column =>
@@ -167,7 +230,7 @@
             column.FieldName = "MotivoCalificacion";
             column.Caption = "Motivo Calificacion";
             column.Width = Unit.Percentage(10);
-            column.Index = 99;
+            column.VisibleIndex = 12;
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
@@ -176,7 +239,7 @@
             column.FieldName = "AccionRemedial";
             column.Caption = "Acción Remedial";
             column.Width = Unit.Percentage(10);
-            column.Index = 99;
+            column.VisibleIndex = 13;
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
@@ -185,14 +248,102 @@
             column.FieldName = "MotivoConducta";
             column.Caption = "Motivo Conducta";
             column.Width = Unit.Percentage(10);
-            column.Index = 99;
+            column.VisibleIndex = 14;
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
-        settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {var editor = IdProfesor;editor.Focus();}}";
+        settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {} }";
 
     });
 
 }
 @grid.Bind(Model).GetHtml()
+<script type="text/javascript">
+    function CalcularPromedio(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdMatricula: GridViewPartial_MatriculaCalificacionParcial.GetEditor('IdMatricula').GetValue(),
+            Calificacion1: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion1').GetValue(),
+            Calificacion2: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion2').GetValue(),
+            Calificacion3: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion3').GetValue(),
+            Calificacion4: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion3').GetValue(),
+            Evaluacion: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Evaluacion').GetValue(),
+            Remedial1: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Remedial1').GetValue(),
+            Remedial2: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Remedial2').GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CalcularPromedio", "MatriculaCalificacionParcial",new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_MatriculaCalificacionParcial.GetEditor('PromedioParcial').SetValue(data.promedio);
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+    function ValidarConducta(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdMatricula: GridViewPartial_MatriculaCalificacionParcial.GetEditor('IdMatricula').GetValue(),
+            Conducta: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Conducta').GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ValidarConducta", "MatriculaCalificacionParcial",new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data=="SI") {
+                    alert("Ingresa motivo de conducta");
+                }
+                //GridViewPartial_MatriculaCalificacionParcial.GetEditor('PromedioParcial').SetValue(data);
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+    
+    function ValidarPromedio(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdMatricula: GridViewPartial_MatriculaCalificacionParcial.GetEditor('IdMatricula').GetValue(),
+            Calificacion1: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion1').GetValue(),
+            Calificacion2: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion2').GetValue(),
+            Calificacion3: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion3').GetValue(),
+            Calificacion4: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Calificacion3').GetValue(),
+            Evaluacion: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Evaluacion').GetValue(),
+            Remedial1: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Remedial1').GetValue(),
+            Remedial2: GridViewPartial_MatriculaCalificacionParcial.GetEditor('Remedial2').GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ValidarPromedio", "MatriculaCalificacionParcial",new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.mensaje != "") {
+                    alert(data.mensaje);
+                }
+            },
+            error: function (error) {
+            }
+        });
+    };
+</script>

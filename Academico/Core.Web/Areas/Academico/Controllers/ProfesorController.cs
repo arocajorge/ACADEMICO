@@ -13,6 +13,7 @@ using Core.Info.General;
 using DevExpress.Web;
 using System.IO;
 using ExcelDataReader;
+using Core.Bus.SeguridadAcceso;
 
 namespace Core.Web.Areas.Academico.Controllers
 {
@@ -24,6 +25,7 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_profesion_Bus bus_profesion = new tb_profesion_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
+        seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         public static UploadedFile file { get; set; }
         public static byte[] imagen { get; set; }
@@ -80,7 +82,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_tipo_discapacidad = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODISCAP), false);
             lst_tipo_discapacidad.Add(new tb_Catalogo_Info { CodCatalogo = "", ca_descripcion = "" });
             var lst_profesion = bus_profesion.GetList(false);
-            //lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "" });
+            var lst_usuario = bus_usuario.get_list(false);
 
             ViewBag.lst_sexo = lst_sexo;
             ViewBag.lst_estado_civil = lst_estado_civil;
@@ -88,6 +90,7 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_tipo_naturaleza = lst_tipo_naturaleza;
             ViewBag.lst_tipo_discapacidad = lst_tipo_discapacidad;
             ViewBag.lst_profesion = lst_profesion;
+            ViewBag.lst_usuario = lst_usuario;
         }
         #endregion
 

@@ -46,6 +46,47 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_MatriculaCalificacion_Info getInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, decimal IdAlumno)
+        {
+            try
+            {
+                aca_MatriculaCalificacion_Info info = new aca_MatriculaCalificacion_Info();
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.vwaca_MatriculaCalificacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede
+                    && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo
+                    && q.IdMateria == IdMateria && q.IdAlumno == IdAlumno).FirstOrDefault();
+
+                    if (Entity == null)
+                        return null;
+                    info = new aca_MatriculaCalificacion_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdMatricula = Entity.IdMatricula,
+                        IdMateria = Entity.IdMateria,
+                        IdProfesor = Entity.IdProfesor,
+                        IdAlumno = Entity.IdAlumno,
+                        Codigo = Entity.Codigo,
+                        pe_nombreCompletoAlumno = Entity.pe_nombreCompletoAlumno,
+                        CalificacionP1 = Entity.CalificacionP1,
+                        CalificacionP2 = Entity.CalificacionP2,
+                        CalificacionP3 = Entity.CalificacionP3,
+                        CalificacionP4 = Entity.CalificacionP4,
+                        CalificacionP5 = Entity.CalificacionP5,
+                        CalificacionP6 = Entity.CalificacionP6
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, List<aca_MatriculaCalificacion_Info> lista)
         {
             try

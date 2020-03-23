@@ -86,7 +86,7 @@ namespace Core.Data.Academico
                         CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
                         NumeroCarnetConadis = Entity.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
-                        IdUsuarioAnulacion = Entity.IdUsuario,
+                        IdUsuario = Entity.IdUsuario,
                     };
                 }
 
@@ -139,6 +139,7 @@ namespace Core.Data.Academico
                         NumeroCarnetConadis = Entity.NumeroCarnetConadis,
                         PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
                         IdUsuarioAnulacion = Entity.IdUsuario,
+                        IdUsuario = Entity.IdUsuario
                     };
                 }
 

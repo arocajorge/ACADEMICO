@@ -130,6 +130,27 @@
                     @Html.ValidationMessageFor(q => q.EsInspector, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Usuario</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdUsuario, settings =>
+                           {
+                               settings.Name = "IdUsuario";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdUsuario", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                               settings.Properties.Columns.Add("Nombre", "Nombre").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdUsuario";
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.TextField = "Nombre";
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_usuario).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
         </div>
     </div>
     <div id="Tabs" role="tabpanel">

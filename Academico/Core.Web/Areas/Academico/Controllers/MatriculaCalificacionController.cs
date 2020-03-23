@@ -86,12 +86,13 @@ namespace Core.Web.Areas.Academico.Controllers
                     var lst_materias_x_curso = bus_materias_x_paralelo.GetList(item.IdEmpresa, item.IdSede, item.IdAnio, item.IdNivel, item.IdJornada, item.IdCurso, item.IdParalelo);
                     var lst_parcial = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
 
+                    var conducta = lst_conducta_existente.Where(q => q.IdMatricula == item.IdMatricula).FirstOrDefault();
+
                     if (lst_materias_x_curso != null && lst_materias_x_curso.Count > 0)
                     {
                         foreach (var item_materias in lst_materias_x_curso)
                         {
                             var calificacion = lst_calificacion_existente.Where(q => q.IdMateria == item_materias.IdMateria).FirstOrDefault();
-                            var conducta = lst_conducta_existente.Where(q => q.IdMateria == item_materias.IdMateria).FirstOrDefault();
 
                             if (lst_parcial.Count()>0)
                             {
@@ -150,29 +151,33 @@ namespace Core.Web.Areas.Academico.Controllers
                             };
 
                             lst_calificacion.Add(info_calificacion);
-
-                            var info_conducta = new aca_MatriculaConducta_Info
-                            {
-                                IdEmpresa = item.IdEmpresa,
-                                IdMatricula = item.IdMatricula,
-                                IdMateria = item_materias.IdMateria,
-                                IdProfesor = item_materias.IdProfesor,
-                                CalificacionP1 = (conducta == null ? null : conducta.CalificacionP1),
-                                CalificacionP2 = (conducta == null ? null : conducta.CalificacionP2),
-                                CalificacionP3 = (conducta == null ? null : conducta.CalificacionP3),
-                                CalificacionP4 = (conducta == null ? null : conducta.CalificacionP4),
-                                CalificacionP5 = (conducta == null ? null : conducta.CalificacionP5),
-                                CalificacionP6 = (conducta == null ? null : conducta.CalificacionP6),
-                                PromedioFinalQ1 = (conducta == null ? null : conducta.PromedioFinalQ1),
-                                PromedioFinalQ2 = (conducta == null ? null : conducta.PromedioFinalQ2),
-                                PromedioQ1 = (conducta == null ? null : conducta.PromedioQ1),
-                                PromedioQ2 = (conducta == null ? null : conducta.PromedioQ2),
-                                PromedioGeneral = (conducta == null ? null : conducta.PromedioGeneral),
-                                PromedioFinal = (conducta == null ? null : conducta.PromedioFinal)
-                            };
-
-                            lst_conducta.Add(info_conducta);
                         }
+
+                        var info_conducta = new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdMatricula = item.IdMatricula,
+                            PromedioP1 = (conducta == null ? null : conducta.PromedioP1),
+                            PromedioP2 = (conducta == null ? null : conducta.PromedioP2),
+                            PromedioP3 = (conducta == null ? null : conducta.PromedioP3),
+                            PromedioP4 = (conducta == null ? null : conducta.PromedioP4),
+                            PromedioP5 = (conducta == null ? null : conducta.PromedioP5),
+                            PromedioP6 = (conducta == null ? null : conducta.PromedioP6),
+                            PromedioFinalP1 = (conducta == null ? null : conducta.PromedioFinalP1),
+                            PromedioFinalP2 = (conducta == null ? null : conducta.PromedioFinalP2),
+                            PromedioFinalP3 = (conducta == null ? null : conducta.PromedioFinalP3),
+                            PromedioFinalP4 = (conducta == null ? null : conducta.PromedioFinalP4),
+                            PromedioFinalP5 = (conducta == null ? null : conducta.PromedioFinalP5),
+                            PromedioFinalP6 = (conducta == null ? null : conducta.PromedioFinalP6),
+                            PromedioFinalQ1 = (conducta == null ? null : conducta.PromedioFinalQ1),
+                            PromedioFinalQ2 = (conducta == null ? null : conducta.PromedioFinalQ2),
+                            PromedioQ1 = (conducta == null ? null : conducta.PromedioQ1),
+                            PromedioQ2 = (conducta == null ? null : conducta.PromedioQ2),
+                            PromedioGeneral = (conducta == null ? null : conducta.PromedioGeneral),
+                            PromedioFinal = (conducta == null ? null : conducta.PromedioFinal)
+                        };
+
+                        lst_conducta.Add(info_conducta);
                     }
                     #endregion
                 }
