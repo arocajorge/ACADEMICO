@@ -109,6 +109,8 @@ namespace Core.Data.Academico
                         if (Entity == null)
                             return false;
 
+                        Entity.FechaDesde = item.FechaDesde;
+                        Entity.FechaHasta = item.FechaHasta;
                         Entity.FechaProntoPago = item.FechaProntoPago;
                         Entity.IdUsuarioModificacion = item.IdUsuarioModificacion;
                         Entity.FechaModificacion = item.FechaModificacion = DateTime.Now;

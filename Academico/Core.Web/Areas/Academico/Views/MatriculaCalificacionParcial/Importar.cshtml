@@ -1,14 +1,11 @@
-﻿@using Core.Web.Helps
-@model Core.Info.Academico.aca_MatriculaCalificacionParcial_Info
+﻿@model Core.Info.Academico.aca_MatriculaCalificacionParcial_Info
 @{
-    ViewBag.Title = "Ingreso de calificaciones";
-    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    {
-        Response.Redirect("~/Account/Login");
-    }
+    ViewBag.Title = "Importar de calificaciones parciales";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script>
+
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
     function buscar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -31,15 +28,73 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridViewPartial_MatriculaCalificacionParcial.PerformCallback();
+                GridViewPartial_MatriculaCalificacionParcialImportacion.PerformCallback();
             },
             error: function (error) {
             }
         });
     }
+
+    function OnFileUploadStart(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ActualizarVariablesSession", "MatriculaCalificacionParcial", new { Area = "Academico"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function OnFileUploadComplete(s, e)
+    {
+        GridViewPartial_MatriculaCalificacionParcialImportacion.PerformCallback();
+    }
+
 </script>
-@using (Html.BeginForm("Index", "MatriculaCalificacionParcial", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
+
+@using (Html.BeginForm("Importar", "MatriculaCalificacionParcial", FormMethod.Post, new { @role = "form", @id = "form" }))
 {
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+    if (ViewBag.error != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.error
+                <a href="@Url.Action("Index","LogError",new  {Area="General"}, null )" class="small-box-footer" target="_blank">Ver detalle error<i class="fa fa-arrow-circle-right"></i></a>
+            </h4>
+        </div>
+
+    }
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="row">
@@ -106,11 +161,41 @@
             </div>
         </div>
     </div>
-
-    <div class="box-footer">
-        <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button>  
-        <a class="btn btn-primary" href="@Url.Action("Importar","MatriculaCalificacionParcial",new { Area = "Academico", IdEmpresa = SessionFixed.IdEmpresa },null)">Descargar/Importar</a>   
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button>
+                <button type="submit" class="btn btn-primary" title="Guardar">Guardar</button>
+            </div>
+        </div>
     </div>
-    @Html.Action("GridViewPartial_MatriculaCalificacionParcial")
-    }
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                @Html.DevExpress().UploadControl(settings =>
+           {
+               settings.Name = "UploadControlFile";
+               settings.CallbackRouteValues = new { Controller = "MatriculaCalificacionParcial", Action = "UploadControlUpload" };
+               settings.ShowUploadButton = true;
+               settings.ShowProgressPanel = true;
+               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+               settings.NullText = "Selecciona el archivo...";
+               settings.ClientSideEvents.FilesUploadStart = "OnFileUploadStart";
+               settings.ClientSideEvents.FileUploadComplete = "OnFileUploadComplete";
+           }).GetHtml()
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_MatriculaCalificacionParcialImportacion")
+            </div>
+        </div>
+    </div>
 
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

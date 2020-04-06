@@ -75,6 +75,38 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_AnioLectivoConductaEquivalencia_Info getInfo_x_Letra(int IdEmpresa, int IdAnio, string Letra)
+        {
+            try
+            {
+                aca_AnioLectivoConductaEquivalencia_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Letra == Letra).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_AnioLectivoConductaEquivalencia_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAnio = Entity.IdAnio,
+                        Secuencia = Entity.Secuencia,
+                        Letra = Entity.Letra,
+                        Calificacion = Entity.Calificacion,
+                        IngresaMotivo = Entity.IngresaMotivo
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public aca_AnioLectivoConductaEquivalencia_Info getInfo_X_PromConducta(int IdEmpresa, int IdAnio, decimal PromedioConducta)
         {
             try

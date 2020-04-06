@@ -44,6 +44,7 @@ namespace Core.Info.Academico
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }
         public decimal PromedioParcial { get; set; }
+        public bool RegistroValido { get; set; }
         #endregion
     }
 }

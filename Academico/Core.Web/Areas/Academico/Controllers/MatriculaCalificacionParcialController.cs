@@ -4,8 +4,10 @@ using Core.Info.Academico;
 using Core.Info.Helps;
 using Core.Web.Helps;
 using DevExpress.Web.Mvc;
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,6 +36,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_MatriculaCalificacion_Combos_List ListaCombos = new aca_MatriculaCalificacion_Combos_List();
         aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
         string mensaje = string.Empty;
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Index
@@ -77,6 +80,7 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             List<aca_MatriculaCalificacionParcial_Info> model = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
+
             return PartialView("_GridViewPartial_MatriculaCalificacionParcial", model);
         }
         #endregion
@@ -102,6 +106,9 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_conducta = bus_conducta.GetList(IdEmpresa, IdAnio, false);
             ViewBag.lst_conducta = lst_conducta;
         }
+
+        
+
         #endregion
 
         #region Combos
@@ -464,8 +471,12 @@ namespace Core.Web.Areas.Academico.Controllers
         public JsonResult cargar_calificaciones(int IdEmpresa=0, int IdSede = 0, int IdAnio=0, int IdNivel=0, int IdJornada=0, int IdCurso=0, int IdParalelo = 0, int IdMateria=0, int IdCatalogoParcial = 0)
         {
             List<aca_MatriculaCalificacionParcial_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionParcial_Info>();
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
 
-            ListaCalificaciones = bus_calificacion_parcial.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial);
+            ListaCalificaciones = bus_calificacion_parcial.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial, IdProfesor);
             foreach (var item in ListaCalificaciones)
             {
                 var calificacion_promediada = bus_calificacion.GetInfo(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, item.IdAlumno);
@@ -489,6 +500,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     item.PromedioParcial = Convert.ToDecimal(calificacion_promediada == null ? 0 : calificacion_promediada.CalificacionP6);
 
                 item.PromedioParcial = (decimal)Math.Round(item.PromedioParcial, 2, MidpointRounding.AwayFromZero);
+                item.RegistroValido = true;
             }
 
             Lista_CalificacionParcial.set_list(ListaCalificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -596,12 +608,144 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings_Parcial.UploadValidationSettings, UploadControlSettings_Parcial.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar( int IdEmpresa = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
+            aca_MatriculaCalificacionParcial_Info model = new aca_MatriculaCalificacionParcial_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdSede = Convert.ToInt32(SessionFixed.IdSede),
+                IdAnio = (info_anio == null ? 0 : info_anio.IdAnio),
+                IdNivel = 0,
+                IdJornada = 0,
+                IdCurso = 0,
+                IdParalelo = 0,
+                IdMateria = 0,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, IdProfesor, EsSuperAdmin);
+            ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            cargar_combos(model);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(aca_MatriculaCalificacionParcial_Info model)
+        {
+            try
+            {
+                var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                string IdUsuario = SessionFixed.IdUsuario;
+                bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+                var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+                var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+                var Lista_Calificaciones = Lista_CalificacionParcial.get_list(model.IdTransaccionSession);
+                bool guardar = true;
+                ViewBag.mensaje = null;
+                ViewBag.MensajeSuccess = null;
+
+                foreach (var item in Lista_Calificaciones)
+                {
+                    item.IdAnio = model.IdAnio;
+                    item.IdSede = model.IdSede;
+                    item.IdNivel = model.IdNivel;
+                    item.IdJornada = model.IdJornada;
+                    item.IdCurso = model.IdCurso;
+                    item.IdParalelo = model.IdParalelo;
+                    item.IdMateria = model.IdMateria;
+                    item.IdCatalogoParcial = model.IdCatalogoParcial;
+                    item.IdProfesor = IdProfesor;               
+                }
+
+                foreach (var item in Lista_Calificaciones)
+                {
+                    if (item.IdProfesor==0 || item.RegistroValido==false)
+                    {
+                        if (item.IdProfesor == 0)
+                        {
+                            ViewBag.mensaje = "El usuario no tiene asignado código de profesor. ";
+                        }
+
+                        if (item.RegistroValido == false)
+                        {
+                            ViewBag.mensaje += "Existen registros con promedio de calificación o conducta por debajo del mínimo aceptado, debe ingresar motivo y acción remedial de la calificación.";
+                        }
+                        
+                        guardar = false;
+                        break;
+                    }
+                }
+
+                if (guardar == true)
+                {
+                    ViewBag.mensaje = null;
+                    
+                    foreach (var item in Lista_Calificaciones)
+                    {
+                        if (!bus_calificacion_parcial.ModicarDB(item))
+                        {
+                            ViewBag.mensaje = "Error al importar el archivo";
+                            cargar_combos(model);
+                            return View(model);
+                        }
+                    }
+                    ViewBag.MensajeSuccess = MensajeSuccess;
+                }
+                cargar_combos(model);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                //SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.error = ex.Message.ToString();
+                cargar_combos(model);
+                return View(model);
+            }
+        }
+
+        public ActionResult GridViewPartial_MatriculaCalificacionParcialImportacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_MatriculaCalificacionParcialImportacion", model);
+        }
         #endregion
     }
 
     public class aca_MatriculaCalificacionParcial_List
     {
         aca_MatriculaCalificacionParcial_Bus bus_parcial = new aca_MatriculaCalificacionParcial_Bus();
+        aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
         string Variable = "aca_MatriculaCalificacionParcial_Info";
         public List<aca_MatriculaCalificacionParcial_Info> get_list(decimal IdTransaccionSession)
         {
@@ -622,23 +766,33 @@ namespace Core.Web.Areas.Academico.Controllers
         public void UpdateRow(aca_MatriculaCalificacionParcial_Info info_det, decimal IdTransaccionSession)
         {
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
 
             aca_MatriculaCalificacionParcial_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdEmpresa==IdEmpresa && m.IdMatricula == info_det.IdMatricula).FirstOrDefault();
-            edited_info.Calificacion1 = info_det.Calificacion1;
-            edited_info.Calificacion2 = info_det.Calificacion2;
-            edited_info.Calificacion3 = info_det.Calificacion3;
-            edited_info.Calificacion4 = info_det.Calificacion4;
-            edited_info.Evaluacion = info_det.Evaluacion;
-            edited_info.Remedial1 = info_det.Remedial1;
-            edited_info.Remedial2 = info_det.Remedial2;
-            edited_info.Conducta = info_det.Conducta;
-            edited_info.PromedioParcial = info_det.PromedioParcial;
-            edited_info.MotivoCalificacion = info_det.MotivoCalificacion;
-            edited_info.MotivoConducta = info_det.MotivoConducta;
-            edited_info.AccionRemedial = info_det.AccionRemedial;
-            edited_info.IdUsuarioModificacion = SessionFixed.IdUsuario;
 
-            bus_parcial.ModicarDB(edited_info);
+            if (edited_info.IdProfesor>0)
+            {
+                edited_info.Calificacion1 = info_det.Calificacion1;
+                edited_info.Calificacion2 = info_det.Calificacion2;
+                edited_info.Calificacion3 = info_det.Calificacion3;
+                edited_info.Calificacion4 = info_det.Calificacion4;
+                edited_info.Evaluacion = info_det.Evaluacion;
+                edited_info.Remedial1 = info_det.Remedial1;
+                edited_info.Remedial2 = info_det.Remedial2;
+                edited_info.Conducta = info_det.Conducta;
+                edited_info.PromedioParcial = info_det.PromedioParcial;
+                edited_info.MotivoCalificacion = info_det.MotivoCalificacion;
+                edited_info.MotivoConducta = info_det.MotivoConducta;
+                edited_info.AccionRemedial = info_det.AccionRemedial;
+                edited_info.IdProfesor = IdProfesor;
+                edited_info.IdUsuarioModificacion = SessionFixed.IdUsuario;
+
+                bus_parcial.ModicarDB(edited_info);
+            }
+            
         }
     }
 
@@ -659,6 +813,150 @@ namespace Core.Web.Areas.Academico.Controllers
         public void set_list(List<aca_MatriculaCalificacion_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
+    public class UploadControlSettings_Parcial
+    {
+        public static aca_MatriculaCalificacionParcial_Info validar_calificaciones(aca_MatriculaCalificacionParcial_Info info)
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
+            aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+            aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
+            var mensaje = string.Empty;
+
+            #region CalcularPromedio
+            decimal resultado = 0;
+            decimal suma_calificaciones = Convert.ToDecimal(info.Calificacion1 + info.Calificacion2 + info.Calificacion3 + info.Calificacion4 + info.Evaluacion);
+            decimal promedio = Convert.ToDecimal((info.Calificacion1 + info.Calificacion2 + info.Calificacion3 + info.Calificacion4 + info.Evaluacion) / 5);
+            resultado = promedio;
+
+            if (info.Remedial1 != 0)
+            {
+                suma_calificaciones = Convert.ToDecimal(suma_calificaciones + info.Remedial1);
+                resultado = (decimal)Math.Round((suma_calificaciones / 6), 2, MidpointRounding.AwayFromZero);
+            }
+            else if (info.Remedial2 != 0)
+            {
+                suma_calificaciones = Convert.ToDecimal(suma_calificaciones + info.Remedial1 + info.Remedial2);
+                resultado = (decimal)Math.Round((suma_calificaciones / 7), 2, MidpointRounding.AwayFromZero);
+            }
+            else
+            {
+                resultado = promedio;
+            }
+
+            info.PromedioParcial = resultado;
+            #endregion
+
+            #region ValidarPromedio
+            var info_matricula = bus_matricula.GetInfo(IdEmpresa, info.IdMatricula);
+            var info_anio_lectivo = bus_anio.GetInfo(IdEmpresa, info_matricula.IdAnio);
+            var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info.Conducta));
+
+            if (info.Calificacion1 > 0 && info.Calificacion2 > 0 && info.Calificacion3 > 0 && info.Calificacion4 > 0 && info.Evaluacion > 0)
+            {
+                if (info_anio_lectivo != null)
+                {
+                    if (resultado < Convert.ToDecimal(info_anio_lectivo.PromedioMinimoParcial))
+                    {
+                        if (string.IsNullOrEmpty(info.MotivoCalificacion) || string.IsNullOrEmpty(info.AccionRemedial))
+                        {
+                            //ViewBag.mensaje = "Promedio por debajo del mínimo aceptado, debe ingresar motivo y accion remedial de la calificación.";
+                            info.RegistroValido = false;
+                        }
+                    }
+
+                    if (info_conducta != null)
+                    {
+                        if (info_conducta.IngresaMotivo == true && string.IsNullOrEmpty(info.MotivoConducta))
+                        {
+                            //ViewBag.mensaje += " Debe de ingresar el motivo por el cual el estudiante tiene esa conducta.";
+                            info.RegistroValido = false;
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            return info;
+        }
+
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            aca_MatriculaCalificacionParcial_List Lista_CalificacionParcial = new aca_MatriculaCalificacionParcial_List();
+            List<aca_MatriculaCalificacionParcial_Info> Lista_Calificaciones = new List<aca_MatriculaCalificacionParcial_Info>();
+            aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
+            aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
+            #endregion
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        var IdMatricula = (Convert.ToInt32(reader.GetValue(0)));
+                        var pe_nombreCompleto = (Convert.ToString(reader.GetValue(1)).Trim());
+                        var Calificacion1 = Convert.ToDecimal(reader.GetValue(2));
+                        var Calificacion2 = (Convert.ToDecimal(reader.GetValue(3)));
+                        var Calificacion3 = (Convert.ToDecimal(reader.GetValue(4)));
+                        var Calificacion4 = (Convert.ToDecimal(reader.GetValue(5)));
+                        var Evaluacion = (Convert.ToDecimal(reader.GetValue(6)));
+                        var Remedial1 = (Convert.ToDecimal(reader.GetValue(7)));
+                        var Remedial2 = (Convert.ToDecimal(reader.GetValue(8)));
+                        var Conducta = (Convert.ToString(reader.GetValue(9)).Trim());
+                        var MotivoCalificacion = (Convert.ToString(reader.GetValue(10)).Trim());
+                        var AccionRemedial = (Convert.ToString(reader.GetValue(11)).Trim());
+                        var MotivoConducta = (Convert.ToString(reader.GetValue(12)).Trim());
+
+                        var info_conducta = bus_conducta.GetInfo_x_Letra(IdEmpresa, info_anio.IdAnio, Conducta);
+                        aca_MatriculaCalificacionParcial_Info info = new aca_MatriculaCalificacionParcial_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdMatricula = IdMatricula,
+                            pe_nombreCompleto = pe_nombreCompleto,
+                            Calificacion1 = Calificacion1,
+                            Calificacion2 = Calificacion2,
+                            Calificacion3 = Calificacion3,
+                            Calificacion4 = Calificacion4,
+                            Evaluacion = Evaluacion,
+                            Remedial1 = Remedial1,
+                            Remedial2 = Remedial2,
+                            Conducta = (info_conducta == null ? (int?)null : info_conducta.Secuencia),
+                            MotivoCalificacion = MotivoCalificacion,
+                            MotivoConducta = MotivoConducta,
+                            AccionRemedial = AccionRemedial,
+                            IdUsuarioModificacion = SessionFixed.IdUsuario,
+                            FechaModificacion = DateTime.Now,
+                            RegistroValido=true
+                        };
+
+                        var info_valida = validar_calificaciones(info);
+                        Lista_Calificaciones.Add(info_valida);
+                    }
+                    else
+                        cont++;
+                }
+
+                Lista_CalificacionParcial.set_list(Lista_Calificaciones, IdTransaccionSession);
+            }
         }
     }
 }
