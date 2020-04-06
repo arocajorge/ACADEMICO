@@ -21,5 +21,8 @@ namespace Core.Data.Base
         public string NomCatalogo { get; set; }
         public Nullable<System.DateTime> FechaInicio { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }
+        public Nullable<bool> EsExamen { get; set; }
+        public int IdCatalogoTipo { get; set; }
+        public string NomCatalogoTipo { get; set; }
     }
 }

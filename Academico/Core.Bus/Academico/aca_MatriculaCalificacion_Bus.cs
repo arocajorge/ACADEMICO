@@ -84,5 +84,16 @@ namespace Core.Bus.Academico
             }
         }
 
+        public bool ModicarDB(aca_MatriculaCalificacion_Info info)
+        {
+            try
+            {
+                return odata.modificarDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

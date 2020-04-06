@@ -15,6 +15,7 @@ namespace Core.Info.Academico
         public int IdCatalogoParcial { get; set; }
         public Nullable<System.DateTime> FechaInicio { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }
+        public Nullable<bool> EsExamen { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }

@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_MateriaCompartida";
-        settings.CallbackRouteValues = new { Controller = "MateriaCompartida", Action = "GridViewPartial_MateriaCompartida", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
+        settings.CallbackRouteValues = new { Controller = "MateriaCompartida", Action = "GridViewPartial_MateriaCompartida"};
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdAlumno";
         settings.CommandColumn.ShowNewButtonInHeader = false;
@@ -12,17 +12,9 @@
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        if (ViewBag.Modificar == true)
-        {
-            settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "MateriaCompartida", Action = "EditingUpdate", Area = "Academico" };
-            settings.CommandColumn.ShowEditButton = true;
-            settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
-        }
-        else
-        {
-            settings.CommandColumn.ShowEditButton = false;
-            settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = false;
-        }
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "MateriaCompartida", Action = "EditingUpdate", Area = "Academico" };
+        settings.CommandColumn.ShowEditButton = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;

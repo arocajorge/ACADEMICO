@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_Parcial";
-        settings.CallbackRouteValues = new { Controller = "Parcial", Action = "GridViewPartial_Parcial", Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
+        settings.CallbackRouteValues = new { Controller = "Parcial", Action = "GridViewPartial_Parcial" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCatalogoParcial";
         settings.CommandColumn.ShowNewButtonInHeader = false;
@@ -12,17 +12,9 @@
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        if (ViewBag.Modificar==true)
-        {
-            settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Parcial", Action = "EditingUpdate", Area = "Academico" };
-            settings.CommandColumn.ShowEditButton = true;
-            settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
-        }
-        else
-        {
-            settings.CommandColumn.ShowEditButton = false;
-            settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = false;
-        }
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "Parcial", Action = "EditingUpdate", Area = "Academico" };
+        settings.CommandColumn.ShowEditButton = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
@@ -64,7 +56,7 @@
         {
             column.FieldName = "NomCatalogo";
             column.Caption = "Parcial";
-            column.Width = Unit.Percentage(70);
+            column.Width = Unit.Percentage(60);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
@@ -90,6 +82,16 @@
 
             });
             column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "EsExamen";
+            column.Caption = "Es Examen";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
         settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {}}";

@@ -37,9 +37,9 @@ namespace Core.Data.Base
         public string MotivoAnulacion { get; set; }
     
         public virtual aca_Alumno aca_Alumno { get; set; }
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_Catalogo aca_Catalogo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_MatriculaCondicional_Det> aca_MatriculaCondicional_Det { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

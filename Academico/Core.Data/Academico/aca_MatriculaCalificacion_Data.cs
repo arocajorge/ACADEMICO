@@ -1,5 +1,6 @@
 ﻿using Core.Data.Base;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,7 +75,13 @@ namespace Core.Data.Academico
                         CalificacionP3 = Entity.CalificacionP3,
                         CalificacionP4 = Entity.CalificacionP4,
                         CalificacionP5 = Entity.CalificacionP5,
-                        CalificacionP6 = Entity.CalificacionP6
+                        CalificacionP6 = Entity.CalificacionP6,
+                        ExamenQ1 = Entity.ExamenQ1,
+                        ExamenQ2 = Entity.ExamenQ2,
+                        ExamenMejoramiento = Entity.ExamenMejoramiento,
+                        ExamenSupletorio = Entity.ExamenSupletorio,
+                        ExamenRemedial = Entity.ExamenRemedial,
+                        ExamenGracia = Entity.ExamenGracia
                     };
                 }
 
@@ -299,6 +306,46 @@ namespace Core.Data.Academico
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public bool modificarDB(aca_MatriculaCalificacion_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_MatriculaCalificacion EntityCalificacion = Context.aca_MatriculaCalificacion.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
+                    && q.IdMatricula == info.IdMatricula && q.IdProfesor == info.IdProfesor && q.IdMateria == info.IdMateria);
+                    if (EntityCalificacion == null)
+                        return false;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
+                        EntityCalificacion.ExamenQ1 = info.CalificacionExamen;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
+                        EntityCalificacion.ExamenQ2 = info.CalificacionExamen;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXMEJ))
+                        EntityCalificacion.ExamenMejoramiento = info.CalificacionExamen;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXSUP))
+                        EntityCalificacion.ExamenSupletorio = info.CalificacionExamen;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXREM))
+                        EntityCalificacion.ExamenRemedial = info.CalificacionExamen;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXGRA))
+                        EntityCalificacion.ExamenGracia = info.CalificacionExamen;
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }

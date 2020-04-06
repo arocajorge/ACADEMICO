@@ -58,6 +58,8 @@ namespace Core.Info.Academico
         public bool EsObligatorio { get; set; }
         public string pe_nombreCompletoAlumno { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public decimal CalificacionExamen { get; set; }
+        public int IdCatalogoParcial { get; set; }
         #endregion
     }
 }

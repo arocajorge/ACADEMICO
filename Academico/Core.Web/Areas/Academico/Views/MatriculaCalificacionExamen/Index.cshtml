@@ -1,6 +1,6 @@
-﻿@model Core.Info.Academico.aca_MatriculaCalificacionParcial_Info
+﻿@model Core.Info.Academico.aca_MatriculaCalificacion_Info
 @{
-    ViewBag.Title = "Ingreso de calificaciones";
+    ViewBag.Title = "Ingreso de calificaciones de exámenes";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -23,21 +23,21 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("cargar_calificaciones", "MatriculaCalificacionParcial", new { Area = "Academico" })',
+            url: '@Url.Action("cargar_calificaciones", "MatriculaCalificacionExamen", new { Area = "Academico" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridViewPartial_MatriculaCalificacionParcial.PerformCallback();
+                GridViewPartial_MatriculaCalificacionExamen.PerformCallback();
             },
             error: function (error) {
             }
         });
     }
 </script>
-@using (Html.BeginForm("Index", "MatriculaCalificacionParcial", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
+@using (Html.BeginForm("Index", "MatriculaCalificacionExamen", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
@@ -99,7 +99,7 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdEmpresa">Parcial</label>
-                    @Html.DropDownListFor(q => q.IdCatalogoParcial, new SelectList(ViewBag.lst_parcial, "IdCatalogoParcial", "NomCatalogo"), new { @class = "form-control", @id = "IdCatalogoParcial" })
+                    @Html.DropDownListFor(q => q.IdCatalogoParcial, new SelectList(ViewBag.lst_examen, "IdCatalogoParcial", "NomCatalogo"), new { @class = "form-control", @id = "IdCatalogoParcial" })
                     @Html.ValidationMessageFor(q => q.IdCatalogoParcial, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -109,6 +109,6 @@
     <div class="box-footer">
         <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button>     
     </div>
-    @Html.Action("GridViewPartial_MatriculaCalificacionParcial")
+    @Html.Action("GridViewPartial_MatriculaCalificacionExamen")
     }
 

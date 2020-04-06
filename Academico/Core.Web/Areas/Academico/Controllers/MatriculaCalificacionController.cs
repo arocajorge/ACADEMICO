@@ -1,6 +1,7 @@
 ﻿using Core.Bus.Academico;
 using Core.Bus.General;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using Core.Web.Helps;
 using System;
 using System.Collections.Generic;
@@ -84,7 +85,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     lst_conducta_existente = bus_conducta.GetList(model.IdEmpresa, item.IdMatricula);
 
                     var lst_materias_x_curso = bus_materias_x_paralelo.GetList(item.IdEmpresa, item.IdSede, item.IdAnio, item.IdNivel, item.IdJornada, item.IdCurso, item.IdParalelo);
-                    var lst_parcial = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
+                    var lst_parcial = bus_parcial.GetList_x_Tipo(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+                    lst_parcial.AddRange( bus_parcial.GetList_x_Tipo(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)) );
 
                     var conducta = lst_conducta_existente.Where(q => q.IdMatricula == item.IdMatricula).FirstOrDefault();
 

@@ -59,12 +59,6 @@ namespace Core.Web.Areas.Academico.Controllers
             
             List<aca_MatriculaCalificacion_Info> lista = bus_calificacion.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdMateria);
             Lista_MateriaCompartida.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MateriaCompartida", "Index");
-            ViewBag.Nuevo = info.Nuevo;
-            ViewBag.Modificar = info.Modificar;
-            ViewBag.Anular = info.Anular;
-            #endregion
 
             return View(model);
         }
@@ -74,23 +68,14 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             List<aca_MatriculaCalificacion_Info> lista = bus_calificacion.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdMateria);
             Lista_MateriaCompartida.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MateriaCompartida", "Index");
-            ViewBag.Nuevo = info.Nuevo;
-            ViewBag.Modificar = info.Modificar;
-            ViewBag.Anular = info.Anular;
-            #endregion
 
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_MateriaCompartida(bool Nuevo = false, bool Modificar = false, bool Anular = false)
+        public ActionResult GridViewPartial_MateriaCompartida()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            ViewBag.Nuevo = Nuevo;
-            ViewBag.Modificar = Modificar;
-            ViewBag.Anular = Anular;
 
             List<aca_MatriculaCalificacion_Info> model = Lista_MateriaCompartida.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_MateriaCompartida", model);

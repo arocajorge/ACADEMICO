@@ -177,7 +177,19 @@ namespace Core.Info.Helps
             PAREN = 3,
             PERNEG = 4,
             CONDIC = 5,
-            PARCIAL = 6
+            QUIM1 = 6,
+            QUIM2 = 7,
+            EXSUP = 8
+        }
+
+        public enum eTipoCatalogoAcademicoExamen
+        {
+            EXQUI1 = 34,
+            EXQUI2 = 35,
+            EXMEJ = 36,
+            EXSUP = 37,
+            EXREM = 38,
+            EXGRA = 39
         }
 
         public enum eTipoCatalogoAcademicoParcial

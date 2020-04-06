@@ -23,6 +23,30 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_AnioLectivoParcial_Info> GetList_x_Tipo(int IdEmpresa, int IdSede, int IdAnio, int IdCatalogoTipo)
+        {
+            try
+            {
+                return odata.getList_x_Tipo(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivoParcial_Info> GetList(int IdEmpresa, int IdSede, int IdAnio, int IdCatalogoTipo, DateTime FechaActual)
+        {
+            try
+            {
+                return odata.getList(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo, FechaActual);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool GuardarDB(List<aca_AnioLectivoParcial_Info> lista)
         {
             try

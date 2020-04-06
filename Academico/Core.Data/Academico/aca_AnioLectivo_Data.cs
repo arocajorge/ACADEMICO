@@ -151,6 +151,8 @@ namespace Core.Data.Academico
                         EnCurso = Entity.EnCurso,
                         BloquearMatricula = Entity.BloquearMatricula,
                         IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
+                        PromedioMinimoParcial = Entity.PromedioMinimoParcial,
+                        PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
                         Estado = Entity.Estado
                     };
                 }
@@ -186,6 +188,8 @@ namespace Core.Data.Academico
                         EnCurso = Entity.EnCurso,
                         BloquearMatricula = Entity.BloquearMatricula,
                         IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
+                        PromedioMinimoParcial = Entity.PromedioMinimoParcial,
+                        PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
                         Estado = Entity.Estado
                     };
                 }
@@ -221,6 +225,8 @@ namespace Core.Data.Academico
                         EnCurso = Entity.EnCurso,
                         BloquearMatricula = Entity.BloquearMatricula,
                         IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
+                        PromedioMinimoParcial = Entity.PromedioMinimoParcial,
+                        PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
                         Estado = Entity.Estado
                     };
                 }
@@ -255,6 +261,8 @@ namespace Core.Data.Academico
                         FechaHasta = Entity.FechaHasta,
                         EnCurso = Entity.EnCurso,
                         IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
+                        PromedioMinimoParcial = Entity.PromedioMinimoParcial,
+                        PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
                         Estado = Entity.Estado
                     };
                 }
@@ -307,6 +315,8 @@ namespace Core.Data.Academico
                         EnCurso = info.EnCurso,
                         BloquearMatricula = info.BloquearMatricula,
                         IdAnioLectivoAnterior = info.IdAnioLectivoAnterior,
+                        PromedioMinimoParcial = info.PromedioMinimoParcial,
+                        PromedioMinimoPromocion = info.PromedioMinimoPromocion,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -364,6 +374,8 @@ namespace Core.Data.Academico
                     Entity.BloquearMatricula = info.BloquearMatricula;
                     Entity.IdAnioLectivoAnterior = info.IdAnioLectivoAnterior;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.PromedioMinimoParcial = info.PromedioMinimoParcial;
+                    Entity.PromedioMinimoPromocion = info.PromedioMinimoPromocion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 
                     Context.SaveChanges();

@@ -23,6 +23,8 @@ namespace Core.Info.Academico
         public Nullable<int> IdAnioLectivoAnterior { get; set; }
         public bool Estado { get; set; }
         public bool EnCurso { get; set; }
+        public Nullable<double> PromedioMinimoParcial { get; set; }
+        public Nullable<double> PromedioMinimoPromocion { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }

@@ -41,12 +41,6 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_AnioLectivoParcial_Info> lista = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
             ListaParcial.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Parcial", "Index");
-            ViewBag.Nuevo = info.Nuevo;
-            ViewBag.Modificar = info.Modificar;
-            ViewBag.Anular = info.Anular;
-            #endregion
 
             return View(model);
         }
@@ -56,23 +50,14 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             List<aca_AnioLectivoParcial_Info> lista = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
             ListaParcial.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Parcial", "Index");
-            ViewBag.Nuevo = info.Nuevo;
-            ViewBag.Modificar = info.Modificar;
-            ViewBag.Anular = info.Anular;
-            #endregion
 
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_Parcial(bool Nuevo = false, bool Modificar = false, bool Anular = false)
+        public ActionResult GridViewPartial_Parcial()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            ViewBag.Nuevo = Nuevo;
-            ViewBag.Modificar = Modificar;
-            ViewBag.Anular = Anular;
 
             List<aca_AnioLectivoParcial_Info> model = ListaParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_Parcial", model);
@@ -111,14 +96,16 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             var resultado = "";
             var lista = bus_parcial.GetList(IdEmpresa, IdSede, IdAnio);
-            var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
+            var lst_calificaciones = new List<aca_AnioLectivoParcial_Info>();
             if (lista.Count()==0)
             {
-                var lst_catalogo = bus_catalogo.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.PARCIAL), false);
+                var lst_quim1= bus_catalogo.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), false);
+                var lst_quim2 = bus_catalogo.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2), false);
+                var lst_examenes = bus_catalogo.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.EXSUP), false);
 
-                foreach (var item in lst_catalogo)
+                foreach (var item in lst_quim1)
                 {
-                    lst_parcial.Add(new aca_AnioLectivoParcial_Info {
+                    lst_calificaciones.Add(new aca_AnioLectivoParcial_Info {
                         IdEmpresa = IdEmpresa,
                         IdSede = IdSede,
                         IdAnio = IdAnio,
@@ -127,7 +114,31 @@ namespace Core.Web.Areas.Academico.Controllers
                     });
                 }
 
-                if (!bus_parcial.GuardarDB(lst_parcial))
+                foreach (var item in lst_quim2)
+                {
+                    lst_calificaciones.Add(new aca_AnioLectivoParcial_Info
+                    {
+                        IdEmpresa = IdEmpresa,
+                        IdSede = IdSede,
+                        IdAnio = IdAnio,
+                        IdCatalogoParcial = item.IdCatalogo,
+                        IdUsuarioCreacion = SessionFixed.IdUsuario
+                    });
+                }
+                foreach (var item in lst_examenes)
+                {
+                    lst_calificaciones.Add(new aca_AnioLectivoParcial_Info
+                    {
+                        IdEmpresa = IdEmpresa,
+                        IdSede = IdSede,
+                        IdAnio = IdAnio,
+                        IdCatalogoParcial = item.IdCatalogo,
+                        EsExamen = true,
+                        IdUsuarioCreacion = SessionFixed.IdUsuario
+                    });
+                }
+
+                if (!bus_parcial.GuardarDB(lst_calificaciones))
                 {
                     resultado = "No se ha podido guardar los registros";
                 }
@@ -170,6 +181,7 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_AnioLectivoParcial_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdCatalogoParcial == info_det.IdCatalogoParcial).FirstOrDefault();
             edited_info.FechaInicio = info_det.FechaInicio;
             edited_info.FechaFin = info_det.FechaFin;
+            edited_info.EsExamen = info_det.EsExamen;
             bus_parcial.ModificarDB(edited_info);
         }
     }

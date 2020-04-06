@@ -33,7 +33,6 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         aca_MatriculaCalificacion_Combos_List ListaCombos = new aca_MatriculaCalificacion_Combos_List();
         aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
-        aca_Parametro_Bus bus_parametro = new aca_Parametro_Bus();
         string mensaje = string.Empty;
         #endregion
 
@@ -68,42 +67,14 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            //List<aca_MatriculaCalificacionParcial_Info> lista = bus_calificacion_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdMateria, model.IdCatalogoParcial);
-            //Lista_CalificacionParcial.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MatriculaCalificacionParcial", "Index");
-            ViewBag.Nuevo = info.Nuevo;
-            ViewBag.Modificar = info.Modificar;
-            ViewBag.Anular = info.Anular;
-            #endregion
-
             cargar_combos(model);
             return View(model);
         }
 
-        //[HttpPost]
-        //public ActionResult Index(aca_MatriculaCalificacionParcial_Info model)
-        //{
-        //    List<aca_MatriculaCalificacionParcial_Info> lista = bus_calificacion_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdMateria, model.IdCatalogoParcial);
-        //    Lista_CalificacionParcial.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-        //    #region Permisos
-        //    aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MatriculaCalificacionParcial", "Index");
-        //    ViewBag.Nuevo = info.Nuevo;
-        //    ViewBag.Modificar = info.Modificar;
-        //    ViewBag.Anular = info.Anular;
-        //    #endregion
-        //    cargar_combos(model);
-        //    return View(model);
-        //}
-
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_MatriculaCalificacionParcial(bool Nuevo = false, bool Modificar = false, bool Anular = false)
+        public ActionResult GridViewPartial_MatriculaCalificacionParcial()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            ViewBag.Nuevo = Nuevo;
-            ViewBag.Modificar = Modificar;
-            ViewBag.Anular = Anular;
-
             List<aca_MatriculaCalificacionParcial_Info> model = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos_detalle();
             return PartialView("_GridViewPartial_MatriculaCalificacionParcial", model);
@@ -113,7 +84,12 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Metodos
         private void cargar_combos(aca_MatriculaCalificacionParcial_Info model)
         {
-            var lst_parcial = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
+            var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
+            var lst_quim1 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), DateTime.Now.Date);
+            var lst_quim2 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2), DateTime.Now.Date);
+            lst_parcial.AddRange(lst_quim1);
+            lst_parcial.AddRange(lst_quim2);
+
             ViewBag.lst_parcial = lst_parcial;
         }
         
@@ -524,9 +500,9 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             decimal resultado = 0;
             var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
-            var info_parametro = bus_parametro.getInfo(IdEmpresa);
+            var info_anio_lectivo = bus_anio.GetInfo(IdEmpresa, info_matricula.IdAnio);
 
-            if (info_parametro!=null)
+            if (info_anio_lectivo != null)
             {
                 decimal suma_calificaciones = (Calificacion1+Calificacion2+Calificacion3+Calificacion4+Evaluacion);
                 decimal promedio = (Calificacion1 + Calificacion2 + Calificacion3 + Calificacion4 + Evaluacion) / 5;
@@ -558,12 +534,12 @@ namespace Core.Web.Areas.Academico.Controllers
             decimal resultado = 0;
             var mensaje = "";
             var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
-            var info_parametro = bus_parametro.getInfo(IdEmpresa);
+            var info_anio_lectivo = bus_anio.GetInfo(IdEmpresa, info_matricula.IdAnio);
             var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Conducta);
 
             if (Calificacion1>0 && Calificacion2>0 && Calificacion3>0 && Calificacion4>0 && Evaluacion>0)
             {
-                if (info_parametro != null)
+                if (info_anio_lectivo != null)
                 {
                     decimal suma_calificaciones = (Calificacion1 + Calificacion2 + Calificacion3 + Calificacion4 + Evaluacion);
                     decimal promedio = (Calificacion1 + Calificacion2 + Calificacion3 + Calificacion4 + Evaluacion) / 5;
@@ -586,7 +562,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                     resultado = (decimal)Math.Round(resultado, 2, MidpointRounding.AwayFromZero);
 
-                    if (resultado < Convert.ToDecimal(info_parametro.PromedioMinimoParcial))
+                    if (resultado < Convert.ToDecimal(info_anio_lectivo.PromedioMinimoParcial))
                     {
                         if (string.IsNullOrEmpty(MotivoCalificacion) || string.IsNullOrEmpty(AccionRemedial))
                         {

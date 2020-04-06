@@ -30,7 +30,80 @@ namespace Core.Data.Academico
                             IdCatalogoParcial = q.IdCatalogoParcial,
                             NomCatalogo = q.NomCatalogo,
                             FechaInicio = q.FechaInicio,
-                            FechaFin = q.FechaFin
+                            FechaFin = q.FechaFin,
+                            EsExamen = q.EsExamen
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivoParcial_Info> getList_x_Tipo(int IdEmpresa, int IdSede, int IdAnio, int IdCatalogoTipo)
+        {
+            try
+            {
+                List<aca_AnioLectivoParcial_Info> Lista = new List<aca_AnioLectivoParcial_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_AnioLectivoParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio
+                    && q.IdCatalogoTipo == IdCatalogoTipo).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AnioLectivoParcial_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdSede = q.IdSede,
+                            IdAnio = q.IdAnio,
+                            IdCatalogoParcial = q.IdCatalogoParcial,
+                            NomCatalogo = q.NomCatalogo,
+                            FechaInicio = q.FechaInicio,
+                            FechaFin = q.FechaFin,
+                            EsExamen = q.EsExamen
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivoParcial_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdCatalogoTipo, DateTime FechaActual)
+        {
+            try
+            {
+                List<aca_AnioLectivoParcial_Info> Lista = new List<aca_AnioLectivoParcial_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_AnioLectivoParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio
+                    && q.IdCatalogoTipo == IdCatalogoTipo && FechaActual >= q.FechaInicio && FechaActual <= q.FechaFin).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AnioLectivoParcial_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdSede = q.IdSede,
+                            IdAnio = q.IdAnio,
+                            IdCatalogoParcial = q.IdCatalogoParcial,
+                            NomCatalogo = q.NomCatalogo,
+                            FechaInicio = q.FechaInicio,
+                            FechaFin = q.FechaFin,
+                            EsExamen = q.EsExamen
                         });
                     });
                 }
@@ -60,6 +133,7 @@ namespace Core.Data.Academico
                             IdCatalogoParcial = item.IdCatalogoParcial,
                             FechaInicio = item.FechaInicio,
                             FechaFin = item.FechaFin,
+                            EsExamen = item.EsExamen,
                             IdUsuarioCreacion = item.IdUsuarioCreacion,
                             FechaCreacion = DateTime.Now
                         };
@@ -89,6 +163,7 @@ namespace Core.Data.Academico
 
                     Entity.FechaInicio = info.FechaInicio;
                     Entity.FechaFin = info.FechaFin;
+                    Entity.EsExamen = info.EsExamen;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
 
