@@ -23,6 +23,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_MatriculaCalificacion_Info> GetList_x_Profesor(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, decimal IdProfesor)
+        {
+            try
+            {
+                return odata.getList_x_Profesor(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdProfesor);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<aca_MatriculaCalificacion_Info> GetList(int IdEmpresa, decimal IdMatricula)
         {
             try

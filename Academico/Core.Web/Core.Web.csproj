@@ -8509,6 +8509,8 @@
     <Content Include="Areas\Academico\Views\MatriculaCalificacionExamen\_GridViewPartial_MatriculaCalificacionExamen.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\Importar.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_GridViewPartial_MatriculaCalificacionParcialImportacion.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionExamen\Importar.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionExamen\_GridViewPartial_MatriculaCalificacionExamenImportacion.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
