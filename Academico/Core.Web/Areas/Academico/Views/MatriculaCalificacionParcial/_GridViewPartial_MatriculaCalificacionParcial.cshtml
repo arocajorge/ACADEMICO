@@ -93,12 +93,13 @@
             column.FieldName = "Calificacion1";
             column.Caption = "Calificacion 1";
             column.Width = Unit.Percentage(8);
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+
             column.VisibleIndex = 3;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
+                q.DisplayFormatString = "{0:n2}";
                 q.Width = Unit.Percentage(100);
                 q.AllowMouseWheel = false;
                 q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
@@ -110,12 +111,12 @@
             column.FieldName = "Calificacion2";
             column.Caption = "Calificacion 2";
             column.Width = Unit.Percentage(8);
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.VisibleIndex = 4;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
+                q.DisplayFormatString = "{0:n2}";
                 q.Width = Unit.Percentage(100);
                 q.AllowMouseWheel = false;
                 q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
@@ -127,12 +128,12 @@
             column.FieldName = "Calificacion3";
             column.Caption = "Calificacion 3";
             column.Width = Unit.Percentage(8);
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.VisibleIndex = 5;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
+                q.DisplayFormatString = "{0:n2}";
                 q.Width = Unit.Percentage(100);
                 q.AllowMouseWheel = false;
                 q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
@@ -144,12 +145,12 @@
             column.FieldName = "Calificacion4";
             column.Caption = "Calificacion 4";
             column.Width = Unit.Percentage(8);
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.VisibleIndex = 6;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
+                q.DisplayFormatString = "{0:n2}";
                 q.Width = Unit.Percentage(100);
                 q.AllowMouseWheel = false;
                 q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
@@ -167,6 +168,7 @@
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
+                q.DisplayFormatString = "{0:n2}";
                 q.Width = Unit.Percentage(100);
                 q.AllowMouseWheel = false;
                 q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
@@ -184,6 +186,7 @@
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
+                q.DisplayFormatString = "{0:n2}";
                 q.Width = Unit.Percentage(100);
                 q.AllowMouseWheel = false;
                 q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";
@@ -195,12 +198,12 @@
             column.FieldName = "Remedial2";
             column.Caption = "Remedial 2";
             column.Width = Unit.Percentage(8);
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.VisibleIndex = 9;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
             {
                 q.MinValue = 0;
+                q.DisplayFormatString = "{0:n2}";
                 q.Width = Unit.Percentage(100);
                 q.AllowMouseWheel = false;
                 q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedio();}";

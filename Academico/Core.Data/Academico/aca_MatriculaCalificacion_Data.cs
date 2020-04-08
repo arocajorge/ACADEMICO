@@ -47,6 +47,42 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_MatriculaCalificacion_Info> getList_PaseAnio(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno)
+        {
+            try
+            {
+                List<aca_MatriculaCalificacion_Info> Lista = new List<aca_MatriculaCalificacion_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_MatriculaCalificacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede
+                    && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo
+                    && q.IdAlumno == IdAlumno).OrderBy(q => q.pe_nombreCompletoAlumno).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_MatriculaCalificacion_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdMatricula = q.IdMatricula,
+                            IdMateria = q.IdMateria,
+                            IdProfesor = q.IdProfesor,
+                            IdAlumno = q.IdAlumno,
+                            Codigo = q.Codigo,
+                            pe_nombreCompletoAlumno = q.pe_nombreCompletoAlumno,
+                            pe_nombreCompleto = q.pe_nombreCompleto
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<aca_MatriculaCalificacion_Info> getList_x_Profesor(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, decimal IdProfesor)
         {
             try
@@ -70,7 +106,20 @@ namespace Core.Data.Academico
                             IdAlumno = q.IdAlumno,
                             Codigo = q.Codigo,
                             pe_nombreCompletoAlumno = q.pe_nombreCompletoAlumno,
-                            pe_nombreCompleto = q.pe_nombreCompleto
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            RegistroValido = true,
+                            CalificacionP1 = q.CalificacionP1,
+                            CalificacionP2 = q.CalificacionP2,
+                            CalificacionP3 = q.CalificacionP3,
+                            CalificacionP4 = q.CalificacionP4,
+                            CalificacionP5 = q.CalificacionP5,
+                            CalificacionP6 = q.CalificacionP6,
+                            ExamenQ1 = q.ExamenQ1,
+                            ExamenQ2 = q.ExamenQ2,
+                            ExamenMejoramiento = q.ExamenMejoramiento,
+                            ExamenSupletorio = q.ExamenSupletorio,
+                            ExamenRemedial = q.ExamenRemedial,
+                            ExamenGracia = q.ExamenGracia
                         });
                     });
                 }
@@ -374,6 +423,23 @@ namespace Core.Data.Academico
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXGRA))
                         EntityCalificacion.ExamenGracia = info.CalificacionExamen;
+
+                    Context.SaveChanges();
+
+                    aca_MatriculaCalificacion EntityCalificacionPromedio = Context.aca_MatriculaCalificacion.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
+                    && q.IdMatricula == info.IdMatricula && q.IdProfesor == info.IdProfesor && q.IdMateria == info.IdMateria);
+                    if (EntityCalificacionPromedio == null)
+                        return false;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
+                    {
+                        EntityCalificacionPromedio.PromedioFinalQ1 = ((EntityCalificacionPromedio.PromedioQ1) * Convert.ToDecimal(0.80) ) + ((EntityCalificacionPromedio.ExamenQ1) * Convert.ToDecimal(0.20));
+                    }
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
+                    {
+                        EntityCalificacionPromedio.PromedioFinalQ2 = ((EntityCalificacionPromedio.PromedioQ2) * Convert.ToDecimal(0.80)) + ((EntityCalificacionPromedio.ExamenQ2) * Convert.ToDecimal(0.20));
+                    }
 
                     Context.SaveChanges();
                 }

@@ -90,7 +90,8 @@ namespace Core.Data.Academico
                             Conducta = q.Conducta,
                             MotivoCalificacion = q.MotivoCalificacion,
                             MotivoConducta = q.MotivoConducta,
-                            AccionRemedial = q.AccionRemedial
+                            AccionRemedial = q.AccionRemedial,
+                            RegistroValido = true
                         });
                     });
                 }
@@ -264,6 +265,23 @@ namespace Core.Data.Academico
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
                         EntityCalificacion.CalificacionP6 = info.PromedioParcial;
+
+                    Context.SaveChanges();
+
+                    aca_MatriculaCalificacion EntityCalificacionPromedio = Context.aca_MatriculaCalificacion.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
+                    && q.IdMatricula == info.IdMatricula && q.IdProfesor == info.IdProfesor && q.IdMateria == info.IdMateria);
+                    if (EntityCalificacionPromedio == null)
+                        return false;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
+                    {
+                        EntityCalificacionPromedio.PromedioQ1 = (Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP1) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP2) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP3))/3;
+                    }
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
+                    {
+                        EntityCalificacionPromedio.PromedioQ2 = (EntityCalificacionPromedio.CalificacionP4 + EntityCalificacionPromedio.CalificacionP5 + EntityCalificacionPromedio.CalificacionP6) / 3;
+                    }
 
                     Context.SaveChanges();
 

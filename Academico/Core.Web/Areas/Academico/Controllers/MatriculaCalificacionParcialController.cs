@@ -625,7 +625,7 @@ namespace Core.Web.Areas.Academico.Controllers
             UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings_Parcial.UploadValidationSettings, UploadControlSettings_Parcial.FileUploadComplete);
             return null;
         }
-        public ActionResult Importar( int IdEmpresa = 0)
+        public ActionResult Importar( int IdEmpresa = 0, int IdSede=0, int IdAnio=0, int IdNivel=0, int IdJornada=0, int IdCurso=0, int IdParalelo=0, int IdMateria=0, int IdCatalogoParcial=0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -636,14 +636,15 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
             aca_MatriculaCalificacionParcial_Info model = new aca_MatriculaCalificacionParcial_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSede = Convert.ToInt32(SessionFixed.IdSede),
-                IdAnio = (info_anio == null ? 0 : info_anio.IdAnio),
-                IdNivel = 0,
-                IdJornada = 0,
-                IdCurso = 0,
-                IdParalelo = 0,
-                IdMateria = 0,
+                IdEmpresa = IdEmpresa,
+                IdSede = IdSede,
+                IdAnio = IdAnio,
+                IdNivel = IdNivel,
+                IdJornada = IdJornada,
+                IdCurso = IdCurso,
+                IdParalelo = IdParalelo,
+                IdMateria = IdMateria,
+                IdCatalogoParcial = IdCatalogoParcial,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
@@ -653,6 +654,9 @@ namespace Core.Web.Areas.Academico.Controllers
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
             List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            List<aca_MatriculaCalificacionParcial_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionParcial_Info>();
+            ListaCalificaciones = bus_calificacion_parcial.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial, IdProfesor);
+            Lista_CalificacionParcial.set_list(ListaCalificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             cargar_combos(model);
             return View(model);

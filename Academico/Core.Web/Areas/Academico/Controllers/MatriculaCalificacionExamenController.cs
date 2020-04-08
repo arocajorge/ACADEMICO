@@ -462,7 +462,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXGRA))
                     item.CalificacionExamen = Convert.ToDecimal(calificacion_examen == null ? 0 : calificacion_examen.ExamenGracia);
 
-                item.CalificacionExamen = (decimal)Math.Round(item.CalificacionExamen, 2, MidpointRounding.AwayFromZero);
+                //item.CalificacionExamen = (decimal)Math.Round(item.CalificacionExamen, 2, MidpointRounding.AwayFromZero);
             }
             ListaCalificacionExamen.ForEach(q=> q.RegistroValido = true);
             Lista_CalificacionExamen.set_list(ListaCalificacionExamen, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -486,7 +486,7 @@ namespace Core.Web.Areas.Academico.Controllers
             UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings_Examen.UploadValidationSettings, UploadControlSettings_Examen.FileUploadComplete);
             return null;
         }
-        public ActionResult Importar(int IdEmpresa = 0)
+        public ActionResult Importar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdMateria = 0, int IdCatalogoParcial = 0)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -497,14 +497,15 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
             aca_MatriculaCalificacion_Info model = new aca_MatriculaCalificacion_Info
             {
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdSede = Convert.ToInt32(SessionFixed.IdSede),
-                IdAnio = (info_anio == null ? 0 : info_anio.IdAnio),
-                IdNivel = 0,
-                IdJornada = 0,
-                IdCurso = 0,
-                IdParalelo = 0,
-                IdMateria = 0,
+                IdEmpresa = IdEmpresa,
+                IdSede = IdSede,
+                IdAnio = IdAnio,
+                IdNivel = IdNivel,
+                IdJornada = IdJornada,
+                IdCurso = IdCurso,
+                IdParalelo = IdParalelo,
+                IdMateria = IdMateria,
+                IdCatalogoParcial = IdCatalogoParcial,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
@@ -514,6 +515,29 @@ namespace Core.Web.Areas.Academico.Controllers
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
             List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            List<aca_MatriculaCalificacion_Info> ListaCalificacionExamen = new List<aca_MatriculaCalificacion_Info>();
+            ListaCalificacionExamen = bus_calificacion.GetList_x_Profesor(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdProfesor);
+            foreach (var item in ListaCalificacionExamen)
+            {
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
+                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenQ1);
+
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
+                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenQ2);
+
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXMEJ))
+                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenMejoramiento);
+
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXSUP))
+                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenSupletorio);
+
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXREM))
+                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenRemedial);
+
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXGRA))
+                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenGracia);
+            }
+            Lista_CalificacionExamen.set_list(ListaCalificacionExamen, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             cargar_combos(model);
             return View(model);

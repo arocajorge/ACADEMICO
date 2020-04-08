@@ -1,7 +1,7 @@
 ﻿@using Core.Web.Helps
 @model Core.Info.Academico.aca_MatriculaCalificacionParcial_Info
 @{
-    ViewBag.Title = "Ingreso de calificaciones";
+    ViewBag.Title = "Ingreso de calificaciones parciales";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -36,6 +36,11 @@
             error: function (error) {
             }
         });
+    }
+    function importar() {
+        var location = GetPathServer();
+        var win = window.open(location + "/Academico/MatriculaCalificacionParcial/Importar?IdEmpresa=" + $("#IdEmpresa").val() + "&IdSede=" + IdSede.GetValue()+ "&IdAnio=" + IdAnio.GetValue() +"&IdNivel=" + IdNivel.GetValue() +"&IdJornada=" + IdJornada.GetValue() +"&IdCurso=" + IdCurso.GetValue() +"&IdParalelo=" + IdParalelo.GetValue() +"&IdMateria=" + IdMateria.GetValue() +"&IdCatalogoParcial=" + $("#IdCatalogoParcial").val(), '_self');
+        win.focus();
     }
 </script>
 @using (Html.BeginForm("Index", "MatriculaCalificacionParcial", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
@@ -108,8 +113,9 @@
     </div>
 
     <div class="box-footer">
-        <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button>  
-        <a class="btn btn-primary" href="@Url.Action("Importar","MatriculaCalificacionParcial",new { Area = "Academico", IdEmpresa = SessionFixed.IdEmpresa },null)">Descargar/Importar</a>   
+        <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button> 
+        <button type="button" class="btn btn-primary" id="btn_importar" onclick="importar();">Descargar/Importar</button>  
+        @*<a class="btn btn-primary" href="@Url.Action("Importar","MatriculaCalificacionParcial",new { Area = "Academico", IdEmpresa = SessionFixed.IdEmpresa },null)">Descargar/Importar</a>*@   
     </div>
     @Html.Action("GridViewPartial_MatriculaCalificacionParcial")
     }

@@ -237,6 +237,7 @@
     <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalParrafoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\MatriculaPaseAnioController.cs" />
     <Compile Include="Areas\Academico\Controllers\MecanismoDePagoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MenuController.cs" />
     <Compile Include="Areas\Academico\Controllers\MenuPorSedeController.cs" />
@@ -8511,6 +8512,15 @@
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_GridViewPartial_MatriculaCalificacionParcialImportacion.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCalificacionExamen\Importar.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCalificacionExamen\_GridViewPartial_MatriculaCalificacionExamenImportacion.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaPaseAnio\_ComboBoxPartial_Alumno.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaPaseAnio\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaPaseAnio\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaPaseAnio\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaPaseAnio\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaPaseAnio\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaPaseAnio\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaPaseAnio\_GridViewPartial_MatriculaPaseAnio.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaPaseAnio\Index.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
