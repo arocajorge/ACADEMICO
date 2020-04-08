@@ -52,7 +52,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
-            List<aca_MatriculaCalificacion_Info> lista = new List<aca_MatriculaCalificacion_Info>();
+            List<aca_Matricula_Info> lista = new List<aca_Matricula_Info>();
             Lista_MatriculaPaseAnio.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return View(model);
@@ -61,7 +61,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_MatriculaCalificacion_Info model)
         {
-            //List<aca_Matricula_Info> lista = bus_matricula.GetList_Calificaciones(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdAlumno);
+            List<aca_Matricula_Info> lista = bus_matricula.GetList_Calificaciones(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdAlumno);
             List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
             List<aca_MatriculaCalificacion_Info> lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
             List<aca_MatriculaConducta_Info> lst_conducta = new List<aca_MatriculaConducta_Info>();
@@ -69,38 +69,52 @@ namespace Core.Web.Areas.Academico.Controllers
             lst_calificacion = bus_calificacion.GetList_PaseAnio(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdAlumno);
             var info_anio = bus_anio.GetInfo(model.IdEmpresa, model.IdAnio);
             List<aca_MatriculaCalificacionParcial_Info> ListaCalificacionParcial = new List<aca_MatriculaCalificacionParcial_Info>();
-            if (lst_calificacion.Count() > 0)
+            if (lista.Count() > 0)
             {
-                foreach (var item in lst_calificacion)
+                foreach (var item in lista)
                 {
-                    var info_calificacion = new aca_MatriculaCalificacion_Info
+                    var lst_x_matricula = lst_calificacion.Where(q=>q.IdEmpresa == item.IdEmpresa && q.IdMatricula==item.IdMatricula);
+
+                    foreach (var item_x_matricula in lst_calificacion)
                     {
-                        IdEmpresa = item.IdEmpresa,
-                        IdMatricula = item.IdMatricula,
-                        pe_nombreCompletoAlumno = item.pe_nombreCompletoAlumno,
-                        IdMateria = item.IdMateria,
-                        IdCatalogoParcial = item.IdCatalogoParcial,
-                        IdProfesor = item.IdProfesor,
-                        CalificacionP1 = item.CalificacionP1,
-                        CalificacionP2 = item.CalificacionP2,
-                        CalificacionP3 = item.CalificacionP3,
-                        PromedioQ1 = item.PromedioQ1,
-                        ExamenQ1 = item.ExamenQ1,
-                        PromedioFinalQ1 = item.PromedioFinalQ1,
-                        CalificacionP4 = item.CalificacionP4,
-                        CalificacionP5 = item.CalificacionP5,
-                        CalificacionP6 = item.CalificacionP6,
-                        PromedioQ2 = item.PromedioQ2,
-                        ExamenQ2 = item.ExamenQ2,
-                        PromedioFinalQ2 = item.PromedioFinalQ1,
-                        ExamenMejoramiento = item.ExamenMejoramiento,
-                        ExamenSupletorio = item.ExamenSupletorio,
-                        ExamenRemedial = item.ExamenRemedial,
-                        ExamenGracia = item.ExamenGracia
-                    };
+                        var PromedioFinalQ1 = item_x_matricula.PromedioFinalQ1;
+                        var PromedioFinalQ2 = item_x_matricula.PromedioFinalQ2;
+                        var ExamenMejoramiento = item_x_matricula.ExamenMejoramiento;
+                        var ExamenSupletorio = item_x_matricula.ExamenSupletorio;
+                        var ExamenRemedial = item_x_matricula.ExamenRemedial;
+                        var ExamenGracia = item_x_matricula.ExamenGracia;
+                        var PromedioFinal = 0;
+
+                        var info_calificacion = new aca_MatriculaCalificacion_Info
+                        {
+                            IdEmpresa = item_x_matricula.IdEmpresa,
+                            IdMatricula = item_x_matricula.IdMatricula,
+                            pe_nombreCompletoAlumno = item_x_matricula.pe_nombreCompletoAlumno,
+                            IdMateria = item_x_matricula.IdMateria,
+                            IdCatalogoParcial = item_x_matricula.IdCatalogoParcial,
+                            IdProfesor = item_x_matricula.IdProfesor,
+                            CalificacionP1 = item_x_matricula.CalificacionP1,
+                            CalificacionP2 = item_x_matricula.CalificacionP2,
+                            CalificacionP3 = item_x_matricula.CalificacionP3,
+                            PromedioQ1 = item_x_matricula.PromedioQ1,
+                            ExamenQ1 = item_x_matricula.ExamenQ1,
+                            PromedioFinalQ1 = item_x_matricula.PromedioFinalQ1,
+                            CalificacionP4 = item_x_matricula.CalificacionP4,
+                            CalificacionP5 = item_x_matricula.CalificacionP5,
+                            CalificacionP6 = item_x_matricula.CalificacionP6,
+                            PromedioQ2 = item_x_matricula.PromedioQ2,
+                            ExamenQ2 = item_x_matricula.ExamenQ2,
+                            PromedioFinalQ2 = item_x_matricula.PromedioFinalQ1,
+                            ExamenMejoramiento = item_x_matricula.ExamenMejoramiento,
+                            ExamenSupletorio = item_x_matricula.ExamenSupletorio,
+                            ExamenRemedial = item_x_matricula.ExamenRemedial,
+                            ExamenGracia = item_x_matricula.ExamenGracia,
+                            PromedioFinal = PromedioFinal
+                        };
+                    }
                 }
             }
-
+            Lista_MatriculaPaseAnio.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return View(model);
         }
 
@@ -109,7 +123,7 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
-            List<aca_MatriculaCalificacion_Info> model = Lista_MatriculaPaseAnio.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            List<aca_Matricula_Info> model = Lista_MatriculaPaseAnio.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_MatriculaPaseAnio", model);
         }
         #endregion
@@ -173,18 +187,18 @@ namespace Core.Web.Areas.Academico.Controllers
     public class aca_MatriculaPaseAnio_List
     {
         string Variable = "aca_MatriculaMatriculaPaseAnio";
-        public List<aca_MatriculaCalificacion_Info> get_list(decimal IdTransaccionSession)
+        public List<aca_Matricula_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
-                List<aca_MatriculaCalificacion_Info> list = new List<aca_MatriculaCalificacion_Info>();
+                List<aca_Matricula_Info> list = new List<aca_Matricula_Info>();
 
                 HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<aca_MatriculaCalificacion_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+            return (List<aca_Matricula_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<aca_MatriculaCalificacion_Info> list, decimal IdTransaccionSession)
+        public void set_list(List<aca_Matricula_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }

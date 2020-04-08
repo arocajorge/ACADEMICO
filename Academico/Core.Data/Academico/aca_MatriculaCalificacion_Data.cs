@@ -52,12 +52,27 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaCalificacion_Info> Lista = new List<aca_MatriculaCalificacion_Info>();
+                int IdNivelIni = IdNivel;
+                int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
+
+                int IdJornadaIni = IdJornada;
+                int IdJornadaFin = IdJornada == 0 ? 9999999 : IdJornada;
+
+                int IdCursoIni = IdCurso;
+                int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
+
+                int IdParaleloIni = IdParalelo;
+                int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
+
+                decimal IdAlumnoIni = IdAlumno;
+                decimal IdAlumnoFin = IdAlumno == 0 ? 9999999 : IdAlumno;
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.vwaca_MatriculaCalificacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede
-                    && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo
-                    && q.IdAlumno == IdAlumno).OrderBy(q => q.pe_nombreCompletoAlumno).ToList();
+                    var lst = odata.vwaca_MatriculaCalificacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
+                    && q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin && q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin
+                    && q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin && q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin
+                    && q.IdAlumno >= IdAlumnoIni && q.IdAlumno <= IdAlumnoFin).OrderBy(q => q.pe_nombreCompletoAlumno).ToList();
 
                     lst.ForEach(q =>
                     {
@@ -70,7 +85,25 @@ namespace Core.Data.Academico
                             IdAlumno = q.IdAlumno,
                             Codigo = q.Codigo,
                             pe_nombreCompletoAlumno = q.pe_nombreCompletoAlumno,
-                            pe_nombreCompleto = q.pe_nombreCompleto
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            RegistroValido = true,
+                            CalificacionP1 = q.CalificacionP1,
+                            CalificacionP2 = q.CalificacionP2,
+                            CalificacionP3 = q.CalificacionP3,
+                            PromedioQ1 = q.PromedioQ1,
+                            ExamenQ1 = q.ExamenQ1,
+                            PromedioFinalQ1 = q.PromedioFinalQ1,
+                            CalificacionP4 = q.CalificacionP4,
+                            CalificacionP5 = q.CalificacionP5,
+                            CalificacionP6 = q.CalificacionP6,
+                            PromedioQ2 = q.PromedioQ2,
+                            ExamenQ2 = q.ExamenQ2,
+                            PromedioFinalQ2 = q.PromedioFinalQ2,
+                            ExamenMejoramiento = q.ExamenMejoramiento,
+                            ExamenSupletorio = q.ExamenSupletorio,
+                            ExamenRemedial = q.ExamenRemedial,
+                            ExamenGracia = q.ExamenGracia,
+                            PromedioFinal = q.PromedioFinal
                         });
                     });
                 }
