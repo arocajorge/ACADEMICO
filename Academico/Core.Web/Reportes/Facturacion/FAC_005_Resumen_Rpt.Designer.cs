@@ -486,7 +486,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Facturacion.FAC_005_Info);
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Facturacion.FAC_007_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // p_CreDeb
