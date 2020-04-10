@@ -8527,6 +8527,7 @@
     <Content Include="Areas\Academico\Views\MatriculaPaseAnio\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaPaseAnio\_GridViewPartial_MatriculaPaseAnio.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaPaseAnio\Index.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_007.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
