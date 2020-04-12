@@ -348,6 +348,9 @@
     <Compile Include="Base\VWFAC_004.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWFAC_007.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwfa_factura_ParaContabilizarAcademico.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -1954,6 +1957,7 @@
     <Compile Include="Reportes\Facturacion\FAC_004_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_005_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_006_Data.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_007_Data.cs" />
     <Compile Include="RRHH\ro_area_Data.cs" />
     <Compile Include="RRHH\ro_area_x_departamento_Data.cs" />
     <Compile Include="RRHH\ro_cargo_Data.cs" />

@@ -20,6 +20,7 @@ namespace Core.Web.Areas.Reportes.Controllers
     public class FacturacionReportesController : Controller
     {
         tb_persona_Bus bus_persona = new tb_persona_Bus();
+        tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         in_Producto_Bus bus_producto = new in_Producto_Bus();
         fa_factura_Bus bus_factura = new fa_factura_Bus();
         fa_catalogo_Bus bus_catalogo = new fa_catalogo_Bus();
@@ -354,5 +355,84 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
         #endregion
+
+        #region FAC_007
+        private void CargarCombosFAC_007()
+        {
+            var lstEmpresa = bus_empresa.get_list(false);
+            ViewBag.lstEmpresa = lstEmpresa;
+        }
+        public ActionResult FAC_007()
+        {
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
+
+            FAC_007_Rpt report = new FAC_007_Rpt();
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "FAC_007");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_FechaIni.Value = model.fecha_ini;
+            report.p_FechaFin.Value = model.fecha_fin;
+            report.p_IdEmpresa_rol.Value = model.IdEmpresa;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            CargarCombosFAC_007();
+
+            FAC_005_Resumen_Rpt reportResumen = new FAC_005_Resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_FechaDesde.Value = model.fecha_ini;
+            reportResumen.p_FechaHasta.Value = model.fecha_fin;
+            reportResumen.p_Naturaleza.Value = model.NaturalezaNota;
+            reportResumen.p_CreDeb.Value = model.CreDeb;
+            reportResumen.p_IdTipoNota.Value = model.IdTipoNota ?? 0;
+            reportResumen.usuario = SessionFixed.IdUsuario;
+            reportResumen.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = reportResumen;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult FAC_007(cl_filtros_facturacion_Info model)
+        {
+            FAC_007_Rpt report = new FAC_007_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "FAC_007");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            report.p_FechaIni.Value = model.fecha_ini;
+            report.p_FechaFin.Value = model.fecha_fin;
+            report.p_IdEmpresa_rol.Value = model.IdEmpresa;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            CargarCombosFAC_007();
+
+            FAC_005_Resumen_Rpt reportResumen = new FAC_005_Resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_FechaDesde.Value = model.fecha_ini;
+            reportResumen.p_FechaHasta.Value = model.fecha_fin;
+            reportResumen.p_Naturaleza.Value = model.NaturalezaNota;
+            reportResumen.p_CreDeb.Value = model.CreDeb;
+            reportResumen.p_IdTipoNota.Value = model.IdTipoNota ?? 0;
+            reportResumen.usuario = SessionFixed.IdUsuario;
+            reportResumen.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = reportResumen;
+
+            return View(model);
+        }
+#endregion
     }
 }

@@ -280,6 +280,7 @@
     <Compile Include="Reportes\Facturacion\FAC_004_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_005_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_006_Bus.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_007_Bus.cs" />
     <Compile Include="RRHH\ro_empleado_Bus.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_Bus.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_x_aca_Sede_Bus.cs" />
