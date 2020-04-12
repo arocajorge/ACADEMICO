@@ -81,6 +81,7 @@ namespace Core.Info.Academico
         public List<aca_MatriculaConducta_Info> lst_conducta { get; set; }
         */
         public aca_MatriculaCambios_Info info_MatriculaCambios { get; set; }
+        public Nullable<decimal> PromedioFinal { get; set; }
         #endregion
     }
 }

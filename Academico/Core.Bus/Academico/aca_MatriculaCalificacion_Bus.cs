@@ -118,5 +118,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public bool ModicarPaseAnioDB(aca_MatriculaCalificacion_Info info)
+        {
+            try
+            {
+                return odata.modicarPaseAnioDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

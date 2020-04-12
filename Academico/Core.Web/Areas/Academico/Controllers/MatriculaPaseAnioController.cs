@@ -74,16 +74,62 @@ namespace Core.Web.Areas.Academico.Controllers
                 foreach (var item in lista)
                 {
                     var lst_x_matricula = lst_calificacion.Where(q=>q.IdEmpresa == item.IdEmpresa && q.IdMatricula==item.IdMatricula);
+                    var lst_agrupada = lst_x_matricula.GroupBy(q=>new {q.IdEmpresa, q.IdMatricula, q.IdMateria }).ToList();
+                    decimal PromedioFinal = 0;
+                    decimal PromedioGeneral = 0;
+                    decimal PromedioFinalTemp = 0;
+                    decimal PromedioMinimoPromocion = Convert.ToDecimal(info_anio.PromedioMinimoPromocion);
 
-                    foreach (var item_x_matricula in lst_calificacion)
+                    foreach (var item_x_matricula in lst_x_matricula)
                     {
-                        var PromedioFinalQ1 = item_x_matricula.PromedioFinalQ1;
-                        var PromedioFinalQ2 = item_x_matricula.PromedioFinalQ2;
-                        var ExamenMejoramiento = item_x_matricula.ExamenMejoramiento;
-                        var ExamenSupletorio = item_x_matricula.ExamenSupletorio;
-                        var ExamenRemedial = item_x_matricula.ExamenRemedial;
-                        var ExamenGracia = item_x_matricula.ExamenGracia;
-                        var PromedioFinal = 0;
+                        decimal PromedioFinalQ1 = Convert.ToDecimal(item_x_matricula.PromedioFinalQ1);
+                        decimal PromedioFinalQ2 = Convert.ToDecimal(item_x_matricula.PromedioFinalQ2);
+                        decimal ExamenMejoramiento = Convert.ToDecimal(item_x_matricula.ExamenMejoramiento);
+                        decimal ExamenSupletorio = Convert.ToDecimal(item_x_matricula.ExamenSupletorio);
+                        decimal ExamenRemedial = Convert.ToDecimal(item_x_matricula.ExamenRemedial);
+                        decimal ExamenGracia = Convert.ToDecimal(item_x_matricula.ExamenGracia);
+                        PromedioFinalTemp = Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2);
+
+                        if (PromedioFinalTemp < PromedioMinimoPromocion)
+                        {
+                            if (ExamenSupletorio >= PromedioMinimoPromocion)
+                            {
+                                PromedioFinal = PromedioMinimoPromocion;
+                            }
+                            else if (ExamenRemedial >= PromedioMinimoPromocion)
+                            {
+                                PromedioFinal = PromedioMinimoPromocion;
+                            }
+                            else if (ExamenGracia >= PromedioMinimoPromocion)
+                            {
+                                PromedioFinal = PromedioMinimoPromocion;
+                            }
+                            else
+                            {
+                                PromedioFinal = PromedioFinalTemp;
+                            }
+
+                        }
+                        else
+                        {
+                            if (ExamenMejoramiento > 0)
+                            {
+                                if (PromedioFinalQ1 < PromedioFinalQ2)
+                                {
+                                    PromedioFinalQ1 = ExamenMejoramiento;
+                                }
+                                else if (PromedioFinalQ2 < PromedioFinalQ1)
+                                {
+                                    PromedioFinalQ2 = ExamenMejoramiento;
+                                }
+
+                                PromedioFinal = Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2);
+                            }
+                            else
+                            {
+                                PromedioFinal = PromedioFinalTemp;
+                            }
+                        }
 
                         var info_calificacion = new aca_MatriculaCalificacion_Info
                         {
@@ -98,20 +144,30 @@ namespace Core.Web.Areas.Academico.Controllers
                             CalificacionP3 = item_x_matricula.CalificacionP3,
                             PromedioQ1 = item_x_matricula.PromedioQ1,
                             ExamenQ1 = item_x_matricula.ExamenQ1,
-                            PromedioFinalQ1 = item_x_matricula.PromedioFinalQ1,
+                            PromedioFinalQ1 = PromedioFinalQ1,
                             CalificacionP4 = item_x_matricula.CalificacionP4,
                             CalificacionP5 = item_x_matricula.CalificacionP5,
                             CalificacionP6 = item_x_matricula.CalificacionP6,
                             PromedioQ2 = item_x_matricula.PromedioQ2,
                             ExamenQ2 = item_x_matricula.ExamenQ2,
-                            PromedioFinalQ2 = item_x_matricula.PromedioFinalQ1,
+                            PromedioFinalQ2 = PromedioFinalQ2,
                             ExamenMejoramiento = item_x_matricula.ExamenMejoramiento,
                             ExamenSupletorio = item_x_matricula.ExamenSupletorio,
                             ExamenRemedial = item_x_matricula.ExamenRemedial,
                             ExamenGracia = item_x_matricula.ExamenGracia,
                             PromedioFinal = PromedioFinal
                         };
+                        PromedioGeneral = PromedioGeneral + PromedioFinal;
+
+                        if (!bus_calificacion.ModicarPaseAnioDB(info_calificacion))
+                        {
+
+                        }
+
                     }
+
+                    PromedioGeneral = PromedioGeneral / lst_agrupada.Count();
+                    item.PromedioFinal = PromedioGeneral;
                 }
             }
             Lista_MatriculaPaseAnio.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));

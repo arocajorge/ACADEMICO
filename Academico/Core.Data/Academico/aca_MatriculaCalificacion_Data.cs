@@ -484,5 +484,29 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public bool modicarPaseAnioDB(aca_MatriculaCalificacion_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_MatriculaCalificacion EntityCalificacion = Context.aca_MatriculaCalificacion.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
+                    && q.IdMatricula == info.IdMatricula && q.IdProfesor == info.IdProfesor && q.IdMateria == info.IdMateria);
+                    if (EntityCalificacion == null)
+                        return false;
+
+                    EntityCalificacion.PromedioFinal = info.PromedioFinal;
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
