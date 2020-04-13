@@ -127,6 +127,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
                 foreach (var item in lst_examenes)
                 {
+                    var ValidaEstadoAlumno = (item.IdCatalogo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2) || item.IdCatalogo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXMEJ) || item.IdCatalogo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXSUP) || item.IdCatalogo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXREM) || item.IdCatalogo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXGRA) ? true : false);
                     lst_calificaciones.Add(new aca_AnioLectivoParcial_Info
                     {
                         IdEmpresa = IdEmpresa,
@@ -134,6 +135,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         IdAnio = IdAnio,
                         IdCatalogoParcial = item.IdCatalogo,
                         EsExamen = true,
+                        ValidaEstadoAlumno = ValidaEstadoAlumno,
                         IdUsuarioCreacion = SessionFixed.IdUsuario
                     });
                 }
@@ -182,6 +184,7 @@ namespace Core.Web.Areas.Academico.Controllers
             edited_info.FechaInicio = info_det.FechaInicio;
             edited_info.FechaFin = info_det.FechaFin;
             edited_info.EsExamen = info_det.EsExamen;
+            edited_info.ValidaEstadoAlumno = info_det.ValidaEstadoAlumno;
             bus_parcial.ModificarDB(edited_info);
         }
     }

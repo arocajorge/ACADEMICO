@@ -122,7 +122,7 @@ namespace Core.Bus.Academico
 
                     }
                 }
-                
+
                 if (grabar_padre == true)
                 {
                     if (info.info_valido_padre == true)
@@ -159,7 +159,7 @@ namespace Core.Bus.Academico
                             Correo = info.Correo_padre,
                             SeFactura = info.SeFactura_padre,
                             EsRepresentante = info.EsRepresentante_padre,
-                            IdCatalogoFichaInst = (info.IdCatalogoFichaInst_padre==0 ? null : info.IdCatalogoFichaInst_padre),
+                            IdCatalogoFichaInst = (info.IdCatalogoFichaInst_padre == 0 ? null : info.IdCatalogoFichaInst_padre),
                             EmpresaTrabajo = info.EmpresaTrabajo_padre,
                             DireccionTrabajo = info.DireccionTrabajo_padre,
                             TelefonoTrabajo = info.TelefonoTrabajo_padre,
@@ -267,7 +267,7 @@ namespace Core.Bus.Academico
                                 cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
                                 cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = odata_vendedor_sucursal.get_list(cliente.IdEmpresa, cliente.IdCliente);
 
-                                if(odata_cliente.modificarDB(cliente))
+                                if (odata_cliente.modificarDB(cliente))
                                 {
                                     grabar_madre = true;
                                 }
@@ -282,7 +282,7 @@ namespace Core.Bus.Academico
                     {
                         grabar_madre = true;
                     }
-                }     
+                }
 
                 if (grabar_madre == true)
                 {
@@ -563,14 +563,15 @@ namespace Core.Bus.Academico
                                 var IdVendedor = info_vendedor.IdVendedor;
                                 info_cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal = new List<fa_cliente_x_fa_Vendedor_x_sucursal_Info>();
 
-                                info_cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal.Add(new fa_cliente_x_fa_Vendedor_x_sucursal_Info {
-                                        IdEmpresa = info.IdEmpresa,
-                                        IdSucursal = info.IdSucursal,
-                                        IdVendedor = IdVendedor,
-                                        observacion = ""
-                                    });
+                                info_cliente.Lst_fa_cliente_x_fa_Vendedor_x_sucursal.Add(new fa_cliente_x_fa_Vendedor_x_sucursal_Info
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdSucursal = info.IdSucursal,
+                                    IdVendedor = IdVendedor,
+                                    observacion = ""
+                                });
 
-                                if(odata_cliente.guardarDB(info_cliente))
+                                if (odata_cliente.guardarDB(info_cliente))
                                 {
                                     grabar_madre = true;
                                 }
@@ -755,6 +756,19 @@ namespace Core.Bus.Academico
             try
             {
                 return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool PaseAnioDB(aca_Alumno_Info info)
+        {
+            try
+            {
+                return odata.paseAnioDB(info);
             }
             catch (Exception)
             {

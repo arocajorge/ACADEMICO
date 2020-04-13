@@ -31,7 +31,8 @@ namespace Core.Data.Academico
                             NomCatalogo = q.NomCatalogo,
                             FechaInicio = q.FechaInicio,
                             FechaFin = q.FechaFin,
-                            EsExamen = q.EsExamen
+                            EsExamen = q.EsExamen,
+                            ValidaEstadoAlumno = q.ValidaEstadoAlumno
                         });
                     });
                 }
@@ -67,7 +68,8 @@ namespace Core.Data.Academico
                             NomCatalogo = q.NomCatalogo,
                             FechaInicio = q.FechaInicio,
                             FechaFin = q.FechaFin,
-                            EsExamen = q.EsExamen
+                            EsExamen = q.EsExamen,
+                            ValidaEstadoAlumno = q.ValidaEstadoAlumno
                         });
                     });
                 }
@@ -103,7 +105,8 @@ namespace Core.Data.Academico
                             NomCatalogo = q.NomCatalogo,
                             FechaInicio = q.FechaInicio,
                             FechaFin = q.FechaFin,
-                            EsExamen = q.EsExamen
+                            EsExamen = q.EsExamen,
+                            ValidaEstadoAlumno = q.ValidaEstadoAlumno
                         });
                     });
                 }
@@ -134,6 +137,7 @@ namespace Core.Data.Academico
                             FechaInicio = item.FechaInicio,
                             FechaFin = item.FechaFin,
                             EsExamen = item.EsExamen,
+                            ValidaEstadoAlumno = item.ValidaEstadoAlumno,
                             IdUsuarioCreacion = item.IdUsuarioCreacion,
                             FechaCreacion = DateTime.Now
                         };
@@ -164,6 +168,7 @@ namespace Core.Data.Academico
                     Entity.FechaInicio = info.FechaInicio;
                     Entity.FechaFin = info.FechaFin;
                     Entity.EsExamen = info.EsExamen;
+                    Entity.ValidaEstadoAlumno = info.ValidaEstadoAlumno;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
 

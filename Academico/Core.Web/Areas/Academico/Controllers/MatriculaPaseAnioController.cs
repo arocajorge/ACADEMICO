@@ -1,5 +1,6 @@
 ﻿using Core.Bus.Academico;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using Core.Web.Helps;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_MatriculaCalificacion_Bus bus_calificacion = new aca_MatriculaCalificacion_Bus();
         aca_MatriculaConducta_Bus bus_conducta = new aca_MatriculaConducta_Bus();
         aca_MatriculaPaseAnio_List Lista_MatriculaPaseAnio = new aca_MatriculaPaseAnio_List();
+        aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -74,11 +76,13 @@ namespace Core.Web.Areas.Academico.Controllers
                 foreach (var item in lista)
                 {
                     var lst_x_matricula = lst_calificacion.Where(q=>q.IdEmpresa == item.IdEmpresa && q.IdMatricula==item.IdMatricula);
+                    var info_matricula = bus_matricula.GetInfo(item.IdEmpresa,item.IdMatricula);
+                    var info_alumno = bus_alumno.GetInfo(item.IdEmpresa, info_matricula.IdAlumno);
                     var lst_agrupada = lst_x_matricula.GroupBy(q=>new {q.IdEmpresa, q.IdMatricula, q.IdMateria }).ToList();
                     decimal PromedioFinal = 0;
                     decimal PromedioGeneral = 0;
                     decimal PromedioFinalTemp = 0;
-                    decimal PromedioMinimoPromocion = Convert.ToDecimal(info_anio.PromedioMinimoPromocion);
+                    decimal PromedioMinimoPromocion = Math.Round(Convert.ToDecimal(info_anio.PromedioMinimoPromocion),2,MidpointRounding.AwayFromZero);
 
                     foreach (var item_x_matricula in lst_x_matricula)
                     {
@@ -88,7 +92,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         decimal ExamenSupletorio = Convert.ToDecimal(item_x_matricula.ExamenSupletorio);
                         decimal ExamenRemedial = Convert.ToDecimal(item_x_matricula.ExamenRemedial);
                         decimal ExamenGracia = Convert.ToDecimal(item_x_matricula.ExamenGracia);
-                        PromedioFinalTemp = Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2);
+                        PromedioFinalTemp = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
 
                         if (PromedioFinalTemp < PromedioMinimoPromocion)
                         {
@@ -123,7 +127,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                     PromedioFinalQ2 = ExamenMejoramiento;
                                 }
 
-                                PromedioFinal = Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2);
+                                PromedioFinal = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
                             }
                             else
                             {
@@ -161,13 +165,23 @@ namespace Core.Web.Areas.Academico.Controllers
 
                         if (!bus_calificacion.ModicarPaseAnioDB(info_calificacion))
                         {
-
                         }
-
                     }
 
-                    PromedioGeneral = PromedioGeneral / lst_agrupada.Count();
+                    PromedioGeneral = Math.Round((PromedioGeneral / lst_agrupada.Count()), 2, MidpointRounding.AwayFromZero);
                     item.PromedioFinal = PromedioGeneral;
+
+                    info_alumno.IdUsuarioModificacion = SessionFixed.IdUsuario;
+                    if (PromedioGeneral < PromedioMinimoPromocion)
+                    {
+                        info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.NO_PROMOVIDO);
+                    }
+                    else
+                    {
+                        info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO);
+                    }
+
+                    bus_alumno.PaseAnioDB(info_alumno);
                 }
             }
             Lista_MatriculaPaseAnio.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
