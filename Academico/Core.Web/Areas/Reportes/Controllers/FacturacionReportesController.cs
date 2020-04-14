@@ -360,15 +360,20 @@ namespace Core.Web.Areas.Reportes.Controllers
         private void CargarCombosFAC_007()
         {
             var lstEmpresa = bus_empresa.get_list(false);
-            ViewBag.lstEmpresa = lstEmpresa;
+            lstEmpresa.Add(new tb_empresa_Info
+            {
+                IdEmpresa = 0,
+                em_nombre = "TODAS"
+            });
+            ViewBag.lstEmpresa = lstEmpresa.OrderBy(q=> q.IdEmpresa).ToList();
         }
         public ActionResult FAC_007()
         {
             cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
-
+            model.IdEmpresa = 0;
             FAC_007_Rpt report = new FAC_007_Rpt();
             #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "FAC_007");
+            var reporte = bus_rep_x_emp.GetInfo(Convert.ToInt32(SessionFixed.IdEmpresa), "FAC_007");
             if (reporte != null)
             {
                 System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
@@ -385,13 +390,11 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             CargarCombosFAC_007();
 
-            FAC_005_Resumen_Rpt reportResumen = new FAC_005_Resumen_Rpt();
-            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
-            reportResumen.p_FechaDesde.Value = model.fecha_ini;
-            reportResumen.p_FechaHasta.Value = model.fecha_fin;
-            reportResumen.p_Naturaleza.Value = model.NaturalezaNota;
-            reportResumen.p_CreDeb.Value = model.CreDeb;
-            reportResumen.p_IdTipoNota.Value = model.IdTipoNota ?? 0;
+            FAC_007_Resumen_Rpt reportResumen = new FAC_007_Resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            reportResumen.p_FechaIni.Value = model.fecha_ini;
+            reportResumen.p_FechaFin.Value = model.fecha_fin;
+            reportResumen.p_IdEmpresa_rol.Value = model.IdEmpresa;
             reportResumen.usuario = SessionFixed.IdUsuario;
             reportResumen.empresa = SessionFixed.NomEmpresa;
             ViewBag.ReportResumen = reportResumen;
@@ -404,7 +407,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             FAC_007_Rpt report = new FAC_007_Rpt();
 
             #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "FAC_007");
+            var reporte = bus_rep_x_emp.GetInfo(Convert.ToInt32(SessionFixed.IdEmpresa), "FAC_007");
             if (reporte != null)
             {
                 System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
@@ -420,13 +423,11 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             CargarCombosFAC_007();
 
-            FAC_005_Resumen_Rpt reportResumen = new FAC_005_Resumen_Rpt();
-            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
-            reportResumen.p_FechaDesde.Value = model.fecha_ini;
-            reportResumen.p_FechaHasta.Value = model.fecha_fin;
-            reportResumen.p_Naturaleza.Value = model.NaturalezaNota;
-            reportResumen.p_CreDeb.Value = model.CreDeb;
-            reportResumen.p_IdTipoNota.Value = model.IdTipoNota ?? 0;
+            FAC_007_Resumen_Rpt reportResumen = new FAC_007_Resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            reportResumen.p_FechaIni.Value = model.fecha_ini;
+            reportResumen.p_FechaFin.Value = model.fecha_fin;
+            reportResumen.p_IdEmpresa_rol.Value = model.IdEmpresa;
             reportResumen.usuario = SessionFixed.IdUsuario;
             reportResumen.empresa = SessionFixed.NomEmpresa;
             ViewBag.ReportResumen = reportResumen;
