@@ -48,13 +48,20 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-
+        settings.HtmlRowPrepared = (s, e) =>
+        {
+            if (Convert.ToBoolean(e.GetValue("PaseAnio")) == false)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
+        };
         settings.Columns.Add("IdMatricula", "ID").Width = Unit.Percentage(5);
         settings.Columns.Add("NomJornada", "Jornada").Width = Unit.Percentage(10);
         settings.Columns.Add("NomNivel", "Nivel").Width = Unit.Percentage(15);
         settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(15);
-        settings.Columns.Add("NomParalelo", "Paralelo").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Estudiante").Width = Unit.Percentage(25);
+        settings.Columns.Add("NomParalelo", "Paralelo").Width = Unit.Percentage(5);
+        settings.Columns.Add("pe_nombreCompleto", "Estudiante").Width = Unit.Percentage(20);
+        settings.Columns.Add("NomCatalogoESTMAT", "Estado").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "PromedioFinal";

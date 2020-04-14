@@ -732,7 +732,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
-                return View(model);
+                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel=model.IdNivel, IdJornada=model.IdJornada, IdCurso=model.IdCurso, IdParalelo=model.IdParalelo, IdMateria=model.IdMateria, IdCatalogoParcial=model.IdCatalogoParcial });
             }
         }
 

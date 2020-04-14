@@ -33,10 +33,12 @@ namespace Core.Info.Academico
         public int IdTipoNota { get; set; }
         [Required(ErrorMessage = "El campo tipo de plantilla es obligatorio")]
         public Nullable<int> IdTipoPlantilla { get; set; }
+        public Nullable<bool> AplicaParaTodo { get; set; }
 
         #region Campos que no existen
         public List<aca_Plantilla_Rubro_Info> lst_Plantilla_Rubro { get; set; }
         
+
         #endregion
     }
 }

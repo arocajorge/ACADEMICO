@@ -90,13 +90,28 @@
             </div>
         </div>
     </div>
-            @Html.Action("GridViewPartial_PlantillaRubro")
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.AplicaParaTodo, settings =>
+                        {
+                            settings.Name = "AplicaParaTodo";
+                            settings.Text = "Aplica para todo";
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.AplicaParaTodo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Action("GridViewPartial_PlantillaRubro")
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Plantilla",new { Area = "Academico" },null)">Cancelar</a>
     </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
-}
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
+            }
 

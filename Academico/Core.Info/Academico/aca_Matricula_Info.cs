@@ -75,6 +75,8 @@ namespace Core.Info.Academico
         public string vt_NumFactura { get; set; }
 
         public string ObservacionCambio { get; set; }
+        public string NomCatalogoESTMAT { get; set; }
+        public bool PaseAnio { get; set; }
         /*
         public List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial { get; set; }
         public List<aca_MatriculaCalificacion_Info> lst_calificacion { get; set; }

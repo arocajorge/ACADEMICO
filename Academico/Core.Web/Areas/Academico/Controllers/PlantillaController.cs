@@ -229,6 +229,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_tipo_plantilla = bus_tipo_plantilla.GetList(IdEmpresa, false);
             ViewBag.lst_tipo_plantilla = lst_tipo_plantilla;
         }
+
         #endregion
 
         #region funciones del detalle
@@ -244,6 +245,15 @@ namespace Core.Web.Areas.Academico.Controllers
 
         private void cargar_combos_detalle()
         {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            Dictionary<string, string> lst_tipo_desc = new Dictionary<string, string>();
+            lst_tipo_desc.Add("$", "$ Monto");
+            lst_tipo_desc.Add("%", "% Porcentaje");
+            ViewBag.lst_tipo_desc = lst_tipo_desc;
+
+            var lst_tipo_nota = bus_tipo_nota.get_list(IdEmpresa, "C", false);
+            ViewBag.lst_tipo_nota = lst_tipo_nota;
+
             var lst_impuesto = bus_impuesto.get_list("IVA", false);
             ViewBag.lst_impuesto = lst_impuesto;
         }
@@ -376,6 +386,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Nuevo(aca_Plantilla_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
+            model.AplicaParaTodo = (model.AplicaParaTodo==null ? false : model.AplicaParaTodo);
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
             model.lst_Plantilla_Rubro = Lista_PlantillaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
 
@@ -385,6 +396,16 @@ namespace Core.Web.Areas.Academico.Controllers
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos();
                 return View(model);
+            }
+
+            if (model.AplicaParaTodo==true)
+            {
+                foreach (var item in model.lst_Plantilla_Rubro)
+                {
+                    item.IdTipoNota_descuentoDet = model.IdTipoNota;
+                    item.Valor_descuentoDet = model.Valor;
+                    item.TipoDescuento_descuentoDet = model.TipoDescuento;
+                }
             }
 
             if (!bus_plantilla.GuardarDB(model))
@@ -429,6 +450,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Modificar(aca_Plantilla_Info model)
         {
+            model.AplicaParaTodo = (model.AplicaParaTodo == null ? false : model.AplicaParaTodo);
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             model.lst_Plantilla_Rubro = new List<aca_Plantilla_Rubro_Info>();
             model.lst_Plantilla_Rubro = Lista_PlantillaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
@@ -439,6 +461,16 @@ namespace Core.Web.Areas.Academico.Controllers
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos();
                 return View(model);
+            }
+
+            if (model.AplicaParaTodo == true)
+            {
+                foreach (var item in model.lst_Plantilla_Rubro)
+                {
+                    item.IdTipoNota_descuentoDet = model.IdTipoNota;
+                    item.Valor_descuentoDet = model.Valor;
+                    item.TipoDescuento_descuentoDet = model.TipoDescuento;
+                }
             }
 
             if (!bus_plantilla.ModificarDB(model))
@@ -538,7 +570,7 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
 
             List<aca_Plantilla_Rubro_Info> list = get_list(IdTransaccionSession);
-                list.Add(info_det); 
+            list.Add(info_det); 
         }
 
         public void UpdateRow(aca_Plantilla_Rubro_Info info_det, decimal IdTransaccionSession)
@@ -552,6 +584,10 @@ namespace Core.Web.Areas.Academico.Controllers
             edited_info.Total = info_det.Total;
             edited_info.IdCod_Impuesto_Iva = info_det.IdCod_Impuesto_Iva;
             edited_info.Subtotal = info_det.Subtotal;
+            edited_info.IdTipoNota_descuentoDet = info_det.IdTipoNota_descuentoDet;
+            edited_info.TipoDescuento_descuentoDet = info_det.TipoDescuento_descuentoDet;
+            edited_info.Valor_descuentoDet = info_det.Valor_descuentoDet;
+
             var info_rubro_anio = bus_rubro_anio.GetInfo(info_det.IdEmpresa, info_det.IdAnio, info_det.IdRubro);
         }
 

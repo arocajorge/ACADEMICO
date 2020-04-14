@@ -94,6 +94,21 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.AplicaParaTodo, settings =>
+                        {
+                            settings.Name = "AplicaParaTodo";
+                            settings.Text = "Aplica para todo";
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.AplicaParaTodo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group has-error">
                     <label for="Rector">Motivo de anulación*</label>

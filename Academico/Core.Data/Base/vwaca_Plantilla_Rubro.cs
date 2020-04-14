@@ -26,5 +26,8 @@ namespace Core.Data.Base
         public decimal Porcentaje { get; set; }
         public decimal ValorIVA { get; set; }
         public decimal Total { get; set; }
+        public string TipoDescuento_descuentoDet { get; set; }
+        public Nullable<decimal> Valor_descuentoDet { get; set; }
+        public Nullable<int> IdTipoNota_descuentoDet { get; set; }
     }
 }

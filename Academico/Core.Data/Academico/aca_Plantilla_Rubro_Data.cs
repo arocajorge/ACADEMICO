@@ -31,7 +31,10 @@ namespace Core.Data.Academico
                         Porcentaje = q.Porcentaje,
                         Total = q.Total,
                         pr_descripcion = q.pr_descripcion,
-                        NomRubro = q.NomRubro
+                        NomRubro = q.NomRubro,
+                        IdTipoNota_descuentoDet = q.IdTipoNota_descuentoDet,
+                        Valor_descuentoDet = q.Valor_descuentoDet,
+                        TipoDescuento_descuentoDet = q.TipoDescuento_descuentoDet
                     }).ToList();
                 }
                 Lista.ForEach(q => q.IdString = q.IdPlantilla.ToString("000000") + q.IdRubro.ToString("000000"));

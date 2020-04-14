@@ -600,7 +600,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     ViewBag.MensajeSuccess = MensajeSuccess;
                 }
                 cargar_combos(model);
-                return View(model);
+                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdMateria = model.IdMateria, IdCatalogoParcial = model.IdCatalogoParcial });
+                //return View(model);
             }
             catch (Exception ex)
             {

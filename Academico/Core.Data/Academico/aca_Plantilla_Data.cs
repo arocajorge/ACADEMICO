@@ -31,6 +31,7 @@ namespace Core.Data.Academico
                         IdTipoNota = q.IdTipoNota,
                         IdTipoPlantilla = q.IdTipoPlantilla,
                         Valor = q.Valor,
+                        AplicaParaTodo = q.AplicaParaTodo,
                         Estado = q.Estado
                     }).ToList();
                 }
@@ -63,6 +64,7 @@ namespace Core.Data.Academico
                         IdTipoPlantilla = Entity.IdTipoPlantilla,
                         TipoDescuento = Entity.TipoDescuento,
                         IdTipoNota = Entity.IdTipoNota,
+                        AplicaParaTodo = Entity.AplicaParaTodo,
                         Valor = Entity.Valor
                     };
                 }
@@ -115,6 +117,7 @@ namespace Core.Data.Academico
                         IdTipoPlantilla = info.IdTipoPlantilla,
                         Valor = info.Valor,
                         Estado = true,
+                        AplicaParaTodo = info.AplicaParaTodo,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now
                     };
@@ -134,7 +137,10 @@ namespace Core.Data.Academico
                                 Subtotal = item.Subtotal,
                                 IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
                                 Porcentaje = item.Porcentaje,
-                                Total= item.Total
+                                Total= item.Total,
+                                IdTipoNota_descuentoDet = item.IdTipoNota_descuentoDet,
+                                TipoDescuento_descuentoDet = item.TipoDescuento_descuentoDet,
+                                Valor_descuentoDet = item.Valor_descuentoDet
                             };
                             Context.aca_Plantilla_Rubro.Add(Entity_Det);
                         }
@@ -167,6 +173,7 @@ namespace Core.Data.Academico
                     Entity.IdTipoNota = info.IdTipoNota;
                     Entity.IdTipoPlantilla = info.IdTipoPlantilla;
                     Entity.Valor = info.Valor;
+                    Entity.AplicaParaTodo = info.AplicaParaTodo;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
 
@@ -187,7 +194,10 @@ namespace Core.Data.Academico
                                 Subtotal = item.Subtotal,
                                 IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
                                 Porcentaje = item.Porcentaje,
-                                Total = item.Total
+                                Total = item.Total,
+                                IdTipoNota_descuentoDet = item.IdTipoNota_descuentoDet,
+                                TipoDescuento_descuentoDet = item.TipoDescuento_descuentoDet,
+                                Valor_descuentoDet = item.Valor_descuentoDet
                             };
                             Context.aca_Plantilla_Rubro.Add(Entity_Det);
                         }
