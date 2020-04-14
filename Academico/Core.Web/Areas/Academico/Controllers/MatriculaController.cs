@@ -422,8 +422,9 @@ namespace Core.Web.Areas.Academico.Controllers
 
                         if (item.AplicaProntoPago == true)
                         {
-                            if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
+                            if (DateTime.Now.Date <= item.FechaProntoPago)
                             {
+                                /*
                                 if (info_plantilla.TipoDescuento == "%")
                                 {
                                     ValorDescuento = (item.Total * (info_plantilla.Valor / 100));
@@ -434,7 +435,9 @@ namespace Core.Web.Areas.Academico.Controllers
                                 {
                                     ValorRubro = (item.Total - info_plantilla.Valor);
                                     TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
-                                }
+                                }*/
+                                ValorRubro = Math.Round(item.ValorProntoPago, 2, MidpointRounding.AwayFromZero);
+                                TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
                             }
                             else
                             {
@@ -443,7 +446,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             }
                             if (item.seleccionado)
                             {
-                                Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                                Total = Total + Math.Round((item.ValorProntoPago), 2, MidpointRounding.AwayFromZero);
                             }
                             
                         }
@@ -526,6 +529,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
                         {
+                            /*
                             if (info_plantilla.TipoDescuento == "%")
                             {
                                 ValorDescuento = (info.Total * (info_plantilla.Valor / 100));
@@ -537,6 +541,9 @@ namespace Core.Web.Areas.Academico.Controllers
                                 ValorRubro = (info.Total - info_plantilla.Valor);
                                 TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
                             }
+                            */
+                            ValorRubro = info.ValorProntoPago;
+                            TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
                         }
                         else
                         {

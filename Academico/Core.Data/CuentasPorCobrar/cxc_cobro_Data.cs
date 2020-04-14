@@ -992,7 +992,19 @@ namespace Core.Data.CuentasPorCobrar
                     if (Plantilla == null)
                         return null;
 
-                    paramCxc.IdTipoNotaProntoPago = Plantilla.IdTipoNota;
+                    if (Plantilla.AplicaParaTodo == true)
+                    {
+                        paramCxc.IdTipoNotaProntoPago = Plantilla.IdTipoNota;
+                    }else
+                    {
+                        var PlantillaDet = dbACA.aca_Plantilla_Rubro.Where(q => q.IdEmpresa == Fac.IdEmpresa && q.IdPlantilla == Fac.IdPlantilla &&  q.IdRubro == Fac.IdRubro).FirstOrDefault();
+                        if (PlantillaDet != null)
+                        {
+                            paramCxc.IdTipoNotaProntoPago = PlantillaDet.IdTipoNota_descuentoDet ?? Plantilla.IdTipoNota;
+                        }
+                    }
+
+                    
                 }
 
                 var TipoNota = dbFac.fa_TipoNota.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoNota == paramCxc.IdTipoNotaProntoPago).FirstOrDefault();

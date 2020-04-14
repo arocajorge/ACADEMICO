@@ -14,28 +14,35 @@ namespace Core.Data.Academico
         {
             try
             {
-                List<aca_Matricula_Rubro_Info> Lista;
+                List<aca_Matricula_Rubro_Info> Lista = new List<aca_Matricula_Rubro_Info>();
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.vwaca_Plantilla_Rubro_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPlantilla == IdPlantilla).OrderBy(q=>q.IdPeriodo).Select(q => new aca_Matricula_Rubro_Info
+                    var lst = Context.vwaca_Plantilla_Rubro_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPlantilla == IdPlantilla).OrderBy(q => q.IdPeriodo).ToList();
+                    foreach (var q in lst)
                     {
-                        IdEmpresa = q.IdEmpresa,
-                        IdAnio = q.IdAnio,
-                        IdPlantilla = q.IdPlantilla,
-                        IdPeriodo = q.IdPeriodo,
-                        IdRubro = q.IdRubro,
-                        IdProducto = q.IdProducto,
-                        Subtotal = q.Subtotal,
-                        IdCod_Impuesto_Iva = q.IdCod_Impuesto_Iva,
-                        ValorIVA = q.ValorIVA,
-                        Porcentaje = q.Porcentaje,
-                        Total = q.Total,
-                        NomRubro = q.NomRubro,
-                        FechaDesde = q.FechaDesde,
-                        pr_descripcion = q.pr_descripcion,
-                        AplicaProntoPago = q.AplicaProntoPago,
-                    }).ToList();
+                        Lista.Add(new aca_Matricula_Rubro_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            IdPlantilla = q.IdPlantilla,
+                            IdPeriodo = q.IdPeriodo,
+                            IdRubro = q.IdRubro,
+                            IdProducto = q.IdProducto,
+                            Subtotal = q.Subtotal,
+                            IdCod_Impuesto_Iva = q.IdCod_Impuesto_Iva,
+                            ValorIVA = q.ValorIVA,
+                            Porcentaje = q.Porcentaje,
+                            Total = q.Total,
+                            NomRubro = q.NomRubro,
+                            FechaDesde = q.FechaDesde,
+                            pr_descripcion = q.pr_descripcion,
+                            AplicaProntoPago = q.AplicaProntoPago,
+                            ValorProntoPago = Convert.ToDecimal(q.ValorProntoPago ?? 0),
+                            FechaProntoPago = q.FechaProntoPago ?? DateTime.Now.Date
+                        });
+                    }
+                    
                 }
                 Lista.ForEach(v => { v.Periodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });
                 Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000000") + q.IdPlantilla.ToString("0000000") + q.IdPeriodo.ToString("0000000") + q.IdRubro.ToString("0000000"));

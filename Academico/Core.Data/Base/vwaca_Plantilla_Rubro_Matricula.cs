@@ -30,5 +30,7 @@ namespace Core.Data.Base
         public decimal Total { get; set; }
         public string pr_descripcion { get; set; }
         public bool AplicaProntoPago { get; set; }
+        public Nullable<double> ValorProntoPago { get; set; }
+        public Nullable<System.DateTime> FechaProntoPago { get; set; }
     }
 }
