@@ -67,16 +67,13 @@
                                 @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                        
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Empresa</label>
-                                    @Html.DropDownListFor(q => q.IdEmpresa, new SelectList(ViewBag.lstNaturaleza, "IdEmpresa", "em_nombre"), new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(q => q.IdEmpresa, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Empresa</label>
+                            @Html.DropDownListFor(q => q.IdEmpresa, new SelectList(ViewBag.lstEmpresa, "IdEmpresa", "em_nombre"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(q => q.IdEmpresa, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>
