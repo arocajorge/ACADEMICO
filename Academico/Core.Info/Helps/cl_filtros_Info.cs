@@ -18,6 +18,8 @@ namespace Core.Info.Helps
         public int IdJornada { get; set; }
         public int IdCurso { get; set; }
         public int IdParalelo { get; set; }
+        public int IdMateria { get; set; }
+        public int IdCatalogoParcial { get; set; }
         public decimal IdAlumno { get; set; }
         [Required(ErrorMessage = "El campo fecha inicio es obligatorio")]
         [DataType(DataType.Date, ErrorMessage = "El campo fecha inicio debe ser una fecha en formato dd/MM/yyyy")]
