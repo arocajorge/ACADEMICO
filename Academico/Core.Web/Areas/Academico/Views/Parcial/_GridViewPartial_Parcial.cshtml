@@ -56,7 +56,7 @@
         {
             column.FieldName = "NomCatalogo";
             column.Caption = "Parcial";
-            column.Width = Unit.Percentage(60);
+            column.Width = Unit.Percentage(50);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
@@ -87,6 +87,16 @@
         {
             column.FieldName = "EsExamen";
             column.Caption = "Es Examen";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ValidaEstadoAlumno";
+            column.Caption = "Valida Estado Alumno";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {

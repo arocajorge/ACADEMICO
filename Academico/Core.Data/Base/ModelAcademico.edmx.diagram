@@ -177,7 +177,6 @@
         <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaConducta" Width="1.5" PointX="34.875" PointY="18.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" />
         <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo" Width="1.5" PointX="0.75" PointY="27.375" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivoParcial" Width="1.5" PointX="6" PointY="32.625" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_AnioLectivo" />
@@ -187,9 +186,10 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoConductaEquivalencia_aca_AnioLectivo" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoParcial_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicional_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_PermisoMatricula_aca_AnioLectivo" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivoParcial" Width="1.5" PointX="6" PointY="32.5" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoParcial_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoParcial_aca_Catalogo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivoParcial_aca_Sede" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_AnioLectivoParcial" Width="1.5" PointX="18.375" PointY="10.75" />

@@ -24,5 +24,6 @@ namespace Core.Data.Base
         public Nullable<bool> EsExamen { get; set; }
         public int IdCatalogoTipo { get; set; }
         public string NomCatalogoTipo { get; set; }
+        public bool ValidaEstadoAlumno { get; set; }
     }
 }
