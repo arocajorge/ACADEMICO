@@ -42,5 +42,10 @@ namespace Core.Data.Base
         public string MotivoCalificacion { get; set; }
         public string MotivoConducta { get; set; }
         public string AccionRemedial { get; set; }
+        public string NomNivel { get; set; }
+        public string NomJornada { get; set; }
+        public string NomCurso { get; set; }
+        public string NomParalelo { get; set; }
+        public string Codigo { get; set; }
     }
 }

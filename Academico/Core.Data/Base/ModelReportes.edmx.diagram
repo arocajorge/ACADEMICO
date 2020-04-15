@@ -34,8 +34,9 @@
         <EntityTypeShape EntityType="ModelReportes.VWCXC_005_Diario" Width="1.5" PointX="12.375" PointY="20.75" />
         <EntityTypeShape EntityType="ModelReportes.VWFAC_0031" Width="1.5" PointX="14.375" PointY="20.75" />
         <EntityTypeShape EntityType="ModelReportes.VWACA_007" Width="1.5" PointX="20.375" PointY="15.75" />
-        <EntityTypeShape EntityType="ModelReportes.VWACA_010" Width="1.5" PointX="3.375" PointY="21.75" />
         <EntityTypeShape EntityType="ModelReportes.VWFAC_007" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWACA_010" Width="1.5" PointX="3.375" PointY="21.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWACA_011" Width="1.5" PointX="16.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

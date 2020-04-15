@@ -774,7 +774,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        #region ACA_010
         #region Combos
         public ActionResult ComboBoxPartial_Anio_Cal()
         {
@@ -829,7 +828,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             return PartialView("_ComboBoxPartial_Materia_Cal", new aca_AnioLectivo_Paralelo_Profesor_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso, IdParalelo = IdParalelo });
         }
         #endregion
-        #region Combos ACA_010
+        #region Combos Funciones Agrupados
         public List<aca_AnioLectivo_Info> CargarAnio(int IdEmpresa = 0)
         {
             List<aca_MatriculaCalificacion_Info> lst_combos = Lista_CombosCalificaciones.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.IdEmpresa == IdEmpresa).ToList();
@@ -1089,7 +1088,9 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             return ListaMateria;
         }
+        #endregion
 
+        #region ACA_010
         private void cargar_combos_ACA_010(aca_MatriculaCalificacionParcial_Info model)
         {
             var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
@@ -1100,7 +1101,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ViewBag.lst_parcial = lst_parcial;
         }
-        #endregion
         public ActionResult ACA_010(int IdEmpresa = 0, decimal IdAlumno = 0)
         {
             aca_MatriculaCalificacionParcial_Info model = new aca_MatriculaCalificacionParcial_Info();
@@ -1175,6 +1175,87 @@ namespace Core.Web.Areas.Reportes.Controllers
 
         #endregion
 
+        #region ACA_011
+        private void cargar_combos_ACA_011(aca_MatriculaCalificacion_Info model)
+        {
+            var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
+            var lst_quim1 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), DateTime.Now.Date);
+            var lst_quim2 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2), DateTime.Now.Date);
+            lst_parcial.AddRange(lst_quim1);
+            lst_parcial.AddRange(lst_quim2);
+
+            ViewBag.lst_parcial = lst_parcial;
+        }
+
+        public ActionResult ACA_011()
+        {
+            aca_MatriculaCalificacion_Info model = new aca_MatriculaCalificacion_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, IdProfesor, EsSuperAdmin);
+            Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            ACA_011_Rpt report = new ACA_011_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_011");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            cargar_combos_ACA_011(model);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_011(aca_MatriculaCalificacion_Info model)
+        {
+            ACA_011_Rpt report = new ACA_011_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_011");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            cargar_combos_ACA_011(model);
+            return View(model);
+        }
+
+        #endregion
     }
 
     public class aca_ReporteCalificacion_Combos_List
