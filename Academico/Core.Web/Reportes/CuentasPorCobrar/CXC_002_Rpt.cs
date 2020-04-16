@@ -47,7 +47,8 @@ namespace Core.Web.Reportes.CuentasPorCobrar
                 }
             }
             var Primero = lst_rpt.FirstOrDefault();
-            lblSaldo.Text = busCobro.GetSaldoAlumno(IdEmpresa,(Primero == null ? 0 : Primero.IdAlumno ?? 0)).ToString("c2");
+            lblSaldo.Text = busCobro.GetSaldoAlumno(IdEmpresa,(Primero == null ? 0 : Primero.IdAlumno ?? 0),false).ToString("c2");
+            lblSaldoConDscto.Text = busCobro.GetSaldoAlumno(IdEmpresa, (Primero == null ? 0 : Primero.IdAlumno ?? 0),true).ToString("c2");
             if (Primero != null)
             {
                 string Cadena = lblReemplaza.Text;

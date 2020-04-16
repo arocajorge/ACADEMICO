@@ -1345,16 +1345,19 @@ namespace Core.Data.CuentasPorCobrar
             }
         }
         
-        public double GetSaldoAlumno(int IdEmpresa, decimal IdAlumno)
+        public double GetSaldoAlumno(int IdEmpresa, decimal IdAlumno, bool ConDescuento)
         {
             try
             {
                 EntitiesCuentasPorCobrar dbCxc = new EntitiesCuentasPorCobrar();
                 EntitiesFacturacion dbFac = new EntitiesFacturacion();
+                double SaldoCxc = 0;
+                if (ConDescuento)
+                {
+                    SaldoCxc = dbCxc.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).Sum(q => q.Saldo - (q.vt_total - q.ValorProntoPago)) ?? 0;
+                }else
+                    SaldoCxc = dbCxc.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).Sum(q => q.Saldo) ?? 0;
 
-                var SaldoCxc = dbCxc.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).Sum(q => q.Saldo - (q.vt_total - q.ValorProntoPago )) ?? 0;
-
-                //double Saldo = Convert.ToDouble(SaldoCxc - (Total - ProntoPago));
                 double Saldo = Convert.ToDouble(SaldoCxc);
                 return Saldo;                
             }

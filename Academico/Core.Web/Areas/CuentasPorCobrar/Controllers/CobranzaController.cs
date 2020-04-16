@@ -768,7 +768,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         public JsonResult SetAlumno(int IdEmpresa = 0, decimal IdAlumno = 0)
         {
             string DatosAlumno = string.Empty;
-            double Saldo = Math.Round(bus_cobro.GetSaldoAlumno(IdEmpresa, IdAlumno),2,MidpointRounding.AwayFromZero);
+            double Saldo = Math.Round(bus_cobro.GetSaldoAlumno(IdEmpresa, IdAlumno, true),2,MidpointRounding.AwayFromZero);
             var AnioLectivo = bus_anioLectivo.GetInfo_AnioEnCurso(IdEmpresa, 0);
             if (AnioLectivo != null)
             {
