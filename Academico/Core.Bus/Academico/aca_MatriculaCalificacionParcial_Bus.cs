@@ -58,7 +58,6 @@ namespace Core.Bus.Academico
         {
             try
             {
-                //return odata.modificarDB(info);
                 if (odata.modificarDB(info))
                 {
                     var info_matricula = odata_matricula.getInfo(info.IdEmpresa, info.IdMatricula);
@@ -69,22 +68,22 @@ namespace Core.Bus.Academico
                         if (info_parcial.ValidaEstadoAlumno == true)
                         {
                             var info_alumno = odata_alumno.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAlumno);
-                            var lista_calificacion = odata_calificacion.getList_PaseAnio(info_matricula.IdEmpresa, info_matricula.IdAnio, info_matricula.IdSede, info_matricula.IdNivel, info_matricula.IdJornada, info_matricula.IdCurso, info_matricula.IdParalelo, info.IdAlumno);
+                            var info_calificacion = odata_calificacion.getInfo_modificar(info_matricula.IdEmpresa, info_matricula.IdAnio, info_matricula.IdSede, info_matricula.IdNivel, info_matricula.IdJornada, info_matricula.IdCurso, info_matricula.IdParalelo, info.IdMateria, info_matricula.IdAlumno);
                             var info_anio = odata_anio.getInfo(info.IdEmpresa, info_matricula.IdAnio);
-                            var lst_agrupada = lista_calificacion.GroupBy(q => new { q.IdEmpresa, q.IdMatricula, q.IdMateria }).ToList();
-                            decimal PromedioGeneral = 0;
+
                             decimal PromedioFinal = 0;
                             decimal PromedioFinalTemp = 0;
                             decimal PromedioMinimoPromocion = Math.Round(Convert.ToDecimal(info_anio.PromedioMinimoPromocion), 2, MidpointRounding.AwayFromZero);
 
-                            foreach (var item_x_matricula in lista_calificacion)
+                            if(info_calificacion!=null)
                             {
-                                decimal PromedioFinalQ1 = Convert.ToDecimal(item_x_matricula.PromedioFinalQ1);
-                                decimal PromedioFinalQ2 = Convert.ToDecimal(item_x_matricula.PromedioFinalQ2);
-                                decimal ExamenMejoramiento = Convert.ToDecimal(item_x_matricula.ExamenMejoramiento);
-                                decimal ExamenSupletorio = Convert.ToDecimal(item_x_matricula.ExamenSupletorio);
-                                decimal ExamenRemedial = Convert.ToDecimal(item_x_matricula.ExamenRemedial);
-                                decimal ExamenGracia = Convert.ToDecimal(item_x_matricula.ExamenGracia);
+                                string CampoMejoramiento = null;
+                                decimal PromedioFinalQ1 = Convert.ToDecimal(info_calificacion.PromedioFinalQ1);
+                                decimal PromedioFinalQ2 = Convert.ToDecimal(info_calificacion.PromedioFinalQ2);
+                                decimal ExamenMejoramiento = Convert.ToDecimal(info_calificacion.ExamenMejoramiento);
+                                decimal ExamenSupletorio = Convert.ToDecimal(info_calificacion.ExamenSupletorio);
+                                decimal ExamenRemedial = Convert.ToDecimal(info_calificacion.ExamenRemedial);
+                                decimal ExamenGracia = Convert.ToDecimal(info_calificacion.ExamenGracia);
                                 PromedioFinalTemp = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
 
                                 if (PromedioFinalTemp < PromedioMinimoPromocion)
@@ -113,32 +112,35 @@ namespace Core.Bus.Academico
                                     {
                                         if (PromedioFinalQ1 < PromedioFinalQ2)
                                         {
-                                            PromedioFinalQ1 = ExamenMejoramiento;
+                                            CampoMejoramiento = "Q1";
+                                            PromedioFinal = Math.Round(Convert.ToDecimal((ExamenMejoramiento + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
                                         }
                                         else if (PromedioFinalQ2 < PromedioFinalQ1)
                                         {
-                                            PromedioFinalQ2 = ExamenMejoramiento;
+                                            CampoMejoramiento = "Q2";
+                                            PromedioFinal = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + ExamenMejoramiento) / 2), 2, MidpointRounding.AwayFromZero);
                                         }
-
-                                        PromedioFinal = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
+                                        else
+                                        {
+                                            PromedioFinal = PromedioFinalTemp;
+                                        }
                                     }
                                     else
                                     {
                                         PromedioFinal = PromedioFinalTemp;
                                     }
                                 }
-                                item_x_matricula.PromedioFinal = PromedioFinal;
-                                odata_calificacion.modicarPaseAnioDB(item_x_matricula);
+                                info_calificacion.PromedioFinal = PromedioFinal;
+                                info_calificacion.CampoMejoramiento = CampoMejoramiento;
+
+                                odata_calificacion.modicarPaseAnioDB(info_calificacion);
 
                                 if (PromedioFinal < PromedioMinimoPromocion)
                                 {
                                     info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.SUPLENCIA);
                                     odata_alumno.PaseAnioDB(info_alumno);
                                 }
-                                //PromedioGeneral = PromedioGeneral + PromedioFinal;
                             }
-
-                            //PromedioGeneral = Math.Round((PromedioGeneral / lst_agrupada.Count()), 2, MidpointRounding.AwayFromZero);
                         }
                     }
                 }

@@ -377,6 +377,7 @@ namespace Core.Data.Academico
                     aca_Alumno Entity = Context.aca_Alumno.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno);
                     if (Entity == null)
                         return false;
+
                     Entity.IdCatalogoESTMAT = info.IdCatalogoESTMAT;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;

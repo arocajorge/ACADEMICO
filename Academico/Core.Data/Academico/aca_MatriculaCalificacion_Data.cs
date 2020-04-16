@@ -100,6 +100,7 @@ namespace Core.Data.Academico
                             ExamenQ2 = q.ExamenQ2,
                             PromedioFinalQ2 = q.PromedioFinalQ2,
                             ExamenMejoramiento = q.ExamenMejoramiento,
+                            CampoMejoramiento = q.CampoMejoramiento,
                             ExamenSupletorio = q.ExamenSupletorio,
                             ExamenRemedial = q.ExamenRemedial,
                             ExamenGracia = q.ExamenGracia,
@@ -109,6 +110,60 @@ namespace Core.Data.Academico
                 }
 
                 return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public aca_MatriculaCalificacion_Info getInfo_modificar(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, decimal IdAlumno)
+        {
+            try
+            {
+                aca_MatriculaCalificacion_Info info = new aca_MatriculaCalificacion_Info();
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var Entity = odata.vwaca_MatriculaCalificacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
+                    && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo && q.IdMateria == IdMateria
+                    && q.IdAlumno == IdAlumno).OrderBy(q => q.pe_nombreCompletoAlumno).FirstOrDefault();
+
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_MatriculaCalificacion_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdMatricula = Entity.IdMatricula,
+                        IdMateria = Entity.IdMateria,
+                        IdProfesor = Entity.IdProfesor,
+                        IdAlumno = Entity.IdAlumno,
+                        Codigo = Entity.Codigo,
+                        pe_nombreCompletoAlumno = Entity.pe_nombreCompletoAlumno,
+                        pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        RegistroValido = true,
+                        CalificacionP1 = Entity.CalificacionP1,
+                        CalificacionP2 = Entity.CalificacionP2,
+                        CalificacionP3 = Entity.CalificacionP3,
+                        PromedioQ1 = Entity.PromedioQ1,
+                        ExamenQ1 = Entity.ExamenQ1,
+                        PromedioFinalQ1 = Entity.PromedioFinalQ1,
+                        CalificacionP4 = Entity.CalificacionP4,
+                        CalificacionP5 = Entity.CalificacionP5,
+                        CalificacionP6 = Entity.CalificacionP6,
+                        PromedioQ2 = Entity.PromedioQ2,
+                        ExamenQ2 = Entity.ExamenQ2,
+                        PromedioFinalQ2 = Entity.PromedioFinalQ2,
+                        ExamenMejoramiento = Entity.ExamenMejoramiento,
+                        CampoMejoramiento = Entity.CampoMejoramiento,
+                        ExamenSupletorio = Entity.ExamenSupletorio,
+                        ExamenRemedial = Entity.ExamenRemedial,
+                        ExamenGracia = Entity.ExamenGracia,
+                        PromedioFinal = Entity.PromedioFinal
+                    };
+                }
+
+                return info;
             }
             catch (Exception)
             {
@@ -150,6 +205,7 @@ namespace Core.Data.Academico
                             ExamenQ1 = q.ExamenQ1,
                             ExamenQ2 = q.ExamenQ2,
                             ExamenMejoramiento = q.ExamenMejoramiento,
+                            CampoMejoramiento = q.CampoMejoramiento,
                             ExamenSupletorio = q.ExamenSupletorio,
                             ExamenRemedial = q.ExamenRemedial,
                             ExamenGracia = q.ExamenGracia
@@ -197,6 +253,7 @@ namespace Core.Data.Academico
                         ExamenQ1 = Entity.ExamenQ1,
                         ExamenQ2 = Entity.ExamenQ2,
                         ExamenMejoramiento = Entity.ExamenMejoramiento,
+                        CampoMejoramiento = Entity.CampoMejoramiento,
                         ExamenSupletorio = Entity.ExamenSupletorio,
                         ExamenRemedial = Entity.ExamenRemedial,
                         ExamenGracia = Entity.ExamenGracia
@@ -284,6 +341,7 @@ namespace Core.Data.Academico
                             ExamenQ2=q.ExamenQ2,
                             ExamenRemedial=q.ExamenRemedial,
                             ExamenMejoramiento = q.ExamenMejoramiento,
+                            CampoMejoramiento = q.CampoMejoramiento,
                             ExamenSupletorio = q.ExamenSupletorio,
                             ExamenGracia=q.ExamenGracia,
                             PromedioQ1 = q.PromedioQ1,
@@ -353,6 +411,7 @@ namespace Core.Data.Academico
                                     ExamenQ2 = info.ExamenQ2,
                                     PromedioFinalQ2 = info.PromedioFinalQ2,
                                     ExamenMejoramiento = info.ExamenMejoramiento,
+                                    CampoMejoramiento = info.CampoMejoramiento,
                                     ExamenSupletorio = info.ExamenSupletorio,
                                     ExamenRemedial = info.ExamenRemedial,
                                     ExamenGracia = info.ExamenGracia,
@@ -496,6 +555,7 @@ namespace Core.Data.Academico
                     if (EntityCalificacion == null)
                         return false;
 
+                    EntityCalificacion.CampoMejoramiento = info.CampoMejoramiento;
                     EntityCalificacion.PromedioFinal = info.PromedioFinal;
 
                     Context.SaveChanges();

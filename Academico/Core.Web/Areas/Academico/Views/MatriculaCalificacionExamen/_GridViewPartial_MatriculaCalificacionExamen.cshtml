@@ -91,6 +91,7 @@
             column.FieldName = "CalificacionExamen";
             column.Caption = "Calificación";
             column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.VisibleIndex = 3;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>

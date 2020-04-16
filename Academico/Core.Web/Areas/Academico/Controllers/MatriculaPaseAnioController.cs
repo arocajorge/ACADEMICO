@@ -87,6 +87,9 @@ namespace Core.Web.Areas.Academico.Controllers
 
                     foreach (var item_x_matricula in lst_x_matricula)
                     {
+                        string CampoMejoramiento = null;
+                        //decimal PromedioFinalQ1 = Convert.ToDecimal((((item_x_matricula.CalificacionP1+ item_x_matricula.CalificacionP2+ item_x_matricula.CalificacionP3) /3) * Convert.ToDecimal(0.80)) + ((item_x_matricula.ExamenQ1) * Convert.ToDecimal(0.20)));
+                        //decimal PromedioFinalQ2 = Convert.ToDecimal((((item_x_matricula.CalificacionP4 + item_x_matricula.CalificacionP5 + item_x_matricula.CalificacionP6) /3) * Convert.ToDecimal(0.80)) + ((item_x_matricula.ExamenQ2) * Convert.ToDecimal(0.20)));
                         decimal PromedioFinalQ1 = Convert.ToDecimal(item_x_matricula.PromedioFinalQ1);
                         decimal PromedioFinalQ2 = Convert.ToDecimal(item_x_matricula.PromedioFinalQ2);
                         decimal ExamenMejoramiento = Convert.ToDecimal(item_x_matricula.ExamenMejoramiento);
@@ -113,7 +116,6 @@ namespace Core.Web.Areas.Academico.Controllers
                             {
                                 PromedioFinal = PromedioFinalTemp;
                             }
-
                         }
                         else
                         {
@@ -121,14 +123,18 @@ namespace Core.Web.Areas.Academico.Controllers
                             {
                                 if (PromedioFinalQ1 < PromedioFinalQ2)
                                 {
-                                    PromedioFinalQ1 = ExamenMejoramiento;
+                                    CampoMejoramiento = "Q1";
+                                    PromedioFinal = Math.Round(Convert.ToDecimal((ExamenMejoramiento + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
                                 }
                                 else if (PromedioFinalQ2 < PromedioFinalQ1)
                                 {
-                                    PromedioFinalQ2 = ExamenMejoramiento;
+                                    CampoMejoramiento = "Q2";
+                                    PromedioFinal = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + ExamenMejoramiento) / 2), 2, MidpointRounding.AwayFromZero);
                                 }
-
-                                PromedioFinal = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
+                                else
+                                {
+                                    PromedioFinal = PromedioFinalTemp;
+                                }                        
                             }
                             else
                             {
@@ -157,6 +163,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             ExamenQ2 = item_x_matricula.ExamenQ2,
                             PromedioFinalQ2 = PromedioFinalQ2,
                             ExamenMejoramiento = item_x_matricula.ExamenMejoramiento,
+                            CampoMejoramiento = CampoMejoramiento,
                             ExamenSupletorio = item_x_matricula.ExamenSupletorio,
                             ExamenRemedial = item_x_matricula.ExamenRemedial,
                             ExamenGracia = item_x_matricula.ExamenGracia,
