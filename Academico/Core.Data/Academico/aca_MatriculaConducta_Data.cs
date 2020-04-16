@@ -56,6 +56,53 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_MatriculaConducta_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
+        {
+            try
+            {
+                List<aca_MatriculaConducta_Info> Lista = new List<aca_MatriculaConducta_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio==IdAnio && q.IdNivel==IdNivel && q.IdJornada==IdJornada && q.IdCurso==IdCurso && q.IdParalelo==IdParalelo).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdMatricula = q.IdMatricula,
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            PromedioP1 = q.PromedioP1,
+                            PromedioP2 = q.PromedioP2,
+                            PromedioP3 = q.PromedioP3,
+                            PromedioP4 = q.PromedioP4,
+                            PromedioP5 = q.PromedioP5,
+                            PromedioP6 = q.PromedioP6,
+                            PromedioFinalP1 = q.PromedioFinalP1,
+                            PromedioFinalP2 = q.PromedioFinalP2,
+                            PromedioFinalP3 = q.PromedioFinalP3,
+                            PromedioFinalP4 = q.PromedioFinalP4,
+                            PromedioFinalP5 = q.PromedioFinalP5,
+                            PromedioFinalP6 = q.PromedioFinalP6,
+                            PromedioQ1 = q.PromedioQ1,
+                            PromedioQ2 = q.PromedioQ2,
+                            PromedioFinalQ1 = q.PromedioFinalQ1,
+                            PromedioFinalQ2 = q.PromedioFinalQ2,
+                            PromedioFinal = q.PromedioFinal,
+                            PromedioGeneral = q.PromedioGeneral
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool generarCalificacion(List<aca_MatriculaConducta_Info> lst_conducta)
         {
             try

@@ -49,6 +49,60 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list(int IdEmpresa, int IdSede, int IdAnio, decimal IdProfesor)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Paralelo_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = (from q in Context.vwaca_AnioLectivo_Curso_Paralelo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdSede == IdSede
+                             && q.IdAnio == IdAnio
+                             && q.IdProfesorTutor == IdProfesor
+                             group q by new
+                             {
+                                 q.IdEmpresa,
+                                 q.IdAnio,
+                                 q.IdSede,
+                                 q.IdNivel,
+                                 q.IdJornada,
+                                 q.IdCurso,
+                                 q.NomSede,
+                                 q.Descripcion,
+                                 q.NomNivel,
+                                 q.NomJornada,
+                                 q.NomCurso,
+                                 q.OrdenParalelo
+                             } into g
+                             select new aca_AnioLectivo_Curso_Paralelo_Info
+                             {
+                                 IdEmpresa = g.Key.IdEmpresa,
+                                 IdSede = g.Key.IdSede,
+                                 IdAnio = g.Key.IdAnio,
+                                 IdNivel = g.Key.IdNivel,
+                                 IdJornada = g.Key.IdJornada,
+                                 IdCurso = g.Key.IdCurso,
+                                 NomSede = g.Key.NomSede,
+                                 Descripcion = g.Key.Descripcion,
+                                 NomNivel = g.Key.NomNivel,
+                                 NomJornada = g.Key.NomJornada,
+                                 NomCurso = g.Key.NomCurso,
+                                 OrdenParalelo = g.Key.OrdenParalelo
+
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try

@@ -35,5 +35,8 @@ namespace Core.Data.Base
         public Nullable<decimal> IdPersonaInpector { get; set; }
         public string NomTutor { get; set; }
         public string NomInspector { get; set; }
+        public int OrdenNivel { get; set; }
+        public int OrdenJornada { get; set; }
+        public int OrdenCurso { get; set; }
     }
 }

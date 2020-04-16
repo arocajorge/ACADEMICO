@@ -24,6 +24,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_MatriculaConducta_Info> GetList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
+        {
+            try
+            {
+                return odata.getList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool GenerarCalificacion(List<aca_MatriculaConducta_Info> lst_conducta)
         {
             try
