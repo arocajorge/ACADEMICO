@@ -8579,6 +8579,12 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_ComboBoxPartial_Paralelo_Cal_Quim.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_012.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_008.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_CmbCurso.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_CmbJornada.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_CmbNivel.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_CmbSede.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_ComboBoxPartial_Paralelo.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
