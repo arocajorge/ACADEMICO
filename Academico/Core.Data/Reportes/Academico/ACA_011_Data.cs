@@ -17,6 +17,7 @@ namespace Core.Data.Reportes.Academico
                 List<ACA_011_Info> Lista = new List<ACA_011_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
+                    Context.SetCommandTimeOut(5000);
                     var lst = Context.VWACA_011.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede &&
                     q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo ).ToList();
 
@@ -24,6 +25,7 @@ namespace Core.Data.Reportes.Academico
                     {
                         Lista.Add(new ACA_011_Info
                         {
+                            RowNumber = q.RowNumber,
                             IdEmpresa = q.IdEmpresa,
                             IdMatricula = q.IdMatricula,
                             IdAlumno = q.IdAlumno,

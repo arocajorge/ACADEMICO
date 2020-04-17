@@ -8,6 +8,7 @@ namespace Core.Info.Reportes.Academico
 {
     public class ACA_010_Info
     {
+        public Nullable<long> RowNumber { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
         public int IdAnio { get; set; }

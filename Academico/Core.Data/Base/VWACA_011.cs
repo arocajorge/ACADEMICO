@@ -14,6 +14,7 @@ namespace Core.Data.Base
     
     public partial class VWACA_011
     {
+        public Nullable<long> RowNumber { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
         public decimal IdAlumno { get; set; }
