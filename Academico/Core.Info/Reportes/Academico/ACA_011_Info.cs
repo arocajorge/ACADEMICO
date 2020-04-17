@@ -14,6 +14,7 @@ namespace Core.Info.Reportes.Academico
         public string pe_nombreCompleto { get; set; }
         public string LugarNacimiento { get; set; }
         public Nullable<System.DateTime> pe_fechaNacimiento { get; set; }
+        public Nullable<int> Edad { get; set; }
         public decimal IdPersonaR { get; set; }
         public string Parentezco { get; set; }
         public string Representante { get; set; }
@@ -42,6 +43,8 @@ namespace Core.Info.Reportes.Academico
         public Nullable<decimal> ExamenQ2 { get; set; }
         public Nullable<decimal> PromedioFinalQ2 { get; set; }
         public Nullable<decimal> ExamenMejoramiento { get; set; }
+        public string CampoMejoramiento { get; set; }
+        public Nullable<decimal> PromedioQuimestral { get; set; }
         public Nullable<decimal> ExamenSupletorio { get; set; }
         public Nullable<decimal> ExamenRemedial { get; set; }
         public Nullable<decimal> ExamenGracia { get; set; }

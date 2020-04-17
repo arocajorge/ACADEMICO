@@ -31,7 +31,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Cmb_ProfesorTutor()
         {
             aca_AnioLectivo_Curso_Paralelo_Info model = new aca_AnioLectivo_Curso_Paralelo_Info();
-            return PartialView("_Cmb_ProfesorTutor", model);
+            return PartialView("_CmbProfesorTutor", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda_tutor(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
@@ -44,8 +44,8 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public ActionResult Cmb_ProfesorInspector()
         {
-            aca_Curso_Info model = new aca_Curso_Info();
-            return PartialView("_Cmb_ProfesorInspector", model);
+            aca_AnioLectivo_Curso_Paralelo_Info model = new aca_AnioLectivo_Curso_Paralelo_Info();
+            return PartialView("_CmbProfesorInspector", model);
         }
         public List<tb_persona_Info> get_list_bajo_demanda_inspector(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
