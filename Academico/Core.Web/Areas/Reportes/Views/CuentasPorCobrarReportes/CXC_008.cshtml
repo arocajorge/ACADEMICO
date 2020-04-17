@@ -66,35 +66,28 @@
                             @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger", @id = "IdCurso" })
                         </div>
                     </div>
-                        <div class="col-md-2">
-                          
-                              <div class="form-group">
-                                <label for="">Fecha inicio*</label>
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    @Html.DevExpress().DateEditFor(q => q.fecha_ini, settings =>
-                           {
-                               settings.Name = "fecha_ini";
-                               settings.Properties.UseMaskBehavior = true;
-                               settings.Properties.EditFormat = EditFormat.Date;
-                               settings.Properties.EditFormatString = "dd/MM/yyyy";
-                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           }).GetHtml()
-                                    @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdProducto">Paralelo</label>
+                            @Html.Partial("_ComboBoxPartial_Paralelo", Model)
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="">Fecha fin*</label>
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    @Html.DevExpress().DateEditFor(q => q.fecha_fin, settings =>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdCliente">Alumno</label>
+                            @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                            @*@Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })*@
+
+                        </div>
+                    </div> 
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="">Fecha fin*</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.DevExpress().DateEditFor(q => q.fecha_fin, settings =>
                            {
                                settings.Name = "fecha_fin";
                                settings.Properties.UseMaskBehavior = true;
@@ -103,22 +96,11 @@
                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                            }).GetHtml()
-                                    @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
-                                </div>
+                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="bo_EsBodega"></label>
-                            @Html.DevExpress().CheckBoxFor(q => q.mostrarAnulados, settings =>
-                                {
-                                    settings.Name = "mostrarAnulados";
-                                    settings.Text = "Dividir paralelos por hoja";
-                                }).GetHtml()
-                            @Html.ValidationMessageFor(q => q.mostrarAnulados, "", new { @class = "text-danger" })
-                        </div>
                     </div>
-                    </div>
+                </div>
             </div>
             
             <!-- /.box-body -->

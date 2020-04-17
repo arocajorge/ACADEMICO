@@ -1,5 +1,7 @@
-﻿using Core.Bus.General;
+﻿using Core.Bus.Academico;
+using Core.Bus.General;
 using Core.Bus.SeguridadAcceso;
+using Core.Info.Academico;
 using Core.Info.General;
 using Core.Info.Helps;
 using Core.Info.SeguridadAcceso;
@@ -19,6 +21,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
         string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
         tb_persona_Bus BusPersona = new tb_persona_Bus();
+        aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
 
         #region Combos
         public ActionResult Cmb_Alumno()
@@ -369,6 +372,76 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa ?? "0");
             ViewBag.Report = report;
             CargarCombos_CXC_006(model.IdEmpresa, model.IntArray);
+            return View(model);
+        }
+        #endregion
+
+        #region CXC_008
+        public ActionResult CXC_008()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = new aca_AnioLectivo_Info();
+            info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+
+            model.IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
+            model.mostrarAnulados = true;
+            CXC_008_Rpt report = new CXC_008_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_008");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_FechaCorte.Value = model.fecha_fin;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CXC_008(cl_filtros_Info model)
+        {
+            CXC_008_Rpt report = new CXC_008_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_008");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_FechaCorte.Value = model.fecha_fin;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
             return View(model);
         }
         #endregion
