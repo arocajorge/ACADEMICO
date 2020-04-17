@@ -421,7 +421,12 @@
     <Compile Include="Reportes\Academico\ACA_011_Rpt.Designer.cs">
       <DependentUpon>ACA_011_Rpt.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\Academico\aca_Catalogo_Tipo_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_012_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_012_Rpt.Designer.cs">
+      <DependentUpon>ACA_012_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8693,6 +8698,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_011_Rpt.resx">
       <DependentUpon>ACA_011_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_012_Rpt.resx">
+      <DependentUpon>ACA_012_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.resx">
       <DependentUpon>BAN_001_cancelaciones_Rpt.cs</DependentUpon>
