@@ -10,16 +10,30 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_012_Data
     {
-        public List<ACA_012_Info> GetList(int IdEmpresa, int IdAnio, DateTime FechaIni, DateTime FechaFin, decimal IdRubro)
+        public List<ACA_012_Info> GetList(int IdEmpresa, DateTime FechaIni, DateTime FechaFin, decimal IdRubro, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
         {
             try
             {
                 FechaIni = FechaIni.Date;
                 FechaFin = FechaFin.Date;
+                
+                int IdNivelFin = IdNivel == 0 ? 99999 : IdNivel;
+                int IdJornadaFin = IdJornada == 0 ? 99999 : IdJornada;
+                int IdCursoFin = IdCurso == 0 ? 99999 : IdCurso;
+                int IdSedeFin = IdSede == 0 ? 99999 : IdSede;
+
                 List<ACA_012_Info> Lista = new List<ACA_012_Info>();
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
-                    var lst = db.VWACA_012.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && FechaIni <= (q.cr_fecha ?? FechaIni) && (q.cr_fecha ?? FechaIni) <= FechaFin).ToList();
+                    var lst = db.VWACA_012.Where(q => q.IdEmpresa == IdEmpresa 
+                    && q.IdAnio == IdAnio 
+                    && IdSede <= q.IdSede && q.IdSede <= IdSedeFin
+                    && IdNivel <= q.IdNivel && q.IdNivel <= IdNivelFin
+                    && IdJornada <= q.IdJornada && q.IdJornada <= IdJornadaFin
+                    && IdCurso <= q.IdCurso && q.IdCurso <= IdCursoFin
+                    && q.IdRubro == IdRubro
+                    && FechaIni <= (q.cr_fecha ?? FechaIni) 
+                    && (q.cr_fecha ?? FechaIni) <= FechaFin).ToList();
                     foreach (var q in lst)
                     {
                         Lista.Add(new ACA_012_Info

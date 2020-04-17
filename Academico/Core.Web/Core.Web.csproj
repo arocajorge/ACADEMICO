@@ -8571,6 +8571,7 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_ComboBoxPartial_Paralelo_Cal.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_011.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_ComboBoxPartial_Paralelo_Cal_Quim.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_012.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

@@ -1256,6 +1256,76 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
 
         #endregion
+
+        #region ACA_012
+        public ActionResult ACA_012()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = new aca_AnioLectivo_Info();
+            info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+
+            model.IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
+            model.mostrarAnulados = true;
+            ACA_012_Rpt report = new ACA_012_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_012");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_FechaIni.Value = model.fecha_ini;
+            report.p_FechaFin.Value = model.fecha_fin;
+            report.p_QuebrarPorParalelo.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_012(cl_filtros_Info model)
+        {
+            ACA_012_Rpt report = new ACA_012_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_012");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_FechaIni.Value = model.fecha_ini;
+            report.p_FechaFin.Value = model.fecha_fin;
+            report.p_QuebrarPorParalelo.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        #endregion
     }
 
     public class aca_ReporteCalificacion_Combos_List
