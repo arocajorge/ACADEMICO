@@ -1,0 +1,139 @@
+﻿@model Core.Info.Helps.cl_filtros_Info
+@{
+    ViewBag.Title = "Saldo de documentos por paralelo";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
+}
+@using (Html.BeginForm("CXC_008", "CuentasPorCobrarReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdSucursal)
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+                </div>
+            </div>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdProducto">Año lectivo</label>
+                            @Html.Partial("_ComboBoxPartial_Anio", Model)
+                            @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger", @id = "IdAnio" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdCliente">Sede</label>
+                            @Html.Partial("_CmbSede", Model)
+                            @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger", @id = "IdSede" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdCliente">Nivel</label>
+                            @Html.Partial("_CmbNivel", Model)
+                            @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger", @id = "IdNivel" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdCliente">Jornada</label>
+                            @Html.Partial("_CmbJornada", Model)
+                            @Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger", @id = "IdJornada" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdCliente">Curso</label>
+                            @Html.Partial("_CmbCurso", Model)
+                            @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger", @id = "IdCurso" })
+                        </div>
+                    </div>
+                        <div class="col-md-2">
+                          
+                              <div class="form-group">
+                                <label for="">Fecha inicio*</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.fecha_ini, settings =>
+                           {
+                               settings.Name = "fecha_ini";
+                               settings.Properties.UseMaskBehavior = true;
+                               settings.Properties.EditFormat = EditFormat.Date;
+                               settings.Properties.EditFormatString = "dd/MM/yyyy";
+                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="">Fecha fin*</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.fecha_fin, settings =>
+                           {
+                               settings.Name = "fecha_fin";
+                               settings.Properties.UseMaskBehavior = true;
+                               settings.Properties.EditFormat = EditFormat.Date;
+                               settings.Properties.EditFormatString = "dd/MM/yyyy";
+                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="bo_EsBodega"></label>
+                            @Html.DevExpress().CheckBoxFor(q => q.mostrarAnulados, settings =>
+                                {
+                                    settings.Name = "mostrarAnulados";
+                                    settings.Text = "Dividir paralelos por hoja";
+                                }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.mostrarAnulados, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    </div>
+            </div>
+            
+            <!-- /.box-body -->
+        </div>
+    </div>
+
+   
+                @Html.DevExpress().WebDocumentViewer(settings =>
+                    {
+                        settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                        settings.MobileMode = false;
+                        settings.Name = "webDocumentViewer";
+                    }).Bind(ViewBag.Report).GetHtml()
+        <!-- /.box-body -->
+        <div class="box-footer">
+            [@Core.Web.Helps.SessionFixed.IdEmpresa] @Core.Web.Helps.SessionFixed.NomEmpresa
+        </div>
+}
