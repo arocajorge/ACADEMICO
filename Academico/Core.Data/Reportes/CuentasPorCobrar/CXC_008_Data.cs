@@ -57,6 +57,10 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                             NomParalelo = q.NomParalelo
                         });
                     }
+                    if (Lista.Count > 0)
+                    {
+                        Lista = Lista.Where(q => q.IdMatricula != null).ToList();
+                    }
                 }
 
                 return Lista;

@@ -6,6 +6,7 @@ using DevExpress.XtraReports.UI;
 using Core.Bus.Reportes.CuentasPorCobrar;
 using System.Collections.Generic;
 using Core.Info.Reportes.CuentasPorCobrar;
+using Core.Bus.General;
 
 namespace Core.Web.Reportes.CuentasPorCobrar
 {
@@ -38,6 +39,17 @@ namespace Core.Web.Reportes.CuentasPorCobrar
                 DateTime FechaFin = string.IsNullOrEmpty(p_FechaCorte.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_FechaCorte.Value);
                 List<CXC_008_Info> Lista = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo,IdAlumno,FechaFin);
                 this.DataSource = Lista;
+
+                tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+                var emp = bus_empresa.get_info(IdEmpresa);
+                if (emp != null)
+                {
+                    if (emp.em_logo != null)
+                    {
+                        ImageConverter obj = new ImageConverter();
+                        lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
+                    }
+                }
             }
             catch (Exception)
             {
