@@ -25,6 +25,19 @@ namespace Core.Bus.General
             }
         }
 
+        public decimal validar_existe_cedula(string IdTipoDocumento, string pe_CedulaRuc)
+        {
+            try
+            {
+                return odata.validar_existe_cedula(IdTipoDocumento, pe_CedulaRuc);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<tb_persona_Info> get_list_bajo_demanda(ListEditItemsRequestedByFilterConditionEventArgs args, int IdEmpresa, string IdTipoPersona)
         {
             return odata.get_list_bajo_demanda(args, IdEmpresa, IdTipoPersona);

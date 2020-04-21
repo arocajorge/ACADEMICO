@@ -16,10 +16,13 @@ namespace Core.Web.Areas.General.Controllers
     {
         #region Variables
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
+        tb_Religion_Bus bus_religion = new tb_Religion_Bus();
+        tb_profesion_Bus bus_profesion = new tb_profesion_Bus();
+        tb_GrupoEtnico_Bus bus_grupoetnico = new tb_GrupoEtnico_Bus();
         #endregion
 
         #region Index
-
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         public ActionResult Index()
         {
@@ -32,18 +35,31 @@ namespace Core.Web.Areas.General.Controllers
             return View();
         }
 
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_persona(bool Nuevo = false, bool Modificar = false, bool Anular = false)
+        {
+            List<tb_persona_Info> model = bus_persona.get_list(true);
+            ViewBag.Nuevo = Nuevo;
+            ViewBag.Modificar = Modificar;
+            ViewBag.Anular = Anular;
+            return PartialView("_GridViewPartial_persona", model);
+        }
+        #endregion
+
+        #region Metodos
         private void cargar_combos()
         {
-            tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
-            tb_Religion_Bus bus_religion = new tb_Religion_Bus();
-            tb_profesion_Bus bus_profesion = new tb_profesion_Bus();
             var lst_sexo = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.SEXO), false);
             var lst_estado_civil = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.ESTCIVIL), false);
             var lst_tipo_doc = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODOC), false);
             var lst_tipo_cta = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIP_CTA_AC), false);
             var lst_tipo_naturaleza = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPONATPER), false);
+            var lst_tipo_sangre = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPOSANGRE), false);
             var lst_profesion = bus_profesion.GetList(false);
             var lst_religion = bus_religion.GetList(false);
+            var lst_tipo_discapacidad = bus_catalogo.get_list(Convert.ToInt32(cl_enumeradores.eTipoCatalogoGeneral.TIPODISCAP), false);
+            lst_tipo_discapacidad.Add(new tb_Catalogo_Info { CodCatalogo = "", ca_descripcion = "" });
+            var lst_grupoetnico = bus_grupoetnico.GetList(false);
 
             ViewBag.lst_sexo = lst_sexo;
             ViewBag.lst_estado_civil = lst_estado_civil;
@@ -52,12 +68,21 @@ namespace Core.Web.Areas.General.Controllers
             ViewBag.lst_tipo_naturaleza = lst_tipo_naturaleza;
             ViewBag.lst_profesion = lst_profesion;
             ViewBag.lst_religion = lst_religion;
+            ViewBag.lst_tipo_discapacidad = lst_tipo_discapacidad;
+            ViewBag.lst_grupoetnico = lst_grupoetnico;
+            ViewBag.lst_tipo_sangre = lst_tipo_sangre;
         }
         #endregion
+
         #region Acciones
         public ActionResult Nuevo()
         {
-            tb_persona_Info model = new tb_persona_Info();
+            tb_persona_Info model = new tb_persona_Info
+            {
+                pe_Naturaleza = "NATU",
+                CodCatalogoCONADIS = "",
+                CodCatalogoSangre = "O+"
+            };
             cargar_combos();
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Persona", "Index");
@@ -71,7 +96,7 @@ namespace Core.Web.Areas.General.Controllers
         public ActionResult Nuevo(tb_persona_Info model)
         {
             var return_naturaleza = "";
-            if (bus_persona.validar_existe_cedula(model.pe_cedulaRuc) != 0)
+            if (bus_persona.validar_existe_cedula(model.IdTipoDocumento, model.pe_cedulaRuc) != 0)
             {
                 ViewBag.mensaje = "El número de documento ya se encuentra registrado";
                 cargar_combos();
@@ -97,21 +122,14 @@ namespace Core.Web.Areas.General.Controllers
             return RedirectToAction("Index", "Persona");
         }
 
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_persona(bool Nuevo = false, bool Modificar = false, bool Anular = false)
-        {
-            List<tb_persona_Info> model = bus_persona.get_list(true);
-            ViewBag.Nuevo = Nuevo;
-            ViewBag.Modificar = Modificar;
-            ViewBag.Anular = Anular;
-            return PartialView("_GridViewPartial_persona", model);
-        }
-
         public ActionResult Modificar(decimal IdPersona = 0)
         {
             tb_persona_Info model = bus_persona.get_info(IdPersona);
             if (model == null)
                 return RedirectToAction("Index", "Persona");
+
+            model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Persona", "Index");
             if (!info.Modificar)
@@ -124,6 +142,13 @@ namespace Core.Web.Areas.General.Controllers
         public ActionResult Modificar(tb_persona_Info model)
         {
             var return_naturaleza = "";
+            if (bus_persona.validar_existe_cedula(model.IdTipoDocumento, model.pe_cedulaRuc) != 0)
+            {
+                ViewBag.mensaje = "El número de documento ya se encuentra registrado";
+                cargar_combos();
+                return View(model);
+            }
+
             if ((cl_funciones.ValidaIdentificacion(model.IdTipoDocumento, model.pe_Naturaleza, model.pe_cedulaRuc, ref return_naturaleza)))
             {
                 model.pe_Naturaleza = return_naturaleza;
@@ -148,6 +173,8 @@ namespace Core.Web.Areas.General.Controllers
             tb_persona_Info model = bus_persona.get_info(IdPersona);
             if (model == null)
                 return RedirectToAction("Index", "Persona");
+
+            model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Persona", "Index");
             if (!info.Anular)
