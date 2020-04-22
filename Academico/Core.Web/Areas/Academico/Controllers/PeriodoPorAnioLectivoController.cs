@@ -222,6 +222,8 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
 
             aca_AnioLectivo_Periodo_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdEmpresa == IdEmpresa && m.IdPeriodo == info_det.IdPeriodo).FirstOrDefault();
+            var mes = info_det.FechaDesde.Month;
+            edited_info.IdMes = mes;
             edited_info.FechaDesde = info_det.FechaDesde;
             edited_info.FechaHasta = info_det.FechaHasta;
             edited_info.FechaProntoPago = info_det.FechaProntoPago;
