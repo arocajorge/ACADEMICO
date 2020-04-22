@@ -96,7 +96,7 @@ namespace Core.Web.Areas.General.Controllers
         public ActionResult Nuevo(tb_persona_Info model)
         {
             var return_naturaleza = "";
-            if (bus_persona.validar_existe_cedula(model.IdTipoDocumento, model.pe_cedulaRuc) != 0)
+            if (bus_persona.validar_existe_cedula(model.IdTipoDocumento, model.pe_cedulaRuc, model.IdPersona) != 0)
             {
                 ViewBag.mensaje = "El número de documento ya se encuentra registrado";
                 cargar_combos();
@@ -142,7 +142,7 @@ namespace Core.Web.Areas.General.Controllers
         public ActionResult Modificar(tb_persona_Info model)
         {
             var return_naturaleza = "";
-            if (bus_persona.validar_existe_cedula(model.IdTipoDocumento, model.pe_cedulaRuc) != 0)
+            if (bus_persona.validar_existe_cedula(model.IdTipoDocumento, model.pe_cedulaRuc, model.IdPersona) != 0)
             {
                 ViewBag.mensaje = "El número de documento ya se encuentra registrado";
                 cargar_combos();

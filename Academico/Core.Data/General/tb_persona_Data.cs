@@ -38,7 +38,7 @@ namespace Core.Data.General
             }
         }
 
-        public decimal validar_existe_cedula(string IdTipoDocumento, string pe_CedulaRuc)
+        public decimal validar_existe_cedula(string IdTipoDocumento, string pe_CedulaRuc, decimal IdPersona)
         {
             try
             {
@@ -49,6 +49,7 @@ namespace Core.Data.General
                     var lst = from q in Context.tb_persona
                               where q.pe_cedulaRuc == pe_CedulaRuc
                               && q.IdTipoDocumento == IdTipoDocumento
+                              && q.IdPersona != IdPersona
                               select q;
 
                     if (lst.Count() > 0)

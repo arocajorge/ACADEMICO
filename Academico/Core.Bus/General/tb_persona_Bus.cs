@@ -25,11 +25,11 @@ namespace Core.Bus.General
             }
         }
 
-        public decimal validar_existe_cedula(string IdTipoDocumento, string pe_CedulaRuc)
+        public decimal validar_existe_cedula(string IdTipoDocumento, string pe_CedulaRuc, decimal IdPersona)
         {
             try
             {
-                return odata.validar_existe_cedula(IdTipoDocumento, pe_CedulaRuc);
+                return odata.validar_existe_cedula(IdTipoDocumento, pe_CedulaRuc, IdPersona);
             }
             catch (Exception)
             {
