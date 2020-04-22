@@ -37,6 +37,32 @@ namespace Core.Data.General
                 throw;
             }
         }
+
+        public decimal validar_existe_cedula(string IdTipoDocumento, string pe_CedulaRuc, decimal IdPersona)
+        {
+            try
+            {
+                using (EntitiesGeneral Context = new EntitiesGeneral())
+                {
+                    pe_CedulaRuc = pe_CedulaRuc == null ? "" : pe_CedulaRuc.Trim();
+
+                    var lst = from q in Context.tb_persona
+                              where q.pe_cedulaRuc == pe_CedulaRuc
+                              && q.IdTipoDocumento == IdTipoDocumento
+                              && q.IdPersona != IdPersona
+                              select q;
+
+                    if (lst.Count() > 0)
+                        return lst.FirstOrDefault().IdPersona;
+                    else
+                        return 0;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public tb_persona_Info get_info(decimal IdPersona)
         {
             try
@@ -71,8 +97,13 @@ namespace Core.Data.General
                         IdBanco_acreditacion = Entity.IdBanco_acreditacion,
                         IdProfesion = Entity.IdProfesion,
                         IdReligion = Entity.IdReligion,
-                        AsisteCentroCristiano = Entity.AsisteCentroCristiano
-                };
+                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
+                        CodCatalogoSangre = Entity.CodCatalogoSangre,
+                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
+                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
+                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
+                        IdGrupoEtnico = Entity.IdGrupoEtnico
+                    };
                 }
 
                 return info;
@@ -118,7 +149,12 @@ namespace Core.Data.General
                         IdBanco_acreditacion = Entity.IdBanco_acreditacion,
                         IdProfesion = Entity.IdProfesion,
                         IdReligion = Entity.IdReligion,
-                        AsisteCentroCristiano = Entity.AsisteCentroCristiano
+                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
+                        CodCatalogoSangre = Entity.CodCatalogoSangre,
+                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
+                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
+                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
+                        IdGrupoEtnico = Entity.IdGrupoEtnico
                     };
                 }
 
@@ -166,6 +202,11 @@ namespace Core.Data.General
                                      IdProfesion = q.IdProfesion,
                                      IdReligion = q.IdReligion,
                                      AsisteCentroCristiano = q.AsisteCentroCristiano,
+                                     CodCatalogoSangre = q.CodCatalogoSangre,
+                                     CodCatalogoCONADIS = q.CodCatalogoCONADIS,
+                                     NumeroCarnetConadis = q.NumeroCarnetConadis,
+                                     PorcentajeDiscapacidad = q.PorcentajeDiscapacidad,
+                                     IdGrupoEtnico = q.IdGrupoEtnico,
                                      EstadoBool = q.pe_estado == "A" ? true : false
                                  }).ToList();
                     else
@@ -196,6 +237,11 @@ namespace Core.Data.General
                                      IdProfesion = q.IdProfesion,
                                      IdReligion = q.IdReligion,
                                      AsisteCentroCristiano = q.AsisteCentroCristiano,
+                                     CodCatalogoSangre = q.CodCatalogoSangre,
+                                     CodCatalogoCONADIS = q.CodCatalogoCONADIS,
+                                     NumeroCarnetConadis = q.NumeroCarnetConadis,
+                                     PorcentajeDiscapacidad = q.PorcentajeDiscapacidad,
+                                     IdGrupoEtnico = q.IdGrupoEtnico,
                                      EstadoBool = q.pe_estado == "A" ? true : false
                                  }).ToList();
                 }
