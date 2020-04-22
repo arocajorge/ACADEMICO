@@ -34,15 +34,17 @@ namespace Core.Web.Reportes.Academico
                 int IdNivel = string.IsNullOrEmpty(p_IdNivel.Value.ToString()) ? 0 : Convert.ToInt32(p_IdNivel.Value);
                 int IdJornada = string.IsNullOrEmpty(p_IdJornada.Value.ToString()) ? 0 : Convert.ToInt32(p_IdJornada.Value);
                 int IdCurso = string.IsNullOrEmpty(p_IdCurso.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCurso.Value);
+                int IdRubro = string.IsNullOrEmpty(p_IdRubro.Value.ToString()) ? 0 : Convert.ToInt32(p_IdRubro.Value);
                 DateTime FechaIni = string.IsNullOrEmpty(p_FechaIni.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_FechaIni.Value);
                 DateTime FechaFin = string.IsNullOrEmpty(p_FechaFin.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_FechaFin.Value);
+
                 if (Convert.ToBoolean(p_QuebrarPorParalelo.Value ?? false))
                 {
                     groupHeaderBand6.PageBreak = PageBreak.BeforeBandExceptFirstEntry;
                 }else
                     groupHeaderBand6.PageBreak = PageBreak.None;
 
-                List<ACA_012_Info> Lista = bus_rpt.GetList(IdEmpresa,FechaIni,FechaFin,3, IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
+                List<ACA_012_Info> Lista = bus_rpt.GetList(IdEmpresa,FechaIni,FechaFin, IdRubro, IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
                 this.DataSource = Lista;
 
                 tb_empresa_Bus bus_empresa = new tb_empresa_Bus();

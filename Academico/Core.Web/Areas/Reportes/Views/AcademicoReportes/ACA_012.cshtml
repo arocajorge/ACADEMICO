@@ -66,64 +66,83 @@
                             @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger", @id = "IdCurso" })
                         </div>
                     </div>
-                        <div class="col-md-2">
-                          
-                              <div class="form-group">
-                                <label for="">Fecha inicio*</label>
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    @Html.DevExpress().DateEditFor(q => q.fecha_ini, settings =>
-                           {
-                               settings.Name = "fecha_ini";
-                               settings.Properties.UseMaskBehavior = true;
-                               settings.Properties.EditFormat = EditFormat.Date;
-                               settings.Properties.EditFormatString = "dd/MM/yyyy";
-                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           }).GetHtml()
-                                    @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdCliente">Rubro</label>
+                            @Html.DevExpress().ComboBoxFor(q => q.IdRubro, settings =>
+                               {
+                                   settings.Name = "IdRubro";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdRubro", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("NomRubro", "Grupo Etnico").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdRubro";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "NomRubro";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_rubro).GetHtml()
+                            @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
                         </div>
-                        <div class="col-md-2">
+                    </div>
+                    <div class="col-md-2">
                             <div class="form-group">
-                                <label for="">Fecha fin*</label>
-                                <div class="input-group date">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    @Html.DevExpress().DateEditFor(q => q.fecha_fin, settings =>
-                           {
-                               settings.Name = "fecha_fin";
-                               settings.Properties.UseMaskBehavior = true;
-                               settings.Properties.EditFormat = EditFormat.Date;
-                               settings.Properties.EditFormatString = "dd/MM/yyyy";
-                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                           }).GetHtml()
-                                    @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+                            <label for="">Fecha inicio*</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
                                 </div>
+                                @Html.DevExpress().DateEditFor(q => q.fecha_ini, settings =>
+                        {
+                            settings.Name = "fecha_ini";
+                            settings.Properties.UseMaskBehavior = true;
+                            settings.Properties.EditFormat = EditFormat.Date;
+                            settings.Properties.EditFormatString = "dd/MM/yyyy";
+                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="bo_EsBodega"></label>
-                            @Html.DevExpress().CheckBoxFor(q => q.mostrarAnulados, settings =>
-                                {
-                                    settings.Name = "mostrarAnulados";
-                                    settings.Text = "Dividir paralelos por hoja";
-                                }).GetHtml()
-                            @Html.ValidationMessageFor(q => q.mostrarAnulados, "", new { @class = "text-danger" })
+                            <label for="">Fecha fin*</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                @Html.DevExpress().DateEditFor(q => q.fecha_fin, settings =>
+                        {
+                            settings.Name = "fecha_fin";
+                            settings.Properties.UseMaskBehavior = true;
+                            settings.Properties.EditFormat = EditFormat.Date;
+                            settings.Properties.EditFormatString = "dd/MM/yyyy";
+                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+                            </div>
                         </div>
                     </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="bo_EsBodega"></label>
+                        @Html.DevExpress().CheckBoxFor(q => q.mostrarAnulados, settings =>
+                            {
+                                settings.Name = "mostrarAnulados";
+                                settings.Text = "Dividir paralelos por hoja";
+                            }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.mostrarAnulados, "", new { @class = "text-danger" })
                     </div>
+                </div>
             </div>
-            
-            <!-- /.box-body -->
         </div>
+            
+        <!-- /.box-body -->
     </div>
+</div>
 
    
                 @Html.DevExpress().WebDocumentViewer(settings =>

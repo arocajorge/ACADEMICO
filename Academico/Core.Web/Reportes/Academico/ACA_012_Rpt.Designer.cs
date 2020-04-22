@@ -102,6 +102,7 @@
             this.xrTableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_IdNivel = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_QuebrarPorParalelo = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdRubro = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
@@ -780,6 +781,11 @@
             this.p_QuebrarPorParalelo.Name = "p_QuebrarPorParalelo";
             this.p_QuebrarPorParalelo.Visible = false;
             // 
+            // p_IdRubro
+            // 
+            this.p_IdRubro.Name = "p_IdRubro";
+            this.p_IdRubro.Visible = false;
+            // 
             // ACA_012_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -812,7 +818,8 @@
             this.p_FechaIni,
             this.p_FechaFin,
             this.p_IdNivel,
-            this.p_QuebrarPorParalelo});
+            this.p_QuebrarPorParalelo,
+            this.p_IdRubro});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_012_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -901,5 +908,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell42;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell43;
         public DevExpress.XtraReports.Parameters.Parameter p_QuebrarPorParalelo;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdRubro;
     }
 }

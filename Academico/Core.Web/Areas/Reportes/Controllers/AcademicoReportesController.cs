@@ -26,6 +26,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         aca_MatriculaCalificacion_Bus bus_calificacion = new aca_MatriculaCalificacion_Bus();
         aca_ReporteCalificacion_Combos_List Lista_CombosCalificaciones = new aca_ReporteCalificacion_Combos_List();
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
+        aca_Rubro_Bus bus_rubro = new aca_Rubro_Bus();
         #endregion
 
         #region Combos
@@ -1258,6 +1259,11 @@ namespace Core.Web.Areas.Reportes.Controllers
         #endregion
 
         #region ACA_012
+        private void cargar_combos_ACA_012(cl_filtros_Info model)
+        {
+            var lst_rubro = bus_rubro.GetList(model.IdEmpresa, false);
+            ViewBag.lst_rubro = lst_rubro;
+        }
         public ActionResult ACA_012()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -1268,6 +1274,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             model.IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
             model.mostrarAnulados = true;
+            model.IdRubro = 3;
             ACA_012_Rpt report = new ACA_012_Rpt();
 
             #region Cargo diseño desde base
@@ -1285,12 +1292,13 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdNivel.Value = model.IdNivel;
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdRubro.Value = model.IdRubro;
             report.p_FechaIni.Value = model.fecha_ini;
             report.p_FechaFin.Value = model.fecha_fin;
             report.p_QuebrarPorParalelo.Value = model.mostrarAnulados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
-
+            cargar_combos_ACA_012(model);
             ViewBag.Report = report;
 
             return View(model);
@@ -1315,12 +1323,13 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdNivel.Value = model.IdNivel;
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdRubro.Value = model.IdRubro;
             report.p_FechaIni.Value = model.fecha_ini;
             report.p_FechaFin.Value = model.fecha_fin;
             report.p_QuebrarPorParalelo.Value = model.mostrarAnulados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
-
+            cargar_combos_ACA_012(model);
             ViewBag.Report = report;
 
             return View(model);

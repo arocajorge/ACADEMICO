@@ -55,7 +55,7 @@ namespace Core.Info.Helps
         public int IdSucursal { get; set; }
         public decimal? IdEmpleado { get; set; }
         public string[] estado_novedad { get; set; }
-        public string IdRubro { get; set; }
+        public int IdRubro { get; set; }
         public int IdNominaTipoLiqui { get; set; }
         public string TipoRubro { get; set; }
         public int IdArea { get; set; }
