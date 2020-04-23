@@ -49,6 +49,7 @@ namespace Core.Data.Academico
                         IdEmpresa = q.IdEmpresa,
                         IdPeriodo = q.IdPeriodo,
                         IdAnio = q.IdAnio,
+                        IdMes = q.IdMes,
                         FechaDesde = q.FechaDesde,
                         FechaHasta = q.FechaHasta,
                         FechaProntoPago = q.FechaProntoPago,
@@ -109,6 +110,7 @@ namespace Core.Data.Academico
                         if (Entity == null)
                             return false;
 
+                        Entity.IdMes = item.IdMes;
                         Entity.FechaDesde = item.FechaDesde;
                         Entity.FechaHasta = item.FechaHasta;
                         Entity.FechaProntoPago = item.FechaProntoPago;
