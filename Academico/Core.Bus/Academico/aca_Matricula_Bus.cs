@@ -48,6 +48,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_Matricula_Info GetInfo_UltimaMatricula(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.getInfo_UltimaMatricula(IdEmpresa, IdAlumno);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public aca_Matricula_Info GetInfo_ExisteMatricula(int IdEmpresa, int IdAnio, decimal IdAlumno)
         {
             try

@@ -133,6 +133,49 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public aca_Matricula_Info getInfo_UltimaMatricula(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                aca_Matricula_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).OrderByDescending(q=> q.IdMatricula).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_Matricula_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdMatricula = Entity.IdMatricula,
+                        Codigo = Entity.Codigo,
+                        IdAlumno = Entity.IdAlumno,
+                        IdAnio = Entity.IdAnio,
+                        IdSede = Entity.IdSede,
+                        IdNivel = Entity.IdNivel,
+                        IdJornada = Entity.IdJornada,
+                        IdCurso = Entity.IdCurso,
+                        IdParalelo = Entity.IdParalelo,
+                        IdPersonaF = Entity.IdPersonaF,
+                        IdPersonaR = Entity.IdPersonaR,
+                        IdPlantilla = Entity.IdPlantilla,
+                        Observacion = Entity.Observacion,
+                        Fecha = Entity.Fecha,
+                        IdMecanismo = Entity.IdMecanismo,
+                        IdEmpresa_rol = Entity.IdEmpresa_rol,
+                        IdEmpleado = Entity.IdEmpleado
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public aca_Matricula_Info getInfo_ExisteMatricula(int IdEmpresa, int IdAnio, decimal IdAlumno)
         {
@@ -646,13 +689,12 @@ namespace Core.Data.Academico
                         return false;
 
                     Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacion WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaConducta WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacionParcial WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+
                     Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCambios WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
                     Context.Database.ExecuteSqlCommand("DELETE aca_Matricula_Rubro WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
                     Context.Database.ExecuteSqlCommand("DELETE aca_Matricula WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
-
-                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacionParcial WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
-                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacion WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
-                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaConducta WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
 
                     Context.SaveChanges();
                 }

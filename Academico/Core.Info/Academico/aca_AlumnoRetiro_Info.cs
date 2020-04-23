@@ -12,8 +12,7 @@ namespace Core.Info.Academico
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdRetiro { get; set; }
-        [Required(ErrorMessage = "El campo alumno es obligatorio")]
-        public decimal IdAlumno { get; set; }
+        public decimal IdMatricula { get; set; }
         [Required(ErrorMessage = "El campo fecha es obligatorio")]
         public System.DateTime Fecha { get; set; }
         [Required(ErrorMessage = "El campo observación es obligatorio")]
@@ -27,8 +26,17 @@ namespace Core.Info.Academico
         public string MotivoAnulacion { get; set; }
 
         #region Campos que no existen en la tabla
+        public string Codigo { get; set; }
+        public int IdAnio { get; set; }
+        public decimal IdAlumno { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public string NomSede { get; set; }
+        public string NomNivel { get; set; }
+        public string NomJornada { get; set; }
+        public string NomParalelo { get; set; }
+        public string Descripcion { get; set; }
+        public string NomCurso { get; set; }
         #endregion
     }
 }

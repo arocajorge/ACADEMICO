@@ -17,7 +17,6 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public aca_Alumno()
         {
-            this.aca_AlumnoRetiro = new HashSet<aca_AlumnoRetiro>();
             this.aca_PermisoMatricula = new HashSet<aca_PermisoMatricula>();
             this.aca_AnioLectivoCalificacionHistorico = new HashSet<aca_AnioLectivoCalificacionHistorico>();
             this.aca_AlumnoDocumento = new HashSet<aca_AlumnoDocumento>();
@@ -57,8 +56,6 @@ namespace Core.Data.Base
         public virtual aca_Catalogo aca_Catalogo { get; set; }
         public virtual aca_Catalogo aca_Catalogo1 { get; set; }
         public virtual aca_Curso aca_Curso { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_AlumnoRetiro> aca_AlumnoRetiro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_PermisoMatricula> aca_PermisoMatricula { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

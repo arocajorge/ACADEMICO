@@ -28,11 +28,20 @@ namespace Core.Data.Academico
                             IdEmpresa = q.IdEmpresa,
                             IdAlumno = q.IdAlumno,
                             IdRetiro = q.IdRetiro,
+                            IdMatricula = q.IdMatricula,
+                            IdAnio = q.IdAnio,
                             Fecha = q.Fecha,
                             Observacion = q.Observacion,
                             IdCatalogoESTALU = q.IdCatalogoESTALU,
                             pe_cedulaRuc = q.pe_cedulaRuc,
                             pe_nombreCompleto = q.pe_nombreCompleto,
+                            Codigo = q.Codigo,
+                            Descripcion = q.Descripcion,
+                            NomSede = q.NomSede,
+                            NomNivel = q.NomNivel,
+                            NomJornada = q.NomJornada,
+                            NomCurso = q.NomCurso,
+                            NomParalelo = q.NomParalelo,
                             IdUsuarioAnulacion = q.IdUsuarioAnulacion
                         });
                     });
@@ -63,6 +72,7 @@ namespace Core.Data.Academico
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdRetiro = Entity.IdRetiro,
+                        IdMatricula = Entity.IdMatricula,
                         IdAlumno = Entity.IdAlumno,
                         Fecha = Entity.Fecha,
                         Observacion = Entity.Observacion,
@@ -115,6 +125,8 @@ namespace Core.Data.Academico
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdRetiro = Entity.IdRetiro,
+                        IdMatricula = Entity.IdMatricula,
+                        IdAnio = Entity.IdAnio,
                         IdAlumno = Entity.IdAlumno,
                         Fecha = Entity.Fecha,
                         Observacion = Entity.Observacion,
@@ -141,7 +153,7 @@ namespace Core.Data.Academico
                     {
                         IdEmpresa = info.IdEmpresa,
                         IdRetiro = info.IdRetiro = getId(info.IdEmpresa),
-                        IdAlumno = info.IdAlumno,
+                        IdMatricula = info.IdMatricula,
                         IdCatalogoESTALU = info.IdCatalogoESTALU,
                         Fecha = info.Fecha,
                         Observacion = info.Observacion,

@@ -16,7 +16,7 @@ namespace Core.Data.Base
     {
         public int IdEmpresa { get; set; }
         public decimal IdRetiro { get; set; }
-        public decimal IdAlumno { get; set; }
+        public decimal IdMatricula { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
         public int IdCatalogoESTALU { get; set; }
@@ -26,6 +26,6 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
-        public virtual aca_Alumno aca_Alumno { get; set; }
+        public virtual aca_Matricula aca_Matricula { get; set; }
     }
 }

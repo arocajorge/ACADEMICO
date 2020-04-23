@@ -1391,15 +1391,46 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Eliminar(aca_Matricula_Info model)
         {
-            if (!bus_matricula.EliminarDB(model))
+            var guardar = true;
+            model.lst_MatriculaRubro = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            foreach (var item in model.lst_MatriculaRubro)
             {
-                ViewBag.mensaje = "No se ha podido anular el registro";
+                if (item.IdCbteVta != null)
+                {
+                    var info_factura = bus_factura.get_info(item.IdEmpresa, Convert.ToInt32(item.IdSucursal), Convert.ToInt32(item.IdBodega), Convert.ToInt32(item.IdCbteVta));
+                    if (info_factura != null)
+                    {
+                        if (info_factura.Estado == "A")
+                        {
+                            guardar = false;
+                            break;                          
+                        }
+                    }
+                }
+            }
+
+            if (guardar==true)
+            {
+                if (!bus_matricula.EliminarDB(model))
+                {
+                    ViewBag.mensaje = "No se ha podido anular el registro";
+                    SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                    cargar_combos();
+                    return View(model);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            else
+            {
+                ViewBag.mensaje = "No se puede eliminar la matrícula, existen facturas activas.";
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos();
                 return View(model);
+                //return RedirectToAction("Eliminar", new { IdEmpresa = model.IdEmpresa, IdMatricula = model.IdMatricula, Exito = false });
             }
-
-            return RedirectToAction("Index");
         }
 
         #endregion

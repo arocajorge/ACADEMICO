@@ -82,7 +82,10 @@ namespace Core.Data.Academico
                         IdMecanismo = q.IdMecanismo,
                         EnMatricula = q.EnMatricula,
                         IdAnio = q.IdAnio,
-                        IdPlantilla = q.IdPlantilla
+                        IdPlantilla = q.IdPlantilla,
+                        IdCbteVta = q.IdCbteVta,
+                        IdBodega = q.IdBodega,
+                        IdSucursal = q.IdSucursal
                     }).ToList();
                 }
                 Lista.ForEach(v => { v.Periodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });

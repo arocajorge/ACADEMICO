@@ -51,8 +51,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Rubro> aca_Rubro { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Jornada_Curso> vwaca_AnioLectivo_Jornada_Curso { get; set; }
         public virtual DbSet<vwaca_PermisoMatricula> vwaca_PermisoMatricula { get; set; }
-        public virtual DbSet<aca_AlumnoRetiro> aca_AlumnoRetiro { get; set; }
-        public virtual DbSet<vwaca_AlumnoRetiro> vwaca_AlumnoRetiro { get; set; }
         public virtual DbSet<aca_CatalogoFicha> aca_CatalogoFicha { get; set; }
         public virtual DbSet<aca_CatalogoTipoFicha> aca_CatalogoTipoFicha { get; set; }
         public virtual DbSet<aca_Alumno> aca_Alumno { get; set; }
@@ -114,6 +112,8 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_Plantilla_Rubro_Matricula> vwaca_Plantilla_Rubro_Matricula { get; set; }
         public virtual DbSet<aca_MatriculaCalificacion> aca_MatriculaCalificacion { get; set; }
         public virtual DbSet<vwaca_MatriculaCalificacion> vwaca_MatriculaCalificacion { get; set; }
+        public virtual DbSet<aca_AlumnoRetiro> aca_AlumnoRetiro { get; set; }
+        public virtual DbSet<vwaca_AlumnoRetiro> vwaca_AlumnoRetiro { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

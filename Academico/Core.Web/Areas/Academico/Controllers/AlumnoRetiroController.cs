@@ -20,6 +20,8 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
         aca_AlumnoRetiro_Bus bus_alumno_retiro = new aca_AlumnoRetiro_Bus();
         aca_AlumnoRetiro_List Lista_AlumnoRetiro = new aca_AlumnoRetiro_List();
+        aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+        aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         string mensaje = string.Empty;
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
@@ -84,11 +86,24 @@ namespace Core.Web.Areas.Academico.Controllers
         private bool validar(aca_AlumnoRetiro_Info info, ref string msg)
         {
             var existe_registro = bus_alumno_retiro.GetList(info.IdEmpresa, info.IdAlumno);
-            if (existe_registro != null)
+
+            var info_matricula = bus_matricula.GetInfo_UltimaMatricula(info.IdEmpresa, info.IdAlumno);
+            var info_alumno = bus_alumno.GetInfo(info.IdEmpresa, info.IdAlumno);
+
+            if (info_matricula==null)
             {
-                msg = "Ya existe retiro para el alumno seleccionado";
+                msg = "No existe matricula para el estudiante seleccionado";
                 return false;
             }
+
+            if (existe_registro != null)
+            {
+                msg = "Ya existe retiro para el estudiante seleccionado";
+                return false;
+            }
+
+            info.IdCatalogoESTALU = info_alumno.IdCatalogoESTALU;
+            info.IdMatricula = info_matricula.IdMatricula;
 
             return true;
         }
@@ -104,11 +119,14 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
 
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
             aca_AlumnoRetiro_Info model = new aca_AlumnoRetiro_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                Fecha = DateTime.Now
+                Fecha = DateTime.Now,
+                IdAnio = (info_anio==null ? 0 : info_anio.IdAnio)
             };
+
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoRetiro", "Index");
             if (!info.Nuevo)
@@ -120,9 +138,6 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Nuevo(aca_AlumnoRetiro_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
-            var info_alumno = bus_alumno.GetInfo(model.IdEmpresa, model.IdAlumno);
-
-            model.IdCatalogoESTALU = info_alumno.IdCatalogoESTALU;
 
             if (!validar(model, ref mensaje))
             {
@@ -163,10 +178,20 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Anular(aca_AlumnoRetiro_Info model)
         {
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
+            var info_matricula = bus_matricula.GetInfo_ExisteMatricula(model.IdEmpresa, model.IdAnio, model.IdAlumno);
 
-            if (!bus_alumno_retiro.AnularDB(model))
+            if (info_anio.IdAnio == info_matricula.IdAnio)
             {
-                ViewBag.mensaje = "No se ha podido anular el registro";
+                if (!bus_alumno_retiro.AnularDB(model))
+                {
+                    ViewBag.mensaje = "No se ha podido anular el registro";
+                    return View(model);
+                }
+            }
+            else
+            {
+                ViewBag.mensaje = "Solo se permitir anular el retiros del año lectivo actual";
                 return View(model);
             }
 
