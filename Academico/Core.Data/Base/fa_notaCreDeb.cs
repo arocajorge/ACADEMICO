@@ -56,6 +56,7 @@ namespace Core.Data.Base
         public bool aprobada_enviar_sri { get; set; }
         public Nullable<bool> Generado { get; set; }
         public string IdCobro_tipo { get; set; }
+        public Nullable<System.DateTime> FechaTransaccion { get; set; }
     
         public virtual fa_cliente fa_cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

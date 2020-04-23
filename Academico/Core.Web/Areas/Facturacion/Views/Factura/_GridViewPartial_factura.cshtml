@@ -148,9 +148,25 @@
         {
             column.FieldName = "IdUsuario";
             column.Caption = "Usuario";
-            column.Width = Unit.Percentage(7);
-            //column.Visible = false;
+            column.Width = Unit.Percentage(10);
+            column.Visible = false;
         });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "vt_autorizacion";
+            column.Caption = "# Autorización";
+            column.Width = Unit.Percentage(10);
+            column.Visible = false;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha_Autorizacion";
+            column.Caption = "Fecha de autorización";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.Visible = false;
+        });
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";

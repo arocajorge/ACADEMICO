@@ -102,7 +102,8 @@ namespace Core.Data.Facturacion
                                  NaturalezaNota =q.NaturalezaNota,
                                  No_Descripcion = q.No_Descripcion,
                                  NumAutorizacion = q.NumAutorizacion,
-                                 
+                                 Fecha_Autorizacion = q.Fecha_Autorizacion,
+                                 IdUsuario = q.IdUsuario,
                                  EstadoBool = q.Estado == "A" ? true : false
                              }).ToList();
                 }

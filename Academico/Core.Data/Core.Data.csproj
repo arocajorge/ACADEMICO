@@ -372,9 +372,6 @@
     <Compile Include="Base\vwfa_notaCreDeb.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\vwfa_notaCreDeb1.cs">
-      <DependentUpon>ModelFacturacion.tt</DependentUpon>
-    </Compile>
     <Compile Include="Base\vwfa_notaCreDeb_ParaConciliarNC.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>

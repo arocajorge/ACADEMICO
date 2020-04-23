@@ -90,6 +90,7 @@ namespace Core.Info.Facturacion
         public string No_Descripcion { get; set; }
         public string NumAutorizacion { get; set; }
         public string NaturalezaNota { get; set; }
-
+        public DateTime? Fecha_Autorizacion { get; set; }
+        public string IdUsuario { get; set; }
     }
 }

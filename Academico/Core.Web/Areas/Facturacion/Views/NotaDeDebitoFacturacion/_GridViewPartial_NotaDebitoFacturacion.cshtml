@@ -109,10 +109,10 @@
         settings.Columns.Add("NombresAlumno", "Alumno").Width = Unit.Percentage(15);
         settings.Columns.Add("Nombres", "Cliente").Width = Unit.Percentage(15);
         settings.Columns.Add("NumNota_Impresa", "# Nota").Width = Unit.Percentage(6);
-        settings.Columns.Add("NumAutorizacion", "# Autorización").Width = Unit.Percentage(6);
+        //settings.Columns.Add("NumAutorizacion", "# Autorización").Width = Unit.Percentage(6);
         settings.Columns.Add("No_Descripcion", "Descripción").Width = Unit.Percentage(15);
         settings.Columns.Add("NaturalezaNota", "Naturaleza").Width = Unit.Percentage(5);
-        
+
         settings.Columns.Add(column =>
         {
             column.FieldName = "sc_subtotal";
@@ -135,7 +135,6 @@
             column.PropertiesEdit.DisplayFormatString = "{0:c2}";
             column.Width = Unit.Percentage(7);
         });
-        //settings.Columns.Add("Usuario", "Usuario").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "EstadoBool";
@@ -146,6 +145,31 @@
 
             });
         });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdUsuario";
+            column.Caption = "Usuario";
+            column.Width = Unit.Percentage(10);
+            column.Visible = false;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NumAutorizacion";
+            column.Caption = "# Autorización";
+            column.Width = Unit.Percentage(10);
+            column.Visible = false;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Fecha_Autorizacion";
+            column.Caption = "Fecha de autorización";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
+            column.Visible = false;
+        });
+
+
         settings.Columns.Add(column =>
         {
             column.Caption = "";

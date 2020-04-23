@@ -33,5 +33,6 @@ namespace Core.Data.Base
         public string No_Descripcion { get; set; }
         public string NumAutorizacion { get; set; }
         public string NaturalezaNota { get; set; }
+        public Nullable<System.DateTime> Fecha_Autorizacion { get; set; }
     }
 }
