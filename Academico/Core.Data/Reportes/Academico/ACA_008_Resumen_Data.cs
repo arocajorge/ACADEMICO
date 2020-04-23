@@ -48,8 +48,8 @@ namespace Core.Data.Reportes.Academico
                         IdPlantilla = q.IdPlantilla,
                         Descripcion = q.Descripcion,
                         pe_nombreCompleto = q.pe_nombreCompleto,
-                        CodigoAlumno = q.CodigoAlumno
-
+                        CodigoAlumno = q.CodigoAlumno,
+                        NomPlantillaTipo = q.NomPlantillaTipo
 
                     }).ToList();
                 }

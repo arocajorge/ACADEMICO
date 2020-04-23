@@ -31,5 +31,7 @@ namespace Core.Info.Reportes.Academico
         public string Descripcion { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string CodigoAlumno { get; set; }
+        public Nullable<int> IdTipoPlantilla { get; set; }
+        public string NomPlantillaTipo { get; set; }
     }
 }

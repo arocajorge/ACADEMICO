@@ -150,7 +150,7 @@
             this.pivotGridField9.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField9.AreaIndex = 0;
             this.pivotGridField9.ColumnValueLineCount = 6;
-            this.pivotGridField9.FieldName = "NomPlantilla";
+            this.pivotGridField9.FieldName = "NomPlantillaTipo";
             this.pivotGridField9.Name = "pivotGridField9";
             this.pivotGridField9.Width = 45;
             // 

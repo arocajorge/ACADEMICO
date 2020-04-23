@@ -30,7 +30,8 @@ namespace Core.Data.Reportes.Academico
                 List<ACA_008_Info> Lista = new List<ACA_008_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                   var lst = Context.VWACA_008.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio &&
+                    Context.SetCommandTimeOut(5000);
+                    var lst = Context.VWACA_008.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio &&
                     IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin &&
                     IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
                     IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin &&
@@ -66,15 +67,16 @@ namespace Core.Data.Reportes.Academico
                             IdPlantilla = item.IdPlantilla,
                             Descripcion = item.Descripcion,
                             pe_nombreCompleto = item.pe_nombreCompleto,
-                            CodigoAlumno = item.CodigoAlumno
-                            
+                            CodigoAlumno = item.CodigoAlumno,
+                            IdTipoPlantilla = item.IdTipoPlantilla,
+                            NomPlantillaTipo = (MostarPlantilla == true ? item.NomPlantillaTipo : "")
                         });
                     }
                 }
 
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
