@@ -14,6 +14,7 @@ namespace Core.Web.Areas.Academico.Controllers
     {
         #region Variables
         aca_Sede_Bus bus_sede = new aca_Sede_Bus();
+        aca_AnioLectivoCalificacionHistorico_Bus bus_historico_calificacion = new aca_AnioLectivoCalificacionHistorico_Bus();
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         aca_NivelAcademico_Bus bus_nivel = new aca_NivelAcademico_Bus();
         aca_Jornada_Bus bus_jornada = new aca_Jornada_Bus();
@@ -77,11 +78,13 @@ namespace Core.Web.Areas.Academico.Controllers
                 foreach (var item in lista)
                 {
                     var lst_x_matricula = lst_calificacion.Where(q=>q.IdEmpresa == item.IdEmpresa && q.IdMatricula==item.IdMatricula);
+                    var lst_conducta_x_matricula = lst_calificacion.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula);
                     var info_matricula = bus_matricula.GetInfo(item.IdEmpresa,item.IdMatricula);
                     var info_alumno = bus_alumno.GetInfo(item.IdEmpresa, info_matricula.IdAlumno);
                     var lst_agrupada = lst_x_matricula.GroupBy(q=>new {q.IdEmpresa, q.IdMatricula, q.IdMateria }).ToList();
                     decimal PromedioFinal = 0;
                     decimal PromedioGeneral = 0;
+                    decimal PromedioConductaGeneral = 0;
                     decimal PromedioFinalTemp = 0;
                     decimal PromedioMinimoPromocion = Math.Round(Convert.ToDecimal(info_anio.PromedioMinimoPromocion),2,MidpointRounding.AwayFromZero);
 
@@ -178,13 +181,15 @@ namespace Core.Web.Areas.Academico.Controllers
 
                     PromedioGeneral = Math.Round((PromedioGeneral / lst_agrupada.Count()), 2, MidpointRounding.AwayFromZero);
                     item.PromedioFinal = PromedioGeneral;
+                    
+
                     var PaseAnio = true;
                     foreach (var item1 in lst_x_matricula)
                     {
                         info_alumno.IdUsuarioModificacion = SessionFixed.IdUsuario;
                         info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO);
                         if (item1.PromedioFinal < PromedioMinimoPromocion)
-                        {       
+                        {
                             info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.NO_PROMOVIDO);
                             bus_alumno.PaseAnioDB(info_alumno);
                             PaseAnio = false;
@@ -194,6 +199,21 @@ namespace Core.Web.Areas.Academico.Controllers
                     var info_catalogo = bus_catalogo.GetInfo(info_alumno.IdCatalogoESTMAT);
                     item.NomCatalogoESTMAT = info_catalogo.NomCatalogo;
                     item.PaseAnio = PaseAnio;
+
+                    //lst_conducta = bus_conducta.GetList_PaseAnio(item.IdEmpresa, item.IdSede, item.IdAnio, item.IdNivel,item.IdJornada, item.IdCurso, item.IdParalelo, item.IdAlumno);
+                    //var info_historico = new aca_AnioLectivoCalificacionHistorico_Info
+                    //{
+                    //    IdEmpresa = item.IdEmpresa,
+                    //    IdAnio = item.IdAnio,
+                    //    IdAlumno = item.IdAlumno,
+                    //    IdNivel = item.IdNivel,
+                    //    IdCurso = item.IdCurso,
+                    //    AntiguaInstitucion = null,
+                    //    Promedio = Convert.ToInt32(item.PromedioFinal),
+                    //    //Conducta = item1.Conducta
+
+                    //};
+                    //bus_historico_calificacion.GuardarDB(info_historico);
                 }
             }
             Lista_MatriculaPaseAnio.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));

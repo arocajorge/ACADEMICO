@@ -750,6 +750,7 @@ namespace Core.Web.Areas.Academico.Controllers
     {
         aca_MatriculaCalificacionParcial_Bus bus_parcial = new aca_MatriculaCalificacionParcial_Bus();
         aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
+        aca_AnioLectivoCalificacionHistorico_Bus bus_historico_calificacion = new aca_AnioLectivoCalificacionHistorico_Bus();
         string Variable = "aca_MatriculaCalificacionParcial_Info";
         public List<aca_MatriculaCalificacionParcial_Info> get_list(decimal IdTransaccionSession)
         {

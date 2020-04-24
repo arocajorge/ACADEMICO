@@ -38,6 +38,7 @@ namespace Core.Info.Academico
         public int IdCurso { get; set; }
         public int IdParalelo { get; set; }
         public int IdCatalogoParcial { get; set; }
+        public decimal IdAlumno { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string Descripcion { get; set; }
         public string NomSede { get; set; }

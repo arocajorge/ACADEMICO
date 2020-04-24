@@ -12,6 +12,7 @@ namespace Core.Data.Academico
     public class aca_MatriculaCalificacionParcial_Data
     {
         aca_AnioLectivoConductaEquivalencia_Data odata_conducta = new aca_AnioLectivoConductaEquivalencia_Data();
+        aca_AnioLectivoConductaEquivalencia_Data odata_conducta_equivalencia = new aca_AnioLectivoConductaEquivalencia_Data();
         aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
         public List<aca_MatriculaCalificacionParcial_Info> getList(int IdEmpresa, decimal IdMatricula)
         {
@@ -321,7 +322,17 @@ namespace Core.Data.Academico
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
                         EntityConducta.PromedioP6 = PromedioParcialConducta;
-                    
+
+                    //if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
+                    //{
+                    //    var cal_p1 = odata_conducta_equivalencia.getInfo(info.IdEmpresa,info.IdAnio, EntityConducta.PromedioP1);
+                    //    EntityConducta.PromedioQ1 = (Convert.ToDecimal(EntityConducta.PromedioP1) + Convert.ToDecimal(EntityConducta.PromedioP2) + Convert.ToDecimal(EntityConducta.PromedioP3)) / 3;
+                    //}
+
+                    //if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
+                    //{
+                    //    EntityConducta.PromedioQ2 = (EntityCalificacionPromedio.CalificacionP4 + EntityCalificacionPromedio.CalificacionP5 + EntityCalificacionPromedio.CalificacionP6) / 3;
+                    //}
 
                     Context.SaveChanges();
                 }

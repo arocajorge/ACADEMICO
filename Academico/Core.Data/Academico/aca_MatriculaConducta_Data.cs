@@ -56,6 +56,75 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_MatriculaConducta_Info> getList_PaseAnio(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno)
+        {
+            try
+            {
+                List<aca_MatriculaConducta_Info> Lista = new List<aca_MatriculaConducta_Info>();
+                int IdNivelIni = IdNivel;
+                int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
+
+                int IdJornadaIni = IdJornada;
+                int IdJornadaFin = IdJornada == 0 ? 9999999 : IdJornada;
+
+                int IdCursoIni = IdCurso;
+                int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
+
+                int IdParaleloIni = IdParalelo;
+                int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
+
+                decimal IdAlumnoIni = IdAlumno;
+                decimal IdAlumnoFin = IdAlumno == 0 ? 9999999 : IdAlumno;
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
+                    && q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin && q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin
+                    && q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin && q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin
+                    && q.IdAlumno >= IdAlumnoIni && q.IdAlumno <= IdAlumnoFin).OrderBy(q => q.pe_nombreCompleto).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdMatricula = q.IdMatricula,
+                            IdAlumno = q.IdAlumno,
+                            PromedioP1 = q.PromedioP1,
+                            PromedioP2 = q.PromedioP2,
+                            PromedioP3 = q.PromedioP3,
+                            PromedioP4 = q.PromedioP4,
+                            PromedioP5 = q.PromedioP5,
+                            PromedioP6 = q.PromedioP6,
+                            PromedioFinalP1 = q.PromedioFinalP1,
+                            PromedioFinalP2 = q.PromedioFinalP2,
+                            PromedioFinalP3 = q.PromedioFinalP3,
+                            PromedioFinalP4 = q.PromedioFinalP4,
+                            PromedioFinalP5 = q.PromedioFinalP5,
+                            PromedioFinalP6 = q.PromedioFinalP6,
+                            PromedioQ1=q.PromedioQ1,
+                            PromedioQ2 = q.PromedioQ2,
+                            PromedioFinalQ1 =q.PromedioFinalQ1,
+                            PromedioFinalQ2=q.PromedioFinalQ2,
+                            IdAnio = q.IdAnio,
+                            IdSede = q.IdSede,
+                            IdNivel=q.IdNivel,
+                            IdJornada = q.IdJornada,
+                            IdCurso=q.IdCurso,
+                            IdParalelo = q.IdParalelo,
+                            pe_nombreCompleto = q.pe_nombreCompleto
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<aca_MatriculaConducta_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
         {
             try
