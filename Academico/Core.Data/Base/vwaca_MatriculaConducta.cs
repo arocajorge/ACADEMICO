@@ -23,25 +23,6 @@ namespace Core.Data.Base
         public int IdJornada { get; set; }
         public int IdCurso { get; set; }
         public int IdParalelo { get; set; }
-        public string pe_nombreCompleto { get; set; }
-        public Nullable<int> PromedioP1 { get; set; }
-        public Nullable<int> PromedioFinalP1 { get; set; }
-        public Nullable<int> PromedioP2 { get; set; }
-        public Nullable<int> PromedioFinalP2 { get; set; }
-        public Nullable<int> PromedioP3 { get; set; }
-        public Nullable<int> PromedioFinalP3 { get; set; }
-        public Nullable<int> PromedioQ1 { get; set; }
-        public Nullable<int> PromedioFinalQ1 { get; set; }
-        public Nullable<int> PromedioP4 { get; set; }
-        public Nullable<int> PromedioFinalP4 { get; set; }
-        public Nullable<int> PromedioP5 { get; set; }
-        public Nullable<int> PromedioFinalP5 { get; set; }
-        public Nullable<int> PromedioP6 { get; set; }
-        public Nullable<int> PromedioFinalP6 { get; set; }
-        public Nullable<int> PromedioQ2 { get; set; }
-        public Nullable<int> PromedioFinalQ2 { get; set; }
-        public Nullable<int> PromedioGeneral { get; set; }
-        public Nullable<int> PromedioFinal { get; set; }
         public string Descripcion { get; set; }
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
@@ -52,5 +33,42 @@ namespace Core.Data.Base
         public int OrdenCurso { get; set; }
         public int OrdenJornada { get; set; }
         public int OrdenNivel { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public Nullable<int> SecuenciaPromedioP1 { get; set; }
+        public Nullable<double> PromedioP1 { get; set; }
+        public Nullable<int> SecuenciaPromedioFinalP1 { get; set; }
+        public Nullable<double> PromedioFinalP1 { get; set; }
+        public Nullable<int> SecuenciaPromedioP2 { get; set; }
+        public Nullable<double> PromedioP2 { get; set; }
+        public Nullable<int> SecuenciaPromedioFinalP2 { get; set; }
+        public Nullable<double> PromedioFinalP2 { get; set; }
+        public Nullable<int> SecuenciaPromedioP3 { get; set; }
+        public Nullable<double> PromedioP3 { get; set; }
+        public Nullable<int> SecuenciaPromedioFinalP3 { get; set; }
+        public Nullable<double> PromedioFinalP3 { get; set; }
+        public Nullable<int> SecuenciaPromedioQ1 { get; set; }
+        public Nullable<double> PromedioQ1 { get; set; }
+        public Nullable<int> SecuenciaPromedioFinalQ1 { get; set; }
+        public Nullable<double> PromedioFinalQ1 { get; set; }
+        public Nullable<int> SecuenciaPromedioP4 { get; set; }
+        public Nullable<double> PromedioP4 { get; set; }
+        public Nullable<int> SecuenciaPromedioFinalP4 { get; set; }
+        public Nullable<double> PromedioFinalP4 { get; set; }
+        public Nullable<int> SecuenciaPromedioP5 { get; set; }
+        public Nullable<double> PromedioP5 { get; set; }
+        public Nullable<int> SecuenciaPromedioFinalP5 { get; set; }
+        public Nullable<double> PromedioFinalP5 { get; set; }
+        public Nullable<int> SecuenciaPromedioP6 { get; set; }
+        public Nullable<double> PromedioP6 { get; set; }
+        public Nullable<int> SecuenciaPromedioFinalP6 { get; set; }
+        public Nullable<double> PromedioFinalP6 { get; set; }
+        public Nullable<int> SecuenciaPromedioQ2 { get; set; }
+        public Nullable<double> PromedioQ2 { get; set; }
+        public Nullable<int> SecuenciaPromedioFinalQ2 { get; set; }
+        public Nullable<double> PromedioFinalQ2 { get; set; }
+        public Nullable<int> SecuenciaPromedioGeneral { get; set; }
+        public Nullable<double> PromedioGeneral { get; set; }
+        public Nullable<int> SecuenciaPromedioFinal { get; set; }
+        public Nullable<double> PromedioFinal { get; set; }
     }
 }

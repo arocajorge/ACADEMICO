@@ -47,11 +47,23 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_AnioLectivoConductaEquivalencia_Info GetInfo_x_PromConducta(int IdEmpresa, int IdAnio, decimal PromedioConducta)
+        public aca_AnioLectivoConductaEquivalencia_Info GetInfo_ImportacionConducta(int IdEmpresa, int IdAnio, decimal PromedioConducta)
         {
             try
             {
-                return odata.getInfo_X_PromConducta(IdEmpresa, IdAnio, PromedioConducta);
+                return odata.getInfo_ImportacionConducta(IdEmpresa, IdAnio, PromedioConducta);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public aca_AnioLectivoConductaEquivalencia_Info GetInfoXPromedioConducta(int IdEmpresa, int IdAnio, decimal PromedioConducta)
+        {
+            try
+            {
+                return odata.getInfoXPromedioConducta(IdEmpresa, IdAnio, PromedioConducta);
             }
             catch (Exception)
             {

@@ -255,6 +255,9 @@
     <Compile Include="Base\vwaca_AnioLectivoParcial.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_AnioLectivo_Paralelo_Conducta.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Paralelo_Profesor_Calificaciones.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>

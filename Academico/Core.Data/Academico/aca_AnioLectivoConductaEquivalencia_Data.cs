@@ -107,7 +107,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_AnioLectivoConductaEquivalencia_Info getInfo_X_PromConducta(int IdEmpresa, int IdAnio, decimal PromedioConducta)
+        public aca_AnioLectivoConductaEquivalencia_Info getInfo_ImportacionConducta(int IdEmpresa, int IdAnio, decimal PromedioConducta)
         {
             try
             {
@@ -115,7 +115,8 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
-                    var Entity = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio ==IdAnio && q.Calificacion == PromedioConducta).FirstOrDefault();
+                    var x = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
+                    var Entity = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio ==IdAnio && PromedioConducta <= q.Calificacion).FirstOrDefault();
                     if (Entity == null)
                         return null;
 
@@ -139,6 +140,69 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_AnioLectivoConductaEquivalencia_Info getInfoXPromedioConducta(int IdEmpresa, int IdAnio, decimal PromedioConducta)
+        {
+            try
+            {
+                aca_AnioLectivoConductaEquivalencia_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_AnioLectivoConductaEquivalencia.OrderBy(q => q.Calificacion).Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && PromedioConducta <= q.Calificacion).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_AnioLectivoConductaEquivalencia_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAnio = Entity.IdAnio,
+                        Secuencia = Entity.Secuencia,
+                        Letra = Entity.Letra,
+                        Calificacion = Entity.Calificacion,
+                        IngresaMotivo = Entity.IngresaMotivo
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public aca_AnioLectivoConductaEquivalencia_Info getInfo_MinimaConducta(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                aca_AnioLectivoConductaEquivalencia_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var CalificacionMinima = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).Min(q => q.Calificacion);
+                    var Entity = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Calificacion==CalificacionMinima).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_AnioLectivoConductaEquivalencia_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAnio = Entity.IdAnio,
+                        Secuencia = Entity.Secuencia,
+                        Letra = Entity.Letra,
+                        Calificacion = Entity.Calificacion,
+                        IngresaMotivo = Entity.IngresaMotivo
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public int getId(int IdEmpresa)
         {
             try

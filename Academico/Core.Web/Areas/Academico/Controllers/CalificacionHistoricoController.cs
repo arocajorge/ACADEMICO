@@ -353,7 +353,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         string cedula_ruc_alumno = (Convert.ToString(reader.GetValue(2)).Trim());
                         aca_Alumno_Info info_alumno = bus_alumno.get_info_x_num_cedula(IdEmpresa, cedula_ruc_alumno);
                         aca_AnioLectivo_Info info_anio = bus_anio.GetInfo_x_Anio(IdEmpresa, anio_inicio, anio_fin);
-                        aca_AnioLectivoConductaEquivalencia_Info info_conducta = bus_conducta.GetInfo_x_PromConducta(IdEmpresa, info_anio.IdAnio, conducta);
+                        aca_AnioLectivoConductaEquivalencia_Info info_conducta = bus_conducta.GetInfo_ImportacionConducta(IdEmpresa, info_anio.IdAnio, conducta);
 
                         //tb_persona_Info info_persona_alumno = new tb_persona_Info();
                         //info_persona_alumno = lst_persona.Where(q => q.pe_cedulaRuc==cedula_ruc_alumno).FirstOrDefault();
