@@ -1,5 +1,6 @@
 ﻿using Core.Data.Base;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace Core.Data.Academico
 {
     public class aca_MatriculaConducta_Data
     {
+        aca_AnioLectivoConductaEquivalencia_Data odata_conducta = new aca_AnioLectivoConductaEquivalencia_Data();
+        aca_AnioLectivoConductaEquivalencia_Data odata_conducta_equivalencia = new aca_AnioLectivoConductaEquivalencia_Data();
+        aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
+
         public List<aca_MatriculaConducta_Info> getList(int IdEmpresa, decimal IdMatricula)
         {
             try
@@ -163,15 +168,29 @@ namespace Core.Data.Academico
             }
         }
 
-        public List<aca_MatriculaConducta_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
+        public List<aca_MatriculaConducta_Info> getList_Combos(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
         {
             try
             {
+                int IdNivelIni = IdNivel;
+                int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
+
+                int IdJornadaIni = IdJornada;
+                int IdJornadaFin = IdJornada == 0 ? 9999999 : IdJornada;
+
+                int IdCursoIni = IdCurso;
+                int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
+
+                int IdParaleloIni = IdParalelo;
+                int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
+
                 List<aca_MatriculaConducta_Info> Lista = new List<aca_MatriculaConducta_Info>();
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.vwaca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio==IdAnio && q.IdNivel==IdNivel && q.IdJornada==IdJornada && q.IdCurso==IdCurso && q.IdParalelo==IdParalelo).ToList();
+                    var lst = odata.vwaca_AnioLectivo_Paralelo_Conducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio==IdAnio
+                    && q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin && q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin
+                    && q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin && q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin).ToList();
 
                     lst.ForEach(q =>
                     {
@@ -179,6 +198,60 @@ namespace Core.Data.Academico
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdMatricula = q.IdMatricula,
+                            IdAnio = q.IdAnio,
+                            IdSede = q.IdSede,
+                            IdNivel = q.IdNivel,
+                            IdJornada = q.IdJornada,
+                            IdCurso = q.IdCurso,
+                            IdParalelo = q.IdParalelo,
+                            Descripcion = q.Descripcion,
+                            NomSede = q.NomSede,
+                            NomNivel = q.NomNivel,
+                            OrdenNivel = q.OrdenNivel ?? 0,
+                            NomJornada = q.NomJornada,
+                            OrdenJornada = q.OrdenJornada ?? 0,
+                            NomCurso = q.NomCurso,
+                            OrdenCurso = q.OrdenCurso ?? 0,
+                            NomParalelo = q.NomParalelo,
+                            OrdenParalelo = q.OrdenParalelo,
+                            CodigoParalelo = q.CodigoParalelo,
+                            IdProfesorTutor = q.IdProfesorTutor ?? 0,
+                            IdProfesorInspector = q.IdProfesorInspector ?? 0,
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<aca_MatriculaConducta_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo)
+        {
+            try
+            {
+                List<aca_MatriculaConducta_Info> Lista = new List<aca_MatriculaConducta_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdMatricula = q.IdMatricula,
+                            IdAlumno = q.IdAlumno,
+                            IdAnio = q.IdAnio,
+                            IdSede = q.IdSede,
+                            IdNivel = q.IdNivel,
+                            IdJornada = q.IdJornada,
+                            IdCurso = q.IdCurso,
+                            IdParalelo = q.IdParalelo,
                             pe_nombreCompleto = q.pe_nombreCompleto,
                             SecuenciaPromedioP1 = q.SecuenciaPromedioP1,
                             PromedioP1 = q.PromedioP1,
@@ -286,6 +359,100 @@ namespace Core.Data.Academico
                         Context.aca_MatriculaConducta.Add(Entity);
                         Context.SaveChanges();
                     }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public bool modicarPromedioFinal(aca_MatriculaConducta_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_MatriculaConducta EntityConducta = Context.aca_MatriculaConducta.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa  && q.IdMatricula == info.IdMatricula);
+                    if (EntityConducta == null)
+                        return false;
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
+                    {
+                        EntityConducta.SecuenciaPromedioFinalP1 = info.SecuenciaConductaPromedioParcialFinal;
+                        EntityConducta.PromedioFinalP1 = info.ConductaPromedioParcialFinal;
+                    }
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
+                    {
+                        EntityConducta.SecuenciaPromedioFinalP2 = info.SecuenciaConductaPromedioParcialFinal;
+                        EntityConducta.PromedioFinalP2 = info.ConductaPromedioParcialFinal;
+                    }
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
+                    {
+                        EntityConducta.SecuenciaPromedioFinalP3 = info.SecuenciaConductaPromedioParcialFinal;
+                        EntityConducta.PromedioFinalP3 = info.ConductaPromedioParcialFinal;
+                    }
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
+                    {
+                        EntityConducta.SecuenciaPromedioFinalP4 = info.SecuenciaConductaPromedioParcialFinal;
+                        EntityConducta.PromedioFinalP4 = info.ConductaPromedioParcialFinal;
+                    }
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
+                    {
+                        EntityConducta.SecuenciaPromedioFinalP5 = info.SecuenciaConductaPromedioParcialFinal;
+                        EntityConducta.PromedioFinalP5 = info.ConductaPromedioParcialFinal;
+                    }
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
+                    {
+                        EntityConducta.SecuenciaPromedioFinalP6 = info.SecuenciaConductaPromedioParcialFinal;
+                        EntityConducta.PromedioFinalP6 = info.ConductaPromedioParcialFinal;
+                    }
+
+                    Context.SaveChanges();
+
+                    aca_MatriculaConducta EntityConductaPromedioQuim = Context.aca_MatriculaConducta.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula);
+                    if (EntityConductaPromedioQuim == null)
+                        return false;
+
+                    var info_matricula = odata_matricula.getInfo(info.IdEmpresa, info.IdMatricula);
+                    var info_conducta = odata_conducta_equivalencia.getInfoXPromedioConducta(info.IdEmpresa, info_matricula.IdAnio, Convert.ToDecimal(info.ConductaPromedioParcialFinal));
+                    var infoConductaMinima = odata_conducta_equivalencia.getInfo_MinimaConducta(info.IdEmpresa, info_matricula.IdAnio);
+                    var SecuenciaConductaMinima = infoConductaMinima.Secuencia;
+
+                    double SumaPromedioQuimestre = 0;
+                    double PromedioQuimestre = 0;
+                    var SecuenciaConducta = (int?)null;
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
+                    {
+                        SumaPromedioQuimestre = Convert.ToDouble((EntityConductaPromedioQuim.PromedioFinalP1>0 ? EntityConductaPromedioQuim.PromedioFinalP1 : EntityConductaPromedioQuim.PromedioP1) + (EntityConductaPromedioQuim.PromedioFinalP2 > 0 ? EntityConductaPromedioQuim.PromedioFinalP2 : EntityConductaPromedioQuim.PromedioP2) + (EntityConductaPromedioQuim.PromedioFinalP3 > 0 ? EntityConductaPromedioQuim.PromedioFinalP3 : EntityConductaPromedioQuim.PromedioP3));
+                        PromedioQuimestre = Convert.ToDouble(SumaPromedioQuimestre / 3);
+                        var info_conductaQ1 = odata_conducta_equivalencia.getInfoXPromedioConducta(info.IdEmpresa, info.IdAnio, Convert.ToDecimal(PromedioQuimestre));
+                        var infoMinimaConductaQ1 = odata_conducta_equivalencia.getInfo_MinimaConducta(info.IdEmpresa, info_matricula.IdAnio);
+                        SecuenciaConducta = infoMinimaConductaQ1.Secuencia;
+
+                        EntityConductaPromedioQuim.PromedioQ1 = PromedioQuimestre;
+                        EntityConductaPromedioQuim.SecuenciaPromedioQ1 = info_conductaQ1 == null ? SecuenciaConducta : info_conductaQ1.Secuencia;
+                    }
+
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
+                    {
+                        SumaPromedioQuimestre = Convert.ToDouble((EntityConductaPromedioQuim.PromedioFinalP4 > 0 ? EntityConductaPromedioQuim.PromedioFinalP4 : EntityConductaPromedioQuim.PromedioP4) + (EntityConductaPromedioQuim.PromedioFinalP5 > 0 ? EntityConductaPromedioQuim.PromedioFinalP5 : EntityConductaPromedioQuim.PromedioP5) + (EntityConductaPromedioQuim.PromedioFinalP6 > 0 ? EntityConductaPromedioQuim.PromedioFinalP6 : EntityConductaPromedioQuim.PromedioP6));
+                        PromedioQuimestre = Convert.ToDouble(SumaPromedioQuimestre / 3);
+                        var info_conductaQ2 = odata_conducta_equivalencia.getInfoXPromedioConducta(info.IdEmpresa, info.IdAnio, Convert.ToDecimal(PromedioQuimestre));
+                        var infoMinimaConductaQ2 = odata_conducta_equivalencia.getInfo_MinimaConducta(info.IdEmpresa, info_matricula.IdAnio);
+                        SecuenciaConducta = infoMinimaConductaQ2.Secuencia;
+
+                        EntityConductaPromedioQuim.PromedioQ2 = PromedioQuimestre;
+                        EntityConductaPromedioQuim.SecuenciaPromedioQ2 = info_conductaQ2 == null ? SecuenciaConducta : info_conductaQ2.Secuencia;
+                    }
+                    Context.SaveChanges();
                 }
 
                 return true;

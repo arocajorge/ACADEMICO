@@ -70,6 +70,14 @@ namespace Core.Info.Academico
         public int OrdenParalelo { get; set; }
         public int PromedioParcialFinal { get; set; }
         public int PromedioParcial { get; set; }
+        public decimal IdProfesorTutor { get; set; }
+        public decimal IdProfesorInspector { get; set; }
+        public string CodigoParalelo { get; set; }
+
+        public int SecuenciaConductaPromedioParcial { get; set; }
+        public double ConductaPromedioParcial { get; set; }
+        public int SecuenciaConductaPromedioParcialFinal { get; set; }
+        public double ConductaPromedioParcialFinal { get; set; }
         #endregion
     }
 }

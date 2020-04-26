@@ -62,7 +62,7 @@
         {
             column.FieldName = "IdMatricula";
             column.Caption = "IdMatricula";
-            column.Width = Unit.Percentage(5);
+            column.Width = Unit.Percentage(10);
             column.VisibleIndex = 1;
             column.Visible = true;
             column.ReadOnly = true;
@@ -72,7 +72,7 @@
         {
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Alumno";
-            column.Width = Unit.Percentage(18);
+            column.Width = Unit.Percentage(30);
             column.VisibleIndex = 2;
             column.Visible = true;
             column.ReadOnly = true;
@@ -80,9 +80,9 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "PromedioParcial";
+            column.FieldName = "SecuenciaConductaPromedioParcial";
             column.Caption = "Promedio Parcial";
-            column.Width = Unit.Percentage(8);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().ComboBox(p =>
             {
                 p.Columns.Add("Letra", "Conducta").Width = Unit.Percentage(100);
@@ -97,9 +97,9 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "PromedioParcialFinal";
+            column.FieldName = "SecuenciaConductaPromedioParcialFinal";
             column.Caption = "Promedio Final";
-            column.Width = Unit.Percentage(8);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().ComboBox(p =>
             {
                 p.Columns.Add("Letra", "Conducta").Width = Unit.Percentage(100);

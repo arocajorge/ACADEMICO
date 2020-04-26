@@ -286,9 +286,8 @@ namespace Core.Data.Academico
 
                     Context.SaveChanges();
 
-                    aca_MatriculaConducta EntityConducta = Context.aca_MatriculaConducta.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
-                    && q.IdMatricula == info.IdMatricula);
-                    if (EntityConducta == null)
+                    aca_MatriculaConducta EntityConductaPromedio = Context.aca_MatriculaConducta.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula);
+                    if (EntityConductaPromedio == null)
                         return false;
 
                     decimal SumaConducta = 0;
@@ -303,59 +302,75 @@ namespace Core.Data.Academico
                         }
                     }
 
-                    double PromedioParcialConducta = Convert.ToInt32(SumaConducta/ lst_calificaciones_parciales.Count());
-                    var info_conducta = odata_conducta_equivalencia.getInfoXPromedioConducta(info.IdEmpresa, info.IdAnio, Convert.ToDecimal(PromedioParcialConducta));
-                    var infoConductaMinima = odata_conducta_equivalencia.getInfo_MinimaConducta(info.IdEmpresa, info.IdAnio);
+                    double PromedioParcialConducta = Convert.ToDouble(SumaConducta/ lst_calificaciones_parciales.Count());
+                    var info_conducta = odata_conducta_equivalencia.getInfoXPromedioConducta(info.IdEmpresa, info_matricula.IdAnio, Convert.ToDecimal(PromedioParcialConducta));
+                    var infoConductaMinima = odata_conducta_equivalencia.getInfo_MinimaConducta(info.IdEmpresa, info_matricula.IdAnio);
                     var SecuenciaConductaMinima = infoConductaMinima.Secuencia;
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
-                        EntityConducta.PromedioP1 = PromedioParcialConducta;
-                        EntityConducta.SecuenciaPromedioP1 = (info_conducta==null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    {
+                        EntityConductaPromedio.PromedioP1 = PromedioParcialConducta;
+                        EntityConductaPromedio.SecuenciaPromedioP1 = (info_conducta == null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
-                        EntityConducta.PromedioP2 = PromedioParcialConducta;
-                        EntityConducta.SecuenciaPromedioP2 = (info_conducta == null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    {
+                        EntityConductaPromedio.PromedioP2 = PromedioParcialConducta;
+                        EntityConductaPromedio.SecuenciaPromedioP2 = (info_conducta == null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
-                        EntityConducta.PromedioP3 = PromedioParcialConducta;
-                        EntityConducta.SecuenciaPromedioP3 = (info_conducta == null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    {
+                        EntityConductaPromedio.PromedioP3 = PromedioParcialConducta;
+                        EntityConductaPromedio.SecuenciaPromedioP3 = (info_conducta == null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
-                        EntityConducta.PromedioP4 = PromedioParcialConducta;
-                        EntityConducta.SecuenciaPromedioP4 = (info_conducta == null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    {
+                        EntityConductaPromedio.PromedioP4 = PromedioParcialConducta;
+                        EntityConductaPromedio.SecuenciaPromedioP4 = (info_conducta == null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
-                        EntityConducta.PromedioP5 = PromedioParcialConducta;
-                        EntityConducta.SecuenciaPromedioP5 = (info_conducta == null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    {
+                        EntityConductaPromedio.PromedioP5 = PromedioParcialConducta;
+                        EntityConductaPromedio.SecuenciaPromedioP5 = (info_conducta == null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
-                        EntityConducta.PromedioP6 = PromedioParcialConducta;
-                        EntityConducta.SecuenciaPromedioP6 = (info_conducta == null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    {
+                        EntityConductaPromedio.PromedioP6 = PromedioParcialConducta;
+                        EntityConductaPromedio.SecuenciaPromedioP6 = (info_conducta == null ? SecuenciaConductaMinima : info_conducta.Secuencia);
+                    }
 
                     Context.SaveChanges();
+
+                    aca_MatriculaConducta EntityConductaPromedioQuim = Context.aca_MatriculaConducta.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula);
+                    if (EntityConductaPromedioQuim == null)
+                        return false;
 
                     double PromedioQuimestre = 0;
                     var SecuenciaConducta = (int?)null;
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
                     {
-                        PromedioQuimestre = Convert.ToDouble((EntityConducta.PromedioP1 + EntityConducta.PromedioP2 + EntityConducta.PromedioP3)/ 3);
+                        PromedioQuimestre = Convert.ToDouble((EntityConductaPromedioQuim.PromedioP1 + EntityConductaPromedioQuim.PromedioP2 + EntityConductaPromedioQuim.PromedioP3)/ 3);
                         var info_conductaQ1= odata_conducta_equivalencia.getInfoXPromedioConducta(info.IdEmpresa, info.IdAnio, Convert.ToDecimal(PromedioQuimestre));
-                        var infoMinimaConductaQ1 = odata_conducta_equivalencia.getInfo_MinimaConducta(info.IdEmpresa, info.IdAnio);
+                        var infoMinimaConductaQ1 = odata_conducta_equivalencia.getInfo_MinimaConducta(info.IdEmpresa, info_matricula.IdAnio);
                         SecuenciaConducta = infoMinimaConductaQ1.Secuencia;
 
-                        EntityConducta.PromedioQ1 = PromedioQuimestre / 3;
-                        EntityConducta.SecuenciaPromedioQ1 = info_conductaQ1 == null ? SecuenciaConducta : info_conductaQ1.Secuencia;
+                        EntityConductaPromedioQuim.PromedioQ1 = PromedioQuimestre / 3;
+                        EntityConductaPromedioQuim.SecuenciaPromedioQ1 = info_conductaQ1 == null ? SecuenciaConducta : info_conductaQ1.Secuencia;
                     }
 
-                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
+                    if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
                     {
-                        PromedioQuimestre = Convert.ToDouble((EntityConducta.PromedioP4 + EntityConducta.PromedioP5 + EntityConducta.PromedioP6) / 3);
+                        PromedioQuimestre = Convert.ToDouble((EntityConductaPromedioQuim.PromedioP4 + EntityConductaPromedioQuim.PromedioP5 + EntityConductaPromedioQuim.PromedioP6) / 3);
                         var info_conductaQ2 = odata_conducta_equivalencia.getInfoXPromedioConducta(info.IdEmpresa, info.IdAnio, Convert.ToDecimal(PromedioQuimestre));
-                        var infoMinimaConductaQ2 = odata_conducta_equivalencia.getInfo_MinimaConducta(info.IdEmpresa, info.IdAnio);
+                        var infoMinimaConductaQ2 = odata_conducta_equivalencia.getInfo_MinimaConducta(info.IdEmpresa, info_matricula.IdAnio);
                         SecuenciaConducta = infoMinimaConductaQ2.Secuencia;
 
-                        EntityConducta.PromedioQ2 = PromedioQuimestre / 3;
-                        EntityConducta.SecuenciaPromedioQ2 = info_conductaQ2 == null ? SecuenciaConducta : info_conductaQ2.Secuencia;
+                        EntityConductaPromedioQuim.PromedioQ2 = PromedioQuimestre / 3;
+                        EntityConductaPromedioQuim.SecuenciaPromedioQ2 = info_conductaQ2 == null ? SecuenciaConducta : info_conductaQ2.Secuencia;
                     }
 
                     Context.SaveChanges();
