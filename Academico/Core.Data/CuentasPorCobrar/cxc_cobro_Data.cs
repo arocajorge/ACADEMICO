@@ -427,6 +427,7 @@ namespace Core.Data.CuentasPorCobrar
                 Entity.IdBanco = info.IdBanco;
                 Entity.IdCaja = info.IdCaja;
                 Entity.cr_Saldo = info.cr_saldo;
+                Entity.IdTipoNotaCredito = info.IdTipoNotaCredito;
                 Entity.cr_ObservacionPantalla = info.cr_ObservacionPantalla;
                 Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                 Entity.Fecha_UltMod = DateTime.Now;

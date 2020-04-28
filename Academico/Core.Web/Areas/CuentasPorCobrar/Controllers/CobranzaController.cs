@@ -264,6 +264,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         return false;
                     }
                     i_validar.cr_Banco = null;
+                    i_validar.IdBanco = null;
                     break;
                 case "CHQF":
                     if (string.IsNullOrEmpty(i_validar.cr_Banco))
