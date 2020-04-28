@@ -18,6 +18,7 @@ namespace Core.Data.Base
         public int IdAnio { get; set; }
         public int IdSede { get; set; }
         public int IdCatalogoParcial { get; set; }
+        public Nullable<int> Orden { get; set; }
         public Nullable<bool> EsExamen { get; set; }
         public Nullable<System.DateTime> FechaInicio { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }

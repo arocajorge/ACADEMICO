@@ -32,7 +32,8 @@ namespace Core.Data.Academico
                             FechaInicio = q.FechaInicio,
                             FechaFin = q.FechaFin,
                             EsExamen = q.EsExamen,
-                            ValidaEstadoAlumno = q.ValidaEstadoAlumno
+                            ValidaEstadoAlumno = q.ValidaEstadoAlumno,
+                            Orden = q.Orden
                         });
                     });
                 }
@@ -69,7 +70,8 @@ namespace Core.Data.Academico
                             FechaInicio = q.FechaInicio,
                             FechaFin = q.FechaFin,
                             EsExamen = q.EsExamen,
-                            ValidaEstadoAlumno = q.ValidaEstadoAlumno
+                            ValidaEstadoAlumno = q.ValidaEstadoAlumno,
+                            Orden = q.Orden
                         });
                     });
                 }
@@ -104,7 +106,8 @@ namespace Core.Data.Academico
                         IdSede = Entity.IdSede,
                         IdCatalogoParcial = Entity.IdCatalogoParcial,
                         EsExamen = Entity.EsExamen,
-                        ValidaEstadoAlumno = Entity.ValidaEstadoAlumno
+                        ValidaEstadoAlumno = Entity.ValidaEstadoAlumno,
+                        Orden = Entity.Orden
                     };
 
                 }
@@ -141,7 +144,8 @@ namespace Core.Data.Academico
                             FechaInicio = q.FechaInicio,
                             FechaFin = q.FechaFin,
                             EsExamen = q.EsExamen,
-                            ValidaEstadoAlumno = q.ValidaEstadoAlumno
+                            ValidaEstadoAlumno = q.ValidaEstadoAlumno,
+                            Orden=q.Orden
                         });
                     });
                 }
@@ -172,6 +176,7 @@ namespace Core.Data.Academico
                             FechaInicio = item.FechaInicio,
                             FechaFin = item.FechaFin,
                             EsExamen = item.EsExamen,
+                            Orden = item.Orden,
                             ValidaEstadoAlumno = item.ValidaEstadoAlumno,
                             IdUsuarioCreacion = item.IdUsuarioCreacion,
                             FechaCreacion = DateTime.Now
@@ -204,6 +209,7 @@ namespace Core.Data.Academico
                     Entity.FechaFin = info.FechaFin;
                     Entity.EsExamen = info.EsExamen;
                     Entity.ValidaEstadoAlumno = info.ValidaEstadoAlumno;
+                    Entity.Orden = info.Orden;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
 

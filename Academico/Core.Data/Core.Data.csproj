@@ -57,6 +57,7 @@
     <Compile Include="Academico\aca_Alumno_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivoCalificacionHistorico_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivoConductaEquivalencia_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivoEquivalenciaPromedio_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivoParcial_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Data.cs" />
@@ -105,6 +106,9 @@
     <Compile Include="Academico\aca_Reporte_Data.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Data.cs" />
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Data.cs" />
+    <Compile Include="Base\aca_AnioLectivoEquivalenciaPromedio.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_AnioLectivoParcial.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -112,6 +116,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Matricula.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_MatriculaCalificacion.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MatriculaCalificacionParcial.cs">
@@ -497,9 +504,6 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MateriaGrupo.cs">
-      <DependentUpon>ModelAcademico.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\aca_MatriculaCalificacion.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MatriculaConducta.cs">

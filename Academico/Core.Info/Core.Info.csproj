@@ -46,6 +46,7 @@
     <Compile Include="Academico\aca_Alumno_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivoCalificacionHistorico_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivoConductaEquivalencia_Info.cs" />
+    <Compile Include="Academico\aca_AnioLectivoEquivalenciaPromedio_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivoParcial_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Info.cs" />
