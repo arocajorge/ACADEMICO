@@ -39,6 +39,11 @@
         settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
         settings.SettingsPager.AlwaysShowPager = true;
 
+        //Configuración click derecho
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.EnableRowMenu = DefaultBoolean.False;
+
         //Configuracion responsive
         settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
         settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
@@ -67,12 +72,18 @@
             e.NewValues["AccionRemedial"] = null;
             e.NewValues["MotivoConducta"] = null;
         };
-
+        settings.HtmlRowPrepared = (s, e) =>
+        {
+            if (Convert.ToBoolean(e.GetValue("RegistroValido")) == false || Convert.ToBoolean(e.GetValue("RegistroValidoConducta")) == false)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
+        };
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdMatricula";
             column.Caption = "IdMatricula";
-            column.Width = Unit.Percentage(5);
+            column.Width = Unit.Percentage(8);
             column.VisibleIndex = 1;
             column.Visible = true;
             column.ReadOnly = true;
@@ -91,8 +102,8 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "Calificacion1";
-            column.Caption = "Calificacion 1";
-            column.Width = Unit.Percentage(8);
+            column.Caption = "TAI";
+            column.Width = Unit.Percentage(7);
 
             column.VisibleIndex = 3;
             column.Visible = true;
@@ -109,8 +120,8 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "Calificacion2";
-            column.Caption = "Calificacion 2";
-            column.Width = Unit.Percentage(8);
+            column.Caption = "AIC";
+            column.Width = Unit.Percentage(7);
             column.VisibleIndex = 4;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
@@ -126,8 +137,8 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "Calificacion3";
-            column.Caption = "Calificacion 3";
-            column.Width = Unit.Percentage(8);
+            column.Caption = "AGC";
+            column.Width = Unit.Percentage(7);
             column.VisibleIndex = 5;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
@@ -143,8 +154,8 @@
         settings.Columns.Add(column =>
         {
             column.FieldName = "Calificacion4";
-            column.Caption = "Calificacion 4";
-            column.Width = Unit.Percentage(8);
+            column.Caption = "LEC";
+            column.Width = Unit.Percentage(7);
             column.VisibleIndex = 6;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
@@ -230,21 +241,10 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "PromedioParcial";
-            column.Caption = "Promedio Parcial";
-            column.Width = Unit.Percentage(8);
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.VisibleIndex = 11;
-            column.Visible = true;
-            column.ReadOnly = false;
-            column.EditFormSettings.Visible = DefaultBoolean.True;
-        });
-        settings.Columns.Add(column =>
-        {
             column.FieldName = "MotivoCalificacion";
             column.Caption = "Motivo Calificacion";
-            column.Width = Unit.Percentage(10);
-            column.VisibleIndex = 12;
+            column.Width = Unit.Percentage(8);
+            column.VisibleIndex = 11;
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
@@ -252,8 +252,8 @@
         {
             column.FieldName = "AccionRemedial";
             column.Caption = "Acción Remedial";
-            column.Width = Unit.Percentage(10);
-            column.VisibleIndex = 13;
+            column.Width = Unit.Percentage(8);
+            column.VisibleIndex = 12;
             column.Visible = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
@@ -261,9 +261,20 @@
         {
             column.FieldName = "MotivoConducta";
             column.Caption = "Motivo Conducta";
-            column.Width = Unit.Percentage(10);
-            column.VisibleIndex = 14;
+            column.Width = Unit.Percentage(8);
+            column.VisibleIndex = 13;
             column.Visible = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "PromedioParcial";
+            column.Caption = "Promedio";
+            column.Width = Unit.Percentage(8);
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.VisibleIndex = 14;
+            column.Visible = true;
+            column.ReadOnly = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";

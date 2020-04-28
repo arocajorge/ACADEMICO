@@ -43,6 +43,38 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_AnioLectivoConductaEquivalencia_Info> getList_IngresaMotivo(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                List<aca_AnioLectivoConductaEquivalencia_Info> Lista = new List<aca_AnioLectivoConductaEquivalencia_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IngresaMotivo==true).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AnioLectivoConductaEquivalencia_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            Secuencia = q.Secuencia,
+                            Letra = q.Letra,
+                            Calificacion = q.Calificacion,
+                            IngresaMotivo = q.IngresaMotivo
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_AnioLectivoConductaEquivalencia_Info getInfo(int IdEmpresa, int IdAnio, int Secuencia)
         {
             try

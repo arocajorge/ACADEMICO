@@ -35,6 +35,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_AnioLectivoConductaEquivalencia_Info> GetList_IngresaMotivo(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                return odata.getList_IngresaMotivo(IdEmpresa, IdAnio);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public aca_AnioLectivoConductaEquivalencia_Info GetInfo_x_Letra(int IdEmpresa, int IdAnio, string Letra)
         {
             try
