@@ -46,6 +46,12 @@ namespace Core.Info.Academico
         public decimal PromedioParcial { get; set; }
         public bool RegistroValido { get; set; }
         public bool RegistroconPromedioBajo { get; set; }
+        public Nullable<decimal> CalificacionP1 { get; set; }
+        public Nullable<decimal> CalificacionP2 { get; set; }
+        public Nullable<decimal> CalificacionP3 { get; set; }
+        public Nullable<decimal> CalificacionP4 { get; set; }
+        public Nullable<decimal> CalificacionP5 { get; set; }
+        public Nullable<decimal> CalificacionP6 { get; set; }
         #endregion
     }
 }

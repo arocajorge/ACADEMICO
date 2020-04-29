@@ -767,11 +767,13 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 #region Calificacion y conducta
                 var lst_materias_x_curso = bus_materias_x_paralelo.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
-                var lst_parcial = bus_parcial.GetList(IdEmpresa, IdSede, IdAnio);
-                /*
+                var lst_parcial = bus_parcial.GetList_x_Tipo(IdEmpresa, IdSede, IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+                lst_parcial.AddRange(bus_parcial.GetList_x_Tipo(IdEmpresa, IdSede, IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)));
+
                 info_matricula.lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
                 info_matricula.lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
                 info_matricula.lst_conducta = new List<aca_MatriculaConducta_Info>();
+
                 if (lst_materias_x_curso != null && lst_materias_x_curso.Count > 0)
                 {
                     foreach (var item in lst_materias_x_curso)
@@ -784,7 +786,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                 {
                                     IdProfesor = item.IdProfesor,
                                     IdMateria = item.IdMateria,
-                                    Parcial = item_p.Parcial
+                                    IdCatalogoParcial = item_p.IdCatalogoParcial
                                 };
 
                                 info_matricula.lst_calificacion_parcial.Add(info_calificacion_parcial);
@@ -800,16 +802,15 @@ namespace Core.Web.Areas.Academico.Controllers
 
                         info_matricula.lst_calificacion.Add(info_calificacion);
 
-                        var info_conducta = new aca_MatriculaConducta_Info
-                        {
-                            IdProfesor = item.IdProfesor,
-                            IdMateria = item.IdMateria
-                        };
+                        //var info_conducta = new aca_MatriculaConducta_Info
+                        //{
+                        //    //IdProfesor = item.IdProfesor,
+                        //    //IdMateria = item.IdMateria
+                        //};
 
-                        info_matricula.lst_conducta.Add(info_conducta);
+                        //info_matricula.lst_conducta.Add(info_conducta);
                     }
                 }
-                */
                 #endregion
 
                 var personaRep = bus_persona.get_info(info_matricula.IdPersonaF);

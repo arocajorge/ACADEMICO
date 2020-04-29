@@ -38,7 +38,7 @@ namespace Core.Data.Base
         public Nullable<decimal> PromedioFinal { get; set; }
         public Nullable<int> IdEquivalenciaPromedio { get; set; }
     
-        public virtual aca_AnioLectivoEquivalenciaPromedio aca_AnioLectivoEquivalenciaPromedio { get; set; }
         public virtual aca_Matricula aca_Matricula { get; set; }
+        public virtual aca_AnioLectivoEquivalenciaPromedio aca_AnioLectivoEquivalenciaPromedio { get; set; }
     }
 }

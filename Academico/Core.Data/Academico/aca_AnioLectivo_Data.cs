@@ -50,6 +50,8 @@ namespace Core.Data.Academico
                             EnCurso = q.EnCurso,
                             BloquearMatricula = q.BloquearMatricula,
                             IdAnioLectivoAnterior = q.IdAnioLectivoAnterior,
+                            PromedioMinimoParcial = q.PromedioMinimoParcial,
+                            PromedioMinimoPromocion = q.PromedioMinimoPromocion,
                             Estado = q.Estado
                         });
                     });
@@ -85,6 +87,8 @@ namespace Core.Data.Academico
                             FechaHasta = q.FechaHasta,
                             EnCurso = q.EnCurso,
                             BloquearMatricula = q.BloquearMatricula,
+                            PromedioMinimoParcial = q.PromedioMinimoParcial,
+                            PromedioMinimoPromocion = q.PromedioMinimoPromocion,
                             IdAnioLectivoAnterior = q.IdAnioLectivoAnterior,
                             Estado = q.Estado
                         });
@@ -116,6 +120,8 @@ namespace Core.Data.Academico
                         FechaHasta = q.FechaHasta,
                         EnCurso = q.EnCurso,
                         BloquearMatricula = q.BloquearMatricula,
+                        PromedioMinimoParcial = q.PromedioMinimoParcial,
+                        PromedioMinimoPromocion = q.PromedioMinimoPromocion,
                         Estado = q.Estado
                     }).ToList();
                 }

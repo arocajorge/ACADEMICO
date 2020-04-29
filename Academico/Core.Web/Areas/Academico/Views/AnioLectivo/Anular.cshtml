@@ -114,6 +114,20 @@
                     @Html.ValidationMessageFor(q => q.IdAnioLectivoAnterior, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdSucursal">Calificación mínima por parcial*</label>
+                    @Html.TextBoxFor(q => q.PromedioMinimoParcial, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.PromedioMinimoParcial, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdSucursal">Calificación mínima a promover*</label>
+                    @Html.TextBoxFor(q => q.PromedioMinimoPromocion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.PromedioMinimoPromocion, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

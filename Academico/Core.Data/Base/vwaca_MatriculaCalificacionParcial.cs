@@ -39,5 +39,11 @@ namespace Core.Data.Base
         public string MotivoConducta { get; set; }
         public string AccionRemedial { get; set; }
         public string Codigo { get; set; }
+        public Nullable<decimal> CalificacionP1 { get; set; }
+        public Nullable<decimal> CalificacionP2 { get; set; }
+        public Nullable<decimal> CalificacionP3 { get; set; }
+        public Nullable<decimal> CalificacionP4 { get; set; }
+        public Nullable<decimal> CalificacionP5 { get; set; }
+        public Nullable<decimal> CalificacionP6 { get; set; }
     }
 }

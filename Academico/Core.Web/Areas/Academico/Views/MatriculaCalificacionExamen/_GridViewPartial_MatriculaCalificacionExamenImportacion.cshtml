@@ -21,10 +21,11 @@
         settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
         settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
         settings.Settings.VerticalScrollableHeight = 400;
-        settings.SettingsPager.Visible = true;
         settings.SettingsPager.PageSize = 10;
+        settings.SettingsPager.Visible = true;
         settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
         settings.SettingsPager.AlwaysShowPager = true;
+
         //Configuración filtro por columna
         settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
         settings.Settings.ShowFilterRow = true;
@@ -55,6 +56,24 @@
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
         };
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Caption = "";
+        //    column.SetDataItemTemplateContent(tc =>
+        //    {
+        //        if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "RegistroconPromedioBajo")) == true)
+        //        {
+        //            ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-remove-circle\" style=\"color: red\"></span>");
+        //        }
+        //        else
+        //        {
+        //            ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-ok-circle\" style=\"color: green\"></span>");
+        //        }
+
+        //        column.Width = 2;
+        //    });
+        //    column.VisibleIndex = 1;
+        //});
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdMatricula";

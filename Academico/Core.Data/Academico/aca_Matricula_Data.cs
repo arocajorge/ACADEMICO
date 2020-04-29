@@ -276,7 +276,7 @@ namespace Core.Data.Academico
                         IdEmpleado = info.IdEmpleado
                     };
                     Context.aca_Matricula.Add(Entity);
-                    /*
+                    
                     if (info.lst_calificacion_parcial.Count > 0)
                     {
                         foreach (var item in info.lst_calificacion_parcial)
@@ -287,7 +287,7 @@ namespace Core.Data.Academico
                                 IdMatricula = info.IdMatricula,
                                 IdMateria = item.IdMateria,
                                 IdProfesor = item.IdProfesor,
-                                Parcial = item.Parcial
+                                IdCatalogoParcial = item.IdCatalogoParcial
                             };
                             Context.aca_MatriculaCalificacionParcial.Add(Entity_CalificacionParcial);
                         }
@@ -308,21 +308,13 @@ namespace Core.Data.Academico
                         }
                     }
 
-                    if (info.lst_conducta.Count > 0)
+                    aca_MatriculaConducta Entity_Conducta = new aca_MatriculaConducta
                     {
-                        foreach (var item in info.lst_conducta)
-                        {
-                            aca_MatriculaConducta Entity_Conducta = new aca_MatriculaConducta
-                            {
-                                IdEmpresa = info.IdEmpresa,
-                                IdMatricula = info.IdMatricula,
-                                IdMateria = item.IdMateria,
-                                IdProfesor = item.IdProfesor
-                            };
-                            Context.aca_MatriculaConducta.Add(Entity_Conducta);
-                        }
-                    }
-                    */
+                        IdEmpresa = info.IdEmpresa,
+                        IdMatricula = info.IdMatricula
+                    };
+                    Context.aca_MatriculaConducta.Add(Entity_Conducta);
+
                     if (info.lst_MatriculaRubro.Count > 0)
                     {
                         foreach (var item in info.lst_MatriculaRubro)

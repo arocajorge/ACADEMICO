@@ -46,6 +46,7 @@
     <Compile Include="Academico\aca_Alumno_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivoCalificacionHistorico_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivoConductaEquivalencia_Bus.cs" />
+    <Compile Include="Academico\aca_AnioLectivoEquivalenciaPromedio_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivoParcial_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Bus.cs" />

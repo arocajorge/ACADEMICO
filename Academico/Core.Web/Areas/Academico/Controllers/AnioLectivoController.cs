@@ -25,6 +25,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_Info());
         }
         #endregion
+
         #region Index
         public ActionResult Index()
         {

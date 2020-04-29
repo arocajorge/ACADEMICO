@@ -201,7 +201,6 @@ namespace Core.Data.Academico
                             Codigo = q.Codigo,
                             pe_nombreCompletoAlumno = q.pe_nombreCompletoAlumno,
                             pe_nombreCompleto = q.pe_nombreCompleto,
-                            RegistroValido = true,
                             CalificacionP1 = q.CalificacionP1,
                             CalificacionP2 = q.CalificacionP2,
                             CalificacionP3 = q.CalificacionP3,
@@ -216,6 +215,7 @@ namespace Core.Data.Academico
                             ExamenRemedial = q.ExamenRemedial,
                             ExamenGracia = q.ExamenGracia,
                             PromedioFinal = q.PromedioFinal,
+                            RegistroValido = true,
                             IdEquivalenciaPromedio = q.IdEquivalenciaPromedio,
                             CodigoEquivalencia = q.CodigoEquivalencia,
                             DescripcionEquivalencia = q.Descripcion

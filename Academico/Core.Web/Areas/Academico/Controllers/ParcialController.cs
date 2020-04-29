@@ -185,6 +185,7 @@ namespace Core.Web.Areas.Academico.Controllers
             edited_info.FechaFin = info_det.FechaFin;
             edited_info.EsExamen = info_det.EsExamen;
             edited_info.ValidaEstadoAlumno = info_det.ValidaEstadoAlumno;
+            edited_info.Orden = info_det.Orden;
             bus_parcial.ModificarDB(edited_info);
         }
     }

@@ -225,6 +225,7 @@
     <Compile Include="Areas\Academico\Controllers\CursoPorJornadaController.cs" />
     <Compile Include="Areas\Academico\Controllers\DocumentoController.cs" />
     <Compile Include="Areas\Academico\Controllers\DocumentoPorCursoController.cs" />
+    <Compile Include="Areas\Academico\Controllers\EquivalenciaPromedioController.cs" />
     <Compile Include="Areas\Academico\Controllers\JornadaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaCompartidaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaController.cs" />
@@ -8585,6 +8586,12 @@
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_CmbSede.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\EquivalenciaPromedio\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\EquivalenciaPromedio\_GridViewPartial_EquivalenciaPromedio.cshtml" />
+    <Content Include="Areas\Academico\Views\EquivalenciaPromedio\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\EquivalenciaPromedio\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\EquivalenciaPromedio\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\EquivalenciaPromedio\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

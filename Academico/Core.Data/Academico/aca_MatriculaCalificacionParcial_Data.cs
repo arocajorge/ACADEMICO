@@ -92,6 +92,12 @@ namespace Core.Data.Academico
                             MotivoCalificacion = q.MotivoCalificacion,
                             MotivoConducta = q.MotivoConducta,
                             AccionRemedial = q.AccionRemedial,
+                            CalificacionP1 = q.CalificacionP1,
+                            CalificacionP2 = q.CalificacionP2,
+                            CalificacionP3 = q.CalificacionP3,
+                            CalificacionP4 = q.CalificacionP4,
+                            CalificacionP5 = q.CalificacionP5,
+                            CalificacionP6 = q.CalificacionP6,
                             RegistroValido = true,
                             RegistroconPromedioBajo = false
                         });

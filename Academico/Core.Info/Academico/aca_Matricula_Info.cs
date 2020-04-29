@@ -77,11 +77,11 @@ namespace Core.Info.Academico
         public string ObservacionCambio { get; set; }
         public string NomCatalogoESTMAT { get; set; }
         public bool PaseAnio { get; set; }
-        /*
+        
         public List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial { get; set; }
         public List<aca_MatriculaCalificacion_Info> lst_calificacion { get; set; }
         public List<aca_MatriculaConducta_Info> lst_conducta { get; set; }
-        */
+        
         public aca_MatriculaCambios_Info info_MatriculaCambios { get; set; }
         public Nullable<decimal> PromedioFinal { get; set; }
         #endregion

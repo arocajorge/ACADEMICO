@@ -101,7 +101,7 @@
         {
             column.FieldName = "IdMatricula";
             column.Caption = "IdMatricula";
-            column.Width = 120;
+            column.Width = 110;
             column.VisibleIndex = 1;
             column.Visible = true;
             column.ReadOnly = true;
@@ -111,7 +111,7 @@
         {
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Alumno";
-            column.Width = 400;
+            column.Width = 300;
             column.VisibleIndex = 2;
             column.Visible = true;
             column.ReadOnly = true;
@@ -240,6 +240,17 @@
         });
         settings.Columns.Add(column =>
         {
+            column.FieldName = "PromedioParcial";
+            column.Caption = "Promedio";
+            column.Width = 100;
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.VisibleIndex = 10;
+            column.Visible = true;
+            column.ReadOnly = false;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
             column.FieldName = "Conducta";
             column.Caption = "Conducta";
             column.Width = 100;
@@ -252,7 +263,7 @@
                 p.DataSource = ViewBag.lst_conducta;
                 p.ClientSideEvents.ValueChanged = "function(s, e){ ValidarConducta();}";
             });
-            column.VisibleIndex = 10;
+            column.VisibleIndex = 11;
             column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
@@ -261,7 +272,7 @@
             column.FieldName = "MotivoCalificacion";
             column.Caption = "Motivo Calificacion";
             column.Width = 300;
-            column.VisibleIndex = 11;
+            column.VisibleIndex = 12;
             column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
@@ -270,7 +281,7 @@
             column.FieldName = "AccionRemedial";
             column.Caption = "Acción Remedial";
             column.Width = 300;
-            column.VisibleIndex = 12;
+            column.VisibleIndex = 13;
             column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
@@ -279,19 +290,8 @@
             column.FieldName = "MotivoConducta";
             column.Caption = "Motivo Conducta";
             column.Width = 300;
-            column.VisibleIndex = 13;
-            column.Visible = true;
-            column.EditFormSettings.Visible = DefaultBoolean.True;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "PromedioParcial";
-            column.Caption = "Promedio";
-            column.Width = 100;
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.VisibleIndex = 14;
             column.Visible = true;
-            column.ReadOnly = false;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
 

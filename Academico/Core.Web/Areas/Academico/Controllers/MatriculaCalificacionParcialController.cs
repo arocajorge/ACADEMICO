@@ -481,27 +481,26 @@ namespace Core.Web.Areas.Academico.Controllers
             ListaCalificaciones = bus_calificacion_parcial.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial, IdProfesor);
             foreach (var item in ListaCalificaciones)
             {
-                var calificacion_promediada = bus_calificacion.GetInfo(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, item.IdAlumno);
+                //var calificacion_promediada = bus_calificacion.GetInfo(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, item.IdAlumno);
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1)) 
-                    item.PromedioParcial = Convert.ToDecimal(calificacion_promediada == null ? 0 : calificacion_promediada.CalificacionP1);
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP1);
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
-                    item.PromedioParcial = Convert.ToDecimal(calificacion_promediada == null ? 0 : calificacion_promediada.CalificacionP2);
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP2);
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
-                    item.PromedioParcial = Convert.ToDecimal(calificacion_promediada == null ? 0 : calificacion_promediada.CalificacionP3);
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP3);
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
-                    item.PromedioParcial = Convert.ToDecimal(calificacion_promediada == null ? 0 : calificacion_promediada.CalificacionP4);
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP4);
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
-                    item.PromedioParcial = Convert.ToDecimal(calificacion_promediada == null ? 0 : calificacion_promediada.CalificacionP5);
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP5);
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
-                    item.PromedioParcial = Convert.ToDecimal(calificacion_promediada == null ? 0 : calificacion_promediada.CalificacionP6);
-
-                item.PromedioParcial = (decimal)Math.Round(item.PromedioParcial, 2, MidpointRounding.AwayFromZero);
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP6);
+                
                 var info_conducta = bus_conducta.GetInfo(IdEmpresa, IdAnio, Convert.ToInt32(item.Conducta));
 
                 if (item.PromedioParcial> 0 && item.PromedioParcial < Convert.ToDecimal(info_anio.PromedioMinimoParcial))
@@ -669,6 +668,24 @@ namespace Core.Web.Areas.Academico.Controllers
             ListaCalificaciones = bus_calificacion_parcial.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial, IdProfesor);
             foreach (var item in ListaCalificaciones)
             {
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP1);
+
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP2);
+
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP3);
+
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP4);
+
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP5);
+
+                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
+                    item.PromedioParcial = Convert.ToDecimal(item.CalificacionP6);
+
                 var info_conducta = bus_conducta.GetInfo(IdEmpresa, IdAnio, Convert.ToInt32(item.Conducta));
                 if (item.PromedioParcial > 0 && item.PromedioParcial < Convert.ToDecimal(info_anio.PromedioMinimoParcial))
                 {
