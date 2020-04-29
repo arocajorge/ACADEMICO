@@ -31,6 +31,7 @@ namespace Core.Info.Academico
         public Nullable<decimal> ExamenRemedial { get; set; }
         public Nullable<decimal> ExamenGracia { get; set; }
         public Nullable<decimal> PromedioFinal { get; set; }
+        public Nullable<int> IdEquivalenciaPromedio { get; set; }
 
         #region Campos que no existen en la tabla
         public int IdAnio { get; set; }
@@ -62,6 +63,8 @@ namespace Core.Info.Academico
         public decimal CalificacionExamen { get; set; }
         public int IdCatalogoParcial { get; set; }
         public bool RegistroValido { get; set; }
+        public string CodigoEquivalencia { get; set; }
+        public string DescripcionEquivalencia { get; set; }
         #endregion
     }
 }
