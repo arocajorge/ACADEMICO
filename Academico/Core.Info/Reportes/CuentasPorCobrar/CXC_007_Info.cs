@@ -25,6 +25,7 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public Nullable<double> Saldo { get; set; }
         public System.DateTime vt_fech_venc { get; set; }
         public Nullable<int> Plazo { get; set; }
+        public Nullable<int> idMes { get; set; }
         public string smes { get; set; }
         public string NomNivel { get; set; }
         public Nullable<int> OrdenNivel { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Core.Data.Base;
+using Core.Data.General;
 using Core.Info.Reportes.CuentasPorCobrar;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
 {
     public class CXC_007_Data
     {
+        tb_mes_Data odata_mes = new tb_mes_Data();
         public List<CXC_007_Info> get_list(int IdEmpresa, DateTime fechaCorte)
         {
             try
@@ -19,7 +21,9 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                 List<CXC_007_Info> Lista = new List<CXC_007_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
+                    Context.SetCommandTimeOut(5000);
                     var lst = Context.SPCXC_007(IdEmpresa, fechaCorte).ToList();
+                    var lista_mes = odata_mes.get_list();
                     foreach (var q in lst)
                     {
                         Lista.Add(new CXC_007_Info
@@ -63,6 +67,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                         });
                     }
 
+                    Lista.ForEach(q => q.idMes = lista_mes.Where(x=>x.smes==q.smes).FirstOrDefault().idMes);
                 }
                 return Lista;
             }

@@ -401,6 +401,22 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
             report.RequestParameters = false;
             ViewBag.Report = report;
+
+           CXC_007_Resumen_Rpt ReportResumen = new CXC_007_Resumen_Rpt();
+            #region Cargo diseño desde base
+            var reportResum = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_007_Resumen");
+            if (reportResum != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
+                ReportResumen.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_fechaCorte.Value = model.fecha_fin;
+            ReportResumen.usuario = SessionFixed.IdUsuario;
+            ReportResumen.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportResumen = ReportResumen;
             return View(model);
         }
 
@@ -424,6 +440,22 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             report.RequestParameters = false;
             ViewBag.Report = report;
+
+            CXC_007_Resumen_Rpt ReportResumen = new CXC_007_Resumen_Rpt();
+            #region Cargo diseño desde base
+            var reportResum = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_007_Resumen");
+            if (reportResum != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
+                ReportResumen.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_fechaCorte.Value = model.fecha_fin;
+            ReportResumen.usuario = SessionFixed.IdUsuario;
+            ReportResumen.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportResumen = ReportResumen;
             return View(model);
         }
         #endregion
