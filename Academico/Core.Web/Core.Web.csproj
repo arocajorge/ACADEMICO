@@ -620,6 +620,12 @@
     <Compile Include="Reportes\Facturacion\FAC_007_Rpt.Designer.cs">
       <DependentUpon>FAC_007_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_008_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_008_Rpt.Designer.cs">
+      <DependentUpon>FAC_008_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -8605,6 +8611,7 @@
     <Content Include="Areas\Academico\Views\EquivalenciaPromedio\Modificar.cshtml" />
     <Content Include="Areas\Academico\Views\EquivalenciaPromedio\Anular.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_007.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_008.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8831,6 +8838,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_007_Rpt.resx">
       <DependentUpon>FAC_007_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_008_Rpt.resx">
+      <DependentUpon>FAC_008_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
