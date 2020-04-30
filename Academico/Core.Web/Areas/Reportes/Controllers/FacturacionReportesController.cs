@@ -434,6 +434,21 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
-#endregion
+        #endregion
+
+        #region FAC_008
+        public ActionResult FAC_008(int IdEmpresa, int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
+        {
+            FAC_008_Rpt model = new FAC_008_Rpt();
+
+            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.p_IdSucursal.Value = IdSucursal;
+            model.p_IdBodega.Value = IdBodega;
+            model.p_IdNota.Value = IdNota;
+            model.usuario = SessionFixed.IdUsuario;
+            model.empresa = SessionFixed.NomEmpresa;
+            return View(model);
+        }
+        #endregion
     }
 }

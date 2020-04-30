@@ -6,7 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="ModelReportes.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -46,7 +46,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_002' no tie
           <Property Name="FechaCreacion" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -82,7 +82,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_003' no tie
           <Property Name="CelularRepresentante" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -132,7 +132,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_004' no tie
           <Property Name="OrdenNivel" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_006">
           <Key>
             <PropertyRef Name="NomSede" />
@@ -183,7 +183,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_006' no tie
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_007">
           <Key>
             <PropertyRef Name="NomSede" />
@@ -238,7 +238,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_007' no tie
           <Property Name="NomPlantillaTipo" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_008">
           <Key>
             <PropertyRef Name="Cantidad" />
@@ -286,7 +286,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_008' no tie
           <Property Name="NomPlantillaTipo" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_009">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -312,7 +312,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_009' no tie
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_010' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_010' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_010">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -372,7 +372,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_010' no tie
           <Property Name="Codigo" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_011' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_011' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_011">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -436,7 +436,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_011' no tie
           <Property Name="PromedioFinal" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_012' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_012' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_012">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -492,7 +492,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWACA_012' no tie
           <Property Name="EstadoPago" Type="varchar" MaxLength="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWBAN_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_001">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -530,7 +530,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWBAN_001' no tie
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWBAN_001_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_001_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_001_cancelaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -557,7 +557,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWBAN_001_cancela
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWBAN_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_002">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -595,7 +595,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWBAN_002' no tie
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWBAN_002_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_002_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_002_cancelaciones">
           <Key>
             <PropertyRef Name="mba_IdEmpresa" />
@@ -615,7 +615,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWBAN_002_cancela
           <Property Name="monto" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWBAN_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_003">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -653,7 +653,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWBAN_003' no tie
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCAJ_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -703,7 +703,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCAJ_001' no tie
           <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCAJ_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_002">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -760,7 +760,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCAJ_002' no tie
           <Property Name="SecuenciaVale" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCAJ_002_ingresos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_002_ingresos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_002_ingresos">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -786,7 +786,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCAJ_002_ingreso
           <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCAJ_002_ValesNoConciliados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_002_ValesNoConciliados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_002_ValesNoConciliados">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -808,7 +808,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCAJ_002_ValesNo
           <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCONTA_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -841,7 +841,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCONTA_001' no t
           <Property Name="NombreUsuario" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -886,7 +886,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_002' no tie
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_002_Aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_002_Aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_002_Aplicaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -906,7 +906,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_002_Aplicac
           <Property Name="dc_ValorPago" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -946,7 +946,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_003' no tie
           <Property Name="TotalPago" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_005">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -980,7 +980,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_005' no tie
           <Property Name="NombreUsuario" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_005_Cobros' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_005_Cobros' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_005_Cobros">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1004,7 +1004,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_005_Cobros'
           <Property Name="cr_observacion" Type="varchar" MaxLength="700" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_005_Diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_005_Diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_005_Diario">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1025,7 +1025,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWCXC_005_Diario'
           <Property Name="Haber" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1097,7 +1097,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_001' no tie
           <Property Name="NomAlumno" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1176,7 +1176,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_002' no tie
           <Property Name="NomAlumno" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1249,7 +1249,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_003' no tie
           <Property Name="FechaTransaccion" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_003_aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_003_aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_003_aplicaciones">
           <Key>
             <PropertyRef Name="IdEmpresa_nt" />
@@ -1271,7 +1271,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_003_aplicac
           <Property Name="vt_fecha" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1349,7 +1349,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_004' no tie
           <Property Name="Cambio" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_007">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1391,7 +1391,70 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.Academico.VWFAC_007' no tie
           <Property Name="IdEmpresa_rol" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.web.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWFAC_008">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdNota" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="no_fecha" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_codigo" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="sc_precioFinal" />
+            <PropertyRef Name="SubtotalIva" />
+            <PropertyRef Name="SubtotalSinIva" />
+            <PropertyRef Name="SubtotalAntesDescuento" />
+            <PropertyRef Name="sc_subtotal" />
+            <PropertyRef Name="TotalDescuento" />
+            <PropertyRef Name="sc_iva" />
+            <PropertyRef Name="sc_total" />
+            <PropertyRef Name="CreDeb" />
+            <PropertyRef Name="CodDocumentoTipo" />
+            <PropertyRef Name="sc_cantidad" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdSucursal" Type="int" Nullable="false" />
+          <Property Name="IdBodega" Type="int" Nullable="false" />
+          <Property Name="IdNota" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="Serie1" Type="varchar" MaxLength="3" />
+          <Property Name="Serie2" Type="varchar" MaxLength="3" />
+          <Property Name="NumNota_Impresa" Type="varchar" MaxLength="28" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="no_fecha" Type="datetime" Nullable="false" />
+          <Property Name="FechaDocumentoAplica" Type="datetime" />
+          <Property Name="sc_observacion" Type="varchar(max)" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="pr_codigo" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="pr_descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="DetalleAdicional" Type="varchar" MaxLength="1000" />
+          <Property Name="sc_precioFinal" Type="float" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="200" />
+          <Property Name="Celular" Type="varchar" MaxLength="200" />
+          <Property Name="Correo" Type="varchar" MaxLength="1000" />
+          <Property Name="Direccion" Type="varchar" MaxLength="1000" />
+          <Property Name="SubtotalIva" Type="float" Nullable="false" />
+          <Property Name="SubtotalSinIva" Type="float" Nullable="false" />
+          <Property Name="SubtotalAntesDescuento" Type="float" Nullable="false" />
+          <Property Name="sc_subtotal" Type="float" Nullable="false" />
+          <Property Name="TotalDescuento" Type="float" Nullable="false" />
+          <Property Name="sc_iva" Type="float" Nullable="false" />
+          <Property Name="sc_total" Type="float" Nullable="false" />
+          <Property Name="DocumentoAplicado" Type="varchar" MaxLength="50" />
+          <Property Name="NumAutorizacion" Type="varchar" MaxLength="50" />
+          <Property Name="Fecha_Autorizacion" Type="datetime" />
+          <Property Name="CreDeb" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="CodDocumentoTipo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="sc_cantidad" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_0031">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2388,6 +2451,45 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.web.VWFAC_003' no tiene def
     [VWFAC_007].[IdEmpresa_rol] AS [IdEmpresa_rol]
     FROM [Academico].[VWFAC_007] AS [VWFAC_007]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWFAC_008" EntityType="Self.VWFAC_008" store:Type="Views" store:Schema="Academico">
+            <DefiningQuery>SELECT 
+    [VWFAC_008].[IdEmpresa] AS [IdEmpresa], 
+    [VWFAC_008].[IdSucursal] AS [IdSucursal], 
+    [VWFAC_008].[IdBodega] AS [IdBodega], 
+    [VWFAC_008].[IdNota] AS [IdNota], 
+    [VWFAC_008].[Secuencia] AS [Secuencia], 
+    [VWFAC_008].[Serie1] AS [Serie1], 
+    [VWFAC_008].[Serie2] AS [Serie2], 
+    [VWFAC_008].[NumNota_Impresa] AS [NumNota_Impresa], 
+    [VWFAC_008].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [VWFAC_008].[pe_cedulaRuc] AS [pe_cedulaRuc], 
+    [VWFAC_008].[no_fecha] AS [no_fecha], 
+    [VWFAC_008].[FechaDocumentoAplica] AS [FechaDocumentoAplica], 
+    [VWFAC_008].[sc_observacion] AS [sc_observacion], 
+    [VWFAC_008].[IdProducto] AS [IdProducto], 
+    [VWFAC_008].[pr_codigo] AS [pr_codigo], 
+    [VWFAC_008].[pr_descripcion] AS [pr_descripcion], 
+    [VWFAC_008].[DetalleAdicional] AS [DetalleAdicional], 
+    [VWFAC_008].[sc_precioFinal] AS [sc_precioFinal], 
+    [VWFAC_008].[Telefono] AS [Telefono], 
+    [VWFAC_008].[Celular] AS [Celular], 
+    [VWFAC_008].[Correo] AS [Correo], 
+    [VWFAC_008].[Direccion] AS [Direccion], 
+    [VWFAC_008].[SubtotalIva] AS [SubtotalIva], 
+    [VWFAC_008].[SubtotalSinIva] AS [SubtotalSinIva], 
+    [VWFAC_008].[SubtotalAntesDescuento] AS [SubtotalAntesDescuento], 
+    [VWFAC_008].[sc_subtotal] AS [sc_subtotal], 
+    [VWFAC_008].[TotalDescuento] AS [TotalDescuento], 
+    [VWFAC_008].[sc_iva] AS [sc_iva], 
+    [VWFAC_008].[sc_total] AS [sc_total], 
+    [VWFAC_008].[DocumentoAplicado] AS [DocumentoAplicado], 
+    [VWFAC_008].[NumAutorizacion] AS [NumAutorizacion], 
+    [VWFAC_008].[Fecha_Autorizacion] AS [Fecha_Autorizacion], 
+    [VWFAC_008].[CreDeb] AS [CreDeb], 
+    [VWFAC_008].[CodDocumentoTipo] AS [CodDocumentoTipo], 
+    [VWFAC_008].[sc_cantidad] AS [sc_cantidad]
+    FROM [Academico].[VWFAC_008] AS [VWFAC_008]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWFAC_0031" EntityType="Self.VWFAC_0031" store:Type="Views" store:Schema="web" store:Name="VWFAC_003">
             <DefiningQuery>SELECT 
     [VWFAC_0031].[IdEmpresa] AS [IdEmpresa], 
@@ -2537,6 +2639,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.web.VWFAC_003' no tiene def
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="FechaCorte" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="VWFAC_008" EntityType="ModelReportes.VWFAC_008" />
         </EntityContainer>
         <ComplexType Name="SPACA_001_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -4259,6 +4362,67 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.web.VWFAC_003' no tiene def
           <Property Type="Double" Name="VENCIDO_91_180" Nullable="true" />
           <Property Type="Double" Name="VENCIDO_181" Nullable="true" />
         </ComplexType>
+        <EntityType Name="VWFAC_008">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSucursal" />
+            <PropertyRef Name="IdBodega" />
+            <PropertyRef Name="IdNota" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="no_fecha" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="pr_codigo" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="sc_precioFinal" />
+            <PropertyRef Name="SubtotalIva" />
+            <PropertyRef Name="SubtotalSinIva" />
+            <PropertyRef Name="SubtotalAntesDescuento" />
+            <PropertyRef Name="sc_subtotal" />
+            <PropertyRef Name="TotalDescuento" />
+            <PropertyRef Name="sc_iva" />
+            <PropertyRef Name="sc_total" />
+            <PropertyRef Name="CreDeb" />
+            <PropertyRef Name="CodDocumentoTipo" />
+            <PropertyRef Name="sc_cantidad" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="IdBodega" Type="Int32" Nullable="false" />
+          <Property Name="IdNota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Serie1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Serie2" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="NumNota_Impresa" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="no_fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaDocumentoAplica" Type="DateTime" Precision="3" />
+          <Property Name="sc_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pr_codigo" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DetalleAdicional" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="sc_precioFinal" Type="Double" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="SubtotalIva" Type="Double" Nullable="false" />
+          <Property Name="SubtotalSinIva" Type="Double" Nullable="false" />
+          <Property Name="SubtotalAntesDescuento" Type="Double" Nullable="false" />
+          <Property Name="sc_subtotal" Type="Double" Nullable="false" />
+          <Property Name="TotalDescuento" Type="Double" Nullable="false" />
+          <Property Name="sc_iva" Type="Double" Nullable="false" />
+          <Property Name="sc_total" Type="Double" Nullable="false" />
+          <Property Name="DocumentoAplicado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumAutorizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
+          <Property Name="CreDeb" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="CodDocumentoTipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="sc_cantidad" Type="Double" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5607,6 +5771,47 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO2.web.VWFAC_003' no tiene def
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWFAC_008">
+            <EntityTypeMapping TypeName="ModelReportes.VWFAC_008">
+              <MappingFragment StoreEntitySet="VWFAC_008">
+                <ScalarProperty Name="sc_cantidad" ColumnName="sc_cantidad" />
+                <ScalarProperty Name="CodDocumentoTipo" ColumnName="CodDocumentoTipo" />
+                <ScalarProperty Name="CreDeb" ColumnName="CreDeb" />
+                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
+                <ScalarProperty Name="NumAutorizacion" ColumnName="NumAutorizacion" />
+                <ScalarProperty Name="DocumentoAplicado" ColumnName="DocumentoAplicado" />
+                <ScalarProperty Name="sc_total" ColumnName="sc_total" />
+                <ScalarProperty Name="sc_iva" ColumnName="sc_iva" />
+                <ScalarProperty Name="TotalDescuento" ColumnName="TotalDescuento" />
+                <ScalarProperty Name="sc_subtotal" ColumnName="sc_subtotal" />
+                <ScalarProperty Name="SubtotalAntesDescuento" ColumnName="SubtotalAntesDescuento" />
+                <ScalarProperty Name="SubtotalSinIva" ColumnName="SubtotalSinIva" />
+                <ScalarProperty Name="SubtotalIva" ColumnName="SubtotalIva" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="sc_precioFinal" ColumnName="sc_precioFinal" />
+                <ScalarProperty Name="DetalleAdicional" ColumnName="DetalleAdicional" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="pr_codigo" ColumnName="pr_codigo" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="sc_observacion" ColumnName="sc_observacion" />
+                <ScalarProperty Name="FechaDocumentoAplica" ColumnName="FechaDocumentoAplica" />
+                <ScalarProperty Name="no_fecha" ColumnName="no_fecha" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="NumNota_Impresa" ColumnName="NumNota_Impresa" />
+                <ScalarProperty Name="Serie2" ColumnName="Serie2" />
+                <ScalarProperty Name="Serie1" ColumnName="Serie1" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdNota" ColumnName="IdNota" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
