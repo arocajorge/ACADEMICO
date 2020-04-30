@@ -92,16 +92,15 @@
                 {
                     ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-ok-circle\" style=\"color: green\"></span>");
                 }
-
-                column.Width = 2;
             });
             column.VisibleIndex = 1;
+            column.Width = 40;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "IdMatricula";
             column.Caption = "IdMatricula";
-            column.Width = 110;
+            column.Width = 120;
             column.VisibleIndex = 1;
             column.Visible = true;
             column.ReadOnly = true;
@@ -111,7 +110,7 @@
         {
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Alumno";
-            column.Width = 300;
+            column.Width = 280;
             column.VisibleIndex = 2;
             column.Visible = true;
             column.ReadOnly = true;
@@ -121,7 +120,7 @@
         {
             column.FieldName = "Calificacion1";
             column.Caption = "TAI";
-            column.Width = 100;
+            column.Width = 90;
             column.VisibleIndex = 3;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
@@ -138,7 +137,7 @@
         {
             column.FieldName = "Calificacion2";
             column.Caption = "AIC";
-            column.Width = 100;
+            column.Width = 90;
             column.VisibleIndex = 4;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
@@ -155,7 +154,7 @@
         {
             column.FieldName = "Calificacion3";
             column.Caption = "AGC";
-            column.Width = 100;
+            column.Width = 90;
             column.VisibleIndex = 5;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
@@ -172,7 +171,7 @@
         {
             column.FieldName = "Calificacion4";
             column.Caption = "LEC";
-            column.Width = 100;
+            column.Width = 90;
             column.VisibleIndex = 6;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
@@ -189,7 +188,7 @@
         {
             column.FieldName = "Evaluacion";
             column.Caption = "Evaluación";
-            column.Width = 120;
+            column.Width = 110;
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.VisibleIndex = 7;
             column.Visible = true;
@@ -207,7 +206,7 @@
         {
             column.FieldName = "Remedial1";
             column.Caption = "Remedial 1";
-            column.Width = 120;
+            column.Width = 110;
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.VisibleIndex = 8;
             column.Visible = true;
@@ -225,7 +224,7 @@
         {
             column.FieldName = "Remedial2";
             column.Caption = "Remedial 2";
-            column.Width = 120;
+            column.Width = 110;
             column.VisibleIndex = 9;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
@@ -271,7 +270,7 @@
         {
             column.FieldName = "MotivoCalificacion";
             column.Caption = "Motivo Calificacion";
-            column.Width = 300;
+            column.Width = 250;
             column.VisibleIndex = 12;
             column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;
@@ -280,7 +279,7 @@
         {
             column.FieldName = "AccionRemedial";
             column.Caption = "Acción Remedial";
-            column.Width = 300;
+            column.Width = 250;
             column.VisibleIndex = 13;
             column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;
@@ -289,7 +288,7 @@
         {
             column.FieldName = "MotivoConducta";
             column.Caption = "Motivo Conducta";
-            column.Width = 300;
+            column.Width = 250;
             column.VisibleIndex = 14;
             column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;

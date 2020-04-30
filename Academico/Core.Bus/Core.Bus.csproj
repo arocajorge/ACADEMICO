@@ -277,6 +277,7 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Cobros_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_005_Diario_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_006_Bus.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_008_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_001_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_002_Bus.cs" />

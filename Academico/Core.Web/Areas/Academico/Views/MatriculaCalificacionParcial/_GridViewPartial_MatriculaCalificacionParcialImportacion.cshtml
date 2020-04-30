@@ -74,10 +74,9 @@
                 {
                     ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-ok-circle\" style=\"color: green\"></span>");
                 }
-
-                column.Width = 2;
             });
             column.VisibleIndex = 1;
+            column.Width = 40;
         });
         settings.Columns.Add(column =>
         {
@@ -90,14 +89,14 @@
         {
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Alumno";
-            column.Width = 300;
+            column.Width = 280;
             column.VisibleIndex = 2;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Calificacion1";
             column.Caption = "TAI";
-            column.Width = 100;
+            column.Width = 90;
             column.VisibleIndex = 3;
             column.EditorProperties().SpinEdit(q =>
             {
@@ -111,7 +110,7 @@
         {
             column.FieldName = "Calificacion2";
             column.Caption = "AIC";
-            column.Width = 100;
+            column.Width = 90;
             column.VisibleIndex = 4;
             column.EditorProperties().SpinEdit(q =>
             {
@@ -125,7 +124,7 @@
         {
             column.FieldName = "Calificacion3";
             column.Caption = "AGC";
-            column.Width = 100;
+            column.Width = 90;
             column.VisibleIndex = 5;
             column.EditorProperties().SpinEdit(q =>
             {
@@ -139,7 +138,7 @@
         {
             column.FieldName = "Calificacion4";
             column.Caption = "LEC";
-            column.Width = 100;
+            column.Width = 90;
             column.VisibleIndex = 6;
             column.EditorProperties().SpinEdit(q =>
             {
@@ -153,7 +152,7 @@
         {
             column.FieldName = "Evaluacion";
             column.Caption = "Evaluación";
-            column.Width = 120;
+            column.Width = 110;
             column.VisibleIndex = 7;
             column.EditorProperties().SpinEdit(q =>
             {
@@ -167,7 +166,7 @@
         {
             column.FieldName = "Remedial1";
             column.Caption = "Remedial 1";
-            column.Width = 120;
+            column.Width = 110;
             column.VisibleIndex = 8;
             column.EditorProperties().SpinEdit(q =>
             {
@@ -181,7 +180,7 @@
         {
             column.FieldName = "Remedial2";
             column.Caption = "Remedial 2";
-            column.Width = 120;
+            column.Width = 110;
             column.VisibleIndex = 9;
             column.EditorProperties().SpinEdit(q =>
             {
@@ -218,21 +217,21 @@
         {
             column.FieldName = "MotivoCalificacion";
             column.Caption = "Motivo Calificacion";
-            column.Width = 300;
+            column.Width = 250;
             column.VisibleIndex = 12;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "AccionRemedial";
             column.Caption = "Acción Remedial";
-            column.Width = 300;
+            column.Width = 250;
             column.VisibleIndex = 13;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "MotivoConducta";
             column.Caption = "Motivo Conducta";
-            column.Width = 300;
+            column.Width = 250;
             column.VisibleIndex = 14;
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
