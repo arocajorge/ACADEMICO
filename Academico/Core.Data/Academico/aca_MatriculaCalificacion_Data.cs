@@ -575,7 +575,7 @@ namespace Core.Data.Academico
 
                     EntityCalificacion.CampoMejoramiento = info.CampoMejoramiento;
                     EntityCalificacion.PromedioFinal = info.PromedioFinal;
-                    EntityCalificacion.IdEquivalenciaPromedio = null;
+                    EntityCalificacion.IdEquivalenciaPromedio = info.IdEquivalenciaPromedio;
 
                     Context.SaveChanges();
                 }

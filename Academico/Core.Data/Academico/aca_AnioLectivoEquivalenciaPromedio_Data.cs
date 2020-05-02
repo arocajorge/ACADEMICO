@@ -79,6 +79,39 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_AnioLectivoEquivalenciaPromedio_Info getInfo_x_Promedio(int IdEmpresa, int IdAnio, decimal PromedioFinal)
+        {
+            try
+            {
+                aca_AnioLectivoEquivalenciaPromedio_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_AnioLectivoEquivalenciaPromedio.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && PromedioFinal >= q.ValorMinimo && PromedioFinal<= q.ValorMaximo).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_AnioLectivoEquivalenciaPromedio_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAnio = Entity.IdAnio,
+                        IdEquivalenciaPromedio = Entity.IdEquivalenciaPromedio,
+                        Descripcion = Entity.Descripcion,
+                        Codigo = Entity.Codigo,
+                        ValorMinimo = Entity.ValorMinimo,
+                        ValorMaximo = Entity.ValorMaximo
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public int getId(int IdEmpresa)
         {
             try

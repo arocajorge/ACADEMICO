@@ -192,14 +192,6 @@
         });
         settings.Columns.Add(column =>
         {
-            column.FieldName = "PromedioParcial";
-            column.Caption = "Promedio";
-            column.Width = 100;
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.VisibleIndex = 10;
-        });
-        settings.Columns.Add(column =>
-        {
             column.FieldName = "Conducta";
             column.Caption = "Conducta";
             column.Width = 100;
@@ -211,27 +203,35 @@
                 p.ValueType = typeof(int);
                 p.DataSource = ViewBag.lst_conducta;
             });
-            column.VisibleIndex = 11;
+            column.VisibleIndex = 10;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "MotivoCalificacion";
             column.Caption = "Motivo Calificacion";
             column.Width = 250;
-            column.VisibleIndex = 12;
+            column.VisibleIndex = 11;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "AccionRemedial";
             column.Caption = "Acción Remedial";
             column.Width = 250;
-            column.VisibleIndex = 13;
+            column.VisibleIndex = 12;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "MotivoConducta";
             column.Caption = "Motivo Conducta";
             column.Width = 250;
+            column.VisibleIndex = 13;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "PromedioParcial";
+            column.Caption = "Promedio";
+            column.Width = 100;
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
             column.VisibleIndex = 14;
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";

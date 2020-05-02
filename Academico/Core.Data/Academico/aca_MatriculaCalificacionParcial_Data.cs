@@ -281,14 +281,17 @@ namespace Core.Data.Academico
                     if (EntityCalificacionPromedio == null)
                         return false;
 
+                    decimal SumaPromedio = 0;
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
                     {
-                        EntityCalificacionPromedio.PromedioQ1 = Math.Round(Convert.ToDecimal((EntityCalificacionPromedio.CalificacionP1) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP2) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP3) /3 ), 2, MidpointRounding.AwayFromZero);
+                        SumaPromedio = Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP1) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP2) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP3);
+                        EntityCalificacionPromedio.PromedioQ1 = Math.Round((SumaPromedio/3), 2, MidpointRounding.AwayFromZero);
                     }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
                     {
-                        EntityCalificacionPromedio.PromedioQ2 = Math.Round(Convert.ToDecimal((EntityCalificacionPromedio.CalificacionP4) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP5) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP6) / 3) ,2, MidpointRounding.AwayFromZero);
+                        SumaPromedio = Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP4) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP5) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP6);
+                        EntityCalificacionPromedio.PromedioQ2 = Math.Round((SumaPromedio / 3) ,2, MidpointRounding.AwayFromZero);
                     }
 
                     Context.SaveChanges();

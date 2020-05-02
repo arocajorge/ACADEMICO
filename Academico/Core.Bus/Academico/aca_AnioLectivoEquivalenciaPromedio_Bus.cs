@@ -35,6 +35,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_AnioLectivoEquivalenciaPromedio_Info GetInfo_x_Promedio(int IdEmpresa, int IdAnio, decimal PromedioFinal)
+        {
+            try
+            {
+                return odata.getInfo_x_Promedio(IdEmpresa, IdAnio, PromedioFinal);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool GuardarDB(aca_AnioLectivoEquivalenciaPromedio_Info info)
         {
             try

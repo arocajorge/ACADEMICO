@@ -29,6 +29,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_MatriculaPaseAnio_List Lista_MatriculaPaseAnio = new aca_MatriculaPaseAnio_List();
         aca_Catalogo_Bus bus_catalogo = new aca_Catalogo_Bus();
         aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
+        aca_AnioLectivoEquivalenciaPromedio_Bus bus_promedio = new aca_AnioLectivoEquivalenciaPromedio_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -145,6 +146,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             }
                         }
 
+                        var info_equivalencia_promedio = bus_promedio.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, PromedioFinal);
                         var info_calificacion = new aca_MatriculaCalificacion_Info
                         {
                             IdEmpresa = item_x_matricula.IdEmpresa,
@@ -170,7 +172,8 @@ namespace Core.Web.Areas.Academico.Controllers
                             ExamenSupletorio = item_x_matricula.ExamenSupletorio,
                             ExamenRemedial = item_x_matricula.ExamenRemedial,
                             ExamenGracia = item_x_matricula.ExamenGracia,
-                            PromedioFinal = PromedioFinal
+                            PromedioFinal = PromedioFinal,
+                            IdEquivalenciaPromedio = (info_equivalencia_promedio==null ? (int?)null : info_equivalencia_promedio.IdEquivalenciaPromedio)
                         };
                         PromedioGeneral = PromedioGeneral + PromedioFinal;
 

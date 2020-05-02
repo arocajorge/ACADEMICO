@@ -415,9 +415,11 @@ namespace Core.Web.Areas.Academico.Controllers
             if (ModelState.IsValid)
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                int IdSede = Convert.ToInt32(SessionFixed.IdSede);
                 var info_matricula = bus_matricula.GetInfo(IdEmpresa, info_det.IdMatricula);
                 info_det.IdCatalogoParcial = Convert.ToInt32(IdCatalogoParcial);
-                if (info_det != null)
+ 
+                if (info_det!=null)
                 {
                     Lista_CalificacionExamen.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 }

@@ -58,11 +58,11 @@ namespace Core.Bus.Academico
         {
             try
             {
+                var info_matricula = odata_matricula.getInfo(info.IdEmpresa, info.IdMatricula);
+                var info_parcial = odata_parcial.getInfo(info.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, info.IdCatalogoParcial);
+
                 if (odata.modificarDB(info))
                 {
-                    var info_matricula = odata_matricula.getInfo(info.IdEmpresa, info.IdMatricula);
-                    var info_parcial = odata_parcial.getInfo(info.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, info.IdCatalogoParcial);
-
                     if (info_parcial != null)
                     {
                         if (info_parcial.ValidaEstadoAlumno == true)
