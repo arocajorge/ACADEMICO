@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_alumno_retiro";
-        settings.CallbackRouteValues = new { Controller = "Alumno", Action = "GridViewPartial_alumno_retiro", Nuevo = ViewBag.Nuevo,  Anular = ViewBag.Anular };
+        settings.CallbackRouteValues = new { Controller = "AlumnoRetiro", Action = "GridViewPartial_alumno_retiro", Nuevo = ViewBag.Nuevo,  Anular = ViewBag.Anular };
         settings.KeyFieldName = "IdRetiro";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
