@@ -10,8 +10,8 @@
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
-
-        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        ModelBinders.Binders.DefaultBinder = new DevExpress.Web.Mvc.DevExpressEditorsBinder();
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
         settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "MatriculaCalificacionParcial", Action = "EditingUpdate", Area = "Academico" };
         settings.CommandColumn.ShowEditButton = true;
         settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
@@ -33,7 +33,7 @@
         //Configuración scrolling y pager
         settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
         settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
-        settings.Settings.VerticalScrollableHeight = 400;
+        settings.Settings.VerticalScrollableHeight = 380;
         settings.SettingsPager.PageSize = 10;
         settings.SettingsPager.Visible = true;
         settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
@@ -300,6 +300,10 @@
 
     });
 
+    if (ViewBag.MostrarError != "")
+    {
+        grid.SetEditErrorText((string)ViewBag.MostrarError);
+    }
 }
 @grid.Bind(Model).GetHtml()
 <script type="text/javascript">

@@ -428,28 +428,94 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Funciones del Grid
-        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] aca_MatriculaCalificacionParcial_Info info_det)
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpress.Web.Mvc.DevExpressEditorsBinder))] aca_MatriculaCalificacionParcial_Info info_det)
         {
 
             if (ModelState.IsValid)
             {
                 int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 var info_matricula = bus_matricula.GetInfo(IdEmpresa, info_det.IdMatricula);
-                var info_conducta = bus_conducta.GetInfo(IdEmpresa,info_matricula.IdAnio, Convert.ToInt32(info_det.Conducta));
+                var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info_det.Conducta));
                 var info_anio = bus_anio.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio);
+                var info_anio_lectivo = bus_anio.GetInfo(IdEmpresa, info_matricula.IdAnio);
+                var lst_conducta = bus_conducta.GetList_IngresaMotivo(IdEmpresa, info_matricula.IdAnio);
+                aca_MatriculaCalificacionParcial_Info registro_editar = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(m => m.IdEmpresa == IdEmpresa && m.IdMatricula == info_det.IdMatricula).FirstOrDefault();
+                info_det.RegistroValido = true;
+                var RegistroValidoConducta = true;
+                var RegistroValidoCalificacion = true;
+                info_det.RegistroconPromedioBajo = false;
+                var info_parcial = bus_parcial.GetInfo(IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, registro_editar.IdCatalogoParcial);
+                ViewBag.MostrarError = "";
+                var actualizar = true;
 
-                if (info_conducta!=null)
+                if ((info_parcial.Orden - 1) ==0 )
                 {
-                    if (info_det.PromedioParcial >= Convert.ToDecimal(info_anio.PromedioMinimoParcial) && (info_conducta.IngresaMotivo == false || (info_conducta.IngresaMotivo == true && !string.IsNullOrEmpty(info_det.MotivoConducta)) ) )
+                    actualizar = true;
+                }
+                else
+                {
+                    actualizar = false;
+                    ViewBag.MostrarError = "El estudiante tiene calificaciones pendientes de ingresar en parciales anteriores.";
+                }
+
+                if (actualizar==true)
+                {
+                    if (registro_editar.IdProfesor>0)
                     {
+                        if (info_det.Calificacion1 >= 0 && info_det.Calificacion2 >= 0 && info_det.Calificacion3 >= 0 && info_det.Calificacion4 >= 0 && info_det.Evaluacion >= 0)
+                        {
+                            if (info_det.PromedioParcial > 0 && info_det.PromedioParcial < Convert.ToDecimal(info_anio_lectivo.PromedioMinimoParcial))
+                            {
+                                info_det.RegistroconPromedioBajo = true;
+
+                                if (string.IsNullOrEmpty(info_det.MotivoCalificacion) || string.IsNullOrEmpty(info_det.AccionRemedial))
+                                {
+                                    RegistroValidoCalificacion = false;
+                                    ViewBag.MostrarError = "El promedio parcial del estudiante es menor al promedio definido, por favor ingresar el motivo y la accion remedial";
+                                }
+                            }
+                            else
+                            {
+                                info_det.RegistroconPromedioBajo = false;
+                            }
+                        }
+                        else
+                        {
+                            RegistroValidoCalificacion = false;
+                            ViewBag.MostrarError = "Debe de ingresar las calificaciones solicitadas.";
+                        }
+
+                        if (info_conducta != null)
+                        {
+                            if (info_conducta.IngresaMotivo == true && string.IsNullOrEmpty(info_det.MotivoConducta))
+                            {
+                                RegistroValidoConducta = false;
+                                ViewBag.MostrarError = "Debe de ingresar el motivo por el cual el estudiante tiene baja conducta.";
+                            }
+                            else if (info_conducta.IngresaMotivo == true)
+                            {
+                                info_det.RegistroconPromedioBajo = true;
+                            }
+                        }
+                        else
+                        {
+                            RegistroValidoConducta = false;
+                            ViewBag.MostrarError = "Debe de ingresar la conducta del estudiante.";
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.MostrarError = "El registro no tiene asignado profesor.";
+                    }
+
+                    if (RegistroValidoCalificacion==true && RegistroValidoConducta==true)
+                    {
+                        info_det.RegistroValido = true;
                         Lista_CalificacionParcial.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                     }
                     else
                     {
-                        if (!string.IsNullOrEmpty(info_det.MotivoCalificacion) && !string.IsNullOrEmpty(info_det.AccionRemedial))
-                        {
-                            Lista_CalificacionParcial.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                        }
+                        info_det.RegistroValido = false;
                     }
                 }
             }
@@ -820,11 +886,6 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_profesor = bus_profesor.GetInfo_x_Usuario(IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
 
-            var info_matricula = bus_matricula.GetInfo(IdEmpresa, info_det.IdMatricula);
-            var info_anio_lectivo = bus_anio.GetInfo(IdEmpresa, info_matricula.IdAnio);
-            var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info_det.Conducta));
-            var lst_conducta = bus_conducta.GetList_IngresaMotivo(IdEmpresa, info_matricula.IdAnio);
-
             aca_MatriculaCalificacionParcial_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdEmpresa==IdEmpresa && m.IdMatricula == info_det.IdMatricula).FirstOrDefault();
 
             if (edited_info.IdProfesor>0)
@@ -843,34 +904,9 @@ namespace Core.Web.Areas.Academico.Controllers
                 edited_info.AccionRemedial = info_det.AccionRemedial;
                 edited_info.IdProfesor = IdProfesor;
                 edited_info.IdUsuarioModificacion = SessionFixed.IdUsuario;
+                edited_info.RegistroValido = info_det.RegistroValido;
+                edited_info.RegistroconPromedioBajo = info_det.RegistroconPromedioBajo;
 
-                if (info_anio_lectivo != null)
-                {
-                    if (edited_info.PromedioParcial > 0 && edited_info.PromedioParcial < Convert.ToDecimal(info_anio_lectivo.PromedioMinimoParcial))
-                    {
-                        edited_info.RegistroconPromedioBajo = true;
-                    }
-
-                    if (edited_info.PromedioParcial > 0 && edited_info.PromedioParcial < Convert.ToDecimal(info_anio_lectivo.PromedioMinimoParcial))
-                    {
-                        if (string.IsNullOrEmpty(edited_info.MotivoCalificacion) || string.IsNullOrEmpty(edited_info.AccionRemedial))
-                        {
-                            edited_info.RegistroValido = false;
-                        }
-                    }
-
-                    if (info_conducta != null)
-                    {
-                        if (info_conducta.IngresaMotivo == true && string.IsNullOrEmpty(info_det.MotivoConducta))
-                        {
-                            edited_info.RegistroValido = false;
-                        }
-                        else if (info_conducta.IngresaMotivo==true)
-                        {
-                            edited_info.RegistroconPromedioBajo = true;
-                        }
-                    }
-                }
                 bus_parcial.ModicarDB(edited_info);
             }
             

@@ -22,7 +22,7 @@ namespace Core.Info.Academico
         public Nullable<decimal> Evaluacion { get; set; }
         public Nullable<decimal> Remedial1 { get; set; }
         public Nullable<decimal> Remedial2 { get; set; }
-        [Required(ErrorMessage = "El campo conducta es obligatorio")]
+        //[Required(ErrorMessage = "El campo conducta es obligatorio")]
         public Nullable<int> Conducta { get; set; }
         public string MotivoCalificacion { get; set; }
         public string MotivoConducta { get; set; }
