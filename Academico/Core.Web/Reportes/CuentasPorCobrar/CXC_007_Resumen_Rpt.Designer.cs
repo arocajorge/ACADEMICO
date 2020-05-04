@@ -34,6 +34,7 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.xrPivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
@@ -66,10 +67,9 @@
             this.p_IdCliente = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_MostrarSoloCarteraVencida = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_Idtipo_cliente = new DevExpress.XtraReports.Parameters.Parameter();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -109,7 +109,7 @@
             this.xrPivotGrid1.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 7.8F);
             this.xrPivotGrid1.Appearance.FieldValueGrandTotal.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.xrPivotGrid1.Appearance.FieldValueTotal.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
-            this.xrPivotGrid1.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrPivotGrid1.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.xrPivotGrid1.Appearance.Lines.Font = new System.Drawing.Font("Tahoma", 7.8F);
             this.xrPivotGrid1.Appearance.TotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F);
             this.xrPivotGrid1.DataSource = this.objectDataSource1;
@@ -131,6 +131,11 @@
             this.xrPivotGrid1.OptionsPrint.PrintRowHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintUnusedFilterFields = false;
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(1093F, 165F);
+            // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.CuentasPorCobrar.CXC_007_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // xrPivotGridField1
             // 
@@ -182,7 +187,7 @@
             // 
             this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField5.AreaIndex = 0;
-            this.pivotGridField5.FieldName = "Total";
+            this.pivotGridField5.FieldName = "Saldo";
             this.pivotGridField5.Name = "pivotGridField5";
             // 
             // pivotGridField6
@@ -446,11 +451,6 @@
             this.p_Idtipo_cliente.Name = "p_Idtipo_cliente";
             this.p_Idtipo_cliente.Visible = false;
             // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.CuentasPorCobrar.CXC_007_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
-            // 
             // CXC_007_Resumen_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -476,9 +476,9 @@
             this.p_Idtipo_cliente});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.CXC_007_Resumen_Rpt_BeforePrint);
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
