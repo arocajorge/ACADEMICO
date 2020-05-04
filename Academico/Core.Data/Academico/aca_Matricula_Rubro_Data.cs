@@ -85,7 +85,12 @@ namespace Core.Data.Academico
                         IdPlantilla = q.IdPlantilla,
                         IdCbteVta = q.IdCbteVta,
                         IdBodega = q.IdBodega,
-                        IdSucursal = q.IdSucursal
+                        IdSucursal = q.IdSucursal,
+                        IdSede = q.IdSede,
+                        IdJornada = q.IdJornada,
+                        IdNivel = q.IdNivel,
+                        IdCurso=q.IdCurso,
+                        IdParalelo = q.IdParalelo
                     }).ToList();
                 }
                 Lista.ForEach(v => { v.Periodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });
@@ -130,7 +135,12 @@ namespace Core.Data.Academico
                         IdMecanismo = Entity.IdMecanismo,
                         EnMatricula = Entity.EnMatricula,
                         IdAnio = Entity.IdAnio,
-                        IdPlantilla = Entity.IdPlantilla
+                        IdPlantilla = Entity.IdPlantilla,
+                        IdSede = Entity.IdSede,
+                        IdJornada = Entity.IdJornada,
+                        IdNivel = Entity.IdNivel,
+                        IdCurso = Entity.IdCurso,
+                        IdParalelo = Entity.IdParalelo
                     };
                 }
 

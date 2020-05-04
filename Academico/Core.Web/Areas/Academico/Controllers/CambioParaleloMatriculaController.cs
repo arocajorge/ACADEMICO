@@ -210,6 +210,10 @@ namespace Core.Web.Areas.Academico.Controllers
             model.lst_matricula_curso = bus_matricula.GetList_PorCurso(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
             Lista_Matricula_PorCurso.set_list(model.lst_matricula_curso, model.IdTransaccionSession);
 
+            model.lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
+            model.lst_MatriculaRubro = bus_matricula_rubro.GetList(model.IdEmpresa, model.IdMatricula);
+            ListaMatriculaRubro.set_list(model.lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
             cargar_combos();
             return View(model);
         }
@@ -234,7 +238,18 @@ namespace Core.Web.Areas.Academico.Controllers
                 TipoCambio = "CURSOPARALELO",
                 IdUsuarioCreacion = SessionFixed.IdUsuario
             };
+
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+            model.lst_MatriculaRubro = ListaMatriculaRubro.get_list(model.IdTransaccionSession);
+
+            foreach (var item in model.lst_MatriculaRubro)
+            {
+                item.IdSede = model.IdSede;
+                item.IdNivel = model.IdNivel;
+                item.IdJornada = model.IdJornada;
+                item.IdCurso = model.IdCurso;
+                item.IdParalelo = model.IdParalelo;
+            }
 
             if (!validar(model, ref mensaje))
             {

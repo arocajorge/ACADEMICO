@@ -711,6 +711,11 @@ namespace Core.Web.Areas.Academico.Controllers
                             IdPlantilla = item_det.IdPlantilla,
                             ValorProntoPago = item_det.ValorProntoPago,
                             FechaProntoPago = item_det.FechaProntoPago,
+                            IdSede = IdSede,
+                            IdNivel = IdNivel,
+                            IdJornada = IdJornada,
+                            IdCurso = IdCurso,
+                            IdParalelo = IdParalelo
                         };
 
                         info_matricula.lst_MatriculaRubro.Add(info_mat_rubro);

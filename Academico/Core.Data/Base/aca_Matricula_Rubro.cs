@@ -20,6 +20,11 @@ namespace Core.Data.Base
         public int IdRubro { get; set; }
         public int IdAnio { get; set; }
         public int IdPlantilla { get; set; }
+        public Nullable<int> IdSede { get; set; }
+        public Nullable<int> IdNivel { get; set; }
+        public Nullable<int> IdJornada { get; set; }
+        public Nullable<int> IdCurso { get; set; }
+        public Nullable<int> IdParalelo { get; set; }
         public decimal IdMecanismo { get; set; }
         public decimal IdProducto { get; set; }
         public bool EnMatricula { get; set; }
@@ -33,9 +38,10 @@ namespace Core.Data.Base
         public Nullable<decimal> IdCbteVta { get; set; }
         public Nullable<System.DateTime> FechaFacturacion { get; set; }
     
-        public virtual aca_Rubro aca_Rubro { get; set; }
-        public virtual aca_MecanismoDePago aca_MecanismoDePago { get; set; }
+        public virtual aca_AnioLectivo_Curso_Paralelo aca_AnioLectivo_Curso_Paralelo { get; set; }
         public virtual aca_Matricula aca_Matricula { get; set; }
+        public virtual aca_MecanismoDePago aca_MecanismoDePago { get; set; }
         public virtual aca_Plantilla aca_Plantilla { get; set; }
+        public virtual aca_Rubro aca_Rubro { get; set; }
     }
 }

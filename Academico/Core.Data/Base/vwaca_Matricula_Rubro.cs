@@ -35,5 +35,10 @@ namespace Core.Data.Base
         public bool EnMatricula { get; set; }
         public int IdAnio { get; set; }
         public int IdPlantilla { get; set; }
+        public Nullable<int> IdSede { get; set; }
+        public Nullable<int> IdNivel { get; set; }
+        public Nullable<int> IdJornada { get; set; }
+        public Nullable<int> IdCurso { get; set; }
+        public Nullable<int> IdParalelo { get; set; }
     }
 }

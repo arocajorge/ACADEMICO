@@ -337,7 +337,12 @@ namespace Core.Data.Academico
                                 FechaFacturacion = null,
                                 EnMatricula = item.EnMatricula,
                                 IdPlantilla = item.IdPlantilla,
-                                IdAnio = item.IdAnio
+                                IdAnio = item.IdAnio,
+                                IdSede = item.IdSede,
+                                IdNivel = item.IdNivel,
+                                IdJornada = item.IdJornada,
+                                IdCurso = item.IdCurso,
+                                IdParalelo = item.IdParalelo
                             };
                             Context.aca_Matricula_Rubro.Add(Entity_Det);
                         }
@@ -586,6 +591,11 @@ namespace Core.Data.Academico
                                 EnMatricula = item.EnMatricula,
                                 IdPlantilla = item.IdPlantilla,
                                 IdAnio = item.IdAnio,
+                                IdSede = item.IdSede,
+                                IdNivel = item.IdNivel,
+                                IdJornada = item.IdJornada,
+                                IdCurso = item.IdCurso,
+                                IdParalelo = item.IdParalelo,
                             };
                             Context.aca_Matricula_Rubro.Add(Entity_Det);
                         }
@@ -661,6 +671,23 @@ namespace Core.Data.Academico
                         Observacion = info.ObservacionCambio
                     };
                     Context.aca_MatriculaCambios.Add(Entity_Cambios);
+                    #endregion
+                    Context.SaveChanges();
+
+                    #region MatriculaRubro
+                    var lst_MatriculaRubro = Context.aca_Matricula_Rubro.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula && q.FechaFacturacion == null).ToList();
+                    foreach (var item in lst_MatriculaRubro)
+                    {
+                        aca_Matricula_Rubro EntityMatriculaRubro = Context.aca_Matricula_Rubro.FirstOrDefault(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula && q.IdPeriodo == item.IdPeriodo && q.IdAnio== item.IdAnio && q.IdRubro == item.IdRubro);
+                        EntityMatriculaRubro.IdSede = info.IdSede;
+                        EntityMatriculaRubro.IdNivel = info.IdNivel;
+                        EntityMatriculaRubro.IdJornada = info.IdJornada;
+                        EntityMatriculaRubro.IdCurso = info.IdCurso;
+                        EntityMatriculaRubro.IdParalelo = info.IdParalelo;
+
+                        Context.SaveChanges();
+                    }
+
                     #endregion
 
                     Context.SaveChanges();

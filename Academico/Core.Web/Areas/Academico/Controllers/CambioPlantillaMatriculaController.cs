@@ -425,7 +425,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdNivel = info_matricula.IdNivel,
                 IdJornada = info_matricula.IdJornada,
                 IdCurso = info_matricula.IdCurso,
-                IdParalelo = info_matricula.IdPlantilla,
+                IdParalelo = info_matricula.IdParalelo,
                 IdPlantilla = info_matricula.IdPlantilla,
                 TipoCambio = "PLANTILLA",
                 IdUsuarioCreacion = SessionFixed.IdUsuario
@@ -433,6 +433,15 @@ namespace Core.Web.Areas.Academico.Controllers
 
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             model.lst_MatriculaRubro = ListaMatriculaRubro.get_list(model.IdTransaccionSession);
+
+            foreach (var item in model.lst_MatriculaRubro)
+            {
+                item.IdSede = info_matricula.IdSede;
+                item.IdNivel = info_matricula.IdNivel;
+                item.IdJornada = info_matricula.IdJornada;
+                item.IdCurso = info_matricula.IdCurso;
+                item.IdParalelo = info_matricula.IdParalelo;
+            }
 
             if (!validar(model, ref mensaje))
             {

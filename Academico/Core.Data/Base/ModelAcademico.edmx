@@ -665,6 +665,11 @@
           <Property Name="IdRubro" Type="int" Nullable="false" />
           <Property Name="IdAnio" Type="int" Nullable="false" />
           <Property Name="IdPlantilla" Type="int" Nullable="false" />
+          <Property Name="IdSede" Type="int" />
+          <Property Name="IdNivel" Type="int" />
+          <Property Name="IdJornada" Type="int" />
+          <Property Name="IdCurso" Type="int" />
+          <Property Name="IdParalelo" Type="int" />
           <Property Name="IdMecanismo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="EnMatricula" Type="bit" Nullable="false" />
@@ -1937,6 +1942,11 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Matricula_Rubro' n
           <Property Name="EnMatricula" Type="bit" Nullable="false" />
           <Property Name="IdAnio" Type="int" Nullable="false" />
           <Property Name="IdPlantilla" Type="int" Nullable="false" />
+          <Property Name="IdSede" Type="int" />
+          <Property Name="IdNivel" Type="int" />
+          <Property Name="IdJornada" Type="int" />
+          <Property Name="IdCurso" Type="int" />
+          <Property Name="IdParalelo" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Matricula_Rubro_PorFacturar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3322,6 +3332,30 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_aca_Matricula_Rubro_aca_AnioLectivo_Curso_Paralelo">
+          <End Role="aca_AnioLectivo_Curso_Paralelo" Type="Self.aca_AnioLectivo_Curso_Paralelo" Multiplicity="0..1" />
+          <End Role="aca_Matricula_Rubro" Type="Self.aca_Matricula_Rubro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivo_Curso_Paralelo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdSede" />
+              <PropertyRef Name="IdNivel" />
+              <PropertyRef Name="IdJornada" />
+              <PropertyRef Name="IdCurso" />
+              <PropertyRef Name="IdParalelo" />
+            </Principal>
+            <Dependent Role="aca_Matricula_Rubro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdSede" />
+              <PropertyRef Name="IdNivel" />
+              <PropertyRef Name="IdJornada" />
+              <PropertyRef Name="IdCurso" />
+              <PropertyRef Name="IdParalelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_aca_Matricula_Rubro_aca_Matricula">
           <End Role="aca_Matricula" Type="Self.aca_Matricula" Multiplicity="1" />
           <End Role="aca_Matricula_Rubro" Type="Self.aca_Matricula_Rubro" Multiplicity="*" />
@@ -4345,7 +4379,12 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
     [vwaca_Matricula_Rubro].[IdMecanismo] AS [IdMecanismo], 
     [vwaca_Matricula_Rubro].[EnMatricula] AS [EnMatricula], 
     [vwaca_Matricula_Rubro].[IdAnio] AS [IdAnio], 
-    [vwaca_Matricula_Rubro].[IdPlantilla] AS [IdPlantilla]
+    [vwaca_Matricula_Rubro].[IdPlantilla] AS [IdPlantilla], 
+    [vwaca_Matricula_Rubro].[IdSede] AS [IdSede], 
+    [vwaca_Matricula_Rubro].[IdNivel] AS [IdNivel], 
+    [vwaca_Matricula_Rubro].[IdJornada] AS [IdJornada], 
+    [vwaca_Matricula_Rubro].[IdCurso] AS [IdCurso], 
+    [vwaca_Matricula_Rubro].[IdParalelo] AS [IdParalelo]
     FROM [dbo].[vwaca_Matricula_Rubro] AS [vwaca_Matricula_Rubro]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwaca_Matricula_Rubro_PorFacturar" EntityType="Self.vwaca_Matricula_Rubro_PorFacturar" store:Type="Views" store:Schema="dbo">
@@ -4909,6 +4948,10 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
           </AssociationSet>
+          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_AnioLectivo_Curso_Paralelo" Association="Self.FK_aca_Matricula_Rubro_aca_AnioLectivo_Curso_Paralelo">
+            <End Role="aca_AnioLectivo_Curso_Paralelo" EntitySet="aca_AnioLectivo_Curso_Paralelo" />
+            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
+          </AssociationSet>
           <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Matricula" Association="Self.FK_aca_Matricula_Rubro_aca_Matricula">
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
@@ -5238,12 +5281,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             <End Role="aca_AnioLectivo_Rubro" EntitySet="aca_AnioLectivo_Rubro" />
             <End Role="aca_AnioLectivo_Rubro_Periodo" EntitySet="aca_AnioLectivo_Rubro_Periodo" />
           </AssociationSet>
-          <EntitySet Name="aca_Matricula_Rubro" EntityType="ModelAcademico.aca_Matricula_Rubro" />
-          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Rubro" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Rubro">
-            <End Role="aca_Rubro" EntitySet="aca_Rubro" />
-            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
-          </AssociationSet>
-          <EntitySet Name="vwaca_Matricula_Rubro" EntityType="ModelAcademico.vwaca_Matricula_Rubro" />
           <EntitySet Name="aca_AnioLectivoCalificacionHistorico" EntityType="ModelAcademico.aca_AnioLectivoCalificacionHistorico" />
           <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno">
             <End Role="aca_Alumno" EntitySet="aca_Alumno" />
@@ -5396,10 +5433,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           </AssociationSet>
           <EntitySet Name="aca_MecanismoDePago" EntityType="ModelAcademico.aca_MecanismoDePago" />
           <EntitySet Name="vwaca_MecanismoDePago" EntityType="ModelAcademico.vwaca_MecanismoDePago" />
-          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_MecanismoDePago" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_MecanismoDePago">
-            <End Role="aca_MecanismoDePago" EntitySet="aca_MecanismoDePago" />
-            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
-          </AssociationSet>
           <EntitySet Name="aca_Matricula" EntityType="ModelAcademico.aca_Matricula" />
           <AssociationSet Name="FK_aca_Matricula_aca_alumno" Association="ModelAcademico.FK_aca_Matricula_aca_alumno">
             <End Role="aca_Alumno" EntitySet="aca_Alumno" />
@@ -5412,10 +5445,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <AssociationSet Name="FK_aca_Matricula_aca_MecanismoDePago" Association="ModelAcademico.FK_aca_Matricula_aca_MecanismoDePago">
             <End Role="aca_MecanismoDePago" EntitySet="aca_MecanismoDePago" />
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Matricula" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula">
-            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
-            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
           </AssociationSet>
           <EntitySet Name="aca_PlantillaTipo" EntityType="ModelAcademico.aca_PlantillaTipo" />
           <EntitySet Name="vwaca_Matricula" EntityType="ModelAcademico.vwaca_Matricula" />
@@ -5509,10 +5538,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
           </AssociationSet>
-          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Plantilla" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla">
-            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
-            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
-          </AssociationSet>
           <AssociationSet Name="FK_aca_Plantilla_aca_PlantillaTipo" Association="ModelAcademico.FK_aca_Plantilla_aca_PlantillaTipo">
             <End Role="aca_PlantillaTipo" EntitySet="aca_PlantillaTipo" />
             <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
@@ -5573,6 +5598,28 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <AssociationSet Name="FK_aca_MatriculaCambios_aca_Matricula" Association="ModelAcademico.FK_aca_MatriculaCambios_aca_Matricula">
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_MatriculaCambios" EntitySet="aca_MatriculaCambios" />
+          </AssociationSet>
+          <EntitySet Name="aca_Matricula_Rubro" EntityType="ModelAcademico.aca_Matricula_Rubro" />
+          <EntitySet Name="vwaca_Matricula_Rubro" EntityType="ModelAcademico.vwaca_Matricula_Rubro" />
+          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_AnioLectivo_Curso_Paralelo" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_AnioLectivo_Curso_Paralelo">
+            <End Role="aca_AnioLectivo_Curso_Paralelo" EntitySet="aca_AnioLectivo_Curso_Paralelo" />
+            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Matricula" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula">
+            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
+            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_MecanismoDePago" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_MecanismoDePago">
+            <End Role="aca_MecanismoDePago" EntitySet="aca_MecanismoDePago" />
+            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Plantilla" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla">
+            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
+            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Rubro" Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_Rubro">
+            <End Role="aca_Rubro" EntitySet="aca_Rubro" />
+            <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
@@ -6175,6 +6222,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <NavigationProperty Name="aca_Profesor" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Profesor" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_Profesor" />
           <NavigationProperty Name="aca_Profesor1" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Profesor1" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_Profesor" />
           <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_AnioLectivo" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_AnioLectivo" />
+          <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_AnioLectivo_Curso_Paralelo" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_Matricula_Rubro" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Curso_Paralelo_aca_Curso">
           <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="1" />
@@ -6826,92 +6874,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="aca_Matricula_Rubro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMatricula" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="IdRubro" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="IdRubro" Type="Int32" Nullable="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
-          <Property Name="IdMecanismo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="EnMatricula" Type="Boolean" Nullable="false" />
-          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Porcentaje" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ValorIVA" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdSucursal" Type="Int32" />
-          <Property Name="IdBodega" Type="Int32" />
-          <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="FechaFacturacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="aca_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Rubro" FromRole="aca_Matricula_Rubro" ToRole="aca_Rubro" />
-          <NavigationProperty Name="aca_MecanismoDePago" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_MecanismoDePago" FromRole="aca_Matricula_Rubro" ToRole="aca_MecanismoDePago" />
-          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" FromRole="aca_Matricula_Rubro" ToRole="aca_Matricula" />
-          <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla" FromRole="aca_Matricula_Rubro" ToRole="aca_Plantilla" />
-        </EntityType>
-        <Association Name="FK_aca_Matricula_Rubro_aca_Rubro">
-          <End Type="ModelAcademico.aca_Rubro" Role="aca_Rubro" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Rubro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro" />
-            </Principal>
-            <Dependent Role="aca_Matricula_Rubro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdRubro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="vwaca_Matricula_Rubro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMatricula" />
-            <PropertyRef Name="IdPeriodo" />
-            <PropertyRef Name="FechaDesde" />
-            <PropertyRef Name="IdRubro" />
-            <PropertyRef Name="NomRubro" />
-            <PropertyRef Name="IdProducto" />
-            <PropertyRef Name="Subtotal" />
-            <PropertyRef Name="IdCod_Impuesto_Iva" />
-            <PropertyRef Name="Porcentaje" />
-            <PropertyRef Name="ValorIVA" />
-            <PropertyRef Name="Total" />
-            <PropertyRef Name="pr_descripcion" />
-            <PropertyRef Name="IdMecanismo" />
-            <PropertyRef Name="EnMatricula" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="IdPlantilla" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
-          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdRubro" Type="Int32" Nullable="false" />
-          <Property Name="NomRubro" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Porcentaje" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ValorIVA" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="IdSucursal" Type="Int32" />
-          <Property Name="IdBodega" Type="Int32" />
-          <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="FechaFacturacion" Type="DateTime" Precision="3" />
-          <Property Name="IdMecanismo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="EnMatricula" Type="Boolean" Nullable="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="aca_AnioLectivoCalificacionHistorico">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7930,8 +7892,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_MecanismoDePago" FromRole="aca_MecanismoDePago" ToRole="aca_Matricula_Rubro" />
           <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_MecanismoDePago" FromRole="aca_MecanismoDePago" ToRole="aca_Matricula" />
+          <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_MecanismoDePago" FromRole="aca_MecanismoDePago" ToRole="aca_Matricula_Rubro" />
         </EntityType>
         <EntityType Name="vwaca_MecanismoDePago">
           <Key>
@@ -7948,20 +7910,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <Property Name="Estado" Type="Boolean" />
           <Property Name="No_Descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_aca_Matricula_Rubro_aca_MecanismoDePago">
-          <End Type="ModelAcademico.aca_MecanismoDePago" Role="aca_MecanismoDePago" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_MecanismoDePago">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMecanismo" />
-            </Principal>
-            <Dependent Role="aca_Matricula_Rubro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMecanismo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="aca_Matricula">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -7995,13 +7943,13 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_Matricula_aca_alumno" FromRole="aca_Matricula" ToRole="aca_Alumno" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_Matricula_aca_AnioLectivo_Curso_Paralelo" FromRole="aca_Matricula" ToRole="aca_AnioLectivo_Curso_Paralelo" />
           <NavigationProperty Name="aca_MecanismoDePago" Relationship="ModelAcademico.FK_aca_Matricula_aca_MecanismoDePago" FromRole="aca_Matricula" ToRole="aca_MecanismoDePago" />
-          <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_Matricula_Rubro" />
           <NavigationProperty Name="aca_MatriculaCalificacionParcial" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParcial_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacionParcial" />
           <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_Matricula_aca_Plantilla" FromRole="aca_Matricula" ToRole="aca_Plantilla" />
           <NavigationProperty Name="aca_MatriculaConducta" Relationship="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaConducta" />
           <NavigationProperty Name="aca_MatriculaCalificacion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacion_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacion" />
           <NavigationProperty Name="aca_AlumnoRetiro" Relationship="ModelAcademico.FK_aca_AlumnoRetiro_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_AlumnoRetiro" />
           <NavigationProperty Name="aca_MatriculaCambios" Relationship="ModelAcademico.FK_aca_MatriculaCambios_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCambios" />
+          <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_Matricula_Rubro" />
         </EntityType>
         <Association Name="FK_aca_Matricula_aca_alumno">
           <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
@@ -8052,20 +8000,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             <Dependent Role="aca_Matricula">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdMecanismo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_Matricula_Rubro_aca_Matricula">
-          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Matricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMatricula" />
-            </Principal>
-            <Dependent Role="aca_Matricula_Rubro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMatricula" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8701,9 +8635,9 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
           <Property Name="AplicaParaTodo" Type="Boolean" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Plantilla" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_AnioLectivo_Curso_Plantilla" />
           <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Matricula" />
-          <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Matricula_Rubro" />
           <NavigationProperty Name="aca_PlantillaTipo" Relationship="ModelAcademico.FK_aca_Plantilla_aca_PlantillaTipo" FromRole="aca_Plantilla" ToRole="aca_PlantillaTipo" />
           <NavigationProperty Name="aca_Plantilla_Rubro" Relationship="ModelAcademico.FK_aca_Plantilla_Rubro_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Plantilla_Rubro" />
+          <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla" FromRole="aca_Plantilla" ToRole="aca_Matricula_Rubro" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Curso_Plantilla_aca_Plantilla">
           <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
@@ -8731,22 +8665,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
               <PropertyRef Name="IdPlantilla" />
             </Principal>
             <Dependent Role="aca_Matricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_Matricula_Rubro_aca_Plantilla">
-          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Plantilla">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Principal>
-            <Dependent Role="aca_Matricula_Rubro">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdAnio" />
               <PropertyRef Name="IdPlantilla" />
@@ -9538,6 +9456,171 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="aca_Matricula_Rubro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="IdRubro" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="IdRubro" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
+          <Property Name="IdSede" Type="Int32" />
+          <Property Name="IdNivel" Type="Int32" />
+          <Property Name="IdJornada" Type="Int32" />
+          <Property Name="IdCurso" Type="Int32" />
+          <Property Name="IdParalelo" Type="Int32" />
+          <Property Name="IdMecanismo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="EnMatricula" Type="Boolean" Nullable="false" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Porcentaje" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ValorIVA" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <Property Name="IdBodega" Type="Int32" />
+          <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FechaFacturacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_AnioLectivo_Curso_Paralelo" FromRole="aca_Matricula_Rubro" ToRole="aca_AnioLectivo_Curso_Paralelo" />
+          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" FromRole="aca_Matricula_Rubro" ToRole="aca_Matricula" />
+          <NavigationProperty Name="aca_MecanismoDePago" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_MecanismoDePago" FromRole="aca_Matricula_Rubro" ToRole="aca_MecanismoDePago" />
+          <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Plantilla" FromRole="aca_Matricula_Rubro" ToRole="aca_Plantilla" />
+          <NavigationProperty Name="aca_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Rubro" FromRole="aca_Matricula_Rubro" ToRole="aca_Rubro" />
+        </EntityType>
+        <EntityType Name="vwaca_Matricula_Rubro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="IdPeriodo" />
+            <PropertyRef Name="FechaDesde" />
+            <PropertyRef Name="IdRubro" />
+            <PropertyRef Name="NomRubro" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="Subtotal" />
+            <PropertyRef Name="IdCod_Impuesto_Iva" />
+            <PropertyRef Name="Porcentaje" />
+            <PropertyRef Name="ValorIVA" />
+            <PropertyRef Name="Total" />
+            <PropertyRef Name="pr_descripcion" />
+            <PropertyRef Name="IdMecanismo" />
+            <PropertyRef Name="EnMatricula" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdPlantilla" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPeriodo" Type="Int32" Nullable="false" />
+          <Property Name="FechaDesde" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdRubro" Type="Int32" Nullable="false" />
+          <Property Name="NomRubro" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="IdProducto" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdCod_Impuesto_Iva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Porcentaje" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ValorIVA" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="pr_descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdSucursal" Type="Int32" />
+          <Property Name="IdBodega" Type="Int32" />
+          <Property Name="IdCbteVta" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FechaFacturacion" Type="DateTime" Precision="3" />
+          <Property Name="IdMecanismo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="EnMatricula" Type="Boolean" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
+          <Property Name="IdSede" Type="Int32" />
+          <Property Name="IdNivel" Type="Int32" />
+          <Property Name="IdJornada" Type="Int32" />
+          <Property Name="IdCurso" Type="Int32" />
+          <Property Name="IdParalelo" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_aca_Matricula_Rubro_aca_AnioLectivo_Curso_Paralelo">
+          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Paralelo" Role="aca_AnioLectivo_Curso_Paralelo" Multiplicity="0..1" />
+          <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivo_Curso_Paralelo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdSede" />
+              <PropertyRef Name="IdNivel" />
+              <PropertyRef Name="IdJornada" />
+              <PropertyRef Name="IdCurso" />
+              <PropertyRef Name="IdParalelo" />
+            </Principal>
+            <Dependent Role="aca_Matricula_Rubro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdSede" />
+              <PropertyRef Name="IdNivel" />
+              <PropertyRef Name="IdJornada" />
+              <PropertyRef Name="IdCurso" />
+              <PropertyRef Name="IdParalelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Matricula_Rubro_aca_Matricula">
+          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Matricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Principal>
+            <Dependent Role="aca_Matricula_Rubro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Matricula_Rubro_aca_MecanismoDePago">
+          <End Type="ModelAcademico.aca_MecanismoDePago" Role="aca_MecanismoDePago" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_MecanismoDePago">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMecanismo" />
+            </Principal>
+            <Dependent Role="aca_Matricula_Rubro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMecanismo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Matricula_Rubro_aca_Plantilla">
+          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Plantilla">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Principal>
+            <Dependent Role="aca_Matricula_Rubro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Matricula_Rubro_aca_Rubro">
+          <End Type="ModelAcademico.aca_Rubro" Role="aca_Rubro" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Matricula_Rubro" Role="aca_Matricula_Rubro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Rubro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Principal>
+            <Dependent Role="aca_Matricula_Rubro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10127,57 +10210,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
                 <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="aca_Matricula_Rubro">
-            <EntityTypeMapping TypeName="ModelAcademico.aca_Matricula_Rubro">
-              <MappingFragment StoreEntitySet="aca_Matricula_Rubro">
-                <ScalarProperty Name="FechaFacturacion" ColumnName="FechaFacturacion" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="ValorIVA" ColumnName="ValorIVA" />
-                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
-                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="EnMatricula" ColumnName="EnMatricula" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="IdMecanismo" ColumnName="IdMecanismo" />
-                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwaca_Matricula_Rubro">
-            <EntityTypeMapping TypeName="ModelAcademico.vwaca_Matricula_Rubro">
-              <MappingFragment StoreEntitySet="vwaca_Matricula_Rubro">
-                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="EnMatricula" ColumnName="EnMatricula" />
-                <ScalarProperty Name="IdMecanismo" ColumnName="IdMecanismo" />
-                <ScalarProperty Name="FechaFacturacion" ColumnName="FechaFacturacion" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="ValorIVA" ColumnName="ValorIVA" />
-                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
-                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
-                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
-                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
-                <ScalarProperty Name="NomRubro" ColumnName="NomRubro" />
-                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
-                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -11486,6 +11518,67 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Profesor' no tiene
                 <ScalarProperty Name="IdSede" ColumnName="IdSede" />
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_Matricula_Rubro">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_Matricula_Rubro">
+              <MappingFragment StoreEntitySet="aca_Matricula_Rubro">
+                <ScalarProperty Name="FechaFacturacion" ColumnName="FechaFacturacion" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ValorIVA" ColumnName="ValorIVA" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="EnMatricula" ColumnName="EnMatricula" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdMecanismo" ColumnName="IdMecanismo" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwaca_Matricula_Rubro">
+            <EntityTypeMapping TypeName="ModelAcademico.vwaca_Matricula_Rubro">
+              <MappingFragment StoreEntitySet="vwaca_Matricula_Rubro">
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="EnMatricula" ColumnName="EnMatricula" />
+                <ScalarProperty Name="IdMecanismo" ColumnName="IdMecanismo" />
+                <ScalarProperty Name="FechaFacturacion" ColumnName="FechaFacturacion" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="pr_descripcion" ColumnName="pr_descripcion" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ValorIVA" ColumnName="ValorIVA" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+                <ScalarProperty Name="IdCod_Impuesto_Iva" ColumnName="IdCod_Impuesto_Iva" />
+                <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="NomRubro" ColumnName="NomRubro" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>

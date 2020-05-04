@@ -24,6 +24,11 @@ namespace Core.Info.Academico
         public Nullable<int> IdBodega { get; set; }
         public Nullable<decimal> IdCbteVta { get; set; }
         public Nullable<System.DateTime> FechaFacturacion { get; set; }
+        public Nullable<int> IdSede { get; set; }
+        public Nullable<int> IdNivel { get; set; }
+        public Nullable<int> IdJornada { get; set; }
+        public Nullable<int> IdCurso { get; set; }
+        public Nullable<int> IdParalelo { get; set; }
 
         #region Campos que no existen en la tabla
         public bool seleccionado { get; set; }
