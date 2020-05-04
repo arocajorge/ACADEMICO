@@ -427,6 +427,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdCurso = info_matricula.IdCurso,
                 IdParalelo = info_matricula.IdPlantilla,
                 IdPlantilla = info_matricula.IdPlantilla,
+                TipoCambio = "PLANTILLA",
                 IdUsuarioCreacion = SessionFixed.IdUsuario
             };
 

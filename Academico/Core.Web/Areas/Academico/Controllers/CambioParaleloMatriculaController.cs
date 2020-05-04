@@ -231,6 +231,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdCurso = info_matricula.IdCurso,
                 IdParalelo = info_matricula.IdParalelo,
                 IdPlantilla = info_matricula.IdPlantilla,
+                TipoCambio = "CURSOPARALELO",
                 IdUsuarioCreacion = SessionFixed.IdUsuario
             };
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;

@@ -78,8 +78,10 @@ namespace Core.Data.Academico
                              pe_cedulaRuc = item.pe_cedulaRuc,
                              IdAlumno = item.IdAlumno,
                              Codigo = item.Codigo,
-                             pe_nombreCompleto = item.pe_nombreCompleto
-                         };
+                             pe_nombreCompleto = item.pe_nombreCompleto,
+                             EsRetirado = item.EsRetirado??false,
+                             EsRetiradoString = item.EsRetiradoString
+                        };
                         Lista.Add(info);
                     }
                 }
@@ -602,6 +604,7 @@ namespace Core.Data.Academico
                         IdCurso = info.info_MatriculaCambios.IdCurso,
                         IdParalelo = info.info_MatriculaCambios.IdParalelo,
                         IdPlantilla = info.info_MatriculaCambios.IdPlantilla,
+                        TipoCambio = info.info_MatriculaCambios.TipoCambio,
                         IdUsuarioCreacion = info.info_MatriculaCambios.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now,
                         Observacion = info.ObservacionCambio
@@ -652,6 +655,7 @@ namespace Core.Data.Academico
                         IdCurso = info.info_MatriculaCambios.IdCurso,
                         IdParalelo = info.info_MatriculaCambios.IdParalelo,
                         IdPlantilla = info.info_MatriculaCambios.IdPlantilla,
+                        TipoCambio = info.info_MatriculaCambios.TipoCambio,
                         IdUsuarioCreacion = info.info_MatriculaCambios.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now,
                         Observacion = info.ObservacionCambio

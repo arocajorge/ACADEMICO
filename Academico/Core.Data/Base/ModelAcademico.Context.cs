@@ -21,7 +21,7 @@ namespace Core.Data.Base
             : base("name=EntitiesAcademico")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -87,10 +87,8 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_MatriculaCondicional_Det> vwaca_MatriculaCondicional_Det { get; set; }
         public virtual DbSet<aca_MecanismoDePago> aca_MecanismoDePago { get; set; }
         public virtual DbSet<vwaca_MecanismoDePago> vwaca_MecanismoDePago { get; set; }
-        public virtual DbSet<aca_MatriculaCambios> aca_MatriculaCambios { get; set; }
         public virtual DbSet<aca_Matricula> aca_Matricula { get; set; }
         public virtual DbSet<aca_PlantillaTipo> aca_PlantillaTipo { get; set; }
-        public virtual DbSet<vwaca_Matricula_AlumnosPorParalelo> vwaca_Matricula_AlumnosPorParalelo { get; set; }
         public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
         public virtual DbSet<aca_MatriculaCalificacionParcial> aca_MatriculaCalificacionParcial { get; set; }
         public virtual DbSet<aca_Profesor> aca_Profesor { get; set; }
@@ -105,8 +103,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_Matricula_Rubro_PorFacturar> vwaca_Matricula_Rubro_PorFacturar { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Curso_Paralelo> vwaca_AnioLectivo_Curso_Paralelo { get; set; }
         public virtual DbSet<vwaca_Plantilla_Rubro_Matricula> vwaca_Plantilla_Rubro_Matricula { get; set; }
-        public virtual DbSet<aca_AlumnoRetiro> aca_AlumnoRetiro { get; set; }
-        public virtual DbSet<vwaca_AlumnoRetiro> vwaca_AlumnoRetiro { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Paralelo_Conducta> vwaca_AnioLectivo_Paralelo_Conducta { get; set; }
         public virtual DbSet<aca_MatriculaConducta> aca_MatriculaConducta { get; set; }
         public virtual DbSet<vwaca_MatriculaConducta> vwaca_MatriculaConducta { get; set; }
@@ -117,6 +113,10 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_MatriculaCalificacionParcial> vwaca_MatriculaCalificacionParcial { get; set; }
         public virtual DbSet<aca_AnioLectivoEquivalenciaPromedio> aca_AnioLectivoEquivalenciaPromedio { get; set; }
         public virtual DbSet<vwaca_AnioLectivoEquivalenciaPromedio> vwaca_AnioLectivoEquivalenciaPromedio { get; set; }
+        public virtual DbSet<aca_AlumnoRetiro> aca_AlumnoRetiro { get; set; }
+        public virtual DbSet<vwaca_AlumnoRetiro> vwaca_AlumnoRetiro { get; set; }
+        public virtual DbSet<vwaca_Matricula_AlumnosPorParalelo> vwaca_Matricula_AlumnosPorParalelo { get; set; }
+        public virtual DbSet<aca_MatriculaCambios> aca_MatriculaCambios { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

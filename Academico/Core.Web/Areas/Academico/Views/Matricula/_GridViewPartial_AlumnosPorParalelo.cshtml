@@ -35,7 +35,14 @@
             if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
                 e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
         };
-        
+        //Evento para pintar de rojo las filas anuladas
+        settings.HtmlRowPrepared = (s, e) =>
+        {
+            if (Convert.ToBoolean(e.GetValue("EsRetirado")) == true)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
+        };
         settings.Columns.Add("IdMatricula", "ID").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
@@ -45,8 +52,9 @@
             column.Width = Unit.Percentage(10);
         });
         settings.Columns.Add("pe_cedulaRuc", "Identificación").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Estudiante").Width = Unit.Percentage(60);
-        
+        settings.Columns.Add("pe_nombreCompleto", "Estudiante").Width = Unit.Percentage(50);
+        settings.Columns.Add("EsRetiradoString", "Retirado").Width = Unit.Percentage(10);
+
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

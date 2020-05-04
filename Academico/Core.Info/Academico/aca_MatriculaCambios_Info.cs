@@ -19,6 +19,7 @@ namespace Core.Info.Academico
         public int IdCurso { get; set; }
         public int IdParalelo { get; set; }
         public int IdPlantilla { get; set; }
+        public string TipoCambio { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         [Required(ErrorMessage = "El campo observación es obligatorio")]

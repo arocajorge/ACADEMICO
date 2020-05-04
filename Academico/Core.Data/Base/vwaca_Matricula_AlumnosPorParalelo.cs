@@ -27,5 +27,7 @@ namespace Core.Data.Base
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
         public System.DateTime Fecha { get; set; }
+        public Nullable<bool> EsRetirado { get; set; }
+        public string EsRetiradoString { get; set; }
     }
 }

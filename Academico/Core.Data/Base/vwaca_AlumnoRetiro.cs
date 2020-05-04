@@ -32,5 +32,6 @@ namespace Core.Data.Base
         public int IdAnio { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string Descripcion { get; set; }
+        public bool Estado { get; set; }
     }
 }

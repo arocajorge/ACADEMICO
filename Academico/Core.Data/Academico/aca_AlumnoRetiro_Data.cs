@@ -42,6 +42,7 @@ namespace Core.Data.Academico
                             NomJornada = q.NomJornada,
                             NomCurso = q.NomCurso,
                             NomParalelo = q.NomParalelo,
+                            Estado = q.Estado,
                             IdUsuarioAnulacion = q.IdUsuarioAnulacion
                         });
                     });
@@ -76,7 +77,8 @@ namespace Core.Data.Academico
                         IdAlumno = Entity.IdAlumno,
                         Fecha = Entity.Fecha,
                         Observacion = Entity.Observacion,
-                        IdCatalogoESTALU = Entity.IdCatalogoESTALU
+                        IdCatalogoESTALU = Entity.IdCatalogoESTALU,
+                        Estado = Entity.Estado
                     };
                 }
                 return info;
@@ -130,7 +132,8 @@ namespace Core.Data.Academico
                         IdAlumno = Entity.IdAlumno,
                         Fecha = Entity.Fecha,
                         Observacion = Entity.Observacion,
-                        IdCatalogoESTALU = Entity.IdCatalogoESTALU
+                        IdCatalogoESTALU = Entity.IdCatalogoESTALU,
+                        Estado = Entity.Estado
                     };
                 }
 
@@ -158,7 +161,8 @@ namespace Core.Data.Academico
                         Fecha = info.Fecha,
                         Observacion = info.Observacion,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
-                        FechaCreacion = info.FechaCreacion = DateTime.Now
+                        FechaCreacion = info.FechaCreacion = DateTime.Now,
+                        Estado = true
                     };
                     Context.aca_AlumnoRetiro.Add(Entity);
 
@@ -188,7 +192,7 @@ namespace Core.Data.Academico
 
                     aca_Alumno Entity_Alumno = Context.aca_Alumno.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno);
                     Entity_Alumno.IdCatalogoESTALU = info.IdCatalogoESTALU;
-
+                    Entity_Alumno.Estado = false;
                     Entity.MotivoAnulacion = info.MotivoAnulacion;
                     Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                     Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;
