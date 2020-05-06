@@ -84,6 +84,17 @@
                             @Html.ValidationMessageFor(q => q.mostrar_observacion_completa, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdCliente"></label>
+                            @Html.DevExpress().CheckBoxFor(q => q.mostrarAnulados, settings =>
+                            {
+                                settings.Name = "mostrarAnulados";
+                                settings.Text = "Mostrar alumnos retirados";
+                            }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.mostrarAnulados, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.box-body -->

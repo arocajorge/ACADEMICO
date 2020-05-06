@@ -60,6 +60,11 @@
             this.p_IdSede = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAnio = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.p_MostarAlumnosRetirados = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdNivel = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdJornada = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdCurso = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdParalelo = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
@@ -378,6 +383,31 @@
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_008_Resumen_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
+            // p_MostarAlumnosRetirados
+            // 
+            this.p_MostarAlumnosRetirados.Name = "p_MostarAlumnosRetirados";
+            this.p_MostarAlumnosRetirados.Visible = false;
+            // 
+            // p_IdNivel
+            // 
+            this.p_IdNivel.Name = "p_IdNivel";
+            this.p_IdNivel.Visible = false;
+            // 
+            // p_IdJornada
+            // 
+            this.p_IdJornada.Name = "p_IdJornada";
+            this.p_IdJornada.Visible = false;
+            // 
+            // p_IdCurso
+            // 
+            this.p_IdCurso.Name = "p_IdCurso";
+            this.p_IdCurso.Visible = false;
+            // 
+            // p_IdParalelo
+            // 
+            this.p_IdParalelo.Name = "p_IdParalelo";
+            this.p_IdParalelo.Visible = false;
+            // 
             // ACA_008_Resumen_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -398,7 +428,12 @@
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
             this.p_IdSede,
-            this.p_IdAnio});
+            this.p_IdAnio,
+            this.p_MostarAlumnosRetirados,
+            this.p_IdNivel,
+            this.p_IdJornada,
+            this.p_IdCurso,
+            this.p_IdParalelo});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_008_Resumen_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
@@ -441,5 +476,10 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
         public DevExpress.XtraReports.Parameters.Parameter p_IdSede;
         public DevExpress.XtraReports.Parameters.Parameter p_IdAnio;
+        public DevExpress.XtraReports.Parameters.Parameter p_MostarAlumnosRetirados;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdNivel;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdJornada;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdCurso;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdParalelo;
     }
 }

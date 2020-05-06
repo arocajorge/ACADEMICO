@@ -441,27 +441,49 @@ namespace Core.Web.Areas.Academico.Controllers
                 var lst_conducta = bus_conducta.GetList_IngresaMotivo(IdEmpresa, info_matricula.IdAnio);
                 aca_MatriculaCalificacionParcial_Info registro_editar = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(m => m.IdEmpresa == IdEmpresa && m.IdMatricula == info_det.IdMatricula).FirstOrDefault();
                 info_det.RegistroValido = true;
+                info_det.RegistroconPromedioBajo = false;
+
+                ViewBag.MostrarError = "";
                 var RegistroValidoConducta = true;
                 var RegistroValidoCalificacion = true;
-                info_det.RegistroconPromedioBajo = false;
                 var info_parcial = bus_parcial.GetInfo(IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, registro_editar.IdCatalogoParcial);
-                ViewBag.MostrarError = "";
                 var actualizar = true;
+            
+                if ((info_parcial.Orden - 1) > 0)
+                {
+                    var OrdenAnterior = info_parcial.Orden - 1;
+                    var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(OrdenAnterior));
+                    var info_cal_anteriores = bus_calificacion_parcial.GetInfo(info_matricula.IdEmpresa, info_matricula.IdMatricula, info_parcial_anterior.IdCatalogoParcial, registro_editar.IdMateria, Convert.ToDecimal(registro_editar.IdProfesor));
 
-                if ((info_parcial.Orden - 1) ==0 )
-                {
-                    actualizar = true;
-                }
-                else
-                {
-                    actualizar = false;
-                    ViewBag.MostrarError = "El estudiante tiene calificaciones pendientes de ingresar en parciales anteriores.";
+                    if (Convert.ToDecimal(info_cal_anteriores.Calificacion1)== 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion2) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion3) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion4) ==  0  || Convert.ToDecimal(info_cal_anteriores.Evaluacion) == 0)
+                    {
+                        ViewBag.MostrarError = "El estudiante tiene calificaciones pendientes de ingresar en el parcial anterior.";
+                        actualizar = false;
+                    }
                 }
 
                 if (actualizar==true)
                 {
                     if (registro_editar.IdProfesor>0)
                     {
+                        if (info_conducta != null)
+                        {
+                            if (info_conducta.IngresaMotivo == true && string.IsNullOrEmpty(info_det.MotivoConducta))
+                            {
+                                RegistroValidoConducta = false;
+                                ViewBag.MostrarError = "Debe de ingresar el motivo por el cual el estudiante tiene baja conducta.";
+                            }
+                            else if (info_conducta.IngresaMotivo == true)
+                            {
+                                info_det.RegistroconPromedioBajo = true;
+                            }
+                        }
+                        else
+                        {
+                            RegistroValidoConducta = false;
+                            ViewBag.MostrarError = "Debe de ingresar la conducta del estudiante.";
+                        }
+
                         if (info_det.Calificacion1 >= 0 && info_det.Calificacion2 >= 0 && info_det.Calificacion3 >= 0 && info_det.Calificacion4 >= 0 && info_det.Evaluacion >= 0)
                         {
                             if (info_det.PromedioParcial > 0 && info_det.PromedioParcial < Convert.ToDecimal(info_anio_lectivo.PromedioMinimoParcial))
@@ -483,24 +505,6 @@ namespace Core.Web.Areas.Academico.Controllers
                         {
                             RegistroValidoCalificacion = false;
                             ViewBag.MostrarError = "Debe de ingresar las calificaciones solicitadas.";
-                        }
-
-                        if (info_conducta != null)
-                        {
-                            if (info_conducta.IngresaMotivo == true && string.IsNullOrEmpty(info_det.MotivoConducta))
-                            {
-                                RegistroValidoConducta = false;
-                                ViewBag.MostrarError = "Debe de ingresar el motivo por el cual el estudiante tiene baja conducta.";
-                            }
-                            else if (info_conducta.IngresaMotivo == true)
-                            {
-                                info_det.RegistroconPromedioBajo = true;
-                            }
-                        }
-                        else
-                        {
-                            RegistroValidoConducta = false;
-                            ViewBag.MostrarError = "Debe de ingresar la conducta del estudiante.";
                         }
                     }
                     else
@@ -779,40 +783,54 @@ namespace Core.Web.Areas.Academico.Controllers
                 var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
                 var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
                 var Lista_Calificaciones = Lista_CalificacionParcial.get_list(model.IdTransaccionSession);
+                var info_parcial = bus_parcial.GetInfo(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoParcial);
+                
                 bool guardar = true;
                 ViewBag.mensaje = null;
                 ViewBag.MensajeSuccess = null;
 
-                foreach (var item in Lista_Calificaciones)
-                {
-                    item.IdAnio = model.IdAnio;
-                    item.IdSede = model.IdSede;
-                    item.IdNivel = model.IdNivel;
-                    item.IdJornada = model.IdJornada;
-                    item.IdCurso = model.IdCurso;
-                    item.IdParalelo = model.IdParalelo;
-                    item.IdMateria = model.IdMateria;
-                    item.IdCatalogoParcial = model.IdCatalogoParcial;
-                    item.IdProfesor = IdProfesor;               
-                }
+                Lista_Calificaciones.ForEach(q => {
+                    q.IdAnio = model.IdAnio; q.IdSede = model.IdSede; q.IdNivel = model.IdNivel; q.IdJornada = model.IdJornada; q.IdCurso = model.IdCurso;
+                    q.IdParalelo = model.IdParalelo; q.IdMateria = model.IdMateria; q.IdCatalogoParcial = model.IdCatalogoParcial; q.IdProfesor = IdProfesor;
+                });
 
-                foreach (var item in Lista_Calificaciones)
+                var info_anio_lectivo = bus_anio.GetInfo(IdEmpresa, model.IdAnio);
+                if (info_anio_lectivo.PromedioMinimoParcial!=null)
                 {
-                    if (item.IdProfesor==0 || item.RegistroValido==false)
+                    foreach (var item in Lista_Calificaciones)
                     {
+                        if ((info_parcial.Orden - 1) != 0)
+                        {
+                            var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(item.IdEmpresa, item.IdSede, item.IdAnio, Convert.ToInt32(info_parcial.Orden));
+                            var info_cal_anteriores = bus_calificacion_parcial.GetInfo(item.IdEmpresa, item.IdMatricula, info_parcial_anterior.IdCatalogoParcial, item.IdMateria, Convert.ToDecimal(item.IdProfesor));
+
+                            if (Convert.ToDecimal(info_cal_anteriores.Calificacion1) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion2) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion3) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion4) == 0 || Convert.ToDecimal(info_cal_anteriores.Evaluacion) == 0)
+                            {
+                                ViewBag.mensaje = "El estudiante con IdMatricula "+item.IdMatricula+" tiene calificaciones pendientes de ingresar en el parcial anterior.";
+                                guardar = false;
+                                break;
+                            }
+                        }
+
                         if (item.IdProfesor == 0)
                         {
                             ViewBag.mensaje = "El usuario no tiene asignado código de profesor. ";
+                            guardar = false;
+                            break;
                         }
 
                         if (item.RegistroValido == false)
                         {
                             ViewBag.mensaje += "Existen registros con promedio de calificación o conducta por debajo del mínimo aceptado, debe ingresar motivo y acción remedial de la calificación.";
+                            guardar = false;
+                            break;
                         }
-                        
-                        guardar = false;
-                        break;
                     }
+                }
+                else
+                {
+                    guardar = false;
+                    ViewBag.mensaje = "No se ha establecido el promedio mínimo aceptado para este año lectivo";
                 }
 
                 if (guardar == true)
@@ -941,7 +959,13 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
             aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
             aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
+            aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
+            var RegistroValidoConducta = true;
+            var RegistroValidoCalificacion = true;
+            var RegistroconPromedioBajo = false;
+            var RegistroconConductaBaja = false;
             var mensaje = string.Empty;
+            var actualizar = true;
 
             #region CalcularPromedio
             decimal resultado = 0;
@@ -973,37 +997,73 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info.Conducta));
             var lst_conducta = bus_conducta.GetList_IngresaMotivo(IdEmpresa, info_matricula.IdAnio);
 
-            //if (info.Calificacion1 > 0 && info.Calificacion2 > 0 && info.Calificacion3 > 0 && info.Calificacion4 > 0 && info.Evaluacion > 0)
-            //{
-                if (info_anio_lectivo != null)
+            if (info_anio_lectivo.PromedioMinimoParcial != null)
+            {
+                if (info_conducta != null)
                 {
-                    if (resultado >0 && resultado < Convert.ToDecimal(info_anio_lectivo.PromedioMinimoParcial))
+                    if (info_conducta.IngresaMotivo == true && string.IsNullOrEmpty(info.MotivoConducta))
                     {
-                        if (string.IsNullOrEmpty(info.MotivoCalificacion) || string.IsNullOrEmpty(info.AccionRemedial))
-                        {
-                            //ViewBag.mensaje = "Promedio por debajo del mínimo aceptado, debe ingresar motivo y accion remedial de la calificación.";
-                            info.RegistroValido = false;
-                        }
+                        RegistroValidoConducta = false;
                     }
-
-                    if (info_conducta != null)
+                    else if (info_conducta.IngresaMotivo == true)
                     {
-                        if (info_conducta.IngresaMotivo == true && string.IsNullOrEmpty(info.MotivoConducta))
-                        {
-                            //ViewBag.mensaje += " Debe de ingresar el motivo por el cual el estudiante tiene esa conducta.";
-                            info.RegistroValido = false;
-                        }
-                        else if (info_conducta.IngresaMotivo==true)
-                        {
-                        info.RegistroconPromedioBajo = true;
-                        }
+                        RegistroconConductaBaja = true;
                     }
                 }
-            //}
-            #endregion
+                else
+                {
+                    RegistroValidoConducta = false;
+                    RegistroconConductaBaja = true;
+                }
+
+                if (info.Calificacion1 >= 0 && info.Calificacion2 >= 0 && info.Calificacion3 >= 0 && info.Calificacion4 >= 0 && info.Evaluacion >= 0)
+                {
+                    if (info.PromedioParcial > 0 && info.PromedioParcial < Convert.ToDecimal(info_anio_lectivo.PromedioMinimoParcial))
+                    {
+                        RegistroconPromedioBajo = true;
+
+                        if (string.IsNullOrEmpty(info.MotivoCalificacion) || string.IsNullOrEmpty(info.AccionRemedial))
+                        {
+                            RegistroValidoCalificacion = false;
+                        }
+                    }
+                    else
+                    {
+                        RegistroconPromedioBajo = false;
+                    }
+                }
+                else
+                {
+                    RegistroValidoCalificacion = false;
+                }
+
+                if (RegistroValidoCalificacion == true && RegistroValidoConducta == true)
+                {
+                    info.RegistroValido = true;
+                }
+                else
+                {
+                    info.RegistroValido = false;
+                }
+
+                if (RegistroconConductaBaja == true || RegistroconPromedioBajo == true)
+                {
+                    info.RegistroconPromedioBajo = true;
+                }
+                else
+                {
+                    info.RegistroconPromedioBajo = false;
+                }
+            }
+            else
+            {
+                info.RegistroValido = false;
+                info.RegistroconPromedioBajo = true;
+            }
 
             return info;
         }
+        #endregion
 
         public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
         {
@@ -1069,7 +1129,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             FechaModificacion = DateTime.Now,
                             RegistroValido=true,
                             RegistroconPromedioBajo = false
-                        };
+                    };
 
                         var info_valida = validar_calificaciones(info);
                         Lista_Calificaciones.Add(info_valida);

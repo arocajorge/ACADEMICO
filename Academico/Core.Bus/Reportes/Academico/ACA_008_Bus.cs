@@ -12,9 +12,9 @@ namespace Core.Bus.Reportes.Academico
     {
         ACA_008_Data odata = new ACA_008_Data();
 
-        public List<ACA_008_Info> GetList(int IdEmpresa,int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, bool MostarPlantilla)
+        public List<ACA_008_Info> GetList(int IdEmpresa,int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, bool MostarPlantilla, bool MostrarAlumnosRetirados)
         {
-            return odata.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, MostarPlantilla);
+            return odata.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, MostarPlantilla, MostrarAlumnosRetirados);
         }
     }
 }

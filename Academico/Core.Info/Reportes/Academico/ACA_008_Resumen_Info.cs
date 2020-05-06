@@ -4,6 +4,7 @@ namespace Core.Info.Reportes.Academico
 {
     public class ACA_008_Resumen_Info
     {
+        public Nullable<long> Num { get; set; }
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
         public Nullable<int> OrdenNivel { get; set; }
@@ -32,5 +33,7 @@ namespace Core.Info.Reportes.Academico
         public string CodigoAlumno { get; set; }
         public Nullable<int> IdTipoPlantilla { get; set; }
         public string NomPlantillaTipo { get; set; }
+        public Nullable<decimal> IdRetiro { get; set; }
+        public string EstaRetirado { get; set; }
     }
 }

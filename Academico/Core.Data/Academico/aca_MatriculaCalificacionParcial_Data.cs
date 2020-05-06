@@ -158,6 +158,50 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_MatriculaCalificacionParcial_Info get_Info(int IdEmpresa, decimal IdMatricula, int IdCatalogoParcial, int IdMateria, decimal IdProfesor)
+        {
+            try
+            {
+                aca_MatriculaCalificacionParcial_Info info = new aca_MatriculaCalificacionParcial_Info();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var Entity = odata.aca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula && q.IdMateria == IdMateria
+                    && q.IdProfesor == IdProfesor && q.IdCatalogoParcial== IdCatalogoParcial).FirstOrDefault();
+
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_MatriculaCalificacionParcial_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdMatricula = Entity.IdMatricula,
+                        IdMateria = Entity.IdMateria,
+                        IdProfesor = Entity.IdProfesor,
+                        IdCatalogoParcial = Entity.IdCatalogoParcial,
+                        Calificacion1 = Entity.Calificacion1,
+                        Calificacion2 = Entity.Calificacion2,
+                        Calificacion3 = Entity.Calificacion3,
+                        Calificacion4 = Entity.Calificacion4,
+                        Evaluacion = Entity.Evaluacion,
+                        Remedial1 = Entity.Remedial1,
+                        Remedial2 = Entity.Remedial2,
+                        Conducta = Entity.Conducta,
+                        MotivoCalificacion = Entity.MotivoCalificacion,
+                        MotivoConducta = Entity.MotivoConducta,
+                        AccionRemedial = Entity.AccionRemedial
+                    };
+
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool generarCalificacion(List<aca_MatriculaCalificacionParcial_Info> lst_parcial)
         {
             try

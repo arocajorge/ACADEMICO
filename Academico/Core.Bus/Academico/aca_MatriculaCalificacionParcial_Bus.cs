@@ -30,6 +30,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_MatriculaCalificacionParcial_Info GetInfo(int IdEmpresa, decimal IdMatricula, int IdCatalogoParcial, int IdMateria, decimal IdProfesor)
+        {
+            try
+            {
+                return odata.get_Info(IdEmpresa, IdMatricula, IdCatalogoParcial, IdMateria, IdProfesor);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
         public List<aca_MatriculaCalificacionParcial_Info> GetList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, int IdCatalogoParcial, decimal IdProfesor)
         {
             try

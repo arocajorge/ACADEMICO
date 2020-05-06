@@ -121,6 +121,42 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_AnioLectivoParcial_Info getInfo_X_Orden(int IdEmpresa, int IdSede, int IdAnio, int Orden)
+        {
+            try
+            {
+                aca_AnioLectivoParcial_Info info = new aca_AnioLectivoParcial_Info();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var Entity = odata.aca_AnioLectivoParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio
+                    && q.Orden == Orden).FirstOrDefault();
+
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_AnioLectivoParcial_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAnio = Entity.IdAnio,
+                        IdSede = Entity.IdSede,
+                        IdCatalogoParcial = Entity.IdCatalogoParcial,
+                        EsExamen = Entity.EsExamen,
+                        ValidaEstadoAlumno = Entity.ValidaEstadoAlumno,
+                        Orden = Entity.Orden
+                    };
+
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<aca_AnioLectivoParcial_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdCatalogoTipo, DateTime FechaActual)
         {
             try

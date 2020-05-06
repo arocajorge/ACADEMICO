@@ -34,6 +34,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public aca_AnioLectivoParcial_Info GetInfo_x_Orden(int IdEmpresa, int IdSede, int IdAnio, int Orden)
+        {
+            try
+            {
+                return odata.getInfo_X_Orden(IdEmpresa, IdSede, IdAnio, Orden);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<aca_AnioLectivoParcial_Info> GetList_x_Tipo(int IdEmpresa, int IdSede, int IdAnio, int IdCatalogoTipo)
         {
             try

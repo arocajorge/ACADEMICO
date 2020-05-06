@@ -624,6 +624,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdCurso = IdCurso;
             model.IdParalelo = IdParalelo;
             model.mostrar_observacion_completa = true;
+            model.mostrarAnulados = true;
 
             ACA_008_Rpt report = new ACA_008_Rpt();
 
@@ -644,6 +645,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_MostrarPlantilla.Value = model.mostrar_observacion_completa;
+            report.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -661,6 +663,11 @@ namespace Core.Web.Areas.Reportes.Controllers
             ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
             ReportResumen.p_IdAnio.Value = model.IdAnio;
             ReportResumen.p_IdSede.Value = model.IdSede;
+            ReportResumen.p_IdNivel.Value = model.IdNivel;
+            ReportResumen.p_IdJornada.Value = model.IdJornada;
+            ReportResumen.p_IdCurso.Value = model.IdCurso;
+            ReportResumen.p_IdParalelo.Value = model.IdParalelo;
+            ReportResumen.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
             ReportResumen.usuario = SessionFixed.IdUsuario;
             ReportResumen.empresa = SessionFixed.NomEmpresa;
 
@@ -690,6 +697,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_MostrarPlantilla.Value = model.mostrar_observacion_completa;
+            report.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -707,6 +715,11 @@ namespace Core.Web.Areas.Reportes.Controllers
             ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
             ReportResumen.p_IdAnio.Value = model.IdAnio;
             ReportResumen.p_IdSede.Value = model.IdSede;
+            ReportResumen.p_IdNivel.Value = model.IdNivel;
+            ReportResumen.p_IdJornada.Value = model.IdJornada;
+            ReportResumen.p_IdCurso.Value = model.IdCurso;
+            ReportResumen.p_IdParalelo.Value = model.IdParalelo;
+            ReportResumen.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
             ReportResumen.usuario = SessionFixed.IdUsuario;
             ReportResumen.empresa = SessionFixed.NomEmpresa;
 

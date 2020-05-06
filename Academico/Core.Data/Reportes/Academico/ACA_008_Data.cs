@@ -8,7 +8,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_008_Data
     {
-        public List<ACA_008_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso,int IdParalelo, bool MostarPlantilla)
+        public List<ACA_008_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso,int IdParalelo, bool MostarPlantilla, bool MostrarAlumnosRetirados)
         {
             try
             {
@@ -36,7 +36,8 @@ namespace Core.Data.Reportes.Academico
                     IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
                     IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin &&
                     IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin &&
-                    IdParaleloIni <= q.IdParalelo && q.IdParalelo <= IdParaleloFin).ToList();
+                    IdParaleloIni <= q.IdParalelo && q.IdParalelo <= IdParaleloFin
+                    && (MostrarAlumnosRetirados == true ? q.IdRetiro == q.IdRetiro : q.IdRetiro == 0)).ToList();
                     foreach (var item in lst)
                     {
                         Lista.Add(new ACA_008_Info
@@ -69,7 +70,8 @@ namespace Core.Data.Reportes.Academico
                             pe_nombreCompleto = item.pe_nombreCompleto,
                             CodigoAlumno = item.CodigoAlumno,
                             IdTipoPlantilla = item.IdTipoPlantilla,
-                            NomPlantillaTipo = (MostarPlantilla == true ? item.NomPlantillaTipo : "")
+                            NomPlantillaTipo = (MostarPlantilla == true ? item.NomPlantillaTipo : ""),
+                            EstaRetirado = item.EstaRetirado
                         });
                     }
                 }

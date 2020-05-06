@@ -33,5 +33,7 @@ namespace Core.Info.Reportes.Academico
         public string CodigoAlumno { get; set; }
         public Nullable<int> IdTipoPlantilla { get; set; }
         public string NomPlantillaTipo { get; set; }
+        public Nullable<decimal> IdRetiro { get; set; }
+        public string EstaRetirado { get; set; }
     }
 }
