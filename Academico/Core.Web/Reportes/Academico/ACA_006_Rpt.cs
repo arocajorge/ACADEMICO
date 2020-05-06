@@ -37,12 +37,14 @@ namespace Core.Web.Reportes.Academico
                 DateTime fecha_ini = string.IsNullOrEmpty(p_fecha_ini.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_fecha_ini.Value);
                 DateTime fecha_fin = string.IsNullOrEmpty(p_fecha_fin.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_fecha_fin.Value);
                 int IdSede = string.IsNullOrEmpty(p_IdSede.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSede.Value);
-                //int IdNivel = string.IsNullOrEmpty(p_IdNivel.Value.ToString()) ? 0 : Convert.ToInt32(p_IdNivel.Value);
-                //int IdJornada = string.IsNullOrEmpty(p_IdJornada.Value.ToString()) ? 0 : Convert.ToInt32(p_IdJornada.Value);
-                //int IdCurso = string.IsNullOrEmpty(p_IdCurso.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCurso.Value);
+                int IdNivel = string.IsNullOrEmpty(p_IdNivel.Value.ToString()) ? 0 : Convert.ToInt32(p_IdNivel.Value);
+                int IdJornada = string.IsNullOrEmpty(p_IdJornada.Value.ToString()) ? 0 : Convert.ToInt32(p_IdJornada.Value);
+                int IdCurso = string.IsNullOrEmpty(p_IdCurso.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCurso.Value);
+                int IdParalelo = string.IsNullOrEmpty(p_IdParalelo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdParalelo.Value);
+                bool MostrarAlumnosRetirados = Convert.ToBoolean(p_MostarAlumnosRetirados.Value);
                 aca_Sede_Bus bus_sede = new aca_Sede_Bus();
 
-                List<ACA_006_Info> Lista = bus_rpt.Getlist(IdEmpresa, IdSede, IdAnio, fecha_ini, fecha_fin);
+                List<ACA_006_Info> Lista = bus_rpt.Getlist(IdEmpresa, IdSede, IdAnio, IdJornada, IdNivel, IdCurso, IdParalelo, fecha_ini, fecha_fin, MostrarAlumnosRetirados);
                 this.DataSource = Lista;
 
                 tb_empresa_Bus bus_empresa = new tb_empresa_Bus();

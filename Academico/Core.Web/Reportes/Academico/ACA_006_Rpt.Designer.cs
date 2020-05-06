@@ -33,6 +33,17 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
+            this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrPivotGrid2 = new DevExpress.XtraReports.UI.XRPivotGrid();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.xrPivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.xrPivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.xrPivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.xrPivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.xrPivotGridField7 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.xrPivotGridField8 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrTable8 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow16 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -49,12 +60,6 @@
             this.p_IdJornada = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAnio = new DevExpress.XtraReports.Parameters.Parameter();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
-            this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
-            this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTable3 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow4 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl_sede = new DevExpress.XtraReports.UI.XRTableCell();
@@ -64,7 +69,6 @@
             this.xrTableRow6 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField3 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
@@ -78,21 +82,31 @@
             this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
             this.p_fecha_fin = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_fecha_ini = new DevExpress.XtraReports.Parameters.Parameter();
-            this.xrPivotGrid2 = new DevExpress.XtraReports.UI.XRPivotGrid();
-            this.xrPivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.xrPivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.xrPivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.xrPivotGridField6 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.xrPivotGridField7 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.xrPivotGridField8 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
-            this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
-            ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
+            this.p_MostarAlumnosRetirados = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdParalelo = new DevExpress.XtraReports.Parameters.Parameter();
+            this.xrTable7 = new DevExpress.XtraReports.UI.XRTable();
+            this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell13 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell16 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell14 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell15 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableRow14 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell36 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell37 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell38 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell39 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableRow7 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell17 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell18 = new DevExpress.XtraReports.UI.XRTableCell();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -117,6 +131,124 @@
             this.xrPivotGrid2});
             this.ReportFooter.HeightF = 111.8751F;
             this.ReportFooter.Name = "ReportFooter";
+            // 
+            // xrTable1
+            // 
+            this.xrTable1.Font = new System.Drawing.Font("Verdana", 8F);
+            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.xrTable1.Name = "xrTable1";
+            this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 0, 100F);
+            this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+            this.xrTableRow1});
+            this.xrTable1.SizeF = new System.Drawing.SizeF(750.9999F, 25F);
+            this.xrTable1.StylePriority.UseFont = false;
+            this.xrTable1.StylePriority.UsePadding = false;
+            // 
+            // xrTableRow1
+            // 
+            this.xrTableRow1.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell3});
+            this.xrTableRow1.Name = "xrTableRow1";
+            this.xrTableRow1.Weight = 1D;
+            // 
+            // xrTableCell3
+            // 
+            this.xrTableCell3.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell3.Multiline = true;
+            this.xrTableCell3.Name = "xrTableCell3";
+            this.xrTableCell3.StylePriority.UseFont = false;
+            this.xrTableCell3.Text = "RESUMEN";
+            this.xrTableCell3.Weight = 1.0667395057730094D;
+            // 
+            // xrPivotGrid2
+            // 
+            this.xrPivotGrid2.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.xrPivotGrid2.Appearance.CustomTotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.xrPivotGrid2.Appearance.FieldHeader.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.xrPivotGrid2.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.xrPivotGrid2.Appearance.FieldValueGrandTotal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.xrPivotGrid2.Appearance.FieldValueTotal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.xrPivotGrid2.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.xrPivotGrid2.Appearance.Lines.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.xrPivotGrid2.Appearance.TotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.xrPivotGrid2.DataSource = this.objectDataSource1;
+            this.xrPivotGrid2.Fields.AddRange(new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField[] {
+            this.xrPivotGridField1,
+            this.xrPivotGridField2,
+            this.xrPivotGridField5,
+            this.xrPivotGridField6,
+            this.xrPivotGridField7,
+            this.xrPivotGridField8});
+            this.xrPivotGrid2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 25F);
+            this.xrPivotGrid2.Name = "xrPivotGrid2";
+            this.xrPivotGrid2.OptionsPrint.FilterSeparatorBarPadding = 3;
+            this.xrPivotGrid2.OptionsPrint.PrintColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
+            this.xrPivotGrid2.OptionsPrint.PrintDataHeaders = DevExpress.Utils.DefaultBoolean.False;
+            this.xrPivotGrid2.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
+            this.xrPivotGrid2.OptionsPrint.PrintRowHeaders = DevExpress.Utils.DefaultBoolean.False;
+            this.xrPivotGrid2.OptionsPrint.PrintUnusedFilterFields = false;
+            this.xrPivotGrid2.OptionsView.ShowColumnHeaders = false;
+            this.xrPivotGrid2.OptionsView.ShowCustomTotalsForSingleValues = true;
+            this.xrPivotGrid2.OptionsView.ShowDataHeaders = false;
+            this.xrPivotGrid2.OptionsView.ShowGrandTotalsForSingleValues = true;
+            this.xrPivotGrid2.OptionsView.ShowRowHeaders = false;
+            this.xrPivotGrid2.SizeF = new System.Drawing.SizeF(750.9999F, 86.87505F);
+            // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_006_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
+            // 
+            // xrPivotGridField1
+            // 
+            this.xrPivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.xrPivotGridField1.AreaIndex = 1;
+            this.xrPivotGridField1.ColumnValueLineCount = 20;
+            this.xrPivotGridField1.FieldName = "NomJornada";
+            this.xrPivotGridField1.Name = "xrPivotGridField1";
+            this.xrPivotGridField1.SortMode = DevExpress.XtraPivotGrid.PivotSortMode.None;
+            this.xrPivotGridField1.Width = 80;
+            // 
+            // xrPivotGridField2
+            // 
+            this.xrPivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.xrPivotGridField2.AreaIndex = 3;
+            this.xrPivotGridField2.FieldName = "NomNivel";
+            this.xrPivotGridField2.Name = "xrPivotGridField2";
+            this.xrPivotGridField2.SortMode = DevExpress.XtraPivotGrid.PivotSortMode.None;
+            this.xrPivotGridField2.Width = 150;
+            // 
+            // xrPivotGridField5
+            // 
+            this.xrPivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
+            this.xrPivotGridField5.AreaIndex = 0;
+            this.xrPivotGridField5.FieldName = "NomSexo";
+            this.xrPivotGridField5.Name = "xrPivotGridField5";
+            // 
+            // xrPivotGridField6
+            // 
+            this.xrPivotGridField6.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
+            this.xrPivotGridField6.AreaIndex = 0;
+            this.xrPivotGridField6.FieldName = "Cantidad";
+            this.xrPivotGridField6.Name = "xrPivotGridField6";
+            // 
+            // xrPivotGridField7
+            // 
+            this.xrPivotGridField7.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.xrPivotGridField7.AreaIndex = 0;
+            this.xrPivotGridField7.FieldName = "OrdenJornada";
+            this.xrPivotGridField7.MinWidth = 0;
+            this.xrPivotGridField7.Name = "xrPivotGridField7";
+            this.xrPivotGridField7.Width = 0;
+            // 
+            // xrPivotGridField8
+            // 
+            this.xrPivotGridField8.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.xrPivotGridField8.AreaIndex = 2;
+            this.xrPivotGridField8.FieldName = "OrdenNivel";
+            this.xrPivotGridField8.MinWidth = 0;
+            this.xrPivotGridField8.Name = "xrPivotGridField8";
+            this.xrPivotGridField8.Width = 0;
             // 
             // PageFooter
             // 
@@ -267,80 +399,12 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable2,
+            this.xrTable7,
             this.xrTable3,
             this.xrPivotGrid1,
             this.lbl_imagen});
-            this.ReportHeader.HeightF = 210F;
+            this.ReportHeader.HeightF = 259F;
             this.ReportHeader.Name = "ReportHeader";
-            // 
-            // xrTable2
-            // 
-            this.xrTable2.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 70.00002F);
-            this.xrTable2.Name = "xrTable2";
-            this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 0, 100F);
-            this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
-            this.xrTableRow2});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(750.9999F, 25F);
-            this.xrTable2.StylePriority.UseFont = false;
-            this.xrTable2.StylePriority.UsePadding = false;
-            // 
-            // xrTableRow2
-            // 
-            this.xrTableRow2.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell1,
-            this.xrTableCell2,
-            this.xrTableCell5,
-            this.xrTableCell8});
-            this.xrTableRow2.Name = "xrTableRow2";
-            this.xrTableRow2.Weight = 1D;
-            // 
-            // xrTableCell1
-            // 
-            this.xrTableCell1.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell1.Multiline = true;
-            this.xrTableCell1.Name = "xrTableCell1";
-            this.xrTableCell1.StylePriority.UseFont = false;
-            this.xrTableCell1.Text = "Desde:";
-            this.xrTableCell1.Weight = 1.0667395057730094D;
-            // 
-            // xrTableCell2
-            // 
-            this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?p_fecha_ini")});
-            this.xrTableCell2.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTableCell2.Multiline = true;
-            this.xrTableCell2.Name = "xrTableCell2";
-            this.xrTableCell2.StylePriority.UseFont = false;
-            this.xrTableCell2.Text = "xrTableCell3";
-            this.xrTableCell2.TextFormatString = "{0:dd/MM/yyyy}";
-            this.xrTableCell2.Weight = 1.4892132586055806D;
-            // 
-            // xrTableCell5
-            // 
-            this.xrTableCell5.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell5.Multiline = true;
-            this.xrTableCell5.Name = "xrTableCell5";
-            this.xrTableCell5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 5, 5, 0, 100F);
-            this.xrTableCell5.StylePriority.UseFont = false;
-            this.xrTableCell5.StylePriority.UsePadding = false;
-            this.xrTableCell5.StylePriority.UseTextAlignment = false;
-            this.xrTableCell5.Text = "Hasta: ";
-            this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
-            this.xrTableCell5.Weight = 1.06815942272782D;
-            // 
-            // xrTableCell8
-            // 
-            this.xrTableCell8.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?p_fecha_fin")});
-            this.xrTableCell8.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTableCell8.Multiline = true;
-            this.xrTableCell8.Name = "xrTableCell8";
-            this.xrTableCell8.StylePriority.UseFont = false;
-            this.xrTableCell8.Text = "xrTableCell5";
-            this.xrTableCell8.TextFormatString = "{0:dd/MM/yyyy}";
-            this.xrTableCell8.Weight = 2.09818253961388D;
             // 
             // xrTable3
             // 
@@ -446,7 +510,7 @@
             this.pivotGridField8,
             this.pivotGridField9,
             this.pivotGridField10});
-            this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 104.4167F);
+            this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0.0004323324F, 148.8334F);
             this.xrPivotGrid1.Name = "xrPivotGrid1";
             this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
             this.xrPivotGrid1.OptionsPrint.PrintColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
@@ -461,11 +525,6 @@
             this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(750.9999F, 86.87505F);
             this.xrPivotGrid1.PrintFieldValue += new System.EventHandler<DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs>(this.xrPivotGrid1_PrintFieldValue);
-            // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_006_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // pivotGridField1
             // 
@@ -568,117 +627,183 @@
             this.p_fecha_ini.Name = "p_fecha_ini";
             this.p_fecha_ini.Visible = false;
             // 
-            // xrPivotGrid2
+            // p_MostarAlumnosRetirados
             // 
-            this.xrPivotGrid2.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid2.Appearance.CustomTotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid2.Appearance.FieldHeader.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid2.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid2.Appearance.FieldValueGrandTotal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.xrPivotGrid2.Appearance.FieldValueTotal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.xrPivotGrid2.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.xrPivotGrid2.Appearance.Lines.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.xrPivotGrid2.Appearance.TotalCell.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.xrPivotGrid2.DataSource = this.objectDataSource1;
-            this.xrPivotGrid2.Fields.AddRange(new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField[] {
-            this.xrPivotGridField1,
-            this.xrPivotGridField2,
-            this.xrPivotGridField5,
-            this.xrPivotGridField6,
-            this.xrPivotGridField7,
-            this.xrPivotGridField8});
-            this.xrPivotGrid2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 25F);
-            this.xrPivotGrid2.Name = "xrPivotGrid2";
-            this.xrPivotGrid2.OptionsPrint.FilterSeparatorBarPadding = 3;
-            this.xrPivotGrid2.OptionsPrint.PrintColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
-            this.xrPivotGrid2.OptionsPrint.PrintDataHeaders = DevExpress.Utils.DefaultBoolean.False;
-            this.xrPivotGrid2.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
-            this.xrPivotGrid2.OptionsPrint.PrintRowHeaders = DevExpress.Utils.DefaultBoolean.False;
-            this.xrPivotGrid2.OptionsPrint.PrintUnusedFilterFields = false;
-            this.xrPivotGrid2.OptionsView.ShowColumnHeaders = false;
-            this.xrPivotGrid2.OptionsView.ShowCustomTotalsForSingleValues = true;
-            this.xrPivotGrid2.OptionsView.ShowDataHeaders = false;
-            this.xrPivotGrid2.OptionsView.ShowGrandTotalsForSingleValues = true;
-            this.xrPivotGrid2.OptionsView.ShowRowHeaders = false;
-            this.xrPivotGrid2.SizeF = new System.Drawing.SizeF(750.9999F, 86.87505F);
+            this.p_MostarAlumnosRetirados.Name = "p_MostarAlumnosRetirados";
+            this.p_MostarAlumnosRetirados.Visible = false;
             // 
-            // xrPivotGridField1
+            // p_IdParalelo
             // 
-            this.xrPivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.xrPivotGridField1.AreaIndex = 1;
-            this.xrPivotGridField1.ColumnValueLineCount = 20;
-            this.xrPivotGridField1.FieldName = "NomJornada";
-            this.xrPivotGridField1.Name = "xrPivotGridField1";
-            this.xrPivotGridField1.SortMode = DevExpress.XtraPivotGrid.PivotSortMode.None;
-            this.xrPivotGridField1.Width = 28;
+            this.p_IdParalelo.Name = "p_IdParalelo";
+            this.p_IdParalelo.Visible = false;
             // 
-            // xrPivotGridField2
+            // xrTable7
             // 
-            this.xrPivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.xrPivotGridField2.AreaIndex = 3;
-            this.xrPivotGridField2.FieldName = "NomNivel";
-            this.xrPivotGridField2.Name = "xrPivotGridField2";
-            this.xrPivotGridField2.SortMode = DevExpress.XtraPivotGrid.PivotSortMode.None;
+            this.xrTable7.Font = new System.Drawing.Font("Verdana", 8F);
+            this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(0F, 70.00002F);
+            this.xrTable7.Name = "xrTable7";
+            this.xrTable7.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 5, 0, 100F);
+            this.xrTable7.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
+            this.xrTableRow3,
+            this.xrTableRow14,
+            this.xrTableRow7});
+            this.xrTable7.SizeF = new System.Drawing.SizeF(751F, 55.5F);
+            this.xrTable7.StylePriority.UseFont = false;
+            this.xrTable7.StylePriority.UsePadding = false;
             // 
-            // xrPivotGridField5
+            // xrTableRow3
             // 
-            this.xrPivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
-            this.xrPivotGridField5.AreaIndex = 0;
-            this.xrPivotGridField5.FieldName = "NomSexo";
-            this.xrPivotGridField5.Name = "xrPivotGridField5";
+            this.xrTableRow3.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell11,
+            this.xrTableCell12,
+            this.xrTableCell13,
+            this.xrTableCell16,
+            this.xrTableCell14,
+            this.xrTableCell15});
+            this.xrTableRow3.Name = "xrTableRow3";
+            this.xrTableRow3.Weight = 1D;
             // 
-            // xrPivotGridField6
+            // xrTableCell11
             // 
-            this.xrPivotGridField6.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
-            this.xrPivotGridField6.AreaIndex = 0;
-            this.xrPivotGridField6.FieldName = "Cantidad";
-            this.xrPivotGridField6.Name = "xrPivotGridField6";
+            this.xrTableCell11.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell11.Multiline = true;
+            this.xrTableCell11.Name = "xrTableCell11";
+            this.xrTableCell11.StylePriority.UseFont = false;
+            this.xrTableCell11.Text = "Año Lectivo:";
+            this.xrTableCell11.Weight = 0.47936085219707059D;
             // 
-            // xrPivotGridField7
+            // xrTableCell12
             // 
-            this.xrPivotGridField7.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.xrPivotGridField7.AreaIndex = 0;
-            this.xrPivotGridField7.FieldName = "OrdenJornada";
-            this.xrPivotGridField7.MinWidth = 0;
-            this.xrPivotGridField7.Name = "xrPivotGridField7";
-            this.xrPivotGridField7.Width = 0;
+            this.xrTableCell12.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNullOrEmpty(?p_IdAnio) || ?p_IdAnio==0,\'TODOS\' , [Descripcion] )")});
+            this.xrTableCell12.Multiline = true;
+            this.xrTableCell12.Name = "xrTableCell12";
+            this.xrTableCell12.Text = "xrTableCell12";
+            this.xrTableCell12.Weight = 1.307301852738016D;
             // 
-            // xrPivotGridField8
+            // xrTableCell13
             // 
-            this.xrPivotGridField8.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.xrPivotGridField8.AreaIndex = 2;
-            this.xrPivotGridField8.FieldName = "OrdenNivel";
-            this.xrPivotGridField8.MinWidth = 0;
-            this.xrPivotGridField8.Name = "xrPivotGridField8";
-            this.xrPivotGridField8.Width = 0;
+            this.xrTableCell13.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell13.Multiline = true;
+            this.xrTableCell13.Name = "xrTableCell13";
+            this.xrTableCell13.StylePriority.UseFont = false;
+            this.xrTableCell13.Text = "Fecha desde:";
+            this.xrTableCell13.Weight = 0.60666864753245675D;
             // 
-            // xrTable1
+            // xrTableCell16
             // 
-            this.xrTable1.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.xrTable1.Name = "xrTable1";
-            this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 0, 100F);
-            this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
-            this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(750.9999F, 25F);
-            this.xrTable1.StylePriority.UseFont = false;
-            this.xrTable1.StylePriority.UsePadding = false;
+            this.xrTableCell16.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?p_fecha_ini")});
+            this.xrTableCell16.Font = new System.Drawing.Font("Verdana", 8F);
+            this.xrTableCell16.Multiline = true;
+            this.xrTableCell16.Name = "xrTableCell16";
+            this.xrTableCell16.StylePriority.UseFont = false;
+            this.xrTableCell16.TextFormatString = "{0:dd/MM/yyyy}";
+            this.xrTableCell16.Weight = 0.60666864753245675D;
             // 
-            // xrTableRow1
+            // xrTableCell14
             // 
-            this.xrTableRow1.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell3});
-            this.xrTableRow1.Name = "xrTableRow1";
-            this.xrTableRow1.Weight = 1D;
+            this.xrTableCell14.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell14.Multiline = true;
+            this.xrTableCell14.Name = "xrTableCell14";
+            this.xrTableCell14.StylePriority.UseFont = false;
+            this.xrTableCell14.Text = "Fecha hasta:";
+            this.xrTableCell14.Weight = 0.5D;
             // 
-            // xrTableCell3
+            // xrTableCell15
             // 
-            this.xrTableCell3.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell3.Multiline = true;
-            this.xrTableCell3.Name = "xrTableCell3";
-            this.xrTableCell3.StylePriority.UseFont = false;
-            this.xrTableCell3.Text = "RESUMEN";
-            this.xrTableCell3.Weight = 1.0667395057730094D;
+            this.xrTableCell15.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?p_fecha_fin")});
+            this.xrTableCell15.Multiline = true;
+            this.xrTableCell15.Name = "xrTableCell15";
+            this.xrTableCell15.TextFormatString = "{0:dd/MM/yyyy}";
+            this.xrTableCell15.Weight = 0.5D;
+            // 
+            // xrTableRow14
+            // 
+            this.xrTableRow14.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell36,
+            this.xrTableCell37,
+            this.xrTableCell38,
+            this.xrTableCell39});
+            this.xrTableRow14.Name = "xrTableRow14";
+            this.xrTableRow14.Weight = 1D;
+            // 
+            // xrTableCell36
+            // 
+            this.xrTableCell36.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell36.Multiline = true;
+            this.xrTableCell36.Name = "xrTableCell36";
+            this.xrTableCell36.StylePriority.UseFont = false;
+            this.xrTableCell36.Text = "Nivel:";
+            this.xrTableCell36.Weight = 0.47936085219707059D;
+            // 
+            // xrTableCell37
+            // 
+            this.xrTableCell37.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNullOrEmpty(?p_IdNivel) || ?p_IdNivel==0,\'TODOS\' , [NomNivel] )")});
+            this.xrTableCell37.Multiline = true;
+            this.xrTableCell37.Name = "xrTableCell37";
+            this.xrTableCell37.Text = "xrTableCell2";
+            this.xrTableCell37.Weight = 1.9139709879015476D;
+            // 
+            // xrTableCell38
+            // 
+            this.xrTableCell38.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell38.Multiline = true;
+            this.xrTableCell38.Name = "xrTableCell38";
+            this.xrTableCell38.StylePriority.UseFont = false;
+            this.xrTableCell38.Text = "Jornada:";
+            this.xrTableCell38.Weight = 0.60666815990138145D;
+            // 
+            // xrTableCell39
+            // 
+            this.xrTableCell39.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNullOrEmpty(?p_IdJornada) || ?p_IdJornada==0,\'TODOS\' , [NomJornada] )")});
+            this.xrTableCell39.Multiline = true;
+            this.xrTableCell39.Name = "xrTableCell39";
+            this.xrTableCell39.Weight = 1D;
+            // 
+            // xrTableRow7
+            // 
+            this.xrTableRow7.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell9,
+            this.xrTableCell10,
+            this.xrTableCell17,
+            this.xrTableCell18});
+            this.xrTableRow7.Name = "xrTableRow7";
+            this.xrTableRow7.Weight = 1D;
+            // 
+            // xrTableCell9
+            // 
+            this.xrTableCell9.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell9.Name = "xrTableCell9";
+            this.xrTableCell9.StylePriority.UseFont = false;
+            this.xrTableCell9.Text = "Curso:";
+            this.xrTableCell9.Weight = 0.47936085219707059D;
+            // 
+            // xrTableCell10
+            // 
+            this.xrTableCell10.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNullOrEmpty(?p_IdCurso) || ?p_IdCurso==0,\'TODOS\' , [NomCurso] )")});
+            this.xrTableCell10.Name = "xrTableCell10";
+            this.xrTableCell10.Text = "xrTableCell8";
+            this.xrTableCell10.Weight = 1.9139703377267807D;
+            // 
+            // xrTableCell17
+            // 
+            this.xrTableCell17.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell17.Name = "xrTableCell17";
+            this.xrTableCell17.StylePriority.UseFont = false;
+            this.xrTableCell17.Text = "Paralelo:";
+            this.xrTableCell17.Weight = 0.60666881007614837D;
+            // 
+            // xrTableCell18
+            // 
+            this.xrTableCell18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNullOrEmpty(?p_IdParalelo) || ?p_IdParalelo==0,\'TODOS\' , [NomParalelo] )")});
+            this.xrTableCell18.Name = "xrTableCell18";
+            this.xrTableCell18.Weight = 1D;
             // 
             // ACA_006_Rpt
             // 
@@ -705,14 +830,16 @@
             this.p_IdJornada,
             this.p_IdAnio,
             this.p_fecha_fin,
-            this.p_fecha_ini});
+            this.p_fecha_ini,
+            this.p_MostarAlumnosRetirados,
+            this.p_IdParalelo});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_006_Rpt_BeforePrint);
-            ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -758,12 +885,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
-        private DevExpress.XtraReports.UI.XRTable xrTable2;
-        private DevExpress.XtraReports.UI.XRTableRow xrTableRow2;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell1;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell2;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell5;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell8;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField7;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField8;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField9;
@@ -778,5 +899,25 @@
         private DevExpress.XtraReports.UI.XRTable xrTable1;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow1;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;
+        public DevExpress.XtraReports.Parameters.Parameter p_MostarAlumnosRetirados;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdParalelo;
+        private DevExpress.XtraReports.UI.XRTable xrTable7;
+        private DevExpress.XtraReports.UI.XRTableRow xrTableRow3;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell12;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell13;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell16;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell14;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell15;
+        private DevExpress.XtraReports.UI.XRTableRow xrTableRow14;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell36;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell37;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell38;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell39;
+        private DevExpress.XtraReports.UI.XRTableRow xrTableRow7;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell9;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell10;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell17;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell18;
     }
 }

@@ -39,9 +39,10 @@ namespace Core.Web.Reportes.Academico
                 int IdAnio = string.IsNullOrEmpty(p_IdAnio.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAnio.Value);
                 DateTime fecha_ini = string.IsNullOrEmpty(p_fecha_ini.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_fecha_ini.Value);
                 DateTime fecha_fin = string.IsNullOrEmpty(p_fecha_fin.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_fecha_fin.Value);
+                bool MostrarAlumnosRetirados = Convert.ToBoolean(p_MostarAlumnosRetirados.Value);
                 aca_Sede_Bus bus_sede = new aca_Sede_Bus();
 
-                List<ACA_007_Info> Lista = bus_rpt.GetList(IdEmpresa, IdSede, IdAnio, IdJornada, IdNivel, IdCurso, IdParalelo, fecha_ini, fecha_fin);
+                List<ACA_007_Info> Lista = bus_rpt.GetList(IdEmpresa, IdSede, IdAnio, IdJornada, IdNivel, IdCurso, IdParalelo, fecha_ini, fecha_fin, MostrarAlumnosRetirados);
                 this.DataSource = Lista;
 
                 tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
@@ -81,7 +82,7 @@ namespace Core.Web.Reportes.Academico
         {
             try
             {
-                if (e.Field != null && (e.Field.FieldName == "NomPlantilla" )&& e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.GrandTotal && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.Total)
+                if (e.Field != null && (e.Field.FieldName == "NomPlantillaTipo") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.GrandTotal && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.Total)
                 {
                     LabelBrick lb = new DevExpress.XtraPrinting.LabelBrick();
                     lb.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
@@ -119,6 +120,27 @@ namespace Core.Web.Reportes.Academico
         private void xrPivotGrid1_BeforePrint_1(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
 
+        }
+
+        private void xrPivotGrid2_PrintFieldValue(object sender, DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs e)
+        {
+            try
+            {
+                if (e.Field != null && (e.Field.FieldName == "NomPlantillaTipo") && e.Field.Area == DevExpress.XtraPivotGrid.PivotArea.ColumnArea && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.GrandTotal && e.ValueType != DevExpress.XtraPivotGrid.PivotGridValueType.Total)
+                {
+                    LabelBrick lb = new DevExpress.XtraPrinting.LabelBrick();
+                    lb.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 2, GraphicsUnit.Pixel);
+                    lb.Angle = 90;
+                    lb.Text = e.Field.FieldName == "Cantidad" ? Convert.ToString(e.Text.Replace("Total", "")) : e.Text;
+                    lb.Rect = DevExpress.XtraPrinting.GraphicsUnitConverter.DocToPixel(e.Brick.Rect);
+                    e.Brick = lb;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

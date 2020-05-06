@@ -8,27 +8,39 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_006_Data
     {
-        public List<ACA_006_Info> Getlist(int IdEmpresa, int IdSede, int IdAnio, DateTime fecha_ini, DateTime fecha_fin)
+        public List<ACA_006_Info> Getlist(int IdEmpresa, int IdSede, int IdAnio, int IdJornada, int IdNivel, int IdCurso, int IdParalelo, DateTime fecha_ini, DateTime fecha_fin, bool MostrarAlumnosRetirados)
         {
             try
             {
                 int IdSedeIni = IdSede;
                 int IdSedeFin = IdSede == 0 ? 9999999 : IdSede;
 
-                //int IdNivelIni = IdNivel;
-                //int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
+                int IdAnioIni = IdAnio;
+                int IdAnioFin = IdAnio == 0 ? 9999999 : IdAnio;
 
-                //int IdJornadaIni = IdJornada;
-                //int IdJornadaFin = IdJornada == 0 ? 9999999 : IdJornada;
+                int IdNivelIni = IdNivel;
+                int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
 
-                //int IdCursoIni = IdCurso;
-                //int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
+                int IdJornadaIni = IdJornada;
+                int IdJornadaFin = IdJornada == 0 ? 9999999 : IdJornada;
+
+                int IdCursoIni = IdCurso;
+                int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
+
+                int IdParaleloIni = IdParalelo;
+                int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
 
                 List<ACA_006_Info> Lista = new List<ACA_006_Info>();
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
-                    Lista = db.VWACA_006.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin 
-                    && q.Fecha>= fecha_ini && q.Fecha <= fecha_fin).Select(q => new ACA_006_Info
+                    Lista = db.VWACA_006.Where(q => q.IdEmpresa == IdEmpresa &&
+                    q.IdSede >= IdSedeIni && q.IdSede <= IdSedeFin &&
+                    q.IdAnio >= IdAnioIni && q.IdAnio <= IdAnioFin &&
+                    q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin &&
+                    q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin &&
+                    q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin &&
+                    q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin &&
+                    q.Fecha >= fecha_ini.Date && q.Fecha <= fecha_fin.Date).Select(q => new ACA_006_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdAnio = q.IdAnio,

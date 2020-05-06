@@ -99,6 +99,7 @@
             this.p_IdCurso = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdParalelo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdJornada = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_MostarAlumnosRetirados = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -140,7 +141,7 @@
             this.xrTableRow1,
             this.xrTableRow14,
             this.xrTableRow7});
-            this.xrTable7.SizeF = new System.Drawing.SizeF(751F, 55.5F);
+            this.xrTable7.SizeF = new System.Drawing.SizeF(750.9999F, 55.50001F);
             this.xrTable7.StylePriority.UseFont = false;
             this.xrTable7.StylePriority.UsePadding = false;
             // 
@@ -305,7 +306,7 @@
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow4,
             this.xrTableRow5});
-            this.xrTable3.SizeF = new System.Drawing.SizeF(611F, 70.00002F);
+            this.xrTable3.SizeF = new System.Drawing.SizeF(611.0001F, 70.00002F);
             this.xrTable3.StylePriority.UsePadding = false;
             // 
             // xrTableRow4
@@ -433,7 +434,8 @@
             this.xrPivotGrid2.OptionsView.ShowDataHeaders = false;
             this.xrPivotGrid2.OptionsView.ShowGrandTotalsForSingleValues = true;
             this.xrPivotGrid2.OptionsView.ShowRowHeaders = false;
-            this.xrPivotGrid2.SizeF = new System.Drawing.SizeF(750.9999F, 233.5417F);
+            this.xrPivotGrid2.SizeF = new System.Drawing.SizeF(751.0001F, 233.5417F);
+            this.xrPivotGrid2.PrintFieldValue += new System.EventHandler<DevExpress.XtraReports.UI.PivotGrid.CustomExportFieldValueEventArgs>(this.xrPivotGrid2_PrintFieldValue);
             // 
             // objectDataSource1
             // 
@@ -452,13 +454,13 @@
             // xrPivotGridField2
             // 
             this.xrPivotGridField2.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 3.75F, System.Drawing.FontStyle.Bold);
-            this.xrPivotGridField2.Appearance.FieldHeader.Font = new System.Drawing.Font("Tahoma", 3.75F);
-            this.xrPivotGridField2.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 6F);
+            this.xrPivotGridField2.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 7F);
             this.xrPivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.xrPivotGridField2.AreaIndex = 0;
             this.xrPivotGridField2.ColumnValueLineCount = 6;
             this.xrPivotGridField2.FieldName = "NomPlantillaTipo";
             this.xrPivotGridField2.Name = "xrPivotGridField2";
+            this.xrPivotGridField2.Width = 30;
             // 
             // xrPivotGridField6
             // 
@@ -539,15 +541,15 @@
             // 
             // pivotGridField13
             // 
-            this.pivotGridField13.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 3.75F, System.Drawing.FontStyle.Bold);
+            this.pivotGridField13.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 4F, System.Drawing.FontStyle.Bold);
             this.pivotGridField13.Appearance.FieldHeader.Font = new System.Drawing.Font("Tahoma", 3.75F);
-            this.pivotGridField13.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 6F);
+            this.pivotGridField13.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 7F);
             this.pivotGridField13.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
             this.pivotGridField13.AreaIndex = 0;
             this.pivotGridField13.ColumnValueLineCount = 6;
             this.pivotGridField13.FieldName = "NomPlantillaTipo";
             this.pivotGridField13.Name = "pivotGridField13";
-            this.pivotGridField13.Width = 45;
+            this.pivotGridField13.Width = 30;
             // 
             // pivotGridField12
             // 
@@ -739,10 +741,10 @@
             // 
             this.xrPageInfo2.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrPageInfo2.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrPageInfo2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.xrPageInfo2.LocationFloat = new DevExpress.Utils.PointFloat(6.103516E-05F, 0F);
             this.xrPageInfo2.Name = "xrPageInfo2";
             this.xrPageInfo2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
-            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(93.875F, 20F);
+            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(93.87494F, 20F);
             this.xrPageInfo2.StylePriority.UseBorders = false;
             this.xrPageInfo2.StylePriority.UseFont = false;
             this.xrPageInfo2.StylePriority.UsePadding = false;
@@ -795,6 +797,11 @@
             this.p_IdJornada.Name = "p_IdJornada";
             this.p_IdJornada.Visible = false;
             // 
+            // p_MostarAlumnosRetirados
+            // 
+            this.p_MostarAlumnosRetirados.Name = "p_MostarAlumnosRetirados";
+            this.p_MostarAlumnosRetirados.Visible = false;
+            // 
             // ACA_007_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -822,7 +829,8 @@
             this.p_IdNivel,
             this.p_IdCurso,
             this.p_IdParalelo,
-            this.p_IdJornada});
+            this.p_IdJornada,
+            this.p_MostarAlumnosRetirados});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_007_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
@@ -906,5 +914,6 @@
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField6;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField7;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField8;
+        public DevExpress.XtraReports.Parameters.Parameter p_MostarAlumnosRetirados;
     }
 }

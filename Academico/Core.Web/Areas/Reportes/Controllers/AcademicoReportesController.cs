@@ -488,14 +488,18 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_006()
         {
             cl_filtros_Info model = new cl_filtros_Info();
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
 
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             model.fecha_ini = DateTime.Now.AddMonths(-1);
             model.fecha_fin = DateTime.Now;
-
+            model.IdJornada = 0;
+            model.IdNivel = 0;
+            model.IdCurso = 0;
+            model.IdParalelo = 0;
+            model.mostrarAnulados = true;
             ACA_006_Rpt report = new ACA_006_Rpt();
 
             #region Cargo diseño desde base
@@ -508,10 +512,15 @@ namespace Core.Web.Areas.Reportes.Controllers
             #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdAnio.Value = model.IdAnio;
             report.p_IdSede.Value = model.IdSede;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
 
             ViewBag.Report = report;
 
@@ -532,10 +541,15 @@ namespace Core.Web.Areas.Reportes.Controllers
             #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdAnio.Value = model.IdAnio;
             report.p_IdSede.Value = model.IdSede;
             report.p_fecha_fin.Value = model.fecha_fin;
             report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
 
             ViewBag.Report = report;
 
@@ -556,7 +570,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdNivel = 0;
             model.IdCurso = 0;
             model.IdParalelo = 0;
-
+            model.mostrarAnulados = true;
             ACA_007_Rpt report = new ACA_007_Rpt();
 
             #region Cargo diseño desde base
@@ -577,7 +591,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdNivel.Value = model.IdNivel;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
-
+            report.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
             ViewBag.Report = report;
 
             return View(model);
@@ -605,6 +619,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdNivel.Value = model.IdNivel;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
 
             ViewBag.Report = report;
 

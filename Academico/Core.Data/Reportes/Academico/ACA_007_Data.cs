@@ -10,7 +10,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_007_Data
     {
-        public List<ACA_007_Info> get_list(int IdEmpresa, int IdSede, int IdAnio, int IdJornada, int IdNivel, int IdCurso, int IdParalelo, DateTime fecha_ini, DateTime fecha_fin)
+        public List<ACA_007_Info> get_list(int IdEmpresa, int IdSede, int IdAnio, int IdJornada, int IdNivel, int IdCurso, int IdParalelo, DateTime fecha_ini, DateTime fecha_fin, bool MostrarAlumnosRetirados)
         {
             try
             {
