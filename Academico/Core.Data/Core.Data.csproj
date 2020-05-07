@@ -187,6 +187,9 @@
     <Compile Include="Base\SPACA_005_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPACA_007_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\SPACA_ContabilizacionCobros_Result.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
@@ -242,9 +245,6 @@
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\VWACA_006.cs">
-      <DependentUpon>ModelReportes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\VWACA_007.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\VWACA_008.cs">

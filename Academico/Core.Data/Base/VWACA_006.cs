@@ -14,6 +14,14 @@ namespace Core.Data.Base
     
     public partial class VWACA_006
     {
+        public int IdEmpresa { get; set; }
+        public decimal IdMatricula { get; set; }
+        public int IdAnio { get; set; }
+        public int IdSede { get; set; }
+        public int IdNivel { get; set; }
+        public int IdJornada { get; set; }
+        public int IdCurso { get; set; }
+        public int IdParalelo { get; set; }
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
         public Nullable<int> OrdenNivel { get; set; }
@@ -27,14 +35,6 @@ namespace Core.Data.Base
         public string pe_sexo { get; set; }
         public string NomSexo { get; set; }
         public int Cantidad { get; set; }
-        public int IdEmpresa { get; set; }
-        public decimal IdMatricula { get; set; }
-        public int IdAnio { get; set; }
-        public int IdSede { get; set; }
-        public int IdNivel { get; set; }
-        public int IdJornada { get; set; }
-        public int IdCurso { get; set; }
-        public int IdParalelo { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Descripcion { get; set; }
         public Nullable<bool> EsRetirado { get; set; }

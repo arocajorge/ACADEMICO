@@ -10,31 +10,30 @@
 namespace Core.Data.Base
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class VWACA_007
+    public partial class SPACA_007_Result
     {
+        public int IdEmpresa { get; set; }
+        public decimal IdMatricula { get; set; }
+        public int IdAnio { get; set; }
+        public int IdSede { get; set; }
+        public int IdNivel { get; set; }
+        public int IdJornada { get; set; }
+        public int IdCurso { get; set; }
+        public int IdParalelo { get; set; }
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
         public Nullable<int> OrdenNivel { get; set; }
         public string NomJornada { get; set; }
         public Nullable<int> OrdenJornada { get; set; }
-        public int OrdenCurso { get; set; }
+        public Nullable<int> OrdenCurso { get; set; }
         public string NomCurso { get; set; }
         public string CodigoParalelo { get; set; }
         public string NomParalelo { get; set; }
         public Nullable<int> OrdenParalelo { get; set; }
         public string pe_sexo { get; set; }
         public int Cantidad { get; set; }
-        public Nullable<int> IdEmpresa { get; set; }
-        public Nullable<decimal> IdMatricula { get; set; }
-        public Nullable<int> IdAnio { get; set; }
-        public Nullable<int> IdSede { get; set; }
-        public Nullable<int> IdNivel { get; set; }
-        public Nullable<int> IdJornada { get; set; }
-        public Nullable<int> IdCurso { get; set; }
-        public Nullable<int> IdParalelo { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
+        public System.DateTime Fecha { get; set; }
         public string NomPlantilla { get; set; }
         public Nullable<int> IdPlantilla { get; set; }
         public string Descripcion { get; set; }

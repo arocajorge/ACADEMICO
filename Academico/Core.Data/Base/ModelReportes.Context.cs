@@ -26,10 +26,7 @@ namespace Core.Data.Base
         {
             throw new UnintentionalCodeFirstException();
         }
-        public void SetCommandTimeOut(int TimeOut)
-        {
-            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = TimeOut;
-        }
+    
         public virtual DbSet<VWCONTA_001> VWCONTA_001 { get; set; }
         public virtual DbSet<VWCXC_003> VWCXC_003 { get; set; }
         public virtual DbSet<VWFAC_003> VWFAC_003 { get; set; }
@@ -60,12 +57,11 @@ namespace Core.Data.Base
         public virtual DbSet<VWACA_012> VWACA_012 { get; set; }
         public virtual DbSet<VWACA_011> VWACA_011 { get; set; }
         public virtual DbSet<VWFAC_008> VWFAC_008 { get; set; }
+        public virtual DbSet<VWACA_010> VWACA_010 { get; set; }
+        public virtual DbSet<VWACA_006> VWACA_006 { get; set; }
         public virtual DbSet<VWACA_008> VWACA_008 { get; set; }
         public virtual DbSet<VWACA_013> VWACA_013 { get; set; }
         public virtual DbSet<VWACA_014> VWACA_014 { get; set; }
-        public virtual DbSet<VWACA_006> VWACA_006 { get; set; }
-        public virtual DbSet<VWACA_007> VWACA_007 { get; set; }
-        public virtual DbSet<VWACA_010> VWACA_010 { get; set; }
     
         public virtual ObjectResult<SPACA_001_Result> SPACA_001(Nullable<int> idEmpresa, Nullable<decimal> idAlumno)
         {
@@ -299,6 +295,51 @@ namespace Core.Data.Base
                 new ObjectParameter("FechaCorte", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXC_007_Result>("SPCXC_007", idEmpresaParameter, fechaCorteParameter);
+        }
+    
+        public virtual ObjectResult<SPACA_007_Result> SPACA_007(Nullable<int> idEmpresa, Nullable<int> idAnio, Nullable<int> idSede, Nullable<int> idNivel, Nullable<int> idJornada, Nullable<int> idCurso, Nullable<int> idParalelo, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin, Nullable<bool> mostrarRetirados)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idAnioParameter = idAnio.HasValue ?
+                new ObjectParameter("IdAnio", idAnio) :
+                new ObjectParameter("IdAnio", typeof(int));
+    
+            var idSedeParameter = idSede.HasValue ?
+                new ObjectParameter("IdSede", idSede) :
+                new ObjectParameter("IdSede", typeof(int));
+    
+            var idNivelParameter = idNivel.HasValue ?
+                new ObjectParameter("IdNivel", idNivel) :
+                new ObjectParameter("IdNivel", typeof(int));
+    
+            var idJornadaParameter = idJornada.HasValue ?
+                new ObjectParameter("IdJornada", idJornada) :
+                new ObjectParameter("IdJornada", typeof(int));
+    
+            var idCursoParameter = idCurso.HasValue ?
+                new ObjectParameter("IdCurso", idCurso) :
+                new ObjectParameter("IdCurso", typeof(int));
+    
+            var idParaleloParameter = idParalelo.HasValue ?
+                new ObjectParameter("IdParalelo", idParalelo) :
+                new ObjectParameter("IdParalelo", typeof(int));
+    
+            var fechaIniParameter = fechaIni.HasValue ?
+                new ObjectParameter("FechaIni", fechaIni) :
+                new ObjectParameter("FechaIni", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            var mostrarRetiradosParameter = mostrarRetirados.HasValue ?
+                new ObjectParameter("MostrarRetirados", mostrarRetirados) :
+                new ObjectParameter("MostrarRetirados", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_007_Result>("SPACA_007", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter, fechaIniParameter, fechaFinParameter, mostrarRetiradosParameter);
         }
     }
 }

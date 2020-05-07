@@ -21,7 +21,8 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                 List<CXC_007_Info> Lista = new List<CXC_007_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Context.SetCommandTimeOut(5000);
+                    //Context.SetCommandTimeOut(5000);
+                    Context.Database.CommandTimeout = 5000;
                     var lst = Context.SPCXC_007(IdEmpresa, fechaCorte).ToList();
                     var lista_mes = odata_mes.get_list();
                     foreach (var q in lst)

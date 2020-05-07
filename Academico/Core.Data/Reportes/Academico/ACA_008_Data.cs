@@ -30,7 +30,8 @@ namespace Core.Data.Reportes.Academico
                 List<ACA_008_Info> Lista = new List<ACA_008_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Context.SetCommandTimeOut(5000);
+                    //Context.SetCommandTimeOut(5000);
+
                     var lst = Context.VWACA_008.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio &&
                     IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin &&
                     IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
