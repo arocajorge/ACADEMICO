@@ -21,15 +21,15 @@ namespace Core.Data.Base
             : base("name=EntitiesReportes")
         {
         }
-        public void SetCommandTimeOut(int TimeOut)
-        {
-            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = TimeOut;
-        }
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+        public void SetCommandTimeOut(int TimeOut)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = TimeOut;
+        }
         public virtual DbSet<VWCONTA_001> VWCONTA_001 { get; set; }
         public virtual DbSet<VWCXC_003> VWCXC_003 { get; set; }
         public virtual DbSet<VWFAC_003> VWFAC_003 { get; set; }
@@ -38,7 +38,6 @@ namespace Core.Data.Base
         public virtual DbSet<VWACA_003> VWACA_003 { get; set; }
         public virtual DbSet<VWCXC_002> VWCXC_002 { get; set; }
         public virtual DbSet<VWACA_004> VWACA_004 { get; set; }
-        public virtual DbSet<VWACA_006> VWACA_006 { get; set; }
         public virtual DbSet<VWCXC_002_Aplicaciones> VWCXC_002_Aplicaciones { get; set; }
         public virtual DbSet<VWFAC_001> VWFAC_001 { get; set; }
         public virtual DbSet<VWFAC_002> VWFAC_002 { get; set; }
@@ -59,11 +58,14 @@ namespace Core.Data.Base
         public virtual DbSet<VWFAC_0031> VWFAC_0031 { get; set; }
         public virtual DbSet<VWFAC_007> VWFAC_007 { get; set; }
         public virtual DbSet<VWACA_012> VWACA_012 { get; set; }
-        public virtual DbSet<VWACA_010> VWACA_010 { get; set; }
         public virtual DbSet<VWACA_011> VWACA_011 { get; set; }
-        public virtual DbSet<VWACA_007> VWACA_007 { get; set; }
         public virtual DbSet<VWFAC_008> VWFAC_008 { get; set; }
         public virtual DbSet<VWACA_008> VWACA_008 { get; set; }
+        public virtual DbSet<VWACA_013> VWACA_013 { get; set; }
+        public virtual DbSet<VWACA_014> VWACA_014 { get; set; }
+        public virtual DbSet<VWACA_006> VWACA_006 { get; set; }
+        public virtual DbSet<VWACA_007> VWACA_007 { get; set; }
+        public virtual DbSet<VWACA_010> VWACA_010 { get; set; }
     
         public virtual ObjectResult<SPACA_001_Result> SPACA_001(Nullable<int> idEmpresa, Nullable<decimal> idAlumno)
         {

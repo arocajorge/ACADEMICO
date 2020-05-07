@@ -262,6 +262,12 @@
     <Compile Include="Base\VWACA_012.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWACA_013.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWACA_014.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_AnioLectivoEquivalenciaPromedio.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>

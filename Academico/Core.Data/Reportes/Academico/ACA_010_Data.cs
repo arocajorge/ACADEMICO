@@ -1,4 +1,5 @@
 ﻿using Core.Data.Base;
+using Core.Info.Helps;
 using Core.Info.Reportes.Academico;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,18 @@ namespace Core.Data.Reportes.Academico
                             Conducta = q.Conducta,
                             MotivoCalificacion = q.MotivoCalificacion,
                             MotivoConducta = q.MotivoConducta,
-                            AccionRemedial = q.AccionRemedial
+                            AccionRemedial = q.AccionRemedial,
+                            //CalificacionP1 = q.CalificacionP1,
+                            //CalificacionP2 = q.CalificacionP2,
+                            //CalificacionP3 = q.CalificacionP3,
+                            //CalificacionP4 = q.CalificacionP4,
+                            //CalificacionP5 = q.CalificacionP5,
+                            //CalificacionP6 = q.CalificacionP6,
+                            //Rendimiento = (IdCatalogoParcial== Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1) ? q.CalificacionP1 : 
+                            //IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2) ? q.CalificacionP2 : 
+                            //IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3)?q.CalificacionP3 : 
+                            //IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4)?q.CalificacionP4 : 
+                            //IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5)?q.CalificacionP5 : q.CalificacionP6)
                         });
                     });
                 }

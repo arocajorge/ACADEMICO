@@ -40,7 +40,8 @@ namespace Core.Data.Reportes.Academico
                     q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin &&
                     q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin &&
                     q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin &&
-                    q.Fecha >= fecha_ini.Date && q.Fecha <= fecha_fin.Date).Select(q => new ACA_006_Info
+                    q.Fecha >= fecha_ini.Date && q.Fecha <= fecha_fin.Date
+                    && (MostrarAlumnosRetirados == true ? q.EsRetirado == q.EsRetirado : q.EsRetirado == false)).Select(q => new ACA_006_Info
                     {
                         IdEmpresa = q.IdEmpresa,
                         IdAnio = q.IdAnio,
@@ -52,10 +53,10 @@ namespace Core.Data.Reportes.Academico
                         NomJornada = q.NomJornada,
                         NomCurso = q.NomCurso,
                         NomNivel = q.NomNivel,
-                        OrdenJornada = q.OrdenJornada,
-                        OrdenNivel = q.OrdenNivel,
-                        OrdenCurso = q.OrdenCurso,
-                        OrdenParalelo = q.OrdenParalelo,
+                        OrdenJornada = q.OrdenJornada??0,
+                        OrdenNivel = q.OrdenNivel??0,
+                        OrdenCurso = q.OrdenCurso??0,
+                        OrdenParalelo = q.OrdenParalelo??0,
                         CodigoParalelo = q.CodigoParalelo,
                         IdMatricula = q.IdMatricula,
                         IdParalelo = q.IdParalelo,

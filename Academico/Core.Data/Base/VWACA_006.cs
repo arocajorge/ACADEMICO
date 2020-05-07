@@ -16,14 +16,14 @@ namespace Core.Data.Base
     {
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
-        public int OrdenNivel { get; set; }
+        public Nullable<int> OrdenNivel { get; set; }
         public string NomJornada { get; set; }
-        public int OrdenJornada { get; set; }
-        public int OrdenCurso { get; set; }
+        public Nullable<int> OrdenJornada { get; set; }
+        public Nullable<int> OrdenCurso { get; set; }
         public string NomCurso { get; set; }
         public string CodigoParalelo { get; set; }
         public string NomParalelo { get; set; }
-        public int OrdenParalelo { get; set; }
+        public Nullable<int> OrdenParalelo { get; set; }
         public string pe_sexo { get; set; }
         public string NomSexo { get; set; }
         public int Cantidad { get; set; }
@@ -37,5 +37,7 @@ namespace Core.Data.Base
         public int IdParalelo { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Descripcion { get; set; }
+        public Nullable<bool> EsRetirado { get; set; }
+        public string EsRetiradoString { get; set; }
     }
 }

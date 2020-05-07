@@ -321,6 +321,8 @@
             // 
             this.xrTableCell56.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrTableCell56.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Rendimiento]")});
             this.xrTableCell56.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTableCell56.Multiline = true;
             this.xrTableCell56.Name = "xrTableCell56";
@@ -330,6 +332,7 @@
             this.xrTableCell56.StylePriority.UsePadding = false;
             this.xrTableCell56.StylePriority.UseTextAlignment = false;
             this.xrTableCell56.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.xrTableCell56.TextFormatString = "{0:n2}";
             this.xrTableCell56.Weight = 0.23709501773216846D;
             // 
             // xrTableCell57
@@ -370,6 +373,8 @@
             // 
             this.xrTableCell59.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrTableCell59.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Conducta]")});
             this.xrTableCell59.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTableCell59.Multiline = true;
             this.xrTableCell59.Name = "xrTableCell59";

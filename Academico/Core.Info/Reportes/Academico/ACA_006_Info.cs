@@ -1,4 +1,6 @@
-﻿namespace Core.Info.Reportes.Academico
+﻿using System;
+
+namespace Core.Info.Reportes.Academico
 {
    public class ACA_006_Info
     {
@@ -25,5 +27,7 @@
         public int IdParalelo { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Descripcion { get; set; }
+        public Nullable<bool> EsRetirado { get; set; }
+        public string EsRetiradoString { get; set; }
     }
 }

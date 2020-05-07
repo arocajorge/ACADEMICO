@@ -43,7 +43,8 @@ namespace Core.Data.Reportes.Academico
                     q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin &&
                     q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin &&
                     q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin &&
-                    q.Fecha >= fecha_ini.Date && q.Fecha <= fecha_fin.Date).ToList();
+                    q.Fecha >= fecha_ini.Date && q.Fecha <= fecha_fin.Date
+                    && (MostrarAlumnosRetirados == true ? q.EsRetirado == q.EsRetirado : q.EsRetirado == false)).ToList();
 
                     foreach (var q in lst)
                     {
