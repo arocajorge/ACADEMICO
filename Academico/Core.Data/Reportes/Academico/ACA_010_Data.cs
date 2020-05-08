@@ -20,9 +20,7 @@ namespace Core.Data.Reportes.Academico
                 {
                     //Context.SetCommandTimeOut(5000);
                     Context.Database.CommandTimeout = 5000;
-                    var lst = Context.VWACA_010.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede &&
-                    q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo
-                    && q.IdMateria == IdMateria && q.IdCatalogoParcial == IdCatalogoParcial).ToList();
+                    var lst = Context.SPACA_010(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial, IdMateria).ToList();
 
                     lst.ForEach(q =>
                     {
@@ -32,39 +30,49 @@ namespace Core.Data.Reportes.Academico
                             IdEmpresa = q.IdEmpresa,
                             IdMatricula = q.IdMatricula,
                             IdMateria = q.IdMateria,
-                            IdProfesor = q.IdProfesor,
                             IdAlumno = q.IdAlumno,
-                            Alumno = q.Alumno,
-                            Codigo = q.Codigo,
-                            Profesor = q.Profesor,
+                            pe_cedulaRuc=q.pe_cedulaRuc,
+                            NombreAlumno = q.NombreAlumno,
+                            CodigoAlumno = q.CodigoAlumno,
+                            NombreProfesor = q.NombreProfesor,
+                            IdAnio =q.IdAnio,
+                            IdSede =q.IdSede,
+                            IdNivel=q.IdNivel,
+                            IdJornada=q.IdJornada,
+                            IdCurso=q.IdCurso,
+                            IdParalelo=q.IdParalelo,
+                            CodigoParalelo=q.CodigoParalelo,
+                            Descripcion = q.Descripcion,
+                            NomSede = q.NomSede,
                             NomNivel = q.NomNivel,
                             NomJornada =q.NomJornada,
                             NomMateria = q.NomMateria,
                             NomCurso = q.NomCurso,
                             NomParalelo = q.NomParalelo,
+                            OrdenNivel=q.OrdenNivel,
+                            OrdenJornada=q.OrdenJornada,
+                            OrdenCurso=q.OrdenCurso,
+                            OrdenParalelo=q.OrdenParalelo,
+                            OrdenMateriaGrupo=q.OrdenMateriaGrupo,
+                            OrdenMateriaArea=q.OrdenMateriaArea,
+                            OrdenMateria=q.OrdenMateria,
+                            Calificacion =q.Calificacion,
+                            EsObligatorio=q.EsObligatorio,
+                            NomCatalogo=q.NomCatalogo,
+                            NomMateriaArea=q.NomMateriaArea,
+                            NomMateriaGrupo=q.NomMateriaGrupo,  
                             IdCatalogoParcial = q.IdCatalogoParcial,
                             Calificacion1 = q.Calificacion1,
                             Calificacion2 = q.Calificacion2,
                             Calificacion3 = q.Calificacion3,
                             Calificacion4 = q.Calificacion4,
                             Evaluacion = q.Evaluacion,
-                            Remedial1 = q.Remedial1,
-                            Remedial2 = q.Remedial2,
-                            Conducta = q.Conducta,
+                            Letra = q.Letra,
                             MotivoCalificacion = q.MotivoCalificacion,
                             MotivoConducta = q.MotivoConducta,
                             AccionRemedial = q.AccionRemedial,
-                            //CalificacionP1 = q.CalificacionP1,
-                            //CalificacionP2 = q.CalificacionP2,
-                            //CalificacionP3 = q.CalificacionP3,
-                            //CalificacionP4 = q.CalificacionP4,
-                            //CalificacionP5 = q.CalificacionP5,
-                            //CalificacionP6 = q.CalificacionP6,
-                            //Rendimiento = (IdCatalogoParcial== Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1) ? q.CalificacionP1 : 
-                            //IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2) ? q.CalificacionP2 : 
-                            //IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3)?q.CalificacionP3 : 
-                            //IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4)?q.CalificacionP4 : 
-                            //IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5)?q.CalificacionP5 : q.CalificacionP6)
+                            PromedioParcial = q.PromedioParcial
+                             
                         });
                     });
                 }

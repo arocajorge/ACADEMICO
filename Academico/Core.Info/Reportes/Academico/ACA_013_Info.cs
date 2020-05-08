@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Reportes.Academico
 {
-    public class ACA_010_Info
+    public class ACA_013_Info
     {
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
@@ -39,20 +39,17 @@ namespace Core.Info.Reportes.Academico
         public int OrdenMateria { get; set; }
         public Nullable<int> OrdenMateriaGrupo { get; set; }
         public Nullable<int> OrdenMateriaArea { get; set; }
-        public string NombreProfesor { get; set; }
         public string NomCatalogo { get; set; }
         public string Descripcion { get; set; }
         public Nullable<decimal> Calificacion1 { get; set; }
         public Nullable<decimal> Calificacion2 { get; set; }
         public Nullable<decimal> Calificacion3 { get; set; }
         public Nullable<decimal> Calificacion4 { get; set; }
+        public Nullable<decimal> Remedial1 { get; set; }
+        public Nullable<decimal> Remedial2 { get; set; }
         public Nullable<decimal> Evaluacion { get; set; }
-        public string MotivoCalificacion { get; set; }
-        public string MotivoConducta { get; set; }
-        public string AccionRemedial { get; set; }
         public string Letra { get; set; }
         public Nullable<decimal> Calificacion { get; set; }
         public Nullable<decimal> PromedioParcial { get; set; }
-        public int RowNumber { get; set; }
     }
 }

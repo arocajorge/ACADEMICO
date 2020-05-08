@@ -42,11 +42,11 @@ namespace Core.Web.Reportes.Academico
             int IdMateria = string.IsNullOrEmpty(p_IdMateria.Value.ToString()) ? 0 : Convert.ToInt32(p_IdMateria.Value);
             int IdCatalogoParcial = string.IsNullOrEmpty(p_IdCatalogoParcial.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCatalogoParcial.Value);
 
-            var info_catalogo = bus_catalogo.GetInfo(IdCatalogoParcial);
-            var info_catalogo_tipo = bus_catalogo_tipo.GetInfo((info_catalogo == null ? 0 : info_catalogo.IdCatalogoTipo));
-            var info_anio = bus_anio.GetInfo(IdEmpresa, IdAnio);
-            var TituloParcial = (info_catalogo_tipo==null ? "" : info_catalogo_tipo.NomCatalogoTipo) + " - " + (info_catalogo==null ? "" : info_catalogo.NomCatalogo) + " - " + (info_anio==null ? "" : info_anio.Descripcion);
-            lbl_parcial.Text = TituloParcial;
+            //var info_catalogo = bus_catalogo.GetInfo(IdCatalogoParcial);
+            //var info_catalogo_tipo = bus_catalogo_tipo.GetInfo((info_catalogo == null ? 0 : info_catalogo.IdCatalogoTipo));
+            //var info_anio = bus_anio.GetInfo(IdEmpresa, IdAnio);
+            //var TituloParcial = (info_catalogo_tipo==null ? "" : info_catalogo_tipo.NomCatalogoTipo) + " - " + (info_catalogo==null ? "" : info_catalogo.NomCatalogo) + " - " + (info_anio==null ? "" : info_anio.Descripcion);
+            //lbl_parcial.Text = TituloParcial;
 
             var info_sede = bus_sede.GetInfo(IdEmpresa, IdSede);
             if (info_sede != null)

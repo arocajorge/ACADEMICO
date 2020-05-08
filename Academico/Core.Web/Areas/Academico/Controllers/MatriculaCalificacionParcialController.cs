@@ -801,7 +801,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         if ((info_parcial.Orden - 1) != 0)
                         {
-                            var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(item.IdEmpresa, item.IdSede, item.IdAnio, Convert.ToInt32(info_parcial.Orden));
+                            var OrdenAnterior = info_parcial.Orden - 1;
+                            var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(item.IdEmpresa, item.IdSede, item.IdAnio, Convert.ToInt32(OrdenAnterior));
                             var info_cal_anteriores = bus_calificacion_parcial.GetInfo(item.IdEmpresa, item.IdMatricula, info_parcial_anterior.IdCatalogoParcial, item.IdMateria, Convert.ToDecimal(item.IdProfesor));
 
                             if (Convert.ToDecimal(info_cal_anteriores.Calificacion1) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion2) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion3) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion4) == 0 || Convert.ToDecimal(info_cal_anteriores.Evaluacion) == 0)

@@ -190,6 +190,12 @@
     <Compile Include="Base\SPACA_007_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPACA_010_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\SPACA_013_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\SPACA_ContabilizacionCobros_Result.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
@@ -253,19 +259,10 @@
     <Compile Include="Base\VWACA_009.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\VWACA_010.cs">
-      <DependentUpon>ModelReportes.tt</DependentUpon>
-    </Compile>
     <Compile Include="Base\VWACA_011.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\VWACA_012.cs">
-      <DependentUpon>ModelReportes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\VWACA_013.cs">
-      <DependentUpon>ModelReportes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\VWACA_014.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivoEquivalenciaPromedio.cs">
@@ -1968,6 +1965,7 @@
     <Compile Include="Reportes\Academico\ACA_010_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_011_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_012_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_013_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Data.cs" />

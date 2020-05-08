@@ -488,7 +488,7 @@ namespace Core.Web.Areas.Academico.Controllers
             UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings_Examen.UploadValidationSettings, UploadControlSettings_Examen.FileUploadComplete);
             return null;
         }
-        public ActionResult Importar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdMateria = 0, int IdCatalogoParcial = 0)
+        public ActionResult Importar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdMateria = 0, int IdCatalogoParcial = 0, bool isSuccess=false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -511,6 +511,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
+            ViewBag.MensajeSuccess = (isSuccess==false ? null : MensajeSuccess);
             string IdUsuario = SessionFixed.IdUsuario;
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
@@ -539,6 +540,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXGRA))
                     item.CalificacionExamen = Convert.ToDecimal(item.ExamenGracia);
             }
+
             Lista_CalificacionExamen.set_list(ListaCalificacionExamen, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             cargar_combos(model);
@@ -602,7 +604,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     ViewBag.MensajeSuccess = MensajeSuccess;
                 }
                 cargar_combos(model);
-                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdMateria = model.IdMateria, IdCatalogoParcial = model.IdCatalogoParcial });
+                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdMateria = model.IdMateria, IdCatalogoParcial = model.IdCatalogoParcial, isSuccess=true });
                 //return View(model);
             }
             catch (Exception ex)
