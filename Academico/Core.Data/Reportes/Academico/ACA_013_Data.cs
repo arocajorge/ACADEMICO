@@ -10,7 +10,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_013_Data
     {
-        public List<ACA_013_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
+        public List<ACA_013_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
         {
             try
             {
@@ -67,7 +67,44 @@ namespace Core.Data.Reportes.Academico
                             Remedial2=q.Remedial2,
                             Evaluacion = q.Evaluacion,
                             Letra = q.Letra,
-                            PromedioParcial = q.PromedioParcial
+                            PromedioParcial = q.PromedioParcial,
+                            MotivoCalificacion=q.MotivoCalificacion,
+                            AccionRemedial = q.AccionRemedial
+                        });
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ACA_013_EquivalenciaPromedio_Info> get_list_equivalencia(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+
+                List<ACA_013_EquivalenciaPromedio_Info> Lista = new List<ACA_013_EquivalenciaPromedio_Info>();
+                using (EntitiesReportes Context = new EntitiesReportes())
+                {
+                    Context.Database.CommandTimeout = 5000;
+                    var lst = Context.VWACA_013_EquivalenciaPromedio.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
+
+                    foreach (var q in lst)
+                    {
+                        Lista.Add(new ACA_013_EquivalenciaPromedio_Info
+                        {
+                            IdEmpresa=q.IdEmpresa,
+                            IdAnio=q.IdAnio,
+                            Codigo=q.Codigo,
+                            IdEquivalenciaPromedio=q.IdEquivalenciaPromedio,
+                            Descripcion=q.Descripcion,
+                            ValorMinimo=q.ValorMinimo,
+                            ValorMaximo=q.ValorMaximo
                         });
                     }
                 }

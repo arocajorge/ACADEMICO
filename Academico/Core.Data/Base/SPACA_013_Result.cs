@@ -55,6 +55,8 @@ namespace Core.Data.Base
         public Nullable<decimal> Evaluacion { get; set; }
         public string Letra { get; set; }
         public Nullable<decimal> Calificacion { get; set; }
+        public string MotivoCalificacion { get; set; }
+        public string AccionRemedial { get; set; }
         public Nullable<decimal> PromedioParcial { get; set; }
     }
 }

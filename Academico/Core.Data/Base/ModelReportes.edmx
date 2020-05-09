@@ -373,6 +373,25 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_012' no tien
           <Property Name="EstadoPago" Type="varchar" MaxLength="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_013_EquivalenciaPromedio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VWACA_013_EquivalenciaPromedio">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEquivalenciaPromedio" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="ValorMinimo" />
+            <PropertyRef Name="ValorMaximo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdEquivalenciaPromedio" Type="int" Nullable="false" />
+          <Property Name="IdAnio" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar(max)" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
+          <Property Name="ValorMinimo" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ValorMaximo" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_001">
           <Key>
@@ -1732,6 +1751,17 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
     [VWACA_012].[EstadoPago] AS [EstadoPago]
     FROM [Academico].[VWACA_012] AS [VWACA_012]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VWACA_013_EquivalenciaPromedio" EntityType="Self.VWACA_013_EquivalenciaPromedio" store:Type="Views" store:Schema="Academico">
+            <DefiningQuery>SELECT 
+    [VWACA_013_EquivalenciaPromedio].[IdEmpresa] AS [IdEmpresa], 
+    [VWACA_013_EquivalenciaPromedio].[IdEquivalenciaPromedio] AS [IdEquivalenciaPromedio], 
+    [VWACA_013_EquivalenciaPromedio].[IdAnio] AS [IdAnio], 
+    [VWACA_013_EquivalenciaPromedio].[Descripcion] AS [Descripcion], 
+    [VWACA_013_EquivalenciaPromedio].[Codigo] AS [Codigo], 
+    [VWACA_013_EquivalenciaPromedio].[ValorMinimo] AS [ValorMinimo], 
+    [VWACA_013_EquivalenciaPromedio].[ValorMaximo] AS [ValorMaximo]
+    FROM [Academico].[VWACA_013_EquivalenciaPromedio] AS [VWACA_013_EquivalenciaPromedio]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VWBAN_001" EntityType="Self.VWBAN_001" store:Type="Views" store:Schema="Academico">
             <DefiningQuery>SELECT 
     [VWBAN_001].[CodTipoCbteBan] AS [CodTipoCbteBan], 
@@ -2521,6 +2551,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
             <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
             <Parameter Name="IdParcial" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="VWACA_013_EquivalenciaPromedio" EntityType="ModelReportes.VWACA_013_EquivalenciaPromedio" />
         </EntityContainer>
         <ComplexType Name="SPACA_001_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -4310,8 +4341,27 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Type="Decimal" Name="Evaluacion" Nullable="true" Precision="18" Scale="2" />
           <Property Type="String" Name="Letra" Nullable="true" MaxLength="10" />
           <Property Type="Decimal" Name="Calificacion" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="MotivoCalificacion" Nullable="true" />
+          <Property Type="String" Name="AccionRemedial" Nullable="true" />
           <Property Type="Decimal" Name="PromedioParcial" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
+        <EntityType Name="VWACA_013_EquivalenciaPromedio">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEquivalenciaPromedio" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="ValorMinimo" />
+            <PropertyRef Name="ValorMaximo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEquivalenciaPromedio" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ValorMinimo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ValorMaximo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5764,10 +5814,25 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
                 <ScalarProperty Name="Evaluacion" ColumnName="Evaluacion" />
                 <ScalarProperty Name="Letra" ColumnName="Letra" />
                 <ScalarProperty Name="Calificacion" ColumnName="Calificacion" />
+                <ScalarProperty Name="MotivoCalificacion" ColumnName="MotivoCalificacion" />
+                <ScalarProperty Name="AccionRemedial" ColumnName="AccionRemedial" />
                 <ScalarProperty Name="PromedioParcial" ColumnName="PromedioParcial" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWACA_013_EquivalenciaPromedio">
+            <EntityTypeMapping TypeName="ModelReportes.VWACA_013_EquivalenciaPromedio">
+              <MappingFragment StoreEntitySet="VWACA_013_EquivalenciaPromedio">
+                <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
+                <ScalarProperty Name="ValorMinimo" ColumnName="ValorMinimo" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdEquivalenciaPromedio" ColumnName="IdEquivalenciaPromedio" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
