@@ -53,5 +53,6 @@ namespace Core.Info.Reportes.Academico
         public string MotivoCalificacion { get; set; }
         public string AccionRemedial { get; set; }
         public Nullable<decimal> PromedioParcial { get; set; }
+        public Nullable<int> PromedioConductaParcial { get; set; }
     }
 }

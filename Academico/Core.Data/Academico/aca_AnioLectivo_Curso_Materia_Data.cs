@@ -155,6 +155,78 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public List<aca_AnioLectivo_Curso_Materia_Info> getList_Update_Grupo(int IdEmpresa, int IdAnio, int IdMateriaGrupo)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Materia_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.vwaca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdMateriaGrupo == IdMateriaGrupo).Select(q => new aca_AnioLectivo_Curso_Materia_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdSede = q.IdSede,
+                        IdAnio = q.IdAnio,
+                        IdNivel = q.IdNivel,
+                        IdJornada = q.IdJornada,
+                        IdCurso = q.IdCurso,
+                        IdMateria = q.IdMateria,
+                        NomMateria = q.NomMateria,
+                        NomMateriaArea = q.NomMateriaArea,
+                        NomMateriaGrupo = q.NomMateriaGrupo,
+                        OrdenMateria = q.OrdenMateria,
+                        OrdenMateriaArea = q.OrdenMateriaArea,
+                        OrdenMateriaGrupo = q.OrdenMateriaGrupo,
+                        EsObligatorio = q.EsObligatorio
+                    }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivo_Curso_Materia_Info> getList_Update_Area(int IdEmpresa, int IdAnio, int IdMateriaArea)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Materia_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = Context.vwaca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdMateriaArea == IdMateriaArea).Select(q => new aca_AnioLectivo_Curso_Materia_Info
+                    {
+                        IdEmpresa = q.IdEmpresa,
+                        IdSede = q.IdSede,
+                        IdAnio = q.IdAnio,
+                        IdNivel = q.IdNivel,
+                        IdJornada = q.IdJornada,
+                        IdCurso = q.IdCurso,
+                        IdMateria = q.IdMateria,
+                        NomMateria = q.NomMateria,
+                        NomMateriaArea = q.NomMateriaArea,
+                        NomMateriaGrupo = q.NomMateriaGrupo,
+                        OrdenMateria = q.OrdenMateria,
+                        OrdenMateriaArea = q.OrdenMateriaArea,
+                        OrdenMateriaGrupo = q.OrdenMateriaGrupo,
+                        EsObligatorio = q.EsObligatorio
+                    }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool modificarDB(List<aca_AnioLectivo_Curso_Materia_Info> lista)
         {
             try
@@ -178,8 +250,9 @@ namespace Core.Data.Academico
                             Entity.OrdenMateriaArea = item.OrdenMateriaArea;
                             Entity.OrdenMateriaGrupo = item.OrdenMateriaGrupo;
 
+                            Context.SaveChanges();
                         }
-                        Context.SaveChanges();
+                        
                     }
                 }
 

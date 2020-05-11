@@ -1458,6 +1458,15 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Parameter Name="IdParalelo" Type="int" Mode="In" />
           <Parameter Name="IdParcial" Type="int" Mode="In" />
         </Function>
+        <Function Name="SPACA_014" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdAnio" Type="int" Mode="In" />
+          <Parameter Name="IdSede" Type="int" Mode="In" />
+          <Parameter Name="IdNivel" Type="int" Mode="In" />
+          <Parameter Name="IdJornada" Type="int" Mode="In" />
+          <Parameter Name="IdCurso" Type="int" Mode="In" />
+          <Parameter Name="IdParalelo" Type="int" Mode="In" />
+        </Function>
         <Function Name="SPCXC_001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="IdSucursalIni" Type="int" Mode="In" />
@@ -2541,6 +2550,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
             <Parameter Name="IdParcial" Mode="In" Type="Int32" />
             <Parameter Name="IdMateria" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="VWACA_013_EquivalenciaPromedio" EntityType="ModelReportes.VWACA_013_EquivalenciaPromedio" />
           <FunctionImport Name="SPACA_013" ReturnType="Collection(ModelReportes.SPACA_013_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdAnio" Mode="In" Type="Int32" />
@@ -2551,7 +2561,15 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
             <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
             <Parameter Name="IdParcial" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="VWACA_013_EquivalenciaPromedio" EntityType="ModelReportes.VWACA_013_EquivalenciaPromedio" />
+          <FunctionImport Name="SPACA_014" ReturnType="Collection(ModelReportes.SPACA_014_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
+            <Parameter Name="IdSede" Mode="In" Type="Int32" />
+            <Parameter Name="IdNivel" Mode="In" Type="Int32" />
+            <Parameter Name="IdJornada" Mode="In" Type="Int32" />
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+            <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACA_001_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -4298,6 +4316,23 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Type="Decimal" Name="PromedioParcial" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Int32" Name="RowNumber" Nullable="false" />
         </ComplexType>
+        <EntityType Name="VWACA_013_EquivalenciaPromedio">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEquivalenciaPromedio" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="ValorMinimo" />
+            <PropertyRef Name="ValorMaximo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEquivalenciaPromedio" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ValorMinimo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ValorMaximo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
         <ComplexType Name="SPACA_013_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
@@ -4344,24 +4379,61 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Type="String" Name="MotivoCalificacion" Nullable="true" />
           <Property Type="String" Name="AccionRemedial" Nullable="true" />
           <Property Type="Decimal" Name="PromedioParcial" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="PromedioConductaParcial" Nullable="true" />
         </ComplexType>
-        <EntityType Name="VWACA_013_EquivalenciaPromedio">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEquivalenciaPromedio" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="ValorMinimo" />
-            <PropertyRef Name="ValorMaximo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEquivalenciaPromedio" Type="Int32" Nullable="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ValorMinimo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ValorMaximo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-        </EntityType>
+        <ComplexType Name="SPACA_014_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdMateria" Nullable="false" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="IdAnio" Nullable="false" />
+          <Property Type="Int32" Name="IdSede" Nullable="false" />
+          <Property Type="Int32" Name="IdNivel" Nullable="false" />
+          <Property Type="Int32" Name="IdJornada" Nullable="false" />
+          <Property Type="Int32" Name="IdCurso" Nullable="false" />
+          <Property Type="Int32" Name="IdParalelo" Nullable="false" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenNivel" Nullable="true" />
+          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenJornada" Nullable="true" />
+          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenCurso" Nullable="true" />
+          <Property Type="String" Name="CodigoParalelo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenParalelo" Nullable="true" />
+          <Property Type="Decimal" Name="CalificacionP1" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalificacionP2" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalificacionP3" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PromedioQ1" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ExamenQ1" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PromedioFinalQ1" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalificacionP4" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalificacionP5" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CalificacionP6" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PromedioQ2" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ExamenQ2" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PromedioFinalQ2" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Double" Name="PromedioQuimestralFinal" Nullable="true" />
+          <Property Type="Decimal" Name="ExamenMejoramiento" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="CampoMejoramiento" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="ExamenSupletorio" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ExamenRemedial" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ExamenGracia" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="PromedioFinal" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="IdEquivalenciaPromedio" Nullable="true" />
+          <Property Type="String" Name="EquivalenciaPromedioFinal" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomMateria" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="NomMateriaArea" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomMateriaGrupo" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="EsObligatorio" Nullable="false" />
+          <Property Type="Int32" Name="OrdenMateria" Nullable="false" />
+          <Property Type="Int32" Name="OrdenMateriaGrupo" Nullable="true" />
+          <Property Type="Int32" Name="OrdenMateriaArea" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5769,6 +5841,19 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="VWACA_013_EquivalenciaPromedio">
+            <EntityTypeMapping TypeName="ModelReportes.VWACA_013_EquivalenciaPromedio">
+              <MappingFragment StoreEntitySet="VWACA_013_EquivalenciaPromedio">
+                <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
+                <ScalarProperty Name="ValorMinimo" ColumnName="ValorMinimo" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdEquivalenciaPromedio" ColumnName="IdEquivalenciaPromedio" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SPACA_013" FunctionName="ModelReportes.Store.SPACA_013">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ModelReportes.SPACA_013_Result">
@@ -5817,22 +5902,67 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
                 <ScalarProperty Name="MotivoCalificacion" ColumnName="MotivoCalificacion" />
                 <ScalarProperty Name="AccionRemedial" ColumnName="AccionRemedial" />
                 <ScalarProperty Name="PromedioParcial" ColumnName="PromedioParcial" />
+                <ScalarProperty Name="PromedioConductaParcial" ColumnName="PromedioConductaParcial" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="VWACA_013_EquivalenciaPromedio">
-            <EntityTypeMapping TypeName="ModelReportes.VWACA_013_EquivalenciaPromedio">
-              <MappingFragment StoreEntitySet="VWACA_013_EquivalenciaPromedio">
-                <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
-                <ScalarProperty Name="ValorMinimo" ColumnName="ValorMinimo" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdEquivalenciaPromedio" ColumnName="IdEquivalenciaPromedio" />
+          <FunctionImportMapping FunctionImportName="SPACA_014" FunctionName="ModelReportes.Store.SPACA_014">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPACA_014_Result">
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
+                <ScalarProperty Name="CodigoParalelo" ColumnName="CodigoParalelo" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
+                <ScalarProperty Name="CalificacionP1" ColumnName="CalificacionP1" />
+                <ScalarProperty Name="CalificacionP2" ColumnName="CalificacionP2" />
+                <ScalarProperty Name="CalificacionP3" ColumnName="CalificacionP3" />
+                <ScalarProperty Name="PromedioQ1" ColumnName="PromedioQ1" />
+                <ScalarProperty Name="ExamenQ1" ColumnName="ExamenQ1" />
+                <ScalarProperty Name="PromedioFinalQ1" ColumnName="PromedioFinalQ1" />
+                <ScalarProperty Name="CalificacionP4" ColumnName="CalificacionP4" />
+                <ScalarProperty Name="CalificacionP5" ColumnName="CalificacionP5" />
+                <ScalarProperty Name="CalificacionP6" ColumnName="CalificacionP6" />
+                <ScalarProperty Name="PromedioQ2" ColumnName="PromedioQ2" />
+                <ScalarProperty Name="ExamenQ2" ColumnName="ExamenQ2" />
+                <ScalarProperty Name="PromedioFinalQ2" ColumnName="PromedioFinalQ2" />
+                <ScalarProperty Name="PromedioQuimestralFinal" ColumnName="PromedioQuimestralFinal" />
+                <ScalarProperty Name="ExamenMejoramiento" ColumnName="ExamenMejoramiento" />
+                <ScalarProperty Name="CampoMejoramiento" ColumnName="CampoMejoramiento" />
+                <ScalarProperty Name="ExamenSupletorio" ColumnName="ExamenSupletorio" />
+                <ScalarProperty Name="ExamenRemedial" ColumnName="ExamenRemedial" />
+                <ScalarProperty Name="ExamenGracia" ColumnName="ExamenGracia" />
+                <ScalarProperty Name="PromedioFinal" ColumnName="PromedioFinal" />
+                <ScalarProperty Name="IdEquivalenciaPromedio" ColumnName="IdEquivalenciaPromedio" />
+                <ScalarProperty Name="EquivalenciaPromedioFinal" ColumnName="EquivalenciaPromedioFinal" />
+                <ScalarProperty Name="NomMateria" ColumnName="NomMateria" />
+                <ScalarProperty Name="NomMateriaArea" ColumnName="NomMateriaArea" />
+                <ScalarProperty Name="NomMateriaGrupo" ColumnName="NomMateriaGrupo" />
+                <ScalarProperty Name="EsObligatorio" ColumnName="EsObligatorio" />
+                <ScalarProperty Name="OrdenMateria" ColumnName="OrdenMateria" />
+                <ScalarProperty Name="OrdenMateriaGrupo" ColumnName="OrdenMateriaGrupo" />
+                <ScalarProperty Name="OrdenMateriaArea" ColumnName="OrdenMateriaArea" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

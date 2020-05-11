@@ -1,0 +1,118 @@
+﻿@model Core.Info.Academico.aca_MatriculaCalificacionParcial_Info
+@{
+    ViewBag.Title = "Record académico";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
+}
+@using (Html.BeginForm("ACA_014", "AcademicoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+                </div>
+            </div>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Año Lectivo</label>
+                            @Html.Partial("_ComboBoxPartial_Anio_Cal", Model)
+                            @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Sede</label>
+                            @Html.Partial("_ComboBoxPartial_Sede_Cal", Model)
+                            @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Nivel Académico</label>
+                            @Html.Partial("_ComboBoxPartial_Nivel_Cal", Model)
+                            @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Jornada</label>
+                            @Html.Partial("_ComboBoxPartial_Jornada_Cal", Model)
+                            @Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Curso</label>
+                            @Html.Partial("_ComboBoxPartial_Curso_Cal", Model)
+                            @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Paralelo</label>
+                            @Html.Partial("_ComboBoxPartial_Paralelo_Cal_Quim", Model)
+                            @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Parcial</label>
+                            @Html.DropDownListFor(q => q.IdCatalogoParcial, new SelectList(ViewBag.lst_parcial, "IdCatalogoParcial", "NomCatalogo"), new { @class = "form-control", @id = "IdCatalogoParcial" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoParcial, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">@ViewBag.Title</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            @Html.DevExpress().WebDocumentViewer(settings =>
+                    {
+                        settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                        settings.MobileMode = false;
+                        settings.Name = "webDocumentViewer";
+                    }).Bind(ViewBag.Report).GetHtml()
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            [@Session["IdEmpresa"]] @Session["nom_empresa"]
+        </div>
+        <!-- /.box-footer-->
+    </div>
+}

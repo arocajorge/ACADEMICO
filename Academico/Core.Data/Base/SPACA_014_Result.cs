@@ -11,18 +11,21 @@ namespace Core.Data.Base
 {
     using System;
     
-    public partial class SPACA_013_Result
+    public partial class SPACA_014_Result
     {
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
         public int IdMateria { get; set; }
-        public int IdCatalogoParcial { get; set; }
+        public string Codigo { get; set; }
+        public string pe_nombreCompleto { get; set; }
         public int IdAnio { get; set; }
         public int IdSede { get; set; }
         public int IdNivel { get; set; }
         public int IdJornada { get; set; }
         public int IdCurso { get; set; }
         public int IdParalelo { get; set; }
+        public decimal IdAlumno { get; set; }
+        public string Descripcion { get; set; }
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
         public Nullable<int> OrdenNivel { get; set; }
@@ -33,10 +36,27 @@ namespace Core.Data.Base
         public string CodigoParalelo { get; set; }
         public string NomParalelo { get; set; }
         public Nullable<int> OrdenParalelo { get; set; }
-        public decimal IdAlumno { get; set; }
-        public string NombreAlumno { get; set; }
-        public string CodigoAlumno { get; set; }
-        public string pe_cedulaRuc { get; set; }
+        public Nullable<decimal> CalificacionP1 { get; set; }
+        public Nullable<decimal> CalificacionP2 { get; set; }
+        public Nullable<decimal> CalificacionP3 { get; set; }
+        public Nullable<decimal> PromedioQ1 { get; set; }
+        public Nullable<decimal> ExamenQ1 { get; set; }
+        public Nullable<decimal> PromedioFinalQ1 { get; set; }
+        public Nullable<decimal> CalificacionP4 { get; set; }
+        public Nullable<decimal> CalificacionP5 { get; set; }
+        public Nullable<decimal> CalificacionP6 { get; set; }
+        public Nullable<decimal> PromedioQ2 { get; set; }
+        public Nullable<decimal> ExamenQ2 { get; set; }
+        public Nullable<decimal> PromedioFinalQ2 { get; set; }
+        public Nullable<double> PromedioQuimestralFinal { get; set; }
+        public Nullable<decimal> ExamenMejoramiento { get; set; }
+        public string CampoMejoramiento { get; set; }
+        public Nullable<decimal> ExamenSupletorio { get; set; }
+        public Nullable<decimal> ExamenRemedial { get; set; }
+        public Nullable<decimal> ExamenGracia { get; set; }
+        public Nullable<decimal> PromedioFinal { get; set; }
+        public Nullable<int> IdEquivalenciaPromedio { get; set; }
+        public string EquivalenciaPromedioFinal { get; set; }
         public string NomMateria { get; set; }
         public string NomMateriaArea { get; set; }
         public string NomMateriaGrupo { get; set; }
@@ -44,20 +64,5 @@ namespace Core.Data.Base
         public int OrdenMateria { get; set; }
         public Nullable<int> OrdenMateriaGrupo { get; set; }
         public Nullable<int> OrdenMateriaArea { get; set; }
-        public string NomCatalogo { get; set; }
-        public string Descripcion { get; set; }
-        public Nullable<decimal> Calificacion1 { get; set; }
-        public Nullable<decimal> Calificacion2 { get; set; }
-        public Nullable<decimal> Calificacion3 { get; set; }
-        public Nullable<decimal> Calificacion4 { get; set; }
-        public Nullable<decimal> Remedial1 { get; set; }
-        public Nullable<decimal> Remedial2 { get; set; }
-        public Nullable<decimal> Evaluacion { get; set; }
-        public string Letra { get; set; }
-        public Nullable<decimal> Calificacion { get; set; }
-        public string MotivoCalificacion { get; set; }
-        public string AccionRemedial { get; set; }
-        public Nullable<decimal> PromedioParcial { get; set; }
-        public Nullable<int> PromedioConductaParcial { get; set; }
     }
 }

@@ -90,7 +90,6 @@ namespace Core.Bus.Academico
                                 foreach (var info_curso_materia in lst_curso_materia)
                                 {
                                     info_curso_materia.NomMateria = info.NomMateria;
-                                    info_curso_materia.NomMateriaGrupo = info.NomMateriaGrupo;
                                     info_curso_materia.EsObligatorio = info.EsObligatorio;
                                     info_curso_materia.OrdenMateria = info.OrdenMateria;
                                 }

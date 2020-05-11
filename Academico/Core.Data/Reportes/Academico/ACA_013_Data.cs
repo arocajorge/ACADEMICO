@@ -69,7 +69,8 @@ namespace Core.Data.Reportes.Academico
                             Letra = q.Letra,
                             PromedioParcial = q.PromedioParcial,
                             MotivoCalificacion=q.MotivoCalificacion,
-                            AccionRemedial = q.AccionRemedial
+                            AccionRemedial = q.AccionRemedial,
+                            PromedioConductaParcial = q.PromedioConductaParcial
                         });
                     }
                 }
