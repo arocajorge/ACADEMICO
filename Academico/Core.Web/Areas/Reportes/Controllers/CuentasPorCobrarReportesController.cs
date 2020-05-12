@@ -529,5 +529,96 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
         #endregion
+
+        #region CXC_009
+        public ActionResult CXC_009()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = new aca_AnioLectivo_Info();
+            info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+
+            model.IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
+            model.mostrarAnulados = true;
+            CXC_009_Rpt report = new CXC_009_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_009");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_FechaIni.Value = model.fecha_ini.Date;
+            report.p_FechaFin.Value = model.fecha_fin.Date;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+
+            CXC_009_Resumen_Rpt ReportResumen = new CXC_009_Resumen_Rpt();
+            #region Cargo diseño desde base
+            var reportResum = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_009_Resumen");
+            if (reportResum != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
+                ReportResumen.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_FechaIni.Value = model.fecha_ini.Date;
+            ReportResumen.p_FechaFin.Value = model.fecha_fin.Date;
+            ReportResumen.usuario = SessionFixed.IdUsuario;
+            ReportResumen.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = ReportResumen;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CXC_009(cl_filtros_Info model)
+        {
+            CXC_009_Rpt report = new CXC_009_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_009");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_FechaIni.Value = model.fecha_ini.Date;
+            report.p_FechaFin.Value = model.fecha_fin.Date;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+
+            CXC_009_Resumen_Rpt ReportResumen = new CXC_009_Resumen_Rpt();
+            #region Cargo diseño desde base
+            var reportResum = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_009_Resumen");
+            if (reportResum != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
+                ReportResumen.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_FechaIni.Value = model.fecha_ini.Date;
+            ReportResumen.p_FechaFin.Value = model.fecha_fin.Date;
+            ReportResumen.usuario = SessionFixed.IdUsuario;
+            ReportResumen.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = ReportResumen;
+            return View(model);
+        }
+        #endregion
     }
 }
