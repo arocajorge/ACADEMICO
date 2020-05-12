@@ -1457,7 +1457,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ViewBag.lst_parcial = lst_parcial;
         }
-        public ActionResult ACA_014(int IdEmpresa = 0, decimal IdAlumno = 0)
+        public ActionResult ACA_014()
         {
             aca_MatriculaCalificacionParcial_Info model = new aca_MatriculaCalificacionParcial_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -1490,7 +1490,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
-            //report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
+
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;

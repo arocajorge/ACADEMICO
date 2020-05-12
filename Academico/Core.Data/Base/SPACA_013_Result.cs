@@ -58,6 +58,7 @@ namespace Core.Data.Base
         public string MotivoCalificacion { get; set; }
         public string AccionRemedial { get; set; }
         public Nullable<decimal> PromedioParcial { get; set; }
-        public Nullable<int> PromedioConductaParcial { get; set; }
+        public Nullable<int> SecuenciaPromedioConducta { get; set; }
+        public string LetraPromedioConducta { get; set; }
     }
 }

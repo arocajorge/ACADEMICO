@@ -196,6 +196,9 @@
     <Compile Include="Base\SPACA_013_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPACA_014_Conducta_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\SPACA_014_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
@@ -1977,6 +1980,7 @@
     <Compile Include="Reportes\Academico\ACA_010_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_011_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_012_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_014_Conducta_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Data.cs" />

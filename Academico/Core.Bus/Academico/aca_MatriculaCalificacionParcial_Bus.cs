@@ -17,6 +17,7 @@ namespace Core.Bus.Academico
         aca_MatriculaCalificacion_Data odata_calificacion = new aca_MatriculaCalificacion_Data();
         aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
         aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
+        aca_AnioLectivoEquivalenciaPromedio_Data odata_promedio_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Data();
 
         public List<aca_MatriculaCalificacionParcial_Info> GetList(int IdEmpresa, decimal IdMatricula)
         {
@@ -83,6 +84,7 @@ namespace Core.Bus.Academico
                             var info_calificacion = odata_calificacion.getInfo_modificar(info_matricula.IdEmpresa, info_matricula.IdAnio, info_matricula.IdSede, info_matricula.IdNivel, info_matricula.IdJornada, info_matricula.IdCurso, info_matricula.IdParalelo, info.IdMateria, info_matricula.IdAlumno);
                             var info_anio = odata_anio.getInfo(info.IdEmpresa, info_matricula.IdAnio);
 
+                            var IdEquivalenciaPromedioFinal = (int?)null;
                             decimal PromedioFinal = 0;
                             decimal PromedioFinalTemp = 0;
                             decimal PromedioMinimoPromocion = Math.Round(Convert.ToDecimal(info_anio.PromedioMinimoPromocion), 2, MidpointRounding.AwayFromZero);
@@ -142,7 +144,11 @@ namespace Core.Bus.Academico
                                         PromedioFinal = PromedioFinalTemp;
                                     }
                                 }
+
+                                var info_equivalencia = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, PromedioFinal);
+                                IdEquivalenciaPromedioFinal = info_equivalencia.IdEquivalenciaPromedio;
                                 info_calificacion.PromedioFinal = PromedioFinal;
+                                info_calificacion.IdEquivalenciaPromedioPF = IdEquivalenciaPromedioFinal;
                                 info_calificacion.CampoMejoramiento = CampoMejoramiento;
 
                                 odata_calificacion.modicarPaseAnioDB(info_calificacion);

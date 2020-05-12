@@ -35,6 +35,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         aca_MatriculaCalificacion_Combos_List ListaCombos = new aca_MatriculaCalificacion_Combos_List();
         aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
+        aca_AnioLectivoEquivalenciaPromedio_Bus bus_equivalencia_promedio = new aca_AnioLectivoEquivalenciaPromedio_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -506,6 +507,9 @@ namespace Core.Web.Areas.Academico.Controllers
                             RegistroValidoCalificacion = false;
                             ViewBag.MostrarError = "Debe de ingresar las calificaciones solicitadas.";
                         }
+
+                        var info_equivalencia_promedio = bus_equivalencia_promedio.GetInfo_x_Promedio(IdEmpresa, info_matricula.IdAnio, info_det.PromedioParcial);
+                        info_det.IdEquivalenciaPromedioParcial = info_equivalencia_promedio.IdEquivalenciaPromedio;
                     }
                     else
                     {
@@ -880,6 +884,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
+
         string Variable = "aca_MatriculaCalificacionParcial_Info";
         public List<aca_MatriculaCalificacionParcial_Info> get_list(decimal IdTransaccionSession)
         {
@@ -917,6 +922,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 edited_info.Remedial1 = info_det.Remedial1;
                 edited_info.Remedial2 = info_det.Remedial2;
                 edited_info.Conducta = info_det.Conducta;
+                edited_info.IdEquivalenciaPromedioParcial = info_det.IdEquivalenciaPromedioParcial;
                 edited_info.PromedioParcial = info_det.PromedioParcial;
                 edited_info.MotivoCalificacion = info_det.MotivoCalificacion;
                 edited_info.MotivoConducta = info_det.MotivoConducta;
@@ -961,17 +967,19 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
             aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
             aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
+            aca_AnioLectivoEquivalenciaPromedio_Bus bus_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Bus();
             var RegistroValidoConducta = true;
             var RegistroValidoCalificacion = true;
             var RegistroconPromedioBajo = false;
             var RegistroconConductaBaja = false;
             var mensaje = string.Empty;
             var actualizar = true;
+            var info_matricula = bus_matricula.GetInfo(info.IdEmpresa, info.IdMatricula);
 
             #region CalcularPromedio
             decimal resultado = 0;
             decimal suma_calificaciones = Convert.ToDecimal(info.Calificacion1 + info.Calificacion2 + info.Calificacion3 + info.Calificacion4 + info.Evaluacion);
-            decimal promedio = Convert.ToDecimal((info.Calificacion1 + info.Calificacion2 + info.Calificacion3 + info.Calificacion4 + info.Evaluacion) / 5);
+            var promedio =  Math.Round((Convert.ToDecimal((info.Calificacion1 + info.Calificacion2 + info.Calificacion3 + info.Calificacion4 + info.Evaluacion)) / 5),2, MidpointRounding.AwayFromZero);
             resultado = promedio;
 
             if (info.Remedial1 != 0)
@@ -990,10 +998,11 @@ namespace Core.Web.Areas.Academico.Controllers
             }
 
             info.PromedioParcial = resultado;
+            var info_equivalencia = bus_equivalencia.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, info.PromedioParcial);
+            info.IdEquivalenciaPromedioParcial = (info_equivalencia==null? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
             #endregion
 
             #region ValidarPromedio
-            var info_matricula = bus_matricula.GetInfo(IdEmpresa, info.IdMatricula);
             var info_anio_lectivo = bus_anio.GetInfo(IdEmpresa, info_matricula.IdAnio);
             var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info.Conducta));
             var lst_conducta = bus_conducta.GetList_IngresaMotivo(IdEmpresa, info_matricula.IdAnio);
@@ -1078,7 +1087,7 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_MatriculaCalificacionParcial_Info> Lista_Calificaciones = new List<aca_MatriculaCalificacionParcial_Info>();
             aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
             aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
-
+            aca_AnioLectivoEquivalenciaPromedio_Bus bus_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Bus();
             int cont = 0;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);

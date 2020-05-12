@@ -17,6 +17,7 @@ namespace Core.Bus.Academico
         aca_MatriculaCalificacion_Data odata_calificacion = new aca_MatriculaCalificacion_Data();
         aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
         aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
+        aca_AnioLectivoEquivalenciaPromedio_Data odata_promedio_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Data();
 
         public List<aca_MatriculaCalificacion_Info> GetList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria)
         {
@@ -203,6 +204,9 @@ namespace Core.Bus.Academico
                                 }
                                 info.CampoMejoramiento = CampoMejoramiento;
                                 info.PromedioFinal = PromedioFinal;
+                                var info_equivalencia = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, PromedioFinal);
+                                info.IdEquivalenciaPromedioPF = (info_equivalencia==null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
+
                                 odata_calificacion.modicarPaseAnioDB(info);
 
                                 if (PromedioFinal < PromedioMinimoPromocion)
