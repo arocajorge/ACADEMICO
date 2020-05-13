@@ -39,7 +39,9 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                             Codigo = item.Codigo,
                             IdCobro_tipo = item.IdCobro_tipo,
                             Tipo = item.Tipo,
-                            Orden = item.Orden
+                            Orden = item.Orden,
+                            OrdenRubros = item.OrdenRubros,
+                            Observacion = item.Observacion
                         });
                     }
                 }

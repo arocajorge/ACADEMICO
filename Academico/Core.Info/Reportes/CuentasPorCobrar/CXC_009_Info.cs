@@ -24,5 +24,7 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public string IdCobro_tipo { get; set; }
         public string Tipo { get; set; }
         public int Orden { get; set; }
+        public string Observacion { get; set; }
+        public string OrdenRubros { get; set; }
     }
 }
