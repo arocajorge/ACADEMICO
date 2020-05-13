@@ -239,6 +239,8 @@ namespace Core.Data.CuentasPorCobrar
                     item.IdEmpresa = cab.IdEmpresa;
                     item.IdSucursal = cab.IdSucursal;
                     item.IdCobro = cab.IdCobro;
+                    item.IdCliente = cab.IdCliente;
+                    item.IdAlumno = cab.IdAlumno;
                     
                     if (item.dc_ValorProntoPago > 0)
                     {
