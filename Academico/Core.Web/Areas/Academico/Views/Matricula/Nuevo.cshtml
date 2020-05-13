@@ -104,11 +104,21 @@
             </div>
         </div>
     </div>
-    @*<div class="loading-container">
-        <div class="circle"></div>
-        <div class="circle"></div>
-    </div>*@
-
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="ModalBloqueo" role="dialog" hidden>
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Procesando</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="align-content:center">
+                        <img src="~/AdminLTE/dist/img/loading.gif" style="align-content:center" width="100%" height="100%" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -349,7 +359,7 @@
     </div>
 
     <div class="box-footer">
-        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
+        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="bloquear();">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Matricula", new { Area = "Academico" })">Cancelar</a>
     </div>
     @section Scripts {
@@ -378,9 +388,13 @@
         });
     });
 
+    function bloquear() {
+        $("#ModalBloqueo").modal("show");
+        setTimeout(function(){ guardar(); }, 2000);       
+    }
+
     function guardar() {
         $("#btn_guardar").prop("disabled", true);
-        
         var datos = {
             Fecha: Fecha.GetDate(),
             IdEmpresa: $("#IdEmpresa").val(),
@@ -415,14 +429,15 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data.msg == "") {
-                    //$("#myform").submit();
+                    //$("#ModalBloqueo").modal("hide");
+                    setTimeout(function(){ $("#ModalBloqueo").modal("hide"); }, 2000);
                     var url = '@Url.Action("Modificar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
                     window.location.href = url;
                 }
                 else {
                     $("#MensajeError").show();
                     $("#Mensaje").html(data.msg);
-
+                    $("#ModalBloqueo").modal("hide");
                     $("#btn_guardar").prop("disabled", false);
                 }
             },
