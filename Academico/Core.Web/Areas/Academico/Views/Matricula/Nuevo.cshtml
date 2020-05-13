@@ -104,11 +104,10 @@
             </div>
         </div>
     </div>
-    <div class="body-content" id="overlayBlock" hidden>
-        <div class="overlay">
-            <i class="fa fa-refresh fa-spin" style="background-color:blue"></i>
-        </div>
-    </div>
+    @*<div class="loading-container">
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>*@
 
     <div class="row">
         <div class="col-md-12">
@@ -381,7 +380,7 @@
 
     function guardar() {
         $("#btn_guardar").prop("disabled", true);
-        $("#overlayBlock").show();
+        
         var datos = {
             Fecha: Fecha.GetDate(),
             IdEmpresa: $("#IdEmpresa").val(),

@@ -296,7 +296,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 lst_MatriculaRubro = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                 var lst_nueva_plantilla = bus_matricula_rubro.GetList_Matricula(IdEmpresa, IdAnio, IdPlantilla);
-                var lista_no_cobrado = lst_MatriculaRubro.Where(q => q.EnMatricula == false).ToList();
+                var lista_no_cobrado = lst_MatriculaRubro.Where(q => q.FechaFacturacion == null).ToList();
 
                 List<aca_Matricula_Rubro_Info> lista_nueva = new List<aca_Matricula_Rubro_Info>();
 
