@@ -17,34 +17,8 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ro_empleado()
         {
-            this.ro_cargaFamiliar = new HashSet<ro_cargaFamiliar>();
-            this.ro_contrato = new HashSet<ro_contrato>();
-            this.ro_empleado_division_area_x_rol = new HashSet<ro_empleado_division_area_x_rol>();
-            this.ro_empleado_Novedad = new HashSet<ro_empleado_Novedad>();
-            this.ro_empleado_Novedad1 = new HashSet<ro_empleado_Novedad>();
-            this.ro_empleado_proyeccion_gastos = new HashSet<ro_empleado_proyeccion_gastos>();
             this.ro_empleado1 = new HashSet<ro_empleado>();
             this.ro_empleado11 = new HashSet<ro_empleado>();
-            this.ro_empleado_x_division_x_area = new HashSet<ro_empleado_x_division_x_area>();
-            this.ro_empleado_x_jornada = new HashSet<ro_empleado_x_jornada>();
-            this.ro_empleado_x_ro_rubro = new HashSet<ro_empleado_x_ro_rubro>();
-            this.ro_empleado_x_rubro_acumulado = new HashSet<ro_empleado_x_rubro_acumulado>();
-            this.ro_empleado_x_titulos = new HashSet<ro_empleado_x_titulos>();
-            this.ro_EmpleadoAnticipoBeneficio = new HashSet<ro_EmpleadoAnticipoBeneficio>();
-            this.ro_EmpleadoNovedadCargaMasiva_det = new HashSet<ro_EmpleadoNovedadCargaMasiva_det>();
-            this.ro_horario_planificacion_det = new HashSet<ro_horario_planificacion_det>();
-            this.ro_HorasProfesores_det = new HashSet<ro_HorasProfesores_det>();
-            this.ro_marcaciones_x_empleado = new HashSet<ro_marcaciones_x_empleado>();
-            this.ro_nomina_x_horas_extras_det = new HashSet<ro_nomina_x_horas_extras_det>();
-            this.ro_NominasPagosCheques_det = new HashSet<ro_NominasPagosCheques_det>();
-            this.ro_participacion_utilidad_empleado = new HashSet<ro_participacion_utilidad_empleado>();
-            this.ro_permiso_x_empleado = new HashSet<ro_permiso_x_empleado>();
-            this.ro_permiso_x_empleado1 = new HashSet<ro_permiso_x_empleado>();
-            this.ro_prestamo = new HashSet<ro_prestamo>();
-            this.ro_PrestamoMasivo_Det = new HashSet<ro_PrestamoMasivo_Det>();
-            this.ro_rol_detalle = new HashSet<ro_rol_detalle>();
-            this.ro_rol_detalle_x_rubro_acumulado = new HashSet<ro_rol_detalle_x_rubro_acumulado>();
-            this.ro_SancionesPorMarcaciones_det = new HashSet<ro_SancionesPorMarcaciones_det>();
         }
     
         public int IdEmpresa { get; set; }
@@ -117,63 +91,10 @@ namespace Core.Data.Base
         public Nullable<int> IdSucursalContabilizacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_cargaFamiliar> ro_cargaFamiliar { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_contrato> ro_contrato { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_empleado_division_area_x_rol> ro_empleado_division_area_x_rol { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_empleado_Novedad> ro_empleado_Novedad1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_empleado_proyeccion_gastos> ro_empleado_proyeccion_gastos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ro_empleado> ro_empleado1 { get; set; }
         public virtual ro_empleado ro_empleado2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ro_empleado> ro_empleado11 { get; set; }
         public virtual ro_empleado ro_empleado3 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_empleado_x_division_x_area> ro_empleado_x_division_x_area { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_empleado_x_jornada> ro_empleado_x_jornada { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_empleado_x_rubro_acumulado> ro_empleado_x_rubro_acumulado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_empleado_x_titulos> ro_empleado_x_titulos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_EmpleadoAnticipoBeneficio> ro_EmpleadoAnticipoBeneficio { get; set; }
-        public virtual ro_EmpleadoFoto ro_EmpleadoFoto { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_EmpleadoNovedadCargaMasiva_det> ro_EmpleadoNovedadCargaMasiva_det { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_horario_planificacion_det> ro_horario_planificacion_det { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_nomina_x_horas_extras_det> ro_nomina_x_horas_extras_det { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_NominasPagosCheques_det> ro_NominasPagosCheques_det { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_participacion_utilidad_empleado> ro_participacion_utilidad_empleado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_permiso_x_empleado> ro_permiso_x_empleado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_permiso_x_empleado> ro_permiso_x_empleado1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_prestamo> ro_prestamo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_PrestamoMasivo_Det> ro_PrestamoMasivo_Det { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_rol_detalle> ro_rol_detalle { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_rol_detalle_x_rubro_acumulado> ro_rol_detalle_x_rubro_acumulado { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ro_SancionesPorMarcaciones_det> ro_SancionesPorMarcaciones_det { get; set; }
     }
 }

@@ -66,89 +66,6 @@
         });
 
     }
-
-    function guardar() {
-        $("#btn_guardar").prop("disabled", true);
-        var datos = {
-            Fecha: Fecha.GetDate(),
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdAnio: IdAnio.GetValue(),
-            IdAlumno: IdAlumno.GetValue(),
-            IdComboCurso: IdComboCurso.GetValue(),
-            IdParalelo: IdParalelo.GetValue(),
-            IdPlantilla: IdPlantilla.GetValue(),
-            IdMecanismo: $("#IdMecanismo").val(),
-            IdMecanismoDet: $("#IdMecanismoDet").val(),
-            Observacion: $("#Observacion").val(),
-            IDs: selectedIDs,
-            IDs_Doc: documentoIDs,
-            IdSucursal: $("#IdSucursal").val(),
-            IdPuntoVta: $("#IdPuntoVta").val(),
-            IdCatalogo_FormaPago:$("#IdCatalogo_FormaPago").val(),
-            vt_serie1:$("#vt_serie1").val(),
-            vt_serie2:$("#vt_serie2").val(),
-            vt_NumFactura:$("#vt_NumFactura").val(),
-            IdEmpresa_rol: $("#IdEmpresa_rol").val(),
-            IdEmpleado: IdEmpleado.GetValue(),
-            IdTransaccionSession: $("#IdTransaccionSession").val()
-        }
-        
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "Matricula", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data.msg == "") {
-                    //$("#myform").submit();
-                    var url = '@Url.Action("Modificar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
-                    window.location.href = url;
-                }
-                else {
-                    $("#MensajeError").show();
-                    $("#Mensaje").html(data.msg);
-
-                    $("#btn_guardar").prop("disabled", false);
-                }
-            },
-            error: function (error) {
-            }
-        });
-    }
-    function SetMatriculaRubro(){
-        $("#ValorPlantilla").val("");
-        $("#ValorPlantillaProntoPago").val("");
-        LimpiarListaDetalle();
-        selectedIDs = "";
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdAnio: IdAnio.GetValue(),
-            IdPlantilla: IdPlantilla.GetValue(),
-            IdMatricula: $("#IdMatricula").val(),
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("SetMatriculaRubro", "Matricula", new { Area = "Academico" })',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                console.log(data);
-                $("#ValorPlantilla").val(data.Valor);
-                $("#ValorPlantillaProntoPago").val(data.ProntoPago);
-                GridViewPartial_DetallePlantilla.PerformCallback();
-            },
-            error: function (error) {
-            }
-        });
-    }
 </script>
 @using (Html.BeginForm("Nuevo", "Matricula", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
@@ -187,6 +104,12 @@
             </div>
         </div>
     </div>
+    <div class="body-content" id="overlayBlock" hidden>
+        <div class="overlay">
+            <i class="fa fa-refresh fa-spin" style="background-color:blue"></i>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -442,7 +365,7 @@
         $("#IdPuntoVta").change(function () {
             GetUltimoDocumento();
         });
-        
+
         $("#IdMecanismoDet").change(function () {
             VerDatosEmpleado();
         });
@@ -455,6 +378,89 @@
             IdEmpleado.PerformCallback();
         });
     });
+
+    function guardar() {
+        $("#btn_guardar").prop("disabled", true);
+        $("#overlayBlock").show();
+        var datos = {
+            Fecha: Fecha.GetDate(),
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdAlumno: IdAlumno.GetValue(),
+            IdComboCurso: IdComboCurso.GetValue(),
+            IdParalelo: IdParalelo.GetValue(),
+            IdPlantilla: IdPlantilla.GetValue(),
+            IdMecanismo: $("#IdMecanismo").val(),
+            IdMecanismoDet: $("#IdMecanismoDet").val(),
+            Observacion: $("#Observacion").val(),
+            IDs: selectedIDs,
+            IDs_Doc: documentoIDs,
+            IdSucursal: $("#IdSucursal").val(),
+            IdPuntoVta: $("#IdPuntoVta").val(),
+            IdCatalogo_FormaPago:$("#IdCatalogo_FormaPago").val(),
+            vt_serie1:$("#vt_serie1").val(),
+            vt_serie2:$("#vt_serie2").val(),
+            vt_NumFactura:$("#vt_NumFactura").val(),
+            IdEmpresa_rol: $("#IdEmpresa_rol").val(),
+            IdEmpleado: IdEmpleado.GetValue(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("guardar", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.msg == "") {
+                    //$("#myform").submit();
+                    var url = '@Url.Action("Modificar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
+                    window.location.href = url;
+                }
+                else {
+                    $("#MensajeError").show();
+                    $("#Mensaje").html(data.msg);
+
+                    $("#btn_guardar").prop("disabled", false);
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+    function SetMatriculaRubro(){
+        $("#ValorPlantilla").val("");
+        $("#ValorPlantillaProntoPago").val("");
+        LimpiarListaDetalle();
+        selectedIDs = "";
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdPlantilla: IdPlantilla.GetValue(),
+            IdMatricula: $("#IdMatricula").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetMatriculaRubro", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                $("#ValorPlantilla").val(data.Valor);
+                $("#ValorPlantillaProntoPago").val(data.ProntoPago);
+                GridViewPartial_DetallePlantilla.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
 
     function VerDatosEmpleado() {
         var datos = {

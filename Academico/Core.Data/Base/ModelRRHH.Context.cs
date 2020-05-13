@@ -25,83 +25,9 @@ namespace Core.Data.Base
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ro_area> ro_area { get; set; }
-        public virtual DbSet<ro_area_x_departamento> ro_area_x_departamento { get; set; }
-        public virtual DbSet<ro_Capacitaciones_x_Empleado> ro_Capacitaciones_x_Empleado { get; set; }
-        public virtual DbSet<ro_cargaFamiliar> ro_cargaFamiliar { get; set; }
-        public virtual DbSet<ro_cargo> ro_cargo { get; set; }
-        public virtual DbSet<ro_catalogo> ro_catalogo { get; set; }
-        public virtual DbSet<ro_catalogoTipo> ro_catalogoTipo { get; set; }
-        public virtual DbSet<ro_Comprobantes_Contables> ro_Comprobantes_Contables { get; set; }
-        public virtual DbSet<ro_Config_Param_contable> ro_Config_Param_contable { get; set; }
-        public virtual DbSet<ro_Config_Rubros_ParametrosGenerales> ro_Config_Rubros_ParametrosGenerales { get; set; }
-        public virtual DbSet<ro_contrato> ro_contrato { get; set; }
-        public virtual DbSet<ro_Departamento> ro_Departamento { get; set; }
-        public virtual DbSet<ro_Division> ro_Division { get; set; }
         public virtual DbSet<ro_empleado> ro_empleado { get; set; }
-        public virtual DbSet<ro_empleado_division_area_x_rol> ro_empleado_division_area_x_rol { get; set; }
-        public virtual DbSet<ro_empleado_Novedad> ro_empleado_Novedad { get; set; }
-        public virtual DbSet<ro_empleado_novedad_det> ro_empleado_novedad_det { get; set; }
-        public virtual DbSet<ro_empleado_proyeccion_gastos> ro_empleado_proyeccion_gastos { get; set; }
-        public virtual DbSet<ro_empleado_proyeccion_gastos_det> ro_empleado_proyeccion_gastos_det { get; set; }
-        public virtual DbSet<ro_empleado_x_division_x_area> ro_empleado_x_division_x_area { get; set; }
-        public virtual DbSet<ro_empleado_x_horario> ro_empleado_x_horario { get; set; }
-        public virtual DbSet<ro_empleado_x_jornada> ro_empleado_x_jornada { get; set; }
-        public virtual DbSet<ro_empleado_x_ro_rubro> ro_empleado_x_ro_rubro { get; set; }
-        public virtual DbSet<ro_empleado_x_rubro_acumulado> ro_empleado_x_rubro_acumulado { get; set; }
-        public virtual DbSet<ro_empleado_x_rubro_acumulado_detalle> ro_empleado_x_rubro_acumulado_detalle { get; set; }
-        public virtual DbSet<ro_empleado_x_titulos> ro_empleado_x_titulos { get; set; }
-        public virtual DbSet<ro_EmpleadoAnticipoBeneficio> ro_EmpleadoAnticipoBeneficio { get; set; }
-        public virtual DbSet<ro_EmpleadoFoto> ro_EmpleadoFoto { get; set; }
-        public virtual DbSet<ro_EmpleadoNovedadCargaMasiva> ro_EmpleadoNovedadCargaMasiva { get; set; }
-        public virtual DbSet<ro_EmpleadoNovedadCargaMasiva_det> ro_EmpleadoNovedadCargaMasiva_det { get; set; }
-        public virtual DbSet<ro_jornada> ro_jornada { get; set; }
-        public virtual DbSet<ro_horario> ro_horario { get; set; }
-        public virtual DbSet<ro_horario_planificacion> ro_horario_planificacion { get; set; }
-        public virtual DbSet<ro_horario_planificacion_det> ro_horario_planificacion_det { get; set; }
-        public virtual DbSet<ro_HorasProfesores> ro_HorasProfesores { get; set; }
-        public virtual DbSet<ro_HorasProfesores_det> ro_HorasProfesores_det { get; set; }
-        public virtual DbSet<ro_marcaciones_tipo> ro_marcaciones_tipo { get; set; }
-        public virtual DbSet<ro_marcaciones_x_empleado> ro_marcaciones_x_empleado { get; set; }
-        public virtual DbSet<ro_Nomina_Tipo> ro_Nomina_Tipo { get; set; }
-        public virtual DbSet<ro_Nomina_Tipoliqui> ro_Nomina_Tipoliqui { get; set; }
-        public virtual DbSet<ro_nomina_x_horas_extras> ro_nomina_x_horas_extras { get; set; }
-        public virtual DbSet<ro_nomina_x_horas_extras_det> ro_nomina_x_horas_extras_det { get; set; }
-        public virtual DbSet<ro_NominasPagosCheques> ro_NominasPagosCheques { get; set; }
-        public virtual DbSet<ro_NominasPagosCheques_det> ro_NominasPagosCheques_det { get; set; }
-        public virtual DbSet<ro_novedad_x_empleado> ro_novedad_x_empleado { get; set; }
-        public virtual DbSet<ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar> ro_parametro_contable_x_Nomina_Tipoliqui_Sueldo_x_Pagar { get; set; }
-        public virtual DbSet<ro_Parametros> ro_Parametros { get; set; }
-        public virtual DbSet<ro_participacion_utilidad> ro_participacion_utilidad { get; set; }
-        public virtual DbSet<ro_participacion_utilidad_empleado> ro_participacion_utilidad_empleado { get; set; }
-        public virtual DbSet<ro_periodo> ro_periodo { get; set; }
-        public virtual DbSet<ro_periodo_x_ro_Nomina_TipoLiqui> ro_periodo_x_ro_Nomina_TipoLiqui { get; set; }
-        public virtual DbSet<ro_permiso_x_empleado> ro_permiso_x_empleado { get; set; }
-        public virtual DbSet<ro_prestamo> ro_prestamo { get; set; }
-        public virtual DbSet<ro_prestamo_detalle> ro_prestamo_detalle { get; set; }
-        public virtual DbSet<ro_PrestamoMasivo> ro_PrestamoMasivo { get; set; }
-        public virtual DbSet<ro_PrestamoMasivo_Det> ro_PrestamoMasivo_Det { get; set; }
-        public virtual DbSet<ro_rol> ro_rol { get; set; }
-        public virtual DbSet<ro_rol_detalle> ro_rol_detalle { get; set; }
-        public virtual DbSet<ro_rol_detalle_x_jornada> ro_rol_detalle_x_jornada { get; set; }
-        public virtual DbSet<ro_rol_detalle_x_ro_rubro_fijo> ro_rol_detalle_x_ro_rubro_fijo { get; set; }
-        public virtual DbSet<ro_rol_detalle_x_rubro_acumulado> ro_rol_detalle_x_rubro_acumulado { get; set; }
-        public virtual DbSet<ro_rol_x_empleado_novedades> ro_rol_x_empleado_novedades { get; set; }
-        public virtual DbSet<ro_rol_x_prestamo_detalle> ro_rol_x_prestamo_detalle { get; set; }
-        public virtual DbSet<ro_rubro_tipo> ro_rubro_tipo { get; set; }
-        public virtual DbSet<ro_rubro_tipo_x_jornada> ro_rubro_tipo_x_jornada { get; set; }
-        public virtual DbSet<ro_rubros_calculados> ro_rubros_calculados { get; set; }
-        public virtual DbSet<ro_SancionesPorMarcaciones> ro_SancionesPorMarcaciones { get; set; }
-        public virtual DbSet<ro_SancionesPorMarcaciones_det> ro_SancionesPorMarcaciones_det { get; set; }
-        public virtual DbSet<ro_SancionesPorMarcaciones_x_novedad> ro_SancionesPorMarcaciones_x_novedad { get; set; }
-        public virtual DbSet<ro_Tipo_Prestamo> ro_Tipo_Prestamo { get; set; }
-        public virtual DbSet<ro_turno> ro_turno { get; set; }
-        public virtual DbSet<vw_Persona> vw_Persona { get; set; }
         public virtual DbSet<vwro_empleado_combo> vwro_empleado_combo { get; set; }
         public virtual DbSet<vwro_empleado_datos_generales> vwro_empleado_datos_generales { get; set; }
         public virtual DbSet<vwro_empleados_consulta> vwro_empleados_consulta { get; set; }
-        public virtual DbSet<vwro_empleado_x_jornada> vwro_empleado_x_jornada { get; set; }
-        public virtual DbSet<vwro_empleado_x_rubro_acumulado> vwro_empleado_x_rubro_acumulado { get; set; }
-        public virtual DbSet<vwro_rubro_tipo> vwro_rubro_tipo { get; set; }
     }
 }

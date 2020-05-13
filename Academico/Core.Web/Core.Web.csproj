@@ -446,6 +446,12 @@
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Rpt.Designer.cs">
       <DependentUpon>ACA_014_Conducta_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_014_Equivalencia_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_014_Equivalencia_Rpt.Designer.cs">
+      <DependentUpon>ACA_014_Equivalencia_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_014_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8790,6 +8796,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_014_Conducta_Rpt.resx">
       <DependentUpon>ACA_014_Conducta_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_014_Equivalencia_Rpt.resx">
+      <DependentUpon>ACA_014_Equivalencia_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_014_Rpt.resx">
       <DependentUpon>ACA_014_Rpt.cs</DependentUpon>
