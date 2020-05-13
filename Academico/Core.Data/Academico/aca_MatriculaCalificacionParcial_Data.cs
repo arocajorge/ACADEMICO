@@ -13,6 +13,7 @@ namespace Core.Data.Academico
     {
         aca_AnioLectivoConductaEquivalencia_Data odata_conducta = new aca_AnioLectivoConductaEquivalencia_Data();
         aca_AnioLectivoConductaEquivalencia_Data odata_conducta_equivalencia = new aca_AnioLectivoConductaEquivalencia_Data();
+        aca_AnioLectivoEquivalenciaPromedio_Data odata_promedio_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Data();
         aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
         public List<aca_MatriculaCalificacionParcial_Info> getList(int IdEmpresa, decimal IdMatricula)
         {
@@ -276,6 +277,8 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
+                    var info_matricula = odata_matricula.getInfo(info.IdEmpresa, info.IdMatricula);
+
                     aca_MatriculaCalificacionParcial Entity = Context.aca_MatriculaCalificacionParcial.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa 
                     && q.IdMatricula == info.IdMatricula && q.IdMateria== info.IdMateria && q.IdProfesor== info.IdProfesor && q.IdCatalogoParcial == info.IdCatalogoParcial);
                     if (Entity == null)
@@ -301,22 +304,40 @@ namespace Core.Data.Academico
                         return false;
                     
                     if(info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
+                    {
                         EntityCalificacion.CalificacionP1 = info.PromedioParcial;
+                        EntityCalificacion.IdEquivalenciaPromedioP1 = info.IdEquivalenciaPromedioParcial;
+                    } 
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
+                    {
                         EntityCalificacion.CalificacionP2 = info.PromedioParcial;
+                        EntityCalificacion.IdEquivalenciaPromedioP2 = info.IdEquivalenciaPromedioParcial;
+                    }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
+                    {
                         EntityCalificacion.CalificacionP3 = info.PromedioParcial;
+                        EntityCalificacion.IdEquivalenciaPromedioP3 = info.IdEquivalenciaPromedioParcial;
+                    }                        
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
+                    {
                         EntityCalificacion.CalificacionP4 = info.PromedioParcial;
+                        EntityCalificacion.IdEquivalenciaPromedioP4 = info.IdEquivalenciaPromedioParcial;
+                    }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
+                    {
                         EntityCalificacion.CalificacionP5 = info.PromedioParcial;
+                        EntityCalificacion.IdEquivalenciaPromedioP5 = info.IdEquivalenciaPromedioParcial;
+                    }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
+                    {
                         EntityCalificacion.CalificacionP6 = info.PromedioParcial;
+                        EntityCalificacion.IdEquivalenciaPromedioP6 = info.IdEquivalenciaPromedioParcial;
+                    }
 
                     Context.SaveChanges();
 
@@ -326,16 +347,26 @@ namespace Core.Data.Academico
                         return false;
 
                     decimal SumaPromedio = 0;
+                    decimal Promedio = 0;
+                    var IdEquivalenciaPromedio = (int?)null;
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
                     {
                         SumaPromedio = Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP1) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP2) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP3);
-                        EntityCalificacionPromedio.PromedioQ1 = Math.Round((SumaPromedio/3), 2, MidpointRounding.AwayFromZero);
+                        Promedio = Math.Round((SumaPromedio / 3), 2, MidpointRounding.AwayFromZero);
+                        EntityCalificacionPromedio.PromedioQ1 = Promedio;
+                        var info_promedio = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Promedio);
+                        IdEquivalenciaPromedio = info_promedio.IdEquivalenciaPromedio;
+                        EntityCalificacionPromedio.IdEquivalenciaPromedioQ1 = (info_promedio==null ? (int?)null : info_promedio.IdEquivalenciaPromedio);
                     }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
                     {
                         SumaPromedio = Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP4) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP5) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP6);
-                        EntityCalificacionPromedio.PromedioQ2 = Math.Round((SumaPromedio / 3) ,2, MidpointRounding.AwayFromZero);
+                        Promedio = Math.Round((SumaPromedio / 3), 2, MidpointRounding.AwayFromZero);
+                        EntityCalificacionPromedio.PromedioQ2 = Promedio;
+                        var info_promedio = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Promedio);
+                        IdEquivalenciaPromedio = info_promedio.IdEquivalenciaPromedio;
+                        EntityCalificacionPromedio.IdEquivalenciaPromedioQ2 = (info_promedio == null ? (int?)null : info_promedio.IdEquivalenciaPromedio);
                     }
 
                     Context.SaveChanges();
@@ -346,7 +377,6 @@ namespace Core.Data.Academico
 
                     decimal SumaConducta = 0;
                     var lst_calificaciones_parciales = getList_x_Parcial(info.IdEmpresa, info.IdMatricula, info.IdCatalogoParcial);
-                    var info_matricula = odata_matricula.getInfo(info.IdEmpresa, info.IdMatricula);
                     foreach (var item in lst_calificaciones_parciales)
                     {
                         if (item.Conducta!=null)

@@ -11,6 +11,8 @@ namespace Core.Data.Academico
 {
     public class aca_MatriculaCalificacion_Data
     {
+        aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
+        aca_AnioLectivoEquivalenciaPromedio_Data odata_promedio_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Data();
         public List<aca_MatriculaCalificacion_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria)
         {
             try
@@ -105,9 +107,19 @@ namespace Core.Data.Academico
                             ExamenRemedial = q.ExamenRemedial,
                             ExamenGracia = q.ExamenGracia,
                             PromedioFinal = q.PromedioFinal,
-                            IdEquivalenciaPromedio= q.IdEquivalenciaPromedio,
                             CodigoEquivalencia= q.CodigoEquivalencia,
-                            DescripcionEquivalencia = q.Descripcion
+                            DescripcionEquivalencia = q.Descripcion,
+                            IdEquivalenciaPromedioP1 = q.IdEquivalenciaPromedioP1,
+                            IdEquivalenciaPromedioP2 = q.IdEquivalenciaPromedioP2,
+                            IdEquivalenciaPromedioP3 = q.IdEquivalenciaPromedioP2,
+                            IdEquivalenciaPromedioEQ1 = q.IdEquivalenciaPromedioEQ1,
+                            IdEquivalenciaPromedioQ1 = q.IdEquivalenciaPromedioQ1,
+                            IdEquivalenciaPromedioP4 = q.IdEquivalenciaPromedioP4,
+                            IdEquivalenciaPromedioP5 = q.IdEquivalenciaPromedioP5,
+                            IdEquivalenciaPromedioP6 = q.IdEquivalenciaPromedioP6,
+                            IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ2,
+                            IdEquivalenciaPromedioQ2 = q.IdEquivalenciaPromedioQ2,
+                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF
                         });
                     });
                 }
@@ -163,9 +175,19 @@ namespace Core.Data.Academico
                         ExamenRemedial = Entity.ExamenRemedial,
                         ExamenGracia = Entity.ExamenGracia,
                         PromedioFinal = Entity.PromedioFinal,
-                        IdEquivalenciaPromedio = Entity.IdEquivalenciaPromedio,
                         CodigoEquivalencia = Entity.CodigoEquivalencia,
-                        DescripcionEquivalencia = Entity.Descripcion
+                        DescripcionEquivalencia = Entity.Descripcion,
+                        IdEquivalenciaPromedioP1 = Entity.IdEquivalenciaPromedioP1,
+                        IdEquivalenciaPromedioP2 = Entity.IdEquivalenciaPromedioP2,
+                        IdEquivalenciaPromedioP3 = Entity.IdEquivalenciaPromedioP2,
+                        IdEquivalenciaPromedioEQ1 = Entity.IdEquivalenciaPromedioEQ1,
+                        IdEquivalenciaPromedioQ1 = Entity.IdEquivalenciaPromedioQ1,
+                        IdEquivalenciaPromedioP4 = Entity.IdEquivalenciaPromedioP4,
+                        IdEquivalenciaPromedioP5 = Entity.IdEquivalenciaPromedioP5,
+                        IdEquivalenciaPromedioP6 = Entity.IdEquivalenciaPromedioP6,
+                        IdEquivalenciaPromedioEQ2 = Entity.IdEquivalenciaPromedioEQ2,
+                        IdEquivalenciaPromedioQ2 = Entity.IdEquivalenciaPromedioQ2,
+                        IdEquivalenciaPromedioPF = Entity.IdEquivalenciaPromedioPF
                     };
                 }
 
@@ -216,9 +238,19 @@ namespace Core.Data.Academico
                             ExamenGracia = q.ExamenGracia,
                             PromedioFinal = q.PromedioFinal,
                             RegistroValido = true,
-                            IdEquivalenciaPromedio = q.IdEquivalenciaPromedio,
                             CodigoEquivalencia = q.CodigoEquivalencia,
-                            DescripcionEquivalencia = q.Descripcion
+                            DescripcionEquivalencia = q.Descripcion,
+                            IdEquivalenciaPromedioP1 = q.IdEquivalenciaPromedioP1,
+                            IdEquivalenciaPromedioP2 = q.IdEquivalenciaPromedioP2,
+                            IdEquivalenciaPromedioP3 = q.IdEquivalenciaPromedioP2,
+                            IdEquivalenciaPromedioEQ1 = q.IdEquivalenciaPromedioEQ1,
+                            IdEquivalenciaPromedioQ1 = q.IdEquivalenciaPromedioQ1,
+                            IdEquivalenciaPromedioP4 = q.IdEquivalenciaPromedioP4,
+                            IdEquivalenciaPromedioP5 = q.IdEquivalenciaPromedioP5,
+                            IdEquivalenciaPromedioP6 = q.IdEquivalenciaPromedioP6,
+                            IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ2,
+                            IdEquivalenciaPromedioQ2 = q.IdEquivalenciaPromedioQ2,
+                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF
                         });
                     });
                 }
@@ -268,9 +300,19 @@ namespace Core.Data.Academico
                         ExamenRemedial = Entity.ExamenRemedial,
                         ExamenGracia = Entity.ExamenGracia,
                         PromedioFinal = Entity.PromedioFinal,
-                        IdEquivalenciaPromedio = Entity.IdEquivalenciaPromedio,
                         CodigoEquivalencia = Entity.CodigoEquivalencia,
-                        DescripcionEquivalencia = Entity.Descripcion
+                        DescripcionEquivalencia = Entity.Descripcion,
+                        IdEquivalenciaPromedioP1 = Entity.IdEquivalenciaPromedioP1,
+                        IdEquivalenciaPromedioP2 = Entity.IdEquivalenciaPromedioP2,
+                        IdEquivalenciaPromedioP3 = Entity.IdEquivalenciaPromedioP2,
+                        IdEquivalenciaPromedioEQ1 = Entity.IdEquivalenciaPromedioEQ1,
+                        IdEquivalenciaPromedioQ1 = Entity.IdEquivalenciaPromedioQ1,
+                        IdEquivalenciaPromedioP4 = Entity.IdEquivalenciaPromedioP4,
+                        IdEquivalenciaPromedioP5 = Entity.IdEquivalenciaPromedioP5,
+                        IdEquivalenciaPromedioP6 = Entity.IdEquivalenciaPromedioP6,
+                        IdEquivalenciaPromedioEQ2 = Entity.IdEquivalenciaPromedioEQ2,
+                        IdEquivalenciaPromedioQ2 = Entity.IdEquivalenciaPromedioQ2,
+                        IdEquivalenciaPromedioPF = Entity.IdEquivalenciaPromedioPF
                     };
                 }
 
@@ -363,7 +405,17 @@ namespace Core.Data.Academico
                             PromedioFinalQ1=q.PromedioFinalQ1,
                             PromedioFinalQ2=q.PromedioFinalQ2,
                             PromedioFinal =q.PromedioFinal,
-                            IdEquivalenciaPromedio = q.IdEquivalenciaPromedio
+                            IdEquivalenciaPromedioP1 = q.IdEquivalenciaPromedioP1,
+                            IdEquivalenciaPromedioP2 = q.IdEquivalenciaPromedioP2,
+                            IdEquivalenciaPromedioP3 = q.IdEquivalenciaPromedioP2,
+                            IdEquivalenciaPromedioEQ1 = q.IdEquivalenciaPromedioEQ1,
+                            IdEquivalenciaPromedioQ1 = q.IdEquivalenciaPromedioQ1,
+                            IdEquivalenciaPromedioP4 = q.IdEquivalenciaPromedioP4,
+                            IdEquivalenciaPromedioP5 = q.IdEquivalenciaPromedioP5,
+                            IdEquivalenciaPromedioP6 = q.IdEquivalenciaPromedioP6,
+                            IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ2,
+                            IdEquivalenciaPromedioQ2 = q.IdEquivalenciaPromedioQ2,
+                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF
                         });
                     });
                 }
@@ -431,7 +483,17 @@ namespace Core.Data.Academico
                                     ExamenRemedial = info.ExamenRemedial,
                                     ExamenGracia = info.ExamenGracia,
                                     PromedioFinal = info.PromedioFinal,
-                                    IdEquivalenciaPromedio = info.IdEquivalenciaPromedio
+                                    IdEquivalenciaPromedioP1 = info.IdEquivalenciaPromedioP1,
+                                    IdEquivalenciaPromedioP2 = info.IdEquivalenciaPromedioP2,
+                                    IdEquivalenciaPromedioP3 = info.IdEquivalenciaPromedioP2,
+                                    IdEquivalenciaPromedioEQ1 = info.IdEquivalenciaPromedioEQ1,
+                                    IdEquivalenciaPromedioQ1 = info.IdEquivalenciaPromedioQ1,
+                                    IdEquivalenciaPromedioP4 = info.IdEquivalenciaPromedioP4,
+                                    IdEquivalenciaPromedioP5 = info.IdEquivalenciaPromedioP5,
+                                    IdEquivalenciaPromedioP6 = info.IdEquivalenciaPromedioP6,
+                                    IdEquivalenciaPromedioEQ2 = info.IdEquivalenciaPromedioEQ2,
+                                    IdEquivalenciaPromedioQ2 = info.IdEquivalenciaPromedioQ2,
+                                    IdEquivalenciaPromedioPF = info.IdEquivalenciaPromedioPF
                                 };
 
                                 Context.aca_MatriculaCalificacion.Add(Entity);
@@ -509,16 +571,23 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
+                    var info_matricula = odata_matricula.getInfo(info.IdEmpresa, info.IdMatricula);
                     aca_MatriculaCalificacion EntityCalificacion = Context.aca_MatriculaCalificacion.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
                     && q.IdMatricula == info.IdMatricula && q.IdProfesor == info.IdProfesor && q.IdMateria == info.IdMateria);
                     if (EntityCalificacion == null)
                         return false;
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
+                    {
                         EntityCalificacion.ExamenQ1 = info.CalificacionExamen;
-
+                        EntityCalificacion.IdEquivalenciaPromedioEQ1 = info.IdEquivalenciaCalificacionExamen;
+                    }
+                        
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
+                    {
                         EntityCalificacion.ExamenQ2 = info.CalificacionExamen;
+                        EntityCalificacion.IdEquivalenciaPromedioEQ2 = info.IdEquivalenciaCalificacionExamen;
+                    }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXMEJ))
                         EntityCalificacion.ExamenMejoramiento = info.CalificacionExamen;
@@ -539,16 +608,21 @@ namespace Core.Data.Academico
                     if (EntityCalificacionPromedio == null)
                         return false;
 
+                    var PromedioFinal = (decimal?)null;
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
                     {
-                        EntityCalificacionPromedio.PromedioFinalQ1 = ((EntityCalificacionPromedio.PromedioQ1) * Convert.ToDecimal(0.80) ) + ((EntityCalificacionPromedio.ExamenQ1) * Convert.ToDecimal(0.20));
-                        EntityCalificacionPromedio.IdEquivalenciaPromedio = null;
+                        PromedioFinal = ((EntityCalificacionPromedio.PromedioQ1) * Convert.ToDecimal(0.80)) + ((EntityCalificacionPromedio.ExamenQ1) * Convert.ToDecimal(0.20));
+                        var info_equivalencia = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Convert.ToDecimal(PromedioFinal));
+                        EntityCalificacionPromedio.PromedioFinalQ1 = PromedioFinal;
+                        EntityCalificacionPromedio.IdEquivalenciaPromedioQ1 = (info_equivalencia==null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
                     }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
                     {
-                        EntityCalificacionPromedio.PromedioFinalQ2 = ((EntityCalificacionPromedio.PromedioQ2) * Convert.ToDecimal(0.80)) + ((EntityCalificacionPromedio.ExamenQ2) * Convert.ToDecimal(0.20));
-                        EntityCalificacionPromedio.IdEquivalenciaPromedio = null;
+                        PromedioFinal = ((EntityCalificacionPromedio.PromedioQ2) * Convert.ToDecimal(0.80)) + ((EntityCalificacionPromedio.ExamenQ2) * Convert.ToDecimal(0.20));
+                        var info_equivalencia = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Convert.ToDecimal(PromedioFinal));
+                        EntityCalificacionPromedio.PromedioFinalQ2 = PromedioFinal;
+                        EntityCalificacionPromedio.IdEquivalenciaPromedioQ2 = (info_equivalencia == null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
                     }
 
                     Context.SaveChanges();
@@ -575,7 +649,7 @@ namespace Core.Data.Academico
 
                     EntityCalificacion.CampoMejoramiento = info.CampoMejoramiento;
                     EntityCalificacion.PromedioFinal = info.PromedioFinal;
-                    EntityCalificacion.IdEquivalenciaPromedio = info.IdEquivalenciaPromedio;
+                    EntityCalificacion.IdEquivalenciaPromedioPF = info.IdEquivalenciaPromedioPF;
 
                     Context.SaveChanges();
                 }

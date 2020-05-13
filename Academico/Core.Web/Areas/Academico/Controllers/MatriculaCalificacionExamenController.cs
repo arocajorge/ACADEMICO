@@ -629,7 +629,9 @@ namespace Core.Web.Areas.Academico.Controllers
 
     public class aca_MatriculaExamen_List
     {
+        aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         aca_MatriculaCalificacion_Bus bus_calificacion = new aca_MatriculaCalificacion_Bus();
+        aca_AnioLectivoEquivalenciaPromedio_Bus bus_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Bus();
         string Variable = "aca_MatriculaExamen_Info";
         public List<aca_MatriculaCalificacion_Info> get_list(decimal IdTransaccionSession)
         {
@@ -650,10 +652,12 @@ namespace Core.Web.Areas.Academico.Controllers
         public void UpdateRow(aca_MatriculaCalificacion_Info info_det, decimal IdTransaccionSession)
         {
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
-
+            var info_matricula = bus_matricula.GetInfo(IdEmpresa, info_det.IdMatricula);
+            var info_equivalencia = bus_equivalencia.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, info_det.CalificacionExamen);
             aca_MatriculaCalificacion_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdMatricula == info_det.IdMatricula).FirstOrDefault();
             edited_info.CalificacionExamen = info_det.CalificacionExamen;
             edited_info.IdCatalogoParcial = info_det.IdCatalogoParcial;
+            edited_info.IdEquivalenciaCalificacionExamen = info_equivalencia.IdEquivalenciaPromedio;
 
             bus_calificacion.ModicarDB(edited_info);
         }
@@ -672,7 +676,8 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_MatriculaExamen_List Lista_Examen = new aca_MatriculaExamen_List();
             List<aca_MatriculaCalificacion_Info> Lista_CalificacionExamen = new List<aca_MatriculaCalificacion_Info>();
             aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
-
+            aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
+            aca_AnioLectivoEquivalenciaPromedio_Bus bus_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Bus();
             int cont = 0;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -693,12 +698,15 @@ namespace Core.Web.Areas.Academico.Controllers
                         var pe_nombreCompleto = (Convert.ToString(reader.GetValue(1)).Trim());
                         var CalificacionExamen = Convert.ToDecimal(reader.GetValue(2));
 
+                        var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
+                        var info_equivalencia = bus_equivalencia.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, CalificacionExamen);
                         aca_MatriculaCalificacion_Info info = new aca_MatriculaCalificacion_Info
                         {
                             IdEmpresa = IdEmpresa,
                             IdMatricula = IdMatricula,
                             pe_nombreCompletoAlumno = pe_nombreCompleto,
                             CalificacionExamen = CalificacionExamen,
+                            IdEquivalenciaCalificacionExamen = (info_equivalencia==null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio),
                             RegistroValido = true
                         };
 

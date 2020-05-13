@@ -43,6 +43,7 @@ namespace Core.Info.Academico
         public decimal IdAlumno { get; set; }
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public Nullable<int> IdEquivalenciaPromedioParcial { get; set; }
         public decimal PromedioParcial { get; set; }
         public bool RegistroValido { get; set; }
         public bool RegistroconPromedioBajo { get; set; }

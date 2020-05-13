@@ -56,5 +56,12 @@ namespace Core.Web.Reportes.Academico
             ((XRSubreport)sender).ReportSource.Parameters["p_IdAnio"].Value = p_IdAnio.Value == null ? 0 : Convert.ToInt32(p_IdAnio.Value);
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
+
+        private void xrSubreport2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdMatricula"].Value = p_IdAnio.Value == null ? 0 : Convert.ToInt32(p_IdMatricula.Value);
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
+        }
     }
 }

@@ -70,7 +70,8 @@ namespace Core.Data.Reportes.Academico
                             PromedioParcial = q.PromedioParcial,
                             MotivoCalificacion=q.MotivoCalificacion,
                             AccionRemedial = q.AccionRemedial,
-                            PromedioConductaParcial = q.PromedioConductaParcial
+                            SecuenciaPromedioConducta = q.SecuenciaPromedioConducta,
+                            LetraPromedioConducta =q.LetraPromedioConducta
                         });
                     }
                 }
