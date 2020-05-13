@@ -258,7 +258,8 @@ namespace Core.Data.CuentasPorCobrar
                     cb_Valor = Math.Round(info.ListaCobros.Sum(q=>q.Valor),2,MidpointRounding.AwayFromZero),
                     IdSucursal = info.IdSucursal,
                     cb_Observacion = "LIQ. TARJ. #"+info.IdLiquidacion+" "+info.Observacion,
-                    lst_det_ct = new List<ct_cbtecble_det_Info>()
+                    lst_det_ct = new List<ct_cbtecble_det_Info>(),
+                    list_det = new List<ba_Cbte_Ban_x_ba_TipoFlujo_Info>()
                 };
                 int Secuencia = 1;
                 var banco = db_b.ba_Banco_Cuenta.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdBanco == info.IdBanco).FirstOrDefault();
@@ -288,7 +289,17 @@ namespace Core.Data.CuentasPorCobrar
 
                 diario.lst_det_canc_op = new List<Info.CuentasPorPagar.cp_orden_pago_cancelaciones_Info>();
                 diario.lst_det_ing = new List<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Info>();
-                
+
+                foreach (var item in info.ListaFlujo)
+                {
+                    diario.list_det.Add(new ba_Cbte_Ban_x_ba_TipoFlujo_Info
+                    {
+                        IdTipoFlujo = item.IdTipoFlujo,
+                        Porcentaje = item.Porcentaje,
+                        Valor = item.Valor
+                    });
+                }
+
                 if (Math.Round(diario.lst_det_ct.Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero) != 0)
                     return null;
 
