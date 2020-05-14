@@ -29,5 +29,7 @@ namespace Core.Data.Base
         public string IdCobro_tipo { get; set; }
         public string Tipo { get; set; }
         public int Orden { get; set; }
+        public string OrdenRubros { get; set; }
+        public string Observacion { get; set; }
     }
 }

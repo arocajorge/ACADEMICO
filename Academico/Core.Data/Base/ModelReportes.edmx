@@ -1500,6 +1500,11 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Parameter Name="IdParalelo" Type="int" Mode="In" />
           <Parameter Name="IdAlumno" Type="numeric" Mode="In" />
         </Function>
+        <Function Name="SPCXC_009" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="FechaIni" Type="date" Mode="In" />
+          <Parameter Name="FechaFin" Type="date" Mode="In" />
+        </Function>
         <Function Name="SPFAC_005" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="FechaDesde" Type="date" Mode="In" />
@@ -2555,11 +2560,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
             <Parameter Name="IdMateria" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="VWACA_013_EquivalenciaPromedio" EntityType="ModelReportes.VWACA_013_EquivalenciaPromedio" />
-          <FunctionImport Name="SPCXC_009" ReturnType="Collection(ModelReportes.SPCXC_009_Result)">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="SPACA_014_Conducta" ReturnType="Collection(ModelReportes.SPACA_014_Conducta_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdMatricula" Mode="In" Type="Decimal" />
@@ -2582,6 +2582,11 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
             <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
             <Parameter Name="IdParcial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPCXC_009" ReturnType="Collection(ModelReportes.SPCXC_009_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACA_001_Result">
@@ -4346,24 +4351,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Name="ValorMinimo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="ValorMaximo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
-        <ComplexType Name="SPCXC_009_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
-          <Property Type="Decimal" Name="IdCobro" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="Int32" Name="secuencial" Nullable="false" />
-          <Property Type="Int32" Name="IdBodega_Cbte" Nullable="true" />
-          <Property Type="Decimal" Name="IdCbte_vta_nota" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="String" Name="dc_TipoDocumento" Nullable="true" MaxLength="20" />
-          <Property Type="Double" Name="dc_ValorPago" Nullable="false" />
-          <Property Type="DateTime" Name="cr_fecha" Nullable="false" Precision="23" />
-          <Property Type="DateTime" Name="vt_fecha" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Periodo" Nullable="true" MaxLength="35" />
-          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="IdCobro_tipo" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="17" />
-          <Property Type="Int32" Name="Orden" Nullable="false" />
-        </ComplexType>
         <ComplexType Name="SPACA_014_Conducta_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
@@ -4507,6 +4494,26 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Type="Decimal" Name="PromedioParcial" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Int32" Name="SecuenciaPromedioConducta" Nullable="true" />
           <Property Type="String" Name="LetraPromedioConducta" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="SPCXC_009_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="Decimal" Name="IdCobro" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="secuencial" Nullable="false" />
+          <Property Type="Int32" Name="IdBodega_Cbte" Nullable="true" />
+          <Property Type="Decimal" Name="IdCbte_vta_nota" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="dc_TipoDocumento" Nullable="true" MaxLength="20" />
+          <Property Type="Double" Name="dc_ValorPago" Nullable="false" />
+          <Property Type="DateTime" Name="cr_fecha" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="vt_fecha" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Periodo" Nullable="true" MaxLength="35" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="IdCobro_tipo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="17" />
+          <Property Type="Int32" Name="Orden" Nullable="false" />
+          <Property Type="String" Name="OrdenRubros" Nullable="true" MaxLength="53" />
+          <Property Type="String" Name="Observacion" Nullable="true" MaxLength="1062" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -6081,6 +6088,30 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
                 <ScalarProperty Name="PromedioParcial" ColumnName="PromedioParcial" />
                 <ScalarProperty Name="SecuenciaPromedioConducta" ColumnName="SecuenciaPromedioConducta" />
                 <ScalarProperty Name="LetraPromedioConducta" ColumnName="LetraPromedioConducta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPCXC_009" FunctionName="ModelReportes.Store.SPCXC_009">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPCXC_009_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
+                <ScalarProperty Name="secuencial" ColumnName="secuencial" />
+                <ScalarProperty Name="IdBodega_Cbte" ColumnName="IdBodega_Cbte" />
+                <ScalarProperty Name="IdCbte_vta_nota" ColumnName="IdCbte_vta_nota" />
+                <ScalarProperty Name="dc_TipoDocumento" ColumnName="dc_TipoDocumento" />
+                <ScalarProperty Name="dc_ValorPago" ColumnName="dc_ValorPago" />
+                <ScalarProperty Name="cr_fecha" ColumnName="cr_fecha" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdCobro_tipo" ColumnName="IdCobro_tipo" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+                <ScalarProperty Name="OrdenRubros" ColumnName="OrdenRubros" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
