@@ -1,4 +1,5 @@
 ﻿using Core.Data.Base;
+using Core.Info.Helps;
 using Core.Info.Reportes.Academico;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_014_Data
     {
-        public List<ACA_014_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo)
+        public List<ACA_014_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
         {
             try
             {
@@ -58,44 +59,44 @@ namespace Core.Data.Reportes.Academico
                             CalificacionP1 = q.CalificacionP1,
                             CalificacionP2=q.CalificacionP2,
                             CalificacionP3=q.CalificacionP3,
-                            CalificacionP4=q.CalificacionP4,
-                            CalificacionP5=q.CalificacionP5,
-                            CalificacionP6=q.CalificacionP6,
                             ExamenQ1=q.ExamenQ1,
-                            ExamenQ2=q.ExamenQ2,
-                            ExamenSupletorio=q.ExamenSupletorio,
-                            ExamenMejoramiento=q.ExamenMejoramiento,
-                            ExamenGracia=q.ExamenGracia,
-                            ExamenRemedial=q.ExamenRemedial,
-                            CampoMejoramiento=q.CampoMejoramiento,
-                            PromedioFinalQ1=q.PromedioFinalQ1,
-                            PromedioFinalQ2=q.PromedioFinalQ2,
-                            PromedioFinal=q.PromedioFinal,
-                            PromedioQ1=q.PromedioQ1,
-                            PromedioQ2=q.PromedioQ2,
-                            PromedioQuimestralFinal = q.PromedioQuimestralFinal,
-                            IdEquivalenciaPromedioP1 = q.IdEquivalenciaPromedioP1,
-                            IdEquivalenciaPromedioP2 = q.IdEquivalenciaPromedioP2,
-                            IdEquivalenciaPromedioP3 = q.IdEquivalenciaPromedioP3,
-                            IdEquivalenciaPromedioEQ1 = q.IdEquivalenciaPromedioEQ1,
-                            IdEquivalenciaPromedioQ1 =q.IdEquivalenciaPromedioQ1,
-                            IdEquivalenciaPromedioP4 = q.IdEquivalenciaPromedioP4,
-                            IdEquivalenciaPromedioP5 = q.IdEquivalenciaPromedioP5,
-                            IdEquivalenciaPromedioP6 = q.IdEquivalenciaPromedioP6,
-                            IdEquivalenciaPromedioEQ2=q.IdEquivalenciaPromedioEQ2,
-                            IdEquivalenciaPromedioQ2=q.IdEquivalenciaPromedioQ2,
-                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF,
+                            PromedioQ1 = q.PromedioQ1,
+                            PromedioFinalQ1 = q.PromedioFinalQ1,
                             EquivalenciaPromedioP1 = q.EquivalenciaPromedioP1,
                             EquivalenciaPromedioP2 = q.EquivalenciaPromedioP2,
                             EquivalenciaPromedioP3 = q.EquivalenciaPromedioP3,
                             EquivalenciaPromedioEQ1 = q.EquivalenciaPromedioEQ1,
                             EquivalenciaPromedioQ1 = q.EquivalenciaPromedioQ1,
-                            EquivalenciaPromedioP4 = q.EquivalenciaPromedioP4,
-                            EquivalenciaPromedioP5 = q.EquivalenciaPromedioP5,
-                            EquivalenciaPromedioP6 = q.EquivalenciaPromedioP6,
-                            EquivalenciaPromedioEQ2 = q.EquivalenciaPromedioEQ2,
-                            EquivalenciaPromedioQ2 = q.EquivalenciaPromedioQ2,
-                            EquivalenciaPromedioPF = q.EquivalenciaPromedioPF
+                            CalificacionP4 = (IdCatalogoParcial== Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)? q.CalificacionP4 : null),
+                            CalificacionP5 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CalificacionP5 :null),
+                            CalificacionP6 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CalificacionP6 : null),
+                            ExamenQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenQ2 :null),
+                            PromedioQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioQ2 : null),
+                            PromedioFinalQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioFinalQ2 : null),
+                            ExamenSupletorio = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenSupletorio: null),
+                            ExamenMejoramiento = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenMejoramiento : null),
+                            ExamenGracia = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenGracia : null),
+                            ExamenRemedial = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenRemedial:null),
+                            CampoMejoramiento = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CampoMejoramiento : null),
+                            PromedioFinal = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioFinal :null),
+                            EquivalenciaPromedioP4 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)? q.EquivalenciaPromedioP4 : ""),
+                            EquivalenciaPromedioP5 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioP5 : ""),
+                            EquivalenciaPromedioP6 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioP6 :""),
+                            EquivalenciaPromedioEQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioEQ2 :""),
+                            EquivalenciaPromedioQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioQ2 : ""),
+                            PromedioQuimestralFinal = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioQuimestralFinal : null),
+                            EquivalenciaPromedioPF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioPF :""),
+
+                            IdEquivalenciaPromedioP1 = q.IdEquivalenciaPromedioP1,
+                            IdEquivalenciaPromedioP2 = q.IdEquivalenciaPromedioP2,
+                            IdEquivalenciaPromedioP3 = q.IdEquivalenciaPromedioP3,
+                            IdEquivalenciaPromedioQ1 = q.IdEquivalenciaPromedioQ1,
+                            IdEquivalenciaPromedioP4 = q.IdEquivalenciaPromedioP4,
+                            IdEquivalenciaPromedioP5 = q.IdEquivalenciaPromedioP5,
+                            IdEquivalenciaPromedioP6 = q.IdEquivalenciaPromedioP6,
+                            IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ2,
+                            IdEquivalenciaPromedioQ2 = q.IdEquivalenciaPromedioQ2,
+                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF
                         });
                     }
                 }

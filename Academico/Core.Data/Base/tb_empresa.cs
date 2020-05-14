@@ -17,9 +17,9 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tb_empresa()
         {
-            this.tb_sucursal = new HashSet<tb_sucursal>();
             this.tb_sis_Documento_Tipo_x_Empresa = new HashSet<tb_sis_Documento_Tipo_x_Empresa>();
             this.tb_sis_reporte_x_tb_empresa = new HashSet<tb_sis_reporte_x_tb_empresa>();
+            this.tb_sucursal = new HashSet<tb_sucursal>();
         }
     
         public int IdEmpresa { get; set; }
@@ -40,12 +40,13 @@ namespace Core.Data.Base
         public System.DateTime em_fechaInicioActividad { get; set; }
         public string cod_entidad_dinardap { get; set; }
         public string em_Email { get; set; }
+        public Nullable<bool> TieneAcademico { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tb_sucursal> tb_sucursal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_sis_Documento_Tipo_x_Empresa> tb_sis_Documento_Tipo_x_Empresa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_sis_reporte_x_tb_empresa> tb_sis_reporte_x_tb_empresa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_sucursal> tb_sucursal { get; set; }
     }
 }

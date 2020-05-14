@@ -26,5 +26,6 @@ namespace Core.Info.General
         public System.DateTime em_fechaInicioActividad { get; set; }
         public string cod_entidad_dinardap { get; set; }
         public string em_Email { get; set; }
+        public Nullable<bool> TieneAcademico { get; set; }
     }
 }

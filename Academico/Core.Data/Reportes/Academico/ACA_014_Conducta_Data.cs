@@ -1,4 +1,5 @@
 ﻿using Core.Data.Base;
+using Core.Info.Helps;
 using Core.Info.Reportes.Academico;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_014_Conducta_Data
     {
-        public List<ACA_014_Conducta_Info> get_list(int IdEmpresa, decimal IdMatricula)
+        public List<ACA_014_Conducta_Info> get_list(int IdEmpresa, decimal IdMatricula, int IdCatalogoParcial)
         {
             try
             {
@@ -30,12 +31,12 @@ namespace Core.Data.Reportes.Academico
                             LetraP1 = q.LetraP1,
                             LetraP2 = q.LetraP2,
                             LetraP3 = q.LetraP3,
-                            LetraP4 = q.LetraP4,
-                            LetraP5 = q.LetraP5,
-                            LetraP6 = q.LetraP6,
                             LetraQ1 = q.LetraQ1,
-                            LetraQ2 = q.LetraQ2,
-                            LetraPF = q.LetraPF,
+                            LetraP4 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.LetraP4 : null),
+                            LetraP5 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.LetraP5 : null),
+                            LetraP6 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.LetraP6 : null),
+                            LetraQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.LetraQ2 : null),
+                            LetraPF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.LetraPF :null),
                             SecuenciaP1 = q.SecuenciaP1,
                             SecuenciaP2 = q.SecuenciaP2,
                             SecuenciaP3 = q.SecuenciaP3,

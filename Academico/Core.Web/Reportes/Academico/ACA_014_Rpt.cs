@@ -31,6 +31,7 @@ namespace Core.Web.Reportes.Academico
             int IdJornada = string.IsNullOrEmpty(p_IdJornada.Value.ToString()) ? 0 : Convert.ToInt32(p_IdJornada.Value);
             int IdCurso = string.IsNullOrEmpty(p_IdCurso.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCurso.Value);
             int IdParalelo = string.IsNullOrEmpty(p_IdParalelo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdParalelo.Value);
+            int IdCatalogoParcial = string.IsNullOrEmpty(p_IdCatalogoParcial.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCatalogoParcial.Value);
 
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);
@@ -45,7 +46,7 @@ namespace Core.Web.Reportes.Academico
 
             ACA_014_Bus bus_rpt = new ACA_014_Bus();
             List<ACA_014_Info> lst_rpt = new List<ACA_014_Info>();
-            lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo);
+            lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial);
 
             this.DataSource = lst_rpt;
         }
@@ -54,6 +55,7 @@ namespace Core.Web.Reportes.Academico
         {
             ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdMatricula"].Value = IdMatricula.Value == null ? 0 : Convert.ToInt32(IdMatricula.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdCatalogoParcial"].Value = p_IdCatalogoParcial.Value == null ? 0 : Convert.ToInt32(p_IdCatalogoParcial.Value);
 
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
@@ -62,6 +64,7 @@ namespace Core.Web.Reportes.Academico
         {
             ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdAnio"].Value = p_IdAnio.Value == null ? 0 : Convert.ToInt32(p_IdAnio.Value);
+            
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
     }

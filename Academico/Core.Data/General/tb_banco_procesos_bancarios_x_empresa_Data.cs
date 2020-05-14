@@ -142,9 +142,9 @@ namespace Core.Data.General
                         IdProceso_bancario_tipo = Entity.IdProceso_bancario_tipo,
                         estado = Entity.estado,
                         Codigo_Empresa = Entity.Codigo_Empresa,
-                        NombreProceso=Entity.NombreProceso
-
-
+                        NombreProceso = Entity.NombreProceso,
+                        Academico = (Entity.Academico == null ? false : Entity.Academico),
+                        ERP = (Entity.ERP==null ? false : Entity.ERP)
                     };
                 }
                 return info;
@@ -194,7 +194,9 @@ namespace Core.Data.General
                         Codigo_Empresa = info.Codigo_Empresa,
                         estado = info.estado="A",
                         IdTipoNota = info.IdTipoNota,
-                        Se_contabiliza=info.Se_contabiliza
+                        Se_contabiliza=info.Se_contabiliza,
+                        Academico=info.Academico,
+                        ERP=info.ERP
                     };
                     Context.tb_banco_procesos_bancarios_x_empresa.Add(Entity);
                     Context.SaveChanges();
@@ -221,6 +223,8 @@ namespace Core.Data.General
                         list.Codigo_Empresa = info.Codigo_Empresa;
                         list.Se_contabiliza = info.Se_contabiliza;
                         list.IdTipoNota = info.IdTipoNota;
+                        list.Academico = info.Academico;
+                        list.ERP = info.ERP;
                     }
                     else
                     {
@@ -233,7 +237,9 @@ namespace Core.Data.General
                             IdProceso_bancario_tipo = info.IdProceso_bancario_tipo,
                             IdTipoNota = info.IdTipoNota,
                             NombreProceso = info.NombreProceso,
-                            Se_contabiliza = info.Se_contabiliza
+                            Se_contabiliza = info.Se_contabiliza,
+                            Academico = info.Academico,
+                            ERP = info.ERP
                         });
                     }
                     Context.SaveChanges();

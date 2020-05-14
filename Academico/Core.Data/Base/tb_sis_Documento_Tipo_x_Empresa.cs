@@ -29,8 +29,8 @@ namespace Core.Data.Base
         public int Posicion { get; set; }
         public string ApareceCombo_FileReporte { get; set; }
     
-        public virtual tb_empresa tb_empresa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_sis_Documento_Tipo_Talonario> tb_sis_Documento_Tipo_Talonario { get; set; }
+        public virtual tb_empresa tb_empresa { get; set; }
     }
 }

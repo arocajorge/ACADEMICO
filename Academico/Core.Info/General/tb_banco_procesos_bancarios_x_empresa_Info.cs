@@ -26,7 +26,11 @@ namespace Core.Info.General
         public Nullable<System.DateTime> Fecha_UltMod { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
+        public Nullable<bool> Academico { get; set; }
+        public Nullable<bool> ERP { get; set; }
+
 
         public string ba_descripcion { get; set; }
         public string CodigoLegal { get; set; }

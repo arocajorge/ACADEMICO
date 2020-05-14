@@ -25,7 +25,6 @@ namespace Core.Data.Base
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tb_empresa> tb_empresa { get; set; }
         public virtual DbSet<tb_sucursal> tb_sucursal { get; set; }
         public virtual DbSet<tb_ciudad> tb_ciudad { get; set; }
         public virtual DbSet<tb_parroquia> tb_parroquia { get; set; }
@@ -56,7 +55,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwtb_bodega_x_tb_sucursal> vwtb_bodega_x_tb_sucursal { get; set; }
         public virtual DbSet<vwtb_bodega_x_sucursal> vwtb_bodega_x_sucursal { get; set; }
         public virtual DbSet<tb_banco> tb_banco { get; set; }
-        public virtual DbSet<tb_banco_procesos_bancarios_x_empresa> tb_banco_procesos_bancarios_x_empresa { get; set; }
         public virtual DbSet<tb_parametro> tb_parametro { get; set; }
         public virtual DbSet<tb_modulo> tb_modulo { get; set; }
         public virtual DbSet<vwtb_banco_procesos_bancarios_x_empresa> vwtb_banco_procesos_bancarios_x_empresa { get; set; }
@@ -67,5 +65,7 @@ namespace Core.Data.Base
         public virtual DbSet<tb_TarjetaCredito_x_cp_proveedor> tb_TarjetaCredito_x_cp_proveedor { get; set; }
         public virtual DbSet<tb_TarjetaCredito> tb_TarjetaCredito { get; set; }
         public virtual DbSet<tb_visor_video_aca> tb_visor_video_aca { get; set; }
+        public virtual DbSet<tb_empresa> tb_empresa { get; set; }
+        public virtual DbSet<tb_banco_procesos_bancarios_x_empresa> tb_banco_procesos_bancarios_x_empresa { get; set; }
     }
 }

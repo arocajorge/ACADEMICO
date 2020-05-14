@@ -11,11 +11,11 @@ namespace Core.Bus.Reportes.Academico
     public class ACA_014_Conducta_Bus
     {
         ACA_014_Conducta_Data odata = new ACA_014_Conducta_Data();
-        public List<ACA_014_Conducta_Info> GetList(int IdEmpresa, decimal IdMatricula)
+        public List<ACA_014_Conducta_Info> GetList(int IdEmpresa, decimal IdMatricula, int IdCatalogoParcial)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdMatricula);
+                return odata.get_list(IdEmpresa, IdMatricula, IdCatalogoParcial);
             }
             catch (Exception)
             {

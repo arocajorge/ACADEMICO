@@ -29,6 +29,8 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
         public string MotivoAnulacion { get; set; }
         public string NombreProceso { get; set; }
+        public Nullable<bool> Academico { get; set; }
+        public Nullable<bool> ERP { get; set; }
     
         public virtual tb_banco tb_banco { get; set; }
     }

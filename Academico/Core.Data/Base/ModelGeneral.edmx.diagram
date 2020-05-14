@@ -5,9 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="437637ffb7a743c0b5adb84253bc059a" Name="Diagram1" ZoomLevel="81">
-        <EntityTypeShape EntityType="ModelGeneral.tb_empresa" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ModelGeneral.tb_sucursal" Width="1.5" PointX="3" PointY="9.125" />
-        <AssociationConnector Association="ModelGeneral.FK_tb_sucursal_tb_empresa" />
         <EntityTypeShape EntityType="ModelGeneral.tb_ciudad" Width="1.5" PointX="5.375" PointY="1" />
         <EntityTypeShape EntityType="ModelGeneral.tb_parroquia" Width="1.5" PointX="7.625" PointY="1" />
         <AssociationConnector Association="ModelGeneral.FK_tb_parroquia_tb_ciudad" />
@@ -32,7 +30,6 @@
         <EntityTypeShape EntityType="ModelGeneral.tb_sis_Documento_Tipo" Width="1.5" PointX="3" PointY="30.25" />
         <EntityTypeShape EntityType="ModelGeneral.tb_sis_Documento_Tipo_Talonario" Width="1.5" PointX="5.25" PointY="0.75" />
         <EntityTypeShape EntityType="ModelGeneral.tb_sis_Documento_Tipo_x_Empresa" Width="1.5" PointX="3" PointY="6" />
-        <AssociationConnector Association="ModelGeneral.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" />
         <AssociationConnector Association="ModelGeneral.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo" />
         <AssociationConnector Association="ModelGeneral.FK_tb_sis_Documento_Tipo_Talonario_tb_sis_Documento_Tipo_x_Empresa" />
         <EntityTypeShape EntityType="ModelGeneral.tb_sis_Impuesto_x_ctacble" Width="1.5" PointX="5.625" PointY="13.125" />
@@ -50,14 +47,11 @@
         <EntityTypeShape EntityType="ModelGeneral.vwtb_bodega_x_tb_sucursal" Width="1.5" PointX="9.375" PointY="11.75" />
         <EntityTypeShape EntityType="ModelGeneral.vwtb_bodega_x_sucursal" Width="1.5" PointX="11.375" PointY="11.75" />
         <EntityTypeShape EntityType="ModelGeneral.tb_banco" Width="1.5" PointX="0.75" PointY="18.5" />
-        <EntityTypeShape EntityType="ModelGeneral.tb_banco_procesos_bancarios_x_empresa" Width="1.5" PointX="3" PointY="10.625" />
         <EntityTypeShape EntityType="ModelGeneral.tb_parametro" Width="1.5" PointX="8.25" PointY="16.375" />
-        <AssociationConnector Association="ModelGeneral.FK_tb_banco_procesos_bancarios_x_empresa_tb_banco" />
         <AssociationConnector Association="ModelGeneral.FK_tb_parametro_tb_sis_Impuesto" />
         <EntityTypeShape EntityType="ModelGeneral.tb_modulo" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelGeneral.vwtb_banco_procesos_bancarios_x_empresa" Width="1.5" PointX="13.375" PointY="3.75" />
         <EntityTypeShape EntityType="ModelGeneral.tb_sis_reporte_x_tb_empresa" Width="1.5" PointX="3" PointY="2.375" />
-        <AssociationConnector Association="ModelGeneral.FK_tb_sis_reporte_x_tb_empresa_tb_empresa" />
         <EntityTypeShape EntityType="ModelGeneral.tb_Religion" Width="1.5" PointX="13.375" PointY="8.75" />
         <EntityTypeShape EntityType="ModelGeneral.tb_GrupoEtnico" Width="1.5" PointX="13.375" PointY="16.375" />
         <EntityTypeShape EntityType="ModelGeneral.tb_persona" Width="1.5" PointX="15.625" PointY="11.875" />
@@ -78,6 +72,12 @@
         <EntityTypeShape EntityType="ModelGeneral.tb_TarjetaCredito" Width="1.5" PointX="3" PointY="26.125" />
         <AssociationConnector Association="ModelGeneral.FK_tb_TarjetaCredito_tb_banco" />
         <EntityTypeShape EntityType="ModelGeneral.tb_visor_video_aca" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_empresa" Width="1.5" PointX="0.75" PointY="5" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_sis_Documento_Tipo_x_Empresa_tb_empresa" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_sis_reporte_x_tb_empresa_tb_empresa" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_sucursal_tb_empresa" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_banco_procesos_bancarios_x_empresa" Width="1.5" PointX="3" PointY="41.5" />
+        <AssociationConnector Association="ModelGeneral.FK_tb_banco_procesos_bancarios_x_empresa_tb_banco" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

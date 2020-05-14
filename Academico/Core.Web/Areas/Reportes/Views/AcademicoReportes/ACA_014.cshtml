@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Academico.aca_MatriculaCalificacionParcial_Info
 @{
-    ViewBag.Title = "Record académico";
+    ViewBag.Title = "Record académico quimestral";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -79,7 +79,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdEmpresa">Parcial</label>
-                            @Html.DropDownListFor(q => q.IdCatalogoParcial, new SelectList(ViewBag.lst_parcial, "IdCatalogoParcial", "NomCatalogo"), new { @class = "form-control", @id = "IdCatalogoParcial" })
+                            @Html.DropDownListFor(q => q.IdCatalogoParcial, new SelectList(ViewBag.lst_quimestre, "IdCatalogoTipo", "NomCatalogoTipo"), new { @class = "form-control", @id = "IdCatalogoParcial" })
                             @Html.ValidationMessageFor(q => q.IdCatalogoParcial, "", new { @class = "text-danger" })
                         </div>
                     </div>

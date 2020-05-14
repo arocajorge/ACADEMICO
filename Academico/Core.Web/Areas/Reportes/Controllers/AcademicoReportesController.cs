@@ -1449,13 +1449,13 @@ namespace Core.Web.Areas.Reportes.Controllers
         #region ACA_014
         private void cargar_combos_ACA_014(aca_MatriculaCalificacionParcial_Info model)
         {
-            var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
-            var lst_quim1 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), DateTime.Now.Date);
-            var lst_quim2 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2), DateTime.Now.Date);
-            lst_parcial.AddRange(lst_quim1);
-            lst_parcial.AddRange(lst_quim2);
-
-            ViewBag.lst_parcial = lst_parcial;
+            aca_CatalogoTipo_Bus bus_catalogo = new aca_CatalogoTipo_Bus();
+            var lst_quimestre = new List<aca_CatalogoTipo_Info>();
+            var quim1 = bus_catalogo.GetInfo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+            lst_quimestre.Add(quim1);
+            var quim2 = bus_catalogo.GetInfo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2));
+            lst_quimestre.Add(quim2);
+            ViewBag.lst_quimestre = lst_quimestre;
         }
         public ActionResult ACA_014()
         {
@@ -1464,7 +1464,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
-
+            model.IdCatalogoParcial = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
             string IdUsuario = SessionFixed.IdUsuario;
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
@@ -1490,6 +1490,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
 
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -1519,7 +1520,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
-            //report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
+            report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;

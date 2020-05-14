@@ -312,9 +312,11 @@
     <Compile Include="Areas\Facturacion\Controllers\TerminoPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
     <Compile Include="Areas\Facturacion\FacturacionAreaRegistration.cs" />
+    <Compile Include="Areas\General\Controllers\EmpresaController.cs" />
     <Compile Include="Areas\General\Controllers\GrupoEtnicoController.cs" />
     <Compile Include="Areas\General\Controllers\ParroquiaController.cs" />
     <Compile Include="Areas\General\Controllers\PersonaController.cs" />
+    <Compile Include="Areas\General\Controllers\ProcesosBancariosPorEmpresaController.cs" />
     <Compile Include="Areas\General\Controllers\ProfesionController.cs" />
     <Compile Include="Areas\General\Controllers\ReligionController.cs" />
     <Compile Include="Areas\General\Controllers\TarjetaCreditoController.cs" />
@@ -8657,6 +8659,11 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_013.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_014.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_009.cshtml" />
+    <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Anular.cshtml" />
+    <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Index.cshtml" />
+    <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Modificar.cshtml" />
+    <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\Nuevo.cshtml" />
+    <Content Include="Areas\General\Views\ProcesosBancariosPorEmpresa\_GridViewPartial_procesos_bancarios.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8713,6 +8720,7 @@
     <Folder Include="Areas\CuentasPorPagar\Views\Shared\" />
     <Folder Include="Areas\Facturacion\Models\" />
     <Folder Include="Areas\General\Models\" />
+    <Folder Include="Areas\General\Views\Empresa\" />
     <Folder Include="Areas\Inventario\Models\" />
     <Folder Include="Areas\Inventario\Views\Grupo\" />
     <Folder Include="Areas\Inventario\Views\Linea\" />

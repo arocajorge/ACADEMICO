@@ -43,10 +43,10 @@ namespace Core.Data.Base
         public string IdCtaCble_vtaIVA0 { get; set; }
         public string IdCtaCble_vtaIVA { get; set; }
     
-        public virtual tb_empresa tb_empresa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_sucursal_FormaPago_x_fa_NivelDescuento> tb_sucursal_FormaPago_x_fa_NivelDescuento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_bodega> tb_bodega { get; set; }
+        public virtual tb_empresa tb_empresa { get; set; }
     }
 }

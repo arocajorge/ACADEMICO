@@ -20,10 +20,11 @@ namespace Core.Web.Reportes.Academico
         {
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdMatricula = string.IsNullOrEmpty(p_IdMatricula.Value.ToString()) ? 0 : Convert.ToInt32(p_IdMatricula.Value);
+            int IdCatalogoParcial = string.IsNullOrEmpty(p_IdCatalogoParcial.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCatalogoParcial.Value);
 
             ACA_014_Conducta_Bus bus_rpt = new ACA_014_Conducta_Bus();
             List<ACA_014_Conducta_Info> lst_rpt = new List<ACA_014_Conducta_Info>();
-            lst_rpt = bus_rpt.GetList(IdEmpresa, IdMatricula);
+            lst_rpt = bus_rpt.GetList(IdEmpresa, IdMatricula, IdCatalogoParcial);
 
             this.DataSource = lst_rpt;
         }
