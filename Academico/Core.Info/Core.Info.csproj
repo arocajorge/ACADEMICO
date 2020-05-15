@@ -95,6 +95,8 @@
     <Compile Include="Academico\aca_Reporte_Info.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Info.cs" />
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Info.cs" />
+    <Compile Include="Banco\ba_ArchivoRecaudacionDet_Info.cs" />
+    <Compile Include="Banco\ba_ArchivoRecaudacion_Info.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionCobros_Info.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionFacturas_Info.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionNotas_Info.cs" />

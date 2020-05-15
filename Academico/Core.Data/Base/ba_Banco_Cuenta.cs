@@ -23,6 +23,7 @@ namespace Core.Data.Base
             this.ba_Talonario_cheques_x_banco = new HashSet<ba_Talonario_cheques_x_banco>();
             this.ba_TipoFlujo_Movimiento = new HashSet<ba_TipoFlujo_Movimiento>();
             this.ba_Archivo_Transferencia = new HashSet<ba_Archivo_Transferencia>();
+            this.ba_ArchivoRecaudacion = new HashSet<ba_ArchivoRecaudacion>();
         }
     
         public int IdEmpresa { get; set; }
@@ -58,5 +59,7 @@ namespace Core.Data.Base
         public virtual ICollection<ba_TipoFlujo_Movimiento> ba_TipoFlujo_Movimiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ba_Archivo_Transferencia> ba_Archivo_Transferencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ba_ArchivoRecaudacion> ba_ArchivoRecaudacion { get; set; }
     }
 }

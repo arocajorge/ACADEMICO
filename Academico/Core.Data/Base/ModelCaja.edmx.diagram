@@ -32,10 +32,10 @@
         <EntityTypeShape EntityType="ModelCaja.vwcp_conciliacion_Caja_det" Width="1.5" PointX="11.375" PointY="11.75" />
         <EntityTypeShape EntityType="ModelCaja.vwcp_conciliacion_Caja_det_x_ValeCaja" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelCaja.caj_Caja" Width="1.5" PointX="0.75" PointY="3.625" />
-        <EntityTypeShape EntityType="ModelCaja.caj_Caja_x_seg_usuario" Width="1.5" PointX="3" PointY="8.875" />
         <AssociationConnector Association="ModelCaja.FK_caj_Caja_Movimiento_caj_Caja" />
-        <AssociationConnector Association="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja" />
         <AssociationConnector Association="ModelCaja.FK_cp_conciliacion_Caja_caj_Caja" />
+        <EntityTypeShape EntityType="ModelCaja.caj_Caja_x_seg_usuario" Width="1.5" PointX="3" PointY="16.875" />
+        <AssociationConnector Association="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

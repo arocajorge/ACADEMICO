@@ -56,5 +56,7 @@ namespace Core.Data.Base
         public virtual DbSet<ba_archivo_transferencia_x_ba_tipo_flujo> ba_archivo_transferencia_x_ba_tipo_flujo { get; set; }
         public virtual DbSet<vwba_Archivo_Transferencia_Det> vwba_Archivo_Transferencia_Det { get; set; }
         public virtual DbSet<vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar> vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar { get; set; }
+        public virtual DbSet<ba_ArchivoRecaudacion> ba_ArchivoRecaudacion { get; set; }
+        public virtual DbSet<ba_ArchivoRecaudacionDet> ba_ArchivoRecaudacionDet { get; set; }
     }
 }

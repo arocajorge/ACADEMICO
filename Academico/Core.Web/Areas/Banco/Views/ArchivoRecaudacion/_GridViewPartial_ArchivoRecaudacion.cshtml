@@ -1,0 +1,123 @@
+@using System.Web.UI.WebControls;
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridViewPartial_ArchivoRecaudacion";
+        settings.CallbackRouteValues = new { Controller = "ArchivoRecaudacion", Action = "GridViewPartial_ArchivoRecaudacion", fecha_ini = ViewBag.fecha_ini, fecha_fin = ViewBag.fecha_fin, Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
+        settings.KeyFieldName = "IdArchivo";
+        settings.Width = Unit.Percentage(100);
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+        //Configuracion responsive
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+
+        //Configuración scrolling y pager
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Hidden;
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+        settings.Settings.VerticalScrollableHeight = 400;
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.PageSize = 10;
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
+        settings.SettingsPager.AlwaysShowPager = true;
+        //Configuración filtro por columna
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        //Configuracion exportacion
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
+        settings.Toolbars.Add(t =>
+        {
+            t.EnableAdaptivity = true;
+            t.Items.Add(GridViewToolbarCommand.ExportToPdf).Text = "Exportar a PDF";
+            t.Items.Add(GridViewToolbarCommand.ExportToXls).Text = "Exportar a XLS";
+            t.Items.Add(GridViewToolbarCommand.ExportToXlsx).Text = "Exportar a XLSX";
+            t.Items.Add(GridViewToolbarCommand.ExportToDocx).Text = "Exportar a DOCX";
+            t.Items.Add(GridViewToolbarCommand.ExportToRtf).Text = "Exportar a RTF";
+            t.Items.Add(GridViewToolbarCommand.ExportToCsv).Text = "Exportar a CSV";
+        });
+        settings.SettingsExport.RenderBrick = (sender, e) =>
+        {
+            if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
+                e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
+        };
+        //Evento para pintar de rojo las filas anuladas
+        settings.HtmlRowPrepared = (s, e) =>
+        {
+            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+                if (Convert.ToBoolean(e.GetValue("Contabilizado")) == true)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Blue;
+            }
+        };
+        settings.Columns.Add(c =>
+        {
+            c.Caption = "#";
+            c.SetDataItemTemplateContent(tc =>
+            {
+                if (ViewBag.Modificar == true)
+                {
+                    ViewContext.Writer.Write(
+                                Html.ActionLink("Consultar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(tc.DataItem, "IdArchivo") }) + "&nbsp;"
+                            );
+                }
+
+                if (ViewBag.Anular == true)
+                {
+                    ViewContext.Writer.Write(
+                        Html.ActionLink("Eliminar", "Eliminar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(tc.DataItem, "IdArchivo") },
+                        new { onclick = "return confirm('¿Está seguro de que desea eliminar el registro?')" })
+                    );
+                }
+            });
+            c.SetHeaderTemplateContent(tc =>
+            {
+                if (ViewBag.Nuevo == true)
+                {
+                    ViewContext.Writer.Write(
+                        Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
+                    );
+                }
+            });
+            c.Settings.AllowDragDrop = DefaultBoolean.False;
+            c.Settings.AllowSort = DefaultBoolean.False;
+            c.Width = Unit.Pixel(250);
+        });
+
+
+        settings.Columns.Add("IdArchivo", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("Nom_Archivo", "Nombre archivo").Width = Unit.Percentage(20);
+        settings.Columns.Add("Observacion", "Observación").Width = Unit.Percentage(40);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Estado";
+            column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.SetDataItemTemplateContent(c =>
+            {
+                ViewContext.Writer.Write("<span class=\"glyphicon  glyphicon-download-alt\" onclick=\"OpenInNewTabWinBrowser('" + Url.Action("get_archivo","ArchivoBancario",new { Area = "Banco", IdEmpresa = DataBinder.Eval(c.DataItem, "IdEmpresa"), IdArchivo = DataBinder.Eval(c.DataItem, "IdArchivo") }, Request.Url.Scheme) + "');\"></span>");
+            });
+            column.Width = Unit.Percentage(10);
+        });
+        
+    });
+}
+@grid.Bind(Model).GetHtml()

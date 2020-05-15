@@ -232,7 +232,7 @@
           <Property Name="Valor" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwcaj_Caja_Movimiento_por_conciliar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcaj_Caja_Movimiento_por_conciliar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcaj_Caja_Movimiento_por_conciliar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -264,7 +264,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwcaj_Caja_Movimiento_por_concilia
           <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwcaj_Caja_Movimiento_ValesNoConciliados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcaj_Caja_Movimiento_ValesNoConciliados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcaj_Caja_Movimiento_ValesNoConciliados">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -280,7 +280,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwcaj_Caja_Movimiento_ValesNoConci
           <Property Name="cm_valor" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.dbo.vwcaj_Caja_Movimiento_x_Conciliar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcaj_Caja_Movimiento_x_Conciliar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcaj_Caja_Movimiento_x_Conciliar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -307,7 +307,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwcaj_Caja_Movimiento_x_Conciliar'
           <Property Name="Saldo" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwcaj_Caja_Movimiento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcaj_Caja_Movimiento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcaj_Caja_Movimiento">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -339,7 +339,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcaj_Caja_Movimiento' no tiene de
           <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcp_conciliacion_Caja_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_conciliacion_Caja_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -389,7 +389,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det' no tie
           <Property Name="co_total" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeCaja' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcp_conciliacion_Caja_det_x_ValeCaja' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_conciliacion_Caja_det_x_ValeCaja">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -890,18 +890,18 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeC
           <EntitySet Name="vwcp_conciliacion_Caja_det" EntityType="ModelCaja.vwcp_conciliacion_Caja_det" />
           <EntitySet Name="vwcp_conciliacion_Caja_det_x_ValeCaja" EntityType="ModelCaja.vwcp_conciliacion_Caja_det_x_ValeCaja" />
           <EntitySet Name="caj_Caja" EntityType="ModelCaja.caj_Caja" />
-          <EntitySet Name="caj_Caja_x_seg_usuario" EntityType="ModelCaja.caj_Caja_x_seg_usuario" />
           <AssociationSet Name="FK_caj_Caja_Movimiento_caj_Caja" Association="ModelCaja.FK_caj_Caja_Movimiento_caj_Caja">
             <End Role="caj_Caja" EntitySet="caj_Caja" />
             <End Role="caj_Caja_Movimiento" EntitySet="caj_Caja_Movimiento" />
           </AssociationSet>
-          <AssociationSet Name="FK_caj_Caja_x_seg_usuario_caj_Caja" Association="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja">
-            <End Role="caj_Caja" EntitySet="caj_Caja" />
-            <End Role="caj_Caja_x_seg_usuario" EntitySet="caj_Caja_x_seg_usuario" />
-          </AssociationSet>
           <AssociationSet Name="FK_cp_conciliacion_Caja_caj_Caja" Association="ModelCaja.FK_cp_conciliacion_Caja_caj_Caja">
             <End Role="caj_Caja" EntitySet="caj_Caja" />
             <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
+          </AssociationSet>
+          <EntitySet Name="caj_Caja_x_seg_usuario" EntityType="ModelCaja.caj_Caja_x_seg_usuario" />
+          <AssociationSet Name="FK_caj_Caja_x_seg_usuario_caj_Caja" Association="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja">
+            <End Role="caj_Caja" EntitySet="caj_Caja" />
+            <End Role="caj_Caja_x_seg_usuario" EntitySet="caj_Caja_x_seg_usuario" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="caj_catalogo">
@@ -1381,20 +1381,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeC
           <Property Name="Fecha_UltAnu" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnu" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="caj_Caja_Movimiento" Relationship="ModelCaja.FK_caj_Caja_Movimiento_caj_Caja" FromRole="caj_Caja" ToRole="caj_Caja_Movimiento" />
-          <NavigationProperty Name="caj_Caja_x_seg_usuario" Relationship="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja" FromRole="caj_Caja" ToRole="caj_Caja_x_seg_usuario" />
           <NavigationProperty Name="cp_conciliacion_Caja" Relationship="ModelCaja.FK_cp_conciliacion_Caja_caj_Caja" FromRole="caj_Caja" ToRole="cp_conciliacion_Caja" />
-        </EntityType>
-        <EntityType Name="caj_Caja_x_seg_usuario">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCaja" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCaja" Type="Int32" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="caj_Caja" Relationship="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja" FromRole="caj_Caja_x_seg_usuario" ToRole="caj_Caja" />
+          <NavigationProperty Name="caj_Caja_x_seg_usuario" Relationship="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja" FromRole="caj_Caja" ToRole="caj_Caja_x_seg_usuario" />
         </EntityType>
         <Association Name="FK_caj_Caja_Movimiento_caj_Caja">
           <End Type="ModelCaja.caj_Caja" Role="caj_Caja" Multiplicity="1" />
@@ -1410,20 +1398,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeC
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_caj_Caja_x_seg_usuario_caj_Caja">
-          <End Type="ModelCaja.caj_Caja" Role="caj_Caja" Multiplicity="1" />
-          <End Type="ModelCaja.caj_Caja_x_seg_usuario" Role="caj_Caja_x_seg_usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="caj_Caja">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCaja" />
-            </Principal>
-            <Dependent Role="caj_Caja_x_seg_usuario">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCaja" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_cp_conciliacion_Caja_caj_Caja">
           <End Type="ModelCaja.caj_Caja" Role="caj_Caja" Multiplicity="1" />
           <End Type="ModelCaja.cp_conciliacion_Caja" Role="cp_conciliacion_Caja" Multiplicity="*" />
@@ -1433,6 +1407,32 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeC
               <PropertyRef Name="IdCaja" />
             </Principal>
             <Dependent Role="cp_conciliacion_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="caj_Caja_x_seg_usuario">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCaja" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCaja" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="caj_Caja" Relationship="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja" FromRole="caj_Caja_x_seg_usuario" ToRole="caj_Caja" />
+        </EntityType>
+        <Association Name="FK_caj_Caja_x_seg_usuario_caj_Caja">
+          <End Type="ModelCaja.caj_Caja" Role="caj_Caja" Multiplicity="1" />
+          <End Type="ModelCaja.caj_Caja_x_seg_usuario" Role="caj_Caja_x_seg_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="caj_Caja">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCaja" />
+            </Principal>
+            <Dependent Role="caj_Caja_x_seg_usuario">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdCaja" />
             </Dependent>
