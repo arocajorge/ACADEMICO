@@ -50,7 +50,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_AnioLectivoCalificacionHistorico_Info getInfo(int IdEmpresa, int IdAnio, int IdAlumno)
+        public aca_AnioLectivoCalificacionHistorico_Info getInfo(int IdEmpresa, int IdAnio, decimal IdAlumno)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace Core.Data.Academico
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

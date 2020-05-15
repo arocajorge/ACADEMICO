@@ -24,11 +24,23 @@ namespace Core.Bus.Academico
             }
         }
 
-        public List<aca_MatriculaConducta_Info> GetList_Combos(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
+        public aca_MatriculaConducta_Info GetInfo(int IdEmpresa, decimal IdMatricula)
         {
             try
             {
-                return odata.getList_Combos(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial);
+                return odata.getInfo(IdEmpresa, IdMatricula);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<aca_MatriculaConducta_Info> GetList_Combos(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo)
+        {
+            try
+            {
+                return odata.getList_Combos(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
             }
             catch (Exception)
             {
@@ -67,6 +79,18 @@ namespace Core.Bus.Academico
                 return odata.modicarPromedioFinal(info);
             }
             catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool modicarPromedioPaseAnio(aca_MatriculaConducta_Info info)
+        {
+            try
+            {
+                return odata.modicarPromedioPaseAnio(info);
+            }
+            catch (Exception ex)
             {
                 throw;
             }

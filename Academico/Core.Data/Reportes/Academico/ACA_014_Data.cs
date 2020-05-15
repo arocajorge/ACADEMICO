@@ -94,7 +94,8 @@ namespace Core.Data.Reportes.Academico
                             IdEquivalenciaPromedioP4 = q.IdEquivalenciaPromedioP4,
                             IdEquivalenciaPromedioP5 = q.IdEquivalenciaPromedioP5,
                             IdEquivalenciaPromedioP6 = q.IdEquivalenciaPromedioP6,
-                            IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ2,
+                            //IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ1,
+                            //IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ2,
                             IdEquivalenciaPromedioQ2 = q.IdEquivalenciaPromedioQ2,
                             IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF
                         });

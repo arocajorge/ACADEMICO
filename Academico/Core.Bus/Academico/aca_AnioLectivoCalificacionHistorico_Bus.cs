@@ -24,7 +24,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_AnioLectivoCalificacionHistorico_Info GetInfo(int IdEmpresa, int IdAnio, int IdAlumno)
+        public aca_AnioLectivoCalificacionHistorico_Info GetInfo(int IdEmpresa, int IdAnio, decimal IdAlumno)
         {
             try
             {

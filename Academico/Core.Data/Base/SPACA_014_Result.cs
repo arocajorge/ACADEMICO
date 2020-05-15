@@ -63,7 +63,7 @@ namespace Core.Data.Base
         public string EquivalenciaPromedioP6 { get; set; }
         public Nullable<decimal> PromedioQ2 { get; set; }
         public Nullable<decimal> ExamenQ2 { get; set; }
-        public string IdEquivalenciaPromedioEQ2 { get; set; }
+        public Nullable<int> IdEquivalenciaPromedioEQ2 { get; set; }
         public string EquivalenciaPromedioEQ2 { get; set; }
         public Nullable<decimal> PromedioFinalQ2 { get; set; }
         public Nullable<int> IdEquivalenciaPromedioQ2 { get; set; }

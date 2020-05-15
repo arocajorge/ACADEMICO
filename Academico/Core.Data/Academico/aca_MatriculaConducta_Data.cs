@@ -79,6 +79,70 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_MatriculaConducta_Info getInfo(int IdEmpresa, decimal IdMatricula)
+        {
+            try
+            {
+                aca_MatriculaConducta_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_MatriculaConducta_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdMatricula = Entity.IdMatricula,
+                        SecuenciaPromedioP1 = Entity.SecuenciaPromedioP1,
+                        PromedioP1 = Entity.PromedioP1,
+                        SecuenciaPromedioFinalP1 = Entity.SecuenciaPromedioFinalP1,
+                        PromedioFinalP1 = Entity.PromedioFinalP1,
+                        SecuenciaPromedioP2 = Entity.SecuenciaPromedioP2,
+                        PromedioP2 = Entity.PromedioP2,
+                        SecuenciaPromedioFinalP2 = Entity.SecuenciaPromedioFinalP2,
+                        PromedioFinalP2 = Entity.PromedioFinalP2,
+                        SecuenciaPromedioP3 = Entity.SecuenciaPromedioP3,
+                        PromedioP3 = Entity.PromedioP3,
+                        SecuenciaPromedioFinalP3 = Entity.SecuenciaPromedioFinalP3,
+                        PromedioFinalP3 = Entity.PromedioFinalP3,
+                        SecuenciaPromedioP4 = Entity.SecuenciaPromedioP4,
+                        PromedioP4 = Entity.PromedioP4,
+                        SecuenciaPromedioFinalP4 = Entity.SecuenciaPromedioFinalP4,
+                        PromedioFinalP4 = Entity.PromedioFinalP4,
+                        SecuenciaPromedioP5 = Entity.SecuenciaPromedioP5,
+                        PromedioP5 = Entity.PromedioP5,
+                        SecuenciaPromedioFinalP5 = Entity.SecuenciaPromedioFinalP5,
+                        PromedioFinalP5 = Entity.PromedioFinalP5,
+                        SecuenciaPromedioP6 = Entity.SecuenciaPromedioP6,
+                        PromedioP6 = Entity.PromedioP6,
+                        SecuenciaPromedioFinalP6 = Entity.SecuenciaPromedioFinalP6,
+                        PromedioFinalP6 = Entity.PromedioFinalP6,
+                        SecuenciaPromedioQ1 = Entity.SecuenciaPromedioQ1,
+                        PromedioQ1 = Entity.PromedioQ1,
+                        SecuenciaPromedioFinalQ1 = Entity.SecuenciaPromedioFinalQ1,
+                        PromedioFinalQ1 = Entity.PromedioFinalQ1,
+                        SecuenciaPromedioQ2 = Entity.SecuenciaPromedioQ2,
+                        PromedioQ2 = Entity.PromedioQ2,
+                        SecuenciaPromedioFinalQ2 = Entity.SecuenciaPromedioFinalQ2,
+                        PromedioFinalQ2 = Entity.PromedioFinalQ2,
+                        SecuenciaPromedioGeneral = Entity.SecuenciaPromedioGeneral,
+                        PromedioGeneral = Entity.PromedioGeneral,
+                        SecuenciaPromedioFinal = Entity.SecuenciaPromedioFinal,
+                        PromedioFinal = Entity.PromedioFinal
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<aca_MatriculaConducta_Info> getList_PaseAnio(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno)
         {
             try
@@ -168,7 +232,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public List<aca_MatriculaConducta_Info> getList_Combos(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
+        public List<aca_MatriculaConducta_Info> getList_Combos(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo)
         {
             try
             {
@@ -452,6 +516,30 @@ namespace Core.Data.Academico
                         EntityConductaPromedioQuim.PromedioQ2 = PromedioQuimestre;
                         EntityConductaPromedioQuim.SecuenciaPromedioQ2 = info_conductaQ2 == null ? SecuenciaConducta : info_conductaQ2.Secuencia;
                     }
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public bool modicarPromedioPaseAnio(aca_MatriculaConducta_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_MatriculaConducta EntityConducta = Context.aca_MatriculaConducta.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula);
+                    if (EntityConducta == null)
+                        return false;
+
+                    EntityConducta.SecuenciaPromedioGeneral = info.SecuenciaPromedioGeneral;
+                    EntityConducta.PromedioGeneral = info.PromedioGeneral;
+
                     Context.SaveChanges();
                 }
 

@@ -30,6 +30,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Catalogo_Bus bus_catalogo = new aca_Catalogo_Bus();
         aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
         aca_AnioLectivoEquivalenciaPromedio_Bus bus_promedio = new aca_AnioLectivoEquivalenciaPromedio_Bus();
+        aca_AnioLectivoConductaEquivalencia_Bus bus_equi_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -78,8 +79,8 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 foreach (var item in lista)
                 {
-                    var lst_x_matricula = lst_calificacion.Where(q=>q.IdEmpresa == item.IdEmpresa && q.IdMatricula==item.IdMatricula);
-                    var lst_conducta_x_matricula = lst_calificacion.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula);
+                    var lst_x_matricula = lst_calificacion.Where(q=>q.IdEmpresa == item.IdEmpresa && q.IdMatricula==item.IdMatricula).ToList();
+                    var lst_conducta_x_matricula = lst_calificacion.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).ToList();
                     var info_matricula = bus_matricula.GetInfo(item.IdEmpresa,item.IdMatricula);
                     var info_alumno = bus_alumno.GetInfo(item.IdEmpresa, info_matricula.IdAlumno);
                     var lst_agrupada = lst_x_matricula.GroupBy(q=>new {q.IdEmpresa, q.IdMatricula, q.IdMateria }).ToList();
@@ -213,20 +214,40 @@ namespace Core.Web.Areas.Academico.Controllers
                     item.NomCatalogoESTMAT = info_catalogo.NomCatalogo;
                     item.PaseAnio = PaseAnio;
 
-                    //lst_conducta = bus_conducta.GetList_PaseAnio(item.IdEmpresa, item.IdSede, item.IdAnio, item.IdNivel,item.IdJornada, item.IdCurso, item.IdParalelo, item.IdAlumno);
-                    //var info_historico = new aca_AnioLectivoCalificacionHistorico_Info
-                    //{
-                    //    IdEmpresa = item.IdEmpresa,
-                    //    IdAnio = item.IdAnio,
-                    //    IdAlumno = item.IdAlumno,
-                    //    IdNivel = item.IdNivel,
-                    //    IdCurso = item.IdCurso,
-                    //    AntiguaInstitucion = null,
-                    //    Promedio = Convert.ToInt32(item.PromedioFinal),
-                    //    //Conducta = item1.Conducta
+                    var info_conducta = bus_conducta.GetInfo(item.IdEmpresa, item.IdMatricula);
+                    var suma_conducta = (info_conducta.PromedioFinalQ1 == null ? info_conducta.PromedioQ1 : info_conducta.PromedioFinalQ1) + (info_conducta.PromedioFinalQ2 == null ? info_conducta.PromedioQ2 : info_conducta.PromedioFinalQ2);
+                    var promedio_conducta =  Math.Round(Convert.ToDecimal(suma_conducta / 2),2, MidpointRounding.AwayFromZero);
+                    var info_conducta_promedio = bus_equi_conducta.GetInfoXPromedioConducta(item.IdEmpresa, item.IdAnio, promedio_conducta);
+                    info_conducta.SecuenciaPromedioGeneral = (info_conducta_promedio==null ? (int?)null : info_conducta_promedio.Secuencia);
+                    info_conducta.PromedioGeneral = Convert.ToDouble(promedio_conducta);
+                    bus_conducta.modicarPromedioPaseAnio(info_conducta);
+                    var info_historico = new aca_AnioLectivoCalificacionHistorico_Info();
+                    var historico = bus_historico_calificacion.GetInfo(item.IdEmpresa, item.IdAnio, item.IdAlumno);
 
-                    //};
-                    //bus_historico_calificacion.GuardarDB(info_historico);
+                    if (historico==null)
+                    {
+                        info_historico = new aca_AnioLectivoCalificacionHistorico_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdAnio = item.IdAnio,
+                            IdAlumno = item.IdAlumno,
+                            IdNivel = item.IdNivel,
+                            IdCurso = item.IdCurso,
+                            AntiguaInstitucion = "",
+                            Promedio = Convert.ToDecimal(item.PromedioFinal),
+                            Conducta = info_conducta_promedio.Calificacion
+
+                        };
+                        bus_historico_calificacion.GuardarDB(info_historico);
+                    }
+                    else
+                    {
+                        info_historico = historico;
+                        info_historico.Promedio = Convert.ToDecimal(item.PromedioFinal);
+                        info_historico.Conducta = info_conducta_promedio.Calificacion;
+
+                        bus_historico_calificacion.ModificarDB(info_historico);
+                    }
                 }
             }
             Lista_MatriculaPaseAnio.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
