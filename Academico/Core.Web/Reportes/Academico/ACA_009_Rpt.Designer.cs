@@ -200,7 +200,7 @@
             this.xrTable1,
             this.xrTable7,
             this.lbl_imagen});
-            this.PageHeader.HeightF = 138.0417F;
+            this.PageHeader.HeightF = 135.0417F;
             this.PageHeader.Name = "PageHeader";
             // 
             // xrTable3
@@ -266,7 +266,7 @@
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 5, 0, 100F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(751.0002F, 25F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(751.0002F, 22F);
             this.xrTable1.StylePriority.UseBorders = false;
             this.xrTable1.StylePriority.UseFont = false;
             this.xrTable1.StylePriority.UsePadding = false;
@@ -303,7 +303,7 @@
             // 
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
-            this.xrTableCell3.Text = "Código Alumno";
+            this.xrTableCell3.Text = "Código ";
             this.xrTableCell3.Weight = 0.72336906137623913D;
             // 
             // xrTableCell4
