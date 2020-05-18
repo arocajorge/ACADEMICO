@@ -12,15 +12,14 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class ba_ArchivoRecaudacionDet
+    public partial class vwba_ArchivoRecaudacionDet_Saldos
     {
         public int IdEmpresa { get; set; }
-        public decimal IdArchivo { get; set; }
-        public int Secuencia { get; set; }
-        public Nullable<decimal> IdMatricula { get; set; }
-        public decimal IdAlumno { get; set; }
-        public double Valor { get; set; }
-        public double ValorProntoPago { get; set; }
-        public Nullable<System.DateTime> FechaProceso { get; set; }
+        public Nullable<decimal> IdAlumno { get; set; }
+        public decimal IdMatricula { get; set; }
+        public string CodigoAlumno { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public Nullable<decimal> Saldo { get; set; }
+        public Nullable<decimal> SaldoProntoPago { get; set; }
     }
 }

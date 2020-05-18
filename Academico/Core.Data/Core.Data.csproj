@@ -339,6 +339,15 @@
     <Compile Include="Base\VWBAN_003.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwba_ArchivoRecaudacionDet.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwba_ArchivoRecaudacionDet_Saldos.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwba_ArchivoRecaudacion_Archivo.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\VWCAJ_001.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>

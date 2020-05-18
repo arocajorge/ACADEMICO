@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +12,13 @@ namespace Core.Info.Banco
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdArchivo { get; set; }
+        [Required(ErrorMessage = "El campo banco es obligatorio")]
         public int IdBanco { get; set; }
+        [Required(ErrorMessage = "El campo proceso bancario es obligatorio")]
         public int IdProceso_bancario { get; set; }
         public string Nom_Archivo { get; set; }
         public int SecuencialDescarga { get; set; }
+        [Required(ErrorMessage = "El campo fecha es obligatorio")]
         public System.DateTime Fecha { get; set; }
         public bool Estado { get; set; }
         public string Observacion { get; set; }
@@ -26,6 +30,7 @@ namespace Core.Info.Banco
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
+        [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
         public Nullable<System.DateTime> FechaProceso { get; set; }
         public string IdUsuarioProceso { get; set; }

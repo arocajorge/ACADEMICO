@@ -8669,6 +8669,8 @@
     <Content Include="Areas\Banco\Views\ArchivoRecaudacion\_GridViewPartial_ArchivoRecaudacionDet.cshtml" />
     <Content Include="Areas\Banco\Views\ArchivoRecaudacion\Index.cshtml" />
     <Content Include="Areas\Banco\Views\ArchivoRecaudacion\_GridViewPartial_ArchivoRecaudacion_Saldo.cshtml" />
+    <Content Include="Areas\Banco\Views\ArchivoRecaudacion\Modificar.cshtml" />
+    <Content Include="Areas\Banco\Views\ArchivoRecaudacion\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

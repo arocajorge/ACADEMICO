@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Banco.ba_ArchivoRecaudacion_Info
 @{
-    ViewBag.Title = "Nuevo archivo recaudación";
+    ViewBag.Title = "Modificar archivo recaudación";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -24,72 +24,6 @@
 </script>
 
 <script>
-    var selectedIDs;
-    function OnBeginCallback(s, e) {
-        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
-        e.customArgs["selectedIDs"] = selectedIDs;
-    }
-    function OnSelectionChanged(s, e) {
-        s.GetSelectedFieldValues("IdAlumno", GetSelectedFieldValuesCallback);
-    }
-    function GetSelectedFieldValuesCallback(values) {
-        //Capture all selected keys
-        selectedIDs = values.join(',');
-    }
-    function MostrarModal() {
-        selectedIDs = "";
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val(),
-            IdSucursal: $("#IdSucursal").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetListPorCruzar", "ArchivoRecaudacion",new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                GridViewPartial_ArchivoRecaudacion_Saldo.PerformCallback();
-                GridViewPartial_ArchivoRecaudacion_Saldo.UnselectRows();
-                $("#SaldoModal").modal("show");
-
-            },
-            error: function (error) {
-            }
-        });
-    }
-    function Add() {
-        var datos = {
-            IDs: selectedIDs,
-            IdTransaccionSession: $("#IdTransaccionSession").val(),
-            IdEmpresa: $("#IdEmpresa").val()
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNew", "ArchivoRecaudacion", new { Area = "Banco"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-            },
-            error: function (error) {
-            }
-        });
-        selectedIDs = "";
-        GridViewPartial_ArchivoRecaudacion_Saldo.PerformCallback();
-        GridViewPartial_ArchivoRecaudacion_Saldo.UnselectRows();
-        GridViewPartial_ArchivoRecaudacionDet.PerformCallback();
-        $("#SaldoModal").modal("hide");
-
-    }
-
     function GetValor() {
         var datos = {
             IdTransaccionSession: $("#IdTransaccionSession").val()
@@ -112,7 +46,7 @@
         });
     }
 </script>
-@using (Html.BeginForm("Nuevo", "ArchivoRecaudacion", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "ArchivoRecaudacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdArchivo, new { @id = "IdArchivo" })
@@ -214,7 +148,17 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group has-error">
+                    <label for="Rector">Motivo de anulación*</label>
+                    @Html.TextBoxFor(q => q.MotivoAnulacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.MotivoAnulacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="Tabs" role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
@@ -223,16 +167,6 @@
         </ul>
         <div class="tab-content" style="padding-top: 20px">
             <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_op">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-1">
-                            <button type="button" class="btn btn-primary form-control" id="btn_buscar_op" onclick="MostrarModal();" title="Buscar órdenes">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <br />
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
@@ -246,10 +180,6 @@
             </div>
         </div>
     </div>
-
-
-
-
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","ArchivoRecaudacion",new { Area = "Banco" },null)">Cancelar</a>

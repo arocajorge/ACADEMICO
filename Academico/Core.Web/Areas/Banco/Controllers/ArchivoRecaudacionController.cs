@@ -31,6 +31,7 @@ namespace Core.Web.Areas.Banco.Controllers
         tb_banco_procesos_bancarios_x_empresa_Bus bus_procesos_bancarios = new tb_banco_procesos_bancarios_x_empresa_Bus();
         ba_Banco_Cuenta_Bus bus_cuentas_bancarias = new ba_Banco_Cuenta_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
+        tb_banco_Bus bus_banco = new tb_banco_Bus();
         string mensaje = string.Empty;
 
         ba_Banco_Cuenta_Bus bus_banco_cuenta = new ba_Banco_Cuenta_Bus();
@@ -56,6 +57,7 @@ namespace Core.Web.Areas.Banco.Controllers
 
             cl_filtros_Info model = new cl_filtros_Info
             {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 fecha_ini = DateTime.Now.AddMonths(-1),
                 fecha_fin = DateTime.Now
             };
@@ -103,12 +105,27 @@ namespace Core.Web.Areas.Banco.Controllers
 
         }
         #endregion
+
         #region Metodos
         private bool validar(ba_ArchivoRecaudacion_Info i_validar, ref string msg)
         {
             if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.Fecha, cl_enumeradores.eModulo.BANCO, i_validar.IdSucursal, ref msg))
             {
                 return false;
+            }
+
+            if (i_validar.Lst_det.Count == 0)
+            {
+                mensaje = "Debe ingresar registros en el detalle";
+                return false;
+            }
+            else
+            {
+                foreach (var item in i_validar.Lst_det)
+                {
+                    item.Valor = Convert.ToDouble(item.Saldo);
+                    item.ValorProntoPago = Convert.ToDouble(item.SaldoProntoPago);
+                }
             }
 
             var pro = bus_procesos_bancarios.get_info(i_validar.IdEmpresa, i_validar.IdProceso_bancario);
@@ -154,6 +171,7 @@ namespace Core.Web.Areas.Banco.Controllers
         [HttpPost]
         public ActionResult Nuevo(ba_ArchivoRecaudacion_Info model)
         {
+            model.Nom_Archivo = "COBROS_MULTICASH";
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             model.Lst_det = Lista_det.get_list(model.IdTransaccionSession);
 
@@ -276,7 +294,7 @@ namespace Core.Web.Areas.Banco.Controllers
                 var Lista = Lista_det_Saldo.get_list(IdTransaccionSession);
                 foreach (var item in array)
                 {
-                    var info_det = Lista.Where(q => q.IdEmpresa==IdEmpresa && q.IdMatricula == Convert.ToInt32(item)).FirstOrDefault();
+                    var info_det = Lista.Where(q => q.IdEmpresa==IdEmpresa && q.IdAlumno == Convert.ToInt32(item)).FirstOrDefault();
                     if (info_det != null)
                     {
                         Lista_det.AddRow(info_det, IdTransaccionSession);
@@ -287,18 +305,18 @@ namespace Core.Web.Areas.Banco.Controllers
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost, ValidateInput(false)]
-        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ba_ArchivoRecaudacionDet_Info info_det)
-        {
+        //[HttpPost, ValidateInput(false)]
+        //public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ba_ArchivoRecaudacionDet_Info info_det)
+        //{
 
-            if (ModelState.IsValid)
-                Lista_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var model = Lista_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_ArchivoRecaudacionDet", model);
-        }
-        public ActionResult EditingDelete(decimal IdOrdenPago)
+        //    if (ModelState.IsValid)
+        //        Lista_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+        //    var model = Lista_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+        //    return PartialView("_GridViewPartial_ArchivoRecaudacionDet", model);
+        //}
+        public ActionResult EditingDelete(int Secuencia)
         {
-            Lista_det.DeleteRow(IdOrdenPago, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            Lista_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             var model = Lista_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_ArchivoRecaudacionDet", model);
         }
@@ -307,15 +325,16 @@ namespace Core.Web.Areas.Banco.Controllers
         #region Json
         public JsonResult GetListPorCruzar(int IdEmpresa = 0, decimal IdTransaccionSession = 0, int IdSucursal = 0)
         {
-            //var lst = bus_archivo_det.get_list_con_saldo(IdEmpresa, 0, "PROVEE", 0, "APRO", SessionFixed.IdUsuario ?? " ", IdSucursal, false);
-            var lst = new List<ba_ArchivoRecaudacionDet_Info>();
+            var lst = bus_archivo_det.GetList_ConSaldo(IdEmpresa);
             Lista_det_Saldo.set_list(lst, IdTransaccionSession);
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetValor(decimal IdTransaccionSession = 0)
         {
-            double Valor = Math.Round(Lista_det.get_list(IdTransaccionSession).Sum(q => q.Valor), 2, MidpointRounding.AwayFromZero);
-            double ValorProntoPago = Math.Round(Lista_det.get_list(IdTransaccionSession).Sum(q => q.Valor), 2, MidpointRounding.AwayFromZero);
+            var Lista = Lista_det.get_list(IdTransaccionSession);
+
+            decimal Valor = Math.Round(Lista.Sum(q => q.Saldo), 2, MidpointRounding.AwayFromZero);
+            decimal ValorProntoPago = Math.Round(Lista.Sum(q => q.SaldoProntoPago), 2, MidpointRounding.AwayFromZero);
             return Json(new { Valor = Valor, ValorProntoPago= ValorProntoPago }, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -328,10 +347,14 @@ namespace Core.Web.Areas.Banco.Controllers
             ba_ArchivoRecaudacion_Bus bus_tipo_file = new ba_ArchivoRecaudacion_Bus();
 
             var info_archivo = bus_archivo.GetInfo(IdEmpresa, IdArchivo);
-            info_archivo.Lst_det = bus_archivo_det.GetList(IdEmpresa, IdArchivo);
+            info_archivo.Lst_det = bus_archivo_det.GetList_Archivo(IdEmpresa, IdArchivo);
+            var NombreArchivo = info_archivo.Nom_Archivo + info_archivo.SecuencialDescarga;
 
-            archivo = GetArchivo(info_archivo, info_archivo.Nom_Archivo);
-            return File(archivo, "application/xml", info_archivo.Nom_Archivo + ".txt");
+            archivo = GetArchivo(info_archivo, NombreArchivo);
+            info_archivo.IdUsuarioModificacion = SessionFixed.IdUsuario;
+            bus_archivo.ModificarSecuenciaDescargaDB(info_archivo);
+
+            return File(archivo, "application/xml", NombreArchivo + ".txt");
         }
 
         private byte[] GetMulticash(ba_ArchivoRecaudacion_Info info, string NombreArchivo)
@@ -341,49 +364,51 @@ namespace Core.Web.Areas.Banco.Controllers
                 System.IO.File.Delete(rutafile + NombreArchivo + ".txt");
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
                 {
-                    var ListaA = info.Lst_det.Where(v => v.Valor > 0).GroupBy(q => new { q.IdMatricula }).Select(q => new
+                    var Lista = info.Lst_det;
+                    foreach (var item in Lista)
                     {
-                        Valor = q.Sum(g => g.Valor)
-                    }).ToList();
+                        string linea1 = "";
+                        string linea2 = "";
+                        //double valor = Convert.ToDouble(item.Valor);
+                        double ValorProntoPago = Convert.ToDouble(item.ValorProntoPago);
+                        double valorEntero = Math.Floor(ValorProntoPago);
+                        double valorDecimal = Convert.ToDouble((ValorProntoPago - valorEntero).ToString("N2")) * 100;
 
-                    var banco = bus_banco_cuenta.get_info(info.IdEmpresa, info.IdBanco);
-                    //foreach (var item in info.Lst_det.Where(v => v.Valor > 0).ToList())
-                    foreach (var item in ListaA)
-                    {
-                        string linea = "";
-                        double valor = Convert.ToDouble(item.Valor);
-                        double valorEntero = Math.Floor(valor);
-                        double valorDecimal = Convert.ToDouble((valor - valorEntero).ToString("N2")) * 100;
-
-                        linea += "PA\t";
-                        linea += string.IsNullOrEmpty(banco.ba_Num_Cuenta) ? "" : banco.ba_Num_Cuenta.PadLeft(10, '0') + "\t";
-                        /*linea += item.Secuencial_reg_x_proceso.ToString().PadLeft(7, ' ') + "\t";
-                        linea += "\t";//COMPROBANTE DE PAGO
-                        linea += (string.IsNullOrEmpty(item.num_cta_acreditacion) ? item.pe_cedulaRuc.Trim() : item.num_cta_acreditacion.Trim()) + "\t";
-                        linea += "USD\t";
-                        linea += (valorEntero.ToString() + valorDecimal.ToString().PadLeft(2, '0')).PadLeft(13, '0') + "\t";
-                        linea += (string.IsNullOrEmpty(item.num_cta_acreditacion) ? "EFE" : "CTA") + "\t";
-                        linea += (string.IsNullOrEmpty(item.num_cta_acreditacion) ? "0017" : item.CodigoLegalBanco.ToString().PadLeft(4, '0')) + "\t";
-                        linea += (string.IsNullOrEmpty(item.num_cta_acreditacion) || string.IsNullOrEmpty(item.IdTipoCta_acreditacion_cat) ? "" : (item.IdTipoCta_acreditacion_cat.Trim() == "COR" ? "CTE" : item.IdTipoCta_acreditacion_cat)) + "\t";
-                        linea += string.IsNullOrEmpty(item.num_cta_acreditacion) ? "" : item.num_cta_acreditacion.PadLeft(10, '0') + "\t";
-                        linea += (item.IdTipoDocumento == "CED" ? "C" : (item.IdTipoDocumento == "RUC" ? "R" : "P")) + "\t";
-                        linea += item.pe_cedulaRuc.Trim() + "\t";
-                        linea += (string.IsNullOrEmpty(item.Nom_Beneficiario) ? "" : (item.Nom_Beneficiario.Length > 40 ? item.Nom_Beneficiario.Substring(0, 40) : item.Nom_Beneficiario.Trim())) + "\t";
-                        linea += "\t";//(string.IsNullOrEmpty(item.pr_direccion) ? "" : (item.pr_direccion.Length > 40 ? item.pr_direccion.Substring(0, 40) : item.pr_direccion.Trim())) + "\t";
-                        linea += "\t";//Ciudad
-                        linea += "\t";//Telefono
-                        linea += "\t";//Localidad
+                        linea1 += "CO" + "\t";
+                        linea1 += string.IsNullOrEmpty(item.ba_Num_Cuenta) ? "" : item.ba_Num_Cuenta.PadLeft(11, '0') + "\t";
+                        linea1 += item.Secuencia.ToString().PadLeft(7, ' ') + "\t";
+                        linea1 += "\t";//COMPROBANTE DE PAGO
+                        linea1 += item.CodigoAlumno+"\t";//CONTRAPARTIDA
+                        linea1 += "USD"+"\t";
+                        linea1 += (valorEntero.ToString() + valorDecimal.ToString().PadRight(2, '0')).PadLeft(13, '0') + "\t";
+                        linea1 += "REC" + "\t";//TIPO DE PAGO
+                        linea1 += item.CodigoLegal.ToString().PadLeft(4, '0') + "\t";
+                        linea1 += "\t";//SOLO SI ES TIPO DE PAGO ES CUENTA
+                        linea1 += "\t";//SOLO SI ES TIPO DE PAGO ES CUENTA
+                        linea1 += (item.IdTipoDocumento == "CED" ? "C" : (item.IdTipoDocumento == "RUC" ? "R" : "P")) + "\t";
+                        linea1 += item.pe_cedulaRuc.Trim() + "\t";
+                        linea1 += (string.IsNullOrEmpty(item.pe_nombreCompleto) ? "" : (item.pe_nombreCompleto.Length > 40 ? item.pe_nombreCompleto.Substring(0, 40) : item.pe_nombreCompleto.Trim())) + "\t";
+                        linea1 += "\t";//Direccion;
+                        linea1 += "\t";//Ciudad
+                        linea1 += "\t";//Telefono
+                        linea1 += "\t";//Localidad
                         var Referencia = string.Empty;
-                        foreach (var refe in info.Lst_det.Where(q => q.pe_cedulaRuc == item.pe_cedulaRuc).ToList())
-                        {
-                            if (!string.IsNullOrEmpty(refe.Referencia))
-                                Referencia += ((string.IsNullOrEmpty(refe.Referencia) ? "" : "/") + refe.Referencia);
-                        }
-                        linea += (string.IsNullOrEmpty(Referencia) ? "" : (Referencia.Length > 200 ? Referencia.Substring(0, 200) : Referencia.Trim())) + "\t";
-                        //linea += (string.IsNullOrEmpty(item.Referencia) ? "" : (item.Referencia.Length > 200 ? item.Referencia.Substring(0, 200) : item.Referencia.Trim())) + "\t";
-                        linea += "|" + (string.IsNullOrEmpty(item.pr_correo) ? "" : (item.pr_correo.Trim().Length > 100 ? item.pr_correo.Trim().Substring(0, 100) : item.pr_correo.Trim())) + "\t";//Ref adicional
-                        */
-                        file.WriteLine(linea);
+                        linea1 += (string.IsNullOrEmpty(Referencia) ? "" : (Referencia.Length > 200 ? Referencia.Substring(0, 200) : Referencia.Trim())) + "\t";
+                        linea1 += (string.IsNullOrEmpty(item.Observacion) ? "" : item.Observacion) + "\t";//REFERENCIA ADICIONAL
+
+                        file.WriteLine(linea1);
+
+                        linea2 += "RC" + "\t";
+                        linea2 += item.Secuencia.ToString().PadLeft(7, ' ') + "\t";
+                        linea2 += "PP" + "\t";//COMPROBANTE DE PAGO
+                        linea2 += Convert.ToDateTime(item.Fecha) + "\t";//DESDE
+                        linea2 += Convert.ToDateTime(item.Fecha) + "\t";//DESDE
+                        linea2 += "C"+"\t";
+                        linea2 += "FI" + "\t";
+                        linea2 += (valorEntero.ToString() + valorDecimal.ToString().PadRight(2, '0')).PadLeft(13, '0') + "\t";
+                        linea2 += "0".PadLeft(13,'0');
+
+                        file.WriteLine(linea2);
                     }
                 }
                 byte[] filebyte = System.IO.File.ReadAllBytes(rutafile + NombreArchivo + ".txt");
@@ -476,23 +501,23 @@ namespace Core.Web.Areas.Banco.Controllers
         {
             List<ba_ArchivoRecaudacionDet_Info> list = get_list(IdTransaccionSession);
             info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
-            if (list.Where(q => q.IdMatricula == info_det.IdMatricula).Count() == 0)
+            if (list.Where(q => q.IdAlumno == info_det.IdAlumno).Count() == 0)
                 list.Add(info_det);
         }
 
-        public void UpdateRow(ba_ArchivoRecaudacionDet_Info info_det, decimal IdTransaccionSession)
-        {
-            ba_ArchivoRecaudacionDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdMatricula == info_det.IdMatricula).First();
-            if (edited_info != null)
-            {
-                edited_info.Valor = info_det.Valor;
-            }
-        }
+        //public void UpdateRow(ba_ArchivoRecaudacionDet_Info info_det, decimal IdTransaccionSession)
+        //{
+        //    ba_ArchivoRecaudacionDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdAlumno == info_det.IdAlumno).First();
+        //    if (edited_info != null)
+        //    {
+        //        edited_info.Valor = info_det.Valor;
+        //    }
+        //}
 
-        public void DeleteRow(decimal IdOrdenPago, decimal IdTransaccionSession)
+        public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {
             List<ba_ArchivoRecaudacionDet_Info> list = get_list(IdTransaccionSession);
-            list.Remove(list.Where(m => m.IdMatricula == IdOrdenPago).First());
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
 }

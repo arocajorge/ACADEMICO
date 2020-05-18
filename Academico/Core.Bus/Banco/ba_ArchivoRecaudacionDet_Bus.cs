@@ -23,5 +23,31 @@ namespace Core.Bus.Banco
                 throw;
             }
         }
+
+        public List<ba_ArchivoRecaudacionDet_Info> GetList_ConSaldo(int IdEmpresa)
+        {
+            try
+            {
+                return odata.getList_ConSaldo(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ba_ArchivoRecaudacionDet_Info> GetList_Archivo(int IdEmpresa, decimal IdArchivo)
+        {
+            try
+            {
+                return odata.getList_Archivo(IdEmpresa, IdArchivo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -101,12 +101,32 @@ namespace Core.Data.Banco
                 throw;
             }
         }
+        private int GetSecuencia(int IdEmpresa)
+        {
+            try
+            {
+                int Secuencia = 1;
+                using (EntitiesBanco Context = new EntitiesBanco())
+                {
+                    var lst = from q in Context.ba_ArchivoRecaudacion
+                              where q.IdEmpresa == IdEmpresa
+                              select q;
+                    if (lst.Count() > 0)
+                        Secuencia = lst.Max(q => q.SecuencialDescarga) + 1;
+                }
+                return Secuencia;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public bool GuardarDB(ba_ArchivoRecaudacion_Info info)
         {
             try
             {
-                //info.Nom_Archivo = "PAGOS_MULTICASH_" + info.Fecha.ToString("yyyyMMdd") + "_01";
                 using (EntitiesBanco Context = new EntitiesBanco())
                 {
                     Context.ba_ArchivoRecaudacion.Add(new ba_ArchivoRecaudacion
@@ -121,7 +141,7 @@ namespace Core.Data.Banco
                         Observacion = info.Observacion,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now,
-                        SecuencialDescarga = info.SecuencialDescarga
+                        SecuencialDescarga = info.SecuencialDescarga = GetSecuencia(info.IdEmpresa)
                     });
 
                     int Secuencia = 1;
@@ -137,7 +157,8 @@ namespace Core.Data.Banco
                                 IdMatricula = item.IdMatricula,
                                 IdAlumno = item.IdAlumno,
                                 FechaProceso = item.FechaProceso,
-                                Valor = item.Valor
+                                Valor = item.Valor,
+                                ValorProntoPago = item.ValorProntoPago
                             });
                         }
                     }
@@ -163,7 +184,9 @@ namespace Core.Data.Banco
                     ba_ArchivoRecaudacion Entity = Context.ba_ArchivoRecaudacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdArchivo == info.IdArchivo).FirstOrDefault();
                     if (Entity == null) return false;
 
-                    Entity.Nom_Archivo = info.Nom_Archivo;
+                    Entity.Fecha = info.Fecha;
+                    Entity.Valor = info.Valor;
+                    Entity.ValorProntoPago = info.ValorProntoPago;
                     Entity.Observacion = info.Observacion;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
@@ -184,11 +207,37 @@ namespace Core.Data.Banco
                                 IdMatricula = item.IdMatricula,
                                 IdAlumno = item.IdAlumno,
                                 FechaProceso = item.FechaProceso,
-                                Valor = item.Valor
+                                Valor = item.Valor,
+                                ValorProntoPago = item.ValorProntoPago
                             });
                         }
                     }
 
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                tb_LogError_Data LogData = new tb_LogError_Data();
+                LogData.GuardarDB(new tb_LogError_Info { Descripcion = ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.Message, Clase = "ba_ArchivoRecaudacion_Data", Metodo = "ModificarDB", IdUsuario = info.IdUsuarioModificacion });
+                return false;
+            }
+        }
+
+        public bool ModificarSecuenciaDescargaDB(ba_ArchivoRecaudacion_Info info)
+        {
+            try
+            {
+                using (EntitiesBanco Context = new EntitiesBanco())
+                {
+                    ba_ArchivoRecaudacion Entity = Context.ba_ArchivoRecaudacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdArchivo == info.IdArchivo).FirstOrDefault();
+                    if (Entity == null) return false;
+
+                    Entity.SecuencialDescarga = info.SecuencialDescarga+1;
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = DateTime.Now;
+                    
                     Context.SaveChanges();
                 }
                 return true;
@@ -207,10 +256,18 @@ namespace Core.Data.Banco
             {
                 using (EntitiesBanco Context = new EntitiesBanco())
                 {
-                    var Lst_det = Context.ba_ArchivoRecaudacionDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdArchivo == info.IdArchivo).ToList();
-                    Context.ba_ArchivoRecaudacionDet.RemoveRange(Lst_det);
+                    //var Lst_det = Context.ba_ArchivoRecaudacionDet.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdArchivo == info.IdArchivo).ToList();
+                    //Context.ba_ArchivoRecaudacionDet.RemoveRange(Lst_det);
 
-                    Context.ba_ArchivoRecaudacion.Remove(Context.ba_ArchivoRecaudacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdArchivo == info.IdArchivo).FirstOrDefault());
+                    //Context.ba_ArchivoRecaudacion.Remove(Context.ba_ArchivoRecaudacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdArchivo == info.IdArchivo).FirstOrDefault());
+                    ba_ArchivoRecaudacion Entity = Context.ba_ArchivoRecaudacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdArchivo == info.IdArchivo).FirstOrDefault();
+                    if (Entity == null) return false;
+
+                    Entity.Estado = false;
+                    Entity.IdUsuarioAnulacion = info.IdUsuarioModificacion;
+                    Entity.FechaAnulacion = DateTime.Now;
+                    Entity.MotivoAnulacion = info.MotivoAnulacion;
+
                     Context.SaveChanges();
                 }
 

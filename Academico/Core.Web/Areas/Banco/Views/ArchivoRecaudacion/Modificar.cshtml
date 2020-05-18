@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Banco.ba_ArchivoRecaudacion_Info
 @{
-    ViewBag.Title = "Nuevo archivo recaudación";
+    ViewBag.Title = "Modificar archivo recaudación";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -112,7 +112,7 @@
         });
     }
 </script>
-@using (Html.BeginForm("Nuevo", "ArchivoRecaudacion", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Modificar", "ArchivoRecaudacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdArchivo, new { @id = "IdArchivo" })

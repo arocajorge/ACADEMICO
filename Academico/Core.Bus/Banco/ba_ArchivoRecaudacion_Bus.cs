@@ -62,6 +62,18 @@ namespace Core.Bus.Banco
             }
         }
 
+        public bool ModificarSecuenciaDescargaDB(ba_ArchivoRecaudacion_Info info)
+        {
+            try
+            {
+                return odata.ModificarSecuenciaDescargaDB(info);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public bool AnularDB(ba_ArchivoRecaudacion_Info info)
         {
             try
