@@ -138,6 +138,8 @@ namespace Core.Data.Banco
                         IdBanco = info.IdBanco,
                         IdProceso_bancario = info.IdProceso_bancario,
                         Nom_Archivo = info.Nom_Archivo,
+                        Valor = info.Valor,
+                        ValorProntoPago = info.ValorProntoPago,
                         Observacion = info.Observacion,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now,

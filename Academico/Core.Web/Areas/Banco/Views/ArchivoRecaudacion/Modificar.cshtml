@@ -111,6 +111,12 @@
             }
         });
     }
+
+    function Imprimir() {
+        var location = GetPathServer();
+        var win = window.open(location +"/Reportes/BancoReportes/BAN_004?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdArchivo="+@Model.IdArchivo, '_blank');
+        win.focus();
+    }
 </script>
 @using (Html.BeginForm("Modificar", "ArchivoRecaudacion", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
@@ -181,6 +187,22 @@
                    }).GetHtml()
                         @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
                     </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdSucursal">&nbsp;</label>
+                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","ArchivoRecaudacion",new { Area = "Banco", IdEmpresa = Model.IdEmpresa },null)">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdCliente">&nbsp;</label>
+                    <button type="button" class="btn btn-primary form-control" onclick="Imprimir();" title="Imprimir">
+                        <i class="fa fa-print"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -263,15 +285,8 @@
         GetListBancoPorSucursal();
         cargar_procesos();
     });
-    $("#IdBanco").change(function () {
-        cargar_procesos();
-    });
-    $("#IdSucursal").change(function () {
-        GetListBancoPorSucursal();
-        cargar_procesos();
-    });
+
     function GetListBancoPorSucursal() {
-        $("#IdBanco").empty();
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSucursal: $("#IdSucursal").val()
@@ -298,7 +313,7 @@
         $("#IdProceso").empty();
         var datos = {
             IdBanco: $("#IdBanco").val(),
-            SeContabiliza: 1
+            SeContabiliza: 0
         }
         $.ajax({
             type: 'POST',

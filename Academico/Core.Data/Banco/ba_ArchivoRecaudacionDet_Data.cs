@@ -90,7 +90,8 @@ namespace Core.Data.Banco
                         Observacion = q.Observacion,
                         ba_Num_Cuenta = q.ba_Num_Cuenta,
                         CodigoLegal=q.CodigoLegal,
-                        IdTipoDocumento=q.IdTipoDocumento
+                        IdTipoDocumento=q.IdTipoDocumento,
+                        Fecha = q.Fecha
                     }).ToList();
                 }
                 return Lista;

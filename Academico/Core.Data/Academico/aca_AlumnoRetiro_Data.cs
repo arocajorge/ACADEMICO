@@ -192,7 +192,8 @@ namespace Core.Data.Academico
 
                     aca_Alumno Entity_Alumno = Context.aca_Alumno.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno);
                     Entity_Alumno.IdCatalogoESTALU = info.IdCatalogoESTALU;
-                    Entity_Alumno.Estado = false;
+
+                    Entity.Estado = false;
                     Entity.MotivoAnulacion = info.MotivoAnulacion;
                     Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                     Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;

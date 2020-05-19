@@ -266,12 +266,8 @@
     $("#IdBanco").change(function () {
         cargar_procesos();
     });
-    $("#IdSucursal").change(function () {
-        GetListBancoPorSucursal();
-        cargar_procesos();
-    });
+
     function GetListBancoPorSucursal() {
-        $("#IdBanco").empty();
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
             IdSucursal: $("#IdSucursal").val()
@@ -298,7 +294,7 @@
         $("#IdProceso").empty();
         var datos = {
             IdBanco: $("#IdBanco").val(),
-            SeContabiliza: 1
+            SeContabiliza: 0
         }
         $.ajax({
             type: 'POST',

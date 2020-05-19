@@ -290,7 +290,14 @@ namespace Core.Info.Helps
         {
             NCR,
             ROL_ELECTRONICO,
-            NCR_TRASN
+            NCR_TRASN,
+            RECBG,
+            RECPB
+        }
+        public enum eTipoProcesoBancarioCobrosAcademico
+        {
+            RECBG = 6,
+            RECPB = 7
         }
     }
 }
