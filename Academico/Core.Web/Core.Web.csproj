@@ -490,6 +490,12 @@
     <Compile Include="Reportes\Banco\BAN_003_Rpt.Designer.cs">
       <DependentUpon>BAN_003_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Banco\BAN_004_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Banco\BAN_004_Rpt.Designer.cs">
+      <DependentUpon>BAN_004_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Caja\CAJ_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8671,6 +8677,7 @@
     <Content Include="Areas\Banco\Views\ArchivoRecaudacion\_GridViewPartial_ArchivoRecaudacion_Saldo.cshtml" />
     <Content Include="Areas\Banco\Views\ArchivoRecaudacion\Modificar.cshtml" />
     <Content Include="Areas\Banco\Views\ArchivoRecaudacion\Anular.cshtml" />
+    <Content Include="Areas\Reportes\Views\BancoReportes\BAN_004.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8831,6 +8838,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_003_Rpt.resx">
       <DependentUpon>BAN_003_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Banco\BAN_004_Rpt.resx">
+      <DependentUpon>BAN_004_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Caja\CAJ_001_Rpt.resx">
       <DependentUpon>CAJ_001_Rpt.cs</DependentUpon>

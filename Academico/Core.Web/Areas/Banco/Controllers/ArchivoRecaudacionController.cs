@@ -119,14 +119,6 @@ namespace Core.Web.Areas.Banco.Controllers
                 mensaje = "Debe ingresar registros en el detalle";
                 return false;
             }
-            else
-            {
-                foreach (var item in i_validar.Lst_det)
-                {
-                    item.Valor = Convert.ToDouble(item.Saldo);
-                    item.ValorProntoPago = Convert.ToDouble(item.SaldoProntoPago);
-                }
-            }
 
             var pro = bus_procesos_bancarios.get_info(i_validar.IdEmpresa, i_validar.IdProceso_bancario);
             //i_validar.Cod_Empresa = pro.Codigo_Empresa;
@@ -291,29 +283,33 @@ namespace Core.Web.Areas.Banco.Controllers
             if (IDs != "")
             {
                 string[] array = IDs.Split(',');
-                var Lista = Lista_det_Saldo.get_list(IdTransaccionSession);
+                var Lista = Lista_det.get_list(IdTransaccionSession);
+
+                var ListaSaldo = Lista_det_Saldo.get_list(IdTransaccionSession);
                 foreach (var item in array)
                 {
-                    var info_det = Lista.Where(q => q.IdEmpresa==IdEmpresa && q.IdAlumno == Convert.ToInt32(item)).FirstOrDefault();
+                    var info_det = ListaSaldo.Where(q => q.IdEmpresa==IdEmpresa && q.IdAlumno == Convert.ToInt32(item)).FirstOrDefault();
                     if (info_det != null)
                     {
+                        info_det.Valor = Convert.ToDouble(info_det.Saldo);
+                        info_det.ValorProntoPago = Convert.ToDouble(info_det.SaldoProntoPago);
                         Lista_det.AddRow(info_det, IdTransaccionSession);
                     }
                 }
             }
-            
+            var model = Lista_det.get_list(IdTransaccionSession);
             return Json("", JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpPost, ValidateInput(false)]
-        //public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ba_ArchivoRecaudacionDet_Info info_det)
-        //{
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] ba_ArchivoRecaudacionDet_Info info_det)
+        {
 
-        //    if (ModelState.IsValid)
-        //        Lista_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-        //    var model = Lista_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-        //    return PartialView("_GridViewPartial_ArchivoRecaudacionDet", model);
-        //}
+            if (ModelState.IsValid)
+                Lista_det.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = Lista_det.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ArchivoRecaudacionDet", model);
+        }
         public ActionResult EditingDelete(int Secuencia)
         {
             Lista_det.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
@@ -333,8 +329,8 @@ namespace Core.Web.Areas.Banco.Controllers
         {
             var Lista = Lista_det.get_list(IdTransaccionSession);
 
-            decimal Valor = Math.Round(Lista.Sum(q => q.Saldo), 2, MidpointRounding.AwayFromZero);
-            decimal ValorProntoPago = Math.Round(Lista.Sum(q => q.SaldoProntoPago), 2, MidpointRounding.AwayFromZero);
+            double Valor = Math.Round(Lista.Sum(q => q.Valor), 2, MidpointRounding.AwayFromZero);
+            double ValorProntoPago = Math.Round(Lista.Sum(q => q.ValorProntoPago), 2, MidpointRounding.AwayFromZero);
             return Json(new { Valor = Valor, ValorProntoPago= ValorProntoPago }, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -505,14 +501,15 @@ namespace Core.Web.Areas.Banco.Controllers
                 list.Add(info_det);
         }
 
-        //public void UpdateRow(ba_ArchivoRecaudacionDet_Info info_det, decimal IdTransaccionSession)
-        //{
-        //    ba_ArchivoRecaudacionDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdAlumno == info_det.IdAlumno).First();
-        //    if (edited_info != null)
-        //    {
-        //        edited_info.Valor = info_det.Valor;
-        //    }
-        //}
+        public void UpdateRow(ba_ArchivoRecaudacionDet_Info info_det, decimal IdTransaccionSession)
+        {
+            ba_ArchivoRecaudacionDet_Info edited_info = get_list(IdTransaccionSession).Where(m => m.Secuencia == info_det.Secuencia).First();
+            if (edited_info != null)
+            {
+                edited_info.Valor = info_det.Valor;
+                edited_info.ValorProntoPago = info_det.ValorProntoPago;
+            }
+        }
 
         public void DeleteRow(int Secuencia, decimal IdTransaccionSession)
         {

@@ -141,7 +141,7 @@ namespace Core.Data.Banco
                         Observacion = info.Observacion,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now,
-                        SecuencialDescarga = info.SecuencialDescarga = GetSecuencia(info.IdEmpresa)
+                        SecuencialDescarga = 1
                     });
 
                     int Secuencia = 1;

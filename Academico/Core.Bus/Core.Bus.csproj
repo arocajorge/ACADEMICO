@@ -268,6 +268,7 @@
     <Compile Include="Reportes\Banco\BAN_002_Bus.cs" />
     <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Bus.cs" />
     <Compile Include="Reportes\Banco\BAN_003_Bus.cs" />
+    <Compile Include="Reportes\Banco\BAN_004_Bus.cs" />
     <Compile Include="Reportes\Caja\CAJ_001_Bus.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_Bus.cs" />
     <Compile Include="Reportes\Caja\CAJ_002_ingresos_Bus.cs" />

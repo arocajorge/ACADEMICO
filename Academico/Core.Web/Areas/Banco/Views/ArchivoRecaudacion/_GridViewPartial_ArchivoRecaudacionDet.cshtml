@@ -7,7 +7,7 @@
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        //settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ArchivoRecaudacion", Action = "EditingUpdate", Area = "Banco" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "ArchivoRecaudacion", Action = "EditingUpdate", Area = "Banco" };
         settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "ArchivoRecaudacion", Action = "EditingDelete", Area = "Banco" };
 
         //Configuración para que la grilla no muestre texto completo
@@ -16,7 +16,7 @@
 
         settings.CommandColumn.Visible = true;
         settings.CommandColumn.ShowNewButton = false;
-        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.ShowEditButton = true;
         settings.CommandColumn.ShowDeleteButton = true;
         settings.CommandColumn.ShowNewButtonInHeader = false;
 
@@ -49,15 +49,15 @@
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
-            column.FieldName = "Saldo";
-            column.Caption = "Saldo";
+            column.FieldName = "Valor";
+            column.Caption = "Valor";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
-            column.FieldName = "SaldoProntoPago";
-            column.Caption = "Saldo Pronto Pago";
+            column.FieldName = "ValorProntoPago";
+            column.Caption = "Valor Pronto Pago";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
         settings.Columns.Add(column =>
