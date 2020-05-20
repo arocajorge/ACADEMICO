@@ -174,6 +174,11 @@ namespace Core.Web.Areas.Banco.Controllers
                 model.Nom_Archivo = "COBROS_MULTICASH_PB";
             }
 
+            if (model.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECBB))
+            {
+                model.Nom_Archivo = "ALUMNOS094";
+            }
+
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             model.Lst_det = Lista_det.get_list(model.IdTransaccionSession);
 
@@ -371,7 +376,7 @@ namespace Core.Web.Areas.Banco.Controllers
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
                 {
                     var Lista = info.Lst_det;
-                    
+
                     if (info.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECPB))
                     {
                         foreach (var item in Lista)
@@ -388,7 +393,7 @@ namespace Core.Web.Areas.Banco.Controllers
 
                             linea1 += "CO" + "\t";
                             linea1 += string.IsNullOrEmpty(item.ba_Num_Cuenta) ? "" : item.ba_Num_Cuenta.PadLeft(11, '0') + "\t";
-                            linea1 += item.Secuencia.ToString()+ "\t";
+                            linea1 += item.Secuencia.ToString() + "\t";
                             linea1 += "\t";//COMPROBANTE DE COBRO
                             linea1 += item.CodigoAlumno + "\t";//CONTRAPARTIDA
                             linea1 += "USD" + "\t";
@@ -413,7 +418,7 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += "RC" + "\t";
                             linea2 += item.Secuencia.ToString() + "\t";
                             linea2 += "PP" + "\t";//COMPROBANTE DE PAGO
-                            linea2 += item.Fecha.Day.ToString().PadLeft(2, '0') + item.Fecha.Month.ToString().PadLeft(2,'0') + item.Fecha.Year.ToString() + "\t";//DESDE
+                            linea2 += item.Fecha.Day.ToString().PadLeft(2, '0') + item.Fecha.Month.ToString().PadLeft(2, '0') + item.Fecha.Year.ToString() + "\t";//DESDE
                             linea2 += item.Fecha.Day.ToString().PadLeft(2, '0') + item.Fecha.Month.ToString().PadLeft(2, '0') + item.Fecha.Year.ToString() + "\t";//HASTA
                             linea2 += "C" + "\t";
                             linea2 += "FI" + "\t";
@@ -438,18 +443,14 @@ namespace Core.Web.Areas.Banco.Controllers
                             valorEntero = Math.Floor(Valor);
                             valorDecimal = Convert.ToDouble((Valor - valorEntero).ToString("N2")) * 100;
 
-                            Valor = Convert.ToDouble(item.Valor);
-                            valorEntero = Math.Floor(Valor);
-                            valorDecimal = Convert.ToDouble((Valor - valorEntero).ToString("N2")) * 100;
-
                             linea1 += "CO";
                             linea1 += item.Secuencia.ToString().PadLeft(7, '0');
                             linea1 += item.CodigoAlumno.PadRight(15, ' ');
                             linea1 += "USD";
                             linea1 += (valorEntero.ToString() + valorDecimal.ToString().PadRight(2, '0')).PadLeft(10, '0');
                             linea1 += "REC";
-                            linea1 += (string.IsNullOrEmpty(item.pe_nombreCompleto) ? "" : (item.pe_nombreCompleto.Length > 40 ? item.pe_nombreCompleto.Substring(0, 40) : item.pe_nombreCompleto.Trim())).PadRight(40,' ');
-                            linea1 += item.Fecha.Year.ToString()+item.Fecha.Month.ToString().PadLeft(2,'0');
+                            linea1 += (string.IsNullOrEmpty(item.pe_nombreCompleto) ? "" : (item.pe_nombreCompleto.Length > 40 ? item.pe_nombreCompleto.Substring(0, 40) : item.pe_nombreCompleto.Trim())).PadRight(40, ' ');
+                            linea1 += item.Fecha.Year.ToString() + item.Fecha.Month.ToString().PadLeft(2, '0');
                             linea1 += "SN";//Curso;
                             linea1 += "SN";//Paralelo
                             linea1 += "SN";//Especialidad
@@ -464,12 +465,61 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += "RC";
                             linea2 += item.Secuencia.ToString().PadLeft(7, '0');
                             linea2 += "PP";
-                            linea2 += item.Fecha.Year.ToString()+item.Fecha.Month.ToString().PadLeft(2, '0') + item.Fecha.Day.ToString().PadLeft(2, '0');//DESDE
-                            linea2 += item.Fecha.Year.ToString() + item.Fecha.Month.ToString().PadLeft(2,'0') + item.Fecha.Day.ToString().PadLeft(2, '0');// HASTA
+                            linea2 += item.Fecha.Year.ToString() + item.Fecha.Month.ToString().PadLeft(2, '0') + item.Fecha.Day.ToString().PadLeft(2, '0');//DESDE
+                            linea2 += item.Fecha.Year.ToString() + item.Fecha.Month.ToString().PadLeft(2, '0') + item.Fecha.Day.ToString().PadLeft(2, '0');// HASTA
                             linea2 += "FI";
                             linea2 += "0000000000";
                             linea2 += "0000000000";
                             linea2 += (valorEnteroDiferencia.ToString() + valorDecimalDiferencia.ToString().PadRight(2, '0')).PadLeft(10, '0');
+
+                            file.WriteLine(linea2);
+                        }
+                    }
+
+                    if (info.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECBB))
+                    {
+                        string linea1 = "";
+
+                        linea1 += "999";
+                        linea1 += "094";
+                        linea1 += "0".PadRight(12, ' ');
+                        linea1 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + info.Fecha.Day.ToString().PadLeft(2,'0') + "/" + info.Fecha.Year.ToString();
+                        linea1 += "\t";
+                        file.WriteLine(linea1);
+
+                        foreach (var item in Lista)
+                        {
+                            string linea2 = "";
+                            double Valor = 0;
+                            double valorEntero = 0;
+                            double valorDecimal = 0;
+
+                            Valor = Convert.ToDouble(item.Valor);
+                            valorEntero = Math.Floor(Valor);
+                            valorDecimal = Convert.ToDouble((Valor - valorEntero).ToString("N2")) * 100;
+
+                            var ValorDiferencia = Convert.ToDouble(item.Valor) - Convert.ToDouble(item.ValorProntoPago);
+                            var valorEnteroDiferencia = Math.Floor(ValorDiferencia);
+                            var valorDecimalDiferencia = Convert.ToDouble((ValorDiferencia - valorEnteroDiferencia).ToString("N2")) * 100;
+
+                            linea2 += "094";
+                            linea2 += item.CodigoAlumno.ToString().PadLeft(15, ' ');
+                            linea2 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + "01" + "/" + info.Fecha.Year.ToString();
+                            linea2 += "0".PadRight(3, ' ');
+                            linea2 += (valorEntero.ToString().PadLeft(8,'0') + "." + valorDecimal.ToString().PadRight(2, '0'));
+                            linea2 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + info.Fecha.Day.ToString().PadLeft(2, '0') + "/" + info.Fecha.Year.ToString();//FECHA TOPE DE PAGO
+                            linea2 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + info.Fecha.Day.ToString().PadLeft(2, '0') + "/" + info.Fecha.Year.ToString();//FECHA PRONTO PAGO
+                            linea2 += "P";
+                            linea2 += (string.IsNullOrEmpty(item.pe_nombreCompleto) ? "" : (item.pe_nombreCompleto.Length > 30 ? item.pe_nombreCompleto.Substring(0, 30) : item.pe_nombreCompleto.Trim())).PadRight(30, ' ');
+                            linea2 += " ".PadRight(15, ' ');
+                            linea2 += " ".PadRight(3, ' ');
+                            linea2 += " ".PadRight(15, ' ');
+                            linea2 += (valorEntero.ToString().PadLeft(8, '0') + "." + valorDecimal.ToString().PadRight(2, '0'));
+                            linea2 += " ".PadRight(10, ' ');
+                            linea2 += "1";
+                            linea2 += (valorEntero.ToString().PadLeft(8, '0') + "." + valorDecimal.ToString().PadRight(2, '0'));
+                            linea2 += (valorEntero.ToString().PadLeft(8, '0') + "." + valorDecimal.ToString().PadRight(2, '0'));
+                            linea2 += "\t";
 
                             file.WriteLine(linea2);
                         }

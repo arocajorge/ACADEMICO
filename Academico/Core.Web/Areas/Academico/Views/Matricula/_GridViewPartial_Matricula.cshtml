@@ -56,7 +56,7 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "BloquearMatricula")) == false)
                 {
                     ViewContext.Writer.Write(
-                            Html.ActionLink("Consultar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") }) + "&nbsp;"
+                            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") }) + "&nbsp;"
                         );
 
                     if (ViewBag.Anular == true)

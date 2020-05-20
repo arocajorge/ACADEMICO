@@ -980,110 +980,19 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(new { msg = mensaje, IdEmpresa = Empresa, IdMatricula = Matricula }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult actualizar(DateTime Fecha, int IdEmpresa = 0, int IdAnio = 0, decimal IdAlumno = 0, string IdComboCurso = "", int IdParalelo = 0, int IdPlantilla = 0,
-            string Observacion = "", decimal IdTransaccionSession = 0, int IdMatricula=0, string IDs_Doc = "")
+        public JsonResult actualizar(int IdEmpresa = 0, int IdMatricula = 0, string Observacion = "", decimal IdTransaccionSession = 0)
         {
-            decimal Matricula = 0;
-            int Empresa = 0;
-            var lst_DetallePlantilla = ListaMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            var lst_DetalleDocumentos = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
 
-            if (IdAnio != 0 && IdAlumno != 0 && IdComboCurso != "" && IdParalelo != 0 && IdPlantilla != 0 && lst_DetallePlantilla.Count > 0)
+            info_matricula.Observacion = Observacion;
+            info_matricula.IdUsuarioModificacion = SessionFixed.IdUsuario;
+
+            if (!bus_matricula.ModificarDB(info_matricula))
             {
-                //IdEmpresa = Convert.ToInt32(model.IdComboCurso.Substring(0, 4));
-                //IdAnio = Convert.ToInt32(model.IdComboCurso.Substring(4, 4));
-                int IdSede = Convert.ToInt32(IdComboCurso.Substring(8, 4));
-                int IdNivel = Convert.ToInt32(IdComboCurso.Substring(12, 4));
-                int IdJornada = Convert.ToInt32(IdComboCurso.Substring(16, 4));
-                int IdCurso = Convert.ToInt32(IdComboCurso.Substring(20, 4));
-
-                var info_rep_eco = bus_familia.GetInfo_Representante(IdEmpresa, IdAlumno, cl_enumeradores.eTipoRepresentante.ECON.ToString());
-                var info_rep_legal = bus_familia.GetInfo_Representante(IdEmpresa, IdAlumno, cl_enumeradores.eTipoRepresentante.LEGAL.ToString());
-
-
-                aca_Matricula_Info info_matricula = new aca_Matricula_Info
-                {
-                    IdEmpresa = IdEmpresa,
-                    IdMatricula = IdMatricula,
-                    IdAlumno = IdAlumno,
-                    IdAnio = IdAnio,
-                    IdSede = IdSede,
-                    IdNivel = IdNivel,
-                    IdJornada = IdJornada,
-                    IdCurso = IdCurso,
-                    IdParalelo = IdParalelo,
-                    IdPersonaF = (info_rep_eco == null ? 0 : info_rep_eco.IdPersona),
-                    IdPersonaR = (info_rep_legal == null ? 0 : info_rep_legal.IdPersona),
-                    IdPlantilla = IdPlantilla,
-                    Fecha = Fecha.Date,
-                    Observacion = Observacion,
-                    IdUsuarioModificacion = SessionFixed.IdUsuario,
-                    lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>()
-                };
-
-                if (lst_DetallePlantilla.Count > 0)
-                {
-                    foreach (var item_det in lst_DetallePlantilla)
-                    {
-                        aca_Matricula_Rubro_Info info_mat_rubro = new aca_Matricula_Rubro_Info
-                        {
-                            IdEmpresa = IdEmpresa,
-                            IdMatricula = IdMatricula,
-                            IdPeriodo = item_det.IdPeriodo,
-                            IdMecanismo = item_det.IdMecanismo,
-                            IdRubro = item_det.IdRubro,
-                            IdProducto = item_det.IdProducto,
-                            Subtotal = item_det.Subtotal,
-                            IdCod_Impuesto_Iva = item_det.IdCod_Impuesto_Iva,
-                            Porcentaje = item_det.Porcentaje,
-                            ValorIVA = item_det.ValorIVA,
-                            FechaFacturacion = item_det.FechaFacturacion,
-                            EnMatricula = item_det.EnMatricula,
-                            Total = item_det.Total
-                        };
-
-                        info_matricula.lst_MatriculaRubro.Add(info_mat_rubro);
-                    }
-                }
-
-                string[] array_doc = IDs_Doc.Split(',');
-                var lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>();
-                if (IDs_Doc != "")
-                {
-                    foreach (var item in array_doc)
-                    {
-                        var info_doc = new aca_AlumnoDocumento_Info
-                        {
-                            IdEmpresa = info_matricula.IdEmpresa,
-                            IdAlumno = info_matricula.IdAlumno,
-                            IdDocumento = Convert.ToInt32(item),
-                            EnArchivo = true
-                        };
-                        lst_alumno_documentos.Add(info_doc);
-                    }
-                }
-                info_matricula.lst_documentos = lst_alumno_documentos;
-
-                if (info_matricula.IdPersonaR != 0 && info_matricula.IdPersonaF != 0)
-                {
-                    if (!bus_matricula.ModificarDB(info_matricula))
-                    {
-                        mensaje = "No se ha podido guardar el registro";
-                    }
-                    Empresa = info_matricula.IdEmpresa;
-                    Matricula = info_matricula.IdMatricula;
-                }
-                else
-                {
-                    mensaje = "Verique que el alumno tenga asignados representantes";
-                }
+                mensaje = "El registro no ha podido ser modificado";
             }
-            else
-            {
-                mensaje = "Ingrese la información solicitada";
-            }
-
-            return Json(new { msg = mensaje, IdEmpresa = Empresa, IdMatricula = Matricula }, JsonRequestBehavior.AllowGet);
+                
+            return Json(new { msg = mensaje, IdEmpresa = info_matricula.IdEmpresa, IdMatricula = info_matricula.IdMatricula }, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult EditarMecanismo(string IdString = "")

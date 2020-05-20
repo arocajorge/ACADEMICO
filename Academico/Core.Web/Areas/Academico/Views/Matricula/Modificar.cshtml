@@ -156,14 +156,14 @@
                     @Html.ValidationMessageFor(q => q.IdComboCurso, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-1">
+            @*<div class="col-md-1">
                 <div class="form-group">
                     <label for="Validar"></label>
                     <button type="button" class="btn btn-primary form-control" title="Mostrar todos los cursos" onclick="ValidarCurso();">
                         <i class="fa fa-navicon"></i>
                     </button>
                 </div>
-            </div>
+            </div>*@
             <div class="col-md-1">
                 <label for="IdCliente"></label>
                 <button type="button" class="btn btn-primary form-control" onclick="Imprimir();" title="Imprimir hoja de matrícula">
@@ -267,7 +267,7 @@
     </div>
 
     <div class="box-footer">
-        @*<button type="button" class="btn btn-primary" id="btn_guardar" onclick="actualizar();">Guardar</button>*@
+        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="actualizar();">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Matricula", new { Area = "Academico" })">Cancelar</a>
     </div>
     @section Scripts {
@@ -383,17 +383,11 @@
 
     function actualizar() {
         var datos = {
-            Fecha: Fecha.GetDate(),
             IdEmpresa: $("#IdEmpresa").val(),
-            IdAnio: IdAnio.GetValue(),
-            IdAlumno: IdAlumno.GetValue(),
-            IdComboCurso: IdComboCurso.GetValue(),
-            IdParalelo: IdParalelo.GetValue(),
-            IdPlantilla: IdPlantilla.GetValue(),
-            Observacion: $("#Observacion").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val(),
             IdMatricula: $("#IdMatricula").val(),
-            IDs_Doc: documentoIDs
+            Observacion: $("#Observacion").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+            
         }
         $("#btn_guardar").attr("disabled", true);
         $.ajax({
@@ -407,7 +401,6 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data.msg == "") {
-                    //$("#myform").submit();
                     var url = '@Url.Action("Modificar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
                     window.location.href = url;
                 }

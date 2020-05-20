@@ -45,5 +45,6 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public Nullable<double> VENCIDO_61_90 { get; set; }
         public Nullable<double> VENCIDO_91_180 { get; set; }
         public Nullable<double> VENCIDO_181 { get; set; }
+        public int Contador { get; set; }
     }
 }
