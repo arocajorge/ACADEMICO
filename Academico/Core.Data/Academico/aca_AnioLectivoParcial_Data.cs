@@ -195,6 +195,44 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_AnioLectivoParcial_Info> getList_Reportes(int IdEmpresa, int IdSede, int IdAnio, int IdCatalogoTipo)
+        {
+            try
+            {
+                List<aca_AnioLectivoParcial_Info> Lista = new List<aca_AnioLectivoParcial_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_AnioLectivoParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio
+                    && q.IdCatalogoTipo == IdCatalogoTipo).OrderBy(q => q.Orden).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AnioLectivoParcial_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdSede = q.IdSede,
+                            IdAnio = q.IdAnio,
+                            IdCatalogoParcial = q.IdCatalogoParcial,
+                            NomCatalogo = q.NomCatalogo,
+                            FechaInicio = q.FechaInicio,
+                            FechaFin = q.FechaFin,
+                            EsExamen = q.EsExamen,
+                            ValidaEstadoAlumno = q.ValidaEstadoAlumno,
+                            Orden = q.Orden
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool guardarDB(List<aca_AnioLectivoParcial_Info> lista)
         {
             try

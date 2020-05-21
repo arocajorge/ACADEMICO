@@ -17,10 +17,18 @@ namespace Core.Data.Reportes.Academico
                 List<ACA_011_Info> Lista = new List<ACA_011_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    //Context.SetCommandTimeOut(5000);
+                    int IdJornadaFin = IdJornada == 0 ? 99999 : IdJornada;
+                    int IdNivelFin = IdNivel == 0 ? 99999 : IdNivel;
+                    int IdCursoFin = IdCurso == 0 ? 99999 : IdCurso;
+                    int IdParaleloFin = IdParalelo == 0 ? 99999 : IdParalelo;
+                    
+
                     Context.Database.CommandTimeout = 5000;
-                    var lst = Context.VWACA_011.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede &&
-                    q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo ).ToList();
+                    var lst = Context.VWACA_011.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
+                    && IdNivel <= q.IdNivel && q.IdNivel <= IdNivelFin
+                    && IdJornada <= q.IdJornada && q.IdJornada <= IdJornadaFin
+                    && IdCurso <= q.IdCurso && q.IdCurso <= IdCursoFin
+                    && IdParalelo <= q.IdParalelo && q.IdParalelo <= IdParaleloFin).ToList();
 
                     lst.ForEach(q =>
                     {

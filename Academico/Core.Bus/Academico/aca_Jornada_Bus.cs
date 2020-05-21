@@ -37,6 +37,17 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_Jornada_Info> GetList_Combos(int IdEmpresa, int IdAnio, int IdSede)
+        {
+            try
+            {
+                return odata.getList_Combos(IdEmpresa, IdAnio, IdSede);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public aca_Jornada_Info GetInfo(int IdEmpresa, int IdJornada)
         {
             try

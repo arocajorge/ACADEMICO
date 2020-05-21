@@ -36,6 +36,7 @@ namespace Core.Web.Reportes.Academico
                 int IdNivel = string.IsNullOrEmpty(p_IdNivel.Value.ToString()) ? 0 : Convert.ToInt32(p_IdNivel.Value);
                 int IdJornada = string.IsNullOrEmpty(p_IdJornada.Value.ToString()) ? 0 : Convert.ToInt32(p_IdJornada.Value);
                 int IdCurso = string.IsNullOrEmpty(p_IdCurso.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCurso.Value);
+                int IdParalelo = string.IsNullOrEmpty(p_IdParalelo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdParalelo.Value);
 
                 List<ACA_004_Info> Lista = bus_rpt.Getlist(IdEmpresa,IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
                 this.DataSource = Lista;

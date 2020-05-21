@@ -70,6 +70,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_AnioLectivoParcial_Info> GetList_Reportes(int IdEmpresa, int IdSede, int IdAnio, int IdCatalogoTipo)
+        {
+            try
+            {
+                return odata.getList_Reportes(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool GuardarDB(List<aca_AnioLectivoParcial_Info> lista)
         {
             try

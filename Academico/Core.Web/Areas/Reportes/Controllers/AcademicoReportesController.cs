@@ -53,40 +53,43 @@ namespace Core.Web.Areas.Reportes.Controllers
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             return PartialView("_CmbSede", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio });
         }
+        public ActionResult CmbJornada()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
+            //int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            return PartialView("_CmbJornada", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdSede = IdSede });
+        }
         public ActionResult CmbNivel()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
-            return PartialView("_CmbNivel", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio, IdSede = IdSede });
+            int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            return PartialView("_CmbNivel", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada= IdJornada });
         }
         public ActionResult CmbCurso()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
-            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
             int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
-            return PartialView("_CmbCurso", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada });
-        }
-        public ActionResult CmbJornada()
-        {
-            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
-            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
             int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
-            return PartialView("_CmbJornada", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel });
+            
+            return PartialView("_CmbCurso", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada, IdNivel = IdNivel });
         }
         public ActionResult ComboBoxPartial_Paralelo()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
-            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
             int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
             int IdCurso = (Request.Params["IdCurso"] != null) ? int.Parse(Request.Params["IdCurso"]) : -1;
 
-            return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
+            return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada, IdNivel = IdNivel, IdCurso = IdCurso });
         }
         #endregion
 
-        public ActionResult ACA_001(int IdEmpresa = 0, decimal IdAlumno = 0, int IdAnio=0)
+        #region ACA_001
+        public ActionResult ACA_001(int IdEmpresa = 0, decimal IdAlumno = 0, int IdAnio = 0)
         {
             cl_filtros_Info model = new cl_filtros_Info();
             var info_anio = new aca_AnioLectivo_Info();
@@ -98,7 +101,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             }
 
             model.IdAnio = (IdAnio == 0 ? info_anio.IdAnio : IdAnio);
-            model. IdAlumno = IdAlumno;
+            model.IdAlumno = IdAlumno;
 
             ACA_001_Rpt Report = new ACA_001_Rpt();
 
@@ -251,6 +254,9 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        #endregion
+
+        #region ACA_002
         public ActionResult ACA_002(int IdEmpresa = 0, decimal IdAlumno = 0, int IdAnio = 0)
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -308,6 +314,9 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        #endregion
+
+        #region ACA_003
         public ActionResult ACA_003(int IdEmpresa = 0, decimal IdAlumno = 0)
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -362,22 +371,22 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
-        public ActionResult ACA_004(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0)
+        #endregion
+
+        #region ACA_004
+        public ActionResult ACA_004()
         {
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
-            var info_anio = new aca_AnioLectivo_Info();
-            if (IdAnio == 0)
-            {
-                info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
-            }
 
-            model.IdAnio = (IdAnio == 0 ? info_anio.IdAnio : IdAnio);
-            model.IdNivel = IdNivel;
-            model.IdJornada = IdJornada;
-            model.IdCurso = IdCurso;
-            
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdNivel = 0;
+            model.IdJornada = 0;
+            model.IdCurso = 0;
+            model.IdParalelo = 0;
 
             ACA_004_Rpt report = new ACA_004_Rpt();
 
@@ -396,6 +405,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdNivel.Value = model.IdNivel;
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -404,7 +414,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult ACA_004(cl_filtros_Info model )
+        public ActionResult ACA_004(cl_filtros_Info model)
         {
             ACA_004_Rpt report = new ACA_004_Rpt();
 
@@ -423,6 +433,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdNivel.Value = model.IdNivel;
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -431,6 +442,9 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+        #endregion
+
+        #region ACA_005
         public ActionResult ACA_005(int IdEmpresa = 0, decimal IdAlumno = 0)
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -484,7 +498,9 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
             return View(model);
         }
+        #endregion
 
+        #region ACA_006
         public ActionResult ACA_006()
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -556,10 +572,13 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
 
+
+        #endregion
+
         #region ACA_007
         public ActionResult ACA_007()
         {
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa),0);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
@@ -627,17 +646,18 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
         #endregion
 
-        public ActionResult ACA_008(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0)
+        #region ACA_008
+        public ActionResult ACA_008()
         {
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
-            model.IdNivel = IdNivel;
-            model.IdJornada = IdJornada;
-            model.IdCurso = IdCurso;
-            model.IdParalelo = IdParalelo;
+            model.IdNivel = 0;
+            model.IdJornada = 0;
+            model.IdCurso = 0;
+            model.IdParalelo = 0;
             model.mostrar_observacion_completa = true;
             model.mostrarAnulados = true;
 
@@ -742,7 +762,9 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
+        #endregion
 
+        #region ACA_009
         public ActionResult ACA_009(int IdEmpresa = 0, decimal IdAlumno = 0)
         {
             cl_filtros_Info model = new cl_filtros_Info();
@@ -802,6 +824,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             return View(model);
         }
+        #endregion
 
         #region Combos
         public ActionResult ComboBoxPartial_Anio_Cal()
@@ -813,50 +836,52 @@ namespace Core.Web.Areas.Reportes.Controllers
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             return PartialView("_ComboBoxPartial_Sede_Cal", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio });
         }
-        public ActionResult ComboBoxPartial_Nivel_Cal()
-        {
-            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
-            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
-            return PartialView("_ComboBoxPartial_Nivel_Cal", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio, IdSede = IdSede });
-        }
         public ActionResult ComboBoxPartial_Jornada_Cal()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
-            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
-            return PartialView("_ComboBoxPartial_Jornada_Cal", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel });
-        }
 
+            return PartialView("_ComboBoxPartial_Jornada_Cal", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdSede = IdSede });
+        }
+        public ActionResult ComboBoxPartial_Nivel_Cal()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            return PartialView("_ComboBoxPartial_Nivel_Cal", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada= IdJornada });
+        }
         public ActionResult ComboBoxPartial_Curso_Cal()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
-            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
             int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
-            return PartialView("_ComboBoxPartial_Curso_Cal", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada });
+            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            
+            return PartialView("_ComboBoxPartial_Curso_Cal", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada, IdNivel = IdNivel });
         }
-
         public ActionResult ComboBoxPartial_Paralelo_Cal()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
-            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
             int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
             int IdCurso = (Request.Params["IdCurso"] != null) ? int.Parse(Request.Params["IdCurso"]) : -1;
-            return PartialView("_ComboBoxPartial_Paralelo_Cal", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
-        }
 
+            return PartialView("_ComboBoxPartial_Paralelo_Cal", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada, IdNivel = IdNivel, IdCurso = IdCurso });
+        }
         public ActionResult ComboBoxPartial_Materia_Cal()
         {
             int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
             int IdSede = (Request.Params["IdSede"] != null) ? int.Parse(Request.Params["IdSede"]) : -1;
-            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
             int IdJornada = (Request.Params["IdJornada"] != null) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
             int IdCurso = (Request.Params["IdCurso"] != null) ? int.Parse(Request.Params["IdCurso"]) : -1;
             var IdParalelo = (Request.Params["IdParalelo"] != null) ? int.Parse(Request.Params["IdParalelo"]) : -1;
-            return PartialView("_ComboBoxPartial_Materia_Cal", new aca_AnioLectivo_Paralelo_Profesor_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso, IdParalelo = IdParalelo });
+
+            return PartialView("_ComboBoxPartial_Materia_Cal", new aca_AnioLectivo_Paralelo_Profesor_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada, IdNivel = IdNivel, IdCurso = IdCurso, IdParalelo = IdParalelo });
         }
         #endregion
+
         #region Combos Funciones Agrupados
         public List<aca_AnioLectivo_Info> CargarAnio(int IdEmpresa = 0)
         {
@@ -923,7 +948,44 @@ namespace Core.Web.Areas.Reportes.Controllers
             return ListaSede;
         }
 
-        public List<aca_NivelAcademico_Info> CargarNivel(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0)
+        public List<aca_Jornada_Info> CargarJornada(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0)
+        {
+            List<aca_MatriculaCalificacion_Info> lst_combos = Lista_CombosCalificaciones.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
+            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede).ToList();
+
+            var lst_jornada = (from q in lst_combos
+                               group q by new
+                               {
+                                   q.IdEmpresa,
+                                   q.IdAnio,
+                                   q.IdSede,
+                                   q.IdJornada,
+                                   q.NomJornada,
+                                   q.OrdenJornada
+                               } into a
+                               select new aca_Jornada_Info
+                               {
+                                   IdEmpresa = a.Key.IdEmpresa,
+                                   IdJornada = a.Key.IdJornada,
+                                   NomJornada = a.Key.NomJornada,
+                                   OrdenJornada = a.Key.OrdenJornada
+                               }).OrderBy(q => q.OrdenJornada).ToList();
+
+            var ListaJornada = new List<aca_Jornada_Info>();
+
+            foreach (var item in lst_jornada)
+            {
+                ListaJornada.Add(new aca_Jornada_Info
+                {
+                    IdJornada = item.IdJornada,
+                    NomJornada = item.NomJornada
+                });
+            }
+
+            return ListaJornada;
+        }
+
+        public List<aca_NivelAcademico_Info> CargarNivel(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada=0)
         {
             List<aca_MatriculaCalificacion_Info> lst_combos = Lista_CombosCalificaciones.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
             q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede).ToList();
@@ -960,45 +1022,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             return ListaNivel;
         }
 
-        public List<aca_Jornada_Info> CargarJornada(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0)
-        {
-            List<aca_MatriculaCalificacion_Info> lst_combos = Lista_CombosCalificaciones.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
-            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel).ToList();
-
-            var lst_jornada = (from q in lst_combos
-                               group q by new
-                               {
-                                   q.IdEmpresa,
-                                   q.IdAnio,
-                                   q.IdSede,
-                                   q.IdNivel,
-                                   q.IdJornada,
-                                   q.NomJornada,
-                                   q.OrdenJornada
-                               } into a
-                               select new aca_Jornada_Info
-                               {
-                                   IdEmpresa = a.Key.IdEmpresa,
-                                   IdJornada = a.Key.IdJornada,
-                                   NomJornada = a.Key.NomJornada,
-                                   OrdenJornada = a.Key.OrdenJornada
-                               }).OrderBy(q => q.OrdenJornada).ToList();
-
-            var ListaJornada = new List<aca_Jornada_Info>();
-
-            foreach (var item in lst_jornada)
-            {
-                ListaJornada.Add(new aca_Jornada_Info
-                {
-                    IdJornada = item.IdJornada,
-                    NomJornada = item.NomJornada
-                });
-            }
-
-            return ListaJornada;
-        }
-
-        public List<aca_Curso_Info> CargarCurso(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0)
+        public List<aca_Curso_Info> CargarCurso(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada = 0, int IdNivel = 0)
         {
             List<aca_MatriculaCalificacion_Info> lst_combos = Lista_CombosCalificaciones.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
             q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada).ToList();
@@ -1037,7 +1061,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             return ListaCurso;
         }
 
-        public List<aca_Paralelo_Info> CargarParalelo(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0)
+        public List<aca_Paralelo_Info> CargarParalelo(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada = 0, int IdNivel = 0,  int IdCurso = 0)
         {
             List<aca_MatriculaCalificacion_Info> lst_combos = Lista_CombosCalificaciones.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
             q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();
@@ -1077,7 +1101,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             return ListaParalelo;
         }
 
-        public List<aca_Materia_Info> CargarMateria(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0)
+        public List<aca_Materia_Info> CargarMateria(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada = 0, int IdNivel = 0, int IdCurso = 0, int IdParalelo = 0)
         {
             List<aca_MatriculaCalificacion_Info> lst_combos = Lista_CombosCalificaciones.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
             q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).ToList();
@@ -1123,8 +1147,8 @@ namespace Core.Web.Areas.Reportes.Controllers
         private void cargar_combos_ACA_010(aca_MatriculaCalificacionParcial_Info model)
         {
             var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
-            var lst_quim1 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), DateTime.Now.Date);
-            var lst_quim2 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2), DateTime.Now.Date);
+            var lst_quim1 = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+            var lst_quim2 = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2));
             lst_parcial.AddRange(lst_quim1);
             lst_parcial.AddRange(lst_quim2);
 
@@ -1368,8 +1392,8 @@ namespace Core.Web.Areas.Reportes.Controllers
         private void cargar_combos_ACA_013(aca_MatriculaCalificacionParcial_Info model)
         {
             var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
-            var lst_quim1 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), DateTime.Now.Date);
-            var lst_quim2 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2), DateTime.Now.Date);
+            var lst_quim1 = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+            var lst_quim2 = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2));
             lst_parcial.AddRange(lst_quim1);
             lst_parcial.AddRange(lst_quim2);
 

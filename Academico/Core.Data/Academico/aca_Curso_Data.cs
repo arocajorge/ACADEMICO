@@ -72,6 +72,35 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_Curso_Info> getList_Combos(int IdEmpresa, int IdAnio, int IdSede, int IdJornada, int IdNivel)
+        {
+            try
+            {
+                List<aca_Curso_Info> Lista = new List<aca_Curso_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdJornada == IdJornada && q.IdNivel == IdNivel ).OrderBy(q => q.OrdenCurso).GroupBy(q => new { q.IdCurso, q.NomCurso }).Select(q => new { q.Key.IdCurso, q.Key.NomCurso }).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_Curso_Info
+                        {
+                            IdCurso = q.IdCurso,
+                            NomCurso = q.NomCurso,
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<aca_Curso_Info> getList_CambioCurso(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, decimal IdMatricula)
         {
             try

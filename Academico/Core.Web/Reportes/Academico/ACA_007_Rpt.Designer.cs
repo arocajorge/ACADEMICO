@@ -229,13 +229,13 @@
             this.xrTableCell36.Multiline = true;
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.StylePriority.UseFont = false;
-            this.xrTableCell36.Text = "Nivel:";
+            this.xrTableCell36.Text = "Jornada:";
             this.xrTableCell36.Weight = 0.47936085219707059D;
             // 
             // xrTableCell37
             // 
             this.xrTableCell37.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNullOrEmpty(?p_IdNivel) || ?p_IdNivel==0,\'TODOS\' , [NomNivel] )")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNullOrEmpty(?p_IdJornada) || ?p_IdJornada==0,\'TODOS\' , [NomJornada] )")});
             this.xrTableCell37.Multiline = true;
             this.xrTableCell37.Name = "xrTableCell37";
             this.xrTableCell37.Text = "xrTableCell2";
@@ -247,13 +247,13 @@
             this.xrTableCell38.Multiline = true;
             this.xrTableCell38.Name = "xrTableCell38";
             this.xrTableCell38.StylePriority.UseFont = false;
-            this.xrTableCell38.Text = "Jornada:";
+            this.xrTableCell38.Text = "Nivel:";
             this.xrTableCell38.Weight = 0.60666815990138145D;
             // 
             // xrTableCell39
             // 
             this.xrTableCell39.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNullOrEmpty(?p_IdJornada) || ?p_IdJornada==0,\'TODOS\' , [NomJornada] )")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNullOrEmpty(?p_IdNivel) || ?p_IdNivel==0,\'TODOS\' , [NomNivel] )")});
             this.xrTableCell39.Multiline = true;
             this.xrTableCell39.Name = "xrTableCell39";
             this.xrTableCell39.Weight = 1D;

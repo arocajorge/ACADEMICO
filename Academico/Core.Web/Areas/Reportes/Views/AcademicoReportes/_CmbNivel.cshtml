@@ -17,7 +17,7 @@
         settings.Properties.Columns.Add("NomNivel", "Nivel", 70);
         settings.Properties.NullText = "== Seleccione ==";
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue(); e.customArgs['IdNivel'] = IdNivel.GetValue(); }";
-        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdJornada.PerformCallback();}";
+        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue(); e.customArgs['IdSede'] = IdSede.GetValue();e.customArgs['IdJornada'] = IdJornada.GetValue(); }";
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdCurso.PerformCallback();}";
     }).BindList(new Core.Bus.Academico.aca_NivelAcademico_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAnio, Model.IdSede)).Bind(Model.IdNivel).GetHtml();
 }

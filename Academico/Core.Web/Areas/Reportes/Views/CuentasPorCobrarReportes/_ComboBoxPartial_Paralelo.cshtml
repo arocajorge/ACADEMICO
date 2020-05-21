@@ -15,6 +15,6 @@
         settings.Properties.NullText = "== Seleccione ==";
         settings.Properties.DropDownStyle = DropDownStyle.DropDown;
         settings.Properties.AllowMouseWheel = false;
-        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue();e.customArgs['IdSede'] = IdSede.GetValue(); e.customArgs['IdNivel'] = IdNivel.GetValue(); e.customArgs['IdJornada'] = IdJornada.GetValue(); e.customArgs['IdCurso'] = IdCurso.GetValue();}";
-    }).BindList(new Core.Bus.Academico.aca_Paralelo_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAnio, Model.IdSede, Model.IdNivel, Model.IdJornada, Model.IdCurso)).Bind(Model.IdParalelo).GetHtml();
+        settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue();e.customArgs['IdSede'] = IdSede.GetValue(); e.customArgs['IdJornada'] = IdJornada.GetValue(); e.customArgs['IdNivel'] = IdNivel.GetValue(); e.customArgs['IdCurso'] = IdCurso.GetValue();}";
+    }).BindList(new Core.Bus.Academico.aca_Paralelo_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAnio, Model.IdSede, Model.IdJornada, Model.IdNivel, Model.IdCurso)).Bind(Model.IdParalelo).GetHtml();
 }
