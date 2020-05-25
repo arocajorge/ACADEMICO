@@ -400,7 +400,8 @@ namespace Core.Data.Facturacion
                 using (EntitiesFacturacion db = new EntitiesFacturacion())
                 {
                     var lstCuentas = db.vwfa_factura_ParaContabilizarAcademico.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdCbteVta == info.IdCbteVta).FirstOrDefault();
-
+                    if (lstCuentas == null)
+                        return null;
                     ct_cbtecble_Info diario = new ct_cbtecble_Info
                     {
                         IdEmpresa = info.IdEmpresa,

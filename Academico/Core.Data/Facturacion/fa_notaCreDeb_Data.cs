@@ -901,6 +901,8 @@ namespace Core.Data.Facturacion
                     if (NCND == null)
                         return null;
 
+                    var EnConciliacion = dbCxc.cxc_ConciliacionNotaCredito.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdNota == info.IdNota && q.Estado == true).Count();
+
                     var paramFac = db.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     if (paramFac == null)
                         return null;
@@ -920,6 +922,14 @@ namespace Core.Data.Facturacion
                     var Caja = dbCaj.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == ptoVta.IdCaja).FirstOrDefault();
                     if (Caja == null)
                         return null;
+
+                    if (EnConciliacion > 0)
+                    {
+                        var TipoNota = db.fa_TipoNota.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoNota == info.IdTipoNota).FirstOrDefault();
+                        if (TipoCobro == null)
+                            return null;
+                        NCND.IdCtaCbleHaber = TipoNota.IdCtaCble;
+                    }
                     
                     #region Cabecera
                     ct_cbtecble_Info diario = new ct_cbtecble_Info
@@ -956,7 +966,7 @@ namespace Core.Data.Facturacion
                         });
                         #endregion
 
-                        if (lst.Where(q => q.Valor_Aplicado != null).Count() > 0)
+                        if (lst.Where(q => q.Valor_Aplicado != null).Count() > 0 && EnConciliacion == 0)
                         {
                             foreach (var item in lst)
                             {

@@ -263,16 +263,17 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             SessionFixed.IdAlumno = model.IdAlumno.ToString();
-
+            
             var lst = busDet.GetList(model.IdEmpresa, model.IdConciliacion);
+
             if (lst.Where(q => q.ValorProntoPago > 0).Count() > 0)
             {
                 ViewBag.mensaje = "La conciliación no se puede modificar ya que aplica pronto pago, debe anular y realizar una nueva";
                 ViewBag.OcultarBoton = true;
             }
-
+            
             lstDet.set_list(lst, model.IdTransaccionSession);
-
+            
             return View(model);
         }
 
