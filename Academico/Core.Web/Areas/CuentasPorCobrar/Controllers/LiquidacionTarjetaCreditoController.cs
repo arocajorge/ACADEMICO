@@ -291,9 +291,15 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 return RedirectToAction("Index");
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            model.ListaDet = bus_LiquidacionTarjetaDet.GetList(IdEmpresa, IdSucursal, IdLiquidacion);
             Lista_LiquidacionTarjetaDet.set_list(bus_LiquidacionTarjetaDet.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
+
+            model.ListaCobros = bus_LiquidacionTarjeta_cxc_cobro.GetList(IdEmpresa, IdSucursal, IdLiquidacion);
             Lista_LiquidacionTarjeta_x_cxc_cobro.set_list(bus_LiquidacionTarjeta_cxc_cobro.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
-            List_LiquidacionTarjeta_Flujo.set_list(bus_LiquidacionTarjeta_flujo.GetList(IdEmpresa, IdSucursal, IdLiquidacion), model.IdTransaccionSession);
+
+            model.ListaFlujo = bus_LiquidacionTarjeta_flujo.GetList(IdEmpresa, IdSucursal, IdLiquidacion);
+            List_LiquidacionTarjeta_Flujo.set_list(model.ListaFlujo, model.IdTransaccionSession);
+            
             var ListaCobro = Lista_LiquidacionTarjeta_x_cxc_cobro.get_list(model.IdTransaccionSession);
             var ListaMotivo = Lista_LiquidacionTarjetaDet.get_list(model.IdTransaccionSession);
             double Total = Convert.ToDouble(ListaCobro.Sum(q => q.Valor)) - Convert.ToDouble(ListaMotivo.Sum(q => q.Valor));
