@@ -118,7 +118,7 @@ namespace Core.Data.CuentasPorCobrar
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdSucursal = Entity.IdSucursal,
-                        IdLiquidacion = Entity.IdSucursal,
+                        IdLiquidacion = Entity.IdLiquidacion,
                         IdBanco = Entity.IdBanco,
                         Valor = Entity.Valor,
                         Fecha = Entity.Fecha,
