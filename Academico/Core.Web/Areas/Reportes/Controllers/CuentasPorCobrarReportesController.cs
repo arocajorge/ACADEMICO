@@ -496,6 +496,29 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ViewBag.Report = report;
 
+            CXC_008_Resumen_Rpt ReportResumen = new CXC_008_Resumen_Rpt();
+            #region Cargo diseño desde base
+            var reportResum = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_008_Resumen");
+            if (reportResum != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
+                ReportResumen.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_IdAnio.Value = model.IdAnio;
+            ReportResumen.p_IdSede.Value = model.IdSede;
+            ReportResumen.p_IdNivel.Value = model.IdNivel;
+            ReportResumen.p_IdJornada.Value = model.IdJornada;
+            ReportResumen.p_IdCurso.Value = model.IdCurso;
+            ReportResumen.p_IdParalelo.Value = model.IdParalelo;
+            ReportResumen.p_FechaCorte.Value = model.fecha_fin;
+            ReportResumen.p_IdAlumno.Value = model.IdAlumno;
+            ReportResumen.usuario = SessionFixed.IdUsuario;
+            ReportResumen.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportResumen = ReportResumen;
+
             return View(model);
         }
         [HttpPost]
@@ -525,6 +548,29 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
 
             ViewBag.Report = report;
+
+            CXC_008_Resumen_Rpt ReportResumen = new CXC_008_Resumen_Rpt();
+            #region Cargo diseño desde base
+            var reportResum = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_008_Resumen");
+            if (reportResum != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
+                ReportResumen.LoadLayout(RootReporte);
+            }
+            #endregion
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_IdAnio.Value = model.IdAnio;
+            ReportResumen.p_IdSede.Value = model.IdSede;
+            ReportResumen.p_IdNivel.Value = model.IdNivel;
+            ReportResumen.p_IdJornada.Value = model.IdJornada;
+            ReportResumen.p_IdCurso.Value = model.IdCurso;
+            ReportResumen.p_IdParalelo.Value = model.IdParalelo;
+            ReportResumen.p_FechaCorte.Value = model.fecha_fin;
+            ReportResumen.p_IdAlumno.Value = model.IdAlumno;
+            ReportResumen.usuario = SessionFixed.IdUsuario;
+            ReportResumen.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportResumen = ReportResumen;
 
             return View(model);
         }

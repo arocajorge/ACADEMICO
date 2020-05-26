@@ -40,5 +40,7 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public string NomJornada { get; set; }
         public string NomCurso { get; set; }
         public string NomParalelo { get; set; }
+
+        public int Num { get; set; }
     }
 }

@@ -39,11 +39,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public List<aca_Paralelo_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        public List<aca_Paralelo_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdJornada, int IdNivel, int IdCurso)
         {
             try
             {
-                return odata.getList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
+                return odata.getList(IdEmpresa, IdAnio, IdSede, IdJornada, IdNivel, IdCurso);
             }
             catch (Exception)
             {

@@ -43,7 +43,8 @@ namespace Core.Data.Academico
                             NomCurso = q.NomCurso,
                             NomParalelo = q.NomParalelo,
                             pe_nombreCompleto =q.pe_nombreCompleto,
-                            BloquearMatricula = q.BloquearMatricula
+                            BloquearMatricula = q.BloquearMatricula,
+                            EsRetirado = q.EsRetirado??false
                         });
                     });
                 }
@@ -66,7 +67,7 @@ namespace Core.Data.Academico
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     var lst = Context.vwaca_Matricula_AlumnosPorParalelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
-                    && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).OrderBy(q => q.pe_nombreCompleto).ToList();
+                    && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo && q.EsRetirado==false).OrderBy(q => q.pe_nombreCompleto).ToList();
 
                     foreach (var item in lst)
                     {

@@ -35,7 +35,7 @@ namespace Core.Data.Academico
             return getInfo(IdEmpresa, (int)args.Value);
         }
 
-        public List<aca_Paralelo_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        public List<aca_Paralelo_Info> getList(int IdEmpresa, int IdAnio, int IdSede, int IdJornada, int IdNivel, int IdCurso)
         {
             try
             {

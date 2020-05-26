@@ -76,6 +76,13 @@
                             @*@Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
+                    <div class="col-md-5" hidden>
+                        <div class="form-group">
+                            <label for="IdEmpresa">Materia</label>
+                            @Html.Partial("_ComboBoxPartial_Materia_Cal", Model)
+                            @Html.ValidationMessageFor(q => q.IdMateria, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.box-body -->

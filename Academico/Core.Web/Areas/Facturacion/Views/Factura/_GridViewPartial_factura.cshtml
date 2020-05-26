@@ -127,6 +127,7 @@
             column.Caption = "Subtotal sin IVA";
             column.PropertiesEdit.DisplayFormatString = "{0:c2}";
             column.Width = Unit.Percentage(7);
+            column.Visible = false;
         });
         settings.Columns.Add(column =>
         {
@@ -134,6 +135,7 @@
             column.Caption = "Subtotal IVA";
             column.PropertiesEdit.DisplayFormatString = "{0:c2}";
             column.Width = Unit.Percentage(6);
+            column.Visible = false;
         });
         settings.Columns.Add(column =>
         {
@@ -141,6 +143,7 @@
             column.Caption = "I.V.A.";
             column.PropertiesEdit.DisplayFormatString = "{0:c2}";
             column.Width = Unit.Percentage(6);
+            column.Visible = false;
         });
         settings.Columns.Add(column =>
         {

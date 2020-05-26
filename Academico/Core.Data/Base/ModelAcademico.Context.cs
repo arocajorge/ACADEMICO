@@ -87,7 +87,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_MecanismoDePago> vwaca_MecanismoDePago { get; set; }
         public virtual DbSet<aca_Matricula> aca_Matricula { get; set; }
         public virtual DbSet<aca_PlantillaTipo> aca_PlantillaTipo { get; set; }
-        public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
         public virtual DbSet<aca_MatriculaCalificacionParcial> aca_MatriculaCalificacionParcial { get; set; }
         public virtual DbSet<aca_Profesor> aca_Profesor { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor> vwaca_AnioLectivo_Paralelo_Profesor { get; set; }
@@ -118,6 +117,7 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_AnioLectivo_Curso_Materia> vwaca_AnioLectivo_Curso_Materia { get; set; }
         public virtual DbSet<aca_MatriculaCalificacion> aca_MatriculaCalificacion { get; set; }
         public virtual DbSet<vwaca_MatriculaCalificacion> vwaca_MatriculaCalificacion { get; set; }
+        public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

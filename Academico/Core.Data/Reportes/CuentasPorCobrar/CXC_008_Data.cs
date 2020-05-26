@@ -23,6 +23,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                     {
                         Lista.Add(new CXC_008_Info
                         {
+                            Num = 1,
                             IdEmpresa = q.IdEmpresa,
                             IdSucursal = q.IdSucursal,
                             IdBodega = q.IdBodega,

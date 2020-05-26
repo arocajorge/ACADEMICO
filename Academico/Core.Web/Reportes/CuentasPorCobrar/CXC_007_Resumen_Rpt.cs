@@ -31,5 +31,10 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             List<CXC_007_Info> lst_rpt = bus_rpt.Get_list(IdEmpresa, fechaCorte);
             this.DataSource = lst_rpt;
         }
+
+        private void CXC_007_Resumen_Rpt_DesignerLoaded(object sender, DevExpress.XtraReports.UserDesigner.DesignerLoadedEventArgs e)
+        {
+
+        }
     }
 }

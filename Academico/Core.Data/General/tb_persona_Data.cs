@@ -517,7 +517,7 @@ namespace Core.Data.General
                         {
                             Lista.Add(new tb_persona_Info
                             {
-                                IdPersona = q.IdPersona,
+                                IdPersona = Convert.ToDecimal(q.IdPersona),
                                 pe_nombreCompleto = q.pe_nombreCompleto,
                                 pe_cedulaRuc = q.pe_cedulaRuc,
                                 IdEntidad = q.IdAlumno,
@@ -693,7 +693,7 @@ namespace Core.Data.General
                             && q.IdAnio != IdAnio
                             select new tb_persona_Info
                             {
-                                IdPersona = q.IdPersona,
+                                IdPersona =  Convert.ToDecimal(q.IdPersona),
                                 pe_nombreCompleto = q.pe_nombreCompleto,
                                 pe_cedulaRuc = q.pe_cedulaRuc,
                                 IdEntidad = q.IdAlumno,

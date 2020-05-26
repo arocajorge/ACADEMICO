@@ -134,7 +134,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_AnioLectivo_Curso_Paralelo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_MecanismoDePago" />
         <EntityTypeShape EntityType="ModelAcademico.aca_PlantillaTipo" Width="1.5" PointX="0.75" PointY="35" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula" Width="1.5" PointX="20.375" PointY="21.75" />
         <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaCalificacionParcial" Width="1.5" PointX="34.875" PointY="30.25" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParcial_aca_Catalogo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParcial_aca_Materia" />
@@ -201,6 +200,7 @@
         <EntityTypeShape EntityType="ModelAcademico.vwaca_MatriculaCalificacion" Width="1.5" PointX="22.375" PointY="32.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacion_aca_Matricula" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula" Width="1.5" PointX="20.375" PointY="21.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
