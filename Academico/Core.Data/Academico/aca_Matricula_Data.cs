@@ -29,6 +29,7 @@ namespace Core.Data.Academico
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdMatricula = q.IdMatricula,
+                            Codigo = q.Codigo,
                             IdAlumno = q.IdAlumno,
                             IdAnio = q.IdAnio,
                             IdSede = q.IdSede,
