@@ -71,8 +71,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                var url = '@Url.Action("Index", "AuditoriaContable")';
-                window.location.href = url;
+                   $("#myform").submit();
             },
             error: function (error) {
             }
@@ -97,8 +96,7 @@
             success: function (data) {
                 if (data=="")
                 {
-                    var url = '@Url.Action("Index", "AuditoriaContable")';
-                    window.location.href = url;
+                       $("#myform").submit();
                 }
             },
             error: function (error) {
@@ -122,8 +120,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                var url = '@Url.Action("Index", "AuditoriaContable")';
-                window.location.href = url;
+                   $("#myform").submit();
             },
             error: function (error) {
             }
@@ -131,7 +128,7 @@
     }
 </script>
 
-@using (Html.BeginForm("Index","AuditoriaContable",FormMethod.Post,new { @rol="form"}))
+@using (Html.BeginForm("Index","AuditoriaContable",FormMethod.Post,new { @rol="form", @id = "myform"}))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
