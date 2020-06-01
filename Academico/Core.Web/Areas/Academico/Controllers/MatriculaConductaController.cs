@@ -398,57 +398,59 @@ namespace Core.Web.Areas.Academico.Controllers
         public JsonResult cargar_calificaciones_conducta(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdCatalogoParcial = 0)
         {
             List<aca_MatriculaConducta_Info> Lista_CalificacionConducta= new List<aca_MatriculaConducta_Info>();
-
-            Lista_CalificacionConducta = bus_conducta_cal.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
-            foreach (var item in Lista_CalificacionConducta)
+            if (IdCatalogoParcial>0)
             {
-                item.IdCatalogoParcial = IdCatalogoParcial;
-                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
+                Lista_CalificacionConducta = bus_conducta_cal.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
+                foreach (var item in Lista_CalificacionConducta)
                 {
-                    item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP1);
-                    item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP1);
-                    item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP1);
-                    item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP1);
-                }
+                    item.IdCatalogoParcial = IdCatalogoParcial;
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
+                    {
+                        item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP1);
+                        item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP1);
+                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP1);
+                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP1);
+                    }
 
-                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
-                {
-                    item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP2);
-                    item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP1);
-                    item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP2);
-                    item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP2);
-                }
-                    
-                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
-                {
-                    item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP3);
-                    item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP3);
-                    item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP3);
-                    item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP3);
-                }
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
+                    {
+                        item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP2);
+                        item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP1);
+                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP2);
+                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP2);
+                    }
 
-                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
-                {
-                    item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP4);
-                    item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP4);
-                    item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP4);
-                    item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP4);
-                }
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
+                    {
+                        item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP3);
+                        item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP3);
+                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP3);
+                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP3);
+                    }
 
-                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
-                {
-                    item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP5);
-                    item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP5);
-                    item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP5);
-                    item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP5);
-                }
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
+                    {
+                        item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP4);
+                        item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP4);
+                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP4);
+                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP4);
+                    }
 
-                if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
-                {
-                    item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP6);
-                    item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP6);
-                    item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP6);
-                    item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP6);
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
+                    {
+                        item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP5);
+                        item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP5);
+                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP5);
+                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP5);
+                    }
+
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
+                    {
+                        item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioP6);
+                        item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioP6);
+                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalP6);
+                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalP6);
+                    }
                 }
             }
 
