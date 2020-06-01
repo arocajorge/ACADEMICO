@@ -12,5 +12,6 @@
     settings.Properties.TextField = "NomNivel";
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
     settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue(); e.customArgs['IdSede'] = IdSede.GetValue(); }";
 }).BindList(new Core.Bus.Academico.aca_NivelAcademico_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa),Model.IdAnio, Model.IdSede)).Bind(Model.IdNivel).GetHtml()

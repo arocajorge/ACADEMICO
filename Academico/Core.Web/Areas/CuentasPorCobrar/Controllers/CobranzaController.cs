@@ -52,6 +52,8 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         fa_notaCreDeb_Bus bus_notaDebCre = new fa_notaCreDeb_Bus();
         cxc_LiquidacionTarjeta_Bus busLiquidacionTarjeta = new cxc_LiquidacionTarjeta_Bus();
+        aca_PlantillaTipo_Bus bus_tipo_plantilla = new aca_PlantillaTipo_Bus();
+        aca_Plantilla_Bus bus_plantilla = new aca_Plantilla_Bus();
         string mensaje = string.Empty;
         string mensajeInfo = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
@@ -486,7 +488,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 var Matricula = bus_matricula.GetInfo_ExisteMatricula(model.IdEmpresa, Anio.IdAnio, model.IdAlumno ?? 0);
                 if (Matricula != null)
                 {
-                    model.DatosAlumno = Matricula.NomNivel + " " + Matricula.NomJornada + " " + Matricula.NomCurso + " " + Matricula.NomParalelo;
+                    var info_plantilla = bus_plantilla.GetInfo(IdEmpresa, Matricula.IdAnio, Matricula.IdPlantilla);
+                    var info_tipo_plantilla = bus_tipo_plantilla.getInfo(IdEmpresa, Convert.ToInt32(info_plantilla == null ? 0 : info_plantilla.IdTipoPlantilla));
+
+                    model.DatosAlumno = Matricula.NomNivel + " " + Matricula.NomJornada + " " + Matricula.NomCurso + " " + Matricula.NomParalelo + " / " + (info_tipo_plantilla == null ? "" : info_tipo_plantilla.NomPlantillaTipo) + " - " + (info_plantilla == null ? "" : info_plantilla.NomPlantilla);
                 }
                 else
                     model.DatosAlumno = "NO MATRICULADO";
@@ -571,7 +576,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 var Matricula = bus_matricula.GetInfo_ExisteMatricula(model.IdEmpresa, Anio.IdAnio, model.IdAlumno ?? 0);
                 if (Matricula != null)
                 {
-                    model.DatosAlumno = Matricula.NomNivel + " " + Matricula.NomJornada + " " + Matricula.NomCurso + " " + Matricula.NomParalelo;
+                    var info_plantilla = bus_plantilla.GetInfo(IdEmpresa, Matricula.IdAnio, Matricula.IdPlantilla);
+                    var info_tipo_plantilla = bus_tipo_plantilla.getInfo(IdEmpresa, Convert.ToInt32(info_plantilla == null ? 0 : info_plantilla.IdTipoPlantilla));
+
+                    model.DatosAlumno = Matricula.NomNivel + " " + Matricula.NomJornada + " " + Matricula.NomCurso + " " + Matricula.NomParalelo + " / " + (info_tipo_plantilla == null ? "" : info_tipo_plantilla.NomPlantillaTipo) + " - " + (info_plantilla == null ? "" : info_plantilla.NomPlantilla);
                 }
                 else
                     model.DatosAlumno = "NO MATRICULADO";
@@ -776,10 +784,15 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 var Matricula = bus_matricula.GetInfo_ExisteMatricula(IdEmpresa, AnioLectivo.IdAnio, IdAlumno);
                 if (Matricula != null)
                 {
-                    DatosAlumno = Matricula.NomNivel + " " + Matricula.NomJornada + " " + Matricula.NomCurso + " " + Matricula.NomParalelo;
+                    var info_plantilla = bus_plantilla.GetInfo(IdEmpresa, Matricula.IdAnio, Matricula.IdPlantilla);
+                    var info_tipo_plantilla = bus_tipo_plantilla.getInfo(IdEmpresa, Convert.ToInt32(info_plantilla==null ? 0 : info_plantilla.IdTipoPlantilla));
+                    DatosAlumno = Matricula.NomNivel + " " + Matricula.NomJornada + " " + Matricula.NomCurso + " " + Matricula.NomParalelo +" / "+ (info_tipo_plantilla==null ? "" : info_tipo_plantilla.NomPlantillaTipo) +" - "+ (info_plantilla == null ? "" : info_plantilla.NomPlantilla);
+
                 }
                 else
+                {
                     DatosAlumno = "NO MATRICULADO";
+                }                 
             }
 
             List<fa_notaCreDeb_Info> lst_CreditoAlumno = bus_notaDebCre.get_list_credito_favor(IdEmpresa, IdAlumno);
