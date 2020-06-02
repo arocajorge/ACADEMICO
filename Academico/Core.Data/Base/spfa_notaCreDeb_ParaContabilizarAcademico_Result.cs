@@ -10,15 +10,16 @@
 namespace Core.Data.Base
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class vwfa_notaCreDeb_ParaContabilizarAcademico
+    public partial class spfa_notaCreDeb_ParaContabilizarAcademico_Result
     {
+        public long IdRow { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
         public decimal IdNota { get; set; }
         public Nullable<int> secuencia { get; set; }
+        public Nullable<double> Valor_Aplicado { get; set; }
         public Nullable<int> IdEmpresa_fac_nd_doc_mod { get; set; }
         public Nullable<int> IdSucursal_fac_nd_doc_mod { get; set; }
         public Nullable<int> IdBodega_fac_nd_doc_mod { get; set; }
@@ -32,7 +33,6 @@ namespace Core.Data.Base
         public string vt_NumFactura { get; set; }
         public string IdCtaCbleHaber { get; set; }
         public string IdCtaCbleDebe { get; set; }
-        public Nullable<double> Valor_Aplicado { get; set; }
         public System.DateTime no_fecha { get; set; }
         public string sc_observacion { get; set; }
         public string NomCliente { get; set; }

@@ -252,6 +252,9 @@
     <Compile Include="Base\SPFAC_015_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\spfa_notaCreDeb_ParaContabilizarAcademico_Result.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_GrupoEtnico.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
@@ -436,9 +439,6 @@
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwfa_notaCreDeb_ParaConciliarNC.cs">
-      <DependentUpon>ModelFacturacion.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\vwfa_notaCreDeb_ParaContabilizarAcademico.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwro_empleados_consulta.cs">

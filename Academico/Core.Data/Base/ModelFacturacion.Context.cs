@@ -12,6 +12,8 @@ namespace Core.Data.Base
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class EntitiesFacturacion : DbContext
     {
@@ -52,7 +54,6 @@ namespace Core.Data.Base
         public virtual DbSet<fa_factura_resumen> fa_factura_resumen { get; set; }
         public virtual DbSet<fa_PuntoVta_x_seg_usuario> fa_PuntoVta_x_seg_usuario { get; set; }
         public virtual DbSet<vwfa_factura_ParaContabilizarAcademico> vwfa_factura_ParaContabilizarAcademico { get; set; }
-        public virtual DbSet<vwfa_notaCreDeb_ParaContabilizarAcademico> vwfa_notaCreDeb_ParaContabilizarAcademico { get; set; }
         public virtual DbSet<fa_notaCreDeb> fa_notaCreDeb { get; set; }
         public virtual DbSet<vwfa_factura_det> vwfa_factura_det { get; set; }
         public virtual DbSet<fa_notaCreDeb_resumen> fa_notaCreDeb_resumen { get; set; }
@@ -64,5 +65,26 @@ namespace Core.Data.Base
         public virtual DbSet<vwfa_factura> vwfa_factura { get; set; }
         public virtual DbSet<fa_factura> fa_factura { get; set; }
         public virtual DbSet<vwfa_notaCreDeb> vwfa_notaCreDeb { get; set; }
+    
+        public virtual ObjectResult<spfa_notaCreDeb_ParaContabilizarAcademico_Result> spfa_notaCreDeb_ParaContabilizarAcademico(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<decimal> idNota)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idSucursalParameter = idSucursal.HasValue ?
+                new ObjectParameter("IdSucursal", idSucursal) :
+                new ObjectParameter("IdSucursal", typeof(int));
+    
+            var idBodegaParameter = idBodega.HasValue ?
+                new ObjectParameter("IdBodega", idBodega) :
+                new ObjectParameter("IdBodega", typeof(int));
+    
+            var idNotaParameter = idNota.HasValue ?
+                new ObjectParameter("IdNota", idNota) :
+                new ObjectParameter("IdNota", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spfa_notaCreDeb_ParaContabilizarAcademico_Result>("spfa_notaCreDeb_ParaContabilizarAcademico", idEmpresaParameter, idSucursalParameter, idBodegaParameter, idNotaParameter);
+        }
     }
 }

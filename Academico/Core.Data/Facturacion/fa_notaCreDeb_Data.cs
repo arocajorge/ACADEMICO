@@ -252,6 +252,12 @@ namespace Core.Data.Facturacion
 
                 using (EntitiesFacturacion db_f = new EntitiesFacturacion())
                 {
+                    var TipoNota = db_f.fa_TipoNota.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoNota == info.IdTipoNota).FirstOrDefault();
+                    if (TipoNota != null)
+                    {
+                        info.IdCtaCble_TipoNota = info.CreDeb == "D" ? TipoNota.IdCtaCbleCXC : TipoNota.IdCtaCble;
+                    }
+
                     #region Nota de debito credito
 
                     #region Cabecera
@@ -514,6 +520,12 @@ namespace Core.Data.Facturacion
 
                 using (EntitiesFacturacion db_f = new EntitiesFacturacion())
                 {
+                    var TipoNota = db_f.fa_TipoNota.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoNota == info.IdTipoNota).FirstOrDefault();
+                    if (TipoNota != null)
+                    {
+                        info.IdCtaCble_TipoNota = info.CreDeb == "D" ? TipoNota.IdCtaCbleCXC : TipoNota.IdCtaCble;
+                    }
+
                     #region Nota de debito credito
 
                     #region Cabecera
@@ -896,7 +908,7 @@ namespace Core.Data.Facturacion
                 EntitiesCuentasPorCobrar dbCxc = new EntitiesCuentasPorCobrar();
                 using (EntitiesFacturacion db = new EntitiesFacturacion())
                 {
-                    var lst = db.vwfa_notaCreDeb_ParaContabilizarAcademico.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdNota == info.IdNota).ToList();
+                    var lst = db.spfa_notaCreDeb_ParaContabilizarAcademico(info.IdEmpresa, info.IdSucursal, info.IdBodega, info.IdNota).ToList();
                     var NCND = lst.Count > 0 ? lst[0] : null;
                     if (NCND == null)
                         return null;

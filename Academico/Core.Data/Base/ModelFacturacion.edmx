@@ -675,46 +675,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwfa_notaCreDeb_ParaConc
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwfa_notaCreDeb_ParaContabilizarAcademico' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="vwfa_notaCreDeb_ParaContabilizarAcademico">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdNota" />
-            <PropertyRef Name="CreDeb" />
-            <PropertyRef Name="SubtotalConDscto" />
-            <PropertyRef Name="ValorIVA" />
-            <PropertyRef Name="Total" />
-            <PropertyRef Name="no_fecha" />
-            <PropertyRef Name="NomCliente" />
-            <PropertyRef Name="NomAlumno" />
-          </Key>
-          <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdSucursal" Type="int" Nullable="false" />
-          <Property Name="IdBodega" Type="int" Nullable="false" />
-          <Property Name="IdNota" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="secuencia" Type="int" />
-          <Property Name="IdEmpresa_fac_nd_doc_mod" Type="int" />
-          <Property Name="IdSucursal_fac_nd_doc_mod" Type="int" />
-          <Property Name="IdBodega_fac_nd_doc_mod" Type="int" />
-          <Property Name="IdCbteVta_fac_nd_doc_mod" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="vt_tipoDoc" Type="varchar" MaxLength="20" />
-          <Property Name="NumNota_Impresa" Type="varchar" MaxLength="28" />
-          <Property Name="CreDeb" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="SubtotalConDscto" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ValorIVA" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Total" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="vt_NumFactura" Type="varchar" MaxLength="28" />
-          <Property Name="IdCtaCbleHaber" Type="varchar" MaxLength="20" />
-          <Property Name="IdCtaCbleDebe" Type="varchar" MaxLength="20" />
-          <Property Name="Valor_Aplicado" Type="float" />
-          <Property Name="no_fecha" Type="datetime" Nullable="false" />
-          <Property Name="sc_observacion" Type="varchar(max)" />
-          <Property Name="NomCliente" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="NomAlumno" Type="varchar" MaxLength="200" Nullable="false" />
-        </EntityType>
-        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwfa_PuntoVta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwfa_PuntoVta">
           <Key>
@@ -1393,6 +1353,12 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwfa_notaCreDeb_x_fa_fac
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spfa_notaCreDeb_ParaContabilizarAcademico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdSucursal" Type="int" Mode="In" />
+          <Parameter Name="IdBodega" Type="int" Mode="In" />
+          <Parameter Name="IdNota" Type="numeric" Mode="In" />
+        </Function>
         <EntityContainer Name="ModelFacturacionStoreContainer">
           <EntitySet Name="cxc_Parametro" EntityType="Self.cxc_Parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="fa_catalogo" EntityType="Self.fa_catalogo" Schema="dbo" store:Type="Tables" />
@@ -1483,33 +1449,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwfa_notaCreDeb_x_fa_fac
     [vwfa_notaCreDeb_ParaConciliarNC].[IdCliente] AS [IdCliente], 
     [vwfa_notaCreDeb_ParaConciliarNC].[pe_nombreCompleto] AS [pe_nombreCompleto]
     FROM [dbo].[vwfa_notaCreDeb_ParaConciliarNC] AS [vwfa_notaCreDeb_ParaConciliarNC]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="vwfa_notaCreDeb_ParaContabilizarAcademico" EntityType="Self.vwfa_notaCreDeb_ParaContabilizarAcademico" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[IdEmpresa] AS [IdEmpresa], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[IdSucursal] AS [IdSucursal], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[IdBodega] AS [IdBodega], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[IdNota] AS [IdNota], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[secuencia] AS [secuencia], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[IdEmpresa_fac_nd_doc_mod] AS [IdEmpresa_fac_nd_doc_mod], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[IdSucursal_fac_nd_doc_mod] AS [IdSucursal_fac_nd_doc_mod], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[IdBodega_fac_nd_doc_mod] AS [IdBodega_fac_nd_doc_mod], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[IdCbteVta_fac_nd_doc_mod] AS [IdCbteVta_fac_nd_doc_mod], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[vt_tipoDoc] AS [vt_tipoDoc], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[NumNota_Impresa] AS [NumNota_Impresa], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[CreDeb] AS [CreDeb], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[SubtotalConDscto] AS [SubtotalConDscto], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[ValorIVA] AS [ValorIVA], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[Total] AS [Total], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[vt_NumFactura] AS [vt_NumFactura], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[IdCtaCbleHaber] AS [IdCtaCbleHaber], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[IdCtaCbleDebe] AS [IdCtaCbleDebe], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[Valor_Aplicado] AS [Valor_Aplicado], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[no_fecha] AS [no_fecha], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[sc_observacion] AS [sc_observacion], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[NomCliente] AS [NomCliente], 
-    [vwfa_notaCreDeb_ParaContabilizarAcademico].[NomAlumno] AS [NomAlumno]
-    FROM [dbo].[vwfa_notaCreDeb_ParaContabilizarAcademico] AS [vwfa_notaCreDeb_ParaContabilizarAcademico]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwfa_PuntoVta" EntityType="Self.vwfa_PuntoVta" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1889,7 +1828,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwfa_notaCreDeb_x_fa_fac
             <End Role="fa_PuntoVta_x_seg_usuario" EntitySet="fa_PuntoVta_x_seg_usuario" />
           </AssociationSet>
           <EntitySet Name="vwfa_factura_ParaContabilizarAcademico" EntityType="ModelFacturacion.vwfa_factura_ParaContabilizarAcademico" />
-          <EntitySet Name="vwfa_notaCreDeb_ParaContabilizarAcademico" EntityType="ModelFacturacion.vwfa_notaCreDeb_ParaContabilizarAcademico" />
           <EntitySet Name="fa_notaCreDeb" EntityType="ModelFacturacion.fa_notaCreDeb" />
           <AssociationSet Name="FK_fa_notaCreDeb_fa_cliente" Association="ModelFacturacion.FK_fa_notaCreDeb_fa_cliente">
             <End Role="fa_cliente" EntitySet="fa_cliente" />
@@ -1969,6 +1907,12 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwfa_notaCreDeb_x_fa_fac
             <End Role="fa_factura_x_ct_cbtecble" EntitySet="fa_factura_x_ct_cbtecble" />
           </AssociationSet>
           <EntitySet Name="vwfa_notaCreDeb" EntityType="ModelFacturacion.vwfa_notaCreDeb" />
+          <FunctionImport Name="spfa_notaCreDeb_ParaContabilizarAcademico" ReturnType="Collection(ModelFacturacion.spfa_notaCreDeb_ParaContabilizarAcademico_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdSucursal" Mode="In" Type="Int32" />
+            <Parameter Name="IdBodega" Mode="In" Type="Int32" />
+            <Parameter Name="IdNota" Mode="In" Type="Decimal" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="fa_cliente">
           <Key>
@@ -2682,44 +2626,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwfa_notaCreDeb_x_fa_fac
           <Property Name="vt_fecha" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="vt_Observacion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="vwfa_notaCreDeb_ParaContabilizarAcademico">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSucursal" />
-            <PropertyRef Name="IdBodega" />
-            <PropertyRef Name="IdNota" />
-            <PropertyRef Name="CreDeb" />
-            <PropertyRef Name="SubtotalConDscto" />
-            <PropertyRef Name="ValorIVA" />
-            <PropertyRef Name="Total" />
-            <PropertyRef Name="no_fecha" />
-            <PropertyRef Name="NomCliente" />
-            <PropertyRef Name="NomAlumno" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="IdBodega" Type="Int32" Nullable="false" />
-          <Property Name="IdNota" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="secuencia" Type="Int32" />
-          <Property Name="IdEmpresa_fac_nd_doc_mod" Type="Int32" />
-          <Property Name="IdSucursal_fac_nd_doc_mod" Type="Int32" />
-          <Property Name="IdBodega_fac_nd_doc_mod" Type="Int32" />
-          <Property Name="IdCbteVta_fac_nd_doc_mod" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="vt_tipoDoc" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NumNota_Impresa" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
-          <Property Name="CreDeb" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <Property Name="SubtotalConDscto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ValorIVA" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="vt_NumFactura" Type="String" MaxLength="28" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCbleHaber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdCtaCbleDebe" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Valor_Aplicado" Type="Double" />
-          <Property Name="no_fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="sc_observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="NomCliente" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="NomAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="fa_notaCreDeb">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -3374,6 +3280,32 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwfa_notaCreDeb_x_fa_fac
           <Property Name="NaturalezaNota" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="Fecha_Autorizacion" Type="DateTime" Precision="3" />
         </EntityType>
+        <ComplexType Name="spfa_notaCreDeb_ParaContabilizarAcademico_Result">
+          <Property Type="Int64" Name="IdRow" Nullable="false" />
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="Int32" Name="IdBodega" Nullable="false" />
+          <Property Type="Decimal" Name="IdNota" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="secuencia" Nullable="true" />
+          <Property Type="Double" Name="Valor_Aplicado" Nullable="true" />
+          <Property Type="Int32" Name="IdEmpresa_fac_nd_doc_mod" Nullable="true" />
+          <Property Type="Int32" Name="IdSucursal_fac_nd_doc_mod" Nullable="true" />
+          <Property Type="Int32" Name="IdBodega_fac_nd_doc_mod" Nullable="true" />
+          <Property Type="Decimal" Name="IdCbteVta_fac_nd_doc_mod" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="vt_tipoDoc" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="NumNota_Impresa" Nullable="true" MaxLength="28" />
+          <Property Type="String" Name="CreDeb" Nullable="false" MaxLength="1" />
+          <Property Type="Decimal" Name="SubtotalConDscto" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ValorIVA" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="vt_NumFactura" Nullable="true" MaxLength="28" />
+          <Property Type="String" Name="IdCtaCbleHaber" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IdCtaCbleDebe" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="no_fecha" Nullable="false" Precision="23" />
+          <Property Type="String" Name="sc_observacion" Nullable="true" />
+          <Property Type="String" Name="NomCliente" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="NomAlumno" Nullable="false" MaxLength="200" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3869,35 +3801,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwfa_notaCreDeb_x_fa_fac
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwfa_notaCreDeb_ParaContabilizarAcademico">
-            <EntityTypeMapping TypeName="ModelFacturacion.vwfa_notaCreDeb_ParaContabilizarAcademico">
-              <MappingFragment StoreEntitySet="vwfa_notaCreDeb_ParaContabilizarAcademico">
-                <ScalarProperty Name="NomAlumno" ColumnName="NomAlumno" />
-                <ScalarProperty Name="NomCliente" ColumnName="NomCliente" />
-                <ScalarProperty Name="sc_observacion" ColumnName="sc_observacion" />
-                <ScalarProperty Name="no_fecha" ColumnName="no_fecha" />
-                <ScalarProperty Name="Valor_Aplicado" ColumnName="Valor_Aplicado" />
-                <ScalarProperty Name="IdCtaCbleDebe" ColumnName="IdCtaCbleDebe" />
-                <ScalarProperty Name="IdCtaCbleHaber" ColumnName="IdCtaCbleHaber" />
-                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="ValorIVA" ColumnName="ValorIVA" />
-                <ScalarProperty Name="SubtotalConDscto" ColumnName="SubtotalConDscto" />
-                <ScalarProperty Name="CreDeb" ColumnName="CreDeb" />
-                <ScalarProperty Name="NumNota_Impresa" ColumnName="NumNota_Impresa" />
-                <ScalarProperty Name="vt_tipoDoc" ColumnName="vt_tipoDoc" />
-                <ScalarProperty Name="IdCbteVta_fac_nd_doc_mod" ColumnName="IdCbteVta_fac_nd_doc_mod" />
-                <ScalarProperty Name="IdBodega_fac_nd_doc_mod" ColumnName="IdBodega_fac_nd_doc_mod" />
-                <ScalarProperty Name="IdSucursal_fac_nd_doc_mod" ColumnName="IdSucursal_fac_nd_doc_mod" />
-                <ScalarProperty Name="IdEmpresa_fac_nd_doc_mod" ColumnName="IdEmpresa_fac_nd_doc_mod" />
-                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
-                <ScalarProperty Name="IdNota" ColumnName="IdNota" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="fa_notaCreDeb">
             <EntityTypeMapping TypeName="ModelFacturacion.fa_notaCreDeb">
               <MappingFragment StoreEntitySet="fa_notaCreDeb">
@@ -4213,6 +4116,36 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwfa_notaCreDeb_x_fa_fac
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spfa_notaCreDeb_ParaContabilizarAcademico" FunctionName="ModelFacturacion.Store.spfa_notaCreDeb_ParaContabilizarAcademico">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelFacturacion.spfa_notaCreDeb_ParaContabilizarAcademico_Result">
+                <ScalarProperty Name="IdRow" ColumnName="IdRow" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdNota" ColumnName="IdNota" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="Valor_Aplicado" ColumnName="Valor_Aplicado" />
+                <ScalarProperty Name="IdEmpresa_fac_nd_doc_mod" ColumnName="IdEmpresa_fac_nd_doc_mod" />
+                <ScalarProperty Name="IdSucursal_fac_nd_doc_mod" ColumnName="IdSucursal_fac_nd_doc_mod" />
+                <ScalarProperty Name="IdBodega_fac_nd_doc_mod" ColumnName="IdBodega_fac_nd_doc_mod" />
+                <ScalarProperty Name="IdCbteVta_fac_nd_doc_mod" ColumnName="IdCbteVta_fac_nd_doc_mod" />
+                <ScalarProperty Name="vt_tipoDoc" ColumnName="vt_tipoDoc" />
+                <ScalarProperty Name="NumNota_Impresa" ColumnName="NumNota_Impresa" />
+                <ScalarProperty Name="CreDeb" ColumnName="CreDeb" />
+                <ScalarProperty Name="SubtotalConDscto" ColumnName="SubtotalConDscto" />
+                <ScalarProperty Name="ValorIVA" ColumnName="ValorIVA" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="IdCtaCbleHaber" ColumnName="IdCtaCbleHaber" />
+                <ScalarProperty Name="IdCtaCbleDebe" ColumnName="IdCtaCbleDebe" />
+                <ScalarProperty Name="no_fecha" ColumnName="no_fecha" />
+                <ScalarProperty Name="sc_observacion" ColumnName="sc_observacion" />
+                <ScalarProperty Name="NomCliente" ColumnName="NomCliente" />
+                <ScalarProperty Name="NomAlumno" ColumnName="NomAlumno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

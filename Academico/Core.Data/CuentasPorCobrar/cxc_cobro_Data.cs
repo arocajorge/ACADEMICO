@@ -828,7 +828,7 @@ namespace Core.Data.CuentasPorCobrar
                     }else
                     if (item.dc_TipoDocumento == "NTDB")
                     {
-                        var infoND = dbFac.vwfa_notaCreDeb_ParaContabilizarAcademico.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdSucursal == item.IdSucursal && q.IdBodega == item.IdBodega_Cbte && q.IdNota == item.IdCbte_vta_nota).FirstOrDefault();
+                        var infoND = dbFac.spfa_notaCreDeb_ParaContabilizarAcademico(item.IdEmpresa, item.IdSucursal, item.IdBodega_Cbte, item.IdCbte_vta_nota).FirstOrDefault();
                         if (infoND != null)
                         {
                             retorno.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
@@ -935,7 +935,7 @@ namespace Core.Data.CuentasPorCobrar
                                 dc_Observacion = TipoCobroCtaNTDB.IdCobro_tipo
                             });
                         }
-                        var infoND = dbFac.vwfa_notaCreDeb_ParaContabilizarAcademico.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdSucursal == item.IdSucursal && q.IdBodega == item.IdBodega_Cbte && q.IdNota == item.IdCbte_vta_nota).FirstOrDefault();
+                        var infoND = dbFac.spfa_notaCreDeb_ParaContabilizarAcademico(item.IdEmpresa, item.IdSucursal, item.IdBodega_Cbte, item.IdCbte_vta_nota).FirstOrDefault();
                         if (infoND != null)
                         {
                             retorno.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info

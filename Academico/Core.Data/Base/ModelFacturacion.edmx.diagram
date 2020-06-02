@@ -42,7 +42,6 @@
         <EntityTypeShape EntityType="ModelFacturacion.fa_PuntoVta_x_seg_usuario" Width="1.5" PointX="10" PointY="16.375" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_PuntoVta_x_seg_usuario_fa_PuntoVta" />
         <EntityTypeShape EntityType="ModelFacturacion.vwfa_factura_ParaContabilizarAcademico" Width="1.5" PointX="3.375" PointY="13.75" />
-        <EntityTypeShape EntityType="ModelFacturacion.vwfa_notaCreDeb_ParaContabilizarAcademico" Width="1.5" PointX="13.375" PointY="21.75" />
         <EntityTypeShape EntityType="ModelFacturacion.fa_notaCreDeb" Width="1.5" PointX="9.625" PointY="6.625" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_fa_cliente" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_det_fa_notaCreDeb" />
