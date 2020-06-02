@@ -57,7 +57,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
 
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
