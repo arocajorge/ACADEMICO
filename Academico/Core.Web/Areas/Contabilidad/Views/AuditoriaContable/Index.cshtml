@@ -12,6 +12,7 @@
     var selectedIDsFactura;
     var selectedIDsNota;
     var selectedIDsCobro;
+    var selectedIDsConciliacionNC;
 
     function OnBeginCallbackFactura(s, e) {
         //Pass all selected keys to GridView callback action
@@ -52,6 +53,20 @@
     function GetSelectedFieldValuesCallbackCobro(values) {
         //Capture all selected keys
         selectedIDsCobro = values.join(',');
+    }
+
+
+    function OnBeginCallbackConciliacionNC(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDsConciliacionNC"] = selectedIDsCobro;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChangedConciliacionNC(s, e) {
+        s.GetSelectedFieldValues("IdString", GetSelectedFieldValuesCallbackConciliacionNC);
+    }
+    function GetSelectedFieldValuesCallbackConciliacionNC(values) {
+        //Capture all selected keys
+        selectedIDsConciliacionNC = values.join(',');
     }
 
     function ContabilizarFactura() {
@@ -120,6 +135,29 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                    $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function ContabilizarConciliacionNC() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            Ids: selectedIDsConciliacionNC
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ContabilizarConciliacionNC", "AuditoriaContable", new { Area = "Contabilidad" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#myform").submit();
             },
             error: function (error) {
             }
@@ -217,6 +255,9 @@
                     <li>
                         <a href="#tabContaCobro" aria-controls="Movimientos" role="tab" data-toggle="tab">Cobros</a>
                     </li>
+                    <li>
+                        <a href="#tabConciliacion" aria-controls="Conciliacion" role="tab" data-toggle="tab">Conciliación NC</a>
+                    </li>
                 </ul>
                 <div class="tab-content" style="padding-top: 20px">
                     <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tabContaFactura">
@@ -289,6 +330,31 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         @Html.Action("GridViewPartial_ContaCobro")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tabConciliacion">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for=""></label>
+                                        <div class="input-group">
+                                            <button type="button" title="Contabilizar Conciliación" class="btn btn-primary" id="btn_contabilizar" onclick="ContabilizarConciliacionNC();">
+                                                <i class="fa fa-refresh"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @Html.Action("GridViewPartial_ContaConciliacionNC")
                                     </div>
                                 </div>
                             </div>

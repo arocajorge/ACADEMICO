@@ -445,6 +445,7 @@
       <DependentUpon>ModelRRHH.tt</DependentUpon>
     </Compile>
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionCobros_Data.cs" />
+    <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionConciliacionNC_Data.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionFacturas_Data.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionNotas_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Data.cs" />
