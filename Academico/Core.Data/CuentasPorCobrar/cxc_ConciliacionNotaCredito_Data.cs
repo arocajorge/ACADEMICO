@@ -596,6 +596,19 @@ namespace Core.Data.CuentasPorCobrar
             }
         }
 
+        public bool Contabilizar(int IdEmpresa, decimal IdConciliacion, string IdUsuario)
+        {
+            try
+            {
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool ValidarEnConciliacionNC(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota, string Tipo)
         {
             try
