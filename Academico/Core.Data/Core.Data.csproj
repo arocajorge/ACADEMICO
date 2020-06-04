@@ -186,6 +186,12 @@
     <Compile Include="Base\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\fa_notaCreDeb_Masiva.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\fa_notaCreDeb_MasivaDet.cs">
+      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\fa_notaCreDeb_resumen.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -456,6 +462,8 @@
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Data.cs" />
+    <Compile Include="Facturacion\fa_notaCreDeb_MasivaDet_Data.cs" />
+    <Compile Include="Facturacion\fa_notaCreDeb_Masiva_Data.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_x_seg_usuario_Data.cs" />
     <Compile Include="General\tb_GrupoEtnico_Data.cs" />
     <Compile Include="General\tb_Religion_Data.cs" />

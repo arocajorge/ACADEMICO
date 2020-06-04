@@ -106,12 +106,12 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_Curso_Info> Lista = new List<aca_Curso_Info>();
-                var info_matricula = odataMatricula.getInfo(IdEmpresa, IdMatricula);
-                var IdCursoActualMatricula = (info_matricula == null ? 0 : info_matricula.IdCurso);
+                //var info_matricula = odataMatricula.getInfo(IdEmpresa, IdMatricula);
+                //var IdCursoActualMatricula = (info_matricula == null ? 0 : info_matricula.IdCurso);
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel 
-                    && q.IdJornada == IdJornada && q.IdCurso == IdCursoActualMatricula).OrderBy(q => q.OrdenCurso).GroupBy(q => new { q.IdCurso, q.NomCurso }).Select(q => new { q.Key.IdCurso, q.Key.NomCurso }).ToList();
+                    && q.IdJornada == IdJornada).OrderBy(q => q.OrdenCurso).GroupBy(q => new { q.IdCurso, q.NomCurso }).Select(q => new { q.Key.IdCurso, q.Key.NomCurso }).ToList();
 
                     lst.ForEach(q =>
                     {

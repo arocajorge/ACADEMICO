@@ -108,6 +108,8 @@
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Bus.cs" />
+    <Compile Include="Facturacion\fa_notaCreDeb_MasivaDet_Bus.cs" />
+    <Compile Include="Facturacion\fa_notaCreDeb_Masiva_Bus.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_x_seg_usuario_Bus.cs" />
     <Compile Include="General\tb_GrupoEtnico_Bus.cs" />
     <Compile Include="General\tb_Religion_Bus.cs" />

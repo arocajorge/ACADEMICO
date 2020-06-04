@@ -70,6 +70,10 @@
         <AssociationConnector Association="ModelFacturacion.FK_fa_factura_fa_Vendedor" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_factura_x_ct_cbtecble_fa_factura" />
         <EntityTypeShape EntityType="ModelFacturacion.vwfa_notaCreDeb" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_notaCreDeb_Masiva" Width="1.5" PointX="9.625" PointY="30.75" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_notaCreDeb_MasivaDet" Width="1.5" PointX="11.875" PointY="20.375" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_MasivaDet_fa_notaCreDeb" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_Masiva_fa_TipoNota" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
