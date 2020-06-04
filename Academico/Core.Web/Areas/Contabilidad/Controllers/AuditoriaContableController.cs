@@ -18,6 +18,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         ct_ContabilizacionFacturas_Bus busContaFactura = new ct_ContabilizacionFacturas_Bus();
         ct_ContabilizacionNotas_Bus busContaNota = new ct_ContabilizacionNotas_Bus();
         ct_ContabilizacionCobros_Bus busContaCobro = new ct_ContabilizacionCobros_Bus();
+        ct_ContabilizacionConciliacionNC_Bus bus_ContaConciliacionNC = new ct_ContabilizacionConciliacionNC_Bus();
 
         fa_factura_Bus busFactura = new fa_factura_Bus();
         cxc_cobro_Bus busCobro = new cxc_cobro_Bus();
@@ -26,6 +27,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         ct_ContabilizacionFacturas_List ListaContaFactura = new ct_ContabilizacionFacturas_List();
         ct_ContabilizacionCobros_List ListaContaCobro = new ct_ContabilizacionCobros_List();
         ct_ContabilizacionNotas_List ListaContaNota = new ct_ContabilizacionNotas_List();
+        ct_ContabilizacionConciliacionNC_List ListaContaConciliacion = new ct_ContabilizacionConciliacionNC_List();
         string mensaje = string.Empty;
         #endregion
 
@@ -48,6 +50,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             ListaContaFactura.set_list(busContaFactura.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             ListaContaNota.set_list(busContaNota.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             ListaContaCobro.set_list(busContaCobro.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
+            ListaContaConciliacion.set_list(bus_ContaConciliacionNC.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             return View(model);
         }
 
@@ -58,6 +61,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             ListaContaFactura.set_list(busContaFactura.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             ListaContaNota.set_list(busContaNota.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             ListaContaCobro.set_list(busContaCobro.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
+            ListaContaConciliacion.set_list(bus_ContaConciliacionNC.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             return View(model);
         }
         #endregion
@@ -89,6 +93,16 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = ListaContaCobro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_ContaCobro", model);
+        }
+        #endregion
+
+        #region Conciliacion
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_ContaConciliacionNC()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaContaConciliacion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ContaConciliacionNC", model);
         }
         #endregion
 
@@ -173,6 +187,31 @@ namespace Core.Web.Areas.Contabilidad.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ContabilizarConciliacionNC(int IdEmpresa = 0, string Ids = "")
+        {
+            var resultado = "";
+            string[] array = Ids.Split(',');
+            int IdSucursal = 0;
+            decimal IdConciliacion = 0;
+
+            if (Ids != "")
+            {
+                foreach (var item in array)
+                {
+                    IdSucursal = Convert.ToInt32(item.Substring(0, 4));
+                    IdConciliacion = Convert.ToDecimal(item.Substring(4, 10));
+                    //if (!busCobro.Contabilizar(IdEmpresa, IdSucursal, IdCobro))
+                    //{
+                    //    mensaje = "No se ha contabilizado la conciliacionc  # " + IdCobro.ToString();
+                    //    ViewBag.mensaje = mensaje;
+                    //    resultado = mensaje;
+                    //}
+                }
+            }
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 
@@ -231,6 +270,26 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         }
 
         public void set_list(List<ct_ContabilizacionCobros_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession] = list;
+        }
+    }
+
+    public class ct_ContabilizacionConciliacionNC_List
+    {
+        string Variable = "ct_ContabilizacionConciliacionNC_Info";
+        public List<ct_ContabilizacionConciliacionNC_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession] == null)
+            {
+                List<ct_ContabilizacionConciliacionNC_Info> list = new List<ct_ContabilizacionConciliacionNC_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession] = list;
+            }
+            return (List<ct_ContabilizacionConciliacionNC_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession];
+        }
+
+        public void set_list(List<ct_ContabilizacionConciliacionNC_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession] = list;
         }

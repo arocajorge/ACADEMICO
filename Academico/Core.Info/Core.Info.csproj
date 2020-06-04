@@ -98,6 +98,7 @@
     <Compile Include="Banco\ba_ArchivoRecaudacionDet_Info.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacion_Info.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionCobros_Info.cs" />
+    <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionConciliacionNC_Info.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionFacturas_Info.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionNotas_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Info.cs" />

@@ -8691,6 +8691,7 @@
     <Content Include="Areas\Banco\Views\ArchivoRecaudacion\Anular.cshtml" />
     <Content Include="Areas\Reportes\Views\BancoReportes\BAN_004.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_015.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\AuditoriaContable\_GridViewPartial_ContaConciliacionNC.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

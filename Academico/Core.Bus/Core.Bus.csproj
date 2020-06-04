@@ -97,6 +97,7 @@
     <Compile Include="Banco\ba_ArchivoRecaudacionDet_Bus.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacion_Bus.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionCobros_Bus.cs" />
+    <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionConciliacionNC_Bus.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionFacturas_Bus.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionNotas_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Bus.cs" />
