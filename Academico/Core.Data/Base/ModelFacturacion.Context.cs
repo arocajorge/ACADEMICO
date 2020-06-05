@@ -67,6 +67,7 @@ namespace Core.Data.Base
         public virtual DbSet<vwfa_notaCreDeb> vwfa_notaCreDeb { get; set; }
         public virtual DbSet<fa_notaCreDeb_Masiva> fa_notaCreDeb_Masiva { get; set; }
         public virtual DbSet<fa_notaCreDeb_MasivaDet> fa_notaCreDeb_MasivaDet { get; set; }
+        public virtual DbSet<vwfa_notaCreDeb_MasivaDet> vwfa_notaCreDeb_MasivaDet { get; set; }
     
         public virtual ObjectResult<spfa_notaCreDeb_ParaContabilizarAcademico_Result> spfa_notaCreDeb_ParaContabilizarAcademico(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<decimal> idNota)
         {

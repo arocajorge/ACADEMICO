@@ -74,6 +74,7 @@
         <EntityTypeShape EntityType="ModelFacturacion.fa_notaCreDeb_MasivaDet" Width="1.5" PointX="11.875" PointY="20.375" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_MasivaDet_fa_notaCreDeb" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_Masiva_fa_TipoNota" />
+        <EntityTypeShape EntityType="ModelFacturacion.vwfa_notaCreDeb_MasivaDet" Width="1.5" PointX="21.375" PointY="19.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,258 @@
+﻿@model Core.Info.Facturacion.fa_notaCreDeb_Masiva_Info
+@{
+    ViewBag.Title = "Nueva nota de crédito/débito masiva";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script>
+    function OnFileUploadStart(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ActualizarVariablesSession", "Alumno", new { Area = "Academico"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function OnFileUploadComplete(s, e) {
+        GridViewPartial_NotaDebitoCreditoMasivaDet.PerformCallback();
+    }
+</script>
+
+@using (Html.BeginForm("Nuevo", "NotaDebitoCreditoMasiva", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdSucursal">Sucursal*</label>
+                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">Naturaleza</label>
+                    @Html.DropDownListFor(q => q.NaturalezaNota, new SelectList(ViewBag.lst_naturaleza, "Key", "Value"), new { @class = "form-control", @id = "NaturalezaNota" })
+                    @Html.ValidationMessageFor(q => q.NaturalezaNota, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdPuntoVta">Punto de venta*</label>
+                    @Html.DropDownListFor(q => q.IdPuntoVta, new SelectList(ViewBag.lst_punto_venta, "IdPuntoVta", "nom_PuntoVta"), new { @class = "form-control", @id = "IdPuntoVta" })
+                    @Html.ValidationMessageFor(q => q.IdPuntoVta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="pf_fecha">Fecha*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.no_fecha, settings =>
+                            {
+                                settings.Name = "no_fecha";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                            }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.no_fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="pf_fecha_vcto">Vencimiento*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.no_fecha_venc, settings =>
+                                    {
+                                        settings.Name = "no_fecha_venc";
+                                        settings.Properties.UseMaskBehavior = true;
+                                        settings.Properties.EditFormat = EditFormat.Date;
+                                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.no_fecha_venc, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdPuntoVta">Tipo*</label>
+                    @Html.DropDownListFor(q => q.CreDeb, new SelectList(ViewBag.lst_tipo, "Key", "Value"), new { @class = "form-control", @id = "CreDeb" })
+                    @Html.ValidationMessageFor(q => q.CreDeb, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">Tipo nota</label>
+                    @Html.DropDownListFor(q => q.IdTipoNota, new SelectList(ViewBag.lst_tipo_nota, "IdTipoNota", "No_Descripcion"), new { @class = "form-control", @id = "IdTipoNota" })
+                    @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
+                    @*@Html.DevExpress().ComboBoxFor(q => q.IdTipoNota, settings =>
+                                {
+                                    settings.Name = "IdTipoNota";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                    settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                    settings.Properties.Columns.Add("No_Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                    //Campo ID
+                                    settings.Properties.ValueField = "IdTipoNota";
+                                    settings.Properties.ValueType = typeof(int);
+                                    settings.Properties.TextField = "No_Descripcion";
+                                    settings.Properties.NullText = "== Seleccione ==";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                    //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){SetNaturalezaNota(); GetUltimoDocumento(); }";
+                                }).BindList(ViewBag.lst_tipo_nota).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="sc_observacion">Observación</label>
+                    @Html.TextBoxFor(q => q.sc_observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.sc_observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                @Html.DevExpress().UploadControl(settings =>
+           {
+               settings.Name = "UploadControlFile";
+               settings.CallbackRouteValues = new { Controller = "NotaDebitoCreditoMasiva", Action = "UploadControlUpload" };
+               settings.ShowUploadButton = true;
+               settings.ShowProgressPanel = true;
+               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+               settings.NullText = "Selecciona el archivo...";
+               settings.ClientSideEvents.FilesUploadStart = "OnFileUploadStart";
+               settings.ClientSideEvents.FileUploadComplete = "OnFileUploadComplete";
+           }).GetHtml()
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary" title="Guardar">Guardar</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_NotaDebitoCreditoMasivaDet")
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","NotaDebitoCreditoMasiva",new { Area = "Facturacion" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+<script type="text/javascript">
+    $(function () {
+        CargarPuntosDeVenta();
+        SetTipoNota();
+
+        $("#IdSucursal").change(function () {
+            CargarPuntosDeVenta();
+        });
+
+        $("#CreDeb").change(function () {
+            SetTipoNota();
+        });
+    });
+
+    function CargarPuntosDeVenta() {
+        $("#IdPuntoVta").empty();
+        var datos = {
+            IdSucursal: $("#IdSucursal").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarPuntosDeVenta", "NotaDeDebitoFacturacion", new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdPuntoVta").append("<option value=" + row.IdPuntoVta + ">" + row.nom_PuntoVta + "</option>");
+                    $("#IdPuntoVta").val($("#IdPuntoVta option:first").val());
+                });
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function SetTipoNota() {
+        $("#IdTipoNota").empty();
+        var datos = {
+            CreDeb: $("#CreDeb").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarTipoNota", "NotaDebitoCreditoMasiva", new { Area = "Facturacion"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdTipoNota").append("<option value=" + row.IdTipoNota + ">" + row.No_Descripcion + "</option>");
+                    $("#IdTipoNota").val($("#IdTipoNota option:first").val());
+                });
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+

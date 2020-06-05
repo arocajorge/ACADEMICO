@@ -31,6 +31,7 @@ namespace Core.Info.Facturacion
 
         #region Campos que no existen en la tabla
         public List<fa_notaCreDeb_MasivaDet_Info> lst_det { get; set; }
+        public string IdCtaCble_TipoNota { get; set; }
         #endregion
     }
 }

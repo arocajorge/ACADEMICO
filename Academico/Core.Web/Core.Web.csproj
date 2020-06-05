@@ -311,6 +311,7 @@
     <Compile Include="Areas\Facturacion\Controllers\NotaDeCreditoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDeDebitoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\PuntoVentaController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\tb_sis_Impuesto_Data.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TerminoPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
     <Compile Include="Areas\Facturacion\FacturacionAreaRegistration.cs" />
@@ -8695,7 +8696,10 @@
     <Content Include="Areas\Contabilidad\Views\AuditoriaContable\_GridViewPartial_ContaConciliacionNC.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDebitoCreditoMasiva\Index.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDebitoCreditoMasiva\_GridViewPartial_NotaDebitoCreditoMasiva.cshtml" />
-    <Content Include="Areas\Facturacion\Views\NotaDebitoCreditoMasiva\_GridViewPartial_NotaDebitoCrebitoMasivaDet.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NotaDebitoCreditoMasiva\_GridViewPartial_NotaDebitoCreditoMasivaDet.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NotaDebitoCreditoMasiva\Nuevo.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NotaDebitoCreditoMasiva\Anular.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NotaDebitoCreditoMasiva\Modificar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
