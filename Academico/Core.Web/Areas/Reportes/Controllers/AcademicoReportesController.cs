@@ -659,8 +659,8 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdJornada = 0;
             model.IdCurso = 0;
             model.IdParalelo = 0;
-            model.mostrar_observacion_completa = true;
-            model.mostrarAnulados = true;
+            model.mostrar_observacion_completa = false;
+            model.mostrarAnulados = false;
 
             ACA_008_Rpt report = new ACA_008_Rpt();
 

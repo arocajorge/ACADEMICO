@@ -23,6 +23,17 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_AlumnoRetiro_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, bool MostrarAnulados)
+        {
+            try
+            {
+                return odata.getList(IdEmpresa, IdAnio, IdSede, MostrarAnulados);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public aca_AlumnoRetiro_Info GetList(int IdEmpresa, decimal IdAlumno)
         {
             try

@@ -17,6 +17,8 @@ namespace Core.Data.Base
         public int IdEmpresa { get; set; }
         public decimal IdRetiro { get; set; }
         public decimal IdMatricula { get; set; }
+        public int IdAnio { get; set; }
+        public int IdSede { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
         public int IdCatalogoESTALU { get; set; }
@@ -29,7 +31,6 @@ namespace Core.Data.Base
         public string NomJornada { get; set; }
         public string NomCurso { get; set; }
         public string NomParalelo { get; set; }
-        public int IdAnio { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string Descripcion { get; set; }
         public bool Estado { get; set; }

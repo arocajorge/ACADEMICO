@@ -30,6 +30,7 @@ namespace Core.Info.Academico
         #region Campos que no existen en la tabla
         public string Codigo { get; set; }
         public int IdAnio { get; set; }
+        public int IdSede { get; set; }
         public decimal IdAlumno { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }

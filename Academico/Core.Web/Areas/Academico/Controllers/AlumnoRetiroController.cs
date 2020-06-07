@@ -41,6 +41,16 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
         }
+
+        public ActionResult ComboBoxPartial_Anio()
+        {
+            return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
+        }
+        public ActionResult ComboBoxPartial_Sede()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            return PartialView("_ComboBoxPartial_Sede", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio });
+        }
         #endregion
 
         #region Index
@@ -52,14 +62,17 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
 
             aca_AlumnoRetiro_Info model = new aca_AlumnoRetiro_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdAnio = info_anio.IdAnio,
+                IdSede = Convert.ToInt32(SessionFixed.IdSede),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
 
-            List<aca_AlumnoRetiro_Info> lista = bus_alumno_retiro.GetList(model.IdEmpresa);
+            List<aca_AlumnoRetiro_Info> lista = bus_alumno_retiro.GetList(model.IdEmpresa, model.IdAnio, model.IdSede, true);
             Lista_AlumnoRetiro.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoRetiro", "Index");
@@ -67,6 +80,22 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.Modificar = info.Modificar;
             ViewBag.Anular = info.Anular;
             #endregion
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Index(aca_AlumnoRetiro_Info model)
+        {
+            List<aca_AlumnoRetiro_Info> lista = bus_alumno_retiro.GetList(model.IdEmpresa, model.IdAnio, model.IdSede, true);
+            Lista_AlumnoRetiro.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AlumnoRetiro", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
             return View(model);
         }
 
