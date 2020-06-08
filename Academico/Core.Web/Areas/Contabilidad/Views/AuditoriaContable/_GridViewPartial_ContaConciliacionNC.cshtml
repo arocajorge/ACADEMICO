@@ -3,7 +3,7 @@
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_ContaConciliacionNC";
         settings.CallbackRouteValues = new { Controller = "AuditoriaContable", Action = "GridViewPartial_ContaConciliacionNC"};
-        settings.KeyFieldName = "IdString";
+        settings.KeyFieldName = "IdConciliacion";
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
 
         //Configuración para que la grilla no muestre texto completo

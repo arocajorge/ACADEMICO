@@ -14,6 +14,7 @@ namespace Core.Data.CuentasPorCobrar
     {
         cxc_cobro_Data odataCobro = new cxc_cobro_Data();
         ct_cbtecble_Data odataCt = new ct_cbtecble_Data();
+        cxc_ConciliacionNotaCreditoDet_Data odataDet = new cxc_ConciliacionNotaCreditoDet_Data();
 
         public List<cxc_ConciliacionNotaCredito_Info> GetList(int IdEmpresa, DateTime FechaIni, DateTime FechaFin)
         {
@@ -600,6 +601,36 @@ namespace Core.Data.CuentasPorCobrar
         {
             try
             {
+                EntitiesCuentasPorCobrar db = new EntitiesCuentasPorCobrar();
+                
+                var info = GetInfo(IdEmpresa, IdConciliacion);
+                if (info != null)
+                {
+                    info.IdUsuarioCreacion = IdUsuario;
+
+                    info.ListaDet = odataDet.GetList(IdEmpresa, IdConciliacion);
+                    var Diario = ArmarDiario(info);
+                    if (Diario != null)
+                    {
+                        Diario.IdTipoCbte = info.IdTipoCbte ?? Diario.IdTipoCbte;
+                        Diario.IdCbteCble = info.IdCbteCble ?? 0;
+                        if (Diario.IdCbteCble == 0)
+                        {
+                            if (odataCt.guardarDB(Diario))
+                            {
+                                var Entity = db.cxc_ConciliacionNotaCredito.Where(q => q.IdEmpresa == IdEmpresa && q.IdConciliacion == IdConciliacion).FirstOrDefault();
+                                Entity.IdTipoCbte = info.IdTipoCbte = Diario.IdTipoCbte;
+                                Entity.IdCbteCble = info.IdCbteCble = Diario.IdCbteCble;
+                                db.SaveChanges();
+                            }
+                        }
+                        else
+                        {
+                            odataCt.modificarDB(Diario);
+                        }
+
+                    }
+                }
                 return true;
             }
             catch (Exception)

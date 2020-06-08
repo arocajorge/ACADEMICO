@@ -23,6 +23,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         fa_factura_Bus busFactura = new fa_factura_Bus();
         cxc_cobro_Bus busCobro = new cxc_cobro_Bus();
         fa_notaCreDeb_Bus busNota = new fa_notaCreDeb_Bus();
+        cxc_ConciliacionNotaCredito_Bus busConciNC = new cxc_ConciliacionNotaCredito_Bus();
 
         ct_ContabilizacionFacturas_List ListaContaFactura = new ct_ContabilizacionFacturas_List();
         ct_ContabilizacionCobros_List ListaContaCobro = new ct_ContabilizacionCobros_List();
@@ -192,21 +193,19 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         {
             var resultado = "";
             string[] array = Ids.Split(',');
-            int IdSucursal = 0;
             decimal IdConciliacion = 0;
 
             if (Ids != "")
             {
                 foreach (var item in array)
                 {
-                    IdSucursal = Convert.ToInt32(item.Substring(0, 4));
-                    IdConciliacion = Convert.ToDecimal(item.Substring(4, 10));
-                    //if (!busCobro.Contabilizar(IdEmpresa, IdSucursal, IdCobro))
-                    //{
-                    //    mensaje = "No se ha contabilizado la conciliacionc  # " + IdCobro.ToString();
-                    //    ViewBag.mensaje = mensaje;
-                    //    resultado = mensaje;
-                    //}
+                    IdConciliacion = Convert.ToDecimal(item);
+                    if (!busConciNC.Contabilizar(IdEmpresa, IdConciliacion,SessionFixed.IdUsuario))
+                    {
+                        mensaje = "No se ha contabilizado la conciliacionc  # " + IdConciliacion.ToString();
+                        ViewBag.mensaje = mensaje;
+                        resultado = mensaje;
+                    }
                 }
             }
 
