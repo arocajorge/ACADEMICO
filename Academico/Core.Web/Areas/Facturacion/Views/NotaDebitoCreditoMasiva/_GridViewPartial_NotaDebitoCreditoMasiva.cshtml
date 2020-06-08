@@ -62,7 +62,7 @@
         //Evento para pintar de rojo las filas anuladas
         settings.HtmlRowPrepared = (s, e) =>
         {
-            if (Convert.ToString(e.GetValue("Estado")) == "I")
+            if (Convert.ToBoolean(e.GetValue("Estado")) == false)
             {
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
@@ -72,21 +72,8 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "Estado")) == "A")
-                {
-                    if (ViewBag.Modificar == true)
-                    {
-                        ViewContext.Writer.Write(
-                    Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdNCMasivo = DataBinder.Eval(tc.DataItem, "IdNCMasivo") }));
-                        ViewContext.Writer.Write("&nbsp;");
-                    }
-                    if (ViewBag.Anular == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdBodega = DataBinder.Eval(tc.DataItem, "IdBodega"), IdNCMasivo = DataBinder.Eval(tc.DataItem, "IdNCMasivo") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-                    }
-                }
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdNCMasivo = DataBinder.Eval(tc.DataItem, "IdNCMasivo") }));
             });
             c.SetHeaderTemplateContent(tc =>
             {

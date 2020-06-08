@@ -288,6 +288,7 @@ namespace Core.Data.Facturacion
                         IdCtaCble_TipoNota = info.IdCtaCble_TipoNota,
                         IdCobro_tipo = string.IsNullOrEmpty(info.IdCobro_tipo) ? (info.CreDeb == "C" ? "NTCR" : "NTDB"): info.IdCobro_tipo,
                         IdUsuario = info.IdUsuario,
+                        FechaTransaccion = DateTime.Now
                     };
                     #endregion
 
@@ -535,19 +536,19 @@ namespace Core.Data.Facturacion
                     //entity.IdPuntoVta = info.IdPuntoVta;
                     entity.CodNota = info.CodNota;
                     entity.CreDeb = info.CreDeb.Trim();
-                    entity.CodDocumentoTipo = info.CodDocumentoTipo;
-                    entity.Serie1 = info.Serie1;
-                    entity.Serie2 = info.Serie2;
-                    entity.NumNota_Impresa = info.NumNota_Impresa;
-                    entity.NumAutorizacion = info.NumAutorizacion;
-                    entity.Fecha_Autorizacion = info.Fecha_Autorizacion;
+                    //entity.CodDocumentoTipo = info.CodDocumentoTipo;
+                    //entity.Serie1 = info.Serie1;
+                    //entity.Serie2 = info.Serie2;
+                    //entity.NumNota_Impresa = info.NumNota_Impresa;
+                    //entity.NumAutorizacion = info.NumAutorizacion;
+                    //entity.Fecha_Autorizacion = info.Fecha_Autorizacion;
                     entity.IdCliente = info.IdCliente;
                     entity.IdAlumno = info.IdAlumno;
                     entity.no_fecha = info.no_fecha.Date;
                     entity.no_fecha_venc = info.no_fecha_venc.Date;
                     entity.IdTipoNota = info.IdTipoNota;
                     entity.sc_observacion = info.sc_observacion;
-                    entity.NaturalezaNota = info.NaturalezaNota;
+                    //entity.NaturalezaNota = info.NaturalezaNota;
                     entity.IdCtaCble_TipoNota = info.IdCtaCble_TipoNota;
                     entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                     entity.Fecha_UltMod = DateTime.Now;

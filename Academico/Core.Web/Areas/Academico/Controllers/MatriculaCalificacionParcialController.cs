@@ -1102,21 +1102,21 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 while (reader.Read())
                 {
-                    if (!reader.IsDBNull(0) && cont > 0)
+                    if (!reader.IsDBNull(1) && cont > 0)
                     {
-                        var IdMatricula = (Convert.ToInt32(reader.GetValue(0)));
-                        var pe_nombreCompleto = (Convert.ToString(reader.GetValue(1)).Trim());
-                        var Calificacion1 = Convert.ToDecimal(reader.GetValue(2));
-                        var Calificacion2 = (Convert.ToDecimal(reader.GetValue(3)));
-                        var Calificacion3 = (Convert.ToDecimal(reader.GetValue(4)));
-                        var Calificacion4 = (Convert.ToDecimal(reader.GetValue(5)));
-                        var Evaluacion = (Convert.ToDecimal(reader.GetValue(6)));
-                        var Remedial1 = (Convert.ToDecimal(reader.GetValue(7)));
-                        var Remedial2 = (Convert.ToDecimal(reader.GetValue(8)));
-                        var Conducta = (Convert.ToString(reader.GetValue(9)).Trim());
-                        var MotivoCalificacion = (Convert.ToString(reader.GetValue(10)).Trim());
-                        var AccionRemedial = (Convert.ToString(reader.GetValue(11)).Trim());
-                        var MotivoConducta = (Convert.ToString(reader.GetValue(12)).Trim());
+                        var IdMatricula = (Convert.ToInt32(reader.GetValue(1)));
+                        var pe_nombreCompleto = (Convert.ToString(reader.GetValue(2)).Trim());
+                        var Calificacion1 = Convert.ToDecimal(reader.GetValue(3));
+                        var Calificacion2 = (Convert.ToDecimal(reader.GetValue(4)));
+                        var Calificacion3 = (Convert.ToDecimal(reader.GetValue(5)));
+                        var Calificacion4 = (Convert.ToDecimal(reader.GetValue(6)));
+                        var Evaluacion = (Convert.ToDecimal(reader.GetValue(7)));
+                        var Remedial1 = (Convert.ToDecimal(reader.GetValue(8)));
+                        var Remedial2 = (Convert.ToDecimal(reader.GetValue(9)));
+                        var Conducta = (Convert.ToString(reader.GetValue(10)).Trim());
+                        var MotivoCalificacion = (Convert.ToString(reader.GetValue(11)).Trim());
+                        var AccionRemedial = (Convert.ToString(reader.GetValue(12)).Trim());
+                        var MotivoConducta = (Convert.ToString(reader.GetValue(13)).Trim());
 
                         var info_conducta = bus_conducta.GetInfo_x_Letra(IdEmpresa, info_anio.IdAnio, Conducta);
                         aca_MatriculaCalificacionParcial_Info info = new aca_MatriculaCalificacionParcial_Info

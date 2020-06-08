@@ -57,6 +57,51 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_AlumnoRetiro_Info> getList(int IdEmpresa, int IdAnio, int IdSede, bool MostrarAnulados)
+        {
+            try
+            {
+                List<aca_AlumnoRetiro_Info> Lista = new List<aca_AlumnoRetiro_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_AlumnoRetiro.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio==IdAnio && q.IdSede ==IdSede && q.Estado ==(MostrarAnulados==true ? q.Estado : true)).OrderBy(q => q.Fecha).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AlumnoRetiro_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAlumno = q.IdAlumno,
+                            IdRetiro = q.IdRetiro,
+                            IdMatricula = q.IdMatricula,
+                            IdAnio = q.IdAnio,
+                            Fecha = q.Fecha,
+                            Observacion = q.Observacion,
+                            IdCatalogoESTALU = q.IdCatalogoESTALU,
+                            pe_cedulaRuc = q.pe_cedulaRuc,
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            Codigo = q.Codigo,
+                            Descripcion = q.Descripcion,
+                            NomSede = q.NomSede,
+                            NomNivel = q.NomNivel,
+                            NomJornada = q.NomJornada,
+                            NomCurso = q.NomCurso,
+                            NomParalelo = q.NomParalelo,
+                            Estado = q.Estado,
+                            IdUsuarioAnulacion = q.IdUsuarioAnulacion
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_AlumnoRetiro_Info getList(int IdEmpresa, decimal IdAlumno)
         {
             try
