@@ -30,5 +30,6 @@ namespace Core.Data.Base
         public decimal IdCliente { get; set; }
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }
+        public string pe_cedulaRuc { get; set; }
     }
 }

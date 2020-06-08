@@ -87,7 +87,7 @@ namespace Core.Bus.Facturacion
                         info_ncd.IdPuntoVta = info.IdPuntoVta;
                         info_ncd.IdCtaCble_TipoNota = info.IdCtaCble_TipoNota;
                         info_ncd.aprobada_enviar_sri = false;
-                        info_ncd.IdCobro_tipo = (info.CreDeb == "D" ? "NTDB" : "NTCR"); ;
+                        info_ncd.IdCobro_tipo = (info.CreDeb == "D" ? "NTDB" : "NTCR");
 
                         #region Resumen
                         var info_anio = bus_anio.getInfo_AnioEnCurso(info_ncd.IdEmpresa, 0);
@@ -99,12 +99,12 @@ namespace Core.Bus.Facturacion
                         var Descuento = 0;
                         ValorIVA = Math.Round( Convert.ToDecimal(item.Subtotal * (info_ImpuestoIVA.porcentaje / 100)), 2, MidpointRounding.AwayFromZero);
                         ValorTotal = Math.Round((Convert.ToDecimal(item.Subtotal) + ValorIVA), 2, MidpointRounding.AwayFromZero);
-                        var SubtotalIVASinDscto = Math.Round(Convert.ToDecimal(item.Subtotal), 2, MidpointRounding.AwayFromZero);
-                        var SubtotalSinIVASinDscto = Math.Round(Convert.ToDecimal(item.Subtotal), 2, MidpointRounding.AwayFromZero);
+                        var SubtotalIVASinDscto = Math.Round((info_ImpuestoIVA.porcentaje > 0 ? Convert.ToDecimal(item.Subtotal):0), 2, MidpointRounding.AwayFromZero);
+                        var SubtotalSinIVASinDscto = Math.Round((info_ImpuestoIVA.porcentaje == 0 ? Convert.ToDecimal(item.Subtotal):0), 2, MidpointRounding.AwayFromZero);
                         var SubtotalIVAConDscto = Math.Round((info_ImpuestoIVA.porcentaje > 0 ? Convert.ToDecimal(item.Subtotal) : 0), 2, MidpointRounding.AwayFromZero);
                         var SubtotalSinIVAConDscto = Math.Round((info_ImpuestoIVA.porcentaje == 0 ? Convert.ToDecimal(item.Subtotal) : 0), 2, MidpointRounding.AwayFromZero);
-                        var SubtotalSinDscto = Math.Round(Convert.ToDecimal(item.Subtotal), 2, MidpointRounding.AwayFromZero);
-                        var SubtotalConDscto = Math.Round(Convert.ToDecimal(item.Subtotal), 2, MidpointRounding.AwayFromZero);
+                        var SubtotalSinDscto = Math.Round((SubtotalIVASinDscto+ SubtotalSinIVASinDscto), 2, MidpointRounding.AwayFromZero);
+                        var SubtotalConDscto = Math.Round((SubtotalIVAConDscto + SubtotalSinIVAConDscto), 2, MidpointRounding.AwayFromZero);
                         var Total = Math.Round(Convert.ToDecimal(ValorTotal), 2, MidpointRounding.AwayFromZero);
                         decimal PorIVA = Convert.ToDecimal(info_ImpuestoIVA.porcentaje);
 
@@ -141,7 +141,7 @@ namespace Core.Bus.Facturacion
                                 Secuencia = 1,
                                 IdProducto = Convert.ToDecimal(info_tipo_nota.IdProducto),
                                 sc_cantidad = 1,
-                                sc_cantidad_factura = 1,
+                                sc_cantidad_factura = 0,
                                 sc_Precio = Convert.ToDouble(info_ncd.info_resumen.SubtotalConDscto),
                                 sc_descUni = 0,
                                 sc_PordescUni = 0,

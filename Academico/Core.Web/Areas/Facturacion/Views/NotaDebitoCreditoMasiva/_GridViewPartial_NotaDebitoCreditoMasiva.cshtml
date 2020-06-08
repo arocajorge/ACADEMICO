@@ -72,21 +72,8 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
-                {
-                    if (ViewBag.Modificar == true)
-                    {
-                        ViewContext.Writer.Write(
-                    Html.ActionLink("Consultar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdNCMasivo = DataBinder.Eval(tc.DataItem, "IdNCMasivo") }));
-                        ViewContext.Writer.Write("&nbsp;");
-                    }
-                    if (ViewBag.Anular == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdNCMasivo = DataBinder.Eval(tc.DataItem, "IdNCMasivo") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                    );
-                    }
-                }
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdNCMasivo = DataBinder.Eval(tc.DataItem, "IdNCMasivo") }));
             });
             c.SetHeaderTemplateContent(tc =>
             {

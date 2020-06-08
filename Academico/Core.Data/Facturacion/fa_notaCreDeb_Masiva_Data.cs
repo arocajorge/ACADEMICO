@@ -154,7 +154,7 @@ namespace Core.Data.Facturacion
 
                         Context.fa_notaCreDeb_MasivaDet.Add(new fa_notaCreDeb_MasivaDet
                         {
-                            IdEmpresa = info.IdEmpresa,
+                            IdEmpresa = item.IdEmpresa = info.IdEmpresa,
                             IdNCMasivo = item.IdNCMasivo = info.IdNCMasivo,
                             Secuencia = item.Secuencia = Secuencia++,
                             IdAlumno = item.IdAlumno,

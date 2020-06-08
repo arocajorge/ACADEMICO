@@ -36,8 +36,11 @@ namespace Core.Data.Facturacion
                                  Total = q.Total,
                                  IdCod_Impuesto_Iva = q.IdCod_Impuesto_Iva,
                                  ObservacionDet = q.ObservacionDet,
+                                 pe_cedulaRuc = q.pe_cedulaRuc,
                                  pe_nombreCompleto = q.pe_nombreCompleto,
-                                 Codigo = q.Codigo
+                                 Codigo = q.Codigo,
+                                 IdAlumno = q.IdAlumno,
+                                 IdCliente= q.IdCliente
                              }).ToList();
                 }
                 return Lista;

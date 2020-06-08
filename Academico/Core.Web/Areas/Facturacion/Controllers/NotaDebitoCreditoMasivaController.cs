@@ -5,8 +5,10 @@ using Core.Bus.General;
 using Core.Bus.Inventario;
 using Core.Info.Academico;
 using Core.Info.Facturacion;
+using Core.Info.General;
 using Core.Info.Helps;
 using Core.Web.Helps;
+using DevExpress.Web;
 using DevExpress.Web.Mvc;
 using ExcelDataReader;
 using System;
@@ -39,7 +41,25 @@ namespace Core.Web.Areas.Facturacion.Controllers
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         fa_notaCreDeb_Masiva_Bus bus_NotaMasiva = new fa_notaCreDeb_Masiva_Bus();
         fa_notaCreDeb_MasivaDet_Bus bus_NotaMasivaDet = new fa_notaCreDeb_MasivaDet_Bus();
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+        aca_Familia_Bus bus_familia = new aca_Familia_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+        #endregion
+
+        #region Combo bajo demanda
+        public ActionResult Cmb_Alumno()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbAlumno", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda_alumno(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda_alumno(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
+        }
         #endregion
 
         #region Index
@@ -159,9 +179,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return false;
             }
 
-            if (info.lst_det.Count()==0)
+            if (info.lst_det.Count() == 0)
             {
-                msg = "Debe de ingresar al menos 1 item en el detalle";
+                msg = "Debe de ingresar al menos 1 item válido en el detalle";
                 return false;
             }
             return true;
@@ -182,6 +202,20 @@ namespace Core.Web.Areas.Facturacion.Controllers
             var resultado = bus_tipo_nota.get_list(IdEmpresa, CreDeb, false);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult AutorizarSRI(int IdEmpresa, int IdNCMasivo)
+        {
+            var lista = bus_NotaMasivaDet.GetList(IdEmpresa, IdNCMasivo);
+            string retorno = string.Empty;
+            foreach (var item in lista)
+            {
+                if (!bus_nota.modificarEstadoAutorizacion(IdEmpresa, Convert.ToInt32(item.IdSucursal), Convert.ToInt32(item.IdBodega), Convert.ToInt32(item.IdNota)))
+                {
+                    retorno = "No se autorizaron todos los registros";
+                }
+            }
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
         {
             string retorno = string.Empty;
@@ -193,10 +227,75 @@ namespace Core.Web.Areas.Facturacion.Controllers
         #endregion
 
         #region CargaDetalle
+        [ValidateInput(false)]
         public ActionResult GridViewPartial_NotaDebitoCreditoMasivaDet()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = ListaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_NotaDebitoCreditoMasivaDet", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingAddNew([ModelBinder(typeof(DevExpressEditorsBinder))] fa_notaCreDeb_MasivaDet_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            info_det.IdEmpresa = IdEmpresa;
+            #region Cliente
+            bool TieneCliente = true;
+            var infoRepEconomico = bus_familia.GetInfo_Representante(IdEmpresa, Convert.ToDecimal(info_det.IdAlumno), cl_enumeradores.eTipoRepresentante.ECON.ToString());
+
+            var info_cliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, (infoRepEconomico == null ? "" : infoRepEconomico.pe_cedulaRuc));
+            if (info_cliente == null || info_cliente.IdCliente == 0)
+            {
+                TieneCliente = false;
+            }
+            info_det.TieneCliente = TieneCliente;
+            #endregion
+            if (info_det.TieneCliente == true)
+            {
+                info_det.IdCliente = info_cliente.IdCliente;
+                if (ModelState.IsValid)
+                    ListaDet.AddRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
+
+            var model = ListaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+   
+            return PartialView("_GridViewPartial_NotaDebitoCreditoMasivaDet", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] fa_notaCreDeb_MasivaDet_Info info_det)
+        {
+            int IdEmpresa = Convert.ToInt32(Session["IdEmpresa"]);
+            #region Cliente
+            bool TieneCliente = true;
+            var infoRepEconomico = bus_familia.GetInfo_Representante(IdEmpresa, Convert.ToDecimal(info_det.IdAlumno), cl_enumeradores.eTipoRepresentante.ECON.ToString());
+
+            var info_cliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, (infoRepEconomico == null ? "" : infoRepEconomico.pe_cedulaRuc));
+            if (info_cliente == null || info_cliente.IdCliente == 0)
+            {
+                TieneCliente = false;
+            }
+            info_det.TieneCliente = TieneCliente;
+            #endregion
+
+            if (info_det.TieneCliente == true)
+            {
+                info_det.IdCliente = info_cliente.IdCliente;
+                if (ModelState.IsValid)
+                    ListaDet.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
+
+            var model = ListaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_NotaDebitoCreditoMasivaDet", model);
+        }
+
+        public ActionResult EditingDelete(int Secuencia)
+        {
+            ListaDet.DeleteRow(Secuencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            var model = ListaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+   
             return PartialView("_GridViewPartial_NotaDebitoCreditoMasivaDet", model);
         }
         public ActionResult UploadControlUpload()
@@ -241,7 +340,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
         public ActionResult Nuevo(fa_notaCreDeb_Masiva_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario.ToString();
-            model.lst_det = ListaDet.get_list(model.IdTransaccionSession);
+            var ListaDetalleNC = ListaDet.get_list(model.IdTransaccionSession);
+
+            model.lst_det = ListaDetalleNC.Where(q=>q.IdAlumno>0 && q.IdCliente>0).ToList();
             model.IdBodega = (int)bus_punto_venta.get_info(model.IdEmpresa, model.IdSucursal, Convert.ToInt32(model.IdPuntoVta)).IdBodega;
 
             if (!validar(model, ref mensaje))
@@ -260,10 +361,10 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return View(model);
             };
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdNCMasivo = model.IdNCMasivo, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdNCMasivo = model.IdNCMasivo, Exito = true });
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, decimal IdNCMasivo = 0, bool Exito = false)
+        public ActionResult Consultar(int IdEmpresa = 0, decimal IdNCMasivo = 0, bool Exito = false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -274,12 +375,6 @@ namespace Core.Web.Areas.Facturacion.Controllers
             fa_notaCreDeb_Masiva_Info model = bus_NotaMasiva.Get_info(IdEmpresa, IdNCMasivo);
             if (model == null)
                 return RedirectToAction("Index");
-
-            #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "NotaDebitoCreditoMasiva", "Index");
-            if (!info.Modificar)
-                return RedirectToAction("Index");
-            #endregion
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.lst_det = bus_NotaMasivaDet.GetList(IdEmpresa, IdNCMasivo);
@@ -295,6 +390,17 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 ViewBag.mensaje = mensaje;
                 ViewBag.MostrarBoton = false;
             }
+            #endregion
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "NotaDebitoCreditoMasiva", "Index");
+            if (model.Estado==false)
+            {
+                info.Anular = false;
+                info.Modificar = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Anular = info.Anular;
             #endregion
 
             return View(model);
@@ -384,6 +490,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
     public class fa_notaCreDeb_MasivaDet_List
     {
         string Variable = "fa_notaCreDeb_MasivaDet_Info";
+        aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
+
         public List<fa_notaCreDeb_MasivaDet_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
@@ -398,6 +507,39 @@ namespace Core.Web.Areas.Facturacion.Controllers
         public void set_list(List<fa_notaCreDeb_MasivaDet_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+
+        public void AddRow(fa_notaCreDeb_MasivaDet_Info info_det, decimal IdTransaccion)
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            List<fa_notaCreDeb_MasivaDet_Info> list = get_list(IdTransaccion);
+            info_det.Secuencia = list.Count == 0 ? 1 : list.Max(q => q.Secuencia) + 1;
+            var info_alumno = bus_alumno.GetInfo(IdEmpresa ,info_det.IdAlumno);
+            info_det.pe_cedulaRuc = info_alumno.pe_cedulaRuc;
+            info_det.pe_nombreCompleto = info_alumno.pe_nombreCompleto;
+
+            list.Add(info_det);
+        }
+
+        public void UpdateRow(fa_notaCreDeb_MasivaDet_Info info_det, decimal IdTransaccion)
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            List<fa_notaCreDeb_MasivaDet_Info> list = get_list(IdTransaccion);
+            fa_notaCreDeb_MasivaDet_Info edited_info = list.Where(m => m.Secuencia == info_det.Secuencia).FirstOrDefault();
+            var info_alumno = bus_alumno.GetInfo(IdEmpresa, info_det.IdAlumno);
+
+            edited_info.IdAlumno = info_det.IdAlumno;
+            edited_info.pe_cedulaRuc = info_alumno.pe_cedulaRuc;
+            edited_info.pe_nombreCompleto = info_alumno.pe_nombreCompleto;
+            edited_info.Subtotal = info_det.Subtotal;
+            edited_info.ObservacionDet = info_det.ObservacionDet;
+
+        }
+
+        public void DeleteRow(int Secuencia, decimal IdTransaccion)
+        {
+            List<fa_notaCreDeb_MasivaDet_Info> list = get_list(IdTransaccion);
+            list.Remove(list.Where(m => m.Secuencia == Secuencia).FirstOrDefault());
         }
     }
 
@@ -430,8 +572,10 @@ namespace Core.Web.Areas.Facturacion.Controllers
             {
                 IExcelDataReader reader = null;
                 reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                var Secuencia = 0;
-
+                var lista = List_Detalle.get_list(IdTransaccionSession);
+                var Secuencia = lista.Count == 0 ? 1 : lista.Max(q => q.Secuencia) + 1;
+                Lista_DetalleNotas.AddRange(List_Detalle.get_list(IdTransaccionSession));
+               
                 #region Detalle   
                 while (reader.Read())
                 {
@@ -450,18 +594,18 @@ namespace Core.Web.Areas.Facturacion.Controllers
                         }
                         #endregion
 
-                        var SubtotalConDscto = Convert.ToDouble(reader.GetValue(1));
+                        var SubtotalConDscto = Convert.ToDouble(reader.GetValue(2));
 
                         var info_det = new fa_notaCreDeb_MasivaDet_Info{
                             IdEmpresa = IdEmpresa,
                             Secuencia = Secuencia++,
-                            IdAlumno = info_alumno.IdAlumno,
-                            IdCliente = info_cliente.IdCliente,
+                            IdAlumno = (info_alumno==null ? 0 : info_alumno.IdAlumno),
+                            IdCliente = (info_cliente==null ?0 : info_cliente.IdCliente),
                             Subtotal = SubtotalConDscto,
-                            ObservacionDet = Convert.ToString(reader.GetValue(2)),
+                            ObservacionDet = Convert.ToString(reader.GetValue(3)),
                             TieneCliente = TieneCliente,
                             pe_nombreCompleto = info_alumno.pe_nombreCompleto,
-                            Codigo = info_alumno.Codigo
+                            pe_cedulaRuc = info_alumno.pe_cedulaRuc
                         };
 
                         Lista_DetalleNotas.Add(info_det);
