@@ -721,7 +721,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 ValorProntoPago = Math.Round((item.vt_total - item.ValorProntoPago ?? 0),2,MidpointRounding.AwayFromZero);
                 if (saldo > 0)
                 {
-                    item.dc_ValorProntoPago = saldo >= (Convert.ToDouble(item.Saldo) - ValorProntoPago) ? ValorProntoPago : 0;
+                    item.dc_ValorProntoPago = saldo >= Math.Round((Convert.ToDouble(item.Saldo) - ValorProntoPago),2,MidpointRounding.AwayFromZero) ? ValorProntoPago : 0;
                     item.dc_ValorPago = saldo >= Math.Round((Convert.ToDouble(item.Saldo) - ValorProntoPago),2,MidpointRounding.AwayFromZero) ? Math.Round(Convert.ToDouble(item.Saldo) - ValorProntoPago,2,MidpointRounding.AwayFromZero) : saldo;
                     item.Saldo_final = Convert.ToDouble(item.Saldo - ValorProntoPago) - item.dc_ValorPago;
                     item.ValorProntoPago = ValorProntoPago;
