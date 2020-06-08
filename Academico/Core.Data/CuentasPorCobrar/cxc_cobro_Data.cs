@@ -174,7 +174,8 @@ namespace Core.Data.CuentasPorCobrar
                         cr_saldo = Entity.cr_Saldo ?? 0,
                         IdTipoNotaCredito = Entity.IdTipoNotaCredito,
                         cr_ObservacionPantalla = Entity.cr_ObservacionPantalla,
-                        IdTarjeta= Entity.IdTarjeta
+                        IdTarjeta= Entity.IdTarjeta,
+                        EstadoBool = (Entity.cr_estado =="A" ? true : false)
                     };
                 }
 

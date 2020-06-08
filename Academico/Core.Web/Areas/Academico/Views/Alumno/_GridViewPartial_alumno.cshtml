@@ -60,26 +60,29 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
-                {
-                    if (ViewBag.Modificar == true)
-                    {
-                        ViewContext.Writer.Write(
-                            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") }) + "&nbsp;"
-                        );
-                    }
-                    if (ViewBag.Anular == true)
-                    {
-                        ViewContext.Writer.Write(
-                            Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                        );
-                    }
-                }
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") }) + "&nbsp;"
+                );
+                //if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                //{
+                //    if (ViewBag.Modificar == true)
+                //    {
+                //        ViewContext.Writer.Write(
+                //            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") }) + "&nbsp;"
+                //        );
+                //    }
+                //    if (ViewBag.Anular == true)
+                //    {
+                //        ViewContext.Writer.Write(
+                //            Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") },
+                //            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                //        );
+                //    }
+                //}
             });
             c.SetHeaderTemplateContent(tc =>
             {
-                if (ViewBag.Nuevo==true)
+                if (ViewBag.Nuevo == true)
                 {
                     ViewContext.Writer.Write(
                         Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()

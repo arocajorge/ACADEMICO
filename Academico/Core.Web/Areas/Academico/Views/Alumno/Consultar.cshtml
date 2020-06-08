@@ -1,7 +1,7 @@
 ﻿@using System.Web.UI.WebControls;
 @model Core.Info.Academico.aca_Alumno_Info
 @{
-    ViewBag.Title = "Modificar estudiante";
+    ViewBag.Title = "Consultar estudiante";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -10,7 +10,7 @@
 }
 
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Modificar", "Alumno", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Consultar", "Alumno", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdAlumno, new { @id = "IdAlumno" })
@@ -105,6 +105,43 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-offset-9 col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Nuevo == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo", "Alumno", new { Area = "Academico", IdEmpresa = Model.IdEmpresa }, null)">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "Alumno", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAlumno = Model.IdAlumno }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="Autorizar"></label>
+                @if (@ViewBag.Anular == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "Alumno", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAlumno = Model.IdAlumno }, null)">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="Codigo">Código</label>
@@ -159,9 +196,6 @@
             <div class="col-md-1">
                 <div class="form-group">
                     <label for="IdSucursal">&nbsp;</label>
-                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","Alumno",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
-                        <i class="fa fa-plus"></i>
-                    </a>
                 </div>
             </div>
             <div class="col-md-1">
@@ -1505,7 +1539,6 @@
         </div>
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Alumno", new { Area = "Academico" }, null)">Cancelar</a>
     </div>
     @section Scripts {

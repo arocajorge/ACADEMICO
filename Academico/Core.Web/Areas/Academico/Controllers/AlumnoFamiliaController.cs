@@ -305,9 +305,45 @@ namespace Core.Web.Areas.Academico.Controllers
             }
 
             //return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno });
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno, Secuencia = model.Secuencia, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno, Secuencia = model.Secuencia, Exito = true });
         }
 
+        public ActionResult Consultar(int IdEmpresa = 0, int IdAlumno = 0, int Secuencia = 0, bool Exito = false)
+        {
+            aca_Familia_Info model = bus_familia.GetInfo(IdEmpresa, IdAlumno, Secuencia);
+            if (model == null)
+                return RedirectToAction("Index", new { IdEmpresa = IdEmpresa, IdAlumno = IdAlumno });
+
+            model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+            var info_cliente = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, model.pe_cedulaRuc);
+            var cliente = bus_cliente.get_info(model.IdEmpresa, info_cliente.IdCliente);
+            model.IdTipoCredito = ((cliente == null || cliente.IdCliente == 0) ? "CON" : cliente.IdTipoCredito);
+            model.Idtipo_cliente = ((cliente == null || cliente.Idtipo_cliente == 0) ? 1 : cliente.Idtipo_cliente);
+            var IdCliente = ((cliente == null || cliente.IdCliente == 0) ? 0 : cliente.IdCliente);
+            var info_contacto = bus_cliente_cont.get_info(model.IdEmpresa, IdCliente, 1);
+            model.IdCiudad_fact = (info_contacto == null ? "09" : info_contacto.IdCiudad);
+            model.IdParroquia_fact = (info_contacto == null ? "09" : info_contacto.IdParroquia);
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Alumno", "Index");
+            if (model.Estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            ViewBag.IdEmpresa = IdEmpresa;
+            ViewBag.IdAlumno = IdAlumno;
+            cargar_combos();
+            return View(model);
+        }
         public ActionResult Modificar(int IdEmpresa = 0, int IdAlumno = 0, int Secuencia = 0, bool Exito = false)
         {
             aca_Familia_Info model = bus_familia.GetInfo(IdEmpresa, IdAlumno, Secuencia);
@@ -392,7 +428,7 @@ namespace Core.Web.Areas.Academico.Controllers
             }
 
             //return RedirectToAction("Index", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno });
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno, Secuencia = model.Secuencia, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdAlumno = model.IdAlumno, Secuencia = model.Secuencia, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdAlumno = 0, int Secuencia = 0)

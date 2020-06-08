@@ -38,6 +38,7 @@ namespace Core.Info.CuentasPorCobrar
         public Nullable<int> IdBanco { get; set; }
         [Required(ErrorMessage ="El campo caja es obligatorio")]
         public int IdCaja { get; set; }
+        [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotiAnula { get; set; }
         public Nullable<int> IdTipoNotaCredito { get; set; }
         public Nullable<System.DateTime> Fecha_Transac { get; set; }

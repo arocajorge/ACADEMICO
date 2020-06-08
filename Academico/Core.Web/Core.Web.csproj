@@ -8703,6 +8703,11 @@
     <Content Include="Areas\Academico\Views\AlumnoRetiro\_ComboBoxPartial_Anio_Consulta.cshtml" />
     <Content Include="Areas\Academico\Views\AlumnoRetiro\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDebitoCreditoMasiva\_CmbAlumno.cshtml" />
+    <Content Include="Areas\Academico\Views\Alumno\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\AlumnoFamilia\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionHistorico\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\Matricula\Consultar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\Consultar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

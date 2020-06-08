@@ -450,7 +450,85 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal, IdCobro = model.IdCobro, Exito = true });
         }
+        public ActionResult Consultar(int IdEmpresa = 0, int IdSucursal = 0, decimal IdCobro = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            ViewBag.MostrarBoton = true;
+            cxc_cobro_Info model = bus_cobro.get_info(IdEmpresa, IdSucursal, IdCobro);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdCobro);
 
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "CuentasPorCobrar", "Cobranza", "Index");
+            if (model.cr_estado=="A" && model.IdCobro_tipo!= "NTCR")
+            {
+
+            }
+            else
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (ViewBag.MostrarBoton == true && model.lst_det.Where(q => q.dc_ValorProntoPago > 0).Count() > 0)
+            {
+                ViewBag.mensaje = "El cobro no se puede modificar ya que aplica pronto pago, debe anular y realizar uno nuevo";
+                ViewBag.MostrarBoton = false;
+            }
+
+            list_det.set_list(model.lst_det, model.IdTransaccionSession);
+            model.IdEntidad = model.IdCliente;
+            cargar_combos(IdEmpresa, model.IdSucursal);
+
+            var Anio = bus_anioLectivo.GetInfo_AnioEnCurso(IdEmpresa, 0);
+            if (Anio != null)
+            {
+                var Matricula = bus_matricula.GetInfo_ExisteMatricula(model.IdEmpresa, Anio.IdAnio, model.IdAlumno ?? 0);
+                if (Matricula != null)
+                {
+                    var info_plantilla = bus_plantilla.GetInfo(IdEmpresa, Matricula.IdAnio, Matricula.IdPlantilla);
+                    var info_tipo_plantilla = bus_tipo_plantilla.getInfo(IdEmpresa, Convert.ToInt32(info_plantilla == null ? 0 : info_plantilla.IdTipoPlantilla));
+
+                    model.DatosAlumno = Matricula.NomNivel + " " + Matricula.NomJornada + " " + Matricula.NomCurso + " " + Matricula.NomParalelo + " / " + (info_tipo_plantilla == null ? "" : info_tipo_plantilla.NomPlantillaTipo) + " - " + (info_plantilla == null ? "" : info_plantilla.NomPlantilla);
+                }
+                else
+                    model.DatosAlumno = "NO MATRICULADO";
+            }
+
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            #region Validacion Periodo
+            if (ViewBag.MostrarBoton == true && !bus_periodo.ValidarFechaTransaccion(IdEmpresa, model.cr_fecha, cl_enumeradores.eModulo.CXC, model.IdSucursal, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                ViewBag.MostrarBoton = false;
+            }
+            #endregion
+
+            #region Validacion Movimiento de caja
+            if (ViewBag.MostrarBoton == true && !bus_cobro.ValidarMostrarBotonModificar(IdEmpresa, model.IdSucursal, model.IdCobro))
+            {
+                ViewBag.mensaje = "El cobro no se puede modificar porque el movimiento de caja asociado ya fue depositado o fue registrado al cerrar una caja chica";
+                ViewBag.MostrarBoton = false;
+            }
+            #endregion
+
+            return View(model);
+        }
         public ActionResult Modificar(int IdEmpresa = 0, int IdSucursal = 0, decimal IdCobro = 0, bool Exito = false)
         {
             #region Validar Session
