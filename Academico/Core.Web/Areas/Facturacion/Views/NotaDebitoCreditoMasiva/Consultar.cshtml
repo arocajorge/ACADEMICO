@@ -62,9 +62,12 @@
             </div>
             <div class="col-md-1">
                 <label for="Autorizar"></label>
+                @if (@ViewBag.MostrarSRI == true)
+                {
                 <button type="button" class="btn btn-primary form-control" id="btn_imprimir" onclick="AutorizarSRI();" title="Autorizar SRI">
                     <i class="fa fa-send"></i>  SRI
                 </button>
+                }
             </div>
         </div>
     </div>

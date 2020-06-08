@@ -393,14 +393,17 @@ namespace Core.Web.Areas.Facturacion.Controllers
             #endregion
 
             #region Permisos
+            var MostrarSRI = true;
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "NotaDebitoCreditoMasiva", "Index");
             if (model.Estado==false)
             {
                 info.Anular = false;
                 info.Modificar = false;
+                MostrarSRI = false;
             }
             ViewBag.Nuevo = info.Nuevo;
             ViewBag.Anular = info.Anular;
+            ViewBag.MostrarSRI = MostrarSRI;
             #endregion
 
             return View(model);
