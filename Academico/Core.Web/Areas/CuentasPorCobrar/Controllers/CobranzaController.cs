@@ -796,14 +796,14 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             var lstFinal = new List<cxc_cobro_det_Info>();
             foreach (var item in lst)
             {
-                ValorProntoPago = (item.vt_total - item.ValorProntoPago ?? 0);
+                ValorProntoPago = Math.Round((item.vt_total - item.ValorProntoPago ?? 0),2,MidpointRounding.AwayFromZero);
                 if (saldo > 0)
                 {
                     item.dc_ValorProntoPago = saldo >= (Convert.ToDouble(item.Saldo) - ValorProntoPago) ? ValorProntoPago : 0;
-                    item.dc_ValorPago = saldo >= (Convert.ToDouble(item.Saldo) - ValorProntoPago) ? Convert.ToDouble(item.Saldo) - ValorProntoPago : saldo;
+                    item.dc_ValorPago = saldo >= Math.Round((Convert.ToDouble(item.Saldo) - ValorProntoPago),2,MidpointRounding.AwayFromZero) ? Math.Round(Convert.ToDouble(item.Saldo) - ValorProntoPago,2,MidpointRounding.AwayFromZero) : saldo;
                     item.Saldo_final = Convert.ToDouble(item.Saldo - ValorProntoPago) - item.dc_ValorPago;
                     item.ValorProntoPago = ValorProntoPago;
-                    saldo = saldo - item.dc_ValorPago;
+                    saldo =  Math.Round(saldo - item.dc_ValorPago);
                     lstFinal.Add(item);
                 }
                 else

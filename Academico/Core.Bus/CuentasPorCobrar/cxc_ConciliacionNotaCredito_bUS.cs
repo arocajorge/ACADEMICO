@@ -90,5 +90,18 @@ namespace Core.Bus.CuentasPorCobrar
             }
         }
 
+        public bool Contabilizar(int IdEmpresa, decimal IdConciliacion, string IdUsuario)
+        {
+            try
+            {
+                return odata.Contabilizar(IdEmpresa, IdConciliacion, IdUsuario);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
