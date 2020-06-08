@@ -54,12 +54,17 @@
             c.SetDataItemTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") }) );
+                Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") }));
             });
+            //c.SetDataItemTemplateContent(tc =>
+            //{
+            //    ViewContext.Writer.Write(
+            //    Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno") }) );
+            //});
             c.SetHeaderTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa  = Core.Web.Helps.SessionFixed.IdEmpresa, IdAlumno = ViewBag.IdAlumno}).ToHtmlString()
+                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa, IdAlumno = ViewBag.IdAlumno }).ToHtmlString()
                 );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

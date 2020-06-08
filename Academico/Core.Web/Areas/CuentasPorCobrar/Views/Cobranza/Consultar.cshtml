@@ -1,6 +1,6 @@
 ﻿@model Core.Info.CuentasPorCobrar.cxc_cobro_Info
 @{
-    ViewBag.Title = ("Anular cobro" + " con ID #" + @Model.IdCobro);
+    ViewBag.Title = ("Consultar cobro" + " con ID #" + @Model.IdCobro);
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -8,17 +8,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script src="~/Scripts/ScriptsGenerales.js"></script>
 
 <script type="text/javascript">
     var selectedIDs;
-    MostrarDatosTarjeta();
+
     $(function () {
+        if(Number($("#cr_saldo").val()))
+        {
+            $("#DivTipoNota").show();
+        }else
+            $("#DivTipoNota").hide();
+
+        MostrarDatosTarjeta();
         $("#IdCobro_tipo").change(function () {
             SetCobroTipo();
             MostrarDatosTarjeta();
         });
 
-        $("#cr_TotalCobro").change(function () {
+        $("#cr_TotalCobro").keyup(function () {
             CalcularSaldo();
         });
         SetCobroTipo();
@@ -27,16 +35,17 @@
     function MostrarDatosTarjeta() {
 
         var TipoCobro = $("#IdCobro_tipo").val();
-        if (TipoCobro == "TARJ") {
+        if (TipoCobro == "TARJ")
+        {
             $("#DatoIdTarjeta").show();
             $("#DatoTarjeta").show();
         }
-        else {
+        else
+        {
             $("#DatoIdTarjeta").hide();
             $("#DatoTarjeta").hide();
         }
     }
-
     function SetCobroTipo() {
 
         var tipo_cobro = $("#IdCobro_tipo").val();
@@ -75,7 +84,7 @@
         $("#FacturasModal").modal("show");
     }
 
-      function AddFacturas() {
+    function AddFacturas() {
 
         var datos = {
             IDs: selectedIDs,
@@ -121,6 +130,11 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $("#cr_saldo").val(data);
+                if(data > 0)
+                {
+                    $("#DivTipoNota").show();
+                }else
+                    $("#DivTipoNota").hide();
             },
             error: function (error) {
             }
@@ -150,7 +164,25 @@
         GridView_cobranza_det.PerformCallback();
     }
 
+    function Imprimir() {
+        var location = GetPathServer();
+        console.log(location);
+        var win = window.open(location +"/Reportes/CuentasPorCobrarReportes/CXC_002?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdSucursal="+@Model.IdSucursal+"&IdCobro="+@Model.IdCobro, '_blank');
+        win.focus();
+    }
 
+    function CrearModificarAlumno() {
+        var location = GetPathServer();
+        if(IdAlumno.GetValue() > 0)
+        {
+            var win = window.open(location + "/Academico/Alumno/Modificar?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdAlumno=" + IdAlumno.GetValue(), '_blank');
+            win.focus();
+        }else
+        {
+            var win = window.open(location + "/Academico/Alumno/Nuevo?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+            win.focus();
+        }
+    }
     function SetDatosAlumno() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -176,15 +208,28 @@
 </script>
 
 
-@using (Html.BeginForm("Anular", "Cobranza", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Consultar", "Cobranza", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa"})
+    @Html.HiddenFor(q => q.IdCliente, new { @id = "IdCliente"})
+    @Html.HiddenFor(q => q.IdSucursal)
+    @Html.HiddenFor(q => q.IdCobro)
+    @Html.HiddenFor(q => q.IdCobro_tipo)
     if (@ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
             <h4>
                 <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4>
+                <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
             </h4>
         </div>
     }
@@ -209,11 +254,43 @@
 
         </div>
     </div>
-
-    @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdSucursal)
-    @Html.HiddenFor(q => q.IdCobro)
-    @Html.HiddenFor(q => q.IdCobro_tipo)
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-9 col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Nuevo == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo", "Cobranza", new { Area = "CuentasPorCobrar", IdEmpresa = Model.IdEmpresa }, null)">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "Cobranza", new { Area = "CuentasPorCobrar", IdEmpresa = Model.IdEmpresa, IdSucursal=Model.IdSucursal, IdCobro=Model.IdCobro }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Anular == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "Cobranza", new { Area = "CuentasPorCobrar", IdEmpresa = Model.IdEmpresa, IdSucursal=Model.IdSucursal, IdCobro=Model.IdCobro }, null)">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-8">
             <div class="col-md-12">
@@ -223,26 +300,38 @@
                     @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <div class="form-group">
                     <label for="IdCliente">Estudiante*</label>
                     @Html.Partial("_CmbAlumno_Cobranza", Model.IdAlumno)
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12">
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdCliente"></label>
+                    <button type="button" class="btn btn-primary form-control " onclick="CrearModificarAlumno();">
+                        <i class="fa fa-external-link-square"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-10">
                 <div class="form-group">
                     @Html.TextBoxFor(q => q.DatosAlumno, new { @id = "DatosAlumno", @readonly = "readonly", @class = "form-control" })
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdCobro_tipo">Tipo cobro*</label>
-                    @Html.DropDownListFor(q => q.IdCobro_tipo, new SelectList(ViewBag.lst_cobro_tipo, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo", @disabled = "disabled" })
-                    @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
+            @if (!String.IsNullOrEmpty(Model.IdCobro_tipo))
+            {
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="IdCobro_tipo">Tipo cobro*</label>
+                        @Html.DropDownListFor(q => q.IdCobro_tipo, new SelectList(ViewBag.lst_cobro_tipo, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo" })
+                        @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
+            }
+            <div class="col-md-6" id="DivTipoNota" hidden>
                 <div class="form-group">
                     <label for="">Tipo nota</label>
                     @Html.DevExpress().ComboBoxFor(q => q.IdTipoNotaCredito, settings =>
@@ -264,7 +353,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="col-md-offset-6 col-md-6">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="cr_fecha">Fecha*</label>
                     @Html.DevExpress().DateEditFor(q=> q.cr_fecha, settings =>
@@ -279,27 +368,43 @@
                     @Html.ValidationMessageFor(q => q.cr_fecha, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdCaja">Caja*</label>
-                    @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @class = "form-control", @id = "IdCaja" })
-                    @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
+            <div class="col-md-3">
+                <label for="IdNuevo"></label>
+                <div class="form-group">                    
+                    <button type="button" class="btn btn-primary form-control" id="btn_imprimir" onclick="Imprimir();" title="Imprimir">
+                        <i class="fa fa-print"></i>
+                    </button>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="cr_TotalCobro">Total*</label>
-                    @Html.TextBoxFor(q => q.cr_TotalCobro, new { @id = "cr_TotalCobro", @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.cr_TotalCobro, "", new { @class = "text-danger" })
-                </div>
+            <div class="col-md-3">
+                <label for="IdNuevo"></label>
+                @*<div class="form-group">
+                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","Cobranza",new { Area = "CuentasPorCobrar", IdEmpresa = Model.IdEmpresa },null)">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>*@
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="cr_saldo">Excedente</label>
-                    @Html.TextBoxFor(q => q.cr_saldo, new { @id = "cr_saldo", @class = "form-control", @readonly = "readonly" })
-                    @Html.ValidationMessageFor(q => q.cr_saldo, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="IdCaja">Caja*</label>
+                        @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @class = "form-control", @id = "IdCaja" })
+                        @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cr_TotalCobro">Total*</label>
+                        @Html.TextBoxFor(q => q.cr_TotalCobro, new { @id = "cr_TotalCobro", @class = "form-control" })
+                        @Html.ValidationMessageFor(q => q.cr_TotalCobro, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cr_saldo">Excedente</label>
+                        @Html.TextBoxFor(q => q.cr_saldo, new { @id = "cr_saldo", @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(q => q.cr_saldo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             <div class="col-md-6" id="DatoIdTarjeta" hidden>
                 <div class="form-group">
                     <label for="cr_TotalCobro">Tarjeta de Crédito</label>
@@ -314,7 +419,7 @@
                     @Html.ValidationMessageFor(q => q.cr_Tarjeta, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
+            </div>
     </div>
     <div class="row" id="div_cheque" hidden>
         <div class="col-md-12">
@@ -353,35 +458,32 @@
             </div>
         </div>
     </div>
-    <br />
-
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
-                <div class="form-group has-error">
-                    <label for="Rector">Motivo de anulación*</label>
-                    @Html.TextBoxFor(q => q.MotiAnula, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.MotiAnula, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label for="pf_observacion">Observación</label>
+                    @Html.TextBoxFor(q => q.cr_ObservacionPantalla, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cr_ObservacionPantalla, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="row">
+    @*<div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
-                @Html.Action("GridViewPartial_cobranza_det")
+            <div class="col-md-3">
+                <button type="button" class="btn btn-primary" title ="Buscar facturas" id="btn_buscar" onclick="MostrarModal();">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
         </div>
-    </div>
-    
+    </div>*@
+    <br />
+    @Html.Action("GridViewPartial_cobranza_det")
 
-    
+
+
     <div class="box-footer">
-    @if (ViewBag.MostrarBoton ?? false)
-    {
-        <button type="submit" class="btn btn-danger">Anular</button>
-    }
         <a class="btn btn-default" href="@Url.Action("Index", "Cobranza", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
     </div>
     @section Scripts {

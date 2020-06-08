@@ -59,20 +59,22 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
-                {
-                    if (ViewBag.Modificar == true)
-                    {
-                        ViewContext.Writer.Write(
-                            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") }));
-                        ViewContext.Writer.Write("&nbsp;");
-                    }
-                    if (ViewBag.Anular == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") },
-                          new { onclick = "return confirm('¿Está seguro de que desea eliminar el registro?')" }));
-                    }
-                }
+                ViewContext.Writer.Write(Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") }));
+
+                //if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                //{
+                //if (ViewBag.Modificar == true)
+                //{
+                //    ViewContext.Writer.Write(
+                //        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") }));
+                //    ViewContext.Writer.Write("&nbsp;");
+                //}
+                //if (ViewBag.Anular == true)
+                //{
+                //    ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAlumno"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") },
+                //      new { onclick = "return confirm('¿Está seguro de que desea eliminar el registro?')" }));
+                //}
+                //}
             });
 
             c.SetHeaderTemplateContent(tc =>

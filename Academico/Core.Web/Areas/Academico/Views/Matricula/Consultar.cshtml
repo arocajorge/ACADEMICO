@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Academico.aca_Matricula_Info
 @{
-    ViewBag.Title = "Modificar matrícula";
+    ViewBag.Title = "Consultar matrícula";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -52,7 +52,7 @@
         }
     }
 </script>
-@using (Html.BeginForm("Modificar", "Matricula", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Consultar", "Matricula", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdMatricula, new { @id = "IdMatricula" })
@@ -95,6 +95,43 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-offset-9 col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Nuevo == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo", "Matricula", new { Area = "Academico", IdEmpresa = Model.IdEmpresa }, null)">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "Matricula", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdMatricula = Model.IdMatricula }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Anular == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Eliminar", "Matricula", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdMatricula = Model.IdMatricula }, null)">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdEmpresa">Año Lectivo*</label>
@@ -114,16 +151,9 @@
                 <button type="button" class="btn btn-primary form-control" title="Crear/Modificar alumno" onclick="CrearModificarAlumno();">
                     <i class="fa fa-external-link-square"></i>
                 </button>
-            </div>
-            <div class="col-md-1">
-                <label for="IdCliente"></label>
-                <a type="button" class="btn btn-primary form-control" title="Nueva matricula" href="@Url.Action("Nuevo","Matricula",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
-                    <i class="fa fa-plus"></i>
-                </a>
-            </div>
-           
+            </div>          
             
-            <div class="col-md-2">
+            <div class="col-md-offset-1 col-md-2">
                 <div class="form-group">
                     <label for="pf_fecha">Fecha*</label>
                     <div class="input-group date">
@@ -267,7 +297,6 @@
     </div>
 
     <div class="box-footer">
-        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="actualizar();">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index","Matricula", new { Area = "Academico" })">Cancelar</a>
     </div>
     @section Scripts {
@@ -401,7 +430,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data.msg == "") {
-                    var url = '@Url.Action("Consultar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
+                    var url = '@Url.Action("Modificar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
                     window.location.href = url;
                 }
                 else {

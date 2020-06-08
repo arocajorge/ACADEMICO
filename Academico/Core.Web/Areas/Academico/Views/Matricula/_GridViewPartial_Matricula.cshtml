@@ -63,16 +63,19 @@
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "BloquearMatricula")) == false && Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "EsRetirado")) == false)
                 {
                     ViewContext.Writer.Write(
-                            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") }) + "&nbsp;"
+                            Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") }) + "&nbsp;"
                         );
+                    //ViewContext.Writer.Write(
+                    //        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") }) + "&nbsp;"
+                    //    );
 
-                    if (ViewBag.Anular == true)
-                    {
-                        ViewContext.Writer.Write(
-                            Html.ActionLink("Eliminar", "Eliminar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") },
-                            new { onclick = "return confirm('¿Está seguro de que desea eliminar el registro?')" })
-                        );
-                    }
+                    //if (ViewBag.Anular == true)
+                    //{
+                    //    ViewContext.Writer.Write(
+                    //        Html.ActionLink("Eliminar", "Eliminar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") },
+                    //        new { onclick = "return confirm('¿Está seguro de que desea eliminar el registro?')" })
+                    //    );
+                    //}
                 }
             });
             c.SetHeaderTemplateContent(tc =>

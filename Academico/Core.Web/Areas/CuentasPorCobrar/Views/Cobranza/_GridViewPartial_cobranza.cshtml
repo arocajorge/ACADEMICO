@@ -69,19 +69,22 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "cr_estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "IdCobro_tipo")) != "NTCR")
-                {
-                    if (ViewBag.Modificar == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdCobro = DataBinder.Eval(tc.DataItem, "IdCobro") }));
-                        ViewContext.Writer.Write("&nbsp;");
-                    }
-                    if (ViewBag.Anular == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdCobro = DataBinder.Eval(tc.DataItem, "IdCobro") },
-                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
-                    }
-                }
+                ViewContext.Writer.Write(Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdCobro = DataBinder.Eval(tc.DataItem, "IdCobro") }));
+                //ViewContext.Writer.Write("&nbsp;");
+
+                //if (Convert.ToString(DataBinder.Eval(tc.DataItem, "cr_estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "IdCobro_tipo")) != "NTCR")
+                //{
+                //    if (ViewBag.Modificar == true)
+                //    {
+                //        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdCobro = DataBinder.Eval(tc.DataItem, "IdCobro") }));
+                //        ViewContext.Writer.Write("&nbsp;");
+                //    }
+                //    if (ViewBag.Anular == true)
+                //    {
+                //        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdCobro = DataBinder.Eval(tc.DataItem, "IdCobro") },
+                //        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                //    }
+                //}
             });
             c.SetHeaderTemplateContent(tc =>
             {

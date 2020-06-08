@@ -431,7 +431,7 @@
                 if (data.msg == "") {
                     //$("#ModalBloqueo").modal("hide");
                     setTimeout(function(){ $("#ModalBloqueo").modal("hide"); }, 2000);
-                    var url = '@Url.Action("Modificar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
+                    var url = '@Url.Action("Consultar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
                     window.location.href = url;
                 }
                 else {
