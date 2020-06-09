@@ -192,6 +192,95 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_Menu_x_seg_usuario_Info getInfo(int IdEmpresa, int IdSede, string IdUsuario, int IdMenu)
+        {
+            try
+            {
+                aca_Menu_x_seg_usuario_Info info;
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var Entity = Context.aca_Menu_x_seg_usuario.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdUsuario == IdUsuario && q.IdMenu==IdMenu).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_Menu_x_seg_usuario_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdSede = Entity.IdSede,
+                        IdMenu = Entity.IdMenu,
+                        IdUsuario = Entity.IdUsuario,
+                        Nuevo = Entity.Nuevo,
+                        Modificar = Entity.Modificar,
+                        Anular = Entity.Anular,
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool guardarDB(aca_Menu_x_seg_usuario_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_Menu_x_seg_usuario Entity = new aca_Menu_x_seg_usuario
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdSede = info.IdSede,
+                        IdMenu = info.IdMenu,
+                        IdUsuario = info.IdUsuario,
+                        Nuevo = info.Nuevo,
+                        Modificar = info.Modificar,
+                        Anular = info.Anular,
+                    };
+                    Context.aca_Menu_x_seg_usuario.Add(Entity);
+
+                    Context.SaveChanges();
+                    string sql = "exec spaca_corregir_menu '" + info.IdEmpresa + "','" + info.IdSede.ToString() + "','" + info.IdUsuario + "'";
+                    Context.Database.ExecuteSqlCommand(sql);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(aca_Menu_x_seg_usuario_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_Menu_x_seg_usuario Entity = Context.aca_Menu_x_seg_usuario.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSede == info.IdSede && q.IdMenu== info.IdMenu && q.IdUsuario==info.IdUsuario);
+                    if (Entity == null)
+                        return false;
+
+                    Entity.Nuevo = info.Nuevo;
+                    Entity.Modificar = info.Modificar;
+                    Entity.Anular = info.Anular;
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_Menu_x_seg_usuario_Info get_list_menu_accion(int IdEmpresa, int IdSede, string IdUsuario, string Area, string NomControlador, string Accion)
         {
             try

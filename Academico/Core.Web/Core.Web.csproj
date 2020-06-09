@@ -8708,6 +8708,9 @@
     <Content Include="Areas\Academico\Views\CalificacionHistorico\Consultar.cshtml" />
     <Content Include="Areas\Academico\Views\Matricula\Consultar.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\Consultar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Factura\Consultar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\Consultar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\Consultar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
