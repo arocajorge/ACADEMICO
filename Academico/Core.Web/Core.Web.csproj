@@ -8711,6 +8711,16 @@
     <Content Include="Areas\Facturacion\Views\Factura\Consultar.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\Consultar.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeDebitoFacturacion\Consultar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\Cliente\Consultar.cshtml" />
+    <Content Include="Areas\Caja\Views\Caja\Consultar.cshtml" />
+    <Content Include="Areas\Caja\Views\CajaMovimientoEgreso\Consultar.cshtml" />
+    <Content Include="Areas\Caja\Views\CajaMovimientoIngreso\Consultar.cshtml" />
+    <Content Include="Areas\Caja\Views\TipoMovimientoCaja\Consultar.cshtml" />
+    <Content Include="Areas\Caja\Views\ConciliacionCaja\Consultar.cshtml" />
+    <Content Include="Areas\Banco\Views\ChequeBanco\Consultar.cshtml" />
+    <Content Include="Areas\Banco\Views\DepositoBanco\Consultar.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\Consultar.cshtml" />
+    <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\Consultar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

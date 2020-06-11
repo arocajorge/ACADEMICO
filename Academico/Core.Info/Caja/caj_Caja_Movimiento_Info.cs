@@ -40,6 +40,7 @@ namespace Core.Info.Caja
         public string IdUsuarioUltMod { get; set; }
         public string Estado { get; set; }
         public bool EstadoBool { get; set; }
+        [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
         public Nullable<decimal> IdTipoFlujo { get; set; }
         public string IdTipo_Persona { get; set; }

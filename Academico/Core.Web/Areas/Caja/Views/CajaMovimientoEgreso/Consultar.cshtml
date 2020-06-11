@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Caja.caj_Caja_Movimiento_Info
 @{
-    ViewBag.Title = ("Anular egreso" + " con ID #" + @Model.IdCbteCble);
+    ViewBag.Title = ("Consultar egreso" + " con ID #" + @Model.IdCbteCble);
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -8,6 +8,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script src="~/Scripts/ScriptsGenerales.js"></script>
+
 <script>
     function AddOP() {
         var datos = {
@@ -18,16 +20,15 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("EditingAddNew", "ChequeBanco",new { Area = "Banco"})',
+            url: '@Url.Action("EditingAddNew", "CajaMovimientoEgreso",new { Area = "Caja"})',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if (data.EsOp == "S") {
-                    $("#cr_Valor").val(data.Valor)
-                }
+                $("#cr_Valor").val(data.Valor);
+                $("#cm_observacion").val(data.Observacion);
             },
             error: function (error) {
             }
@@ -52,34 +53,6 @@
         selectedIDs = values.join(',');
     }
 
-    function MostrarModal() {
-        selectedIDs = "";
-
-        var datos = {
-            IdEmpresa: $("#IdEmpresa").val(),
-            IdTransaccionSession: $("#IdTransaccionSession").val(),
-            IdTipoPersona: $("#IdTipoPersona").val(),
-            IdEntidad: IdEntidad.GetValue(),
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("GetListPorCruzar", "CajaMovimientoEgreso",new { Area = "Caja"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                GridView_egreso_op_x_cruzar.PerformCallback();
-                GridView_egreso_op_x_cruzar.UnselectRows();
-                $("#OpModal").modal("show");
-            },
-            error: function (error) {
-            }
-        });
-    }
-
     function armar_diario() {
         var caja = $("#IdCaja").val();
         var tipo_movimiento = IdTipoMovi.GetValue();
@@ -102,6 +75,9 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                if (data.EsOp == "S") {
+                    $("#cr_Valor").val(data.Valor)
+                }
                 GridView_comprobante_detalle.PerformCallback();
             },
             error: function (error) {
@@ -109,22 +85,73 @@
         });
     }
 </script>
-@using (Html.BeginForm("Anular", "CajaMovimientoEgreso", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Consultar", "CajaMovimientoEgreso", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdCbteCble)
     @Html.HiddenFor(q => q.IdTipocbte)
-
-    if (@ViewBag.mensaje != null)
+    if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
             <h4>
                 <i class="icon fa fa-warning"></i> @ViewBag.mensaje
             </h4>
         </div>
+
     }
 
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h4>
+                <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+            </h4>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-8 col-md-1">
+                @if (@ViewBag.Nuevo == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo", "CajaMovimientoEgreso", new { Area = "Caja", IdEmpresa = Model.IdEmpresa }, null)">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "CajaMovimientoEgreso", new { Area = "Caja", IdEmpresa = Model.IdEmpresa, IdTipocbte = Model.IdTipocbte, IdCbteCble=Model.IdCbteCble }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                @if (@ViewBag.Anular == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "CajaMovimientoEgreso", new { Area = "Caja", IdEmpresa = Model.IdEmpresa, IdTipocbte = Model.IdTipocbte, IdCbteCble=Model.IdCbteCble }, null)">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary form-control" id="btn_imprimir" onclick="Imprimir();" title="Imprimir">
+                        <i class="fa fa-print"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-3">
@@ -134,7 +161,7 @@
                     @Html.ValidationMessageFor(q => q.CodMoviCaja, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-7 col-md-2">
+            <div class="col-md-offset-5 col-md-2">
                 <div class="form-group">
                     <label for="">Fecha</label>
                     <div class="input-group date">
@@ -161,7 +188,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdCaja">Caja*</label>
-                    @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @class = "form-control", @id = "IdCaja" })
+                    @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @class = "form-control", @id = "IdCaja", })
                     @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -179,7 +206,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="info_caj_Caja_Movimiento_det.IdCobro_tipo">Tipo cobro</label>
-                    @Html.DropDownListFor(q => q.info_caj_Caja_Movimiento_det.IdCobro_tipo, new SelectList(ViewBag.lst_cobro, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdTipoMovi" })
+                    @Html.DropDownListFor(q => q.info_caj_Caja_Movimiento_det.IdCobro_tipo, new SelectList(ViewBag.lst_cobro, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo" })
                     @Html.ValidationMessageFor(q => q.info_caj_Caja_Movimiento_det.IdCobro_tipo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -214,7 +241,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="cm_observacion">Observación</label>
-                    @Html.TextAreaFor(q => q.cm_observacion, new { @class = "form-control" })
+                    @Html.TextAreaFor(q => q.cm_observacion, new { @class = "form-control", @id = "cm_observacion" })
                     @Html.ValidationMessageFor(q => q.cm_observacion, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -243,43 +270,29 @@
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_op">
                 <div class="row">
-                    <div class="col-md-1">
-                        <button type="button" class="btn btn-primary form-control" id="btn_buscar_op" onclick="MostrarModal();" title="Buscar órdenes">
-                            <i class="fa fa-search"></i>
-                        </button>
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.Action("GridViewPartial_egreso_op")
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <br />
-                @Html.Action("GridViewPartial_egreso_op")
+                
             </div>
         </div>
 
+    </div>    
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index", "CajaMovimientoEgreso", new { Area = "Caja" }, null)">Cancelar</a>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group has-error">
-                    <label for="Rector">Motivo de anulación*</label>
-                    @Html.TextBoxFor(q => q.MotivoAnulacion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.MotivoAnulacion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-        <div class="box-footer">
-            @if (!(ViewBag.NoMostrarBotones ?? true))
-            {
-            <button type="submit" class="btn btn-danger">Anular</button>
-            }
-            <a class="btn btn-default" href="@Url.Action("Index", "CajaMovimientoEgreso", new { Area = "Caja" }, null)">Cancelar</a>
-        </div>
-
+    
+    
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
 <script>
-
     $("#IdTipoPersona").change(function () {
         IdEntidad.SetValue(null);
     });
@@ -296,7 +309,7 @@
         armar_diario();
     });
 
-function armar_diario() {
+    function armar_diario() {
                         var caja = $("#IdCaja").val();
                         var tipo_movimiento = IdTipoMovi.GetValue();
                         var monto = $("#cr_Valor").val();
@@ -318,12 +331,21 @@ function armar_diario() {
                             dataType: 'json',
                             contentType: 'application/json; charset=utf-8',
                             success: function (data) {
+                                if (data.EsOp == "S") {
+                                    $("#cr_Valor").val(data.Valor)
+                                }
                                 GridView_comprobante_detalle.PerformCallback();
                             },
                             error: function (error) {
                             }
                         });
                     }
+
+    function Imprimir() {
+        var location = GetPathServer();
+        var win = window.open(location +"/Reportes/CajaReportes/CAJ_001?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdTipocbte="+@Model.IdTipocbte+"&IdCbteCble="+@Model.IdCbteCble, '_blank');
+        win.focus();
+    }
 
     function OnSelectedCtaCbleChanged() {
         GridView_comprobante_detalle.GetEditor("IdGrupoPresupuesto").PerformCallback();
