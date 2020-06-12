@@ -235,7 +235,52 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar",new { IdEmpresa = model.IdEmpresa, IdConciliacion = model.IdConciliacion, Exito = true});
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdConciliacion = model.IdConciliacion, Exito = true});
+        }
+
+        public ActionResult Consultar(int IdEmpresa = 0, decimal IdConciliacion = 0, bool Exito = false)
+        {
+            ViewBag.OcultarBoton = false;
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            var model = busConciliacion.GetInfo(IdEmpresa, IdConciliacion);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "CuentasPorCobrar", "ConciliacionNC", "Index");
+            if (model.Estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            SessionFixed.IdAlumno = model.IdAlumno.ToString();
+
+            var lst = busDet.GetList(model.IdEmpresa, model.IdConciliacion);
+
+            if (lst.Where(q => q.ValorProntoPago > 0).Count() > 0)
+            {
+                ViewBag.mensaje = "La conciliación no se puede modificar ya que aplica pronto pago, debe anular y realizar una nueva";
+                ViewBag.OcultarBoton = true;
+            }
+
+            lstDet.set_list(lst, model.IdTransaccionSession);
+
+            return View(model);
         }
 
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdConciliacion = 0, bool Exito = false)
@@ -296,7 +341,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdConciliacion = model.IdConciliacion, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdConciliacion = model.IdConciliacion, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, decimal IdConciliacion = 0)

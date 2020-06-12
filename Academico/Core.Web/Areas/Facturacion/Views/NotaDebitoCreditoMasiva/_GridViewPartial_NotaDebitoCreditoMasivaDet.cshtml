@@ -54,6 +54,13 @@
             t.Items.Add(GridViewToolbarCommand.ExportToRtf).Text = "Exportar a RTF";
             t.Items.Add(GridViewToolbarCommand.ExportToCsv).Text = "Exportar a CSV";
         });
+
+        //Configuración filtro por columna
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
         //Funcion para inicializar fila al presionar nuevo
         settings.InitNewRow = (s, e) =>
         {

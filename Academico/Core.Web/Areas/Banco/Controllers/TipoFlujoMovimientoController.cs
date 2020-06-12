@@ -23,6 +23,7 @@ namespace Core.Web.Areas.Banco.Controllers
         ba_TipoFlujo_Movimiento_Bus bus_TipoFlujo_Movimiento = new ba_TipoFlujo_Movimiento_Bus();
         string mensaje = string.Empty;
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Combo bajo demanda CmbTipoFlujo
@@ -115,7 +116,40 @@ namespace Core.Web.Areas.Banco.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdMovimiento = model.IdMovimiento, Exito = true });
+        }
+
+        public ActionResult Consultar(int IdEmpresa = 0, decimal IdMovimiento = 0, bool Exito=false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            ba_TipoFlujo_Movimiento_Info model = bus_TipoFlujo_Movimiento.GetInfo(IdEmpresa, IdMovimiento);
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoMovimiento", "Index");
+            if (model.Estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos(IdEmpresa, model.IdSucursal);
+            return View(model);
         }
 
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdMovimiento = 0)
@@ -150,7 +184,7 @@ namespace Core.Web.Areas.Banco.Controllers
                 cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdMovimiento = model.IdMovimiento, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, decimal IdMovimiento = 0)

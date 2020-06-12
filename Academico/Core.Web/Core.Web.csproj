@@ -8721,6 +8721,12 @@
     <Content Include="Areas\Banco\Views\DepositoBanco\Consultar.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeCreditoBanco\Consultar.cshtml" />
     <Content Include="Areas\Banco\Views\NotaDeDebitoBanco\Consultar.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\ComprobanteContable\Consultar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\ConciliacionNC\Consultar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\LiquidacionTarjetaCredito\Consultar.cshtml" />
+    <Content Include="Areas\Banco\Views\ArchivoRecaudacion\Consultar.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoMovimiento\Consultar.cshtml" />
+    <Content Include="Areas\Inventario\Views\Producto\Consultar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

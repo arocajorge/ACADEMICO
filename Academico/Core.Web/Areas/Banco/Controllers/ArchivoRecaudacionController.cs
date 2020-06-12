@@ -157,6 +157,12 @@ namespace Core.Web.Areas.Banco.Controllers
             };
             Lista_det.set_list(model.Lst_det, model.IdTransaccionSession);
 
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "ArchivoRecaudacion", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
+
             cargar_combos();
             return View(model);
         }
@@ -193,7 +199,41 @@ namespace Core.Web.Areas.Banco.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdArchivo = model.IdArchivo, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdArchivo = model.IdArchivo, Exito = true });
+        }
+        public ActionResult Consultar(int IdEmpresa = 0, decimal IdArchivo = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            ba_ArchivoRecaudacion_Info model = bus_archivo.GetInfo(IdEmpresa, IdArchivo);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "ArchivoRecaudacion", "Index");
+            if (model.Estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            model.Lst_det = bus_archivo_det.GetList(model.IdEmpresa, model.IdArchivo);
+            Lista_det.set_list(model.Lst_det, model.IdTransaccionSession);
+
+            cargar_combos();
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+            return View(model);
         }
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdArchivo = 0, bool Exito = false)
         {
@@ -206,6 +246,13 @@ namespace Core.Web.Areas.Banco.Controllers
             ba_ArchivoRecaudacion_Info model = bus_archivo.GetInfo(IdEmpresa, IdArchivo);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "ArchivoRecaudacion", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
+
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.Lst_det = bus_archivo_det.GetList(model.IdEmpresa, model.IdArchivo);
             Lista_det.set_list(model.Lst_det, model.IdTransaccionSession);
@@ -236,7 +283,7 @@ namespace Core.Web.Areas.Banco.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdArchivo = model.IdArchivo, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdArchivo = model.IdArchivo, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, decimal IdArchivo = 0)
@@ -244,6 +291,12 @@ namespace Core.Web.Areas.Banco.Controllers
             ba_ArchivoRecaudacion_Info model = bus_archivo.GetInfo(IdEmpresa, IdArchivo);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "ArchivoRecaudacion", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.Lst_det = bus_archivo_det.GetList(model.IdEmpresa, model.IdArchivo);
