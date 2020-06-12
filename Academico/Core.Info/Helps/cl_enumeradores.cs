@@ -296,9 +296,9 @@ namespace Core.Info.Helps
         }
         public enum eTipoProcesoBancarioCobrosAcademico
         {
-            RECBG = 6,
-            RECPB = 7,
-            RECBB = 8
+            RECBG = 4,
+            RECPB = 5,
+            RECBB = 6
         }
     }
 }

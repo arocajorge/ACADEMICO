@@ -170,14 +170,17 @@ namespace Core.Web.Areas.Banco.Controllers
         public ActionResult Nuevo(ba_ArchivoRecaudacion_Info model)
         {
             model.Nom_Archivo = "COBROS_MULTICASH";
+            var anio = (Convert.ToDateTime(model.Fecha).Year).ToString();
+            var mes = ((Convert.ToDateTime(model.Fecha).Month).ToString());
+            var dia = ((Convert.ToDateTime(model.Fecha).Day).ToString());
             if (model.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECBG))
             {
-                model.Nom_Archivo = "COBROS_MULTICASH_BG";
+                model.Nom_Archivo = "RCE_"+ anio + mes.PadLeft(2,'0') + dia.PadLeft(2, '0') + "_PAH";
             }
 
             if (model.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECPB))
             {
-                model.Nom_Archivo = "COBROS_MULTICASH_PB";
+                model.Nom_Archivo = "PRODUBANCO"+ anio + mes.PadLeft(2, '0') + dia.PadLeft(2, '0');
             }
 
             if (model.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECBB))
@@ -412,7 +415,7 @@ namespace Core.Web.Areas.Banco.Controllers
 
             var info_archivo = bus_archivo.GetInfo(IdEmpresa, IdArchivo);
             info_archivo.Lst_det = bus_archivo_det.GetList_Archivo(IdEmpresa, IdArchivo);
-            var NombreArchivo = info_archivo.Nom_Archivo + info_archivo.SecuencialDescarga;
+            var NombreArchivo = info_archivo.Nom_Archivo + "_" +info_archivo.SecuencialDescarga;
 
             archivo = GetArchivo(info_archivo, NombreArchivo);
             info_archivo.IdUsuarioModificacion = SessionFixed.IdUsuario;
@@ -488,6 +491,7 @@ namespace Core.Web.Areas.Banco.Controllers
                         {
                             string linea1 = "";
                             string linea2 = "";
+                            string linea3 = "";
                             double Valor = 0;
                             double valorEntero = 0;
                             double valorDecimal = 0;
@@ -526,6 +530,18 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += (valorEnteroDiferencia.ToString() + valorDecimalDiferencia.ToString().PadRight(2, '0')).PadLeft(10, '0');
 
                             file.WriteLine(linea2);
+
+                            linea3 += "RC";
+                            linea3 += item.Secuencia.ToString().PadLeft(7, '0');
+                            linea3 += "VM";
+                            linea3 += item.Fecha.Year.ToString() + item.Fecha.Month.ToString().PadLeft(2, '0') + item.Fecha.Day.ToString().PadLeft(2, '0');//DESDE
+                            linea3 += item.Fecha.Year.ToString() + item.Fecha.Month.ToString().PadLeft(2, '0') + item.Fecha.Day.ToString().PadLeft(2, '0');// HASTA
+                            linea3 += "FI";
+                            linea3 += "0000000000";
+                            linea3 += "0000000000";
+                            linea3 += (valorEnteroDiferencia.ToString() + valorDecimalDiferencia.ToString().PadRight(2, '0')).PadLeft(10, '0');
+
+                            file.WriteLine(linea3);
                         }
                     }
 
