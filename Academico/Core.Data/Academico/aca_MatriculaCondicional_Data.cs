@@ -119,7 +119,8 @@ namespace Core.Data.Academico
                         IdAlumno = Entity.IdAlumno,
                         IdCatalogoCONDIC = Entity.IdCatalogoCONDIC,
                         Fecha = Entity.Fecha,
-                        Observacion = Entity.Observacion
+                        Observacion = Entity.Observacion,
+                        Estado = Entity.Estado
                     };
                 }
 

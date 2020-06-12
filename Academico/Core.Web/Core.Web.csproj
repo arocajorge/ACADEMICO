@@ -8727,6 +8727,12 @@
     <Content Include="Areas\Banco\Views\ArchivoRecaudacion\Consultar.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoMovimiento\Consultar.cshtml" />
     <Content Include="Areas\Inventario\Views\Producto\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\PeriodoPorAnioLectivo\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\RubroPorPeriodo\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\AlumnoRetiro\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\PermitirMatricula\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\NegarMatricula\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCondicional\Consultar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

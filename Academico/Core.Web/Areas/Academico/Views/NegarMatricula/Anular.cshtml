@@ -83,9 +83,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
-                <label for="IdEmpresa">Observación</label>
-                @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
-                @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <label for="IdEmpresa">Observación</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
     </div>

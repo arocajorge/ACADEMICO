@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Academico.aca_AnioLectivo_Rubro_Info
 @{
-    ViewBag.Title = "Anular rubro por año lectivo";
+    ViewBag.Title = "Consultar rubro por año lectivo";
 
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
@@ -23,8 +23,48 @@
         //Capture all selected keys
         selectedIDs = values.join(',');
     }
+
+    function actualizar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdRubro: IdRubro.GetValue(),
+            IdProducto: IdProducto.GetValue(),
+            Subtotal: $("#Subtotal").val(),
+            IdCod_Impuesto_Iva: $("#IdCod_Impuesto_Iva").val(),
+            Porcentaje: $("#Porcentaje").val(),
+            ValorIVA: $("#ValorIVA").val(),
+            Total: $("#Total").val(),
+            AplicaProntoPago: AplicaProntoPago.GetValue(),
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $("#btn_guardar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("actualizar", "RubroPorPeriodo", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.msg == "") {
+                    //$("#myform").submit();
+                    var url = '@Url.Action("Modificar", "RubroPorPeriodo")' + '?IdEmpresa=' + data.IdEmpresa + '&IdAnio=' + data.IdAnio + '&IdRubro=' + data.IdRubro + '&Exito=true';
+                    window.location.href = url;
+                }
+                else {
+                    alert(data.msg);
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
-@using (Html.BeginForm("Anular", "RubroPorPeriodo", FormMethod.Post, new { @class = "form", @role = "form", @id = "myform" }))
+@using (Html.BeginForm("Consultar", "RubroPorPeriodo", FormMethod.Post, new { @class = "form", @role = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
@@ -52,6 +92,43 @@
             </div>
         </div>
     }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-9 col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Nuevo == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo", "RubroPorPeriodo", new { Area = "Academico", IdEmpresa = Model.IdEmpresa }, null)">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "RubroPorPeriodo", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAnio = Model.IdAnio, IdRubro=Model.IdRubro }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="Autorizar"></label>
+                @if (@ViewBag.Anular == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "RubroPorPeriodo", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAnio = Model.IdAnio, IdRubro=Model.IdRubro }, null)">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -139,18 +216,9 @@
                     @Html.ValidationMessageFor(q => q.Total, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-1 col-md-1">
-                <div class="form-group">
-                    <label for="IdSucursal">&nbsp;</label>
-                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","RubroPorPeriodo",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
-                        <i class="fa fa-plus"></i>
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
     <div class="box-footer">
-        <button type="submit" class="btn btn-danger">Anular</button>
         <a class="btn btn-default" href="@Url.Action("Index","RubroPorPeriodo",new { Area = "Academico" },null)">Cancelar</a>
     </div>
     @Html.Action("GridViewPartial_RubroPorPeriodo")
@@ -179,6 +247,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                console.log(data);
                 $("#Subtotal").val(data.Subtotal);
                 $("#IdCod_Impuesto_Iva").val(data.IdCod_Impuesto_Iva);
                 $("#Porcentaje").val(data.Porcentaje);
@@ -205,6 +274,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
+                console.log(data);
                 $("#ValorIVA").val(data.ValorIva);
                 $("#Total").val(data.Total);
             },

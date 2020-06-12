@@ -82,7 +82,7 @@
             success: function (data) {
                 if (data.msg == "") {
                     //$("#myform").submit();
-                    var url = '@Url.Action("Modificar", "RubroPorPeriodo")' + '?IdEmpresa=' + data.IdEmpresa + '&IdAnio=' + data.IdAnio + '&IdRubro=' + data.IdRubro + '&Exito=true';
+                    var url = '@Url.Action("Consultar", "RubroPorPeriodo")' + '?IdEmpresa=' + data.IdEmpresa + '&IdAnio=' + data.IdAnio + '&IdRubro=' + data.IdRubro + '&Exito=true';
                     window.location.href = url;
                 }
                 else {
