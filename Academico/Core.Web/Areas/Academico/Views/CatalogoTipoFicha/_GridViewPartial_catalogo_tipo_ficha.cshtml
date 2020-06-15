@@ -56,7 +56,7 @@
             c.SetDataItemTemplateContent(tc =>
             {
                 ViewContext.Writer.Write(
-            Html.ActionLink("Modificar", "Modificar", new { IdCatalogoTipoFicha = DataBinder.Eval(tc.DataItem, "IdCatalogoTipoFicha") })
+            Html.ActionLink("Consultar", "Consultar", new { IdCatalogoTipoFicha = DataBinder.Eval(tc.DataItem, "IdCatalogoTipoFicha") })
                 );
             });
             //c.SetHeaderTemplateContent(tc =>

@@ -44,6 +44,7 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         string mensaje = string.Empty;
         #endregion
 
@@ -116,6 +117,7 @@ namespace Core.Web.Areas.Academico.Controllers
         }
 
         #endregion
+
         #region Combos bajo demanada Empleado
         public ActionResult Cmb_CambioPlantillaEmpleado()
         {
@@ -383,6 +385,46 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Acciones
+        public ActionResult Consultar(int IdEmpresa = 0, int IdMatricula = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_Matricula_Info model = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
+            model.IdEmpresa_rol = (model.IdEmpresa_rol == null ? Convert.ToInt32(SessionFixed.IdEmpresa) : model.IdEmpresa_rol);
+            model.Validar = "N";
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "CambioPlantillaMatricula", "Index");
+            if (model.BloquearMatricula == true)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            model.lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
+            model.lst_MatriculaRubro = bus_matricula_rubro.GetList(model.IdEmpresa, model.IdMatricula);
+            ListaMatriculaRubro.set_list(model.lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            cargar_combos();
+            return View(model);
+        }
+
         public ActionResult Modificar(int IdEmpresa = 0, int IdMatricula = 0, bool Exito = false)
         {
             #region Validar Session
@@ -398,6 +440,12 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "CambioPlantillaMatricula", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
 
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
@@ -460,7 +508,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdMatricula = model.IdMatricula, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdMatricula = model.IdMatricula, Exito = true });
         }
         #endregion
     }

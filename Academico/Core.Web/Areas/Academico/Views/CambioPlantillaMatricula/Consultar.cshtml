@@ -1,0 +1,262 @@
+﻿@model Core.Info.Academico.aca_Matricula_Info
+@{
+    ViewBag.Title = "Consultar plantilla de matrícula";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
+    //var exp = false;
+    //var ind;
+    //var visibleIndex = -1;
+    //function OnGetRowValues(Value){
+    //    console.log(Value);
+    //    if(Value == null){
+
+    //        exp = true;
+    //        ind = visibleIndex;
+    //    }
+    //}
+
+    //function OnRowClick (s, e) {
+    //    visibleIndex = e.visibleIndex;
+    //    s.GetRowValues(e.visibleIndex, 'FechaFacturacion', OnGetRowValues);
+    //    if(exp == true){
+    //        s.StartEditRow(visibleIndex);
+    //    }
+
+    //}
+
+    //function OnEndCallback(s, e) {
+    //    if (exp == true) {
+    //        exp = false;
+    //        s.ExpandDetailRow(ind);
+    //    }
+    //}
+</script>
+@using (Html.BeginForm("Consultar", "CambioPlantillaMatricula", FormMethod.Post, new { @role = "form", @class = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdMatricula, new { @id = "IdMatricula" })
+    @Html.HiddenFor(q => q.IdMecanismo, new { @id = "IdMecanismo" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.Validar, new { @id = "Validar" })
+
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row" id="MensajeError" hidden>
+        <div class="col-md-12">
+            <div class="alert alert-warning alert-dismissible">
+                <h4>
+                    <i class="icon fa fa-warning"></i> <label id="Mensaje"></label>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-11 col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "CambioPlantillaMatricula", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdMatricula = Model.IdMatricula }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Estudiante*</label>
+                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Año lectivo*</label>
+                    @Html.Partial("_ComboBoxPartial_Anio", Model)
+                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Sede*</label>
+                    @Html.Partial("_ComboBoxPartial_Sede", Model)
+                    @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Nivel Académico*</label>
+                    @Html.Partial("_ComboBoxPartial_Nivel", Model)
+                    @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Jornada*</label>
+                    @Html.Partial("_ComboBoxPartial_Jornada", Model)
+                    @Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Curso*</label>
+                    @Html.Partial("_ComboBoxPartial_Curso", Model)
+                    @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Paralelo*</label>
+                    @Html.Partial("_ComboBoxPartial_Paralelo", Model)
+                    @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="IdEmpresa">Plantilla*</label>
+                    @Html.Partial("_ComboBoxPartial_Plantilla", Model)
+                    @Html.ValidationMessageFor(q => q.IdPlantilla, "", new { @class = "text-danger" })
+                </div>
+            </div>     
+        </div>
+    </div>
+    <div class="row" id="Empleado" hidden>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdEmpresa">Empresa*</label>
+                    @Html.DropDownListFor(q => q.IdEmpresa_rol, new SelectList(ViewBag.lst_empresa, "IdEmpresa", "em_nombre"), new { @class = "form-control", @id = "IdEmpresa_rol" })
+                    @Html.ValidationMessageFor(q => q.IdEmpresa_rol, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label for="IdEmpresa">Empleado*</label>
+                @Html.Partial("_CmbEmpleado", Model)
+                @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <label for="IdEmpresa">Observación*</label>
+                @Html.TextBoxFor(q => q.ObservacionCambio, new { @class = "form-control", id = "ObservacionCambio" })
+                @Html.ValidationMessageFor(q => q.ObservacionCambio, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_MatriculaRubro")
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index","CambioPlantillaMatricula", new { Area = "Academico" })">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+<script>
+    $(function ()
+    {
+        GridViewPartial_MatriculaRubro.PerformCallback();
+    });
+
+    function ValidarEmpleado() {
+        var datos = {
+            IdEmpresa: $('#IdEmpresa').val(),
+            IdTransaccionSession : $('#IdTransaccionSession').val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetDatosMecanismo", "CambioPlantillaMatricula",new { Area = "Academico"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == true) {
+                    $("#Empleado").show();
+                }
+                else {
+                    $("#Empleado").hide();
+                }
+            },
+            error: function (error) {
+
+            }
+        });
+    }
+
+    function SetMatriculaRubro(){
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdPlantilla: IdPlantilla.GetValue(),
+            IdMatricula: $("#IdMatricula").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetMatriculaRubro", "CambioPlantillaMatricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_MatriculaRubro.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+

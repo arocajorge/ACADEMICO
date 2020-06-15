@@ -163,9 +163,54 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdProfesor = model.IdProfesor, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdProfesor = model.IdProfesor, Exito = true });
         }
 
+        public ActionResult Consultar(int IdEmpresa = 0, int IdProfesor = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_Profesor_Info model = bus_profesor.GetInfo(IdEmpresa, IdProfesor);
+
+            if (model.prof_foto == null)
+                model.prof_foto = new byte[0];
+
+            try
+            {
+
+                model.prof_foto = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + model.IdEmpresa.ToString("000") + model.IdProfesor.ToString("000000") + ".jpg");
+            }
+            catch (Exception)
+            {
+
+                model.prof_foto = new byte[0];
+            }
+
+            if (model == null)
+                return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Profesor", "Index");
+            if (model.Estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos();
+            return View(model);
+        }
         public ActionResult Modificar(int IdEmpresa = 0, int IdProfesor = 0, bool Exito = false)
         {
             #region Validar Session
@@ -248,7 +293,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdProfesor = model.IdProfesor, Exito = true });
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdProfesor = model.IdProfesor, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdProfesor = model.IdProfesor, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdProfesor = 0)

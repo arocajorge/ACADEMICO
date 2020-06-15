@@ -60,20 +60,21 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
-                {
-                    if (ViewBag.Modificar == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMateria = DataBinder.Eval(tc.DataItem, "IdMateria") }));
-                        ViewContext.Writer.Write("&nbsp;");
-                    }
+                ViewContext.Writer.Write(Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMateria = DataBinder.Eval(tc.DataItem, "IdMateria") }));
+                //if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                //{
+                //    if (ViewBag.Modificar == true)
+                //    {
+                //        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMateria = DataBinder.Eval(tc.DataItem, "IdMateria") }));
+                //        ViewContext.Writer.Write("&nbsp;");
+                //    }
 
-                    if (ViewBag.Anular == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMateria = DataBinder.Eval(tc.DataItem, "IdMateria") },
-                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
-                    }
-                }
+                //    if (ViewBag.Anular == true)
+                //    {
+                //        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMateria = DataBinder.Eval(tc.DataItem, "IdMateria") },
+                //        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                //    }
+                //}
 
             });
             c.SetHeaderTemplateContent(tc =>

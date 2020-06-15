@@ -49,6 +49,7 @@ namespace Core.Data.Academico
                     {
                         IdCatalogoTipoFicha = Entity.IdCatalogoTipoFicha,
                         Codigo = Entity.Codigo,
+                        Estado = Entity.Estado,
                         NomCatalogoTipoFicha = Entity.NomCatalogoTipoFicha
                     };
                 }
