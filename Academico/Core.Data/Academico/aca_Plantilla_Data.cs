@@ -65,7 +65,8 @@ namespace Core.Data.Academico
                         TipoDescuento = Entity.TipoDescuento,
                         IdTipoNota = Entity.IdTipoNota,
                         AplicaParaTodo = Entity.AplicaParaTodo,
-                        Valor = Entity.Valor
+                        Valor = Entity.Valor,
+                        Estado = Entity.Estado
                     };
                 }
 

@@ -311,7 +311,6 @@
     <Compile Include="Areas\Facturacion\Controllers\NotaDeCreditoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDeDebitoFacturacionController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\PuntoVentaController.cs" />
-    <Compile Include="Areas\Facturacion\Controllers\tb_sis_Impuesto_Data.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TerminoPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
     <Compile Include="Areas\Facturacion\FacturacionAreaRegistration.cs" />
@@ -8750,6 +8749,12 @@
     <Content Include="Areas\Academico\Views\ConductaEquivalencia\Consultar.cshtml" />
     <Content Include="Areas\Academico\Views\CatalogoTipoFicha\Consultar.cshtml" />
     <Content Include="Areas\Academico\Views\CatalogoFicha\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\Rubro\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\PlantillaTipo\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\Plantilla\Consultar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\ClienteTipo\Consultar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\PuntoVenta\Consultar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\TipoNota\Consultar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

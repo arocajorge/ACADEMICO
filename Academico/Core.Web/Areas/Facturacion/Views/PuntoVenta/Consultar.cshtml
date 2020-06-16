@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Facturacion.fa_PuntoVta_Info
 @{
-    ViewBag.Title = "Anular punto";
+    ViewBag.Title = "Consultar punto de venta";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -9,11 +9,57 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 
-@using (Html.BeginForm("Anular", "PuntoVenta", FormMethod.Post, new { @class = "form", @rolw = "form" }))
+@using (Html.BeginForm("Consultar", "PuntoVenta", FormMethod.Post, new { @class = "form", @rolw = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession)
     @Html.HiddenFor(q => q.IdPuntoVta)
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-9 col-md-1">
+                @if (@ViewBag.Nuevo == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo", "PuntoVenta", new { Area = "Facturacion", IdEmpresa = Model.IdEmpresa }, null)">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "PuntoVenta", new { Area = "Facturacion", IdEmpresa = Model.IdEmpresa, IdSucursal = Model.IdSucursal,IdPuntoVta = Model.IdPuntoVta }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                @if (@ViewBag.Anular == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "PuntoVenta", new { Area = "Facturacion", IdEmpresa = Model.IdEmpresa, IdSucursal = Model.IdSucursal, IdPuntoVta = Model.IdPuntoVta }, null)">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
 
@@ -112,26 +158,15 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
-                <div class="form-group has-error">
-                    <label for="MotiAnula">Motivo anulación*</label>
-                    @Html.TextAreaFor(q => q.MotivoAnulacion, new { @class = "form-control", @rows = 3 })
-                    @Html.ValidationMessageFor(q => q.MotivoAnulacion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
                 <div class="form-group">
                     @Html.Action("GridViewPartial_puntoventa_usuario")
                 </div>
             </div>
         </div>
     </div>
+
     <div class="box-footer">
-        <button type="submit" class="btn btn-danger">Anular</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "PuntoVenta", new { Area = "Facturacion" }, null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index", "PuntoVenta", new {   Area = "Facturacion" }, null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

@@ -3,6 +3,7 @@ using Core.Bus.Caja;
 using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Bus.SeguridadAcceso;
+using Core.Info.Academico;
 using Core.Info.Facturacion;
 using Core.Info.General;
 using Core.Info.Helps;
@@ -27,6 +28,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
         fa_PuntoVta_x_seg_usuario_List Lista_PtoVta_Usuario = new fa_PuntoVta_x_seg_usuario_List();
         string mensaje = string.Empty;
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
 
         public ActionResult Index()
         {
@@ -121,6 +124,13 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                 IdSucursal = bus_sede.GetInfo(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede)).IdSucursal,
             };
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "PuntoVenta", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
+
             cargar_combos(model);
             return View(model);
         }
@@ -135,8 +145,44 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 cargar_combos(model);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal, IdPuntoVta = model.IdPuntoVta, Exito = true });
         }
+
+        public ActionResult Consultar(int IdEmpresa = 0, int IdSucursal = 0, int IdPuntoVta = 0, bool Exito=false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            fa_PuntoVta_Info model = bus_punto.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
+            model.lst_usuarios = bus_punto_usuario.get_list(IdEmpresa, IdPuntoVta);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            Lista_PtoVta_Usuario.set_list(model.lst_usuarios, model.IdTransaccionSession);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "PuntoVenta", "Index");
+            if (model.estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos(model);
+            return View(model);
+        }
+
         public ActionResult Modificar(int IdEmpresa = 0, int IdSucursal = 0, int IdPuntoVta = 0)
         {
             #region Validar Session
@@ -147,11 +193,20 @@ namespace Core.Web.Areas.Facturacion.Controllers
             #endregion
 
             fa_PuntoVta_Info model = bus_punto.get_info(IdEmpresa, IdSucursal, IdPuntoVta);
-            model.lst_usuarios = bus_punto_usuario.get_list(IdEmpresa,IdPuntoVta);
+            var lst = bus_punto_usuario.get_list(IdEmpresa, IdPuntoVta);
+            model.lst_usuarios = new List<fa_PuntoVta_x_seg_usuario_Info>();
+            model.lst_usuarios = bus_punto_usuario.get_list(IdEmpresa, IdPuntoVta);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             Lista_PtoVta_Usuario.set_list(model.lst_usuarios, model.IdTransaccionSession);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "PuntoVenta", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
+
             cargar_combos(model);
             return View(model);
         }
@@ -166,7 +221,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 cargar_combos(model);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal, IdPuntoVta = model.IdPuntoVta, Exito = true });
         }
         public ActionResult Anular(int IdEmpresa = 0, int IdSucursal = 0, int IdPuntoVta = 0)
         {
@@ -185,6 +240,13 @@ namespace Core.Web.Areas.Facturacion.Controllers
             {
                 return RedirectToAction("Index");
             }
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "PuntoVenta", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
+
             cargar_combos(model);
             return View(model);
         }

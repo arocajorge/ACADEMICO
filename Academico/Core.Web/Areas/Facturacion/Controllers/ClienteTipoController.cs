@@ -18,6 +18,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
     {
         #region Variables
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
         #region Index
         fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();
@@ -95,7 +96,32 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, Idtipo_cliente = model.Idtipo_cliente, Exito = true });
+        }
+
+        public ActionResult Consultar(int IdEmpresa = 0, int Idtipo_cliente = 0, bool Exito=false)
+        {
+            fa_cliente_tipo_Info model = bus_clientetipo.get_info(IdEmpresa, Idtipo_cliente);
+            if (model == null)
+            {
+                return RedirectToAction("Index");
+            }
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "ClienteTipo", "Index");
+            if (model.estado == "I")
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+            cargar_combos(IdEmpresa);
+            return View(model);
         }
         public ActionResult Modificar(int IdEmpresa = 0, int Idtipo_cliente = 0)
         {
@@ -122,7 +148,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, Idtipo_cliente = model.Idtipo_cliente, Exito = true });
         }
         public ActionResult Anular(int IdEmpresa = 0, int Idtipo_cliente = 0)
         {

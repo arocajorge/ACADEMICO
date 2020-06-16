@@ -1,0 +1,167 @@
+﻿@model Core.Info.Facturacion.fa_TipoNota_Info
+@{
+    ViewBag.Title = "Consultar Tipo ";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
+@using (Html.BeginForm("Consultar", "TipoNota", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+@Html.HiddenFor(q => q.IdTipoNota)
+@Html.HiddenFor(q => q.IdTransaccionSession)
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-offset-9 col-md-1">
+            @if (@ViewBag.Nuevo == true)
+            {
+                <div class="form-group">
+                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo", "TipoNota", new { Area = "Facturacion", IdEmpresa = Model.IdEmpresa }, null)">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            }
+        </div>
+        <div class="col-md-1">
+            @if (@ViewBag.Modificar == true)
+            {
+                <div class="form-group">
+                    <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "TipoNota", new { Area = "Facturacion", IdEmpresa = Model.IdEmpresa, IdTipoNota = Model.IdTipoNota }, null)">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                </div>
+            }
+        </div>
+        <div class="col-md-1">
+            @if (@ViewBag.Anular == true)
+            {
+                <div class="form-group">
+                    <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "TipoNota", new { Area = "Facturacion", IdEmpresa = Model.IdEmpresa, IdTipoNota = Model.IdTipoNota }, null)">
+                        <i class="fa fa-remove"></i>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="CodTipoNota">Código</label>
+                @Html.TextBoxFor(q => q.CodTipoNota, new { @class = "form-control" })
+                @Html.ValidationMessageFor(q => q.CodTipoNota, "", new { @class = "form", @role = "text-danger" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="IdCtaCble">Cuenta contable*</label>
+                @Html.Partial("_CmbCuenta_TipoNota", Model)
+                @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="IdCtaCble">Cuenta contable CxC*</label>
+                @Html.Partial("_CmbCuentaCxC_TipoNota", Model)
+                @Html.ValidationMessageFor(q => q.IdCtaCbleCXC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="Tipo">Tipo*</label>
+                @Html.DropDownListFor(q => q.Tipo, new SelectList(ViewBag.lst_tipos, "Key", "Value"), new { @class = "form-control", @id = "Tipo" })
+                @Html.ValidationMessageFor(q => q.Tipo, "", new { @class = "form", @role = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3" id="div_movimiento">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for=""></label>
+                @Html.DevExpress().CheckBoxFor(q => q.GeneraMoviInven, settings =>
+               {
+                   settings.Name = "GeneraMoviInven";
+                   settings.Text = "Genera movimiento inventario";
+               }).GetHtml()
+                @Html.ValidationMessageFor(q => q.GeneraMoviInven, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="IdCtaCble">Producto</label>
+                @Html.Partial("_CmbProducto_TipoNota", Model.IdProducto)
+                @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="No_Descripcion">Descripción*</label>
+                @Html.TextBoxFor(q => q.No_Descripcion, new { @class = "form-control" })
+                @Html.ValidationMessageFor(q => q.No_Descripcion, "", new { @class = "form", @role = "text-danger" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box-footer">
+    <a class="btn btn-default" href="@Url.Action("Index","TipoNota",new { Area = "Facturacion" },null)">Cancelar</a>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+}
+<script>
+    $(function () {
+        ocultar_mostrar_div_movimiento();
+
+        $("#Tipo").change(function () {
+            ocultar_mostrar_div_movimiento();
+        });
+        $("#GeneraMoviInven").change(function () {
+            ocultar_mostrar_div_movimiento();
+        });
+    })
+
+    function ocultar_mostrar_div_movimiento() {
+        var tipo = ($("#Tipo").val());
+        if (tipo == "D") {
+            $("#div_movimiento").hide();
+        } else {
+            $("#div_movimiento").show();
+        }
+    }
+</script>
