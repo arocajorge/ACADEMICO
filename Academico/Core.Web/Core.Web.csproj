@@ -8755,6 +8755,12 @@
     <Content Include="Areas\Facturacion\Views\ClienteTipo\Consultar.cshtml" />
     <Content Include="Areas\Facturacion\Views\PuntoVenta\Consultar.cshtml" />
     <Content Include="Areas\Facturacion\Views\TipoNota\Consultar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\TerminoPago\Consultar.cshtml" />
+    <Content Include="Areas\Banco\Views\BancoCuenta\Consultar.cshtml" />
+    <Content Include="Areas\Banco\Views\TalonarioChequeBanco\Consultar.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoNotaBanco\Consultar.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Consultar.cshtml" />
+    <Content Include="Areas\Banco\Views\TipoFlujoBanco\Consultar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

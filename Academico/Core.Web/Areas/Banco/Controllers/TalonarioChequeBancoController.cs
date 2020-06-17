@@ -1,4 +1,6 @@
-﻿using Core.Bus.Banco;
+﻿using Core.Bus.Academico;
+using Core.Bus.Banco;
+using Core.Info.Academico;
 using Core.Info.Banco;
 using Core.Web.Helps;
 using System;
@@ -16,6 +18,8 @@ namespace Core.Web.Areas.Banco.Controllers
         ba_Talonario_cheques_x_banco_Bus bus_talonario = new ba_Talonario_cheques_x_banco_Bus();
         ba_Banco_Cuenta_Bus bus_bco_cuenta = new ba_Banco_Cuenta_Bus();
         ba_Banco_Cuenta_Bus bus_banco = new ba_Banco_Cuenta_Bus();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Index
@@ -86,7 +90,32 @@ namespace Core.Web.Areas.Banco.Controllers
                 }
                 secuencia++;
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdBanco = model.IdBanco, Num_cheque=model.Num_cheque, Exito = true });
+        }
+
+        public ActionResult Consultar(int IdEmpresa = 0, int IdBanco = 0, string Num_cheque = "", bool Exito=false )
+        {
+            ba_Talonario_cheques_x_banco_Info model = bus_talonario.get_info(IdEmpresa, IdBanco, Num_cheque);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoNotaBanco", "Index");
+            if (model.Estado == "I")
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos(IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
+            return View(model);
         }
 
         public ActionResult Modificar(int IdEmpresa = 0, int IdBanco = 0, string Num_cheque = "")
@@ -106,7 +135,7 @@ namespace Core.Web.Areas.Banco.Controllers
                 cargar_combos(model.IdEmpresa, Convert.ToInt32(SessionFixed.IdSucursal));
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdBanco = model.IdBanco, Num_cheque = model.Num_cheque, Exito = true });
         }
 
         #endregion

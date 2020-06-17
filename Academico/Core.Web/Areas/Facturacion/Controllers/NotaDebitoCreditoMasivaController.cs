@@ -585,6 +585,10 @@ namespace Core.Web.Areas.Facturacion.Controllers
                     if (!reader.IsDBNull(0) && cont > 0)
                     {
                         var cedula_ruc_alumno = (Convert.ToString(reader.GetValue(0))).Trim();
+                        var num_factura = (Convert.ToString(reader.GetValue(4))).Trim();
+                        var serie1 = num_factura.Substring(0,3);
+                        var serie2 = num_factura.Substring(4, 3);
+                        var numero = num_factura.Substring(8, 9);
                         var info_alumno = bus_alumno.get_info_x_num_cedula(IdEmpresa, cedula_ruc_alumno);
                         var TieneCliente = true;
                         #region Cliente
@@ -608,7 +612,10 @@ namespace Core.Web.Areas.Facturacion.Controllers
                             ObservacionDet = Convert.ToString(reader.GetValue(3)),
                             TieneCliente = TieneCliente,
                             pe_nombreCompleto = info_alumno.pe_nombreCompleto,
-                            pe_cedulaRuc = info_alumno.pe_cedulaRuc
+                            pe_cedulaRuc = info_alumno.pe_cedulaRuc,
+                            vt_serie1=serie1,
+                            vt_serie2 = serie2,
+                            vt_NumFactura = numero
                         };
 
                         Lista_DetalleNotas.Add(info_det);

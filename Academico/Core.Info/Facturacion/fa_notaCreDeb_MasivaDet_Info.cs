@@ -30,5 +30,8 @@ namespace Core.Info.Facturacion
         public string pe_nombreCompleto { get; set; }
         public string Codigo { get; set; }
         public bool TieneCliente { get; set; }
+        public string vt_serie1 { get; set; }
+        public string vt_serie2 { get; set; }
+        public string vt_NumFactura { get; set; }
     }
 }

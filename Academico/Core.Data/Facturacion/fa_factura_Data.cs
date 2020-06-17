@@ -148,6 +148,61 @@ namespace Core.Data.Facturacion
             }
         }
 
+        public fa_factura_Info get_info(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdAlumno, string Serie1, string Serie2, string NumFact)
+        {
+            try
+            {
+                fa_factura_Info info = new fa_factura_Info();
+                using (EntitiesFacturacion Context = new EntitiesFacturacion())
+                {
+                    fa_factura Entity = Context.fa_factura.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega
+                    && q.vt_serie1 == Serie1 && q.vt_serie2 == Serie2 && q.vt_NumFactura == NumFact && q.Estado == "A");
+                    if (Entity == null) return null;
+                    info = new fa_factura_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdSucursal = Entity.IdSucursal,
+                        IdBodega = Entity.IdBodega,
+                        IdCbteVta = Entity.IdCbteVta,
+                        CodCbteVta = Entity.CodCbteVta,
+                        vt_tipoDoc = Entity.vt_tipoDoc,
+                        vt_serie1 = Entity.vt_serie1,
+                        vt_serie2 = Entity.vt_serie2,
+                        vt_NumFactura = Entity.vt_NumFactura,
+                        Fecha_Autorizacion = Entity.fecha_primera_cuota,
+                        vt_autorizacion = Entity.vt_autorizacion,
+                        vt_fecha = Entity.vt_fecha,
+                        vt_fech_venc = Entity.vt_fech_venc,
+                        IdCliente = Entity.IdCliente,
+                        IdVendedor = Entity.IdVendedor,
+                        vt_plazo = Entity.vt_plazo,
+                        vt_Observacion = Entity.vt_Observacion,
+                        vt_tipo_venta = Entity.vt_tipo_venta,
+                        IdCaja = Entity.IdCaja,
+                        IdPuntoVta = Entity.IdPuntoVta,
+                        fecha_primera_cuota = Entity.fecha_primera_cuota,
+                        Fecha_Transaccion = Entity.fecha_primera_cuota,
+                        Estado = Entity.Estado,
+                        esta_impresa = Entity.esta_impresa,
+                        valor_abono = Entity.valor_abono,
+                        IdNivel = Entity.IdNivel,
+                        IdCatalogo_FormaPago = Entity.IdCatalogo_FormaPago,
+                        IdAlumno = Entity.IdAlumno,
+                        IdEmpresa_rol = Entity.IdEmpresa_rol,
+                        IdEmpleado = Entity.IdEmpleado
+                    };
+
+                    info.info_resumen = info.info_resumen ?? new fa_factura_resumen_Info();
+                }
+                return info;
+            }
+            catch (Exception ex)
+            {
+                tb_LogError_Data LogData = new tb_LogError_Data();
+                LogData.GuardarDB(new tb_LogError_Info { Descripcion = ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.Message, Clase = "fa_factura_Data", Metodo = "get_info" });
+                return new fa_factura_Info();
+            }
+        }
         private decimal get_id(int IdEmpresa, int IdSucursal, int IdBodega)
         {
             try
