@@ -1,4 +1,6 @@
-﻿using Core.Bus.General;
+﻿using Core.Bus.Academico;
+using Core.Bus.General;
+using Core.Info.Academico;
 using Core.Info.General;
 using Core.Web.Helps;
 using System;
@@ -17,6 +19,7 @@ namespace Core.Web.Areas.General.Controllers
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Index
@@ -62,6 +65,12 @@ namespace Core.Web.Areas.General.Controllers
 
             tb_Religion_Info model = new tb_Religion_Info();
 
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Religion", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
+
             return View(model);
         }
         [HttpPost]
@@ -74,7 +83,38 @@ namespace Core.Web.Areas.General.Controllers
                 ViewBag.mensaje = "No se ha podido guardar el registro";
                 return View(model);
             }
-            return RedirectToAction("Modificar", new { IdReligion = model.IdReligion, Exito = true });
+            return RedirectToAction("Consultar", new { IdReligion = model.IdReligion, Exito = true });
+        }
+
+        public ActionResult Consultar(int IdReligion = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            tb_Religion_Info model = bus_religion.GetInfo(IdReligion);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Religion", "Index");
+            if (model.Estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            return View(model);
         }
 
         public ActionResult Modificar(int IdReligion = 0, bool Exito = false)
@@ -89,6 +129,12 @@ namespace Core.Web.Areas.General.Controllers
             tb_Religion_Info model = bus_religion.GetInfo(IdReligion);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Religion", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
 
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
@@ -106,7 +152,7 @@ namespace Core.Web.Areas.General.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdReligion = model.IdReligion, Exito = true });
+            return RedirectToAction("Consultar", new { IdReligion = model.IdReligion, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdReligion = 0)
@@ -122,6 +168,12 @@ namespace Core.Web.Areas.General.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Religion", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
 
             return View(model);
         }

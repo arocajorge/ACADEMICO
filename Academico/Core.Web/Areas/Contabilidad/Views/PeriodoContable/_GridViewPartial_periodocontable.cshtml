@@ -63,19 +63,20 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "pe_estado")) == "A")
-                {
-                    if (ViewBag.Modificar == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") }));
-                        ViewContext.Writer.Write("&nbsp;");
-                    }
-                    if (ViewBag.Anular == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") },
-                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
-                    }
-                }
+                ViewContext.Writer.Write(Html.ActionLink("Consultar", "Consultar", new { IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") }));
+                //if (Convert.ToString(DataBinder.Eval(tc.DataItem, "pe_estado")) == "A")
+                //{
+                //    if (ViewBag.Modificar == true)
+                //    {
+                //        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") }));
+                //        ViewContext.Writer.Write("&nbsp;");
+                //    }
+                //    if (ViewBag.Anular == true)
+                //    {
+                //        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdPeriodo = DataBinder.Eval(tc.DataItem, "IdPeriodo") },
+                //        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                //    }
+                //}
             });
 
             c.SetHeaderTemplateContent(tc =>

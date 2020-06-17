@@ -21,7 +21,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_PlantillaTipo_Bus bus_tipo_plantilla = new aca_PlantillaTipo_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
-
+        
         #region Index
         public ActionResult Index()
         {
@@ -60,6 +60,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_PlantillaTipo", model);
         }
         #endregion
+
         #region Acciones
         public ActionResult Nuevo()
         {

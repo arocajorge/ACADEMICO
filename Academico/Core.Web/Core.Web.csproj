@@ -8761,6 +8761,14 @@
     <Content Include="Areas\Banco\Views\TipoNotaBanco\Consultar.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoPlantilla\Consultar.cshtml" />
     <Content Include="Areas\Banco\Views\TipoFlujoBanco\Consultar.cshtml" />
+    <Content Include="Areas\General\Views\TipoDocumentoTalonario\Consultar.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\AnioFiscal\Consultar.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\PeriodoContable\Consultar.cshtml" />
+    <Content Include="Areas\General\Views\GrupoEtnico\Consultar.cshtml" />
+    <Content Include="Areas\General\Views\Persona\Consultar.cshtml" />
+    <Content Include="Areas\General\Views\Profesion\Consultar.cshtml" />
+    <Content Include="Areas\General\Views\Religion\Consultar.cshtml" />
+    <Content Include="Areas\General\Views\TarjetaCredito\Consultar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

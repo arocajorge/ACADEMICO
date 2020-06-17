@@ -19,6 +19,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         ct_anio_fiscal_Bus bus_anio = new ct_anio_fiscal_Bus();
         tb_mes_Bus bus_mes = new tb_mes_Bus();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
         #region Index
         public ActionResult Index(int IdanioFiscal = 0)
@@ -78,7 +79,30 @@ namespace Core.Web.Areas.Contabilidad.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdPeriodo = model.IdPeriodo, Exito = true });
+        }
+        public ActionResult Consultar(int IdPeriodo = 0, bool Exito=false)
+        {
+            ct_periodo_Info model = bus_periodo.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), IdPeriodo);
+            if (model == null)
+                return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Contabilidad", "PeriodoContable", "Index");
+            if (model.pe_estado == "I")
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos();
+            return View(model);
         }
         public ActionResult Modificar(int IdPeriodo = 0)
         {
@@ -102,7 +126,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdPeriodo = model.IdPeriodo, Exito = true });
         }
 
         public ActionResult Anular(int IdPeriodo = 0)

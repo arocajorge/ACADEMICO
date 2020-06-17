@@ -61,19 +61,20 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToString(DataBinder.Eval(tc.DataItem, "af_estado")) == "A")
-                {
-                    if (ViewBag.Modificar == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") }));
-                        ViewContext.Writer.Write("&nbsp;");
-                    }
-                    if (ViewBag.Anular == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") },
-                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
-                    }
-                }
+                ViewContext.Writer.Write(Html.ActionLink("Consultar", "Consultar", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") }));
+                //if (Convert.ToString(DataBinder.Eval(tc.DataItem, "af_estado")) == "A")
+                //{
+                //    if (ViewBag.Modificar == true)
+                //    {
+                //        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") }));
+                //        ViewContext.Writer.Write("&nbsp;");
+                //    }
+                //    if (ViewBag.Anular == true)
+                //    {
+                //        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdanioFiscal = DataBinder.Eval(tc.DataItem, "IdanioFiscal") },
+                //        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                //    }
+                //}
             });
 
             c.SetHeaderTemplateContent(tc =>
@@ -84,7 +85,7 @@
                     Html.ActionLink("Nuevo", "Nuevo").ToHtmlString()
                 );
                 }
-                
+
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
