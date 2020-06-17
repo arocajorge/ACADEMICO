@@ -1,0 +1,86 @@
+
+@using System.Web.UI.WebControls;
+
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridViewPartial_AsignacionTutorInspector";
+        settings.KeyFieldName = "IdParalelo";
+        settings.CallbackRouteValues = new { Controller = "AsignacionTutorInspector", Action = "GridViewPartial_AsignacionTutorInspector_Consultar" };
+
+
+        settings.Width = Unit.Percentage(100);
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
+
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowEditButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+
+        settings.SettingsContextMenu.Enabled = false;
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NomParalelo";
+            column.Caption = "Paralelo";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 1;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NomTutor";
+            column.Caption = "Tutor";
+            column.VisibleIndex = 2;
+            column.Width = Unit.Percentage(40);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NomInspector";
+            column.Caption = "Inspector";
+            column.VisibleIndex = 3;
+            column.Width = Unit.Percentage(40);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdProfesorTutor";
+            column.Caption = "Tutor";
+            column.Width = Unit.Percentage(40);
+            column.Visible = false;
+            column.VisibleIndex = 2;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
+            {
+                Html.RenderPartial("_CmbProfesorTutor", DataBinder.Eval(c.DataItem, "IdProfesorTutor"));
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdProfesorInspector";
+            column.Caption = "Inspector";
+            column.Width = Unit.Percentage(40);
+            column.Visible = false;
+            column.VisibleIndex = 3;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
+            {
+                Html.RenderPartial("_CmbProfesorInspector", DataBinder.Eval(c.DataItem, "IdProfesorInspector"));
+            });
+        });
+        settings.ClientSideEvents.BeginCallback = "function(s,e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();}";//OnBeginGridCallback(s,e);
+    });
+}
+@grid.Bind(Model).GetHtml()

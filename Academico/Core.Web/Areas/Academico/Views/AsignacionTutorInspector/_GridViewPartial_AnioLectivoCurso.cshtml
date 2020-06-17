@@ -65,7 +65,7 @@
                 //if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
                 //{
                 ViewContext.Writer.Write(
-            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdSede = DataBinder.Eval(tc.DataItem, "IdSede"), IdNivel = DataBinder.Eval(tc.DataItem, "IdNivel"), IdJornada = DataBinder.Eval(tc.DataItem, "IdJornada"), IdCurso = DataBinder.Eval(tc.DataItem, "IdCurso") })
+            Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), IdSede = DataBinder.Eval(tc.DataItem, "IdSede"), IdNivel = DataBinder.Eval(tc.DataItem, "IdNivel"), IdJornada = DataBinder.Eval(tc.DataItem, "IdJornada"), IdCurso = DataBinder.Eval(tc.DataItem, "IdCurso") })
             );
                 //}
             });

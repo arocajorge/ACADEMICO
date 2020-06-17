@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Academico.aca_AnioLectivo_Curso_Paralelo_Info
 @{
-    ViewBag.Title = "Modificar asignación de tutor e inspector por paralelo";
+    ViewBag.Title = "Consultar asignación de tutor e inspector por paralelo";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -18,10 +18,26 @@
         }, 200);
     }
 </script>
-@using (Html.BeginForm("Modificar", "AsignacionTutorInspector", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
+@using (Html.BeginForm("Consultar", "AsignacionTutorInspector", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-11 col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "AsignacionTutorInspector", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAnio = Model.IdAnio, IdSede=Model.IdSede, IdNivel=Model.IdNivel, IdJornada = Model.IdJornada, IdCurso = Model.IdCurso }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -65,7 +81,7 @@
             </div>
         </div>
     </div>
-    @Html.Action("GridViewPartial_AsignacionTutorInspector")
+    @Html.Action("GridViewPartial_AsignacionTutorInspector_Consultar")
     <div class="box-footer">
         <a class="btn btn-default" href="@Url.Action("Index", "AsignacionTutorInspector", new { Area ="Academico" }, null)">Cancelar</a>
     </div>

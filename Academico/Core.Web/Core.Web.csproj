@@ -8769,6 +8769,8 @@
     <Content Include="Areas\General\Views\Profesion\Consultar.cshtml" />
     <Content Include="Areas\General\Views\Religion\Consultar.cshtml" />
     <Content Include="Areas\General\Views\TarjetaCredito\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTutorInspector\_GridViewPartial_AsignacionTutorInspector_Consultar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8860,6 +8862,7 @@
     <TypeScriptCompile Include="AdminLTE\bower_components\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\Academico\ACA_001_Rpt.resx">
       <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
