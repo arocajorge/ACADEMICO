@@ -44,5 +44,31 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<cxc_cobro_det_Info> get_list_AP(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_AP(IdEmpresa);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<cxc_cobro_det_Info> get_list_AP(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.get_list_AP(IdEmpresa, IdAlumno);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

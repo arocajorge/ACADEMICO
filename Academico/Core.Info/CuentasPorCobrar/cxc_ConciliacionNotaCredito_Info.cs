@@ -18,6 +18,7 @@ namespace Core.Info.CuentasPorCobrar
         public int IdBodega { get; set; }
         public decimal IdNota { get; set; }
         public decimal IdCobro { get; set; }
+        public Nullable<decimal> IdAplicacion { get; set; }
         [Required(ErrorMessage = "El campo fecha es obligatorio")]
         public System.DateTime Fecha { get; set; }
         public double Valor { get; set; }

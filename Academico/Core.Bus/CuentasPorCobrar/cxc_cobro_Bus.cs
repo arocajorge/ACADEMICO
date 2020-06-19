@@ -134,7 +134,18 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
-
+        
+        public List<cxc_cobro_Info> get_list_aplicacion_masiva(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_aplicacion_masiva(IdEmpresa);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public double GetSaldoAlumno(int IdEmpresa, decimal IdAlumno, bool ConDescuento)
         {
             try

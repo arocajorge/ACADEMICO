@@ -1244,6 +1244,8 @@ namespace Core.Data.Facturacion
                         {
                             IdEmpresa = item.IdEmpresa,
                             IdSucursal = item.IdSucursal,
+                            IdBodega = item.IdBodega,
+                            IdNota = item.IdNota,
                             IdAlumno = item.IdAlumno,
                             sc_saldo = Convert.ToDouble(item.Saldo)
                         };
@@ -1259,6 +1261,45 @@ namespace Core.Data.Facturacion
             }
         }
 
+        public List<fa_notaCreDeb_Info> get_list_aplicacion_masiva(int IdEmpresa)
+        {
+            try
+            {
+                List<fa_notaCreDeb_Info> Lista = new List<fa_notaCreDeb_Info>();
+                using (EntitiesFacturacion Context = new EntitiesFacturacion())
+                {
+                    var lst = Context.vwfa_notaCreDeb_ParaConciliarNC.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno==2618).ToList();
+
+                    foreach (var item in lst)
+                    {
+                        var info = new fa_notaCreDeb_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdSucursal = item.IdSucursal,
+                            IdBodega = item.IdBodega,
+                            IdNota = item.IdNota,
+                            IdAlumno = item.IdAlumno,
+                            NomAlumno = item.pe_nombreCompleto,
+                            sc_saldo = Convert.ToDouble(item.Saldo)
+                        };
+                        Lista.Add(info);
+                    }
+                    //Lista = Context.vwfa_notaCreDeb_ParaConciliarNC.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno==4605).GroupBy(q => new { q.IdEmpresa, q.IdAlumno, q.pe_nombreCompleto }).Select(q => new fa_notaCreDeb_Info
+                    //{
+                    //    IdEmpresa = q.Key.IdEmpresa,
+                    //    IdAlumno = q.Key.IdAlumno,
+                    //    NomAlumno = q.Key.pe_nombreCompleto,
+                    //    sc_saldo = (double?)q.Sum(h => h.Saldo)
+                    //}).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool Contabilizar(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota)
         {
             try

@@ -28,10 +28,7 @@
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_det_cxc_cobro" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_x_caj_Caja_Movimiento_cxc_cobro" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_cobro_x_ct_cbtecble_cxc_cobro" />
-        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_ConciliacionNotaCredito" Width="1.5" PointX="7.5" PointY="0.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_ConciliacionNotaCreditoDet" Width="1.5" PointX="9.75" PointY="4.25" />
-        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_ConciliacionNotaCredito_cxc_cobro" />
-        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_ConciliacionNotaCreditoDet_cxc_ConciliacionNotaCredito" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_ConciliacionNotaCredito" Width="1.5" PointX="14.375" PointY="10.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_Parametro" Width="1.5" PointX="12.375" PointY="15.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cobro" Width="1.5" PointX="14.375" PointY="15.75" />
@@ -52,6 +49,9 @@
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_LiquidacionTarjeta_x_cxc_cobro" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal" Width="1.5" PointX="16.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo" Width="1.5" PointX="9.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_ConciliacionNotaCredito" Width="1.5" PointX="7.5" PointY="0.75" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_ConciliacionNotaCredito_cxc_cobro" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_ConciliacionNotaCreditoDet_cxc_ConciliacionNotaCredito" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

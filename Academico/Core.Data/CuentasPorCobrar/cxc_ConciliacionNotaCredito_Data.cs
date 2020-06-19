@@ -98,6 +98,7 @@ namespace Core.Data.CuentasPorCobrar
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdConciliacion = Entity.IdConciliacion,
+                        IdAplicacion = Entity.IdAplicacion,
                         IdAlumno = Entity.IdAlumno,
                         IdSucursal = Entity.IdSucursal,
                         IdBodega = Entity.IdBodega,
@@ -138,6 +139,7 @@ namespace Core.Data.CuentasPorCobrar
                 {
                     IdEmpresa = info.IdEmpresa,
                     IdConciliacion = info.IdConciliacion = GetId(info.IdEmpresa),
+                    IdAplicacion = info.IdAplicacion,
                     IdAlumno = info.IdAlumno,
                     IdSucursal = info.IdSucursal,
                     IdBodega = info.IdBodega,
