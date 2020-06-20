@@ -73,6 +73,7 @@ namespace Core.Bus.Facturacion
                                 IdNota = item_nc.IdNota,
                                 Fecha = info.Fecha,
                                 Valor = SaldoRealNC,
+                                IdUsuarioCreacion = info.IdUsuarioCreacion,
                                 Observacion = info.Observacion,
                             };
                             #endregion
@@ -107,14 +108,16 @@ namespace Core.Bus.Facturacion
 
                                         //secuencia_nt = item_nc.
                                     });
-
-                                    odata_conciliacion.GuardarDB(info_conciliacion);
                                 }
-                                else
-                                {
-                                    break;
-                                }
+                                
                             }
+                            if(info_conciliacion.ListaDet.Count >0)
+                            {
+                                info_conciliacion.Valor = info_conciliacion.ListaDet.Sum(q => q.Valor);
+
+                                odata_conciliacion.GuardarDB(info_conciliacion);
+                            }
+                            
                         }
                         
                     }   
