@@ -465,9 +465,13 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea1 += "\t";//Ciudad
                             linea1 += "\t";//Telefono
                             linea1 += "\t";//Localidad
-                            var Referencia = string.Empty;
-                            linea1 += (string.IsNullOrEmpty(Referencia) ? "" : (Referencia.Length > 200 ? Referencia.Substring(0, 200) : Referencia.Trim())) + "\t";
-                            linea1 += item.CodigoAlumno + "\t";//REFERENCIA ADICIONAL
+                            //var Referencia = string.Empty;
+                            //linea1 += (string.IsNullOrEmpty(Referencia) ? "" : (Referencia.Length > 200 ? Referencia.Substring(0, 200) : Referencia.Trim())) + "\t";
+                            linea1 += item.CodigoAlumno + "\t";//REFERENCIA
+                            linea1 += "\t";//REFERENCIA adicional
+                            linea1 += "\t";//Base Iva 0%
+                            linea1 += "\t";//Base ICE
+                            linea1 += "\t";//
 
                             file.WriteLine(linea1);
 
@@ -572,7 +576,7 @@ namespace Core.Web.Areas.Banco.Controllers
                             var valorDecimalDiferencia = Convert.ToDouble((ValorDiferencia - valorEnteroDiferencia).ToString("N2")) * 100;
 
                             linea2 += "094";
-                            linea2 += item.CodigoAlumno.ToString().PadLeft(15, ' ');
+                            linea2 += item.CodigoAlumno.ToString().PadRight(15, ' ');
                             linea2 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + "01" + "/" + info.Fecha.Year.ToString();
                             linea2 += "0".PadRight(3, ' ');
                             linea2 += (valorEntero.ToString().PadLeft(8,'0') + "." + valorDecimal.ToString().PadRight(2, '0'));
@@ -580,9 +584,9 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + info.Fecha.Day.ToString().PadLeft(2, '0') + "/" + info.Fecha.Year.ToString();//FECHA PRONTO PAGO
                             linea2 += "P";
                             linea2 += (string.IsNullOrEmpty(item.pe_nombreCompleto) ? "" : (item.pe_nombreCompleto.Length > 30 ? item.pe_nombreCompleto.Substring(0, 30) : item.pe_nombreCompleto.Trim())).PadRight(30, ' ');
-                            linea2 += " ".PadRight(15, ' ');
-                            linea2 += " ".PadRight(3, ' ');
-                            linea2 += " ".PadRight(15, ' ');
+                            linea2 += " ".PadRight(15, ' ');//CURSO
+                            linea2 += " ".PadRight(3, ' ');//PARALELO
+                            linea2 += " ".PadRight(15, ' ');//SECCION
                             linea2 += (valorEntero.ToString().PadLeft(8, '0') + "." + valorDecimal.ToString().PadRight(2, '0'));
                             linea2 += " ".PadRight(10, ' ');
                             linea2 += "1";
