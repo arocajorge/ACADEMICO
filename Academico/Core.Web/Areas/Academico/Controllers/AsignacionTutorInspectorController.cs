@@ -25,6 +25,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Sede_Bus bus_sede = new aca_Sede_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
         #region Combos bajo demanada
@@ -150,6 +151,14 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_AsignacionTutorInspector", model);
         }
 
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_AsignacionTutorInspector_Consultar()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_ParaleloPorCurso.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_AsignacionTutorInspector_Consultar", model);
+        }
+
         [HttpPost, ValidateInput(false)]
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpressEditorsBinder))] aca_AnioLectivo_Curso_Paralelo_Info info_det)
         {
@@ -160,6 +169,50 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Acciones
+        public ActionResult Consultar(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            aca_AnioLectivo_Curso_Paralelo_Info model = new aca_AnioLectivo_Curso_Paralelo_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdAnio = IdAnio,
+                IdSede = IdSede,
+                IdNivel = IdNivel,
+                IdJornada = IdJornada,
+                IdCurso = IdCurso,
+            };
+            model.lst_detalle = new List<aca_AnioLectivo_Curso_Paralelo_Info>();
+            model.lst_detalle = bus_ParaleloPorCurso.GetListByCurso(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "AsignacionTutorInspector", "Index");
+            var info_anio = bus_anio.GetInfo(model.IdEmpresa, model.IdAnio);
+            if (info_anio.BloquearMatricula == true)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            Lista_ParaleloPorCurso.set_list(model.lst_detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return View(model);
+        }
         public ActionResult Modificar(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, bool Exito = false)
         {
             #region Validar Session

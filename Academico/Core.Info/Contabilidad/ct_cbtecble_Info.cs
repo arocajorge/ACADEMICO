@@ -24,6 +24,7 @@ namespace Core.Info.Contabilidad
         #region Campos de auditoria
         public string IdUsuario { get; set; }
         public string IdUsuarioAnu { get; set; }
+        [Required(ErrorMessage = "El campo campo de anulación es obligatorio")]
         public string cb_MotivoAnu { get; set; }
         public string IdUsuarioUltModi { get; set; }
         public Nullable<System.DateTime> cb_FechaAnu { get; set; }

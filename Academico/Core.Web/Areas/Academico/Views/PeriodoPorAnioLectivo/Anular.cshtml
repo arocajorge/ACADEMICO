@@ -9,7 +9,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Modificar", "AnioLectivoPorPeriodo", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Anular", "PeriodoPorAnioLectivo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
 
@@ -37,7 +37,16 @@
             </div>
         </div>
     </div>
-    @Html.Action("GridViewPartial_PlantillaRubro")
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.Action("GridViewPartial_periodos")
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
@@ -51,7 +60,7 @@
     </div>
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
-        <a class="btn btn-default" href="@Url.Action("Index","AnioLectivoPorPeriodo",new { Area = "Academico" },null)">Cancelar</a>
+        <a class="btn btn-default" href="@Url.Action("Index","PeriodoPorAnioLectivo",new { Area = "Academico" },null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

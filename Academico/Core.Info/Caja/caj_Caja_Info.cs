@@ -31,6 +31,7 @@ namespace Core.Info.Caja
         public string IdUsuario_Responsable { get; set; }
         public string IdUsuarioUltAnu { get; set; }
         public Nullable<System.DateTime> Fecha_UltAnu { get; set; }
+        [Required(ErrorMessage = "El campo motivo de anulación es obligatorio")]
         public string MotivoAnu { get; set; }
 
         public List<caj_Caja_x_seg_usuario_Info> ListaResponsables { get; set; }

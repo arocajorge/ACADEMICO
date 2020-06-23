@@ -21,6 +21,7 @@ namespace Core.Web.Areas.Caja.Controllers
         caj_Caja_Movimiento_Tipo_Bus bus_tipomovimiento = new caj_Caja_Movimiento_Tipo_Bus();
         ct_plancta_Bus bus_plancta = new ct_plancta_Bus();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -106,10 +107,34 @@ namespace Core.Web.Areas.Caja.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdTipoMovi = model.IdTipoMovi, Exito = true });
         }
 
-        public ActionResult Modificar(int IdEmpresa = 0, int IdTipoMovi = 0)
+        public ActionResult Consultar(int IdEmpresa = 0, int IdTipoMovi = 0, bool Exito = false)
+        {
+            caj_Caja_Movimiento_Tipo_Info model = bus_tipomovimiento.get_info(IdEmpresa, IdTipoMovi);
+            if (model == null)
+                return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Caja", "TipoMovimientoCaja", "Index");
+            if (model.Estado == "I")
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos(IdEmpresa);
+            return View(model);
+        }
+
+        public ActionResult Modificar(int IdEmpresa = 0, int IdTipoMovi = 0, bool Exito=false)
         {
             caj_Caja_Movimiento_Tipo_Info model = bus_tipomovimiento.get_info(IdEmpresa, IdTipoMovi);
             if (model == null)
@@ -119,6 +144,10 @@ namespace Core.Web.Areas.Caja.Controllers
             if (!info.Modificar)
                 return RedirectToAction("Index");
             #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -131,7 +160,7 @@ namespace Core.Web.Areas.Caja.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdTipoMovi = model.IdTipoMovi, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdTipoMovi = 0)

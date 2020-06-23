@@ -267,7 +267,7 @@
         </div>
     </div>
         <div class="box-footer">
-            if (!(ViewBag.NoMostrarBotones ?? true))
+            @if (!(ViewBag.NoMostrarBotones ?? true))
             {
             <button type="submit" class="btn btn-danger">Anular</button>
             }

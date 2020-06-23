@@ -27,6 +27,7 @@ namespace Core.Data.Base
         public int IdBodega { get; set; }
         public decimal IdNota { get; set; }
         public decimal IdCobro { get; set; }
+        public Nullable<decimal> IdAplicacion { get; set; }
         public System.DateTime Fecha { get; set; }
         public double Valor { get; set; }
         public string Observacion { get; set; }

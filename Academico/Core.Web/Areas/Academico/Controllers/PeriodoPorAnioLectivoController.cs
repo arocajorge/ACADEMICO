@@ -17,6 +17,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
         aca_AnioLectivo_Periodo_List Lista_AnioLectivo_Periodo = new aca_AnioLectivo_Periodo_List();
         string mensaje = string.Empty;
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
@@ -106,6 +107,47 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Acciones
+        public ActionResult Consultar(int IdEmpresa = 0, int IdAnio = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_AnioLectivo_Periodo_Info model = new aca_AnioLectivo_Periodo_Info();
+            model.IdEmpresa = IdEmpresa;
+            model.IdAnio = IdAnio;
+            model.lst_detalle = bus_anio_periodo.GetList(IdEmpresa, IdAnio, true);
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "PeriodoPorAnioLectivo", "Index");
+            var info_anio = bus_anio.GetInfo(model.IdEmpresa, model.IdAnio);
+            if (info_anio.BloquearMatricula == true)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.lst_detalle = new List<aca_AnioLectivo_Periodo_Info>();
+            model.lst_detalle = bus_anio_periodo.GetList(model.IdEmpresa, model.IdAnio, true);
+            Lista_AnioLectivo_Periodo.set_list(model.lst_detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return View(model);
+        }
+
         public ActionResult Modificar(int IdEmpresa = 0, int IdAnio = 0, bool Exito = false)
         {
             #region Validar Session
@@ -122,6 +164,12 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "PeriodoPorAnioLectivo", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
 
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
@@ -149,7 +197,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdAnio = 0)
@@ -162,11 +210,20 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_AnioLectivo_Periodo_Info model = new aca_AnioLectivo_Periodo_Info();
+            model.IdEmpresa = IdEmpresa;
+            model.IdAnio = IdAnio;
             model.lst_detalle = bus_anio_periodo.GetList(IdEmpresa, IdAnio, true);
 
             if (model == null)
                 return RedirectToAction("Index");
 
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "PeriodoPorAnioLectivo", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
             model.lst_detalle = new List<aca_AnioLectivo_Periodo_Info>();
             model.lst_detalle = bus_anio_periodo.GetList(model.IdEmpresa, model.IdAnio, true);
             Lista_AnioLectivo_Periodo.set_list(model.lst_detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));

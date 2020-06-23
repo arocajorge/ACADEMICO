@@ -40,7 +40,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwcxc_cartera_x_cobrar> vwcxc_cartera_x_cobrar { get; set; }
         public virtual DbSet<vwcxc_cobro_det> vwcxc_cobro_det { get; set; }
         public virtual DbSet<cxc_cobro> cxc_cobro { get; set; }
-        public virtual DbSet<cxc_ConciliacionNotaCredito> cxc_ConciliacionNotaCredito { get; set; }
         public virtual DbSet<cxc_ConciliacionNotaCreditoDet> cxc_ConciliacionNotaCreditoDet { get; set; }
         public virtual DbSet<vwcxc_ConciliacionNotaCredito> vwcxc_ConciliacionNotaCredito { get; set; }
         public virtual DbSet<cxc_Parametro> cxc_Parametro { get; set; }
@@ -56,5 +55,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwcxc_LiquidacionTarjeta_x_cxc_cobro> vwcxc_LiquidacionTarjeta_x_cxc_cobro { get; set; }
         public virtual DbSet<vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal> vwcxc_MotivoLiquidacionTarjeta_x_tb_sucursal { get; set; }
         public virtual DbSet<vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo> vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo { get; set; }
+        public virtual DbSet<cxc_ConciliacionNotaCredito> cxc_ConciliacionNotaCredito { get; set; }
     }
 }

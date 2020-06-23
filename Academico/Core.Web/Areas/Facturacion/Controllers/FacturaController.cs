@@ -703,7 +703,68 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return View(model);
             };
             //return RedirectToAction("Index");
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal, IdBodega = model.IdBodega, IdCbteVta = model.IdCbteVta, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal, IdBodega = model.IdBodega, IdCbteVta = model.IdCbteVta, Exito = true });
+        }
+        public ActionResult Consultar(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            fa_factura_Info model = bus_factura.get_info(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+            if (model == null)
+                return RedirectToAction("Index");
+            if (model.esta_impresa == null ? false : Convert.ToBoolean(model.esta_impresa))
+                return RedirectToAction("Index");
+            model.IdEmpresa_rol = (model.IdEmpresa_rol == null ? IdEmpresa : model.IdEmpresa_rol);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "Factura", "Index");
+            if (model.Estado=="A" && string.IsNullOrEmpty(model.vt_autorizacion))
+            {
+                
+            }
+            else
+            {
+                info.Modificar = false;
+            }
+
+            if (model.Estado == "I")
+            {
+                info.Anular = false;
+            }
+
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            model.lst_det = bus_det.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+            List_det.set_list(model.lst_det, model.IdTransaccionSession);
+            cargar_combos(model);
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+            #region Validacion Periodo
+            ViewBag.MostrarBoton = true;
+            if (!bus_periodo.ValidarFechaTransaccion(IdEmpresa, model.vt_fecha, cl_enumeradores.eModulo.FAC, model.IdSucursal, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                ViewBag.MostrarBoton = false;
+            }
+            #endregion
+
+            #region Validacion si tiene cobros
+            if (ViewBag.MostrarBoton == true && !bus_factura.ValidarDocumentoAnulacion(model.IdEmpresa, model.IdSucursal, model.IdBodega, model.IdCbteVta, model.vt_tipoDoc, ref mensaje))
+            {
+                ViewBag.mensaje = "El documento tiene cobros realizados, por favor anule los cobros primero";
+                ViewBag.MostrarBoton = false;
+            }
+            #endregion
+
+            return View(model);
         }
         public ActionResult Modificar(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0, bool Exito = false)
         {
@@ -778,7 +839,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return View(model);
             };
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal, IdBodega = model.IdBodega, IdCbteVta = model.IdCbteVta, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdSucursal = model.IdSucursal, IdBodega = model.IdBodega, IdCbteVta = model.IdCbteVta, Exito = true });
         }
         public ActionResult Anular(int IdEmpresa = 0, int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
         {

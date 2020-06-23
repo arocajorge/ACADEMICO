@@ -82,7 +82,36 @@ namespace Core.Web.Areas.Facturacion.Controllers
             {
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdTerminoPago = model.IdTerminoPago, Exito = true });
+        }
+
+        public ActionResult Consultar(string IdTerminoPago = "")
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            fa_TerminoPago_Info model = bus_terminopago.get_info(IdTerminoPago);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.Lst_fa_TerminoPago_Distribucion = bus_termino_dist.get_list(IdTerminoPago);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            List_fa_TerminoPago_Distribucion.set_list(model.Lst_fa_TerminoPago_Distribucion, model.IdTransaccionSession);
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "TerminoPago", "Index");
+            if (model.estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+            return View(model);
         }
 
         public ActionResult Modificar(string IdTerminoPago = "")
@@ -117,7 +146,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
             {
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdTerminoPago = model.IdTerminoPago, Exito = true });
         }
 
         public ActionResult Anular(string IdTerminoPago = "")

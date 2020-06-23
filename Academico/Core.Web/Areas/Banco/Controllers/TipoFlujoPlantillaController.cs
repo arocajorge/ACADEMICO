@@ -25,6 +25,7 @@ namespace Core.Web.Areas.Banco.Controllers
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         //ba_Archivo_Flujo_List List_flujo = new ba_Archivo_Flujo_List();
         string mensaje = string.Empty;
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Combos bajo demanda
@@ -127,7 +128,43 @@ namespace Core.Web.Areas.Banco.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdPlantilla = model.IdPlantilla, Exito = true });
+        }
+
+        public ActionResult Consultar(int IdEmpresa = 0, decimal IdPlantilla = 0, bool Exito=false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            ba_TipoFlujo_Plantilla_Info model = bus_TipoFlujo_Plantilla.GetInfo(IdEmpresa, IdPlantilla);
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoPlantilla", "Index");
+            if (model.Estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.Lista_TipoFlujo_PlantillaDet = bus_TipoFlujo_PlantillaDet.GetList(model.IdEmpresa, model.IdPlantilla);
+            TipoFlujo_PlantillaDet_Lista.set_list(model.Lista_TipoFlujo_PlantillaDet, model.IdTransaccionSession);
+
+            return View(model);
         }
 
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdPlantilla = 0)
@@ -172,7 +209,7 @@ namespace Core.Web.Areas.Banco.Controllers
             {
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdPlantilla = model.IdPlantilla, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, decimal IdPlantilla = 0)
@@ -319,7 +356,7 @@ namespace Core.Web.Areas.Banco.Controllers
                     IdTipoFlujo = item.IdTipoFlujo,
                     Descricion = item.Descricion,
                     Porcentaje = item.Porcentaje,
-                    Valor = (item.Porcentaje * Valor) / 100
+                    Valor =Math.Round( ((item.Porcentaje * Valor) / 100), 2,MidpointRounding.AwayFromZero)
                 });
             }
 

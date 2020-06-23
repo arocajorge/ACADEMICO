@@ -20,7 +20,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         ct_anio_fiscal_x_cuenta_utilidad_Bus bus_aniocta = new ct_anio_fiscal_x_cuenta_utilidad_Bus();
         string mensaje = string.Empty;
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
-
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         public ActionResult Index()
         {
             #region Permisos
@@ -92,6 +92,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             }
             return true;
         }
+
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0, int IdanioFiscal = 0)
         {
@@ -162,7 +163,38 @@ namespace Core.Web.Areas.Contabilidad.Controllers
                 cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdanioFiscal = model.IdanioFiscal, Exito = true });
+        }
+
+        public ActionResult Consultar(int IdanioFiscal = 0, bool Exito=false)
+        {
+            ct_anio_fiscal_Info model = bus_anio_fiscal.get_info(IdanioFiscal);
+            if (model == null)
+                return RedirectToAction("Index");
+            model.info_anio_ctautil = bus_aniocta.get_info(Convert.ToInt32(SessionFixed.IdEmpresa), IdanioFiscal);
+            if (model.info_anio_ctautil == null)
+                model.info_anio_ctautil = new ct_anio_fiscal_x_cuenta_utilidad_Info
+                {
+                    IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                    IdanioFiscal = model.IdanioFiscal
+                };
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Contabilidad", "AnioFiscal", "Index");
+            if (model.af_estado == "I")
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
+            return View(model);
         }
 
         public ActionResult Modificar(int IdanioFiscal = 0)
@@ -203,7 +235,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
                 cargar_combos(Convert.ToInt32(SessionFixed.IdEmpresa));
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdanioFiscal = model.IdanioFiscal, Exito = true });
         }
         public ActionResult Anular(int IdanioFiscal = 0)
         {

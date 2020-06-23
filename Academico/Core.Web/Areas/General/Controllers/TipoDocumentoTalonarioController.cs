@@ -1,5 +1,6 @@
 ﻿using Core.Bus.Academico;
 using Core.Bus.General;
+using Core.Info.Academico;
 using Core.Info.General;
 using Core.Info.Helps;
 using Core.Web.Helps;
@@ -18,7 +19,10 @@ namespace Core.Web.Areas.General.Controllers
         tb_sis_Documento_Tipo_Bus bus_tipodoc = new tb_sis_Documento_Tipo_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         aca_Sede_Bus bus_sede = new aca_Sede_Bus();
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
+
         #region Index / Metodos
         public ActionResult Index()
         {
@@ -80,6 +84,7 @@ namespace Core.Web.Areas.General.Controllers
         }
 
         #endregion
+
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
@@ -89,6 +94,13 @@ namespace Core.Web.Areas.General.Controllers
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 FechaCaducidad = DateTime.Now
             };
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "TipoDocumentoTalonario", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
+
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -151,7 +163,32 @@ namespace Core.Web.Areas.General.Controllers
                 }
                 secuencia++;
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, CodDocumentoTipo=model.CodDocumentoTipo, Establecimiento=model.Establecimiento, PuntoEmision=model.PuntoEmision, NumDocumento=model.NumDocumento,  Exito = true });
+        }
+
+        public ActionResult Consultar(int IdEmpresa = 0, string CodDocumentoTipo = "", string Establecimiento = "", string PuntoEmision = "", string NumDocumento = "", bool Exito=false)
+        {
+            tb_sis_Documento_Tipo_Talonario_Info model = bus_talonario.get_info(IdEmpresa, CodDocumentoTipo, Establecimiento, PuntoEmision, NumDocumento);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "TipoDocumentoTalonario", "Index");
+            if (model.Estado == "I")
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos(IdEmpresa);
+            return View(model);
         }
 
         public ActionResult Modificar(int IdEmpresa = 0, string CodDocumentoTipo = "", string Establecimiento = "", string PuntoEmision = "", string NumDocumento = "")
@@ -159,6 +196,13 @@ namespace Core.Web.Areas.General.Controllers
             tb_sis_Documento_Tipo_Talonario_Info model = bus_talonario.get_info(IdEmpresa, CodDocumentoTipo, Establecimiento, PuntoEmision, NumDocumento);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "TipoDocumentoTalonario", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
+
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -171,7 +215,7 @@ namespace Core.Web.Areas.General.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, CodDocumentoTipo = model.CodDocumentoTipo, Establecimiento = model.Establecimiento, PuntoEmision = model.PuntoEmision, NumDocumento = model.NumDocumento, Exito = true });
 
         }
 
@@ -180,6 +224,13 @@ namespace Core.Web.Areas.General.Controllers
             tb_sis_Documento_Tipo_Talonario_Info model = bus_talonario.get_info(IdEmpresa, CodDocumentoTipo, Establecimiento, PuntoEmision, NumDocumento);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "TipoDocumentoTalonario", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
+
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -196,6 +247,7 @@ namespace Core.Web.Areas.General.Controllers
         }
 
         #endregion
+
         #region Json
         public JsonResult get_NumeroDocumentoInicial(int IdEmpresa = 0, string CodDocumentoTipo = "", string Establecimiento = "", string PuntoEmision = "")
         {

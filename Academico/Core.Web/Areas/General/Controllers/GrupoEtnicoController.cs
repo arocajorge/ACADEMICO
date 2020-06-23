@@ -89,7 +89,37 @@ namespace Core.Web.Areas.General.Controllers
                 ViewBag.mensaje = "No se ha podido guardar el registro";
                 return View(model);
             }
-            return RedirectToAction("Modificar", new { IdGrupoEtnico = model.IdGrupoEtnico, Exito = true });
+            return RedirectToAction("Consultar", new { IdGrupoEtnico = model.IdGrupoEtnico, Exito = true });
+        }
+
+        public ActionResult Consultar(int IdGrupoEtnico = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            tb_GrupoEtnico_Info model = bus_GrupoEtnico.GetInfo(IdGrupoEtnico);
+            if (model == null)
+                return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "GrupoEtnico", "Index");
+            if (model.Estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            return View(model);
         }
 
         public ActionResult Modificar(int IdGrupoEtnico = 0, bool Exito = false)
@@ -125,7 +155,7 @@ namespace Core.Web.Areas.General.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdGrupoEtnico = model.IdGrupoEtnico, Exito = true });
+            return RedirectToAction("Consultar", new { IdGrupoEtnico = model.IdGrupoEtnico, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, int IdGrupoEtnico = 0)

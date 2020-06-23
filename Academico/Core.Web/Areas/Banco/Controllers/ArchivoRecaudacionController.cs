@@ -157,6 +157,12 @@ namespace Core.Web.Areas.Banco.Controllers
             };
             Lista_det.set_list(model.Lst_det, model.IdTransaccionSession);
 
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "ArchivoRecaudacion", "Index");
+            if (!info.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
+
             cargar_combos();
             return View(model);
         }
@@ -164,14 +170,17 @@ namespace Core.Web.Areas.Banco.Controllers
         public ActionResult Nuevo(ba_ArchivoRecaudacion_Info model)
         {
             model.Nom_Archivo = "COBROS_MULTICASH";
+            var anio = (Convert.ToDateTime(model.Fecha).Year).ToString();
+            var mes = ((Convert.ToDateTime(model.Fecha).Month).ToString());
+            var dia = ((Convert.ToDateTime(model.Fecha).Day).ToString());
             if (model.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECBG))
             {
-                model.Nom_Archivo = "COBROS_MULTICASH_BG";
+                model.Nom_Archivo = "RCE_"+ anio + mes.PadLeft(2,'0') + dia.PadLeft(2, '0') + "_PAH";
             }
 
             if (model.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECPB))
             {
-                model.Nom_Archivo = "COBROS_MULTICASH_PB";
+                model.Nom_Archivo = "PRODUBANCO"+ anio + mes.PadLeft(2, '0') + dia.PadLeft(2, '0');
             }
 
             if (model.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECBB))
@@ -193,7 +202,41 @@ namespace Core.Web.Areas.Banco.Controllers
                 cargar_combos();
                 return View(model);
             }
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdArchivo = model.IdArchivo, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdArchivo = model.IdArchivo, Exito = true });
+        }
+        public ActionResult Consultar(int IdEmpresa = 0, decimal IdArchivo = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            ba_ArchivoRecaudacion_Info model = bus_archivo.GetInfo(IdEmpresa, IdArchivo);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "ArchivoRecaudacion", "Index");
+            if (model.Estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            model.Lst_det = bus_archivo_det.GetList(model.IdEmpresa, model.IdArchivo);
+            Lista_det.set_list(model.Lst_det, model.IdTransaccionSession);
+
+            cargar_combos();
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+            return View(model);
         }
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdArchivo = 0, bool Exito = false)
         {
@@ -206,6 +249,13 @@ namespace Core.Web.Areas.Banco.Controllers
             ba_ArchivoRecaudacion_Info model = bus_archivo.GetInfo(IdEmpresa, IdArchivo);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "ArchivoRecaudacion", "Index");
+            if (!info.Modificar)
+                return RedirectToAction("Index");
+            #endregion
+
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.Lst_det = bus_archivo_det.GetList(model.IdEmpresa, model.IdArchivo);
             Lista_det.set_list(model.Lst_det, model.IdTransaccionSession);
@@ -236,7 +286,7 @@ namespace Core.Web.Areas.Banco.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdArchivo = model.IdArchivo, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdArchivo = model.IdArchivo, Exito = true });
         }
 
         public ActionResult Anular(int IdEmpresa = 0, decimal IdArchivo = 0)
@@ -244,6 +294,12 @@ namespace Core.Web.Areas.Banco.Controllers
             ba_ArchivoRecaudacion_Info model = bus_archivo.GetInfo(IdEmpresa, IdArchivo);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "ArchivoRecaudacion", "Index");
+            if (!info.Anular)
+                return RedirectToAction("Index");
+            #endregion
 
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             model.Lst_det = bus_archivo_det.GetList(model.IdEmpresa, model.IdArchivo);
@@ -359,7 +415,7 @@ namespace Core.Web.Areas.Banco.Controllers
 
             var info_archivo = bus_archivo.GetInfo(IdEmpresa, IdArchivo);
             info_archivo.Lst_det = bus_archivo_det.GetList_Archivo(IdEmpresa, IdArchivo);
-            var NombreArchivo = info_archivo.Nom_Archivo + info_archivo.SecuencialDescarga;
+            var NombreArchivo = info_archivo.Nom_Archivo + "_" +info_archivo.SecuencialDescarga;
 
             archivo = GetArchivo(info_archivo, NombreArchivo);
             info_archivo.IdUsuarioModificacion = SessionFixed.IdUsuario;
@@ -409,9 +465,13 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea1 += "\t";//Ciudad
                             linea1 += "\t";//Telefono
                             linea1 += "\t";//Localidad
-                            var Referencia = string.Empty;
-                            linea1 += (string.IsNullOrEmpty(Referencia) ? "" : (Referencia.Length > 200 ? Referencia.Substring(0, 200) : Referencia.Trim())) + "\t";
-                            linea1 += item.CodigoAlumno + "\t";//REFERENCIA ADICIONAL
+                            //var Referencia = string.Empty;
+                            //linea1 += (string.IsNullOrEmpty(Referencia) ? "" : (Referencia.Length > 200 ? Referencia.Substring(0, 200) : Referencia.Trim())) + "\t";
+                            linea1 += item.CodigoAlumno + "\t";//REFERENCIA
+                            linea1 += "\t";//REFERENCIA adicional
+                            linea1 += "\t";//Base Iva 0%
+                            linea1 += "\t";//Base ICE
+                            linea1 += "\t";//
 
                             file.WriteLine(linea1);
 
@@ -435,6 +495,7 @@ namespace Core.Web.Areas.Banco.Controllers
                         {
                             string linea1 = "";
                             string linea2 = "";
+                            string linea3 = "";
                             double Valor = 0;
                             double valorEntero = 0;
                             double valorDecimal = 0;
@@ -473,6 +534,18 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += (valorEnteroDiferencia.ToString() + valorDecimalDiferencia.ToString().PadRight(2, '0')).PadLeft(10, '0');
 
                             file.WriteLine(linea2);
+
+                            linea3 += "RC";
+                            linea3 += item.Secuencia.ToString().PadLeft(7, '0');
+                            linea3 += "VM";
+                            linea3 += item.Fecha.Year.ToString() + item.Fecha.Month.ToString().PadLeft(2, '0') + item.Fecha.Day.ToString().PadLeft(2, '0');//DESDE
+                            linea3 += item.Fecha.Year.ToString() + item.Fecha.Month.ToString().PadLeft(2, '0') + item.Fecha.Day.ToString().PadLeft(2, '0');// HASTA
+                            linea3 += "FI";
+                            linea3 += "0000000000";
+                            linea3 += "0000000000";
+                            linea3 += (valorEnteroDiferencia.ToString() + valorDecimalDiferencia.ToString().PadRight(2, '0')).PadLeft(10, '0');
+
+                            file.WriteLine(linea3);
                         }
                     }
 
@@ -503,7 +576,7 @@ namespace Core.Web.Areas.Banco.Controllers
                             var valorDecimalDiferencia = Convert.ToDouble((ValorDiferencia - valorEnteroDiferencia).ToString("N2")) * 100;
 
                             linea2 += "094";
-                            linea2 += item.CodigoAlumno.ToString().PadLeft(15, ' ');
+                            linea2 += item.CodigoAlumno.ToString().PadRight(15, ' ');
                             linea2 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + "01" + "/" + info.Fecha.Year.ToString();
                             linea2 += "0".PadRight(3, ' ');
                             linea2 += (valorEntero.ToString().PadLeft(8,'0') + "." + valorDecimal.ToString().PadRight(2, '0'));
@@ -511,9 +584,9 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + info.Fecha.Day.ToString().PadLeft(2, '0') + "/" + info.Fecha.Year.ToString();//FECHA PRONTO PAGO
                             linea2 += "P";
                             linea2 += (string.IsNullOrEmpty(item.pe_nombreCompleto) ? "" : (item.pe_nombreCompleto.Length > 30 ? item.pe_nombreCompleto.Substring(0, 30) : item.pe_nombreCompleto.Trim())).PadRight(30, ' ');
-                            linea2 += " ".PadRight(15, ' ');
-                            linea2 += " ".PadRight(3, ' ');
-                            linea2 += " ".PadRight(15, ' ');
+                            linea2 += " ".PadRight(15, ' ');//CURSO
+                            linea2 += " ".PadRight(3, ' ');//PARALELO
+                            linea2 += " ".PadRight(15, ' ');//SECCION
                             linea2 += (valorEntero.ToString().PadLeft(8, '0') + "." + valorDecimal.ToString().PadRight(2, '0'));
                             linea2 += " ".PadRight(10, ' ');
                             linea2 += "1";

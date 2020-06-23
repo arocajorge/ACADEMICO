@@ -20,6 +20,7 @@ namespace Core.Web.Areas.General.Controllers
         tb_Religion_Bus bus_religion = new tb_Religion_Bus();
         tb_profesion_Bus bus_profesion = new tb_profesion_Bus();
         tb_GrupoEtnico_Bus bus_grupoetnico = new tb_GrupoEtnico_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Index
@@ -119,7 +120,34 @@ namespace Core.Web.Areas.General.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Persona");
+            return RedirectToAction("Consultar", new { IdPersona = model.IdPersona, Exito = true });
+        }
+
+        public ActionResult Consultar(decimal IdPersona = 0, bool Exito=false)
+        {
+            tb_persona_Info model = bus_persona.get_info(IdPersona);
+            if (model == null)
+                return RedirectToAction("Index", "Persona");
+
+            model.CodCatalogoCONADIS = (model.CodCatalogoCONADIS == null ? "" : model.CodCatalogoCONADIS);
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "Persona", "Index");
+            if (model.pe_estado == "I")
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos();
+            return View(model);
         }
 
         public ActionResult Modificar(decimal IdPersona = 0)
@@ -165,7 +193,7 @@ namespace Core.Web.Areas.General.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Persona");
+            return RedirectToAction("Consultar", new { IdPersona = model.IdPersona, Exito = true });
         }
 
         public ActionResult Anular(decimal IdPersona = 0)

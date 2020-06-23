@@ -53,15 +53,16 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (ViewBag.Modificar == true)
-                {
-                    ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") }));
-                }
-                ViewContext.Writer.Write(
-            "&nbsp;" +
-                    Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") },
-                        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
-                );
+                ViewContext.Writer.Write(Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") }));
+                //if (ViewBag.Modificar == true)
+                //{
+                //    ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") }));
+                //}
+                //ViewContext.Writer.Write(
+                //    "&nbsp;" +
+                //    Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio"), Secuencia = DataBinder.Eval(tc.DataItem, "Secuencia") },
+                //        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" })
+                //);
             });
             c.SetHeaderTemplateContent(tc =>
             {

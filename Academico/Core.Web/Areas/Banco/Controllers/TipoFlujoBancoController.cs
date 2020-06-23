@@ -24,6 +24,7 @@ namespace Core.Web.Areas.Banco.Controllers
         ba_Cbte_Ban_x_ba_TipoFlujo_Bus bus_flujo_det = new ba_Cbte_Ban_x_ba_TipoFlujo_Bus();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         //ba_Archivo_Flujo_List List_flujo = new ba_Archivo_Flujo_List();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Metodos ComboBox bajo demanda flujo
@@ -100,7 +101,31 @@ namespace Core.Web.Areas.Banco.Controllers
                 cargar_combo(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdTipoFlujo = model.IdTipoFlujo, Exito = true });
+        }
+
+        public ActionResult Consultar(int IdEmpresa = 0, decimal IdTipoFlujo = 0, bool Exito=false)
+        {
+            ba_TipoFlujo_Info model = bus_flujo.get_info(IdEmpresa, IdTipoFlujo);
+            if (model == null)
+                return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Banco", "TipoFlujoBanco", "Index");
+            if (model.Estado == "I")
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combo(IdEmpresa);
+            return View(model);
         }
 
         public ActionResult Modificar(int IdEmpresa = 0, decimal IdTipoFlujo = 0)
@@ -125,7 +150,7 @@ namespace Core.Web.Areas.Banco.Controllers
                 cargar_combo(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdTipoFlujo = model.IdTipoFlujo, Exito = true });
         }
         public ActionResult Anular(int IdEmpresa = 0, decimal IdTipoFlujo = 0)
         {

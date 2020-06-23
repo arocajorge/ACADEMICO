@@ -150,29 +150,45 @@ namespace Core.Web.Areas.Academico.Controllers
             else
             {
                 var lst_menu = Lista_menu_usuario.get_list();
-                var output = array.GroupBy(q => q).ToList();
-                foreach (var item in lst_menu)
+                //var output = array.GroupBy(q => q).ToList();
+                //foreach (var item in lst_menu)
+                //{
+                //    foreach (var item2 in output)
+                //    {
+                //        if (item.IdMenu == Convert.ToInt32(item2.Key))
+                //        {
+                //            lista.Add(item);
+                //        }
+                //    }
+                //}
+                if (Ids != "")
                 {
-                    foreach (var item2 in output)
+                    var output = array.GroupBy(q => q).ToList();
+                    foreach (var item in lst_menu)
                     {
-                        if (item.IdMenu == Convert.ToInt32(item2.Key))
+                        foreach (var item2 in output)
                         {
-                            lista.Add(item);
+                            if (item.IdMenu == Convert.ToInt32(item2.Key))
+                            {
+                                lista.Add(item);
+                            }
                         }
                     }
                 }
-                //var output = array.GroupBy(q => q).ToList();
-                //foreach (var item in output)
-                //{
-                //    if (!string.IsNullOrEmpty(item.Key))
-                //    {
-                //        var lst_menu = Lista_menu_usuario.get_list();
-                //        var menu = lst_menu.Where(q => q.IdMenu == Convert.ToInt32(item.Key)).FirstOrDefault();
-
-                //        if (menu != null)
-                //            lista.Add(menu);
-                //    }
-                //}
+                else
+                {
+                    var lst_menu_nuevo = lst_menu.Where(q => q.seleccionado == true).ToList();
+                    foreach (var item in lst_menu)
+                    {
+                        foreach (var item2 in lst_menu_nuevo)
+                        {
+                            if (item.IdMenu == Convert.ToInt32(item2.IdMenu))
+                            {
+                                lista.Add(item);
+                            }
+                        }
+                    }
+                }
             }
 
             bus_menu_sede_usuario.eliminarDB(IdEmpresa, IdSede, IdUsuario);
@@ -205,6 +221,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
     public class seg_Menu_x_Sede_x_Usuario_Lista_Memoria
     {
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         static string Variable = "fx_MenuXEmpresaXUsuarioFixed_Lista";
         public List<aca_Menu_x_seg_usuario_Info> get_list()
         {
@@ -228,6 +245,16 @@ namespace Core.Web.Areas.Academico.Controllers
             edited_info.Nuevo = info.Nuevo;
             edited_info.Modificar = info.Modificar;
             edited_info.Anular = info.Anular;
+
+            var existe = bus_permisos.getInfo(edited_info.IdEmpresa, edited_info.IdSede, edited_info.IdUsuario, edited_info.IdMenu);
+            if (existe == null && edited_info.seleccionado==true)
+            {
+                bus_permisos.guardarDB(edited_info);
+            }
+            else
+            {
+                bus_permisos.modificarDB(edited_info);
+            }
         }
     }
 

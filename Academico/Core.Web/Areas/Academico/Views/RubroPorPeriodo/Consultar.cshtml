@@ -1,0 +1,286 @@
+﻿@model Core.Info.Academico.aca_AnioLectivo_Rubro_Info
+@{
+    ViewBag.Title = "Consultar rubro por año lectivo";
+
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script>
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdPeriodo", GetSelectedFieldValuesCallback);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+    function actualizar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdRubro: IdRubro.GetValue(),
+            IdProducto: IdProducto.GetValue(),
+            Subtotal: $("#Subtotal").val(),
+            IdCod_Impuesto_Iva: $("#IdCod_Impuesto_Iva").val(),
+            Porcentaje: $("#Porcentaje").val(),
+            ValorIVA: $("#ValorIVA").val(),
+            Total: $("#Total").val(),
+            AplicaProntoPago: AplicaProntoPago.GetValue(),
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $("#btn_guardar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("actualizar", "RubroPorPeriodo", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.msg == "") {
+                    //$("#myform").submit();
+                    var url = '@Url.Action("Modificar", "RubroPorPeriodo")' + '?IdEmpresa=' + data.IdEmpresa + '&IdAnio=' + data.IdAnio + '&IdRubro=' + data.IdRubro + '&Exito=true';
+                    window.location.href = url;
+                }
+                else {
+                    alert(data.msg);
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+@using (Html.BeginForm("Consultar", "RubroPorPeriodo", FormMethod.Post, new { @class = "form", @role = "form", @id = "myform" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-9 col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Nuevo == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo", "RubroPorPeriodo", new { Area = "Academico", IdEmpresa = Model.IdEmpresa }, null)">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "RubroPorPeriodo", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAnio = Model.IdAnio, IdRubro=Model.IdRubro }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="Autorizar"></label>
+                @if (@ViewBag.Anular == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "RubroPorPeriodo", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAnio = Model.IdAnio, IdRubro=Model.IdRubro }, null)">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Año Lectivo*</label>
+                    @Html.Partial("_ComboBoxPartial_Anio_Inactivo", Model)
+                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Rubro*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdRubro, settings =>
+                   {
+                       settings.Name = "IdRubro";
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                       settings.Properties.Columns.Add("IdRubro", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                       settings.Properties.Columns.Add("NomRubro", "Rubro").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                       //Campo ID
+                       settings.Properties.ValueField = "IdRubro";
+                       settings.Properties.ValueType = typeof(int);
+                       settings.Properties.TextField = "NomRubro";
+                       settings.Properties.NullText = "== Seleccione ==";
+                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                       settings.ReadOnly = true;
+                   }).BindList(ViewBag.lst_rubro).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdRubro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.AplicaProntoPago, settings =>
+                            {
+                                settings.Name = "AplicaProntoPago";
+                                settings.Text = "Aplica Pronto Pago";
+                            }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.AplicaProntoPago, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdSucursal">Producto*</label>
+                    @Html.Partial("_CmbProducto", Model.IdProducto)
+                    @Html.ValidationMessageFor(q => q.IdProducto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">SubTotal</label>
+                    @Html.TextBoxFor(q => q.Subtotal, new { @class = "form-control", @id= "Subtotal" })
+                    @Html.ValidationMessageFor(q => q.Subtotal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Impuesto</label>
+                    @Html.DropDownListFor(q => q.IdCod_Impuesto_Iva, new SelectList(ViewBag.lst_impuesto, "IdCod_Impuesto", "nom_impuesto"), new { @class = "form-control", @id = "IdCod_Impuesto_Iva", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.IdCod_Impuesto_Iva, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Porcentaje IVA</label>
+                    @Html.TextBoxFor(q => q.Porcentaje, new { @class = "form-control", @id = "Porcentaje", @readonly="readonly" })
+                    @Html.ValidationMessageFor(q => q.Porcentaje, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Valor IVa</label>
+                    @Html.TextBoxFor(q => q.ValorIVA, new { @class = "form-control", @id = "ValorIVA", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.ValorIVA, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Total</label>
+                    @Html.TextBoxFor(q => q.Total, new { @class = "form-control", @id = "Total", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(q => q.Total, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index","RubroPorPeriodo",new { Area = "Academico" },null)">Cancelar</a>
+    </div>
+    @Html.Action("GridViewPartial_RubroPorPeriodo")
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+<script type="text/javascript">
+    $("#Subtotal").change(function () {
+        CalcularTotal();
+    });
+
+    function CalcularValoresProducto(s, e) {
+        var datos = {
+            IdProducto: IdProducto.GetValue(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CalcularValoresProducto", "RubroPorPeriodo",new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                $("#Subtotal").val(data.Subtotal);
+                $("#IdCod_Impuesto_Iva").val(data.IdCod_Impuesto_Iva);
+                $("#Porcentaje").val(data.Porcentaje);
+                $("#ValorIVA").val(data.ValorIva);
+                $("#Total").val(data.Total);
+            },
+            error: function (error) {
+            }
+        });
+    };
+
+    function CalcularTotal() {
+        var datos = {
+            IdProducto: IdProducto.GetValue(),
+            Subtotal: $("#Subtotal").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CalcularTotal", "RubroPorPeriodo",new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                $("#ValorIVA").val(data.ValorIva);
+                $("#Total").val(data.Total);
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+

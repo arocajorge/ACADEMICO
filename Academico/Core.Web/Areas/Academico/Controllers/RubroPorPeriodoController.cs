@@ -27,6 +27,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
         string mensaje = string.Empty;
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
@@ -268,11 +269,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     mensaje = "No se ha podido modificar el registro";
                 }
-
-                Empresa = info_rubro_anio.IdEmpresa;
-                Anio = info_rubro_anio.IdAnio;
-                Rubro = info_rubro_anio.IdRubro;
             }
+            Empresa = info_rubro_anio.IdEmpresa;
+            Anio = info_rubro_anio.IdAnio;
+            Rubro = info_rubro_anio.IdRubro;
 
             return Json(new { msg = mensaje, IdEmpresa = Empresa, IdAnio = Anio, IdRubro = Rubro }, JsonRequestBehavior.AllowGet);
         }
@@ -316,8 +316,51 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
 
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info inf = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "RubroPorPeriodo", "Index");
+            if (!inf.Nuevo)
+                return RedirectToAction("Index");
+            #endregion
+
             model.lst_rubro_anio_periodo = new List<aca_AnioLectivo_Rubro_Periodo_Info>();
             ListaRubroAnioPeriodo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+
+            cargar_combos();
+            return View(model);
+        }
+
+        public ActionResult Consultar(int IdEmpresa = 0, int IdAnio = 0, int IdRubro = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_AnioLectivo_Rubro_Info model = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, IdRubro);
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info inf = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "RubroPorPeriodo", "Index");
+            var info_anio = bus_anio.GetInfo(IdEmpresa, IdAnio);
+            if (info_anio.BloquearMatricula == true)
+            {
+                inf.Modificar = false;
+                inf.Anular = false;
+            }
+
+            ViewBag.Nuevo = inf.Nuevo;
+            ViewBag.Modificar = inf.Modificar;
+            ViewBag.Anular = inf.Anular;
+            #endregion
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.lst_rubro_anio_periodo = new List<aca_AnioLectivo_Rubro_Periodo_Info>();
+            model.lst_rubro_anio_periodo = bus_rubro_anio_periodo.GetListAsignacion(model.IdEmpresa, model.IdAnio, model.IdRubro);
+            ListaRubroAnioPeriodo.set_list(model.lst_rubro_anio_periodo, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
 
             cargar_combos();
             return View(model);
@@ -330,6 +373,12 @@ namespace Core.Web.Areas.Academico.Controllers
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info inf = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "RubroPorPeriodo", "Index");
+            if (!inf.Modificar)
+                return RedirectToAction("Index");
             #endregion
             aca_AnioLectivo_Rubro_Info model = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, IdRubro);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
@@ -351,6 +400,12 @@ namespace Core.Web.Areas.Academico.Controllers
                 return RedirectToAction("Login", new { Area = "", Controller = "Account" });
             SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info inf = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "RubroPorPeriodo", "Index");
+            if (!inf.Anular)
+                return RedirectToAction("Index");
             #endregion
 
             aca_AnioLectivo_Rubro_Info model = bus_rubro_anio.GetInfo(IdEmpresa, IdAnio, IdRubro);

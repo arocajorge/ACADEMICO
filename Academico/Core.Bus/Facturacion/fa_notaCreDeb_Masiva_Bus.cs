@@ -23,6 +23,8 @@ namespace Core.Bus.Facturacion
         tb_sis_Impuesto_Data bus_impuesto = new tb_sis_Impuesto_Data();
         fa_notaCreDeb_Data odata_ncd = new fa_notaCreDeb_Data();
         in_Producto_Data odata_prod = new in_Producto_Data();
+        fa_factura_Data odata_fact = new fa_factura_Data();
+        fa_notaCreDeb_x_fa_factura_NotaDeb_Data odata_saldo = new fa_notaCreDeb_x_fa_factura_NotaDeb_Data();
 
         public List<fa_notaCreDeb_Masiva_Info> Get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin, bool MostrarAnulados)
         {
@@ -156,6 +158,31 @@ namespace Core.Bus.Facturacion
                                 IdPunto_cargo_grupo = null
                             }
                         };
+
+                        #region Cruce
+                        info_ncd.lst_cruce = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>();
+                        var info_factura = odata_fact.get_info(info_ncd.IdEmpresa, info_ncd.IdSucursal, info_ncd.IdBodega, item.IdAlumno, item.vt_serie1, item.vt_serie2, item.vt_NumFactura);
+                        var info_saldo = odata_saldo.get_info_cartera_academico(info_ncd.IdEmpresa, info_ncd.IdSucursal, info_ncd.IdBodega, item.IdCliente, item.IdAlumno, info_factura.IdCbteVta);
+
+                        if (info_factura != null)
+                        {
+                            info_ncd.lst_cruce.Add(new fa_notaCreDeb_x_fa_factura_NotaDeb_Info
+                                {
+                                    IdEmpresa_nt = info_ncd.IdEmpresa,
+                                    IdSucursal_nt = info_ncd.IdSucursal,
+                                    IdBodega_nt = info_ncd.IdBodega,
+                                    secuencia = 1,
+                                    IdEmpresa_fac_nd_doc_mod = info_factura.IdEmpresa,
+                                    IdSucursal_fac_nd_doc_mod = info_factura.IdSucursal,
+                                    IdBodega_fac_nd_doc_mod = info_factura.IdBodega,
+                                    IdCbteVta_fac_nd_doc_mod = info_factura.IdCbteVta,
+                                    vt_tipoDoc = info_factura.vt_tipoDoc,
+                                    Valor_Aplicado = (info_saldo==null || info_saldo.Saldo==0 || info_saldo.Saldo< item.Subtotal ? 0 : item.Subtotal),
+                                    fecha_cruce = DateTime.Now,
+                                    ValorProntoPago = 0
+                            });
+                        }
+                        #endregion
 
                         odata_ncd.guardarDB(info_ncd);
 

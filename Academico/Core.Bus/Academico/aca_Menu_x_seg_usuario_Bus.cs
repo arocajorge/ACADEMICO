@@ -64,6 +64,43 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_Menu_x_seg_usuario_Info getInfo(int IdEmpresa, int IdSede, string IdUsuario, int IdMenu)
+        {
+            try
+            {
+                return odata.getInfo(IdEmpresa, IdSede, IdUsuario, IdMenu);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool guardarDB(aca_Menu_x_seg_usuario_Info info)
+        {
+            try
+            {
+                return odata.guardarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool modificarDB(aca_Menu_x_seg_usuario_Info info)
+        {
+            try
+            {
+                return odata.modificarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public aca_Menu_x_seg_usuario_Info get_list_menu_accion(int IdEmpresa, int IdSede, string IdUsuario, string Area, string NomControlador, string Accion)
         {
             try

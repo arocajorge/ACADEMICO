@@ -30,6 +30,7 @@ namespace Core.Web.Areas.Caja.Controllers
         caj_Caja_x_seg_usuario_List Lista_caj_Caja_x_seg_usuario = new caj_Caja_x_seg_usuario_List();
         string mensaje = string.Empty;
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -222,9 +223,36 @@ namespace Core.Web.Areas.Caja.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdCaja = model.IdCaja, Exito = true });
         }
-        public ActionResult Modificar(int IdEmpresa = 0, int IdCaja = 0)
+        public ActionResult Consultar(int IdEmpresa = 0, int IdCaja = 0, bool Exito = false)
+        {
+            caj_Caja_Info model = bus_caja.get_info(IdEmpresa, IdCaja);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.ListaResponsables = bus_caja_responsables.get_list(model.IdEmpresa, IdCaja);
+            Lista_caj_Caja_x_seg_usuario.set_list(model.ListaResponsables, model.IdTransaccionSession);
+
+            if (model == null)
+                return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Caja", "Caja", "Index");
+            if (model.Estado == "I")
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos(IdEmpresa);
+            return View(model);
+        }
+        public ActionResult Modificar(int IdEmpresa = 0, int IdCaja = 0, bool Exito=false)
         {
             caj_Caja_Info model = bus_caja.get_info(IdEmpresa, IdCaja);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
@@ -238,6 +266,10 @@ namespace Core.Web.Areas.Caja.Controllers
             if (!info.Modificar)
                 return RedirectToAction("Index");
             #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
             cargar_combos(IdEmpresa);
             return View(model);
         }
@@ -259,7 +291,7 @@ namespace Core.Web.Areas.Caja.Controllers
                 cargar_combos(model.IdEmpresa);
                 return View(model);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdCaja = model.IdCaja, Exito = true });
         }
         public ActionResult Anular(int IdEmpresa = 0, int IdCaja = 0)
         {

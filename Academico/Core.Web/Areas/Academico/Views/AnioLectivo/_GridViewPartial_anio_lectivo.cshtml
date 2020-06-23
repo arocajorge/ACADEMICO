@@ -60,19 +60,20 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
-                {
-                    if (ViewBag.Modificar == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio") }));
-                        ViewContext.Writer.Write("&nbsp;");
-                    }
-                    if (ViewBag.Anular == true)
-                    {
-                        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio") },
-                            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
-                    }
-                }
+                ViewContext.Writer.Write(Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio") }));
+                //if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Estado")) == true)
+                //{
+                //    if (ViewBag.Modificar == true)
+                //    {
+                //        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio") }));
+                //        ViewContext.Writer.Write("&nbsp;");
+                //    }
+                //    if (ViewBag.Anular == true)
+                //    {
+                //        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAnio = DataBinder.Eval(tc.DataItem, "IdAnio") },
+                //            new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
+                //    }
+                //}
             });
             c.SetHeaderTemplateContent(tc =>
             {

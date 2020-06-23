@@ -1,0 +1,166 @@
+﻿@model Core.Info.Academico.aca_Plantilla_Info
+@{
+    ViewBag.Title = "Consultar plantilla";
+
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Consultar", "Plantilla", FormMethod.Post, new { @class = "form", @role = "form", @id = "myform" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdPlantilla, new { @id = "IdPlantilla" })
+    @Html.HiddenFor(q => q.IdAnio, new { @id = "IdAnio" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-9 col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Nuevo == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","Plantilla",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "Plantilla", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAnio=Model.IdAnio, IdPlantilla = Model.IdPlantilla }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="Autorizar"></label>
+                @if (@ViewBag.Anular == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "Plantilla", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAnio=Model.IdAnio, IdPlantilla = Model.IdPlantilla }, null)">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdEmpresa">Descripción</label>
+                    @Html.TextBoxFor(q => q.NomPlantilla, new { @class = "form-control", @id = "NomPlantilla" })
+                    @Html.ValidationMessageFor(q => q.NomPlantilla, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Año Lectivo</label>
+                    @Html.Partial("_ComboBoxPartial_Anio", Model)
+                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="info_persona.IdTipoDocumento">Tipo de plantilla*</label>
+                    @Html.DropDownListFor(q => q.IdTipoPlantilla, new SelectList(ViewBag.lst_tipo_plantilla, "IdTipoPlantilla", "NomPlantillaTipo"), new { @class = "form-control", @id = "IdTipoPlantilla" })
+                    @Html.ValidationMessageFor(q => q.IdTipoPlantilla, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdOrden_giro_Tipo">Tipo descuento*</label>
+                    @Html.DropDownListFor(q => q.TipoDescuento, new SelectList(ViewBag.lst_tipo_desc, "Key", "Value"), new { @class = "form-control", @id = "TipoDescuento" })
+                    @Html.ValidationMessageFor(q => q.TipoDescuento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">Tipo nota</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoNota, settings =>
+                           {
+                               settings.Name = "IdTipoNota";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                               settings.Properties.Columns.Add("No_Descripcion", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdTipoNota";
+                               settings.Properties.ValueType = typeof(int);
+                               settings.Properties.TextField = "No_Descripcion";
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_tipo_nota).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoNota, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Valor</label>
+                    @Html.TextBoxFor(q => q.Valor, new { @class = "form-control", @id = "Valor" })
+                    @Html.ValidationMessageFor(q => q.Valor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.AplicaParaTodo, settings =>
+                        {
+                            settings.Name = "AplicaParaTodo";
+                            settings.Text = "Aplica para todo";
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.AplicaParaTodo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Action("GridViewPartial_PlantillaRubro")
+
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index","Plantilla",new { Area = "Academico" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+

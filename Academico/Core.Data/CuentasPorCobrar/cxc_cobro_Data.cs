@@ -1348,7 +1348,32 @@ namespace Core.Data.CuentasPorCobrar
                 throw;
             }
         }
-        
+
+        public List<cxc_cobro_Info> get_list_aplicacion_masiva(int IdEmpresa)
+        {
+            try
+            {
+                List<cxc_cobro_Info> Lista;
+                using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
+                {
+                    Lista = Context.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa).GroupBy(q => new { q.IdEmpresa, q.IdAlumno, q.NomCliente }).Select(q => new cxc_cobro_Info
+                    {
+                        IdEmpresa = q.Key.IdEmpresa,
+                        IdAlumno = q.Key.IdAlumno,
+                        NomAlumno = q.Key.NomCliente,
+                        cr_saldo = q.Sum(h => h.Saldo) ?? 0
+                    }).ToList();
+
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public double GetSaldoAlumno(int IdEmpresa, decimal IdAlumno, bool ConDescuento)
         {
             try

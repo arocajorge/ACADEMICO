@@ -164,6 +164,18 @@ namespace Core.Bus.Facturacion
             }
         }
 
+        public List<fa_notaCreDeb_Info> get_list_aplicacion_masiva(int IdEmpresa)
+        {
+            try
+            {
+                return odata.get_list_aplicacion_masiva(IdEmpresa);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool Contabilizar(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota)
         {
             try

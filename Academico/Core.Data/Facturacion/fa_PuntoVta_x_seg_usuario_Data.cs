@@ -14,24 +14,26 @@ namespace Core.Data.Facturacion
         {
             try
             {
-                List<fa_PuntoVta_x_seg_usuario_Info> Lista;
+                var Lista= new List<fa_PuntoVta_x_seg_usuario_Info>();
 
                 using (EntitiesFacturacion Context = new EntitiesFacturacion())
                 {
-                    Lista = (from q in Context.fa_PuntoVta_x_seg_usuario
-                             where q.IdEmpresa == IdEmpresa
-                              && q.IdPuntoVta == IdPuntoVta
-                             select new fa_PuntoVta_x_seg_usuario_Info
-                             {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdSucursal = q.IdSucursal,
-                                 Secuencia = q.Secuencia,
-                                 IdPuntoVta = q.IdPuntoVta,
-                                 IdUsuario = q.IdUsuario
-                             }).ToList();
-                }
+                    var lst = Context.fa_PuntoVta_x_seg_usuario.Where(q=> q.IdEmpresa == IdEmpresa && q.IdPuntoVta == IdPuntoVta).ToList();
 
-                return Lista;
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new fa_PuntoVta_x_seg_usuario_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdSucursal = q.IdSucursal,
+                            Secuencia = q.Secuencia,
+                            IdPuntoVta = q.IdPuntoVta,
+                            IdUsuario = q.IdUsuario
+                        });
+                    });
+                    return Lista;
+                }
+                
             }
             catch (Exception)
             {

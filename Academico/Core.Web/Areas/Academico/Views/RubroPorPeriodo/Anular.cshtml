@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Academico.aca_AnioLectivo_Rubro_Info
 @{
-    ViewBag.Title = "Modificar rubro por año lectivo";
+    ViewBag.Title = "Anular rubro por año lectivo";
 
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
@@ -145,17 +145,6 @@
                     <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","RubroPorPeriodo",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
                         <i class="fa fa-plus"></i>
                     </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group has-error">
-                    <label for="Rector">Motivo de anulación*</label>
-                    @Html.TextBoxFor(q => q.MotivoAnulacion, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.MotivoAnulacion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

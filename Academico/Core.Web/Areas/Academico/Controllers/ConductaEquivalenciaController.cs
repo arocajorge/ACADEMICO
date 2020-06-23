@@ -113,9 +113,35 @@ namespace Core.Web.Areas.Academico.Controllers
     
                 return View(model);
             }
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, Secuencia = model.Secuencia, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, Secuencia = model.Secuencia, Exito = true });
         }
 
+        public ActionResult Consultar(int IdEmpresa = 0, int IdAnio = 0, int Secuencia = 0, bool Exito = false)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_AnioLectivoConductaEquivalencia_Info model = bus_conducta.GetInfo(IdEmpresa, IdAnio, Secuencia);
+
+            if (model == null)
+                return RedirectToAction("Index");
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "ConductaEquivalencia", "Index");
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+
+            return View(model);
+        }
         public ActionResult Modificar(int IdEmpresa = 0, int IdAnio = 0, int Secuencia = 0, bool Exito = false)
         {
             #region Validar Session
@@ -153,7 +179,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("Modificar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, Secuencia = model.Secuencia, Exito = true });
+            return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, Secuencia = model.Secuencia, Exito = true });
         }
         #endregion
     }

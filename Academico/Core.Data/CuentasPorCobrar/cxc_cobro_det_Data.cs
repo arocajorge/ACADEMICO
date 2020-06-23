@@ -154,5 +154,90 @@ namespace Core.Data.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<cxc_cobro_det_Info> get_list_AP(int IdEmpresa)
+        {
+            try
+            {
+                List<cxc_cobro_det_Info> Lista;
+
+                using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
+                {
+                    Lista = (from q in Context.vwcxc_cartera_x_cobrar
+                             where q.IdEmpresa == IdEmpresa && q.vt_tipoDoc=="FACT"
+                             select new cxc_cobro_det_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 IdBodega_Cbte = q.IdBodega,
+                                 dc_TipoDocumento = q.vt_tipoDoc,
+                                 vt_NumDocumento = q.vt_NunDocumento,
+                                 IdCbte_vta_nota = q.IdComprobante,
+                                 vt_fecha = q.vt_fecha,
+                                 vt_total = q.vt_total,
+                                 Saldo = q.Saldo,
+                                 vt_Subtotal = q.vt_Subtotal,
+                                 vt_iva = q.vt_iva,
+                                 vt_fech_venc = q.vt_fech_venc,
+                                 dc_ValorProntoPago = q.ValorProntoPago,
+                                 IdAnio = q.IdAnio,
+                                 IdPlantilla = q.IdPlantilla,
+                                 IdPuntoVta = q.IdPuntoVta,
+                                 IdAlumno = q.IdAlumno
+                             }).ToList();
+
+                    Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento + "-" + q.IdBodega_Cbte.ToString() + "-" + q.IdCbte_vta_nota.ToString(); q.Saldo_final = Convert.ToDouble(q.Saldo - q.dc_ValorPago); });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<cxc_cobro_det_Info> get_list_AP(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                List<cxc_cobro_det_Info> Lista;
+
+                using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
+                {
+                    Lista = (from q in Context.vwcxc_cartera_x_cobrar
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdAlumno == IdAlumno
+                             select new cxc_cobro_det_Info
+                             {
+                                 IdEmpresa = q.IdEmpresa,
+                                 IdSucursal = q.IdSucursal,
+                                 IdBodega_Cbte = q.IdBodega,
+                                 dc_TipoDocumento = q.vt_tipoDoc,
+                                 vt_NumDocumento = q.vt_NunDocumento,
+                                 IdCbte_vta_nota = q.IdComprobante,
+                                 vt_fecha = q.vt_fecha,
+                                 vt_total = q.vt_total,
+                                 Saldo = q.Saldo,
+                                 vt_Subtotal = q.vt_Subtotal,
+                                 vt_iva = q.vt_iva,
+                                 vt_fech_venc = q.vt_fech_venc,
+                                 dc_ValorProntoPago = q.ValorProntoPago,
+                                 IdAnio = q.IdAnio,
+                                 IdPlantilla = q.IdPlantilla,
+                                 IdPuntoVta = q.IdPuntoVta,
+                                 IdAlumno = q.IdAlumno
+                             }).ToList();
+
+                    Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento + "-" + q.IdBodega_Cbte.ToString() + "-" + q.IdCbte_vta_nota.ToString(); q.Saldo_final = Convert.ToDouble(q.Saldo - q.dc_ValorPago); });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

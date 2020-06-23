@@ -10,11 +10,13 @@ using System.Web.Mvc;
 namespace Core.Web.Areas.Academico.Controllers
 {
     public class CatalogoTipoFichaController : Controller
-    {
-        
+    {      
         #region Index
         aca_CatalogoTipoFicha_List Lista_CatalogoTipoFicha = new aca_CatalogoTipoFicha_List();
         aca_CatalogoTipoFicha_Bus bus_catalogo_tipo_ficha = new aca_CatalogoTipoFicha_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+
         public ActionResult Index()
         {
             #region Validar Session
@@ -69,6 +71,30 @@ namespace Core.Web.Areas.Academico.Controllers
                 return View(model);
             }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Consultar(int IdCatalogoTipoFicha = 0, bool Exito=false)
+        {
+            aca_CatalogoTipoFicha_Info model = bus_catalogo_tipo_ficha.get_info(IdCatalogoTipoFicha);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            #region Permisos
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "CatalogoTipoFicha", "Index");
+            if (model.Estado == false)
+            {
+                info.Modificar = false;
+                info.Anular = false;
+            }
+            ViewBag.Nuevo = info.Nuevo;
+            ViewBag.Modificar = info.Modificar;
+            ViewBag.Anular = info.Anular;
+            #endregion
+
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
+
+            return View(model);
         }
 
         public ActionResult Modificar(int IdCatalogoTipoFicha = 0)
