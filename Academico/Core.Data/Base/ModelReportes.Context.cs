@@ -514,5 +514,26 @@ namespace Core.Data.Base
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXC_006_Result>("SPCXC_006", idEmpresaParameter, idSucursalParameter, fechaIniParameter, fechaFinParameter);
         }
+    
+        public virtual ObjectResult<SPCXC_010_Result> SPCXC_010(Nullable<int> idEmpresa, Nullable<decimal> idAlumno, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idAlumnoParameter = idAlumno.HasValue ?
+                new ObjectParameter("IdAlumno", idAlumno) :
+                new ObjectParameter("IdAlumno", typeof(decimal));
+    
+            var fechaIniParameter = fechaIni.HasValue ?
+                new ObjectParameter("FechaIni", fechaIni) :
+                new ObjectParameter("FechaIni", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXC_010_Result>("SPCXC_010", idEmpresaParameter, idAlumnoParameter, fechaIniParameter, fechaFinParameter);
+        }
     }
 }

@@ -666,5 +666,57 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
         #endregion
+
+        #region CXC_010
+        public ActionResult CXC_010()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            CXC_010_Rpt report = new CXC_010_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_010");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CXC_010(cl_filtros_Info model)
+        {
+            CXC_010_Rpt report = new CXC_010_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_010");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_fechaIni.Value = model.fecha_ini;
+            report.p_fechaFin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+        #endregion
     }
 }

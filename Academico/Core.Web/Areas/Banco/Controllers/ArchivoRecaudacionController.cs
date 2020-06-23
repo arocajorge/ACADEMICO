@@ -32,6 +32,7 @@ namespace Core.Web.Areas.Banco.Controllers
         ba_Banco_Cuenta_Bus bus_cuentas_bancarias = new ba_Banco_Cuenta_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         tb_banco_Bus bus_banco = new tb_banco_Bus();
+        aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         string mensaje = string.Empty;
 
         ba_Banco_Cuenta_Bus bus_banco_cuenta = new ba_Banco_Cuenta_Bus();
@@ -566,7 +567,7 @@ namespace Core.Web.Areas.Banco.Controllers
                             double Valor = 0;
                             double valorEntero = 0;
                             double valorDecimal = 0;
-
+                            var info_matricula = bus_matricula.GetInfo(item.IdEmpresa, Convert.ToDecimal(item.IdMatricula));
                             Valor = Convert.ToDouble(item.Valor);
                             valorEntero = Math.Floor(Valor);
                             valorDecimal = Convert.ToDouble((Valor - valorEntero).ToString("N2")) * 100;
@@ -582,11 +583,11 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += (valorEntero.ToString().PadLeft(8,'0') + "." + valorDecimal.ToString().PadRight(2, '0'));
                             linea2 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + info.Fecha.Day.ToString().PadLeft(2, '0') + "/" + info.Fecha.Year.ToString();//FECHA TOPE DE PAGO
                             linea2 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + info.Fecha.Day.ToString().PadLeft(2, '0') + "/" + info.Fecha.Year.ToString();//FECHA PRONTO PAGO
-                            linea2 += "P";
+                            linea2 += "N";
                             linea2 += (string.IsNullOrEmpty(item.pe_nombreCompleto) ? "" : (item.pe_nombreCompleto.Length > 30 ? item.pe_nombreCompleto.Substring(0, 30) : item.pe_nombreCompleto.Trim())).PadRight(30, ' ');
-                            linea2 += " ".PadRight(15, ' ');//CURSO
-                            linea2 += " ".PadRight(3, ' ');//PARALELO
-                            linea2 += " ".PadRight(15, ' ');//SECCION
+                            linea2 += (string.IsNullOrEmpty(info_matricula.NomCurso) ? "" : (info_matricula.NomCurso.Length > 15 ? info_matricula.NomCurso.Substring(0, 15) : info_matricula.NomCurso.Trim().PadRight(15, ' ')));//CURSO
+                            linea2 += (string.IsNullOrEmpty(info_matricula.NomParalelo) ? "" : (info_matricula.NomParalelo.Length > 3 ? info_matricula.NomParalelo.Substring(0, 3) : info_matricula.NomParalelo.Trim().PadRight(3, ' ')));//PARALELO
+                            linea2 += (string.IsNullOrEmpty(info_matricula.NomJornada) ? "" : (info_matricula.NomJornada.Length > 15 ? info_matricula.NomJornada.Substring(0, 15) : info_matricula.NomJornada.Trim().PadRight(15, ' ')));//SECCION
                             linea2 += (valorEntero.ToString().PadLeft(8, '0') + "." + valorDecimal.ToString().PadRight(2, '0'));
                             linea2 += " ".PadRight(10, ' ');
                             linea2 += "1";

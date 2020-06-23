@@ -125,7 +125,10 @@ namespace Core.Data.Academico
                         Fecha = Entity.Fecha,
                         IdMecanismo = Entity.IdMecanismo,
                         IdEmpresa_rol = Entity.IdEmpresa_rol,
-                        IdEmpleado = Entity.IdEmpleado
+                        IdEmpleado = Entity.IdEmpleado,
+                        NomCurso = Entity.NomCurso,
+                        NomJornada = Entity.NomJornada,
+                        NomParalelo = Entity.NomParalelo,
                     };
                 }
 

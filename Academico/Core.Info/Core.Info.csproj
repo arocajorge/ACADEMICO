@@ -290,6 +290,7 @@
     <Compile Include="Reportes\Contabilidad\CONTA_001_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Aplicaciones_Info.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_010_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_002_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_003_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_004_Info.cs" />

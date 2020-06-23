@@ -624,6 +624,12 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_009_Rpt.Designer.cs">
       <DependentUpon>CXC_009_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_010_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_010_Rpt.Designer.cs">
+      <DependentUpon>CXC_010_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Facturacion\FAC_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8779,6 +8785,7 @@
     <Content Include="Areas\Facturacion\Views\AplicacionMasiva\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\AplicacionMasiva\Consultar.cshtml" />
     <Content Include="Areas\Facturacion\Views\AplicacionMasiva\_GridViewPartial_AplicacionMasivaValorCero.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_010.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9005,6 +9012,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_009_Rpt.resx">
       <DependentUpon>CXC_009_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_010_Rpt.resx">
+      <DependentUpon>CXC_010_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_001_Rpt.resx">
       <DependentUpon>FAC_001_Rpt.cs</DependentUpon>
