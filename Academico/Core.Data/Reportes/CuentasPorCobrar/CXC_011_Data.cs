@@ -64,7 +64,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                         q.ValorDesde = ValorDesde;
                         q.ValorHasta = ValorHasta;
                         q.ValorProntoPagoHasta = ValorProntoPagoHasta;
-                        q.MostrarValoresDesdeHasta = (FechaHasta > DateTime.Now ? false : true);
+                        q.MostrarValoresDesdeHasta = (DateTime.Now > FechaHasta ? false : true);
                     });
                 }
                 return Lista;
