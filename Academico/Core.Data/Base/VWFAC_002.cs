@@ -66,5 +66,6 @@ namespace Core.Data.Base
         public string NomAlumno { get; set; }
         public Nullable<decimal> IdAlumno { get; set; }
         public decimal IdCliente { get; set; }
+        public string Codigo { get; set; }
     }
 }

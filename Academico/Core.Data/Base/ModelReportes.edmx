@@ -1108,6 +1108,7 @@ advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_002' no tiene definida
           <Property Name="NomAlumno" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdCliente" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -2288,7 +2289,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
     [VWFAC_002].[NomPlantilla] AS [NomPlantilla], 
     [VWFAC_002].[NomAlumno] AS [NomAlumno], 
     [VWFAC_002].[IdAlumno] AS [IdAlumno], 
-    [VWFAC_002].[IdCliente] AS [IdCliente]
+    [VWFAC_002].[IdCliente] AS [IdCliente], 
+    [VWFAC_002].[Codigo] AS [Codigo]
     FROM [Academico].[VWFAC_002] AS [VWFAC_002]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWFAC_003" EntityType="Self.VWFAC_003" store:Type="Views" store:Schema="Academico">
@@ -4691,6 +4693,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
           <Property Name="NomAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IdAlumno" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdCliente" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -6288,6 +6291,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
           <EntitySetMapping Name="VWFAC_002">
             <EntityTypeMapping TypeName="ModelReportes.VWFAC_002">
               <MappingFragment StoreEntitySet="VWFAC_002">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="NomAlumno" ColumnName="NomAlumno" />

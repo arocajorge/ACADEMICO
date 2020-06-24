@@ -78,7 +78,8 @@ namespace Core.Data.Reportes.Facturacion
                                  NomAlumno = q.NomAlumno,
                                  
                                  IdAlumno = q.IdAlumno,
-                                 IdCliente = q.IdCliente
+                                 IdCliente = q.IdCliente,
+                                 Codigo = q.Codigo
                              }).ToList();
                 }
                 return Lista;

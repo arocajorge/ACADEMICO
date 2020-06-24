@@ -52,6 +52,7 @@
             this.p_IdBodega = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCbteVta = new DevExpress.XtraReports.Parameters.Parameter();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
+            this.IdAlumno = new DevExpress.XtraReports.UI.XRLabel();
             this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow19 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -182,9 +183,8 @@
             this.xrTableCell70 = new DevExpress.XtraReports.UI.XRTableCell();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.lblReemplaza = new DevExpress.XtraReports.UI.XRLabel();
-            this.IdAlumno = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
@@ -343,6 +343,21 @@
             this.xrTable1});
             this.PageHeader.HeightF = 361.7916F;
             this.PageHeader.Name = "PageHeader";
+            // 
+            // IdAlumno
+            // 
+            this.IdAlumno.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdAlumno]")});
+            this.IdAlumno.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.IdAlumno.ForeColor = System.Drawing.Color.Transparent;
+            this.IdAlumno.LocationFloat = new DevExpress.Utils.PointFloat(321.2292F, 50F);
+            this.IdAlumno.Name = "IdAlumno";
+            this.IdAlumno.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.IdAlumno.SizeF = new System.Drawing.SizeF(73.77075F, 14.99999F);
+            this.IdAlumno.StylePriority.UseFont = false;
+            this.IdAlumno.StylePriority.UseForeColor = false;
+            this.IdAlumno.Text = "IdAlumno";
+            this.IdAlumno.Visible = false;
             // 
             // lbl_imagen
             // 
@@ -1025,7 +1040,7 @@
             // 
             this.xrTableCell80.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Right | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell80.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomAlumno]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat([Codigo],\' - \',[NomAlumno] )")});
             this.xrTableCell80.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell80.Multiline = true;
             this.xrTableCell80.Name = "xrTableCell80";
@@ -1649,20 +1664,10 @@
             this.lblReemplaza.Text = "Usted podrá consultar su factura electrónica en el portal web: ww.Facturacionlcg." +
     "com\r\nEl usuario es: {0} y la clave es {0}\r\nCliente: {1}";
             // 
-            // IdAlumno
+            // objectDataSource1
             // 
-            this.IdAlumno.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdAlumno]")});
-            this.IdAlumno.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.IdAlumno.ForeColor = System.Drawing.Color.Black;
-            this.IdAlumno.LocationFloat = new DevExpress.Utils.PointFloat(321.2292F, 50F);
-            this.IdAlumno.Name = "IdAlumno";
-            this.IdAlumno.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.IdAlumno.SizeF = new System.Drawing.SizeF(73.77075F, 14.99999F);
-            this.IdAlumno.StylePriority.UseFont = false;
-            this.IdAlumno.StylePriority.UseForeColor = false;
-            this.IdAlumno.Text = "IdAlumno";
-            this.IdAlumno.Visible = false;
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Facturacion.FAC_002_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // xrSubreport1
             // 
@@ -1671,11 +1676,6 @@
             this.xrSubreport1.ReportSource = new Core.Web.Reportes.Facturacion.FAC_002_PendientePago_Rpt();
             this.xrSubreport1.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
             this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
-            // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Facturacion.FAC_002_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // FAC_002_Rpt
             // 
