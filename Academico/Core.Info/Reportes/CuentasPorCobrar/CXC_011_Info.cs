@@ -28,5 +28,12 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public string Codigo { get; set; }
         public Nullable<decimal> ValorProntoPago { get; set; }
         public Nullable<System.DateTime> FechaProntoPago { get; set; }
+
+        #region Campos que no existen en la vista
+        public string ValorProntoPagoHasta { get; set; }
+        public string ValorHasta { get; set; }
+        public string ValorDesde { get; set; }
+        public bool MostrarValoresDesdeHasta { get; set; }
+        #endregion
     }
 }

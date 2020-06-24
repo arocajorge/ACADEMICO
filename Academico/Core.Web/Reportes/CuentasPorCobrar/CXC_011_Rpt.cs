@@ -37,6 +37,23 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             lst_rpt.AddRange(bus_rpt.get_list(IdEmpresa, IdAlumno));
             this.DataSource = lst_rpt;
 
+            if (lst_rpt.Count > 0)
+            {
+                if (lst_rpt.FindLast(q => q.MostrarValoresDesdeHasta == q.MostrarValoresDesdeHasta).MostrarValoresDesdeHasta == true)
+                {
+                    ValoresDesdeHasta.Visible = true;
+                }
+                else
+                {
+                    ValoresDesdeHasta.Visible = false;
+                }
+            }
+            else
+            {
+                ValoresDesdeHasta.Visible = false;
+            }
+
+            tb_mes_Bus bus_mes = new tb_mes_Bus();
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);
             if (emp != null && emp.em_logo != null)
@@ -45,15 +62,27 @@ namespace Core.Web.Reportes.CuentasPorCobrar
                 lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
             }
 
-            var fecha = DateTime.Now.ToString("dd/MM/yyyy");
-            lbl_fecha.Text = "Guayaquil, " + fecha;
-            lbl_texto.Text = "Mediante reporte generado con corte al" + fecha + ", el departamento de Cobranzas informa el detalle de su estado de cuenta, considerando las facturas pendientes de pago:";
+            DateTime fecha = DateTime.Now;
+            var mes = fecha.Month;
+            var lst_mes = bus_mes.get_list();
+            var descripcion_mes = "";
+            foreach (var item in lst_mes)
+            {
+                if (item.idMes==mes)
+                {
+                    descripcion_mes = item.smes;
+                }
+            }
+
+            Fecha.Text = "Guayaquil, " + fecha.Day.ToString() + " de " + descripcion_mes + " de " + fecha.Year.ToString();
+            lbl_texto.Text = "Mediante reporte generado con corte al" + fecha.Date + ", el departamento de Cobranzas informa el detalle de su estado de cuenta, considerando las facturas pendientes de pago:";
+
             aca_Sede_Bus bus_sede = new aca_Sede_Bus();
             var sede = bus_sede.GetInfo(IdEmpresa, IdSede);
             if (sede!=null)
             {
-                lbl_sede.Text = sede.NomSede;
-                lbl_direccion.Text = sede.Direccion;
+                lbl_sede.Text =  sede.NomSede.ToUpper();
+                lbl_direccion.Text = sede.Direccion.ToUpper();
             }
         }
     }

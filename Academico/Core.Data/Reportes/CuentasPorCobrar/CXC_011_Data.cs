@@ -44,6 +44,28 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                             vt_tipoDoc=q.vt_tipoDoc
                         });
                     }
+
+                    var FechaHasta = Lista.Where(q => q.FechaProntoPago > DateTime.Now.Date).Min(q => q.FechaProntoPago);
+                    var ValorHasta = "VALOR A PAGAR HASTA ";
+                    FechaHasta = FechaHasta ?? DateTime.Now.Date;
+                    ValorHasta += Convert.ToDateTime(FechaHasta).ToString("dd/MM/yyyy");
+
+                    var FechaDesde = Lista.Where(q => q.FechaProntoPago > DateTime.Now.Date).Max(q => q.FechaProntoPago);
+                    var ValorDesde = "VALOR A PAGAR DESDE ";
+                    FechaDesde = FechaDesde ?? DateTime.Now.Date;
+                    FechaDesde = Convert.ToDateTime(FechaDesde).AddDays(1);
+                    ValorDesde += Convert.ToDateTime(FechaDesde).ToString("dd/MM/yyyy");
+
+                    var ValorProntoPagoHasta = "(-) PRONTO PAGO HASTA ";
+                    ValorProntoPagoHasta += Convert.ToDateTime(FechaHasta).ToString("dd/MM/yyyy");
+
+
+                    Lista.ForEach(q => {
+                        q.ValorDesde = ValorDesde;
+                        q.ValorHasta = ValorHasta;
+                        q.ValorProntoPagoHasta = ValorProntoPagoHasta;
+                        q.MostrarValoresDesdeHasta = (FechaHasta > DateTime.Now ? false : true);
+                    });
                 }
                 return Lista;
             }
