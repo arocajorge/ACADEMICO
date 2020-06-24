@@ -64,5 +64,7 @@ namespace Core.Data.Base
         public string NomParalelo { get; set; }
         public string NomPlantilla { get; set; }
         public string NomAlumno { get; set; }
+        public Nullable<decimal> IdAlumno { get; set; }
+        public decimal IdCliente { get; set; }
     }
 }

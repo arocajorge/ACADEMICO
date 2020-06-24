@@ -58,5 +58,14 @@ namespace Core.Web.Reportes.Facturacion
                 lblReemplaza.Text = Cadena;
             }
         }
+
+        private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdSucursal"].Value = p_IdSucursal.Value == null ? 0 : Convert.ToDecimal(p_IdSucursal.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdAlumno"].Value = IdAlumno.Value == null ? 0 : Convert.ToDecimal(IdAlumno.Text);
+
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
+        }
     }
 }

@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Core.Bus.Reportes.Facturacion
 {
-    public class FAC_002_Bus
+    public class FAC_002_Pendiente_Pago_Bus
     {
-        FAC_002_Data odata = new FAC_002_Data();
-        public List<FAC_002_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta)
+        FAC_002_Pendiente_Pago_Data odata = new FAC_002_Pendiente_Pago_Data();
+        public List<FAC_002_Pendiente_Pago_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdAlumno)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+                return odata.get_list(IdEmpresa, IdSucursal, IdAlumno);
             }
             catch (Exception)
             {

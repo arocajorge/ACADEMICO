@@ -37,7 +37,6 @@ namespace Core.Data.Base
         public virtual DbSet<VWACA_004> VWACA_004 { get; set; }
         public virtual DbSet<VWCXC_002_Aplicaciones> VWCXC_002_Aplicaciones { get; set; }
         public virtual DbSet<VWFAC_001> VWFAC_001 { get; set; }
-        public virtual DbSet<VWFAC_002> VWFAC_002 { get; set; }
         public virtual DbSet<VWACA_002> VWACA_002 { get; set; }
         public virtual DbSet<VWCAJ_001> VWCAJ_001 { get; set; }
         public virtual DbSet<VWCAJ_002> VWCAJ_002 { get; set; }
@@ -61,6 +60,7 @@ namespace Core.Data.Base
         public virtual DbSet<VWACA_008> VWACA_008 { get; set; }
         public virtual DbSet<VWACA_013_EquivalenciaPromedio> VWACA_013_EquivalenciaPromedio { get; set; }
         public virtual DbSet<VWBAN_004> VWBAN_004 { get; set; }
+        public virtual DbSet<VWFAC_002> VWFAC_002 { get; set; }
     
         public virtual ObjectResult<SPACA_001_Result> SPACA_001(Nullable<int> idEmpresa, Nullable<decimal> idAlumno)
         {

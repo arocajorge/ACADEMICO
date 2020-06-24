@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="ModelReportes.VWACA_004" Width="1.5" PointX="0.75" PointY="12.75" />
         <EntityTypeShape EntityType="ModelReportes.VWCXC_002_Aplicaciones" Width="1.5" PointX="3.375" PointY="12.75" />
         <EntityTypeShape EntityType="ModelReportes.VWFAC_001" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="ModelReportes.VWFAC_002" Width="1.5" PointX="15.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelReportes.VWACA_002" Width="1.5" PointX="5.375" PointY="15.75" />
         <EntityTypeShape EntityType="ModelReportes.VWCAJ_001" Width="1.5" PointX="7.75" PointY="15.75" />
         <EntityTypeShape EntityType="ModelReportes.VWCAJ_002" Width="1.5" PointX="15.75" PointY="12.75" />
@@ -39,6 +38,7 @@
         <EntityTypeShape EntityType="ModelReportes.VWACA_008" Width="1.5" PointX="20.375" PointY="16.75" />
         <EntityTypeShape EntityType="ModelReportes.VWACA_013_EquivalenciaPromedio" Width="1.5" PointX="0.75" PointY="19.75" />
         <EntityTypeShape EntityType="ModelReportes.VWBAN_004" Width="1.5" PointX="16.375" PointY="21.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWFAC_002" Width="1.5" PointX="22.375" PointY="16.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

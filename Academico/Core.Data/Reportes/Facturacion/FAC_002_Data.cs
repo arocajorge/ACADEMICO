@@ -75,9 +75,10 @@ namespace Core.Data.Reportes.Facturacion
                                  NomCurso = q.NomCurso,
                                  NomPlantilla = q.NomPlantilla,
                                  NomParalelo = q.NomParalelo,
-                                 NomAlumno = q.NomAlumno
-
-
+                                 NomAlumno = q.NomAlumno,
+                                 
+                                 IdAlumno = q.IdAlumno,
+                                 IdCliente = q.IdCliente
                              }).ToList();
                 }
                 return Lista;

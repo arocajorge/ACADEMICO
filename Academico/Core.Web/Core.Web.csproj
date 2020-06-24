@@ -636,6 +636,12 @@
     <Compile Include="Reportes\Facturacion\FAC_001_Rpt.Designer.cs">
       <DependentUpon>FAC_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_002_PendientePago_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_002_PendientePago_Rpt.Designer.cs">
+      <DependentUpon>FAC_002_PendientePago_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Facturacion\FAC_002_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9018,6 +9024,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_001_Rpt.resx">
       <DependentUpon>FAC_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_002_PendientePago_Rpt.resx">
+      <DependentUpon>FAC_002_PendientePago_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_002_Rpt.resx">
       <DependentUpon>FAC_002_Rpt.cs</DependentUpon>
