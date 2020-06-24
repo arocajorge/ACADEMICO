@@ -29,21 +29,22 @@
         <div class="col-md-6">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCble">Cuenta contable*</label>
-                    @Html.Partial("_CmbCuenta_TipoNota", Model)
-                    @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
+                    <label for="IdCtaCble">Cuenta Debe*</label>
+                    @Html.Partial("_CmbCuentaCxC_TipoNota", Model)
+                    @Html.ValidationMessageFor(q => q.IdCtaCbleCXC, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="IdCtaCble">Cuenta contable CxC*</label>
-                    @Html.Partial("_CmbCuentaCxC_TipoNota", Model)
-                    @Html.ValidationMessageFor(q => q.IdCtaCbleCXC, "", new { @class = "text-danger" })
+                    <label for="IdCtaCble">Cuenta Haber*</label>
+                    @Html.Partial("_CmbCuenta_TipoNota", Model)
+                    @Html.ValidationMessageFor(q => q.IdCtaCble, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
+
     </div>
     <div class="row">
         <div class="col-md-3">
