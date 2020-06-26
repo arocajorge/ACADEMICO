@@ -184,41 +184,46 @@ namespace Core.Data.Academico
         {
             try
             {
-                List<aca_Matricula_Rubro_Info> Lista;
+                List<aca_Matricula_Rubro_Info> Lista = new List<aca_Matricula_Rubro_Info>();
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = Context.vwaca_Matricula_Rubro_PorFacturarMasiva.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdPeriodo).Select(q => new aca_Matricula_Rubro_Info
+                    var lst = Context.vwaca_Matricula_Rubro_PorFacturarMasiva.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPeriodo == IdPeriodo && q.IdAlumno > 1 && q.IdAlumno < 50).ToList();
+                    foreach (var q in lst)
                     {
-                        IdEmpresa = q.IdEmpresa,
-                        IdMatricula = q.IdMatricula,
-                        IdAnio = q.IdAnio,
-                        IdPeriodo = q.IdPeriodo,
-                        IdPlantilla = q.IdPlantilla,
-                        IdRubro = q.IdRubro,
-                        IdProducto = q.IdProducto,
-                        Subtotal = q.Subtotal,
-                        IdCod_Impuesto_Iva = q.IdCod_Impuesto_Iva,
-                        ValorIVA = q.ValorIVA,
-                        Porcentaje = q.Porcentaje,
-                        Total = q.Total,
-                        //ValorProntoPago = q.ValorProntoPago,
-                        vt_Observacion = q.Observacion,
-                        IdAlumno = q.IdAlumno,
-                        //FechaDesde = q.FechaDesde,
-                        //FechaProntoPago = q.FechaProntoPago,
-                        IdTerminoPago = q.IdTerminoPago,
-                        //NomRubro = q.NomRubro,
-                        //IdCliente = q.IdCliente,
-                        Codigo = q.Codigo,
-                        pe_nombreCompleto = q.Alumno
-                    }).ToList();
+                        var info = new aca_Matricula_Rubro_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdMatricula = q.IdMatricula,
+                            IdAnio = q.IdAnio,
+                            IdPeriodo = q.IdPeriodo,
+                            IdPlantilla = q.IdPlantilla,
+                            IdRubro = q.IdRubro,
+                            IdProducto = q.IdProducto,
+                            Subtotal = q.Subtotal,
+                            IdCod_Impuesto_Iva = q.IdCod_Impuesto_Iva,
+                            ValorIVA = q.ValorIVA,
+                            Porcentaje = q.Porcentaje,
+                            Total = q.Total,
+                            ValorProntoPago = Convert.ToDecimal(q.ValorProntoPago),
+                            vt_Observacion = q.Observacion,
+                            IdAlumno = q.IdAlumno,
+                            FechaDesde = Convert.ToDateTime(q.FechaDesde),
+                            FechaProntoPago = Convert.ToDateTime(q.FechaProntoPago),
+                            IdTerminoPago = q.IdTerminoPago,
+                            IdCliente = q.IdCliente ?? 0,
+                            Codigo = q.Codigo,
+                            pe_nombreCompleto = q.Alumno
+                        };
+                        Lista.Add(info);
+                    }
+                     
                 }
-                Lista.ForEach(v => { v.Periodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });
+                
                 Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000") + q.IdMatricula.ToString("000000") + q.IdPeriodo.ToString("0000") + q.IdRubro.ToString("000000"));
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

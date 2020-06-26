@@ -68,6 +68,37 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_MecanismoDePago_Info getInfo_by_IdTermino(int IdEmpresa, string IdTerminoPago)
+        {
+            try
+            {
+                aca_MecanismoDePago_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_MecanismoDePago.Where(q => q.IdEmpresa == IdEmpresa && q.IdTerminoPago == IdTerminoPago).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_MecanismoDePago_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdMecanismo = Entity.IdMecanismo,
+                        NombreMecanismo = Entity.NombreMecanismo,
+                        IdTerminoPago = Entity.IdTerminoPago,
+                        IdTipoNotaDescuentoPorRol = Entity.IdTipoNotaDescuentoPorRol
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public decimal getId(int IdEmpresa)
         {
             try

@@ -469,7 +469,7 @@ namespace Core.Web.Areas.Banco.Controllers
                             //var Referencia = string.Empty;
                             //linea1 += (string.IsNullOrEmpty(Referencia) ? "" : (Referencia.Length > 200 ? Referencia.Substring(0, 200) : Referencia.Trim())) + "\t";
                             linea1 += item.CodigoAlumno + "\t";//REFERENCIA
-                            linea1 += "\t";//REFERENCIA adicional
+                            linea1 += item.CodigoAlumno + "\t";//REFERENCIA adicional
                             linea1 += "\t";//Base Iva 0%
                             linea1 += "\t";//Base ICE
                             linea1 += "\t";//
@@ -484,7 +484,8 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += "C" + "\t";
                             linea2 += "FI" + "\t";
                             linea2 += (valorEntero.ToString() + valorDecimal.ToString().PadRight(2, '0')).PadLeft(13, '0') + "\t";
-                            linea2 += "0".PadLeft(13, '0');
+                            linea2 += "0".PadLeft(13, '0') + "\t";
+                            linea2 += (valorEntero.ToString() + valorDecimal.ToString().PadRight(2, '0')).PadLeft(5, '0');//ESTE CAMPO NO ESTA EN LA FICHA
 
                             file.WriteLine(linea2);
                         }
@@ -593,7 +594,7 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += "1";
                             linea2 += (valorEntero.ToString().PadLeft(8, '0') + "." + valorDecimal.ToString().PadRight(2, '0'));
                             linea2 += (valorEntero.ToString().PadLeft(8, '0') + "." + valorDecimal.ToString().PadRight(2, '0'));
-                            linea2 += "\t";
+                            //linea2 += "\t";
 
                             file.WriteLine(linea2);
                         }

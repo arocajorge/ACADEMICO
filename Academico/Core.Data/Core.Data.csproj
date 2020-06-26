@@ -348,6 +348,9 @@
     <Compile Include="Base\vwaca_MatriculaConducta.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_Matricula_Rubro_PorFacturarMasiva.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\VWBAN_001.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>

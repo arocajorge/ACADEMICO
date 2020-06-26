@@ -121,7 +121,8 @@ namespace Core.Data.Academico
                         FechaDesde = Entity.FechaDesde,
                         FechaHasta = Entity.FechaHasta,
                         FechaProntoPago = Entity.FechaProntoPago,
-                        Estado = Entity.Estado
+                        Estado = Entity.Estado,
+                        Procesado = Entity.Procesado
                     };
                 }
 

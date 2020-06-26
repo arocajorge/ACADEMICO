@@ -112,8 +112,8 @@ namespace Core.Bus.Academico
                             talonario = odata_talonario.GetUltimoNoUsado(info.IdEmpresa, cl_enumeradores.eTipoDocumento.FACT.ToString(), punto_venta.Su_CodigoEstablecimiento, punto_venta.cod_PuntoVta, punto_venta.EsElectronico, false);
                         }
 
-                        var mecanismo = odata_mecanismo.getInfo(info.IdEmpresa, item.IdMecanismo);
-                        var termino_pago = odata_termino_pago.get_info(mecanismo.IdTerminoPago);
+                        var mecanismo = odata_mecanismo.getInfo_by_IdTermino(info.IdEmpresa, item.IdTerminoPago);
+                        var termino_pago = odata_termino_pago.get_info(item.IdTerminoPago);
 
                         var info_factura = new fa_factura_Info
                         {
@@ -132,13 +132,13 @@ namespace Core.Bus.Academico
                             vt_fecha = DateTime.Now,
                             vt_plazo = termino_pago.Dias_Vct,
                             vt_fech_venc = DateTime.Now.AddDays(termino_pago.Dias_Vct),
-                            vt_tipo_venta = mecanismo.IdTerminoPago,
+                            vt_tipo_venta = item.IdTerminoPago,
                             vt_Observacion = item.vt_Observacion,
                             Estado = "A",
                             IdCaja = punto_venta.IdCaja,
                             //IdEmpresa_rol = item.IdEmpresa_rol,
                             //IdEmpleado = item.IdEmpleado,
-                            IdUsuario = info.IdUsuarioModificacion,
+                            IdUsuario = info.IdUsuarioCreacion,
                             IdPuntoVta = info.IdPuntoVta,
                             aprobada_enviar_sri = false
                         };
@@ -154,7 +154,7 @@ namespace Core.Bus.Academico
                             vt_PorDescUnitario = 0,
                             vt_DescUnitario = 0,
                             vt_PrecioFinal = Convert.ToDouble(item.Total),
-                            vt_Subtotal = Convert.ToDouble(item.Total),
+                            vt_Subtotal = Convert.ToDouble(item.Subtotal),
                             vt_por_iva = info_impuesto.porcentaje,
                             IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
                             vt_iva = Convert.ToDouble(item.ValorIVA),

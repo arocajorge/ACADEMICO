@@ -5,7 +5,7 @@
         settings.Name = "GridViewPartial_FacturacionMasivaDet";
         settings.CallbackRouteValues = new { Controller = "FacturacionMasiva", Action = "GridViewPartial_FacturacionMasivaDet", Area = "Facturacion"};
         settings.Width = Unit.Percentage(100);
-        settings.KeyFieldName = "Secuencia";
+        settings.KeyFieldName = "IdString";
         settings.Width = Unit.Percentage(100);
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
@@ -87,21 +87,21 @@
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
 
-        //settings.Columns.Add(column =>
-        //{
-        //    column.FieldName = "Saldo";
-        //    column.Caption = "Saldo";
-        //    column.Width = Unit.Percentage(10);
-        //    column.VisibleIndex = 3;
-        //    column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-        //    column.EditorProperties().SpinEdit(q =>
-        //    {
-        //        q.MinValue = 0;
-        //        q.DisplayFormatString = "{0:n2}";
-        //        q.Width = Unit.Percentage(100);
-        //        q.AllowMouseWheel = false;
-        //    });
-        //});
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Total";
+            column.Caption = "Total";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 3;
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.EditorProperties().SpinEdit(q =>
+            {
+                q.MinValue = 0;
+                q.DisplayFormatString = "{0:n2}";
+                q.Width = Unit.Percentage(100);
+                q.AllowMouseWheel = false;
+            });
+        });
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

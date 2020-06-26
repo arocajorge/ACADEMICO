@@ -62,5 +62,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public List<aca_Matricula_Rubro_Info> getList_FactMasiva(int IdEmpresa, int IdAnio, int IdPeriodo)
+        {
+            try
+            {
+                return odata.getList_FactMasiva(IdEmpresa, IdAnio, IdPeriodo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -22,6 +22,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         aca_AnioLectivo_Periodo_FactMasiva_List Lista_FactMasiva = new aca_AnioLectivo_Periodo_FactMasiva_List();
         aca_Matricula_Rubro_FactMasiva_List Lista_FactMasivaDet = new aca_Matricula_Rubro_FactMasiva_List();
+        aca_Matricula_Rubro_Bus bus_MatRubro = new aca_Matricula_Rubro_Bus();
         #endregion
 
         #region Index
@@ -123,8 +124,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
             #endregion
 
             aca_AnioLectivo_Periodo_Info model = bus_periodo.GetInfo(IdEmpresa, IdAnio, IdPeriodo);
+            model.IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-            model.lst_det_fact_masiva = new List<aca_Matricula_Rubro_Info>();
+            model.lst_det_fact_masiva = bus_MatRubro.getList_FactMasiva(IdEmpresa, IdAnio, IdPeriodo);
             Lista_FactMasivaDet.set_list(model.lst_det_fact_masiva, model.IdTransaccionSession);
             ViewBag.MostrarBoton = true;
             if (model.Procesado==true)
@@ -138,16 +140,16 @@ namespace Core.Web.Areas.Facturacion.Controllers
         }
 
         [HttpPost]
-        public ActionResult Nuevo(aca_AnioLectivo_Periodo_Info model)
+        public ActionResult Consultar(aca_AnioLectivo_Periodo_Info model)
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             model.lst_det_fact_masiva = Lista_FactMasivaDet.get_list(model.IdTransaccionSession);
 
-            //if (!bus_periodo.Modificar_FacturacionMasiva(model))
-            //{
-            //    ViewBag.mensaje = "No se ha podido guardar el registro";
-            //    return View(model);
-            //}
+            if (!bus_periodo.Modificar_FacturacionMasiva(model))
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                return View(model);
+            }
             return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, IdPeriodo=model.IdPeriodo, Exito = true });
         }
         #endregion
