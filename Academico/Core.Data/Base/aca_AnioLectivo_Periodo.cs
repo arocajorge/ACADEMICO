@@ -35,9 +35,15 @@ namespace Core.Data.Base
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
+        public Nullable<int> IdPuntoVta { get; set; }
+        public Nullable<bool> Procesado { get; set; }
+        public Nullable<System.DateTime> FechaProceso { get; set; }
+        public Nullable<decimal> TotalAlumnos { get; set; }
+        public Nullable<decimal> TotalValorFacturado { get; set; }
     
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivo_Rubro_Periodo> aca_AnioLectivo_Rubro_Periodo { get; set; }
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

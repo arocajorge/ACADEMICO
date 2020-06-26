@@ -35,6 +35,41 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public List<aca_AnioLectivo_Periodo_Info> getList_AnioCurso(int IdEmpresa)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Periodo_Info> Lista = new List<aca_AnioLectivo_Periodo_Info>();
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = (from ap in Context.aca_AnioLectivo_Periodo
+                             join a in Context.aca_AnioLectivo on new { ap.IdEmpresa, ap.IdAnio } equals new { a.IdEmpresa, a.IdAnio }
+                             where ap.IdEmpresa == IdEmpresa
+                             && a.EnCurso==true
+                             select new aca_AnioLectivo_Periodo_Info
+                             {
+                                IdEmpresa = ap.IdEmpresa,
+                                IdAnio = ap.IdAnio,
+                                FechaDesde = ap.FechaDesde,
+                                Descripcion = a.Descripcion,
+                                IdPeriodo = ap.IdPeriodo,
+                                IdMes = ap.IdMes,
+                                FechaHasta = ap.FechaHasta,
+                                Estado = ap.Estado,
+                                Procesado=ap.Procesado,
+                                TotalValorFacturado = ap.TotalValorFacturado
+                             }).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public List<aca_AnioLectivo_Periodo_Info> getList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
         {
@@ -171,6 +206,37 @@ namespace Core.Data.Academico
                 }
 
                 return ID;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        
+        public bool modificar_FacturacionMasiva(aca_AnioLectivo_Periodo_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_AnioLectivo_Periodo Entity = Context.aca_AnioLectivo_Periodo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPeriodo == info.IdPeriodo);
+                    if (Entity == null)
+                        return false;
+
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = DateTime.Now;
+                    Entity.IdSucursal = info.IdSucursal;
+                    Entity.IdPuntoVta = info.IdPuntoVta;
+                    Entity.Procesado = true;
+                    Entity.FechaProceso = DateTime.Now;
+                    Entity.TotalAlumnos = info.lst_det_fact_masiva.Count();
+                    Entity.TotalValorFacturado = info.lst_det_fact_masiva.Sum(q=>q.Total);
+
+                    Context.SaveChanges();
+                }
+
+                return true;
             }
             catch (Exception)
             {

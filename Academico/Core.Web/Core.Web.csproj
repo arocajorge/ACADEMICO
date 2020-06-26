@@ -307,6 +307,7 @@
     <Compile Include="Areas\Facturacion\Controllers\AplicacionMasivaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\ClienteTipoController.cs" />
+    <Compile Include="Areas\Facturacion\Controllers\FacturacionMasivaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\FacturaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDebitoCreditoMasivaController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\NotaDeCreditoFacturacionController.cs" />
@@ -8796,9 +8797,12 @@
     <Content Include="Areas\Facturacion\Views\AplicacionMasiva\_GridViewPartial_AplicacionMasivaDet.cshtml" />
     <Content Include="Areas\Facturacion\Views\AplicacionMasiva\Nuevo.cshtml" />
     <Content Include="Areas\Facturacion\Views\AplicacionMasiva\Consultar.cshtml" />
-    <Content Include="Areas\Facturacion\Views\AplicacionMasiva\_GridViewPartial_AplicacionMasivaValorCero.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_010.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_011.cshtml" />
+    <Content Include="Areas\Facturacion\Views\FacturacionMasiva\Index.cshtml" />
+    <Content Include="Areas\Facturacion\Views\FacturacionMasiva\Consultar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\FacturacionMasiva\_GridViewPartial_FacturacionMasiva.cshtml" />
+    <Content Include="Areas\Facturacion\Views\FacturacionMasiva\_GridViewPartial_FacturacionMasivaDet.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

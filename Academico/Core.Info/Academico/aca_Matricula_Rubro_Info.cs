@@ -42,6 +42,12 @@ namespace Core.Info.Academico
         public bool AplicaProntoPago { get; set; }
         public DateTime FechaProntoPago { get; set; }
         public decimal ValorProntoPago { get; set; }
+        public decimal IdAlumno { get; set; }
+        public decimal IdCliente { get; set; }
+        public string vt_Observacion { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public string Codigo { get; set; }
+        public string IdTerminoPago { get; set; }
         #endregion
     }
 }

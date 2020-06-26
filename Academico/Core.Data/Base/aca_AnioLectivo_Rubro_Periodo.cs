@@ -21,7 +21,7 @@ namespace Core.Data.Base
         public int Secuencia { get; set; }
         public string Observacion { get; set; }
     
-        public virtual aca_AnioLectivo_Periodo aca_AnioLectivo_Periodo { get; set; }
         public virtual aca_AnioLectivo_Rubro aca_AnioLectivo_Rubro { get; set; }
+        public virtual aca_AnioLectivo_Periodo aca_AnioLectivo_Periodo { get; set; }
     }
 }

@@ -24,12 +24,19 @@ namespace Core.Info.Academico
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+        public Nullable<int> IdSucursal { get; set; }
+        public Nullable<int> IdPuntoVta { get; set; }
+        public Nullable<bool> Procesado { get; set; }
+        public Nullable<System.DateTime> FechaProceso { get; set; }
+        public Nullable<decimal> TotalAlumnos { get; set; }
+        public Nullable<decimal> TotalValorFacturado { get; set; }
 
         #region Campos que no existen en la tabla
         public List<aca_AnioLectivo_Periodo_Info> lst_detalle { get; set; }
         public string Descripcion { get; set; }
         public int NumPeriodos { get; set; }
         public string NomPeriodo { get; set; }
+        public List<aca_Matricula_Rubro_Info> lst_det_fact_masiva { get; set; }
         #endregion
     }
 }

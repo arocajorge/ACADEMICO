@@ -135,14 +135,6 @@ namespace Core.Web.Areas.Facturacion.Controllers
             var model = ListaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_AplicacionMasivaDet", model);
         }
-        
-        [ValidateInput(false)]
-        public ActionResult GridViewPartial_AplicacionMasivaValorCero()
-        {
-            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            var model = ListaDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            return PartialView("_GridViewPartial_AplicacionMasivaValorCero", model);
-        }
         #endregion
 
         #region Metodos

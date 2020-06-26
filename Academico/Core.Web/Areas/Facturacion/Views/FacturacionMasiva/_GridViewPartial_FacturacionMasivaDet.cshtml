@@ -2,8 +2,8 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_AplicacionMasivaValorCero";
-        settings.CallbackRouteValues = new { Controller = "AplicacionMasiva", Action = "GridViewPartial_AplicacionMasivaValorCero", Area = "Facturacion"};
+        settings.Name = "GridViewPartial_FacturacionMasivaDet";
+        settings.CallbackRouteValues = new { Controller = "FacturacionMasiva", Action = "GridViewPartial_FacturacionMasivaDet", Area = "Facturacion"};
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "Secuencia";
         settings.Width = Unit.Percentage(100);
@@ -14,8 +14,8 @@
         settings.SettingsBehavior.AllowEllipsisInText = true;
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
-        settings.CommandColumn.ShowNewButtonInHeader = true;
-        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+        settings.CommandColumn.Visible = false;
 
         settings.CommandColumn.ShowNewButton = false;
         settings.CommandColumn.ShowEditButton = false;
@@ -64,7 +64,6 @@
         settings.InitNewRow = (s, e) =>
         {
             e.NewValues["IdAlumno"] = 0;
-            e.NewValues["Saldo"] = 0;
         };
         settings.SettingsExport.RenderBrick = (sender, e) =>
         {
@@ -87,21 +86,22 @@
             column.VisibleIndex = 2;
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Saldo";
-            column.Caption = "Saldo";
-            column.Width = Unit.Percentage(10);
-            column.VisibleIndex = 3;
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.EditorProperties().SpinEdit(q =>
-            {
-                q.MinValue = 0;
-                q.DisplayFormatString = "{0:n2}";
-                q.Width = Unit.Percentage(100);
-                q.AllowMouseWheel = false;
-            });
-        });
+
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "Saldo";
+        //    column.Caption = "Saldo";
+        //    column.Width = Unit.Percentage(10);
+        //    column.VisibleIndex = 3;
+        //    column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+        //    column.EditorProperties().SpinEdit(q =>
+        //    {
+        //        q.MinValue = 0;
+        //        q.DisplayFormatString = "{0:n2}";
+        //        q.Width = Unit.Percentage(100);
+        //        q.AllowMouseWheel = false;
+        //    });
+        //});
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

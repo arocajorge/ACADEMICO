@@ -1270,7 +1270,7 @@ namespace Core.Data.Facturacion
                 List<fa_notaCreDeb_Info> Lista = new List<fa_notaCreDeb_Info>();
                 using (EntitiesFacturacion Context = new EntitiesFacturacion())
                 {
-                    var lst = Context.vwfa_notaCreDeb_ParaConciliarNC.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno==2629).ToList();
+                    var lst = Context.vwfa_notaCreDeb_ParaConciliarNC.Where(q => q.IdEmpresa == IdEmpresa).ToList();
 
                     foreach (var item in lst)
                     {
