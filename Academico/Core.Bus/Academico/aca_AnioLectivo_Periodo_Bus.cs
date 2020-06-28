@@ -159,13 +159,13 @@ namespace Core.Bus.Academico
                             IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
                             vt_iva = Convert.ToDouble(item.ValorIVA),
                             vt_total = Convert.ToDouble(item.Total),
-                            //vt_detallexItems = NumPension,
+                            //vt_detallexItems = null,
                             IdMatricula = item.IdMatricula,
                             aca_IdPeriodo = item.IdPeriodo,
                             aca_IdAnio = item.IdAnio,
                             aca_IdPlantilla = item.IdPlantilla,
                             aca_IdRubro = item.IdRubro,
-                            AplicaProntoPago = item.AplicaProntoPago,
+                            AplicaProntoPago = (item.Total==item.ValorProntoPago ? false : true),
                             FechaProntoPago = item.FechaProntoPago,
                             ValorProntoPago = Convert.ToDouble(item.ValorProntoPago)
                         };

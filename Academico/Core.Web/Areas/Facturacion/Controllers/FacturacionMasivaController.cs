@@ -23,6 +23,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         aca_AnioLectivo_Periodo_FactMasiva_List Lista_FactMasiva = new aca_AnioLectivo_Periodo_FactMasiva_List();
         aca_Matricula_Rubro_FactMasiva_List Lista_FactMasivaDet = new aca_Matricula_Rubro_FactMasiva_List();
         aca_Matricula_Rubro_Bus bus_MatRubro = new aca_Matricula_Rubro_Bus();
+        string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
         #region Index
@@ -134,6 +135,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 ViewBag.MostrarBoton = false;
             }
 
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
 
             cargar_combos();
             return View(model);
@@ -145,9 +148,24 @@ namespace Core.Web.Areas.Facturacion.Controllers
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             model.lst_det_fact_masiva = Lista_FactMasivaDet.get_list(model.IdTransaccionSession);
 
+            var info_periodo_anterior = new aca_AnioLectivo_Periodo_Info();
+            var periodo_anterior = model.IdPeriodo - 1;
+            if (periodo_anterior!=0)
+            {
+                info_periodo_anterior = bus_periodo.GetInfo(model.IdEmpresa, model.IdAnio, periodo_anterior);
+            }
+
+            if (info_periodo_anterior!=null && info_periodo_anterior.Procesado==false)
+            {
+                ViewBag.mensaje = "No se puede procesar este periodo, tiene pendiente procesar el periodo anterior";
+                cargar_combos();
+                return View(model);
+            }
+
             if (!bus_periodo.Modificar_FacturacionMasiva(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
+                cargar_combos();
                 return View(model);
             }
             return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, IdPeriodo=model.IdPeriodo, Exito = true });
