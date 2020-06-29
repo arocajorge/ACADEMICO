@@ -155,7 +155,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 info_periodo_anterior = bus_periodo.GetInfo(model.IdEmpresa, model.IdAnio, periodo_anterior);
             }
 
-            if (info_periodo_anterior!=null && info_periodo_anterior.Procesado==false)
+            if (info_periodo_anterior!=null && (info_periodo_anterior.Procesado==false || info_periodo_anterior.Procesado ==null))
             {
                 ViewBag.mensaje = "No se puede procesar este periodo, tiene pendiente procesar el periodo anterior";
                 cargar_combos();

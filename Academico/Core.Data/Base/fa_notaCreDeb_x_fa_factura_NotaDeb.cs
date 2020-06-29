@@ -26,8 +26,9 @@ namespace Core.Data.Base
         public string vt_tipoDoc { get; set; }
         public string NumDocumento { get; set; }
         public double Valor_Aplicado { get; set; }
-        public Nullable<double> ValorProntoPago { get; set; }
         public System.DateTime fecha_cruce { get; set; }
+        public Nullable<double> ValorProntoPago { get; set; }
+        public Nullable<bool> TieneSaldo0 { get; set; }
     
         public virtual fa_notaCreDeb fa_notaCreDeb { get; set; }
     }

@@ -105,7 +105,8 @@ namespace Core.Data.Facturacion
                                      Saldo = q.Saldo,
                                      vt_Subtotal = q.vt_Subtotal,
                                      vt_iva = q.vt_iva,
-                                     NumDocumento = q.vt_NunDocumento
+                                     NumDocumento = q.vt_NunDocumento,
+                                     TieneSaldo0 = false
                                  }).ToList();
                     else
                         Lista = (from q in Context.vwcxc_cartera_x_cobrar
@@ -127,8 +128,51 @@ namespace Core.Data.Facturacion
                                      Saldo = q.Saldo,
                                      vt_Subtotal = q.vt_Subtotal,
                                      vt_iva = q.vt_iva,
-                                     NumDocumento = q.vt_NunDocumento
+                                     NumDocumento = q.vt_NunDocumento,
+                                     TieneSaldo0 = false
                                  }).ToList();
+
+                    Lista.ForEach(q => { q.secuencial = q.vt_tipoDoc + "-" + q.IdBodega_fac_nd_doc_mod.ToString() + "-" + q.IdCbteVta_fac_nd_doc_mod.ToString(); q.Valor_Aplicado = Convert.ToDouble(q.Saldo);});
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list_cartera_saldo_cero(int IdEmpresa, int IdSucursal, decimal IdCliente, decimal IdAlumno)
+        {
+            try
+            {
+                List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> Lista = new List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info>();
+
+                using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
+                {
+                    var lst = Context.vwcxc_cartera_cobrada_saldo0.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdCliente == IdCliente).ToList();
+
+                    foreach (var q in lst)
+                    {
+                        var info = new fa_notaCreDeb_x_fa_factura_NotaDeb_Info
+                        {
+                            IdEmpresa_fac_nd_doc_mod = q.IdEmpresa,
+                            IdSucursal_fac_nd_doc_mod = q.IdSucursal,
+                            IdBodega_fac_nd_doc_mod = q.IdBodega,
+                            vt_tipoDoc = q.vt_tipoDoc,
+                            IdCbteVta_fac_nd_doc_mod = q.IdCbteVta,
+                            vt_NumDocumento = q.vt_NunDocumento,
+                            Observacion = q.vt_Observacion,
+                            vt_fecha = q.vt_fecha,
+                            vt_total = Convert.ToDouble(q.Total),
+                            NumDocumento = q.vt_NunDocumento,
+                            Saldo = 0,
+                            TieneSaldo0 = true
+                        };
+                        Lista.Add(info);
+                    }
+                    
 
                     Lista.ForEach(q => { q.secuencial = q.vt_tipoDoc + "-" + q.IdBodega_fac_nd_doc_mod.ToString() + "-" + q.IdCbteVta_fac_nd_doc_mod.ToString(); q.Valor_Aplicado = Convert.ToDouble(q.Saldo); });
                 }

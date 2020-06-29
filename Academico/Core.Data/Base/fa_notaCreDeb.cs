@@ -20,8 +20,8 @@ namespace Core.Data.Base
             this.fa_notaCreDeb_det = new HashSet<fa_notaCreDeb_det>();
             this.fa_notaCreDeb_x_ct_cbtecble = new HashSet<fa_notaCreDeb_x_ct_cbtecble>();
             this.fa_notaCreDeb_x_cxc_cobro = new HashSet<fa_notaCreDeb_x_cxc_cobro>();
-            this.fa_notaCreDeb_x_fa_factura_NotaDeb = new HashSet<fa_notaCreDeb_x_fa_factura_NotaDeb>();
             this.fa_notaCreDeb_MasivaDet = new HashSet<fa_notaCreDeb_MasivaDet>();
+            this.fa_notaCreDeb_x_fa_factura_NotaDeb = new HashSet<fa_notaCreDeb_x_fa_factura_NotaDeb>();
         }
     
         public int IdEmpresa { get; set; }
@@ -70,8 +70,8 @@ namespace Core.Data.Base
         public virtual ICollection<fa_notaCreDeb_x_cxc_cobro> fa_notaCreDeb_x_cxc_cobro { get; set; }
         public virtual fa_notaCreDeb_resumen fa_notaCreDeb_resumen { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<fa_notaCreDeb_x_fa_factura_NotaDeb> fa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_notaCreDeb_MasivaDet> fa_notaCreDeb_MasivaDet { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<fa_notaCreDeb_x_fa_factura_NotaDeb> fa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
     }
 }

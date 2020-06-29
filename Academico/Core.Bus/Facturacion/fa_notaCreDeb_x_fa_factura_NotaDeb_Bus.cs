@@ -34,6 +34,19 @@ namespace Core.Bus.Facturacion
                 throw;
             }
         }
+
+        public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list_cartera_saldo_cero(int IdEmpresa, int IdSucursal, decimal IdCliente, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.get_list_cartera_saldo_cero(IdEmpresa, IdSucursal, IdCliente, IdAlumno);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota)
         {
             try

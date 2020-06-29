@@ -33,6 +33,7 @@ namespace Core.Info.Facturacion
         public Nullable<int> IdPunto_cargo_grupo { get; set; }
         public string IdCod_Impuesto_Iva { get; set; }
         public string IdCentroCosto { get; set; }
+
         #region Campos que no existen en la tabla
         public string pr_descripcion { get; set; }
         public string lote_num_lote { get; set; }
@@ -40,7 +41,7 @@ namespace Core.Info.Facturacion
         public string nom_presentacion { get; set; }
 
         public Nullable<double> sc_cantidad_factura { get; set; }
-
+        public bool TieneSaldo0 { get; set; }
         #endregion
 
     }

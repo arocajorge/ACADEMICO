@@ -110,7 +110,7 @@ namespace Core.Data.Facturacion
 
                 return Lista.OrderByDescending(q=> q.IdNota).ToList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

@@ -411,6 +411,9 @@
     <Compile Include="Base\VWCXC_005_Diario.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwcxc_cartera_cobrada_saldo0.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwcxc_ConciliacionNotaCredito.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
@@ -907,7 +910,7 @@
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\cxc_Parametro.cs">
-      <DependentUpon>ModelFacturacion.tt</DependentUpon>
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\fa_catalogo.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>

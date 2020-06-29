@@ -114,7 +114,8 @@ namespace Core.Data.Facturacion
                         IdCatalogo_FormaPago = Entity.IdCatalogo_FormaPago,
                         IdAlumno = Entity.IdAlumno,
                         IdEmpresa_rol=Entity.IdEmpresa_rol,
-                        IdEmpleado = Entity.IdEmpleado
+                        IdEmpleado = Entity.IdEmpleado,
+                        AplicacionMasiva = Entity.AplicacionMasiva
                     };
 
                     info.info_resumen = Context.fa_factura_resumen.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega && q.IdCbteVta == IdCbteVta).Select(q => new fa_factura_resumen_Info
@@ -189,7 +190,8 @@ namespace Core.Data.Facturacion
                         IdCatalogo_FormaPago = Entity.IdCatalogo_FormaPago,
                         IdAlumno = Entity.IdAlumno,
                         IdEmpresa_rol = Entity.IdEmpresa_rol,
-                        IdEmpleado = Entity.IdEmpleado
+                        IdEmpleado = Entity.IdEmpleado,
+                        AplicacionMasiva = Entity.AplicacionMasiva
                     };
 
                     info.info_resumen = info.info_resumen ?? new fa_factura_resumen_Info();
@@ -271,7 +273,8 @@ namespace Core.Data.Facturacion
                     IdNivel = info.IdNivel,
                     IdAlumno = info.IdAlumno,
                     IdEmpresa_rol= info.IdEmpresa_rol,
-                    IdEmpleado=info.IdEmpleado
+                    IdEmpleado=info.IdEmpleado,
+                    AplicacionMasiva = info.AplicacionMasiva
                 };
                 #endregion
 

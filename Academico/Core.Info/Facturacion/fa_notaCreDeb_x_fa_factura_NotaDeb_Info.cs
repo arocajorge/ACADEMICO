@@ -22,6 +22,7 @@ namespace Core.Info.Facturacion
         public double Valor_Aplicado { get; set; }
         public System.DateTime fecha_cruce { get; set; }
         public double ValorProntoPago { get; set; }
+        public Nullable<bool> TieneSaldo0 { get; set; }
 
         #region Campos que no existen en la tabla
         public string secuencial { get; set; }

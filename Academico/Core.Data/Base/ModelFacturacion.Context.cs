@@ -58,12 +58,9 @@ namespace Core.Data.Base
         public virtual DbSet<vwfa_factura_det> vwfa_factura_det { get; set; }
         public virtual DbSet<fa_notaCreDeb_resumen> fa_notaCreDeb_resumen { get; set; }
         public virtual DbSet<vwfa_notaCreDeb_ParaConciliarNC> vwfa_notaCreDeb_ParaConciliarNC { get; set; }
-        public virtual DbSet<fa_notaCreDeb_x_fa_factura_NotaDeb> fa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
         public virtual DbSet<vwfa_notaCreDeb_x_fa_factura_NotaDeb> vwfa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
-        public virtual DbSet<cxc_Parametro> cxc_Parametro { get; set; }
         public virtual DbSet<fa_parametro> fa_parametro { get; set; }
         public virtual DbSet<vwfa_factura> vwfa_factura { get; set; }
-        public virtual DbSet<fa_factura> fa_factura { get; set; }
         public virtual DbSet<vwfa_notaCreDeb> vwfa_notaCreDeb { get; set; }
         public virtual DbSet<fa_notaCreDeb_Masiva> fa_notaCreDeb_Masiva { get; set; }
         public virtual DbSet<fa_notaCreDeb_MasivaDet> fa_notaCreDeb_MasivaDet { get; set; }
@@ -71,6 +68,8 @@ namespace Core.Data.Base
         public virtual DbSet<fa_AplicacionMasivaDet> fa_AplicacionMasivaDet { get; set; }
         public virtual DbSet<fa_AplicacionMasiva> fa_AplicacionMasiva { get; set; }
         public virtual DbSet<vwfa_AplicacionMasivaDet> vwfa_AplicacionMasivaDet { get; set; }
+        public virtual DbSet<fa_factura> fa_factura { get; set; }
+        public virtual DbSet<fa_notaCreDeb_x_fa_factura_NotaDeb> fa_notaCreDeb_x_fa_factura_NotaDeb { get; set; }
     
         public virtual ObjectResult<spfa_notaCreDeb_ParaContabilizarAcademico_Result> spfa_notaCreDeb_ParaContabilizarAcademico(Nullable<int> idEmpresa, Nullable<int> idSucursal, Nullable<int> idBodega, Nullable<decimal> idNota)
         {

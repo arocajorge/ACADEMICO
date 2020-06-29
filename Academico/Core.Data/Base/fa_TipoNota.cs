@@ -18,7 +18,6 @@ namespace Core.Data.Base
         public fa_TipoNota()
         {
             this.fa_notaCreDeb = new HashSet<fa_notaCreDeb>();
-            this.cxc_Parametro = new HashSet<cxc_Parametro>();
             this.fa_notaCreDeb_Masiva = new HashSet<fa_notaCreDeb_Masiva>();
         }
     
@@ -42,8 +41,6 @@ namespace Core.Data.Base
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_notaCreDeb> fa_notaCreDeb { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cxc_Parametro> cxc_Parametro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<fa_notaCreDeb_Masiva> fa_notaCreDeb_Masiva { get; set; }
     }

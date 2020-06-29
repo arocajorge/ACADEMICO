@@ -21,5 +21,6 @@ namespace Core.Data.Base
         public string pe_nombreCompleto { get; set; }
         public Nullable<decimal> Saldo { get; set; }
         public Nullable<decimal> SaldoProntoPago { get; set; }
+        public Nullable<System.DateTime> FechaProntoPago { get; set; }
     }
 }

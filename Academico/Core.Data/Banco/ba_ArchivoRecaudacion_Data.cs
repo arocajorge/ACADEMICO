@@ -160,7 +160,8 @@ namespace Core.Data.Banco
                                 IdAlumno = item.IdAlumno,
                                 FechaProceso = item.FechaProceso,
                                 Valor = item.Valor,
-                                ValorProntoPago = item.ValorProntoPago
+                                ValorProntoPago = item.ValorProntoPago,
+                                FechaProntoPago = item.FechaProntoPago
                             });
                         }
                     }

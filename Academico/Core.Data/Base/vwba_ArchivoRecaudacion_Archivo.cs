@@ -32,5 +32,7 @@ namespace Core.Data.Base
         public int SecuencialDescarga { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
+        public Nullable<System.DateTime> FechaProceso { get; set; }
+        public Nullable<System.DateTime> FechaProntoPago { get; set; }
     }
 }

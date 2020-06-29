@@ -232,7 +232,7 @@
           <Property Name="Valor" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcaj_Caja_Movimiento_por_conciliar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcaj_Caja_Movimiento_por_conciliar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcaj_Caja_Movimiento_por_conciliar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -264,7 +264,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcaj_Caja_Movimiento_po
           <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcaj_Caja_Movimiento_ValesNoConciliados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcaj_Caja_Movimiento_ValesNoConciliados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcaj_Caja_Movimiento_ValesNoConciliados">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -280,7 +280,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcaj_Caja_Movimiento_Va
           <Property Name="cm_valor" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcaj_Caja_Movimiento_x_Conciliar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcaj_Caja_Movimiento_x_Conciliar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcaj_Caja_Movimiento_x_Conciliar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -307,7 +307,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwcaj_Caja_Movimiento_x_
           <Property Name="Saldo" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcaj_Caja_Movimiento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwcaj_Caja_Movimiento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcaj_Caja_Movimiento">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -339,7 +339,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcaj_Caja_Movimiento' n
           <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcp_conciliacion_Caja_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_conciliacion_Caja_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -389,7 +389,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcp_conciliacion_Caja_d
           <Property Name="co_total" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwcp_conciliacion_Caja_det_x_ValeCaja' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeCaja' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_conciliacion_Caja_det_x_ValeCaja">
           <Key>
             <PropertyRef Name="IdEmpresa" />

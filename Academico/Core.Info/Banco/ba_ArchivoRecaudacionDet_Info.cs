@@ -23,6 +23,10 @@ namespace Core.Info.Banco
         public System.DateTime Fecha { get; set; }
         public decimal Saldo { get; set; }
         public decimal SaldoProntoPago { get; set; }
+        public Nullable<System.DateTime> FechaProntoPago { get; set; }
+
+
+
 
         public string Nom_Archivo { get; set; }
         public int IdBanco { get; set; }

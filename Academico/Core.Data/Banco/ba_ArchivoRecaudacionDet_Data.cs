@@ -28,7 +28,8 @@ namespace Core.Data.Banco
                         pe_nombreCompleto = q.pe_nombreCompleto,
                         Valor =q.Valor,
                         ValorProntoPago =q.ValorProntoPago,
-                        FechaProceso = q.FechaProceso
+                        FechaProceso = q.FechaProceso,
+                        FechaProntoPago = q.FechaProntoPago
                     }).ToList();
                 }
                 return Lista;
@@ -44,19 +45,26 @@ namespace Core.Data.Banco
         {
             try
             {
-                List<ba_ArchivoRecaudacionDet_Info> Lista;
+                List<ba_ArchivoRecaudacionDet_Info> Lista = new List<ba_ArchivoRecaudacionDet_Info>();
                 using (EntitiesBanco Context = new EntitiesBanco())
                 {
-                    Lista = Context.vwba_ArchivoRecaudacionDet_Saldos.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new ba_ArchivoRecaudacionDet_Info
+                    var lst = Context.vwba_ArchivoRecaudacionDet_Saldos.Where(q => q.IdEmpresa == IdEmpresa).ToList();
+
+                    foreach (var q in lst)
                     {
-                        IdEmpresa = q.IdEmpresa,
-                        IdMatricula = q.IdMatricula,
-                        CodigoAlumno = q.CodigoAlumno,
-                        IdAlumno = q.IdAlumno??0,
-                        pe_nombreCompleto = q.pe_nombreCompleto,
-                        Saldo = q.Saldo??0,
-                        SaldoProntoPago = q.SaldoProntoPago??0,
-                    }).ToList();
+                        var info = new ba_ArchivoRecaudacionDet_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdMatricula = q.IdMatricula,
+                            CodigoAlumno = q.CodigoAlumno,
+                            IdAlumno = q.IdAlumno ?? 0,
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            Saldo = q.Saldo ?? 0,
+                            SaldoProntoPago = q.SaldoProntoPago ?? 0,
+                            FechaProntoPago = (DateTime) q.FechaProntoPago
+                        };
+                        Lista.Add(info);
+                    }
                 }
                 return Lista;
             }
@@ -91,7 +99,8 @@ namespace Core.Data.Banco
                         ba_Num_Cuenta = q.ba_Num_Cuenta,
                         CodigoLegal=q.CodigoLegal,
                         IdTipoDocumento=q.IdTipoDocumento,
-                        Fecha = q.Fecha
+                        Fecha = q.Fecha,
+                        FechaProntoPago = q.FechaProntoPago
                     }).ToList();
                 }
                 return Lista;

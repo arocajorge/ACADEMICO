@@ -140,7 +140,8 @@ namespace Core.Bus.Academico
                             //IdEmpleado = item.IdEmpleado,
                             IdUsuario = info.IdUsuarioCreacion,
                             IdPuntoVta = info.IdPuntoVta,
-                            aprobada_enviar_sri = false
+                            aprobada_enviar_sri = false,
+                            AplicacionMasiva = true
                         };
 
                         info_factura.lst_det = new List<fa_factura_det_Info>();

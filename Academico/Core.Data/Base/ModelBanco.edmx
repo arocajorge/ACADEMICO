@@ -106,6 +106,7 @@
           <Property Name="Valor" Type="float" Nullable="false" />
           <Property Name="ValorProntoPago" Type="float" Nullable="false" />
           <Property Name="FechaProceso" Type="datetime" />
+          <Property Name="FechaProntoPago" Type="datetime" />
         </EntityType>
         <EntityType Name="ba_Banco_Cuenta">
           <Key>
@@ -465,7 +466,7 @@
           <Property Name="valor_disponible" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_Archivo_Transferencia_Det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_Archivo_Transferencia_Det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Archivo_Transferencia_Det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -515,7 +516,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_Archivo_Transferenc
           <Property Name="IdCbteCble_cxp" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_ArchivoRecaudacion_Archivo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_ArchivoRecaudacion_Archivo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_ArchivoRecaudacion_Archivo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -548,9 +549,11 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_ArchivoRecaudacion_
           <Property Name="SecuencialDescarga" Type="int" Nullable="false" />
           <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="FechaProceso" Type="datetime" />
+          <Property Name="FechaProntoPago" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_ArchivoRecaudacionDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_ArchivoRecaudacionDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_ArchivoRecaudacionDet">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -571,9 +574,10 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_ArchivoRecaudacionD
           <Property Name="Valor" Type="float" Nullable="false" />
           <Property Name="ValorProntoPago" Type="float" Nullable="false" />
           <Property Name="FechaProceso" Type="datetime" />
+          <Property Name="FechaProntoPago" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_ArchivoRecaudacionDet_Saldos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_ArchivoRecaudacionDet_Saldos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_ArchivoRecaudacionDet_Saldos">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -587,9 +591,10 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_ArchivoRecaudacionD
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Saldo" Type="money" />
           <Property Name="SaldoProntoPago" Type="money" />
+          <Property Name="FechaProntoPago" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -628,7 +633,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_Caja_Movimiento_x_C
           <Property Name="mba_IdCbteCble" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -664,7 +669,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_Caja_Movimiento_x_C
           <Property Name="IdUsuario" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_Cbte_Ban_x_ba_TipoFlujo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_Cbte_Ban_x_ba_TipoFlujo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Cbte_Ban_x_ba_TipoFlujo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -686,7 +691,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_Cbte_Ban_x_ba_TipoF
           <Property Name="Descricion" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_TipoFlujo_Movimiento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_TipoFlujo_Movimiento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_TipoFlujo_Movimiento">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -714,7 +719,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_TipoFlujo_Movimient
           <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_TipoFlujoPlantillaDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwba_TipoFlujoPlantillaDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_TipoFlujoPlantillaDet">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -732,7 +737,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwba_TipoFlujoPlantillaD
           <Property Name="Descricion" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Cbte_Ban' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwba_Cbte_Ban' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Cbte_Ban">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -771,7 +776,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Cbte_Ban' no tiene 
           <Property Name="Imprimir_Solo_el_cheque" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x_banco_ID' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwba_Talonario_cheques_x_banco_ID">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1216,7 +1221,9 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x
     [vwba_ArchivoRecaudacion_Archivo].[ValorProntoPago] AS [ValorProntoPago], 
     [vwba_ArchivoRecaudacion_Archivo].[SecuencialDescarga] AS [SecuencialDescarga], 
     [vwba_ArchivoRecaudacion_Archivo].[Fecha] AS [Fecha], 
-    [vwba_ArchivoRecaudacion_Archivo].[Observacion] AS [Observacion]
+    [vwba_ArchivoRecaudacion_Archivo].[Observacion] AS [Observacion], 
+    [vwba_ArchivoRecaudacion_Archivo].[FechaProceso] AS [FechaProceso], 
+    [vwba_ArchivoRecaudacion_Archivo].[FechaProntoPago] AS [FechaProntoPago]
     FROM [dbo].[vwba_ArchivoRecaudacion_Archivo] AS [vwba_ArchivoRecaudacion_Archivo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwba_ArchivoRecaudacionDet" EntityType="Self.vwba_ArchivoRecaudacionDet" store:Type="Views" store:Schema="dbo">
@@ -1230,7 +1237,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x
     [vwba_ArchivoRecaudacionDet].[pe_nombreCompleto] AS [pe_nombreCompleto], 
     [vwba_ArchivoRecaudacionDet].[Valor] AS [Valor], 
     [vwba_ArchivoRecaudacionDet].[ValorProntoPago] AS [ValorProntoPago], 
-    [vwba_ArchivoRecaudacionDet].[FechaProceso] AS [FechaProceso]
+    [vwba_ArchivoRecaudacionDet].[FechaProceso] AS [FechaProceso], 
+    [vwba_ArchivoRecaudacionDet].[FechaProntoPago] AS [FechaProntoPago]
     FROM [dbo].[vwba_ArchivoRecaudacionDet] AS [vwba_ArchivoRecaudacionDet]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwba_ArchivoRecaudacionDet_Saldos" EntityType="Self.vwba_ArchivoRecaudacionDet_Saldos" store:Type="Views" store:Schema="dbo">
@@ -1241,7 +1249,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x
     [vwba_ArchivoRecaudacionDet_Saldos].[CodigoAlumno] AS [CodigoAlumno], 
     [vwba_ArchivoRecaudacionDet_Saldos].[pe_nombreCompleto] AS [pe_nombreCompleto], 
     [vwba_ArchivoRecaudacionDet_Saldos].[Saldo] AS [Saldo], 
-    [vwba_ArchivoRecaudacionDet_Saldos].[SaldoProntoPago] AS [SaldoProntoPago]
+    [vwba_ArchivoRecaudacionDet_Saldos].[SaldoProntoPago] AS [SaldoProntoPago], 
+    [vwba_ArchivoRecaudacionDet_Saldos].[FechaProntoPago] AS [FechaProntoPago]
     FROM [dbo].[vwba_ArchivoRecaudacionDet_Saldos] AS [vwba_ArchivoRecaudacionDet_Saldos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntityType="Self.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" store:Type="Views" store:Schema="dbo">
@@ -2699,6 +2708,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Saldo" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="SaldoProntoPago" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FechaProntoPago" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="ba_ArchivoRecaudacionDet">
           <Key>
@@ -2714,6 +2724,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x
           <Property Name="Valor" Type="Double" Nullable="false" />
           <Property Name="ValorProntoPago" Type="Double" Nullable="false" />
           <Property Name="FechaProceso" Type="DateTime" Precision="3" />
+          <Property Name="FechaProntoPago" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="vwba_ArchivoRecaudacionDet">
           <Key>
@@ -2735,6 +2746,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x
           <Property Name="Valor" Type="Double" Nullable="false" />
           <Property Name="ValorProntoPago" Type="Double" Nullable="false" />
           <Property Name="FechaProceso" Type="DateTime" Precision="3" />
+          <Property Name="FechaProntoPago" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="vwba_ArchivoRecaudacion_Archivo">
           <Key>
@@ -2768,6 +2780,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x
           <Property Name="SecuencialDescarga" Type="Int32" Nullable="false" />
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FechaProceso" Type="DateTime" Precision="3" />
+          <Property Name="FechaProntoPago" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3368,6 +3382,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x
           <EntitySetMapping Name="vwba_ArchivoRecaudacionDet_Saldos">
             <EntityTypeMapping TypeName="DBERP_LICEOModel.vwba_ArchivoRecaudacionDet_Saldos">
               <MappingFragment StoreEntitySet="vwba_ArchivoRecaudacionDet_Saldos">
+                <ScalarProperty Name="FechaProntoPago" ColumnName="FechaProntoPago" />
                 <ScalarProperty Name="SaldoProntoPago" ColumnName="SaldoProntoPago" />
                 <ScalarProperty Name="Saldo" ColumnName="Saldo" />
                 <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
@@ -3381,6 +3396,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x
           <EntitySetMapping Name="ba_ArchivoRecaudacionDet">
             <EntityTypeMapping TypeName="DBERP_LICEOModel.ba_ArchivoRecaudacionDet">
               <MappingFragment StoreEntitySet="ba_ArchivoRecaudacionDet">
+                <ScalarProperty Name="FechaProntoPago" ColumnName="FechaProntoPago" />
                 <ScalarProperty Name="FechaProceso" ColumnName="FechaProceso" />
                 <ScalarProperty Name="ValorProntoPago" ColumnName="ValorProntoPago" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
@@ -3395,6 +3411,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x
           <EntitySetMapping Name="vwba_ArchivoRecaudacionDet">
             <EntityTypeMapping TypeName="DBERP_LICEOModel.vwba_ArchivoRecaudacionDet">
               <MappingFragment StoreEntitySet="vwba_ArchivoRecaudacionDet">
+                <ScalarProperty Name="FechaProntoPago" ColumnName="FechaProntoPago" />
                 <ScalarProperty Name="FechaProceso" ColumnName="FechaProceso" />
                 <ScalarProperty Name="ValorProntoPago" ColumnName="ValorProntoPago" />
                 <ScalarProperty Name="Valor" ColumnName="Valor" />
@@ -3411,6 +3428,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwba_Talonario_cheques_x
           <EntitySetMapping Name="vwba_ArchivoRecaudacion_Archivo">
             <EntityTypeMapping TypeName="DBERP_LICEOModel.vwba_ArchivoRecaudacion_Archivo">
               <MappingFragment StoreEntitySet="vwba_ArchivoRecaudacion_Archivo">
+                <ScalarProperty Name="FechaProntoPago" ColumnName="FechaProntoPago" />
+                <ScalarProperty Name="FechaProceso" ColumnName="FechaProceso" />
                 <ScalarProperty Name="Observacion" ColumnName="Observacion" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
                 <ScalarProperty Name="SecuencialDescarga" ColumnName="SecuencialDescarga" />

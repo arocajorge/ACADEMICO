@@ -59,6 +59,7 @@ namespace Core.Info.Facturacion
 
         public Nullable<int> IdEmpresa_rol { get; set; }
         public Nullable<decimal> IdEmpleado { get; set; }
+        public Nullable<bool> AplicacionMasiva { get; set; }
 
         public fa_factura_resumen_Info info_resumen { get; set; }
 

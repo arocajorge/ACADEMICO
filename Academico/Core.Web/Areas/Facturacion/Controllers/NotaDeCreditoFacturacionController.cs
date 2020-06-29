@@ -247,6 +247,23 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetDocumentosPorCobrarSaldoCero(int IdSucursal = 0, decimal IdCliente = 0, decimal IdAlumno = 0, decimal IdTransaccionSession = 0)
+        {
+            bool resultado = true;
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var List = List_cruce.get_list(IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
+            var ListPorCruzar = bus_cruce.get_list_cartera_saldo_cero(IdEmpresa, IdSucursal, IdCliente, IdAlumno);
+
+            foreach (var item in List)
+            {
+                ListPorCruzar.Remove(ListPorCruzar.Where(q => q.secuencial == item.secuencial).FirstOrDefault());
+            }
+
+            List.AddRange(ListPorCruzar);
+            List_cruce.set_list(List, IdTransaccionSession);
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult VaciarListas(decimal IdTransaccionSession = 0)
         {
             bool resultado = true;
@@ -292,7 +309,14 @@ namespace Core.Web.Areas.Facturacion.Controllers
             var model = List_cruce.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == false).ToList();
             return PartialView("_GridViewPartial_CruceNC_x_cruzar", model);
         }
+        
+        public ActionResult GridViewPartial_CruceNC_SaldoCero_x_cruzar()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
 
+            var model = List_cruce.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.seleccionado == false).ToList();
+            return PartialView("_GridViewPartial_CruceNC_SaldoCero_x_cruzar", model);
+        }
         public ActionResult GridViewPartial_CruceNC()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
@@ -315,7 +339,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
             var lst_det = new List<fa_notaCreDeb_det_Info>();
             foreach (var item in list)
             {
-                lst_det.AddRange(bus_det.get_list(item.IdEmpresa_fac_nd_doc_mod, item.IdSucursal_fac_nd_doc_mod, item.IdBodega_fac_nd_doc_mod, item.IdCbteVta_fac_nd_doc_mod, item.vt_tipoDoc));
+                var lst = bus_det.get_list(item.IdEmpresa_fac_nd_doc_mod, item.IdSucursal_fac_nd_doc_mod, item.IdBodega_fac_nd_doc_mod, item.IdCbteVta_fac_nd_doc_mod, item.vt_tipoDoc);
+                lst.ForEach(q=>q.TieneSaldo0 = Convert.ToBoolean(item.TieneSaldo0));
+                lst_det.AddRange(lst);
             }
             List_det.set_list(lst_det, IdTransaccionSession);
             var model = list;
@@ -910,10 +936,16 @@ namespace Core.Web.Areas.Facturacion.Controllers
         {
             List<fa_notaCreDeb_x_fa_factura_NotaDeb_Info> list = get_list(IdTransaccion);
             fa_notaCreDeb_x_fa_factura_NotaDeb_Info edited_info = list.Where(m => m.secuencial == info_det.secuencial).FirstOrDefault();
-            edited_info.Saldo_final = Convert.ToDouble(edited_info.Saldo) - info_det.Valor_Aplicado;
-            edited_info.Valor_Aplicado = info_det.Valor_Aplicado;
+
             edited_info.fecha_cruce = info_det.fecha_cruce;
+            edited_info.TieneSaldo0 = info_det.TieneSaldo0;
             edited_info.NumDocumento = info_det.NumDocumento;
+
+            if (info_det.TieneSaldo0 == false)
+            {
+                edited_info.Valor_Aplicado = info_det.Valor_Aplicado;
+                edited_info.Saldo_final = Convert.ToDouble(edited_info.Saldo) - info_det.Valor_Aplicado;
+            }
 
         }
 
@@ -925,4 +957,5 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 info.seleccionado = !info.seleccionado;
         }
     }
+
 }
