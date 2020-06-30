@@ -188,7 +188,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst = Context.vwaca_Matricula_Rubro_PorFacturarMasiva.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPeriodo == IdPeriodo && q.IdAlumno>0 && q.IdAlumno<100).ToList();
+                    var lst = Context.vwaca_Matricula_Rubro_PorFacturarMasiva.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPeriodo == IdPeriodo).ToList();
                     foreach (var q in lst)
                     {
                         var info = new aca_Matricula_Rubro_Info
