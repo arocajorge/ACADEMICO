@@ -567,7 +567,6 @@ namespace Core.Web.Areas.Banco.Controllers
                         linea1 += "094";
                         linea1 += "0".PadRight(12, ' ');
                         linea1 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + info.Fecha.Day.ToString().PadLeft(2, '0') + "/" + info.Fecha.Year.ToString();
-                        linea1 += "\t";
                         file.WriteLine(linea1);
 
                         foreach (var item in Lista)

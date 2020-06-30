@@ -14,26 +14,28 @@ namespace Core.Data.Facturacion
         {
             try
             {
-                List<fa_AplicacionMasivaDet_Info> Lista;
+                List<fa_AplicacionMasivaDet_Info> Lista= new List<fa_AplicacionMasivaDet_Info>();
 
                 using (EntitiesFacturacion Context = new EntitiesFacturacion())
                 {
-                    Lista = (from q in Context.vwfa_AplicacionMasivaDet
-                             where q.IdEmpresa == IdEmpresa
-                             && q.IdAplicacion == IdAplicacion
-                             select new fa_AplicacionMasivaDet_Info
-                             {
-                                 IdEmpresa = q.IdEmpresa,
-                                 IdAplicacion= q.IdAplicacion,
-                                 IdAlumno = q.IdAlumno,
-                                 pe_nombreCompleto = q.pe_nombreCompleto,
-                                 Saldo = q.Saldo
-                                 
-                             }).ToList();
+                    var lst = Context.vwfa_AplicacionMasivaDet.Where(q => q.IdEmpresa == IdEmpresa && q.IdAplicacion == IdAplicacion).ToList();
+
+                    foreach (var q in lst)
+                    {
+                        var info = new fa_AplicacionMasivaDet_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAplicacion = q.IdAplicacion,
+                            IdAlumno = q.IdAlumno,
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            Saldo = q.Saldo
+                        };
+                        Lista.Add(info);
+                    }
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

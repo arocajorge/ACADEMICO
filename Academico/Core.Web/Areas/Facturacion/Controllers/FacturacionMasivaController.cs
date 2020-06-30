@@ -145,7 +145,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
         [HttpPost]
         public ActionResult Consultar(aca_AnioLectivo_Periodo_Info model)
         {
-            model.IdUsuarioCreacion = SessionFixed.IdUsuario;
+            model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+
             model.lst_det_fact_masiva = Lista_FactMasivaDet.get_list(model.IdTransaccionSession);
 
             var info_periodo_anterior = new aca_AnioLectivo_Periodo_Info();

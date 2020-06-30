@@ -138,7 +138,7 @@ namespace Core.Bus.Academico
                             IdCaja = punto_venta.IdCaja,
                             //IdEmpresa_rol = item.IdEmpresa_rol,
                             //IdEmpleado = item.IdEmpleado,
-                            IdUsuario = info.IdUsuarioCreacion,
+                            IdUsuario = info.IdUsuarioModificacion,
                             IdPuntoVta = info.IdPuntoVta,
                             aprobada_enviar_sri = false,
                             AplicacionMasiva = true
