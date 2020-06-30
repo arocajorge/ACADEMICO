@@ -125,79 +125,79 @@ namespace Core.Web.Areas.Academico.Controllers
 
                                     lst_calificacion_parcial.Add(info_calificacion_parcial);
                                 }
+
+                                var info_calificacion = new aca_MatriculaCalificacion_Info
+                                {
+                                    IdEmpresa = item.IdEmpresa,
+                                    IdMatricula = item.IdMatricula,
+                                    IdMateria = item_materias.IdMateria,
+                                    IdProfesor = item_materias.IdProfesor,
+                                    CalificacionP1 = (calificacion == null ? null : calificacion.CalificacionP1),
+                                    CalificacionP2 = (calificacion == null ? null : calificacion.CalificacionP2),
+                                    CalificacionP3 = (calificacion == null ? null : calificacion.CalificacionP3),
+                                    CalificacionP4 = (calificacion == null ? null : calificacion.CalificacionP4),
+                                    CalificacionP5 = (calificacion == null ? null : calificacion.CalificacionP5),
+                                    CalificacionP6 = (calificacion == null ? null : calificacion.CalificacionP6),
+                                    PromedioQ1 = (calificacion == null ? null : calificacion.PromedioQ1),
+                                    PromedioQ2 = (calificacion == null ? null : calificacion.PromedioQ2),
+                                    ExamenQ1 = (calificacion == null ? null : calificacion.ExamenQ1),
+                                    ExamenQ2 = (calificacion == null ? null : calificacion.ExamenQ2),
+                                    PromedioFinalQ1 = (calificacion == null ? null : calificacion.PromedioFinalQ1),
+                                    PromedioFinalQ2 = (calificacion == null ? null : calificacion.PromedioFinalQ2),
+                                    ExamenMejoramiento = (calificacion == null ? null : calificacion.ExamenMejoramiento),
+                                    ExamenSupletorio = (calificacion == null ? null : calificacion.ExamenSupletorio),
+                                    ExamenRemedial = (calificacion == null ? null : calificacion.ExamenRemedial),
+                                    ExamenGracia = (calificacion == null ? null : calificacion.ExamenGracia),
+                                    PromedioFinal = (calificacion == null ? null : calificacion.PromedioFinal)
+                                };
+
+                                lst_calificacion.Add(info_calificacion);
                             }
 
-                            var info_calificacion = new aca_MatriculaCalificacion_Info
+                            var info_conducta = new aca_MatriculaConducta_Info
                             {
                                 IdEmpresa = item.IdEmpresa,
                                 IdMatricula = item.IdMatricula,
-                                IdMateria = item_materias.IdMateria,
-                                IdProfesor = item_materias.IdProfesor,
-                                CalificacionP1 = (calificacion == null ? null : calificacion.CalificacionP1),
-                                CalificacionP2 = (calificacion == null ? null : calificacion.CalificacionP2),
-                                CalificacionP3 = (calificacion == null ? null : calificacion.CalificacionP3),
-                                CalificacionP4 = (calificacion == null ? null : calificacion.CalificacionP4),
-                                CalificacionP5 = (calificacion == null ? null : calificacion.CalificacionP5),
-                                CalificacionP6 = (calificacion == null ? null : calificacion.CalificacionP6),
-                                PromedioQ1 = (calificacion == null ? null : calificacion.PromedioQ1),
-                                PromedioQ2 = (calificacion == null ? null : calificacion.PromedioQ2),
-                                ExamenQ1 = (calificacion == null ? null : calificacion.ExamenQ1),
-                                ExamenQ2 = (calificacion == null ? null : calificacion.ExamenQ2),
-                                PromedioFinalQ1 = (calificacion == null ? null : calificacion.PromedioFinalQ1),
-                                PromedioFinalQ2 = (calificacion == null ? null : calificacion.PromedioFinalQ2),
-                                ExamenMejoramiento = (calificacion == null ? null : calificacion.ExamenMejoramiento),
-                                ExamenSupletorio = (calificacion == null ? null : calificacion.ExamenSupletorio),
-                                ExamenRemedial = (calificacion == null ? null : calificacion.ExamenRemedial),
-                                ExamenGracia = (calificacion == null ? null : calificacion.ExamenGracia),
-                                PromedioFinal = (calificacion == null ? null : calificacion.PromedioFinal)
+                                SecuenciaPromedioP1 = (conducta == null ? null : conducta.SecuenciaPromedioP1),
+                                PromedioP1 = (conducta == null ? null : conducta.PromedioP1),
+                                SecuenciaPromedioFinalP1 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP1),
+                                PromedioFinalP1 = (conducta == null ? null : conducta.PromedioFinalP1),
+                                SecuenciaPromedioP2 = (conducta == null ? null : conducta.SecuenciaPromedioP2),
+                                PromedioP2 = (conducta == null ? null : conducta.PromedioP2),
+                                SecuenciaPromedioFinalP2 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP2),
+                                PromedioFinalP2 = (conducta == null ? null : conducta.PromedioFinalP2),
+                                SecuenciaPromedioP3 = (conducta == null ? null : conducta.SecuenciaPromedioP3),
+                                PromedioP3 = (conducta == null ? null : conducta.PromedioP3),
+                                SecuenciaPromedioFinalP3 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP3),
+                                PromedioFinalP3 = (conducta == null ? null : conducta.PromedioFinalP3),
+                                SecuenciaPromedioP4 = (conducta == null ? null : conducta.SecuenciaPromedioP4),
+                                PromedioP4 = (conducta == null ? null : conducta.PromedioP4),
+                                SecuenciaPromedioFinalP4 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP4),
+                                PromedioFinalP4 = (conducta == null ? null : conducta.PromedioFinalP4),
+                                SecuenciaPromedioP5 = (conducta == null ? null : conducta.SecuenciaPromedioP5),
+                                PromedioP5 = (conducta == null ? null : conducta.PromedioP5),
+                                SecuenciaPromedioFinalP5 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP5),
+                                PromedioFinalP5 = (conducta == null ? null : conducta.PromedioFinalP5),
+                                SecuenciaPromedioP6 = (conducta == null ? null : conducta.SecuenciaPromedioP6),
+                                PromedioP6 = (conducta == null ? null : conducta.PromedioP6),
+                                SecuenciaPromedioFinalP6 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP6),
+                                PromedioFinalP6 = (conducta == null ? null : conducta.PromedioFinalP6),
+                                SecuenciaPromedioQ1 = (conducta == null ? null : conducta.SecuenciaPromedioQ1),
+                                PromedioQ1 = (conducta == null ? null : conducta.PromedioQ1),
+                                SecuenciaPromedioFinalQ1 = (conducta == null ? null : conducta.SecuenciaPromedioFinalQ1),
+                                PromedioFinalQ1 = (conducta == null ? null : conducta.PromedioFinalQ1),
+                                SecuenciaPromedioQ2 = (conducta == null ? null : conducta.SecuenciaPromedioQ2),
+                                PromedioQ2 = (conducta == null ? null : conducta.PromedioQ2),
+                                SecuenciaPromedioFinalQ2 = (conducta == null ? null : conducta.SecuenciaPromedioFinalQ2),
+                                PromedioFinalQ2 = (conducta == null ? null : conducta.PromedioFinalQ2),
+                                SecuenciaPromedioGeneral = (conducta == null ? null : conducta.SecuenciaPromedioGeneral),
+                                PromedioGeneral = (conducta == null ? null : conducta.PromedioGeneral),
+                                SecuenciaPromedioFinal = (conducta == null ? null : conducta.SecuenciaPromedioFinal),
+                                PromedioFinal = (conducta == null ? null : conducta.PromedioFinal)
                             };
 
-                            lst_calificacion.Add(info_calificacion);
+                            lst_conducta.Add(info_conducta);
                         }
-
-                        var info_conducta = new aca_MatriculaConducta_Info
-                        {
-                            IdEmpresa = item.IdEmpresa,
-                            IdMatricula = item.IdMatricula,
-                            SecuenciaPromedioP1 = (conducta == null ? null : conducta.SecuenciaPromedioP1),
-                            PromedioP1 = (conducta == null ? null : conducta.PromedioP1),
-                            SecuenciaPromedioFinalP1 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP1),
-                            PromedioFinalP1 = (conducta == null ? null : conducta.PromedioFinalP1),
-                            SecuenciaPromedioP2 = (conducta == null ? null : conducta.SecuenciaPromedioP2),
-                            PromedioP2 = (conducta == null ? null : conducta.PromedioP2),
-                            SecuenciaPromedioFinalP2 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP2),
-                            PromedioFinalP2 = (conducta == null ? null : conducta.PromedioFinalP2),
-                            SecuenciaPromedioP3 = (conducta == null ? null : conducta.SecuenciaPromedioP3),
-                            PromedioP3 = (conducta == null ? null : conducta.PromedioP3),
-                            SecuenciaPromedioFinalP3 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP3),
-                            PromedioFinalP3 = (conducta == null ? null : conducta.PromedioFinalP3),
-                            SecuenciaPromedioP4 = (conducta == null ? null : conducta.SecuenciaPromedioP4),
-                            PromedioP4 = (conducta == null ? null : conducta.PromedioP4),
-                            SecuenciaPromedioFinalP4 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP4),
-                            PromedioFinalP4 = (conducta == null ? null : conducta.PromedioFinalP4),
-                            SecuenciaPromedioP5 = (conducta == null ? null : conducta.SecuenciaPromedioP5),
-                            PromedioP5 = (conducta == null ? null : conducta.PromedioP5),
-                            SecuenciaPromedioFinalP5 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP5),
-                            PromedioFinalP5 = (conducta == null ? null : conducta.PromedioFinalP5),
-                            SecuenciaPromedioP6 = (conducta == null ? null : conducta.SecuenciaPromedioP6),
-                            PromedioP6 = (conducta == null ? null : conducta.PromedioP6),
-                            SecuenciaPromedioFinalP6 = (conducta == null ? null : conducta.SecuenciaPromedioFinalP6),
-                            PromedioFinalP6 = (conducta == null ? null : conducta.PromedioFinalP6),
-                            SecuenciaPromedioQ1 = (conducta == null ? null : conducta.SecuenciaPromedioQ1),
-                            PromedioQ1 = (conducta == null ? null : conducta.PromedioQ1),
-                            SecuenciaPromedioFinalQ1 = (conducta == null ? null : conducta.SecuenciaPromedioFinalQ1),
-                            PromedioFinalQ1 = (conducta == null ? null : conducta.PromedioFinalQ1),
-                            SecuenciaPromedioQ2 = (conducta == null ? null : conducta.SecuenciaPromedioQ2),
-                            PromedioQ2 = (conducta == null ? null : conducta.PromedioQ2),
-                            SecuenciaPromedioFinalQ2 = (conducta == null ? null : conducta.SecuenciaPromedioFinalQ2),
-                            PromedioFinalQ2 = (conducta == null ? null : conducta.PromedioFinalQ2),
-                            SecuenciaPromedioGeneral = (conducta == null ? null : conducta.SecuenciaPromedioGeneral),
-                            PromedioGeneral = (conducta == null ? null : conducta.PromedioGeneral),
-                            SecuenciaPromedioFinal = (conducta == null ? null : conducta.SecuenciaPromedioFinal),
-                            PromedioFinal = (conducta == null ? null : conducta.PromedioFinal)
-                        };
-
-                        lst_conducta.Add(info_conducta);
                     }
                     #endregion
                 }

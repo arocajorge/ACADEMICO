@@ -8804,6 +8804,7 @@
     <Content Include="Areas\Facturacion\Views\FacturacionMasiva\_GridViewPartial_FacturacionMasiva.cshtml" />
     <Content Include="Areas\Facturacion\Views\FacturacionMasiva\_GridViewPartial_FacturacionMasivaDet.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC_SaldoCero_x_cruzar.cshtml" />
+    <Content Include="Areas\Facturacion\Views\AplicacionMasiva\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

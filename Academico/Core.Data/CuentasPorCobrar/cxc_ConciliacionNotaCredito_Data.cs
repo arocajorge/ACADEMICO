@@ -124,6 +124,52 @@ namespace Core.Data.CuentasPorCobrar
             }
         }
 
+        public List<cxc_ConciliacionNotaCredito_Info> GetList_X_Aplicacion(int IdEmpresa, decimal IdAplicacion)
+        {
+            try
+            {
+                List<cxc_ConciliacionNotaCredito_Info> Lista = new List<cxc_ConciliacionNotaCredito_Info>();
+
+                using (EntitiesCuentasPorCobrar db = new EntitiesCuentasPorCobrar())
+                {
+                    var lst = db.cxc_ConciliacionNotaCredito.Where(q => q.IdEmpresa == IdEmpresa && q.IdAplicacion == IdAplicacion).ToList();
+
+                    foreach (var q in lst)
+                    {
+                        var info = new cxc_ConciliacionNotaCredito_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdConciliacion = q.IdConciliacion,
+                            IdAplicacion = q.IdAplicacion,
+                            IdAlumno = q.IdAlumno,
+                            IdSucursal = q.IdSucursal,
+                            IdBodega = q.IdBodega,
+                            IdNota = q.IdNota,
+                            IdCobro = q.IdCobro,
+                            Fecha = q.Fecha,
+                            Valor = q.Valor,
+                            Observacion = q.Observacion,
+                            Estado = q.Estado,
+                            IdTipoCbte = q.IdTipoCbte,
+                            IdCbteCble = q.IdCbteCble,
+
+                            IdString = q.IdSucursal.ToString("0000") + q.IdBodega.ToString("0000") + q.IdNota.ToString("0000000000")
+                        };
+
+                        Lista.Add(info);
+                    }
+                    
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool GuardarDB(cxc_ConciliacionNotaCredito_Info info)
         {
             try

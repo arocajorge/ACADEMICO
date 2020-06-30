@@ -137,15 +137,13 @@ namespace Core.Bus.Facturacion
             {
                 if (odata.anularDB(info))
                 {
-                    //foreach (var item in info.lst_det)
-                    //{
-                    //    var info_nota = odata_ncd.get_info(info.IdEmpresa, Convert.ToInt32(item.IdSucursal), Convert.ToInt32(item.IdBodega), Convert.ToInt32(item.IdNota));
-
-                    //    info_nota.IdUsuarioUltAnu = info.IdUsuarioAnulacion;
-                    //    info_nota.MotiAnula = info.MotivoAnulacion;
-
-                    //    odata_ncd.anularDB(info_nota);
-                    //}
+                    var lst = odata_conciliacion.GetList_X_Aplicacion(info.IdEmpresa, info.IdAplicacion);
+                    foreach (var item in lst)
+                    {
+                        item.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
+                        item.MotivoAnulacion = info.MotivoAnulacion;
+                        odata_conciliacion.AnularDB(item);
+                    }
                 }
                 return true;
             }

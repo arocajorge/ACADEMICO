@@ -938,10 +938,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
             fa_notaCreDeb_x_fa_factura_NotaDeb_Info edited_info = list.Where(m => m.secuencial == info_det.secuencial).FirstOrDefault();
 
             edited_info.fecha_cruce = info_det.fecha_cruce;
-            edited_info.TieneSaldo0 = info_det.TieneSaldo0;
             edited_info.NumDocumento = info_det.NumDocumento;
 
-            if (info_det.TieneSaldo0 == false)
+            if (edited_info.TieneSaldo0 == false)
             {
                 edited_info.Valor_Aplicado = info_det.Valor_Aplicado;
                 edited_info.Saldo_final = Convert.ToDouble(edited_info.Saldo) - info_det.Valor_Aplicado;
