@@ -129,7 +129,7 @@ namespace Core.Bus.Academico
                             IdVendedor = 1,
                             IdNivel = 1,
                             IdCatalogo_FormaPago = "CRE",
-                            vt_fecha = DateTime.Now,
+                            vt_fecha = item.FechaDesde,
                             vt_plazo = termino_pago.Dias_Vct,
                             vt_fech_venc = DateTime.Now.AddDays(termino_pago.Dias_Vct),
                             vt_tipo_venta = item.IdTerminoPago,

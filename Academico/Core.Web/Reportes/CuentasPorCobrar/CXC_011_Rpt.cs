@@ -75,7 +75,7 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             }
 
             Fecha.Text = "Guayaquil, " + fecha.Day.ToString() + " de " + descripcion_mes + " de " + fecha.Year.ToString();
-            lbl_texto.Text = "Mediante reporte generado con corte al" + fecha.Date + ", el departamento de Cobranzas informa el detalle de su estado de cuenta, considerando las facturas pendientes de pago:";
+            lbl_texto.Text = "Mediante reporte generado con corte al " + fecha.ToString("d 'de' MMMM 'de' yyyy") + ", el departamento de Cobranzas informa el detalle de su estado de cuenta, considerando las facturas pendientes de pago:";
 
             aca_Sede_Bus bus_sede = new aca_Sede_Bus();
             var sede = bus_sede.GetInfo(IdEmpresa, IdSede);

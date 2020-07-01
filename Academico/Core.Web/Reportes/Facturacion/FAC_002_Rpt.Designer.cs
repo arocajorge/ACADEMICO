@@ -36,6 +36,7 @@
             DevExpress.XtraReports.UI.XRSummary xrSummary5 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.XtraReports.UI.XRSummary xrSummary6 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.XtraReports.UI.XRSummary xrSummary7 = new DevExpress.XtraReports.UI.XRSummary();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FAC_002_Rpt));
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable3 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow11 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -184,6 +185,7 @@
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.lblReemplaza = new DevExpress.XtraReports.UI.XRLabel();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.xrRichText1 = new DevExpress.XtraReports.UI.XRRichText();
             this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
@@ -195,6 +197,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrRichText1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -973,11 +976,14 @@
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrSubreport1,
+            this.xrRichText1,
+            this.lblReemplaza,
             this.xrTable10,
             this.xrTable9,
             this.xrTable7,
             this.xrTable6});
-            this.ReportFooter.HeightF = 306.1668F;
+            this.ReportFooter.HeightF = 469.5825F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrTable10
@@ -1646,20 +1652,17 @@
             // 
             // PageFooter
             // 
-            this.PageFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrSubreport1,
-            this.lblReemplaza});
-            this.PageFooter.HeightF = 71.62486F;
+            this.PageFooter.HeightF = 0F;
             this.PageFooter.Name = "PageFooter";
             // 
             // lblReemplaza
             // 
             this.lblReemplaza.Font = new System.Drawing.Font("Verdana", 7F);
-            this.lblReemplaza.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.lblReemplaza.LocationFloat = new DevExpress.Utils.PointFloat(0F, 336.7084F);
             this.lblReemplaza.Multiline = true;
             this.lblReemplaza.Name = "lblReemplaza";
             this.lblReemplaza.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblReemplaza.SizeF = new System.Drawing.SizeF(443.625F, 37.74994F);
+            this.lblReemplaza.SizeF = new System.Drawing.SizeF(750.9999F, 37.74994F);
             this.lblReemplaza.StylePriority.UseFont = false;
             this.lblReemplaza.Text = "Usted podrá consultar su factura electrónica en el portal web: ww.Facturacionlcg." +
     "com\r\nEl usuario es: {0} y la clave es {0}\r\nCliente: {1}";
@@ -1669,9 +1672,19 @@
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Facturacion.FAC_002_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
+            // xrRichText1
+            // 
+            this.xrRichText1.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.xrRichText1.LocationFloat = new DevExpress.Utils.PointFloat(0.0001398722F, 374.4584F);
+            this.xrRichText1.Name = "xrRichText1";
+            this.xrRichText1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrRichText1.SerializableRtfString = resources.GetString("xrRichText1.SerializableRtfString");
+            this.xrRichText1.SizeF = new System.Drawing.SizeF(750.9999F, 54.66664F);
+            this.xrRichText1.StylePriority.UseFont = false;
+            // 
             // xrSubreport1
             // 
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 48.62486F);
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0.0001398722F, 446.5825F);
             this.xrSubreport1.Name = "xrSubreport1";
             this.xrSubreport1.ReportSource = new Core.Web.Reportes.Facturacion.FAC_002_PendientePago_Rpt();
             this.xrSubreport1.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
@@ -1711,6 +1724,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrRichText1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -1866,5 +1880,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell80;
         private DevExpress.XtraReports.UI.XRLabel IdAlumno;
         private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
+        private DevExpress.XtraReports.UI.XRRichText xrRichText1;
     }
 }
