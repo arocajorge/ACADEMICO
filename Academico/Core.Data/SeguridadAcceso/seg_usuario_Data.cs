@@ -221,7 +221,7 @@ namespace Core.Data.SeguridadAcceso
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

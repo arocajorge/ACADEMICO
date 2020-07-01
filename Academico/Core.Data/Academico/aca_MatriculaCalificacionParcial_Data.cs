@@ -14,6 +14,7 @@ namespace Core.Data.Academico
         aca_AnioLectivoConductaEquivalencia_Data odata_conducta = new aca_AnioLectivoConductaEquivalencia_Data();
         aca_AnioLectivoConductaEquivalencia_Data odata_conducta_equivalencia = new aca_AnioLectivoConductaEquivalencia_Data();
         aca_AnioLectivoEquivalenciaPromedio_Data odata_promedio_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Data();
+        aca_AnioLectivoParcial_Data odata_parcial = new aca_AnioLectivoParcial_Data();
         aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
         public List<aca_MatriculaCalificacionParcial_Info> getList(int IdEmpresa, decimal IdMatricula)
         {
@@ -352,7 +353,9 @@ namespace Core.Data.Academico
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
                     {
                         SumaPromedio = Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP1) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP2) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP3);
-                        Promedio = Math.Round((SumaPromedio / 3), 2, MidpointRounding.AwayFromZero);
+                        var lst_pacial_quim1 = odata_parcial.getList_x_Tipo(info.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+
+                        Promedio = Math.Round((SumaPromedio / lst_pacial_quim1.Count), 2, MidpointRounding.AwayFromZero);
                         EntityCalificacionPromedio.PromedioQ1 = Promedio;
                         var info_promedio = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Promedio);
                         IdEquivalenciaPromedio = info_promedio.IdEquivalenciaPromedio;
@@ -362,7 +365,8 @@ namespace Core.Data.Academico
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
                     {
                         SumaPromedio = Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP4) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP5) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP6);
-                        Promedio = Math.Round((SumaPromedio / 3), 2, MidpointRounding.AwayFromZero);
+                        var lst_pacial_quim2 = odata_parcial.getList_x_Tipo(info.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+                        Promedio = Math.Round((SumaPromedio / lst_pacial_quim2.Count), 2, MidpointRounding.AwayFromZero);
                         EntityCalificacionPromedio.PromedioQ2 = Promedio;
                         var info_promedio = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Promedio);
                         IdEquivalenciaPromedio = info_promedio.IdEquivalenciaPromedio;

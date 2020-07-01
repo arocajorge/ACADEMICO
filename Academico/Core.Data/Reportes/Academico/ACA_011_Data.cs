@@ -24,11 +24,13 @@ namespace Core.Data.Reportes.Academico
                     
 
                     Context.Database.CommandTimeout = 5000;
-                    var lst = Context.VWACA_011.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
+                    /*var lst = Context.VWACA_011.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
                     && IdNivel <= q.IdNivel && q.IdNivel <= IdNivelFin
                     && IdJornada <= q.IdJornada && q.IdJornada <= IdJornadaFin
                     && IdCurso <= q.IdCurso && q.IdCurso <= IdCursoFin
                     && IdParalelo <= q.IdParalelo && q.IdParalelo <= IdParaleloFin).ToList();
+                    */
+                    var lst = Context.SPACA_011(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo).ToList();
 
                     lst.ForEach(q =>
                     {

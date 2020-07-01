@@ -216,6 +216,9 @@
     <Compile Include="Base\SPACA_010_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPACA_011_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\SPACA_013_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
