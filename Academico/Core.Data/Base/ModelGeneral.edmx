@@ -118,6 +118,39 @@
           <Property Name="nom_pc" Type="varchar" MaxLength="50" />
           <Property Name="ip" Type="varchar" MaxLength="25" />
         </EntityType>
+        <EntityType Name="tb_ColaCorreo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCorreo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdCorreo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Destinatarios" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Asunto" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Cuerpo" Type="varchar(max)" Nullable="false" />
+          <Property Name="Parametros" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaEnvio" Type="datetime" />
+          <Property Name="Error" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tb_ColaCorreoParametros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Contrasenia" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Puerto" Type="int" Nullable="false" />
+          <Property Name="Host" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="PermitirSSL" Type="bit" Nullable="false" />
+          <Property Name="CorreoCopia" Type="varchar" MaxLength="200" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="tb_ColaImpresionDirecta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1044,6 +1077,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <EntitySet Name="tb_Catalogo" EntityType="Self.tb_Catalogo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_CatalogoTipo" EntityType="Self.tb_CatalogoTipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ciudad" EntityType="Self.tb_ciudad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_ColaCorreo" EntityType="Self.tb_ColaCorreo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_ColaCorreoParametros" EntityType="Self.tb_ColaCorreoParametros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ColaImpresionDirecta" EntityType="Self.tb_ColaImpresionDirecta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_dia" EntityType="Self.tb_dia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" Schema="dbo" store:Type="Tables" />
@@ -1440,6 +1475,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             <End Role="tb_banco" EntitySet="tb_banco" />
             <End Role="tb_banco_procesos_bancarios_x_empresa" EntitySet="tb_banco_procesos_bancarios_x_empresa" />
           </AssociationSet>
+          <EntitySet Name="tb_ColaCorreo" EntityType="ModelGeneral.tb_ColaCorreo" />
+          <EntitySet Name="tb_ColaCorreoParametros" EntityType="ModelGeneral.tb_ColaCorreoParametros" />
           </EntityContainer>
         <EntityType Name="tb_sucursal">
           <Key>
@@ -2519,6 +2556,39 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tb_ColaCorreo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCorreo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCorreo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Destinatarios" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Asunto" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Cuerpo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Parametros" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaEnvio" Type="DateTime" Precision="3" />
+          <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tb_ColaCorreoParametros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasenia" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Puerto" Type="Int32" Nullable="false" />
+          <Property Name="Host" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PermitirSSL" Type="Boolean" Nullable="false" />
+          <Property Name="CorreoCopia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3163,6 +3233,40 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
                 <ScalarProperty Name="IdBanco" ColumnName="IdBanco" />
                 <ScalarProperty Name="IdProceso_bancario_tipo" ColumnName="IdProceso_bancario_tipo" />
                 <ScalarProperty Name="IdProceso" ColumnName="IdProceso" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ColaCorreo">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_ColaCorreo">
+              <MappingFragment StoreEntitySet="tb_ColaCorreo">
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="FechaEnvio" ColumnName="FechaEnvio" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Parametros" ColumnName="Parametros" />
+                <ScalarProperty Name="Cuerpo" ColumnName="Cuerpo" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="Destinatarios" ColumnName="Destinatarios" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdCorreo" ColumnName="IdCorreo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ColaCorreoParametros">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_ColaCorreoParametros">
+              <MappingFragment StoreEntitySet="tb_ColaCorreoParametros">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="CorreoCopia" ColumnName="CorreoCopia" />
+                <ScalarProperty Name="PermitirSSL" ColumnName="PermitirSSL" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Puerto" ColumnName="Puerto" />
+                <ScalarProperty Name="Contrasenia" ColumnName="Contrasenia" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

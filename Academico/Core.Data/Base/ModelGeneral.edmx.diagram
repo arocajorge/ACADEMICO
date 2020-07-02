@@ -78,6 +78,8 @@
         <AssociationConnector Association="ModelGeneral.FK_tb_sucursal_tb_empresa" />
         <EntityTypeShape EntityType="ModelGeneral.tb_banco_procesos_bancarios_x_empresa" Width="1.5" PointX="3" PointY="41.5" />
         <AssociationConnector Association="ModelGeneral.FK_tb_banco_procesos_bancarios_x_empresa_tb_banco" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_ColaCorreo" Width="1.5" PointX="10.5" PointY="15.75" />
+        <EntityTypeShape EntityType="ModelGeneral.tb_ColaCorreoParametros" Width="1.5" PointX="3.5" PointY="16.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
