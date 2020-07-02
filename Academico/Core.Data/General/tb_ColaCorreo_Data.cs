@@ -48,7 +48,7 @@ namespace Core.Data.General
             }
         }
 
-        public tb_ColaCorreo_Info GetInfoPendienteEnviar(int IdEmpresa)
+        public tb_ColaCorreo_Info GetInfoPendienteEnviar()
         {
             try
             {

@@ -24,11 +24,11 @@ namespace Core.Bus.General
             }
         }
 
-        public tb_ColaCorreo_Info GetInfoPendienteEnviar(int IdEmpresa)
+        public tb_ColaCorreo_Info GetInfoPendienteEnviar()
         {
             try
             {
-                return odata.GetInfoPendienteEnviar(IdEmpresa);
+                return odata.GetInfoPendienteEnviar();
             }
             catch (Exception)
             {

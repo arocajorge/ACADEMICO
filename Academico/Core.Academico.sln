@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Data", "Core.Data\Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Bus", "Core.Bus\Core.Bus.csproj", "{ADBB9BEF-8266-4A4C-9C3D-B52873B89450}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.SrvCorreos", "Core.SrvCorreos\Core.SrvCorreos.csproj", "{8D58D419-EB5C-4277-B9EE-E106EB0B5825}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{ADBB9BEF-8266-4A4C-9C3D-B52873B89450}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADBB9BEF-8266-4A4C-9C3D-B52873B89450}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADBB9BEF-8266-4A4C-9C3D-B52873B89450}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D58D419-EB5C-4277-B9EE-E106EB0B5825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D58D419-EB5C-4277-B9EE-E106EB0B5825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D58D419-EB5C-4277-B9EE-E106EB0B5825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D58D419-EB5C-4277-B9EE-E106EB0B5825}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
