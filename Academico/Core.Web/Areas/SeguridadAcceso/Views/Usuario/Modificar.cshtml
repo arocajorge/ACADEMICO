@@ -112,36 +112,36 @@
             </div>
         </div>
     </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="IdMenu">Menú inicio de sesión</label>
-                                @Html.DropDownListFor(q => q.IdMenu, new SelectList(ViewBag.lst_menu, "IdMenu", "DescripcionMenu_combo", Model.IdMenu == null ? 0 : Model.IdMenu), new { @class = "form-control" })
-                                @Html.ValidationMessageFor(q => q.IdMenu, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
+    @*<div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdMenu">Menú inicio de sesión</label>
+                    @Html.DropDownListFor(q => q.IdMenu, new SelectList(ViewBag.lst_menu, "IdMenu", "DescripcionMenu_combo", Model.IdMenu == null ? 0 : Model.IdMenu), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.IdMenu, "", new { @class = "text-danger" })
                 </div>
+            </div>
+        </div>
+    </div>*@
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                @Html.Action("GridViewPartial_Usuario_x_Sede")
-                            </div>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.Action("GridViewPartial_Usuario_x_Sede")
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" id="btn_guardar">Guardar</button>
-                    <a class="btn btn-default" href="@Url.Action("Index","Usuario",new { Area = "SeguridadAcceso" },null)">Cancelar</a>
-                    <button type="button" class="btn btn-danger" onclick="ResetearContrasena();" id="btn_resetear">Resetear contraseña</button>
-                </div>
-                @section Scripts {
-                    @Scripts.Render("~/bundles/jqueryval")
-                }
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary" id="btn_guardar">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index","Usuario",new { Area = "SeguridadAcceso" },null)">Cancelar</a>
+        <button type="button" class="btn btn-danger" onclick="ResetearContrasena();" id="btn_resetear">Resetear contraseña</button>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 }
 <script>
 

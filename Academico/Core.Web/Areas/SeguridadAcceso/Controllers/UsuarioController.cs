@@ -41,7 +41,7 @@ namespace Core.Web.Areas.SeguridadAcceso.Controllers
             };
 
             List<seg_usuario_Info> lista = bus_usuario.get_list(true);
-            Lista_Usuarios.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            Lista_Usuarios.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
 
             return View(model);
         }

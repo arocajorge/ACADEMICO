@@ -48,7 +48,7 @@ namespace Core.Web.Areas.Academico.Controllers
             };
 
             List<aca_Profesor_Info> lista = bus_profesor.GetList(model.IdEmpresa, true);
-            Lista_Profesor.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            Lista_Profesor.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "Profesor", "Index");
             ViewBag.Nuevo = info.Nuevo;
