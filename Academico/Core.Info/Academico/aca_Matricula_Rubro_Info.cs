@@ -48,6 +48,9 @@ namespace Core.Info.Academico
         public string pe_nombreCompleto { get; set; }
         public string Codigo { get; set; }
         public string IdTerminoPago { get; set; }
+        public bool Procesado { get; set; }
+        public string vt_autorizacion { get; set; }
+        public string Correo { get; set; }
         #endregion
     }
 }

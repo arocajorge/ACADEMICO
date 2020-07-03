@@ -2,6 +2,7 @@
 using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Info.Academico;
+using Core.Info.General;
 using Core.Info.Helps;
 using Core.Web.Helps;
 using System;
@@ -23,6 +24,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
         aca_AnioLectivo_Periodo_FactMasiva_List Lista_FactMasiva = new aca_AnioLectivo_Periodo_FactMasiva_List();
         aca_Matricula_Rubro_FactMasiva_List Lista_FactMasivaDet = new aca_Matricula_Rubro_FactMasiva_List();
         aca_Matricula_Rubro_Bus bus_MatRubro = new aca_Matricula_Rubro_Bus();
+        tb_ColaCorreo_Bus busCorreo = new tb_ColaCorreo_Bus();
+        tb_ColaCorreoCodigo_Bus busCorreoCodigo = new tb_ColaCorreoCodigo_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
@@ -170,6 +173,33 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 return View(model);
             }
             return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, IdPeriodo=model.IdPeriodo, Exito = true });
+        }
+        #endregion
+
+        #region Json
+        public JsonResult EnviarCorreoAutorizados(int IdEmpresa, decimal IdTransaccionSession)
+        {
+            string Mensaje = string.Empty;
+            var lst = Lista_FactMasivaDet.get_list(IdTransaccionSession).Where(q=> q.Procesado == true && !string.IsNullOrEmpty(q.vt_autorizacion));
+            var Codigo = busCorreoCodigo.GetInfo(IdEmpresa, "FAC_002");
+            if (Codigo != null)
+            {
+                foreach (var item in lst)
+                {
+                    busCorreo.GuardarDB(new tb_ColaCorreo_Info
+                    {
+                        IdEmpresa = IdEmpresa,
+                        Codigo = "FAC_002",
+                        Destinatarios = item.Correo,
+                        Asunto = Codigo.Asunto,
+                        Cuerpo = Codigo.Cuerpo,
+                        Parametros = item.IdEmpresa.ToString()+";"+item.IdSucursal.ToString()+";"+item.IdBodega.ToString()+";"+item.IdCbteVta.ToString(),
+                        IdUsuarioCreacion = SessionFixed.IdUsuario
+                    });
+                }
+            }
+
+            return Json(Mensaje,JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

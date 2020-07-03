@@ -1,7 +1,5 @@
 ﻿@model Core.Info.Academico.aca_AnioLectivo_Periodo_Info
 @{
-    /**/
-
     ViewBag.Title = ("Procesar factura masiva");
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
@@ -58,6 +56,12 @@
                     @Html.ValidationMessageFor(q => q.IdPuntoVta, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdPuntoVta">   </label>
+                    <button type="button" class="btn btn-primary form-control" id="btn_enviarCorreo" onclick="EnviarCorreoAutorizados();">Enviar avisos de pago</button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -84,5 +88,26 @@
     }
 }
 <script>
-                        
+    function EnviarCorreoAutorizados() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EnviarCorreoAutorizados", "FacturacionMasiva", new { Area = "Facturacion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                alert("Se han enviado los avisos de pago a la cola de correos");
+            },
+            error: function (error) {
+            }
+        });
+    }
+    
 </script>

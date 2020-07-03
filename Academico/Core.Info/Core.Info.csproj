@@ -114,6 +114,9 @@
     <Compile Include="Facturacion\fa_notaCreDeb_MasivaDet_Info.cs" />
     <Compile Include="Facturacion\fa_notaCreDeb_Masiva_Info.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_x_seg_usuario_Info.cs" />
+    <Compile Include="General\tb_ColaCorreoCodigo_Info.cs" />
+    <Compile Include="General\tb_ColaCorreoParametros_Info.cs" />
+    <Compile Include="General\tb_ColaCorreo_Info.cs" />
     <Compile Include="General\tb_GrupoEtnico_Info.cs" />
     <Compile Include="General\tb_Religion_Info.cs" />
     <Compile Include="Academico\aca_Rubro_Info.cs" />
