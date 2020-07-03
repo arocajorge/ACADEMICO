@@ -69,5 +69,56 @@ namespace Core.Data.General
                 throw;
             }
         }
+
+        public bool guardarDB(tb_ColaCorreoCodigo_Info info)
+        {
+            try
+            {
+                using (EntitiesGeneral Context = new EntitiesGeneral())
+                {
+                    tb_ColaCorreoCodigo Entity = new tb_ColaCorreoCodigo
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        Codigo = info.Codigo,
+                        Asunto = info.Asunto,
+                        Cuerpo = info.Cuerpo,
+                    };
+                    Context.tb_ColaCorreoCodigo.Add(Entity);
+
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(tb_ColaCorreoCodigo_Info info)
+        {
+            try
+            {
+                using (EntitiesGeneral Context = new EntitiesGeneral())
+                {
+                    tb_ColaCorreoCodigo Entity = Context.tb_ColaCorreoCodigo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.Codigo == info.Codigo);
+                    if (Entity == null)
+                        return false;
+
+                    Entity.Asunto = info.Asunto;
+                    Entity.Cuerpo = info.Cuerpo;
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

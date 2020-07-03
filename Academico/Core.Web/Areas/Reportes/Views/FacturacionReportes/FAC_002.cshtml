@@ -1,4 +1,4 @@
-﻿
+﻿@model Core.Info.Reportes.Facturacion.FAC_002_Info
 @{
     ViewBag.Title = "RIDE de factura";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
@@ -9,10 +9,66 @@
 }
 @using (Html.BeginForm())
 {
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdSucursal, new { @id = "IdSucursal" })
+    @Html.HiddenFor(q => q.IdBodega, new { @id = "IdBodega" })
+    @Html.HiddenFor(q => q.IdCbteVta, new { @id = "IdCbteVta" })
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdSucursal">Destinatarios (En caso de tener más de un destinatario separarlo con punto y coma)</label>
+                    @Html.TextBoxFor(q => q.Correos, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Correos, "", new { @class = "text-danger" })
+                    <label id="error" style="color:red" hidden> <i class="icon fa fa-warning"></i> Debe de ingresar al menos un destinatario</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdPuntoVta">   </label>
+                    <button type="button" class="btn btn-primary form-control" id="btn_enviarCorreo" onclick="EnviarCorreo();">Enviar aviso de pago</button>
+                </div>
+            </div>
+        </div>
+    </div>
    @Html.DevExpress().WebDocumentViewer(settings =>
     {
         settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
         settings.MobileMode = false;
         settings.Name = "webDocumentViewer";
-    }).Bind(Model).GetHtml()
+    }).Bind(ViewBag.Report).GetHtml()
 }
+
+<script>
+    function EnviarCorreo() {
+        if ($("#Correos").val() != "") {
+            $("#error").hide();
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                IdSucursal: $("#IdSucursal").val(),
+                IdBodega: $("#IdBodega").val(),
+                IdCbteVta: $("#IdCbteVta").val(),
+                Correos: $("#Correos").val(),
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("EnviarCorreo", "FacturacionMasiva", new { Area = "Facturacion" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    alert("Se han enviado los avisos de pago a la cola de correos");
+                },
+                error: function (error) {
+                }
+            });
+        }
+        else {
+            $("#error").show();
+        }
+    }
+
+</script>

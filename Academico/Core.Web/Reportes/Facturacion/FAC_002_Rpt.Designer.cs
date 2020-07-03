@@ -187,6 +187,7 @@
             this.xrTableCell70 = new DevExpress.XtraReports.UI.XRTableCell();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.p_Correos = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
@@ -1690,6 +1691,11 @@
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Facturacion.FAC_002_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
+            // p_Correos
+            // 
+            this.p_Correos.Name = "p_Correos";
+            this.p_Correos.Visible = false;
+            // 
             // FAC_002_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1711,7 +1717,8 @@
             this.p_IdEmpresa,
             this.p_IdSucursal,
             this.p_IdBodega,
-            this.p_IdCbteVta});
+            this.p_IdCbteVta,
+            this.p_Correos});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.FAC_002_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
@@ -1881,5 +1888,6 @@
         private DevExpress.XtraReports.UI.XRLabel IdAlumno;
         private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
         private DevExpress.XtraReports.UI.XRRichText xrRichText1;
+        public DevExpress.XtraReports.Parameters.Parameter p_Correos;
     }
 }

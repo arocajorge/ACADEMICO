@@ -1,0 +1,111 @@
+﻿
+@model Core.Info.General.tb_ColaCorreoCodigo_Info
+@{
+    ViewBag.Title = "Consultar códigos de correo";
+
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@*<script src="~/AdminLTE/bower_components/ckeditor/ckeditor.js"></script>@*../ckeditor.js*@
+<script src="~/AdminLTE/bower_components/ckeditor/samples/js/sample.js"></script>@*js/sample.js*@
+<link rel="stylesheet" href="~/AdminLTE/bower_components/ckeditor/samples/css/samples.css">@*css/samples.css*@
+<link rel="stylesheet" href="~/AdminLTE/bower_components/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">@*toolbarconfigurator/lib/codemirror/neo.css*@*@
+@using (Html.BeginForm("Consultar", "ColaCorreoCodigo", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-9 col-md-1">
+                @if (@ViewBag.Nuevo == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","ColaCorreoCodigo",new { Area = "General",IdEmpresa = Model.IdEmpresa},null)">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "ColaCorreoCodigo", new { Area = "General", IdEmpresa = Model.IdEmpresa, Codigo=Model.Codigo }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                @if (@ViewBag.Anular == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "ColaCorreoCodigo", new { Area = "General", IdEmpresa = Model.IdEmpresa, Codigo=Model.Codigo }, null)">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdSucursal">Código*</label>
+                    @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label for="IdSucursal">Asunto*</label>
+                    @Html.TextBoxFor(q => q.Asunto, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Asunto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <label for="IdSucursal">Cuerpo*</label>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        @*<button type="submit" class="btn btn-primary">Guardar</button>*@
+        <a class="btn btn-default" href="@Url.Action("Index", "ColaCorreoCodigo", new { Area ="General" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+

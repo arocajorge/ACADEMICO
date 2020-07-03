@@ -18,6 +18,7 @@ namespace Core.Info.General
         public string IdUsuarioCreacion { get; set; }
         public string Error { get; set; }
         public DateTime FechaCreacion { get; set; }
+        public DateTime FechaEnvio { get; set; }
 
         #region Campos que no existen en la tabla
         public tb_ColaCorreoParametros_Info ParametroInfo { get; set; }

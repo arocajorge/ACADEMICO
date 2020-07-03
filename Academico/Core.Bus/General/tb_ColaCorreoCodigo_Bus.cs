@@ -37,5 +37,31 @@ namespace Core.Bus.General
                 throw;
             }
         }
+
+        public bool guardarDB(tb_ColaCorreoCodigo_Info info)
+        {
+            try
+            {
+                return odata.guardarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(tb_ColaCorreoCodigo_Info info)
+        {
+            try
+            {
+                return odata.modificarDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

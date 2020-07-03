@@ -6,6 +6,7 @@ using Core.Info.Facturacion;
 using Core.Info.General;
 using Core.Info.Helps;
 using Core.Info.Inventario;
+using Core.Info.Reportes.Facturacion;
 using Core.Web.Helps;
 using Core.Web.Reportes.Facturacion;
 using DevExpress.Web;
@@ -27,6 +28,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         in_Marca_Bus bus_marca = new in_Marca_Bus();
+        fa_cliente_contactos_Bus bus_cliente_contacto = new fa_cliente_contactos_Bus();
         string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
 
         #region Metodos ComboBox bajo demanda
@@ -111,22 +113,36 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult FAC_002(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            FAC_002_Rpt model = new FAC_002_Rpt();
+            var info_factura = bus_factura.get_info(IdEmpresa,IdSucursal, IdBodega, IdCbteVta);
+            var info_cliente = bus_cliente_contacto.get_info(IdEmpresa,info_factura.IdCliente,1);
+            FAC_002_Info model = new FAC_002_Info();
+            model.IdEmpresa = IdEmpresa;
+            model.Correos = (info_cliente==null ? "" : info_cliente.Correo);
+            model.IdSucursal = IdSucursal;
+            model.IdBodega = IdBodega;
+            model.IdCbteVta = IdCbteVta;
+
+            FAC_002_Rpt report = new FAC_002_Rpt();
             #region Cargo diseño desde base
+
             var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "FAC_002");
             if (reporte != null)
             {
                 System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                model.LoadLayout(RootReporte);
+                report.LoadLayout(RootReporte);
             }
             #endregion
-            model.p_IdEmpresa.Value = IdEmpresa;
-            model.p_IdBodega.Value = IdBodega;
-            model.p_IdSucursal.Value = IdSucursal;
-            model.p_IdCbteVta.Value = IdCbteVta;
-            model.usuario = SessionFixed.IdUsuario;
-            model.empresa = SessionFixed.NomEmpresa;
-            model.RequestParameters = false;
+
+            report.p_IdEmpresa.Value = IdEmpresa;
+            report.p_IdBodega.Value = IdBodega;
+            report.p_IdSucursal.Value = IdSucursal;
+            report.p_IdCbteVta.Value = IdCbteVta;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            report.RequestParameters = false;
+
+            ViewBag.Report = report;
+
             return View(model);
         }
         public ActionResult FAC_003(int IdSucursal = 0, int IdBodega = 0, decimal IdNota = 0)
@@ -168,6 +184,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.p_IdSucursal.Value = IdSucursal;
             model.p_IdCbteVta.Value = IdCbteVta;
             model.RequestParameters = false;
+
             return View(model);
         }
 

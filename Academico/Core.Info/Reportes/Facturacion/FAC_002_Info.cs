@@ -61,5 +61,8 @@ namespace Core.Info.Reportes.Facturacion
         public Nullable<decimal> IdAlumno { get; set; }
         public decimal IdCliente { get; set; }
         public string Codigo { get; set; }
+
+
+        public string Correos { get; set; }
     }
 }

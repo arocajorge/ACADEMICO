@@ -270,6 +270,8 @@ namespace Core.Info.Helps
         public decimal IdAlumno { get; set; }
 
 
+
+
         public cl_filtros_facturacion_Info()
         {
             fecha_ini = DateTime.Now.Date.AddMonths(-1);

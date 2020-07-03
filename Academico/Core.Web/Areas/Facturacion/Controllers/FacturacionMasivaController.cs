@@ -201,6 +201,27 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             return Json(Mensaje,JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult EnviarCorreo(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, string Correos)
+        {
+            string Mensaje = string.Empty;
+            var Codigo = busCorreoCodigo.GetInfo(IdEmpresa, "FAC_002");
+            if (Codigo != null)
+            {
+                busCorreo.GuardarDB(new tb_ColaCorreo_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    Codigo = "FAC_002",
+                    Destinatarios = Correos,
+                    Asunto = Codigo.Asunto,
+                    Cuerpo = Codigo.Cuerpo,
+                    Parametros = IdEmpresa.ToString() + ";" + IdSucursal.ToString() + ";" + IdBodega.ToString() + ";" + IdCbteVta.ToString(),
+                    IdUsuarioCreacion = SessionFixed.IdUsuario
+                });
+            }
+
+            return Json(Mensaje, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 

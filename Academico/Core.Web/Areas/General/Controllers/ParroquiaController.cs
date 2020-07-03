@@ -37,6 +37,7 @@ namespace Core.Web.Areas.General.Controllers
             ViewBag.lst_ciudades = lst_ciudades;
         }
         #endregion
+
         #region Acciones
         public ActionResult Nuevo(string IdCiudad = "")
         {

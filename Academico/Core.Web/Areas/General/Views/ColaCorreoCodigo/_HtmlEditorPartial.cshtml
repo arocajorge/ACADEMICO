@@ -1,0 +1,18 @@
+@using System.Web.UI.WebControls;
+@using Core.Web.Areas.General.Controllers;
+
+@Html.DevExpress().HtmlEditor(settings => {
+    settings.Name = "HtmlEditor";
+    settings.CallbackRouteValues = new { Controller = "ColaCorreoCodigo", Action = "HtmlEditorPartial" };
+    settings.Width = Unit.Percentage(100);
+    settings.Height = Unit.Percentage(20);
+    settings.ToolbarMode = HtmlEditorToolbarMode.Menu;
+
+
+    settings.SettingsDialogs.InsertImageDialog.SettingsImageUpload.UploadCallbackRouteValues = new { Controller = "ColaCorreoCodigo", Action = "HtmlEditorPartialImageUpload" };
+    settings.SettingsDialogs.InsertImageDialog.SettingsImageUpload.UploadFolder = ColaCorreoCodigoControllerHtmlEditorSettings.ImageUploadDirectory;
+    settings.SettingsDialogs.InsertImageDialog.SettingsImageUpload.ValidationSettings.Assign(ColaCorreoCodigoControllerHtmlEditorSettings.ImageUploadValidationSettings);
+
+
+    settings.SettingsDialogs.InsertImageDialog.SettingsImageSelector.Assign(ColaCorreoCodigoControllerHtmlEditorSettings.ImageSelectorSettings);
+}).GetHtml()

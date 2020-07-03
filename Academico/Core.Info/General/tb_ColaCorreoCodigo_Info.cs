@@ -8,6 +8,7 @@ namespace Core.Info.General
 {
     public class tb_ColaCorreoCodigo_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public string Codigo { get; set; }
         public string Asunto { get; set; }

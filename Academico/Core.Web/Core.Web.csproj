@@ -316,6 +316,9 @@
     <Compile Include="Areas\Facturacion\Controllers\TerminoPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
     <Compile Include="Areas\Facturacion\FacturacionAreaRegistration.cs" />
+    <Compile Include="Areas\General\Controllers\ColaCorreoCodigoController.cs" />
+    <Compile Include="Areas\General\Controllers\ColaCorreoController.cs" />
+    <Compile Include="Areas\General\Controllers\CorreoParametroController.cs" />
     <Compile Include="Areas\General\Controllers\GrupoEtnicoController.cs" />
     <Compile Include="Areas\General\Controllers\ParroquiaController.cs" />
     <Compile Include="Areas\General\Controllers\PersonaController.cs" />
@@ -7309,6 +7312,11 @@
     <Content Include="bower_DevExpress\knockout\Gruntfile.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\imagenes\alumnos\001000001.jpg" />
+    <Content Include="Content\imagenes\alumnos\001000019.jpg" />
+    <Content Include="Content\imagenes\profesores\001.jpg" />
+    <Content Include="Content\imagenes\profesores\001000006.jpg" />
+    <Content Include="Content\imagenes\profesores\001000007.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -8805,6 +8813,13 @@
     <Content Include="Areas\Facturacion\Views\FacturacionMasiva\_GridViewPartial_FacturacionMasivaDet.cshtml" />
     <Content Include="Areas\Facturacion\Views\NotaDeCreditoFacturacion\_GridViewPartial_CruceNC_SaldoCero_x_cruzar.cshtml" />
     <Content Include="Areas\Facturacion\Views\AplicacionMasiva\Anular.cshtml" />
+    <Content Include="Areas\General\Views\CorreoParametro\Index.cshtml" />
+    <Content Include="Areas\General\Views\ColaCorreo\Index.cshtml" />
+    <Content Include="Areas\General\Views\ColaCorreo\_GridViewPartial_ColaCorreo.cshtml" />
+    <Content Include="Areas\General\Views\ColaCorreoCodigo\Index.cshtml" />
+    <Content Include="Areas\General\Views\ColaCorreoCodigo\_GridViewPartial_ColaCorreoCodigo.cshtml" />
+    <Content Include="Areas\General\Views\ColaCorreoCodigo\Consultar.cshtml" />
+    <Content Include="Areas\General\Views\ColaCorreoCodigo\_HtmlEditorPartial.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -8869,6 +8884,7 @@
     <Folder Include="Areas\Inventario\Views\Subgrupo\" />
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
+    <Folder Include="Content\imagenes\correos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

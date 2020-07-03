@@ -34,7 +34,9 @@ namespace Core.Data.General
                             Parametros = item.Parametros,
                             IdUsuarioCreacion = item.IdUsuarioCreacion,
                             Error = item.Error,
-                            FechaCreacion = item.FechaCreacion
+                            FechaCreacion = item.FechaCreacion,
+                            FechaEnvio = Convert.ToDateTime(item.FechaEnvio)
+
                         });
                     }
                 }
