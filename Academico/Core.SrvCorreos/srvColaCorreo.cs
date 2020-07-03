@@ -51,17 +51,7 @@ namespace Core.SrvCorreos
                 if (CorreoInfo == null)
                     return;
                 #endregion
-                try
-                {
-
-                }
-                catch (Exception ex)
-                {
-                    CorreoInfo.Error = ex.Message;
-                    busCorreo.ModificarDB(CorreoInfo);
-                }
-
-
+              
                 #region Armar correo
                 MailMessage mail = new MailMessage();
                 try
