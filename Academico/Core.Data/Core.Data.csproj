@@ -279,6 +279,9 @@
     <Compile Include="Base\tb_ColaCorreo.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\tb_ColaCorreoCodigo.cs">
+      <DependentUpon>ModelGeneral.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\tb_ColaCorreoParametros.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
     </Compile>
@@ -355,6 +358,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_MatriculaConducta.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_Matricula_Rubro_FacturaMasiva.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Matricula_Rubro_PorFacturarMasiva.cs">
@@ -500,6 +506,7 @@
     <Compile Include="Facturacion\fa_notaCreDeb_MasivaDet_Data.cs" />
     <Compile Include="Facturacion\fa_notaCreDeb_Masiva_Data.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_x_seg_usuario_Data.cs" />
+    <Compile Include="General\tb_ColaCorreoCodigo_Data.cs" />
     <Compile Include="General\tb_ColaCorreoParametros_Data.cs" />
     <Compile Include="General\tb_ColaCorreo_Data.cs" />
     <Compile Include="General\tb_GrupoEtnico_Data.cs" />

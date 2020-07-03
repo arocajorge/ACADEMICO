@@ -37,7 +37,7 @@ namespace Core.Bus.General
             }
         }
 
-        private bool GuardarDB(tb_ColaCorreo_Info info)
+        public bool GuardarDB(tb_ColaCorreo_Info info)
         {
             try
             {

@@ -131,9 +131,19 @@
           <Property Name="Cuerpo" Type="varchar(max)" Nullable="false" />
           <Property Name="Parametros" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="FechaCreacion" Type="date" Nullable="false" />
           <Property Name="FechaEnvio" Type="datetime" />
           <Property Name="Error" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="tb_ColaCorreoCodigo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Asunto" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Cuerpo" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_ColaCorreoParametros">
           <Key>
@@ -1078,6 +1088,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <EntitySet Name="tb_CatalogoTipo" EntityType="Self.tb_CatalogoTipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ciudad" EntityType="Self.tb_ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ColaCorreo" EntityType="Self.tb_ColaCorreo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tb_ColaCorreoCodigo" EntityType="Self.tb_ColaCorreoCodigo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ColaCorreoParametros" EntityType="Self.tb_ColaCorreoParametros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_ColaImpresionDirecta" EntityType="Self.tb_ColaImpresionDirecta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tb_dia" EntityType="Self.tb_dia" Schema="dbo" store:Type="Tables" />
@@ -1477,6 +1488,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           </AssociationSet>
           <EntitySet Name="tb_ColaCorreo" EntityType="ModelGeneral.tb_ColaCorreo" />
           <EntitySet Name="tb_ColaCorreoParametros" EntityType="ModelGeneral.tb_ColaCorreoParametros" />
+          <EntitySet Name="tb_ColaCorreoCodigo" EntityType="ModelGeneral.tb_ColaCorreoCodigo" />
           </EntityContainer>
         <EntityType Name="tb_sucursal">
           <Key>
@@ -2569,7 +2581,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <Property Name="Cuerpo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Parametros" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="FechaEnvio" Type="DateTime" Precision="3" />
           <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -2588,6 +2600,16 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tb_ColaCorreoCodigo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Asunto" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Cuerpo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3267,6 +3289,16 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
                 <ScalarProperty Name="Puerto" ColumnName="Puerto" />
                 <ScalarProperty Name="Contrasenia" ColumnName="Contrasenia" />
                 <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_ColaCorreoCodigo">
+            <EntityTypeMapping TypeName="ModelGeneral.tb_ColaCorreoCodigo">
+              <MappingFragment StoreEntitySet="tb_ColaCorreoCodigo">
+                <ScalarProperty Name="Cuerpo" ColumnName="Cuerpo" />
+                <ScalarProperty Name="Asunto" ColumnName="Asunto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

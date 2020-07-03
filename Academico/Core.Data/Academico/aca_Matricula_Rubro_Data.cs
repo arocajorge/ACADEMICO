@@ -213,11 +213,31 @@ namespace Core.Data.Academico
                             IdTerminoPago = q.IdTerminoPago,
                             IdCliente = q.IdCliente ?? 0,
                             Codigo = q.Codigo,
-                            pe_nombreCompleto = q.Alumno
+                            pe_nombreCompleto = q.Alumno,
+                            Procesado = false
                         };
                         Lista.Add(info);
                     }
-                     
+
+                    var lstProcesado = Context.vwaca_Matricula_Rubro_FacturaMasiva.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPeriodo == IdPeriodo).ToList();
+                    foreach (var item in lstProcesado)
+                    {
+                        Lista.Add(new aca_Matricula_Rubro_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdAnio = item.IdAnio,
+                            IdPeriodo = item.IdPeriodo,
+                            IdAlumno = item.IdAlumno,
+                            pe_nombreCompleto = item.pe_nombreCompleto,
+                            Total = item.Total,
+                            IdSucursal = item.IdSucursal,
+                            IdBodega = item.IdBodega,
+                            IdCbteVta = item.IdCbteVta,
+                            Correo = item.Correo,
+                            vt_autorizacion = item.vt_autorizacion,
+                            Procesado = true
+                        });
+                    }
                 }
                 
                 Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000") + q.IdMatricula.ToString("000000") + q.IdPeriodo.ToString("0000") + q.IdRubro.ToString("000000"));

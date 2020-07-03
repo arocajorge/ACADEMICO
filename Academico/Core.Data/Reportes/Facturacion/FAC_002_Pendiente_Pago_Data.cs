@@ -27,6 +27,8 @@ namespace Core.Data.Reportes.Facturacion
                                  vt_total = q.vt_total,
                                  ValorProntoPago = q.ValorProntoPago,
                                  FechaProntoPago = q.FechaProntoPago,
+                                 TotalxCobrado = q.TotalxCobrado,
+                                 Saldo = q.Saldo,
                                  vt_fecha = q.vt_fecha
                              }).ToList();
 

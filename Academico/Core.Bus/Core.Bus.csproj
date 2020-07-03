@@ -113,6 +113,7 @@
     <Compile Include="Facturacion\fa_notaCreDeb_MasivaDet_Bus.cs" />
     <Compile Include="Facturacion\fa_notaCreDeb_Masiva_Bus.cs" />
     <Compile Include="Facturacion\fa_PuntoVta_x_seg_usuario_Bus.cs" />
+    <Compile Include="General\tb_ColaCorreoCodigo_Bus.cs" />
     <Compile Include="General\tb_ColaCorreoParametros_Bus.cs" />
     <Compile Include="General\tb_ColaCorreo_Bus.cs" />
     <Compile Include="General\tb_GrupoEtnico_Bus.cs" />
