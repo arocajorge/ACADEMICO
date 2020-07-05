@@ -5,14 +5,15 @@
     settings.Name = "HtmlEditor";
     settings.CallbackRouteValues = new { Controller = "ColaCorreoCodigo", Action = "HtmlEditorPartial" };
     settings.Width = Unit.Percentage(100);
-    settings.Height = Unit.Percentage(20);
     settings.ToolbarMode = HtmlEditorToolbarMode.Menu;
 
-
     settings.SettingsDialogs.InsertImageDialog.SettingsImageUpload.UploadCallbackRouteValues = new { Controller = "ColaCorreoCodigo", Action = "HtmlEditorPartialImageUpload" };
-    settings.SettingsDialogs.InsertImageDialog.SettingsImageUpload.UploadFolder = ColaCorreoCodigoControllerHtmlEditorSettings.ImageUploadDirectory;
-    settings.SettingsDialogs.InsertImageDialog.SettingsImageUpload.ValidationSettings.Assign(ColaCorreoCodigoControllerHtmlEditorSettings.ImageUploadValidationSettings);
+    settings.SettingsDialogs.InsertImageDialog.SettingsImageUpload.UploadFolder = ColaCorreoCodigoControllerHtmlEditorSettings1.ImageUploadDirectory;
+    settings.SettingsDialogs.InsertImageDialog.SettingsImageUpload.ValidationSettings.Assign(ColaCorreoCodigoControllerHtmlEditorSettings1.ImageUploadValidationSettings);
 
+    settings.Html = ( Model==null ? "" :  (Model.Cuerpo==null ? "" : Model.Cuerpo));
+    settings.SettingsDialogs.InsertImageDialog.SettingsImageSelector.Assign(ColaCorreoCodigoControllerHtmlEditorSettings1.ImageSelectorSettings);
 
-    settings.SettingsDialogs.InsertImageDialog.SettingsImageSelector.Assign(ColaCorreoCodigoControllerHtmlEditorSettings.ImageSelectorSettings);
 }).GetHtml()
+
+

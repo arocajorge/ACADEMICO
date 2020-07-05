@@ -38,6 +38,18 @@ namespace Core.Bus.General
             }
         }
 
+        public bool Existe_codigo(int IdEmpresa, string Codigo)
+        {
+            try
+            {
+                return odata.Existe_codigo(IdEmpresa, Codigo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool guardarDB(tb_ColaCorreoCodigo_Info info)
         {
             try

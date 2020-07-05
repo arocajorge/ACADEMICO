@@ -18,6 +18,7 @@ namespace Core.Web.Areas.General.Controllers
         tb_ColaCorreoCodigo_Bus bus_correo = new tb_ColaCorreoCodigo_Bus();
         tb_ColaCorreoCodigo_List ListaCorreoCodigo = new tb_ColaCorreoCodigo_List();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
 
@@ -79,6 +80,19 @@ namespace Core.Web.Areas.General.Controllers
         }
         #endregion
 
+        #region Metodos
+        private bool validar(tb_ColaCorreoCodigo_Info info, ref string msg)
+        {
+            if (bus_correo.Existe_codigo(info.IdEmpresa, info.Codigo))
+            {
+                msg = "Ya existe registrado el codigo del reporte";
+                return false;
+            }
+
+            return true;
+        }
+        #endregion
+
         #region Acciones
         public ActionResult Nuevo(int IdEmpresa = 0)
         {
@@ -102,6 +116,12 @@ namespace Core.Web.Areas.General.Controllers
         [HttpPost]
         public ActionResult Nuevo(tb_ColaCorreoCodigo_Info model)
         {
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
+
             if (!bus_correo.guardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
@@ -169,22 +189,23 @@ namespace Core.Web.Areas.General.Controllers
 
         public ActionResult HtmlEditorPartial()
         {
-            return PartialView("_HtmlEditorPartial");
+            return PartialView("_HtmlEditorPartial", new tb_ColaCorreoCodigo_Info());
         }
         public ActionResult HtmlEditorPartialImageSelectorUpload()
         {
-            HtmlEditorExtension.SaveUploadedImage("HtmlEditor", ColaCorreoCodigoControllerHtmlEditorSettings.ImageSelectorSettings);
+            HtmlEditorExtension.SaveUploadedImage("HtmlEditor", ColaCorreoCodigoControllerHtmlEditorSettings1.ImageSelectorSettings);
             return null;
         }
         public ActionResult HtmlEditorPartialImageUpload()
         {
-            HtmlEditorExtension.SaveUploadedFile("HtmlEditor", ColaCorreoCodigoControllerHtmlEditorSettings.ImageUploadValidationSettings, ColaCorreoCodigoControllerHtmlEditorSettings.ImageUploadDirectory);
+            HtmlEditorExtension.SaveUploadedFile("HtmlEditor", ColaCorreoCodigoControllerHtmlEditorSettings1.ImageUploadValidationSettings, ColaCorreoCodigoControllerHtmlEditorSettings1.ImageUploadDirectory);
             return null;
         }
     }
-    public class ColaCorreoCodigoControllerHtmlEditorSettings
+
+    public class ColaCorreoCodigoControllerHtmlEditorSettings1
     {
-        public const string ImageUploadDirectory = "~/Content/imagenes/correos";
+        public const string ImageUploadDirectory = "~/Content/UploadImages/";
         public const string ImageSelectorThumbnailDirectory = "~/Content/Thumb/";
 
         public static DevExpress.Web.UploadControlValidationSettings ImageUploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()

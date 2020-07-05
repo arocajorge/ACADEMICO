@@ -70,6 +70,28 @@ namespace Core.Data.General
             }
         }
 
+        public bool Existe_codigo(int IdEmpresa, string Codigo)
+        {
+            try
+            {
+                tb_ColaCorreoCodigo_Info info = new tb_ColaCorreoCodigo_Info();
+
+                using (EntitiesGeneral db = new EntitiesGeneral())
+                {
+                    var Entity = db.tb_ColaCorreoCodigo.Where(q => q.IdEmpresa == IdEmpresa && q.Codigo == Codigo).FirstOrDefault();
+                    if (Entity == null)
+                        return false;
+
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool guardarDB(tb_ColaCorreoCodigo_Info info)
         {
             try

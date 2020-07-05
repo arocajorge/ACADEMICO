@@ -8820,6 +8820,8 @@
     <Content Include="Areas\General\Views\ColaCorreoCodigo\_GridViewPartial_ColaCorreoCodigo.cshtml" />
     <Content Include="Areas\General\Views\ColaCorreoCodigo\Consultar.cshtml" />
     <Content Include="Areas\General\Views\ColaCorreoCodigo\_HtmlEditorPartial.cshtml" />
+    <Content Include="Areas\General\Views\ColaCorreoCodigo\Nuevo.cshtml" />
+    <Content Include="Areas\General\Views\ColaCorreoCodigo\Modificar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

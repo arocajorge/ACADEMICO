@@ -17,7 +17,7 @@
         new Script { ExtensionSuite = ExtensionSuite.HtmlEditor }
     )
 
-@using (Html.BeginForm("Consultar", "ColaCorreoCodigo", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Nuevo", "ColaCorreoCodigo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     if (ViewBag.mensaje != null)
@@ -44,30 +44,7 @@
             </div>
         </div>
     }
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-offset-10 col-md-1">
-                @if (@ViewBag.Nuevo == true)
-                {
-                    <div class="form-group">
-                        <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","ColaCorreoCodigo",new { Area = "General",IdEmpresa = Model.IdEmpresa},null)">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                    </div>
-                }
-            </div>
-            <div class="col-md-1">
-                @if (@ViewBag.Modificar == true)
-                {
-                    <div class="form-group">
-                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "ColaCorreoCodigo", new { Area = "General", IdEmpresa = Model.IdEmpresa, Codigo=Model.Codigo }, null)">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -90,14 +67,13 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <label for="IdSucursal">Cuerpo*</label>
-
                 @Html.Action("HtmlEditorPartial", Model)
-
+                @Html.ValidationMessageFor(m => m.Cuerpo, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
     <div class="box-footer">
-        @*<button type="submit" class="btn btn-primary">Guardar</button>*@
+        <button type="submit" class="btn btn-primary">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "ColaCorreoCodigo", new { Area ="General" }, null)">Cancelar</a>
     </div>
     @section Scripts {
