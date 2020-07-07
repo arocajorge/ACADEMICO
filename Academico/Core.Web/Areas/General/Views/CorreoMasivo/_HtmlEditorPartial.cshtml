@@ -1,0 +1,10 @@
+@using System.Web.UI.WebControls;
+@Html.DevExpress().HtmlEditor(settings => {
+    settings.Name = "Cuerpo";
+    settings.CallbackRouteValues = new { Controller = "CorreoMasivo", Action = "HtmlEditorPartial" };
+    settings.Width = Unit.Percentage(100);
+    settings.ToolbarMode = HtmlEditorToolbarMode.Menu;
+    settings.Html = (Model == null ? "" : (Model.Cuerpo == null ? "" : Model.Cuerpo));
+
+
+}).GetHtml()

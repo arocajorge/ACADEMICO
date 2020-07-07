@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Info.Academico;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Core.Info.General
 {
     public class tb_ColaCorreo_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdCorreo { get; set; }
         public string Codigo { get; set; }
@@ -22,6 +24,17 @@ namespace Core.Info.General
 
         #region Campos que no existen en la tabla
         public tb_ColaCorreoParametros_Info ParametroInfo { get; set; }
+        public decimal IdAlumno { get; set; }
+        public bool RepLegal { get; set; }
+        public bool RepEconomico { get; set; }
+        public int IdAnio { get; set; }
+        public int IdSede { get; set; }
+        public int IdNivel { get; set; }
+        public int IdJornada { get; set; }
+        public int IdCurso { get; set; }
+        public int IdParalelo { get; set; }
+        public string Copia { get; set; }
+        public List<aca_AnioLectivo_Curso_Paralelo_Info> lst_correo_masivo { get; set; }
         #endregion
     }
 }

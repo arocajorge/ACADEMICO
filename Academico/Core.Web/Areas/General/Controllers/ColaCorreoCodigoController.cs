@@ -104,6 +104,7 @@ namespace Core.Web.Areas.General.Controllers
             #endregion
 
             tb_ColaCorreoCodigo_Info model = new tb_ColaCorreoCodigo_Info();
+            model.Cuerpo = "Escribe tu mensaje";
             model.IdEmpresa = IdEmpresa;
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "ColaCorreoCodigo", "Index");
@@ -187,25 +188,25 @@ namespace Core.Web.Areas.General.Controllers
         }
         #endregion
 
-        public ActionResult HtmlEditorPartial()
+        public ActionResult HtmlEditorPartial(tb_ColaCorreoCodigo_Info model)
         {
-            return PartialView("_HtmlEditorPartial", new tb_ColaCorreoCodigo_Info());
+            return PartialView("_HtmlEditorPartial", model);
         }
         public ActionResult HtmlEditorPartialImageSelectorUpload()
         {
-            HtmlEditorExtension.SaveUploadedImage("HtmlEditor", ColaCorreoCodigoControllerHtmlEditorSettings1.ImageSelectorSettings);
+            HtmlEditorExtension.SaveUploadedImage("HtmlEditorPartial", ColaCorreoCodigoControllerHtmlEditorSettings1.ImageSelectorSettings);
             return null;
         }
         public ActionResult HtmlEditorPartialImageUpload()
         {
-            HtmlEditorExtension.SaveUploadedFile("HtmlEditor", ColaCorreoCodigoControllerHtmlEditorSettings1.ImageUploadValidationSettings, ColaCorreoCodigoControllerHtmlEditorSettings1.ImageUploadDirectory);
+            HtmlEditorExtension.SaveUploadedFile("HtmlEditorPartial", ColaCorreoCodigoControllerHtmlEditorSettings1.ImageUploadValidationSettings, ColaCorreoCodigoControllerHtmlEditorSettings1.ImageUploadDirectory);
             return null;
         }
     }
 
     public class ColaCorreoCodigoControllerHtmlEditorSettings1
     {
-        public const string ImageUploadDirectory = "~/Content/UploadImages/";
+        public const string ImageUploadDirectory = "~/Content/imagenes/correos/";
         public const string ImageSelectorThumbnailDirectory = "~/Content/Thumb/";
 
         public static DevExpress.Web.UploadControlValidationSettings ImageUploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()

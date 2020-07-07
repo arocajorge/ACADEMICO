@@ -103,6 +103,73 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list_CorreoMAsivo(int IdEmpresa, int IdSede, int IdAnio)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Paralelo_Info> Lista;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    Lista = (from q in Context.vwaca_AnioLectivo_Curso_Paralelo
+                             where q.IdEmpresa == IdEmpresa
+                             && q.IdSede == IdSede
+                             && q.IdAnio == IdAnio
+                             group q by new
+                             {
+                                 q.IdEmpresa,
+                                 q.IdAnio,
+                                 q.IdSede,
+                                 q.IdNivel,
+                                 q.IdJornada,
+                                 q.IdCurso,
+                                 q.IdParalelo,
+                                 q.NomSede,
+                                 q.Descripcion,
+                                 q.NomNivel,
+                                 q.NomJornada,
+                                 q.NomCurso,
+                                 q.NomParalelo,
+                                 q.OrdenJornada, 
+                                 q.OrdenNivel,
+                                 q.OrdenCurso,
+                                 q.OrdenParalelo
+                             } into g
+                             select new aca_AnioLectivo_Curso_Paralelo_Info
+                             {
+                                 IdEmpresa = g.Key.IdEmpresa,
+                                 IdSede = g.Key.IdSede,
+                                 IdAnio = g.Key.IdAnio,
+                                 IdNivel = g.Key.IdNivel,
+                                 IdJornada = g.Key.IdJornada,
+                                 IdCurso = g.Key.IdCurso,
+                                 IdParalelo = g.Key.IdParalelo,
+                                 NomSede = g.Key.NomSede,
+                                 Descripcion = g.Key.Descripcion,
+                                 NomNivel = g.Key.NomNivel,
+                                 NomJornada = g.Key.NomJornada,
+                                 NomCurso = g.Key.NomCurso,
+                                 NomParalelo = g.Key.NomParalelo,
+                                 OrdenJornada = g.Key.OrdenJornada,
+                                 OrdenNivel = g.Key.OrdenNivel,
+                                 OrdenCurso = g.Key.OrdenCurso,
+                                 OrdenParalelo = g.Key.OrdenParalelo
+
+                             }).ToList();
+
+                    Lista.ForEach(q=>q.IdString= q.IdEmpresa.ToString("000") + q.IdAnio.ToString("000") + q.IdSede.ToString("000") + q.IdJornada.ToString("000")+ q.IdCurso.ToString("000")+ q.IdParalelo.ToString("000"));
+                    //Lista.OrderBy(q => new { q.OrdenJornada, q.OrdenNivel, q.OrdenCurso, q.OrdenParalelo} ).ToList();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try
