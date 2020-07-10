@@ -25,6 +25,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         cxc_CobroMasivoDet_List Lista_CobroMasivoDet = new cxc_CobroMasivoDet_List();
         cxc_CobroMasivo_Bus bus_cobro_masivo = new cxc_CobroMasivo_Bus();
         cxc_CobroMasivoDet_Bus bus_cobro_masivo_det = new cxc_CobroMasivoDet_Bus();
+        cxc_cobro_tipo_Bus bus_cobro_tipo = new cxc_cobro_tipo_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
@@ -110,17 +111,30 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             if (info.lst_det.Where(q=>q.ExisteAlumno==false).Count()>0)
             {
-                msg = "Existen alumnos no registrados en el sistema";
+                msg = "Existen estudiantes no registrados en el sistema";
                 return false;
             }
 
             if (info.lst_det.Where(q => q.Repetido == true).Count() > 0)
             {
-                msg = "Existen alumnos repetidos en el detalle";
+                msg = "Existen estudiantes repetidos en el detalle";
+                return false;
+            }
+
+            if (info.lst_det.Where(q => q.ValorIgual == false).Count() > 0)
+            {
+                msg = "Existen pagos que no concuerdan con el valor adeudado";
                 return false;
             }
 
             return true;
+        }
+
+        private void cargar_combos(int IdEmpresa, int IdSucursal)
+        {
+            var lst_cobro_tipo = bus_cobro_tipo.get_list(false);
+            lst_cobro_tipo = lst_cobro_tipo.Where(q => q.IdMotivo_tipo_cobro != "RET" && !q.IdCobro_tipo.StartsWith("CRU") && !q.IdCobro_tipo.StartsWith("NT") && !q.IdCobro_tipo.StartsWith("NC") && !q.IdCobro_tipo.StartsWith("TRAN_CLI") && !q.IdCobro_tipo.StartsWith("CHQF")).ToList();
+            ViewBag.lst_cobro_tipo = lst_cobro_tipo;
         }
         #endregion
 
@@ -175,7 +189,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             };
 
             Lista_CobroMasivoDet.set_list(model.lst_det, model.IdTransaccionSession);
-
+            cargar_combos(model.IdEmpresa, model.IdSucursal);
             return View(model);
         }
 
@@ -191,12 +205,13 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             {
                 Lista_CobroMasivoDet.set_list(Lista_CobroMasivoDet.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
                 ViewBag.mensaje = mensaje;
-
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 return View(model);
             }
 
             if (!bus_cobro_masivo.GuardarDB(model))
             {
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 Lista_CobroMasivoDet.set_list(Lista_CobroMasivoDet.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
                 ViewBag.mensaje = "No se ha podido guardar el registro";
@@ -248,6 +263,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.MostrarSRI = MostrarSRI;
             #endregion
 
+            cargar_combos(model.IdEmpresa, model.IdSucursal);
             return View(model);
         }
 
@@ -282,6 +298,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             }
             #endregion
 
+            cargar_combos(model.IdEmpresa, model.IdSucursal);
             return View(model);
         }
 
@@ -293,12 +310,14 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             if (!validar(model, ref mensaje))
             {
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 ViewBag.mensaje = mensaje;
                 return View(model);
             }
 
             if (!bus_cobro_masivo.AnularDB(model))
             {
+                cargar_combos(model.IdEmpresa, model.IdSucursal);
                 ViewBag.mensaje = "No se ha podido anular el registro";
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 Lista_CobroMasivoDet.set_list(Lista_CobroMasivoDet.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
@@ -369,11 +388,12 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             tb_persona_Bus bus_persona = new tb_persona_Bus();
             aca_Familia_Bus bus_familia = new aca_Familia_Bus();
             fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
-            cxc_cobro_Bus bus_cobros = new cxc_cobro_Bus();
+            cxc_cobro_det_Bus bus_cobro_det = new cxc_cobro_det_Bus();
 
             int cont = 0;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             #endregion
 
             Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
@@ -395,6 +415,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         var Fecha = (Convert.ToDateTime(reader.GetValue(2)));
                         var ExisteAlumno = true;
                         var Repetido = false;
+                        var ValorIgual = false;
 
                         #region Alumno
                         var info_alumno = bus_alumno.GetInfo_Codigo(IdEmpresa, CodigoAlumno);
@@ -404,6 +425,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                             ExisteAlumno = false;
                         }
                         #endregion
+
                         #region Cliente
                         var infoRepEconomico = bus_familia.GetInfo_Representante(IdEmpresa, (info_alumno==null ? 0 : Convert.ToDecimal(info_alumno.IdAlumno)), cl_enumeradores.eTipoRepresentante.ECON.ToString());
                         var TieneCliente = true;
@@ -416,7 +438,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
                         var ExisteRepetido = Lista_CobroMasivoDet.Where(q=>q.IdEmpresa==IdEmpresa && q.IdAlumno== (info_alumno==null ? 0 : info_alumno.IdAlumno) ).Count();
                         Repetido = (ExisteRepetido > 0 ? true : false);
-                        var lst_AlumnoCartertaXCobrar = bus_cobros.get_list_deuda(IdEmpresa, (info_alumno == null ? 0 : info_alumno.IdAlumno)).ToList();
+
+                        var lst_AlumnoCartertaXCobrar = bus_cobro_det.get_list_cartera_x_alumno(IdEmpresa, IdSucursal, (info_alumno == null ? 0 : info_alumno.IdAlumno)).ToList();
+                        double ValorCxC = Convert.ToDouble(lst_AlumnoCartertaXCobrar == null ? 0 : lst_AlumnoCartertaXCobrar.Sum(q => q.ValorProntoPago));
+                        ValorIgual = (Valor == ValorCxC ? true : false);
 
                         var info_det = new cxc_CobroMasivoDet_Info
                         {
@@ -430,8 +455,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                             Valor = Valor,
                             ExisteAlumno = ExisteAlumno,
                             Repetido = Repetido,
-                            Error = ((ExisteAlumno==false || Repetido==true) ? true : false),
-                            ErrorDetalle = ((ExisteAlumno==false ? "No existe el código del estudiante" : (Repetido==true ? "Existe estudiante repetido" : "")))
+                            ValorIgual = ValorIgual,
+                            Error = ((ExisteAlumno==false || Repetido==true || ValorIgual==false) ? true : false),
+                            ErrorDetalle = ((ExisteAlumno==false ? "No existe el código del estudiante" : (Repetido==true ? "Existe estudiante repetido" : (ValorIgual==false ? "El valor a cancelar debe ser igual al de la cartera por cobrar "+ ValorCxC.ToString("C2") : ""))))
                         };
 
                         Lista_CobroMasivoDet.Add(info_det);

@@ -35,7 +35,8 @@ namespace Core.Data.CuentasPorCobrar
                             IdCobroMasivo = q.IdCobroMasivo,
                             Secuencia = q.Secuencia,
                             Repetido=false,
-                            ExisteAlumno =true
+                            ExisteAlumno =true,
+                            ValorIgual = true
                         };
                         Lista.Add(info);
                     }

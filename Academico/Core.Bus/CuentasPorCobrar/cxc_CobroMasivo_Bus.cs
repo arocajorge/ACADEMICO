@@ -48,12 +48,6 @@ namespace Core.Bus.CuentasPorCobrar
                    
                     foreach (var item in info.lst_det)
                     {
-                        ////double SaldoReal = 0;
-                        ////double ValorProntoPagoCxC = 0;
-                        ////double ValorProntoPago = 0;
-                        ////double Valor = 0;
-                        ////double Saldo_final = 0;
-
                         double SaldoReal = 0;
                         double ValorProntoPagoCxC = 0;
                         double ValorProntoPago = 0;
@@ -68,15 +62,14 @@ namespace Core.Bus.CuentasPorCobrar
                             IdSucursal = info.IdSucursal,
                             IdCaja = Caja,
                             cr_Codigo = "",
-                            IdCobro_tipo = "EFEC",
+                            IdCobro_tipo = info.IdCobro_tipo,
                             IdCliente = item.IdCliente,
                             IdAlumno = item.IdAlumno,
-                            cr_TotalCobro = item.Valor,
                             cr_fecha = item.Fecha.Date,
                             cr_fechaDocu = item.Fecha.Date,
                             cr_fechaCobro = item.Fecha.Date,
                             cr_ObservacionPantalla = info.Observacion,
-                            //IdTipoNotaCredito = 
+                            IdUsuario = info.IdUsuarioCreacion
                         };
                         info_cobro.lst_det = new List<cxc_cobro_det_Info>();
                         #endregion
@@ -89,16 +82,11 @@ namespace Core.Bus.CuentasPorCobrar
                             ValorProntoPago = Math.Round((item_cxc.vt_total - item_cxc.ValorProntoPago ?? 0), 2, MidpointRounding.AwayFromZero);
                             if (SaldoReal > 0)
                             {
-                                dc_ValorProntoPago = SaldoReal >= Math.Round((Convert.ToDouble(item_cxc.Saldo) - ValorProntoPago), 2, MidpointRounding.AwayFromZero) ? ValorProntoPago : 0;
-                                dc_ValorPago = SaldoReal >= Math.Round((Convert.ToDouble(item_cxc.Saldo) - ValorProntoPago), 2, MidpointRounding.AwayFromZero) ? Math.Round(Convert.ToDouble(item_cxc.Saldo) - ValorProntoPago, 2, MidpointRounding.AwayFromZero) : SaldoReal;
-                                Saldo_final = Convert.ToDouble(item_cxc.Saldo - ValorProntoPago) - dc_ValorPago;
+                                dc_ValorProntoPago = Math.Round(SaldoReal, 2, MidpointRounding.AwayFromZero) >= Math.Round((Convert.ToDouble(item_cxc.Saldo) - ValorProntoPago), 2, MidpointRounding.AwayFromZero) ? Math.Round(ValorProntoPago, 2, MidpointRounding.AwayFromZero) : 0;
+                                dc_ValorPago = Math.Round(SaldoReal, 2, MidpointRounding.AwayFromZero) >= Math.Round((Convert.ToDouble(item_cxc.Saldo) - ValorProntoPago), 2, MidpointRounding.AwayFromZero) ? Math.Round(Convert.ToDouble(item_cxc.Saldo) - ValorProntoPago, 2, MidpointRounding.AwayFromZero) : Math.Round(SaldoReal, 2, MidpointRounding.AwayFromZero);
+                                Saldo_final = Math.Round(Convert.ToDouble(item_cxc.Saldo - ValorProntoPago) - item_cxc.dc_ValorPago, 2, MidpointRounding.AwayFromZero);
                                 ValorProntoPagoCxC = ValorProntoPago;
-                                SaldoReal = Math.Round(SaldoReal - dc_ValorPago);
-                                //ValorProntoPagoCxC = Math.Round((item.Valor - item_cxc.dc_ValorProntoPago ?? 0), 2, MidpointRounding.AwayFromZero);
-                                //ValorProntoPago = SaldoRealNC >= (item_cxc.Saldo - ValorProntoPagoCxC) ? ValorProntoPagoCxC : 0;
-                                //Valor = SaldoRealNC >= Convert.ToDouble(item_cxc.Saldo - ValorProntoPagoCxC) ? Convert.ToDouble(item_cxc.Saldo) - ValorProntoPago : SaldoRealNC;
-                                //Saldo_final = Convert.ToDouble(item_cxc.Saldo - ValorProntoPago) - Valor;
-                                //SaldoRealNC = SaldoRealNC - Valor;
+                                SaldoReal = Math.Round(Convert.ToDouble(SaldoReal-dc_ValorPago), 2, MidpointRounding.AwayFromZero);
 
                                 info_cobro.lst_det.Add(new cxc_cobro_det_Info
                                 {
@@ -114,7 +102,7 @@ namespace Core.Bus.CuentasPorCobrar
                                     dc_TipoDocumento = item_cxc.dc_TipoDocumento,
                                     ValorProntoPago = ValorProntoPagoCxC,
                                     dc_ValorPago = dc_ValorPago,
-                                    dc_ValorProntoPago = ValorProntoPago,
+                                    dc_ValorProntoPago = dc_ValorProntoPago,
                                     IdNotaCredito = item_cxc.IdNotaCredito,
                                     Saldo_final =Saldo_final,
                                     Saldo = SaldoReal
@@ -122,6 +110,7 @@ namespace Core.Bus.CuentasPorCobrar
                             }
 
                         }
+                        info_cobro.cr_TotalCobro = info_cobro.lst_det.Sum(q => q.dc_ValorPago);
                         odata_cobro.guardarDB(info_cobro);
 
                         item.IdSucursal = info_cobro.IdSucursal;

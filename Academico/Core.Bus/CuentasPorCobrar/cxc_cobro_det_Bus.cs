@@ -19,6 +19,18 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<cxc_cobro_det_Info> get_list_cartera_x_alumno(int IdEmpresa, int IdSucursal, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.get_list_cartera_x_alumno(IdEmpresa, IdSucursal, IdAlumno);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
         public List<cxc_cobro_det_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCobro)
         {
             try

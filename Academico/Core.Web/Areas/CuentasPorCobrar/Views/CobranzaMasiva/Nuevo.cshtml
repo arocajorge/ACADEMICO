@@ -71,6 +71,13 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdCobro_tipo">Tipo cobro*</label>
+                    @Html.DropDownListFor(q => q.IdCobro_tipo, new SelectList(ViewBag.lst_cobro_tipo, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo" })
+                    @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

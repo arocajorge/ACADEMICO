@@ -27,6 +27,7 @@ namespace Core.Info.CuentasPorCobrar
 
         #region Campos que no existen en la tabla
         public int IdSucursal { get; set; }
+        public string IdCobro_tipo { get; set; }
         public List<cxc_CobroMasivoDet_Info> lst_det { get; set; }
         #endregion
     }

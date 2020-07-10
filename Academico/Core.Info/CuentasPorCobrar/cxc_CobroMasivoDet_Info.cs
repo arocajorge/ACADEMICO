@@ -22,6 +22,7 @@ namespace Core.Info.CuentasPorCobrar
         public string NombreAlumno { get; set; }
         public bool ExisteAlumno { get; set; }
         public bool Repetido { get; set; }
+        public bool ValorIgual { get; set; }
         public bool Error { get; set; }
         public string ErrorDetalle { get; set; }
         public decimal IdCliente { get; set; }

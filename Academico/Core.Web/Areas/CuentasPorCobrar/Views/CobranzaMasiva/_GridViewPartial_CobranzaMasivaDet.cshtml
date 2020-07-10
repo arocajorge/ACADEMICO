@@ -81,6 +81,10 @@
             {
                 e.Row.ForeColor = System.Drawing.Color.Orange;
             }
+            if (Convert.ToBoolean(e.GetValue("ValorIgual")) == false)
+            {
+                e.Row.ForeColor = System.Drawing.Color.Red;
+            }
         };
         settings.Columns.Add(column =>
         {
@@ -123,7 +127,7 @@
         });
         settings.Columns.Add(column =>
         {
-            column.Caption = "Error";
+            column.Caption = "";
             column.SetDataItemTemplateContent(tc =>
             {
                 if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "Error")) == true)
