@@ -1,4 +1,5 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.Banco;
 using Core.Bus.Contabilidad;
 using Core.Bus.CuentasPorCobrar;
 using Core.Bus.Facturacion;
@@ -27,6 +28,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         cxc_CobroMasivoDet_Bus bus_cobro_masivo_det = new cxc_CobroMasivoDet_Bus();
         cxc_cobro_tipo_Bus bus_cobro_tipo = new cxc_cobro_tipo_Bus();
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+        tb_banco_Bus bus_banco = new tb_banco_Bus();
+        ba_Banco_Cuenta_Bus bus_banco_cuenta = new ba_Banco_Cuenta_Bus();
+        tb_TarjetaCredito_Bus bus_tarjeta = new tb_TarjetaCredito_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
@@ -135,6 +139,15 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             var lst_cobro_tipo = bus_cobro_tipo.get_list(false);
             lst_cobro_tipo = lst_cobro_tipo.Where(q => q.IdMotivo_tipo_cobro != "RET" && !q.IdCobro_tipo.StartsWith("CRU") && !q.IdCobro_tipo.StartsWith("NT") && !q.IdCobro_tipo.StartsWith("NC") && !q.IdCobro_tipo.StartsWith("TRAN_CLI") && !q.IdCobro_tipo.StartsWith("CHQF")).ToList();
             ViewBag.lst_cobro_tipo = lst_cobro_tipo;
+
+            var lst_banco = bus_banco.get_list(false);
+            ViewBag.lst_banco = lst_banco;
+
+            var lst_banco_cuenta = bus_banco_cuenta.get_list(IdEmpresa, IdSucursal, false);
+            ViewBag.lst_banco_cuenta = lst_banco_cuenta;
+
+            var lst_tarjeta = bus_tarjeta.GetList(IdEmpresa, false);
+            ViewBag.lst_tarjeta = lst_tarjeta;
         }
         #endregion
 
@@ -184,6 +197,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 IdEmpresa = IdEmpresa,
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 Fecha = DateTime.Now.Date,
+                IdCobro_tipo = "EFEC",
                 lst_det = new List<cxc_CobroMasivoDet_Info>(),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };

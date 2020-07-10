@@ -89,6 +89,12 @@ namespace Core.Web.Areas.General.Controllers
                 return false;
             }
 
+            if (string.IsNullOrEmpty(info.Codigo) || string.IsNullOrEmpty(info.Asunto) || string.IsNullOrEmpty(info.Cuerpo))
+            {
+                msg = "Debe de ingresar todos los campos";
+                return false;
+            }
+
             return true;
         }
         #endregion

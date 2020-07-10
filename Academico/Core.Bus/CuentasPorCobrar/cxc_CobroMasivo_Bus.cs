@@ -62,7 +62,15 @@ namespace Core.Bus.CuentasPorCobrar
                             IdSucursal = info.IdSucursal,
                             IdCaja = Caja,
                             cr_Codigo = "",
+
                             IdCobro_tipo = info.IdCobro_tipo,
+                            cr_Banco = info.cr_Banco,
+                            cr_cuenta = info.cr_cuenta,
+                            cr_NumDocumento = info.cr_NumDocumento,
+                            IdBanco = info.IdBanco,
+                            IdTarjeta = info.IdTarjeta,
+                            cr_Tarjeta = info.cr_Tarjeta,
+
                             IdCliente = item.IdCliente,
                             IdAlumno = item.IdAlumno,
                             cr_fecha = item.Fecha.Date,

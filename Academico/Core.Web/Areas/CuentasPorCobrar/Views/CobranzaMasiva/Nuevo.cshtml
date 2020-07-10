@@ -9,6 +9,44 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script>
+    $(function () {
+        MostrarDatosTarjeta();
+        SetCobroTipo();
+
+        $("#IdCobro_tipo").change(function () {
+            SetCobroTipo();
+            MostrarDatosTarjeta();
+        });
+    })
+
+    function MostrarDatosTarjeta() {
+        var TipoCobro = $("#IdCobro_tipo").val();
+        if (TipoCobro == "TARJ") {
+            $("#div_tarjeta").show();
+            $("#DatoIdTarjeta").show();
+            $("#DatoTarjeta").show();
+        }
+        else {
+            $("#div_tarjeta").hide();
+            $("#DatoIdTarjeta").hide();
+            $("#DatoTarjeta").hide();
+        }
+    }
+
+    function SetCobroTipo() {
+
+        var tipo_cobro = $("#IdCobro_tipo").val();
+
+        $("#div_bancos").hide();
+        $("#div_cheque").hide();
+        if (tipo_cobro == "CHQF" || tipo_cobro == "CHQV") {
+            $("#div_cheque").show();
+        } else
+            if (tipo_cobro == "DEPO") {
+                $("#div_bancos").show();
+            }
+    }
+
     function OnFileUploadStart(s, e) {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -80,6 +118,61 @@
             </div>
         </div>
     </div>
+    <div class="row" id="div_tarjeta" hidden>
+        <div class="col-md-12">
+            <div class="col-md-6" id="DatoIdTarjeta" hidden>
+                <div class="form-group">
+                    <label for="cr_TotalCobro">Tarjeta de Crédito</label>
+                    @Html.DropDownListFor(q => q.IdTarjeta, new SelectList(ViewBag.lst_tarjeta, "IdTarjeta", "NombreTarjeta"), new { @class = "form-control", @id = "IdTarjeta" })
+                    @Html.ValidationMessageFor(q => q.IdTarjeta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6" id="DatoTarjeta" hidden>
+                <div class="form-group">
+                    <label for="cr_saldo">Numero</label>
+                    @Html.TextBoxFor(q => q.cr_Tarjeta, new { @id = "cr_Tarjeta", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cr_Tarjeta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="div_cheque" hidden>
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="cr_Banco">Banco*</label>
+                    @Html.DropDownListFor(q => q.cr_Banco, new SelectList(ViewBag.lst_banco, "ba_descripcion", "ba_descripcion"), new { @class = "form-control", @id = "cr_Banco" })
+                    @Html.ValidationMessageFor(q => q.cr_Banco, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="cr_cuenta">Cuenta*</label>
+                    @Html.TextBoxFor(q => q.cr_cuenta, new { @id = "cr_cuenta", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cr_cuenta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="cr_NumDocumento"># Cheque*</label>
+                    @Html.TextBoxFor(q => q.cr_NumDocumento, new { @id = "cr_NumDocumento", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.cr_NumDocumento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="div_bancos" hidden>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdBanco">Cuenta bancaria*</label>
+                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
+                    @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">

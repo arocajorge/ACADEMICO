@@ -72,21 +72,22 @@
         });
     }
 </script>
-@Html.DevExpress().GetStyleSheets(
-        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor }
-    )
-@Html.DevExpress().GetScripts(
-        new Script { ExtensionSuite = ExtensionSuite.HtmlEditor }
-    )
 @using (Html.BeginForm("Index", "CorreoMasivo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdAnio, new { @id = "IdAnio" })
     @Html.HiddenFor(q => q.modificado, new { @id = "modificado" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-            
+         
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor }
+    )
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.HtmlEditor }
+    )
+
     if (ViewBag.mensaje != null)
-            {
+    {
         <div class="alert alert-warning alert-dismissible">
             <h4>
                 <i class="icon fa fa-warning"></i> @ViewBag.mensaje

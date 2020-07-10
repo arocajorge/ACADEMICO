@@ -10,16 +10,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@Html.DevExpress().GetStyleSheets(
-        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor }
-    )
-@Html.DevExpress().GetScripts(
-        new Script { ExtensionSuite = ExtensionSuite.HtmlEditor }
-    )
-
 @using (Html.BeginForm("Nuevo", "ColaCorreoCodigo", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+
+    @Html.DevExpress().GetStyleSheets(
+        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor }
+    )
+    @Html.DevExpress().GetScripts(
+        new Script { ExtensionSuite = ExtensionSuite.HtmlEditor }
+    )
+
     if (ViewBag.mensaje != null)
     {
         <div class="row">
