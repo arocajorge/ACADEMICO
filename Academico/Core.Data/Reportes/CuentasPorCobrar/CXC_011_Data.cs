@@ -41,7 +41,8 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                             IdSucursal=q.IdSucursal,
                             Representante=q.Representante,
                             ValorProntoPago=q.ValorProntoPago,
-                            vt_tipoDoc=q.vt_tipoDoc
+                            vt_tipoDoc=q.vt_tipoDoc,
+                            
                         });
                     }
 
