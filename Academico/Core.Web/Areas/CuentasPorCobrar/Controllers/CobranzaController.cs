@@ -799,11 +799,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 ValorProntoPago = Math.Round((item.vt_total - item.ValorProntoPago ?? 0),2,MidpointRounding.AwayFromZero);
                 if (saldo > 0)
                 {
-                    item.dc_ValorProntoPago = saldo >= Math.Round((Convert.ToDouble(item.Saldo) - ValorProntoPago),2,MidpointRounding.AwayFromZero) ? ValorProntoPago : 0;
-                    item.dc_ValorPago = saldo >= Math.Round((Convert.ToDouble(item.Saldo) - ValorProntoPago),2,MidpointRounding.AwayFromZero) ? Math.Round(Convert.ToDouble(item.Saldo) - ValorProntoPago,2,MidpointRounding.AwayFromZero) : saldo;
-                    item.Saldo_final = Convert.ToDouble(item.Saldo - ValorProntoPago) - item.dc_ValorPago;
+                    item.dc_ValorProntoPago = Math.Round(saldo,2,MidpointRounding.AwayFromZero) >= Math.Round((Convert.ToDouble(item.Saldo) - ValorProntoPago),2,MidpointRounding.AwayFromZero) ? Math.Round(ValorProntoPago,2,MidpointRounding.AwayFromZero) : 0;
+                    item.dc_ValorPago = Math.Round(saldo,2,MidpointRounding.AwayFromZero) >= Math.Round((Convert.ToDouble(item.Saldo) - ValorProntoPago),2,MidpointRounding.AwayFromZero) ? Math.Round(Convert.ToDouble(item.Saldo) - ValorProntoPago,2,MidpointRounding.AwayFromZero) : Math.Round(saldo,2,MidpointRounding.AwayFromZero);
+                    item.Saldo_final  = Math.Round(Convert.ToDouble(item.Saldo - ValorProntoPago) - item.dc_ValorPago,2,MidpointRounding.AwayFromZero);
                     item.ValorProntoPago = ValorProntoPago;
-                    saldo =  Math.Round(saldo - item.dc_ValorPago);
+                    saldo =  Math.Round(saldo - item.dc_ValorPago,2,MidpointRounding.AwayFromZero);
                     lstFinal.Add(item);
                 }
                 else
