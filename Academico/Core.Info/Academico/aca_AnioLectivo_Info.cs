@@ -38,6 +38,26 @@ namespace Core.Info.Academico
         public int IdAnioApertura { get; set; }
         public int IdSede { get; set; }
         public List<aca_AnioLectivo_Periodo_Info> lst_periodos { get; set; }
+        public List<TreeList_Info> lst_TreeList { get; set; }
         #endregion
     }
+
+    public class TreeList_Info
+    {
+        public string IdString { get; set; }
+        public string IdStringPadre { get; set; }
+        public string Descripcion { get; set; }
+        public int Orden { get; set; }
+        public bool Seleccionado { get; set; }
+
+        public TreeList_Info()
+        {
+            IdString = "";
+            IdStringPadre = "";
+            Descripcion = "";
+            Orden = 0;
+            Seleccionado = false;
+        }
+    }
+
 }

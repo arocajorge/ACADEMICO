@@ -5,6 +5,6 @@
     settings.Width = Unit.Percentage(100);
     settings.ToolbarMode = HtmlEditorToolbarMode.Menu;
     settings.Html = (Model == null ? "" : (Model.Cuerpo == null ? "" : Model.Cuerpo));
-
+    settings.CssFiles.Add("~/Content/CustomCss.css");
 
 }).GetHtml()

@@ -63,7 +63,58 @@ namespace Core.Data.CuentasPorCobrar
                 throw;
             }
         }
-        
+
+        public List<cxc_cobro_det_Info> get_list_cartera_x_alumno(int IdEmpresa, int IdSucursal, decimal IdAlumno)
+        {
+            try
+            {
+                List<cxc_cobro_det_Info> Lista = new List<cxc_cobro_det_Info>();
+
+                using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
+                {
+                    var lst = Context.vwcxc_cartera_x_cobrar.Where(q => q.IdEmpresa == IdEmpresa
+                             && q.IdSucursal == IdSucursal && q.IdAlumno == IdAlumno).ToList();
+
+                    foreach (var q in lst)
+                    {
+                        Lista.Add(new cxc_cobro_det_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdSucursal = q.IdSucursal,
+                            IdBodega_Cbte = q.IdBodega,
+                            dc_TipoDocumento = q.vt_tipoDoc,
+                            vt_NumDocumento = q.vt_NunDocumento,
+                            Observacion = q.Referencia,
+                            IdCbte_vta_nota = q.IdComprobante,
+                            vt_fecha = q.vt_fecha,
+                            vt_total = q.vt_total,
+                            Saldo = q.Saldo,
+                            vt_Subtotal = q.vt_Subtotal,
+                            vt_iva = q.vt_iva,
+                            vt_fech_venc = q.vt_fech_venc,
+                            NomCliente = q.NomCliente,
+                            ValorProntoPago = q.ValorProntoPago,
+                            FechaProntoPago = q.FechaProntoPago,
+
+                            IdAnio = q.IdAnio,
+                            IdPlantilla = q.IdPlantilla,
+                            IdPuntoVta = q.IdPuntoVta,
+                            IdCliente = q.IdCliente,
+                            IdAlumno = q.IdAlumno
+                        });
+                    }
+
+                    Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento + "-" + q.IdBodega_Cbte.ToString() + "-" + q.IdCbte_vta_nota.ToString(); q.dc_ValorPago = Convert.ToDouble(q.Saldo); });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<cxc_cobro_det_Info> get_list(int IdEmpresa, int IdSucursal, decimal IdCobro)
         {
             try
@@ -223,6 +274,7 @@ namespace Core.Data.CuentasPorCobrar
                                  vt_iva = q.vt_iva,
                                  vt_fech_venc = q.vt_fech_venc,
                                  dc_ValorProntoPago = q.ValorProntoPago,
+                                 ValorProntoPago = q.ValorProntoPago,
                                  IdAnio = q.IdAnio,
                                  IdPlantilla = q.IdPlantilla,
                                  IdPuntoVta = q.IdPuntoVta,

@@ -28,13 +28,9 @@ namespace Core.Info.General
         public bool RepLegal { get; set; }
         public bool RepEconomico { get; set; }
         public int IdAnio { get; set; }
-        public int IdSede { get; set; }
-        public int IdNivel { get; set; }
-        public int IdJornada { get; set; }
-        public int IdCurso { get; set; }
-        public int IdParalelo { get; set; }
         public string Copia { get; set; }
-        public List<aca_AnioLectivo_Curso_Paralelo_Info> lst_correo_masivo { get; set; }
+        public int modificado { get; set; }
+        public List<TreeList_Info> lst_correo_masivo { get; set; }
         #endregion
     }
 }

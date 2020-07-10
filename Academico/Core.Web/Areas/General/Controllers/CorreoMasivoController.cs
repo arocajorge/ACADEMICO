@@ -11,6 +11,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DevExpress.Web;
+using Core.Web.Areas.Academico.Controllers;
 
 namespace Core.Web.Areas.General.Controllers
 {
@@ -23,7 +24,9 @@ namespace Core.Web.Areas.General.Controllers
         aca_AnioLectivo_Curso_Paralelo_Bus bus_treelist = new aca_AnioLectivo_Curso_Paralelo_Bus();
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
-        aca_AnioLectivo_Curso_Paralelo_TreeList Lista_TreeList = new aca_AnioLectivo_Curso_Paralelo_TreeList();
+        TreeList_List Lista_TreeList = new TreeList_List();
+        aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
+        aca_alumno_PeriodoActual_List List_AlumnosPeriodoActual = new aca_alumno_PeriodoActual_List();
         string mensaje = string.Empty;
         #endregion
 
@@ -71,14 +74,15 @@ namespace Core.Web.Areas.General.Controllers
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdAnio = info_anio.IdAnio,
-                IdSede = Convert.ToInt32(SessionFixed.IdSede),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                 Cuerpo = "Escribe tu mensaje",
-                lst_correo_masivo = new List<aca_AnioLectivo_Curso_Paralelo_Info>()
+                RepEconomico = true,
+                RepLegal = true,
+                lst_correo_masivo = new List<TreeList_Info>()
             };
 
-            //model.lst_correo_masivo = bus_treelist.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
-            //Lista_TreeList.set_list(model.lst_correo_masivo, model.IdTransaccionSession);
+            model.lst_correo_masivo = bus_treelist.GetList_CorreoMasivo(model.IdEmpresa, model.IdAnio);
+            Lista_TreeList.set_list(model.lst_correo_masivo, model.IdTransaccionSession);
 
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "ColaCorreo", "Index");
@@ -94,6 +98,7 @@ namespace Core.Web.Areas.General.Controllers
         public ActionResult Index(tb_ColaCorreo_Info model)
         {
             model.lst_correo_masivo = Lista_TreeList.get_list(model.IdTransaccionSession);
+            var lst = model.lst_correo_masivo.Where(q=>q.Seleccionado==true);
 
             if (!validar(model, ref mensaje))
             {
@@ -101,12 +106,12 @@ namespace Core.Web.Areas.General.Controllers
                 return View(model);
             }
 
-            if (!bus_cola.GuardarDB(model))
-            {
-                ViewBag.mensaje = "No se ha podido guardar el registro";
-                return View(model);
-            }
-            return RedirectToAction("Nuevo");
+            //if (!bus_cola.GuardarDB(model))
+            //{
+            //    ViewBag.mensaje = "No se ha podido guardar el registro";
+            //    return View(model);
+            //}
+            return RedirectToAction("Index");
         }
         #endregion
 
@@ -119,21 +124,21 @@ namespace Core.Web.Areas.General.Controllers
 
         #region TreeList
         [ValidateInput(false)]
-        public ActionResult TreeListPartial_CorreoMasivo(int IdEmpresa = 0, int IdAnio = 0, int IdSede=0)
+        public ActionResult aca_AnioLectivo_ParaleloTreeList(int IdEmpresa = 0, int IdAnio = 0)
         {
-            //SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            //List<aca_AnioLectivo_Curso_Paralelo_Info> model = Lista_TreeList.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            List<TreeList_Info> model = Lista_TreeList.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            List<aca_AnioLectivo_Curso_Paralelo_Info> model = bus_treelist.GetList_CorreoMAsivo(IdEmpresa, IdSede, IdAnio);
+            //List<TreeList_Info> model = bus_treelist.GetList_CorreoMasivo(IdEmpresa, IdAnio);
             ViewBag.IdEmpresa = IdEmpresa;
             ViewBag.IdAnio = IdAnio;
-            ViewBag.IdSede = IdSede;
+
             ViewData["selectedIDs"] = Request.Params["selectedIDs"];
             if (ViewData["selectedIDs"] == null)
             {
                 int x = 0;
                 string selectedIDs = "";
-                foreach (var item in model.Where(q => q.seleccionado == true).ToList())
+                foreach (var item in model.Where(q => q.Seleccionado == true).ToList())
                 {
                     if (x == 0)
                         selectedIDs = item.IdString.ToString();
@@ -143,30 +148,125 @@ namespace Core.Web.Areas.General.Controllers
                 }
                 ViewData["selectedIDs"] = selectedIDs;
             }
-            return PartialView("_TreeListPartial_CorreoMasivo", model);
+            return PartialView("_aca_AnioLectivo_ParaleloTreeList", model);
         }
 
         #endregion
 
+        #region Json
+        public JsonResult guardar(int IdEmpresa = 0, int Modificado = 0, string Ids = "", decimal IdAlumno=0, string Copia="", string Asunto="", string Cuerpo="", bool RepLegal=false, bool RepEconomico=false, decimal IdTransaccionSession=0)
+        {
+            string[] array = Ids.Split(',');
+            List<TreeList_Info> lista = new List<TreeList_Info>();
+            var lst_TreeList = Lista_TreeList.get_list(IdTransaccionSession);
+            if (Ids != "")
+            {
+                var output = array.GroupBy(q => q).ToList();
+                foreach (var item in lst_TreeList)
+                {
+                    foreach (var item2 in output)
+                    {
+                        if (item.IdString == Convert.ToString(item2.Key))
+                        {
+                            lista.Add(item);
+                        }
+                    }
+                }
+            }
+
+            var AlumnosPorPeriodoActual = bus_alumno.GetList_PeriodoActual(IdEmpresa);
+            List_AlumnosPeriodoActual.set_list(AlumnosPorPeriodoActual, IdTransaccionSession);
+            var lstAlumnos = List_AlumnosPeriodoActual.get_list(IdTransaccionSession).ToList();
+
+            var lstParalelos = lista.Where(q => q.IdString.Count() == 15).ToList();
+
+            if (string.IsNullOrEmpty(Asunto) || string.IsNullOrEmpty(Cuerpo))
+            {
+                mensaje = "Es obligatorio ingresar asunto y cuerpo del correo";
+            }
+            else if (IdAlumno==0 && lstParalelos.Count==0)
+            {
+                mensaje = "Debe ingresar al menos un destinario";
+            }
+            else
+            {
+                foreach (var item in lstParalelos)
+                {
+                    var IdSede = Convert.ToInt32(item.IdString.Substring(0, 3));
+                    var IdJornada = Convert.ToInt32(item.IdString.Substring(3, 3));
+                    var IdNivel = Convert.ToInt32(item.IdString.Substring(6, 3));
+                    var IdCurso = Convert.ToInt32(item.IdString.Substring(9, 3));
+                    var IdParalelo = Convert.ToInt32(item.IdString.Substring(12, 3));
+
+
+                    var lstAlumnosPorParalelos = lstAlumnos.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdJornada == IdJornada && q.IdNivel == IdNivel && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).ToList();
+
+                    foreach (var item1 in lstAlumnosPorParalelos)
+                    {
+                        var CorreoXAlumno = lstAlumnosPorParalelos.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == item1.IdAlumno).FirstOrDefault();
+                        var Destinatarios = (RepLegal == true ? (CorreoXAlumno == null ? "" : CorreoXAlumno.CorreoRepLegal + ";") : "") + (RepEconomico == true ? (CorreoXAlumno == null ? "" : CorreoXAlumno.correoRepEconomico + ";") : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
+
+                        var info = new tb_ColaCorreo_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            Asunto = Asunto,
+                            Cuerpo = Cuerpo,
+                            Destinatarios = Destinatarios,
+                            Codigo = " ",
+                            Parametros = " ",
+                            IdUsuarioCreacion = SessionFixed.IdUsuario
+                        };
+
+                        if (!bus_cola.GuardarDB(info))
+                        {
+                            mensaje = "Ha ocurrido un error al guardar los registros";
+                        }
+                    }
+                }
+                if (IdAlumno > 0)
+                {
+                    var CorreosAlumno = List_AlumnosPeriodoActual.get_list(IdTransaccionSession).Where(q => q.IdAlumno == IdAlumno).FirstOrDefault();
+                    var DestinatarioAlumno = (RepLegal == true ? (CorreosAlumno == null ? "" : CorreosAlumno.CorreoRepLegal + ";") : "") + (RepEconomico == true ? (CorreosAlumno == null ? "" : CorreosAlumno.correoRepEconomico + ";") : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
+                    var info = new tb_ColaCorreo_Info
+                    {
+                        IdEmpresa = IdEmpresa,
+                        Asunto = Asunto,
+                        Cuerpo = Cuerpo,
+                        Destinatarios = DestinatarioAlumno,
+                        Codigo = " ",
+                        Parametros = " ",
+                        IdUsuarioCreacion = SessionFixed.IdUsuario
+                    };
+
+                    if (!bus_cola.GuardarDB(info))
+                    {
+                        mensaje = "No se ha podido guardar el registro";
+                    }
+                }
+            }
+            
+            return Json(mensaje, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 
 
 
-    public class aca_AnioLectivo_Curso_Paralelo_TreeList
+    public class TreeList_List
     {
-        string Variable = "aca_AnioLectivo_Curso_Paralelo_TreeList_Info";
-        public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list(decimal IdTransaccionSession)
+        string Variable = "TreeList_Info";
+        public List<TreeList_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
-                List<aca_AnioLectivo_Curso_Paralelo_Info> list = new List<aca_AnioLectivo_Curso_Paralelo_Info>();
+                List<TreeList_Info> list = new List<TreeList_Info>();
 
                 HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<aca_AnioLectivo_Curso_Paralelo_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+            return (List<TreeList_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<aca_AnioLectivo_Curso_Paralelo_Info> list, decimal IdTransaccionSession)
+        public void set_list(List<TreeList_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }

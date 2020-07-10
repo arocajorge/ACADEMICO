@@ -1,0 +1,55 @@
+.CommonTitlePreview {
+    color: #969a33;
+    font-family: Tahoma;
+    font-size: 20pt;
+    font-weight: bold;
+}
+.CommonHeader1Preview {
+    color: #6f7408;
+    font-weight: lighter;
+    font-size: 15pt;
+}
+.CommonHeader2Preview {
+    color: #6f7408;
+    font-weight: lighter;
+    font-size: 12pt;
+}
+.CommonContentPreview {
+    font-size: 100%;
+    color: #303440;
+}
+.CommonFeaturesPreview {
+    font-weight: 700;
+    color: #595d66;
+}
+.CommonFooterPreview {
+    color: Black;
+    font-size: 12px
+}
+.LinkPreview {
+    color: #0000FF;
+}
+.ImageMarginPreview {
+    font-size: 100%;
+    color: #303440;
+    border: 1px dotted #576fa5;
+    padding: 0px 2px 1px 2px;
+    display: inline-block;
+}
+.ImageTitlePreview {
+    color: #000000;
+    line-height: 20px;
+    font-style:italic;
+}
+.ImageWithBorderPreview {
+    color: Black;
+    font-size: 12px
+}
+.ImageWithPaddingsPreview {
+    color: Black;
+    font-size: 12px
+}
+.ImageSemiTransparentPreview {
+    color: Black;
+    font-size: 12px
+}

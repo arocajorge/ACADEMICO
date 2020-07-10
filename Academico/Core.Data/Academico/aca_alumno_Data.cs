@@ -58,6 +58,119 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_Alumno_Info> getList_PeriodoActual(int IdEmpresa)
+        {
+            try
+            {
+                List<aca_Alumno_Info> Lista = new List<aca_Alumno_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_Alumno_PeriodoActual.Where(q => q.IdEmpresa == IdEmpresa).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_Alumno_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAlumno = q.IdAlumno,
+                            Codigo = q.Codigo,
+                            pe_nombreCompleto = q.NombreAlumno,
+                            pe_cedulaRuc = q.pe_cedulaRuc,
+                            NomRepEconomico = q.NombreEmiteFactura,
+                            correoRepEconomico = q.CorreoEmiteFactura,
+                            TelefonoRepEconomico = q.CelularEmiteFactura,
+                            NomRepLegal = q.NombreRepresentante,
+                            CorreoRepLegal =q.CorreoRepresentante,
+                            TelefonoRepLegal = q.CelularRepresentante,
+                            IdSede= q.IdSede,
+                            IdJornada=q.IdJornada,
+                            IdNivel=q.IdNivel,
+                            IdCurso = q.IdCurso,
+                            IdParalelo = q.IdParalelo,
+                            NomSede = q.NomSede,
+                            NomJornada = q.NomJornada,
+                            NomNivel = q.NomNivel,
+                            NomCurso = q.NomCurso,
+                            NomParalelo = q.NomParalelo
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_Alumno_Info> getList_PeriodoActual(int IdEmpresa, int IdAnio, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo)
+        {
+            try
+            {
+                int IdSedeIni = IdSede;
+                int IdSedeFin = IdSede == 0 ? 9999999 : IdSede;
+
+                int IdJornadaIni = IdJornada;
+                int IdJornadaFin = IdJornada == 0 ? 9999999 : IdJornada;
+
+                int IdNivelIni = IdNivel;
+                int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
+
+                int IdCursoIni = IdCurso;
+                int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
+
+                int IdParaleloIni = IdParalelo;
+                int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
+
+                List<aca_Alumno_Info> Lista = new List<aca_Alumno_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_Alumno_PeriodoActual.Where(q => q.IdEmpresa == IdEmpresa & q.IdAnio == IdAnio && q.IdSede >= IdSedeIni && q.IdSede <= IdSedeFin
+                    && q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin && q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin
+                    && q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin && q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin).OrderBy(q=>q.NombreAlumno).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_Alumno_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAlumno = q.IdAlumno,
+                            Codigo = q.Codigo,
+                            pe_nombreCompleto = q.NombreAlumno,
+                            pe_cedulaRuc = q.pe_cedulaRuc,
+                            NomRepEconomico = q.NombreEmiteFactura,
+                            correoRepEconomico = q.CorreoEmiteFactura,
+                            TelefonoRepEconomico = q.CelularEmiteFactura,
+                            NomRepLegal = q.NombreRepresentante,
+                            CorreoRepLegal = q.CorreoRepresentante,
+                            TelefonoRepLegal = q.CelularRepresentante,
+                            IdSede = q.IdSede,
+                            IdJornada = q.IdJornada,
+                            IdNivel = q.IdNivel,
+                            IdCurso = q.IdCurso,
+                            IdParalelo = q.IdParalelo,
+                            NomSede = q.NomSede,
+                            NomJornada = q.NomJornada,
+                            NomNivel = q.NomNivel,
+                            NomCurso = q.NomCurso,
+                            NomParalelo = q.NomParalelo
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public aca_Alumno_Info getInfo(int IdEmpresa, decimal IdAlumno)
         {
             try
@@ -118,6 +231,36 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_Alumno_Info getInfo_Codigo(int IdEmpresa, string Codigo)
+        {
+            try
+            {
+                aca_Alumno_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.Codigo == Codigo).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_Alumno_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        pe_nombreCompleto = Entity.pe_nombreCompleto,
+                        IdAlumno = Entity.IdAlumno,
+                        IdPersona = Entity.IdPersona,
+                        Codigo = Entity.Codigo
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_Alumno_Info getInfo(int IdEmpresa, decimal IdAlumno, string pe_cedulaRucFamiliar)
         {
             try

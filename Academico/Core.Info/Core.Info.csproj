@@ -101,6 +101,8 @@
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionConciliacionNC_Info.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionFacturas_Info.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionNotas_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_CobroMasivoDet_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_CobroMasivo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCredito_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Info.cs" />

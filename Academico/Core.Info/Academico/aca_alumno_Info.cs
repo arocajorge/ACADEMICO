@@ -224,6 +224,25 @@ namespace Core.Info.Academico
         public string dia { get; set; }
         public int IdSede { get; set; }
         public int IdSucursal { get; set; }
+
+        #region Datos Alumno Periodo Actual
+        public string NomRepLegal { get; set; }
+        public string TelefonoRepLegal { get; set; }
+        public string CorreoRepLegal { get; set; }
+        public string NomRepEconomico { get; set; }
+        public string TelefonoRepEconomico { get; set; }
+        public string correoRepEconomico { get; set; }
+        public int IdAnio { get; set; }
+        public int IdJornada { get; set; }
+        public int IdNivel { get; set; }
+        public int IdParalelo { get; set; }
+        public string NomSede { get; set; }
+        public string NomNivel { get; set; }
+        public string NomJornada { get; set; }
+        public string NomCurso { get; set; }
+        public string NomParalelo { get; set; }
+        #endregion
+
         #endregion
     }
 }

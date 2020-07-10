@@ -159,6 +159,12 @@
     <Compile Include="Base\caj_Caja_x_seg_usuario.cs">
       <DependentUpon>ModelCaja.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\cxc_CobroMasivo.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_CobroMasivoDet.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\cxc_cobro_det.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
@@ -324,6 +330,9 @@
     <Compile Include="Base\VWACA_013_EquivalenciaPromedio.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_Alumno_PeriodoActual.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_AnioLectivoEquivalenciaPromedio.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -429,6 +438,9 @@
     <Compile Include="Base\vwcxc_cartera_cobrada_saldo0.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwcxc_CobroMasivoDet.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwcxc_ConciliacionNotaCredito.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
@@ -493,6 +505,8 @@
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionConciliacionNC_Data.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionFacturas_Data.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionNotas_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_CobroMasivoDet_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_CobroMasivo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCredito_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Data.cs" />

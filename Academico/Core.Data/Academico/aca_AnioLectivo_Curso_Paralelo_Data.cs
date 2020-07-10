@@ -104,62 +104,160 @@ namespace Core.Data.Academico
             }
         }
 
-        public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list_CorreoMAsivo(int IdEmpresa, int IdSede, int IdAnio)
+        public List<TreeList_Info> get_list_CorreoMasivo(int IdEmpresa, int IdAnio)
         {
             try
             {
-                List<aca_AnioLectivo_Curso_Paralelo_Info> Lista;
+                List<TreeList_Info> Lista = new List<TreeList_Info>();
+                var ListaSede = new List<vwaca_AnioLectivo_Curso_Paralelo>(); ;
+                var ListaJornada = new List<vwaca_AnioLectivo_Curso_Paralelo>();
+                var ListaNivel = new List<vwaca_AnioLectivo_Curso_Paralelo>();
+                var ListaCurso = new List<vwaca_AnioLectivo_Curso_Paralelo>();
+                var ListaParalelo = new List<vwaca_AnioLectivo_Curso_Paralelo>();
 
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    Lista = (from q in Context.vwaca_AnioLectivo_Curso_Paralelo
-                             where q.IdEmpresa == IdEmpresa
-                             && q.IdSede == IdSede
-                             && q.IdAnio == IdAnio
-                             group q by new
-                             {
-                                 q.IdEmpresa,
-                                 q.IdAnio,
-                                 q.IdSede,
-                                 q.IdNivel,
-                                 q.IdJornada,
-                                 q.IdCurso,
-                                 q.IdParalelo,
-                                 q.NomSede,
-                                 q.Descripcion,
-                                 q.NomNivel,
-                                 q.NomJornada,
-                                 q.NomCurso,
-                                 q.NomParalelo,
-                                 q.OrdenJornada, 
-                                 q.OrdenNivel,
-                                 q.OrdenCurso,
-                                 q.OrdenParalelo
-                             } into g
-                             select new aca_AnioLectivo_Curso_Paralelo_Info
-                             {
-                                 IdEmpresa = g.Key.IdEmpresa,
-                                 IdSede = g.Key.IdSede,
-                                 IdAnio = g.Key.IdAnio,
-                                 IdNivel = g.Key.IdNivel,
-                                 IdJornada = g.Key.IdJornada,
-                                 IdCurso = g.Key.IdCurso,
-                                 IdParalelo = g.Key.IdParalelo,
-                                 NomSede = g.Key.NomSede,
-                                 Descripcion = g.Key.Descripcion,
-                                 NomNivel = g.Key.NomNivel,
-                                 NomJornada = g.Key.NomJornada,
-                                 NomCurso = g.Key.NomCurso,
-                                 NomParalelo = g.Key.NomParalelo,
-                                 OrdenJornada = g.Key.OrdenJornada,
-                                 OrdenNivel = g.Key.OrdenNivel,
-                                 OrdenCurso = g.Key.OrdenCurso,
-                                 OrdenParalelo = g.Key.OrdenParalelo
+                    var lst_sede = new List<TreeList_Info>();
+                    var lst_jornada = new List<TreeList_Info>();
+                    var lst_nivel = new List<TreeList_Info>();
+                    var lst_curso = new List<TreeList_Info>();
+                    var lst_paralelo = new List<TreeList_Info>();
 
-                             }).ToList();
+                    ListaSede = Context.vwaca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
+                    lst_sede = (from q in ListaSede
+                                group q by new
+                                {
+                                    q.IdEmpresa,
+                                    q.IdAnio,
+                                    q.IdSede,
+                                    q.NomSede
+                                } into s
+                                select new TreeList_Info
+                                {
+                                    IdString = s.Key.IdSede.ToString("000"),
+                                    IdStringPadre = null,
+                                    Descripcion = s.Key.NomSede,
+                                    Orden = 0
+                                }).OrderBy(q => q.Orden).ToList();
 
-                    Lista.ForEach(q=>q.IdString= q.IdEmpresa.ToString("000") + q.IdAnio.ToString("000") + q.IdSede.ToString("000") + q.IdJornada.ToString("000")+ q.IdCurso.ToString("000")+ q.IdParalelo.ToString("000"));
-                    //Lista.OrderBy(q => new { q.OrdenJornada, q.OrdenNivel, q.OrdenCurso, q.OrdenParalelo} ).ToList();
+                    Lista.AddRange(lst_sede);
+
+                    foreach (var item_sede in lst_sede)
+                    {
+                        var IdSede = Convert.ToInt32(item_sede.IdString);
+                        ListaJornada = Context.vwaca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede).ToList();
+
+                        lst_jornada = (from q in ListaJornada
+                                        group q by new
+                                        {
+                                            q.IdEmpresa,
+                                            q.IdAnio,
+                                            q.IdSede,
+                                            q.IdJornada,
+                                            q.NomJornada,
+                                            q.OrdenJornada
+                                        } into s
+                                        select new TreeList_Info
+                                        {
+                                            IdString = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000"),
+                                            IdStringPadre = s.Key.IdSede.ToString("000"),
+                                            Descripcion = s.Key.NomJornada,
+                                            Orden = s.Key.OrdenJornada
+                                        }).OrderBy(q => q.Orden).ToList();
+
+                        Lista.AddRange(lst_jornada);
+
+                        foreach (var item_jornada in lst_jornada)
+                        {
+                            //var IdSede = Convert.ToInt32(item_jornada.IdString.Substring(0, 3));
+                            var IdJornada = Convert.ToInt32(item_jornada.IdString.Substring(3, 3));
+                            ListaNivel = Context.vwaca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdJornada == IdJornada).ToList();
+
+                            lst_nivel = (from q in ListaNivel
+                                            group q by new
+                                            {
+                                                q.IdEmpresa,
+                                                q.IdAnio,
+                                                q.IdSede,
+                                                q.IdJornada,
+                                                q.IdNivel,
+                                                q.NomNivel,
+                                                q.OrdenNivel
+                                            } into s
+                                            select new TreeList_Info
+                                            {
+                                                IdString = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000"),
+                                                IdStringPadre = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000"),
+                                                Descripcion = s.Key.NomNivel,
+                                                Orden = s.Key.OrdenNivel
+                                            }).OrderBy(q => q.Orden).ToList();
+
+                            Lista.AddRange(lst_nivel);
+
+                            foreach (var item_nivel in lst_nivel)
+                            {
+                                //var IdSede = Convert.ToInt32(item_nivel.IdString.Substring(0, 3));
+                                //var IdJornada = Convert.ToInt32(item_nivel.IdString.Substring(3, 3));
+                                var IdNivel = Convert.ToInt32(item_nivel.IdString.Substring(6, 3));
+                                ListaCurso = Context.vwaca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdJornada == IdJornada && q.IdNivel == IdNivel).ToList();
+
+                                lst_curso = (from q in ListaCurso
+                                             group q by new
+                                             {
+                                                 q.IdEmpresa,
+                                                 q.IdAnio,
+                                                 q.IdSede,
+                                                 q.IdJornada,
+                                                 q.IdNivel,
+                                                 q.IdCurso,
+                                                 q.NomCurso,
+                                                 q.OrdenCurso
+                                             } into s
+                                             select new TreeList_Info
+                                             {
+                                                 IdString = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000") + s.Key.IdCurso.ToString("000"),
+                                                 IdStringPadre = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000"),
+                                                 Descripcion = s.Key.NomCurso,
+                                                 Orden = s.Key.OrdenCurso
+                                             }).OrderBy(q => q.Orden).ToList();
+
+                                Lista.AddRange(lst_curso);
+
+                                foreach (var item_curso in lst_curso)
+                                {
+                                    //var IdSede = Convert.ToInt32(item_curso.IdString.Substring(0, 3));
+                                    //var IdJornada = Convert.ToInt32(item_curso.IdString.Substring(3, 3));
+                                    //var IdNivel = Convert.ToInt32(item_curso.IdString.Substring(6, 3));
+                                    var IdCurso = Convert.ToInt32(item_curso.IdString.Substring(9, 3));
+
+                                    ListaCurso = Context.vwaca_AnioLectivo_Curso_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdJornada == IdJornada && q.IdNivel == IdNivel && q.IdCurso == IdCurso).ToList();
+
+                                    lst_paralelo = (from q in ListaCurso
+                                                    group q by new
+                                                    {
+                                                        q.IdEmpresa,
+                                                        q.IdAnio,
+                                                        q.IdSede,
+                                                        q.IdJornada,
+                                                        q.IdNivel,
+                                                        q.IdCurso,
+                                                        q.IdParalelo,
+                                                        q.NomParalelo,
+                                                        q.OrdenParalelo
+                                                    } into s
+                                                    select new TreeList_Info
+                                                    {
+                                                        IdString = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000") + s.Key.IdCurso.ToString("000") + s.Key.IdParalelo.ToString("000"),
+                                                        IdStringPadre = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000") + s.Key.IdCurso.ToString("000"),
+                                                        Descripcion = s.Key.NomParalelo,
+                                                        Orden = s.Key.OrdenParalelo
+                                                    }).OrderBy(q => q.Orden).ToList();
+
+                                    Lista.AddRange(lst_paralelo);
+                                }
+                            }
+                        }
+                    }
                 }
 
                 return Lista;

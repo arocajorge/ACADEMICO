@@ -37,6 +37,30 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_Alumno_Info> GetList_PeriodoActual(int IdEmpresa)
+        {
+            try
+            {
+                return odata.getList_PeriodoActual(IdEmpresa);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<aca_Alumno_Info> GetList_PeriodoActual(int IdEmpresa, int IdAnio, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo)
+        {
+            try
+            {
+                return odata.getList_PeriodoActual(IdEmpresa, IdAnio, IdSede, IdJornada, IdNivel, IdCurso, IdParalelo );
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public aca_Alumno_Info get_info_x_num_cedula(int IdEmpresa, string pe_cedulaRuc)
         {
             try
@@ -54,6 +78,18 @@ namespace Core.Bus.Academico
             try
             {
                 return odata.getInfo(IdEmpresa, IdAlumno);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public aca_Alumno_Info GetInfo_Codigo(int IdEmpresa, string Codigo)
+        {
+            try
+            {
+                return odata.getInfo_Codigo(IdEmpresa, Codigo);
             }
             catch (Exception)
             {
