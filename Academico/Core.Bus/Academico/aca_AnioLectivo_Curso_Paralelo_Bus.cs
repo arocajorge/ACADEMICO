@@ -23,6 +23,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Curso_Paralelo_Info> GetList_CorreoMAsivo(int IdEmpresa, int IdSede, int IdAnio)
+        {
+            try
+            {
+                return odata.get_list_CorreoMAsivo(IdEmpresa, IdSede, IdAnio);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        
         public List<aca_AnioLectivo_Curso_Paralelo_Info> GetListByCurso(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try

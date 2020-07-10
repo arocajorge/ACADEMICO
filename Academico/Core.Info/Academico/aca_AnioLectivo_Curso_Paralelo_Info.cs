@@ -41,6 +41,12 @@ namespace Core.Info.Academico
         public decimal IdMatricula { get; set; }
         public List<aca_AnioLectivo_Curso_Paralelo_Info> lst_detalle { get; set; }
         public string Validar { get; set; }
+
+        /*correo*/
+        public int OrdenJornada { get; set; }
+        public int OrdenNivel { get; set; }
+        public int OrdenCurso { get; set; }
+        public string IdString { get; set; }
         #endregion
     }
 }

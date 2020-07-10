@@ -316,8 +316,10 @@
     <Compile Include="Areas\Facturacion\Controllers\TerminoPagoController.cs" />
     <Compile Include="Areas\Facturacion\Controllers\TipoNotaController.cs" />
     <Compile Include="Areas\Facturacion\FacturacionAreaRegistration.cs" />
+    <Compile Include="Areas\General\Controllers\aca_AnioLectivo_bus.cs" />
     <Compile Include="Areas\General\Controllers\ColaCorreoCodigoController.cs" />
     <Compile Include="Areas\General\Controllers\ColaCorreoController.cs" />
+    <Compile Include="Areas\General\Controllers\CorreoMasivoController.cs" />
     <Compile Include="Areas\General\Controllers\CorreoParametroController.cs" />
     <Compile Include="Areas\General\Controllers\GrupoEtnicoController.cs" />
     <Compile Include="Areas\General\Controllers\ParroquiaController.cs" />
@@ -8822,6 +8824,10 @@
     <Content Include="Areas\General\Views\ColaCorreoCodigo\_HtmlEditorPartial.cshtml" />
     <Content Include="Areas\General\Views\ColaCorreoCodigo\Nuevo.cshtml" />
     <Content Include="Areas\General\Views\ColaCorreoCodigo\Modificar.cshtml" />
+    <Content Include="Areas\General\Views\CorreoMasivo\Index.cshtml" />
+    <Content Include="Areas\General\Views\CorreoMasivo\_CmbAlumno.cshtml" />
+    <Content Include="Areas\General\Views\CorreoMasivo\_TreeListPartial_CorreoMasivo.cshtml" />
+    <Content Include="Areas\General\Views\CorreoMasivo\_HtmlEditorPartial.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

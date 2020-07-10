@@ -1,0 +1,26 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdAlumno";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Pixel(1000);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "CorreoMasivo", Action = "Cmb_Alumno", Area = "General" };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "pe_nombreCompleto";
+        settings.Properties.TextFormatString = "[{0}] {1} - {2} - {3}";
+        settings.Properties.ValueField = "IdEntidad";
+        settings.Properties.ValueType = typeof(decimal);
+        settings.Properties.Columns.Add("IdEntidad", "ID", 10);
+        settings.Properties.Columns.Add("CodAlumno", "Codigo", 10);
+        settings.Properties.Columns.Add("pe_cedulaRuc", "Identificacion", 15);
+        settings.Properties.Columns.Add("pe_nombreCompleto", "Alumno", 65);
+        settings.Properties.AllowMouseWheel = false;
+    })
+    .BindList(new Core.Web.Areas.General.Controllers.CorreoMasivoController().get_list_bajo_demanda_alumno, new Core.Web.Areas.General.Controllers.CorreoMasivoController().get_info_bajo_demanda_alumno)
+    .Bind(Model.GetType() == typeof(Core.Info.General.tb_ColaCorreo_Info) ? "" : (Model == 0 ? "" : Model));
+
+}
+@comboBox.GetHtml()
