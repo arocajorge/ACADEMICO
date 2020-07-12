@@ -95,6 +95,7 @@ namespace Core.Data.CuentasPorCobrar
                             NomCliente = q.NomCliente,
                             ValorProntoPago = q.ValorProntoPago,
                             FechaProntoPago = q.FechaProntoPago,
+                            dc_ValorProntoPago = q.TotalxCobrado,
                             IdAnio = q.IdAnio,
                             IdPlantilla = q.IdPlantilla,
                             IdPuntoVta = q.IdPuntoVta,

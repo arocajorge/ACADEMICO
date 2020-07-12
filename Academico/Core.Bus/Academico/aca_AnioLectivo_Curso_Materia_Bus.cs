@@ -33,30 +33,47 @@ namespace Core.Bus.Academico
                     var lst_ParaleloProfesor = odata_ParaleloProfesor.get_list_x_curso(IdEmpresa,IdSede,IdAnio,IdNivel,IdJornada,IdCurso);
                     List<aca_AnioLectivo_Paralelo_Profesor_Info> nueva_lista_profesor = new List<aca_AnioLectivo_Paralelo_Profesor_Info>();
 
-                    foreach (var item in lista)
-                    {
-                        var lst_existe = lst_ParaleloProfesor.Where(q=> q.IdMateria==item.IdMateria).ToList();
-                        if (lst_existe!=null)
-                        {
-                            nueva_lista_profesor.AddRange(lst_existe);
-                        }
-                    }
-
-                    var listaParalelos = nueva_lista_profesor.GroupBy(q => new { q.IdEmpresa, q.IdSede, q.IdAnio, q.IdNivel, q.IdJornada, q.IdCurso, q.IdParalelo }).Select(q=> 
+                    var listaParalelos = lst_ParaleloProfesor.GroupBy(q => new { q.IdEmpresa, q.IdSede, q.IdAnio, q.IdNivel, q.IdJornada, q.IdCurso, q.IdParalelo }).Select(q =>
                     new {
                         IdEmpresa = q.Key.IdEmpresa,
                         IdSede = q.Key.IdSede,
-                        IdAnio= q.Key.IdAnio,
+                        IdAnio = q.Key.IdAnio,
                         IdNivel = q.Key.IdNivel,
                         IdJornada = q.Key.IdJornada,
                         IdCurso = q.Key.IdCurso,
                         IdParalelo = q.Key.IdParalelo
                     }).ToList();
 
+                    foreach (var item in lista)
+                    {
+                        var lst_existe_registro = lst_ParaleloProfesor.Where(q=> q.IdMateria==item.IdMateria).ToList();
+                        if (lst_existe_registro.Count == 0)
+                        {
+                            foreach (var item2 in listaParalelos)
+                            {
+                                nueva_lista_profesor.Add(new aca_AnioLectivo_Paralelo_Profesor_Info
+                                {
+                                    IdEmpresa = item.IdEmpresa,
+                                    IdSede = item.IdSede,
+                                    IdAnio = item.IdAnio,
+                                    IdJornada = item.IdJornada,
+                                    IdNivel = item.IdNivel,
+                                    IdCurso = item.IdCurso,
+                                    IdParalelo = item2.IdParalelo,
+                                    IdMateria = item.IdMateria
+                                });
+                            }
+                        }
+                        else
+                        {
+                            nueva_lista_profesor.AddRange(lst_existe_registro);
+                        }
+                    }
+
                     foreach (var item in listaParalelos)
                     {
-                        List<aca_AnioLectivo_Paralelo_Profesor_Info> NuevaListaParaleloProfesor = nueva_lista_profesor.Where(q=> q.IdEmpresa==item.IdEmpresa && q.IdSede==item.IdSede && q.IdAnio==item.IdAnio
-                        && q.IdNivel==item.IdNivel && q.IdJornada==item.IdJornada && q.IdCurso==item.IdCurso && q.IdParalelo==item.IdParalelo).ToList();
+                        List<aca_AnioLectivo_Paralelo_Profesor_Info> NuevaListaParaleloProfesor = nueva_lista_profesor.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdSede == item.IdSede && q.IdAnio == item.IdAnio
+                        && q.IdNivel == item.IdNivel && q.IdJornada == item.IdJornada && q.IdCurso == item.IdCurso && q.IdParalelo == item.IdParalelo).ToList();
 
                         odata_ParaleloProfesor.guardarDB(item.IdEmpresa, item.IdSede, item.IdAnio, item.IdNivel, item.IdJornada, item.IdCurso, item.IdParalelo, NuevaListaParaleloProfesor);
                     }

@@ -15,12 +15,12 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
 
-    @Html.DevExpress().GetStyleSheets(
+    @*@Html.DevExpress().GetStyleSheets(
         new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor }
     )
     @Html.DevExpress().GetScripts(
         new Script { ExtensionSuite = ExtensionSuite.HtmlEditor }
-    )
+    )*@
 
     if (ViewBag.mensaje != null)
     {
@@ -92,12 +92,12 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <label for="IdSucursal">Cuerpo*</label>
-                @Html.DevExpress().HtmlEditorFor(q => q.Cuerpo, settings =>
+                @*@Html.DevExpress().HtmlEditorFor(q => q.Cuerpo, settings =>
                {
                    settings.Name = "Cuerpo";
                    settings.ToolbarMode = HtmlEditorToolbarMode.Menu;
                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-               }).GetHtml()
+               }).GetHtml()*@
                  
                 @*@Html.Action("HtmlEditorPartial", Model)*@
 

@@ -79,12 +79,12 @@
     @Html.HiddenFor(q => q.modificado, new { @id = "modificado" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
          
-    @Html.DevExpress().GetStyleSheets(
+    @*@Html.DevExpress().GetStyleSheets(
         new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor }
     )
     @Html.DevExpress().GetScripts(
         new Script { ExtensionSuite = ExtensionSuite.HtmlEditor }
-    )
+    )*@
 
     if (ViewBag.mensaje != null)
     {
@@ -195,7 +195,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="Telefonos">Cuerpo</label>
-                                @Html.Action("HtmlEditorPartial", Model)
+                                @*@Html.Action("HtmlEditorPartial", Model)*@
                                 @Html.ValidationMessageFor(q => q.Cuerpo, "", new { @class = "text-danger" })
                             </div>
                         </div>
