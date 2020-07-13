@@ -18,11 +18,6 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="~/AdminLTE/dist/css/skins/skin-blue.min.css">
-    
-    @*EDITOR*@
-    <link rel="stylesheet" href="~/Content/PreviewCustomCss.css" />
-    <link rel="stylesheet" href="~/Content/CustomCss.css" />
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -66,7 +61,6 @@
 <body class="fixed skin-blue layout-top-nav">
     <div class="wrapper">
         <header class="main-header">
-
             <nav class="navbar navbar-inverse navbar-static-top" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; padding: 0 15px; height: 50px; font-size: 25px;line-height: 50px; font-weight: 300;">
                 <div class="container">
                     <a class="navbar-brand text-center center-block" href="#myModal" data-toggle="modal">
@@ -74,9 +68,7 @@
                     </a>
                 </div>
             </nav>
-
             <!-- Logo -->
-
 
         </header>
         <!-- =============================================== -->
@@ -105,14 +97,13 @@
                                         <a class="btn btn-primary" href="@Url.Action("Consulta","ReportePorUsuario",new { Area = "Academico" },null)">Reportes</a>
                                         <a class="btn btn-default glyphicon glyphicon-expand" href="@Url.Action("Index","VisorDeVideoAcademico",new { Area = "General"},null)"></a>
                                     </div>
-
                                     <div class="modal-body">
                                         @Html.DevExpress().TreeView(settings =>
                                    {
                                        settings.Name = "treeViewMenu";
                                        settings.EnableHotTrack = true;
                                        var Nodes = new List<Core.Info.Academico.aca_Menu_x_seg_usuario_Info>();
-                                       Core.Web.Areas.Academico.Controllers.MenuPorSedePorUsuarioController.CreateTreeViewNodesRecursive(Nodes, settings.Nodes, 0, (Core.Web.Helps.SessionFixed.IdEmpresa == null ? 0 : Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa)), (Core.Web.Helps.SessionFixed.IdSede == null ? 0 : Convert.ToInt32(Core.Web.Helps.SessionFixed.IdSede)), string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) ? "" : Core.Web.Helps.SessionFixed.IdUsuario);                                      
+                                       Core.Web.Areas.Academico.Controllers.MenuPorSedePorUsuarioController.CreateTreeViewNodesRecursive(Nodes, settings.Nodes, 0, (Core.Web.Helps.SessionFixed.IdEmpresa == null ? 0 : Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa)), (Core.Web.Helps.SessionFixed.IdSede == null ? 0 : Convert.ToInt32(Core.Web.Helps.SessionFixed.IdSede)), string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) ? "" : Core.Web.Helps.SessionFixed.IdUsuario);
                                    }).GetHtml()
                                     </div>
                                     <div class="modal-footer">
@@ -120,7 +111,6 @@
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                         @RenderBody()
@@ -145,8 +135,6 @@
              immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
     </div>
-
     <!-- ./wrapper -->
-
 </body>
 </html>
