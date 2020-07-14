@@ -110,6 +110,30 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pa_IdTipoCbteCble_CxC">Tipo de nota de pago anticipado</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoNotaPagoAnticipado, settings =>
+                            {
+                                settings.Name = "IdTipoNotaPagoAnticipado";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdTipoNota", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                settings.Properties.Columns.Add("No_Descripcion", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdTipoNota";
+                                settings.Properties.ValueType = typeof(int);
+                                settings.Properties.TextField = "No_Descripcion";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            }).BindList(ViewBag.lst_tipo_nota_pago_anticipado).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoNotaPagoAnticipado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="DiasTransaccionesAFuturo">Dias máximos para transacciones a futuro</label>

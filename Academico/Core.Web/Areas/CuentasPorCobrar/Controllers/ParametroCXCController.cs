@@ -68,6 +68,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             
             var lst_tipo_nota_credito = bus_tiponota.get_list(IdEmpresa, "C", false);
             ViewBag.lst_tipo_nota_credito = lst_tipo_nota_credito;
+
+            var lst_tipo_nota_pago_anticipado = bus_tiponota.get_list(IdEmpresa, "C", false);
+            ViewBag.lst_tipo_nota_pago_anticipado = lst_tipo_nota_pago_anticipado;
         }
 
         #endregion

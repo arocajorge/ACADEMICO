@@ -170,6 +170,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
         private bool validar(cxc_cobro_Info i_validar, ref string msg)
         {
+            var cxc_Parametro = bus_param_cxc.get_info(i_validar.IdEmpresa);
             var familia = bus_familia.GetInfo_Representante(i_validar.IdEmpresa, i_validar.IdAlumno ?? 0, "ECON");
             if (familia == null)
             {
@@ -195,12 +196,14 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 msg = "El valor aplicado a los documentos es mayor al total a cobrar";
                 return false;
             }
+
             i_validar.lst_det = list_det.get_list(i_validar.IdTransaccionSession);
             if (i_validar.lst_det.Count == 0 && i_validar.cr_saldo == 0)
             {
                 msg = "No ha seleccionado documentos para realizar la cobranza";
                 return false;
             }
+
             if (i_validar.lst_det.Where(q => q.dc_ValorPago == 0).Count() > 0)
             {
                 msg = "Existen documentos con valor aplicado 0";
@@ -230,17 +233,21 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             if (i_validar.lst_det.Count == 0 && i_validar.cr_saldo > 0)
             {
-                if (i_validar.IdTipoNotaCredito == null)
-                {
-                    msg = "Debe ingresar el tipo de nota de crédito a aplicar para el saldo";
-                    return false;
-                }
+                i_validar.IdTipoNotaCredito = cxc_Parametro.IdTipoNotaPagoAnticipado;
+
+                //if (i_validar.IdTipoNotaCredito == null)
+                //{
+                //    msg = "Debe ingresar el tipo de nota de crédito a aplicar para el saldo";
+                //    return false;
+                //}
+
                 if (bus_det.get_list_cartera(i_validar.IdEmpresa,i_validar.IdSucursal,i_validar.IdAlumno ?? 0,false).Count > 0)
                 {
                     msg = "No puede realizar un cobro sin documentos cuando el estudiante tiene documentos por cobrar";
                     return false;
                 }
             }
+
             if (i_validar.lst_det.Count > 0 && i_validar.cr_saldo > 0)
             {
                 msg = "Tiene un excedente de "+ i_validar.cr_saldo.ToString("c2")+", por favor cree un nuevo cobro para el excedente";

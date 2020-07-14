@@ -27,7 +27,8 @@ namespace Core.Data.CuentasPorCobrar
                         pa_IdTipoMoviCaja_x_Cobros_x_cliente = Entity.pa_IdTipoMoviCaja_x_Cobros_x_cliente,
                         IdTipoNotaProntoPago = Entity.IdTipoNotaProntoPago,
                         DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo,
-                        IdTipoCbte_ConciliacionNC = Entity.IdTipoCbte_ConciliacionNC
+                        IdTipoCbte_ConciliacionNC = Entity.IdTipoCbte_ConciliacionNC,
+                        IdTipoNotaPagoAnticipado = Entity.IdTipoNotaPagoAnticipado
                     };
                 }
                 return info;
@@ -57,6 +58,7 @@ namespace Core.Data.CuentasPorCobrar
                             IdTipoNotaProntoPago = info.IdTipoNotaProntoPago,
                             DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo,
                             IdTipoCbte_ConciliacionNC = info.IdTipoCbte_ConciliacionNC,
+                            IdTipoNotaPagoAnticipado = info.IdTipoNotaPagoAnticipado,
                             IdUsuario = info.IdUsuario,
                             FechaTransac = DateTime.Now
                         };
@@ -70,6 +72,7 @@ namespace Core.Data.CuentasPorCobrar
                         Entity.IdTipoNotaProntoPago = info.IdTipoNotaProntoPago;
                         Entity.DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo;
                         Entity.IdTipoCbte_ConciliacionNC = info.IdTipoCbte_ConciliacionNC;
+                        Entity.IdTipoNotaPagoAnticipado = info.IdTipoNotaPagoAnticipado;
                         Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                         Entity.FechaUltMod = DateTime.Now;
                     }

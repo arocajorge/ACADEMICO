@@ -52,12 +52,12 @@
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_ConciliacionNotaCredito_cxc_cobro" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_ConciliacionNotaCreditoDet_cxc_ConciliacionNotaCredito" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cartera_cobrada_saldo0" Width="1.5" PointX="19.375" PointY="0.75" />
-        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_Parametro" Width="1.5" PointX="11.375" PointY="15.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_CobroMasivo" Width="1.5" PointX="5.25" PointY="26.875" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_CobroMasivoDet" Width="1.5" PointX="10.875" PointY="20.875" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_CobroMasivoDet" Width="1.5" PointX="0.75" PointY="20.75" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_CobroMasivoDet_cxc_cobro" />
         <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_CobroMasivoDet_cxc_CobroMasivo" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_Parametro" Width="1.5" PointX="11.375" PointY="15.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
