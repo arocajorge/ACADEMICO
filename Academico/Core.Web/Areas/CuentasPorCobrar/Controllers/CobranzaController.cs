@@ -170,7 +170,6 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
         private bool validar(cxc_cobro_Info i_validar, ref string msg)
         {
-            var cxc_Parametro = bus_param_cxc.get_info(i_validar.IdEmpresa);
             var familia = bus_familia.GetInfo_Representante(i_validar.IdEmpresa, i_validar.IdAlumno ?? 0, "ECON");
             if (familia == null)
             {
@@ -233,13 +232,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             if (i_validar.lst_det.Count == 0 && i_validar.cr_saldo > 0)
             {
-                i_validar.IdTipoNotaCredito = cxc_Parametro.IdTipoNotaPagoAnticipado;
-
-                //if (i_validar.IdTipoNotaCredito == null)
-                //{
-                //    msg = "Debe ingresar el tipo de nota de crédito a aplicar para el saldo";
-                //    return false;
-                //}
+                if (i_validar.IdTipoNotaCredito == null)
+                {
+                    msg = "Debe ingresar el tipo de nota de crédito a aplicar para el saldo";
+                    return false;
+                }
 
                 if (bus_det.get_list_cartera(i_validar.IdEmpresa,i_validar.IdSucursal,i_validar.IdAlumno ?? 0,false).Count > 0)
                 {
@@ -427,7 +424,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 cr_fecha = DateTime.Now.Date,
                 IdCobro_tipo = "EFEC",
                 lst_det = new List<cxc_cobro_det_Info>(),
-                IdTipoNotaCredito = paramCxc.IdTipoNotaProntoPago
+                IdTipoNotaCredito = paramCxc.IdTipoNotaPagoAnticipado
             };
             list_det.set_list(new List<cxc_cobro_det_Info>(), model.IdTransaccionSession);
             List_x_Cruzar.set_list(new List<cxc_cobro_det_Info>(), model.IdTransaccionSession);
