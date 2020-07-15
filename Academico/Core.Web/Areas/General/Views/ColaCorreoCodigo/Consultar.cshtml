@@ -15,13 +15,6 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa)
 
-    @*@Html.DevExpress().GetStyleSheets(
-        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor }
-    )
-    @Html.DevExpress().GetScripts(
-        new Script { ExtensionSuite = ExtensionSuite.HtmlEditor }
-    )*@
-
     if (ViewBag.mensaje != null)
     {
         <div class="row">
@@ -92,7 +85,7 @@
         <div class="col-md-12">
             <div class="col-md-12">
                 <label for="IdSucursal">Cuerpo*</label>
-                @*@Html.Action("HtmlEditorPartial", Model)*@
+                @Html.Action("HtmlEditorPartial", Model)
 
             </div>
         </div>

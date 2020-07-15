@@ -1,10 +1,18 @@
 @using System.Web.UI.WebControls;
+@using Core.Web.Areas.General.Controllers;
+
 @Html.DevExpress().HtmlEditor(settings => {
     settings.Name = "Cuerpo";
     settings.CallbackRouteValues = new { Controller = "CorreoMasivo", Action = "HtmlEditorPartial" };
     settings.Width = Unit.Percentage(100);
     settings.ToolbarMode = HtmlEditorToolbarMode.Menu;
-    settings.Html = (Model == null ? "" : (Model.Cuerpo == null ? "" : Model.Cuerpo));
     settings.CssFiles.Add("~/Content/CustomCss.css");
+    settings.SettingsDialogs.InsertImageDialog.SettingsImageUpload.UploadCallbackRouteValues = new { Controller = "CorreoMasivo", Action = "HtmlEditorPartialImageUpload" };
+    settings.SettingsDialogs.InsertImageDialog.SettingsImageUpload.UploadFolder = CorreoMasivoControllerHtmlEditorSettings.ImageUploadDirectory;
+    settings.SettingsDialogs.InsertImageDialog.SettingsImageUpload.ValidationSettings.Assign(CorreoMasivoControllerHtmlEditorSettings.ImageUploadValidationSettings);
+
+
+    settings.SettingsDialogs.InsertImageDialog.SettingsImageSelector.Assign(CorreoMasivoControllerHtmlEditorSettings.ImageSelectorSettings);
+    settings.Html = (Model == null ? "" : (Model.Cuerpo == null ? "" : Model.Cuerpo));
 
 }).GetHtml()

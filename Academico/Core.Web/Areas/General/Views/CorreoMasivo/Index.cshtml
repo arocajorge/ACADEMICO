@@ -56,14 +56,14 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 if (data == "") {
-                    //setTimeout(function () { $("#ModalBloqueo").modal("hide"); }, 2000);
+                    setTimeout(function () { $("#ModalBloqueo").modal("hide"); }, 2000);
                     var url = '@Url.Action("Index", "CorreoMasivo")';
                     window.location.href = url;
                 }
                 else {
                     $("#MensajeError").show();
                     $("#Mensaje").html(data);
-                    //$("#ModalBloqueo").modal("hide");
+                    $("#ModalBloqueo").modal("hide");
                     $("#btn_guardar").prop("disabled", false);
                 }
             },
@@ -79,13 +79,6 @@
     @Html.HiddenFor(q => q.modificado, new { @id = "modificado" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
          
-    @*@Html.DevExpress().GetStyleSheets(
-        new StyleSheet { ExtensionSuite = ExtensionSuite.HtmlEditor }
-    )
-    @Html.DevExpress().GetScripts(
-        new Script { ExtensionSuite = ExtensionSuite.HtmlEditor }
-    )*@
-
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -195,7 +188,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="Telefonos">Cuerpo</label>
-                                @*@Html.Action("HtmlEditorPartial", Model)*@
+                                @Html.Action("HtmlEditorPartial", Model)
                                 @Html.ValidationMessageFor(q => q.Cuerpo, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -217,7 +210,7 @@
     </div>
     <div class="box-footer">
         @*<button type="submit" class="btn btn-primary">Guardar</button>*@
-        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
+        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="bloquear();">Guardar</button>
         <a class="btn btn-default" href="@Url.Action("Index", "CorreoMasivo", new { Area = "General" }, null)">Cancelar</a>
     </div>
     @section Scripts {

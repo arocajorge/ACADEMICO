@@ -120,6 +120,16 @@ namespace Core.Web.Areas.General.Controllers
         {
             return PartialView("_HtmlEditorPartial", model);
         }
+        public ActionResult HtmlEditorPartialImageSelectorUpload()
+        {
+            HtmlEditorExtension.SaveUploadedImage("HtmlEditorPartial", CorreoMasivoControllerHtmlEditorSettings.ImageSelectorSettings);
+            return null;
+        }
+        public ActionResult HtmlEditorPartialImageUpload()
+        {
+            HtmlEditorExtension.SaveUploadedFile("HtmlEditorPartial", CorreoMasivoControllerHtmlEditorSettings.ImageUploadValidationSettings, ColaCorreoCodigoControllerHtmlEditorSettings1.ImageUploadDirectory);
+            return null;
+        }
         #endregion
 
         #region TreeList
@@ -204,7 +214,7 @@ namespace Core.Web.Areas.General.Controllers
                     foreach (var item1 in lstAlumnosPorParalelos)
                     {
                         var CorreoXAlumno = lstAlumnosPorParalelos.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == item1.IdAlumno).FirstOrDefault();
-                        var Destinatarios = (RepLegal == true ? (CorreoXAlumno == null ? "" : CorreoXAlumno.CorreoRepLegal + ";") : "") + (RepEconomico == true ? (CorreoXAlumno == null ? "" : CorreoXAlumno.correoRepEconomico + ";") : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
+                        var Destinatarios = (RepLegal == true ? (CorreoXAlumno == null ? "" : (string.IsNullOrEmpty(CorreoXAlumno.CorreoRepLegal) ? "" : CorreoXAlumno.CorreoRepLegal + ";") ) : "")  + (RepEconomico == true ? (CorreoXAlumno == null ? "" : (string.IsNullOrEmpty(CorreoXAlumno.correoRepEconomico) ? "" : CorreoXAlumno.correoRepEconomico + ";")) : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
 
                         var info = new tb_ColaCorreo_Info
                         {
@@ -226,7 +236,7 @@ namespace Core.Web.Areas.General.Controllers
                 if (IdAlumno > 0)
                 {
                     var CorreosAlumno = List_AlumnosPeriodoActual.get_list(IdTransaccionSession).Where(q => q.IdAlumno == IdAlumno).FirstOrDefault();
-                    var DestinatarioAlumno = (RepLegal == true ? (CorreosAlumno == null ? "" : CorreosAlumno.CorreoRepLegal + ";") : "") + (RepEconomico == true ? (CorreosAlumno == null ? "" : CorreosAlumno.correoRepEconomico + ";") : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
+                    var DestinatarioAlumno = (RepLegal == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.CorreoRepLegal) ? "" : CorreosAlumno.CorreoRepLegal + ";")) : "") + (RepEconomico == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.correoRepEconomico) ? "" : CorreosAlumno.correoRepEconomico + ";")) : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
                     var info = new tb_ColaCorreo_Info
                     {
                         IdEmpresa = IdEmpresa,
@@ -251,7 +261,36 @@ namespace Core.Web.Areas.General.Controllers
     }
 
 
+    public class CorreoMasivoControllerHtmlEditorSettings
+    {
+        public const string ImageUploadDirectory = "~/Content/imagenes/correos/";
+        public const string ImageSelectorThumbnailDirectory = "~/Content/Thumb/";
 
+        public static DevExpress.Web.UploadControlValidationSettings ImageUploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".jpe", ".gif", ".png" },
+            MaxFileSize = 4000000
+        };
+
+        static DevExpress.Web.Mvc.MVCxHtmlEditorImageSelectorSettings imageSelectorSettings;
+        public static DevExpress.Web.Mvc.MVCxHtmlEditorImageSelectorSettings ImageSelectorSettings
+        {
+            get
+            {
+                if (imageSelectorSettings == null)
+                {
+                    imageSelectorSettings = new DevExpress.Web.Mvc.MVCxHtmlEditorImageSelectorSettings(null);
+                    imageSelectorSettings.Enabled = true;
+                    imageSelectorSettings.UploadCallbackRouteValues = new { Controller = "CorreoMasivo", Action = "HtmlEditorPartialImageSelectorUpload" };
+                    imageSelectorSettings.CommonSettings.RootFolder = ImageUploadDirectory;
+                    imageSelectorSettings.CommonSettings.ThumbnailFolder = ImageSelectorThumbnailDirectory;
+                    imageSelectorSettings.CommonSettings.AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".jpe", ".gif" };
+                    imageSelectorSettings.UploadSettings.Enabled = true;
+                }
+                return imageSelectorSettings;
+            }
+        }
+    }
     public class TreeList_List
     {
         string Variable = "TreeList_Info";
