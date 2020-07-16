@@ -454,7 +454,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         Repetido = (ExisteRepetido > 0 ? true : false);
 
                         var lst_AlumnoCartertaXCobrar = bus_cobro_det.get_list_cartera_x_alumno(IdEmpresa, IdSucursal, (info_alumno == null ? 0 : info_alumno.IdAlumno)).ToList();
-                        double ValorCxC = Convert.ToDouble(lst_AlumnoCartertaXCobrar == null ? 0 : lst_AlumnoCartertaXCobrar.Sum(q => q.ValorProntoPago - q.dc_ValorProntoPago));
+                        var ValorCxC = Math.Round((Convert.ToDouble(lst_AlumnoCartertaXCobrar == null ? 0 : lst_AlumnoCartertaXCobrar.Sum(q => q.ValorProntoPago - q.dc_ValorProntoPago))),2, MidpointRounding.AwayFromZero);
                         ValorIgual = (Valor == ValorCxC ? true : false);
 
                         var info_det = new cxc_CobroMasivoDet_Info
