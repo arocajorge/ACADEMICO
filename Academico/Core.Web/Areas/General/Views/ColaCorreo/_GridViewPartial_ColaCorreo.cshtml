@@ -66,8 +66,8 @@
 
         settings.Columns.Add("IdCorreo", "ID").Width = Unit.Percentage(5);
         settings.Columns.Add("Codigo", "Código").Width = Unit.Percentage(10);
-        settings.Columns.Add("Destinatarios", "Destinatarios").Width = Unit.Percentage(30);
-        settings.Columns.Add("Asunto", "Asunto").Width = Unit.Percentage(35);
+        settings.Columns.Add("Destinatarios", "Destinatarios").Width = Unit.Percentage(20);
+        settings.Columns.Add("Asunto", "Asunto").Width = Unit.Percentage(30);
         settings.Columns.Add(column =>
         {
             column.FieldName = "FechaEnvio";
@@ -75,7 +75,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
             column.Width = Unit.Percentage(10);
         });
-
+        settings.Columns.Add("Error", "Error").Width = Unit.Percentage(25);
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

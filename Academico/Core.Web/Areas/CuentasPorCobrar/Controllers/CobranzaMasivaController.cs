@@ -107,6 +107,78 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 return false;
             }
 
+            switch (info.IdCobro_tipo)
+            {
+                case "DEPO":
+                    if (info.IdBanco == null)
+                    {
+                        msg = "El campo cuenta bancaria es obligatorio para depositos";
+                        return false;
+                    }
+                    info.cr_Banco = null;
+                    info.IdTarjeta = null;
+                    info.cr_Tarjeta = null;
+                    break;
+                case "TARJ":
+                    if (info.IdTarjeta == null || string.IsNullOrEmpty(info.cr_Tarjeta))
+                    {
+                        msg = "El campo tarjeta de crédito es obligatorio";
+                        return false;
+                    }
+                    info.cr_Banco = null;
+                    info.IdBanco = null;
+                    break;
+                case "CHQF":
+                    if (string.IsNullOrEmpty(info.cr_Banco))
+                    {
+                        msg = "El campo banco es obligatorio para cheques";
+                        return false;
+                    }
+                    if (string.IsNullOrEmpty(info.cr_cuenta))
+                    {
+                        msg = "El campo cuenta es obligatorio para cheques";
+                        return false;
+                    }
+                    if (string.IsNullOrEmpty(info.cr_NumDocumento))
+                    {
+                        msg = "El campo # cheque es obligatorio para cheques";
+                        return false;
+                    }
+                    info.IdBanco = null;
+                    //i_validar.cr_Banco = null;
+                    info.IdTarjeta = null;
+                    info.cr_Tarjeta = null;
+                    break;
+
+                case "CHQV":
+                    if (string.IsNullOrEmpty(info.cr_Banco))
+                    {
+                        msg = "El campo banco es obligatorio para cheques";
+                        return false;
+                    }
+                    if (string.IsNullOrEmpty(info.cr_cuenta))
+                    {
+                        msg = "El campo cuenta es obligatorio para cheques";
+                        return false;
+                    }
+                    if (string.IsNullOrEmpty(info.cr_NumDocumento))
+                    {
+                        msg = "El campo # cheque es obligatorio para cheques";
+                        return false;
+                    }
+                    info.IdBanco = null;
+                    //i_validar.cr_Banco = null;
+                    info.IdTarjeta = null;
+                    info.cr_Tarjeta = null;
+                    break;
+                default:
+                    info.IdBanco = null;
+                    info.cr_Banco = null;
+                    info.IdTarjeta = null;
+                    info.cr_Tarjeta = null;
+                    break;
+            }
+
             if (info.lst_det.Count() == 0)
             {
                 msg = "Debe de ingresar al menos 1 item válido en el detalle";

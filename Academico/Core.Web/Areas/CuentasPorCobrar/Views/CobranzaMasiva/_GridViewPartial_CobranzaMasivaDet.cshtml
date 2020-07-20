@@ -149,7 +149,8 @@
             column.Width = Unit.Percentage(30);
             column.VisibleIndex = 6;
         });
-
+        settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Valor").DisplayFormat = "Total: {0:n2}";
+        settings.Settings.ShowFooter = true;
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }
