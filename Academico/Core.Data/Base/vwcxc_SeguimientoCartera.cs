@@ -12,12 +12,15 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_ColaCorreoCodigo
+    public partial class vwcxc_SeguimientoCartera
     {
         public int IdEmpresa { get; set; }
+        public int IdSeguimiento { get; set; }
+        public decimal IdAlumno { get; set; }
         public string Codigo { get; set; }
-        public string Asunto { get; set; }
-        public string Cuerpo { get; set; }
-        public Nullable<bool> ApareceSeguimientoCobranza { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public System.DateTime Fecha { get; set; }
+        public string Observacion { get; set; }
+        public bool Estado { get; set; }
     }
 }

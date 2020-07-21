@@ -1,0 +1,71 @@
+@{
+    var treeList = Html.DevExpress().TreeList(settings =>
+    {
+        settings.Name = "aca_AnioLectivo_ParaleloTreeList";
+        settings.CallbackRouteValues = new { Controller = "CorreoMasivoCobranza", Action = "aca_AnioLectivo_ParaleloTreeList", IdEmpresa = ViewBag.IdEmpresa, IdAnio = ViewBag.IdAnio };
+        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+        settings.KeyFieldName = "IdString";
+        settings.ParentFieldName = "IdStringPadre";
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdString";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(20);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "*";
+            column.FieldName = "Seleccionado";
+            column.ColumnType = MVCxTreeListColumnType.CheckBox;
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(5);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Descripción";
+            column.FieldName = "Descripcion";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(80);
+        });
+
+        settings.SettingsCookies.StoreSelection = true;
+        settings.Settings.GridLines = System.Web.UI.WebControls.GridLines.Both;
+        settings.SettingsPager.Visible = true;
+        settings.SettingsSelection.Enabled = true;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowFilterRowMenu = true;
+        settings.SettingsSelection.Recursive = true;
+        settings.SettingsSelection.AllowSelectAll = true;
+        settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
+        settings.DataBound = (s, e) =>
+        {
+            MVCxTreeList tree = s as MVCxTreeList;
+            string bId = ViewData["selectedIDs"] == null ? "" : ViewData["selectedIDs"].ToString();//I have a bId truly
+            if (tree.Nodes.Count == 0) return;
+            if (tree.Nodes[0] == null) return;
+            if (string.IsNullOrEmpty(bId))
+                return;
+            TreeListNodeIterator iterator = tree.CreateNodeIterator();
+            TreeListNode node = iterator.Current;
+            tree.SelectAll();
+            string[] array = ViewData["selectedIDs"].ToString().Split(',');
+            int index = 0;
+            while (node != null)
+            {
+                if (node["IdString"] != null)
+                {
+                    if (!string.IsNullOrEmpty(array.FirstOrDefault(q => q == node["IdString"].ToString())))
+                    {
+                        node.Selected = Convert.ToBoolean(node["Seleccionado"]);
+                    }
+                    else
+                        node.Selected = false;
+                }
+
+                index++;
+                node = iterator.GetNext();
+            }
+        };
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+    });
+}
+
+@treeList.Bind(Model).GetHtml()

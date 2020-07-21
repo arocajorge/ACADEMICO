@@ -19,5 +19,6 @@ namespace Core.Info.General
         public string Asunto { get; set; }
         [Required(ErrorMessage = "El campo cuerpo es obligatorio")]
         public string Cuerpo { get; set; }
+        public Nullable<bool> ApareceSeguimientoCobranza { get; set; }
     }
 }

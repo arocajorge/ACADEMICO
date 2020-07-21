@@ -144,6 +144,7 @@
           <Property Name="Codigo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Asunto" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="Cuerpo" Type="varchar(max)" Nullable="false" />
+          <Property Name="ApareceSeguimientoCobranza" Type="bit" />
         </EntityType>
         <EntityType Name="tb_ColaCorreoParametros">
           <Key>
@@ -586,7 +587,7 @@
           <Property Name="FechaTransaccion" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_banco_procesos_bancarios_x_empresa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_banco_procesos_bancarios_x_empresa' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_banco_procesos_bancarios_x_empresa">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -612,7 +613,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_banco_procesos_banc
           <Property Name="Expr1" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_bodega_x_tb_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_bodega_x_tb_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_bodega_x_tb_sucursal">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -630,7 +631,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_bodega_x_tb_sucursa
           <Property Name="bo_Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_Ciudad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_Ciudad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_Ciudad">
           <Key>
             <PropertyRef Name="IdCiudad" />
@@ -648,7 +649,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_Ciudad' no tiene de
           <Property Name="IdProvincia" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_ciudad_id' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_ciudad_id' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_ciudad_id">
           <Key>
             <PropertyRef Name="IdCiudad" />
@@ -656,7 +657,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_ciudad_id' no tiene
           <Property Name="IdCiudad" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_pais' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_pais' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_pais">
           <Key>
             <PropertyRef Name="Nombre" />
@@ -665,7 +666,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_pais' no tiene defi
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_parroquia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_parroquia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_parroquia">
           <Key>
             <PropertyRef Name="IdParroquia" />
@@ -673,7 +674,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_parroquia' no tiene
           <Property Name="IdParroquia" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_provincia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwtb_provincia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_provincia">
           <Key>
             <PropertyRef Name="IdProvincia" />
@@ -681,7 +682,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwtb_provincia' no tiene
           <Property Name="IdProvincia" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwtb_bodega_x_sucursal' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwtb_bodega_x_sucursal">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2610,6 +2611,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <Property Name="Codigo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Asunto" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Cuerpo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ApareceSeguimientoCobranza" Type="Boolean" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3296,6 +3298,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.vwtb_bodega_x_sucursal' 
           <EntitySetMapping Name="tb_ColaCorreoCodigo">
             <EntityTypeMapping TypeName="ModelGeneral.tb_ColaCorreoCodigo">
               <MappingFragment StoreEntitySet="tb_ColaCorreoCodigo">
+                <ScalarProperty Name="ApareceSeguimientoCobranza" ColumnName="ApareceSeguimientoCobranza" />
                 <ScalarProperty Name="Cuerpo" ColumnName="Cuerpo" />
                 <ScalarProperty Name="Asunto" ColumnName="Asunto" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
