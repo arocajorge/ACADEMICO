@@ -111,6 +111,7 @@
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_SeguimientoCartera_Info.cs" />
     <Compile Include="Facturacion\fa_AplicacionMasivaDet_Info.cs" />
     <Compile Include="Facturacion\fa_AplicacionMasiva_Info.cs" />
     <Compile Include="Facturacion\fa_notaCreDeb_MasivaDet_Info.cs" />

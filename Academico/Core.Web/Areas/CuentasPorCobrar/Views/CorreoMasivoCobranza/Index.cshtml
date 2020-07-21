@@ -1,0 +1,243 @@
+﻿@using System.Web.UI.WebControls;
+@model Core.Info.General.tb_ColaCorreo_Info
+@{
+    ViewBag.Title = "Correo Masivo Cobranza";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
+    var selectedIDs;
+
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+    }
+    function OnSelectionChanged(s, e) {
+        $("#modificado").val("1");
+        s.GetSelectedNodeValues("IdString", GetSelectedNodeValuesCallback);
+    }
+    function GetSelectedNodeValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+    function bloquear() {
+        $("#ModalBloqueo").modal("show");
+        setTimeout(function () { guardar(); }, 2000);
+    }
+
+    function guardar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            Modificado: $("#modificado").val(),
+            IDs: selectedIDs,
+            IdAlumno : IdAlumno.GetValue(),
+            Copia: $("#Copia").val(),
+            Asunto: $("#Asunto").val(),
+            Cuerpo: Cuerpo.GetHtml(),
+            RepLegal: RepLegal.GetValue(),
+            RepEconomico: RepEconomico.GetValue(),
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+        }
+        $("#btn_guardar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("guardar", "CorreoMasivoCobranza", new { Area = "General" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == "") {
+                    setTimeout(function () { $("#ModalBloqueo").modal("hide"); }, 2000);
+                    var url = '@Url.Action("Index", "CorreoMasivo")';
+                    window.location.href = url;
+                }
+                else {
+                    $("#MensajeError").show();
+                    $("#Mensaje").html(data);
+                    $("#ModalBloqueo").modal("hide");
+                    $("#btn_guardar").prop("disabled", false);
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+@using (Html.BeginForm("Index", "CorreoMasivoCobranza", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdAnio, new { @id = "IdAnio" })
+    @Html.HiddenFor(q => q.modificado, new { @id = "modificado" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+         
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="ModalBloqueo" role="dialog" hidden>
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Procesando</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="align-content:center">
+                        <img src="~/AdminLTE/dist/img/loading.gif" style="align-content:center" width="100%" height="100%" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="MensajeError" hidden>
+        <div class="col-md-12">
+            <div class="alert alert-warning alert-dismissible">
+                <h4>
+                    <i class="icon fa fa-warning"></i> <label id="Mensaje"></label>
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Código</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.Codigo, settings =>
+                           {
+                               settings.Name = "Codigo";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("Codigo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                               settings.Properties.Columns.Add("Asunto", "Asunto").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                               //Campo ID
+                               settings.Properties.ValueField = "Codigo";
+                               settings.Properties.ValueType = typeof(string);
+                               settings.Properties.TextField = "Asunto";
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_codigo).GetHtml()
+                    @Html.ValidationMessageFor(q => q.Codigo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdCliente">Estudiante*</label>
+                    @Html.Partial("_CmbAlumno", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="bo_EsBodega"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.RepLegal, settings =>
+                        {
+                            settings.Name = "RepLegal";
+                            settings.Text = "Representante Legal";
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.RepLegal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="bo_EsBodega"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.RepEconomico, settings =>
+                        {
+                            settings.Name = "RepEconomico";
+                            settings.Text = "Representante Económico";
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.RepEconomico, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Tabs" role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_correo" aria-controls="general" role="tab" data-toggle="tab"><b>Datos del correo</b></a>
+            </li>
+            <li>
+                <a href="#tab_correo_masivo" aria-controls="otros" role="tab" data-toggle="tab"><b>Correo masivo</b></a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tab_correo">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Telefonos">Copia</label>
+                                @Html.TextBoxFor(q => q.Copia, new { @class = "form-control", @id = "Copia", @placeholder = "Separar correos con punto y coma. Ejemplo: correo1@gmail.com;correo2@gmail.com;" })
+                                @Html.ValidationMessageFor(q => q.Copia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Telefonos">Asunto</label>
+                                @Html.TextBoxFor(q => q.Asunto, new { @class = "form-control", @id = "Asunto" })
+                                @Html.ValidationMessageFor(q => q.Asunto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Telefonos">Cuerpo</label>
+                                @Html.Action("HtmlEditorPartial", Model)
+                                @Html.ValidationMessageFor(q => q.Cuerpo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tab_correo_masivo">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @Html.Action("aca_AnioLectivo_ParaleloTreeList", new { IdEmpresa = Model.IdEmpresa, IdAnio = Model.IdAnio })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="box-footer">
+        @*<button type="submit" class="btn btn-primary">Guardar</button>*@
+        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="bloquear();">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "CorreoMasivoCobranza", new { Area = "General" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    }

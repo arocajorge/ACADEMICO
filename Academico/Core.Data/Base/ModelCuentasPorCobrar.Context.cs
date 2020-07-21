@@ -60,5 +60,7 @@ namespace Core.Data.Base
         public virtual DbSet<vwcxc_CobroMasivoDet> vwcxc_CobroMasivoDet { get; set; }
         public virtual DbSet<cxc_Parametro> cxc_Parametro { get; set; }
         public virtual DbSet<cxc_CobroMasivo> cxc_CobroMasivo { get; set; }
+        public virtual DbSet<cxc_SeguimientoCartera> cxc_SeguimientoCartera { get; set; }
+        public virtual DbSet<vwcxc_SeguimientoCartera> vwcxc_SeguimientoCartera { get; set; }
     }
 }
