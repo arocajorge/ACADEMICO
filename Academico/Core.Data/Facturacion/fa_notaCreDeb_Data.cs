@@ -992,7 +992,7 @@ namespace Core.Data.Facturacion
                                     IdTipoCbte = diario.IdTipoCbte,
                                     IdCbteCble = diario.IdCbteCble,
                                     secuencia = secuencia++,
-                                    IdCtaCble = NCND.IdCtaCbleHaber,
+                                    IdCtaCble = NCND.IdCtaCbleDebe,
                                     dc_Observacion = NCND.vt_NumFactura,
                                     dc_Valor = Math.Round(item.Valor_Aplicado ?? 0, 2, MidpointRounding.AwayFromZero) * -1
                                 });
