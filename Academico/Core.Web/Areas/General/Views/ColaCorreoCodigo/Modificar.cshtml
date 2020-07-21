@@ -43,11 +43,26 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdSucursal">Código*</label>
-                    @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control", @readonly="readonly" })
+                    @Html.TextBoxFor(q => q.Codigo, new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(m => m.Codigo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="bo_EsBodega"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.ApareceSeguimientoCobranza, settings =>
+                                {
+                                    settings.Name = "ApareceSeguimientoCobranza";
+                                    settings.Text = "Aparece en Seguimiento Cobranza";
+                                }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.ApareceSeguimientoCobranza, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="IdSucursal">Asunto*</label>
                     @Html.TextBoxFor(q => q.Asunto, new { @class = "form-control" })

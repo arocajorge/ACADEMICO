@@ -56,6 +56,7 @@ namespace Core.Data.General
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         Codigo = Entity.Codigo,
+                        ApareceSeguimientoCobranza = Entity.ApareceSeguimientoCobranza,
                         Asunto = Entity.Asunto,
                         Cuerpo = Entity.Cuerpo
                     };
@@ -102,6 +103,7 @@ namespace Core.Data.General
                     {
                         IdEmpresa = info.IdEmpresa,
                         Codigo = info.Codigo,
+                        ApareceSeguimientoCobranza = (info.ApareceSeguimientoCobranza == null ? false : info.ApareceSeguimientoCobranza),
                         Asunto = info.Asunto,
                         Cuerpo = info.Cuerpo,
                     };
@@ -130,6 +132,7 @@ namespace Core.Data.General
 
                     Entity.Asunto = info.Asunto;
                     Entity.Cuerpo = info.Cuerpo;
+                    Entity.ApareceSeguimientoCobranza = (info.ApareceSeguimientoCobranza == null ? false : info.ApareceSeguimientoCobranza);
 
                     Context.SaveChanges();
                 }
