@@ -24,6 +24,7 @@ namespace Core.Data.Base
         public decimal IdCobroMasivo { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
+        public Nullable<double> Total { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

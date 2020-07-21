@@ -56,9 +56,9 @@ namespace Core.Data.Base
         public virtual DbSet<vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo> vwcxc_LiquidacionTarjeta_x_ba_TipoFlujo { get; set; }
         public virtual DbSet<cxc_ConciliacionNotaCredito> cxc_ConciliacionNotaCredito { get; set; }
         public virtual DbSet<vwcxc_cartera_cobrada_saldo0> vwcxc_cartera_cobrada_saldo0 { get; set; }
-        public virtual DbSet<cxc_CobroMasivo> cxc_CobroMasivo { get; set; }
         public virtual DbSet<cxc_CobroMasivoDet> cxc_CobroMasivoDet { get; set; }
         public virtual DbSet<vwcxc_CobroMasivoDet> vwcxc_CobroMasivoDet { get; set; }
         public virtual DbSet<cxc_Parametro> cxc_Parametro { get; set; }
+        public virtual DbSet<cxc_CobroMasivo> cxc_CobroMasivo { get; set; }
     }
 }

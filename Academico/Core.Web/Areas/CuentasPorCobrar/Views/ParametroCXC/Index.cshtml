@@ -134,6 +134,30 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pa_IdTipoCbteCble_CxC">Comprobante contable nota de crédito</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoCbte_ConciliacionNC, settings =>
+                            {
+                                settings.Name = "IdTipoCbte_ConciliacionNC";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdTipoCbte", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                settings.Properties.Columns.Add("tc_TipoCbte", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdTipoCbte";
+                                settings.Properties.ValueType = typeof(int);
+                                settings.Properties.TextField = "tc_TipoCbte";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            }).BindList(ViewBag.lst_tipo_comprobante).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdTipoCbte_ConciliacionNC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="DiasTransaccionesAFuturo">Dias máximos para transacciones a futuro</label>

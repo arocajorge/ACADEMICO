@@ -15,6 +15,7 @@ namespace Core.Info.CuentasPorCobrar
         [Required(ErrorMessage = "El campo fecha es obligatorio")]
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
+        public Nullable<double> Total { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

@@ -206,6 +206,7 @@
           <Property Name="IdCobroMasivo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Fecha" Type="datetime" Nullable="false" />
           <Property Name="Observacion" Type="varchar(max)" />
+          <Property Name="Total" Type="float" />
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
           <Property Name="FechaCreacion" Type="datetime" />
@@ -1553,18 +1554,18 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
             <End Role="cxc_ConciliacionNotaCreditoDet" EntitySet="cxc_ConciliacionNotaCreditoDet" />
           </AssociationSet>
           <EntitySet Name="vwcxc_cartera_cobrada_saldo0" EntityType="ModelCuentasPorCobrar.vwcxc_cartera_cobrada_saldo0" />
-          <EntitySet Name="cxc_CobroMasivo" EntityType="ModelCuentasPorCobrar.cxc_CobroMasivo" />
           <EntitySet Name="cxc_CobroMasivoDet" EntityType="ModelCuentasPorCobrar.cxc_CobroMasivoDet" />
           <EntitySet Name="vwcxc_CobroMasivoDet" EntityType="ModelCuentasPorCobrar.vwcxc_CobroMasivoDet" />
           <AssociationSet Name="FK_cxc_CobroMasivoDet_cxc_cobro" Association="ModelCuentasPorCobrar.FK_cxc_CobroMasivoDet_cxc_cobro">
             <End Role="cxc_cobro" EntitySet="cxc_cobro" />
             <End Role="cxc_CobroMasivoDet" EntitySet="cxc_CobroMasivoDet" />
           </AssociationSet>
+          <EntitySet Name="cxc_Parametro" EntityType="ModelCuentasPorCobrar.cxc_Parametro" />
+          <EntitySet Name="cxc_CobroMasivo" EntityType="ModelCuentasPorCobrar.cxc_CobroMasivo" />
           <AssociationSet Name="FK_cxc_CobroMasivoDet_cxc_CobroMasivo" Association="ModelCuentasPorCobrar.FK_cxc_CobroMasivoDet_cxc_CobroMasivo">
             <End Role="cxc_CobroMasivo" EntitySet="cxc_CobroMasivo" />
             <End Role="cxc_CobroMasivoDet" EntitySet="cxc_CobroMasivoDet" />
           </AssociationSet>
-          <EntitySet Name="cxc_Parametro" EntityType="ModelCuentasPorCobrar.cxc_Parametro" />
           </EntityContainer>
         <EntityType Name="cxc_Catalogo">
           <Key>
@@ -2550,25 +2551,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
           <Property Name="IdPuntoVta" Type="Int32" />
           <Property Name="dc_ValorPago" Type="Double" Nullable="false" />
         </EntityType>
-        <EntityType Name="cxc_CobroMasivo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdCobroMasivo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdCobroMasivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="cxc_CobroMasivoDet" Relationship="ModelCuentasPorCobrar.FK_cxc_CobroMasivoDet_cxc_CobroMasivo" FromRole="cxc_CobroMasivo" ToRole="cxc_CobroMasivoDet" />
-        </EntityType>
         <EntityType Name="cxc_CobroMasivoDet">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2623,20 +2605,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_cxc_CobroMasivoDet_cxc_CobroMasivo">
-          <End Type="ModelCuentasPorCobrar.cxc_CobroMasivo" Role="cxc_CobroMasivo" Multiplicity="1" />
-          <End Type="ModelCuentasPorCobrar.cxc_CobroMasivoDet" Role="cxc_CobroMasivoDet" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="cxc_CobroMasivo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCobroMasivo" />
-            </Principal>
-            <Dependent Role="cxc_CobroMasivoDet">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCobroMasivo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="cxc_Parametro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2654,6 +2622,40 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
           <Property Name="IdTipoNotaProntoPago" Type="Int32" />
           <Property Name="IdTipoNotaPagoAnticipado" Type="Int32" />
         </EntityType>
+        <EntityType Name="cxc_CobroMasivo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdCobroMasivo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdCobroMasivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Total" Type="Double" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cxc_CobroMasivoDet" Relationship="ModelCuentasPorCobrar.FK_cxc_CobroMasivoDet_cxc_CobroMasivo" FromRole="cxc_CobroMasivo" ToRole="cxc_CobroMasivoDet" />
+        </EntityType>
+        <Association Name="FK_cxc_CobroMasivoDet_cxc_CobroMasivo">
+          <End Type="ModelCuentasPorCobrar.cxc_CobroMasivo" Role="cxc_CobroMasivo" Multiplicity="1" />
+          <End Type="ModelCuentasPorCobrar.cxc_CobroMasivoDet" Role="cxc_CobroMasivoDet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cxc_CobroMasivo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCobroMasivo" />
+            </Principal>
+            <Dependent Role="cxc_CobroMasivoDet">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCobroMasivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3259,24 +3261,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="cxc_CobroMasivo">
-            <EntityTypeMapping TypeName="ModelCuentasPorCobrar.cxc_CobroMasivo">
-              <MappingFragment StoreEntitySet="cxc_CobroMasivo">
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="IdCobroMasivo" ColumnName="IdCobroMasivo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="cxc_CobroMasivoDet">
             <EntityTypeMapping TypeName="ModelCuentasPorCobrar.cxc_CobroMasivoDet">
               <MappingFragment StoreEntitySet="cxc_CobroMasivoDet">
@@ -3321,6 +3305,25 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
                 <ScalarProperty Name="pa_IdTipoCbteCble_CxC" ColumnName="pa_IdTipoCbteCble_CxC" />
                 <ScalarProperty Name="pa_IdTipoMoviCaja_x_Cobros_x_cliente" ColumnName="pa_IdTipoMoviCaja_x_Cobros_x_cliente" />
                 <ScalarProperty Name="pa_IdCaja_x_cobros_x_CXC" ColumnName="pa_IdCaja_x_cobros_x_CXC" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cxc_CobroMasivo">
+            <EntityTypeMapping TypeName="ModelCuentasPorCobrar.cxc_CobroMasivo">
+              <MappingFragment StoreEntitySet="cxc_CobroMasivo">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdCobroMasivo" ColumnName="IdCobroMasivo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

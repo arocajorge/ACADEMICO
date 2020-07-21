@@ -29,6 +29,7 @@ namespace Core.Data.CuentasPorCobrar
                             IdEmpresa = q.IdEmpresa,
                             IdCobroMasivo = q.IdCobroMasivo,
                             Fecha = q.Fecha,
+                            Total =q.Total,
                             Observacion = q.Observacion,
                             Estado = q.Estado
                         });
@@ -110,6 +111,7 @@ namespace Core.Data.CuentasPorCobrar
                         IdCobroMasivo = info.IdCobroMasivo = get_id(info.IdEmpresa),
                         Fecha = info.Fecha,
                         Observacion = info.Observacion,
+                        Total = info.Total,
                         Estado = info.Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now

@@ -284,8 +284,8 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario.ToString();
             var ListaDetalle = Lista_CobroMasivoDet.get_list(model.IdTransaccionSession);
-
             model.lst_det = ListaDetalle.ToList();
+            model.Total = model.lst_det.Sum(q=>q.Valor);
 
             if (!validar(model, ref mensaje))
             {
