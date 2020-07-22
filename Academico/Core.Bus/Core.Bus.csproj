@@ -300,6 +300,7 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_008_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_009_Bus.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_007_Resumen_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_001_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_002_Pendiente_Pago_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_002_Bus.cs" />

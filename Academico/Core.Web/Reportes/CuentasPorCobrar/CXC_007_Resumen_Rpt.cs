@@ -27,8 +27,8 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             DateTime fechaCorte = p_fechaCorte.Value == null ? DateTime.Now : Convert.ToDateTime(p_fechaCorte.Value);
 
-            CXC_007_Bus bus_rpt = new CXC_007_Bus();
-            List<CXC_007_Info> lst_rpt = bus_rpt.Get_list(IdEmpresa, fechaCorte);
+            CXC_007_Resumen_Bus bus_rpt = new CXC_007_Resumen_Bus();
+            List<CXC_007_Resumen_Info> lst_rpt = bus_rpt.GetList(IdEmpresa, fechaCorte);
             this.DataSource = lst_rpt;
         }
 
