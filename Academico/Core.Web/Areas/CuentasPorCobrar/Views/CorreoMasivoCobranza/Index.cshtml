@@ -38,6 +38,7 @@
             IDs: selectedIDs,
             IdAlumno : IdAlumno.GetValue(),
             Copia: $("#Copia").val(),
+            Codigo: Codigo.GetValue(),
             Asunto: $("#Asunto").val(),
             Cuerpo: Cuerpo.GetHtml(),
             RepLegal: RepLegal.GetValue(),
@@ -48,7 +49,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("guardar", "CorreoMasivoCobranza", new { Area = "General" })',
+            url: '@Url.Action("guardar", "CorreoMasivoCobranza", new { Area = "CuentasPorCobrar" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
@@ -57,7 +58,7 @@
             success: function (data) {
                 if (data == "") {
                     setTimeout(function () { $("#ModalBloqueo").modal("hide"); }, 2000);
-                    var url = '@Url.Action("Index", "CorreoMasivo")';
+                    var url = '@Url.Action("Index", "CorreoMasivoCobranza")';
                     window.location.href = url;
                 }
                 else {
@@ -140,7 +141,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdCliente">Estudiante*</label>
                     @Html.Partial("_CmbAlumno", Model.IdAlumno)

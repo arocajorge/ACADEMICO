@@ -29,6 +29,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         cxc_SeguimientoCartera_List Lista_Seguimiento = new cxc_SeguimientoCartera_List();
         cxc_SeguimientoCartera_x_Alumno_List Lista_Seguimiento_x_Alumno = new cxc_SeguimientoCartera_x_Alumno_List();
+        
         #endregion
 
         #region Combos bajo demanada
@@ -124,6 +125,12 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         #endregion
 
         #region Json
+        public JsonResult GetInfoAlumno(int IdEmpresa = 0, decimal IdAlumno = 0)
+        {
+            var info = bus_alumno.GetInfo_PeriodoActual(IdEmpresa, IdAlumno);
+
+            return Json(info, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetList_x_Alumno(decimal IdTransaccionSession = 0, int IdEmpresa = 0, decimal IdAlumno = 0)
         {
             var lst = bus_seguimiento.getList_x_Alumno(IdEmpresa, IdAlumno);
@@ -131,6 +138,19 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             Lista_Seguimiento_x_Alumno.set_list(lst, IdTransaccionSession);
 
             return Json(lst.Count, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Metodos
+        private bool validar(cxc_SeguimientoCartera_Info info, ref string msg)
+        {
+            if (info.IdAlumno==0)
+            {
+                msg = "Debe seleccionar al estudiante";
+                return false;
+            }
+
+            return true;
         }
         #endregion
 
@@ -166,6 +186,14 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             model.IdUsuarioCreacion = SessionFixed.IdUsuario.ToString();
             var ListaDetalle = Lista_Seguimiento_x_Alumno.get_list(model.IdTransaccionSession);
             model.lst_det = ListaDetalle.ToList();
+
+            if (!validar(model, ref mensaje))
+            {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                Lista_Seguimiento_x_Alumno.set_list(Lista_Seguimiento_x_Alumno.get_list(model.IdTransaccionSession), model.IdTransaccionSession);
+                ViewBag.mensaje = mensaje;
+                return View(model);
+            }
 
             if (!bus_seguimiento.guardarDB(model))
             {
@@ -203,7 +231,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.Modificar = info.Modificar;
             ViewBag.Anular = info.Anular;
             #endregion
-
+            var info_alumno = bus_alumno.GetInfo_PeriodoActual(model.IdEmpresa, model.IdAlumno);
+            model.DatosAcademicos = (info_alumno==null ? "" : (info_alumno.NomSede + " - " + info_alumno.NomJornada + " - " + info_alumno.NomNivel + " - " + info_alumno.NomCurso + " - " + info_alumno.NomParalelo));
+            model.RepLegal = (info_alumno == null ? "" : info_alumno.NomRepLegal);
+            model.RepEconomico = (info_alumno == null ? "" : info_alumno.NomRepEconomico);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
 
             if (Exito)
@@ -229,7 +260,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             if (!info.Anular)
                 return RedirectToAction("Index");
             #endregion
-
+            var info_alumno = bus_alumno.GetInfo_PeriodoActual(model.IdEmpresa, model.IdAlumno);
+            model.DatosAcademicos = (info_alumno == null ? "" : (info_alumno.NomSede + " - " + info_alumno.NomJornada + " - " + info_alumno.NomNivel + " - " + info_alumno.NomCurso + " - " + info_alumno.NomParalelo));
+            model.RepLegal = (info_alumno == null ? "" : info_alumno.NomRepLegal);
+            model.RepEconomico = (info_alumno == null ? "" : info_alumno.NomRepEconomico);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
 
             return View(model);

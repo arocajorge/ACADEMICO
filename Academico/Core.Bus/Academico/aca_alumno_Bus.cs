@@ -49,6 +49,17 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_Alumno_Info GetInfo_PeriodoActual(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.getInfo_PeriodoActual(IdEmpresa, IdAlumno);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<aca_Alumno_Info> GetList_PeriodoActual(int IdEmpresa, int IdAnio, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo)
         {
             try

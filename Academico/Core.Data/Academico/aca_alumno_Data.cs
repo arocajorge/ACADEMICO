@@ -106,6 +106,53 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_Alumno_Info getInfo_PeriodoActual(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                aca_Alumno_Info info = new aca_Alumno_Info();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var Entity = odata.vwaca_Alumno_PeriodoActual.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_Alumno_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAlumno = Entity.IdAlumno,
+                        Codigo = Entity.Codigo,
+                        pe_nombreCompleto = Entity.NombreAlumno,
+                        pe_cedulaRuc = Entity.pe_cedulaRuc,
+                        NomRepEconomico = Entity.NombreEmiteFactura,
+                        correoRepEconomico = Entity.CorreoEmiteFactura,
+                        TelefonoRepEconomico = Entity.CelularEmiteFactura,
+                        NomRepLegal = Entity.NombreRepresentante,
+                        CorreoRepLegal = Entity.CorreoRepresentante,
+                        TelefonoRepLegal = Entity.CelularRepresentante,
+                        IdSede = Entity.IdSede,
+                        IdJornada = Entity.IdJornada,
+                        IdNivel = Entity.IdNivel,
+                        IdCurso = Entity.IdCurso,
+                        IdParalelo = Entity.IdParalelo,
+                        NomSede = Entity.NomSede,
+                        NomJornada = Entity.NomJornada,
+                        NomNivel = Entity.NomNivel,
+                        NomCurso = Entity.NomCurso,
+                        NomParalelo = Entity.NomParalelo,
+                        
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_Alumno_Info> getList_PeriodoActual(int IdEmpresa, int IdAnio, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo)
         {
             try

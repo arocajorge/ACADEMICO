@@ -50,12 +50,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         #endregion
 
         #region Metodos
-
         private void cargar_combos()
         {
             var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            var lst_codigo = bus_correo_codigo.GetList(IdEmpresa);
+            var lst_codigo = bus_correo_codigo.GetList_Seguimiento(IdEmpresa);
             ViewBag.lst_codigo = lst_codigo;
         }
         #endregion
@@ -145,7 +144,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         #endregion
 
         #region Json
-        public JsonResult guardar(int IdEmpresa = 0, int Modificado = 0, string Ids = "", decimal IdAlumno = 0, string Copia = "", string Asunto = "", string Cuerpo = "", bool RepLegal = false, bool RepEconomico = false, string Codigo = "", decimal IdTransaccionSession = 0)
+        public JsonResult guardar(int IdEmpresa = 0, int Modificado = 0, string Ids = "", decimal IdAlumno = 0, string Copia = "", string Codigo = "", string Asunto = "", string Cuerpo = "", bool RepLegal = false, bool RepEconomico = false, decimal IdTransaccionSession = 0)
         {
             string[] array = Ids.Split(',');
             List<TreeList_Info> lista = new List<TreeList_Info>();
@@ -170,8 +169,28 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             var lstAlumnos = List_AlumnosPeriodoActual.get_list(IdTransaccionSession).ToList();
 
             var lstParalelos = lista.Where(q => q.IdString.Count() == 15).ToList();
+            var CodigoCorreo = "";
+            var AsuntoCorreo = "";
+            var CuerpoCorreo = "";
 
-            if (string.IsNullOrEmpty(Asunto) || string.IsNullOrEmpty(Cuerpo))
+            if (string.IsNullOrEmpty(Codigo))
+            {
+                CodigoCorreo = " ";
+                AsuntoCorreo = Asunto;
+                CuerpoCorreo = Cuerpo;
+            }
+            else
+            {
+                var info_correo = bus_correo_codigo.GetInfo(IdEmpresa, Codigo);
+                if (info_correo!=null)
+                {
+                    CodigoCorreo = info_correo.Codigo;
+                    AsuntoCorreo = info_correo.Asunto;
+                    CuerpoCorreo = info_correo.Cuerpo;
+                }
+            }
+
+            if (string.IsNullOrEmpty(AsuntoCorreo) || string.IsNullOrEmpty(CuerpoCorreo))
             {
                 mensaje = "Es obligatorio ingresar asunto y cuerpo del correo";
             }
@@ -204,11 +223,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                             var info = new tb_ColaCorreo_Info
                             {
                                 IdEmpresa = IdEmpresa,
-                                Asunto = Asunto,
-                                Cuerpo = Cuerpo,
+                                Asunto = AsuntoCorreo,
+                                Cuerpo = CuerpoCorreo,
                                 Destinatarios = Destinatarios,
-                                Codigo = Codigo,
-                                //Parametros = IdEmpresa.ToString() + ";" + IdSucursal.ToString() + ";" + IdBodega.ToString() + ";" + IdCbteVta.ToString(),
+                                Codigo = CodigoCorreo,
+                                Parametros = IdEmpresa.ToString() + ";" + item1.IdAlumno.ToString(),
                                 IdUsuarioCreacion = SessionFixed.IdUsuario
                             };
 
@@ -221,23 +240,29 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 }
                 if (IdAlumno > 0)
                 {
-                    var CorreosAlumno = List_AlumnosPeriodoActual.get_list(IdTransaccionSession).Where(q => q.IdAlumno == IdAlumno).FirstOrDefault();
-                    var DestinatarioAlumno = (RepLegal == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.CorreoRepLegal) ? "" : CorreosAlumno.CorreoRepLegal + ";")) : "") + (RepEconomico == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.correoRepEconomico) ? "" : CorreosAlumno.correoRepEconomico + ";")) : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
-                    var info = new tb_ColaCorreo_Info
-                    {
-                        IdEmpresa = IdEmpresa,
-                        Asunto = Asunto,
-                        Cuerpo = Cuerpo,
-                        Destinatarios = DestinatarioAlumno,
-                        Codigo = " ",
-                        Parametros = " ",
-                        IdUsuarioCreacion = SessionFixed.IdUsuario
-                    };
+                    var lst_cartera_x_cobrar = bus_cobro.get_list_deuda(IdEmpresa, IdAlumno);
 
-                    if (!bus_cola.GuardarDB(info))
+                    if (lst_cartera_x_cobrar.Count > 0)
                     {
-                        mensaje = "No se ha podido guardar el registro";
+                        var CorreosAlumno = List_AlumnosPeriodoActual.get_list(IdTransaccionSession).Where(q => q.IdAlumno == IdAlumno).FirstOrDefault();
+                        var DestinatarioAlumno = (RepLegal == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.CorreoRepLegal) ? "" : CorreosAlumno.CorreoRepLegal + ";")) : "") + (RepEconomico == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.correoRepEconomico) ? "" : CorreosAlumno.correoRepEconomico + ";")) : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
+                        var info = new tb_ColaCorreo_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            Asunto = AsuntoCorreo,
+                            Cuerpo = CuerpoCorreo,
+                            Destinatarios = DestinatarioAlumno,
+                            Codigo = CodigoCorreo,
+                            Parametros = IdEmpresa.ToString() + ";" + IdAlumno.ToString(),
+                            IdUsuarioCreacion = SessionFixed.IdUsuario
+                        };
+
+                        if (!bus_cola.GuardarDB(info))
+                        {
+                            mensaje = "No se ha podido guardar el registro";
+                        }
                     }
+                    
                 }
             }
 

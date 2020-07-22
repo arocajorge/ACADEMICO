@@ -31,6 +31,28 @@
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Datos académicos</label>
+                    @Html.TextBoxFor(q => q.DatosAcademicos, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdCliente">Representante legal</label>
+                    @Html.TextBoxFor(q => q.RepLegal, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdCliente">Representante económico</label>
+                    @Html.TextBoxFor(q => q.RepEconomico, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="pf_fecha">Fecha*</label>

@@ -31,6 +31,9 @@ namespace Core.Info.CuentasPorCobrar
         #region Campos que no existe en la tabla
         public string Codigo { get; set; }
         public string NombreAlumno { get; set; }
+        public string DatosAcademicos { get; set; }
+        public string RepLegal { get; set; }
+        public string RepEconomico { get; set; }
         public List<cxc_SeguimientoCartera_Info> lst_det { get; set; }
         #endregion
     }

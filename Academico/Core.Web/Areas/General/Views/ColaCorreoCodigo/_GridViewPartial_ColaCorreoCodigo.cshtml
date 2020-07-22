@@ -81,8 +81,18 @@
         });
 
         settings.Columns.Add("Codigo", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("Asunto", "Asunto").Width = Unit.Percentage(80);
+        settings.Columns.Add("Asunto", "Asunto").Width = Unit.Percentage(70);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "ApareceSeguimientoCobranza";
+            column.Caption = "Aparece en Seguimiento Cobranza";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
 
+            });
+        });
+        
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

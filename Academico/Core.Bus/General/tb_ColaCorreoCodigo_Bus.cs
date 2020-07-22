@@ -25,6 +25,19 @@ namespace Core.Bus.General
             }
         }
 
+        public List<tb_ColaCorreoCodigo_Info> GetList_Seguimiento(int IdEmpresa)
+        {
+            try
+            {
+                return odata.GetList_Seguimiento(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public tb_ColaCorreoCodigo_Info GetInfo(int IdEmpresa, string Codigo)
         {
             try

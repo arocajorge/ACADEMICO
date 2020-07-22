@@ -9,6 +9,29 @@
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script>
+    function GetInfoAlumno() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAlumno: IdAlumno.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetInfoAlumno", "SeguimientoCartera", new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#DatosAcademicos").val(data.NomSede + " - " + data.NomJornada + " - " + data.NomNivel + " - " + data.NomCurso + " - " + data.NomParalelo);
+                $("#RepLegal").val(data.NomRepLegal);
+                $("#RepEconomico").val(data.NomRepEconomico);
+            },
+            error: function (error) {
+            }
+        });
+    }
     function GetList_x_Alumno() {
         var datos = {
             IdTransaccionSession: $("#IdTransaccionSession").val(),
@@ -63,6 +86,28 @@
                     <label for="IdCliente">Estudiante*</label>
                     @Html.Partial("_CmbAlumnoSeguimiento", Model.IdAlumno)
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Datos académicos*</label>
+                    @Html.TextBoxFor(q => q.DatosAcademicos, new { @class = "form-control", @readonly="readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdCliente">Representante legal*</label>
+                    @Html.TextBoxFor(q => q.RepLegal, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdCliente">Representante económico*</label>
+                    @Html.TextBoxFor(q => q.RepEconomico, new { @class = "form-control", @readonly = "readonly" })
                 </div>
             </div>
             <div class="col-md-2">
