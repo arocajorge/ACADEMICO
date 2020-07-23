@@ -16,4 +16,4 @@
     settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdAnio'] = IdAnio.GetValue(); }";
     settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdNivel.PerformCallback(); IdJornada.PerformCallback(); IdCurso.PerformCallback(); IdParalelo.PerformCallback(); IdMateria.PerformCallback();}";
     //}).BindList(new Core.Bus.Academico.aca_Sede_Bus().GetList(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa),Model.IdAnio)).Bind(Model.IdSede).GetHtml()
-}).BindList(new Core.Web.Areas.Academico.Controllers.MatriculaCalificacionParcialController().CargarSede(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAnio)).Bind(Model.IdSede).GetHtml()
+}).BindList(new Core.Web.Areas.Academico.Controllers.MatriculaCalificacionExamenController().CargarSede(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa), Model.IdAnio)).Bind(Model.IdSede).GetHtml()
