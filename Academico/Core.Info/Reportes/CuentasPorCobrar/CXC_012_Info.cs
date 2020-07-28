@@ -29,5 +29,7 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public string NomParalelo { get; set; }
         public string CodigoParalelo { get; set; }
         public Nullable<int> OrdenParalelo { get; set; }
+
+        public int Num { get; set; }
     }
 }

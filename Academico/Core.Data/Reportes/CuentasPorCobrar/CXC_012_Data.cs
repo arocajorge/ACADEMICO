@@ -42,7 +42,8 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                             OrdenCurso=q.OrdenCurso,
                             OrdenParalelo=q.OrdenParalelo,
                             CodigoParalelo = q.CodigoParalelo,
-                            Fecha=q.Fecha
+                            Fecha=q.Fecha,
+                            Num=1
                         });
                     }
                 }
