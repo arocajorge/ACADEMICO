@@ -1,4 +1,5 @@
-﻿@model Core.Info.CuentasPorCobrar.cxc_SeguimientoCartera_Info
+﻿@using System.Web.UI.WebControls;
+@model Core.Info.CuentasPorCobrar.cxc_SeguimientoCartera_Info
 @{
     ViewBag.Title = "Nuevo seguimiento";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
@@ -25,8 +26,15 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $("#DatosAcademicos").val(data.NomSede + " - " + data.NomJornada + " - " + data.NomNivel + " - " + data.NomCurso + " - " + data.NomParalelo);
+                $("#IdMatricula").val(data.IdMatricula);
+                $("#Saldo").val(data.Saldo);
+                $("#SaldoProntoPago").val(data.SaldoProntoPago);
                 $("#RepLegal").val(data.NomRepLegal);
+                $("#TelefonoLegal").val(data.TelefonoRepLegal);
+                $("#CorreoLegal").val(data.CorreoRepLegal);
                 $("#RepEconomico").val(data.NomRepEconomico);
+                $("#TelefonoEconomico").val(data.TelefonoRepEconomico);
+                $("#CorreoEconomico").val(data.correoRepEconomico);
             },
             error: function (error) {
             }
@@ -54,11 +62,56 @@
             }
         });
     }
+
+    function nombre_imagen() {
+        var datos = {
+            IdSeguimiento: $("#IdSeguimiento").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("nombre_imagen", "SeguimientoCartera", new { Area = "CuentasPorCobrar" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+    }
+    function actualizar_div() {
+        var datos = {
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("actualizar_div", "SeguimientoCartera", new { Area = "CuentasPorCobrar" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+
+                //$("#uploadedImage").load();
+                //  $("#uploadedImage").attr("src",Url.Content(Core.Erp.Web.Helps.SessionFixed.NombreImagen));
+
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
 
 @using (Html.BeginForm("Nuevo", "SeguimientoCartera", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdMatricula, new { @id = "IdMatricula" })
+    @Html.HiddenFor(q => q.IdSeguimiento, new { @id = "IdSeguimiento" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     if (ViewBag.mensaje != null)
     {
@@ -88,29 +141,7 @@
                     @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdCliente">Datos académicos*</label>
-                    @Html.TextBoxFor(q => q.DatosAcademicos, new { @class = "form-control", @readonly="readonly" })
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label for="IdCliente">Representante legal*</label>
-                    @Html.TextBoxFor(q => q.RepLegal, new { @class = "form-control", @readonly = "readonly" })
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label for="IdCliente">Representante económico*</label>
-                    @Html.TextBoxFor(q => q.RepEconomico, new { @class = "form-control", @readonly = "readonly" })
-                </div>
-            </div>
-            <div class="col-md-2">
+            <div class="col-md-offset-4 col-md-2">
                 <div class="form-group">
                     <label for="pf_fecha">Fecha*</label>
                     <div class="input-group date">
@@ -134,11 +165,141 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Datos académicos</label>
+                    @Html.TextBoxFor(q => q.DatosAcademicos, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdCliente">Saldo</label>
+                    @Html.TextBoxFor(q => q.Saldo, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-offset-2 col-md-2">
+                <div class="form-group">
+                    <label for="IdCliente">Saldo Pronto Pago</label>
+                    @Html.TextBoxFor(q => q.SaldoProntoPago, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Representante legal</label>
+                    @Html.TextBoxFor(q => q.RepLegal, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdCliente">Teléfono</label>
+                    @Html.TextBoxFor(q => q.TelefonoLegal, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdCliente">Correo</label>
+                    @Html.TextBoxFor(q => q.CorreoLegal, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Representante económico</label>
+                    @Html.TextBoxFor(q => q.RepEconomico, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdCliente">Teléfono</label>
+                    @Html.TextBoxFor(q => q.TelefonoEconomico, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdCliente">Correo</label>
+                    @Html.TextBoxFor(q => q.CorreoEconomico, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="sc_observacion">Observación</label>
                     @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <script type="text/javascript">
+                    function onUploadControlFileUploadComplete(s, e) {
+                        if (e.isValid)
+                            // $("#uploadedImage").attr("src", e.callbackData);
+                            //actualizar_div();
+                            setElementVisible("uploadedImage", e.isValid);
+                    }
+                    function onImageLoad() {
+                        var externalDropZone = $("#externalDropZone");
+                        var uploadedImage = $("#uploadedImage");
+                        uploadedImage.css({
+                            left: (externalDropZone.width() - uploadedImage.width()) / 4,
+                            top: (externalDropZone.height() - uploadedImage.height()) / 4
+                        });
+                        setElementVisible("dragZone", false);
+                    }
+                    function setElementVisible(elementId, visible) {
+                        var el = $("#" + elementId);
+                        if (visible)
+                            el.show();
+                        else
+                            el.hide();
+                    }
+                </script>
+                <div class="uploadContainer">
+                    @Html.DevExpress().BinaryImage(
+                               settings =>
+                               {
+                                   settings.Name = "seguimiento_foto";
+                                   settings.CallbackRouteValues = new { Controller = "SeguimientoCartera", Action = "get_imagen_general" };
+                               }).Bind((Model.seguimiento_foto).ToArray()).GetHtml()
+
+                    @Html.DevExpress().UploadControl(settings =>
+                               {
+                                   settings.ShowProgressPanel = true;
+                                   settings.CallbackRouteValues = new { Controller = "SeguimientoCartera", Action = "DragAndDropImageUpload" };
+                                   settings.Name = "ucDragAndDrop";
+                                   settings.UploadMode = UploadControlUploadMode.Auto;
+                                   settings.AutoStartUpload = true;
+                                   settings.Width = Unit.Percentage(100);
+                                   settings.DialogTriggerID = "externalDropZone";
+                                   settings.AdvancedModeSettings.EnableDragAndDrop = true;
+                                   settings.AdvancedModeSettings.EnableFileList = false;
+                                   settings.AdvancedModeSettings.EnableMultiSelect = false;
+                                   settings.AdvancedModeSettings.ExternalDropZoneID = "externalDropZone";
+                                   settings.AdvancedModeSettings.DropZoneText = "";
+                                   settings.ValidationSettings.MaxFileSize = 4194304;
+                                   settings.ValidationSettings.AllowedFileExtensions = new string[] { ".jpg", ".jpeg", ".gif", ".png" };
+                                   settings.ValidationSettings.ErrorStyle.CssClass = "validationMessage";
+                                   settings.ClientSideEvents.FilesUploadStart = "function(s,e){nombre_imagen();}";
+
+                                   settings.Styles.DropZone.CssClass = "uploadControlDropZone";
+                                   settings.ClientSideEvents.DropZoneEnter = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', true); }";
+                                   settings.ClientSideEvents.DropZoneLeave = "function(s, e) { if(e.dropZone.id == 'externalDropZone') setElementVisible('dropZone', false); }";
+                                   settings.ClientSideEvents.FileUploadComplete = "onUploadControlFileUploadComplete";
+                               }).GetHtml()
                 </div>
             </div>
         </div>

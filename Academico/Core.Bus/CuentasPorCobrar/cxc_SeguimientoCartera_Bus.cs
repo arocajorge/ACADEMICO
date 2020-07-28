@@ -50,6 +50,19 @@ namespace Core.Bus.CuentasPorCobrar
             }
         }
 
+        public int getId(int IdEmpresa)
+        {
+            try
+            {
+                return odata.getId(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool guardarDB(cxc_SeguimientoCartera_Info info)
         {
             try
@@ -68,6 +81,19 @@ namespace Core.Bus.CuentasPorCobrar
             try
             {
                 return odata.anularDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool EnviarCorreoDB(cxc_SeguimientoCartera_Info info)
+        {
+            try
+            {
+                return odata.enviarcorreoDB(info);
             }
             catch (Exception)
             {

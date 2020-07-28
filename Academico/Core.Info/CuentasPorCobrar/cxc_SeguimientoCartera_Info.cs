@@ -12,6 +12,8 @@ namespace Core.Info.CuentasPorCobrar
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public int IdSeguimiento { get; set; }
+        public Nullable<decimal> IdMatricula { get; set; }
+        public bool CorreoEnviado { get; set; }
         [Required(ErrorMessage = "El campo estudiante es obligatorio")]
         public decimal IdAlumno { get; set; }
         [Required(ErrorMessage = "El campo fecha es obligatorio")]
@@ -33,7 +35,14 @@ namespace Core.Info.CuentasPorCobrar
         public string NombreAlumno { get; set; }
         public string DatosAcademicos { get; set; }
         public string RepLegal { get; set; }
+        public string TelefonoLegal { get; set; }
+        public string CorreoLegal { get; set; }
         public string RepEconomico { get; set; }
+        public string TelefonoEconomico { get; set; }
+        public string CorreoEconomico { get; set; }
+        public string Saldo { get; set; }
+        public string SaldoProntoPago { get; set; }
+        public byte[] seguimiento_foto { get; set; }
         public List<cxc_SeguimientoCartera_Info> lst_det { get; set; }
         #endregion
     }

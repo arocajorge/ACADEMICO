@@ -8926,6 +8926,7 @@
     <Folder Include="Areas\Reportes\Models\" />
     <Folder Include="Areas\SeguridadAcceso\Models\" />
     <Folder Include="Content\imagenes\correos\" />
+    <Folder Include="Content\imagenes\seguimiento\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -445,13 +445,17 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             if (i_validar.lst_cruce.Count()>0)
             {
-                var TotalCruce = i_validar.lst_cruce.Sum(q=>q.Valor_Aplicado);
-
-                if (Convert.ToDouble(i_validar.info_resumen.Total) != TotalCruce)
+                if (i_validar.lst_cruce.Where(q=> q.TieneSaldo0==false).Count()>0)
                 {
-                    msg = "El valor total de los documentos relacionados no es igual al valor de la nota de crédito";
-                    return false;
+                    var TotalCruce = i_validar.lst_cruce.Sum(q => q.Valor_Aplicado);
+
+                    if (Math.Round(Convert.ToDouble(i_validar.info_resumen.Total), 2, MidpointRounding.AwayFromZero) != Math.Round(TotalCruce, 2,MidpointRounding.AwayFromZero))
+                    {
+                        msg = "El valor total de los documentos relacionados no es igual al valor de la nota de crédito";
+                        return false;
+                    }
                 }
+                
             }
 
             if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.no_fecha, cl_enumeradores.eModulo.FAC, i_validar.IdSucursal, ref msg))

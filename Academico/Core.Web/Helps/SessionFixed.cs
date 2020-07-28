@@ -18,6 +18,7 @@ namespace Core.Web.Helps
         string IdTransaccionSession { get; set; }
         string IdTransaccionSessionActual { get; set; }
         string NombreImagenAlumno { get; set; }
+        string NombreImagenSeguimiento { get; set; }
         string NombreImagenProfesor { get; set; }
         string IdNivelDescuento { get; set; }
         string IdEntidad { get; set; }
@@ -109,6 +110,12 @@ namespace Core.Web.Helps
         {
             get { return _sessionValueProvider.NombreImagenAlumno; }
             set { _sessionValueProvider.NombreImagenAlumno = value; }
+        }
+
+        public static string NombreImagenSeguimiento
+        {
+            get { return _sessionValueProvider.NombreImagenSeguimiento; }
+            set { _sessionValueProvider.NombreImagenSeguimiento = value; }
         }
 
         public static string NombreImagenProfesor
@@ -204,6 +211,7 @@ namespace Core.Web.Helps
         private const string _IdTransaccionSession = "FxAca_IdTransaccionSesssion";
         private const string _IdTransaccionSessionActual = "FxAca_IdTransaccionSessionActual";
         private const string _NombreImagenAlumno = "FxAca_NombreImagenAlumno";
+        private const string _NombreImagenSeguimiento = "FxAca_NombreImagenSeguimiento";
         private const string _NombreImagenProfesor = "FxAca_NombreImagenProfesor";
         private const string _IdEntidad = "Fx_IdEntidadParam";
         private const string _IdNivelDescuento = "Fx_IdNivelDescuento";
@@ -273,6 +281,13 @@ namespace Core.Web.Helps
             get { return (string)HttpContext.Current.Session[_NombreImagenAlumno]; }
             set { HttpContext.Current.Session[_NombreImagenAlumno] = value; }
         }
+
+        public string NombreImagenSeguimiento
+        {
+            get { return (string)HttpContext.Current.Session[_NombreImagenSeguimiento]; }
+            set { HttpContext.Current.Session[_NombreImagenSeguimiento] = value; }
+        }
+
         public string NombreImagenProfesor
         {
             get { return (string)HttpContext.Current.Session[_NombreImagenProfesor]; }
