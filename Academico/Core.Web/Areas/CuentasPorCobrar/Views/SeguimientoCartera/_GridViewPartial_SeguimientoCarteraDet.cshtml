@@ -84,12 +84,22 @@
         {
             column.FieldName = "Observacion";
             column.Caption = "Observacion";
-            column.Width = Unit.Percentage(80);
+            column.Width = Unit.Percentage(70);
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "Estado";
             column.Caption = "Estado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CorreoEnviado";
+            column.Caption = "Enviado";
             column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
             column.EditorProperties().CheckBox(sp =>
             {

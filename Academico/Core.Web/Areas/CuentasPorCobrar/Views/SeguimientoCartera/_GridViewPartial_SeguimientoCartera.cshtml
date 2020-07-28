@@ -105,6 +105,33 @@
 
             });
         });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "CorreoEnviado";
+            column.Caption = "Enviado";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.EditorProperties().CheckBox(sp =>
+            {
+
+            });
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "";
+            column.FieldName = "";
+            column.Width = Unit.Percentage(10);
+            column.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            column.SetDataItemTemplateContent(c =>
+            {
+                Html.DevExpress().Button(settingsBtn =>
+                {
+                    settingsBtn.Name = "btn" + c.KeyValue;
+                    settingsBtn.Text = "Enviar";
+                    settingsBtn.ClientSideEvents.Click = "function(s, e) {EnviarCorreo('" + c.KeyValue + "');}";
+                }).Render();
+            });
+        });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

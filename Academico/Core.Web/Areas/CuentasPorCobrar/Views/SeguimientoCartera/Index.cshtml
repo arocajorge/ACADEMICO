@@ -9,7 +9,33 @@
 }
 
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-
+<script type="text/javascript">
+    function EnviarCorreo(IdSeguimiento) {
+        var datos = {
+            IdSeguimiento: IdSeguimiento
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("EnviarCorreo", "SeguimientoCartera", new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data!="") {
+                    alert(data);
+                    GridViewPartial_SeguimientoCartera.PerformCallback();
+                } else {
+                    alert("No se ha podido enviar el correo");
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
 @using (Html.BeginForm("Index", "SeguimientoCartera", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)

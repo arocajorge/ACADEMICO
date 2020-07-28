@@ -33,6 +33,8 @@ namespace Core.Data.CuentasPorCobrar
                             NombreAlumno = q.pe_nombreCompleto,
                             Fecha = q.Fecha,
                             Observacion = q.Observacion,
+                            CorreoEnviado = q.CorreoEnviado,
+                            IdMatricula = q.IdMatricula,
                             Estado = q.Estado
                         });
                     });
@@ -66,7 +68,9 @@ namespace Core.Data.CuentasPorCobrar
                             IdAlumno = q.IdAlumno,
                             Fecha = q.Fecha,
                             Observacion = q.Observacion,
-                            Estado = q.Estado
+                            Estado = q.Estado,
+                            IdMatricula = q.IdMatricula,
+                            CorreoEnviado = q.CorreoEnviado
                         });
                     });
                 }
@@ -140,6 +144,8 @@ namespace Core.Data.CuentasPorCobrar
                         IdEmpresa = info.IdEmpresa,
                         IdSeguimiento = info.IdSeguimiento = getId(info.IdEmpresa),
                         IdAlumno = info.IdAlumno,
+                        IdMatricula = ((info.IdMatricula==null || info.IdMatricula==0) ? null : info.IdMatricula),
+                        CorreoEnviado = false,
                         Fecha = info.Fecha,
                         Observacion = info.Observacion,
                         Estado = true,
@@ -173,6 +179,32 @@ namespace Core.Data.CuentasPorCobrar
                     Entity.MotivoAnulacion = info.MotivoAnulacion;
                     Entity.IdUsuarioAnulacion = info.IdUsuarioAnulacion;
                     Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool enviarcorreoDB(cxc_SeguimientoCartera_Info info)
+        {
+            try
+            {
+                using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
+                {
+                    cxc_SeguimientoCartera Entity = Context.cxc_SeguimientoCartera.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSeguimiento == info.IdSeguimiento);
+                    if (Entity == null)
+                        return false;
+
+                    Entity.CorreoEnviado = info.CorreoEnviado = true;
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
+
                     Context.SaveChanges();
                 }
 

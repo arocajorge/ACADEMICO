@@ -53,6 +53,20 @@
         settings.Columns.Add("IdAlumno", "ID").Width = Unit.Pixel(100);
         settings.Columns.Add("Codigo", "Codigo").Width = Unit.Pixel(100);
         settings.Columns.Add("pe_nombreCompleto", "Estudiante").Width = Unit.Pixel(300);
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Saldo";
+            column.Caption = "Saldo";
+            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.Width = Unit.Pixel(100);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "SaldoProntoPago";
+            column.Caption = "Saldo Pronto Pago";
+            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+            column.Width = Unit.Pixel(100);
+        });
         settings.Columns.Add("NomRepEconomico", "Nombre Representante Económico").Width = Unit.Pixel(300);
         settings.Columns.Add("correoRepEconomico", "Correo Representante Económico").Width = Unit.Pixel(200);
         settings.Columns.Add("TelefonoRepEconomico", "Teléfono Representante Económico").Width = Unit.Pixel(200);

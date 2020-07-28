@@ -202,8 +202,8 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Rubro_Periodo_aca_AnioLectivo_Periodo" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula_Rubro_PorFacturarMasiva" Width="1.5" PointX="17.375" PointY="36.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Matricula_Rubro_FacturaMasiva" Width="1.5" PointX="32.375" PointY="36.75" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Alumno_PeriodoActual" Width="1.5" PointX="34.375" PointY="36.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_AnioLectivo_Paralelo_Profesor" Width="1.5" PointX="6.375" PointY="21.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_Alumno_PeriodoActual" Width="1.5" PointX="34.375" PointY="36.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

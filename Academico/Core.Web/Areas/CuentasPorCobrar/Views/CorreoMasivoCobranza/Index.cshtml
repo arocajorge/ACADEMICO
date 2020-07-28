@@ -26,6 +26,15 @@
         selectedIDs = values.join(',');
     }
 
+    function DatosCorreo() {
+        if (Codigo.GetValue()!="" && Codigo.GetValue()!=null) {
+            $("#DatosCorreo").hide();
+        }
+        else {
+            $("#DatosCorreo").show();
+        }
+    }
+
     function bloquear() {
         $("#ModalBloqueo").modal("show");
         setTimeout(function () { guardar(); }, 2000);
@@ -121,19 +130,22 @@
                 <div class="form-group">
                     <label for="">Código</label>
                     @Html.DevExpress().ComboBoxFor(q => q.Codigo, settings =>
-                           {
-                               settings.Name = "Codigo";
-                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                               settings.Properties.Columns.Add("Codigo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                               settings.Properties.Columns.Add("Asunto", "Asunto").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                               //Campo ID
-                               settings.Properties.ValueField = "Codigo";
-                               settings.Properties.ValueType = typeof(string);
-                               settings.Properties.TextField = "Asunto";
-                               settings.Properties.NullText = "== Seleccione ==";
-                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                           }).BindList(ViewBag.lst_codigo).GetHtml()
+               {
+                   settings.Name = "Codigo";
+                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                   settings.Properties.Columns.Add("Codigo", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                   settings.Properties.Columns.Add("Asunto", "Asunto").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                   //Campo ID
+                   settings.Properties.ValueField = "Codigo";
+                   settings.Properties.ValueType = typeof(string);
+                   settings.Properties.TextField = "Asunto";
+                   settings.Properties.NullText = "== Seleccione ==";
+                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                   settings.Properties.AllowNull = true;
+                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function (){ DatosCorreo(); }";
+               }).BindList(ViewBag.lst_codigo).GetHtml()
                     @Html.ValidationMessageFor(q => q.Codigo, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -197,24 +209,26 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
+                <div id="DatosCorreo">
+                    <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="Telefonos">Asunto</label>
-                                @Html.TextBoxFor(q => q.Asunto, new { @class = "form-control", @id = "Asunto" })
-                                @Html.ValidationMessageFor(q => q.Asunto, "", new { @class = "text-danger" })
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="Telefonos">Asunto</label>
+                                    @Html.TextBoxFor(q => q.Asunto, new { @class = "form-control", @id = "Asunto" })
+                                    @Html.ValidationMessageFor(q => q.Asunto, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
+                    <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="Telefonos">Cuerpo</label>
-                                @Html.Action("HtmlEditorPartial", Model)
-                                @Html.ValidationMessageFor(q => q.Cuerpo, "", new { @class = "text-danger" })
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="Telefonos">Cuerpo</label>
+                                    @Html.Action("HtmlEditorPartial", Model)
+                                    @Html.ValidationMessageFor(q => q.Cuerpo, "", new { @class = "text-danger" })
+                                </div>
                             </div>
                         </div>
                     </div>

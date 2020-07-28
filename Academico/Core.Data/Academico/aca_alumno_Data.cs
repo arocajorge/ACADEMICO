@@ -122,6 +122,7 @@ namespace Core.Data.Academico
                     {
                         IdEmpresa = Entity.IdEmpresa,
                         IdAlumno = Entity.IdAlumno,
+                        IdMatricula = Entity.IdMatricula,
                         Codigo = Entity.Codigo,
                         pe_nombreCompleto = Entity.NombreAlumno,
                         pe_cedulaRuc = Entity.pe_cedulaRuc,
@@ -131,6 +132,8 @@ namespace Core.Data.Academico
                         NomRepLegal = Entity.NombreRepresentante,
                         CorreoRepLegal = Entity.CorreoRepresentante,
                         TelefonoRepLegal = Entity.CelularRepresentante,
+                        Saldo = Entity.Saldo,
+                        SaldoProntoPago = Entity.SaldoProntoPago,
                         IdSede = Entity.IdSede,
                         IdJornada = Entity.IdJornada,
                         IdNivel = Entity.IdNivel,
@@ -176,6 +179,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
+                    odata.Database.CommandTimeout = 5000;
                     var lst = odata.vwaca_Alumno_PeriodoActual.Where(q => q.IdEmpresa == IdEmpresa & q.IdAnio == IdAnio && q.IdSede >= IdSedeIni && q.IdSede <= IdSedeFin
                     && q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin && q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin
                     && q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin && q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin).OrderBy(q=>q.NombreAlumno).ToList();
@@ -204,7 +208,9 @@ namespace Core.Data.Academico
                             NomJornada = q.NomJornada,
                             NomNivel = q.NomNivel,
                             NomCurso = q.NomCurso,
-                            NomParalelo = q.NomParalelo
+                            NomParalelo = q.NomParalelo,
+                            Saldo = q.Saldo,
+                            SaldoProntoPago = q.SaldoProntoPago
                         });
                     });
                 }

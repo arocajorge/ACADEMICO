@@ -17,6 +17,7 @@ namespace Core.Data.Base
         public int IdEmpresa { get; set; }
         public string Codigo { get; set; }
         public decimal IdAlumno { get; set; }
+        public decimal IdMatricula { get; set; }
         public string NombreAlumno { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string NombreRepresentante { get; set; }
@@ -36,5 +37,7 @@ namespace Core.Data.Base
         public string NomJornada { get; set; }
         public string NomCurso { get; set; }
         public string NomParalelo { get; set; }
+        public double Saldo { get; set; }
+        public double SaldoProntoPago { get; set; }
     }
 }

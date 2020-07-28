@@ -17,6 +17,8 @@ namespace Core.Data.Base
         public int IdEmpresa { get; set; }
         public int IdSeguimiento { get; set; }
         public decimal IdAlumno { get; set; }
+        public Nullable<decimal> IdMatricula { get; set; }
+        public bool CorreoEnviado { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
         public bool Estado { get; set; }

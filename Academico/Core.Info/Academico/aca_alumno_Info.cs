@@ -241,6 +241,9 @@ namespace Core.Info.Academico
         public string NomJornada { get; set; }
         public string NomCurso { get; set; }
         public string NomParalelo { get; set; }
+        public decimal IdMatricula { get; set; }
+        public double Saldo { get; set; }
+        public double SaldoProntoPago { get; set; }
         #endregion
 
         #endregion
