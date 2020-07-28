@@ -5,42 +5,12 @@
     {
         Response.Redirect("~/Account/Login");
     }
-    Layout = "~/Views/Shared/_LayoutConsulta.cshtml";
+    Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
 }
-
-<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-<script type="text/javascript">
-    function EnviarCorreo(IdSeguimiento) {
-        var datos = {
-            IdSeguimiento: IdSeguimiento
-        }
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify(datos),
-            url: '@Url.Action("EnviarCorreo", "SeguimientoCartera", new { Area = "CuentasPorCobrar"})',
-            async: false,
-            bDeferRender: true,
-            bProcessing: true,
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            success: function (data) {
-                if (data!="") {
-                    alert(data);
-                    GridViewPartial_SeguimientoCartera.PerformCallback();
-                } else {
-                    alert("No se ha podido enviar el correo");
-                }
-            },
-            error: function (error) {
-            }
-        });
-    }
-</script>
-@using (Html.BeginForm("Index", "SeguimientoCartera", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("CXC_012", "CuentasPorCobrarReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
-    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
-    <div class="box ">
+    <div class="box">
         <div class="box-header with-border">
             <div class="row">
                 <div class="col-md-12">
@@ -55,16 +25,11 @@
                     <i class="fa fa-times"></i>
                 </button>
             </div>
+
         </div>
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="IdCliente">Estudiante*</label>
-                            @Html.Partial("_CmbAlumno", Model.IdAlumno)
-                        </div>
-                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="">Fecha inicio*</label>
@@ -72,15 +37,15 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                @Html.DevExpress().DateEditFor(q=> q.fecha_ini, settings =>
-                            {
-                                settings.Name = "fecha_ini";
-                                settings.Properties.UseMaskBehavior = true;
-                                settings.Properties.EditFormat = EditFormat.Date;
-                                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                            }).GetHtml()
+                                @Html.DevExpress().DateEditFor(q => q.fecha_ini, settings =>
+                           {
+                               settings.Name = "fecha_ini";
+                               settings.Properties.UseMaskBehavior = true;
+                               settings.Properties.EditFormat = EditFormat.Date;
+                               settings.Properties.EditFormatString = "dd/MM/yyyy";
+                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                           }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -107,10 +72,10 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- /.box-body -->
         </div>
-        <!-- /.box-body -->
     </div>
-
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title">@ViewBag.Title</h3>
@@ -124,14 +89,17 @@
             </div>
         </div>
         <div class="box-body">
-            @Html.Action("GridViewPartial_SeguimientoCartera", new { Fecha_ini = Model.fecha_ini, Fecha_fin = Model.fecha_fin, IdAlumno = Model.IdAlumno, Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular})
+            @Html.DevExpress().WebDocumentViewer(settings =>
+               {
+                   settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                   settings.MobileMode = false;
+                   settings.Name = "webDocumentViewer";
+               }).Bind(ViewBag.Report).GetHtml()
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            [@Core.Web.Helps.SessionFixed.IdEmpresa] @Core.Web.Helps.SessionFixed.NomEmpresa
+            [@Session["IdEmpresa"]] @Session["nom_empresa"]
         </div>
         <!-- /.box-footer-->
     </div>
-
 }
-
