@@ -61,6 +61,7 @@ namespace Core.Data.Base
         public virtual DbSet<VWACA_013_EquivalenciaPromedio> VWACA_013_EquivalenciaPromedio { get; set; }
         public virtual DbSet<VWBAN_004> VWBAN_004 { get; set; }
         public virtual DbSet<VWFAC_002> VWFAC_002 { get; set; }
+        public virtual DbSet<VWCXC_012> VWCXC_012 { get; set; }
     
         public virtual ObjectResult<SPACA_001_Result> SPACA_001(Nullable<int> idEmpresa, Nullable<decimal> idAlumno)
         {

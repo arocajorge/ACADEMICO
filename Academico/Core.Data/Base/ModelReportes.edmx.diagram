@@ -39,6 +39,7 @@
         <EntityTypeShape EntityType="ModelReportes.VWACA_013_EquivalenciaPromedio" Width="1.5" PointX="0.75" PointY="19.75" />
         <EntityTypeShape EntityType="ModelReportes.VWBAN_004" Width="1.5" PointX="16.375" PointY="21.75" />
         <EntityTypeShape EntityType="ModelReportes.VWFAC_002" Width="1.5" PointX="22.375" PointY="16.75" />
+        <EntityTypeShape EntityType="ModelReportes.VWCXC_012" Width="1.5" PointX="13.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
