@@ -472,7 +472,7 @@ namespace Core.Data.Facturacion
                     #endregion
 
                     #region Cobranza
-                    if (info.CreDeb.Trim() == "C" && info.lst_cruce.Count != 0)
+                    if (info.CreDeb.Trim() == "C" && info.lst_cruce.Count != 0 && info.lst_cruce.Where(q=> q.Valor_Aplicado > 0).Count() > 0)
                     {
                         cxc_cobro_Info cobro = armar_cobro(info);
                         if (cobro != null)
@@ -877,7 +877,7 @@ namespace Core.Data.Facturacion
                 };
 
                 int Secuencia = 1;
-                foreach (var item in info.lst_cruce)
+                foreach (var item in info.lst_cruce.Where(q=> q.Valor_Aplicado > 0).ToList())
                 {
                     cobro.lst_det.Add(new cxc_cobro_det_Info
                     {
@@ -981,7 +981,7 @@ namespace Core.Data.Facturacion
                         });
                         #endregion
 
-                        if (lst.Where(q => q.Valor_Aplicado != null).Count() > 0 && EnConciliacion == 0)
+                        if (lst.Where(q => q.Valor_Aplicado != null && q.Valor_Aplicado != 0).Count() > 0 && EnConciliacion == 0)
                         {
                             foreach (var item in lst)
                             {
