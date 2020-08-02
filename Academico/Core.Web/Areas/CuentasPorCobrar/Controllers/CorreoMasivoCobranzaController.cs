@@ -213,56 +213,45 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
                     foreach (var item1 in lstAlumnosPorParalelos)
                     {
-                        var lst_cartera_x_cobrar = bus_cobro.get_list_deuda(item1.IdEmpresa, item1.IdAlumno);
+                        var CorreoXAlumno = lstAlumnosPorParalelos.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == item1.IdAlumno).FirstOrDefault();
+                        var Destinatarios = (RepLegal == true ? (CorreoXAlumno == null ? "" : (string.IsNullOrEmpty(CorreoXAlumno.CorreoRepLegal) ? "" : CorreoXAlumno.CorreoRepLegal + ";")) : "") + (RepEconomico == true ? (CorreoXAlumno == null ? "" : (string.IsNullOrEmpty(CorreoXAlumno.correoRepEconomico) ? "" : CorreoXAlumno.correoRepEconomico + ";")) : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
 
-                        if (lst_cartera_x_cobrar.Count > 0)
-                        {
-                            var CorreoXAlumno = lstAlumnosPorParalelos.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == item1.IdAlumno).FirstOrDefault();
-                            var Destinatarios = (RepLegal == true ? (CorreoXAlumno == null ? "" : (string.IsNullOrEmpty(CorreoXAlumno.CorreoRepLegal) ? "" : CorreoXAlumno.CorreoRepLegal + ";")) : "") + (RepEconomico == true ? (CorreoXAlumno == null ? "" : (string.IsNullOrEmpty(CorreoXAlumno.correoRepEconomico) ? "" : CorreoXAlumno.correoRepEconomico + ";")) : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
-
-                            var info = new tb_ColaCorreo_Info
-                            {
-                                IdEmpresa = IdEmpresa,
-                                Asunto = AsuntoCorreo,
-                                Cuerpo = CuerpoCorreo,
-                                Destinatarios = Destinatarios,
-                                Codigo = CodigoCorreo,
-                                Parametros = IdEmpresa.ToString() + ";" + item1.IdAlumno.ToString(),
-                                IdUsuarioCreacion = SessionFixed.IdUsuario
-                            };
-
-                            if (!bus_cola.GuardarDB(info))
-                            {
-                                mensaje = "Ha ocurrido un error al guardar los registros";
-                            }
-                        }
-                    }
-                }
-                if (IdAlumno > 0)
-                {
-                    var lst_cartera_x_cobrar = bus_cobro.get_list_deuda(IdEmpresa, IdAlumno);
-
-                    if (lst_cartera_x_cobrar.Count > 0)
-                    {
-                        var CorreosAlumno = List_AlumnosPeriodoActual.get_list(IdTransaccionSession).Where(q => q.IdAlumno == IdAlumno).FirstOrDefault();
-                        var DestinatarioAlumno = (RepLegal == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.CorreoRepLegal) ? "" : CorreosAlumno.CorreoRepLegal + ";")) : "") + (RepEconomico == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.correoRepEconomico) ? "" : CorreosAlumno.correoRepEconomico + ";")) : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
                         var info = new tb_ColaCorreo_Info
                         {
                             IdEmpresa = IdEmpresa,
                             Asunto = AsuntoCorreo,
                             Cuerpo = CuerpoCorreo,
-                            Destinatarios = DestinatarioAlumno,
+                            Destinatarios = Destinatarios,
                             Codigo = CodigoCorreo,
-                            Parametros = IdEmpresa.ToString() + ";" + IdAlumno.ToString(),
+                            Parametros = IdEmpresa.ToString() + ";" + item1.IdAlumno.ToString(),
                             IdUsuarioCreacion = SessionFixed.IdUsuario
                         };
 
                         if (!bus_cola.GuardarDB(info))
                         {
-                            mensaje = "No se ha podido guardar el registro";
+                            mensaje = "Ha ocurrido un error al guardar los registros";
                         }
                     }
-                    
+                }
+                if (IdAlumno > 0)
+                {
+                    var CorreosAlumno = List_AlumnosPeriodoActual.get_list(IdTransaccionSession).Where(q => q.IdAlumno == IdAlumno).FirstOrDefault();
+                    var DestinatarioAlumno = (RepLegal == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.CorreoRepLegal) ? "" : CorreosAlumno.CorreoRepLegal + ";")) : "") + (RepEconomico == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.correoRepEconomico) ? "" : CorreosAlumno.correoRepEconomico + ";")) : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
+                    var info = new tb_ColaCorreo_Info
+                    {
+                        IdEmpresa = IdEmpresa,
+                        Asunto = AsuntoCorreo,
+                        Cuerpo = CuerpoCorreo,
+                        Destinatarios = DestinatarioAlumno,
+                        Codigo = CodigoCorreo,
+                        Parametros = IdEmpresa.ToString() + ";" + IdAlumno.ToString(),
+                        IdUsuarioCreacion = SessionFixed.IdUsuario
+                    };
+
+                    if (!bus_cola.GuardarDB(info))
+                    {
+                        mensaje = "No se ha podido guardar el registro";
+                    }
                 }
             }
 

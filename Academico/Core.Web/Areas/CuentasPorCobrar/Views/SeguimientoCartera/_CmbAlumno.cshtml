@@ -18,6 +18,7 @@
         settings.Properties.Columns.Add("pe_cedulaRuc", "Identificacion", 15);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Alumno", 65);
         settings.Properties.AllowMouseWheel = false;
+        settings.Properties.ClientSideEvents.EndCallback = "function (){ SetCorreo(); }";
     })
     .BindList(new Core.Web.Areas.CuentasPorCobrar.Controllers.SeguimientoCarteraController().get_list_bajo_demanda_alumno, new Core.Web.Areas.CuentasPorCobrar.Controllers.SeguimientoCarteraController().get_info_bajo_demanda_alumno)
     .Bind(Model.GetType() == typeof(Core.Info.General.tb_ColaCorreo_Info) ? "" : (Model == 0 ? "" : Model));

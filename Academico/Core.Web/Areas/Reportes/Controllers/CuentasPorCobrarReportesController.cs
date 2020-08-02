@@ -1,4 +1,5 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Bus.SeguridadAcceso;
 using Core.Info.Academico;
@@ -22,6 +23,10 @@ namespace Core.Web.Areas.Reportes.Controllers
         string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
         tb_persona_Bus BusPersona = new tb_persona_Bus();
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+        aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
+        fa_cliente_contactos_Bus bus_cliente_contacto = new fa_cliente_contactos_Bus();
+        fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+        tb_persona_Bus bus_persona = new tb_persona_Bus();
 
         #region Combos
         public ActionResult Cmb_Alumno()
@@ -720,11 +725,19 @@ namespace Core.Web.Areas.Reportes.Controllers
         #endregion
 
         #region CXC_011
-        public ActionResult CXC_011()
+        public ActionResult CXC_011(decimal IdAlumno = 0)
         {
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.IdAlumno = IdAlumno;
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            var info_matricula = bus_matricula.GetInfo_UltimaMatricula(model.IdEmpresa, model.IdAlumno);
+            var info_persona_factura = bus_persona.get_info(model.IdEmpresa, cl_enumeradores.eTipoPersona.PERSONA.ToString(), (info_matricula == null ? 0 : info_matricula.IdPersonaF));
+            var info_cliente = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, (info_persona_factura == null ? "" : info_persona_factura.pe_cedulaRuc));
+            var info_cliente_contacto = bus_cliente_contacto.get_info(model.IdEmpresa, info_cliente.IdCliente, 1);
+            model.Correos = (info_cliente_contacto == null ? "" : info_cliente_contacto.Correo);
+
             CXC_011_Rpt report = new CXC_011_Rpt();
 
             #region Cargo diseño desde base
@@ -743,11 +756,19 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
 
             ViewBag.Report = report;
+            ViewBag.MostrarCorreo = false;
             return View(model);
         }
         [HttpPost]
         public ActionResult CXC_011(cl_filtros_Info model)
         {
+            //var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            //var info_matricula = bus_matricula.GetInfo_UltimaMatricula(model.IdEmpresa, model.IdAlumno);
+            //var info_persona_factura = bus_persona.get_info(model.IdEmpresa, cl_enumeradores.eTipoPersona.PERSONA.ToString(), (info_matricula == null ? 0 : info_matricula.IdPersonaF));
+            //var info_cliente = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, (info_persona_factura == null ? "" : info_persona_factura.pe_cedulaRuc));
+            //var info_cliente_contacto = bus_cliente_contacto.get_info(model.IdEmpresa, info_cliente.IdCliente, 1);
+            //model.Correos = (info_cliente_contacto == null ? "" : info_cliente_contacto.Correo);
+
             CXC_011_Rpt report = new CXC_011_Rpt();
 
             #region Cargo diseño desde base
@@ -766,6 +787,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
 
             ViewBag.Report = report;
+            ViewBag.MostrarCorreo = true;
             return View(model);
         }
         #endregion

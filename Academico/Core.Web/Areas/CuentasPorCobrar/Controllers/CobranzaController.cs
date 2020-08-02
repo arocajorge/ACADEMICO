@@ -51,9 +51,13 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         aca_AnioLectivo_Bus bus_anioLectivo = new aca_AnioLectivo_Bus();
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         fa_notaCreDeb_Bus bus_notaDebCre = new fa_notaCreDeb_Bus();
+        tb_ColaCorreoCodigo_Bus busCorreoCodigo = new tb_ColaCorreoCodigo_Bus();
+        tb_ColaCorreo_Bus busCorreo = new tb_ColaCorreo_Bus();
         cxc_LiquidacionTarjeta_Bus busLiquidacionTarjeta = new cxc_LiquidacionTarjeta_Bus();
         aca_PlantillaTipo_Bus bus_tipo_plantilla = new aca_PlantillaTipo_Bus();
         aca_Plantilla_Bus bus_plantilla = new aca_Plantilla_Bus();
+        aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+        fa_cliente_contactos_Bus bus_cliente_contacto = new fa_cliente_contactos_Bus();
         string mensaje = string.Empty;
         string mensajeInfo = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
@@ -886,6 +890,40 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             }
 
             return Json(new { Saldo = Saldo, DatosAlumno = DatosAlumno, mensajeInfo = mensajeInfo },JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult EnviarCorreo(int IdEmpresa, int IdSede, decimal IdAlumno, string Correos)
+        {
+            string Mensaje = string.Empty;
+            var Codigo = busCorreoCodigo.GetInfo(IdEmpresa, "CXC_011");
+            if (Codigo != null)
+            {
+                busCorreo.GuardarDB(new tb_ColaCorreo_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    Codigo = "CXC_011",
+                    Destinatarios = Correos,
+                    Asunto = Codigo.Asunto,
+                    Cuerpo = Codigo.Cuerpo,
+                    Parametros = IdEmpresa.ToString() + ";" + IdSede.ToString() + ";" + IdAlumno.ToString(),
+                    IdUsuarioCreacion = SessionFixed.IdUsuario
+                });
+            }
+
+            return Json(Mensaje, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DatosCorreo(int IdEmpresa, decimal IdAlumno)
+        {
+            string Mensaje = string.Empty;
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
+            var info_matricula = bus_matricula.GetInfo_UltimaMatricula(IdEmpresa, IdAlumno);
+            var info_persona_factura = bus_persona.get_info(IdEmpresa, cl_enumeradores.eTipoPersona.PERSONA.ToString(), (info_matricula == null ? 0 : info_matricula.IdPersonaF));
+            var info_cliente = bus_cliente.get_info_x_num_cedula(IdEmpresa, (info_persona_factura == null ? "" : info_persona_factura.pe_cedulaRuc));
+            var info_cliente_contacto = bus_cliente_contacto.get_info(IdEmpresa, info_cliente.IdCliente, 1);
+            Mensaje = (info_cliente_contacto == null ? "" : info_cliente_contacto.Correo);
+
+            return Json(Mensaje, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

@@ -8868,6 +8868,7 @@
     <Content Include="Areas\CuentasPorCobrar\Views\SeguimientoCartera\_CmbAlumnoReadOnly.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\SeguimientoCartera\Anular.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_012.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_CmbAlumnoEstadoCuenta.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

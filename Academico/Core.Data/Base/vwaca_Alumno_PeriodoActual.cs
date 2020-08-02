@@ -39,5 +39,6 @@ namespace Core.Data.Base
         public string NomParalelo { get; set; }
         public double Saldo { get; set; }
         public double SaldoProntoPago { get; set; }
+        public int CantDeudas { get; set; }
     }
 }

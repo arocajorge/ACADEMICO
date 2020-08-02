@@ -150,17 +150,7 @@ namespace Core.Web.Areas.Academico.Controllers
             else
             {
                 var lst_menu = Lista_menu_usuario.get_list();
-                //var output = array.GroupBy(q => q).ToList();
-                //foreach (var item in lst_menu)
-                //{
-                //    foreach (var item2 in output)
-                //    {
-                //        if (item.IdMenu == Convert.ToInt32(item2.Key))
-                //        {
-                //            lista.Add(item);
-                //        }
-                //    }
-                //}
+
                 if (Ids != "")
                 {
                     var output = array.GroupBy(q => q).ToList();
