@@ -40,5 +40,6 @@ namespace Core.Data.Base
         public double Saldo { get; set; }
         public double SaldoProntoPago { get; set; }
         public int CantDeudas { get; set; }
+        public string NomPlantillaTipo { get; set; }
     }
 }

@@ -373,6 +373,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             model.RepEconomico = (info_alumno == null ? "" : info_alumno.NomRepEconomico);
             model.TelefonoEconomico = (info_alumno == null ? "" : info_alumno.TelefonoRepEconomico);
             model.CorreoEconomico = (info_alumno == null ? "" : info_alumno.correoRepEconomico);
+            model.NomPlantillaTipo = (info_alumno == null ? "" : info_alumno.NomPlantillaTipo);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
 
             if (Exito)
@@ -426,6 +427,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             model.RepEconomico = (info_alumno == null ? "" : info_alumno.NomRepEconomico);
             model.TelefonoEconomico = (info_alumno == null ? "" : info_alumno.TelefonoRepEconomico);
             model.CorreoEconomico = (info_alumno == null ? "" : info_alumno.correoRepEconomico);
+            model.NomPlantillaTipo = (info_alumno == null ? "" : info_alumno.NomPlantillaTipo);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
 
             return View(model);

@@ -92,7 +92,8 @@ namespace Core.Data.Academico
                             NomJornada = q.NomJornada,
                             NomNivel = q.NomNivel,
                             NomCurso = q.NomCurso,
-                            NomParalelo = q.NomParalelo
+                            NomParalelo = q.NomParalelo,
+                            NomPlantillaTipo = q.NomPlantillaTipo
                         });
                     });
                 }
@@ -144,7 +145,7 @@ namespace Core.Data.Academico
                         NomNivel = Entity.NomNivel,
                         NomCurso = Entity.NomCurso,
                         NomParalelo = Entity.NomParalelo,
-                        
+                        NomPlantillaTipo = Entity.NomPlantillaTipo
                     };
                 }
 
@@ -210,7 +211,8 @@ namespace Core.Data.Academico
                             NomCurso = q.NomCurso,
                             NomParalelo = q.NomParalelo,
                             Saldo = q.Saldo,
-                            SaldoProntoPago = q.SaldoProntoPago
+                            SaldoProntoPago = q.SaldoProntoPago,
+                            NomPlantillaTipo = q.NomPlantillaTipo
                         });
                     });
                 }

@@ -43,6 +43,7 @@ namespace Core.Info.CuentasPorCobrar
         public string Saldo { get; set; }
         public string SaldoProntoPago { get; set; }
         public byte[] seguimiento_foto { get; set; }
+        public string NomPlantillaTipo { get; set; }
         public List<cxc_SeguimientoCartera_Info> lst_det { get; set; }
         #endregion
     }

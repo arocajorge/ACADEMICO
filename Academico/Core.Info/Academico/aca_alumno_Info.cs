@@ -244,6 +244,7 @@ namespace Core.Info.Academico
         public decimal IdMatricula { get; set; }
         public double Saldo { get; set; }
         public double SaldoProntoPago { get; set; }
+        public string NomPlantillaTipo { get; set; }
         #endregion
 
         #endregion

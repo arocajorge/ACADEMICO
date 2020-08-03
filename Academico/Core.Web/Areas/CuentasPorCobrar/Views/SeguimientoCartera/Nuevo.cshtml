@@ -35,6 +35,7 @@
                 $("#RepEconomico").val(data.NomRepEconomico);
                 $("#TelefonoEconomico").val(data.TelefonoRepEconomico);
                 $("#CorreoEconomico").val(data.correoRepEconomico);
+                $("#NomPlantillaTipo").val(data.NomPlantillaTipo);
             },
             error: function (error) {
             }
@@ -188,11 +189,17 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
+                    <label for="IdCliente">Tipo de Plantilla</label>
+                    @Html.TextBoxFor(q => q.NomPlantillaTipo, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
                     <label for="IdCliente">Saldo</label>
                     @Html.TextBoxFor(q => q.Saldo, new { @class = "form-control", @readonly = "readonly" })
                 </div>
             </div>
-            <div class="col-md-offset-2 col-md-2">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdCliente">Saldo Pronto Pago</label>
                     @Html.TextBoxFor(q => q.SaldoProntoPago, new { @class = "form-control", @readonly = "readonly" })

@@ -1294,6 +1294,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Alumno_PeriodoActual' no tie
           <Property Name="Saldo" Type="float" Nullable="false" />
           <Property Name="SaldoProntoPago" Type="float" Nullable="false" />
           <Property Name="CantDeudas" Type="int" Nullable="false" />
+          <Property Name="NomPlantillaTipo" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AlumnoDocumento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -4142,7 +4143,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
     [vwaca_Alumno_PeriodoActual].[NomParalelo] AS [NomParalelo], 
     [vwaca_Alumno_PeriodoActual].[Saldo] AS [Saldo], 
     [vwaca_Alumno_PeriodoActual].[SaldoProntoPago] AS [SaldoProntoPago], 
-    [vwaca_Alumno_PeriodoActual].[CantDeudas] AS [CantDeudas]
+    [vwaca_Alumno_PeriodoActual].[CantDeudas] AS [CantDeudas], 
+    [vwaca_Alumno_PeriodoActual].[NomPlantillaTipo] AS [NomPlantillaTipo]
     FROM [dbo].[vwaca_Alumno_PeriodoActual] AS [vwaca_Alumno_PeriodoActual]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwaca_AlumnoDocumento" EntityType="Self.vwaca_AlumnoDocumento" store:Type="Views" store:Schema="dbo">
@@ -10046,6 +10048,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <Property Name="Saldo" Type="Double" Nullable="false" />
           <Property Name="SaldoProntoPago" Type="Double" Nullable="false" />
           <Property Name="CantDeudas" Type="Int32" Nullable="false" />
+          <Property Name="NomPlantillaTipo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -12109,6 +12112,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <EntitySetMapping Name="vwaca_Alumno_PeriodoActual">
             <EntityTypeMapping TypeName="ModelAcademico.vwaca_Alumno_PeriodoActual">
               <MappingFragment StoreEntitySet="vwaca_Alumno_PeriodoActual">
+                <ScalarProperty Name="NomPlantillaTipo" ColumnName="NomPlantillaTipo" />
                 <ScalarProperty Name="CantDeudas" ColumnName="CantDeudas" />
                 <ScalarProperty Name="SaldoProntoPago" ColumnName="SaldoProntoPago" />
                 <ScalarProperty Name="Saldo" ColumnName="Saldo" />
