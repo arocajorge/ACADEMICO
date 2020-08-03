@@ -238,8 +238,8 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="Telefonos">Teléfono</label>
-                    @Html.TextBoxFor(q => q.pe_telfono_Contacto, new { @class = "form-control", @id = "pe_telfono_Contacto" })
-                    @Html.ValidationMessageFor(q => q.pe_telfono_Contacto, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(q => q.Telefono, new { @class = "form-control", @id = "Telefono" })
+                    @Html.ValidationMessageFor(q => q.Telefono, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-3">
@@ -705,7 +705,7 @@
                         $("#Correo").val(data.Correo);
                         $("#Celular").val(data.Celular);
                         $("#Direccion").val(data.Direccion);
-                        $("#pe_telfono_Contacto").val(data.pe_telfono_Contacto);
+                        $("#Telefono").val(data.Telefono);
                         $("#CodCatalogoSangre").val(data.CodCatalogoSangre);
                         $("#CodCatalogoCONADIS").val(data.CodCatalogoCONADIS);
                         $("#NumeroCarnetConadis").val(data.NumeroCarnetConadis);
@@ -742,7 +742,7 @@
         $("#Correo").val("");
         $("#Celular").val("");
         $("#Direccion").val("");
-        $("#pe_telfono_Contacto").val("");
+        $("#Telefono").val("");
         $("#CodCatalogoSangre").val("");
         $("#CodCatalogoCONADIS").val("");
         $("#NumeroCarnetConadis").val("");
