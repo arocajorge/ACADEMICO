@@ -731,12 +731,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             model.IdAlumno = IdAlumno;
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
-            var info_matricula = bus_matricula.GetInfo_UltimaMatricula(model.IdEmpresa, model.IdAlumno);
-            var info_persona_factura = bus_persona.get_info(model.IdEmpresa, cl_enumeradores.eTipoPersona.PERSONA.ToString(), (info_matricula == null ? 0 : info_matricula.IdPersonaF));
-            var info_cliente = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, (info_persona_factura == null ? "" : info_persona_factura.pe_cedulaRuc));
-            var info_cliente_contacto = bus_cliente_contacto.get_info(model.IdEmpresa, info_cliente.IdCliente, 1);
-            model.Correos = (info_cliente_contacto == null ? "" : info_cliente_contacto.Correo);
 
             CXC_011_Rpt report = new CXC_011_Rpt();
 
@@ -762,13 +756,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         [HttpPost]
         public ActionResult CXC_011(cl_filtros_Info model)
         {
-            //var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
-            //var info_matricula = bus_matricula.GetInfo_UltimaMatricula(model.IdEmpresa, model.IdAlumno);
-            //var info_persona_factura = bus_persona.get_info(model.IdEmpresa, cl_enumeradores.eTipoPersona.PERSONA.ToString(), (info_matricula == null ? 0 : info_matricula.IdPersonaF));
-            //var info_cliente = bus_cliente.get_info_x_num_cedula(model.IdEmpresa, (info_persona_factura == null ? "" : info_persona_factura.pe_cedulaRuc));
-            //var info_cliente_contacto = bus_cliente_contacto.get_info(model.IdEmpresa, info_cliente.IdCliente, 1);
-            //model.Correos = (info_cliente_contacto == null ? "" : info_cliente_contacto.Correo);
-
             CXC_011_Rpt report = new CXC_011_Rpt();
 
             #region Cargo diseño desde base

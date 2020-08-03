@@ -41,27 +41,27 @@
                     </div> 
                 </div>
             </div>
-            @*@if (ViewBag.MostrarCorreo == true)
-            {*@
-                <div class="row" id="correo">
-                    <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="IdSucursal">Destinatarios (En caso de tener más de un destinatario separarlo con punto y coma)</label>
-                                @Html.TextBoxFor(q => q.Correos, new { @id = "Correos", @class = "form-control" } )
-                                @Html.ValidationMessageFor(q => q.Correos, "", new { @class = "text-danger" })
-                                <label id="error" style="color:red" hidden> <i class="icon fa fa-warning"></i> Debe de ingresar al menos un destinatario</label>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="IdPuntoVta">   </label>
-                                <button type="button" class="btn btn-primary form-control" id="btn_enviarCorreo" onclick="EnviarCorreo();">Enviar estado de cuenta</button>
-                            </div>
+            <div class="row" id="correo">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdSucursal">Destinatarios (En caso de tener más de un destinatario separarlo con punto y coma)</label>
+                            @Html.TextBoxFor(q => q.Correos, new { @id = "Correos", @class = "form-control" } )
+                            @Html.ValidationMessageFor(q => q.Correos, "", new { @class = "text-danger" })
+                            <label id="error" style="color:red" hidden> <i class="icon fa fa-warning"></i> Debe de ingresar al menos un destinatario</label>
                         </div>
                     </div>
+                    @*@if (ViewBag.MostrarCorreo == true)
+                    {*@
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdPuntoVta">   </label>
+                            <button type="button" class="btn btn-primary form-control" id="btn_enviarCorreo" onclick="EnviarCorreo();">Enviar estado de cuenta</button>
+                        </div>
+                    </div>
+                    @*}*@
                 </div>
-            @*}*@
+            </div>
             <!-- /.box-body -->
         </div>
     </div>
