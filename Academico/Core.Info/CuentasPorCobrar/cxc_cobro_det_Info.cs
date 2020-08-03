@@ -61,6 +61,7 @@ namespace Core.Info.CuentasPorCobrar
         public decimal? IdAlumno { get; set; }
         public int? IdPlantilla { get; set; }
         public int? IdAnio { get; set; }
+        public double TotalxCobrado { get; set; }
         #endregion
 
     }
