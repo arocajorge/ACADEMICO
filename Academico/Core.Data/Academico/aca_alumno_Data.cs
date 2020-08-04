@@ -79,10 +79,10 @@ namespace Core.Data.Academico
                             pe_cedulaRuc = q.pe_cedulaRuc,
                             NomRepEconomico = q.NombreEmiteFactura,
                             correoRepEconomico = q.CorreoEmiteFactura,
-                            TelefonoRepEconomico = q.CelularEmiteFactura,
+                            CelularEmiteFactura = q.CelularEmiteFactura,
                             NomRepLegal = q.NombreRepresentante,
                             CorreoRepLegal =q.CorreoRepresentante,
-                            TelefonoRepLegal = q.CelularRepresentante,
+                            CelularRepresentante = q.CelularRepresentante,
                             IdSede= q.IdSede,
                             IdJornada=q.IdJornada,
                             IdNivel=q.IdNivel,
@@ -93,7 +93,9 @@ namespace Core.Data.Academico
                             NomNivel = q.NomNivel,
                             NomCurso = q.NomCurso,
                             NomParalelo = q.NomParalelo,
-                            NomPlantillaTipo = q.NomPlantillaTipo
+                            NomPlantillaTipo = q.NomPlantillaTipo,
+                            TelefonoRepresentante = q.TelefonoRepresentante,
+                            TelefonoEmiteFactura = q.TelefonoEmiteFactura
                         });
                     });
                 }
@@ -129,10 +131,10 @@ namespace Core.Data.Academico
                         pe_cedulaRuc = Entity.pe_cedulaRuc,
                         NomRepEconomico = Entity.NombreEmiteFactura,
                         correoRepEconomico = Entity.CorreoEmiteFactura,
-                        TelefonoRepEconomico = Entity.CelularEmiteFactura,
+                        CelularEmiteFactura = Entity.CelularEmiteFactura,
                         NomRepLegal = Entity.NombreRepresentante,
                         CorreoRepLegal = Entity.CorreoRepresentante,
-                        TelefonoRepLegal = Entity.CelularRepresentante,
+                        CelularRepresentante = Entity.CelularRepresentante,
                         Saldo = Entity.Saldo,
                         SaldoProntoPago = Entity.SaldoProntoPago,
                         IdSede = Entity.IdSede,
@@ -145,7 +147,9 @@ namespace Core.Data.Academico
                         NomNivel = Entity.NomNivel,
                         NomCurso = Entity.NomCurso,
                         NomParalelo = Entity.NomParalelo,
-                        NomPlantillaTipo = Entity.NomPlantillaTipo
+                        NomPlantillaTipo = Entity.NomPlantillaTipo,
+                        TelefonoRepresentante = Entity.TelefonoRepresentante,
+                        TelefonoEmiteFactura = Entity.TelefonoEmiteFactura
                     };
                 }
 
@@ -196,10 +200,10 @@ namespace Core.Data.Academico
                             pe_cedulaRuc = q.pe_cedulaRuc,
                             NomRepEconomico = q.NombreEmiteFactura,
                             correoRepEconomico = q.CorreoEmiteFactura,
-                            TelefonoRepEconomico = q.CelularEmiteFactura,
+                            CelularEmiteFactura = q.CelularEmiteFactura,
                             NomRepLegal = q.NombreRepresentante,
                             CorreoRepLegal = q.CorreoRepresentante,
-                            TelefonoRepLegal = q.CelularRepresentante,
+                            CelularRepresentante = q.CelularRepresentante,
                             IdSede = q.IdSede,
                             IdJornada = q.IdJornada,
                             IdNivel = q.IdNivel,
@@ -212,7 +216,9 @@ namespace Core.Data.Academico
                             NomParalelo = q.NomParalelo,
                             Saldo = q.Saldo,
                             SaldoProntoPago = q.SaldoProntoPago,
-                            NomPlantillaTipo = q.NomPlantillaTipo
+                            NomPlantillaTipo = q.NomPlantillaTipo,
+                            TelefonoRepresentante = q.TelefonoRepresentante,
+                            TelefonoEmiteFactura = q.TelefonoEmiteFactura
                         });
                     });
                 }

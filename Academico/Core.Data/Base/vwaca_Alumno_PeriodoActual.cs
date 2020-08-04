@@ -26,6 +26,8 @@ namespace Core.Data.Base
         public string CorreoEmiteFactura { get; set; }
         public string CelularRepresentante { get; set; }
         public string CelularEmiteFactura { get; set; }
+        public string TelefonoRepresentante { get; set; }
+        public string TelefonoEmiteFactura { get; set; }
         public int IdAnio { get; set; }
         public int IdSede { get; set; }
         public int IdNivel { get; set; }

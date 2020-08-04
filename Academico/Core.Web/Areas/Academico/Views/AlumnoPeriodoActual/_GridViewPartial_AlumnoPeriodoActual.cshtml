@@ -53,6 +53,7 @@
         settings.Columns.Add("IdAlumno", "ID").Width = Unit.Pixel(100);
         settings.Columns.Add("Codigo", "Codigo").Width = Unit.Pixel(100);
         settings.Columns.Add("pe_nombreCompleto", "Estudiante").Width = Unit.Pixel(300);
+        settings.Columns.Add("NomPlantillaTipo", "Tipo Plantilla").Width = Unit.Pixel(200);
         settings.Columns.Add(column =>
         {
             column.FieldName = "Saldo";
@@ -69,16 +70,18 @@
         });
         settings.Columns.Add("NomRepEconomico", "Nombre Representante Económico").Width = Unit.Pixel(300);
         settings.Columns.Add("correoRepEconomico", "Correo Representante Económico").Width = Unit.Pixel(200);
-        settings.Columns.Add("TelefonoRepEconomico", "Teléfono Representante Económico").Width = Unit.Pixel(200);
+        settings.Columns.Add("TelefonoEmiteFactura", "Teléfono Representante Económico").Width = Unit.Pixel(200);
+        settings.Columns.Add("CelularEmiteFactura", "Celular Representante Económico").Width = Unit.Pixel(200);
         settings.Columns.Add("NomRepLegal", "Nombre Representante Legal").Width = Unit.Pixel(300);
         settings.Columns.Add("CorreoRepLegal", "Correo Representante Legal").Width = Unit.Pixel(200);
-        settings.Columns.Add("TelefonoRepLegal", "Teléfono Representante Legal").Width = Unit.Pixel(200);
+        settings.Columns.Add("TelefonoRepresentante", "Teléfono Representante Legal").Width = Unit.Pixel(200);
+        settings.Columns.Add("CelularRepresentante", "Celular Representante Legal").Width = Unit.Pixel(200);
         settings.Columns.Add("NomSede", "Sede").Width = Unit.Pixel(200);
         settings.Columns.Add("NomNivel", "Nivel").Width = Unit.Pixel(150);
         settings.Columns.Add("NomJornada", "Jornada").Width = Unit.Pixel(150);
         settings.Columns.Add("NomCurso", "Curso").Width = Unit.Pixel(150);
-        settings.Columns.Add("NomParalelo", "Paralelo").Width = Unit.Pixel(50);
-
+        settings.Columns.Add("NomParalelo", "Paralelo").Width = Unit.Pixel(100);
+        
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

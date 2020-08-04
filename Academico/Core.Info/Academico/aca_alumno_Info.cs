@@ -227,10 +227,10 @@ namespace Core.Info.Academico
 
         #region Datos Alumno Periodo Actual
         public string NomRepLegal { get; set; }
-        public string TelefonoRepLegal { get; set; }
+        public string CelularRepresentante { get; set; }
         public string CorreoRepLegal { get; set; }
         public string NomRepEconomico { get; set; }
-        public string TelefonoRepEconomico { get; set; }
+        public string CelularEmiteFactura { get; set; }
         public string correoRepEconomico { get; set; }
         public int IdAnio { get; set; }
         public int IdJornada { get; set; }
@@ -245,6 +245,8 @@ namespace Core.Info.Academico
         public double Saldo { get; set; }
         public double SaldoProntoPago { get; set; }
         public string NomPlantillaTipo { get; set; }
+        public string TelefonoEmiteFactura { get; set; }
+        public string TelefonoRepresentante { get; set; }
         #endregion
 
         #endregion

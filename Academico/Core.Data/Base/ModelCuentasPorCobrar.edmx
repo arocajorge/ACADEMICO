@@ -703,6 +703,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwcxc_SeguimientoCartera' no tiene
           <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" />
           <Property Name="CorreoEnviado" Type="bit" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -1331,7 +1332,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
     [vwcxc_SeguimientoCartera].[Observacion] AS [Observacion], 
     [vwcxc_SeguimientoCartera].[Estado] AS [Estado], 
     [vwcxc_SeguimientoCartera].[IdMatricula] AS [IdMatricula], 
-    [vwcxc_SeguimientoCartera].[CorreoEnviado] AS [CorreoEnviado]
+    [vwcxc_SeguimientoCartera].[CorreoEnviado] AS [CorreoEnviado], 
+    [vwcxc_SeguimientoCartera].[IdUsuarioCreacion] AS [IdUsuarioCreacion]
     FROM [dbo].[vwcxc_SeguimientoCartera] AS [vwcxc_SeguimientoCartera]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcxc_cobro" EntityType="Self.vwcxc_cobro" store:Type="Views" store:Schema="web">
@@ -2760,6 +2762,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
           <Property Name="Estado" Type="Boolean" Nullable="false" />
           <Property Name="IdMatricula" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CorreoEnviado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3457,6 +3460,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
           <EntitySetMapping Name="vwcxc_SeguimientoCartera">
             <EntityTypeMapping TypeName="ModelCuentasPorCobrar.vwcxc_SeguimientoCartera">
               <MappingFragment StoreEntitySet="vwcxc_SeguimientoCartera">
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
                 <ScalarProperty Name="CorreoEnviado" ColumnName="CorreoEnviado" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />

@@ -496,6 +496,8 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_CantMinima.Value = model.CantMinima;
+            report.p_CantMaxima.Value = model.CantMaxima;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -519,6 +521,8 @@ namespace Core.Web.Areas.Reportes.Controllers
             ReportResumen.p_IdParalelo.Value = model.IdParalelo;
             ReportResumen.p_FechaCorte.Value = model.fecha_fin;
             ReportResumen.p_IdAlumno.Value = model.IdAlumno;
+            ReportResumen.p_CantMinima.Value = model.CantMinima;
+            ReportResumen.p_CantMaxima.Value = model.CantMaxima;
             ReportResumen.usuario = SessionFixed.IdUsuario;
             ReportResumen.empresa = SessionFixed.NomEmpresa;
 
@@ -549,6 +553,8 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_CantMinima.Value = model.CantMinima;
+            report.p_CantMaxima.Value = model.CantMaxima;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -572,6 +578,8 @@ namespace Core.Web.Areas.Reportes.Controllers
             ReportResumen.p_IdParalelo.Value = model.IdParalelo;
             ReportResumen.p_FechaCorte.Value = model.fecha_fin;
             ReportResumen.p_IdAlumno.Value = model.IdAlumno;
+            ReportResumen.p_CantMinima.Value = model.CantMinima;
+            ReportResumen.p_CantMaxima.Value = model.CantMaxima;
             ReportResumen.usuario = SessionFixed.IdUsuario;
             ReportResumen.empresa = SessionFixed.NomEmpresa;
 

@@ -86,6 +86,8 @@
             this.xrPivotGridField9 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrPivotGridField13 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.p_CantMinima = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_CantMaxima = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
@@ -623,6 +625,16 @@
             this.GroupHeader1.HeightF = 228.5F;
             this.GroupHeader1.Name = "GroupHeader1";
             // 
+            // p_CantMinima
+            // 
+            this.p_CantMinima.Name = "p_CantMinima";
+            this.p_CantMinima.Visible = false;
+            // 
+            // p_CantMaxima
+            // 
+            this.p_CantMaxima.Name = "p_CantMaxima";
+            this.p_CantMaxima.Visible = false;
+            // 
             // CXC_008_Resumen_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -650,7 +662,9 @@
             this.p_IdCurso,
             this.p_FechaCorte,
             this.p_IdParalelo,
-            this.p_IdAlumno});
+            this.p_IdAlumno,
+            this.p_CantMinima,
+            this.p_CantMaxima});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.CXC_008_Resumen_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
@@ -719,5 +733,7 @@
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField9;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField xrPivotGridField13;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader1;
+        public DevExpress.XtraReports.Parameters.Parameter p_CantMinima;
+        public DevExpress.XtraReports.Parameters.Parameter p_CantMaxima;
     }
 }

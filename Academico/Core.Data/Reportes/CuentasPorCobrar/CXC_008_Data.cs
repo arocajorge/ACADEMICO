@@ -10,7 +10,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
 {
     public class CXC_008_Data
     {
-        public List<CXC_008_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, DateTime FechaCorte)
+        public List<CXC_008_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, DateTime FechaCorte, int CantMin, int CantMax)
         {
             try
             {
