@@ -18,7 +18,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
 
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
-                    var lst = db.SPCXC_008(IdEmpresa, FechaCorte, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno).ToList();
+                    var lst = db.SPCXC_008(IdEmpresa, FechaCorte, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, CantMin, CantMax).ToList();
                     foreach (var q in lst)
                     {
                         Lista.Add(new CXC_008_Info
@@ -66,7 +66,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
 
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

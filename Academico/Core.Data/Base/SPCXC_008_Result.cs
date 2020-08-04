@@ -45,5 +45,6 @@ namespace Core.Data.Base
         public string NomJornada { get; set; }
         public string NomCurso { get; set; }
         public string NomParalelo { get; set; }
+        public Nullable<int> Cont { get; set; }
     }
 }
