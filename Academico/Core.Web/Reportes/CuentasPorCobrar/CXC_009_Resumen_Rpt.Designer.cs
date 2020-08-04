@@ -51,6 +51,8 @@
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
             this.fieldTipo = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.fielddcValorPago = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.fieldOrdenRubros = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.fieldObservacion = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrTable8 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow16 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -63,8 +65,6 @@
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_FechaIni = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_FechaFin = new DevExpress.XtraReports.Parameters.Parameter();
-            this.fieldOrdenRubros = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.fieldObservacion = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -256,6 +256,7 @@
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintRowHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintUnusedFilterFields = false;
+            this.xrPivotGrid1.OptionsView.ShowRowTotals = false;
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(751.0005F, 165F);
             // 
             // fieldTipo
@@ -273,6 +274,21 @@
             this.fielddcValorPago.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.fielddcValorPago.FieldName = "dc_ValorPago";
             this.fielddcValorPago.Name = "fielddcValorPago";
+            // 
+            // fieldOrdenRubros
+            // 
+            this.fieldOrdenRubros.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.fieldOrdenRubros.AreaIndex = 0;
+            this.fieldOrdenRubros.FieldName = "OrdenRubros";
+            this.fieldOrdenRubros.Name = "fieldOrdenRubros";
+            // 
+            // fieldObservacion
+            // 
+            this.fieldObservacion.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.fieldObservacion.AreaIndex = 1;
+            this.fieldObservacion.FieldName = "Observacion";
+            this.fieldObservacion.Name = "fieldObservacion";
+            this.fieldObservacion.Width = 200;
             // 
             // PageFooter
             // 
@@ -405,21 +421,6 @@
             // 
             this.p_FechaFin.Name = "p_FechaFin";
             this.p_FechaFin.Visible = false;
-            // 
-            // fieldOrdenRubros
-            // 
-            this.fieldOrdenRubros.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.fieldOrdenRubros.AreaIndex = 0;
-            this.fieldOrdenRubros.FieldName = "OrdenRubros";
-            this.fieldOrdenRubros.Name = "fieldOrdenRubros";
-            // 
-            // fieldObservacion
-            // 
-            this.fieldObservacion.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.fieldObservacion.AreaIndex = 1;
-            this.fieldObservacion.FieldName = "Observacion";
-            this.fieldObservacion.Name = "fieldObservacion";
-            this.fieldObservacion.Width = 200;
             // 
             // CXC_009_Resumen_Rpt
             // 

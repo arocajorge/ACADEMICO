@@ -34,6 +34,8 @@ namespace Core.Info.Helps
         public int IdBodega { get; set; }
         public string CodDocumentoTipo { get; set; }
         public string Correos { get; set; }
+        public int CantMinima { get; set; }
+        public int CantMaxima { get; set; }
 
         public int IdTipoCbte { get; set; }
         public decimal IdCbteCble { get; set; }

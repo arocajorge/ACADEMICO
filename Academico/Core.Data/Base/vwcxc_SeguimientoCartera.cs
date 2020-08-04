@@ -24,5 +24,6 @@ namespace Core.Data.Base
         public bool Estado { get; set; }
         public Nullable<decimal> IdMatricula { get; set; }
         public bool CorreoEnviado { get; set; }
+        public string IdUsuarioCreacion { get; set; }
     }
 }

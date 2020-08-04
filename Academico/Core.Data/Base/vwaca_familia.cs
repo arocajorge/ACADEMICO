@@ -64,5 +64,6 @@ namespace Core.Data.Base
         public string IdParroquia { get; set; }
         public string Sector { get; set; }
         public bool Estado { get; set; }
+        public string Telefono { get; set; }
     }
 }

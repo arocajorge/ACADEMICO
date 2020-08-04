@@ -100,6 +100,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="Codigo">Cant Min</label>
+                            @Html.TextBoxFor(q => q.CantMinima, new { @class = "form-control", @id = "CantMinima" })
+                            @Html.ValidationMessageFor(q => q.CantMinima, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="Codigo">Cant Max</label>
+                            @Html.TextBoxFor(q => q.CantMaxima, new { @class = "form-control", @id = "CantMaxima" })
+                            @Html.ValidationMessageFor(q => q.CantMaxima, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
             </div>
             

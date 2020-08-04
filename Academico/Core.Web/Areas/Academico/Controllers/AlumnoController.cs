@@ -723,7 +723,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.pe_fechaNacimiento_padre = info_fam_padre.pe_fechaNacimiento;
             model.pe_sexo_padre = info_fam_padre.pe_sexo;
             model.IdEstadoCivil_padre = info_fam_padre.IdEstadoCivil;
-            model.pe_telfono_Contacto_padre = info_fam_padre.pe_telfono_Contacto;
+            model.pe_telfono_Contacto_padre = info_fam_padre.Telefono;
             model.Celular_padre = info_fam_padre.Celular;
             model.Correo_padre = info_fam_padre.Correo;
             model.Direccion_padre = info_fam_padre.Direccion;
@@ -770,7 +770,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.pe_fechaNacimiento_madre = info_fam_madre.pe_fechaNacimiento;
             model.pe_sexo_madre = info_fam_madre.pe_sexo;
             model.IdEstadoCivil_madre = info_fam_madre.IdEstadoCivil;
-            model.pe_telfono_Contacto_madre = info_fam_madre.pe_telfono_Contacto;
+            model.pe_telfono_Contacto_madre = info_fam_madre.Telefono;
             model.Celular_madre = info_fam_madre.Celular;
             model.Correo_madre = info_fam_madre.Correo;
             model.Direccion_madre = info_fam_madre.Direccion;
@@ -928,7 +928,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.pe_fechaNacimiento_padre = info_fam_padre.pe_fechaNacimiento;
             model.pe_sexo_padre = info_fam_padre.pe_sexo;
             model.IdEstadoCivil_padre = info_fam_padre.IdEstadoCivil;
-            model.pe_telfono_Contacto_padre = info_fam_padre.pe_telfono_Contacto;
+            model.pe_telfono_Contacto_padre = info_fam_padre.Telefono;
             model.Celular_padre = info_fam_padre.Celular;
             model.Correo_padre = info_fam_padre.Correo;
             model.Direccion_padre = info_fam_padre.Direccion;
@@ -975,7 +975,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.pe_fechaNacimiento_madre = info_fam_madre.pe_fechaNacimiento;
             model.pe_sexo_madre = info_fam_madre.pe_sexo;
             model.IdEstadoCivil_madre = info_fam_madre.IdEstadoCivil;
-            model.pe_telfono_Contacto_madre = info_fam_madre.pe_telfono_Contacto;
+            model.pe_telfono_Contacto_madre = info_fam_madre.Telefono;
             model.Celular_madre = info_fam_madre.Celular;
             model.Correo_madre = info_fam_madre.Correo;
             model.Direccion_madre = info_fam_madre.Direccion;
@@ -1163,7 +1163,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.pe_fechaNacimiento_padre = info_fam_padre.pe_fechaNacimiento;
             model.pe_sexo_padre = info_fam_padre.pe_sexo;
             model.IdEstadoCivil_padre = info_fam_padre.IdEstadoCivil;
-            model.pe_telfono_Contacto_padre = info_fam_padre.pe_telfono_Contacto;
+            model.pe_telfono_Contacto_padre = info_fam_padre.Telefono;
             model.Celular_padre = info_fam_padre.Celular;
             model.Correo_padre = info_fam_padre.Correo;
             model.Direccion_padre = info_fam_padre.Direccion;
@@ -1195,7 +1195,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.pe_fechaNacimiento_madre = info_fam_madre.pe_fechaNacimiento;
             model.pe_sexo_madre = info_fam_madre.pe_sexo;
             model.IdEstadoCivil_madre = info_fam_madre.IdEstadoCivil;
-            model.pe_telfono_Contacto_madre = info_fam_madre.pe_telfono_Contacto;
+            model.pe_telfono_Contacto_madre = info_fam_madre.Telefono;
             model.Celular_madre = info_fam_madre.Celular;
             model.Correo_madre = info_fam_madre.Correo;
             model.Direccion_madre = info_fam_madre.Direccion;

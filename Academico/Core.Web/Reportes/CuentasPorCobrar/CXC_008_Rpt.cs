@@ -36,8 +36,10 @@ namespace Core.Web.Reportes.CuentasPorCobrar
                 int IdCurso = string.IsNullOrEmpty(p_IdCurso.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCurso.Value);
                 int IdParalelo = string.IsNullOrEmpty(p_IdParalelo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdParalelo.Value);
                 decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdAlumno.Value);
+                int CantMin = string.IsNullOrEmpty(p_CantMinima.Value.ToString()) ? 0 : Convert.ToInt32(p_CantMinima.Value);
+                int CantMax = string.IsNullOrEmpty(p_CantMaxima.Value.ToString()) ? 0 : Convert.ToInt32(p_CantMaxima.Value);
                 DateTime FechaFin = string.IsNullOrEmpty(p_FechaCorte.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_FechaCorte.Value);
-                List<CXC_008_Info> Lista = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo,IdAlumno,FechaFin);
+                List<CXC_008_Info> Lista = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo,IdAlumno,FechaFin, CantMin, CantMax);
                 this.DataSource = Lista;
 
                 tb_empresa_Bus bus_empresa = new tb_empresa_Bus();

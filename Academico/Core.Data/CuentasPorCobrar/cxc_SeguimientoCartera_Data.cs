@@ -35,6 +35,7 @@ namespace Core.Data.CuentasPorCobrar
                             Observacion = q.Observacion,
                             CorreoEnviado = q.CorreoEnviado,
                             IdMatricula = q.IdMatricula,
+                            IdUsuarioCreacion = q.IdUsuarioCreacion,
                             Estado = q.Estado
                         });
                     });

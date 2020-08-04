@@ -1597,6 +1597,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
           <Parameter Name="IdCurso" Type="int" Mode="In" />
           <Parameter Name="IdParalelo" Type="int" Mode="In" />
           <Parameter Name="IdAlumno" Type="numeric" Mode="In" />
+          <Parameter Name="CantIni" Type="int" Mode="In" />
+          <Parameter Name="CantFin" Type="int" Mode="In" />
         </Function>
         <Function Name="SPCXC_009" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -2665,17 +2667,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
           </FunctionImport>
           <EntitySet Name="VWFAC_007" EntityType="ModelReportes.VWFAC_007" />
           <EntitySet Name="VWACA_012" EntityType="ModelReportes.VWACA_012" />
-          <FunctionImport Name="SPCXC_008" ReturnType="Collection(ModelReportes.SPCXC_008_Result)">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="FechaCorte" Mode="In" Type="DateTime" />
-            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
-            <Parameter Name="IdSede" Mode="In" Type="Int32" />
-            <Parameter Name="IdNivel" Mode="In" Type="Int32" />
-            <Parameter Name="IdJornada" Mode="In" Type="Int32" />
-            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
-            <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
-            <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
-          </FunctionImport>
           <EntitySet Name="VWACA_011" EntityType="ModelReportes.VWACA_011" />
           <FunctionImport Name="SPCXC_007" ReturnType="Collection(ModelReportes.SPCXC_007_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
@@ -2777,6 +2768,19 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
             <Parameter Name="FechaCorte" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="VWCXC_012" EntityType="ModelReportes.VWCXC_012" />
+          <FunctionImport Name="SPCXC_008" ReturnType="Collection(ModelReportes.SPCXC_008_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="FechaCorte" Mode="In" Type="DateTime" />
+            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
+            <Parameter Name="IdSede" Mode="In" Type="Int32" />
+            <Parameter Name="IdNivel" Mode="In" Type="Int32" />
+            <Parameter Name="IdJornada" Mode="In" Type="Int32" />
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+            <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
+            <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
+            <Parameter Name="CantIni" Mode="In" Type="Int32" />
+            <Parameter Name="CantFin" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACA_001_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -4067,40 +4071,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
           <Property Name="DescripcionAnio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstadoPago" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
         </EntityType>
-        <ComplexType Name="SPCXC_008_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
-          <Property Type="Int32" Name="IdBodega" Nullable="false" />
-          <Property Type="Decimal" Name="IdCbteVta" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="DateTime" Name="vt_fecha" Nullable="false" Precision="23" />
-          <Property Type="String" Name="vt_Observacion" Nullable="true" />
-          <Property Type="String" Name="vt_NumFactura" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="CodigoAlumno" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
-          <Property Type="Int32" Name="Periodo" Nullable="true" />
-          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Double" Name="TotalPagado" Nullable="false" />
-          <Property Type="Double" Name="Saldo" Nullable="true" />
-          <Property Type="DateTime" Name="vt_fech_venc" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="Plazo" Nullable="true" />
-          <Property Type="Decimal" Name="IdMatricula" Nullable="true" Precision="18" Scale="0" />
-          <Property Type="Int32" Name="IdAnio" Nullable="true" />
-          <Property Type="Int32" Name="IdSede" Nullable="true" />
-          <Property Type="Int32" Name="IdNivel" Nullable="true" />
-          <Property Type="Int32" Name="IdJornada" Nullable="true" />
-          <Property Type="Int32" Name="IdCurso" Nullable="true" />
-          <Property Type="Int32" Name="IdParalelo" Nullable="true" />
-          <Property Type="Int32" Name="OrdenNivel" Nullable="true" />
-          <Property Type="Int32" Name="OrdenJornada" Nullable="true" />
-          <Property Type="Int32" Name="OrdenCurso" Nullable="true" />
-          <Property Type="Int32" Name="OrdenParalelo" Nullable="true" />
-          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
-        </ComplexType>
         <EntityType Name="VWACA_011">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -4911,6 +4881,41 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
           <Property Name="CodigoParalelo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="OrdenParalelo" Type="Int32" />
         </EntityType>
+        <ComplexType Name="SPCXC_008_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdSucursal" Nullable="false" />
+          <Property Type="Int32" Name="IdBodega" Nullable="false" />
+          <Property Type="Decimal" Name="IdCbteVta" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="vt_fecha" Nullable="false" Precision="23" />
+          <Property Type="String" Name="vt_Observacion" Nullable="true" />
+          <Property Type="String" Name="vt_NumFactura" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="CodigoAlumno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Periodo" Nullable="true" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Double" Name="TotalPagado" Nullable="false" />
+          <Property Type="Double" Name="Saldo" Nullable="true" />
+          <Property Type="DateTime" Name="vt_fech_venc" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Plazo" Nullable="true" />
+          <Property Type="Decimal" Name="IdMatricula" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdAnio" Nullable="true" />
+          <Property Type="Int32" Name="IdSede" Nullable="true" />
+          <Property Type="Int32" Name="IdNivel" Nullable="true" />
+          <Property Type="Int32" Name="IdJornada" Nullable="true" />
+          <Property Type="Int32" Name="IdCurso" Nullable="true" />
+          <Property Type="Int32" Name="IdParalelo" Nullable="true" />
+          <Property Type="Int32" Name="OrdenNivel" Nullable="true" />
+          <Property Type="Int32" Name="OrdenJornada" Nullable="true" />
+          <Property Type="Int32" Name="OrdenCurso" Nullable="true" />
+          <Property Type="Int32" Name="OrdenParalelo" Nullable="true" />
+          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="Cont" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5939,44 +5944,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SPCXC_008" FunctionName="ModelReportes.Store.SPCXC_008">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ModelReportes.SPCXC_008_Result">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
-                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
-                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
-                <ScalarProperty Name="vt_Observacion" ColumnName="vt_Observacion" />
-                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="TotalPagado" ColumnName="TotalPagado" />
-                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-                <ScalarProperty Name="vt_fech_venc" ColumnName="vt_fech_venc" />
-                <ScalarProperty Name="Plazo" ColumnName="Plazo" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
-                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
-                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
-                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
-                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
-                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
-                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
-                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
-                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
-                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
-                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
-                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="VWACA_011">
             <EntityTypeMapping TypeName="ModelReportes.VWACA_011">
               <MappingFragment StoreEntitySet="VWACA_011">
@@ -6742,6 +6709,45 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPCXC_008" FunctionName="ModelReportes.Store.SPCXC_008">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPCXC_008_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdBodega" ColumnName="IdBodega" />
+                <ScalarProperty Name="IdCbteVta" ColumnName="IdCbteVta" />
+                <ScalarProperty Name="vt_fecha" ColumnName="vt_fecha" />
+                <ScalarProperty Name="vt_Observacion" ColumnName="vt_Observacion" />
+                <ScalarProperty Name="vt_NumFactura" ColumnName="vt_NumFactura" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Periodo" ColumnName="Periodo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="TotalPagado" ColumnName="TotalPagado" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="vt_fech_venc" ColumnName="vt_fech_venc" />
+                <ScalarProperty Name="Plazo" ColumnName="Plazo" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
+                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
+                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
+                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="Cont" ColumnName="Cont" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

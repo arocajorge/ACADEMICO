@@ -20,6 +20,7 @@ namespace Core.Data.Base
         public int IdCatalogoPAREN { get; set; }
         public decimal IdPersona { get; set; }
         public string Direccion { get; set; }
+        public string Telefono { get; set; }
         public string Celular { get; set; }
         public string Correo { get; set; }
         public Nullable<int> IdCatalogoFichaInst { get; set; }

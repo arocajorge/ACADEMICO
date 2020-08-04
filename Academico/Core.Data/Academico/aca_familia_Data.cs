@@ -35,6 +35,7 @@ namespace Core.Data.Academico
                             IdCatalogoPAREN = q.IdCatalogoPAREN,
                             NomCatalogo = q.NomCatalogo,
                             Direccion = q.Direccion,
+                            Telefono = q.Telefono,
                             Celular =q.Celular,
                             Correo =q.Correo,
                             SeFactura = q.SeFactura,
@@ -93,6 +94,7 @@ namespace Core.Data.Academico
                         IdPersona = Entity.IdPersona,
                         IdCatalogoPAREN = Entity.IdCatalogoPAREN,
                         Direccion = Entity.Direccion,
+                        Telefono = Entity.Telefono,
                         Celular = Entity.Celular,
                         Correo = Entity.Correo,
                         SeFactura = Entity.SeFactura,
@@ -168,6 +170,7 @@ namespace Core.Data.Academico
                         IdPersona = Entity.IdPersona,
                         IdCatalogoPAREN = Entity.IdCatalogoPAREN,
                         Direccion = Entity.Direccion,
+                        Telefono = Entity.Telefono,
                         Celular = Entity.Celular,
                         Correo = Entity.Correo,
                         SeFactura = Entity.SeFactura,
@@ -239,6 +242,7 @@ namespace Core.Data.Academico
                         IdPersona = Entity.IdPersona,
                         IdCatalogoPAREN = Entity.IdCatalogoPAREN,
                         Direccion = Entity.Direccion,
+                        Telefono = Entity.Telefono,
                         Celular = Entity.Celular,
                         Correo = Entity.Correo,
                         SeFactura = Entity.SeFactura,
@@ -313,6 +317,7 @@ namespace Core.Data.Academico
                         IdPersona = Entity.IdPersona,
                         IdCatalogoPAREN = Entity.IdCatalogoPAREN,
                         Direccion = Entity.Direccion,
+                        Telefono = Entity.Telefono,
                         Celular = Entity.Celular,
                         Correo = Entity.Correo,
                         SeFactura = Entity.SeFactura,
@@ -418,6 +423,7 @@ namespace Core.Data.Academico
                     IdCatalogoPAREN = Entity_fam.IdCatalogoPAREN,
                     Direccion = Entity_fam.Direccion,
                     Correo = Entity_fam.Correo,
+                    Telefono = Entity_fam.Telefono,
                     Celular = Entity_fam.Celular,
                     SeFactura = Entity_fam.SeFactura,
                     IdPersona = Entity_fam.IdPersona,
@@ -546,6 +552,7 @@ namespace Core.Data.Academico
                         IdCatalogoPAREN = info.IdCatalogoPAREN,
                         IdPersona = info.IdPersona,
                         Direccion = info.Direccion,
+                        Telefono = info.Telefono,
                         Celular = info.Celular,
                         Correo = info.Correo,
                         SeFactura = info.SeFactura,
@@ -642,6 +649,7 @@ namespace Core.Data.Academico
                     Entity.IdCatalogoPAREN = info.IdCatalogoPAREN;
                     Entity.IdPersona = info.IdPersona;
                     Entity.Direccion = info.Direccion;
+                    Entity.Telefono = info.Telefono;
                     Entity.Celular = info.Celular;
                     Entity.Correo = info.Correo;
                     Entity.SeFactura = info.SeFactura;
@@ -727,6 +735,7 @@ namespace Core.Data.Academico
                     NomCatalogo = Entity_fam.NomCatalogo,
                     Direccion = Entity_fam.Direccion,
                     Correo = Entity_fam.Correo,
+                    Telefono = Entity_fam.Telefono,
                     Celular = Entity_fam.Celular,
                     SeFactura = Entity_fam.SeFactura,
                     IdPersona = Entity_fam.IdPersona,

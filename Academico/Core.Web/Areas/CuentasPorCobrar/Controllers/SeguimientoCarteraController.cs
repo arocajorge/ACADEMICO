@@ -368,11 +368,14 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             model.Saldo = (info_alumno == null ? 0 : info_alumno.Saldo).ToString("C2");
             model.SaldoProntoPago = (info_alumno == null ? 0 : info_alumno.SaldoProntoPago).ToString("C2");
             model.RepLegal = (info_alumno == null ? "" : info_alumno.NomRepLegal);
-            model.TelefonoLegal = (info_alumno == null ? "" : info_alumno.TelefonoRepLegal);
+            model.TelefonoLegal = (info_alumno == null ? "" : info_alumno.TelefonoRepresentante);
+            model.CelularRepresentante = (info_alumno == null ? "" : info_alumno.CelularRepresentante);
             model.CorreoLegal = (info_alumno == null ? "" : info_alumno.correoRepEconomico);
             model.RepEconomico = (info_alumno == null ? "" : info_alumno.NomRepEconomico);
-            model.TelefonoEconomico = (info_alumno == null ? "" : info_alumno.TelefonoRepEconomico);
+            model.TelefonoEconomico = (info_alumno == null ? "" : info_alumno.TelefonoEmiteFactura);
+            model.CelularEmiteFactura = (info_alumno == null ? "" : info_alumno.CelularEmiteFactura);
             model.CorreoEconomico = (info_alumno == null ? "" : info_alumno.correoRepEconomico);
+            model.NomPlantillaTipo = (info_alumno == null ? "" : info_alumno.NomPlantillaTipo);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
 
             if (Exito)
@@ -421,11 +424,14 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             model.Saldo = (info_alumno == null ? 0 : info_alumno.Saldo).ToString("C2");
             model.SaldoProntoPago = (info_alumno == null ? 0 : info_alumno.SaldoProntoPago).ToString("C2");
             model.RepLegal = (info_alumno == null ? "" : info_alumno.NomRepLegal);
-            model.TelefonoLegal = (info_alumno == null ? "" : info_alumno.TelefonoRepLegal);
+            model.CelularRepresentante = (info_alumno == null ? "" : info_alumno.CelularRepresentante);
+            model.TelefonoLegal = (info_alumno == null ? "" : info_alumno.TelefonoRepresentante);
             model.CorreoLegal = (info_alumno == null ? "" : info_alumno.correoRepEconomico);
             model.RepEconomico = (info_alumno == null ? "" : info_alumno.NomRepEconomico);
-            model.TelefonoEconomico = (info_alumno == null ? "" : info_alumno.TelefonoRepEconomico);
+            model.TelefonoEconomico = (info_alumno == null ? "" : info_alumno.TelefonoEmiteFactura);
+            model.CelularEmiteFactura = (info_alumno == null ? "" : info_alumno.CelularEmiteFactura);
             model.CorreoEconomico = (info_alumno == null ? "" : info_alumno.correoRepEconomico);
+            model.NomPlantillaTipo = (info_alumno == null ? "" : info_alumno.NomPlantillaTipo);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
 
             return View(model);
