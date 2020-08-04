@@ -434,6 +434,8 @@ namespace Core.Web.Areas.Banco.Controllers
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(rutafile + NombreArchivo + ".txt", true))
                 {
                     var Lista = info.Lst_det;
+                    DateTime FechaIni = Convert.ToDateTime("01" + "-" + (Convert.ToDateTime(info.Fecha).Month) + "-" + (Convert.ToDateTime(info.Fecha).Year));
+                    DateTime FechaFin = Convert.ToDateTime(FechaIni.AddDays(-1).Day + "-" + FechaIni.Month + "-" + FechaIni.Year);
 
                     #region PRODUBANCO
                     if (info.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECPB))
@@ -445,7 +447,6 @@ namespace Core.Web.Areas.Banco.Controllers
                             double Valor = 0;
                             double valorEntero = 0;
                             double valorDecimal = 0;
-                            var FechaIni = Convert.ToDateTime("01" + "-" + (Convert.ToDateTime(item.FechaProntoPago).Month) + "-" + (Convert.ToDateTime(item.FechaProntoPago).Year));
 
                             Valor = (info.Fecha<= item.FechaProntoPago ? Convert.ToDouble(item.ValorProntoPago) : Convert.ToDouble(item.Valor));
                             valorEntero = Math.Floor(Valor);
@@ -483,7 +484,8 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += item.Secuencia.ToString() + "\t";
                             linea2 += "PP" + "\t";//COMPROBANTE DE PAGO
                             linea2 += FechaIni.Day.ToString().PadLeft(2, '0') + FechaIni.Month.ToString().PadLeft(2, '0') + FechaIni.Year.ToString() + "\t";//DESDE
-                            linea2 += Convert.ToDateTime(item.FechaProntoPago).Day.ToString().PadLeft(2, '0') + Convert.ToDateTime(item.FechaProntoPago).Month.ToString().PadLeft(2, '0') + Convert.ToDateTime(item.FechaProntoPago).Year.ToString() + "\t";//HASTA
+                            //linea2 += Convert.ToDateTime(item.FechaProntoPago).Day.ToString().PadLeft(2, '0') + Convert.ToDateTime(item.FechaProntoPago).Month.ToString().PadLeft(2, '0') + Convert.ToDateTime(item.FechaProntoPago).Year.ToString() + "\t";//HASTA
+                            linea2 += FechaFin.Day.ToString().PadLeft(2, '0') + FechaFin.Month.ToString().PadLeft(2, '0') + FechaFin.Year.ToString() + "\t";//HASTA
                             linea2 += "C" + "\t";
                             linea2 += "FI" + "\t";
                             linea2 += (valorEntero.ToString() + valorDecimal.ToString().PadRight(2, '0')).PadLeft(13, '0') + "\t";
@@ -510,7 +512,6 @@ namespace Core.Web.Areas.Banco.Controllers
                             Valor = (item.Fecha <= item.FechaProntoPago ? Convert.ToDouble(item.ValorProntoPago) : Convert.ToDouble(item.Valor));
                             valorEntero = Math.Floor(Valor);
                             valorDecimal = Convert.ToDouble((Valor - valorEntero).ToString("N2")) * 100;
-                            var FechaIni = Convert.ToDateTime("01" + "-" + (Convert.ToDateTime(item.FechaProntoPago).Month) + "-" + (Convert.ToDateTime(item.FechaProntoPago).Year));
 
                             linea1 += "CO";
                             linea1 += item.Secuencia.ToString().PadLeft(7, '0');
@@ -546,8 +547,9 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea3 += "RC";
                             linea3 += item.Secuencia.ToString().PadLeft(7, '0');
                             linea3 += "VM";
-                            linea3 += item.Fecha.Year.ToString() + item.Fecha.Month.ToString().PadLeft(2, '0') + item.Fecha.Day.ToString().PadLeft(2, '0');//DESDE
-                            linea3 += item.Fecha.Year.ToString() + item.Fecha.Month.ToString().PadLeft(2, '0') + item.Fecha.Day.ToString().PadLeft(2, '0');// HASTA
+                            linea3 += FechaIni.Year.ToString() + FechaIni.Month.ToString().PadLeft(2, '0') + FechaIni.Day.ToString().PadLeft(2, '0');//DESDE
+                            linea3 += FechaFin.Year.ToString() + FechaFin.Month.ToString().PadLeft(2, '0') + FechaFin.Day.ToString().PadLeft(2, '0');//HASTA                                                                                                                         
+                            //linea3 += Convert.ToDateTime(item.FechaProntoPago).Year.ToString() + Convert.ToDateTime(item.FechaProntoPago).Month.ToString().PadLeft(2, '0') + Convert.ToDateTime(item.FechaProntoPago).Day.ToString().PadLeft(2, '0');// HASTA
                             linea3 += "FI";
                             linea3 += "0000000000";
                             linea3 += "0000000000";
@@ -595,18 +597,16 @@ namespace Core.Web.Areas.Banco.Controllers
                             valorEnteroConDescuento = Math.Floor(ValorConDescuento);
                             valorDecimalConDescuento = Convert.ToDouble((ValorConDescuento - valorEnteroConDescuento).ToString("N2")) * 100;
 
-                            var FechaIni = Convert.ToDateTime("01" + "-" + (Convert.ToDateTime(item.FechaProntoPago).Month) + "-" + (Convert.ToDateTime(item.FechaProntoPago).Year));
-
                             var ValorDiferencia = Convert.ToDouble(item.Valor) - Convert.ToDouble(item.ValorProntoPago);
                             var valorEnteroDiferencia = Math.Floor(ValorDiferencia);
                             var valorDecimalDiferencia = Convert.ToDouble((ValorDiferencia - valorEnteroDiferencia).ToString("N2")) * 100;
 
                             linea2 += "094";
                             linea2 += item.CodigoAlumno.ToString().PadRight(15, ' ');
-                            linea2 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + "01" + "/" + info.Fecha.Year.ToString();
+                            linea2 += FechaIni.Month.ToString().PadLeft(2, '0') + "/" + FechaIni.Day.ToString().PadLeft(2, '0') + "/" + FechaIni.Year.ToString();
                             linea2 += "0".PadRight(3, ' ');
                             linea2 += (valorEntero.ToString().PadLeft(8, '0') + "." + valorDecimal.ToString().PadRight(2, '0'));
-                            linea2 += info.Fecha.Month.ToString().PadLeft(2, '0') + "/" + info.Fecha.Day.ToString().PadLeft(2, '0') + "/" + info.Fecha.Year.ToString();//FECHA TOPE DE PAGO
+                            linea2 += FechaFin.Month.ToString().PadLeft(2, '0') + "/" + FechaFin.Day.ToString().PadLeft(2, '0') + "/" + FechaFin.Year.ToString();//FECHA TOPE DE PAGO
                             linea2 += Convert.ToDateTime(item.FechaProntoPago).Month.ToString().PadLeft(2, '0') + "/" + Convert.ToDateTime(item.FechaProntoPago).Day.ToString().PadLeft(2, '0') + "/" + Convert.ToDateTime(item.FechaProntoPago).Year.ToString();//FECHA PRONTO PAGO
                             linea2 += "N";
                             linea2 += (string.IsNullOrEmpty(item.pe_nombreCompleto) ? "" : (item.pe_nombreCompleto.Length > 30 ? item.pe_nombreCompleto.Substring(0, 30) : item.pe_nombreCompleto.Trim())).PadRight(30, ' ');
