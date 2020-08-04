@@ -56,7 +56,7 @@ namespace Core.Data.CuentasPorCobrar
                     Lista.ForEach(q => { q.secuencia = q.dc_TipoDocumento + "-" + q.IdBodega_Cbte.ToString() + "-" + q.IdCbte_vta_nota.ToString(); q.dc_ValorPago = Convert.ToDouble(q.Saldo); });
                 }
 
-                return Lista;
+                return Lista.OrderBy(q=> q.vt_fecha).ToList();
             }
             catch (Exception)
             {
