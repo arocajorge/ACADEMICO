@@ -121,7 +121,6 @@
             this.xrTableRow12 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell16 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
-            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrRichText1 = new DevExpress.XtraReports.UI.XRRichText();
             this.lblReemplaza = new DevExpress.XtraReports.UI.XRLabel();
             this.xrTable10 = new DevExpress.XtraReports.UI.XRTable();
@@ -186,8 +185,10 @@
             this.xrTableCell69 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell70 = new DevExpress.XtraReports.UI.XRTableCell();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_Correos = new DevExpress.XtraReports.Parameters.Parameter();
+            this.SinDeuda = new DevExpress.XtraReports.UI.XRLabel();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
@@ -353,7 +354,7 @@
             this.IdAlumno.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdAlumno]")});
             this.IdAlumno.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.IdAlumno.ForeColor = System.Drawing.Color.Transparent;
+            this.IdAlumno.ForeColor = System.Drawing.Color.Black;
             this.IdAlumno.LocationFloat = new DevExpress.Utils.PointFloat(321.2292F, 50F);
             this.IdAlumno.Name = "IdAlumno";
             this.IdAlumno.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -977,6 +978,7 @@
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.SinDeuda,
             this.xrSubreport1,
             this.xrRichText1,
             this.lblReemplaza,
@@ -984,16 +986,8 @@
             this.xrTable9,
             this.xrTable7,
             this.xrTable6});
-            this.ReportFooter.HeightF = 469.5825F;
+            this.ReportFooter.HeightF = 494.6242F;
             this.ReportFooter.Name = "ReportFooter";
-            // 
-            // xrSubreport1
-            // 
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0.0001398722F, 446.5825F);
-            this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.ReportSource = new Core.Web.Reportes.Facturacion.FAC_002_PendientePago_Rpt();
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
-            this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
             // 
             // xrRichText1
             // 
@@ -1686,15 +1680,39 @@
             this.PageFooter.HeightF = 0F;
             this.PageFooter.Name = "PageFooter";
             // 
+            // p_Correos
+            // 
+            this.p_Correos.Name = "p_Correos";
+            this.p_Correos.Visible = false;
+            // 
+            // SinDeuda
+            // 
+            this.SinDeuda.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.SinDeuda.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
+            this.SinDeuda.LocationFloat = new DevExpress.Utils.PointFloat(0F, 474.6242F);
+            this.SinDeuda.Multiline = true;
+            this.SinDeuda.Name = "SinDeuda";
+            this.SinDeuda.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 0, 0, 100F);
+            this.SinDeuda.SizeF = new System.Drawing.SizeF(751.0001F, 20F);
+            this.SinDeuda.StylePriority.UseBorders = false;
+            this.SinDeuda.StylePriority.UseFont = false;
+            this.SinDeuda.StylePriority.UsePadding = false;
+            this.SinDeuda.Text = "USTED ESTA AL DÍA CON SUS PAGOS";
+            // 
             // objectDataSource1
             // 
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Facturacion.FAC_002_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
-            // p_Correos
+            // xrSubreport1
             // 
-            this.p_Correos.Name = "p_Correos";
-            this.p_Correos.Visible = false;
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 451.6242F);
+            this.xrSubreport1.Name = "xrSubreport1";
+            this.xrSubreport1.ReportSource = new Core.Web.Reportes.Facturacion.FAC_002_PendientePago_Rpt();
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(750.9999F, 23F);
+            this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
             // 
             // FAC_002_Rpt
             // 
@@ -1889,5 +1907,6 @@
         private DevExpress.XtraReports.UI.XRSubreport xrSubreport1;
         private DevExpress.XtraReports.UI.XRRichText xrRichText1;
         public DevExpress.XtraReports.Parameters.Parameter p_Correos;
+        private DevExpress.XtraReports.UI.XRLabel SinDeuda;
     }
 }

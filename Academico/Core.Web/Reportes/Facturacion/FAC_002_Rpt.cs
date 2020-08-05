@@ -57,6 +57,21 @@ namespace Core.Web.Reportes.Facturacion
                 Cadena = Cadena.Replace("{0}", Primero.cli_cedulaRuc).Replace("{1}", Primero.cli_Nombre);
                 lblReemplaza.Text = Cadena;
             }
+
+            FAC_002_Pendiente_Pago_Bus bus_cxc = new FAC_002_Pendiente_Pago_Bus();
+            var IdAlumnoRpt = (lst_rpt.Count==0 ? 0 : lst_rpt.FirstOrDefault().IdAlumno);
+            var lst_cxc = bus_cxc.get_list(IdEmpresa, IdSucursal, Convert.ToDecimal(IdAlumnoRpt));
+
+            if (lst_cxc.Count>0 && lst_cxc.Sum(q=>q.Saldo) > 0)
+            {
+                xrSubreport1.Visible = true;
+                SinDeuda.Visible = false;
+            }
+            else
+            {
+                xrSubreport1.Visible = false;
+                SinDeuda.Visible = true;
+            }
         }
 
         private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)

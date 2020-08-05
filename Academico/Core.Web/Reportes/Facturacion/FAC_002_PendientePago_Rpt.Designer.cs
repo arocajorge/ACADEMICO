@@ -65,6 +65,7 @@
             this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -408,6 +409,10 @@
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Facturacion.FAC_002_Pendiente_Pago_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
+            // PageFooter
+            // 
+            this.PageFooter.Name = "PageFooter";
+            // 
             // FAC_002_PendientePago_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -415,7 +420,8 @@
             this.BottomMargin,
             this.Detail,
             this.ReportHeader,
-            this.ReportFooter});
+            this.ReportFooter,
+            this.PageFooter});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
@@ -472,5 +478,6 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow2;
         private DevExpress.XtraReports.UI.XRTableCell Desde;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
+        private DevExpress.XtraReports.UI.PageFooterBand PageFooter;
     }
 }
