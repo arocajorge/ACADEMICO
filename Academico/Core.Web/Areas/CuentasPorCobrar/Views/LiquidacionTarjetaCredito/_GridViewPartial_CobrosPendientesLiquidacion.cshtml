@@ -47,7 +47,7 @@
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
         });
         settings.Columns.Add("pe_nombreCompleto", "Cliente").Width = Unit.Percentage(30);
-        settings.Columns.Add("cr_observacion", "Observación").Width = Unit.Percentage(30);
+        settings.Columns.Add("cr_observacion", "Observación").Width = Unit.Percentage(20);
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
@@ -55,6 +55,7 @@
             column.Caption = "Valor";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
+        settings.Columns.Add("IdUsuario", "Usuario").Width = Unit.Percentage(10);
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
         settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
     });

@@ -30,7 +30,8 @@ namespace Core.Data.CuentasPorCobrar
                                  IdCobro = q.IdCobro,
                                  cr_fecha = q.cr_fecha,
                                  cr_observacion = q.cr_observacion,
-                                 pe_nombreCompleto = q.pe_nombreCompleto 
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 IdUsuario = q.IdUsuario
                              }).ToList();
                 }
 

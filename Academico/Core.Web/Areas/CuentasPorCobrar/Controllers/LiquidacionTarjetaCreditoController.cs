@@ -74,6 +74,30 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 return false;
             }
 
+
+            if (i_validar.ListaCobros.Count>0)
+            {
+                if (Math.Round((i_validar.Total), 2, MidpointRounding.AwayFromZero) != Math.Round((i_validar.ListaFlujo.Sum(q => q.Valor)), 2, MidpointRounding.AwayFromZero))
+                {
+                    mensaje = "La suma de los detalles del flujo debe ser igual a el valor de la liquidacion";
+                    return false;
+                }
+            }
+            
+            var cta = bus_banco_cuenta.get_info(i_validar.IdEmpresa, i_validar.IdBanco);
+            if (cta == null)
+            {
+                mensaje = "Selecciona la cuenta bancaria";
+                return false;
+            }
+            if (cta.EsFlujoObligatorio)
+            {
+                if (i_validar.ListaFlujo.Count == 0)
+                {
+                    mensaje = "Falta distribución de flujo";
+                    return false;
+                }
+            }
             return true;
         }
         #endregion
@@ -275,6 +299,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             {
                 SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model.IdEmpresa, model.IdSucursal);
+                ViewBag.mensaje = mensaje;
                 return View(model);
             }
             if (!bus_LiquidacionTarjeta.guardarDB(model))
