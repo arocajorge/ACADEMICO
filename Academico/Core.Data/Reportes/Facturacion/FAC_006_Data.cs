@@ -51,8 +51,14 @@ namespace Core.Data.Reportes.Facturacion
                                  nom_FormaPago = q.nom_FormaPago,
                                  pe_cedulaRuc = q.pe_cedulaRuc,
                                  Tarifa = q.Tarifa,
-                                 vt_Observacion = q.vt_Observacion
-                                 
+                                 vt_Observacion = q.vt_Observacion,
+                                 IdJornada = q.IdJornada,
+                                 NomJornada = q.NomJornada,
+                                 OrdenJornada = q.OrdenJornada,
+                                 IdNivel = q.IdNivel,
+                                 NomNivel = q.NomNivel,
+                                 OrdenNivel = q.OrdenNivel,
+                                 Cantidad=1
                              }).ToList();
                 }
                 return Lista;

@@ -39,5 +39,11 @@ namespace Core.Data.Base
         public string pe_cedulaRuc { get; set; }
         public string vt_Observacion { get; set; }
         public string Tarifa { get; set; }
+        public Nullable<int> IdJornada { get; set; }
+        public Nullable<int> OrdenJornada { get; set; }
+        public string NomJornada { get; set; }
+        public Nullable<int> IdNivel { get; set; }
+        public Nullable<int> OrdenNivel { get; set; }
+        public string NomNivel { get; set; }
     }
 }

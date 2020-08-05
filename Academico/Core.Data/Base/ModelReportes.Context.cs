@@ -160,43 +160,6 @@ namespace Core.Data.Base
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPFAC_015_Result>("SPFAC_015", idEmpresaParameter, idSucursalParameter, fechaIniParameter, fechaFinParameter);
         }
     
-        public virtual ObjectResult<SPFAC_006_Result> SPFAC_006(Nullable<int> idEmpresa, Nullable<int> idSucursalIni, Nullable<int> idSucursalFin, Nullable<decimal> idAlumnoIni, Nullable<decimal> idAlumnoFin, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin, Nullable<bool> mostrarAnulados)
-        {
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            var idSucursalIniParameter = idSucursalIni.HasValue ?
-                new ObjectParameter("IdSucursalIni", idSucursalIni) :
-                new ObjectParameter("IdSucursalIni", typeof(int));
-    
-            var idSucursalFinParameter = idSucursalFin.HasValue ?
-                new ObjectParameter("IdSucursalFin", idSucursalFin) :
-                new ObjectParameter("IdSucursalFin", typeof(int));
-    
-            var idAlumnoIniParameter = idAlumnoIni.HasValue ?
-                new ObjectParameter("IdAlumnoIni", idAlumnoIni) :
-                new ObjectParameter("IdAlumnoIni", typeof(decimal));
-    
-            var idAlumnoFinParameter = idAlumnoFin.HasValue ?
-                new ObjectParameter("IdAlumnoFin", idAlumnoFin) :
-                new ObjectParameter("IdAlumnoFin", typeof(decimal));
-    
-            var fechaIniParameter = fechaIni.HasValue ?
-                new ObjectParameter("FechaIni", fechaIni) :
-                new ObjectParameter("FechaIni", typeof(System.DateTime));
-    
-            var fechaFinParameter = fechaFin.HasValue ?
-                new ObjectParameter("FechaFin", fechaFin) :
-                new ObjectParameter("FechaFin", typeof(System.DateTime));
-    
-            var mostrarAnuladosParameter = mostrarAnulados.HasValue ?
-                new ObjectParameter("MostrarAnulados", mostrarAnulados) :
-                new ObjectParameter("MostrarAnulados", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPFAC_006_Result>("SPFAC_006", idEmpresaParameter, idSucursalIniParameter, idSucursalFinParameter, idAlumnoIniParameter, idAlumnoFinParameter, fechaIniParameter, fechaFinParameter, mostrarAnuladosParameter);
-        }
-    
         public virtual ObjectResult<SPFAC_005_Result> SPFAC_005(Nullable<int> idEmpresa, Nullable<System.DateTime> fechaDesde, Nullable<System.DateTime> fechaHasta, string creDeb, string naturaleza)
         {
             var idEmpresaParameter = idEmpresa.HasValue ?
@@ -602,6 +565,43 @@ namespace Core.Data.Base
                 new ObjectParameter("CantFin", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPCXC_008_Result>("SPCXC_008", idEmpresaParameter, fechaCorteParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter, idAlumnoParameter, cantIniParameter, cantFinParameter);
+        }
+    
+        public virtual ObjectResult<SPFAC_006_Result> SPFAC_006(Nullable<int> idEmpresa, Nullable<int> idSucursalIni, Nullable<int> idSucursalFin, Nullable<decimal> idAlumnoIni, Nullable<decimal> idAlumnoFin, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin, Nullable<bool> mostrarAnulados)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idSucursalIniParameter = idSucursalIni.HasValue ?
+                new ObjectParameter("IdSucursalIni", idSucursalIni) :
+                new ObjectParameter("IdSucursalIni", typeof(int));
+    
+            var idSucursalFinParameter = idSucursalFin.HasValue ?
+                new ObjectParameter("IdSucursalFin", idSucursalFin) :
+                new ObjectParameter("IdSucursalFin", typeof(int));
+    
+            var idAlumnoIniParameter = idAlumnoIni.HasValue ?
+                new ObjectParameter("IdAlumnoIni", idAlumnoIni) :
+                new ObjectParameter("IdAlumnoIni", typeof(decimal));
+    
+            var idAlumnoFinParameter = idAlumnoFin.HasValue ?
+                new ObjectParameter("IdAlumnoFin", idAlumnoFin) :
+                new ObjectParameter("IdAlumnoFin", typeof(decimal));
+    
+            var fechaIniParameter = fechaIni.HasValue ?
+                new ObjectParameter("FechaIni", fechaIni) :
+                new ObjectParameter("FechaIni", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            var mostrarAnuladosParameter = mostrarAnulados.HasValue ?
+                new ObjectParameter("MostrarAnulados", mostrarAnulados) :
+                new ObjectParameter("MostrarAnulados", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPFAC_006_Result>("SPFAC_006", idEmpresaParameter, idSucursalIniParameter, idSucursalFinParameter, idAlumnoIniParameter, idAlumnoFinParameter, fechaIniParameter, fechaFinParameter, mostrarAnuladosParameter);
         }
     }
 }

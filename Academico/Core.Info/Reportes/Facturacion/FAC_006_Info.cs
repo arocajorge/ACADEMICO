@@ -8,7 +8,6 @@ namespace Core.Info.Reportes.Facturacion
 {
   public class FAC_006_Info
     {
-
         public int IdEmpresa { get; set; }
         public int IdSucursal { get; set; }
         public int IdBodega { get; set; }
@@ -35,5 +34,12 @@ namespace Core.Info.Reportes.Facturacion
         public string pe_cedulaRuc { get; set; }
         public string vt_Observacion { get; set; }
         public string Tarifa { get; set; }
+        public Nullable<int> IdJornada { get; set; }
+        public Nullable<int> OrdenJornada { get; set; }
+        public string NomJornada { get; set; }
+        public Nullable<int> IdNivel { get; set; }
+        public Nullable<int> OrdenNivel { get; set; }
+        public string NomNivel { get; set; }
+        public int Cantidad { get; set; }
     }
 }
