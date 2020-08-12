@@ -438,6 +438,13 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         return false;
                     }
                 }
+
+                var CantFechaMayor = i_validar.ListaDet.Where(q=>q.vt_fecha > i_validar.Fecha).Count();
+                if (CantFechaMayor>0)
+                {
+                    msg = "No puede realizar la conciliación ya que existen documentos en el detalle con fecha mayor a la conciliación";
+                    return false;
+                }
             }
 
             i_validar.IdUsuarioCreacion = SessionFixed.IdUsuario;

@@ -37,7 +37,6 @@
             this.p_IdSucursal = new DevExpress.XtraReports.Parameters.Parameter();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
             this.logo = new DevExpress.XtraReports.UI.XRPictureBox();
-            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable4 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow6 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell16 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -93,13 +92,16 @@
             this.xrTableRow7 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell20 = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblSaldo = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableRow12 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell30 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.lblSaldoConDscto = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblReemplaza = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.xrTableRow12 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell30 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.lblSaldoConDscto = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableRow13 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell31 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -148,7 +150,7 @@
             this.xrTable3,
             this.xrTable2,
             this.xrTable1});
-            this.PageHeader.HeightF = 239F;
+            this.PageHeader.HeightF = 258F;
             this.PageHeader.Name = "PageHeader";
             // 
             // logo
@@ -158,18 +160,10 @@
             this.logo.SizeF = new System.Drawing.SizeF(129.6876F, 78.00001F);
             this.logo.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
-            // xrSubreport1
-            // 
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 216F);
-            this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.ReportSource = new Core.Web.Reportes.CuentasPorCobrar.CXC_002_Aplicaciones_Rpt();
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(751.0002F, 23F);
-            this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
-            // 
             // xrTable4
             // 
             this.xrTable4.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 172F);
+            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 191F);
             this.xrTable4.Name = "xrTable4";
             this.xrTable4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 5, 0, 100F);
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -258,7 +252,7 @@
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable3.BorderWidth = 2F;
             this.xrTable3.Font = new System.Drawing.Font("Verdana", 10F);
-            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 147F);
+            this.xrTable3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 166F);
             this.xrTable3.Name = "xrTable3";
             this.xrTable3.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -314,7 +308,7 @@
             // xrTable2
             // 
             this.xrTable2.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 78F);
+            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 100F);
             this.xrTable2.Name = "xrTable2";
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 5, 0, 100F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -511,8 +505,9 @@
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1,
             this.xrTableRow8,
-            this.xrTableRow2});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(620.3124F, 75F);
+            this.xrTableRow2,
+            this.xrTableRow13});
+            this.xrTable1.SizeF = new System.Drawing.SizeF(620.3124F, 100F);
             this.xrTable1.StylePriority.UseTextAlignment = false;
             this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
@@ -743,6 +738,32 @@
             this.lblSaldo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             this.lblSaldo.Weight = 0.91826240473071286D;
             // 
+            // xrTableRow12
+            // 
+            this.xrTableRow12.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell30,
+            this.lblSaldoConDscto});
+            this.xrTableRow12.Name = "xrTableRow12";
+            this.xrTableRow12.Weight = 1D;
+            // 
+            // xrTableCell30
+            // 
+            this.xrTableCell30.Multiline = true;
+            this.xrTableCell30.Name = "xrTableCell30";
+            this.xrTableCell30.Text = "SALDO CON DSCTO.";
+            this.xrTableCell30.Weight = 1.0817375952692871D;
+            // 
+            // lblSaldoConDscto
+            // 
+            this.lblSaldoConDscto.Multiline = true;
+            this.lblSaldoConDscto.Name = "lblSaldoConDscto";
+            this.lblSaldoConDscto.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 2, 0, 100F);
+            this.lblSaldoConDscto.StylePriority.UsePadding = false;
+            this.lblSaldoConDscto.StylePriority.UseTextAlignment = false;
+            this.lblSaldoConDscto.Text = "lblSaldoConDscto";
+            this.lblSaldoConDscto.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            this.lblSaldoConDscto.Weight = 0.91826240473071286D;
+            // 
             // lblReemplaza
             // 
             this.lblReemplaza.Font = new System.Drawing.Font("Verdana", 7F);
@@ -778,31 +799,35 @@
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.CuentasPorCobrar.CXC_002_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
-            // xrTableRow12
+            // xrTableRow13
             // 
-            this.xrTableRow12.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell30,
-            this.lblSaldoConDscto});
-            this.xrTableRow12.Name = "xrTableRow12";
-            this.xrTableRow12.Weight = 1D;
+            this.xrTableRow13.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell31});
+            this.xrTableRow13.Name = "xrTableRow13";
+            this.xrTableRow13.Weight = 1D;
             // 
-            // xrTableCell30
+            // xrTableCell31
             // 
-            this.xrTableCell30.Multiline = true;
-            this.xrTableCell30.Name = "xrTableCell30";
-            this.xrTableCell30.Text = "SALDO CON DSCTO.";
-            this.xrTableCell30.Weight = 1.0817375952692871D;
+            this.xrTableCell31.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([cr_estado]==\'ANULADO\',\'ANULADO\' ,\'\' )")});
+            this.xrTableCell31.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell31.ForeColor = System.Drawing.Color.Red;
+            this.xrTableCell31.Multiline = true;
+            this.xrTableCell31.Name = "xrTableCell31";
+            this.xrTableCell31.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 129, 0, 0, 100F);
+            this.xrTableCell31.StylePriority.UseFont = false;
+            this.xrTableCell31.StylePriority.UseForeColor = false;
+            this.xrTableCell31.StylePriority.UsePadding = false;
+            this.xrTableCell31.Text = "xrTableCell31";
+            this.xrTableCell31.Weight = 2.00267022696929D;
             // 
-            // lblSaldoConDscto
+            // xrSubreport1
             // 
-            this.lblSaldoConDscto.Multiline = true;
-            this.lblSaldoConDscto.Name = "lblSaldoConDscto";
-            this.lblSaldoConDscto.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 2, 0, 100F);
-            this.lblSaldoConDscto.StylePriority.UsePadding = false;
-            this.lblSaldoConDscto.StylePriority.UseTextAlignment = false;
-            this.lblSaldoConDscto.Text = "lblSaldoConDscto";
-            this.lblSaldoConDscto.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
-            this.lblSaldoConDscto.Weight = 0.91826240473071286D;
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(2.543131E-05F, 235F);
+            this.xrSubreport1.Name = "xrSubreport1";
+            this.xrSubreport1.ReportSource = new Core.Web.Reportes.CuentasPorCobrar.CXC_002_Aplicaciones_Rpt();
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(751.0002F, 23F);
+            this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
             // 
             // CXC_002_Rpt
             // 
@@ -911,5 +936,7 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow12;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell30;
         private DevExpress.XtraReports.UI.XRTableCell lblSaldoConDscto;
+        private DevExpress.XtraReports.UI.XRTableRow xrTableRow13;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell31;
     }
 }

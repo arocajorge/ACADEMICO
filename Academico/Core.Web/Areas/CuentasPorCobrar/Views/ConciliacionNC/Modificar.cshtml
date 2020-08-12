@@ -1,6 +1,6 @@
 ﻿@model Core.Info.CuentasPorCobrar.cxc_ConciliacionNotaCredito_Info
 @{
-    ViewBag.Title = "Modificiar conciliación de nota de crédito";
+    ViewBag.Title = ("Modificiar conciliación de nota de crédito" + " con ID #" + @Model.IdConciliacion);
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");

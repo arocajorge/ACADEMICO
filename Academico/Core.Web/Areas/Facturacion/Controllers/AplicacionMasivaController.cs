@@ -192,13 +192,13 @@ namespace Core.Web.Areas.Facturacion.Controllers
             var lst_det = new List<fa_AplicacionMasivaDet_Info>();
             foreach (var item in lst_Final)
             {
-                lst_det.Add(new fa_AplicacionMasivaDet_Info
-                {
-                    IdEmpresa = item.IdEmpresa,
-                    IdAlumno = item.IdAlumno,
-                    pe_nombreCompleto = item.pe_nombreCompleto,
-                    Saldo = item.Saldo
-                });
+                    lst_det.Add(new fa_AplicacionMasivaDet_Info
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdAlumno = item.IdAlumno,
+                        pe_nombreCompleto = item.pe_nombreCompleto,
+                        Saldo = item.Saldo
+                    });
             }
 
             ListaDet.set_list(lst_det, IdTransaccionSession);
