@@ -51,6 +51,8 @@ namespace Core.Info.Academico
         public bool Procesado { get; set; }
         public string vt_autorizacion { get; set; }
         public string Correo { get; set; }
+        public Nullable<int> IdEmpresa_rol { get; set; }
+        public Nullable<decimal> IdEmpleado { get; set; }
         #endregion
     }
 }

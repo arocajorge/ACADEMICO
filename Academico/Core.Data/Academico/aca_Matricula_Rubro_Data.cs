@@ -214,7 +214,9 @@ namespace Core.Data.Academico
                             IdCliente = q.IdCliente ?? 0,
                             Codigo = q.Codigo,
                             pe_nombreCompleto = q.Alumno,
-                            Procesado = false
+                            Procesado = false,
+                            IdEmpresa_rol = q.IdEmpresa_rol,
+                            IdEmpleado = q.IdEmpleado,
                         };
                         Lista.Add(info);
                     }

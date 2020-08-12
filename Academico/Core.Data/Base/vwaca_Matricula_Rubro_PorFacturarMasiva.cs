@@ -35,5 +35,7 @@ namespace Core.Data.Base
         public Nullable<decimal> IdCliente { get; set; }
         public string Codigo { get; set; }
         public string Alumno { get; set; }
+        public Nullable<int> IdEmpresa_rol { get; set; }
+        public Nullable<decimal> IdEmpleado { get; set; }
     }
 }

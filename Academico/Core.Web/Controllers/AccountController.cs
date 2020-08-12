@@ -148,8 +148,8 @@ namespace Core.Web.Controllers
             var lst_sedes = bus_sede.GetList(IdEmpresa, false);
             ViewBag.lst_sedes = lst_sedes;
 
-            var lst_empresas = bus_empresa.get_list(false);
-            ViewBag.lst_empresas = lst_empresas;
+            //var lst_empresas = bus_empresa.get_list(false);
+            //ViewBag.lst_empresas = lst_empresas;
         }
         #region Json
         public JsonResult cargar_sede_x_empresa(int IdEmpresa = 0, string IdUsuario = "")
