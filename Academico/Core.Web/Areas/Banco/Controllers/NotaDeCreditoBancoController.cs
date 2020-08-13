@@ -37,6 +37,7 @@ namespace Core.Web.Areas.Banco.Controllers
         ba_Cbte_Ban_x_ba_TipoFlujo_Bus bus_Cbte_Ban_x_ba_TipoFlujo = new ba_Cbte_Ban_x_ba_TipoFlujo_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        ba_parametros_Bus bus_parametros = new ba_parametros_Bus();
         #endregion
         #region Metodos ComboBox bajo demanda flujo
         public ActionResult CmbFlujo_ND_C()
@@ -439,6 +440,7 @@ namespace Core.Web.Areas.Banco.Controllers
             i_validar.IdUsuario_Anu = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
             i_validar.cb_Valor = Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero);
+
             return true;
         }
         #endregion

@@ -78,6 +78,8 @@ namespace Core.Data.Base
         public string aut_doc_Modificar { get; set; }
         public Nullable<int> IdTipoMovi { get; set; }
         public bool aprobada_enviar_sri { get; set; }
+        public Nullable<int> IdPuntoVta { get; set; }
+        public Nullable<bool> MueveInventario { get; set; }
     
         public virtual cp_codigo_SRI cp_codigo_SRI { get; set; }
         public virtual cp_codigo_SRI cp_codigo_SRI1 { get; set; }

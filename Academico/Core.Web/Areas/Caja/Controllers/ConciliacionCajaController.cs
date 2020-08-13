@@ -343,6 +343,11 @@ namespace Core.Web.Areas.Caja.Controllers
             i_validar.Total_fact_vale = Math.Round(egresos, 2, MidpointRounding.AwayFromZero);
             i_validar.Dif_x_pagar_o_cobrar = Math.Round(ingresos - egresos, 2, MidpointRounding.AwayFromZero);
 
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.Fecha, cl_enumeradores.eModulo.CAJA, Convert.ToInt32(SessionFixed.IdSucursal), ref msg))
+            {
+                return false;
+            }
+
             if (i_validar.lst_det_vale.Count() == 0 && i_validar.lst_det_fact.Count() == 0)
             {
                 msg = "Debe ingresar registros de facturas o vales";

@@ -58,6 +58,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         aca_Plantilla_Bus bus_plantilla = new aca_Plantilla_Bus();
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         fa_cliente_contactos_Bus bus_cliente_contacto = new fa_cliente_contactos_Bus();
+        cxc_Parametro_Bus bus_parametros = new cxc_Parametro_Bus();
         string mensaje = string.Empty;
         string mensajeInfo = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
@@ -369,7 +370,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                     }
                 }
             }
-            
+
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.cr_fecha, cl_enumeradores.eModulo.CXC, i_validar.IdSucursal, ref msg))
+            {
+                return false;
+            }
 
             if (i_validar.IdCobro>0)
             {

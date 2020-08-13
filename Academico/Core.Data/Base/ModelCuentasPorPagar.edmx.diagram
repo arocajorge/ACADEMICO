@@ -14,7 +14,6 @@
         <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det" />
         <AssociationConnector Association="ModelCuentasPorPagar.FK_cp_orden_pago_cancelaciones_cp_orden_pago_det1" />
         <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_orden_pago_tipo_x_empresa" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_parametros" Width="1.5" PointX="3.75" PointY="6.75" />
         <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_nota_DebCre" Width="1.5" PointX="6.375" PointY="6.75" />
         <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_orden_giro_x_pagar" Width="1.5" PointX="8.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_SolicitudPago" Width="1.5" PointX="8.375" PointY="10" />
@@ -89,6 +88,7 @@
         <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_proveedor_consulta" Width="1.5" PointX="13.375" PointY="13.75" />
         <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_retencion" Width="1.5" PointX="20.375" PointY="11.75" />
         <EntityTypeShape EntityType="ModelCuentasPorPagar.vwcp_retencion_det" Width="1.5" PointX="3.375" PointY="20.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorPagar.cp_parametros" Width="1.5" PointX="20.375" PointY="20.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

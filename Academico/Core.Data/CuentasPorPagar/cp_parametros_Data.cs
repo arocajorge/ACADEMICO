@@ -10,6 +10,103 @@ namespace Core.Data.CuentasPorPagar
 {
    public class cp_parametros_Data
     {
+        public cp_parametros_Info get_info(int IdEmpresa)
+        {
+            try
+            {
+                cp_parametros_Info info = new cp_parametros_Info();
+                using (EntitiesCuentasPorPagar Context = new EntitiesCuentasPorPagar())
+                {
+                    cp_parametros Entity = Context.cp_parametros.FirstOrDefault(q => q.IdEmpresa == IdEmpresa);
+                    if (Entity != null)
+                        info = new cp_parametros_Info
+                        {
+                             pa_TipoCbte_OG = Convert.ToInt32(Entity.pa_TipoCbte_OG),
+                             pa_ctacble_deudora = Entity.pa_ctacble_deudora,
+                             pa_ctacble_iva = Entity.pa_ctacble_iva,
+                             pa_TipoEgrMoviCaja_Conciliacion = Entity.pa_TipoEgrMoviCaja_Conciliacion,
+                             pa_ctacble_Proveedores_default = Entity.pa_ctacble_Proveedores_default,
+                             pa_TipoCbte_NC = Entity.pa_TipoCbte_NC,
+                             pa_TipoCbte_ND = Entity.pa_TipoCbte_ND,
+                             pa_IdTipoCbte_x_Retencion = Entity.pa_IdTipoCbte_x_Retencion,
+                             pa_TipoCbte_para_conci_x_antcipo = Convert.ToInt32(Entity.pa_TipoCbte_para_conci_x_antcipo),
+                             pa_ctacble_x_RetFte_default = Entity.pa_ctacble_x_RetFte_default,
+                             pa_ctacble_x_RetIva_default = Entity.pa_ctacble_x_RetIva_default,
+                             DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo,
+                             DiasTransaccionesAPasado = Entity.DiasTransaccionesAPasado,
+                             IdEmpresa = Entity.IdEmpresa
+                };
+                    else
+                        info = null;
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarDB(cp_parametros_Info info)
+        {
+            try
+            {
+                using (EntitiesCuentasPorPagar Context = new EntitiesCuentasPorPagar())
+                {
+                    cp_parametros Entity = Context.cp_parametros.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa);
+                    if (Entity == null)
+                    {
+                        Entity = new cp_parametros
+                        {
+                             IdEmpresa = info.IdEmpresa,
+                             pa_TipoCbte_OG = info.pa_TipoCbte_OG,
+                             pa_ctacble_deudora = (info.pa_ctacble_deudora == "") ? null : info.pa_ctacble_deudora,
+                             pa_ctacble_iva = (info.pa_ctacble_iva == "") ? null : info.pa_ctacble_iva,
+                             pa_TipoEgrMoviCaja_Conciliacion = info.pa_TipoEgrMoviCaja_Conciliacion,
+                             IdUsuario = info.IdUsuario,
+                             pa_ctacble_Proveedores_default = info.pa_ctacble_Proveedores_default,
+                             pa_TipoCbte_NC = info.pa_TipoCbte_NC,
+                             pa_TipoCbte_ND = info.pa_TipoCbte_ND,
+                             pa_IdTipoCbte_x_Retencion = info.pa_IdTipoCbte_x_Retencion,
+                             pa_TipoCbte_para_conci_x_antcipo = info.pa_TipoCbte_para_conci_x_antcipo,
+                             pa_ctacble_x_RetIva_default = info.pa_ctacble_x_RetIva_default,
+                             DiasTransaccionesAPasado = info.DiasTransaccionesAPasado,
+                             DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo,
+                        };
+                        Context.cp_parametros.Add(Entity);
+                    }
+                    else
+                    {
+                        Entity.IdEmpresa = info.IdEmpresa;
+                        Entity.pa_TipoCbte_OG = info.pa_TipoCbte_OG;
+                        Entity.pa_ctacble_deudora = (info.pa_ctacble_deudora == "") ? null : info.pa_ctacble_deudora;
+                        Entity.pa_ctacble_iva = (info.pa_ctacble_iva == "") ? null : info.pa_ctacble_iva;
+                        Entity.pa_ctacble_Proveedores_default = info.pa_ctacble_Proveedores_default;
+                        Entity.pa_TipoEgrMoviCaja_Conciliacion = info.pa_TipoEgrMoviCaja_Conciliacion;
+                        Entity.pa_TipoCbte_NC = info.pa_TipoCbte_NC;
+                        Entity.pa_TipoCbte_ND = info.pa_TipoCbte_ND;
+                        Entity.FechaUltMod = DateTime.Now;
+                        Entity.IdUsuarioUltMod = info.IdUsuario;
+                        Entity.pa_IdTipoCbte_x_Retencion = info.pa_IdTipoCbte_x_Retencion;
+                        Entity.pa_TipoCbte_para_conci_x_antcipo = info.pa_TipoCbte_para_conci_x_antcipo;
+                        Entity.pa_ctacble_x_RetFte_default = info.pa_ctacble_x_RetFte_default;
+                        Entity.pa_ctacble_x_RetIva_default = info.pa_ctacble_x_RetIva_default;
+                        Entity.DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo;
+                        Entity.DiasTransaccionesAPasado = info.DiasTransaccionesAPasado;
+                    }
+
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        /*
         public Boolean modificarDB(cp_parametros_Info info)
         {
             try
@@ -72,8 +169,8 @@ namespace Core.Data.CuentasPorPagar
                 
                 throw ;
             }
-        }
-        public cp_parametros_Info get_info(int IdEmpresa)
+        }*/
+        /*public cp_parametros_Info get_info(int IdEmpresa)
         {
             try
             {
@@ -113,7 +210,7 @@ namespace Core.Data.CuentasPorPagar
             {
                 throw;
             }
-        }
+        }*/
 
         public List<cp_parametros_Info> get_list(int IdEmpresa)
         {
@@ -138,8 +235,8 @@ namespace Core.Data.CuentasPorPagar
                                  pa_TipoCbte_para_conci_x_antcipo = q.pa_TipoCbte_para_conci_x_antcipo,
                                  pa_ctacble_x_RetFte_default = q.pa_ctacble_x_RetFte_default,
                                  pa_ctacble_x_RetIva_default = q.pa_ctacble_x_RetIva_default,
-                                 DiasTransaccionesAFuturo = q.DiasTransaccionesAFuturo
-                                 
+                                 DiasTransaccionesAFuturo = q.DiasTransaccionesAFuturo,
+                                 DiasTransaccionesAPasado = q.DiasTransaccionesAPasado
                              }).ToList();
                          }
                 return lista;

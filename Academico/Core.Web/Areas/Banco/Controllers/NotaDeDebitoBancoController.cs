@@ -39,7 +39,7 @@ namespace Core.Web.Areas.Banco.Controllers
         ba_Cbte_Ban_x_ba_TipoFlujo_Bus bus_flujo = new ba_Cbte_Ban_x_ba_TipoFlujo_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         cp_orden_pago_cancelaciones_PorCruzar ListPorCruzar = new cp_orden_pago_cancelaciones_PorCruzar();
-        ba_parametros_Bus bus_param = new ba_parametros_Bus();
+        ba_parametros_Bus bus_parametros = new ba_parametros_Bus();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
 
@@ -204,7 +204,7 @@ namespace Core.Web.Areas.Banco.Controllers
             i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
             i_validar.cb_Valor = Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero);
 
-            var param = bus_param.get_info(i_validar.IdEmpresa);
+            var param = bus_parametros.get_info(i_validar.IdEmpresa);
             if (!(param.PermitirSobreGiro))
             {
                 var Valor = Math.Round(i_validar.lst_det_ct.Where(q => q.IdCtaCble == cta.IdCtaCble).Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero);

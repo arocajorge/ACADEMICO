@@ -19,9 +19,6 @@
         <AssociationConnector Association="ModelContabilidad.FK_ct_cbtecble_Reversado_ct_cbtecble1" />
         <EntityTypeShape EntityType="ModelContabilidad.vwct_periodo" Width="1.5" PointX="5.375" PointY="5.75" />
         <EntityTypeShape EntityType="ModelContabilidad.ct_CierrePorModuloPorSucursal" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="ModelContabilidad.ct_parametro" Width="1.5" PointX="3" PointY="14.625" />
-        <AssociationConnector Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo" />
-        <AssociationConnector Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo1" />
         <EntityTypeShape EntityType="ModelContabilidad.ct_anio_fiscal" Width="1.5" PointX="0.75" PointY="9.625" />
         <EntityTypeShape EntityType="ModelContabilidad.ct_anio_fiscal_x_cuenta_utilidad" Width="1.5" PointX="3" PointY="18.75" />
         <EntityTypeShape EntityType="ModelContabilidad.ct_anio_fiscal_x_tb_sucursal" Width="1.5" PointX="5.25" PointY="0.75" />
@@ -45,6 +42,9 @@
         <EntityTypeShape EntityType="ModelContabilidad.ct_periodo_x_tb_modulo" Width="1.5" PointX="3" PointY="22.25" />
         <EntityTypeShape EntityType="ModelContabilidad.vwct_CierrePorModuloPorSucursal" Width="1.5" PointX="11.375" PointY="10.75" />
         <AssociationConnector Association="ModelContabilidad.FK_ct_periodo_x_tb_modulo_ct_periodo" />
+        <EntityTypeShape EntityType="ModelContabilidad.ct_parametro" Width="1.5" PointX="3" PointY="14.625" />
+        <AssociationConnector Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo" />
+        <AssociationConnector Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

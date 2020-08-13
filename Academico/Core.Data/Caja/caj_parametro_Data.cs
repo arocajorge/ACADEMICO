@@ -22,7 +22,8 @@ namespace Core.Data.Caja
                         IdTipoCbteCble_MoviCaja_Egr = Entity.IdTipoCbteCble_MoviCaja_Egr,
                         IdTipoCbteCble_MoviCaja_Ing = Entity.IdTipoCbteCble_MoviCaja_Ing,
                         IdTipo_movi_ing_x_reposicion = Entity.IdTipo_movi_ing_x_reposicion,
-                        DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo
+                        DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo,
+                        DiasTransaccionesAPasado = Entity.DiasTransaccionesAPasado
                     };
                 }
                 return info;
@@ -50,6 +51,7 @@ namespace Core.Data.Caja
                             IdTipoCbteCble_MoviCaja_Ing = info.IdTipoCbteCble_MoviCaja_Ing,
                             IdTipo_movi_ing_x_reposicion = info.IdTipo_movi_ing_x_reposicion,
                             DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo,
+                            DiasTransaccionesAPasado = info.DiasTransaccionesAPasado,
                             IdUsuario = info.IdUsuario,
                             Fecha_Transac = DateTime.Now
                         };
@@ -61,6 +63,7 @@ namespace Core.Data.Caja
                         Entity.IdTipoCbteCble_MoviCaja_Ing = info.IdTipoCbteCble_MoviCaja_Ing;
                         Entity.IdTipo_movi_ing_x_reposicion = info.IdTipo_movi_ing_x_reposicion;
                         Entity.DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo;
+                        Entity.DiasTransaccionesAPasado = info.DiasTransaccionesAPasado;
                         Entity.IdUsuarioUltMod = info.IdUsuarioUltMod;
                         Entity.FechaUltMod = info.FechaUltMod;
                     }

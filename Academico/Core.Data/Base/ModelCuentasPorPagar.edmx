@@ -195,6 +195,8 @@
           <Property Name="aut_doc_Modificar" Type="varchar" MaxLength="100" />
           <Property Name="IdTipoMovi" Type="int" />
           <Property Name="aprobada_enviar_sri" Type="bit" Nullable="false" />
+          <Property Name="IdPuntoVta" Type="int" />
+          <Property Name="MueveInventario" Type="bit" />
         </EntityType>
         <EntityType Name="cp_orden_giro_det">
           <Key>
@@ -469,6 +471,7 @@
           <Property Name="pa_ctacble_x_RetIva_default" Type="varchar" MaxLength="20" />
           <Property Name="pa_ctacble_x_RetFte_default" Type="varchar" MaxLength="20" />
           <Property Name="DiasTransaccionesAFuturo" Type="int" Nullable="false" />
+          <Property Name="DiasTransaccionesAPasado" Type="int" />
         </EntityType>
         <EntityType Name="cp_proveedor">
           <Key>
@@ -684,9 +687,11 @@
           <Property Name="GeneraRetencion" Type="varchar" MaxLength="1" />
           <Property Name="Codigo_Secuenciales_Transaccion" Type="varchar" MaxLength="250" />
           <Property Name="Sustento_Tributario" Type="varchar" MaxLength="250" />
+          <Property Name="ManejaTalonario" Type="bit" Nullable="false" />
+          <Property Name="FechaInicioTalonario" Type="date" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_codigo_SRI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_codigo_SRI' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_codigo_SRI">
           <Key>
             <PropertyRef Name="IdCodigo_SRI" />
@@ -712,7 +717,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_codigo_SRI' no tiene de
           <Property Name="IdCtaCble" Type="varchar" MaxLength="20" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_det_ing_x_oc' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_giro_det_ing_x_oc' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro_det_ing_x_oc">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -772,7 +777,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_det_ing_x_oc
           <Property Name="do_precioCompra" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_det_ing_x_oc_x_cruzar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_giro_det_ing_x_oc_x_cruzar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro_det_ing_x_oc_x_cruzar">
           <Key>
             <PropertyRef Name="inv_IdEmpresa" />
@@ -823,7 +828,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_det_ing_x_oc
           <Property Name="pc_Cuenta" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_det_ing_x_os' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_giro_det_ing_x_os' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro_det_ing_x_os">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -871,7 +876,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_det_ing_x_os
           <Property Name="do_precioCompra" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_det_ing_x_os_x_cruzar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_giro_det_ing_x_os_x_cruzar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro_det_ing_x_os_x_cruzar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -923,7 +928,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_det_ing_x_os
           <Property Name="IdCod_Impuesto" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_SinRetencion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_giro_SinRetencion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro_SinRetencion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -958,7 +963,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_SinRetencion
           <Property Name="IdSucursal" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_x_pagar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_giro_x_pagar' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro_x_pagar">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1026,7 +1031,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_giro_x_pagar' no 
           <Property Name="num_cta_acreditacion" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_pago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_pago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_pago">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1068,7 +1073,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_pago' no tiene de
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_pago_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_orden_pago_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_pago_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1101,7 +1106,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_orden_pago_det' no tien
           <Property Name="IdTipoCbte_cxp" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_SolicitudPago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwcp_SolicitudPago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_SolicitudPago">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1134,7 +1139,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.dbo.vwcp_SolicitudPago' no tiene
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_orden_giro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_orden_giro' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1161,6 +1166,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_orden_giro' no tiene de
             <PropertyRef Name="pe_nombreCompleto" />
             <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="ManejaTalonario" />
+            <PropertyRef Name="EstadoCancelacion" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdCbteCble_Ogiro" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -1211,9 +1218,13 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_orden_giro' no tiene de
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ManejaTalonario" Type="bit" Nullable="false" />
+          <Property Name="FechaInicioTalonario" Type="date" />
+          <Property Name="Saldo" Type="money" />
+          <Property Name="EstadoCancelacion" Type="varchar" MaxLength="9" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_orden_giro_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_orden_giro_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_orden_giro_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1257,7 +1268,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_orden_giro_det' no tien
           <Property Name="Secuencia_oc" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_proveedor_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_proveedor_consulta' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_proveedor_consulta">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1277,7 +1288,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_proveedor_consulta' no 
           <Property Name="pr_estado" Type="varchar" MaxLength="1" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_retencion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_retencion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1331,7 +1342,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion' no tiene def
           <Property Name="aprobada_enviar_sri" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.vwcp_retencion_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwcp_retencion_det">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2211,7 +2222,11 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
     [vwcp_orden_giro].[pe_razonSocial] AS [pe_razonSocial], 
     [vwcp_orden_giro].[pe_nombreCompleto] AS [pe_nombreCompleto], 
     [vwcp_orden_giro].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-    [vwcp_orden_giro].[Descripcion] AS [Descripcion]
+    [vwcp_orden_giro].[Descripcion] AS [Descripcion], 
+    [vwcp_orden_giro].[ManejaTalonario] AS [ManejaTalonario], 
+    [vwcp_orden_giro].[FechaInicioTalonario] AS [FechaInicioTalonario], 
+    [vwcp_orden_giro].[Saldo] AS [Saldo], 
+    [vwcp_orden_giro].[EstadoCancelacion] AS [EstadoCancelacion]
     FROM [web].[vwcp_orden_giro] AS [vwcp_orden_giro]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwcp_orden_giro_det" EntityType="Self.vwcp_orden_giro_det" store:Type="Views" store:Schema="web">
@@ -2524,7 +2539,6 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
             <End Role="cp_orden_pago_cancelaciones" EntitySet="cp_orden_pago_cancelaciones" />
           </AssociationSet>
           <EntitySet Name="cp_orden_pago_tipo_x_empresa" EntityType="ModelCuentasPorPagar.cp_orden_pago_tipo_x_empresa" />
-          <EntitySet Name="cp_parametros" EntityType="ModelCuentasPorPagar.cp_parametros" />
           <EntitySet Name="cp_nota_DebCre" EntityType="ModelCuentasPorPagar.cp_nota_DebCre" />
           <EntitySet Name="vwcp_orden_giro_x_pagar" EntityType="ModelCuentasPorPagar.vwcp_orden_giro_x_pagar" />
           <EntitySet Name="cp_SolicitudPago" EntityType="ModelCuentasPorPagar.cp_SolicitudPago" />
@@ -2701,6 +2715,7 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
           <EntitySet Name="vwcp_proveedor_consulta" EntityType="ModelCuentasPorPagar.vwcp_proveedor_consulta" />
           <EntitySet Name="vwcp_retencion" EntityType="ModelCuentasPorPagar.vwcp_retencion" />
           <EntitySet Name="vwcp_retencion_det" EntityType="ModelCuentasPorPagar.vwcp_retencion_det" />
+          <EntitySet Name="cp_parametros" EntityType="ModelCuentasPorPagar.cp_parametros" />
         </EntityContainer>
         <ComplexType Name="spcp_Get_Data_orden_pago_con_cancelacion_data_Result">
           <Property Type="Int64" Name="IdRow" Nullable="false" />
@@ -2964,28 +2979,6 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
           <Property Name="IdCtaCble_Credito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Dispara_Alerta" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="cp_orden_pago_tipo" Relationship="ModelCuentasPorPagar.FK_cp_orden_pago_tipo_x_empresa_cp_orden_pago_tipo" FromRole="cp_orden_pago_tipo_x_empresa" ToRole="cp_orden_pago_tipo" />
-        </EntityType>
-        <EntityType Name="cp_parametros">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="pa_TipoCbte_OG" Type="Int32" />
-          <Property Name="pa_ctacble_deudora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pa_ctacble_iva" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pa_ctacble_Proveedores_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pa_IdTipoCbte_x_Retencion" Type="Int32" />
-          <Property Name="IdTipoMoviCaja" Type="Int32" />
-          <Property Name="pa_TipoEgrMoviCaja_Conciliacion" Type="Int32" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
-          <Property Name="pa_TipoCbte_NC" Type="Int32" />
-          <Property Name="pa_TipoCbte_ND" Type="Int32" />
-          <Property Name="pa_TipoCbte_para_conci_x_antcipo" Type="Int32" />
-          <Property Name="pa_ctacble_x_RetIva_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pa_ctacble_x_RetFte_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="cp_nota_DebCre">
           <Key>
@@ -3360,6 +3353,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
           <NavigationProperty Name="cp_orden_giro_pagos_sri" Relationship="ModelCuentasPorPagar.FK_cp_orden_giro_pagos_sri_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_orden_giro_pagos_sri" />
           <NavigationProperty Name="cp_orden_giro_x_in_Ing_Egr_Inven" Relationship="ModelCuentasPorPagar.FK_cp_orden_giro_x_in_Ing_Egr_Inven_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_orden_giro_x_in_Ing_Egr_Inven" />
           <NavigationProperty Name="cp_retencion" Relationship="ModelCuentasPorPagar.FK_cp_retencion_cp_orden_giro" FromRole="cp_orden_giro" ToRole="cp_retencion" />
+          <Property Name="IdPuntoVta" Type="Int32" />
+          <Property Name="MueveInventario" Type="Boolean" />
         </EntityType>
         <EntityType Name="cp_orden_giro_det">
           <Key>
@@ -3719,6 +3714,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
           <Property Name="GeneraRetencion" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Codigo_Secuenciales_Transaccion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Sustento_Tributario" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ManejaTalonario" Type="Boolean" Nullable="false" />
+          <Property Name="FechaInicioTalonario" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_cp_catalogo_cp_catalogo_tipo">
           <End Type="ModelCuentasPorPagar.cp_catalogo_tipo" Role="cp_catalogo_tipo" Multiplicity="1" />
@@ -4420,6 +4417,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
             <PropertyRef Name="pe_nombreCompleto" />
             <PropertyRef Name="pe_cedulaRuc" />
             <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="ManejaTalonario" />
+            <PropertyRef Name="EstadoCancelacion" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdCbteCble_Ogiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
@@ -4470,6 +4469,10 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ManejaTalonario" Type="Boolean" Nullable="false" />
+          <Property Name="FechaInicioTalonario" Type="DateTime" Precision="0" />
+          <Property Name="Saldo" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="EstadoCancelacion" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="vwcp_orden_giro_det">
           <Key>
@@ -4640,6 +4643,29 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
           <Property Name="re_valor_retencion" Type="Double" Nullable="false" />
           <Property Name="re_estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="IdCtaCble" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="cp_parametros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="pa_TipoCbte_OG" Type="Int32" />
+          <Property Name="pa_ctacble_deudora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pa_ctacble_iva" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pa_ctacble_Proveedores_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pa_IdTipoCbte_x_Retencion" Type="Int32" />
+          <Property Name="IdTipoMoviCaja" Type="Int32" />
+          <Property Name="pa_TipoEgrMoviCaja_Conciliacion" Type="Int32" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+          <Property Name="pa_TipoCbte_NC" Type="Int32" />
+          <Property Name="pa_TipoCbte_ND" Type="Int32" />
+          <Property Name="pa_TipoCbte_para_conci_x_antcipo" Type="Int32" />
+          <Property Name="pa_ctacble_x_RetIva_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pa_ctacble_x_RetFte_default" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <Property Name="DiasTransaccionesAPasado" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4864,29 +4890,6 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
                 <ScalarProperty Name="IdTipoCbte_OP" ColumnName="IdTipoCbte_OP" />
                 <ScalarProperty Name="IdCtaCble" ColumnName="IdCtaCble" />
                 <ScalarProperty Name="IdTipo_op" ColumnName="IdTipo_op" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="cp_parametros">
-            <EntityTypeMapping TypeName="ModelCuentasPorPagar.cp_parametros">
-              <MappingFragment StoreEntitySet="cp_parametros">
-                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
-                <ScalarProperty Name="pa_ctacble_x_RetFte_default" ColumnName="pa_ctacble_x_RetFte_default" />
-                <ScalarProperty Name="pa_ctacble_x_RetIva_default" ColumnName="pa_ctacble_x_RetIva_default" />
-                <ScalarProperty Name="pa_TipoCbte_para_conci_x_antcipo" ColumnName="pa_TipoCbte_para_conci_x_antcipo" />
-                <ScalarProperty Name="pa_TipoCbte_ND" ColumnName="pa_TipoCbte_ND" />
-                <ScalarProperty Name="pa_TipoCbte_NC" ColumnName="pa_TipoCbte_NC" />
-                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="pa_TipoEgrMoviCaja_Conciliacion" ColumnName="pa_TipoEgrMoviCaja_Conciliacion" />
-                <ScalarProperty Name="IdTipoMoviCaja" ColumnName="IdTipoMoviCaja" />
-                <ScalarProperty Name="pa_IdTipoCbte_x_Retencion" ColumnName="pa_IdTipoCbte_x_Retencion" />
-                <ScalarProperty Name="pa_ctacble_Proveedores_default" ColumnName="pa_ctacble_Proveedores_default" />
-                <ScalarProperty Name="pa_ctacble_iva" ColumnName="pa_ctacble_iva" />
-                <ScalarProperty Name="pa_ctacble_deudora" ColumnName="pa_ctacble_deudora" />
-                <ScalarProperty Name="pa_TipoCbte_OG" ColumnName="pa_TipoCbte_OG" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -5128,6 +5131,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
           <EntitySetMapping Name="cp_orden_giro">
             <EntityTypeMapping TypeName="ModelCuentasPorPagar.cp_orden_giro">
               <MappingFragment StoreEntitySet="cp_orden_giro">
+                <ScalarProperty Name="MueveInventario" ColumnName="MueveInventario" />
+                <ScalarProperty Name="IdPuntoVta" ColumnName="IdPuntoVta" />
                 <ScalarProperty Name="aprobada_enviar_sri" ColumnName="aprobada_enviar_sri" />
                 <ScalarProperty Name="IdTipoMovi" ColumnName="IdTipoMovi" />
                 <ScalarProperty Name="aut_doc_Modificar" ColumnName="aut_doc_Modificar" />
@@ -5478,6 +5483,8 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
           <EntitySetMapping Name="cp_TipoDocumento">
             <EntityTypeMapping TypeName="ModelCuentasPorPagar.cp_TipoDocumento">
               <MappingFragment StoreEntitySet="cp_TipoDocumento">
+                <ScalarProperty Name="FechaInicioTalonario" ColumnName="FechaInicioTalonario" />
+                <ScalarProperty Name="ManejaTalonario" ColumnName="ManejaTalonario" />
                 <ScalarProperty Name="Sustento_Tributario" ColumnName="Sustento_Tributario" />
                 <ScalarProperty Name="Codigo_Secuenciales_Transaccion" ColumnName="Codigo_Secuenciales_Transaccion" />
                 <ScalarProperty Name="GeneraRetencion" ColumnName="GeneraRetencion" />
@@ -5648,6 +5655,10 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
           <EntitySetMapping Name="vwcp_orden_giro">
             <EntityTypeMapping TypeName="ModelCuentasPorPagar.vwcp_orden_giro">
               <MappingFragment StoreEntitySet="vwcp_orden_giro">
+                <ScalarProperty Name="EstadoCancelacion" ColumnName="EstadoCancelacion" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="FechaInicioTalonario" ColumnName="FechaInicioTalonario" />
+                <ScalarProperty Name="ManejaTalonario" ColumnName="ManejaTalonario" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
                 <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
@@ -5815,6 +5826,30 @@ advertencia 6002: La tabla o vista 'DBERP_LICEO.web.vwcp_retencion_det' no tiene
                 <ScalarProperty Name="re_tipoRet" ColumnName="re_tipoRet" />
                 <ScalarProperty Name="Idsecuencia" ColumnName="Idsecuencia" />
                 <ScalarProperty Name="IdRetencion" ColumnName="IdRetencion" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_parametros">
+            <EntityTypeMapping TypeName="ModelCuentasPorPagar.cp_parametros">
+              <MappingFragment StoreEntitySet="cp_parametros">
+                <ScalarProperty Name="DiasTransaccionesAPasado" ColumnName="DiasTransaccionesAPasado" />
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="pa_ctacble_x_RetFte_default" ColumnName="pa_ctacble_x_RetFte_default" />
+                <ScalarProperty Name="pa_ctacble_x_RetIva_default" ColumnName="pa_ctacble_x_RetIva_default" />
+                <ScalarProperty Name="pa_TipoCbte_para_conci_x_antcipo" ColumnName="pa_TipoCbte_para_conci_x_antcipo" />
+                <ScalarProperty Name="pa_TipoCbte_ND" ColumnName="pa_TipoCbte_ND" />
+                <ScalarProperty Name="pa_TipoCbte_NC" ColumnName="pa_TipoCbte_NC" />
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="pa_TipoEgrMoviCaja_Conciliacion" ColumnName="pa_TipoEgrMoviCaja_Conciliacion" />
+                <ScalarProperty Name="IdTipoMoviCaja" ColumnName="IdTipoMoviCaja" />
+                <ScalarProperty Name="pa_IdTipoCbte_x_Retencion" ColumnName="pa_IdTipoCbte_x_Retencion" />
+                <ScalarProperty Name="pa_ctacble_Proveedores_default" ColumnName="pa_ctacble_Proveedores_default" />
+                <ScalarProperty Name="pa_ctacble_iva" ColumnName="pa_ctacble_iva" />
+                <ScalarProperty Name="pa_ctacble_deudora" ColumnName="pa_ctacble_deudora" />
+                <ScalarProperty Name="pa_TipoCbte_OG" ColumnName="pa_TipoCbte_OG" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

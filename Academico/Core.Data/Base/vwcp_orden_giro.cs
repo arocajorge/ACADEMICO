@@ -63,5 +63,9 @@ namespace Core.Data.Base
         public string pe_nombreCompleto { get; set; }
         public string pe_cedulaRuc { get; set; }
         public string Descripcion { get; set; }
+        public bool ManejaTalonario { get; set; }
+        public Nullable<System.DateTime> FechaInicioTalonario { get; set; }
+        public Nullable<decimal> Saldo { get; set; }
+        public string EstadoCancelacion { get; set; }
     }
 }

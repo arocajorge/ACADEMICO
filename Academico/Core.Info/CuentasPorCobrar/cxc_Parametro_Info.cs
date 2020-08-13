@@ -20,5 +20,6 @@ namespace Core.Info.CuentasPorCobrar
         public Nullable<System.DateTime> FechaUltMod { get; set; }
         public int? IdTipoCbte_ConciliacionNC { get; set; }
         public Nullable<int> IdTipoNotaPagoAnticipado { get; set; }
+        public Nullable<int> DiasTransaccionesAPasado { get; set; }
     }
 }

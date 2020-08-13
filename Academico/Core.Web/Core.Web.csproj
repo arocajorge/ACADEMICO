@@ -294,6 +294,7 @@
     <Compile Include="Areas\Contabilidad\Controllers\AuditoriaContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\CierrePorModuloPorSucursalController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\ComprobanteContableController.cs" />
+    <Compile Include="Areas\Contabilidad\Controllers\ParametroContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\PeriodoContableController.cs" />
     <Compile Include="Areas\Contabilidad\Controllers\PlanDeCuentasController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaController.cs" />
@@ -8869,6 +8870,7 @@
     <Content Include="Areas\CuentasPorCobrar\Views\SeguimientoCartera\Anular.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_012.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_CmbAlumnoEstadoCuenta.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\ParametroContable\Index.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

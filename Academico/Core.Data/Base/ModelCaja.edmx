@@ -132,6 +132,7 @@
           <Property Name="Fecha_Transac" Type="datetime" />
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
           <Property Name="FechaUltMod" Type="datetime" />
+          <Property Name="DiasTransaccionesAPasado" Type="int" />
         </EntityType>
         <EntityType Name="cp_conciliacion_Caja">
           <Key>
@@ -844,7 +845,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeC
           </AssociationSet>
           <EntitySet Name="caj_catalogo" EntityType="ModelCaja.caj_catalogo" />
           <EntitySet Name="caj_catalogo_tipo" EntityType="ModelCaja.caj_catalogo_tipo" />
-          <EntitySet Name="caj_parametro" EntityType="ModelCaja.caj_parametro" />
           <EntitySet Name="caj_Caja_Movimiento_Tipo" EntityType="ModelCaja.caj_Caja_Movimiento_Tipo" />
           <EntitySet Name="cp_conciliacion_Caja_det_x_ValeCaja" EntityType="ModelCaja.cp_conciliacion_Caja_det_x_ValeCaja" />
           <AssociationSet Name="FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo" Association="ModelCaja.FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo">
@@ -899,6 +899,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeC
             <End Role="cp_conciliacion_Caja" EntitySet="cp_conciliacion_Caja" />
           </AssociationSet>
           <EntitySet Name="caj_Caja_x_seg_usuario" EntityType="ModelCaja.caj_Caja_x_seg_usuario" />
+          <EntitySet Name="caj_parametro" EntityType="ModelCaja.caj_parametro" />
           <AssociationSet Name="FK_caj_Caja_x_seg_usuario_caj_Caja" Association="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja">
             <End Role="caj_Caja" EntitySet="caj_Caja" />
             <End Role="caj_Caja_x_seg_usuario" EntitySet="caj_Caja_x_seg_usuario" />
@@ -918,20 +919,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeC
           </Key>
           <Property Name="IdCatalogo_cj_tipo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="nom_IdCatalogo_cj_tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="caj_parametro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteCble_MoviCaja_Ing" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbteCble_MoviCaja_Egr" Type="Int32" Nullable="false" />
-          <Property Name="IdTipo_movi_ing_x_reposicion" Type="Int32" />
-          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="caj_Caja_Movimiento_Tipo">
           <Key>
@@ -1424,6 +1411,21 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeC
           <Property Name="IdUsuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="caj_Caja" Relationship="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja" FromRole="caj_Caja_x_seg_usuario" ToRole="caj_Caja" />
         </EntityType>
+        <EntityType Name="caj_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Ing" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbteCble_MoviCaja_Egr" Type="Int32" Nullable="false" />
+          <Property Name="IdTipo_movi_ing_x_reposicion" Type="Int32" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Transac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+          <Property Name="DiasTransaccionesAPasado" Type="Int32" />
+        </EntityType>
         <Association Name="FK_caj_Caja_x_seg_usuario_caj_Caja">
           <End Type="ModelCaja.caj_Caja" Role="caj_Caja" Multiplicity="1" />
           <End Type="ModelCaja.caj_Caja_x_seg_usuario" Role="caj_Caja_x_seg_usuario" Multiplicity="*" />
@@ -1500,21 +1502,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeC
               <MappingFragment StoreEntitySet="caj_catalogo_tipo">
                 <ScalarProperty Name="nom_IdCatalogo_cj_tipo" ColumnName="nom_IdCatalogo_cj_tipo" />
                 <ScalarProperty Name="IdCatalogo_cj_tipo" ColumnName="IdCatalogo_cj_tipo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="caj_parametro">
-            <EntityTypeMapping TypeName="ModelCaja.caj_parametro">
-              <MappingFragment StoreEntitySet="caj_parametro">
-                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
-                <ScalarProperty Name="IdTipo_movi_ing_x_reposicion" ColumnName="IdTipo_movi_ing_x_reposicion" />
-                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Egr" ColumnName="IdTipoCbteCble_MoviCaja_Egr" />
-                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Ing" ColumnName="IdTipoCbteCble_MoviCaja_Ing" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1778,6 +1765,22 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcp_conciliacion_Caja_det_x_ValeC
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdCaja" ColumnName="IdCaja" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="caj_parametro">
+            <EntityTypeMapping TypeName="ModelCaja.caj_parametro">
+              <MappingFragment StoreEntitySet="caj_parametro">
+                <ScalarProperty Name="DiasTransaccionesAPasado" ColumnName="DiasTransaccionesAPasado" />
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="Fecha_Transac" ColumnName="Fecha_Transac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="IdTipo_movi_ing_x_reposicion" ColumnName="IdTipo_movi_ing_x_reposicion" />
+                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Egr" ColumnName="IdTipoCbteCble_MoviCaja_Egr" />
+                <ScalarProperty Name="IdTipoCbteCble_MoviCaja_Ing" ColumnName="IdTipoCbteCble_MoviCaja_Ing" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

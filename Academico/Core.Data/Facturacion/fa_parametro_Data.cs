@@ -36,6 +36,7 @@ namespace Core.Data.Facturacion
                             pa_Contabiliza_descuento = Entity.pa_Contabiliza_descuento,
                             clave_desbloqueo_precios = Entity.clave_desbloqueo_precios,
                             DiasTransaccionesAFuturo = Entity.DiasTransaccionesAFuturo,
+                            DiasTransaccionesAPasado = Entity.DiasTransaccionesAPasado,
                             IdClienteConsumidorFinal = Entity.IdClienteConsumidorFinal,
                             MontoMaximoConsumidorFinal = Entity.MontoMaximoConsumidorFinal
                         };
@@ -76,6 +77,7 @@ namespace Core.Data.Facturacion
                             pa_IdCtaCble_descuento = info.pa_IdCtaCble_descuento,
                             pa_Contabiliza_descuento = info.pa_Contabiliza_descuento,
                             clave_desbloqueo_precios = info.clave_desbloqueo_precios,
+                            DiasTransaccionesAPasado = info.DiasTransaccionesAPasado,
                             DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo,
                             IdClienteConsumidorFinal = info.IdClienteConsumidorFinal,
                             MontoMaximoConsumidorFinal = info.MontoMaximoConsumidorFinal
@@ -101,6 +103,8 @@ namespace Core.Data.Facturacion
                         Entity.DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo;
                         Entity.IdClienteConsumidorFinal = info.IdClienteConsumidorFinal;
                         Entity.MontoMaximoConsumidorFinal = info.MontoMaximoConsumidorFinal;
+                        Entity.DiasTransaccionesAPasado = info.DiasTransaccionesAPasado;
+                        Entity.DiasTransaccionesAFuturo = info.DiasTransaccionesAFuturo;
                     }
 
                     Context.SaveChanges();

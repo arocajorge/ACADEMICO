@@ -34,6 +34,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         cxc_SeguimientoCartera_List Lista_Seguimiento = new cxc_SeguimientoCartera_List();
         cxc_SeguimientoCartera_x_Alumno_List Lista_Seguimiento_x_Alumno = new cxc_SeguimientoCartera_x_Alumno_List();
         tb_ColaCorreo_Bus bus_cola_correo = new tb_ColaCorreo_Bus();
+        cxc_Parametro_Bus bus_parametros = new cxc_Parametro_Bus();
         public static UploadedFile file { get; set; }
         public static byte[] imagen { get; set; }
         public static byte[] seguimiento_foto { get; set; }

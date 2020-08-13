@@ -24,5 +24,6 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaTransac { get; set; }
         public string IdUsuarioUltMod { get; set; }
         public Nullable<System.DateTime> FechaUltMod { get; set; }
+        public Nullable<int> DiasTransaccionesAPasado { get; set; }
     }
 }

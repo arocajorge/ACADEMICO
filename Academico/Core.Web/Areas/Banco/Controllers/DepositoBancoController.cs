@@ -32,7 +32,7 @@ namespace Core.Web.Areas.Banco.Controllers
         ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Bus bus_det = new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_Bus();
         ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List List_ing = new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List();
         ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal = new ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_List_x_sucursal();
-
+        ba_parametros_Bus bus_parametros = new ba_parametros_Bus();
 
         ba_Banco_Flujo_Det_List_Deposito List_Flujo = new ba_Banco_Flujo_Det_List_Deposito();
         ba_Cbte_Ban_x_ba_TipoFlujo_Bus bus_flujo = new ba_Cbte_Ban_x_ba_TipoFlujo_Bus();
@@ -195,6 +195,7 @@ namespace Core.Web.Areas.Banco.Controllers
             i_validar.IdUsuario_Anu = SessionFixed.IdUsuario;
             i_validar.IdUsuarioUltMod = SessionFixed.IdUsuario;
             i_validar.cb_Valor = Math.Round(i_validar.lst_det_ct.Sum(q => q.dc_Valor_debe), 2, MidpointRounding.AwayFromZero);
+
             return true;
         }
         #endregion

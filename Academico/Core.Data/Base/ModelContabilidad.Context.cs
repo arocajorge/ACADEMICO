@@ -36,7 +36,6 @@ namespace Core.Data.Base
         public virtual DbSet<ct_cbtecble_tipo> ct_cbtecble_tipo { get; set; }
         public virtual DbSet<vwct_periodo> vwct_periodo { get; set; }
         public virtual DbSet<ct_CierrePorModuloPorSucursal> ct_CierrePorModuloPorSucursal { get; set; }
-        public virtual DbSet<ct_parametro> ct_parametro { get; set; }
         public virtual DbSet<ct_anio_fiscal> ct_anio_fiscal { get; set; }
         public virtual DbSet<ct_anio_fiscal_x_cuenta_utilidad> ct_anio_fiscal_x_cuenta_utilidad { get; set; }
         public virtual DbSet<ct_anio_fiscal_x_tb_sucursal> ct_anio_fiscal_x_tb_sucursal { get; set; }
@@ -49,6 +48,7 @@ namespace Core.Data.Base
         public virtual DbSet<vwct_cbtecble_con_ctacble_acreedora> vwct_cbtecble_con_ctacble_acreedora { get; set; }
         public virtual DbSet<ct_periodo_x_tb_modulo> ct_periodo_x_tb_modulo { get; set; }
         public virtual DbSet<vwct_CierrePorModuloPorSucursal> vwct_CierrePorModuloPorSucursal { get; set; }
+        public virtual DbSet<ct_parametro> ct_parametro { get; set; }
     
         public virtual ObjectResult<SPACA_ContabilizacionCobros_Result> SPACA_ContabilizacionCobros(Nullable<int> idEmpresa, Nullable<System.DateTime> fechaIni, Nullable<System.DateTime> fechaFin)
         {

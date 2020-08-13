@@ -393,6 +393,7 @@
           <Property Name="FechaUltMod" Type="datetime" />
           <Property Name="IdTipoNotaProntoPago" Type="int" />
           <Property Name="IdTipoNotaPagoAnticipado" Type="int" />
+          <Property Name="DiasTransaccionesAPasado" Type="int" />
         </EntityType>
         <EntityType Name="cxc_SeguimientoCartera">
           <Key>
@@ -1623,7 +1624,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
             <End Role="cxc_cobro" EntitySet="cxc_cobro" />
             <End Role="cxc_CobroMasivoDet" EntitySet="cxc_CobroMasivoDet" />
           </AssociationSet>
-          <EntitySet Name="cxc_Parametro" EntityType="ModelCuentasPorCobrar.cxc_Parametro" />
           <EntitySet Name="cxc_CobroMasivo" EntityType="ModelCuentasPorCobrar.cxc_CobroMasivo" />
           <AssociationSet Name="FK_cxc_CobroMasivoDet_cxc_CobroMasivo" Association="ModelCuentasPorCobrar.FK_cxc_CobroMasivoDet_cxc_CobroMasivo">
             <End Role="cxc_CobroMasivo" EntitySet="cxc_CobroMasivo" />
@@ -1632,6 +1632,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
           <EntitySet Name="cxc_SeguimientoCartera" EntityType="ModelCuentasPorCobrar.cxc_SeguimientoCartera" />
           <EntitySet Name="vwcxc_SeguimientoCartera" EntityType="ModelCuentasPorCobrar.vwcxc_SeguimientoCartera" />
           <EntitySet Name="vwcxc_LiquidacionTarjeta_x_cxc_cobro" EntityType="ModelCuentasPorCobrar.vwcxc_LiquidacionTarjeta_x_cxc_cobro" />
+          <EntitySet Name="cxc_Parametro" EntityType="ModelCuentasPorCobrar.cxc_Parametro" />
           </EntityContainer>
         <EntityType Name="cxc_Catalogo">
           <Key>
@@ -2652,23 +2653,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="cxc_Parametro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="pa_IdCaja_x_cobros_x_CXC" Type="Int32" Nullable="false" />
-          <Property Name="pa_IdTipoMoviCaja_x_Cobros_x_cliente" Type="Int32" Nullable="false" />
-          <Property Name="pa_IdTipoCbteCble_CxC" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte_ConciliacionNC" Type="Int32" />
-          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaTransac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
-          <Property Name="IdTipoNotaProntoPago" Type="Int32" />
-          <Property Name="IdTipoNotaPagoAnticipado" Type="Int32" />
-        </EntityType>
         <EntityType Name="cxc_CobroMasivo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2766,6 +2750,24 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
           <Property Name="cr_observacion" Type="String" Nullable="false" MaxLength="700" FixedLength="false" Unicode="false" />
           <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="cxc_Parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="pa_IdCaja_x_cobros_x_CXC" Type="Int32" Nullable="false" />
+          <Property Name="pa_IdTipoMoviCaja_x_Cobros_x_cliente" Type="Int32" Nullable="false" />
+          <Property Name="pa_IdTipoCbteCble_CxC" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_ConciliacionNC" Type="Int32" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaTransac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+          <Property Name="IdTipoNotaProntoPago" Type="Int32" />
+          <Property Name="IdTipoNotaPagoAnticipado" Type="Int32" />
+          <Property Name="DiasTransaccionesAPasado" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3388,24 +3390,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="cxc_Parametro">
-            <EntityTypeMapping TypeName="ModelCuentasPorCobrar.cxc_Parametro">
-              <MappingFragment StoreEntitySet="cxc_Parametro">
-                <ScalarProperty Name="IdTipoNotaPagoAnticipado" ColumnName="IdTipoNotaPagoAnticipado" />
-                <ScalarProperty Name="IdTipoNotaProntoPago" ColumnName="IdTipoNotaProntoPago" />
-                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="FechaTransac" ColumnName="FechaTransac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
-                <ScalarProperty Name="IdTipoCbte_ConciliacionNC" ColumnName="IdTipoCbte_ConciliacionNC" />
-                <ScalarProperty Name="pa_IdTipoCbteCble_CxC" ColumnName="pa_IdTipoCbteCble_CxC" />
-                <ScalarProperty Name="pa_IdTipoMoviCaja_x_Cobros_x_cliente" ColumnName="pa_IdTipoMoviCaja_x_Cobros_x_cliente" />
-                <ScalarProperty Name="pa_IdCaja_x_cobros_x_CXC" ColumnName="pa_IdCaja_x_cobros_x_CXC" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="cxc_CobroMasivo">
             <EntityTypeMapping TypeName="ModelCuentasPorCobrar.cxc_CobroMasivo">
               <MappingFragment StoreEntitySet="cxc_CobroMasivo">
@@ -3474,6 +3458,25 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwcxc_cobro_para_retencion' no tie
                 <ScalarProperty Name="IdLiquidacion" ColumnName="IdLiquidacion" />
                 <ScalarProperty Name="IdCobro" ColumnName="IdCobro" />
                 <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cxc_Parametro">
+            <EntityTypeMapping TypeName="ModelCuentasPorCobrar.cxc_Parametro">
+              <MappingFragment StoreEntitySet="cxc_Parametro">
+                <ScalarProperty Name="DiasTransaccionesAPasado" ColumnName="DiasTransaccionesAPasado" />
+                <ScalarProperty Name="IdTipoNotaPagoAnticipado" ColumnName="IdTipoNotaPagoAnticipado" />
+                <ScalarProperty Name="IdTipoNotaProntoPago" ColumnName="IdTipoNotaProntoPago" />
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="FechaTransac" ColumnName="FechaTransac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="IdTipoCbte_ConciliacionNC" ColumnName="IdTipoCbte_ConciliacionNC" />
+                <ScalarProperty Name="pa_IdTipoCbteCble_CxC" ColumnName="pa_IdTipoCbteCble_CxC" />
+                <ScalarProperty Name="pa_IdTipoMoviCaja_x_Cobros_x_cliente" ColumnName="pa_IdTipoMoviCaja_x_Cobros_x_cliente" />
+                <ScalarProperty Name="pa_IdCaja_x_cobros_x_CXC" ColumnName="pa_IdCaja_x_cobros_x_CXC" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

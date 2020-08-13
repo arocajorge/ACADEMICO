@@ -347,6 +347,7 @@
           <Property Name="FechaTransac" Type="datetime" />
           <Property Name="IdUsuarioUltMod" Type="varchar" MaxLength="20" />
           <Property Name="FechaUltMod" Type="datetime" />
+          <Property Name="DiasTransaccionesAPasado" Type="int" />
         </EntityType>
         <EntityType Name="ba_Talonario_cheques_x_banco">
           <Key>
@@ -1494,7 +1495,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <EntitySet Name="ba_Banco_Cuenta_x_tb_sucursal" EntityType="DBERP_LICEOModel.ba_Banco_Cuenta_x_tb_sucursal" />
           <EntitySet Name="ba_Catalogo" EntityType="DBERP_LICEOModel.ba_Catalogo" />
           <EntitySet Name="ba_CatalogoTipo" EntityType="DBERP_LICEOModel.ba_CatalogoTipo" />
-          <EntitySet Name="ba_parametros" EntityType="DBERP_LICEOModel.ba_parametros" />
           <AssociationSet Name="FK_ba_Banco_Cuenta_x_tb_sucursal_ba_Banco_Cuenta" Association="DBERP_LICEOModel.FK_ba_Banco_Cuenta_x_tb_sucursal_ba_Banco_Cuenta">
             <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
             <End Role="ba_Banco_Cuenta_x_tb_sucursal" EntitySet="ba_Banco_Cuenta_x_tb_sucursal" />
@@ -1628,6 +1628,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <EntitySet Name="ba_ArchivoRecaudacionDet" EntityType="DBERP_LICEOModel.ba_ArchivoRecaudacionDet" />
           <EntitySet Name="vwba_ArchivoRecaudacionDet" EntityType="DBERP_LICEOModel.vwba_ArchivoRecaudacionDet" />
           <EntitySet Name="vwba_ArchivoRecaudacion_Archivo" EntityType="DBERP_LICEOModel.vwba_ArchivoRecaudacion_Archivo" />
+          <EntitySet Name="ba_parametros" EntityType="DBERP_LICEOModel.ba_parametros" />
         </EntityContainer>
         <EntityType Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
           <Key>
@@ -1723,21 +1724,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <Property Name="IdTipoCatalogo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="tc_Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ba_Catalogo" Relationship="DBERP_LICEOModel.FK_ba_Catalogo_ba_CatalogoTipo" FromRole="ba_CatalogoTipo" ToRole="ba_Catalogo" />
-        </EntityType>
-        <EntityType Name="ba_parametros">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="CiudadDefaultParaCrearCheques" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
-          <Property Name="CantidadChequesAlerta" Type="Int32" />
-          <Property Name="PermitirSobreGiro" Type="Boolean" Nullable="false" />
-          <Property Name="ValidarSoloCuentasArchivo" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaTransac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_ba_Banco_Cuenta_x_tb_sucursal_ba_Banco_Cuenta">
           <End Type="DBERP_LICEOModel.ba_Banco_Cuenta" Role="ba_Banco_Cuenta" Multiplicity="1" />
@@ -2783,6 +2769,22 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <Property Name="FechaProceso" Type="DateTime" Precision="3" />
           <Property Name="FechaProntoPago" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="ba_parametros">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="CiudadDefaultParaCrearCheques" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <Property Name="CantidadChequesAlerta" Type="Int32" />
+          <Property Name="PermitirSobreGiro" Type="Boolean" Nullable="false" />
+          <Property Name="ValidarSoloCuentasArchivo" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaTransac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+          <Property Name="DiasTransaccionesAPasado" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2877,22 +2879,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
               <MappingFragment StoreEntitySet="ba_CatalogoTipo">
                 <ScalarProperty Name="tc_Descripcion" ColumnName="tc_Descripcion" />
                 <ScalarProperty Name="IdTipoCatalogo" ColumnName="IdTipoCatalogo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ba_parametros">
-            <EntityTypeMapping TypeName="DBERP_LICEOModel.ba_parametros">
-              <MappingFragment StoreEntitySet="ba_parametros">
-                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="FechaTransac" ColumnName="FechaTransac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="ValidarSoloCuentasArchivo" ColumnName="ValidarSoloCuentasArchivo" />
-                <ScalarProperty Name="PermitirSobreGiro" ColumnName="PermitirSobreGiro" />
-                <ScalarProperty Name="CantidadChequesAlerta" ColumnName="CantidadChequesAlerta" />
-                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
-                <ScalarProperty Name="CiudadDefaultParaCrearCheques" ColumnName="CiudadDefaultParaCrearCheques" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3447,6 +3433,23 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
                 <ScalarProperty Name="Nom_Archivo" ColumnName="Nom_Archivo" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ba_parametros">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.ba_parametros">
+              <MappingFragment StoreEntitySet="ba_parametros">
+                <ScalarProperty Name="DiasTransaccionesAPasado" ColumnName="DiasTransaccionesAPasado" />
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="FechaTransac" ColumnName="FechaTransac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="ValidarSoloCuentasArchivo" ColumnName="ValidarSoloCuentasArchivo" />
+                <ScalarProperty Name="PermitirSobreGiro" ColumnName="PermitirSobreGiro" />
+                <ScalarProperty Name="CantidadChequesAlerta" ColumnName="CantidadChequesAlerta" />
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="CiudadDefaultParaCrearCheques" ColumnName="CiudadDefaultParaCrearCheques" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

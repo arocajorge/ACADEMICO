@@ -31,7 +31,6 @@ namespace Core.Data.Base
         public virtual DbSet<ba_Banco_Cuenta_x_tb_sucursal> ba_Banco_Cuenta_x_tb_sucursal { get; set; }
         public virtual DbSet<ba_Catalogo> ba_Catalogo { get; set; }
         public virtual DbSet<ba_CatalogoTipo> ba_CatalogoTipo { get; set; }
-        public virtual DbSet<ba_parametros> ba_parametros { get; set; }
         public virtual DbSet<ba_Cbte_Ban> ba_Cbte_Ban { get; set; }
         public virtual DbSet<ba_Cbte_Ban_tipo> ba_Cbte_Ban_tipo { get; set; }
         public virtual DbSet<ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo> ba_Cbte_Ban_tipo_x_ct_CbteCble_tipo { get; set; }
@@ -61,5 +60,6 @@ namespace Core.Data.Base
         public virtual DbSet<ba_ArchivoRecaudacionDet> ba_ArchivoRecaudacionDet { get; set; }
         public virtual DbSet<vwba_ArchivoRecaudacionDet> vwba_ArchivoRecaudacionDet { get; set; }
         public virtual DbSet<vwba_ArchivoRecaudacion_Archivo> vwba_ArchivoRecaudacion_Archivo { get; set; }
+        public virtual DbSet<ba_parametros> ba_parametros { get; set; }
     }
 }

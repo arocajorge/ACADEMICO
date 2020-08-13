@@ -32,6 +32,8 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         string Mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        cxc_Parametro_Bus bus_parametros = new cxc_Parametro_Bus();
+        ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
         #endregion
 
         #region Combo bajo demanda Alumno
@@ -413,6 +415,11 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             i_validar.IdSucursal = Convert.ToInt32(i_validar.IdString.Substring(0, 4));
             i_validar.IdBodega = Convert.ToInt32(i_validar.IdString.Substring(4, 4));
             i_validar.IdNota = Convert.ToInt32(i_validar.IdString.Substring(8, 10));
+
+            if (!bus_periodo.ValidarFechaTransaccion(i_validar.IdEmpresa, i_validar.Fecha, cl_enumeradores.eModulo.CXC, i_validar.IdSucursal, ref msg))
+            {
+                return false;
+            }
 
             if (i_validar.ListaDet.Count > 0)
             {

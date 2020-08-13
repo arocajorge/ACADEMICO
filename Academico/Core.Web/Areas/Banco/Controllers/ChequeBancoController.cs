@@ -45,6 +45,7 @@ namespace Core.Web.Areas.Banco.Controllers
         ba_parametros_Bus bus_param = new ba_parametros_Bus();
         ba_Banco_Flujo_Det_List_Cheque List_Flujo = new ba_Banco_Flujo_Det_List_Cheque();
         ba_Cbte_Ban_x_ba_TipoFlujo_Bus bus_flujo = new ba_Cbte_Ban_x_ba_TipoFlujo_Bus();
+        ba_parametros_Bus bus_parametros = new ba_parametros_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion

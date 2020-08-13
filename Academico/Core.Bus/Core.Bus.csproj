@@ -100,6 +100,7 @@
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionConciliacionNC_Bus.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionFacturas_Bus.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionNotas_Bus.cs" />
+    <Compile Include="Contabilidad\ct_parametro_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_CobroMasivoDet_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_CobroMasivo_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Bus.cs" />

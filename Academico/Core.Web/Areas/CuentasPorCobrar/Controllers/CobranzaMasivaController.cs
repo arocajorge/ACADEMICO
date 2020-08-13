@@ -31,6 +31,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         tb_banco_Bus bus_banco = new tb_banco_Bus();
         ba_Banco_Cuenta_Bus bus_banco_cuenta = new ba_Banco_Cuenta_Bus();
         tb_TarjetaCredito_Bus bus_tarjeta = new tb_TarjetaCredito_Bus();
+        cxc_Parametro_Bus bus_parametros = new cxc_Parametro_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
@@ -178,6 +179,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                     info.cr_Tarjeta = null;
                     break;
             }
+
 
             if (info.lst_det.Count() == 0)
             {

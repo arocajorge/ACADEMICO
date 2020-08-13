@@ -36,6 +36,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         ba_TipoFlujo_Bus bus_tipo = new ba_TipoFlujo_Bus();
         string mensaje = string.Empty;
         ct_periodo_Bus bus_periodo = new ct_periodo_Bus();
+        cxc_Parametro_Bus bus_parametros = new cxc_Parametro_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
@@ -98,6 +99,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                     return false;
                 }
             }
+
             return true;
         }
         #endregion

@@ -54,8 +54,6 @@
         <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_resumen_fa_notaCreDeb" />
         <EntityTypeShape EntityType="ModelFacturacion.vwfa_notaCreDeb_ParaConciliarNC" Width="1.5" PointX="21.375" PointY="14.75" />
         <EntityTypeShape EntityType="ModelFacturacion.vwfa_notaCreDeb_x_fa_factura_NotaDeb" Width="1.5" PointX="15.375" PointY="21.75" />
-        <EntityTypeShape EntityType="ModelFacturacion.fa_parametro" Width="1.5" PointX="5.375" PointY="27" />
-        <AssociationConnector Association="ModelFacturacion.FK_fa_parametro_fa_cliente" />
         <EntityTypeShape EntityType="ModelFacturacion.vwfa_factura" Width="1.5" PointX="9.375" PointY="19.75" />
         <EntityTypeShape EntityType="ModelFacturacion.vwfa_notaCreDeb" Width="1.5" PointX="21.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelFacturacion.fa_notaCreDeb_Masiva" Width="1.5" PointX="9.625" PointY="30.75" />
@@ -77,6 +75,8 @@
         <AssociationConnector Association="ModelFacturacion.FK_fa_factura_x_ct_cbtecble_fa_factura" />
         <EntityTypeShape EntityType="ModelFacturacion.fa_notaCreDeb_x_fa_factura_NotaDeb" Width="1.5" PointX="11.875" PointY="25.25" />
         <AssociationConnector Association="ModelFacturacion.FK_fa_notaCreDeb_x_fa_factura_NotaDeb_fa_notaCreDeb" />
+        <EntityTypeShape EntityType="ModelFacturacion.fa_parametro" Width="1.5" PointX="5.375" PointY="27" />
+        <AssociationConnector Association="ModelFacturacion.FK_fa_parametro_fa_cliente" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

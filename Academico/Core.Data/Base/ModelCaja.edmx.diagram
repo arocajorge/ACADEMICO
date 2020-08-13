@@ -10,7 +10,6 @@
         <AssociationConnector Association="ModelCaja.FK_caj_Caja_Movimiento_det_caj_Caja_Movimiento" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ModelCaja.caj_catalogo" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelCaja.caj_catalogo_tipo" Width="1.5" PointX="5.375" PointY="3.75" />
-        <EntityTypeShape EntityType="ModelCaja.caj_parametro" Width="1.5" PointX="3.375" PointY="6.75" />
         <EntityTypeShape EntityType="ModelCaja.caj_Caja_Movimiento_Tipo" Width="1.5" PointX="0.75" PointY="15.25" />
         <EntityTypeShape EntityType="ModelCaja.cp_conciliacion_Caja_det_x_ValeCaja" Width="1.5" PointX="3" PointY="0.75" />
         <AssociationConnector Association="ModelCaja.FK_caj_Caja_Movimiento_caj_Caja_Movimiento_Tipo" />
@@ -34,7 +33,8 @@
         <EntityTypeShape EntityType="ModelCaja.caj_Caja" Width="1.5" PointX="0.75" PointY="3.625" />
         <AssociationConnector Association="ModelCaja.FK_caj_Caja_Movimiento_caj_Caja" />
         <AssociationConnector Association="ModelCaja.FK_cp_conciliacion_Caja_caj_Caja" />
-        <EntityTypeShape EntityType="ModelCaja.caj_Caja_x_seg_usuario" Width="1.5" PointX="3" PointY="16.875" />
+        <EntityTypeShape EntityType="ModelCaja.caj_Caja_x_seg_usuario" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="ModelCaja.caj_parametro" Width="1.5" PointX="12.375" PointY="5.75" />
         <AssociationConnector Association="ModelCaja.FK_caj_Caja_x_seg_usuario_caj_Caja" />
       </Diagram>
     </edmx:Diagrams>

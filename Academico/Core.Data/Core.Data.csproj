@@ -517,6 +517,7 @@
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionConciliacionNC_Data.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionFacturas_Data.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionNotas_Data.cs" />
+    <Compile Include="Contabilidad\ct_parametro_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_CobroMasivoDet_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_CobroMasivo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Data.cs" />

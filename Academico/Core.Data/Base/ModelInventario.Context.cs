@@ -21,12 +21,10 @@ namespace Core.Data.Base
             : base("name=EntitiesInventario")
         {
         }
-
         public void SetCommandTimeOut(int TimeOut)
         {
             ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = TimeOut;
         }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -37,7 +35,6 @@ namespace Core.Data.Base
         public virtual DbSet<in_presentacion> in_presentacion { get; set; }
         public virtual DbSet<in_ProductoTipo> in_ProductoTipo { get; set; }
         public virtual DbSet<in_Producto_x_fa_NivelDescuento> in_Producto_x_fa_NivelDescuento { get; set; }
-        public virtual DbSet<in_parametro> in_parametro { get; set; }
         public virtual DbSet<in_grupo> in_grupo { get; set; }
         public virtual DbSet<in_linea> in_linea { get; set; }
         public virtual DbSet<in_Marca> in_Marca { get; set; }
@@ -85,6 +82,7 @@ namespace Core.Data.Base
         public virtual DbSet<in_movi_inven_tipo> in_movi_inven_tipo { get; set; }
         public virtual DbSet<vwin_Ing_Egr_Inven> vwin_Ing_Egr_Inven { get; set; }
         public virtual DbSet<vwin_movi_inve_x_estado_contabilizacion> vwin_movi_inve_x_estado_contabilizacion { get; set; }
+        public virtual DbSet<in_parametro> in_parametro { get; set; }
     
         public virtual ObjectResult<string> spin_Producto_validar_anulacion(Nullable<int> idEmpresa, Nullable<decimal> idProducto)
         {
