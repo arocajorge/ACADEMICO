@@ -286,7 +286,7 @@ namespace Core.Data.Contabilidad
                             }
                             */
                             var FechaFutura = DateTime.Now.AddDays((param == null ? 0 : param.DiasTransaccionesAFuturo));
-                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 0 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
+                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 99999 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
 
                             if (!(Fecha >= FechaPasada && Fecha <= FechaFutura))
                             {
@@ -316,7 +316,7 @@ namespace Core.Data.Contabilidad
                             }
 
                             var FechaFutura = DateTime.Now.AddDays((param == null ? 0 : param.DiasTransaccionesAFuturo));
-                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 0 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
+                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 99999 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
 
                             if (!(Fecha >= FechaPasada && Fecha <= FechaFutura))
                             {
@@ -437,7 +437,7 @@ namespace Core.Data.Contabilidad
 
 
                             var FechaFutura = DateTime.Now.AddDays((param == null ? 0 : param.DiasTransaccionesAFuturo));
-                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 0 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
+                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 99999 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
 
                             if (!(Fecha >= FechaPasada && Fecha <= FechaFutura))
                             {
@@ -474,7 +474,7 @@ namespace Core.Data.Contabilidad
                             }
 
                             var FechaFutura = DateTime.Now.AddDays((param == null ? 0 : param.DiasTransaccionesAFuturo));
-                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 0 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
+                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 99999 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
 
                             if (!(Fecha >= FechaPasada && Fecha <= FechaFutura))
                             {
@@ -510,7 +510,7 @@ namespace Core.Data.Contabilidad
                             }
 
                             var FechaFutura = DateTime.Now.AddDays((param == null ? 0 : param.DiasTransaccionesAFuturo));
-                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 0 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
+                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 99999 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
 
                             if (!(Fecha >= FechaPasada && Fecha <= FechaFutura))
                             {
@@ -546,7 +546,7 @@ namespace Core.Data.Contabilidad
                             }
 
                             var FechaFutura = DateTime.Now.AddDays((param == null ? 0 : param.DiasTransaccionesAFuturo));
-                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 0 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
+                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 99999 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
 
                             if (!(Fecha >= FechaPasada && Fecha <= FechaFutura))
                             {
@@ -582,7 +582,7 @@ namespace Core.Data.Contabilidad
                             }
 
                             var FechaFutura = DateTime.Now.AddDays((param == null ? 0 : param.DiasTransaccionesAFuturo));
-                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 0 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
+                            var FechaPasada = DateTime.Now.AddDays(-(param == null ? 0 : (param.DiasTransaccionesAPasado == null ? 99999 : Convert.ToInt32(param.DiasTransaccionesAPasado))));
 
                             if (!(Fecha >= FechaPasada && Fecha <= FechaFutura))
                             {
