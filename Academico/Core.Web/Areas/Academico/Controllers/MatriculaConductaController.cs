@@ -59,8 +59,15 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
-            List<aca_MatriculaConducta_Info> lst_datos_combos = bus_conducta_cal.GetList_Combos(model.IdEmpresa, model.IdSede, model.IdAnio,model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
-            Lista_Combos.set_list(lst_datos_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+            List<aca_MatriculaConducta_Info> lst_combos = bus_conducta_cal.GetList_Combos_Inspector(model.IdEmpresa, IdProfesor, EsSuperAdmin);
+            Lista_Combos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            //List<aca_MatriculaConducta_Info> lst_datos_combos = bus_conducta_cal.GetList_Combos(model.IdEmpresa, model.IdSede, model.IdAnio,model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
+            //Lista_Combos.set_list(lst_datos_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             cargar_combos(model);
             return View(model);

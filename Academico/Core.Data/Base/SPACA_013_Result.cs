@@ -60,5 +60,8 @@ namespace Core.Data.Base
         public Nullable<decimal> PromedioParcial { get; set; }
         public Nullable<int> SecuenciaPromedioConducta { get; set; }
         public string LetraPromedioConducta { get; set; }
+        public Nullable<decimal> IdProfesorTutor { get; set; }
+        public string NombreTutor { get; set; }
+        public string NombreRepresentante { get; set; }
     }
 }

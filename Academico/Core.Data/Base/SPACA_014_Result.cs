@@ -84,5 +84,8 @@ namespace Core.Data.Base
         public int OrdenMateria { get; set; }
         public Nullable<int> OrdenMateriaGrupo { get; set; }
         public Nullable<int> OrdenMateriaArea { get; set; }
+        public Nullable<decimal> IdProfesorInspector { get; set; }
+        public string NombreInspector { get; set; }
+        public string NombreRepresentante { get; set; }
     }
 }

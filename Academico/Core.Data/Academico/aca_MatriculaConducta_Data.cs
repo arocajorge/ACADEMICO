@@ -293,6 +293,54 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_MatriculaConducta_Info> getList_Combos_Inspector(int IdEmpresa, decimal IdProfesor, bool EsSuperAdmin)
+        {
+            try
+            {
+                List<aca_MatriculaConducta_Info> Lista = new List<aca_MatriculaConducta_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_AnioLectivo_Paralelo_Profesor_Calificaciones.Where(q => q.IdEmpresa == IdEmpresa
+                    && q.IdProfesorInspector == (EsSuperAdmin == true ? q.IdProfesorInspector : IdProfesor)).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdMatricula = q.IdMatricula,
+                            IdAnio = q.IdAnio,
+                            IdSede = q.IdSede,
+                            IdNivel = q.IdNivel,
+                            IdJornada = q.IdJornada,
+                            IdCurso = q.IdCurso,
+                            IdParalelo = q.IdParalelo,
+                            Descripcion = q.Descripcion,
+                            NomSede = q.NomSede,
+                            NomNivel = q.NomNivel,
+                            OrdenNivel = q.OrdenNivel ?? 0,
+                            NomJornada = q.NomJornada,
+                            OrdenJornada = q.OrdenJornada ?? 0,
+                            NomCurso = q.NomCurso,
+                            OrdenCurso = q.OrdenCurso ?? 0,
+                            NomParalelo = q.NomParalelo,
+                            OrdenParalelo = q.OrdenParalelo ?? 0,
+                            CodigoParalelo = q.CodigoParalelo,
+                            IdProfesorTutor = q.IdProfesorTutor ?? 0,
+                            IdProfesorInspector = q.IdProfesorInspector ?? 0
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_MatriculaConducta_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo)
         {
             try
@@ -301,7 +349,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
-                    var lst = odata.vwaca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).ToList();
+                    var lst = odata.vwaca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).OrderBy(q=>q.pe_nombreCompleto).ToList();
 
                     lst.ForEach(q =>
                     {

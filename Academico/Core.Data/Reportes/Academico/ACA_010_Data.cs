@@ -72,7 +72,7 @@ namespace Core.Data.Reportes.Academico
                             MotivoConducta = q.MotivoConducta,
                             AccionRemedial = q.AccionRemedial,
                             PromedioParcial = q.PromedioParcial
-                             
+                            
                         });
                     });
                 }

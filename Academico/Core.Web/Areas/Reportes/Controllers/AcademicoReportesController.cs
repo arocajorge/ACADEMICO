@@ -1412,8 +1412,8 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, IdProfesor, EsSuperAdmin);
-            Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            //List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, IdProfesor, EsSuperAdmin);
+            //Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_013_Rpt report = new ACA_013_Rpt();
 

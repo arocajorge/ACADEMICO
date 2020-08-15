@@ -519,6 +519,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
+                    odata.Database.CommandTimeout = 5000;
                     var lst = odata.vwaca_AnioLectivo_Paralelo_Profesor_Calificaciones.Where(q => q.IdEmpresa == IdEmpresa 
                     && q.IdProfesor == (EsSuperAdmin==true ? q.IdProfesor : IdProfesor) ).ToList();
 

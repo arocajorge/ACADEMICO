@@ -97,7 +97,11 @@ namespace Core.Data.Reportes.Academico
                             //IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ1,
                             //IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ2,
                             IdEquivalenciaPromedioQ2 = q.IdEquivalenciaPromedioQ2,
-                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF
+                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF,
+
+                            NombreRepresentante = q.NombreRepresentante,
+                            NombreInspector = q.NombreInspector,
+                            IdProfesorInspector = q.IdProfesorInspector
                         });
                     }
                 }

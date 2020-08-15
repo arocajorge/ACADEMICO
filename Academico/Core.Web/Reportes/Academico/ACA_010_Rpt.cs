@@ -51,7 +51,7 @@ namespace Core.Web.Reportes.Academico
             var info_sede = bus_sede.GetInfo(IdEmpresa, IdSede);
             if (info_sede != null)
             {
-                //lbl_secretaria.Text = info_sede.NombreSecretaria;
+                lbl_secretaria.Text = (info_sede.NombreSecretaria==null ? "" : info_sede.NombreSecretaria);
             }
 
             var emp = bus_empresa.get_info(IdEmpresa);

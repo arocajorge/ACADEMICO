@@ -71,7 +71,10 @@ namespace Core.Data.Reportes.Academico
                             MotivoCalificacion=q.MotivoCalificacion,
                             AccionRemedial = q.AccionRemedial,
                             SecuenciaPromedioConducta = q.SecuenciaPromedioConducta,
-                            LetraPromedioConducta =q.LetraPromedioConducta
+                            LetraPromedioConducta =q.LetraPromedioConducta,
+                            NombreRepresentante = q.NombreRepresentante,
+                            NombreTutor = q.NombreTutor,
+                            IdProfesorTutor = q.IdProfesorTutor
                         });
                     }
                 }
