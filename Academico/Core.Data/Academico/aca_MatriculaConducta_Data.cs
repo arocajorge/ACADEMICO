@@ -13,6 +13,7 @@ namespace Core.Data.Academico
     {
         aca_AnioLectivoConductaEquivalencia_Data odata_conducta = new aca_AnioLectivoConductaEquivalencia_Data();
         aca_AnioLectivoConductaEquivalencia_Data odata_conducta_equivalencia = new aca_AnioLectivoConductaEquivalencia_Data();
+        aca_AnioLectivoParcial_Data odata_parcial = new aca_AnioLectivoParcial_Data();
         aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
 
         public List<aca_MatriculaConducta_Info> getList(int IdEmpresa, decimal IdMatricula)
@@ -558,8 +559,10 @@ namespace Core.Data.Academico
                     var SecuenciaConducta = (int?)null;
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
                     {
+                        var lst_pacial_quim1 = odata_parcial.getList_x_Tipo(info.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+
                         SumaPromedioQuimestre = Convert.ToDouble((EntityConductaPromedioQuim.PromedioFinalP1>0 ? EntityConductaPromedioQuim.PromedioFinalP1 : EntityConductaPromedioQuim.PromedioP1) + (EntityConductaPromedioQuim.PromedioFinalP2 > 0 ? EntityConductaPromedioQuim.PromedioFinalP2 : EntityConductaPromedioQuim.PromedioP2) + (EntityConductaPromedioQuim.PromedioFinalP3 > 0 ? EntityConductaPromedioQuim.PromedioFinalP3 : EntityConductaPromedioQuim.PromedioP3));
-                        PromedioQuimestre = Convert.ToDouble(SumaPromedioQuimestre / 3);
+                        PromedioQuimestre = Convert.ToDouble(SumaPromedioQuimestre / lst_pacial_quim1.Count());
                         var info_conductaQ1 = odata_conducta_equivalencia.getInfoXPromedioConducta(info.IdEmpresa, info.IdAnio, Convert.ToDecimal(PromedioQuimestre));
                         var infoMinimaConductaQ1 = odata_conducta_equivalencia.getInfo_MinimaConducta(info.IdEmpresa, info_matricula.IdAnio);
                         SecuenciaConducta = infoMinimaConductaQ1.Secuencia;
@@ -570,8 +573,10 @@ namespace Core.Data.Academico
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
                     {
+                        var lst_pacial_quim2 = odata_parcial.getList_x_Tipo(info.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2));
+
                         SumaPromedioQuimestre = Convert.ToDouble((EntityConductaPromedioQuim.PromedioFinalP4 > 0 ? EntityConductaPromedioQuim.PromedioFinalP4 : EntityConductaPromedioQuim.PromedioP4) + (EntityConductaPromedioQuim.PromedioFinalP5 > 0 ? EntityConductaPromedioQuim.PromedioFinalP5 : EntityConductaPromedioQuim.PromedioP5) + (EntityConductaPromedioQuim.PromedioFinalP6 > 0 ? EntityConductaPromedioQuim.PromedioFinalP6 : EntityConductaPromedioQuim.PromedioP6));
-                        PromedioQuimestre = Convert.ToDouble(SumaPromedioQuimestre / 3);
+                        PromedioQuimestre = Convert.ToDouble(SumaPromedioQuimestre / lst_pacial_quim2.Count());
                         var info_conductaQ2 = odata_conducta_equivalencia.getInfoXPromedioConducta(info.IdEmpresa, info.IdAnio, Convert.ToDecimal(PromedioQuimestre));
                         var infoMinimaConductaQ2 = odata_conducta_equivalencia.getInfo_MinimaConducta(info.IdEmpresa, info_matricula.IdAnio);
                         SecuenciaConducta = infoMinimaConductaQ2.Secuencia;
