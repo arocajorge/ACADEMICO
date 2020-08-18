@@ -15,38 +15,47 @@ namespace Core.Info.Academico
         public Nullable<double> PromedioP1 { get; set; }
         public Nullable<int> SecuenciaPromedioFinalP1 { get; set; }
         public Nullable<double> PromedioFinalP1 { get; set; }
+        public string MotivoPromedioFinalP1 { get; set; }
         public Nullable<int> SecuenciaPromedioP2 { get; set; }
         public Nullable<double> PromedioP2 { get; set; }
         public Nullable<int> SecuenciaPromedioFinalP2 { get; set; }
         public Nullable<double> PromedioFinalP2 { get; set; }
+        public string MotivoPromedioFinalP2 { get; set; }
         public Nullable<int> SecuenciaPromedioP3 { get; set; }
         public Nullable<double> PromedioP3 { get; set; }
         public Nullable<int> SecuenciaPromedioFinalP3 { get; set; }
         public Nullable<double> PromedioFinalP3 { get; set; }
+        public string MotivoPromedioFinalP3 { get; set; }
         public Nullable<int> SecuenciaPromedioQ1 { get; set; }
         public Nullable<double> PromedioQ1 { get; set; }
         public Nullable<int> SecuenciaPromedioFinalQ1 { get; set; }
         public Nullable<double> PromedioFinalQ1 { get; set; }
+        public string MotivoPromedioFinalQ1 { get; set; }
         public Nullable<int> SecuenciaPromedioP4 { get; set; }
         public Nullable<double> PromedioP4 { get; set; }
         public Nullable<int> SecuenciaPromedioFinalP4 { get; set; }
         public Nullable<double> PromedioFinalP4 { get; set; }
+        public string MotivoPromedioFinalP4 { get; set; }
         public Nullable<int> SecuenciaPromedioP5 { get; set; }
         public Nullable<double> PromedioP5 { get; set; }
         public Nullable<int> SecuenciaPromedioFinalP5 { get; set; }
         public Nullable<double> PromedioFinalP5 { get; set; }
+        public string MotivoPromedioFinalP5 { get; set; }
         public Nullable<int> SecuenciaPromedioP6 { get; set; }
         public Nullable<double> PromedioP6 { get; set; }
         public Nullable<int> SecuenciaPromedioFinalP6 { get; set; }
         public Nullable<double> PromedioFinalP6 { get; set; }
+        public string MotivoPromedioFinalP6 { get; set; }
         public Nullable<int> SecuenciaPromedioQ2 { get; set; }
         public Nullable<double> PromedioQ2 { get; set; }
         public Nullable<int> SecuenciaPromedioFinalQ2 { get; set; }
         public Nullable<double> PromedioFinalQ2 { get; set; }
+        public string MotivoPromedioFinalQ2 { get; set; }
         public Nullable<int> SecuenciaPromedioGeneral { get; set; }
         public Nullable<double> PromedioGeneral { get; set; }
         public Nullable<int> SecuenciaPromedioFinal { get; set; }
         public Nullable<double> PromedioFinal { get; set; }
+        public string MotivoPromedioFinal { get; set; }
 
         #region Campos que no existen en la tabla
         public int IdAnio { get; set; }
@@ -78,6 +87,8 @@ namespace Core.Info.Academico
         public double ConductaPromedioParcial { get; set; }
         public int SecuenciaConductaPromedioParcialFinal { get; set; }
         public double ConductaPromedioParcialFinal { get; set; }
+        public string MotivoPromedioParcialFinal { get; set; }
+        public string IdPromedioFinal { get; set; }
         #endregion
     }
 }

@@ -96,6 +96,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public bool ModicarPromedioFinalQuimestre(aca_MatriculaConducta_Info info)
+        {
+            try
+            {
+                return odata.modicarPromedioFinalQuimestre(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool modicarPromedioPaseAnio(aca_MatriculaConducta_Info info)
         {
             try

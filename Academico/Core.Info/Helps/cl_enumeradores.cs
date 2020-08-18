@@ -201,6 +201,13 @@ namespace Core.Info.Helps
             P5 = 32,
             P6 = 33
         }
+
+        public enum eTipoCatalogoAcademicoConductaFinal
+        {
+            QUIMESTRE_1,
+            QUIMESTRE_2,
+            PROMEDIOFINAL
+        }
         public enum eCatalogoAcademicoMatricula
         {
             REGISTRADO = 1,

@@ -1,7 +1,7 @@
 ﻿@Html.DevExpress().ComboBox(settings =>
 {
     settings.Name = "IdAnio";
-    settings.CallbackRouteValues = new { Controller = "MatriculaConducta", Action = "ComboBoxPartial_Anio", Area = "Academico" };    
+    settings.CallbackRouteValues = new { Controller = "MatriculaConductaQuimestral", Action = "ComboBoxPartial_Anio", Area = "Academico" };    
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.Properties.DisplayFormatString = "[{0}] - {1}";
     settings.Properties.Columns.Add("IdAnio", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
@@ -14,4 +14,4 @@
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
     settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
     settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdSede.PerformCallback(); IdJornada.PerformCallback(); IdNivel.PerformCallback(); IdCurso.PerformCallback(); IdParalelo.PerformCallback();}";
-}).BindList(new Core.Web.Areas.Academico.Controllers.MatriculaConductaController().CargarAnio(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa))).Bind(Model.IdAnio).GetHtml()
+}).BindList(new Core.Web.Areas.Academico.Controllers.MatriculaConductaQuimestralController().CargarAnio(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa))).Bind(Model.IdAnio).GetHtml()

@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_MatriculaConducta";
-        settings.CallbackRouteValues = new { Controller = "MatriculaConducta", Action = "GridViewPartial_MatriculaConducta" };
+        settings.CallbackRouteValues = new { Controller = "MatriculaConductaQuimestral", Action = "GridViewPartial_MatriculaConducta" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdMatricula";
         settings.CommandColumn.ShowNewButtonInHeader = false;
@@ -12,7 +12,7 @@
         settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
 
         settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
-        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "MatriculaConducta", Action = "EditingUpdate", Area = "Academico" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "MatriculaConductaQuimestral", Action = "EditingUpdate", Area = "Academico" };
         settings.CommandColumn.ShowEditButton = true;
         settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
 

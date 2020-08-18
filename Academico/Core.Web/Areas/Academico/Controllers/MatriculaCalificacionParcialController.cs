@@ -232,6 +232,43 @@ namespace Core.Web.Areas.Academico.Controllers
             return ListaSede;
         }
 
+        public List<aca_Jornada_Info> CargarJornada(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0)
+        {
+            List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
+            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede).ToList();
+
+            var lst_jornada = (from q in lst_combos
+                               group q by new
+                               {
+                                   q.IdEmpresa,
+                                   q.IdAnio,
+                                   q.IdSede,
+                                   q.IdJornada,
+                                   q.NomJornada,
+                                   q.OrdenJornada
+                               } into a
+                               select new aca_Jornada_Info
+                               {
+                                   IdEmpresa = a.Key.IdEmpresa,
+                                   IdJornada = a.Key.IdJornada,
+                                   NomJornada = a.Key.NomJornada,
+                                   OrdenJornada = a.Key.OrdenJornada
+                               }).OrderBy(q => q.OrdenJornada).ToList();
+
+            var ListaJornada = new List<aca_Jornada_Info>();
+
+            foreach (var item in lst_jornada)
+            {
+                ListaJornada.Add(new aca_Jornada_Info
+                {
+                    IdJornada = item.IdJornada,
+                    NomJornada = item.NomJornada
+                });
+            }
+
+            return ListaJornada;
+        }
+
         public List<aca_NivelAcademico_Info> CargarNivel(int IdEmpresa = 0, int IdAnio = 0, int IdSede=0)
         {
             List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => 
@@ -269,45 +306,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return ListaNivel;
         }
 
-        public List<aca_Jornada_Info> CargarJornada(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel=0)
-        {
-            List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => 
-            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel).ToList();
-
-            var lst_jornada = (from q in lst_combos
-                            group q by new
-                            {
-                                q.IdEmpresa,
-                                q.IdAnio,
-                                q.IdSede,
-                                q.IdNivel,
-                                q.IdJornada,
-                                q.NomJornada,
-                                q.OrdenJornada
-                            } into a
-                            select new aca_Jornada_Info
-                            {
-                                IdEmpresa = a.Key.IdEmpresa,
-                                IdJornada = a.Key.IdJornada,
-                                NomJornada = a.Key.NomJornada,
-                                OrdenJornada = a.Key.OrdenJornada
-                            }).OrderBy(q=>q.OrdenJornada).ToList();
-
-            var ListaJornada = new List<aca_Jornada_Info>();
-
-            foreach (var item in lst_jornada)
-            {
-                ListaJornada.Add(new aca_Jornada_Info
-                {
-                    IdJornada = item.IdJornada,
-                    NomJornada = item.NomJornada
-                });
-            }
-
-            return ListaJornada;
-        }
-
-        public List<aca_Curso_Info> CargarCurso(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada=0)
+        public List<aca_Curso_Info> CargarCurso(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada = 0, int IdNivel = 0)
         {
             List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
             q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada).ToList();
@@ -346,7 +345,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return ListaCurso;
         }
 
-        public List<aca_Paralelo_Info> CargarParalelo(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso=0)
+        public List<aca_Paralelo_Info> CargarParalelo(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada = 0, int IdNivel = 0, int IdCurso=0)
         {
             List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
             q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso==IdCurso).ToList();
@@ -386,7 +385,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return ListaParalelo;
         }
 
-        public List<aca_Materia_Info> CargarMateria(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo=0)
+        public List<aca_Materia_Info> CargarMateria(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada = 0, int IdNivel = 0, int IdCurso = 0, int IdParalelo=0)
         {
             List<aca_MatriculaCalificacion_Info> lst_combos = ListaCombos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
             q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo==IdParalelo).ToList();

@@ -1,7 +1,7 @@
 ﻿@using Core.Web.Helps
-@model Core.Info.Academico.aca_MatriculaCalificacion_Info
+@model Core.Info.Academico.aca_MatriculaConducta_Info
 @{
-    ViewBag.Title = "Ingreso de calificaciones de exámenes parciales";
+    ViewBag.Title = "Ingreso de calificaciones de conducta quimestral";
     if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
     {
         Response.Redirect("~/Account/Login");
@@ -18,33 +18,26 @@
             IdJornada: IdJornada.GetValue(),
             IdCurso: IdCurso.GetValue(),
             IdParalelo: IdParalelo.GetValue(),
-            IdMateria: IdMateria.GetValue(),
-            IdCatalogoParcial: $("#IdCatalogoParcial").val()
+            IdPromedioFinal: $("#IdPromedioFinal").val()
         }
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("cargar_calificaciones", "MatriculaCalificacionExamen", new { Area = "Academico" })',
+            url: '@Url.Action("cargar_calificaciones_conducta", "MatriculaConductaQuimestral", new { Area = "Academico" })',
             async: false,
             bDeferRender: true,
             bProcessing: true,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridViewPartial_MatriculaCalificacionExamen.PerformCallback();
+                GridViewPartial_MatriculaConducta.PerformCallback();
             },
             error: function (error) {
             }
         });
     }
-
-    function importar() {
-        var location = GetPathServer();
-        var win = window.open(location + "/Academico/MatriculaCalificacionExamen/Importar?IdEmpresa=" + $("#IdEmpresa").val() + "&IdSede=" + IdSede.GetValue() + "&IdAnio=" + IdAnio.GetValue() + "&IdNivel=" + IdNivel.GetValue() + "&IdJornada=" + IdJornada.GetValue() + "&IdCurso=" + IdCurso.GetValue() + "&IdParalelo=" + IdParalelo.GetValue() + "&IdMateria=" + IdMateria.GetValue() + "&IdCatalogoParcial=" + $("#IdCatalogoParcial").val(), '_self');
-        win.focus();
-    }
 </script>
-@using (Html.BeginForm("Index", "MatriculaCalificacionExamen", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
+@using (Html.BeginForm("Index", "MatriculaConducta", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
@@ -96,28 +89,19 @@
                     @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label for="IdEmpresa">Materia</label>
-                    @Html.Partial("_ComboBoxPartial_Materia", Model)
-                    @Html.ValidationMessageFor(q => q.IdMateria, "", new { @class = "text-danger" })
-                </div>
-            </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="IdEmpresa">Examen</label>
-                    @Html.DropDownListFor(q => q.IdCatalogoParcial, new SelectList(ViewBag.lst_examen, "IdCatalogoParcial", "NomCatalogo"), new { @class = "form-control", @id = "IdCatalogoParcial" })
-                    @Html.ValidationMessageFor(q => q.IdCatalogoParcial, "", new { @class = "text-danger" })
+                    <label for="IdEmpresa">Parcial</label>
+                    @Html.DropDownListFor(q => q.IdPromedioFinal, new SelectList(ViewBag.lst_parcial, "Key", "Value"), new { @class = "form-control", @id = "IdPromedioFinal" })
+                    @Html.ValidationMessageFor(q => q.IdPromedioFinal, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
 
     <div class="box-footer">
-        <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button>
-        <button type="button" class="btn btn-primary" id="btn_importar" onclick="importar();">Descargar/Importar</button>  
-        @*<a class="btn btn-primary" href="@Url.Action("Importar","MatriculaCalificacionExamen",new { Area = "Academico", IdEmpresa = SessionFixed.IdEmpresa },null)">Descargar/Importar</a>*@        
+        <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button>    
     </div>
-    @Html.Action("GridViewPartial_MatriculaCalificacionExamen")
+    @Html.Action("GridViewPartial_MatriculaConducta")
     }
 

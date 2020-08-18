@@ -842,38 +842,47 @@
           <Property Name="PromedioP1" Type="float" />
           <Property Name="SecuenciaPromedioFinalP1" Type="int" />
           <Property Name="PromedioFinalP1" Type="float" />
+          <Property Name="MotivoPromedioFinalP1" Type="varchar(max)" />
           <Property Name="SecuenciaPromedioP2" Type="int" />
           <Property Name="PromedioP2" Type="float" />
           <Property Name="SecuenciaPromedioFinalP2" Type="int" />
           <Property Name="PromedioFinalP2" Type="float" />
+          <Property Name="MotivoPromedioFinalP2" Type="varchar(max)" />
           <Property Name="SecuenciaPromedioP3" Type="int" />
           <Property Name="PromedioP3" Type="float" />
           <Property Name="SecuenciaPromedioFinalP3" Type="int" />
           <Property Name="PromedioFinalP3" Type="float" />
+          <Property Name="MotivoPromedioFinalP3" Type="varchar(max)" />
           <Property Name="SecuenciaPromedioQ1" Type="int" />
           <Property Name="PromedioQ1" Type="float" />
           <Property Name="SecuenciaPromedioFinalQ1" Type="int" />
           <Property Name="PromedioFinalQ1" Type="float" />
+          <Property Name="MotivoPromedioFinalQ1" Type="varchar(max)" />
           <Property Name="SecuenciaPromedioP4" Type="int" />
           <Property Name="PromedioP4" Type="float" />
           <Property Name="SecuenciaPromedioFinalP4" Type="int" />
           <Property Name="PromedioFinalP4" Type="float" />
+          <Property Name="MotivoPromedioFinalP4" Type="varchar(max)" />
           <Property Name="SecuenciaPromedioP5" Type="int" />
           <Property Name="PromedioP5" Type="float" />
           <Property Name="SecuenciaPromedioFinalP5" Type="int" />
           <Property Name="PromedioFinalP5" Type="float" />
+          <Property Name="MotivoPromedioFinalP5" Type="varchar(max)" />
           <Property Name="SecuenciaPromedioP6" Type="int" />
           <Property Name="PromedioP6" Type="float" />
           <Property Name="SecuenciaPromedioFinalP6" Type="int" />
           <Property Name="PromedioFinalP6" Type="float" />
+          <Property Name="MotivoPromedioFinalP6" Type="varchar(max)" />
           <Property Name="SecuenciaPromedioQ2" Type="int" />
           <Property Name="PromedioQ2" Type="float" />
           <Property Name="SecuenciaPromedioFinalQ2" Type="int" />
           <Property Name="PromedioFinalQ2" Type="float" />
+          <Property Name="MotivoPromedioFinalQ2" Type="varchar(max)" />
           <Property Name="SecuenciaPromedioGeneral" Type="int" />
           <Property Name="PromedioGeneral" Type="float" />
           <Property Name="SecuenciaPromedioFinal" Type="int" />
           <Property Name="PromedioFinal" Type="float" />
+          <Property Name="MotivoPromedioFinal" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="aca_MecanismoDePago">
           <Key>
@@ -2397,6 +2406,15 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_MatriculaConducta' no tiene 
           <Property Name="PromedioGeneral" Type="float" />
           <Property Name="SecuenciaPromedioFinal" Type="int" />
           <Property Name="PromedioFinal" Type="float" />
+          <Property Name="MotivoPromedioFinalP1" Type="varchar(max)" />
+          <Property Name="MotivoPromedioFinalP2" Type="varchar(max)" />
+          <Property Name="MotivoPromedioFinalP3" Type="varchar(max)" />
+          <Property Name="MotivoPromedioFinalQ1" Type="varchar(max)" />
+          <Property Name="MotivoPromedioFinalP4" Type="varchar(max)" />
+          <Property Name="MotivoPromedioFinalP5" Type="varchar(max)" />
+          <Property Name="MotivoPromedioFinalP6" Type="varchar(max)" />
+          <Property Name="MotivoPromedioFinalQ2" Type="varchar(max)" />
+          <Property Name="MotivoPromedioFinal" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_MecanismoDePago' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -4857,7 +4875,16 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
     [vwaca_MatriculaConducta].[SecuenciaPromedioGeneral] AS [SecuenciaPromedioGeneral], 
     [vwaca_MatriculaConducta].[PromedioGeneral] AS [PromedioGeneral], 
     [vwaca_MatriculaConducta].[SecuenciaPromedioFinal] AS [SecuenciaPromedioFinal], 
-    [vwaca_MatriculaConducta].[PromedioFinal] AS [PromedioFinal]
+    [vwaca_MatriculaConducta].[PromedioFinal] AS [PromedioFinal], 
+    [vwaca_MatriculaConducta].[MotivoPromedioFinalP1] AS [MotivoPromedioFinalP1], 
+    [vwaca_MatriculaConducta].[MotivoPromedioFinalP2] AS [MotivoPromedioFinalP2], 
+    [vwaca_MatriculaConducta].[MotivoPromedioFinalP3] AS [MotivoPromedioFinalP3], 
+    [vwaca_MatriculaConducta].[MotivoPromedioFinalQ1] AS [MotivoPromedioFinalQ1], 
+    [vwaca_MatriculaConducta].[MotivoPromedioFinalP4] AS [MotivoPromedioFinalP4], 
+    [vwaca_MatriculaConducta].[MotivoPromedioFinalP5] AS [MotivoPromedioFinalP5], 
+    [vwaca_MatriculaConducta].[MotivoPromedioFinalP6] AS [MotivoPromedioFinalP6], 
+    [vwaca_MatriculaConducta].[MotivoPromedioFinalQ2] AS [MotivoPromedioFinalQ2], 
+    [vwaca_MatriculaConducta].[MotivoPromedioFinal] AS [MotivoPromedioFinal]
     FROM [dbo].[vwaca_MatriculaConducta] AS [vwaca_MatriculaConducta]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwaca_MecanismoDePago" EntityType="Self.vwaca_MecanismoDePago" store:Type="Views" store:Schema="dbo">
@@ -5809,12 +5836,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <EntitySet Name="vwaca_AnioLectivo_Curso_Paralelo" EntityType="ModelAcademico.vwaca_AnioLectivo_Curso_Paralelo" />
           <EntitySet Name="vwaca_Plantilla_Rubro_Matricula" EntityType="ModelAcademico.vwaca_Plantilla_Rubro_Matricula" />
           <EntitySet Name="vwaca_AnioLectivo_Paralelo_Conducta" EntityType="ModelAcademico.vwaca_AnioLectivo_Paralelo_Conducta" />
-          <EntitySet Name="aca_MatriculaConducta" EntityType="ModelAcademico.aca_MatriculaConducta" />
-          <EntitySet Name="vwaca_MatriculaConducta" EntityType="ModelAcademico.vwaca_MatriculaConducta" />
-          <AssociationSet Name="FK_aca_MatriculaConducta_aca_Matricula" Association="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula">
-            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
-            <End Role="aca_MatriculaConducta" EntitySet="aca_MatriculaConducta" />
-          </AssociationSet>
           <EntitySet Name="aca_AnioLectivoParcial" EntityType="ModelAcademico.aca_AnioLectivoParcial" />
           <EntitySet Name="vwaca_AnioLectivoParcial" EntityType="ModelAcademico.vwaca_AnioLectivoParcial" />
           <AssociationSet Name="FK_aca_AnioLectivoParcial_aca_AnioLectivo" Association="ModelAcademico.FK_aca_AnioLectivoParcial_aca_AnioLectivo">
@@ -5905,6 +5926,12 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           </AssociationSet>
           <EntitySet Name="vwaca_Alumno_PeriodoActual" EntityType="ModelAcademico.vwaca_Alumno_PeriodoActual" />
           <EntitySet Name="vwaca_Matricula_Rubro_PorFacturarMasiva" EntityType="ModelAcademico.vwaca_Matricula_Rubro_PorFacturarMasiva" />
+          <EntitySet Name="aca_MatriculaConducta" EntityType="ModelAcademico.aca_MatriculaConducta" />
+          <AssociationSet Name="FK_aca_MatriculaConducta_aca_Matricula" Association="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula">
+            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
+            <End Role="aca_MatriculaConducta" EntitySet="aca_MatriculaConducta" />
+          </AssociationSet>
+          <EntitySet Name="vwaca_MatriculaConducta" EntityType="ModelAcademico.vwaca_MatriculaConducta" />
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
           <Key>
@@ -8051,11 +8078,11 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <NavigationProperty Name="aca_MecanismoDePago" Relationship="ModelAcademico.FK_aca_Matricula_aca_MecanismoDePago" FromRole="aca_Matricula" ToRole="aca_MecanismoDePago" />
           <NavigationProperty Name="aca_MatriculaCalificacionParcial" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParcial_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacionParcial" />
           <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_Matricula_aca_Plantilla" FromRole="aca_Matricula" ToRole="aca_Plantilla" />
-          <NavigationProperty Name="aca_MatriculaConducta" Relationship="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaConducta" />
           <NavigationProperty Name="aca_AlumnoRetiro" Relationship="ModelAcademico.FK_aca_AlumnoRetiro_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_AlumnoRetiro" />
           <NavigationProperty Name="aca_MatriculaCambios" Relationship="ModelAcademico.FK_aca_MatriculaCambios_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCambios" />
           <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_Matricula_Rubro" />
           <NavigationProperty Name="aca_MatriculaCalificacion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacion_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacion" />
+          <NavigationProperty Name="aca_MatriculaConducta" Relationship="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaConducta" />
         </EntityType>
         <Association Name="FK_aca_Matricula_aca_alumno">
           <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
@@ -8877,145 +8904,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <Property Name="IdProfesorTutor" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="IdProfesorInspector" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
-        <EntityType Name="aca_MatriculaConducta">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMatricula" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="SecuenciaPromedioP1" Type="Int32" />
-          <Property Name="PromedioP1" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP1" Type="Int32" />
-          <Property Name="PromedioFinalP1" Type="Double" />
-          <Property Name="SecuenciaPromedioP2" Type="Int32" />
-          <Property Name="PromedioP2" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP2" Type="Int32" />
-          <Property Name="PromedioFinalP2" Type="Double" />
-          <Property Name="SecuenciaPromedioP3" Type="Int32" />
-          <Property Name="PromedioP3" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP3" Type="Int32" />
-          <Property Name="PromedioFinalP3" Type="Double" />
-          <Property Name="SecuenciaPromedioQ1" Type="Int32" />
-          <Property Name="PromedioQ1" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalQ1" Type="Int32" />
-          <Property Name="PromedioFinalQ1" Type="Double" />
-          <Property Name="SecuenciaPromedioP4" Type="Int32" />
-          <Property Name="PromedioP4" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP4" Type="Int32" />
-          <Property Name="PromedioFinalP4" Type="Double" />
-          <Property Name="SecuenciaPromedioP5" Type="Int32" />
-          <Property Name="PromedioP5" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP5" Type="Int32" />
-          <Property Name="PromedioFinalP5" Type="Double" />
-          <Property Name="SecuenciaPromedioP6" Type="Int32" />
-          <Property Name="PromedioP6" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP6" Type="Int32" />
-          <Property Name="PromedioFinalP6" Type="Double" />
-          <Property Name="SecuenciaPromedioQ2" Type="Int32" />
-          <Property Name="PromedioQ2" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalQ2" Type="Int32" />
-          <Property Name="PromedioFinalQ2" Type="Double" />
-          <Property Name="SecuenciaPromedioGeneral" Type="Int32" />
-          <Property Name="PromedioGeneral" Type="Double" />
-          <Property Name="SecuenciaPromedioFinal" Type="Int32" />
-          <Property Name="PromedioFinal" Type="Double" />
-          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" FromRole="aca_MatriculaConducta" ToRole="aca_Matricula" />
-        </EntityType>
-        <EntityType Name="vwaca_MatriculaConducta">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMatricula" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="IdSede" />
-            <PropertyRef Name="IdNivel" />
-            <PropertyRef Name="IdJornada" />
-            <PropertyRef Name="IdCurso" />
-            <PropertyRef Name="IdParalelo" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="NomSede" />
-            <PropertyRef Name="NomNivel" />
-            <PropertyRef Name="NomJornada" />
-            <PropertyRef Name="NomCurso" />
-            <PropertyRef Name="NomParalelo" />
-            <PropertyRef Name="OrdenParalelo" />
-            <PropertyRef Name="OrdenCurso" />
-            <PropertyRef Name="OrdenJornada" />
-            <PropertyRef Name="OrdenNivel" />
-            <PropertyRef Name="pe_nombreCompleto" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="IdSede" Type="Int32" Nullable="false" />
-          <Property Name="IdNivel" Type="Int32" Nullable="false" />
-          <Property Name="IdJornada" Type="Int32" Nullable="false" />
-          <Property Name="IdCurso" Type="Int32" Nullable="false" />
-          <Property Name="IdParalelo" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NomSede" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomNivel" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomJornada" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomParalelo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenParalelo" Type="Int32" Nullable="false" />
-          <Property Name="OrdenCurso" Type="Int32" Nullable="false" />
-          <Property Name="OrdenJornada" Type="Int32" Nullable="false" />
-          <Property Name="OrdenNivel" Type="Int32" Nullable="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="SecuenciaPromedioP1" Type="Int32" />
-          <Property Name="PromedioP1" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP1" Type="Int32" />
-          <Property Name="PromedioFinalP1" Type="Double" />
-          <Property Name="SecuenciaPromedioP2" Type="Int32" />
-          <Property Name="PromedioP2" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP2" Type="Int32" />
-          <Property Name="PromedioFinalP2" Type="Double" />
-          <Property Name="SecuenciaPromedioP3" Type="Int32" />
-          <Property Name="PromedioP3" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP3" Type="Int32" />
-          <Property Name="PromedioFinalP3" Type="Double" />
-          <Property Name="SecuenciaPromedioQ1" Type="Int32" />
-          <Property Name="PromedioQ1" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalQ1" Type="Int32" />
-          <Property Name="PromedioFinalQ1" Type="Double" />
-          <Property Name="SecuenciaPromedioP4" Type="Int32" />
-          <Property Name="PromedioP4" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP4" Type="Int32" />
-          <Property Name="PromedioFinalP4" Type="Double" />
-          <Property Name="SecuenciaPromedioP5" Type="Int32" />
-          <Property Name="PromedioP5" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP5" Type="Int32" />
-          <Property Name="PromedioFinalP5" Type="Double" />
-          <Property Name="SecuenciaPromedioP6" Type="Int32" />
-          <Property Name="PromedioP6" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalP6" Type="Int32" />
-          <Property Name="PromedioFinalP6" Type="Double" />
-          <Property Name="SecuenciaPromedioQ2" Type="Int32" />
-          <Property Name="PromedioQ2" Type="Double" />
-          <Property Name="SecuenciaPromedioFinalQ2" Type="Int32" />
-          <Property Name="PromedioFinalQ2" Type="Double" />
-          <Property Name="SecuenciaPromedioGeneral" Type="Int32" />
-          <Property Name="PromedioGeneral" Type="Double" />
-          <Property Name="SecuenciaPromedioFinal" Type="Int32" />
-          <Property Name="PromedioFinal" Type="Double" />
-        </EntityType>
-        <Association Name="FK_aca_MatriculaConducta_aca_Matricula">
-          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_MatriculaConducta" Role="aca_MatriculaConducta" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Matricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMatricula" />
-            </Principal>
-            <Dependent Role="aca_MatriculaConducta">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMatricula" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="aca_AnioLectivoParcial">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -10066,6 +9954,163 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <Property Name="Alumno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IdEmpresa_rol" Type="Int32" />
           <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="aca_MatriculaConducta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SecuenciaPromedioP1" Type="Int32" />
+          <Property Name="PromedioP1" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP1" Type="Int32" />
+          <Property Name="PromedioFinalP1" Type="Double" />
+          <Property Name="MotivoPromedioFinalP1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaPromedioP2" Type="Int32" />
+          <Property Name="PromedioP2" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP2" Type="Int32" />
+          <Property Name="PromedioFinalP2" Type="Double" />
+          <Property Name="MotivoPromedioFinalP2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaPromedioP3" Type="Int32" />
+          <Property Name="PromedioP3" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP3" Type="Int32" />
+          <Property Name="PromedioFinalP3" Type="Double" />
+          <Property Name="MotivoPromedioFinalP3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaPromedioQ1" Type="Int32" />
+          <Property Name="PromedioQ1" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalQ1" Type="Int32" />
+          <Property Name="PromedioFinalQ1" Type="Double" />
+          <Property Name="MotivoPromedioFinalQ1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaPromedioP4" Type="Int32" />
+          <Property Name="PromedioP4" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP4" Type="Int32" />
+          <Property Name="PromedioFinalP4" Type="Double" />
+          <Property Name="MotivoPromedioFinalP4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaPromedioP5" Type="Int32" />
+          <Property Name="PromedioP5" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP5" Type="Int32" />
+          <Property Name="PromedioFinalP5" Type="Double" />
+          <Property Name="MotivoPromedioFinalP5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaPromedioP6" Type="Int32" />
+          <Property Name="PromedioP6" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP6" Type="Int32" />
+          <Property Name="PromedioFinalP6" Type="Double" />
+          <Property Name="MotivoPromedioFinalP6" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaPromedioQ2" Type="Int32" />
+          <Property Name="PromedioQ2" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalQ2" Type="Int32" />
+          <Property Name="PromedioFinalQ2" Type="Double" />
+          <Property Name="MotivoPromedioFinalQ2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaPromedioGeneral" Type="Int32" />
+          <Property Name="PromedioGeneral" Type="Double" />
+          <Property Name="SecuenciaPromedioFinal" Type="Int32" />
+          <Property Name="PromedioFinal" Type="Double" />
+          <Property Name="MotivoPromedioFinal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" FromRole="aca_MatriculaConducta" ToRole="aca_Matricula" />
+        </EntityType>
+        <Association Name="FK_aca_MatriculaConducta_aca_Matricula">
+          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaConducta" Role="aca_MatriculaConducta" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Matricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Principal>
+            <Dependent Role="aca_MatriculaConducta">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwaca_MatriculaConducta">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdSede" />
+            <PropertyRef Name="IdNivel" />
+            <PropertyRef Name="IdJornada" />
+            <PropertyRef Name="IdCurso" />
+            <PropertyRef Name="IdParalelo" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="NomSede" />
+            <PropertyRef Name="NomNivel" />
+            <PropertyRef Name="NomJornada" />
+            <PropertyRef Name="NomCurso" />
+            <PropertyRef Name="NomParalelo" />
+            <PropertyRef Name="OrdenParalelo" />
+            <PropertyRef Name="OrdenCurso" />
+            <PropertyRef Name="OrdenJornada" />
+            <PropertyRef Name="OrdenNivel" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdSede" Type="Int32" Nullable="false" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="IdJornada" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="IdParalelo" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomSede" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomNivel" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomJornada" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomParalelo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenParalelo" Type="Int32" Nullable="false" />
+          <Property Name="OrdenCurso" Type="Int32" Nullable="false" />
+          <Property Name="OrdenJornada" Type="Int32" Nullable="false" />
+          <Property Name="OrdenNivel" Type="Int32" Nullable="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="SecuenciaPromedioP1" Type="Int32" />
+          <Property Name="PromedioP1" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP1" Type="Int32" />
+          <Property Name="PromedioFinalP1" Type="Double" />
+          <Property Name="SecuenciaPromedioP2" Type="Int32" />
+          <Property Name="PromedioP2" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP2" Type="Int32" />
+          <Property Name="PromedioFinalP2" Type="Double" />
+          <Property Name="SecuenciaPromedioP3" Type="Int32" />
+          <Property Name="PromedioP3" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP3" Type="Int32" />
+          <Property Name="PromedioFinalP3" Type="Double" />
+          <Property Name="SecuenciaPromedioQ1" Type="Int32" />
+          <Property Name="PromedioQ1" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalQ1" Type="Int32" />
+          <Property Name="PromedioFinalQ1" Type="Double" />
+          <Property Name="SecuenciaPromedioP4" Type="Int32" />
+          <Property Name="PromedioP4" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP4" Type="Int32" />
+          <Property Name="PromedioFinalP4" Type="Double" />
+          <Property Name="SecuenciaPromedioP5" Type="Int32" />
+          <Property Name="PromedioP5" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP5" Type="Int32" />
+          <Property Name="PromedioFinalP5" Type="Double" />
+          <Property Name="SecuenciaPromedioP6" Type="Int32" />
+          <Property Name="PromedioP6" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalP6" Type="Int32" />
+          <Property Name="PromedioFinalP6" Type="Double" />
+          <Property Name="SecuenciaPromedioQ2" Type="Int32" />
+          <Property Name="PromedioQ2" Type="Double" />
+          <Property Name="SecuenciaPromedioFinalQ2" Type="Int32" />
+          <Property Name="PromedioFinalQ2" Type="Double" />
+          <Property Name="SecuenciaPromedioGeneral" Type="Int32" />
+          <Property Name="PromedioGeneral" Type="Double" />
+          <Property Name="SecuenciaPromedioFinal" Type="Int32" />
+          <Property Name="PromedioFinal" Type="Double" />
+          <Property Name="MotivoPromedioFinalP1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoPromedioFinalP2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoPromedioFinalP3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoPromedioFinalQ1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoPromedioFinalP4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoPromedioFinalP5" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoPromedioFinalP6" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoPromedioFinalQ2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MotivoPromedioFinal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -11421,112 +11466,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="aca_MatriculaConducta">
-            <EntityTypeMapping TypeName="ModelAcademico.aca_MatriculaConducta">
-              <MappingFragment StoreEntitySet="aca_MatriculaConducta">
-                <ScalarProperty Name="PromedioFinal" ColumnName="PromedioFinal" />
-                <ScalarProperty Name="SecuenciaPromedioFinal" ColumnName="SecuenciaPromedioFinal" />
-                <ScalarProperty Name="PromedioGeneral" ColumnName="PromedioGeneral" />
-                <ScalarProperty Name="SecuenciaPromedioGeneral" ColumnName="SecuenciaPromedioGeneral" />
-                <ScalarProperty Name="PromedioFinalQ2" ColumnName="PromedioFinalQ2" />
-                <ScalarProperty Name="SecuenciaPromedioFinalQ2" ColumnName="SecuenciaPromedioFinalQ2" />
-                <ScalarProperty Name="PromedioQ2" ColumnName="PromedioQ2" />
-                <ScalarProperty Name="SecuenciaPromedioQ2" ColumnName="SecuenciaPromedioQ2" />
-                <ScalarProperty Name="PromedioFinalP6" ColumnName="PromedioFinalP6" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP6" ColumnName="SecuenciaPromedioFinalP6" />
-                <ScalarProperty Name="PromedioP6" ColumnName="PromedioP6" />
-                <ScalarProperty Name="SecuenciaPromedioP6" ColumnName="SecuenciaPromedioP6" />
-                <ScalarProperty Name="PromedioFinalP5" ColumnName="PromedioFinalP5" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP5" ColumnName="SecuenciaPromedioFinalP5" />
-                <ScalarProperty Name="PromedioP5" ColumnName="PromedioP5" />
-                <ScalarProperty Name="SecuenciaPromedioP5" ColumnName="SecuenciaPromedioP5" />
-                <ScalarProperty Name="PromedioFinalP4" ColumnName="PromedioFinalP4" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP4" ColumnName="SecuenciaPromedioFinalP4" />
-                <ScalarProperty Name="PromedioP4" ColumnName="PromedioP4" />
-                <ScalarProperty Name="SecuenciaPromedioP4" ColumnName="SecuenciaPromedioP4" />
-                <ScalarProperty Name="PromedioFinalQ1" ColumnName="PromedioFinalQ1" />
-                <ScalarProperty Name="SecuenciaPromedioFinalQ1" ColumnName="SecuenciaPromedioFinalQ1" />
-                <ScalarProperty Name="PromedioQ1" ColumnName="PromedioQ1" />
-                <ScalarProperty Name="SecuenciaPromedioQ1" ColumnName="SecuenciaPromedioQ1" />
-                <ScalarProperty Name="PromedioFinalP3" ColumnName="PromedioFinalP3" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP3" ColumnName="SecuenciaPromedioFinalP3" />
-                <ScalarProperty Name="PromedioP3" ColumnName="PromedioP3" />
-                <ScalarProperty Name="SecuenciaPromedioP3" ColumnName="SecuenciaPromedioP3" />
-                <ScalarProperty Name="PromedioFinalP2" ColumnName="PromedioFinalP2" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP2" ColumnName="SecuenciaPromedioFinalP2" />
-                <ScalarProperty Name="PromedioP2" ColumnName="PromedioP2" />
-                <ScalarProperty Name="SecuenciaPromedioP2" ColumnName="SecuenciaPromedioP2" />
-                <ScalarProperty Name="PromedioFinalP1" ColumnName="PromedioFinalP1" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP1" ColumnName="SecuenciaPromedioFinalP1" />
-                <ScalarProperty Name="PromedioP1" ColumnName="PromedioP1" />
-                <ScalarProperty Name="SecuenciaPromedioP1" ColumnName="SecuenciaPromedioP1" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwaca_MatriculaConducta">
-            <EntityTypeMapping TypeName="ModelAcademico.vwaca_MatriculaConducta">
-              <MappingFragment StoreEntitySet="vwaca_MatriculaConducta">
-                <ScalarProperty Name="PromedioFinal" ColumnName="PromedioFinal" />
-                <ScalarProperty Name="SecuenciaPromedioFinal" ColumnName="SecuenciaPromedioFinal" />
-                <ScalarProperty Name="PromedioGeneral" ColumnName="PromedioGeneral" />
-                <ScalarProperty Name="SecuenciaPromedioGeneral" ColumnName="SecuenciaPromedioGeneral" />
-                <ScalarProperty Name="PromedioFinalQ2" ColumnName="PromedioFinalQ2" />
-                <ScalarProperty Name="SecuenciaPromedioFinalQ2" ColumnName="SecuenciaPromedioFinalQ2" />
-                <ScalarProperty Name="PromedioQ2" ColumnName="PromedioQ2" />
-                <ScalarProperty Name="SecuenciaPromedioQ2" ColumnName="SecuenciaPromedioQ2" />
-                <ScalarProperty Name="PromedioFinalP6" ColumnName="PromedioFinalP6" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP6" ColumnName="SecuenciaPromedioFinalP6" />
-                <ScalarProperty Name="PromedioP6" ColumnName="PromedioP6" />
-                <ScalarProperty Name="SecuenciaPromedioP6" ColumnName="SecuenciaPromedioP6" />
-                <ScalarProperty Name="PromedioFinalP5" ColumnName="PromedioFinalP5" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP5" ColumnName="SecuenciaPromedioFinalP5" />
-                <ScalarProperty Name="PromedioP5" ColumnName="PromedioP5" />
-                <ScalarProperty Name="SecuenciaPromedioP5" ColumnName="SecuenciaPromedioP5" />
-                <ScalarProperty Name="PromedioFinalP4" ColumnName="PromedioFinalP4" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP4" ColumnName="SecuenciaPromedioFinalP4" />
-                <ScalarProperty Name="PromedioP4" ColumnName="PromedioP4" />
-                <ScalarProperty Name="SecuenciaPromedioP4" ColumnName="SecuenciaPromedioP4" />
-                <ScalarProperty Name="PromedioFinalQ1" ColumnName="PromedioFinalQ1" />
-                <ScalarProperty Name="SecuenciaPromedioFinalQ1" ColumnName="SecuenciaPromedioFinalQ1" />
-                <ScalarProperty Name="PromedioQ1" ColumnName="PromedioQ1" />
-                <ScalarProperty Name="SecuenciaPromedioQ1" ColumnName="SecuenciaPromedioQ1" />
-                <ScalarProperty Name="PromedioFinalP3" ColumnName="PromedioFinalP3" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP3" ColumnName="SecuenciaPromedioFinalP3" />
-                <ScalarProperty Name="PromedioP3" ColumnName="PromedioP3" />
-                <ScalarProperty Name="SecuenciaPromedioP3" ColumnName="SecuenciaPromedioP3" />
-                <ScalarProperty Name="PromedioFinalP2" ColumnName="PromedioFinalP2" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP2" ColumnName="SecuenciaPromedioFinalP2" />
-                <ScalarProperty Name="PromedioP2" ColumnName="PromedioP2" />
-                <ScalarProperty Name="SecuenciaPromedioP2" ColumnName="SecuenciaPromedioP2" />
-                <ScalarProperty Name="PromedioFinalP1" ColumnName="PromedioFinalP1" />
-                <ScalarProperty Name="SecuenciaPromedioFinalP1" ColumnName="SecuenciaPromedioFinalP1" />
-                <ScalarProperty Name="PromedioP1" ColumnName="PromedioP1" />
-                <ScalarProperty Name="SecuenciaPromedioP1" ColumnName="SecuenciaPromedioP1" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
-                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
-                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
-                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
-                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
-                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
-                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
-                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
-                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
-                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
-                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="aca_AnioLectivoParcial">
             <EntityTypeMapping TypeName="ModelAcademico.aca_AnioLectivoParcial">
               <MappingFragment StoreEntitySet="aca_AnioLectivoParcial">
@@ -12160,6 +12099,130 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
                 <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
                 <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_MatriculaConducta">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_MatriculaConducta">
+              <MappingFragment StoreEntitySet="aca_MatriculaConducta">
+                <ScalarProperty Name="MotivoPromedioFinal" ColumnName="MotivoPromedioFinal" />
+                <ScalarProperty Name="PromedioFinal" ColumnName="PromedioFinal" />
+                <ScalarProperty Name="SecuenciaPromedioFinal" ColumnName="SecuenciaPromedioFinal" />
+                <ScalarProperty Name="PromedioGeneral" ColumnName="PromedioGeneral" />
+                <ScalarProperty Name="SecuenciaPromedioGeneral" ColumnName="SecuenciaPromedioGeneral" />
+                <ScalarProperty Name="MotivoPromedioFinalQ2" ColumnName="MotivoPromedioFinalQ2" />
+                <ScalarProperty Name="PromedioFinalQ2" ColumnName="PromedioFinalQ2" />
+                <ScalarProperty Name="SecuenciaPromedioFinalQ2" ColumnName="SecuenciaPromedioFinalQ2" />
+                <ScalarProperty Name="PromedioQ2" ColumnName="PromedioQ2" />
+                <ScalarProperty Name="SecuenciaPromedioQ2" ColumnName="SecuenciaPromedioQ2" />
+                <ScalarProperty Name="MotivoPromedioFinalP6" ColumnName="MotivoPromedioFinalP6" />
+                <ScalarProperty Name="PromedioFinalP6" ColumnName="PromedioFinalP6" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP6" ColumnName="SecuenciaPromedioFinalP6" />
+                <ScalarProperty Name="PromedioP6" ColumnName="PromedioP6" />
+                <ScalarProperty Name="SecuenciaPromedioP6" ColumnName="SecuenciaPromedioP6" />
+                <ScalarProperty Name="MotivoPromedioFinalP5" ColumnName="MotivoPromedioFinalP5" />
+                <ScalarProperty Name="PromedioFinalP5" ColumnName="PromedioFinalP5" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP5" ColumnName="SecuenciaPromedioFinalP5" />
+                <ScalarProperty Name="PromedioP5" ColumnName="PromedioP5" />
+                <ScalarProperty Name="SecuenciaPromedioP5" ColumnName="SecuenciaPromedioP5" />
+                <ScalarProperty Name="MotivoPromedioFinalP4" ColumnName="MotivoPromedioFinalP4" />
+                <ScalarProperty Name="PromedioFinalP4" ColumnName="PromedioFinalP4" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP4" ColumnName="SecuenciaPromedioFinalP4" />
+                <ScalarProperty Name="PromedioP4" ColumnName="PromedioP4" />
+                <ScalarProperty Name="SecuenciaPromedioP4" ColumnName="SecuenciaPromedioP4" />
+                <ScalarProperty Name="MotivoPromedioFinalQ1" ColumnName="MotivoPromedioFinalQ1" />
+                <ScalarProperty Name="PromedioFinalQ1" ColumnName="PromedioFinalQ1" />
+                <ScalarProperty Name="SecuenciaPromedioFinalQ1" ColumnName="SecuenciaPromedioFinalQ1" />
+                <ScalarProperty Name="PromedioQ1" ColumnName="PromedioQ1" />
+                <ScalarProperty Name="SecuenciaPromedioQ1" ColumnName="SecuenciaPromedioQ1" />
+                <ScalarProperty Name="MotivoPromedioFinalP3" ColumnName="MotivoPromedioFinalP3" />
+                <ScalarProperty Name="PromedioFinalP3" ColumnName="PromedioFinalP3" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP3" ColumnName="SecuenciaPromedioFinalP3" />
+                <ScalarProperty Name="PromedioP3" ColumnName="PromedioP3" />
+                <ScalarProperty Name="SecuenciaPromedioP3" ColumnName="SecuenciaPromedioP3" />
+                <ScalarProperty Name="MotivoPromedioFinalP2" ColumnName="MotivoPromedioFinalP2" />
+                <ScalarProperty Name="PromedioFinalP2" ColumnName="PromedioFinalP2" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP2" ColumnName="SecuenciaPromedioFinalP2" />
+                <ScalarProperty Name="PromedioP2" ColumnName="PromedioP2" />
+                <ScalarProperty Name="SecuenciaPromedioP2" ColumnName="SecuenciaPromedioP2" />
+                <ScalarProperty Name="MotivoPromedioFinalP1" ColumnName="MotivoPromedioFinalP1" />
+                <ScalarProperty Name="PromedioFinalP1" ColumnName="PromedioFinalP1" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP1" ColumnName="SecuenciaPromedioFinalP1" />
+                <ScalarProperty Name="PromedioP1" ColumnName="PromedioP1" />
+                <ScalarProperty Name="SecuenciaPromedioP1" ColumnName="SecuenciaPromedioP1" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwaca_MatriculaConducta">
+            <EntityTypeMapping TypeName="ModelAcademico.vwaca_MatriculaConducta">
+              <MappingFragment StoreEntitySet="vwaca_MatriculaConducta">
+                <ScalarProperty Name="MotivoPromedioFinal" ColumnName="MotivoPromedioFinal" />
+                <ScalarProperty Name="MotivoPromedioFinalQ2" ColumnName="MotivoPromedioFinalQ2" />
+                <ScalarProperty Name="MotivoPromedioFinalP6" ColumnName="MotivoPromedioFinalP6" />
+                <ScalarProperty Name="MotivoPromedioFinalP5" ColumnName="MotivoPromedioFinalP5" />
+                <ScalarProperty Name="MotivoPromedioFinalP4" ColumnName="MotivoPromedioFinalP4" />
+                <ScalarProperty Name="MotivoPromedioFinalQ1" ColumnName="MotivoPromedioFinalQ1" />
+                <ScalarProperty Name="MotivoPromedioFinalP3" ColumnName="MotivoPromedioFinalP3" />
+                <ScalarProperty Name="MotivoPromedioFinalP2" ColumnName="MotivoPromedioFinalP2" />
+                <ScalarProperty Name="MotivoPromedioFinalP1" ColumnName="MotivoPromedioFinalP1" />
+                <ScalarProperty Name="PromedioFinal" ColumnName="PromedioFinal" />
+                <ScalarProperty Name="SecuenciaPromedioFinal" ColumnName="SecuenciaPromedioFinal" />
+                <ScalarProperty Name="PromedioGeneral" ColumnName="PromedioGeneral" />
+                <ScalarProperty Name="SecuenciaPromedioGeneral" ColumnName="SecuenciaPromedioGeneral" />
+                <ScalarProperty Name="PromedioFinalQ2" ColumnName="PromedioFinalQ2" />
+                <ScalarProperty Name="SecuenciaPromedioFinalQ2" ColumnName="SecuenciaPromedioFinalQ2" />
+                <ScalarProperty Name="PromedioQ2" ColumnName="PromedioQ2" />
+                <ScalarProperty Name="SecuenciaPromedioQ2" ColumnName="SecuenciaPromedioQ2" />
+                <ScalarProperty Name="PromedioFinalP6" ColumnName="PromedioFinalP6" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP6" ColumnName="SecuenciaPromedioFinalP6" />
+                <ScalarProperty Name="PromedioP6" ColumnName="PromedioP6" />
+                <ScalarProperty Name="SecuenciaPromedioP6" ColumnName="SecuenciaPromedioP6" />
+                <ScalarProperty Name="PromedioFinalP5" ColumnName="PromedioFinalP5" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP5" ColumnName="SecuenciaPromedioFinalP5" />
+                <ScalarProperty Name="PromedioP5" ColumnName="PromedioP5" />
+                <ScalarProperty Name="SecuenciaPromedioP5" ColumnName="SecuenciaPromedioP5" />
+                <ScalarProperty Name="PromedioFinalP4" ColumnName="PromedioFinalP4" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP4" ColumnName="SecuenciaPromedioFinalP4" />
+                <ScalarProperty Name="PromedioP4" ColumnName="PromedioP4" />
+                <ScalarProperty Name="SecuenciaPromedioP4" ColumnName="SecuenciaPromedioP4" />
+                <ScalarProperty Name="PromedioFinalQ1" ColumnName="PromedioFinalQ1" />
+                <ScalarProperty Name="SecuenciaPromedioFinalQ1" ColumnName="SecuenciaPromedioFinalQ1" />
+                <ScalarProperty Name="PromedioQ1" ColumnName="PromedioQ1" />
+                <ScalarProperty Name="SecuenciaPromedioQ1" ColumnName="SecuenciaPromedioQ1" />
+                <ScalarProperty Name="PromedioFinalP3" ColumnName="PromedioFinalP3" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP3" ColumnName="SecuenciaPromedioFinalP3" />
+                <ScalarProperty Name="PromedioP3" ColumnName="PromedioP3" />
+                <ScalarProperty Name="SecuenciaPromedioP3" ColumnName="SecuenciaPromedioP3" />
+                <ScalarProperty Name="PromedioFinalP2" ColumnName="PromedioFinalP2" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP2" ColumnName="SecuenciaPromedioFinalP2" />
+                <ScalarProperty Name="PromedioP2" ColumnName="PromedioP2" />
+                <ScalarProperty Name="SecuenciaPromedioP2" ColumnName="SecuenciaPromedioP2" />
+                <ScalarProperty Name="PromedioFinalP1" ColumnName="PromedioFinalP1" />
+                <ScalarProperty Name="SecuenciaPromedioFinalP1" ColumnName="SecuenciaPromedioFinalP1" />
+                <ScalarProperty Name="PromedioP1" ColumnName="PromedioP1" />
+                <ScalarProperty Name="SecuenciaPromedioP1" ColumnName="SecuenciaPromedioP1" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
+                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
+                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
+                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>

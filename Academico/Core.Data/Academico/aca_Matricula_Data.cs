@@ -662,7 +662,7 @@ namespace Core.Data.Academico
                     var lst = Context.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
                     && q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin && q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin
                     && q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin && q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin
-                    && q.IdAlumno >= IdAlumnoIni && q.IdAlumno <= IdAlumnoFin).OrderBy(q=>q.OrdenCurso).ThenBy(q=>q.OrdenParalelo).ThenBy(q=>q.pe_nombreCompleto).ToList();
+                    && q.IdAlumno >= IdAlumnoIni && q.IdAlumno <= IdAlumnoFin && q.EsRetirado==false).OrderBy(q=>q.OrdenCurso).ThenBy(q=>q.OrdenParalelo).ThenBy(q=>q.pe_nombreCompleto).ToList();
 
                     foreach (var q in lst)
                     {

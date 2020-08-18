@@ -70,5 +70,14 @@ namespace Core.Data.Base
         public Nullable<double> PromedioGeneral { get; set; }
         public Nullable<int> SecuenciaPromedioFinal { get; set; }
         public Nullable<double> PromedioFinal { get; set; }
+        public string MotivoPromedioFinalP1 { get; set; }
+        public string MotivoPromedioFinalP2 { get; set; }
+        public string MotivoPromedioFinalP3 { get; set; }
+        public string MotivoPromedioFinalQ1 { get; set; }
+        public string MotivoPromedioFinalP4 { get; set; }
+        public string MotivoPromedioFinalP5 { get; set; }
+        public string MotivoPromedioFinalP6 { get; set; }
+        public string MotivoPromedioFinalQ2 { get; set; }
+        public string MotivoPromedioFinal { get; set; }
     }
 }
