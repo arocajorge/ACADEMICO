@@ -171,8 +171,14 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Modificar(aca_Materia_Info model)
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+            var info_area = bus_area.GetInfo(model.IdEmpresa, Convert.ToInt32(model.IdMateriaArea));
+            model.NomMateriaArea = (info_area == null ? "" : info_area.NomMateriaArea);
+            model.OrdenMateriaArea = (info_area == null ? 0 : info_area.OrdenMateriaArea);
+
             var info_grupo = bus_grupo.GetInfo(model.IdEmpresa, Convert.ToInt32(model.IdMateriaGrupo));
             model.NomMateriaGrupo = (info_grupo == null ? "" : info_grupo.NomMateriaGrupo);
+            model.OrdenMateriaGrupo = (info_grupo == null ? 0 : info_grupo.OrdenMateriaGrupo);
+
             if (!bus_materia.ModificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";
