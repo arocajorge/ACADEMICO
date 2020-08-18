@@ -126,6 +126,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_AnioLectivo_Curso_Paralelo_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             List<aca_AnioLectivo_Curso_Paralelo_Info> lista = bus_ParaleloPorCurso.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
             Lista_ParaleloPorCurso.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos();

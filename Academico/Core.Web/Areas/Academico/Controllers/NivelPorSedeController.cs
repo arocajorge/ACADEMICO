@@ -49,6 +49,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_AnioLectivo_Sede_NivelAcademico_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             List<aca_AnioLectivo_Sede_NivelAcademico_Info> lista = bus_SedePorNivel.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio);
             Lista_NivelPorSede.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos();

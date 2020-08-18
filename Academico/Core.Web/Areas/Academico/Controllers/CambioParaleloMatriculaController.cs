@@ -151,6 +151,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_Matricula_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             List<aca_Matricula_Info> lista = bus_matricula.GetList(model.IdEmpresa, model.IdAnio, model.IdSede, true);
             Lista_Matricula.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
 

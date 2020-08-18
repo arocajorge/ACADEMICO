@@ -86,6 +86,10 @@ namespace Core.Info.Academico
         
         public aca_MatriculaCambios_Info info_MatriculaCambios { get; set; }
         public Nullable<decimal> PromedioFinal { get; set; }
+        public int OrdenJornada { get; set; }
+        public int OrdenNivel { get; set; }
+        public int OrdenCurso { get; set; }
+        public int OrdenParalelo { get; set; }
         #endregion
     }
 }

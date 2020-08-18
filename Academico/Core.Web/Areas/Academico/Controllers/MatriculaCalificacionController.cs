@@ -66,6 +66,8 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_MatriculaCalificacion_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+
             List<aca_Matricula_Info> lista = bus_matricula.GetList_Calificaciones(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdAlumno);
             List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial_existente = new List<aca_MatriculaCalificacionParcial_Info>();
             List<aca_MatriculaCalificacion_Info> lst_calificacion_existente = new List<aca_MatriculaCalificacion_Info>();
@@ -319,6 +321,89 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdCurso = !string.IsNullOrEmpty(Request.Params["IdCurso"]) ? int.Parse(Request.Params["IdCurso"]) : -1;
             var IdParalelo = !string.IsNullOrEmpty(Request.Params["IdParalelo"]) ? int.Parse(Request.Params["IdParalelo"]) : -1;
             return PartialView("_ComboBoxPartial_Alumno", new aca_Matricula_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso, IdParalelo = IdParalelo });
+        }
+        #endregion
+
+        #region Json
+        public JsonResult RevisarConfiguracion(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo=0, decimal IdAlumno=0, decimal IdTransaccionSession = 0)
+        {
+            var texto = "";
+            List<aca_Matricula_Info> lista = bus_matricula.GetList_Calificaciones(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno);
+            List<aca_Matricula_Info> ListaGeneracion = new List<aca_Matricula_Info>();
+            ListaGeneracion = (from q in lista
+                               group q by new
+                               {
+                                   q.IdEmpresa,
+                                   q.IdAnio,
+                                   q.IdSede,
+                                   q.IdJornada,
+                                   q.IdNivel,
+                                   q.IdCurso,
+                                   q.IdParalelo,
+                                   q.Descripcion,
+                                   q.NomSede,
+                                   q.NomJornada,
+                                   q.NomNivel,
+                                   q.NomCurso,
+                                   q.NomParalelo,
+                                   q.OrdenJornada,
+                                   q.OrdenNivel,
+                                   q.OrdenCurso,
+                                   q.OrdenParalelo
+                               } into a
+                               select new aca_Matricula_Info
+                               {
+                                   IdEmpresa = a.Key.IdEmpresa,
+                                   IdAnio = a.Key.IdAnio,
+                                   IdSede = a.Key.IdSede,
+                                   IdJornada = a.Key.IdJornada,
+                                   IdNivel = a.Key.IdNivel,
+                                   IdCurso = a.Key.IdCurso,
+                                   IdParalelo = a.Key.IdParalelo,
+                                   Descripcion = a.Key.Descripcion,
+                                   NomSede = a.Key.NomSede,
+                                   NomJornada = a.Key.NomJornada,
+                                   NomNivel = a.Key.NomNivel,
+                                   NomCurso = a.Key.NomCurso,
+                                   NomParalelo = a.Key.NomParalelo,
+                                   OrdenJornada = a.Key.OrdenJornada,
+                                   OrdenNivel = a.Key.OrdenNivel,
+                                   OrdenCurso = a.Key.OrdenCurso,
+                                   OrdenParalelo = a.Key.OrdenParalelo
+                               }).ToList();
+
+
+            if (ListaGeneracion.Count() > 0)
+            {
+                var cant = 0;
+                foreach (var item in ListaGeneracion)
+                {
+                    cant = 1;
+                    texto += "<div class='row'>";
+                    texto += "<div class='col-md-12'>";
+                    texto += "<label style='font-size:small'>" + "<h4><b><u>" + item.NomJornada + " - " + item.NomCurso + " - " + item.NomParalelo + "</u></b></h34>" +"</label>";
+                    texto += "</div>";
+                    texto += "<br>";
+
+                    var lst_materias_x_curso = bus_materias_x_paralelo.GetList(item.IdEmpresa, item.IdSede, item.IdAnio, item.IdNivel, item.IdJornada, item.IdCurso, item.IdParalelo).OrderBy(q=>q.NomMateria);
+
+                    foreach (var mat in lst_materias_x_curso)
+                    {
+                        texto += "<div class='col-md-6' style='font-size:small; font-weight:400;'>";
+                        texto += mat.NomMateria;
+                        //texto += "<label style='font-size:small; font-weight:400;'>" + mat.NomMateria + "</label>";
+                        texto += "</div>";
+                        texto += "<div class='col-md-6' style='font-size:small; font-weight:400;'>";
+                        texto += mat.pe_nombreCompleto;
+                        //texto += "<label style='font-size:small; font-weight:400'>" + mat.pe_nombreCompleto + "</label>";
+                        texto += "</div>";
+                    }
+                    texto += "</div>";
+                    texto += "<br>";
+                }
+            }
+
+            return Json(texto, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

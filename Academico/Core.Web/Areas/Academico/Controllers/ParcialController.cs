@@ -48,6 +48,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_AnioLectivoParcial_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             List<aca_AnioLectivoParcial_Info> lista = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio);
             ListaParcial.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 

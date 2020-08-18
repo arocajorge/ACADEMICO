@@ -79,7 +79,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_AnioLectivo_Info model)
         {
-
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;

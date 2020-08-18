@@ -73,7 +73,7 @@ namespace Core.Data.Academico
 
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

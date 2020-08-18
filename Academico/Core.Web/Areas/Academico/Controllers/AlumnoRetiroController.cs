@@ -87,6 +87,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_AlumnoRetiro_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             List<aca_AlumnoRetiro_Info> lista = bus_alumno_retiro.GetList(model.IdEmpresa, model.IdAnio, model.IdSede, true);
             Lista_AlumnoRetiro.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 

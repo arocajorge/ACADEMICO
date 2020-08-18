@@ -66,6 +66,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_MatriculaCalificacion_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             List<aca_MatriculaCalificacion_Info> lista = new List<aca_MatriculaCalificacion_Info>();
 
             if (model.IdEmpresa > 0 && model.IdSede > 0 && model.IdAnio > 0 && model.IdNivel > 0 && model.IdJornada > 0 && model.IdCurso>0 && model.IdParalelo>0 && model.IdMateria>0)

@@ -39,7 +39,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
 
-            List<aca_AnioLectivo_NivelAcademico_Jornada_Info> lista = bus_NivelPorJornada.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel);
+            //List<aca_AnioLectivo_NivelAcademico_Jornada_Info> lista = bus_NivelPorJornada.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel);
+            List<aca_AnioLectivo_NivelAcademico_Jornada_Info> lista = new List<aca_AnioLectivo_NivelAcademico_Jornada_Info>();
             Lista_JornadaPorNivel.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             return View(model);
         }
@@ -47,6 +48,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_AnioLectivo_NivelAcademico_Jornada_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             List<aca_AnioLectivo_NivelAcademico_Jornada_Info> lista = new List<aca_AnioLectivo_NivelAcademico_Jornada_Info>();
             if (model.IdEmpresa > 0 && model.IdSede > 0 && model.IdAnio > 0 && model.IdNivel > 0)
             {

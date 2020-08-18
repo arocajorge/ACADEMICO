@@ -662,7 +662,7 @@ namespace Core.Data.Academico
                     var lst = Context.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
                     && q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin && q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin
                     && q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin && q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin
-                    && q.IdAlumno >= IdAlumnoIni && q.IdAlumno <= IdAlumnoFin && q.EsRetirado==false).OrderBy(q=>q.OrdenCurso).ThenBy(q=>q.OrdenParalelo).ThenBy(q=>q.pe_nombreCompleto).ToList();
+                    && q.IdAlumno >= IdAlumnoIni && q.IdAlumno <= IdAlumnoFin && q.EsRetirado==false).OrderBy(q=> new { q.OrdenJornada, q.OrdenNivel, q.OrdenCurso, q.OrdenParalelo, q.pe_nombreCompleto }).ToList();
 
                     foreach (var q in lst)
                     {
@@ -680,10 +680,16 @@ namespace Core.Data.Academico
                             Fecha = q.Fecha,
                             pe_cedulaRuc = q.pe_cedulaRuc,
                             pe_nombreCompleto = q.pe_nombreCompleto,
+                            NomSede=q.NomSede,
+                            Descripcion = q.Descripcion,
                             NomJornada = q.NomJornada,
                             NomNivel = q.NomNivel,
                             NomCurso = q.NomCurso,
-                            NomParalelo = q.NomParalelo
+                            NomParalelo = q.NomParalelo,
+                            OrdenJornada = q.OrdenJornada??0,
+                            OrdenNivel = q.OrdenNivel??0,
+                            OrdenCurso = q.OrdenCurso??0,
+                            OrdenParalelo = q.OrdenParalelo??0,
                         });
                     }
                 }

@@ -44,7 +44,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
-            List<aca_AnioLectivo_Curso_Paralelo_Info> lista = bus_ParaleloPorCurso.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso);
+            //List<aca_AnioLectivo_Curso_Paralelo_Info> lista = bus_ParaleloPorCurso.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso);
+            List<aca_AnioLectivo_Curso_Paralelo_Info> lista = new List<aca_AnioLectivo_Curso_Paralelo_Info>();
             Lista_ParaleloPorCurso.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return View(model);
         }
@@ -52,6 +53,8 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_AnioLectivo_Curso_Paralelo_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+
             List<aca_AnioLectivo_Curso_Paralelo_Info> lista = new List<aca_AnioLectivo_Curso_Paralelo_Info>();
             if (model.IdEmpresa > 0 && model.IdSede > 0 && model.IdAnio > 0 && model.IdNivel > 0 && model.IdJornada > 0 && model.IdCurso>0)
             {

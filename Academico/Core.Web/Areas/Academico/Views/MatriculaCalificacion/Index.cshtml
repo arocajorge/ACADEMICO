@@ -7,6 +7,40 @@
     }
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript">
+    $(function () {
+    });
+
+    function RevisarConfiguracion() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSede: IdSede.GetValue(),
+            IdAnio: IdAnio.GetValue(),
+            IdNivel: IdNivel.GetValue(),
+            IdJornada: IdJornada.GetValue(),
+            IdCurso: IdCurso.GetValue(),
+            IdParalelo: IdParalelo.GetValue(),
+            IdAlumno: IdAlumno.GetValue(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("RevisarConfiguracion", "MatriculaCalificacion", new { Area = "Academico"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#Texto").html(data);
+                $("#ModalRevisonConfiguracion").modal("show");
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
 @using (Html.BeginForm("Index", "MatriculaCalificacion", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
@@ -37,6 +71,25 @@
         </div>
     }
 
+    <div class="modal fade" id="ModalRevisonConfiguracion" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Materias por Curso</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="Texto">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Generar/Actualizar Malla</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">
@@ -96,7 +149,8 @@
     </div>
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary" id="btn_buscar">Generar</button>
+        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="RevisarConfiguracion();">Generar</button>
+        @*<button type="submit" class="btn btn-primary" id="btn_buscar">Generar</button>*@
     </div>
     @Html.Action("GridViewPartial_MatriculaCalificacion")
     }

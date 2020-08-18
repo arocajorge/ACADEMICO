@@ -82,6 +82,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_MatriculaCondicional_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             List<aca_MatriculaCondicional_Info> lista = bus_condicional.GetList(model.IdEmpresa, model.IdAnio, true);
             Lista_MatriculaCondicional.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
             #region Permisos

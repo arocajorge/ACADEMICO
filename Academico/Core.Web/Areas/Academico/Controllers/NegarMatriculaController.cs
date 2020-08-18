@@ -81,6 +81,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_PermisoMatricula_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             List<aca_PermisoMatricula_Info> lista = bus_permiso.GetList(model.IdEmpresa, model.IdAnio, model.IdCatalogoPERNEG, true);
             Lista_NegarMatricula.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
             #region Permisos

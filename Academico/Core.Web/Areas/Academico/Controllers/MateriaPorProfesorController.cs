@@ -53,7 +53,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
-            List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = bus_MateriaPorProfesor.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
+            //List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = bus_MateriaPorProfesor.GetListAsignacion(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
+            List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = new List<aca_AnioLectivo_Paralelo_Profesor_Info>();
             Lista_MateriaPorProfesor.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             cargar_combos();
             return View(model);
@@ -62,6 +63,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_AnioLectivo_Paralelo_Profesor_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = new List<aca_AnioLectivo_Paralelo_Profesor_Info>();
             if (model.IdEmpresa > 0 && model.IdSede > 0 && model.IdAnio > 0 && model.IdNivel > 0 && model.IdJornada > 0 && model.IdCurso>0 && model.IdParalelo>0)
             {
