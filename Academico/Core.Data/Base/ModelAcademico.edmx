@@ -690,6 +690,36 @@
           <Property Name="IdCbteVta" Type="numeric" Precision="18" Scale="0" />
           <Property Name="FechaFacturacion" Type="datetime" />
         </EntityType>
+        <EntityType Name="aca_MatriculaAsistencia">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FInjustificadaP1" Type="int" />
+          <Property Name="FJustificadaP1" Type="int" />
+          <Property Name="AtrasosP1" Type="int" />
+          <Property Name="FInjustificadaP2" Type="int" />
+          <Property Name="FJustificadaP2" Type="int" />
+          <Property Name="AtrasosP2" Type="int" />
+          <Property Name="FInjustificadaP3" Type="int" />
+          <Property Name="FJustificadaP3" Type="int" />
+          <Property Name="AtrasosP3" Type="int" />
+          <Property Name="FInjustificadaP4" Type="int" />
+          <Property Name="FJustificadaP4" Type="int" />
+          <Property Name="AtrasosP4" Type="int" />
+          <Property Name="FInjustificadaP5" Type="int" />
+          <Property Name="FJustificadaP5" Type="int" />
+          <Property Name="AtrasosP5" Type="int" />
+          <Property Name="FInjustificadaP6" Type="int" />
+          <Property Name="FJustificadaP6" Type="int" />
+          <Property Name="AtrasosP6" Type="int" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaModificacion" Type="datetime" />
+        </EntityType>
         <EntityType Name="aca_MatriculaCalificacion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2168,6 +2198,53 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Matricula_Rubro_PorFacturarM
           <Property Name="IdEmpleado" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_MatriculaAsistencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vwaca_MatriculaAsistencia">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdSede" />
+            <PropertyRef Name="IdNivel" />
+            <PropertyRef Name="IdJornada" />
+            <PropertyRef Name="IdCurso" />
+            <PropertyRef Name="IdParalelo" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdAnio" Type="int" Nullable="false" />
+          <Property Name="IdSede" Type="int" Nullable="false" />
+          <Property Name="IdNivel" Type="int" Nullable="false" />
+          <Property Name="IdJornada" Type="int" Nullable="false" />
+          <Property Name="IdCurso" Type="int" Nullable="false" />
+          <Property Name="IdParalelo" Type="int" Nullable="false" />
+          <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="200" />
+          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FInjustificadaP1" Type="int" />
+          <Property Name="FJustificadaP1" Type="int" />
+          <Property Name="AtrasosP1" Type="int" />
+          <Property Name="FInjustificadaP2" Type="int" />
+          <Property Name="FJustificadaP2" Type="int" />
+          <Property Name="AtrasosP2" Type="int" />
+          <Property Name="FInjustificadaP3" Type="int" />
+          <Property Name="FJustificadaP3" Type="int" />
+          <Property Name="AtrasosP3" Type="int" />
+          <Property Name="FInjustificadaP4" Type="int" />
+          <Property Name="FJustificadaP4" Type="int" />
+          <Property Name="AtrasosP4" Type="int" />
+          <Property Name="FInjustificadaP5" Type="int" />
+          <Property Name="FJustificadaP5" Type="int" />
+          <Property Name="AtrasosP5" Type="int" />
+          <Property Name="FInjustificadaP6" Type="int" />
+          <Property Name="FJustificadaP6" Type="int" />
+          <Property Name="AtrasosP6" Type="int" />
+          <Property Name="IdProfesorTutor" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IdProfesorInspector" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_MatriculaCalificacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_MatriculaCalificacion">
           <Key>
@@ -3602,6 +3679,20 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_aca_MatriculaAsistencia_aca_Matricula">
+          <End Role="aca_Matricula" Type="Self.aca_Matricula" Multiplicity="1" />
+          <End Role="aca_MatriculaAsistencia" Type="Self.aca_MatriculaAsistencia" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Matricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Principal>
+            <Dependent Role="aca_MatriculaAsistencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio">
           <End Role="aca_AnioLectivoEquivalenciaPromedio" Type="Self.aca_AnioLectivoEquivalenciaPromedio" Multiplicity="0..1" />
           <End Role="aca_MatriculaCalificacion" Type="Self.aca_MatriculaCalificacion" Multiplicity="*" />
@@ -4075,6 +4166,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <EntitySet Name="aca_MateriaGrupo" EntityType="Self.aca_MateriaGrupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Matricula" EntityType="Self.aca_Matricula" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Matricula_Rubro" EntityType="Self.aca_Matricula_Rubro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aca_MatriculaAsistencia" EntityType="Self.aca_MatriculaAsistencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_MatriculaCalificacion" EntityType="Self.aca_MatriculaCalificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_MatriculaCalificacionParcial" EntityType="Self.aca_MatriculaCalificacionParcial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_MatriculaCambios" EntityType="Self.aca_MatriculaCambios" Schema="dbo" store:Type="Tables" />
@@ -4707,6 +4799,41 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
     [vwaca_Matricula_Rubro_PorFacturarMasiva].[IdEmpleado] AS [IdEmpleado]
     FROM [dbo].[vwaca_Matricula_Rubro_PorFacturarMasiva] AS [vwaca_Matricula_Rubro_PorFacturarMasiva]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vwaca_MatriculaAsistencia" EntityType="Self.vwaca_MatriculaAsistencia" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwaca_MatriculaAsistencia].[IdEmpresa] AS [IdEmpresa], 
+    [vwaca_MatriculaAsistencia].[IdMatricula] AS [IdMatricula], 
+    [vwaca_MatriculaAsistencia].[IdAnio] AS [IdAnio], 
+    [vwaca_MatriculaAsistencia].[IdSede] AS [IdSede], 
+    [vwaca_MatriculaAsistencia].[IdNivel] AS [IdNivel], 
+    [vwaca_MatriculaAsistencia].[IdJornada] AS [IdJornada], 
+    [vwaca_MatriculaAsistencia].[IdCurso] AS [IdCurso], 
+    [vwaca_MatriculaAsistencia].[IdParalelo] AS [IdParalelo], 
+    [vwaca_MatriculaAsistencia].[IdAlumno] AS [IdAlumno], 
+    [vwaca_MatriculaAsistencia].[Codigo] AS [Codigo], 
+    [vwaca_MatriculaAsistencia].[pe_nombreCompleto] AS [pe_nombreCompleto], 
+    [vwaca_MatriculaAsistencia].[FInjustificadaP1] AS [FInjustificadaP1], 
+    [vwaca_MatriculaAsistencia].[FJustificadaP1] AS [FJustificadaP1], 
+    [vwaca_MatriculaAsistencia].[AtrasosP1] AS [AtrasosP1], 
+    [vwaca_MatriculaAsistencia].[FInjustificadaP2] AS [FInjustificadaP2], 
+    [vwaca_MatriculaAsistencia].[FJustificadaP2] AS [FJustificadaP2], 
+    [vwaca_MatriculaAsistencia].[AtrasosP2] AS [AtrasosP2], 
+    [vwaca_MatriculaAsistencia].[FInjustificadaP3] AS [FInjustificadaP3], 
+    [vwaca_MatriculaAsistencia].[FJustificadaP3] AS [FJustificadaP3], 
+    [vwaca_MatriculaAsistencia].[AtrasosP3] AS [AtrasosP3], 
+    [vwaca_MatriculaAsistencia].[FInjustificadaP4] AS [FInjustificadaP4], 
+    [vwaca_MatriculaAsistencia].[FJustificadaP4] AS [FJustificadaP4], 
+    [vwaca_MatriculaAsistencia].[AtrasosP4] AS [AtrasosP4], 
+    [vwaca_MatriculaAsistencia].[FInjustificadaP5] AS [FInjustificadaP5], 
+    [vwaca_MatriculaAsistencia].[FJustificadaP5] AS [FJustificadaP5], 
+    [vwaca_MatriculaAsistencia].[AtrasosP5] AS [AtrasosP5], 
+    [vwaca_MatriculaAsistencia].[FInjustificadaP6] AS [FInjustificadaP6], 
+    [vwaca_MatriculaAsistencia].[FJustificadaP6] AS [FJustificadaP6], 
+    [vwaca_MatriculaAsistencia].[AtrasosP6] AS [AtrasosP6], 
+    [vwaca_MatriculaAsistencia].[IdProfesorTutor] AS [IdProfesorTutor], 
+    [vwaca_MatriculaAsistencia].[IdProfesorInspector] AS [IdProfesorInspector]
+    FROM [dbo].[vwaca_MatriculaAsistencia] AS [vwaca_MatriculaAsistencia]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vwaca_MatriculaCalificacion" EntityType="Self.vwaca_MatriculaCalificacion" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwaca_MatriculaCalificacion].[IdEmpresa] AS [IdEmpresa], 
@@ -5274,6 +5401,10 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <AssociationSet Name="FK_aca_Matricula_Rubro_aca_Rubro" Association="Self.FK_aca_Matricula_Rubro_aca_Rubro">
             <End Role="aca_Rubro" EntitySet="aca_Rubro" />
             <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_MatriculaAsistencia_aca_Matricula" Association="Self.FK_aca_MatriculaAsistencia_aca_Matricula">
+            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
+            <End Role="aca_MatriculaAsistencia" EntitySet="aca_MatriculaAsistencia" />
           </AssociationSet>
           <AssociationSet Name="FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio" Association="Self.FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio">
             <End Role="aca_AnioLectivoEquivalenciaPromedio" EntitySet="aca_AnioLectivoEquivalenciaPromedio" />
@@ -5932,6 +6063,12 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <End Role="aca_MatriculaConducta" EntitySet="aca_MatriculaConducta" />
           </AssociationSet>
           <EntitySet Name="vwaca_MatriculaConducta" EntityType="ModelAcademico.vwaca_MatriculaConducta" />
+          <EntitySet Name="vwaca_MatriculaAsistencia" EntityType="ModelAcademico.vwaca_MatriculaAsistencia" />
+          <EntitySet Name="aca_MatriculaAsistencia" EntityType="ModelAcademico.aca_MatriculaAsistencia" />
+          <AssociationSet Name="FK_aca_MatriculaAsistencia_aca_Matricula" Association="ModelAcademico.FK_aca_MatriculaAsistencia_aca_Matricula">
+            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
+            <End Role="aca_MatriculaAsistencia" EntitySet="aca_MatriculaAsistencia" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
           <Key>
@@ -8083,6 +8220,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_Matricula_Rubro" />
           <NavigationProperty Name="aca_MatriculaCalificacion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacion_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacion" />
           <NavigationProperty Name="aca_MatriculaConducta" Relationship="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaConducta" />
+          <NavigationProperty Name="aca_MatriculaAsistencia" Relationship="ModelAcademico.FK_aca_MatriculaAsistencia_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaAsistencia" />
         </EntityType>
         <Association Name="FK_aca_Matricula_aca_alumno">
           <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
@@ -10112,6 +10250,96 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <Property Name="MotivoPromedioFinalQ2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MotivoPromedioFinal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="vwaca_MatriculaAsistencia">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdSede" />
+            <PropertyRef Name="IdNivel" />
+            <PropertyRef Name="IdJornada" />
+            <PropertyRef Name="IdCurso" />
+            <PropertyRef Name="IdParalelo" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdSede" Type="Int32" Nullable="false" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="IdJornada" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="IdParalelo" Type="Int32" Nullable="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FInjustificadaP1" Type="Int32" />
+          <Property Name="FJustificadaP1" Type="Int32" />
+          <Property Name="AtrasosP1" Type="Int32" />
+          <Property Name="FInjustificadaP2" Type="Int32" />
+          <Property Name="FJustificadaP2" Type="Int32" />
+          <Property Name="AtrasosP2" Type="Int32" />
+          <Property Name="FInjustificadaP3" Type="Int32" />
+          <Property Name="FJustificadaP3" Type="Int32" />
+          <Property Name="AtrasosP3" Type="Int32" />
+          <Property Name="FInjustificadaP4" Type="Int32" />
+          <Property Name="FJustificadaP4" Type="Int32" />
+          <Property Name="AtrasosP4" Type="Int32" />
+          <Property Name="FInjustificadaP5" Type="Int32" />
+          <Property Name="FJustificadaP5" Type="Int32" />
+          <Property Name="AtrasosP5" Type="Int32" />
+          <Property Name="FInjustificadaP6" Type="Int32" />
+          <Property Name="FJustificadaP6" Type="Int32" />
+          <Property Name="AtrasosP6" Type="Int32" />
+          <Property Name="IdProfesorTutor" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdProfesorInspector" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="aca_MatriculaAsistencia">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="FInjustificadaP1" Type="Int32" />
+          <Property Name="FJustificadaP1" Type="Int32" />
+          <Property Name="AtrasosP1" Type="Int32" />
+          <Property Name="FInjustificadaP2" Type="Int32" />
+          <Property Name="FJustificadaP2" Type="Int32" />
+          <Property Name="AtrasosP2" Type="Int32" />
+          <Property Name="FInjustificadaP3" Type="Int32" />
+          <Property Name="FJustificadaP3" Type="Int32" />
+          <Property Name="AtrasosP3" Type="Int32" />
+          <Property Name="FInjustificadaP4" Type="Int32" />
+          <Property Name="FJustificadaP4" Type="Int32" />
+          <Property Name="AtrasosP4" Type="Int32" />
+          <Property Name="FInjustificadaP5" Type="Int32" />
+          <Property Name="FJustificadaP5" Type="Int32" />
+          <Property Name="AtrasosP5" Type="Int32" />
+          <Property Name="FInjustificadaP6" Type="Int32" />
+          <Property Name="FJustificadaP6" Type="Int32" />
+          <Property Name="AtrasosP6" Type="Int32" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_MatriculaAsistencia_aca_Matricula" FromRole="aca_MatriculaAsistencia" ToRole="aca_Matricula" />
+        </EntityType>
+        <Association Name="FK_aca_MatriculaAsistencia_aca_Matricula">
+          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaAsistencia" Role="aca_MatriculaAsistencia" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Matricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Principal>
+            <Dependent Role="aca_MatriculaAsistencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -12223,6 +12451,73 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
                 <ScalarProperty Name="IdSede" ColumnName="IdSede" />
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwaca_MatriculaAsistencia">
+            <EntityTypeMapping TypeName="ModelAcademico.vwaca_MatriculaAsistencia">
+              <MappingFragment StoreEntitySet="vwaca_MatriculaAsistencia">
+                <ScalarProperty Name="IdProfesorInspector" ColumnName="IdProfesorInspector" />
+                <ScalarProperty Name="IdProfesorTutor" ColumnName="IdProfesorTutor" />
+                <ScalarProperty Name="AtrasosP6" ColumnName="AtrasosP6" />
+                <ScalarProperty Name="FJustificadaP6" ColumnName="FJustificadaP6" />
+                <ScalarProperty Name="FInjustificadaP6" ColumnName="FInjustificadaP6" />
+                <ScalarProperty Name="AtrasosP5" ColumnName="AtrasosP5" />
+                <ScalarProperty Name="FJustificadaP5" ColumnName="FJustificadaP5" />
+                <ScalarProperty Name="FInjustificadaP5" ColumnName="FInjustificadaP5" />
+                <ScalarProperty Name="AtrasosP4" ColumnName="AtrasosP4" />
+                <ScalarProperty Name="FJustificadaP4" ColumnName="FJustificadaP4" />
+                <ScalarProperty Name="FInjustificadaP4" ColumnName="FInjustificadaP4" />
+                <ScalarProperty Name="AtrasosP3" ColumnName="AtrasosP3" />
+                <ScalarProperty Name="FJustificadaP3" ColumnName="FJustificadaP3" />
+                <ScalarProperty Name="FInjustificadaP3" ColumnName="FInjustificadaP3" />
+                <ScalarProperty Name="AtrasosP2" ColumnName="AtrasosP2" />
+                <ScalarProperty Name="FJustificadaP2" ColumnName="FJustificadaP2" />
+                <ScalarProperty Name="FInjustificadaP2" ColumnName="FInjustificadaP2" />
+                <ScalarProperty Name="AtrasosP1" ColumnName="AtrasosP1" />
+                <ScalarProperty Name="FJustificadaP1" ColumnName="FJustificadaP1" />
+                <ScalarProperty Name="FInjustificadaP1" ColumnName="FInjustificadaP1" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_MatriculaAsistencia">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_MatriculaAsistencia">
+              <MappingFragment StoreEntitySet="aca_MatriculaAsistencia">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="AtrasosP6" ColumnName="AtrasosP6" />
+                <ScalarProperty Name="FJustificadaP6" ColumnName="FJustificadaP6" />
+                <ScalarProperty Name="FInjustificadaP6" ColumnName="FInjustificadaP6" />
+                <ScalarProperty Name="AtrasosP5" ColumnName="AtrasosP5" />
+                <ScalarProperty Name="FJustificadaP5" ColumnName="FJustificadaP5" />
+                <ScalarProperty Name="FInjustificadaP5" ColumnName="FInjustificadaP5" />
+                <ScalarProperty Name="AtrasosP4" ColumnName="AtrasosP4" />
+                <ScalarProperty Name="FJustificadaP4" ColumnName="FJustificadaP4" />
+                <ScalarProperty Name="FInjustificadaP4" ColumnName="FInjustificadaP4" />
+                <ScalarProperty Name="AtrasosP3" ColumnName="AtrasosP3" />
+                <ScalarProperty Name="FJustificadaP3" ColumnName="FJustificadaP3" />
+                <ScalarProperty Name="FInjustificadaP3" ColumnName="FInjustificadaP3" />
+                <ScalarProperty Name="AtrasosP2" ColumnName="AtrasosP2" />
+                <ScalarProperty Name="FJustificadaP2" ColumnName="FJustificadaP2" />
+                <ScalarProperty Name="FInjustificadaP2" ColumnName="FInjustificadaP2" />
+                <ScalarProperty Name="AtrasosP1" ColumnName="AtrasosP1" />
+                <ScalarProperty Name="FJustificadaP1" ColumnName="FJustificadaP1" />
+                <ScalarProperty Name="FInjustificadaP1" ColumnName="FInjustificadaP1" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>

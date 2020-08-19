@@ -2,7 +2,6 @@
 using Core.Info.Academico;
 using Core.Info.Helps;
 using Core.Web.Helps;
-using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Core.Web.Areas.Academico.Controllers
 {
-    public class MatriculaConductaQuimestralController : Controller
+    public class MatriculaAsistenciaController : Controller
     {
         #region Variables
         aca_Sede_Bus bus_sede = new aca_Sede_Bus();
@@ -25,11 +24,12 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         aca_MatriculaCalificacionParcial_Bus bus_calificacion_parcial = new aca_MatriculaCalificacionParcial_Bus();
         aca_MatriculaCalificacion_Bus bus_calificacion = new aca_MatriculaCalificacion_Bus();
+        aca_MatriculaAsistencia_Combos_List Lista_Combos = new aca_MatriculaAsistencia_Combos_List();
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
         aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
-        aca_MatriculaConductaQuimestral_List ListaConductaQuimestral = new aca_MatriculaConductaQuimestral_List();
-        aca_MatriculaConductaFinal_List ListaEditarConducta = new aca_MatriculaConductaFinal_List();
+        aca_MatriculaAsistencia_Bus bus_asistencia = new aca_MatriculaAsistencia_Bus();
+        aca_MatriculaAsistencia_List ListaAsistencia = new aca_MatriculaAsistencia_List();
         aca_MatriculaConducta_Bus bus_conducta_cal = new aca_MatriculaConducta_Bus();
         aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
         string mensaje = string.Empty;
@@ -46,7 +46,7 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
             #endregion
             var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
-            aca_MatriculaConducta_Info model = new aca_MatriculaConducta_Info
+            aca_MatriculaAsistencia_Info model = new aca_MatriculaAsistencia_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSede = Convert.ToInt32(SessionFixed.IdSede),
@@ -55,7 +55,6 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdJornada = 0,
                 IdCurso = 0,
                 IdParalelo = 0,
-                IdCatalogoParcial = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
@@ -64,43 +63,34 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
             List<aca_MatriculaConducta_Info> lst_combos = bus_conducta_cal.GetList_Combos_Inspector(model.IdEmpresa, IdProfesor, EsSuperAdmin);
-            ListaConductaQuimestral.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            Lista_Combos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             cargar_combos(model);
             return View(model);
         }
 
         [ValidateInput(false)]
-        public ActionResult GridViewPartial_MatriculaConducta()
+        public ActionResult GridViewPartial_MatriculaAsistencia()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
-            List<aca_MatriculaConducta_Info> model = ListaEditarConducta.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
+            List<aca_MatriculaAsistencia_Info> model = ListaAsistencia.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            return PartialView("_GridViewPartial_MatriculaConducta", model);
+            return PartialView("_GridViewPartial_MatriculaAsistencia", model);
         }
         #endregion
 
         #region Metodos
-        private void cargar_combos(aca_MatriculaConducta_Info model)
+        private void cargar_combos(aca_MatriculaAsistencia_Info model)
         {
-            Dictionary<string, string> lst_parcial = new Dictionary<string, string>();
-            lst_parcial.Add(cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.QUIMESTRE_1.ToString(), "QUIMESTRE 1");
-            lst_parcial.Add(cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.QUIMESTRE_2.ToString(), "QUIMESTRE 2");
-            lst_parcial.Add(cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.PROMEDIOFINAL.ToString(), "PROMEDIO FINAL");
+            aca_CatalogoTipo_Bus bus_catalogo = new aca_CatalogoTipo_Bus();
+            var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
+            var lst_quim1 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), DateTime.Now.Date);
+            var lst_quim2 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2), DateTime.Now.Date);
+            lst_parcial.AddRange(lst_quim1);
+            lst_parcial.AddRange(lst_quim2);
+
             ViewBag.lst_parcial = lst_parcial;
         }
-
-        private void cargar_combos_detalle()
-        {
-            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
-            int IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
-
-            var lst_conducta = bus_conducta.GetList(IdEmpresa, IdAnio, false);
-            ViewBag.lst_conducta = lst_conducta;
-        }
-
         #endregion
 
         #region Combos
@@ -124,7 +114,7 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
             int IdSede = !string.IsNullOrEmpty(Request.Params["IdSede"]) ? int.Parse(Request.Params["IdSede"]) : -1;
             int IdJornada = !string.IsNullOrEmpty(Request.Params["IdJornada"]) ? int.Parse(Request.Params["IdJornada"]) : -1;
-            return PartialView("_ComboBoxPartial_Nivel", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada });
+            return PartialView("_ComboBoxPartial_Nivel", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada=IdJornada });
         }
 
         public ActionResult ComboBoxPartial_Curso()
@@ -151,7 +141,7 @@ namespace Core.Web.Areas.Academico.Controllers
         #region FuncionesCombos
         public List<aca_AnioLectivo_Info> CargarAnio(int IdEmpresa = 0)
         {
-            List<aca_MatriculaConducta_Info> lst_combos = ListaConductaQuimestral.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.IdEmpresa == IdEmpresa).ToList();
+            List<aca_MatriculaConducta_Info> lst_combos = Lista_Combos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q => q.IdEmpresa == IdEmpresa).ToList();
             var lst_anio = (from q in lst_combos
                             group q by new
                             {
@@ -182,7 +172,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public List<aca_Sede_Info> CargarSede(int IdEmpresa = 0, int IdAnio = 0)
         {
-            List<aca_MatriculaConducta_Info> lst_combos = ListaConductaQuimestral.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
+            List<aca_MatriculaConducta_Info> lst_combos = Lista_Combos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
             q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
 
             var lst_sede = (from q in lst_combos
@@ -215,7 +205,7 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         public List<aca_Jornada_Info> CargarJornada(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0)
         {
-            List<aca_MatriculaConducta_Info> lst_combos = ListaConductaQuimestral.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
+            List<aca_MatriculaConducta_Info> lst_combos = Lista_Combos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
             q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede).ToList();
 
             var lst_jornada = (from q in lst_combos
@@ -250,10 +240,10 @@ namespace Core.Web.Areas.Academico.Controllers
             return ListaJornada;
         }
 
-        public List<aca_NivelAcademico_Info> CargarNivel(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada = 0)
+        public List<aca_NivelAcademico_Info> CargarNivel(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada=0)
         {
-            List<aca_MatriculaConducta_Info> lst_combos = ListaConductaQuimestral.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
-            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdJornada==IdJornada).ToList();
+            List<aca_MatriculaConducta_Info> lst_combos = Lista_Combos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
+            q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdJornada== IdJornada).ToList();
 
             var lst_nivel = (from q in lst_combos
                              group q by new
@@ -289,7 +279,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public List<aca_Curso_Info> CargarCurso(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada = 0, int IdNivel = 0)
         {
-            List<aca_MatriculaConducta_Info> lst_combos = ListaConductaQuimestral.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
+            List<aca_MatriculaConducta_Info> lst_combos = Lista_Combos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
             q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada).ToList();
 
             var lst_curso = (from q in lst_combos
@@ -328,7 +318,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public List<aca_Paralelo_Info> CargarParalelo(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada = 0, int IdNivel = 0, int IdCurso = 0)
         {
-            List<aca_MatriculaConducta_Info> lst_combos = ListaConductaQuimestral.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
+            List<aca_MatriculaConducta_Info> lst_combos = Lista_Combos.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(q =>
             q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();
 
             var lst_paralelo = (from q in lst_combos
@@ -369,82 +359,86 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Funciones del Grid
-        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpress.Web.Mvc.DevExpressEditorsBinder))] aca_MatriculaConducta_Info info_det)
+        public ActionResult EditingUpdate([ModelBinder(typeof(DevExpress.Web.Mvc.DevExpressEditorsBinder))] aca_MatriculaAsistencia_Info info_det)
         {
             ViewBag.MostrarError = "";
             if (ModelState.IsValid)
             {
-                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                var info_matricula = bus_matricula.GetInfo(IdEmpresa, info_det.IdMatricula);
-                var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info_det.SecuenciaConductaPromedioParcialFinal));
-
-                if (info_conducta == null || string.IsNullOrEmpty(info_det.MotivoPromedioParcialFinal))
-                {
-                    ViewBag.MostrarError = "Debe de ingresar el promedio final y el motivo por el cual realiza el cambio";
-                }
-                else
-                {
-                    info_det.ConductaPromedioParcialFinal = Convert.ToDouble(info_conducta.Calificacion);
-                    ListaEditarConducta.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                }
+                ListaAsistencia.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
 
-            List<aca_MatriculaConducta_Info> model = new List<aca_MatriculaConducta_Info>();
-            model = ListaEditarConducta.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            List<aca_MatriculaAsistencia_Info> model = new List<aca_MatriculaAsistencia_Info>();
+            model = ListaAsistencia.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            cargar_combos_detalle();
-            return PartialView("_GridViewPartial_MatriculaConducta", model);
+            return PartialView("_GridViewPartial_MatriculaAsistencia", model);
         }
         #endregion
 
         #region Json
-        public JsonResult cargar_calificaciones_conducta(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, string IdPromedioFinal = "")
+        public JsonResult cargar_calificaciones_asistencia(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdCatalogoParcial = 0)
         {
-            List<aca_MatriculaConducta_Info> Lista_CalificacionConducta = new List<aca_MatriculaConducta_Info>();
-            if (!string.IsNullOrEmpty(IdPromedioFinal))
+            List<aca_MatriculaAsistencia_Info> Lista_CalificacionAsistencia = new List<aca_MatriculaAsistencia_Info>();
+            if (IdCatalogoParcial > 0)
             {
-                Lista_CalificacionConducta = bus_conducta_cal.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
-                foreach (var item in Lista_CalificacionConducta)
+                Lista_CalificacionAsistencia = bus_asistencia.getList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
+                foreach (var item in Lista_CalificacionAsistencia)
                 {
-                    item.IdPromedioFinal = IdPromedioFinal;
-                    if (IdPromedioFinal == cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.QUIMESTRE_1.ToString())
+                    item.IdCatalogoParcial = IdCatalogoParcial;
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
                     {
-                        item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioFinalQ1);
-                        item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioQ1);
-                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalQ1);
-                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalQ1);
-                        item.MotivoPromedioParcialFinal = item.MotivoPromedioFinalQ1;
+                        item.FInjustificada = item.FInjustificadaP1;
+                        item.FJustificada = item.FJustificadaP1;
+                        item.Atrasos = item.AtrasosP1;
                     }
-                    if (IdPromedioFinal == cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.QUIMESTRE_2.ToString())
+
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
                     {
-                        item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioFinalQ2);
-                        item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioQ2);
-                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalQ2);
-                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalQ2);
-                        item.MotivoPromedioParcialFinal = item.MotivoPromedioFinalQ2;
+                        item.FInjustificada = item.FInjustificadaP2;
+                        item.FJustificada = item.FJustificadaP2;
+                        item.Atrasos = item.AtrasosP2;
                     }
-                    if (IdPromedioFinal == cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.PROMEDIOFINAL.ToString())
+
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
                     {
-                        item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioGeneral);
-                        item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioGeneral);
-                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinal);
-                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinal);
-                        item.MotivoPromedioParcialFinal = item.MotivoPromedioFinal;
+                        item.FInjustificada = item.FInjustificadaP3;
+                        item.FJustificada = item.FJustificadaP3;
+                        item.Atrasos = item.AtrasosP3;
+                    }
+
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
+                    {
+                        item.FInjustificada = item.FInjustificadaP4;
+                        item.FJustificada = item.FJustificadaP4;
+                        item.Atrasos = item.AtrasosP4;
+                    }
+
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
+                    {
+                        item.FInjustificada = item.FInjustificadaP5;
+                        item.FJustificada = item.FJustificadaP5;
+                        item.Atrasos = item.AtrasosP5;
+                    }
+
+                    if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
+                    {
+                        item.FInjustificada = item.FInjustificadaP6;
+                        item.FJustificada = item.FJustificadaP6;
+                        item.Atrasos = item.AtrasosP6;
                     }
                 }
             }
 
-            ListaEditarConducta.set_list(Lista_CalificacionConducta, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ListaAsistencia.set_list(Lista_CalificacionAsistencia, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            return Json(Lista_CalificacionConducta, JsonRequestBehavior.AllowGet);
+            return Json(Lista_CalificacionAsistencia, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
     }
 
-    public class aca_MatriculaConductaQuimestral_List
+    public class aca_MatriculaAsistencia_Combos_List
     {
-        string Variable = "aca_MatriculaConductaQuimestral_Info";
+        string Variable = "aca_MatriculaAsistencia_Combos_Info";
         public List<aca_MatriculaConducta_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
@@ -461,44 +455,41 @@ namespace Core.Web.Areas.Academico.Controllers
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
     }
-
-    public class aca_MatriculaConductaFinal_List
+    public class aca_MatriculaAsistencia_List
     {
-        aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
-        aca_MatriculaConducta_Bus bus_conducta = new aca_MatriculaConducta_Bus();
-        aca_AnioLectivoConductaEquivalencia_Bus bus_conducta_equivalencia = new aca_AnioLectivoConductaEquivalencia_Bus();
-        string Variable = "aca_MatriculaConductaFinal_Info";
-        public List<aca_MatriculaConducta_Info> get_list(decimal IdTransaccionSession)
+        aca_MatriculaAsistencia_Bus bus_asistencia = new aca_MatriculaAsistencia_Bus();
+
+        string Variable = "aca_MatriculaAsistencia_Info";
+        public List<aca_MatriculaAsistencia_Info> get_list(decimal IdTransaccionSession)
         {
             if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
             {
-                List<aca_MatriculaConducta_Info> list = new List<aca_MatriculaConducta_Info>();
+                List<aca_MatriculaAsistencia_Info> list = new List<aca_MatriculaAsistencia_Info>();
 
                 HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
             }
-            return (List<aca_MatriculaConducta_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+            return (List<aca_MatriculaAsistencia_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
         }
 
-        public void set_list(List<aca_MatriculaConducta_Info> list, decimal IdTransaccionSession)
+        public void set_list(List<aca_MatriculaAsistencia_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
 
-        public void UpdateRow(aca_MatriculaConducta_Info info_det, decimal IdTransaccionSession)
+        public void UpdateRow(aca_MatriculaAsistencia_Info info_det, decimal IdTransaccionSession)
         {
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            aca_MatriculaConducta_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdEmpresa == IdEmpresa && m.IdMatricula == info_det.IdMatricula).FirstOrDefault();
-            var info_matricula = bus_matricula.GetInfo(edited_info.IdEmpresa, edited_info.IdMatricula);
-            //var info_conducta = bus_conducta_equivalencia.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAnio, info_det.SecuenciaConductaPromedioParcialFinal);
+            aca_MatriculaAsistencia_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdEmpresa == IdEmpresa && m.IdMatricula == info_det.IdMatricula).FirstOrDefault();
 
             if (edited_info != null)
             {
-                edited_info.SecuenciaConductaPromedioParcialFinal = info_det.SecuenciaConductaPromedioParcialFinal;
-                edited_info.ConductaPromedioParcialFinal = info_det.ConductaPromedioParcialFinal;
-                edited_info.MotivoPromedioParcialFinal = info_det.MotivoPromedioParcialFinal;
+                edited_info.FInjustificada = info_det.FInjustificada;
+                edited_info.FJustificada = info_det.FJustificada;
+                edited_info.Atrasos = info_det.Atrasos;
+                edited_info.IdUsuarioModificacion = SessionFixed.IdUsuario;
 
-                bus_conducta.ModicarPromedioFinalQuimestre(edited_info);
+                bus_asistencia.modificar(edited_info);
             }
 
         }

@@ -204,6 +204,9 @@
         <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaConducta" Width="1.5" PointX="34.875" PointY="48.25" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_MatriculaConducta" Width="1.5" PointX="28.375" PointY="34.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_MatriculaAsistencia" Width="1.5" PointX="39.375" PointY="22.75" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaAsistencia" Width="1.5" PointX="34.875" PointY="17.5" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaAsistencia_aca_Matricula" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

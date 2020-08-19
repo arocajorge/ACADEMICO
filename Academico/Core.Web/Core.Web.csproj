@@ -233,6 +233,7 @@
     <Compile Include="Areas\Academico\Controllers\MateriaGrupoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaPorProfesorController.cs" />
+    <Compile Include="Areas\Academico\Controllers\MatriculaAsistenciaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionExamenController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionParcialController.cs" />
@@ -8880,6 +8881,14 @@
     <Content Include="Areas\Academico\Views\MatriculaConductaQuimestral\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaConductaQuimestral\_GridViewPartial_MatriculaConducta.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaConductaQuimestral\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaAsistencia\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaAsistencia\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaAsistencia\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaAsistencia\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaAsistencia\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaAsistencia\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaAsistencia\_GridViewPartial_MatriculaAsistencia.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaAsistencia\Index.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

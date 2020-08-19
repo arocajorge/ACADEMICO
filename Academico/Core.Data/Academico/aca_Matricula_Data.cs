@@ -294,7 +294,9 @@ namespace Core.Data.Academico
                                 IdMatricula = info.IdMatricula,
                                 IdMateria = item.IdMateria,
                                 IdProfesor = item.IdProfesor,
-                                IdCatalogoParcial = item.IdCatalogoParcial
+                                IdCatalogoParcial = item.IdCatalogoParcial,
+                                IdUsuarioCreacion = info.IdUsuarioCreacion,
+                                FechaCreacion = DateTime.Now
                             };
                             Context.aca_MatriculaCalificacionParcial.Add(Entity_CalificacionParcial);
                         }
@@ -309,7 +311,7 @@ namespace Core.Data.Academico
                                 IdEmpresa = info.IdEmpresa,
                                 IdMatricula = info.IdMatricula,
                                 IdMateria = item.IdMateria,
-                                IdProfesor = item.IdProfesor
+                                IdProfesor = item.IdProfesor,
                             };
                             Context.aca_MatriculaCalificacion.Add(Entity_Calificacion);
                         }
@@ -321,6 +323,15 @@ namespace Core.Data.Academico
                         IdMatricula = info.IdMatricula
                     };
                     Context.aca_MatriculaConducta.Add(Entity_Conducta);
+
+                    aca_MatriculaAsistencia Entity_Asistencia = new aca_MatriculaAsistencia
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        IdMatricula = info.IdMatricula,
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        FechaCreacion = DateTime.Now,
+                    };
+                    Context.aca_MatriculaAsistencia.Add(Entity_Asistencia);
 
                     if (info.lst_MatriculaRubro.Count > 0)
                     {

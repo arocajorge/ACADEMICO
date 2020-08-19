@@ -76,6 +76,7 @@
     <Compile Include="Academico\aca_CatalogoTipoFicha_Data.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Data.cs" />
     <Compile Include="Academico\aca_Catalogo_Data.cs" />
+    <Compile Include="Academico\aca_MatriculaAsistencia_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacionParcial_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacion_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Data.cs" />
@@ -118,6 +119,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Matricula.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_MatriculaAsistencia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MatriculaCalificacion.cs">
@@ -358,6 +362,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Materia.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_MatriculaAsistencia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_MatriculaCalificacion.cs">
