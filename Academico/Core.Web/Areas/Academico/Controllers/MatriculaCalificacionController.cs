@@ -382,24 +382,21 @@ namespace Core.Web.Areas.Academico.Controllers
                     texto += "<div class='row'>";
                     texto += "<div class='col-md-12'>";
                     texto += "<label style='font-size:small'>" + "<h4><b><u>" + item.NomJornada + " - " + item.NomCurso + " - " + item.NomParalelo + "</u></b></h34>" +"</label>";
-                    texto += "</div>";
                     texto += "<br>";
 
                     var lst_materias_x_curso = bus_materias_x_paralelo.GetList(item.IdEmpresa, item.IdSede, item.IdAnio, item.IdNivel, item.IdJornada, item.IdCurso, item.IdParalelo).OrderBy(q=>q.NomMateria);
 
+                    texto += "<table width=100% style='font-size:small; font-weight:400;'>";
                     foreach (var mat in lst_materias_x_curso)
                     {
-                        texto += "<div class='col-md-6' style='font-size:small; font-weight:400;'>";
-                        texto += mat.NomMateria;
-                        //texto += "<label style='font-size:small; font-weight:400;'>" + mat.NomMateria + "</label>";
-                        texto += "</div>";
-                        texto += "<div class='col-md-6' style='font-size:small; font-weight:400;'>";
-                        texto += mat.pe_nombreCompleto;
-                        //texto += "<label style='font-size:small; font-weight:400'>" + mat.pe_nombreCompleto + "</label>";
-                        texto += "</div>";
+                        texto += "<tr>";
+                        texto += "<td width=50%>" + mat.NomMateria +"</td>";
+                        texto += "<td width=50%>" + mat.pe_nombreCompleto + "</td>";
+                        texto += "</tr>";
                     }
+                    texto += "</table>";
                     texto += "</div>";
-                    texto += "<br>";
+                    texto += "</div>";
                 }
             }
 

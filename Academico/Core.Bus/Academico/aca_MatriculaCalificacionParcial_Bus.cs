@@ -55,6 +55,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_MatriculaCalificacionParcial_Info> GetList_SuperAdmin(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, int IdCatalogoParcial)
+        {
+            try
+            {
+                return odata.GetList_SuperAdmin(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool GenerarCalificacion(List<aca_MatriculaCalificacionParcial_Info> lst_parcial)
         {
             try

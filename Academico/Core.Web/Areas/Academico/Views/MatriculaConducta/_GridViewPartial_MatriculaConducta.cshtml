@@ -78,23 +78,23 @@
             column.ReadOnly = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "SecuenciaConductaPromedioParcial";
-            column.Caption = "Promedio Conducta";
-            column.Width = Unit.Percentage(10);
-            column.EditorProperties().ComboBox(p =>
-            {
-                p.Columns.Add("Letra", "Conducta").Width = Unit.Percentage(100);
-                p.TextField = "Letra";
-                p.ValueField = "Secuencia";
-                p.ValueType = typeof(int);
-                p.DataSource = ViewBag.lst_conducta;
-            });
-            column.VisibleIndex = 3;
-            column.Visible = true;
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "SecuenciaConductaPromedioParcial";
+        //    column.Caption = "Promedio Conducta";
+        //    column.Width = Unit.Percentage(10);
+        //    column.EditorProperties().ComboBox(p =>
+        //    {
+        //        p.Columns.Add("Letra", "Conducta").Width = Unit.Percentage(100);
+        //        p.TextField = "Letra";
+        //        p.ValueField = "Secuencia";
+        //        p.ValueType = typeof(int);
+        //        p.DataSource = ViewBag.lst_conducta;
+        //    });
+        //    column.VisibleIndex = 3;
+        //    column.Visible = true;
+        //    column.EditFormSettings.Visible = DefaultBoolean.False;
+        //});
         settings.Columns.Add(column =>
         {
             column.FieldName = "SecuenciaConductaPromedioParcialFinal";
@@ -117,7 +117,7 @@
         {
             column.FieldName = "MotivoPromedioParcialFinal";
             column.Caption = "Motivo";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(40);
             column.VisibleIndex = 5;
             column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;

@@ -9,6 +9,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
+    $(function () {
+        $("#IdCatalogoTipo").change(function () {
+            CargarParciales();
+        });
+    });
+
+    function CargarParciales() {
+        $("#IdCatalogoParcial").empty();
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSede: IdSede.GetValue(),
+            IdAnio: IdAnio.GetValue(),
+            IdCatalogoTipo: $("#IdCatalogoTipo").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarParciales_X_Quimestre", "MatriculaConductaQuimestral",new { Area = "Academico"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdCatalogoParcial").append("<option value=" + row.IdCatalogoParcial + ">" + row.NomCatalogo + "</option>");
+                    $("#IdCatalogoParcial").val($("#IdCatalogoParcial option:first").val());
+                });
+            },
+            error: function (error) {
+            }
+        });
+    }
+
     function buscar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),

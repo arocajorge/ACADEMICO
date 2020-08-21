@@ -29,7 +29,80 @@ namespace Core.Data.Academico
                             Secuencia = q.Secuencia,
                             Letra = q.Letra,
                             Calificacion = q.Calificacion,
-                            Descripcion = q.Descripcion
+                            Descripcion = q.Descripcion,
+                            IngresaMotivo = q.IngresaMotivo,
+                            IngresaInspector =q.IngresaInspector,
+                            IngresaProfesor = q.IngresaProfesor
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivoConductaEquivalencia_Info> getList_Profesor(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                List<aca_AnioLectivoConductaEquivalencia_Info> Lista = new List<aca_AnioLectivoConductaEquivalencia_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IngresaProfesor==true).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AnioLectivoConductaEquivalencia_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            Secuencia = q.Secuencia,
+                            Letra = q.Letra,
+                            Calificacion = q.Calificacion,
+                            IngresaMotivo = q.IngresaMotivo,
+                            IngresaInspector = q.IngresaInspector,
+                            IngresaProfesor = q.IngresaProfesor
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivoConductaEquivalencia_Info> getList_Inspector(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                List<aca_AnioLectivoConductaEquivalencia_Info> Lista = new List<aca_AnioLectivoConductaEquivalencia_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IngresaInspector == true).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AnioLectivoConductaEquivalencia_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            Secuencia = q.Secuencia,
+                            Letra = q.Letra,
+                            Calificacion = q.Calificacion,
+                            IngresaMotivo = q.IngresaMotivo,
+                            IngresaInspector = q.IngresaInspector,
+                            IngresaProfesor = q.IngresaProfesor
                         });
                     });
                 }
@@ -62,7 +135,9 @@ namespace Core.Data.Academico
                             Secuencia = q.Secuencia,
                             Letra = q.Letra,
                             Calificacion = q.Calificacion,
-                            IngresaMotivo = q.IngresaMotivo
+                            IngresaMotivo = q.IngresaMotivo,
+                            IngresaInspector = q.IngresaInspector,
+                            IngresaProfesor = q.IngresaProfesor
                         });
                     });
                 }
@@ -94,7 +169,9 @@ namespace Core.Data.Academico
                         Secuencia = Entity.Secuencia,
                         Letra = Entity.Letra,
                         Calificacion = Entity.Calificacion,
-                        IngresaMotivo = Entity.IngresaMotivo
+                        IngresaMotivo = Entity.IngresaMotivo,
+                        IngresaInspector = Entity.IngresaInspector,
+                        IngresaProfesor = Entity.IngresaProfesor
                     };
                 }
 
@@ -126,7 +203,9 @@ namespace Core.Data.Academico
                         Secuencia = Entity.Secuencia,
                         Letra = Entity.Letra,
                         Calificacion = Entity.Calificacion,
-                        IngresaMotivo = Entity.IngresaMotivo
+                        IngresaMotivo = Entity.IngresaMotivo,
+                        IngresaInspector = Entity.IngresaInspector,
+                        IngresaProfesor = Entity.IngresaProfesor
                     };
                 }
 
@@ -159,7 +238,9 @@ namespace Core.Data.Academico
                         Secuencia = Entity.Secuencia,
                         Letra = Entity.Letra,
                         Calificacion = Entity.Calificacion,
-                        IngresaMotivo = Entity.IngresaMotivo
+                        IngresaMotivo = Entity.IngresaMotivo,
+                        IngresaInspector = Entity.IngresaInspector,
+                        IngresaProfesor = Entity.IngresaProfesor
                     };
                 }
 
@@ -191,7 +272,9 @@ namespace Core.Data.Academico
                         Secuencia = Entity.Secuencia,
                         Letra = Entity.Letra,
                         Calificacion = Entity.Calificacion,
-                        IngresaMotivo = Entity.IngresaMotivo
+                        IngresaMotivo = Entity.IngresaMotivo,
+                        IngresaProfesor = Entity.IngresaProfesor,
+                        IngresaInspector = Entity.IngresaInspector
                     };
                 }
 
@@ -223,7 +306,9 @@ namespace Core.Data.Academico
                         Secuencia = Entity.Secuencia,
                         Letra = Entity.Letra,
                         Calificacion = Entity.Calificacion,
-                        IngresaMotivo = Entity.IngresaMotivo
+                        IngresaMotivo = Entity.IngresaMotivo,
+                        IngresaProfesor = Entity.IngresaProfesor,
+                        IngresaInspector = Entity.IngresaInspector
                     };
                 }
 
@@ -270,7 +355,9 @@ namespace Core.Data.Academico
                         Secuencia = info.Secuencia=getId(info.IdEmpresa),
                         Letra = info.Letra,
                         Calificacion = info.Calificacion,
-                        IngresaMotivo = (info.IngresaMotivo==null ? false : info.IngresaMotivo)
+                        IngresaMotivo = (info.IngresaMotivo==null ? false : info.IngresaMotivo),
+                        IngresaInspector = (info.IngresaInspector == null ? false : info.IngresaInspector),
+                        IngresaProfesor = (info.IngresaProfesor == null ? false : info.IngresaProfesor)
                     };
                     Context.aca_AnioLectivoConductaEquivalencia.Add(Entity);
 
@@ -298,6 +385,8 @@ namespace Core.Data.Academico
                     Entity.Letra = info.Letra;
                     Entity.Calificacion = info.Calificacion;
                     Entity.IngresaMotivo = (info.IngresaMotivo == null ? false : info.IngresaMotivo);
+                    Entity.IngresaInspector = (info.IngresaInspector == null ? false : info.IngresaInspector);
+                    Entity.IngresaProfesor = (info.IngresaProfesor == null ? false : info.IngresaProfesor);
                     Context.SaveChanges();
                 }
 

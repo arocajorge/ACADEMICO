@@ -40,7 +40,36 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public List<aca_CatalogoTipo_Info> getListTipo(int IdCatalogoTipo)
+        {
+            try
+            {
+                List<aca_CatalogoTipo_Info> Lista = new List<aca_CatalogoTipo_Info>();
 
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.aca_CatalogoTipo.Where(q => q.IdCatalogoTipo==IdCatalogoTipo && q.Estado == true).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_CatalogoTipo_Info
+                        {
+                            IdCatalogoTipo = q.IdCatalogoTipo,
+                            NomCatalogoTipo = q.NomCatalogoTipo,
+                            Codigo = q.Codigo,
+                            Estado = q.Estado
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_CatalogoTipo_Info getInfo(int IdCatalogoTipo)
         {
             try

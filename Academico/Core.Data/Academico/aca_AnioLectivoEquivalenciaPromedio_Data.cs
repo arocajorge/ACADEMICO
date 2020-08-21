@@ -66,7 +66,8 @@ namespace Core.Data.Academico
                         Descripcion = Entity.Descripcion,
                         Codigo = Entity.Codigo,
                         ValorMinimo = Entity.ValorMinimo,
-                        ValorMaximo = Entity.ValorMaximo
+                        ValorMaximo = Entity.ValorMaximo,
+                        Estado = Entity.Estado
                     };
                 }
 

@@ -282,6 +282,7 @@
     <Compile Include="Reportes\Academico\ACA_012_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_013_EquivalenciaPromedio_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_013_Asistencia_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_015_Info.cs" />

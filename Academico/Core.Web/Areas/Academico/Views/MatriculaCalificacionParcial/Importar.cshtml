@@ -6,6 +6,14 @@
 
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
+    $(function () {
+        CargarParciales();
+
+        $("#IdCatalogoTipo").change(function () {
+            CargarParciales();
+        });
+    });
+
     function buscar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -59,6 +67,32 @@
     function OnFileUploadComplete(s, e)
     {
         GridViewPartial_MatriculaCalificacionParcialImportacion.PerformCallback();
+    }
+
+    function CargarParciales() {
+        $("#IdCatalogoParcial").empty();
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSede: IdSede.GetValue(),
+            IdAnio: IdAnio.GetValue(),
+            IdCatalogoTipo: $("#IdCatalogoTipo").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarParciales_X_Quimestre", "MatriculaCalificacionParcial",new { Area = "Academico"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdCatalogoParcial").append("<option value=" + row.IdCatalogoParcial + ">" + row.NomCatalogo + "</option>");
+                    $("#IdCatalogoParcial").val($("#IdCatalogoParcial option:first").val());
+                });
+            },
+            error: function (error) {
+            }
+        });
     }
 
 </script>
@@ -145,11 +179,18 @@
                     @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdEmpresa">Materia</label>
                     @Html.Partial("_ComboBoxPartial_Materia", Model)
                     @Html.ValidationMessageFor(q => q.IdMateria, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Quimestre</label>
+                    @Html.DropDownListFor(q => q.IdCatalogoTipo, new SelectList(ViewBag.lst_quimestres, "Key", "Value"), new { @class = "form-control", @id = "IdCatalogoTipo" })
+                    @Html.ValidationMessageFor(q => q.IdCatalogoTipo, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="col-md-2">

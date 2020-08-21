@@ -19,6 +19,8 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo calificación es obligatorio")]
         public decimal Calificacion { get; set; }
         public Nullable<bool> IngresaMotivo { get; set; }
+        public Nullable<bool> IngresaProfesor { get; set; }
+        public Nullable<bool> IngresaInspector { get; set; }
 
         #region Campos que no existen en la tabla
         public string Descripcion { get; set; }

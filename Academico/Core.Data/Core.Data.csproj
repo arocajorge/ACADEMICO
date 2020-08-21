@@ -109,10 +109,16 @@
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Data.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacionDet_Data.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacion_Data.cs" />
+    <Compile Include="Base\aca_AnioLectivoConductaEquivalencia.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_AnioLectivoEquivalenciaPromedio.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_AnioLectivoParcial.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_AnioLectivo_PeriodoDet.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MateriaArea.cs">
@@ -341,6 +347,9 @@
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Alumno_PeriodoActual.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_AnioLectivoConductaEquivalencia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivoEquivalenciaPromedio.cs">
@@ -579,9 +588,6 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_AnioLectivoCalificacionHistorico.cs">
-      <DependentUpon>ModelAcademico.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\aca_AnioLectivoConductaEquivalencia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_AnioLectivo_Curso_Documento.cs">
@@ -1415,9 +1421,6 @@
     <Compile Include="Base\vwaca_AnioLectivoCalificacionHistorico.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\vwaca_AnioLectivoConductaEquivalencia.cs">
-      <DependentUpon>ModelAcademico.tt</DependentUpon>
-    </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Curso_Paralelo.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -1869,6 +1872,7 @@
     <Compile Include="Reportes\Academico\ACA_010_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_011_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_012_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_013_Asistencia_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Data.cs" />

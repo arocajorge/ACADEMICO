@@ -23,6 +23,30 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_AnioLectivoConductaEquivalencia_Info> GetList_Profesor(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                return odata.getList_Profesor(IdEmpresa, IdAnio);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<aca_AnioLectivoConductaEquivalencia_Info> GetList_Inspector(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                return odata.getList_Inspector(IdEmpresa, IdAnio);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public aca_AnioLectivoConductaEquivalencia_Info GetInfo(int IdEmpresa, int IdAnio, int Secuencia)
         {
             try

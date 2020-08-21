@@ -445,6 +445,12 @@
     <Compile Include="Reportes\Academico\ACA_012_Rpt.Designer.cs">
       <DependentUpon>ACA_012_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_013_Asistencia_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_013_Asistencia_Rpt.Designer.cs">
+      <DependentUpon>ACA_013_Asistencia_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_013_Equivalencia_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8889,6 +8895,7 @@
     <Content Include="Areas\Academico\Views\MatriculaAsistencia\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaAsistencia\_GridViewPartial_MatriculaAsistencia.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaAsistencia\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_GridViewPartial_MatriculaCalificacionParcial_SuperAdmin.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9021,6 +9028,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_012_Rpt.resx">
       <DependentUpon>ACA_012_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_013_Asistencia_Rpt.resx">
+      <DependentUpon>ACA_013_Asistencia_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_013_Equivalencia_Rpt.resx">
       <DependentUpon>ACA_013_Equivalencia_Rpt.cs</DependentUpon>

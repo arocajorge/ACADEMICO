@@ -55,7 +55,6 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdJornada = 0,
                 IdCurso = 0,
                 IdParalelo = 0,
-                IdCatalogoParcial = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
@@ -97,7 +96,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
             int IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
 
-            var lst_conducta = bus_conducta.GetList(IdEmpresa, IdAnio, false);
+            var lst_conducta = bus_conducta.GetList_Inspector(IdEmpresa, IdAnio);
             ViewBag.lst_conducta = lst_conducta;
         }
 
@@ -378,14 +377,17 @@ namespace Core.Web.Areas.Academico.Controllers
                 var info_matricula = bus_matricula.GetInfo(IdEmpresa, info_det.IdMatricula);
                 var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info_det.SecuenciaConductaPromedioParcialFinal));
 
-                if (info_conducta == null || string.IsNullOrEmpty(info_det.MotivoPromedioParcialFinal))
+                if (info_conducta != null)
                 {
-                    ViewBag.MostrarError = "Debe de ingresar el promedio final y el motivo por el cual realiza el cambio";
-                }
-                else
-                {
-                    info_det.ConductaPromedioParcialFinal = Convert.ToDouble(info_conducta.Calificacion);
-                    ListaEditarConducta.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                    if (info_conducta.IngresaMotivo == true && (info_det.SecuenciaConductaPromedioParcialFinal == 0 || string.IsNullOrEmpty(info_det.MotivoPromedioParcialFinal)))
+                    {
+                        ViewBag.MostrarError = "Debe de ingresar el promedio final y el motivo por el cual el estudiante tiene baja conducta.";
+                    }
+                    else
+                    {
+                        info_det.ConductaPromedioParcialFinal = Convert.ToDouble(info_conducta.Calificacion);
+                        ListaEditarConducta.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                    }
                 }
             }
 
@@ -439,6 +441,11 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(Lista_CalificacionConducta, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult CargarParciales_X_Quimestre(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdCatalogoTipo = 0)
+        {
+            var resultado = bus_parcial.GetList_Reportes(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 

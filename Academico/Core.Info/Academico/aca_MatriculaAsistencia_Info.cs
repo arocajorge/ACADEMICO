@@ -48,6 +48,7 @@ namespace Core.Info.Academico
         public Nullable<int> FJustificada { get; set; }
         public Nullable<int> Atrasos { get; set; }
         public int IdCatalogoParcial { get; set; }
+        public int IdCatalogoTipo { get; set; }
         #endregion
     }
 }

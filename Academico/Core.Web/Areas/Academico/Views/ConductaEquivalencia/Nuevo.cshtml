@@ -27,14 +27,14 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="Sede">Letra</label>
                     @Html.TextBoxFor(q => q.Letra, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Letra, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="Sede">Calificación</label>
                     @Html.TextBoxFor(q => q.Calificacion, new { @class = "form-control" })
@@ -50,6 +50,32 @@
                             settings.Text = "Ingresa motivo por baja conducta";
                         }).GetHtml()
                     @Html.ValidationMessageFor(q => q.IngresaMotivo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.IngresaProfesor, settings =>
+                        {
+                            settings.Name = "IngresaProfesor";
+                            settings.Text = "Ingresa Profesor";
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IngresaProfesor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.IngresaInspector, settings =>
+                        {
+                            settings.Name = "IngresaInspector";
+                            settings.Text = "Ingresa Inspector";
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IngresaInspector, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

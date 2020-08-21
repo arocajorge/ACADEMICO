@@ -1147,13 +1147,22 @@ namespace Core.Web.Areas.Reportes.Controllers
         #region ACA_010
         private void cargar_combos_ACA_010(aca_MatriculaCalificacionParcial_Info model)
         {
-            var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
-            var lst_quim1 = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
-            var lst_quim2 = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2));
-            lst_parcial.AddRange(lst_quim1);
-            lst_parcial.AddRange(lst_quim2);
+            aca_Catalogo_Bus bus_catalogotipo = new aca_Catalogo_Bus();
+            Dictionary<string, string> lst_quimestres = new Dictionary<string, string>();
+            lst_quimestres.Add("6", "QUIMESTRE 1");
+            lst_quimestres.Add("7", "QUIMESTRE 2");
+            ViewBag.lst_quimestres = lst_quimestres;
 
+            //var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
+            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
             ViewBag.lst_parcial = lst_parcial;
+            //var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
+            //var lst_quim1 = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+            //var lst_quim2 = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2));
+            //lst_parcial.AddRange(lst_quim1);
+            //lst_parcial.AddRange(lst_quim2);
+
+            //ViewBag.lst_parcial = lst_parcial;
         }
         public ActionResult ACA_010(int IdEmpresa = 0, decimal IdAlumno = 0)
         {
@@ -1162,7 +1171,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
-
+            model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
             string IdUsuario = SessionFixed.IdUsuario;
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
@@ -1189,6 +1198,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdMateria.Value = model.IdMateria;
+            report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -1219,6 +1229,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdMateria.Value = model.IdMateria;
+            report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -1389,22 +1400,32 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
         #endregion
 
+        public JsonResult CargarParciales_X_Quimestre(int IdEmpresa=0, int IdSede=0, int IdAnio = 0, int IdCatalogoTipo=0)
+        {
+            var resultado = bus_parcial.GetList_Reportes(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
         #region ACA_013
         private void cargar_combos_ACA_013(aca_MatriculaCalificacionParcial_Info model)
         {
-            var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
-            var lst_quim1 = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
-            var lst_quim2 = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2));
-            lst_parcial.AddRange(lst_quim1);
-            lst_parcial.AddRange(lst_quim2);
+            aca_Catalogo_Bus bus_catalogotipo = new aca_Catalogo_Bus();
+            Dictionary<string, string> lst_quimestres = new Dictionary<string, string>();
+            lst_quimestres.Add("6", "QUIMESTRE 1");
+            lst_quimestres.Add("7", "QUIMESTRE 2");
+            ViewBag.lst_quimestres = lst_quimestres;
 
+            //var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
+            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
             ViewBag.lst_parcial = lst_parcial;
+
         }
         public ActionResult ACA_013(int IdEmpresa = 0, decimal IdAlumno = 0)
         {
             aca_MatriculaCalificacionParcial_Info model = new aca_MatriculaCalificacionParcial_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
 
@@ -1462,6 +1483,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;

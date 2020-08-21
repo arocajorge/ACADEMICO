@@ -55,6 +55,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdJornada = 0,
                 IdCurso = 0,
                 IdParalelo = 0,
+                IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
 
@@ -82,14 +83,21 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Metodos
         private void cargar_combos(aca_MatriculaAsistencia_Info model)
         {
-            aca_CatalogoTipo_Bus bus_catalogo = new aca_CatalogoTipo_Bus();
-            var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
-            var lst_quim1 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), DateTime.Now.Date);
-            var lst_quim2 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2), DateTime.Now.Date);
-            lst_parcial.AddRange(lst_quim1);
-            lst_parcial.AddRange(lst_quim2);
+            Dictionary<string, string> lst_quimestres = new Dictionary<string, string>();
+            lst_quimestres.Add("6", "QUIMESTRE 1");
+            lst_quimestres.Add("7", "QUIMESTRE 2");
+            ViewBag.lst_quimestres = lst_quimestres;
 
+            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
             ViewBag.lst_parcial = lst_parcial;
+            //aca_CatalogoTipo_Bus bus_catalogo = new aca_CatalogoTipo_Bus();
+            //var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
+            //var lst_quim1 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), DateTime.Now.Date);
+            //var lst_quim2 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2), DateTime.Now.Date);
+            //lst_parcial.AddRange(lst_quim1);
+            //lst_parcial.AddRange(lst_quim2);
+
+            //ViewBag.lst_parcial = lst_parcial;
         }
         #endregion
 
@@ -433,6 +441,11 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(Lista_CalificacionAsistencia, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult CargarParciales_X_Quimestre(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdCatalogoTipo = 0)
+        {
+            var resultado = bus_parcial.GetList_Reportes(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 

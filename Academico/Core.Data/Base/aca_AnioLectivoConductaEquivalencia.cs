@@ -20,6 +20,8 @@ namespace Core.Data.Base
         public string Letra { get; set; }
         public decimal Calificacion { get; set; }
         public Nullable<bool> IngresaMotivo { get; set; }
+        public Nullable<bool> IngresaProfesor { get; set; }
+        public Nullable<bool> IngresaInspector { get; set; }
     
         public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }

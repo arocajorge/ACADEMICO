@@ -56,7 +56,7 @@
                 @if (@ViewBag.Modificar == true)
                 {
                     <div class="form-group">
-                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "EquivalenciaPromedio", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdEquivalenciaPromedio = Model.IdEquivalenciaPromedio }, null)">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "EquivalenciaPromedio", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdAnio = Model.IdAnio, IdEquivalenciaPromedio = Model.IdEquivalenciaPromedio }, null)">
                             <i class="fa fa-edit"></i>
                         </a>
                     </div>
@@ -67,7 +67,7 @@
                 @if (@ViewBag.Anular == true)
                 {
                     <div class="form-group">
-                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "EquivalenciaPromedio", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdEquivalenciaPromedio = Model.IdEquivalenciaPromedio }, null)">
+                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "EquivalenciaPromedio", new { Area = "Academico", IdEmpresa = Model.IdEmpresa,IdAnio = Model.IdAnio, IdEquivalenciaPromedio = Model.IdEquivalenciaPromedio }, null)">
                             <i class="fa fa-remove"></i>
                         </a>
                     </div>
