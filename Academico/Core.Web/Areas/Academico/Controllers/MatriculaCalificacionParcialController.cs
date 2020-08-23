@@ -105,7 +105,7 @@ namespace Core.Web.Areas.Academico.Controllers
             lst_quimestres.Add("7", "QUIMESTRE 2");
             ViewBag.lst_quimestres = lst_quimestres;
 
-            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
+            var lst_parcial = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo, DateTime.Now.Date);
             ViewBag.lst_parcial = lst_parcial;
             //var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
             //var lst_quim1 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), DateTime.Now.Date);
@@ -719,7 +719,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public JsonResult CargarParciales_X_Quimestre(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdCatalogoTipo = 0)
         {
-            var resultado = bus_parcial.GetList_Reportes(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo);
+            var resultado = bus_parcial.GetList(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo, DateTime.Now.Date);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion

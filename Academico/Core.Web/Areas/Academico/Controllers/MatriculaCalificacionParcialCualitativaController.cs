@@ -105,7 +105,7 @@ namespace Core.Web.Areas.Academico.Controllers
             lst_quimestres.Add("7", "QUIMESTRE 2");
             ViewBag.lst_quimestres = lst_quimestres;
 
-            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
+            var lst_parcial = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo, DateTime.Now.Date);
             ViewBag.lst_parcial = lst_parcial;
             //var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
             //var lst_quim1 = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), DateTime.Now.Date);
@@ -525,7 +525,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public JsonResult CargarParciales_X_Quimestre(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdCatalogoTipo = 0)
         {
-            var resultado = bus_parcial.GetList_Reportes(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo);
+            var resultado = bus_parcial.GetList(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo, DateTime.Now);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
@@ -736,6 +736,8 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_MatriculaCalificacionCualitativa_Info> Lista_Calificaciones = new List<aca_MatriculaCalificacionCualitativa_Info>();
             aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
             aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+            aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
+            aca_AnioLectivoCalificacionCualitativa_Bus bus_cualitativa = new aca_AnioLectivoCalificacionCualitativa_Bus();
             aca_AnioLectivoEquivalenciaPromedio_Bus bus_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Bus();
             int cont = 0;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
@@ -753,15 +755,18 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     if (!reader.IsDBNull(1) && cont > 0)
                     {
-                        var IdMatricula = (Convert.ToInt32(reader.GetValue(1)));
-                        var pe_nombreCompleto = (Convert.ToString(reader.GetValue(2)).Trim());
-                        int? IdCalificacionCualitativa = reader.GetValue(3) == null ? (int?)null : Convert.ToInt32(reader.GetValue(3));
+                        //var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                        var IdMatricula = (Convert.ToInt32(reader.GetValue(0)));
+                        var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
+                        var pe_nombreCompleto = (Convert.ToString(reader.GetValue(1)).Trim());
+                        string CodigoCalificacionCualitativa = Convert.ToString(reader.GetValue(2));
+                        var info_cualitativa = bus_cualitativa.getInfo_Codigo(info_matricula.IdEmpresa, info_matricula.IdAnio, CodigoCalificacionCualitativa);
                         aca_MatriculaCalificacionCualitativa_Info info = new aca_MatriculaCalificacionCualitativa_Info
                         {
                             IdEmpresa = IdEmpresa,
                             IdMatricula = IdMatricula,
                             pe_nombreCompleto = pe_nombreCompleto,
-                            IdCalificacionCualitativa = IdCalificacionCualitativa,
+                            IdCalificacionCualitativa = (info_cualitativa==null ? (int?)null : Convert.ToInt32(info_cualitativa.IdCalificacionCualitativa))
                         };
 
                         Lista_Calificaciones.Add(info);

@@ -80,8 +80,8 @@
             column.Width = Unit.Percentage(30);
             column.EditorProperties().ComboBox(p =>
             {
-                p.Columns.Add("DescripcionCorta", "Calificación").Width = Unit.Percentage(100);
-                p.TextField = "DescripcionCorta";
+                p.Columns.Add("Codigo", "Calificación").Width = Unit.Percentage(100);
+                p.TextField = "Codigo";
                 p.ValueField = "IdCalificacionCualitativa";
                 p.ValueType = typeof(int);
                 p.DataSource = ViewBag.lst_calificacion_cualitativa;

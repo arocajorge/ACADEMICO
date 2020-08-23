@@ -38,6 +38,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_AnioLectivoCalificacionCualitativa_Info getInfo_Codigo(int IdEmpresa, int IdAnio, string Codigo)
+        {
+            try
+            {
+                return odata.getInfo_Codigo(IdEmpresa, IdAnio, Codigo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool guardarDB(aca_AnioLectivoCalificacionCualitativa_Info info)
         {
             try

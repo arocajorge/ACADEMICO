@@ -77,6 +77,38 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_AnioLectivoCalificacionCualitativa_Info getInfo_Codigo(int IdEmpresa, int IdAnio, string Codigo)
+        {
+            try
+            {
+                aca_AnioLectivoCalificacionCualitativa_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_AnioLectivoCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Codigo == Codigo).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_AnioLectivoCalificacionCualitativa_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAnio = Entity.IdAnio,
+                        IdCalificacionCualitativa = Entity.IdCalificacionCualitativa,
+                        Codigo = Entity.Codigo,
+                        DescripcionCorta = Entity.DescripcionCorta,
+                        DescripcionLarga = Entity.DescripcionLarga,
+                        Estado = Entity.Estado
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public int getId(int IdEmpresa)
         {
             try
