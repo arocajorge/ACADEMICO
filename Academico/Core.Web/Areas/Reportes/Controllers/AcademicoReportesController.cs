@@ -87,8 +87,64 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada, IdNivel = IdNivel, IdCurso = IdCurso });
         }
+
         #endregion
 
+        #region Combos ACA_013 ACA_014
+        public ActionResult ComboBoxPartial_AnioAlumno()
+        {
+            return PartialView("_ComboBoxPartial_AnioAlumno", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
+        }
+        public ActionResult CmbSedeAlumno()
+        {
+            int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            return PartialView("_CmbSedeAlumno", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio });
+        }
+        public ActionResult CmbJornadaAlumno()
+        {
+
+            int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = !string.IsNullOrEmpty(Request.Params["IdSede"]) ? int.Parse(Request.Params["IdSede"]) : -1;
+            //int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            return PartialView("_CmbJornadaAlumno", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdSede = IdSede });
+        }
+        public ActionResult CmbNivelAlumno()
+        {
+            int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = !string.IsNullOrEmpty(Request.Params["IdSede"]) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdJornada = !string.IsNullOrEmpty(Request.Params["IdJornada"]) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            return PartialView("_CmbNivel", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada });
+        }
+        public ActionResult CmbCursoAlumno()
+        {
+            int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = !string.IsNullOrEmpty(Request.Params["IdSede"]) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdJornada = !string.IsNullOrEmpty(Request.Params["IdJornada"]) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            int IdNivel = !string.IsNullOrEmpty(Request.Params["IdNivel"]) ? int.Parse(Request.Params["IdNivel"]) : -1;
+
+            return PartialView("_CmbCursoAlumno", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada, IdNivel = IdNivel });
+        }
+        public ActionResult ComboBoxPartial_ParaleloAlumno()
+        {
+            int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = !string.IsNullOrEmpty(Request.Params["IdSede"]) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdJornada = !string.IsNullOrEmpty(Request.Params["IdJornada"]) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            int IdNivel = !string.IsNullOrEmpty(Request.Params["IdNivel"]) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            int IdCurso = !string.IsNullOrEmpty(Request.Params["IdCurso"]) ? int.Parse(Request.Params["IdCurso"]) : -1;
+
+            return PartialView("_ComboBoxPartial_ParaleloAlumno", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada, IdNivel = IdNivel, IdCurso = IdCurso });
+        }
+        public ActionResult ComboBoxPartial_Alumno()
+        {
+            int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = !string.IsNullOrEmpty(Request.Params["IdSede"]) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdNivel = !string.IsNullOrEmpty(Request.Params["IdNivel"]) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            int IdJornada = !string.IsNullOrEmpty(Request.Params["IdJornada"]) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            int IdCurso = !string.IsNullOrEmpty(Request.Params["IdCurso"]) ? int.Parse(Request.Params["IdCurso"]) : -1;
+            var IdParalelo = !string.IsNullOrEmpty(Request.Params["IdParalelo"]) ? int.Parse(Request.Params["IdParalelo"]) : -1;
+            return PartialView("_ComboBoxPartial_Alumno", new aca_Matricula_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso, IdParalelo = IdParalelo });
+        }
+        #endregion
         #region ACA_001
         public ActionResult ACA_001(int IdEmpresa = 0, decimal IdAlumno = 0, int IdAnio = 0)
         {
@@ -1454,6 +1510,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -1483,6 +1540,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
             report.usuario = SessionFixed.IdUsuario;
@@ -1537,6 +1595,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
 
             report.usuario = SessionFixed.IdUsuario;
@@ -1567,6 +1626,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;

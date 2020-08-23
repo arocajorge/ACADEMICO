@@ -65,17 +65,6 @@
                     ViewContext.Writer.Write(
                             Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") }) + "&nbsp;"
                         );
-                    //ViewContext.Writer.Write(
-                    //        Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") }) + "&nbsp;"
-                    //    );
-
-                    //if (ViewBag.Anular == true)
-                    //{
-                    //    ViewContext.Writer.Write(
-                    //        Html.ActionLink("Eliminar", "Eliminar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdMatricula = DataBinder.Eval(tc.DataItem, "IdMatricula") },
-                    //        new { onclick = "return confirm('¿Está seguro de que desea eliminar el registro?')" })
-                    //    );
-                    //}
                 }
             });
             c.SetHeaderTemplateContent(tc =>
@@ -91,13 +80,15 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("IdMatricula", "ID").Width = Unit.Percentage(10);
+        settings.Columns.Add("IdMatricula", "ID").Width = Unit.Percentage(8);
         settings.Columns.Add("Codigo", "Código Alumno").Width = Unit.Percentage(10);
         settings.Columns.Add("NomSede", "Sede").Width = Unit.Percentage(10);
-        settings.Columns.Add("pe_nombreCompleto", "Estudiante").Width = Unit.Percentage(30);
+        settings.Columns.Add("pe_nombreCompleto", "Estudiante").Width = Unit.Percentage(20);
         settings.Columns.Add("NomJornada", "Jornada").Width = Unit.Percentage(10);
         settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(10);
-        settings.Columns.Add("NomParalelo", "Paralelo").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomParalelo", "Paralelo").Width = Unit.Percentage(8);
+        settings.Columns.Add("NomPlantilla", "Plantilla").Width = Unit.Percentage(14);
+        
         //settings.Columns.Add(column =>
         //{
         //    column.Caption = "Reporte";

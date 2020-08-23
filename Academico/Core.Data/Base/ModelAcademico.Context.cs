@@ -69,10 +69,7 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Reporte> aca_Reporte { get; set; }
         public virtual DbSet<aca_SocioEconomico> aca_SocioEconomico { get; set; }
         public virtual DbSet<vwaca_AnioLectivoCalificacionHistorico> vwaca_AnioLectivoCalificacionHistorico { get; set; }
-        public virtual DbSet<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
-        public virtual DbSet<aca_Materia> aca_Materia { get; set; }
         public virtual DbSet<aca_MateriaArea> aca_MateriaArea { get; set; }
-        public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
         public virtual DbSet<aca_AnioLectivo_Sede_NivelAcademico> aca_AnioLectivo_Sede_NivelAcademico { get; set; }
         public virtual DbSet<aca_MatriculaCondicionalParrafo> aca_MatriculaCondicionalParrafo { get; set; }
         public virtual DbSet<aca_MatriculaCondicional> aca_MatriculaCondicional { get; set; }
@@ -105,14 +102,11 @@ namespace Core.Data.Base
         public virtual DbSet<aca_MatriculaCambios> aca_MatriculaCambios { get; set; }
         public virtual DbSet<aca_Matricula_Rubro> aca_Matricula_Rubro { get; set; }
         public virtual DbSet<vwaca_Matricula_Rubro> vwaca_Matricula_Rubro { get; set; }
-        public virtual DbSet<vwaca_AnioLectivo_Curso_Materia> vwaca_AnioLectivo_Curso_Materia { get; set; }
         public virtual DbSet<aca_MatriculaCalificacion> aca_MatriculaCalificacion { get; set; }
         public virtual DbSet<vwaca_MatriculaCalificacion> vwaca_MatriculaCalificacion { get; set; }
-        public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
         public virtual DbSet<vwaca_AlumnoRetiro> vwaca_AlumnoRetiro { get; set; }
         public virtual DbSet<aca_AnioLectivo_Periodo> aca_AnioLectivo_Periodo { get; set; }
         public virtual DbSet<vwaca_Matricula_Rubro_FacturaMasiva> vwaca_Matricula_Rubro_FacturaMasiva { get; set; }
-        public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor> vwaca_AnioLectivo_Paralelo_Profesor { get; set; }
         public virtual DbSet<aca_Familia> aca_Familia { get; set; }
         public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
         public virtual DbSet<vwaca_Alumno_PeriodoActual> vwaca_Alumno_PeriodoActual { get; set; }
@@ -124,6 +118,16 @@ namespace Core.Data.Base
         public virtual DbSet<aca_AnioLectivo_PeriodoDet> aca_AnioLectivo_PeriodoDet { get; set; }
         public virtual DbSet<aca_AnioLectivoConductaEquivalencia> aca_AnioLectivoConductaEquivalencia { get; set; }
         public virtual DbSet<vwaca_AnioLectivoConductaEquivalencia> vwaca_AnioLectivoConductaEquivalencia { get; set; }
+        public virtual DbSet<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
+        public virtual DbSet<aca_AnioLectivoCalificacionCualitativa> aca_AnioLectivoCalificacionCualitativa { get; set; }
+        public virtual DbSet<aca_Materia> aca_Materia { get; set; }
+        public virtual DbSet<vwaca_AnioLectivo_Curso_Materia> vwaca_AnioLectivo_Curso_Materia { get; set; }
+        public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
+        public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor> vwaca_AnioLectivo_Paralelo_Profesor { get; set; }
+        public virtual DbSet<aca_MatriculaCalificacionCualitativa> aca_MatriculaCalificacionCualitativa { get; set; }
+        public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor_CalificacionesCualitativas> vwaca_AnioLectivo_Paralelo_Profesor_CalificacionesCualitativas { get; set; }
+        public virtual DbSet<vwaca_MatriculaCalificacionCualitativa> vwaca_MatriculaCalificacionCualitativa { get; set; }
+        public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

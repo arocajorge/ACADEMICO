@@ -45,7 +45,8 @@ namespace Core.Data.Academico
                             NomParalelo = q.NomParalelo,
                             pe_nombreCompleto =q.pe_nombreCompleto,
                             BloquearMatricula = q.BloquearMatricula,
-                            EsRetirado = q.EsRetirado??false
+                            EsRetirado = q.EsRetirado??false,
+                            NomPlantilla = q.NomPlantilla
                         });
                     });
                 }

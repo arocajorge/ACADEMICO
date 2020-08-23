@@ -18,6 +18,8 @@ namespace Core.Info.Academico
         public string Letra { get; set; }
         [Required(ErrorMessage = "El campo calificación es obligatorio")]
         public decimal Calificacion { get; set; }
+        public string Equivalencia { get; set; }
+        public string DescripcionEquivalencia { get; set; }
         public Nullable<bool> IngresaMotivo { get; set; }
         public Nullable<bool> IngresaProfesor { get; set; }
         public Nullable<bool> IngresaInspector { get; set; }

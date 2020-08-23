@@ -77,9 +77,10 @@
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(150);
         });
-        settings.Columns.Add("Descripcion", "Año").Width = Unit.Percentage(20);
-        settings.Columns.Add("Letra","Letra").Width = Unit.Percentage(50);
-        settings.Columns.Add("Calificacion","Calificación").Width = Unit.Percentage(20);
+        settings.Columns.Add("Descripcion", "Año").Width = Unit.Percentage(10);
+        settings.Columns.Add("Letra","Letra").Width = Unit.Percentage(10);
+        settings.Columns.Add("Calificacion","Calificación").Width = Unit.Percentage(10);
+        settings.Columns.Add("DescripcionEquivalencia", "Descripcion").Width = Unit.Percentage(50);
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

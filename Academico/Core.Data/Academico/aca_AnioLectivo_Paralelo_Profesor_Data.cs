@@ -167,7 +167,8 @@ namespace Core.Data.Academico
                                  IdMateria = q.IdMateria,
                                  NomMateria = q.NomMateria,
                                  IdProfesor = q.IdProfesor,
-                                 pe_nombreCompleto = q.pe_nombreCompleto
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion??0
                              }).ToList();
                 }
                 return Lista;

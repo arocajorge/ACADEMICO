@@ -39,19 +39,18 @@
     }
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-11">
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="IdSucursal">Materia*</label>
                     @Html.TextBoxFor(q => q.NomMateria, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.NomMateria, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label for="IdSucursal">&nbsp;</label>
-                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","Materia",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
-                        <i class="fa fa-plus"></i>
-                    </a>
+                    <label for="IdSucursal">Tipo de calificación*</label>
+                    @Html.DropDownListFor(q => q.IdCatalogoTipoCalificacion, new SelectList(ViewBag.lst_tipo_calificacion, "IdCatalogo", "NomCatalogo"), new { @class = "form-control", @id = "IdCatalogoTipoCalificacion" })
+                    @Html.ValidationMessageFor(m => m.IdCatalogoTipoCalificacion, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>

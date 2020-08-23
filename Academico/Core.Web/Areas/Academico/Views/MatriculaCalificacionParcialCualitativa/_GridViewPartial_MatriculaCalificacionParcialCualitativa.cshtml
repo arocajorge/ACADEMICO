@@ -1,0 +1,111 @@
+@using System.Web.UI.WebControls;
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridViewPartial_MatriculaCalificacionParcialCualitativa";
+        settings.CallbackRouteValues = new { Controller = "MatriculaCalificacionParcialCualitativa", Action = "GridViewPartial_MatriculaCalificacionParcialCualitativa" };
+        settings.Width = Unit.Percentage(100);
+        settings.KeyFieldName = "IdMatricula";
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
+        ModelBinders.Binders.DefaultBinder = new DevExpress.Web.Mvc.DevExpressEditorsBinder();
+        settings.SettingsEditing.Mode = GridViewEditingMode.PopupEditForm;
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "MatriculaCalificacionParcialCualitativa", Action = "EditingUpdate", Area = "Academico" };
+        settings.CommandColumn.ShowEditButton = true;
+        settings.SettingsContextMenu.RowMenuItemVisibility.EditRow = true;
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowDeleteButton = false;
+        settings.SettingsContextMenu.RowMenuItemVisibility.NewRow = false;
+        settings.SettingsContextMenu.RowMenuItemVisibility.DeleteRow = false;
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+
+        settings.Settings.ShowFooter = true;
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        //Configuración scrolling y pager
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+        settings.Settings.VerticalScrollableHeight = 380;
+        settings.SettingsPager.PageSize = 10;
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
+        settings.SettingsPager.AlwaysShowPager = true;
+
+        //Configuración click derecho
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.EnableRowMenu = DefaultBoolean.False;
+
+        //Configuracion responsive
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+
+        //Configuración filtro por columna
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        //Funcion para inicializar fila al presionar nuevo
+        settings.InitNewRow = (s, e) =>
+        {
+            e.NewValues["IdCalificacionCualitativa"] = null;
+        };
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdMatricula";
+            column.Caption = "IdMatricula";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 1;
+            column.Visible = true;
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_nombreCompleto";
+            column.Caption = "Alumno";
+            column.Width = Unit.Percentage(50);
+            column.VisibleIndex = 2;
+            column.Visible = true;
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCalificacionCualitativa";
+            column.Caption = "Calificación";
+            column.Width = Unit.Percentage(30);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("DescripcionCorta", "Calificación").Width = Unit.Percentage(100);
+                p.TextField = "DescripcionCorta";
+                p.ValueField = "IdCalificacionCualitativa";
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_calificacion_cualitativa;
+            });
+            column.VisibleIndex = 3;
+        });
+
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {} }";
+
+    });
+
+    if (ViewBag.MostrarError != "")
+    {
+        grid.SetEditErrorText((string)ViewBag.MostrarError);
+    }
+}
+@grid.Bind(Model).GetHtml()

@@ -36,8 +36,8 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaModificacion { get; set; }
     
         public virtual aca_Catalogo aca_Catalogo { get; set; }
-        public virtual aca_Materia aca_Materia { get; set; }
         public virtual aca_Matricula aca_Matricula { get; set; }
         public virtual aca_Profesor aca_Profesor { get; set; }
+        public virtual aca_Materia aca_Materia { get; set; }
     }
 }

@@ -31,6 +31,7 @@ namespace Core.Data.Academico
                             OrdenMateria = q.OrdenMateria,
                             EsObligatorio = q.EsObligatorio,
                             IdMateriaGrupo = q.IdMateriaGrupo,
+                            IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion,
                             Estado = q.Estado
                         });
                     });
@@ -60,7 +61,7 @@ namespace Core.Data.Academico
                         Lista.Add(new aca_Materia_Info
                         {
                             IdMateria = q.IdMateria,
-                            NomMateria = q.NomMateria,
+                            NomMateria = q.NomMateria
                         });
                     });
                 }
@@ -98,6 +99,7 @@ namespace Core.Data.Academico
                         OrdenMateriaGrupo = Entity.OrdenMateriaGrupo??0,
                         OrdenMateriaArea = Entity.OrdenMateriaArea??0,
                         EsObligatorio = Entity.EsObligatorio,
+                        IdCatalogoTipoCalificacion = Entity.IdCatalogoTipoCalificacion,
                         Estado = Entity.Estado
                     };
                 }
@@ -170,6 +172,7 @@ namespace Core.Data.Academico
                         IdMateriaArea = (info.IdMateriaArea == 0 ? null : info.IdMateriaArea),
                         OrdenMateria = info.OrdenMateria,
                         EsObligatorio = info.EsObligatorio,
+                        IdCatalogoTipoCalificacion = info.IdCatalogoTipoCalificacion,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -202,6 +205,7 @@ namespace Core.Data.Academico
                     Entity.IdMateriaGrupo = (info.IdMateriaGrupo == 0 ? null : info.IdMateriaGrupo);
                     Entity.IdMateriaArea = (info.IdMateriaArea == 0 ? null : info.IdMateriaArea);
                     Entity.EsObligatorio = info.EsObligatorio;
+                    Entity.IdCatalogoTipoCalificacion = info.IdCatalogoTipoCalificacion;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 

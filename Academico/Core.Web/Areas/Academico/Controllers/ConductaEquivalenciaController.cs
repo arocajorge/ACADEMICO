@@ -56,6 +56,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_AnioLectivoConductaEquivalencia_Info model)
         {
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
             List<aca_AnioLectivoConductaEquivalencia_Info> lista = bus_conducta.GetList(model.IdEmpresa, model.IdAnio, true);
             Lista_ConductaEquivalencia.set_list(lista, Convert.ToDecimal(model.IdTransaccionSession));
             #region Permisos

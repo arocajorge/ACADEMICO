@@ -55,6 +55,7 @@
     <Compile Include="Academico\aca_AlumnoDocumento_Data.cs" />
     <Compile Include="Academico\aca_AlumnoRetiro_Data.cs" />
     <Compile Include="Academico\aca_Alumno_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivoCalificacionCualitativa_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivoCalificacionHistorico_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivoConductaEquivalencia_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivoEquivalenciaPromedio_Data.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Academico\aca_CatalogoTipo_Data.cs" />
     <Compile Include="Academico\aca_Catalogo_Data.cs" />
     <Compile Include="Academico\aca_MatriculaAsistencia_Data.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacionCualitativa_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacionParcial_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacion_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Data.cs" />
@@ -109,6 +111,9 @@
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Data.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacionDet_Data.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacion_Data.cs" />
+    <Compile Include="Base\aca_AnioLectivoCalificacionCualitativa.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_AnioLectivoConductaEquivalencia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -131,6 +136,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MatriculaCalificacion.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_MatriculaCalificacionCualitativa.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MatriculaCalificacionParcial.cs">
@@ -367,6 +375,9 @@
     <Compile Include="Base\vwaca_AnioLectivo_Paralelo_Profesor_Calificaciones.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_AnioLectivo_Paralelo_Profesor_CalificacionesCualitativas.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_Hermanos.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -377,6 +388,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_MatriculaCalificacion.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_MatriculaCalificacionCualitativa.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_MatriculaCalificacionParcial.cs">

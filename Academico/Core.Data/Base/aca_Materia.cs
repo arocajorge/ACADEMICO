@@ -20,6 +20,7 @@ namespace Core.Data.Base
             this.aca_AnioLectivo_Curso_Materia = new HashSet<aca_AnioLectivo_Curso_Materia>();
             this.aca_AnioLectivo_Paralelo_Profesor = new HashSet<aca_AnioLectivo_Paralelo_Profesor>();
             this.aca_MatriculaCalificacionParcial = new HashSet<aca_MatriculaCalificacionParcial>();
+            this.aca_MatriculaCalificacionCualitativa = new HashSet<aca_MatriculaCalificacionCualitativa>();
         }
     
         public int IdEmpresa { get; set; }
@@ -29,6 +30,7 @@ namespace Core.Data.Base
         public string NomMateria { get; set; }
         public bool EsObligatorio { get; set; }
         public int OrdenMateria { get; set; }
+        public Nullable<int> IdCatalogoTipoCalificacion { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -42,9 +44,12 @@ namespace Core.Data.Base
         public virtual ICollection<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
+        public virtual aca_Catalogo aca_Catalogo { get; set; }
         public virtual aca_MateriaArea aca_MateriaArea { get; set; }
         public virtual aca_MateriaGrupo aca_MateriaGrupo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_MatriculaCalificacionParcial> aca_MatriculaCalificacionParcial { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_MatriculaCalificacionCualitativa> aca_MatriculaCalificacionCualitativa { get; set; }
     }
 }

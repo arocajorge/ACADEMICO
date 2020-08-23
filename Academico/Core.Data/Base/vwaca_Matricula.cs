@@ -47,5 +47,6 @@ namespace Core.Data.Base
         public Nullable<int> IdEmpresa_rol { get; set; }
         public Nullable<decimal> IdEmpleado { get; set; }
         public Nullable<bool> EsRetirado { get; set; }
+        public string NomPlantilla { get; set; }
     }
 }

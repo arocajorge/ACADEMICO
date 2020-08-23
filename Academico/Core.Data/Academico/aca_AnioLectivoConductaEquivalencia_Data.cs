@@ -32,7 +32,9 @@ namespace Core.Data.Academico
                             Descripcion = q.Descripcion,
                             IngresaMotivo = q.IngresaMotivo,
                             IngresaInspector =q.IngresaInspector,
-                            IngresaProfesor = q.IngresaProfesor
+                            IngresaProfesor = q.IngresaProfesor,
+                            Equivalencia = q.Equivalencia,
+                            DescripcionEquivalencia = q.DescripcionEquivalencia
                         });
                     });
                 }
@@ -67,7 +69,9 @@ namespace Core.Data.Academico
                             Calificacion = q.Calificacion,
                             IngresaMotivo = q.IngresaMotivo,
                             IngresaInspector = q.IngresaInspector,
-                            IngresaProfesor = q.IngresaProfesor
+                            IngresaProfesor = q.IngresaProfesor,
+                            Equivalencia = q.Equivalencia,
+                            DescripcionEquivalencia = q.DescripcionEquivalencia
                         });
                     });
                 }
@@ -102,7 +106,9 @@ namespace Core.Data.Academico
                             Calificacion = q.Calificacion,
                             IngresaMotivo = q.IngresaMotivo,
                             IngresaInspector = q.IngresaInspector,
-                            IngresaProfesor = q.IngresaProfesor
+                            IngresaProfesor = q.IngresaProfesor,
+                            Equivalencia = q.Equivalencia,
+                            DescripcionEquivalencia = q.DescripcionEquivalencia
                         });
                     });
                 }
@@ -137,7 +143,9 @@ namespace Core.Data.Academico
                             Calificacion = q.Calificacion,
                             IngresaMotivo = q.IngresaMotivo,
                             IngresaInspector = q.IngresaInspector,
-                            IngresaProfesor = q.IngresaProfesor
+                            IngresaProfesor = q.IngresaProfesor,
+                            Equivalencia = q.Equivalencia,
+                            DescripcionEquivalencia = q.DescripcionEquivalencia
                         });
                     });
                 }
@@ -171,7 +179,9 @@ namespace Core.Data.Academico
                         Calificacion = Entity.Calificacion,
                         IngresaMotivo = Entity.IngresaMotivo,
                         IngresaInspector = Entity.IngresaInspector,
-                        IngresaProfesor = Entity.IngresaProfesor
+                        IngresaProfesor = Entity.IngresaProfesor,
+                        Equivalencia = Entity.Equivalencia,
+                        DescripcionEquivalencia = Entity.DescripcionEquivalencia
                     };
                 }
 
@@ -205,7 +215,9 @@ namespace Core.Data.Academico
                         Calificacion = Entity.Calificacion,
                         IngresaMotivo = Entity.IngresaMotivo,
                         IngresaInspector = Entity.IngresaInspector,
-                        IngresaProfesor = Entity.IngresaProfesor
+                        IngresaProfesor = Entity.IngresaProfesor,
+                        Equivalencia = Entity.Equivalencia,
+                        DescripcionEquivalencia = Entity.DescripcionEquivalencia
                     };
                 }
 
@@ -240,7 +252,9 @@ namespace Core.Data.Academico
                         Calificacion = Entity.Calificacion,
                         IngresaMotivo = Entity.IngresaMotivo,
                         IngresaInspector = Entity.IngresaInspector,
-                        IngresaProfesor = Entity.IngresaProfesor
+                        IngresaProfesor = Entity.IngresaProfesor,
+                        Equivalencia = Entity.Equivalencia,
+                        DescripcionEquivalencia = Entity.DescripcionEquivalencia
                     };
                 }
 
@@ -274,7 +288,9 @@ namespace Core.Data.Academico
                         Calificacion = Entity.Calificacion,
                         IngresaMotivo = Entity.IngresaMotivo,
                         IngresaProfesor = Entity.IngresaProfesor,
-                        IngresaInspector = Entity.IngresaInspector
+                        IngresaInspector = Entity.IngresaInspector,
+                        Equivalencia = Entity.Equivalencia,
+                        DescripcionEquivalencia = Entity.DescripcionEquivalencia
                     };
                 }
 
@@ -308,7 +324,9 @@ namespace Core.Data.Academico
                         Calificacion = Entity.Calificacion,
                         IngresaMotivo = Entity.IngresaMotivo,
                         IngresaProfesor = Entity.IngresaProfesor,
-                        IngresaInspector = Entity.IngresaInspector
+                        IngresaInspector = Entity.IngresaInspector,
+                        Equivalencia = Entity.Equivalencia,
+                        DescripcionEquivalencia = Entity.DescripcionEquivalencia
                     };
                 }
 
@@ -357,7 +375,9 @@ namespace Core.Data.Academico
                         Calificacion = info.Calificacion,
                         IngresaMotivo = (info.IngresaMotivo==null ? false : info.IngresaMotivo),
                         IngresaInspector = (info.IngresaInspector == null ? false : info.IngresaInspector),
-                        IngresaProfesor = (info.IngresaProfesor == null ? false : info.IngresaProfesor)
+                        IngresaProfesor = (info.IngresaProfesor == null ? false : info.IngresaProfesor),
+                        Equivalencia = info.Equivalencia,
+                        DescripcionEquivalencia = info.DescripcionEquivalencia
                     };
                     Context.aca_AnioLectivoConductaEquivalencia.Add(Entity);
 
@@ -387,6 +407,9 @@ namespace Core.Data.Academico
                     Entity.IngresaMotivo = (info.IngresaMotivo == null ? false : info.IngresaMotivo);
                     Entity.IngresaInspector = (info.IngresaInspector == null ? false : info.IngresaInspector);
                     Entity.IngresaProfesor = (info.IngresaProfesor == null ? false : info.IngresaProfesor);
+                    Entity.Equivalencia = info.Equivalencia;
+                    Entity.DescripcionEquivalencia = info.DescripcionEquivalencia;
+                    
                     Context.SaveChanges();
                 }
 

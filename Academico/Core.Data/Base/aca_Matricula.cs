@@ -22,6 +22,7 @@ namespace Core.Data.Base
             this.aca_MatriculaCambios = new HashSet<aca_MatriculaCambios>();
             this.aca_Matricula_Rubro = new HashSet<aca_Matricula_Rubro>();
             this.aca_MatriculaCalificacion = new HashSet<aca_MatriculaCalificacion>();
+            this.aca_MatriculaCalificacionCualitativa = new HashSet<aca_MatriculaCalificacionCualitativa>();
         }
     
         public int IdEmpresa { get; set; }
@@ -66,5 +67,7 @@ namespace Core.Data.Base
         public virtual ICollection<aca_MatriculaCalificacion> aca_MatriculaCalificacion { get; set; }
         public virtual aca_MatriculaConducta aca_MatriculaConducta { get; set; }
         public virtual aca_MatriculaAsistencia aca_MatriculaAsistencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_MatriculaCalificacionCualitativa> aca_MatriculaCalificacionCualitativa { get; set; }
     }
 }

@@ -33,6 +33,7 @@ namespace Core.Web.Reportes.Academico
             int IdCurso = string.IsNullOrEmpty(p_IdCurso.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCurso.Value);
             int IdParalelo = string.IsNullOrEmpty(p_IdParalelo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdParalelo.Value);
             int IdCatalogoParcial = string.IsNullOrEmpty(p_IdCatalogoParcial.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCatalogoParcial.Value);
+            int IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
 
             var emp = bus_empresa.get_info(IdEmpresa);
             if (emp != null)
@@ -46,7 +47,7 @@ namespace Core.Web.Reportes.Academico
 
             ACA_013_Bus bus_rpt = new ACA_013_Bus();
             List<ACA_013_Info> lst_rpt = new List<ACA_013_Info>();
-            lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial);
+            lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial, IdAlumno);
 
             this.DataSource = lst_rpt;
         }
@@ -64,6 +65,20 @@ namespace Core.Web.Reportes.Academico
             ((XRSubreport)sender).ReportSource.Parameters["p_IdMatricula"].Value = IdMatricula.Value == null ? 0 : Convert.ToDecimal(IdMatricula.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdCatalogoParcial"].Value = p_IdCatalogoParcial.Value == null ? 0 : Convert.ToInt32(p_IdCatalogoParcial.Value);
 
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
+        }
+
+        private void Conducta_Subreporte_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdAnio"].Value = p_IdAnio.Value == null ? 0 : Convert.ToInt32(p_IdAnio.Value);
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
+        }
+
+        private void Cualitativa_Subreporte_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdAnio"].Value = p_IdAnio.Value == null ? 0 : Convert.ToInt32(p_IdAnio.Value);
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
     }

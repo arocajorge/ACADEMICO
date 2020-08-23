@@ -534,7 +534,7 @@ namespace Core.Data.Base
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPFAC_006_Result>("SPFAC_006", idEmpresaParameter, idSucursalIniParameter, idSucursalFinParameter, idAlumnoIniParameter, idAlumnoFinParameter, fechaIniParameter, fechaFinParameter, mostrarAnuladosParameter);
         }
     
-        public virtual ObjectResult<SPACA_013_Result> SPACA_013(Nullable<int> idEmpresa, Nullable<int> idAnio, Nullable<int> idSede, Nullable<int> idNivel, Nullable<int> idJornada, Nullable<int> idCurso, Nullable<int> idParalelo, Nullable<int> idParcial)
+        public virtual ObjectResult<SPACA_013_Result> SPACA_013(Nullable<int> idEmpresa, Nullable<int> idAnio, Nullable<int> idSede, Nullable<int> idNivel, Nullable<int> idJornada, Nullable<int> idCurso, Nullable<int> idParalelo, Nullable<int> idParcial, Nullable<decimal> idAlumno)
         {
             var idEmpresaParameter = idEmpresa.HasValue ?
                 new ObjectParameter("IdEmpresa", idEmpresa) :
@@ -568,10 +568,14 @@ namespace Core.Data.Base
                 new ObjectParameter("IdParcial", idParcial) :
                 new ObjectParameter("IdParcial", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_013_Result>("SPACA_013", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter, idParcialParameter);
+            var idAlumnoParameter = idAlumno.HasValue ?
+                new ObjectParameter("IdAlumno", idAlumno) :
+                new ObjectParameter("IdAlumno", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_013_Result>("SPACA_013", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter, idParcialParameter, idAlumnoParameter);
         }
     
-        public virtual ObjectResult<SPACA_014_Result> SPACA_014(Nullable<int> idEmpresa, Nullable<int> idAnio, Nullable<int> idSede, Nullable<int> idNivel, Nullable<int> idJornada, Nullable<int> idCurso, Nullable<int> idParalelo)
+        public virtual ObjectResult<SPACA_014_Result> SPACA_014(Nullable<int> idEmpresa, Nullable<int> idAnio, Nullable<int> idSede, Nullable<int> idNivel, Nullable<int> idJornada, Nullable<int> idCurso, Nullable<int> idParalelo, Nullable<decimal> idAlumno)
         {
             var idEmpresaParameter = idEmpresa.HasValue ?
                 new ObjectParameter("IdEmpresa", idEmpresa) :
@@ -601,7 +605,11 @@ namespace Core.Data.Base
                 new ObjectParameter("IdParalelo", idParalelo) :
                 new ObjectParameter("IdParalelo", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_014_Result>("SPACA_014", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter);
+            var idAlumnoParameter = idAlumno.HasValue ?
+                new ObjectParameter("IdAlumno", idAlumno) :
+                new ObjectParameter("IdAlumno", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_014_Result>("SPACA_014", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter, idAlumnoParameter);
         }
     }
 }

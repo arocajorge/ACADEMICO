@@ -90,6 +90,7 @@ namespace Core.Info.Academico
         public int OrdenNivel { get; set; }
         public int OrdenCurso { get; set; }
         public int OrdenParalelo { get; set; }
+        public string NomPlantilla { get; set; }
         #endregion
     }
 }

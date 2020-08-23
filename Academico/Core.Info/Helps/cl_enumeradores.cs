@@ -179,9 +179,15 @@ namespace Core.Info.Helps
             CONDIC = 5,
             QUIM1 = 6,
             QUIM2 = 7,
-            EXSUP = 8
+            EXSUP = 8,
+            TIPOCAL = 9
         }
 
+        public enum eCatalogoTipoCalificacion
+        {
+            CUANTI = 40,
+            CUALI = 41
+        }
         public enum eTipoCatalogoAcademicoExamen
         {
             EXQUI1 = 34,

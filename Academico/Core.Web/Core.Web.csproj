@@ -216,6 +216,7 @@
     <Compile Include="Areas\Academico\Controllers\AnioLectivoAperturaController.cs" />
     <Compile Include="Areas\Academico\Controllers\AnioLectivoController.cs" />
     <Compile Include="Areas\Academico\Controllers\AsignacionTutorInspectorController.cs" />
+    <Compile Include="Areas\Academico\Controllers\CalificacionCualitativaController.cs" />
     <Compile Include="Areas\Academico\Controllers\CalificacionHistoricoController.cs" />
     <Compile Include="Areas\Academico\Controllers\CambioParaleloMatriculaController.cs" />
     <Compile Include="Areas\Academico\Controllers\CambioPlantillaMatriculaController.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionExamenController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionParcialController.cs" />
+    <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionParcialCualitativaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalParrafoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaConductaController.cs" />
@@ -463,11 +465,35 @@
     <Compile Include="Reportes\Academico\ACA_013_Rpt.Designer.cs">
       <DependentUpon>ACA_013_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_013_CalificacionCualitativa_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_013_CalificacionCualitativa_Rpt.Designer.cs">
+      <DependentUpon>ACA_013_CalificacionCualitativa_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_014_CalificacionCualitativa_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_014_CalificacionCualitativa_Rpt.Designer.cs">
+      <DependentUpon>ACA_014_CalificacionCualitativa_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Rpt.Designer.cs">
       <DependentUpon>ACA_014_Conducta_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_013_EquivalenciaConducta_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_013_EquivalenciaConducta_Rpt.Designer.cs">
+      <DependentUpon>ACA_013_EquivalenciaConducta_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_014_EquivalenciaConducta_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_014_EquivalenciaConducta_Rpt.Designer.cs">
+      <DependentUpon>ACA_014_EquivalenciaConducta_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Academico\ACA_014_Equivalencia_Rpt.cs">
       <SubType>Component</SubType>
@@ -8896,6 +8922,32 @@
     <Content Include="Areas\Academico\Views\MatriculaAsistencia\_GridViewPartial_MatriculaAsistencia.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaAsistencia\Index.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParcial\_GridViewPartial_MatriculaCalificacionParcial_SuperAdmin.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionCualitativa\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionCualitativa\_GridViewPartial_CalificacionCualitativa.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionCualitativa\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionCualitativa\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionCualitativa\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionCualitativa\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\CalificacionCualitativa\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\_ComboBoxPartial_Materia.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\_GridViewPartial_MatriculaCalificacionParcialCualitativa.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\_GridViewPartial_MatriculaCalificacionParcialCualitativa_SuperAdmin.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\_GridViewPartial_MatriculaCalificacionParcialCualitativaImportacion.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\Importar.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParcialCualitativa\Index.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\_ComboBoxPartial_Alumno.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\_ComboBoxPartial_ParaleloAlumno.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\_ComboBoxPartial_AnioAlumno.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbSedeAlumno.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbJornadaAlumno.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbNivelAlumno.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbCursoAlumno.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9038,8 +9090,20 @@
     <EmbeddedResource Include="Reportes\Academico\ACA_013_Rpt.resx">
       <DependentUpon>ACA_013_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_013_CalificacionCualitativa_Rpt.resx">
+      <DependentUpon>ACA_013_CalificacionCualitativa_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_014_CalificacionCualitativa_Rpt.resx">
+      <DependentUpon>ACA_014_CalificacionCualitativa_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_014_Conducta_Rpt.resx">
       <DependentUpon>ACA_014_Conducta_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_013_EquivalenciaConducta_Rpt.resx">
+      <DependentUpon>ACA_013_EquivalenciaConducta_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_014_EquivalenciaConducta_Rpt.resx">
+      <DependentUpon>ACA_014_EquivalenciaConducta_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_014_Equivalencia_Rpt.resx">
       <DependentUpon>ACA_014_Equivalencia_Rpt.cs</DependentUpon>

@@ -1536,6 +1536,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
           <Parameter Name="IdCurso" Type="int" Mode="In" />
           <Parameter Name="IdParalelo" Type="int" Mode="In" />
           <Parameter Name="IdParcial" Type="int" Mode="In" />
+          <Parameter Name="IdAlumno" Type="decimal" Mode="In" />
         </Function>
         <Function Name="SPACA_014" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -1545,6 +1546,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
           <Parameter Name="IdJornada" Type="int" Mode="In" />
           <Parameter Name="IdCurso" Type="int" Mode="In" />
           <Parameter Name="IdParalelo" Type="int" Mode="In" />
+          <Parameter Name="IdAlumno" Type="decimal" Mode="In" />
         </Function>
         <Function Name="SPACA_014_Conducta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -2771,6 +2773,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
             <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
             <Parameter Name="IdParcial" Mode="In" Type="Int32" />
+            <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="SPACA_014" ReturnType="Collection(ModelReportes.SPACA_014_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
@@ -2780,6 +2783,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
             <Parameter Name="IdJornada" Mode="In" Type="Int32" />
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
             <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
+            <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACA_001_Result">

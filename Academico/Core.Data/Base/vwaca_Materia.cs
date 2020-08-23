@@ -26,5 +26,7 @@ namespace Core.Data.Base
         public string NomMateriaGrupo { get; set; }
         public bool EsObligatorio { get; set; }
         public bool Estado { get; set; }
+        public Nullable<int> IdCatalogoTipoCalificacion { get; set; }
+        public string NomCatalogo { get; set; }
     }
 }

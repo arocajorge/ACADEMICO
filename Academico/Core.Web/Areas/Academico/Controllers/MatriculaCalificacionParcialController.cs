@@ -470,7 +470,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(OrdenAnterior));
                     var info_cal_anteriores = bus_calificacion_parcial.GetInfo(info_matricula.IdEmpresa, info_matricula.IdMatricula, info_parcial_anterior.IdCatalogoParcial, registro_editar.IdMateria, Convert.ToDecimal(registro_editar.IdProfesor));
 
-                    if (Convert.ToDecimal(info_cal_anteriores.Calificacion1)== 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion2) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion3) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion4) ==  0  || Convert.ToDecimal(info_cal_anteriores.Evaluacion) == 0)
+                    if (info_cal_anteriores.Calificacion1==null  || info_cal_anteriores.Calificacion2==null || info_cal_anteriores.Calificacion3==null || info_cal_anteriores.Calificacion4==null  || info_cal_anteriores.Evaluacion == null)
                     {
                         ViewBag.MostrarError = "El estudiante tiene calificaciones pendientes de ingresar en el parcial anterior.";
                         actualizar = false;
@@ -749,6 +749,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdCurso = IdCurso,
                 IdParalelo = IdParalelo,
                 IdMateria = IdMateria,
+                IdCatalogoTipo = IdCatalogoTipo,
                 IdCatalogoParcial = IdCatalogoParcial,
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
             };
@@ -830,7 +831,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(item.IdEmpresa, item.IdSede, item.IdAnio, Convert.ToInt32(OrdenAnterior));
                             var info_cal_anteriores = bus_calificacion_parcial.GetInfo(item.IdEmpresa, item.IdMatricula, info_parcial_anterior.IdCatalogoParcial, item.IdMateria, Convert.ToDecimal(item.IdProfesor));
 
-                            if (Convert.ToDecimal(info_cal_anteriores.Calificacion1) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion2) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion3) == 0 || Convert.ToDecimal(info_cal_anteriores.Calificacion4) == 0 || Convert.ToDecimal(info_cal_anteriores.Evaluacion) == 0)
+                            if (info_cal_anteriores.Calificacion1==null || info_cal_anteriores.Calificacion2 == null || info_cal_anteriores.Calificacion3 == null || info_cal_anteriores.Calificacion4 == null || info_cal_anteriores.Evaluacion == null)
                             {
                                 ViewBag.mensaje = "El estudiante con IdMatricula "+item.IdMatricula+" tiene calificaciones pendientes de ingresar en el parcial anterior.";
                                 guardar = false;

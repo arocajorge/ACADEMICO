@@ -27,5 +27,6 @@ namespace Core.Data.Base
         public string pe_nombreCompleto { get; set; }
         public string NomMateria { get; set; }
         public string IdUsuario { get; set; }
+        public Nullable<int> IdCatalogoTipoCalificacion { get; set; }
     }
 }

@@ -19,6 +19,8 @@ namespace Core.Data.Base
         public int Secuencia { get; set; }
         public string Letra { get; set; }
         public decimal Calificacion { get; set; }
+        public string Equivalencia { get; set; }
+        public string DescripcionEquivalencia { get; set; }
         public Nullable<bool> IngresaMotivo { get; set; }
         public Nullable<bool> IngresaProfesor { get; set; }
         public Nullable<bool> IngresaInspector { get; set; }

@@ -32,6 +32,7 @@ namespace Core.Info.Academico
         public string pe_nombreCompleto { get; set; }
         public string Codigo { get; set; }
         public string NomMateria { get; set; }
+        public int IdCatalogoTipoCalificacion { get; set; }
         #endregion
     }
 }

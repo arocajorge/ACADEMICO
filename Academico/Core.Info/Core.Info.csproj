@@ -44,6 +44,7 @@
     <Compile Include="Academico\aca_AlumnoDocumento_Info.cs" />
     <Compile Include="Academico\aca_AlumnoRetiro_Info.cs" />
     <Compile Include="Academico\aca_Alumno_Info.cs" />
+    <Compile Include="Academico\aca_AnioLectivoCalificacionCualitativa_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivoCalificacionHistorico_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivoConductaEquivalencia_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivoEquivalenciaPromedio_Info.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Academico\aca_CatalogoTipo_Info.cs" />
     <Compile Include="Academico\aca_Catalogo_Info.cs" />
     <Compile Include="Academico\aca_MatriculaAsistencia_Info.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacionCualitativa_Info.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacionParcial_Info.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Det_Info.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Info.cs" />
@@ -280,6 +282,10 @@
     <Compile Include="Reportes\Academico\ACA_010_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_011_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_012_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_014_EquivalenciaConducta.cs" />
+    <Compile Include="Reportes\Academico\ACA_014_EquivalenciaCualitativa.cs" />
+    <Compile Include="Reportes\Academico\ACA_013_EquivalenciaCualitativa.cs" />
+    <Compile Include="Reportes\Academico\ACA_013_EquivalenciaConducta.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_013_EquivalenciaPromedio_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Asistencia_Info.cs" />

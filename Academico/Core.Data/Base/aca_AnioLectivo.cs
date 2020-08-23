@@ -17,7 +17,6 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public aca_AnioLectivo()
         {
-            this.aca_AnioLectivo_Curso_Materia = new HashSet<aca_AnioLectivo_Curso_Materia>();
             this.aca_AnioLectivo_Curso_Paralelo = new HashSet<aca_AnioLectivo_Curso_Paralelo>();
             this.aca_AnioLectivo_Jornada_Curso = new HashSet<aca_AnioLectivo_Jornada_Curso>();
             this.aca_AnioLectivo_NivelAcademico_Jornada = new HashSet<aca_AnioLectivo_NivelAcademico_Jornada>();
@@ -30,6 +29,8 @@ namespace Core.Data.Base
             this.aca_AnioLectivoEquivalenciaPromedio = new HashSet<aca_AnioLectivoEquivalenciaPromedio>();
             this.aca_AnioLectivo_Periodo = new HashSet<aca_AnioLectivo_Periodo>();
             this.aca_AnioLectivoConductaEquivalencia = new HashSet<aca_AnioLectivoConductaEquivalencia>();
+            this.aca_AnioLectivo_Curso_Materia = new HashSet<aca_AnioLectivo_Curso_Materia>();
+            this.aca_AnioLectivoCalificacionCualitativa = new HashSet<aca_AnioLectivoCalificacionCualitativa>();
         }
     
         public int IdEmpresa { get; set; }
@@ -51,8 +52,6 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivo_Curso_Paralelo> aca_AnioLectivo_Curso_Paralelo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -77,5 +76,9 @@ namespace Core.Data.Base
         public virtual ICollection<aca_AnioLectivo_Periodo> aca_AnioLectivo_Periodo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivoConductaEquivalencia> aca_AnioLectivoConductaEquivalencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_AnioLectivoCalificacionCualitativa> aca_AnioLectivoCalificacionCualitativa { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Core.Bus.Academico;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using Core.Web.Helps;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Materia_List Lista_Materia = new aca_Materia_List();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        aca_Catalogo_Bus bus_catalogo = new aca_Catalogo_Bus();
         string mensaje = string.Empty;
         #endregion
 
@@ -70,6 +72,9 @@ namespace Core.Web.Areas.Academico.Controllers
 
             var lst_areas = bus_area.GetList(IdEmpresa, false);
             ViewBag.lst_areas = lst_areas;
+
+            var lst_tipo_calificacion = bus_catalogo.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.TIPOCAL), false);
+            ViewBag.lst_tipo_calificacion = lst_tipo_calificacion;
         }
         #endregion
 

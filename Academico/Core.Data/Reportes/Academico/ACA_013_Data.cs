@@ -10,7 +10,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_013_Data
     {
-        public List<ACA_013_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
+        public List<ACA_013_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial, decimal IdAlumno)
         {
             try
             {
@@ -19,7 +19,7 @@ namespace Core.Data.Reportes.Academico
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
                     Context.Database.CommandTimeout=5000;
-                    var lst = Context.SPACA_013(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial).ToList();
+                    var lst = Context.SPACA_013(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial, IdAlumno).ToList();
 
                     foreach (var q in lst)
                     {
@@ -110,6 +110,71 @@ namespace Core.Data.Reportes.Academico
                             Descripcion=q.Descripcion,
                             ValorMinimo=q.ValorMinimo,
                             ValorMaximo=q.ValorMaximo
+                        });
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ACA_013_EquivalenciaCualitativa_Info> get_list_EquivalenciaCualitativa(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+
+                List<ACA_013_EquivalenciaCualitativa_Info> Lista = new List<ACA_013_EquivalenciaCualitativa_Info>();
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var lst = Context.aca_AnioLectivoCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
+
+                    foreach (var q in lst)
+                    {
+                        Lista.Add(new ACA_013_EquivalenciaCualitativa_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            Codigo = q.Codigo,
+                            IdCalificacionCualitativa = q.IdCalificacionCualitativa,
+                            DescripcionCorta = q.DescripcionCorta,
+                            DescripcionLarga = q.DescripcionLarga
+                        });
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public List<ACA_013_EquivalenciaConducta_Info> get_list_EquivalenciaConducta(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+
+                List<ACA_013_EquivalenciaConducta_Info> Lista = new List<ACA_013_EquivalenciaConducta_Info>();
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var lst = Context.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
+
+                    foreach (var q in lst)
+                    {
+                        Lista.Add(new ACA_013_EquivalenciaConducta_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            Letra = q.Letra,
+                            Equivalencia = q.Equivalencia,
+                            DescripcionEquivalencia = q.DescripcionEquivalencia
                         });
                     }
                 }

@@ -74,11 +74,33 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
+                    <label for="Sede">Equivalencia</label>
+                    @Html.TextBoxFor(q => q.Equivalencia, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Equivalencia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
                     <label for="Sede">Calificación</label>
                     @Html.TextBoxFor(q => q.Calificacion, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Calificacion, "", new { @class = "text-danger" })
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Sede">Descripcion</label>
+                    @Html.TextBoxFor(q => q.DescripcionEquivalencia, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.DescripcionEquivalencia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="obligatorio"></label>
@@ -90,10 +112,6 @@
                     @Html.ValidationMessageFor(q => q.IngresaMotivo, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="obligatorio"></label>

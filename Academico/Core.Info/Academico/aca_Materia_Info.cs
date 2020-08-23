@@ -20,6 +20,8 @@ namespace Core.Info.Academico
         public bool EsObligatorio { get; set; }
         [Required(ErrorMessage = "El campo orden es obligatorio")]
         public int OrdenMateria { get; set; }
+        [Required(ErrorMessage = "El campo tipo de calificación es obligatorio")]
+        public Nullable<int> IdCatalogoTipoCalificacion { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
