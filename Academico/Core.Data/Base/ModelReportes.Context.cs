@@ -611,5 +611,59 @@ namespace Core.Data.Base
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_014_Result>("SPACA_014", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter, idAlumnoParameter);
         }
+    
+        public virtual ObjectResult<SPACA_016_Result> SPACA_016(Nullable<int> idEmpresa, Nullable<int> idAnio, Nullable<int> idSede, Nullable<int> idNivel, Nullable<int> idJornada, Nullable<int> idCurso, Nullable<int> idParalelo, Nullable<int> idCatalogoParcial)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idAnioParameter = idAnio.HasValue ?
+                new ObjectParameter("IdAnio", idAnio) :
+                new ObjectParameter("IdAnio", typeof(int));
+    
+            var idSedeParameter = idSede.HasValue ?
+                new ObjectParameter("IdSede", idSede) :
+                new ObjectParameter("IdSede", typeof(int));
+    
+            var idNivelParameter = idNivel.HasValue ?
+                new ObjectParameter("IdNivel", idNivel) :
+                new ObjectParameter("IdNivel", typeof(int));
+    
+            var idJornadaParameter = idJornada.HasValue ?
+                new ObjectParameter("IdJornada", idJornada) :
+                new ObjectParameter("IdJornada", typeof(int));
+    
+            var idCursoParameter = idCurso.HasValue ?
+                new ObjectParameter("IdCurso", idCurso) :
+                new ObjectParameter("IdCurso", typeof(int));
+    
+            var idParaleloParameter = idParalelo.HasValue ?
+                new ObjectParameter("IdParalelo", idParalelo) :
+                new ObjectParameter("IdParalelo", typeof(int));
+    
+            var idCatalogoParcialParameter = idCatalogoParcial.HasValue ?
+                new ObjectParameter("IdCatalogoParcial", idCatalogoParcial) :
+                new ObjectParameter("IdCatalogoParcial", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_016_Result>("SPACA_016", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter, idCatalogoParcialParameter);
+        }
+    
+        public virtual ObjectResult<SPACA_013_MatriculaCalificacionCualitativa_Result> SPACA_013_MatriculaCalificacionCualitativa(Nullable<int> idEmpresa, Nullable<decimal> idMatricula, Nullable<int> idCatalogoParcial)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idMatriculaParameter = idMatricula.HasValue ?
+                new ObjectParameter("IdMatricula", idMatricula) :
+                new ObjectParameter("IdMatricula", typeof(decimal));
+    
+            var idCatalogoParcialParameter = idCatalogoParcial.HasValue ?
+                new ObjectParameter("IdCatalogoParcial", idCatalogoParcial) :
+                new ObjectParameter("IdCatalogoParcial", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_013_MatriculaCalificacionCualitativa_Result>("SPACA_013_MatriculaCalificacionCualitativa", idEmpresaParameter, idMatriculaParameter, idCatalogoParcialParameter);
+        }
     }
 }

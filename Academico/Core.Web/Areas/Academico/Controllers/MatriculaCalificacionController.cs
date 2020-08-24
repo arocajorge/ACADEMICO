@@ -116,7 +116,13 @@ namespace Core.Web.Areas.Academico.Controllers
                                         IdMateria = item_materias_cuant.IdMateria,
                                         IdCatalogoParcial = item_p.IdCatalogoParcial,
                                         IdProfesor = item_materias_cuant.IdProfesor,
-                                        IdCalificacionCualitativa = (calificacion_cualitativa_parcial == null ? null : calificacion_cualitativa_parcial.IdCalificacionCualitativa)
+                                        IdCalificacionCualitativa = (calificacion_cualitativa_parcial == null ? null : calificacion_cualitativa_parcial.IdCalificacionCualitativa),
+                                        Conducta = (calificacion_cualitativa_parcial == null ? null : calificacion_cualitativa_parcial.Conducta),
+                                        MotivoConducta = (calificacion_cualitativa_parcial == null ? null : calificacion_cualitativa_parcial.MotivoConducta),
+                                        IdUsuarioCreacion = (calificacion_cualitativa_parcial == null ? SessionFixed.IdUsuario :calificacion_cualitativa_parcial.IdUsuarioCreacion),
+                                        FechaCreacion = (calificacion_cualitativa_parcial == null ? DateTime.Now : calificacion_cualitativa_parcial.FechaCreacion),
+                                        IdUsuarioModificacion = (calificacion_cualitativa_parcial == null ? null : SessionFixed.IdUsuario),
+                                        FechaModificacion = (calificacion_cualitativa_parcial == null ? DateTime.Now : calificacion_cualitativa_parcial.FechaModificacion)
                                     };
                                     lst_calificacion_cualitativa.Add(info_cualitativa);
                                 }
@@ -157,7 +163,10 @@ namespace Core.Web.Areas.Academico.Controllers
                                         MotivoCalificacion = (calificacion_parcial == null ? null : calificacion_parcial.MotivoCalificacion),
                                         MotivoConducta = (calificacion_parcial == null ? null : calificacion_parcial.MotivoConducta),
                                         AccionRemedial = (calificacion_parcial == null ? null : calificacion_parcial.AccionRemedial),
-                                        IdUsuarioCreacion = SessionFixed.IdUsuario
+                                        IdUsuarioCreacion = (calificacion_parcial == null ? SessionFixed.IdUsuario : calificacion_parcial.IdUsuarioCreacion),
+                                        FechaCreacion = (calificacion_parcial == null ? DateTime.Now : calificacion_parcial.FechaCreacion),
+                                        IdUsuarioModificacion = (calificacion_parcial == null ? null : SessionFixed.IdUsuario),
+                                        FechaModificacion = (calificacion_parcial == null ? DateTime.Now : calificacion_parcial.FechaModificacion),
                                     };
 
                                     lst_calificacion_parcial.Add(info_calificacion_parcial);

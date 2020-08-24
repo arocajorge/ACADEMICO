@@ -309,7 +309,9 @@ namespace Core.Data.Academico
                                     MotivoConducta = info.MotivoConducta,
                                     AccionRemedial = info.AccionRemedial,
                                     IdUsuarioCreacion= info.IdUsuarioCreacion,
-                                    FechaCreacion = DateTime.Now
+                                    FechaCreacion = info.FechaCreacion,
+                                    IdUsuarioModificacion = info.IdUsuarioModificacion,
+                                    FechaModificacion = info.FechaModificacion
                                 };
 
                                 Context.aca_MatriculaCalificacionParcial.Add(Entity);

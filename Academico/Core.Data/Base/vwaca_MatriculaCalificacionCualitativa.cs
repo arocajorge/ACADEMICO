@@ -29,5 +29,10 @@ namespace Core.Data.Base
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }
         public Nullable<int> IdCalificacionCualitativa { get; set; }
+        public Nullable<int> Conducta { get; set; }
+        public string MotivoConducta { get; set; }
+        public string CodigoCalificacion { get; set; }
+        public string DescripcionCorta { get; set; }
+        public string Letra { get; set; }
     }
 }

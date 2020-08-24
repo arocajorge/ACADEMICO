@@ -24,7 +24,9 @@ namespace Core.Web.Areas.Reportes.Controllers
         string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Academico.repx";
         aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
         aca_MatriculaCalificacion_Bus bus_calificacion = new aca_MatriculaCalificacion_Bus();
+        aca_MatriculaCalificacionCualitativa_Bus bus_calificacion_cualitativa = new aca_MatriculaCalificacionCualitativa_Bus();
         aca_ReporteCalificacion_Combos_List Lista_CombosCalificaciones = new aca_ReporteCalificacion_Combos_List();
+        aca_ReporteCalificacionCualitativa_Combos_List Lista_CombosCalificacionesCualitativas = new aca_ReporteCalificacionCualitativa_Combos_List();
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
         aca_Rubro_Bus bus_rubro = new aca_Rubro_Bus();
         #endregion
@@ -145,6 +147,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             return PartialView("_ComboBoxPartial_Alumno", new aca_Matricula_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso, IdParalelo = IdParalelo });
         }
         #endregion
+
         #region ACA_001
         public ActionResult ACA_001(int IdEmpresa = 0, decimal IdAlumno = 0, int IdAnio = 0)
         {
@@ -1698,6 +1701,94 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
 
         #endregion
+
+        #region ACA_016
+        private void cargar_combos_ACA_016(aca_MatriculaCalificacionCualitativa_Info model)
+        {
+            aca_Catalogo_Bus bus_catalogotipo = new aca_Catalogo_Bus();
+            Dictionary<string, string> lst_quimestres = new Dictionary<string, string>();
+            lst_quimestres.Add("6", "QUIMESTRE 1");
+            lst_quimestres.Add("7", "QUIMESTRE 2");
+            ViewBag.lst_quimestres = lst_quimestres;
+
+            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
+            ViewBag.lst_parcial = lst_parcial;
+        }
+        public ActionResult ACA_016()
+        {
+            aca_MatriculaCalificacionCualitativa_Info model = new aca_MatriculaCalificacionCualitativa_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_cualitativa.getList_Combos(model.IdEmpresa, IdProfesor, EsSuperAdmin);
+            Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            ACA_016_Rpt report = new ACA_016_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_016");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdMateria.Value = model.IdMateria;
+            report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
+            report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            cargar_combos_ACA_016(model);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_016(aca_MatriculaCalificacionCualitativa_Info model)
+        {
+            ACA_016_Rpt report = new ACA_016_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_016");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdMateria.Value = model.IdMateria;
+            report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
+            report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            cargar_combos_ACA_016(model);
+            return View(model);
+        }
+
+        #endregion
     }
 
     public class aca_ReporteCalificacion_Combos_List
@@ -1715,6 +1806,26 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
 
         public void set_list(List<aca_MatriculaCalificacion_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+    
+    public class aca_ReporteCalificacionCualitativa_Combos_List
+    {
+        string Variable = "aca_ReporteCalificacionCualitativa_Info";
+        public List<aca_MatriculaCalificacionCualitativa_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<aca_MatriculaCalificacionCualitativa_Info> list = new List<aca_MatriculaCalificacionCualitativa_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<aca_MatriculaCalificacionCualitativa_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<aca_MatriculaCalificacionCualitativa_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }

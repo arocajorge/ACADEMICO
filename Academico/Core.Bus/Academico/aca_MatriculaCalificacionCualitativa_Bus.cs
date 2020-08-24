@@ -48,7 +48,7 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
-        public List<aca_MatriculaCalificacionCualitativa_Info> getList_Combos(int IdEmpresa, decimal IdProfesor, bool EsSuperAdmin)
+        public List<aca_MatriculaCalificacion_Info> getList_Combos(int IdEmpresa, decimal IdProfesor, bool EsSuperAdmin)
         {
             try
             {

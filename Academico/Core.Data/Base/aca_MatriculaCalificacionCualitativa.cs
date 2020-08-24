@@ -20,6 +20,12 @@ namespace Core.Data.Base
         public int IdCatalogoParcial { get; set; }
         public Nullable<decimal> IdProfesor { get; set; }
         public Nullable<int> IdCalificacionCualitativa { get; set; }
+        public Nullable<int> Conducta { get; set; }
+        public string MotivoConducta { get; set; }
+        public string IdUsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public string IdUsuarioModificacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
     
         public virtual aca_AnioLectivoCalificacionCualitativa aca_AnioLectivoCalificacionCualitativa { get; set; }
         public virtual aca_Catalogo aca_Catalogo { get; set; }

@@ -80,7 +80,7 @@
         {
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Alumno";
-            column.Width = Unit.Percentage(50);
+            column.Width = Unit.Percentage(40);
             column.VisibleIndex = 2;
             column.Visible = true;
             column.ReadOnly = true;
@@ -90,7 +90,7 @@
         {
             column.FieldName = "IdCalificacionCualitativa";
             column.Caption = "Calificación";
-            column.Width = Unit.Percentage(30);
+            column.Width = Unit.Percentage(10);
             column.EditorProperties().ComboBox(p =>
             {
                 p.Columns.Add("DescripcionCorta", "Calificación").Width = Unit.Percentage(100);
@@ -101,7 +101,33 @@
             });
             column.VisibleIndex = 3;
         });
-
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Conducta";
+            column.Caption = "Conducta";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("Letra", "Conducta").Width = Unit.Percentage(100);
+                p.TextField = "Letra";
+                p.ValueField = "Secuencia";
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_conducta;
+                p.ClientSideEvents.ValueChanged = "function(s, e){ ValidarConducta();}";
+            });
+            column.VisibleIndex = 4;
+            column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "MotivoConducta";
+            column.Caption = "Motivo Conducta";
+            column.Width = Unit.Percentage(20);
+            column.VisibleIndex = 5;
+            column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
         settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {} }";
 

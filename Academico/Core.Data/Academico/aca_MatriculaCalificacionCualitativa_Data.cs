@@ -32,7 +32,9 @@ namespace Core.Data.Academico
                             IdMateria = q.IdMateria,
                             IdCatalogoParcial = q.IdCatalogoParcial,
                             IdProfesor = q.IdProfesor,
-                            IdCalificacionCualitativa = q.IdCalificacionCualitativa
+                            IdCalificacionCualitativa = q.IdCalificacionCualitativa,
+                            Conducta = q.Conducta,
+                            MotivoConducta = q.MotivoConducta
                         });
                     });
                 }
@@ -70,7 +72,15 @@ namespace Core.Data.Academico
                             Codigo = q.Codigo,
                             pe_nombreCompleto = q.pe_nombreCompleto,
                             IdCatalogoParcial = q.IdCatalogoParcial,
-                            IdCalificacionCualitativa = q.IdCalificacionCualitativa
+                            IdCalificacionCualitativa = q.IdCalificacionCualitativa,
+                            Conducta = q.Conducta,
+                            MotivoConducta = q.MotivoConducta,
+                            Letra = q.Letra,
+                            CodigoCalificacion = q.CodigoCalificacion,
+                            DescripcionCorta = q.DescripcionCorta,
+                            RegistroValido = true,
+                            RegistroValidoCalificacion = true,
+                            RegistroValidoConducta = true
                         });
                     });
                 }
@@ -107,7 +117,15 @@ namespace Core.Data.Academico
                             Codigo = q.Codigo,
                             pe_nombreCompleto = q.pe_nombreCompleto,
                             IdCatalogoParcial = q.IdCatalogoParcial,
-                            IdCalificacionCualitativaParcial = q.IdCalificacionCualitativa
+                            IdCalificacionCualitativaParcial = q.IdCalificacionCualitativa,
+                            Conducta = q.Conducta,
+                            MotivoConducta = q.MotivoConducta,
+                            Letra = q.Letra,
+                            CodigoCalificacion = q.CodigoCalificacion,
+                            DescripcionCorta = q.DescripcionCorta,
+                            RegistroValido = true,
+                            RegistroValidoCalificacion = true,
+                            RegistroValidoConducta = true
                         });
                     });
                 }
@@ -141,7 +159,9 @@ namespace Core.Data.Academico
                         IdMateria = Entity.IdMateria,
                         IdProfesor = Entity.IdProfesor,
                         IdCatalogoParcial = Entity.IdCatalogoParcial,
-                        IdCalificacionCualitativa = Entity.IdCalificacionCualitativa
+                        IdCalificacionCualitativa = Entity.IdCalificacionCualitativa,
+                        Conducta = Entity.Conducta,
+                        MotivoConducta = Entity.MotivoConducta
                     };
 
                 }
@@ -153,11 +173,11 @@ namespace Core.Data.Academico
                 throw;
             }
         }
-        public List<aca_MatriculaCalificacionCualitativa_Info> getList_Combos(int IdEmpresa, decimal IdProfesor, bool EsSuperAdmin)
+        public List<aca_MatriculaCalificacion_Info> getList_Combos(int IdEmpresa, decimal IdProfesor, bool EsSuperAdmin)
         {
             try
             {
-                List<aca_MatriculaCalificacionCualitativa_Info> Lista = new List<aca_MatriculaCalificacionCualitativa_Info>();
+                List<aca_MatriculaCalificacion_Info> Lista = new List<aca_MatriculaCalificacion_Info>();
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
@@ -167,7 +187,7 @@ namespace Core.Data.Academico
 
                     lst.ForEach(q =>
                     {
-                        Lista.Add(new aca_MatriculaCalificacionCualitativa_Info
+                        Lista.Add(new aca_MatriculaCalificacion_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdMatricula = q.IdMatricula,
@@ -245,7 +265,13 @@ namespace Core.Data.Academico
                                     IdMateria = info.IdMateria,
                                     IdCatalogoParcial = info.IdCatalogoParcial,
                                     IdProfesor = info.IdProfesor,
-                                    IdCalificacionCualitativa = info.IdCalificacionCualitativa
+                                    IdCalificacionCualitativa = info.IdCalificacionCualitativa,
+                                    Conducta = info.Conducta,
+                                    MotivoConducta = info.MotivoConducta,
+                                    IdUsuarioCreacion = info.IdUsuarioCreacion,
+                                    FechaCreacion = info.FechaCreacion,
+                                    IdUsuarioModificacion = info.IdUsuarioModificacion,
+                                    FechaModificacion = info.FechaModificacion
                                 };
 
                                 Context.aca_MatriculaCalificacionCualitativa.Add(Entity);
@@ -276,11 +302,12 @@ namespace Core.Data.Academico
                     if (Entity == null)
                         return false;
 
-                    //Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
-                    //Entity.FechaModificacion = DateTime.Now;
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = DateTime.Now;
                     Entity.IdCalificacionCualitativa = info.IdCalificacionCualitativa;
+                    Entity.Conducta = info.Conducta;
+                    Entity.MotivoConducta = info.MotivoConducta;
 
-                    
                     Context.SaveChanges();
                 }
 

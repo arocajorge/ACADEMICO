@@ -124,10 +124,10 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_AnioLectivo_Curso_Materia> vwaca_AnioLectivo_Curso_Materia { get; set; }
         public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor> vwaca_AnioLectivo_Paralelo_Profesor { get; set; }
-        public virtual DbSet<aca_MatriculaCalificacionCualitativa> aca_MatriculaCalificacionCualitativa { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor_CalificacionesCualitativas> vwaca_AnioLectivo_Paralelo_Profesor_CalificacionesCualitativas { get; set; }
-        public virtual DbSet<vwaca_MatriculaCalificacionCualitativa> vwaca_MatriculaCalificacionCualitativa { get; set; }
         public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
+        public virtual DbSet<aca_MatriculaCalificacionCualitativa> aca_MatriculaCalificacionCualitativa { get; set; }
+        public virtual DbSet<vwaca_MatriculaCalificacionCualitativa> vwaca_MatriculaCalificacionCualitativa { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {
