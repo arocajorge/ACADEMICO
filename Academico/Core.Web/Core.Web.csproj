@@ -531,6 +531,36 @@
     <Compile Include="Reportes\Academico\ACA_016_Rpt.Designer.cs">
       <DependentUpon>ACA_016_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_017_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_017_Rpt.Designer.cs">
+      <DependentUpon>ACA_017_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_018_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_018_Rpt.Designer.cs">
+      <DependentUpon>ACA_018_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_019_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_019_Rpt.Designer.cs">
+      <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_021_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_021_Rpt.Designer.cs">
+      <DependentUpon>ACA_021_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_020_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_020_Rpt.Designer.cs">
+      <DependentUpon>ACA_020_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -8967,6 +8997,11 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbNivelAlumno.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbCursoAlumno.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_016.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_017.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_018.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_019.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_020.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_021.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9141,6 +9176,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_016_Rpt.resx">
       <DependentUpon>ACA_016_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_017_Rpt.resx">
+      <DependentUpon>ACA_017_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_018_Rpt.resx">
+      <DependentUpon>ACA_018_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_019_Rpt.resx">
+      <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_021_Rpt.resx">
+      <DependentUpon>ACA_021_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_020_Rpt.resx">
+      <DependentUpon>ACA_020_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.resx">
       <DependentUpon>BAN_001_cancelaciones_Rpt.cs</DependentUpon>

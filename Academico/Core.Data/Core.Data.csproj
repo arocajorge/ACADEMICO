@@ -360,6 +360,21 @@
     <Compile Include="Base\VWACA_013_EquivalenciaPromedio.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWACA_017.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWACA_018.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWACA_019.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWACA_020.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\VWACA_021.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_Alumno_PeriodoActual.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -1900,6 +1915,10 @@
     <Compile Include="Reportes\Academico\ACA_016_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_017_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_013_MatriculaCalificacionCualitativa_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_018_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_021_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_020_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_019_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Data.cs" />
     <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Data.cs" />

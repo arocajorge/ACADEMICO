@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Reportes.Academico
 {
-    public class ACA_017_Info
+    public class ACA_021_Info
     {
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
         public string Codigo { get; set; }
         public decimal IdAlumno { get; set; }
-        public decimal IdPersona { get; set; }
+        public Nullable<decimal> IdPersona { get; set; }
         public string NombreAlumno { get; set; }
-        public string pe_cedulaRuc { get; set; }
+        public string CedulaAlumno { get; set; }
         public int IdAnio { get; set; }
         public int IdSede { get; set; }
         public int IdNivel { get; set; }
@@ -33,6 +33,9 @@ namespace Core.Info.Reportes.Academico
         public Nullable<int> OrdenParalelo { get; set; }
         public System.DateTime Fecha { get; set; }
         public Nullable<bool> EsRetirado { get; set; }
+        public int IdPlantilla { get; set; }
+        public string NomPlantilla { get; set; }
+        public string NomPlantillaTipo { get; set; }
         public string FechaActual { get; set; }
     }
 }

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_017_Data
+    public class ACA_020_Data
     {
-        public List<ACA_017_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, bool MostrarRetirados)
+        public List<ACA_020_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, bool MostrarRetirados)
         {
             try
             {
@@ -32,28 +32,34 @@ namespace Core.Data.Reportes.Academico
                 decimal IdAlumnoIni = IdAlumno;
                 decimal IdAlumnoFin = IdAlumno == 0 ? 999999999999 : IdAlumno;
 
-                List<ACA_017_Info> Lista = new List<ACA_017_Info>();
+                List<ACA_020_Info> Lista = new List<ACA_020_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
                     Context.Database.CommandTimeout = 5000;
-                    var lst = Context.VWACA_017.Where(q=> q.IdEmpresa==IdEmpresa && q.IdAnio==IdAnio
+                    var lst = Context.VWACA_020.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio
                     && IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin &&
                     IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin &&
                     IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
                     IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin &&
                     IdParaleloIni <= q.IdParalelo && q.IdParalelo <= IdParaleloFin &&
                     IdAlumnoIni <= q.IdAlumno && q.IdAlumno <= IdAlumnoFin &&
-                    q.EsRetirado == (MostrarRetirados==true ? q.EsRetirado : false)).ToList();
+                    q.EsRetirado == (MostrarRetirados == true ? q.EsRetirado : false)).ToList();
 
                     foreach (var q in lst)
                     {
-                        Lista.Add(new ACA_017_Info
+                        Lista.Add(new ACA_020_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdMatricula = q.IdMatricula,
                             IdAlumno = q.IdAlumno,
-                            pe_cedulaRuc = q.pe_cedulaRuc,
+                            IdPersonaR = q.IdPersonaR,
+                            CedulaAlumno = q.CedulaAlumno,
                             NombreAlumno = q.NombreAlumno,
+                            CedulaFactura = q.CedulaFactura,
+                            NombreFactura=q.NombreFactura,
+                            CedulaLegal = q.CedulaLegal,
+                            NombreLegal=q.NombreLegal,
+                            IdPersonaF = q.IdPersonaF,
                             Codigo = q.Codigo,
                             IdAnio = q.IdAnio,
                             IdSede = q.IdSede,
@@ -72,9 +78,9 @@ namespace Core.Data.Reportes.Academico
                             OrdenCurso = q.OrdenCurso,
                             OrdenParalelo = q.OrdenParalelo,
                             EsRetirado = q.EsRetirado,
-                            Fecha =q.Fecha,
+                            Fecha = q.Fecha,
                             IdPersona = q.IdPersona,
-                            FechaActual=DateTime.Now.ToString("d' de 'MMMM' de 'yyyy")
+                            FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy")
                         });
                     }
                 }
@@ -87,6 +93,5 @@ namespace Core.Data.Reportes.Academico
                 throw;
             }
         }
-
     }
 }

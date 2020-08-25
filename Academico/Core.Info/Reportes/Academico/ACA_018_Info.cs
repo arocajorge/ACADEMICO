@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Reportes.Academico
 {
-    public class ACA_017_Info
+    public class ACA_018_Info
     {
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
@@ -33,6 +33,7 @@ namespace Core.Info.Reportes.Academico
         public Nullable<int> OrdenParalelo { get; set; }
         public System.DateTime Fecha { get; set; }
         public Nullable<bool> EsRetirado { get; set; }
+        public string FechaMatricula { get; set; }
         public string FechaActual { get; set; }
     }
 }

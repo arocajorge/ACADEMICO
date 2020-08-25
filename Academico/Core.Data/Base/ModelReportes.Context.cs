@@ -62,6 +62,11 @@ namespace Core.Data.Base
         public virtual DbSet<VWBAN_004> VWBAN_004 { get; set; }
         public virtual DbSet<VWFAC_002> VWFAC_002 { get; set; }
         public virtual DbSet<VWCXC_012> VWCXC_012 { get; set; }
+        public virtual DbSet<VWACA_017> VWACA_017 { get; set; }
+        public virtual DbSet<VWACA_018> VWACA_018 { get; set; }
+        public virtual DbSet<VWACA_019> VWACA_019 { get; set; }
+        public virtual DbSet<VWACA_020> VWACA_020 { get; set; }
+        public virtual DbSet<VWACA_021> VWACA_021 { get; set; }
     
         public virtual ObjectResult<SPACA_001_Result> SPACA_001(Nullable<int> idEmpresa, Nullable<decimal> idAlumno)
         {
