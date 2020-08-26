@@ -58,6 +58,7 @@
             this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField3 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrTable8 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow16 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell50 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -322,7 +323,8 @@
             this.xrPivotGrid1.Fields.AddRange(new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField[] {
             this.pivotGridField2,
             this.pivotGridField5,
-            this.pivotGridField1});
+            this.pivotGridField1,
+            this.pivotGridField3});
             this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(2.543131E-05F, 10F);
             this.xrPivotGrid1.Name = "xrPivotGrid1";
             this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
@@ -330,7 +332,6 @@
             this.xrPivotGrid1.OptionsPrint.PrintHorzLines = DevExpress.Utils.DefaultBoolean.True;
             this.xrPivotGrid1.OptionsPrint.PrintVertLines = DevExpress.Utils.DefaultBoolean.True;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
-            this.xrPivotGrid1.OptionsView.ShowColumnGrandTotals = false;
             this.xrPivotGrid1.OptionsView.ShowColumnHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowColumnTotals = false;
             this.xrPivotGrid1.OptionsView.ShowDataHeaders = false;
@@ -340,10 +341,6 @@
             // 
             // pivotGridField2
             // 
-            this.pivotGridField2.Appearance.FieldValueGrandTotal.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
-            this.pivotGridField2.Appearance.FieldValueTotal.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
-            this.pivotGridField2.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
-            this.pivotGridField2.Appearance.TotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.pivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
             this.pivotGridField2.AreaIndex = 0;
             this.pivotGridField2.Caption = "Tipo de nota";
@@ -353,7 +350,6 @@
             // 
             // pivotGridField5
             // 
-            this.pivotGridField5.Appearance.TotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField5.AreaIndex = 0;
             this.pivotGridField5.Caption = "V. Aplicado";
@@ -366,7 +362,6 @@
             // 
             // pivotGridField1
             // 
-            this.pivotGridField1.Appearance.TotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
             this.pivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField1.AreaIndex = 1;
             this.pivotGridField1.Caption = "V. Conciliado";
@@ -374,6 +369,16 @@
             this.pivotGridField1.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.pivotGridField1.FieldName = "Cruce";
             this.pivotGridField1.Name = "pivotGridField1";
+            // 
+            // pivotGridField3
+            // 
+            this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
+            this.pivotGridField3.AreaIndex = 2;
+            this.pivotGridField3.Caption = "Saldo";
+            this.pivotGridField3.CellFormat.FormatString = "n2";
+            this.pivotGridField3.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.pivotGridField3.FieldName = "Saldo";
+            this.pivotGridField3.Name = "pivotGridField3";
             // 
             // xrTable8
             // 
@@ -598,5 +603,6 @@
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField2;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField5;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField1;
+        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField3;
     }
 }

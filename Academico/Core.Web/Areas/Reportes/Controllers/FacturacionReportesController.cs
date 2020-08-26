@@ -105,8 +105,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.RequestParameters = false;
             model.DefaultPrinterSettingsUsing.UsePaperKind = false;
             //bus_factura.modificarEstadoImpresion(Convert.ToInt32(SessionFixed.IdEmpresa), IdSucursal, IdBodega, IdCbteVta, true);
-
-
+            
             return View(model);
         }
 
@@ -464,6 +463,82 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.p_IdNota.Value = IdNota;
             model.usuario = SessionFixed.IdUsuario;
             model.empresa = SessionFixed.NomEmpresa;
+            return View(model);
+        }
+        #endregion
+
+        #region FAC_009
+        public ActionResult FAC_009()
+        {
+            cl_filtros_facturacion_Info model = new cl_filtros_facturacion_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.fecha_ini = DateTime.Now.AddMonths(-1);
+            model.fecha_fin = DateTime.Now;
+            model.CreDeb = "C";
+            model.NaturalezaNota = null;
+
+            FAC_009_Rpt report = new FAC_009_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "FAC_009");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_FechaDesde.Value = model.fecha_ini;
+            report.p_FechaHasta.Value = model.fecha_fin;
+            report.p_IdTipoNota.Value = model.IdTipoNota ?? 0;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            
+            
+            FAC_009_Resumen_Rpt reportResumen = new FAC_009_Resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_FechaDesde.Value = model.fecha_ini;
+            reportResumen.p_FechaHasta.Value = model.fecha_fin;
+            reportResumen.p_IdTipoNota.Value = model.IdTipoNota ?? 0;
+            reportResumen.usuario = SessionFixed.IdUsuario;
+            reportResumen.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = reportResumen;
+            
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult FAC_009(cl_filtros_facturacion_Info model)
+        {
+            FAC_009_Rpt report = new FAC_009_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "FAC_009");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_FechaDesde.Value = model.fecha_ini;
+            report.p_FechaHasta.Value = model.fecha_fin;
+            report.p_IdTipoNota.Value = model.IdTipoNota;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            
+            FAC_005_Resumen_Rpt reportResumen = new FAC_005_Resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_FechaDesde.Value = model.fecha_ini;
+            reportResumen.p_FechaHasta.Value = model.fecha_fin;
+            reportResumen.p_IdTipoNota.Value = model.IdTipoNota ?? 0;
+            reportResumen.usuario = SessionFixed.IdUsuario;
+            reportResumen.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = reportResumen;
+            
             return View(model);
         }
         #endregion

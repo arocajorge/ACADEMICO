@@ -807,6 +807,18 @@
     <Compile Include="Reportes\Facturacion\FAC_008_Rpt.Designer.cs">
       <DependentUpon>FAC_008_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_009_Resumen_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_009_Resumen_Rpt.Designer.cs">
+      <DependentUpon>FAC_009_Resumen_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_009_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Facturacion\FAC_009_Rpt.Designer.cs">
+      <DependentUpon>FAC_009_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -9002,6 +9014,7 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_019.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_020.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_021.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_009.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9314,6 +9327,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_008_Rpt.resx">
       <DependentUpon>FAC_008_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_009_Resumen_Rpt.resx">
+      <DependentUpon>FAC_009_Resumen_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Facturacion\FAC_009_Rpt.resx">
+      <DependentUpon>FAC_009_Rpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
