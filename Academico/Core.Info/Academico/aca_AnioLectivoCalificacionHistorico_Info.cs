@@ -13,6 +13,7 @@ namespace Core.Info.Academico
         public int IdEmpresa { get; set; }
         [Required(ErrorMessage = "El campo año lectivo es obligatorio")]
         public int IdAnio { get; set; }
+        public Nullable<decimal> IdMatricula { get; set; }
         [Required(ErrorMessage = "El campo alumno es obligatorio")]
         public decimal IdAlumno { get; set; }
         [Required(ErrorMessage = "El campo curso es obligatorio")]

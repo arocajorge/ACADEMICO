@@ -30,5 +30,6 @@ namespace Core.Data.Base
         public string AntiguaInstitucion { get; set; }
         public int IdNivel { get; set; }
         public string Codigo { get; set; }
+        public Nullable<decimal> IdMatricula { get; set; }
     }
 }

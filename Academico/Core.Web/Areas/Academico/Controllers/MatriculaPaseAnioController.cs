@@ -216,7 +216,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     item.PaseAnio = PaseAnio;
 
                     var info_conducta = bus_conducta.GetInfo(item.IdEmpresa, item.IdMatricula);
-                    //var suma_conducta = (info_conducta.PromedioFinalQ1 == null ? info_conducta.PromedioQ1 : info_conducta.PromedioFinalQ1) + (info_conducta.PromedioFinalQ2 == null ? info_conducta.PromedioQ2 : info_conducta.PromedioFinalQ2);
+                    //var suma_conducta = (info_conducta.PromedioFinalQ1) + (info_conducta.PromedioFinalQ2);
                     //var promedio_conducta =  Math.Round(Convert.ToDecimal(suma_conducta / 2),2, MidpointRounding.AwayFromZero);
                     var info_conducta_promedio = bus_equi_conducta.GetInfoXPromedioConducta(item.IdEmpresa, item.IdAnio, Convert.ToDecimal(info_conducta.PromedioGeneral));
                     info_conducta.SecuenciaPromedioGeneral = (info_conducta_promedio==null ? (int?)null : info_conducta_promedio.Secuencia);
@@ -233,6 +233,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             IdEmpresa = item.IdEmpresa,
                             IdAnio = item.IdAnio,
                             IdAlumno = item.IdAlumno,
+                            IdMatricula = item.IdMatricula,
                             IdNivel = item.IdNivel,
                             IdCurso = item.IdCurso,
                             AntiguaInstitucion = "",
