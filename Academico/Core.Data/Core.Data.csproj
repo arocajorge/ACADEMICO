@@ -378,6 +378,9 @@
     <Compile Include="Base\vwaca_Alumno_PeriodoActual.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_AnioLectivoCalificacionHistorico.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_AnioLectivoConductaEquivalencia.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -1451,9 +1454,6 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AlumnoRetiro.cs">
-      <DependentUpon>ModelAcademico.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\vwaca_AnioLectivoCalificacionHistorico.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Curso_Paralelo.cs">

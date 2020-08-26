@@ -26,6 +26,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Jornada_Curso_Bus bus_anio_curso = new aca_AnioLectivo_Jornada_Curso_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
+        aca_AnioLectivoEquivalenciaPromedio_Bus bus_promedio = new aca_AnioLectivoEquivalenciaPromedio_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
@@ -173,6 +174,11 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Nuevo(aca_AnioLectivoCalificacionHistorico_Info model)
         {
+            var info_conducta = bus_conducta.GetInfo(model.IdEmpresa, model.IdAnio, Convert.ToInt32(model.SecuenciaConducta));
+            var info_equivalencia = bus_promedio.GetInfo_x_Promedio(model.IdEmpresa, model.IdAnio, model.Promedio);
+            model.Conducta = info_conducta.Calificacion;
+            model.IdEquivalenciaPromedio = (info_equivalencia==null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
+
             if (!bus_CalificacionHistorico.GuardarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
@@ -239,6 +245,11 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Modificar(aca_AnioLectivoCalificacionHistorico_Info model)
         {
+            var info_conducta = bus_conducta.GetInfo(model.IdEmpresa, model.IdAnio, Convert.ToInt32(model.SecuenciaConducta));
+            var info_equivalencia = bus_promedio.GetInfo_x_Promedio(model.IdEmpresa, model.IdAnio, model.Promedio);
+            model.Conducta = info_conducta.Calificacion;
+            model.IdEquivalenciaPromedio = (info_equivalencia == null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
+
             if (!bus_CalificacionHistorico.ModificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";

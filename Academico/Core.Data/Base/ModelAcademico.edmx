@@ -374,7 +374,9 @@
           <Property Name="IdCurso" Type="int" Nullable="false" />
           <Property Name="AntiguaInstitucion" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Promedio" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IdEquivalenciaPromedio" Type="int" />
           <Property Name="Conducta" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SecuenciaConducta" Type="int" />
         </EntityType>
         <EntityType Name="aca_AnioLectivoConductaEquivalencia">
           <Key>
@@ -397,6 +399,7 @@
           <Key>
             <PropertyRef Name="IdEmpresa" />
             <PropertyRef Name="IdEquivalenciaPromedio" />
+            <PropertyRef Name="IdAnio" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdEquivalenciaPromedio" Type="int" Nullable="false" />
@@ -1847,7 +1850,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivoCalificacionHisto
             <PropertyRef Name="NomCurso" />
             <PropertyRef Name="AntiguaInstitucion" />
             <PropertyRef Name="IdNivel" />
-            <PropertyRef Name="Letra" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdAnio" Type="int" Nullable="false" />
@@ -1856,12 +1858,15 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivoCalificacionHisto
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="IdCurso" Type="int" Nullable="false" />
           <Property Name="Promedio" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IdEquivalenciaPromedio" Type="int" />
           <Property Name="Conducta" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SecuenciaConducta" Type="int" />
+          <Property Name="Letra" Type="varchar" MaxLength="10" />
           <Property Name="NomNivel" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="NomCurso" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="AntiguaInstitucion" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="IdNivel" Type="int" Nullable="false" />
-          <Property Name="Letra" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AnioLectivoConductaEquivalencia' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -3517,6 +3522,38 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoConductaEquivalencia">
+          <End Role="aca_AnioLectivoConductaEquivalencia" Type="Self.aca_AnioLectivoConductaEquivalencia" Multiplicity="0..1" />
+          <End Role="aca_AnioLectivoCalificacionHistorico" Type="Self.aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivoConductaEquivalencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="Secuencia" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="SecuenciaConducta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoEquivalenciaPromedio">
+          <End Role="aca_AnioLectivoEquivalenciaPromedio" Type="Self.aca_AnioLectivoEquivalenciaPromedio" Multiplicity="0..1" />
+          <End Role="aca_AnioLectivoCalificacionHistorico" Type="Self.aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivoEquivalenciaPromedio">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEquivalenciaPromedio" />
+              <PropertyRef Name="IdAnio" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEquivalenciaPromedio" />
+              <PropertyRef Name="IdAnio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Curso">
           <End Role="aca_Curso" Type="Self.aca_Curso" Multiplicity="1" />
           <End Role="aca_AnioLectivoCalificacionHistorico" Type="Self.aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
@@ -3866,20 +3903,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <Dependent Role="aca_MatriculaAsistencia">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdMatricula" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio">
-          <End Role="aca_AnioLectivoEquivalenciaPromedio" Type="Self.aca_AnioLectivoEquivalenciaPromedio" Multiplicity="0..1" />
-          <End Role="aca_MatriculaCalificacion" Type="Self.aca_MatriculaCalificacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_AnioLectivoEquivalenciaPromedio">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEquivalenciaPromedio" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCalificacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEquivalenciaPromedioPF" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4786,12 +4809,15 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
     [vwaca_AnioLectivoCalificacionHistorico].[pe_nombreCompleto] AS [pe_nombreCompleto], 
     [vwaca_AnioLectivoCalificacionHistorico].[IdCurso] AS [IdCurso], 
     [vwaca_AnioLectivoCalificacionHistorico].[Promedio] AS [Promedio], 
+    [vwaca_AnioLectivoCalificacionHistorico].[IdEquivalenciaPromedio] AS [IdEquivalenciaPromedio], 
     [vwaca_AnioLectivoCalificacionHistorico].[Conducta] AS [Conducta], 
+    [vwaca_AnioLectivoCalificacionHistorico].[SecuenciaConducta] AS [SecuenciaConducta], 
+    [vwaca_AnioLectivoCalificacionHistorico].[Letra] AS [Letra], 
     [vwaca_AnioLectivoCalificacionHistorico].[NomNivel] AS [NomNivel], 
     [vwaca_AnioLectivoCalificacionHistorico].[NomCurso] AS [NomCurso], 
     [vwaca_AnioLectivoCalificacionHistorico].[AntiguaInstitucion] AS [AntiguaInstitucion], 
     [vwaca_AnioLectivoCalificacionHistorico].[IdNivel] AS [IdNivel], 
-    [vwaca_AnioLectivoCalificacionHistorico].[Letra] AS [Letra]
+    [vwaca_AnioLectivoCalificacionHistorico].[Codigo] AS [Codigo]
     FROM [dbo].[vwaca_AnioLectivoCalificacionHistorico] AS [vwaca_AnioLectivoCalificacionHistorico]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwaca_AnioLectivoConductaEquivalencia" EntityType="Self.vwaca_AnioLectivoConductaEquivalencia" store:Type="Views" store:Schema="dbo">
@@ -5629,6 +5655,14 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
             <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
           </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoConductaEquivalencia" Association="Self.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoConductaEquivalencia">
+            <End Role="aca_AnioLectivoConductaEquivalencia" EntitySet="aca_AnioLectivoConductaEquivalencia" />
+            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoEquivalenciaPromedio" Association="Self.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoEquivalenciaPromedio">
+            <End Role="aca_AnioLectivoEquivalenciaPromedio" EntitySet="aca_AnioLectivoEquivalenciaPromedio" />
+            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
+          </AssociationSet>
           <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Curso" Association="Self.FK_aca_AnioLectivoCalificacionHistorico_aca_Curso">
             <End Role="aca_Curso" EntitySet="aca_Curso" />
             <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
@@ -5724,10 +5758,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <AssociationSet Name="FK_aca_MatriculaAsistencia_aca_Matricula" Association="Self.FK_aca_MatriculaAsistencia_aca_Matricula">
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_MatriculaAsistencia" EntitySet="aca_MatriculaAsistencia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio" Association="Self.FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio">
-            <End Role="aca_AnioLectivoEquivalenciaPromedio" EntitySet="aca_AnioLectivoEquivalenciaPromedio" />
-            <End Role="aca_MatriculaCalificacion" EntitySet="aca_MatriculaCalificacion" />
           </AssociationSet>
           <AssociationSet Name="FK_aca_MatriculaCalificacion_aca_Matricula" Association="Self.FK_aca_MatriculaCalificacion_aca_Matricula">
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
@@ -6052,19 +6082,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <End Role="aca_AnioLectivo_Rubro" EntitySet="aca_AnioLectivo_Rubro" />
             <End Role="aca_AnioLectivo_Rubro_Periodo" EntitySet="aca_AnioLectivo_Rubro_Periodo" />
           </AssociationSet>
-          <EntitySet Name="aca_AnioLectivoCalificacionHistorico" EntityType="ModelAcademico.aca_AnioLectivoCalificacionHistorico" />
-          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Curso" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Curso">
-            <End Role="aca_Curso" EntitySet="aca_Curso" />
-            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico">
-            <End Role="aca_NivelAcademico" EntitySet="aca_NivelAcademico" />
-            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
-          </AssociationSet>
           <EntitySet Name="aca_AlumnoDocumento" EntityType="ModelAcademico.aca_AlumnoDocumento" />
           <EntitySet Name="vwaca_AlumnoDocumento" EntityType="ModelAcademico.vwaca_AlumnoDocumento" />
           <AssociationSet Name="FK_aca_AlumnoDocumento_aca_Alumno" Association="ModelAcademico.FK_aca_AlumnoDocumento_aca_Alumno">
@@ -6121,7 +6138,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
             <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
           </AssociationSet>
-          <EntitySet Name="vwaca_AnioLectivoCalificacionHistorico" EntityType="ModelAcademico.vwaca_AnioLectivoCalificacionHistorico" />
           <EntitySet Name="aca_MateriaArea" EntityType="ModelAcademico.aca_MateriaArea" />
           <EntitySet Name="aca_AnioLectivo_Sede_NivelAcademico" EntityType="ModelAcademico.aca_AnioLectivo_Sede_NivelAcademico" />
           <AssociationSet Name="FK_aca_AnioLectivo_Sede_NivelAcademico_aca_NivelAcademico" Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_NivelAcademico">
@@ -6222,10 +6238,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
             <End Role="aca_AnioLectivo_Sede_NivelAcademico" EntitySet="aca_AnioLectivo_Sede_NivelAcademico" />
           </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo">
-            <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
-            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
-          </AssociationSet>
           <AssociationSet Name="FK_aca_MatriculaCondicional_aca_AnioLectivo" Association="ModelAcademico.FK_aca_MatriculaCondicional_aca_AnioLectivo">
             <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
             <End Role="aca_MatriculaCondicional" EntitySet="aca_MatriculaCondicional" />
@@ -6272,12 +6284,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <End Role="aca_AnioLectivoParcial" EntitySet="aca_AnioLectivoParcial" />
           </AssociationSet>
           <EntitySet Name="vwaca_MatriculaCalificacionParcial" EntityType="ModelAcademico.vwaca_MatriculaCalificacionParcial" />
-          <EntitySet Name="aca_AnioLectivoEquivalenciaPromedio" EntityType="ModelAcademico.aca_AnioLectivoEquivalenciaPromedio" />
-          <AssociationSet Name="FK_aca_AnioLectivoEquivalenciaPromedio_aca_AnioLectivo" Association="ModelAcademico.FK_aca_AnioLectivoEquivalenciaPromedio_aca_AnioLectivo">
-            <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
-            <End Role="aca_AnioLectivoEquivalenciaPromedio" EntitySet="aca_AnioLectivoEquivalenciaPromedio" />
-          </AssociationSet>
-          <EntitySet Name="vwaca_AnioLectivoEquivalenciaPromedio" EntityType="ModelAcademico.vwaca_AnioLectivoEquivalenciaPromedio" />
           <EntitySet Name="aca_AlumnoRetiro" EntityType="ModelAcademico.aca_AlumnoRetiro" />
           <EntitySet Name="vwaca_Matricula_AlumnosPorParalelo" EntityType="ModelAcademico.vwaca_Matricula_AlumnosPorParalelo" />
           <AssociationSet Name="FK_aca_AlumnoRetiro_aca_Matricula" Association="ModelAcademico.FK_aca_AlumnoRetiro_aca_Matricula">
@@ -6313,10 +6319,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           </AssociationSet>
           <EntitySet Name="aca_MatriculaCalificacion" EntityType="ModelAcademico.aca_MatriculaCalificacion" />
           <EntitySet Name="vwaca_MatriculaCalificacion" EntityType="ModelAcademico.vwaca_MatriculaCalificacion" />
-          <AssociationSet Name="FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio" Association="ModelAcademico.FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio">
-            <End Role="aca_AnioLectivoEquivalenciaPromedio" EntitySet="aca_AnioLectivoEquivalenciaPromedio" />
-            <End Role="aca_MatriculaCalificacion" EntitySet="aca_MatriculaCalificacion" />
-          </AssociationSet>
           <AssociationSet Name="FK_aca_MatriculaCalificacion_aca_Matricula" Association="ModelAcademico.FK_aca_MatriculaCalificacion_aca_Matricula">
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_MatriculaCalificacion" EntitySet="aca_MatriculaCalificacion" />
@@ -6441,6 +6443,38 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <End Role="aca_MatriculaCalificacionCualitativa" EntitySet="aca_MatriculaCalificacionCualitativa" />
           </AssociationSet>
           <EntitySet Name="vwaca_MatriculaCalificacionCualitativa" EntityType="ModelAcademico.vwaca_MatriculaCalificacionCualitativa" />
+          <EntitySet Name="aca_AnioLectivoCalificacionHistorico" EntityType="ModelAcademico.aca_AnioLectivoCalificacionHistorico" />
+          <EntitySet Name="aca_AnioLectivoEquivalenciaPromedio" EntityType="ModelAcademico.aca_AnioLectivoEquivalenciaPromedio" />
+          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo">
+            <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
+            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivoEquivalenciaPromedio_aca_AnioLectivo" Association="ModelAcademico.FK_aca_AnioLectivoEquivalenciaPromedio_aca_AnioLectivo">
+            <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
+            <End Role="aca_AnioLectivoEquivalenciaPromedio" EntitySet="aca_AnioLectivoEquivalenciaPromedio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoConductaEquivalencia" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoConductaEquivalencia">
+            <End Role="aca_AnioLectivoConductaEquivalencia" EntitySet="aca_AnioLectivoConductaEquivalencia" />
+            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoEquivalenciaPromedio" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoEquivalenciaPromedio">
+            <End Role="aca_AnioLectivoEquivalenciaPromedio" EntitySet="aca_AnioLectivoEquivalenciaPromedio" />
+            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Curso" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Curso">
+            <End Role="aca_Curso" EntitySet="aca_Curso" />
+            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico">
+            <End Role="aca_NivelAcademico" EntitySet="aca_NivelAcademico" />
+            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
+          </AssociationSet>
+          <EntitySet Name="vwaca_AnioLectivoEquivalenciaPromedio" EntityType="ModelAcademico.vwaca_AnioLectivoEquivalenciaPromedio" />
+          <EntitySet Name="vwaca_AnioLectivoCalificacionHistorico" EntityType="ModelAcademico.vwaca_AnioLectivoCalificacionHistorico" />
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
           <Key>
@@ -6643,9 +6677,9 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <NavigationProperty Name="aca_AnioLectivo_NivelAcademico_Jornada" Relationship="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_NivelAcademico" FromRole="aca_NivelAcademico" ToRole="aca_AnioLectivo_NivelAcademico_Jornada" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_NivelAcademico" FromRole="aca_NivelAcademico" ToRole="aca_AnioLectivo_Curso_Paralelo" />
           <NavigationProperty Name="aca_AnioLectivo_Paralelo_Profesor" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_NivelAcademico" FromRole="aca_NivelAcademico" ToRole="aca_AnioLectivo_Paralelo_Profesor" />
-          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico" FromRole="aca_NivelAcademico" ToRole="aca_AnioLectivoCalificacionHistorico" />
           <NavigationProperty Name="aca_AnioLectivo_Sede_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_NivelAcademico" FromRole="aca_NivelAcademico" ToRole="aca_AnioLectivo_Sede_NivelAcademico" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_NivelAcademico" FromRole="aca_NivelAcademico" ToRole="aca_AnioLectivo_Curso_Materia" />
+          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico" FromRole="aca_NivelAcademico" ToRole="aca_AnioLectivoCalificacionHistorico" />
         </EntityType>
         <EntityType Name="aca_Paralelo">
           <Key>
@@ -6892,8 +6926,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivo_Curso_Paralelo" />
           <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_alumno_aca_Curso" FromRole="aca_Curso" ToRole="aca_Alumno" />
           <NavigationProperty Name="aca_AnioLectivo_Paralelo_Profesor" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivo_Paralelo_Profesor" />
-          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivoCalificacionHistorico" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivo_Curso_Materia" />
+          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivoCalificacionHistorico" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Curso_Documento_aca_AnioLectivo_Jornada_Curso">
           <End Type="ModelAcademico.aca_AnioLectivo_Jornada_Curso" Role="aca_AnioLectivo_Jornada_Curso" Multiplicity="1" />
@@ -7340,12 +7374,12 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <NavigationProperty Name="aca_Catalogo1" Relationship="ModelAcademico.FK_aca_alumno_aca_Catalogo2" FromRole="aca_Alumno" ToRole="aca_Catalogo" />
           <NavigationProperty Name="aca_Curso" Relationship="ModelAcademico.FK_aca_alumno_aca_Curso" FromRole="aca_Alumno" ToRole="aca_Curso" />
           <NavigationProperty Name="aca_PermisoMatricula" Relationship="ModelAcademico.FK_aca_PermisoMatricula_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_PermisoMatricula" />
-          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_AnioLectivoCalificacionHistorico" />
           <NavigationProperty Name="aca_AlumnoDocumento" Relationship="ModelAcademico.FK_aca_AlumnoDocumento_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_AlumnoDocumento" />
           <NavigationProperty Name="aca_SocioEconomico" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_SocioEconomico" />
           <NavigationProperty Name="aca_MatriculaCondicional" Relationship="ModelAcademico.FK_aca_MatriculaCondicional_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_MatriculaCondicional" />
           <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_alumno" FromRole="aca_Alumno" ToRole="aca_Matricula" />
           <NavigationProperty Name="aca_Familia" Relationship="ModelAcademico.FK_aca_familia_aca_alumno" FromRole="aca_Alumno" ToRole="aca_Familia" />
+          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_AnioLectivoCalificacionHistorico" />
         </EntityType>
         <Association Name="FK_aca_alumno_aca_Catalogo1">
           <End Type="ModelAcademico.aca_Catalogo" Role="aca_Catalogo" Multiplicity="1" />
@@ -7640,67 +7674,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdAnio" />
               <PropertyRef Name="IdRubro" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="aca_AnioLectivoCalificacionHistorico">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="IdAlumno" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdNivel" Type="Int32" Nullable="false" />
-          <Property Name="IdCurso" Type="Int32" Nullable="false" />
-          <Property Name="AntiguaInstitucion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Promedio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Conducta" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" FromRole="aca_AnioLectivoCalificacionHistorico" ToRole="aca_Alumno" />
-          <NavigationProperty Name="aca_Curso" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Curso" FromRole="aca_AnioLectivoCalificacionHistorico" ToRole="aca_Curso" />
-          <NavigationProperty Name="aca_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico" FromRole="aca_AnioLectivoCalificacionHistorico" ToRole="aca_NivelAcademico" />
-          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo" FromRole="aca_AnioLectivoCalificacionHistorico" ToRole="aca_AnioLectivo" />
-        </EntityType>
-        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Curso">
-          <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Curso">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCurso" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCurso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico">
-          <End Type="ModelAcademico.aca_NivelAcademico" Role="aca_NivelAcademico" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_NivelAcademico">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNivel" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNivel" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8047,36 +8020,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwaca_AnioLectivoCalificacionHistorico">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="IdCurso" />
-            <PropertyRef Name="Promedio" />
-            <PropertyRef Name="Conducta" />
-            <PropertyRef Name="NomNivel" />
-            <PropertyRef Name="NomCurso" />
-            <PropertyRef Name="AntiguaInstitucion" />
-            <PropertyRef Name="IdNivel" />
-            <PropertyRef Name="Letra" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdCurso" Type="Int32" Nullable="false" />
-          <Property Name="Promedio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Conducta" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="NomNivel" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="AntiguaInstitucion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdNivel" Type="Int32" Nullable="false" />
-          <Property Name="Letra" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="aca_MateriaArea">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -8721,15 +8664,15 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <NavigationProperty Name="aca_AnioLectivo_NivelAcademico_Jornada" Relationship="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivo_NivelAcademico_Jornada" />
           <NavigationProperty Name="aca_AnioLectivo_Paralelo_Profesor" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivo_Paralelo_Profesor" />
           <NavigationProperty Name="aca_AnioLectivo_Sede_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivo_Sede_NivelAcademico" />
-          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivoCalificacionHistorico" />
           <NavigationProperty Name="aca_MatriculaCondicional" Relationship="ModelAcademico.FK_aca_MatriculaCondicional_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_MatriculaCondicional" />
           <NavigationProperty Name="aca_PermisoMatricula" Relationship="ModelAcademico.FK_aca_PermisoMatricula_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_PermisoMatricula" />
           <NavigationProperty Name="aca_AnioLectivoParcial" Relationship="ModelAcademico.FK_aca_AnioLectivoParcial_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivoParcial" />
-          <NavigationProperty Name="aca_AnioLectivoEquivalenciaPromedio" Relationship="ModelAcademico.FK_aca_AnioLectivoEquivalenciaPromedio_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivoEquivalenciaPromedio" />
           <NavigationProperty Name="aca_AnioLectivo_Periodo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Periodo_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivo_Periodo" />
           <NavigationProperty Name="aca_AnioLectivoConductaEquivalencia" Relationship="ModelAcademico.FK_aca_AnioLectivoConductaEquivalencia_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivoConductaEquivalencia" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivo_Curso_Materia" />
           <NavigationProperty Name="aca_AnioLectivoCalificacionCualitativa" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionCualitativa_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivoCalificacionCualitativa" />
+          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivoCalificacionHistorico" />
+          <NavigationProperty Name="aca_AnioLectivoEquivalenciaPromedio" Relationship="ModelAcademico.FK_aca_AnioLectivoEquivalenciaPromedio_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivoEquivalenciaPromedio" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Curso_Paralelo_aca_AnioLectivo">
           <End Type="ModelAcademico.aca_AnioLectivo" Role="aca_AnioLectivo" Multiplicity="1" />
@@ -8796,20 +8739,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
               <PropertyRef Name="IdAnio" />
             </Principal>
             <Dependent Role="aca_AnioLectivo_Sede_NivelAcademico">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo">
-          <End Type="ModelAcademico.aca_AnioLectivo" Role="aca_AnioLectivo" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_AnioLectivo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdAnio" />
             </Dependent>
@@ -9294,64 +9223,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <Property Name="CalificacionP5" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="CalificacionP6" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
-        <EntityType Name="aca_AnioLectivoEquivalenciaPromedio">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEquivalenciaPromedio" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEquivalenciaPromedio" Type="Int32" Nullable="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ValorMinimo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ValorMaximo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivoEquivalenciaPromedio_aca_AnioLectivo" FromRole="aca_AnioLectivoEquivalenciaPromedio" ToRole="aca_AnioLectivo" />
-          <NavigationProperty Name="aca_MatriculaCalificacion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio" FromRole="aca_AnioLectivoEquivalenciaPromedio" ToRole="aca_MatriculaCalificacion" />
-        </EntityType>
-        <Association Name="FK_aca_AnioLectivoEquivalenciaPromedio_aca_AnioLectivo">
-          <End Type="ModelAcademico.aca_AnioLectivo" Role="aca_AnioLectivo" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivoEquivalenciaPromedio" Role="aca_AnioLectivoEquivalenciaPromedio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_AnioLectivo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivoEquivalenciaPromedio">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="vwaca_AnioLectivoEquivalenciaPromedio">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdEquivalenciaPromedio" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="DescripcionAnio" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="ValorMinimo" />
-            <PropertyRef Name="ValorMaximo" />
-            <PropertyRef Name="Estado" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdEquivalenciaPromedio" Type="Int32" Nullable="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="DescripcionAnio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ValorMinimo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ValorMaximo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="aca_AlumnoRetiro">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -9657,7 +9528,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <Property Name="ExamenGracia" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="PromedioFinal" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="IdEquivalenciaPromedioPF" Type="Int32" />
-          <NavigationProperty Name="aca_AnioLectivoEquivalenciaPromedio" Relationship="ModelAcademico.FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio" FromRole="aca_MatriculaCalificacion" ToRole="aca_AnioLectivoEquivalenciaPromedio" />
           <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_MatriculaCalificacion_aca_Matricula" FromRole="aca_MatriculaCalificacion" ToRole="aca_Matricula" />
         </EntityType>
         <EntityType Name="vwaca_MatriculaCalificacion">
@@ -9720,20 +9590,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <Property Name="IdEquivalenciaPromedioQ2" Type="Int32" />
           <Property Name="IdEquivalenciaPromedioPF" Type="Int32" />
         </EntityType>
-        <Association Name="FK_aca_MatriculaCalificacion_aca_AnioLectivoEquivalenciaPromedio">
-          <End Type="ModelAcademico.aca_AnioLectivoEquivalenciaPromedio" Role="aca_AnioLectivoEquivalenciaPromedio" Multiplicity="0..1" />
-          <End Type="ModelAcademico.aca_MatriculaCalificacion" Role="aca_MatriculaCalificacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_AnioLectivoEquivalenciaPromedio">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEquivalenciaPromedio" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCalificacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdEquivalenciaPromedioPF" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_aca_MatriculaCalificacion_aca_Matricula">
           <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
           <End Type="ModelAcademico.aca_MatriculaCalificacion" Role="aca_MatriculaCalificacion" Multiplicity="*" />
@@ -10373,6 +10229,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <Property Name="IngresaProfesor" Type="Boolean" />
           <Property Name="IngresaInspector" Type="Boolean" />
           <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivoConductaEquivalencia_aca_AnioLectivo" FromRole="aca_AnioLectivoConductaEquivalencia" ToRole="aca_AnioLectivo" />
+          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoConductaEquivalencia" FromRole="aca_AnioLectivoConductaEquivalencia" ToRole="aca_AnioLectivoCalificacionHistorico" />
         </EntityType>
         <EntityType Name="vwaca_AnioLectivoConductaEquivalencia">
           <Key>
@@ -10966,6 +10823,208 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
           <Property Name="DescripcionCorta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Letra" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="aca_AnioLectivoCalificacionHistorico">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdAlumno" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="AntiguaInstitucion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Promedio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdEquivalenciaPromedio" Type="Int32" />
+          <Property Name="Conducta" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SecuenciaConducta" Type="Int32" />
+          <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" FromRole="aca_AnioLectivoCalificacionHistorico" ToRole="aca_Alumno" />
+          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo" FromRole="aca_AnioLectivoCalificacionHistorico" ToRole="aca_AnioLectivo" />
+          <NavigationProperty Name="aca_AnioLectivoConductaEquivalencia" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoConductaEquivalencia" FromRole="aca_AnioLectivoCalificacionHistorico" ToRole="aca_AnioLectivoConductaEquivalencia" />
+          <NavigationProperty Name="aca_AnioLectivoEquivalenciaPromedio" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoEquivalenciaPromedio" FromRole="aca_AnioLectivoCalificacionHistorico" ToRole="aca_AnioLectivoEquivalenciaPromedio" />
+          <NavigationProperty Name="aca_Curso" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Curso" FromRole="aca_AnioLectivoCalificacionHistorico" ToRole="aca_Curso" />
+          <NavigationProperty Name="aca_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico" FromRole="aca_AnioLectivoCalificacionHistorico" ToRole="aca_NivelAcademico" />
+        </EntityType>
+        <EntityType Name="aca_AnioLectivoEquivalenciaPromedio">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEquivalenciaPromedio" />
+            <PropertyRef Name="IdAnio" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEquivalenciaPromedio" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ValorMinimo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ValorMaximo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivoEquivalenciaPromedio_aca_AnioLectivo" FromRole="aca_AnioLectivoEquivalenciaPromedio" ToRole="aca_AnioLectivo" />
+          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoEquivalenciaPromedio" FromRole="aca_AnioLectivoEquivalenciaPromedio" ToRole="aca_AnioLectivoCalificacionHistorico" />
+        </EntityType>
+        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivo">
+          <End Type="ModelAcademico.aca_AnioLectivo" Role="aca_AnioLectivo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivoEquivalenciaPromedio_aca_AnioLectivo">
+          <End Type="ModelAcademico.aca_AnioLectivo" Role="aca_AnioLectivo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivoEquivalenciaPromedio" Role="aca_AnioLectivoEquivalenciaPromedio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivoEquivalenciaPromedio">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoConductaEquivalencia">
+          <End Type="ModelAcademico.aca_AnioLectivoConductaEquivalencia" Role="aca_AnioLectivoConductaEquivalencia" Multiplicity="0..1" />
+          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivoConductaEquivalencia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="Secuencia" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="SecuenciaConducta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_AnioLectivoEquivalenciaPromedio">
+          <End Type="ModelAcademico.aca_AnioLectivoEquivalenciaPromedio" Role="aca_AnioLectivoEquivalenciaPromedio" Multiplicity="0..1" />
+          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivoEquivalenciaPromedio">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEquivalenciaPromedio" />
+              <PropertyRef Name="IdAnio" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdEquivalenciaPromedio" />
+              <PropertyRef Name="IdAnio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Curso">
+          <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Curso">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCurso" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico">
+          <End Type="ModelAcademico.aca_NivelAcademico" Role="aca_NivelAcademico" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_NivelAcademico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwaca_AnioLectivoEquivalenciaPromedio">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdEquivalenciaPromedio" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="DescripcionAnio" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="ValorMinimo" />
+            <PropertyRef Name="ValorMaximo" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdEquivalenciaPromedio" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="DescripcionAnio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ValorMinimo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ValorMaximo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwaca_AnioLectivoCalificacionHistorico">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="Descripcion" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdCurso" />
+            <PropertyRef Name="Promedio" />
+            <PropertyRef Name="Conducta" />
+            <PropertyRef Name="NomNivel" />
+            <PropertyRef Name="NomCurso" />
+            <PropertyRef Name="AntiguaInstitucion" />
+            <PropertyRef Name="IdNivel" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="Promedio" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdEquivalenciaPromedio" Type="Int32" />
+          <Property Name="Conducta" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SecuenciaConducta" Type="Int32" />
+          <Property Name="Letra" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NomNivel" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomCurso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AntiguaInstitucion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -11526,20 +11585,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="aca_AnioLectivoCalificacionHistorico">
-            <EntityTypeMapping TypeName="ModelAcademico.aca_AnioLectivoCalificacionHistorico">
-              <MappingFragment StoreEntitySet="aca_AnioLectivoCalificacionHistorico">
-                <ScalarProperty Name="Conducta" ColumnName="Conducta" />
-                <ScalarProperty Name="Promedio" ColumnName="Promedio" />
-                <ScalarProperty Name="AntiguaInstitucion" ColumnName="AntiguaInstitucion" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="aca_AlumnoDocumento">
             <EntityTypeMapping TypeName="ModelAcademico.aca_AlumnoDocumento">
               <MappingFragment StoreEntitySet="aca_AlumnoDocumento">
@@ -11699,25 +11744,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
                 <ScalarProperty Name="IdCatalogoFichaVi" ColumnName="IdCatalogoFichaVi" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="IdSocioEconomico" ColumnName="IdSocioEconomico" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwaca_AnioLectivoCalificacionHistorico">
-            <EntityTypeMapping TypeName="ModelAcademico.vwaca_AnioLectivoCalificacionHistorico">
-              <MappingFragment StoreEntitySet="vwaca_AnioLectivoCalificacionHistorico">
-                <ScalarProperty Name="Letra" ColumnName="Letra" />
-                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
-                <ScalarProperty Name="AntiguaInstitucion" ColumnName="AntiguaInstitucion" />
-                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
-                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
-                <ScalarProperty Name="Conducta" ColumnName="Conducta" />
-                <ScalarProperty Name="Promedio" ColumnName="Promedio" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -12310,42 +12336,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
                 <ScalarProperty Name="IdSede" ColumnName="IdSede" />
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="aca_AnioLectivoEquivalenciaPromedio">
-            <EntityTypeMapping TypeName="ModelAcademico.aca_AnioLectivoEquivalenciaPromedio">
-              <MappingFragment StoreEntitySet="aca_AnioLectivoEquivalenciaPromedio">
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
-                <ScalarProperty Name="ValorMinimo" ColumnName="ValorMinimo" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdEquivalenciaPromedio" ColumnName="IdEquivalenciaPromedio" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwaca_AnioLectivoEquivalenciaPromedio">
-            <EntityTypeMapping TypeName="ModelAcademico.vwaca_AnioLectivoEquivalenciaPromedio">
-              <MappingFragment StoreEntitySet="vwaca_AnioLectivoEquivalenciaPromedio">
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
-                <ScalarProperty Name="ValorMinimo" ColumnName="ValorMinimo" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="DescripcionAnio" ColumnName="DescripcionAnio" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdEquivalenciaPromedio" ColumnName="IdEquivalenciaPromedio" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -13266,6 +13256,80 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
                 <ScalarProperty Name="IdSede" ColumnName="IdSede" />
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_AnioLectivoCalificacionHistorico">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_AnioLectivoCalificacionHistorico">
+              <MappingFragment StoreEntitySet="aca_AnioLectivoCalificacionHistorico">
+                <ScalarProperty Name="SecuenciaConducta" ColumnName="SecuenciaConducta" />
+                <ScalarProperty Name="Conducta" ColumnName="Conducta" />
+                <ScalarProperty Name="IdEquivalenciaPromedio" ColumnName="IdEquivalenciaPromedio" />
+                <ScalarProperty Name="Promedio" ColumnName="Promedio" />
+                <ScalarProperty Name="AntiguaInstitucion" ColumnName="AntiguaInstitucion" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_AnioLectivoEquivalenciaPromedio">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_AnioLectivoEquivalenciaPromedio">
+              <MappingFragment StoreEntitySet="aca_AnioLectivoEquivalenciaPromedio">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
+                <ScalarProperty Name="ValorMinimo" ColumnName="ValorMinimo" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdEquivalenciaPromedio" ColumnName="IdEquivalenciaPromedio" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwaca_AnioLectivoEquivalenciaPromedio">
+            <EntityTypeMapping TypeName="ModelAcademico.vwaca_AnioLectivoEquivalenciaPromedio">
+              <MappingFragment StoreEntitySet="vwaca_AnioLectivoEquivalenciaPromedio">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ValorMaximo" ColumnName="ValorMaximo" />
+                <ScalarProperty Name="ValorMinimo" ColumnName="ValorMinimo" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="DescripcionAnio" ColumnName="DescripcionAnio" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdEquivalenciaPromedio" ColumnName="IdEquivalenciaPromedio" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwaca_AnioLectivoCalificacionHistorico">
+            <EntityTypeMapping TypeName="ModelAcademico.vwaca_AnioLectivoCalificacionHistorico">
+              <MappingFragment StoreEntitySet="vwaca_AnioLectivoCalificacionHistorico">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="AntiguaInstitucion" ColumnName="AntiguaInstitucion" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="Letra" ColumnName="Letra" />
+                <ScalarProperty Name="SecuenciaConducta" ColumnName="SecuenciaConducta" />
+                <ScalarProperty Name="Conducta" ColumnName="Conducta" />
+                <ScalarProperty Name="IdEquivalenciaPromedio" ColumnName="IdEquivalenciaPromedio" />
+                <ScalarProperty Name="Promedio" ColumnName="Promedio" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

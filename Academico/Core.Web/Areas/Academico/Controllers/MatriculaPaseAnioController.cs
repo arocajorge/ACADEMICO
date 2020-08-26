@@ -216,12 +216,13 @@ namespace Core.Web.Areas.Academico.Controllers
                     item.PaseAnio = PaseAnio;
 
                     var info_conducta = bus_conducta.GetInfo(item.IdEmpresa, item.IdMatricula);
-                    var suma_conducta = (info_conducta.PromedioFinalQ1 == null ? info_conducta.PromedioQ1 : info_conducta.PromedioFinalQ1) + (info_conducta.PromedioFinalQ2 == null ? info_conducta.PromedioQ2 : info_conducta.PromedioFinalQ2);
-                    var promedio_conducta =  Math.Round(Convert.ToDecimal(suma_conducta / 2),2, MidpointRounding.AwayFromZero);
-                    var info_conducta_promedio = bus_equi_conducta.GetInfoXPromedioConducta(item.IdEmpresa, item.IdAnio, promedio_conducta);
+                    //var suma_conducta = (info_conducta.PromedioFinalQ1 == null ? info_conducta.PromedioQ1 : info_conducta.PromedioFinalQ1) + (info_conducta.PromedioFinalQ2 == null ? info_conducta.PromedioQ2 : info_conducta.PromedioFinalQ2);
+                    //var promedio_conducta =  Math.Round(Convert.ToDecimal(suma_conducta / 2),2, MidpointRounding.AwayFromZero);
+                    var info_conducta_promedio = bus_equi_conducta.GetInfoXPromedioConducta(item.IdEmpresa, item.IdAnio, Convert.ToDecimal(info_conducta.PromedioGeneral));
                     info_conducta.SecuenciaPromedioGeneral = (info_conducta_promedio==null ? (int?)null : info_conducta_promedio.Secuencia);
-                    info_conducta.PromedioGeneral = Convert.ToDouble(promedio_conducta);
-                    bus_conducta.modicarPromedioPaseAnio(info_conducta);
+                    info_conducta.PromedioGeneral = Convert.ToDouble(info_conducta.PromedioGeneral);
+                    //bus_conducta.modicarPromedioPaseAnio(info_conducta);
+                    var EquivalenciaPromedio = bus_promedio.GetInfo_x_Promedio(item.IdEmpresa,item.IdAnio, Convert.ToDecimal(item.PromedioFinal));
                     var info_historico = new aca_AnioLectivoCalificacionHistorico_Info();
                     var historico = bus_historico_calificacion.GetInfo(item.IdEmpresa, item.IdAnio, item.IdAlumno);
 
@@ -236,7 +237,9 @@ namespace Core.Web.Areas.Academico.Controllers
                             IdCurso = item.IdCurso,
                             AntiguaInstitucion = "",
                             Promedio = Convert.ToDecimal(item.PromedioFinal),
-                            Conducta = info_conducta_promedio.Calificacion
+                            IdEquivalenciaPromedio = (EquivalenciaPromedio==null ? (int?)null : EquivalenciaPromedio.IdEquivalenciaPromedio),
+                            Conducta = info_conducta_promedio.Calificacion,
+                            SecuenciaConducta = (info_conducta_promedio==null ? (int?)null : info_conducta_promedio.Secuencia)
 
                         };
                         bus_historico_calificacion.GuardarDB(info_historico);

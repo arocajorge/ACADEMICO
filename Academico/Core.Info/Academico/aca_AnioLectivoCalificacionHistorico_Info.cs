@@ -24,8 +24,10 @@ namespace Core.Info.Academico
         public string AntiguaInstitucion { get; set; }
         [Required(ErrorMessage = "El campo promedio es obligatorio")]
         public decimal Promedio { get; set; }
+        public Nullable<int> IdEquivalenciaPromedio { get; set; }
         [Required(ErrorMessage = "El campo conducta es obligatorio")]
         public decimal Conducta { get; set; }
+        public Nullable<int> SecuenciaConducta { get; set; }
 
         #region Campos que no existen en la tabla
         public string Descripcion { get; set; }
@@ -35,6 +37,7 @@ namespace Core.Info.Academico
         public string IdString { get; set; }
         public string Letra { get; set; }
         public string pe_cedulaRuc { get; set; }
+        public string Codigo { get; set; }
         #endregion
     }
 }

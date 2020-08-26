@@ -14,6 +14,12 @@ namespace Core.Data.Base
     
     public partial class aca_AnioLectivoConductaEquivalencia
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public aca_AnioLectivoConductaEquivalencia()
+        {
+            this.aca_AnioLectivoCalificacionHistorico = new HashSet<aca_AnioLectivoCalificacionHistorico>();
+        }
+    
         public int IdEmpresa { get; set; }
         public int IdAnio { get; set; }
         public int Secuencia { get; set; }
@@ -26,5 +32,7 @@ namespace Core.Data.Base
         public Nullable<bool> IngresaInspector { get; set; }
     
         public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_AnioLectivoCalificacionHistorico> aca_AnioLectivoCalificacionHistorico { get; set; }
     }
 }

@@ -344,6 +344,17 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
 
+            FAC_006_Resumen_Rpt reportResumen = new FAC_006_Resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_IdSucursal.Value = model.IdSucursal;
+            reportResumen.p_IdAlumno.Value = model.IdAlumno;
+            reportResumen.p_fecha_ini.Value = model.fecha_ini;
+            reportResumen.p_fecha_fin.Value = model.fecha_fin;
+            reportResumen.p_MostrarAnulados.Value = model.mostrarAnulados;
+            reportResumen.usuario = SessionFixed.IdUsuario;
+            reportResumen.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = reportResumen;
+
             return View(model);
         }
         [HttpPost]
@@ -369,6 +380,18 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
+
+            FAC_006_Resumen_Rpt reportResumen = new FAC_006_Resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_IdSucursal.Value = model.IdSucursal;
+            reportResumen.p_IdAlumno.Value = model.IdAlumno;
+            reportResumen.p_fecha_ini.Value = model.fecha_ini;
+            reportResumen.p_fecha_fin.Value = model.fecha_fin;
+            reportResumen.p_MostrarAnulados.Value = model.mostrarAnulados;
+            reportResumen.usuario = SessionFixed.IdUsuario;
+            reportResumen.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = reportResumen;
+
             return View(model);
         }
         #endregion

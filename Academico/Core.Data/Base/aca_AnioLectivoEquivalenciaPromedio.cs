@@ -17,7 +17,7 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public aca_AnioLectivoEquivalenciaPromedio()
         {
-            this.aca_MatriculaCalificacion = new HashSet<aca_MatriculaCalificacion>();
+            this.aca_AnioLectivoCalificacionHistorico = new HashSet<aca_AnioLectivoCalificacionHistorico>();
         }
     
         public int IdEmpresa { get; set; }
@@ -38,6 +38,6 @@ namespace Core.Data.Base
     
         public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_MatriculaCalificacion> aca_MatriculaCalificacion { get; set; }
+        public virtual ICollection<aca_AnioLectivoCalificacionHistorico> aca_AnioLectivoCalificacionHistorico { get; set; }
     }
 }

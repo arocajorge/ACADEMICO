@@ -21,11 +21,14 @@ namespace Core.Data.Base
         public string pe_nombreCompleto { get; set; }
         public int IdCurso { get; set; }
         public decimal Promedio { get; set; }
+        public Nullable<int> IdEquivalenciaPromedio { get; set; }
         public decimal Conducta { get; set; }
+        public Nullable<int> SecuenciaConducta { get; set; }
+        public string Letra { get; set; }
         public string NomNivel { get; set; }
         public string NomCurso { get; set; }
         public string AntiguaInstitucion { get; set; }
         public int IdNivel { get; set; }
-        public string Letra { get; set; }
+        public string Codigo { get; set; }
     }
 }

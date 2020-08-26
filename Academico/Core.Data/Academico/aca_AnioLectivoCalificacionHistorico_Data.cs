@@ -36,7 +36,10 @@ namespace Core.Data.Academico
                             NomCurso= q.NomCurso,
                             Letra = q.Letra,
                             AntiguaInstitucion = q.AntiguaInstitucion,
-                            pe_nombreCompleto = q.pe_nombreCompleto
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            IdEquivalenciaPromedio = q.IdEquivalenciaPromedio,
+                            SecuenciaConducta = q.SecuenciaConducta,
+                            Codigo = q.Codigo
                         });
                     });
                 }
@@ -71,7 +74,9 @@ namespace Core.Data.Academico
                         IdCurso = Entity.IdCurso,
                         AntiguaInstitucion = Entity.AntiguaInstitucion,
                         Promedio = Entity.Promedio,
-                        Conducta = Entity.Conducta
+                        IdEquivalenciaPromedio = Entity.IdEquivalenciaPromedio,
+                        Conducta = Entity.Conducta,
+                        SecuenciaConducta = Entity.SecuenciaConducta
                     };
                 }
 
@@ -99,7 +104,9 @@ namespace Core.Data.Academico
                         IdCurso = info.IdCurso,
                         AntiguaInstitucion= info.AntiguaInstitucion,
                         Promedio = info.Promedio,
-                        Conducta = info.Conducta
+                        Conducta = info.Conducta,
+                        IdEquivalenciaPromedio = info.IdEquivalenciaPromedio,
+                        SecuenciaConducta = info.SecuenciaConducta
                     };
                     Context.aca_AnioLectivoCalificacionHistorico.Add(Entity);
 
@@ -128,7 +135,9 @@ namespace Core.Data.Academico
                     Entity.IdCurso = info.IdCurso;
                     Entity.AntiguaInstitucion = info.AntiguaInstitucion;
                     Entity.Promedio = info.Promedio;
+                    Entity.IdEquivalenciaPromedio = info.IdEquivalenciaPromedio;
                     Entity.Conducta = info.Conducta;
+                    Entity.SecuenciaConducta = info.SecuenciaConducta;
 
                     Context.SaveChanges();
                 }

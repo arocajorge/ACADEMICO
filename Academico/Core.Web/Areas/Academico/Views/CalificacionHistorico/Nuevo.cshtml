@@ -107,8 +107,8 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="Sede">Conducta</label>
-                        @Html.DropDownListFor(q => q.Conducta, new SelectList(ViewBag.lst_conducta, "Calificacion", "Letra"), new { @class = "form-control", @id = "Conducta" })
-                        @Html.ValidationMessageFor(m => m.Conducta, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(q => q.SecuenciaConducta, new SelectList(ViewBag.lst_conducta, "Secuencia", "Letra"), new { @class = "form-control", @id = "Conducta" })
+                        @Html.ValidationMessageFor(m => m.SecuenciaConducta, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
