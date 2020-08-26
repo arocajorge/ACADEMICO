@@ -549,6 +549,9 @@
     <Compile Include="Base\VWFAC_008.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWFAC_009.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwfa_AplicacionMasivaDet.cs">
       <DependentUpon>ModelFacturacion.tt</DependentUpon>
     </Compile>
@@ -1956,6 +1959,7 @@
     <Compile Include="Reportes\Facturacion\FAC_006_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_007_Data.cs" />
     <Compile Include="Reportes\Facturacion\FAC_008_Data.cs" />
+    <Compile Include="Reportes\Facturacion\FAC_009_Data.cs" />
     <Compile Include="RRHH\ro_empleado_Data.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_Data.cs" />
     <Compile Include="SeguridadAcceso\seg_usuario_x_aca_Sede_Data.cs" />
