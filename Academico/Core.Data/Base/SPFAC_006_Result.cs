@@ -45,5 +45,10 @@ namespace Core.Data.Base
         public Nullable<int> IdNivel { get; set; }
         public Nullable<int> OrdenNivel { get; set; }
         public string NomNivel { get; set; }
+        public string NomRubro { get; set; }
+        public Nullable<int> idMes { get; set; }
+        public string smes { get; set; }
+        public string NomRuboDetalle { get; set; }
+        public Nullable<int> IdPeriodo { get; set; }
     }
 }

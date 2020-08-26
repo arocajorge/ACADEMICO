@@ -58,7 +58,13 @@ namespace Core.Data.Reportes.Facturacion
                                  IdNivel = q.IdNivel,
                                  NomNivel = q.NomNivel,
                                  OrdenNivel = q.OrdenNivel,
-                                 Cantidad=1
+                                 Cantidad=1,
+                                 idMes = q.idMes,
+                                 smes = q.smes,
+                                 NomRubro = q.NomRubro,
+                                 IdPeriodo = q.IdPeriodo,
+                                 NomRuboDetalle = q.NomRuboDetalle
+                                 
                              }).ToList();
                 }
                 return Lista;
