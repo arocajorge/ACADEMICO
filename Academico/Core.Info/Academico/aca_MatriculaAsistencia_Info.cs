@@ -49,6 +49,7 @@ namespace Core.Info.Academico
         public Nullable<int> Atrasos { get; set; }
         public int IdCatalogoParcial { get; set; }
         public int IdCatalogoTipo { get; set; }
+        public int IdMateria { get; set; }
         #endregion
     }
 }

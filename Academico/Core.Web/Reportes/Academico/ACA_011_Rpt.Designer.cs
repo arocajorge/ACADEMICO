@@ -132,6 +132,7 @@
             this.p_IdParalelo = new DevExpress.XtraReports.Parameters.Parameter();
             this.groupFooterBand1 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.xrTableCell68 = new DevExpress.XtraReports.UI.XRTableCell();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -1063,7 +1064,8 @@
             // xrTableRow1
             // 
             this.xrTableRow1.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.lbl_titulo});
+            this.lbl_titulo,
+            this.xrTableCell68});
             this.xrTableRow1.Name = "xrTableRow1";
             this.xrTableRow1.Weight = 0.87591216871936894D;
             // 
@@ -1076,7 +1078,7 @@
             this.lbl_titulo.StylePriority.UsePadding = false;
             this.lbl_titulo.StylePriority.UseTextAlignment = false;
             this.lbl_titulo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.lbl_titulo.Weight = 3.207429558618816D;
+            this.lbl_titulo.Weight = 2.6279255075568786D;
             // 
             // xrTableRow2
             // 
@@ -1551,6 +1553,19 @@
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_011_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
+            // xrTableCell68
+            // 
+            this.xrTableCell68.Font = new System.Drawing.Font("Verdana", 6F);
+            this.xrTableCell68.Multiline = true;
+            this.xrTableCell68.Name = "xrTableCell68";
+            this.xrTableCell68.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.xrTableCell68.StylePriority.UseFont = false;
+            this.xrTableCell68.StylePriority.UsePadding = false;
+            this.xrTableCell68.StylePriority.UseTextAlignment = false;
+            this.xrTableCell68.Text = "ACA_011";
+            this.xrTableCell68.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell68.Weight = 0.57950405106193759D;
+            // 
             // ACA_011_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1694,5 +1709,6 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdParalelo;
         private DevExpress.XtraReports.UI.GroupFooterBand groupFooterBand1;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell67;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell68;
     }
 }

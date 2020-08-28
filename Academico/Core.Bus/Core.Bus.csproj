@@ -284,6 +284,8 @@
     <Compile Include="Reportes\Academico\ACA_017_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_013_MatriculaCalificacionCualitativa_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_018_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_023_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_022_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_021_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_020_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_019_Bus.cs" />

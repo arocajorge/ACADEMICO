@@ -43,7 +43,6 @@
         <EntityTypeShape EntityType="ModelReportes.VWACA_017" Width="1.5" PointX="0.75" PointY="23.75" />
         <EntityTypeShape EntityType="ModelReportes.VWACA_018" Width="1.5" PointX="2.75" PointY="23.75" />
         <EntityTypeShape EntityType="ModelReportes.VWACA_019" Width="1.5" PointX="24.75" PointY="7.75" />
-        <EntityTypeShape EntityType="ModelReportes.VWACA_020" Width="1.5" PointX="24.375" PointY="15.75" />
         <EntityTypeShape EntityType="ModelReportes.VWACA_021" Width="1.5" PointX="18.375" PointY="24.75" />
         <EntityTypeShape EntityType="ModelReportes.VWFAC_009" Width="1.5" PointX="24.375" PointY="23.75" />
       </Diagram>

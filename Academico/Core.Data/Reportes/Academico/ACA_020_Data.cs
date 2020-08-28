@@ -14,36 +14,11 @@ namespace Core.Data.Reportes.Academico
         {
             try
             {
-                int IdSedeIni = IdSede;
-                int IdSedeFin = IdSede == 0 ? 9999999 : IdSede;
-
-                int IdJornadaIni = IdJornada;
-                int IdJornadaFin = IdJornada == 0 ? 9999999 : IdJornada;
-
-                int IdNivelIni = IdNivel;
-                int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
-
-                int IdCursoIni = IdCurso;
-                int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
-
-                int IdParaleloIni = IdParalelo;
-                int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
-
-                decimal IdAlumnoIni = IdAlumno;
-                decimal IdAlumnoFin = IdAlumno == 0 ? 999999999999 : IdAlumno;
-
                 List<ACA_020_Info> Lista = new List<ACA_020_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
                     Context.Database.CommandTimeout = 5000;
-                    var lst = Context.VWACA_020.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio
-                    && IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin &&
-                    IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin &&
-                    IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
-                    IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin &&
-                    IdParaleloIni <= q.IdParalelo && q.IdParalelo <= IdParaleloFin &&
-                    IdAlumnoIni <= q.IdAlumno && q.IdAlumno <= IdAlumnoFin &&
-                    q.EsRetirado == (MostrarRetirados == true ? q.EsRetirado : false)).ToList();
+                    var lst = Context.SPACA_020(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados).ToList();
 
                     foreach (var q in lst)
                     {
@@ -56,9 +31,9 @@ namespace Core.Data.Reportes.Academico
                             CedulaAlumno = q.CedulaAlumno,
                             NombreAlumno = q.NombreAlumno,
                             CedulaFactura = q.CedulaFactura,
-                            NombreFactura=q.NombreFactura,
+                            NombreFactura = q.NombreFactura,
                             CedulaLegal = q.CedulaLegal,
-                            NombreLegal=q.NombreLegal,
+                            NombreLegal = q.NombreLegal,
                             IdPersonaF = q.IdPersonaF,
                             Codigo = q.Codigo,
                             IdAnio = q.IdAnio,
@@ -80,7 +55,9 @@ namespace Core.Data.Reportes.Academico
                             EsRetirado = q.EsRetirado,
                             Fecha = q.Fecha,
                             IdPersona = q.IdPersona,
-                            FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy")
+                            FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy"),
+                            Total = q.Total,
+                            TotalPension = q.Total.ToString("C2")
                         });
                     }
                 }

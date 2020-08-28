@@ -14,8 +14,8 @@ namespace Core.Info.Reportes.Academico
         public int IdMateria { get; set; }
         public string Codigo { get; set; }
         public string NombreAlumno { get; set; }
-        public int IdAnio { get; set; }
         public int IdSede { get; set; }
+        public int IdAnio { get; set; }
         public int IdNivel { get; set; }
         public int IdJornada { get; set; }
         public int IdCurso { get; set; }
@@ -44,6 +44,9 @@ namespace Core.Info.Reportes.Academico
         public Nullable<int> IdCalificacionCualitativa { get; set; }
         public string CodigoCalificacionCualitativa { get; set; }
         public string DescripcionCorta { get; set; }
+        public Nullable<decimal> IdProfesor { get; set; }
         public string NombreProfesor { get; set; }
+        public string Letra { get; set; }
+        public Nullable<int> Conducta { get; set; }
     }
 }

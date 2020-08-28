@@ -39,6 +39,9 @@ namespace Core.Info.Reportes.Academico
         public string CedulaFactura { get; set; }
         public string NombreFactura { get; set; }
         public Nullable<bool> EsRetirado { get; set; }
+        public string EsRetiradoString { get; set; }
+        public decimal Total { get; set; }
         public string FechaActual { get; set; }
+        public string TotalPension { get; set; }
     }
 }

@@ -6,7 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="ModelReportes.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -46,7 +46,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_002' no tien
           <Property Name="FechaCreacion" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -82,7 +82,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_003' no tien
           <Property Name="CelularRepresentante" Type="varchar" MaxLength="500" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -132,7 +132,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_004' no tien
           <Property Name="OrdenNivel" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_006' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_006">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -175,7 +175,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_006' no tien
           <Property Name="EsRetiradoString" Type="varchar" MaxLength="8" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_008">
           <Key>
             <PropertyRef Name="Num" />
@@ -227,7 +227,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_008' no tien
           <Property Name="EstaRetirado" Type="varchar" MaxLength="8" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_009">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -253,7 +253,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_009' no tien
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_011' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_011' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_011">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -317,7 +317,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_011' no tien
           <Property Name="PromedioFinal" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_012' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_012' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_012">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -373,7 +373,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_012' no tien
           <Property Name="EstadoPago" Type="varchar" MaxLength="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_013_EquivalenciaPromedio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_013_EquivalenciaPromedio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_013_EquivalenciaPromedio">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -392,7 +392,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_013_Equivale
           <Property Name="ValorMaximo" Type="numeric" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_017' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_017' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_017">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -437,7 +437,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_017' no tien
           <Property Name="EsRetirado" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_018' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_018' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_018">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -482,7 +482,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_018' no tien
           <Property Name="EsRetirado" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_019' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_019' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_019">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -528,57 +528,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_019' no tien
           <Property Name="EsRetirado" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_020' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="VWACA_020">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMatricula" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="IdSede" />
-            <PropertyRef Name="IdNivel" />
-            <PropertyRef Name="IdJornada" />
-            <PropertyRef Name="IdCurso" />
-            <PropertyRef Name="IdParalelo" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="IdPersonaR" />
-            <PropertyRef Name="Fecha" />
-            <PropertyRef Name="IdPersonaF" />
-          </Key>
-          <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Codigo" Type="varchar" MaxLength="200" />
-          <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="NombreAlumno" Type="varchar" MaxLength="200" />
-          <Property Name="CedulaAlumno" Type="varchar" MaxLength="50" />
-          <Property Name="IdAnio" Type="int" Nullable="false" />
-          <Property Name="IdSede" Type="int" Nullable="false" />
-          <Property Name="IdNivel" Type="int" Nullable="false" />
-          <Property Name="IdJornada" Type="int" Nullable="false" />
-          <Property Name="IdCurso" Type="int" Nullable="false" />
-          <Property Name="IdParalelo" Type="int" Nullable="false" />
-          <Property Name="NomSede" Type="varchar" MaxLength="500" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="NomNivel" Type="varchar" MaxLength="500" />
-          <Property Name="OrdenNivel" Type="int" />
-          <Property Name="NomJornada" Type="varchar" MaxLength="500" />
-          <Property Name="OrdenJornada" Type="int" />
-          <Property Name="NomCurso" Type="varchar" MaxLength="500" />
-          <Property Name="OrdenCurso" Type="int" />
-          <Property Name="NomParalelo" Type="varchar" MaxLength="500" />
-          <Property Name="OrdenParalelo" Type="int" />
-          <Property Name="IdPersonaR" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="CedulaLegal" Type="varchar" MaxLength="50" />
-          <Property Name="NombreLegal" Type="varchar" MaxLength="200" />
-          <Property Name="Fecha" Type="date" Nullable="false" />
-          <Property Name="IdPersonaF" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="CedulaFactura" Type="varchar" MaxLength="50" />
-          <Property Name="NombreFactura" Type="varchar" MaxLength="200" />
-          <Property Name="EsRetirado" Type="bit" />
-        </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_021' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWACA_021' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWACA_021">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -626,7 +576,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWACA_021' no tien
           <Property Name="NomPlantillaTipo" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWBAN_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_001">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -664,7 +614,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_001' no tien
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_001_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWBAN_001_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_001_cancelaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -691,7 +641,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_001_cancelac
           <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWBAN_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_002">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -729,7 +679,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_002' no tien
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_002_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWBAN_002_cancelaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_002_cancelaciones">
           <Key>
             <PropertyRef Name="mba_IdEmpresa" />
@@ -749,7 +699,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_002_cancelac
           <Property Name="monto" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWBAN_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_003">
           <Key>
             <PropertyRef Name="CodTipoCbteBan" />
@@ -787,7 +737,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_003' no tien
           <Property Name="Su_Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWBAN_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWBAN_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -818,7 +768,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWBAN_004' no tien
           <Property Name="Estado" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCAJ_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -868,7 +818,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_001' no tien
           <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCAJ_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_002">
           <Key>
             <PropertyRef Name="IdRow" />
@@ -925,7 +875,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_002' no tien
           <Property Name="SecuenciaVale" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_002_ingresos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCAJ_002_ingresos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_002_ingresos">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -951,7 +901,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_002_ingresos
           <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_002_ValesNoConciliados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCAJ_002_ValesNoConciliados' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCAJ_002_ValesNoConciliados">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -973,7 +923,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCAJ_002_ValesNoC
           <Property Name="SecuenciaCaja" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCONTA_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCONTA_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1006,7 +956,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCONTA_001' no ti
           <Property Name="NombreUsuario" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1051,7 +1001,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_002' no tien
           <Property Name="IdUsuario" Type="varchar" MaxLength="20" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_002_Aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_002_Aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_002_Aplicaciones">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1071,7 +1021,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_002_Aplicaci
           <Property Name="dc_ValorPago" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1111,7 +1061,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_003' no tien
           <Property Name="TotalPago" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_005' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_005">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1145,7 +1095,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_005' no tien
           <Property Name="NombreUsuario" Type="varchar(max)" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_005_Cobros' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_005_Cobros' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_005_Cobros">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1169,7 +1119,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_005_Cobros' 
           <Property Name="cr_observacion" Type="varchar" MaxLength="700" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_005_Diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_005_Diario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_005_Diario">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1190,7 +1140,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_005_Diario' 
           <Property Name="Haber" Type="float" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_012' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWCXC_012' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWCXC_012">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1225,7 +1175,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWCXC_012' no tien
           <Property Name="OrdenParalelo" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_001' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_001">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1297,7 +1247,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_001' no tien
           <Property Name="NomAlumno" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_002' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_002">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1380,7 +1330,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_002' no tien
           <Property Name="Codigo" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_003">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1453,7 +1403,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_003' no tien
           <Property Name="FechaTransaccion" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_003_aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_003_aplicaciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_003_aplicaciones">
           <Key>
             <PropertyRef Name="IdEmpresa_nt" />
@@ -1475,7 +1425,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_003_aplicaci
           <Property Name="vt_fecha" Type="datetime" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_004' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_004">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1553,7 +1503,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_004' no tien
           <Property Name="Cambio" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_007' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_007">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1595,7 +1545,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_007' no tien
           <Property Name="IdEmpresa_rol" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_008' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_008">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1658,7 +1608,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_008' no tien
           <Property Name="sc_cantidad" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.Academico.VWFAC_009' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_009">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1700,7 +1650,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.Academico.VWFAC_009' no tien
           <Property Name="IdConciliacion" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="VWFAC_0031">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -1850,7 +1800,37 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Parameter Name="IdJornada" Type="int" Mode="In" />
           <Parameter Name="IdCurso" Type="int" Mode="In" />
           <Parameter Name="IdParalelo" Type="int" Mode="In" />
+          <Parameter Name="IdMateria" Type="int" Mode="In" />
           <Parameter Name="IdCatalogoParcial" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPACA_020" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdAnio" Type="int" Mode="In" />
+          <Parameter Name="IdSede" Type="int" Mode="In" />
+          <Parameter Name="IdNivel" Type="int" Mode="In" />
+          <Parameter Name="IdJornada" Type="int" Mode="In" />
+          <Parameter Name="IdCurso" Type="int" Mode="In" />
+          <Parameter Name="IdParalelo" Type="int" Mode="In" />
+          <Parameter Name="IdAlumno" Type="decimal" Mode="In" />
+          <Parameter Name="MostrarRetirados" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SPACA_022" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdAnio" Type="int" Mode="In" />
+          <Parameter Name="IdSede" Type="int" Mode="In" />
+          <Parameter Name="IdNivel" Type="int" Mode="In" />
+          <Parameter Name="IdJornada" Type="int" Mode="In" />
+          <Parameter Name="IdCurso" Type="int" Mode="In" />
+          <Parameter Name="IdParalelo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SPACA_023" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdAnio" Type="int" Mode="In" />
+          <Parameter Name="IdSede" Type="int" Mode="In" />
+          <Parameter Name="IdNivel" Type="int" Mode="In" />
+          <Parameter Name="IdJornada" Type="int" Mode="In" />
+          <Parameter Name="IdCurso" Type="int" Mode="In" />
+          <Parameter Name="IdParalelo" Type="int" Mode="In" />
         </Function>
         <Function Name="SPCXC_001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
@@ -2272,41 +2252,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
     [VWACA_019].[Fecha] AS [Fecha], 
     [VWACA_019].[EsRetirado] AS [EsRetirado]
     FROM [Academico].[VWACA_019] AS [VWACA_019]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="VWACA_020" EntityType="Self.VWACA_020" store:Type="Views" store:Schema="Academico">
-            <DefiningQuery>SELECT 
-    [VWACA_020].[IdEmpresa] AS [IdEmpresa], 
-    [VWACA_020].[IdMatricula] AS [IdMatricula], 
-    [VWACA_020].[Codigo] AS [Codigo], 
-    [VWACA_020].[IdAlumno] AS [IdAlumno], 
-    [VWACA_020].[IdPersona] AS [IdPersona], 
-    [VWACA_020].[NombreAlumno] AS [NombreAlumno], 
-    [VWACA_020].[CedulaAlumno] AS [CedulaAlumno], 
-    [VWACA_020].[IdAnio] AS [IdAnio], 
-    [VWACA_020].[IdSede] AS [IdSede], 
-    [VWACA_020].[IdNivel] AS [IdNivel], 
-    [VWACA_020].[IdJornada] AS [IdJornada], 
-    [VWACA_020].[IdCurso] AS [IdCurso], 
-    [VWACA_020].[IdParalelo] AS [IdParalelo], 
-    [VWACA_020].[NomSede] AS [NomSede], 
-    [VWACA_020].[Descripcion] AS [Descripcion], 
-    [VWACA_020].[NomNivel] AS [NomNivel], 
-    [VWACA_020].[OrdenNivel] AS [OrdenNivel], 
-    [VWACA_020].[NomJornada] AS [NomJornada], 
-    [VWACA_020].[OrdenJornada] AS [OrdenJornada], 
-    [VWACA_020].[NomCurso] AS [NomCurso], 
-    [VWACA_020].[OrdenCurso] AS [OrdenCurso], 
-    [VWACA_020].[NomParalelo] AS [NomParalelo], 
-    [VWACA_020].[OrdenParalelo] AS [OrdenParalelo], 
-    [VWACA_020].[IdPersonaR] AS [IdPersonaR], 
-    [VWACA_020].[CedulaLegal] AS [CedulaLegal], 
-    [VWACA_020].[NombreLegal] AS [NombreLegal], 
-    [VWACA_020].[Fecha] AS [Fecha], 
-    [VWACA_020].[IdPersonaF] AS [IdPersonaF], 
-    [VWACA_020].[CedulaFactura] AS [CedulaFactura], 
-    [VWACA_020].[NombreFactura] AS [NombreFactura], 
-    [VWACA_020].[EsRetirado] AS [EsRetirado]
-    FROM [Academico].[VWACA_020] AS [VWACA_020]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VWACA_021" EntityType="Self.VWACA_021" store:Type="Views" store:Schema="Academico">
             <DefiningQuery>SELECT 
@@ -3250,16 +3195,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
             <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
             <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="SPACA_016" ReturnType="Collection(ModelReportes.SPACA_016_Result)">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
-            <Parameter Name="IdSede" Mode="In" Type="Int32" />
-            <Parameter Name="IdNivel" Mode="In" Type="Int32" />
-            <Parameter Name="IdJornada" Mode="In" Type="Int32" />
-            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
-            <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
-            <Parameter Name="IdCatalogoParcial" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="SPACA_013_MatriculaCalificacionCualitativa" ReturnType="Collection(ModelReportes.SPACA_013_MatriculaCalificacionCualitativa_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdMatricula" Mode="In" Type="Decimal" />
@@ -3268,7 +3203,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <EntitySet Name="VWACA_017" EntityType="ModelReportes.VWACA_017" />
           <EntitySet Name="VWACA_018" EntityType="ModelReportes.VWACA_018" />
           <EntitySet Name="VWACA_019" EntityType="ModelReportes.VWACA_019" />
-          <EntitySet Name="VWACA_020" EntityType="ModelReportes.VWACA_020" />
           <EntitySet Name="VWACA_021" EntityType="ModelReportes.VWACA_021" />
           <FunctionImport Name="SPFAC_006" ReturnType="Collection(ModelReportes.SPFAC_006_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
@@ -3281,6 +3215,46 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
             <Parameter Name="MostrarAnulados" Mode="In" Type="Boolean" />
           </FunctionImport>
           <EntitySet Name="VWFAC_009" EntityType="ModelReportes.VWFAC_009" />
+          <FunctionImport Name="SPACA_016" ReturnType="Collection(ModelReportes.SPACA_016_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
+            <Parameter Name="IdSede" Mode="In" Type="Int32" />
+            <Parameter Name="IdNivel" Mode="In" Type="Int32" />
+            <Parameter Name="IdJornada" Mode="In" Type="Int32" />
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+            <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
+            <Parameter Name="IdMateria" Mode="In" Type="Int32" />
+            <Parameter Name="IdCatalogoParcial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPACA_020" ReturnType="Collection(ModelReportes.SPACA_020_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
+            <Parameter Name="IdSede" Mode="In" Type="Int32" />
+            <Parameter Name="IdNivel" Mode="In" Type="Int32" />
+            <Parameter Name="IdJornada" Mode="In" Type="Int32" />
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+            <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
+            <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
+            <Parameter Name="MostrarRetirados" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SPACA_023" ReturnType="Collection(ModelReportes.SPACA_023_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
+            <Parameter Name="IdSede" Mode="In" Type="Int32" />
+            <Parameter Name="IdNivel" Mode="In" Type="Int32" />
+            <Parameter Name="IdJornada" Mode="In" Type="Int32" />
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+            <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPACA_022" ReturnType="Collection(ModelReportes.SPACA_022_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
+            <Parameter Name="IdSede" Mode="In" Type="Int32" />
+            <Parameter Name="IdNivel" Mode="In" Type="Int32" />
+            <Parameter Name="IdJornada" Mode="In" Type="Int32" />
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+            <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACA_001_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -5394,44 +5368,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Type="String" Name="NombreInspector" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="NombreRepresentante" Nullable="true" MaxLength="200" />
         </ComplexType>
-        <ComplexType Name="SPACA_016_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="Int32" Name="IdMateria" Nullable="false" />
-          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="NombreAlumno" Nullable="false" MaxLength="200" />
-          <Property Type="Int32" Name="IdAnio" Nullable="false" />
-          <Property Type="Int32" Name="IdSede" Nullable="false" />
-          <Property Type="Int32" Name="IdNivel" Nullable="false" />
-          <Property Type="Int32" Name="IdJornada" Nullable="false" />
-          <Property Type="Int32" Name="IdCurso" Nullable="false" />
-          <Property Type="Int32" Name="IdParalelo" Nullable="false" />
-          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="OrdenNivel" Nullable="true" />
-          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="OrdenJornada" Nullable="true" />
-          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="OrdenCurso" Nullable="true" />
-          <Property Type="String" Name="CodigoParalelo" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="OrdenParalelo" Nullable="true" />
-          <Property Type="String" Name="NomMateria" Nullable="false" MaxLength="500" />
-          <Property Type="String" Name="NomMateriaArea" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomMateriaGrupo" Nullable="true" MaxLength="500" />
-          <Property Type="Boolean" Name="EsObligatorio" Nullable="false" />
-          <Property Type="Int32" Name="OrdenMateria" Nullable="false" />
-          <Property Type="Int32" Name="OrdenMateriaGrupo" Nullable="true" />
-          <Property Type="Int32" Name="OrdenMateriaArea" Nullable="true" />
-          <Property Type="Int32" Name="IdCatalogoParcial" Nullable="false" />
-          <Property Type="String" Name="NomCatalogo" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="IdCalificacionCualitativa" Nullable="true" />
-          <Property Type="String" Name="CodigoCalificacionCualitativa" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="DescripcionCorta" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="NombreProfesor" Nullable="true" MaxLength="200" />
-        </ComplexType>
         <ComplexType Name="SPACA_013_MatriculaCalificacionCualitativa_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
@@ -5600,54 +5536,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EsRetirado" Type="Boolean" />
         </EntityType>
-        <EntityType Name="VWACA_020">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMatricula" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="IdSede" />
-            <PropertyRef Name="IdNivel" />
-            <PropertyRef Name="IdJornada" />
-            <PropertyRef Name="IdCurso" />
-            <PropertyRef Name="IdParalelo" />
-            <PropertyRef Name="Descripcion" />
-            <PropertyRef Name="IdPersonaR" />
-            <PropertyRef Name="Fecha" />
-            <PropertyRef Name="IdPersonaF" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdPersona" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="NombreAlumno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CedulaAlumno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="IdSede" Type="Int32" Nullable="false" />
-          <Property Name="IdNivel" Type="Int32" Nullable="false" />
-          <Property Name="IdJornada" Type="Int32" Nullable="false" />
-          <Property Name="IdCurso" Type="Int32" Nullable="false" />
-          <Property Name="IdParalelo" Type="Int32" Nullable="false" />
-          <Property Name="NomSede" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NomNivel" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenNivel" Type="Int32" />
-          <Property Name="NomJornada" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenJornada" Type="Int32" />
-          <Property Name="NomCurso" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenCurso" Type="Int32" />
-          <Property Name="NomParalelo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenParalelo" Type="Int32" />
-          <Property Name="IdPersonaR" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="CedulaLegal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NombreLegal" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IdPersonaF" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="CedulaFactura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NombreFactura" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="EsRetirado" Type="Boolean" />
-        </EntityType>
         <EntityType Name="VWACA_021">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -5773,6 +5661,180 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Name="vt_fecha" Type="DateTime" Precision="3" />
           <Property Name="IdConciliacion" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
+        <ComplexType Name="SPACA_016_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdMateria" Nullable="false" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NombreAlumno" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="IdSede" Nullable="false" />
+          <Property Type="Int32" Name="IdAnio" Nullable="false" />
+          <Property Type="Int32" Name="IdNivel" Nullable="false" />
+          <Property Type="Int32" Name="IdJornada" Nullable="false" />
+          <Property Type="Int32" Name="IdCurso" Nullable="false" />
+          <Property Type="Int32" Name="IdParalelo" Nullable="false" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenNivel" Nullable="true" />
+          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenJornada" Nullable="true" />
+          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenCurso" Nullable="true" />
+          <Property Type="String" Name="CodigoParalelo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenParalelo" Nullable="true" />
+          <Property Type="String" Name="NomMateria" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="NomMateriaArea" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomMateriaGrupo" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="EsObligatorio" Nullable="false" />
+          <Property Type="Int32" Name="OrdenMateria" Nullable="false" />
+          <Property Type="Int32" Name="OrdenMateriaGrupo" Nullable="true" />
+          <Property Type="Int32" Name="OrdenMateriaArea" Nullable="true" />
+          <Property Type="Int32" Name="IdCatalogoParcial" Nullable="false" />
+          <Property Type="String" Name="NomCatalogo" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IdCalificacionCualitativa" Nullable="true" />
+          <Property Type="String" Name="CodigoCalificacionCualitativa" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DescripcionCorta" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="IdProfesor" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="NombreProfesor" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Letra" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Conducta" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SPACA_020_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IdPersona" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="NombreAlumno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CedulaAlumno" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdAnio" Nullable="false" />
+          <Property Type="Int32" Name="IdSede" Nullable="false" />
+          <Property Type="Int32" Name="IdNivel" Nullable="false" />
+          <Property Type="Int32" Name="IdJornada" Nullable="false" />
+          <Property Type="Int32" Name="IdCurso" Nullable="false" />
+          <Property Type="Int32" Name="IdParalelo" Nullable="false" />
+          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenNivel" Nullable="true" />
+          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenJornada" Nullable="true" />
+          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenCurso" Nullable="true" />
+          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenParalelo" Nullable="true" />
+          <Property Type="Decimal" Name="IdPersonaR" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="CedulaLegal" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreLegal" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="Decimal" Name="IdPersonaF" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="CedulaFactura" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreFactura" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="EsRetirado" Nullable="true" />
+          <Property Type="String" Name="EsRetiradoString" Nullable="false" MaxLength="8" />
+          <Property Type="Decimal" Name="Total" Nullable="false" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="SPACA_023_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdAnio" Nullable="true" />
+          <Property Type="Int32" Name="IdSede" Nullable="true" />
+          <Property Type="Int32" Name="IdNivel" Nullable="true" />
+          <Property Type="Int32" Name="IdJornada" Nullable="true" />
+          <Property Type="Int32" Name="IdCurso" Nullable="true" />
+          <Property Type="Int32" Name="IdParalelo" Nullable="true" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenNivel" Nullable="true" />
+          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenJornada" Nullable="true" />
+          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenCurso" Nullable="true" />
+          <Property Type="String" Name="CodigoParalelo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenParalelo" Nullable="true" />
+          <Property Type="Int32" Name="SecuenciaP1" Nullable="true" />
+          <Property Type="String" Name="LetraP1" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MotivoPromedioFinalP1" Nullable="true" />
+          <Property Type="Int32" Name="SecuenciaP2" Nullable="true" />
+          <Property Type="String" Name="LetraP2" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MotivoPromedioFinalP2" Nullable="true" />
+          <Property Type="Int32" Name="SecuenciaP3" Nullable="true" />
+          <Property Type="String" Name="LetraP3" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MotivoPromedioFinalP3" Nullable="true" />
+          <Property Type="Int32" Name="SecuenciaQ1" Nullable="true" />
+          <Property Type="String" Name="LetraQ1" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MotivoPromedioFinalQ1" Nullable="true" />
+          <Property Type="Int32" Name="SecuenciaP4" Nullable="true" />
+          <Property Type="String" Name="LetraP4" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MotivoPromedioFinalP4" Nullable="true" />
+          <Property Type="Int32" Name="SecuenciaP5" Nullable="true" />
+          <Property Type="String" Name="LetraP5" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MotivoPromedioFinalP5" Nullable="true" />
+          <Property Type="Int32" Name="SecuenciaP6" Nullable="true" />
+          <Property Type="String" Name="LetraP6" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MotivoPromedioFinalP6" Nullable="true" />
+          <Property Type="Int32" Name="SecuenciaQ2" Nullable="true" />
+          <Property Type="String" Name="LetraQ2" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MotivoPromedioFinalQ2" Nullable="true" />
+          <Property Type="Int32" Name="SecuenciaPF" Nullable="true" />
+          <Property Type="String" Name="LetraPF" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MotivoPromedioFinal" Nullable="true" />
+          <Property Type="Decimal" Name="IdProfesorInspector" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="NombreInspector" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="SPACA_022_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="true" />
+          <Property Type="Decimal" Name="IdMatricula" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdAnio" Nullable="true" />
+          <Property Type="Int32" Name="IdSede" Nullable="true" />
+          <Property Type="Int32" Name="IdNivel" Nullable="true" />
+          <Property Type="Int32" Name="IdJornada" Nullable="true" />
+          <Property Type="Int32" Name="IdCurso" Nullable="true" />
+          <Property Type="Int32" Name="IdParalelo" Nullable="true" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenNivel" Nullable="true" />
+          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenJornada" Nullable="true" />
+          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenCurso" Nullable="true" />
+          <Property Type="String" Name="CodigoParalelo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenParalelo" Nullable="true" />
+          <Property Type="Boolean" Name="EsRetirado" Nullable="true" />
+          <Property Type="Int32" Name="FInjustificadaP1" Nullable="true" />
+          <Property Type="Int32" Name="FJustificadaP1" Nullable="true" />
+          <Property Type="Int32" Name="AtrasosP1" Nullable="true" />
+          <Property Type="Int32" Name="FInjustificadaP2" Nullable="true" />
+          <Property Type="Int32" Name="FJustificadaP2" Nullable="true" />
+          <Property Type="Int32" Name="AtrasosP2" Nullable="true" />
+          <Property Type="Int32" Name="FInjustificadaP3" Nullable="true" />
+          <Property Type="Int32" Name="FJustificadaP3" Nullable="true" />
+          <Property Type="Int32" Name="AtrasosP3" Nullable="true" />
+          <Property Type="Int32" Name="FInjustificadaP4" Nullable="true" />
+          <Property Type="Int32" Name="FJustificadaP4" Nullable="true" />
+          <Property Type="Int32" Name="AtrasosP4" Nullable="true" />
+          <Property Type="Int32" Name="FInjustificadaP5" Nullable="true" />
+          <Property Type="Int32" Name="FJustificadaP5" Nullable="true" />
+          <Property Type="Int32" Name="AtrasosP5" Nullable="true" />
+          <Property Type="Int32" Name="FInjustificadaP6" Nullable="true" />
+          <Property Type="Int32" Name="FJustificadaP6" Nullable="true" />
+          <Property Type="Int32" Name="AtrasosP6" Nullable="true" />
+          <Property Type="Decimal" Name="IdProfesorInspector" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="NombreInspector" Nullable="false" MaxLength="200" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7579,48 +7641,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SPACA_016" FunctionName="ModelReportes.Store.SPACA_016">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ModelReportes.SPACA_016_Result">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
-                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
-                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
-                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
-                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
-                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
-                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
-                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
-                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
-                <ScalarProperty Name="CodigoParalelo" ColumnName="CodigoParalelo" />
-                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
-                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
-                <ScalarProperty Name="NomMateria" ColumnName="NomMateria" />
-                <ScalarProperty Name="NomMateriaArea" ColumnName="NomMateriaArea" />
-                <ScalarProperty Name="NomMateriaGrupo" ColumnName="NomMateriaGrupo" />
-                <ScalarProperty Name="EsObligatorio" ColumnName="EsObligatorio" />
-                <ScalarProperty Name="OrdenMateria" ColumnName="OrdenMateria" />
-                <ScalarProperty Name="OrdenMateriaGrupo" ColumnName="OrdenMateriaGrupo" />
-                <ScalarProperty Name="OrdenMateriaArea" ColumnName="OrdenMateriaArea" />
-                <ScalarProperty Name="IdCatalogoParcial" ColumnName="IdCatalogoParcial" />
-                <ScalarProperty Name="NomCatalogo" ColumnName="NomCatalogo" />
-                <ScalarProperty Name="IdCalificacionCualitativa" ColumnName="IdCalificacionCualitativa" />
-                <ScalarProperty Name="CodigoCalificacionCualitativa" ColumnName="CodigoCalificacionCualitativa" />
-                <ScalarProperty Name="DescripcionCorta" ColumnName="DescripcionCorta" />
-                <ScalarProperty Name="NombreProfesor" ColumnName="NombreProfesor" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPACA_013_MatriculaCalificacionCualitativa" FunctionName="ModelReportes.Store.SPACA_013_MatriculaCalificacionCualitativa">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ModelReportes.SPACA_013_MatriculaCalificacionCualitativa_Result">
@@ -7759,43 +7779,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VWACA_020">
-            <EntityTypeMapping TypeName="ModelReportes.VWACA_020">
-              <MappingFragment StoreEntitySet="VWACA_020">
-                <ScalarProperty Name="EsRetirado" ColumnName="EsRetirado" />
-                <ScalarProperty Name="NombreFactura" ColumnName="NombreFactura" />
-                <ScalarProperty Name="CedulaFactura" ColumnName="CedulaFactura" />
-                <ScalarProperty Name="IdPersonaF" ColumnName="IdPersonaF" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="NombreLegal" ColumnName="NombreLegal" />
-                <ScalarProperty Name="CedulaLegal" ColumnName="CedulaLegal" />
-                <ScalarProperty Name="IdPersonaR" ColumnName="IdPersonaR" />
-                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
-                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
-                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
-                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
-                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
-                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
-                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
-                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
-                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
-                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
-                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="CedulaAlumno" ColumnName="CedulaAlumno" />
-                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VWACA_021">
             <EntityTypeMapping TypeName="ModelReportes.VWACA_021">
               <MappingFragment StoreEntitySet="VWACA_021">
@@ -7902,6 +7885,196 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_016" FunctionName="ModelReportes.Store.SPACA_016">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPACA_016_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
+                <ScalarProperty Name="CodigoParalelo" ColumnName="CodigoParalelo" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
+                <ScalarProperty Name="NomMateria" ColumnName="NomMateria" />
+                <ScalarProperty Name="NomMateriaArea" ColumnName="NomMateriaArea" />
+                <ScalarProperty Name="NomMateriaGrupo" ColumnName="NomMateriaGrupo" />
+                <ScalarProperty Name="EsObligatorio" ColumnName="EsObligatorio" />
+                <ScalarProperty Name="OrdenMateria" ColumnName="OrdenMateria" />
+                <ScalarProperty Name="OrdenMateriaGrupo" ColumnName="OrdenMateriaGrupo" />
+                <ScalarProperty Name="OrdenMateriaArea" ColumnName="OrdenMateriaArea" />
+                <ScalarProperty Name="IdCatalogoParcial" ColumnName="IdCatalogoParcial" />
+                <ScalarProperty Name="NomCatalogo" ColumnName="NomCatalogo" />
+                <ScalarProperty Name="IdCalificacionCualitativa" ColumnName="IdCalificacionCualitativa" />
+                <ScalarProperty Name="CodigoCalificacionCualitativa" ColumnName="CodigoCalificacionCualitativa" />
+                <ScalarProperty Name="DescripcionCorta" ColumnName="DescripcionCorta" />
+                <ScalarProperty Name="IdProfesor" ColumnName="IdProfesor" />
+                <ScalarProperty Name="NombreProfesor" ColumnName="NombreProfesor" />
+                <ScalarProperty Name="Letra" ColumnName="Letra" />
+                <ScalarProperty Name="Conducta" ColumnName="Conducta" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_020" FunctionName="ModelReportes.Store.SPACA_020">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPACA_020_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
+                <ScalarProperty Name="CedulaAlumno" ColumnName="CedulaAlumno" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
+                <ScalarProperty Name="IdPersonaR" ColumnName="IdPersonaR" />
+                <ScalarProperty Name="CedulaLegal" ColumnName="CedulaLegal" />
+                <ScalarProperty Name="NombreLegal" ColumnName="NombreLegal" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdPersonaF" ColumnName="IdPersonaF" />
+                <ScalarProperty Name="CedulaFactura" ColumnName="CedulaFactura" />
+                <ScalarProperty Name="NombreFactura" ColumnName="NombreFactura" />
+                <ScalarProperty Name="EsRetirado" ColumnName="EsRetirado" />
+                <ScalarProperty Name="EsRetiradoString" ColumnName="EsRetiradoString" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_023" FunctionName="ModelReportes.Store.SPACA_023">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPACA_023_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
+                <ScalarProperty Name="CodigoParalelo" ColumnName="CodigoParalelo" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
+                <ScalarProperty Name="SecuenciaP1" ColumnName="SecuenciaP1" />
+                <ScalarProperty Name="LetraP1" ColumnName="LetraP1" />
+                <ScalarProperty Name="MotivoPromedioFinalP1" ColumnName="MotivoPromedioFinalP1" />
+                <ScalarProperty Name="SecuenciaP2" ColumnName="SecuenciaP2" />
+                <ScalarProperty Name="LetraP2" ColumnName="LetraP2" />
+                <ScalarProperty Name="MotivoPromedioFinalP2" ColumnName="MotivoPromedioFinalP2" />
+                <ScalarProperty Name="SecuenciaP3" ColumnName="SecuenciaP3" />
+                <ScalarProperty Name="LetraP3" ColumnName="LetraP3" />
+                <ScalarProperty Name="MotivoPromedioFinalP3" ColumnName="MotivoPromedioFinalP3" />
+                <ScalarProperty Name="SecuenciaQ1" ColumnName="SecuenciaQ1" />
+                <ScalarProperty Name="LetraQ1" ColumnName="LetraQ1" />
+                <ScalarProperty Name="MotivoPromedioFinalQ1" ColumnName="MotivoPromedioFinalQ1" />
+                <ScalarProperty Name="SecuenciaP4" ColumnName="SecuenciaP4" />
+                <ScalarProperty Name="LetraP4" ColumnName="LetraP4" />
+                <ScalarProperty Name="MotivoPromedioFinalP4" ColumnName="MotivoPromedioFinalP4" />
+                <ScalarProperty Name="SecuenciaP5" ColumnName="SecuenciaP5" />
+                <ScalarProperty Name="LetraP5" ColumnName="LetraP5" />
+                <ScalarProperty Name="MotivoPromedioFinalP5" ColumnName="MotivoPromedioFinalP5" />
+                <ScalarProperty Name="SecuenciaP6" ColumnName="SecuenciaP6" />
+                <ScalarProperty Name="LetraP6" ColumnName="LetraP6" />
+                <ScalarProperty Name="MotivoPromedioFinalP6" ColumnName="MotivoPromedioFinalP6" />
+                <ScalarProperty Name="SecuenciaQ2" ColumnName="SecuenciaQ2" />
+                <ScalarProperty Name="LetraQ2" ColumnName="LetraQ2" />
+                <ScalarProperty Name="MotivoPromedioFinalQ2" ColumnName="MotivoPromedioFinalQ2" />
+                <ScalarProperty Name="SecuenciaPF" ColumnName="SecuenciaPF" />
+                <ScalarProperty Name="LetraPF" ColumnName="LetraPF" />
+                <ScalarProperty Name="MotivoPromedioFinal" ColumnName="MotivoPromedioFinal" />
+                <ScalarProperty Name="IdProfesorInspector" ColumnName="IdProfesorInspector" />
+                <ScalarProperty Name="NombreInspector" ColumnName="NombreInspector" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_022" FunctionName="ModelReportes.Store.SPACA_022">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPACA_022_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
+                <ScalarProperty Name="CodigoParalelo" ColumnName="CodigoParalelo" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
+                <ScalarProperty Name="EsRetirado" ColumnName="EsRetirado" />
+                <ScalarProperty Name="FInjustificadaP1" ColumnName="FInjustificadaP1" />
+                <ScalarProperty Name="FJustificadaP1" ColumnName="FJustificadaP1" />
+                <ScalarProperty Name="AtrasosP1" ColumnName="AtrasosP1" />
+                <ScalarProperty Name="FInjustificadaP2" ColumnName="FInjustificadaP2" />
+                <ScalarProperty Name="FJustificadaP2" ColumnName="FJustificadaP2" />
+                <ScalarProperty Name="AtrasosP2" ColumnName="AtrasosP2" />
+                <ScalarProperty Name="FInjustificadaP3" ColumnName="FInjustificadaP3" />
+                <ScalarProperty Name="FJustificadaP3" ColumnName="FJustificadaP3" />
+                <ScalarProperty Name="AtrasosP3" ColumnName="AtrasosP3" />
+                <ScalarProperty Name="FInjustificadaP4" ColumnName="FInjustificadaP4" />
+                <ScalarProperty Name="FJustificadaP4" ColumnName="FJustificadaP4" />
+                <ScalarProperty Name="AtrasosP4" ColumnName="AtrasosP4" />
+                <ScalarProperty Name="FInjustificadaP5" ColumnName="FInjustificadaP5" />
+                <ScalarProperty Name="FJustificadaP5" ColumnName="FJustificadaP5" />
+                <ScalarProperty Name="AtrasosP5" ColumnName="AtrasosP5" />
+                <ScalarProperty Name="FInjustificadaP6" ColumnName="FInjustificadaP6" />
+                <ScalarProperty Name="FJustificadaP6" ColumnName="FJustificadaP6" />
+                <ScalarProperty Name="AtrasosP6" ColumnName="AtrasosP6" />
+                <ScalarProperty Name="IdProfesorInspector" ColumnName="IdProfesorInspector" />
+                <ScalarProperty Name="NombreInspector" ColumnName="NombreInspector" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -10,9 +10,8 @@
 namespace Core.Data.Base
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class VWACA_020
+    public partial class SPACA_020_Result
     {
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }
@@ -45,5 +44,7 @@ namespace Core.Data.Base
         public string CedulaFactura { get; set; }
         public string NombreFactura { get; set; }
         public Nullable<bool> EsRetirado { get; set; }
+        public string EsRetiradoString { get; set; }
+        public decimal Total { get; set; }
     }
 }

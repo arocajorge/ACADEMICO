@@ -90,6 +90,7 @@ namespace Core.Info.Academico
         public string MotivoPromedioParcialFinal { get; set; }
         public string IdPromedioFinal { get; set; }
         public int IdCatalogoTipo { get; set; }
+        public int IdMateria { get; set; }
         #endregion
     }
 }

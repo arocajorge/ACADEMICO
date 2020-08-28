@@ -264,6 +264,15 @@
     <Compile Include="Base\SPACA_016_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPACA_020_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\SPACA_022_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\SPACA_023_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\SPACA_ContabilizacionCobros_Result.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
@@ -367,9 +376,6 @@
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\VWACA_019.cs">
-      <DependentUpon>ModelReportes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\VWACA_020.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\VWACA_021.cs">
@@ -1919,6 +1925,8 @@
     <Compile Include="Reportes\Academico\ACA_017_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_013_MatriculaCalificacionCualitativa_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_018_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_023_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_022_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_021_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_020_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_019_Data.cs" />

@@ -10,7 +10,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_016_Data
     {
-        public List<ACA_016_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoParcial)
+        public List<ACA_016_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, int IdCatalogoParcial)
         {
             try
             {
@@ -19,7 +19,7 @@ namespace Core.Data.Reportes.Academico
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
                     Context.Database.CommandTimeout = 5000;
-                    var lst = Context.SPACA_016(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial).ToList();
+                    var lst = Context.SPACA_016(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial).ToList();
 
                     foreach (var q in lst)
                     {
