@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.PieSeriesView pieSeriesView1 = new DevExpress.XtraCharts.PieSeriesView();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -95,6 +97,7 @@
             this.xrTableCell78 = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_IdParalelo = new DevExpress.XtraReports.Parameters.Parameter();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
+            this.xrChart1 = new DevExpress.XtraReports.UI.XRChart();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
@@ -102,6 +105,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrChart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -721,13 +727,15 @@
             // groupFooterBand1
             // 
             this.groupFooterBand1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrChart1,
             this.xrTable11});
+            this.groupFooterBand1.HeightF = 295.5F;
             this.groupFooterBand1.Name = "groupFooterBand1";
             // 
             // xrTable11
             // 
             this.xrTable11.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrTable11.LocationFloat = new DevExpress.Utils.PointFloat(294.7005F, 60F);
+            this.xrTable11.LocationFloat = new DevExpress.Utils.PointFloat(289.4009F, 255.5F);
             this.xrTable11.Name = "xrTable11";
             this.xrTable11.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable11.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -790,6 +798,26 @@
             this.PageHeader.HeightF = 68.50002F;
             this.PageHeader.Name = "PageHeader";
             // 
+            // xrChart1
+            // 
+            this.xrChart1.BorderColor = System.Drawing.Color.Black;
+            this.xrChart1.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrChart1.DataSource = this.objectDataSource2;
+            this.xrChart1.Legend.Name = "Default Legend";
+            this.xrChart1.LocationFloat = new DevExpress.Utils.PointFloat(260.0002F, 0F);
+            this.xrChart1.Name = "xrChart1";
+            series1.ArgumentDataMember = "Letra";
+            series1.LegendName = "Default Legend";
+            series1.Name = "Serie1";
+            series1.SeriesPointsSortingKey = DevExpress.XtraCharts.SeriesPointKey.Value_1;
+            series1.ToolTipHintDataMember = "Letra";
+            series1.ValueDataMembersSerializable = "Num";
+            series1.View = pieSeriesView1;
+            this.xrChart1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
+        series1};
+            this.xrChart1.SeriesTemplate.SeriesColorizer = null;
+            this.xrChart1.SizeF = new System.Drawing.SizeF(300F, 200F);
+            // 
             // ACA_023_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -824,6 +852,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xrChart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -895,5 +926,6 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow4;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell12;
         private DevExpress.XtraReports.UI.PageHeaderBand PageHeader;
+        private DevExpress.XtraReports.UI.XRChart xrChart1;
     }
 }

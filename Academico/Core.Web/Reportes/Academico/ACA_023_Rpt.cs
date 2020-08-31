@@ -56,7 +56,13 @@ namespace Core.Web.Reportes.Academico
             List<ACA_023_Info> lst_rpt = new List<ACA_023_Info>();
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial);
 
+            xrChart1.DataSource = lst_rpt;
             this.DataSource = lst_rpt;
+        }
+
+        private void xrChart1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
         }
     }
 }
