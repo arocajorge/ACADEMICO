@@ -8,6 +8,7 @@ using Core.Info.Reportes.Academico;
 using System.Collections.Generic;
 using Core.Bus.General;
 using Core.Bus.Academico;
+using System.Linq;
 
 namespace Core.Web.Reportes.Academico
 {
@@ -56,7 +57,23 @@ namespace Core.Web.Reportes.Academico
             List<ACA_023_Info> lst_rpt = new List<ACA_023_Info>();
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial);
 
-            xrChart1.DataSource = lst_rpt;
+            List<ACA_023_Info> ListaGrafico = new List<ACA_023_Info>();
+            ListaGrafico = (from q in lst_rpt
+                            where q.Letra!=null
+                             group q by new
+                             {
+                                 q.IdEmpresa,
+                                 q.Letra,
+                                 q.Num
+                             } into ing
+                             select new ACA_023_Info
+                             {
+                                 IdEmpresa = ing.Key.IdEmpresa,
+                                 Letra = ing.Key.Letra,
+                                 Num =  ing.Sum(q=>q.Num)
+                             }).ToList();
+
+            xrChart1.DataSource = ListaGrafico;
             this.DataSource = lst_rpt;
         }
 
