@@ -91,6 +91,10 @@ namespace Core.Info.Academico
         public int OrdenCurso { get; set; }
         public int OrdenParalelo { get; set; }
         public string NomPlantilla { get; set; }
+
+        public List<aca_MatriculaCalificacionParcial_Info> lst_MatriculaCalificacionParcial { get; set; }
+        public List<aca_MatriculaCalificacion_Info> lst_MatriculaCalificacion { get; set; }
+        public List<aca_MatriculaCalificacionCualitativa_Info> lst_MatriculaCalificacionCualitativa { get; set; }
         #endregion
     }
 }

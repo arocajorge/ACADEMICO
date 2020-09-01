@@ -101,28 +101,28 @@ namespace Core.Web.Areas.Academico.Controllers
                     #region Cualitativas
                     if (lst_materias_cualitativas != null && lst_materias_cualitativas.Count > 0)
                     {
-                        foreach (var item_materias_cuant in lst_materias_cualitativas)
+                        foreach (var item_materias_cualit in lst_materias_cualitativas)
                         {
                             if (lst_parcial.Count() > 0)
                             {
                                 foreach (var item_p in lst_parcial)
                                 {
-                                    var calificacion_cualitativa_parcial = lst_calificacion_cualitativa_parcial_existente.Where(q => q.IdCatalogoParcial == item_p.IdCatalogoParcial && q.IdMateria == item_materias_cuant.IdMateria).FirstOrDefault();
+                                    var calificacion_cualitativa_parcial = lst_calificacion_cualitativa_parcial_existente.Where(q => q.IdCatalogoParcial == item_p.IdCatalogoParcial && q.IdMateria == item_materias_cualit.IdMateria).FirstOrDefault();
 
                                     var info_cualitativa = new aca_MatriculaCalificacionCualitativa_Info()
                                     {
                                         IdEmpresa = item.IdEmpresa,
                                         IdMatricula = item.IdMatricula,
-                                        IdMateria = item_materias_cuant.IdMateria,
+                                        IdMateria = item_materias_cualit.IdMateria,
                                         IdCatalogoParcial = item_p.IdCatalogoParcial,
-                                        IdProfesor = item_materias_cuant.IdProfesor,
+                                        IdProfesor = item_materias_cualit.IdProfesor,
                                         IdCalificacionCualitativa = (calificacion_cualitativa_parcial == null ? null : calificacion_cualitativa_parcial.IdCalificacionCualitativa),
                                         Conducta = (calificacion_cualitativa_parcial == null ? null : calificacion_cualitativa_parcial.Conducta),
                                         MotivoConducta = (calificacion_cualitativa_parcial == null ? null : calificacion_cualitativa_parcial.MotivoConducta),
                                         IdUsuarioCreacion = (calificacion_cualitativa_parcial == null ? SessionFixed.IdUsuario :calificacion_cualitativa_parcial.IdUsuarioCreacion),
                                         FechaCreacion = (calificacion_cualitativa_parcial == null ? DateTime.Now : calificacion_cualitativa_parcial.FechaCreacion),
                                         IdUsuarioModificacion = (calificacion_cualitativa_parcial == null ? null : SessionFixed.IdUsuario),
-                                        FechaModificacion = (calificacion_cualitativa_parcial == null ? DateTime.Now : calificacion_cualitativa_parcial.FechaModificacion)
+                                        FechaModificacion = (calificacion_cualitativa_parcial == null ? (DateTime?)null : calificacion_cualitativa_parcial.FechaModificacion)
                                     };
                                     lst_calificacion_cualitativa.Add(info_cualitativa);
                                 }
@@ -166,7 +166,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                         IdUsuarioCreacion = (calificacion_parcial == null ? SessionFixed.IdUsuario : calificacion_parcial.IdUsuarioCreacion),
                                         FechaCreacion = (calificacion_parcial == null ? DateTime.Now : calificacion_parcial.FechaCreacion),
                                         IdUsuarioModificacion = (calificacion_parcial == null ? null : SessionFixed.IdUsuario),
-                                        FechaModificacion = (calificacion_parcial == null ? DateTime.Now : calificacion_parcial.FechaModificacion),
+                                        FechaModificacion = (calificacion_parcial == null ? (DateTime?)null : calificacion_parcial.FechaModificacion),
                                     };
 
                                     lst_calificacion_parcial.Add(info_calificacion_parcial);
@@ -194,7 +194,19 @@ namespace Core.Web.Areas.Academico.Controllers
                                     ExamenSupletorio = (calificacion == null ? null : calificacion.ExamenSupletorio),
                                     ExamenRemedial = (calificacion == null ? null : calificacion.ExamenRemedial),
                                     ExamenGracia = (calificacion == null ? null : calificacion.ExamenGracia),
-                                    PromedioFinal = (calificacion == null ? null : calificacion.PromedioFinal)
+                                    PromedioFinal = (calificacion == null ? null : calificacion.PromedioFinal),
+                                    IdEquivalenciaPromedioP1 = (calificacion == null ? null : calificacion.IdEquivalenciaPromedioP1),
+                                    IdEquivalenciaPromedioP2 = (calificacion == null ? null : calificacion.IdEquivalenciaPromedioP2),
+                                    IdEquivalenciaPromedioP3 = (calificacion == null ? null : calificacion.IdEquivalenciaPromedioP2),
+                                    IdEquivalenciaPromedioEQ1 = (calificacion == null ? null : calificacion.IdEquivalenciaPromedioEQ1),
+                                    IdEquivalenciaPromedioQ1 = (calificacion == null ? null : calificacion.IdEquivalenciaPromedioQ1),
+                                    IdEquivalenciaPromedioP4 = (calificacion == null ? null : calificacion.IdEquivalenciaPromedioP4),
+                                    IdEquivalenciaPromedioP5 = (calificacion == null ? null : calificacion.IdEquivalenciaPromedioP5),
+                                    IdEquivalenciaPromedioP6 = (calificacion == null ? null : calificacion.IdEquivalenciaPromedioP6),
+                                    IdEquivalenciaPromedioEQ2 = (calificacion == null ? null : calificacion.IdEquivalenciaPromedioEQ2),
+                                    IdEquivalenciaPromedioQ2 = (calificacion == null ? null : calificacion.IdEquivalenciaPromedioQ2),
+                                    IdEquivalenciaPromedioPF = (calificacion == null ? null : calificacion.IdEquivalenciaPromedioPF),
+                                    CampoMejoramiento = (calificacion == null ? null : calificacion.CampoMejoramiento),
                                 };
 
                                 lst_calificacion.Add(info_calificacion);

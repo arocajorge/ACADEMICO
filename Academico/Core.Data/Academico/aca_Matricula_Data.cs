@@ -607,6 +607,107 @@ namespace Core.Data.Academico
 
                     #endregion
 
+                    #region Calificaciones
+                    var lst_MatriculaCalificacionesParciales = Context.aca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula).ToList();
+                    Context.aca_MatriculaCalificacionParcial.RemoveRange(lst_MatriculaCalificacionesParciales);
+                    foreach (var cal_parcial in info.lst_MatriculaCalificacionParcial)
+                    {
+                        aca_MatriculaCalificacionParcial Entity_ParcialCuantitativa = new aca_MatriculaCalificacionParcial
+                        {
+                            IdEmpresa = cal_parcial.IdEmpresa,
+                            IdMatricula = cal_parcial.IdMatricula,
+                            IdMateria = cal_parcial.IdMateria,
+                            IdCatalogoParcial = cal_parcial.IdCatalogoParcial,
+                            IdProfesor = cal_parcial.IdProfesor,
+                            Calificacion1 = cal_parcial.Calificacion1,
+                            Calificacion2 = cal_parcial.Calificacion2,
+                            Calificacion3 = cal_parcial.Calificacion3,
+                            Calificacion4 = cal_parcial.Calificacion4,
+                            Remedial1 = cal_parcial.Remedial1,
+                            Remedial2 = cal_parcial.Remedial2,
+                            Evaluacion = cal_parcial.Evaluacion,
+                            Conducta = cal_parcial.Conducta,
+                            MotivoCalificacion = cal_parcial.MotivoCalificacion,
+                            MotivoConducta = cal_parcial.MotivoConducta,
+                            AccionRemedial = cal_parcial.AccionRemedial,
+                            IdUsuarioCreacion = cal_parcial.IdUsuarioCreacion,
+                            FechaCreacion = cal_parcial.FechaCreacion,
+                            IdUsuarioModificacion = cal_parcial.IdUsuarioModificacion,
+                            FechaModificacion = cal_parcial.FechaModificacion
+                        };
+
+                        Context.aca_MatriculaCalificacionParcial.Add(Entity_ParcialCuantitativa);
+                    }
+
+                    var lst_MatriculaCalificaciones = Context.aca_MatriculaCalificacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula).ToList();
+                    Context.aca_MatriculaCalificacion.RemoveRange(lst_MatriculaCalificaciones);
+                    foreach (var cal_final in info.lst_MatriculaCalificacion)
+                    {
+                        aca_MatriculaCalificacion Entity_Cuantitativa = new aca_MatriculaCalificacion
+                        {
+                            IdEmpresa = cal_final.IdEmpresa,
+                            IdMatricula = cal_final.IdMatricula,
+                            IdMateria = cal_final.IdMateria,
+                            IdProfesor = cal_final.IdProfesor,
+                            CalificacionP1 = cal_final.CalificacionP1,
+                            CalificacionP2 = cal_final.CalificacionP2,
+                            CalificacionP3 = cal_final.CalificacionP3,
+                            CalificacionP4 = cal_final.CalificacionP4,
+                            CalificacionP5 = cal_final.CalificacionP5,
+                            CalificacionP6 = cal_final.CalificacionP6,
+                            PromedioQ1 = cal_final.PromedioQ1,
+                            ExamenQ1 = cal_final.ExamenQ1,
+                            PromedioFinalQ1 = cal_final.PromedioFinalQ1,
+                            PromedioQ2 = cal_final.PromedioQ2,
+                            ExamenQ2 = cal_final.ExamenQ2,
+                            PromedioFinalQ2 = cal_final.PromedioFinalQ2,
+                            ExamenMejoramiento = cal_final.ExamenMejoramiento,
+                            CampoMejoramiento = cal_final.CampoMejoramiento,
+                            ExamenSupletorio = cal_final.ExamenSupletorio,
+                            ExamenRemedial = cal_final.ExamenRemedial,
+                            ExamenGracia = cal_final.ExamenGracia,
+                            PromedioFinal = cal_final.PromedioFinal,
+                            IdEquivalenciaPromedioP1 = cal_final.IdEquivalenciaPromedioP1,
+                            IdEquivalenciaPromedioP2 = cal_final.IdEquivalenciaPromedioP2,
+                            IdEquivalenciaPromedioP3 = cal_final.IdEquivalenciaPromedioP2,
+                            IdEquivalenciaPromedioEQ1 = cal_final.IdEquivalenciaPromedioEQ1,
+                            IdEquivalenciaPromedioQ1 = cal_final.IdEquivalenciaPromedioQ1,
+                            IdEquivalenciaPromedioP4 = cal_final.IdEquivalenciaPromedioP4,
+                            IdEquivalenciaPromedioP5 = cal_final.IdEquivalenciaPromedioP5,
+                            IdEquivalenciaPromedioP6 = cal_final.IdEquivalenciaPromedioP6,
+                            IdEquivalenciaPromedioEQ2 = cal_final.IdEquivalenciaPromedioEQ2,
+                            IdEquivalenciaPromedioQ2 = cal_final.IdEquivalenciaPromedioQ2,
+                            IdEquivalenciaPromedioPF = cal_final.IdEquivalenciaPromedioPF
+                        };
+
+                        Context.aca_MatriculaCalificacion.Add(Entity_Cuantitativa);
+                    }
+
+                    var lst_MatriculaCalificacionesCualitativas = Context.aca_MatriculaCalificacionCualitativa.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula).ToList();
+                    Context.aca_MatriculaCalificacionCualitativa.RemoveRange(lst_MatriculaCalificacionesCualitativas);
+                    foreach (var cal_cualit in info.lst_MatriculaCalificacionCualitativa)
+                    {
+                        aca_MatriculaCalificacionCualitativa Entity_ParcialCualitativa = new aca_MatriculaCalificacionCualitativa
+                        {
+                            IdEmpresa = cal_cualit.IdEmpresa,
+                            IdMatricula = cal_cualit.IdMatricula,
+                            IdMateria = cal_cualit.IdMateria,
+                            IdCatalogoParcial = cal_cualit.IdCatalogoParcial,
+                            IdProfesor = cal_cualit.IdProfesor,
+                            IdCalificacionCualitativa = cal_cualit.IdCalificacionCualitativa,
+                            Conducta = cal_cualit.Conducta,
+                            MotivoConducta = cal_cualit.MotivoConducta,
+                            IdUsuarioCreacion = cal_cualit.IdUsuarioCreacion,
+                            FechaCreacion = cal_cualit.FechaCreacion,
+                            IdUsuarioModificacion = cal_cualit.IdUsuarioModificacion,
+                            FechaModificacion = cal_cualit.FechaModificacion
+                        };
+
+                        Context.aca_MatriculaCalificacionCualitativa.Add(Entity_ParcialCualitativa);
+                    }
+
+                    #endregion
+
                     Context.SaveChanges();
                 }
 
