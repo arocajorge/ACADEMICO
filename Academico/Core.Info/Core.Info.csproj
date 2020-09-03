@@ -301,6 +301,7 @@
     <Compile Include="Reportes\Academico\ACA_021_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_022_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_023_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_024_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Info.cs" />

@@ -491,6 +491,15 @@ namespace Core.Web.Areas.Academico.Controllers
             var resultado = bus_parcial.GetList(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo, DateTime.Now.Date);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Importacion
@@ -626,13 +635,13 @@ namespace Core.Web.Areas.Academico.Controllers
                         {
                             ViewBag.mensaje = "Error al importar el archivo";
                             cargar_combos_detalle();
-                            return View(model);
+                            return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdCatalogoTipo = model.IdCatalogoTipo, IdCatalogoParcial = model.IdCatalogoParcial });
                         }
                     }
                     ViewBag.MensajeSuccess = MensajeSuccess;
                 }
                 cargar_combos(model);
-                return View(model);
+                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdCatalogoTipo = model.IdCatalogoTipo, IdCatalogoParcial = model.IdCatalogoParcial });
             }
             catch (Exception ex)
             {
@@ -640,7 +649,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 ViewBag.error = ex.Message.ToString();
                 cargar_combos_detalle();
-                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdCatalogoParcial = model.IdCatalogoParcial });
+                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdCatalogoTipo = model.IdCatalogoTipo, IdCatalogoParcial = model.IdCatalogoParcial });
             }
         }
 

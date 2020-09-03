@@ -1,0 +1,137 @@
+@using System.Web.UI.WebControls;
+@{
+    var grid = Html.DevExpress().GridView(settings => {
+        settings.Name = "GridViewPartial_MatriculaConductaImportacion";
+        settings.CallbackRouteValues = new { Controller = "MatriculaConductaQuimestral", Action = "GridViewPartial_MatriculaConductaImportacion" };
+        settings.Width = Unit.Percentage(100);
+        settings.KeyFieldName = "IdMatricula";
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
+        //Configuracion responsive
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+
+        //Configuración click derecho
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.EnableRowMenu = DefaultBoolean.False;
+
+        //Configuración scrolling y pager
+        settings.Settings.HorizontalScrollBarMode = ScrollBarMode.Visible;
+        settings.Settings.VerticalScrollBarMode = ScrollBarMode.Visible;
+        settings.Settings.VerticalScrollableHeight = 400;
+        settings.SettingsPager.PageSize = 10;
+        settings.SettingsPager.Visible = true;
+        settings.SettingsPager.Mode = GridViewPagerMode.ShowPager;
+        settings.SettingsPager.AlwaysShowPager = true;
+
+        //Configuración filtro por columna
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+        //Configuracion exportacion
+        settings.SettingsExport.EnableClientSideExportAPI = true;
+        settings.SettingsExport.ExcelExportMode = DevExpress.Export.ExportType.WYSIWYG;
+        settings.Toolbars.Add(t =>
+        {
+            t.EnableAdaptivity = true;
+            //t.Items.Add(GridViewToolbarCommand.ExportToPdf).Text = "Exportar a PDF";
+            t.Items.Add(GridViewToolbarCommand.ExportToXls).Text = "Exportar a XLS";
+            t.Items.Add(GridViewToolbarCommand.ExportToXlsx).Text = "Exportar a XLSX";
+            //t.Items.Add(GridViewToolbarCommand.ExportToDocx).Text = "Exportar a DOCX";
+            //t.Items.Add(GridViewToolbarCommand.ExportToRtf).Text = "Exportar a RTF";
+            //t.Items.Add(GridViewToolbarCommand.ExportToCsv).Text = "Exportar a CSV";
+        });
+        settings.SettingsExport.RenderBrick = (sender, e) =>
+        {
+            if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
+                e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
+        };
+
+
+        //Funcion para inicializar fila al presionar nuevo
+        settings.InitNewRow = (s, e) =>
+        {
+            e.NewValues["PromedioParcialFinal"] = null;
+        };
+
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "";
+            column.SetDataItemTemplateContent(tc =>
+            {
+                if (Convert.ToBoolean(DataBinder.Eval(tc.DataItem, "ValidoImportacion")) == false)
+                {
+                    ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-remove-circle\" style=\"color: red\"></span>");
+                }
+                else
+                {
+                    ViewContext.Writer.Write("<span class=\"glyphicon glyphicon-ok-circle\" style=\"color: green\"></span>");
+                }
+            });
+            column.VisibleIndex = 1;
+            column.Width = Unit.Percentage(10);
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdMatricula";
+            column.Caption = "IdMatricula";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 1;
+            column.Visible = true;
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "pe_nombreCompleto";
+            column.Caption = "Alumno";
+            column.Width = Unit.Percentage(30);
+            column.VisibleIndex = 2;
+            column.Visible = true;
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "SecuenciaConductaPromedioParcialFinal";
+            column.Caption = "Promedio Final";
+            column.Width = Unit.Percentage(10);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("Letra", "Conducta").Width = Unit.Percentage(100);
+                p.TextField = "Letra";
+                p.ValueField = "Secuencia";
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_conducta;
+            });
+            column.VisibleIndex = 4;
+            column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "MotivoPromedioParcialFinal";
+            column.Caption = "Motivo";
+            column.Width = Unit.Percentage(40);
+            column.VisibleIndex = 5;
+            column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+        settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {} }";
+
+    });
+    if (ViewBag.MostrarError != "")
+    {
+        grid.SetEditErrorText((string)ViewBag.MostrarError);
+    }
+}
+@grid.Bind(Model).GetHtml()

@@ -573,6 +573,12 @@
     <Compile Include="Reportes\Academico\ACA_023_Rpt.Designer.cs">
       <DependentUpon>ACA_023_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_024_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_024_Rpt.Designer.cs">
+      <DependentUpon>ACA_024_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9037,6 +9043,9 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_023.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaConducta\_GridViewPartial_MatriculaConductaImportacion.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaConducta\Importar.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_024.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaConductaQuimestral\_GridViewPartial_MatriculaConductaImportacion.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaConductaQuimestral\Importar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9232,6 +9241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_023_Rpt.resx">
       <DependentUpon>ACA_023_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_024_Rpt.resx">
+      <DependentUpon>ACA_024_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.resx">
       <DependentUpon>BAN_001_cancelaciones_Rpt.cs</DependentUpon>

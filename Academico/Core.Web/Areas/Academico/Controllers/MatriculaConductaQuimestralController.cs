@@ -3,8 +3,10 @@ using Core.Info.Academico;
 using Core.Info.Helps;
 using Core.Web.Helps;
 using DevExpress.Web.Mvc;
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -446,6 +448,160 @@ namespace Core.Web.Areas.Academico.Controllers
             var resultado = bus_parcial.GetList_Reportes(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings_ConductaQuimestral.UploadValidationSettings, UploadControlSettings_ConductaQuimestral.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, string IdPromedioFinal="")
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
+            aca_MatriculaConducta_Info model = new aca_MatriculaConducta_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSede = IdSede,
+                IdAnio = IdAnio,
+                IdNivel = IdNivel,
+                IdJornada = IdJornada,
+                IdCurso = IdCurso,
+                IdParalelo = IdParalelo,
+                IdPromedioFinal = IdPromedioFinal,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+            List<aca_MatriculaConducta_Info> lst_combos = bus_conducta_cal.GetList_Combos_Inspector(model.IdEmpresa, IdProfesor, EsSuperAdmin);
+            ListaConductaQuimestral.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            List<aca_MatriculaConducta_Info> ListaCalificacionesConducta = new List<aca_MatriculaConducta_Info>();
+
+            if (!string.IsNullOrEmpty(IdPromedioFinal))
+            {
+                ListaCalificacionesConducta = bus_conducta_cal.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
+                foreach (var item in ListaCalificacionesConducta)
+                {
+                    item.IdPromedioFinal = IdPromedioFinal;
+                    if (IdPromedioFinal == cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.QUIMESTRE_1.ToString())
+                    {
+                        //item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioFinalQ1);
+                        //item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioQ1);
+                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalQ1);
+                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalQ1);
+                        item.MotivoPromedioParcialFinal = item.MotivoPromedioFinalQ1;
+                    }
+                    if (IdPromedioFinal == cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.QUIMESTRE_2.ToString())
+                    {
+                        //item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioFinalQ2);
+                        //item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioQ2);
+                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinalQ2);
+                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinalQ2);
+                        item.MotivoPromedioParcialFinal = item.MotivoPromedioFinalQ2;
+                    }
+                    if (IdPromedioFinal == cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.PROMEDIOFINAL.ToString())
+                    {
+                        //item.SecuenciaConductaPromedioParcial = Convert.ToInt32(item.SecuenciaPromedioGeneral);
+                        //item.ConductaPromedioParcial = Convert.ToDouble(item.PromedioGeneral);
+                        item.SecuenciaConductaPromedioParcialFinal = Convert.ToInt32(item.SecuenciaPromedioFinal);
+                        item.ConductaPromedioParcialFinal = Convert.ToDouble(item.PromedioFinal);
+                        item.MotivoPromedioParcialFinal = item.MotivoPromedioFinal;
+                    }
+                }
+            }
+
+            ListaEditarConducta.set_list(ListaCalificacionesConducta, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            cargar_combos(model);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(aca_MatriculaConducta_Info model)
+        {
+            try
+            {
+                var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                string IdUsuario = SessionFixed.IdUsuario;
+                bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+                var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+                var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+                var Lista_CalificacionesConducta = ListaEditarConducta.get_list(model.IdTransaccionSession);
+                var info_parcial = bus_parcial.GetInfo(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoParcial);
+
+                bool guardar = true;
+                ViewBag.mensaje = null;
+                ViewBag.MensajeSuccess = null;
+
+                Lista_CalificacionesConducta.ForEach(q =>
+                {
+                    q.IdAnio = model.IdAnio; q.IdSede = model.IdSede; q.IdNivel = model.IdNivel; q.IdJornada = model.IdJornada; q.IdCurso = model.IdCurso;
+                    q.IdParalelo = model.IdParalelo; q.IdMateria = model.IdMateria; q.IdPromedioFinal = model.IdPromedioFinal;
+                });
+
+
+                foreach (var item in Lista_CalificacionesConducta)
+                {
+                    if (item.ValidoImportacion == false)
+                    {
+                        ViewBag.mensaje += "Existen registros con conducta por debajo del mínimo aceptado, debe ingresar motivo de la conducta.";
+                        guardar = false;
+                        break;
+                    }
+                }
+
+                if (guardar == true)
+                {
+                    ViewBag.mensaje = null;
+
+                    foreach (var item in Lista_CalificacionesConducta)
+                    {
+                        if (!bus_conducta_cal.ModicarPromedioFinalQuimestre(item))
+                        {
+                            ViewBag.mensaje = "Error al importar el archivo";
+                            cargar_combos_detalle();
+                            return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdPromedioFinal = model.IdPromedioFinal });
+                        }
+                    }
+                    ViewBag.MensajeSuccess = MensajeSuccess;
+                }
+                cargar_combos(model);
+                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdPromedioFinal = model.IdPromedioFinal });
+            }
+            catch (Exception ex)
+            {
+                //SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.error = ex.Message.ToString();
+                cargar_combos_detalle();
+                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdPromedioFinal = model.IdPromedioFinal });
+            }
+        }
+
+        public ActionResult GridViewPartial_MatriculaConductaImportacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaEditarConducta.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            cargar_combos_detalle();
+            return PartialView("_GridViewPartial_MatriculaConductaImportacion", model);
+        }
         #endregion
     }
 
@@ -508,6 +664,87 @@ namespace Core.Web.Areas.Academico.Controllers
                 bus_conducta.ModicarPromedioFinalQuimestre(edited_info);
             }
 
+        }
+    }
+
+    public class UploadControlSettings_ConductaQuimestral
+    {
+
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            aca_MatriculaConductaFinal_List ListaConductaQuimestral = new aca_MatriculaConductaFinal_List();
+            List<aca_MatriculaConducta_Info> Lista_Conducta = new List<aca_MatriculaConducta_Info>();
+            aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
+            aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
+            #endregion
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(1) && cont > 0)
+                    {
+                        var IdMatricula = (Convert.ToInt32(reader.GetValue(1)));
+                        var pe_nombreCompleto = (Convert.ToString(reader.GetValue(2)).Trim());
+                        var Conducta = (Convert.ToString(reader.GetValue(3)).Trim());
+                        var MotivoConducta = (Convert.ToString(reader.GetValue(4)).Trim());
+
+                        var info_conducta = bus_conducta.GetInfo_x_Letra(IdEmpresa, info_anio.IdAnio, Conducta);
+                        aca_MatriculaConducta_Info info = new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdMatricula = IdMatricula,
+                            pe_nombreCompleto = pe_nombreCompleto,
+                            SecuenciaConductaPromedioParcialFinal = (info_conducta == null ? (int?)null : info_conducta.Secuencia),
+                            ConductaPromedioParcialFinal = (info_conducta == null ? (double?)null : Convert.ToDouble(info_conducta.Calificacion)),
+                            MotivoPromedioParcialFinal = MotivoConducta
+                        };
+
+                        if (info.SecuenciaConductaPromedioParcialFinal == null)
+                        {
+                            info.ValidoImportacion = true;
+                        }
+                        else
+                        {
+                            if (info_conducta.IngresaMotivo == true)
+                            {
+                                if (string.IsNullOrEmpty(info.MotivoPromedioParcialFinal))
+                                {
+                                    info.ValidoImportacion = false;
+                                }
+                                else
+                                {
+                                    info.ValidoImportacion = true;
+                                }
+                            }
+                            else
+                            {
+                                info.ValidoImportacion = true;
+                            }
+                        }
+
+                        Lista_Conducta.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+
+                ListaConductaQuimestral.set_list(Lista_Conducta, IdTransaccionSession);
+            }
         }
     }
 }
