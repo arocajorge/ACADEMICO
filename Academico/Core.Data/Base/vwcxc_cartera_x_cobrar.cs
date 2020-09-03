@@ -44,5 +44,6 @@ namespace Core.Data.Base
         public Nullable<int> IdAnio { get; set; }
         public Nullable<int> IdPlantilla { get; set; }
         public Nullable<int> IdPuntoVta { get; set; }
+        public Nullable<double> SaldoProntoPago { get; set; }
     }
 }

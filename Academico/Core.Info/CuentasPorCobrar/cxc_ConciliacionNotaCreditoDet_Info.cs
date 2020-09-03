@@ -36,6 +36,7 @@ namespace Core.Info.CuentasPorCobrar
         public decimal? IdAlumno { get; set; }
         public double Saldo_final { get; set; }
         public string Observacion { get; set; }
+        public double SaldoProntoPago { get; set; }
         #endregion
 
     }

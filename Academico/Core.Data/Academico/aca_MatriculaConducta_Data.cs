@@ -411,6 +411,7 @@ namespace Core.Data.Academico
                             MotivoPromedioFinalP6 = q.MotivoPromedioFinalP6,
                             MotivoPromedioFinalQ2 = q.MotivoPromedioFinalQ2,
                             MotivoPromedioFinal = q.MotivoPromedioFinal,
+                            ValidoImportacion=true
                         });
                     });
                 }

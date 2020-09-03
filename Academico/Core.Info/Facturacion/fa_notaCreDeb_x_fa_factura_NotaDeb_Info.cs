@@ -36,6 +36,7 @@ namespace Core.Info.Facturacion
         public bool seleccionado { get; set; }
         public double Saldo_final { get; set; }
         public int? IdPuntoVta { get; set; }
+        public double SaldoProntoPago { get; set; }
         #endregion
 
     }

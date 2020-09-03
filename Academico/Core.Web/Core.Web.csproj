@@ -9035,6 +9035,8 @@
     <Content Include="Areas\Reportes\Views\FacturacionReportes\FAC_009.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_022.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_023.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaConducta\_GridViewPartial_MatriculaConductaImportacion.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaConducta\Importar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

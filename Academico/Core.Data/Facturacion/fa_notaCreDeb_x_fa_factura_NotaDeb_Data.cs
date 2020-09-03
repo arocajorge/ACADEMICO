@@ -106,7 +106,8 @@ namespace Core.Data.Facturacion
                                      vt_Subtotal = q.vt_Subtotal,
                                      vt_iva = q.vt_iva,
                                      NumDocumento = q.vt_NunDocumento,
-                                     TieneSaldo0 = false
+                                     TieneSaldo0 = false,
+                                     SaldoProntoPago = q.SaldoProntoPago??0
                                  }).ToList();
                     else
                         Lista = (from q in Context.vwcxc_cartera_x_cobrar
@@ -129,7 +130,8 @@ namespace Core.Data.Facturacion
                                      vt_Subtotal = q.vt_Subtotal,
                                      vt_iva = q.vt_iva,
                                      NumDocumento = q.vt_NunDocumento,
-                                     TieneSaldo0 = false
+                                     TieneSaldo0 = false,
+                                     SaldoProntoPago = q.SaldoProntoPago ?? 0
                                  }).ToList();
 
                     Lista.ForEach(q => { q.secuencial = q.vt_tipoDoc + "-" + q.IdBodega_fac_nd_doc_mod.ToString() + "-" + q.IdCbteVta_fac_nd_doc_mod.ToString(); q.Valor_Aplicado = Convert.ToDouble(q.Saldo);});

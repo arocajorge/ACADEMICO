@@ -59,7 +59,6 @@ namespace Core.Web.Reportes.Academico
 
             List<ACA_023_Info> ListaGrafico = new List<ACA_023_Info>();
             ListaGrafico = (from q in lst_rpt
-                            where q.Letra!=null
                              group q by new
                              {
                                  q.IdEmpresa,

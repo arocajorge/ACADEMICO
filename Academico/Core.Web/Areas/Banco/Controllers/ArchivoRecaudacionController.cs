@@ -435,7 +435,8 @@ namespace Core.Web.Areas.Banco.Controllers
                 {
                     var Lista = info.Lst_det;
                     DateTime FechaIni = Convert.ToDateTime("01" + "-" + (Convert.ToDateTime(info.Fecha).Month) + "-" + (Convert.ToDateTime(info.Fecha).Year));
-                    DateTime FechaFin = Convert.ToDateTime(FechaIni.AddDays(-1).Day + "-" + FechaIni.Month + "-" + FechaIni.Year);
+                    DateTime FechaFin = new DateTime(FechaIni.Year, FechaIni.Month + 1, 1).AddDays(-1);
+                    //DateTime FechaFin = Convert.ToDateTime(DiaFin.ToString() + "-" + Mes.ToString() + "-" + Anio.ToString());
 
                     #region PRODUBANCO
                     if (info.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECPB))
@@ -479,7 +480,7 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea1 += "\t";//
 
                             file.WriteLine(linea1);
-
+                            var ValorCero = 0;
                             linea2 += "RC" + "\t";
                             linea2 += item.Secuencia.ToString() + "\t";
                             linea2 += "PP" + "\t";//COMPROBANTE DE PAGO
@@ -488,9 +489,9 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += FechaFin.Day.ToString().PadLeft(2, '0') + FechaFin.Month.ToString().PadLeft(2, '0') + FechaFin.Year.ToString() + "\t";//HASTA
                             linea2 += "C" + "\t";
                             linea2 += "FI" + "\t";
-                            linea2 += (valorEntero.ToString() + valorDecimal.ToString().PadRight(2, '0')).PadLeft(13, '0') + "\t";
+                            linea2 += (ValorCero.ToString() + ValorCero.ToString().PadRight(2, '0')).PadLeft(13, '0') + "\t";
                             linea2 += "0".PadLeft(13, '0') + "\t";
-                            linea2 += (valorEntero.ToString() + valorDecimal.ToString().PadRight(2, '0')).PadLeft(5, '0');//ESTE CAMPO NO ESTA EN LA FICHA
+                            linea2 += (ValorCero.ToString() + ValorCero.ToString().PadRight(2, '0')).PadLeft(5, '0');//ESTE CAMPO NO ESTA EN LA FICHA
 
                             file.WriteLine(linea2);
                         }
@@ -629,7 +630,7 @@ namespace Core.Web.Areas.Banco.Controllers
                 return filebyte;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

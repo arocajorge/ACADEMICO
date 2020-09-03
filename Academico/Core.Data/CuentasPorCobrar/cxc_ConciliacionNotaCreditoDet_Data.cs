@@ -97,7 +97,8 @@ namespace Core.Data.CuentasPorCobrar
                             IdPuntoVta = item.IdPuntoVta,
                             IdCliente = item.IdCliente,
                             IdAlumno = item.IdAlumno,
-                            secuencia = item.vt_tipoDoc + "-" + item.IdBodega.ToString() + "-" + item.IdComprobante.ToString()
+                            secuencia = item.vt_tipoDoc + "-" + item.IdBodega.ToString() + "-" + item.IdComprobante.ToString(),
+                            SaldoProntoPago = item.SaldoProntoPago??0
                         });
                     }
                 }

@@ -1,15 +1,14 @@
-﻿@using Core.Web.Helps
-@model Core.Info.Academico.aca_MatriculaConducta_Info
+﻿@model Core.Info.Academico.aca_MatriculaConducta_Info
 @{
-    ViewBag.Title = "Ingreso de calificaciones de conducta parcial";
-    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
-    {
-        Response.Redirect("~/Account/Login");
-    }
+    ViewBag.Title = "Importación de conducta parcial";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script>
+
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
     $(function () {
+        CargarParciales();
+
         $("#IdCatalogoTipo").change(function () {
             CargarParciales();
         });
@@ -36,11 +35,37 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridViewPartial_MatriculaConducta.PerformCallback();
+                GridViewPartial_MatriculaConductaImportacion.PerformCallback();
             },
             error: function (error) {
             }
         });
+    }
+
+    function OnFileUploadStart(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ActualizarVariablesSession", "MatriculaConducta", new { Area = "Academico"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function OnFileUploadComplete(s, e)
+    {
+        GridViewPartial_MatriculaConductaImportacion.PerformCallback();
     }
 
     function CargarParciales() {
@@ -54,7 +79,7 @@
         $.ajax({
             type: 'POST',
             data: JSON.stringify(datos),
-            url: '@Url.Action("CargarParciales_X_Quimestre", "MatriculaCalificacionParcial",new { Area = "Academico"})',
+            url: '@Url.Action("CargarParciales_X_Quimestre", "MatriculaConducta", new { Area = "Academico"})',
             async: false,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
@@ -69,14 +94,40 @@
         });
     }
 
-    function importar() {
-        var location = GetPathServer();
-        var win = window.open(location + "/Academico/MatriculaConducta/Importar?IdEmpresa=" + $("#IdEmpresa").val() + "&IdSede=" + IdSede.GetValue() + "&IdAnio=" + IdAnio.GetValue() + "&IdNivel=" + IdNivel.GetValue() + "&IdJornada=" + IdJornada.GetValue() + "&IdCurso=" + IdCurso.GetValue() + "&IdParalelo=" + IdParalelo.GetValue() + "&IdCatalogoTipo=" + $("#IdCatalogoTipo").val() + "&IdCatalogoParcial=" + $("#IdCatalogoParcial").val(), '_self');
-        win.focus();
-    }
 </script>
-@using (Html.BeginForm("Index", "MatriculaConducta", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
+
+@using (Html.BeginForm("Importar", "MatriculaConducta", FormMethod.Post, new { @role = "form", @id = "form" }))
 {
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+    if (ViewBag.error != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.error
+                <a href="@Url.Action("Index","LogError",new  {Area="General"}, null )" class="small-box-footer" target="_blank">Ver detalle error<i class="fa fa-arrow-circle-right"></i></a>
+            </h4>
+        </div>
+
+    }
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     <div class="row">
@@ -143,11 +194,41 @@
             </div>
         </div>
     </div>
-
-    <div class="box-footer">
-        <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button> 
-        <button type="button" class="btn btn-primary" id="btn_importar" onclick="importar();">Descargar/Importar</button>     
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button>
+                <button type="submit" class="btn btn-primary" title="Guardar">Guardar</button>
+            </div>
+        </div>
     </div>
-    @Html.Action("GridViewPartial_MatriculaConducta")
-    }
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                @Html.DevExpress().UploadControl(settings =>
+           {
+               settings.Name = "UploadControlFile";
+               settings.CallbackRouteValues = new { Controller = "MatriculaConducta", Action = "UploadControlUpload" };
+               settings.ShowUploadButton = true;
+               settings.ShowProgressPanel = true;
+               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+               settings.NullText = "Selecciona el archivo...";
+               settings.ClientSideEvents.FilesUploadStart = "OnFileUploadStart";
+               settings.ClientSideEvents.FileUploadComplete = "OnFileUploadComplete";
+           }).GetHtml()
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_MatriculaConductaImportacion")
+            </div>
+        </div>
+    </div>
 
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

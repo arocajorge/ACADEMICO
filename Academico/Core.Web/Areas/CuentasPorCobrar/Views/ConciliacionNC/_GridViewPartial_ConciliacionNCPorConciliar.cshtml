@@ -38,16 +38,15 @@
         settings.SettingsBehavior.AllowSelectByRowClick = true;
         settings.Settings.ShowFooter = true;
 
-        
-        settings.Columns.Add("NomCliente", "Cliente").Width = Unit.Percentage(20);
-        settings.Columns.Add("ReferenciaDet", "# Documento").Width = Unit.Percentage(20);
+        //settings.Columns.Add("NomCliente", "Cliente").Width = Unit.Percentage(20);
+        settings.Columns.Add("ReferenciaDet", "# Documento").Width = Unit.Percentage(25);
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
             column.FieldName = "vt_fecha";
             column.Caption = "Fecha";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-        });        
+        });
         settings.Columns.Add(column =>
         {
             column.Width = Unit.Percentage(10);
@@ -73,6 +72,13 @@
         });
         settings.Columns.Add(column =>
         {
+            column.Width = Unit.Percentage(12);
+            column.FieldName = "ValorProntoPago";
+            column.Caption = "Total Pronto Pago";
+            column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+        });
+        settings.Columns.Add(column =>
+        {
             column.Width = Unit.Percentage(10);
             column.FieldName = "Saldo";
             column.Caption = "Saldo";
@@ -80,19 +86,19 @@
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(10);
-            column.FieldName = "ValorProntoPago";
-            column.Caption = "Pronto Pago";
+            column.Width = Unit.Percentage(12);
+            column.FieldName = "SaldoProntoPago";
+            column.Caption = "Saldo Pronto Pago";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
         settings.Columns.Add(column =>
         {
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(12);
             column.FieldName = "FechaProntoPago";
             column.Caption = "Fecha pronto pago";
             column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
         });
-        
+
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "vt_total").DisplayFormat = "{0:c2}";
         settings.TotalSummary.Add(DevExpress.Data.SummaryItemType.Sum, "Saldo").DisplayFormat = "{0:c2}";
 

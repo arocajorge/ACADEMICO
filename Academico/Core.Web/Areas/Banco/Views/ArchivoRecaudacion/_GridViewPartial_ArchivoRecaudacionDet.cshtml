@@ -23,10 +23,15 @@
         settings.SettingsContextMenu.Enabled = false;
         settings.SettingsBehavior.EnableCustomizationWindow = true;
 
-
         settings.Settings.ShowFooter = true;
         settings.SettingsPager.Visible = true;
         settings.Settings.ShowGroupPanel = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        //Configuración filtro por columna
+        settings.Settings.AutoFilterCondition = AutoFilterCondition.Contains;
+        settings.Settings.ShowFilterRow = true;
+        settings.Settings.ShowHeaderFilterButton = true;
         settings.SettingsBehavior.AllowSelectByRowClick = true;
 
         //Configuracion responsive

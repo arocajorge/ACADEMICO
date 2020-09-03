@@ -17,8 +17,7 @@ namespace Core.Data.CuentasPorCobrar
                 using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
                 {
                     var lst = Context.vwcxc_cartera_x_cobrar.Where(q=> q.IdEmpresa == IdEmpresa
-                             && q.IdSucursal == IdSucursal
-                             
+                             && q.IdSucursal == IdSucursal                        
                              && q.IdCliente == (FiltrarPorCliente == true ? IdCliente : q.IdCliente)
                              && q.IdAlumno == (FiltrarPorCliente == false ? IdCliente : q.IdAlumno)
 
@@ -49,7 +48,8 @@ namespace Core.Data.CuentasPorCobrar
                             IdPlantilla = q.IdPlantilla,
                             IdPuntoVta = q.IdPuntoVta,
                             IdCliente = q.IdCliente,
-                            IdAlumno = q.IdAlumno
+                            IdAlumno = q.IdAlumno,
+                            SaldoProntoPago = q.SaldoProntoPago??0
                         });
                     }
 

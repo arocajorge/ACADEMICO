@@ -85,12 +85,18 @@ namespace Core.Info.Academico
 
         public int SecuenciaConductaPromedioParcial { get; set; }
         public double ConductaPromedioParcial { get; set; }
-        public int SecuenciaConductaPromedioParcialFinal { get; set; }
-        public double ConductaPromedioParcialFinal { get; set; }
+        public Nullable<int> SecuenciaConductaPromedioParcialFinal { get; set; }
+        public Nullable<double> ConductaPromedioParcialFinal { get; set; }
         public string MotivoPromedioParcialFinal { get; set; }
         public string IdPromedioFinal { get; set; }
         public int IdCatalogoTipo { get; set; }
         public int IdMateria { get; set; }
+
+
+        //public Nullable<int> SecuenciaImportacion { get; set; }
+        //public Nullable<double> ConductaImportacion { get; set; }
+        //public string MotivoConductaImportacion { get; set; }
+        public bool ValidoImportacion { get; set; }
         #endregion
     }
 }

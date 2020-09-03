@@ -75,6 +75,13 @@
             column.Caption = "Saldo";
             column.PropertiesEdit.DisplayFormatString = "{0:N2}";
         });
+        //settings.Columns.Add(column =>
+        //{
+        //    column.Width = Unit.Percentage(10);
+        //    column.FieldName = "SaldoProntoPago";
+        //    column.Caption = "Saldo Pronto Pago";
+        //    column.PropertiesEdit.DisplayFormatString = "{0:N2}";
+        //});
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";
     });
 }

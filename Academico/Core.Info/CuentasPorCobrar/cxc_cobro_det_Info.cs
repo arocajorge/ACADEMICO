@@ -62,6 +62,7 @@ namespace Core.Info.CuentasPorCobrar
         public int? IdPlantilla { get; set; }
         public int? IdAnio { get; set; }
         public double TotalxCobrado { get; set; }
+        public double SaldoProntoPago { get; set; }
         #endregion
 
     }
