@@ -101,6 +101,17 @@
                             @Html.ValidationMessageFor(q => q.IdCatalogoParcial, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdCliente"></label>
+                            @Html.DevExpress().CheckBoxFor(q => q.MostrarRetirados, settings =>
+                            {
+                                settings.Name = "MostrarRetirados";
+                                settings.Text = "Mostrar retirados";
+                            }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.MostrarRetirados, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.box-body -->

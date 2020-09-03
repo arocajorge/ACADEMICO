@@ -175,6 +175,7 @@
             this.p_IdCatalogoParcial = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_MostrarRetirados = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
@@ -2162,6 +2163,11 @@
             this.p_IdAlumno.Name = "p_IdAlumno";
             this.p_IdAlumno.Visible = false;
             // 
+            // p_MostrarRetirados
+            // 
+            this.p_MostrarRetirados.Name = "p_MostrarRetirados";
+            this.p_MostrarRetirados.Visible = false;
+            // 
             // ACA_014_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -2192,7 +2198,8 @@
             this.p_IdParalelo,
             this.p_IdMatricula,
             this.p_IdCatalogoParcial,
-            this.p_IdAlumno});
+            this.p_IdAlumno,
+            this.p_MostrarRetirados});
             this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_014_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -2353,5 +2360,6 @@
         private DevExpress.XtraReports.UI.XRSubreport Subreport_Conducta;
         private DevExpress.XtraReports.UI.XRSubreport Cualitativa_Subreporte;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell71;
+        public DevExpress.XtraReports.Parameters.Parameter p_MostrarRetirados;
     }
 }

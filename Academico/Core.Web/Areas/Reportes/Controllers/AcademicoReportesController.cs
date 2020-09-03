@@ -1488,7 +1488,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
-
+            model.MostrarRetirados = false;
             string IdUsuario = SessionFixed.IdUsuario;
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
@@ -1517,6 +1517,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
+            report.p_MostrarRetirados.Value = model.MostrarRetirados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
@@ -1548,6 +1549,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
+            report.p_MostrarRetirados.Value = model.MostrarRetirados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
@@ -1575,6 +1577,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             model.IdCatalogoParcial = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
+            model.MostrarRetirados = false;
             string IdUsuario = SessionFixed.IdUsuario;
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
@@ -1602,6 +1605,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
+            report.p_MostrarRetirados.Value = model.MostrarRetirados;
 
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -1633,6 +1637,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
+            report.p_MostrarRetirados.Value = model.MostrarRetirados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;

@@ -54,6 +54,7 @@ namespace Core.Info.Academico
         public Nullable<decimal> CalificacionP5 { get; set; }
         public Nullable<decimal> CalificacionP6 { get; set; }
         public int IdCatalogoTipo { get; set; }
+        public bool MostrarRetirados { get; set; }
         #endregion
     }
 }
