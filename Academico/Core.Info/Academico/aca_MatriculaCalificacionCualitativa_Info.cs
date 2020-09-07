@@ -41,6 +41,7 @@ namespace Core.Info.Academico
         public bool RegistroValidoCalificacion { get; set; }
         public bool RegistroValidoConducta { get; set; }
         public bool RegistroValido { get; set; }
+        public bool MostrarRetirados { get; set; }
         #endregion
     }
 }

@@ -579,6 +579,24 @@
     <Compile Include="Reportes\Academico\ACA_024_Rpt.Designer.cs">
       <DependentUpon>ACA_024_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_025_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_025_Rpt.Designer.cs">
+      <DependentUpon>ACA_025_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_026_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_026_Rpt.Designer.cs">
+      <DependentUpon>ACA_026_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_027_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_027_Rpt.Designer.cs">
+      <DependentUpon>ACA_027_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9046,6 +9064,9 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_024.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaConductaQuimestral\_GridViewPartial_MatriculaConductaImportacion.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaConductaQuimestral\Importar.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_025.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_026.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_027.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9244,6 +9265,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_024_Rpt.resx">
       <DependentUpon>ACA_024_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_025_Rpt.resx">
+      <DependentUpon>ACA_025_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_026_Rpt.resx">
+      <DependentUpon>ACA_026_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_027_Rpt.resx">
+      <DependentUpon>ACA_027_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.resx">
       <DependentUpon>BAN_001_cancelaciones_Rpt.cs</DependentUpon>

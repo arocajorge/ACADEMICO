@@ -173,7 +173,7 @@ namespace Core.Data.Academico
                 throw;
             }
         }
-        public List<aca_MatriculaCalificacion_Info> getList_Combos(int IdEmpresa, decimal IdProfesor, bool EsSuperAdmin)
+        public List<aca_MatriculaCalificacion_Info> getList_Combos(int IdEmpresa, int IdAnio, int IdSede)
         {
             try
             {
@@ -183,7 +183,61 @@ namespace Core.Data.Academico
                 {
                     odata.Database.CommandTimeout = 5000;
                     var lst = odata.vwaca_AnioLectivo_Paralelo_Profesor_CalificacionesCualitativas.Where(q => q.IdEmpresa == IdEmpresa
-                    && q.IdProfesor == (EsSuperAdmin == true ? q.IdProfesor : IdProfesor)).ToList();
+                    && q.IdAnio == IdAnio && q.IdSede == IdSede).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_MatriculaCalificacion_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdMatricula = q.IdMatricula,
+                            IdMateria = q.IdMateria,
+                            IdProfesor = q.IdProfesor,
+                            IdAnio = q.IdAnio,
+                            IdSede = q.IdSede,
+                            IdNivel = q.IdNivel,
+                            IdJornada = q.IdJornada,
+                            IdCurso = q.IdCurso,
+                            IdParalelo = q.IdParalelo,
+                            Descripcion = q.Descripcion,
+                            NomSede = q.NomSede,
+                            NomNivel = q.NomNivel,
+                            OrdenNivel = q.OrdenNivel ?? 0,
+                            NomJornada = q.NomJornada,
+                            OrdenJornada = q.OrdenJornada ?? 0,
+                            NomCurso = q.NomCurso,
+                            OrdenCurso = q.OrdenCurso ?? 0,
+                            NomParalelo = q.NomParalelo,
+                            OrdenParalelo = q.OrdenParalelo ?? 0,
+                            CodigoParalelo = q.CodigoParalelo,
+                            IdProfesorTutor = q.IdProfesorTutor ?? 0,
+                            IdProfesorInspector = q.IdProfesorInspector ?? 0,
+                            NomMateria = q.NomMateria,
+                            OrdenMateria = q.OrdenMateria,
+                            EsObligatorio = q.EsObligatorio
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<aca_MatriculaCalificacion_Info> getList_Combos(int IdEmpresa, int IdAnio, int IdSede, decimal IdProfesor, bool EsSuperAdmin)
+        {
+            try
+            {
+                List<aca_MatriculaCalificacion_Info> Lista = new List<aca_MatriculaCalificacion_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    odata.Database.CommandTimeout = 5000;
+                    var lst = odata.vwaca_AnioLectivo_Paralelo_Profesor_CalificacionesCualitativas.Where(q => q.IdEmpresa == IdEmpresa
+                    && q.IdAnio==IdAnio && q.IdSede==IdSede && q.IdProfesor == (EsSuperAdmin == true ? q.IdProfesor : IdProfesor)).ToList();
 
                     lst.ForEach(q =>
                     {

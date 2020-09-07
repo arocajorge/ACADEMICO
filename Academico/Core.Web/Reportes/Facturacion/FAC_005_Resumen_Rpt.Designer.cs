@@ -55,10 +55,6 @@
             this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
-            this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField3 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrTable8 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow16 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell50 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -74,6 +70,11 @@
             this.p_FechaHasta = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_Naturaleza = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
+            this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField3 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
+            this.pivotGridField4 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
@@ -321,6 +322,7 @@
             this.xrPivotGrid1.Appearance.Lines.Font = new System.Drawing.Font("Tahoma", 7.8F);
             this.xrPivotGrid1.Appearance.TotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F);
             this.xrPivotGrid1.Fields.AddRange(new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField[] {
+            this.pivotGridField4,
             this.pivotGridField2,
             this.pivotGridField5,
             this.pivotGridField1,
@@ -332,53 +334,11 @@
             this.xrPivotGrid1.OptionsPrint.PrintHorzLines = DevExpress.Utils.DefaultBoolean.True;
             this.xrPivotGrid1.OptionsPrint.PrintVertLines = DevExpress.Utils.DefaultBoolean.True;
             this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
-            this.xrPivotGrid1.OptionsView.ShowColumnHeaders = false;
-            this.xrPivotGrid1.OptionsView.ShowColumnTotals = false;
+            this.xrPivotGrid1.OptionsView.ShowCustomTotalsForSingleValues = true;
             this.xrPivotGrid1.OptionsView.ShowDataHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowFilterHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(549.9998F, 60F);
-            // 
-            // pivotGridField2
-            // 
-            this.pivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.pivotGridField2.AreaIndex = 0;
-            this.pivotGridField2.Caption = "Tipo de nota";
-            this.pivotGridField2.FieldName = "No_Descripcion";
-            this.pivotGridField2.Name = "pivotGridField2";
-            this.pivotGridField2.Width = 350;
-            // 
-            // pivotGridField5
-            // 
-            this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
-            this.pivotGridField5.AreaIndex = 0;
-            this.pivotGridField5.Caption = "V. Aplicado";
-            this.pivotGridField5.CellFormat.FormatString = "n2";
-            this.pivotGridField5.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.pivotGridField5.FieldName = "Aplicacion";
-            this.pivotGridField5.Name = "pivotGridField5";
-            this.pivotGridField5.TotalCellFormat.FormatString = "n2";
-            this.pivotGridField5.TotalCellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            // 
-            // pivotGridField1
-            // 
-            this.pivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
-            this.pivotGridField1.AreaIndex = 1;
-            this.pivotGridField1.Caption = "V. Conciliado";
-            this.pivotGridField1.CellFormat.FormatString = "n2";
-            this.pivotGridField1.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.pivotGridField1.FieldName = "Cruce";
-            this.pivotGridField1.Name = "pivotGridField1";
-            // 
-            // pivotGridField3
-            // 
-            this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
-            this.pivotGridField3.AreaIndex = 2;
-            this.pivotGridField3.Caption = "Saldo";
-            this.pivotGridField3.CellFormat.FormatString = "n2";
-            this.pivotGridField3.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.pivotGridField3.FieldName = "Saldo";
-            this.pivotGridField3.Name = "pivotGridField3";
+            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(598.2681F, 60F);
             // 
             // xrTable8
             // 
@@ -524,6 +484,66 @@
             this.p_IdEmpresa.Name = "p_IdEmpresa";
             this.p_IdEmpresa.Visible = false;
             // 
+            // pivotGridField2
+            // 
+            this.pivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
+            this.pivotGridField2.AreaIndex = 0;
+            this.pivotGridField2.Caption = "Tipo de nota";
+            this.pivotGridField2.FieldName = "No_Descripcion";
+            this.pivotGridField2.Name = "pivotGridField2";
+            this.pivotGridField2.Width = 350;
+            // 
+            // pivotGridField5
+            // 
+            this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
+            this.pivotGridField5.AreaIndex = 0;
+            this.pivotGridField5.Caption = "V. Aplicado";
+            this.pivotGridField5.CellFormat.FormatString = "n2";
+            this.pivotGridField5.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.pivotGridField5.FieldName = "Aplicacion";
+            this.pivotGridField5.Name = "pivotGridField5";
+            this.pivotGridField5.TotalCellFormat.FormatString = "n2";
+            this.pivotGridField5.TotalCellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.pivotGridField5.Width = 90;
+            // 
+            // pivotGridField1
+            // 
+            this.pivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
+            this.pivotGridField1.AreaIndex = 1;
+            this.pivotGridField1.Caption = "V. Conciliado";
+            this.pivotGridField1.CellFormat.FormatString = "n2";
+            this.pivotGridField1.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.pivotGridField1.FieldName = "Cruce";
+            this.pivotGridField1.Name = "pivotGridField1";
+            this.pivotGridField1.Width = 90;
+            // 
+            // pivotGridField3
+            // 
+            this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
+            this.pivotGridField3.AreaIndex = 2;
+            this.pivotGridField3.Caption = "Saldo";
+            this.pivotGridField3.CellFormat.FormatString = "n2";
+            this.pivotGridField3.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.pivotGridField3.FieldName = "Saldo";
+            this.pivotGridField3.Name = "pivotGridField3";
+            this.pivotGridField3.Width = 90;
+            // 
+            // pivotGridField4
+            // 
+            this.pivotGridField4.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.pivotGridField4.Appearance.CustomTotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.pivotGridField4.Appearance.FieldHeader.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.pivotGridField4.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.pivotGridField4.Appearance.FieldValueGrandTotal.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.pivotGridField4.Appearance.FieldValueTotal.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.pivotGridField4.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.pivotGridField4.Appearance.TotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
+            this.pivotGridField4.AreaIndex = 3;
+            this.pivotGridField4.FieldName = "Total";
+            this.pivotGridField4.Name = "pivotGridField4";
+            this.pivotGridField4.Width = 90;
+            // 
             // FAC_005_Resumen_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -604,5 +624,6 @@
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField5;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField1;
         private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField3;
+        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField4;
     }
 }

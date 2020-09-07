@@ -69,7 +69,7 @@ namespace Core.Web.Areas.Academico.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_parcial.getList_Combos(model.IdEmpresa, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_parcial.getList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ViewBag.EsSuperAdmin = EsSuperAdmin;
             cargar_combos(model);
@@ -612,7 +612,7 @@ namespace Core.Web.Areas.Academico.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_parcial.getList_Combos(model.IdEmpresa, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_parcial.getList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             List<aca_MatriculaCalificacionCualitativa_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionCualitativa_Info>();
             ListaCalificaciones = bus_calificacion_parcial.getList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial, IdProfesor);

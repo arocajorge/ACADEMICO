@@ -102,11 +102,22 @@ namespace Core.Bus.Academico
             }
         }
 
-        public List<aca_MatriculaCalificacion_Info> GetList_Combos(int IdEmpresa, decimal IdProfesor, bool EsSuperAdmin)
+        public List<aca_MatriculaCalificacion_Info> GetList_Combos(int IdEmpresa, int IdAnio, int IdSede)
         {
             try
             {
-                return odata.getList_Combos(IdEmpresa, IdProfesor, EsSuperAdmin);
+                return odata.getList_Combos(IdEmpresa, IdAnio, IdSede);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<aca_MatriculaCalificacion_Info> GetList_Combos(int IdEmpresa, int IdAnio, int IdSede, decimal IdProfesor, bool EsSuperAdmin)
+        {
+            try
+            {
+                return odata.getList_Combos(IdEmpresa, IdAnio, IdSede, IdProfesor, EsSuperAdmin);
             }
             catch (Exception)
             {
@@ -114,22 +125,22 @@ namespace Core.Bus.Academico
             }
         }
 
-        public List<aca_MatriculaCalificacion_Info> GetList_Combos_Tutor(int IdEmpresa, decimal IdProfesor, bool EsSuperAdmin)
+        public List<aca_MatriculaCalificacion_Info> GetList_Combos_Tutor(int IdEmpresa, int IdAnio, int IdSede, decimal IdProfesor, bool EsSuperAdmin)
         {
             try
             {
-                return odata.getList_Combos_Tutor(IdEmpresa, IdProfesor, EsSuperAdmin);
+                return odata.getList_Combos_Tutor(IdEmpresa, IdAnio, IdSede, IdProfesor, EsSuperAdmin);
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        public List<aca_MatriculaCalificacion_Info> GetList_Combos_Inspector(int IdEmpresa, decimal IdProfesor, bool EsSuperAdmin)
+        public List<aca_MatriculaCalificacion_Info> GetList_Combos_Inspector(int IdEmpresa, int IdAnio, int IdSede, decimal IdProfesor, bool EsSuperAdmin)
         {
             try
             {
-                return odata.getList_Combos_Inspector(IdEmpresa, IdProfesor, EsSuperAdmin);
+                return odata.getList_Combos_Inspector(IdEmpresa, IdAnio, IdSede, IdProfesor, EsSuperAdmin);
             }
             catch (Exception)
             {

@@ -97,6 +97,7 @@ namespace Core.Info.Academico
         //public Nullable<double> ConductaImportacion { get; set; }
         //public string MotivoConductaImportacion { get; set; }
         public bool ValidoImportacion { get; set; }
+        public bool MostrarRetirados { get; set; }
         #endregion
     }
 }
