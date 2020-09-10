@@ -59,6 +59,20 @@
                     @Html.ValidationMessageFor(q => q.ApareceSeguimientoCobranza, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdSucursal">#Facturas Inicio*</label>
+                    @Html.TextBoxFor(q => q.CantidadIni, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CantidadIni, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdSucursal">#Facturas fin*</label>
+                    @Html.TextBoxFor(q => q.CantidadFin, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CantidadFin, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

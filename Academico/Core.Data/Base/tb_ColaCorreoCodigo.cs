@@ -19,5 +19,7 @@ namespace Core.Data.Base
         public string Asunto { get; set; }
         public string Cuerpo { get; set; }
         public Nullable<bool> ApareceSeguimientoCobranza { get; set; }
+        public Nullable<int> CantidadIni { get; set; }
+        public Nullable<int> CantidadFin { get; set; }
     }
 }

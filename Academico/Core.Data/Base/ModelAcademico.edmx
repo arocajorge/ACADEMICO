@@ -1397,6 +1397,10 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Alumno_PeriodoActual' no tie
           <Property Name="SaldoProntoPago" Type="float" Nullable="false" />
           <Property Name="CantDeudas" Type="int" Nullable="false" />
           <Property Name="NomPlantillaTipo" Type="varchar" MaxLength="500" />
+          <Property Name="OrdenJornada" Type="int" />
+          <Property Name="OrdenNivel" Type="int" />
+          <Property Name="OrdenCurso" Type="int" />
+          <Property Name="OrdenParalelo" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_AlumnoDocumento' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -4534,7 +4538,11 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
     [vwaca_Alumno_PeriodoActual].[Saldo] AS [Saldo], 
     [vwaca_Alumno_PeriodoActual].[SaldoProntoPago] AS [SaldoProntoPago], 
     [vwaca_Alumno_PeriodoActual].[CantDeudas] AS [CantDeudas], 
-    [vwaca_Alumno_PeriodoActual].[NomPlantillaTipo] AS [NomPlantillaTipo]
+    [vwaca_Alumno_PeriodoActual].[NomPlantillaTipo] AS [NomPlantillaTipo], 
+    [vwaca_Alumno_PeriodoActual].[OrdenJornada] AS [OrdenJornada], 
+    [vwaca_Alumno_PeriodoActual].[OrdenNivel] AS [OrdenNivel], 
+    [vwaca_Alumno_PeriodoActual].[OrdenCurso] AS [OrdenCurso], 
+    [vwaca_Alumno_PeriodoActual].[OrdenParalelo] AS [OrdenParalelo]
     FROM [dbo].[vwaca_Alumno_PeriodoActual] AS [vwaca_Alumno_PeriodoActual]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vwaca_AlumnoDocumento" EntityType="Self.vwaca_AlumnoDocumento" store:Type="Views" store:Schema="dbo">
@@ -6347,7 +6355,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
             <End Role="aca_Familia" EntitySet="aca_Familia" />
           </AssociationSet>
-          <EntitySet Name="vwaca_Alumno_PeriodoActual" EntityType="ModelAcademico.vwaca_Alumno_PeriodoActual" />
           <EntitySet Name="vwaca_Matricula_Rubro_PorFacturarMasiva" EntityType="ModelAcademico.vwaca_Matricula_Rubro_PorFacturarMasiva" />
           <EntitySet Name="aca_MatriculaConducta" EntityType="ModelAcademico.aca_MatriculaConducta" />
           <AssociationSet Name="FK_aca_MatriculaConducta_aca_Matricula" Association="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula">
@@ -6478,6 +6485,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             <End Role="aca_NivelAcademico" EntitySet="aca_NivelAcademico" />
             <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
           </AssociationSet>
+          <EntitySet Name="vwaca_Alumno_PeriodoActual" EntityType="ModelAcademico.vwaca_Alumno_PeriodoActual" />
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
           <Key>
@@ -9870,53 +9878,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwaca_Alumno_PeriodoActual">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="IdMatricula" />
-            <PropertyRef Name="NombreAlumno" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="IdSede" />
-            <PropertyRef Name="IdNivel" />
-            <PropertyRef Name="IdJornada" />
-            <PropertyRef Name="IdCurso" />
-            <PropertyRef Name="IdParalelo" />
-            <PropertyRef Name="Saldo" />
-            <PropertyRef Name="SaldoProntoPago" />
-            <PropertyRef Name="CantDeudas" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="NombreAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NombreRepresentante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CorreoRepresentante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NombreEmiteFactura" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CorreoEmiteFactura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="CelularRepresentante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="CelularEmiteFactura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TelefonoRepresentante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TelefonoEmiteFactura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="IdSede" Type="Int32" Nullable="false" />
-          <Property Name="IdNivel" Type="Int32" Nullable="false" />
-          <Property Name="IdJornada" Type="Int32" Nullable="false" />
-          <Property Name="IdCurso" Type="Int32" Nullable="false" />
-          <Property Name="IdParalelo" Type="Int32" Nullable="false" />
-          <Property Name="NomSede" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomNivel" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomJornada" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomCurso" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomParalelo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Saldo" Type="Double" Nullable="false" />
-          <Property Name="SaldoProntoPago" Type="Double" Nullable="false" />
-          <Property Name="CantDeudas" Type="Int32" Nullable="false" />
-          <Property Name="NomPlantillaTipo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="vwaca_Matricula_Rubro_PorFacturarMasiva">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -11030,6 +10991,57 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vwaca_Alumno_PeriodoActual">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="NombreAlumno" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdSede" />
+            <PropertyRef Name="IdNivel" />
+            <PropertyRef Name="IdJornada" />
+            <PropertyRef Name="IdCurso" />
+            <PropertyRef Name="IdParalelo" />
+            <PropertyRef Name="Saldo" />
+            <PropertyRef Name="SaldoProntoPago" />
+            <PropertyRef Name="CantDeudas" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="NombreAlumno" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NombreRepresentante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoRepresentante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NombreEmiteFactura" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoEmiteFactura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CelularRepresentante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CelularEmiteFactura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoRepresentante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoEmiteFactura" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdSede" Type="Int32" Nullable="false" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="IdJornada" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="IdParalelo" Type="Int32" Nullable="false" />
+          <Property Name="NomSede" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomNivel" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomJornada" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomCurso" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomParalelo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Saldo" Type="Double" Nullable="false" />
+          <Property Name="SaldoProntoPago" Type="Double" Nullable="false" />
+          <Property Name="CantDeudas" Type="Int32" Nullable="false" />
+          <Property Name="NomPlantillaTipo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenJornada" Type="Int32" />
+          <Property Name="OrdenNivel" Type="Int32" />
+          <Property Name="OrdenCurso" Type="Int32" />
+          <Property Name="OrdenParalelo" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -12726,41 +12738,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwaca_Alumno_PeriodoActual">
-            <EntityTypeMapping TypeName="ModelAcademico.vwaca_Alumno_PeriodoActual">
-              <MappingFragment StoreEntitySet="vwaca_Alumno_PeriodoActual">
-                <ScalarProperty Name="NomPlantillaTipo" ColumnName="NomPlantillaTipo" />
-                <ScalarProperty Name="CantDeudas" ColumnName="CantDeudas" />
-                <ScalarProperty Name="SaldoProntoPago" ColumnName="SaldoProntoPago" />
-                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
-                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
-                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
-                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
-                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
-                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
-                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
-                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="TelefonoEmiteFactura" ColumnName="TelefonoEmiteFactura" />
-                <ScalarProperty Name="TelefonoRepresentante" ColumnName="TelefonoRepresentante" />
-                <ScalarProperty Name="CelularEmiteFactura" ColumnName="CelularEmiteFactura" />
-                <ScalarProperty Name="CelularRepresentante" ColumnName="CelularRepresentante" />
-                <ScalarProperty Name="CorreoEmiteFactura" ColumnName="CorreoEmiteFactura" />
-                <ScalarProperty Name="NombreEmiteFactura" ColumnName="NombreEmiteFactura" />
-                <ScalarProperty Name="CorreoRepresentante" ColumnName="CorreoRepresentante" />
-                <ScalarProperty Name="NombreRepresentante" ColumnName="NombreRepresentante" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwaca_Matricula_Rubro_PorFacturarMasiva">
             <EntityTypeMapping TypeName="ModelAcademico.vwaca_Matricula_Rubro_PorFacturarMasiva">
               <MappingFragment StoreEntitySet="vwaca_Matricula_Rubro_PorFacturarMasiva">
@@ -13337,6 +13314,45 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Profesor' no tiene definida 
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwaca_Alumno_PeriodoActual">
+            <EntityTypeMapping TypeName="ModelAcademico.vwaca_Alumno_PeriodoActual">
+              <MappingFragment StoreEntitySet="vwaca_Alumno_PeriodoActual">
+                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
+                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
+                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
+                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
+                <ScalarProperty Name="NomPlantillaTipo" ColumnName="NomPlantillaTipo" />
+                <ScalarProperty Name="CantDeudas" ColumnName="CantDeudas" />
+                <ScalarProperty Name="SaldoProntoPago" ColumnName="SaldoProntoPago" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="TelefonoEmiteFactura" ColumnName="TelefonoEmiteFactura" />
+                <ScalarProperty Name="TelefonoRepresentante" ColumnName="TelefonoRepresentante" />
+                <ScalarProperty Name="CelularEmiteFactura" ColumnName="CelularEmiteFactura" />
+                <ScalarProperty Name="CelularRepresentante" ColumnName="CelularRepresentante" />
+                <ScalarProperty Name="CorreoEmiteFactura" ColumnName="CorreoEmiteFactura" />
+                <ScalarProperty Name="NombreEmiteFactura" ColumnName="NombreEmiteFactura" />
+                <ScalarProperty Name="CorreoRepresentante" ColumnName="CorreoRepresentante" />
+                <ScalarProperty Name="NombreRepresentante" ColumnName="NombreRepresentante" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

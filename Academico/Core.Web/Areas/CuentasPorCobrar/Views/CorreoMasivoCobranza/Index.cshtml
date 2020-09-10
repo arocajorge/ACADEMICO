@@ -27,8 +27,30 @@
     }
 
     function DatosCorreo() {
-        if (Codigo.GetValue()!="" && Codigo.GetValue()!=null) {
+        if (Codigo.GetValue() != "" && Codigo.GetValue() != null) {
             $("#DatosCorreo").hide();
+
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                Codigo: Codigo.GetValue()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("DatosCorreo", "CorreoMasivoCobranza", new { Area = "CuentasPorCobrar" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $("#CantidadIni").val(data.Ini);
+                    $("#CantidadFin").val(data.Fin);
+                    actualizarTreeList();
+                },
+                error: function (error) {
+                }
+            });
         }
         else {
             $("#DatosCorreo").show();
@@ -52,6 +74,8 @@
             Cuerpo: Cuerpo.GetHtml(),
             RepLegal: RepLegal.GetValue(),
             RepEconomico: RepEconomico.GetValue(),
+            CantidadIni: $("#CantidadIni").val(),
+            CantidadFin: $("#CantidadFin").val(),
             IdTransaccionSession: $("#IdTransaccionSession").val(),
         }
         $("#btn_guardar").attr("disabled", true);
@@ -153,7 +177,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="IdCliente">Estudiante*</label>
                     @Html.Partial("_CmbAlumno", Model.IdAlumno)
@@ -180,6 +204,20 @@
                             settings.Text = "Representante Económico";
                         }).GetHtml()
                     @Html.ValidationMessageFor(q => q.RepEconomico, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdSucursal">#Facturas Inicio*</label>
+                    @Html.TextBoxFor(q => q.CantidadIni, new { @class = "form-control", @id = "CantidadIni" })
+                    @Html.ValidationMessageFor(m => m.CantidadIni, "", new { @class = "text-danger"})
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdSucursal">#Facturas fin*</label>
+                    @Html.TextBoxFor(q => q.CantidadFin, new { @class = "form-control", @id = "CantidadFin" })
+                    @Html.ValidationMessageFor(m => m.CantidadFin, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
@@ -239,7 +277,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            @Html.Action("aca_AnioLectivo_ParaleloTreeList", new { IdEmpresa = Model.IdEmpresa, IdAnio = Model.IdAnio })
+                            @Html.Action("aca_AnioLectivo_ParaleloTreeList")
                         </div>
                     </div>
                 </div>
@@ -256,3 +294,39 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
     }
+<script type="text/javascript">
+$(function () {
+    $("#CantidadIni").change(function () {
+        actualizarTreeList();
+    });
+
+    $("#CantidadFin").change(function () {
+        actualizarTreeList();
+    });
+})
+
+function actualizarTreeList() {
+    var datos = {
+        IdEmpresa: $("#IdEmpresa").val(),
+        IdAnio: $("#IdAnio").val(),
+        CantidadIni: $("#CantidadIni").val(),
+        CantidadFin: $("#CantidadFin").val(),
+        IdTransaccionSession: $("#IdTransaccionSession").val(),
+    }
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        url: '@Url.Action("actualizarTreeList", "CorreoMasivoCobranza", new { Area = "CuentasPorCobrar" })',
+        async: false,
+        bDeferRender: true,
+        bProcessing: true,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            aca_AnioLectivo_ParaleloTreeList.PerformCallback();
+        },
+        error: function (error) {
+        }
+    });
+}
+</script>

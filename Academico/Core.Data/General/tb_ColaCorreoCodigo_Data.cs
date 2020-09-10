@@ -27,7 +27,9 @@ namespace Core.Data.General
                             Codigo = item.Codigo,
                             ApareceSeguimientoCobranza = item.ApareceSeguimientoCobranza,
                             Asunto = item.Asunto,
-                            Cuerpo = item.Cuerpo
+                            Cuerpo = item.Cuerpo,
+                            CantidadFin = item.CantidadFin,
+                            CantidadIni = item.CantidadIni
                         });
                     }
                 }
@@ -58,7 +60,9 @@ namespace Core.Data.General
                             Codigo = item.Codigo,
                             ApareceSeguimientoCobranza = item.ApareceSeguimientoCobranza,
                             Asunto = item.Asunto,
-                            Cuerpo = item.Cuerpo
+                            Cuerpo = item.Cuerpo,
+                            CantidadFin = item.CantidadFin,
+                            CantidadIni = item.CantidadIni
                         });
                     }
                 }
@@ -90,7 +94,9 @@ namespace Core.Data.General
                         Codigo = Entity.Codigo,
                         ApareceSeguimientoCobranza = Entity.ApareceSeguimientoCobranza,
                         Asunto = Entity.Asunto,
-                        Cuerpo = Entity.Cuerpo
+                        Cuerpo = Entity.Cuerpo,
+                        CantidadIni = Entity.CantidadIni,
+                        CantidadFin = Entity.CantidadFin
                     };
                 }
 
@@ -138,6 +144,8 @@ namespace Core.Data.General
                         ApareceSeguimientoCobranza = (info.ApareceSeguimientoCobranza == null ? false : info.ApareceSeguimientoCobranza),
                         Asunto = info.Asunto,
                         Cuerpo = info.Cuerpo,
+                        CantidadIni=info.CantidadIni,
+                        CantidadFin=info.CantidadFin
                     };
                     Context.tb_ColaCorreoCodigo.Add(Entity);
 
@@ -165,7 +173,8 @@ namespace Core.Data.General
                     Entity.Asunto = info.Asunto;
                     Entity.Cuerpo = info.Cuerpo;
                     Entity.ApareceSeguimientoCobranza = (info.ApareceSeguimientoCobranza == null ? false : info.ApareceSeguimientoCobranza);
-
+                    Entity.CantidadFin = info.CantidadFin;
+                    Entity.CantidadIni = info.CantidadIni;
                     Context.SaveChanges();
                 }
 

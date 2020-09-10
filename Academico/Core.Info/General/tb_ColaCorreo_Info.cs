@@ -31,6 +31,8 @@ namespace Core.Info.General
         public string Copia { get; set; }
         public int modificado { get; set; }
         public List<TreeList_Info> lst_correo_masivo { get; set; }
+        public int CantidadIni { get; set; }
+        public int CantidadFin { get; set; }
         #endregion
     }
 }

@@ -268,6 +268,227 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public List<TreeList_Info> get_list_CorreoMasivoDeudores(int IdEmpresa, int IdAnio, int CantidadIni, int CantidadFin)
+        {
+            try
+            {
+                List<TreeList_Info> Lista = new List<TreeList_Info>();
+                var ListaSede = new List<vwaca_Alumno_PeriodoActual>(); ;
+                var ListaJornada = new List<vwaca_Alumno_PeriodoActual>();
+                var ListaNivel = new List<vwaca_Alumno_PeriodoActual>();
+                var ListaCurso = new List<vwaca_Alumno_PeriodoActual>();
+                var ListaParalelo = new List<vwaca_Alumno_PeriodoActual>();
+                var ListaAlumno = new List<vwaca_Alumno_PeriodoActual>();
+
+                int CantidadIniConsulta = CantidadIni;
+                int CantidadFinConsulta = CantidadIni == 0 ? 9999999 : CantidadFin;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var lst_sede = new List<TreeList_Info>();
+                    var lst_jornada = new List<TreeList_Info>();
+                    var lst_nivel = new List<TreeList_Info>();
+                    var lst_curso = new List<TreeList_Info>();
+                    var lst_paralelo = new List<TreeList_Info>();
+                    var lst_alumno = new List<TreeList_Info>();
+
+                    Context.Database.CommandTimeout = 5000;
+                    var ListaGeneralPorCantidadFacturas = Context.vwaca_Alumno_PeriodoActual.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio 
+                    && q.CantDeudas>= CantidadIniConsulta && q.CantDeudas<=CantidadFin).ToList();
+
+                    ListaSede = ListaGeneralPorCantidadFacturas.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList(); ;
+                    lst_sede = (from q in ListaSede
+                                group q by new
+                                {
+                                    q.IdEmpresa,
+                                    q.IdAnio,
+                                    q.IdSede,
+                                    q.NomSede
+                                } into s
+                                select new TreeList_Info
+                                {
+                                    IdString = s.Key.IdSede.ToString("000"),
+                                    IdStringPadre = null,
+                                    Descripcion = s.Key.NomSede,
+                                    Orden = 0
+                                }).OrderBy(q => q.Orden).ToList();
+
+                    Lista.AddRange(lst_sede);
+
+                    foreach (var item_sede in lst_sede)
+                    {
+                        var IdSede = Convert.ToInt32(item_sede.IdString);
+                        ListaJornada = ListaGeneralPorCantidadFacturas.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede).ToList();
+
+                        lst_jornada = (from q in ListaJornada
+                                       group q by new
+                                       {
+                                           q.IdEmpresa,
+                                           q.IdAnio,
+                                           q.IdSede,
+                                           q.IdJornada,
+                                           q.NomJornada,
+                                           q.OrdenJornada
+                                       } into s
+                                       select new TreeList_Info
+                                       {
+                                           IdString = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000"),
+                                           IdStringPadre = s.Key.IdSede.ToString("000"),
+                                           Descripcion = s.Key.NomJornada,
+                                           Orden = s.Key.OrdenJornada??0
+                                       }).OrderBy(q => q.Orden).ToList();
+
+                        Lista.AddRange(lst_jornada);
+
+                        foreach (var item_jornada in lst_jornada)
+                        {
+                            //var IdSede = Convert.ToInt32(item_jornada.IdString.Substring(0, 3));
+                            var IdJornada = Convert.ToInt32(item_jornada.IdString.Substring(3, 3));
+                            ListaNivel = ListaGeneralPorCantidadFacturas.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdJornada == IdJornada).ToList();
+
+                            lst_nivel = (from q in ListaNivel
+                                         group q by new
+                                         {
+                                             q.IdEmpresa,
+                                             q.IdAnio,
+                                             q.IdSede,
+                                             q.IdJornada,
+                                             q.IdNivel,
+                                             q.NomNivel,
+                                             q.OrdenNivel
+                                         } into s
+                                         select new TreeList_Info
+                                         {
+                                             IdString = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000"),
+                                             IdStringPadre = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000"),
+                                             Descripcion = s.Key.NomNivel,
+                                             Orden = s.Key.OrdenNivel??0
+                                         }).OrderBy(q => q.Orden).ToList();
+
+                            Lista.AddRange(lst_nivel);
+
+                            foreach (var item_nivel in lst_nivel)
+                            {
+                                //var IdSede = Convert.ToInt32(item_nivel.IdString.Substring(0, 3));
+                                //var IdJornada = Convert.ToInt32(item_nivel.IdString.Substring(3, 3));
+                                var IdNivel = Convert.ToInt32(item_nivel.IdString.Substring(6, 3));
+                                ListaCurso = ListaGeneralPorCantidadFacturas.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdJornada == IdJornada && q.IdNivel == IdNivel).ToList();
+
+                                lst_curso = (from q in ListaCurso
+                                             group q by new
+                                             {
+                                                 q.IdEmpresa,
+                                                 q.IdAnio,
+                                                 q.IdSede,
+                                                 q.IdJornada,
+                                                 q.IdNivel,
+                                                 q.IdCurso,
+                                                 q.NomCurso,
+                                                 q.OrdenCurso
+                                             } into s
+                                             select new TreeList_Info
+                                             {
+                                                 IdString = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000") + s.Key.IdCurso.ToString("000"),
+                                                 IdStringPadre = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000"),
+                                                 Descripcion = s.Key.NomCurso,
+                                                 Orden = s.Key.OrdenCurso??0
+                                             }).OrderBy(q => q.Orden).ToList();
+
+                                Lista.AddRange(lst_curso);
+
+                                foreach (var item_curso in lst_curso)
+                                {
+                                    //var IdSede = Convert.ToInt32(item_curso.IdString.Substring(0, 3));
+                                    //var IdJornada = Convert.ToInt32(item_curso.IdString.Substring(3, 3));
+                                    //var IdNivel = Convert.ToInt32(item_curso.IdString.Substring(6, 3));
+                                    var IdCurso = Convert.ToInt32(item_curso.IdString.Substring(9, 3));
+
+                                    ListaCurso = ListaGeneralPorCantidadFacturas.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdJornada == IdJornada && q.IdNivel == IdNivel && q.IdCurso == IdCurso).ToList();
+
+                                    lst_paralelo = (from q in ListaCurso
+                                                    group q by new
+                                                    {
+                                                        q.IdEmpresa,
+                                                        q.IdAnio,
+                                                        q.IdSede,
+                                                        q.IdJornada,
+                                                        q.IdNivel,
+                                                        q.IdCurso,
+                                                        q.IdParalelo,
+                                                        q.NomParalelo,
+                                                        q.OrdenParalelo
+                                                    } into s
+                                                    select new TreeList_Info
+                                                    {
+                                                        IdString = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000") + s.Key.IdCurso.ToString("000") + s.Key.IdParalelo.ToString("000"),
+                                                        IdStringPadre = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000") + s.Key.IdCurso.ToString("000"),
+                                                        Descripcion = s.Key.NomParalelo,
+                                                        Orden = s.Key.OrdenParalelo??0
+                                                    }).OrderBy(q => q.Orden).ToList();
+
+                                    Lista.AddRange(lst_paralelo);
+
+                                    foreach (var item_paralelo in lst_paralelo)
+                                    {
+                                        var IdParalelo = Convert.ToInt32(item_paralelo.IdString.Substring(12, 3));
+
+                                        ListaAlumno= ListaGeneralPorCantidadFacturas.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede && q.IdJornada == IdJornada && q.IdNivel == IdNivel && q.IdCurso == IdCurso && q.IdParalelo==IdParalelo).OrderBy(q=>q.NombreAlumno).ToList();
+
+                                        foreach (var item in ListaAlumno)
+                                        {
+                                            var info = new TreeList_Info
+                                            {
+                                                IdString = IdSede.ToString("000") + IdJornada.ToString("000") + IdNivel.ToString("000") + IdCurso.ToString("000") + IdParalelo.ToString("000") + item.IdAlumno.ToString("000000"),
+                                                IdStringPadre = IdSede.ToString("000") + IdJornada.ToString("000") + IdNivel.ToString("000") + IdCurso.ToString("000") + IdParalelo.ToString("000"),
+                                                Descripcion = item.Codigo + " - " + item.NombreAlumno,
+                                                Orden = 0,
+                                                CorreoEmiteFactura = item.CorreoEmiteFactura,
+                                                CorreoRepresentante = item.CorreoRepresentante
+                                            };
+                                            Lista.Add(info);
+                                        }
+                                        /*
+                                        lst_alumno = (from q in ListaParalelo
+                                                        group q by new
+                                                        {
+                                                            q.IdEmpresa,
+                                                            q.IdAnio,
+                                                            q.IdSede,
+                                                            q.IdJornada,
+                                                            q.IdNivel,
+                                                            q.IdCurso,
+                                                            q.IdParalelo,
+                                                            q.NomParalelo,
+                                                            q.OrdenParalelo,
+                                                            q.IdAlumno,
+                                                            q.Codigo,
+                                                            q.NombreAlumno
+                                                        } into s
+                                                        select new TreeList_Info
+                                                        {
+                                                            IdString = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000") + s.Key.IdCurso.ToString("000") + s.Key.IdParalelo.ToString("000") + s.Key.IdAlumno.ToString("000000"),
+                                                            IdStringPadre = s.Key.IdSede.ToString("000") + s.Key.IdJornada.ToString("000") + s.Key.IdNivel.ToString("000") + s.Key.IdCurso.ToString("000") + s.Key.IdParalelo.ToString("000"),
+                                                            Descripcion = s.Key.Codigo + " - " + s.Key.NombreAlumno,
+                                                            Orden = 0
+                                                        }).OrderBy(q => q.Orden).ToList();
+                                        */
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try

@@ -145,6 +145,8 @@
           <Property Name="Asunto" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="Cuerpo" Type="varchar(max)" Nullable="false" />
           <Property Name="ApareceSeguimientoCobranza" Type="bit" />
+          <Property Name="CantidadIni" Type="int" />
+          <Property Name="CantidadFin" Type="int" />
         </EntityType>
         <EntityType Name="tb_ColaCorreoParametros">
           <Key>
@@ -2612,6 +2614,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_bodega_x_sucursal' no tiene d
           <Property Name="Asunto" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Cuerpo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ApareceSeguimientoCobranza" Type="Boolean" />
+          <Property Name="CantidadIni" Type="Int32" />
+          <Property Name="CantidadFin" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3298,6 +3302,8 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwtb_bodega_x_sucursal' no tiene d
           <EntitySetMapping Name="tb_ColaCorreoCodigo">
             <EntityTypeMapping TypeName="ModelGeneral.tb_ColaCorreoCodigo">
               <MappingFragment StoreEntitySet="tb_ColaCorreoCodigo">
+                <ScalarProperty Name="CantidadFin" ColumnName="CantidadFin" />
+                <ScalarProperty Name="CantidadIni" ColumnName="CantidadIni" />
                 <ScalarProperty Name="ApareceSeguimientoCobranza" ColumnName="ApareceSeguimientoCobranza" />
                 <ScalarProperty Name="Cuerpo" ColumnName="Cuerpo" />
                 <ScalarProperty Name="Asunto" ColumnName="Asunto" />

@@ -105,7 +105,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_Matricula_Rubro_FacturaMasiva> vwaca_Matricula_Rubro_FacturaMasiva { get; set; }
         public virtual DbSet<aca_Familia> aca_Familia { get; set; }
         public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
-        public virtual DbSet<vwaca_Alumno_PeriodoActual> vwaca_Alumno_PeriodoActual { get; set; }
         public virtual DbSet<vwaca_Matricula_Rubro_PorFacturarMasiva> vwaca_Matricula_Rubro_PorFacturarMasiva { get; set; }
         public virtual DbSet<aca_MatriculaConducta> aca_MatriculaConducta { get; set; }
         public virtual DbSet<vwaca_MatriculaConducta> vwaca_MatriculaConducta { get; set; }
@@ -128,6 +127,7 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_AnioLectivoEquivalenciaPromedio> vwaca_AnioLectivoEquivalenciaPromedio { get; set; }
         public virtual DbSet<aca_AnioLectivoCalificacionHistorico> aca_AnioLectivoCalificacionHistorico { get; set; }
         public virtual DbSet<vwaca_AnioLectivoCalificacionHistorico> vwaca_AnioLectivoCalificacionHistorico { get; set; }
+        public virtual DbSet<vwaca_Alumno_PeriodoActual> vwaca_Alumno_PeriodoActual { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

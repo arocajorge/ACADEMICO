@@ -1,6 +1,6 @@
 ﻿@model Core.Info.General.tb_ColaCorreoCodigo_Info
 @{
-    ViewBag.Title = "Cola de correos";
+    ViewBag.Title = "Código de correos";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");

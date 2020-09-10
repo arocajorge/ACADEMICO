@@ -81,7 +81,9 @@
         });
 
         settings.Columns.Add("Codigo", "ID").Width = Unit.Percentage(10);
-        settings.Columns.Add("Asunto", "Asunto").Width = Unit.Percentage(70);
+        settings.Columns.Add("Asunto", "Asunto").Width = Unit.Percentage(50);
+        settings.Columns.Add("CantidadIni", "#Facturas Ini").Width = Unit.Percentage(10);
+        settings.Columns.Add("CantidadFin", "#Facturas Fin").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.FieldName = "ApareceSeguimientoCobranza";
@@ -92,7 +94,7 @@
 
             });
         });
-        
+
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

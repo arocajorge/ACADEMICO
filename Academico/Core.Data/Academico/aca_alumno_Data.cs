@@ -66,6 +66,7 @@ namespace Core.Data.Academico
 
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
+                    odata.Database.CommandTimeout = 5000;
                     var lst = odata.vwaca_Alumno_PeriodoActual.Where(q => q.IdEmpresa == IdEmpresa).ToList();
 
                     lst.ForEach(q =>

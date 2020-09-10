@@ -43,5 +43,9 @@ namespace Core.Data.Base
         public double SaldoProntoPago { get; set; }
         public int CantDeudas { get; set; }
         public string NomPlantillaTipo { get; set; }
+        public Nullable<int> OrdenJornada { get; set; }
+        public Nullable<int> OrdenNivel { get; set; }
+        public Nullable<int> OrdenCurso { get; set; }
+        public Nullable<int> OrdenParalelo { get; set; }
     }
 }

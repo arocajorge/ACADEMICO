@@ -34,7 +34,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
-        
+
+        public List<TreeList_Info> GetList_CorreoMasivoDeudores(int IdEmpresa, int IdAnio, int CantidadIni, int CantidadFin)
+        {
+            try
+            {
+                return odata.get_list_CorreoMasivoDeudores(IdEmpresa, IdAnio, CantidadIni, CantidadFin);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<aca_AnioLectivo_Curso_Paralelo_Info> GetListByCurso(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try

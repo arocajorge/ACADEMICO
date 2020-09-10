@@ -20,5 +20,9 @@ namespace Core.Info.General
         [Required(ErrorMessage = "El campo cuerpo es obligatorio")]
         public string Cuerpo { get; set; }
         public Nullable<bool> ApareceSeguimientoCobranza { get; set; }
+        [Required(ErrorMessage = "El campo cantidad de inicio es obligatorio")]
+        public Nullable<int> CantidadIni { get; set; }
+        [Required(ErrorMessage = "El campo cantidad de fin es obligatorio")]
+        public Nullable<int> CantidadFin { get; set; }
     }
 }

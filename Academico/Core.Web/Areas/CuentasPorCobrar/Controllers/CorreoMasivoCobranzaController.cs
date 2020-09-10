@@ -78,14 +78,16 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 Cuerpo = "Escribe tu mensaje",
                 RepEconomico = true,
                 RepLegal = true,
+                CantidadIni=0,
+                CantidadFin=0,
                 lst_correo_masivo = new List<TreeList_Info>()
             };
 
-            model.lst_correo_masivo = bus_treelist.GetList_CorreoMasivo(model.IdEmpresa, model.IdAnio);
+            model.lst_correo_masivo = bus_treelist.GetList_CorreoMasivoDeudores(model.IdEmpresa, model.IdAnio, model.CantidadIni, model.CantidadFin);
             Lista_TreeList.set_list(model.lst_correo_masivo, model.IdTransaccionSession);
 
             #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "ColaCorreo", "Index");
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "General", "CorreoMasivoCobranza", "Index");
             ViewBag.Nuevo = info.Nuevo;
             ViewBag.Modificar = info.Modificar;
             ViewBag.Anular = info.Anular;
@@ -114,14 +116,10 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
         #region TreeList
         [ValidateInput(false)]
-        public ActionResult aca_AnioLectivo_ParaleloTreeList(int IdEmpresa = 0, int IdAnio = 0)
+        public ActionResult aca_AnioLectivo_ParaleloTreeList()
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             List<TreeList_Info> model = Lista_TreeList.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
-            //List<TreeList_Info> model = bus_treelist.GetList_CorreoMasivo(IdEmpresa, IdAnio);
-            ViewBag.IdEmpresa = IdEmpresa;
-            ViewBag.IdAnio = IdAnio;
 
             ViewData["selectedIDs"] = Request.Params["selectedIDs"];
             if (ViewData["selectedIDs"] == null)
@@ -144,7 +142,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         #endregion
 
         #region Json
-        public JsonResult guardar(int IdEmpresa = 0, int Modificado = 0, string Ids = "", decimal IdAlumno = 0, string Copia = "", string Codigo = "", string Asunto = "", string Cuerpo = "", bool RepLegal = false, bool RepEconomico = false, decimal IdTransaccionSession = 0)
+        public JsonResult guardar(int IdEmpresa = 0, int Modificado = 0, string Ids = "", decimal IdAlumno = 0, string Copia = "", string Codigo = "", string Asunto = "", string Cuerpo = "", bool RepLegal = false, bool RepEconomico = false, int CantidadIni=0, int CantidadFin=0, decimal IdTransaccionSession = 0)
         {
             string[] array = Ids.Split(',');
             List<TreeList_Info> lista = new List<TreeList_Info>();
@@ -169,6 +167,30 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             var lstAlumnos = List_AlumnosPeriodoActual.get_list(IdTransaccionSession).ToList();
 
             var lstParalelos = lista.Where(q => q.IdString.Count() == 15).ToList();
+            var ListaAlumnosDeudores = new List<aca_Alumno_Info>();
+            foreach (var item in lstParalelos)
+            {
+                var lst_x_paralelo = lista.Where(q=>q.IdStringPadre == item.IdString).ToList();
+
+                foreach (var itemAlu in lst_x_paralelo)
+                {
+                    var info_alumno_deudor = new aca_Alumno_Info
+                    {
+                        IdEmpresa = IdEmpresa,
+                        IdSede = Convert.ToInt32(itemAlu.IdString.Substring(0, 3)),
+                        IdJornada = Convert.ToInt32(itemAlu.IdString.Substring(3, 3)),
+                        IdNivel = Convert.ToInt32(itemAlu.IdString.Substring(6, 3)),
+                        IdCurso = Convert.ToInt32(itemAlu.IdString.Substring(9, 3)),
+                        IdParalelo = Convert.ToInt32(itemAlu.IdString.Substring(12, 3)),
+                        IdAlumno = Convert.ToInt32(itemAlu.IdString.Substring(15, 6)),
+                        correoRepEconomico = itemAlu.CorreoEmiteFactura,
+                        CorreoRepLegal = itemAlu.CorreoRepresentante
+                    };
+                    ListaAlumnosDeudores.Add(info_alumno_deudor);
+                }
+                
+            }
+
             var CodigoCorreo = "";
             var AsuntoCorreo = "";
             var CuerpoCorreo = "";
@@ -207,9 +229,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                     var IdNivel = Convert.ToInt32(item.IdString.Substring(6, 3));
                     var IdCurso = Convert.ToInt32(item.IdString.Substring(9, 3));
                     var IdParalelo = Convert.ToInt32(item.IdString.Substring(12, 3));
+                    //var IdAlumnoDeudor = Convert.ToInt32(item.IdString.Substring(15, 6));
 
-
-                    var lstAlumnosPorParalelos = lstAlumnos.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdJornada == IdJornada && q.IdNivel == IdNivel && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).ToList();
+                    var lstAlumnosPorParalelos = ListaAlumnosDeudores.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdJornada == IdJornada && q.IdNivel == IdNivel && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).ToList();
 
                     foreach (var item1 in lstAlumnosPorParalelos)
                     {
@@ -256,6 +278,28 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             }
 
             return Json(mensaje, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult actualizarTreeList(int IdEmpresa = 0, int IdAnio=0, int CantidadIni = 0, int CantidadFin = 0, decimal IdTransaccionSession = 0)
+        {
+            var lst_correo_masivo = bus_treelist.GetList_CorreoMasivoDeudores(IdEmpresa, IdAnio, CantidadIni, CantidadFin);
+            Lista_TreeList.set_list(lst_correo_masivo, IdTransaccionSession);
+
+            return Json(lst_correo_masivo, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DatosCorreo(int IdEmpresa = 0, string Codigo="")
+        {
+            var info_CodigoCorreo = bus_correo_codigo.GetInfo(IdEmpresa, Codigo);
+            var Ini = 0;
+            var Fin = 0;
+            if (info_CodigoCorreo!=null)
+            {
+                Ini = info_CodigoCorreo.CantidadIni??0;
+                Fin = info_CodigoCorreo.CantidadFin??0;
+            }
+
+            return Json(new { Ini = Ini, Fin = Fin }, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

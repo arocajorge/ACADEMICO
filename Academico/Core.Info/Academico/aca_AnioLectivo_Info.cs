@@ -47,6 +47,8 @@ namespace Core.Info.Academico
         public string IdString { get; set; }
         public string IdStringPadre { get; set; }
         public string Descripcion { get; set; }
+        public string CorreoEmiteFactura { get; set; }
+        public string CorreoRepresentante { get; set; }
         public int Orden { get; set; }
         public bool Seleccionado { get; set; }
 
@@ -55,6 +57,8 @@ namespace Core.Info.Academico
             IdString = "";
             IdStringPadre = "";
             Descripcion = "";
+            CorreoRepresentante = "";
+            CorreoEmiteFactura = "";
             Orden = 0;
             Seleccionado = false;
         }

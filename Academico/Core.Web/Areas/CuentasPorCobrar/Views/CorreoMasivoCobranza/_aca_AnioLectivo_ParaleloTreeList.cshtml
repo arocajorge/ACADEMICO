@@ -2,7 +2,7 @@
     var treeList = Html.DevExpress().TreeList(settings =>
     {
         settings.Name = "aca_AnioLectivo_ParaleloTreeList";
-        settings.CallbackRouteValues = new { Controller = "CorreoMasivoCobranza", Action = "aca_AnioLectivo_ParaleloTreeList", IdEmpresa = ViewBag.IdEmpresa, IdAnio = ViewBag.IdAnio };
+        settings.CallbackRouteValues = new { Controller = "CorreoMasivoCobranza", Action = "aca_AnioLectivo_ParaleloTreeList" };
         settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
         settings.KeyFieldName = "IdString";
         settings.ParentFieldName = "IdStringPadre";
