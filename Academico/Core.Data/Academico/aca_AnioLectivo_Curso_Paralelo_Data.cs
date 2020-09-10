@@ -297,6 +297,7 @@ namespace Core.Data.Academico
                     var ListaGeneralPorCantidadFacturas = Context.vwaca_Alumno_PeriodoActual.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio 
                     && q.CantDeudas>= CantidadIniConsulta && q.CantDeudas<=CantidadFin).ToList();
 
+                    
                     ListaSede = ListaGeneralPorCantidadFacturas.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList(); ;
                     lst_sede = (from q in ListaSede
                                 group q by new
@@ -489,6 +490,8 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        
         public List<aca_AnioLectivo_Curso_Paralelo_Info> get_list(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try

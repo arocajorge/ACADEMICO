@@ -588,6 +588,7 @@
     <Compile Include="Base\vwro_empleados_consulta.cs">
       <DependentUpon>ModelRRHH.tt</DependentUpon>
     </Compile>
+    <Compile Include="CadenaDeConexion.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionCobros_Data.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionConciliacionNC_Data.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionFacturas_Data.cs" />
