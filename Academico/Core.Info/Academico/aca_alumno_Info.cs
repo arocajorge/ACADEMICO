@@ -241,6 +241,10 @@ namespace Core.Info.Academico
         public string NomJornada { get; set; }
         public string NomCurso { get; set; }
         public string NomParalelo { get; set; }
+        public int OrdenParalelo { get; set; }
+        public int OrdenCurso { get; set; }
+        public int OrdenNivel { get; set; }
+        public int OrdenJornada { get; set; }
         public decimal IdMatricula { get; set; }
         public double Saldo { get; set; }
         public double SaldoProntoPago { get; set; }
