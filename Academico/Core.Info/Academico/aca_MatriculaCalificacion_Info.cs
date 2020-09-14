@@ -72,6 +72,7 @@ namespace Core.Info.Academico
         public string pe_nombreCompleto { get; set; }
         public decimal CalificacionExamen { get; set; }
         public Nullable<int> IdEquivalenciaCalificacionExamen { get; set; }
+        public int IdCatalogoTipo { get; set; }
         public int IdCatalogoParcial { get; set; }
         public bool RegistroValido { get; set; }
         public string CodigoEquivalencia { get; set; }

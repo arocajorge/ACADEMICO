@@ -305,6 +305,10 @@
     <Compile Include="Reportes\Academico\ACA_027_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_026_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_025_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_ConductaBaja_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_Promedios_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_Profesores_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Info.cs" />

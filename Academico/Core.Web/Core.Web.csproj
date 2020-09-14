@@ -597,6 +597,36 @@
     <Compile Include="Reportes\Academico\ACA_027_Rpt.Designer.cs">
       <DependentUpon>ACA_027_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_ConductaBaja_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_ConductaBaja_Rpt.Designer.cs">
+      <DependentUpon>ACA_028_ConductaBaja_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_PromediosProfesor_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_PromediosProfesor_Rpt.Designer.cs">
+      <DependentUpon>ACA_028_PromediosProfesor_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_Promedios_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_Promedios_Rpt.Designer.cs">
+      <DependentUpon>ACA_028_Promedios_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_Profesores_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_Profesores_Rpt.Designer.cs">
+      <DependentUpon>ACA_028_Profesores_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_Rpt.Designer.cs">
+      <DependentUpon>ACA_028_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9067,6 +9097,7 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_025.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_026.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_027.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_028.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9160,6 +9191,7 @@
     <TypeScriptCompile Include="AdminLTE\bower_components\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Reportes\Academico\ACA_001_Rpt.resx">
       <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -9273,6 +9305,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_027_Rpt.resx">
       <DependentUpon>ACA_027_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_028_ConductaBaja_Rpt.resx">
+      <DependentUpon>ACA_028_ConductaBaja_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_028_PromediosProfesor_Rpt.resx">
+      <DependentUpon>ACA_028_PromediosProfesor_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_028_Promedios_Rpt.resx">
+      <DependentUpon>ACA_028_Promedios_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_028_Profesores_Rpt.resx">
+      <DependentUpon>ACA_028_Profesores_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_028_Rpt.resx">
+      <DependentUpon>ACA_028_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.resx">
       <DependentUpon>BAN_001_cancelaciones_Rpt.cs</DependentUpon>
