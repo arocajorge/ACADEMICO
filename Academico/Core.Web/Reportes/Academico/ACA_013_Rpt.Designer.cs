@@ -1486,8 +1486,8 @@
             // 
             this.PromedioGeneralParcial.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.PromedioGeneralParcial.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif((IsNullOrEmpty([PromedioParcial])),\'\' ,  Round((sumSum([PromedioParcial])/sum" +
-                    "Count([PromedioParcial])),2))")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif((sumSum([NoMostrarPromedio]) > 0),\'\' ,  Round((sumSum([PromedioParcial])/sumC" +
+                    "ount([PromedioParcial])),2))")});
             this.PromedioGeneralParcial.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
             this.PromedioGeneralParcial.Multiline = true;
             this.PromedioGeneralParcial.Name = "PromedioGeneralParcial";
