@@ -14,13 +14,14 @@ namespace Core.Data.Reportes.Academico
         {
             try
             {
-
                 List<ACA_013_Info> Lista = new List<ACA_013_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
                     Context.Database.CommandTimeout=5000;
                     var lst = Context.SPACA_013(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial, IdAlumno, MostrarRetirados).ToList();
 
+                    int NoMostrarPromedio = 0;
+                    decimal IdMatricula = 0;
                     foreach (var q in lst)
                     {
                         Lista.Add(new ACA_013_Info
@@ -74,7 +75,8 @@ namespace Core.Data.Reportes.Academico
                             LetraPromedioConducta =q.LetraPromedioConducta,
                             NombreRepresentante = q.NombreRepresentante,
                             NombreTutor = q.NombreTutor,
-                            IdProfesorTutor = q.IdProfesorTutor
+                            IdProfesorTutor = q.IdProfesorTutor,
+                            NoMostrarPromedio = q.PromedioParcial == null ? 1 : 0
                         });
                     }
                 }
