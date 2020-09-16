@@ -230,7 +230,11 @@ namespace Core.Data.Academico
                             CalificacionP5 = q.CalificacionP5,
                             CalificacionP6 = q.CalificacionP6,
                             ExamenQ1 = q.ExamenQ1,
+                            CausaQ1 = q.CausaQ1,
+                            ResolucionQ1 = q.ResolucionQ1,
                             ExamenQ2 = q.ExamenQ2,
+                            CausaQ2 = q.CausaQ2,
+                            ResolucionQ2 = q.ResolucionQ2,
                             ExamenMejoramiento = q.ExamenMejoramiento,
                             CampoMejoramiento = q.CampoMejoramiento,
                             ExamenSupletorio = q.ExamenSupletorio,
@@ -324,6 +328,65 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_MatriculaCalificacion_Info getInfo_X_Matricula(int IdEmpresa, decimal IdMatricula, decimal IdMateria)
+        {
+            try
+            {
+                aca_MatriculaCalificacion_Info info = new aca_MatriculaCalificacion_Info();
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_MatriculaCalificacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula && q.IdMateria == IdMateria).FirstOrDefault();
+
+                    if (Entity == null)
+                        return null;
+                    info = new aca_MatriculaCalificacion_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdMatricula = Entity.IdMatricula,
+                        IdMateria = Entity.IdMateria,
+                        IdProfesor = Entity.IdProfesor,
+                        CalificacionP1 = Entity.CalificacionP1,
+                        CalificacionP2 = Entity.CalificacionP2,
+                        CalificacionP3 = Entity.CalificacionP3,
+                        CalificacionP4 = Entity.CalificacionP4,
+                        CalificacionP5 = Entity.CalificacionP5,
+                        CalificacionP6 = Entity.CalificacionP6,
+                        PromedioQ1=Entity.PromedioQ1,
+                        ExamenQ1 = Entity.ExamenQ1,
+                        CausaQ1 = Entity.CausaQ1,
+                        ResolucionQ1 = Entity.ResolucionQ1,
+                        PromedioQ2 = Entity.PromedioQ2,
+                        ExamenQ2 = Entity.ExamenQ2,
+                        CausaQ2 = Entity.CausaQ2,
+                        ResolucionQ2 = Entity.ResolucionQ2,
+                        ExamenMejoramiento = Entity.ExamenMejoramiento,
+                        CampoMejoramiento = Entity.CampoMejoramiento,
+                        ExamenSupletorio = Entity.ExamenSupletorio,
+                        ExamenRemedial = Entity.ExamenRemedial,
+                        ExamenGracia = Entity.ExamenGracia,
+                        PromedioFinal = Entity.PromedioFinal,
+                        IdEquivalenciaPromedioP1 = Entity.IdEquivalenciaPromedioP1,
+                        IdEquivalenciaPromedioP2 = Entity.IdEquivalenciaPromedioP2,
+                        IdEquivalenciaPromedioP3 = Entity.IdEquivalenciaPromedioP2,
+                        IdEquivalenciaPromedioEQ1 = Entity.IdEquivalenciaPromedioEQ1,
+                        IdEquivalenciaPromedioQ1 = Entity.IdEquivalenciaPromedioQ1,
+                        IdEquivalenciaPromedioP4 = Entity.IdEquivalenciaPromedioP4,
+                        IdEquivalenciaPromedioP5 = Entity.IdEquivalenciaPromedioP5,
+                        IdEquivalenciaPromedioP6 = Entity.IdEquivalenciaPromedioP6,
+                        IdEquivalenciaPromedioEQ2 = Entity.IdEquivalenciaPromedioEQ2,
+                        IdEquivalenciaPromedioQ2 = Entity.IdEquivalenciaPromedioQ2,
+                        IdEquivalenciaPromedioPF = Entity.IdEquivalenciaPromedioPF
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, List<aca_MatriculaCalificacion_Info> lista)
         {
@@ -742,12 +805,16 @@ namespace Core.Data.Academico
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
                     {
                         EntityCalificacion.ExamenQ1 = info.CalificacionExamen;
+                        EntityCalificacion.CausaQ1 = info.Causa;
+                        EntityCalificacion.ResolucionQ1 = info.Resolucion;
                         EntityCalificacion.IdEquivalenciaPromedioEQ1 = info.IdEquivalenciaCalificacionExamen;
                     }
                         
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
                     {
                         EntityCalificacion.ExamenQ2 = info.CalificacionExamen;
+                        EntityCalificacion.CausaQ2 = info.Causa;
+                        EntityCalificacion.ResolucionQ2 = info.Resolucion;
                         EntityCalificacion.IdEquivalenciaPromedioEQ2 = info.IdEquivalenciaCalificacionExamen;
                     }
 

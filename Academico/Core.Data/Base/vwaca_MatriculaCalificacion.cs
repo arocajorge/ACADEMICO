@@ -34,12 +34,16 @@ namespace Core.Data.Base
         public Nullable<decimal> PromedioQ1 { get; set; }
         public Nullable<decimal> ExamenQ1 { get; set; }
         public Nullable<decimal> PromedioFinalQ1 { get; set; }
+        public string CausaQ1 { get; set; }
+        public string ResolucionQ1 { get; set; }
         public Nullable<decimal> CalificacionP4 { get; set; }
         public Nullable<decimal> CalificacionP5 { get; set; }
         public Nullable<decimal> CalificacionP6 { get; set; }
         public Nullable<decimal> PromedioQ2 { get; set; }
         public Nullable<decimal> ExamenQ2 { get; set; }
         public Nullable<decimal> PromedioFinalQ2 { get; set; }
+        public string CausaQ2 { get; set; }
+        public string ResolucionQ2 { get; set; }
         public Nullable<decimal> ExamenMejoramiento { get; set; }
         public string CampoMejoramiento { get; set; }
         public Nullable<decimal> ExamenSupletorio { get; set; }

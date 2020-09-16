@@ -159,6 +159,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_MatriculaCalificacion_Info GetInfo_X_Matricula(int IdEmpresa, decimal IdMatricula, int IdMateria)
+        {
+            try
+            {
+                return odata.getInfo_X_Matricula(IdEmpresa, IdMatricula, IdMateria);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public bool ModicarDB(aca_MatriculaCalificacion_Info info)
         {
             try

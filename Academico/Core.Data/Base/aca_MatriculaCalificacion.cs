@@ -29,6 +29,8 @@ namespace Core.Data.Base
         public Nullable<int> IdEquivalenciaPromedioEQ1 { get; set; }
         public Nullable<decimal> PromedioFinalQ1 { get; set; }
         public Nullable<int> IdEquivalenciaPromedioQ1 { get; set; }
+        public string CausaQ1 { get; set; }
+        public string ResolucionQ1 { get; set; }
         public Nullable<decimal> CalificacionP4 { get; set; }
         public Nullable<int> IdEquivalenciaPromedioP4 { get; set; }
         public Nullable<decimal> CalificacionP5 { get; set; }
@@ -40,6 +42,8 @@ namespace Core.Data.Base
         public Nullable<int> IdEquivalenciaPromedioEQ2 { get; set; }
         public Nullable<decimal> PromedioFinalQ2 { get; set; }
         public Nullable<int> IdEquivalenciaPromedioQ2 { get; set; }
+        public string CausaQ2 { get; set; }
+        public string ResolucionQ2 { get; set; }
         public Nullable<decimal> ExamenMejoramiento { get; set; }
         public string CampoMejoramiento { get; set; }
         public Nullable<decimal> ExamenSupletorio { get; set; }

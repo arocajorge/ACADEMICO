@@ -446,9 +446,9 @@ namespace Core.Data.Academico
                             SumaPromedio = Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP1) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP2) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP3);
                             Promedio = Math.Round((SumaPromedio / lst_pacial_quim1.Count), 2, MidpointRounding.AwayFromZero);
                             EntityCalificacionPromedio.PromedioQ1 = Promedio;
-                            var info_promedio = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Promedio);
-                            IdEquivalenciaPromedio = info_promedio.IdEquivalenciaPromedio;
-                            EntityCalificacionPromedio.IdEquivalenciaPromedioQ1 = (info_promedio == null ? (int?)null : info_promedio.IdEquivalenciaPromedio);
+                            //var info_promedio = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Promedio);
+                            //IdEquivalenciaPromedio = info_promedio.IdEquivalenciaPromedio;
+                            //EntityCalificacionPromedio.IdEquivalenciaPromedioQ1 = (info_promedio == null ? (int?)null : info_promedio.IdEquivalenciaPromedio);
                         }
                     }
 
@@ -489,9 +489,9 @@ namespace Core.Data.Academico
                             SumaPromedio = Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP4) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP5) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP6);
                             Promedio = Math.Round((SumaPromedio / lst_pacial_quim2.Count), 2, MidpointRounding.AwayFromZero);
                             EntityCalificacionPromedio.PromedioQ2 = Promedio;
-                            var info_promedio = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Promedio);
-                            IdEquivalenciaPromedio = info_promedio.IdEquivalenciaPromedio;
-                            EntityCalificacionPromedio.IdEquivalenciaPromedioQ2 = (info_promedio == null ? (int?)null : info_promedio.IdEquivalenciaPromedio);
+                            //var info_promedio = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Promedio);
+                            //IdEquivalenciaPromedio = info_promedio.IdEquivalenciaPromedio;
+                            //EntityCalificacionPromedio.IdEquivalenciaPromedioQ2 = (info_promedio == null ? (int?)null : info_promedio.IdEquivalenciaPromedio);
                         }
                     }
 

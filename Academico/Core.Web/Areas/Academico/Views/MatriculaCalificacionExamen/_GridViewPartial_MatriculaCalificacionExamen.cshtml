@@ -93,21 +93,11 @@
             column.ReadOnly = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
-        //settings.Columns.Add(column =>
-        //{
-        //    column.FieldName = "IdCatalogoParcial";
-        //    column.Caption = "IdCatalogoParcial";
-        //    column.Width = Unit.Percentage(10);
-        //    column.VisibleIndex = 2;
-        //    column.Visible = true;
-        //    column.ReadOnly = true;
-        //    column.EditFormSettings.Visible = DefaultBoolean.True;
-        //});     
         settings.Columns.Add(column =>
         {
             column.FieldName = "pe_nombreCompletoAlumno";
             column.Caption = "Alumno";
-            column.Width = Unit.Percentage(70);
+            column.Width = Unit.Percentage(40);
             column.VisibleIndex = 2;
             column.Visible = true;
             column.ReadOnly = true;
@@ -127,14 +117,82 @@
                 q.DisplayFormatString = "{0:n2}";
                 q.Width = Unit.Percentage(100);
                 q.AllowMouseWheel = false;
+                q.ClientSideEvents.ValueChanged = "function(s, e){ CalcularPromedioQuimestral();}";
             });
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Promedio";
+            column.Caption = "Promedio";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.VisibleIndex = 4;
+            column.ReadOnly = true;
+            column.Visible = true;
+            column.EditorProperties().SpinEdit(q =>
+            {
+                q.MinValue = 0;
+                q.DisplayFormatString = "{0:n2}";
+                q.Width = Unit.Percentage(100);
+                q.AllowMouseWheel = false;
+            });
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Causa";
+            column.Caption = "Causa";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 5;
+            column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Resolucion";
+            column.Caption = "Resolución";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 6;
+            column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); e.customArgs['IdCatalogoParcial'] = $('#IdCatalogoParcial').val();}";
         settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {} }";
-
     });
 
+    if (ViewBag.MostrarError != "")
+    {
+        grid.SetEditErrorText((string)ViewBag.MostrarError);
+    }
 }
 @grid.Bind(Model).GetHtml()
+
+<script type="text/javascript">
+    function CalcularPromedioQuimestral(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdMatricula: GridViewPartial_MatriculaCalificacionExamen.GetEditor('IdMatricula').GetValue(),
+            IdMateria: IdMateria.GetValue(),
+            CalificacionExamen: GridViewPartial_MatriculaCalificacionExamen.GetEditor('CalificacionExamen').GetValue(),
+            IdCatalogoParcial: $("#IdCatalogoParcial").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CalcularPromedioQuimestral", "MatriculaCalificacionExamen",new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                console.log(data);
+                GridViewPartial_MatriculaCalificacionExamen.GetEditor('Promedio').SetValue(data.Promedio);
+            },
+            error: function (error) {
+            }
+        });
+    };
+</script>

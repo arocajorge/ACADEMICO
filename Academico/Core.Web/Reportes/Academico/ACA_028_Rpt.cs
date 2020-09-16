@@ -110,5 +110,18 @@ namespace Core.Web.Reportes.Academico
 
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
+
+        private void PromediosBajos_SubRpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdSede"].Value = p_IdSede.Value == null ? 0 : Convert.ToInt32(p_IdSede.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdAnio"].Value = p_IdAnio.Value == null ? 0 : Convert.ToInt32(p_IdAnio.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdJornada"].Value = p_IdJornada.Value == null ? 0 : Convert.ToInt32(p_IdJornada.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdNivel"].Value = p_IdNivel.Value == null ? 0 : Convert.ToInt32(p_IdNivel.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdCurso"].Value = p_IdCurso.Value == null ? 0 : Convert.ToInt32(p_IdCurso.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdParalelo"].Value = p_IdParalelo.Value == null ? 0 : Convert.ToInt32(p_IdParalelo.Value);
+
+            ((XRSubreport)sender).ReportSource.RequestParameters = false;
+        }
     }
 }

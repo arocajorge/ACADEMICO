@@ -108,7 +108,7 @@ namespace Core.Data.Facturacion
                                      NumDocumento = q.vt_NunDocumento,
                                      TieneSaldo0 = false,
                                      SaldoProntoPago = q.SaldoProntoPago??0
-                                 }).ToList();
+                                 }).OrderBy(q => q.vt_fecha).ToList();
                     else
                         Lista = (from q in Context.vwcxc_cartera_x_cobrar
                                  where q.IdEmpresa == IdEmpresa
@@ -132,7 +132,7 @@ namespace Core.Data.Facturacion
                                      NumDocumento = q.vt_NunDocumento,
                                      TieneSaldo0 = false,
                                      SaldoProntoPago = q.SaldoProntoPago ?? 0
-                                 }).ToList();
+                                 }).OrderBy(q=> q.vt_fecha).ToList();
 
                     Lista.ForEach(q => { q.secuencial = q.vt_tipoDoc + "-" + q.IdBodega_fac_nd_doc_mod.ToString() + "-" + q.IdCbteVta_fac_nd_doc_mod.ToString(); q.Valor_Aplicado = Convert.ToDouble(q.Saldo);});
                 }
@@ -153,7 +153,7 @@ namespace Core.Data.Facturacion
 
                 using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
                 {
-                    var lst = Context.vwcxc_cartera_cobrada_saldo0.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdCliente == IdCliente).ToList();
+                    var lst = Context.vwcxc_cartera_cobrada_saldo0.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdCliente == IdCliente).OrderBy(q=>q.vt_fecha).ToList();
 
                     foreach (var q in lst)
                     {

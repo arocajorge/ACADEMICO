@@ -24,6 +24,8 @@ namespace Core.Info.Academico
         public Nullable<int> IdEquivalenciaPromedioEQ1 { get; set; }
         public Nullable<decimal> PromedioFinalQ1 { get; set; }
         public Nullable<int> IdEquivalenciaPromedioQ1 { get; set; }
+        public string CausaQ1 { get; set; }
+        public string ResolucionQ1 { get; set; }
         public Nullable<decimal> CalificacionP4 { get; set; }
         public Nullable<int> IdEquivalenciaPromedioP4 { get; set; }
         public Nullable<decimal> CalificacionP5 { get; set; }
@@ -35,6 +37,8 @@ namespace Core.Info.Academico
         public Nullable<int> IdEquivalenciaPromedioEQ2 { get; set; }
         public Nullable<decimal> PromedioFinalQ2 { get; set; }
         public Nullable<int> IdEquivalenciaPromedioQ2 { get; set; }
+        public string CausaQ2 { get; set; }
+        public string ResolucionQ2 { get; set; }
         public Nullable<decimal> ExamenMejoramiento { get; set; }
         public string CampoMejoramiento { get; set; }
         public Nullable<decimal> ExamenSupletorio { get; set; }
@@ -72,11 +76,14 @@ namespace Core.Info.Academico
         public string pe_nombreCompleto { get; set; }
         public decimal CalificacionExamen { get; set; }
         public Nullable<int> IdEquivalenciaCalificacionExamen { get; set; }
+        public string Causa { get; set; }
+        public string Resolucion { get; set; }
         public int IdCatalogoTipo { get; set; }
         public int IdCatalogoParcial { get; set; }
         public bool RegistroValido { get; set; }
         public string CodigoEquivalencia { get; set; }
         public string DescripcionEquivalencia { get; set; }
+        public Nullable<decimal> Promedio { get; set; }
         #endregion
     }
 }

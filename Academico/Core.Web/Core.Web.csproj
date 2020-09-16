@@ -603,6 +603,12 @@
     <Compile Include="Reportes\Academico\ACA_028_ConductaBaja_Rpt.Designer.cs">
       <DependentUpon>ACA_028_ConductaBaja_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_PromediosBajos_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_PromediosBajos_Rpt.Designer.cs">
+      <DependentUpon>ACA_028_PromediosBajos_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_028_PromediosProfesor_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9308,6 +9314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_028_ConductaBaja_Rpt.resx">
       <DependentUpon>ACA_028_ConductaBaja_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_028_PromediosBajos_Rpt.resx">
+      <DependentUpon>ACA_028_PromediosBajos_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_028_PromediosProfesor_Rpt.resx">
       <DependentUpon>ACA_028_PromediosProfesor_Rpt.cs</DependentUpon>
