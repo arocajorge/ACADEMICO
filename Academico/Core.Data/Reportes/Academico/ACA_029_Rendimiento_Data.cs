@@ -71,8 +71,8 @@ namespace Core.Data.Reportes.Academico
                             ValorMinimo = Convert.ToDecimal(reader["ValorMinimo"]),
                             ValorMaximo = Convert.ToDecimal(reader["ValorMaximo"]),
                             CantAlumnos = Convert.ToInt32(reader["CantAlumnos"]),
-                            CantidadEnRango = Convert.ToInt32(reader["CantidadEnRango"]),
-                            Porcentaje = Convert.ToDecimal(reader["Porcentaje"])
+                            CantidadEnRango = string.IsNullOrEmpty(reader["CantidadEnRango"].ToString()) ? null : (int?)reader["CantidadEnRango"],
+                            Porcentaje = string.IsNullOrEmpty(reader["Porcentaje"].ToString()) ? null : (decimal?)reader["Porcentaje"],
                         });
                     }
                     reader.Close();

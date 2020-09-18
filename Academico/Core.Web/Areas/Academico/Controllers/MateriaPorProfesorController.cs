@@ -196,7 +196,6 @@ namespace Core.Web.Areas.Academico.Controllers
             var resultado = 1;
             List<aca_AnioLectivo_Paralelo_Profesor_Info> lista = new List<aca_AnioLectivo_Paralelo_Profesor_Info>();
             lista = Lista_MateriaPorProfesor.get_list(IdTransaccionSession);
-
             if (!bus_MateriaPorProfesor.GuardarDB(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, lista))
             {
                 resultado = 0;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Reportes.Academico
 {
-    public class ACA_028_PromediosBajos_Info
+    public class ACA_029_SinPromedios_Info
     {
         public int IdEmpresa { get; set; }
         public decimal IdMatricula { get; set; }

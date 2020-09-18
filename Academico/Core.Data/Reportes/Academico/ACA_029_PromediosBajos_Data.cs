@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_028_PromediosBajos_Data
+    public class ACA_029_PromediosBajos_Data
     {
-        public List<ACA_028_PromediosBajos_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCatalogoTipo)
+        public List<ACA_029_PromediosBajos_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, int IdCatalogoTipo)
         {
             try
             {
-                List<ACA_028_PromediosBajos_Info> Lista = new List<ACA_028_PromediosBajos_Info>();
-                List<ACA_028_PromediosBajos_Info> ListaFinal = new List<ACA_028_PromediosBajos_Info>();
+                List<ACA_029_PromediosBajos_Info> Lista = new List<ACA_029_PromediosBajos_Info>();
+                List<ACA_029_PromediosBajos_Info> ListaFinal = new List<ACA_029_PromediosBajos_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
                     Context.Database.CommandTimeout = 5000;
-                    var lst = Context.SPACA_028_PromediosBajos(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo).ToList();
+                    var lst = Context.SPACA_029_PromediosBajos(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria).ToList();
 
                     foreach (var q in lst)
                     {
-                        Lista.Add(new ACA_028_PromediosBajos_Info
+                        Lista.Add(new ACA_029_PromediosBajos_Info
                         {
                             IdEmpresa = q.IdEmpresa,
                             IdAnio = q.IdAnio,

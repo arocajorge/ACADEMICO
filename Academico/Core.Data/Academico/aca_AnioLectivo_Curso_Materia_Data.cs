@@ -10,7 +10,6 @@ namespace Core.Data.Academico
 {
     public class aca_AnioLectivo_Curso_Materia_Data
     {
-        aca_AnioLectivo_Paralelo_Profesor_Data odata_MateriaProfesor = new aca_AnioLectivo_Paralelo_Profesor_Data();
         public List<aca_AnioLectivo_Curso_Materia_Info> get_list_asignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
         {
             try
@@ -72,6 +71,47 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_AnioLectivo_Curso_Materia_Info getInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdMateria)
+        {
+            try
+            {
+                aca_AnioLectivo_Curso_Materia_Info info = new aca_AnioLectivo_Curso_Materia_Info(); ;
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var Entity = Context.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio==IdAnio && q.IdNivel==IdNivel
+                    && q.IdJornada==IdJornada && q.IdCurso==IdCurso && q.IdMateria==IdMateria).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_AnioLectivo_Curso_Materia_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAnio = Entity.IdAnio,
+                        IdSede = Entity.IdSede,
+                        IdNivel = Entity.IdNivel,
+                        IdJornada = Entity.IdJornada,
+                        IdCurso = Entity.IdCurso,
+                        IdMateria = Entity.IdMateria,
+                        NomMateria = Entity.NomMateria,
+                        NomMateriaArea = Entity.NomMateriaArea,
+                        NomMateriaGrupo = Entity.NomMateriaGrupo,
+                        OrdenMateria = Entity.OrdenMateria,
+                        OrdenMateriaArea = Entity.OrdenMateriaArea,
+                        OrdenMateriaGrupo = Entity.OrdenMateriaGrupo,
+                        EsObligatorio = Entity.EsObligatorio,
+                        IdCatalogoTipoCalificacion = Entity.IdCatalogoTipoCalificacion
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool guardarDB(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, List<aca_AnioLectivo_Curso_Materia_Info> lista)
         {
             try
@@ -100,7 +140,8 @@ namespace Core.Data.Academico
                                 OrdenMateria = info.OrdenMateria,
                                 OrdenMateriaArea = (info.NomMateriaArea==null ? null : info.OrdenMateriaArea),
                                 OrdenMateriaGrupo = (info.NomMateriaGrupo==null ? null : info.OrdenMateriaGrupo),
-                                EsObligatorio = info.EsObligatorio
+                                EsObligatorio = info.EsObligatorio,
+                                IdCatalogoTipoCalificacion = info.IdCatalogoTipoCalificacion
                             };
                             Context.aca_AnioLectivo_Curso_Materia.Add(Entity);    
                         }
@@ -143,7 +184,8 @@ namespace Core.Data.Academico
                         OrdenMateria = q.OrdenMateria,
                         OrdenMateriaArea = q.OrdenMateriaArea,
                         OrdenMateriaGrupo = q.OrdenMateriaGrupo,
-                        EsObligatorio = q.EsObligatorio
+                        EsObligatorio = q.EsObligatorio,
+                        IdCatalogoTipoCalificacion=q.IdCatalogoTipoCalificacion
                     }).ToList();
                 }
 
@@ -179,7 +221,8 @@ namespace Core.Data.Academico
                         OrdenMateria = q.OrdenMateria,
                         OrdenMateriaArea = q.OrdenMateriaArea,
                         OrdenMateriaGrupo = q.OrdenMateriaGrupo,
-                        EsObligatorio = q.EsObligatorio
+                        EsObligatorio = q.EsObligatorio,
+                        IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion
                     }).ToList();
                 }
 
@@ -215,7 +258,8 @@ namespace Core.Data.Academico
                         OrdenMateria = q.OrdenMateria,
                         OrdenMateriaArea = q.OrdenMateriaArea,
                         OrdenMateriaGrupo = q.OrdenMateriaGrupo,
-                        EsObligatorio = q.EsObligatorio
+                        EsObligatorio = q.EsObligatorio,
+                        IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion
                     }).ToList();
                 }
 

@@ -33,6 +33,9 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.SinPromedios_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
+            this.PromediosBajos_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
+            this.RendimientoProcentaje_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable12 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow21 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell24 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -120,7 +123,6 @@
             this.p_IdParalelo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdMateria = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCatalogoTipo = new DevExpress.XtraReports.Parameters.Parameter();
-            this.RendimientoProcentaje_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable11)).BeginInit();
@@ -154,6 +156,8 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.SinPromedios_SubRpt,
+            this.PromediosBajos_SubRpt,
             this.RendimientoProcentaje_SubRpt,
             this.xrTable12,
             this.xrTable10,
@@ -167,13 +171,37 @@
             this.xrTable7,
             this.xrTable1,
             this.lbl_imagen});
-            this.ReportHeader.HeightF = 850.6667F;
+            this.ReportHeader.HeightF = 809.8334F;
             this.ReportHeader.Name = "ReportHeader";
+            // 
+            // SinPromedios_SubRpt
+            // 
+            this.SinPromedios_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 298.5F);
+            this.SinPromedios_SubRpt.Name = "SinPromedios_SubRpt";
+            this.SinPromedios_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_029_SinPromedios_Rpt();
+            this.SinPromedios_SubRpt.SizeF = new System.Drawing.SizeF(750.9999F, 20F);
+            this.SinPromedios_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SinPromedios_SubRpt_BeforePrint);
+            // 
+            // PromediosBajos_SubRpt
+            // 
+            this.PromediosBajos_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(5.086263E-05F, 247.0001F);
+            this.PromediosBajos_SubRpt.Name = "PromediosBajos_SubRpt";
+            this.PromediosBajos_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_029_PromediosBajos_Rpt();
+            this.PromediosBajos_SubRpt.SizeF = new System.Drawing.SizeF(751.0002F, 20F);
+            this.PromediosBajos_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromediosBajos_SubRpt_BeforePrint);
+            // 
+            // RendimientoProcentaje_SubRpt
+            // 
+            this.RendimientoProcentaje_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(2.543131E-05F, 195.1667F);
+            this.RendimientoProcentaje_SubRpt.Name = "RendimientoProcentaje_SubRpt";
+            this.RendimientoProcentaje_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_029_Rendimiento_Rpt();
+            this.RendimientoProcentaje_SubRpt.SizeF = new System.Drawing.SizeF(751.0002F, 20F);
+            this.RendimientoProcentaje_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.RendimientoProcentaje_SubRpt_BeforePrint);
             // 
             // xrTable12
             // 
             this.xrTable12.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrTable12.LocationFloat = new DevExpress.Utils.PointFloat(545.7006F, 810.6666F);
+            this.xrTable12.LocationFloat = new DevExpress.Utils.PointFloat(545.7004F, 769.8334F);
             this.xrTable12.Name = "xrTable12";
             this.xrTable12.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable12.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -206,7 +234,7 @@
             // xrTable10
             // 
             this.xrTable10.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrTable10.LocationFloat = new DevExpress.Utils.PointFloat(274.7005F, 810.6666F);
+            this.xrTable10.LocationFloat = new DevExpress.Utils.PointFloat(274.7005F, 769.8334F);
             this.xrTable10.Name = "xrTable10";
             this.xrTable10.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable10.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -239,7 +267,7 @@
             // xrTable11
             // 
             this.xrTable11.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrTable11.LocationFloat = new DevExpress.Utils.PointFloat(0F, 810.6667F);
+            this.xrTable11.LocationFloat = new DevExpress.Utils.PointFloat(0F, 769.8334F);
             this.xrTable11.Name = "xrTable11";
             this.xrTable11.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable11.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -291,14 +319,18 @@
             // 
             // xrTable9
             // 
+            this.xrTable9.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable9.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(0F, 647.3335F);
+            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(0F, 614.8335F);
             this.xrTable9.Name = "xrTable9";
             this.xrTable9.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 5, 0, 100F);
             this.xrTable9.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow15,
             this.xrTableRow17});
             this.xrTable9.SizeF = new System.Drawing.SizeF(751.0001F, 98.50002F);
+            this.xrTable9.StylePriority.UseBorders = false;
             this.xrTable9.StylePriority.UseFont = false;
             this.xrTable9.StylePriority.UsePadding = false;
             // 
@@ -336,7 +368,7 @@
             // xrTable6
             // 
             this.xrTable6.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable6.LocationFloat = new DevExpress.Utils.PointFloat(0F, 287.8335F);
+            this.xrTable6.LocationFloat = new DevExpress.Utils.PointFloat(0.0001398722F, 280F);
             this.xrTable6.Name = "xrTable6";
             this.xrTable6.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 5, 0, 100F);
             this.xrTable6.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -364,7 +396,7 @@
             // xrTable5
             // 
             this.xrTable5.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable5.LocationFloat = new DevExpress.Utils.PointFloat(5.086263E-05F, 351.0003F);
+            this.xrTable5.LocationFloat = new DevExpress.Utils.PointFloat(0F, 336.0003F);
             this.xrTable5.Name = "xrTable5";
             this.xrTable5.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 5, 0, 100F);
             this.xrTable5.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -499,14 +531,18 @@
             // 
             // xrTable4
             // 
+            this.xrTable4.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable4.Font = new System.Drawing.Font("Verdana", 8F);
-            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 527.8336F);
+            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 496.1669F);
             this.xrTable4.Name = "xrTable4";
             this.xrTable4.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 5, 0, 100F);
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow8,
             this.xrTableRow13});
             this.xrTable4.SizeF = new System.Drawing.SizeF(751.0001F, 98.50002F);
+            this.xrTable4.StylePriority.UseBorders = false;
             this.xrTable4.StylePriority.UseFont = false;
             this.xrTable4.StylePriority.UsePadding = false;
             // 
@@ -1007,14 +1043,6 @@
             this.p_IdCatalogoTipo.Name = "p_IdCatalogoTipo";
             this.p_IdCatalogoTipo.Visible = false;
             // 
-            // RendimientoProcentaje_SubRpt
-            // 
-            this.RendimientoProcentaje_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(2.543131E-05F, 195.1667F);
-            this.RendimientoProcentaje_SubRpt.Name = "RendimientoProcentaje_SubRpt";
-            this.RendimientoProcentaje_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_029_Rendimiento_Rpt();
-            this.RendimientoProcentaje_SubRpt.SizeF = new System.Drawing.SizeF(751.0002F, 20F);
-            this.RendimientoProcentaje_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.RendimientoProcentaje_SubRpt_BeforePrint);
-            // 
             // ACA_029_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1154,5 +1182,7 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdMateria;
         public DevExpress.XtraReports.Parameters.Parameter p_IdCatalogoTipo;
         private DevExpress.XtraReports.UI.XRSubreport RendimientoProcentaje_SubRpt;
+        private DevExpress.XtraReports.UI.XRSubreport PromediosBajos_SubRpt;
+        private DevExpress.XtraReports.UI.XRSubreport SinPromedios_SubRpt;
     }
 }

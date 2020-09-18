@@ -871,12 +871,13 @@ namespace Core.Web.Areas.Academico.Controllers
                     }
                     if (resultado <= Convert.ToDecimal(info_anio.PromedioMinimoPromocion))
                     {
-                        RegistroconPromedioBajo = true;
-                        RegistroValidoCalificacion = false;
-
                         if (string.IsNullOrEmpty(info.Causa) || string.IsNullOrEmpty(info.Resolucion))
                         {
                             RegistroValidoCalificacion = false;
+                        }
+                        else
+                        {
+                            RegistroValidoCalificacion = true;
                         }
                     }
                     
@@ -895,12 +896,14 @@ namespace Core.Web.Areas.Academico.Controllers
 
                     if (resultado <= Convert.ToDecimal(info_anio.PromedioMinimoPromocion))
                     {
-                        RegistroconPromedioBajo = true;
-                        RegistroValidoCalificacion = false;
-                    }
-                    if (string.IsNullOrEmpty(info.Causa) || string.IsNullOrEmpty(info.Resolucion))
-                    {
-                        RegistroValidoCalificacion = false;
+                        if (string.IsNullOrEmpty(info.Causa) || string.IsNullOrEmpty(info.Resolucion))
+                        {
+                            RegistroValidoCalificacion = false;
+                        }
+                        else
+                        {
+                            RegistroValidoCalificacion = true;
+                        }
                     }
                 }
 

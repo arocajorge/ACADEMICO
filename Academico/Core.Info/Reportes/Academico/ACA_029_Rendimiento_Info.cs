@@ -21,8 +21,8 @@ namespace Core.Info.Reportes.Academico
         public decimal ValorMinimo { get; set; }
         public decimal ValorMaximo { get; set; }
         public int CantAlumnos { get; set; }
-        public int CantidadEnRango { get; set; }
-        public decimal Porcentaje { get; set; }
+        public  Nullable<int> CantidadEnRango { get; set; }
+        public Nullable<decimal>Porcentaje { get; set; }
 
     }
 }

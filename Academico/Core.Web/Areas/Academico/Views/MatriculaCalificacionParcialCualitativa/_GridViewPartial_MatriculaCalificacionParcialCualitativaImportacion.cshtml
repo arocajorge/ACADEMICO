@@ -90,7 +90,7 @@
         {
             column.FieldName = "pe_nombreCompleto";
             column.Caption = "Alumno";
-            column.Width = Unit.Percentage(40);
+            column.Width = Unit.Percentage(30);
             column.VisibleIndex = 2;
         });
         settings.Columns.Add(column =>
@@ -130,10 +130,30 @@
         {
             column.FieldName = "MotivoConducta";
             column.Caption = "Motivo Conducta";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(10);
             column.VisibleIndex = 5;
             column.Visible = true;
             column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCatalogoParcial";
+            column.Caption = "Parcial";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 6;
+            column.Visible = true;
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdMateria";
+            column.Caption = "Materia";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 7;
+            column.Visible = true;
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
         settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {} }";

@@ -23,5 +23,6 @@ namespace Core.Data.Base
         public int IdParalelo { get; set; }
         public int IdMateria { get; set; }
         public string NomMateria { get; set; }
+        public Nullable<int> IdCatalogoTipoCalificacion { get; set; }
     }
 }
