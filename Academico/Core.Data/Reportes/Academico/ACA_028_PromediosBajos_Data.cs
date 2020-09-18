@@ -44,7 +44,9 @@ namespace Core.Data.Reportes.Academico
                             PromedioFinalQ2=q.PromedioFinalQ2,
                             PromedioMinimoPromocion=q.PromedioMinimoPromocion,
                             IdMateria=q.IdMateria,
-                            PromedioQuimestral = (IdCatalogoTipo== Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ?  q.PromedioFinalQ1 : (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioFinalQ2 : null) )
+                            PromedioQuimestral = (IdCatalogoTipo== Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ?  q.PromedioFinalQ1 : (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioFinalQ2 : null) ),
+                            Causa = (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.CausaQ1 : (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CausaQ1 : null)),
+                            Resolucion = (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.ResolucionQ1 : (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ResolucionQ2 : null))
                         });
                     }
                     ListaFinal = Lista.Where(q => q.PromedioQuimestral!=null && q.PromedioQuimestral < Convert.ToDecimal(q.PromedioMinimoPromocion)).ToList();

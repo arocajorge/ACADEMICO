@@ -47,6 +47,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_Catalogo_Info GetInfo_x_Codigo(string Codigo)
+        {
+            try
+            {
+                return odata.getInfo_x_Codigo(Codigo);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public int GetOrden(int IdCatalogoTipo)
         {
             try

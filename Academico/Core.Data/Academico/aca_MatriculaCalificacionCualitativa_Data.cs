@@ -48,6 +48,39 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_MatriculaCalificacionCualitativa_Info getInfo_X_Matricula(int IdEmpresa, decimal IdMatricula, decimal IdMateria, int IdCatalogoParcial)
+        {
+            try
+            {
+                aca_MatriculaCalificacionCualitativa_Info info = new aca_MatriculaCalificacionCualitativa_Info();
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_MatriculaCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula && q.IdMateria == IdMateria && q.IdCatalogoParcial== IdCatalogoParcial).FirstOrDefault();
+
+                    if (Entity == null)
+                        return null;
+                    info = new aca_MatriculaCalificacionCualitativa_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdMatricula = Entity.IdMatricula,
+                        IdMateria = Entity.IdMateria,
+                        IdProfesor = Entity.IdProfesor,
+                        IdCatalogoParcial = Entity.IdCatalogoParcial,
+                        IdCalificacionCualitativa = Entity.IdCalificacionCualitativa,
+                        Conducta = Entity.Conducta,
+                        MotivoConducta = Entity.MotivoConducta
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<aca_MatriculaCalificacionCualitativa_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, int IdCatalogoParcial, decimal IdProfesor)
         {
             try

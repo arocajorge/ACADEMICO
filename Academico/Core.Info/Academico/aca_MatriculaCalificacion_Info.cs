@@ -84,6 +84,9 @@ namespace Core.Info.Academico
         public string CodigoEquivalencia { get; set; }
         public string DescripcionEquivalencia { get; set; }
         public Nullable<decimal> Promedio { get; set; }
+        public Nullable<int> IdEquivalenciaPromedio { get; set; }
+        public bool EsImportacion { get; set; }
+        public string IdCatalogoParcialImportacion { get; set; }
         #endregion
     }
 }

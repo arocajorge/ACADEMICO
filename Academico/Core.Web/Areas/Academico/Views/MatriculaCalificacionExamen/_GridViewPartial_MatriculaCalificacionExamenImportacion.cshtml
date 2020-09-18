@@ -85,7 +85,7 @@
         {
             column.FieldName = "pe_nombreCompletoAlumno";
             column.Caption = "Alumno";
-            column.Width = Unit.Percentage(70);
+            column.Width = Unit.Percentage(40);
             column.VisibleIndex = 2;
         });
         settings.Columns.Add(column =>
@@ -101,6 +101,62 @@
                 q.Width = Unit.Percentage(100);
                 q.AllowMouseWheel = false;
             });
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Causa";
+            column.Caption = "Causa";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 4;
+            column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Resolucion";
+            column.Caption = "Resolución";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 5;
+            column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Promedio";
+            column.Caption = "Promedio";
+            column.Width = Unit.Percentage(10);
+            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+            column.VisibleIndex = 6;
+            column.ReadOnly = true;
+            column.Visible = true;
+            column.EditorProperties().SpinEdit(q =>
+            {
+                q.MinValue = 0;
+                q.DisplayFormatString = "{0:n2}";
+                q.Width = Unit.Percentage(100);
+                q.AllowMouseWheel = false;
+            });
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdCatalogoParcialImportacion";
+            column.Caption = "Tipo";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 7;
+            column.Visible = true;
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdMateria";
+            column.Caption = "Materia";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 8;
+            column.Visible = true;
+            column.ReadOnly = true;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
         settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {} }";

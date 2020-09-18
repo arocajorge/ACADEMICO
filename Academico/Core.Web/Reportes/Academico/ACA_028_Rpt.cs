@@ -81,6 +81,7 @@ namespace Core.Web.Reportes.Academico
             ((XRSubreport)sender).ReportSource.Parameters["p_IdNivel"].Value = p_IdNivel.Value == null ? 0 : Convert.ToInt32(p_IdNivel.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdCurso"].Value = p_IdCurso.Value == null ? 0 : Convert.ToInt32(p_IdCurso.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdParalelo"].Value = p_IdParalelo.Value == null ? 0 : Convert.ToInt32(p_IdParalelo.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdCatalogoTipo"].Value = p_IdCatalogoTipo.Value == null ? 0 : Convert.ToInt32(p_IdCatalogoTipo.Value);
 
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
@@ -94,6 +95,7 @@ namespace Core.Web.Reportes.Academico
             ((XRSubreport)sender).ReportSource.Parameters["p_IdNivel"].Value = p_IdNivel.Value == null ? 0 : Convert.ToInt32(p_IdNivel.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdCurso"].Value = p_IdCurso.Value == null ? 0 : Convert.ToInt32(p_IdCurso.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdParalelo"].Value = p_IdParalelo.Value == null ? 0 : Convert.ToInt32(p_IdParalelo.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdCatalogoTipo"].Value = p_IdCatalogoTipo.Value == null ? 0 : Convert.ToInt32(p_IdCatalogoTipo.Value);
 
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
@@ -107,6 +109,7 @@ namespace Core.Web.Reportes.Academico
             ((XRSubreport)sender).ReportSource.Parameters["p_IdNivel"].Value = p_IdNivel.Value == null ? 0 : Convert.ToInt32(p_IdNivel.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdCurso"].Value = p_IdCurso.Value == null ? 0 : Convert.ToInt32(p_IdCurso.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdParalelo"].Value = p_IdParalelo.Value == null ? 0 : Convert.ToInt32(p_IdParalelo.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdCatalogoTipo"].Value = p_IdCatalogoTipo.Value == null ? 0 : Convert.ToInt32(p_IdCatalogoTipo.Value);
 
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }
@@ -120,6 +123,7 @@ namespace Core.Web.Reportes.Academico
             ((XRSubreport)sender).ReportSource.Parameters["p_IdNivel"].Value = p_IdNivel.Value == null ? 0 : Convert.ToInt32(p_IdNivel.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdCurso"].Value = p_IdCurso.Value == null ? 0 : Convert.ToInt32(p_IdCurso.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdParalelo"].Value = p_IdParalelo.Value == null ? 0 : Convert.ToInt32(p_IdParalelo.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_IdCatalogoTipo"].Value = p_IdCatalogoTipo.Value == null ? 0 : Convert.ToInt32(p_IdCatalogoTipo.Value);
 
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }

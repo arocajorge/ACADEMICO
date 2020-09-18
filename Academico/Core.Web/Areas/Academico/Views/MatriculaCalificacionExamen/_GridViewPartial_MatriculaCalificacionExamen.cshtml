@@ -123,11 +123,29 @@
         });
         settings.Columns.Add(column =>
         {
+            column.FieldName = "Causa";
+            column.Caption = "Causa";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 4;
+            column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "Resolucion";
+            column.Caption = "Resolución";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 5;
+            column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
             column.FieldName = "Promedio";
             column.Caption = "Promedio";
             column.Width = Unit.Percentage(10);
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.VisibleIndex = 4;
+            column.VisibleIndex = 6;
             column.ReadOnly = true;
             column.Visible = true;
             column.EditorProperties().SpinEdit(q =>
@@ -139,25 +157,6 @@
             });
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Causa";
-            column.Caption = "Causa";
-            column.Width = Unit.Percentage(10);
-            column.VisibleIndex = 5;
-            column.Visible = true;
-            column.EditFormSettings.Visible = DefaultBoolean.True;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "Resolucion";
-            column.Caption = "Resolución";
-            column.Width = Unit.Percentage(10);
-            column.VisibleIndex = 6;
-            column.Visible = true;
-            column.EditFormSettings.Visible = DefaultBoolean.True;
-        });
-
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); e.customArgs['IdCatalogoParcial'] = $('#IdCatalogoParcial').val();}";
         settings.ClientSideEvents.EndCallback = "function(s,e){if (s.IsEditing()) {} }";
     });

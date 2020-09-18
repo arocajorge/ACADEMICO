@@ -9,6 +9,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
+    $(function () {
+        $("#IdCatalogoParcial").change(function () {
+            LimpiarLista();
+        });
+    });
     function buscar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -28,6 +33,26 @@
             async: false,
             bDeferRender: true,
             bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_MatriculaCalificacionExamen.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function LimpiarLista() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("LimpiarLista", "MatriculaCalificacionExamen", new { Area = "Academico"})',
+            async: false,
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {

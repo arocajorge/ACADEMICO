@@ -25,6 +25,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_MatriculaCalificacionCualitativa_Info GetInfo_X_Matricula(int IdEmpresa, decimal IdMatricula, int IdMateria, int IdCatalogoParcial)
+        {
+            try
+            {
+                return odata.getInfo_X_Matricula(IdEmpresa, IdMatricula, IdMateria, IdCatalogoParcial);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<aca_MatriculaCalificacionCualitativa_Info> getList(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, int IdCatalogoParcial, decimal IdProfesor)
         {
             try

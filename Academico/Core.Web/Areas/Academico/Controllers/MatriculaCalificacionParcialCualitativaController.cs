@@ -576,6 +576,17 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult LimpiarLista(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            List<aca_MatriculaCalificacionCualitativa_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionCualitativa_Info>();
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+
+            Lista_CalificacionParcial.set_list(ListaCalificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return Json(EsSuperAdmin, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Importacion
@@ -626,12 +637,15 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             try
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 string IdUsuario = SessionFixed.IdUsuario;
                 bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
                 var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
                 var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
                 var Lista_Calificaciones = Lista_CalificacionParcial.get_list(model.IdTransaccionSession);
+                var Lista_CalificacionesGuardar = new List<aca_MatriculaCalificacionCualitativa_Info>();
+
                 var info_parcial = bus_parcial.GetInfo(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoParcial);
 
                 bool guardar = true;
@@ -642,8 +656,9 @@ namespace Core.Web.Areas.Academico.Controllers
                     q.IdAnio = model.IdAnio; q.IdSede = model.IdSede; q.IdNivel = model.IdNivel; q.IdJornada = model.IdJornada; q.IdCurso = model.IdCurso;
                     q.IdParalelo = model.IdParalelo; q.IdMateria = model.IdMateria; q.IdCatalogoParcial = model.IdCatalogoParcial; q.IdProfesor = IdProfesor;
                 });
+                Lista_CalificacionesGuardar = Lista_Calificaciones.Where(q => q.RegistroValido == true).ToList();
 
-                foreach (var item in Lista_Calificaciones)
+                foreach (var item in Lista_CalificacionesGuardar)
                 {
                     if ((info_parcial.Orden - 1) != 0)
                     {
@@ -678,7 +693,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     ViewBag.mensaje = null;
 
-                    foreach (var item in Lista_Calificaciones)
+                    foreach (var item in Lista_CalificacionesGuardar)
                     {
                         if (!bus_calificacion_parcial.modificarDB(item))
                         {
@@ -790,11 +805,44 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
             aca_AnioLectivoEquivalenciaPromedio_Bus bus_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Bus();
             aca_AnioLectivoCalificacionCualitativa_Bus bus_cualitativa = new aca_AnioLectivoCalificacionCualitativa_Bus();
+            aca_MatriculaCalificacionCualitativa_Bus bus_calificacion_cualitativa = new aca_MatriculaCalificacionCualitativa_Bus();
+            aca_MatriculaCalificacion_Bus bus_calificacion = new aca_MatriculaCalificacion_Bus();
             var mensaje = string.Empty;
             var RegistroValidoConducta = true;
+            var RegistroValido = true;
             var info_matricula = bus_matricula.GetInfo(info.IdEmpresa, info.IdMatricula);
             var info_anio_lectivo = bus_anio.GetInfo(IdEmpresa, info_matricula.IdAnio);
             var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info.Conducta));
+
+            var info_parcial = bus_parcial.GetInfo(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, info.IdCatalogoParcial);
+            if ((info_parcial.Orden - 1) != 0)
+            {
+                var OrdenAnterior = info_parcial.Orden - 1;
+                var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(OrdenAnterior));
+                var info_cal_anteriores = bus_calificacion_cualitativa.GetInfo_X_Matricula(info.IdEmpresa, info.IdMatricula, info.IdMateria, info_parcial_anterior.IdCatalogoParcial);
+                decimal? Promedio_CatalogoParcial = null;
+
+                if (info_cal_anteriores != null)
+                {
+                    if (info_parcial_anterior != null)
+                    {
+                        Promedio_CatalogoParcial = info_cal_anteriores.IdCalificacionCualitativa;
+
+                        if (Promedio_CatalogoParcial == null)
+                        {
+                            RegistroValido = false;
+                        }
+                    }
+                    else
+                    {
+                        RegistroValido = false;
+                    }
+                }
+                else
+                {
+                    RegistroValido = false;
+                }
+            }
 
             if (info_conducta != null)
             {
@@ -810,7 +858,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
             info.RegistroValidoConducta = RegistroValidoConducta;
 
-            if (info.RegistroValidoConducta == true)
+            if (info.RegistroValidoConducta == true && RegistroValido==true)
             {
                 info.RegistroValido = true;
             }
@@ -837,6 +885,7 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
             aca_AnioLectivoCalificacionCualitativa_Bus bus_cualitativa = new aca_AnioLectivoCalificacionCualitativa_Bus();
             aca_AnioLectivoEquivalenciaPromedio_Bus bus_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Bus();
+            aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
             int cont = 0;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -860,6 +909,12 @@ namespace Core.Web.Areas.Academico.Controllers
                         string CodigoCalificacionCualitativa = Convert.ToString(reader.GetValue(3));
                         string Conducta = Convert.ToString(reader.GetValue(4));
                         string MotivoConducta = Convert.ToString(reader.GetValue(5));
+                        var IdCatalogoParcial = Convert.ToInt32(reader.GetValue(6));
+                        var IdMateria = Convert.ToInt32(reader.GetValue(7));
+                        string IdUsuario = SessionFixed.IdUsuario;
+                        bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+                        var info_profesor = bus_profesor.GetInfo_x_Usuario(IdEmpresa, IdUsuario);
+                        var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
 
                         var info_cualitativa = bus_cualitativa.getInfo_Codigo(info_matricula.IdEmpresa, info_matricula.IdAnio, CodigoCalificacionCualitativa);
                         var info_conducta = bus_conducta.GetInfo_x_Letra(IdEmpresa, info_anio.IdAnio, Conducta);
@@ -872,6 +927,9 @@ namespace Core.Web.Areas.Academico.Controllers
                             IdCalificacionCualitativa = (info_cualitativa==null ? (int?)null : Convert.ToInt32(info_cualitativa.IdCalificacionCualitativa)),
                             Conducta = (info_conducta == null ? (int?)null : info_conducta.Secuencia),
                             MotivoConducta = MotivoConducta,
+                            IdCatalogoParcial = IdCatalogoParcial,
+                            IdMateria = IdMateria,
+                            IdProfesor = IdProfesor
                             //RegistroValidoCalificacion = (info_cualitativa==null ? false : true),
                             //RegistroValido = true,
                             //RegistroValidoConducta = true

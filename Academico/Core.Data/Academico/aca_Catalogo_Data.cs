@@ -108,6 +108,38 @@ namespace Core.Data.Academico
             }
         }
 
+        public aca_Catalogo_Info getInfo_x_Codigo(string Codigo)
+        {
+            try
+            {
+                aca_Catalogo_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var Entity = db.aca_Catalogo.Where(q => q.Codigo == Codigo).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    info = new aca_Catalogo_Info
+                    {
+                        IdCatalogo = Entity.IdCatalogo,
+                        IdCatalogoTipo = Entity.IdCatalogoTipo,
+                        NomCatalogo = Entity.NomCatalogo,
+                        Orden = Entity.Orden,
+                        Codigo = Entity.Codigo,
+                        Estado = Entity.Estado
+                    };
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public int getId()
         {
             try

@@ -12,6 +12,11 @@
     $(function () {
         $("#IdCatalogoTipo").change(function () {
             CargarParciales();
+            LimpiarLista();
+        });
+
+        $("#IdCatalogoParcial").change(function () {
+            LimpiarLista();
         });
     });
 
@@ -75,6 +80,30 @@
         });
     }
 
+    function LimpiarLista() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("LimpiarLista", "MatriculaCalificacionParcial",new { Area = "Academico"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == 1) {
+                    GridViewPartial_MatriculaCalificacionParcial_SuperAdmin.PerformCallback();
+                }
+                else {
+                    GridViewPartial_MatriculaCalificacionParcial.PerformCallback();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
     function importar() {
         var location = GetPathServer();
         var win = window.open(location + "/Academico/MatriculaCalificacionParcial/Importar?IdEmpresa=" + $("#IdEmpresa").val() + "&IdSede=" + IdSede.GetValue() + "&IdAnio=" + IdAnio.GetValue() + "&IdNivel=" + IdNivel.GetValue() + "&IdJornada=" + IdJornada.GetValue() + "&IdCurso=" + IdCurso.GetValue() + "&IdParalelo=" + IdParalelo.GetValue() + "&IdMateria=" + IdMateria.GetValue() + "&IdCatalogoTipo=" + $("#IdCatalogoTipo").val() + "&IdCatalogoParcial=" + $("#IdCatalogoParcial").val(), '_self');

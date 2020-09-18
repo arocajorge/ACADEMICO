@@ -1,6 +1,7 @@
 ﻿using Core.Data.Base;
 using Core.Data.SeguridadAcceso;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Core.Data.Academico
 {
     public class aca_AnioLectivo_Paralelo_Profesor_Data
     {
+        aca_AnioLectivo_Curso_Materia_Data odata_curso_materia = new aca_AnioLectivo_Curso_Materia_Data();
         public List<aca_AnioLectivo_Paralelo_Profesor_Info> get_list_asignacion(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo)
         {
             try
@@ -39,7 +41,8 @@ namespace Core.Data.Academico
                                  IdMateria = q.IdMateria,
                                  NomMateria = q.NomMateria,
                                  IdProfesor = q.IdProfesor,
-                                 pe_nombreCompleto = q.pe_nombreCompleto
+                                 pe_nombreCompleto = q.pe_nombreCompleto,
+                                 IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion??0
                              }).ToList();
 
                     Lista.AddRange((from q in Context.vwaca_AnioLectivo_Paralelo_Profesor_NoAsignados
@@ -64,7 +67,8 @@ namespace Core.Data.Academico
                                         IdCurso = q.IdCurso,
                                         IdParalelo = IdParalelo,
                                         IdMateria = q.IdMateria,
-                                        NomMateria = q.NomMateria
+                                        NomMateria = q.NomMateria,
+                                        IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion ?? 0
                                     }).ToList());
                 }
                 return Lista;
@@ -102,27 +106,42 @@ namespace Core.Data.Academico
                                 IdProfesor = info.IdProfesor
                             };
                             Context.aca_AnioLectivo_Paralelo_Profesor.Add(Entity);
-
+                        
                             var info_anio_curso = Context.aca_AnioLectivo.Where(q=> q.IdEmpresa==IdEmpresa && q.EnCurso==true).FirstOrDefault();
                             if (info_anio_curso!=null)
                             {
                                 var lst_matricula = Context.aca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede==info.IdSede
                                 && q.IdNivel ==info.IdNivel && q.IdJornada==IdJornada && q.IdCurso ==IdCurso && q.IdParalelo==IdParalelo).ToList();
+
+                                var info_materia_curso = odata_curso_materia.getInfo(IdEmpresa,IdSede,IdAnio,IdNivel,IdJornada,IdCurso,info.IdMateria);
                                 if (lst_matricula!=null && lst_matricula.Count>0)
                                 {
                                     foreach (var item in lst_matricula)
                                     {
-                                        var lst_MatriculaCalificacionParcial = Context.aca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == item.IdMatricula && q.IdMateria == info.IdMateria).ToList();
-                                        if (lst_MatriculaCalificacionParcial.Count > 0)
-                                        {
-                                            lst_MatriculaCalificacionParcial.ForEach(q => q.IdProfesor = info.IdProfesor);
-                                        }
 
-                                        var lst_MatriculaCalificacion = Context.aca_MatriculaCalificacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula== item.IdMatricula && q.IdMateria == info.IdMateria).ToList();
-                                        if (lst_MatriculaCalificacion.Count > 0)
+                                        if (info_materia_curso.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI))
                                         {
-                                            lst_MatriculaCalificacion.ForEach(q => q.IdProfesor = info.IdProfesor);
+                                            var lst_MatriculaCalificacionParcial = Context.aca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == item.IdMatricula && q.IdMateria == info.IdMateria).ToList();
+                                            if (lst_MatriculaCalificacionParcial.Count > 0)
+                                            {
+                                                lst_MatriculaCalificacionParcial.ForEach(q => q.IdProfesor = info.IdProfesor);
+                                            }
+
+                                            var lst_MatriculaCalificacion = Context.aca_MatriculaCalificacion.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == item.IdMatricula && q.IdMateria == info.IdMateria).ToList();
+                                            if (lst_MatriculaCalificacion.Count > 0)
+                                            {
+                                                lst_MatriculaCalificacion.ForEach(q => q.IdProfesor = info.IdProfesor);
+                                            }
                                         }
+                                        else
+                                        {
+                                            var lst_MatriculaCalificacionCualitativaParcial = Context.aca_MatriculaCalificacionCualitativa.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == item.IdMatricula && q.IdMateria == info.IdMateria).ToList();
+                                            if (lst_MatriculaCalificacionCualitativaParcial.Count > 0)
+                                            {
+                                                lst_MatriculaCalificacionCualitativaParcial.ForEach(q => q.IdProfesor = info.IdProfesor);
+                                            }
+                                        }
+                                        
                                     }
                                 }
                             }                           
