@@ -2812,6 +2812,94 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
 
         #endregion
+
+        #region ACA_030
+        private void cargar_combos_ACA_030(aca_MatriculaCalificacion_Info model)
+        {
+            aca_CatalogoTipo_Bus bus_catalogo = new aca_CatalogoTipo_Bus();
+            var lst_quimestre = new List<aca_CatalogoTipo_Info>();
+            var quim1 = bus_catalogo.GetInfo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+            lst_quimestre.Add(quim1);
+            var quim2 = bus_catalogo.GetInfo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2));
+            lst_quimestre.Add(quim2);
+            ViewBag.lst_quimestre = lst_quimestre;
+        }
+        public ActionResult ACA_030()
+        {
+            aca_MatriculaCalificacion_Info model = new aca_MatriculaCalificacion_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
+            model.MostrarRetirados = false;
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            ACA_030_Rpt report = new ACA_030_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_030");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_IdCatalogoParcialTipo.Value = model.IdCatalogoTipo;
+            report.p_MostrarRetirados.Value = model.MostrarRetirados;
+
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            cargar_combos_ACA_030(model);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_030(aca_MatriculaCalificacion_Info model)
+        {
+            ACA_030_Rpt report = new ACA_030_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_030");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_IdCatalogoParcialTipo.Value = model.IdCatalogoTipo;
+            report.p_MostrarRetirados.Value = model.MostrarRetirados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            cargar_combos_ACA_030(model);
+            return View(model);
+        }
+        #endregion
     }
 
     public class aca_ReporteCalificacion_Combos_List

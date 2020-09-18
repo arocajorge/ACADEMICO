@@ -309,6 +309,9 @@
     <Compile Include="Base\SPACA_029_SinPromedios_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPACA_030_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\SPACA_ContabilizacionCobros_Result.cs">
       <DependentUpon>ModelContabilidad.tt</DependentUpon>
     </Compile>
@@ -1955,6 +1958,7 @@
     <Compile Include="Reportes\Academico\ACA_012_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Asistencia_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_030_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_015_Data.cs" />
