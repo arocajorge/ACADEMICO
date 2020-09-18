@@ -50,8 +50,8 @@ namespace Core.Data.Reportes.Academico
                             OrdenJornada = q.OrdenJornada,
                             OrdenCurso = q.OrdenCurso,
                             OrdenParalelo = q.OrdenParalelo,
-                            OrdenMateriaGrupo = q.OrdenMateriaGrupo,
-                            OrdenMateriaArea = q.OrdenMateriaArea,
+                            OrdenMateriaGrupo = q.OrdenMateriaGrupo??0,
+                            OrdenMateriaArea = q.OrdenMateriaArea??0,
                             OrdenMateria = q.OrdenMateria,
                             EsObligatorio = q.EsObligatorio,
                             NomMateriaArea = q.NomMateriaArea,
@@ -60,17 +60,20 @@ namespace Core.Data.Reportes.Academico
                             NombreTutor = q.NombreTutor,
                             NombreInspector = q.NombreInspector,
                             IdProfesorInspector = q.IdProfesorInspector,
-                            P1 = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.CalificacionP1??0 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CalificacionP4 : null),
-                            P2 = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.CalificacionP2??0 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CalificacionP5 : null),
-                            P3 = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.CalificacionP3??0 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CalificacionP6 : null),
-                            PROM80 = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.PorcentajeQ1??0 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PorcentajeQ2 : null),
-                            EXAMEN = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.ExamenQ1??0 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenQ2 : null),
-                            EXA20 = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.PorcentajeEQ1??0 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PorcentajeEQ1 : null),
-                            PROMFINAL = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.PromedioFinalQ1??0 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioFinalQ2 : null),
+                            P1 = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.CalificacionP1 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CalificacionP4 : (decimal?)null),
+                            P2 = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.CalificacionP2 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CalificacionP5 : (decimal?)null),
+                            P3 = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.CalificacionP3 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CalificacionP6 : (decimal?)null),
+                            PROM80 = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.PorcentajeQ1 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PorcentajeQ2 : (decimal?)null),
+                            EXAMEN = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.ExamenQ1 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenQ2 : (decimal?)null),
+                            EXA20 = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.PorcentajeEQ1 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PorcentajeEQ2 : (decimal?)null),
+                            PROMFINAL = IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ?  q.PromedioFinalQ1 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioFinalQ2 : (decimal?)null),
                         });
                     }
                 }
-                //Lista = Lista.OrderBy(q=> new { q.OrdenMateria, q.pe_nombreCompleto}).ToList();
+
+                //if (Lista.Count() > 0)
+                //    Lista = Lista.OrderBy(q => new { q.OrdenMateriaArea, q.OrdenMateriaGrupo, q.OrdenMateria, q.pe_nombreCompleto }).ToList();
+
                 return Lista;
             }
             catch (Exception ex)
