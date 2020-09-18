@@ -7,10 +7,13 @@
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
 <script type="text/javascript">
     $(function () {
-        CargarParciales();
-
         $("#IdCatalogoTipo").change(function () {
             CargarParciales();
+            LimpiarLista();
+        });
+
+        $("#IdCatalogoParcial").change(function () {
+            LimpiarLista();
         });
     });
 
@@ -95,6 +98,25 @@
         });
     }
 
+    function LimpiarLista() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("LimpiarLista", "MatriculaCalificacionParcialCualitativa", new { Area = "Academico"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_MatriculaCalificacionParcialCualitativaImportacion.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
 </script>
 
 @using (Html.BeginForm("Importar", "MatriculaCalificacionParcialCualitativa", FormMethod.Post, new { @role = "form", @id = "form" }))

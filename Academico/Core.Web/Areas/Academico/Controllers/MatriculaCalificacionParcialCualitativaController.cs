@@ -576,6 +576,17 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult LimpiarLista(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            List<aca_MatriculaCalificacionCualitativa_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionCualitativa_Info>();
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+
+            Lista_CalificacionParcial.set_list(ListaCalificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return Json(EsSuperAdmin, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Importacion
@@ -626,6 +637,7 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             try
             {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 string IdUsuario = SessionFixed.IdUsuario;
                 bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);

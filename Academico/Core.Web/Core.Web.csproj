@@ -633,6 +633,18 @@
     <Compile Include="Reportes\Academico\ACA_028_Rpt.Designer.cs">
       <DependentUpon>ACA_028_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_029_Rendimiento_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_029_Rendimiento_Rpt.Designer.cs">
+      <DependentUpon>ACA_029_Rendimiento_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_029_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_029_Rpt.Designer.cs">
+      <DependentUpon>ACA_029_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9104,6 +9116,7 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_026.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_027.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_028.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_029.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9329,6 +9342,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_028_Rpt.resx">
       <DependentUpon>ACA_028_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_029_Rendimiento_Rpt.resx">
+      <DependentUpon>ACA_029_Rendimiento_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_029_Rpt.resx">
+      <DependentUpon>ACA_029_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Banco\BAN_001_cancelaciones_Rpt.resx">
       <DependentUpon>BAN_001_cancelaciones_Rpt.cs</DependentUpon>
