@@ -62,6 +62,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
+        aca_MatriculaCambios_Bus bus_cambios = new aca_MatriculaCambios_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         string mensajeInfo = string.Empty;
@@ -1235,6 +1236,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
             }
 
+            var CambioPlantilla = bus_cambios.getInfo_UltimoCambioPlantilla(IdEmpresa, IdMatricula);
+            var CambioCurso = bus_cambios.getInfo_UltimoCambioParalelo(IdEmpresa, IdMatricula);
+            model.ObservacionCambioCurso = CambioCurso == null ? null : CambioCurso.Observacion;
+            model.ObservacionCambioPlantilla = CambioPlantilla == null ? null : CambioPlantilla.Observacion;
+
             Lista_DocumentosMatricula.set_list(model.lst_alumno_documentos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             cargar_combos();
@@ -1305,6 +1311,11 @@ namespace Core.Web.Areas.Academico.Controllers
                     model.lst_alumno_documentos.Add(item);
                 }
             }
+
+            var CambioPlantilla = bus_cambios.getInfo_UltimoCambioPlantilla(IdEmpresa, IdMatricula);
+            var CambioCurso = bus_cambios.getInfo_UltimoCambioParalelo(IdEmpresa, IdMatricula);
+            model.ObservacionCambioCurso = CambioCurso == null ? null : CambioCurso.Observacion;
+            model.ObservacionCambioPlantilla = CambioPlantilla == null ? null : CambioPlantilla.Observacion;
 
             Lista_DocumentosMatricula.set_list(model.lst_alumno_documentos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
@@ -1377,6 +1388,11 @@ namespace Core.Web.Areas.Academico.Controllers
                     model.lst_alumno_documentos.Add(item);
                 }
             }
+
+            var CambioPlantilla = bus_cambios.getInfo_UltimoCambioPlantilla(IdEmpresa, IdMatricula);
+            var CambioCurso = bus_cambios.getInfo_UltimoCambioParalelo(IdEmpresa, IdMatricula);
+            model.ObservacionCambioCurso = CambioCurso == null ? null : CambioCurso.Observacion;
+            model.ObservacionCambioPlantilla = CambioPlantilla == null ? null : CambioPlantilla.Observacion;
 
             Lista_DocumentosMatricula.set_list(model.lst_alumno_documentos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 

@@ -315,6 +315,8 @@
     <Compile Include="Reportes\Academico\ACA_028_Profesores_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_028_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_030_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_031_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_032_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Info.cs" />

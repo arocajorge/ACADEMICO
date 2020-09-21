@@ -95,6 +95,9 @@ namespace Core.Info.Academico
         public List<aca_MatriculaCalificacionParcial_Info> lst_MatriculaCalificacionParcial { get; set; }
         public List<aca_MatriculaCalificacion_Info> lst_MatriculaCalificacion { get; set; }
         public List<aca_MatriculaCalificacionCualitativa_Info> lst_MatriculaCalificacionCualitativa { get; set; }
+
+        public string ObservacionCambioPlantilla { get; set; }
+        public string ObservacionCambioCurso { get; set; }
         #endregion
     }
 }

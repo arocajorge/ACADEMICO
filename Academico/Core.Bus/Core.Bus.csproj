@@ -70,6 +70,7 @@
     <Compile Include="Academico\aca_MatriculaCalificacionCualitativa_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacionParcial_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacion_Bus.cs" />
+    <Compile Include="Academico\aca_MatriculaCambios_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Bus.cs" />
     <Compile Include="Academico\aca_Curso_Bus.cs" />
     <Compile Include="Academico\aca_Documento_Bus.cs" />
@@ -273,6 +274,8 @@
     <Compile Include="Reportes\Academico\ACA_008_Resumen_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_009_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Asistencia_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_032_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_031_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_030_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Bus.cs" />
