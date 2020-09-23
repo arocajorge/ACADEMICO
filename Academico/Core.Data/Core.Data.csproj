@@ -63,6 +63,7 @@
     <Compile Include="Academico\aca_AnioLectivo_Curso_Documento_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Materia_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Curso_Paralelo_Dece_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Data.cs" />
@@ -123,10 +124,10 @@
     <Compile Include="Base\aca_AnioLectivoParcial.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\aca_AnioLectivo_PeriodoDet.cs">
+    <Compile Include="Base\aca_AnioLectivo_Curso_Paralelo_Dece.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\aca_AnioLetivo_Curso_Paralelo_Dece.cs">
+    <Compile Include="Base\aca_AnioLectivo_PeriodoDet.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MateriaArea.cs">
@@ -463,6 +464,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Curso_Materia.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_AnioLectivo_Curso_Paralelo_Dece.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AnioLectivo_Paralelo_Conducta.cs">

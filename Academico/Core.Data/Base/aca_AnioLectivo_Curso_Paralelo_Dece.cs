@@ -12,7 +12,7 @@ namespace Core.Data.Base
     using System;
     using System.Collections.Generic;
     
-    public partial class aca_AnioLetivo_Curso_Paralelo_Dece
+    public partial class aca_AnioLectivo_Curso_Paralelo_Dece
     {
         public int IdEmpresa { get; set; }
         public int IdAnio { get; set; }
@@ -23,5 +23,13 @@ namespace Core.Data.Base
         public int IdParalelo { get; set; }
         public string ObservacionQ1 { get; set; }
         public string ObservacionQ2 { get; set; }
+        public bool Estado { get; set; }
+        public string IdUsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public string IdUsuarioModificacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public string IdUsuarioAnulacion { get; set; }
+        public Nullable<System.DateTime> FechaAnulacion { get; set; }
+        public string MotivoAnulacion { get; set; }
     }
 }

@@ -225,6 +225,7 @@
     <Compile Include="Areas\Academico\Controllers\ConductaEquivalenciaController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoPorJornadaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\DECEObservacionController.cs" />
     <Compile Include="Areas\Academico\Controllers\DocumentoController.cs" />
     <Compile Include="Areas\Academico\Controllers\DocumentoPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\EquivalenciaPromedioController.cs" />
@@ -9175,6 +9176,9 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_030.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_031.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_032.cshtml" />
+    <Content Include="Areas\Academico\Views\DECEObservacion\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\DECEObservacion\_GridViewPartial_DECEObservacion.cshtml" />
+    <Content Include="Areas\Academico\Views\DECEObservacion\Index.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

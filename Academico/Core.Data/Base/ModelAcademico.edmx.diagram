@@ -220,7 +220,8 @@
         <EntityTypeShape EntityType="ModelAcademico.vwaca_MatriculaCalificacion" Width="1.5" PointX="37.375" PointY="30.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacion_aca_Matricula" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_AnioLectivo_Paralelo_Profesor_NoAsignados" Width="1.5" PointX="15.375" PointY="16.75" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_AnioLetivo_Curso_Paralelo_Dece" Width="1.5" PointX="26.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_AnioLectivo_Curso_Paralelo_Dece" Width="1.5" PointX="28.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ModelAcademico.vwaca_AnioLectivo_Curso_Paralelo_Dece" Width="1.5" PointX="22.375" PointY="32.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
