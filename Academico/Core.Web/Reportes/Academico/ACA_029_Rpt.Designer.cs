@@ -123,6 +123,7 @@
             this.p_IdParalelo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdMateria = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCatalogoTipo = new DevExpress.XtraReports.Parameters.Parameter();
+            this.Promedios_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable11)).BeginInit();
@@ -156,6 +157,7 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.Promedios_SubRpt,
             this.SinPromedios_SubRpt,
             this.PromediosBajos_SubRpt,
             this.RendimientoProcentaje_SubRpt,
@@ -195,7 +197,7 @@
             this.RendimientoProcentaje_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(2.543131E-05F, 195.1667F);
             this.RendimientoProcentaje_SubRpt.Name = "RendimientoProcentaje_SubRpt";
             this.RendimientoProcentaje_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_029_Rendimiento_Rpt();
-            this.RendimientoProcentaje_SubRpt.SizeF = new System.Drawing.SizeF(751.0002F, 20F);
+            this.RendimientoProcentaje_SubRpt.SizeF = new System.Drawing.SizeF(600F, 20F);
             this.RendimientoProcentaje_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.RendimientoProcentaje_SubRpt_BeforePrint);
             // 
             // xrTable12
@@ -1043,6 +1045,14 @@
             this.p_IdCatalogoTipo.Name = "p_IdCatalogoTipo";
             this.p_IdCatalogoTipo.Visible = false;
             // 
+            // Promedios_SubRpt
+            // 
+            this.Promedios_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(600F, 195.1667F);
+            this.Promedios_SubRpt.Name = "Promedios_SubRpt";
+            this.Promedios_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_029_Promedios_Rpt();
+            this.Promedios_SubRpt.SizeF = new System.Drawing.SizeF(151.0002F, 19.99997F);
+            this.Promedios_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Promedios_SubRpt_BeforePrint);
+            // 
             // ACA_029_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1184,5 +1194,6 @@
         private DevExpress.XtraReports.UI.XRSubreport RendimientoProcentaje_SubRpt;
         private DevExpress.XtraReports.UI.XRSubreport PromediosBajos_SubRpt;
         private DevExpress.XtraReports.UI.XRSubreport SinPromedios_SubRpt;
+        private DevExpress.XtraReports.UI.XRSubreport Promedios_SubRpt;
     }
 }

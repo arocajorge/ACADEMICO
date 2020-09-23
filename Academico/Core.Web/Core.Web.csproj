@@ -567,6 +567,31 @@
     <Compile Include="Reportes\Academico\ACA_022_Rpt.Designer.cs">
       <DependentUpon>ACA_022_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_EstudiantesSinExamen_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_EstudiantesSinExamen_Rpt.Designer.cs">
+      <DependentUpon>ACA_028_EstudiantesSinExamen_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_EstudianteSupletorio_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_EstudianteSupletorio_Rpt.Designer.cs">
+      <DependentUpon>ACA_028_EstudianteSupletorio_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_PromediosXSexo_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_PromediosXSexo_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_PromediosXSexo_Rpt.Designer.cs">
+      <DependentUpon>ACA_028_PromediosXSexo_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_029_Promedios_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_029_Promedios_Rpt.Designer.cs">
+      <DependentUpon>ACA_029_Promedios_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_032_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9342,6 +9367,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_022_Rpt.resx">
       <DependentUpon>ACA_022_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_028_EstudiantesSinExamen_Rpt.resx">
+      <DependentUpon>ACA_028_EstudiantesSinExamen_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_028_EstudianteSupletorio_Rpt.resx">
+      <DependentUpon>ACA_028_EstudianteSupletorio_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_028_PromediosXSexo_Rpt.resx">
+      <DependentUpon>ACA_028_PromediosXSexo_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_029_Promedios_Rpt.resx">
+      <DependentUpon>ACA_029_Promedios_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_032_Rpt.resx">
       <DependentUpon>ACA_032_Rpt.cs</DependentUpon>

@@ -172,6 +172,7 @@
             this.pivotGridField9.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField9.AreaIndex = 6;
             this.pivotGridField9.CellFormat.FormatString = "n2";
+            this.pivotGridField9.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.pivotGridField9.FieldName = "PROMFINAL";
             this.pivotGridField9.Name = "pivotGridField9";
             this.pivotGridField9.Width = 60;
@@ -181,6 +182,7 @@
             this.pivotGridField8.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField8.AreaIndex = 5;
             this.pivotGridField8.CellFormat.FormatString = "n2";
+            this.pivotGridField8.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.pivotGridField8.FieldName = "EXA20";
             this.pivotGridField8.Name = "pivotGridField8";
             this.pivotGridField8.Width = 50;
@@ -190,6 +192,7 @@
             this.pivotGridField7.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField7.AreaIndex = 4;
             this.pivotGridField7.CellFormat.FormatString = "n2";
+            this.pivotGridField7.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.pivotGridField7.FieldName = "EXAMEN";
             this.pivotGridField7.Name = "pivotGridField7";
             this.pivotGridField7.Width = 50;
@@ -199,6 +202,7 @@
             this.pivotGridField6.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField6.AreaIndex = 3;
             this.pivotGridField6.CellFormat.FormatString = "n2";
+            this.pivotGridField6.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.pivotGridField6.FieldName = "PROM80";
             this.pivotGridField6.Name = "pivotGridField6";
             this.pivotGridField6.Width = 50;
@@ -208,6 +212,7 @@
             this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField5.AreaIndex = 2;
             this.pivotGridField5.CellFormat.FormatString = "n2";
+            this.pivotGridField5.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.pivotGridField5.FieldName = "P3";
             this.pivotGridField5.Name = "pivotGridField5";
             this.pivotGridField5.Width = 50;
@@ -217,6 +222,7 @@
             this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField4.AreaIndex = 1;
             this.pivotGridField4.CellFormat.FormatString = "n2";
+            this.pivotGridField4.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.pivotGridField4.FieldName = "P2";
             this.pivotGridField4.Name = "pivotGridField4";
             this.pivotGridField4.Width = 50;
@@ -242,6 +248,7 @@
             this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
             this.pivotGridField3.AreaIndex = 0;
             this.pivotGridField3.CellFormat.FormatString = "n2";
+            this.pivotGridField3.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.pivotGridField3.FieldName = "P1";
             this.pivotGridField3.Name = "pivotGridField3";
             this.pivotGridField3.Width = 50;

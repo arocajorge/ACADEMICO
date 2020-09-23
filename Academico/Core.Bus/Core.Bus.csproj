@@ -274,6 +274,10 @@
     <Compile Include="Reportes\Academico\ACA_008_Resumen_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_009_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Asistencia_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_SinExamen_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_Supletorio_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_PromedioXSexo_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_029_Promedios.cs" />
     <Compile Include="Reportes\Academico\ACA_032_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_031_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_030_Bus.cs" />

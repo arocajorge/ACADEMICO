@@ -126,6 +126,9 @@
     <Compile Include="Base\aca_AnioLectivo_PeriodoDet.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\aca_AnioLetivo_Curso_Paralelo_Dece.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_MateriaArea.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -294,16 +297,31 @@
     <Compile Include="Base\SPACA_028_Profesores_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPACA_028_PromedioConducta_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\SPACA_028_PromediosBajos_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\SPACA_028_Promedios_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPACA_028_PromedioXSexo_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\SPACA_028_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\SPACA_028_SinExamen_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\SPACA_028_Supletorio_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\SPACA_029_PromediosBajos_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\SPACA_029_Promedios_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\SPACA_029_Result.cs">
@@ -1967,6 +1985,10 @@
     <Compile Include="Reportes\Academico\ACA_012_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Asistencia_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_SinExamen_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_Supletorio_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_PromedioXSexo_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_029_Promedios_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_032_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_031_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_030_Data.cs" />

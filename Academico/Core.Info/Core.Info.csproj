@@ -306,6 +306,8 @@
     <Compile Include="Reportes\Academico\ACA_026_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_025_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_028_ConductaBaja_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_PromedioXSexo_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_029_Promedios_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_029_SinPromedios_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_029_PromediosBajos_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_029_Info.cs" />
@@ -317,6 +319,8 @@
     <Compile Include="Reportes\Academico\ACA_030_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_031_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_032_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_SinExamen_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_Supletorio_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Info.cs" />
