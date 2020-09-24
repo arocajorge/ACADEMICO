@@ -86,22 +86,10 @@ namespace Core.Data.Reportes.Academico
                             EquivalenciaPromedioQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioQ2 : ""),
                             PromedioQuimestralFinal = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioQuimestralFinal : null),
                             EquivalenciaPromedioPF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioPF :""),
-
-                            IdEquivalenciaPromedioP1 = q.IdEquivalenciaPromedioP1,
-                            IdEquivalenciaPromedioP2 = q.IdEquivalenciaPromedioP2,
-                            IdEquivalenciaPromedioP3 = q.IdEquivalenciaPromedioP3,
-                            IdEquivalenciaPromedioQ1 = q.IdEquivalenciaPromedioQ1,
-                            IdEquivalenciaPromedioP4 = q.IdEquivalenciaPromedioP4,
-                            IdEquivalenciaPromedioP5 = q.IdEquivalenciaPromedioP5,
-                            IdEquivalenciaPromedioP6 = q.IdEquivalenciaPromedioP6,
-                            //IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ1,
-                            //IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ2,
-                            IdEquivalenciaPromedioQ2 = q.IdEquivalenciaPromedioQ2,
                             IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF,
-
+                            
                             NombreRepresentante = q.NombreRepresentante,
-                            NombreInspector = q.NombreInspector,
-                            IdProfesorInspector = q.IdProfesorInspector
+                            NombreInspector = q.NombreInspector
                         });
                     }
                 }

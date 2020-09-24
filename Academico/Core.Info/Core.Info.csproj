@@ -307,6 +307,7 @@
     <Compile Include="Reportes\Academico\ACA_026_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_025_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_028_ConductaBaja_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_Dece_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_028_PromedioXSexo_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_029_Promedios_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_029_SinPromedios_Info.cs" />

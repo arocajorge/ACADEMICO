@@ -33,7 +33,12 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.Supletorio_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
+            this.SinExamen_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.DECE_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
+            this.PromedioXSexo_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
+            this.PromediosBajos_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
+            this.ConductaBaja_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable17 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow49 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell112 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -82,9 +87,12 @@
             this.xrTableCell90 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow36 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell91 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.PromediosXMateriasProfesor = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable11 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow34 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell89 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.PromediosXMaterias_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
+            this.Profesores_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable9 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow30 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell80 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -241,14 +249,6 @@
             this.xrTableRow52 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell115 = new DevExpress.XtraReports.UI.XRTableCell();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.SinExamen_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
-            this.PromedioXSexo_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
-            this.PromediosBajos_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
-            this.ConductaBaja_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
-            this.PromediosXMateriasProfesor = new DevExpress.XtraReports.UI.XRSubreport();
-            this.PromediosXMaterias_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
-            this.Profesores_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
-            this.Supletorio_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable15)).BeginInit();
@@ -318,11 +318,53 @@
             this.ReportHeader.HeightF = 1688F;
             this.ReportHeader.Name = "ReportHeader";
             // 
+            // Supletorio_SubRpt
+            // 
+            this.Supletorio_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0.0003051758F, 830.5F);
+            this.Supletorio_SubRpt.Name = "Supletorio_SubRpt";
+            this.Supletorio_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_EstudianteSupletorio_Rpt();
+            this.Supletorio_SubRpt.SizeF = new System.Drawing.SizeF(750.9987F, 20F);
+            this.Supletorio_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Supletorio_SubRpt_BeforePrint);
+            // 
+            // SinExamen_SubRpt
+            // 
+            this.SinExamen_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0.0003051758F, 733.3333F);
+            this.SinExamen_SubRpt.Name = "SinExamen_SubRpt";
+            this.SinExamen_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_EstudiantesSinExamen_Rpt();
+            this.SinExamen_SubRpt.SizeF = new System.Drawing.SizeF(751.0005F, 20F);
+            this.SinExamen_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SinExamen_SubRpt_BeforePrint);
+            // 
             // DECE_SubRpt
             // 
             this.DECE_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 998.666F);
             this.DECE_SubRpt.Name = "DECE_SubRpt";
+            this.DECE_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_Dece_Rpt();
             this.DECE_SubRpt.SizeF = new System.Drawing.SizeF(751.0001F, 20F);
+            this.DECE_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.DECE_SubRpt_BeforePrint);
+            // 
+            // PromedioXSexo_SubRpt
+            // 
+            this.PromedioXSexo_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 922F);
+            this.PromedioXSexo_SubRpt.Name = "PromedioXSexo_SubRpt";
+            this.PromedioXSexo_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_PromediosXSexo_Rpt();
+            this.PromedioXSexo_SubRpt.SizeF = new System.Drawing.SizeF(750.9999F, 20F);
+            this.PromedioXSexo_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromedioXSexo_SubRpt_BeforePrint);
+            // 
+            // PromediosBajos_SubRpt
+            // 
+            this.PromediosBajos_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 800F);
+            this.PromediosBajos_SubRpt.Name = "PromediosBajos_SubRpt";
+            this.PromediosBajos_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_PromediosBajos_Rpt();
+            this.PromediosBajos_SubRpt.SizeF = new System.Drawing.SizeF(751.0004F, 20F);
+            this.PromediosBajos_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromediosBajos_SubRpt_BeforePrint);
+            // 
+            // ConductaBaja_SubRpt
+            // 
+            this.ConductaBaja_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 1099.5F);
+            this.ConductaBaja_SubRpt.Name = "ConductaBaja_SubRpt";
+            this.ConductaBaja_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_ConductaBaja_Rpt();
+            this.ConductaBaja_SubRpt.SizeF = new System.Drawing.SizeF(750.9996F, 20F);
+            this.ConductaBaja_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ConductaBaja_SubRpt_BeforePrint);
             // 
             // xrTable17
             // 
@@ -860,6 +902,14 @@
             this.xrTableCell91.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell91.Weight = 3D;
             // 
+            // PromediosXMateriasProfesor
+            // 
+            this.PromediosXMateriasProfesor.LocationFloat = new DevExpress.Utils.PointFloat(0F, 891.1667F);
+            this.PromediosXMateriasProfesor.Name = "PromediosXMateriasProfesor";
+            this.PromediosXMateriasProfesor.ReportSource = new Core.Web.Reportes.Academico.ACA_028_PromediosProfesor_Rpt();
+            this.PromediosXMateriasProfesor.SizeF = new System.Drawing.SizeF(751F, 20F);
+            this.PromediosXMateriasProfesor.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromediosXMateriasProfesor_BeforePrint);
+            // 
             // xrTable11
             // 
             this.xrTable11.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
@@ -894,6 +944,22 @@
             this.xrTableCell89.Text = "PROMEDIOS GENERALES DEL AÑO/CURSO POR ASIGNATURA:";
             this.xrTableCell89.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell89.Weight = 3D;
+            // 
+            // PromediosXMaterias_SubRpt
+            // 
+            this.PromediosXMaterias_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 702.8334F);
+            this.PromediosXMaterias_SubRpt.Name = "PromediosXMaterias_SubRpt";
+            this.PromediosXMaterias_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_Promedios_Rpt();
+            this.PromediosXMaterias_SubRpt.SizeF = new System.Drawing.SizeF(750.9999F, 20F);
+            this.PromediosXMaterias_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromediosXMaterias_SubRpt_BeforePrint);
+            // 
+            // Profesores_SubRpt
+            // 
+            this.Profesores_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 413.7567F);
+            this.Profesores_SubRpt.Name = "Profesores_SubRpt";
+            this.Profesores_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_Profesores_Rpt();
+            this.Profesores_SubRpt.SizeF = new System.Drawing.SizeF(751.0002F, 20F);
+            this.Profesores_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Profesores_SubRpt_BeforePrint);
             // 
             // xrTable9
             // 
@@ -2585,70 +2651,6 @@
             // 
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_028_Info);
             this.objectDataSource1.Name = "objectDataSource1";
-            // 
-            // SinExamen_SubRpt
-            // 
-            this.SinExamen_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0.0003051758F, 733.3333F);
-            this.SinExamen_SubRpt.Name = "SinExamen_SubRpt";
-            this.SinExamen_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_EstudiantesSinExamen_Rpt();
-            this.SinExamen_SubRpt.SizeF = new System.Drawing.SizeF(751.0005F, 20F);
-            this.SinExamen_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SinExamen_SubRpt_BeforePrint);
-            // 
-            // PromedioXSexo_SubRpt
-            // 
-            this.PromedioXSexo_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 922F);
-            this.PromedioXSexo_SubRpt.Name = "PromedioXSexo_SubRpt";
-            this.PromedioXSexo_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_PromediosXSexo_Rpt();
-            this.PromedioXSexo_SubRpt.SizeF = new System.Drawing.SizeF(750.9999F, 20F);
-            this.PromedioXSexo_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromedioXSexo_SubRpt_BeforePrint);
-            // 
-            // PromediosBajos_SubRpt
-            // 
-            this.PromediosBajos_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 800F);
-            this.PromediosBajos_SubRpt.Name = "PromediosBajos_SubRpt";
-            this.PromediosBajos_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_PromediosBajos_Rpt();
-            this.PromediosBajos_SubRpt.SizeF = new System.Drawing.SizeF(751.0004F, 20F);
-            this.PromediosBajos_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromediosBajos_SubRpt_BeforePrint);
-            // 
-            // ConductaBaja_SubRpt
-            // 
-            this.ConductaBaja_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 1099.5F);
-            this.ConductaBaja_SubRpt.Name = "ConductaBaja_SubRpt";
-            this.ConductaBaja_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_ConductaBaja_Rpt();
-            this.ConductaBaja_SubRpt.SizeF = new System.Drawing.SizeF(750.9996F, 20F);
-            this.ConductaBaja_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ConductaBaja_SubRpt_BeforePrint);
-            // 
-            // PromediosXMateriasProfesor
-            // 
-            this.PromediosXMateriasProfesor.LocationFloat = new DevExpress.Utils.PointFloat(0F, 891.1667F);
-            this.PromediosXMateriasProfesor.Name = "PromediosXMateriasProfesor";
-            this.PromediosXMateriasProfesor.ReportSource = new Core.Web.Reportes.Academico.ACA_028_PromediosProfesor_Rpt();
-            this.PromediosXMateriasProfesor.SizeF = new System.Drawing.SizeF(751F, 20F);
-            this.PromediosXMateriasProfesor.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromediosXMateriasProfesor_BeforePrint);
-            // 
-            // PromediosXMaterias_SubRpt
-            // 
-            this.PromediosXMaterias_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 702.8334F);
-            this.PromediosXMaterias_SubRpt.Name = "PromediosXMaterias_SubRpt";
-            this.PromediosXMaterias_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_Promedios_Rpt();
-            this.PromediosXMaterias_SubRpt.SizeF = new System.Drawing.SizeF(750.9999F, 20F);
-            this.PromediosXMaterias_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromediosXMaterias_SubRpt_BeforePrint);
-            // 
-            // Profesores_SubRpt
-            // 
-            this.Profesores_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 413.7567F);
-            this.Profesores_SubRpt.Name = "Profesores_SubRpt";
-            this.Profesores_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_Profesores_Rpt();
-            this.Profesores_SubRpt.SizeF = new System.Drawing.SizeF(751.0002F, 20F);
-            this.Profesores_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Profesores_SubRpt_BeforePrint);
-            // 
-            // Supletorio_SubRpt
-            // 
-            this.Supletorio_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0.0003051758F, 830.5F);
-            this.Supletorio_SubRpt.Name = "Supletorio_SubRpt";
-            this.Supletorio_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_028_EstudianteSupletorio_Rpt();
-            this.Supletorio_SubRpt.SizeF = new System.Drawing.SizeF(750.9987F, 20F);
-            this.Supletorio_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Supletorio_SubRpt_BeforePrint);
             // 
             // ACA_028_Rpt
             // 

@@ -275,6 +275,7 @@
     <Compile Include="Reportes\Academico\ACA_008_Resumen_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_009_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Asistencia_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_Dece_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_028_SinExamen_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_028_Supletorio_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_028_PromedioXSexo_Bus.cs" />

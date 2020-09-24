@@ -33,6 +33,7 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.Promedios_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.SinPromedios_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.PromediosBajos_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.RendimientoProcentaje_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
@@ -123,7 +124,6 @@
             this.p_IdParalelo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdMateria = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCatalogoTipo = new DevExpress.XtraReports.Parameters.Parameter();
-            this.Promedios_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable11)).BeginInit();
@@ -175,6 +175,14 @@
             this.lbl_imagen});
             this.ReportHeader.HeightF = 809.8334F;
             this.ReportHeader.Name = "ReportHeader";
+            // 
+            // Promedios_SubRpt
+            // 
+            this.Promedios_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(600F, 195.1667F);
+            this.Promedios_SubRpt.Name = "Promedios_SubRpt";
+            this.Promedios_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_029_Promedios_Rpt();
+            this.Promedios_SubRpt.SizeF = new System.Drawing.SizeF(151.0002F, 19.99997F);
+            this.Promedios_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Promedios_SubRpt_BeforePrint);
             // 
             // SinPromedios_SubRpt
             // 
@@ -812,11 +820,11 @@
             // 
             this.lbl.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
             this.lbl.Name = "lbl";
-            this.lbl.Padding = new DevExpress.XtraPrinting.PaddingInfo(54, 120, 0, 0, 100F);
+            this.lbl.Padding = new DevExpress.XtraPrinting.PaddingInfo(54, 100, 0, 0, 100F);
             this.lbl.StylePriority.UseFont = false;
             this.lbl.StylePriority.UsePadding = false;
             this.lbl.StylePriority.UseTextAlignment = false;
-            this.lbl.Text = "ACTA DE LA JUNTA DE DOCENTES";
+            this.lbl.Text = "INFORME QUIMESTRAL DE RENDIMIENTO ACADEMICO";
             this.lbl.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.lbl.Weight = 1.8403411327512849D;
             // 
@@ -1044,14 +1052,6 @@
             // 
             this.p_IdCatalogoTipo.Name = "p_IdCatalogoTipo";
             this.p_IdCatalogoTipo.Visible = false;
-            // 
-            // Promedios_SubRpt
-            // 
-            this.Promedios_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(600F, 195.1667F);
-            this.Promedios_SubRpt.Name = "Promedios_SubRpt";
-            this.Promedios_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_029_Promedios_Rpt();
-            this.Promedios_SubRpt.SizeF = new System.Drawing.SizeF(151.0002F, 19.99997F);
-            this.Promedios_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Promedios_SubRpt_BeforePrint);
             // 
             // ACA_029_Rpt
             // 

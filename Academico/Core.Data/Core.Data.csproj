@@ -259,9 +259,6 @@
     <Compile Include="Base\SPACA_014_Conducta_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\SPACA_014_MatriculaCalificacionCualitativa_Result.cs">
-      <DependentUpon>ModelReportes.tt</DependentUpon>
-    </Compile>
     <Compile Include="Base\SPACA_014_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
@@ -293,6 +290,9 @@
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\SPACA_028_ConductaBaja_Result.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\SPACA_028_DECE_Result.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\SPACA_028_Profesores_Result.cs">
@@ -1989,6 +1989,7 @@
     <Compile Include="Reportes\Academico\ACA_012_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Asistencia_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_028_Dece_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_028_SinExamen_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_028_Supletorio_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_028_PromedioXSexo_Data.cs" />

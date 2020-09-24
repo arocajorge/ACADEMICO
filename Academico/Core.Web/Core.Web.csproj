@@ -587,6 +587,12 @@
     <Compile Include="Reportes\Academico\ACA_028_PromediosXSexo_Rpt.Designer.cs">
       <DependentUpon>ACA_028_PromediosXSexo_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_Dece_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_028_Dece_Rpt.Designer.cs">
+      <DependentUpon>ACA_028_Dece_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_029_Promedios_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9380,6 +9386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_028_PromediosXSexo_Rpt.resx">
       <DependentUpon>ACA_028_PromediosXSexo_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_028_Dece_Rpt.resx">
+      <DependentUpon>ACA_028_Dece_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_029_Promedios_Rpt.resx">
       <DependentUpon>ACA_029_Promedios_Rpt.cs</DependentUpon>

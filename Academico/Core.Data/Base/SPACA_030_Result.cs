@@ -14,17 +14,24 @@ namespace Core.Data.Base
     public partial class SPACA_030_Result
     {
         public int IdEmpresa { get; set; }
+        public Nullable<int> IdAnio { get; set; }
+        public Nullable<int> IdSede { get; set; }
+        public Nullable<int> IdNivel { get; set; }
+        public Nullable<int> IdJornada { get; set; }
+        public Nullable<int> IdCurso { get; set; }
+        public Nullable<int> IdParalelo { get; set; }
+        public Nullable<decimal> IdAlumno { get; set; }
         public decimal IdMatricula { get; set; }
         public int IdMateria { get; set; }
+        public string NomMateria { get; set; }
+        public string NomMateriaArea { get; set; }
+        public string NomMateriaGrupo { get; set; }
+        public Nullable<int> EsObligatorio { get; set; }
+        public Nullable<int> OrdenMateria { get; set; }
+        public Nullable<int> OrdenMateriaGrupo { get; set; }
+        public Nullable<int> OrdenMateriaArea { get; set; }
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }
-        public int IdAnio { get; set; }
-        public int IdSede { get; set; }
-        public int IdNivel { get; set; }
-        public int IdJornada { get; set; }
-        public int IdCurso { get; set; }
-        public int IdParalelo { get; set; }
-        public decimal IdAlumno { get; set; }
         public string Descripcion { get; set; }
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
@@ -36,6 +43,8 @@ namespace Core.Data.Base
         public string CodigoParalelo { get; set; }
         public string NomParalelo { get; set; }
         public Nullable<int> OrdenParalelo { get; set; }
+        public string NombreInspector { get; set; }
+        public string NombreTutor { get; set; }
         public Nullable<decimal> CalificacionP1 { get; set; }
         public Nullable<decimal> CalificacionP2 { get; set; }
         public Nullable<decimal> CalificacionP3 { get; set; }
@@ -59,16 +68,5 @@ namespace Core.Data.Base
         public Nullable<decimal> ExamenRemedial { get; set; }
         public Nullable<decimal> ExamenGracia { get; set; }
         public Nullable<decimal> PromedioFinal { get; set; }
-        public string NomMateria { get; set; }
-        public string NomMateriaArea { get; set; }
-        public string NomMateriaGrupo { get; set; }
-        public bool EsObligatorio { get; set; }
-        public int OrdenMateria { get; set; }
-        public Nullable<int> OrdenMateriaGrupo { get; set; }
-        public Nullable<int> OrdenMateriaArea { get; set; }
-        public Nullable<decimal> IdProfesorInspector { get; set; }
-        public string NombreInspector { get; set; }
-        public Nullable<decimal> IdProfesorTutor { get; set; }
-        public string NombreTutor { get; set; }
     }
 }
