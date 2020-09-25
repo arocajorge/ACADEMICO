@@ -323,6 +323,7 @@
     <Compile Include="Reportes\Academico\ACA_032_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_028_SinExamen_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_028_Supletorio_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_033_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_cancelaciones_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_001_Info.cs" />
     <Compile Include="Reportes\Banco\BAN_002_cancelaciones_Info.cs" />
