@@ -13,7 +13,7 @@ namespace Core.Data
             string ip = @"localhost";
             string password = "admin*2016";
             string user = "sa";
-            string InitialCatalog = "DBERP";
+            string InitialCatalog = "DBERP_ACADEMICO";
 
             return "data source=" + ip + ";initial catalog=" + InitialCatalog + ";user id=" + user + ";password=" + password + ";MultipleActiveResultSets=True;";
         }

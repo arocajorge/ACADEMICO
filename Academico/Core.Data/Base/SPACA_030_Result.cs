@@ -14,22 +14,22 @@ namespace Core.Data.Base
     public partial class SPACA_030_Result
     {
         public int IdEmpresa { get; set; }
-        public Nullable<int> IdAnio { get; set; }
-        public Nullable<int> IdSede { get; set; }
-        public Nullable<int> IdNivel { get; set; }
-        public Nullable<int> IdJornada { get; set; }
-        public Nullable<int> IdCurso { get; set; }
-        public Nullable<int> IdParalelo { get; set; }
-        public Nullable<decimal> IdAlumno { get; set; }
+        public int IdAnio { get; set; }
+        public int IdSede { get; set; }
+        public int IdNivel { get; set; }
+        public int IdJornada { get; set; }
+        public int IdCurso { get; set; }
+        public int IdParalelo { get; set; }
+        public decimal IdAlumno { get; set; }
         public decimal IdMatricula { get; set; }
         public int IdMateria { get; set; }
         public string NomMateria { get; set; }
         public string NomMateriaArea { get; set; }
         public string NomMateriaGrupo { get; set; }
-        public Nullable<int> EsObligatorio { get; set; }
-        public Nullable<int> OrdenMateria { get; set; }
-        public Nullable<int> OrdenMateriaGrupo { get; set; }
-        public Nullable<int> OrdenMateriaArea { get; set; }
+        public Nullable<bool> EsObligatorio { get; set; }
+        public int OrdenMateria { get; set; }
+        public int OrdenMateriaGrupo { get; set; }
+        public int OrdenMateriaArea { get; set; }
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string Descripcion { get; set; }
@@ -45,28 +45,28 @@ namespace Core.Data.Base
         public Nullable<int> OrdenParalelo { get; set; }
         public string NombreInspector { get; set; }
         public string NombreTutor { get; set; }
-        public Nullable<decimal> CalificacionP1 { get; set; }
-        public Nullable<decimal> CalificacionP2 { get; set; }
-        public Nullable<decimal> CalificacionP3 { get; set; }
-        public Nullable<decimal> PromedioQ1 { get; set; }
-        public Nullable<decimal> PorcentajeQ1 { get; set; }
-        public Nullable<decimal> ExamenQ1 { get; set; }
-        public Nullable<decimal> PorcentajeEQ1 { get; set; }
-        public Nullable<decimal> PromedioFinalQ1 { get; set; }
-        public Nullable<decimal> CalificacionP4 { get; set; }
-        public Nullable<decimal> CalificacionP5 { get; set; }
-        public Nullable<decimal> CalificacionP6 { get; set; }
-        public Nullable<decimal> PromedioQ2 { get; set; }
-        public Nullable<decimal> PorcentajeQ2 { get; set; }
-        public Nullable<decimal> ExamenQ2 { get; set; }
-        public Nullable<decimal> PorcentajeEQ2 { get; set; }
-        public Nullable<decimal> PromedioFinalQ2 { get; set; }
-        public Nullable<decimal> PromedioQuimestralFinal { get; set; }
-        public Nullable<decimal> ExamenMejoramiento { get; set; }
+        public string CalificacionP1 { get; set; }
+        public string CalificacionP2 { get; set; }
+        public string CalificacionP3 { get; set; }
+        public string PromedioQ1 { get; set; }
+        public string PorcentajeQ1 { get; set; }
+        public string ExamenQ1 { get; set; }
+        public string PorcentajeEQ1 { get; set; }
+        public string PromedioFinalQ1 { get; set; }
+        public string CalificacionP4 { get; set; }
+        public string CalificacionP5 { get; set; }
+        public string CalificacionP6 { get; set; }
+        public string PromedioQ2 { get; set; }
+        public string PorcentajeQ2 { get; set; }
+        public string ExamenQ2 { get; set; }
+        public string PorcentajeEQ2 { get; set; }
+        public string PromedioFinalQ2 { get; set; }
+        public string PromedioQuimestralFinal { get; set; }
+        public string ExamenMejoramiento { get; set; }
         public string CampoMejoramiento { get; set; }
-        public Nullable<decimal> ExamenSupletorio { get; set; }
-        public Nullable<decimal> ExamenRemedial { get; set; }
-        public Nullable<decimal> ExamenGracia { get; set; }
-        public Nullable<decimal> PromedioFinal { get; set; }
+        public string ExamenSupletorio { get; set; }
+        public string ExamenRemedial { get; set; }
+        public string ExamenGracia { get; set; }
+        public string PromedioFinal { get; set; }
     }
 }
