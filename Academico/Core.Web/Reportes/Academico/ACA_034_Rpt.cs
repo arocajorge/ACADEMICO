@@ -11,12 +11,12 @@ using Core.Bus.Academico;
 
 namespace Core.Web.Reportes.Academico
 {
-    public partial class ACA_030_Rpt : DevExpress.XtraReports.UI.XtraReport
+    public partial class ACA_034_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
 
-        public ACA_030_Rpt()
+        public ACA_034_Rpt()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace Core.Web.Reportes.Academico
 
         }
 
-        private void ACA_030_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void ACA_034_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_usuario.Text = usuario;
@@ -42,12 +42,8 @@ namespace Core.Web.Reportes.Academico
             int IdCatalogoParcialTipo = string.IsNullOrEmpty(p_IdCatalogoParcialTipo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCatalogoParcialTipo.Value);
             bool MostrarRetirados = string.IsNullOrEmpty(p_MostrarRetirados.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarRetirados.Value);
 
-            aca_CatalogoTipo_Bus bus_catalogo_tipo = new aca_CatalogoTipo_Bus();
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
-
-            var CatalofoTipo = bus_catalogo_tipo.GetInfo(IdCatalogoParcialTipo);
-            lbl_Quimestre.Text = (CatalofoTipo==null ? "" : CatalofoTipo.NomCatalogoTipo);
-
+            aca_Sede_Bus bus_sede = new aca_Sede_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);
             if (emp != null)
             {
@@ -58,9 +54,17 @@ namespace Core.Web.Reportes.Academico
                 }
             }
 
-            ACA_030_Bus bus_rpt = new ACA_030_Bus();
-            List<ACA_030_Info> lst_rpt = new List<ACA_030_Info>();
-            lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcialTipo, IdAlumno, MostrarRetirados);
+            var sede = bus_sede.GetInfo(IdEmpresa, IdSede);
+            if (sede != null)
+            {
+                rector.Text = sede.NombreRector;
+                secretaria.Text = sede.NombreSecretaria;
+            }
+
+            ACA_034_Bus bus_rpt = new ACA_034_Bus();
+            List<ACA_034_Info> lst_rpt = new List<ACA_034_Info>();
+            lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados);
+
 
             this.DataSource = lst_rpt;
         }

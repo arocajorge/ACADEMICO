@@ -978,10 +978,8 @@
             // PageFooter
             // 
             this.PageFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable10,
-            this.xrTable11,
             this.xrTable8});
-            this.PageFooter.HeightF = 50F;
+            this.PageFooter.HeightF = 20F;
             this.PageFooter.Name = "PageFooter";
             // 
             // xrTable8
@@ -990,7 +988,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable8.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
-            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(0F, 30F);
+            this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable8.Name = "xrTable8";
             this.xrTable8.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow16});
@@ -1796,8 +1794,10 @@
             this.Cualitativa_Subreporte,
             this.Conducta_Subreporte,
             this.xrTable5,
+            this.xrTable11,
+            this.xrTable10,
             this.EquivalenciaRendimiento_Subreporte});
-            this.groupFooterBand1.HeightF = 40F;
+            this.groupFooterBand1.HeightF = 101.5F;
             this.groupFooterBand1.Level = 1;
             this.groupFooterBand1.Name = "groupFooterBand1";
             // 
@@ -2007,7 +2007,7 @@
             // xrTable11
             // 
             this.xrTable11.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrTable11.LocationFloat = new DevExpress.Utils.PointFloat(620F, 0F);
+            this.xrTable11.LocationFloat = new DevExpress.Utils.PointFloat(619.9999F, 71.49999F);
             this.xrTable11.Name = "xrTable11";
             this.xrTable11.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable11.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -2111,7 +2111,7 @@
             // xrTable10
             // 
             this.xrTable10.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrTable10.LocationFloat = new DevExpress.Utils.PointFloat(1.271566E-05F, 0F);
+            this.xrTable10.LocationFloat = new DevExpress.Utils.PointFloat(0F, 60F);
             this.xrTable10.Name = "xrTable10";
             this.xrTable10.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable10.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -2213,7 +2213,7 @@
             this.p_IdCatalogoParcial,
             this.p_IdAlumno,
             this.p_MostrarRetirados});
-            this.Version = "20.1";
+            this.Version = "19.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_014_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();

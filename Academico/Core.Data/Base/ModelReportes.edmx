@@ -2052,6 +2052,27 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Parameter Name="IdParalelo" Type="int" Mode="In" />
           <Parameter Name="IdMateria" Type="int" Mode="In" />
         </Function>
+        <Function Name="SPACA_034" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdAnio" Type="int" Mode="In" />
+          <Parameter Name="IdSede" Type="int" Mode="In" />
+          <Parameter Name="IdNivel" Type="int" Mode="In" />
+          <Parameter Name="IdJornada" Type="int" Mode="In" />
+          <Parameter Name="IdCurso" Type="int" Mode="In" />
+          <Parameter Name="IdParalelo" Type="int" Mode="In" />
+          <Parameter Name="IdAlumno" Type="numeric" Mode="In" />
+          <Parameter Name="MostrarRetirados" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SPACA_035" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
+          <Parameter Name="IdEmpresa" Type="int" Mode="In" />
+          <Parameter Name="IdAnio" Type="int" Mode="In" />
+          <Parameter Name="IdSede" Type="int" Mode="In" />
+          <Parameter Name="IdNivel" Type="int" Mode="In" />
+          <Parameter Name="IdJornada" Type="int" Mode="In" />
+          <Parameter Name="IdCurso" Type="int" Mode="In" />
+          <Parameter Name="IdParalelo" Type="int" Mode="In" />
+          <Parameter Name="IdAlumno" Type="numeric" Mode="In" />
+        </Function>
         <Function Name="SPCXC_001" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Academico">
           <Parameter Name="IdEmpresa" Type="int" Mode="In" />
           <Parameter Name="IdSucursalIni" Type="int" Mode="In" />
@@ -3694,6 +3715,27 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
             <Parameter Name="IdCurso" Mode="In" Type="Int32" />
             <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
             <Parameter Name="IdMateria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SPACA_034" ReturnType="Collection(ModelReportes.SPACA_034_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
+            <Parameter Name="IdSede" Mode="In" Type="Int32" />
+            <Parameter Name="IdNivel" Mode="In" Type="Int32" />
+            <Parameter Name="IdJornada" Mode="In" Type="Int32" />
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+            <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
+            <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
+            <Parameter Name="MostrarRetirados" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SPACA_035" ReturnType="Collection(ModelReportes.SPACA_035_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdAnio" Mode="In" Type="Int32" />
+            <Parameter Name="IdSede" Mode="In" Type="Int32" />
+            <Parameter Name="IdNivel" Mode="In" Type="Int32" />
+            <Parameter Name="IdJornada" Mode="In" Type="Int32" />
+            <Parameter Name="IdCurso" Mode="In" Type="Int32" />
+            <Parameter Name="IdParalelo" Mode="In" Type="Int32" />
+            <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPACA_001_Result">
@@ -6927,6 +6969,72 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Type="Int32" Name="IdEquivalenciaPromedioPF" Nullable="true" />
           <Property Type="String" Name="EquivalenciaPromedioPF" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="SPACA_034_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Int32" Name="IdAnio" Nullable="false" />
+          <Property Type="Int32" Name="IdSede" Nullable="false" />
+          <Property Type="Int32" Name="IdNivel" Nullable="false" />
+          <Property Type="Int32" Name="IdJornada" Nullable="false" />
+          <Property Type="Int32" Name="IdCurso" Nullable="false" />
+          <Property Type="Int32" Name="IdParalelo" Nullable="false" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IdMateria" Nullable="false" />
+          <Property Type="String" Name="NomMateria" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="NomMateriaArea" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomMateriaGrupo" Nullable="true" MaxLength="500" />
+          <Property Type="Boolean" Name="EsObligatorio" Nullable="false" />
+          <Property Type="Int32" Name="OrdenMateria" Nullable="false" />
+          <Property Type="Int32" Name="OrdenMateriaGrupo" Nullable="false" />
+          <Property Type="Int32" Name="OrdenMateriaArea" Nullable="false" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="pe_nombreCompleto" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenNivel" Nullable="true" />
+          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenJornada" Nullable="true" />
+          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenCurso" Nullable="true" />
+          <Property Type="String" Name="CodigoParalelo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="OrdenParalelo" Nullable="true" />
+          <Property Type="String" Name="PromedioFinalQ1" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PromedioFinalQ2" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Supletorio" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ExamenSupletorio" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ExamenRemedial" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="ExamenGracia" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PromedioFinal" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="SPACA_035_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="String" Name="Codigo" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="NombreAlumno" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="pe_cedulaRuc" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdAnio" Nullable="false" />
+          <Property Type="Int32" Name="IdSede" Nullable="false" />
+          <Property Type="Int32" Name="IdNivel" Nullable="false" />
+          <Property Type="Int32" Name="IdJornada" Nullable="false" />
+          <Property Type="Int32" Name="IdCurso" Nullable="false" />
+          <Property Type="Int32" Name="IdParalelo" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
+          <Property Type="Double" Name="Saldo" Nullable="false" />
+          <Property Type="Double" Name="SaldoProntoPago" Nullable="false" />
+          <Property Type="Int32" Name="CantDeudas" Nullable="false" />
+          <Property Type="Int32" Name="OrdenJornada" Nullable="true" />
+          <Property Type="Int32" Name="OrdenNivel" Nullable="true" />
+          <Property Type="Int32" Name="OrdenCurso" Nullable="true" />
+          <Property Type="Int32" Name="OrdenParalelo" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -9904,6 +10012,80 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
                 <ScalarProperty Name="PromedioFinal" ColumnName="PromedioFinal" />
                 <ScalarProperty Name="IdEquivalenciaPromedioPF" ColumnName="IdEquivalenciaPromedioPF" />
                 <ScalarProperty Name="EquivalenciaPromedioPF" ColumnName="EquivalenciaPromedioPF" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_034" FunctionName="ModelReportes.Store.SPACA_034">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPACA_034_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="NomMateria" ColumnName="NomMateria" />
+                <ScalarProperty Name="NomMateriaArea" ColumnName="NomMateriaArea" />
+                <ScalarProperty Name="NomMateriaGrupo" ColumnName="NomMateriaGrupo" />
+                <ScalarProperty Name="EsObligatorio" ColumnName="EsObligatorio" />
+                <ScalarProperty Name="OrdenMateria" ColumnName="OrdenMateria" />
+                <ScalarProperty Name="OrdenMateriaGrupo" ColumnName="OrdenMateriaGrupo" />
+                <ScalarProperty Name="OrdenMateriaArea" ColumnName="OrdenMateriaArea" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
+                <ScalarProperty Name="CodigoParalelo" ColumnName="CodigoParalelo" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
+                <ScalarProperty Name="PromedioFinalQ1" ColumnName="PromedioFinalQ1" />
+                <ScalarProperty Name="PromedioFinalQ2" ColumnName="PromedioFinalQ2" />
+                <ScalarProperty Name="Supletorio" ColumnName="Supletorio" />
+                <ScalarProperty Name="ExamenSupletorio" ColumnName="ExamenSupletorio" />
+                <ScalarProperty Name="ExamenRemedial" ColumnName="ExamenRemedial" />
+                <ScalarProperty Name="ExamenGracia" ColumnName="ExamenGracia" />
+                <ScalarProperty Name="PromedioFinal" ColumnName="PromedioFinal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_035" FunctionName="ModelReportes.Store.SPACA_035">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPACA_035_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="NombreAlumno" ColumnName="NombreAlumno" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="SaldoProntoPago" ColumnName="SaldoProntoPago" />
+                <ScalarProperty Name="CantDeudas" ColumnName="CantDeudas" />
+                <ScalarProperty Name="OrdenJornada" ColumnName="OrdenJornada" />
+                <ScalarProperty Name="OrdenNivel" ColumnName="OrdenNivel" />
+                <ScalarProperty Name="OrdenCurso" ColumnName="OrdenCurso" />
+                <ScalarProperty Name="OrdenParalelo" ColumnName="OrdenParalelo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
