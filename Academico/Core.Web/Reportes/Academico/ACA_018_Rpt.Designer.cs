@@ -111,8 +111,6 @@
             // 
             this.Detail.HeightF = 0F;
             this.Detail.Name = "Detail";
-            this.Detail.SortFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
-            new DevExpress.XtraReports.UI.GroupField("NombreAlumno", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             // 
             // PageHeader
             // 
@@ -343,7 +341,8 @@
             new DevExpress.XtraReports.UI.GroupField("OrdenNivel", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("OrdenCurso", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("OrdenParalelo", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
-            new DevExpress.XtraReports.UI.GroupField("IdAlumno", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            new DevExpress.XtraReports.UI.GroupField("NombreAlumno", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
+            new DevExpress.XtraReports.UI.GroupField("IdAlumno", DevExpress.XtraReports.UI.XRColumnSortOrder.None)});
             this.groupHeaderBand1.HeightF = 630F;
             this.groupHeaderBand1.Name = "groupHeaderBand1";
             this.groupHeaderBand1.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBand;

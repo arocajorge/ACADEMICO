@@ -607,6 +607,7 @@
             this.pivotGridField1.FieldName = "OrdenJornada";
             this.pivotGridField1.MinWidth = 0;
             this.pivotGridField1.Name = "pivotGridField1";
+            this.pivotGridField1.SortMode = DevExpress.XtraPivotGrid.PivotSortMode.Value;
             this.pivotGridField1.Width = 0;
             // 
             // pivotGridField2
@@ -616,6 +617,7 @@
             this.pivotGridField2.FieldName = "OrdenNivel";
             this.pivotGridField2.MinWidth = 0;
             this.pivotGridField2.Name = "pivotGridField2";
+            this.pivotGridField2.SortMode = DevExpress.XtraPivotGrid.PivotSortMode.Value;
             this.pivotGridField2.Width = 0;
             // 
             // pivotGridField3
@@ -625,6 +627,7 @@
             this.pivotGridField3.FieldName = "OrdenCurso";
             this.pivotGridField3.MinWidth = 0;
             this.pivotGridField3.Name = "pivotGridField3";
+            this.pivotGridField3.SortMode = DevExpress.XtraPivotGrid.PivotSortMode.Value;
             this.pivotGridField3.Width = 0;
             // 
             // pivotGridField4
@@ -634,6 +637,7 @@
             this.pivotGridField4.FieldName = "OrdenParalelo";
             this.pivotGridField4.MinWidth = 0;
             this.pivotGridField4.Name = "pivotGridField4";
+            this.pivotGridField4.SortMode = DevExpress.XtraPivotGrid.PivotSortMode.Value;
             this.pivotGridField4.Width = 0;
             // 
             // PageFooter

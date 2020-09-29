@@ -99,7 +99,8 @@ namespace Core.Web.Areas.Academico.Controllers
                         IdAnio = IdAnio,
                         IdNivel = Convert.ToInt32(item),
                         NomSede = info_sede.NomSede,
-                        NomNivel = info_nivel.NomNivel
+                        NomNivel = info_nivel.NomNivel,
+                        OrdenNivel = info_nivel.Orden
                     };
                     lista.Add(info);
                 }

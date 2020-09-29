@@ -30,20 +30,34 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ACA_034_Rpt));
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition1 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(15.86525F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition2 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(15.86525F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition3 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(15.86525F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition4 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(19.22136F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition5 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(15.27166F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition6 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(15.27166F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition7 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(15.27166F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition8 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(18.50221F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition9 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(22.35427F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition10 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(22.35427F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition11 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(22.35427F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition12 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(27.08306F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnField crossTabColumnField1 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnField();
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnField crossTabColumnField2 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnField();
+            DevExpress.XtraReports.UI.CrossTab.CrossTabColumnField crossTabColumnField3 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnField();
+            DevExpress.XtraReports.UI.CrossTab.CrossTabDataField crossTabDataField1 = new DevExpress.XtraReports.UI.CrossTab.CrossTabDataField();
+            DevExpress.XtraReports.UI.CrossTab.CrossTabDataField crossTabDataField2 = new DevExpress.XtraReports.UI.CrossTab.CrossTabDataField();
+            DevExpress.XtraReports.UI.CrossTab.CrossTabDataField crossTabDataField3 = new DevExpress.XtraReports.UI.CrossTab.CrossTabDataField();
+            DevExpress.XtraReports.UI.CrossTab.CrossTabDataField crossTabDataField4 = new DevExpress.XtraReports.UI.CrossTab.CrossTabDataField();
+            DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition crossTabRowDefinition1 = new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(23F);
+            DevExpress.XtraReports.UI.CrossTab.CrossTabRowField crossTabRowField1 = new DevExpress.XtraReports.UI.CrossTab.CrossTabRowField();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
-            this.xrPivotGrid1 = new DevExpress.XtraReports.UI.XRPivotGrid();
+            this.xrPictureBox2 = new DevExpress.XtraReports.UI.XRPictureBox();
+            this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.pivotGridField9 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField5 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField4 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField2 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField11 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField10 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField1 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
-            this.pivotGridField3 = new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField();
             this.xrTable7 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow14 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell36 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -56,6 +70,10 @@
             this.xrTableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
+            this.xrTableRow6 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableRow5 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow18 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -92,17 +110,70 @@
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
-            this.xrPictureBox2 = new DevExpress.XtraReports.UI.XRPictureBox();
-            this.xrTableRow5 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableRow6 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrCrossTabCell1 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell2 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell3 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell4 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell5 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell6 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell7 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell8 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell9 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell10 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell11 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell12 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell13 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell14 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell15 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell16 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell17 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell18 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell19 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell20 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell21 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell22 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell23 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell24 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell25 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell26 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell27 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell28 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell29 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell30 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell31 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell32 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell33 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell34 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell35 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell36 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell37 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell38 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell39 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell40 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell41 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell42 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell43 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell44 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell45 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell46 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell47 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell48 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell49 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell50 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell51 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell52 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell53 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell54 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell55 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell56 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.xrCrossTabCell57 = new DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell();
+            this.CrossTab_xrPivotGrid1 = new DevExpress.XtraReports.UI.XRCrossTab();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CrossTab_xrPivotGrid1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -125,126 +196,33 @@
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPictureBox2,
             this.xrPictureBox1,
-            this.xrPivotGrid1,
             this.xrTable7,
             this.xrTable1,
-            this.lbl_imagen});
-            this.ReportHeader.HeightF = 266.6667F;
+            this.lbl_imagen,
+            this.CrossTab_xrPivotGrid1});
+            this.ReportHeader.HeightF = 292F;
             this.ReportHeader.Name = "ReportHeader";
             // 
-            // xrPivotGrid1
+            // xrPictureBox2
             // 
-            this.xrPivotGrid1.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            this.xrPivotGrid1.Appearance.CustomTotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            this.xrPivotGrid1.Appearance.FieldHeader.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            this.xrPivotGrid1.Appearance.FieldValue.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            this.xrPivotGrid1.Appearance.FieldValueGrandTotal.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            this.xrPivotGrid1.Appearance.FieldValueTotal.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            this.xrPivotGrid1.Appearance.GrandTotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            this.xrPivotGrid1.Appearance.Lines.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            this.xrPivotGrid1.Appearance.TotalCell.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            this.xrPivotGrid1.DataSource = this.objectDataSource1;
-            this.xrPivotGrid1.Fields.AddRange(new DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField[] {
-            this.pivotGridField9,
-            this.pivotGridField5,
-            this.pivotGridField4,
-            this.pivotGridField2,
-            this.pivotGridField11,
-            this.pivotGridField10,
-            this.pivotGridField1,
-            this.pivotGridField3});
-            this.xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 205F);
-            this.xrPivotGrid1.Name = "xrPivotGrid1";
-            this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
-            this.xrPivotGrid1.OptionsPrint.PrintDataHeaders = DevExpress.Utils.DefaultBoolean.False;
-            this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
-            this.xrPivotGrid1.OptionsView.ShowColumnGrandTotalHeader = false;
-            this.xrPivotGrid1.OptionsView.ShowColumnGrandTotals = false;
-            this.xrPivotGrid1.OptionsView.ShowColumnHeaders = false;
-            this.xrPivotGrid1.OptionsView.ShowColumnTotals = false;
-            this.xrPivotGrid1.OptionsView.ShowRowGrandTotalHeader = false;
-            this.xrPivotGrid1.OptionsView.ShowRowGrandTotals = false;
-            this.xrPivotGrid1.OptionsView.ShowRowHeaders = false;
-            this.xrPivotGrid1.OptionsView.ShowRowTotals = false;
-            this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(1070F, 50F);
+            this.xrPictureBox2.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox2.ImageSource"));
+            this.xrPictureBox2.LocationFloat = new DevExpress.Utils.PointFloat(501.6667F, 0F);
+            this.xrPictureBox2.Name = "xrPictureBox2";
+            this.xrPictureBox2.SizeF = new System.Drawing.SizeF(80F, 60F);
+            this.xrPictureBox2.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
+            // 
+            // xrPictureBox1
+            // 
+            this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
+            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.xrPictureBox1.Name = "xrPictureBox1";
+            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(100F, 50F);
+            this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // objectDataSource1
             // 
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_034_Info);
             this.objectDataSource1.Name = "objectDataSource1";
-            // 
-            // pivotGridField9
-            // 
-            this.pivotGridField9.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
-            this.pivotGridField9.AreaIndex = 3;
-            this.pivotGridField9.CellFormat.FormatString = "n2";
-            this.pivotGridField9.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.pivotGridField9.FieldName = "PromedioFinal";
-            this.pivotGridField9.Name = "pivotGridField9";
-            this.pivotGridField9.Width = 60;
-            // 
-            // pivotGridField5
-            // 
-            this.pivotGridField5.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
-            this.pivotGridField5.AreaIndex = 2;
-            this.pivotGridField5.CellFormat.FormatString = "n2";
-            this.pivotGridField5.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.pivotGridField5.FieldName = "Supletorio";
-            this.pivotGridField5.Name = "pivotGridField5";
-            this.pivotGridField5.Width = 50;
-            // 
-            // pivotGridField4
-            // 
-            this.pivotGridField4.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
-            this.pivotGridField4.AreaIndex = 1;
-            this.pivotGridField4.CellFormat.FormatString = "n2";
-            this.pivotGridField4.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.pivotGridField4.FieldName = "PromedioFinalQ2";
-            this.pivotGridField4.Name = "pivotGridField4";
-            this.pivotGridField4.Width = 50;
-            // 
-            // pivotGridField2
-            // 
-            this.pivotGridField2.Area = DevExpress.XtraPivotGrid.PivotArea.RowArea;
-            this.pivotGridField2.AreaIndex = 0;
-            this.pivotGridField2.FieldName = "pe_nombreCompleto";
-            this.pivotGridField2.Name = "pivotGridField2";
-            this.pivotGridField2.Width = 250;
-            // 
-            // pivotGridField11
-            // 
-            this.pivotGridField11.Appearance.Cell.ForeColor = System.Drawing.Color.Transparent;
-            this.pivotGridField11.Appearance.FieldValue.ForeColor = System.Drawing.Color.Transparent;
-            this.pivotGridField11.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
-            this.pivotGridField11.AreaIndex = 1;
-            this.pivotGridField11.FieldName = "OrdenMateria";
-            this.pivotGridField11.Name = "pivotGridField11";
-            // 
-            // pivotGridField10
-            // 
-            this.pivotGridField10.Appearance.FieldValue.ForeColor = System.Drawing.Color.Transparent;
-            this.pivotGridField10.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
-            this.pivotGridField10.AreaIndex = 0;
-            this.pivotGridField10.FieldName = "OrdenMateriaGrupo";
-            this.pivotGridField10.Name = "pivotGridField10";
-            // 
-            // pivotGridField1
-            // 
-            this.pivotGridField1.Appearance.Cell.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
-            this.pivotGridField1.Area = DevExpress.XtraPivotGrid.PivotArea.ColumnArea;
-            this.pivotGridField1.AreaIndex = 2;
-            this.pivotGridField1.FieldName = "NomMateria";
-            this.pivotGridField1.Name = "pivotGridField1";
-            // 
-            // pivotGridField3
-            // 
-            this.pivotGridField3.Area = DevExpress.XtraPivotGrid.PivotArea.DataArea;
-            this.pivotGridField3.AreaIndex = 0;
-            this.pivotGridField3.CellFormat.FormatString = "n2";
-            this.pivotGridField3.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.pivotGridField3.FieldName = "PromedioFinalQ1";
-            this.pivotGridField3.Name = "pivotGridField3";
-            this.pivotGridField3.Width = 50;
             // 
             // xrTable7
             // 
@@ -366,6 +344,49 @@
             this.xrTable1.StylePriority.UseFont = false;
             this.xrTable1.StylePriority.UseTextAlignment = false;
             this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            // 
+            // xrTableRow6
+            // 
+            this.xrTableRow6.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell3});
+            this.xrTableRow6.Name = "xrTableRow6";
+            this.xrTableRow6.StylePriority.UseTextAlignment = false;
+            this.xrTableRow6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableRow6.Weight = 0.65693401389729789D;
+            // 
+            // xrTableCell3
+            // 
+            this.xrTableCell3.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell3.Multiline = true;
+            this.xrTableCell3.Name = "xrTableCell3";
+            this.xrTableCell3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
+            this.xrTableCell3.StylePriority.UseFont = false;
+            this.xrTableCell3.StylePriority.UsePadding = false;
+            this.xrTableCell3.StylePriority.UseTextAlignment = false;
+            this.xrTableCell3.Text = "REPUBLICA DEL ECUADOR";
+            this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell3.Weight = 1.8818461273943534D;
+            // 
+            // xrTableRow5
+            // 
+            this.xrTableRow5.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell1});
+            this.xrTableRow5.Name = "xrTableRow5";
+            this.xrTableRow5.Weight = 0.656934013897298D;
+            // 
+            // xrTableCell1
+            // 
+            this.xrTableCell1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomSede]")});
+            this.xrTableCell1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell1.Multiline = true;
+            this.xrTableCell1.Name = "xrTableCell1";
+            this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
+            this.xrTableCell1.StylePriority.UseFont = false;
+            this.xrTableCell1.StylePriority.UsePadding = false;
+            this.xrTableCell1.StylePriority.UseTextAlignment = false;
+            this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell1.Weight = 1.8818461273943534D;
             // 
             // xrTableRow2
             // 
@@ -690,64 +711,1118 @@
             this.xrTableCell7.Text = "SECRETARIA";
             this.xrTableCell7.Weight = 1.4999999666213988D;
             // 
-            // xrPictureBox1
+            // xrCrossTabCell1
             // 
-            this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
-            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.xrPictureBox1.Name = "xrPictureBox1";
-            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(100F, 50F);
-            this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
+            this.xrCrossTabCell1.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell1.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell1.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell1.BorderWidth = 1F;
+            this.xrCrossTabCell1.ColumnIndex = 0;
+            this.xrCrossTabCell1.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Bold);
+            this.xrCrossTabCell1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell1.Name = "xrCrossTabCell1";
+            this.xrCrossTabCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell1.RowIndex = 0;
+            this.xrCrossTabCell1.RowSpan = 4;
+            this.xrCrossTabCell1.Text = "Estudiantes";
+            this.xrCrossTabCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
-            // xrPictureBox2
+            // xrCrossTabCell2
             // 
-            this.xrPictureBox2.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox2.ImageSource"));
-            this.xrPictureBox2.LocationFloat = new DevExpress.Utils.PointFloat(501.6667F, 0F);
-            this.xrPictureBox2.Name = "xrPictureBox2";
-            this.xrPictureBox2.SizeF = new System.Drawing.SizeF(80F, 60F);
-            this.xrPictureBox2.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
+            this.xrCrossTabCell2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell2.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell2.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell2.BorderWidth = 1F;
+            this.xrCrossTabCell2.ColumnIndex = 1;
+            this.xrCrossTabCell2.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell2.Name = "xrCrossTabCell2";
+            this.xrCrossTabCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell2.RowIndex = 4;
+            this.xrCrossTabCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
-            // xrTableRow5
+            // xrCrossTabCell3
             // 
-            this.xrTableRow5.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell1});
-            this.xrTableRow5.Name = "xrTableRow5";
-            this.xrTableRow5.Weight = 0.656934013897298D;
+            this.xrCrossTabCell3.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell3.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell3.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell3.BorderWidth = 1F;
+            this.xrCrossTabCell3.ColumnIndex = 1;
+            this.xrCrossTabCell3.ColumnSpan = 8;
+            this.xrCrossTabCell3.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell3.ForeColor = System.Drawing.Color.Transparent;
+            this.xrCrossTabCell3.Name = "xrCrossTabCell3";
+            this.xrCrossTabCell3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell3.RowIndex = 0;
+            this.xrCrossTabCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
-            // xrTableCell1
+            // xrCrossTabCell4
             // 
-            this.xrTableCell1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomSede]")});
-            this.xrTableCell1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell1.Multiline = true;
-            this.xrTableCell1.Name = "xrTableCell1";
-            this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
-            this.xrTableCell1.StylePriority.UseFont = false;
-            this.xrTableCell1.StylePriority.UsePadding = false;
-            this.xrTableCell1.StylePriority.UseTextAlignment = false;
-            this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell1.Weight = 1.8818461273943534D;
+            this.xrCrossTabCell4.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell4.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell4.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell4.BorderWidth = 1F;
+            this.xrCrossTabCell4.ColumnIndex = 0;
+            this.xrCrossTabCell4.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell4.Name = "xrCrossTabCell4";
+            this.xrCrossTabCell4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell4.RowIndex = 4;
+            this.xrCrossTabCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
-            // xrTableRow6
+            // xrCrossTabCell5
             // 
-            this.xrTableRow6.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell3});
-            this.xrTableRow6.Name = "xrTableRow6";
-            this.xrTableRow6.StylePriority.UseTextAlignment = false;
-            this.xrTableRow6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableRow6.Weight = 0.65693401389729789D;
+            this.xrCrossTabCell5.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell5.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell5.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell5.BorderWidth = 1F;
+            this.xrCrossTabCell5.ColumnIndex = 0;
+            this.xrCrossTabCell5.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell5.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell5.Name = "xrCrossTabCell5";
+            this.xrCrossTabCell5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell5.RowIndex = 5;
+            this.xrCrossTabCell5.Text = "Grand Total";
+            this.xrCrossTabCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
-            // xrTableCell3
+            // xrCrossTabCell6
             // 
-            this.xrTableCell3.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell3.Multiline = true;
-            this.xrTableCell3.Name = "xrTableCell3";
-            this.xrTableCell3.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
-            this.xrTableCell3.StylePriority.UseFont = false;
-            this.xrTableCell3.StylePriority.UsePadding = false;
-            this.xrTableCell3.StylePriority.UseTextAlignment = false;
-            this.xrTableCell3.Text = "REPUBLICA DEL ECUADOR";
-            this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell3.Weight = 1.8818461273943534D;
+            this.xrCrossTabCell6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell6.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell6.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell6.BorderWidth = 1F;
+            this.xrCrossTabCell6.ColumnIndex = 1;
+            this.xrCrossTabCell6.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell6.Name = "xrCrossTabCell6";
+            this.xrCrossTabCell6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell6.RowIndex = 5;
+            this.xrCrossTabCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell6.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell7
+            // 
+            this.xrCrossTabCell7.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell7.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell7.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell7.BorderWidth = 1F;
+            this.xrCrossTabCell7.ColumnIndex = 13;
+            this.xrCrossTabCell7.ColumnSpan = 4;
+            this.xrCrossTabCell7.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell7.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell7.Name = "xrCrossTabCell7";
+            this.xrCrossTabCell7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell7.RowIndex = 0;
+            this.xrCrossTabCell7.RowSpan = 3;
+            this.xrCrossTabCell7.Text = "Grand Total";
+            this.xrCrossTabCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
+            // xrCrossTabCell8
+            // 
+            this.xrCrossTabCell8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell8.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell8.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell8.BorderWidth = 1F;
+            this.xrCrossTabCell8.ColumnIndex = 13;
+            this.xrCrossTabCell8.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell8.Name = "xrCrossTabCell8";
+            this.xrCrossTabCell8.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell8.RowIndex = 4;
+            this.xrCrossTabCell8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell8.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell9
+            // 
+            this.xrCrossTabCell9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell9.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell9.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell9.BorderWidth = 1F;
+            this.xrCrossTabCell9.ColumnIndex = 13;
+            this.xrCrossTabCell9.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell9.Name = "xrCrossTabCell9";
+            this.xrCrossTabCell9.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell9.RowIndex = 5;
+            this.xrCrossTabCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell9.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell10
+            // 
+            this.xrCrossTabCell10.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell10.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell10.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell10.BorderWidth = 1F;
+            this.xrCrossTabCell10.ColumnIndex = 1;
+            this.xrCrossTabCell10.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Bold);
+            this.xrCrossTabCell10.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell10.Name = "xrCrossTabCell10";
+            this.xrCrossTabCell10.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell10.RowIndex = 3;
+            this.xrCrossTabCell10.Text = "I QUIMESTRE";
+            this.xrCrossTabCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
+            // xrCrossTabCell11
+            // 
+            this.xrCrossTabCell11.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell11.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell11.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell11.BorderWidth = 1F;
+            this.xrCrossTabCell11.ColumnIndex = 2;
+            this.xrCrossTabCell11.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Bold);
+            this.xrCrossTabCell11.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell11.Name = "xrCrossTabCell11";
+            this.xrCrossTabCell11.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell11.RowIndex = 3;
+            this.xrCrossTabCell11.Text = "II QUIMESTRE";
+            this.xrCrossTabCell11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
+            // xrCrossTabCell12
+            // 
+            this.xrCrossTabCell12.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell12.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell12.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell12.BorderWidth = 1F;
+            this.xrCrossTabCell12.ColumnIndex = 13;
+            this.xrCrossTabCell12.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell12.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell12.Name = "xrCrossTabCell12";
+            this.xrCrossTabCell12.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell12.RowIndex = 3;
+            this.xrCrossTabCell12.Text = "Promedio Final Q1";
+            this.xrCrossTabCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell12.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell13
+            // 
+            this.xrCrossTabCell13.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell13.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell13.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell13.BorderWidth = 1F;
+            this.xrCrossTabCell13.ColumnIndex = 14;
+            this.xrCrossTabCell13.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell13.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell13.Name = "xrCrossTabCell13";
+            this.xrCrossTabCell13.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell13.RowIndex = 3;
+            this.xrCrossTabCell13.Text = "Promedio Final Q2";
+            this.xrCrossTabCell13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell13.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell14
+            // 
+            this.xrCrossTabCell14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell14.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell14.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell14.BorderWidth = 1F;
+            this.xrCrossTabCell14.ColumnIndex = 2;
+            this.xrCrossTabCell14.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell14.Name = "xrCrossTabCell14";
+            this.xrCrossTabCell14.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell14.RowIndex = 4;
+            this.xrCrossTabCell14.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            // 
+            // xrCrossTabCell15
+            // 
+            this.xrCrossTabCell15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell15.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell15.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell15.BorderWidth = 1F;
+            this.xrCrossTabCell15.ColumnIndex = 14;
+            this.xrCrossTabCell15.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell15.Name = "xrCrossTabCell15";
+            this.xrCrossTabCell15.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell15.RowIndex = 4;
+            this.xrCrossTabCell15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell15.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell16
+            // 
+            this.xrCrossTabCell16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell16.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell16.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell16.BorderWidth = 1F;
+            this.xrCrossTabCell16.ColumnIndex = 2;
+            this.xrCrossTabCell16.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell16.Name = "xrCrossTabCell16";
+            this.xrCrossTabCell16.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell16.RowIndex = 5;
+            this.xrCrossTabCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell16.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell17
+            // 
+            this.xrCrossTabCell17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell17.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell17.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell17.BorderWidth = 1F;
+            this.xrCrossTabCell17.ColumnIndex = 14;
+            this.xrCrossTabCell17.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell17.Name = "xrCrossTabCell17";
+            this.xrCrossTabCell17.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell17.RowIndex = 5;
+            this.xrCrossTabCell17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell17.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell18
+            // 
+            this.xrCrossTabCell18.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell18.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell18.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell18.BorderWidth = 1F;
+            this.xrCrossTabCell18.ColumnIndex = 9;
+            this.xrCrossTabCell18.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell18.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell18.Name = "xrCrossTabCell18";
+            this.xrCrossTabCell18.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell18.RowIndex = 3;
+            this.xrCrossTabCell18.Text = "Promedio Final Q1";
+            this.xrCrossTabCell18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell18.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell19
+            // 
+            this.xrCrossTabCell19.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell19.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell19.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell19.BorderWidth = 1F;
+            this.xrCrossTabCell19.ColumnIndex = 10;
+            this.xrCrossTabCell19.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell19.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell19.Name = "xrCrossTabCell19";
+            this.xrCrossTabCell19.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell19.RowIndex = 3;
+            this.xrCrossTabCell19.Text = "Promedio Final Q2";
+            this.xrCrossTabCell19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell19.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell20
+            // 
+            this.xrCrossTabCell20.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell20.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell20.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell20.BorderWidth = 1F;
+            this.xrCrossTabCell20.ColumnIndex = 1;
+            this.xrCrossTabCell20.ColumnSpan = 4;
+            this.xrCrossTabCell20.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell20.ForeColor = System.Drawing.Color.Transparent;
+            this.xrCrossTabCell20.Name = "xrCrossTabCell20";
+            this.xrCrossTabCell20.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell20.RowIndex = 1;
+            this.xrCrossTabCell20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
+            // xrCrossTabCell21
+            // 
+            this.xrCrossTabCell21.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell21.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell21.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell21.BorderWidth = 1F;
+            this.xrCrossTabCell21.ColumnIndex = 9;
+            this.xrCrossTabCell21.ColumnSpan = 4;
+            this.xrCrossTabCell21.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell21.ForeColor = System.Drawing.Color.Transparent;
+            this.xrCrossTabCell21.Name = "xrCrossTabCell21";
+            this.xrCrossTabCell21.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell21.RowIndex = 0;
+            this.xrCrossTabCell21.RowSpan = 3;
+            this.xrCrossTabCell21.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell21.TextFormatString = "{0} Total";
+            // 
+            // xrCrossTabCell22
+            // 
+            this.xrCrossTabCell22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell22.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell22.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell22.BorderWidth = 1F;
+            this.xrCrossTabCell22.ColumnIndex = 9;
+            this.xrCrossTabCell22.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell22.Name = "xrCrossTabCell22";
+            this.xrCrossTabCell22.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell22.RowIndex = 4;
+            this.xrCrossTabCell22.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell22.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell23
+            // 
+            this.xrCrossTabCell23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell23.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell23.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell23.BorderWidth = 1F;
+            this.xrCrossTabCell23.ColumnIndex = 10;
+            this.xrCrossTabCell23.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell23.Name = "xrCrossTabCell23";
+            this.xrCrossTabCell23.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell23.RowIndex = 4;
+            this.xrCrossTabCell23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell23.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell24
+            // 
+            this.xrCrossTabCell24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell24.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell24.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell24.BorderWidth = 1F;
+            this.xrCrossTabCell24.ColumnIndex = 9;
+            this.xrCrossTabCell24.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell24.Name = "xrCrossTabCell24";
+            this.xrCrossTabCell24.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell24.RowIndex = 5;
+            this.xrCrossTabCell24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell24.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell25
+            // 
+            this.xrCrossTabCell25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell25.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell25.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell25.BorderWidth = 1F;
+            this.xrCrossTabCell25.ColumnIndex = 10;
+            this.xrCrossTabCell25.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell25.Name = "xrCrossTabCell25";
+            this.xrCrossTabCell25.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell25.RowIndex = 5;
+            this.xrCrossTabCell25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell25.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell26
+            // 
+            this.xrCrossTabCell26.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell26.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell26.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell26.BorderWidth = 1F;
+            this.xrCrossTabCell26.ColumnIndex = 3;
+            this.xrCrossTabCell26.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Bold);
+            this.xrCrossTabCell26.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell26.Name = "xrCrossTabCell26";
+            this.xrCrossTabCell26.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell26.RowIndex = 3;
+            this.xrCrossTabCell26.Text = "SUPLETORIO";
+            this.xrCrossTabCell26.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
+            // xrCrossTabCell27
+            // 
+            this.xrCrossTabCell27.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell27.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell27.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell27.BorderWidth = 1F;
+            this.xrCrossTabCell27.ColumnIndex = 11;
+            this.xrCrossTabCell27.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell27.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell27.Name = "xrCrossTabCell27";
+            this.xrCrossTabCell27.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell27.RowIndex = 3;
+            this.xrCrossTabCell27.Text = "Supletorio";
+            this.xrCrossTabCell27.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell27.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell28
+            // 
+            this.xrCrossTabCell28.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell28.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell28.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell28.BorderWidth = 1F;
+            this.xrCrossTabCell28.ColumnIndex = 15;
+            this.xrCrossTabCell28.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell28.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell28.Name = "xrCrossTabCell28";
+            this.xrCrossTabCell28.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell28.RowIndex = 3;
+            this.xrCrossTabCell28.Text = "Supletorio";
+            this.xrCrossTabCell28.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell28.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell29
+            // 
+            this.xrCrossTabCell29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell29.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell29.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell29.BorderWidth = 1F;
+            this.xrCrossTabCell29.ColumnIndex = 3;
+            this.xrCrossTabCell29.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell29.Name = "xrCrossTabCell29";
+            this.xrCrossTabCell29.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell29.RowIndex = 4;
+            this.xrCrossTabCell29.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            // 
+            // xrCrossTabCell30
+            // 
+            this.xrCrossTabCell30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell30.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell30.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell30.BorderWidth = 1F;
+            this.xrCrossTabCell30.ColumnIndex = 11;
+            this.xrCrossTabCell30.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell30.Name = "xrCrossTabCell30";
+            this.xrCrossTabCell30.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell30.RowIndex = 4;
+            this.xrCrossTabCell30.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell30.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell31
+            // 
+            this.xrCrossTabCell31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell31.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell31.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell31.BorderWidth = 1F;
+            this.xrCrossTabCell31.ColumnIndex = 15;
+            this.xrCrossTabCell31.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell31.Name = "xrCrossTabCell31";
+            this.xrCrossTabCell31.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell31.RowIndex = 4;
+            this.xrCrossTabCell31.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell31.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell32
+            // 
+            this.xrCrossTabCell32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell32.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell32.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell32.BorderWidth = 1F;
+            this.xrCrossTabCell32.ColumnIndex = 3;
+            this.xrCrossTabCell32.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell32.Name = "xrCrossTabCell32";
+            this.xrCrossTabCell32.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell32.RowIndex = 5;
+            this.xrCrossTabCell32.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell32.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell33
+            // 
+            this.xrCrossTabCell33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell33.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell33.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell33.BorderWidth = 1F;
+            this.xrCrossTabCell33.ColumnIndex = 11;
+            this.xrCrossTabCell33.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell33.Name = "xrCrossTabCell33";
+            this.xrCrossTabCell33.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell33.RowIndex = 5;
+            this.xrCrossTabCell33.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell33.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell34
+            // 
+            this.xrCrossTabCell34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell34.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell34.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell34.BorderWidth = 1F;
+            this.xrCrossTabCell34.ColumnIndex = 15;
+            this.xrCrossTabCell34.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell34.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell34.Name = "xrCrossTabCell34";
+            this.xrCrossTabCell34.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell34.RowIndex = 5;
+            this.xrCrossTabCell34.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell34.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell35
+            // 
+            this.xrCrossTabCell35.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell35.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell35.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell35.BorderWidth = 1F;
+            this.xrCrossTabCell35.ColumnIndex = 5;
+            this.xrCrossTabCell35.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell35.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell35.Name = "xrCrossTabCell35";
+            this.xrCrossTabCell35.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell35.RowIndex = 3;
+            this.xrCrossTabCell35.Text = "Promedio Final Q1";
+            this.xrCrossTabCell35.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell35.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell36
+            // 
+            this.xrCrossTabCell36.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell36.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell36.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell36.BorderWidth = 1F;
+            this.xrCrossTabCell36.ColumnIndex = 6;
+            this.xrCrossTabCell36.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell36.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell36.Name = "xrCrossTabCell36";
+            this.xrCrossTabCell36.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell36.RowIndex = 3;
+            this.xrCrossTabCell36.Text = "Promedio Final Q2";
+            this.xrCrossTabCell36.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell36.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell37
+            // 
+            this.xrCrossTabCell37.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell37.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell37.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell37.BorderWidth = 1F;
+            this.xrCrossTabCell37.ColumnIndex = 7;
+            this.xrCrossTabCell37.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell37.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell37.Name = "xrCrossTabCell37";
+            this.xrCrossTabCell37.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell37.RowIndex = 3;
+            this.xrCrossTabCell37.Text = "Supletorio";
+            this.xrCrossTabCell37.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell37.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell38
+            // 
+            this.xrCrossTabCell38.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell38.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell38.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell38.BorderWidth = 1F;
+            this.xrCrossTabCell38.ColumnIndex = 1;
+            this.xrCrossTabCell38.ColumnSpan = 4;
+            this.xrCrossTabCell38.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Bold);
+            this.xrCrossTabCell38.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell38.Name = "xrCrossTabCell38";
+            this.xrCrossTabCell38.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell38.RowIndex = 2;
+            this.xrCrossTabCell38.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
+            // xrCrossTabCell39
+            // 
+            this.xrCrossTabCell39.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell39.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell39.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell39.BorderWidth = 1F;
+            this.xrCrossTabCell39.ColumnIndex = 5;
+            this.xrCrossTabCell39.ColumnSpan = 4;
+            this.xrCrossTabCell39.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell39.ForeColor = System.Drawing.Color.Transparent;
+            this.xrCrossTabCell39.Name = "xrCrossTabCell39";
+            this.xrCrossTabCell39.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell39.RowIndex = 1;
+            this.xrCrossTabCell39.RowSpan = 2;
+            this.xrCrossTabCell39.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell39.TextFormatString = "{0} Total";
+            // 
+            // xrCrossTabCell40
+            // 
+            this.xrCrossTabCell40.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell40.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell40.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell40.BorderWidth = 1F;
+            this.xrCrossTabCell40.ColumnIndex = 5;
+            this.xrCrossTabCell40.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell40.Name = "xrCrossTabCell40";
+            this.xrCrossTabCell40.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell40.RowIndex = 4;
+            this.xrCrossTabCell40.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell40.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell41
+            // 
+            this.xrCrossTabCell41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell41.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell41.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell41.BorderWidth = 1F;
+            this.xrCrossTabCell41.ColumnIndex = 6;
+            this.xrCrossTabCell41.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell41.Name = "xrCrossTabCell41";
+            this.xrCrossTabCell41.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell41.RowIndex = 4;
+            this.xrCrossTabCell41.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell41.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell42
+            // 
+            this.xrCrossTabCell42.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell42.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell42.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell42.BorderWidth = 1F;
+            this.xrCrossTabCell42.ColumnIndex = 7;
+            this.xrCrossTabCell42.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell42.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell42.Name = "xrCrossTabCell42";
+            this.xrCrossTabCell42.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell42.RowIndex = 4;
+            this.xrCrossTabCell42.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell42.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell43
+            // 
+            this.xrCrossTabCell43.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell43.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell43.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell43.BorderWidth = 1F;
+            this.xrCrossTabCell43.ColumnIndex = 5;
+            this.xrCrossTabCell43.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell43.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell43.Name = "xrCrossTabCell43";
+            this.xrCrossTabCell43.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell43.RowIndex = 5;
+            this.xrCrossTabCell43.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell43.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell44
+            // 
+            this.xrCrossTabCell44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell44.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell44.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell44.BorderWidth = 1F;
+            this.xrCrossTabCell44.ColumnIndex = 6;
+            this.xrCrossTabCell44.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell44.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell44.Name = "xrCrossTabCell44";
+            this.xrCrossTabCell44.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell44.RowIndex = 5;
+            this.xrCrossTabCell44.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell44.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell45
+            // 
+            this.xrCrossTabCell45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell45.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell45.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell45.BorderWidth = 1F;
+            this.xrCrossTabCell45.ColumnIndex = 7;
+            this.xrCrossTabCell45.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell45.Name = "xrCrossTabCell45";
+            this.xrCrossTabCell45.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell45.RowIndex = 5;
+            this.xrCrossTabCell45.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell45.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell46
+            // 
+            this.xrCrossTabCell46.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell46.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell46.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell46.BorderWidth = 1F;
+            this.xrCrossTabCell46.ColumnIndex = 4;
+            this.xrCrossTabCell46.Font = new System.Drawing.Font("Tahoma", 7F, System.Drawing.FontStyle.Bold);
+            this.xrCrossTabCell46.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell46.Name = "xrCrossTabCell46";
+            this.xrCrossTabCell46.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell46.RowIndex = 3;
+            this.xrCrossTabCell46.Text = "PROMEDIO FINAL";
+            this.xrCrossTabCell46.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
+            // xrCrossTabCell47
+            // 
+            this.xrCrossTabCell47.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell47.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell47.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell47.BorderWidth = 1F;
+            this.xrCrossTabCell47.ColumnIndex = 8;
+            this.xrCrossTabCell47.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell47.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell47.Name = "xrCrossTabCell47";
+            this.xrCrossTabCell47.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell47.RowIndex = 3;
+            this.xrCrossTabCell47.Text = "Promedio Final";
+            this.xrCrossTabCell47.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell47.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell48
+            // 
+            this.xrCrossTabCell48.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell48.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell48.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell48.BorderWidth = 1F;
+            this.xrCrossTabCell48.ColumnIndex = 12;
+            this.xrCrossTabCell48.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell48.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell48.Name = "xrCrossTabCell48";
+            this.xrCrossTabCell48.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell48.RowIndex = 3;
+            this.xrCrossTabCell48.Text = "Promedio Final";
+            this.xrCrossTabCell48.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell48.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell49
+            // 
+            this.xrCrossTabCell49.BackColor = System.Drawing.SystemColors.Control;
+            this.xrCrossTabCell49.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell49.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell49.BorderWidth = 1F;
+            this.xrCrossTabCell49.ColumnIndex = 16;
+            this.xrCrossTabCell49.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell49.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.xrCrossTabCell49.Name = "xrCrossTabCell49";
+            this.xrCrossTabCell49.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell49.RowIndex = 3;
+            this.xrCrossTabCell49.Text = "Promedio Final";
+            this.xrCrossTabCell49.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell49.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell50
+            // 
+            this.xrCrossTabCell50.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell50.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell50.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell50.BorderWidth = 1F;
+            this.xrCrossTabCell50.ColumnIndex = 4;
+            this.xrCrossTabCell50.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell50.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell50.Name = "xrCrossTabCell50";
+            this.xrCrossTabCell50.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell50.RowIndex = 4;
+            this.xrCrossTabCell50.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            // 
+            // xrCrossTabCell51
+            // 
+            this.xrCrossTabCell51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell51.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell51.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell51.BorderWidth = 1F;
+            this.xrCrossTabCell51.ColumnIndex = 8;
+            this.xrCrossTabCell51.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell51.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell51.Name = "xrCrossTabCell51";
+            this.xrCrossTabCell51.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell51.RowIndex = 4;
+            this.xrCrossTabCell51.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell51.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell52
+            // 
+            this.xrCrossTabCell52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell52.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell52.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell52.BorderWidth = 1F;
+            this.xrCrossTabCell52.ColumnIndex = 12;
+            this.xrCrossTabCell52.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell52.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell52.Name = "xrCrossTabCell52";
+            this.xrCrossTabCell52.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell52.RowIndex = 4;
+            this.xrCrossTabCell52.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell52.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell53
+            // 
+            this.xrCrossTabCell53.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell53.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell53.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell53.BorderWidth = 1F;
+            this.xrCrossTabCell53.ColumnIndex = 16;
+            this.xrCrossTabCell53.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell53.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell53.Name = "xrCrossTabCell53";
+            this.xrCrossTabCell53.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell53.RowIndex = 4;
+            this.xrCrossTabCell53.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell53.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell54
+            // 
+            this.xrCrossTabCell54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell54.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell54.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell54.BorderWidth = 1F;
+            this.xrCrossTabCell54.ColumnIndex = 4;
+            this.xrCrossTabCell54.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell54.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell54.Name = "xrCrossTabCell54";
+            this.xrCrossTabCell54.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell54.RowIndex = 5;
+            this.xrCrossTabCell54.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell54.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell55
+            // 
+            this.xrCrossTabCell55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell55.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell55.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell55.BorderWidth = 1F;
+            this.xrCrossTabCell55.ColumnIndex = 8;
+            this.xrCrossTabCell55.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell55.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell55.Name = "xrCrossTabCell55";
+            this.xrCrossTabCell55.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell55.RowIndex = 5;
+            this.xrCrossTabCell55.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell55.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell56
+            // 
+            this.xrCrossTabCell56.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell56.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell56.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell56.BorderWidth = 1F;
+            this.xrCrossTabCell56.ColumnIndex = 12;
+            this.xrCrossTabCell56.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell56.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell56.Name = "xrCrossTabCell56";
+            this.xrCrossTabCell56.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell56.RowIndex = 5;
+            this.xrCrossTabCell56.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell56.TextFormatString = "{0:n2}";
+            // 
+            // xrCrossTabCell57
+            // 
+            this.xrCrossTabCell57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.xrCrossTabCell57.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.xrCrossTabCell57.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrCrossTabCell57.BorderWidth = 1F;
+            this.xrCrossTabCell57.ColumnIndex = 16;
+            this.xrCrossTabCell57.Font = new System.Drawing.Font("Tahoma", 7.8F);
+            this.xrCrossTabCell57.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.xrCrossTabCell57.Name = "xrCrossTabCell57";
+            this.xrCrossTabCell57.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrCrossTabCell57.RowIndex = 5;
+            this.xrCrossTabCell57.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrCrossTabCell57.TextFormatString = "{0:n2}";
+            // 
+            // CrossTab_xrPivotGrid1
+            // 
+            this.CrossTab_xrPivotGrid1.Cells.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrCrossTabCell1,
+            this.xrCrossTabCell2,
+            this.xrCrossTabCell3,
+            this.xrCrossTabCell4,
+            this.xrCrossTabCell5,
+            this.xrCrossTabCell6,
+            this.xrCrossTabCell7,
+            this.xrCrossTabCell8,
+            this.xrCrossTabCell9,
+            this.xrCrossTabCell10,
+            this.xrCrossTabCell11,
+            this.xrCrossTabCell12,
+            this.xrCrossTabCell13,
+            this.xrCrossTabCell14,
+            this.xrCrossTabCell15,
+            this.xrCrossTabCell16,
+            this.xrCrossTabCell17,
+            this.xrCrossTabCell18,
+            this.xrCrossTabCell19,
+            this.xrCrossTabCell20,
+            this.xrCrossTabCell21,
+            this.xrCrossTabCell22,
+            this.xrCrossTabCell23,
+            this.xrCrossTabCell24,
+            this.xrCrossTabCell25,
+            this.xrCrossTabCell26,
+            this.xrCrossTabCell27,
+            this.xrCrossTabCell28,
+            this.xrCrossTabCell29,
+            this.xrCrossTabCell30,
+            this.xrCrossTabCell31,
+            this.xrCrossTabCell32,
+            this.xrCrossTabCell33,
+            this.xrCrossTabCell34,
+            this.xrCrossTabCell35,
+            this.xrCrossTabCell36,
+            this.xrCrossTabCell37,
+            this.xrCrossTabCell38,
+            this.xrCrossTabCell39,
+            this.xrCrossTabCell40,
+            this.xrCrossTabCell41,
+            this.xrCrossTabCell42,
+            this.xrCrossTabCell43,
+            this.xrCrossTabCell44,
+            this.xrCrossTabCell45,
+            this.xrCrossTabCell46,
+            this.xrCrossTabCell47,
+            this.xrCrossTabCell48,
+            this.xrCrossTabCell49,
+            this.xrCrossTabCell50,
+            this.xrCrossTabCell51,
+            this.xrCrossTabCell52,
+            this.xrCrossTabCell53,
+            this.xrCrossTabCell54,
+            this.xrCrossTabCell55,
+            this.xrCrossTabCell56,
+            this.xrCrossTabCell57});
+            crossTabColumnDefinition1.Visible = false;
+            crossTabColumnDefinition2.Visible = false;
+            crossTabColumnDefinition3.Visible = false;
+            crossTabColumnDefinition4.Visible = false;
+            crossTabColumnDefinition5.Visible = false;
+            crossTabColumnDefinition6.Visible = false;
+            crossTabColumnDefinition7.Visible = false;
+            crossTabColumnDefinition8.Visible = false;
+            crossTabColumnDefinition9.Visible = false;
+            crossTabColumnDefinition10.Visible = false;
+            crossTabColumnDefinition11.Visible = false;
+            crossTabColumnDefinition12.Visible = false;
+            this.CrossTab_xrPivotGrid1.ColumnDefinitions.AddRange(new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition[] {
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(250F),
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(80F),
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(80F),
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(70F),
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(100F),
+            crossTabColumnDefinition1,
+            crossTabColumnDefinition2,
+            crossTabColumnDefinition3,
+            crossTabColumnDefinition4,
+            crossTabColumnDefinition5,
+            crossTabColumnDefinition6,
+            crossTabColumnDefinition7,
+            crossTabColumnDefinition8,
+            crossTabColumnDefinition9,
+            crossTabColumnDefinition10,
+            crossTabColumnDefinition11,
+            crossTabColumnDefinition12});
+            crossTabColumnField1.FieldName = "OrdenMateriaGrupo";
+            crossTabColumnField2.FieldName = "OrdenMateria";
+            crossTabColumnField3.FieldName = "NomMateria";
+            this.CrossTab_xrPivotGrid1.ColumnFields.AddRange(new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnField[] {
+            crossTabColumnField1,
+            crossTabColumnField2,
+            crossTabColumnField3});
+            crossTabDataField1.FieldName = "PromedioFinalQ1";
+            crossTabDataField1.SummaryType = DevExpress.XtraReports.UI.CrossTab.SummaryType.Min;
+            crossTabDataField2.FieldName = "PromedioFinalQ2";
+            crossTabDataField2.SummaryType = DevExpress.XtraReports.UI.CrossTab.SummaryType.Min;
+            crossTabDataField3.FieldName = "Supletorio";
+            crossTabDataField3.SummaryType = DevExpress.XtraReports.UI.CrossTab.SummaryType.Min;
+            crossTabDataField4.FieldName = "PromedioFinal";
+            crossTabDataField4.SummaryType = DevExpress.XtraReports.UI.CrossTab.SummaryType.Min;
+            this.CrossTab_xrPivotGrid1.DataFields.AddRange(new DevExpress.XtraReports.UI.CrossTab.CrossTabDataField[] {
+            crossTabDataField1,
+            crossTabDataField2,
+            crossTabDataField3,
+            crossTabDataField4});
+            this.CrossTab_xrPivotGrid1.DataSource = this.objectDataSource1;
+            this.CrossTab_xrPivotGrid1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 205F);
+            this.CrossTab_xrPivotGrid1.Name = "CrossTab_xrPivotGrid1";
+            this.CrossTab_xrPivotGrid1.OriginalPivotGridLayout = resources.GetString("CrossTab_xrPivotGrid1.OriginalPivotGridLayout");
+            this.CrossTab_xrPivotGrid1.PrintOptions.PrintTotalsForSingleValues = false;
+            this.CrossTab_xrPivotGrid1.PrintOptions.RepeatColumnHeaders = false;
+            this.CrossTab_xrPivotGrid1.PrintOptions.RepeatRowHeaders = false;
+            crossTabRowDefinition1.Visible = false;
+            this.CrossTab_xrPivotGrid1.RowDefinitions.AddRange(new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition[] {
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(2F),
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(2F),
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(20F),
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(20F),
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(20F),
+            crossTabRowDefinition1});
+            crossTabRowField1.FieldName = "pe_nombreCompleto";
+            this.CrossTab_xrPivotGrid1.RowFields.AddRange(new DevExpress.XtraReports.UI.CrossTab.CrossTabRowField[] {
+            crossTabRowField1});
+            this.CrossTab_xrPivotGrid1.SizeF = new System.Drawing.SizeF(805.2802F, 87F);
             // 
             // ACA_034_Rpt
             // 
@@ -778,13 +1853,14 @@
             this.p_IdCatalogoParcialTipo,
             this.p_IdAlumno,
             this.p_MostrarRetirados});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_034_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CrossTab_xrPivotGrid1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -833,13 +1909,6 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdParalelo;
         public DevExpress.XtraReports.Parameters.Parameter p_IdAlumno;
         public DevExpress.XtraReports.Parameters.Parameter p_MostrarRetirados;
-        private DevExpress.XtraReports.UI.XRPivotGrid xrPivotGrid1;
-        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField2;
-        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField1;
-        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField3;
-        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField9;
-        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField5;
-        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField4;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private DevExpress.XtraReports.UI.XRTable xrTable2;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow3;
@@ -850,8 +1919,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
-        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField11;
-        private DevExpress.XtraReports.UI.PivotGrid.XRPivotGridField pivotGridField10;
         private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox2;
         private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow6;
@@ -859,5 +1926,63 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow5;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell1;
         private DevExpress.XtraReports.UI.XRTableCell lbl_Quimestre;
+        private DevExpress.XtraReports.UI.XRCrossTab CrossTab_xrPivotGrid1;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell1;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell2;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell3;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell4;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell5;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell6;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell7;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell8;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell9;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell10;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell11;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell12;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell13;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell14;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell15;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell16;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell17;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell18;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell19;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell20;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell21;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell22;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell23;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell24;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell25;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell26;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell27;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell28;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell29;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell30;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell31;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell32;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell33;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell34;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell35;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell36;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell37;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell38;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell39;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell40;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell41;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell42;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell43;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell44;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell45;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell46;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell47;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell48;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell49;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell50;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell51;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell52;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell53;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell54;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell55;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell56;
+        private DevExpress.XtraReports.UI.CrossTab.XRCrossTabCell xrCrossTabCell57;
     }
 }

@@ -10,10 +10,10 @@ namespace Core.Data
     {
         public static string GetConnectionString()
         {
-            string ip = @"localhost";
-            string password = "admin*2016";
+            string ip = @"192.168.25.29\SQL2014";
+            string password = "Sysadm753";
             string user = "sa";
-            string InitialCatalog = "DBERP_ACADEMICO";
+            string InitialCatalog = "DBERP";
 
             return "data source=" + ip + ";initial catalog=" + InitialCatalog + ";user id=" + user + ";password=" + password + ";MultipleActiveResultSets=True;";
         }

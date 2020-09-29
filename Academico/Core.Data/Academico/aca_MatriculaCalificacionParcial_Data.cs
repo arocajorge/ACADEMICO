@@ -446,9 +446,14 @@ namespace Core.Data.Academico
                             SumaPromedio = Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP1) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP2) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP3);
                             Promedio = Math.Round((SumaPromedio / lst_pacial_quim1.Count), 2, MidpointRounding.AwayFromZero);
                             EntityCalificacionPromedio.PromedioQ1 = Promedio;
-                            //var info_promedio = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Promedio);
-                            //IdEquivalenciaPromedio = info_promedio.IdEquivalenciaPromedio;
-                            //EntityCalificacionPromedio.IdEquivalenciaPromedioQ1 = (info_promedio == null ? (int?)null : info_promedio.IdEquivalenciaPromedio);
+
+                            if (EntityCalificacionPromedio.ExamenQ1!=null)
+                            {
+                                var PromedioFinalQ1 = ((EntityCalificacionPromedio.PromedioQ1) * Convert.ToDecimal(0.80)) + ((EntityCalificacionPromedio.ExamenQ1) * Convert.ToDecimal(0.20));
+                                var info_equivalencia = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Convert.ToDecimal(PromedioFinalQ1));
+                                EntityCalificacionPromedio.PromedioFinalQ1 = PromedioFinalQ1;
+                                EntityCalificacionPromedio.IdEquivalenciaPromedioQ1 = (info_equivalencia==null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
+                            }
                         }
                     }
 
@@ -489,9 +494,14 @@ namespace Core.Data.Academico
                             SumaPromedio = Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP4) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP5) + Convert.ToDecimal(EntityCalificacionPromedio.CalificacionP6);
                             Promedio = Math.Round((SumaPromedio / lst_pacial_quim2.Count), 2, MidpointRounding.AwayFromZero);
                             EntityCalificacionPromedio.PromedioQ2 = Promedio;
-                            //var info_promedio = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Promedio);
-                            //IdEquivalenciaPromedio = info_promedio.IdEquivalenciaPromedio;
-                            //EntityCalificacionPromedio.IdEquivalenciaPromedioQ2 = (info_promedio == null ? (int?)null : info_promedio.IdEquivalenciaPromedio);
+
+                            if (EntityCalificacionPromedio.ExamenQ2 != null)
+                            {
+                                var PromedioFinalQ2 = ((EntityCalificacionPromedio.PromedioQ2) * Convert.ToDecimal(0.80)) + ((EntityCalificacionPromedio.ExamenQ2) * Convert.ToDecimal(0.20));
+                                var info_equivalencia = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Convert.ToDecimal(PromedioFinalQ2));
+                                EntityCalificacionPromedio.PromedioFinalQ2 = PromedioFinalQ2;
+                                EntityCalificacionPromedio.IdEquivalenciaPromedioQ2 = (info_equivalencia == null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
+                            }
                         }
                     }
 

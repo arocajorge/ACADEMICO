@@ -32,7 +32,8 @@ namespace Core.Data.Academico
                                  IdSede = q.IdSede,
                                  IdAnio = q.IdAnio,
                                  IdNivel = q.IdNivel,
-                                 NomNivel = q.NomNivel
+                                 NomNivel = q.NomNivel,
+                                 OrdenNivel = q.OrdenNivel
                              }).ToList();
 
                     Lista.AddRange((from q in Context.aca_NivelAcademico
@@ -45,7 +46,8 @@ namespace Core.Data.Academico
                                         IdSede = IdSede,
                                         IdAnio = IdAnio,
                                         IdNivel = q.IdNivel,
-                                        NomNivel = q.NomNivel
+                                        NomNivel = q.NomNivel, 
+                                        OrdenNivel = q.Orden
                                     }).ToList());
                 }
 
@@ -134,7 +136,8 @@ namespace Core.Data.Academico
                                 IdSede = info.IdSede,
                                 IdNivel = info.IdNivel,
                                 NomSede = info.NomSede,
-                                NomNivel = info.NomNivel
+                                NomNivel = info.NomNivel,
+                                OrdenNivel = info.OrdenNivel
                             };
                             Context.aca_AnioLectivo_Sede_NivelAcademico.Add(Entity);     
                         }
