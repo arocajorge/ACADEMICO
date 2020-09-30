@@ -1,6 +1,6 @@
 ﻿namespace Core.Web.Reportes.Academico
 {
-    partial class ACA_036_Rpt
+    partial class ACA_038_Rpt
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ACA_036_Rpt));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ACA_038_Rpt));
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -59,12 +59,12 @@
             this.p_IdParalelo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
             this.groupHeaderBand1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
-            this.IdAlumno = new DevExpress.XtraReports.UI.XRLabel();
-            this.Deuda_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
+            this.IdMatricula = new DevExpress.XtraReports.UI.XRLabel();
             this.xrRichText1 = new DevExpress.XtraReports.UI.XRRichText();
             this.groupFooterBand1 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.p_MostrarRetirados = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.Rubros_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow45 = new DevExpress.XtraReports.UI.XRTableRow();
             this.Colecturia = new DevExpress.XtraReports.UI.XRTableCell();
@@ -135,7 +135,7 @@
             this.xrTableCell1.StylePriority.UsePadding = false;
             this.xrTableCell1.StylePriority.UseTextAlignment = false;
             this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell1.Weight = 1.6419603620940544D;
+            this.xrTableCell1.Weight = 1.6419603820940543D;
             // 
             // xrTableCell4
             // 
@@ -146,7 +146,7 @@
             this.xrTableCell4.StylePriority.UseFont = false;
             this.xrTableCell4.StylePriority.UsePadding = false;
             this.xrTableCell4.StylePriority.UseTextAlignment = false;
-            this.xrTableCell4.Text = "ACA_036";
+            this.xrTableCell4.Text = "ACA_038";
             this.xrTableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell4.Weight = 0.35675806743933569D;
             // 
@@ -339,8 +339,8 @@
             // groupHeaderBand1
             // 
             this.groupHeaderBand1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.IdAlumno,
-            this.Deuda_SubRpt,
+            this.Rubros_SubRpt,
+            this.IdMatricula,
             this.xrRichText1,
             this.txtSolicitud});
             this.groupHeaderBand1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
@@ -354,23 +354,15 @@
             this.groupHeaderBand1.Name = "groupHeaderBand1";
             this.groupHeaderBand1.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBand;
             // 
-            // IdAlumno
+            // IdMatricula
             // 
-            this.IdAlumno.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdAlumno]")});
-            this.IdAlumno.LocationFloat = new DevExpress.Utils.PointFloat(0F, 153.3333F);
-            this.IdAlumno.Name = "IdAlumno";
-            this.IdAlumno.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.IdAlumno.SizeF = new System.Drawing.SizeF(100F, 15F);
-            this.IdAlumno.Visible = false;
-            // 
-            // Deuda_SubRpt
-            // 
-            this.Deuda_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 168.3333F);
-            this.Deuda_SubRpt.Name = "Deuda_SubRpt";
-            this.Deuda_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_036_Deuda_Rpt();
-            this.Deuda_SubRpt.SizeF = new System.Drawing.SizeF(727F, 23F);
-            this.Deuda_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Deuda_SubRpt_BeforePrint);
+            this.IdMatricula.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdMatricula]")});
+            this.IdMatricula.LocationFloat = new DevExpress.Utils.PointFloat(0F, 153.3333F);
+            this.IdMatricula.Name = "IdMatricula";
+            this.IdMatricula.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.IdMatricula.SizeF = new System.Drawing.SizeF(100F, 15F);
+            this.IdMatricula.Visible = false;
             // 
             // xrRichText1
             // 
@@ -396,8 +388,16 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_036_Info);
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_038_Info);
             this.objectDataSource1.Name = "objectDataSource1";
+            // 
+            // Rubros_SubRpt
+            // 
+            this.Rubros_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0.0002034505F, 168.3333F);
+            this.Rubros_SubRpt.Name = "Rubros_SubRpt";
+            this.Rubros_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_038_Rubros_Rpt();
+            this.Rubros_SubRpt.SizeF = new System.Drawing.SizeF(726.9998F, 20F);
+            this.Rubros_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Rubros_SubRpt_BeforePrint);
             // 
             // xrTable5
             // 
@@ -514,7 +514,7 @@
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell2.Weight = 8.2478027835195054D;
             // 
-            // ACA_036_Rpt
+            // ACA_038_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.TopMargin,
@@ -543,7 +543,7 @@
             this.p_IdAlumno,
             this.p_MostrarRetirados});
             this.Version = "20.1";
-            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_036_Rpt_BeforePrint);
+            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_038_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSolicitud)).EndInit();
@@ -589,8 +589,8 @@
         public DevExpress.XtraReports.Parameters.Parameter p_MostrarRetirados;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
         private DevExpress.XtraReports.UI.XRRichText xrRichText1;
-        private DevExpress.XtraReports.UI.XRSubreport Deuda_SubRpt;
-        private DevExpress.XtraReports.UI.XRLabel IdAlumno;
+        private DevExpress.XtraReports.UI.XRLabel IdMatricula;
+        private DevExpress.XtraReports.UI.XRSubreport Rubros_SubRpt;
         private DevExpress.XtraReports.UI.XRTable xrTable5;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow45;
         private DevExpress.XtraReports.UI.XRTableCell Colecturia;

@@ -35,7 +35,7 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_AnioLectivoEquivalenciaPromedio_Info GetInfo_x_Promedio(int IdEmpresa, int IdAnio, decimal PromedioFinal)
+        public aca_AnioLectivoEquivalenciaPromedio_Info GetInfo_x_Promedio(int IdEmpresa, int IdAnio, decimal? PromedioFinal)
         {
             try
             {

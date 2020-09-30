@@ -1997,6 +1997,8 @@
     <Compile Include="Reportes\Academico\ACA_012_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Asistencia_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_038_Rubros_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_038_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_036_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_035_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_028_Dece_Data.cs" />

@@ -74,7 +74,7 @@ namespace Core.Info.Academico
         public bool EsObligatorio { get; set; }
         public string pe_nombreCompletoAlumno { get; set; }
         public string pe_nombreCompleto { get; set; }
-        public decimal CalificacionExamen { get; set; }
+        public Nullable<decimal> CalificacionExamen { get; set; }
         public Nullable<int> IdEquivalenciaCalificacionExamen { get; set; }
         public string Causa { get; set; }
         public string Resolucion { get; set; }

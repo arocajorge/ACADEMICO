@@ -1,6 +1,6 @@
 ﻿namespace Core.Web.Reportes.Academico
 {
-    partial class ACA_036_Deuda_Rpt
+    partial class ACA_038_Rubros_Rpt
     {
         /// <summary>
         /// Required designer variable.
@@ -39,7 +39,7 @@
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAnio = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdMatricula = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
@@ -91,7 +91,7 @@
             // xrTableCell1
             // 
             this.xrTableCell1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Referencia]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Pension]")});
             this.xrTableCell1.Font = new System.Drawing.Font("Verdana", 10F);
             this.xrTableCell1.Multiline = true;
             this.xrTableCell1.Name = "xrTableCell1";
@@ -105,7 +105,7 @@
             // xrTableCell2
             // 
             this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Saldo]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[TotalReporte]")});
             this.xrTableCell2.Font = new System.Drawing.Font("Verdana", 10F);
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
@@ -126,14 +126,14 @@
             this.p_IdAnio.Name = "p_IdAnio";
             this.p_IdAnio.Visible = false;
             // 
-            // p_IdAlumno
+            // p_IdMatricula
             // 
-            this.p_IdAlumno.Name = "p_IdAlumno";
-            this.p_IdAlumno.Visible = false;
+            this.p_IdMatricula.Name = "p_IdMatricula";
+            this.p_IdMatricula.Visible = false;
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_036_Deuda_Info);
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_038_Rubros_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // ReportFooter
@@ -180,7 +180,7 @@
             // 
             this.xrTableCell4.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrTableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([Saldo])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([TotalReporte])")});
             this.xrTableCell4.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
             this.xrTableCell4.Multiline = true;
             this.xrTableCell4.Name = "xrTableCell4";
@@ -193,7 +193,7 @@
             this.xrTableCell4.TextFormatString = "{0:n2}";
             this.xrTableCell4.Weight = 0.92250004577636713D;
             // 
-            // ACA_036_Deuda_Rpt
+            // ACA_038_Rubros_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.TopMargin,
@@ -211,9 +211,9 @@
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
             this.p_IdAnio,
-            this.p_IdAlumno});
+            this.p_IdMatricula});
             this.Version = "20.1";
-            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_036_Deuda_Rpt_BeforePrint);
+            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_038_Rubros_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
@@ -233,7 +233,7 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell2;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
         public DevExpress.XtraReports.Parameters.Parameter p_IdAnio;
-        public DevExpress.XtraReports.Parameters.Parameter p_IdAlumno;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdMatricula;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         private DevExpress.XtraReports.UI.XRTable xrTable2;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow2;

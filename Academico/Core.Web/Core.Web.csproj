@@ -552,11 +552,23 @@
     <Compile Include="Reportes\Academico\ACA_019_Rpt.Designer.cs">
       <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_038_Rubros_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_038_Rubros_Rpt.Designer.cs">
+      <DependentUpon>ACA_038_Rubros_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_036_Deuda_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Academico\ACA_036_Deuda_Rpt.Designer.cs">
       <DependentUpon>ACA_036_Deuda_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_038_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_038_Rpt.Designer.cs">
+      <DependentUpon>ACA_038_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Academico\ACA_036_Rpt.cs">
       <SubType>Component</SubType>
@@ -9221,6 +9233,8 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_035.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_036.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_037.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_038.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionExamen\_GridViewPartial_MatriculaCalificacionExamen_SuperAdmin.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9405,8 +9419,14 @@
     <EmbeddedResource Include="Reportes\Academico\ACA_019_Rpt.resx">
       <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_038_Rubros_Rpt.resx">
+      <DependentUpon>ACA_038_Rubros_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_036_Deuda_Rpt.resx">
       <DependentUpon>ACA_036_Deuda_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_038_Rpt.resx">
+      <DependentUpon>ACA_038_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_036_Rpt.resx">
       <DependentUpon>ACA_036_Rpt.cs</DependentUpon>

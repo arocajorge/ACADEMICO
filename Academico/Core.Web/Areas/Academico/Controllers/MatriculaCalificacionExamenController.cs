@@ -68,7 +68,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
             List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
+            ViewBag.EsSuperAdmin = EsSuperAdmin;
             cargar_combos(model);
             return View(model);
         }
@@ -80,6 +80,15 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_MatriculaCalificacion_Info> model = Lista_CalificacionExamen.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return PartialView("_GridViewPartial_MatriculaCalificacionExamen", model);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_MatriculaCalificacionExamen_SuperAdmin()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            List<aca_MatriculaCalificacion_Info> model = Lista_CalificacionExamen.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_MatriculaCalificacionExamen_SuperAdmin", model);
         }
         #endregion
 
@@ -428,8 +437,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         if (info_det.Promedio == null)
                         {
-                            ViewBag.MostrarError = "Promedio no calculado, calificaciones pendientes de ingresar";
-                            actualizar = false;
+                            //ViewBag.MostrarError = "Promedio no calculado, calificaciones pendientes de ingresar";
+                            //actualizar = false;
                         }
                         else
                         {
@@ -449,8 +458,8 @@ namespace Core.Web.Areas.Academico.Controllers
                         {
                             if (info_det.Promedio == null)
                             {
-                                ViewBag.MostrarError = "Promedio no calculado";
-                                actualizar = false;
+                                //ViewBag.MostrarError = "Promedio no calculado";
+                                //actualizar = false;
                             }
                         }
 
@@ -505,7 +514,16 @@ namespace Core.Web.Areas.Academico.Controllers
 
             List<aca_MatriculaCalificacion_Info> ListaCalificacionExamen = new List<aca_MatriculaCalificacion_Info>();
 
-            ListaCalificacionExamen = bus_calificacion.GetList_x_Profesor(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdProfesor);
+            ViewBag.EsSuperAdmin = EsSuperAdmin;
+            if (Convert.ToBoolean(SessionFixed.EsSuperAdmin) == true)
+            {
+                ListaCalificacionExamen = bus_calificacion.GetList_SuperAdmin(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria);
+            }
+            else
+            {
+                ListaCalificacionExamen = bus_calificacion.GetList_x_Profesor(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdProfesor);
+            }
+            
             foreach (var item in ListaCalificacionExamen)
             {
                 //var calificacion_examen = bus_calificacion.GetInfo(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, item.IdAlumno);
@@ -517,7 +535,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenQ1);
+                    item.CalificacionExamen =item.ExamenQ1;
                     item.Promedio = item.PromedioFinalQ1;
                     item.Causa = item.CausaQ1;
                     item.Resolucion = item.ResolucionQ1;
@@ -525,7 +543,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenQ2);
+                    item.CalificacionExamen = item.ExamenQ2;
                     item.Promedio = item.PromedioFinalQ2;
                     item.Causa = item.CausaQ2;
                     item.Resolucion = item.ResolucionQ2;
@@ -533,25 +551,25 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXMEJ))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenMejoramiento);
+                    item.CalificacionExamen = item.ExamenMejoramiento;
                     item.Promedio = item.PromedioFinal;
                 }
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXSUP))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenSupletorio);
+                    item.CalificacionExamen = item.ExamenSupletorio;
                     item.Promedio = item.PromedioFinal;
                 }
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXREM))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenRemedial);
+                    item.CalificacionExamen = item.ExamenRemedial;
                     item.Promedio = item.PromedioFinal;
                 }
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXGRA))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenGracia);
+                    item.CalificacionExamen = item.ExamenGracia;
                     item.Promedio = item.PromedioFinal;
                 }
             }
@@ -585,15 +603,21 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     if (calificacion.PromedioQ1!=null)
                     {
-                        resultado = Math.Round( Convert.ToDecimal(calificacion.PromedioQ1 * Convert.ToDecimal(0.80) + CalificacionExamen * Convert.ToDecimal(0.20)),2, MidpointRounding.AwayFromZero);
+                        if (CalificacionExamen!=null)
+                        {
+                            resultado = Math.Round(Convert.ToDecimal(calificacion.PromedioQ1 * Convert.ToDecimal(0.80) + CalificacionExamen * Convert.ToDecimal(0.20)), 2, MidpointRounding.AwayFromZero);
+                        }
                     }
                 }
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
                 {
-                    if (calificacion.PromedioQ2!=null)
+                    if (calificacion.PromedioQ2 != null)
                     {
-                        resultado = Math.Round(Convert.ToDecimal(calificacion.PromedioQ2 * Convert.ToDecimal(0.80) + CalificacionExamen * Convert.ToDecimal(0.20)), 2, MidpointRounding.AwayFromZero);
+                        if (CalificacionExamen != null)
+                        {
+                            resultado = Math.Round(Convert.ToDecimal(calificacion.PromedioQ2 * Convert.ToDecimal(0.80) + CalificacionExamen * Convert.ToDecimal(0.20)), 2, MidpointRounding.AwayFromZero);
+                        }
                     }
                 }
             }
@@ -817,15 +841,15 @@ namespace Core.Web.Areas.Academico.Controllers
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
             var info_matricula = bus_matricula.GetInfo(IdEmpresa, info_det.IdMatricula);
             var info_equivalencia = bus_equivalencia.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, info_det.CalificacionExamen);
-            var info_equivalencia_promedio = bus_equivalencia.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Convert.ToDecimal(info_det.Promedio));
+            var info_equivalencia_promedio = bus_equivalencia.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, info_det.Promedio);
             aca_MatriculaCalificacion_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdMatricula == info_det.IdMatricula).FirstOrDefault();
             edited_info.CalificacionExamen = info_det.CalificacionExamen;
             edited_info.Promedio = info_det.Promedio;
-            edited_info.IdEquivalenciaPromedio = info_equivalencia_promedio.IdEquivalenciaPromedio;
+            edited_info.IdEquivalenciaPromedio = (info_equivalencia_promedio==null ? (int?)null : info_equivalencia_promedio.IdEquivalenciaPromedio);
             edited_info.Causa = info_det.Causa;
             edited_info.Resolucion = info_det.Resolucion;
             edited_info.IdCatalogoParcial = info_det.IdCatalogoParcial;
-            edited_info.IdEquivalenciaCalificacionExamen = info_equivalencia.IdEquivalenciaPromedio;
+            edited_info.IdEquivalenciaCalificacionExamen = (info_equivalencia == null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
 
             bus_calificacion.ModicarDB(edited_info);
         }
@@ -863,7 +887,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     if (calificacion.PromedioQ1 != null)
                     {
-                        resultado = Math.Round(Convert.ToDecimal(calificacion.PromedioQ1 * Convert.ToDecimal(0.80) + info.CalificacionExamen * Convert.ToDecimal(0.20)), 2, MidpointRounding.AwayFromZero);
+                        if (info.CalificacionExamen!=null)
+                        {
+                            resultado = Math.Round(Convert.ToDecimal(calificacion.PromedioQ1 * Convert.ToDecimal(0.80) + info.CalificacionExamen * Convert.ToDecimal(0.20)), 2, MidpointRounding.AwayFromZero);
+                        }
                     }
                     else
                     {
@@ -887,7 +914,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     if (calificacion.PromedioQ2 != null)
                     {
-                        resultado = Math.Round(Convert.ToDecimal(calificacion.PromedioQ2 * Convert.ToDecimal(0.80) + info.CalificacionExamen * Convert.ToDecimal(0.20)), 2, MidpointRounding.AwayFromZero);
+                        if (info.CalificacionExamen != null)
+                        {
+                            resultado = Math.Round(Convert.ToDecimal(calificacion.PromedioQ2 * Convert.ToDecimal(0.80) + info.CalificacionExamen * Convert.ToDecimal(0.20)), 2, MidpointRounding.AwayFromZero);
+                        }
                     }
                     else
                     {
@@ -956,9 +986,9 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
 
                 var info_equivalencia = bus_equivalencia.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, info.CalificacionExamen);
-                var info_equivalencia_promedio = bus_equivalencia.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Convert.ToDecimal(resultado));
-                info.IdEquivalenciaCalificacionExamen = info_equivalencia.IdEquivalenciaPromedio;
-                info.IdEquivalenciaPromedio = info_equivalencia_promedio.IdEquivalenciaPromedio;
+                var info_equivalencia_promedio = bus_equivalencia.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, resultado);
+                info.IdEquivalenciaCalificacionExamen = (info_equivalencia==null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
+                info.IdEquivalenciaPromedio = (info_equivalencia_promedio==null ? (int?)null : info_equivalencia_promedio.IdEquivalenciaPromedio);
                 info.RegistroValido = RegistroValidoCalificacion;
                 info.Promedio = resultado;
             }
@@ -998,14 +1028,15 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         var IdMatricula = (Convert.ToInt32(reader.GetValue(0)));
                         var pe_nombreCompleto = (Convert.ToString(reader.GetValue(1)).Trim());
-                        var CalificacionExamen = Convert.ToDecimal(reader.GetValue(2));
+                        var x = Convert.ToString(reader.GetValue(1));
+                        decimal ? CalificacionExamen = string.IsNullOrEmpty(Convert.ToString(reader.GetValue(2))) ? (decimal?)null : Convert.ToDecimal(reader.GetValue(2));
                         var Causa = Convert.ToString(reader.GetValue(3));
                         var Resolucion = Convert.ToString(reader.GetValue(4));
                         var IdCatalogoParcialImportacion = Convert.ToString(reader.GetValue(6));
                         var IdMateria = Convert.ToInt32(reader.GetValue(7));
 
                         var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
-                        var info_equivalencia = bus_equivalencia.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, CalificacionExamen);
+                        var info_equivalencia = bus_equivalencia.GetInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, (CalificacionExamen == null ? (decimal?)null : Convert.ToDecimal(CalificacionExamen)));  
                         var info_catalogo = bus_catalogo.GetInfo_x_Codigo(IdCatalogoParcialImportacion);
 
                         string IdUsuario = SessionFixed.IdUsuario;

@@ -80,7 +80,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_AnioLectivoEquivalenciaPromedio_Info getInfo_x_Promedio(int IdEmpresa, int IdAnio, decimal PromedioFinal)
+        public aca_AnioLectivoEquivalenciaPromedio_Info getInfo_x_Promedio(int IdEmpresa, int IdAnio, decimal? PromedioFinal)
         {
             try
             {
@@ -90,6 +90,9 @@ namespace Core.Data.Academico
                 {
                     var Entity = db.aca_AnioLectivoEquivalenciaPromedio.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && PromedioFinal >= q.ValorMinimo && PromedioFinal<= q.ValorMaximo).FirstOrDefault();
                     if (Entity == null)
+                        return null;
+
+                    if(PromedioFinal==null)
                         return null;
 
                     info = new aca_AnioLectivoEquivalenciaPromedio_Info

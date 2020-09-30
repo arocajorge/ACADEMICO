@@ -269,6 +269,76 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_MatriculaCalificacion_Info> getList_SuperAdmin(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria)
+        {
+            try
+            {
+                List<aca_MatriculaCalificacion_Info> Lista = new List<aca_MatriculaCalificacion_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    var lst = odata.vwaca_MatriculaCalificacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede
+                    && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo
+                    && q.IdMateria == IdMateria).OrderBy(q => q.pe_nombreCompletoAlumno).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_MatriculaCalificacion_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdMatricula = q.IdMatricula,
+                            IdMateria = q.IdMateria,
+                            IdProfesor = q.IdProfesor,
+                            IdAlumno = q.IdAlumno,
+                            Codigo = q.Codigo,
+                            pe_nombreCompletoAlumno = q.pe_nombreCompletoAlumno,
+                            pe_nombreCompleto = q.pe_nombreCompleto,
+                            CalificacionP1 = q.CalificacionP1,
+                            CalificacionP2 = q.CalificacionP2,
+                            CalificacionP3 = q.CalificacionP3,
+                            CalificacionP4 = q.CalificacionP4,
+                            CalificacionP5 = q.CalificacionP5,
+                            CalificacionP6 = q.CalificacionP6,
+                            ExamenQ1 = q.ExamenQ1,
+                            PromedioFinalQ1 = q.PromedioFinalQ1,
+                            CausaQ1 = q.CausaQ1,
+                            ResolucionQ1 = q.ResolucionQ1,
+                            ExamenQ2 = q.ExamenQ2,
+                            PromedioFinalQ2 = q.PromedioFinalQ2,
+                            CausaQ2 = q.CausaQ2,
+                            ResolucionQ2 = q.ResolucionQ2,
+                            ExamenMejoramiento = q.ExamenMejoramiento,
+                            CampoMejoramiento = q.CampoMejoramiento,
+                            ExamenSupletorio = q.ExamenSupletorio,
+                            ExamenRemedial = q.ExamenRemedial,
+                            ExamenGracia = q.ExamenGracia,
+                            PromedioFinal = q.PromedioFinal,
+                            RegistroValido = true,
+                            CodigoEquivalencia = q.CodigoEquivalencia,
+                            DescripcionEquivalencia = q.Descripcion,
+                            IdEquivalenciaPromedioP1 = q.IdEquivalenciaPromedioP1,
+                            IdEquivalenciaPromedioP2 = q.IdEquivalenciaPromedioP2,
+                            IdEquivalenciaPromedioP3 = q.IdEquivalenciaPromedioP2,
+                            IdEquivalenciaPromedioEQ1 = q.IdEquivalenciaPromedioEQ1,
+                            IdEquivalenciaPromedioQ1 = q.IdEquivalenciaPromedioQ1,
+                            IdEquivalenciaPromedioP4 = q.IdEquivalenciaPromedioP4,
+                            IdEquivalenciaPromedioP5 = q.IdEquivalenciaPromedioP5,
+                            IdEquivalenciaPromedioP6 = q.IdEquivalenciaPromedioP6,
+                            IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ2,
+                            IdEquivalenciaPromedioQ2 = q.IdEquivalenciaPromedioQ2,
+                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF
+                        });
+                    });
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public aca_MatriculaCalificacion_Info getInfo(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdMateria, decimal IdAlumno)
         {
             try
