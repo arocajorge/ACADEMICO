@@ -61,7 +61,10 @@ namespace Core.Data.Reportes.Academico
                             DescripcionCorta = q.DescripcionCorta,
                             IdCatalogoParcial = q.IdCatalogoParcial,
                             NomCatalogo = q.NomCatalogo,
-                            NombreProfesor = q.NombreProfesor
+                            NombreProfesor = q.NombreProfesor,
+                            Letra=q.Letra,
+                            Conducta=q.Conducta,
+                            IdProfesor =q.IdProfesor
                         });
                     }
                 }
