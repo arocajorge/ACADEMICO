@@ -215,7 +215,7 @@ namespace Core.Data.CuentasPorCobrar
                 using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
                 {
                     Lista = (from q in Context.vwcxc_cartera_x_cobrar
-                             where q.IdEmpresa == IdEmpresa && q.vt_tipoDoc=="FACT"
+                             where q.IdEmpresa == IdEmpresa
                              select new cxc_cobro_det_Info
                              {
                                  IdEmpresa = q.IdEmpresa,

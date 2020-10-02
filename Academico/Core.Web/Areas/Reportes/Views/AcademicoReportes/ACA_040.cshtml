@@ -1,13 +1,13 @@
-﻿@model Core.Info.Helps.cl_filtros_Info
+﻿@model Core.Info.Academico.aca_MatriculaCalificacionParcial_Info
 @{
-    ViewBag.Title = "Certificado valores cancelados";
+    ViewBag.Title = "Certificado conducta parcial";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
 }
-@using (Html.BeginForm("ACA_038", "AcademicoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("ACA_040", "AcademicoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     <div class="box">
@@ -85,6 +85,35 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Quimestre</label>
+                            @Html.DropDownListFor(q => q.IdCatalogoTipo, new SelectList(ViewBag.lst_quimestres, "Key", "Value"), new { @class = "form-control", @id = "IdCatalogoTipo" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoTipo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdEmpresa">Parcial</label>
+                            @Html.DropDownListFor(q => q.IdCatalogoParcial, new SelectList(ViewBag.lst_parcial, "IdCatalogoParcial", "NomCatalogo"), new { @class = "form-control", @id = "IdCatalogoParcial" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoParcial, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdCliente"></label>
+                            @Html.DevExpress().CheckBoxFor(q => q.MostrarRetirados, settings =>
+                            {
+                                settings.Name = "MostrarRetirados";
+                                settings.Text = "Mostrar retirados";
+                            }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.MostrarRetirados, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- /.box-body -->
         </div>
     </div>
@@ -116,3 +145,37 @@
         <!-- /.box-footer-->
     </div>
 }
+
+<script type="text/javascript">
+    $(function () {
+        $("#IdCatalogoTipo").change(function () {
+            CargarParciales();
+        });
+    });
+
+    function CargarParciales() {
+        $("#IdCatalogoParcial").empty();
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSede: IdSede.GetValue(),
+            IdAnio: IdAnio.GetValue(),
+            IdCatalogoTipo: $("#IdCatalogoTipo").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarParciales_X_Quimestre", "AcademicoReportes",new { Area = "Reportes"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdCatalogoParcial").append("<option value=" + row.IdCatalogoParcial + ">" + row.NomCatalogo + "</option>");
+                    $("#IdCatalogoParcial").val($("#IdCatalogoParcial option:first").val());
+                });
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
