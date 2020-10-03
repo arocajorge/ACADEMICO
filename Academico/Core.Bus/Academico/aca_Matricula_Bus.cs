@@ -115,6 +115,19 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public bool ModificarEstadoMatricula(aca_Matricula_Info info)
+        {
+            try
+            {
+                return odata.modificarEstadoMatriculaDB(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool ModificarCursoParaleloDB(aca_Matricula_Info info)
         {
             try

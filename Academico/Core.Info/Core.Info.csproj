@@ -326,6 +326,7 @@
     <Compile Include="Reportes\Academico\ACA_033_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_034_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_035_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_041_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_040_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_039_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_038_Rubros_Info.cs" />

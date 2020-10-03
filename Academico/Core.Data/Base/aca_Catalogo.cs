@@ -26,6 +26,7 @@ namespace Core.Data.Base
             this.aca_AnioLectivoParcial = new HashSet<aca_AnioLectivoParcial>();
             this.aca_Materia = new HashSet<aca_Materia>();
             this.aca_MatriculaCalificacionCualitativa = new HashSet<aca_MatriculaCalificacionCualitativa>();
+            this.aca_Matricula = new HashSet<aca_Matricula>();
         }
     
         public int IdCatalogo { get; set; }
@@ -61,5 +62,7 @@ namespace Core.Data.Base
         public virtual ICollection<aca_Materia> aca_Materia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_MatriculaCalificacionCualitativa> aca_MatriculaCalificacionCualitativa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
     }
 }

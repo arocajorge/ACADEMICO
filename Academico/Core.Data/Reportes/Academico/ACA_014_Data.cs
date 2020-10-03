@@ -87,7 +87,7 @@ namespace Core.Data.Reportes.Academico
                             PromedioQuimestralFinal = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioQuimestralFinal : null),
                             EquivalenciaPromedioPF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioPF :""),
                             IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF,
-                            
+                            IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion,
                             NombreRepresentante = q.NombreRepresentante,
                             NombreInspector = q.NombreInspector
                         });

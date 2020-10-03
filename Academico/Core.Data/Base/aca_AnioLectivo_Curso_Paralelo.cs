@@ -17,8 +17,8 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public aca_AnioLectivo_Curso_Paralelo()
         {
-            this.aca_Matricula = new HashSet<aca_Matricula>();
             this.aca_Matricula_Rubro = new HashSet<aca_Matricula_Rubro>();
+            this.aca_Matricula = new HashSet<aca_Matricula>();
         }
     
         public int IdEmpresa { get; set; }
@@ -39,12 +39,12 @@ namespace Core.Data.Base
         public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
         public virtual aca_Paralelo aca_Paralelo { get; set; }
         public virtual aca_Sede aca_Sede { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
         public virtual aca_Profesor aca_Profesor { get; set; }
         public virtual aca_Profesor aca_Profesor1 { get; set; }
         public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Matricula_Rubro> aca_Matricula_Rubro { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
     }
 }

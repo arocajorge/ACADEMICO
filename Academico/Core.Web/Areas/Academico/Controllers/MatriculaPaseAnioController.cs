@@ -253,6 +253,9 @@ namespace Core.Web.Areas.Academico.Controllers
 
                         bus_historico_calificacion.ModificarDB(info_historico);
                     }
+
+                    item.IdCatalogoESTMAT = info_alumno.IdCatalogoESTMAT;
+                    bus_matricula.ModificarPlantillaDB(item);
                 }
             }
             Lista_MatriculaPaseAnio.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));

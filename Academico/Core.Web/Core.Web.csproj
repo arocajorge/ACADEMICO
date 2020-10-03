@@ -552,6 +552,12 @@
     <Compile Include="Reportes\Academico\ACA_019_Rpt.Designer.cs">
       <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_041_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_041_Rpt.Designer.cs">
+      <DependentUpon>ACA_041_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_040_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9249,6 +9255,7 @@
     <Content Include="Areas\Academico\Views\MatriculaCalificacionExamen\_GridViewPartial_MatriculaCalificacionExamen_SuperAdmin.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_039.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_040.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_041.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9432,6 +9439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_019_Rpt.resx">
       <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_041_Rpt.resx">
+      <DependentUpon>ACA_041_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_040_Rpt.resx">
       <DependentUpon>ACA_040_Rpt.cs</DependentUpon>

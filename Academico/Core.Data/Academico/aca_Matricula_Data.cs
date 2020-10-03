@@ -277,6 +277,7 @@ namespace Core.Data.Academico
                         IdPlantilla = info.IdPlantilla,
                         IdMecanismo = info.IdMecanismo,
                         Observacion = info.Observacion,
+                        IdCatalogoESTMAT = info.IdCatalogoESTMAT,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now,
                         Fecha = info.Fecha,
@@ -300,6 +301,24 @@ namespace Core.Data.Academico
                                 FechaCreacion = DateTime.Now
                             };
                             Context.aca_MatriculaCalificacionParcial.Add(Entity_CalificacionParcial);
+                        }
+                    }
+
+                    if (info.lst_MatriculaCalificacionCualitativa.Count > 0)
+                    {
+                        foreach (var item in info.lst_MatriculaCalificacionCualitativa)
+                        {
+                            aca_MatriculaCalificacionCualitativa Entity_CalificacionCualitativaParcial = new aca_MatriculaCalificacionCualitativa
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdMatricula = info.IdMatricula,
+                                IdMateria = item.IdMateria,
+                                IdProfesor = item.IdProfesor,
+                                IdCatalogoParcial = item.IdCatalogoParcial,
+                                IdUsuarioCreacion = info.IdUsuarioCreacion,
+                                FechaCreacion = DateTime.Now
+                            };
+                            Context.aca_MatriculaCalificacionCualitativa.Add(Entity_CalificacionCualitativaParcial);
                         }
                     }
 
@@ -538,6 +557,31 @@ namespace Core.Data.Academico
                     };
                     Context.aca_MatriculaCambios.Add(Entity_Historico);
                     #endregion
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public bool modificarEstadoMatriculaDB(aca_Matricula_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_Matricula Entity = Context.aca_Matricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula);
+                    if (Entity == null)
+                        return false;
+                    Entity.IdCatalogoESTMAT = info.IdCatalogoESTMAT;
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = DateTime.Now;
 
                     Context.SaveChanges();
                 }

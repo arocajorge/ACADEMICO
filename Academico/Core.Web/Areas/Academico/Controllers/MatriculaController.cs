@@ -643,7 +643,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public JsonResult guardar(DateTime Fecha, int IdEmpresa = 0, int IdAnio = 0, decimal IdAlumno = 0, string IdComboCurso = "", int IdParalelo = 0, int IdPlantilla = 0,
             int IdMecanismo = 0, int IdMecanismoDet = 0,string Observacion = "",string Ids = "", string IDs_Doc="", int IdSucursal = 0, int IdPuntoVta=0, string IdCatalogo_FormaPago="", 
-            string vt_serie1="", string vt_serie2 = "", string vt_NumFactura = "", int IdEmpresa_rol = 0 , decimal IdEmpleado=0, decimal IdTransaccionSession = 0)
+            string vt_serie1="", string vt_serie2 = "", string vt_NumFactura = "", int IdEmpresa_rol = 0 , decimal IdEmpleado=0, int IdCatalogoESTMAT = 0, decimal IdTransaccionSession = 0)
         {
             decimal Matricula = 0;
             int Empresa = 0;
@@ -689,6 +689,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     IdMecanismo = IdMecanismo,
                     Fecha = Fecha.Date,
                     Observacion = Observacion,
+                    IdCatalogoESTMAT = IdCatalogoESTMAT,
                     IdEmpresa_rol = ((info_termino_pago!=null && info_termino_pago.AplicaDescuentoNomina == true)? IdEmpresa_rol :(int?)null ),
                     IdEmpleado = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? IdEmpleado : (decimal?)null ),
                     IdUsuarioCreacion = SessionFixed.IdUsuario,
@@ -777,18 +778,22 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 #region Calificacion y conducta
                 var lst_materias_x_curso = bus_materias_x_paralelo.GetList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo);
+                var lst_materias_cualitativas = lst_materias_x_curso.Where(q => q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUALI)).ToList();
+                var lst_materias_cuantitativas = lst_materias_x_curso.Where(q => q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
+
                 var lst_parcial = bus_parcial.GetList_x_Tipo(IdEmpresa, IdSede, IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
                 lst_parcial.AddRange(bus_parcial.GetList_x_Tipo(IdEmpresa, IdSede, IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)));
 
+                info_matricula.lst_MatriculaCalificacionCualitativa = new List<aca_MatriculaCalificacionCualitativa_Info>();
                 info_matricula.lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
                 info_matricula.lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
                 info_matricula.lst_conducta = new List<aca_MatriculaConducta_Info>();
 
-                if (lst_materias_x_curso != null && lst_materias_x_curso.Count > 0)
+                if (lst_materias_cuantitativas != null && lst_materias_cuantitativas.Count > 0)
                 {
-                    foreach (var item in lst_materias_x_curso)
+                    foreach (var item in lst_materias_cuantitativas)
                     {
-                        if (lst_parcial!=null)
+                        if (lst_parcial != null && lst_parcial.Count > 0)
                         {
                             foreach (var item_p in lst_parcial)
                             {
@@ -803,7 +808,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                             }
                         }
-                        
+
                         var info_calificacion = new aca_MatriculaCalificacion_Info
                         {
                             IdProfesor = item.IdProfesor,
@@ -811,14 +816,27 @@ namespace Core.Web.Areas.Academico.Controllers
                         };
 
                         info_matricula.lst_calificacion.Add(info_calificacion);
+                    }
+                }
+                if (lst_materias_cualitativas != null && lst_materias_cualitativas.Count > 0)
+                {
+                    foreach (var item in lst_materias_cualitativas)
+                    {
+                        if (lst_parcial != null && lst_parcial.Count > 0)
+                        {
+                            foreach (var item_p in lst_parcial)
+                            {
+                                var info_calificacion_cualitativa_parcial = new aca_MatriculaCalificacionCualitativa_Info
+                                {
+                                    IdProfesor = item.IdProfesor,
+                                    IdMateria = item.IdMateria,
+                                    IdCatalogoParcial = item_p.IdCatalogoParcial
+                                };
 
-                        //var info_conducta = new aca_MatriculaConducta_Info
-                        //{
-                        //    //IdProfesor = item.IdProfesor,
-                        //    //IdMateria = item.IdMateria
-                        //};
+                                info_matricula.lst_MatriculaCalificacionCualitativa.Add(info_calificacion_cualitativa_parcial);
 
-                        //info_matricula.lst_conducta.Add(info_conducta);
+                            }
+                        }
                     }
                 }
                 #endregion
@@ -1159,7 +1177,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 IdCatalogo_FormaPago = "CRE",
                 Validar = "S",
-                IdEmpresa_rol= Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa_rol= Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.MATRICULADO)
             };
             model.lst_matricula_curso = new List<aca_Matricula_Info>();
             model.lst_alumno_documentos = new List<aca_AnioLectivo_Curso_Documento_Info>();

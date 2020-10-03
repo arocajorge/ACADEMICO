@@ -43,8 +43,9 @@ namespace Core.Info.Academico
         public string MotivoAnulacion { get; set; }
         public Nullable<int> IdEmpresa_rol { get; set; }
         public Nullable<decimal> IdEmpleado { get; set; }
+        public Nullable<int> IdCatalogoESTMAT { get; set; }
 
-        
+
 
         #region Campos que no existen en la tabla
         public string IdComboCurso { get; set; }

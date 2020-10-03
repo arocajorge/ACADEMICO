@@ -18,8 +18,8 @@ namespace Core.Info.Reportes.Academico
         public Nullable<int> IdParalelo { get; set; }
         public int IdRubro { get; set; }
         public string Pension { get; set; }
-        public double Total { get; set; }
-        public Nullable<double> TotalReporte { get; set; }
+        public double TotalFacturado { get; set; }
+        public double TotalCobrado { get; set; }
      
     }
 }
