@@ -32,7 +32,7 @@ namespace Core.Info.Reportes.Academico
         public Nullable<int> OrdenParalelo { get; set; }
         public string NombreFactura { get; set; }
         public string CedulaFactura { get; set; }
-        public string Parentezco { get; set; }
+        public string Parentesco { get; set; }
 
         #region Campos que no existen
         public string FechaActual { get; set; }

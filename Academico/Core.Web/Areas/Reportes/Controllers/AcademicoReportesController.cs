@@ -3559,17 +3559,44 @@ namespace Core.Web.Areas.Reportes.Controllers
         #endregion
 
         #region ACA_040
+        public JsonResult CargarParciales_X_Quimestre_ACA_040(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdCatalogoTipo = 0)
+        {
+            var resultado = new List<aca_AnioLectivoParcial_Info>();
+            resultado.Add(new aca_AnioLectivoParcial_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSede = IdSede,
+                IdAnio = IdAnio,
+                IdCatalogoParcial = 0,
+                NomCatalogo = "",
+                Orden = 0
+            });
 
+            resultado.AddRange(bus_parcial.GetList_Reportes(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo));
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         private void cargar_combos_ACA_040(aca_MatriculaCalificacionParcial_Info model)
         {
             aca_Catalogo_Bus bus_catalogotipo = new aca_Catalogo_Bus();
             Dictionary<string, string> lst_quimestres = new Dictionary<string, string>();
             lst_quimestres.Add("6", "QUIMESTRE 1");
             lst_quimestres.Add("7", "QUIMESTRE 2");
+            lst_quimestres.Add("0", "PROMEDIO FINAL");
             ViewBag.lst_quimestres = lst_quimestres;
 
-            //var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
-            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
+            var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
+            lst_parcial.Add(
+                new aca_AnioLectivoParcial_Info
+                {
+                    IdEmpresa = model.IdEmpresa,
+                    IdSede = model.IdSede,
+                    IdAnio = model.IdAnio,
+                    IdCatalogoParcial = 0,
+                    NomCatalogo = "",
+                    Orden = 0
+                });
+            lst_parcial.AddRange(bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo));
+            
             ViewBag.lst_parcial = lst_parcial;
 
         }

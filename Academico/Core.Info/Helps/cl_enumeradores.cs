@@ -217,7 +217,9 @@ namespace Core.Info.Helps
         public enum eCatalogoAcademicoMatricula
         {
             REGISTRADO = 1,
-            MATRICULADO = 2
+            MATRICULADO = 2,
+            APROBADO = 42,
+            REPROBADO = 43
         }
 
         public enum eCatalogoAcademicoAlumno

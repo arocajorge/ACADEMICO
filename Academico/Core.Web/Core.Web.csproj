@@ -552,6 +552,12 @@
     <Compile Include="Reportes\Academico\ACA_019_Rpt.Designer.cs">
       <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_041_Pagos_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_041_Pagos_Rpt.Designer.cs">
+      <DependentUpon>ACA_041_Pagos_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_041_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9439,6 +9445,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_019_Rpt.resx">
       <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_041_Pagos_Rpt.resx">
+      <DependentUpon>ACA_041_Pagos_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_041_Rpt.resx">
       <DependentUpon>ACA_041_Rpt.cs</DependentUpon>

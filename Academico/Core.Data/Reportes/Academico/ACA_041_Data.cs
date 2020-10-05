@@ -27,7 +27,7 @@ namespace Core.Data.Reportes.Academico
                     #region Query
                     string query = "SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, "
                     + " a.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, al.Codigo,  "
-                    + " dbo.tb_persona.pe_nombreCompleto NombreAlumno, pfc.pe_nombreCompleto NombreFactura, pfc.pe_cedulaRuc CedulaFactura, cat.NomCatalogo Parentezco"
+                    + " dbo.tb_persona.pe_nombreCompleto NombreAlumno, pfc.pe_nombreCompleto NombreFactura, pfc.pe_cedulaRuc CedulaFactura, cat.NomCatalogo Parentesco"
                     + " FROM     dbo.aca_Matricula AS m LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio LEFT OUTER JOIN "
@@ -84,7 +84,7 @@ namespace Core.Data.Reportes.Academico
                             OrdenParalelo = Convert.ToInt32(reader["OrdenParalelo"]),
                             NombreFactura = reader["NombreFactura"].ToString(),
                             CedulaFactura = reader["CedulaFactura"].ToString(),
-                            Parentezco = reader["Parentezco"].ToString(),
+                            Parentesco = reader["Parentesco"].ToString().ToLower(),
                             FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy"),
                         });
                     }

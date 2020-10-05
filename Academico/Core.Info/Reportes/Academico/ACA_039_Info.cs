@@ -36,9 +36,11 @@ namespace Core.Info.Reportes.Academico
         public string Letra { get; set; }
         public string Conducta { get; set; }
         public string Equivalencia { get; set; }
+        public int IdCatalogoESTMAT { get; set; }
 
         #region Campos que no existen
         public string FechaActual { get; set; }
+        public string EstadoMatriculacion { get; set; }
         #endregion
     }
 }

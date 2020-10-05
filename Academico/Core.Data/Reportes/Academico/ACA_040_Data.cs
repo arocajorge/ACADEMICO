@@ -23,9 +23,57 @@ namespace Core.Data.Reportes.Academico
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
+                    string query = "";
 
                     #region Query
-                    string query = " SELECT a.IdEmpresa, a.IdAlumno, e.IdMatricula, b.pe_nombreCompleto AS NombreAlumno,  b.pe_cedulaRuc, e.IdAnio, e.IdSede, e.IdNivel, "
+                    if (IdCatalogoParcial==0)
+                    {
+                    query = "SELECT a.IdEmpresa, a.IdAlumno, e.IdMatricula, b.pe_nombreCompleto AS NombreAlumno,  b.pe_cedulaRuc, e.IdAnio, e.IdSede, e.IdNivel, "
+                    + " e.IdJornada, e.IdCurso, e.IdParalelo, f.Descripcion, sn.NomSede, sn.NomNivel,  nj.NomJornada,  jc.NomCurso, cp.NomParalelo, nj.OrdenJornada, "
+                    + " sn.OrdenNivel, jc.OrdenCurso, cp.OrdenParalelo, "
+                     + " case when " + IdCatalogoParcialTipo + " = 6 then equivq1.Equivalencia else "
+                        + " case when " + IdCatalogoParcialTipo + "  = 7 then equivq2.Equivalencia else "
+                            + " case when " + IdCatalogoParcialTipo + "  = 0 then equivpf.Equivalencia else null "
+                            + " end "
+                        + " end "
+                    + " end Equivalencia, "
+                    + " case when " + IdCatalogoParcialTipo + "  = 6 then equivq1.Letra else "
+                        + " case when " + IdCatalogoParcialTipo + "  = 7 then equivq2.Letra else "
+                            + " case when " + IdCatalogoParcialTipo + "  = 0 then equivpf.Letra else null "
+                            + " end "
+                        + " end "
+                    + " end Letra, "
+                    + " cat.NomCatalogoTipo,  ca.NomCatalogo "
+                    + " FROM dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn "
+                    + " RIGHT OUTER JOIN  dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio  AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel "
+                    + " RIGHT OUTER JOIN dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede  AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada "
+                    + " RIGHT OUTER JOIN dbo.aca_AnioLectivo_Curso_Paralelo AS cp RIGHT OUTER JOIN  dbo.aca_AnioLectivo AS f INNER JOIN dbo.aca_Matricula AS e ON f.IdEmpresa = e.IdEmpresa AND f.IdAnio = e.IdAnio "
+                    + " INNER JOIN  dbo.aca_Alumno AS a "
+                    + " INNER JOIN dbo.tb_persona AS b ON a.IdPersona = b.IdPersona  ON e.IdEmpresa = a.IdEmpresa  AND e.IdAlumno = a.IdAlumno "
+                    + " ON cp.IdEmpresa = e.IdEmpresa AND cp.IdAnio = e.IdAnio AND cp.IdSede = e.IdSede  AND cp.IdNivel = e.IdNivel  AND cp.IdJornada = e.IdJornada AND cp.IdCurso = e.IdCurso AND cp.IdParalelo = e.IdParalelo "
+                    + " ON jc.IdEmpresa = cp.IdEmpresa  AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel  AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso "
+                    + " LEFT OUTER JOIN(select r.IdEmpresa, r.IdMatricula  from aca_AlumnoRetiro as r where r.Estado = 1  ) as ret  on e.IdEmpresa = ret.IdEmpresa  and e.IdMatricula = ret.IdMatricula "
+                    + " LEFT OUTER JOIN aca_MatriculaConducta mco on mco.IdEmpresa = e.IdEmpresa and mco.IdMatricula = e.IdMatricula "
+                    + " LEFT OUTER JOIN aca_AnioLectivoConductaEquivalencia equivq1 on equivq1.IdEmpresa = mco.IdEmpresa and equivq1.IdAnio = e.IdAnio and equivq1.Secuencia = mco.SecuenciaPromedioFinalQ1 "
+                    + " LEFT OUTER JOIN aca_AnioLectivoConductaEquivalencia equivq2 on equivq2.IdEmpresa = mco.IdEmpresa and equivq2.IdAnio = e.IdAnio and equivq2.Secuencia = mco.SecuenciaPromedioFinalQ2 "
+                    + " LEFT OUTER JOIN aca_AnioLectivoConductaEquivalencia equivpf on equivpf.IdEmpresa = mco.IdEmpresa and equivpf.IdAnio = e.IdAnio and equivpf.Secuencia = mco.SecuenciaPromedioFinal "
+                    + " LEFT OUTER JOIN aca_Catalogo ca on ca.IdCatalogo = " + IdCatalogoParcial
+                    + " LEFT OUTER JOIN aca_CatalogoTipo cat on cat.IdCatalogoTipo = " + IdCatalogoParcialTipo
+                      + " WHERE "
+                      + " e.IdEmpresa = " + IdEmpresa.ToString()
+                      + " and e.IdAnio = " + IdAnio.ToString()
+                      + " and e.IdSede = " + IdSede.ToString()
+                      + " and e.IdJornada = " + IdJornada.ToString()
+                      + " and e.IdNivel = " + IdNivel.ToString()
+                      + " and e.IdCurso = " + IdCurso.ToString()
+                      + " and e.IdParalelo = " + IdParalelo.ToString()
+                      + " and e.IdAlumno between " + IdAlumnoIni.ToString() + " and " + IdAlumnoFin.ToString()
+                      + " and(f.Estado = 1) AND(a.Estado = 1) "
+                      + " and isnull(ret.IdMatricula,0) = case when " + (MostrarRetirados == false ? 0 : 1) + " = 1 then isnull(ret.IdMatricula,0) else 0 end";
+                    }
+                    else
+                    {
+                    query = " SELECT a.IdEmpresa, a.IdAlumno, e.IdMatricula, b.pe_nombreCompleto AS NombreAlumno,  b.pe_cedulaRuc, e.IdAnio, e.IdSede, e.IdNivel, "
                     + " e.IdJornada, e.IdCurso, e.IdParalelo, f.Descripcion, sn.NomSede, sn.NomNivel,  nj.NomJornada,  jc.NomCurso, cp.NomParalelo, nj.OrdenJornada, "
                     + " sn.OrdenNivel, jc.OrdenCurso, cp.OrdenParalelo, "
                     + " case when " + IdCatalogoParcial + " = 28 then equiv1.Equivalencia else  "
@@ -83,6 +131,7 @@ namespace Core.Data.Reportes.Academico
                       + " and e.IdAlumno between " + IdAlumnoIni.ToString() + " and " + IdAlumnoFin.ToString()
                       + " and(f.Estado = 1) AND(a.Estado = 1) "
                       + " and isnull(ret.IdMatricula,0) = case when " + (MostrarRetirados == false ? 0 : 1) + " = 1 then isnull(ret.IdMatricula,0) else 0 end";
+                    }
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
@@ -116,7 +165,8 @@ namespace Core.Data.Reportes.Academico
                             Letra = reader["Letra"].ToString(),
                             Equivalencia = reader["Equivalencia"].ToString(),
                             NomCatalogo = reader["NomCatalogo"].ToString(),
-                            NomCatalogoTipo = reader["NomCatalogoTipo"].ToString()
+                            NomCatalogoTipo = reader["NomCatalogoTipo"].ToString(),
+                            DescripcionParcial = (IdCatalogoParcial==0 ? reader["NomCatalogoTipo"].ToString() : reader["NomCatalogo"].ToString() + " - " + reader["NomCatalogoTipo"].ToString())
                         });
                     }
                     reader.Close();

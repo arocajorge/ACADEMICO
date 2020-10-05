@@ -36,6 +36,7 @@ namespace Core.Info.Reportes.Academico
 
         #region Campos que no existen
         public string FechaActual { get; set; }
+        public string DescripcionParcial { get; set; }
         #endregion
     }
 }
