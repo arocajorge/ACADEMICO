@@ -11,16 +11,16 @@ using Core.Bus.Academico;
 
 namespace Core.Web.Reportes.Academico
 {
-    public partial class ACA_041_Rpt : DevExpress.XtraReports.UI.XtraReport
+    public partial class ACA_042_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
-        public ACA_041_Rpt()
+        public ACA_042_Rpt()
         {
             InitializeComponent();
         }
 
-        private void ACA_041_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void ACA_042_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_usuario.Text = usuario;
@@ -35,8 +35,8 @@ namespace Core.Web.Reportes.Academico
             decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
             bool MostrarRetirados = string.IsNullOrEmpty(p_MostrarRetirados.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarRetirados.Value);
 
-            ACA_041_Bus bus_rpt = new ACA_041_Bus();
-            List<ACA_041_Info> lst_rpt = new List<ACA_041_Info>();
+            ACA_042_Bus bus_rpt = new ACA_042_Bus();
+            List<ACA_042_Info> lst_rpt = new List<ACA_042_Info>();
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados);
 
             this.DataSource = lst_rpt;

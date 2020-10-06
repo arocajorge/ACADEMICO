@@ -3,8 +3,11 @@ using Core.Bus.General;
 using Core.Info.Academico;
 using Core.Info.Helps;
 using Core.Web.Helps;
+using DevExpress.Web.Mvc;
+using ExcelDataReader;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -549,6 +552,104 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(EsSuperAdmin, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ActualizarVariablesSession(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            string retorno = string.Empty;
+            SessionFixed.IdEmpresa = IdEmpresa.ToString();
+            SessionFixed.IdTransaccionSession = IdTransaccionSession.ToString();
+            SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Importacion
+        public ActionResult UploadControlUpload()
+        {
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings_Participacion.UploadValidationSettings, UploadControlSettings_Participacion.FileUploadComplete);
+            return null;
+        }
+        public ActionResult Importar(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, int IdCampoAccion = 0, int IdTematica = 0, int IdCatalogoParcialTipo = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
+            aca_MatriculaCalificacionParticipacion_Info model = new aca_MatriculaCalificacionParticipacion_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSede = IdSede,
+                IdAnio = IdAnio,
+                IdNivel = IdNivel,
+                IdJornada = IdJornada,
+                IdCurso = IdCurso,
+                IdParalelo = IdParalelo,
+                IdCampoAccion = IdCampoAccion,
+                IdTematica = IdTematica,
+                IdCatalogoParcialTipo = IdCatalogoParcialTipo,
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)
+            };
+
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+            List<aca_MatriculaCalificacionParticipacion_Info> lst_combos = bus_calificacion_participacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            List<aca_MatriculaCalificacionParticipacion_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionParticipacion_Info>();
+            ListaCalificaciones = bus_calificacion_participacion.GetList_Calificaciones(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdCampoAccion, IdTematica, IdCatalogoParcialTipo, IdProfesor);
+
+            Lista_CalificacionParticipacion.set_list(ListaCalificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            cargar_combos(model);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Importar(aca_MatriculaCalificacionParticipacion_Info model)
+        {
+            try
+            {
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                string IdUsuario = SessionFixed.IdUsuario;
+                bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+                var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+                var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+                var Lista_Calificaciones = Lista_CalificacionParticipacion.get_list(model.IdTransaccionSession);
+                var Lista_CalificacionesGuardar = new List<aca_MatriculaCalificacionParticipacion_Info>();
+
+                foreach (var item in Lista_CalificacionesGuardar)
+                {
+                    if (!bus_calificacion_participacion.modificarDB(item))
+                    {
+                        ViewBag.mensaje = "Error al importar el archivo";
+                        cargar_combos(model);
+                        return View(model);
+                    }
+                }
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                //SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
+
+                ViewBag.error = ex.Message.ToString();
+                cargar_combos(model);
+                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdCampoAccion = model.IdCampoAccion, IdTematica = model.IdTematica, IdCatalogoParcialTipo = model.IdCatalogoParcialTipo });
+            }
+        }
+
+        public ActionResult GridViewPartial_MatriculaCalificacionParticipacionImportacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista_CalificacionParticipacion.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_MatriculaCalificacionParticipacionImportacion", model);
+        }
         #endregion
     }
 
@@ -610,6 +711,76 @@ namespace Core.Web.Areas.Academico.Controllers
                 edited_info.Promedio = info_det.Promedio;
 
                 bus_calificacion_participacion.modificarDB(edited_info);
+            }
+        }
+    }
+
+    public class UploadControlSettings_Participacion
+    {
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
+        {
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            aca_MatriculaCalificacionParticipacion_List Lista_CalificacionParticipacion = new aca_MatriculaCalificacionParticipacion_List();
+            List<aca_MatriculaCalificacionParticipacion_Info> Lista = new List<aca_MatriculaCalificacionParticipacion_Info>();
+            aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+            aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(Convert.ToInt32(SessionFixed.IdEmpresa), 0);
+            #endregion
+
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(1) && cont > 0)
+                    {
+                        var x = reader.GetValue(2);
+                        var IdMatricula = (Convert.ToDecimal(reader.GetValue(0)));
+                        var pe_nombreCompleto = (Convert.ToString(reader.GetValue(1)).Trim());
+                        decimal? Calificacion1 = reader.GetValue(3) == null ? (decimal?)null : Convert.ToDecimal(reader.GetValue(2));
+                        decimal? Calificacion2 = reader.GetValue(4) == null ? (decimal?)null : (Convert.ToDecimal(reader.GetValue(3)));
+                        var IdCatalogoParcialTipo = Convert.ToInt32(reader.GetValue(5));
+                        var IdCampoAccion = Convert.ToInt32(reader.GetValue(6));
+                        var IdTematica = Convert.ToInt32(reader.GetValue(7));
+                        string IdUsuario = SessionFixed.IdUsuario;
+                        bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+                        var info_profesor = bus_profesor.GetInfo_x_Usuario(IdEmpresa, IdUsuario);
+                        var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+                        var Promedio = (Calificacion1 == null || Calificacion2 == null ? (decimal?)null : Math.Round(((Convert.ToDecimal(Calificacion1 + Calificacion2) / 2)),2,MidpointRounding.AwayFromZero));
+                        aca_MatriculaCalificacionParticipacion_Info info = new aca_MatriculaCalificacionParticipacion_Info
+                        {
+                            IdEmpresa = IdEmpresa,
+                            IdMatricula = IdMatricula,
+                            NombreAlumno = pe_nombreCompleto,
+                            Calificacion1 = Calificacion1,
+                            Calificacion2 = Calificacion2,
+                            IdCampoAccion = IdCampoAccion,
+                            IdTematica = IdTematica,
+                            IdUsuarioModificacion = SessionFixed.IdUsuario,
+                            FechaModificacion = DateTime.Now,
+                            IdProfesor = IdProfesor,
+                            IdCatalogoParcialTipo = IdCatalogoParcialTipo,
+                            Promedio = Promedio
+                        };
+
+                        Lista.Add(info);
+                    }
+                    else
+                        cont++;
+                }
+
+                Lista_CalificacionParticipacion.set_list(Lista, IdTransaccionSession);
             }
         }
     }

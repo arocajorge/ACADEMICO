@@ -1,4 +1,5 @@
-﻿using Core.Data.Base;
+﻿using Core.Data.Academico;
+using Core.Data.Base;
 using Core.Info.Helps;
 using Core.Info.Reportes.Academico;
 using System;
@@ -10,25 +11,26 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_039_Data
+    public class ACA_042_Data
     {
-        public List<ACA_039_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, bool MostrarRetirados)
+        aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
+        public List<ACA_042_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, bool MostrarRetirados)
         {
             try
             {
                 decimal IdAlumnoIni = IdAlumno;
                 decimal IdAlumnoFin = IdAlumno == 0 ? 9999999 : IdAlumno;
 
-                List<ACA_039_Info> Lista = new List<ACA_039_Info>();
+                List<ACA_042_Info> Lista = new List<ACA_042_Info>();
+                List<ACA_042_Info> ListaFinal = new List<ACA_042_Info>();
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
 
                     #region Query
                     string query = "SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, "
-                    + " a.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, "
-                    + " dbo.tb_persona.pe_nombreCompleto NombreAlumno, dbo.tb_persona.pe_cedulaRuc, m.IdCatalogoESTMAT, "
-                    + " cast(h.Promedio as varchar) Promedio, h.IdEquivalenciaPromedio, ep.Codigo, cast(h.Conducta as varchar) Conducta, h.SecuenciaConducta, ec.Letra, ec.Equivalencia "
+                    + " a.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, al.Codigo,  "
+                    + " dbo.tb_persona.pe_nombreCompleto NombreAlumno, a.IdCursoBachiller, m.IdCatalogoESTMAT "
                     + " FROM     dbo.aca_Matricula AS m LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio LEFT OUTER JOIN "
@@ -40,9 +42,6 @@ namespace Core.Data.Reportes.Academico
                     + " dbo.aca_Alumno AS al ON dbo.tb_persona.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno "
                     + " LEFT OUTER JOIN(select r.IdEmpresa, r.IdMatricula  from aca_AlumnoRetiro as r where r.Estado = 1  ) as ret "
                     + " on m.IdEmpresa = ret.IdEmpresa and m.IdMatricula = ret.IdMatricula "
-                    + " left outer join aca_AnioLectivoCalificacionHistorico h on h.IdEmpresa = m.IdEmpresa and h.IdMatricula = m.IdMatricula and h.IdAnio = m.IdAnio and h.IdAlumno = m.IdAlumno "
-                    + " left outer join aca_AnioLectivoEquivalenciaPromedio ep on ep.IdEmpresa = m.IdEmpresa and ep.IdEquivalenciaPromedio = h.IdEquivalenciaPromedio "
-                    + " left outer join aca_AnioLectivoConductaEquivalencia ec on ec.IdEmpresa = m.IdEmpresa and ec.Secuencia = h.SecuenciaConducta "
                     + " WHERE "
                     + " m.IdEmpresa = " + IdEmpresa.ToString()
                     + " and m.IdAnio = " + IdAnio.ToString()
@@ -60,13 +59,13 @@ namespace Core.Data.Reportes.Academico
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Lista.Add(new ACA_039_Info
+                        Lista.Add(new ACA_042_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            Codigo = reader["Codigo"].ToString(),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
                             NombreAlumno = reader["NombreAlumno"].ToString(),
-                            pe_cedulaRuc = reader["pe_cedulaRuc"].ToString(),
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),
                             IdSede = Convert.ToInt32(reader["IdSede"]),
                             IdNivel = Convert.ToInt32(reader["IdNivel"]),
@@ -83,21 +82,18 @@ namespace Core.Data.Reportes.Academico
                             OrdenJornada = Convert.ToInt32(reader["OrdenJornada"]),
                             OrdenCurso = Convert.ToInt32(reader["OrdenCurso"]),
                             OrdenParalelo = Convert.ToInt32(reader["OrdenParalelo"]),
-                            FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy"),
-                            Promedio = reader["Promedio"].ToString(),
-                            Codigo = reader["Codigo"].ToString(),
-                            Conducta = reader["Conducta"].ToString(),
-                            Letra = reader["Letra"].ToString(),
-                            Equivalencia = reader["Equivalencia"].ToString(),
                             IdCatalogoESTMAT = Convert.ToInt32(reader["IdCatalogoESTMAT"]),
-                            EstadoMatriculacion = (Convert.ToInt32(reader["IdCatalogoESTMAT"]) == Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.APROBADO) ? "y aprobó el" :
-                                                  Convert.ToInt32(reader["IdCatalogoESTMAT"]) == Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REPROBADO) ? "y reprobó el" : "en")
+                            FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy")
                         });
                     }
                     reader.Close();
                 }
-                
-                return Lista;
+
+                var IdCatalogoEstado = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.APROBADO);
+                var info_anio = odata_anio.getInfo(IdEmpresa,IdAnio);
+                ListaFinal = Lista.Where(q=>q.IdAnio==info_anio.IdCursoBachiller && q.IdCatalogoESTMAT == Convert.ToInt32(IdCatalogoEstado)).ToList();
+
+                return ListaFinal;
             }
             catch (Exception ex)
             {

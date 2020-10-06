@@ -47,7 +47,8 @@ namespace Core.Info.Reportes.Academico
         public string EquivalenciaPromedioP2 { get; set; }
         public string CalificacionP3 { get; set; }
         public string EquivalenciaPromedioP3 { get; set; }
-        public string PromedioQ1 { get; set; }
+        public string PorcentajePromedioQ1 { get; set; }
+        public string PorcentajeExamenQ1 { get; set; }
         public string ExamenQ1 { get; set; }
         public string EquivalenciaPromedioEQ1 { get; set; }
         public string PromedioFinalQ1 { get; set; }
@@ -58,7 +59,8 @@ namespace Core.Info.Reportes.Academico
         public string EquivalenciaPromedioP5 { get; set; }
         public string CalificacionP6 { get; set; }
         public string EquivalenciaPromedioP6 { get; set; }
-        public string PromedioQ2 { get; set; }
+        public string PorcentajePromedioQ2 { get; set; }
+        public string PorcentajeExamenQ2 { get; set; }
         public string ExamenQ2 { get; set; }
         public string EquivalenciaPromedioEQ2 { get; set; }
         public string PromedioFinalQ2 { get; set; }

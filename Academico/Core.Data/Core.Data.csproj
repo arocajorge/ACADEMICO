@@ -2020,6 +2020,9 @@
     <Compile Include="Reportes\Academico\ACA_012_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Asistencia_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_043_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_042_Pagos_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_042_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_041_Pagos_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_041_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_040_Data.cs" />

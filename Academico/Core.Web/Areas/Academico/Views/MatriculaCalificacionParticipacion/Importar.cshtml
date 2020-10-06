@@ -36,16 +36,36 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if (data==1) {
-                    GridViewPartial_MatriculaCalificacionParticipacion_SuperAdmin.PerformCallback();
-                }
-                else {
-                    GridViewPartial_MatriculaCalificacionParticipacion.PerformCallback();
-                }               
+                GridViewPartial_MatriculaCalificacionParticipacionImportacion.PerformCallback();
             },
             error: function (error) {
             }
         });
+    }
+
+    function OnFileUploadStart(s, e) {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ActualizarVariablesSession", "MatriculaCalificacionParticipacion", new { Area = "Academico"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function OnFileUploadComplete(s, e) {
+        GridViewPartial_MatriculaCalificacionParticipacionImportacion.PerformCallback();
     }
 
     function LimpiarLista() {
@@ -61,26 +81,15 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if (data == 1) {
-                    GridViewPartial_MatriculaCalificacionParticipacion_SuperAdmin.PerformCallback();
-                }
-                else {
-                    GridViewPartial_MatriculaCalificacionParticipacion.PerformCallback();
-                }
+                GridViewPartial_MatriculaCalificacionParticipacionImportacion.PerformCallback();
             },
             error: function (error) {
             }
         });
     }
-
-    function importar() {
-        var location = GetPathServer();
-        var win = window.open(location + "/Academico/MatriculaCalificacionParticipacion/Importar?IdEmpresa=" + $("#IdEmpresa").val() + "&IdSede=" + IdSede.GetValue() + "&IdAnio=" + IdAnio.GetValue() + "&IdNivel=" + IdNivel.GetValue() + "&IdJornada=" + IdJornada.GetValue() + "&IdCurso=" + IdCurso.GetValue() + "&IdParalelo=" + IdParalelo.GetValue() + "&IdCampoAccion=" + IdCampoAccion.GetValue() + "&IdTematica=" + IdTematica.GetValue() + "&IdCatalogoParcialTipo=" + $("#IdCatalogoParcialTipo").val(), '_self');
-        win.focus();
-    }
 </script>
 
-@using (Html.BeginForm("Index", "MatriculaCalificacionParcial", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
+@using (Html.BeginForm("Importar", "MatriculaCalificacionParticipacion", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
@@ -156,18 +165,41 @@
         </div>
     </div>
 
-    <div class="box-footer">
-        <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button> 
-        <button type="button" class="btn btn-primary" id="btn_importar" onclick="importar();">Descargar/Importar</button>  
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default" id="btn_guardar" onclick="buscar();">Buscar</button>
+                <button type="submit" class="btn btn-primary" title="Guardar">Guardar</button>
+            </div>
+        </div>
     </div>
-    if (ViewBag.EsSuperAdmin == true)
-    {
-        @Html.Action("GridViewPartial_MatriculaCalificacionParticipacion_SuperAdmin")
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                @Html.DevExpress().UploadControl(settings =>
+           {
+               settings.Name = "UploadControlFile";
+               settings.CallbackRouteValues = new { Controller = "MatriculaCalificacionParticipacion", Action = "UploadControlUpload" };
+               settings.ShowUploadButton = true;
+               settings.ShowProgressPanel = true;
+               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+               settings.NullText = "Selecciona el archivo...";
+               settings.ClientSideEvents.FilesUploadStart = "OnFileUploadStart";
+               settings.ClientSideEvents.FileUploadComplete = "OnFileUploadComplete";
+           }).GetHtml()
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                @Html.Action("GridViewPartial_MatriculaCalificacionParticipacionImportacion")
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
     }
-    else
-    {
-        @Html.Action("GridViewPartial_MatriculaCalificacionParticipacion")
-    }
-
 }
 
