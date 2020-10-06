@@ -48,6 +48,16 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
-        
+        public List<aca_MatriculaCalificacionParticipacion_Info> GetList_Combos(int IdEmpresa, int IdAnio, int IdSede, decimal IdProfesor, bool EsSuperAdmin)
+        {
+            try
+            {
+                return odata.getList_Combos(IdEmpresa, IdAnio, IdSede, IdProfesor, EsSuperAdmin);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

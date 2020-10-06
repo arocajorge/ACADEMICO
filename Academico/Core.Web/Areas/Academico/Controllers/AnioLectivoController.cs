@@ -15,6 +15,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         aca_AnioLectivo_List Lista_AnioLectivo = new aca_AnioLectivo_List();
         string mensaje = string.Empty;
+        aca_Curso_Bus bus_curso = new aca_Curso_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         #endregion
@@ -81,6 +82,14 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return true;
         }
+        private void cargar_combos()
+        {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_curso = bus_curso.GetList(IdEmpresa, false);
+            lst_curso.Add(new aca_Curso_Info { IdCurso = 0, NomCurso = "" });
+
+            ViewBag.lst_curso = lst_curso;
+        }
         #endregion
 
         #region Acciones
@@ -104,6 +113,8 @@ namespace Core.Web.Areas.Academico.Controllers
             if (!info.Nuevo)
                 return RedirectToAction("Index");
             #endregion
+
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
@@ -180,6 +191,7 @@ namespace Core.Web.Areas.Academico.Controllers
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
+            cargar_combos();
             return View(model);
         }
 
@@ -203,6 +215,7 @@ namespace Core.Web.Areas.Academico.Controllers
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;
 
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
@@ -243,6 +256,8 @@ namespace Core.Web.Areas.Academico.Controllers
             if (!info.Anular)
                 return RedirectToAction("Index");
             #endregion
+
+            cargar_combos();
             return View(model);
         }
         [HttpPost]
