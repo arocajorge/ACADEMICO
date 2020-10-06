@@ -35,10 +35,12 @@
             // 
             // TopMargin
             // 
+            this.TopMargin.HeightF = 38F;
             this.TopMargin.Name = "TopMargin";
             // 
             // BottomMargin
             // 
+            this.BottomMargin.HeightF = 38F;
             this.BottomMargin.Name = "BottomMargin";
             // 
             // Detail
@@ -52,6 +54,10 @@
             this.BottomMargin,
             this.Detail});
             this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.Margins = new System.Drawing.Printing.Margins(38, 38, 38, 38);
+            this.PageHeight = 1169;
+            this.PageWidth = 827;
+            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Version = "20.1";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
