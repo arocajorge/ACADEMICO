@@ -9330,7 +9330,10 @@
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_GridViewPartial_MatriculaCalificacionParticipacion_SuperAdmin.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\Index.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_ComboBoxPartial_Tematica.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_043.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_042.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\Importar.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_GridViewPartial_MatriculaCalificacionParticipacionImportacion.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
