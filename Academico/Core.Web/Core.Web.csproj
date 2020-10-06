@@ -557,6 +557,18 @@
     <Compile Include="Reportes\Academico\ACA_019_Rpt.Designer.cs">
       <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_042_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_042_Rpt.Designer.cs">
+      <DependentUpon>ACA_042_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_042_Pagos_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_042_Pagos_Rpt.Designer.cs">
+      <DependentUpon>ACA_042_Pagos_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_041_Pagos_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9318,6 +9330,7 @@
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_GridViewPartial_MatriculaCalificacionParticipacion_SuperAdmin.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\Index.cshtml" />
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_ComboBoxPartial_Tematica.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_042.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9501,6 +9514,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_019_Rpt.resx">
       <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_042_Rpt.resx">
+      <DependentUpon>ACA_042_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_042_Pagos_Rpt.resx">
+      <DependentUpon>ACA_042_Pagos_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_041_Pagos_Rpt.resx">
       <DependentUpon>ACA_041_Pagos_Rpt.cs</DependentUpon>

@@ -6963,7 +6963,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Type="String" Name="EquivalenciaPromedioP2" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CalificacionP3" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="EquivalenciaPromedioP3" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="PromedioQ1" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PorcentajePromedioQ1" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PorcentajeExamenQ1" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="ExamenQ1" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="EquivalenciaPromedioEQ1" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="PromedioFinalQ1" Nullable="true" MaxLength="30" />
@@ -6974,7 +6975,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
           <Property Type="String" Name="EquivalenciaPromedioP5" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CalificacionP6" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="EquivalenciaPromedioP6" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="PromedioQ2" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PorcentajePromedioQ2" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PorcentajeExamenQ2" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="ExamenQ2" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="EquivalenciaPromedioEQ2" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="PromedioFinalQ2" Nullable="true" MaxLength="30" />
@@ -9985,7 +9987,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
                 <ScalarProperty Name="EquivalenciaPromedioP2" ColumnName="EquivalenciaPromedioP2" />
                 <ScalarProperty Name="CalificacionP3" ColumnName="CalificacionP3" />
                 <ScalarProperty Name="EquivalenciaPromedioP3" ColumnName="EquivalenciaPromedioP3" />
-                <ScalarProperty Name="PromedioQ1" ColumnName="PromedioQ1" />
+                <ScalarProperty Name="PorcentajePromedioQ1" ColumnName="PorcentajePromedioQ1" />
+                <ScalarProperty Name="PorcentajeExamenQ1" ColumnName="PorcentajeExamenQ1" />
                 <ScalarProperty Name="ExamenQ1" ColumnName="ExamenQ1" />
                 <ScalarProperty Name="EquivalenciaPromedioEQ1" ColumnName="EquivalenciaPromedioEQ1" />
                 <ScalarProperty Name="PromedioFinalQ1" ColumnName="PromedioFinalQ1" />
@@ -9996,7 +9999,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.web.VWFAC_003' no tiene defi
                 <ScalarProperty Name="EquivalenciaPromedioP5" ColumnName="EquivalenciaPromedioP5" />
                 <ScalarProperty Name="CalificacionP6" ColumnName="CalificacionP6" />
                 <ScalarProperty Name="EquivalenciaPromedioP6" ColumnName="EquivalenciaPromedioP6" />
-                <ScalarProperty Name="PromedioQ2" ColumnName="PromedioQ2" />
+                <ScalarProperty Name="PorcentajePromedioQ2" ColumnName="PorcentajePromedioQ2" />
+                <ScalarProperty Name="PorcentajeExamenQ2" ColumnName="PorcentajeExamenQ2" />
                 <ScalarProperty Name="ExamenQ2" ColumnName="ExamenQ2" />
                 <ScalarProperty Name="EquivalenciaPromedioEQ2" ColumnName="EquivalenciaPromedioEQ2" />
                 <ScalarProperty Name="PromedioFinalQ2" ColumnName="PromedioFinalQ2" />
