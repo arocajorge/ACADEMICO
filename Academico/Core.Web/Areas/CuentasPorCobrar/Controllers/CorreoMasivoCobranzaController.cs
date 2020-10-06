@@ -245,7 +245,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                             Cuerpo = CuerpoCorreo,
                             Destinatarios = Destinatarios,
                             Codigo = CodigoCorreo,
-                            Parametros = IdEmpresa.ToString() + ";" + item1.IdAlumno.ToString(),
+                            Parametros = IdEmpresa.ToString()+";"+item1.IdSede.ToString() + ";" + item1.IdAlumno.ToString(),
                             IdUsuarioCreacion = SessionFixed.IdUsuario
                         };
 
@@ -266,7 +266,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                         Cuerpo = CuerpoCorreo,
                         Destinatarios = DestinatarioAlumno,
                         Codigo = CodigoCorreo,
-                        Parametros = IdEmpresa.ToString() + ";" + IdAlumno.ToString(),
+                        Parametros = IdEmpresa.ToString() + ";" + CorreosAlumno.IdSede.ToString() + ";" + CorreosAlumno.IdAlumno.ToString(),
                         IdUsuarioCreacion = SessionFixed.IdUsuario
                     };
 
