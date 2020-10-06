@@ -9289,6 +9289,16 @@
     <Content Include="Areas\Academico\Views\AsignacionTematicasParalelo\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Academico\Views\AsignacionTematicasParalelo\_GridViewPartial_AsignacionTematicasParalelo.cshtml" />
     <Content Include="Areas\Academico\Views\AsignacionTematicasParalelo\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_ComboBoxPartial_CampoAccion.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_GridViewPartial_MatriculaCalificacionParticipacion.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_GridViewPartial_MatriculaCalificacionParticipacion_SuperAdmin.cshtml" />
+    <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\Index.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9333,7 +9343,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
-    <Folder Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\" />
     <Folder Include="Areas\Banco\Models\" />
     <Folder Include="Areas\Banco\Views\ArchivoBancario\" />
     <Folder Include="Areas\Caja\Models\" />

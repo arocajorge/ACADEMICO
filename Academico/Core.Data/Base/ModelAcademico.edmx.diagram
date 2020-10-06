@@ -227,20 +227,20 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicional_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_PermisoMatricula_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionCualitativa_aca_AnioLectivoCalificacionCualitativa" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaCalificacionParticipacion" Width="1.5" PointX="42.625" PointY="26.625" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Profesor" />
         <EntityTypeShape EntityType="ModelAcademico.aca_CampoAccion" Width="1.5" PointX="38.125" PointY="42.5" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Tematica" Width="1.5" PointX="40.375" PointY="39.375" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Tematica_aca_CampoAccion" />
         <AssociationConnector Association="ModelAcademico.FK_aca_AnioLectivo_Tematica_aca_Tematica" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_CampoAccion" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Tematica_aca_CampoAccion" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Tematica" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Tematica" Width="1.5" PointX="6.375" PointY="26.75" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_MatriculaCalificacionParticipacion" Width="1.5" PointX="42.625" PointY="24.5" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_CampoAccion" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Profesor" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Tematica" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

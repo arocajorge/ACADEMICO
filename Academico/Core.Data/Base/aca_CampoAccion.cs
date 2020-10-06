@@ -18,8 +18,8 @@ namespace Core.Data.Base
         public aca_CampoAccion()
         {
             this.aca_AnioLectivo_Tematica = new HashSet<aca_AnioLectivo_Tematica>();
-            this.aca_MatriculaCalificacionParticipacion = new HashSet<aca_MatriculaCalificacionParticipacion>();
             this.aca_Tematica = new HashSet<aca_Tematica>();
+            this.aca_MatriculaCalificacionParticipacion = new HashSet<aca_MatriculaCalificacionParticipacion>();
         }
     
         public int IdEmpresa { get; set; }
@@ -38,8 +38,8 @@ namespace Core.Data.Base
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivo_Tematica> aca_AnioLectivo_Tematica { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_MatriculaCalificacionParticipacion> aca_MatriculaCalificacionParticipacion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Tematica> aca_Tematica { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_MatriculaCalificacionParticipacion> aca_MatriculaCalificacionParticipacion { get; set; }
     }
 }

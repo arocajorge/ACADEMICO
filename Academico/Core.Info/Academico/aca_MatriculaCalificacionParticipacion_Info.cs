@@ -21,7 +21,7 @@ namespace Core.Info.Academico
         public Nullable<decimal> CalificacionP3 { get; set; }
         public Nullable<decimal> CalificacionP4 { get; set; }
         public Nullable<decimal> PromedioQ2 { get; set; }
-        public string PromedioFinal { get; set; }
+        public Nullable<decimal> PromedioFinal { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
@@ -54,6 +54,11 @@ namespace Core.Info.Academico
         public string NombreCampoAccion { get; set; }
         public string NombreTematica { get; set; }
         public string IdString { get; set; }
+        public string NombreAlumno { get; set; }
+        public Nullable<decimal> Calificacion1 { get; set; }
+        public Nullable<decimal> Calificacion2 { get; set; }
+        public Nullable<decimal> Promedio { get; set; }
+        public int IdCatalogoParcialTipo { get; set; }
         #endregion
     }
 }

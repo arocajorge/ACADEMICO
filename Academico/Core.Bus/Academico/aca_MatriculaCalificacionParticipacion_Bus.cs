@@ -59,5 +59,29 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public List<aca_MatriculaCalificacionParticipacion_Info> GetList_Calificaciones(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCampoAccion, int IdTematica, int IdCatalogoParcialTipo, decimal IdProfesor)
+        {
+            try
+            {
+                return odata.getList_Calificaciones(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdCampoAccion, IdTematica, IdCatalogoParcialTipo, IdProfesor);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<aca_MatriculaCalificacionParticipacion_Info> GetList_Calificaciones_SuperAdmin(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCampoAccion, int IdTematica, int IdCatalogoParcialTipo)
+        {
+            try
+            {
+                return odata.getList_Calificaciones_SuperAdmin(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdCampoAccion, IdTematica, IdCatalogoParcialTipo);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
