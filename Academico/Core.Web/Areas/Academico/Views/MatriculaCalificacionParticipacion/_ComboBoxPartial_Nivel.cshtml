@@ -1,7 +1,7 @@
 ﻿@Html.DevExpress().ComboBox(settings =>
 {
     settings.Name = "IdNivel";
-    settings.CallbackRouteValues = new { Controller = "MatriculaCalificacionParcial", Action = "ComboBoxPartial_Nivel", Area = "Academico" };
+    settings.CallbackRouteValues = new { Controller = "MatriculaCalificacionParticipacion", Action = "ComboBoxPartial_Nivel", Area = "Academico" };
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.Properties.DisplayFormatString = "[{0}] - {1}";
     settings.Properties.Columns.Add("IdNivel", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);

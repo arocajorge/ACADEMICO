@@ -12,6 +12,7 @@ namespace Core.Data.Academico
 {
     public class aca_MatriculaCalificacionParticipacion_Data
     {
+        aca_Matricula_Data odata_matricula = new aca_Matricula_Data();
         public List<aca_MatriculaCalificacionParticipacion_Info> getListParalelo(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
         {
             try
@@ -240,8 +241,8 @@ namespace Core.Data.Academico
                     + " dbo.aca_Alumno AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
                     + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona "
                     + " WHERE mp.IdEmpresa = " + IdEmpresa + " and m.IdSede = " + IdSede + " and m.IdAnio = " + IdAnio + " and m.IdNivel = " + IdNivel
-                    + " and m.IdJornada = " + IdJornada + " and m.IdCurso = " + IdCurso + " and m.IdParalelo = " + IdParalelo + " and mc.IdCampoAccion = " + IdCampoAccion
-                    + " and mc.IdTematica = " + IdTematica + " and mc.IdProfesor = " + IdProfesor;
+                    + " and m.IdJornada = " + IdJornada + " and m.IdCurso = " + IdCurso + " and m.IdParalelo = " + IdParalelo + " and mp.IdCampoAccion = " + IdCampoAccion
+                    + " and mp.IdTematica = " + IdTematica + " and mp.IdProfesor = " + IdProfesor;
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
@@ -315,8 +316,8 @@ namespace Core.Data.Academico
                     + " dbo.aca_Alumno AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
                     + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona "
                                         + " WHERE mp.IdEmpresa = " + IdEmpresa + " and m.IdSede = " + IdSede + " and m.IdAnio = " + IdAnio + " and m.IdNivel = " + IdNivel
-                    + " and m.IdJornada = " + IdJornada + " and m.IdCurso = " + IdCurso + " and m.IdParalelo = " + IdParalelo + " and mc.IdCampoAccion = " + IdCampoAccion
-                    + " and mc.IdTematica = " + IdTematica;
+                    + " and m.IdJornada = " + IdJornada + " and m.IdCurso = " + IdCurso + " and m.IdParalelo = " + IdParalelo + " and mp.IdCampoAccion = " + IdCampoAccion
+                    + " and mp.IdTematica = " + IdTematica;
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
@@ -370,6 +371,51 @@ namespace Core.Data.Academico
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public bool modificarDB(aca_MatriculaCalificacionParticipacion_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    var info_matricula = odata_matricula.getInfo(info.IdEmpresa, Convert.ToInt32(info.IdMatricula));
+
+                    aca_MatriculaCalificacionParticipacion Entity = Context.aca_MatriculaCalificacionParticipacion.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
+                    && q.IdMatricula == info.IdMatricula && q.IdCampoAccion == info.IdCampoAccion && q.IdTematica == info.IdTematica && q.IdProfesor == info.IdProfesor);
+                    if (Entity == null)
+                        return false;
+
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = DateTime.Now;
+
+                    if (info.IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1))
+                    {
+                        Entity.CalificacionP1 = info.Calificacion1;
+                        Entity.CalificacionP2 = info.Calificacion2;
+                        Entity.PromedioQ1 = info.Promedio;
+                    }
+                    if (info.IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2))
+                    {
+                        Entity.CalificacionP3 = info.Calificacion1;
+                        Entity.CalificacionP4 = info.Calificacion2;
+                        Entity.PromedioQ2 = info.Promedio;
+                    }
+
+                    if (Entity.PromedioQ1 != null && Entity.PromedioQ2 !=null)
+                    {
+                        Entity.PromedioFinal = Math.Round((Convert.ToDecimal((Entity.PromedioQ1 + Entity.PromedioQ2) /2 )),2, MidpointRounding.AwayFromZero);
+                    }
+
+                    Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }
