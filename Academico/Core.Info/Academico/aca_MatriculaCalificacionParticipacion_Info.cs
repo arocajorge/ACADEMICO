@@ -35,8 +35,20 @@ namespace Core.Info.Academico
         public int IdJornada { get; set; }
         public int IdCurso { get; set; }
         public int IdParalelo { get; set; }
+        public string Descripcion { get; set; }
+        public string NomSede { get; set; }
+        public string NomNivel { get; set; }
+        public string NomJornada { get; set; }
+        public string NomCurso { get; set; }
         public string NomParalelo { get; set; }
+        public string CodigoParalelo { get; set; }
+        public string NomMateria { get; set; }
+        public int OrdenNivel { get; set; }
+        public int OrdenJornada { get; set; }
+        public int OrdenCurso { get; set; }
         public int OrdenParalelo { get; set; }
+        public int OrdenTematica { get; set; }
+        public int OrdenCampoAccion { get; set; }
         public Nullable<int> IdTematicaParticipacion { get; set; }
         public List<aca_MatriculaCalificacionParticipacion_Info> lst_detalle { get; set; }
         public string NombreCampoAccion { get; set; }

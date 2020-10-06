@@ -52,6 +52,7 @@ namespace Core.Data.Academico
                             IdAnioLectivoAnterior = q.IdAnioLectivoAnterior,
                             PromedioMinimoParcial = q.PromedioMinimoParcial,
                             PromedioMinimoPromocion = q.PromedioMinimoPromocion,
+                            IdCursoBachiller = q.IdCursoBachiller,
                             Estado = q.Estado
                         });
                     });
@@ -90,6 +91,7 @@ namespace Core.Data.Academico
                             PromedioMinimoParcial = q.PromedioMinimoParcial,
                             PromedioMinimoPromocion = q.PromedioMinimoPromocion,
                             IdAnioLectivoAnterior = q.IdAnioLectivoAnterior,
+                            IdCursoBachiller = q.IdCursoBachiller,
                             Estado = q.Estado
                         });
                     });
@@ -122,6 +124,7 @@ namespace Core.Data.Academico
                         BloquearMatricula = q.BloquearMatricula,
                         PromedioMinimoParcial = q.PromedioMinimoParcial,
                         PromedioMinimoPromocion = q.PromedioMinimoPromocion,
+                        IdCursoBachiller = q.IdCursoBachiller,
                         Estado = q.Estado
                     }).ToList();
                 }
@@ -159,6 +162,7 @@ namespace Core.Data.Academico
                         IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
                         PromedioMinimoParcial = Entity.PromedioMinimoParcial,
                         PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
+                        IdCursoBachiller = Entity.IdCursoBachiller,
                         Estado = Entity.Estado
                     };
                 }
@@ -196,6 +200,7 @@ namespace Core.Data.Academico
                         IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
                         PromedioMinimoParcial = Entity.PromedioMinimoParcial,
                         PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
+                        IdCursoBachiller = Entity.IdCursoBachiller,
                         Estado = Entity.Estado
                     };
                 }
@@ -233,6 +238,7 @@ namespace Core.Data.Academico
                         IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
                         PromedioMinimoParcial = Entity.PromedioMinimoParcial,
                         PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
+                        IdCursoBachiller = Entity.IdCursoBachiller,
                         Estado = Entity.Estado
                     };
                 }
@@ -269,6 +275,7 @@ namespace Core.Data.Academico
                         IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
                         PromedioMinimoParcial = Entity.PromedioMinimoParcial,
                         PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
+                        IdCursoBachiller = Entity.IdCursoBachiller,
                         Estado = Entity.Estado
                     };
                 }
@@ -323,6 +330,7 @@ namespace Core.Data.Academico
                         IdAnioLectivoAnterior = info.IdAnioLectivoAnterior,
                         PromedioMinimoParcial = info.PromedioMinimoParcial,
                         PromedioMinimoPromocion = info.PromedioMinimoPromocion,
+                        IdCursoBachiller = info.IdCursoBachiller,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -382,6 +390,7 @@ namespace Core.Data.Academico
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.PromedioMinimoParcial = info.PromedioMinimoParcial;
                     Entity.PromedioMinimoPromocion = info.PromedioMinimoPromocion;
+                    Entity.IdCursoBachiller = info.IdCursoBachiller;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 
                     Context.SaveChanges();

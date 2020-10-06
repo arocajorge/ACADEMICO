@@ -103,6 +103,26 @@
                     @Html.ValidationMessageFor(q => q.BloquearMatricula, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="info_persona.pe_Naturaleza">Curso bachiller*</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdCursoBachiller, settings =>
+                           {
+                               settings.Name = "IdCursoBachiller";
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                               settings.Properties.Columns.Add("IdCurso", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                               settings.Properties.Columns.Add("NomCurso", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                               //Campo ID
+                               settings.Properties.ValueField = "IdCurso";
+                               settings.Properties.ValueType = typeof(int);
+                               settings.Properties.TextField = "NomCurso";
+                               settings.Properties.NullText = "== Seleccione ==";
+                               settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                           }).BindList(ViewBag.lst_curso).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdCursoBachiller, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

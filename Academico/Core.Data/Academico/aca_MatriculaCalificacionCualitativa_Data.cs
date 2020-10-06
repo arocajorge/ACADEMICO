@@ -152,6 +152,7 @@ namespace Core.Data.Academico
                             pe_nombreCompleto = q.pe_nombreCompleto,
                             IdCatalogoParcial = q.IdCatalogoParcial,
                             IdCalificacionCualitativaParcial = q.IdCalificacionCualitativa,
+                            IdCalificacionCualitativa = q.IdCalificacionCualitativa,
                             Conducta = q.Conducta,
                             MotivoConducta = q.MotivoConducta,
                             Letra = q.Letra,
