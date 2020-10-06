@@ -26,6 +26,7 @@ namespace Core.Data.Base
         public string Codigo { get; set; }
         public string DescripcionCorta { get; set; }
         public string DescripcionLarga { get; set; }
+        public Nullable<decimal> Calificacion { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

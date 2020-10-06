@@ -1,0 +1,118 @@
+﻿@model Core.Info.Academico.aca_AnioLectivo_Tematica_Info
+@{
+    ViewBag.Title = "Consulta temáticas por año lectivo";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdTematica", GetSelectedFieldValuesCallback);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+    function guardar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IDs: selectedIDs,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $("#btn_guardar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("guardar", "AnioLectivoTematica", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>
+
+@using (Html.BeginForm("Index", "AnioLectivoTematica", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdAnio">Año Lectivo</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdAnio, settings =>
+                   {
+                       settings.Name = "IdAnio";
+                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                       settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                       settings.Properties.Columns.Add("IdAnio", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                       settings.Properties.Columns.Add("Descripcion", "Año Lectivo").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                       //Campo ID
+                       settings.Properties.ValueField = "IdAnio";
+                       settings.Properties.ValueType = typeof(int);
+                       settings.Properties.TextField = "Descripcion";
+                       settings.Properties.NullText = "== Seleccione ==";
+                       settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                       //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e){GetListNivelPorSede();}";
+                   }).BindList(ViewBag.lst_anio).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                </div>
+            </div>          
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-default" id="btn_buscar">Buscar</button>
+        <button type="button" class="btn btn-primary" id="btn_guardar" onclick="guardar();">Guardar</button>
+    </div>
+    @Html.Action("GridViewPartial_AnioLectivoTematica")
+}
+
+<script type="text/javascript">
+    $(function () {
+    });
+
+    function GetListAnioLectivoTematica() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetListAnioLectivoTematica", "AnioLectivoTematica", new { Area = "Academico"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_AnioLectivoTematica.PerformCallback();
+                //$.each(data, function (i, row) {
+                //    $("#IdJornada").append("<option value=" + row.IdJornada + ">" + row.NomJornada + "</option>");
+                //});
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>

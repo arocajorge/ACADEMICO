@@ -36,8 +36,8 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivoCalificacionHistorico> aca_AnioLectivoCalificacionHistorico { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

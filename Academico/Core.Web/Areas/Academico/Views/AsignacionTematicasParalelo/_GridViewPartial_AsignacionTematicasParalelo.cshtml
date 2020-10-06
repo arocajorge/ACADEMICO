@@ -1,0 +1,84 @@
+
+@using System.Web.UI.WebControls;
+
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridViewPartial_AsignacionTematicasParalelo";
+        settings.KeyFieldName = "IdString";
+        settings.CallbackRouteValues = new { Controller = "AsignacionTematicasParalelo", Action = "GridViewPartial_AsignacionTematicasParalelo", IdEmpresa = ViewBag.IdEmpresa, IdAnio = ViewBag.IdAnio };
+
+
+        settings.Width = Unit.Percentage(100);
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "AsignacionTematicasParalelo", Action = "EditingUpdate", Area = "Academico" };
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.Control;
+
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = false;
+        settings.CommandColumn.ShowEditButton = true;
+        settings.CommandColumn.ShowDeleteButton = false;
+
+        settings.SettingsContextMenu.Enabled = true;
+        settings.CommandColumn.ShowNewButtonInHeader = false;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.SettingsBehavior.AllowSelectByRowClick = true;
+
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NomParalelo";
+            column.Caption = "Paralelo";
+            column.Width = Unit.Percentage(10);
+            column.VisibleIndex = 1;
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdTematicaParticipacion";
+            column.Caption = "Temática";
+            column.Width = Unit.Percentage(50);
+            column.EditorProperties().ComboBox(p =>
+            {
+                p.Columns.Add("NombreTematica", "Tematica").Width = Unit.Percentage(60);
+                p.Columns.Add("NombreCampoAccion", "CampoAccion").Width = Unit.Percentage(40);
+                p.TextField = "NombreTematica";
+                p.ValueField = "IdTematica";
+                p.ValueType = typeof(int);
+                p.DataSource = ViewBag.lst_tematicas;
+            });
+            column.VisibleIndex = 2;
+            column.Visible = true;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "NombreProfesor";
+            column.Caption = "Profesor";
+            column.VisibleIndex = 3;
+            column.Width = Unit.Percentage(30);
+            column.EditFormSettings.Visible = DefaultBoolean.False;
+        });
+        settings.Columns.Add(column =>
+        {
+            column.FieldName = "IdProfesor";
+            column.Caption = "Profesor";
+            column.Width = Unit.Percentage(30);
+            column.Visible = false;
+            column.VisibleIndex = 3;
+            column.EditFormSettings.Visible = DefaultBoolean.True;
+            column.SetEditItemTemplateContent(c =>
+            {
+                Html.RenderPartial("_CmbProfesor", DataBinder.Eval(c.DataItem, "IdProfesor"));
+            });
+        });
+        settings.ClientSideEvents.BeginCallback = "function(s,e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();}";//OnBeginGridCallback(s,e);
+    });
+}
+@grid.Bind(Model).GetHtml()

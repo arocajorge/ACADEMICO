@@ -628,7 +628,7 @@ namespace Core.Data.Academico
                                     IdEquivalenciaPromedioP6 = info.IdEquivalenciaPromedioP6,
                                     IdEquivalenciaPromedioEQ2 = info.IdEquivalenciaPromedioEQ2,
                                     IdEquivalenciaPromedioQ2 = info.IdEquivalenciaPromedioQ2,
-                                    IdEquivalenciaPromedioPF = info.IdEquivalenciaPromedioPF
+                                    IdEquivalenciaPromedioPF = info.IdEquivalenciaPromedioPF,
                                 };
 
                                 Context.aca_MatriculaCalificacion.Add(Entity);

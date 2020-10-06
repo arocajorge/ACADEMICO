@@ -65,13 +65,17 @@
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Periodo_Bus.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Bus.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Tematica_Bus.cs" />
+    <Compile Include="Academico\aca_CampoAccion_Bus.cs" />
     <Compile Include="Academico\aca_CatalogoFicha_Bus.cs" />
     <Compile Include="Academico\aca_CatalogoTipoFicha_Bus.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Bus.cs" />
     <Compile Include="Academico\aca_Catalogo_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaAsistencia_Bus.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacionCualitativaPromedio_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacionCualitativa_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacionParcial_Bus.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacionParticipacion_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacion_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaCambios_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Bus.cs" />
@@ -101,6 +105,7 @@
     <Compile Include="Academico\aca_Reporte_Bus.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Bus.cs" />
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Bus.cs" />
+    <Compile Include="Academico\aca_Tematica_Bus.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacionDet_Bus.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacion_Bus.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionCobros_Bus.cs" />

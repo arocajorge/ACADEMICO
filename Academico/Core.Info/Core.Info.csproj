@@ -63,13 +63,17 @@
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Periodo_Info.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Info.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Tematica_Info.cs" />
+    <Compile Include="Academico\aca_CampoAccion_Info.cs" />
     <Compile Include="Academico\aca_CatalogoFicha_Info.cs" />
     <Compile Include="Academico\aca_CatalogoTipoFicha_Info.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Info.cs" />
     <Compile Include="Academico\aca_Catalogo_Info.cs" />
     <Compile Include="Academico\aca_MatriculaAsistencia_Info.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacionCualitativaPromedio_Info.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacionCualitativa_Info.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacionParcial_Info.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacionParticipacion_Info.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Det_Info.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Info.cs" />
     <Compile Include="Academico\aca_Curso_Info.cs" />
@@ -99,6 +103,7 @@
     <Compile Include="Academico\aca_Reporte_Info.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Info.cs" />
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Info.cs" />
+    <Compile Include="Academico\aca_Tematica_Info.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacionDet_Info.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacion_Info.cs" />
     <Compile Include="Contabilidad\Contabilizacion\ct_ContabilizacionCobros_Info.cs" />

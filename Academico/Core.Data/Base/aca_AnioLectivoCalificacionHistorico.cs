@@ -27,10 +27,10 @@ namespace Core.Data.Base
         public Nullable<int> SecuenciaConducta { get; set; }
     
         public virtual aca_Alumno aca_Alumno { get; set; }
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_AnioLectivoConductaEquivalencia aca_AnioLectivoConductaEquivalencia { get; set; }
         public virtual aca_AnioLectivoEquivalenciaPromedio aca_AnioLectivoEquivalenciaPromedio { get; set; }
         public virtual aca_Curso aca_Curso { get; set; }
         public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

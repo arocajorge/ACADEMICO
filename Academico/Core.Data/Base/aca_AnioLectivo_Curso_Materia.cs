@@ -30,11 +30,11 @@ namespace Core.Data.Base
         public Nullable<int> OrdenMateriaGrupo { get; set; }
         public Nullable<int> OrdenMateriaArea { get; set; }
     
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_Curso aca_Curso { get; set; }
         public virtual aca_Jornada aca_Jornada { get; set; }
         public virtual aca_Materia aca_Materia { get; set; }
         public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
         public virtual aca_Sede aca_Sede { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

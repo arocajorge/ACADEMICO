@@ -31,8 +31,8 @@ namespace Core.Data.Base
         public Nullable<bool> IngresaProfesor { get; set; }
         public Nullable<bool> IngresaInspector { get; set; }
     
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivoCalificacionHistorico> aca_AnioLectivoCalificacionHistorico { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

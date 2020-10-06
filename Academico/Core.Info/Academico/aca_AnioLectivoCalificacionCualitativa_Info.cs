@@ -19,6 +19,7 @@ namespace Core.Info.Academico
         [StringLength(50, MinimumLength = 1, ErrorMessage = "el campo descripción corta debe tener mínimo 1 caracter y máximo 50")]
         public string DescripcionCorta { get; set; }
         public string DescripcionLarga { get; set; }
+        public Nullable<decimal> Calificacion { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

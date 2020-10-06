@@ -544,6 +544,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 ListaCalificaciones = bus_calificacion_parcial.getList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial, IdProfesor);
             }
 
+            ListaCalificaciones.ForEach(q=> { q.IdSede = IdSede; q.IdAnio = IdAnio;  });
             Lista_CalificacionParcial.set_list(ListaCalificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return Json(EsSuperAdmin, JsonRequestBehavior.AllowGet);
@@ -735,6 +736,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
+        aca_AnioLectivoCalificacionCualitativa_Bus bus_equivalecia = new aca_AnioLectivoCalificacionCualitativa_Bus();
 
         string Variable = "aca_MatriculaCalificacionParcialCualitativa_Info";
         public List<aca_MatriculaCalificacionCualitativa_Info> get_list(decimal IdTransaccionSession)
@@ -766,6 +768,8 @@ namespace Core.Web.Areas.Academico.Controllers
             if (edited_info.IdProfesor > 0)
             {
                 edited_info.IdCalificacionCualitativa = info_det.IdCalificacionCualitativa;
+                var info_equivalencia = bus_equivalecia.getInfo(edited_info.IdEmpresa,edited_info.IdAnio, Convert.ToInt32(edited_info.IdCalificacionCualitativa));
+                edited_info.Calificacion = info_equivalencia == null ? null : info_equivalencia.Calificacion;
                 edited_info.Conducta = info_det.Conducta;
                 edited_info.MotivoConducta = info_det.MotivoConducta;
 
@@ -923,8 +927,11 @@ namespace Core.Web.Areas.Academico.Controllers
                         {
                             IdEmpresa = IdEmpresa,
                             IdMatricula = IdMatricula,
+                            IdSede = (info_matricula==null ? 0 : Convert.ToInt32(info_matricula.IdSede)),
+                            IdAnio = (info_matricula == null ? 0 : Convert.ToInt32(info_matricula.IdAnio)),
                             pe_nombreCompleto = pe_nombreCompleto,
                             IdCalificacionCualitativa = (info_cualitativa==null ? (int?)null : Convert.ToInt32(info_cualitativa.IdCalificacionCualitativa)),
+                            Calificacion = (info_cualitativa == null ? (decimal?)null : Convert.ToDecimal(info_cualitativa.Calificacion)),
                             Conducta = (info_conducta == null ? (int?)null : info_conducta.Secuencia),
                             MotivoConducta = MotivoConducta,
                             IdCatalogoParcial = IdCatalogoParcial,

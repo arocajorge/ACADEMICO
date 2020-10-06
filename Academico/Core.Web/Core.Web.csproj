@@ -217,11 +217,14 @@
     <Compile Include="Areas\Academico\Controllers\AlumnoRetiroController.cs" />
     <Compile Include="Areas\Academico\Controllers\AnioLectivoAperturaController.cs" />
     <Compile Include="Areas\Academico\Controllers\AnioLectivoController.cs" />
+    <Compile Include="Areas\Academico\Controllers\AnioLectivoTematicaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\AsignacionTematicasParaleloController.cs" />
     <Compile Include="Areas\Academico\Controllers\AsignacionTutorInspectorController.cs" />
     <Compile Include="Areas\Academico\Controllers\CalificacionCualitativaController.cs" />
     <Compile Include="Areas\Academico\Controllers\CalificacionHistoricoController.cs" />
     <Compile Include="Areas\Academico\Controllers\CambioParaleloMatriculaController.cs" />
     <Compile Include="Areas\Academico\Controllers\CambioPlantillaMatriculaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\CampoAccionController.cs" />
     <Compile Include="Areas\Academico\Controllers\CatalogoFichaController.cs" />
     <Compile Include="Areas\Academico\Controllers\CatalogoTipoFichaController.cs" />
     <Compile Include="Areas\Academico\Controllers\ConductaEquivalenciaController.cs" />
@@ -242,6 +245,7 @@
     <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionExamenController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionParcialController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionParcialCualitativaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\MatriculaCalificacionParticipacionController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaCondicionalParrafoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MatriculaConductaController.cs" />
@@ -273,6 +277,7 @@
     <Compile Include="Areas\Academico\Controllers\NivelPorSedeController.cs" />
     <Compile Include="Areas\Academico\Controllers\SocioEconomicoController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaAreaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\TematicaController.cs" />
     <Compile Include="Areas\Banco\BancoAreaRegistration.cs" />
     <Compile Include="Areas\Banco\Controllers\ArchivoBancarioController.cs" />
     <Compile Include="Areas\Banco\Controllers\ArchivoRecaudacionController.cs" />
@@ -9262,6 +9267,28 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_039.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_040.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_041.cshtml" />
+    <Content Include="Areas\Academico\Views\CampoAccion\_GridViewPartial_CampoAccion.cshtml" />
+    <Content Include="Areas\Academico\Views\CampoAccion\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\CampoAccion\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\CampoAccion\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\CampoAccion\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\CampoAccion\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\Tematica\Nuevo.cshtml" />
+    <Content Include="Areas\Academico\Views\Tematica\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\Tematica\Consultar.cshtml" />
+    <Content Include="Areas\Academico\Views\Tematica\_GridViewPartial_Tematica.cshtml" />
+    <Content Include="Areas\Academico\Views\Tematica\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\Tematica\Anular.cshtml" />
+    <Content Include="Areas\Academico\Views\AnioLectivoTematica\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\AnioLectivoTematica\_GridViewPartial_AnioLectivoTematica.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTematicasParalelo\_CmbProfesor.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTematicasParalelo\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTematicasParalelo\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTematicasParalelo\_ComboBoxPartial_Jornada.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTematicasParalelo\_ComboBoxPartial_Nivel.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTematicasParalelo\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTematicasParalelo\_GridViewPartial_AsignacionTematicasParalelo.cshtml" />
+    <Content Include="Areas\Academico\Views\AsignacionTematicasParalelo\Index.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9306,6 +9333,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
+    <Folder Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\" />
     <Folder Include="Areas\Banco\Models\" />
     <Folder Include="Areas\Banco\Views\ArchivoBancario\" />
     <Folder Include="Areas\Caja\Models\" />

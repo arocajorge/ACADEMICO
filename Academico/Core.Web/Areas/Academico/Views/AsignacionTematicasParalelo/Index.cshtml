@@ -1,0 +1,75 @@
+﻿@model Core.Info.Academico.aca_MatriculaCalificacionParticipacion_Info
+@{
+    ViewBag.Title = "Consultar asignación de temáticas por paralelo";
+    if (Session["IdUsuario"] == null || Session["IdEmpresa"] == null)
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    var timerHandle = -1;
+    function OnBatchEditStartEditing(s, e) {
+        clearTimeout(timerHandle);
+    }
+    function OnBatchEditEndEditing(s, e) {
+        timerHandle = setTimeout(function () {
+            s.UpdateEdit();
+        }, 200);
+    }
+</script>
+@using (Html.BeginForm("Index", "AsignacionTematicasParalelo", FormMethod.Post, new { @role = "form", @class = "form", @id = "myform" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Año Lectivo</label>
+                    @Html.Partial("_ComboBoxPartial_Anio", Model)
+                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdEmpresa">Sede</label>
+                    @Html.Partial("_ComboBoxPartial_Sede", Model)
+                    @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdEmpresa">Nivel Académico</label>
+                    @Html.Partial("_ComboBoxPartial_Nivel", Model)
+                    @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Jornada</label>
+                    @Html.Partial("_ComboBoxPartial_Jornada", Model)
+                    @Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Curso</label>
+                    @Html.Partial("_ComboBoxPartial_Curso", Model)
+                    @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "AsignacionTematicasParalelo", new { Area ="Academico" }, null)">Cancelar</a>
+    </div>
+
+    @Html.Action("GridViewPartial_AsignacionTematicasParalelo", new { IdEmpresa = Model.IdEmpresa, IdAnio = Model.IdAnio})
+}

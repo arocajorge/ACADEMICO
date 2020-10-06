@@ -76,13 +76,17 @@
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Rubro_Periodo_Data.cs" />
     <Compile Include="Academico\aca_AnioLectivo_Sede_NivelAcademico_Data.cs" />
+    <Compile Include="Academico\aca_AnioLectivo_Tematica_Data.cs" />
+    <Compile Include="Academico\aca_CampoAccion_Data.cs" />
     <Compile Include="Academico\aca_CatalogoFicha_Data.cs" />
     <Compile Include="Academico\aca_CatalogoTipoFicha_Data.cs" />
     <Compile Include="Academico\aca_CatalogoTipo_Data.cs" />
     <Compile Include="Academico\aca_Catalogo_Data.cs" />
     <Compile Include="Academico\aca_MatriculaAsistencia_Data.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacionCualitativaPromedio_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacionCualitativa_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacionParcial_Data.cs" />
+    <Compile Include="Academico\aca_MatriculaCalificacionParticipacion_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCalificacion_Data.cs" />
     <Compile Include="Academico\aca_MatriculaCondicional_Data.cs" />
     <Compile Include="Academico\aca_Curso_Data.cs" />
@@ -112,6 +116,7 @@
     <Compile Include="Academico\aca_Reporte_Data.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Data.cs" />
     <Compile Include="Academico\aca_Reporte_x_tb_empresa_Data.cs" />
+    <Compile Include="Academico\aca_Tematica_Data.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacionDet_Data.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacion_Data.cs" />
     <Compile Include="Base\aca_AnioLectivoCalificacionCualitativa.cs">
@@ -132,6 +137,12 @@
     <Compile Include="Base\aca_AnioLectivo_PeriodoDet.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\aca_AnioLectivo_Tematica.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_CampoAccion.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_MateriaArea.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -147,7 +158,13 @@
     <Compile Include="Base\aca_MatriculaCalificacionCualitativa.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\aca_MatriculaCalificacionCualitativaPromedio.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_MatriculaCalificacionParcial.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_MatriculaCalificacionParticipacion.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MatriculaCambios.cs">
@@ -172,6 +189,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Reporte_x_tb_empresa.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_Tematica.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\ba_ArchivoRecaudacion.cs">
@@ -517,6 +537,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_Matricula_Rubro_PorFacturarMasiva.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\vwaca_Tematica.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\VWBAN_001.cs">

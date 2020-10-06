@@ -42,8 +42,8 @@ namespace Core.Data.Base
         public Nullable<decimal> TotalAlumnos { get; set; }
         public Nullable<decimal> TotalValorFacturado { get; set; }
     
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivo_Rubro_Periodo> aca_AnioLectivo_Rubro_Periodo { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

@@ -64,6 +64,7 @@ namespace Core.Data.Academico
                         Codigo = Entity.Codigo,
                         DescripcionCorta = Entity.DescripcionCorta,
                         DescripcionLarga = Entity.DescripcionLarga,
+                        Calificacion = Entity.Calificacion,
                         Estado = Entity.Estado
                     };
                 }
@@ -97,6 +98,7 @@ namespace Core.Data.Academico
                         Codigo = Entity.Codigo,
                         DescripcionCorta = Entity.DescripcionCorta,
                         DescripcionLarga = Entity.DescripcionLarga,
+                        Calificacion = Entity.Calificacion,
                         Estado = Entity.Estado
                     };
                 }
@@ -208,6 +210,41 @@ namespace Core.Data.Academico
                 }
 
                 return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public aca_AnioLectivoCalificacionCualitativa_Info getInfo_x_Promedio(int IdEmpresa, int IdAnio, decimal? PromedioFinal)
+        {
+            try
+            {
+                aca_AnioLectivoCalificacionCualitativa_Info info;
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var PromedioRedondeado = Math.Round(Convert.ToDecimal(PromedioFinal), 2, MidpointRounding.AwayFromZero);
+                    var Entity = db.aca_AnioLectivoCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && PromedioRedondeado <= q.Calificacion).FirstOrDefault();
+                    if (Entity == null)
+                        return null;
+
+                    if (PromedioFinal == null)
+                        return null;
+
+                    info = new aca_AnioLectivoCalificacionCualitativa_Info
+                    {
+                        IdEmpresa = Entity.IdEmpresa,
+                        IdAnio = Entity.IdAnio,
+                        IdCalificacionCualitativa = Entity.IdCalificacionCualitativa,
+                        Codigo = Entity.Codigo,
+                        Calificacion = Entity.Calificacion
+                    };
+                }
+
+                return info;
             }
             catch (Exception)
             {

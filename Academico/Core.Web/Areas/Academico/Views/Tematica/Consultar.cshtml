@@ -1,0 +1,112 @@
+﻿@model Core.Info.Academico.aca_Tematica_Info
+@{
+    ViewBag.Title = "Consultar temática";
+
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Consultar", "Tematica", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdTematica)
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-offset-9 col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Nuevo == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","Tematica",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="IdNuevo"></label>
+                @if (@ViewBag.Modificar == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Modificar" href="@Url.Action("Modificar", "Tematica", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdTematica = Model.IdTematica }, null)">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+            <div class="col-md-1">
+                <label for="Autorizar"></label>
+                @if (@ViewBag.Anular == true)
+                {
+                    <div class="form-group">
+                        <a type="button" class="btn btn-primary form-control" title="Anular" href="@Url.Action("Anular", "Tematica", new { Area = "Academico", IdEmpresa = Model.IdEmpresa, IdTematica = Model.IdTematica }, null)">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdSucursal">Temática*</label>
+                    @Html.TextBoxFor(q => q.NombreTematica, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.NombreTematica, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">Campo de acción*</label>
+                    @Html.DropDownListFor(q => q.IdCampoAccion, new SelectList(ViewBag.lst_CampoAccion, "IdCampoAccion", "NombreCampoAccion"), new { @class = "form-control", @id = "IdCampoAccion" })
+                    @Html.ValidationMessageFor(q => q.IdCampoAccion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="Sede">Orden*</label>
+                    @Html.TextBoxFor(q => q.OrdenTematica, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.OrdenTematica, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index","Tematica",new { Area = "Academico" },null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

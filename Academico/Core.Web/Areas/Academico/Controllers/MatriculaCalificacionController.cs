@@ -31,6 +31,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_MatriculaConducta_Bus bus_conducta = new aca_MatriculaConducta_Bus();
         aca_MatriculaGeneracionCalificaciones_List Lista_MatriculaCalificaciones = new aca_MatriculaGeneracionCalificaciones_List();
         aca_MatriculaCalificacionCualitativa_Bus bus_calificacion_cualitativa = new aca_MatriculaCalificacionCualitativa_Bus();
+        aca_MatriculaCalificacionCualitativaPromedio_Bus bus_calificacion_cualitativa_promedio = new aca_MatriculaCalificacionCualitativaPromedio_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = string.Empty;
         #endregion
@@ -72,11 +73,13 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_Matricula_Info> lista = bus_matricula.GetList_Calificaciones(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdAlumno);
             List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial_existente = new List<aca_MatriculaCalificacionParcial_Info>();
             List<aca_MatriculaCalificacionCualitativa_Info> lst_calificacion_cualitativa_parcial_existente = new List<aca_MatriculaCalificacionCualitativa_Info>();
+            List<aca_MatriculaCalificacionCualitativaPromedio_Info> lst_calificacion_cualitativa_existente = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
             List<aca_MatriculaCalificacion_Info> lst_calificacion_existente = new List<aca_MatriculaCalificacion_Info>();
             List<aca_MatriculaConducta_Info> lst_conducta_existente = new List<aca_MatriculaConducta_Info>();
 
             List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
             List<aca_MatriculaCalificacionCualitativa_Info> lst_calificacion_cualitativa = new List<aca_MatriculaCalificacionCualitativa_Info>();
+            List<aca_MatriculaCalificacionCualitativaPromedio_Info> lst_calificacion_cualitativa_promedio = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
             List<aca_MatriculaCalificacion_Info> lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
             List<aca_MatriculaConducta_Info> lst_conducta = new List<aca_MatriculaConducta_Info>();
 
@@ -86,6 +89,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     lst_calificacion_parcial_existente = bus_calificacion_parcial.GetList(model.IdEmpresa, item.IdMatricula);
                     lst_calificacion_cualitativa_parcial_existente = bus_calificacion_cualitativa.getList(model.IdEmpresa, item.IdMatricula);
+                    lst_calificacion_cualitativa_existente = bus_calificacion_cualitativa_promedio.GetList(model.IdEmpresa, item.IdMatricula);
                     lst_calificacion_existente = bus_calificacion.GetList(model.IdEmpresa, item.IdMatricula);
                     lst_conducta_existente = bus_conducta.GetList(model.IdEmpresa, item.IdMatricula);
 
@@ -103,6 +107,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         foreach (var item_materias_cualit in lst_materias_cualitativas)
                         {
+                            var calificacion_cualitativa = lst_calificacion_cualitativa_existente.Where(q => q.IdMateria == item_materias_cualit.IdMateria).FirstOrDefault();
                             if (lst_parcial.Count() > 0)
                             {
                                 foreach (var item_p in lst_parcial)
@@ -127,8 +132,28 @@ namespace Core.Web.Areas.Academico.Controllers
                                     lst_calificacion_cualitativa.Add(info_cualitativa);
                                 }
                             }
+
+                            var info_calificacion_cualitativa = new aca_MatriculaCalificacionCualitativaPromedio_Info
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdMatricula = item.IdMatricula,
+                                IdMateria = item_materias_cualit.IdMateria,
+                                IdCalificacionCualitativaQ1 = (calificacion_cualitativa == null ? null : calificacion_cualitativa.IdCalificacionCualitativaQ1),
+                                PromedioQ1 = (calificacion_cualitativa == null ? null : calificacion_cualitativa.PromedioQ1),
+                                IdCalificacionCualitativaQ2 = (calificacion_cualitativa == null ? null : calificacion_cualitativa.IdCalificacionCualitativaQ2),
+                                PromedioQ2 = (calificacion_cualitativa == null ? null : calificacion_cualitativa.PromedioQ2),
+                                IdCalificacionCualitativaFinal = (calificacion_cualitativa == null ? null : calificacion_cualitativa.IdCalificacionCualitativaFinal),
+                                PromedioFinal = (calificacion_cualitativa == null ? null : calificacion_cualitativa.PromedioFinal),
+                                IdUsuarioCreacion = (calificacion_cualitativa == null ? SessionFixed.IdUsuario : calificacion_cualitativa.IdUsuarioCreacion),
+                                FechaCreacion = (calificacion_cualitativa == null ? DateTime.Now : calificacion_cualitativa.FechaCreacion),
+                                IdUsuarioModificacion = (calificacion_cualitativa == null ? null : SessionFixed.IdUsuario),
+                                FechaModificacion = (calificacion_cualitativa == null ? (DateTime?)null : calificacion_cualitativa.FechaModificacion)
+
+                            };
+
+                            lst_calificacion_cualitativa_promedio.Add(info_calificacion_cualitativa);
                         }
-                        var x = lst_calificacion_cualitativa;
+                        var x = lst_calificacion_cualitativa_promedio;
                     }
                     #endregion
 
@@ -266,39 +291,42 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         if (bus_calificacion.GenerarCalificacion(lst_calificacion))
                         {
-                            if (bus_conducta.GenerarCalificacion(lst_conducta))
+                            if (bus_calificacion_cualitativa_promedio.GenerarCalificacion(lst_calificacion_cualitativa_promedio))
                             {
-                                MensajeSuccess = "Registros generados exitosamente";
-                                ViewBag.MensajeSuccess = MensajeSuccess;
-                                var ListaGenerada = new List<aca_Matricula_Info>();
-                                //var ListaGenerada = bus_calificacion.GetList(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdAlumno);
-
-                                var lst_matricula = (from q in lst_conducta
-                                                     group q by new
-                                                     {
-                                                         q.IdEmpresa,
-                                                         q.IdMatricula
-                                                     } into mat
-                                                     select new aca_Matricula_Info
-                                                     {
-                                                         IdEmpresa = mat.Key.IdEmpresa,
-                                                         IdMatricula = mat.Key.IdMatricula
-                                                     }).ToList();
-
-                                foreach (var item in lst_matricula)
+                                if (bus_conducta.GenerarCalificacion(lst_conducta))
                                 {
-                                    var matricula = lista.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).FirstOrDefault();
-                                    if (matricula != null)
+                                    MensajeSuccess = "Registros generados exitosamente";
+                                    ViewBag.MensajeSuccess = MensajeSuccess;
+                                    var ListaGenerada = new List<aca_Matricula_Info>();
+                                    //var ListaGenerada = bus_calificacion.GetList(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdAlumno);
+
+                                    var lst_matricula = (from q in lst_conducta
+                                                         group q by new
+                                                         {
+                                                             q.IdEmpresa,
+                                                             q.IdMatricula
+                                                         } into mat
+                                                         select new aca_Matricula_Info
+                                                         {
+                                                             IdEmpresa = mat.Key.IdEmpresa,
+                                                             IdMatricula = mat.Key.IdMatricula
+                                                         }).ToList();
+
+                                    foreach (var item in lst_matricula)
                                     {
-                                        ListaGenerada.Add(matricula);
+                                        var matricula = lista.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).FirstOrDefault();
+                                        if (matricula != null)
+                                        {
+                                            ListaGenerada.Add(matricula);
+                                        }
                                     }
+                                    Lista_MatriculaCalificaciones.set_list(ListaGenerada, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                                 }
-                                Lista_MatriculaCalificaciones.set_list(ListaGenerada, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-                            }
-                            else
-                            {
-                                mensaje = "Ha ocurrido un error al generar las calificaciones de conducta";
-                                ViewBag.mensaje = mensaje;
+                                else
+                                {
+                                    mensaje = "Ha ocurrido un error al generar las calificaciones de conducta";
+                                    ViewBag.mensaje = mensaje;
+                                }
                             }
                         }
                         else
