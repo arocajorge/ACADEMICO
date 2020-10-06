@@ -15,7 +15,6 @@ namespace Core.Web.Reportes.CuentasPorCobrar
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
-        public int[] IntArray { get; set; }
 
         public CXC_011_Rpt()
         {

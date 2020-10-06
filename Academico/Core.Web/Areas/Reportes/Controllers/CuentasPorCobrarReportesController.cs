@@ -867,5 +867,60 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
         #endregion
+
+        #region CXC_013
+        public ActionResult CXC_013(decimal IdAlumno = 0)
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.IdAlumno = IdAlumno;
+
+            CXC_013_Rpt report = new CXC_013_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_013");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_FechaCorte.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            ViewBag.MostrarCorreo = false;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CXC_013(cl_filtros_Info model)
+        {
+            CXC_013_Rpt report = new CXC_013_Rpt();
+
+            #region Cargo diseño desde base
+            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_013");
+            if (reporte != null)
+            {
+                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
+                report.LoadLayout(RootReporte);
+            }
+            #endregion
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_FechaCorte.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            ViewBag.MostrarCorreo = true;
+            return View(model);
+        }
+        #endregion
     }
 }

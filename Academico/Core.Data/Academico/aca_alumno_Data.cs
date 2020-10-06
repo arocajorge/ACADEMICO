@@ -290,6 +290,7 @@ namespace Core.Data.Academico
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
