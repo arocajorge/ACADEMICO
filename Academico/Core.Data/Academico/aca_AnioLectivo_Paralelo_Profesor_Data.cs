@@ -140,6 +140,12 @@ namespace Core.Data.Academico
                                             {
                                                 lst_MatriculaCalificacionCualitativaParcial.ForEach(q => q.IdProfesor = info.IdProfesor);
                                             }
+
+                                            var lst_MatriculaCalificacionPromedio = Context.aca_MatriculaCalificacionCualitativaPromedio.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == item.IdMatricula && q.IdMateria == info.IdMateria).ToList();
+                                            if (lst_MatriculaCalificacionPromedio.Count > 0)
+                                            {
+                                                lst_MatriculaCalificacionPromedio.ForEach(q => q.IdProfesor = info.IdProfesor);
+                                            }
                                         }
                                         
                                     }

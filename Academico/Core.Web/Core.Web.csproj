@@ -562,6 +562,18 @@
     <Compile Include="Reportes\Academico\ACA_019_Rpt.Designer.cs">
       <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_046_Promedios_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_046_Promedios_Rpt.Designer.cs">
+      <DependentUpon>ACA_046_Promedios_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_046_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_046_Rpt.Designer.cs">
+      <DependentUpon>ACA_046_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_045_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9360,8 +9372,12 @@
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_GridViewPartial_MatriculaCalificacionParticipacionImportacion.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_044.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_045.cshtml" />
+<<<<<<< Updated upstream
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_014.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_015.cshtml" />
+=======
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_046.cshtml" />
+>>>>>>> Stashed changes
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9549,6 +9565,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_019_Rpt.resx">
       <DependentUpon>ACA_019_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_046_Promedios_Rpt.resx">
+      <DependentUpon>ACA_046_Promedios_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_046_Rpt.resx">
+      <DependentUpon>ACA_046_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_045_Rpt.resx">
       <DependentUpon>ACA_045_Rpt.cs</DependentUpon>

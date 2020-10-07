@@ -138,6 +138,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                 IdEmpresa = item.IdEmpresa,
                                 IdMatricula = item.IdMatricula,
                                 IdMateria = item_materias_cualit.IdMateria,
+                                IdProfesor = item_materias_cualit.IdProfesor,
                                 IdCalificacionCualitativaQ1 = (calificacion_cualitativa == null ? null : calificacion_cualitativa.IdCalificacionCualitativaQ1),
                                 PromedioQ1 = (calificacion_cualitativa == null ? null : calificacion_cualitativa.PromedioQ1),
                                 IdCalificacionCualitativaQ2 = (calificacion_cualitativa == null ? null : calificacion_cualitativa.IdCalificacionCualitativaQ2),
