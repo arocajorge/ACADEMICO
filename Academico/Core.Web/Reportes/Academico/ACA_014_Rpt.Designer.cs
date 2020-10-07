@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
-            DevExpress.XtraReports.UI.XRSummary xrSummary2 = new DevExpress.XtraReports.UI.XRSummary();
-            DevExpress.XtraReports.UI.XRSummary xrSummary3 = new DevExpress.XtraReports.UI.XRSummary();
-            DevExpress.XtraReports.UI.XRSummary xrSummary4 = new DevExpress.XtraReports.UI.XRSummary();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -144,9 +140,6 @@
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.groupFooterBand1 = new DevExpress.XtraReports.UI.GroupFooterBand();
-            this.Subreport_Conducta = new DevExpress.XtraReports.UI.XRSubreport();
-            this.Cualitativa_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
-            this.Conducta_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow9 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell63 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -170,12 +163,15 @@
             this.xrTableRow25 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell35 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell64 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.EquivalenciaRendimiento_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
             this.p_IdMatricula = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCatalogoParcial = new DevExpress.XtraReports.Parameters.Parameter();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_MostrarRetirados = new DevExpress.XtraReports.Parameters.Parameter();
+            this.Subreport_Conducta = new DevExpress.XtraReports.UI.XRSubreport();
+            this.Cualitativa_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
+            this.Conducta_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
+            this.EquivalenciaRendimiento_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
@@ -1801,30 +1797,6 @@
             this.groupFooterBand1.Level = 1;
             this.groupFooterBand1.Name = "groupFooterBand1";
             // 
-            // Subreport_Conducta
-            // 
-            this.Subreport_Conducta.LocationFloat = new DevExpress.Utils.PointFloat(500F, 30F);
-            this.Subreport_Conducta.Name = "Subreport_Conducta";
-            this.Subreport_Conducta.ReportSource = new Core.Web.Reportes.Academico.ACA_014_EquivalenciaConducta_Rpt();
-            this.Subreport_Conducta.SizeF = new System.Drawing.SizeF(359.9999F, 10F);
-            this.Subreport_Conducta.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Subreport_Conducta_BeforePrint);
-            // 
-            // Cualitativa_Subreporte
-            // 
-            this.Cualitativa_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(919.9999F, 30F);
-            this.Cualitativa_Subreporte.Name = "Cualitativa_Subreporte";
-            this.Cualitativa_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_CalificacionCualitativa_Rpt();
-            this.Cualitativa_Subreporte.SizeF = new System.Drawing.SizeF(209F, 10F);
-            this.Cualitativa_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Cualitativa_Subreporte_BeforePrint);
-            // 
-            // Conducta_Subreporte
-            // 
-            this.Conducta_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(0F, 18F);
-            this.Conducta_Subreporte.Name = "Conducta_Subreporte";
-            this.Conducta_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_Conducta_Rpt();
-            this.Conducta_Subreporte.SizeF = new System.Drawing.SizeF(1129F, 10F);
-            this.Conducta_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport2_BeforePrint_1);
-            // 
             // xrTable5
             // 
             this.xrTable5.Font = new System.Drawing.Font("Verdana", 8F);
@@ -1878,7 +1850,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell74.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumAvg([PromedioFinalQ1])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PromedioGeneralQ1]")});
             this.xrTableCell74.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell74.Multiline = true;
             this.xrTableCell74.Name = "xrTableCell74";
@@ -1887,8 +1859,6 @@
             this.xrTableCell74.StylePriority.UseFont = false;
             this.xrTableCell74.StylePriority.UsePadding = false;
             this.xrTableCell74.StylePriority.UseTextAlignment = false;
-            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
-            this.xrTableCell74.Summary = xrSummary1;
             this.xrTableCell74.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell74.TextFormatString = "{0:n2}";
             this.xrTableCell74.Weight = 0.13792912028256993D;
@@ -1915,7 +1885,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell100.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(?p_IdCatalogoParcial==7, sumAvg([PromedioFinalQ2]),\'\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PromedioGeneralQ2]")});
             this.xrTableCell100.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell100.Multiline = true;
             this.xrTableCell100.Name = "xrTableCell100";
@@ -1924,8 +1894,6 @@
             this.xrTableCell100.StylePriority.UseFont = false;
             this.xrTableCell100.StylePriority.UsePadding = false;
             this.xrTableCell100.StylePriority.UseTextAlignment = false;
-            xrSummary2.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
-            this.xrTableCell100.Summary = xrSummary2;
             this.xrTableCell100.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell100.TextFormatString = "{0:n2}";
             this.xrTableCell100.Weight = 0.13792912143701197D;
@@ -1952,7 +1920,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell102.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(?p_IdCatalogoParcial==7,sumAvg([PromedioQuimestralFinal]),\'\' )")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PromedioGeneralQuim]")});
             this.xrTableCell102.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell102.Multiline = true;
             this.xrTableCell102.Name = "xrTableCell102";
@@ -1961,8 +1929,6 @@
             this.xrTableCell102.StylePriority.UseFont = false;
             this.xrTableCell102.StylePriority.UsePadding = false;
             this.xrTableCell102.StylePriority.UseTextAlignment = false;
-            xrSummary3.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
-            this.xrTableCell102.Summary = xrSummary3;
             this.xrTableCell102.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell102.TextFormatString = "{0:n2}";
             this.xrTableCell102.Weight = 0.13792912070851598D;
@@ -1989,7 +1955,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell108.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(?p_IdCatalogoParcial==7,sumAvg([PromedioFinal]),\'\' )")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PromedioGeneralFinal]")});
             this.xrTableCell108.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell108.Multiline = true;
             this.xrTableCell108.Name = "xrTableCell108";
@@ -1998,8 +1964,6 @@
             this.xrTableCell108.StylePriority.UseFont = false;
             this.xrTableCell108.StylePriority.UsePadding = false;
             this.xrTableCell108.StylePriority.UseTextAlignment = false;
-            xrSummary4.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
-            this.xrTableCell108.Summary = xrSummary4;
             this.xrTableCell108.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell108.TextFormatString = "{0:n2}";
             this.xrTableCell108.Weight = 0.13333202099692909D;
@@ -2148,14 +2112,6 @@
             this.xrTableCell64.StylePriority.UseBorders = false;
             this.xrTableCell64.Weight = 6.6755542587787176D;
             // 
-            // EquivalenciaRendimiento_Subreporte
-            // 
-            this.EquivalenciaRendimiento_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(0F, 30F);
-            this.EquivalenciaRendimiento_Subreporte.Name = "EquivalenciaRendimiento_Subreporte";
-            this.EquivalenciaRendimiento_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_Equivalencia_Rpt();
-            this.EquivalenciaRendimiento_Subreporte.SizeF = new System.Drawing.SizeF(410F, 10F);
-            this.EquivalenciaRendimiento_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint_1);
-            // 
             // p_IdMatricula
             // 
             this.p_IdMatricula.Name = "p_IdMatricula";
@@ -2166,11 +2122,6 @@
             this.p_IdCatalogoParcial.Name = "p_IdCatalogoParcial";
             this.p_IdCatalogoParcial.Visible = false;
             // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_014_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
-            // 
             // p_IdAlumno
             // 
             this.p_IdAlumno.Name = "p_IdAlumno";
@@ -2180,6 +2131,43 @@
             // 
             this.p_MostrarRetirados.Name = "p_MostrarRetirados";
             this.p_MostrarRetirados.Visible = false;
+            // 
+            // Subreport_Conducta
+            // 
+            this.Subreport_Conducta.LocationFloat = new DevExpress.Utils.PointFloat(500F, 30F);
+            this.Subreport_Conducta.Name = "Subreport_Conducta";
+            this.Subreport_Conducta.ReportSource = new Core.Web.Reportes.Academico.ACA_014_EquivalenciaConducta_Rpt();
+            this.Subreport_Conducta.SizeF = new System.Drawing.SizeF(359.9999F, 10F);
+            this.Subreport_Conducta.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Subreport_Conducta_BeforePrint);
+            // 
+            // Cualitativa_Subreporte
+            // 
+            this.Cualitativa_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(919.9999F, 30F);
+            this.Cualitativa_Subreporte.Name = "Cualitativa_Subreporte";
+            this.Cualitativa_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_CalificacionCualitativa_Rpt();
+            this.Cualitativa_Subreporte.SizeF = new System.Drawing.SizeF(209F, 10F);
+            this.Cualitativa_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Cualitativa_Subreporte_BeforePrint);
+            // 
+            // Conducta_Subreporte
+            // 
+            this.Conducta_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(0F, 18F);
+            this.Conducta_Subreporte.Name = "Conducta_Subreporte";
+            this.Conducta_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_Conducta_Rpt();
+            this.Conducta_Subreporte.SizeF = new System.Drawing.SizeF(1129F, 10F);
+            this.Conducta_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport2_BeforePrint_1);
+            // 
+            // EquivalenciaRendimiento_Subreporte
+            // 
+            this.EquivalenciaRendimiento_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(0F, 30F);
+            this.EquivalenciaRendimiento_Subreporte.Name = "EquivalenciaRendimiento_Subreporte";
+            this.EquivalenciaRendimiento_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_Equivalencia_Rpt();
+            this.EquivalenciaRendimiento_Subreporte.SizeF = new System.Drawing.SizeF(410F, 10F);
+            this.EquivalenciaRendimiento_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint_1);
+            // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_014_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // ACA_014_Rpt
             // 

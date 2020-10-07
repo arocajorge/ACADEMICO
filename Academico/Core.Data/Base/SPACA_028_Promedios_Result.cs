@@ -35,10 +35,14 @@ namespace Core.Data.Base
         public Nullable<int> OrdenParalelo { get; set; }
         public string NombreProfesor { get; set; }
         public string NomMateria { get; set; }
-        public int OrdenMateria { get; set; }
-        public Nullable<decimal> Quim1 { get; set; }
-        public Nullable<decimal> EXQuim1 { get; set; }
-        public Nullable<decimal> Quim2 { get; set; }
-        public Nullable<decimal> EXQuim2 { get; set; }
+        public Nullable<int> OrdenMateriaGrupo { get; set; }
+        public Nullable<int> OrdenMateria { get; set; }
+        public Nullable<int> IdCatalogoTipoCalificacion { get; set; }
+        public string Quim1 { get; set; }
+        public string PorcentajeQuim1 { get; set; }
+        public string EXQuim1 { get; set; }
+        public string Quim2 { get; set; }
+        public string PorcentajeQuim2 { get; set; }
+        public string EXQuim2 { get; set; }
     }
 }

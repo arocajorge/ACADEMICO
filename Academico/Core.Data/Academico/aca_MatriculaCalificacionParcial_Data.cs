@@ -455,6 +455,11 @@ namespace Core.Data.Academico
                                 EntityCalificacionPromedio.IdEquivalenciaPromedioQ1 = (info_equivalencia==null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
                             }
                         }
+                        else
+                        {
+                            EntityCalificacionPromedio.PromedioFinalQ1 = null;
+                            EntityCalificacionPromedio.IdEquivalenciaPromedioQ1 = null;
+                        }
                     }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5) || info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
@@ -502,6 +507,11 @@ namespace Core.Data.Academico
                                 EntityCalificacionPromedio.PromedioFinalQ2 = PromedioFinalQ2;
                                 EntityCalificacionPromedio.IdEquivalenciaPromedioQ2 = (info_equivalencia == null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
                             }
+                        }
+                        else
+                        {
+                            EntityCalificacionPromedio.PromedioFinalQ2 = null;
+                            EntityCalificacionPromedio.IdEquivalenciaPromedioQ2 = null;
                         }
                     }
 

@@ -74,5 +74,16 @@ namespace Core.Info.Reportes.Academico
         public string PromedioFinal { get; set; }
         public Nullable<int> IdEquivalenciaPromedioPF { get; set; }
         public string EquivalenciaPromedioPF { get; set; }
+
+        #region Campos que no existen
+        public string PromedioGeneralQ1 { get; set; }
+        public string PromedioGeneralQ2 { get; set; }
+        public string PromedioGeneralQuim { get; set; }
+        public string PromedioGeneralFinal { get; set; }
+        public int CantQ1 { get; set; }
+        public int CantQ2 { get; set; }
+        public int CantQuim { get; set; }
+        public int CantFinal { get; set; }
+        #endregion
     }
 }

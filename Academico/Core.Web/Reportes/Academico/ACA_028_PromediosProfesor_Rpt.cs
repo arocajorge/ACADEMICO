@@ -6,6 +6,8 @@ using DevExpress.XtraReports.UI;
 using Core.Bus.Reportes.Academico;
 using Core.Info.Reportes.Academico;
 using System.Collections.Generic;
+using Core.Info.Helps;
+using System.Linq;
 
 namespace Core.Web.Reportes.Academico
 {
@@ -29,7 +31,32 @@ namespace Core.Web.Reportes.Academico
             ACA_028_Promedios_Bus bus_rpt = new ACA_028_Promedios_Bus();
             List<ACA_028_Promedios_Info> lst_rpt = new List<ACA_028_Promedios_Info>();
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoTipo);
+            var lst_cuantitativas = lst_rpt.Where(q=>q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
+            decimal SumaPromedio = 0;
+            var PromedioGeneral = "";
+            var cont = 0;
+            foreach (var item in lst_cuantitativas)
+            {
+                if(string.IsNullOrEmpty(item.PromedioQuimestre))
+                {
+                    cont++;
+                }
+                else
+                {
+                    SumaPromedio = SumaPromedio + Convert.ToDecimal(item.PromedioQuimestre);
+                }
+            }
 
+            if (cont == 0)
+            {
+                if (lst_cuantitativas.Count() >0)
+                {
+                    decimal Calculo = Math.Round(Convert.ToDecimal(SumaPromedio / lst_cuantitativas.Count()), 2, MidpointRounding.AwayFromZero);
+                    PromedioGeneral = Convert.ToString(Calculo);
+                }
+            }
+
+            Promedio.Text = PromedioGeneral;
             this.DataSource = lst_rpt;
         }
     }

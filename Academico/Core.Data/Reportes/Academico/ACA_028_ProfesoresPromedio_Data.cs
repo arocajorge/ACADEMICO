@@ -45,6 +45,7 @@ namespace Core.Data.Reportes.Academico
                             IdProfesor = q.IdProfesor,
                             NombreProfesor=q.NombreProfesor,
                             NomMateria=q.NomMateria,
+                            OrdenMateriaGrupo=q.OrdenMateriaGrupo,
                             OrdenMateria = q.OrdenMateria,
                             Descripcion = q.Descripcion,
                             EXQuim1 = q.EXQuim1,
@@ -53,12 +54,11 @@ namespace Core.Data.Reportes.Academico
                             Quim2 = q.Quim2,
                             IdMateria=q.IdMateria,
                             PromedioExamen = (IdCatalogoTipo== Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ?  q.EXQuim1 : (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EXQuim2 : null) ),
-                            PromedioQuimestre = (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.Quim1 : (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.Quim2 : null) )
-
+                            PromedioQuimestre = (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.Quim1 : (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.Quim2 : null) ),
+                            PorcentajePromedio = (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.PorcentajeQuim1 : (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PorcentajeQuim2 : null))
                         });
                     }
                 }
-
                 return Lista;
             }
             catch (Exception ex)

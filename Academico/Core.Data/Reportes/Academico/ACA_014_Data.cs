@@ -96,6 +96,102 @@ namespace Core.Data.Reportes.Academico
                     }
                 }
 
+                var ListaAgrupadaXMatricula = (from q in Lista
+                                group q by new
+                                {
+                                    q.IdEmpresa,
+                                    q.IdMatricula,
+                                    q.IdMateria,
+                                    q.IdCatalogoTipoCalificacion,
+                                    q.PromedioFinalQ1,
+                                    q.PromedioFinalQ2,
+                                    q.PromedioQuimestralFinal,
+                                    q.PromedioFinal
+                                } into a
+                                select new ACA_014_Info
+                                {
+                                    IdEmpresa = a.Key.IdEmpresa,
+                                    IdMatricula = a.Key.IdMatricula,
+                                    IdMateria = a.Key.IdMateria,
+                                    IdCatalogoTipoCalificacion = a.Key.IdCatalogoTipoCalificacion,
+                                    PromedioFinalQ1 = a.Key.PromedioFinalQ1,
+                                    PromedioFinalQ2 = a.Key.PromedioFinalQ2,
+                                    PromedioQuimestralFinal = a.Key.PromedioQuimestralFinal,
+                                    PromedioFinal = a.Key.PromedioFinal,
+                                }).ToList();
+
+                var lst_cuantitativas = ListaAgrupadaXMatricula.Where(q => q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
+                decimal SumaPromedioQ1 = 0;
+                decimal SumaPromedioQ2 = 0;
+                decimal SumaPromedioQuim = 0;
+                decimal SumaPromedioFinal = 0;
+                var PromedioGeneralQ1 = "";
+                var PromedioGeneralQ2 = "";
+                var PromedioGeneralQuim = "";
+                var PromedioGeneralFinal = "";
+                var contQ1 = 0;
+                var contQ2 = 0;
+                var contQuim = 0;
+                var contFinal = 0;
+
+                foreach (var item in lst_cuantitativas)
+                {
+                    if (string.IsNullOrEmpty(item.PromedioFinalQ1))
+                    {
+                        contQ1++;
+                    }
+
+                    if (string.IsNullOrEmpty(item.PromedioFinalQ2))
+                    {
+                        contQ2++;
+                    }
+
+                    if (string.IsNullOrEmpty(item.PromedioQuimestralFinal))
+                    {
+                        contQuim++;
+                    }
+
+                    if (string.IsNullOrEmpty(item.PromedioFinal))
+                    {
+                        contFinal++;
+                    }
+
+                    item.CantQ1 = contQ1;
+                    item.CantQ2 = contQ2;
+                    item.CantQuim = contQuim;
+                    item.CantFinal = contFinal;
+                }
+
+                foreach (var item in lst_cuantitativas)
+                {
+                    if (contQ1 == 0)
+                    {
+                        decimal CalculoQ1 = Math.Round(Convert.ToDecimal(SumaPromedioQ1 / lst_cuantitativas.Count()), 2, MidpointRounding.AwayFromZero);
+                        PromedioGeneralQ1 = Convert.ToString(CalculoQ1);
+                    }
+
+                    if (contQ2 == 0)
+                    {
+                        decimal CalculoQ2 = Math.Round(Convert.ToDecimal(SumaPromedioQ2 / lst_cuantitativas.Count()), 2, MidpointRounding.AwayFromZero);
+                        PromedioGeneralQ2 = Convert.ToString(CalculoQ2);
+                    }
+
+                    if (contQuim == 0)
+                    {
+                        decimal CalculoQuim = Math.Round(Convert.ToDecimal(SumaPromedioQ2 / lst_cuantitativas.Count()), 2, MidpointRounding.AwayFromZero);
+                        PromedioGeneralQuim = Convert.ToString(CalculoQuim);
+                    }
+
+                    if (contFinal == 0)
+                    {
+                        decimal CalculoFinal = Math.Round(Convert.ToDecimal(SumaPromedioQ1 / lst_cuantitativas.Count()), 2, MidpointRounding.AwayFromZero);
+                        PromedioGeneralFinal = Convert.ToString(CalculoFinal);
+                    }
+
+                    Lista.ForEach(q => { q.PromedioGeneralQ1 = PromedioGeneralQ1; q.PromedioGeneralQ2 = PromedioGeneralQ2; q.PromedioGeneralQuim = PromedioGeneralQuim; q.PromedioGeneralFinal = PromedioGeneralFinal; });
+                }
+
+
                 return Lista;
             }
             catch (Exception ex)

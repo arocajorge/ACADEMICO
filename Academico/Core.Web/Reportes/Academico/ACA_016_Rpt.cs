@@ -7,6 +7,7 @@ using Core.Bus.General;
 using Core.Info.Reportes.Academico;
 using Core.Bus.Reportes.Academico;
 using System.Collections.Generic;
+using Core.Bus.Academico;
 
 namespace Core.Web.Reportes.Academico
 {
@@ -50,6 +51,13 @@ namespace Core.Web.Reportes.Academico
             lst_rpt = bus_rpt.get_list(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial);
 
             this.DataSource = lst_rpt;
+
+            aca_Sede_Bus bus_sede = new aca_Sede_Bus();
+            var sede = bus_sede.GetInfo(IdEmpresa, IdSede);
+            if (sede != null)
+            {
+                lbl_secretaria.Text = sede.NombreSecretaria;
+            }
         }
     }
 }

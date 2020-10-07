@@ -54,9 +54,9 @@
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_IdCatalogoTipo = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource3 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.Promedio = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -142,7 +142,7 @@
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.StylePriority.UseFont = false;
             this.xrTableCell5.StylePriority.UseTextAlignment = false;
-            this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell5.TextFormatString = "{0:n2}";
             this.xrTableCell5.Weight = 0.13315567307462881D;
             // 
@@ -250,6 +250,7 @@
             // PageFooter
             // 
             this.PageFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.Promedio,
             this.xrTable2});
             this.PageFooter.HeightF = 20F;
             this.PageFooter.Name = "PageFooter";
@@ -264,7 +265,7 @@
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(750.9999F, 20F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(650.9999F, 20F);
             this.xrTable2.StylePriority.UseBorders = false;
             this.xrTable2.StylePriority.UseTextAlignment = false;
             this.xrTable2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleJustify;
@@ -272,8 +273,7 @@
             // xrTableRow2
             // 
             this.xrTableRow2.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell2,
-            this.xrTableCell7});
+            this.xrTableCell2});
             this.xrTableRow2.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTableRow2.Name = "xrTableRow2";
             this.xrTableRow2.StylePriority.UseFont = false;
@@ -292,19 +292,6 @@
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell2.Weight = 0.86684436770714912D;
             // 
-            // xrTableCell7
-            // 
-            this.xrTableCell7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Avg([PromedioQuimestre])")});
-            this.xrTableCell7.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrTableCell7.Multiline = true;
-            this.xrTableCell7.Name = "xrTableCell7";
-            this.xrTableCell7.StylePriority.UseFont = false;
-            this.xrTableCell7.StylePriority.UseTextAlignment = false;
-            this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell7.TextFormatString = "{0:n2}";
-            this.xrTableCell7.Weight = 0.13315571371055834D;
-            // 
             // p_IdCatalogoTipo
             // 
             this.p_IdCatalogoTipo.Name = "p_IdCatalogoTipo";
@@ -314,6 +301,22 @@
             // 
             this.objectDataSource3.DataSource = typeof(Core.Info.Reportes.Academico.ACA_028_Promedios_Info);
             this.objectDataSource3.Name = "objectDataSource3";
+            // 
+            // Promedio
+            // 
+            this.Promedio.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.Promedio.Font = new System.Drawing.Font("Verdana", 7F, System.Drawing.FontStyle.Bold);
+            this.Promedio.LocationFloat = new DevExpress.Utils.PointFloat(650.9999F, 0F);
+            this.Promedio.Multiline = true;
+            this.Promedio.Name = "Promedio";
+            this.Promedio.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.Promedio.SizeF = new System.Drawing.SizeF(100F, 20F);
+            this.Promedio.StylePriority.UseBorders = false;
+            this.Promedio.StylePriority.UseFont = false;
+            this.Promedio.StylePriority.UseTextAlignment = false;
+            this.Promedio.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // ACA_028_PromediosProfesor_Rpt
             // 
@@ -326,7 +329,7 @@
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.objectDataSource3});
             this.DataSource = this.objectDataSource3;
-            this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
             this.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
             this.PageHeight = 1169;
             this.PageWidth = 751;
@@ -340,7 +343,7 @@
             this.p_IdCurso,
             this.p_IdParalelo,
             this.p_IdCatalogoTipo});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_028_PromediosProfesor_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
@@ -377,8 +380,8 @@
         private DevExpress.XtraReports.UI.XRTable xrTable2;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow2;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell2;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
         public DevExpress.XtraReports.Parameters.Parameter p_IdCatalogoTipo;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource3;
+        private DevExpress.XtraReports.UI.XRLabel Promedio;
     }
 }

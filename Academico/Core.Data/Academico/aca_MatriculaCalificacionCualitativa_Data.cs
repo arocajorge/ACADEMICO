@@ -429,7 +429,7 @@ namespace Core.Data.Academico
                         {
                             Promedio = SumaPromedio / count_calificaciones;
                             var info_equivalencia = odata_equivalencia.getInfo_x_Promedio( info.IdEmpresa,info.IdAnio,Promedio);
-                            EntityCalificacionPromedio.PromedioQ1 = Promedio;
+                            EntityCalificacionPromedio.PromedioQ1 = (info_equivalencia == null ? (int?)null : info_equivalencia.Calificacion);
                             EntityCalificacionPromedio.IdCalificacionCualitativaQ1 = (info_equivalencia == null ? (int?)null : info_equivalencia.IdCalificacionCualitativa);
                         }
 
@@ -463,15 +463,15 @@ namespace Core.Data.Academico
                         {
                             Promedio = SumaPromedio / count_calificaciones;
                             var info_equivalencia = odata_equivalencia.getInfo_x_Promedio(info.IdEmpresa, info.IdAnio, Promedio);
-                            EntityCalificacionPromedio.PromedioQ2 = Promedio;
+                            EntityCalificacionPromedio.PromedioQ2 = (info_equivalencia == null ? (int?)null : info_equivalencia.Calificacion); ;
                             EntityCalificacionPromedio.IdCalificacionCualitativaQ2 = (info_equivalencia == null ? (int?)null : info_equivalencia.IdCalificacionCualitativa);
                         }
 
                         if (EntityCalificacionPromedio.PromedioQ1 != null && EntityCalificacionPromedio.PromedioQ2 != null)
                         {
                             PromedioFinal = Convert.ToDecimal((EntityCalificacionPromedio.PromedioQ1 + EntityCalificacionPromedio.PromedioQ2) / 2);
-                            EntityCalificacionPromedio.PromedioFinal = PromedioFinal;
-                            var info_equivalencia_pf = odata_equivalencia.getInfo_x_Promedio(info.IdEmpresa, info.IdAnio, Promedio);
+                            var info_equivalencia_pf = odata_equivalencia.getInfo_x_Promedio(info.IdEmpresa, info.IdAnio, PromedioFinal);
+                            EntityCalificacionPromedio.PromedioFinal = (info_equivalencia_pf == null ? (int?)null : info_equivalencia_pf.Calificacion); ;
                             EntityCalificacionPromedio.IdCalificacionCualitativaFinal = (info_equivalencia_pf == null ? (int?)null : info_equivalencia_pf.IdCalificacionCualitativa);
                         }
                         Context.SaveChanges();

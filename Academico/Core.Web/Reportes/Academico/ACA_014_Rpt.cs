@@ -7,6 +7,8 @@ using Core.Bus.Reportes.Academico;
 using System.Collections.Generic;
 using Core.Info.Reportes.Academico;
 using Core.Bus.General;
+using System.Linq;
+using Core.Info.Helps;
 
 namespace Core.Web.Reportes.Academico
 {
@@ -49,8 +51,8 @@ namespace Core.Web.Reportes.Academico
             ACA_014_Bus bus_rpt = new ACA_014_Bus();
             List<ACA_014_Info> lst_rpt = new List<ACA_014_Info>();
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial, IdAlumno, MostrarRetirados);
-
             this.DataSource = lst_rpt;
+
         }
 
         private void xrSubreport2_BeforePrint_1(object sender, System.Drawing.Printing.PrintEventArgs e)

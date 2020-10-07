@@ -128,20 +128,18 @@
             this.xrTableCell4.StylePriority.UseFont = false;
             this.xrTableCell4.StylePriority.UseTextAlignment = false;
             this.xrTableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell4.TextFormatString = "{0:n2}";
             this.xrTableCell4.Weight = 0.13315583291288852D;
             // 
             // xrTableCell5
             // 
             this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PromedioQuimestre]*0.10")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PorcentajePromedio]")});
             this.xrTableCell5.Font = new System.Drawing.Font("Verdana", 7F);
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.StylePriority.UseFont = false;
             this.xrTableCell5.StylePriority.UseTextAlignment = false;
             this.xrTableCell5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell5.TextFormatString = "{0:0.00%}";
             this.xrTableCell5.Weight = 0.13315581530038198D;
             // 
             // xrTableCell6
@@ -154,7 +152,6 @@
             this.xrTableCell6.StylePriority.UseFont = false;
             this.xrTableCell6.StylePriority.UseTextAlignment = false;
             this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell6.TextFormatString = "{0:n2}";
             this.xrTableCell6.Weight = 0.17310239682463929D;
             // 
             // PageHeader
@@ -304,7 +301,7 @@
             this.p_IdCurso,
             this.p_IdParalelo,
             this.p_IdCatalogoTipo});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_028_Promedios_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
