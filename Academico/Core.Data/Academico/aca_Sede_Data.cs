@@ -31,6 +31,9 @@ namespace Core.Data.Academico
                             NomSede = q.NomSede,
                             Direccion = q.Direccion,
                             NombreRector = q.NombreRector,
+                            TelefonoRector = q.TelefonoRector,
+                            CelularRector=q.CelularRector,
+                            CorreoRector = q.CorreoRector,
                             NombreSecretaria = q.NombreSecretaria,
                             Estado = q.Estado
                         });
@@ -96,6 +99,9 @@ namespace Core.Data.Academico
                         Direccion = Entity.Direccion,
                         NombreRector = Entity.NombreRector,
                         NombreSecretaria = Entity.NombreSecretaria,
+                        TelefonoRector = Entity.TelefonoRector,
+                        CelularRector = Entity.CelularRector,
+                        CorreoRector = Entity.CorreoRector,
                         Estado = Entity.Estado
                     };
                 }
@@ -130,6 +136,9 @@ namespace Core.Data.Academico
                             Direccion = q.Direccion,
                             NombreRector = q.NombreRector,
                             NombreSecretaria = q.NombreSecretaria,
+                            TelefonoRector = q.TelefonoRector,
+                            CelularRector = q.CelularRector,
+                            CorreoRector = q.CorreoRector,
                             Estado = q.Estado
                         });
                     });
@@ -245,6 +254,9 @@ namespace Core.Data.Academico
                         IdSede = info.IdSede = get_id(info.IdEmpresa),
                         NomSede = info.NomSede,
                         NombreRector = info.NombreRector,
+                        TelefonoRector = info.TelefonoRector,
+                        CelularRector = info.CelularRector,
+                        CorreoRector = info.CorreoRector,
                         NombreSecretaria = info.NombreSecretaria,
                         Direccion = info.Direccion,
                         Estado = true,
@@ -277,6 +289,9 @@ namespace Core.Data.Academico
                     Entity.IdSucursal = info.IdSucursal;
                     Entity.NomSede = info.NomSede;
                     Entity.NombreRector = info.NombreRector;
+                    Entity.TelefonoRector = info.TelefonoRector;
+                    Entity.CelularRector = info.CelularRector;
+                    Entity.CorreoRector = info.CorreoRector;
                     Entity.NombreSecretaria = info.NombreSecretaria;
                     Entity.Direccion = info.Direccion;
 

@@ -331,6 +331,8 @@
     <Compile Include="Reportes\Academico\ACA_033_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_034_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_035_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_045_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_044_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_043_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_042_Pagos_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_042_Info.cs" />

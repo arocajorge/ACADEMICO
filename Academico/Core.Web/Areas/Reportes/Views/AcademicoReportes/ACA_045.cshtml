@@ -1,13 +1,13 @@
 ﻿@model Core.Info.Academico.aca_MatriculaCalificacionParcial_Info
 @{
-    ViewBag.Title = "Reporte de aprobación de participación estudiantil";
+    ViewBag.Title = "Certificado bachiller";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
 }
-@using (Html.BeginForm("ACA_043", "AcademicoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("ACA_045", "AcademicoReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa)
     <div class="box">
@@ -76,7 +76,7 @@
                             @*@Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
-                    <div class="col-md-5" hidden>
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="IdEmpresa">Alumno</label>
                             @Html.Partial("_ComboBoxPartial_Alumno", Model)

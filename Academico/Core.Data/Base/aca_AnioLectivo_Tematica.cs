@@ -27,8 +27,8 @@ namespace Core.Data.Base
         public string IdUsuarioModificacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
     
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_CampoAccion aca_CampoAccion { get; set; }
         public virtual aca_Tematica aca_Tematica { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

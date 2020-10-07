@@ -19,6 +19,9 @@ namespace Core.Info.Academico
         public string NomSede { get; set; }
         public string Direccion { get; set; }
         public string NombreRector { get; set; }
+        public string TelefonoRector { get; set; }
+        public string CelularRector { get; set; }
+        public string CorreoRector { get; set; }
         public string NombreSecretaria { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
