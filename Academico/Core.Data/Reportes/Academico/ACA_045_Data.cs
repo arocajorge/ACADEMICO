@@ -11,30 +11,35 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_043_Data
+    public class ACA_045_Data
     {
         aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
-        public List<ACA_043_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, bool MostrarRetirados)
+        public List<ACA_045_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, bool MostrarRetirados)
         {
             try
             {
-                List<ACA_043_Info> Lista = new List<ACA_043_Info>();
+                decimal IdAlumnoIni = IdAlumno;
+                decimal IdAlumnoFin = IdAlumno == 0 ? 9999999 : IdAlumno;
 
+                List<ACA_045_Info> Lista = new List<ACA_045_Info>();
+                List<ACA_045_Info> ListaFinal = new List<ACA_045_Info>();
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, a.Codigo, p.pe_nombreCompleto AS Nombrealumno, s.NombreRector, s.TelefonoRector, s.CelularRector, s.CorreoRector,  "
-                    + " jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, dbo.aca_Sede.NomSede "
-                    + " FROM     dbo.aca_Matricula AS m INNER JOIN "
-                    + " dbo.aca_Sede ON m.IdEmpresa = dbo.aca_Sede.IdEmpresa AND m.IdSede = dbo.aca_Sede.IdSede LEFT OUTER JOIN "
+                    string query = "SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, "
+                    + " a.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, al.Codigo,  "
+                    + " dbo.tb_persona.pe_nombreCompleto NombreAlumno, a.IdCursoBachiller, m.IdCatalogoESTMAT "
+                    + " FROM     dbo.aca_Matricula AS m LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON m.IdEmpresa = jc.IdEmpresa AND m.IdAnio = jc.IdAnio AND m.IdSede = jc.IdSede AND m.IdNivel = jc.IdNivel AND m.IdJornada = jc.IdJornada AND m.IdCurso = jc.IdCurso LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
                     + " m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
-                    + " dbo.aca_Sede AS s ON m.IdEmpresa = s.IdEmpresa AND m.IdSede = s.IdSede LEFT OUTER JOIN "
-                    + " dbo.aca_Alumno AS a ON m.IdAlumno = a.IdAlumno AND m.IdEmpresa = a.IdEmpresa LEFT OUTER JOIN "
-                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.tb_persona INNER JOIN "
+                    + " dbo.aca_Alumno AS al ON dbo.tb_persona.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno "
                     + " LEFT OUTER JOIN(select r.IdEmpresa, r.IdMatricula  from aca_AlumnoRetiro as r where r.Estado = 1  ) as ret "
                     + " on m.IdEmpresa = ret.IdEmpresa and m.IdMatricula = ret.IdMatricula "
                     + " WHERE "
@@ -45,7 +50,8 @@ namespace Core.Data.Reportes.Academico
                     + " and m.IdNivel = " + IdNivel.ToString()
                     + " and m.IdCurso = " + IdCurso.ToString()
                     + " and m.IdParalelo = " + IdParalelo.ToString()
-                    + " and(a.Estado = 1) "
+                    + " and m.IdAlumno between " + IdAlumnoIni.ToString() + " and " + IdAlumnoFin.ToString()
+                    + " and(a.Estado = 1) AND(al.Estado = 1) "
                     + " and isnull(ret.IdMatricula, 0) = case when " + (MostrarRetirados == false ? 0 : 1) + " = 1 then isnull(ret.IdMatricula, 0) else 0 end ";
                     #endregion
 
@@ -53,7 +59,7 @@ namespace Core.Data.Reportes.Academico
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Lista.Add(new ACA_043_Info
+                        Lista.Add(new ACA_045_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             Codigo = reader["Codigo"].ToString(),
@@ -68,16 +74,26 @@ namespace Core.Data.Reportes.Academico
                             IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
                             Descripcion = reader["Descripcion"].ToString(),
                             NomSede = reader["NomSede"].ToString(),
+                            NomNivel = reader["NomNivel"].ToString(),
+                            NomJornada = reader["NomJornada"].ToString(),
                             NomCurso = reader["NomCurso"].ToString(),
                             NomParalelo = reader["NomParalelo"].ToString(),
+                            OrdenNivel = Convert.ToInt32(reader["OrdenNivel"]),
+                            OrdenJornada = Convert.ToInt32(reader["OrdenJornada"]),
                             OrdenCurso = Convert.ToInt32(reader["OrdenCurso"]),
-                            OrdenParalelo = Convert.ToInt32(reader["OrdenParalelo"])
+                            OrdenParalelo = Convert.ToInt32(reader["OrdenParalelo"]),
+                            IdCatalogoESTMAT = Convert.ToInt32(reader["IdCatalogoESTMAT"]),
+                            FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy")
                         });
                     }
                     reader.Close();
                 }
 
-                return Lista;
+                var IdCatalogoEstado = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.APROBADO);
+                var info_anio = odata_anio.getInfo(IdEmpresa,IdAnio);
+                ListaFinal = Lista.Where(q=>q.IdAnio==info_anio.IdCursoBachiller && q.IdCatalogoESTMAT == Convert.ToInt32(IdCatalogoEstado)).ToList();
+
+                return ListaFinal;
             }
             catch (Exception ex)
             {

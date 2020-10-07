@@ -69,6 +69,35 @@
                     @Html.ValidationMessageFor(m => m.NombreRector, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Secretaria">Teléfono Rector</label>
+                    @Html.TextBoxFor(q => q.TelefonoRector, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.TelefonoRector, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="Secretaria">Celular Rector</label>
+                    @Html.TextBoxFor(q => q.CelularRector, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CelularRector, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="Rector">Correo Rector</label>
+                    @Html.TextBoxFor(q => q.CorreoRector, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CorreoRector, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="Secretaria">Secretaria</label>

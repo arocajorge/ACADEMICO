@@ -621,16 +621,19 @@ namespace Core.Web.Areas.Academico.Controllers
                 var Lista_Calificaciones = Lista_CalificacionParticipacion.get_list(model.IdTransaccionSession);
                 var Lista_CalificacionesGuardar = new List<aca_MatriculaCalificacionParticipacion_Info>();
 
-                foreach (var item in Lista_CalificacionesGuardar)
+                if (IdProfesor>0)
                 {
-                    if (!bus_calificacion_participacion.modificarDB(item))
+                    foreach (var item in Lista_Calificaciones)
                     {
-                        ViewBag.mensaje = "Error al importar el archivo";
-                        cargar_combos(model);
-                        return View(model);
+                        if (!bus_calificacion_participacion.modificarDB(item))
+                        {
+                            ViewBag.mensaje = "Error al importar el archivo";
+                            cargar_combos(model);
+                            return View(model);
+                        }
                     }
                 }
-
+                cargar_combos(model);
                 return View(model);
             }
             catch (Exception ex)
@@ -725,7 +728,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
             #region Variables
-            aca_MatriculaCalificacionParticipacion_List Lista_CalificacionParticipacion = new aca_MatriculaCalificacionParticipacion_List();
+            aca_MatriculaCalificacionParticipacion_Ingreso_List Lista_CalificacionParticipacion = new aca_MatriculaCalificacionParticipacion_Ingreso_List();
             List<aca_MatriculaCalificacionParticipacion_Info> Lista = new List<aca_MatriculaCalificacionParticipacion_Info>();
             aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
             aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
@@ -746,10 +749,11 @@ namespace Core.Web.Areas.Academico.Controllers
                     if (!reader.IsDBNull(1) && cont > 0)
                     {
                         var x = reader.GetValue(2);
+                        var y = reader.GetValue(3);
                         var IdMatricula = (Convert.ToDecimal(reader.GetValue(0)));
                         var pe_nombreCompleto = (Convert.ToString(reader.GetValue(1)).Trim());
-                        decimal? Calificacion1 = reader.GetValue(3) == null ? (decimal?)null : Convert.ToDecimal(reader.GetValue(2));
-                        decimal? Calificacion2 = reader.GetValue(4) == null ? (decimal?)null : (Convert.ToDecimal(reader.GetValue(3)));
+                        decimal? Calificacion1 = x== null ? (decimal?)null : Convert.ToDecimal(reader.GetValue(2));
+                        decimal? Calificacion2 = y == null ? (decimal?)null : (Convert.ToDecimal(reader.GetValue(3)));
                         var IdCatalogoParcialTipo = Convert.ToInt32(reader.GetValue(5));
                         var IdCampoAccion = Convert.ToInt32(reader.GetValue(6));
                         var IdTematica = Convert.ToInt32(reader.GetValue(7));

@@ -38,7 +38,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Menu_x_aca_Sede> aca_Menu_x_aca_Sede { get; set; }
         public virtual DbSet<aca_NivelAcademico> aca_NivelAcademico { get; set; }
         public virtual DbSet<aca_Paralelo> aca_Paralelo { get; set; }
-        public virtual DbSet<aca_Sede> aca_Sede { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Rubro> vwaca_AnioLectivo_Rubro { get; set; }
         public virtual DbSet<aca_AnioLectivo_Curso_Documento> aca_AnioLectivo_Curso_Documento { get; set; }
         public virtual DbSet<aca_Curso> aca_Curso { get; set; }
@@ -128,7 +127,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_AnioLectivo_Curso_Paralelo_Dece> aca_AnioLectivo_Curso_Paralelo_Dece { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Curso_Paralelo_Dece> vwaca_AnioLectivo_Curso_Paralelo_Dece { get; set; }
         public virtual DbSet<aca_Matricula> aca_Matricula { get; set; }
-        public virtual DbSet<aca_AnioLectivo> aca_AnioLectivo { get; set; }
         public virtual DbSet<aca_AnioLectivo_Tematica> aca_AnioLectivo_Tematica { get; set; }
         public virtual DbSet<aca_AnioLectivoCalificacionCualitativa> aca_AnioLectivoCalificacionCualitativa { get; set; }
         public virtual DbSet<aca_MatriculaCalificacionCualitativaPromedio> aca_MatriculaCalificacionCualitativaPromedio { get; set; }
@@ -136,6 +134,8 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Tematica> aca_Tematica { get; set; }
         public virtual DbSet<vwaca_Tematica> vwaca_Tematica { get; set; }
         public virtual DbSet<aca_MatriculaCalificacionParticipacion> aca_MatriculaCalificacionParticipacion { get; set; }
+        public virtual DbSet<aca_AnioLectivo> aca_AnioLectivo { get; set; }
+        public virtual DbSet<aca_Sede> aca_Sede { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

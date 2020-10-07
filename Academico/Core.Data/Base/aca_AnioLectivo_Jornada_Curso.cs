@@ -31,10 +31,10 @@ namespace Core.Data.Base
     
         public virtual aca_Jornada aca_Jornada { get; set; }
         public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
-        public virtual aca_Sede aca_Sede { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_AnioLectivo_Curso_Documento> aca_AnioLectivo_Curso_Documento { get; set; }
         public virtual aca_Curso aca_Curso { get; set; }
         public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
+        public virtual aca_Sede aca_Sede { get; set; }
     }
 }
