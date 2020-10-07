@@ -9372,12 +9372,9 @@
     <Content Include="Areas\Academico\Views\MatriculaCalificacionParticipacion\_GridViewPartial_MatriculaCalificacionParticipacionImportacion.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_044.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_045.cshtml" />
-<<<<<<< Updated upstream
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_014.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_015.cshtml" />
-=======
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_046.cshtml" />
->>>>>>> Stashed changes
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
