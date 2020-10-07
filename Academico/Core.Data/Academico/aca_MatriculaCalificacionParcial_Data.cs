@@ -457,6 +457,7 @@ namespace Core.Data.Academico
                         }
                         else
                         {
+                            EntityCalificacionPromedio.PromedioQ1 = null;
                             EntityCalificacionPromedio.PromedioFinalQ1 = null;
                             EntityCalificacionPromedio.IdEquivalenciaPromedioQ1 = null;
                         }
@@ -510,6 +511,7 @@ namespace Core.Data.Academico
                         }
                         else
                         {
+                            EntityCalificacionPromedio.PromedioQ2 = null;
                             EntityCalificacionPromedio.PromedioFinalQ2 = null;
                             EntityCalificacionPromedio.IdEquivalenciaPromedioQ2 = null;
                         }
