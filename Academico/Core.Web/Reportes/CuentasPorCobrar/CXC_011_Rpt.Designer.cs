@@ -1233,7 +1233,7 @@
             this.p_IdEmpresa,
             this.p_IdAlumno,
             this.p_IdSede});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.CXC_011_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).EndInit();
