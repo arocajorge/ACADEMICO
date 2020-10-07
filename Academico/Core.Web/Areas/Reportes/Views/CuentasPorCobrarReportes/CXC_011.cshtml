@@ -87,7 +87,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            [@Session["IdEmpresa"]] @Session["nom_empresa"]
+            [@Core.Web.Helps.SessionFixed.IdEmpresa] @Core.Web.Helps.SessionFixed.NomEmpresa
         </div>
         <!-- /.box-footer-->
     </div>
@@ -135,6 +135,7 @@
                 IdSede: $("#IdSede").val(),
                 IdAlumno: IdAlumno.GetValue(),
                 Correos: $("#Correos").val(),
+                CodigoCorreo: "CXC_011"
             }
             $.ajax({
                 type: 'POST',

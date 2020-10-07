@@ -51,5 +51,15 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             lblHeader.Text = lblHeader.Text.Replace("[REPRESENTANTE]", lst_rpt.Count > 0 ? lst_rpt[0].Representante : "");
             lblFooter.Text = lblFooter.Text.Replace("[CODIGO]", lst_rpt.Count > 0 ? lst_rpt[0].Codigo : "");
         }
+
+        private void ProntoPagoHasta_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
+
+        private void xrTableCell28_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
     }
 }

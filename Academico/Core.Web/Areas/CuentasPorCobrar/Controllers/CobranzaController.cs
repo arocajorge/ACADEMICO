@@ -897,16 +897,16 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             return Json(new { Saldo = Saldo, DatosAlumno = DatosAlumno, mensajeInfo = mensajeInfo },JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult EnviarCorreo(int IdEmpresa, int IdSede, decimal IdAlumno, string Correos)
+        public JsonResult EnviarCorreo(int IdEmpresa, int IdSede, decimal IdAlumno, string Correos,string CodigoCorreo)
         {
             string Mensaje = string.Empty;
-            var Codigo = busCorreoCodigo.GetInfo(IdEmpresa, "CXC_011");
+            var Codigo = busCorreoCodigo.GetInfo(IdEmpresa, CodigoCorreo);
             if (Codigo != null)
             {
                 busCorreo.GuardarDB(new tb_ColaCorreo_Info
                 {
                     IdEmpresa = IdEmpresa,
-                    Codigo = "CXC_011",
+                    Codigo = CodigoCorreo,
                     Destinatarios = Correos,
                     Asunto = Codigo.Asunto,
                     Cuerpo = Codigo.Cuerpo,
