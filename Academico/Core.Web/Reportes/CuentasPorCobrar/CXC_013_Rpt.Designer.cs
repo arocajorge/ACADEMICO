@@ -64,6 +64,7 @@
             this.xrTableCell25 = new DevExpress.XtraReports.UI.XRTableCell();
             this.lblHeader = new DevExpress.XtraReports.UI.XRLabel();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.lblFooter = new DevExpress.XtraReports.UI.XRRichText();
             this.xrTable9 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow21 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell36 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -94,15 +95,14 @@
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_FechaCorte = new DevExpress.XtraReports.Parameters.Parameter();
-            this.lblFooter = new DevExpress.XtraReports.UI.XRRichText();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblFooter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ValoresDesdeHasta)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblFooter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -454,7 +454,7 @@
             // 
             // lblHeader
             // 
-            this.lblHeader.Font = new System.Drawing.Font("Verdana", 9F);
+            this.lblHeader.Font = new System.Drawing.Font("Calibri", 10.5F);
             this.lblHeader.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblHeader.Multiline = true;
             this.lblHeader.Name = "lblHeader";
@@ -470,9 +470,19 @@
             this.xrTable9,
             this.ValoresDesdeHasta});
             this.ReportFooter.Font = new System.Drawing.Font("Verdana", 9F);
-            this.ReportFooter.HeightF = 468.667F;
+            this.ReportFooter.HeightF = 515.667F;
             this.ReportFooter.Name = "ReportFooter";
             this.ReportFooter.StylePriority.UseFont = false;
+            // 
+            // lblFooter
+            // 
+            this.lblFooter.LocationFloat = new DevExpress.Utils.PointFloat(0.0004291534F, 109F);
+            this.lblFooter.Name = "lblFooter";
+            this.lblFooter.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
+            this.lblFooter.SerializableRtfString = resources.GetString("lblFooter.SerializableRtfString");
+            this.lblFooter.SizeF = new System.Drawing.SizeF(750.9998F, 406.667F);
+            this.lblFooter.StylePriority.UseFont = false;
+            this.lblFooter.StylePriority.UsePadding = false;
             // 
             // xrTable9
             // 
@@ -855,16 +865,6 @@
             this.p_FechaCorte.Name = "p_FechaCorte";
             this.p_FechaCorte.Visible = false;
             // 
-            // lblFooter
-            // 
-            this.lblFooter.LocationFloat = new DevExpress.Utils.PointFloat(0.0004291534F, 109F);
-            this.lblFooter.Name = "lblFooter";
-            this.lblFooter.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
-            this.lblFooter.SerializableRtfString = resources.GetString("lblFooter.SerializableRtfString");
-            this.lblFooter.SizeF = new System.Drawing.SizeF(750.9998F, 349.667F);
-            this.lblFooter.StylePriority.UseFont = false;
-            this.lblFooter.StylePriority.UsePadding = false;
-            // 
             // CXC_013_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -891,11 +891,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lblFooter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ValoresDesdeHasta)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lblFooter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }

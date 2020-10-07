@@ -1,0 +1,160 @@
+﻿@model Core.Info.Helps.cl_filtros_Info
+@{
+    ViewBag.Title = "Estado de cuenta tipo carta 4 - 6 facturas";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
+}
+@using (Html.BeginForm("CXC_014", "CuentasPorCobrarReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdSede, new { @id = "IdSede" })
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+                </div>
+            </div>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+
+        </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdCliente">Alumno</label>
+                            @Html.Partial("_CmbAlumnoEstadoCuenta", Model.IdAlumno)
+                            @*@Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })*@
+
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="row" id="correo">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="IdSucursal">Destinatarios (En caso de tener más de un destinatario separarlo con punto y coma)</label>
+                            @Html.TextBoxFor(q => q.Correos, new { @id = "Correos", @class = "form-control" } )
+                            @Html.ValidationMessageFor(q => q.Correos, "", new { @class = "text-danger" })
+                            <label id="error" style="color:red" hidden> <i class="icon fa fa-warning"></i> Debe de ingresar al menos un destinatario</label>
+                        </div>
+                    </div>
+                    @*@if (ViewBag.MostrarCorreo == true)
+                    {*@
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdPuntoVta">   </label>
+                            <button type="button" class="btn btn-primary form-control" id="btn_enviarCorreo" onclick="EnviarCorreo();">Enviar estado de cuenta</button>
+                        </div>
+                    </div>
+                    @*}*@
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">@ViewBag.Title</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="box-body">
+            @Html.DevExpress().WebDocumentViewer(settings =>
+               {
+                   settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                   settings.MobileMode = false;
+                   settings.Name = "webDocumentViewer";
+               }).Bind(ViewBag.Report).GetHtml()
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            [@Core.Web.Helps.SessionFixed.IdEmpresa] @Core.Web.Helps.SessionFixed.NomEmpresa
+        </div>
+        <!-- /.box-footer-->
+    </div>
+}
+
+<script type="text/javascript">
+    $(function () {
+        DatosCorreo();
+    });
+
+    function DatosCorreo() {
+        if (IdAlumno.GetValue() > 0) {
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                IdAlumno: IdAlumno.GetValue()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("DatosCorreo", "Cobranza", new { Area = "CuentasPorCobrar" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $("#Correos").val(data);
+                    $("#correo").show();
+                },
+                error: function (error) {
+                }
+            });
+        }
+        else {
+            $("#Correos").val("");
+            $("#correo").hide();
+        }
+
+    }
+    function EnviarCorreo() {
+        if ($("#Correos").val() != "") {
+            $("#error").hide();
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                IdSede: $("#IdSede").val(),
+                IdAlumno: IdAlumno.GetValue(),
+                Correos: $("#Correos").val(),
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("EnviarCorreo", "Cobranza", new { Area = "CuentasPorCobrar" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    alert("Se han enviado el estado de cuenta a la cola de correos");
+                },
+                error: function (error) {
+                }
+            });
+        }
+        else {
+            $("#error").show();
+        }
+    }
+
+</script>

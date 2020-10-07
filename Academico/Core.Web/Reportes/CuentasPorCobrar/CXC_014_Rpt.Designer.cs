@@ -42,6 +42,7 @@
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrTable4 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow20 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell15 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -91,11 +92,10 @@
             this.lbl_fecha = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell33 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_FechaCorte = new DevExpress.XtraReports.Parameters.Parameter();
-            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
@@ -184,14 +184,27 @@
             this.xrTable5,
             this.lblHeader});
             this.ReportHeader.Font = new System.Drawing.Font("Verdana", 9F);
-            this.ReportHeader.HeightF = 315.2917F;
+            this.ReportHeader.HeightF = 344.4584F;
             this.ReportHeader.Name = "ReportHeader";
             this.ReportHeader.StylePriority.UseFont = false;
+            // 
+            // xrLabel1
+            // 
+            this.xrLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold);
+            this.xrLabel1.ForeColor = System.Drawing.Color.Red;
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(467.5001F, 65.08333F);
+            this.xrLabel1.Multiline = true;
+            this.xrLabel1.Name = "xrLabel1";
+            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(257.2917F, 23.00001F);
+            this.xrLabel1.StylePriority.UseFont = false;
+            this.xrLabel1.StylePriority.UseForeColor = false;
+            this.xrLabel1.Text = "AVISO IMPORTANTE";
             // 
             // xrTable4
             // 
             this.xrTable4.Font = new System.Drawing.Font("Verdana", 9F);
-            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 235.2917F);
+            this.xrTable4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 264.4584F);
             this.xrTable4.Name = "xrTable4";
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow20,
@@ -406,7 +419,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable5.Font = new System.Drawing.Font("Arial", 9F);
-            this.xrTable5.LocationFloat = new DevExpress.Utils.PointFloat(0.0004291534F, 295.2917F);
+            this.xrTable5.LocationFloat = new DevExpress.Utils.PointFloat(0.0004291534F, 324.4584F);
             this.xrTable5.Name = "xrTable5";
             this.xrTable5.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow19});
@@ -456,12 +469,12 @@
             // 
             // lblHeader
             // 
-            this.lblHeader.Font = new System.Drawing.Font("Verdana", 9F);
+            this.lblHeader.Font = new System.Drawing.Font("Calibri", 10.5F);
             this.lblHeader.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lblHeader.Multiline = true;
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblHeader.SizeF = new System.Drawing.SizeF(750.9999F, 235.2917F);
+            this.lblHeader.SizeF = new System.Drawing.SizeF(750.9999F, 264.4584F);
             this.lblHeader.StylePriority.UseFont = false;
             this.lblHeader.Text = resources.GetString("lblHeader.Text");
             // 
@@ -472,7 +485,7 @@
             this.xrTable9,
             this.ValoresDesdeHasta});
             this.ReportFooter.Font = new System.Drawing.Font("Verdana", 9F);
-            this.ReportFooter.HeightF = 530.5419F;
+            this.ReportFooter.HeightF = 593.5419F;
             this.ReportFooter.Name = "ReportFooter";
             this.ReportFooter.StylePriority.UseFont = false;
             // 
@@ -482,7 +495,7 @@
             this.lblFooter.Name = "lblFooter";
             this.lblFooter.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
             this.lblFooter.SerializableRtfString = resources.GetString("lblFooter.SerializableRtfString");
-            this.lblFooter.SizeF = new System.Drawing.SizeF(750.9998F, 421.5419F);
+            this.lblFooter.SizeF = new System.Drawing.SizeF(750.9998F, 480.5419F);
             this.lblFooter.StylePriority.UseFont = false;
             this.lblFooter.StylePriority.UsePadding = false;
             // 
@@ -847,11 +860,6 @@
             this.xrPageInfo2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrPageInfo2.TextFormatString = "Página {0} de {1}";
             // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.CuentasPorCobrar.CXC_014_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
-            // 
             // p_IdEmpresa
             // 
             this.p_IdEmpresa.Name = "p_IdEmpresa";
@@ -867,18 +875,10 @@
             this.p_FechaCorte.Name = "p_FechaCorte";
             this.p_FechaCorte.Visible = false;
             // 
-            // xrLabel1
+            // objectDataSource1
             // 
-            this.xrLabel1.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Bold);
-            this.xrLabel1.ForeColor = System.Drawing.Color.Red;
-            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(467.5001F, 65.08333F);
-            this.xrLabel1.Multiline = true;
-            this.xrLabel1.Name = "xrLabel1";
-            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel1.SizeF = new System.Drawing.SizeF(257.2917F, 23.00001F);
-            this.xrLabel1.StylePriority.UseFont = false;
-            this.xrLabel1.StylePriority.UseForeColor = false;
-            this.xrLabel1.Text = "AVISO IMPORTANTE";
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.CuentasPorCobrar.CXC_014_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // CXC_014_Rpt
             // 
