@@ -53,6 +53,7 @@ namespace Core.Data.Reportes.Academico
                             Quim1=q.Quim1,
                             Quim2 = q.Quim2,
                             IdMateria=q.IdMateria,
+                            IdCatalogoTipoCalificacion=q.IdCatalogoTipoCalificacion,
                             PromedioExamen = (IdCatalogoTipo== Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ?  q.EXQuim1 : (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EXQuim2 : null) ),
                             PromedioQuimestre = (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.Quim1 : (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.Quim2 : null) ),
                             PorcentajePromedio = (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ? q.PorcentajeQuim1 : (IdCatalogoTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PorcentajeQuim2 : null))

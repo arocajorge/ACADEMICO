@@ -100,27 +100,14 @@ namespace Core.Data.Reportes.Academico
                                 group q by new
                                 {
                                     q.IdEmpresa,
-                                    q.IdMatricula,
-                                    q.IdMateria,
-                                    q.IdCatalogoTipoCalificacion,
-                                    q.PromedioFinalQ1,
-                                    q.PromedioFinalQ2,
-                                    q.PromedioQuimestralFinal,
-                                    q.PromedioFinal
+                                    q.IdMatricula
                                 } into a
                                 select new ACA_014_Info
                                 {
                                     IdEmpresa = a.Key.IdEmpresa,
-                                    IdMatricula = a.Key.IdMatricula,
-                                    IdMateria = a.Key.IdMateria,
-                                    IdCatalogoTipoCalificacion = a.Key.IdCatalogoTipoCalificacion,
-                                    PromedioFinalQ1 = a.Key.PromedioFinalQ1,
-                                    PromedioFinalQ2 = a.Key.PromedioFinalQ2,
-                                    PromedioQuimestralFinal = a.Key.PromedioQuimestralFinal,
-                                    PromedioFinal = a.Key.PromedioFinal,
+                                    IdMatricula = a.Key.IdMatricula
                                 }).ToList();
 
-                var lst_cuantitativas = ListaAgrupadaXMatricula.Where(q => q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
                 decimal SumaPromedioQ1 = 0;
                 decimal SumaPromedioQ2 = 0;
                 decimal SumaPromedioQuim = 0;
@@ -134,63 +121,59 @@ namespace Core.Data.Reportes.Academico
                 var contQuim = 0;
                 var contFinal = 0;
 
-                foreach (var item in lst_cuantitativas)
+                foreach (var item in ListaAgrupadaXMatricula)
                 {
-                    if (string.IsNullOrEmpty(item.PromedioFinalQ1))
-                    {
-                        contQ1++;
-                    }
+                    var lst_cuantitativas = Lista.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
+                    decimal SumaQ1 = 0;
+                    decimal SumaQ2 = 0;
+                    decimal SumaQuimestral = 0;
+                    decimal SumaFinal = 0;
 
-                    if (string.IsNullOrEmpty(item.PromedioFinalQ2))
+                    foreach (var item1 in lst_cuantitativas)
                     {
-                        contQ2++;
-                    }
+                        if (string.IsNullOrEmpty(item1.PromedioFinalQ1))
+                        {
+                            contQ1++;
+                        }
+                        else
+                        {
+                            SumaQ1 = SumaQ1 + Convert.ToDecimal(item.PromedioFinalQ1);
+                        }
 
-                    if (string.IsNullOrEmpty(item.PromedioQuimestralFinal))
-                    {
-                        contQuim++;
-                    }
+                        if (string.IsNullOrEmpty(item1.PromedioFinalQ2))
+                        {
+                            contQ2++;
+                        }
+                        else
+                        {
+                            SumaQ2 = SumaQ2 + Convert.ToDecimal(item.PromedioFinalQ2);
+                        }
 
-                    if (string.IsNullOrEmpty(item.PromedioFinal))
-                    {
-                        contFinal++;
-                    }
+                        if (string.IsNullOrEmpty(item1.PromedioQuimestralFinal))
+                        {
+                            contQuim++;
+                        }
+                        else
+                        {
+                            SumaQuimestral = SumaQuimestral + Convert.ToDecimal(item.PromedioQuimestralFinal);
+                        }
 
-                    item.CantQ1 = contQ1;
-                    item.CantQ2 = contQ2;
-                    item.CantQuim = contQuim;
-                    item.CantFinal = contFinal;
+                        if (string.IsNullOrEmpty(item1.PromedioFinal))
+                        {
+                            contFinal++;
+                        }
+                        else
+                        {
+                            SumaFinal = SumaFinal + Convert.ToDecimal(item.PromedioFinal);
+                        }
+
+                        item1.CantQ1 = contQ1;
+                        item1.CantQ2 = contQ2;
+                        item1.CantQuim = contQuim;
+                        item1.CantFinal = contFinal;
+                        //item1.SumaQ1 = SumaQ1;
+                    }
                 }
-
-                foreach (var item in lst_cuantitativas)
-                {
-                    if (contQ1 == 0)
-                    {
-                        decimal CalculoQ1 = Math.Round(Convert.ToDecimal(SumaPromedioQ1 / lst_cuantitativas.Count()), 2, MidpointRounding.AwayFromZero);
-                        PromedioGeneralQ1 = Convert.ToString(CalculoQ1);
-                    }
-
-                    if (contQ2 == 0)
-                    {
-                        decimal CalculoQ2 = Math.Round(Convert.ToDecimal(SumaPromedioQ2 / lst_cuantitativas.Count()), 2, MidpointRounding.AwayFromZero);
-                        PromedioGeneralQ2 = Convert.ToString(CalculoQ2);
-                    }
-
-                    if (contQuim == 0)
-                    {
-                        decimal CalculoQuim = Math.Round(Convert.ToDecimal(SumaPromedioQ2 / lst_cuantitativas.Count()), 2, MidpointRounding.AwayFromZero);
-                        PromedioGeneralQuim = Convert.ToString(CalculoQuim);
-                    }
-
-                    if (contFinal == 0)
-                    {
-                        decimal CalculoFinal = Math.Round(Convert.ToDecimal(SumaPromedioQ1 / lst_cuantitativas.Count()), 2, MidpointRounding.AwayFromZero);
-                        PromedioGeneralFinal = Convert.ToString(CalculoFinal);
-                    }
-
-                    Lista.ForEach(q => { q.PromedioGeneralQ1 = PromedioGeneralQ1; q.PromedioGeneralQ2 = PromedioGeneralQ2; q.PromedioGeneralQuim = PromedioGeneralQuim; q.PromedioGeneralFinal = PromedioGeneralFinal; });
-                }
-
 
                 return Lista;
             }

@@ -124,6 +124,8 @@
             this.p_IdParalelo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdMateria = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCatalogoTipo = new DevExpress.XtraReports.Parameters.Parameter();
+            this.xrTableCell27 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell28 = new DevExpress.XtraReports.UI.XRTableCell();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable11)).BeginInit();
@@ -469,7 +471,7 @@
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.StylePriority.UseFont = false;
             this.xrTableCell13.Text = "NUMERO DE DESTREZAS LOGRADAS";
-            this.xrTableCell13.Weight = 1D;
+            this.xrTableCell13.Weight = 0.91744277203267188D;
             // 
             // xrTableCell12
             // 
@@ -478,7 +480,7 @@
             this.xrTableCell12.Name = "xrTableCell12";
             this.xrTableCell12.StylePriority.UseFont = false;
             this.xrTableCell12.Text = "PORCENTAJE DE DESTREZAS LOGRADAS";
-            this.xrTableCell12.Weight = 1D;
+            this.xrTableCell12.Weight = 1.0825572279673281D;
             // 
             // xrTableCell14
             // 
@@ -521,7 +523,7 @@
             this.xrTableCell16.Multiline = true;
             this.xrTableCell16.Name = "xrTableCell16";
             this.xrTableCell16.StylePriority.UseFont = false;
-            this.xrTableCell16.Weight = 1D;
+            this.xrTableCell16.Weight = 0.9174430158481699D;
             // 
             // xrTableCell17
             // 
@@ -529,7 +531,7 @@
             this.xrTableCell17.Multiline = true;
             this.xrTableCell17.Name = "xrTableCell17";
             this.xrTableCell17.StylePriority.UseFont = false;
-            this.xrTableCell17.Weight = 1D;
+            this.xrTableCell17.Weight = 1.08255698415183D;
             // 
             // xrTableCell18
             // 
@@ -679,7 +681,9 @@
             // 
             this.xrTableRow5.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
             this.xrTableCell25,
-            this.xrTableCell26});
+            this.xrTableCell26,
+            this.xrTableCell27,
+            this.xrTableCell28});
             this.xrTableRow5.Name = "xrTableRow5";
             this.xrTableRow5.Weight = 1D;
             // 
@@ -698,7 +702,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NombreProfesor]")});
             this.xrTableCell26.Multiline = true;
             this.xrTableCell26.Name = "xrTableCell26";
-            this.xrTableCell26.Weight = 3.5603639727108645D;
+            this.xrTableCell26.Weight = 1.4778072071506836D;
             // 
             // xrTableRow14
             // 
@@ -1053,6 +1057,26 @@
             this.p_IdCatalogoTipo.Name = "p_IdCatalogoTipo";
             this.p_IdCatalogoTipo.Visible = false;
             // 
+            // xrTableCell27
+            // 
+            this.xrTableCell27.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell27.Multiline = true;
+            this.xrTableCell27.Name = "xrTableCell27";
+            this.xrTableCell27.StylePriority.UseFont = false;
+            this.xrTableCell27.StylePriority.UseTextAlignment = false;
+            this.xrTableCell27.Text = "Materia:";
+            this.xrTableCell27.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            this.xrTableCell27.Weight = 0.666536644346332D;
+            // 
+            // xrTableCell28
+            // 
+            this.xrTableCell28.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomMateria]")});
+            this.xrTableCell28.Multiline = true;
+            this.xrTableCell28.Name = "xrTableCell28";
+            this.xrTableCell28.Text = "xrTableCell28";
+            this.xrTableCell28.Weight = 1.4160201212138488D;
+            // 
             // ACA_029_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -1079,7 +1103,7 @@
             this.p_IdParalelo,
             this.p_IdMateria,
             this.p_IdCatalogoTipo});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_029_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable10)).EndInit();
@@ -1195,5 +1219,7 @@
         private DevExpress.XtraReports.UI.XRSubreport PromediosBajos_SubRpt;
         private DevExpress.XtraReports.UI.XRSubreport SinPromedios_SubRpt;
         private DevExpress.XtraReports.UI.XRSubreport Promedios_SubRpt;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell27;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell28;
     }
 }
