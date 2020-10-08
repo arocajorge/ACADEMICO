@@ -166,15 +166,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_001_Rpt Report = new ACA_001_Rpt();
 
-            #region Cargo diseño desde base
-            var report = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_001");
-            if (report != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, report.ReporteDisenio);
-                Report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             Report.p_IdEmpresa.Value = model.IdEmpresa;
             Report.p_IdSede.Value = model.IdSede;
             Report.p_IdAnio.Value = model.IdAnio;
@@ -185,14 +176,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = Report;
 
             ACA_002_Rpt ReportSolicitud = new ACA_002_Rpt();
-            #region Cargo diseño desde base
-            var reportSol = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_002");
-            if (reportSol != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportSol.ReporteDisenio);
-                ReportSolicitud.LoadLayout(RootReporte);
-            }
-            #endregion
+
             ReportSolicitud.p_IdEmpresa.Value = model.IdEmpresa;
             ReportSolicitud.p_IdAlumno.Value = model.IdAlumno;
             ReportSolicitud.p_IdAnio.Value = model.IdAnio;
@@ -202,14 +186,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.ReportSolicitud = ReportSolicitud;
 
             ACA_003_Rpt ReportContrato = new ACA_003_Rpt();
-            #region Cargo diseño desde base
-            var reportCont = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_003");
-            if (reportCont != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportCont.ReporteDisenio);
-                ReportContrato.LoadLayout(RootReporte);
-            }
-            #endregion
+
             ReportContrato.p_IdEmpresa.Value = model.IdEmpresa;
             ReportContrato.p_IdAlumno.Value = model.IdAlumno;
             ReportContrato.p_IdSede.Value = model.IdSede;
@@ -219,14 +196,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.ReportContrato = ReportContrato;
 
             ACA_005_Rpt ReportSocioEconomica = new ACA_005_Rpt();
-            #region Cargo diseño desde base
-            var reportSocioEco = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_005");
-            if (reportSocioEco != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportSocioEco.ReporteDisenio);
-                ReportSocioEconomica.LoadLayout(RootReporte);
-            }
-            #endregion
+
             ReportSocioEconomica.p_IdEmpresa.Value = model.IdEmpresa;
             ReportSocioEconomica.p_IdAlumno.Value = model.IdAlumno;
             ReportSocioEconomica.p_IdSede.Value = model.IdSede;
@@ -242,15 +212,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_001(cl_filtros_Info model)
         {
             ACA_001_Rpt Report = new ACA_001_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var report = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_001");
-            if (report != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, report.ReporteDisenio);
-                Report.LoadLayout(RootReporte);
-            }
-            #endregion
+
             Report.p_IdEmpresa.Value = model.IdEmpresa;
             Report.p_IdAlumno.Value = model.IdAlumno;
             Report.p_IdAnio.Value = model.IdAnio;
@@ -261,14 +223,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = Report;
 
             ACA_002_Rpt ReportSolicitud = new ACA_002_Rpt();
-            #region Cargo diseño desde base
-            var reportSol = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_002");
-            if (reportSol != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportSol.ReporteDisenio);
-                ReportSolicitud.LoadLayout(RootReporte);
-            }
-            #endregion
+
             ReportSolicitud.p_IdEmpresa.Value = model.IdEmpresa;
             ReportSolicitud.p_IdAlumno.Value = model.IdAlumno;
             ReportSolicitud.p_IdAnio.Value = model.IdAnio;
@@ -278,14 +233,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.ReportSolicitud = ReportSolicitud;
 
             ACA_003_Rpt ReportContrato = new ACA_003_Rpt();
-            #region Cargo diseño desde base
-            var reportCont = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_003");
-            if (reportCont != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportCont.ReporteDisenio);
-                ReportContrato.LoadLayout(RootReporte);
-            }
-            #endregion
+
             ReportContrato.p_IdEmpresa.Value = model.IdEmpresa;
             ReportContrato.p_IdAlumno.Value = model.IdAlumno;
             ReportContrato.p_IdSede.Value = model.IdSede;
@@ -296,14 +244,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
 
             ACA_005_Rpt ReportSocioEconomica = new ACA_005_Rpt();
-            #region Cargo diseño desde base
-            var reportSocioEco = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_005");
-            if (reportSocioEco != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportSocioEco.ReporteDisenio);
-                ReportSocioEconomica.LoadLayout(RootReporte);
-            }
-            #endregion
+
             ReportSocioEconomica.p_IdEmpresa.Value = model.IdEmpresa;
             ReportSocioEconomica.p_IdAlumno.Value = model.IdAlumno;
             ReportSocioEconomica.p_IdSede.Value = model.IdSede;
@@ -333,15 +274,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAlumno = IdAlumno;
             ACA_002_Rpt report = new ACA_002_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_002");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
             report.p_IdAlumno.Value = IdAlumno;
@@ -356,15 +288,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_002(cl_filtros_Info model)
         {
             ACA_002_Rpt report = new ACA_002_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_002");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdAnio.Value = model.IdAnio;
@@ -390,15 +314,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_003_Rpt report = new ACA_003_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_003");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAlumno.Value = IdAlumno;
@@ -413,15 +328,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_003(cl_filtros_Info model)
         {
             ACA_003_Rpt report = new ACA_003_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_003");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdSede.Value = model.IdSede;
@@ -451,15 +358,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_004_Rpt report = new ACA_004_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_004");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
             report.p_IdSede.Value = model.IdSede;
@@ -478,15 +376,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_004(cl_filtros_Info model)
         {
             ACA_004_Rpt report = new ACA_004_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_004");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
@@ -518,15 +407,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_005_Rpt report = new ACA_005_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_005");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAlumno.Value = IdAlumno;
@@ -541,15 +421,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_005(cl_filtros_Info model)
         {
             ACA_005_Rpt report = new ACA_005_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "ACA_005");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdSede.Value = model.IdSede;
@@ -579,15 +451,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.mostrarAnulados = true;
             ACA_006_Rpt report = new ACA_006_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_006");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_fecha_fin.Value = model.fecha_fin;
@@ -607,15 +470,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_006(cl_filtros_Info model)
         {
             ACA_006_Rpt report = new ACA_006_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_006");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -653,15 +507,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.mostrarAnulados = true;
             ACA_007_Rpt report = new ACA_007_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_007");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_fecha_fin.Value = model.fecha_fin;
@@ -680,15 +525,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_007(cl_filtros_Info model)
         {
             ACA_007_Rpt report = new ACA_007_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_007");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -724,15 +560,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_008_Rpt report = new ACA_008_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_008");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
             report.p_IdSede.Value = model.IdSede;
@@ -748,14 +575,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
 
             ACA_008_Resumen_Rpt ReportResumen = new ACA_008_Resumen_Rpt();
-            #region Cargo diseño desde base
-            var reportCont = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_008");
-            if (reportCont != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportCont.ReporteDisenio);
-                ReportResumen.LoadLayout(RootReporte);
-            }
-            #endregion
+
             ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
             ReportResumen.p_IdAnio.Value = model.IdAnio;
             ReportResumen.p_IdSede.Value = model.IdSede;
@@ -776,15 +596,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         {
             ACA_008_Rpt report = new ACA_008_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_008");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
             report.p_IdSede.Value = model.IdSede;
@@ -800,14 +611,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
 
             ACA_008_Resumen_Rpt ReportResumen = new ACA_008_Resumen_Rpt();
-            #region Cargo diseño desde base
-            var reportCont = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_008");
-            if (reportCont != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportCont.ReporteDisenio);
-                ReportResumen.LoadLayout(RootReporte);
-            }
-            #endregion
+
             ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
             ReportResumen.p_IdAnio.Value = model.IdAnio;
             ReportResumen.p_IdSede.Value = model.IdSede;
@@ -839,15 +643,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_009_Rpt report = new ACA_009_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_009");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_fecha_fin.Value = model.fecha_fin;
@@ -862,17 +657,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         [HttpPost]
         public ActionResult ACA_009(cl_filtros_Info model)
         {
-
             ACA_009_Rpt report = new ACA_009_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_009");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
@@ -1241,15 +1026,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_010_Rpt report = new ACA_010_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_010");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -1271,15 +1047,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_010(aca_MatriculaCalificacionParcial_Info model)
         {
             ACA_010_Rpt report = new ACA_010_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_010");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -1329,15 +1096,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_011_Rpt report = new ACA_011_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_011");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -1356,15 +1114,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_011(aca_MatriculaCalificacion_Info model)
         {
             ACA_011_Rpt report = new ACA_011_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_011");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -1401,15 +1150,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdRubro = 3;
             ACA_012_Rpt report = new ACA_012_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_012");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
             report.p_IdSede.Value = model.IdSede;
@@ -1431,15 +1171,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_012(cl_filtros_Info model)
         {
             ACA_012_Rpt report = new ACA_012_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_012");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
@@ -1498,15 +1229,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_013_Rpt report = new ACA_013_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_013");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -1529,15 +1251,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_013(aca_MatriculaCalificacionParcial_Info model)
         {
             ACA_013_Rpt report = new ACA_013_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_013");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -1587,15 +1300,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_014_Rpt report = new ACA_014_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_014");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -1618,15 +1322,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_014(aca_MatriculaCalificacionParcial_Info model)
         {
             ACA_014_Rpt report = new ACA_014_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_014");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -1657,15 +1352,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_015_Rpt report = new ACA_015_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_015");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -1683,15 +1369,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_015(aca_Matricula_Info model)
         {
             ACA_015_Rpt report = new ACA_015_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_015");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -1738,15 +1415,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_016_Rpt report = new ACA_016_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_016");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -1768,15 +1436,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_016(aca_MatriculaCalificacionCualitativa_Info model)
         {
             ACA_016_Rpt report = new ACA_016_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_016");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -1808,15 +1467,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_017_Rpt report = new ACA_017_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_017");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -1836,15 +1486,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_017(cl_filtros_Info model)
         {
             ACA_017_Rpt report = new ACA_017_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_017");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -1874,15 +1515,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_018_Rpt report = new ACA_018_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_018");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -1902,15 +1534,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_018(cl_filtros_Info model)
         {
             ACA_018_Rpt report = new ACA_018_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_018");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -1940,15 +1563,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_019_Rpt report = new ACA_019_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_019");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -1968,15 +1582,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_019(cl_filtros_Info model)
         {
             ACA_019_Rpt report = new ACA_019_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_019");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2007,15 +1612,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_020_Rpt report = new ACA_020_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_020");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2035,15 +1631,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_020(cl_filtros_Info model)
         {
             ACA_020_Rpt report = new ACA_020_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_020");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2073,15 +1660,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.mostrarAnulados = false;
             ACA_021_Rpt report = new ACA_021_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_021");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2101,15 +1679,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_021(cl_filtros_Info model)
         {
             ACA_021_Rpt report = new ACA_021_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_021");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2157,15 +1726,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_022_Rpt report = new ACA_022_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_022");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2186,15 +1746,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_022(aca_MatriculaAsistencia_Info model)
         {
             ACA_022_Rpt report = new ACA_022_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_022");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2243,15 +1794,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_023_Rpt report = new ACA_023_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_023");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2272,15 +1814,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_023(aca_MatriculaConducta_Info model)
         {
             ACA_023_Rpt report = new ACA_023_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_023");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2330,15 +1863,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_024_Rpt report = new ACA_024_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_024");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2360,15 +1884,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_024(aca_MatriculaCalificacionParcial_Info model)
         {
             ACA_024_Rpt report = new ACA_024_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_024");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2414,15 +1929,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_025_Rpt report = new ACA_025_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_025");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2445,15 +1951,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_025(aca_MatriculaCalificacionParcial_Info model)
         {
             ACA_025_Rpt report = new ACA_025_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_025");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2501,15 +1998,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_026_Rpt report = new ACA_026_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_026");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2532,15 +2020,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_026(aca_MatriculaCalificacionCualitativa_Info model)
         {
             ACA_026_Rpt report = new ACA_026_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_026");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2588,15 +2067,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_027_Rpt report = new ACA_027_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_027");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2618,15 +2088,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_027(aca_MatriculaConducta_Info model)
         {
             ACA_027_Rpt report = new ACA_027_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_027");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2675,15 +2136,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_028_Rpt report = new ACA_028_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_028");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2703,15 +2155,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_028(aca_MatriculaCalificacion_Info model)
         {
             ACA_028_Rpt report = new ACA_028_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_028");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2756,15 +2199,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_029_Rpt report = new ACA_029_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_029");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2785,15 +2219,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_029(aca_MatriculaCalificacion_Info model)
         {
             ACA_029_Rpt report = new ACA_029_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_029");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2842,15 +2267,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_030_Rpt report = new ACA_030_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_030");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2873,15 +2289,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_030(aca_MatriculaCalificacion_Info model)
         {
             ACA_030_Rpt report = new ACA_030_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_030");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2927,15 +2334,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_031_Rpt report = new ACA_031_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_031");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -2955,15 +2353,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_031(aca_MatriculaConducta_Info model)
         {
             ACA_031_Rpt report = new ACA_031_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_031");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3006,15 +2395,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_032_Rpt report = new ACA_032_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_032");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3035,15 +2415,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_032(aca_MatriculaConducta_Info model)
         {
             ACA_032_Rpt report = new ACA_032_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_032");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3089,15 +2460,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_033_Rpt report = new ACA_033_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_033");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3118,15 +2480,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_033(aca_MatriculaCalificacionParcial_Info model)
         {
             ACA_033_Rpt report = new ACA_033_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_033");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3165,15 +2518,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_034_Rpt report = new ACA_034_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_034");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3194,15 +2538,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_034(aca_MatriculaCalificacion_Info model)
         {
             ACA_034_Rpt report = new ACA_034_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_034");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3230,15 +2565,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             ACA_035_Rpt report = new ACA_035_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_035");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3257,15 +2583,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_035(cl_filtros_Info model)
         {
             ACA_035_Rpt report = new ACA_035_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_035");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3293,15 +2610,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             ACA_036_Rpt report = new ACA_036_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_036");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3320,15 +2628,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_036(cl_filtros_Info model)
         {
             ACA_036_Rpt report = new ACA_036_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_036");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3374,15 +2673,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_028_Rpt report = new ACA_028_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_028");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3402,15 +2692,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_037(aca_MatriculaCalificacion_Info model)
         {
             ACA_028_Rpt report = new ACA_028_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_028");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3439,15 +2720,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             ACA_038_Rpt report = new ACA_038_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_038");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3466,15 +2738,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_038(cl_filtros_Info model)
         {
             ACA_038_Rpt report = new ACA_038_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_038");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3503,15 +2766,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.mostrarAnulados = false;
             ACA_039_Rpt report = new ACA_039_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_039");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3531,15 +2785,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_039(cl_filtros_Info model)
         {
             ACA_039_Rpt report = new ACA_039_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_039");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3611,15 +2856,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
             ACA_040_Rpt report = new ACA_040_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_040");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3641,15 +2877,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_040(aca_MatriculaCalificacionParcial_Info model)
         {
             ACA_040_Rpt report = new ACA_040_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_040");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3681,15 +2908,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.MostrarRetirados = false;
             ACA_041_Rpt report = new ACA_041_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_041");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3709,15 +2927,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_041(aca_MatriculaCalificacionParcial_Info model)
         {
             ACA_041_Rpt report = new ACA_041_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_041");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3747,15 +2956,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.MostrarRetirados = false;
             ACA_042_Rpt report = new ACA_042_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_042");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3775,15 +2975,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_042(aca_MatriculaCalificacionParcial_Info model)
         {
             ACA_042_Rpt report = new ACA_042_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_042");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3813,15 +3004,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.MostrarRetirados = false;
             ACA_043_Rpt report = new ACA_043_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_043");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3840,15 +3022,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_043(aca_MatriculaCalificacionParcial_Info model)
         {
             ACA_043_Rpt report = new ACA_043_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_043");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3877,15 +3050,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.mostrarAnulados = false;
             ACA_044_Rpt report = new ACA_044_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_044");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3905,15 +3069,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_044(cl_filtros_Info model)
         {
             ACA_044_Rpt report = new ACA_044_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_044");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3943,15 +3098,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.MostrarRetirados = false;
             ACA_045_Rpt report = new ACA_045_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_045");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -3971,15 +3117,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_045(aca_MatriculaCalificacionParcial_Info model)
         {
             ACA_045_Rpt report = new ACA_045_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_045");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -4009,15 +3146,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.mostrarAnulados = false;
             ACA_046_Rpt report = new ACA_046_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_046");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -4037,15 +3165,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_046(cl_filtros_Info model)
         {
             ACA_046_Rpt report = new ACA_046_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_046");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -4090,15 +3209,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ACA_047_Rpt report = new ACA_047_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_047");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -4120,15 +3230,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         {
             ACA_047_Rpt report = new ACA_047_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "ACA_047");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAnio.Value = model.IdAnio;
@@ -4142,6 +3243,71 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
             cargar_combos_ACA_047(model);
+            return View(model);
+        }
+
+        #endregion
+
+        #region ACA_048
+        private void cargar_combos_ACA_048(aca_MatriculaCalificacion_Info model)
+        {
+            aca_Catalogo_Bus bus_catalogotipo = new aca_Catalogo_Bus();
+            Dictionary<string, string> lst_quimestres = new Dictionary<string, string>();
+            lst_quimestres.Add("6", "QUIMESTRE 1");
+            lst_quimestres.Add("7", "QUIMESTRE 2");
+            ViewBag.lst_quimestres = lst_quimestres;
+        }
+        public ActionResult ACA_048()
+        {
+            aca_MatriculaCalificacion_Info model = new aca_MatriculaCalificacion_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_cualitativa.getList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            ACA_048_Rpt report = new ACA_048_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdMateria.Value = model.IdMateria;
+            report.p_IdCatalogoParcialTipo.Value = model.IdCatalogoTipo;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            cargar_combos_ACA_048(model);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_048(aca_MatriculaCalificacion_Info model)
+        {
+            ACA_048_Rpt report = new ACA_048_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdMateria.Value = model.IdMateria;
+            report.p_IdCatalogoParcialTipo.Value = model.IdCatalogoTipo;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            cargar_combos_ACA_048(model);
             return View(model);
         }
 

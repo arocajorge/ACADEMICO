@@ -112,15 +112,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             CargarSucursal(model);
             cargar_sucursal_check(model.IdEmpresa, model.IntArray);
             CXC_001_Rpt report = new CXC_001_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_001");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.IntArray = model.IntArray;
             report.p_IdCliente.Value = model.IdAlumno == null ? 0 : Convert.ToDecimal(model.IdAlumno);
@@ -136,15 +128,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_001(cl_filtros_facturacion_Info model)
         {
             CXC_001_Rpt report = new CXC_001_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_001");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
             CargarSucursal(model);
             report.IntArray = model.IntArray;
             report.p_IdEmpresa.Value = model.IdEmpresa;
@@ -162,15 +145,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_002(int IdSucursal = 0, decimal IdCobro = 0)
         {
             CXC_002_Rpt model = new CXC_002_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_002");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                model.LoadLayout(RootReporte);
-            }
-            #endregion
+
             model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.p_IdSucursal.Value = IdSucursal;
             model.p_IdCobro.Value = IdCobro;
@@ -220,15 +195,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             CargarCombos_CXC_003(model.IdEmpresa, model.StringArray);
             CXC_003_Rpt report = new CXC_003_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_003");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+            
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.StringArray = model.StringArray;
             report.p_FechaIni.Value = model.fecha_ini;
@@ -243,15 +210,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_003(cl_filtros_Info model)
         {
             CXC_003_Rpt report = new CXC_003_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_003");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+          
             //CargarSucursal(model);
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
@@ -281,15 +240,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             };
            
             CXC_004_Rpt report = new CXC_004_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_004");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+            
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdUsuario.Value = SessionFixed.IdUsuario;
             report.p_FechaCorte.Value = model.fecha_corte;
@@ -303,15 +254,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_004(cl_filtros_facturacion_Info model)
         {
             CXC_004_Rpt report = new CXC_004_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_004");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+            
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdUsuario.Value = SessionFixed.IdUsuario;
             report.p_FechaCorte.Value = model.fecha_corte;
@@ -324,15 +267,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_005(int IdSucursal = 0, decimal IdLiquidacion = 0)
         {
             CXC_005_Rpt report = new CXC_005_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_005");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+            
             report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
             report.p_IdSucursal.Value = IdSucursal;
             report.p_IdLiquidacion.Value = IdLiquidacion;
@@ -370,15 +305,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             };
 
             CXC_006_Rpt report = new CXC_006_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_006");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+            
             report.p_FechaIni.Value = model.fecha_ini;
             report.p_FechaFin.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -392,15 +319,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_006(cl_filtros_facturacion_Info model)
         {
             CXC_006_Rpt report = new CXC_006_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_006");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+            
             report.p_FechaIni.Value = model.fecha_ini;
             report.p_FechaFin.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -422,15 +341,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             };
 
             CXC_007_Rpt report = new CXC_007_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_007");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+          
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -439,14 +350,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
 
            CXC_007_Resumen_Rpt ReportResumen = new CXC_007_Resumen_Rpt();
-            #region Cargo diseño desde base
-            var reportResum = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_007_Resumen");
-            if (reportResum != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
-                ReportResumen.LoadLayout(RootReporte);
-            }
-            #endregion
+            
             ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
             ReportResumen.p_fechaCorte.Value = model.fecha_fin;
             ReportResumen.usuario = SessionFixed.IdUsuario;
@@ -460,15 +364,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_007(cl_filtros_facturacion_Info model)
         {
             CXC_007_Rpt report = new CXC_007_Rpt();
-            #region Cargo diseño desde base
-            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var reporte = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_007");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
+            
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_fechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -478,14 +374,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
 
             CXC_007_Resumen_Rpt ReportResumen = new CXC_007_Resumen_Rpt();
-            #region Cargo diseño desde base
-            var reportResum = bus_rep_x_emp.GetInfo(IdEmpresa, "CXC_007_Resumen");
-            if (reportResum != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
-                ReportResumen.LoadLayout(RootReporte);
-            }
-            #endregion
+            
             ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
             ReportResumen.p_fechaCorte.Value = model.fecha_fin;
             ReportResumen.usuario = SessionFixed.IdUsuario;
@@ -508,15 +397,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
             model.mostrarAnulados = true;
             CXC_008_Rpt report = new CXC_008_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_008");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
@@ -565,15 +445,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_008(cl_filtros_Info model)
         {
             CXC_008_Rpt report = new CXC_008_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_008");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAnio.Value = model.IdAnio;
@@ -633,15 +504,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.mostrarAnulados = true;
             CXC_009_Rpt report = new CXC_009_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_009");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_FechaIni.Value = model.fecha_ini.Date;
             report.p_FechaFin.Value = model.fecha_fin.Date;
@@ -652,14 +514,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
 
             CXC_009_Resumen_Rpt ReportResumen = new CXC_009_Resumen_Rpt();
-            #region Cargo diseño desde base
-            var reportResum = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_009_Resumen");
-            if (reportResum != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
-                ReportResumen.LoadLayout(RootReporte);
-            }
-            #endregion
+
             ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
             ReportResumen.p_FechaIni.Value = model.fecha_ini.Date;
             ReportResumen.p_FechaFin.Value = model.fecha_fin.Date;
@@ -674,15 +529,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         {
             CXC_009_Rpt report = new CXC_009_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_009");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_FechaIni.Value = model.fecha_ini.Date;
             report.p_FechaFin.Value = model.fecha_fin.Date;
@@ -693,14 +539,7 @@ namespace Core.Web.Areas.Reportes.Controllers
 
 
             CXC_009_Resumen_Rpt ReportResumen = new CXC_009_Resumen_Rpt();
-            #region Cargo diseño desde base
-            var reportResum = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_009_Resumen");
-            if (reportResum != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
-                ReportResumen.LoadLayout(RootReporte);
-            }
-            #endregion
+
             ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
             ReportResumen.p_FechaIni.Value = model.fecha_ini.Date;
             ReportResumen.p_FechaFin.Value = model.fecha_fin.Date;
@@ -718,15 +557,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             CXC_010_Rpt report = new CXC_010_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_010");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_fechaIni.Value = model.fecha_ini;
@@ -741,15 +571,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_010(cl_filtros_Info model)
         {
             CXC_010_Rpt report = new CXC_010_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_010");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
@@ -773,15 +594,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             CXC_011_Rpt report = new CXC_011_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_011");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
             report.p_IdAlumno.Value = model.IdAlumno;
@@ -796,15 +608,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_011(cl_filtros_Info model)
         {
             CXC_011_Rpt report = new CXC_011_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_011");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
@@ -825,15 +628,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             CXC_012_Rpt report = new CXC_012_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_012");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_FechaIni.Value = model.fecha_ini;
             report.p_FechaFin.Value = model.fecha_fin;
@@ -847,15 +641,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_012(cl_filtros_Info model)
         {
             CXC_012_Rpt report = new CXC_012_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_012");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_FechaIni.Value = model.fecha_ini;
@@ -878,15 +663,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             CXC_013_Rpt report = new CXC_013_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_013");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
@@ -901,15 +677,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_013(cl_filtros_Info model)
         {
             CXC_013_Rpt report = new CXC_013_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_013");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
@@ -933,15 +700,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             CXC_014_Rpt report = new CXC_014_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_014");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
@@ -956,15 +714,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_014(cl_filtros_Info model)
         {
             CXC_014_Rpt report = new CXC_014_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_014");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
@@ -988,15 +737,6 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             CXC_015_Rpt report = new CXC_015_Rpt();
 
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_015");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
-
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
@@ -1011,15 +751,6 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult CXC_015(cl_filtros_Info model)
         {
             CXC_015_Rpt report = new CXC_015_Rpt();
-
-            #region Cargo diseño desde base
-            var reporte = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_015");
-            if (reporte != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                report.LoadLayout(RootReporte);
-            }
-            #endregion
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdAlumno.Value = model.IdAlumno;

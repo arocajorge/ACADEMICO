@@ -2020,6 +2020,10 @@
     <Compile Include="Reportes\Academico\ACA_012_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Asistencia_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_048_Promedios_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_048_SinPromedios_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_048_Rendimiento.cs" />
+    <Compile Include="Reportes\Academico\ACA_048_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_047_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_046_Promedios_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_046_Data.cs" />

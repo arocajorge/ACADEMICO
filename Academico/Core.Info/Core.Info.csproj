@@ -298,6 +298,10 @@
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_015_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_048_Promedios_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_048_Rendimiento_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_048_SinPromedios_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_048_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_047_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_016_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_017_Info.cs" />
