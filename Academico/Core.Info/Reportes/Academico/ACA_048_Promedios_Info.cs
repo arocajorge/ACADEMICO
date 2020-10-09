@@ -18,9 +18,12 @@ namespace Core.Info.Reportes.Academico
         public Nullable<int> IdMateria { get; set; }
         public Nullable<decimal> PromedioFinalQ1 { get; set; }
         public Nullable<decimal> PromedioFinalQ2 { get; set; }
+        public string CodigoQ1 { get; set; }
+        public string CodigoQ2 { get; set; }
 
         #region Campos que no existen
         public Nullable<decimal> PromedioFinal { get; set; }
+        public string Codigo { get; set; }
         #endregion
     }
 }

@@ -47,6 +47,7 @@
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
             this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
+            this.xrChart1 = new DevExpress.XtraReports.UI.XRChart();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdSede = new DevExpress.XtraReports.Parameters.Parameter();
@@ -57,12 +58,11 @@
             this.p_IdNivel = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCatalogoParcialTipo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdMateria = new DevExpress.XtraReports.Parameters.Parameter();
-            this.xrChart1 = new DevExpress.XtraReports.UI.XRChart();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrChart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -113,7 +113,7 @@
             // xrTableCell5
             // 
             this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat( [DescripcionCorta], \' - \', [DescripcionLarga])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DescripcionLarga]")});
             this.xrTableCell5.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
@@ -135,7 +135,7 @@
             // xrTableCell7
             // 
             this.xrTableCell7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Calificacion]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Codigo]")});
             this.xrTableCell7.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTableCell7.Multiline = true;
             this.xrTableCell7.Name = "xrTableCell7";
@@ -233,6 +233,27 @@
             this.GroupFooter1.HeightF = 210F;
             this.GroupFooter1.Name = "GroupFooter1";
             // 
+            // xrChart1
+            // 
+            this.xrChart1.BorderColor = System.Drawing.Color.Black;
+            this.xrChart1.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram1.DefaultPane.EnableAxisXScrolling = DevExpress.Utils.DefaultBoolean.False;
+            xyDiagram1.DefaultPane.EnableAxisXZooming = DevExpress.Utils.DefaultBoolean.False;
+            xyDiagram1.DefaultPane.EnableAxisYScrolling = DevExpress.Utils.DefaultBoolean.False;
+            xyDiagram1.DefaultPane.EnableAxisYZooming = DevExpress.Utils.DefaultBoolean.False;
+            this.xrChart1.Diagram = xyDiagram1;
+            this.xrChart1.Legend.Name = "Default Legend";
+            this.xrChart1.LocationFloat = new DevExpress.Utils.PointFloat(180.8333F, 10F);
+            this.xrChart1.Name = "xrChart1";
+            this.xrChart1.SeriesDataMember = "Codigo";
+            this.xrChart1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.xrChart1.SeriesTemplate.ArgumentDataMember = "AlumnosConCalificacion";
+            this.xrChart1.SeriesTemplate.SeriesDataMember = "Codigo";
+            this.xrChart1.SeriesTemplate.ValueDataMembersSerializable = "AlumnosConCalificacion";
+            this.xrChart1.SizeF = new System.Drawing.SizeF(300F, 200F);
+            // 
             // objectDataSource1
             // 
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_048_Rendimiento_Info);
@@ -283,27 +304,6 @@
             this.p_IdMateria.Name = "p_IdMateria";
             this.p_IdMateria.Visible = false;
             // 
-            // xrChart1
-            // 
-            this.xrChart1.BorderColor = System.Drawing.Color.Black;
-            this.xrChart1.Borders = DevExpress.XtraPrinting.BorderSide.None;
-            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram1.DefaultPane.EnableAxisXScrolling = DevExpress.Utils.DefaultBoolean.False;
-            xyDiagram1.DefaultPane.EnableAxisXZooming = DevExpress.Utils.DefaultBoolean.False;
-            xyDiagram1.DefaultPane.EnableAxisYScrolling = DevExpress.Utils.DefaultBoolean.False;
-            xyDiagram1.DefaultPane.EnableAxisYZooming = DevExpress.Utils.DefaultBoolean.False;
-            this.xrChart1.Diagram = xyDiagram1;
-            this.xrChart1.Legend.Name = "Default Legend";
-            this.xrChart1.LocationFloat = new DevExpress.Utils.PointFloat(180.8333F, 10F);
-            this.xrChart1.Name = "xrChart1";
-            this.xrChart1.SeriesDataMember = "Codigo";
-            this.xrChart1.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.xrChart1.SeriesTemplate.ArgumentDataMember = "AlumnosConCalificacion";
-            this.xrChart1.SeriesTemplate.SeriesDataMember = "Codigo";
-            this.xrChart1.SeriesTemplate.ValueDataMembersSerializable = "AlumnosConCalificacion";
-            this.xrChart1.SizeF = new System.Drawing.SizeF(300F, 200F);
-            // 
             // ACA_048_Rendimiento
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -334,9 +334,9 @@
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_048_Rendimiento_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrChart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }

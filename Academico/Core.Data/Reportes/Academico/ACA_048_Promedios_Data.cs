@@ -23,12 +23,14 @@ namespace Core.Data.Reportes.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "select a.IdEmpresa, a.IdAnio, a.IdSede, a.IdNivel, a.IdJornada, a.IdCurso, a.IdParalelo, d.IdMateria, "
-                    + " AVG(d.PromedioQ1) PromedioFinalQ1, AVG(d.PromedioQ2) PromedioFinalQ2 "
-                    + " from aca_Matricula as a inner join "
-                    + " aca_Alumno as b on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno inner join "
-                    + " tb_persona as c on b.IdPersona = c.IdPersona left join "
-                    + " aca_MatriculaCalificacionCualitativaPromedio as d on a.IdEmpresa = d.IdEmpresa and a.IdMatricula = d.IdMatricula "
+                    string query = "select  x.IdEmpresa, x.IdAnio, x.IdSede, x.IdNivel, x.IdJornada, x.IdCurso, x.IdParalelo, x.IdMateria, "
+                    + " x.PromedioFinalQ1, q1.Codigo CodigoQ1, x.PromedioFinalQ2, q2.Codigo CodigoQ2 "
+                    + " from( "
+                    + " select a.IdEmpresa, a.IdAnio, a.IdSede, a.IdNivel, a.IdJornada, a.IdCurso, a.IdParalelo, d.IdMateria, "
+                    + " dbo.BankersRounding(AVG(d.PromedioQ1), 2) PromedioFinalQ1, dbo.BankersRounding(AVG(d.PromedioQ2), 2) PromedioFinalQ2 "
+                    + " from aca_Matricula as a inner join  aca_Alumno as b on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno "
+                    + " inner join  tb_persona as c on b.IdPersona = c.IdPersona left join  aca_MatriculaCalificacionCualitativaPromedio as d "
+                    + " on a.IdEmpresa = d.IdEmpresa and a.IdMatricula = d.IdMatricula "
                     + " where a.IdEmpresa = " + IdEmpresa
                     + " and a.IdAnio = " + IdAnio
                     + " and a.IdSede = " + IdSede
@@ -38,11 +40,11 @@ namespace Core.Data.Reportes.Academico
                     + " and a.IdParalelo = " + IdParalelo
                     + " and d.IdMateria = " + IdMateria
                     + " and b.Estado = 1 "
-                    + " AND NOT EXISTS( "
-                    + " SELECT f.IdEmpresa FROM aca_AlumnoRetiro AS F "
-                    + " where a.IdEmpresa = f.IdEmpresa and a.IdMatricula = f.IdMatricula and f.Estado = 1 "
-                    + " ) "
-                    + " group by a.IdEmpresa, a.IdAnio, a.IdSede, a.IdNivel, a.IdJornada, a.IdCurso, a.IdParalelo, d.IdMateria";
+                    + " AND NOT EXISTS(SELECT f.IdEmpresa FROM aca_AlumnoRetiro AS F  where a.IdEmpresa = f.IdEmpresa and a.IdMatricula = f.IdMatricula and f.Estado = 1) "
+                    + " group by a.IdEmpresa, a.IdAnio, a.IdSede, a.IdNivel, a.IdJornada, a.IdCurso, a.IdParalelo, d.IdMateria "
+                    + " ) x "
+                    + " left join aca_AnioLectivoCalificacionCualitativa q1 on q1.IdEmpresa = x.IdEmpresa and q1.IdAnio = x.IdAnio and q1.Calificacion >= x.PromedioFinalQ1 "
+                    + " left join aca_AnioLectivoCalificacionCualitativa q2 on q2.IdEmpresa = x.IdEmpresa and q2.IdAnio = x.IdAnio and q2.Calificacion >= x.PromedioFinalQ2";
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
@@ -61,12 +63,20 @@ namespace Core.Data.Reportes.Academico
                             IdMateria = Convert.ToInt32(reader["IdMateria"]),
                             PromedioFinalQ1 = string.IsNullOrEmpty(reader["PromedioFinalQ1"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["PromedioFinalQ1"]),
                             PromedioFinalQ2 = string.IsNullOrEmpty(reader["PromedioFinalQ2"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["PromedioFinalQ2"]),
+                            CodigoQ1 = string.IsNullOrEmpty(reader["CodigoQ1"].ToString()) ? null : reader["CodigoQ1"].ToString(),
+                            CodigoQ2 = string.IsNullOrEmpty(reader["CodigoQ2"].ToString()) ? null : reader["CodigoQ2"].ToString(),
                             PromedioFinal = (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ?
                                 (string.IsNullOrEmpty(reader["PromedioFinalQ1"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["PromedioFinalQ1"])) :
                                 ((IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)) ?
                                    string.IsNullOrEmpty(reader["PromedioFinalQ2"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["PromedioFinalQ2"]) :
                                    null)
-                                )
+                                ),
+                            Codigo = (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ?
+                                        (string.IsNullOrEmpty(reader["CodigoQ1"].ToString()) ? null : reader["CodigoQ1"].ToString()) :
+                                            ((IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)) ?
+                                            string.IsNullOrEmpty(reader["CodigoQ2"].ToString()) ? null : reader["CodigoQ2"].ToString() :
+                                       null)
+                                   )
                         });
                     }
                     reader.Close();
