@@ -98,6 +98,7 @@ namespace Core.Data.Academico
                         OrdenMateria = Entity.OrdenMateria,
                         OrdenMateriaGrupo = Entity.OrdenMateriaGrupo??0,
                         OrdenMateriaArea = Entity.OrdenMateriaArea??0,
+                        PromediarGrupo = Entity.PromediarGrupo??false,
                         EsObligatorio = Entity.EsObligatorio,
                         IdCatalogoTipoCalificacion = Entity.IdCatalogoTipoCalificacion,
                         Estado = Entity.Estado

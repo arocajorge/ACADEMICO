@@ -60,6 +60,7 @@ namespace Core.Data.Academico
                         IdMateriaGrupo = Entity.IdMateriaGrupo,
                         NomMateriaGrupo = Entity.NomMateriaGrupo,
                         OrdenMateriaGrupo = Entity.OrdenMateriaGrupo,
+                        PromediarGrupo = Entity.PromediarGrupo,
                         Estado = Entity.Estado
                     };
                 }
@@ -129,6 +130,7 @@ namespace Core.Data.Academico
                         IdMateriaGrupo = info.IdMateriaGrupo = getId(info.IdEmpresa),
                         NomMateriaGrupo = info.NomMateriaGrupo,
                         OrdenMateriaGrupo = info.OrdenMateriaGrupo,
+                        PromediarGrupo = (info.PromediarGrupo==null ? false : info.PromediarGrupo),
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -158,6 +160,7 @@ namespace Core.Data.Academico
                     Entity.IdEmpresa = info.IdEmpresa;
                     Entity.NomMateriaGrupo = info.NomMateriaGrupo;
                     Entity.OrdenMateriaGrupo = info.OrdenMateriaGrupo;
+                    Entity.PromediarGrupo = (info.PromediarGrupo == null ? false : info.PromediarGrupo);
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 

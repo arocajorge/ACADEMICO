@@ -46,6 +46,17 @@
                     @Html.ValidationMessageFor(m => m.OrdenMateriaGrupo, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="bo_EsBodega"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.PromediarGrupo, settings =>
+                                {
+                                    settings.Name = "PromediarGrupo";
+                                    settings.Text = "Se promedia el grupo";
+                                }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.PromediarGrupo, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

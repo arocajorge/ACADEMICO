@@ -35,6 +35,7 @@ namespace Core.Info.Academico
         public int OrdenMateria { get; set; }
         public Nullable<int> OrdenMateriaGrupo { get; set; }
         public Nullable<int> OrdenMateriaArea { get; set; }
+        public Nullable<bool> PromediarGrupo { get; set; }
         public Nullable<int> IdCatalogoTipoCalificacion { get; set; }
 
         #region Campos que no existen en la tabla

@@ -53,16 +53,12 @@ namespace Core.Data.Reportes.Academico
                             OrdenMateriaGrupo = q.OrdenMateriaGrupo,
                             OrdenMateriaArea = q.OrdenMateriaArea,
                             OrdenMateria = q.OrdenMateria,
-                            EsObligatorio = q.EsObligatorio,
                             NomMateriaArea = q.NomMateriaArea,
                             NomMateriaGrupo = q.NomMateriaGrupo,
                             PromedioFinalQ1 = q.PromedioFinalQ1,
                             PromedioFinalQ2 = q.PromedioFinalQ2,
                             Supletorio = q.Supletorio,
                             PromedioFinal=q.PromedioFinal,
-                            ExamenSupletorio = q.ExamenSupletorio,
-                            ExamenRemedial = q.ExamenRemedial,
-                            ExamenGracia = q.ExamenGracia
                         });
                     }
                 }

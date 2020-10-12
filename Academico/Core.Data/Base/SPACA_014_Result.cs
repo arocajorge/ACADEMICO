@@ -29,6 +29,7 @@ namespace Core.Data.Base
         public Nullable<bool> EsObligatorio { get; set; }
         public Nullable<int> OrdenMateriaArea { get; set; }
         public Nullable<int> OrdenMateriaGrupo { get; set; }
+        public Nullable<bool> PromediarGrupo { get; set; }
         public Nullable<int> OrdenMateria { get; set; }
         public Nullable<int> IdCatalogoTipoCalificacion { get; set; }
         public string Codigo { get; set; }

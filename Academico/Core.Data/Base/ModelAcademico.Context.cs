@@ -33,7 +33,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Catalogo> aca_Catalogo { get; set; }
         public virtual DbSet<aca_CatalogoTipo> aca_CatalogoTipo { get; set; }
         public virtual DbSet<aca_Jornada> aca_Jornada { get; set; }
-        public virtual DbSet<aca_MateriaGrupo> aca_MateriaGrupo { get; set; }
         public virtual DbSet<aca_Menu> aca_Menu { get; set; }
         public virtual DbSet<aca_Menu_x_aca_Sede> aca_Menu_x_aca_Sede { get; set; }
         public virtual DbSet<aca_NivelAcademico> aca_NivelAcademico { get; set; }
@@ -107,10 +106,7 @@ namespace Core.Data.Base
         public virtual DbSet<aca_AnioLectivo_PeriodoDet> aca_AnioLectivo_PeriodoDet { get; set; }
         public virtual DbSet<aca_AnioLectivoConductaEquivalencia> aca_AnioLectivoConductaEquivalencia { get; set; }
         public virtual DbSet<vwaca_AnioLectivoConductaEquivalencia> vwaca_AnioLectivoConductaEquivalencia { get; set; }
-        public virtual DbSet<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
         public virtual DbSet<aca_Materia> aca_Materia { get; set; }
-        public virtual DbSet<vwaca_AnioLectivo_Curso_Materia> vwaca_AnioLectivo_Curso_Materia { get; set; }
-        public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor> vwaca_AnioLectivo_Paralelo_Profesor { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Paralelo_Profesor_CalificacionesCualitativas> vwaca_AnioLectivo_Paralelo_Profesor_CalificacionesCualitativas { get; set; }
         public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
@@ -136,6 +132,10 @@ namespace Core.Data.Base
         public virtual DbSet<aca_MatriculaCalificacionParticipacion> aca_MatriculaCalificacionParticipacion { get; set; }
         public virtual DbSet<aca_AnioLectivo> aca_AnioLectivo { get; set; }
         public virtual DbSet<aca_Sede> aca_Sede { get; set; }
+        public virtual DbSet<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
+        public virtual DbSet<aca_MateriaGrupo> aca_MateriaGrupo { get; set; }
+        public virtual DbSet<vwaca_AnioLectivo_Curso_Materia> vwaca_AnioLectivo_Curso_Materia { get; set; }
+        public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

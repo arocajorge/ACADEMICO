@@ -21,9 +21,8 @@ namespace Core.Info.Reportes.Academico
         public string NomMateria { get; set; }
         public string NomMateriaArea { get; set; }
         public string NomMateriaGrupo { get; set; }
-        public bool EsObligatorio { get; set; }
         public int OrdenMateria { get; set; }
-        public int OrdenMateriaGrupo { get; set; }
+        public Nullable<int> OrdenMateriaGrupo { get; set; }
         public int OrdenMateriaArea { get; set; }
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }
@@ -40,10 +39,7 @@ namespace Core.Info.Reportes.Academico
         public Nullable<int> OrdenParalelo { get; set; }
         public string PromedioFinalQ1 { get; set; }
         public string PromedioFinalQ2 { get; set; }
-        public string Supletorio { get; set; }
-        public string ExamenSupletorio { get; set; }
-        public string ExamenRemedial { get; set; }
-        public string ExamenGracia { get; set; }
+        public Nullable<decimal> Supletorio { get; set; }
         public string PromedioFinal { get; set; }
     }
 }

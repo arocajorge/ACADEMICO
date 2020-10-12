@@ -26,9 +26,8 @@ namespace Core.Data.Base
         public string NomMateria { get; set; }
         public string NomMateriaArea { get; set; }
         public string NomMateriaGrupo { get; set; }
-        public Nullable<bool> EsObligatorio { get; set; }
         public int OrdenMateria { get; set; }
-        public int OrdenMateriaGrupo { get; set; }
+        public Nullable<int> OrdenMateriaGrupo { get; set; }
         public int OrdenMateriaArea { get; set; }
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }

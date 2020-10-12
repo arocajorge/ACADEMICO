@@ -293,6 +293,7 @@ namespace Core.Data.Academico
                             Entity.OrdenMateria = item.OrdenMateria;
                             Entity.OrdenMateriaArea = item.OrdenMateriaArea;
                             Entity.OrdenMateriaGrupo = item.OrdenMateriaGrupo;
+                            Entity.PromediarGrupo = item.PromediarGrupo;
                             Entity.IdCatalogoTipoCalificacion = item.IdCatalogoTipoCalificacion;
 
                             Context.SaveChanges();

@@ -17,6 +17,7 @@ namespace Core.Info.Academico
         public string NomMateriaGrupo { get; set; }
         [Required(ErrorMessage = "El campo orden es obligatorio")]
         public int OrdenMateriaGrupo { get; set; }
+        public Nullable<bool> PromediarGrupo { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

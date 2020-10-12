@@ -24,6 +24,7 @@ namespace Core.Data.Base
         public int IdMateriaGrupo { get; set; }
         public string NomMateriaGrupo { get; set; }
         public int OrdenMateriaGrupo { get; set; }
+        public Nullable<bool> PromediarGrupo { get; set; }
         public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }

@@ -37,6 +37,7 @@ namespace Core.Info.Academico
         public string NomMateriaArea { get; set; }
         public int OrdenMateriaGrupo { get; set; }
         public int OrdenMateriaArea { get; set; }
+        public bool PromediarGrupo { get; set; }
         #endregion
     }
 }

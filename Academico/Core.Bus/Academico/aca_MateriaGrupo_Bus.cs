@@ -80,6 +80,7 @@ namespace Core.Bus.Academico
                                 {
                                     info_curso_materia.NomMateriaGrupo = info.NomMateriaGrupo;
                                     info_curso_materia.OrdenMateriaGrupo = info.OrdenMateriaGrupo;
+                                    info_curso_materia.PromediarGrupo = info.PromediarGrupo;
                                 }
 
                                 return (odata_curso_materia.modificarDB(lst_curso_materia));

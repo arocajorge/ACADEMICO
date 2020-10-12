@@ -138,6 +138,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         OrdenMateria = info_materia.OrdenMateria,
                         OrdenMateriaArea = info_materia.OrdenMateriaArea,
                         OrdenMateriaGrupo = info_materia.OrdenMateriaGrupo,
+                        PromediarGrupo = info_materia.PromediarGrupo,
                         IdCatalogoTipoCalificacion = info_materia.IdCatalogoTipoCalificacion
                     };
                     lista.Add(info);

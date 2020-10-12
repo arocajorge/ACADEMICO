@@ -24,6 +24,7 @@ namespace Core.Data.Base
         public string NomMateria { get; set; }
         public string NomMateriaArea { get; set; }
         public string NomMateriaGrupo { get; set; }
+        public Nullable<bool> PromediarGrupo { get; set; }
         public bool EsObligatorio { get; set; }
         public bool Estado { get; set; }
         public Nullable<int> IdCatalogoTipoCalificacion { get; set; }

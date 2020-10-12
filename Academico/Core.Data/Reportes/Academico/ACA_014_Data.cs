@@ -53,6 +53,7 @@ namespace Core.Data.Reportes.Academico
                             OrdenMateriaGrupo = q.OrdenMateriaGrupo,
                             OrdenMateriaArea = q.OrdenMateriaArea,
                             OrdenMateria = q.OrdenMateria,
+                            PromediarGrupo = q.PromediarGrupo,
                             EsObligatorio = q.EsObligatorio,
                             NomMateriaArea = q.NomMateriaArea,
                             NomMateriaGrupo = q.NomMateriaGrupo,
@@ -91,7 +92,7 @@ namespace Core.Data.Reportes.Academico
                             IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF,
                             IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion,
                             NombreRepresentante = q.NombreRepresentante,
-                            NombreInspector = q.NombreInspector
+                            NombreInspector = q.NombreInspector,
                         });
                     }
                 }
@@ -123,13 +124,13 @@ namespace Core.Data.Reportes.Academico
 
                 foreach (var item in ListaAgrupadaXMatricula)
                 {
-                    var lst_cuantitativas = Lista.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
+                    var lst_promediar_grupo = Lista.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula && q.PromediarGrupo == true && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUALI)).ToList();
                     decimal SumaQ1 = 0;
                     decimal SumaQ2 = 0;
                     decimal SumaQuimestral = 0;
                     decimal SumaFinal = 0;
 
-                    foreach (var item1 in lst_cuantitativas)
+                    foreach (var item1 in lst_promediar_grupo)
                     {
                         if (string.IsNullOrEmpty(item1.PromedioFinalQ1))
                         {
@@ -171,7 +172,6 @@ namespace Core.Data.Reportes.Academico
                         item1.CantQ2 = contQ2;
                         item1.CantQuim = contQuim;
                         item1.CantFinal = contFinal;
-                        //item1.SumaQ1 = SumaQ1;
                     }
                 }
 

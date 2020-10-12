@@ -241,7 +241,7 @@
             this.xrTable1,
             this.lbl_imagen,
             this.CrossTab_xrPivotGrid1});
-            this.ReportHeader.HeightF = 226.8334F;
+            this.ReportHeader.HeightF = 242.6667F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // xrTable7
@@ -352,13 +352,13 @@
             // xrTable1
             // 
             this.xrTable1.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(119.9999F, 0F);
+            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(130F, 0F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2,
             this.xrTableRow18,
             this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(950.0001F, 68.50002F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(940F, 68.50002F);
             this.xrTable1.StylePriority.UseFont = false;
             this.xrTable1.StylePriority.UseTextAlignment = false;
             this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
@@ -406,7 +406,7 @@
             // lbl_parcial
             // 
             this.lbl_parcial.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Descripcion]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'AÑO LECTIVO\',[Descripcion])")});
             this.lbl_parcial.Font = new System.Drawing.Font("Verdana", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.lbl_parcial.Name = "lbl_parcial";
             this.lbl_parcial.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 120, 0, 0, 100F);
@@ -439,7 +439,7 @@
             // 
             this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lbl_imagen.Name = "lbl_imagen";
-            this.lbl_imagen.SizeF = new System.Drawing.SizeF(120F, 60F);
+            this.lbl_imagen.SizeF = new System.Drawing.SizeF(130F, 60F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // CrossTab_xrPivotGrid1
@@ -592,6 +592,7 @@
             crossTabColumnField1.FieldName = "OrdenMateriaGrupo";
             crossTabColumnField2.FieldName = "OrdenMateria";
             crossTabColumnField3.FieldName = "NomMateria";
+            crossTabColumnField3.SortOrder = DevExpress.XtraReports.UI.XRColumnSortOrder.None;
             this.CrossTab_xrPivotGrid1.ColumnFields.AddRange(new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnField[] {
             crossTabColumnField1,
             crossTabColumnField2,
@@ -627,8 +628,8 @@
             this.CrossTab_xrPivotGrid1.PrintOptions.RepeatRowHeaders = false;
             crossTabRowDefinition1.Visible = false;
             this.CrossTab_xrPivotGrid1.RowDefinitions.AddRange(new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition[] {
-            new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(2F),
-            new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(2F),
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(10F),
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(10F),
             new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(20F),
             new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(20F),
             new DevExpress.XtraReports.UI.CrossTab.CrossTabRowDefinition(20F),
@@ -636,7 +637,7 @@
             crossTabRowField1.FieldName = "pe_nombreCompleto";
             this.CrossTab_xrPivotGrid1.RowFields.AddRange(new DevExpress.XtraReports.UI.CrossTab.CrossTabRowField[] {
             crossTabRowField1});
-            this.CrossTab_xrPivotGrid1.SizeF = new System.Drawing.SizeF(790.7653F, 87F);
+            this.CrossTab_xrPivotGrid1.SizeF = new System.Drawing.SizeF(790.7653F, 103F);
             // 
             // xrCrossTabCell1
             // 
@@ -1295,7 +1296,7 @@
             this.xrCrossTabCell38.Name = "xrCrossTabCell38";
             this.xrCrossTabCell38.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrCrossTabCell38.RowIndex = 2;
-            this.xrCrossTabCell38.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrCrossTabCell38.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // xrCrossTabCell39
             // 

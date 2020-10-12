@@ -24,6 +24,7 @@ namespace Core.Info.Reportes.Academico
         public Nullable<bool> EsObligatorio { get; set; }
         public Nullable<int> OrdenMateriaArea { get; set; }
         public Nullable<int> OrdenMateriaGrupo { get; set; }
+        public Nullable<bool> PromediarGrupo { get; set; }
         public Nullable<int> OrdenMateria { get; set; }
         public Nullable<int> IdCatalogoTipoCalificacion { get; set; }
         public string Codigo { get; set; }
@@ -75,7 +76,7 @@ namespace Core.Info.Reportes.Academico
         public Nullable<int> IdEquivalenciaPromedioPF { get; set; }
         public string EquivalenciaPromedioPF { get; set; }
 
-        #region Campos que no existen
+        #region Campos que no existen en la tabla
         public string PromedioGeneralQ1 { get; set; }
         public string PromedioGeneralQ2 { get; set; }
         public string PromedioGeneralQuim { get; set; }
