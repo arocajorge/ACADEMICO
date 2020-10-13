@@ -49,13 +49,5 @@ namespace Core.Web.Reportes.Academico
             }
 
         }
-
-        private void Promedios_SubRpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
-        {
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            ((XRSubreport)sender).ReportSource.Parameters["p_IdAlumno"].Value = IdAlumno.Value == null ? 0 : Convert.ToDecimal(IdAlumno.Value);
-
-            ((XRSubreport)sender).ReportSource.RequestParameters = false;
-        }
     }
 }
