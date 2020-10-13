@@ -97,83 +97,120 @@ namespace Core.Data.Reportes.Academico
                     }
                 }
 
-                var ListaAgrupadaXMatricula = (from q in Lista
-                                group q by new
-                                {
-                                    q.IdEmpresa,
-                                    q.IdMatricula
-                                } into a
-                                select new ACA_014_Info
-                                {
-                                    IdEmpresa = a.Key.IdEmpresa,
-                                    IdMatricula = a.Key.IdMatricula
-                                }).ToList();
-
-                decimal SumaPromedioQ1 = 0;
-                decimal SumaPromedioQ2 = 0;
-                decimal SumaPromedioQuim = 0;
-                decimal SumaPromedioFinal = 0;
-                var PromedioGeneralQ1 = "";
-                var PromedioGeneralQ2 = "";
-                var PromedioGeneralQuim = "";
-                var PromedioGeneralFinal = "";
-                var contQ1 = 0;
-                var contQ2 = 0;
-                var contQuim = 0;
-                var contFinal = 0;
-
-                foreach (var item in ListaAgrupadaXMatricula)
+                #region Agrupar por "Promedio agrupado"
+                int TipoCatalogoCuantitativo = Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI);
+                var lstAgrupada = Lista.Where(q => q.IdCatalogoTipoCalificacion == TipoCatalogoCuantitativo && q.PromediarGrupo == true).GroupBy(q => new
                 {
-                    var lst_promediar_grupo = Lista.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula && q.PromediarGrupo == true && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUALI)).ToList();
-                    decimal SumaQ1 = 0;
-                    decimal SumaQ2 = 0;
-                    decimal SumaQuimestral = 0;
-                    decimal SumaFinal = 0;
+                    q.IdEmpresa,
+                    q.IdMatricula,
+                    q.NomMateriaGrupo
+                }).Select(q=> new ACA_014_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdMatricula = q.Key.IdMatricula,
+                    NomMateriaGrupo = q.Key.NomMateriaGrupo,
+                    PromedioFinalQ1Double = q.Max(g => g.PromedioFinalQ1) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinalQ1)) / q.Count(g=> !string.IsNullOrEmpty(g.PromedioFinalQ1)),
+                    PromedioFinalQ2Double = q.Max(g => g.PromedioFinalQ2) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinalQ2)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioFinalQ2)),
+                    PromedioFinalDouble = q.Max(g => g.PromedioFinal) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinal)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioFinal)),
+                }).ToList();
+                #endregion
+                
+                var lstMateriasNoAgrupada = Lista.Where(q => q.IdCatalogoTipoCalificacion == TipoCatalogoCuantitativo && (q.PromediarGrupo ?? false) == false).Select(q=> new ACA_014_Info
+                {
+                    IdEmpresa = q.IdEmpresa,
+                    IdMatricula = q.IdMatricula,
+                    PromedioFinalQ1Double = q.PromedioFinalQ1 == null ? (decimal?)null : Convert.ToDecimal(q.PromedioFinalQ1),
+                    PromedioFinalQ2Double = q.PromedioFinalQ2 == null ? (decimal?)null : Convert.ToDecimal(q.PromedioFinalQ2),
+                    PromedioFinalDouble = q.PromedioFinal == null ? (decimal?)null : Convert.ToDecimal(q.PromedioFinal),
+                }).ToList();
+                lstMateriasNoAgrupada.AddRange(lstAgrupada);
 
-                    foreach (var item1 in lst_promediar_grupo)
-                    {
-                        if (string.IsNullOrEmpty(item1.PromedioFinalQ1))
-                        {
-                            contQ1++;
-                        }
-                        else
-                        {
-                            SumaQ1 = SumaQ1 + Convert.ToDecimal(item.PromedioFinalQ1);
-                        }
+                var lstFinal = lstMateriasNoAgrupada.GroupBy(q => new { q.IdEmpresa, q.IdMatricula }).Select(q => new ACA_014_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdMatricula = q.Key.IdMatricula,
+                    PromedioFinalQ1Double = q.Max(g=> g.PromedioFinalQ1Double) == null ? (decimal?)null : (q.Sum(g=> g.PromedioFinalQ1Double) / q.Count(g => g.PromedioFinalQ1Double != null)),
+                    PromedioFinalQ2Double = q.Max(g => g.PromedioFinalQ2Double) == null ? (decimal?)null : (q.Sum(g => g.PromedioFinalQ2Double) / q.Count(g => g.PromedioFinalQ2Double != null)),
+                    PromedioFinalDouble = q.Max(g => g.PromedioFinalDouble) == null ? (decimal?)null : (q.Sum(g => g.PromedioFinalDouble) / q.Count(g => g.PromedioFinalDouble != null)),
+                }).ToList();
 
-                        if (string.IsNullOrEmpty(item1.PromedioFinalQ2))
-                        {
-                            contQ2++;
-                        }
-                        else
-                        {
-                            SumaQ2 = SumaQ2 + Convert.ToDecimal(item.PromedioFinalQ2);
-                        }
+                Lista = (from a in Lista
+                         join b in lstFinal
+                         on a.IdMatricula equals b.IdMatricula
+                         select new ACA_014_Info
+                         {
+                             IdEmpresa = a.IdEmpresa,
+                             IdMatricula = a.IdMatricula,
+                             IdMateria = a.IdMateria,
+                             IdAlumno = a.IdAlumno,
+                             pe_nombreCompleto = a.pe_nombreCompleto,
+                             Codigo = a.Codigo,
+                             IdAnio = a.IdAnio,
+                             IdSede = a.IdSede,
+                             IdNivel = a.IdNivel,
+                             IdJornada = a.IdJornada,
+                             IdCurso = a.IdCurso,
+                             IdParalelo = a.IdParalelo,
+                             CodigoParalelo = a.CodigoParalelo,
+                             Descripcion = a.Descripcion,
+                             NomSede = a.NomSede,
+                             NomNivel = a.NomNivel,
+                             NomJornada = a.NomJornada,
+                             NomMateria = a.NomMateria,
+                             NomCurso = a.NomCurso,
+                             NomParalelo = a.NomParalelo,
+                             OrdenNivel = a.OrdenNivel,
+                             OrdenJornada = a.OrdenJornada,
+                             OrdenCurso = a.OrdenCurso,
+                             OrdenParalelo = a.OrdenParalelo,
+                             OrdenMateriaGrupo = a.OrdenMateriaGrupo,
+                             OrdenMateriaArea = a.OrdenMateriaArea,
+                             OrdenMateria = a.OrdenMateria,
+                             PromediarGrupo = a.PromediarGrupo,
+                             EsObligatorio = a.EsObligatorio,
+                             NomMateriaArea = a.NomMateriaArea,
+                             NomMateriaGrupo = a.NomMateriaGrupo,
+                             CalificacionP1 = a.CalificacionP1,
+                             CalificacionP2 = a.CalificacionP2,
+                             CalificacionP3 = a.CalificacionP3,
+                             ExamenQ1 = a.ExamenQ1,
+                             PorcentajePromedioQ1 = a.PorcentajePromedioQ1,
+                             PorcentajeExamenQ1 = a.PorcentajeExamenQ1,
+                             PromedioFinalQ1 = a.PromedioFinalQ1,
+                             EquivalenciaPromedioP1 = a.EquivalenciaPromedioP1,
+                             EquivalenciaPromedioP2 = a.EquivalenciaPromedioP2,
+                             EquivalenciaPromedioP3 = a.EquivalenciaPromedioP3,
+                             EquivalenciaPromedioEQ1 = a.EquivalenciaPromedioEQ1,
+                             EquivalenciaPromedioQ1 = a.EquivalenciaPromedioQ1,
+                             CalificacionP4 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.CalificacionP4 : null),
+                             CalificacionP5 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.CalificacionP5 : null),
+                             CalificacionP6 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.CalificacionP6 : null),
+                             ExamenQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.ExamenQ2 : null),
+                             PorcentajePromedioQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PorcentajePromedioQ2 : null),
+                             PorcentajeExamenQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PorcentajeExamenQ2 : null),
+                             PromedioFinalQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PromedioFinalQ2 : null),
+                             ExamenSupletorio = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.ExamenSupletorio : null),
+                             ExamenMejoramiento = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.ExamenMejoramiento : null),
+                             ExamenGracia = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.ExamenGracia : null),
+                             ExamenRemedial = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.ExamenRemedial : null),
+                             CampoMejoramiento = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.CampoMejoramiento : null),
+                             PromedioFinal = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PromedioFinal : null),
+                             EquivalenciaPromedioP4 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioP4 : ""),
+                             EquivalenciaPromedioP5 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioP5 : ""),
+                             EquivalenciaPromedioP6 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioP6 : ""),
+                             EquivalenciaPromedioEQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioEQ2 : ""),
+                             EquivalenciaPromedioQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioQ2 : ""),
+                             PromedioQuimestralFinal = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PromedioQuimestralFinal : null),
+                             EquivalenciaPromedioPF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioPF : ""),
+                             IdEquivalenciaPromedioPF = a.IdEquivalenciaPromedioPF,
+                             IdCatalogoTipoCalificacion = a.IdCatalogoTipoCalificacion,
+                             NombreRepresentante = a.NombreRepresentante,
+                             NombreInspector = a.NombreInspector,
 
-                        if (string.IsNullOrEmpty(item1.PromedioQuimestralFinal))
-                        {
-                            contQuim++;
-                        }
-                        else
-                        {
-                            SumaQuimestral = SumaQuimestral + Convert.ToDecimal(item.PromedioQuimestralFinal);
-                        }
-
-                        if (string.IsNullOrEmpty(item1.PromedioFinal))
-                        {
-                            contFinal++;
-                        }
-                        else
-                        {
-                            SumaFinal = SumaFinal + Convert.ToDecimal(item.PromedioFinal);
-                        }
-
-                        item1.CantQ1 = contQ1;
-                        item1.CantQ2 = contQ2;
-                        item1.CantQuim = contQuim;
-                        item1.CantFinal = contFinal;
-                    }
-                }
+                             PFQ1 = b.PromedioFinalQ1Double == null ? (decimal?)null : Math.Round(b.PromedioFinalQ1Double ?? 0,2,MidpointRounding.AwayFromZero),
+                             PFQ2 = b.PromedioFinalQ2Double == null ? (decimal?)null : Math.Round(b.PromedioFinalQ2Double ?? 0, 2, MidpointRounding.AwayFromZero),
+                             PF = b.PromedioFinalDouble == null ? (decimal?)null : Math.Round(b.PromedioFinalDouble ?? 0, 2, MidpointRounding.AwayFromZero),
+                         }).ToList();
 
                 return Lista;
             }

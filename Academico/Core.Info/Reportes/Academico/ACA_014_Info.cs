@@ -85,6 +85,12 @@ namespace Core.Info.Reportes.Academico
         public int CantQ2 { get; set; }
         public int CantQuim { get; set; }
         public int CantFinal { get; set; }
+        public decimal? PromedioFinalQ1Double { get; set; }
+        public decimal? PromedioFinalQ2Double { get; set; }
+        public decimal? PromedioFinalDouble { get; set; }
+        public decimal? PFQ1 { get; set; }
+        public decimal? PFQ2 { get; set; }
+        public decimal? PF { get; set; }
         #endregion
     }
 }
