@@ -163,6 +163,7 @@ namespace Core.Data.Academico
                         PromedioMinimoParcial = Entity.PromedioMinimoParcial,
                         PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
                         IdCursoBachiller = Entity.IdCursoBachiller,
+                        CalificacionMaxima = Entity.CalificacionMaxima,
                         Estado = Entity.Estado
                     };
                 }
@@ -201,6 +202,7 @@ namespace Core.Data.Academico
                         PromedioMinimoParcial = Entity.PromedioMinimoParcial,
                         PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
                         IdCursoBachiller = Entity.IdCursoBachiller,
+                        CalificacionMaxima = Entity.CalificacionMaxima,
                         Estado = Entity.Estado
                     };
                 }
@@ -239,6 +241,7 @@ namespace Core.Data.Academico
                         PromedioMinimoParcial = Entity.PromedioMinimoParcial,
                         PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
                         IdCursoBachiller = Entity.IdCursoBachiller,
+                        CalificacionMaxima = Entity.CalificacionMaxima,
                         Estado = Entity.Estado
                     };
                 }
@@ -276,6 +279,7 @@ namespace Core.Data.Academico
                         PromedioMinimoParcial = Entity.PromedioMinimoParcial,
                         PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
                         IdCursoBachiller = Entity.IdCursoBachiller,
+                        CalificacionMaxima = Entity.CalificacionMaxima,
                         Estado = Entity.Estado
                     };
                 }
@@ -331,6 +335,7 @@ namespace Core.Data.Academico
                         PromedioMinimoParcial = info.PromedioMinimoParcial,
                         PromedioMinimoPromocion = info.PromedioMinimoPromocion,
                         IdCursoBachiller = info.IdCursoBachiller,
+                        CalificacionMaxima = info.CalificacionMaxima,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
@@ -391,6 +396,7 @@ namespace Core.Data.Academico
                     Entity.PromedioMinimoParcial = info.PromedioMinimoParcial;
                     Entity.PromedioMinimoPromocion = info.PromedioMinimoPromocion;
                     Entity.IdCursoBachiller = info.IdCursoBachiller;
+                    Entity.CalificacionMaxima = info.CalificacionMaxima;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
 
                     Context.SaveChanges();

@@ -84,6 +84,7 @@
           <Property Name="PromedioMinimoParcial" Type="float" />
           <Property Name="PromedioMinimoPromocion" Type="float" />
           <Property Name="IdCursoBachiller" Type="int" />
+          <Property Name="CalificacionMaxima" Type="float" />
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
@@ -6902,10 +6903,75 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
             <End Role="aca_Tematica" EntitySet="aca_Tematica" />
             <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
           </AssociationSet>
+          <EntitySet Name="aca_Sede" EntityType="ModelAcademico.aca_Sede" />
+          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede">
+            <End Role="aca_Sede" EntitySet="aca_Sede" />
+            <End Role="aca_AnioLectivo_Curso_Paralelo" EntitySet="aca_AnioLectivo_Curso_Paralelo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivo_Jornada_Curso_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Sede">
+            <End Role="aca_Sede" EntitySet="aca_Sede" />
+            <End Role="aca_AnioLectivo_Jornada_Curso" EntitySet="aca_AnioLectivo_Jornada_Curso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Sede">
+            <End Role="aca_Sede" EntitySet="aca_Sede" />
+            <End Role="aca_AnioLectivo_NivelAcademico_Jornada" EntitySet="aca_AnioLectivo_NivelAcademico_Jornada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivo_Paralelo_Profesor_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Sede">
+            <End Role="aca_Sede" EntitySet="aca_Sede" />
+            <End Role="aca_AnioLectivo_Paralelo_Profesor" EntitySet="aca_AnioLectivo_Paralelo_Profesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede">
+            <End Role="aca_Sede" EntitySet="aca_Sede" />
+            <End Role="aca_AnioLectivo_Sede_NivelAcademico" EntitySet="aca_AnioLectivo_Sede_NivelAcademico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivoParcial_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivoParcial_aca_Sede">
+            <End Role="aca_Sede" EntitySet="aca_Sede" />
+            <End Role="aca_AnioLectivoParcial" EntitySet="aca_AnioLectivoParcial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Menu_x_aca_Sede_aca_Sede" Association="ModelAcademico.FK_aca_Menu_x_aca_Sede_aca_Sede">
+            <End Role="aca_Sede" EntitySet="aca_Sede" />
+            <End Role="aca_Menu_x_aca_Sede" EntitySet="aca_Menu_x_aca_Sede" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Menu_x_seg_usuario_aca_Sede" Association="ModelAcademico.FK_aca_Menu_x_seg_usuario_aca_Sede">
+            <End Role="aca_Sede" EntitySet="aca_Sede" />
+            <End Role="aca_Menu_x_seg_usuario" EntitySet="aca_Menu_x_seg_usuario" />
+          </AssociationSet>
+          <EntitySet Name="aca_AnioLectivo_Curso_Materia" EntityType="ModelAcademico.aca_AnioLectivo_Curso_Materia" />
+          <EntitySet Name="aca_MateriaGrupo" EntityType="ModelAcademico.aca_MateriaGrupo" />
+          <EntitySet Name="vwaca_AnioLectivo_Curso_Materia" EntityType="ModelAcademico.vwaca_AnioLectivo_Curso_Materia" />
+          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_Curso" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Curso">
+            <End Role="aca_Curso" EntitySet="aca_Curso" />
+            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_Jornada" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Jornada">
+            <End Role="aca_Jornada" EntitySet="aca_Jornada" />
+            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_Materia" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Materia">
+            <End Role="aca_Materia" EntitySet="aca_Materia" />
+            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_NivelAcademico" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_NivelAcademico">
+            <End Role="aca_NivelAcademico" EntitySet="aca_NivelAcademico" />
+            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Sede">
+            <End Role="aca_Sede" EntitySet="aca_Sede" />
+            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Materia_aca_MateriaGrupo" Association="ModelAcademico.FK_aca_Materia_aca_MateriaGrupo">
+            <End Role="aca_MateriaGrupo" EntitySet="aca_MateriaGrupo" />
+            <End Role="aca_Materia" EntitySet="aca_Materia" />
+          </AssociationSet>
+          <EntitySet Name="vwaca_Materia" EntityType="ModelAcademico.vwaca_Materia" />
           <EntitySet Name="aca_AnioLectivo" EntityType="ModelAcademico.aca_AnioLectivo" />
           <AssociationSet Name="FK_aca_AnioLectivo_aca_Curso" Association="ModelAcademico.FK_aca_AnioLectivo_aca_Curso">
             <End Role="aca_Curso" EntitySet="aca_Curso" />
             <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo">
+            <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
+            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
           </AssociationSet>
           <AssociationSet Name="FK_aca_AnioLectivo_Curso_Paralelo_aca_AnioLectivo" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_AnioLectivo">
             <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
@@ -6963,71 +7029,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
             <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
             <End Role="aca_PermisoMatricula" EntitySet="aca_PermisoMatricula" />
           </AssociationSet>
-          <EntitySet Name="aca_Sede" EntityType="ModelAcademico.aca_Sede" />
-          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede">
-            <End Role="aca_Sede" EntitySet="aca_Sede" />
-            <End Role="aca_AnioLectivo_Curso_Paralelo" EntitySet="aca_AnioLectivo_Curso_Paralelo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivo_Jornada_Curso_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Sede">
-            <End Role="aca_Sede" EntitySet="aca_Sede" />
-            <End Role="aca_AnioLectivo_Jornada_Curso" EntitySet="aca_AnioLectivo_Jornada_Curso" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Sede">
-            <End Role="aca_Sede" EntitySet="aca_Sede" />
-            <End Role="aca_AnioLectivo_NivelAcademico_Jornada" EntitySet="aca_AnioLectivo_NivelAcademico_Jornada" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivo_Paralelo_Profesor_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Sede">
-            <End Role="aca_Sede" EntitySet="aca_Sede" />
-            <End Role="aca_AnioLectivo_Paralelo_Profesor" EntitySet="aca_AnioLectivo_Paralelo_Profesor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede">
-            <End Role="aca_Sede" EntitySet="aca_Sede" />
-            <End Role="aca_AnioLectivo_Sede_NivelAcademico" EntitySet="aca_AnioLectivo_Sede_NivelAcademico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivoParcial_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivoParcial_aca_Sede">
-            <End Role="aca_Sede" EntitySet="aca_Sede" />
-            <End Role="aca_AnioLectivoParcial" EntitySet="aca_AnioLectivoParcial" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_Menu_x_aca_Sede_aca_Sede" Association="ModelAcademico.FK_aca_Menu_x_aca_Sede_aca_Sede">
-            <End Role="aca_Sede" EntitySet="aca_Sede" />
-            <End Role="aca_Menu_x_aca_Sede" EntitySet="aca_Menu_x_aca_Sede" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_Menu_x_seg_usuario_aca_Sede" Association="ModelAcademico.FK_aca_Menu_x_seg_usuario_aca_Sede">
-            <End Role="aca_Sede" EntitySet="aca_Sede" />
-            <End Role="aca_Menu_x_seg_usuario" EntitySet="aca_Menu_x_seg_usuario" />
-          </AssociationSet>
-          <EntitySet Name="aca_AnioLectivo_Curso_Materia" EntityType="ModelAcademico.aca_AnioLectivo_Curso_Materia" />
-          <EntitySet Name="aca_MateriaGrupo" EntityType="ModelAcademico.aca_MateriaGrupo" />
-          <EntitySet Name="vwaca_AnioLectivo_Curso_Materia" EntityType="ModelAcademico.vwaca_AnioLectivo_Curso_Materia" />
-          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo">
-            <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
-            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_Curso" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Curso">
-            <End Role="aca_Curso" EntitySet="aca_Curso" />
-            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_Jornada" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Jornada">
-            <End Role="aca_Jornada" EntitySet="aca_Jornada" />
-            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_Materia" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Materia">
-            <End Role="aca_Materia" EntitySet="aca_Materia" />
-            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_NivelAcademico" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_NivelAcademico">
-            <End Role="aca_NivelAcademico" EntitySet="aca_NivelAcademico" />
-            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivo_Curso_Materia_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Sede">
-            <End Role="aca_Sede" EntitySet="aca_Sede" />
-            <End Role="aca_AnioLectivo_Curso_Materia" EntitySet="aca_AnioLectivo_Curso_Materia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_Materia_aca_MateriaGrupo" Association="ModelAcademico.FK_aca_Materia_aca_MateriaGrupo">
-            <End Role="aca_MateriaGrupo" EntitySet="aca_MateriaGrupo" />
-            <End Role="aca_Materia" EntitySet="aca_Materia" />
-          </AssociationSet>
-          <EntitySet Name="vwaca_Materia" EntityType="ModelAcademico.vwaca_Materia" />
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
           <Key>
@@ -7070,8 +7071,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
           <NavigationProperty Name="aca_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_NivelAcademico" FromRole="aca_AnioLectivo_Jornada_Curso" ToRole="aca_NivelAcademico" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Documento" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Documento_aca_AnioLectivo_Jornada_Curso" FromRole="aca_AnioLectivo_Jornada_Curso" ToRole="aca_AnioLectivo_Curso_Documento" />
           <NavigationProperty Name="aca_Curso" Relationship="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Curso" FromRole="aca_AnioLectivo_Jornada_Curso" ToRole="aca_Curso" />
-          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_AnioLectivo" FromRole="aca_AnioLectivo_Jornada_Curso" ToRole="aca_AnioLectivo" />
           <NavigationProperty Name="aca_Sede" Relationship="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Sede" FromRole="aca_AnioLectivo_Jornada_Curso" ToRole="aca_Sede" />
+          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_AnioLectivo" FromRole="aca_AnioLectivo_Jornada_Curso" ToRole="aca_AnioLectivo" />
         </EntityType>
         <EntityType Name="aca_AnioLectivo_NivelAcademico_Jornada">
           <Key>
@@ -7090,8 +7091,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
           <Property Name="OrdenJornada" Type="Int32" Nullable="false" />
           <NavigationProperty Name="aca_Jornada" Relationship="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Jornada" FromRole="aca_AnioLectivo_NivelAcademico_Jornada" ToRole="aca_Jornada" />
           <NavigationProperty Name="aca_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_NivelAcademico" FromRole="aca_AnioLectivo_NivelAcademico_Jornada" ToRole="aca_NivelAcademico" />
-          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_AnioLectivo" FromRole="aca_AnioLectivo_NivelAcademico_Jornada" ToRole="aca_AnioLectivo" />
           <NavigationProperty Name="aca_Sede" Relationship="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Sede" FromRole="aca_AnioLectivo_NivelAcademico_Jornada" ToRole="aca_Sede" />
+          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_AnioLectivo" FromRole="aca_AnioLectivo_NivelAcademico_Jornada" ToRole="aca_AnioLectivo" />
         </EntityType>
         <EntityType Name="aca_Catalogo">
           <Key>
@@ -7390,8 +7391,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
           <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_alumno_aca_Curso" FromRole="aca_Curso" ToRole="aca_Alumno" />
           <NavigationProperty Name="aca_AnioLectivo_Paralelo_Profesor" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivo_Paralelo_Profesor" />
           <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivoCalificacionHistorico" />
-          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivo" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivo_Curso_Materia" />
+          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivo" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Curso_Documento_aca_AnioLectivo_Jornada_Curso">
           <End Type="ModelAcademico.aca_AnioLectivo_Jornada_Curso" Role="aca_AnioLectivo_Jornada_Curso" Multiplicity="1" />
@@ -7518,8 +7519,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
           <NavigationProperty Name="aca_Profesor1" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Profesor1" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_Profesor" />
           <NavigationProperty Name="aca_Matricula_Rubro" Relationship="ModelAcademico.FK_aca_Matricula_Rubro_aca_AnioLectivo_Curso_Paralelo" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_Matricula_Rubro" />
           <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_AnioLectivo_Curso_Paralelo" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_Matricula" />
-          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_AnioLectivo" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_AnioLectivo" />
           <NavigationProperty Name="aca_Sede" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_Sede" />
+          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_AnioLectivo" FromRole="aca_AnioLectivo_Curso_Paralelo" ToRole="aca_AnioLectivo" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Curso_Paralelo_aca_Curso">
           <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="1" />
@@ -7897,8 +7898,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
           <NavigationProperty Name="aca_Paralelo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Paralelo" FromRole="aca_AnioLectivo_Paralelo_Profesor" ToRole="aca_Paralelo" />
           <NavigationProperty Name="aca_Profesor" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Profesor" FromRole="aca_AnioLectivo_Paralelo_Profesor" ToRole="aca_Profesor" />
           <NavigationProperty Name="aca_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Materia" FromRole="aca_AnioLectivo_Paralelo_Profesor" ToRole="aca_Materia" />
-          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_AnioLectivo" FromRole="aca_AnioLectivo_Paralelo_Profesor" ToRole="aca_AnioLectivo" />
           <NavigationProperty Name="aca_Sede" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Sede" FromRole="aca_AnioLectivo_Paralelo_Profesor" ToRole="aca_Sede" />
+          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_AnioLectivo" FromRole="aca_AnioLectivo_Paralelo_Profesor" ToRole="aca_AnioLectivo" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Paralelo_Profesor_aca_Curso">
           <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="1" />
@@ -8456,8 +8457,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
           <Property Name="NomNivel" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="OrdenNivel" Type="Int32" Nullable="false" />
           <NavigationProperty Name="aca_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_NivelAcademico" FromRole="aca_AnioLectivo_Sede_NivelAcademico" ToRole="aca_NivelAcademico" />
-          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_AnioLectivo" FromRole="aca_AnioLectivo_Sede_NivelAcademico" ToRole="aca_AnioLectivo" />
           <NavigationProperty Name="aca_Sede" Relationship="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede" FromRole="aca_AnioLectivo_Sede_NivelAcademico" ToRole="aca_Sede" />
+          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_AnioLectivo" FromRole="aca_AnioLectivo_Sede_NivelAcademico" ToRole="aca_AnioLectivo" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Sede_NivelAcademico_aca_NivelAcademico">
           <End Type="ModelAcademico.aca_NivelAcademico" Role="aca_NivelAcademico" Multiplicity="1" />
@@ -9237,8 +9238,8 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="aca_Catalogo" Relationship="ModelAcademico.FK_aca_AnioLectivoParcial_aca_Catalogo" FromRole="aca_AnioLectivoParcial" ToRole="aca_Catalogo" />
-          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivoParcial_aca_AnioLectivo" FromRole="aca_AnioLectivoParcial" ToRole="aca_AnioLectivo" />
           <NavigationProperty Name="aca_Sede" Relationship="ModelAcademico.FK_aca_AnioLectivoParcial_aca_Sede" FromRole="aca_AnioLectivoParcial" ToRole="aca_Sede" />
+          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivoParcial_aca_AnioLectivo" FromRole="aca_AnioLectivoParcial" ToRole="aca_AnioLectivo" />
         </EntityType>
         <EntityType Name="vwaca_AnioLectivoParcial">
           <Key>
@@ -11387,6 +11388,345 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="aca_Sede">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdSede" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdSede" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="NomSede" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NombreRector" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoRector" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CelularRector" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoRector" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="NombreSecretaria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_Curso_Paralelo" />
+          <NavigationProperty Name="aca_AnioLectivo_Jornada_Curso" Relationship="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_Jornada_Curso" />
+          <NavigationProperty Name="aca_AnioLectivo_NivelAcademico_Jornada" Relationship="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_NivelAcademico_Jornada" />
+          <NavigationProperty Name="aca_AnioLectivo_Paralelo_Profesor" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_Paralelo_Profesor" />
+          <NavigationProperty Name="aca_AnioLectivo_Sede_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_Sede_NivelAcademico" />
+          <NavigationProperty Name="aca_AnioLectivoParcial" Relationship="ModelAcademico.FK_aca_AnioLectivoParcial_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivoParcial" />
+          <NavigationProperty Name="aca_Menu_x_aca_Sede" Relationship="ModelAcademico.FK_aca_Menu_x_aca_Sede_aca_Sede" FromRole="aca_Sede" ToRole="aca_Menu_x_aca_Sede" />
+          <NavigationProperty Name="aca_Menu_x_seg_usuario" Relationship="ModelAcademico.FK_aca_Menu_x_seg_usuario_aca_Sede" FromRole="aca_Sede" ToRole="aca_Menu_x_seg_usuario" />
+          <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_Curso_Materia" />
+        </EntityType>
+        <Association Name="FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede">
+          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Paralelo" Role="aca_AnioLectivo_Curso_Paralelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_Curso_Paralelo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivo_Jornada_Curso_aca_Sede">
+          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_Jornada_Curso" Role="aca_AnioLectivo_Jornada_Curso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_Jornada_Curso">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Sede">
+          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_NivelAcademico_Jornada" Role="aca_AnioLectivo_NivelAcademico_Jornada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_NivelAcademico_Jornada">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivo_Paralelo_Profesor_aca_Sede">
+          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_Paralelo_Profesor" Role="aca_AnioLectivo_Paralelo_Profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_Paralelo_Profesor">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede">
+          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_Sede_NivelAcademico" Role="aca_AnioLectivo_Sede_NivelAcademico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_Sede_NivelAcademico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivoParcial_aca_Sede">
+          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivoParcial" Role="aca_AnioLectivoParcial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivoParcial">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Menu_x_aca_Sede_aca_Sede">
+          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Menu_x_aca_Sede" Role="aca_Menu_x_aca_Sede" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Principal>
+            <Dependent Role="aca_Menu_x_aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Menu_x_seg_usuario_aca_Sede">
+          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Menu_x_seg_usuario" Role="aca_Menu_x_seg_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Principal>
+            <Dependent Role="aca_Menu_x_seg_usuario">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="aca_AnioLectivo_Curso_Materia">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdSede" />
+            <PropertyRef Name="IdNivel" />
+            <PropertyRef Name="IdJornada" />
+            <PropertyRef Name="IdCurso" />
+            <PropertyRef Name="IdMateria" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdSede" Type="Int32" Nullable="false" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="IdJornada" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="IdMateria" Type="Int32" Nullable="false" />
+          <Property Name="NomMateria" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomMateriaArea" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomMateriaGrupo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdCatalogoTipoCalificacion" Type="Int32" />
+          <Property Name="EsObligatorio" Type="Boolean" Nullable="false" />
+          <Property Name="OrdenMateria" Type="Int32" Nullable="false" />
+          <Property Name="OrdenMateriaGrupo" Type="Int32" />
+          <Property Name="OrdenMateriaArea" Type="Int32" />
+          <Property Name="PromediarGrupo" Type="Boolean" />
+          <NavigationProperty Name="aca_Curso" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Curso" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_Curso" />
+          <NavigationProperty Name="aca_Jornada" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Jornada" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_Jornada" />
+          <NavigationProperty Name="aca_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Materia" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_Materia" />
+          <NavigationProperty Name="aca_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_NivelAcademico" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_NivelAcademico" />
+          <NavigationProperty Name="aca_Sede" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Sede" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_Sede" />
+          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_AnioLectivo" />
+        </EntityType>
+        <EntityType Name="aca_MateriaGrupo">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMateriaGrupo" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMateriaGrupo" Type="Int32" Nullable="false" />
+          <Property Name="NomMateriaGrupo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="OrdenMateriaGrupo" Type="Int32" Nullable="false" />
+          <Property Name="PromediarGrupo" Type="Boolean" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aca_Materia" Relationship="ModelAcademico.FK_aca_Materia_aca_MateriaGrupo" FromRole="aca_MateriaGrupo" ToRole="aca_Materia" />
+        </EntityType>
+        <EntityType Name="vwaca_AnioLectivo_Curso_Materia">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAnio" />
+            <PropertyRef Name="IdSede" />
+            <PropertyRef Name="IdNivel" />
+            <PropertyRef Name="IdJornada" />
+            <PropertyRef Name="IdCurso" />
+            <PropertyRef Name="IdMateria" />
+            <PropertyRef Name="NomMateria" />
+            <PropertyRef Name="EsObligatorio" />
+            <PropertyRef Name="OrdenMateria" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdSede" Type="Int32" Nullable="false" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="IdJornada" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="IdMateria" Type="Int32" Nullable="false" />
+          <Property Name="IdMateriaGrupo" Type="Int32" />
+          <Property Name="IdMateriaArea" Type="Int32" />
+          <Property Name="NomMateria" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomMateriaArea" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomMateriaGrupo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EsObligatorio" Type="Boolean" Nullable="false" />
+          <Property Name="OrdenMateria" Type="Int32" Nullable="false" />
+          <Property Name="OrdenMateriaGrupo" Type="Int32" />
+          <Property Name="OrdenMateriaArea" Type="Int32" />
+          <Property Name="IdCatalogoTipoCalificacion" Type="Int32" />
+          <Property Name="PromediarGrupo" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_Curso">
+          <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Curso">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCurso" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_Curso_Materia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_Jornada">
+          <End Type="ModelAcademico.aca_Jornada" Role="aca_Jornada" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Jornada">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdJornada" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_Curso_Materia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdJornada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_Materia">
+          <End Type="ModelAcademico.aca_Materia" Role="aca_Materia" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Materia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMateria" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_Curso_Materia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_NivelAcademico">
+          <End Type="ModelAcademico.aca_NivelAcademico" Role="aca_NivelAcademico" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_NivelAcademico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_Curso_Materia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_Sede">
+          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_Curso_Materia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Materia_aca_MateriaGrupo">
+          <End Type="ModelAcademico.aca_MateriaGrupo" Role="aca_MateriaGrupo" Multiplicity="0..1" />
+          <End Type="ModelAcademico.aca_Materia" Role="aca_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_MateriaGrupo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMateriaGrupo" />
+            </Principal>
+            <Dependent Role="aca_Materia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMateriaGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwaca_Materia">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMateria" />
+            <PropertyRef Name="OrdenMateria" />
+            <PropertyRef Name="NomMateria" />
+            <PropertyRef Name="EsObligatorio" />
+            <PropertyRef Name="Estado" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMateria" Type="Int32" Nullable="false" />
+          <Property Name="IdMateriaArea" Type="Int32" />
+          <Property Name="IdMateriaGrupo" Type="Int32" />
+          <Property Name="OrdenMateria" Type="Int32" Nullable="false" />
+          <Property Name="OrdenMateriaArea" Type="Int32" />
+          <Property Name="OrdenMateriaGrupo" Type="Int32" />
+          <Property Name="NomMateria" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomMateriaArea" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomMateriaGrupo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PromediarGrupo" Type="Boolean" />
+          <Property Name="EsObligatorio" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="IdCatalogoTipoCalificacion" Type="Int32" />
+          <Property Name="NomCatalogo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="aca_AnioLectivo">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -11404,6 +11744,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
           <Property Name="PromedioMinimoParcial" Type="Double" />
           <Property Name="PromedioMinimoPromocion" Type="Double" />
           <Property Name="IdCursoBachiller" Type="Int32" />
+          <Property Name="CalificacionMaxima" Type="Double" />
           <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -11412,6 +11753,7 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="aca_Curso" Relationship="ModelAcademico.FK_aca_AnioLectivo_aca_Curso" FromRole="aca_AnioLectivo" ToRole="aca_Curso" />
+          <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivo_Curso_Materia" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivo_Curso_Paralelo" />
           <NavigationProperty Name="aca_AnioLectivo_Jornada_Curso" Relationship="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivo_Jornada_Curso" />
           <NavigationProperty Name="aca_AnioLectivo_NivelAcademico_Jornada" Relationship="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivo_NivelAcademico_Jornada" />
@@ -11426,7 +11768,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
           <NavigationProperty Name="aca_AnioLectivoParcial" Relationship="ModelAcademico.FK_aca_AnioLectivoParcial_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivoParcial" />
           <NavigationProperty Name="aca_MatriculaCondicional" Relationship="ModelAcademico.FK_aca_MatriculaCondicional_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_MatriculaCondicional" />
           <NavigationProperty Name="aca_PermisoMatricula" Relationship="ModelAcademico.FK_aca_PermisoMatricula_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_PermisoMatricula" />
-          <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivo_Curso_Materia" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_aca_Curso">
           <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="0..1" />
@@ -11439,6 +11780,20 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
             <Dependent Role="aca_AnioLectivo">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdCursoBachiller" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo">
+          <End Type="ModelAcademico.aca_AnioLectivo" Role="aca_AnioLectivo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivo_Curso_Materia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -11638,359 +11993,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="aca_Sede">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdSede" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdSede" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="NomSede" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="NombreRector" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="TelefonoRector" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CelularRector" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CorreoRector" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="NombreSecretaria" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_Curso_Paralelo" />
-          <NavigationProperty Name="aca_AnioLectivo_Jornada_Curso" Relationship="ModelAcademico.FK_aca_AnioLectivo_Jornada_Curso_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_Jornada_Curso" />
-          <NavigationProperty Name="aca_AnioLectivo_NivelAcademico_Jornada" Relationship="ModelAcademico.FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_NivelAcademico_Jornada" />
-          <NavigationProperty Name="aca_AnioLectivo_Paralelo_Profesor" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_Paralelo_Profesor" />
-          <NavigationProperty Name="aca_AnioLectivo_Sede_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_Sede_NivelAcademico" />
-          <NavigationProperty Name="aca_AnioLectivoParcial" Relationship="ModelAcademico.FK_aca_AnioLectivoParcial_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivoParcial" />
-          <NavigationProperty Name="aca_Menu_x_aca_Sede" Relationship="ModelAcademico.FK_aca_Menu_x_aca_Sede_aca_Sede" FromRole="aca_Sede" ToRole="aca_Menu_x_aca_Sede" />
-          <NavigationProperty Name="aca_Menu_x_seg_usuario" Relationship="ModelAcademico.FK_aca_Menu_x_seg_usuario_aca_Sede" FromRole="aca_Sede" ToRole="aca_Menu_x_seg_usuario" />
-          <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_Curso_Materia" />
-        </EntityType>
-        <Association Name="FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede">
-          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Paralelo" Role="aca_AnioLectivo_Curso_Paralelo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Sede">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_Curso_Paralelo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivo_Jornada_Curso_aca_Sede">
-          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_Jornada_Curso" Role="aca_AnioLectivo_Jornada_Curso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Sede">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_Jornada_Curso">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivo_NivelAcademico_Jornada_aca_Sede">
-          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_NivelAcademico_Jornada" Role="aca_AnioLectivo_NivelAcademico_Jornada" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Sede">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_NivelAcademico_Jornada">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivo_Paralelo_Profesor_aca_Sede">
-          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_Paralelo_Profesor" Role="aca_AnioLectivo_Paralelo_Profesor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Sede">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_Paralelo_Profesor">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivo_Sede_NivelAcademico_aca_Sede">
-          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_Sede_NivelAcademico" Role="aca_AnioLectivo_Sede_NivelAcademico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Sede">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_Sede_NivelAcademico">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivoParcial_aca_Sede">
-          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivoParcial" Role="aca_AnioLectivoParcial" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Sede">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivoParcial">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_Menu_x_aca_Sede_aca_Sede">
-          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Menu_x_aca_Sede" Role="aca_Menu_x_aca_Sede" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Sede">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Principal>
-            <Dependent Role="aca_Menu_x_aca_Sede">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_Menu_x_seg_usuario_aca_Sede">
-          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Menu_x_seg_usuario" Role="aca_Menu_x_seg_usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Sede">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Principal>
-            <Dependent Role="aca_Menu_x_seg_usuario">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="aca_AnioLectivo_Curso_Materia">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="IdSede" />
-            <PropertyRef Name="IdNivel" />
-            <PropertyRef Name="IdJornada" />
-            <PropertyRef Name="IdCurso" />
-            <PropertyRef Name="IdMateria" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="IdSede" Type="Int32" Nullable="false" />
-          <Property Name="IdNivel" Type="Int32" Nullable="false" />
-          <Property Name="IdJornada" Type="Int32" Nullable="false" />
-          <Property Name="IdCurso" Type="Int32" Nullable="false" />
-          <Property Name="IdMateria" Type="Int32" Nullable="false" />
-          <Property Name="NomMateria" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomMateriaArea" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomMateriaGrupo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdCatalogoTipoCalificacion" Type="Int32" />
-          <Property Name="EsObligatorio" Type="Boolean" Nullable="false" />
-          <Property Name="OrdenMateria" Type="Int32" Nullable="false" />
-          <Property Name="OrdenMateriaGrupo" Type="Int32" />
-          <Property Name="OrdenMateriaArea" Type="Int32" />
-          <Property Name="PromediarGrupo" Type="Boolean" />
-          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_AnioLectivo" />
-          <NavigationProperty Name="aca_Curso" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Curso" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_Curso" />
-          <NavigationProperty Name="aca_Jornada" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Jornada" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_Jornada" />
-          <NavigationProperty Name="aca_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Materia" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_Materia" />
-          <NavigationProperty Name="aca_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_NivelAcademico" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_NivelAcademico" />
-          <NavigationProperty Name="aca_Sede" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Sede" FromRole="aca_AnioLectivo_Curso_Materia" ToRole="aca_Sede" />
-        </EntityType>
-        <EntityType Name="aca_MateriaGrupo">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMateriaGrupo" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMateriaGrupo" Type="Int32" Nullable="false" />
-          <Property Name="NomMateriaGrupo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="OrdenMateriaGrupo" Type="Int32" Nullable="false" />
-          <Property Name="PromediarGrupo" Type="Boolean" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aca_Materia" Relationship="ModelAcademico.FK_aca_Materia_aca_MateriaGrupo" FromRole="aca_MateriaGrupo" ToRole="aca_Materia" />
-        </EntityType>
-        <EntityType Name="vwaca_AnioLectivo_Curso_Materia">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAnio" />
-            <PropertyRef Name="IdSede" />
-            <PropertyRef Name="IdNivel" />
-            <PropertyRef Name="IdJornada" />
-            <PropertyRef Name="IdCurso" />
-            <PropertyRef Name="IdMateria" />
-            <PropertyRef Name="NomMateria" />
-            <PropertyRef Name="EsObligatorio" />
-            <PropertyRef Name="OrdenMateria" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="IdSede" Type="Int32" Nullable="false" />
-          <Property Name="IdNivel" Type="Int32" Nullable="false" />
-          <Property Name="IdJornada" Type="Int32" Nullable="false" />
-          <Property Name="IdCurso" Type="Int32" Nullable="false" />
-          <Property Name="IdMateria" Type="Int32" Nullable="false" />
-          <Property Name="IdMateriaGrupo" Type="Int32" />
-          <Property Name="IdMateriaArea" Type="Int32" />
-          <Property Name="NomMateria" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomMateriaArea" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomMateriaGrupo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="EsObligatorio" Type="Boolean" Nullable="false" />
-          <Property Name="OrdenMateria" Type="Int32" Nullable="false" />
-          <Property Name="OrdenMateriaGrupo" Type="Int32" />
-          <Property Name="OrdenMateriaArea" Type="Int32" />
-          <Property Name="IdCatalogoTipoCalificacion" Type="Int32" />
-          <Property Name="PromediarGrupo" Type="Boolean" />
-        </EntityType>
-        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_AnioLectivo">
-          <End Type="ModelAcademico.aca_AnioLectivo" Role="aca_AnioLectivo" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_AnioLectivo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_Curso_Materia">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_Curso">
-          <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Curso">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCurso" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_Curso_Materia">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCurso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_Jornada">
-          <End Type="ModelAcademico.aca_Jornada" Role="aca_Jornada" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Jornada">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdJornada" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_Curso_Materia">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdJornada" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_Materia">
-          <End Type="ModelAcademico.aca_Materia" Role="aca_Materia" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Materia">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMateria" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_Curso_Materia">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMateria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_NivelAcademico">
-          <End Type="ModelAcademico.aca_NivelAcademico" Role="aca_NivelAcademico" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_NivelAcademico">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNivel" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_Curso_Materia">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdNivel" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivo_Curso_Materia_aca_Sede">
-          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Materia" Role="aca_AnioLectivo_Curso_Materia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Sede">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivo_Curso_Materia">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdSede" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_Materia_aca_MateriaGrupo">
-          <End Type="ModelAcademico.aca_MateriaGrupo" Role="aca_MateriaGrupo" Multiplicity="0..1" />
-          <End Type="ModelAcademico.aca_Materia" Role="aca_Materia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_MateriaGrupo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMateriaGrupo" />
-            </Principal>
-            <Dependent Role="aca_Materia">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMateriaGrupo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="vwaca_Materia">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMateria" />
-            <PropertyRef Name="OrdenMateria" />
-            <PropertyRef Name="NomMateria" />
-            <PropertyRef Name="EsObligatorio" />
-            <PropertyRef Name="Estado" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdMateria" Type="Int32" Nullable="false" />
-          <Property Name="IdMateriaArea" Type="Int32" />
-          <Property Name="IdMateriaGrupo" Type="Int32" />
-          <Property Name="OrdenMateria" Type="Int32" Nullable="false" />
-          <Property Name="OrdenMateriaArea" Type="Int32" />
-          <Property Name="OrdenMateriaGrupo" Type="Int32" />
-          <Property Name="NomMateria" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomMateriaArea" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomMateriaGrupo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="PromediarGrupo" Type="Boolean" />
-          <Property Name="EsObligatorio" Type="Boolean" Nullable="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="IdCatalogoTipoCalificacion" Type="Int32" />
-          <Property Name="NomCatalogo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14347,31 +14349,6 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="aca_AnioLectivo">
-            <EntityTypeMapping TypeName="ModelAcademico.aca_AnioLectivo">
-              <MappingFragment StoreEntitySet="aca_AnioLectivo">
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="IdCursoBachiller" ColumnName="IdCursoBachiller" />
-                <ScalarProperty Name="PromedioMinimoPromocion" ColumnName="PromedioMinimoPromocion" />
-                <ScalarProperty Name="PromedioMinimoParcial" ColumnName="PromedioMinimoParcial" />
-                <ScalarProperty Name="IdAnioLectivoAnterior" ColumnName="IdAnioLectivoAnterior" />
-                <ScalarProperty Name="BloquearMatricula" ColumnName="BloquearMatricula" />
-                <ScalarProperty Name="EnCurso" ColumnName="EnCurso" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
-                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="aca_Sede">
             <EntityTypeMapping TypeName="ModelAcademico.aca_Sede">
               <MappingFragment StoreEntitySet="aca_Sede">
@@ -14478,6 +14455,32 @@ advertencia 6002: La tabla o vista 'DBERP_ACADEMICO.dbo.vwaca_Tematica' no tiene
                 <ScalarProperty Name="IdMateriaGrupo" ColumnName="IdMateriaGrupo" />
                 <ScalarProperty Name="IdMateriaArea" ColumnName="IdMateriaArea" />
                 <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_AnioLectivo">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_AnioLectivo">
+              <MappingFragment StoreEntitySet="aca_AnioLectivo">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="CalificacionMaxima" ColumnName="CalificacionMaxima" />
+                <ScalarProperty Name="IdCursoBachiller" ColumnName="IdCursoBachiller" />
+                <ScalarProperty Name="PromedioMinimoPromocion" ColumnName="PromedioMinimoPromocion" />
+                <ScalarProperty Name="PromedioMinimoParcial" ColumnName="PromedioMinimoParcial" />
+                <ScalarProperty Name="IdAnioLectivoAnterior" ColumnName="IdAnioLectivoAnterior" />
+                <ScalarProperty Name="BloquearMatricula" ColumnName="BloquearMatricula" />
+                <ScalarProperty Name="EnCurso" ColumnName="EnCurso" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaHasta" ColumnName="FechaHasta" />
+                <ScalarProperty Name="FechaDesde" ColumnName="FechaDesde" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

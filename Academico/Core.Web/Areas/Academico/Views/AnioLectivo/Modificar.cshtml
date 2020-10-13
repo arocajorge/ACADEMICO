@@ -168,6 +168,13 @@
                     @Html.ValidationMessageFor(m => m.PromedioMinimoPromocion, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdSucursal">Calificación máxima*</label>
+                    @Html.TextBoxFor(q => q.CalificacionMaxima, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CalificacionMaxima, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
     </div>
     <div class="box-footer">

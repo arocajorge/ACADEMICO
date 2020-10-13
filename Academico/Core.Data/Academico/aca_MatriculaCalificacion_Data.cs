@@ -437,6 +437,8 @@ namespace Core.Data.Academico
                         ExamenSupletorio = Entity.ExamenSupletorio,
                         ExamenRemedial = Entity.ExamenRemedial,
                         ExamenGracia = Entity.ExamenGracia,
+                        PromedioFinalQ1 = Entity.PromedioFinalQ1,
+                        PromedioFinalQ2 = Entity.PromedioFinalQ2,
                         PromedioFinal = Entity.PromedioFinal,
                         IdEquivalenciaPromedioP1 = Entity.IdEquivalenciaPromedioP1,
                         IdEquivalenciaPromedioP2 = Entity.IdEquivalenciaPromedioP2,

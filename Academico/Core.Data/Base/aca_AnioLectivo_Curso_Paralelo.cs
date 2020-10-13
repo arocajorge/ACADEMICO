@@ -44,7 +44,7 @@ namespace Core.Data.Base
         public virtual ICollection<aca_Matricula_Rubro> aca_Matricula_Rubro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
-        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_Sede aca_Sede { get; set; }
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
     }
 }

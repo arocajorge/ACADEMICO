@@ -24,6 +24,7 @@ namespace Core.Info.Academico
         public bool Estado { get; set; }
         public bool EnCurso { get; set; }
         public Nullable<int> IdCursoBachiller { get; set; }
+        public Nullable<double> CalificacionMaxima { get; set; }
         public Nullable<double> PromedioMinimoParcial { get; set; }
         public Nullable<double> PromedioMinimoPromocion { get; set; }
         public string IdUsuarioCreacion { get; set; }

@@ -538,6 +538,12 @@
     <Compile Include="Reportes\Academico\ACA_015_Rpt.Designer.cs">
       <DependentUpon>ACA_015_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_Rpt.Designer.cs">
+      <DependentUpon>ACA_049_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_048_Promedios_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9582,6 +9588,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_015_Rpt.resx">
       <DependentUpon>ACA_015_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_049_Rpt.resx">
+      <DependentUpon>ACA_049_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_048_Promedios_Rpt.resx">
       <DependentUpon>ACA_048_Promedios_Rpt.cs</DependentUpon>

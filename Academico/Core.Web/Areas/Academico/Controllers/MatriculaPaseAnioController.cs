@@ -202,16 +202,26 @@ namespace Core.Web.Areas.Academico.Controllers
                     foreach (var item1 in lst_x_matricula)
                     {
                         info_alumno.IdUsuarioModificacion = SessionFixed.IdUsuario;
-                        info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO);
-                        if (item1.PromedioFinal < PromedioMinimoPromocion)
+                        //info_alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO);
+                        //info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.APROBADO);
+                        if (item1.PromedioFinal!=null)
                         {
-                            info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.NO_PROMOVIDO);
-                            bus_alumno.PaseAnioDB(info_alumno);
-                            PaseAnio = false;
-                            break;
-                        }
+                            if (item1.PromedioFinal > 0 && item1.PromedioFinal < PromedioMinimoPromocion)
+                            {
+                                info_alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.NO_PROMOVIDO);
+                                info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REPROBADO);
+                                bus_alumno.PaseAnioDB(info_alumno);
+                                PaseAnio = false;
+                                break;
+                            }
+                            else
+                            {
+                                info_alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO);
+                                info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.APROBADO);
+                            }
+                        } 
                     }
-                    var info_catalogo = bus_catalogo.GetInfo(info_alumno.IdCatalogoESTMAT);
+                    var info_catalogo = bus_catalogo.GetInfo(info_alumno.IdCatalogoESTALU);
                     item.NomCatalogoESTMAT = info_catalogo.NomCatalogo;
                     item.PaseAnio = PaseAnio;
 
@@ -255,7 +265,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     }
 
                     item.IdCatalogoESTMAT = info_alumno.IdCatalogoESTMAT;
-                    bus_matricula.ModificarPlantillaDB(item);
+                    bus_matricula.ModificarEstadoMatricula(item);
                 }
             }
             Lista_MatriculaPaseAnio.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
