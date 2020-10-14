@@ -19,12 +19,12 @@ namespace Core.Data.Base
         {
             this.aca_AlumnoRetiro = new HashSet<aca_AlumnoRetiro>();
             this.aca_Matricula_Rubro = new HashSet<aca_Matricula_Rubro>();
-            this.aca_MatriculaCalificacion = new HashSet<aca_MatriculaCalificacion>();
             this.aca_MatriculaCalificacionCualitativa = new HashSet<aca_MatriculaCalificacionCualitativa>();
             this.aca_MatriculaCalificacionParcial = new HashSet<aca_MatriculaCalificacionParcial>();
             this.aca_MatriculaCambios = new HashSet<aca_MatriculaCambios>();
             this.aca_MatriculaCalificacionParticipacion = new HashSet<aca_MatriculaCalificacionParticipacion>();
             this.aca_MatriculaCalificacionParticipacion1 = new HashSet<aca_MatriculaCalificacionParticipacion>();
+            this.aca_MatriculaCalificacion = new HashSet<aca_MatriculaCalificacion>();
         }
     
         public int IdEmpresa { get; set; }
@@ -65,8 +65,6 @@ namespace Core.Data.Base
         public virtual ICollection<aca_Matricula_Rubro> aca_Matricula_Rubro { get; set; }
         public virtual aca_MatriculaAsistencia aca_MatriculaAsistencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aca_MatriculaCalificacion> aca_MatriculaCalificacion { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_MatriculaCalificacionCualitativa> aca_MatriculaCalificacionCualitativa { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_MatriculaCalificacionParcial> aca_MatriculaCalificacionParcial { get; set; }
@@ -77,5 +75,7 @@ namespace Core.Data.Base
         public virtual ICollection<aca_MatriculaCalificacionParticipacion> aca_MatriculaCalificacionParticipacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_MatriculaCalificacionParticipacion> aca_MatriculaCalificacionParticipacion1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_MatriculaCalificacion> aca_MatriculaCalificacion { get; set; }
     }
 }

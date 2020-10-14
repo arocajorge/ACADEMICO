@@ -61,7 +61,8 @@ namespace Core.Info.Reportes.Academico
         public string EquivalenciaPromedioEQ2 { get; set; }
         public Nullable<decimal> PromedioFinalQ2 { get; set; }
         public string EquivalenciaPromedioQ2 { get; set; }
-        public Nullable<double> PromedioQuimestralFinal { get; set; }
+        public Nullable<decimal> PromedioQuimestres_PF { get; set; }
+        public Nullable<decimal> Promedio_PR { get; set; }
         public Nullable<decimal> ExamenMejoramiento { get; set; }
         public string CampoMejoramiento { get; set; }
         public Nullable<decimal> ExamenSupletorio { get; set; }

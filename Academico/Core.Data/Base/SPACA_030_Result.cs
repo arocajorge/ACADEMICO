@@ -28,7 +28,7 @@ namespace Core.Data.Base
         public string NomMateriaGrupo { get; set; }
         public int OrdenMateria { get; set; }
         public Nullable<int> OrdenMateriaGrupo { get; set; }
-        public int OrdenMateriaArea { get; set; }
+        public Nullable<int> OrdenMateriaArea { get; set; }
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string Descripcion { get; set; }
@@ -44,28 +44,8 @@ namespace Core.Data.Base
         public Nullable<int> OrdenParalelo { get; set; }
         public string NombreInspector { get; set; }
         public string NombreTutor { get; set; }
-        public string CalificacionP1 { get; set; }
-        public string CalificacionP2 { get; set; }
-        public string CalificacionP3 { get; set; }
-        public string PromedioQ1 { get; set; }
-        public string PorcentajeQ1 { get; set; }
-        public string ExamenQ1 { get; set; }
-        public string PorcentajeEQ1 { get; set; }
-        public string PromedioFinalQ1 { get; set; }
-        public string CalificacionP4 { get; set; }
-        public string CalificacionP5 { get; set; }
-        public string CalificacionP6 { get; set; }
-        public string PromedioQ2 { get; set; }
-        public string PorcentajeQ2 { get; set; }
-        public string ExamenQ2 { get; set; }
-        public string PorcentajeEQ2 { get; set; }
-        public string PromedioFinalQ2 { get; set; }
-        public string PromedioQuimestralFinal { get; set; }
-        public string ExamenMejoramiento { get; set; }
-        public string CampoMejoramiento { get; set; }
-        public string ExamenSupletorio { get; set; }
-        public string ExamenRemedial { get; set; }
-        public string ExamenGracia { get; set; }
-        public string PromedioFinal { get; set; }
+        public string Calificacion { get; set; }
+        public string Columna { get; set; }
+        public int OrdenColumna { get; set; }
     }
 }

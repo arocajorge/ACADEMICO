@@ -213,6 +213,7 @@ namespace Core.Web.Areas.Academico.Controllers
                                     PromedioQ1 = (calificacion == null ? null : calificacion.PromedioQ1),
                                     PromedioQ2 = (calificacion == null ? null : calificacion.PromedioQ2),
                                     ExamenQ1 = (calificacion == null ? null : calificacion.ExamenQ1),
+                                    PromedioQuimestres = (calificacion == null ? null : calificacion.PromedioQuimestres),
                                     ExamenQ2 = (calificacion == null ? null : calificacion.ExamenQ2),
                                     PromedioFinalQ1 = (calificacion == null ? null : calificacion.PromedioFinalQ1),
                                     PromedioFinalQ2 = (calificacion == null ? null : calificacion.PromedioFinalQ2),

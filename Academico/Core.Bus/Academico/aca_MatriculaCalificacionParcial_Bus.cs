@@ -98,7 +98,7 @@ namespace Core.Bus.Academico
 
                             var IdEquivalenciaPromedioFinal = (int?)null;
                             decimal PromedioFinal = 0;
-                            decimal PromedioFinalTemp = 0;
+                            decimal PromedioQuimestralCalculado = 0;
                             decimal PromedioMinimoPromocion = Math.Round(Convert.ToDecimal(info_anio.PromedioMinimoPromocion), 2, MidpointRounding.AwayFromZero);
 
                             if(info_calificacion!=null)
@@ -110,9 +110,9 @@ namespace Core.Bus.Academico
                                 decimal ExamenSupletorio = Convert.ToDecimal(info_calificacion.ExamenSupletorio);
                                 decimal ExamenRemedial = Convert.ToDecimal(info_calificacion.ExamenRemedial);
                                 decimal ExamenGracia = Convert.ToDecimal(info_calificacion.ExamenGracia);
-                                PromedioFinalTemp = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
+                                PromedioQuimestralCalculado = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
 
-                                if (PromedioFinalTemp < PromedioMinimoPromocion)
+                                if (PromedioQuimestralCalculado < PromedioMinimoPromocion)
                                 {
                                     if (ExamenSupletorio >= PromedioMinimoPromocion)
                                     {
@@ -128,7 +128,7 @@ namespace Core.Bus.Academico
                                     }
                                     else
                                     {
-                                        PromedioFinal = PromedioFinalTemp;
+                                        PromedioFinal = PromedioQuimestralCalculado;
                                     }
 
                                 }
@@ -148,28 +148,41 @@ namespace Core.Bus.Academico
                                         }
                                         else
                                         {
-                                            PromedioFinal = PromedioFinalTemp;
+                                            PromedioFinal = PromedioQuimestralCalculado;
                                         }
                                     }
                                     else
                                     {
-                                        PromedioFinal = PromedioFinalTemp;
+                                        PromedioFinal = PromedioQuimestralCalculado;
                                     }
                                 }
 
                                 var info_equivalencia = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, PromedioFinal);
                                 IdEquivalenciaPromedioFinal = info_equivalencia.IdEquivalenciaPromedio;
+
+                                info_calificacion.PromedioQuimestres = PromedioQuimestralCalculado;
                                 info_calificacion.PromedioFinal = PromedioFinal;
                                 info_calificacion.IdEquivalenciaPromedioPF = IdEquivalenciaPromedioFinal;
                                 info_calificacion.CampoMejoramiento = CampoMejoramiento;
 
                                 odata_calificacion.modicarPaseAnioDB(info_calificacion);
 
-                                if (PromedioFinal < PromedioMinimoPromocion)
+                                if (PromedioFinal != null)
                                 {
-                                    info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.SUPLENCIA);
-                                    odata_alumno.PaseAnioDB(info_alumno);
+                                    if (PromedioFinal < PromedioMinimoPromocion)
+                                    {
+                                        info_alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.SUPLENCIA);
+                                        info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REPROBADO);
+                                        odata_alumno.PaseAnioDB(info_alumno);
+                                    }
+                                    else
+                                    {
+                                        info_alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO);
+                                        info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.APROBADO);
+                                        odata_alumno.PaseAnioDB(info_alumno);
+                                    }
                                 }
+                                
                             }
                         }
                     }

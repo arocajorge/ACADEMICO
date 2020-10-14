@@ -66,7 +66,8 @@ namespace Core.Info.Reportes.Academico
         public string EquivalenciaPromedioEQ2 { get; set; }
         public string PromedioFinalQ2 { get; set; }
         public string EquivalenciaPromedioQ2 { get; set; }
-        public string PromedioQuimestralFinal { get; set; }
+        public string PromedioQuimestres_PF { get; set; }
+        public string Promedio_PR { get; set; }
         public string ExamenMejoramiento { get; set; }
         public string CampoMejoramiento { get; set; }
         public string ExamenSupletorio { get; set; }
@@ -77,19 +78,17 @@ namespace Core.Info.Reportes.Academico
         public string EquivalenciaPromedioPF { get; set; }
 
         #region Campos que no existen en la tabla
-        public string PromedioGeneralQ1 { get; set; }
-        public string PromedioGeneralQ2 { get; set; }
-        public string PromedioGeneralQuim { get; set; }
-        public string PromedioGeneralFinal { get; set; }
-        public int CantQ1 { get; set; }
-        public int CantQ2 { get; set; }
-        public int CantQuim { get; set; }
-        public int CantFinal { get; set; }
         public decimal? PromedioFinalQ1Double { get; set; }
         public decimal? PromedioFinalQ2Double { get; set; }
         public decimal? PromedioFinalDouble { get; set; }
+        public decimal? PromedioQuimestresDouble { get; set; }
+        public decimal? PromedioGrupoQ1Double { get; set; }
+        public decimal? PromedioGrupoQ2Double { get; set; }
+        public decimal? PromedioFinalGrupoDouble { get; set; }
+        public decimal? PromedioQuimestresGrupoDouble { get; set; }
         public decimal? PFQ1 { get; set; }
         public decimal? PFQ2 { get; set; }
+        public decimal? PFQuim { get; set; }
         public decimal? PF { get; set; }
         #endregion
     }

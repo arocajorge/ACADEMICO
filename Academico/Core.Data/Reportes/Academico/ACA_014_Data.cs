@@ -87,12 +87,17 @@ namespace Core.Data.Reportes.Academico
                             EquivalenciaPromedioP6 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioP6 :""),
                             EquivalenciaPromedioEQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioEQ2 :""),
                             EquivalenciaPromedioQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioQ2 : ""),
-                            PromedioQuimestralFinal = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioQuimestralFinal : null),
+                            PromedioQuimestres_PF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioQuimestres_PF : null),
+                            Promedio_PR = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.Promedio_PR : null),
                             EquivalenciaPromedioPF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioPF :""),
                             IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF,
                             IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion,
                             NombreRepresentante = q.NombreRepresentante,
                             NombreInspector = q.NombreInspector,
+                            //PromedioGrupoQ1Double = (q.IdCatalogoTipoCalificacion== Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)) ? Convert.ToDecimal(q.PromedioFinalQ1) : (decimal?)null,
+                            //PromedioGrupoQ2Double = (q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)) ? Convert.ToDecimal(q.PromedioFinalQ2) : (decimal?)null,
+                            //PromedioQuimestresGrupoDouble = (q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)) ? Convert.ToDecimal(q.PromedioQuimestres_PF) : (decimal?)null,
+                            //PromedioFinalGrupoDouble = (q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)) ? Convert.ToDecimal(q.PromedioFinal) : (decimal?)null
                         });
                     }
                 }
@@ -111,16 +116,125 @@ namespace Core.Data.Reportes.Academico
                     NomMateriaGrupo = q.Key.NomMateriaGrupo,
                     PromedioFinalQ1Double = q.Max(g => g.PromedioFinalQ1) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinalQ1)) / q.Count(g=> !string.IsNullOrEmpty(g.PromedioFinalQ1)),
                     PromedioFinalQ2Double = q.Max(g => g.PromedioFinalQ2) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinalQ2)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioFinalQ2)),
+                    PromedioQuimestresDouble = q.Max(g => g.PromedioQuimestres_PF) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioQuimestres_PF)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioQuimestres_PF)),
                     PromedioFinalDouble = q.Max(g => g.PromedioFinal) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinal)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioFinal)),
+                    PromedioGrupoQ1Double = q.Max(g => g.PromedioFinalQ1) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinalQ1)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioFinalQ1)),
+                    PromedioGrupoQ2Double = q.Max(g => g.PromedioFinalQ2) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinalQ2)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioFinalQ2)),
+                    PromedioQuimestresGrupoDouble = q.Max(g => g.PromedioQuimestres_PF) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioQuimestres_PF)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioQuimestres_PF)),
+                    PromedioFinalGrupoDouble = q.Max(g => g.PromedioFinal) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinal)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioFinal))
                 }).ToList();
                 #endregion
-                
-                var lstMateriasNoAgrupada = Lista.Where(q => q.IdCatalogoTipoCalificacion == TipoCatalogoCuantitativo && (q.PromediarGrupo ?? false) == false).Select(q=> new ACA_014_Info
+
+                var lstPromedioMateriasNoAgrupada = Lista.Where(q => q.IdCatalogoTipoCalificacion == TipoCatalogoCuantitativo && (q.PromediarGrupo ?? false) == false).GroupBy(q => new
+                {
+                    q.IdEmpresa,
+                    q.IdMatricula,
+                    q.NomMateriaGrupo
+                }).Select(q => new ACA_014_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdMatricula = q.Key.IdMatricula,
+                    NomMateriaGrupo = q.Key.NomMateriaGrupo,
+                    //PromedioGrupoQ1Double = null,
+                    //PromedioGrupoQ2Double = null,
+                    //PromedioQuimestresGrupoDouble = null,
+                    //PromedioFinalGrupoDouble = null
+                    PromedioGrupoQ1Double = q.Max(g => g.PromedioFinalQ1) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinalQ1)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioFinalQ1)),
+                    PromedioGrupoQ2Double = q.Max(g => g.PromedioFinalQ2) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinalQ2)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioFinalQ2)),
+                    PromedioQuimestresGrupoDouble = q.Max(g => g.PromedioQuimestres_PF) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioQuimestres_PF)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioQuimestres_PF)),
+                    PromedioFinalGrupoDouble = q.Max(g => g.PromedioFinal) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.PromedioFinal)) / q.Count(g => !string.IsNullOrEmpty(g.PromedioFinal))
+
+                }).ToList();
+                lstPromedioMateriasNoAgrupada.AddRange(lstAgrupada);
+
+                Lista = (from a in Lista
+                         join b in lstPromedioMateriasNoAgrupada
+                         on new { a.IdEmpresa, a.IdMatricula, a.NomMateriaGrupo } equals new { b.IdEmpresa, b.IdMatricula, b.NomMateriaGrupo }
+                         select new ACA_014_Info
+                         {
+                             IdEmpresa = a.IdEmpresa,
+                             IdMatricula = a.IdMatricula,
+                             IdMateria = a.IdMateria,
+                             IdAlumno = a.IdAlumno,
+                             pe_nombreCompleto = a.pe_nombreCompleto,
+                             Codigo = a.Codigo,
+                             IdAnio = a.IdAnio,
+                             IdSede = a.IdSede,
+                             IdNivel = a.IdNivel,
+                             IdJornada = a.IdJornada,
+                             IdCurso = a.IdCurso,
+                             IdParalelo = a.IdParalelo,
+                             CodigoParalelo = a.CodigoParalelo,
+                             Descripcion = a.Descripcion,
+                             NomSede = a.NomSede,
+                             NomNivel = a.NomNivel,
+                             NomJornada = a.NomJornada,
+                             NomMateria = a.NomMateria,
+                             NomCurso = a.NomCurso,
+                             NomParalelo = a.NomParalelo,
+                             OrdenNivel = a.OrdenNivel,
+                             OrdenJornada = a.OrdenJornada,
+                             OrdenCurso = a.OrdenCurso,
+                             OrdenParalelo = a.OrdenParalelo,
+                             OrdenMateriaGrupo = a.OrdenMateriaGrupo,
+                             OrdenMateriaArea = a.OrdenMateriaArea,
+                             OrdenMateria = a.OrdenMateria,
+                             PromediarGrupo = a.PromediarGrupo,
+                             EsObligatorio = a.EsObligatorio,
+                             NomMateriaArea = a.NomMateriaArea,
+                             NomMateriaGrupo = a.NomMateriaGrupo,
+                             CalificacionP1 = a.CalificacionP1,
+                             CalificacionP2 = a.CalificacionP2,
+                             CalificacionP3 = a.CalificacionP3,
+                             ExamenQ1 = a.ExamenQ1,
+                             PorcentajePromedioQ1 = a.PorcentajePromedioQ1,
+                             PorcentajeExamenQ1 = a.PorcentajeExamenQ1,
+                             PromedioFinalQ1 = a.PromedioFinalQ1,
+                             EquivalenciaPromedioP1 = a.EquivalenciaPromedioP1,
+                             EquivalenciaPromedioP2 = a.EquivalenciaPromedioP2,
+                             EquivalenciaPromedioP3 = a.EquivalenciaPromedioP3,
+                             EquivalenciaPromedioEQ1 = a.EquivalenciaPromedioEQ1,
+                             EquivalenciaPromedioQ1 = a.EquivalenciaPromedioQ1,
+                             CalificacionP4 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.CalificacionP4 : null),
+                             CalificacionP5 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.CalificacionP5 : null),
+                             CalificacionP6 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.CalificacionP6 : null),
+                             ExamenQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.ExamenQ2 : null),
+                             PorcentajePromedioQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PorcentajePromedioQ2 : null),
+                             PorcentajeExamenQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PorcentajeExamenQ2 : null),
+                             PromedioFinalQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PromedioFinalQ2 : null),
+                             ExamenSupletorio = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.ExamenSupletorio : null),
+                             ExamenMejoramiento = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.ExamenMejoramiento : null),
+                             ExamenGracia = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.ExamenGracia : null),
+                             ExamenRemedial = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.ExamenRemedial : null),
+                             CampoMejoramiento = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.CampoMejoramiento : null),
+                             PromedioFinal = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PromedioFinal : null),
+                             EquivalenciaPromedioP4 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioP4 : ""),
+                             EquivalenciaPromedioP5 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioP5 : ""),
+                             EquivalenciaPromedioP6 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioP6 : ""),
+                             EquivalenciaPromedioEQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioEQ2 : ""),
+                             EquivalenciaPromedioQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioQ2 : ""),
+                             PromedioQuimestres_PF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PromedioQuimestres_PF : null),
+                             Promedio_PR = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.Promedio_PR : ""),
+                             EquivalenciaPromedioPF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioPF : ""),
+                             IdEquivalenciaPromedioPF = a.IdEquivalenciaPromedioPF,
+                             IdCatalogoTipoCalificacion = a.IdCatalogoTipoCalificacion,
+                             NombreRepresentante = a.NombreRepresentante,
+                             NombreInspector = a.NombreInspector,
+
+                             PromedioGrupoQ1Double = b.PromedioGrupoQ1Double == null ? (decimal?)null : Math.Round(b.PromedioGrupoQ1Double ?? 0, 2, MidpointRounding.AwayFromZero),
+                             PromedioGrupoQ2Double = b.PromedioGrupoQ2Double == null ? (decimal?)null : Math.Round(b.PromedioGrupoQ2Double ?? 0, 2, MidpointRounding.AwayFromZero),
+                             PromedioQuimestresGrupoDouble = b.PromedioQuimestresGrupoDouble == null ? (decimal?)null : Math.Round(b.PromedioQuimestresGrupoDouble ?? 0, 2, MidpointRounding.AwayFromZero),
+                             PromedioFinalGrupoDouble = b.PromedioFinalGrupoDouble == null ? (decimal?)null : Math.Round(b.PromedioFinalGrupoDouble ?? 0, 2, MidpointRounding.AwayFromZero)
+                         }).ToList();
+
+
+                var lstMateriasNoAgrupada = Lista.Where(q => q.IdCatalogoTipoCalificacion == TipoCatalogoCuantitativo && (q.PromediarGrupo ?? false) == false).Select(q => new ACA_014_Info
                 {
                     IdEmpresa = q.IdEmpresa,
                     IdMatricula = q.IdMatricula,
                     PromedioFinalQ1Double = q.PromedioFinalQ1 == null ? (decimal?)null : Convert.ToDecimal(q.PromedioFinalQ1),
                     PromedioFinalQ2Double = q.PromedioFinalQ2 == null ? (decimal?)null : Convert.ToDecimal(q.PromedioFinalQ2),
+                    PromedioQuimestresDouble = q.PromedioQuimestres_PF == null ? (decimal?)null : Convert.ToDecimal(q.PromedioQuimestres_PF),
                     PromedioFinalDouble = q.PromedioFinal == null ? (decimal?)null : Convert.ToDecimal(q.PromedioFinal),
                 }).ToList();
                 lstMateriasNoAgrupada.AddRange(lstAgrupada);
@@ -131,6 +245,7 @@ namespace Core.Data.Reportes.Academico
                     IdMatricula = q.Key.IdMatricula,
                     PromedioFinalQ1Double = q.Max(g=> g.PromedioFinalQ1Double) == null ? (decimal?)null : (q.Sum(g=> g.PromedioFinalQ1Double) / q.Count(g => g.PromedioFinalQ1Double != null)),
                     PromedioFinalQ2Double = q.Max(g => g.PromedioFinalQ2Double) == null ? (decimal?)null : (q.Sum(g => g.PromedioFinalQ2Double) / q.Count(g => g.PromedioFinalQ2Double != null)),
+                    PromedioQuimestresDouble = q.Max(g => g.PromedioQuimestresDouble) == null ? (decimal?)null : (q.Sum(g => g.PromedioQuimestresDouble) / q.Count(g => g.PromedioQuimestresDouble != null)),
                     PromedioFinalDouble = q.Max(g => g.PromedioFinalDouble) == null ? (decimal?)null : (q.Sum(g => g.PromedioFinalDouble) / q.Count(g => g.PromedioFinalDouble != null)),
                 }).ToList();
 
@@ -200,16 +315,23 @@ namespace Core.Data.Reportes.Academico
                              EquivalenciaPromedioP6 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioP6 : ""),
                              EquivalenciaPromedioEQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioEQ2 : ""),
                              EquivalenciaPromedioQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioQ2 : ""),
-                             PromedioQuimestralFinal = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PromedioQuimestralFinal : null),
+                             PromedioQuimestres_PF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.PromedioQuimestres_PF : ""),
+                             Promedio_PR = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.Promedio_PR : ""),
                              EquivalenciaPromedioPF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? a.EquivalenciaPromedioPF : ""),
                              IdEquivalenciaPromedioPF = a.IdEquivalenciaPromedioPF,
                              IdCatalogoTipoCalificacion = a.IdCatalogoTipoCalificacion,
                              NombreRepresentante = a.NombreRepresentante,
                              NombreInspector = a.NombreInspector,
 
+                             PromedioGrupoQ1Double = a.PromedioGrupoQ1Double,
+                             PromedioGrupoQ2Double = a.PromedioGrupoQ2Double,
+                             PromedioQuimestresGrupoDouble = a.PromedioQuimestresGrupoDouble,
+                             PromedioFinalGrupoDouble = a.PromedioFinalGrupoDouble,
+
                              PFQ1 = b.PromedioFinalQ1Double == null ? (decimal?)null : Math.Round(b.PromedioFinalQ1Double ?? 0,2,MidpointRounding.AwayFromZero),
                              PFQ2 = b.PromedioFinalQ2Double == null ? (decimal?)null : Math.Round(b.PromedioFinalQ2Double ?? 0, 2, MidpointRounding.AwayFromZero),
-                             PF = b.PromedioFinalDouble == null ? (decimal?)null : Math.Round(b.PromedioFinalDouble ?? 0, 2, MidpointRounding.AwayFromZero),
+                             PFQuim = b.PromedioQuimestresDouble == null ? (decimal?)null : Math.Round(b.PromedioQuimestresDouble ?? 0, 2, MidpointRounding.AwayFromZero),
+                             PF = b.PromedioFinalDouble == null ? (decimal?)null : Math.Round(b.PromedioFinalDouble ?? 0, 2, MidpointRounding.AwayFromZero)
                          }).ToList();
 
                 return Lista;

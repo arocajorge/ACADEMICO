@@ -44,6 +44,7 @@ namespace Core.Data.Base
         public Nullable<decimal> PromedioFinalQ2 { get; set; }
         public string CausaQ2 { get; set; }
         public string ResolucionQ2 { get; set; }
+        public Nullable<decimal> PromedioQuimestres { get; set; }
         public Nullable<decimal> ExamenMejoramiento { get; set; }
         public string CampoMejoramiento { get; set; }
         public Nullable<decimal> ExamenSupletorio { get; set; }

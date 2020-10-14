@@ -71,7 +71,8 @@ namespace Core.Data.Base
         public string EquivalenciaPromedioEQ2 { get; set; }
         public string PromedioFinalQ2 { get; set; }
         public string EquivalenciaPromedioQ2 { get; set; }
-        public string PromedioQuimestralFinal { get; set; }
+        public string PromedioQuimestres_PF { get; set; }
+        public string Promedio_PR { get; set; }
         public string ExamenMejoramiento { get; set; }
         public string CampoMejoramiento { get; set; }
         public string ExamenSupletorio { get; set; }

@@ -687,6 +687,7 @@ namespace Core.Data.Academico
                     if (Entity == null)
                         return false;
 
+                    Entity.IdCatalogoESTALU = info.IdCatalogoESTALU;
                     Entity.IdCatalogoESTMAT = info.IdCatalogoESTMAT;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaAnulacion = info.FechaAnulacion = DateTime.Now;

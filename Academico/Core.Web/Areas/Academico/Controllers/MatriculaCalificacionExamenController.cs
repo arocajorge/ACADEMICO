@@ -543,6 +543,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     item.CalificacionExamen =item.ExamenQ1;
                     item.Promedio = item.PromedioFinalQ1;
+                    item.IdEquivalenciaCalificacionExamen = item.IdEquivalenciaPromedioEQ1;
                     item.Causa = item.CausaQ1;
                     item.Resolucion = item.ResolucionQ1;
                 }
@@ -551,6 +552,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     item.CalificacionExamen = item.ExamenQ2;
                     item.Promedio = item.PromedioFinalQ2;
+                    item.IdEquivalenciaCalificacionExamen = item.IdEquivalenciaPromedioEQ2;
                     item.Causa = item.CausaQ2;
                     item.Resolucion = item.ResolucionQ2;
                 }

@@ -432,6 +432,7 @@ namespace Core.Data.Academico
                         ExamenQ2 = Entity.ExamenQ2,
                         CausaQ2 = Entity.CausaQ2,
                         ResolucionQ2 = Entity.ResolucionQ2,
+                        PromedioQuimestres = Entity.PromedioQuimestres,
                         ExamenMejoramiento = Entity.ExamenMejoramiento,
                         CampoMejoramiento = Entity.CampoMejoramiento,
                         ExamenSupletorio = Entity.ExamenSupletorio,
@@ -614,6 +615,7 @@ namespace Core.Data.Academico
                                     PromedioQ2 = info.PromedioQ2,
                                     ExamenQ2 = info.ExamenQ2,
                                     PromedioFinalQ2 = info.PromedioFinalQ2,
+                                    PromedioQuimestres =info.PromedioQuimestres,
                                     ExamenMejoramiento = info.ExamenMejoramiento,
                                     CampoMejoramiento = info.CampoMejoramiento,
                                     ExamenSupletorio = info.ExamenSupletorio,
@@ -894,6 +896,13 @@ namespace Core.Data.Academico
                         EntityCalificacion.CausaQ2 = info.Causa;
                         EntityCalificacion.ResolucionQ2 = info.Resolucion;
                         EntityCalificacion.IdEquivalenciaPromedioEQ2 = info.IdEquivalenciaCalificacionExamen;
+
+                        var PromedioQuimestral = (decimal?)null;
+                        if (EntityCalificacion.PromedioFinalQ1!= null && EntityCalificacion.PromedioFinalQ2!=null)
+                        {
+                            PromedioQuimestral = Math.Round(((Convert.ToDecimal(EntityCalificacion.PromedioFinalQ1 + EntityCalificacion.PromedioFinalQ2)) / 2), 2, MidpointRounding.AwayFromZero);
+                        }
+                        EntityCalificacion.PromedioQuimestres = PromedioQuimestral; 
                     }
 
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXMEJ))
@@ -971,6 +980,7 @@ namespace Core.Data.Academico
                     if (EntityCalificacion == null)
                         return false;
 
+                    EntityCalificacion.PromedioQuimestres = info.PromedioQuimestres;
                     EntityCalificacion.CampoMejoramiento = info.CampoMejoramiento;
                     EntityCalificacion.PromedioFinal = info.PromedioFinal;
                     EntityCalificacion.IdEquivalenciaPromedioPF = info.IdEquivalenciaPromedioPF;
