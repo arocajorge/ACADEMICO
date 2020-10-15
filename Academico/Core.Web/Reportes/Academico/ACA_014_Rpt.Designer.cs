@@ -141,6 +141,9 @@
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.groupFooterBand1 = new DevExpress.XtraReports.UI.GroupFooterBand();
+            this.Subreport_Conducta = new DevExpress.XtraReports.UI.XRSubreport();
+            this.Cualitativa_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
+            this.Conducta_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow9 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell63 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -164,6 +167,7 @@
             this.xrTableRow25 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell35 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell64 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.EquivalenciaRendimiento_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
             this.p_IdMatricula = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCatalogoParcial = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
@@ -181,10 +185,6 @@
             this.xrTableCell95 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrControlStyle1 = new DevExpress.XtraReports.UI.XRControlStyle();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.Subreport_Conducta = new DevExpress.XtraReports.UI.XRSubreport();
-            this.Cualitativa_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
-            this.Conducta_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
-            this.EquivalenciaRendimiento_Subreporte = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
@@ -485,7 +485,8 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell47.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PromedioFinalQ1]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PromedioFinalQ1]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Bold", "[PromediarGrupo]=0")});
             this.xrTableCell47.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell47.Multiline = true;
             this.xrTableCell47.Name = "xrTableCell47";
@@ -1859,6 +1860,30 @@
             this.groupFooterBand1.Level = 1;
             this.groupFooterBand1.Name = "groupFooterBand1";
             // 
+            // Subreport_Conducta
+            // 
+            this.Subreport_Conducta.LocationFloat = new DevExpress.Utils.PointFloat(500F, 30F);
+            this.Subreport_Conducta.Name = "Subreport_Conducta";
+            this.Subreport_Conducta.ReportSource = new Core.Web.Reportes.Academico.ACA_014_EquivalenciaConducta_Rpt();
+            this.Subreport_Conducta.SizeF = new System.Drawing.SizeF(362F, 10F);
+            this.Subreport_Conducta.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Subreport_Conducta_BeforePrint);
+            // 
+            // Cualitativa_Subreporte
+            // 
+            this.Cualitativa_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(924.0001F, 30F);
+            this.Cualitativa_Subreporte.Name = "Cualitativa_Subreporte";
+            this.Cualitativa_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_CalificacionCualitativa_Rpt();
+            this.Cualitativa_Subreporte.SizeF = new System.Drawing.SizeF(214.0001F, 10F);
+            this.Cualitativa_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Cualitativa_Subreporte_BeforePrint);
+            // 
+            // Conducta_Subreporte
+            // 
+            this.Conducta_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(0F, 15F);
+            this.Conducta_Subreporte.Name = "Conducta_Subreporte";
+            this.Conducta_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_Conducta_Rpt();
+            this.Conducta_Subreporte.SizeF = new System.Drawing.SizeF(1138F, 10F);
+            this.Conducta_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport2_BeforePrint_1);
+            // 
             // xrTable5
             // 
             this.xrTable5.Font = new System.Drawing.Font("Verdana", 8F);
@@ -2174,6 +2199,14 @@
             this.xrTableCell64.StylePriority.UseBorders = false;
             this.xrTableCell64.Weight = 6.6755542587787176D;
             // 
+            // EquivalenciaRendimiento_Subreporte
+            // 
+            this.EquivalenciaRendimiento_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(0F, 30F);
+            this.EquivalenciaRendimiento_Subreporte.Name = "EquivalenciaRendimiento_Subreporte";
+            this.EquivalenciaRendimiento_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_Equivalencia_Rpt();
+            this.EquivalenciaRendimiento_Subreporte.SizeF = new System.Drawing.SizeF(440F, 10F);
+            this.EquivalenciaRendimiento_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint_1);
+            // 
             // p_IdMatricula
             // 
             this.p_IdMatricula.Name = "p_IdMatricula";
@@ -2382,38 +2415,6 @@
             // 
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_014_Info);
             this.objectDataSource1.Name = "objectDataSource1";
-            // 
-            // Subreport_Conducta
-            // 
-            this.Subreport_Conducta.LocationFloat = new DevExpress.Utils.PointFloat(500F, 30F);
-            this.Subreport_Conducta.Name = "Subreport_Conducta";
-            this.Subreport_Conducta.ReportSource = new Core.Web.Reportes.Academico.ACA_014_EquivalenciaConducta_Rpt();
-            this.Subreport_Conducta.SizeF = new System.Drawing.SizeF(362F, 10F);
-            this.Subreport_Conducta.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Subreport_Conducta_BeforePrint);
-            // 
-            // Cualitativa_Subreporte
-            // 
-            this.Cualitativa_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(924.0001F, 30F);
-            this.Cualitativa_Subreporte.Name = "Cualitativa_Subreporte";
-            this.Cualitativa_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_CalificacionCualitativa_Rpt();
-            this.Cualitativa_Subreporte.SizeF = new System.Drawing.SizeF(214.0001F, 10F);
-            this.Cualitativa_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Cualitativa_Subreporte_BeforePrint);
-            // 
-            // Conducta_Subreporte
-            // 
-            this.Conducta_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(0F, 15F);
-            this.Conducta_Subreporte.Name = "Conducta_Subreporte";
-            this.Conducta_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_Conducta_Rpt();
-            this.Conducta_Subreporte.SizeF = new System.Drawing.SizeF(1138F, 10F);
-            this.Conducta_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport2_BeforePrint_1);
-            // 
-            // EquivalenciaRendimiento_Subreporte
-            // 
-            this.EquivalenciaRendimiento_Subreporte.LocationFloat = new DevExpress.Utils.PointFloat(0F, 30F);
-            this.EquivalenciaRendimiento_Subreporte.Name = "EquivalenciaRendimiento_Subreporte";
-            this.EquivalenciaRendimiento_Subreporte.ReportSource = new Core.Web.Reportes.Academico.ACA_014_Equivalencia_Rpt();
-            this.EquivalenciaRendimiento_Subreporte.SizeF = new System.Drawing.SizeF(440F, 10F);
-            this.EquivalenciaRendimiento_Subreporte.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint_1);
             // 
             // ACA_014_Rpt
             // 
