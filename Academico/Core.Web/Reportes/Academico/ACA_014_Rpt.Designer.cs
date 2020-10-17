@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary2 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary3 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary4 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary5 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary6 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary7 = new DevExpress.XtraReports.UI.XRSummary();
+            DevExpress.XtraReports.UI.XRSummary xrSummary8 = new DevExpress.XtraReports.UI.XRSummary();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -1937,8 +1945,8 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.lblPromQ1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PFQ1]")});
-            this.lblPromQ1.Font = new System.Drawing.Font("Verdana", 6.5F, System.Drawing.FontStyle.Bold);
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(sumSum([NoMostrarPromedioQ1]) > 0, \'\' ,[PFQ1])")});
+            this.lblPromQ1.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.lblPromQ1.Multiline = true;
             this.lblPromQ1.Name = "lblPromQ1";
             this.lblPromQ1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 1, 1, 100F);
@@ -1946,6 +1954,8 @@
             this.lblPromQ1.StylePriority.UseFont = false;
             this.lblPromQ1.StylePriority.UsePadding = false;
             this.lblPromQ1.StylePriority.UseTextAlignment = false;
+            xrSummary1.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
+            this.lblPromQ1.Summary = xrSummary1;
             this.lblPromQ1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblPromQ1.TextFormatString = "{0:n2}";
             this.lblPromQ1.Weight = 0.14712441355829753D;
@@ -1972,8 +1982,8 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.lblPromQ2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PFQ2]")});
-            this.lblPromQ2.Font = new System.Drawing.Font("Verdana", 6.5F, System.Drawing.FontStyle.Bold);
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(sumSum([NoMostrarPromedioQ2]) > 0, \'\' ,[PFQ2])")});
+            this.lblPromQ2.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.lblPromQ2.Multiline = true;
             this.lblPromQ2.Name = "lblPromQ2";
             this.lblPromQ2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 1, 1, 100F);
@@ -1981,6 +1991,8 @@
             this.lblPromQ2.StylePriority.UseFont = false;
             this.lblPromQ2.StylePriority.UsePadding = false;
             this.lblPromQ2.StylePriority.UseTextAlignment = false;
+            xrSummary2.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
+            this.lblPromQ2.Summary = xrSummary2;
             this.lblPromQ2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblPromQ2.TextFormatString = "{0:n2}";
             this.lblPromQ2.Weight = 0.14712469533028524D;
@@ -2007,8 +2019,8 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.lblPromF.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PFQuim]")});
-            this.lblPromF.Font = new System.Drawing.Font("Verdana", 6.5F, System.Drawing.FontStyle.Bold);
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(sumSum([NoMostrarPromedioQuim]) > 0, \'\' , [PFQuim])")});
+            this.lblPromF.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.lblPromF.Multiline = true;
             this.lblPromF.Name = "lblPromF";
             this.lblPromF.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 1, 1, 100F);
@@ -2016,6 +2028,8 @@
             this.lblPromF.StylePriority.UseFont = false;
             this.lblPromF.StylePriority.UsePadding = false;
             this.lblPromF.StylePriority.UseTextAlignment = false;
+            xrSummary3.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
+            this.lblPromF.Summary = xrSummary3;
             this.lblPromF.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.lblPromF.TextFormatString = "{0:n2}";
             this.lblPromF.Weight = 0.14712441398424359D;
@@ -2042,8 +2056,8 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell108.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PF]")});
-            this.xrTableCell108.Font = new System.Drawing.Font("Verdana", 6.5F, System.Drawing.FontStyle.Bold);
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(sumSum([NoMostrarPromedioFinal]) > 0, \'\' , [PF])")});
+            this.xrTableCell108.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell108.Multiline = true;
             this.xrTableCell108.Name = "xrTableCell108";
             this.xrTableCell108.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 1, 1, 100F);
@@ -2051,6 +2065,8 @@
             this.xrTableCell108.StylePriority.UseFont = false;
             this.xrTableCell108.StylePriority.UsePadding = false;
             this.xrTableCell108.StylePriority.UseTextAlignment = false;
+            xrSummary4.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
+            this.xrTableCell108.Summary = xrSummary4;
             this.xrTableCell108.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell108.TextFormatString = "{0:n2}";
             this.xrTableCell108.Weight = 0.14712395244121565D;
@@ -2288,7 +2304,8 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell75.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([PromediarGrupo]==0, \'\' , [PromedioGrupoQ1Double])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([PromediarGrupo]==0, \'\' , Iif(sumSum([NoMostrarPromedioQ1])>0,\'\' , [PromedioG" +
+                    "rupoQ1Double]))")});
             this.xrTableCell75.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell75.Multiline = true;
             this.xrTableCell75.Name = "xrTableCell75";
@@ -2297,6 +2314,8 @@
             this.xrTableCell75.StylePriority.UseFont = false;
             this.xrTableCell75.StylePriority.UsePadding = false;
             this.xrTableCell75.StylePriority.UseTextAlignment = false;
+            xrSummary5.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
+            this.xrTableCell75.Summary = xrSummary5;
             this.xrTableCell75.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell75.TextFormatString = "{0:n2}";
             this.xrTableCell75.Weight = 0.14712441355829753D;
@@ -2323,7 +2342,8 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell77.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([PromediarGrupo]==0, \'\' ,[PromedioGrupoQ2Double])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([PromediarGrupo]==0, \'\' , Iif(sumSum([NoMostrarPromedioQ2])>0,\'\' , [PromedioG" +
+                    "rupoQ2Double]))")});
             this.xrTableCell77.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell77.Multiline = true;
             this.xrTableCell77.Name = "xrTableCell77";
@@ -2332,6 +2352,8 @@
             this.xrTableCell77.StylePriority.UseFont = false;
             this.xrTableCell77.StylePriority.UsePadding = false;
             this.xrTableCell77.StylePriority.UseTextAlignment = false;
+            xrSummary6.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
+            this.xrTableCell77.Summary = xrSummary6;
             this.xrTableCell77.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell77.TextFormatString = "{0:n2}";
             this.xrTableCell77.Weight = 0.14712469533028524D;
@@ -2358,7 +2380,8 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell93.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([PromediarGrupo]==0, \'\' ,[PromedioQuimestresGrupoDouble])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([PromediarGrupo]==0, \'\' , Iif(sumSum([NoMostrarPromedioQuim])>0,\'\' , [Promedi" +
+                    "oQuimestresGrupoDouble]))")});
             this.xrTableCell93.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell93.Multiline = true;
             this.xrTableCell93.Name = "xrTableCell93";
@@ -2367,6 +2390,8 @@
             this.xrTableCell93.StylePriority.UseFont = false;
             this.xrTableCell93.StylePriority.UsePadding = false;
             this.xrTableCell93.StylePriority.UseTextAlignment = false;
+            xrSummary7.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
+            this.xrTableCell93.Summary = xrSummary7;
             this.xrTableCell93.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell93.TextFormatString = "{0:n2}";
             this.xrTableCell93.Weight = 0.14712441398424359D;
@@ -2393,7 +2418,8 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell95.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([PromediarGrupo]==0, \'\' ,[PromedioFinalGrupoDouble])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([PromediarGrupo]==0, \'\' , Iif(sumSum([NoMostrarPromedioFinal])>0,\'\' , [Promed" +
+                    "ioFinalGrupoDouble]))")});
             this.xrTableCell95.Font = new System.Drawing.Font("Verdana", 6F, System.Drawing.FontStyle.Bold);
             this.xrTableCell95.Multiline = true;
             this.xrTableCell95.Name = "xrTableCell95";
@@ -2402,6 +2428,8 @@
             this.xrTableCell95.StylePriority.UseFont = false;
             this.xrTableCell95.StylePriority.UsePadding = false;
             this.xrTableCell95.StylePriority.UseTextAlignment = false;
+            xrSummary8.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
+            this.xrTableCell95.Summary = xrSummary8;
             this.xrTableCell95.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell95.TextFormatString = "{0:n2}";
             this.xrTableCell95.Weight = 0.14712402259560206D;

@@ -17,13 +17,13 @@ namespace Core.Info.Reportes.Academico
         public int IdParalelo { get; set; }
         public decimal IdAlumno { get; set; }
         public decimal IdMatricula { get; set; }
-        public int IdMateria { get; set; }
+        public Nullable<int> IdMateria { get; set; }
         public string NomMateria { get; set; }
-        public string NomMateriaArea { get; set; }
         public string NomMateriaGrupo { get; set; }
         public int OrdenMateria { get; set; }
         public Nullable<int> OrdenMateriaGrupo { get; set; }
-        public Nullable<int> OrdenMateriaArea { get; set; }
+        public Nullable<int> PromediarGrupo { get; set; }
+        public Nullable<int> IdCatalogoTipoCalificacion { get; set; }
         public string Codigo { get; set; }
         public string pe_nombreCompleto { get; set; }
         public string Descripcion { get; set; }
@@ -40,12 +40,15 @@ namespace Core.Info.Reportes.Academico
         public string NombreInspector { get; set; }
         public string NombreTutor { get; set; }
         public string Calificacion { get; set; }
+        public Nullable<decimal> CalificacionNumerica { get; set; }
         public string Columna { get; set; }
         public int OrdenColumna { get; set; }
 
         #region MyRegion
-        public decimal? PromedioFinalGrupoDouble { get; set; }
-        public string PromedioFinalGrupo { get; set; }
+        public decimal? PromedioGeneralCalculado { get; set; }
+        public decimal? PromedioGeneralNumerico { get; set; }
+        public string PromedioGeneral{ get; set; }
+        public int ExisteNulos { get; set; }
         #endregion
     }
 }

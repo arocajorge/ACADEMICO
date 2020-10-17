@@ -90,6 +90,10 @@ namespace Core.Info.Reportes.Academico
         public decimal? PFQ2 { get; set; }
         public decimal? PFQuim { get; set; }
         public decimal? PF { get; set; }
+        public int NoMostrarPromedioQ1 { get; set; }
+        public int NoMostrarPromedioQ2 { get; set; }
+        public int NoMostrarPromedioQuim { get; set; }
+        public int NoMostrarPromedioFinal { get; set; }
         #endregion
     }
 }
