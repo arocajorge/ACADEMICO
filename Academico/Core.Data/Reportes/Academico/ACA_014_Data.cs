@@ -224,10 +224,10 @@ namespace Core.Data.Reportes.Academico
                              NoMostrarPromedioQ2 = a.NoMostrarPromedioQ2,
                              NoMostrarPromedioQuim = a.NoMostrarPromedioQuim,
                              NoMostrarPromedioFinal = a.NoMostrarPromedioFinal,
-                             PromedioGrupoQ1Double = b.PromedioGrupoQ1Double == null ? (decimal?)null : Math.Round(b.PromedioGrupoQ1Double ?? 0, 2, MidpointRounding.AwayFromZero),
-                             PromedioGrupoQ2Double = b.PromedioGrupoQ2Double == null ? (decimal?)null : Math.Round(b.PromedioGrupoQ2Double ?? 0, 2, MidpointRounding.AwayFromZero),
-                             PromedioQuimestresGrupoDouble = b.PromedioQuimestresGrupoDouble == null ? (decimal?)null : Math.Round(b.PromedioQuimestresGrupoDouble ?? 0, 2, MidpointRounding.AwayFromZero),
-                             PromedioFinalGrupoDouble = b.PromedioFinalGrupoDouble == null ? (decimal?)null : Math.Round(b.PromedioFinalGrupoDouble ?? 0, 2, MidpointRounding.AwayFromZero)
+                             PromedioGrupoQ1Double = b.PromedioGrupoQ1Double == null ? (decimal?)null : b.PromedioGrupoQ1Double ?? 0,
+                             PromedioGrupoQ2Double = b.PromedioGrupoQ2Double == null ? (decimal?)null : b.PromedioGrupoQ2Double ?? 0,
+                             PromedioQuimestresGrupoDouble = b.PromedioQuimestresGrupoDouble == null ? (decimal?)null : b.PromedioQuimestresGrupoDouble ?? 0,
+                             PromedioFinalGrupoDouble = b.PromedioFinalGrupoDouble == null ? (decimal?)null : b.PromedioFinalGrupoDouble ?? 0
                          }).ToList();
 
 

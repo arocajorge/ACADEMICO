@@ -115,6 +115,7 @@ namespace Core.Data.Reportes.Academico
                 ListaPromedioOptativas = Lista.Where(q => q.PromediarGrupo == 1 && q.Columna == "OPTATIVAS" && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
                 ListaPromedioProyectos = Lista.Where(q => q.PromediarGrupo == 0 && q.Columna == "PROYECTOS" && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUALI)).ToList();
                 ListaPromedioGeneral= Lista.Where(q => q.PromediarGrupo == 0 && q.Columna == "P FINAL" && q.IdCatalogoTipoCalificacion == null).ToList();
+
                 ListaFinal.AddRange(ListaObligatorias);
 
                 var lstLeftJoin_PromediosObligatorias =

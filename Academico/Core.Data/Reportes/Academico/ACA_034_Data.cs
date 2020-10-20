@@ -17,9 +17,21 @@ namespace Core.Data.Reportes.Academico
             {
 
                 List<ACA_034_Info> Lista = new List<ACA_034_Info>();
+                List<ACA_034_Info> ListaFinal = new List<ACA_034_Info>();
+
+                List<ACA_034_Info> ListaInicial = new List<ACA_034_Info>();
+                List<ACA_034_Info> ListaObligatorias = new List<ACA_034_Info>();
+                List<ACA_034_Info> ListaOptativas = new List<ACA_034_Info>();
+                List<ACA_034_Info> ListaOptativasIndividuales = new List<ACA_034_Info>();
+
+
+                List<ACA_034_Info> ListaPromedioObligatorias = new List<ACA_034_Info>();
+                List<ACA_034_Info> ListaPromedioOptativas = new List<ACA_034_Info>();
+                List<ACA_034_Info> ListaPromedioProyectos = new List<ACA_034_Info>();
+                List<ACA_034_Info> ListaPromedioGeneral = new List<ACA_034_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
-                    Context.Database.CommandTimeout=5000;
+                    Context.Database.CommandTimeout = 5000;
                     var lst = Context.SPACA_034(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados).ToList();
 
                     foreach (var q in lst)
@@ -43,27 +55,107 @@ namespace Core.Data.Reportes.Academico
                             NomSede = q.NomSede,
                             NomNivel = q.NomNivel,
                             NomJornada = q.NomJornada,
-                            NomMateria = q.NomMateria,
                             NomCurso = q.NomCurso,
                             NomParalelo = q.NomParalelo,
                             OrdenNivel = q.OrdenNivel,
                             OrdenJornada = q.OrdenJornada,
                             OrdenCurso = q.OrdenCurso,
                             OrdenParalelo = q.OrdenParalelo,
-                            OrdenMateriaGrupo = q.OrdenMateriaGrupo,
-                            OrdenMateriaArea = q.OrdenMateriaArea,
                             OrdenMateria = q.OrdenMateria,
-                            NomMateriaArea = q.NomMateriaArea,
-                            NomMateriaGrupo = q.NomMateriaGrupo,
-                            PromedioFinalQ1 = q.PromedioFinalQ1,
-                            PromedioFinalQ2 = q.PromedioFinalQ2,
-                            Supletorio = q.Supletorio,
-                            PromedioFinal=q.PromedioFinal,
+                            Calificacion = q.Calificacion,
+                            CalificacionNumerica = q.CalificacionNumerica,
+                            IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion,
+                            Columna = q.Columna,
+                            NombreGrupo = q.NombreGrupo,
+                            NombreMateria = q.NombreMateria,
+                            OrdenColumna = q.OrdenColumna,
+                            OrdenGrupo = q.OrdenGrupo,
+                            PromediarGrupo = q.PromediarGrupo
                         });
                     }
                 }
 
-                return Lista;
+                ListaInicial = Lista.Where(q => q.IdMateria == 0 ).ToList();
+                ListaFinal.AddRange(ListaInicial);
+
+                ListaObligatorias = Lista.Where(q => q.PromediarGrupo == 0 && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
+                ListaOptativasIndividuales = Lista.Where(q => q.PromediarGrupo == 1 && q.NombreGrupo == "OPTATIVAS  INDIVIDUAL" && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
+                ListaOptativas = Lista.Where(q => q.PromediarGrupo == 1 && q.NombreGrupo == "OPTATIVAS" && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
+
+                var lstPromediosNull_Obligatorias = ListaObligatorias.Where(q => (q.Columna == "I QUIMESTRE" || q.Columna == "II QUIMESTRE") && q.Calificacion == null).GroupBy(q => new
+                {
+                    q.IdEmpresa,
+                    q.IdMatricula,
+                    q.IdMateria
+                }).Select(q => new ACA_034_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdMatricula = q.Key.IdMatricula,
+                    IdMateria = q.Key.IdMateria
+                }).ToList();
+
+                var lstPromediosNull_Optativas = ListaOptativasIndividuales.Where(q => (q.Columna == "I QUIMESTRE" || q.Columna == "II QUIMESTRE") && q.Calificacion == null).GroupBy(q => new
+                {
+                    q.IdEmpresa,
+                    q.IdMatricula,
+                    q.IdMateria
+                }).Select(q => new ACA_034_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdMatricula = q.Key.IdMatricula,
+                    IdMateria = q.Key.IdMateria
+                }).ToList();
+
+                ListaFinal.AddRange(ListaObligatorias.Where(q=>q.Columna!= "PROMEDIO"));
+
+                var lstLeftJoin_PromediosObligatorias =
+                  (from a in ListaObligatorias
+                   join b in lstPromediosNull_Obligatorias on new { a.IdMatricula, a.IdMateria } equals new { b.IdMatricula, b.IdMateria } into PromNulos
+                   from pn in PromNulos.DefaultIfEmpty()
+                   where a.Columna == "PROMEDIO"
+                   select new ACA_034_Info
+                   {
+                       IdEmpresa = a.IdEmpresa,
+                       IdMatricula = a.IdMatricula,
+                       IdMateria = a.IdMateria,
+                       IdAlumno = a.IdAlumno,
+                       pe_nombreCompleto = a.pe_nombreCompleto,
+                       Codigo = a.Codigo,
+                       IdAnio = a.IdAnio,
+                       IdSede = a.IdSede,
+                       IdNivel = a.IdNivel,
+                       IdJornada = a.IdJornada,
+                       IdCurso = a.IdCurso,
+                       IdParalelo = a.IdParalelo,
+                       CodigoParalelo = a.CodigoParalelo,
+                       Descripcion = a.Descripcion,
+                       NomSede = a.NomSede,
+                       NomNivel = a.NomNivel,
+                       NomJornada = a.NomJornada,
+                       NomCurso = a.NomCurso,
+                       NomParalelo = a.NomParalelo,
+                       OrdenNivel = a.OrdenNivel,
+                       OrdenJornada = a.OrdenJornada,
+                       OrdenCurso = a.OrdenCurso,
+                       OrdenParalelo = a.OrdenParalelo,
+                       OrdenMateria = a.OrdenMateria,
+                       NombreTutor = a.NombreTutor,
+                       NombreInspector = a.NombreInspector,
+                       Columna = a.Columna,
+                       OrdenColumna = a.OrdenColumna,
+                       PromediarGrupo = a.PromediarGrupo ?? 0,
+                       IdCatalogoTipoCalificacion = a.IdCatalogoTipoCalificacion,
+                       Calificacion = (pn == null) ? a.Calificacion : null,
+                       CalificacionNumerica = (pn != null) ? a.CalificacionNumerica : null,
+                       NombreGrupo=a.NombreGrupo,
+                       NombreMateria=a.NombreMateria,
+                       OrdenGrupo=a.OrdenGrupo
+                   }
+                  ).ToList();
+
+                ListaFinal.AddRange(lstLeftJoin_PromediosObligatorias);
+
+                return ListaFinal;
             }
             catch (Exception ex)
             {

@@ -197,7 +197,7 @@
             crossTabColumnDefinition5.Visible = false;
             this.xrCrossTab1.ColumnDefinitions.AddRange(new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition[] {
             new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(250F),
-            new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(50F),
+            new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(40F),
             crossTabColumnDefinition1,
             crossTabColumnDefinition2,
             crossTabColumnDefinition3,
@@ -242,7 +242,7 @@
             crossTabRowField1.FieldName = "pe_nombreCompleto";
             this.xrCrossTab1.RowFields.AddRange(new DevExpress.XtraReports.UI.CrossTab.CrossTabRowField[] {
             crossTabRowField1});
-            this.xrCrossTab1.SizeF = new System.Drawing.SizeF(1060.735F, 135F);
+            this.xrCrossTab1.SizeF = new System.Drawing.SizeF(1050.735F, 135F);
             this.xrCrossTab1.TotalAreaStyleName = "crossTabTotalStyle1";
             // 
             // crossTabHeaderCell1
