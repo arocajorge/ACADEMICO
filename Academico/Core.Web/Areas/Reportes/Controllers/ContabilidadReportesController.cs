@@ -177,7 +177,8 @@ namespace Core.Web.Areas.Reportes.Controllers
             lstTipo.Add("NOTAS DE CREDITO", "NOTAS DE CREDITO");
             lstTipo.Add("NOTAS DE DEBITO", "NOTAS DE DEBITO");
             lstTipo.Add("COBROS", "COBROS");
-            lstTipo.Add("CONCILIACION DE NOTA DE CREDITO", "CONCILIACION DE NOTA DE CREDITO");
+            lstTipo.Add("CONCILIACION DE NOTAS DE CREDITO", "CONCILIACION DE NOTAS DE CREDITO");
+            lstTipo.Add("", "TODOS");
             ViewBag.lstTipo = lstTipo;
         }
         #endregion
