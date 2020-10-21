@@ -256,7 +256,8 @@ namespace Core.Data.Academico
                             IdEquivalenciaPromedioP6 = q.IdEquivalenciaPromedioP6,
                             IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ2,
                             IdEquivalenciaPromedioQ2 = q.IdEquivalenciaPromedioQ2,
-                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF
+                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF,
+                            PromedioQuimestres = q.PromedioQuimestres
                         });
                     });
                 }
@@ -326,7 +327,8 @@ namespace Core.Data.Academico
                             IdEquivalenciaPromedioP6 = q.IdEquivalenciaPromedioP6,
                             IdEquivalenciaPromedioEQ2 = q.IdEquivalenciaPromedioEQ2,
                             IdEquivalenciaPromedioQ2 = q.IdEquivalenciaPromedioQ2,
-                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF
+                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF,
+                            PromedioQuimestres = q.PromedioQuimestres
                         });
                     });
                 }
@@ -886,6 +888,14 @@ namespace Core.Data.Academico
                         EntityCalificacion.CausaQ1 = info.Causa;
                         EntityCalificacion.ResolucionQ1 = info.Resolucion;
                         EntityCalificacion.IdEquivalenciaPromedioEQ1 = info.IdEquivalenciaCalificacionExamen;
+
+                        var PromedioQuimestral = (decimal?)null;
+                        if (EntityCalificacion.PromedioFinalQ1 != null && EntityCalificacion.PromedioFinalQ2 != null)
+                        {
+                            PromedioQuimestral = Math.Round(((Convert.ToDecimal(EntityCalificacion.PromedioFinalQ1 + EntityCalificacion.PromedioFinalQ2)) / 2), 2, MidpointRounding.AwayFromZero);
+                        }
+
+                        EntityCalificacion.PromedioQuimestres = PromedioQuimestral;
                     }
                         
                     if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
@@ -902,6 +912,7 @@ namespace Core.Data.Academico
                         {
                             PromedioQuimestral = Math.Round(((Convert.ToDecimal(EntityCalificacion.PromedioFinalQ1 + EntityCalificacion.PromedioFinalQ2)) / 2), 2, MidpointRounding.AwayFromZero);
                         }
+
                         EntityCalificacion.PromedioQuimestres = PromedioQuimestral; 
                     }
 
@@ -933,30 +944,6 @@ namespace Core.Data.Academico
                         EntityCalificacion.PromedioFinal = info.Promedio;
                         EntityCalificacion.IdEquivalenciaPromedioPF = info.IdEquivalenciaPromedio;
                     }
-
-                    Context.SaveChanges();
-
-                    //aca_MatriculaCalificacion EntityCalificacionPromedio = Context.aca_MatriculaCalificacion.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa
-                    //&& q.IdMatricula == info.IdMatricula && q.IdProfesor == info.IdProfesor && q.IdMateria == info.IdMateria);
-                    //if (EntityCalificacionPromedio == null)
-                    //    return false;
-
-                    //var PromedioFinal = (decimal?)null;
-                    //if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
-                    //{
-                    //    PromedioFinal = ((EntityCalificacionPromedio.PromedioQ1) * Convert.ToDecimal(0.80)) + ((EntityCalificacionPromedio.ExamenQ1) * Convert.ToDecimal(0.20));
-                    //    var info_equivalencia = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Convert.ToDecimal(PromedioFinal));
-                    //    EntityCalificacionPromedio.PromedioFinalQ1 = PromedioFinal;
-                    //    EntityCalificacionPromedio.IdEquivalenciaPromedioQ1 = (info_equivalencia==null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
-                    //}
-
-                    //if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
-                    //{
-                    //    PromedioFinal = ((EntityCalificacionPromedio.PromedioQ2) * Convert.ToDecimal(0.80)) + ((EntityCalificacionPromedio.ExamenQ2) * Convert.ToDecimal(0.20));
-                    //    var info_equivalencia = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, Convert.ToDecimal(PromedioFinal));
-                    //    EntityCalificacionPromedio.PromedioFinalQ2 = PromedioFinal;
-                    //    EntityCalificacionPromedio.IdEquivalenciaPromedioQ2 = (info_equivalencia == null ? (int?)null : info_equivalencia.IdEquivalenciaPromedio);
-                    //}
 
                     Context.SaveChanges();
                 }

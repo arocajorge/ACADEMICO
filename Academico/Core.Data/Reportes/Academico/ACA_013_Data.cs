@@ -76,7 +76,9 @@ namespace Core.Data.Reportes.Academico
                             NombreRepresentante = q.NombreRepresentante,
                             NombreTutor = q.NombreTutor,
                             IdProfesorTutor = q.IdProfesorTutor,
-                            NoMostrarPromedio = q.PromedioParcial == null ? 1 : 0
+                            NoMostrarPromedio = q.PromedioParcial == null ? 1 : 0,
+                            CodigoEquivalenciaPromedio = q.CodigoEquivalenciaPromedio,
+                            NomCatalogoTipo = q.NomCatalogoTipo
                         });
                     }
                 }

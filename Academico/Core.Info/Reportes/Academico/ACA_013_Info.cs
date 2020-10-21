@@ -58,6 +58,8 @@ namespace Core.Info.Reportes.Academico
         public Nullable<decimal> IdProfesorTutor { get; set; }
         public string NombreTutor { get; set; }
         public string NombreRepresentante { get; set; }
+        public string CodigoEquivalenciaPromedio { get; set; }
+        public string NomCatalogoTipo { get; set; }
 
         #region Campos que no existen en la base
         public int NoMostrarPromedio { get; set; }
