@@ -119,7 +119,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             cl_filtros_contabilidad_Info model = new cl_filtros_contabilidad_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                balance = "FACTURA"
+                balance = "FACTURAS"
             };
             CONTA_002_Rpt report = new CONTA_002_Rpt();
 
@@ -131,6 +131,16 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
             report.RequestParameters = false;
             ViewBag.Report = report;
+
+            CONTA_002_resumen_Rpt reportResumen = new CONTA_002_resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_FechaIni.Value = model.fecha_ini;
+            reportResumen.p_FechaFin.Value = model.fecha_fin;
+            reportResumen.p_Tipo.Value = model.balance;
+            reportResumen.usuario = SessionFixed.IdUsuario;
+            reportResumen.empresa = SessionFixed.NomEmpresa;
+            reportResumen.RequestParameters = false;
+            ViewBag.ReportResumen = reportResumen;
             CargarCombosCONTA_002();
             return View(model);
         }
@@ -146,6 +156,16 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
             report.RequestParameters = false;
             ViewBag.Report = report;
+
+            CONTA_002_resumen_Rpt reportResumen = new CONTA_002_resumen_Rpt();
+            reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            reportResumen.p_FechaIni.Value = model.fecha_ini;
+            reportResumen.p_FechaFin.Value = model.fecha_fin;
+            reportResumen.p_Tipo.Value = model.balance;
+            reportResumen.usuario = SessionFixed.IdUsuario;
+            reportResumen.empresa = SessionFixed.NomEmpresa;
+            reportResumen.RequestParameters = false;
+            ViewBag.ReportResumen = reportResumen;
             CargarCombosCONTA_002();
             return View(model);
         }

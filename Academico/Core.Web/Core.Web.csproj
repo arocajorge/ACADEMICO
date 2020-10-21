@@ -928,6 +928,12 @@
     <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.Designer.cs">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Contabilidad\CONTA_002_resumen_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contabilidad\CONTA_002_resumen_Rpt.Designer.cs">
+      <DependentUpon>CONTA_002_resumen_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Contabilidad\CONTA_002_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9790,6 +9796,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_001_Rpt.resx">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contabilidad\CONTA_002_resumen_Rpt.resx">
+      <DependentUpon>CONTA_002_resumen_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_002_Rpt.resx">
       <DependentUpon>CONTA_002_Rpt.cs</DependentUpon>

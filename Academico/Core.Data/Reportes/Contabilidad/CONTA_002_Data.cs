@@ -25,7 +25,7 @@ namespace Core.Data.Reportes.Contabilidad
                         case "FACTURAS":
                             query = "select 'FACTURA' AS Tipo, a.vt_serie1+'-'+a.vt_serie2+'-'+a.vt_NumFactura as Referencia,"
                                 + " a.IdEmpresa, c.IdTipoCbte, c.IdCbteCble, c.secuencia, c.IdCtaCble, d.pc_Cuenta, c.dc_Observacion, isnull(e.cb_Fecha,a.vt_fecha) cb_Fecha, e.cb_Observacion, f.Su_Descripcion,"
-                                + " case when c.dc_Valor > 0 then c.dc_Valor else 0 end as dc_ValorDebe,case when c.dc_Valor < 0 then abs(c.dc_Valor) else 0 end as dc_ValorHaber"
+                                + " case when c.dc_Valor > 0 then c.dc_Valor else 0 end as dc_ValorDebe,case when c.dc_Valor < 0 then abs(c.dc_Valor) else 0 end as dc_ValorHaber, isnull(c.dc_Valor,0) dc_Valor"
                                 + " from fa_factura as a inner join"
                                 +" fa_factura_x_ct_cbtecble as b on a.IdEmpresa = b.vt_IdEmpresa and a.IdSucursal = b.vt_IdSucursal and a.IdBodega = b.vt_IdBodega and a.IdCbteVta = b.vt_IdCbteVta inner join"
                                 +" ct_cbtecble_det as c on b.ct_IdEmpresa = c.IdEmpresa and b.ct_IdTipoCbte = c.IdTipoCbte and b.ct_IdCbteCble = c.IdCbteCble inner join"
@@ -55,7 +55,8 @@ namespace Core.Data.Reportes.Contabilidad
                             cb_Observacion = Convert.ToString(reader["cb_Observacion"]),
                             Su_Descripcion = Convert.ToString(reader["Su_Descripcion"]),
                             dc_ValorDebe = Convert.ToInt32(reader["dc_ValorDebe"]),
-                            dc_ValorHaber = Convert.ToInt32(reader["dc_ValorHaber"])
+                            dc_ValorHaber = Convert.ToInt32(reader["dc_ValorHaber"]),
+                            dc_Valor = Convert.ToInt32(reader["dc_Valor"])
                         });
                     }
                 }

@@ -22,5 +22,6 @@ namespace Core.Info.Reportes.Contabilidad
         public string Su_Descripcion { get; set; }
         public double dc_ValorDebe { get; set; }
         public double dc_ValorHaber { get; set; }
+        public double dc_Valor { get; set; }
     }
 }
