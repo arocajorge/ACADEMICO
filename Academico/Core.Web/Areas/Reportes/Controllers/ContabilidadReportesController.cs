@@ -112,5 +112,54 @@ namespace Core.Web.Areas.Reportes.Controllers
             lst_balance.Add("", "Balance de comprobación");
             ViewBag.lst_balance = lst_balance;
         }
+
+        #region CONTA_002
+        public ActionResult CONTA_002()
+        {
+            cl_filtros_contabilidad_Info model = new cl_filtros_contabilidad_Info
+            {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                balance = "FACTURA"
+            };
+            CONTA_002_Rpt report = new CONTA_002_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_FechaIni.Value = model.fecha_ini;
+            report.p_FechaFin.Value = model.fecha_fin;
+            report.p_Tipo.Value = model.balance;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            CargarCombosCONTA_002();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CONTA_002(cl_filtros_contabilidad_Info model)
+        {
+            CONTA_002_Rpt report = new CONTA_002_Rpt();
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_FechaIni.Value = model.fecha_ini;
+            report.p_FechaFin.Value = model.fecha_fin;
+            report.p_Tipo.Value = model.balance;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            report.RequestParameters = false;
+            ViewBag.Report = report;
+            CargarCombosCONTA_002();
+            return View(model);
+        }
+
+        public void CargarCombosCONTA_002()
+        {
+            Dictionary<string, string> lstTipo = new Dictionary<string, string>();
+            lstTipo.Add("FACTURAS", "FACTURAS");
+            lstTipo.Add("NOTAS DE CREDITO", "NOTAS DE CREDITO");
+            lstTipo.Add("NOTAS DE DEBITO", "NOTAS DE DEBITO");
+            lstTipo.Add("COBROS", "COBROS");
+            lstTipo.Add("CONCILIACION DE NOTA DE CREDITO", "CONCILIACION DE NOTA DE CREDITO");
+            ViewBag.lstTipo = lstTipo;
+        }
+        #endregion
     }
 }

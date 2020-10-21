@@ -928,6 +928,12 @@
     <Compile Include="Reportes\Contabilidad\CONTA_001_Rpt.Designer.cs">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Contabilidad\CONTA_002_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Contabilidad\CONTA_002_Rpt.Designer.cs">
+      <DependentUpon>CONTA_002_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9413,6 +9419,7 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_046.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_047.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_048.cshtml" />
+    <Content Include="Areas\Reportes\Views\ContabilidadReportes\CONTA_002.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9783,6 +9790,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Contabilidad\CONTA_001_Rpt.resx">
       <DependentUpon>CONTA_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Contabilidad\CONTA_002_Rpt.resx">
+      <DependentUpon>CONTA_002_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_001_Rpt.resx">
       <DependentUpon>CXC_001_Rpt.cs</DependentUpon>
