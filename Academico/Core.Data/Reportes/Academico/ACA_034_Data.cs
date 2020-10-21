@@ -140,7 +140,7 @@ namespace Core.Data.Reportes.Academico
 
                 ListaFinal.AddRange(lstLeftJoin_PromediosObligatorias);
 
-                ListaFinal.AddRange(ListaOptativasIndividuales);
+                //ListaFinal.AddRange(ListaOptativasIndividuales);
                 var Lista_Validar_PromediosOptativa = new List<ACA_034_Info>();
 
                 var IQuim_ParaValidar = new List<ACA_034_Info>();
@@ -382,6 +382,10 @@ namespace Core.Data.Reportes.Academico
                     IdNivel = q.Key.IdNivel,
                     IdCurso = q.Key.IdCurso,
                     IdParalelo = q.Key.IdParalelo,
+                    OrdenJornada = q.Key.OrdenJornada,
+                    OrdenNivel = q.Key.OrdenNivel,
+                    OrdenCurso = q.Key.OrdenCurso,
+                    OrdenParalelo = q.Key.OrdenParalelo,
                     NomSede = q.Key.NomSede,
                     Descripcion = q.Key.Descripcion,
                     NomJornada = q.Key.NomJornada,
@@ -391,8 +395,8 @@ namespace Core.Data.Reportes.Academico
                     IdAlumno = q.Key.IdAlumno,
                     pe_nombreCompleto = q.Key.pe_nombreCompleto,
                     OptativasNulas = q.Sum(g => g.OptativasNulas),
-                    /*SumaGeneral = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)),
-                    /*PromedioFinalCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))*/
+                    SumaGeneral = q.Max(g => (g.Calificacion == null || g.Calificacion=="")) ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)),
+                    PromedioFinalCalculado = q.Max(g => (g.Calificacion == null || g.Calificacion == "")) ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
                 }).ToList();
 
                 foreach (var item in ListaPromedioGeneral_Validar)
@@ -401,6 +405,22 @@ namespace Core.Data.Reportes.Academico
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,
+                        IdAnio = item.IdAnio,
+                        IdSede = item.IdSede,
+                        IdJornada = item.IdJornada,
+                        IdNivel = item.IdNivel,
+                        IdCurso = item.IdCurso,
+                        IdParalelo = item.IdParalelo,
+                        OrdenJornada = item.OrdenJornada,
+                        OrdenNivel = item.OrdenNivel,
+                        OrdenCurso = item.OrdenCurso,
+                        OrdenParalelo = item.OrdenParalelo,
+                        NomSede = item.NomSede,
+                        Descripcion = item.Descripcion,
+                        NomJornada = item.NomJornada,
+                        NomCurso = item.NomCurso,
+                        NomNivel = item.NomNivel,
+                        NomParalelo = item.NomParalelo,
                         IdAlumno = item.IdAlumno,
                         pe_nombreCompleto = item.pe_nombreCompleto,
                         Columna = "SUMA TOTAL",
@@ -416,16 +436,63 @@ namespace Core.Data.Reportes.Academico
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,
+                        IdAnio = item.IdAnio,
+                        IdSede = item.IdSede,
+                        IdJornada = item.IdJornada,
+                        IdNivel = item.IdNivel,
+                        IdCurso = item.IdCurso,
+                        IdParalelo = item.IdParalelo,
+                        OrdenJornada = item.OrdenJornada,
+                        OrdenNivel = item.OrdenNivel,
+                        OrdenCurso = item.OrdenCurso,
+                        OrdenParalelo = item.OrdenParalelo,
+                        NomSede = item.NomSede,
+                        Descripcion = item.Descripcion,
+                        NomJornada = item.NomJornada,
+                        NomCurso = item.NomCurso,
+                        NomNivel = item.NomNivel,
+                        NomParalelo = item.NomParalelo,
                         IdAlumno = item.IdAlumno,
                         pe_nombreCompleto = item.pe_nombreCompleto,
                         Columna = "PROMEDIO GENERAL",
                         NombreGrupo = null,
                         OrdenMateria = 999,
                         OrdenGrupo = 999,
-                        Calificacion = (item.OptativasNulas > 0 ? null : Convert.ToString(item.SumaGeneral)),
-                        CalificacionNumerica = (item.OptativasNulas > 0 ? (decimal?)null : item.SumaGeneral),
+                        Calificacion = (item.OptativasNulas > 0 ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioFinalCalculado),2,MidpointRounding.AwayFromZero))),
+                        CalificacionNumerica = (item.OptativasNulas > 0 ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioFinalCalculado), 2, MidpointRounding.AwayFromZero)),
                     };
                     ListaPromedioGeneral_Agregar.Add(promedio);
+
+                    var equivalencia = new ACA_034_Info
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdMatricula = item.IdMatricula,
+                        IdAnio = item.IdAnio,
+                        IdSede = item.IdSede,
+                        IdJornada = item.IdJornada,
+                        IdNivel = item.IdNivel,
+                        IdCurso = item.IdCurso,
+                        IdParalelo = item.IdParalelo,
+                        OrdenJornada = item.OrdenJornada,
+                        OrdenNivel = item.OrdenNivel,
+                        OrdenCurso = item.OrdenCurso,
+                        OrdenParalelo = item.OrdenParalelo,
+                        NomSede = item.NomSede,
+                        Descripcion = item.Descripcion,
+                        NomJornada = item.NomJornada,
+                        NomCurso = item.NomCurso,
+                        NomNivel = item.NomNivel,
+                        NomParalelo = item.NomParalelo,
+                        IdAlumno = item.IdAlumno,
+                        pe_nombreCompleto = item.pe_nombreCompleto,
+                        Columna = "EQUIVALENCIA",
+                        NombreGrupo = null,
+                        OrdenMateria = 999,
+                        OrdenGrupo = 999,
+                        Calificacion = null,
+                        //CalificacionNumerica = (item.OptativasNulas > 0 ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioFinalCalculado), 2, MidpointRounding.AwayFromZero)),
+                    };
+                    ListaPromedioGeneral_Agregar.Add(equivalencia);
                 }
 
                 ListaFinal.AddRange(ListaPromedioGeneral_Agregar);
