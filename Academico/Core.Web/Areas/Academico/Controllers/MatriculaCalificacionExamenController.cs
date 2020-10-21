@@ -591,12 +591,12 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXMEJ))
             {
-                ListaCalificacionExamen_Final = ListaCalificacionExamen.Where(q=>q.PromedioFinal >= Convert.ToDecimal(info_anio.PromedioMinimoPromocion)).ToList();
+                ListaCalificacionExamen_Final = ListaCalificacionExamen.Where(q=> q.ExamenMejoramiento==null && q.PromedioQuimestres >= Convert.ToDecimal(info_anio.PromedioMinimoPromocion)).ToList();
             }
 
             if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXSUP))
             {
-                ListaCalificacionExamen_Final = ListaCalificacionExamen.Where(q => q.PromedioFinal < Convert.ToDecimal(info_anio.PromedioMinimoPromocion)).ToList();
+                ListaCalificacionExamen_Final = ListaCalificacionExamen.Where(q => q.PromedioQuimestres < Convert.ToDecimal(info_anio.PromedioMinimoPromocion)).ToList();
             }
 
             if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXREM))

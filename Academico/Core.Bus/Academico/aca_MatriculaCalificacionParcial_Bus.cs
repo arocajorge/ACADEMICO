@@ -97,20 +97,24 @@ namespace Core.Bus.Academico
                             var info_anio = odata_anio.getInfo(info.IdEmpresa, info_matricula.IdAnio);
 
                             var IdEquivalenciaPromedioFinal = (int?)null;
-                            decimal PromedioFinal = 0;
-                            decimal PromedioQuimestralCalculado = 0;
+                            var PromedioFinal = (decimal?)null;
+                            var PromedioQuimestralCalculado = (decimal?)null;
                             decimal PromedioMinimoPromocion = Math.Round(Convert.ToDecimal(info_anio.PromedioMinimoPromocion), 2, MidpointRounding.AwayFromZero);
 
                             if(info_calificacion!=null)
                             {
                                 string CampoMejoramiento = null;
-                                decimal PromedioFinalQ1 = Convert.ToDecimal(info_calificacion.PromedioFinalQ1);
-                                decimal PromedioFinalQ2 = Convert.ToDecimal(info_calificacion.PromedioFinalQ2);
+                                var PromedioFinalQ1 = info_calificacion.PromedioFinalQ1;
+                                var PromedioFinalQ2 = info_calificacion.PromedioFinalQ2;
                                 decimal ExamenMejoramiento = Convert.ToDecimal(info_calificacion.ExamenMejoramiento);
                                 decimal ExamenSupletorio = Convert.ToDecimal(info_calificacion.ExamenSupletorio);
                                 decimal ExamenRemedial = Convert.ToDecimal(info_calificacion.ExamenRemedial);
                                 decimal ExamenGracia = Convert.ToDecimal(info_calificacion.ExamenGracia);
-                                PromedioQuimestralCalculado = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
+
+                                if (PromedioFinalQ1!= null && PromedioFinalQ2!=null)
+                                {
+                                    PromedioQuimestralCalculado = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
+                                }
 
                                 if (PromedioQuimestralCalculado < PromedioMinimoPromocion)
                                 {

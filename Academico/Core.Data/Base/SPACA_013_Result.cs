@@ -44,6 +44,7 @@ namespace Core.Data.Base
         public int OrdenMateria { get; set; }
         public Nullable<int> OrdenMateriaGrupo { get; set; }
         public Nullable<int> OrdenMateriaArea { get; set; }
+        public string NomCatalogoTipo { get; set; }
         public string NomCatalogo { get; set; }
         public string Descripcion { get; set; }
         public Nullable<decimal> Calificacion1 { get; set; }
@@ -58,6 +59,7 @@ namespace Core.Data.Base
         public string MotivoCalificacion { get; set; }
         public string AccionRemedial { get; set; }
         public Nullable<decimal> PromedioParcial { get; set; }
+        public string CodigoEquivalenciaPromedio { get; set; }
         public Nullable<int> SecuenciaPromedioConducta { get; set; }
         public string LetraPromedioConducta { get; set; }
         public Nullable<decimal> IdProfesorTutor { get; set; }
