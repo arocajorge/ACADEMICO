@@ -148,9 +148,9 @@ namespace Core.Data.Reportes.Contabilidad
                             cb_Fecha = Convert.ToDateTime(reader["cb_Fecha"]),
                             cb_Observacion = Convert.ToString(reader["cb_Observacion"]),
                             Su_Descripcion = Convert.ToString(reader["Su_Descripcion"]),
-                            dc_ValorDebe = Convert.ToInt32(reader["dc_ValorDebe"]),
-                            dc_ValorHaber = Convert.ToInt32(reader["dc_ValorHaber"]),
-                            dc_Valor = Convert.ToInt32(reader["dc_Valor"])
+                            dc_ValorDebe = Convert.ToDouble(reader["dc_ValorDebe"]),
+                            dc_ValorHaber = Convert.ToDouble(reader["dc_ValorHaber"]),
+                            dc_Valor = Convert.ToDouble(reader["dc_Valor"])
                         });
                     }
                 }
