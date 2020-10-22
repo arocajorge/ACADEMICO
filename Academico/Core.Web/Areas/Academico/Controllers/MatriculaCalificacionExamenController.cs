@@ -443,8 +443,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     {
                         if (info_det.Promedio == null)
                         {
-                            ViewBag.MostrarError = "El estudiante no tiene promedio quimestral,ingrese calificaciones pendientes.";
-                            actualizar = false;
+                            //ViewBag.MostrarError = "El estudiante no tiene promedio quimestral,ingrese calificaciones pendientes.";
+                            //actualizar = false;
                         }
                         else
                         {

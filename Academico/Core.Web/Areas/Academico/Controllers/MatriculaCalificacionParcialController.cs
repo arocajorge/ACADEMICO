@@ -565,6 +565,10 @@ namespace Core.Web.Areas.Academico.Controllers
                                 info_det.RegistroconPromedioBajo = false;
                             }
                         }
+                        else
+                        {
+
+                        }
 
                         //if (info_det.PromedioParcial!=null)
                         //{
@@ -580,8 +584,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     if (RegistroValidoCalificacion==true && RegistroValidoConducta==true)
                     {
                         info_det.RegistroValido = true;
-                        var info_equivalencia_promedio = bus_equivalencia_promedio.GetInfo_x_Promedio(IdEmpresa, info_matricula.IdAnio, Convert.ToDecimal(info_det.PromedioParcial));
-                        info_det.IdEquivalenciaPromedioParcial = info_equivalencia_promedio.IdEquivalenciaPromedio;
+                        var info_equivalencia_promedio = bus_equivalencia_promedio.GetInfo_x_Promedio(IdEmpresa, info_matricula.IdAnio, info_det.PromedioParcial);
+                        info_det.IdEquivalenciaPromedioParcial = (info_equivalencia_promedio==null ? (int?)null : info_equivalencia_promedio.IdEquivalenciaPromedio);
 
                         Lista_CalificacionParcial.UpdateRow(info_det, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                     }
@@ -667,7 +671,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public JsonResult CalcularPromedio(int IdEmpresa = 0, decimal IdMatricula = 0, decimal? Calificacion1=null, decimal? Calificacion2=null, decimal? Calificacion3=null, decimal? Calificacion4=null, decimal? Evaluacion=null, decimal? Remedial1=null, decimal? Remedial2=null)
         {
-            decimal? resultado = null;
+            var resultado = (decimal?)null;
             var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
             var info_anio_lectivo = bus_anio.GetInfo(IdEmpresa, info_matricula.IdAnio);
 

@@ -13,6 +13,7 @@ namespace Core.Data.Reportes.Academico
     public class ACA_034_Data
     {
         aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
+        aca_AnioLectivoEquivalenciaPromedio_Data odata_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Data();
         public List<ACA_034_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, bool MostrarRetirados)
         {
             try
@@ -463,6 +464,8 @@ namespace Core.Data.Reportes.Academico
                     };
                     ListaPromedioGeneral_Agregar.Add(promedio);
 
+                    var PromedioGeneral = (promedio.CalificacionNumerica == null ? (decimal?)null : promedio.CalificacionNumerica);
+                    var info_equivalencia = odata_equivalencia.getInfo_x_Promedio(IdEmpresa,IdAnio, PromedioGeneral);
                     var equivalencia = new ACA_034_Info
                     {
                         IdEmpresa = item.IdEmpresa,
@@ -489,8 +492,8 @@ namespace Core.Data.Reportes.Academico
                         NombreGrupo = null,
                         OrdenMateria = 999,
                         OrdenGrupo = 999,
-                        Calificacion = null,
-                        //CalificacionNumerica = (item.OptativasNulas > 0 ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioFinalCalculado), 2, MidpointRounding.AwayFromZero)),
+                        Calificacion = (info_equivalencia == null ? null :info_equivalencia.Codigo),
+                        CalificacionNumerica = (decimal?)null,
                     };
                     ListaPromedioGeneral_Agregar.Add(equivalencia);
                 }
