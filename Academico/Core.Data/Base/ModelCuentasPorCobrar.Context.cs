@@ -62,5 +62,8 @@ namespace Core.Data.Base
         public virtual DbSet<vwcxc_LiquidacionTarjeta_x_cxc_cobro> vwcxc_LiquidacionTarjeta_x_cxc_cobro { get; set; }
         public virtual DbSet<cxc_Parametro> cxc_Parametro { get; set; }
         public virtual DbSet<vwcxc_cartera_x_cobrar> vwcxc_cartera_x_cobrar { get; set; }
+        public virtual DbSet<cxc_Pagare> cxc_Pagare { get; set; }
+        public virtual DbSet<cxc_Convenio_Det> cxc_Convenio_Det { get; set; }
+        public virtual DbSet<cxc_Convenio> cxc_Convenio { get; set; }
     }
 }

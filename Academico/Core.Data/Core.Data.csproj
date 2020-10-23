@@ -218,6 +218,12 @@
     <Compile Include="Base\cxc_ConciliacionNotaCreditoDet.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\cxc_Convenio.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_Convenio_Det.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\cxc_LiquidacionTarjeta.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
@@ -234,6 +240,9 @@
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal.cs">
+      <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\cxc_Pagare.cs">
       <DependentUpon>ModelCuentasPorCobrar.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\cxc_SeguimientoCartera.cs">
@@ -687,12 +696,15 @@
     <Compile Include="CuentasPorCobrar\cxc_CobroMasivo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCredito_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Convenio_Det_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Convenio_Data.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Pagare_Data.cs" />
     <Compile Include="CuentasPorCobrar\cxc_SeguimientoCartera_Data.cs" />
     <Compile Include="Facturacion\fa_AplicacionMasivaDet_Data.cs" />
     <Compile Include="Facturacion\fa_AplicacionMasiva_Data.cs" />
@@ -2089,6 +2101,7 @@
     <Compile Include="Reportes\Caja\CAJ_002_ValesNoConciliados_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_001_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_002_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_016_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_001_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_011_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_010_Data.cs" />

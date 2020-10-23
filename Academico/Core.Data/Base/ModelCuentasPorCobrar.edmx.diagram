@@ -60,6 +60,10 @@
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_LiquidacionTarjeta_x_cxc_cobro" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_Parametro" Width="1.5" PointX="11.375" PointY="15.75" />
         <EntityTypeShape EntityType="ModelCuentasPorCobrar.vwcxc_cartera_x_cobrar" Width="1.5" PointX="13.375" PointY="21.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_Pagare" Width="1.5" PointX="3.375" PointY="22.75" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_Convenio_Det" Width="1.5" PointX="23.625" PointY="17.875" />
+        <EntityTypeShape EntityType="ModelCuentasPorCobrar.cxc_Convenio" Width="1.5" PointX="21.375" PointY="17" />
+        <AssociationConnector Association="ModelCuentasPorCobrar.FK_cxc_Convenio_Det_cxc_Convenio" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

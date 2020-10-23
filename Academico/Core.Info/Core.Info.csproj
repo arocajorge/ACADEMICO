@@ -115,12 +115,15 @@
     <Compile Include="CuentasPorCobrar\cxc_CobroMasivo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCredito_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Convenio_Det_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Convenio_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Info.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Pagare_Info.cs" />
     <Compile Include="CuentasPorCobrar\cxc_SeguimientoCartera_Info.cs" />
     <Compile Include="Facturacion\fa_AplicacionMasivaDet_Info.cs" />
     <Compile Include="Facturacion\fa_AplicacionMasiva_Info.cs" />
@@ -382,6 +385,7 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_012_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_013_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_014_Info.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_016_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_015_Info.cs" />
     <Compile Include="Reportes\Facturacion\FAC_001_Info.cs" />
     <Compile Include="Reportes\Facturacion\FAC_002_PendientePago_Info.cs" />

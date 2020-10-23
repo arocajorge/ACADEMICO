@@ -117,12 +117,15 @@
     <Compile Include="CuentasPorCobrar\cxc_CobroMasivo_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCreditoDet_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_ConciliacionNotaCredito_Bus.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Convenio_Det_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjetaDet_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_ba_TipoFlujo_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_LiquidacionTarjeta_x_cxc_cobro_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_MotivoLiquidacionTarjeta_x_tb_sucursal_Bus.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Convenio_Bus.cs" />
+    <Compile Include="CuentasPorCobrar\cxc_Pagare_Bus.cs" />
     <Compile Include="CuentasPorCobrar\cxc_SeguimientoCartera_Bus.cs" />
     <Compile Include="Facturacion\fa_AplicacionMasivaDet_Bus.cs" />
     <Compile Include="Facturacion\fa_AplicacionMasiva_Bus.cs" />
@@ -373,6 +376,7 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_012_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_013_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_014_Bus.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_016_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_015_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_001_Bus.cs" />
     <Compile Include="Reportes\Facturacion\FAC_002_Pendiente_Pago_Bus.cs" />

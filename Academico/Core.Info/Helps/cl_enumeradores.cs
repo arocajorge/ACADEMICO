@@ -180,7 +180,8 @@ namespace Core.Info.Helps
             QUIM1 = 6,
             QUIM2 = 7,
             EXSUP = 8,
-            TIPOCAL = 9
+            TIPOCAL = 9,
+            ESTCONV = 10
         }
 
         public enum eCatalogoTipoCalificacion
@@ -232,6 +233,13 @@ namespace Core.Info.Helps
             PROMOVIDO = 8,
             NO_PROMOVIDO = 9,
             RETIRADO = 21
+        }
+
+        public enum eCatalogoAcademicoConvenio
+        {
+            PENDIENTE = 44,
+            CANCELADO = 45,
+            ANULADO = 45
         }
 
         public enum eTipoRepresentante

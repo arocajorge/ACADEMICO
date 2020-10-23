@@ -1,0 +1,120 @@
+﻿@model Core.Info.CuentasPorCobrar.cxc_Pagare_Info
+@{
+    ViewBag.Title = "Modificar pagaré";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+    })
+
+    function SetDatosCobranza() {
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAlumno: IdAlumno.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetDatosCobranza", "Pagare",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#Valor").val(data.Saldo),
+                IdPersonaPagare.SetValue(data.IdPersonaFactura);
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+</script>
+
+
+@using (Html.BeginForm("Modificar", "Pagare", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdPagare)
+    if (@ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="cr_fecha">Fecha*</label>
+                    @Html.DevExpress().DateEditFor(q => q.FechaAPagar, settings =>
+                        {
+                            settings.Name = "FechaAPagar";
+                            settings.Properties.UseMaskBehavior = true;
+                            settings.Properties.EditFormat = EditFormat.Date;
+                            settings.Properties.EditFormatString = "dd/MM/yyyy";
+                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                        }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.FechaAPagar, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-8 col-md-2">
+                <div class="form-group">
+                    <label for="cr_saldo">Valor</label>
+                    @Html.TextBoxFor(q => q.Valor, new { @id = "Valor", @class = "form-control"})
+                    @Html.ValidationMessageFor(q => q.Valor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Estudiante*</label>
+                    @Html.Partial("_CmbAlumnoReadonly", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Persona Pagaré*</label>
+                    @Html.Partial("_CmbPersona", Model.IdPersonaPagare)
+                    @Html.ValidationMessageFor(q => q.IdPersonaPagare, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cr_saldo">Observacion</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @id = "Observacion", @class = "form-control" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "Pagare", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+

@@ -21,7 +21,7 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
-        
+
         public List<cxc_cobro_Info> get_list_matricula(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
             try
@@ -134,7 +134,7 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
-        
+
         public List<cxc_cobro_Info> get_list_aplicacion_masiva(int IdEmpresa)
         {
             try
@@ -177,6 +177,18 @@ namespace Core.Bus.CuentasPorCobrar
             try
             {
                 return odata.Contabilizar(IdEmpresa, IdSucursal, IdCobro);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<cxc_cobro_Info> GetSaldoAlumno(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.GetSaldoAlumno(IdEmpresa, IdAlumno);
             }
             catch (Exception)
             {

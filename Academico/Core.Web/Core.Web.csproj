@@ -312,12 +312,14 @@
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CobranzaMasivaController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ConciliacionNCController.cs" />
+    <Compile Include="Areas\CuentasPorCobrar\Controllers\ConvenioController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\CorreoMasivoCobranzaController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\LiquidacionTarjetaCreditoController.cs" />
+    <Compile Include="Areas\CuentasPorCobrar\Controllers\PagareController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\ParametroCXCController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\Controllers\SeguimientoCarteraController.cs" />
     <Compile Include="Areas\CuentasPorCobrar\CuentasPorCobrarAreaRegistration.cs" />
-    <Compile Include="Areas\CuentasPorCobrar\MotivoLiquidacionController.cs" />
+    <Compile Include="Areas\CuentasPorCobrar\Controllers\MotivoLiquidacionController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\DeudasController.cs" />
     <Compile Include="Areas\CuentasPorPagar\Controllers\RetencionController.cs" />
     <Compile Include="Areas\CuentasPorPagar\CuentasPorPagarAreaRegistration.cs" />
@@ -1065,6 +1067,12 @@
     </Compile>
     <Compile Include="Reportes\CuentasPorCobrar\CXC_013_Rpt.Designer.cs">
       <DependentUpon>CXC_013_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_016_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_016_Rpt.Designer.cs">
+      <DependentUpon>CXC_016_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Facturacion\FAC_006_Resumen_Rpt.cs">
       <SubType>Component</SubType>
@@ -9426,6 +9434,26 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_047.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_048.cshtml" />
     <Content Include="Areas\Reportes\Views\ContabilidadReportes\CONTA_002.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Pagare\Index.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Pagare\_GridViewPartial_Pagare.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Pagare\_CmbAlumno.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Pagare\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Pagare\_CmbPersona.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Pagare\_CmbAlumnoReadonly.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Pagare\Consultar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Pagare\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Pagare\Anular.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_016.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Convenio\Index.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Convenio\_GridViewPartial_Convenio.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Convenio\Nuevo.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Convenio\_CmbAlumno.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Convenio\_CmbAlumnoReadonly.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Convenio\_CmbPersona.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Convenio\_GridViewPartial_Convenio_Det.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Convenio\Consultar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Convenio\Modificar.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Convenio\Anular.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9865,6 +9893,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_013_Rpt.resx">
       <DependentUpon>CXC_013_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_016_Rpt.resx">
+      <DependentUpon>CXC_016_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Facturacion\FAC_006_Resumen_Rpt.resx">
       <DependentUpon>FAC_006_Resumen_Rpt.cs</DependentUpon>

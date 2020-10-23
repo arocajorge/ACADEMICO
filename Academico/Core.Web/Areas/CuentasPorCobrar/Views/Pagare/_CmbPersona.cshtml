@@ -1,0 +1,24 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdPersonaPagare";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Percentage(100);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "Pagare", Action = "Cmb_Persona", Area = "CuentasPorCobrar" };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "pe_nombreCompleto";
+        settings.Properties.TextFormatString = "[{0}] {1} - {2}";
+        settings.Properties.ValueField = "IdEntidad";
+        settings.Properties.ValueType = typeof(decimal);
+        settings.Properties.Columns.Add("IdEntidad", "ID", 10);
+        settings.Properties.Columns.Add("pe_cedulaRuc", "Identificacion", 25);
+        settings.Properties.Columns.Add("pe_nombreCompleto", "Nombres", 65);
+    })
+    .BindList(new Core.Web.Areas.CuentasPorCobrar.Controllers.PagareController().get_list_bajo_demanda_persona, new Core.Web.Areas.CuentasPorCobrar.Controllers.PagareController().get_info_bajo_demanda_persona)
+    .Bind(Model.GetType() == typeof(Core.Info.CuentasPorCobrar.cxc_Pagare_Info) ? "" : (Model == 0 ? "" : Model));
+
+}
+@comboBox.GetHtml()

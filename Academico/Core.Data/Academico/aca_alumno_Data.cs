@@ -306,6 +306,7 @@ namespace Core.Data.Academico
                             correoRepEconomico = reader["CorreoEmiteFactura"].ToString(),
                             NomRepLegal = reader["NombreRepresentante"].ToString(),
                             CorreoRepLegal = reader["CorreoRepresentante"].ToString(),
+
                             CelularRepresentante = reader["CelularRepresentante"].ToString(),
                             CelularEmiteFactura = reader["CelularEmiteFactura"].ToString(),
                             IdSede = Convert.ToInt32(reader["IdSede"]),
