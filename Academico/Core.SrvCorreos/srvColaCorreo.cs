@@ -60,6 +60,8 @@ namespace Core.SrvCorreos
                     
                     mail.From = new MailAddress(CorreoInfo.ParametroInfo.Usuario);
                     mail.Subject = CorreoInfo.Asunto;
+                    mail.IsBodyHtml = true;
+
                     string[] Correos = CorreoInfo.Destinatarios.Split(';');
                     foreach (var item in Correos)
                     {
