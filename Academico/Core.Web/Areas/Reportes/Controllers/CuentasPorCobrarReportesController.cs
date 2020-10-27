@@ -798,5 +798,40 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
         #endregion
+
+        #region CXC_017
+        public ActionResult CXC_017(decimal IdAlumno = 0)
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.IdAlumno = IdAlumno;
+
+            CXC_017_Rpt report = new CXC_017_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            ViewBag.MostrarCorreo = false;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CXC_017(cl_filtros_Info model)
+        {
+            CXC_017_Rpt report = new CXC_017_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            ViewBag.MostrarCorreo = true;
+            return View(model);
+        }
+        #endregion
     }
 }

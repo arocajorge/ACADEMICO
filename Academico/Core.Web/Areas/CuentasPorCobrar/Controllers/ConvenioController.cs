@@ -31,6 +31,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         aca_Familia_Bus bus_familia = new aca_Familia_Bus();
         cxc_Convenio_Det_List Lista_Convenio_Det = new cxc_Convenio_Det_List();
         aca_Catalogo_Bus bus_catalogo = new aca_Catalogo_Bus();
+        aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         #endregion
@@ -59,8 +60,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         }
         public List<tb_persona_Info> get_list_bajo_demanda_alumno(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            var x = bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
-            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO_MATRICULADOS.ToString());
         }
         public tb_persona_Info get_info_bajo_demanda_alumno(ListEditItemRequestedByValueEventArgs args)
         {
@@ -117,7 +117,6 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         }
 
         #endregion
-
 
         #region Metodos
         private void cargar_combos_detalle()
@@ -375,6 +374,8 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             string Resultado = string.Empty;
             var Saldo = (double?)null;
             var IdPersonaFactura = (decimal?)null;
+            var IdMatricula = (decimal?)null;
+
             var lst_SaldoAlumno = bus_cobro.GetSaldoAlumno(IdEmpresa, IdAlumno);
             if (lst_SaldoAlumno != null)
             {
@@ -383,7 +384,12 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             var info_PesonaFactura = bus_familia.GetInfo_Representante(IdEmpresa, IdAlumno, cl_enumeradores.eTipoRepresentante.ECON.ToString());
             IdPersonaFactura = (info_PesonaFactura == null ? (decimal?)null : info_PesonaFactura.IdPersona);
-            return Json(new { Saldo = Saldo, IdPersonaFactura = IdPersonaFactura }, JsonRequestBehavior.AllowGet);
+
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa,0);
+            var info_matricula = bus_matricula.GetInfo_ExisteMatricula(IdEmpresa, info_anio.IdAnio,IdAlumno);
+            IdMatricula = info_matricula.IdMatricula;
+
+            return Json(new { Saldo = Saldo, IdPersonaFactura = IdPersonaFactura, IdMatricula = IdMatricula }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GenerarConvenioDet(double Valor, DateTime FechaPrimerPago, int NumCuotas = 0)

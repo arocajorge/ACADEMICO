@@ -31,6 +31,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                 $("#Valor").val(data.Saldo),
+                $("#IdMatricula").val(data.IdMatricula),
                 IdPersonaConvenio.SetValue(data.IdPersonaFactura);
                 
             },
@@ -68,6 +69,7 @@
 {
     @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
     @Html.HiddenFor(q => q.IdEmpresa)
+    @Html.HiddenFor(q => q.IdMatricula, new { @id = "IdMatricula" })
     if (@ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">

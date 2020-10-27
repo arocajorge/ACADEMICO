@@ -47,7 +47,7 @@ namespace Core.Data.Reportes.Contabilidad
                             pe_correo = Convert.ToString(reader["pe_correo"]),
                             Valor = Convert.ToDouble(reader["Valor"]),
                             ValorString = Convert.ToDouble(reader["Valor"]).ToString("C2"),
-                            ValorTexto = "/100",
+                            ValorTexto = entero.ToString() + " con " + decimales.ToString() +"/100",
                             FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy"),
                             dia = Convert.ToDateTime(reader["FechaAPagar"]).ToString("dd"),
                             mes = Convert.ToDateTime(reader["FechaAPagar"]).ToString("MMMM"),

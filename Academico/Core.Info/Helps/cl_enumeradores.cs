@@ -167,7 +167,8 @@ namespace Core.Info.Helps
             TUTOR,
             INSPECTOR,
             PROFESOR,
-            ALUMNO_MATRICULA
+            ALUMNO_MATRICULA,
+            ALUMNO_MATRICULADOS
         }
 
         public enum eTipoCatalogoAcademico
