@@ -540,6 +540,18 @@
     <Compile Include="Reportes\Academico\ACA_015_Rpt.Designer.cs">
       <DependentUpon>ACA_015_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_050_Promedios_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_050_Promedios_Rpt.Designer.cs">
+      <DependentUpon>ACA_050_Promedios_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_050_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_050_Rpt.Designer.cs">
+      <DependentUpon>ACA_050_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_049_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9461,6 +9473,8 @@
     <Content Include="Areas\CuentasPorCobrar\Views\Convenio\Modificar.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Convenio\Anular.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_017.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_049.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_050.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9636,6 +9650,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_015_Rpt.resx">
       <DependentUpon>ACA_015_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_050_Promedios_Rpt.resx">
+      <DependentUpon>ACA_050_Promedios_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_050_Rpt.resx">
+      <DependentUpon>ACA_050_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_049_Rpt.resx">
       <DependentUpon>ACA_049_Rpt.cs</DependentUpon>

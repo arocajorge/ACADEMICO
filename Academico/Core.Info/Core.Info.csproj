@@ -301,6 +301,8 @@
     <Compile Include="Reportes\Academico\ACA_014_Conducta_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_014_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_015_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_050_Promedios_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_050_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_049_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_048_Promedios_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_048_Rendimiento_Info.cs" />

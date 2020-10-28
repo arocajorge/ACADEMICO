@@ -285,6 +285,8 @@
     <Compile Include="Reportes\Academico\ACA_008_Resumen_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_009_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_013_Asistencia_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_050_Promedios_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_050_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_049_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_048_Promedios.cs" />
     <Compile Include="Reportes\Academico\ACA_048_SinPromedios_Bus.cs" />
