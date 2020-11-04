@@ -63,6 +63,36 @@ namespace Core.Info.Helps
             return res;
         }
 
+        public string NumeroALetras_Aca(string num)
+        {
+            string res, dec = "";
+            Int64 entero;
+            int decimales;
+            double nro;
+            try
+            {
+                nro = Convert.ToDouble(num);
+            }
+            catch
+            {
+                return "";
+            }
+
+            entero = Convert.ToInt64(Math.Truncate(nro));
+            decimales = Convert.ToInt32(Math.Round((nro - entero) * 100, 2));
+            if (decimales > 0)
+            {
+                if (decimales < 10)
+                    dec = " CON 0" + decimales.ToString() + "/100";
+                else
+                    dec = " CON " + decimales.ToString() + "/100";
+            }
+            else
+                dec = " CON 00/100";
+
+            res = NumeroALetras(Convert.ToDecimal(entero)) + dec;
+            return res;
+        }
         static string NumeroALetras(decimal value)
         {
             string Num2Text = "";

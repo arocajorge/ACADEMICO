@@ -16,6 +16,9 @@
         settings.Properties.Columns.Add("IdEntidad", "ID", 10);
         settings.Properties.Columns.Add("pe_cedulaRuc", "Identificacion", 25);
         settings.Properties.Columns.Add("pe_nombreCompleto", "Nombres", 65);
+        //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function (){ OnListBoxIndexChanged(); }";
+        //settings.Properties.ClientSideEvents.BeginCallback = "OnBeginCallback";
+        //settings.Properties.ClientSideEvents.EndCallback = "OnEndCallback";
     })
     .BindList(new Core.Web.Areas.CuentasPorCobrar.Controllers.ConvenioController().get_list_bajo_demanda_persona, new Core.Web.Areas.CuentasPorCobrar.Controllers.ConvenioController().get_info_bajo_demanda_persona)
     .Bind(Model.GetType() == typeof(Core.Info.CuentasPorCobrar.cxc_Convenio_Info) ? "" : (Model == 0 ? "" : Model));

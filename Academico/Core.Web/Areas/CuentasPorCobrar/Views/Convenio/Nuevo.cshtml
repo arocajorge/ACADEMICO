@@ -13,6 +13,22 @@
     $(function () {
 
     })
+    var employeeId = null;
+    function OnListBoxIndexChanged(s, e) {
+        employeeId = IdPersonaConvenio.GetValue();
+        console.log(employeeId);
+        //if (!IdPersonaConvenio.InCallback())
+        //    IdPersonaConvenio.PerformCallback();
+    }
+    function OnBeginCallback(s, e) {
+        e.customArgs["EmployeeID"] = employeeId;
+        employeeId = null;
+    }
+    function OnEndCallback(s, e) {
+        console.log(employeeId);
+        if (employeeId != null)
+            IdPersonaConvenio.PerformCallback();
+    }
 
     function SetDatosCobranza() {
 
@@ -32,6 +48,7 @@
             success: function (data) {
                 $("#Valor").val(data.Saldo),
                 $("#IdMatricula").val(data.IdMatricula),
+                //IdPersonaConvenio.PerformCallback();
                 IdPersonaConvenio.SetValue(data.IdPersonaFactura);
                 
             },

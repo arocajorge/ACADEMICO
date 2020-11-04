@@ -1,4 +1,5 @@
-﻿using Core.Info.Reportes.Contabilidad;
+﻿using Core.Info.Helps;
+using Core.Info.Reportes.Contabilidad;
 using Core.Info.Reportes.CuentasPorCobrar;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Core.Data.Reportes.Contabilidad
 {
     public class CXC_016_Data
     {
+        cl_funciones funciones = new cl_funciones();
         public List<CXC_016_Info> GetList(int IdEmpresa, decimal IdAlumno)
         {
             try
@@ -47,7 +49,7 @@ namespace Core.Data.Reportes.Contabilidad
                             pe_correo = Convert.ToString(reader["pe_correo"]),
                             Valor = Convert.ToDouble(reader["Valor"]),
                             ValorString = Convert.ToDouble(reader["Valor"]).ToString("C2"),
-                            ValorTexto = entero.ToString() + " con " + decimales.ToString() +"/100",
+                            //ValorTexto = entero.ToString() + " con " + decimales.ToString() +"/100",
                             FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy"),
                             dia = Convert.ToDateTime(reader["FechaAPagar"]).ToString("dd"),
                             mes = Convert.ToDateTime(reader["FechaAPagar"]).ToString("MMMM"),
@@ -55,7 +57,7 @@ namespace Core.Data.Reportes.Contabilidad
                         });
                     }
                 }
-
+                Lista.ForEach(q => q.ValorTexto = funciones.NumeroALetras_Aca(q.Valor.ToString()));
                 return Lista;
             }
             catch (Exception)

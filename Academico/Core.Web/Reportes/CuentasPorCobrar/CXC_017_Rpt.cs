@@ -7,6 +7,7 @@ using Core.Bus.Reportes.CuentasPorCobrar;
 using Core.Info.Reportes.CuentasPorCobrar;
 using System.Collections.Generic;
 using Core.Bus.General;
+using Core.Info.Helps;
 
 namespace Core.Web.Reportes.CuentasPorCobrar
 {

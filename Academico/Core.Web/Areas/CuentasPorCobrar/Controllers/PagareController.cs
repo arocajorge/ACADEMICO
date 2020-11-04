@@ -297,7 +297,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             var info_matricula = bus_matricula.GetInfo_ExisteMatricula(IdEmpresa, info_anio.IdAnio, IdAlumno);
             IdMatricula = info_matricula.IdMatricula;
 
-            return Json(new { Saldo= Saldo, IdPersonaFactura = IdPersonaFactura }, JsonRequestBehavior.AllowGet);
+            return Json(new { Saldo= Saldo, IdPersonaFactura = IdPersonaFactura, IdMatricula= IdMatricula }, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }
