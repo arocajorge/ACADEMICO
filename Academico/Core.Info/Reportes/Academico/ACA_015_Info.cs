@@ -37,6 +37,7 @@ namespace Core.Info.Reportes.Academico
         public string pe_nombreCompleto { get; set; }
         public string Direccion { get; set; }
         public string Celular { get; set; }
+        public string Correo { get; set; }
         public string pe_telfono_Contacto { get; set; }
         public string Descripcion { get; set; }
 

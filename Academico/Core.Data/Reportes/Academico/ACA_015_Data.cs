@@ -56,6 +56,7 @@ namespace Core.Data.Reportes.Academico
                             NomAnioLectivo =q.NomAnioLectivo,
                             NomPlantilla=q.NomPlantilla,
                             pe_telfono_Contacto = q.pe_telfono_Contacto,
+                            Correo = q.Correo,
                             IdPlantilla=q.IdPlantilla
 
                         });
