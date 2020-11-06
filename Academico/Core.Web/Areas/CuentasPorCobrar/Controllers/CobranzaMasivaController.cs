@@ -59,7 +59,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             Lista_CobroMasivo.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "NotaDebitoCreditoMasiva", "Index");
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "CuentasPorCobrar", "CobranzaMasiva", "Index");
             ViewBag.Nuevo = info.Nuevo;
             ViewBag.Modificar = info.Modificar;
             ViewBag.Anular = info.Anular;
@@ -74,7 +74,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             Lista_CobroMasivo.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             #region Permisos
-            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Facturacion", "NotaDebitoCreditoMasiva", "Index");
+            aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "CuentasPorCobrar", "CobranzaMasiva", "Index");
             ViewBag.Nuevo = info.Nuevo;
             ViewBag.Modificar = info.Modificar;
             ViewBag.Anular = info.Anular;
