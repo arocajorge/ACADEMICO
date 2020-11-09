@@ -8,7 +8,7 @@
     Layout = "~/Views/Shared/_LayoutConsulta.cshtml";
 }
 <script src="~/Scripts/ValidacionBotonSubmit.js"></script>
-@using (Html.BeginForm("Index", "NotaDebitoCreditoMasiva", FormMethod.Post, new { @role = "form", @class = "form" }))
+@using (Html.BeginForm("Index", "AplicacionMasiva", FormMethod.Post, new { @role = "form", @class = "form" }))
 {
 @Html.HiddenFor(q => q.IdEmpresa)
 @Html.HiddenFor(q => q.IdSucursal)

@@ -30,10 +30,8 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                $("#Valor").val(data.Saldo),
-                $("#IdMatricula").val(data.IdMatricula),
-                IdPersonaPagare.SetValue(data.IdPersonaFactura);
-                
+                $("#Valor").val(data.Saldo);
+                $("#IdMatricula").val(data.IdMatricula);
             },
             error: function (error) {
             }

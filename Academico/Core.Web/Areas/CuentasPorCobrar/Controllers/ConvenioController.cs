@@ -126,9 +126,16 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         }
         private bool validar(cxc_Convenio_Info model, ref string msg)
         {
-            if (model.Valor != model.lst_detalle.Sum(q => q.TotalCuota))
+            var suma_det = Math.Round(model.lst_detalle.Sum(q => q.TotalCuota),2, MidpointRounding.AwayFromZero);
+            if (model.Valor != suma_det)
             {
                 msg = "La valor total de las cuotas no es el mismo que el valor total del convenio";
+                return false;
+            }
+
+            if (model.lst_detalle.Count() == 0 )
+            {
+                msg = "El convenio de pago debe de tener al menos un registro en el detalle";
                 return false;
             }
 
