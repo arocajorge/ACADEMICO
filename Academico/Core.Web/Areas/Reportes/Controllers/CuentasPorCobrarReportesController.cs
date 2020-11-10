@@ -3,6 +3,7 @@ using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Bus.SeguridadAcceso;
 using Core.Info.Academico;
+using Core.Info.CuentasPorCobrar;
 using Core.Info.General;
 using Core.Info.Helps;
 using Core.Info.SeguridadAcceso;
@@ -765,17 +766,16 @@ namespace Core.Web.Areas.Reportes.Controllers
         #endregion
 
         #region CXC_016
-        public ActionResult CXC_016(decimal IdAlumno = 0)
+        public ActionResult CXC_016(int IdEmpresa = 0, int IdPagare = 0)
         {
-            cl_filtros_Info model = new cl_filtros_Info();
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
-            model.IdAlumno = IdAlumno;
+            cxc_Pagare_Info model = new cxc_Pagare_Info();
+            model.IdEmpresa = (IdEmpresa == 0 ? Convert.ToInt32(SessionFixed.IdEmpresa) : IdEmpresa);
+            model.IdPagare = IdPagare;
 
             CXC_016_Rpt report = new CXC_016_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_IdPagare.Value = model.IdPagare;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -789,7 +789,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             CXC_016_Rpt report = new CXC_016_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_IdPagare.Value = model.IdAlumno;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -800,17 +800,16 @@ namespace Core.Web.Areas.Reportes.Controllers
         #endregion
 
         #region CXC_017
-        public ActionResult CXC_017(decimal IdAlumno = 0)
+        public ActionResult CXC_017(int IdEmpresa = 0, int IdConvenio = 0)
         {
-            cl_filtros_Info model = new cl_filtros_Info();
-            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
-            model.IdAlumno = IdAlumno;
+            cxc_Convenio_Info model = new cxc_Convenio_Info();
+            model.IdEmpresa = (IdEmpresa==0 ? Convert.ToInt32(SessionFixed.IdEmpresa) : IdEmpresa);
+            model.IdConvenio = IdConvenio;
 
             CXC_017_Rpt report = new CXC_017_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_IdConvenio.Value = model.IdConvenio;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -824,7 +823,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             CXC_017_Rpt report = new CXC_017_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_IdConvenio.Value = model.IdAlumno;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 

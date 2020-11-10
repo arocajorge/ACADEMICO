@@ -39,6 +39,11 @@
         });
     }
 
+    function Imprimir() {
+        var location = GetPathServer();
+        var win = window.open(location +"/Reportes/CuentasporCobrarReportes/CXC_016?IdEmpresa="+@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdPagare="+@Model.IdPagare, '_blank');
+        win.focus();
+    }
 </script>
 
 
@@ -60,7 +65,7 @@
     }
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-offset-9 col-md-1">
+            <div class="col-md-offset-8 col-md-1">
                 <label for="IdNuevo"></label>
                 @if (@ViewBag.Nuevo == true)
                 {
@@ -92,6 +97,12 @@
                         </a>
                     </div>
                 }
+            </div>
+            <div class="col-md-1">
+                <label for="IdNuevo"></label>
+                <button type="button" class="btn btn-primary form-control" id="btn_imprimir" onclick="Imprimir();" title="Imprimir">
+                    <i class="fa fa-print"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -149,6 +160,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index", "Pagare", new { Area = "CuentasPorCobrar" }, null)">Cancelar</a>
     </div>
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")

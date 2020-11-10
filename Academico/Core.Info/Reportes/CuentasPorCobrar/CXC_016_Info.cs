@@ -20,6 +20,7 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public string pe_direccion { get; set; }
         public string pe_correo { get; set; }
         public string pe_celular { get; set; }
+        public bool Estado { get; set; }
 
         #region Campos que no existen en la tabla
 

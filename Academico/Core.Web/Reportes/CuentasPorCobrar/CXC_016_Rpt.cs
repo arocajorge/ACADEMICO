@@ -26,11 +26,11 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             lbl_usuario.Text = usuario;
 
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
+            int IdPagare = string.IsNullOrEmpty(p_IdPagare.Value.ToString()) ? 0 : Convert.ToInt32(p_IdPagare.Value);
 
             CXC_016_Bus bus_rpt = new CXC_016_Bus();
             List<CXC_016_Info> lst_rpt = new List<CXC_016_Info>();
-            lst_rpt = bus_rpt.get_list(IdEmpresa, IdAlumno);
+            lst_rpt = bus_rpt.get_list(IdEmpresa, IdPagare);
 
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);

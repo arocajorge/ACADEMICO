@@ -14,7 +14,7 @@ namespace Core.Data.Reportes.Contabilidad
     {
         cl_funciones funciones = new cl_funciones();
 
-        public List<CXC_017_Info> GetList(int IdEmpresa, decimal IdAlumno)
+        public List<CXC_017_Info> GetList(int IdEmpresa, int IdConvenio)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace Core.Data.Reportes.Contabilidad
                     string query = string.Empty;
                     query = "SELECT cd.IdEmpresa, c.IdConvenio, c.Fecha, c.Valor, cd.NumCuota, cd.FechaPago, cd.TotalCuota, c.IdAlumno, al.Codigo, pa.pe_nombreCompleto AS Alumno, "
                     + " c.IdPersonaConvenio, u.Nombre Usuario, p.pe_nombreCompleto AS PersonaConvenio, p.pe_cedulaRuc, "
-                    + " p.pe_direccion,p.pe_celular,p.pe_correo, c.IdMatricula, m.IdAnio, a.Descripcion, nj.NomJornada, OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, u.Nombre, c.FechaCreacion "
+                    + " p.pe_direccion,p.pe_celular,p.pe_correo, c.IdMatricula, m.IdAnio, a.Descripcion, nj.NomJornada, OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, u.Nombre, c.FechaCreacion, c.Estado "
                     + " FROM     dbo.cxc_Convenio AS c LEFT OUTER JOIN "
                     + " dbo.cxc_Convenio_Det AS cd ON c.IdEmpresa = cd.IdEmpresa and c.IdConvenio = cd.IdConvenio LEFT OUTER JOIN "
                     + " dbo.aca_Alumno AS al ON al.IdEmpresa = c.IdEmpresa AND al.IdAlumno = c.IdAlumno LEFT OUTER JOIN "
@@ -38,7 +38,7 @@ namespace Core.Data.Reportes.Contabilidad
                     + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON jc.IdEmpresa = m.IdEmpresa AND jc.IdAnio = m.IdAnio AND jc.IdSede = m.IdSede AND jc.IdNivel = m.IdNivel AND jc.IdJornada = m.IdJornada AND jc.IdCurso = m.IdCurso LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
                     + " dbo.seg_usuario AS u ON u.IdUsuario = c.IdUsuarioCreacion "
-                     + " where c.IdEmpresa= " + IdEmpresa + " and c.IdAlumno = "+ IdAlumno + " and c.Estado = 1 ";
+                     + " where c.IdEmpresa= " + IdEmpresa + " and c.IdConvenio = " + IdConvenio;
 
                     SqlCommand command = new SqlCommand(query, connection);
                     SqlDataReader reader = command.ExecuteReader();
@@ -52,7 +52,7 @@ namespace Core.Data.Reportes.Contabilidad
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdConvenio = Convert.ToInt32(reader["IdConvenio"]),
                             IdAlumno = Convert.ToInt32(reader["IdAlumno"]),
-                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdMatricula = string.IsNullOrEmpty(reader["IdMatricula"].ToString()) ? (decimal?)null: Convert.ToDecimal(reader["IdMatricula"]),
                             IdPersonaConvenio = Convert.ToDecimal(reader["IdPersonaConvenio"]),
                             FechaPago = Convert.ToDateTime(reader["FechaPago"]),
                             Alumno = Convert.ToString(reader["Alumno"]),
@@ -64,7 +64,8 @@ namespace Core.Data.Reportes.Contabilidad
                             TotalCuota = Convert.ToDouble(reader["TotalCuota"]),
                             Valor = Convert.ToDouble(reader["Valor"]),
                             ValorString = Convert.ToDouble(reader["Valor"]).ToString("C2"),
-                            //ValorTexto = entero.ToString() + " con " + decimales.ToString() + "/100",
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            FechaConvenio = funciones.NumeroALetrasFecha(Convert.ToDateTime(reader["Fecha"]).Day.ToString()) + " días del mes de " + Convert.ToDateTime(reader["Fecha"]).ToString("MMMM' de 'yyyy"),
                             FechaActual = DateTime.Now.ToString("dd' de 'MMMM' de 'yyyy"),
                             Descripcion = Convert.ToString(reader["Descripcion"]),
                             NomCurso = Convert.ToString(reader["NomCurso"]),
@@ -78,11 +79,12 @@ namespace Core.Data.Reportes.Contabilidad
                             OrdenParalelo = (string.IsNullOrEmpty(reader["OrdenParalelo"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenParalelo"])),
                             NomParalelo = Convert.ToString(reader["NomParalelo"]),
                             NumCuota = Convert.ToInt32(reader["NumCuota"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
                         });
                     }
                 }
 
-                Lista.ForEach(q=>q.ValorTexto = funciones.NumeroALetras_Aca(q.Valor.ToString()));
+                Lista.ForEach( q => q.ValorTexto = funciones.NumeroALetras_Aca(q.Valor.ToString()));
                 return Lista;
             }
             catch (Exception)

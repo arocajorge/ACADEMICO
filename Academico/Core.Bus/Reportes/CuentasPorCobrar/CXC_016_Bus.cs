@@ -12,11 +12,11 @@ namespace Core.Bus.Reportes.CuentasPorCobrar
     public class CXC_016_Bus
     {
         CXC_016_Data odata = new CXC_016_Data();
-        public List<CXC_016_Info> get_list(int IdEmpresa, decimal IdAlumno)
+        public List<CXC_016_Info> get_list(int IdEmpresa, int IdPagare)
         {
             try
             {
-                return odata.GetList(IdEmpresa, IdAlumno);
+                return odata.GetList(IdEmpresa, IdPagare);
             }
             catch (Exception)
             {

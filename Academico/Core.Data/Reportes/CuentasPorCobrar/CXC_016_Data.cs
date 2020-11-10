@@ -13,7 +13,7 @@ namespace Core.Data.Reportes.Contabilidad
     public class CXC_016_Data
     {
         cl_funciones funciones = new cl_funciones();
-        public List<CXC_016_Info> GetList(int IdEmpresa, decimal IdAlumno)
+        public List<CXC_016_Info> GetList(int IdEmpresa, int IdPagare)
         {
             try
             {
@@ -24,9 +24,9 @@ namespace Core.Data.Reportes.Contabilidad
                     connection.Open();
                     string query = string.Empty;
                     query = "select pag.IdEmpresa, pag.IdPagare, pag.IdAlumno, pag.FechaAPagar, pag.IdPersonaPagare, p.pe_nombreCompleto, pag.Valor, p.pe_cedulaRuc, "
-                    + " p.pe_celular, p.pe_direccion, p.pe_correo from cxc_Pagare pag "
+                    + " p.pe_celular, p.pe_direccion, p.pe_correo, pag.Estado from cxc_Pagare pag "
                     + " left join tb_persona p on pag.IdPersonaPagare = p.IdPersona "
-                    + " where pag.IdEmpresa= " + IdEmpresa + " and pag.IdAlumno = "+ IdAlumno + " and pag.Estado = 1 ";
+                    + " where pag.IdEmpresa= " + IdEmpresa + " and pag.IdPagare = " + IdPagare;
 
                     SqlCommand command = new SqlCommand(query, connection);
                     SqlDataReader reader = command.ExecuteReader();
@@ -49,6 +49,7 @@ namespace Core.Data.Reportes.Contabilidad
                             pe_correo = Convert.ToString(reader["pe_correo"]),
                             Valor = Convert.ToDouble(reader["Valor"]),
                             ValorString = Convert.ToDouble(reader["Valor"]).ToString("C2"),
+                            Estado = Convert.ToBoolean(reader["Estado"]),
                             //ValorTexto = entero.ToString() + " con " + decimales.ToString() +"/100",
                             FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy"),
                             dia = Convert.ToDateTime(reader["FechaAPagar"]).ToString("dd"),

@@ -62,7 +62,25 @@ namespace Core.Info.Helps
             res = NumeroALetras(Convert.ToDecimal(entero)) + dec;
             return res;
         }
+        public string NumeroALetrasFecha(string num)
+        {
+            string res = "";
+            Int64 entero;
+            double nro;
+            try
+            {
+                nro = Convert.ToDouble(num);
+            }
+            catch
+            {
+                return "";
+            }
 
+            entero = Convert.ToInt64(Math.Truncate(nro));
+
+            res = NumeroALetrasFecha(Convert.ToDecimal(entero)) ;
+            return res;
+        }
         public string NumeroALetras_Aca(string num)
         {
             string res, dec = "";
@@ -93,6 +111,54 @@ namespace Core.Info.Helps
             res = NumeroALetras(Convert.ToDecimal(entero)) + dec;
             return res;
         }
+
+        static string NumeroALetrasFecha(decimal value)
+        {
+            string Num2Text = "";
+            value = Math.Truncate(value);
+            if (value == 1) Num2Text = "un";
+
+            else if (value == 2) Num2Text = "dos";
+
+            else if (value == 3) Num2Text = "tres";
+
+            else if (value == 4) Num2Text = "cuatro";
+
+            else if (value == 5) Num2Text = "cinco";
+
+            else if (value == 6) Num2Text = "seis";
+
+            else if (value == 7) Num2Text = "siete";
+
+            else if (value == 8) Num2Text = "ocho";
+
+            else if (value == 9) Num2Text = "nueve";
+
+            else if (value == 10) Num2Text = "diez";
+
+            else if (value == 11) Num2Text = "once";
+
+            else if (value == 12) Num2Text = "doce";
+
+            else if (value == 13) Num2Text = "trece";
+
+            else if (value == 14) Num2Text = "catorce";
+
+            else if (value == 15) Num2Text = "quince";
+
+            else if (value < 20) Num2Text = "dieci" + NumeroALetrasFecha(Convert.ToDecimal((value - 10)));
+
+            else if (value == 20) Num2Text = "veinte";
+
+            else if (value < 30) Num2Text = "veinti" + NumeroALetrasFecha(Convert.ToDecimal((value - 20)));
+
+            else if (value == 30) Num2Text = "treinta";
+
+            else if (value < 32) Num2Text = NumeroALetrasFecha(Convert.ToDecimal((Math.Truncate(value / 10) * 10))) + " Y " + NumeroALetrasFecha(Convert.ToDecimal((value % 10)));
+
+            return Num2Text;
+        }
+
         static string NumeroALetras(decimal value)
         {
             string Num2Text = "";

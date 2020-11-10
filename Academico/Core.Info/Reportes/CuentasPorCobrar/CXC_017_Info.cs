@@ -11,7 +11,7 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public int IdEmpresa { get; set; }
         public int IdConvenio { get; set; }
         public decimal IdAlumno { get; set; }
-        public decimal IdMatricula { get; set; }
+        public Nullable<decimal> IdMatricula { get; set; }
         public decimal IdPersonaConvenio { get; set; }
         public double TotalCuota { get; set; }
         public string Observacion { get; set; }
@@ -27,6 +27,7 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public string Descripcion { get; set; }
         public int NumCuota { get; set; }
         public System.DateTime FechaPago { get; set; }
+        public System.DateTime Fecha { get; set; }
         public string Usuario { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public string NomParalelo { get; set; }
@@ -34,11 +35,13 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public int OrdenCurso { get; set; }
         public int OrdenParalelo { get; set; }
         public double Valor { get; set; }
+        public bool Estado { get; set; }
 
         #region Campos que no existen en la tabla
         public string ValorString { get; set; }
         public string ValorTexto { get; set; }
         public string FechaActual { get; set; }
+        public string FechaConvenio { get; set; }
         public string Anio { get; set; }
         public string Acta { get; set; }
         #endregion
