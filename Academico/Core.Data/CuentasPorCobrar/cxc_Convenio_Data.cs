@@ -24,11 +24,11 @@ namespace Core.Data.CuentasPorCobrar
                     #region Query
                     string query = "SELECT Conv.IdEmpresa, Conv.IdConvenio, Conv.IdAlumno, al.Codigo, pa.pe_nombreCompleto AS Alumno, Conv.IdMatricula, Conv.IdPersonaConvenio, pg.pe_nombreCompleto AS PersonaConvenio, Conv.Fecha, Conv.FechaPrimerPago, "
                     + " Conv.Valor, Conv.NumCuotas, Conv.Estado, Conv.Observacion "
-                    + " FROM     dbo.tb_persona AS pa INNER JOIN "
-                    + " dbo.aca_Alumno AS al ON pa.IdPersona = al.IdPersona RIGHT OUTER JOIN "
-                    + " dbo.cxc_Convenio AS Conv INNER JOIN "
-                    + " dbo.tb_persona AS pg ON Conv.IdPersonaConvenio = pg.IdPersona ON al.IdEmpresa = Conv.IdEmpresa AND al.IdAlumno = Conv.IdAlumno "
-                    + " WHERE Conv.IdEmpresa = " + IdEmpresa + " and Conv.FechaPrimerPago between " + "'" + fecha_ini.ToString("dd/MM/yyyy") + "'" + " and " + "'" + fecha_fin.Date.ToString("dd/MM/yyyy") + "'";
+                    + " FROM     dbo.cxc_Convenio AS Conv "
+                    + " INNER JOIN dbo.aca_Alumno AS al ON al.IdEmpresa = Conv.IdEmpresa and al.IdAlumno = Conv.IdAlumno "
+                    + " LEFT JOIN dbo.tb_persona AS pa ON pa.IdPersona = al.IdPersona "
+                    + " LEFT JOIN dbo.tb_persona AS pg ON Conv.IdPersonaConvenio = pg.IdPersona "
+                    + " WHERE Conv.IdEmpresa = " + IdEmpresa + " and Conv.Fecha between " + "'" + fecha_ini.ToString("dd/MM/yyyy") + "'" + " and " + "'" + fecha_fin.Date.ToString("dd/MM/yyyy") + "'";
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
