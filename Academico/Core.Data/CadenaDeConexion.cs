@@ -15,7 +15,7 @@ namespace Core.Data
             string user = string.Empty;
             string InitialCatalog = string.Empty;
 
-            string Cadena = "LICEO";
+            string Cadena = "LOCAL";
 
             switch (Cadena)
             {

@@ -832,5 +832,46 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
         #endregion
+
+        #region CXC_018
+        public ActionResult CXC_018()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdAlumno = 0;
+            model.fecha_ini = DateTime.Now.AddMonths(-1);
+            model.fecha_fin = DateTime.Now;
+            model.mostrarAnulados = false;
+
+            CXC_018_Rpt report = new CXC_018_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_mostrarAnulados.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CXC_018(cl_filtros_Info model)
+        {
+            CXC_018_Rpt report = new CXC_018_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_mostrarAnulados.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+        #endregion
     }
 }

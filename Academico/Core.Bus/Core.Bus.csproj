@@ -378,6 +378,7 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_012_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_013_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_014_Bus.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_018_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_017_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_016_Bus.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_015_Bus.cs" />
