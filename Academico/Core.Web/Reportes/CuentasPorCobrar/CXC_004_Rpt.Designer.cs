@@ -836,7 +836,7 @@
             this.p_IdEmpresa,
             this.p_IdUsuario,
             this.p_FechaCorte});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.CXC_004_Rptcs_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();

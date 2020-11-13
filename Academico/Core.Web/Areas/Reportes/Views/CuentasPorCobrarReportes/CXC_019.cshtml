@@ -1,13 +1,13 @@
 ﻿@model Core.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Listado de pagarés";
+    ViewBag.Title = "Listado de convenios de pago";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
 }
-@using (Html.BeginForm("CXC_018", "CuentasPorCobrarReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("CXC_019", "CuentasPorCobrarReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
 
