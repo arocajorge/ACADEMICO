@@ -28,7 +28,7 @@ namespace Core.Data.CuentasPorCobrar
                     + " INNER JOIN dbo.aca_Alumno AS al ON al.IdEmpresa = Conv.IdEmpresa and al.IdAlumno = Conv.IdAlumno "
                     + " LEFT JOIN dbo.tb_persona AS pa ON pa.IdPersona = al.IdPersona "
                     + " LEFT JOIN dbo.tb_persona AS pg ON Conv.IdPersonaConvenio = pg.IdPersona "
-                    + " WHERE Conv.IdEmpresa = " + IdEmpresa + " and Conv.Fecha between " + "'" + fecha_ini.ToString("dd/MM/yyyy") + "'" + " and " + "'" + fecha_fin.Date.ToString("dd/MM/yyyy") + "'";
+                    + " WHERE Conv.IdEmpresa = " + IdEmpresa + " and Conv.Fecha between DATEFROMPARTS(" + fecha_ini.Year.ToString() + "," + fecha_ini.Month.ToString() + "," + fecha_ini.Day.ToString() + ") and DATEFROMPARTS(" + fecha_fin.Year.ToString() + "," + fecha_fin.Month.ToString() + "," + fecha_fin.Day.ToString() + ")";
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);

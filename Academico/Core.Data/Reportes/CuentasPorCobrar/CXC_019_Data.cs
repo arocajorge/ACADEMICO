@@ -30,7 +30,7 @@ namespace Core.Data.Reportes.Contabilidad
                     + " LEFT OUTER JOIN dbo.tb_persona AS p_al ON a.IdPersona = p_al.IdPersona "
                     + " LEFT OUTER JOIN aca_Matricula m on m.IdEmpresa = conv.IdEmpresa and m.IdMatricula = conv.IdMatricula "
                     + " LEFT OUTER JOIN aca_AnioLectivo al on al.IdEmpresa = m.IdEmpresa and al.IdAnio = m.IdAnio "
-                    + " WHERE conv.IdEmpresa = " + IdEmpresa + " and conv.Fecha between " + "'" + fecha_ini.ToString("dd/MM/yyyy") + "'" + " and " + "'" + fecha_fin.Date.ToString("dd/MM/yyyy") + "'";
+                    + " WHERE conv.IdEmpresa = " + IdEmpresa + " and conv.Fecha between DATEFROMPARTS(" + fecha_ini.Year.ToString() + "," + fecha_ini.Month.ToString() + "," + fecha_ini.Day.ToString() + ") and DATEFROMPARTS(" + fecha_fin.Year.ToString() + "," + fecha_fin.Month.ToString() + "," + fecha_fin.Day.ToString() + ")";
                     if (IdAlumno!=0)
                     {
                         query += " and conv.IdAlumno  = " + IdAlumno;

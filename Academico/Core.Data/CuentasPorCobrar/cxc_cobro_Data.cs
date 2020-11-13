@@ -100,7 +100,7 @@ namespace Core.Data.CuentasPorCobrar
                     + " dbo.cxc_cobro_tipo_motivo AS t2 ON t1.IdMotivo_tipo_cobro = t2.IdMotivo_tipo_cobro LEFT OUTER JOIN "
                     + " dbo.ba_Banco_Cuenta AS ba ON dbo.cxc_cobro.IdEmpresa = ba.IdEmpresa AND dbo.cxc_cobro.IdBanco = ba.IdBanco "
                     + " WHERE dbo.cxc_cobro.IdEmpresa = " + IdEmpresa + " and dbo.cxc_cobro.IdSucursal between " + IdSucursal_ini + " and " + IdSucursal_fin
-                    + " and dbo.cxc_cobro.cr_fecha between " + "'" + Fecha_ini.ToString("dd/MM/yyyy") + "'" + " and " + "'" + Fecha_fin.Date.ToString("dd/MM/yyyy") + "'"
+                    + " and dbo.cxc_cobro.cr_fecha between DATEFROMPARTS(" + Fecha_ini.Year.ToString() + "," + Fecha_ini.Month.ToString() + "," + Fecha_ini.Day.ToString() + ") and DATEFROMPARTS(" + Fecha_fin.Year.ToString() + "," + Fecha_fin.Month.ToString() + "," + Fecha_fin.Day.ToString() + ")"
                     + " and dbo.cxc_cobro.IdAlumno is not null Order by  dbo.cxc_cobro.IdCobro desc";
                     #endregion
 
@@ -202,7 +202,7 @@ namespace Core.Data.CuentasPorCobrar
                     + " dbo.cxc_cobro_tipo_motivo AS t2 ON t1.IdMotivo_tipo_cobro = t2.IdMotivo_tipo_cobro LEFT OUTER JOIN "
                     + " dbo.ba_Banco_Cuenta AS ba ON dbo.cxc_cobro.IdEmpresa = ba.IdEmpresa AND dbo.cxc_cobro.IdBanco = ba.IdBanco "
                     + " WHERE dbo.cxc_cobro.IdEmpresa = " + IdEmpresa + " and dbo.cxc_cobro.IdSucursal between " + IdSucursal_ini + " and " + IdSucursal_fin
-                    + " and dbo.cxc_cobro.cr_fecha between " + "'" + Fecha_ini.ToString("dd/MM/yyyy") + "'" + " and " + "'" + Fecha_fin.Date.ToString("dd/MM/yyyy") + "'"
+                    + " and dbo.cxc_cobro.cr_fecha between DATEFROMPARTS(" + Fecha_ini.Year.ToString() + "," + Fecha_ini.Month.ToString() + "," + Fecha_ini.Day.ToString() + ") and DATEFROMPARTS(" + Fecha_fin.Year.ToString() + "," + Fecha_fin.Month.ToString() + "," + Fecha_fin.Day.ToString() + ")"
                     + " and dbo.cxc_cobro.IdAlumno = " + IdAlumno +" Order by  dbo.cxc_cobro.IdCobro desc";
                     #endregion
 
