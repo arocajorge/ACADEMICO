@@ -71,6 +71,9 @@ namespace Core.Info.CuentasPorCobrar
         public string nom_Motivo_tipo_cobro { get; set; }
         public string DatosAlumno { get; set; }
         public string Usuario { get; set; }
+
+        public DateTime fecha_ini { get; set; }
+        public DateTime fecha_fin { get; set; }
         #endregion
     }
 }

@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridView_cobranza";
-        settings.CallbackRouteValues = new { Controller = "Cobranza", Action = "GridViewPartial_cobranza", Fecha_ini = ViewBag.Fecha_ini, Fecha_fin = ViewBag.Fecha_fin, IdSucursal = ViewBag.IdSucursal, Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
+        settings.Name = "GridViewPartial_cobranza_x_alumno";
+        settings.CallbackRouteValues = new { Controller = "Cobranza", Action = "GridViewPartial_cobranza_x_alumno" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdCobro";
         //Configuración para que la grilla no muestre texto completo
@@ -64,41 +64,7 @@
                 e.Row.ForeColor = System.Drawing.Color.Red;
             }
         };
-        settings.Columns.Add(c =>
-        {
-            c.Caption = "#";
-            c.SetDataItemTemplateContent(tc =>
-            {
-                ViewContext.Writer.Write(Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdCobro = DataBinder.Eval(tc.DataItem, "IdCobro") }));
-                //ViewContext.Writer.Write("&nbsp;");
 
-                //if (Convert.ToString(DataBinder.Eval(tc.DataItem, "cr_estado")) == "A" && Convert.ToString(DataBinder.Eval(tc.DataItem, "IdCobro_tipo")) != "NTCR")
-                //{
-                //    if (ViewBag.Modificar == true)
-                //    {
-                //        ViewContext.Writer.Write(Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdCobro = DataBinder.Eval(tc.DataItem, "IdCobro") }));
-                //        ViewContext.Writer.Write("&nbsp;");
-                //    }
-                //    if (ViewBag.Anular == true)
-                //    {
-                //        ViewContext.Writer.Write(Html.ActionLink("Anular", "Anular", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdSucursal = DataBinder.Eval(tc.DataItem, "IdSucursal"), IdCobro = DataBinder.Eval(tc.DataItem, "IdCobro") },
-                //        new { onclick = "return confirm('¿Está seguro de que desea anular el registro?')" }));
-                //    }
-                //}
-            });
-            c.SetHeaderTemplateContent(tc =>
-            {
-                if (ViewBag.Nuevo == true)
-                {
-                    ViewContext.Writer.Write(
-                    Html.ActionLink("Nuevo", "Nuevo", new { IdEmpresa = Core.Web.Helps.SessionFixed.IdEmpresa }).ToHtmlString()
-                );
-                }
-            });
-            c.Settings.AllowDragDrop = DefaultBoolean.False;
-            c.Settings.AllowSort = DefaultBoolean.False;
-            c.Width = Unit.Pixel(150);
-        });
         settings.Columns.Add("nom_Motivo_tipo_cobro", "Motivo").Width = Unit.Percentage(10);
         settings.Columns.Add("cr_NumDocumento", "# Doc/Cheque").Width = Unit.Percentage(10);
         settings.Columns.Add("IdCobro", "ID").Width = Unit.Percentage(7);

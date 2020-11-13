@@ -9489,6 +9489,7 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_050.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_018.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_019.cshtml" />
+    <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_x_alumno.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9582,7 +9583,6 @@
     <TypeScriptCompile Include="AdminLTE\bower_components\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

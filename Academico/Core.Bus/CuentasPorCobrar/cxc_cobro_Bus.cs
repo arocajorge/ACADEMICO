@@ -33,6 +33,18 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
+        
+        public List<cxc_cobro_Info> get_list_matricula_alumno(int IdEmpresa, int IdSucursal, decimal IdAlumno, DateTime Fecha_ini, DateTime Fecha_fin)
+        {
+            try
+            {
+                return odata.get_list_matricula_alumno(IdEmpresa, IdSucursal, IdAlumno, Fecha_ini, Fecha_fin);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public cxc_cobro_Info get_info(int IdEmpresa, int IdSucursal, decimal IdCobro)
         {
             try

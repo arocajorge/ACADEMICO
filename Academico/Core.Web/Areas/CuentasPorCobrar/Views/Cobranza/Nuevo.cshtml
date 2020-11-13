@@ -12,6 +12,7 @@
 <script type="text/javascript">
     var selectedIDs;
     $(function () {
+        $("#link_cobros_alumno").hide();
         GetIdCajaPorSucursal();
         MostrarDatosTarjeta();
 
@@ -235,6 +236,66 @@
         }
     }
 
+    function MostrarConsultaAlumno() {
+        if(IdAlumno.GetValue()>0){
+            $("#link_cobros_alumno").show();
+            $("#link_cobros_alumno").click();
+
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                IdSucursal: $("#IdSucursal").val(),
+                IdAlumno: IdAlumno.GetValue(),
+                IdTransaccionSession: $("#IdTransaccionSession").val(),
+                fecha_ini: fecha_ini.GetDate(),
+                fecha_fin: fecha_fin.GetDate()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("SetConsultaAlumno", "Cobranza",new { Area = "CuentasPorCobrar"})',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    GridViewPartial_cobranza_x_alumno.PerformCallback();
+                },
+                error: function (error) {
+                }
+            });
+        }
+        else{
+            $("#link_cobros_alumno").hide();
+        }
+    }
+
+    function AplicarFiltros() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSucursal: $("#IdSucursal").val(),
+            IdAlumno: IdAlumno.GetValue(),
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
+            fecha_ini: fecha_ini.GetDate(),
+            fecha_fin: fecha_fin.GetDate()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetConsultaAlumno", "Cobranza",new { Area = "CuentasPorCobrar"})',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_cobranza_x_alumno.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
     function SetDatosAlumno() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
@@ -318,47 +379,67 @@
 
         </div>
     </div>
-    @Html.HiddenFor(q => q.IdEmpresa)
-    <div class="row">
-        <div class="col-md-8">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="IdSucursal">Sucursal*</label>
-                    @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
-                    @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-10">
-                <div class="form-group">
-                    <label for="IdCliente">Estudiante*</label>
-                    @Html.Partial("_CmbAlumno_Cobranza", Model.IdAlumno)
-                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="IdCliente"></label>
-                    <button type="button" class="btn btn-primary form-control " onclick="CrearModificarAlumno();">
-                        <i class="fa fa-external-link-square"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="col-md-10">
-                <div class="form-group">
-                    @Html.TextBoxFor(q=> q.DatosAlumno, new { @id = "DatosAlumno", @readonly = "readonly", @class = "form-control" })
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdCobro_tipo">Tipo cobro*</label>
-                    @Html.DropDownListFor(q => q.IdCobro_tipo, new SelectList(ViewBag.lst_cobro_tipo, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo" })
-                    @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="col-md-6" id="DivTipoNota" hidden>
-                <div class="form-group">
-                    <label for="">Tipo nota</label>
-                    @Html.DevExpress().ComboBoxFor(q => q.IdTipoNotaCredito, settings =>
+
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_cobros" aria-controls="cobros" role="tab" data-toggle="tab">Cobros</a>
+            </li>
+            <li hidden>
+                <a href="#tab_cobros_alumno" aria-controls="cobros_alumno" role="tab" data-toggle="tab" id="link_cobros_alumno">Cobros por alumno</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_cobros">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdSucursal">Sucursal*</label>
+                                @Html.DropDownListFor(q => q.IdSucursal, new SelectList(ViewBag.lst_sucursal, "IdSucursal", "Su_Descripcion"), new { @class = "form-control", @id = "IdSucursal" })
+                                @Html.ValidationMessageFor(q => q.IdSucursal, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="IdCliente">Estudiante*</label>
+                                @Html.Partial("_CmbAlumno_Cobranza", Model.IdAlumno)
+                                @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="IdCliente"></label>
+                                <button type="button" class="btn btn-primary form-control " onclick="CrearModificarAlumno();">
+                                    <i class="fa fa-external-link-square"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="IdCliente"></label>
+                                <button type="button" class="btn btn-primary form-control " onclick="MostrarConsultaAlumno();" title="Mostrar cobros recientes">
+                                    <i class="fa fa-search-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                @Html.TextBoxFor(q => q.DatosAlumno, new { @id = "DatosAlumno", @readonly = "readonly", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="IdCobro_tipo">Tipo cobro*</label>
+                                @Html.DropDownListFor(q => q.IdCobro_tipo, new SelectList(ViewBag.lst_cobro_tipo, "IdCobro_tipo", "tc_descripcion"), new { @class = "form-control", @id = "IdCobro_tipo" })
+                                @Html.ValidationMessageFor(q => q.IdCobro_tipo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="DivTipoNota" hidden>
+                            <div class="form-group">
+                                <label for="">Tipo nota</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdTipoNotaCredito, settings =>
                            {
                                settings.Name = "IdTipoNotaCredito";
                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
@@ -372,125 +453,191 @@
                                settings.Properties.NullText = "== Seleccione ==";
                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
                            }).BindList(ViewBag.lst_tipo_nota).GetHtml()
-                    @Html.ValidationMessageFor(q => q.IdTipoNotaCredito, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+                                @Html.ValidationMessageFor(q => q.IdTipoNotaCredito, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="col-md-4">
-        <div class="col-md-offset-6 col-md-6">
-            <div class="form-group">
-                <label for="cr_fecha">Fecha*</label>
-                @Html.DevExpress().DateEditFor(q=> q.cr_fecha, settings =>
-            {
-                settings.Name = "cr_fecha";
-                settings.Properties.UseMaskBehavior = true;
-                settings.Properties.EditFormat = EditFormat.Date;
-                settings.Properties.EditFormatString = "dd/MM/yyyy";
-                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-            }).GetHtml()
-                @Html.ValidationMessageFor(q => q.cr_fecha, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="IdCaja">Caja*</label>
-                @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @class = "form-control", @id = "IdCaja" })
-                @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="cr_TotalCobro">Total*</label>
-                @Html.TextBoxFor(q => q.cr_TotalCobro, new { @id = "cr_TotalCobro", @class = "form-control" })
-                @Html.ValidationMessageFor(q => q.cr_TotalCobro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="cr_saldo">Excedente</label>
-                @Html.TextBoxFor(q => q.cr_saldo, new { @id = "cr_saldo", @class = "form-control", @readonly = "readonly" })
-                @Html.ValidationMessageFor(q => q.cr_saldo, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-6" id="DatoIdTarjeta" hidden>
-            <div class="form-group">
-                <label for="cr_TotalCobro">Tarjeta de Crédito</label>
-                @Html.DropDownListFor(q => q.IdTarjeta, new SelectList(ViewBag.lst_tarjeta, "IdTarjeta", "NombreTarjeta"), new { @class = "form-control", @id = "IdTarjeta" })
-                @Html.ValidationMessageFor(q => q.IdTarjeta, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-md-6" id="DatoTarjeta" hidden>
-            <div class="form-group">
-                <label for="cr_saldo">Numero</label>
-                @Html.TextBoxFor(q => q.cr_Tarjeta, new { @id = "cr_Tarjeta", @class = "form-control" })
-                @Html.ValidationMessageFor(q => q.cr_Tarjeta, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="row" id="div_cheque" hidden>
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="cr_Banco">Banco*</label>
-                    @Html.DropDownListFor(q => q.cr_Banco, new SelectList(ViewBag.lst_banco, "ba_descripcion", "ba_descripcion"), new { @class = "form-control", @id = "cr_Banco" })
-                    @Html.ValidationMessageFor(q => q.cr_Banco, "", new { @class = "text-danger" })
+                    <div class="col-md-4">
+                        <div class="col-md-offset-6 col-md-6">
+                            <div class="form-group">
+                                <label for="cr_fecha">Fecha*</label>
+                                @Html.DevExpress().DateEditFor(q => q.cr_fecha, settings =>
+                               {
+                                   settings.Name = "cr_fecha";
+                                   settings.Properties.UseMaskBehavior = true;
+                                   settings.Properties.EditFormat = EditFormat.Date;
+                                   settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                   settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.cr_fecha, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="IdCaja">Caja*</label>
+                                @Html.DropDownListFor(q => q.IdCaja, new SelectList(ViewBag.lst_caja, "IdCaja", "ca_Descripcion"), new { @class = "form-control", @id = "IdCaja" })
+                                @Html.ValidationMessageFor(q => q.IdCaja, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="cr_TotalCobro">Total*</label>
+                                @Html.TextBoxFor(q => q.cr_TotalCobro, new { @id = "cr_TotalCobro", @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.cr_TotalCobro, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="cr_saldo">Excedente</label>
+                                @Html.TextBoxFor(q => q.cr_saldo, new { @id = "cr_saldo", @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(q => q.cr_saldo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="DatoIdTarjeta" hidden>
+                            <div class="form-group">
+                                <label for="cr_TotalCobro">Tarjeta de Crédito</label>
+                                @Html.DropDownListFor(q => q.IdTarjeta, new SelectList(ViewBag.lst_tarjeta, "IdTarjeta", "NombreTarjeta"), new { @class = "form-control", @id = "IdTarjeta" })
+                                @Html.ValidationMessageFor(q => q.IdTarjeta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="DatoTarjeta" hidden>
+                            <div class="form-group">
+                                <label for="cr_saldo">Numero</label>
+                                @Html.TextBoxFor(q => q.cr_Tarjeta, new { @id = "cr_Tarjeta", @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.cr_Tarjeta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="cr_cuenta">Cuenta*</label>
-                    @Html.TextBoxFor(q => q.cr_cuenta, new { @id = "cr_cuenta", @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.cr_cuenta, "", new { @class = "text-danger" })
+                <div class="row" id="div_cheque" hidden>
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="cr_Banco">Banco*</label>
+                                @Html.DropDownListFor(q => q.cr_Banco, new SelectList(ViewBag.lst_banco, "ba_descripcion", "ba_descripcion"), new { @class = "form-control", @id = "cr_Banco" })
+                                @Html.ValidationMessageFor(q => q.cr_Banco, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="cr_cuenta">Cuenta*</label>
+                                @Html.TextBoxFor(q => q.cr_cuenta, new { @id = "cr_cuenta", @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.cr_cuenta, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="cr_NumDocumento"># Cheque*</label>
+                                @Html.TextBoxFor(q => q.cr_NumDocumento, new { @id = "cr_NumDocumento", @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.cr_NumDocumento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="cr_NumDocumento"># Cheque*</label>
-                    @Html.TextBoxFor(q => q.cr_NumDocumento, new { @id = "cr_NumDocumento", @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.cr_NumDocumento, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="row" id="div_bancos" hidden>
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="IdBanco">Cuenta bancaria*</label>
-                    @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
-                    @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+                <div class="row" id="div_bancos" hidden>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="IdBanco">Cuenta bancaria*</label>
+                                @Html.DropDownListFor(q => q.IdBanco, new SelectList(ViewBag.lst_banco_cuenta, "IdBanco", "ba_descripcion"), new { @class = "form-control", @id = "IdBanco" })
+                                @Html.ValidationMessageFor(q => q.IdBanco, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="pf_observacion">Observación</label>
+                                @Html.TextBoxFor(q => q.cr_ObservacionPantalla, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(q => q.cr_ObservacionPantalla, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-primary" title="Buscar facturas" id="btn_buscar" onclick="MostrarModal();">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                @Html.Action("GridViewPartial_cobranza_det")
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_cobros_alumno">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="">Fecha inicio*</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.fecha_ini, settings =>
+                                    {
+                                        settings.Name = "fecha_ini";
+                                        settings.Properties.UseMaskBehavior = true;
+                                        settings.Properties.EditFormat = EditFormat.Date;
+                                        settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                        settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                        settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="">Fecha fin*</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.fecha_fin, settings =>
+                                   {
+                                       settings.Name = "fecha_fin";
+                                       settings.Properties.UseMaskBehavior = true;
+                                       settings.Properties.EditFormat = EditFormat.Date;
+                                       settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                       settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                       settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.fecha_fin, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdCliente"></label>
+                                <button type="button" class="btn btn-primary form-control " onclick="AplicarFiltros();">Aplicar Filtros</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_cobranza_x_alumno")
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="pf_observacion">Observación</label>
-                    @Html.TextBoxFor(q => q.cr_ObservacionPantalla, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(q => q.cr_ObservacionPantalla, "", new { @class = "text-danger" })
-                </div>
-            </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            [@Session["IdEmpresa"]] @Session["nom_empresa"]
         </div>
+        <!-- /.box-footer-->
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
-                <button type="button" class="btn btn-primary" title="Buscar facturas" id="btn_buscar" onclick="MostrarModal();">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    <br />
-
-    @Html.Action("GridViewPartial_cobranza_det")
-
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Guardar</button>
