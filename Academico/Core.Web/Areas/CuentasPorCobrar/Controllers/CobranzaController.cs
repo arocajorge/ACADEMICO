@@ -63,6 +63,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         string mensajeInfo = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        cxc_cobro_List Lista_Cobro = new cxc_cobro_List();
         #endregion
 
         #region Metodos ComboBox bajo demanda
@@ -100,8 +101,17 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         #region Index
         public ActionResult Index()
         {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
             cl_filtros_Info model = new cl_filtros_Info
             {
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 fecha_ini= DateTime.Now.Date.AddMonths(-1),
                 fecha_fin=DateTime.Now
@@ -115,12 +125,16 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.Anular = info.Anular;
             #endregion
 
+            List<cxc_cobro_Info> lista = bus_cobro.get_list_matricula(model.IdEmpresa, model.IdSucursal, model.fecha_ini, model.fecha_fin);
+            Lista_Cobro.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+
             return View(model);
         }
         [HttpPost]
         public ActionResult Index(cl_filtros_Info model)
         {
             cargar_combos_consulta();
+            SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
 
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "CuentasPorCobrar", "Cobranza", "Index");
@@ -128,6 +142,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.Modificar = info.Modificar;
             ViewBag.Anular = info.Anular;
             #endregion
+
+            List<cxc_cobro_Info> lista = bus_cobro.get_list_matricula(model.IdEmpresa, model.IdSucursal, model.fecha_ini, model.fecha_fin);
+            Lista_Cobro.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
 
             return View(model);
         }
@@ -433,7 +450,9 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
                 cr_fecha = DateTime.Now.Date,
                 IdCobro_tipo = "EFEC",
                 lst_det = new List<cxc_cobro_det_Info>(),
-                IdTipoNotaCredito = paramCxc.IdTipoNotaPagoAnticipado
+                IdTipoNotaCredito = paramCxc.IdTipoNotaPagoAnticipado,
+                fecha_ini = DateTime.Now.Date.AddMonths(-1),
+                fecha_fin = DateTime.Now
             };
             list_det.set_list(new List<cxc_cobro_det_Info>(), model.IdTransaccionSession);
             List_x_Cruzar.set_list(new List<cxc_cobro_det_Info>(), model.IdTransaccionSession);
@@ -730,6 +749,8 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         [ValidateInput(false)]
         public ActionResult GridViewPartial_cobranza(DateTime? Fecha_ini, DateTime? Fecha_fin, int IdSucursal = 0, bool Nuevo = false, bool Modificar = false, bool Anular = false)
         {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             ViewBag.Fecha_ini = Fecha_ini == null ? DateTime.Now.Date.AddMonths(-1) : Convert.ToDateTime(Fecha_ini);
             ViewBag.Fecha_fin = Fecha_fin == null ? DateTime.Now.Date : Convert.ToDateTime(Fecha_fin);
@@ -739,9 +760,18 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             ViewBag.Modificar = Modificar;
             ViewBag.Anular = Anular;
 
-            var model = bus_cobro.get_list_matricula(IdEmpresa, IdSucursal, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
-
+            //var model = bus_cobro.get_list_matricula(IdEmpresa, IdSucursal, ViewBag.Fecha_ini, ViewBag.Fecha_fin);
+            List<cxc_cobro_Info> model = Lista_Cobro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_cobranza", model);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_cobranza_x_alumno()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            List<cxc_cobro_Info> model = Lista_Cobro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_cobranza_x_alumno", model);
         }
 
         [ValidateInput(false)]
@@ -930,6 +960,14 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             return Json(Mensaje, JsonRequestBehavior.AllowGet);
         }
+        
+        public JsonResult SetConsultaAlumno(DateTime fecha_ini, DateTime fecha_fin, int IdEmpresa = 0, int IdSucursal = 0, decimal IdAlumno = 0, decimal IdTransaccionSession = 0)
+        {
+            List<cxc_cobro_Info> lista = bus_cobro.get_list_matricula_alumno(IdEmpresa, IdSucursal, IdAlumno, fecha_ini, fecha_fin);
+            Lista_Cobro.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+
+            return Json(lista, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 
@@ -993,6 +1031,26 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         }
 
         public void set_list(List<cxc_cobro_det_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
+    public class cxc_cobro_List
+    {
+        string Variable = "cxc_cobro_Info";
+        public List<cxc_cobro_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<cxc_cobro_Info> list = new List<cxc_cobro_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<cxc_cobro_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<cxc_cobro_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }
