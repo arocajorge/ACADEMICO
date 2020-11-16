@@ -18,6 +18,7 @@ namespace Core.Data.Reportes.Facturacion
                 FechaIni = FechaIni.Date;
                 FechaFin = FechaFin.Date;
                 int IdTipoNotaFin = IdTipoNota == 0 ? 99999 : IdTipoNota;
+
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
                     var lst = db.VWFAC_009.Where(q => q.IdEmpresa == IdEmpresa && IdTipoNota <= q.IdTipoNota && q.IdTipoNota <= IdTipoNotaFin && FechaIni <= q.fecha_cruce && q.fecha_cruce <= FechaFin).ToList();

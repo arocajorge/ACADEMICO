@@ -461,7 +461,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
 
             
-            FAC_005_Resumen_Rpt reportResumen = new FAC_005_Resumen_Rpt();
+            FAC_009_Resumen_Rpt reportResumen = new FAC_009_Resumen_Rpt();
             reportResumen.p_IdEmpresa.Value = model.IdEmpresa;
             reportResumen.p_FechaDesde.Value = model.fecha_ini;
             reportResumen.p_FechaHasta.Value = model.fecha_fin;

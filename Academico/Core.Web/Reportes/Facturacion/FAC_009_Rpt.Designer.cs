@@ -338,19 +338,19 @@
             // 
             this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lbl_imagen.Name = "lbl_imagen";
-            this.lbl_imagen.SizeF = new System.Drawing.SizeF(126.1667F, 75F);
+            this.lbl_imagen.SizeF = new System.Drawing.SizeF(130F, 75F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // xrTable1
             // 
             this.xrTable1.BorderWidth = 0F;
-            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(126.1667F, 0F);
+            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(130F, 0F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1,
             this.xrTableRow2,
             this.xrTableRow6});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(630.8333F, 75F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(627F, 75F);
             this.xrTable1.StylePriority.UseBorderWidth = false;
             this.xrTable1.StylePriority.UseTextAlignment = false;
             this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
@@ -368,11 +368,11 @@
             this.lbl_empresa.CanGrow = false;
             this.lbl_empresa.Font = new System.Drawing.Font("Verdana", 12F);
             this.lbl_empresa.Name = "lbl_empresa";
-            this.lbl_empresa.Padding = new DevExpress.XtraPrinting.PaddingInfo(69, 125, 0, 0, 100F);
+            this.lbl_empresa.Padding = new DevExpress.XtraPrinting.PaddingInfo(69, 70, 0, 0, 100F);
             this.lbl_empresa.StylePriority.UseFont = false;
             this.lbl_empresa.StylePriority.UsePadding = false;
             this.lbl_empresa.Text = "lbl_empresa";
-            this.lbl_empresa.Weight = 1.7780191647731047D;
+            this.lbl_empresa.Weight = 1.8062039641318484D;
             // 
             // FAC_006
             // 
@@ -381,7 +381,7 @@
             this.FAC_006.Name = "FAC_006";
             this.FAC_006.StylePriority.UseFont = false;
             this.FAC_006.Text = "FAC_009";
-            this.FAC_006.Weight = 0.21931739429397257D;
+            this.FAC_006.Weight = 0.19113259493522888D;
             // 
             // xrTableRow2
             // 
@@ -394,7 +394,7 @@
             // 
             this.xrTableCell1.Font = new System.Drawing.Font("Times New Roman", 14F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.xrTableCell1.Name = "xrTableCell1";
-            this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 125, 0, 0, 100F);
+            this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(60, 130, 0, 0, 100F);
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.StylePriority.UsePadding = false;
             this.xrTableCell1.Text = "NOTAS DE CREDITO APLICADAS - ACADEMICO";
