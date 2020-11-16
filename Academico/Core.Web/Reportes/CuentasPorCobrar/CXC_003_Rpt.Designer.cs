@@ -454,7 +454,7 @@
             this.xrTableCell1.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.StylePriority.UseFont = false;
-            this.xrTableCell1.Text = "LISTADO DE COBROS";
+            this.xrTableCell1.Text = "COBROS POR CAJERO";
             this.xrTableCell1.Weight = 2.00267022696929D;
             // 
             // PageFooter
@@ -946,7 +946,7 @@
             this.p_IdEmpresa,
             this.p_FechaIni,
             this.p_FechaFin});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.CXC_003_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();

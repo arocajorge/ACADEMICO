@@ -1,13 +1,13 @@
 ﻿@model Core.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Pagarés emmitidos";
+    ViewBag.Title = "Cuadre de cartera";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
     }
     Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
 }
-@using (Html.BeginForm("CXC_018", "CuentasPorCobrarReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("CXC_020", "CuentasPorCobrarReportes", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
 
@@ -31,17 +31,9 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="IdCliente">Alumno</label>
-                            @Html.Partial("_CmbAlumno", Model.IdAlumno)
-                            @*@Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })*@
-
-                        </div>
-                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="">Fecha ini*</label>
+                            <label for="">Fecha inicio*</label>
                             <div class="input-group date">
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
@@ -77,17 +69,6 @@
                         }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.fecha_ini, "", new { @class = "text-danger" })
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label for="IdCliente"></label>
-                            @Html.DevExpress().CheckBoxFor(q => q.mostrarAnulados, settings =>
-                            {
-                                settings.Name = "mostrarAnulados";
-                                settings.Text = "Mostrar anulados";
-                            }).GetHtml()
-                            @Html.ValidationMessageFor(q => q.mostrarAnulados, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

@@ -417,7 +417,7 @@
             this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(68, 125, 0, 0, 100F);
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.StylePriority.UsePadding = false;
-            this.xrTableCell1.Text = "LISTADO DE FACTURAS";
+            this.xrTableCell1.Text = "FACTURAS EMITIDAS";
             this.xrTableCell1.Weight = 1.9973365590670773D;
             // 
             // xrTableRow6
@@ -1292,7 +1292,7 @@
             this.p_fecha_fin,
             this.p_MostrarAnulados,
             this.p_IdAlumno});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.FAC_006_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();

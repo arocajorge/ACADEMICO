@@ -535,7 +535,7 @@
             this.xrTableCell1.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.StylePriority.UseFont = false;
-            this.xrTableCell1.Text = "SALDO DE DOCUMENTOS POR ALUMNO";
+            this.xrTableCell1.Text = "SALDOS PENDIENTES POR DOCUMENTO";
             this.xrTableCell1.Weight = 2D;
             // 
             // PageHeader
@@ -1402,7 +1402,7 @@
             this.p_IdCliente,
             this.p_fecha_corte,
             this.p_mostrarSaldo0});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.CXC_001_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();

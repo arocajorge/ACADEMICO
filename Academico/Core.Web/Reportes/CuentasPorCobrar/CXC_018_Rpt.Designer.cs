@@ -471,7 +471,7 @@
             this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 120, 0, 0, 100F);
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.StylePriority.UsePadding = false;
-            this.xrTableCell1.Text = "REPORTE DE PAGARE";
+            this.xrTableCell1.Text = "PAGARES EMITIDOS";
             this.xrTableCell1.Weight = 2D;
             // 
             // lbl_imagen

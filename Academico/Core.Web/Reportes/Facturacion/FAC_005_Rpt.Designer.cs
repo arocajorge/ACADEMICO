@@ -519,9 +519,6 @@
             // 
             // xrTableCell37
             // 
-            this.xrTableCell37.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'LISTADO DE NOTAS DE \', Iif([Parameters].[p_CreDeb] = \'C\',\'CREDITO\' , \'DEB" +
-                    "ITO\' ),\' DETALLADO\' )")});
             this.xrTableCell37.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell37.Multiline = true;
             this.xrTableCell37.Name = "xrTableCell37";
@@ -529,7 +526,7 @@
             this.xrTableCell37.StylePriority.UseFont = false;
             this.xrTableCell37.StylePriority.UsePadding = false;
             this.xrTableCell37.StylePriority.UseTextAlignment = false;
-            this.xrTableCell37.Text = "LISTADO DE NOTAS DE ";
+            this.xrTableCell37.Text = "NOTAS DE DEBITO Y CREDITO - ACADEMICO";
             this.xrTableCell37.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell37.Weight = 5.2162062039638721D;
             // 
@@ -1185,7 +1182,7 @@
             this.p_CreDeb,
             this.p_Naturaleza,
             this.p_IdTipoNota});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.FAC_005_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();

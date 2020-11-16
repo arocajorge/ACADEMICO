@@ -387,6 +387,7 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_012_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_013_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_014_Info.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_020_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_019_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_018_Info.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_017_Info.cs" />

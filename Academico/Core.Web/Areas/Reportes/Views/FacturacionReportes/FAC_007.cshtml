@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Helps.cl_filtros_facturacion_Info
 @{
-    ViewBag.Title = "Listado de facturas con descuento por rol";
+    ViewBag.Title = "Descuento por rol - academico";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");

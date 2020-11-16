@@ -15,7 +15,7 @@ namespace Core.Data
             string user = string.Empty;
             string InitialCatalog = string.Empty;
 
-            string Cadena = "LOCAL";
+            string Cadena = "LICEO";
 
             switch (Cadena)
             {
@@ -23,7 +23,7 @@ namespace Core.Data
                     ip = @"localhost";
                     password = "admin*2016";
                     user = "sa";
-                    InitialCatalog = "DBERP_ACADEMICO";
+                    InitialCatalog = "DBERP";
                     break;
                 case "LICEO":
                     ip = @"192.168.25.29\SQL2014";

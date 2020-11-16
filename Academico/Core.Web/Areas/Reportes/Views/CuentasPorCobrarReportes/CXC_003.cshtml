@@ -2,7 +2,7 @@
 @model Core.Info.Helps.cl_filtros_Info
 @{
     Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
-    ViewBag.Title = "Listado de cobros";
+    ViewBag.Title = "Cobros por cajero";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");

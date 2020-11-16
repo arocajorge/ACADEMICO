@@ -522,7 +522,7 @@
             this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(72, 120, 0, 0, 100F);
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.StylePriority.UsePadding = false;
-            this.xrTableCell1.Text = "REPORTE DE CONVENIOS DE PAGO";
+            this.xrTableCell1.Text = "CONVENIOS DE PAGO EMITIDOS";
             this.xrTableCell1.Weight = 2D;
             // 
             // lbl_imagen

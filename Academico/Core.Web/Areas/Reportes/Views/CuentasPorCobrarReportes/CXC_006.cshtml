@@ -2,7 +2,7 @@
 @model Core.Info.Helps.cl_filtros_facturacion_Info
 @{
     Layout = "~/Areas/Reportes/Views/Shared/_LayoutConsulta.cshtml";
-    ViewBag.Title = "Listado de liquidaciones de tarjetas de crédito";
+    ViewBag.Title = "Liquidaciones de tarjetas de crédito";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");

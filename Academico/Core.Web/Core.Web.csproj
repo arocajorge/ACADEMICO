@@ -1092,6 +1092,12 @@
     <Compile Include="Reportes\CuentasPorCobrar\CXC_016_Rpt.Designer.cs">
       <DependentUpon>CXC_016_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_020_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_020_Rpt.Designer.cs">
+      <DependentUpon>CXC_020_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\CuentasPorCobrar\CXC_019_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9490,6 +9496,7 @@
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_018.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_019.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_x_alumno.cshtml" />
+    <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_020.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9583,6 +9590,7 @@
     <TypeScriptCompile Include="AdminLTE\bower_components\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -9940,6 +9948,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_016_Rpt.resx">
       <DependentUpon>CXC_016_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_020_Rpt.resx">
+      <DependentUpon>CXC_020_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\CuentasPorCobrar\CXC_019_Rpt.resx">
       <DependentUpon>CXC_019_Rpt.cs</DependentUpon>

@@ -397,7 +397,7 @@
             this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 125, 0, 0, 100F);
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.StylePriority.UsePadding = false;
-            this.xrTableCell1.Text = "APLICACIONES POR NOTAS DE CREDITO";
+            this.xrTableCell1.Text = "NOTAS DE CREDITO APLICADAS - ACADEMICO";
             this.xrTableCell1.Weight = 1.9973365590670773D;
             // 
             // xrTableRow6
@@ -961,7 +961,7 @@
             this.p_FechaHasta,
             this.p_IdTipoNota,
             this.p_IdEmpresa});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.FAC_009_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
