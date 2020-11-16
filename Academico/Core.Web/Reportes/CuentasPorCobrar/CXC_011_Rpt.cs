@@ -8,6 +8,7 @@ using Core.Info.Reportes.CuentasPorCobrar;
 using Core.Bus.Reportes.CuentasPorCobrar;
 using System.Collections.Generic;
 using Core.Bus.Academico;
+using System.Linq;
 
 namespace Core.Web.Reportes.CuentasPorCobrar
 {
@@ -38,7 +39,7 @@ namespace Core.Web.Reportes.CuentasPorCobrar
 
             if (lst_rpt.Count > 0)
             {
-                if (lst_rpt.FindLast(q => q.MostrarValoresDesdeHasta == q.MostrarValoresDesdeHasta).MostrarValoresDesdeHasta == true)
+                if (lst_rpt.First().MostrarValoresDesdeHasta == true)
                 {
                     ValoresDesdeHasta.Visible = true;
                 }
