@@ -1,4 +1,6 @@
 ﻿using Core.Bus.General;
+using Core.Data.General;
+using Core.Info.General;
 using Core.Web.Reportes.CuentasPorCobrar;
 using Core.Web.Reportes.Facturacion;
 using System;
@@ -90,16 +92,7 @@ namespace Core.SrvCorreos
 
                             #region FAC_002
                             FAC_002_Rpt rpt = new FAC_002_Rpt();
-
-                            #region Cargo diseño desde base
-                            var reporte = bus_rep_x_emp.GetInfo(CorreoInfo.IdEmpresa, "FAC_002");
-                            if (reporte != null)
-                            {
-                                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                                rpt.LoadLayout(RootReporte);
-                            }
-                            #endregion
-
+                            
                             #region Parametros
                             if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
                             {
@@ -131,16 +124,7 @@ namespace Core.SrvCorreos
                         case "CXC_011":
 
                             #region CXC_011
-                            CXC_011_Rpt rpt_CXC_011 = new CXC_011_Rpt();
-
-                            #region Cargo diseño desde base
-                            var reporte_CXC_011 = bus_rep_x_emp.GetInfo(CorreoInfo.IdEmpresa, "CXC_011");
-                            if (reporte_CXC_011 != null)
-                            {
-                                System.IO.File.WriteAllBytes(RootReporte, reporte_CXC_011.ReporteDisenio);
-                                rpt_CXC_011.LoadLayout(RootReporte);
-                            }
-                            #endregion
+                            CXC_011_Rpt rpt_CXC_011 = new CXC_011_Rpt();                           
 
                             #region Parametros
                             if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
@@ -173,16 +157,7 @@ namespace Core.SrvCorreos
 
                             #region CXC_013
                             CXC_013_Rpt rpt_CXC_013 = new CXC_013_Rpt();
-
-                            #region Cargo diseño desde base
-                            var reporte_CXC_013 = bus_rep_x_emp.GetInfo(CorreoInfo.IdEmpresa, "CXC_013");
-                            if (reporte_CXC_013 != null)
-                            {
-                                System.IO.File.WriteAllBytes(RootReporte, reporte_CXC_013.ReporteDisenio);
-                                rpt_CXC_013.LoadLayout(RootReporte);
-                            }
-                            #endregion
-
+                            
                             #region Parametros
                             if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
                             {
@@ -213,16 +188,7 @@ namespace Core.SrvCorreos
 
                             #region CXC_014
                             CXC_014_Rpt rpt_CXC_014 = new CXC_014_Rpt();
-
-                            #region Cargo diseño desde base
-                            var reporte_CXC_014 = bus_rep_x_emp.GetInfo(CorreoInfo.IdEmpresa, "CXC_014");
-                            if (reporte_CXC_014 != null)
-                            {
-                                System.IO.File.WriteAllBytes(RootReporte, reporte_CXC_014.ReporteDisenio);
-                                rpt_CXC_014.LoadLayout(RootReporte);
-                            }
-                            #endregion
-
+                            
                             #region Parametros
                             if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
                             {
@@ -253,16 +219,7 @@ namespace Core.SrvCorreos
 
                             #region CXC_015
                             CXC_015_Rpt rpt_CXC_015 = new CXC_015_Rpt();
-
-                            #region Cargo diseño desde base
-                            var reporte_CXC_015 = bus_rep_x_emp.GetInfo(CorreoInfo.IdEmpresa, "CXC_015");
-                            if (reporte_CXC_015 != null)
-                            {
-                                System.IO.File.WriteAllBytes(RootReporte, reporte_CXC_015.ReporteDisenio);
-                                rpt_CXC_015.LoadLayout(RootReporte);
-                            }
-                            #endregion
-
+                            
                             #region Parametros
                             if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
                             {
@@ -327,7 +284,8 @@ namespace Core.SrvCorreos
             }
             catch (Exception ex)
             {
-                
+                tb_LogError_Bus LogData = new tb_LogError_Bus();
+                LogData.GuardarDB(new tb_LogError_Info { Descripcion = ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.InnerException.Message, Clase = "srvColaCorreo", Metodo = "Serv_ColaCorreo", IdUsuario = "Server" });
             }
         }
 

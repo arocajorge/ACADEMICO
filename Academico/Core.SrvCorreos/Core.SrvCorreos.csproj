@@ -110,6 +110,10 @@
       <Project>{adbb9bef-8266-4a4c-9c3d-b52873b89450}</Project>
       <Name>Core.Bus</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Data\Core.Data.csproj">
+      <Project>{AF0C301B-22DD-4B45-99DC-33A507CC734A}</Project>
+      <Name>Core.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Info\Core.Info.csproj">
       <Project>{01b5c318-17e8-4674-847e-c8fda6df7978}</Project>
       <Name>Core.Info</Name>

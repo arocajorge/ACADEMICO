@@ -1,4 +1,5 @@
 ﻿using Core.Bus.General;
+using Core.Info.General;
 using Core.Web.Reportes.CuentasPorCobrar;
 using Core.Web.Reportes.Facturacion;
 using System;
@@ -23,7 +24,6 @@ namespace Core.TestServicios
                 tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
 
                 tb_empresa_Bus busEmpresa = new tb_empresa_Bus();
-
                 #region Get correo por enviar
                 var CorreoInfo = busCorreo.GetInfoPendienteEnviar();
                 if (CorreoInfo == null)
@@ -38,6 +38,7 @@ namespace Core.TestServicios
                     mail.From = new MailAddress(CorreoInfo.ParametroInfo.Usuario);
                     mail.Subject = CorreoInfo.Asunto;
                     mail.IsBodyHtml = true;
+
                     string[] Correos = CorreoInfo.Destinatarios.Split(';');
                     foreach (var item in Correos)
                     {
@@ -66,15 +67,6 @@ namespace Core.TestServicios
 
                             #region FAC_002
                             FAC_002_Rpt rpt = new FAC_002_Rpt();
-
-                            #region Cargo diseño desde base
-                            var reporte = bus_rep_x_emp.GetInfo(CorreoInfo.IdEmpresa, "FAC_002");
-                            if (reporte != null)
-                            {
-                                System.IO.File.WriteAllBytes(RootReporte, reporte.ReporteDisenio);
-                                rpt.LoadLayout(RootReporte);
-                            }
-                            #endregion
 
                             #region Parametros
                             if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
@@ -109,15 +101,6 @@ namespace Core.TestServicios
                             #region CXC_011
                             CXC_011_Rpt rpt_CXC_011 = new CXC_011_Rpt();
 
-                            #region Cargo diseño desde base
-                            var reporte_CXC_011 = bus_rep_x_emp.GetInfo(CorreoInfo.IdEmpresa, "CXC_011");
-                            if (reporte_CXC_011 != null)
-                            {
-                                System.IO.File.WriteAllBytes(RootReporte, reporte_CXC_011.ReporteDisenio);
-                                rpt_CXC_011.LoadLayout(RootReporte);
-                            }
-                            #endregion
-
                             #region Parametros
                             if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
                             {
@@ -142,6 +125,99 @@ namespace Core.TestServicios
 
                             AlternateView htmlView_CXC_011 = AlternateView.CreateAlternateViewFromString(CorreoInfo.Cuerpo, null, "text/html");
                             mail.AlternateViews.Add(htmlView_CXC_011);
+                            #endregion
+
+                            break;
+                        case "CXC_013":
+
+                            #region CXC_013
+                            CXC_013_Rpt rpt_CXC_013 = new CXC_013_Rpt();
+
+                            #region Parametros
+                            if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
+                            {
+                                string[] Parametros = CorreoInfo.Parametros.Split(';');
+                                rpt_CXC_013.p_IdEmpresa.Value = Parametros[0];
+                                rpt_CXC_013.p_IdAlumno.Value = Parametros[2];
+                            }
+                            #endregion
+
+
+                            rpt_CXC_013.usuario = "SRVFIX";
+                            rpt_CXC_013.empresa = Empresa.em_nombre;
+                            rpt_CXC_013.RequestParameters = false;
+
+                            rpt_CXC_013.ExportToPdf(mem);
+
+                            // Create a new attachment and put the PDF report into it.
+                            mem.Seek(0, System.IO.SeekOrigin.Begin);
+                            Attachment att_CXC_013 = new Attachment(mem, "ESTADO DE CUENTA.pdf", "application/pdf");
+                            mail.Attachments.Add(att_CXC_013);
+
+                            AlternateView htmlView_CXC_013 = AlternateView.CreateAlternateViewFromString(CorreoInfo.Cuerpo, null, "text/html");
+                            mail.AlternateViews.Add(htmlView_CXC_013);
+                            #endregion
+
+                            break;
+                        case "CXC_014":
+
+                            #region CXC_014
+                            CXC_014_Rpt rpt_CXC_014 = new CXC_014_Rpt();
+
+                            #region Parametros
+                            if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
+                            {
+                                string[] Parametros = CorreoInfo.Parametros.Split(';');
+                                rpt_CXC_014.p_IdEmpresa.Value = Parametros[0];
+                                rpt_CXC_014.p_IdAlumno.Value = Parametros[2];
+                            }
+                            #endregion
+
+
+                            rpt_CXC_014.usuario = "SRVFIX";
+                            rpt_CXC_014.empresa = Empresa.em_nombre;
+                            rpt_CXC_014.RequestParameters = false;
+
+                            rpt_CXC_014.ExportToPdf(mem);
+
+                            // Create a new attachment and put the PDF report into it.
+                            mem.Seek(0, System.IO.SeekOrigin.Begin);
+                            Attachment att_CXC_014 = new Attachment(mem, "ESTADO DE CUENTA.pdf", "application/pdf");
+                            mail.Attachments.Add(att_CXC_014);
+
+                            AlternateView htmlView_CXC_014 = AlternateView.CreateAlternateViewFromString(CorreoInfo.Cuerpo, null, "text/html");
+                            mail.AlternateViews.Add(htmlView_CXC_014);
+                            #endregion
+
+                            break;
+                        case "CXC_015":
+
+                            #region CXC_015
+                            CXC_015_Rpt rpt_CXC_015 = new CXC_015_Rpt();
+
+                            #region Parametros
+                            if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
+                            {
+                                string[] Parametros = CorreoInfo.Parametros.Split(';');
+                                rpt_CXC_015.p_IdEmpresa.Value = Parametros[0];
+                                rpt_CXC_015.p_IdAlumno.Value = Parametros[2];
+                            }
+                            #endregion
+
+
+                            rpt_CXC_015.usuario = "SRVFIX";
+                            rpt_CXC_015.empresa = Empresa.em_nombre;
+                            rpt_CXC_015.RequestParameters = false;
+
+                            rpt_CXC_015.ExportToPdf(mem);
+
+                            // Create a new attachment and put the PDF report into it.
+                            mem.Seek(0, System.IO.SeekOrigin.Begin);
+                            Attachment att_CXC_015 = new Attachment(mem, "ESTADO DE CUENTA.pdf", "application/pdf");
+                            mail.Attachments.Add(att_CXC_015);
+
+                            AlternateView htmlView_CXC_015 = AlternateView.CreateAlternateViewFromString(CorreoInfo.Cuerpo, null, "text/html");
+                            mail.AlternateViews.Add(htmlView_CXC_015);
                             #endregion
 
                             break;
@@ -183,7 +259,8 @@ namespace Core.TestServicios
             }
             catch (Exception ex)
             {
-
+                tb_LogError_Bus LogData = new tb_LogError_Bus();
+                LogData.GuardarDB(new tb_LogError_Info { Descripcion = ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.InnerException.Message, Clase = "srvColaCorreo", Metodo = "Serv_ColaCorreo", IdUsuario = "Server" });
             }
         }
     }
