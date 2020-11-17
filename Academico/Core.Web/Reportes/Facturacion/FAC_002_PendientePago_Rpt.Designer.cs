@@ -411,6 +411,7 @@
             // 
             // PageFooter
             // 
+            this.PageFooter.HeightF = 0F;
             this.PageFooter.Name = "PageFooter";
             // 
             // FAC_002_PendientePago_Rpt
@@ -434,7 +435,7 @@
             this.p_IdEmpresa,
             this.p_IdSucursal,
             this.p_IdAlumno});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.FAC_002_PendientePago_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
