@@ -19,5 +19,7 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public double SaldoNeto { get; set; }
         public double SaldoAcreedorFinal { get; set; }
         public double SaldoFinal { get; set; }
+        public double SaldoCalculado { get; set; }
+        public double Diferencia { get; set; }
     }
 }
