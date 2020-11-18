@@ -80,6 +80,12 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
             }
 
+            if (info.lst_periodos.Count ==0)
+            {
+                msg = "El año lectivo debe tener al menos 1 periodo";
+                return false;
+            }
+
             return true;
         }
         private void cargar_combos()
@@ -122,11 +128,6 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             model.lst_periodos = new List<aca_AnioLectivo_Periodo_Info>();
-            if (!validar(model, ref mensaje))
-            {
-                ViewBag.mensaje = mensaje;
-                return View(model);
-            }
 
             var mes_ini = model.FechaDesde.Month;
             var mes_fin = model.FechaHasta.Month;
@@ -153,6 +154,12 @@ namespace Core.Web.Areas.Academico.Controllers
                 fecha_inicio = fecha_desde.AddMonths(1);
 
                 model.lst_periodos.Add(info_periodo);
+            }
+
+            if (!validar(model, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                return View(model);
             }
 
             if (!bus_anio.GuardarDB(model))

@@ -25,6 +25,15 @@ namespace Core.Data.Academico
         aca_Curso_Data odata_curso = new aca_Curso_Data();
         aca_Paralelo_Data odata_paralelo = new aca_Paralelo_Data();
         aca_Materia_Data odata_materia = new aca_Materia_Data();
+        aca_Profesor_Data odata_profesor = new aca_Profesor_Data();
+        aca_AnioLectivoCalificacionCualitativa_Data odata_calificacion_cualitativa = new aca_AnioLectivoCalificacionCualitativa_Data();
+        aca_AnioLectivoConductaEquivalencia_Data odata_conducta_equivalencia = new aca_AnioLectivoConductaEquivalencia_Data();
+        aca_AnioLectivoEquivalenciaPromedio_Data odata_equivalencia_promedio = new aca_AnioLectivoEquivalenciaPromedio_Data();
+        aca_Plantilla_Data odata_plantilla = new aca_Plantilla_Data();
+        aca_AnioLectivo_Curso_Plantilla_Data odata_curso_plantilla = new aca_AnioLectivo_Curso_Plantilla_Data();
+        aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Data odata_curso_plantilla_parametrizacion = new aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Data();
+        aca_AnioLectivo_Rubro_Data odata_anio_rubro = new aca_AnioLectivo_Rubro_Data();
+        aca_AnioLectivo_Rubro_Periodo_Data odata_anio_rubro_periodo = new aca_AnioLectivo_Rubro_Periodo_Data();
         aca_Documento_Data odata_documento = new aca_Documento_Data();
         seg_usuario_Data odata_usuario = new seg_usuario_Data();
 
@@ -443,10 +452,150 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst_asignacion_sede_nivel = odata_sede_nivel.get_list_asignacion(info.IdEmpresa, info.IdSede, info.IdAnio).Where(q=> q.seleccionado==true).ToList();
+                    var lst_equivalencia_promedio_x_anio = odata_equivalencia_promedio.getList(info.IdEmpresa,info.IdAnio,false);
+                    if (lst_equivalencia_promedio_x_anio.Count > 0)
+                    {
+                        var IdEquivalenciaPromedio = odata_equivalencia_promedio.getId(info.IdEmpresa);
+                        foreach (var item in lst_equivalencia_promedio_x_anio)
+                        {
+                            aca_AnioLectivoEquivalenciaPromedio Entity_EquivalenciaPromedio = new aca_AnioLectivoEquivalenciaPromedio
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdEquivalenciaPromedio = IdEquivalenciaPromedio++,
+                                IdAnio = info.IdAnioApertura,
+                                Descripcion = item.Descripcion,
+                                Codigo = item.Codigo,
+                                ValorMinimo = item.ValorMinimo,
+                                ValorMaximo = item.ValorMaximo,
+                                Estado = item.Estado,
+                                IdUsuarioCreacion = info.IdUsuarioCreacion,
+                                FechaCreacion = DateTime.Now
+                            };
+                            Context.aca_AnioLectivoEquivalenciaPromedio.Add(Entity_EquivalenciaPromedio);
+                        }
+                    }
 
+                    var lst_equivalencia_cualitativa_x_anio = odata_calificacion_cualitativa.getList(info.IdEmpresa, info.IdAnio, false);
+                    if (lst_equivalencia_cualitativa_x_anio.Count > 0)
+                    {
+                        var IdEquivalenciaPromedio = odata_calificacion_cualitativa.getId(info.IdEmpresa);
+                        foreach (var item in lst_equivalencia_cualitativa_x_anio)
+                        {
+                            aca_AnioLectivoCalificacionCualitativa Entity_EquivalenciaCualitativa = new aca_AnioLectivoCalificacionCualitativa
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdCalificacionCualitativa = IdEquivalenciaPromedio++,
+                                IdAnio = info.IdAnioApertura,
+                                DescripcionCorta = item.DescripcionCorta,
+                                DescripcionLarga = item.DescripcionLarga,
+                                Codigo = item.Codigo,
+                                Calificacion = item.Calificacion,
+                                Estado = item.Estado,
+                                IdUsuarioCreacion = info.IdUsuarioCreacion,
+                                FechaCreacion = DateTime.Now
+                            };
+                            Context.aca_AnioLectivoCalificacionCualitativa.Add(Entity_EquivalenciaCualitativa);
+                        }
+                    }
+
+                    var lst_equivalencia_conducta_x_anio = odata_conducta_equivalencia.getList(info.IdEmpresa, info.IdAnio, false);
+                    if (lst_equivalencia_conducta_x_anio.Count > 0)
+                    {
+                        var Secuencia = 1;
+                        foreach (var item in lst_equivalencia_conducta_x_anio)
+                        {
+                            aca_AnioLectivoConductaEquivalencia Entity_EquivalenciaConducta = new aca_AnioLectivoConductaEquivalencia
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                Secuencia = Secuencia++,
+                                IdAnio = info.IdAnioApertura,
+                                Equivalencia = item.Equivalencia,
+                                DescripcionEquivalencia = item.DescripcionEquivalencia,
+                                Letra = item.Letra,
+                                Calificacion = item.Calificacion,
+                                IngresaInspector = item.IngresaInspector,
+                                IngresaMotivo = item.IngresaMotivo,
+                                IngresaProfesor = item.IngresaProfesor
+                            };
+                            Context.aca_AnioLectivoConductaEquivalencia.Add(Entity_EquivalenciaConducta);
+                        }
+                    }
+
+
+                    //RUBROS//
+                    var lst_rubros_x_anio = odata_anio_rubro.getList(info.IdEmpresa, info.IdAnio, false);
+                    if (lst_rubros_x_anio.Count > 0)
+                    {
+                        foreach (var item in lst_rubros_x_anio)
+                        {
+                            aca_AnioLectivo_Rubro Entity_AnioRubro = new aca_AnioLectivo_Rubro
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdAnio = info.IdAnioApertura,
+                                IdRubro = item.IdRubro,
+                                AplicaProntoPago = item.AplicaProntoPago,
+                                NomRubro = item.NomRubro,
+                                IdProducto = item.IdProducto,
+                                Subtotal = item.Subtotal,
+                                IdCod_Impuesto_Iva = item.IdCod_Impuesto_Iva,
+                                Porcentaje = item.Porcentaje,
+                                ValorIVA = item.ValorIVA,
+                                Total = item.Total,
+                                NumeroCuotas = item.NumeroCuotas
+                            };
+                            Context.aca_AnioLectivo_Rubro.Add(Entity_AnioRubro);
+                        }
+                    }
+
+                    var lst_rubros_x_anio_periodos = odata_anio_rubro_periodo.getList(info.IdEmpresa, info.IdAnio, false);
+                    if (lst_rubros_x_anio_periodos.Count > 0)
+                    {
+                        foreach (var item in lst_rubros_x_anio_periodos)
+                        {
+                            aca_AnioLectivo_Rubro_Periodo Entity_AnioRubro_Periodo = new aca_AnioLectivo_Rubro_Periodo
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdAnio = info.IdAnioApertura,
+                                IdRubro = item.IdRubro,
+                                IdPeriodo = item.IdPeriodo,
+                                Secuencia = item.Secuencia,
+                                Observacion = item.Observacion
+                            };
+                            Context.aca_AnioLectivo_Rubro_Periodo.Add(Entity_AnioRubro_Periodo);
+                        }
+                    }
+
+
+                    // PLANTILLAS POR AÑO
+                    var lst_plantillas_x_año = odata_plantilla.getList(info.IdEmpresa, info.IdAnio, false);
+                    if (lst_plantillas_x_año.Count > 0)
+                    {
+                        var IdPlantilla = odata_plantilla.getId(info.IdEmpresa);
+                        foreach (var item in lst_plantillas_x_año)
+                        {
+                            aca_Plantilla Entity_Plantilla = new aca_Plantilla
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdAnio = info.IdAnioApertura,
+                                IdPlantilla = IdPlantilla++,
+                                NomPlantilla = item.NomPlantilla,
+                                Valor = item.Valor,
+                                TipoDescuento = item.TipoDescuento,
+                                Estado = item.Estado,
+                                IdUsuarioCreacion = info.IdUsuarioCreacion,
+                                FechaCreacion = DateTime.Now,
+                                IdTipoPlantilla = item.IdTipoPlantilla,
+                                IdTipoNota = item.IdTipoNota,
+                                AplicaParaTodo = item.AplicaParaTodo
+                            };
+                            Context.aca_Plantilla.Add(Entity_Plantilla);
+                        }
+                    }
+
+                    var lst_asignacion_sede_nivel = odata_sede_nivel.get_list_asignacion(info.IdEmpresa, info.IdSede, info.IdAnio).Where(q=> q.seleccionado==true).ToList();
                     if (lst_asignacion_sede_nivel.Count > 0)
                     {
+                        #region SedeNivel
                         foreach (var item_sn in lst_asignacion_sede_nivel)
                         {
                             var info_sede = odata_sede.GetInfo(info.IdEmpresa, item_sn.IdSede);
@@ -462,13 +611,14 @@ namespace Core.Data.Academico
                             };
                             Context.aca_AnioLectivo_Sede_NivelAcademico.Add(Entity_SedeNivel);
                         }
+                        #endregion
 
-                        var lst_nivel = lst_asignacion_sede_nivel.GroupBy(q=>q.IdNivel).ToList();
-                        if (lst_nivel.Count >0)
+                        var lst_nivel = lst_asignacion_sede_nivel.GroupBy(q => q.IdNivel).ToList();
+                        if (lst_nivel.Count > 0)
                         {
                             foreach (var item_niv in lst_nivel)
                             {
-                                var lst_asignacion_nivel_jornada = odata_nivel_jornada.get_list_asignacion(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key) ).Where(q => q.seleccionado == true).ToList();
+                                var lst_asignacion_nivel_jornada = odata_nivel_jornada.get_list_asignacion(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key)).Where(q => q.seleccionado == true).ToList();
 
                                 foreach (var item_nj in lst_asignacion_nivel_jornada)
                                 {
@@ -520,6 +670,9 @@ namespace Core.Data.Academico
                                                 foreach (var item_cp in lst_asignacion_curso_paralelo)
                                                 {
                                                     var inf_paralelo = odata_paralelo.getInfo(info.IdEmpresa, item_cp.IdParalelo);
+                                                    var info_profesor_insp = odata_profesor.getInfo(info.IdEmpresa, Convert.ToDecimal(item_cp.IdProfesorInspector));
+                                                    var info_profesor_tutor = odata_profesor.getInfo(info.IdEmpresa, Convert.ToDecimal(item_cp.IdProfesorTutor));
+
                                                     aca_AnioLectivo_Curso_Paralelo Entity_CursoParalelo = new aca_AnioLectivo_Curso_Paralelo
                                                     {
                                                         IdEmpresa = item_cp.IdEmpresa,
@@ -531,92 +684,156 @@ namespace Core.Data.Academico
                                                         IdParalelo = item_cp.IdParalelo,
                                                         CodigoParalelo = inf_paralelo.CodigoParalelo,
                                                         NomParalelo = inf_paralelo.NomParalelo,
-                                                        OrdenParalelo = inf_paralelo.OrdenParalelo
+                                                        OrdenParalelo = inf_paralelo.OrdenParalelo,
+                                                        IdProfesorInspector = (info_profesor_insp==null ? (decimal?)null : (info_profesor_insp.Estado==false ? (decimal?)null : item_cp.IdProfesorInspector)),
+                                                        IdProfesorTutor = (info_profesor_tutor == null ? (decimal?)null : (info_profesor_tutor.Estado == false ? (decimal?)null : item_cp.IdProfesorInspector)),
                                                     };
                                                     Context.aca_AnioLectivo_Curso_Paralelo.Add(Entity_CursoParalelo);
                                                 }
 
                                                 var lst_asignacion_curso_materia = odata_curso_materia.get_list_asignacion(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key)).Where(q => q.seleccionado == true).ToList();
-
-                                                foreach (var item_cm in lst_asignacion_curso_materia)
+                                                if (lst_asignacion_curso_materia.Count > 0)
                                                 {
-                                                    var info_materia = odata_materia.getInfo(info.IdEmpresa, item_cm.IdMateria);
-                                                    aca_AnioLectivo_Curso_Materia Entity_CursoMateria = new aca_AnioLectivo_Curso_Materia
+                                                    foreach (var item_cm in lst_asignacion_curso_materia)
                                                     {
-                                                        IdEmpresa = item_cm.IdEmpresa,
-                                                        IdAnio = info.IdAnioApertura,
-                                                        IdSede = item_cm.IdSede,
-                                                        IdNivel = item_cm.IdNivel,
-                                                        IdJornada = item_cm.IdJornada,
-                                                        IdCurso = item_cm.IdCurso,
-                                                        IdMateria = item_cm.IdMateria,
-                                                        NomMateria = info_materia.NomMateria,
-                                                        NomMateriaArea = info_materia.NomMateriaArea,
-                                                        NomMateriaGrupo = info_materia.NomMateriaGrupo,
-                                                        EsObligatorio = info_materia.EsObligatorio,
-                                                        OrdenMateria = info_materia.OrdenMateria,
-                                                        OrdenMateriaArea = info_materia.OrdenMateriaArea,
-                                                        OrdenMateriaGrupo = info_materia.OrdenMateriaGrupo
-                                                    };
-                                                    Context.aca_AnioLectivo_Curso_Materia.Add(Entity_CursoMateria);
+                                                        var info_materia = odata_materia.getInfo(info.IdEmpresa, item_cm.IdMateria);
+                                                        aca_AnioLectivo_Curso_Materia Entity_CursoMateria = new aca_AnioLectivo_Curso_Materia
+                                                        {
+                                                            IdEmpresa = item_cm.IdEmpresa,
+                                                            IdAnio = info.IdAnioApertura,
+                                                            IdSede = item_cm.IdSede,
+                                                            IdNivel = item_cm.IdNivel,
+                                                            IdJornada = item_cm.IdJornada,
+                                                            IdCurso = item_cm.IdCurso,
+                                                            IdMateria = item_cm.IdMateria,
+                                                            NomMateria = info_materia.NomMateria,
+                                                            NomMateriaArea = info_materia.NomMateriaArea,
+                                                            NomMateriaGrupo = info_materia.NomMateriaGrupo,
+                                                            EsObligatorio = info_materia.EsObligatorio,
+                                                            OrdenMateria = info_materia.OrdenMateria,
+                                                            OrdenMateriaArea = info_materia.OrdenMateriaArea,
+                                                            OrdenMateriaGrupo = info_materia.OrdenMateriaGrupo,
+                                                            IdCatalogoTipoCalificacion = info_materia.IdCatalogoTipoCalificacion
+                                                        };
+                                                        Context.aca_AnioLectivo_Curso_Materia.Add(Entity_CursoMateria);
+                                                    }
                                                 }
-
-                                                //var lst_asignacion_paralelo_profesor = odata_paralelo_profesor.get_list_asignacion(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key)).Where(q => q.seleccionado == true).ToList();
-
-                                                //foreach (var item_cm in lst_asignacion_curso_materia)
-                                                //{
-                                                //    var info_materia = odata_materia.getInfo(info.IdEmpresa, item_cm.IdMateria);
-                                                //    aca_AnioLectivo_Curso_Materia Entity_CursoMateria = new aca_AnioLectivo_Curso_Materia
-                                                //    {
-                                                //        IdEmpresa = item_cm.IdEmpresa,
-                                                //        IdAnio = info.IdAnioApertura,
-                                                //        IdSede = item_cm.IdSede,
-                                                //        IdNivel = item_cm.IdNivel,
-                                                //        IdJornada = item_cm.IdJornada,
-                                                //        IdCurso = item_cm.IdCurso,
-                                                //        IdMateria = item_cm.IdMateria,
-                                                //        NomMateria = info_materia.NomMateria,
-                                                //        NomMateriaGrupo = info_materia.NomMateriaGrupo,
-                                                //        EsObligatorio = info_materia.EsObligatorio,
-                                                //        OrdenMateria = info_materia.OrdenMateria
-                                                //    };
-                                                //    Context.aca_AnioLectivo_Curso_Materia.Add(Entity_CursoMateria);
-                                                //}
 
                                                 var lst_asignacion_curso_documento = odata_curso_documento.get_list_asignacion(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key)).Where(q => q.seleccionado == true).ToList();
-
-                                                foreach (var item_cd in lst_asignacion_curso_documento)
+                                                if (lst_asignacion_curso_documento.Count > 0)
                                                 {
-                                                    var inf_documento = odata_documento.getInfo(info.IdEmpresa, item_cd.IdDocumento);
-                                                    aca_AnioLectivo_Curso_Documento Entity_CursoDocumento = new aca_AnioLectivo_Curso_Documento
+                                                    foreach (var item_cd in lst_asignacion_curso_documento)
                                                     {
-                                                        IdEmpresa = item_cd.IdEmpresa,
-                                                        IdAnio = info.IdAnioApertura,
-                                                        IdSede = item_cd.IdSede,
-                                                        IdNivel = item_cd.IdNivel,
-                                                        IdJornada = item_cd.IdJornada,
-                                                        IdCurso = item_cd.IdCurso,
-                                                        IdDocumento = item_cd.IdDocumento,
-                                                        NomDocumento = inf_documento.NomDocumento,
-                                                        OrdenDocumento = inf_documento.OrdenDocumento
-                                                    };
-                                                    Context.aca_AnioLectivo_Curso_Documento.Add(Entity_CursoDocumento);
+                                                        var inf_documento = odata_documento.getInfo(info.IdEmpresa, item_cd.IdDocumento);
+                                                        aca_AnioLectivo_Curso_Documento Entity_CursoDocumento = new aca_AnioLectivo_Curso_Documento
+                                                        {
+                                                            IdEmpresa = item_cd.IdEmpresa,
+                                                            IdAnio = info.IdAnioApertura,
+                                                            IdSede = item_cd.IdSede,
+                                                            IdNivel = item_cd.IdNivel,
+                                                            IdJornada = item_cd.IdJornada,
+                                                            IdCurso = item_cd.IdCurso,
+                                                            IdDocumento = item_cd.IdDocumento,
+                                                            NomDocumento = inf_documento.NomDocumento,
+                                                            OrdenDocumento = inf_documento.OrdenDocumento
+                                                        };
+                                                        Context.aca_AnioLectivo_Curso_Documento.Add(Entity_CursoDocumento);
+                                                    }
                                                 }
+
+                                                /*
+                                                var lst_plantillas_x_anio = odata_curso_plantilla.getList(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key));
+                                                if (lst_plantillas_x_anio.Count > 0)
+                                                {
+                                                    foreach (var item_p in lst_plantillas_x_anio)
+                                                    {
+                                                        //var inf_documento = odata_documento.getInfo(info.IdEmpresa, item_cd.IdDocumento);
+                                                        aca_AnioLectivo_Curso_Plantilla Entity_CursoPlantilla = new aca_AnioLectivo_Curso_Plantilla
+                                                        {
+                                                            IdEmpresa = item_p.IdEmpresa,
+                                                            IdAnio = info.IdAnioApertura,
+                                                            IdSede = item_p.IdSede,
+                                                            IdNivel = item_p.IdNivel,
+                                                            IdJornada = item_p.IdJornada,
+                                                            IdCurso = item_p.IdCurso,
+                                                            IdPlantilla = item_p.IdPlantilla,
+                                                            Observacion = item_p.Observacion
+                                                        };
+                                                        Context.aca_AnioLectivo_Curso_Plantilla.Add(Entity_CursoPlantilla);
+                                                    }
+                                                }
+
+
+                                                var lst_plantillas_x_anio_periodo = odata_curso_plantilla_parametrizacion.GetList_x_Curso(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key));
+                                                if (lst_plantillas_x_anio_periodo.Count > 0)
+                                                {
+                                                    foreach (var item_p in lst_plantillas_x_anio_periodo)
+                                                    {
+                                                        aca_AnioLectivo_Curso_Plantilla_Parametrizacion Entity_CursoPlantilla_Parametrizacion = new aca_AnioLectivo_Curso_Plantilla_Parametrizacion
+                                                        {
+                                                            IdEmpresa = item_p.IdEmpresa,
+                                                            IdAnio = info.IdAnioApertura,
+                                                            IdSede = item_p.IdSede,
+                                                            IdNivel = item_p.IdNivel,
+                                                            IdJornada = item_p.IdJornada,
+                                                            IdCurso = item_p.IdCurso,
+                                                            IdPlantilla = item_p.IdPlantilla,
+                                                            IdRubro = item_p.IdRubro,
+                                                            IdCtaCbleDebe = item_p.IdCtaCbleDebe,
+                                                            IdCtaCbleHaber = item_p.IdCtaCbleHaber
+                                                        };
+                                                        Context.aca_AnioLectivo_Curso_Plantilla_Parametrizacion.Add(Entity_CursoPlantilla_Parametrizacion);
+                                                    }
+                                                }
+                                                */
                                             }
+                                            
+                                            Context.SaveChanges();
 
-
+                                            //PARALELO POR PROFESOR
+                                            foreach (var item_cur in lst_curso)
+                                            {
+                                                var lst_asignacion_curso_paralelo = odata_curso_paralelo.get_list_asignacion(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key)).Where(q => q.seleccionado == true).ToList();
+                                                if (lst_asignacion_curso_paralelo.Count > 0)
+                                                {
+                                                    foreach (var item_cp in lst_asignacion_curso_paralelo)
+                                                    {
+                                                        var lst_asignacion_paralelo_profesor = odata_paralelo_profesor.get_list_asignacion(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key), Convert.ToInt32(item_cp.IdParalelo)).ToList();
+                                                        if (lst_asignacion_paralelo_profesor.Count>0)
+                                                        { 
+                                                            foreach (var item_pp in lst_asignacion_paralelo_profesor)
+                                                            {
+                                                                var info_profesor = odata_profesor.getInfo(info.IdEmpresa, Convert.ToDecimal(item_pp.IdProfesor));
+                                                                aca_AnioLectivo_Paralelo_Profesor Entity_ParaleloProfesor = new aca_AnioLectivo_Paralelo_Profesor
+                                                                {
+                                                                    IdEmpresa = item_pp.IdEmpresa,
+                                                                    IdAnio = info.IdAnioApertura,
+                                                                    IdSede = item_pp.IdSede,
+                                                                    IdNivel = item_pp.IdNivel,
+                                                                    IdJornada = item_pp.IdJornada,
+                                                                    IdCurso = item_pp.IdCurso,
+                                                                    IdMateria = item_pp.IdMateria,
+                                                                    IdParalelo = item_pp.IdParalelo,
+                                                                    IdProfesor = (info_profesor == null ? (decimal?)null : (info_profesor.Estado == false ? (decimal?)null : item_pp.IdProfesor))
+                                                                };
+                                                                Context.aca_AnioLectivo_Paralelo_Profesor.Add(Entity_ParaleloProfesor);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                Context.SaveChanges();
+                                            } //lista de curso
                                         }
                                     }
                                 }
                             }
                         }
-                    }  
-
+                    }
                     Context.SaveChanges();
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

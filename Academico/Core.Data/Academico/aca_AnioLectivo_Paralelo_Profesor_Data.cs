@@ -42,7 +42,8 @@ namespace Core.Data.Academico
                                  NomMateria = q.NomMateria,
                                  IdProfesor = q.IdProfesor,
                                  pe_nombreCompleto = q.pe_nombreCompleto,
-                                 IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion??0
+                                 IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion??0,
+                                 seleccionado = true
                              }).ToList();
 
                     Lista.AddRange((from q in Context.vwaca_AnioLectivo_Paralelo_Profesor_NoAsignados
@@ -55,6 +56,8 @@ namespace Core.Data.Academico
                                      && q.IdParalelo == IdParalelo
                                      && !Context.aca_AnioLectivo_Paralelo_Profesor.Any(me =>
                                      me.IdEmpresa == IdEmpresa
+                                     && me.IdAnio == IdAnio
+                                     && me.IdSede == IdSede
                                      && me.IdCurso == IdCurso
                                      && me.IdParalelo == IdParalelo)
                                     select new aca_AnioLectivo_Paralelo_Profesor_Info
@@ -68,7 +71,8 @@ namespace Core.Data.Academico
                                         IdParalelo = IdParalelo,
                                         IdMateria = q.IdMateria,
                                         NomMateria = q.NomMateria,
-                                        IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion ?? 0
+                                        IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion ?? 0,
+                                        seleccionado = false
                                     }).ToList());
                 }
                 return Lista;

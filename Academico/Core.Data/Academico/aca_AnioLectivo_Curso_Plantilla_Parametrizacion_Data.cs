@@ -57,6 +57,55 @@ namespace Core.Data.Academico
             }
         }
 
+
+        public List<aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Info> GetList_x_Curso(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Info> Lista = new List<aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Info>();
+
+                using (EntitiesAcademico db = new EntitiesAcademico())
+                {
+                    var lst = db.vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede==IdSede && q.IdAnio == IdAnio && q.IdNivel==IdNivel && q.IdJornada==IdJornada && q.IdCurso==IdCurso).ToList();
+                    foreach (var item in lst)
+                    {
+                        Lista.Add(new aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            IdAnio = item.IdAnio,
+                            IdSede = item.IdSede,
+                            IdNivel = item.IdNivel,
+                            IdJornada = item.IdJornada,
+                            IdCurso = item.IdCurso,
+                            IdPlantilla = item.IdPlantilla,
+                            IdRubro = item.IdRubro,
+                            IdCtaCbleDebe = item.IdCtaCbleDebe,
+                            NomJornada = item.NomJornada,
+                            OrdenJornada = item.OrdenJornada,
+                            NomCurso = item.NomCurso,
+                            OrdenCurso = item.OrdenCurso,
+                            NomPlantilla = item.NomPlantilla,
+                            NomRubro = item.NomRubro,
+                            NomNivel = item.NomNivel,
+                            NomSede = item.NomSede,
+                            IdCtaCbleHaber = item.IdCtaCbleHaber,
+                            pc_CuentaDebe = item.pc_CuentaDebe,
+                            pc_CuentaHaber = item.pc_CuentaHaber,
+                            IdString = item.IdEmpresa.ToString("0000") + item.IdAnio.ToString("0000") + item.IdSede.ToString("0000") + item.IdNivel.ToString("0000") + item.IdJornada.ToString("0000") + item.IdCurso.ToString("0000") + item.IdPlantilla.ToString("0000") + item.IdRubro.ToString("0000")
+                        });
+                    }
+
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool ModificarDB(aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Info info)
         {
             try

@@ -2,7 +2,7 @@
 @{
     var grid = Html.DevExpress().GridView(settings => {
         settings.Name = "GridViewPartial_anio_lectivo_periodo";
-        settings.CallbackRouteValues = new { Controller = "AnioLectivoPorPeriodo", Action = "GridViewPartial_anio_lectivo_periodo" };
+        settings.CallbackRouteValues = new { Controller = "PeriodoPorAnioLectivo", Action = "GridViewPartial_anio_lectivo_periodo" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdAnio";
         //Configuración para que la grilla no muestre texto completo
