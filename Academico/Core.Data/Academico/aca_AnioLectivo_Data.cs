@@ -547,23 +547,23 @@ namespace Core.Data.Academico
                         }
                     }
 
-                    var lst_rubros_x_anio_periodos = odata_anio_rubro_periodo.getList(info.IdEmpresa, info.IdAnio, false);
-                    if (lst_rubros_x_anio_periodos.Count > 0)
-                    {
-                        foreach (var item in lst_rubros_x_anio_periodos)
-                        {
-                            aca_AnioLectivo_Rubro_Periodo Entity_AnioRubro_Periodo = new aca_AnioLectivo_Rubro_Periodo
-                            {
-                                IdEmpresa = item.IdEmpresa,
-                                IdAnio = info.IdAnioApertura,
-                                IdRubro = item.IdRubro,
-                                IdPeriodo = item.IdPeriodo,
-                                Secuencia = item.Secuencia,
-                                Observacion = item.Observacion
-                            };
-                            Context.aca_AnioLectivo_Rubro_Periodo.Add(Entity_AnioRubro_Periodo);
-                        }
-                    }
+                    //var lst_rubros_x_anio_periodos = odata_anio_rubro_periodo.getList(info.IdEmpresa, info.IdAnio, false);
+                    //if (lst_rubros_x_anio_periodos.Count > 0)
+                    //{
+                    //    foreach (var item in lst_rubros_x_anio_periodos)
+                    //    {
+                    //        aca_AnioLectivo_Rubro_Periodo Entity_AnioRubro_Periodo = new aca_AnioLectivo_Rubro_Periodo
+                    //        {
+                    //            IdEmpresa = item.IdEmpresa,
+                    //            IdAnio = info.IdAnioApertura,
+                    //            IdRubro = item.IdRubro,
+                    //            IdPeriodo = item.IdPeriodo,
+                    //            Secuencia = item.Secuencia,
+                    //            Observacion = item.Observacion
+                    //        };
+                    //        Context.aca_AnioLectivo_Rubro_Periodo.Add(Entity_AnioRubro_Periodo);
+                    //    }
+                    //}
 
 
                     // PLANTILLAS POR AÑO
