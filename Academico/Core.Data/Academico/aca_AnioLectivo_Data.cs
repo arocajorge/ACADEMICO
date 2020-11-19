@@ -1,8 +1,10 @@
 ﻿using Core.Data.Base;
 using Core.Data.SeguridadAcceso;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,13 +32,15 @@ namespace Core.Data.Academico
         aca_AnioLectivoConductaEquivalencia_Data odata_conducta_equivalencia = new aca_AnioLectivoConductaEquivalencia_Data();
         aca_AnioLectivoEquivalenciaPromedio_Data odata_equivalencia_promedio = new aca_AnioLectivoEquivalenciaPromedio_Data();
         aca_Plantilla_Data odata_plantilla = new aca_Plantilla_Data();
+        aca_Plantilla_Rubro_Data odata_plantilla_rubro = new aca_Plantilla_Rubro_Data();
         aca_AnioLectivo_Curso_Plantilla_Data odata_curso_plantilla = new aca_AnioLectivo_Curso_Plantilla_Data();
         aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Data odata_curso_plantilla_parametrizacion = new aca_AnioLectivo_Curso_Plantilla_Parametrizacion_Data();
         aca_AnioLectivo_Rubro_Data odata_anio_rubro = new aca_AnioLectivo_Rubro_Data();
         aca_AnioLectivo_Rubro_Periodo_Data odata_anio_rubro_periodo = new aca_AnioLectivo_Rubro_Periodo_Data();
         aca_Documento_Data odata_documento = new aca_Documento_Data();
         seg_usuario_Data odata_usuario = new seg_usuario_Data();
-
+        aca_AnioLectivoParcial_Data odata_parcial = new aca_AnioLectivoParcial_Data();
+        aca_Catalogo_Data odata_catalogo = new aca_Catalogo_Data();
         public List<aca_AnioLectivo_Info> getList(int IdEmpresa, bool MostrarAnulados)
         {
             try
@@ -452,6 +456,53 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
+                    var lst_calificaciones = new List<aca_AnioLectivoParcial_Info>();
+                    var lst_quim1 = odata_catalogo.getList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1), false);
+                    var lst_quim2 = odata_catalogo.getList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2), false);
+                    var lst_examenes = odata_catalogo.getList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.EXSUP), false);
+
+                    foreach (var item in lst_quim1)
+                    {
+                        lst_calificaciones.Add(new aca_AnioLectivoParcial_Info
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSede = info.IdSede,
+                            IdAnio = info.IdAnioApertura,
+                            IdCatalogoParcial = item.IdCatalogo,
+                            IdUsuarioCreacion = info.IdUsuarioCreacion,
+                            FechaCreacion = DateTime.Now
+                        });
+                    }
+
+                    foreach (var item in lst_quim2)
+                    {
+                        lst_calificaciones.Add(new aca_AnioLectivoParcial_Info
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSede = info.IdSede,
+                            IdAnio = info.IdAnioApertura,
+                            IdCatalogoParcial = item.IdCatalogo,
+                            IdUsuarioCreacion = info.IdUsuarioCreacion,
+                            FechaCreacion = DateTime.Now
+                        });
+                    }
+                    foreach (var item in lst_examenes)
+                    {
+                        var ValidaEstadoAlumno = (item.IdCatalogo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2) || item.IdCatalogo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXMEJ) || item.IdCatalogo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXSUP) || item.IdCatalogo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXREM) || item.IdCatalogo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXGRA) ? true : false);
+                        lst_calificaciones.Add(new aca_AnioLectivoParcial_Info
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdSede = info.IdSede,
+                            IdAnio = info.IdAnioApertura,
+                            IdCatalogoParcial = item.IdCatalogo,
+                            EsExamen = true,
+                            ValidaEstadoAlumno = ValidaEstadoAlumno,
+                            IdUsuarioCreacion = info.IdUsuarioCreacion,
+                            FechaCreacion = DateTime.Now
+                        });
+                    }
+
+
                     var lst_equivalencia_promedio_x_anio = odata_equivalencia_promedio.getList(info.IdEmpresa,info.IdAnio,false);
                     if (lst_equivalencia_promedio_x_anio.Count > 0)
                     {
@@ -544,27 +595,135 @@ namespace Core.Data.Academico
                                 NumeroCuotas = item.NumeroCuotas
                             };
                             Context.aca_AnioLectivo_Rubro.Add(Entity_AnioRubro);
+
+                            var lst_periodo_anio_anterior = odata_periodo.getList(info.IdEmpresa, info.IdAnio, false).OrderBy(q => q.FechaDesde).ToList();
+                            var OrdenAnterior = 1;
+                            lst_periodo_anio_anterior.ForEach(q=>q.Orden = OrdenAnterior++);
+
+                            var lst_periodo_anio_apertura = odata_periodo.getList(info.IdEmpresa, info.IdAnioApertura, false).OrderBy(q => q.FechaDesde).ToList();
+                            var OrdenApertura = 1;
+                            lst_periodo_anio_apertura.ForEach(q => q.Orden = OrdenApertura++);
+
+                            #region DATATABLE PERIODO ANTERIOR Y APERTURA
+                            DataTable tabla = new DataTable();
+
+                            // Variables para las columnas y las filas
+                            DataColumn column_periodo;
+                            DataRow row_periodo;
+
+                            // Se tiene que crear primero la columna asignandole Nombre y Tipo de datos 
+                            column_periodo = new DataColumn();
+                            column_periodo.DataType = System.Type.GetType("System.Int32");
+                            column_periodo.ColumnName = "IdAnioAnterior";
+                            tabla.Columns.Add(column_periodo);
+
+                            column_periodo = new DataColumn();
+                            column_periodo.DataType = System.Type.GetType("System.Int32");
+                            column_periodo.ColumnName = "IdPeriodoAnterior";
+                            tabla.Columns.Add(column_periodo);
+
+                            column_periodo = new DataColumn();
+                            column_periodo.DataType = System.Type.GetType("System.Int32");
+                            column_periodo.ColumnName = "OrdenAnterior";
+                            tabla.Columns.Add(column_periodo);
+
+                            column_periodo = new DataColumn();
+                            column_periodo.DataType = System.Type.GetType("System.Int32");
+                            column_periodo.ColumnName = "IdAnioApertura";
+                            tabla.Columns.Add(column_periodo);
+
+                            column_periodo = new DataColumn();
+                            column_periodo.DataType = System.Type.GetType("System.Int32");
+                            column_periodo.ColumnName = "IdPeriodoApertura";
+                            tabla.Columns.Add(column_periodo);
+
+                            column_periodo = new DataColumn();
+                            column_periodo.DataType = System.Type.GetType("System.Int32");
+                            column_periodo.ColumnName = "OrdenApertura";
+                            tabla.Columns.Add(column_periodo);
+
+                            foreach (var item_periodo in lst_periodo_anio_apertura)
+                            {
+                                var periodo_anterior = lst_periodo_anio_anterior.Where(q => q.Orden == item_periodo.Orden).FirstOrDefault();
+
+                                if (periodo_anterior!=null)
+                                {
+                                    row_periodo = tabla.NewRow();
+                                    row_periodo["IdAnioAnterior"] = periodo_anterior.IdAnio;
+                                    row_periodo["IdPeriodoAnterior"] = periodo_anterior.IdPeriodo;
+                                    row_periodo["OrdenAnterior"] = periodo_anterior.Orden;
+                                    row_periodo["IdAnioApertura"] = item_periodo.IdAnio;
+                                    row_periodo["IdPeriodoApertura"] = item_periodo.IdPeriodo;
+                                    row_periodo["OrdenApertura"] = item_periodo.Orden;
+
+                                    tabla.Rows.Add(row_periodo);
+                                }
+                            }
+                            #endregion
+   
+                            var periodo_actual = tabla;
+                            var lst_rubros_anioanterior_periodos = odata_anio_rubro_periodo.get_list_asignacion(info.IdEmpresa, info.IdAnio, item.IdRubro).Where(q=> q.seleccionado==true).ToList();
+
+                            if (lst_rubros_anioanterior_periodos.Count > 0)
+                            {
+                                var SecuenciaRP = 1;
+                                var IdPeriodoApertura = 0;
+                                foreach (var item_p in lst_rubros_anioanterior_periodos)
+                                {
+                                    foreach (DataRow fila in tabla.Rows)
+                                    {
+                                        if (Convert.ToInt32(fila["IdAnioAnterior"]) == item_p.IdAnio && Convert.ToInt32(fila["IdPeriodoAnterior"]) == item_p.IdPeriodo)
+                                        {
+                                            IdPeriodoApertura = Convert.ToInt32(fila["IdPeriodoApertura"]);
+                                            break;
+                                        }
+                                    }
+
+                                    aca_AnioLectivo_Rubro_Periodo Entity_AnioRubro_Periodo = new aca_AnioLectivo_Rubro_Periodo
+                                    {
+                                        IdEmpresa = item.IdEmpresa,
+                                        IdAnio = info.IdAnioApertura,
+                                        IdRubro = item.IdRubro,
+                                        IdPeriodo = IdPeriodoApertura,
+                                        Secuencia = SecuenciaRP++,
+                                        Observacion = item_p.Observacion
+                                    };
+                                    Context.aca_AnioLectivo_Rubro_Periodo.Add(Entity_AnioRubro_Periodo);
+                        
+                                }
+                            }
                         }
                     }
 
-                    //var lst_rubros_x_anio_periodos = odata_anio_rubro_periodo.getList(info.IdEmpresa, info.IdAnio, false);
-                    //if (lst_rubros_x_anio_periodos.Count > 0)
-                    //{
-                    //    foreach (var item in lst_rubros_x_anio_periodos)
-                    //    {
-                    //        aca_AnioLectivo_Rubro_Periodo Entity_AnioRubro_Periodo = new aca_AnioLectivo_Rubro_Periodo
-                    //        {
-                    //            IdEmpresa = item.IdEmpresa,
-                    //            IdAnio = info.IdAnioApertura,
-                    //            IdRubro = item.IdRubro,
-                    //            IdPeriodo = item.IdPeriodo,
-                    //            Secuencia = item.Secuencia,
-                    //            Observacion = item.Observacion
-                    //        };
-                    //        Context.aca_AnioLectivo_Rubro_Periodo.Add(Entity_AnioRubro_Periodo);
-                    //    }
-                    //}
 
+                    #region COLUMNAS DATATABLE PLANTILLA ANIO ANTERIOR Y APERTURA
+                    DataTable tabla_plantilla = new DataTable();
+
+                    // Variables para las columnas y las filas
+                    DataColumn column;
+                    DataRow row;
+
+                    // Se tiene que crear primero la columna asignandole Nombre y Tipo de datos 
+                    column = new DataColumn();
+                    column.DataType = System.Type.GetType("System.Int32");
+                    column.ColumnName = "IdAnioAnterior";
+                    tabla_plantilla.Columns.Add(column);
+
+                    column = new DataColumn();
+                    column.DataType = System.Type.GetType("System.Int32");
+                    column.ColumnName = "IdPlantillaAnterior";
+                    tabla_plantilla.Columns.Add(column);
+
+                    column = new DataColumn();
+                    column.DataType = System.Type.GetType("System.Int32");
+                    column.ColumnName = "IdAnioApertura";
+                    tabla_plantilla.Columns.Add(column);
+
+                    column = new DataColumn();
+                    column.DataType = System.Type.GetType("System.Int32");
+                    column.ColumnName = "IdPlantillaApertura";
+                    tabla_plantilla.Columns.Add(column);
+                    #endregion
 
                     // PLANTILLAS POR AÑO
                     var lst_plantillas_x_año = odata_plantilla.getList(info.IdEmpresa, info.IdAnio, false);
@@ -573,11 +732,21 @@ namespace Core.Data.Academico
                         var IdPlantilla = odata_plantilla.getId(info.IdEmpresa);
                         foreach (var item in lst_plantillas_x_año)
                         {
+                            #region COLUMNAS DATATABLE PLANTILLA ANIO ANTERIOR Y APERTURA
+                            row = tabla_plantilla.NewRow();
+                            row["IdAnioAnterior"] = item.IdAnio;
+                            row["IdPlantillaAnterior"] = item.IdPlantilla;
+                            row["IdAnioApertura"] = info.IdAnioApertura;
+                            row["IdPlantillaApertura"] = IdPlantilla;
+
+                            tabla_plantilla.Rows.Add(row);
+                            #endregion
+
                             aca_Plantilla Entity_Plantilla = new aca_Plantilla
                             {
                                 IdEmpresa = item.IdEmpresa,
                                 IdAnio = info.IdAnioApertura,
-                                IdPlantilla = IdPlantilla++,
+                                IdPlantilla = IdPlantilla,
                                 NomPlantilla = item.NomPlantilla,
                                 Valor = item.Valor,
                                 TipoDescuento = item.TipoDescuento,
@@ -589,6 +758,32 @@ namespace Core.Data.Academico
                                 AplicaParaTodo = item.AplicaParaTodo
                             };
                             Context.aca_Plantilla.Add(Entity_Plantilla);
+
+                            var lst_plantilla_x_anio_rubro = odata_plantilla_rubro.getList(info.IdEmpresa, info.IdAnio, item.IdPlantilla);
+                            if (lst_plantilla_x_anio_rubro.Count>0)
+                            {
+                                foreach (var item_r in lst_plantilla_x_anio_rubro)
+                                {
+                                    aca_Plantilla_Rubro Entity_PlantillaRubro = new aca_Plantilla_Rubro
+                                    {
+                                        IdEmpresa = item.IdEmpresa,
+                                        IdAnio = info.IdAnioApertura,
+                                        IdPlantilla = IdPlantilla,
+                                        IdRubro = item_r.IdRubro,
+                                        IdProducto = item_r.IdProducto,
+                                        Subtotal = item_r.Subtotal,
+                                        IdCod_Impuesto_Iva = item_r.IdCod_Impuesto_Iva,
+                                        Porcentaje = item_r.Porcentaje,
+                                        ValorIVA = item_r.ValorIVA,
+                                        Total = item_r.Total,
+                                        TipoDescuento_descuentoDet = item_r.TipoDescuento_descuentoDet,
+                                        Valor_descuentoDet = item_r.Valor_descuentoDet,
+                                        IdTipoNota_descuentoDet = item_r.IdTipoNota_descuentoDet
+                                    };
+                                    Context.aca_Plantilla_Rubro.Add(Entity_PlantillaRubro);
+                                }
+                            }
+                            IdPlantilla++;
                         }
                     }
 
@@ -740,52 +935,6 @@ namespace Core.Data.Academico
                                                         Context.aca_AnioLectivo_Curso_Documento.Add(Entity_CursoDocumento);
                                                     }
                                                 }
-
-                                                /*
-                                                var lst_plantillas_x_anio = odata_curso_plantilla.getList(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key));
-                                                if (lst_plantillas_x_anio.Count > 0)
-                                                {
-                                                    foreach (var item_p in lst_plantillas_x_anio)
-                                                    {
-                                                        //var inf_documento = odata_documento.getInfo(info.IdEmpresa, item_cd.IdDocumento);
-                                                        aca_AnioLectivo_Curso_Plantilla Entity_CursoPlantilla = new aca_AnioLectivo_Curso_Plantilla
-                                                        {
-                                                            IdEmpresa = item_p.IdEmpresa,
-                                                            IdAnio = info.IdAnioApertura,
-                                                            IdSede = item_p.IdSede,
-                                                            IdNivel = item_p.IdNivel,
-                                                            IdJornada = item_p.IdJornada,
-                                                            IdCurso = item_p.IdCurso,
-                                                            IdPlantilla = item_p.IdPlantilla,
-                                                            Observacion = item_p.Observacion
-                                                        };
-                                                        Context.aca_AnioLectivo_Curso_Plantilla.Add(Entity_CursoPlantilla);
-                                                    }
-                                                }
-
-
-                                                var lst_plantillas_x_anio_periodo = odata_curso_plantilla_parametrizacion.GetList_x_Curso(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key));
-                                                if (lst_plantillas_x_anio_periodo.Count > 0)
-                                                {
-                                                    foreach (var item_p in lst_plantillas_x_anio_periodo)
-                                                    {
-                                                        aca_AnioLectivo_Curso_Plantilla_Parametrizacion Entity_CursoPlantilla_Parametrizacion = new aca_AnioLectivo_Curso_Plantilla_Parametrizacion
-                                                        {
-                                                            IdEmpresa = item_p.IdEmpresa,
-                                                            IdAnio = info.IdAnioApertura,
-                                                            IdSede = item_p.IdSede,
-                                                            IdNivel = item_p.IdNivel,
-                                                            IdJornada = item_p.IdJornada,
-                                                            IdCurso = item_p.IdCurso,
-                                                            IdPlantilla = item_p.IdPlantilla,
-                                                            IdRubro = item_p.IdRubro,
-                                                            IdCtaCbleDebe = item_p.IdCtaCbleDebe,
-                                                            IdCtaCbleHaber = item_p.IdCtaCbleHaber
-                                                        };
-                                                        Context.aca_AnioLectivo_Curso_Plantilla_Parametrizacion.Add(Entity_CursoPlantilla_Parametrizacion);
-                                                    }
-                                                }
-                                                */
                                             }
                                             
                                             Context.SaveChanges();
@@ -821,6 +970,62 @@ namespace Core.Data.Academico
                                                         }
                                                     }
                                                 }
+
+                                                var lst_plantillas_x_curso = odata_curso_plantilla.getList(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key));
+                                                if (lst_plantillas_x_curso.Count > 0)
+                                                {
+                                                    var IdPlantillaApertura = 0;
+                                                    foreach (var item_p in lst_plantillas_x_curso)
+                                                    {
+                                                        foreach (DataRow fila in tabla_plantilla.Rows)
+                                                        {
+                                                            if (Convert.ToInt32(fila["IdAnioAnterior"]) == item_p.IdAnio && Convert.ToInt32(fila["IdPlantillaAnterior"]) == item_p.IdPlantilla)
+                                                            {
+                                                                IdPlantillaApertura = Convert.ToInt32(fila["IdPlantillaApertura"]);
+                                                                break;
+                                                            }
+                                                        }
+
+                                                        aca_AnioLectivo_Curso_Plantilla Entity_CursoPlantilla = new aca_AnioLectivo_Curso_Plantilla
+                                                        {
+                                                            IdEmpresa = item_p.IdEmpresa,
+                                                            IdAnio = info.IdAnioApertura,
+                                                            IdSede = item_p.IdSede,
+                                                            IdNivel = item_p.IdNivel,
+                                                            IdJornada = item_p.IdJornada,
+                                                            IdCurso = item_p.IdCurso,
+                                                            IdPlantilla = IdPlantillaApertura,
+                                                            Observacion = item_p.Observacion
+                                                        };
+                                                        Context.aca_AnioLectivo_Curso_Plantilla.Add(Entity_CursoPlantilla);
+
+
+                                                        // PARAMETRIZACION //
+                                                        var lst_plantillas_x_anio_curso = odata_curso_plantilla_parametrizacion.GetList_x_Curso_x_Plantilla(info.IdEmpresa, info.IdSede, info.IdAnio, Convert.ToInt32(item_niv.Key), Convert.ToInt32(item_jor.Key), Convert.ToInt32(item_cur.Key), item_p.IdPlantilla);
+                                                        if (lst_plantillas_x_anio_curso.Count > 0)
+                                                        {
+                                                            foreach (var item_param in lst_plantillas_x_anio_curso)
+                                                            {
+                                                                aca_AnioLectivo_Curso_Plantilla_Parametrizacion Entity_CursoPlantilla_Parametrizacion = new aca_AnioLectivo_Curso_Plantilla_Parametrizacion
+                                                                {
+                                                                    IdEmpresa = item_param.IdEmpresa,
+                                                                    IdAnio = info.IdAnioApertura,
+                                                                    IdSede = item_param.IdSede,
+                                                                    IdNivel = item_param.IdNivel,
+                                                                    IdJornada = item_param.IdJornada,
+                                                                    IdCurso = item_param.IdCurso,
+                                                                    IdPlantilla = IdPlantillaApertura,
+                                                                    IdRubro = item_param.IdRubro,
+                                                                    IdCtaCbleDebe = item_param.IdCtaCbleDebe,
+                                                                    IdCtaCbleHaber = item_param.IdCtaCbleHaber
+                                                                };
+                                                                Context.aca_AnioLectivo_Curso_Plantilla_Parametrizacion.Add(Entity_CursoPlantilla_Parametrizacion);
+                                                            }
+                                                        }
+
+                                                    }
+                                                }
+                                                
                                                 Context.SaveChanges();
                                             } //lista de curso
                                         }

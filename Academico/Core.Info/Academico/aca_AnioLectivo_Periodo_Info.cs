@@ -37,6 +37,7 @@ namespace Core.Info.Academico
         public int NumPeriodos { get; set; }
         public string NomPeriodo { get; set; }
         public List<aca_Matricula_Rubro_Info> lst_det_fact_masiva { get; set; }
+        public int Orden { get; set; }
         #endregion
     }
 }

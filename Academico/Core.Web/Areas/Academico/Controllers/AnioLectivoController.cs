@@ -80,9 +80,9 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
             }
 
-            if (info.lst_periodos.Count ==0)
+            if (info.lst_periodos.Count ==0 || info.lst_periodos.Count > 10)
             {
-                msg = "El año lectivo debe tener al menos 1 periodo";
+                msg = "El año lectivo debe tener 10 periodos";
                 return false;
             }
 
