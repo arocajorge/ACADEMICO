@@ -127,7 +127,7 @@ namespace Core.Data.Academico
                     connection.Open();
                     #region Query
                     string query = "SELECT * FROM aca_AnioLectivo a "
-                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString();
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " q.BloquearMatricula==0 ";
                     if (MostrarAnulados == false)
                     {
                         query += " and a.Estado = 1";
@@ -201,7 +201,7 @@ namespace Core.Data.Academico
                     connection.Open();
                     #region Query
                     string query = "SELECT * FROM aca_AnioLectivo a "
-                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString();
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.Estado == 1 and a.BloquearMatricula == 0";
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
