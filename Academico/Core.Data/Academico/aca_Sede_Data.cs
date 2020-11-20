@@ -3,6 +3,7 @@ using Core.Info.Academico;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,43 @@ namespace Core.Data.Academico
             {
                 List<aca_Sede_Info> Lista = new List<aca_Sede_Info>();
 
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+
+                    #region Query
+                    string query = "SELECT * FROM aca_Sede s "
+                    + " WHERE s.IdEmpresa = " + IdEmpresa.ToString();
+                    if (MostrarAnulados==false)
+                    {
+                        query += " and s.Estado = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Sede_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdSucursal = Convert.ToInt32(reader["IdSucursal"]),
+                            NomSede = reader["NomSede"].ToString(),
+                            Direccion = reader["Direccion"].ToString(),
+                            NombreRector = reader["NombreRector"].ToString(),
+                            NombreSecretaria = reader["NombreSecretaria"].ToString(),
+                            CelularRector = reader["CelularRector"].ToString(),
+                            TelefonoRector = reader["TelefonoRector"].ToString(),
+                            CorreoRector = reader["CorreoRector"].ToString(),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
+                }
+
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_Sede.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
@@ -38,7 +76,7 @@ namespace Core.Data.Academico
                             Estado = q.Estado
                         });
                     });
-                }
+                }*/
 
                 return Lista;
             }

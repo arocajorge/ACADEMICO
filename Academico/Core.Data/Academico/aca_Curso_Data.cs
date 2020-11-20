@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,38 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_Curso_Info> Lista = new List<aca_Curso_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_Curso c "
+                    + " WHERE c.IdEmpresa = " + IdEmpresa.ToString();
+                    if (MostrarAnulados == false)
+                    {
+                        query += " and c.Estado = 1";
+                    }
+                    query += " order by c.OrdenCurso";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Curso_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdCursoAPromover = string.IsNullOrEmpty(reader["IdCursoAPromover"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoAPromover"]),
+                            NomCurso = reader["NomCurso"].ToString(),
+                            OrdenCurso = Convert.ToInt32(reader["OrdenCurso"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q => q.OrdenCurso).ToList();
@@ -34,7 +66,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)

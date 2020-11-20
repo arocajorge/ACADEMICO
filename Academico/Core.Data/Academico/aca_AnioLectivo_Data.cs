@@ -5,6 +5,7 @@ using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,7 +47,43 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AnioLectivo_Info> Lista = new List<aca_AnioLectivo_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    #region Query
+                    string query = "SELECT * FROM aca_AnioLectivo a "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString();
+                    if (MostrarAnulados == false)
+                    {
+                        query += " and a.Estado = 1";
+                    }
+                    query += " order by a.Descripcion";
+                    #endregion
 
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
+                            EnCurso = Convert.ToBoolean(reader["EnCurso"]),
+                            BloquearMatricula = Convert.ToBoolean(reader["BloquearMatricula"]),
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdAnioLectivoAnterior = string.IsNullOrEmpty(reader["IdAnioLectivoAnterior"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdAnioLectivoAnterior"]),
+                            PromedioMinimoParcial = string.IsNullOrEmpty(reader["PromedioMinimoParcial"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoParcial"]),
+                            PromedioMinimoPromocion = string.IsNullOrEmpty(reader["PromedioMinimoPromocion"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoPromocion"]),
+                            IdCursoBachiller = string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"])
+                        });
+                    }
+                reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q=>q.Descripcion).ToList();
@@ -70,7 +107,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -85,7 +122,43 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AnioLectivo_Info> Lista = new List<aca_AnioLectivo_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    #region Query
+                    string query = "SELECT * FROM aca_AnioLectivo a "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString();
+                    if (MostrarAnulados == false)
+                    {
+                        query += " and a.Estado = 1";
+                    }
+                    query += " order by a.Descripcion";
+                    #endregion
 
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
+                            EnCurso = Convert.ToBoolean(reader["EnCurso"]),
+                            BloquearMatricula = Convert.ToBoolean(reader["BloquearMatricula"]),
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdAnioLectivoAnterior = string.IsNullOrEmpty(reader["IdAnioLectivoAnterior"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdAnioLectivoAnterior"]),
+                            PromedioMinimoParcial = string.IsNullOrEmpty(reader["PromedioMinimoParcial"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoParcial"]),
+                            PromedioMinimoPromocion = string.IsNullOrEmpty(reader["PromedioMinimoPromocion"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoPromocion"]),
+                            IdCursoBachiller = string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"]),
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.BloquearMatricula==false && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q => q.Descripcion).ToList();
@@ -109,7 +182,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -123,7 +196,38 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AnioLectivo_Info> Lista = new List<aca_AnioLectivo_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    #region Query
+                    string query = "SELECT * FROM aca_AnioLectivo a "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString();
+                    #endregion
 
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
+                            EnCurso = Convert.ToBoolean(reader["EnCurso"]),
+                            BloquearMatricula = Convert.ToBoolean(reader["BloquearMatricula"]),
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdAnioLectivoAnterior = string.IsNullOrEmpty(reader["IdAnioLectivoAnterior"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdAnioLectivoAnterior"]),
+                            PromedioMinimoParcial = string.IsNullOrEmpty(reader["PromedioMinimoParcial"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoParcial"]),
+                            PromedioMinimoPromocion = string.IsNullOrEmpty(reader["PromedioMinimoPromocion"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoPromocion"]),
+                            IdCursoBachiller = string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"]),
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     Lista = Context.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true && q.BloquearMatricula == false).Select(q => new aca_AnioLectivo_Info
@@ -141,7 +245,7 @@ namespace Core.Data.Academico
                         Estado = q.Estado
                     }).ToList();
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -155,8 +259,40 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivo_Info info;
+                aca_AnioLectivo_Info info = new aca_AnioLectivo_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo a "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.IdAnio = "+ IdAnio.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while(reader.Read())
+                    {
+                        info = new aca_AnioLectivo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
+                            EnCurso = Convert.ToBoolean(reader["EnCurso"]),
+                            BloquearMatricula = Convert.ToBoolean(reader["BloquearMatricula"]),
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdAnioLectivoAnterior = string.IsNullOrEmpty(reader["IdAnioLectivoAnterior"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdAnioLectivoAnterior"]),
+                            PromedioMinimoParcial = string.IsNullOrEmpty(reader["PromedioMinimoParcial"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoParcial"]),
+                            PromedioMinimoPromocion = string.IsNullOrEmpty(reader["PromedioMinimoPromocion"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoPromocion"]),
+                            IdCursoBachiller = string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).FirstOrDefault();
@@ -180,7 +316,7 @@ namespace Core.Data.Academico
                         Estado = Entity.Estado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
@@ -468,9 +604,7 @@ namespace Core.Data.Academico
                             IdEmpresa = info.IdEmpresa,
                             IdSede = info.IdSede,
                             IdAnio = info.IdAnioApertura,
-                            IdCatalogoParcial = item.IdCatalogo,
-                            IdUsuarioCreacion = info.IdUsuarioCreacion,
-                            FechaCreacion = DateTime.Now
+                            IdCatalogoParcial = item.IdCatalogo
                         });
                     }
 
@@ -481,9 +615,7 @@ namespace Core.Data.Academico
                             IdEmpresa = info.IdEmpresa,
                             IdSede = info.IdSede,
                             IdAnio = info.IdAnioApertura,
-                            IdCatalogoParcial = item.IdCatalogo,
-                            IdUsuarioCreacion = info.IdUsuarioCreacion,
-                            FechaCreacion = DateTime.Now
+                            IdCatalogoParcial = item.IdCatalogo
                         });
                     }
                     foreach (var item in lst_examenes)
@@ -496,12 +628,28 @@ namespace Core.Data.Academico
                             IdAnio = info.IdAnioApertura,
                             IdCatalogoParcial = item.IdCatalogo,
                             EsExamen = true,
-                            ValidaEstadoAlumno = ValidaEstadoAlumno,
-                            IdUsuarioCreacion = info.IdUsuarioCreacion,
-                            FechaCreacion = DateTime.Now
+                            ValidaEstadoAlumno = ValidaEstadoAlumno
                         });
                     }
 
+                    if (lst_calificaciones.Count>0)
+                    {
+                        foreach (var item in lst_calificaciones)
+                        {
+                            aca_AnioLectivoParcial Entity_AnioLectivoParcial = new aca_AnioLectivoParcial
+                            {
+                                IdEmpresa = item.IdEmpresa,
+                                IdSede = item.IdSede,
+                                IdAnio = item.IdAnio,
+                                IdCatalogoParcial = item.IdCatalogoParcial,
+                                EsExamen = item.EsExamen,
+                                ValidaEstadoAlumno = item.ValidaEstadoAlumno,
+                                IdUsuarioCreacion = info.IdUsuarioCreacion,
+                                FechaCreacion = DateTime.Now
+                            };
+                            Context.aca_AnioLectivoParcial.Add(Entity_AnioLectivoParcial);
+                        }
+                    }
 
                     var lst_equivalencia_promedio_x_anio = odata_equivalencia_promedio.getList(info.IdEmpresa,info.IdAnio,false);
                     if (lst_equivalencia_promedio_x_anio.Count > 0)

@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,37 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_NivelAcademico_Info> Lista = new List<aca_NivelAcademico_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_NivelAcademico n "
+                    + " WHERE n.IdEmpresa = " + IdEmpresa.ToString();
+                    if (MostrarAnulados == false)
+                    {
+                        query += " and n.Estado = 1";
+                    }
+                    query += " order by n.Orden";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_NivelAcademico_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            NomNivel = reader["NomNivel"].ToString(),
+                            Orden = Convert.ToInt32(reader["Orden"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q=>q.Orden).ToList();
@@ -32,7 +63,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)

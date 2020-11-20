@@ -3,6 +3,7 @@ using Core.Info.Academico;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -98,7 +99,38 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_Paralelo_Info> Lista = new List<aca_Paralelo_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_Paralelo p "
+                    + " WHERE p.IdEmpresa = " + IdEmpresa.ToString();
+                    if (MostrarAnulados == false)
+                    {
+                        query += " and c.Estado = 1";
+                    }
+                    query += " order by p.OrdenParalelo";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Paralelo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            CodigoParalelo = string.IsNullOrEmpty(reader["CodigoParalelo"].ToString()) ? null : reader["CodigoParalelo"].ToString(),
+                            NomParalelo = reader["NomParalelo"].ToString(),
+                            OrdenParalelo = Convert.ToInt32(reader["OrdenParalelo"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q => q.OrdenParalelo).ToList();
@@ -116,7 +148,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
