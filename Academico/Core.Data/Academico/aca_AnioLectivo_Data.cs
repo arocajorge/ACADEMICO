@@ -127,7 +127,7 @@ namespace Core.Data.Academico
                     connection.Open();
                     #region Query
                     string query = "SELECT * FROM aca_AnioLectivo a "
-                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " q.BloquearMatricula=0 ";
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.BloquearMatricula=0 ";
                     if (MostrarAnulados == false)
                     {
                         query += " and a.Estado = 1";
@@ -331,8 +331,41 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivo_Info info;
+                aca_AnioLectivo_Info info = new aca_AnioLectivo_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo a "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and YEAR(a.FechaDesde) = " + AnioIni.ToString() + " and YEAR(a.FechaHasta)= "+ AnioFin.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
+                            EnCurso = Convert.ToBoolean(reader["EnCurso"]),
+                            BloquearMatricula = Convert.ToBoolean(reader["BloquearMatricula"]),
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdAnioLectivoAnterior = string.IsNullOrEmpty(reader["IdAnioLectivoAnterior"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdAnioLectivoAnterior"]),
+                            PromedioMinimoParcial = string.IsNullOrEmpty(reader["PromedioMinimoParcial"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoParcial"]),
+                            PromedioMinimoPromocion = string.IsNullOrEmpty(reader["PromedioMinimoPromocion"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoPromocion"]),
+                            CalificacionMaxima = string.IsNullOrEmpty(reader["CalificacionMaxima"].ToString()) ? (double?)null : Convert.ToInt32(reader["CalificacionMaxima"]),
+                            IdCursoBachiller = string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.FechaDesde.Year == AnioIni && q.FechaHasta.Year == AnioFin).FirstOrDefault();
@@ -356,7 +389,7 @@ namespace Core.Data.Academico
                         Estado = Entity.Estado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
@@ -370,8 +403,41 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivo_Info info;
+                aca_AnioLectivo_Info info = new aca_AnioLectivo_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo a "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and YEAR(a.FechaDesde) = " + Anio.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
+                            EnCurso = Convert.ToBoolean(reader["EnCurso"]),
+                            BloquearMatricula = Convert.ToBoolean(reader["BloquearMatricula"]),
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdAnioLectivoAnterior = string.IsNullOrEmpty(reader["IdAnioLectivoAnterior"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdAnioLectivoAnterior"]),
+                            PromedioMinimoParcial = string.IsNullOrEmpty(reader["PromedioMinimoParcial"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoParcial"]),
+                            PromedioMinimoPromocion = string.IsNullOrEmpty(reader["PromedioMinimoPromocion"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoPromocion"]),
+                            CalificacionMaxima = string.IsNullOrEmpty(reader["CalificacionMaxima"].ToString()) ? (double?)null : Convert.ToInt32(reader["CalificacionMaxima"]),
+                            IdCursoBachiller = string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.FechaDesde.Year == Anio).FirstOrDefault();
@@ -394,7 +460,7 @@ namespace Core.Data.Academico
                         CalificacionMaxima = Entity.CalificacionMaxima,
                         Estado = Entity.Estado
                     };
-                }
+                }*/
 
                 return info;
             }
@@ -409,8 +475,50 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivo_Info info;
+                aca_AnioLectivo_Info info = new aca_AnioLectivo_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo a "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.Estado = 1 and a.EnCurso=1";
+                    if (IdAnio==0)
+                    {
+                        //command.CommandText += " and a.IdAnio = " + IdAnio.ToString();
+                    }
+                    else
+                    {
+                        command.CommandText += " and a.IdAnio != " + IdAnio.ToString();
+                    }
+                    
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
+                            EnCurso = Convert.ToBoolean(reader["EnCurso"]),
+                            BloquearMatricula = Convert.ToBoolean(reader["BloquearMatricula"]),
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdAnioLectivoAnterior = string.IsNullOrEmpty(reader["IdAnioLectivoAnterior"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdAnioLectivoAnterior"]),
+                            PromedioMinimoParcial = string.IsNullOrEmpty(reader["PromedioMinimoParcial"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoParcial"]),
+                            PromedioMinimoPromocion = string.IsNullOrEmpty(reader["PromedioMinimoPromocion"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoPromocion"]),
+                            CalificacionMaxima = string.IsNullOrEmpty(reader["CalificacionMaxima"].ToString()) ? (double?)null : Convert.ToInt32(reader["CalificacionMaxima"]),
+                            IdCursoBachiller = string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado==true && q.EnCurso==true && (IdAnio==0 ? q.IdAnio == q.IdAnio : q.IdAnio!= IdAnio)).FirstOrDefault();
@@ -433,7 +541,7 @@ namespace Core.Data.Academico
                         Estado = Entity.Estado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
