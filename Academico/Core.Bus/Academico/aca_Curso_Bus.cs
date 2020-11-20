@@ -117,7 +117,7 @@ namespace Core.Bus.Academico
                                     info_jornada_curso.OrdenCurso = info.OrdenCurso;
                                 }
 
-                                return (odata_jornada_curso.modificarDB(lst_jornada_curso));
+                                odata_jornada_curso.modificarDB(lst_jornada_curso);
                             }
                         }
                     }

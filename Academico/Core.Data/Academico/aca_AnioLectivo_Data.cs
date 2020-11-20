@@ -127,7 +127,7 @@ namespace Core.Data.Academico
                     connection.Open();
                     #region Query
                     string query = "SELECT * FROM aca_AnioLectivo a "
-                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " q.BloquearMatricula==0 ";
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " q.BloquearMatricula=0 ";
                     if (MostrarAnulados == false)
                     {
                         query += " and a.Estado = 1";
@@ -201,7 +201,7 @@ namespace Core.Data.Academico
                     connection.Open();
                     #region Query
                     string query = "SELECT * FROM aca_AnioLectivo a "
-                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.Estado == 1 and a.BloquearMatricula == 0";
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.Estado = 1 and a.BloquearMatricula = 0";
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
@@ -288,6 +288,7 @@ namespace Core.Data.Academico
                             IdAnioLectivoAnterior = string.IsNullOrEmpty(reader["IdAnioLectivoAnterior"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdAnioLectivoAnterior"]),
                             PromedioMinimoParcial = string.IsNullOrEmpty(reader["PromedioMinimoParcial"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoParcial"]),
                             PromedioMinimoPromocion = string.IsNullOrEmpty(reader["PromedioMinimoPromocion"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoPromocion"]),
+                            CalificacionMaxima = string.IsNullOrEmpty(reader["CalificacionMaxima"].ToString()) ? (double?)null : Convert.ToInt32(reader["CalificacionMaxima"]),
                             IdCursoBachiller = string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"])
                         };
                     }

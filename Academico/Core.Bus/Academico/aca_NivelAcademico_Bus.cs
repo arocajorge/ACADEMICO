@@ -95,7 +95,7 @@ namespace Core.Bus.Academico
                                     info_sede_nivel.OrdenNivel = info.Orden;
                                 }
 
-                                return (odata_sede_nivel.modificarDB(lst_sede_nivel));
+                                odata_sede_nivel.modificarDB(lst_sede_nivel);
                             }
                         }
                     }

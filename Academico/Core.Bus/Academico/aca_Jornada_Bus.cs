@@ -104,7 +104,7 @@ namespace Core.Bus.Academico
                                     info_nivel_jornada.NomJornada = info.NomJornada;
                                 }
 
-                                return (odata_nivel_jornada.modificarDB(lst_nivel_jornada));
+                                odata_nivel_jornada.modificarDB(lst_nivel_jornada);
                             }
                         }
                     }

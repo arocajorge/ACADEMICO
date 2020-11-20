@@ -93,7 +93,7 @@ namespace Core.Bus.Academico
                                     info_curso_documento.OrdenDocumento = info.OrdenDocumento;
                                 }
 
-                                return (odata_curso_documento.modificarDB(lst_curso_documento));
+                                odata_curso_documento.modificarDB(lst_curso_documento);
                             }
                         }
                     }

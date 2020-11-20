@@ -132,7 +132,7 @@ namespace Core.Bus.Academico
                                     info_curso_paralelo.OrdenParalelo = info.OrdenParalelo;
                                 }
 
-                                return (odata_curso_paralelo.modificarDB(lst_curso_paralelo));
+                                odata_curso_paralelo.modificarDB(lst_curso_paralelo);
                             }
                         }
                     }
