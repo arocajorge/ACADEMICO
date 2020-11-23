@@ -332,7 +332,7 @@
             // Rector
             // 
             this.Rector.Borders = DevExpress.XtraPrinting.BorderSide.Top;
-            this.Rector.Font = new System.Drawing.Font("Verdana", 10F);
+            this.Rector.Font = new System.Drawing.Font("Verdana", 9F);
             this.Rector.Multiline = true;
             this.Rector.Name = "Rector";
             this.Rector.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -341,7 +341,7 @@
             this.Rector.StylePriority.UsePadding = false;
             this.Rector.StylePriority.UseTextAlignment = false;
             this.Rector.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.Rector.Weight = 5.3191598777091436D;
+            this.Rector.Weight = 5.5319262666191067D;
             // 
             // xrTableCell16
             // 
@@ -353,12 +353,12 @@
             this.xrTableCell16.StylePriority.UsePadding = false;
             this.xrTableCell16.StylePriority.UseTextAlignment = false;
             this.xrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell16.Weight = 4.8297969562175531D;
+            this.xrTableCell16.Weight = 4.4042641783976268D;
             // 
             // Secretaria
             // 
             this.Secretaria.Borders = DevExpress.XtraPrinting.BorderSide.Top;
-            this.Secretaria.Font = new System.Drawing.Font("Verdana", 10F);
+            this.Secretaria.Font = new System.Drawing.Font("Verdana", 9F);
             this.Secretaria.Multiline = true;
             this.Secretaria.Name = "Secretaria";
             this.Secretaria.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -367,7 +367,7 @@
             this.Secretaria.StylePriority.UsePadding = false;
             this.Secretaria.StylePriority.UseTextAlignment = false;
             this.Secretaria.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.Secretaria.Weight = 5.3191557439587021D;
+            this.Secretaria.Weight = 5.5319221328686652D;
             // 
             // xrTableRow46
             // 
@@ -382,7 +382,7 @@
             // 
             // xrTableCell143
             // 
-            this.xrTableCell143.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell143.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
             this.xrTableCell143.Multiline = true;
             this.xrTableCell143.Name = "xrTableCell143";
             this.xrTableCell143.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -391,7 +391,7 @@
             this.xrTableCell143.StylePriority.UseTextAlignment = false;
             this.xrTableCell143.Text = "RECTOR";
             this.xrTableCell143.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell143.Weight = 8.2478082936663331D;
+            this.xrTableCell143.Weight = 8.57772063307866D;
             // 
             // xrTableCell3
             // 
@@ -404,11 +404,11 @@
             this.xrTableCell3.StylePriority.UseTextAlignment = false;
             this.xrTableCell3.Text = "\r\n";
             this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell3.Weight = 7.4890099572149831D;
+            this.xrTableCell3.Weight = 6.8291852783903293D;
             // 
             // xrTableCell2
             // 
-            this.xrTableCell2.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -417,7 +417,7 @@
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "SECRETARIA GENERAL";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell2.Weight = 8.2478027835195054D;
+            this.xrTableCell2.Weight = 8.5777151229318331D;
             // 
             // p_IdEmpresa
             // 
@@ -518,7 +518,7 @@
             this.p_IdParalelo,
             this.p_IdAlumno,
             this.p_MostrarRetirado});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_017_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();

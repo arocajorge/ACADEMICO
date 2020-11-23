@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,40 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AlumnoDocumento_Info> Lista = new List<aca_AlumnoDocumento_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT ad.IdEmpresa, ad.IdAlumno, ad.IdDocumento, d.NomDocumento, ad.EnArchivo, d.OrdenDocumento, ad.Secuencia "
+                    + " FROM dbo.aca_AlumnoDocumento AS ad INNER JOIN "
+                    + " dbo.aca_Documento AS d ON ad.IdEmpresa = d.IdEmpresa AND ad.IdDocumento = d.IdDocumento "
+                    + " WHERE ad.IdEmpresa = " + IdEmpresa.ToString() + " and ad.IdAlumno = " + IdAlumno.ToString();
+                    if (MostrarEnArchivo == true)
+                    {
+                        query += " and ad.EnArchivo = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AlumnoDocumento_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdDocumento = Convert.ToInt32(reader["IdDocumento"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            EnArchivo = Convert.ToBoolean(reader["EnArchivo"]),
+                            NomDocumento = reader["NomDocumento"].ToString()
+
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     Lista = Context.vwaca_AlumnoDocumento.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.EnArchivo == (MostrarEnArchivo ? true : q.EnArchivo)).Select(q => new aca_AlumnoDocumento_Info
@@ -28,7 +62,7 @@ namespace Core.Data.Academico
                         NomDocumento = q.NomDocumento
                     }).ToList();
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -42,8 +76,36 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AlumnoDocumento_Info info;
+                aca_AlumnoDocumento_Info info = new aca_AlumnoDocumento_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT ad.IdEmpresa, ad.IdAlumno, ad.IdDocumento, d.NomDocumento, ad.EnArchivo, d.OrdenDocumento, ad.Secuencia "
+                    + " FROM dbo.aca_AlumnoDocumento AS ad INNER JOIN "
+                    + " dbo.aca_Documento AS d ON ad.IdEmpresa = d.IdEmpresa AND ad.IdDocumento = d.IdDocumento "
+                    + " WHERE ad.IdEmpresa = " + IdEmpresa.ToString() + " and ad.IdAlumno = " + IdAlumno.ToString() + " and ad.IdDocumento = " + IdDocumento.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AlumnoDocumento_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdDocumento = Convert.ToInt32(reader["IdDocumento"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            EnArchivo = Convert.ToBoolean(reader["EnArchivo"]),
+                            NomDocumento = reader["Secuencia"].ToString()
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     var Entity = Context.vwaca_AlumnoDocumento.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdDocumento == IdDocumento).FirstOrDefault();
@@ -60,7 +122,7 @@ namespace Core.Data.Academico
                         NomDocumento = Entity.NomDocumento
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)

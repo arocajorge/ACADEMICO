@@ -55,7 +55,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                
                 return Lista;
             }
             catch (Exception)
@@ -189,8 +189,34 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_Paralelo_Info info;
+                aca_Paralelo_Info info = new aca_Paralelo_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_Paralelo p "
+                    + " WHERE p.IdEmpresa = " + IdEmpresa.ToString() + " and p.IdParalelo = "+ IdParalelo.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_Paralelo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            CodigoParalelo = string.IsNullOrEmpty(reader["CodigoParalelo"].ToString()) ? null : reader["CodigoParalelo"].ToString(),
+                            NomParalelo = reader["NomParalelo"].ToString(),
+                            OrdenParalelo = Convert.ToInt32(reader["OrdenParalelo"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdParalelo == IdParalelo).FirstOrDefault();
@@ -207,7 +233,7 @@ namespace Core.Data.Academico
                         Estado = Entity.Estado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)

@@ -137,8 +137,33 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_Jornada_Info info;
+                aca_Jornada_Info info = new aca_Jornada_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT* FROM aca_Jornada j "
+                   + " WHERE j.IdEmpresa = " + IdEmpresa.ToString() + " and j.IdJornada = " + IdJornada.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_Jornada_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            NomJornada = reader["NomJornada"].ToString(),
+                            OrdenJornada = Convert.ToInt32(reader["OrdenJornada"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.IdJornada == IdJornada).FirstOrDefault();
@@ -154,7 +179,7 @@ namespace Core.Data.Academico
                         Estado = Entity.Estado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)

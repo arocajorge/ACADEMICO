@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,46 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_Materia_Info> Lista = new List<aca_Materia_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT m.IdEmpresa, m.IdMateria, m.IdMateriaArea, m.IdMateriaGrupo, m.OrdenMateria, ma.OrdenMateriaArea, mg.OrdenMateriaGrupo, m.NomMateria, ma.NomMateriaArea, mg.NomMateriaGrupo, mg.PromediarGrupo, m.EsObligatorio,  "
+                    + " m.Estado, m.IdCatalogoTipoCalificacion, c.NomCatalogo "
+                    + " FROM dbo.aca_Materia AS m LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c ON m.IdCatalogoTipoCalificacion = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_MateriaArea AS ma ON m.IdEmpresa = ma.IdEmpresa AND m.IdMateriaArea = ma.IdMateriaArea LEFT OUTER JOIN "
+                    + " dbo.aca_MateriaGrupo AS mg ON m.IdEmpresa = mg.IdEmpresa AND m.IdMateriaGrupo = mg.IdMateriaGrupo "
+                    + " WHERE m.IdEmpresa = " + IdEmpresa.ToString();
+                    if (MostrarAnulados == false)
+                    {
+                        query += " and m.Estado = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Materia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMateria = Convert.ToInt32(reader["IdMateria"]),
+                            NomMateria = reader["NomMateria"].ToString(),
+                            NomMateriaGrupo = reader["NomMateriaGrupo"].ToString(),
+                            OrdenMateria = Convert.ToInt32(reader["OrdenMateria"]),
+                            EsObligatorio = Convert.ToBoolean(reader["EsObligatorio"]),
+                            IdMateriaGrupo = string.IsNullOrEmpty(reader["IdMateriaGrupo"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdMateriaGrupo"]),
+                            IdMateriaArea = string.IsNullOrEmpty(reader["IdMateriaArea"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdMateriaArea"]),
+                            IdCatalogoTipoCalificacion = Convert.ToInt32(reader["IdCatalogoTipoCalificacion"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
@@ -36,7 +76,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -78,8 +118,47 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_Materia_Info info;
+                aca_Materia_Info info = new aca_Materia_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT m.IdEmpresa, m.IdMateria, m.IdMateriaArea, m.IdMateriaGrupo, m.OrdenMateria, ma.OrdenMateriaArea, mg.OrdenMateriaGrupo, m.NomMateria, ma.NomMateriaArea, mg.NomMateriaGrupo, mg.PromediarGrupo, m.EsObligatorio,  "
+                    + " m.Estado, m.IdCatalogoTipoCalificacion, c.NomCatalogo "
+                    + " FROM dbo.aca_Materia AS m LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c ON m.IdCatalogoTipoCalificacion = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_MateriaArea AS ma ON m.IdEmpresa = ma.IdEmpresa AND m.IdMateriaArea = ma.IdMateriaArea LEFT OUTER JOIN "
+                    + " dbo.aca_MateriaGrupo AS mg ON m.IdEmpresa = mg.IdEmpresa AND m.IdMateriaGrupo = mg.IdMateriaGrupo "
+                    + " WHERE m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdMateria = "+ IdMateria.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_Materia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMateria = Convert.ToInt32(reader["IdMateria"]),
+                            IdMateriaGrupo = string.IsNullOrEmpty(reader["IdMateriaGrupo"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdMateriaGrupo"]),
+                            IdMateriaArea = string.IsNullOrEmpty(reader["IdMateriaArea"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdMateriaArea"]),
+                            NomMateria = reader["NomMateria"].ToString(),
+                            NomMateriaGrupo = string.IsNullOrEmpty(reader["NomMateriaGrupo"].ToString()) ? null : reader["NomMateriaGrupo"].ToString(),
+                            NomMateriaArea = string.IsNullOrEmpty(reader["NomMateriaArea"].ToString()) ? null : reader["NomMateriaArea"].ToString(),
+                            OrdenMateria = Convert.ToInt32(reader["OrdenMateria"]),
+                            OrdenMateriaGrupo = string.IsNullOrEmpty(reader["OrdenMateriaGrupo"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenMateriaGrupo"]),
+                            OrdenMateriaArea = string.IsNullOrEmpty(reader["OrdenMateriaArea"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenMateriaArea"]),
+                            PromediarGrupo = string.IsNullOrEmpty(reader["PromediarGrupo"].ToString()) ? false : Convert.ToBoolean(reader["PromediarGrupo"]),
+                            EsObligatorio = Convert.ToBoolean(reader["EsObligatorio"]),
+                            IdCatalogoTipoCalificacion = string.IsNullOrEmpty(reader["IdCatalogoTipoCalificacion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCatalogoTipoCalificacion"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.vwaca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdMateria == IdMateria).FirstOrDefault();
@@ -104,7 +183,7 @@ namespace Core.Data.Academico
                         Estado = Entity.Estado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)

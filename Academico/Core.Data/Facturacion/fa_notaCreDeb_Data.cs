@@ -1103,6 +1103,7 @@ namespace Core.Data.Facturacion
                         cr_Valor = Convert.ToDouble(infoNC.info_resumen.Total),
                         IdCobro_tipo = infoNC.IdCobro_tipo
                     },
+                    IdUsuario = infoNC.IdUsuario,
                     lst_ct_cbtecble_det = infoCT.lst_ct_cbtecble_det
                 };
 

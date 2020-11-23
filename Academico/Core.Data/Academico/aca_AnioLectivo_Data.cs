@@ -713,7 +713,9 @@ namespace Core.Data.Academico
                             IdEmpresa = info.IdEmpresa,
                             IdSede = info.IdSede,
                             IdAnio = info.IdAnioApertura,
-                            IdCatalogoParcial = item.IdCatalogo
+                            IdCatalogoParcial = item.IdCatalogo,
+                            EsExamen = false,
+                            ValidaEstadoAlumno = false
                         });
                     }
 
@@ -724,7 +726,9 @@ namespace Core.Data.Academico
                             IdEmpresa = info.IdEmpresa,
                             IdSede = info.IdSede,
                             IdAnio = info.IdAnioApertura,
-                            IdCatalogoParcial = item.IdCatalogo
+                            IdCatalogoParcial = item.IdCatalogo,
+                            EsExamen = false,
+                            ValidaEstadoAlumno = false
                         });
                     }
                     foreach (var item in lst_examenes)
@@ -797,7 +801,7 @@ namespace Core.Data.Academico
                                 DescripcionCorta = item.DescripcionCorta,
                                 DescripcionLarga = item.DescripcionLarga,
                                 Codigo = item.Codigo,
-                                Calificacion = item.Calificacion,
+                                Calificacion = (item.Calificacion ==null) ? (decimal?)null : item.Calificacion,
                                 Estado = item.Estado,
                                 IdUsuarioCreacion = info.IdUsuarioCreacion,
                                 FechaCreacion = DateTime.Now
@@ -821,14 +825,13 @@ namespace Core.Data.Academico
                                 DescripcionEquivalencia = item.DescripcionEquivalencia,
                                 Letra = item.Letra,
                                 Calificacion = item.Calificacion,
-                                IngresaInspector = item.IngresaInspector,
-                                IngresaMotivo = item.IngresaMotivo,
-                                IngresaProfesor = item.IngresaProfesor
+                                IngresaInspector = (item.IngresaInspector==null) ? false : item.IngresaInspector,
+                                IngresaMotivo = (item.IngresaMotivo == null) ? false : item.IngresaMotivo,
+                                IngresaProfesor = (item.IngresaProfesor == null) ? false : item.IngresaProfesor
                             };
                             Context.aca_AnioLectivoConductaEquivalencia.Add(Entity_EquivalenciaConducta);
                         }
                     }
-
 
                     //RUBROS//
                     var lst_rubros_x_anio = odata_anio_rubro.getList(info.IdEmpresa, info.IdAnio, false);
@@ -1010,9 +1013,9 @@ namespace Core.Data.Academico
                                 Estado = item.Estado,
                                 IdUsuarioCreacion = info.IdUsuarioCreacion,
                                 FechaCreacion = DateTime.Now,
-                                IdTipoPlantilla = item.IdTipoPlantilla,
+                                IdTipoPlantilla = (item.IdTipoPlantilla==null) ? (int?)null : item.IdTipoPlantilla,
                                 IdTipoNota = item.IdTipoNota,
-                                AplicaParaTodo = item.AplicaParaTodo
+                                AplicaParaTodo = (item.AplicaParaTodo == null) ? false : item.AplicaParaTodo
                             };
                             Context.aca_Plantilla.Add(Entity_Plantilla);
 
@@ -1035,7 +1038,7 @@ namespace Core.Data.Academico
                                         Total = item_r.Total,
                                         TipoDescuento_descuentoDet = item_r.TipoDescuento_descuentoDet,
                                         Valor_descuentoDet = item_r.Valor_descuentoDet,
-                                        IdTipoNota_descuentoDet = item_r.IdTipoNota_descuentoDet
+                                        IdTipoNota_descuentoDet = (item_r.IdTipoNota_descuentoDet == null) ? (int?)null : item_r.IdTipoNota_descuentoDet
                                     };
                                     Context.aca_Plantilla_Rubro.Add(Entity_PlantillaRubro);
                                 }
@@ -1149,6 +1152,7 @@ namespace Core.Data.Academico
                                                     foreach (var item_cm in lst_asignacion_curso_materia)
                                                     {
                                                         var info_materia = odata_materia.getInfo(info.IdEmpresa, item_cm.IdMateria);
+
                                                         aca_AnioLectivo_Curso_Materia Entity_CursoMateria = new aca_AnioLectivo_Curso_Materia
                                                         {
                                                             IdEmpresa = item_cm.IdEmpresa,
@@ -1163,9 +1167,9 @@ namespace Core.Data.Academico
                                                             NomMateriaGrupo = info_materia.NomMateriaGrupo,
                                                             EsObligatorio = info_materia.EsObligatorio,
                                                             OrdenMateria = info_materia.OrdenMateria,
-                                                            OrdenMateriaArea = info_materia.OrdenMateriaArea,
-                                                            OrdenMateriaGrupo = info_materia.OrdenMateriaGrupo,
-                                                            IdCatalogoTipoCalificacion = info_materia.IdCatalogoTipoCalificacion
+                                                            OrdenMateriaArea = (info_materia.OrdenMateriaArea==null) ? (int?)null : info_materia.OrdenMateriaArea,
+                                                            OrdenMateriaGrupo = (info_materia.OrdenMateriaGrupo == null) ? (int?)null : info_materia.OrdenMateriaGrupo,
+                                                            IdCatalogoTipoCalificacion = (info_materia.IdCatalogoTipoCalificacion == null) ? (int?)null : info_materia.IdCatalogoTipoCalificacion
                                                         };
                                                         Context.aca_AnioLectivo_Curso_Materia.Add(Entity_CursoMateria);
                                                     }
@@ -1187,14 +1191,14 @@ namespace Core.Data.Academico
                                                             IdCurso = item_cd.IdCurso,
                                                             IdDocumento = item_cd.IdDocumento,
                                                             NomDocumento = inf_documento.NomDocumento,
-                                                            OrdenDocumento = inf_documento.OrdenDocumento
+                                                            OrdenDocumento = (inf_documento.OrdenDocumento==null) ? (int?)null : inf_documento.OrdenDocumento
                                                         };
                                                         Context.aca_AnioLectivo_Curso_Documento.Add(Entity_CursoDocumento);
                                                     }
                                                 }
                                             }
                                             
-                                            Context.SaveChanges();
+                                            //Context.SaveChanges();
 
                                             //PARALELO POR PROFESOR
                                             foreach (var item_cur in lst_curso)
@@ -1273,8 +1277,8 @@ namespace Core.Data.Academico
                                                                     IdCurso = item_param.IdCurso,
                                                                     IdPlantilla = IdPlantillaApertura,
                                                                     IdRubro = item_param.IdRubro,
-                                                                    IdCtaCbleDebe = item_param.IdCtaCbleDebe,
-                                                                    IdCtaCbleHaber = item_param.IdCtaCbleHaber
+                                                                    IdCtaCbleDebe = string.IsNullOrEmpty(item_param.IdCtaCbleDebe) ? null : item_param.IdCtaCbleDebe,
+                                                                    IdCtaCbleHaber = string.IsNullOrEmpty(item_param.IdCtaCbleDebe) ? null : item_param.IdCtaCbleHaber
                                                                 };
                                                                 Context.aca_AnioLectivo_Curso_Plantilla_Parametrizacion.Add(Entity_CursoPlantilla_Parametrizacion);
                                                             }
@@ -1283,7 +1287,7 @@ namespace Core.Data.Academico
                                                     }
                                                 }
                                                 
-                                                Context.SaveChanges();
+                                                //Context.SaveChanges();
                                             } //lista de curso
                                         }
                                     }

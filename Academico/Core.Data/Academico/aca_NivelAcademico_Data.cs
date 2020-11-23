@@ -78,7 +78,7 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_NivelAcademico_Info> Lista = new List<aca_NivelAcademico_Info>();
-
+                
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_AnioLectivo_Sede_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede).GroupBy(q=> new { q.IdNivel, q.NomNivel}).Select(q=> new { q.Key.IdNivel, q.Key.NomNivel}).ToList();
@@ -92,7 +92,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                
                 return Lista;
             }
             catch (Exception)
@@ -106,8 +106,33 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_NivelAcademico_Info info;
+                aca_NivelAcademico_Info info = new aca_NivelAcademico_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT* FROM aca_NivelAcademico n "
+                   + " WHERE n.IdEmpresa = " + IdEmpresa.ToString() + " and n.IdNivel = " + IdNivel.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_NivelAcademico_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            NomNivel = reader["NomNivel"].ToString(),
+                            Orden = Convert.ToInt32(reader["Orden"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.IdNivel == IdNivel).FirstOrDefault();
@@ -123,7 +148,7 @@ namespace Core.Data.Academico
                         Estado = Entity.Estado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)

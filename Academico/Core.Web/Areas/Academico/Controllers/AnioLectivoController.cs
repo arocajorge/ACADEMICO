@@ -18,6 +18,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Curso_Bus bus_curso = new aca_Curso_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
+        aca_AnioLectivo_Periodo_Bus bus_periodo = new aca_AnioLectivo_Periodo_Bus();
         #endregion
 
         #region Combos
@@ -80,7 +81,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
             }
 
-            if (info.lst_periodos.Count ==0 || info.lst_periodos.Count > 10)
+            if (info.lst_periodos.Count != 10)
             {
                 msg = "El año lectivo debe tener 10 periodos";
                 return false;
@@ -131,14 +132,18 @@ namespace Core.Web.Areas.Academico.Controllers
 
             var mes_ini = model.FechaDesde.Month;
             var mes_fin = model.FechaHasta.Month;
-            TimeSpan diferencia = model.FechaHasta - model.FechaDesde;
-            var dias_diferencia = diferencia.TotalDays;
-            var meses1 = dias_diferencia / 30;
-            var meses = Convert.ToInt32(dias_diferencia /30);
+            //TimeSpan diferencia = model.FechaHasta - model.FechaDesde;
+            //var dias_diferencia = diferencia.TotalDays;
+            //var meses1 = dias_diferencia / 30;
+            //var meses = Convert.ToInt32(dias_diferencia /30);
             
             var fecha_inicio = new DateTime(model.FechaDesde.Year, model.FechaDesde.Month, 1);
+            var fecha_fin= new DateTime(model.FechaHasta.Year, model.FechaHasta.Month, 1);
+            TimeSpan diferencia = fecha_fin - fecha_inicio;
+            var dias_diferencia = diferencia.TotalDays;
+            var meses = Convert.ToInt32(dias_diferencia / 30);
 
-            for (int i = 0; i < meses; i++)
+            for (int i = 0; i <= meses; i++)
             {
                 var fecha_desde = fecha_inicio;
                 var fecha_hasta = fecha_inicio.AddMonths(1).AddDays(-1);
@@ -229,7 +234,8 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Modificar(aca_AnioLectivo_Info model)
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
-
+            model.lst_periodos = new List<aca_AnioLectivo_Periodo_Info>();
+            model.lst_periodos = bus_periodo.GetList(model.IdEmpresa,model.IdAnio, false);
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;

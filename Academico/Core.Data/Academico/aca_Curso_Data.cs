@@ -167,8 +167,34 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_Curso_Info info;
+                aca_Curso_Info info = new aca_Curso_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_Curso c "
+                    + " WHERE c.IdEmpresa = " + IdEmpresa.ToString() + " and c.IdCurso = " + IdCurso.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_Curso_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdCursoAPromover = string.IsNullOrEmpty(reader["IdCursoAPromover"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoAPromover"]),
+                            NomCurso = reader["NomCurso"].ToString(),
+                            OrdenCurso = Convert.ToInt32(reader["OrdenCurso"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdCurso == IdCurso).FirstOrDefault();
@@ -185,7 +211,7 @@ namespace Core.Data.Academico
                         Estado = Entity.Estado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)

@@ -92,7 +92,29 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_Sede_Info> Lista = new List<aca_Sede_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT IdSede, NomSede FROM aca_AnioLectivo_Sede_NivelAcademico "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = "+IdAnio.ToString() + " GROUP BY IdSede, NomSede";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Sede_Info
+                        {
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            NomSede = reader["NomSede"].ToString()
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_AnioLectivo_Sede_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).GroupBy(q => new { q.IdSede, q.NomSede }).Select(q => new { q.Key.IdSede, q.Key.NomSede }).ToList();
@@ -106,7 +128,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -158,7 +180,41 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_Sede_Info> Lista = new List<aca_Sede_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_Sede s ";
+                    if (mostrar_anulados == false)
+                    {
+                        query += " WHERE s.Estado = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Sede_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdSucursal = Convert.ToInt32(reader["IdSucursal"]),
+                            NomSede = reader["NomSede"].ToString(),
+                            Direccion = reader["Direccion"].ToString(),
+                            NombreRector = reader["NombreRector"].ToString(),
+                            NombreSecretaria = reader["NombreSecretaria"].ToString(),
+                            CelularRector = reader["CelularRector"].ToString(),
+                            TelefonoRector = reader["TelefonoRector"].ToString(),
+                            CorreoRector = reader["CorreoRector"].ToString(),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     var lst = Context.aca_Sede.Where(q => q.Estado == (mostrar_anulados ? q.Estado : true)).ToList();
@@ -181,7 +237,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)

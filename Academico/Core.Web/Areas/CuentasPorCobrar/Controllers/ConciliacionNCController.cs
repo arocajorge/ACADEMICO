@@ -223,6 +223,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Nuevo(cxc_ConciliacionNotaCredito_Info model)
         {
+            model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             if (!Validar(model,ref Mensaje))
             {
                 ViewBag.mensaje = Mensaje;
@@ -374,6 +375,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         [HttpPost]
         public ActionResult Anular(cxc_ConciliacionNotaCredito_Info model)
         {
+            model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             if (!Validar(model, ref Mensaje))
             {
                 ViewBag.mensaje = Mensaje;

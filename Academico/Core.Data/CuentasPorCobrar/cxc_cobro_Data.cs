@@ -372,7 +372,7 @@ namespace Core.Data.CuentasPorCobrar
                     item.IdCobro = cab.IdCobro;
                     item.IdCliente = cab.IdCliente;
                     item.IdAlumno = cab.IdAlumno;
-                    
+                    item.IdUsuario = cab.IdUsuario;
                     if (item.dc_ValorProntoPago > 0)
                     {
                         var NotaCredito = ArmarNotaCredito(item);

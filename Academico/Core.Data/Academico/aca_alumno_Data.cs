@@ -17,7 +17,58 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_Alumno_Info> Lista = new List<aca_Alumno_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT a.IdEmpresa, a.IdAlumno, a.Codigo, a.IdPersona, p.pe_Naturaleza, p.pe_nombreCompleto, p.pe_apellido, p.pe_nombre, p.IdTipoDocumento, p.pe_cedulaRuc, a.Direccion, a.Celular, a.Correo, p.pe_sexo, p.pe_fechaNacimiento, "
+                    + " p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, a.Estado, a.IdCatalogoESTMAT, a.IdCurso, a.IdCatalogoESTALU, p.pe_telfono_Contacto, cm.NomCatalogo AS NomCatalogoESTMAT, "
+                    + " c.NomCatalogo AS NomCatalogoESTALU, a.FechaIngreso, a.LugarNacimiento, a.IdPais, a.Cod_Region, a.IdProvincia, a.IdCiudad, a.IdParroquia, a.Sector, p.IdReligion, p.AsisteCentroCristiano, p.IdGrupoEtnico "
+                    + " FROM dbo.aca_Alumno AS a INNER JOIN "
+                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTALU = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS cm ON a.IdCatalogoESTMAT = cm.IdCatalogo "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString();
+                    if (MostrarAnulados == false)
+                    {
+                        query += " and a.Estado = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Alumno_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdPersona = Convert.ToInt32(reader["IdPersona"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            Codigo = reader["Codigo"].ToString(),
+                            IdTipoDocumento = reader["IdTipoDocumento"].ToString(),
+                            pe_Naturaleza = reader["pe_Naturaleza"].ToString(),
+                            pe_cedulaRuc = reader["pe_cedulaRuc"].ToString(),
+                            pe_nombre = reader["pe_nombre"].ToString(),
+                            pe_apellido = reader["pe_apellido"].ToString(),
+                            pe_nombreCompleto = reader["pe_nombreCompleto"].ToString(),
+                            pe_sexo = reader["pe_sexo"].ToString(),
+                            FechaIngreso = Convert.ToDateTime(reader["FechaIngreso"]),
+                            pe_fechaNacimiento = string.IsNullOrEmpty(reader["pe_fechaNacimiento"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["pe_fechaNacimiento"]),
+                            CodCatalogoSangre = string.IsNullOrEmpty(reader["CodCatalogoSangre"].ToString()) ? null : reader["CodCatalogoSangre"].ToString(),
+                            CodCatalogoCONADIS = string.IsNullOrEmpty(reader["CodCatalogoCONADIS"].ToString()) ? null : string.IsNullOrEmpty(reader["Correo"].ToString()) ? null : reader["CodCatalogoCONADIS"].ToString(),
+                            NumeroCarnetConadis = string.IsNullOrEmpty(reader["NumeroCarnetConadis"].ToString()) ? null : reader["NumeroCarnetConadis"].ToString(),
+                            PorcentajeDiscapacidad = string.IsNullOrEmpty(reader["PorcentajeDiscapacidad"].ToString()) ? (double?)null : Convert.ToDouble(reader["PorcentajeDiscapacidad"]),
+                            Correo = string.IsNullOrEmpty(reader["Correo"].ToString()) ? null : reader["Correo"].ToString(),
+                            NomCatalogoESTALU = reader["NomCatalogoESTALU"].ToString(),
+                            NomCatalogoESTMAT = reader["NomCatalogoESTMAT"].ToString(),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
@@ -49,7 +100,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -64,7 +115,104 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_Alumno_Info> Lista = new List<aca_Alumno_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "select a.IdEmpresa, a.Codigo, a.IdAlumno, b.IdMatricula, c.pe_nombreCompleto, c.pe_cedulaRuc, pfr.pe_nombreCompleto as NombreRepresentante, fr.Correo as CorreoRepresentante,"
+                    + " pfc.pe_nombreCompleto NombreFactura, fc.Correo as CorreoEmiteFactura, fr.Celular as CelularRepresentante, fc.Celular as CelularEmiteFactura, fr.Telefono as TelefonoRepresentante, fc.Telefono as TelefonoEmiteFactura,"
+                    + " b.IdAnio, b.IdSede, b.IdNivel, b.IdJornada, b.IdCurso, b.IdParalelo,  sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo,"
+                    + " isnull(e.Saldo, 0) Saldo, isnull(e.SaldoProntoPago, 0)SaldoProntoPago, isnull(e.CantidadDeudas, 0) CantidadDeudas, pt.NomPlantillaTipo"
+                    + " from aca_Alumno as a inner join"
+                    + " aca_Matricula as b on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno left join"
+                    + " tb_persona as c on a.IdPersona = c.IdPersona inner join"
+                    + " aca_AnioLectivo as d on b.IdEmpresa = d.IdEmpresa and b.IdAnio = d.IdAnio left join"
+                    + " ("
+                    + " select az.IdEmpresa, az.IdAlumno, dbo.bankersrounding(sum(az.Saldo), 2) Saldo, sum(az.SaldoProntoPago) SaldoProntoPago, sum(CantidadFacturas) as CantidadDeudas from("
+                    + " SELECT ay.IdEmpresa, ay.IdAlumno, sum(ay.Saldo) Saldo, sum(ay.SaldoProntoPago) SaldoProntoPago, count(*) as CantidadFacturas"
+                    + " FROM("
+                    + " select a1.IdEmpresa, a2.IdAlumno, dbo.bankersrounding(a1.Total - ISNULL(A3.dc_ValorPago, 0), 2) as Saldo,"
+                    + " case when a5.FechaProntoPago >= CAST(GETDATE() AS DATE) THEN dbo.bankersrounding(a1.ValorProntoPago - ISNULL(A3.dc_ValorPago, 0), 2) ELSE dbo.bankersrounding(a1.Total - ISNULL(A3.dc_ValorPago, 0), 2) end as SaldoProntoPago"
+                    + " from fa_factura_resumen as a1 inner join"
+                    + " fa_factura as a2 on a1.IdEmpresa = a2.IdEmpresa and a1.IdSucursal = a2.IdSucursal and a1.IdBodega = a2.IdBodega and a1.IdCbteVta = a2.IdCbteVta left join"
+                    + " ("
+                    + " select x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento, sum(x1.dc_ValorPago) dc_ValorPago"
+                    + " from cxc_cobro_det as x1"
+                    + " where x1.IdEmpresa = " + IdEmpresa.ToString() + " and x1.estado = 'A'"
+                    + " group by x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento"
+                    + " ) as a3 on a2.IdEmpresa = a3.IdEmpresa and a2.IdSucursal = a3.IdSucursal and a2.IdBodega = a3.IdBodega_Cbte and a2.IdCbteVta = a3.IdCbte_vta_nota and a2.vt_tipoDoc = a3.dc_TipoDocumento left join"
+                    + " aca_Matricula_Rubro as a4 on a2.IdEmpresa = a4.IdEmpresa and a2.IdSucursal = a4.IdSucursal and a2.IdBodega = a4.IdBodega and a2.IdCbteVta = a4.IdCbteVta left join"
+                    + " aca_AnioLectivo_Periodo as a5 on a5.IdEmpresa = a4.IdEmpresa and a5.IdAnio = a4.IdAnio and a5.IdPeriodo = a4.IdPeriodo"
+                    + " where a2.IdEmpresa = " + IdEmpresa.ToString() + " and a2.Estado = 'A' and dbo.BankersRounding(a1.Total - isnull(a3.dc_ValorPago, 0), 2) > 0"
+                    + " ) ay group by ay.IdEmpresa, ay.IdAlumno"
+                    + " UNION ALL"
+                    + " select a1.IdEmpresa, a2.IdAlumno, dbo.bankersrounding(sum(a1.Total) - ISNULL(SUM(A3.dc_ValorPago), 0), 2) as Saldo, dbo.bankersrounding(sum(a1.Total) - ISNULL(SUM(A3.dc_ValorPago), 0), 2), count(*) CantidadFacturas"
+                    + " from fa_notaCreDeb_resumen as a1 inner join"
+                    + " fa_notaCreDeb as a2 on a1.IdEmpresa = a2.IdEmpresa and a1.IdSucursal = a2.IdSucursal and a1.IdBodega = a2.IdBodega and a1.IdNota = a2.IdNota left join"
+                    + " ("
+                    + " select x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento, sum(x1.dc_ValorPago) dc_ValorPago"
+                    + " from cxc_cobro_det as x1"
+                    + " where x1.IdEmpresa = " + IdEmpresa.ToString() + " and x1.estado = 'A'"
+                    + " group by x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento"
+                    + " ) as a3 on a2.IdEmpresa = a3.IdEmpresa and a2.IdSucursal = a3.IdSucursal and a2.IdBodega = a3.IdBodega_Cbte and a2.IdNota = a3.IdCbte_vta_nota and a2.CodDocumentoTipo = a3.dc_TipoDocumento"
+                    + " where a2.IdEmpresa = " + IdEmpresa.ToString() + " and a2.Estado = 'A' and a2.CreDeb = 'D' and dbo.BankersRounding(a1.Total - isnull(a3.dc_ValorPago, 0), 2) > 0"
+                    + " group by a1.IdEmpresa, a2.IdAlumno"
+                    + " ) az group by az.IdEmpresa, az.IdAlumno"
+                    + " ) as e on a.IdEmpresa = e.IdEmpresa and a.IdAlumno = e.IdAlumno left join"
+                    + " aca_AnioLectivo_Curso_Paralelo as cp on b.IdEmpresa = cp.IdEmpresa and b.IdAnio = cp.IdAnio and b.IdSede = cp.IdSede and b.IdNivel = cp.IdNivel and b.IdJornada = cp.IdJornada and b.IdCurso = cp.IdCurso and b.IdParalelo = cp.IdParalelo left join"
+                    + " aca_AnioLectivo_Jornada_Curso as jc on b.IdEmpresa = jc.IdEmpresa and b.IdAnio = jc.IdAnio and b.IdSede = jc.IdSede and b.IdNivel = jc.IdNivel and b.IdJornada = jc.IdJornada and b.IdCurso = jc.IdCurso left join"
+                    + " aca_AnioLectivo_NivelAcademico_Jornada as nj on nj.IdEmpresa = b.IdEmpresa and nj.IdAnio = b.IdAnio and nj.IdSede = b.IdSede and nj.IdNivel = b.IdNivel and nj.IdJornada = b.IdJornada left join"
+                    + " aca_AnioLectivo_Sede_NivelAcademico as sn on sn.IdEmpresa = b.IdEmpresa and sn.IdAnio = b.IdAnio and sn.IdSede = b.IdSede and sn.IdNivel = b.IdNivel left join"
+                    + " aca_Familia as fr on fr.IdEmpresa = a.IdEmpresa and fr.IdAlumno = a.IdAlumno and fr.EsRepresentante = 1 left join"
+                    + " tb_persona as pfr on pfr.IdPersona = fr.IdPersona left join"
+                    + " aca_Familia as fc on fc.IdEmpresa = a.IdEmpresa and fc.IdAlumno = a.IdAlumno and fc.SeFactura = 1 left join"
+                    + " tb_persona as pfc on pfc.IdPersona = fc.IdPersona LEFT JOIN"
+                    + " aca_Plantilla as p on b.IdEmpresa = p.IdEmpresa and b.IdPlantilla = p.IdPlantilla left join"
+                    + " aca_PlantillaTipo as pt on pt.IdEmpresa = p.IdEmpresa and pt.IdTipoPlantilla = p.IdTipoPlantilla"
+                    + " where a.IdEmpresa = " + IdEmpresa.ToString() + " and d.EnCurso = 1 and not exists("
+                    + " select x1.IdEmpresa from aca_AlumnoRetiro as x1"
+                    + " where x1.IdEmpresa = b.IdEmpresa and x1.IdMatricula = b.IdMatricula and x1.Estado = 1)";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Alumno_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            Codigo = reader["Codigo"].ToString(),
+                            pe_nombreCompleto = reader["pe_nombreCompleto"].ToString(),
+                            pe_cedulaRuc = reader["pe_cedulaRuc"].ToString(),
+                            NomRepEconomico = reader["NombreFactura"].ToString(),
+                            correoRepEconomico = reader["CorreoEmiteFactura"].ToString(),
+                            NomRepLegal = reader["NombreRepresentante"].ToString(),
+                            CorreoRepLegal = reader["CorreoRepresentante"].ToString(),
+                            CelularRepresentante = reader["CelularRepresentante"].ToString(),
+                            CelularEmiteFactura = reader["CelularEmiteFactura"].ToString(),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            NomSede = reader["NomSede"].ToString(),
+                            NomNivel = reader["NomNivel"].ToString(),
+                            NomJornada = reader["NomJornada"].ToString(),
+                            NomCurso = reader["NomCurso"].ToString(),
+                            NomParalelo = reader["NomParalelo"].ToString(),
+                            Saldo = Convert.ToDouble(reader["Saldo"]),
+                            SaldoProntoPago = Convert.ToDouble(reader["SaldoProntoPago"]),
+                            TelefonoRepresentante = reader["TelefonoRepresentante"].ToString(),
+                            TelefonoEmiteFactura = reader["TelefonoEmiteFactura"].ToString(),
+                            NomPlantillaTipo = reader["NomPlantillaTipo"].ToString()
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     odata.Database.CommandTimeout = 5000;
@@ -101,7 +249,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -116,7 +264,6 @@ namespace Core.Data.Academico
             try
             {
                 aca_Alumno_Info info = new aca_Alumno_Info();
-
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var Entity = odata.vwaca_Alumno_PeriodoActual.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).FirstOrDefault();
@@ -154,7 +301,7 @@ namespace Core.Data.Academico
                         TelefonoEmiteFactura = Entity.TelefonoEmiteFactura
                     };
                 }
-
+                
                 return info;
             }
             catch (Exception)
@@ -342,8 +489,67 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_Alumno_Info info;
+                aca_Alumno_Info info=new aca_Alumno_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT a.IdEmpresa, a.IdAlumno, a.Codigo, a.IdPersona, p.pe_Naturaleza, p.pe_nombreCompleto, p.pe_apellido, p.pe_nombre, p.IdTipoDocumento, p.pe_cedulaRuc, a.Direccion, a.Celular, a.Correo, p.pe_sexo, p.pe_fechaNacimiento, "
+                    + " p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, a.Estado, a.IdCatalogoESTMAT, a.IdCurso, a.IdCatalogoESTALU, p.pe_telfono_Contacto, cm.NomCatalogo AS NomCatalogoESTMAT, "
+                    + " c.NomCatalogo AS NomCatalogoESTALU, a.FechaIngreso, a.LugarNacimiento, a.IdPais, a.Cod_Region, a.IdProvincia, a.IdCiudad, a.IdParroquia, a.Sector, p.IdReligion, p.AsisteCentroCristiano, p.IdGrupoEtnico "
+                    + " FROM dbo.aca_Alumno AS a INNER JOIN "
+                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTALU = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS cm ON a.IdCatalogoESTMAT = cm.IdCatalogo "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + "and a.IdAlumno = " + IdAlumno.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_Alumno_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdPersona = Convert.ToInt32(reader["IdPersona"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            Codigo = reader["Codigo"].ToString(),
+                            IdTipoDocumento = reader["IdTipoDocumento"].ToString(),
+                            pe_Naturaleza = reader["pe_Naturaleza"].ToString(),
+                            pe_cedulaRuc = reader["pe_cedulaRuc"].ToString(),
+                            pe_nombre = reader["pe_nombre"].ToString(),
+                            pe_apellido = reader["pe_apellido"].ToString(),
+                            pe_nombreCompleto = reader["pe_nombreCompleto"].ToString(),
+                            pe_telfono_Contacto = reader["pe_telfono_Contacto"].ToString(),
+                            Correo = string.IsNullOrEmpty(reader["Correo"].ToString()) ? null : reader["Correo"].ToString(),
+                            Direccion = reader["Direccion"].ToString(),
+                            pe_sexo = reader["pe_sexo"].ToString(),
+                            FechaIngreso = Convert.ToDateTime(reader["FechaIngreso"]),
+                            pe_fechaNacimiento = string.IsNullOrEmpty(reader["pe_fechaNacimiento"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["pe_fechaNacimiento"]),
+                            CodCatalogoSangre = string.IsNullOrEmpty(reader["CodCatalogoSangre"].ToString()) ? null : reader["CodCatalogoSangre"].ToString(),
+                            CodCatalogoCONADIS = string.IsNullOrEmpty(reader["CodCatalogoCONADIS"].ToString()) ? null : string.IsNullOrEmpty(reader["Correo"].ToString()) ? null : reader["CodCatalogoCONADIS"].ToString(),
+                            NumeroCarnetConadis = string.IsNullOrEmpty(reader["NumeroCarnetConadis"].ToString()) ? null : reader["NumeroCarnetConadis"].ToString(),
+                            PorcentajeDiscapacidad = string.IsNullOrEmpty(reader["PorcentajeDiscapacidad"].ToString()) ? (double?)null : Convert.ToDouble(reader["PorcentajeDiscapacidad"]),
+                            NomCatalogoESTALU = reader["NomCatalogoESTALU"].ToString(),
+                            NomCatalogoESTMAT = reader["NomCatalogoESTMAT"].ToString(),
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdPais = reader["IdPais"].ToString(),
+                            Cod_Region = reader["Cod_Region"].ToString(),
+                            IdProvincia = reader["IdProvincia"].ToString(),
+                            IdCiudad = reader["IdCiudad"].ToString(),
+                            IdParroquia = reader["IdParroquia"].ToString(),
+                            Sector = string.IsNullOrEmpty(reader["Sector"].ToString()) ? null : reader["Sector"].ToString(),
+                            LugarNacimiento = string.IsNullOrEmpty(reader["LugarNacimiento"].ToString()) ? null : reader["LugarNacimiento"].ToString(),
+                            IdReligion = string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdReligion"]),
+                            AsisteCentroCristiano = string.IsNullOrEmpty(reader["AsisteCentroCristiano"].ToString()) ? false : Convert.ToBoolean(reader["AsisteCentroCristiano"]),
+                            IdGrupoEtnico = string.IsNullOrEmpty(reader["IdGrupoEtnico"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdGrupoEtnico"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).FirstOrDefault();
@@ -388,7 +594,7 @@ namespace Core.Data.Academico
                         IdGrupoEtnico = Entity.IdGrupoEtnico
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
