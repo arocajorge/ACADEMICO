@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,39 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AnioLectivoCalificacionCualitativa_Info> Lista = new List<aca_AnioLectivoCalificacionCualitativa_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_AnioLectivoCalificacionCualitativa "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString();
+                    if (MostrarAnulados==false)
+                    {
+                        query += " and Estado = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivoCalificacionCualitativa_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdCalificacionCualitativa = Convert.ToInt32(reader["IdCalificacionCualitativa"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            DescripcionCorta = string.IsNullOrEmpty(reader["DescripcionCorta"].ToString()) ? null : reader["DescripcionCorta"].ToString(),
+                            DescripcionLarga = string.IsNullOrEmpty(reader["DescripcionLarga"].ToString()) ? null : reader["DescripcionLarga"].ToString(),
+                            Calificacion = string.IsNullOrEmpty(reader["Calificacion"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_AnioLectivoCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Estado == (MostrarAnulados==true ? q.Estado : true)).ToList();
@@ -34,7 +67,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -48,8 +81,36 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivoCalificacionCualitativa_Info info;
+                aca_AnioLectivoCalificacionCualitativa_Info info = new aca_AnioLectivoCalificacionCualitativa_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoCalificacionCualitativa "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdCalificacionCualitativa = " + IdCalificacionCualitativa.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivoCalificacionCualitativa_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdCalificacionCualitativa = Convert.ToInt32(reader["IdCalificacionCualitativa"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            DescripcionCorta = string.IsNullOrEmpty(reader["DescripcionCorta"].ToString()) ? null : reader["DescripcionCorta"].ToString(),
+                            DescripcionLarga = string.IsNullOrEmpty(reader["DescripcionLarga"].ToString()) ? null : reader["DescripcionLarga"].ToString(),
+                            Calificacion = string.IsNullOrEmpty(reader["Calificacion"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_AnioLectivoCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdCalificacionCualitativa == IdCalificacionCualitativa).FirstOrDefault();
@@ -68,7 +129,7 @@ namespace Core.Data.Academico
                         Estado = Entity.Estado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
@@ -82,8 +143,36 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivoCalificacionCualitativa_Info info;
+                aca_AnioLectivoCalificacionCualitativa_Info info = new aca_AnioLectivoCalificacionCualitativa_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoCalificacionCualitativa "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and Codigo = " + "'" + Codigo.ToString() + "'";
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivoCalificacionCualitativa_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdCalificacionCualitativa = Convert.ToInt32(reader["IdCalificacionCualitativa"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            DescripcionCorta = string.IsNullOrEmpty(reader["DescripcionCorta"].ToString()) ? null : reader["DescripcionCorta"].ToString(),
+                            DescripcionLarga = string.IsNullOrEmpty(reader["DescripcionLarga"].ToString()) ? null : reader["DescripcionLarga"].ToString(),
+                            Calificacion = string.IsNullOrEmpty(reader["Calificacion"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_AnioLectivoCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Codigo == Codigo).FirstOrDefault();
@@ -102,7 +191,7 @@ namespace Core.Data.Academico
                         Estado = Entity.Estado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)

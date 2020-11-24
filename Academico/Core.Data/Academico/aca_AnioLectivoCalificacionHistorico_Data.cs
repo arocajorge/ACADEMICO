@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,53 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AnioLectivoCalificacionHistorico_Info> Lista = new List<aca_AnioLectivoCalificacionHistorico_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT h.IdEmpresa, h.IdAnio, a.Descripcion, h.IdAlumno, p.pe_nombreCompleto, h.IdCurso, h.Promedio, h.IdEquivalenciaPromedio, "
+                    + " h.Conducta, h.SecuenciaConducta, ce.Letra, n.NomNivel, c.NomCurso, h.AntiguaInstitucion, h.IdNivel, ep.Codigo, h.IdMatricula "
+                    + " FROM dbo.aca_AnioLectivoCalificacionHistorico AS h INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a ON h.IdEmpresa = a.IdEmpresa AND h.IdAnio = a.IdAnio INNER JOIN "
+                    + " dbo.aca_Alumno AS al ON h.IdEmpresa = al.IdEmpresa AND h.IdAlumno = al.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p ON al.IdPersona = p.IdPersona INNER JOIN "
+                    + " dbo.aca_Curso AS c ON h.IdEmpresa = c.IdEmpresa AND h.IdCurso = c.IdCurso INNER JOIN "
+                    + " dbo.aca_NivelAcademico AS n ON h.IdEmpresa = n.IdEmpresa AND h.IdNivel = n.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoEquivalenciaPromedio AS ep ON h.IdEmpresa = ep.IdEmpresa AND h.IdAnio = ep.IdAnio AND h.IdEquivalenciaPromedio = ep.IdEquivalenciaPromedio LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoConductaEquivalencia AS ce ON h.IdEmpresa = ce.IdEmpresa AND h.IdAnio = ce.IdAnio AND h.SecuenciaConducta = ce.Secuencia "
+                    + " WHERE h.IdEmpresa = " + IdEmpresa.ToString() + " and h.IdAlumno = " + IdAlumno.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivoCalificacionHistorico_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            Promedio = Convert.ToDecimal(reader["Promedio"]),
+                            Conducta = Convert.ToDecimal(reader["Conducta"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            NomNivel = reader["NomNivel"].ToString(),
+                            NomCurso = reader["NomCurso"].ToString(),
+                            IdMatricula = string.IsNullOrEmpty(reader["IdMatricula"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["IdMatricula"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            AntiguaInstitucion = reader["AntiguaInstitucion"].ToString(),
+                            pe_nombreCompleto = reader["pe_nombreCompleto"].ToString(),
+                            IdEquivalenciaPromedio = string.IsNullOrEmpty(reader["IdEquivalenciaPromedio"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedio"]),
+                            SecuenciaConducta = string.IsNullOrEmpty(reader["SecuenciaConducta"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaConducta"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_AnioLectivoCalificacionHistorico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).ToList();
@@ -44,6 +91,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
+                */
                 Lista.ForEach(q=>q.IdString = IdEmpresa.ToString("000")+ q.IdAnio.ToString("0000") + q.IdAlumno.ToString("000000") + q.IdNivel.ToString("000") + q.IdCurso.ToString("000") );
                 return Lista;
             }
@@ -58,8 +106,39 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivoCalificacionHistorico_Info info;
+                aca_AnioLectivoCalificacionHistorico_Info info = new aca_AnioLectivoCalificacionHistorico_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoCalificacionHistorico "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdAlumno = " + IdAlumno.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivoCalificacionHistorico_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdMatricula = string.IsNullOrEmpty(reader["IdMatricula"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["IdMatricula"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            Promedio = Convert.ToDecimal(reader["Promedio"]),
+                            Conducta = Convert.ToDecimal(reader["Conducta"]),
+                            AntiguaInstitucion = reader["AntiguaInstitucion"].ToString(),
+                            IdEquivalenciaPromedio = string.IsNullOrEmpty(reader["IdEquivalenciaPromedio"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedio"]),
+                            SecuenciaConducta = string.IsNullOrEmpty(reader["SecuenciaConducta"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaConducta"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_AnioLectivoCalificacionHistorico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno== IdAlumno).FirstOrDefault();
@@ -81,7 +160,7 @@ namespace Core.Data.Academico
                         SecuenciaConducta = Entity.SecuenciaConducta
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)

@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,34 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AnioLectivo_Periodo_Info> Lista = new List<aca_AnioLectivo_Periodo_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT ap.IdEmpresa, ap.IdAnio, a.Descripcion, COUNT(ap.IdPeriodo) AS NumPeriodos "
+                    + " FROM dbo.aca_AnioLectivo_Periodo AS ap INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a ON ap.IdEmpresa = a.IdEmpresa AND ap.IdAnio = a.IdAnio "
+                    + " WHERE ap.IdEmpresa = " + IdEmpresa.ToString()
+                    + " GROUP BY ap.IdEmpresa, ap.IdAnio, a.Descripcion ";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivo_Periodo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            NumPeriodos = string.IsNullOrEmpty(reader["NumPeriodos"].ToString()) ? 0 : Convert.ToInt32(reader["NumPeriodos"]),
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     Lista = Context.vwaca_AnioLectivo_Periodo.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new aca_AnioLectivo_Periodo_Info
@@ -26,7 +54,7 @@ namespace Core.Data.Academico
                         NumPeriodos = q.NumPeriodos??0
                     }).ToList();
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -76,7 +104,39 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AnioLectivo_Periodo_Info> Lista = new List<aca_AnioLectivo_Periodo_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_AnioLectivo_Periodo"
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = "+IdAnio.ToString();
+                    if (MostrarAnulados==false)
+                    {
+                        query += " and Estado = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivo_Periodo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdPeriodo = Convert.ToInt32(reader["IdPeriodo"]),
+                            IdMes = Convert.ToInt32(reader["IdMes"]),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
+                            FechaProntoPago = string.IsNullOrEmpty(reader["FechaProntoPago"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["FechaProntoPago"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     Lista = Context.aca_AnioLectivo_Periodo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_AnioLectivo_Periodo_Info
@@ -90,7 +150,7 @@ namespace Core.Data.Academico
                         FechaProntoPago = q.FechaProntoPago,
                         Estado = q.Estado
                     }).ToList();
-                }
+                }*/
                 Lista.ForEach(v => { v.NomPeriodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });
                 return Lista;
             }
@@ -104,8 +164,36 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivo_Periodo_Info info;
+                aca_AnioLectivo_Periodo_Info info = new aca_AnioLectivo_Periodo_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo_Periodo "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdPeriodo = " + IdPeriodo.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivo_Periodo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdPeriodo = Convert.ToInt32(reader["IdPeriodo"]),
+                            IdMes = Convert.ToInt32(reader["IdMes"]),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
+                            FechaProntoPago = string.IsNullOrEmpty(reader["FechaProntoPago"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["FechaProntoPago"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_AnioLectivo_Periodo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPeriodo == IdPeriodo).FirstOrDefault();
@@ -125,7 +213,7 @@ namespace Core.Data.Academico
                         Procesado = Entity.Procesado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)

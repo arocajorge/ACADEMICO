@@ -256,6 +256,7 @@
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintRowHeaders = DevExpress.Utils.DefaultBoolean.False;
             this.xrPivotGrid1.OptionsPrint.PrintUnusedFilterFields = false;
+            this.xrPivotGrid1.OptionsView.ShowGrandTotalsForSingleValues = true;
             this.xrPivotGrid1.OptionsView.ShowRowTotals = false;
             this.xrPivotGrid1.SizeF = new System.Drawing.SizeF(751.0005F, 165F);
             // 
@@ -443,7 +444,7 @@
             this.p_IdEmpresa,
             this.p_FechaIni,
             this.p_FechaFin});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.CXC_009_Resumen_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();

@@ -60,6 +60,7 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             {
                 ImageConverter obj = new ImageConverter();
                 lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
+                lbl_telefono.Text = "TELEFONO " + emp.em_telefonos;
             }
 
             DateTime fecha = DateTime.Now;
