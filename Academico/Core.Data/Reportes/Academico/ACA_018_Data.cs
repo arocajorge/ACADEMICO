@@ -37,9 +37,9 @@ namespace Core.Data.Reportes.Academico
                 {
                     Context.Database.CommandTimeout = 5000;
                     var lst = Context.VWACA_018.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio
-                    && IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin &&
-                    IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin &&
-                    IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
+                    && q.IdSede == IdSede
+                    && q.IdJornada == IdJornada
+                    && q.IdNivel== IdNivel &&
                     IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin &&
                     IdParaleloIni <= q.IdParalelo && q.IdParalelo <= IdParaleloFin &&
                     IdAlumnoIni <= q.IdAlumno && q.IdAlumno <= IdAlumnoFin &&
