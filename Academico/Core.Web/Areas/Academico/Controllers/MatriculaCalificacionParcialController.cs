@@ -463,7 +463,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 var RegistroValidoCalificacion = true;
                 var info_parcial = bus_parcial.GetInfo(IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, registro_editar.IdCatalogoParcial);
                 var actualizar = true;
-            
+
                 if ((info_parcial.Orden - 1) > 0)
                 {
                     var Promedio_CatalogoParcial = (decimal?)null;
@@ -520,6 +520,20 @@ namespace Core.Web.Areas.Academico.Controllers
                         }
                     }
                 }
+
+                if ((info_det.Calificacion1 != null && info_det.Calificacion1 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+                (info_det.Calificacion2 != null && info_det.Calificacion2 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+                (info_det.Calificacion3 != null && info_det.Calificacion3 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+                (info_det.Calificacion4 != null && info_det.Calificacion4 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+                (info_det.Evaluacion != null && info_det.Evaluacion > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+                (info_det.Remedial1 != null && info_det.Remedial1 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+                (info_det.Remedial2 != null && info_det.Remedial2 > Convert.ToDecimal(info_anio.CalificacionMaxima))
+                )
+                {
+                    ViewBag.MostrarError = "El estudiante tiene calificaciones con valores superiores a los permitidos";
+                    actualizar = false;
+                }
+
 
                 if (actualizar==true)
                 {
@@ -1091,6 +1105,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var mensaje = string.Empty;
             var actualizar = true;
             var info_matricula = bus_matricula.GetInfo(info.IdEmpresa, info.IdMatricula);
+            var info_anio = bus_anio.GetInfo(info.IdEmpresa, info_matricula.IdAnio);
 
             #region CalcularPromedio
             decimal? resultado =null;
@@ -1179,6 +1194,18 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     RegistroValidoCalificacion = false;
                 }
+            }
+
+            if ((info.Calificacion1 != null && info.Calificacion1 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+            (info.Calificacion2 != null && info.Calificacion2 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+            (info.Calificacion3 != null && info.Calificacion3 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+            (info.Calificacion4 != null && info.Calificacion4 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+            (info.Evaluacion != null && info.Evaluacion > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+            (info.Remedial1 != null && info.Remedial1 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
+            (info.Remedial2 != null && info.Remedial2 > Convert.ToDecimal(info_anio.CalificacionMaxima))
+            )
+            {
+                RegistroValidoCalificacion = false;
             }
 
             #region ValidarPromedio

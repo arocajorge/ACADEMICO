@@ -148,7 +148,39 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivoEquivalenciaPromedio_Info info;
+                aca_AnioLectivoEquivalenciaPromedio_Info info = new aca_AnioLectivoEquivalenciaPromedio_Info();
+                /*
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoEquivalenciaPromedio "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and " + PromedioFinal.ToString() + "  >= ValorMinimo and " + PromedioFinal.ToString() + " <= ValorMaximo ";
+                    var ResultValue = command.ExecuteScalar();
+
+                    if (ResultValue == null)
+                        return null;
+
+                    if (PromedioFinal == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivoEquivalenciaPromedio_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdEquivalenciaPromedio = Convert.ToInt32(reader["IdEquivalenciaPromedio"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
+                            ValorMinimo = Convert.ToDecimal(reader["ValorMinimo"]),
+                            ValorMaximo = Convert.ToDecimal(reader["ValorMaximo"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
+                }*/
 
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
@@ -170,7 +202,7 @@ namespace Core.Data.Academico
                         ValorMaximo = Entity.ValorMaximo
                     };
                 }
-
+                
                 return info;
             }
             catch (Exception)

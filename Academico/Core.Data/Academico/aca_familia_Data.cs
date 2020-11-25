@@ -4,6 +4,7 @@ using Core.Info.General;
 using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,67 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_Familia_Info> Lista = new List<aca_Familia_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT f.IdEmpresa, f.IdAlumno, f.IdCatalogoPAREN, c.NomCatalogo, f.IdPersona, p.pe_Naturaleza, p.IdTipoDocumento, p.pe_cedulaRuc, p.pe_apellido, p.pe_nombre, p.pe_nombreCompleto, f.Direccion, f.Celular, f.Correo, f.SeFactura, p.pe_sexo, "
+                    + " p.IdEstadoCivil, p.pe_fechaNacimiento, p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, p.pe_telfono_Contacto, f.Secuencia, f.EsRepresentante, p.pe_razonSocial, p.IdProfesion, "
+                    + " f.IdCatalogoFichaInst, f.EmpresaTrabajo, f.DireccionTrabajo, f.TelefonoTrabajo, f.CargoTrabajo, f.AniosServicio, f.IngresoMensual, f.VehiculoPropio, f.Marca, f.Modelo, f.CasaPropia, f.AnioVehiculo, p.IdReligion, p.AsisteCentroCristiano, "
+                    + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono "
+                    + " FROM dbo.tb_persona AS p INNER JOIN "
+                    + " dbo.aca_Familia AS f ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c ON f.IdCatalogoPAREN = c.IdCatalogo "
+                    + " WHERE f.IdEmpresa = " + IdEmpresa.ToString() + "and f.IdAlumno = " + IdAlumno.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Familia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            IdPersona = Convert.ToDecimal(reader["IdPersona"]),
+                            IdCatalogoPAREN = Convert.ToInt32(reader["IdCatalogoPAREN"]),
+                            NomCatalogo = string.IsNullOrEmpty(reader["IdCatalogoPAREN"].ToString()) ? null : reader["IdCatalogoPAREN"].ToString(),
+                            Direccion = string.IsNullOrEmpty(reader["Direccion"].ToString()) ? null : reader["Direccion"].ToString(),
+                            Telefono = string.IsNullOrEmpty(reader["Direccion"].ToString()) ? null : reader["Direccion"].ToString(),
+                            Celular = string.IsNullOrEmpty(reader["Direccion"].ToString()) ? null : reader["Direccion"].ToString(),
+                            Correo = string.IsNullOrEmpty(reader["Direccion"].ToString()) ? null : reader["Direccion"].ToString(),
+                            SeFactura = Convert.ToBoolean(reader["SeFactura"]),
+                            EsRepresentante = Convert.ToBoolean(reader["EsRepresentante"]),
+                            IdCatalogoFichaInst = string.IsNullOrEmpty(reader["IdCatalogoFichaInst"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCatalogoFichaInst"]),
+                            EmpresaTrabajo = string.IsNullOrEmpty(reader["EmpresaTrabajo"].ToString()) ? null : reader["EmpresaTrabajo"].ToString(),
+                            DireccionTrabajo = string.IsNullOrEmpty(reader["DireccionTrabajo"].ToString()) ? null : reader["DireccionTrabajo"].ToString(),
+                            TelefonoTrabajo = string.IsNullOrEmpty(reader["TelefonoTrabajo"].ToString()) ? null : reader["TelefonoTrabajo"].ToString(),
+                            CargoTrabajo = string.IsNullOrEmpty(reader["CargoTrabajo"].ToString()) ? null : reader["CargoTrabajo"].ToString(),
+                            AniosServicio = string.IsNullOrEmpty(reader["AniosServicio"].ToString()) ? (int?)null : Convert.ToInt32(reader["AniosServicio"]),
+                            IngresoMensual = string.IsNullOrEmpty(reader["IngresoMensual"].ToString()) ? (double?)null : Convert.ToDouble(reader["IngresoMensual"]),
+                            VehiculoPropio = Convert.ToBoolean(reader["VehiculoPropio"]),
+                            Marca = string.IsNullOrEmpty(reader["Marca"].ToString()) ? null : reader["Marca"].ToString(),
+                            Modelo = string.IsNullOrEmpty(reader["Modelo"].ToString()) ? null : reader["Modelo"].ToString(),
+                            CasaPropia = Convert.ToBoolean(reader["CasaPropia"]),
+                            IdTipoDocumento = reader["IdTipoDocumento"].ToString(),
+                            pe_Naturaleza = reader["IdTipoDocumento"].ToString(),
+                            pe_cedulaRuc = reader["pe_cedulaRuc"].ToString(),
+                            pe_nombre = string.IsNullOrEmpty(reader["pe_nombre"].ToString()) ? null : reader["pe_nombre"].ToString(),
+                            pe_apellido = string.IsNullOrEmpty(reader["pe_apellido"].ToString()) ? null : reader["pe_apellido"].ToString(),
+                            pe_nombreCompleto = reader["pe_nombreCompleto"].ToString(),
+                            pe_sexo = string.IsNullOrEmpty(reader["pe_sexo"].ToString()) ? null : reader["pe_sexo"].ToString(),
+                            IdEstadoCivil = string.IsNullOrEmpty(reader["IdEstadoCivil"].ToString()) ? null : reader["IdEstadoCivil"].ToString(),
+                            pe_fechaNacimiento = string.IsNullOrEmpty(reader["pe_fechaNacimiento"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["pe_fechaNacimiento"]),
+                            EstaFallecido = Convert.ToBoolean(reader["EstaFallecido"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).ToList();
@@ -65,7 +126,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)

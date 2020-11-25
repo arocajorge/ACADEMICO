@@ -22,9 +22,6 @@ namespace Core.Web.Reportes.CuentasPorCobrar
 
         private void CXC_016_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-            lbl_usuario.Text = usuario;
-
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdPagare = string.IsNullOrEmpty(p_IdPagare.Value.ToString()) ? 0 : Convert.ToInt32(p_IdPagare.Value);
 

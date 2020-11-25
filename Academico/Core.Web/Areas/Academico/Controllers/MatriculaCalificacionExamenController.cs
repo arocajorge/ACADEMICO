@@ -435,7 +435,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     if (info_det.CalificacionExamen > Convert.ToDecimal(info_anio.CalificacionMaxima))
                     {
-                        ViewBag.MostrarError = "Calificación no permitida.";
+                        ViewBag.MostrarError = "El estudiante tiene calificaciones con valores superiores a los permitidos.";
                         actualizar = false;
                     }
 

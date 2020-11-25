@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,44 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AnioLectivoConductaEquivalencia_Info> Lista = new List<aca_AnioLectivoConductaEquivalencia_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT c.IdEmpresa, c.IdAnio, c.Secuencia, c.Letra, c.Calificacion, a.Descripcion, c.Equivalencia, c.DescripcionEquivalencia, c.IngresaMotivo, c.IngresaProfesor, c.IngresaInspector "
+                    + " FROM dbo.aca_AnioLectivoConductaEquivalencia AS c INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a ON c.IdEmpresa = a.IdEmpresa AND c.IdAnio = a.IdAnio "
+                    + " WHERE c.IdEmpresa = " + IdEmpresa.ToString() + " and c.IdAnio = " + IdAnio.ToString();
+                    if (MostrarAnulados == false)
+                    {
+                        query += " and c.Estado = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivoConductaEquivalencia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            DescripcionEquivalencia = string.IsNullOrEmpty(reader["DescripcionEquivalencia"].ToString()) ? null : reader["DescripcionEquivalencia"].ToString(),
+                            Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
+                            Calificacion = Convert.ToDecimal(reader["Calificacion"]),
+                            Equivalencia = string.IsNullOrEmpty(reader["Equivalencia"].ToString()) ? null : reader["Equivalencia"].ToString(),
+                            IngresaMotivo = string.IsNullOrEmpty(reader["IngresaMotivo"].ToString()) ? false : Convert.ToBoolean(reader["IngresaMotivo"]),
+                            IngresaInspector = string.IsNullOrEmpty(reader["IngresaInspector"].ToString()) ? false : Convert.ToBoolean(reader["IngresaInspector"]),
+                            IngresaProfesor = string.IsNullOrEmpty(reader["IngresaProfesor"].ToString()) ? false : Convert.ToBoolean(reader["IngresaProfesor"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio ==IdAnio).ToList();
@@ -38,7 +76,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -53,7 +91,37 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AnioLectivoConductaEquivalencia_Info> Lista = new List<aca_AnioLectivoConductaEquivalencia_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_AnioLectivoConductaEquivalencia"
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IngresaProfesor = 1";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivoConductaEquivalencia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            DescripcionEquivalencia = string.IsNullOrEmpty(reader["DescripcionEquivalencia"].ToString()) ? null : reader["DescripcionEquivalencia"].ToString(),
+                            Calificacion = Convert.ToDecimal(reader["Calificacion"]),
+                            Equivalencia = string.IsNullOrEmpty(reader["Equivalencia"].ToString()) ? null : reader["Equivalencia"].ToString(),
+                            IngresaMotivo = string.IsNullOrEmpty(reader["IngresaMotivo"].ToString()) ? false : Convert.ToBoolean(reader["IngresaMotivo"]),
+                            IngresaInspector = string.IsNullOrEmpty(reader["IngresaInspector"].ToString()) ? false : Convert.ToBoolean(reader["IngresaInspector"]),
+                            IngresaProfesor = string.IsNullOrEmpty(reader["IngresaProfesor"].ToString()) ? false : Convert.ToBoolean(reader["IngresaProfesor"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IngresaProfesor==true).ToList();
@@ -75,7 +143,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -90,7 +158,37 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AnioLectivoConductaEquivalencia_Info> Lista = new List<aca_AnioLectivoConductaEquivalencia_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_AnioLectivoConductaEquivalencia"
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IngresaInspector = 1";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivoConductaEquivalencia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            DescripcionEquivalencia = string.IsNullOrEmpty(reader["DescripcionEquivalencia"].ToString()) ? null : reader["DescripcionEquivalencia"].ToString(),
+                            Calificacion = Convert.ToDecimal(reader["Calificacion"]),
+                            Equivalencia = string.IsNullOrEmpty(reader["Equivalencia"].ToString()) ? null : reader["Equivalencia"].ToString(),
+                            IngresaMotivo = string.IsNullOrEmpty(reader["IngresaMotivo"].ToString()) ? false : Convert.ToBoolean(reader["IngresaMotivo"]),
+                            IngresaInspector = string.IsNullOrEmpty(reader["IngresaInspector"].ToString()) ? false : Convert.ToBoolean(reader["IngresaInspector"]),
+                            IngresaProfesor = string.IsNullOrEmpty(reader["IngresaProfesor"].ToString()) ? false : Convert.ToBoolean(reader["IngresaProfesor"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IngresaInspector == true).ToList();
@@ -112,7 +210,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -127,7 +225,37 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_AnioLectivoConductaEquivalencia_Info> Lista = new List<aca_AnioLectivoConductaEquivalencia_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_AnioLectivoConductaEquivalencia"
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IngresaMotivo = 1";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivoConductaEquivalencia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            DescripcionEquivalencia = string.IsNullOrEmpty(reader["DescripcionEquivalencia"].ToString()) ? null : reader["DescripcionEquivalencia"].ToString(),
+                            Calificacion = Convert.ToDecimal(reader["Calificacion"]),
+                            Equivalencia = string.IsNullOrEmpty(reader["Equivalencia"].ToString()) ? null : reader["Equivalencia"].ToString(),
+                            IngresaMotivo = string.IsNullOrEmpty(reader["IngresaMotivo"].ToString()) ? false : Convert.ToBoolean(reader["IngresaMotivo"]),
+                            IngresaInspector = string.IsNullOrEmpty(reader["IngresaInspector"].ToString()) ? false : Convert.ToBoolean(reader["IngresaInspector"]),
+                            IngresaProfesor = string.IsNullOrEmpty(reader["IngresaProfesor"].ToString()) ? false : Convert.ToBoolean(reader["IngresaProfesor"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IngresaMotivo==true).ToList();
@@ -149,7 +277,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -162,8 +290,38 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivoConductaEquivalencia_Info info;
+                aca_AnioLectivoConductaEquivalencia_Info info = new aca_AnioLectivoConductaEquivalencia_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoConductaEquivalencia "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and Secuencia = " + Secuencia.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivoConductaEquivalencia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            DescripcionEquivalencia = string.IsNullOrEmpty(reader["DescripcionEquivalencia"].ToString()) ? null : reader["DescripcionEquivalencia"].ToString(),
+                            Calificacion = Convert.ToDecimal(reader["Calificacion"]),
+                            Equivalencia = string.IsNullOrEmpty(reader["Equivalencia"].ToString()) ? null : reader["Equivalencia"].ToString(),
+                            IngresaMotivo = string.IsNullOrEmpty(reader["IngresaMotivo"].ToString()) ? false : Convert.ToBoolean(reader["IngresaMotivo"]),
+                            IngresaInspector = string.IsNullOrEmpty(reader["IngresaInspector"].ToString()) ? false : Convert.ToBoolean(reader["IngresaInspector"]),
+                            IngresaProfesor = string.IsNullOrEmpty(reader["IngresaProfesor"].ToString()) ? false : Convert.ToBoolean(reader["IngresaProfesor"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Secuencia == Secuencia).FirstOrDefault();
@@ -184,7 +342,7 @@ namespace Core.Data.Academico
                         DescripcionEquivalencia = Entity.DescripcionEquivalencia
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
@@ -198,8 +356,38 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivoConductaEquivalencia_Info info;
+                aca_AnioLectivoConductaEquivalencia_Info info = new aca_AnioLectivoConductaEquivalencia_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoConductaEquivalencia "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and Letra = " + "'" + Letra.ToString() + "'";
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivoConductaEquivalencia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            DescripcionEquivalencia = string.IsNullOrEmpty(reader["DescripcionEquivalencia"].ToString()) ? null : reader["DescripcionEquivalencia"].ToString(),
+                            Calificacion = Convert.ToDecimal(reader["Calificacion"]),
+                            Equivalencia = string.IsNullOrEmpty(reader["Equivalencia"].ToString()) ? null : reader["Equivalencia"].ToString(),
+                            IngresaMotivo = string.IsNullOrEmpty(reader["IngresaMotivo"].ToString()) ? false : Convert.ToBoolean(reader["IngresaMotivo"]),
+                            IngresaInspector = string.IsNullOrEmpty(reader["IngresaInspector"].ToString()) ? false : Convert.ToBoolean(reader["IngresaInspector"]),
+                            IngresaProfesor = string.IsNullOrEmpty(reader["IngresaProfesor"].ToString()) ? false : Convert.ToBoolean(reader["IngresaProfesor"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Letra == Letra).FirstOrDefault();
@@ -220,7 +408,7 @@ namespace Core.Data.Academico
                         DescripcionEquivalencia = Entity.DescripcionEquivalencia
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
@@ -234,8 +422,38 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivoConductaEquivalencia_Info info;
+                aca_AnioLectivoConductaEquivalencia_Info info = new aca_AnioLectivoConductaEquivalencia_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoConductaEquivalencia "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and " + PromedioConducta.ToString() + " <= Calificacion ";
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivoConductaEquivalencia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            DescripcionEquivalencia = string.IsNullOrEmpty(reader["DescripcionEquivalencia"].ToString()) ? null : reader["DescripcionEquivalencia"].ToString(),
+                            Calificacion = Convert.ToDecimal(reader["Calificacion"]),
+                            Equivalencia = string.IsNullOrEmpty(reader["Equivalencia"].ToString()) ? null : reader["Equivalencia"].ToString(),
+                            IngresaMotivo = string.IsNullOrEmpty(reader["IngresaMotivo"].ToString()) ? false : Convert.ToBoolean(reader["IngresaMotivo"]),
+                            IngresaInspector = string.IsNullOrEmpty(reader["IngresaInspector"].ToString()) ? false : Convert.ToBoolean(reader["IngresaInspector"]),
+                            IngresaProfesor = string.IsNullOrEmpty(reader["IngresaProfesor"].ToString()) ? false : Convert.ToBoolean(reader["IngresaProfesor"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var x = db.aca_AnioLectivoConductaEquivalencia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
@@ -257,7 +475,7 @@ namespace Core.Data.Academico
                         DescripcionEquivalencia = Entity.DescripcionEquivalencia
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
@@ -271,8 +489,38 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_AnioLectivoConductaEquivalencia_Info info;
+                aca_AnioLectivoConductaEquivalencia_Info info = new aca_AnioLectivoConductaEquivalencia_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoConductaEquivalencia "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and " + PromedioConducta.ToString() + " <= Calificacion ";
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivoConductaEquivalencia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            DescripcionEquivalencia = string.IsNullOrEmpty(reader["DescripcionEquivalencia"].ToString()) ? null : reader["DescripcionEquivalencia"].ToString(),
+                            Calificacion = Convert.ToDecimal(reader["Calificacion"]),
+                            Equivalencia = string.IsNullOrEmpty(reader["Equivalencia"].ToString()) ? null : reader["Equivalencia"].ToString(),
+                            IngresaMotivo = string.IsNullOrEmpty(reader["IngresaMotivo"].ToString()) ? false : Convert.ToBoolean(reader["IngresaMotivo"]),
+                            IngresaInspector = string.IsNullOrEmpty(reader["IngresaInspector"].ToString()) ? false : Convert.ToBoolean(reader["IngresaInspector"]),
+                            IngresaProfesor = string.IsNullOrEmpty(reader["IngresaProfesor"].ToString()) ? false : Convert.ToBoolean(reader["IngresaProfesor"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_AnioLectivoConductaEquivalencia.OrderBy(q => q.Calificacion).Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && PromedioConducta <= q.Calificacion).FirstOrDefault();
@@ -293,7 +541,7 @@ namespace Core.Data.Academico
                         DescripcionEquivalencia = Entity.DescripcionEquivalencia
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
@@ -359,7 +607,6 @@ namespace Core.Data.Academico
                 throw;
             }
         }
-
         public bool guardarDB(aca_AnioLectivoConductaEquivalencia_Info info)
         {
             try

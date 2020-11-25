@@ -267,7 +267,8 @@ namespace Core.Bus.Academico
 
                                 if (PromedioFinal < PromedioMinimoPromocion)
                                 {
-                                    info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.SUPLENCIA);
+                                    info_alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.SUPLENCIA);
+                                    info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REPROBADO);
                                     odata_alumno.PaseAnioDB(info_alumno);
                                 }
                             }
