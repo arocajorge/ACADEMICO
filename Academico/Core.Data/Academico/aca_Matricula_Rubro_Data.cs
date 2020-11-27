@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,58 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_Matricula_Rubro_Info> Lista = new List<aca_Matricula_Rubro_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT dbo.aca_Plantilla_Rubro.IdEmpresa, dbo.aca_Plantilla_Rubro.IdAnio, dbo.aca_Plantilla_Rubro.IdPlantilla, dbo.aca_Plantilla_Rubro.IdRubro, dbo.aca_AnioLectivo_Rubro.NomRubro, arp.IdPeriodo, "
+                    + " dbo.aca_AnioLectivo_Periodo.FechaDesde, dbo.aca_AnioLectivo_Periodo.FechaHasta, dbo.aca_Plantilla_Rubro.IdProducto, dbo.aca_Plantilla_Rubro.Subtotal, dbo.aca_Plantilla_Rubro.IdCod_Impuesto_Iva, "
+                    + " dbo.aca_Plantilla_Rubro.Porcentaje, dbo.aca_Plantilla_Rubro.ValorIVA, dbo.aca_Plantilla_Rubro.Total, pro.pr_descripcion, dbo.aca_AnioLectivo_Rubro.AplicaProntoPago, CASE WHEN aca_AnioLectivo_Rubro.AplicaProntoPago = 1 AND "
+                    + " dbo.aca_AnioLectivo_Periodo.FechaProntoPago > CAST(getdate() AS date) THEN CAST(dbo.aca_Plantilla_Rubro.Subtotal AS float) "
+                    + " - (CASE WHEN dbo.aca_Plantilla.AplicaParaTodo = 1 THEN(CASE WHEN dbo.aca_Plantilla.TipoDescuento = '$' THEN CAST(dbo.aca_Plantilla.Valor AS FLOAT) ELSE ROUND(CAST(dbo.aca_Plantilla_Rubro.Subtotal AS float) "
+                    + " * (dbo.aca_Plantilla.Valor / 100), 2) END) ELSE(CASE WHEN dbo.aca_Plantilla_Rubro.TipoDescuento_descuentoDet = '$' THEN CAST(dbo.aca_Plantilla_Rubro.Valor_descuentoDet AS FLOAT) "
+                    + " ELSE ROUND(CAST(dbo.aca_Plantilla_Rubro.Subtotal AS float) * (dbo.aca_Plantilla_Rubro.Valor_descuentoDet / 100), 2) END) END) ELSE CAST(dbo.aca_Plantilla_Rubro.Subtotal AS float)  "
+                    + " + CAST(dbo.aca_Plantilla_Rubro.ValorIVA AS FLOAT) END + dbo.aca_Plantilla_Rubro.ValorIVA AS ValorProntoPago, dbo.aca_AnioLectivo_Periodo.FechaProntoPago "
+                    + " FROM dbo.aca_AnioLectivo_Rubro_Periodo AS arp INNER JOIN "
+                    + " dbo.aca_Plantilla_Rubro ON arp.IdEmpresa = dbo.aca_Plantilla_Rubro.IdEmpresa AND arp.IdAnio = dbo.aca_Plantilla_Rubro.IdAnio AND arp.IdRubro = dbo.aca_Plantilla_Rubro.IdRubro INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Periodo ON arp.IdEmpresa = dbo.aca_AnioLectivo_Periodo.IdEmpresa AND arp.IdPeriodo = dbo.aca_AnioLectivo_Periodo.IdPeriodo INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Rubro ON arp.IdEmpresa = dbo.aca_AnioLectivo_Rubro.IdEmpresa AND arp.IdAnio = dbo.aca_AnioLectivo_Rubro.IdAnio AND arp.IdRubro = dbo.aca_AnioLectivo_Rubro.IdRubro INNER JOIN "
+                    + " dbo.in_Producto AS pro ON dbo.aca_Plantilla_Rubro.IdEmpresa = pro.IdEmpresa AND dbo.aca_Plantilla_Rubro.IdProducto = pro.IdProducto INNER JOIN "
+                    + " dbo.aca_Plantilla ON dbo.aca_Plantilla_Rubro.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND dbo.aca_Plantilla_Rubro.IdAnio = dbo.aca_Plantilla.IdAnio AND dbo.aca_Plantilla_Rubro.IdPlantilla = dbo.aca_Plantilla.IdPlantilla "
+                    + " WHERE dbo.aca_Plantilla_Rubro.IdEmpresa = " + IdEmpresa.ToString() + " and dbo.aca_Plantilla_Rubro.IdAnio = " + IdAnio.ToString() + " and dbo.aca_Plantilla_Rubro.IdPlantilla = " + IdPlantilla.ToString()
+                    + " ORDER BY arp.IdPeriodo ";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Matricula_Rubro_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdPlantilla = Convert.ToInt32(reader["IdPlantilla"]),
+                            IdPeriodo = Convert.ToInt32(reader["IdPeriodo"]),
+                            IdRubro = Convert.ToInt32(reader["IdRubro"]),
+                            IdProducto = Convert.ToDecimal(reader["IdProducto"]),
+                            Subtotal = Convert.ToDecimal(reader["Subtotal"]),
+                            IdCod_Impuesto_Iva = reader["IdCod_Impuesto_Iva"].ToString(),
+                            ValorIVA = Convert.ToDecimal(reader["ValorIVA"]),
+                            Porcentaje = Convert.ToDecimal(reader["Porcentaje"]),
+                            Total = Convert.ToDecimal(reader["Total"]),
+                            NomRubro = reader["NomRubro"].ToString(),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            pr_descripcion = reader["pr_descripcion"].ToString(),
+                            AplicaProntoPago = Convert.ToBoolean(reader["AplicaProntoPago"]),
+                            ValorProntoPago = string.IsNullOrEmpty(reader["ValorProntoPago"].ToString()) ? 0 : Convert.ToDecimal(reader["ValorProntoPago"]),
+                            FechaProntoPago = string.IsNullOrEmpty(reader["FechaProntoPago"].ToString()) ? DateTime.Now.Date : Convert.ToDateTime(reader["FechaProntoPago"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     var lst = Context.vwaca_Plantilla_Rubro_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPlantilla == IdPlantilla).OrderBy(q => q.IdPeriodo).ToList();
@@ -41,9 +93,9 @@ namespace Core.Data.Academico
                             ValorProntoPago = Convert.ToDecimal(q.ValorProntoPago ?? 0),
                             FechaProntoPago = q.FechaProntoPago ?? DateTime.Now.Date
                         });
-                    }
-                    
+                    }    
                 }
+                */
                 Lista.ForEach(v => { v.Periodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });
                 Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000000") + q.IdPlantilla.ToString("0000000") + q.IdPeriodo.ToString("0000000") + q.IdRubro.ToString("0000000"));
                 return Lista;
@@ -59,8 +111,61 @@ namespace Core.Data.Academico
         {
             try
             {
-                List<aca_Matricula_Rubro_Info> Lista;
+                List<aca_Matricula_Rubro_Info> Lista = new List<aca_Matricula_Rubro_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT mr.IdEmpresa, mr.IdMatricula, mr.IdPeriodo, ap.FechaDesde, mr.IdRubro, ar.NomRubro, mr.IdProducto, mr.Subtotal, mr.IdCod_Impuesto_Iva, mr.Porcentaje, mr.ValorIVA, mr.Total, p.pr_descripcion, mr.IdSucursal, mr.IdBodega, "
+                    + " mr.IdCbteVta, mr.FechaFacturacion, mr.IdMecanismo, mr.EnMatricula, mr.IdAnio, mr.IdPlantilla, mr.IdSede, mr.IdNivel, mr.IdJornada, mr.IdCurso, mr.IdParalelo "
+                    + " FROM     dbo.aca_AnioLectivo_Rubro AS ar INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Rubro_Periodo AS arp ON ar.IdEmpresa = arp.IdEmpresa AND ar.IdAnio = arp.IdAnio AND ar.IdRubro = arp.IdRubro INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Periodo AS ap ON arp.IdEmpresa = ap.IdEmpresa AND arp.IdPeriodo = ap.IdPeriodo INNER JOIN "
+                    + " dbo.aca_Matricula_Rubro AS mr ON arp.IdEmpresa = mr.IdEmpresa AND arp.IdPeriodo = mr.IdPeriodo AND arp.IdRubro = mr.IdRubro INNER JOIN "
+                    + " dbo.in_Producto AS p ON mr.IdEmpresa = p.IdEmpresa AND mr.IdProducto = p.IdProducto "
+                    + " WHERE mr.IdEmpresa = " + IdEmpresa.ToString() + " and mr.IdMatricula = " + IdMatricula.ToString()
+                    + " ORDER BY mr.IdPeriodo ";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Matricula_Rubro_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdPeriodo = Convert.ToInt32(reader["IdPeriodo"]),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            IdRubro = Convert.ToInt32(reader["IdRubro"]),
+                            NomRubro = reader["NomRubro"].ToString(),
+                            IdProducto = Convert.ToDecimal(reader["IdProducto"]),
+                            Subtotal = Convert.ToDecimal(reader["Subtotal"]),
+                            IdCod_Impuesto_Iva = reader["IdCod_Impuesto_Iva"].ToString(),
+                            ValorIVA = Convert.ToDecimal(reader["ValorIVA"]),
+                            Porcentaje = Convert.ToDecimal(reader["Porcentaje"]),
+                            Total = Convert.ToDecimal(reader["Total"]),
+                            pr_descripcion = reader["pr_descripcion"].ToString(),
+                            IdSucursal = string.IsNullOrEmpty(reader["IdSucursal"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdSucursal"]),
+                            IdBodega = string.IsNullOrEmpty(reader["IdBodega"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdBodega"]),
+                            IdCbteVta = string.IsNullOrEmpty(reader["IdCbteVta"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["IdCbteVta"]),
+                            FechaFacturacion = string.IsNullOrEmpty(reader["FechaFacturacion"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["FechaFacturacion"]),
+                            IdMecanismo = Convert.ToInt32(reader["IdMecanismo"]),
+                            EnMatricula = Convert.ToBoolean(reader["EnMatricula"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdPlantilla = Convert.ToInt32(reader["IdPlantilla"]),
+                            IdSede = string.IsNullOrEmpty(reader["IdSede"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdSede"]),
+                            IdJornada = string.IsNullOrEmpty(reader["IdJornada"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = string.IsNullOrEmpty(reader["IdNivel"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = string.IsNullOrEmpty(reader["IdCurso"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = string.IsNullOrEmpty(reader["IdParalelo"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdParalelo"]),
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     Lista = Context.vwaca_Matricula_Rubro.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).OrderBy(q=>q.IdPeriodo).Select(q => new aca_Matricula_Rubro_Info
@@ -93,6 +198,7 @@ namespace Core.Data.Academico
                         IdParalelo = q.IdParalelo
                     }).ToList();
                 }
+                */
                 Lista.ForEach(v => { v.Periodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });
                 Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000")+ q.IdMatricula.ToString("000000") + q.IdPeriodo.ToString("0000") + q.IdRubro.ToString("000000"));
                 return Lista;
@@ -109,7 +215,59 @@ namespace Core.Data.Academico
             try
             {
                 aca_Matricula_Rubro_Info info = new aca_Matricula_Rubro_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT mr.IdEmpresa, mr.IdMatricula, mr.IdPeriodo, ap.FechaDesde, mr.IdRubro, ar.NomRubro, mr.IdProducto, mr.Subtotal, mr.IdCod_Impuesto_Iva, mr.Porcentaje, mr.ValorIVA, mr.Total, p.pr_descripcion, mr.IdSucursal, mr.IdBodega, "
+                    + " mr.IdCbteVta, mr.FechaFacturacion, mr.IdMecanismo, mr.EnMatricula, mr.IdAnio, mr.IdPlantilla, mr.IdSede, mr.IdNivel, mr.IdJornada, mr.IdCurso, mr.IdParalelo "
+                    + " FROM     dbo.aca_AnioLectivo_Rubro AS ar INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Rubro_Periodo AS arp ON ar.IdEmpresa = arp.IdEmpresa AND ar.IdAnio = arp.IdAnio AND ar.IdRubro = arp.IdRubro INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Periodo AS ap ON arp.IdEmpresa = ap.IdEmpresa AND arp.IdPeriodo = ap.IdPeriodo INNER JOIN "
+                    + " dbo.aca_Matricula_Rubro AS mr ON arp.IdEmpresa = mr.IdEmpresa AND arp.IdPeriodo = mr.IdPeriodo AND arp.IdRubro = mr.IdRubro INNER JOIN "
+                    + " dbo.in_Producto AS p ON mr.IdEmpresa = p.IdEmpresa AND mr.IdProducto = p.IdProducto "
+                    + " WHERE mr.IdEmpresa = " + IdEmpresa.ToString() + " and mr.IdMatricula = " + IdMatricula.ToString() + " and mr.IdPeriodo = " + IdPeriodo.ToString() + " and mr.IdRubro = " + IdRubro.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_Matricula_Rubro_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdPeriodo = Convert.ToInt32(reader["IdPeriodo"]),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            IdRubro = Convert.ToInt32(reader["IdRubro"]),
+                            NomRubro = reader["NomRubro"].ToString(),
+                            IdProducto = Convert.ToDecimal(reader["IdProducto"]),
+                            Subtotal = Convert.ToDecimal(reader["Subtotal"]),
+                            IdCod_Impuesto_Iva = reader["IdCod_Impuesto_Iva"].ToString(),
+                            ValorIVA = Convert.ToDecimal(reader["ValorIVA"]),
+                            Porcentaje = Convert.ToDecimal(reader["Porcentaje"]),
+                            Total = Convert.ToDecimal(reader["Total"]),
+                            pr_descripcion = reader["pr_descripcion"].ToString(),
+                            IdSucursal = string.IsNullOrEmpty(reader["IdSucursal"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdSucursal"]),
+                            IdBodega = string.IsNullOrEmpty(reader["IdBodega"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdBodega"]),
+                            IdCbteVta = string.IsNullOrEmpty(reader["IdCbteVta"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["IdCbteVta"]),
+                            FechaFacturacion = string.IsNullOrEmpty(reader["FechaFacturacion"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["FechaFacturacion"]),
+                            IdMecanismo = Convert.ToDecimal(reader["IdMecanismo"]),
+                            EnMatricula = Convert.ToBoolean(reader["EnMatricula"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdPlantilla = Convert.ToInt32(reader["IdPlantilla"]),
+                            IdSede = string.IsNullOrEmpty(reader["IdSede"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdSede"]),
+                            IdJornada = string.IsNullOrEmpty(reader["IdJornada"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = string.IsNullOrEmpty(reader["IdNivel"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = string.IsNullOrEmpty(reader["IdCurso"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = string.IsNullOrEmpty(reader["IdParalelo"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdParalelo"]),
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     var Entity = Context.vwaca_Matricula_Rubro.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula && q.IdPeriodo == IdPeriodo && q.IdRubro == IdRubro).FirstOrDefault();
@@ -143,7 +301,7 @@ namespace Core.Data.Academico
                         IdParalelo = Entity.IdParalelo
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)

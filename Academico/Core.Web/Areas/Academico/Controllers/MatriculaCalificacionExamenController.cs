@@ -974,6 +974,12 @@ namespace Core.Web.Areas.Academico.Controllers
             decimal? resultado = null;
             if (info.IdCatalogoParcial!=0)
             {
+                var Promedio_CatalogoParcial = (decimal?)null;
+                var info_parcial = bus_parcial.GetInfo(IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, info.IdCatalogoParcial);
+                var OrdenAnterior = info_parcial.Orden - 1;
+                var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(OrdenAnterior));
+                var info_cal_anteriores = bus_calificacion.GetInfo_X_Matricula(info_matricula.IdEmpresa, info_matricula.IdMatricula, info.IdMateria);
+
                 if (info.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
                 {
                     if (calificacion.PromedioQ1 != null)

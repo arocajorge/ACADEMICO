@@ -25,10 +25,6 @@ namespace Core.Data.Academico
                     + " FROM dbo.aca_AnioLectivoConductaEquivalencia AS c INNER JOIN "
                     + " dbo.aca_AnioLectivo AS a ON c.IdEmpresa = a.IdEmpresa AND c.IdAnio = a.IdAnio "
                     + " WHERE c.IdEmpresa = " + IdEmpresa.ToString() + " and c.IdAnio = " + IdAnio.ToString();
-                    if (MostrarAnulados == false)
-                    {
-                        query += " and c.Estado = 1";
-                    }
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);

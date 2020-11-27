@@ -3,6 +3,7 @@ using Core.Info.Academico;
 using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,8 +38,55 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_SocioEconomico_Info info;
+                aca_SocioEconomico_Info info = new aca_SocioEconomico_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_SocioEconomico"
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdSocioEconomico = " + IdSocioEconomico.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_SocioEconomico_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdSocioEconomico = Convert.ToInt32(reader["IdSocioEconomico"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdCatalogoFichaVi = Convert.ToInt32(reader["IdCatalogoFichaVi"]),
+                            IdCatalogoFichaTVi = Convert.ToInt32(reader["IdCatalogoFichaTVi"]),
+                            IdCatalogoFichaAg = Convert.ToInt32(reader["IdCatalogoFichaAg"]),
+                            TieneElectricidad = Convert.ToBoolean(reader["TieneElectricidad"]),
+                            TieneHermanos = Convert.ToBoolean(reader["TieneHermanos"]),
+                            CantidadHermanos = string.IsNullOrEmpty(reader["CantidadHermanos"].ToString()) ? (int?)null : Convert.ToInt32(reader["CantidadHermanos"]),
+                            SueldoPadre = Convert.ToDouble(reader["SueldoPadre"]),
+                            SueldoMadre = Convert.ToDouble(reader["SueldoMadre"]),
+                            OtroIngresoMadre = Convert.ToDouble(reader["OtroIngresoMadre"]),
+                            OtroIngresoPadre = Convert.ToDouble(reader["OtroIngresoPadre"]),
+                            GastoAlimentacion = Convert.ToDouble(reader["GastoAlimentacion"]),
+                            GastoEducacion = Convert.ToDouble(reader["GastoEducacion"]),
+                            GastoServicioBasico = Convert.ToDouble(reader["GastoServicioBasico"]),
+                            GastoSalud = Convert.ToDouble(reader["GastoSalud"]),
+                            GastoArriendo = Convert.ToDouble(reader["GastoArriendo"]),
+                            GastoPrestamo = Convert.ToDouble(reader["GastoPrestamo"]),
+                            OtroGasto = Convert.ToDouble(reader["OtroGasto"]),
+                            IdCatalogoFichaMot = Convert.ToInt32(reader["IdCatalogoFichaMot"]),
+                            IdCatalogoFichaIns = Convert.ToInt32(reader["IdCatalogoFichaIns"]),
+                            IdCatalogoFichaFin = Convert.ToInt32(reader["IdCatalogoFichaFin"]),
+                            IdCatalogoFichaVive = Convert.ToInt32(reader["IdCatalogoFichaVive"]),
+                            OtroFinanciamiento = string.IsNullOrEmpty(reader["OtroFinanciamiento"].ToString()) ? null : reader["OtroFinanciamiento"].ToString(),
+                            OtroInformacionInst = string.IsNullOrEmpty(reader["OtroInformacionInst"].ToString()) ? null : reader["OtroInformacionInst"].ToString(),
+                            OtroMotivoIngreso = string.IsNullOrEmpty(reader["OtroMotivoIngreso"].ToString()) ? null : reader["OtroMotivoIngreso"].ToString()
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_SocioEconomico.Where(q => q.IdEmpresa == IdEmpresa && q.IdSocioEconomico == IdSocioEconomico).FirstOrDefault();
@@ -76,7 +124,7 @@ namespace Core.Data.Academico
                         OtroMotivoIngreso = Entity.OtroMotivoIngreso
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
@@ -90,8 +138,55 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_SocioEconomico_Info info;
+                aca_SocioEconomico_Info info = new aca_SocioEconomico_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_SocioEconomico"
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAlumno = " + IdAlumno.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_SocioEconomico_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdSocioEconomico = Convert.ToInt32(reader["IdSocioEconomico"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdCatalogoFichaVi = Convert.ToInt32(reader["IdCatalogoFichaVi"]),
+                            IdCatalogoFichaTVi = Convert.ToInt32(reader["IdCatalogoFichaTVi"]),
+                            IdCatalogoFichaAg = Convert.ToInt32(reader["IdCatalogoFichaAg"]),
+                            TieneElectricidad = Convert.ToBoolean(reader["TieneElectricidad"]),
+                            TieneHermanos = Convert.ToBoolean(reader["TieneHermanos"]),
+                            CantidadHermanos = string.IsNullOrEmpty(reader["CantidadHermanos"].ToString()) ? (int?)null : Convert.ToInt32(reader["CantidadHermanos"]),
+                            SueldoPadre = Convert.ToDouble(reader["SueldoPadre"]),
+                            SueldoMadre = Convert.ToDouble(reader["SueldoMadre"]),
+                            OtroIngresoMadre = Convert.ToDouble(reader["OtroIngresoMadre"]),
+                            OtroIngresoPadre = Convert.ToDouble(reader["OtroIngresoPadre"]),
+                            GastoAlimentacion = Convert.ToDouble(reader["GastoAlimentacion"]),
+                            GastoEducacion = Convert.ToDouble(reader["GastoEducacion"]),
+                            GastoServicioBasico = Convert.ToDouble(reader["GastoServicioBasico"]),
+                            GastoSalud = Convert.ToDouble(reader["GastoSalud"]),
+                            GastoArriendo = Convert.ToDouble(reader["GastoArriendo"]),
+                            GastoPrestamo = Convert.ToDouble(reader["GastoPrestamo"]),
+                            OtroGasto = Convert.ToDouble(reader["OtroGasto"]),
+                            IdCatalogoFichaMot = Convert.ToInt32(reader["IdCatalogoFichaMot"]),
+                            IdCatalogoFichaIns = Convert.ToInt32(reader["IdCatalogoFichaIns"]),
+                            IdCatalogoFichaFin = Convert.ToInt32(reader["IdCatalogoFichaFin"]),
+                            IdCatalogoFichaVive = Convert.ToInt32(reader["IdCatalogoFichaVive"]),
+                            OtroFinanciamiento = string.IsNullOrEmpty(reader["OtroFinanciamiento"].ToString()) ? null : reader["OtroFinanciamiento"].ToString(),
+                            OtroInformacionInst = string.IsNullOrEmpty(reader["OtroInformacionInst"].ToString()) ? null : reader["OtroInformacionInst"].ToString(),
+                            OtroMotivoIngreso = string.IsNullOrEmpty(reader["OtroMotivoIngreso"].ToString()) ? null : reader["OtroMotivoIngreso"].ToString()
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_SocioEconomico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).FirstOrDefault();
@@ -125,7 +220,7 @@ namespace Core.Data.Academico
                         IdCatalogoFichaFin = Entity.IdCatalogoFichaFin
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)

@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,46 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_PermisoMatricula_Info> Lista = new List<aca_PermisoMatricula_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT pm.IdEmpresa, pm.IdPermiso, pm.IdAlumno, a.IdPersona, p.pe_nombreCompleto, pm.IdAnio, an.Descripcion, pm.IdCatalogoPERNEG, pm.Fecha, pm.Observacion, pm.Estado, pm.IdUsuarioCreacion "
+                    + " FROM dbo.aca_Alumno AS a INNER JOIN "
+                    + " dbo.aca_PermisoMatricula AS pm ON a.IdEmpresa = pm.IdEmpresa AND a.IdAlumno = pm.IdAlumno INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS an ON pm.IdEmpresa = an.IdEmpresa AND pm.IdAnio = an.IdAnio INNER JOIN "
+                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona "
+                    + " WHERE pm.IdEmpresa = " + IdEmpresa.ToString() + " and pm.IdAnio = " + IdAnio.ToString() + " and pm.IdCatalogoPERNEG = " + IdCatalogoPERNEG.ToString();
+                    if (MostrarAnulados==false)
+                    {
+                        query += " and pm.Estado = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_PermisoMatricula_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdPermiso = Convert.ToDecimal(reader["IdPermiso"]),
+                            IdCatalogoPERNEG = Convert.ToInt32(reader["IdCatalogoPERNEG"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            AnioLectivo = reader["Descripcion"].ToString(),
+                            Alumno = reader["pe_nombreCompleto"].ToString(),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"]),
+                            IdUsuarioCreacion = string.IsNullOrEmpty(reader["IdUsuarioCreacion"].ToString()) ? null : reader["IdUsuarioCreacion"].ToString()
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     Lista = Context.vwaca_PermisoMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio== IdAnio && q.IdCatalogoPERNEG == IdCatalogoPERNEG 
@@ -34,6 +74,7 @@ namespace Core.Data.Academico
                         IdUsuarioCreacion = q.IdUsuarioCreacion
                     }).ToList();
                 }
+                */
                 return Lista;
             }
             catch (Exception)
@@ -47,7 +88,36 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_PermisoMatricula_Info> Lista = new List<aca_PermisoMatricula_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_PermisoMatricula "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdAlumno = " + IdAlumno.ToString()
+                    + " and IdCatalogoPERNEG = " + IdCatalogoPERNEG.ToString() + " and IdPermiso != " + IdPermiso.ToString() + " and Estado = 1";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_PermisoMatricula_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdPermiso = Convert.ToDecimal(reader["IdPermiso"]),
+                            IdCatalogoPERNEG = Convert.ToInt32(reader["IdCatalogoPERNEG"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     Lista = Context.aca_PermisoMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno
@@ -63,6 +133,7 @@ namespace Core.Data.Academico
                         Estado = q.Estado
                     }).ToList();
                 }
+                */
                 return Lista;
             }
             catch (Exception)
@@ -75,8 +146,36 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_PermisoMatricula_Info info;
+                aca_PermisoMatricula_Info info =  new aca_PermisoMatricula_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_PermisoMatricula "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdPermiso = " + IdPermiso.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_PermisoMatricula_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdPermiso = Convert.ToDecimal(reader["IdPermiso"]),
+                            IdCatalogoPERNEG = Convert.ToInt32(reader["IdCatalogoPERNEG"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_PermisoMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdPermiso == IdPermiso).FirstOrDefault();
@@ -95,7 +194,7 @@ namespace Core.Data.Academico
                         Estado = Entity.Estado
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
@@ -109,8 +208,36 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_PermisoMatricula_Info info;
+                aca_PermisoMatricula_Info info = new aca_PermisoMatricula_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_PermisoMatricula "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdAlumno = " + IdAlumno.ToString() + " and IdCatalogoPERNEG = " + IdCatalogoPERNEG.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_PermisoMatricula_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdPermiso = Convert.ToDecimal(reader["IdPermiso"]),
+                            IdCatalogoPERNEG = Convert.ToInt32(reader["IdCatalogoPERNEG"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_PermisoMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno 
@@ -131,7 +258,7 @@ namespace Core.Data.Academico
                         Observacion = Entity.Observacion
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
