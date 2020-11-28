@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,37 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaCalificacionCualitativaPromedio_Info> Lista = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_MatriculaCalificacionCualitativaPromedio "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdMatricula = " + IdMatricula.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_MatriculaCalificacionCualitativaPromedio_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdMateria = Convert.ToInt32(reader["IdMateria"]),
+                            IdProfesor = string.IsNullOrEmpty(reader["IdProfesor"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["IdProfesor"]),
+                            IdCalificacionCualitativaQ1 = string.IsNullOrEmpty(reader["IdCalificacionCualitativaQ1"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCalificacionCualitativaQ1"]),
+                            IdCalificacionCualitativaQ2 = string.IsNullOrEmpty(reader["IdCalificacionCualitativaQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCalificacionCualitativaQ2"]),
+                            IdCalificacionCualitativaFinal = string.IsNullOrEmpty(reader["IdCalificacionCualitativaFinal"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCalificacionCualitativaFinal"]),
+                            PromedioQ1 = string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["PromedioQ1"]),
+                            PromedioQ2 = string.IsNullOrEmpty(reader["PromedioQ2"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["PromedioQ2"]),
+                            PromedioFinal = string.IsNullOrEmpty(reader["PromedioFinal"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["PromedioFinal"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_MatriculaCalificacionCualitativaPromedio.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).ToList();
@@ -37,7 +68,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)

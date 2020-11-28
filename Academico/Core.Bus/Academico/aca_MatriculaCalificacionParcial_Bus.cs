@@ -162,7 +162,7 @@ namespace Core.Bus.Academico
                                 }
 
                                 var info_equivalencia = odata_promedio_equivalencia.getInfo_x_Promedio(info_matricula.IdEmpresa, info_matricula.IdAnio, PromedioFinal);
-                                IdEquivalenciaPromedioFinal = info_equivalencia.IdEquivalenciaPromedio;
+                                IdEquivalenciaPromedioFinal = (info_equivalencia==null) ? (int?)null : info_equivalencia.IdEquivalenciaPromedio;
 
                                 info_calificacion.PromedioQuimestres = PromedioQuimestralCalculado;
                                 info_calificacion.PromedioFinal = PromedioFinal;
