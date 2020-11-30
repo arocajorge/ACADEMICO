@@ -108,7 +108,7 @@ namespace Core.Data.Academico
                             IdCatalogoParcial = Convert.ToInt32(reader["IdCatalogoParcial"]),
                             IdCalificacionCualitativa = string.IsNullOrEmpty(reader["IdCalificacionCualitativa"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCalificacionCualitativa"]),
                             Conducta = string.IsNullOrEmpty(reader["Conducta"].ToString()) ? (int?)null : Convert.ToInt32(reader["Conducta"]),
-                            MotivoConducta = string.IsNullOrEmpty(reader["IdCurso"].ToString()) ? null : reader["IdCurso"].ToString()
+                            MotivoConducta = string.IsNullOrEmpty(reader["MotivoConducta"].ToString()) ? null : reader["MotivoConducta"].ToString()
                         };
                     }
                 }
@@ -176,6 +176,12 @@ namespace Core.Data.Academico
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
                             IdMateria = Convert.ToInt32(reader["IdMateria"]),
                             IdProfesor = string.IsNullOrEmpty(reader["IdProfesor"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["IdProfesor"]),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
@@ -188,9 +194,6 @@ namespace Core.Data.Academico
                             Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
                             CodigoCalificacion = string.IsNullOrEmpty(reader["CodigoCalificacion"].ToString()) ? null : reader["CodigoCalificacion"].ToString(),
                             DescripcionCorta = string.IsNullOrEmpty(reader["DescripcionCorta"].ToString()) ? null : reader["DescripcionCorta"].ToString(),
-                            RegistroValido = string.IsNullOrEmpty(reader["RegistroValido"].ToString()) ? false : Convert.ToBoolean(reader["RegistroValido"]),
-                            RegistroValidoCalificacion = string.IsNullOrEmpty(reader["RegistroValidoCalificacion"].ToString()) ? false : Convert.ToBoolean(reader["RegistroValidoCalificacion"]),
-                            RegistroValidoConducta = string.IsNullOrEmpty(reader["RegistroValidoConducta"].ToString()) ? false : Convert.ToBoolean(reader["RegistroValidoConducta"]),
                         });
                     }
                     reader.Close();
@@ -269,6 +272,12 @@ namespace Core.Data.Academico
                     {
                         IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                         IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                        IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                        IdSede = Convert.ToInt32(reader["IdSede"]),
+                        IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                        IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                        IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                        IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
                         IdMateria = Convert.ToInt32(reader["IdMateria"]),
                         IdProfesor = string.IsNullOrEmpty(reader["IdProfesor"].ToString()) ? (decimal?)null : Convert.ToInt32(reader["IdProfesor"]),
                         IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
@@ -281,9 +290,6 @@ namespace Core.Data.Academico
                         Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
                         CodigoCalificacion = string.IsNullOrEmpty(reader["CodigoCalificacion"].ToString()) ? null : reader["CodigoCalificacion"].ToString(),
                         DescripcionCorta = string.IsNullOrEmpty(reader["DescripcionCorta"].ToString()) ? null : reader["DescripcionCorta"].ToString(),
-                        RegistroValido = string.IsNullOrEmpty(reader["RegistroValido"].ToString()) ? false : Convert.ToBoolean(reader["RegistroValido"]),
-                        RegistroValidoCalificacion = string.IsNullOrEmpty(reader["RegistroValidoCalificacion"].ToString()) ? false : Convert.ToBoolean(reader["RegistroValidoCalificacion"]),
-                        RegistroValidoConducta = string.IsNullOrEmpty(reader["RegistroValidoConducta"].ToString()) ? false : Convert.ToBoolean(reader["RegistroValidoConducta"]),
                     });
                 }
                 reader.Close();
@@ -526,7 +532,7 @@ namespace Core.Data.Academico
                     + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
                     + " c.IdEmpresa = cp.IdEmpresa AND c.IdAnio = cp.IdAnio AND c.IdSede = cp.IdSede AND c.IdNivel = cp.IdNivel AND c.IdJornada = cp.IdJornada AND c.IdCurso = cp.IdCurso AND c.IdParalelo = cp.IdParalelo ";
-                    if (EsSuperAdmin == false)
+                    if (EsSuperAdmin == true)
                     {
                         query += " WHERE mc.IdEmpresa = " + IdEmpresa.ToString() + " and c.IdSede = " + IdSede.ToString()
                         + " and c.IdAnio = " + IdAnio.ToString();

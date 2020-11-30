@@ -468,11 +468,11 @@ namespace Core.Web.Areas.Academico.Controllers
                     var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(OrdenAnterior));
                     var info_cal_anteriores = bus_calificacion_parcial.get_Info(info_matricula.IdEmpresa, info_matricula.IdMatricula, info_parcial_anterior.IdCatalogoParcial, registro_editar.IdMateria, Convert.ToDecimal(registro_editar.IdProfesor));
 
-                    if (info_cal_anteriores.IdCalificacionCualitativa == null)
-                    {
-                        ViewBag.MostrarError = "El estudiante tiene calificaciones pendientes de ingresar en el parcial anterior.";
-                        RegistroValidoCalificacion = false;
-                    }
+                    //if (info_cal_anteriores.IdCalificacionCualitativa == null)
+                    //{
+                    //    ViewBag.MostrarError = "El estudiante tiene calificaciones pendientes de ingresar en el parcial anterior.";
+                    //    RegistroValidoCalificacion = false;
+                    //}
                 }
 
                 if (registro_editar.IdProfesor > 0)
