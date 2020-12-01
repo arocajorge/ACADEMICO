@@ -535,6 +535,8 @@ namespace Core.Data.Academico
                             PorcentajeDiscapacidad = string.IsNullOrEmpty(reader["PorcentajeDiscapacidad"].ToString()) ? (double?)null : Convert.ToDouble(reader["PorcentajeDiscapacidad"]),
                             NomCatalogoESTALU = reader["NomCatalogoESTALU"].ToString(),
                             NomCatalogoESTMAT = reader["NomCatalogoESTMAT"].ToString(),
+                            IdCatalogoESTALU = Convert.ToInt32(reader["IdCatalogoESTALU"]),
+                            IdCatalogoESTMAT = Convert.ToInt32(reader["IdCatalogoESTMAT"]),
                             Estado = Convert.ToBoolean(reader["Estado"]),
                             IdPais = reader["IdPais"].ToString(),
                             Cod_Region = reader["Cod_Region"].ToString(),

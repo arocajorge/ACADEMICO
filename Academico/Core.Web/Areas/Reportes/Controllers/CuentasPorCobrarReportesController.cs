@@ -1,4 +1,5 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.CuentasPorCobrar;
 using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Bus.SeguridadAcceso;
@@ -28,6 +29,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         fa_cliente_contactos_Bus bus_cliente_contacto = new fa_cliente_contactos_Bus();
         fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
+        cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
 
         #region Combos
         public ActionResult Cmb_Alumno()
@@ -145,13 +147,25 @@ namespace Core.Web.Areas.Reportes.Controllers
 
         public ActionResult CXC_002(int IdSucursal = 0, decimal IdCobro = 0)
         {
-            CXC_002_Rpt model = new CXC_002_Rpt();
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var info_cobro = bus_cobro.get_info(IdEmpresa, IdSucursal,IdCobro);
+            cl_filtros_Info model = new cl_filtros_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdSede = Convert.ToInt32(SessionFixed.IdSede),
+                IdSucursal = IdSucursal,
+                IdAlumno = Convert.ToInt32(info_cobro.IdAlumno),
 
-            model.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
-            model.p_IdSucursal.Value = IdSucursal;
-            model.p_IdCobro.Value = IdCobro;
-            model.usuario = SessionFixed.IdUsuario;
-            
+            };
+
+            CXC_002_Rpt Report = new CXC_002_Rpt();
+
+            Report.p_IdEmpresa.Value = Convert.ToInt32(SessionFixed.IdEmpresa);
+            Report.p_IdSucursal.Value = IdSucursal;
+            Report.p_IdCobro.Value = IdCobro;
+            Report.usuario = SessionFixed.IdUsuario;
+            ViewBag.Report = Report;
+
             return View(model);
         }
 

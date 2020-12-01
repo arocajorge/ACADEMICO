@@ -3,6 +3,7 @@ using Core.Info.Academico;
 using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,65 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaConducta_Info> Lista = new List<aca_MatriculaConducta_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT * FROM aca_MatriculaConducta "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdMatricula = " + IdMatricula.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            SecuenciaPromedioP1 = string.IsNullOrEmpty(reader["SecuenciaPromedioP1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP1"]),
+                            PromedioP1 = string.IsNullOrEmpty(reader["PromedioP1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP1"]),
+                            SecuenciaPromedioFinalP1 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP1"]),
+                            PromedioFinalP1 = string.IsNullOrEmpty(reader["PromedioFinalP1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP1"]),
+                            SecuenciaPromedioP2 = string.IsNullOrEmpty(reader["SecuenciaPromedioP2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP2"]),
+                            PromedioP2 = string.IsNullOrEmpty(reader["PromedioP2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP2"]),
+                            SecuenciaPromedioFinalP2 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP2"]),
+                            PromedioFinalP2 = string.IsNullOrEmpty(reader["PromedioFinalP2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP2"]),
+                            SecuenciaPromedioP3 = string.IsNullOrEmpty(reader["SecuenciaPromedioP3"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP3"]),
+                            PromedioP3 = string.IsNullOrEmpty(reader["PromedioP3"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP3"]),
+                            SecuenciaPromedioFinalP3 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP3"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP3"]),
+                            PromedioFinalP3 = string.IsNullOrEmpty(reader["PromedioFinalP3"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP3"]),
+                            SecuenciaPromedioP4 = string.IsNullOrEmpty(reader["SecuenciaPromedioP4"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP4"]),
+                            PromedioP4 = string.IsNullOrEmpty(reader["PromedioP4"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP4"]),
+                            SecuenciaPromedioFinalP4 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP4"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP4"]),
+                            PromedioFinalP4 = string.IsNullOrEmpty(reader["PromedioFinalP4"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP4"]),
+                            SecuenciaPromedioP5 = string.IsNullOrEmpty(reader["SecuenciaPromedioP5"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP5"]),
+                            PromedioP5 = string.IsNullOrEmpty(reader["PromedioP5"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP5"]),
+                            SecuenciaPromedioFinalP5 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP5"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP5"]),
+                            PromedioFinalP5 = string.IsNullOrEmpty(reader["PromedioFinalP5"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP5"]),
+                            SecuenciaPromedioP6 = string.IsNullOrEmpty(reader["SecuenciaPromedioP6"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP6"]),
+                            PromedioP6 = string.IsNullOrEmpty(reader["PromedioP6"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP6"]),
+                            SecuenciaPromedioFinalP6 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP6"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP6"]),
+                            PromedioFinalP6 = string.IsNullOrEmpty(reader["PromedioFinalP6"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP6"]),
+                            SecuenciaPromedioQ1 = string.IsNullOrEmpty(reader["SecuenciaPromedioQ1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioQ1"]),
+                            PromedioQ1 = string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioQ1"]),
+                            SecuenciaPromedioFinalQ1 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalQ1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalQ1"]),
+                            PromedioFinalQ1 = string.IsNullOrEmpty(reader["PromedioFinalQ1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalQ1"]),
+                            SecuenciaPromedioQ2 = string.IsNullOrEmpty(reader["SecuenciaPromedioQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioQ2"]),
+                            PromedioQ2 = string.IsNullOrEmpty(reader["PromedioQ2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioQ2"]),
+                            SecuenciaPromedioFinalQ2 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalQ2"]),
+                            PromedioFinalQ2 = string.IsNullOrEmpty(reader["PromedioFinalQ2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalQ2"]),
+                            SecuenciaPromedioGeneral = string.IsNullOrEmpty(reader["SecuenciaPromedioGeneral"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioGeneral"]),
+                            PromedioGeneral = string.IsNullOrEmpty(reader["PromedioGeneral"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioGeneral"]),
+                            SecuenciaPromedioFinal = string.IsNullOrEmpty(reader["SecuenciaPromedioFinal"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinal"]),
+                            PromedioFinal = string.IsNullOrEmpty(reader["PromedioFinal"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinal"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.aca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).ToList();
@@ -71,7 +130,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception ex)
@@ -84,8 +143,66 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_MatriculaConducta_Info info;
+                aca_MatriculaConducta_Info info = new aca_MatriculaConducta_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_MatriculaConducta "
+                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdMatricula = " + IdMatricula.ToString();
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            SecuenciaPromedioP1 = string.IsNullOrEmpty(reader["SecuenciaPromedioP1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP1"]),
+                            PromedioP1 = string.IsNullOrEmpty(reader["PromedioP1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP1"]),
+                            SecuenciaPromedioFinalP1 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP1"]),
+                            PromedioFinalP1 = string.IsNullOrEmpty(reader["PromedioFinalP1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP1"]),
+                            SecuenciaPromedioP2 = string.IsNullOrEmpty(reader["SecuenciaPromedioP2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP2"]),
+                            PromedioP2 = string.IsNullOrEmpty(reader["PromedioP2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP2"]),
+                            SecuenciaPromedioFinalP2 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP2"]),
+                            PromedioFinalP2 = string.IsNullOrEmpty(reader["PromedioFinalP2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP2"]),
+                            SecuenciaPromedioP3 = string.IsNullOrEmpty(reader["SecuenciaPromedioP3"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP3"]),
+                            PromedioP3 = string.IsNullOrEmpty(reader["PromedioP3"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP3"]),
+                            SecuenciaPromedioFinalP3 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP3"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP3"]),
+                            PromedioFinalP3 = string.IsNullOrEmpty(reader["PromedioFinalP3"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP3"]),
+                            SecuenciaPromedioP4 = string.IsNullOrEmpty(reader["SecuenciaPromedioP4"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP4"]),
+                            PromedioP4 = string.IsNullOrEmpty(reader["PromedioP4"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP4"]),
+                            SecuenciaPromedioFinalP4 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP4"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP4"]),
+                            PromedioFinalP4 = string.IsNullOrEmpty(reader["PromedioFinalP4"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP4"]),
+                            SecuenciaPromedioP5 = string.IsNullOrEmpty(reader["SecuenciaPromedioP5"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP5"]),
+                            PromedioP5 = string.IsNullOrEmpty(reader["PromedioP5"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP5"]),
+                            SecuenciaPromedioFinalP5 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP5"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP5"]),
+                            PromedioFinalP5 = string.IsNullOrEmpty(reader["PromedioFinalP5"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP5"]),
+                            SecuenciaPromedioP6 = string.IsNullOrEmpty(reader["SecuenciaPromedioP6"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP6"]),
+                            PromedioP6 = string.IsNullOrEmpty(reader["PromedioP6"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP6"]),
+                            SecuenciaPromedioFinalP6 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP6"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP6"]),
+                            PromedioFinalP6 = string.IsNullOrEmpty(reader["PromedioFinalP6"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP6"]),
+                            SecuenciaPromedioQ1 = string.IsNullOrEmpty(reader["SecuenciaPromedioQ1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioQ1"]),
+                            PromedioQ1 = string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioQ1"]),
+                            SecuenciaPromedioFinalQ1 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalQ1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalQ1"]),
+                            PromedioFinalQ1 = string.IsNullOrEmpty(reader["PromedioFinalQ1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalQ1"]),
+                            SecuenciaPromedioQ2 = string.IsNullOrEmpty(reader["SecuenciaPromedioQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioQ2"]),
+                            PromedioQ2 = string.IsNullOrEmpty(reader["PromedioQ2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioQ2"]),
+                            SecuenciaPromedioFinalQ2 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalQ2"]),
+                            PromedioFinalQ2 = string.IsNullOrEmpty(reader["PromedioFinalQ2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalQ2"]),
+                            SecuenciaPromedioGeneral = string.IsNullOrEmpty(reader["SecuenciaPromedioGeneral"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioGeneral"]),
+                            PromedioGeneral = string.IsNullOrEmpty(reader["PromedioGeneral"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioGeneral"]),
+                            SecuenciaPromedioFinal = string.IsNullOrEmpty(reader["SecuenciaPromedioFinal"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinal"]),
+                            PromedioFinal = string.IsNullOrEmpty(reader["PromedioFinal"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinal"])
+                        };
+                    }
+                }
+                /*
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var Entity = db.aca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).FirstOrDefault();
@@ -134,7 +251,7 @@ namespace Core.Data.Academico
                         PromedioFinal = Entity.PromedioFinal
                     };
                 }
-
+                */
                 return info;
             }
             catch (Exception)
@@ -164,6 +281,98 @@ namespace Core.Data.Academico
                 decimal IdAlumnoIni = IdAlumno;
                 decimal IdAlumnoFin = IdAlumno == 0 ? 9999999 : IdAlumno;
 
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+
+                    #region Query
+                    string query = "SELECT mc.IdEmpresa, mc.IdMatricula, m.IdAlumno, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, p.pe_nombreCompleto, mc.SecuenciaPromedioP1, mc.PromedioP1, mc.SecuenciaPromedioFinalP1, mc.PromedioFinalP1, "
+                    + " mc.SecuenciaPromedioP2, mc.PromedioP2, mc.SecuenciaPromedioFinalP2, mc.PromedioFinalP2, mc.SecuenciaPromedioP3, mc.PromedioP3, mc.SecuenciaPromedioFinalP3, mc.PromedioFinalP3, mc.SecuenciaPromedioQ1, "
+                    + " mc.PromedioQ1, mc.SecuenciaPromedioFinalQ1, mc.PromedioFinalQ1, mc.SecuenciaPromedioP4, mc.PromedioP4, mc.SecuenciaPromedioFinalP4, mc.PromedioFinalP4, mc.SecuenciaPromedioP5, mc.PromedioP5, "
+                    + " mc.SecuenciaPromedioFinalP5, mc.PromedioFinalP5, mc.SecuenciaPromedioP6, mc.PromedioP6, mc.SecuenciaPromedioFinalP6, mc.PromedioFinalP6, mc.SecuenciaPromedioQ2, mc.PromedioQ2, mc.SecuenciaPromedioFinalQ2, "
+                    + " mc.PromedioFinalQ2, mc.SecuenciaPromedioGeneral, mc.PromedioGeneral, mc.SecuenciaPromedioFinal, mc.PromedioFinal, mc.MotivoPromedioFinalP1, mc.MotivoPromedioFinalP2, mc.MotivoPromedioFinalP3, mc.MotivoPromedioFinalQ1, "
+                    + " mc.MotivoPromedioFinalP4, mc.MotivoPromedioFinalP5, mc.MotivoPromedioFinalP6, mc.MotivoPromedioFinalQ2, mc.MotivoPromedioFinal, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, "
+                    + " jc.OrdenCurso, cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo "
+                    + " FROM dbo.aca_Matricula AS m INNER JOIN "
+                    + " dbo.aca_MatriculaConducta AS mc ON m.IdEmpresa = mc.IdEmpresa AND m.IdMatricula = mc.IdMatricula INNER JOIN "
+                    + " dbo.tb_persona AS p INNER JOIN "
+                    + " dbo.aca_Alumno AS a ON p.IdPersona = a.IdPersona ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
+                    + " m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON m.IdEmpresa = jc.IdEmpresa AND m.IdAnio = jc.IdAnio AND m.IdSede = jc.IdSede AND m.IdNivel = jc.IdNivel AND m.IdJornada = jc.IdJornada AND m.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel "
+                    + " WHERE(NOT EXISTS "
+                    + " (SELECT IdEmpresa "
+                    + " FROM      dbo.aca_AlumnoRetiro AS f "
+                    + " WHERE(IdEmpresa = mc.IdEmpresa) AND(IdMatricula = mc.IdMatricula) AND(Estado = 1))) "
+                    + " AND m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdSede = " + IdSede.ToString() + " and m.IdAnio = " + IdAnio.ToString()
+                    + " AND m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
+                    + " AND m.IdJornada between " + IdJornadaIni.ToString() + " and " + IdJornadaFin.ToString()
+                    + " AND m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString()
+                    + " AND m.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString()
+                    + " AND m.IdAlumno between " + IdAlumnoIni.ToString() + " and " + IdAlumnoFin.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdAlumno = Convert.ToInt32(reader["IdAlumno"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            pe_nombreCompleto = reader["pe_nombreCompleto"].ToString(),
+                            IdMateria = Convert.ToInt32(reader["IdMateria"]),
+                            SecuenciaPromedioP1 = string.IsNullOrEmpty(reader["SecuenciaPromedioP1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP1"]),
+                            PromedioP1 = string.IsNullOrEmpty(reader["PromedioP1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP1"]),
+                            SecuenciaPromedioFinalP1 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP1"]),
+                            PromedioFinalP1 = string.IsNullOrEmpty(reader["PromedioFinalP1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP1"]),
+                            SecuenciaPromedioP2 = string.IsNullOrEmpty(reader["SecuenciaPromedioP2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP2"]),
+                            PromedioP2 = string.IsNullOrEmpty(reader["PromedioP2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP2"]),
+                            SecuenciaPromedioFinalP2 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP2"]),
+                            PromedioFinalP2 = string.IsNullOrEmpty(reader["PromedioFinalP2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP2"]),
+                            SecuenciaPromedioP3 = string.IsNullOrEmpty(reader["SecuenciaPromedioP3"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP3"]),
+                            PromedioP3 = string.IsNullOrEmpty(reader["PromedioP3"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP3"]),
+                            SecuenciaPromedioFinalP3 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP3"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP3"]),
+                            PromedioFinalP3 = string.IsNullOrEmpty(reader["PromedioFinalP3"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP3"]),
+                            SecuenciaPromedioP4 = string.IsNullOrEmpty(reader["SecuenciaPromedioP4"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP4"]),
+                            PromedioP4 = string.IsNullOrEmpty(reader["PromedioP4"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP4"]),
+                            SecuenciaPromedioFinalP4 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP4"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP4"]),
+                            PromedioFinalP4 = string.IsNullOrEmpty(reader["PromedioFinalP4"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP4"]),
+                            SecuenciaPromedioP5 = string.IsNullOrEmpty(reader["SecuenciaPromedioP5"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP5"]),
+                            PromedioP5 = string.IsNullOrEmpty(reader["PromedioP5"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP5"]),
+                            SecuenciaPromedioFinalP5 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP5"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP5"]),
+                            PromedioFinalP5 = string.IsNullOrEmpty(reader["PromedioFinalP5"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP5"]),
+                            SecuenciaPromedioP6 = string.IsNullOrEmpty(reader["SecuenciaPromedioP6"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP6"]),
+                            PromedioP6 = string.IsNullOrEmpty(reader["PromedioP6"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP6"]),
+                            SecuenciaPromedioFinalP6 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP6"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP6"]),
+                            PromedioFinalP6 = string.IsNullOrEmpty(reader["PromedioFinalP6"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP6"]),
+                            SecuenciaPromedioQ1 = string.IsNullOrEmpty(reader["SecuenciaPromedioQ1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioQ1"]),
+                            PromedioQ1 = string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioQ1"]),
+                            SecuenciaPromedioFinalQ1 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalQ1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalQ1"]),
+                            PromedioFinalQ1 = string.IsNullOrEmpty(reader["PromedioFinalQ1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalQ1"]),
+                            SecuenciaPromedioQ2 = string.IsNullOrEmpty(reader["SecuenciaPromedioQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioQ2"]),
+                            PromedioQ2 = string.IsNullOrEmpty(reader["PromedioQ2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioQ2"]),
+                            SecuenciaPromedioFinalQ2 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalQ2"]),
+                            PromedioFinalQ2 = string.IsNullOrEmpty(reader["PromedioFinalQ2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalQ2"]),
+                            SecuenciaPromedioGeneral = string.IsNullOrEmpty(reader["SecuenciaPromedioGeneral"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioGeneral"]),
+                            PromedioGeneral = string.IsNullOrEmpty(reader["PromedioGeneral"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioGeneral"]),
+                            SecuenciaPromedioFinal = string.IsNullOrEmpty(reader["SecuenciaPromedioFinal"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinal"]),
+                            PromedioFinal = string.IsNullOrEmpty(reader["PromedioFinal"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinal"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
@@ -224,7 +433,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -250,7 +459,64 @@ namespace Core.Data.Academico
                 int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
 
                 List<aca_MatriculaConducta_Info> Lista = new List<aca_MatriculaConducta_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT mc.IdEmpresa, mc.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, a.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, "
+                    + " cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo, cp.IdProfesorTutor, cp.IdProfesorInspector "
+                    + " FROM     dbo.aca_MatriculaConducta AS mc INNER JOIN "
+                    + " dbo.aca_Matricula AS m ON mc.IdEmpresa = m.IdEmpresa AND mc.IdMatricula = m.IdMatricula INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a ON m.IdAnio = a.IdAnio AND m.IdEmpresa = a.IdEmpresa LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
+                    + " m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON m.IdEmpresa = jc.IdEmpresa AND m.IdAnio = jc.IdAnio AND m.IdSede = jc.IdSede AND m.IdNivel = jc.IdNivel AND m.IdJornada = jc.IdJornada AND m.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel "
+                    + " WHERE mc.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdSede = " + IdSede.ToString() + " and m.IdAnio = " + IdAnio.ToString()
+                    + " AND m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
+                    + " AND m.IdJornada between " + IdJornadaIni.ToString() + " and " + IdJornadaFin.ToString()
+                    + " AND m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString()
+                    + " AND m.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString()
+                    + " GROUP BY mc.IdEmpresa, mc.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, a.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, "
+                    + " cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo, cp.IdProfesorTutor, cp.IdProfesorInspector ";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdAlumno = Convert.ToInt32(reader["IdAlumno"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
+                            NomSede = string.IsNullOrEmpty(reader["NomSede"].ToString()) ? null : reader["NomSede"].ToString(),
+                            NomNivel = string.IsNullOrEmpty(reader["NomNivel"].ToString()) ? null : reader["NomNivel"].ToString(),
+                            OrdenNivel = Convert.ToInt32(reader["OrdenNivel"]),
+                            NomJornada = string.IsNullOrEmpty(reader["NomJornada"].ToString()) ? null : reader["NomJornada"].ToString(),
+                            OrdenJornada = Convert.ToInt32(reader["OrdenJornada"]),
+                            NomCurso = string.IsNullOrEmpty(reader["NomCurso"].ToString()) ? null : reader["NomCurso"].ToString(),
+                            OrdenCurso = Convert.ToInt32(reader["OrdenCurso"]),
+                            NomParalelo = string.IsNullOrEmpty(reader["NomParalelo"].ToString()) ? null : reader["NomParalelo"].ToString(),
+                            OrdenParalelo = Convert.ToInt32(reader["OrdenParalelo"]),
+                            CodigoParalelo = string.IsNullOrEmpty(reader["CodigoParalelo"].ToString()) ? null : reader["CodigoParalelo"].ToString(),
+                            IdProfesorTutor = Convert.ToInt32(reader["IdProfesorTutor"]),
+                            IdProfesorInspector = Convert.ToInt32(reader["IdProfesorInspector"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_AnioLectivo_Paralelo_Conducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio==IdAnio
@@ -285,7 +551,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -299,7 +565,68 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaConducta_Info> Lista = new List<aca_MatriculaConducta_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT mc.IdEmpresa, mc.IdMatricula, mc.IdMateria, mc.IdProfesor, c.IdAnio, c.IdSede, c.IdNivel, c.IdJornada, c.IdCurso, c.IdParalelo, a.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, "
+                    + " jc.OrdenCurso, cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo, cp.IdProfesorTutor, cp.IdProfesorInspector, cm.NomMateria, cm.EsObligatorio, cm.OrdenMateria "
+                    + " FROM     dbo.aca_MatriculaCalificacion AS mc INNER JOIN "
+                    + " dbo.aca_Matricula AS c ON mc.IdEmpresa = c.IdEmpresa AND mc.IdMatricula = c.IdMatricula INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a ON c.IdAnio = a.IdAnio AND c.IdEmpresa = a.IdEmpresa INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Materia AS cm ON c.IdEmpresa = cm.IdEmpresa AND c.IdAnio = cm.IdAnio AND c.IdSede = cm.IdSede AND c.IdNivel = cm.IdNivel AND c.IdJornada = cm.IdJornada AND c.IdCurso = cm.IdCurso AND "
+                    + " mc.IdMateria = cm.IdMateria LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON nj.IdEmpresa = sn.IdEmpresa AND nj.IdAnio = sn.IdAnio AND nj.IdSede = sn.IdSede AND nj.IdNivel = sn.IdNivel RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
+                    + " c.IdEmpresa = cp.IdEmpresa AND c.IdAnio = cp.IdAnio AND c.IdSede = cp.IdSede AND c.IdNivel = cp.IdNivel AND c.IdJornada = cp.IdJornada AND c.IdCurso = cp.IdCurso AND c.IdParalelo = cp.IdParalelo ";
+                    if (EsSuperAdmin == false)
+                    {
+                        query += " WHERE mc.IdEmpresa = " + IdEmpresa.ToString() + " and cp.IdProfesorInspector = " + IdProfesor.ToString();
+                    }
+                    else
+                    {
+                        query += " WHERE mc.IdEmpresa = " + IdEmpresa.ToString();
+                    }
+                    query += " GROUP BY mc.IdEmpresa, mc.IdMatricula, mc.IdMateria, mc.IdProfesor, c.IdAnio, c.IdSede, c.IdNivel, c.IdJornada, c.IdCurso, c.IdParalelo, a.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, "
+                    + " jc.OrdenCurso, cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo, cp.IdProfesorTutor, cp.IdProfesorInspector, cm.NomMateria, cm.OrdenMateria, cm.EsObligatorio ";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
+                            NomSede = string.IsNullOrEmpty(reader["NomSede"].ToString()) ? null : reader["NomSede"].ToString(),
+                            NomNivel = string.IsNullOrEmpty(reader["NomNivel"].ToString()) ? null : reader["NomNivel"].ToString(),
+                            OrdenNivel = Convert.ToInt32(reader["OrdenNivel"]),
+                            NomJornada = string.IsNullOrEmpty(reader["NomJornada"].ToString()) ? null : reader["NomJornada"].ToString(),
+                            OrdenJornada = Convert.ToInt32(reader["OrdenJornada"]),
+                            NomCurso = string.IsNullOrEmpty(reader["NomCurso"].ToString()) ? null : reader["NomCurso"].ToString(),
+                            OrdenCurso = Convert.ToInt32(reader["OrdenCurso"]),
+                            NomParalelo = string.IsNullOrEmpty(reader["NomParalelo"].ToString()) ? null : reader["NomParalelo"].ToString(),
+                            OrdenParalelo = Convert.ToInt32(reader["OrdenParalelo"]),
+                            CodigoParalelo = string.IsNullOrEmpty(reader["CodigoParalelo"].ToString()) ? null : reader["CodigoParalelo"].ToString(),
+                            IdProfesorTutor = Convert.ToInt32(reader["IdProfesorTutor"]),
+                            IdProfesorInspector = Convert.ToInt32(reader["IdProfesorInspector"])
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_AnioLectivo_Paralelo_Profesor_Calificaciones.Where(q => q.IdEmpresa == IdEmpresa
@@ -333,7 +660,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -347,7 +674,106 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaConducta_Info> Lista = new List<aca_MatriculaConducta_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT mc.IdEmpresa, mc.IdMatricula, m.IdAlumno, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, p.pe_nombreCompleto, mc.SecuenciaPromedioP1, mc.PromedioP1, mc.SecuenciaPromedioFinalP1, mc.PromedioFinalP1, "
+                    + " mc.SecuenciaPromedioP2, mc.PromedioP2, mc.SecuenciaPromedioFinalP2, mc.PromedioFinalP2, mc.SecuenciaPromedioP3, mc.PromedioP3, mc.SecuenciaPromedioFinalP3, mc.PromedioFinalP3, mc.SecuenciaPromedioQ1, "
+                    + " mc.PromedioQ1, mc.SecuenciaPromedioFinalQ1, mc.PromedioFinalQ1, mc.SecuenciaPromedioP4, mc.PromedioP4, mc.SecuenciaPromedioFinalP4, mc.PromedioFinalP4, mc.SecuenciaPromedioP5, mc.PromedioP5, "
+                    + " mc.SecuenciaPromedioFinalP5, mc.PromedioFinalP5, mc.SecuenciaPromedioP6, mc.PromedioP6, mc.SecuenciaPromedioFinalP6, mc.PromedioFinalP6, mc.SecuenciaPromedioQ2, mc.PromedioQ2, mc.SecuenciaPromedioFinalQ2, "
+                    + " mc.PromedioFinalQ2, mc.SecuenciaPromedioGeneral, mc.PromedioGeneral, mc.SecuenciaPromedioFinal, mc.PromedioFinal, mc.MotivoPromedioFinalP1, mc.MotivoPromedioFinalP2, mc.MotivoPromedioFinalP3, mc.MotivoPromedioFinalQ1, "
+                    + " mc.MotivoPromedioFinalP4, mc.MotivoPromedioFinalP5, mc.MotivoPromedioFinalP6, mc.MotivoPromedioFinalQ2, mc.MotivoPromedioFinal, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, "
+                    + " jc.OrdenCurso, cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo "
+                    + " FROM dbo.aca_Matricula AS m INNER JOIN "
+                    + " dbo.aca_MatriculaConducta AS mc ON m.IdEmpresa = mc.IdEmpresa AND m.IdMatricula = mc.IdMatricula INNER JOIN "
+                    + " dbo.tb_persona AS p INNER JOIN "
+                    + " dbo.aca_Alumno AS a ON p.IdPersona = a.IdPersona ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
+                    + " m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON m.IdEmpresa = jc.IdEmpresa AND m.IdAnio = jc.IdAnio AND m.IdSede = jc.IdSede AND m.IdNivel = jc.IdNivel AND m.IdJornada = jc.IdJornada AND m.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel "
+                    + " WHERE(NOT EXISTS "
+                    + " (SELECT IdEmpresa "
+                    + " FROM      dbo.aca_AlumnoRetiro AS f "
+                    + " WHERE(IdEmpresa = mc.IdEmpresa) AND(IdMatricula = mc.IdMatricula) AND(Estado = 1))) "
+                    + " AND m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdSede = " + IdSede.ToString() + " and m.IdAnio = " + IdAnio.ToString()
+                    + " AND m.IdNivel = " + IdNivel.ToString()
+                    + " AND m.IdJornada = " + IdJornada.ToString()
+                    + " AND m.IdCurso = " + IdCurso.ToString()
+                    + " AND m.IdParalelo = " + IdParalelo.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_MatriculaConducta_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdAlumno = Convert.ToInt32(reader["IdAlumno"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            pe_nombreCompleto = reader["pe_nombreCompleto"].ToString(),
+                            SecuenciaPromedioP1 = string.IsNullOrEmpty(reader["SecuenciaPromedioP1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP1"]),
+                            PromedioP1 = string.IsNullOrEmpty(reader["PromedioP1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP1"]),
+                            SecuenciaPromedioFinalP1 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP1"]),
+                            PromedioFinalP1 = string.IsNullOrEmpty(reader["PromedioFinalP1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP1"]),
+                            SecuenciaPromedioP2 = string.IsNullOrEmpty(reader["SecuenciaPromedioP2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP2"]),
+                            PromedioP2 = string.IsNullOrEmpty(reader["PromedioP2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP2"]),
+                            SecuenciaPromedioFinalP2 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP2"]),
+                            PromedioFinalP2 = string.IsNullOrEmpty(reader["PromedioFinalP2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP2"]),
+                            SecuenciaPromedioP3 = string.IsNullOrEmpty(reader["SecuenciaPromedioP3"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP3"]),
+                            PromedioP3 = string.IsNullOrEmpty(reader["PromedioP3"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP3"]),
+                            SecuenciaPromedioFinalP3 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP3"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP3"]),
+                            PromedioFinalP3 = string.IsNullOrEmpty(reader["PromedioFinalP3"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP3"]),
+                            SecuenciaPromedioP4 = string.IsNullOrEmpty(reader["SecuenciaPromedioP4"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP4"]),
+                            PromedioP4 = string.IsNullOrEmpty(reader["PromedioP4"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP4"]),
+                            SecuenciaPromedioFinalP4 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP4"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP4"]),
+                            PromedioFinalP4 = string.IsNullOrEmpty(reader["PromedioFinalP4"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP4"]),
+                            SecuenciaPromedioP5 = string.IsNullOrEmpty(reader["SecuenciaPromedioP5"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP5"]),
+                            PromedioP5 = string.IsNullOrEmpty(reader["PromedioP5"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP5"]),
+                            SecuenciaPromedioFinalP5 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP5"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP5"]),
+                            PromedioFinalP5 = string.IsNullOrEmpty(reader["PromedioFinalP5"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP5"]),
+                            SecuenciaPromedioP6 = string.IsNullOrEmpty(reader["SecuenciaPromedioP6"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioP6"]),
+                            PromedioP6 = string.IsNullOrEmpty(reader["PromedioP6"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioP6"]),
+                            SecuenciaPromedioFinalP6 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalP6"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalP6"]),
+                            PromedioFinalP6 = string.IsNullOrEmpty(reader["PromedioFinalP6"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalP6"]),
+                            SecuenciaPromedioQ1 = string.IsNullOrEmpty(reader["SecuenciaPromedioQ1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioQ1"]),
+                            PromedioQ1 = string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioQ1"]),
+                            SecuenciaPromedioFinalQ1 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalQ1"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalQ1"]),
+                            PromedioFinalQ1 = string.IsNullOrEmpty(reader["PromedioFinalQ1"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalQ1"]),
+                            SecuenciaPromedioQ2 = string.IsNullOrEmpty(reader["SecuenciaPromedioQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioQ2"]),
+                            PromedioQ2 = string.IsNullOrEmpty(reader["PromedioQ2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioQ2"]),
+                            SecuenciaPromedioFinalQ2 = string.IsNullOrEmpty(reader["SecuenciaPromedioFinalQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinalQ2"]),
+                            PromedioFinalQ2 = string.IsNullOrEmpty(reader["PromedioFinalQ2"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinalQ2"]),
+                            SecuenciaPromedioGeneral = string.IsNullOrEmpty(reader["SecuenciaPromedioGeneral"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioGeneral"]),
+                            PromedioGeneral = string.IsNullOrEmpty(reader["PromedioGeneral"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioGeneral"]),
+                            SecuenciaPromedioFinal = string.IsNullOrEmpty(reader["SecuenciaPromedioFinal"].ToString()) ? (int?)null : Convert.ToInt32(reader["SecuenciaPromedioFinal"]),
+                            PromedioFinal = string.IsNullOrEmpty(reader["PromedioFinal"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioFinal"]),
+                            MotivoPromedioFinalP1 = string.IsNullOrEmpty(reader["MotivoPromedioFinalP1"].ToString()) ? null : reader["MotivoPromedioFinalP1"].ToString(),
+                            MotivoPromedioFinalP2 = string.IsNullOrEmpty(reader["MotivoPromedioFinalP2"].ToString()) ? null : reader["MotivoPromedioFinalP2"].ToString(),
+                            MotivoPromedioFinalP3 = string.IsNullOrEmpty(reader["MotivoPromedioFinalP3"].ToString()) ? null : reader["MotivoPromedioFinalP3"].ToString(),
+                            MotivoPromedioFinalQ1 = string.IsNullOrEmpty(reader["MotivoPromedioFinalQ1"].ToString()) ? null : reader["MotivoPromedioFinalQ1"].ToString(),
+                            MotivoPromedioFinalP4 = string.IsNullOrEmpty(reader["MotivoPromedioFinalP4"].ToString()) ? null : reader["MotivoPromedioFinalP4"].ToString(),
+                            MotivoPromedioFinalP5 = string.IsNullOrEmpty(reader["MotivoPromedioFinalP5"].ToString()) ? null : reader["MotivoPromedioFinalP5"].ToString(),
+                            MotivoPromedioFinalP6 = string.IsNullOrEmpty(reader["MotivoPromedioFinalP6"].ToString()) ? null : reader["MotivoPromedioFinalP6"].ToString(),
+                            MotivoPromedioFinalQ2 = string.IsNullOrEmpty(reader["MotivoPromedioFinalQ2"].ToString()) ? null : reader["MotivoPromedioFinalQ2"].ToString(),
+                            MotivoPromedioFinal = string.IsNullOrEmpty(reader["MotivoPromedioFinal"].ToString()) ? null : reader["MotivoPromedioFinal"].ToString(),
+                            ValidoImportacion = true
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).OrderBy(q=>q.pe_nombreCompleto).ToList();
@@ -415,7 +841,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -429,7 +855,7 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaConducta_Info> Lista = new List<aca_MatriculaConducta_Info>();
-
+                
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     foreach (var info in lst_conducta)
@@ -483,7 +909,7 @@ namespace Core.Data.Academico
                         Context.SaveChanges();
                     }
                 }
-
+                
                 return true;
             }
             catch (Exception ex)

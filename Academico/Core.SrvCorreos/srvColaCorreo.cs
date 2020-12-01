@@ -121,6 +121,38 @@ namespace Core.SrvCorreos
                             #endregion
 
                             break;
+                        case "CXC_002":
+
+                            #region CXC_002
+                            CXC_002_Rpt rpt_CXC_002 = new CXC_002_Rpt();
+
+                            #region Parametros
+                            if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
+                            {
+                                string[] Parametros = CorreoInfo.Parametros.Split(';');
+                                rpt_CXC_002.p_IdEmpresa.Value = Parametros[0];
+                                //rpt_CXC_002.p_IdSede.Value = Parametros[1];
+                                rpt_CXC_002.p_IdAlumno.Value = Parametros[2];
+                            }
+                            #endregion
+
+
+                            rpt_CXC_002.usuario = "SRVFIX";
+                            rpt_CXC_002.empresa = Empresa.em_nombre;
+                            rpt_CXC_002.RequestParameters = false;
+
+                            rpt_CXC_002.ExportToPdf(mem);
+
+                            // Create a new attachment and put the PDF report into it.
+                            mem.Seek(0, System.IO.SeekOrigin.Begin);
+                            Attachment att_CXC_002 = new Attachment(mem, "RECIBO DE  CAJA.pdf", "application/pdf");
+                            mail.Attachments.Add(att_CXC_002);
+
+                            AlternateView htmlView_CXC_002 = AlternateView.CreateAlternateViewFromString(CorreoInfo.Cuerpo, null, "text/html");
+                            mail.AlternateViews.Add(htmlView_CXC_002);
+                            #endregion
+
+                            break;
                         case "CXC_011":
 
                             #region CXC_011

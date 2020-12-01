@@ -15,6 +15,7 @@ namespace Core.Web.Reportes.CuentasPorCobrar
     public partial class CXC_002_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
         public string usuario { get; set; }
+        public string empresa { get; set; }
         tb_empresa_Bus busEmpresa = new tb_empresa_Bus();
         cxc_cobro_Bus busCobro = new cxc_cobro_Bus();
         public CXC_002_Rpt()
