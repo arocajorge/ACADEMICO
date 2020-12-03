@@ -37,6 +37,14 @@
                 $("#TelefonoEconomico").val(data.TelefonoEmiteFactura);
                 $("#CelularEmiteFactura").val(data.CelularEmiteFactura);
                 $("#CorreoEconomico").val(data.correoRepEconomico);
+                $("#Papa").val(data.pe_nombreCompleto_padre);
+                $("#TelefonoPapa").val(data.TelefonoTrabajo_padre);
+                $("#CelularPapa").val(data.Celular_padre);
+                $("#CorreoPapa").val(data.Correo_padre);
+                $("#Mama").val(data.pe_nombreCompleto_madre);
+                $("#TelefonoMama").val(data.TelefonoTrabajo_madre);
+                $("#CelularMama").val(data.Celular_madre);
+                $("#CorreoMama").val(data.Correo_madre);
                 $("#NomPlantillaTipo").val(data.NomPlantillaTipo);
             },
             error: function (error) {
@@ -261,6 +269,62 @@
                 <div class="form-group">
                     <label for="IdCliente">Correo</label>
                     @Html.TextBoxFor(q => q.CorreoEconomico, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Papá</label>
+                    @Html.TextBoxFor(q => q.Papa, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdCliente">Teléfono</label>
+                    @Html.TextBoxFor(q => q.TelefonoPapa, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdCliente">Celular</label>
+                    @Html.TextBoxFor(q => q.CelularPapa, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdCliente">Correo</label>
+                    @Html.TextBoxFor(q => q.CorreoPapa, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Mamá</label>
+                    @Html.TextBoxFor(q => q.Mama, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdCliente">Teléfono</label>
+                    @Html.TextBoxFor(q => q.TelefonoMama, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdCliente">Celular</label>
+                    @Html.TextBoxFor(q => q.CelularMama, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdCliente">Correo</label>
+                    @Html.TextBoxFor(q => q.CorreoMama, new { @class = "form-control", @readonly = "readonly" })
                 </div>
             </div>
         </div>

@@ -189,7 +189,8 @@ namespace Core.Data.Academico
                             FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
                             FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
                             FechaProntoPago = string.IsNullOrEmpty(reader["FechaProntoPago"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["FechaProntoPago"]),
-                            Estado = Convert.ToBoolean(reader["Estado"])
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            Procesado = string.IsNullOrEmpty(reader["Procesado"].ToString()) ? false : Convert.ToBoolean(reader["Procesado"])
                         };
                     }
                 }

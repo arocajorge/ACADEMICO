@@ -27,6 +27,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         seg_usuario_Bus bus_usuario = new seg_usuario_Bus();
+        aca_Familia_Bus bus_familia = new aca_Familia_Bus();
         string mensaje = string.Empty;
         string mensajeInfo = string.Empty;
         string MensajeSuccess = "La transacción se ha realizado con éxito";
@@ -136,6 +137,22 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         public JsonResult GetInfoAlumno(int IdEmpresa = 0, decimal IdAlumno = 0)
         {
             var info = bus_alumno.GetInfo_PeriodoActual(IdEmpresa, IdAlumno);
+            var info_papa = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
+            var info_mama = bus_familia.GetListTipo(IdEmpresa, IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
+            if (info_papa!=null)
+            {
+                info.pe_nombreCompleto_padre = info_papa.pe_nombreCompleto;
+                info.TelefonoTrabajo_padre = info_papa.Telefono;
+                info.Celular_padre = info_papa.Celular;
+                info.Correo_padre = info_papa.Correo;
+            }
+            if (info_mama != null)
+            {
+                info.pe_nombreCompleto_madre = info_mama.pe_nombreCompleto;
+                info.TelefonoTrabajo_madre = info_mama.Telefono;
+                info.Celular_madre = info_mama.Celular;
+                info.Correo_madre = info_mama.Correo;
+            }
             return Json(info, JsonRequestBehavior.AllowGet);
         }
         public JsonResult GetList_x_Alumno(decimal IdTransaccionSession = 0, int IdEmpresa = 0, decimal IdAlumno = 0)
@@ -378,6 +395,24 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             model.CorreoEconomico = (info_alumno == null ? "" : info_alumno.correoRepEconomico);
             model.NomPlantillaTipo = (info_alumno == null ? "" : info_alumno.NomPlantillaTipo);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+
+            var info_papa = bus_familia.GetListTipo(IdEmpresa, model.IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
+            var info_mama = bus_familia.GetListTipo(IdEmpresa, model.IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
+
+            if (info_papa != null)
+            {
+                model.Papa = info_papa.pe_nombreCompleto;
+                model.TelefonoPapa = info_papa.Telefono;
+                model.CelularPapa = info_papa.Celular;
+                model.CorreoPapa = info_papa.Correo;
+            }
+            if (info_mama != null)
+            {
+                model.Mama = info_mama.pe_nombreCompleto;
+                model.TelefonoMama = info_mama.Telefono;
+                model.CelularMama = info_mama.Celular;
+                model.CorreoMama = info_mama.Correo;
+            }
 
             if (Exito)
                 ViewBag.MensajeSuccess = MensajeSuccess;

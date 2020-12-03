@@ -46,6 +46,14 @@ namespace Core.Info.CuentasPorCobrar
         public string NomPlantillaTipo { get; set; }
         public string CelularEmiteFactura { get; set; }
         public string CelularRepresentante { get; set; }
+        public string Mama { get; set; }
+        public string TelefonoMama { get; set; }
+        public string CorreoMama { get; set; }
+        public string CelularMama { get; set; }
+        public string Papa { get; set; }
+        public string TelefonoPapa { get; set; }
+        public string CorreoPapa { get; set; }
+        public string CelularPapa { get; set; }
         public List<cxc_SeguimientoCartera_Info> lst_det { get; set; }
         #endregion
     }

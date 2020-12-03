@@ -435,8 +435,8 @@ namespace Core.Web.Areas.Banco.Controllers
                 {
                     var Lista = info.Lst_det;
                     DateTime FechaIni = Convert.ToDateTime("01" + "-" + (Convert.ToDateTime(info.Fecha).Month) + "-" + (Convert.ToDateTime(info.Fecha).Year));
-                    DateTime FechaFin = new DateTime(FechaIni.Year, FechaIni.Month + 1, 1).AddDays(-1);
-                    //DateTime FechaFin = Convert.ToDateTime(DiaFin.ToString() + "-" + Mes.ToString() + "-" + Anio.ToString());
+                    DateTime FechaFin = new DateTime(FechaIni.Year, FechaIni.Month, 1).AddMonths(1).AddDays(-1);
+                    //DateTime FechaFin = FechaIni.AddDays(-1);
 
                     #region PRODUBANCO
                     if (info.IdProceso_bancario == Convert.ToInt32(cl_enumeradores.eTipoProcesoBancarioCobrosAcademico.RECPB))
