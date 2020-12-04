@@ -199,6 +199,8 @@ namespace Core.Data.Academico
                             IdEquivalenciaPromedioEQ2 = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioEQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioEQ2"]),
                             IdEquivalenciaPromedioQ2 = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioQ2"]),
                             IdEquivalenciaPromedioPF = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioPF"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioPF"]),
+                            PromedioQ1 = string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ1"]),
+                            PromedioQ2 = string.IsNullOrEmpty(reader["PromedioQ2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ2"]),
                             PromedioQuimestres = string.IsNullOrEmpty(reader["PromedioQuimestres"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQuimestres"])
 
                         });
@@ -360,6 +362,8 @@ namespace Core.Data.Academico
                             IdEquivalenciaPromedioEQ2 = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioEQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioEQ2"]),
                             IdEquivalenciaPromedioQ2 = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioQ2"]),
                             IdEquivalenciaPromedioPF = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioPF"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioPF"]),
+                            PromedioQ1 = string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ1"]),
+                            PromedioQ2 = string.IsNullOrEmpty(reader["PromedioQ2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ2"]),
                             PromedioQuimestres = string.IsNullOrEmpty(reader["PromedioQuimestres"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQuimestres"]),
                         };
                     }
@@ -514,6 +518,8 @@ namespace Core.Data.Academico
                             IdEquivalenciaPromedioEQ2 = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioEQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioEQ2"]),
                             IdEquivalenciaPromedioQ2 = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioQ2"]),
                             IdEquivalenciaPromedioPF = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioPF"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioPF"]),
+                            PromedioQ1 = string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ1"]),
+                            PromedioQ2 = string.IsNullOrEmpty(reader["PromedioQ2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ2"]),
                             PromedioQuimestres = string.IsNullOrEmpty(reader["PromedioQuimestres"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQuimestres"]),
                         });
                     }
@@ -672,6 +678,8 @@ namespace Core.Data.Academico
                             IdEquivalenciaPromedioEQ2 = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioEQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioEQ2"]),
                             IdEquivalenciaPromedioQ2 = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioQ2"]),
                             IdEquivalenciaPromedioPF = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioPF"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioPF"]),
+                            PromedioQ1 = string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ1"]),
+                            PromedioQ2 = string.IsNullOrEmpty(reader["PromedioQ2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ2"]),
                             PromedioQuimestres = string.IsNullOrEmpty(reader["PromedioQuimestres"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQuimestres"]),
                         });
                     }
@@ -831,6 +839,8 @@ namespace Core.Data.Academico
                             IdEquivalenciaPromedioEQ2 = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioEQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioEQ2"]),
                             IdEquivalenciaPromedioQ2 = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioQ2"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioQ2"]),
                             IdEquivalenciaPromedioPF = string.IsNullOrEmpty(reader["IdEquivalenciaPromedioPF"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEquivalenciaPromedioPF"]),
+                            PromedioQ1 = string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ1"]),
+                            PromedioQ2 = string.IsNullOrEmpty(reader["PromedioQ2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ2"]),
                             PromedioQuimestres = string.IsNullOrEmpty(reader["PromedioQuimestres"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQuimestres"])
                         };
                     }
