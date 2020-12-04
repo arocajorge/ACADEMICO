@@ -948,6 +948,27 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             return Json(Mensaje, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult EnviarCorreoCobro(int IdEmpresa, int IdSucursal, decimal IdCobro, decimal IdAlumno, string Correos, string CodigoCorreo)
+        {
+            string Mensaje = string.Empty;
+            var Codigo = busCorreoCodigo.GetInfo(IdEmpresa, CodigoCorreo);
+            if (Codigo != null)
+            {
+                busCorreo.GuardarDB(new tb_ColaCorreo_Info
+                {
+                    IdEmpresa = IdEmpresa,
+                    Codigo = CodigoCorreo,
+                    Destinatarios = Correos,
+                    Asunto = Codigo.Asunto,
+                    Cuerpo = Codigo.Cuerpo,
+                    Parametros = IdEmpresa.ToString() + ";" + IdSucursal.ToString() + ";"+ IdCobro.ToString() + ";" + IdAlumno.ToString(),
+                    IdUsuarioCreacion = SessionFixed.IdUsuario
+                });
+            }
+
+            return Json(Mensaje, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult DatosCorreo(int IdEmpresa, decimal IdAlumno)
         {
             string Mensaje = string.Empty;

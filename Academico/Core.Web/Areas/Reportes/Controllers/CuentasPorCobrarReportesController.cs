@@ -155,6 +155,7 @@ namespace Core.Web.Areas.Reportes.Controllers
                 IdSede = Convert.ToInt32(SessionFixed.IdSede),
                 IdSucursal = IdSucursal,
                 IdAlumno = Convert.ToInt32(info_cobro.IdAlumno),
+                IdCbteCble = IdCobro
 
             };
 

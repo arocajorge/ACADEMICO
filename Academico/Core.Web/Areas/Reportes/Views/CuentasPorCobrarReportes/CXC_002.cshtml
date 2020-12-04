@@ -11,7 +11,9 @@
 {
     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
     @Html.HiddenFor(q => q.IdSede, new { @id = "IdSede" })
+    @Html.HiddenFor(q => q.IdSucursal, new { @id = "IdSucursal" })
     @Html.HiddenFor(q => q.IdAlumno, new { @id = "IdAlumno" })
+    @Html.HiddenFor(q => q.IdCbteCble, new { @id = "IdCobro" })
     <div class="box">
         <div class="box-header with-border">
             @*<div class="row">
@@ -120,7 +122,8 @@
             $("#error").hide();
             var datos = {
                 IdEmpresa: $("#IdEmpresa").val(),
-                IdSede: $("#IdSede").val(),
+                IdSucursal: $("#IdSucursal").val(),
+                IdCobro: $("#IdCobro").val(),
                 IdAlumno: $("#IdAlumno").val(),
                 Correos: $("#Correos").val(),
                 CodigoCorreo: "CXC_002"
@@ -128,7 +131,7 @@
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
-                url: '@Url.Action("EnviarCorreo", "Cobranza", new { Area = "CuentasPorCobrar" })',
+                url: '@Url.Action("EnviarCorreoCobro", "Cobranza", new { Area = "CuentasPorCobrar" })',
                 async: false,
                 bDeferRender: true,
                 bProcessing: true,
