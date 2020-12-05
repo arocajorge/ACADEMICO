@@ -406,7 +406,7 @@
             // 
             this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(2.543131E-05F, 0F);
             this.lbl_imagen.Name = "lbl_imagen";
-            this.lbl_imagen.SizeF = new System.Drawing.SizeF(120F, 60F);
+            this.lbl_imagen.SizeF = new System.Drawing.SizeF(140F, 60F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // xrTable2
@@ -759,7 +759,7 @@
             this.xrTableCell138.StylePriority.UsePadding = false;
             this.xrTableCell138.StylePriority.UseTextAlignment = false;
             this.xrTableCell138.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell138.Weight = 4.2582542282577D;
+            this.xrTableCell138.Weight = 5.4696296329218876D;
             // 
             // xrTableCell16
             // 
@@ -771,7 +771,7 @@
             this.xrTableCell16.StylePriority.UsePadding = false;
             this.xrTableCell16.StylePriority.UseTextAlignment = false;
             this.xrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell16.Weight = 11.2098583496277D;
+            this.xrTableCell16.Weight = 9.9984829449635129D;
             // 
             // xrTableRow46
             // 
@@ -901,7 +901,7 @@
             this.p_IdEmpresa,
             this.p_IdAlumno,
             this.p_IdAnio});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_002_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.txtSolicitud)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();

@@ -33,9 +33,9 @@ namespace Core.Data.Reportes.Academico
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
                     var lst = db.VWACA_008.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio &&
-                    IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin &&
-                    IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
-                    IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin &&
+                    q.IdSede == IdSede &&
+                    q.IdNivel == IdNivel &&
+                    q.IdJornada == IdJornada &&
                     IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin &&
                     IdParaleloIni <= q.IdParalelo && q.IdParalelo <= IdParaleloFin
                     && (MostrarAlumnosRetirados == true ? q.IdRetiro == q.IdRetiro : q.IdRetiro == 0)).ToList();

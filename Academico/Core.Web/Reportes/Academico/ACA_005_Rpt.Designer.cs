@@ -357,14 +357,14 @@
             this.xrTableCell112 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell113 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell114 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_IdSede = new DevExpress.XtraReports.Parameters.Parameter();
-            this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
             this.xrTableRow83 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell203 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell204 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell206 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell207 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdSede = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
@@ -3138,7 +3138,7 @@
             this.xrTableRow7,
             this.xrTableRow8,
             this.xrTableRow9});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(589F, 99.99998F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(579F, 99.99998F);
             this.xrTable2.StylePriority.UseFont = false;
             this.xrTable2.StylePriority.UseTextAlignment = false;
             this.xrTable2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
@@ -3241,9 +3241,9 @@
             // 
             // lbl_imagen
             // 
-            this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(589F, 0F);
+            this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(579.0001F, 0F);
             this.lbl_imagen.Name = "lbl_imagen";
-            this.lbl_imagen.SizeF = new System.Drawing.SizeF(120F, 60F);
+            this.lbl_imagen.SizeF = new System.Drawing.SizeF(130F, 60F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // PageFooter
@@ -4847,21 +4847,6 @@
             this.xrTableCell114.TextFormatString = "{0:n2}";
             this.xrTableCell114.Weight = 2.30599682327832D;
             // 
-            // p_IdEmpresa
-            // 
-            this.p_IdEmpresa.Name = "p_IdEmpresa";
-            this.p_IdEmpresa.Visible = false;
-            // 
-            // p_IdSede
-            // 
-            this.p_IdSede.Name = "p_IdSede";
-            this.p_IdSede.Visible = false;
-            // 
-            // p_IdAlumno
-            // 
-            this.p_IdAlumno.Name = "p_IdAlumno";
-            this.p_IdAlumno.Visible = false;
-            // 
             // xrTableRow83
             // 
             this.xrTableRow83.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
@@ -4931,6 +4916,21 @@
             this.xrTableCell207.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             this.xrTableCell207.Weight = 2.30599682327832D;
             // 
+            // p_IdEmpresa
+            // 
+            this.p_IdEmpresa.Name = "p_IdEmpresa";
+            this.p_IdEmpresa.Visible = false;
+            // 
+            // p_IdSede
+            // 
+            this.p_IdSede.Name = "p_IdSede";
+            this.p_IdSede.Visible = false;
+            // 
+            // p_IdAlumno
+            // 
+            this.p_IdAlumno.Name = "p_IdAlumno";
+            this.p_IdAlumno.Visible = false;
+            // 
             // ACA_005_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -4952,7 +4952,7 @@
             this.p_IdEmpresa,
             this.p_IdSede,
             this.p_IdAlumno});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_005_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).EndInit();

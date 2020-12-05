@@ -1,6 +1,6 @@
 ﻿@model Core.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Resumen de alumnos matriculados";
+    ViewBag.Title = "Estadistica de alumnos matriculados";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -131,25 +131,35 @@
         </div>
     </div>
 
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">@ViewBag.Title</h3>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fa fa-times"></i>
-                </button>
-            </div>
-        </div>
-        <div class="box-body">
-            @Html.DevExpress().WebDocumentViewer(settings =>
+    <div id="Tabs" role="tabpanel">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tab_estadistica" aria-controls="estadistica" role="tab" data-toggle="tab">Estadistica</a>
+            </li>
+            <li>
+                <a href="#tab_resumen" aria-controls="resumen" role="tab" data-toggle="tab">Resumen</a>
+            </li>
+        </ul>
+        <div class="tab-content" style="padding-top: 20px">
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_estadistica">
+                @Html.DevExpress().WebDocumentViewer(settings =>
                     {
                         settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
                         settings.MobileMode = false;
                         settings.Name = "webDocumentViewer";
                     }).Bind(ViewBag.Report).GetHtml()
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_resumen">
+
+                @Html.DevExpress().WebDocumentViewer(settings =>
+               {
+                   settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                   settings.MobileMode = false;
+                   settings.Name = "webDocumentViewer2";
+               }).Bind(ViewBag.ReportResumen).GetHtml()
+            </div>
+
         </div>
         <!-- /.box-body -->
         <div class="box-footer">

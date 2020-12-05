@@ -402,11 +402,11 @@
             // 
             this.lbl_empresa.Font = new System.Drawing.Font("Verdana", 10F);
             this.lbl_empresa.Name = "lbl_empresa";
-            this.lbl_empresa.Padding = new DevExpress.XtraPrinting.PaddingInfo(73, 120, 0, 0, 100F);
+            this.lbl_empresa.Padding = new DevExpress.XtraPrinting.PaddingInfo(73, 57, 0, 0, 100F);
             this.lbl_empresa.StylePriority.UseFont = false;
             this.lbl_empresa.StylePriority.UsePadding = false;
             this.lbl_empresa.Text = "lbl_empresa";
-            this.lbl_empresa.Weight = 1.7578462209174464D;
+            this.lbl_empresa.Weight = 1.7578472198563735D;
             // 
             // CXC_001
             // 
@@ -414,7 +414,7 @@
             this.CXC_001.Name = "CXC_001";
             this.CXC_001.StylePriority.UseFont = false;
             this.CXC_001.Text = "ACA_012";
-            this.CXC_001.Weight = 0.24215377908255403D;
+            this.CXC_001.Weight = 0.24215278014362698D;
             // 
             // xrTableRow4
             // 
@@ -427,10 +427,10 @@
             // 
             this.xrTableCell6.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell6.Name = "xrTableCell6";
-            this.xrTableCell6.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 120, 0, 0, 100F);
+            this.xrTableCell6.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 73, 0, 0, 100F);
             this.xrTableCell6.StylePriority.UseFont = false;
             this.xrTableCell6.StylePriority.UsePadding = false;
-            this.xrTableCell6.Text = "LISTADO DE RUBROS POR ALUMNO";
+            this.xrTableCell6.Text = "LISTADO DE RUBROS POR ESTUDIANTE";
             this.xrTableCell6.Weight = 2D;
             // 
             // PageFooter
@@ -523,7 +523,7 @@
             this.lbl_fecha.StylePriority.UsePadding = false;
             this.lbl_fecha.StylePriority.UseTextAlignment = false;
             this.lbl_fecha.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbl_fecha.Weight = 1.2029591080825479D;
+            this.lbl_fecha.Weight = 1.1930783009487271D;
             this.lbl_fecha.WordWrap = false;
             // 
             // xrTableCell52
@@ -535,16 +535,16 @@
             this.xrTableCell52.Name = "xrTableCell52";
             this.xrTableCell52.StylePriority.UseBorders = false;
             this.xrTableCell52.StylePriority.UseFont = false;
-            this.xrTableCell52.Weight = 0.78805160099222582D;
+            this.xrTableCell52.Weight = 0.79793240812604649D;
             // 
             // xrPageInfo2
             // 
             this.xrPageInfo2.Borders = DevExpress.XtraPrinting.BorderSide.Top;
             this.xrPageInfo2.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrPageInfo2.LocationFloat = new DevExpress.Utils.PointFloat(6.103516E-05F, 0F);
+            this.xrPageInfo2.LocationFloat = new DevExpress.Utils.PointFloat(0.9278564F, 0F);
             this.xrPageInfo2.Name = "xrPageInfo2";
             this.xrPageInfo2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
-            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(73.97797F, 20F);
+            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(73.05011F, 20F);
             this.xrPageInfo2.StylePriority.UseBorders = false;
             this.xrPageInfo2.StylePriority.UseFont = false;
             this.xrPageInfo2.StylePriority.UsePadding = false;
@@ -820,7 +820,7 @@
             this.p_IdNivel,
             this.p_QuebrarPorParalelo,
             this.p_IdRubro});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_012_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();

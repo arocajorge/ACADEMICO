@@ -207,9 +207,9 @@
             // 
             // lbl_imagen
             // 
-            this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(289.4845F, 0F);
+            this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(283.6512F, 0F);
             this.lbl_imagen.Name = "lbl_imagen";
-            this.lbl_imagen.SizeF = new System.Drawing.SizeF(120F, 60F);
+            this.lbl_imagen.SizeF = new System.Drawing.SizeF(140F, 60F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // PageFooter
@@ -602,7 +602,7 @@
             this.p_IdSede});
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
             this.xrControlStyle1});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_003_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.txtContrato)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();

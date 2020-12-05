@@ -173,7 +173,7 @@
             this.xrTableCell12.Multiline = true;
             this.xrTableCell12.Name = "xrTableCell12";
             this.xrTableCell12.Text = "xrTableCell12";
-            this.xrTableCell12.Weight = 1.307301852738016D;
+            this.xrTableCell12.Weight = 1.2250335193914081D;
             // 
             // xrTableCell13
             // 
@@ -182,7 +182,7 @@
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.StylePriority.UseFont = false;
             this.xrTableCell13.Text = "Fecha desde:";
-            this.xrTableCell13.Weight = 0.60666864753245675D;
+            this.xrTableCell13.Weight = 0.68893698087906441D;
             // 
             // xrTableCell16
             // 
@@ -321,7 +321,7 @@
             // 
             this.lbl_sede.Font = new System.Drawing.Font("Verdana", 12F);
             this.lbl_sede.Name = "lbl_sede";
-            this.lbl_sede.Padding = new DevExpress.XtraPrinting.PaddingInfo(75, 125, 0, 0, 100F);
+            this.lbl_sede.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
             this.lbl_sede.StylePriority.UseFont = false;
             this.lbl_sede.StylePriority.UsePadding = false;
             this.lbl_sede.StylePriority.UseTextAlignment = false;
@@ -350,11 +350,11 @@
             // 
             this.xrTableCell7.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell7.Name = "xrTableCell7";
-            this.xrTableCell7.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 100, 0, 0, 100F);
+            this.xrTableCell7.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 93, 0, 0, 100F);
             this.xrTableCell7.StylePriority.UseFont = false;
             this.xrTableCell7.StylePriority.UsePadding = false;
             this.xrTableCell7.StylePriority.UseTextAlignment = false;
-            this.xrTableCell7.Text = "ESTADISTICAS DE ALUMNOS MATRICULADOS POR DIA Y TIPO DE PLANTILLA";
+            this.xrTableCell7.Text = "ESTADISTICAS DE ESTUDIANTES MATRICULADOS POR DIA Y TIPO DE PLANTILLA";
             this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell7.Weight = 2D;
             // 
@@ -701,7 +701,7 @@
             this.lbl_usuario.StylePriority.UsePadding = false;
             this.lbl_usuario.StylePriority.UseTextAlignment = false;
             this.lbl_usuario.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbl_usuario.Weight = 2.5369141177212287D;
+            this.lbl_usuario.Weight = 2.3772656322406673D;
             // 
             // xrTableCell51
             // 
@@ -715,7 +715,7 @@
             this.xrTableCell51.StylePriority.UseTextAlignment = false;
             this.xrTableCell51.Text = "Fecha de impresión:";
             this.xrTableCell51.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            this.xrTableCell51.Weight = 1.1772839744937196D;
+            this.xrTableCell51.Weight = 1.3369324599742809D;
             // 
             // lbl_fecha
             // 
@@ -835,7 +835,7 @@
             this.p_IdParalelo,
             this.p_IdJornada,
             this.p_MostarAlumnosRetirados});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_007_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();

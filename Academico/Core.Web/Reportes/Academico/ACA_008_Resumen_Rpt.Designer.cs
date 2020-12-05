@@ -182,13 +182,13 @@
             // 
             this.lbl_sede.Font = new System.Drawing.Font("Verdana", 12F);
             this.lbl_sede.Name = "lbl_sede";
-            this.lbl_sede.Padding = new DevExpress.XtraPrinting.PaddingInfo(75, 125, 0, 0, 100F);
+            this.lbl_sede.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
             this.lbl_sede.StylePriority.UseFont = false;
             this.lbl_sede.StylePriority.UsePadding = false;
             this.lbl_sede.StylePriority.UseTextAlignment = false;
             this.lbl_sede.Text = "lbl_sede";
             this.lbl_sede.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.lbl_sede.Weight = 1.6726675426470876D;
+            this.lbl_sede.Weight = 1.7460485627352036D;
             // 
             // xrTableCell6
             // 
@@ -198,7 +198,7 @@
             this.xrTableCell6.StylePriority.UseTextAlignment = false;
             this.xrTableCell6.Text = "ACA_008";
             this.xrTableCell6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell6.Weight = 0.32733245735291433D;
+            this.xrTableCell6.Weight = 0.25395143726479841D;
             // 
             // xrTableRow5
             // 
@@ -211,11 +211,11 @@
             // 
             this.xrTableCell7.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell7.Name = "xrTableCell7";
-            this.xrTableCell7.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 100, 0, 0, 100F);
+            this.xrTableCell7.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 125, 0, 0, 100F);
             this.xrTableCell7.StylePriority.UseFont = false;
             this.xrTableCell7.StylePriority.UsePadding = false;
             this.xrTableCell7.StylePriority.UseTextAlignment = false;
-            this.xrTableCell7.Text = "RESUMEN DE ALUMNOS MATRICULADOS";
+            this.xrTableCell7.Text = "RESUMEN DE ESTUDIANTES MATRICULADOS";
             this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell7.Weight = 2D;
             // 
@@ -233,7 +233,7 @@
             this.xrTableCell4.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell4.Multiline = true;
             this.xrTableCell4.Name = "xrTableCell4";
-            this.xrTableCell4.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 100, 0, 0, 100F);
+            this.xrTableCell4.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 125, 0, 0, 100F);
             this.xrTableCell4.StylePriority.UseFont = false;
             this.xrTableCell4.StylePriority.UsePadding = false;
             this.xrTableCell4.StylePriority.UseTextAlignment = false;
@@ -335,7 +335,7 @@
             this.lbl_fecha.StylePriority.UsePadding = false;
             this.lbl_fecha.StylePriority.UseTextAlignment = false;
             this.lbl_fecha.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbl_fecha.Weight = 1.8681015895212489D;
+            this.lbl_fecha.Weight = 2.0475364134262994D;
             // 
             // xrTableCell52
             // 
@@ -346,7 +346,7 @@
             this.xrTableCell52.Name = "xrTableCell52";
             this.xrTableCell52.StylePriority.UseBorders = false;
             this.xrTableCell52.StylePriority.UseFont = false;
-            this.xrTableCell52.Weight = 1.065248970563601D;
+            this.xrTableCell52.Weight = 0.88581414665855029D;
             // 
             // xrPageInfo2
             // 
@@ -355,7 +355,7 @@
             this.xrPageInfo2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrPageInfo2.Name = "xrPageInfo2";
             this.xrPageInfo2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
-            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(100.0002F, 20F);
+            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(121.1348F, 20F);
             this.xrPageInfo2.StylePriority.UseBorders = false;
             this.xrPageInfo2.StylePriority.UseFont = false;
             this.xrPageInfo2.StylePriority.UsePadding = false;
@@ -434,7 +434,7 @@
             this.p_IdJornada,
             this.p_IdCurso,
             this.p_IdParalelo});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_008_Resumen_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).EndInit();

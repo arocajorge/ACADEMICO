@@ -282,13 +282,13 @@
             // xrTable1
             // 
             this.xrTable1.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(120.0001F, 0F);
+            this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(140F, 0F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2,
             this.xrTableRow18,
             this.xrTableRow4});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(654.0001F, 68.50002F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(634.0002F, 68.50002F);
             this.xrTable1.StylePriority.UseFont = false;
             this.xrTable1.StylePriority.UseTextAlignment = false;
             this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
@@ -305,7 +305,7 @@
             // 
             this.parcial.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
             this.parcial.Name = "parcial";
-            this.parcial.Padding = new DevExpress.XtraPrinting.PaddingInfo(75, 120, 0, 0, 100F);
+            this.parcial.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
             this.parcial.StylePriority.UseFont = false;
             this.parcial.StylePriority.UsePadding = false;
             this.parcial.StylePriority.UseTextAlignment = false;
@@ -337,7 +337,7 @@
             // 
             this.lbl_parcial.Font = new System.Drawing.Font("Verdana", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.lbl_parcial.Name = "lbl_parcial";
-            this.lbl_parcial.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 120, 0, 0, 100F);
+            this.lbl_parcial.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 73, 0, 0, 100F);
             this.lbl_parcial.StylePriority.UseFont = false;
             this.lbl_parcial.StylePriority.UsePadding = false;
             this.lbl_parcial.StylePriority.UseTextAlignment = false;
@@ -358,7 +358,7 @@
             this.xrTableCell13.Font = new System.Drawing.Font("Verdana", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.xrTableCell13.Multiline = true;
             this.xrTableCell13.Name = "xrTableCell13";
-            this.xrTableCell13.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 120, 0, 0, 100F);
+            this.xrTableCell13.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 73, 0, 0, 100F);
             this.xrTableCell13.StylePriority.UseFont = false;
             this.xrTableCell13.StylePriority.UsePadding = false;
             this.xrTableCell13.StylePriority.UseTextAlignment = false;
@@ -369,7 +369,7 @@
             // 
             this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.lbl_imagen.Name = "lbl_imagen";
-            this.lbl_imagen.SizeF = new System.Drawing.SizeF(120F, 60F);
+            this.lbl_imagen.SizeF = new System.Drawing.SizeF(140F, 60F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // PageFooter
@@ -758,13 +758,13 @@
             // xrTable11
             // 
             this.xrTable11.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrTable11.LocationFloat = new DevExpress.Utils.PointFloat(294.7005F, 60F);
+            this.xrTable11.LocationFloat = new DevExpress.Utils.PointFloat(299F, 60F);
             this.xrTable11.Name = "xrTable11";
             this.xrTable11.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable11.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow19,
             this.xrTableRow24});
-            this.xrTable11.SizeF = new System.Drawing.SizeF(200F, 40F);
+            this.xrTable11.SizeF = new System.Drawing.SizeF(250F, 40F);
             this.xrTable11.StylePriority.UseFont = false;
             this.xrTable11.StylePriority.UseTextAlignment = false;
             this.xrTable11.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
@@ -851,7 +851,7 @@
             this.p_IdCatalogoTipo,
             this.p_IdCatalogoParcial,
             this.p_IdParalelo});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_022_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();

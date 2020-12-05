@@ -462,6 +462,20 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
 
+            ACA_006_Resumen_Rpt ReportResumen = new ACA_006_Resumen_Rpt();
+
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_IdSede.Value = model.IdSede;
+            ReportResumen.p_fecha_fin.Value = model.fecha_fin;
+            ReportResumen.p_fecha_ini.Value = model.fecha_ini;
+            ReportResumen.p_IdAnio.Value = model.IdAnio;
+            ReportResumen.p_IdJornada.Value = model.IdJornada;
+            ReportResumen.p_IdNivel.Value = model.IdNivel;
+            ReportResumen.p_IdCurso.Value = model.IdCurso;
+            ReportResumen.p_IdParalelo.Value = model.IdParalelo;
+            ReportResumen.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
+
+            ViewBag.ReportResumen = ReportResumen;
             ViewBag.Report = report;
 
             return View(model);
@@ -482,6 +496,20 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
 
+            ACA_006_Resumen_Rpt ReportResumen = new ACA_006_Resumen_Rpt();
+
+            ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportResumen.p_IdSede.Value = model.IdSede;
+            ReportResumen.p_fecha_fin.Value = model.fecha_fin;
+            ReportResumen.p_fecha_ini.Value = model.fecha_ini;
+            ReportResumen.p_IdAnio.Value = model.IdAnio;
+            ReportResumen.p_IdJornada.Value = model.IdJornada;
+            ReportResumen.p_IdNivel.Value = model.IdNivel;
+            ReportResumen.p_IdCurso.Value = model.IdCurso;
+            ReportResumen.p_IdParalelo.Value = model.IdParalelo;
+            ReportResumen.p_MostarAlumnosRetirados.Value = model.mostrarAnulados;
+
+            ViewBag.ReportResumen = ReportResumen;
             ViewBag.Report = report;
 
             return View(model);

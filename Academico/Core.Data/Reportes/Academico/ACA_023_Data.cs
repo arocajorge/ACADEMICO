@@ -50,13 +50,13 @@ namespace Core.Data.Reportes.Academico
                             OrdenCurso = q.OrdenCurso,
                             OrdenParalelo = q.OrdenParalelo,
                             CodigoParalelo = q.CodigoParalelo,
-                            Letra = ((IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1)) ? q.LetraP1 :
-                                                (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2)) ? q.LetraP2 :
-                                                (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3)) ? q.LetraP3 :
-                                                (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4)) ? q.LetraP4 :
-                                                (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5)) ? q.LetraP5 :
-                                                (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6)) ? q.LetraP6 :
-                                                null
+                            Letra = ((IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1)) ? (string.IsNullOrEmpty(q.LetraP1)? "" : q.LetraP1) :
+                                                (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2)) ? (string.IsNullOrEmpty(q.LetraP2) ? "" : q.LetraP2) :
+                                                (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3)) ? (string.IsNullOrEmpty(q.LetraP3) ? "" : q.LetraP3) :
+                                                (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4)) ? (string.IsNullOrEmpty(q.LetraP4) ? "" : q.LetraP4) :
+                                                (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5)) ? (string.IsNullOrEmpty(q.LetraP5) ? "" : q.LetraP5) :
+                                                (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6)) ? (string.IsNullOrEmpty(q.LetraP6) ? "" : q.LetraP6) :
+                                                ""
                                                 ),
                             Motivo = ((IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1)) ? q.MotivoPromedioFinalP1 :
                                                 (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2)) ? q.MotivoPromedioFinalP2 :

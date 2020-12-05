@@ -428,11 +428,11 @@
             // 
             this.lbl_empresa.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
             this.lbl_empresa.Name = "lbl_empresa";
-            this.lbl_empresa.Padding = new DevExpress.XtraPrinting.PaddingInfo(65, 0, 0, 0, 100F);
+            this.lbl_empresa.Padding = new DevExpress.XtraPrinting.PaddingInfo(91, 0, 0, 0, 100F);
             this.lbl_empresa.StylePriority.UseFont = false;
             this.lbl_empresa.StylePriority.UsePadding = false;
             this.lbl_empresa.Text = "lbl_empresa";
-            this.lbl_empresa.Weight = 1.6350966055588803D;
+            this.lbl_empresa.Weight = 1.7615554328732448D;
             // 
             // CXC_001
             // 
@@ -440,7 +440,7 @@
             this.CXC_001.Name = "CXC_001";
             this.CXC_001.StylePriority.UseFont = false;
             this.CXC_001.Text = "ACA_004";
-            this.CXC_001.Weight = 0.36490339444112019D;
+            this.CXC_001.Weight = 0.23844456712675569D;
             // 
             // xrTableRow2
             // 
@@ -455,7 +455,9 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat(\'ASIGNACION DE MATERIAS POR CURSO \',[Descripcion] )")});
             this.xrTableCell1.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Italic);
             this.xrTableCell1.Name = "xrTableCell1";
+            this.xrTableCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrTableCell1.StylePriority.UseFont = false;
+            this.xrTableCell1.StylePriority.UsePadding = false;
             this.xrTableCell1.Text = "ASIGNACION DE MATERIAS POR CURSO";
             this.xrTableCell1.Weight = 2D;
             // 
@@ -547,7 +549,7 @@
             this.lbl_fecha.StylePriority.UsePadding = false;
             this.lbl_fecha.StylePriority.UseTextAlignment = false;
             this.lbl_fecha.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbl_fecha.Weight = 1.482927069140348D;
+            this.lbl_fecha.Weight = 1.348900244881337D;
             // 
             // xrTableCell52
             // 
@@ -558,7 +560,7 @@
             this.xrTableCell52.Name = "xrTableCell52";
             this.xrTableCell52.StylePriority.UseBorders = false;
             this.xrTableCell52.StylePriority.UseFont = false;
-            this.xrTableCell52.Weight = 0.81975371800579921D;
+            this.xrTableCell52.Weight = 0.95378054226481035D;
             // 
             // xrPageInfo2
             // 
@@ -567,7 +569,7 @@
             this.xrPageInfo2.LocationFloat = new DevExpress.Utils.PointFloat(6.103516E-05F, 0F);
             this.xrPageInfo2.Name = "xrPageInfo2";
             this.xrPageInfo2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 5, 0, 0, 100F);
-            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(79.0036F, 20F);
+            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(89.95245F, 20F);
             this.xrPageInfo2.StylePriority.UseBorders = false;
             this.xrPageInfo2.StylePriority.UseFont = false;
             this.xrPageInfo2.StylePriority.UsePadding = false;
@@ -920,7 +922,7 @@
             this.p_IdEmpresa,
             this.p_IdAnio,
             this.p_IdParalelo});
-            this.Version = "19.1";
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_004_Rpt_Before_Print);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
