@@ -36,6 +36,8 @@ namespace Core.Web.Reportes.Academico
             var Curso = "";
             var Jornada = "";
             var Paralelo = "";
+            var Total = "";
+            var NomPlantillaTipo = "";
 
             if (info!=null)
             {
@@ -44,6 +46,8 @@ namespace Core.Web.Reportes.Academico
                 Curso = info.NomCurso;
                 Jornada = info.NomJornada;
                 Paralelo = info.NomParalelo;
+                NomPlantillaTipo = info.NomPlantillaTipo;
+                Total = info.Total.ToString();
 
                 lst_rpt.Add(info);
             }
@@ -64,6 +68,8 @@ namespace Core.Web.Reportes.Academico
             txtSolicitud.Rtf = txtSolicitud.Rtf.Replace("[Curso]", Curso);
             txtSolicitud.Rtf = txtSolicitud.Rtf.Replace("[Jornada]", Jornada);
             txtSolicitud.Rtf = txtSolicitud.Rtf.Replace("[Paralelo]", Paralelo);
+            txtSolicitud.Rtf = txtSolicitud.Rtf.Replace("[NomPlantillaTipo]", NomPlantillaTipo);
+            txtSolicitud.Rtf = txtSolicitud.Rtf.Replace("[Total]", Total);
 
             this.DataSource = lst_rpt;
         }

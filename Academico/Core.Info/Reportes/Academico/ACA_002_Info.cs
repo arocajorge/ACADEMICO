@@ -26,5 +26,7 @@ namespace Core.Info.Reportes.Academico
         public string NomPlantilla { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public string NomPlantillaTipo { get; set; }
+        public Nullable<decimal> Total { get; set; }
     }
 }

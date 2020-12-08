@@ -438,6 +438,36 @@
     <Compile Include="Reportes\Academico\ACA_008_Resumen_Rpt.Designer.cs">
       <DependentUpon>ACA_008_Resumen_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_055_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_055_Rpt.Designer.cs">
+      <DependentUpon>ACA_055_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_054_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_054_Rpt.Designer.cs">
+      <DependentUpon>ACA_054_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_053_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_053_Rpt.Designer.cs">
+      <DependentUpon>ACA_053_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_052_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_052_Rpt.Designer.cs">
+      <DependentUpon>ACA_052_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_051_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_051_Rpt.Designer.cs">
+      <DependentUpon>ACA_051_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_008_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9503,6 +9533,11 @@
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_019.cshtml" />
     <Content Include="Areas\CuentasPorCobrar\Views\Cobranza\_GridViewPartial_cobranza_x_alumno.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_020.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_051.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_052.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_053.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_054.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_055.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9627,6 +9662,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_008_Resumen_Rpt.resx">
       <DependentUpon>ACA_008_Resumen_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_055_Rpt.resx">
+      <DependentUpon>ACA_055_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_054_Rpt.resx">
+      <DependentUpon>ACA_054_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_053_Rpt.resx">
+      <DependentUpon>ACA_053_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_052_Rpt.resx">
+      <DependentUpon>ACA_052_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_051_Rpt.resx">
+      <DependentUpon>ACA_051_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_008_Rpt.resx">
       <DependentUpon>ACA_008_Rpt.cs</DependentUpon>

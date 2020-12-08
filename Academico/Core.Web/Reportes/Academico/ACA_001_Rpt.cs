@@ -67,5 +67,14 @@ namespace Core.Web.Reportes.Academico
 
             this.DataSource = lst_rpt;
         }
+
+        private void foto_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            var IdEmpresa = Convert.ToString(string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value)).PadLeft(3,'0');
+            var IdAlumno = Convert.ToString(string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value)).PadLeft(6, '0');
+            var NombreImagen = IdEmpresa + IdAlumno;
+            var URLString = "~/Content/imagenes/alumnos/" + NombreImagen+ ".jpg";
+            foto.ImageUrl = URLString;
+        }
     }
 }

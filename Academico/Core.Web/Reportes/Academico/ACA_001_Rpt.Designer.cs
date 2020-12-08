@@ -2168,6 +2168,7 @@
             this.foto.SizeF = new System.Drawing.SizeF(100F, 115F);
             this.foto.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             this.foto.StylePriority.UseBorders = false;
+            this.foto.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.foto_BeforePrint);
             // 
             // xrTable1
             // 

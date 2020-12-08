@@ -281,6 +281,11 @@
     <Compile Include="Reportes\Academico\ACA_005_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_007_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_006_ Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_055_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_054_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_053_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_052_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_051_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_008_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_008_Resumen_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_009_Bus.cs" />

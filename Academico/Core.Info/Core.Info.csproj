@@ -285,6 +285,11 @@
     <Compile Include="Reportes\Academico\ACA_005_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_007_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_006_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_055_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_054_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_053_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_052_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_051_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_008_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_008_Resumen_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_009_Info.cs" />
