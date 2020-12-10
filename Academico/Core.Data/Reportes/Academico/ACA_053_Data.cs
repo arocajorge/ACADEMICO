@@ -9,7 +9,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_053_Data
     {
-        public List<ACA_053_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso,int IdParalelo)
+        public List<ACA_053_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso,int IdParalelo, bool MostrarRetirados)
         {
             try
             {
@@ -31,7 +31,8 @@ namespace Core.Data.Reportes.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, al.Codigo, p.pe_nombreCompleto, an.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, "
+                    string query = "DECLARE @MostrarRetirados int = " + (MostrarRetirados==true ? 1 : 0) +";"
+                    + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, al.Codigo, p.pe_nombreCompleto, an.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, "
                     + " jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, ad.IdDocumento, ad.EnArchivo, d.NomDocumento, d.OrdenDocumento, m.Observacion "
                     + " FROM     dbo.aca_Matricula AS m INNER JOIN "
                     + " dbo.aca_Alumno AS al ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno INNER JOIN "
@@ -43,7 +44,8 @@ namespace Core.Data.Reportes.Academico
                     + " m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON m.IdEmpresa = jc.IdEmpresa AND m.IdAnio = jc.IdAnio AND m.IdSede = jc.IdSede AND m.IdNivel = jc.IdNivel AND m.IdJornada = jc.IdJornada AND m.IdCurso = jc.IdCurso LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString()
                     + " and m.IdAnio = " + IdAnio.ToString()
                     + " and m.IdSede = " + IdSede.ToString()
@@ -51,7 +53,8 @@ namespace Core.Data.Reportes.Academico
                     + " and m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
                     + " and m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString()
                     + " and m.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString()
-                    + " and ad.EnArchivo = 0";
+                    + " and ad.EnArchivo = 0"
+                    + " and isnull(r.IdMatricula,0) = case when @MostrarRetirados = 1 then isnull(r.IdMatricula,0) else 0 end ";
 
                     #endregion
 
@@ -68,6 +71,7 @@ namespace Core.Data.Reportes.Academico
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),
                             IdSede = Convert.ToInt32(reader["IdSede"]),
                             IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
                             IdCurso = Convert.ToInt32(reader["IdCurso"]),
                             IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),

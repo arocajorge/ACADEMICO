@@ -51,10 +51,13 @@ namespace Core.Data.Academico
                             NomParalelo = reader["NomParalelo"].ToString(),
                             OrdenParalelo = Convert.ToInt32(reader["OrdenParalelo"]),
                             IdProfesor = string.IsNullOrEmpty(reader["IdProfesor"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["IdProfesor"]),
+                            IdTematica = string.IsNullOrEmpty(reader["IdTematica"].ToString()) ? 0 : Convert.ToInt32(reader["IdTematica"]),
+                            IdCampoAccion = string.IsNullOrEmpty(reader["IdCampoAccion"].ToString()) ? 0 : Convert.ToInt32(reader["IdCampoAccion"]),
                             IdTematicaParticipacion = string.IsNullOrEmpty(reader["IdTematica"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdTematica"]),
-                            NombreCampoAccion = reader["NombreCampoAccion"].ToString(),
-                            NombreTematica = reader["NombreTematica"].ToString(),
-                            NombreProfesor = reader["NombreProfesor"].ToString()
+                            IdCampoParticipacion = string.IsNullOrEmpty(reader["IdCampoAccion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCampoAccion"]),
+                            NombreCampoAccion = string.IsNullOrEmpty(reader["NombreCampoAccion"].ToString()) ? null : reader["NombreCampoAccion"].ToString(),
+                            NombreTematica = string.IsNullOrEmpty(reader["NombreTematica"].ToString()) ? null : reader["NombreTematica"].ToString(),
+                            NombreProfesor = string.IsNullOrEmpty(reader["NombreProfesor"].ToString()) ? null : reader["NombreProfesor"].ToString()
                         });
                     }
                     reader.Close();

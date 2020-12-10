@@ -34,15 +34,16 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
+            this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl = new DevExpress.XtraReports.UI.XRTableCell();
             this.txtSolicitud = new DevExpress.XtraReports.UI.XRRichText();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow45 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.Rector = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell16 = new DevExpress.XtraReports.UI.XRTableCell();
             this.Secretaria = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell16 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.Colecturia = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow46 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell143 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -60,7 +61,6 @@
             this.groupFooterBand1 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.objectDataSource2 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSolicitud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
@@ -90,6 +90,13 @@
             this.xrTable1});
             this.PageHeader.HeightF = 300F;
             this.PageHeader.Name = "PageHeader";
+            // 
+            // lbl_imagen
+            // 
+            this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.lbl_imagen.Name = "lbl_imagen";
+            this.lbl_imagen.SizeF = new System.Drawing.SizeF(140F, 60F);
+            this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // xrTable1
             // 
@@ -149,39 +156,13 @@
             // xrTableRow45
             // 
             this.xrTableRow45.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.Rector,
+            this.Secretaria,
             this.xrTableCell16,
-            this.Secretaria});
+            this.Colecturia});
             this.xrTableRow45.Name = "xrTableRow45";
             this.xrTableRow45.StylePriority.UseTextAlignment = false;
             this.xrTableRow45.TextAlignment = DevExpress.XtraPrinting.TextAlignment.BottomLeft;
             this.xrTableRow45.Weight = 0.875912270864986D;
-            // 
-            // Rector
-            // 
-            this.Rector.Borders = DevExpress.XtraPrinting.BorderSide.Top;
-            this.Rector.Font = new System.Drawing.Font("Verdana", 9F);
-            this.Rector.Multiline = true;
-            this.Rector.Name = "Rector";
-            this.Rector.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
-            this.Rector.StylePriority.UseBorders = false;
-            this.Rector.StylePriority.UseFont = false;
-            this.Rector.StylePriority.UsePadding = false;
-            this.Rector.StylePriority.UseTextAlignment = false;
-            this.Rector.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.Rector.Weight = 5.9574590444390338D;
-            // 
-            // xrTableCell16
-            // 
-            this.xrTableCell16.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell16.Multiline = true;
-            this.xrTableCell16.Name = "xrTableCell16";
-            this.xrTableCell16.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
-            this.xrTableCell16.StylePriority.UseFont = false;
-            this.xrTableCell16.StylePriority.UsePadding = false;
-            this.xrTableCell16.StylePriority.UseTextAlignment = false;
-            this.xrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell16.Weight = 3.5531986227577725D;
             // 
             // Secretaria
             // 
@@ -195,7 +176,34 @@
             this.Secretaria.StylePriority.UsePadding = false;
             this.Secretaria.StylePriority.UseTextAlignment = false;
             this.Secretaria.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.Secretaria.Weight = 5.9574549106885915D;
+            this.Secretaria.Weight = 5.9574590444390338D;
+            // 
+            // xrTableCell16
+            // 
+            this.xrTableCell16.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell16.Multiline = true;
+            this.xrTableCell16.Name = "xrTableCell16";
+            this.xrTableCell16.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
+            this.xrTableCell16.StylePriority.UseFont = false;
+            this.xrTableCell16.StylePriority.UsePadding = false;
+            this.xrTableCell16.StylePriority.UseTextAlignment = false;
+            this.xrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell16.Weight = 3.5531986227577725D;
+            // 
+            // Colecturia
+            // 
+            this.Colecturia.Borders = DevExpress.XtraPrinting.BorderSide.Top;
+            this.Colecturia.Font = new System.Drawing.Font("Verdana", 9F);
+            this.Colecturia.Multiline = true;
+            this.Colecturia.Name = "Colecturia";
+            this.Colecturia.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
+            this.Colecturia.StylePriority.UseBorders = false;
+            this.Colecturia.StylePriority.UseFont = false;
+            this.Colecturia.StylePriority.UsePadding = false;
+            this.Colecturia.StylePriority.UseTextAlignment = false;
+            this.Colecturia.Text = "CPA. Edison Gellibert Villagómez";
+            this.Colecturia.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.Colecturia.Weight = 5.9574549106885915D;
             // 
             // xrTableRow46
             // 
@@ -217,7 +225,7 @@
             this.xrTableCell143.StylePriority.UseFont = false;
             this.xrTableCell143.StylePriority.UsePadding = false;
             this.xrTableCell143.StylePriority.UseTextAlignment = false;
-            this.xrTableCell143.Text = "RECTOR";
+            this.xrTableCell143.Text = "SECRETARIA GENERAL";
             this.xrTableCell143.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell143.Weight = 9.2375453119033146D;
             // 
@@ -243,7 +251,7 @@
             this.xrTableCell2.StylePriority.UseFont = false;
             this.xrTableCell2.StylePriority.UsePadding = false;
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
-            this.xrTableCell2.Text = "SECRETARIA GENERAL";
+            this.xrTableCell2.Text = "COORDINADOR DE COLECTURIA";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell2.Weight = 9.2375398017564869D;
             // 
@@ -323,13 +331,6 @@
             this.objectDataSource2.DataSource = typeof(Core.Info.Reportes.Academico.ACA_021_Info);
             this.objectDataSource2.Name = "objectDataSource2";
             // 
-            // lbl_imagen
-            // 
-            this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.lbl_imagen.Name = "lbl_imagen";
-            this.lbl_imagen.SizeF = new System.Drawing.SizeF(140F, 60F);
-            this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            // 
             // ACA_021_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -382,9 +383,9 @@
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
         private DevExpress.XtraReports.UI.XRTable xrTable5;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow45;
-        private DevExpress.XtraReports.UI.XRTableCell Rector;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell16;
         private DevExpress.XtraReports.UI.XRTableCell Secretaria;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell16;
+        private DevExpress.XtraReports.UI.XRTableCell Colecturia;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow46;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell143;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;

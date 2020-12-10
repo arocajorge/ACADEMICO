@@ -53,7 +53,6 @@ namespace Core.Web.Reportes.Academico
             var sede = bus_sede.GetInfo(IdEmpresa, IdSede);
             if (sede != null)
             {
-                Rector.Text = sede.NombreRector;
                 Secretaria.Text = sede.NombreSecretaria;
             }
 

@@ -22,9 +22,6 @@ namespace Core.Web.Reportes.Academico
 
         private void ACA_039_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-            lbl_usuario.Text = usuario;
-
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdSede = string.IsNullOrEmpty(p_IdSede.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSede.Value);
             int IdAnio = string.IsNullOrEmpty(p_IdAnio.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAnio.Value);
@@ -40,6 +37,18 @@ namespace Core.Web.Reportes.Academico
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados);
 
             this.DataSource = lst_rpt;
+
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+            var emp = bus_empresa.get_info(IdEmpresa);
+            if (emp != null)
+            {
+                if (emp.em_logo != null)
+                {
+                    ImageConverter obj = new ImageConverter();
+                    lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
+                }
+            }
+
             aca_Sede_Bus bus_sede = new aca_Sede_Bus();
             var sede = bus_sede.GetInfo(IdEmpresa, IdSede);
             if (sede != null)

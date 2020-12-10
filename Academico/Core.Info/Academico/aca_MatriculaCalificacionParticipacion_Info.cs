@@ -50,6 +50,7 @@ namespace Core.Info.Academico
         public int OrdenTematica { get; set; }
         public int OrdenCampoAccion { get; set; }
         public Nullable<int> IdTematicaParticipacion { get; set; }
+        public Nullable<int> IdCampoParticipacion { get; set; }
         public List<aca_MatriculaCalificacionParticipacion_Info> lst_detalle { get; set; }
         public string NombreCampoAccion { get; set; }
         public string NombreTematica { get; set; }

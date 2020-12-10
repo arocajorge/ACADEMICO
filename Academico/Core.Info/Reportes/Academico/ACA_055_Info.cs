@@ -27,7 +27,7 @@ namespace Core.Info.Reportes.Academico
         public string pe_nombreCompleto { get; set; }
         public string Codigo { get; set; }
         public string TipoDiscapacidad { get; set; }
-        public string Porcentaje { get; set; }
+        public Nullable<double> Porcentaje { get; set; }
         public string NumCarnet { get; set; }
     }
 }

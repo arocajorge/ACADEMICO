@@ -67,6 +67,7 @@ namespace Core.Data.Reportes.Academico
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),
                             IdSede = Convert.ToInt32(reader["IdSede"]),
                             IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
                             IdCurso = Convert.ToInt32(reader["IdCurso"]),
                             IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),

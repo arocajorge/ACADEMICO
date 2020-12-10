@@ -9,7 +9,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_054_Data
     {
-        public List<ACA_054_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        public List<ACA_054_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, bool MostrarRetirados)
         {
             try
             {
@@ -28,7 +28,8 @@ namespace Core.Data.Reportes.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT m.IdEmpresa, m.IdMatricula, m.IdAlumno, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, jc.NomCurso, jc.OrdenCurso, nj.NomJornada, nj.OrdenJornada, an.Descripcion, al.Codigo, p.pe_nombreCompleto, p.pe_sexo, "
+                    string query = "DECLARE @MostrarRetirados int = " + (MostrarRetirados == true ? 1 : 0) + ";"
+                    + "SELECT m.IdEmpresa, m.IdMatricula, m.IdAlumno, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, jc.NomCurso, jc.OrdenCurso, nj.NomJornada, nj.OrdenJornada, an.Descripcion, al.Codigo, p.pe_nombreCompleto, p.pe_sexo, "
                     + "c.ca_descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel "
                     + "FROM     dbo.aca_Matricula AS m INNER JOIN "
                     + "dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel LEFT OUTER JOIN "
@@ -37,13 +38,15 @@ namespace Core.Data.Reportes.Academico
                     + "dbo.aca_AnioLectivo AS an ON an.IdEmpresa = m.IdEmpresa AND an.IdAnio = m.IdAnio LEFT OUTER JOIN "
                     + "dbo.aca_Alumno AS al ON m.IdAlumno = al.IdAlumno AND m.IdEmpresa = al.IdEmpresa LEFT OUTER JOIN "
                     + "dbo.tb_persona AS p ON al.IdPersona = p.IdPersona LEFT OUTER JOIN "
-                    + "dbo.tb_Catalogo AS c ON c.CodCatalogo = p.pe_sexo "
+                    + "dbo.tb_Catalogo AS c ON c.CodCatalogo = p.pe_sexo LEFT OUTER JOIN "
+                    + " dbo.aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1"
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString()
                     + " and m.IdAnio = " + IdAnio.ToString()
                     + " and m.IdSede = " + IdSede.ToString()
                     + " and m.IdJornada = " + IdJornada.ToString()
                     + " and m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
-                    + " and m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString();
+                    + " and m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString()
+                    + " and isnull(r.IdMatricula,0) = case when @MostrarRetirados = 1 then isnull(r.IdMatricula,0) else 0 end ";
 
                     #endregion
 
@@ -59,6 +62,7 @@ namespace Core.Data.Reportes.Academico
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),
                             IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
                             IdJornada = Convert.ToInt32(reader["IdJornada"]),
                             IdCurso = Convert.ToInt32(reader["IdCurso"]),
                             IdParalelo = Convert.ToInt32(reader["IdParalelo"]),

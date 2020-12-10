@@ -88,6 +88,7 @@
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.groupHeaderBand4 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.groupFooterBand1 = new DevExpress.XtraReports.UI.GroupFooterBand();
+            this.p_MostrarRetirados = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -655,6 +656,11 @@
             this.groupFooterBand1.HeightF = 24.83332F;
             this.groupFooterBand1.Name = "groupFooterBand1";
             // 
+            // p_MostrarRetirados
+            // 
+            this.p_MostrarRetirados.Name = "p_MostrarRetirados";
+            this.p_MostrarRetirados.Visible = false;
+            // 
             // ACA_054_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -686,7 +692,8 @@
             this.p_IdParalelo,
             this.p_IdJornada,
             this.p_IdSede,
-            this.p_IdAnio});
+            this.p_IdAnio,
+            this.p_MostrarRetirados});
             this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_054_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
@@ -759,5 +766,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
         private DevExpress.XtraReports.UI.GroupHeaderBand groupHeaderBand4;
         private DevExpress.XtraReports.UI.GroupFooterBand groupFooterBand1;
+        public DevExpress.XtraReports.Parameters.Parameter p_MostrarRetirados;
     }
 }

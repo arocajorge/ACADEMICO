@@ -152,7 +152,7 @@ namespace Core.Data.Academico
                         Lista.Add(new aca_Matricula_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
-                            IdMatricula = Convert.ToDecimal(reader["IdAnio"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
                             Codigo = string.IsNullOrEmpty(reader["IdEmpresa"].ToString()) ? null : reader["IdEmpresa"].ToString(),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),
@@ -244,7 +244,7 @@ namespace Core.Data.Academico
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
-                            Codigo = string.IsNullOrEmpty(reader["IdEmpresa"].ToString()) ? null : reader["IdEmpresa"].ToString(),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),
                             IdSede = Convert.ToInt32(reader["IdSede"]),

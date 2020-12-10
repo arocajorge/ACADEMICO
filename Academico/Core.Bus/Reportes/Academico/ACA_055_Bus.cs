@@ -12,9 +12,9 @@ namespace Core.Bus.Reportes.Academico
     {
         ACA_055_Data odata = new ACA_055_Data();
 
-        public List<ACA_055_Info> GetList(int IdEmpresa,int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso)
+        public List<ACA_055_Info> GetList(int IdEmpresa,int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, bool MostrarRetirados)
         {
-            return odata.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
+            return odata.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, MostrarRetirados);
         }
     }
 }

@@ -285,6 +285,12 @@
     <Compile Include="Reportes\Academico\ACA_005_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_007_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_006_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_061_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_060_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_059_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_058_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_057_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_056_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_055_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_054_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_053_Info.cs" />
@@ -415,6 +421,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Compra\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

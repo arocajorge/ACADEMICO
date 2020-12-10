@@ -31,7 +31,7 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="IdProducto">Año lectivo</label>
                             @Html.Partial("_ComboBoxPartial_Anio", Model)
@@ -45,21 +45,21 @@
                             @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger", @id = "IdSede" })
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdCliente">Jornada</label>
                             @Html.Partial("_CmbJornada", Model)
                             @*@Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger", @id = "IdJornada" })*@
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="IdCliente">Nivel</label>
                             @Html.Partial("_CmbNivel", Model)
                             @*@Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger", @id = "IdNivel" })*@
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="IdCliente">Curso</label>
                             @Html.Partial("_CmbCurso", Model)
