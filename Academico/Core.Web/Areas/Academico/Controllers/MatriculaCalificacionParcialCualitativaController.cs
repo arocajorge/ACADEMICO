@@ -661,19 +661,19 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 foreach (var item in Lista_CalificacionesGuardar)
                 {
-                    if ((info_parcial.Orden - 1) != 0)
-                    {
-                        var OrdenAnterior = info_parcial.Orden - 1;
-                        var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(item.IdEmpresa, item.IdSede, item.IdAnio, Convert.ToInt32(OrdenAnterior));
-                        var info_cal_anteriores = bus_calificacion_parcial.get_Info(item.IdEmpresa, item.IdMatricula, info_parcial_anterior.IdCatalogoParcial, item.IdMateria, Convert.ToDecimal(item.IdProfesor));
+                    //if ((info_parcial.Orden - 1) != 0)
+                    //{
+                    //    var OrdenAnterior = info_parcial.Orden - 1;
+                    //    var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(item.IdEmpresa, item.IdSede, item.IdAnio, Convert.ToInt32(OrdenAnterior));
+                    //    var info_cal_anteriores = bus_calificacion_parcial.get_Info(item.IdEmpresa, item.IdMatricula, info_parcial_anterior.IdCatalogoParcial, item.IdMateria, Convert.ToDecimal(item.IdProfesor));
 
-                        if (info_cal_anteriores.IdCalificacionCualitativa==null)
-                        {
-                            ViewBag.mensaje = "El estudiante con IdMatricula " + item.IdMatricula + " tiene calificaciones pendientes de ingresar en el parcial anterior.";
-                            guardar = false;
-                            break;
-                        }
-                    }
+                    //    if (info_cal_anteriores.IdCalificacionCualitativa==null)
+                    //    {
+                    //        ViewBag.mensaje = "El estudiante con IdMatricula " + item.IdMatricula + " tiene calificaciones pendientes de ingresar en el parcial anterior.";
+                    //        guardar = false;
+                    //        break;
+                    //    }
+                    //}
 
                     if (item.IdProfesor == 0)
                     {
@@ -714,7 +714,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 ViewBag.error = ex.Message.ToString();
                 cargar_combos(model);
-                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdMateria = model.IdMateria, IdCatalogoParcial = model.IdCatalogoParcial });
+                return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdMateria = model.IdMateria, IdCatalogoTipo = model.IdCatalogoTipo, IdCatalogoParcial = model.IdCatalogoParcial });
             }
         }
 
@@ -819,34 +819,34 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info.Conducta));
 
             var info_parcial = bus_parcial.GetInfo(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, info.IdCatalogoParcial);
-            if ((info_parcial.Orden - 1) != 0)
-            {
-                var OrdenAnterior = info_parcial.Orden - 1;
-                var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(OrdenAnterior));
-                var info_cal_anteriores = bus_calificacion_cualitativa.GetInfo_X_Matricula(info.IdEmpresa, info.IdMatricula, info.IdMateria, info_parcial_anterior.IdCatalogoParcial);
-                decimal? Promedio_CatalogoParcial = null;
+            //if ((info_parcial.Orden - 1) != 0)
+            //{
+            //    var OrdenAnterior = info_parcial.Orden - 1;
+            //    var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(OrdenAnterior));
+            //    var info_cal_anteriores = bus_calificacion_cualitativa.GetInfo_X_Matricula(info.IdEmpresa, info.IdMatricula, info.IdMateria, info_parcial_anterior.IdCatalogoParcial);
+            //    decimal? Promedio_CatalogoParcial = null;
 
-                if (info_cal_anteriores != null)
-                {
-                    if (info_parcial_anterior != null)
-                    {
-                        Promedio_CatalogoParcial = info_cal_anteriores.IdCalificacionCualitativa;
+            //    if (info_cal_anteriores != null)
+            //    {
+            //        if (info_parcial_anterior != null)
+            //        {
+            //            Promedio_CatalogoParcial = info_cal_anteriores.IdCalificacionCualitativa;
 
-                        if (Promedio_CatalogoParcial == null)
-                        {
-                            RegistroValido = false;
-                        }
-                    }
-                    else
-                    {
-                        RegistroValido = false;
-                    }
-                }
-                else
-                {
-                    RegistroValido = false;
-                }
-            }
+            //            if (Promedio_CatalogoParcial == null)
+            //            {
+            //                RegistroValido = false;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            RegistroValido = false;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        RegistroValido = false;
+            //    }
+            //}
 
             if (info_conducta != null)
             {

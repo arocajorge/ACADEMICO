@@ -44,6 +44,7 @@ namespace Core.Info.Academico
         public Nullable<int> IdEmpresa_rol { get; set; }
         public Nullable<decimal> IdEmpleado { get; set; }
         public Nullable<int> IdCatalogoESTMAT { get; set; }
+        public Nullable<bool> EsPatrocinado { get; set; }
 
 
 

@@ -61,6 +61,9 @@
                 <a href="#tab_solicitud_matricula" aria-controls="listado" role="tab" data-toggle="tab">Solicitud</a>
             </li>
             <li>
+                <a href="#tab_autorizacion_matricula" aria-controls="listado" role="tab" data-toggle="tab">Autorización</a>
+            </li>
+            <li>
                 <a href="#tab_contrato_matricula" aria-controls="listado" role="tab" data-toggle="tab">Contrato</a>
             </li>
             <li>
@@ -76,7 +79,6 @@
                         settings.Name = "webDocumentViewer";
                     }).Bind(ViewBag.Report).GetHtml()
             </div>
-
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_solicitud_matricula">
 
                 @Html.DevExpress().WebDocumentViewer(settings =>
@@ -85,6 +87,15 @@
                    settings.MobileMode = false;
                    settings.Name = "webDocumentViewer2";
                }).Bind(ViewBag.ReportSolicitud).GetHtml()
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_autorizacion_matricula">
+
+                @Html.DevExpress().WebDocumentViewer(settings =>
+               {
+                   settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                   settings.MobileMode = false;
+                   settings.Name = "webDocumentViewer5";
+               }).Bind(ViewBag.ReportAutorizacion).GetHtml()
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_contrato_matricula">
 

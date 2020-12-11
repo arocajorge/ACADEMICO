@@ -43,7 +43,7 @@
             this.xrTableRow45 = new DevExpress.XtraReports.UI.XRTableRow();
             this.Rector = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell16 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.Secretaria = new DevExpress.XtraReports.UI.XRTableCell();
+            this.Colecturia = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow46 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell143 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -156,7 +156,7 @@
             this.xrTableRow45.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
             this.Rector,
             this.xrTableCell16,
-            this.Secretaria});
+            this.Colecturia});
             this.xrTableRow45.Name = "xrTableRow45";
             this.xrTableRow45.StylePriority.UseTextAlignment = false;
             this.xrTableRow45.TextAlignment = DevExpress.XtraPrinting.TextAlignment.BottomLeft;
@@ -188,19 +188,20 @@
             this.xrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell16.Weight = 3.5531986227577725D;
             // 
-            // Secretaria
+            // Colecturia
             // 
-            this.Secretaria.Borders = DevExpress.XtraPrinting.BorderSide.Top;
-            this.Secretaria.Font = new System.Drawing.Font("Verdana", 9F);
-            this.Secretaria.Multiline = true;
-            this.Secretaria.Name = "Secretaria";
-            this.Secretaria.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
-            this.Secretaria.StylePriority.UseBorders = false;
-            this.Secretaria.StylePriority.UseFont = false;
-            this.Secretaria.StylePriority.UsePadding = false;
-            this.Secretaria.StylePriority.UseTextAlignment = false;
-            this.Secretaria.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.Secretaria.Weight = 5.9574549106885915D;
+            this.Colecturia.Borders = DevExpress.XtraPrinting.BorderSide.Top;
+            this.Colecturia.Font = new System.Drawing.Font("Verdana", 9F);
+            this.Colecturia.Multiline = true;
+            this.Colecturia.Name = "Colecturia";
+            this.Colecturia.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
+            this.Colecturia.StylePriority.UseBorders = false;
+            this.Colecturia.StylePriority.UseFont = false;
+            this.Colecturia.StylePriority.UsePadding = false;
+            this.Colecturia.StylePriority.UseTextAlignment = false;
+            this.Colecturia.Text = "CPA. EDISON GELLIBERT VILLAGOMEZ";
+            this.Colecturia.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.Colecturia.Weight = 5.9574549106885915D;
             // 
             // xrTableRow46
             // 
@@ -248,7 +249,7 @@
             this.xrTableCell2.StylePriority.UseFont = false;
             this.xrTableCell2.StylePriority.UsePadding = false;
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
-            this.xrTableCell2.Text = "SECRETARIA GENERAL";
+            this.xrTableCell2.Text = "COORDINADOR DE COLECTURIA";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell2.Weight = 9.2375398017564869D;
             // 
@@ -375,7 +376,7 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow45;
         private DevExpress.XtraReports.UI.XRTableCell Rector;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell16;
-        private DevExpress.XtraReports.UI.XRTableCell Secretaria;
+        private DevExpress.XtraReports.UI.XRTableCell Colecturia;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow46;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell143;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;

@@ -643,7 +643,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public JsonResult guardar(DateTime Fecha, int IdEmpresa = 0, int IdAnio = 0, decimal IdAlumno = 0, string IdComboCurso = "", int IdParalelo = 0, int IdPlantilla = 0,
             int IdMecanismo = 0, int IdMecanismoDet = 0,string Observacion = "",string Ids = "", string IDs_Doc="", int IdSucursal = 0, int IdPuntoVta=0, string IdCatalogo_FormaPago="", 
-            string vt_serie1="", string vt_serie2 = "", string vt_NumFactura = "", int IdEmpresa_rol = 0 , decimal IdEmpleado=0, int IdCatalogoESTMAT = 0, decimal IdTransaccionSession = 0)
+            string vt_serie1="", string vt_serie2 = "", string vt_NumFactura = "", int IdEmpresa_rol = 0 , decimal IdEmpleado=0, int IdCatalogoESTMAT = 0, bool EsPatrocinado = false, decimal IdTransaccionSession = 0)
         {
             decimal Matricula = 0;
             int Empresa = 0;
@@ -692,6 +692,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     IdCatalogoESTMAT = IdCatalogoESTMAT,
                     IdEmpresa_rol = ((info_termino_pago!=null && info_termino_pago.AplicaDescuentoNomina == true)? IdEmpresa_rol :(int?)null ),
                     IdEmpleado = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? IdEmpleado : (decimal?)null ),
+                    EsPatrocinado = EsPatrocinado,
                     IdUsuarioCreacion = SessionFixed.IdUsuario,
                     lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>()
                 };

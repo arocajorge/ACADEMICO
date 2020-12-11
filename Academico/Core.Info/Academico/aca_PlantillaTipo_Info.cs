@@ -25,5 +25,6 @@ namespace Core.Info.Academico
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         [Required(ErrorMessage = "El campo motivo anulación es obligatorio")]
         public string MotivoAnulacion { get; set; }
+        public Nullable<bool> EsBeca { get; set; }
     }
 }

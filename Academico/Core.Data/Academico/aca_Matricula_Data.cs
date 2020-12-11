@@ -218,7 +218,7 @@ namespace Core.Data.Academico
                     SqlCommand command = new SqlCommand("", connection);
                     command.CommandText = "SELECT m.IdEmpresa, m.IdMatricula, al.Codigo, m.IdAlumno, pa.IdPersona, pa.pe_nombreCompleto, pa.pe_cedulaRuc, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, sn.NomSede, a.Descripcion, sn.NomNivel, sn.OrdenNivel, "
                     + " nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, a.BloquearMatricula, m.IdPersonaF, m.IdPersonaR, m.IdPlantilla, m.Fecha, m.Observacion, m.IdMecanismo, m.IdEmpresa_rol, "
-                    + " m.IdEmpleado, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, dbo.aca_Plantilla.NomPlantilla "
+                    + " m.IdEmpleado, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, dbo.aca_Plantilla.NomPlantilla, m.EsPatrocinado "
                     + " FROM dbo.aca_Matricula AS m INNER JOIN "
                     + " dbo.aca_AnioLectivo AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
                     + " dbo.aca_Plantilla ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
@@ -270,6 +270,7 @@ namespace Core.Data.Academico
                             IdMecanismo = Convert.ToDecimal(reader["IdMecanismo"]),
                             IdEmpresa_rol = string.IsNullOrEmpty(reader["IdEmpresa_rol"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEmpresa_rol"]),
                             IdEmpleado = string.IsNullOrEmpty(reader["IdEmpleado"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["IdEmpleado"]),
+                            EsPatrocinado = string.IsNullOrEmpty(reader["EsPatrocinado"].ToString()) ? false : Convert.ToBoolean(reader["EsPatrocinado"]),
                         };
                     }
                 }
@@ -554,7 +555,8 @@ namespace Core.Data.Academico
                         FechaCreacion = DateTime.Now,
                         Fecha = info.Fecha,
                         IdEmpresa_rol=info.IdEmpresa_rol,
-                        IdEmpleado = info.IdEmpleado
+                        IdEmpleado = info.IdEmpleado,
+                        EsPatrocinado = info.EsPatrocinado
                     };
                     Context.aca_Matricula.Add(Entity);
                     

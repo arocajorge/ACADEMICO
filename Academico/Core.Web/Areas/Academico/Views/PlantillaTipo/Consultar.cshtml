@@ -86,7 +86,21 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.EsBeca, settings =>
+                            {
+                                settings.Name = "EsBeca";
+                                settings.Text = "Es Beca Total";
+                            }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.EsBeca, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
     //@Html.Action("GridViewPartial_PlantillaTipo")
 
     <div class="box-footer">

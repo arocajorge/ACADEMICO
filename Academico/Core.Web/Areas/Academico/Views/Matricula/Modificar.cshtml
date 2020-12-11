@@ -202,7 +202,18 @@
                     @Html.Partial("_ComboBoxPartial_Plantilla", Model)
                     @Html.ValidationMessageFor(q => q.IdPlantilla, "", new { @class = "text-danger" })
                 </div>
-            </div>  
+            </div> 
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.EsPatrocinado, settings =>
+                            {
+                                settings.Name = "EsPatrocinado";
+                                settings.Text = "Es Patrocinado";
+                            }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.EsPatrocinado, "", new { @class = "text-danger" })
+                </div>
+            </div> 
         </div>
     </div>
     <div class="row" id="Empleado" hidden>

@@ -185,6 +185,17 @@ namespace Core.Web.Areas.Reportes.Controllers
 
             ViewBag.ReportSolicitud = ReportSolicitud;
 
+            ACA_063_Rpt ReportAutorizacion= new ACA_063_Rpt();
+
+            ReportAutorizacion.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportAutorizacion.p_IdAlumno.Value = model.IdAlumno;
+            ReportAutorizacion.p_IdAnio.Value = model.IdAnio;
+            ReportAutorizacion.p_IdSede.Value = model.IdSede;
+            ReportAutorizacion.usuario = SessionFixed.IdUsuario;
+            ReportAutorizacion.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportAutorizacion = ReportAutorizacion;
+
             ACA_003_Rpt ReportContrato = new ACA_003_Rpt();
 
             ReportContrato.p_IdEmpresa.Value = model.IdEmpresa;
@@ -231,6 +242,17 @@ namespace Core.Web.Areas.Reportes.Controllers
             ReportSolicitud.empresa = SessionFixed.NomEmpresa;
 
             ViewBag.ReportSolicitud = ReportSolicitud;
+
+            ACA_063_Rpt ReportAutorizacion = new ACA_063_Rpt();
+
+            ReportAutorizacion.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportAutorizacion.p_IdAlumno.Value = model.IdAlumno;
+            ReportAutorizacion.p_IdAnio.Value = model.IdAnio;
+            ReportAutorizacion.p_IdSede.Value = model.IdSede;
+            ReportAutorizacion.usuario = SessionFixed.IdUsuario;
+            ReportAutorizacion.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportAutorizacion = ReportAutorizacion;
 
             ACA_003_Rpt ReportContrato = new ACA_003_Rpt();
 
@@ -3968,6 +3990,160 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_MostrarRetirado.Value = model.mostrarAnulados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        #endregion
+
+        #region ACA_062
+        public ActionResult ACA_062()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.mostrarAnulados = false;
+            ACA_062_Rpt report = new ACA_062_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_MostrarRetirado.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_062(cl_filtros_Info model)
+        {
+            ACA_062_Rpt report = new ACA_062_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_MostrarRetirado.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        #endregion
+
+        #region ACA_064
+        public ActionResult ACA_064()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdNivel = 0;
+            model.IdJornada = 0;
+            model.IdCurso = 0;
+            model.IdParalelo = 0;
+            model.mostrarAnulados = false;
+
+            ACA_064_Rpt report = new ACA_064_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_MostrarRetirados.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_064(cl_filtros_Info model)
+        {
+            ACA_064_Rpt report = new ACA_064_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_MostrarRetirados.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        #endregion
+
+        #region ACA_065
+        public ActionResult ACA_065()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdNivel = 0;
+            model.IdJornada = 0;
+            model.IdCurso = 0;
+            model.IdParalelo = 0;
+            model.mostrarAnulados = false;
+
+            ACA_065_Rpt report = new ACA_065_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_MostrarRetirados.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_065(cl_filtros_Info model)
+        {
+            ACA_065_Rpt report = new ACA_065_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_MostrarRetirados.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
             ViewBag.Report = report;
 
             return View(model);

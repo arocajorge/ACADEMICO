@@ -275,12 +275,16 @@
     <Compile Include="Inventario\in_UnidadMedida_Equiv_conversion_Bus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reportes\Academico\ACA_001_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_065_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_064_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_063_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_002_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_003_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_004_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_005_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_007_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_006_ Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_062_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_061_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_060_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_059_Bus.cs" />

@@ -23,6 +23,7 @@ namespace Core.Data.Academico
                         IdEmpresa = q.IdEmpresa,
                         IdTipoPlantilla = q.IdTipoPlantilla,
                         NomPlantillaTipo = q.NomPlantillaTipo,
+                        EsBeca = q.EsBeca,
                         Estado = q.Estado
                     }).ToList();
                 }
@@ -71,6 +72,7 @@ namespace Core.Data.Academico
                         IdEmpresa = Entity.IdEmpresa,
                         IdTipoPlantilla = Entity.IdTipoPlantilla,
                         NomPlantillaTipo = Entity.NomPlantillaTipo,
+                        EsBeca = Entity.EsBeca??false,
                         Estado = Entity.Estado
                     };
                 }
@@ -96,6 +98,7 @@ namespace Core.Data.Academico
                     IdEmpresa = info.IdEmpresa,
                     IdTipoPlantilla = info.IdTipoPlantilla = GetId(info.IdEmpresa),
                     NomPlantillaTipo = info.NomPlantillaTipo,
+                    EsBeca = (info.EsBeca==null) ? false : info.EsBeca,
                     Estado = true,
                     IdUsuarioCreacion = info.IdUsuarioCreacion,
                     FechaCreacion =DateTime.Now,
@@ -127,6 +130,7 @@ namespace Core.Data.Academico
                     return false;
                 Entity.NomPlantillaTipo = info.NomPlantillaTipo;
                 Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                Entity.EsBeca = (info.EsBeca == null) ? false : info.EsBeca;
                 Entity.FechaModificacion = DateTime.Now;
                 #endregion
 

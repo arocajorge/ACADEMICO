@@ -48,5 +48,6 @@ namespace Core.Data.Base
         public Nullable<decimal> IdEmpleado { get; set; }
         public Nullable<bool> EsRetirado { get; set; }
         public string NomPlantilla { get; set; }
+        public Nullable<bool> EsPatrocinado { get; set; }
     }
 }

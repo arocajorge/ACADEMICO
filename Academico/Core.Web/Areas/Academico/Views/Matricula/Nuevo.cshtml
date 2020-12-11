@@ -212,14 +212,13 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="IdEmpresa">Plantilla*</label>
                     @Html.Partial("_ComboBoxPartial_Plantilla", Model)
                     @Html.ValidationMessageFor(q => q.IdPlantilla, "", new { @class = "text-danger" })
                 </div>
             </div>
-           
             <div class="col-md-2">
                 <label for="IdEmpresa">Valor total</label>
                 @Html.TextBoxFor(q => q.ValorPlantilla, new { @class = "form-control", @id= "ValorPlantilla", @readonly = "readonly" })
@@ -229,6 +228,17 @@
                 <label for="IdEmpresa">Valor pronto pago</label>
                 @Html.TextBoxFor(q => q.ValorPlantillaProntoPago, new { @class = "form-control", @id = "ValorPlantillaProntoPago", @readonly = "readonly" })
                 @Html.ValidationMessageFor(q => q.ValorPlantillaProntoPago, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.EsPatrocinado, settings =>
+                            {
+                                settings.Name = "EsPatrocinado";
+                                settings.Text = "Es Patrocinado";
+                            }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.EsPatrocinado, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
     </div>
@@ -418,6 +428,7 @@
             IdEmpresa_rol: $("#IdEmpresa_rol").val(),
             IdEmpleado: IdEmpleado.GetValue(),
             IdCatalogoESTMAT: $("#IdCatalogoESTMAT").val(),
+            EsPatrocinado : EsPatrocinado.GetValue(),
             IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({

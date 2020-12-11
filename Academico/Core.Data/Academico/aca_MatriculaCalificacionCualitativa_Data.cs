@@ -194,6 +194,9 @@ namespace Core.Data.Academico
                             Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
                             CodigoCalificacion = string.IsNullOrEmpty(reader["CodigoCalificacion"].ToString()) ? null : reader["CodigoCalificacion"].ToString(),
                             DescripcionCorta = string.IsNullOrEmpty(reader["DescripcionCorta"].ToString()) ? null : reader["DescripcionCorta"].ToString(),
+                            RegistroValido = true,
+                            RegistroValidoCalificacion = true,
+                            RegistroValidoConducta = true
                         });
                     }
                     reader.Close();
