@@ -1137,7 +1137,7 @@ namespace Core.Data.Reportes.Academico
                         });
                     }
                 }
-                */
+                
                 ListaInicial = Lista.Where(q => q.IdMateria == 0 ).ToList();
                 ListaFinal.AddRange(ListaInicial);
 
