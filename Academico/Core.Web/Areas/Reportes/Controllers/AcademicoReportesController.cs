@@ -4149,6 +4149,123 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
         #endregion
+
+        #region ACA_066
+        public ActionResult ACA_066()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+
+            ACA_066_Rpt report = new ACA_066_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_066(cl_filtros_Info model)
+        {
+            ACA_066_Rpt report = new ACA_066_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        #endregion
+
+        #region ACA_067
+        public ActionResult ACA_067()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdNivel = 0;
+            model.IdJornada = 0;
+            model.IdCurso = 0;
+            model.IdParalelo = 0;
+            model.mostrarAnulados = false;
+
+            ACA_067_Rpt reportMatutina = new ACA_067_Rpt();
+            ACA_067_Vespertina_Rpt reportVespertina = new ACA_067_Vespertina_Rpt();
+
+            reportMatutina.p_IdEmpresa.Value = model.IdEmpresa;
+            reportMatutina.p_IdAnio.Value = model.IdAnio;
+            reportMatutina.p_IdSede.Value = model.IdSede;
+            reportMatutina.p_IdNivel.Value = model.IdNivel;
+            reportMatutina.p_IdJornada.Value = model.IdJornada;
+            reportMatutina.p_IdCurso.Value = model.IdCurso;
+            reportMatutina.p_IdParalelo.Value = model.IdParalelo;
+            reportMatutina.p_MostrarRetirados.Value = model.mostrarAnulados;
+            reportMatutina.usuario = SessionFixed.IdUsuario;
+            reportMatutina.empresa = SessionFixed.NomEmpresa;
+
+            reportVespertina.p_IdEmpresa.Value = model.IdEmpresa;
+            reportVespertina.p_IdAnio.Value = model.IdAnio;
+            reportVespertina.p_IdSede.Value = model.IdSede;
+            reportVespertina.p_IdNivel.Value = model.IdNivel;
+            reportVespertina.p_IdJornada.Value = model.IdJornada;
+            reportVespertina.p_IdCurso.Value = model.IdCurso;
+            reportVespertina.p_IdParalelo.Value = model.IdParalelo;
+            reportVespertina.p_MostrarRetirados.Value = model.mostrarAnulados;
+            reportVespertina.usuario = SessionFixed.IdUsuario;
+            reportVespertina.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportMatutina = reportMatutina;
+            ViewBag.ReportVespertina = reportVespertina;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_067(cl_filtros_Info model)
+        {
+            ACA_067_Rpt reportMatutina = new ACA_067_Rpt();
+            ACA_067_Vespertina_Rpt reportVespertina = new ACA_067_Vespertina_Rpt();
+
+            reportMatutina.p_IdEmpresa.Value = model.IdEmpresa;
+            reportMatutina.p_IdAnio.Value = model.IdAnio;
+            reportMatutina.p_IdSede.Value = model.IdSede;
+            reportMatutina.p_IdNivel.Value = model.IdNivel;
+            reportMatutina.p_IdJornada.Value = model.IdJornada;
+            reportMatutina.p_IdCurso.Value = model.IdCurso;
+            reportMatutina.p_IdParalelo.Value = model.IdParalelo;
+            reportMatutina.p_MostrarRetirados.Value = model.mostrarAnulados;
+            reportMatutina.usuario = SessionFixed.IdUsuario;
+            reportMatutina.empresa = SessionFixed.NomEmpresa;
+
+            reportVespertina.p_IdEmpresa.Value = model.IdEmpresa;
+            reportVespertina.p_IdAnio.Value = model.IdAnio;
+            reportVespertina.p_IdSede.Value = model.IdSede;
+            reportVespertina.p_IdNivel.Value = model.IdNivel;
+            reportVespertina.p_IdJornada.Value = model.IdJornada;
+            reportVespertina.p_IdCurso.Value = model.IdCurso;
+            reportVespertina.p_IdParalelo.Value = model.IdParalelo;
+            reportVespertina.p_MostrarRetirados.Value = model.mostrarAnulados;
+            reportVespertina.usuario = SessionFixed.IdUsuario;
+            reportVespertina.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.ReportMatutina = reportMatutina;
+            ViewBag.ReportVespertina = reportVespertina;
+
+            return View(model);
+        }
+        #endregion
     }
 
     public class aca_ReporteCalificacion_Combos_List

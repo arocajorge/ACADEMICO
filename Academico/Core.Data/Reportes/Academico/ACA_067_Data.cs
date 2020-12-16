@@ -1,4 +1,5 @@
 ﻿using Core.Data.Base;
+using Core.Info.Helps;
 using Core.Info.Reportes.Academico;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,10 @@ using System.Linq;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_061_Data
+    public class ACA_067_Data
     {
-        public List<ACA_061_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, bool MostrarRetirados)
+        cl_funciones funciones = new cl_funciones();
+        public List<ACA_067_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, bool MostrarRetirados)
         {
             try
             {
@@ -25,19 +27,18 @@ namespace Core.Data.Reportes.Academico
                 int IdParaleloIni = IdParalelo;
                 int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
 
-                decimal IdAlumnoIni = IdAlumno;
-                decimal IdAlumnoFin = IdAlumno == 0 ? 9999999 : IdAlumno;
-
-                List<ACA_061_Info> Lista = new List<ACA_061_Info>();
+                List<ACA_067_Info> Lista = new List<ACA_067_Info>();
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
 
                     #region Query
                     string query = "DECLARE @MostrarRetirados int = " + (MostrarRetirados == true ? 1 : 0) + ";"
-                    + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, an.Descripcion, sn.NomSede, sn.NomNivel, "
-                    + " sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo,p.pe_nombreCompleto "
-                    + " FROM     dbo.aca_Matricula AS m LEFT OUTER JOIN "
+                    + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, sn.NomSede, sn.NomNivel, "
+                    + " sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, p.pe_nombreCompleto, rep.pe_nombreCompleto RepLegal, rep.pe_cedulaRuc CedRepLegal ,s.NombreRector, s.NombreSecretaria, mc.Fecha, an.Descripcion  "
+                    + " FROM dbo.aca_Matricula AS m RIGHT OUTER JOIN "
+                    + " dbo.aca_MatriculaCondicional AS mc ON m.IdEmpresa = mc.IdEmpresa AND m.IdAlumno = mc.IdAlumno AND m.IdAnio = mc.IdAnio and mc.Estado=1 LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS rep ON rep.IdPersona = m.IdPersonaR LEFT OUTER JOIN "
                     + " dbo.aca_Alumno AS al ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
                     + " dbo.tb_persona AS p ON al.IdPersona = p.IdPersona LEFT OUTER JOIN "
                     + " dbo.aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 INNER JOIN "
@@ -47,6 +48,7 @@ namespace Core.Data.Reportes.Academico
                     + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo AS an ON m.IdEmpresa = an.IdEmpresa AND m.IdAnio = an.IdAnio "
+                    + " LEFT OUTER JOIN aca_Sede s on s.IdEmpresa=m.IdEmpresa and s.IdSede = m.IdSede "
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString()
                     + " and m.IdAnio = " + IdAnio.ToString()
                     + " and m.IdSede = " + IdSede.ToString()
@@ -54,7 +56,6 @@ namespace Core.Data.Reportes.Academico
                     + " and m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
                     + " and m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString()
                     + " and m.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString()
-                    + " and m.IdAlumno between " + IdAlumnoIni.ToString() + " and " + IdAlumnoFin.ToString()
                     + " and isnull(r.IdMatricula,0) = case when @MostrarRetirados = 1 then isnull(r.IdMatricula,0) else 0 end ";
                     #endregion
 
@@ -63,8 +64,9 @@ namespace Core.Data.Reportes.Academico
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Lista.Add(new ACA_061_Info
+                        Lista.Add(new ACA_067_Info
                         {
+                            Num=1,
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),
@@ -73,7 +75,7 @@ namespace Core.Data.Reportes.Academico
                             IdNivel = Convert.ToInt32(reader["IdNivel"]),
                             IdCurso = Convert.ToInt32(reader["IdCurso"]),
                             IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
-                            EsRetirado = string.IsNullOrEmpty(reader["EsRetirado"].ToString()) ? false : Convert.ToBoolean(reader["EsRetirado"]),
+                            //EsRetirado = string.IsNullOrEmpty(reader["EsRetirado"].ToString()) ? false : Convert.ToBoolean(reader["EsRetirado"]),
                             Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
                             NomSede = string.IsNullOrEmpty(reader["NomSede"].ToString()) ? null : reader["NomSede"].ToString(),
                             NomNivel = string.IsNullOrEmpty(reader["NomNivel"].ToString()) ? null : reader["NomNivel"].ToString(),
@@ -85,14 +87,15 @@ namespace Core.Data.Reportes.Academico
                             OrdenCurso = string.IsNullOrEmpty(reader["OrdenCurso"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenCurso"]),
                             OrdenParalelo = string.IsNullOrEmpty(reader["OrdenParalelo"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenParalelo"]),
                             pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
-                            FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy")
+                            RepLegal = string.IsNullOrEmpty(reader["RepLegal"].ToString()) ? null : reader["RepLegal"].ToString(),
+                            NombreRector = string.IsNullOrEmpty(reader["NombreRector"].ToString()) ? null : reader["NombreRector"].ToString(),
+                            NombreSecretaria = string.IsNullOrEmpty(reader["NombreSecretaria"].ToString()) ? null : reader["NombreSecretaria"].ToString(),
+                            FechaMatriculaCondicional = funciones.NumeroALetrasFecha(Convert.ToDateTime(reader["Fecha"]).Day.ToString()) + " días del mes de " + Convert.ToDateTime(reader["Fecha"]).ToString("MMMM' de 'yyyy"),
+                            CedRepLegal = string.IsNullOrEmpty(reader["CedRepLegal"].ToString()) ? null : reader["CedRepLegal"].ToString(),
                         });
                     }
                     reader.Close();
                 }
-                var SecuenciaInicial = 1;
-                var SecuenciaBasica = 1;
-                Lista.ForEach(q=>q.Num = (q.IdNivel==1 ? SecuenciaInicial++ : SecuenciaBasica++));
 
                 return Lista;
             }

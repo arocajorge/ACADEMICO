@@ -1,0 +1,28 @@
+﻿@using System.Web.UI.WebControls;
+@{
+    var comboBox = Html.DevExpress().ComboBox(settings =>
+    {
+        settings.Name = "IdAlumno";
+        settings.Width = Unit.Percentage(100);
+        settings.Properties.DropDownWidth = Unit.Pixel(1200);
+        settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+        settings.CallbackRouteValues = new { Controller = "AlumnoRepresentantes", Action = "CmbAlumno", Area = "Academico" };
+        settings.Properties.CallbackPageSize = 15;
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.Contains;
+        settings.Properties.TextField = "pe_nombreCompleto";
+        settings.Properties.TextFormatString = "[{0}] {1} - {2}";
+        settings.Properties.ValueField = "IdEntidad";
+        settings.Properties.ValueType = typeof(decimal);
+
+        settings.Properties.DropDownButton.Enabled = false;
+
+        settings.Properties.Columns.Add("IdEntidad", "ID", 5);
+        settings.Properties.Columns.Add("pe_cedulaRuc", "Identificacion", 10);
+        settings.Properties.Columns.Add("pe_nombreCompleto", "Alumno", 55);
+        settings.Properties.FilterMinLength = 3;
+    })
+    .BindList(new Core.Web.Areas.Academico.Controllers.AlumnoRepresentantesController().get_list_bajo_demanda_alumno, new Core.Web.Areas.Academico.Controllers.AlumnoRepresentantesController().get_info_bajo_demanda_alumno)
+    .Bind(Model.GetType() == typeof(Core.Info.Academico.aca_Alumno_Info) ? "" : (Model == 0 ? "" : Model));
+
+}
+@comboBox.GetHtml()

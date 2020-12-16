@@ -60,6 +60,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+        public List<aca_Alumno_Info> GetList_AlumnoRepresentante(int IdEmpresa, decimal IdAlumno)
+        {
+            try
+            {
+                return odata.getList_AlumnoRepresentante(IdEmpresa, IdAlumno);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<aca_Alumno_Info> GetList_PeriodoActual(int IdEmpresa, int IdAnio, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo)
         {
             try

@@ -184,7 +184,7 @@ namespace Core.Data.Academico
                             ValidaEstadoAlumno = Convert.ToBoolean(reader["ValidaEstadoAlumno"]),
                             EsExamen = string.IsNullOrEmpty(reader["EsExamen"].ToString()) ? false : Convert.ToBoolean(reader["EsExamen"]),
                             FechaInicio = string.IsNullOrEmpty(reader["FechaInicio"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["FechaInicio"]),
-                            FechaFin = string.IsNullOrEmpty(reader["FechaInicio"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["FechaInicio"])
+                            FechaFin = string.IsNullOrEmpty(reader["FechaFin"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["FechaFin"])
                         };
                     }
                 }
