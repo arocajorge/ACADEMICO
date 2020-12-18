@@ -43,13 +43,10 @@ namespace Core.Info.Reportes.Academico
         public Nullable<decimal> CalificacionNumerica { get; set; }
         public string Columna { get; set; }
         public int OrdenColumna { get; set; }
-
-
-        public int OptativasNulas { get; set; }
-        public int MuestraSupletorio { get; set; }
         public Nullable<decimal> PromedioCalculado { get; set; }
         public Nullable<decimal> SupletorioCalculado { get; set; }
         public Nullable<decimal> PromedioFinalCalculado { get; set; }
         public Nullable<decimal> SumaGeneral { get; set; }
+        public int NoTieneCalificacion { get; set; }
     }
 }

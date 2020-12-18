@@ -776,8 +776,8 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenQ1);
-                    item.Promedio = item.PromedioFinalQ1;
+                    item.CalificacionExamen = item.ExamenQ1 == null ? (decimal?)null : Convert.ToDecimal(item.ExamenQ1);
+                    item.Promedio = item.PromedioFinalQ1 == null ? (decimal?)null : item.PromedioFinalQ1;
                     item.IdEquivalenciaPromedio = item.IdEquivalenciaPromedioQ1==null ? null : item.IdEquivalenciaPromedioQ1;
                     item.Causa = item.CausaQ1;
                     item.Resolucion = item.ResolucionQ1;
@@ -785,35 +785,35 @@ namespace Core.Web.Areas.Academico.Controllers
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenQ2);
-                    item.Promedio = item.PromedioFinalQ2;
-                    item.IdEquivalenciaPromedio = item.IdEquivalenciaPromedioQ2 == null ? null : item.IdEquivalenciaPromedioQ2;
+                    item.CalificacionExamen = item.ExamenQ2 == null ? (decimal?)null : Convert.ToDecimal(item.ExamenQ2);
+                    item.Promedio = item.PromedioFinalQ2 == null ? (decimal?)null : item.PromedioFinalQ2;
+                    item.IdEquivalenciaPromedio = item.IdEquivalenciaPromedioEQ2 == null ? null : item.IdEquivalenciaPromedioEQ2;
                     item.Causa = item.CausaQ2;
                     item.Resolucion = item.ResolucionQ2;
                 }
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXMEJ))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenMejoramiento);
-                    item.Promedio = item.PromedioFinal;
+                    item.CalificacionExamen = item.ExamenMejoramiento == null ? (decimal?)null : Convert.ToDecimal(item.ExamenMejoramiento);
+                    item.Promedio = item.PromedioFinal == null ? (decimal?)null : item.PromedioFinal;
                 }
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXSUP))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenSupletorio);
-                    item.Promedio = item.PromedioFinal;
+                    item.CalificacionExamen = item.ExamenSupletorio == null ? (decimal?)null : Convert.ToDecimal(item.ExamenSupletorio);
+                    item.Promedio = item.PromedioFinal == null ? (decimal?)null : item.PromedioFinal;
                 }
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXREM))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenRemedial);
-                    item.Promedio = item.PromedioFinal;
+                    item.CalificacionExamen = item.ExamenRemedial == null ? (decimal?)null : Convert.ToDecimal(item.ExamenRemedial);
+                    item.Promedio = item.PromedioFinal == null ? (decimal?)null : item.PromedioFinal;
                 }
 
                 if (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXGRA))
                 {
-                    item.CalificacionExamen = Convert.ToDecimal(item.ExamenGracia);
-                    item.Promedio = item.PromedioFinal;
+                    item.CalificacionExamen = item.ExamenGracia == null ? (decimal?)null : Convert.ToDecimal(item.ExamenGracia);
+                    item.Promedio = item.PromedioFinal == null ? (decimal?)null : item.PromedioFinal;
                 }
             }
 

@@ -325,7 +325,7 @@ namespace Core.Data.Reportes.Academico
                              IdCatalogoTipoCalificacion = a.IdCatalogoTipoCalificacion,
                              NombreRepresentante = a.NombreRepresentante,
                              NombreInspector = a.NombreInspector,
-
+                             
                              NoMostrarPromedioQ1 = a.NoMostrarPromedioQ1,
                              NoMostrarPromedioQ2 = a.NoMostrarPromedioQ2,
                              NoMostrarPromedioQuim = a.NoMostrarPromedioQuim,
