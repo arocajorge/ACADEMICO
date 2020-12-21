@@ -1,6 +1,6 @@
-﻿@model Core.Info.Academico.aca_MatriculaCalificacion_Info
+﻿@model Core.Info.Helps.cl_filtros_Info
 @{
-    ViewBag.Title = "Actas de Juntas de Curso";
+    ViewBag.Title = "Estudiantes de participación estudiantil";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
     {
         Response.Redirect("~/Account/Login");
@@ -33,28 +33,28 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdEmpresa">Año Lectivo</label>
-                            @Html.Partial("_ComboBoxPartial_Anio", Model)
+                            @Html.Partial("_ComboBoxPartial_Anio_Cal", Model)
                             @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdEmpresa">Sede</label>
-                            @Html.Partial("_CmbSede", Model)
+                            @Html.Partial("_ComboBoxPartial_Sede_Cal", Model)
                             @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdEmpresa">Jornada</label>
-                            @Html.Partial("_CmbJornada", Model)
+                            @Html.Partial("_ComboBoxPartial_Jornada_Cal", Model)
                             @*@Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="IdEmpresa">Nivel Académico</label>
-                            @Html.Partial("_CmbNivel", Model)
+                            @Html.Partial("_ComboBoxPartial_Nivel_Cal", Model)
                             @*@Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
@@ -62,25 +62,25 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="IdEmpresa">Curso</label>
-                            @Html.Partial("_CmbCurso", Model)
+                            @Html.Partial("_ComboBoxPartial_Curso_Cal", Model)
                             @*@Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="IdCliente">Paralelo</label>
-                            @Html.Partial("_ComboBoxPartial_Paralelo", Model)
+                            <label for="IdEmpresa">Paralelo</label>
+                            @Html.Partial("_ComboBoxPartial_Paralelo_Cal_Quim", Model)
                             @*@Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-5" hidden>
                         <div class="form-group">
-                            <label for="IdEmpresa">Quimestre</label>
-                            @Html.DropDownListFor(q => q.IdCatalogoTipo, new SelectList(ViewBag.lst_quimestres, "Key", "Value"), new { @class = "form-control", @id = "IdCatalogoTipo" })
-                            @Html.ValidationMessageFor(q => q.IdCatalogoTipo, "", new { @class = "text-danger" })
+                            <label for="IdEmpresa">Materia</label>
+                            @Html.Partial("_ComboBoxPartial_Materia_Cal", Model)
+                            @Html.ValidationMessageFor(q => q.IdMateria, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

@@ -391,6 +391,12 @@
     <Compile Include="Reportes\Academico\ACA_001_Rpt.Designer.cs">
       <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_037_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_037_Rpt.Designer.cs">
+      <DependentUpon>ACA_037_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_068_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9738,6 +9744,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_001_Rpt.resx">
       <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_037_Rpt.resx">
+      <DependentUpon>ACA_037_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_068_Rpt.resx">
       <DependentUpon>ACA_068_Rpt.cs</DependentUpon>

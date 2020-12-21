@@ -17,6 +17,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                 List<CXC_002_Info> Lista = new List<CXC_002_Info>();
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
+                    Context.Database.CommandTimeout = 5000;
                     var lst = Context.VWCXC_002.Where(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdCobro == IdCobro).ToList();
                     foreach (var item in lst)
                     {

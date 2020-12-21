@@ -1055,7 +1055,7 @@ namespace Core.Data.Reportes.Academico
                     SumaGeneral = q.Sum(g => Convert.ToDecimal(g.Calificacion)),
                     PromedioCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
                 }).ToList();
-                ListaComplementarias_IIQuim.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
+                ListaComplementariasProm_IIQuim.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
 
                 var lst_promedio_complementarias_QuimII = new List<ACA_034_Info>();
                 foreach (var item in ListaComplementariasProm_IIQuim)

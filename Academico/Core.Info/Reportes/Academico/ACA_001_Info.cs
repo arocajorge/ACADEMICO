@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,5 +66,6 @@ namespace Core.Info.Reportes.Academico
         public Nullable<double> OtrosIngresos { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public string NivelProcedencia { get; set; }
+        public Bitmap ImageUrl { get; set; }
     }
 }

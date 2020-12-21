@@ -25,9 +25,11 @@ namespace Core.Web.Areas.Reportes.Controllers
         string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Academico.repx";
         aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
         aca_MatriculaCalificacion_Bus bus_calificacion = new aca_MatriculaCalificacion_Bus();
+        aca_MatriculaCalificacionParticipacion_Bus bus_calificacion_participacion = new aca_MatriculaCalificacionParticipacion_Bus();
         aca_MatriculaCalificacionCualitativa_Bus bus_calificacion_cualitativa = new aca_MatriculaCalificacionCualitativa_Bus();
         aca_ReporteCalificacion_Combos_List Lista_CombosCalificaciones = new aca_ReporteCalificacion_Combos_List();
         aca_ReporteCalificacionCualitativa_Combos_List Lista_CombosCalificacionesCualitativas = new aca_ReporteCalificacionCualitativa_Combos_List();
+        aca_ReporteCalificacionParticipacion_Combos_List Lista_CombosCalificacionesParticipacion = new aca_ReporteCalificacionParticipacion_Combos_List();
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
         aca_Rubro_Bus bus_rubro = new aca_Rubro_Bus();
         #endregion
@@ -2696,32 +2698,19 @@ namespace Core.Web.Areas.Reportes.Controllers
         #endregion
 
         #region ACA_037
-        private void cargar_combos_ACA_037(aca_MatriculaCalificacion_Info model)
-        {
-            aca_Catalogo_Bus bus_catalogotipo = new aca_Catalogo_Bus();
-            Dictionary<string, string> lst_quimestres = new Dictionary<string, string>();
-            lst_quimestres.Add("6", "QUIMESTRE 1");
-            lst_quimestres.Add("7", "QUIMESTRE 2");
-            ViewBag.lst_quimestres = lst_quimestres;
-        }
-
         public ActionResult ACA_037()
         {
-            aca_MatriculaCalificacion_Info model = new aca_MatriculaCalificacion_Info();
+            cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
-            model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
+            model.mostrarAnulados = false;
 
-            string IdUsuario = SessionFixed.IdUsuario;
-            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
-            var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
-            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos_Tutor(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_CombosParticipacion(model.IdEmpresa, model.IdAnio, model.IdSede);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            ACA_028_Rpt report = new ACA_028_Rpt();
+            ACA_037_Rpt report = new ACA_037_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2730,18 +2719,17 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
-            report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
+            report.p_MostrarRetirados.Value = model.mostrarAnulados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
 
-            cargar_combos_ACA_037(model);
             return View(model);
         }
         [HttpPost]
-        public ActionResult ACA_037(aca_MatriculaCalificacion_Info model)
+        public ActionResult ACA_037(cl_filtros_Info model)
         {
-            ACA_028_Rpt report = new ACA_028_Rpt();
+            ACA_037_Rpt report = new ACA_037_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -2750,11 +2738,14 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
-            report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
+            report.p_MostrarRetirados.Value = model.mostrarAnulados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
-            cargar_combos_ACA_037(model);
+
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_CombosParticipacion(model.IdEmpresa, model.IdAnio, model.IdSede);
+            Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
             return View(model);
         }
 
@@ -4357,6 +4348,26 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
 
         public void set_list(List<aca_MatriculaCalificacionCualitativa_Info> list, decimal IdTransaccionSession)
+        {
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+    }
+
+    public class aca_ReporteCalificacionParticipacion_Combos_List
+    {
+        string Variable = "aca_ReporteCalificacionParticipacion_Info";
+        public List<aca_MatriculaCalificacion_Info> get_list(decimal IdTransaccionSession)
+        {
+            if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+            {
+                List<aca_MatriculaCalificacion_Info> list = new List<aca_MatriculaCalificacion_Info>();
+
+                HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+            }
+            return (List<aca_MatriculaCalificacion_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+        }
+
+        public void set_list(List<aca_MatriculaCalificacion_Info> list, decimal IdTransaccionSession)
         {
             HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
         }

@@ -69,8 +69,8 @@
             this.p_IdParalelo = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
             this.groupHeaderBand1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
-            this.xrRichText1 = new DevExpress.XtraReports.UI.XRRichText();
             this.IdMatricula = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrRichText1 = new DevExpress.XtraReports.UI.XRRichText();
             this.groupFooterBand1 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow45 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -118,16 +118,16 @@
             // xrPictureBox1
             // 
             this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
-            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(507F, 0F);
+            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(487F, 0F);
             this.xrPictureBox1.Name = "xrPictureBox1";
-            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(220F, 60F);
+            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(240F, 60F);
             this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // lbl_imagen
             // 
             this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(0.0002034505F, 0F);
             this.lbl_imagen.Name = "lbl_imagen";
-            this.lbl_imagen.SizeF = new System.Drawing.SizeF(130F, 60F);
+            this.lbl_imagen.SizeF = new System.Drawing.SizeF(140F, 60F);
             this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // xrTable1
@@ -480,6 +480,16 @@
             this.groupHeaderBand1.Name = "groupHeaderBand1";
             this.groupHeaderBand1.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBand;
             // 
+            // IdMatricula
+            // 
+            this.IdMatricula.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdMatricula]")});
+            this.IdMatricula.LocationFloat = new DevExpress.Utils.PointFloat(0.0002031326F, 0F);
+            this.IdMatricula.Name = "IdMatricula";
+            this.IdMatricula.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.IdMatricula.SizeF = new System.Drawing.SizeF(100F, 15F);
+            this.IdMatricula.Visible = false;
+            // 
             // xrRichText1
             // 
             this.xrRichText1.Font = new System.Drawing.Font("Verdana", 10F);
@@ -490,16 +500,6 @@
             this.xrRichText1.SizeF = new System.Drawing.SizeF(726.9998F, 162.5F);
             this.xrRichText1.StylePriority.UseFont = false;
             this.xrRichText1.StylePriority.UsePadding = false;
-            // 
-            // IdMatricula
-            // 
-            this.IdMatricula.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IdMatricula]")});
-            this.IdMatricula.LocationFloat = new DevExpress.Utils.PointFloat(0.0002031326F, 0F);
-            this.IdMatricula.Name = "IdMatricula";
-            this.IdMatricula.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.IdMatricula.SizeF = new System.Drawing.SizeF(100F, 15F);
-            this.IdMatricula.Visible = false;
             // 
             // groupFooterBand1
             // 

@@ -123,6 +123,7 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
         public List<aca_MatriculaCalificacion_Info> GetList_Combos(int IdEmpresa, int IdAnio, int IdSede, decimal IdProfesor, bool EsSuperAdmin)
         {
             try
@@ -288,6 +289,19 @@ namespace Core.Bus.Academico
             try
             {
                 return odata.modicarPaseAnioDB(info);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public List<aca_MatriculaCalificacion_Info> GetList_CombosParticipacion(int IdEmpresa, int IdAnio, int IdSede)
+        {
+            try
+            {
+                return odata.getList_CombosParticipacion(IdEmpresa, IdAnio, IdSede);
             }
             catch (Exception)
             {

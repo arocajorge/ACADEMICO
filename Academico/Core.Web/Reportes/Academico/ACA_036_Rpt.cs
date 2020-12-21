@@ -22,9 +22,6 @@ namespace Core.Web.Reportes.Academico
 
         private void ACA_036_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-            lbl_usuario.Text = usuario;
-
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdSede = string.IsNullOrEmpty(p_IdSede.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSede.Value);
             int IdAnio = string.IsNullOrEmpty(p_IdAnio.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAnio.Value);
@@ -35,6 +32,7 @@ namespace Core.Web.Reportes.Academico
             decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
 
             ACA_036_Bus bus_rpt = new ACA_036_Bus();
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             List<ACA_036_Info> lst_rpt = new List<ACA_036_Info>();
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno);
 
@@ -46,6 +44,15 @@ namespace Core.Web.Reportes.Academico
                 Secretaria.Text = sede.NombreSecretaria;
             }
 
+            var emp = bus_empresa.get_info(IdEmpresa);
+            if (emp != null)
+            {
+                if (emp.em_logo != null)
+                {
+                    ImageConverter obj = new ImageConverter();
+                    lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
+                }
+            }
         }
 
         private void Deuda_SubRpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)

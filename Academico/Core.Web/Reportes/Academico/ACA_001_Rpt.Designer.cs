@@ -2163,6 +2163,9 @@
             this.foto.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.foto.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "ImageSource", "[ImageUrl]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "ImageUrl", "[ImageUrl]")});
             this.foto.LocationFloat = new DevExpress.Utils.PointFloat(609F, 0.0001017253F);
             this.foto.Name = "foto";
             this.foto.SizeF = new System.Drawing.SizeF(100F, 115F);

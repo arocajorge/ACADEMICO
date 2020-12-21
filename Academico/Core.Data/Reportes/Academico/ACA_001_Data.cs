@@ -2,6 +2,7 @@
 using Core.Info.Reportes.Academico;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace Core.Data.Reportes.Academico
         {
             try
             {
+                var Ruta = "~/Content/imagenes/alumnos/" + IdEmpresa.ToString("000") + IdAlumno.ToString("000000") + ".jpg";
                 List<ACA_001_Info> Lista = new List<ACA_001_Info>(); ;
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
@@ -76,13 +78,13 @@ namespace Core.Data.Reportes.Academico
                                 Promedio = q.Promedio,
                                 Titulo = q.Titulo,
                                 TotalGastos = q.TotalGastos,
-                                VehiculoPropio = q.VehiculoPropio
-                                               
-                             }).ToList();
+                                VehiculoPropio = q.VehiculoPropio,
+                                //ImageUrl = new Bitmap(Ruta)
+                        }).ToList();
                 }
                 return Lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;
