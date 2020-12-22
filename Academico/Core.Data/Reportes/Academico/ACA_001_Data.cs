@@ -15,7 +15,7 @@ namespace Core.Data.Reportes.Academico
         {
             try
             {
-                var Ruta = "~/Content/imagenes/alumnos/" + IdEmpresa.ToString("000") + IdAlumno.ToString("000000") + ".jpg";
+                var Ruta = @"..\\Content\imagenes\alumnos\" + IdEmpresa.ToString("000") + IdAlumno.ToString("000000") + ".jpg";
                 List<ACA_001_Info> Lista = new List<ACA_001_Info>(); ;
                 using (EntitiesReportes Context = new EntitiesReportes())
                 {
@@ -79,7 +79,7 @@ namespace Core.Data.Reportes.Academico
                                 Titulo = q.Titulo,
                                 TotalGastos = q.TotalGastos,
                                 VehiculoPropio = q.VehiculoPropio,
-                                //ImageUrl = new Bitmap(Ruta)
+                                ImageUrlString = Ruta
                         }).ToList();
                 }
                 return Lista;

@@ -281,6 +281,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reportes\Academico\ACA_001_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_037_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_070_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_069_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_068_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_067_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_066_Info.cs" />
