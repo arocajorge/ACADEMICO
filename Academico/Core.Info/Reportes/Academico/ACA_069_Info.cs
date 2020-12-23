@@ -29,5 +29,13 @@ namespace Core.Info.Reportes.Academico
         public decimal IdMatricula { get; set; }
         public decimal IdAlumno { get; set; }
         public string FechaActual { get; set; }
+
+        public Nullable<decimal> CalificacionNumerica { get; set; }
+        public string Calificacion { get; set; }
+        public bool PromediarGrupo { get; set; }
+        public int tieneCalificacionNula { get; set; }
+        public Nullable<decimal> PromedioCalculado { get; set; }
+        public string NomMateriaGrupo { get; set; }
+        public string Codigo { get; set; }
     }
 }

@@ -133,13 +133,87 @@ namespace Core.Data.Reportes.Academico
                             OrdenJornada = string.IsNullOrEmpty(reader["OrdenJornada"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenJornada"]),
                             OrdenCurso = string.IsNullOrEmpty(reader["OrdenCurso"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenCurso"]),
                             OrdenParalelo = string.IsNullOrEmpty(reader["OrdenParalelo"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenParalelo"]),
-                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString()
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                            PromediarGrupo = string.IsNullOrEmpty(reader["PromediarGrupo"].ToString()) ? false : Convert.ToBoolean(reader["PromediarGrupo"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            Calificacion = string.IsNullOrEmpty(reader["Calificacion"].ToString()) ? null : reader["Calificacion"].ToString(),
+                            CalificacionNumerica = string.IsNullOrEmpty(reader["CalificacionNumerica"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionNumerica"]),
                         });
                     }
                     reader.Close();
                 }
 
-                return Lista;
+                ListaObligatorias = Lista.Where(q => q.PromediarGrupo == false).ToList();
+                ListaObligatorias.ForEach(q => q.tieneCalificacionNula = (string.IsNullOrEmpty(q.Calificacion) ? 1 : 0));
+                var lstPromedioObligatorias = ListaObligatorias.GroupBy(q => new
+                {
+                    q.IdEmpresa,
+                    q.IdMatricula,
+                    q.NomMateriaGrupo,
+                }).Select(q => new ACA_070_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdMatricula = q.Key.IdMatricula,
+                    tieneCalificacionNula = q.Sum(g => g.tieneCalificacionNula),
+                    PromedioCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
+                }).ToList();
+                lstPromedioObligatorias.ForEach(q => q.PromedioCalculado = (q.tieneCalificacionNula == 0 ? q.PromedioCalculado : (decimal?)null));
+
+                ListaComplementarias = Lista.Where(q => q.PromediarGrupo == true).ToList();
+                ListaComplementarias.ForEach(q => q.tieneCalificacionNula = (string.IsNullOrEmpty(q.Calificacion) ? 1 : 0));
+                var lstPromedioComplementarias = ListaComplementarias.GroupBy(q => new
+                {
+                    q.IdEmpresa,
+                    q.IdMatricula,
+                    q.NomMateriaGrupo,
+                }).Select(q => new ACA_070_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdMatricula = q.Key.IdMatricula,
+                    tieneCalificacionNula = q.Sum(g => g.tieneCalificacionNula),
+                    PromedioCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
+                }).ToList();
+                lstPromedioComplementarias.ForEach(q => q.PromedioCalculado = (q.tieneCalificacionNula == 0 ? q.PromedioCalculado : (decimal?)null));
+
+                var ListaPromediar = new List<ACA_070_Info>();
+                ListaPromediar.AddRange(lstPromedioObligatorias);
+                ListaPromediar.AddRange(lstPromedioComplementarias);
+
+                var lstFinal = ListaPromediar.GroupBy(q => new { q.IdEmpresa, q.IdMatricula }).Select(q => new ACA_070_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdMatricula = q.Key.IdMatricula,
+                    PromedioCalculado = q.Max(g => g.PromedioCalculado) == null ? (decimal?)null : (q.Sum(g => g.PromedioCalculado) / q.Count(g => g.PromedioCalculado != null)),
+                }).ToList();
+
+                var ListaAlumnos = ListaComplementarias.GroupBy(q => new
+                {
+                    q.IdEmpresa,
+                    q.IdMatricula,
+                    q.IdAlumno,
+                    q.pe_nombreCompleto,
+                }).Select(q => new ACA_070_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdMatricula = q.Key.IdMatricula,
+                    IdAlumno = q.Key.IdAlumno,
+                    pe_nombreCompleto = q.Key.pe_nombreCompleto
+                }).ToList();
+
+                ListaPromediar = (from a in ListaAlumnos
+                                  join b in lstFinal
+                                  on a.IdMatricula equals b.IdMatricula
+                                  select new ACA_070_Info
+                                  {
+                                      IdEmpresa = a.IdEmpresa,
+                                      IdMatricula = a.IdMatricula,
+                                      IdAlumno = a.IdAlumno,
+                                      pe_nombreCompleto = a.pe_nombreCompleto,
+                                      PromedioCalculado = b.PromedioCalculado == null ? (decimal?)null : Math.Round(b.PromedioCalculado ?? 0, 2, MidpointRounding.AwayFromZero)
+                                  }).ToList();
+
+                var ListaFinal = ListaPromediar.Where(q => q.PromedioCalculado != null && q.PromedioCalculado >= Convert.ToDecimal(9.50)).ToList();
+                return ListaFinal;
             }
             catch (Exception ex)
             {

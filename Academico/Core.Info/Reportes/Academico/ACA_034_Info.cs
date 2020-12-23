@@ -25,7 +25,7 @@ namespace Core.Info.Reportes.Academico
         public Nullable<int> PromediarGrupo { get; set; }
         public Nullable<int> IdCatalogoTipoCalificacion { get; set; }
         public string Codigo { get; set; }
-        public string pe_nombreCompleto { get; set; }
+        public string NombreAlumno { get; set; }
         public string Descripcion { get; set; }
         public string NomSede { get; set; }
         public string NomNivel { get; set; }
@@ -37,7 +37,6 @@ namespace Core.Info.Reportes.Academico
         public string CodigoParalelo { get; set; }
         public string NomParalelo { get; set; }
         public Nullable<int> OrdenParalelo { get; set; }
-        public string NombreInspector { get; set; }
         public string NombreTutor { get; set; }
         public string Calificacion { get; set; }
         public Nullable<decimal> CalificacionNumerica { get; set; }

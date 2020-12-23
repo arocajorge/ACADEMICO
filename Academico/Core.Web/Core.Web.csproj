@@ -9656,6 +9656,8 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_066.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_067.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_068.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_069.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_070.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
