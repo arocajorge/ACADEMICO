@@ -22,7 +22,6 @@ namespace Core.Web.Areas.Reportes.Controllers
     public class CuentasPorCobrarReportesController : Controller
     {
         tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
-        string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
         tb_persona_Bus BusPersona = new tb_persona_Bus();
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
@@ -433,14 +432,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
 
             CXC_008_Resumen_Rpt ReportResumen = new CXC_008_Resumen_Rpt();
-            #region Cargo diseño desde base
-            var reportResum = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_008_Resumen");
-            if (reportResum != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
-                ReportResumen.LoadLayout(RootReporte);
-            }
-            #endregion
             ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
             ReportResumen.p_IdAnio.Value = model.IdAnio;
             ReportResumen.p_IdSede.Value = model.IdSede;
@@ -481,14 +472,6 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.Report = report;
 
             CXC_008_Resumen_Rpt ReportResumen = new CXC_008_Resumen_Rpt();
-            #region Cargo diseño desde base
-            var reportResum = bus_rep_x_emp.GetInfo(model.IdEmpresa, "CXC_008_Resumen");
-            if (reportResum != null)
-            {
-                System.IO.File.WriteAllBytes(RootReporte, reportResum.ReporteDisenio);
-                ReportResumen.LoadLayout(RootReporte);
-            }
-            #endregion
             ReportResumen.p_IdEmpresa.Value = model.IdEmpresa;
             ReportResumen.p_IdAnio.Value = model.IdAnio;
             ReportResumen.p_IdSede.Value = model.IdSede;
