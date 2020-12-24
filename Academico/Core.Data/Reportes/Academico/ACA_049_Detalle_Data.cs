@@ -8,24 +8,26 @@ using System.Linq;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_070_Data
+    public class ACA_049_Detalle_Data
     {
         cl_funciones funciones = new cl_funciones();
-        public List<ACA_070_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, bool MostrarRetirados)
+        public List<ACA_049_Detalle_Info> GetList(int IdEmpresa, int IdAnio, decimal IdMatricula)
         {
             try
             {
-                List<ACA_070_Info> Lista = new List<ACA_070_Info>();
-                List<ACA_070_Info> ListaFinal = new List<ACA_070_Info>();
-                List<ACA_070_Info> ListaObligatorias = new List<ACA_070_Info>();
-                List<ACA_070_Info> ListaComplementarias = new List<ACA_070_Info>();
-                List<ACA_070_Info> ListaPromediadaComplementarias = new List<ACA_070_Info>();
+                List<ACA_049_Detalle_Info> Lista = new List<ACA_049_Detalle_Info>();
+                List<ACA_049_Detalle_Info> ListaFinal = new List<ACA_049_Detalle_Info>();
+                List<ACA_049_Detalle_Info> Lista_Comportamiento_Proyectos = new List<ACA_049_Detalle_Info>();
+                List<ACA_049_Detalle_Info> ListaObligatorias = new List<ACA_049_Detalle_Info>();
+                List<ACA_049_Detalle_Info> ListaComplementarias = new List<ACA_049_Detalle_Info>();
+                List<ACA_049_Detalle_Info> ListaPromediadaComplementarias = new List<ACA_049_Detalle_Info>();
 
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
+
                     #region Query
-                    string query = "DECLARE @IdEmpresa int =" + IdEmpresa.ToString() + ", @IdAnio int = " + IdAnio.ToString() + ", @IdSede int = " + IdSede.ToString() + ", @IdNivel int = " + IdNivel.ToString() + ", @IdJornada int = " + IdJornada.ToString() + ", @IdCurso int= " + IdCurso.ToString() + ", @IdParalelo int = " + IdParalelo.ToString() + ", @MostrarRetirados bit = " + (MostrarRetirados == false ? 0 : 1)
+                    string query = "DECLARE @IdEmpresa int = " + IdEmpresa.ToString() + ", @IdAnio int = " + IdAnio.ToString() + ", @IdMatricula decimal = " + IdMatricula.ToString()
                     + " /*PROMEDIO FINAL*/ "
                     + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, AN.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, "
                     + " cp.NomParalelo, cp.OrdenParalelo, alu.Codigo, pa.pe_nombreCompleto AS NombreAlumno, mc.IdMateria, mc.NomMateria NombreMateria, mc.NomMateriaGrupo NombreGrupo, mc.OrdenMateria, mc.OrdenMateriaGrupo OrdenGrupo, mc.PromediarGrupo, mc.IdCatalogoTipoCalificacion, "
@@ -49,12 +51,7 @@ namespace Core.Data.Reportes.Academico
                     + " WHERE(Estado = 1)) AS ret ON m.IdEmpresa = ret.IdEmpresa AND m.IdMatricula = ret.IdMatricula "
                     + " WHERE mco.IdEmpresa = @IdEmpresa "
                     + " and m.IdAnio = @IdAnio "
-                    + " and m.IdSede = @IdSede "
-                    + " and m.IdNivel = @IdNivel "
-                    + " and m.IdJornada = @IdJornada "
-                    + " and m.IdCurso = @IdCurso "
-                    + " and m.IdParalelo = @IdParalelo "
-                    + " and isnull(ret.IdMatricula, 0) = case when @MostrarRetirados = 1 then isnull(ret.IdMatricula, 0) else 0 end "
+                    + " and m.IdMatricula = @IdMatricula "
                     + " and mc.PromediarGrupo = 0 "
                     + " and mc.IdCatalogoTipoCalificacion = 40 "
                     + " UNION ALL "
@@ -83,12 +80,7 @@ namespace Core.Data.Reportes.Academico
                     + " WHERE(Estado = 1)) AS ret ON m.IdEmpresa = ret.IdEmpresa AND m.IdMatricula = ret.IdMatricula "
                     + " WHERE mco.IdEmpresa = @IdEmpresa "
                     + " and m.IdAnio = @IdAnio "
-                    + " and m.IdSede = @IdSede "
-                    + " and m.IdNivel = @IdNivel "
-                    + " and m.IdJornada = @IdJornada "
-                    + " and m.IdCurso = @IdCurso "
-                    + " and m.IdParalelo = @IdParalelo "
-                    + " and isnull(ret.IdMatricula, 0) = case when @MostrarRetirados = 1 then isnull(ret.IdMatricula, 0) else 0 end "
+                    + " and m.IdMatricula = @IdMatricula "
                     + " and mc.PromediarGrupo = 1 "
                     + " and mc.IdCatalogoTipoCalificacion = 40 "
                     + " ) ";
@@ -99,7 +91,7 @@ namespace Core.Data.Reportes.Academico
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Lista.Add(new ACA_070_Info
+                        Lista.Add(new ACA_049_Detalle_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
@@ -155,7 +147,6 @@ namespace Core.Data.Reportes.Academico
                     q.IdMatricula,
                     q.IdAlumno,
                     q.NombreAlumno,
-                    q.NombreTutor,
                     q.Codigo,
                     q.IdAnio,
                     q.IdSede,
@@ -173,13 +164,12 @@ namespace Core.Data.Reportes.Academico
                     q.OrdenJornada,
                     q.OrdenCurso,
                     q.OrdenParalelo,
-                }).Select(q => new ACA_070_Info
+                }).Select(q => new ACA_049_Detalle_Info
                 {
                     IdEmpresa = q.Key.IdEmpresa,
                     IdMatricula = q.Key.IdMatricula,
                     IdAlumno = q.Key.IdAlumno,
                     NombreAlumno = q.Key.NombreAlumno,
-                    NombreTutor = q.Key.NombreTutor,
                     Codigo = q.Key.Codigo,
                     IdAnio = q.Key.IdAnio,
                     IdSede = q.Key.IdSede,
@@ -203,17 +193,16 @@ namespace Core.Data.Reportes.Academico
                 }).ToList();
                 ListaComplementariasProm_Final.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
 
-                var lst_promedio_complementarias_PromFinal = new List<ACA_070_Info>();
+                var lst_promedio_complementarias_PromFinal = new List<ACA_049_Detalle_Info>();
                 foreach (var item in ListaComplementariasProm_Final)
                 {
-                    lst_promedio_complementarias_PromFinal.Add(new ACA_070_Info
+                    lst_promedio_complementarias_PromFinal.Add(new ACA_049_Detalle_Info
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,
                         IdMateria = 0,
                         IdAlumno = item.IdAlumno,
                         NombreAlumno = item.NombreAlumno,
-                        NombreTutor = item.NombreTutor,
                         Codigo = item.Codigo,
                         IdAnio = item.IdAnio,
                         IdSede = item.IdSede,
@@ -255,7 +244,6 @@ namespace Core.Data.Reportes.Academico
                     q.IdMatricula,
                     q.IdAlumno,
                     q.NombreAlumno,
-                    q.NombreTutor,
                     q.Codigo,
                     q.IdAnio,
                     q.IdSede,
@@ -273,13 +261,12 @@ namespace Core.Data.Reportes.Academico
                     q.OrdenJornada,
                     q.OrdenCurso,
                     q.OrdenParalelo,
-                }).Select(q => new ACA_070_Info
+                }).Select(q => new ACA_049_Detalle_Info
                 {
                     IdEmpresa = q.Key.IdEmpresa,
                     IdMatricula = q.Key.IdMatricula,
                     IdAlumno = q.Key.IdAlumno,
                     NombreAlumno = q.Key.NombreAlumno,
-                    NombreTutor= q.Key.NombreTutor,
                     Codigo = q.Key.Codigo,
                     IdAnio = q.Key.IdAnio,
                     IdSede = q.Key.IdSede,
@@ -303,17 +290,16 @@ namespace Core.Data.Reportes.Academico
                 }).ToList();
                 ListaPromedioGeneral.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
 
-                var lst_promedio_general = new List<ACA_070_Info>();
+                var lst_promedio_general = new List<ACA_049_Detalle_Info>();
                 foreach (var item in ListaPromedioGeneral)
                 {
-                    lst_promedio_general.Add(new ACA_070_Info
+                    lst_promedio_general.Add(new ACA_049_Detalle_Info
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,
                         IdMateria = 0,
                         IdAlumno = item.IdAlumno,
                         NombreAlumno = item.NombreAlumno,
-                        NombreTutor=item.NombreTutor,
                         Codigo = item.Codigo,
                         IdAnio = item.IdAnio,
                         IdSede = item.IdSede,
@@ -340,13 +326,15 @@ namespace Core.Data.Reportes.Academico
                         OrdenGrupo = 9999,
                         OrdenMateria = 9999,
                         OrdenColumna = 1,
-                        PromediarGrupo = 0,
-                        FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy"),
+                        PromediarGrupo = 0
                     });
                 }
                 ListaFinal.AddRange(lst_promedio_general);
-                var ListaAlumnos = lst_promedio_general.Where(q => q.CalificacionNumerica != null && q.CalificacionNumerica >= Convert.ToDecimal(9.50) && q.CalificacionNumerica <= Convert.ToDecimal(10)).ToList();
-                return ListaAlumnos;
+                //var ListaAlumnos = lst_promedio_general.ToList();
+                //ListaAlumnos.ForEach(q=> q.Num=1);
+                Lista_Comportamiento_Proyectos = Lista.Where(q => q.IdMateria == 0).ToList();
+                ListaFinal.AddRange(Lista_Comportamiento_Proyectos);
+                return ListaFinal;
             }
             catch (Exception ex)
             {

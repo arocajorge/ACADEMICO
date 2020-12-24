@@ -397,6 +397,18 @@
     <Compile Include="Reportes\Academico\ACA_037_Rpt.Designer.cs">
       <DependentUpon>ACA_037_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_048_Rendimiento.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_048_Rendimiento.Designer.cs">
+      <DependentUpon>ACA_048_Rendimiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_Detalle_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_Detalle_Rpt.Designer.cs">
+      <DependentUpon>ACA_049_Detalle_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_069_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -708,12 +720,6 @@
     </Compile>
     <Compile Include="Reportes\Academico\ACA_048_SinPromedios_Rpt.Designer.cs">
       <DependentUpon>ACA_048_SinPromedios_Rpt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\Academico\ACA_048_Rendimiento.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\Academico\ACA_048_Rendimiento.Designer.cs">
-      <DependentUpon>ACA_048_Rendimiento.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Academico\ACA_048_Rpt.cs">
       <SubType>Component</SubType>
@@ -9762,6 +9768,12 @@
     <EmbeddedResource Include="Reportes\Academico\ACA_037_Rpt.resx">
       <DependentUpon>ACA_037_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_048_Rendimiento.resx">
+      <DependentUpon>ACA_048_Rendimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_049_Detalle_Rpt.resx">
+      <DependentUpon>ACA_049_Detalle_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_069_Rpt.resx">
       <DependentUpon>ACA_069_Rpt.cs</DependentUpon>
     </EmbeddedResource>
@@ -9917,9 +9929,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_048_SinPromedios_Rpt.resx">
       <DependentUpon>ACA_048_SinPromedios_Rpt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Academico\ACA_048_Rendimiento.resx">
-      <DependentUpon>ACA_048_Rendimiento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_048_Rpt.resx">
       <DependentUpon>ACA_048_Rpt.cs</DependentUpon>

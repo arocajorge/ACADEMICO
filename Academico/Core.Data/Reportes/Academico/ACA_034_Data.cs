@@ -33,7 +33,7 @@ namespace Core.Data.Reportes.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "DECLARE @IdEmpresa int =1, @IdAnio int = " + IdAnio.ToString() + ", @IdSede int = " + IdSede.ToString() + ", @IdNivel int = " + IdNivel.ToString() + ", @IdJornada int = " + IdJornada.ToString() + ", @IdCurso int= " + IdCurso.ToString() + ", @IdParalelo int = " + IdParalelo.ToString() + ", @IdAlumno numeric = " + IdAlumno.ToString() + " , @MostrarRetirados bit = " + (MostrarRetirados == false ? 0 : 1)
+                    string query = "DECLARE @IdEmpresa int =" + IdEmpresa.ToString() + ", @IdAnio int = " + IdAnio.ToString() + ", @IdSede int = " + IdSede.ToString() + ", @IdNivel int = " + IdNivel.ToString() + ", @IdJornada int = " + IdJornada.ToString() + ", @IdCurso int= " + IdCurso.ToString() + ", @IdParalelo int = " + IdParalelo.ToString() + ", @IdAlumno numeric = " + IdAlumno.ToString() + " , @MostrarRetirados bit = " + (MostrarRetirados == false ? 0 : 1)
                     +" /*COMPORTAMIENTO*/ "
                     + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, AN.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso,  "
                     + " cp.NomParalelo, cp.OrdenParalelo, pa.pe_nombreCompleto AS NombreAlumno, 0 AS IdMateria, NULL AS NombreMateria, NULL AS NombreGrupo, 99999 AS OrdenMateria, 99999 AS OrdenGrupo, 0 AS PromediarGrupo, NULL "

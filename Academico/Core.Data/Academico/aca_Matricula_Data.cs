@@ -338,7 +338,7 @@ namespace Core.Data.Academico
                         info = new aca_Matricula_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
-                            IdMatricula = Convert.ToDecimal(reader["IdAnio"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
                             Codigo = string.IsNullOrEmpty(reader["IdEmpresa"].ToString()) ? null : reader["IdEmpresa"].ToString(),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),

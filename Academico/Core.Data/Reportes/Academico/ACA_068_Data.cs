@@ -16,6 +16,7 @@ namespace Core.Data.Reportes.Academico
             try
             {
                 List<ACA_068_Info> Lista = new List<ACA_068_Info>();
+                List<ACA_068_Info> ListaFinal = new List<ACA_068_Info>();
                 List<ACA_068_Info> ListaObligatorias = new List<ACA_068_Info>();
                 List<ACA_068_Info> ListaComplementarias = new List<ACA_068_Info>();
                 List<ACA_068_Info> ListaPromediadaComplementarias = new List<ACA_068_Info>();
@@ -25,40 +26,29 @@ namespace Core.Data.Reportes.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "DECLARE @IdEmpresa int =" + IdEmpresa.ToString()+ ","
-                    + " @IdAnio int = " + IdAnio.ToString() + ","
-                    + " @IdSede int = " + IdSede.ToString() + ","
-                    + " @IdNivel int = " + IdNivel.ToString() + ","
-                    + " @IdJornada int = " + IdJornada.ToString() + ","
-                    + " @IdCurso int= " + IdCurso.ToString() + ","
-                    + " @IdParalelo int = " + IdParalelo.ToString() + ","
-                    + " @MostrarRetirados bit = " + (MostrarRetirados==true ? 1 : 0) + ";"
-                    + " /*MATERIAS QUE NO SE PROMEDIAN*/ "
-                    + " /*PROMEDIO FINAL DE MATERIAS QUE NO SE PROMEDIAN*/ "
-                    + " SELECT mc.IdEmpresa, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno,  mc.IdMatricula,mc.IdMateria, "
-                    + " CM.NomMateria,CM.NomMateriaGrupo,CM.OrdenMateria, CM.OrdenMateriaGrupo, CM.PromediarGrupo,CM.IdCatalogoTipoCalificacion, "
-                    + " alu.Codigo, p.pe_nombreCompleto, AN.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, "
-                    + " nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo, "
-                    + " CAST(mc.PromedioFinal as varchar) Calificacion, CAST(mc.PromedioFinal AS numeric(18, 2)) AS CalificacionNumerica "
-                    + " FROM     dbo.aca_MatriculaCalificacion AS mc INNER JOIN "
-                    + " dbo.aca_Matricula AS m ON mc.IdEmpresa = m.IdEmpresa AND mc.IdMatricula = m.IdMatricula INNER JOIN "
-                    + " dbo.aca_Alumno AS alu ON m.IdEmpresa = alu.IdEmpresa AND m.IdAlumno = alu.IdAlumno INNER JOIN "
-                    + " dbo.tb_persona AS p ON alu.IdPersona = p.IdPersona INNER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Materia CM ON m.IdEmpresa = CM.IdEmpresa AND m.IdAnio = CM.IdAnio AND m.IdSede = CM.IdSede AND "
-                    + " m.IdNivel = CM.IdNivel AND m.IdJornada = CM.IdJornada AND m.IdCurso = CM.IdCurso AND "
-                    + " mc.IdMateria = CM.IdMateria "
-                    + " LEFT OUTER JOIN "
+                    string query = "DECLARE @IdEmpresa int =" + IdEmpresa.ToString() + ", @IdAnio int = " + IdAnio.ToString() + ", @IdSede int = " + IdSede.ToString() + ", @IdNivel int = " + IdNivel.ToString() + ", @IdJornada int = " + IdJornada.ToString() + ", @IdCurso int= " + IdCurso.ToString() + ", @IdParalelo int = " + IdParalelo.ToString() + ", @MostrarRetirados bit = " + (MostrarRetirados == false ? 0 : 1)
+                    + " /*PROMEDIO FINAL*/ "
+                    + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, AN.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, "
+                    + " cp.NomParalelo, cp.OrdenParalelo, alu.Codigo, pa.pe_nombreCompleto AS NombreAlumno, mc.IdMateria, mc.NomMateria NombreMateria, mc.NomMateriaGrupo NombreGrupo, mc.OrdenMateria, mc.OrdenMateriaGrupo OrdenGrupo, mc.PromediarGrupo, mc.IdCatalogoTipoCalificacion, "
+                    + " CAST(mco.PromedioFinal AS varchar) AS Calificacion, CAST(mco.PromedioFinal AS numeric(18, 2)) AS CalificacionNumerica, 'PROMEDIO FINAL' AS Columna, 7 AS OrdenColumna, pp.pe_nombreCompleto AS NombreTutor "
+                    + " FROM     dbo.aca_Matricula AS m INNER JOIN "
+                    + " dbo.aca_MatriculaCalificacion AS mco ON m.IdEmpresa = mco.IdEmpresa AND m.IdMatricula = mco.IdMatricula LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo AS AN ON m.IdEmpresa = AN.IdEmpresa AND m.IdAnio = AN.IdAnio LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
-                    + " m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND m.IdParalelo = cp.IdParalelo "
-                    + " LEFT OUTER JOIN "
-                        + " (SELECT IdEmpresa, IdMatricula "
-                        + " FROM      dbo.aca_AlumnoRetiro AS r "
-                        + " WHERE(Estado = 1)) AS ret ON m.IdEmpresa = ret.IdEmpresa AND m.IdMatricula = ret.IdMatricula "
-                    + " where mc.IdEmpresa = @IdEmpresa "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON sn.IdEmpresa = m.IdEmpresa AND sn.IdSede = m.IdSede AND sn.IdAnio = m.IdAnio AND sn.IdNivel = m.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON nj.IdEmpresa = m.IdEmpresa AND nj.IdAnio = m.IdAnio AND nj.IdSede = m.IdSede AND nj.IdNivel = m.IdNivel AND nj.IdJornada = m.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON jc.IdEmpresa = m.IdEmpresa AND jc.IdAnio = m.IdAnio AND jc.IdSede = m.IdSede AND jc.IdNivel = m.IdNivel AND jc.IdJornada = m.IdJornada AND jc.IdCurso = m.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON cp.IdEmpresa = m.IdEmpresa AND cp.IdAnio = m.IdAnio AND cp.IdSede = m.IdSede AND cp.IdNivel = m.IdNivel AND cp.IdJornada = m.IdJornada AND cp.IdCurso = m.IdCurso AND "
+                    + " cp.IdParalelo = m.IdParalelo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Materia AS mc ON mc.IdEmpresa = m.IdEmpresa AND mc.IdAnio = m.IdAnio AND mc.IdSede = m.IdSede AND mc.IdNivel = m.IdNivel AND mc.IdJornada = m.IdJornada AND mc.IdCurso = m.IdCurso AND "
+                    + " mc.IdMateria = mco.IdMateria LEFT OUTER JOIN "
+                    + " dbo.aca_Alumno AS alu ON m.IdEmpresa = alu.IdEmpresa AND m.IdAlumno = alu.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS pa ON alu.IdPersona = pa.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Profesor AS pro ON pro.IdEmpresa = m.IdEmpresa AND pro.IdProfesor = cp.IdProfesorTutor LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS pp ON pro.IdPersona = pp.IdPersona LEFT OUTER JOIN "
+                    + " (SELECT IdEmpresa, IdMatricula "
+                    + " FROM      dbo.aca_AlumnoRetiro AS r "
+                    + " WHERE(Estado = 1)) AS ret ON m.IdEmpresa = ret.IdEmpresa AND m.IdMatricula = ret.IdMatricula "
+                    + " WHERE mco.IdEmpresa = @IdEmpresa "
                     + " and m.IdAnio = @IdAnio "
                     + " and m.IdSede = @IdSede "
                     + " and m.IdNivel = @IdNivel "
@@ -66,45 +56,42 @@ namespace Core.Data.Reportes.Academico
                     + " and m.IdCurso = @IdCurso "
                     + " and m.IdParalelo = @IdParalelo "
                     + " and isnull(ret.IdMatricula, 0) = case when @MostrarRetirados = 1 then isnull(ret.IdMatricula, 0) else 0 end "
-                    + " and cm.PromediarGrupo = 0 "
-                    + " and cm.IdCatalogoTipoCalificacion = 40 "
-                    + " /*MATERIAS QUE SE PROMEDIAN*/ "
-                    + " /*PROMEDIO X MATERIA OPTATIVA*/ "
+                    + " and mc.PromediarGrupo = 0 "
+                    + " and mc.IdCatalogoTipoCalificacion = 40 "
                     + " UNION ALL "
                     + " ( "
-                    + " SELECT mc.IdEmpresa, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, mc.IdMatricula, mc.IdMateria, cm.NomMateria, "
-                    + " cm.NomMateriaGrupo, cm.OrdenMateria, cm.OrdenMateriaGrupo, cm.PromediarGrupo, cm.IdCatalogoTipoCalificacion, alu.Codigo, p.pe_nombreCompleto NombreAlumno, "
-                    + " AN.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.CodigoParalelo, "
-                    + " cp.NomParalelo, cp.OrdenParalelo, CAST(mc.PromedioFinal as varchar) Calificacion, "
-                    + " mc.PromedioFinal as CalificacionNumerica "
-                    + " FROM     dbo.aca_MatriculaCalificacion AS mc INNER JOIN "
-                    + " dbo.aca_Matricula AS m ON mc.IdEmpresa = m.IdEmpresa AND mc.IdMatricula = m.IdMatricula INNER JOIN "
-                    + " dbo.aca_Alumno AS alu ON m.IdEmpresa = alu.IdEmpresa AND m.IdAlumno = alu.IdAlumno INNER JOIN "
-                    + " dbo.tb_persona AS p ON alu.IdPersona = p.IdPersona INNER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Materia CM ON m.IdEmpresa = CM.IdEmpresa AND m.IdAnio = CM.IdAnio AND m.IdSede = CM.IdSede AND "
-                    + " m.IdNivel = CM.IdNivel AND m.IdJornada = CM.IdJornada AND m.IdCurso = CM.IdCurso AND "
-                    + " mc.IdMateria = CM.IdMateria "
-                    + " LEFT OUTER JOIN "
+                    + " /*MATERIAS QUE SE PROMEDIAN*/ "
+                    + " /*PROMEDIO FINAL*/ "
+                    + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, AN.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, "
+                    + " cp.NomParalelo, cp.OrdenParalelo, alu.Codigo, pa.pe_nombreCompleto AS NombreAlumno, mc.IdMateria, mc.NomMateria, mc.NomMateriaGrupo, mc.OrdenMateria, mc.OrdenMateriaGrupo, mc.PromediarGrupo, mc.IdCatalogoTipoCalificacion, "
+                    + " CAST(mco.PromedioFinal AS varchar) AS Calificacion, CAST(mco.PromedioFinal AS numeric(18, 2)) AS CalificacionNumerica, 'PROMEDIO FINAL' AS Columna, 7 AS OrdenColumna, pp.pe_nombreCompleto AS NombreTutor "
+                    + " FROM     dbo.aca_Matricula AS m INNER JOIN "
+                    + " dbo.aca_MatriculaCalificacion AS mco ON m.IdEmpresa = mco.IdEmpresa AND m.IdMatricula = mco.IdMatricula LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo AS AN ON m.IdEmpresa = AN.IdEmpresa AND m.IdAnio = AN.IdAnio LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
-                    + " m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND m.IdParalelo = cp.IdParalelo "
-                    + " LEFT OUTER JOIN "
-                        + " (SELECT IdEmpresa, IdMatricula "
-                        + " FROM      dbo.aca_AlumnoRetiro AS r "
-                        + " WHERE(Estado = 1)) AS ret ON m.IdEmpresa = ret.IdEmpresa AND m.IdMatricula = ret.IdMatricula "
-                    + " where mc.IdEmpresa = @IdEmpresa "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON sn.IdEmpresa = m.IdEmpresa AND sn.IdSede = m.IdSede AND sn.IdAnio = m.IdAnio AND sn.IdNivel = m.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON nj.IdEmpresa = m.IdEmpresa AND nj.IdAnio = m.IdAnio AND nj.IdSede = m.IdSede AND nj.IdNivel = m.IdNivel AND nj.IdJornada = m.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON jc.IdEmpresa = m.IdEmpresa AND jc.IdAnio = m.IdAnio AND jc.IdSede = m.IdSede AND jc.IdNivel = m.IdNivel AND jc.IdJornada = m.IdJornada AND jc.IdCurso = m.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON cp.IdEmpresa = m.IdEmpresa AND cp.IdAnio = m.IdAnio AND cp.IdSede = m.IdSede AND cp.IdNivel = m.IdNivel AND cp.IdJornada = m.IdJornada AND cp.IdCurso = m.IdCurso AND "
+                    + " cp.IdParalelo = m.IdParalelo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Materia AS mc ON mc.IdEmpresa = m.IdEmpresa AND mc.IdAnio = m.IdAnio AND mc.IdSede = m.IdSede AND mc.IdNivel = m.IdNivel AND mc.IdJornada = m.IdJornada AND mc.IdCurso = m.IdCurso AND "
+                    + " mc.IdMateria = mco.IdMateria LEFT OUTER JOIN "
+                    + " dbo.aca_Alumno AS alu ON m.IdEmpresa = alu.IdEmpresa AND m.IdAlumno = alu.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS pa ON alu.IdPersona = pa.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Profesor AS pro ON pro.IdEmpresa = m.IdEmpresa AND pro.IdProfesor = cp.IdProfesorTutor LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS pp ON pro.IdPersona = pp.IdPersona LEFT OUTER JOIN "
+                    + " (SELECT IdEmpresa, IdMatricula "
+                    + " FROM      dbo.aca_AlumnoRetiro AS r "
+                    + " WHERE(Estado = 1)) AS ret ON m.IdEmpresa = ret.IdEmpresa AND m.IdMatricula = ret.IdMatricula "
+                    + " WHERE mco.IdEmpresa = @IdEmpresa "
                     + " and m.IdAnio = @IdAnio "
                     + " and m.IdSede = @IdSede "
-                    + " and m.IdJornada = @IdJornada "
                     + " and m.IdNivel = @IdNivel "
+                    + " and m.IdJornada = @IdJornada "
                     + " and m.IdCurso = @IdCurso "
                     + " and m.IdParalelo = @IdParalelo "
                     + " and isnull(ret.IdMatricula, 0) = case when @MostrarRetirados = 1 then isnull(ret.IdMatricula, 0) else 0 end "
-                    + " and cm.PromediarGrupo = 1 "
-                    + " and cm.IdCatalogoTipoCalificacion = 40 "
+                    + " and mc.PromediarGrupo = 1 "
+                    + " and mc.IdCatalogoTipoCalificacion = 40 "
                     + " ) ";
                     #endregion
 
@@ -117,12 +104,17 @@ namespace Core.Data.Reportes.Academico
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdMateria = string.IsNullOrEmpty(reader["IdMateria"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdMateria"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            NombreAlumno = string.IsNullOrEmpty(reader["NombreAlumno"].ToString()) ? null : reader["NombreAlumno"].ToString(),
+                            NombreTutor = string.IsNullOrEmpty(reader["NombreTutor"].ToString()) ? null : reader["NombreTutor"].ToString(),
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),
                             IdSede = Convert.ToInt32(reader["IdSede"]),
                             IdJornada = Convert.ToInt32(reader["IdJornada"]),
-                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
                             IdCurso = Convert.ToInt32(reader["IdCurso"]),
                             IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
                             Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
                             NomSede = string.IsNullOrEmpty(reader["NomSede"].ToString()) ? null : reader["NomSede"].ToString(),
                             NomNivel = string.IsNullOrEmpty(reader["NomNivel"].ToString()) ? null : reader["NomNivel"].ToString(),
@@ -133,88 +125,223 @@ namespace Core.Data.Reportes.Academico
                             OrdenJornada = string.IsNullOrEmpty(reader["OrdenJornada"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenJornada"]),
                             OrdenCurso = string.IsNullOrEmpty(reader["OrdenCurso"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenCurso"]),
                             OrdenParalelo = string.IsNullOrEmpty(reader["OrdenParalelo"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenParalelo"]),
-                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
-                            PromediarGrupo = string.IsNullOrEmpty(reader["PromediarGrupo"].ToString()) ? false : Convert.ToBoolean(reader["PromediarGrupo"]),
-                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            OrdenMateria = string.IsNullOrEmpty(reader["OrdenMateria"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenMateria"]),
                             Calificacion = string.IsNullOrEmpty(reader["Calificacion"].ToString()) ? null : reader["Calificacion"].ToString(),
                             CalificacionNumerica = string.IsNullOrEmpty(reader["CalificacionNumerica"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionNumerica"]),
+                            IdCatalogoTipoCalificacion = string.IsNullOrEmpty(reader["IdCatalogoTipoCalificacion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCatalogoTipoCalificacion"]),
+                            Columna = string.IsNullOrEmpty(reader["Columna"].ToString()) ? null : reader["Columna"].ToString(),
+                            NombreGrupo = string.IsNullOrEmpty(reader["NombreGrupo"].ToString()) ? null : reader["NombreGrupo"].ToString(),
+                            NombreMateria = string.IsNullOrEmpty(reader["NombreMateria"].ToString()) ? null : reader["NombreMateria"].ToString(),
+                            OrdenColumna = Convert.ToInt32(reader["OrdenColumna"]),
+                            OrdenGrupo = string.IsNullOrEmpty(reader["OrdenGrupo"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenGrupo"]),
+                            PromediarGrupo = string.IsNullOrEmpty(reader["PromediarGrupo"].ToString()) ? 0 : Convert.ToInt32(reader["PromediarGrupo"]),
                         });
                     }
                     reader.Close();
                 }
 
-                ListaObligatorias = Lista.Where(q=> q.PromediarGrupo ==false).ToList();
-                ListaObligatorias.ForEach(q=> q.tieneCalificacionNula = (string.IsNullOrEmpty(q.Calificacion) ? 1 : 0) );
-                var lstPromedioObligatorias = ListaObligatorias.GroupBy(q => new
-                {
-                    q.IdEmpresa,
-                    q.IdMatricula,
-                    q.NomMateriaGrupo,
-                }).Select(q => new ACA_068_Info
-                {
-                    IdEmpresa = q.Key.IdEmpresa,
-                    IdMatricula = q.Key.IdMatricula,
-                    tieneCalificacionNula = q.Sum(g => g.tieneCalificacionNula),
-                    PromedioCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
-                }).ToList();
-                lstPromedioObligatorias.ForEach(q => q.PromedioCalculado = (q.tieneCalificacionNula == 0 ? q.PromedioCalculado : (decimal?)null));
+                ListaObligatorias = Lista.Where(q => q.PromediarGrupo == 0 && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
+                var ListaObligatorias_ValidaCalificaciones = ListaObligatorias.Where(q => q.Columna == "PROMEDIO FINAL").ToList();
+                ListaObligatorias_ValidaCalificaciones.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
+                ListaFinal.AddRange(ListaObligatorias);
 
-                ListaComplementarias = Lista.Where(q => q.PromediarGrupo == true).ToList();
-                ListaComplementarias.ForEach(q => q.tieneCalificacionNula = (string.IsNullOrEmpty(q.Calificacion) ? 1 : 0));
-                var lstPromedioComplementarias = ListaComplementarias.GroupBy(q => new
-                {
-                    q.IdEmpresa,
-                    q.IdMatricula,
-                    q.NomMateriaGrupo,
-                }).Select(q => new ACA_068_Info
-                {
-                    IdEmpresa = q.Key.IdEmpresa,
-                    IdMatricula = q.Key.IdMatricula,
-                    tieneCalificacionNula = q.Sum(g => g.tieneCalificacionNula),
-                    PromedioCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
-                }).ToList();
-                lstPromedioComplementarias.ForEach(q => q.PromedioCalculado = (q.tieneCalificacionNula == 0 ? q.PromedioCalculado : (decimal?)null));
+                ListaComplementarias = Lista.Where(q => q.PromediarGrupo == 1 && q.IdMateria != null && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
+                var ListaComplementarias_PromedioFinal = ListaComplementarias.Where(q => q.Columna == "PROMEDIO FINAL").ToList();
 
-                var ListaPromediar = new List<ACA_068_Info>();
-                ListaPromediar.AddRange(lstPromedioObligatorias);
-                ListaPromediar.AddRange(lstPromedioComplementarias);
-
-                var lstFinal = ListaPromediar.GroupBy(q => new { q.IdEmpresa, q.IdMatricula }).Select(q => new ACA_068_Info
-                {
-                    IdEmpresa = q.Key.IdEmpresa,
-                    IdMatricula = q.Key.IdMatricula,
-                    PromedioCalculado = q.Max(g => g.PromedioCalculado) == null ? (decimal?)null : (q.Sum(g => g.PromedioCalculado) / q.Count(g => g.PromedioCalculado != null)),
-                }).ToList();
-
-                var ListaAlumnos = ListaComplementarias.GroupBy(q => new
+                #region PromedioFinal
+                ListaComplementarias_PromedioFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
+                var ListaComplementariasProm_Final = ListaComplementarias_PromedioFinal.GroupBy(q => new
                 {
                     q.IdEmpresa,
                     q.IdMatricula,
                     q.IdAlumno,
-                    q.pe_nombreCompleto,
+                    q.NombreAlumno,
+                    q.Codigo,
+                    q.IdAnio,
+                    q.IdSede,
+                    q.IdJornada,
+                    q.IdCurso,
+                    q.IdParalelo,
+                    q.IdNivel,
+                    q.Descripcion,
+                    q.NomSede,
+                    q.NomNivel,
+                    q.NomJornada,
+                    q.NomCurso,
+                    q.NomParalelo,
+                    q.OrdenNivel,
+                    q.OrdenJornada,
+                    q.OrdenCurso,
+                    q.OrdenParalelo,
                 }).Select(q => new ACA_068_Info
                 {
                     IdEmpresa = q.Key.IdEmpresa,
                     IdMatricula = q.Key.IdMatricula,
                     IdAlumno = q.Key.IdAlumno,
-                    pe_nombreCompleto = q.Key.pe_nombreCompleto
+                    NombreAlumno = q.Key.NombreAlumno,
+                    Codigo = q.Key.Codigo,
+                    IdAnio = q.Key.IdAnio,
+                    IdSede = q.Key.IdSede,
+                    IdJornada = q.Key.IdJornada,
+                    IdCurso = q.Key.IdCurso,
+                    IdParalelo = q.Key.IdParalelo,
+                    IdNivel = q.Key.IdNivel,
+                    Descripcion = q.Key.Descripcion,
+                    NomSede = q.Key.NomSede,
+                    NomNivel = q.Key.NomNivel,
+                    NomJornada = q.Key.NomJornada,
+                    NomCurso = q.Key.NomCurso,
+                    NomParalelo = q.Key.NomParalelo,
+                    OrdenNivel = q.Key.OrdenNivel,
+                    OrdenJornada = q.Key.OrdenJornada,
+                    OrdenCurso = q.Key.OrdenCurso,
+                    OrdenParalelo = q.Key.OrdenParalelo,
+                    NoTieneCalificacion = q.Sum(g => g.NoTieneCalificacion),
+                    SumaGeneral = q.Sum(g => Convert.ToDecimal(g.Calificacion)),
+                    PromedioCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
                 }).ToList();
+                ListaComplementariasProm_Final.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
 
-                ListaPromediar = (from a in ListaAlumnos
-                                  join b in lstFinal
-                                  on a.IdMatricula equals b.IdMatricula
-                                  select new ACA_068_Info
-                                  {
-                                      IdEmpresa = a.IdEmpresa,
-                                      IdMatricula = a.IdMatricula,
-                                      IdAlumno = a.IdAlumno,
-                                      pe_nombreCompleto = a.pe_nombreCompleto,
-                                      PromedioCalculado = b.PromedioCalculado == null ? (decimal?)null : Math.Round(b.PromedioCalculado ?? 0, 2, MidpointRounding.AwayFromZero)
-                                  }).ToList();
+                var lst_promedio_complementarias_PromFinal = new List<ACA_068_Info>();
+                foreach (var item in ListaComplementariasProm_Final)
+                {
+                    lst_promedio_complementarias_PromFinal.Add(new ACA_068_Info
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdMatricula = item.IdMatricula,
+                        IdMateria = 0,
+                        IdAlumno = item.IdAlumno,
+                        NombreAlumno = item.NombreAlumno,
+                        Codigo = item.Codigo,
+                        IdAnio = item.IdAnio,
+                        IdSede = item.IdSede,
+                        IdJornada = item.IdJornada,
+                        IdCurso = item.IdCurso,
+                        IdParalelo = item.IdParalelo,
+                        IdNivel = item.IdNivel,
+                        Descripcion = item.Descripcion,
+                        NomSede = item.NomSede,
+                        NomNivel = item.NomNivel,
+                        NomJornada = item.NomJornada,
+                        NomCurso = item.NomCurso,
+                        NomParalelo = item.NomParalelo,
+                        OrdenNivel = item.OrdenNivel,
+                        OrdenJornada = item.OrdenJornada,
+                        OrdenCurso = item.OrdenCurso,
+                        OrdenParalelo = item.OrdenParalelo,
+                        Calificacion = (item.PromedioCalculado == null ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero))),
+                        CalificacionNumerica = (item.PromedioCalculado == null ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero)),
+                        IdCatalogoTipoCalificacion = null,
+                        Columna = "PROMEDIO FINAL",
+                        NombreGrupo = "OPTATIVA",
+                        NombreMateria = "OPTATIVA",
+                        OrdenGrupo = 99,
+                        OrdenMateria = 99,
+                        OrdenColumna = 9,
+                        PromediarGrupo = 0
+                    });
+                }
 
-                var ListaFinal = ListaPromediar.Where(q=> q.PromedioCalculado!=null && q.PromedioCalculado>= Convert.ToDecimal(9.50)).ToList();
-                ListaFinal.ForEach(q=> q.Num=1);
-                return ListaFinal;
+                ListaFinal.AddRange(lst_promedio_complementarias_PromFinal);
+                ListaFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
+                #endregion
+
+                var ListaPromediar = ListaFinal.Where(q => q.Columna == "PROMEDIO FINAL").ToList();
+                var ListaPromedioGeneral = ListaPromediar.GroupBy(q => new
+                {
+                    q.IdEmpresa,
+                    q.IdMatricula,
+                    q.IdAlumno,
+                    q.NombreAlumno,
+                    q.Codigo,
+                    q.IdAnio,
+                    q.IdSede,
+                    q.IdJornada,
+                    q.IdCurso,
+                    q.IdParalelo,
+                    q.IdNivel,
+                    q.Descripcion,
+                    q.NomSede,
+                    q.NomNivel,
+                    q.NomJornada,
+                    q.NomCurso,
+                    q.NomParalelo,
+                    q.OrdenNivel,
+                    q.OrdenJornada,
+                    q.OrdenCurso,
+                    q.OrdenParalelo,
+                }).Select(q => new ACA_068_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdMatricula = q.Key.IdMatricula,
+                    IdAlumno = q.Key.IdAlumno,
+                    NombreAlumno = q.Key.NombreAlumno,
+                    Codigo = q.Key.Codigo,
+                    IdAnio = q.Key.IdAnio,
+                    IdSede = q.Key.IdSede,
+                    IdJornada = q.Key.IdJornada,
+                    IdCurso = q.Key.IdCurso,
+                    IdParalelo = q.Key.IdParalelo,
+                    IdNivel = q.Key.IdNivel,
+                    Descripcion = q.Key.Descripcion,
+                    NomSede = q.Key.NomSede,
+                    NomNivel = q.Key.NomNivel,
+                    NomJornada = q.Key.NomJornada,
+                    NomCurso = q.Key.NomCurso,
+                    NomParalelo = q.Key.NomParalelo,
+                    OrdenNivel = q.Key.OrdenNivel,
+                    OrdenJornada = q.Key.OrdenJornada,
+                    OrdenCurso = q.Key.OrdenCurso,
+                    OrdenParalelo = q.Key.OrdenParalelo,
+                    NoTieneCalificacion = q.Sum(g => g.NoTieneCalificacion),
+                    SumaGeneral = q.Sum(g => Convert.ToDecimal(g.Calificacion)),
+                    PromedioCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
+                }).ToList();
+                ListaPromedioGeneral.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
+
+                var lst_promedio_general = new List<ACA_068_Info>();
+                foreach (var item in ListaPromedioGeneral)
+                {
+                    lst_promedio_general.Add(new ACA_068_Info
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdMatricula = item.IdMatricula,
+                        IdMateria = 0,
+                        IdAlumno = item.IdAlumno,
+                        NombreAlumno = item.NombreAlumno,
+                        Codigo = item.Codigo,
+                        IdAnio = item.IdAnio,
+                        IdSede = item.IdSede,
+                        IdJornada = item.IdJornada,
+                        IdCurso = item.IdCurso,
+                        IdParalelo = item.IdParalelo,
+                        IdNivel = item.IdNivel,
+                        Descripcion = item.Descripcion,
+                        NomSede = item.NomSede,
+                        NomNivel = item.NomNivel,
+                        NomJornada = item.NomJornada,
+                        NomCurso = item.NomCurso,
+                        NomParalelo = item.NomParalelo,
+                        OrdenNivel = item.OrdenNivel,
+                        OrdenJornada = item.OrdenJornada,
+                        OrdenCurso = item.OrdenCurso,
+                        OrdenParalelo = item.OrdenParalelo,
+                        Calificacion = (item.PromedioCalculado == null ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero))),
+                        CalificacionNumerica = (item.PromedioCalculado == null ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero)),
+                        IdCatalogoTipoCalificacion = null,
+                        Columna = "PROMEDIO GENERAL",
+                        NombreGrupo = "PROMEDIO GENERAL",
+                        NombreMateria = "",
+                        OrdenGrupo = 9999,
+                        OrdenMateria = 9999,
+                        OrdenColumna = 1,
+                        PromediarGrupo = 0
+                    });
+                }
+                ListaFinal.AddRange(lst_promedio_general);
+                var ListaAlumnos = lst_promedio_general.ToList();
+                ListaAlumnos.ForEach(q=> q.Num=1);
+                return ListaAlumnos;
             }
             catch (Exception ex)
             {
