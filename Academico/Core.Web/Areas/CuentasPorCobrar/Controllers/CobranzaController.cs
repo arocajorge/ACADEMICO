@@ -982,13 +982,6 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             return Json(Mensaje, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult LimpiarDetalle(int IdEmpresa, decimal IdTransaccionSession)
-        {
-            string Mensaje = string.Empty;
-            list_det.set_list(new List<cxc_cobro_det_Info>(), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-
-            return Json(Mensaje, JsonRequestBehavior.AllowGet);
-        }
         public JsonResult SetConsultaAlumno(DateTime fecha_ini, DateTime fecha_fin, int IdEmpresa = 0, int IdSucursal = 0, decimal IdAlumno = 0, decimal IdTransaccionSession = 0)
         {
             List<cxc_cobro_Info> lista = bus_cobro.get_list_matricula_alumno(IdEmpresa, IdSucursal, IdAlumno, fecha_ini, fecha_fin);
