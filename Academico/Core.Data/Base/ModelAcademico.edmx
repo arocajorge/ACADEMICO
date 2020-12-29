@@ -950,11 +950,11 @@
         <EntityType Name="aca_MatriculaCalificacionParticipacion">
           <Key>
             <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="IdMatricula" />
           </Key>
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdMatricula" Type="numeric" Precision="18" Scale="0" />
           <Property Name="IdTematica" Type="int" Nullable="false" />
           <Property Name="IdCampoAccion" Type="int" Nullable="false" />
           <Property Name="IdProfesor" Type="numeric" Precision="18" Scale="0" />
@@ -4329,7 +4329,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
         </Association>
         <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno">
           <End Role="aca_Alumno" Type="Self.aca_Alumno" Multiplicity="1" />
-          <End Role="aca_MatriculaCalificacionParticipacion" Type="Self.aca_MatriculaCalificacionParticipacion" Multiplicity="0..1" />
+          <End Role="aca_MatriculaCalificacionParticipacion" Type="Self.aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="aca_Alumno">
               <PropertyRef Name="IdEmpresa" />
@@ -4343,7 +4343,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
         </Association>
         <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1">
           <End Role="aca_Alumno" Type="Self.aca_Alumno" Multiplicity="1" />
-          <End Role="aca_MatriculaCalificacionParticipacion" Type="Self.aca_MatriculaCalificacionParticipacion" Multiplicity="0..1" />
+          <End Role="aca_MatriculaCalificacionParticipacion" Type="Self.aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="aca_Alumno">
               <PropertyRef Name="IdEmpresa" />
@@ -4370,8 +4370,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Matricula">
-          <End Role="aca_Matricula" Type="Self.aca_Matricula" Multiplicity="0..1" />
-          <End Role="aca_MatriculaCalificacionParticipacion" Type="Self.aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
+          <End Role="aca_Matricula" Type="Self.aca_Matricula" Multiplicity="1" />
+          <End Role="aca_MatriculaCalificacionParticipacion" Type="Self.aca_MatriculaCalificacionParticipacion" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="aca_Matricula">
               <PropertyRef Name="IdEmpresa" />
@@ -4384,8 +4384,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1">
-          <End Role="aca_Matricula" Type="Self.aca_Matricula" Multiplicity="0..1" />
-          <End Role="aca_MatriculaCalificacionParticipacion" Type="Self.aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
+          <End Role="aca_Matricula" Type="Self.aca_Matricula" Multiplicity="1" />
+          <End Role="aca_MatriculaCalificacionParticipacion" Type="Self.aca_MatriculaCalificacionParticipacion" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="aca_Matricula">
               <PropertyRef Name="IdEmpresa" />
@@ -6820,27 +6820,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <End Role="aca_Tematica" EntitySet="aca_Tematica" />
           </AssociationSet>
           <EntitySet Name="vwaca_Tematica" EntityType="ModelAcademico.vwaca_Tematica" />
-          <EntitySet Name="aca_MatriculaCalificacionParticipacion" EntityType="ModelAcademico.aca_MatriculaCalificacionParticipacion" />
-          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_CampoAccion" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_CampoAccion">
-            <End Role="aca_CampoAccion" EntitySet="aca_CampoAccion" />
-            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Profesor" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Profesor">
-            <End Role="aca_Profesor" EntitySet="aca_Profesor" />
-            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Tematica" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Tematica">
-            <End Role="aca_Tematica" EntitySet="aca_Tematica" />
-            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
-          </AssociationSet>
           <EntitySet Name="aca_Sede" EntityType="ModelAcademico.aca_Sede" />
           <AssociationSet Name="FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede" Association="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede">
             <End Role="aca_Sede" EntitySet="aca_Sede" />
@@ -7016,14 +6995,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_MatriculaCalificacionParcial" EntitySet="aca_MatriculaCalificacionParcial" />
           </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Matricula" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula">
-            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
-            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1">
-            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
-            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
-          </AssociationSet>
           <AssociationSet Name="FK_aca_MatriculaCambios_aca_Matricula" Association="ModelAcademico.FK_aca_MatriculaCambios_aca_Matricula">
             <End Role="aca_Matricula" EntitySet="aca_Matricula" />
             <End Role="aca_MatriculaCambios" EntitySet="aca_MatriculaCambios" />
@@ -7035,6 +7006,35 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <AssociationSet Name="FK_aca_Plantilla_aca_PlantillaTipo" Association="ModelAcademico.FK_aca_Plantilla_aca_PlantillaTipo">
             <End Role="aca_PlantillaTipo" EntitySet="aca_PlantillaTipo" />
             <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
+          </AssociationSet>
+          <EntitySet Name="aca_MatriculaCalificacionParticipacion" EntityType="ModelAcademico.aca_MatriculaCalificacionParticipacion" />
+          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_CampoAccion" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_CampoAccion">
+            <End Role="aca_CampoAccion" EntitySet="aca_CampoAccion" />
+            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Matricula" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula">
+            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
+            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1">
+            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
+            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Profesor" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Profesor">
+            <End Role="aca_Profesor" EntitySet="aca_Profesor" />
+            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Tematica" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Tematica">
+            <End Role="aca_Tematica" EntitySet="aca_Tematica" />
+            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
@@ -7823,9 +7823,9 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_MatriculaCondicional" Relationship="ModelAcademico.FK_aca_MatriculaCondicional_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_MatriculaCondicional" />
           <NavigationProperty Name="aca_Familia" Relationship="ModelAcademico.FK_aca_familia_aca_alumno" FromRole="aca_Alumno" ToRole="aca_Familia" />
           <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_AnioLectivoCalificacionHistorico" />
+          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_alumno" FromRole="aca_Alumno" ToRole="aca_Matricula" />
           <NavigationProperty Name="aca_MatriculaCalificacionParticipacion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_MatriculaCalificacionParticipacion" />
           <NavigationProperty Name="aca_MatriculaCalificacionParticipacion1" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1" FromRole="aca_Alumno" ToRole="aca_MatriculaCalificacionParticipacion" />
-          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_alumno" FromRole="aca_Alumno" ToRole="aca_Matricula" />
           </EntityType>
         <Association Name="FK_aca_alumno_aca_Catalogo1">
           <End Type="ModelAcademico.aca_Catalogo" Role="aca_Catalogo" Multiplicity="1" />
@@ -10832,106 +10832,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="NombreCampoAccion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="OrdenCampoAccion" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="aca_MatriculaCalificacionParticipacion">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAlumno" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdMatricula" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdTematica" Type="Int32" Nullable="false" />
-          <Property Name="IdCampoAccion" Type="Int32" Nullable="false" />
-          <Property Name="IdProfesor" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="CalificacionP1" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="CalificacionP2" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PromedioQ1" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="CalificacionP3" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="CalificacionP4" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PromedioQ2" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="PromedioFinal" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Alumno" />
-          <NavigationProperty Name="aca_Alumno1" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Alumno" />
-          <NavigationProperty Name="aca_CampoAccion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_CampoAccion" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_CampoAccion" />
-          <NavigationProperty Name="aca_Profesor" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Profesor" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Profesor" />
-          <NavigationProperty Name="aca_Tematica" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Tematica" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Tematica" />
-          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Matricula" />
-          <NavigationProperty Name="aca_Matricula1" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Matricula" />
-        </EntityType>
-        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCalificacionParticipacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCalificacionParticipacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_CampoAccion">
-          <End Type="ModelAcademico.aca_CampoAccion" Role="aca_CampoAccion" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_CampoAccion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCampoAccion" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCalificacionParticipacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCampoAccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Profesor">
-          <End Type="ModelAcademico.aca_Profesor" Role="aca_Profesor" Multiplicity="0..1" />
-          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Profesor">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProfesor" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCalificacionParticipacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdProfesor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Tematica">
-          <End Type="ModelAcademico.aca_Tematica" Role="aca_Tematica" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Tematica">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTematica" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCalificacionParticipacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTematica" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="aca_Sede">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -11691,10 +11591,10 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_MatriculaCalificacion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacion_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacion" />
           <NavigationProperty Name="aca_MatriculaCalificacionCualitativa" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionCualitativa_aca_Matricula1" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacionCualitativa" />
           <NavigationProperty Name="aca_MatriculaCalificacionParcial" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParcial_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacionParcial" />
-          <NavigationProperty Name="aca_MatriculaCalificacionParticipacion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacionParticipacion" />
-          <NavigationProperty Name="aca_MatriculaCalificacionParticipacion1" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacionParticipacion" />
           <NavigationProperty Name="aca_MatriculaCambios" Relationship="ModelAcademico.FK_aca_MatriculaCambios_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCambios" />
           <NavigationProperty Name="aca_MatriculaConducta" Relationship="ModelAcademico.FK_aca_MatriculaConducta_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaConducta" />
+          <NavigationProperty Name="aca_MatriculaCalificacionParticipacion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacionParticipacion" />
+          <NavigationProperty Name="aca_MatriculaCalificacionParticipacion1" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1" FromRole="aca_Matricula" ToRole="aca_MatriculaCalificacionParticipacion" />
         </EntityType>
         <EntityType Name="aca_PlantillaTipo">
           <Key>
@@ -11935,34 +11835,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Matricula">
-          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="0..1" />
-          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Matricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMatricula" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCalificacionParticipacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMatricula" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1">
-          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="0..1" />
-          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Matricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMatricula" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCalificacionParticipacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMatricula" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_aca_MatriculaCambios_aca_Matricula">
           <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
           <End Type="ModelAcademico.aca_MatriculaCambios" Role="aca_MatriculaCambios" Multiplicity="*" />
@@ -12002,6 +11874,134 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <Dependent Role="aca_Plantilla">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdTipoPlantilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="aca_MatriculaCalificacionParticipacion">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTematica" Type="Int32" Nullable="false" />
+          <Property Name="IdCampoAccion" Type="Int32" Nullable="false" />
+          <Property Name="IdProfesor" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CalificacionP1" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CalificacionP2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PromedioQ1" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CalificacionP3" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CalificacionP4" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PromedioQ2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PromedioFinal" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Alumno" />
+          <NavigationProperty Name="aca_Alumno1" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Alumno" />
+          <NavigationProperty Name="aca_CampoAccion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_CampoAccion" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_CampoAccion" />
+          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Matricula" />
+          <NavigationProperty Name="aca_Matricula1" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Matricula" />
+          <NavigationProperty Name="aca_Profesor" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Profesor" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Profesor" />
+          <NavigationProperty Name="aca_Tematica" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Tematica" FromRole="aca_MatriculaCalificacionParticipacion" ToRole="aca_Tematica" />
+        </EntityType>
+        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCalificacionParticipacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCalificacionParticipacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_CampoAccion">
+          <End Type="ModelAcademico.aca_CampoAccion" Role="aca_CampoAccion" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CampoAccion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCampoAccion" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCalificacionParticipacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCampoAccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Matricula">
+          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Matricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCalificacionParticipacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1">
+          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Matricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCalificacionParticipacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMatricula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Profesor">
+          <End Type="ModelAcademico.aca_Profesor" Role="aca_Profesor" Multiplicity="0..1" />
+          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Profesor">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProfesor" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCalificacionParticipacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Tematica">
+          <End Type="ModelAcademico.aca_Tematica" Role="aca_Tematica" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Tematica">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTematica" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCalificacionParticipacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTematica" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -14151,29 +14151,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="aca_MatriculaCalificacionParticipacion">
-            <EntityTypeMapping TypeName="ModelAcademico.aca_MatriculaCalificacionParticipacion">
-              <MappingFragment StoreEntitySet="aca_MatriculaCalificacionParticipacion">
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="PromedioFinal" ColumnName="PromedioFinal" />
-                <ScalarProperty Name="PromedioQ2" ColumnName="PromedioQ2" />
-                <ScalarProperty Name="CalificacionP4" ColumnName="CalificacionP4" />
-                <ScalarProperty Name="CalificacionP3" ColumnName="CalificacionP3" />
-                <ScalarProperty Name="PromedioQ1" ColumnName="PromedioQ1" />
-                <ScalarProperty Name="CalificacionP2" ColumnName="CalificacionP2" />
-                <ScalarProperty Name="CalificacionP1" ColumnName="CalificacionP1" />
-                <ScalarProperty Name="IdProfesor" ColumnName="IdProfesor" />
-                <ScalarProperty Name="IdCampoAccion" ColumnName="IdCampoAccion" />
-                <ScalarProperty Name="IdTematica" ColumnName="IdTematica" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="aca_Sede">
             <EntityTypeMapping TypeName="ModelAcademico.aca_Sede">
               <MappingFragment StoreEntitySet="aca_Sede">
@@ -14497,6 +14474,29 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_MatriculaCalificacionParticipacion">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_MatriculaCalificacionParticipacion">
+              <MappingFragment StoreEntitySet="aca_MatriculaCalificacionParticipacion">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="PromedioFinal" ColumnName="PromedioFinal" />
+                <ScalarProperty Name="PromedioQ2" ColumnName="PromedioQ2" />
+                <ScalarProperty Name="CalificacionP4" ColumnName="CalificacionP4" />
+                <ScalarProperty Name="CalificacionP3" ColumnName="CalificacionP3" />
+                <ScalarProperty Name="PromedioQ1" ColumnName="PromedioQ1" />
+                <ScalarProperty Name="CalificacionP2" ColumnName="CalificacionP2" />
+                <ScalarProperty Name="CalificacionP1" ColumnName="CalificacionP1" />
+                <ScalarProperty Name="IdProfesor" ColumnName="IdProfesor" />
+                <ScalarProperty Name="IdCampoAccion" ColumnName="IdCampoAccion" />
+                <ScalarProperty Name="IdTematica" ColumnName="IdTematica" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>

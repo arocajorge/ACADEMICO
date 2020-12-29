@@ -111,6 +111,32 @@ namespace Core.Info.Helps
             res = NumeroALetras(Convert.ToDecimal(entero)) + dec;
             return res;
         }
+        public string NumeroALetras_Certificado(string num)
+        {
+            string res, dec = "";
+            Int64 entero;
+            int decimales;
+            double nro;
+            try
+            {
+                nro = Convert.ToDouble(num);
+            }
+            catch
+            {
+                return "";
+            }
+
+            entero = Convert.ToInt64(Math.Truncate(nro));
+            decimales = Convert.ToInt32(Math.Round((nro - entero) * 100, 2));
+            if (decimales > 0)
+            {
+                dec = " COMA " + NumeroALetras(decimales);
+            }
+
+            res = NumeroALetras(Convert.ToDecimal(entero)) + dec;
+            return res;
+        }
+
 
         static string NumeroALetrasFecha(decimal value)
         {

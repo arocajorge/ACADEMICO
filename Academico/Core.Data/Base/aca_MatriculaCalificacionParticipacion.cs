@@ -15,8 +15,8 @@ namespace Core.Data.Base
     public partial class aca_MatriculaCalificacionParticipacion
     {
         public int IdEmpresa { get; set; }
+        public decimal IdMatricula { get; set; }
         public decimal IdAlumno { get; set; }
-        public Nullable<decimal> IdMatricula { get; set; }
         public int IdTematica { get; set; }
         public int IdCampoAccion { get; set; }
         public Nullable<decimal> IdProfesor { get; set; }
@@ -35,9 +35,9 @@ namespace Core.Data.Base
         public virtual aca_Alumno aca_Alumno { get; set; }
         public virtual aca_Alumno aca_Alumno1 { get; set; }
         public virtual aca_CampoAccion aca_CampoAccion { get; set; }
-        public virtual aca_Profesor aca_Profesor { get; set; }
-        public virtual aca_Tematica aca_Tematica { get; set; }
         public virtual aca_Matricula aca_Matricula { get; set; }
         public virtual aca_Matricula aca_Matricula1 { get; set; }
+        public virtual aca_Profesor aca_Profesor { get; set; }
+        public virtual aca_Tematica aca_Tematica { get; set; }
     }
 }

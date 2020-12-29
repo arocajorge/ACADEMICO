@@ -258,6 +258,7 @@ namespace Core.Data.Academico
                         OrdenMateria = q.OrdenMateria,
                         OrdenMateriaArea = q.OrdenMateriaArea,
                         OrdenMateriaGrupo = q.OrdenMateriaGrupo,
+                        PromediarGrupo = q.PromediarGrupo,
                         EsObligatorio = q.EsObligatorio,
                         IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion
                     }).ToList();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Reportes.Academico
 {
-    public class ACA_037_Info
+    public class ACA_043_Promedios_Info
     {
         public int Num { get; set; }
         public int IdEmpresa { get; set; }
@@ -41,6 +41,6 @@ namespace Core.Info.Reportes.Academico
         public string CorreoProfesor { get; set; }
         public string NombreCampoAccion { get; set; }
         public string NombreTematica { get; set; }
-
+        public Nullable<decimal> PromedioFinal { get; set; }
     }
 }

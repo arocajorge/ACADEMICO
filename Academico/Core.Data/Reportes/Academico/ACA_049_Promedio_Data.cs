@@ -9,22 +9,22 @@ using System.Linq;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_049_Detalle_Data
+    public class ACA_049_Promedio_Data
     {
         cl_funciones funciones = new cl_funciones();
         aca_AnioLectivoConductaEquivalencia_Data odata_conducta_equiv = new aca_AnioLectivoConductaEquivalencia_Data();
         aca_AnioLectivoCalificacionCualitativa_Data odata_proyectos_equiv = new aca_AnioLectivoCalificacionCualitativa_Data();
-        public List<ACA_049_Detalle_Info> GetList(int IdEmpresa, int IdAnio, decimal IdMatricula)
+        public List<ACA_049_Promedio_Info> GetList(int IdEmpresa, int IdAnio, decimal IdMatricula)
         {
             try
             {
-                List<ACA_049_Detalle_Info> Lista = new List<ACA_049_Detalle_Info>();
-                List<ACA_049_Detalle_Info> ListaFinal = new List<ACA_049_Detalle_Info>();
-                List<ACA_049_Detalle_Info> Lista_Comportamiento = new List<ACA_049_Detalle_Info>();
-                List<ACA_049_Detalle_Info> Lista_Proyectos = new List<ACA_049_Detalle_Info>();
-                List<ACA_049_Detalle_Info> ListaObligatorias = new List<ACA_049_Detalle_Info>();
-                List<ACA_049_Detalle_Info> ListaComplementarias = new List<ACA_049_Detalle_Info>();
-                List<ACA_049_Detalle_Info> ListaPromediadaComplementarias = new List<ACA_049_Detalle_Info>();
+                List<ACA_049_Promedio_Info> Lista = new List<ACA_049_Promedio_Info>();
+                List<ACA_049_Promedio_Info> ListaFinal = new List<ACA_049_Promedio_Info>();
+                List<ACA_049_Promedio_Info> Lista_Comportamiento = new List<ACA_049_Promedio_Info>();
+                List<ACA_049_Promedio_Info> Lista_Proyectos = new List<ACA_049_Promedio_Info>();
+                List<ACA_049_Promedio_Info> ListaObligatorias = new List<ACA_049_Promedio_Info>();
+                List<ACA_049_Promedio_Info> ListaComplementarias = new List<ACA_049_Promedio_Info>();
+                List<ACA_049_Promedio_Info> ListaPromediadaComplementarias = new List<ACA_049_Promedio_Info>();
 
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
@@ -34,7 +34,7 @@ namespace Core.Data.Reportes.Academico
                     string query = "DECLARE @IdEmpresa int = " + IdEmpresa.ToString() + ", @IdAnio int = " + IdAnio.ToString() + ", @IdMatricula decimal = " + IdMatricula.ToString()
                     + " /*COMPORTAMIENTO*/ "
                     + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, AN.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso,  "
-                    + " cp.NomParalelo, cp.OrdenParalelo,alu.Codigo, pa.pe_nombreCompleto AS NombreAlumno, 0 AS IdMateria, NULL AS NombreMateria, '' NomMateriaArea, 'COMPORTAMIENTO' AS NombreGrupo, 99999 AS OrdenMateria, 99999 AS OrdenGrupo, 0 AS PromediarGrupo, NULL "
+                    + " cp.NomParalelo, cp.OrdenParalelo,alu.Codigo, pa.pe_nombreCompleto AS NombreAlumno, 0 AS IdMateria, 'EVALUACION DEL COMPORTAMIENTO' AS NombreMateria, '' NomMateriaArea, 'COMPORTAMIENTO' AS NombreGrupo, 99999 AS OrdenMateria, 99999 AS OrdenGrupo, 0 AS PromediarGrupo, NULL "
                     + " AS IdCatalogoTipoCalificacion, CAST(equiv.Letra AS varchar) AS Calificacion, CAST(equiv.Calificacion AS numeric(18, 2)) AS CalificacionNumerica, 'EVALUACION DEL COMPORTAMIENTO' AS Columna, 1 AS OrdenColumna, "
                     + " pp.pe_nombreCompleto AS NombreTutor "
                     + " FROM     dbo.aca_Matricula AS m INNER JOIN "
@@ -60,7 +60,7 @@ namespace Core.Data.Reportes.Academico
                     + " ( "
                     + " /*PROYECTOS*/ "
                     + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, AN.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, "
-                    + " cp.NomParalelo, cp.OrdenParalelo,alu.Codigo, pa.pe_nombreCompleto AS NombreAlumno, 0 AS IdMateria, NULL AS NombreMateria, '' NomMateriaArea, 'PROYECTOS' AS NombreGrupo, 999999 AS OrdenMateria, 999999 AS OrdenGrupo, 0 AS PromediarGrupo, "
+                    + " cp.NomParalelo, cp.OrdenParalelo,alu.Codigo, pa.pe_nombreCompleto AS NombreAlumno, 0 AS IdMateria, 'EVALUACION DE PROYECTOS ESCOLARES' AS NombreMateria, '' NomMateriaArea, 'PROYECTOS' AS NombreGrupo, 999999 AS OrdenMateria, 999999 AS OrdenGrupo, 0 AS PromediarGrupo, "
                     + " mc.IdCatalogoTipoCalificacion AS IdCatalogoTipoCalificacion, CAST(lp.Codigo AS varchar) AS Calificacion, CAST(ep.Calificacion AS numeric(18, 2)) AS CalificacionNumerica, 'EVALUACION DE PROYECTOS ESCOLARES' AS Columna, "
                     + " 1 AS OrdenColumna, pp.pe_nombreCompleto AS NombreTutor "
                     + " FROM     dbo.aca_Matricula AS m LEFT OUTER JOIN "
@@ -151,7 +151,7 @@ namespace Core.Data.Reportes.Academico
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Lista.Add(new ACA_049_Detalle_Info
+                        Lista.Add(new ACA_049_Promedio_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
@@ -191,29 +191,12 @@ namespace Core.Data.Reportes.Academico
                     }
                     reader.Close();
                 }
-                /*
-                Lista_Comportamiento = Lista.Where(q => q.IdMateria == 0 && q.NombreGrupo=="COMPORTAMIENTO").ToList();
-                foreach (var item in Lista_Comportamiento)
-                {
-                    var equivalencia = odata_conducta_equiv.getInfo_x_Letra(IdEmpresa, IdAnio, (item.Calificacion==null ? "" : Convert.ToString(item.Calificacion)));
-                    item.CalificacionCualitativa = (equivalencia == null ? null : equivalencia.DescripcionEquivalencia);
-                }
-
-                Lista_Proyectos = Lista.Where(q => q.IdMateria == 0 && q.NombreGrupo == "PROYECTOS").ToList();
-                foreach (var item in Lista_Proyectos)
-                {
-                    var equivalencia = odata_proyectos_equiv.getInfo_Codigo(IdEmpresa, IdAnio, (item.Calificacion == null ? "" : Convert.ToString(item.Calificacion)));
-                    item.CalificacionCualitativa = (equivalencia == null ? null : equivalencia.DescripcionLarga);
-                }
                 
-                ListaFinal.AddRange(Lista_Comportamiento);
-                ListaFinal.AddRange(Lista_Proyectos);
-                */
                 Lista.ForEach(q=> q.CalificacionCualitativa = (q.CalificacionNumerica==null ? "" : funciones.NumeroALetras_Certificado(q.CalificacionNumerica.ToString())) );
                 ListaObligatorias = Lista.Where(q => q.PromediarGrupo == 0 && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
                 var ListaObligatorias_ValidaCalificaciones = ListaObligatorias.Where(q => q.Columna == "PROMEDIO FINAL").ToList();
                 ListaObligatorias_ValidaCalificaciones.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
-                ListaFinal.AddRange(ListaObligatorias);
+                //ListaFinal.AddRange(ListaObligatorias);
 
                 ListaComplementarias = Lista.Where(q => q.PromediarGrupo == 1 && q.IdMateria != null && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
                 var ListaComplementarias_PromedioFinal = ListaComplementarias.Where(q => q.Columna == "PROMEDIO FINAL").ToList();
@@ -243,7 +226,7 @@ namespace Core.Data.Reportes.Academico
                     q.OrdenJornada,
                     q.OrdenCurso,
                     q.OrdenParalelo,
-                }).Select(q => new ACA_049_Detalle_Info
+                }).Select(q => new ACA_049_Promedio_Info
                 {
                     IdEmpresa = q.Key.IdEmpresa,
                     IdMatricula = q.Key.IdMatricula,
@@ -272,10 +255,10 @@ namespace Core.Data.Reportes.Academico
                 }).ToList();
                 ListaComplementariasProm_Final.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
 
-                var lst_promedio_complementarias_PromFinal = new List<ACA_049_Detalle_Info>();
+                var lst_promedio_complementarias_PromFinal = new List<ACA_049_Promedio_Info>();
                 foreach (var item in ListaComplementariasProm_Final)
                 {
-                    lst_promedio_complementarias_PromFinal.Add(new ACA_049_Detalle_Info
+                    lst_promedio_complementarias_PromFinal.Add(new ACA_049_Promedio_Info
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,
@@ -313,11 +296,11 @@ namespace Core.Data.Reportes.Academico
                     });
                 }
                 lst_promedio_complementarias_PromFinal.ForEach(q => q.CalificacionCualitativa = (q.CalificacionNumerica == null ? "" : funciones.NumeroALetras_Certificado(q.CalificacionNumerica.ToString())));
-                ListaFinal.AddRange(lst_promedio_complementarias_PromFinal);
+                //ListaFinal.AddRange(lst_promedio_complementarias_PromFinal);
                 ListaFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
                 #endregion
-                /*
-                var ListaPromediar = ListaFinal.Where(q => q.Columna == "PROMEDIO FINAL").ToList();
+                
+                var ListaPromediar = ListaObligatorias_ValidaCalificaciones.Where(q => q.Columna == "PROMEDIO FINAL").ToList();
                 var ListaPromedioGeneral = ListaPromediar.GroupBy(q => new
                 {
                     q.IdEmpresa,
@@ -341,7 +324,7 @@ namespace Core.Data.Reportes.Academico
                     q.OrdenJornada,
                     q.OrdenCurso,
                     q.OrdenParalelo,
-                }).Select(q => new ACA_049_Detalle_Info
+                }).Select(q => new ACA_049_Promedio_Info
                 {
                     IdEmpresa = q.Key.IdEmpresa,
                     IdMatricula = q.Key.IdMatricula,
@@ -370,10 +353,10 @@ namespace Core.Data.Reportes.Academico
                 }).ToList();
                 ListaPromedioGeneral.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
 
-                var lst_promedio_general = new List<ACA_049_Detalle_Info>();
+                var lst_promedio_general = new List<ACA_049_Promedio_Info>();
                 foreach (var item in ListaPromedioGeneral)
                 {
-                    lst_promedio_general.Add(new ACA_049_Detalle_Info
+                    lst_promedio_general.Add(new ACA_049_Promedio_Info
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,
@@ -402,7 +385,7 @@ namespace Core.Data.Reportes.Academico
                         IdCatalogoTipoCalificacion = null,
                         Columna = "PROMEDIO GENERAL",
                         NombreGrupo = "PROMEDIO GENERAL",
-                        NombreMateria = "",
+                        NombreMateria = "PROMEDIO GENERAL",
                         NomMateriaArea = "",
                         OrdenGrupo = 9999,
                         OrdenMateria = 9999,
@@ -411,8 +394,26 @@ namespace Core.Data.Reportes.Academico
                     });
                 }
                 lst_promedio_general.ForEach(q => q.CalificacionCualitativa = (q.CalificacionNumerica == null ? "" : funciones.NumeroALetras_Certificado(q.CalificacionNumerica.ToString())));
+
                 ListaFinal.AddRange(lst_promedio_general);
-                */
+
+                Lista_Proyectos = Lista.Where(q => q.IdMateria == 0 && q.NombreGrupo == "PROYECTOS").ToList();
+                foreach (var item in Lista_Proyectos)
+                {
+                    var equivalencia = odata_proyectos_equiv.getInfo_Codigo(IdEmpresa, IdAnio, (item.Calificacion == null ? "" : Convert.ToString(item.Calificacion)));
+                    item.CalificacionCualitativa = (equivalencia == null ? null : equivalencia.DescripcionLarga);
+                }
+                ListaFinal.AddRange(Lista_Proyectos);
+
+                Lista_Comportamiento = Lista.Where(q => q.IdMateria == 0 && q.NombreGrupo == "COMPORTAMIENTO").ToList();
+                foreach (var item in Lista_Comportamiento)
+                {
+                    var equivalencia = odata_conducta_equiv.getInfo_x_Letra(IdEmpresa, IdAnio, (item.Calificacion == null ? "" : Convert.ToString(item.Calificacion)));
+                    item.CalificacionCualitativa = (equivalencia == null ? null : equivalencia.DescripcionEquivalencia);
+                }
+                ListaFinal.AddRange(Lista_Comportamiento);
+                
+
                 return ListaFinal;
             }
             catch (Exception ex)

@@ -217,6 +217,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 var info = new aca_MatriculaCalificacionParticipacion_Info
                 {
                     IdEmpresa = edited_info.IdEmpresa,
+                    IdAnio = edited_info.IdAnio,
                     IdMatricula = item.IdMatricula,
                     IdAlumno = item.IdAlumno,
                     IdTematica = edited_info.IdTematica,

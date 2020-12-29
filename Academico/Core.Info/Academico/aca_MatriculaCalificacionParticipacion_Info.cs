@@ -10,8 +10,8 @@ namespace Core.Info.Academico
     {
         public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
+        public decimal IdMatricula { get; set; }
         public decimal IdAlumno { get; set; }
-        public Nullable<decimal> IdMatricula { get; set; }
         public int IdTematica { get; set; }
         public int IdCampoAccion { get; set; }
         public Nullable<decimal> IdProfesor { get; set; }

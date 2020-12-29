@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Info.Reportes.Academico
 {
-    public class ACA_049_Detalle_Info
+    public class ACA_049_Promedio_Info
     {
         public int IdEmpresa { get; set; }
         public int IdAnio { get; set; }

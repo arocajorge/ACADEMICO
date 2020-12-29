@@ -40,9 +40,10 @@ namespace Core.Data.Reportes.Academico
                     string query = "DECLARE @MostrarRetirados int = " + (MostrarRetirados == true ? 1 : 0) + ";"
                     + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, sn.NomSede, sn.NomNivel, "
                     + " sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, p.pe_nombreCompleto,  p.pe_cedulaRuc, s.NombreRector, s.NombreSecretaria,an.Descripcion,  "
-                    + " s.TelefonoRector, s.CelularRector, s.CorreoRector, mc.IdProfesor, per.pe_nombreCompleto NombreProfesor,per.pe_telfono_Contacto TelefonoProfesor, pro.Telefonos CelularProfesor, pro.Correo CorreoProfesor "
+                    + " s.TelefonoRector, s.CelularRector, s.CorreoRector, mc.IdProfesor, mc.IdCampoAccion, mc.IdTematica, t.NombreCampoAccion, t.NombreTematica, per.pe_nombreCompleto NombreProfesor,per.pe_telfono_Contacto TelefonoProfesor, pro.Telefonos CelularProfesor, pro.Correo CorreoProfesor "
                     + " FROM dbo.aca_Matricula AS m RIGHT OUTER JOIN "
                     + " dbo.aca_MatriculaCalificacionParticipacion AS mc ON m.IdEmpresa = mc.IdEmpresa AND m.IdAlumno = mc.IdAlumno AND m.IdMatricula = mc.IdMatricula "
+                    + " LEFT OUTER JOIN dbo.aca_AnioLectivo_Tematica t on t.IdEmpresa= mc.IdEmpresa and t.IdAnio = m.IdAnio and t.IdCampoAccion=mc.IdCampoAccion and t.IdTematica=mc.IdTematica "
                     + " LEFT OUTER JOIN dbo.aca_Profesor pro on pro.IdEmpresa = mc.IdEmpresa and pro.IdProfesor = mc.IdProfesor "
                     + " LEFT OUTER JOIN dbo.tb_persona AS per ON per.IdPersona = pro.IdPersona LEFT OUTER JOIN"
                     + " dbo.aca_Alumno AS al ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
@@ -101,6 +102,8 @@ namespace Core.Data.Reportes.Academico
                             CorreoRector = string.IsNullOrEmpty(reader["CorreoRector"].ToString()) ? null : reader["CorreoRector"].ToString(),
                             NombreRector = string.IsNullOrEmpty(reader["NombreRector"].ToString()) ? null : reader["NombreRector"].ToString(),
                             TelefonoRector = string.IsNullOrEmpty(reader["TelefonoRector"].ToString()) ? null : reader["TelefonoRector"].ToString(),
+                            NombreCampoAccion = string.IsNullOrEmpty(reader["NombreCampoAccion"].ToString()) ? null : reader["NombreCampoAccion"].ToString(),
+                            NombreTematica = string.IsNullOrEmpty(reader["NombreTematica"].ToString()) ? null : reader["NombreTematica"].ToString(),
                         });
                     }
                     reader.Close();

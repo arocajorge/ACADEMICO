@@ -397,11 +397,23 @@
     <Compile Include="Reportes\Academico\ACA_037_Rpt.Designer.cs">
       <DependentUpon>ACA_037_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_043_Promedios_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_043_Promedios_Rpt.Designer.cs">
+      <DependentUpon>ACA_043_Promedios_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_048_Rendimiento.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Academico\ACA_048_Rendimiento.Designer.cs">
       <DependentUpon>ACA_048_Rendimiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_Promedio_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_Promedio_Rpt.Designer.cs">
+      <DependentUpon>ACA_049_Promedio_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Academico\ACA_049_Detalle_Rpt.cs">
       <SubType>Component</SubType>
@@ -9768,8 +9780,14 @@
     <EmbeddedResource Include="Reportes\Academico\ACA_037_Rpt.resx">
       <DependentUpon>ACA_037_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_043_Promedios_Rpt.resx">
+      <DependentUpon>ACA_043_Promedios_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_048_Rendimiento.resx">
       <DependentUpon>ACA_048_Rendimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_049_Promedio_Rpt.resx">
+      <DependentUpon>ACA_049_Promedio_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_049_Detalle_Rpt.resx">
       <DependentUpon>ACA_049_Detalle_Rpt.cs</DependentUpon>

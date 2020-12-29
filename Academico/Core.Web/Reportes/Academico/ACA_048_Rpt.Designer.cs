@@ -33,6 +33,9 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.SinPromedios_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
+            this.Promedio_Subrpt = new DevExpress.XtraReports.UI.XRSubreport();
+            this.Rendimiento_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrTable12 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow21 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -124,9 +127,6 @@
             this.p_IdMateria = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCatalogoParcialTipo = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.SinPromedios_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
-            this.Promedio_Subrpt = new DevExpress.XtraReports.UI.XRSubreport();
-            this.Rendimiento_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable11)).BeginInit();
@@ -177,6 +177,30 @@
             this.xrTable1});
             this.ReportHeader.HeightF = 830.3334F;
             this.ReportHeader.Name = "ReportHeader";
+            // 
+            // SinPromedios_SubRpt
+            // 
+            this.SinPromedios_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 305.1666F);
+            this.SinPromedios_SubRpt.Name = "SinPromedios_SubRpt";
+            this.SinPromedios_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_048_SinPromedios_Rpt();
+            this.SinPromedios_SubRpt.SizeF = new System.Drawing.SizeF(751.0004F, 20F);
+            this.SinPromedios_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SinPromedios_SubRpt_BeforePrint_1);
+            // 
+            // Promedio_Subrpt
+            // 
+            this.Promedio_Subrpt.LocationFloat = new DevExpress.Utils.PointFloat(600F, 195.1667F);
+            this.Promedio_Subrpt.Name = "Promedio_Subrpt";
+            this.Promedio_Subrpt.ReportSource = new Core.Web.Reportes.Academico.ACA_048_Promedios_Rpt();
+            this.Promedio_Subrpt.SizeF = new System.Drawing.SizeF(151F, 20F);
+            this.Promedio_Subrpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Promedio_Subrpt_BeforePrint);
+            // 
+            // Rendimiento_SubRpt
+            // 
+            this.Rendimiento_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 195.1667F);
+            this.Rendimiento_SubRpt.Name = "Rendimiento_SubRpt";
+            this.Rendimiento_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_048_Rendimiento();
+            this.Rendimiento_SubRpt.SizeF = new System.Drawing.SizeF(600F, 20F);
+            this.Rendimiento_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Rendimiento_SubRpt_BeforePrint);
             // 
             // lbl_imagen
             // 
@@ -1064,30 +1088,6 @@
             // 
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_048_Info);
             this.objectDataSource1.Name = "objectDataSource1";
-            // 
-            // SinPromedios_SubRpt
-            // 
-            this.SinPromedios_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 305.1666F);
-            this.SinPromedios_SubRpt.Name = "SinPromedios_SubRpt";
-            this.SinPromedios_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_048_SinPromedios_Rpt();
-            this.SinPromedios_SubRpt.SizeF = new System.Drawing.SizeF(751.0004F, 20F);
-            this.SinPromedios_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.SinPromedios_SubRpt_BeforePrint_1);
-            // 
-            // Promedio_Subrpt
-            // 
-            this.Promedio_Subrpt.LocationFloat = new DevExpress.Utils.PointFloat(600F, 195.1667F);
-            this.Promedio_Subrpt.Name = "Promedio_Subrpt";
-            this.Promedio_Subrpt.ReportSource = new Core.Web.Reportes.Academico.ACA_048_Promedios_Rpt();
-            this.Promedio_Subrpt.SizeF = new System.Drawing.SizeF(151F, 20F);
-            this.Promedio_Subrpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Promedio_Subrpt_BeforePrint);
-            // 
-            // Rendimiento_SubRpt
-            // 
-            this.Rendimiento_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 195.1667F);
-            this.Rendimiento_SubRpt.Name = "Rendimiento_SubRpt";
-            this.Rendimiento_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_048_Rendimiento();
-            this.Rendimiento_SubRpt.SizeF = new System.Drawing.SizeF(600F, 20F);
-            this.Rendimiento_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Rendimiento_SubRpt_BeforePrint);
             // 
             // ACA_048_Rpt
             // 
