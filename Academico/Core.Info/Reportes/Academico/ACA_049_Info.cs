@@ -33,10 +33,13 @@ namespace Core.Info.Reportes.Academico
         public string NomCatalogo { get; set; }
         public Nullable<int> IdCursoAPromover { get; set; }
         public string CursoPromover { get; set; }
+        public Nullable<int> IdCursoBachiller { get; set; }
 
         #region Campos que no existen en la tabla
         public string Promover { get; set; }
         public string FechaActual { get; set; }
+        public string NombreRector { get; set; }
+        public string NombreSecretaria { get; set; }
         #endregion
     }
 }

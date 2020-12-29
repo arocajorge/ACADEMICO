@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_049_Data
+    public class ACA_049_General_Data
     {
-        public List<ACA_049_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno=0, bool MostrarRetirados=false  )
+        public List<ACA_049_General_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno=0, bool MostrarRetirados=false  )
         {
             try
             {
                 decimal IdAlumnoIni = IdAlumno;
                 decimal IdAlumnoFin = IdAlumno == 0 ? 9999999 : IdAlumno;
-                List<ACA_049_Info> Lista = new List<ACA_049_Info>();
+                List<ACA_049_General_Info> Lista = new List<ACA_049_General_Info>();
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
@@ -58,7 +58,7 @@ namespace Core.Data.Reportes.Academico
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Lista.Add(new ACA_049_Info
+                        Lista.Add(new ACA_049_General_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),
@@ -82,17 +82,17 @@ namespace Core.Data.Reportes.Academico
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
                             IdCatalogoESTMAT =(string.IsNullOrEmpty(reader["IdCatalogoESTMAT"].ToString())? (int?)null : Convert.ToInt32(reader["IdCatalogoESTMAT"]) ),
-                            IdCursoAPromover = string.IsNullOrEmpty(reader["IdCursoAPromover"].ToString()) ? (int?)null  : Convert.ToInt32(reader["IdCursoAPromover"]),
+                            IdCursoAPromover = string.IsNullOrEmpty(reader["IdCursoAPromover"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoAPromover"]),
                             Codigo = reader["Codigo"].ToString(),
                             CursoPromover = string.IsNullOrEmpty(reader["CursoPromover"].ToString()) ? null : reader["CursoPromover"].ToString(),
-                            FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy"),
                             IdCursoBachiller = (string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"])),
+                            FechaActual = DateTime.Now.ToString("d' de 'MMMM' de 'yyyy"),
                             NombreRector = string.IsNullOrEmpty(reader["NombreRector"].ToString()) ? null : reader["NombreRector"].ToString(),
                             NombreSecretaria = string.IsNullOrEmpty(reader["NombreSecretaria"].ToString()) ? null : reader["NombreSecretaria"].ToString(),
                             Promover = (string.IsNullOrEmpty(reader["IdCatalogoESTMAT"].ToString()) ? null :
-                                            (Convert.ToInt32(reader["IdCurso"]) == (string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"])) ? "POR LO TANTO HA CONCLUIDO EL " + reader["NomCurso"].ToString() :
-                                            (Convert.ToInt32(reader["IdCatalogoESTMAT"]) == Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.APROBADO) ? "POR LO TANTO ES PROMOVIDO/A " + (string.IsNullOrEmpty(reader["CursoPromover"].ToString()) ? " " : reader["CursoPromover"].ToString()) :
-                                            "POR LO TANTO NO ES PROMOVIDO/A AL " + (string.IsNullOrEmpty(reader["CursoPromover"].ToString()) ? " " : reader["CursoPromover"].ToString()))))
+                                            (Convert.ToInt32(reader["IdCurso"]) == (string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"])) ? "POR LO TANTO HA CONCLUIDO EL " + reader["NomCurso"].ToString() :  
+                                            (Convert.ToInt32(reader["IdCatalogoESTMAT"]) == Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.APROBADO) ? "POR LO TANTO ES PROMOVIDO/A "+ (string.IsNullOrEmpty(reader["CursoPromover"].ToString()) ? " " : reader["CursoPromover"].ToString()) :
+                                            "POR LO TANTO NO ES PROMOVIDO/A AL " + (string.IsNullOrEmpty(reader["CursoPromover"].ToString()) ? " " : reader["CursoPromover"].ToString()) )))
                         });
                     }
                     reader.Close();

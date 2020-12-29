@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_043_Data
+    public class ACA_071_Data
     {
         aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
-        public List<ACA_043_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, bool MostrarRetirados)
+        public List<ACA_071_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, bool MostrarRetirados)
         {
             try
             {
@@ -30,11 +30,13 @@ namespace Core.Data.Reportes.Academico
                 int IdParaleloIni = IdParalelo;
                 int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
 
-                List<ACA_043_Info> Lista = new List<ACA_043_Info>();
-                List<ACA_043_Info> ListaPromedio = new List<ACA_043_Info>();
-                List<ACA_043_Info> ListaHoras = new List<ACA_043_Info>();
-                List<ACA_043_Info> ListaAlumosPromedio = new List<ACA_043_Info>();
-                List<ACA_043_Info> ListaFinal = new List<ACA_043_Info>();
+                decimal IdAlumnoIni = IdAlumno;
+                decimal IdAlumnoFin = IdAlumno == 0 ? 9999999 : IdAlumno;
+                List<ACA_071_Info> Lista = new List<ACA_071_Info>();
+                List<ACA_071_Info> ListaPromedio = new List<ACA_071_Info>();
+                List<ACA_071_Info> ListaHoras = new List<ACA_071_Info>();
+                List<ACA_071_Info> ListaAlumosPromedio = new List<ACA_071_Info>();
+                List<ACA_071_Info> ListaFinal = new List<ACA_071_Info>();
 
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
@@ -43,14 +45,11 @@ namespace Core.Data.Reportes.Academico
                     #region Query
                     string query = "DECLARE @MostrarRetirados int = " + (MostrarRetirados == true ? 1 : 0) + ";"
                     + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, sn.NomSede, sn.NomNivel, "
-                    + " sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, mc.IdCampoAccion, mc.IdTematica, t.NombreCampoAccion, t.NombreTematica, p.pe_nombreCompleto,  p.pe_cedulaRuc, s.NombreRector, s.NombreSecretaria,an.Descripcion,  "
-                    + " s.TelefonoRector, s.CelularRector, s.CorreoRector, mc.IdProfesor, per.pe_nombreCompleto NombreProfesor,per.pe_telfono_Contacto TelefonoProfesor, pro.Telefonos CelularProfesor, pro.Correo CorreoProfesor "
+                    + " sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, mc.IdCampoAccion, mc.IdTematica, t.NombreCampoAccion, t.NombreTematica, p.pe_nombreCompleto,  p.pe_cedulaRuc, an.Descripcion "
                     + " FROM dbo.aca_Matricula AS m RIGHT OUTER JOIN "
                     + " dbo.aca_MatriculaCalificacionParticipacion AS mc ON m.IdEmpresa = mc.IdEmpresa AND m.IdAlumno = mc.IdAlumno AND m.IdMatricula = mc.IdMatricula "
                     + " LEFT OUTER JOIN dbo.aca_AnioLectivo_Tematica t on t.IdEmpresa= mc.IdEmpresa and t.IdAnio = m.IdAnio and t.IdCampoAccion=mc.IdCampoAccion and t.IdTematica=mc.IdTematica "
-                    + " LEFT OUTER JOIN dbo.aca_Profesor pro on pro.IdEmpresa = mc.IdEmpresa and pro.IdProfesor = mc.IdProfesor "
-                    + " LEFT OUTER JOIN dbo.tb_persona AS per ON per.IdPersona = pro.IdPersona LEFT OUTER JOIN"
-                    + " dbo.aca_Alumno AS al ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
+                    + " LEFT OUTER JOIN dbo.aca_Alumno AS al ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
                     + " dbo.tb_persona AS p ON al.IdPersona = p.IdPersona LEFT OUTER JOIN "
                     + " dbo.aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 INNER JOIN "
                     + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
@@ -67,6 +66,7 @@ namespace Core.Data.Reportes.Academico
                     + " and m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
                     + " and m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString()
                     + " and m.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString()
+                    + " and m.IdAlumno between " + IdAlumnoIni.ToString() + " and " + IdAlumnoFin.ToString()
                     + " and isnull(r.IdMatricula,0) = case when @MostrarRetirados = 1 then isnull(r.IdMatricula,0) else 0 end ";
                     #endregion
 
@@ -74,9 +74,8 @@ namespace Core.Data.Reportes.Academico
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Lista.Add(new ACA_043_Info
+                        Lista.Add(new ACA_071_Info
                         {
-                            Num = 1,
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
@@ -98,16 +97,9 @@ namespace Core.Data.Reportes.Academico
                             OrdenParalelo = string.IsNullOrEmpty(reader["OrdenParalelo"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenParalelo"]),
                             pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
                             pe_cedulaRuc = string.IsNullOrEmpty(reader["pe_cedulaRuc"].ToString()) ? null : reader["pe_cedulaRuc"].ToString(),
-                            NombreProfesor = string.IsNullOrEmpty(reader["NombreProfesor"].ToString()) ? null : reader["NombreProfesor"].ToString(),
-                            TelefonoProfesor = string.IsNullOrEmpty(reader["TelefonoProfesor"].ToString()) ? null : reader["TelefonoProfesor"].ToString(),
-                            CelularProfesor = string.IsNullOrEmpty(reader["CelularProfesor"].ToString()) ? null : reader["CelularProfesor"].ToString(),
-                            CelularRector = string.IsNullOrEmpty(reader["CelularRector"].ToString()) ? null : reader["CelularRector"].ToString(),
-                            CorreoProfesor = string.IsNullOrEmpty(reader["CorreoProfesor"].ToString()) ? null : reader["CorreoProfesor"].ToString(),
-                            CorreoRector = string.IsNullOrEmpty(reader["CorreoRector"].ToString()) ? null : reader["CorreoRector"].ToString(),
-                            NombreRector = string.IsNullOrEmpty(reader["NombreRector"].ToString()) ? null : reader["NombreRector"].ToString(),
-                            TelefonoRector = string.IsNullOrEmpty(reader["TelefonoRector"].ToString()) ? null : reader["TelefonoRector"].ToString(),
                             NombreCampoAccion = string.IsNullOrEmpty(reader["NombreCampoAccion"].ToString()) ? null : reader["NombreCampoAccion"].ToString(),
                             NombreTematica = string.IsNullOrEmpty(reader["NombreTematica"].ToString()) ? null : reader["NombreTematica"].ToString(),
+                            FechaActual = DateTime.Now.ToString("MMMM' 'd' del 'yyyy")
                         });
                     }
                     reader.Close();
@@ -156,9 +148,8 @@ namespace Core.Data.Reportes.Academico
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        ListaPromedio.Add(new ACA_043_Info
+                        ListaPromedio.Add(new ACA_071_Info
                         {
-                            Num = 1,
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
                             Promedio1 = string.IsNullOrEmpty(reader["Promedio1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Promedio1"]),
@@ -174,9 +165,8 @@ namespace Core.Data.Reportes.Academico
                 ListaAlumosPromedio = (from a in Lista
                                        join b in ListaPromedio
                                        on new { a.IdEmpresa, a.IdAlumno } equals new { b.IdEmpresa, b.IdAlumno }
-                                       select new ACA_043_Info
+                                       select new ACA_071_Info
                                        {
-                                           Num = 1,
                                            IdEmpresa = a.IdEmpresa,
                                            IdAlumno = a.IdAlumno,
                                            pe_nombreCompleto = a.pe_nombreCompleto,
@@ -199,12 +189,6 @@ namespace Core.Data.Reportes.Academico
                                            OrdenParalelo = a.OrdenParalelo,
                                            NombreCampoAccion = a.NombreCampoAccion,
                                            NombreTematica = a.NombreTematica,
-                                           NombreProfesor = a.NombreProfesor,
-                                           TelefonoProfesor = a.TelefonoProfesor,
-                                           CelularProfesor = a.CelularProfesor,
-                                           NombreRector = a.NombreRector,
-                                           TelefonoRector = a.TelefonoRector,
-                                           CelularRector = a.CelularRector,
                                            Promedio1 = b.Promedio1,
                                            Promedio2 = b.Promedio2,
                                            Promedio3 = b.Promedio3,
@@ -229,7 +213,7 @@ namespace Core.Data.Reportes.Academico
                         SqlDataReader reader = command.ExecuteReader();
                         while (reader.Read())
                         {
-                            ListaHoras.Add(new ACA_043_Info
+                            ListaHoras.Add(new ACA_071_Info
                             {
                                 IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                                 IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
@@ -244,9 +228,8 @@ namespace Core.Data.Reportes.Academico
                 ListaFinal = (from a in ListaAlumosPromedio
                               join b in ListaHoras
                               on new { a.IdEmpresa, a.IdAlumno } equals new { b.IdEmpresa, b.IdAlumno }
-                              select new ACA_043_Info
+                              select new ACA_071_Info
                               {
-                                  Num = 1,
                                   IdEmpresa = a.IdEmpresa,
                                   IdAlumno = a.IdAlumno,
                                   pe_nombreCompleto = a.pe_nombreCompleto,
@@ -269,18 +252,14 @@ namespace Core.Data.Reportes.Academico
                                   OrdenParalelo = a.OrdenParalelo,
                                   NombreCampoAccion = a.NombreCampoAccion,
                                   NombreTematica = a.NombreTematica,
-                                  NombreProfesor = a.NombreProfesor,
-                                  TelefonoProfesor = a.TelefonoProfesor,
-                                  CelularProfesor = a.CelularProfesor,
-                                  NombreRector = a.NombreRector,
-                                  TelefonoRector = a.TelefonoRector,
-                                  CelularRector = a.CelularRector,
                                   Promedio1 = a.Promedio1,
                                   Promedio2 = a.Promedio2,
                                   Promedio3 = a.Promedio3,
                                   PromedioFinal = a.PromedioFinal,
+                                  PromedioFinalString = (a.PromedioFinal==null ? null : Math.Round(Convert.ToDecimal(a.PromedioFinal), 2, MidpointRounding.AwayFromZero).ToString()),
                                   NumHoras = b.NumHoras,
-                                  NumCalificaciones = b.NumCalificaciones
+                                  NumCalificaciones = b.NumCalificaciones,
+                                  FechaActual = DateTime.Now.ToString("d' 'MMMM' del 'yyyy")
                               }).ToList();
 
                 return ListaFinal;

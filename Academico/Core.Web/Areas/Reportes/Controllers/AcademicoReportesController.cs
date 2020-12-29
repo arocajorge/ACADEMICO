@@ -3364,6 +3364,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             model.mostrarAnulados = false;
             ACA_049_Rpt report = new ACA_049_Rpt();
+            ACA_049_General_Rpt reportGeneral = new ACA_049_General_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3377,6 +3378,19 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
+
+            reportGeneral.p_IdEmpresa.Value = model.IdEmpresa;
+            reportGeneral.p_IdSede.Value = model.IdSede;
+            reportGeneral.p_IdAnio.Value = model.IdAnio;
+            reportGeneral.p_IdNivel.Value = model.IdNivel;
+            reportGeneral.p_IdJornada.Value = model.IdJornada;
+            reportGeneral.p_IdCurso.Value = model.IdCurso;
+            reportGeneral.p_IdParalelo.Value = model.IdParalelo;
+            reportGeneral.p_IdAlumno.Value = model.IdAlumno;
+            reportGeneral.p_MostrarRetirados.Value = model.mostrarAnulados;
+            reportGeneral.usuario = SessionFixed.IdUsuario;
+            reportGeneral.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportGeneral = reportGeneral;
 
             return View(model);
         }
@@ -3384,6 +3398,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult ACA_049(cl_filtros_Info model)
         {
             ACA_049_Rpt report = new ACA_049_Rpt();
+            ACA_049_General_Rpt reportGeneral = new ACA_049_General_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
@@ -3398,6 +3413,18 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
 
+            reportGeneral.p_IdEmpresa.Value = model.IdEmpresa;
+            reportGeneral.p_IdSede.Value = model.IdSede;
+            reportGeneral.p_IdAnio.Value = model.IdAnio;
+            reportGeneral.p_IdNivel.Value = model.IdNivel;
+            reportGeneral.p_IdJornada.Value = model.IdJornada;
+            reportGeneral.p_IdCurso.Value = model.IdCurso;
+            reportGeneral.p_IdParalelo.Value = model.IdParalelo;
+            reportGeneral.p_IdAlumno.Value = model.IdAlumno;
+            reportGeneral.p_MostrarRetirados.Value = model.mostrarAnulados;
+            reportGeneral.usuario = SessionFixed.IdUsuario;
+            reportGeneral.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportGeneral = reportGeneral;
             return View(model);
         }
         #endregion
@@ -4410,6 +4437,63 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_MostrarRetirados.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+
+            return View(model);
+        }
+        #endregion
+
+        #region ACA_071
+        public ActionResult ACA_071()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdNivel = 0;
+            model.IdJornada = 0;
+            model.IdCurso = 0;
+            model.IdParalelo = 0;
+            model.IdAlumno = 0;
+            model.mostrarAnulados = false;
+
+            ACA_071_Rpt report = new ACA_071_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_MostrarRetirado.Value = model.mostrarAnulados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_071(cl_filtros_Info model)
+        {
+            ACA_071_Rpt report = new ACA_071_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
+            report.p_MostrarRetirado.Value = model.mostrarAnulados;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 

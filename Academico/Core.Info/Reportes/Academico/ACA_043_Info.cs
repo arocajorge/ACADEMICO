@@ -41,5 +41,13 @@ namespace Core.Info.Reportes.Academico
         public string CorreoProfesor { get; set; }
         public string NombreCampoAccion { get; set; }
         public string NombreTematica { get; set; }
+
+        public Nullable<decimal> PromedioFinalConsulta { get; set; }
+        public Nullable<decimal> Promedio1 { get; set; }
+        public Nullable<decimal> Promedio2 { get; set; }
+        public Nullable<decimal> Promedio3 { get; set; }
+        public Nullable<decimal> PromedioFinal { get; set; }
+        public int NumCalificaciones { get; set; }
+        public int NumHoras { get; set; }
     }
 }

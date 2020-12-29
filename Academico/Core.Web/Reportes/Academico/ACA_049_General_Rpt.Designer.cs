@@ -1,6 +1,6 @@
 ﻿namespace Core.Web.Reportes.Academico
 {
-    partial class ACA_049_Rpt
+    partial class ACA_049_General_Rpt
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ACA_049_Rpt));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ACA_049_General_Rpt));
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -528,18 +528,18 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_049_Info);
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_049_General_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // PromedioMaterias_SubRpt
             // 
             this.PromedioMaterias_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 180.8333F);
             this.PromedioMaterias_SubRpt.Name = "PromedioMaterias_SubRpt";
-            this.PromedioMaterias_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_049_Detalle_Rpt();
+            this.PromedioMaterias_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_049_General_Detalle_Rpt();
             this.PromedioMaterias_SubRpt.SizeF = new System.Drawing.SizeF(727F, 20F);
             this.PromedioMaterias_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromedioMaterias_SubRpt_BeforePrint);
             // 
-            // ACA_049_Rpt
+            // ACA_049_General_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.TopMargin,
@@ -567,7 +567,7 @@
             this.p_IdAlumno,
             this.p_MostrarRetirados});
             this.Version = "20.1";
-            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_049_Rpt_BeforePrint);
+            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_049_General_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSolicitud)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrRichText1)).EndInit();

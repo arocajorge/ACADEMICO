@@ -391,17 +391,35 @@
     <Compile Include="Reportes\Academico\ACA_001_Rpt.Designer.cs">
       <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_General_Detalle_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_General_Detalle_Rpt.Designer.cs">
+      <DependentUpon>ACA_049_General_Detalle_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_General_Promedio_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_General_Promedio_Rpt.Designer.cs">
+      <DependentUpon>ACA_049_General_Promedio_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_General_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_049_General_Rpt.Designer.cs">
+      <DependentUpon>ACA_049_General_Rpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_071_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_071_Rpt.Designer.cs">
+      <DependentUpon>ACA_071_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_037_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\Academico\ACA_037_Rpt.Designer.cs">
       <DependentUpon>ACA_037_Rpt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reportes\Academico\ACA_043_Promedios_Rpt.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\Academico\ACA_043_Promedios_Rpt.Designer.cs">
-      <DependentUpon>ACA_043_Promedios_Rpt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reportes\Academico\ACA_048_Rendimiento.cs">
       <SubType>Component</SubType>
@@ -9676,6 +9694,7 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_068.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_069.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_070.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_071.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9777,11 +9796,20 @@
     <EmbeddedResource Include="Reportes\Academico\ACA_001_Rpt.resx">
       <DependentUpon>ACA_001_Rpt.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_049_General_Detalle_Rpt.resx">
+      <DependentUpon>ACA_049_General_Detalle_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_049_General_Promedio_Rpt.resx">
+      <DependentUpon>ACA_049_General_Promedio_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_049_General_Rpt.resx">
+      <DependentUpon>ACA_049_General_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_071_Rpt.resx">
+      <DependentUpon>ACA_071_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_037_Rpt.resx">
       <DependentUpon>ACA_037_Rpt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Academico\ACA_043_Promedios_Rpt.resx">
-      <DependentUpon>ACA_043_Promedios_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_048_Rendimiento.resx">
       <DependentUpon>ACA_048_Rendimiento.cs</DependentUpon>
