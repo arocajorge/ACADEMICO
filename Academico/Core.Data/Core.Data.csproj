@@ -111,6 +111,7 @@
     <Compile Include="Academico\aca_Menu_x_seg_usuario_Data.cs" />
     <Compile Include="Academico\aca_NivelAcademico_Data.cs" />
     <Compile Include="Academico\aca_Paralelo_Data.cs" />
+    <Compile Include="Academico\aca_parametro_Data.cs" />
     <Compile Include="Academico\aca_PermisoMatricula_Data.cs" />
     <Compile Include="Academico\aca_PlantillaTipo_Data.cs" />
     <Compile Include="Academico\aca_Plantilla_Data.cs" />
@@ -180,6 +181,9 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_MatriculaCondicional_Det.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_parametro.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_PlantillaTipo.cs">

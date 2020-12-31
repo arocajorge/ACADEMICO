@@ -241,6 +241,7 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Matricula1" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Profesor" />
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Tematica" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_parametro" Width="1.5" PointX="20.375" PointY="12.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

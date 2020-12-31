@@ -1,0 +1,54 @@
+﻿@model Core.Info.Academico.aca_parametro_Info
+@{
+    ViewBag.Title = "Parámetros de académico";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Index", "ParametrosAcademico", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa)
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="DiasTransaccionesAFuturo">Imágenes Alumno</label>
+                    @Html.TextBoxFor(q => q.RutaImagen_Alumno, new { @class = "form-control", @id = "RutaImagen_Alumno" })
+                    @Html.ValidationMessageFor(q => q.RutaImagen_Alumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="DiasTransaccionesAFuturo">Imágenes Profesor</label>
+                    @Html.TextBoxFor(q => q.RutaImagen_Profesor, new { @class = "form-control", @id = "RutaImagen_Profesor" })
+                    @Html.ValidationMessageFor(q => q.RutaImagen_Profesor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="DiasTransaccionesAFuturo">Imágenes Seguimiento</label>
+                    @Html.TextBoxFor(q => q.RutaImagen_Seguimiento, new { @class = "form-control", @id = "RutaImagen_Alumno" })
+                    @Html.ValidationMessageFor(q => q.RutaImagen_Seguimiento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}

@@ -1192,6 +1192,15 @@
           <Property Name="FechaAnulacion" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="aca_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="RutaImagen_Alumno" Type="varchar" MaxLength="500" />
+          <Property Name="RutaImagen_Profesor" Type="varchar" MaxLength="500" />
+          <Property Name="RutaImagen_Seguimiento" Type="varchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="aca_PermisoMatricula">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -4852,6 +4861,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <EntitySet Name="aca_Menu_x_seg_usuario" EntityType="Self.aca_Menu_x_seg_usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_NivelAcademico" EntityType="Self.aca_NivelAcademico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Paralelo" EntityType="Self.aca_Paralelo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="aca_parametro" EntityType="Self.aca_parametro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_PermisoMatricula" EntityType="Self.aca_PermisoMatricula" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Plantilla" EntityType="Self.aca_Plantilla" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Plantilla_Rubro" EntityType="Self.aca_Plantilla_Rubro" Schema="dbo" store:Type="Tables" />
@@ -7036,6 +7046,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <End Role="aca_Tematica" EntitySet="aca_Tematica" />
             <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
           </AssociationSet>
+          <EntitySet Name="aca_parametro" EntityType="ModelAcademico.aca_parametro" />
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
           <Key>
@@ -12005,6 +12016,15 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="aca_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="RutaImagen_Alumno" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RutaImagen_Profesor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RutaImagen_Seguimiento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14498,6 +14518,16 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="IdTematica" ColumnName="IdTematica" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_parametro">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_parametro">
+              <MappingFragment StoreEntitySet="aca_parametro">
+                <ScalarProperty Name="RutaImagen_Seguimiento" ColumnName="RutaImagen_Seguimiento" />
+                <ScalarProperty Name="RutaImagen_Profesor" ColumnName="RutaImagen_Profesor" />
+                <ScalarProperty Name="RutaImagen_Alumno" ColumnName="RutaImagen_Alumno" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -42,6 +42,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Documento_Bus bus_documento = new aca_Documento_Bus();
         tb_Religion_Bus bus_religion = new tb_Religion_Bus();
         tb_GrupoEtnico_Bus bus_grupoetnico = new tb_GrupoEtnico_Bus();
+        aca_parametro_Bus bus_parametro = new aca_parametro_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         public static UploadedFile file { get; set; }
@@ -648,8 +649,9 @@ namespace Core.Web.Areas.Academico.Controllers
 
             try
             {
-
-                model.alu_foto = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + model.IdEmpresa.ToString("000") + model.IdAlumno.ToString("000000") + ".jpg");
+                var info_parametro = bus_parametro.get_info(model.IdEmpresa);
+                var Ruta = (info_parametro == null ? "" : info_parametro.RutaImagen_Alumno);
+                model.alu_foto = System.IO.File.ReadAllBytes(Server.MapPath(Ruta) +model.IdAlumno.ToString() + ".jpg");
                 if (model.alu_foto == null)
                     model.alu_foto = new byte[0];
             }
@@ -854,7 +856,9 @@ namespace Core.Web.Areas.Academico.Controllers
             try
             {
 
-                model.alu_foto = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + model.IdEmpresa.ToString("000") + model.IdAlumno.ToString("000000") + ".jpg");
+                var info_parametro = bus_parametro.get_info(model.IdEmpresa);
+                var Ruta = (info_parametro == null ? "" : info_parametro.RutaImagen_Alumno);
+                model.alu_foto = System.IO.File.ReadAllBytes(Server.MapPath(Ruta) + model.IdAlumno.ToString() + ".jpg");
                 if (model.alu_foto == null)
                     model.alu_foto = new byte[0];
             }
@@ -1113,7 +1117,10 @@ namespace Core.Web.Areas.Academico.Controllers
             try
             {
 
-                model.alu_foto = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + model.IdEmpresa.ToString("000") + model.IdAlumno.ToString("000000") + ".jpg");
+                //model.alu_foto = System.IO.File.ReadAllBytes(Server.MapPath(UploadDirectory) + model.IdEmpresa.ToString("000") + model.IdAlumno.ToString("000000") + ".jpg");
+                var info_parametro = bus_parametro.get_info(model.IdEmpresa);
+                var Ruta = (info_parametro == null ? "" : info_parametro.RutaImagen_Alumno);
+                model.alu_foto = System.IO.File.ReadAllBytes(Server.MapPath(Ruta) + model.IdAlumno.ToString() + ".jpg");
             }
             catch (Exception)
             {
@@ -1315,7 +1322,7 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 if (IdAlumno == 0)
                     IdAlumno = bus_alumno.GetId(Convert.ToInt32(SessionFixed.IdEmpresa));
-                SessionFixed.NombreImagenAlumno = IdAlumno.ToString("000000");
+                SessionFixed.NombreImagenAlumno = IdAlumno.ToString();
                 return Json("", JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -1352,7 +1359,8 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             return Json(SessionFixed.NombreImagenAlumno, JsonRequestBehavior.AllowGet);
         }
-        public string UploadDirectory = "~/Content/imagenes/alumnos/";
+        //public string UploadDirectory = "~/Content/imagenes/alumnos/";
+        public string UploadDirectory = "";
         public ActionResult DragAndDropImageUpload([ModelBinder(typeof(DragAndDropSupportDemoBinder))]IEnumerable<UploadedFile> ucDragAndDrop)
         {
 
@@ -1360,9 +1368,11 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 //Extract Image File Name.
                 string fileName = System.IO.Path.GetFileName(ucDragAndDrop.FirstOrDefault().FileName);
-                var IdEmpresa = Convert.ToString(SessionFixed.IdEmpresa).PadLeft(3,'0');
                 //Set the Image File Path.
-                UploadDirectory = UploadDirectory + IdEmpresa + SessionFixed.NombreImagenAlumno + ".jpg";
+                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                var info_parametros = bus_parametro.get_info(IdEmpresa);
+                UploadDirectory = (info_parametros==null ? "" : info_parametros.RutaImagen_Alumno);
+                UploadDirectory = UploadDirectory + SessionFixed.NombreImagenAlumno + ".jpg";
                 imagen = ucDragAndDrop.FirstOrDefault().FileBytes;
                 //Save the Image File in Folder.
                 ucDragAndDrop.FirstOrDefault().SaveAs(Server.MapPath(UploadDirectory));
@@ -1372,7 +1382,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 return Json(ucDragAndDrop.FirstOrDefault().FileBytes, JsonRequestBehavior.AllowGet);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return View();
             }

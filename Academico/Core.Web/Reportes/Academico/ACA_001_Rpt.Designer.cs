@@ -168,7 +168,6 @@
             this.xrTableCell98 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow37 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell112 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.foto = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl_empresa = new DevExpress.XtraReports.UI.XRTableCell();
@@ -223,6 +222,7 @@
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.fotoAlumno = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -2158,18 +2158,6 @@
             this.xrTableCell112.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell112.Weight = 7.9948736781336D;
             // 
-            // foto
-            // 
-            this.foto.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
-            | DevExpress.XtraPrinting.BorderSide.Right) 
-            | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.foto.LocationFloat = new DevExpress.Utils.PointFloat(609F, 0.0001017253F);
-            this.foto.Name = "foto";
-            this.foto.SizeF = new System.Drawing.SizeF(100F, 115F);
-            this.foto.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.foto.StylePriority.UseBorders = false;
-            this.foto.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.foto_BeforePrint);
-            // 
             // xrTable1
             // 
             this.xrTable1.Font = new System.Drawing.Font("Verdana", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2786,10 +2774,10 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.fotoAlumno,
             this.lbl_imagen,
             this.xrTable3,
             this.xrTable2,
-            this.foto,
             this.xrTable1});
             this.ReportHeader.HeightF = 458.0001F;
             this.ReportHeader.Name = "ReportHeader";
@@ -2805,6 +2793,15 @@
             // 
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_001_Info);
             this.objectDataSource1.Name = "objectDataSource1";
+            // 
+            // fotoAlumno
+            // 
+            this.fotoAlumno.EditOptions.Enabled = true;
+            this.fotoAlumno.LocationFloat = new DevExpress.Utils.PointFloat(609F, 0F);
+            this.fotoAlumno.Name = "fotoAlumno";
+            this.fotoAlumno.SizeF = new System.Drawing.SizeF(100F, 115.0001F);
+            this.fotoAlumno.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
+            this.fotoAlumno.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.fotoAlumno_BeforePrint);
             // 
             // ACA_001_Rpt
             // 
@@ -2869,7 +2866,6 @@
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo2;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow3;
         private DevExpress.XtraReports.UI.XRTableCell lbl_nivel;
-        private DevExpress.XtraReports.UI.XRPictureBox foto;
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
         public DevExpress.XtraReports.Parameters.Parameter p_IdAnio;
         private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource1;
@@ -3039,5 +3035,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell112;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
         private DevExpress.XtraReports.UI.XRPictureBox lbl_imagen;
+        private DevExpress.XtraReports.UI.XRPictureBox fotoAlumno;
     }
 }

@@ -11,6 +11,8 @@ using Core.Bus.Academico;
 using Core.Info.Helps;
 using Core.Web.Helps;
 using DevExpress.Security.Resources;
+using DevExpress.XtraPrinting.Drawing;
+using System.Web;
 
 namespace Core.Web.Reportes.Academico
 {
@@ -69,13 +71,21 @@ namespace Core.Web.Reportes.Academico
             this.DataSource = lst_rpt;
         }
 
-        private void foto_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void fotoAlumno_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            var IdEmpresa = Convert.ToString(string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value)).PadLeft(3, '0');
-            var IdAlumno = Convert.ToString(string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value)).PadLeft(6, '0');
-            var NombreImagen = IdEmpresa + IdAlumno;
-            var URLString = @"/Content/imagenes/alumnos/" + NombreImagen + ".jpg";
-            foto.ImageUrl = URLString;
+            aca_parametro_Bus bus_parametro = new aca_parametro_Bus();
+            int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdAlumno.Value);
+            //var NombreImagen = IdEmpresa + IdAlumno;
+            //var URLString = "C:/Users/Wendy Pc/Documents/GitHub/ACADEMICO/Academico/Core.Web/Content/imagenes/alumnos/"+NombreImagen + ".png";
+            var info_parametros = bus_parametro.get_info(IdEmpresa);
+            var URLImagen = (info_parametros == null ? "" : info_parametros.RutaImagen_Alumno)+IdAlumno + ".jpg";
+            //var URLSitio = "C:/Users/Wendy Pc/Documents/GitHub/ACADEMICO/Academico/Core.Web";
+            var URL = "http://sistema.liceocristiano.edu.ec/lcg";
+            string[] subs = URLImagen.Split('~');
+            var URLString = URL+subs[1];
+            //var Imagen = new Bitmap(URLString);
+            fotoAlumno.ImageUrl = URLString.ToString();
         }
     }
 }

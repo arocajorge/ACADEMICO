@@ -263,6 +263,7 @@
     <Compile Include="Areas\Academico\Controllers\ParaleloController.cs" />
     <Compile Include="Areas\Academico\Controllers\ParaleloPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\ParametrizacionPlantillaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\ParametrosAcademicoController.cs" />
     <Compile Include="Areas\Academico\Controllers\ParcialController.cs" />
     <Compile Include="Areas\Academico\Controllers\PeriodoPorAnioLectivoController.cs" />
     <Compile Include="Areas\Academico\Controllers\PermitirMatriculaController.cs" />
@@ -9695,6 +9696,7 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_069.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_070.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_071.cshtml" />
+    <Content Include="Areas\Academico\Views\ParametrosAcademico\Index.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
