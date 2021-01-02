@@ -221,7 +221,7 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Combos bajo demanada Empleado
         public ActionResult Cmb_MatriculaEmpleado()
         {
-            int IdEmpresa_rol = (Request.Params["IdEmpresa_rol"] != null) ? int.Parse(Request.Params["IdEmpresa_rol"]) : -1;
+            int IdEmpresa_rol = (Request.Params["IdEmpresa_rol"] != null) ? int.Parse(Request.Params["IdEmpresa_rol"]) : 0;
             return PartialView("_CmbEmpleado", new aca_Matricula_Info { IdEmpresa_rol = IdEmpresa_rol });
         }
         #endregion
@@ -1129,13 +1129,16 @@ namespace Core.Web.Areas.Academico.Controllers
         public JsonResult GetDatosMecanismo(int IdEmpresa = 0, int IdMecanismo = 0, int IdMecanismoOtros = 0)
         {
             bool resultado = false;
+            var Empresa = 0;
             var info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismo);
             var info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
 
-            if (info_termino_pago!= null && info_termino_pago.AplicaDescuentoNomina == true)
+            if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
             {
                 resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
-            }else
+                Empresa = (info_mecanismo == null ? 0 : info_mecanismo.IdEmpresa_rol??0);
+            }
+            else
             {
                 if (IdMecanismoOtros!=0)
                 {
@@ -1144,11 +1147,12 @@ namespace Core.Web.Areas.Academico.Controllers
                     if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
                     {
                         resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
+                        Empresa = (info_mecanismo == null ? 0 : info_mecanismo.IdEmpresa_rol??0);
                     }
                 }
             }
 
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            return Json(new { MostrarEmpleado = resultado, IdEmpresa_rol = Empresa}, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -1178,7 +1182,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 IdCatalogo_FormaPago = "CRE",
                 Validar = "S",
-                IdEmpresa_rol= Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdEmpresa_rol= 0,
                 IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.MATRICULADO)
             };
             model.lst_matricula_curso = new List<aca_Matricula_Info>();

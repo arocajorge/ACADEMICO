@@ -58,7 +58,6 @@ namespace Core.Data.Base
         public virtual ICollection<aca_AlumnoRetiro> aca_AlumnoRetiro { get; set; }
         public virtual aca_AnioLectivo_Curso_Paralelo aca_AnioLectivo_Curso_Paralelo { get; set; }
         public virtual aca_Catalogo aca_Catalogo { get; set; }
-        public virtual aca_MecanismoDePago aca_MecanismoDePago { get; set; }
         public virtual aca_Plantilla aca_Plantilla { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Matricula_Rubro> aca_Matricula_Rubro { get; set; }
@@ -74,5 +73,6 @@ namespace Core.Data.Base
         public virtual aca_MatriculaConducta aca_MatriculaConducta { get; set; }
         public virtual aca_MatriculaCalificacionParticipacion aca_MatriculaCalificacionParticipacion { get; set; }
         public virtual aca_MatriculaCalificacionParticipacion aca_MatriculaCalificacionParticipacion1 { get; set; }
+        public virtual aca_MecanismoDePago aca_MecanismoDePago { get; set; }
     }
 }

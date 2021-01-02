@@ -59,6 +59,30 @@
                     @Html.ValidationMessageFor(q => q.IdTerminoPago, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div class="col-md-offset-2 col-md-6" id="EmpresaRol" hidden>
+                <div class="form-group">
+                    <label for="pa_IdTipoCbteCble_CxC">Empresa</label>
+                    @Html.DevExpress().ComboBoxFor(q => q.IdEmpresa_rol, settings =>
+                            {
+                                settings.Name = "IdEmpresa_rol";
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                settings.Properties.Columns.Add("IdEmpresa", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+                                settings.Properties.Columns.Add("em_nombre", "Tipo").Width = System.Web.UI.WebControls.Unit.Percentage(90);
+                                //Campo ID
+                                settings.Properties.ValueField = "IdEmpresa";
+                                settings.Properties.ValueType = typeof(int);
+                                settings.Properties.TextField = "em_nombre";
+                                //Boton para seleccionar ningun registro
+                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                            }).BindList(ViewBag.lst_empresas).GetHtml()
+                    @Html.ValidationMessageFor(q => q.IdEmpresa_rol, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="pa_IdTipoCbteCble_CxC">Tipo de nota de credito para descuento por rol</label>
@@ -79,14 +103,6 @@
                     @Html.ValidationMessageFor(q => q.IdTipoNotaDescuentoPorRol, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-offset-1 col-md-1">
-                <div class="form-group">
-                    <label for="IdSucursal">&nbsp;</label>
-                    <a type="button" class="btn btn-primary form-control" title="Nuevo" href="@Url.Action("Nuevo","MecanismoDePago",new { Area = "Academico", IdEmpresa = Model.IdEmpresa },null)">
-                        <i class="fa fa-plus"></i>
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -98,4 +114,40 @@
         @Scripts.Render("~/bundles/jqueryval")
     }
 }
+<script type="text/javascript">
+    $(function () {
+        MostrarEmpresaRol();
 
+        $("#IdTerminoPago").change(function () {
+            MostrarEmpresaRol();
+        });
+    })
+
+    function MostrarEmpresaRol() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTerminoPago: $("#IdTerminoPago").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetTermimoPago", "MecanismoDePago", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if(data == 1){
+                    $("#EmpresaRol").show();
+                }
+                else {
+                    $("#EmpresaRol").hide();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    };
+</script>

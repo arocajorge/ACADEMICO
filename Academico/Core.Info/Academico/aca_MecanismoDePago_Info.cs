@@ -17,6 +17,8 @@ namespace Core.Info.Academico
         public string NombreMecanismo { get; set; }
         [Required(ErrorMessage = "El campo termino de pago es obligatorio")]
         public string IdTerminoPago { get; set; }
+        [Required(ErrorMessage = "El campo empresa rol es obligatorio")]
+        public Nullable<int> IdEmpresa_rol { get; set; }
         public Nullable<bool> Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -31,6 +33,7 @@ namespace Core.Info.Academico
         public string nom_TerminoPago { get; set; }
         public string No_Descripcion { get; set; }
         public int? IdTipoNotaDescuentoPorRol { get; set; }
+        public bool AplicaDescuentoNomina { get; set; }
         #endregion
     }
 }

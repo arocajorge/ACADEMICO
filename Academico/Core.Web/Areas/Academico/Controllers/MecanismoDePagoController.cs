@@ -1,5 +1,6 @@
 ﻿using Core.Bus.Academico;
 using Core.Bus.Facturacion;
+using Core.Bus.General;
 using Core.Info.Academico;
 using Core.Web.Helps;
 using System;
@@ -21,6 +22,7 @@ namespace Core.Web.Areas.Academico.Controllers
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         fa_TipoNota_Bus bus_tiponota = new fa_TipoNota_Bus();
+        tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         #endregion
 
         #region Index
@@ -71,8 +73,22 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_termino = bus_termino.get_list(false);
             ViewBag.lst_termino = lst_termino;
 
+            var lst_empresas = bus_empresa.get_list(false);
+            ViewBag.lst_empresas = lst_empresas;
+
             var lst_tipo_nota_credito = bus_tiponota.get_list(IdEmpresa, "C", false);
             ViewBag.lst_tipo_nota_credito = lst_tipo_nota_credito;
+        }
+        #endregion
+
+        #region JSON
+        public JsonResult GetTermimoPago(int IdEmpresa=0, string IdTerminoPago = "")
+        {
+            int MuestraEmpresaRol = 0;
+            var info_TerminoPago = bus_termino.get_info(IdTerminoPago);
+            MuestraEmpresaRol = (info_TerminoPago == null ? 0 : (info_TerminoPago.AplicaDescuentoNomina==null ? 0 : (info_TerminoPago.AplicaDescuentoNomina==true ? 1 :0)));
+
+            return Json(MuestraEmpresaRol, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

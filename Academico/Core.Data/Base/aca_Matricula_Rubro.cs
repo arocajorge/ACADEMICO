@@ -39,9 +39,9 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaFacturacion { get; set; }
     
         public virtual aca_AnioLectivo_Curso_Paralelo aca_AnioLectivo_Curso_Paralelo { get; set; }
-        public virtual aca_MecanismoDePago aca_MecanismoDePago { get; set; }
         public virtual aca_Plantilla aca_Plantilla { get; set; }
         public virtual aca_Rubro aca_Rubro { get; set; }
         public virtual aca_Matricula aca_Matricula { get; set; }
+        public virtual aca_MecanismoDePago aca_MecanismoDePago { get; set; }
     }
 }

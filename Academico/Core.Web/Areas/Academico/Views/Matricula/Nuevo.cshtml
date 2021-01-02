@@ -75,6 +75,8 @@
     @Html.HiddenFor(q => q.IdCatalogo_FormaPago, new { @id = "IdCatalogo_FormaPago" })
     @Html.HiddenFor(q => q.Validar, new { @id = "Validar" })
     @Html.HiddenFor(q => q.IdCatalogoESTMAT, new { @id = "IdCatalogoESTMAT" })
+    @Html.HiddenFor(q => q.IdEmpresa_rol, new { @id = "IdEmpresa_rol" })
+    @Html.HiddenFor(q => q.AplicaDescuentoNomina, new { @id = "AplicaDescuentoNomina" })
     if (ViewBag.mensaje != null)
     {
         <div class="row">
@@ -295,13 +297,13 @@
     </div>
     <div class="row" id="Empleado" hidden>
         <div class="col-md-12">
-            <div class="col-md-4">
+            @*<div class="col-md-4">
                 <div class="form-group">
                     <label for="IdEmpresa">Empresa</label>
-                    @Html.DropDownListFor(q => q.IdEmpresa_rol, new SelectList(ViewBag.lst_empresa, "IdEmpresa", "em_nombre"), new { @class = "form-control", @id = "IdEmpresa_rol" })
+                    @Html.DropDownListFor(q => q.IdEmpresa_rol, new SelectList(ViewBag.lst_empresa, "IdEmpresa", "em_nombre"), new { @class = "form-control", @id = "IdEmpresa_rol", @readonly= "readonly" })
                     @Html.ValidationMessageFor(q => q.IdEmpresa_rol, "", new { @class = "text-danger" })
                 </div>
-            </div>
+            </div>*@
             <div class="col-md-6">
                 <label for="IdEmpresa">Empleado</label>
                 @Html.Partial("_CmbEmpleado", Model)
@@ -394,9 +396,9 @@
             VerDatosEmpleado();
         });
 
-        $("#IdEmpresa_rol").change(function () {
-            IdEmpleado.PerformCallback();
-        });
+        //$("#IdEmpresa_rol").change(function () {
+        //    IdEmpleado.PerformCallback();
+        //});
     });
 
     function bloquear() {
@@ -505,8 +507,11 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                if(data == true){
+                if(data.MostrarEmpleado == true){
                     $("#Empleado").show();
+                    $("#IdEmpresa_rol").val(data.IdEmpresa_rol)
+
+                    IdEmpleado.PerformCallback();
                 }
                 else{
                     $("#Empleado").hide();

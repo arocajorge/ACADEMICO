@@ -25,6 +25,7 @@ namespace Core.Data.Academico
                         NombreMecanismo = q.NombreMecanismo,
                         IdTerminoPago = q.IdTerminoPago,
                         nom_TerminoPago = q.nom_TerminoPago,
+                        //IdEmpresa_rol = q.IdEmpresa_rol,
                         Estado = q.Estado,
                         No_Descripcion = q.No_Descripcion
                     }).ToList();
@@ -55,7 +56,8 @@ namespace Core.Data.Academico
                         IdMecanismo = Entity.IdMecanismo,
                         NombreMecanismo = Entity.NombreMecanismo,
                         IdTerminoPago = Entity.IdTerminoPago,
-                        IdTipoNotaDescuentoPorRol = Entity.IdTipoNotaDescuentoPorRol
+                        IdTipoNotaDescuentoPorRol = Entity.IdTipoNotaDescuentoPorRol,
+                        IdEmpresa_rol = Entity.IdEmpresa_rol,
                     };
                 }
 
@@ -86,7 +88,8 @@ namespace Core.Data.Academico
                         IdMecanismo = Entity.IdMecanismo,
                         NombreMecanismo = Entity.NombreMecanismo,
                         IdTerminoPago = Entity.IdTerminoPago,
-                        IdTipoNotaDescuentoPorRol = Entity.IdTipoNotaDescuentoPorRol
+                        IdTipoNotaDescuentoPorRol = Entity.IdTipoNotaDescuentoPorRol,
+                        IdEmpresa_rol = Entity.IdEmpresa_rol
                     };
                 }
 
@@ -134,6 +137,7 @@ namespace Core.Data.Academico
                         NombreMecanismo = info.NombreMecanismo,
                         IdTerminoPago = info.IdTerminoPago,
                         IdTipoNotaDescuentoPorRol = info.IdTipoNotaDescuentoPorRol,
+                        IdEmpresa_rol = info.IdEmpresa_rol,
                         Estado = true,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now
@@ -164,6 +168,7 @@ namespace Core.Data.Academico
                     Entity.NombreMecanismo = info.NombreMecanismo;
                     Entity.IdTerminoPago = info.IdTerminoPago;
                     Entity.IdTipoNotaDescuentoPorRol = info.IdTipoNotaDescuentoPorRol;
+                    Entity.IdEmpresa_rol = info.IdEmpresa_rol;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
 

@@ -100,6 +100,8 @@ namespace Core.Info.Academico
 
         public string ObservacionCambioPlantilla { get; set; }
         public string ObservacionCambioCurso { get; set; }
+
+        public bool AplicaDescuentoNomina { get; set; }
         #endregion
     }
 }
