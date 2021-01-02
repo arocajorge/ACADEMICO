@@ -1,0 +1,118 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- BEGIN: Mobile Menu -->
+<div class="mobile-menu md:hidden">
+    <div class="mobile-menu-bar">
+        <a href="" class="flex mr-auto">
+            <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="dist/images/logo.svg">
+        </a>
+        <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
+    </div>
+    <ul class="border-t border-theme-24 py-5 hidden">
+        <li>
+            <a href="@Url.Action("Index","Admision")" class="menu">
+                <div class="menu__icon"> <i data-feather="send"></i> </div>
+                <div class="menu__title"> Enviar admisión </div>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index","Consulta")" class="menu menu--active">
+                <div class="menu__icon"> <i data-feather="search"></i> </div>
+                <div class="menu__title"> Consultar estado de admisión </div>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- END: Mobile Menu -->
+<div class="flex">
+    <!-- BEGIN: Simple Menu -->
+    <nav class="side-nav side-nav--simple">
+        <a href="" class="intro-x flex items-center pl-5 pt-4">
+            <img alt="Sistema de admisión académico" class="w-6" src="dist/images/logo.svg">
+        </a>
+        <div class="side-nav__devider my-6"></div>
+        <ul>
+            <li>
+                <a href="@Url.Action("Index","Admision")" class="side-menu">
+                    <div class="side-menu__icon"> <i data-feather="send"></i> </div>
+                    <div class="side-menu__title"> Enviar admisión </div>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index","Consulta")" class="side-menu side-menu--active" > 
+                    <div class="side-menu__icon"> <i data-feather="search"></i> </div>
+                    <div class="side-menu__title"> Consultar estado de admisión </div>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- END: Simple Menu -->
+    <!-- BEGIN: Content -->
+    <div class="content">
+        <!-- BEGIN: Top Bar -->
+        <div class="top-bar">
+            <!-- BEGIN: Breadcrumb -->
+            <div class="-intro-x breadcrumb mr-auto hidden sm:flex"> <a href="" class="">Liceo cristiano de guayaquil</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="" class="breadcrumb--active">Consultar admisión</a> </div>
+            <!-- END: Breadcrumb -->
+        </div>
+        <!-- END: Top Bar -->
+        <div class="flex items-center mt-8">
+            <h2 class="intro-y text-lg font-medium mr-auto">
+                Wizard Layout
+            </h2>
+        </div>
+        <!-- BEGIN: Wizard Layout -->
+        <div class="intro-y box py-10 sm:py-20 mt-5">
+            <div class="flex justify-center">
+                <button class="intro-y w-10 h-10 rounded-full button text-white bg-theme-1 mx-2">1</button>
+                <button class="intro-y w-10 h-10 rounded-full button bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">2</button>
+                <button class="intro-y w-10 h-10 rounded-full button bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">3</button>
+            </div>
+            <div class="px-5 mt-10">
+                <div class="font-medium text-center text-lg">Setup Your Account</div>
+                <div class="text-gray-600 text-center mt-2">To start off, please enter your username, email address and password.</div>
+            </div>
+            <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5">
+                <div class="font-medium text-base">Profile Settings</div>
+                <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">From</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="example@gmail.com">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">To</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="example@gmail.com">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Subject</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="Important Meeting">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Has the Words</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="Job, Work, Documentation">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Doesn't Have</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="Job, Work, Documentation">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Size</div>
+                        <select class="input w-full border flex-1">
+                            <option>10</option>
+                            <option>25</option>
+                            <option>35</option>
+                            <option>50</option>
+                        </select>
+                    </div>
+                    <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                        <button class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300">Previous</button>
+                        <button class="button w-24 justify-center block bg-theme-1 text-white ml-2">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: Wizard Layout -->
+    </div>
+    <!-- END: Content -->
+</div>
