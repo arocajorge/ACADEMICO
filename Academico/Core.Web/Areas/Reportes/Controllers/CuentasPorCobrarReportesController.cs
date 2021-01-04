@@ -592,11 +592,19 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             model.IdAlumno = IdAlumno;
+            var info_anio = new aca_AnioLectivo_Info();
+            info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
 
             CXC_011_Rpt report = new CXC_011_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
             report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -611,8 +619,13 @@ namespace Core.Web.Areas.Reportes.Controllers
             CXC_011_Rpt report = new CXC_011_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -661,10 +674,19 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             model.IdAlumno = IdAlumno;
+            var info_anio = new aca_AnioLectivo_Info();
+            info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
 
             CXC_013_Rpt report = new CXC_013_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -680,6 +702,12 @@ namespace Core.Web.Areas.Reportes.Controllers
             CXC_013_Rpt report = new CXC_013_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -698,10 +726,19 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             model.IdAlumno = IdAlumno;
+            var info_anio = new aca_AnioLectivo_Info();
+            info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
 
             CXC_014_Rpt report = new CXC_014_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            //report.p_IdSede.Value = model.IdSede;
+            //report.p_IdAnio.Value = model.IdAnio;
+            //report.p_IdNivel.Value = model.IdNivel;
+            //report.p_IdJornada.Value = model.IdJornada;
+            //report.p_IdCurso.Value = model.IdCurso;
+            //report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -717,6 +754,12 @@ namespace Core.Web.Areas.Reportes.Controllers
             CXC_014_Rpt report = new CXC_014_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            //report.p_IdSede.Value = model.IdSede;
+            //report.p_IdAnio.Value = model.IdAnio;
+            //report.p_IdNivel.Value = model.IdNivel;
+            //report.p_IdJornada.Value = model.IdJornada;
+            //report.p_IdCurso.Value = model.IdCurso;
+            //report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -735,10 +778,19 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             model.IdAlumno = IdAlumno;
+            var info_anio = new aca_AnioLectivo_Info();
+            info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
 
             CXC_015_Rpt report = new CXC_015_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            //report.p_IdSede.Value = model.IdSede;
+            //report.p_IdAnio.Value = model.IdAnio;
+            //report.p_IdNivel.Value = model.IdNivel;
+            //report.p_IdJornada.Value = model.IdJornada;
+            //report.p_IdCurso.Value = model.IdCurso;
+            //report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -754,6 +806,12 @@ namespace Core.Web.Areas.Reportes.Controllers
             CXC_015_Rpt report = new CXC_015_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
+            //report.p_IdSede.Value = model.IdSede;
+            //report.p_IdAnio.Value = model.IdAnio;
+            //report.p_IdNivel.Value = model.IdNivel;
+            //report.p_IdJornada.Value = model.IdJornada;
+            //report.p_IdCurso.Value = model.IdCurso;
+            //report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;

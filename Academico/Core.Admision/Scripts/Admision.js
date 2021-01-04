@@ -17,11 +17,20 @@ function AnteriorPadre() {
     $("#BtnAspirante").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
 }
 function SiguienteMadre() {
-
+    $("#DatosMadre").hide();
+    $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+    $("#DatosRepresentante").show();
+    $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
 }
 function AnteriorMadre() {
     $("#DatosMadre").hide();
     $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
     $("#DatosPadre").show();
     $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+}
+function AnteriorRepresentante() {
+    $("#DatosRepresentante").hide();
+    $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+    $("#DatosMadre").show();
+    $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
 }

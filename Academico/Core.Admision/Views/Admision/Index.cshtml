@@ -1,4 +1,5 @@
-﻿@{ 
+﻿@model Core.Admision.Info.aca_Admision_Info
+@{ 
     Layout ="~/Views/Shared/_Layout.cshtml";
 } 
 <script src="~/Scripts/Admision.js"></script>
@@ -80,14 +81,18 @@
                     <button class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnMadre">3</button>
                     <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Datos de la madre</div>
                 </div>
+                <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
+                    <button class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnRepresentante">4</button>
+                    <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Datos del representante</div>
+                </div>
                 <div class="wizard__line hidden lg:block w-2/3 bg-gray-200 dark:bg-dark-1 absolute mt-5"></div>
             </div>
             <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosAspirante">
                 <div class="font-medium text-base">Datos del aspirante</div>
                 <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                     <div class="intro-y col-span-12 sm:col-span-6">
-                        <div class="mb-2">From</div>
-                        <input type="text" class="input w-full border flex-1" placeholder="example@gmail.com">
+                        @*@Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza" })
+                        @Html.ValidationMessageFor(q => q.pe_Naturaleza, "", new { @class = "text-danger" })*@
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
                         <div class="mb-2">To</div>
@@ -123,16 +128,17 @@
             <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosPadre" hidden>
                 <div class="font-medium text-base">Datos del padre</div>
                 <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                    <div class="intro-y col-span-12 sm:col-span-6">
-                        <div class="mb-2">From</div>
+                    <div class="intro-y col-span-12 sm:col-span-3">
+                        <div class="mb-2">Naturaleza</div>
+                        @*@Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza" })
+                        @Html.ValidationMessageFor(q => q.pe_Naturaleza, "", new { @class = "text-danger" })*@
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-3">
+                        <div class="mb-2">Tipo documento</div>
                         <input type="text" class="input w-full border flex-1" placeholder="example@gmail.com">
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
-                        <div class="mb-2">To</div>
-                        <input type="text" class="input w-full border flex-1" placeholder="example@gmail.com">
-                    </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
-                        <div class="mb-2">Subject</div>
+                    <div class="intro-y col-span-12 sm:col-span-3">
+                        <div class="mb-2">Número documento</div>
                         <input type="text" class="input w-full border flex-1" placeholder="Important Meeting">
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
@@ -192,7 +198,44 @@
                     </div>
                     <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
                         <button class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorMadre();">Anterior</button>
-                        @*<button class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteMadre();">Siguiente</button>*@
+                        <button class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteMadre();">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+            <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosRepresentante" hidden>
+                <div class="font-medium text-base">Datos del representante</div>
+                <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">From</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="example@gmail.com">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">To</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="example@gmail.com">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Subject</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="Important Meeting">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Has the Words</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="Job, Work, Documentation">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Doesn't Have</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="Job, Work, Documentation">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Size</div>
+                        <select class="input w-full border flex-1">
+                            <option>10</option>
+                            <option>25</option>
+                            <option>35</option>
+                            <option>50</option>
+                        </select>
+                    </div>
+                    <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                        <button class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorRepresentante();">Anterior</button>
                     </div>
                 </div>
             </div>

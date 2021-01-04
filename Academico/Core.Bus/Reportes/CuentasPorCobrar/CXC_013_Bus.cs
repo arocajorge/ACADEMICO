@@ -11,11 +11,11 @@ namespace Core.Bus.Reportes.CuentasPorCobrar
     public class CXC_013_Bus
     {
         CXC_013_Data odata = new CXC_013_Data();
-        public List<CXC_013_Info> get_list(int IdEmpresa, decimal IdAlumno)
+        public List<CXC_013_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo, decimal IdAlumno)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdAlumno);
+                return odata.get_list(IdEmpresa, IdAnio, IdSede, IdJornada, IdNivel, IdCurso, IdParalelo, IdAlumno);
             }
             catch (Exception)
             {

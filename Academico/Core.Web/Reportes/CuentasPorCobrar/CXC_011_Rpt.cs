@@ -29,12 +29,17 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             lbl_usuario.Text = usuario;
             int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             int IdSede = p_IdSede.Value == null ? 0 : Convert.ToInt32(p_IdSede.Value);
+            int IdAnio = p_IdAnio.Value == null ? 0 : Convert.ToInt32(p_IdAnio.Value);
+            int IdJornada = p_IdJornada.Value == null ? 0 : Convert.ToInt32(p_IdJornada.Value);
+            int IdNivel = p_IdNivel.Value == null ? 0 : Convert.ToInt32(p_IdNivel.Value);
+            int IdCurso = p_IdCurso.Value == null ? 0 : Convert.ToInt32(p_IdCurso.Value);
+            int IdParalelo = p_IdParalelo.Value == null ? 0 : Convert.ToInt32(p_IdParalelo.Value);
             decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
 
             CXC_011_Bus bus_rpt = new CXC_011_Bus();
             List<CXC_011_Info> lst_rpt = new List<CXC_011_Info>();
 
-            lst_rpt.AddRange(bus_rpt.get_list(IdEmpresa, IdAlumno));
+            lst_rpt.AddRange(bus_rpt.get_list(IdEmpresa,IdAnio, IdSede, IdJornada, IdNivel,IdCurso, IdParalelo, IdAlumno));
             this.DataSource = lst_rpt;
 
             if (lst_rpt.Count > 0)

@@ -165,7 +165,7 @@ namespace Core.Web.Areas.Caja.Controllers
         [HttpPost]
         public ActionResult Nuevo(cp_conciliacion_Caja_Info model)
         {
-
+            model.IdUsuarioCreacion = SessionFixed.IdUsuario;
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -283,7 +283,7 @@ namespace Core.Web.Areas.Caja.Controllers
         [HttpPost]
         public ActionResult Modificar(cp_conciliacion_Caja_Info model)
         {
-
+            model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;

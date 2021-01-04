@@ -15,6 +15,15 @@ namespace Core.Data.Reportes.CuentasPorCobrar
             try
             {
                 List<CXC_015_Info> Lista = new List<CXC_015_Info>();
+                //int IdNivelIni = IdNivel;
+                //int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
+
+                //int IdCursoIni = IdCurso;
+                //int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
+
+                //int IdParaleloIni = IdParalelo;
+                //int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
+
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     #region Query
@@ -114,7 +123,17 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                             IdSucursal = Convert.ToInt32(reader["IdSucursal"]),
                             Representante = Convert.ToString(reader["Representante"]),
                             ValorProntoPago = Convert.ToDecimal(reader["ValorProntoPago"]),
-                            vt_tipoDoc = Convert.ToString(reader["vt_tipoDoc"])
+                            vt_tipoDoc = Convert.ToString(reader["vt_tipoDoc"]),
+                            //IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            //IdSede = Convert.ToInt32(reader["IdSede"]),
+                            //IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            //IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            //IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            //IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            //OrdenNivel = string.IsNullOrEmpty(reader["OrdenNivel"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenNivel"]),
+                            //OrdenJornada = string.IsNullOrEmpty(reader["OrdenJornada"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenJornada"]),
+                            //OrdenCurso = string.IsNullOrEmpty(reader["OrdenCurso"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenCurso"]),
+                            //OrdenParalelo = string.IsNullOrEmpty(reader["OrdenParalelo"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenParalelo"])
                         });
                     }
                     var FechaHasta = Lista.Where(q => q.FechaProntoPago > DateTime.Now.Date).Min(q => q.FechaProntoPago);

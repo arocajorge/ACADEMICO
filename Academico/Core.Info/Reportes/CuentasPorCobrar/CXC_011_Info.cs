@@ -29,6 +29,18 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public Nullable<decimal> ValorProntoPago { get; set; }
         public Nullable<System.DateTime> FechaProntoPago { get; set; }
 
+        public int IdAnio { get; set; }
+        public int IdSede { get; set; }
+        public int IdNivel { get; set; }
+        public int IdJornada { get; set; }
+        public int IdCurso { get; set; }
+        public int IdParalelo { get; set; }
+        public Nullable<int> OrdenJornada { get; set; }
+        public Nullable<int> OrdenNivel { get; set; }
+        public Nullable<int> OrdenParalelo { get; set; }
+        public Nullable<int> OrdenCurso { get; set; }
+
+
         #region Campos que no existen en la vista
         public string ValorProntoPagoHasta { get; set; }
         public string ValorHasta { get; set; }
