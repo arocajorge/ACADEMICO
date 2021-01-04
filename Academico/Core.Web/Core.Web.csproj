@@ -281,6 +281,7 @@
     <Compile Include="Areas\Academico\Controllers\MateriaAreaController.cs" />
     <Compile Include="Areas\Academico\Controllers\TematicaController.cs" />
     <Compile Include="Areas\Banco\BancoAreaRegistration.cs" />
+    <Compile Include="Areas\Banco\Controllers\ActualizarArchivoController.cs" />
     <Compile Include="Areas\Banco\Controllers\ArchivoBancarioController.cs" />
     <Compile Include="Areas\Banco\Controllers\ArchivoRecaudacionController.cs" />
     <Compile Include="Areas\Banco\Controllers\BancoCuentaController.cs" />
@@ -9742,6 +9743,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
     <Folder Include="Areas\Banco\Models\" />
+    <Folder Include="Areas\Banco\Views\ActualizarArchivo\" />
     <Folder Include="Areas\Banco\Views\ArchivoBancario\" />
     <Folder Include="Areas\Caja\Models\" />
     <Folder Include="Areas\Contabilidad\Models\" />
