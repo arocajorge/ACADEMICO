@@ -153,7 +153,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Info\aca_Admision_Info.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -291,6 +290,16 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Bus\Core.Bus.csproj">
+      <Project>{ADBB9BEF-8266-4A4C-9C3D-B52873B89450}</Project>
+      <Name>Core.Bus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Info\Core.Info.csproj">
+      <Project>{01B5C318-17E8-4674-847E-C8FDA6DF7978}</Project>
+      <Name>Core.Info</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

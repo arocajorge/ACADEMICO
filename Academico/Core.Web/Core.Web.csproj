@@ -9698,6 +9698,12 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_070.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_071.cshtml" />
     <Content Include="Areas\Academico\Views\ParametrosAcademico\Index.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbSede.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbNivel.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbJornada.cshtml" />
+    <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbCurso.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

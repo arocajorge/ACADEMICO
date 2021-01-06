@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Academico\aca_Admision_Info.cs" />
     <Compile Include="Academico\aca_AlumnoDocumento_Info.cs" />
     <Compile Include="Academico\aca_AlumnoRetiro_Info.cs" />
     <Compile Include="Academico\aca_Alumno_Info.cs" />

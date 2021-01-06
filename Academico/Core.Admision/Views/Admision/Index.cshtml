@@ -1,5 +1,5 @@
-﻿@model Core.Admision.Info.aca_Admision_Info
-@{ 
+﻿@model Core.Info.Academico.aca_Admision_Info
+@{
     Layout ="~/Views/Shared/_Layout.cshtml";
 } 
 <script src="~/Scripts/Admision.js"></script>
@@ -85,45 +85,115 @@
                     <button class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnRepresentante">4</button>
                     <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Datos del representante</div>
                 </div>
+                <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
+                    <button class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnSocioEconomico">5</button>
+                    <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Datos socioeconómicos</div>
+                </div>
                 <div class="wizard__line hidden lg:block w-2/3 bg-gray-200 dark:bg-dark-1 absolute mt-5"></div>
             </div>
             <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosAspirante">
                 <div class="font-medium text-base">Datos del aspirante</div>
                 <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                    <div class="intro-y col-span-12 sm:col-span-6">
-                        @*@Html.DropDownListFor(q => q.pe_Naturaleza, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "pe_Naturaleza" })
-                        @Html.ValidationMessageFor(q => q.pe_Naturaleza, "", new { @class = "text-danger" })*@
+                    <div class="intro-y col-span-12 sm:col-span-2">
+                        <div class="mb-2">Naturaleza*</div>
+                        @Html.DropDownListFor(q => q.Naturaleza_Aspirante, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "Naturaleza_Aspirante" })
+                        @Html.ValidationMessageFor(q => q.Naturaleza_Aspirante, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-2">
+                        <div class="mb-2">Tipo de documento*</div>
+                        @Html.DropDownListFor(q => q.IdTipoDocumento_Aspirante, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento_Aspirante" })
+                        @Html.ValidationMessageFor(q => q.IdTipoDocumento_Aspirante, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-2">
+                        <div class="mb-2">Cédula de identidad*</div>
+                        <input type="text" id="CedulaRuc_Aspirante" class="input w-full border flex-1" placeholder="Important Meeting">
+                        @Html.ValidationMessageFor(q => q.CedulaRuc_Aspirante, "", new { @class = "text-danger" })
+                        <label id="error_documento" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
-                        <div class="mb-2">To</div>
-                        <input type="text" class="input w-full border flex-1" placeholder="example@gmail.com">
+
+                    </div>
+
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Nombres*</div>
+                        <input type="text" id="CedulaRuc_Aspirante" class="input w-full border flex-1" placeholder="Nombres del aspirante">
+                        @Html.ValidationMessageFor(q => q.CedulaRuc_Aspirante, "", new { @class = "text-danger" })
                     </div>
                     <div class="intro-y col-span-12 sm:col-span-6">
-                        <div class="mb-2">Subject</div>
-                        <input type="text" class="input w-full border flex-1" placeholder="Important Meeting">
+                        <div class="mb-2">Apellidos*</div>
+                        <input type="text" id="Apellidos_Aspirante" class="input w-full border flex-1" placeholder="Apellidos del aspirante">
+                        @Html.ValidationMessageFor(q => q.Apellidos_Aspirante, "", new { @class = "text-danger" })
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
-                        <div class="mb-2">Has the Words</div>
-                        <input type="text" class="input w-full border flex-1" placeholder="Job, Work, Documentation">
+                    <div class="intro-y col-span-12 sm:col-span-12">
+                        <div class="mb-2">Nombres completos*</div>
+                        <input type="text" id="NombreCompleto_Aspirante" class="input w-full border flex-1" placeholder="Nombres completos del aspirante">
+                        @Html.ValidationMessageFor(q => q.NombreCompleto_Aspirante, "", new { @class = "text-danger" })
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
-                        <div class="mb-2">Doesn't Have</div>
-                        <input type="text" class="input w-full border flex-1" placeholder="Job, Work, Documentation">
+
+                    <div class="font-medium text-base">Datos generales</div>
+                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <div class="mb-2">Lugar de nacimiento</div>
+                            <input type="text" id="LugarNacimiento_Aspirante" class="input w-full border flex-1" placeholder="Important Meeting">
+                            @Html.ValidationMessageFor(q => q.LugarNacimiento_Aspirante, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-2">
+                            <div class="mb-2">Fecha de nacimiento</div>
+                            <i data-feather="calendar" class="w-4 h-4"></i><input type="text" id="FechaNacimiento_Aspirante" class="datepicker input pl-12 border" data-single-mode="true"> 
+                            @Html.ValidationMessageFor(q => q.FechaNacimiento_Aspirante, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-2">
+                            <div class="mb-2">Sexo</div>
+                            @Html.DropDownListFor(q => q.Sexo_Aspirante, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "Sexo_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.Sexo_Aspirante, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-2">
+                            <div class="mb-2">Tipo de sangre</div>
+                            @Html.DropDownListFor(q => q.CodCatalogoSangre_Aspirante, new SelectList(ViewBag.lst_tipo_sangre, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogoSangre_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.CodCatalogoSangre_Aspirante, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-2">
+                            <div class="mb-2"></div>
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Grupo Etnico</div>
+                            @Html.DropDownListFor(q => q.IdGrupoEtnico_Aspirante, new SelectList(ViewBag.lst_grupoetnico, "IdGrupoEtnico", "NomGrupoEtnico"), new { @class = "form-control", @id = "IdGrupoEtnico_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Aspirante, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Religión</div>
+                            @Html.DropDownListFor(q => q.IdReligion_Aspirante, new SelectList(ViewBag.lst_religion, "IdReligion", "NomReligion"), new { @class = "form-control", @id = "IdReligion_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.IdReligion_Aspirante, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Religión</div>
+                            <input type="checkbox" id="AsisteCentroCristiano_Aspirante" class="input input--switch border">
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <div class="mb-2">Teléfono</div>
+                            <input type="text" id="Telefono_Aspirante" class="input w-full border flex-1" placeholder="Telefono aspirante">
+                            @Html.ValidationMessageFor(q => q.Telefono_Aspirante, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <div class="mb-2">Celular</div>
+                            <input type="text" id="Celular_Aspirante" class="input w-full border flex-1" placeholder="Celular aspirante">
+                            @Html.ValidationMessageFor(q => q.Celular_Aspirante, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-4">
+                            <div class="mb-2">Correo</div>
+                            <input type="email" id="Correo_Aspirante" class="input w-full border flex-1" placeholder="Correo aspirante">
+                            @Html.ValidationMessageFor(q => q.Correo_Aspirante, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-12">
+                            <div class="mb-2">Direccion</div>
+                            <input type="text" id="Direccion_Aspirante" class="input w-full border flex-1" placeholder="Direccion aspirante">
+                            @Html.ValidationMessageFor(q => q.Direccion_Aspirante, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                            <button class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteAspirante();">Siguiente</button>
+                        </div>
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
-                        <div class="mb-2">Size</div>
-                        <select class="input w-full border flex-1">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>35</option>
-                            <option>50</option>
-                        </select>
-                    </div>
-                    <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                        @*<button class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300">Anterior</button>*@
-                        <button class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteAspirante();">Siguiente</button>
-                    </div>
-                </div>
             </div>
             <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosPadre" hidden>
                 <div class="font-medium text-base">Datos del padre</div>
@@ -225,17 +295,37 @@
                         <div class="mb-2">Doesn't Have</div>
                         <input type="text" class="input w-full border flex-1" placeholder="Job, Work, Documentation">
                     </div>
-                    <div class="intro-y col-span-12 sm:col-span-6">
-                        <div class="mb-2">Size</div>
-                        <select class="input w-full border flex-1">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>35</option>
-                            <option>50</option>
-                        </select>
-                    </div>
                     <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
                         <button class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorRepresentante();">Anterior</button>
+                        <button class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteRepresentante();">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+            <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosSocioEconomico" hidden>
+                <div class="font-medium text-base">Datos socioecónomico</div>
+                <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">From</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="example@gmail.com">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">To</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="example@gmail.com">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Subject</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="Important Meeting">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Has the Words</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="Job, Work, Documentation">
+                    </div>
+                    <div class="intro-y col-span-12 sm:col-span-6">
+                        <div class="mb-2">Doesn't Have</div>
+                        <input type="text" class="input w-full border flex-1" placeholder="Job, Work, Documentation">
+                    </div>
+                    <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                        <button class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorSocioenonomico();">Anterior</button>
                     </div>
                 </div>
             </div>

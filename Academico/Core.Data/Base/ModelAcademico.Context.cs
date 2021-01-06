@@ -137,6 +137,7 @@ namespace Core.Data.Base
         public virtual DbSet<aca_MatriculaCalificacionParticipacion> aca_MatriculaCalificacionParticipacion { get; set; }
         public virtual DbSet<aca_parametro> aca_parametro { get; set; }
         public virtual DbSet<aca_MecanismoDePago> aca_MecanismoDePago { get; set; }
+        public virtual DbSet<aca_Admision> aca_Admision { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

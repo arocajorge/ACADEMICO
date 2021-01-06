@@ -44,6 +44,7 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public string ValorHasta { get; set; }
         public string ValorDesde { get; set; }
         public bool MostrarValoresDesdeHasta { get; set; }
+        public int CantFacturas { get; set; }
         #endregion
     }
 }

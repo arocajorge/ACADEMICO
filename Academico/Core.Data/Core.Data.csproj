@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Academico\aca_Admision_Data.cs" />
     <Compile Include="Academico\aca_AlumnoDocumento_Data.cs" />
     <Compile Include="Academico\aca_AlumnoRetiro_Data.cs" />
     <Compile Include="Academico\aca_Alumno_Data.cs" />
@@ -123,6 +124,9 @@
     <Compile Include="Academico\aca_Tematica_Data.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacionDet_Data.cs" />
     <Compile Include="Banco\ba_ArchivoRecaudacion_Data.cs" />
+    <Compile Include="Base\aca_Admision.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\aca_AnioLectivoCalificacionCualitativa.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -2192,7 +2196,9 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Base\ModelAcademico.edmx.diagram">
       <DependentUpon>ModelAcademico.edmx</DependentUpon>
     </None>

@@ -15,6 +15,9 @@ namespace Core.Data.Reportes.CuentasPorCobrar
             try
             {
                 List<CXC_013_Info> Lista = new List<CXC_013_Info>();
+                List<CXC_013_Info> ListaJoin = new List<CXC_013_Info>();
+                List<CXC_013_Info> ListaFinal = new List<CXC_013_Info>();
+
                 int IdNivelIni = IdNivel;
                 int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
 
@@ -265,12 +268,63 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                             OrdenParalelo = string.IsNullOrEmpty(reader["OrdenParalelo"].ToString()) ? (int?)null : Convert.ToInt32(reader["OrdenParalelo"])
                         });
                     }
-                    var FechaHasta = Lista.Where(q => q.FechaProntoPago > DateTime.Now.Date).Min(q => q.FechaProntoPago);
+
+                    var ListaAgrupada = Lista.GroupBy(q => new
+                    {
+                        q.IdEmpresa,
+                        q.IdAlumno
+                    }).Select(q => new CXC_013_Info
+                    {
+                        IdEmpresa = q.Key.IdEmpresa,
+                        IdAlumno = q.Key.IdAlumno,
+                        CantFacturas = q.Count()
+                    }).ToList();
+
+                    ListaJoin = (from a in Lista
+                             join b in ListaAgrupada
+                             on new { a.IdEmpresa, a.IdAlumno } equals new { b.IdEmpresa, b.IdAlumno }
+                             select new CXC_013_Info
+                             {
+                                 IdEmpresa = a.IdEmpresa,
+                                 IdAlumno = a.IdAlumno,
+                                 IdCbteVta = a.IdCbteVta,
+                                 vt_fecha = a.vt_fecha,
+                                 vt_Observacion = a.vt_Observacion,
+                                 NomCurso = a.NomCurso,
+                                 NomJornada = a.NomCurso,
+                                 Saldo = a.Saldo,
+                                 NomNivel = a.NomNivel,
+                                 NomParalelo = a.NomParalelo,
+                                 Alumno = a.Alumno,
+                                 Codigo = a.Codigo,
+                                 dc_ValorPago = a.dc_ValorPago,
+                                 FechaProntoPago = a.FechaProntoPago,
+                                 Total = a.Total,
+                                 IdBodega = a.IdBodega,
+                                 IdSucursal = a.IdSucursal,
+                                 Representante = a.Representante,
+                                 ValorProntoPago = a.ValorProntoPago,
+                                 vt_tipoDoc = a.vt_tipoDoc,
+                                 IdAnio = a.IdAnio,
+                                 IdSede = a.IdSede,
+                                 IdJornada = a.IdJornada,
+                                 IdCurso = a.IdCurso,
+                                 IdParalelo = a.IdParalelo,
+                                 IdNivel = a.IdNivel,
+                                 OrdenNivel = a.OrdenNivel,
+                                 OrdenJornada = a.OrdenJornada,
+                                 OrdenCurso = a.OrdenCurso,
+                                 OrdenParalelo = a.OrdenParalelo,
+                                 CantFacturas = b.CantFacturas,
+                             }).ToList();
+
+                    ListaFinal = ListaJoin.Where(q=>q.CantFacturas >= 2 && q.CantFacturas<=3).ToList();
+                    var FechaHasta = ListaFinal.Where(q => q.FechaProntoPago > DateTime.Now.Date).Min(q => q.FechaProntoPago);
                     var ValorHasta = "VALOR A PAGAR HASTA ";
                     FechaHasta = FechaHasta ?? DateTime.Now.Date;
                     ValorHasta += Convert.ToDateTime(FechaHasta).ToString("dd/MM/yyyy");
 
-                    var FechaDesde = Lista.Where(q => q.FechaProntoPago > DateTime.Now.Date).Max(q => q.FechaProntoPago);
+                    var FechaDesde = ListaFinal.Where(q => q.FechaProntoPago > DateTime.Now.Date).Max(q => q.FechaProntoPago);
                     var ValorDesde = "VALOR A PAGAR DESDE ";
                     FechaDesde = FechaDesde ?? DateTime.Now.Date;
                     FechaDesde = Convert.ToDateTime(FechaDesde).AddDays(1);
@@ -280,7 +334,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                     ValorProntoPagoHasta += Convert.ToDateTime(FechaHasta).ToString("dd/MM/yyyy");
 
 
-                    Lista.ForEach(q => {
+                    ListaFinal.ForEach(q => {
                         q.ValorDesde = ValorDesde;
                         q.ValorHasta = ValorHasta;
                         q.ValorProntoPagoHasta = ValorProntoPagoHasta;
@@ -288,7 +342,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                     });
                     reader.Close();
                 }
-                return Lista;
+                return ListaFinal;
             }
             catch (Exception ex)
             {

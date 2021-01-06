@@ -5,6 +5,199 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ModelAcademico.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="aca_Admision">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAdmision" />
+          </Key>
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdAdmision" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSede" Type="int" Nullable="false" />
+          <Property Name="IdAnio" Type="int" Nullable="false" />
+          <Property Name="IdJornada" Type="int" Nullable="false" />
+          <Property Name="IdNivel" Type="int" Nullable="false" />
+          <Property Name="IdCurso" Type="int" Nullable="false" />
+          <Property Name="Naturaleza_Aspirante" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdTipoDocumento_Aspirante" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CedulaRuc_Aspirante" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombres_Aspirante" Type="varchar" MaxLength="100" />
+          <Property Name="Apellidos_Aspirante" Type="varchar" MaxLength="100" />
+          <Property Name="NombreCompleto_Aspirante" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Direccion_Aspirante" Type="varchar" MaxLength="150" />
+          <Property Name="Telefono_Aspirante" Type="varchar" MaxLength="50" />
+          <Property Name="Celular_Aspirante" Type="varchar" MaxLength="50" />
+          <Property Name="Correo_Aspirante" Type="varchar" MaxLength="100" />
+          <Property Name="Sexo_Aspirante" Type="varchar" MaxLength="25" />
+          <Property Name="FechaNacimiento_Aspirante" Type="datetime" />
+          <Property Name="CodCatalogoSangre_Aspirante" Type="varchar" MaxLength="25" />
+          <Property Name="CodCatalogoCONADIS_Aspirante" Type="varchar" MaxLength="25" />
+          <Property Name="PorcentajeDiscapacidad_Aspirante" Type="float" />
+          <Property Name="NumeroCarnetConadis_Aspirante" Type="varchar" MaxLength="200" />
+          <Property Name="IdGrupoEtnico_Aspirante" Type="int" />
+          <Property Name="IdReligion_Aspirante" Type="int" />
+          <Property Name="AsisteCentroCristiano_Aspirante" Type="bit" />
+          <Property Name="LugarNacimiento_Aspirante" Type="varchar" MaxLength="300" />
+          <Property Name="IdPais_Aspirante" Type="varchar" MaxLength="10" />
+          <Property Name="Cod_Region_Aspirante" Type="varchar" MaxLength="10" />
+          <Property Name="IdProvincia_Aspirante" Type="varchar" MaxLength="25" />
+          <Property Name="IdCiudad_Aspirante" Type="varchar" MaxLength="25" />
+          <Property Name="IdParroquia_Aspirante" Type="varchar" MaxLength="25" />
+          <Property Name="Sector_Aspirante" Type="varchar" MaxLength="500" />
+          <Property Name="FechaIngreso_Aspirante" Type="date" Nullable="false" />
+          <Property Name="IdCatalogoFichaTipoViv_Aspirante" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaViv_Aspirante" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaAgua_Aspirante" Type="int" Nullable="false" />
+          <Property Name="TieneElectricidad_Aspirante" Type="bit" Nullable="false" />
+          <Property Name="TieneHermanos_Aspirante" Type="bit" Nullable="false" />
+          <Property Name="IdCatalogoFichaMotivo_Aspirante" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaInst_Aspirante" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaFinanc_Aspirante" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaVive_Aspirante" Type="int" Nullable="false" />
+          <Property Name="OtroMotivoIngreso_Aspirante" Type="varchar(max)" />
+          <Property Name="OtroInformacionInst_Aspirante" Type="varchar(max)" />
+          <Property Name="OtroFinanciamiento_Aspirante" Type="varchar(max)" />
+          <Property Name="Naturaleza_Padre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdTipoDocumento_Padre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CedulaRuc_Padre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombres_Padre" Type="varchar" MaxLength="100" />
+          <Property Name="Apellidos_Padre" Type="varchar" MaxLength="100" />
+          <Property Name="NombreCompleto_Padre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="RazonSocial_Padre" Type="varchar" MaxLength="150" />
+          <Property Name="Direccion_Padre" Type="varchar" MaxLength="150" />
+          <Property Name="Telefono_Padre" Type="varchar" MaxLength="50" />
+          <Property Name="Celular_Padre" Type="varchar" MaxLength="50" />
+          <Property Name="Correo_Padre" Type="varchar" MaxLength="100" />
+          <Property Name="Sexo_Padre" Type="varchar" MaxLength="25" />
+          <Property Name="FechaNacimiento_Padre" Type="datetime" />
+          <Property Name="CodCatalogoSangre_Padre" Type="varchar" MaxLength="25" />
+          <Property Name="CodCatalogoCONADIS_Padre" Type="varchar" MaxLength="25" />
+          <Property Name="PorcentajeDiscapacidad_Padre" Type="float" />
+          <Property Name="NumeroCarnetConadis_Padre" Type="varchar" MaxLength="200" />
+          <Property Name="IdGrupoEtnico_Padre" Type="int" />
+          <Property Name="IdReligion_Padre" Type="int" />
+          <Property Name="IdEstadoCivil_Padre" Type="varchar" MaxLength="25" />
+          <Property Name="AsisteCentroCristiano_Padre" Type="bit" Nullable="false" />
+          <Property Name="IdPais_Padre" Type="varchar" MaxLength="10" />
+          <Property Name="Cod_Region_Padre" Type="varchar" MaxLength="10" />
+          <Property Name="IdProvincia_Padre" Type="varchar" MaxLength="25" />
+          <Property Name="IdCiudad_Padre" Type="varchar" MaxLength="25" />
+          <Property Name="IdParroquia_Padre" Type="varchar" MaxLength="25" />
+          <Property Name="Sector_Padre" Type="varchar" MaxLength="500" />
+          <Property Name="IdCatalogoPAREN_Padre" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaInst_Padre" Type="int" />
+          <Property Name="EmpresaTrabajo_Padre" Type="varchar" MaxLength="200" />
+          <Property Name="DireccionTrabajo_Padre" Type="varchar" MaxLength="500" />
+          <Property Name="TelefonoTrabajo_Padre" Type="varchar" MaxLength="200" />
+          <Property Name="CargoTrabajo_Padre" Type="varchar" MaxLength="200" />
+          <Property Name="AniosServicio_Padre" Type="int" />
+          <Property Name="IngresoMensual_Padre" Type="float" />
+          <Property Name="VehiculoPropio_Padre" Type="bit" Nullable="false" />
+          <Property Name="Marca_Padre" Type="varchar" MaxLength="50" />
+          <Property Name="Modelo_Padre" Type="varchar" MaxLength="50" />
+          <Property Name="AnioVehiculo_Padre" Type="int" />
+          <Property Name="CasaPropia_Padre" Type="bit" Nullable="false" />
+          <Property Name="EstaFallecido_Padre" Type="bit" Nullable="false" />
+          <Property Name="Naturaleza_Madre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdTipoDocumento_Madre" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CedulaRuc_Madre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombres_Madre" Type="varchar" MaxLength="100" />
+          <Property Name="Apellidos_Madre" Type="varchar" MaxLength="100" />
+          <Property Name="NombreCompleto_Madre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="RazonSocial_Madre" Type="varchar" MaxLength="150" />
+          <Property Name="Direccion_Madre" Type="varchar" MaxLength="150" />
+          <Property Name="Telefono_Madre" Type="varchar" MaxLength="50" />
+          <Property Name="Celular_Madre" Type="varchar" MaxLength="50" />
+          <Property Name="Correo_Madre" Type="varchar" MaxLength="100" />
+          <Property Name="Sexo_Madre" Type="varchar" MaxLength="25" />
+          <Property Name="FechaNacimiento_Madre" Type="datetime" />
+          <Property Name="CodCatalogoSangre_Madre" Type="varchar" MaxLength="25" />
+          <Property Name="CodCatalogoCONADIS_Madre" Type="varchar" MaxLength="25" />
+          <Property Name="PorcentajeDiscapacidad_Madre" Type="float" />
+          <Property Name="NumeroCarnetConadis_Madre" Type="varchar" MaxLength="200" />
+          <Property Name="IdGrupoEtnico_Madre" Type="int" />
+          <Property Name="IdReligion_Madre" Type="int" />
+          <Property Name="IdEstadoCivil_Madre" Type="varchar" MaxLength="25" />
+          <Property Name="AsisteCentroCristiano_Madre" Type="bit" Nullable="false" />
+          <Property Name="IdPais_Madre" Type="varchar" MaxLength="10" />
+          <Property Name="Cod_Region_Madre" Type="varchar" MaxLength="10" />
+          <Property Name="IdProvincia_Madre" Type="varchar" MaxLength="25" />
+          <Property Name="IdCiudad_Madre" Type="varchar" MaxLength="25" />
+          <Property Name="IdParroquia_Madre" Type="varchar" MaxLength="25" />
+          <Property Name="Sector_Madre" Type="varchar" MaxLength="500" />
+          <Property Name="IdCatalogoPAREN_Madre" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaInst_Madre" Type="int" />
+          <Property Name="EmpresaTrabajo_Madre" Type="varchar" MaxLength="200" />
+          <Property Name="DireccionTrabajo_Madre" Type="varchar" MaxLength="500" />
+          <Property Name="TelefonoTrabajo_Madre" Type="varchar" MaxLength="200" />
+          <Property Name="CargoTrabajo_Madre" Type="varchar" MaxLength="200" />
+          <Property Name="AniosServicio_Madre" Type="int" />
+          <Property Name="IngresoMensual_Madre" Type="float" />
+          <Property Name="VehiculoPropio_Madre" Type="bit" Nullable="false" />
+          <Property Name="Marca_Madre" Type="varchar" MaxLength="50" />
+          <Property Name="Modelo_Madre" Type="varchar" MaxLength="50" />
+          <Property Name="AnioVehiculo_Madre" Type="int" />
+          <Property Name="CasaPropia_Madre" Type="bit" Nullable="false" />
+          <Property Name="EstaFallecido_Madre" Type="bit" Nullable="false" />
+          <Property Name="Naturaleza_Representante" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="IdTipoDocumento_Representante" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CedulaRuc_Representante" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombres_Representante" Type="varchar" MaxLength="100" />
+          <Property Name="Apellidos_Representante" Type="varchar" MaxLength="100" />
+          <Property Name="NombreCompleto_Representante" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="RazonSocial_Representante" Type="varchar" MaxLength="150" />
+          <Property Name="Direccion_Representante" Type="varchar" MaxLength="150" />
+          <Property Name="Telefono_Representante" Type="varchar" MaxLength="50" />
+          <Property Name="Celular_Representante" Type="varchar" MaxLength="50" />
+          <Property Name="Correo_Representante" Type="varchar" MaxLength="100" />
+          <Property Name="Sexo_Representante" Type="varchar" MaxLength="25" />
+          <Property Name="FechaNacimiento_Representante" Type="datetime" />
+          <Property Name="CodCatalogoSangre_Representante" Type="varchar" MaxLength="25" />
+          <Property Name="CodCatalogoCONADIS_Representante" Type="varchar" MaxLength="25" />
+          <Property Name="PorcentajeDiscapacidad_Representante" Type="float" />
+          <Property Name="NumeroCarnetConadis_Representante" Type="varchar" MaxLength="200" />
+          <Property Name="IdGrupoEtnico_Representante" Type="int" />
+          <Property Name="IdReligion_Representante" Type="int" />
+          <Property Name="IdEstadoCivil_Representante" Type="varchar" MaxLength="25" />
+          <Property Name="AsisteCentroCristiano_Representante" Type="bit" Nullable="false" />
+          <Property Name="IdPais_Representante" Type="varchar" MaxLength="10" />
+          <Property Name="Cod_Region_Representante" Type="varchar" MaxLength="10" />
+          <Property Name="IdProvincia_Representante" Type="varchar" MaxLength="25" />
+          <Property Name="IdCiudad_Representante" Type="varchar" MaxLength="25" />
+          <Property Name="IdParroquia_Representante" Type="varchar" MaxLength="25" />
+          <Property Name="Sector_Representante" Type="varchar" MaxLength="500" />
+          <Property Name="IdCatalogoPAREN_Representante" Type="int" Nullable="false" />
+          <Property Name="IdCatalogoFichaInst_Representante" Type="int" />
+          <Property Name="EmpresaTrabajo_Representante" Type="varchar" MaxLength="200" />
+          <Property Name="DireccionTrabajo_Representante" Type="varchar" MaxLength="500" />
+          <Property Name="TelefonoTrabajo_Representante" Type="varchar" MaxLength="200" />
+          <Property Name="CargoTrabajo_Representante" Type="varchar" MaxLength="200" />
+          <Property Name="AniosServicio_Representante" Type="int" />
+          <Property Name="IngresoMensual_Representante" Type="float" />
+          <Property Name="VehiculoPropio_Representante" Type="bit" Nullable="false" />
+          <Property Name="Marca_Representante" Type="varchar" MaxLength="50" />
+          <Property Name="Modelo_Representante" Type="varchar" MaxLength="50" />
+          <Property Name="AnioVehiculo_Representante" Type="int" />
+          <Property Name="CasaPropia_Representante" Type="bit" Nullable="false" />
+          <Property Name="EstaFallecido_Representante" Type="bit" Nullable="false" />
+          <Property Name="SueldoPadre" Type="float" Nullable="false" />
+          <Property Name="SueldoMadre" Type="float" Nullable="false" />
+          <Property Name="OtroIngresoPadre" Type="float" Nullable="false" />
+          <Property Name="OtroIngresoMadre" Type="float" Nullable="false" />
+          <Property Name="GastoAlimentacion" Type="float" Nullable="false" />
+          <Property Name="GastoEducacion" Type="float" Nullable="false" />
+          <Property Name="GastoServicioBasico" Type="float" Nullable="false" />
+          <Property Name="GastoSalud" Type="float" Nullable="false" />
+          <Property Name="GastoArriendo" Type="float" Nullable="false" />
+          <Property Name="GastoPrestamo" Type="float" Nullable="false" />
+          <Property Name="OtroGasto" Type="float" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="200" />
+          <Property Name="FechaAnulacion" Type="datetime" />
+          <Property Name="MotivoAnulacion" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="aca_Alumno">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -4807,6 +5000,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Parameter Name="IdUsuario" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="ModelAcademicoStoreContainer">
+          <EntitySet Name="aca_Admision" EntityType="Self.aca_Admision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Alumno" EntityType="Self.aca_Alumno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_AlumnoDocumento" EntityType="Self.aca_AlumnoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_AlumnoRetiro" EntityType="Self.aca_AlumnoRetiro" Schema="dbo" store:Type="Tables" />
@@ -7048,6 +7242,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <End Role="aca_MecanismoDePago" EntitySet="aca_MecanismoDePago" />
             <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
           </AssociationSet>
+          <EntitySet Name="aca_Admision" EntityType="ModelAcademico.aca_Admision" />
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
           <Key>
@@ -12027,6 +12222,199 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="aca_Admision">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAdmision" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAdmision" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdSede" Type="Int32" Nullable="false" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdJornada" Type="Int32" Nullable="false" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="Naturaleza_Aspirante" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento_Aspirante" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CedulaRuc_Aspirante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres_Aspirante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos_Aspirante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCompleto_Aspirante" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion_Aspirante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono_Aspirante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Celular_Aspirante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Correo_Aspirante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo_Aspirante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento_Aspirante" Type="DateTime" Precision="3" />
+          <Property Name="CodCatalogoSangre_Aspirante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CodCatalogoCONADIS_Aspirante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeDiscapacidad_Aspirante" Type="Double" />
+          <Property Name="NumeroCarnetConadis_Aspirante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdGrupoEtnico_Aspirante" Type="Int32" />
+          <Property Name="IdReligion_Aspirante" Type="Int32" />
+          <Property Name="AsisteCentroCristiano_Aspirante" Type="Boolean" />
+          <Property Name="LugarNacimiento_Aspirante" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="IdPais_Aspirante" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Region_Aspirante" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdProvincia_Aspirante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad_Aspirante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia_Aspirante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Sector_Aspirante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso_Aspirante" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdCatalogoFichaTipoViv_Aspirante" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaViv_Aspirante" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaAgua_Aspirante" Type="Int32" Nullable="false" />
+          <Property Name="TieneElectricidad_Aspirante" Type="Boolean" Nullable="false" />
+          <Property Name="TieneHermanos_Aspirante" Type="Boolean" Nullable="false" />
+          <Property Name="IdCatalogoFichaMotivo_Aspirante" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaInst_Aspirante" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaFinanc_Aspirante" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaVive_Aspirante" Type="Int32" Nullable="false" />
+          <Property Name="OtroMotivoIngreso_Aspirante" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OtroInformacionInst_Aspirante" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OtroFinanciamiento_Aspirante" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Naturaleza_Padre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento_Padre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CedulaRuc_Padre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres_Padre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos_Padre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCompleto_Padre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial_Padre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion_Padre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono_Padre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Celular_Padre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Correo_Padre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo_Padre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento_Padre" Type="DateTime" Precision="3" />
+          <Property Name="CodCatalogoSangre_Padre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CodCatalogoCONADIS_Padre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeDiscapacidad_Padre" Type="Double" />
+          <Property Name="NumeroCarnetConadis_Padre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdGrupoEtnico_Padre" Type="Int32" />
+          <Property Name="IdReligion_Padre" Type="Int32" />
+          <Property Name="IdEstadoCivil_Padre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="AsisteCentroCristiano_Padre" Type="Boolean" Nullable="false" />
+          <Property Name="IdPais_Padre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Region_Padre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdProvincia_Padre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad_Padre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia_Padre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Sector_Padre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdCatalogoPAREN_Padre" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaInst_Padre" Type="Int32" />
+          <Property Name="EmpresaTrabajo_Padre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionTrabajo_Padre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoTrabajo_Padre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CargoTrabajo_Padre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AniosServicio_Padre" Type="Int32" />
+          <Property Name="IngresoMensual_Padre" Type="Double" />
+          <Property Name="VehiculoPropio_Padre" Type="Boolean" Nullable="false" />
+          <Property Name="Marca_Padre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modelo_Padre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AnioVehiculo_Padre" Type="Int32" />
+          <Property Name="CasaPropia_Padre" Type="Boolean" Nullable="false" />
+          <Property Name="EstaFallecido_Padre" Type="Boolean" Nullable="false" />
+          <Property Name="Naturaleza_Madre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento_Madre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CedulaRuc_Madre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres_Madre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos_Madre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCompleto_Madre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial_Madre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion_Madre" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono_Madre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Celular_Madre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Correo_Madre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo_Madre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento_Madre" Type="DateTime" Precision="3" />
+          <Property Name="CodCatalogoSangre_Madre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CodCatalogoCONADIS_Madre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeDiscapacidad_Madre" Type="Double" />
+          <Property Name="NumeroCarnetConadis_Madre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdGrupoEtnico_Madre" Type="Int32" />
+          <Property Name="IdReligion_Madre" Type="Int32" />
+          <Property Name="IdEstadoCivil_Madre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="AsisteCentroCristiano_Madre" Type="Boolean" Nullable="false" />
+          <Property Name="IdPais_Madre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Region_Madre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdProvincia_Madre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad_Madre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia_Madre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Sector_Madre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdCatalogoPAREN_Madre" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaInst_Madre" Type="Int32" />
+          <Property Name="EmpresaTrabajo_Madre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionTrabajo_Madre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoTrabajo_Madre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CargoTrabajo_Madre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AniosServicio_Madre" Type="Int32" />
+          <Property Name="IngresoMensual_Madre" Type="Double" />
+          <Property Name="VehiculoPropio_Madre" Type="Boolean" Nullable="false" />
+          <Property Name="Marca_Madre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modelo_Madre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AnioVehiculo_Madre" Type="Int32" />
+          <Property Name="CasaPropia_Madre" Type="Boolean" Nullable="false" />
+          <Property Name="EstaFallecido_Madre" Type="Boolean" Nullable="false" />
+          <Property Name="Naturaleza_Representante" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento_Representante" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CedulaRuc_Representante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres_Representante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos_Representante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NombreCompleto_Representante" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RazonSocial_Representante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion_Representante" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono_Representante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Celular_Representante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Correo_Representante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo_Representante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento_Representante" Type="DateTime" Precision="3" />
+          <Property Name="CodCatalogoSangre_Representante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CodCatalogoCONADIS_Representante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeDiscapacidad_Representante" Type="Double" />
+          <Property Name="NumeroCarnetConadis_Representante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdGrupoEtnico_Representante" Type="Int32" />
+          <Property Name="IdReligion_Representante" Type="Int32" />
+          <Property Name="IdEstadoCivil_Representante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="AsisteCentroCristiano_Representante" Type="Boolean" Nullable="false" />
+          <Property Name="IdPais_Representante" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Region_Representante" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdProvincia_Representante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad_Representante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia_Representante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Sector_Representante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdCatalogoPAREN_Representante" Type="Int32" Nullable="false" />
+          <Property Name="IdCatalogoFichaInst_Representante" Type="Int32" />
+          <Property Name="EmpresaTrabajo_Representante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionTrabajo_Representante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoTrabajo_Representante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CargoTrabajo_Representante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="AniosServicio_Representante" Type="Int32" />
+          <Property Name="IngresoMensual_Representante" Type="Double" />
+          <Property Name="VehiculoPropio_Representante" Type="Boolean" Nullable="false" />
+          <Property Name="Marca_Representante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modelo_Representante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AnioVehiculo_Representante" Type="Int32" />
+          <Property Name="CasaPropia_Representante" Type="Boolean" Nullable="false" />
+          <Property Name="EstaFallecido_Representante" Type="Boolean" Nullable="false" />
+          <Property Name="SueldoPadre" Type="Double" Nullable="false" />
+          <Property Name="SueldoMadre" Type="Double" Nullable="false" />
+          <Property Name="OtroIngresoPadre" Type="Double" Nullable="false" />
+          <Property Name="OtroIngresoMadre" Type="Double" Nullable="false" />
+          <Property Name="GastoAlimentacion" Type="Double" Nullable="false" />
+          <Property Name="GastoEducacion" Type="Double" Nullable="false" />
+          <Property Name="GastoServicioBasico" Type="Double" Nullable="false" />
+          <Property Name="GastoSalud" Type="Double" Nullable="false" />
+          <Property Name="GastoArriendo" Type="Double" Nullable="false" />
+          <Property Name="GastoPrestamo" Type="Double" Nullable="false" />
+          <Property Name="OtroGasto" Type="Double" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14531,6 +14919,199 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="IdTerminoPago" ColumnName="IdTerminoPago" />
                 <ScalarProperty Name="NombreMecanismo" ColumnName="NombreMecanismo" />
                 <ScalarProperty Name="IdMecanismo" ColumnName="IdMecanismo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_Admision">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_Admision">
+              <MappingFragment StoreEntitySet="aca_Admision">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />
+                <ScalarProperty Name="GastoPrestamo" ColumnName="GastoPrestamo" />
+                <ScalarProperty Name="GastoArriendo" ColumnName="GastoArriendo" />
+                <ScalarProperty Name="GastoSalud" ColumnName="GastoSalud" />
+                <ScalarProperty Name="GastoServicioBasico" ColumnName="GastoServicioBasico" />
+                <ScalarProperty Name="GastoEducacion" ColumnName="GastoEducacion" />
+                <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
+                <ScalarProperty Name="OtroIngresoMadre" ColumnName="OtroIngresoMadre" />
+                <ScalarProperty Name="OtroIngresoPadre" ColumnName="OtroIngresoPadre" />
+                <ScalarProperty Name="SueldoMadre" ColumnName="SueldoMadre" />
+                <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
+                <ScalarProperty Name="EstaFallecido_Representante" ColumnName="EstaFallecido_Representante" />
+                <ScalarProperty Name="CasaPropia_Representante" ColumnName="CasaPropia_Representante" />
+                <ScalarProperty Name="AnioVehiculo_Representante" ColumnName="AnioVehiculo_Representante" />
+                <ScalarProperty Name="Modelo_Representante" ColumnName="Modelo_Representante" />
+                <ScalarProperty Name="Marca_Representante" ColumnName="Marca_Representante" />
+                <ScalarProperty Name="VehiculoPropio_Representante" ColumnName="VehiculoPropio_Representante" />
+                <ScalarProperty Name="IngresoMensual_Representante" ColumnName="IngresoMensual_Representante" />
+                <ScalarProperty Name="AniosServicio_Representante" ColumnName="AniosServicio_Representante" />
+                <ScalarProperty Name="CargoTrabajo_Representante" ColumnName="CargoTrabajo_Representante" />
+                <ScalarProperty Name="TelefonoTrabajo_Representante" ColumnName="TelefonoTrabajo_Representante" />
+                <ScalarProperty Name="DireccionTrabajo_Representante" ColumnName="DireccionTrabajo_Representante" />
+                <ScalarProperty Name="EmpresaTrabajo_Representante" ColumnName="EmpresaTrabajo_Representante" />
+                <ScalarProperty Name="IdCatalogoFichaInst_Representante" ColumnName="IdCatalogoFichaInst_Representante" />
+                <ScalarProperty Name="IdCatalogoPAREN_Representante" ColumnName="IdCatalogoPAREN_Representante" />
+                <ScalarProperty Name="Sector_Representante" ColumnName="Sector_Representante" />
+                <ScalarProperty Name="IdParroquia_Representante" ColumnName="IdParroquia_Representante" />
+                <ScalarProperty Name="IdCiudad_Representante" ColumnName="IdCiudad_Representante" />
+                <ScalarProperty Name="IdProvincia_Representante" ColumnName="IdProvincia_Representante" />
+                <ScalarProperty Name="Cod_Region_Representante" ColumnName="Cod_Region_Representante" />
+                <ScalarProperty Name="IdPais_Representante" ColumnName="IdPais_Representante" />
+                <ScalarProperty Name="AsisteCentroCristiano_Representante" ColumnName="AsisteCentroCristiano_Representante" />
+                <ScalarProperty Name="IdEstadoCivil_Representante" ColumnName="IdEstadoCivil_Representante" />
+                <ScalarProperty Name="IdReligion_Representante" ColumnName="IdReligion_Representante" />
+                <ScalarProperty Name="IdGrupoEtnico_Representante" ColumnName="IdGrupoEtnico_Representante" />
+                <ScalarProperty Name="NumeroCarnetConadis_Representante" ColumnName="NumeroCarnetConadis_Representante" />
+                <ScalarProperty Name="PorcentajeDiscapacidad_Representante" ColumnName="PorcentajeDiscapacidad_Representante" />
+                <ScalarProperty Name="CodCatalogoCONADIS_Representante" ColumnName="CodCatalogoCONADIS_Representante" />
+                <ScalarProperty Name="CodCatalogoSangre_Representante" ColumnName="CodCatalogoSangre_Representante" />
+                <ScalarProperty Name="FechaNacimiento_Representante" ColumnName="FechaNacimiento_Representante" />
+                <ScalarProperty Name="Sexo_Representante" ColumnName="Sexo_Representante" />
+                <ScalarProperty Name="Correo_Representante" ColumnName="Correo_Representante" />
+                <ScalarProperty Name="Celular_Representante" ColumnName="Celular_Representante" />
+                <ScalarProperty Name="Telefono_Representante" ColumnName="Telefono_Representante" />
+                <ScalarProperty Name="Direccion_Representante" ColumnName="Direccion_Representante" />
+                <ScalarProperty Name="RazonSocial_Representante" ColumnName="RazonSocial_Representante" />
+                <ScalarProperty Name="NombreCompleto_Representante" ColumnName="NombreCompleto_Representante" />
+                <ScalarProperty Name="Apellidos_Representante" ColumnName="Apellidos_Representante" />
+                <ScalarProperty Name="Nombres_Representante" ColumnName="Nombres_Representante" />
+                <ScalarProperty Name="CedulaRuc_Representante" ColumnName="CedulaRuc_Representante" />
+                <ScalarProperty Name="IdTipoDocumento_Representante" ColumnName="IdTipoDocumento_Representante" />
+                <ScalarProperty Name="Naturaleza_Representante" ColumnName="Naturaleza_Representante" />
+                <ScalarProperty Name="EstaFallecido_Madre" ColumnName="EstaFallecido_Madre" />
+                <ScalarProperty Name="CasaPropia_Madre" ColumnName="CasaPropia_Madre" />
+                <ScalarProperty Name="AnioVehiculo_Madre" ColumnName="AnioVehiculo_Madre" />
+                <ScalarProperty Name="Modelo_Madre" ColumnName="Modelo_Madre" />
+                <ScalarProperty Name="Marca_Madre" ColumnName="Marca_Madre" />
+                <ScalarProperty Name="VehiculoPropio_Madre" ColumnName="VehiculoPropio_Madre" />
+                <ScalarProperty Name="IngresoMensual_Madre" ColumnName="IngresoMensual_Madre" />
+                <ScalarProperty Name="AniosServicio_Madre" ColumnName="AniosServicio_Madre" />
+                <ScalarProperty Name="CargoTrabajo_Madre" ColumnName="CargoTrabajo_Madre" />
+                <ScalarProperty Name="TelefonoTrabajo_Madre" ColumnName="TelefonoTrabajo_Madre" />
+                <ScalarProperty Name="DireccionTrabajo_Madre" ColumnName="DireccionTrabajo_Madre" />
+                <ScalarProperty Name="EmpresaTrabajo_Madre" ColumnName="EmpresaTrabajo_Madre" />
+                <ScalarProperty Name="IdCatalogoFichaInst_Madre" ColumnName="IdCatalogoFichaInst_Madre" />
+                <ScalarProperty Name="IdCatalogoPAREN_Madre" ColumnName="IdCatalogoPAREN_Madre" />
+                <ScalarProperty Name="Sector_Madre" ColumnName="Sector_Madre" />
+                <ScalarProperty Name="IdParroquia_Madre" ColumnName="IdParroquia_Madre" />
+                <ScalarProperty Name="IdCiudad_Madre" ColumnName="IdCiudad_Madre" />
+                <ScalarProperty Name="IdProvincia_Madre" ColumnName="IdProvincia_Madre" />
+                <ScalarProperty Name="Cod_Region_Madre" ColumnName="Cod_Region_Madre" />
+                <ScalarProperty Name="IdPais_Madre" ColumnName="IdPais_Madre" />
+                <ScalarProperty Name="AsisteCentroCristiano_Madre" ColumnName="AsisteCentroCristiano_Madre" />
+                <ScalarProperty Name="IdEstadoCivil_Madre" ColumnName="IdEstadoCivil_Madre" />
+                <ScalarProperty Name="IdReligion_Madre" ColumnName="IdReligion_Madre" />
+                <ScalarProperty Name="IdGrupoEtnico_Madre" ColumnName="IdGrupoEtnico_Madre" />
+                <ScalarProperty Name="NumeroCarnetConadis_Madre" ColumnName="NumeroCarnetConadis_Madre" />
+                <ScalarProperty Name="PorcentajeDiscapacidad_Madre" ColumnName="PorcentajeDiscapacidad_Madre" />
+                <ScalarProperty Name="CodCatalogoCONADIS_Madre" ColumnName="CodCatalogoCONADIS_Madre" />
+                <ScalarProperty Name="CodCatalogoSangre_Madre" ColumnName="CodCatalogoSangre_Madre" />
+                <ScalarProperty Name="FechaNacimiento_Madre" ColumnName="FechaNacimiento_Madre" />
+                <ScalarProperty Name="Sexo_Madre" ColumnName="Sexo_Madre" />
+                <ScalarProperty Name="Correo_Madre" ColumnName="Correo_Madre" />
+                <ScalarProperty Name="Celular_Madre" ColumnName="Celular_Madre" />
+                <ScalarProperty Name="Telefono_Madre" ColumnName="Telefono_Madre" />
+                <ScalarProperty Name="Direccion_Madre" ColumnName="Direccion_Madre" />
+                <ScalarProperty Name="RazonSocial_Madre" ColumnName="RazonSocial_Madre" />
+                <ScalarProperty Name="NombreCompleto_Madre" ColumnName="NombreCompleto_Madre" />
+                <ScalarProperty Name="Apellidos_Madre" ColumnName="Apellidos_Madre" />
+                <ScalarProperty Name="Nombres_Madre" ColumnName="Nombres_Madre" />
+                <ScalarProperty Name="CedulaRuc_Madre" ColumnName="CedulaRuc_Madre" />
+                <ScalarProperty Name="IdTipoDocumento_Madre" ColumnName="IdTipoDocumento_Madre" />
+                <ScalarProperty Name="Naturaleza_Madre" ColumnName="Naturaleza_Madre" />
+                <ScalarProperty Name="EstaFallecido_Padre" ColumnName="EstaFallecido_Padre" />
+                <ScalarProperty Name="CasaPropia_Padre" ColumnName="CasaPropia_Padre" />
+                <ScalarProperty Name="AnioVehiculo_Padre" ColumnName="AnioVehiculo_Padre" />
+                <ScalarProperty Name="Modelo_Padre" ColumnName="Modelo_Padre" />
+                <ScalarProperty Name="Marca_Padre" ColumnName="Marca_Padre" />
+                <ScalarProperty Name="VehiculoPropio_Padre" ColumnName="VehiculoPropio_Padre" />
+                <ScalarProperty Name="IngresoMensual_Padre" ColumnName="IngresoMensual_Padre" />
+                <ScalarProperty Name="AniosServicio_Padre" ColumnName="AniosServicio_Padre" />
+                <ScalarProperty Name="CargoTrabajo_Padre" ColumnName="CargoTrabajo_Padre" />
+                <ScalarProperty Name="TelefonoTrabajo_Padre" ColumnName="TelefonoTrabajo_Padre" />
+                <ScalarProperty Name="DireccionTrabajo_Padre" ColumnName="DireccionTrabajo_Padre" />
+                <ScalarProperty Name="EmpresaTrabajo_Padre" ColumnName="EmpresaTrabajo_Padre" />
+                <ScalarProperty Name="IdCatalogoFichaInst_Padre" ColumnName="IdCatalogoFichaInst_Padre" />
+                <ScalarProperty Name="IdCatalogoPAREN_Padre" ColumnName="IdCatalogoPAREN_Padre" />
+                <ScalarProperty Name="Sector_Padre" ColumnName="Sector_Padre" />
+                <ScalarProperty Name="IdParroquia_Padre" ColumnName="IdParroquia_Padre" />
+                <ScalarProperty Name="IdCiudad_Padre" ColumnName="IdCiudad_Padre" />
+                <ScalarProperty Name="IdProvincia_Padre" ColumnName="IdProvincia_Padre" />
+                <ScalarProperty Name="Cod_Region_Padre" ColumnName="Cod_Region_Padre" />
+                <ScalarProperty Name="IdPais_Padre" ColumnName="IdPais_Padre" />
+                <ScalarProperty Name="AsisteCentroCristiano_Padre" ColumnName="AsisteCentroCristiano_Padre" />
+                <ScalarProperty Name="IdEstadoCivil_Padre" ColumnName="IdEstadoCivil_Padre" />
+                <ScalarProperty Name="IdReligion_Padre" ColumnName="IdReligion_Padre" />
+                <ScalarProperty Name="IdGrupoEtnico_Padre" ColumnName="IdGrupoEtnico_Padre" />
+                <ScalarProperty Name="NumeroCarnetConadis_Padre" ColumnName="NumeroCarnetConadis_Padre" />
+                <ScalarProperty Name="PorcentajeDiscapacidad_Padre" ColumnName="PorcentajeDiscapacidad_Padre" />
+                <ScalarProperty Name="CodCatalogoCONADIS_Padre" ColumnName="CodCatalogoCONADIS_Padre" />
+                <ScalarProperty Name="CodCatalogoSangre_Padre" ColumnName="CodCatalogoSangre_Padre" />
+                <ScalarProperty Name="FechaNacimiento_Padre" ColumnName="FechaNacimiento_Padre" />
+                <ScalarProperty Name="Sexo_Padre" ColumnName="Sexo_Padre" />
+                <ScalarProperty Name="Correo_Padre" ColumnName="Correo_Padre" />
+                <ScalarProperty Name="Celular_Padre" ColumnName="Celular_Padre" />
+                <ScalarProperty Name="Telefono_Padre" ColumnName="Telefono_Padre" />
+                <ScalarProperty Name="Direccion_Padre" ColumnName="Direccion_Padre" />
+                <ScalarProperty Name="RazonSocial_Padre" ColumnName="RazonSocial_Padre" />
+                <ScalarProperty Name="NombreCompleto_Padre" ColumnName="NombreCompleto_Padre" />
+                <ScalarProperty Name="Apellidos_Padre" ColumnName="Apellidos_Padre" />
+                <ScalarProperty Name="Nombres_Padre" ColumnName="Nombres_Padre" />
+                <ScalarProperty Name="CedulaRuc_Padre" ColumnName="CedulaRuc_Padre" />
+                <ScalarProperty Name="IdTipoDocumento_Padre" ColumnName="IdTipoDocumento_Padre" />
+                <ScalarProperty Name="Naturaleza_Padre" ColumnName="Naturaleza_Padre" />
+                <ScalarProperty Name="OtroFinanciamiento_Aspirante" ColumnName="OtroFinanciamiento_Aspirante" />
+                <ScalarProperty Name="OtroInformacionInst_Aspirante" ColumnName="OtroInformacionInst_Aspirante" />
+                <ScalarProperty Name="OtroMotivoIngreso_Aspirante" ColumnName="OtroMotivoIngreso_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaVive_Aspirante" ColumnName="IdCatalogoFichaVive_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaFinanc_Aspirante" ColumnName="IdCatalogoFichaFinanc_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaInst_Aspirante" ColumnName="IdCatalogoFichaInst_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaMotivo_Aspirante" ColumnName="IdCatalogoFichaMotivo_Aspirante" />
+                <ScalarProperty Name="TieneHermanos_Aspirante" ColumnName="TieneHermanos_Aspirante" />
+                <ScalarProperty Name="TieneElectricidad_Aspirante" ColumnName="TieneElectricidad_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaAgua_Aspirante" ColumnName="IdCatalogoFichaAgua_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaViv_Aspirante" ColumnName="IdCatalogoFichaViv_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaTipoViv_Aspirante" ColumnName="IdCatalogoFichaTipoViv_Aspirante" />
+                <ScalarProperty Name="FechaIngreso_Aspirante" ColumnName="FechaIngreso_Aspirante" />
+                <ScalarProperty Name="Sector_Aspirante" ColumnName="Sector_Aspirante" />
+                <ScalarProperty Name="IdParroquia_Aspirante" ColumnName="IdParroquia_Aspirante" />
+                <ScalarProperty Name="IdCiudad_Aspirante" ColumnName="IdCiudad_Aspirante" />
+                <ScalarProperty Name="IdProvincia_Aspirante" ColumnName="IdProvincia_Aspirante" />
+                <ScalarProperty Name="Cod_Region_Aspirante" ColumnName="Cod_Region_Aspirante" />
+                <ScalarProperty Name="IdPais_Aspirante" ColumnName="IdPais_Aspirante" />
+                <ScalarProperty Name="LugarNacimiento_Aspirante" ColumnName="LugarNacimiento_Aspirante" />
+                <ScalarProperty Name="AsisteCentroCristiano_Aspirante" ColumnName="AsisteCentroCristiano_Aspirante" />
+                <ScalarProperty Name="IdReligion_Aspirante" ColumnName="IdReligion_Aspirante" />
+                <ScalarProperty Name="IdGrupoEtnico_Aspirante" ColumnName="IdGrupoEtnico_Aspirante" />
+                <ScalarProperty Name="NumeroCarnetConadis_Aspirante" ColumnName="NumeroCarnetConadis_Aspirante" />
+                <ScalarProperty Name="PorcentajeDiscapacidad_Aspirante" ColumnName="PorcentajeDiscapacidad_Aspirante" />
+                <ScalarProperty Name="CodCatalogoCONADIS_Aspirante" ColumnName="CodCatalogoCONADIS_Aspirante" />
+                <ScalarProperty Name="CodCatalogoSangre_Aspirante" ColumnName="CodCatalogoSangre_Aspirante" />
+                <ScalarProperty Name="FechaNacimiento_Aspirante" ColumnName="FechaNacimiento_Aspirante" />
+                <ScalarProperty Name="Sexo_Aspirante" ColumnName="Sexo_Aspirante" />
+                <ScalarProperty Name="Correo_Aspirante" ColumnName="Correo_Aspirante" />
+                <ScalarProperty Name="Celular_Aspirante" ColumnName="Celular_Aspirante" />
+                <ScalarProperty Name="Telefono_Aspirante" ColumnName="Telefono_Aspirante" />
+                <ScalarProperty Name="Direccion_Aspirante" ColumnName="Direccion_Aspirante" />
+                <ScalarProperty Name="NombreCompleto_Aspirante" ColumnName="NombreCompleto_Aspirante" />
+                <ScalarProperty Name="Apellidos_Aspirante" ColumnName="Apellidos_Aspirante" />
+                <ScalarProperty Name="Nombres_Aspirante" ColumnName="Nombres_Aspirante" />
+                <ScalarProperty Name="CedulaRuc_Aspirante" ColumnName="CedulaRuc_Aspirante" />
+                <ScalarProperty Name="IdTipoDocumento_Aspirante" ColumnName="IdTipoDocumento_Aspirante" />
+                <ScalarProperty Name="Naturaleza_Aspirante" ColumnName="Naturaleza_Aspirante" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdAdmision" ColumnName="IdAdmision" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -607,7 +607,8 @@ namespace Core.Web.Areas.Banco.Controllers
                             linea2 += FechaIni.Month.ToString().PadLeft(2, '0') + "/" + FechaIni.Day.ToString().PadLeft(2, '0') + "/" + FechaIni.Year.ToString();
                             linea2 += "0".PadRight(3, ' ');
                             linea2 += (valorEntero.ToString().PadLeft(8, '0') + "." + valorDecimal.ToString().PadRight(2, '0'));
-                            linea2 += FechaFin.Month.ToString().PadLeft(2, '0') + "/" + FechaFin.Day.ToString().PadLeft(2, '0') + "/" + FechaFin.Year.ToString();//FECHA TOPE DE PAGO
+                            //linea2 += FechaFin.Month.ToString().PadLeft(2, '0') + "/" + FechaFin.Day.ToString().PadLeft(2, '0') + "/" + FechaFin.Year.ToString();//FECHA TOPE DE PAGO
+                            linea2 += Convert.ToDateTime(item.FechaProntoPago).Month.ToString().PadLeft(2, '0') + "/" + Convert.ToDateTime(item.FechaProntoPago).Day.ToString().PadLeft(2, '0') + "/" + Convert.ToDateTime(item.FechaProntoPago).Year.ToString();//FECHA TOPE DE PAGO
                             linea2 += Convert.ToDateTime(item.FechaProntoPago).Month.ToString().PadLeft(2, '0') + "/" + Convert.ToDateTime(item.FechaProntoPago).Day.ToString().PadLeft(2, '0') + "/" + Convert.ToDateTime(item.FechaProntoPago).Year.ToString();//FECHA PRONTO PAGO
                             linea2 += "N";
                             linea2 += (string.IsNullOrEmpty(item.pe_nombreCompleto) ? "" : (item.pe_nombreCompleto.Length > 30 ? item.pe_nombreCompleto.Substring(0, 30) : item.pe_nombreCompleto.Trim())).PadRight(30, ' ');

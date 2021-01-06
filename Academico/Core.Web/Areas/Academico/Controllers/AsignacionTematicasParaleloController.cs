@@ -181,6 +181,7 @@ namespace Core.Web.Areas.Academico.Controllers
     {
         string Variable = "aca_MatriculaCalificacionParticipacion_Info";
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
+        aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
         aca_AnioLectivo_Tematica_Bus bus_anio_tematica = new aca_AnioLectivo_Tematica_Bus();
         aca_MatriculaCalificacionParticipacion_Bus bus_participacion = new aca_MatriculaCalificacionParticipacion_Bus();
         public List<aca_MatriculaCalificacionParticipacion_Info> get_list(decimal IdTransaccionSession)
@@ -208,6 +209,12 @@ namespace Core.Web.Areas.Academico.Controllers
             edited_info.IdProfesor = info_det.IdProfesor;
             edited_info.IdCampoAccion = anio_tematica.IdCampoAccion;
             edited_info.IdTematica = anio_tematica.IdTematica;
+            edited_info.IdTematicaParticipacion = anio_tematica.IdTematica;
+            var info_profesor = bus_profesor.GetInfo(edited_info.IdEmpresa, edited_info.IdProfesor??0);
+            edited_info.NombreProfesor = (info_profesor == null ? "" : info_profesor.pe_nombreCompleto);
+            //var info_tematica = bus_anio_tematica.getInfo(edited_info.IdEmpresa, edited_info.IdAnio, edited_info.IdTematica);
+            //edited_info.NombreCampoAccion = (info_tematica==null ? null : info_tematica.NombreCampoAccion);
+            //edited_info.NombreTematica = (info_tematica == null ? null : info_tematica.NombreTematica);
             var lst_calificacion_participacion = new List<aca_MatriculaCalificacionParticipacion_Info>();
 
             var lst_matricula = bus_matricula.GetList_PorCurso(edited_info.IdEmpresa,edited_info.IdAnio, edited_info.IdSede,edited_info.IdNivel, edited_info.IdJornada,edited_info.IdCurso,edited_info.IdParalelo);

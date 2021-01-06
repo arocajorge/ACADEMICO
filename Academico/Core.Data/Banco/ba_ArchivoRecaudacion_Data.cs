@@ -19,7 +19,7 @@ namespace Core.Data.Banco
                 List<ba_ArchivoRecaudacion_Info> Lista= new List<ba_ArchivoRecaudacion_Info>();
                 using (EntitiesBanco Context = new EntitiesBanco())
                 {
-                    var lst = Context.ba_ArchivoRecaudacion.Where(q => q.IdEmpresa == IdEmpresa && fechaini.Date <= q.Fecha && q.Fecha <= fechafin.Date && q.Estado == (mostrar_anulados == true ? q.Estado : true)).ToList();
+                    var lst = Context.ba_ArchivoRecaudacion.Where(q => q.IdEmpresa == IdEmpresa && q.Fecha >= fechaini.Date && q.Fecha <= fechafin.Date && q.Estado == (mostrar_anulados == true ? q.Estado : true)).ToList();
 
                     lst.ForEach(q =>
                     {

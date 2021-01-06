@@ -11,11 +11,11 @@ namespace Core.Bus.Reportes.Facturacion
     public class FAC_002_Bus
     {
         FAC_002_Data odata = new FAC_002_Data();
-        public List<FAC_002_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta)
+        public List<FAC_002_Info> get_list(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta, int IdAnio, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo, DateTime FechaIni, DateTime FechaFin)
         {
             try
             {
-                return odata.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+                return odata.get_list(IdEmpresa, IdSucursal, IdBodega, IdCbteVta, IdAnio, IdSede, IdJornada, IdNivel, IdCurso, IdParalelo, FechaIni, FechaFin);
             }
             catch (Exception)
             {

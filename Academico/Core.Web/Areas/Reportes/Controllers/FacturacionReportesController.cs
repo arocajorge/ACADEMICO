@@ -1,7 +1,9 @@
-﻿using Core.Bus.Facturacion;
+﻿using Core.Bus.Academico;
+using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Bus.Inventario;
 using Core.Erp.Web.Reportes.Facturacion;
+using Core.Info.Academico;
 using Core.Info.Facturacion;
 using Core.Info.General;
 using Core.Info.Helps;
@@ -28,6 +30,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
         tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         in_Marca_Bus bus_marca = new in_Marca_Bus();
+        aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         fa_cliente_contactos_Bus bus_cliente_contacto = new fa_cliente_contactos_Bus();
         string RootReporte = System.IO.Path.GetTempPath() + "Rpt_Facturacion.repx";
 
@@ -103,14 +106,27 @@ namespace Core.Web.Areas.Reportes.Controllers
         public ActionResult FAC_002(int IdSucursal = 0, int IdBodega = 0, decimal IdCbteVta = 0)
         {
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var info_factura = bus_factura.get_info(IdEmpresa,IdSucursal, IdBodega, IdCbteVta);
-            var info_cliente = bus_cliente_contacto.get_info(IdEmpresa,info_factura.IdCliente,1);
+        
             FAC_002_Info model = new FAC_002_Info();
             model.IdEmpresa = IdEmpresa;
-            model.Correos = (info_cliente==null ? "" : info_cliente.Correo);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = new aca_AnioLectivo_Info();
+            info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+
+            model.IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
+            model.fecha_ini = DateTime.Now.Date.AddMonths(-1);
+            model.fecha_fin = DateTime.Now.Date;
+            
             model.IdSucursal = IdSucursal;
             model.IdBodega = IdBodega;
             model.IdCbteVta = IdCbteVta;
+
+            if (model.IdCbteVta != 0)
+            {
+                var info_factura = bus_factura.get_info(IdEmpresa, IdSucursal, IdBodega, IdCbteVta);
+                var info_cliente = bus_cliente_contacto.get_info(IdEmpresa, info_factura.IdCliente, 1);
+                model.Correos = (info_cliente == null ? "" : info_cliente.Correo);
+            }
 
             FAC_002_Rpt report = new FAC_002_Rpt();
 
@@ -121,6 +137,37 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             report.RequestParameters = false;
+
+            ViewBag.Report = report;
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult FAC_002(FAC_002_Info model)
+        {
+            FAC_002_Rpt report = new FAC_002_Rpt();
+
+            if (model.IdCbteVta != 0)
+            {
+                var info_factura = bus_factura.get_info(model.IdEmpresa, model.IdSucursal, model.IdBodega, model.IdCbteVta);
+                var info_cliente = bus_cliente_contacto.get_info(model.IdEmpresa, info_factura.IdCliente, 1);
+                model.Correos = (info_cliente == null ? "" : info_cliente.Correo);
+            }
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.p_IdBodega.Value = model.IdBodega;
+            report.p_IdSucursal.Value = model.IdSucursal;
+            report.p_IdCbteVta.Value = model.IdCbteVta;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
 
             ViewBag.Report = report;
 

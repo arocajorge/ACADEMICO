@@ -733,12 +733,12 @@ namespace Core.Web.Areas.Reportes.Controllers
             CXC_014_Rpt report = new CXC_014_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            //report.p_IdSede.Value = model.IdSede;
-            //report.p_IdAnio.Value = model.IdAnio;
-            //report.p_IdNivel.Value = model.IdNivel;
-            //report.p_IdJornada.Value = model.IdJornada;
-            //report.p_IdCurso.Value = model.IdCurso;
-            //report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -754,12 +754,12 @@ namespace Core.Web.Areas.Reportes.Controllers
             CXC_014_Rpt report = new CXC_014_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            //report.p_IdSede.Value = model.IdSede;
-            //report.p_IdAnio.Value = model.IdAnio;
-            //report.p_IdNivel.Value = model.IdNivel;
-            //report.p_IdJornada.Value = model.IdJornada;
-            //report.p_IdCurso.Value = model.IdCurso;
-            //report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -785,12 +785,12 @@ namespace Core.Web.Areas.Reportes.Controllers
             CXC_015_Rpt report = new CXC_015_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            //report.p_IdSede.Value = model.IdSede;
-            //report.p_IdAnio.Value = model.IdAnio;
-            //report.p_IdNivel.Value = model.IdNivel;
-            //report.p_IdJornada.Value = model.IdJornada;
-            //report.p_IdCurso.Value = model.IdCurso;
-            //report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;
@@ -806,12 +806,12 @@ namespace Core.Web.Areas.Reportes.Controllers
             CXC_015_Rpt report = new CXC_015_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
-            //report.p_IdSede.Value = model.IdSede;
-            //report.p_IdAnio.Value = model.IdAnio;
-            //report.p_IdNivel.Value = model.IdNivel;
-            //report.p_IdJornada.Value = model.IdJornada;
-            //report.p_IdCurso.Value = model.IdCurso;
-            //report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_FechaCorte.Value = model.fecha_fin;
             report.usuario = SessionFixed.IdUsuario;

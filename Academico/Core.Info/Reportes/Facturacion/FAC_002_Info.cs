@@ -64,5 +64,17 @@ namespace Core.Info.Reportes.Facturacion
 
 
         public string Correos { get; set; }
+        public int IdSede { get; set; }
+        public int IdAnio { get; set; }
+        public int IdNivel { get; set; }
+        public int IdJornada { get; set; }
+        public int IdCurso { get; set; }
+        public int IdParalelo { get; set; }
+        public DateTime fecha_ini { get; set; }
+        public DateTime fecha_fin { get; set; }
+        public Nullable<int> OrdenJornada { get; set; }
+        public Nullable<int> OrdenNivel { get; set; }
+        public Nullable<int> OrdenParalelo { get; set; }
+        public Nullable<int> OrdenCurso { get; set; }
     }
 }

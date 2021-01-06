@@ -242,6 +242,7 @@
         <EntityTypeShape EntityType="ModelAcademico.aca_MecanismoDePago" Width="1.5" PointX="38.375" PointY="1" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_MecanismoDePago" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_MecanismoDePago" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_Admision" Width="1.5" PointX="10.375" PointY="41.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

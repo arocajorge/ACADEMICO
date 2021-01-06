@@ -13,10 +13,10 @@ namespace Core.Web.Areas.Banco.Controllers
 {
     public class ActualizarArchivoController : Controller
     {
-        tb_sucursal_Bus busSucursal;
+        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
         public ActualizarArchivoController()
         {
-            busSucursal = new tb_sucursal_Bus();
+            bus_sucursal = new tb_sucursal_Bus();
         }
 
         public ActionResult Index()
@@ -37,11 +37,11 @@ namespace Core.Web.Areas.Banco.Controllers
 
         private void CargarCombos(ba_Archivo_Transferencia_Info model)
         {
-            var lst_cuenta_bancarias = bus_cuentas_bancarias.get_list(model.IdEmpresa, model.IdSucursal, false);
-            ViewBag.lst_cuenta_bancarias = lst_cuenta_bancarias;
+            //var lst_cuenta_bancarias = bus_cuentas_bancarias.get_list(model.IdEmpresa, model.IdSucursal, false);
+            //ViewBag.lst_cuenta_bancarias = lst_cuenta_bancarias;
 
-            var lst_proceso = bus_procesos_bancarios.get_list(model.IdEmpresa, false);
-            ViewBag.lst_proceso = lst_proceso;
+            //var lst_proceso = bus_procesos_bancarios.get_list(model.IdEmpresa, false);
+            //ViewBag.lst_proceso = lst_proceso;
 
             var lst_sucursal = bus_sucursal.GetList(model.IdEmpresa, SessionFixed.IdUsuario, false);
             ViewBag.lst_sucursal = lst_sucursal;
