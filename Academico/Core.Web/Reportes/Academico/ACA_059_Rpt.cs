@@ -53,17 +53,12 @@ namespace Core.Web.Reportes.Academico
 
                 aca_Sede_Bus bus_sede = new aca_Sede_Bus();
                 var info_sede = bus_sede.GetInfo(IdEmpresa, IdSede);
-                var NomSede = "";
-                var Rector = "";
-                var Secretaria = "";
                 if (info_sede != null)
                 {
-                    NomSede = info_sede.NomSede;
-                    Rector = info_sede.NombreRector;
-                    Secretaria = info_sede.NombreSecretaria;
+                    Rector.Text = info_sede.NombreRector;
+                    Secretaria.Text = info_sede.NombreSecretaria;
+                    lbl_sede.Text = info_sede.NomSede;
                 }
-
-                lbl_sede.Text = NomSede;
 
             }
             catch (Exception ex)

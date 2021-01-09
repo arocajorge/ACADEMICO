@@ -3,7 +3,6 @@ using Core.Bus.General;
 using Core.Info.Academico;
 using Core.Info.General;
 using Core.Info.Helps;
-using Core.Web.Helps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,8 +106,8 @@ namespace Core.Admision.Controllers
                 IdCatalogoPAREN_Madre = Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA),
                 IdCatalogoPAREN_Padre = Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA),
                 IdCatalogoPAREN_Representante = Convert.ToInt32(cl_enumeradores.eTipoParentezco.OTROS),
-                SueldoPadre =0,
-                SueldoMadre=0,
+                SueldoPadre = 0,
+                SueldoMadre= 0,
                 OtroIngresoMadre = 0,
                 OtroIngresoPadre = 0,
                 GastoAlimentacion = 0,
@@ -129,6 +128,7 @@ namespace Core.Admision.Controllers
                 IdParroquia_Padre = "",
                 IdParroquia_Madre = "",
                 IdParroquia_Representante = "",
+                FechaActual = DateTime.Now
             };
 
             cargar_combos(model);
@@ -314,11 +314,20 @@ namespace Core.Admision.Controllers
                 info.info_valido_representante = false;
             }
 
-            if (info.CedulaRuc_Padre != null && info.CedulaRuc_Madre != null && (info.CedulaRuc_Padre == info.CedulaRuc_Madre))
+            if (info.info_valido_aspirante == true && info.info_valido_padre==true && info.info_valido_madre == true && info.info_valido_representante==true)
             {
-                msg = "No se puede registrar a la misma persona como padre y madre";
+                if (info.CedulaRuc_Padre != null && info.CedulaRuc_Madre != null && (info.CedulaRuc_Padre == info.CedulaRuc_Madre))
+                {
+                    msg = "No se puede registrar a la misma persona como padre y madre";
+                    return false;
+                }
+            }
+            else
+            {
+                //msg = "Número de identificación del madre inválida";
                 return false;
             }
+
 
             
             return true;

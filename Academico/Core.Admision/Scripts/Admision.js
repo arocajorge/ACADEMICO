@@ -815,7 +815,8 @@ function PadreRepresentante() {
     $("#IdCatalogoPAREN_Representante").prop('disabled', true);
 
     Validar_cedula_ruc_Representante();
-    $("#DivDatosRepresentante").show();
+    mostrar_VehiculoRepresentante();
+    //$("#DivDatosRepresentante").show();
 }
 
 function MadreRepresentante() {
@@ -943,7 +944,8 @@ function MadreRepresentante() {
     $("#IdCatalogoPAREN_Representante").prop('disabled', true);
 
     Validar_cedula_ruc_Representante();
-    $("#DivDatosRepresentante").show();
+    mostrar_VehiculoRepresentante();
+    //$("#DivDatosRepresentante").show();
 }
 
 function OtroRepresentante() {
@@ -1029,12 +1031,13 @@ function OtroRepresentante() {
     $("#IdCatalogoPAREN_Representante").prop('disabled', false);
 
     $("#RepresentanteValido").val("0");
-    $("#DivDatosRepresentante").show();
+    mostrar_VehiculoRepresentante();
+    //$("#DivDatosRepresentante").show();
 }
 
 function mostrar_otro_motivo() {
     var MotivoIngreso = $("#IdCatalogoFichaMotivo_Aspirante").val();
-    if (MotivoIngreso == 15) {
+    if (MotivoIngreso == 19) {
         $("#otro_motivo_ingreso").show();
     }
     else {
@@ -1044,7 +1047,7 @@ function mostrar_otro_motivo() {
 
 function mostrar_otro_informacion_inst() {
     var MotivoIngreso = $("#IdCatalogoFichaInst_Aspirante").val();
-    if (MotivoIngreso == 19) {
+    if (MotivoIngreso == 15) {
         $("#otro_informacion_inst").show();
     }
     else {
@@ -1482,7 +1485,7 @@ function vaciar_campos_aspirante() {
     $("#Telefono_Aspirante").val("");
     $("#Celular_Aspirante").val("");
     $("#Correo_Aspirante").val("");
-    $("#FechaNacimiento_Aspirante").val(new Date());
+    $("#FechaNacimiento_Aspirante").val(new Date().getDate() + "/" + (new Date().getMonth() +1) + "/" + new Date().getFullYear());
     $("#CodCatalogoSangre_Aspirante").val("");
     $("#CodCatalogoCONADIS_Aspirante").val("");
     $("#PorcentajeDiscapacidad_Aspirante").val("");

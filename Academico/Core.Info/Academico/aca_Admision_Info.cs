@@ -228,6 +228,7 @@ namespace Core.Info.Academico
         public bool info_valido_padre { get; set; }
         public bool info_valido_madre { get; set; }
         public bool info_valido_representante { get; set; }
+        public DateTime FechaActual { get; set; }
         #endregion
     }
 }

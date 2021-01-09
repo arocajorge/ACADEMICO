@@ -105,6 +105,7 @@
                     @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
                     @Html.HiddenFor(q => q.IdCatalogoPAREN_Padre, new { @id = "IdCatalogoPAREN_Padre" })
                     @Html.HiddenFor(q => q.IdCatalogoPAREN_Madre, new { @id = "IdCatalogoPAREN_Madre" })
+                    @Html.HiddenFor(q => q.FechaActual, new { @id = "FechaActual" })
                     @Html.HiddenFor(q => q.RepresentanteValido, new { @id = "RepresentanteValido" })
                     
                     <div class="font-medium text-base">Datos de la admisión</div>
@@ -738,7 +739,7 @@
                             <button type="button" class="button w-32 mr-2 mb-2 flex items-center justify-center border text-gray-700 dark:border-dark-5 dark:text-gray-300" onclick="OtroRepresentante();" title="Otra persona es Representante"> <i data-feather="users" class="w-4 h-4 mr-2"></i> Otros </button>
                         </div>
                     </div>
-                            <div id="DivDatosRepresentante" hidden>
+                            <div id="DivDatosRepresentante">
                                 <div class="font-medium text-base">Datos del representante</div>
                                 <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                                     <div class="intro-y col-span-12 sm:col-span-3">
